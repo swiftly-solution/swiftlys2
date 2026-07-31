@@ -156,13 +156,31 @@ internal partial class PostProcessingBloomParameters_tImpl : SchemaClass, PostPr
             return ref _Handle.AsRef<float>(_ComputeBloomLensDirtBlackLevelOffset!.Value);
         }
     }
+    private static nint? _BlurWeightOffset;
+    private SchemaFixedArray<float>? _BlurWeightInstance;
+
     public ISchemaFixedArray<float> BlurWeight
     {
-        get => new SchemaFixedArray<float>(_Handle, 0x30F41F3CAF5FB432, 5, 4, 4);
+        get
+        {
+            _BlurWeightOffset = _BlurWeightOffset ?? Schema.GetOffset(0x30F41F3CAF5FB432);
+            var instance = _BlurWeightInstance ??= new SchemaFixedArray<float>(0, 0x30F41F3CAF5FB432, 5, 4, 4);
+            instance.DangerousSetHandle(_Handle + _BlurWeightOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _BlurTintOffset;
+    private SchemaFixedArray<Vector>? _BlurTintInstance;
+
     public ISchemaFixedArray<Vector> BlurTint
     {
-        get => new SchemaFixedArray<Vector>(_Handle, 0x30F41F3CC8FE1D49, 5, 12, 4);
+        get
+        {
+            _BlurTintOffset = _BlurTintOffset ?? Schema.GetOffset(0x30F41F3CC8FE1D49);
+            var instance = _BlurTintInstance ??= new SchemaFixedArray<Vector>(0, 0x30F41F3CC8FE1D49, 5, 12, 4);
+            instance.DangerousSetHandle(_Handle + _BlurTintOffset!.Value);
+            return instance;
+        }
     }
 
 }

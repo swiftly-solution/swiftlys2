@@ -27,23 +27,29 @@ internal partial class C_OP_SequenceFromModelImpl : CParticleFunctionOperatorImp
         }
     }
     private static nint? _FieldOutputOffset;
+    private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
             _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x16E29E95E5729606);
-            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+            var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FieldOutputAnimOffset;
+    private ParticleAttributeIndex_tImpl? _FieldOutputAnimInstance;
 
     public ParticleAttributeIndex_t FieldOutputAnim
     {
         get
         {
             _FieldOutputAnimOffset = _FieldOutputAnimOffset ?? Schema.GetOffset(0x16E29E9537BE767F);
-            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputAnimOffset!.Value);
+            var instance = _FieldOutputAnimInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FieldOutputAnimOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InputMinOffset;

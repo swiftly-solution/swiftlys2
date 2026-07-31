@@ -67,13 +67,16 @@ internal partial class CBaseCSGrenadeImpl : CCSWeaponBaseImpl, CBaseCSGrenade
         }
     }
     private static nint? _ThrowTimeOffset;
+    private GameTime_tImpl? _ThrowTimeInstance;
 
     public GameTime_t ThrowTime
     {
         get
         {
             _ThrowTimeOffset = _ThrowTimeOffset ?? Schema.GetOffset(0x8680ADED57C1B8DA);
-            return new GameTime_tImpl(_Handle + _ThrowTimeOffset!.Value);
+            var instance = _ThrowTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _ThrowTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ThrowStrengthOffset;
@@ -87,23 +90,29 @@ internal partial class CBaseCSGrenadeImpl : CCSWeaponBaseImpl, CBaseCSGrenade
         }
     }
     private static nint? _DropTimeOffset;
+    private GameTime_tImpl? _DropTimeInstance;
 
     public GameTime_t DropTime
     {
         get
         {
             _DropTimeOffset = _DropTimeOffset ?? Schema.GetOffset(0x8680ADED2DE88B09);
-            return new GameTime_tImpl(_Handle + _DropTimeOffset!.Value);
+            var instance = _DropTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _DropTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PinPullTimeOffset;
+    private GameTime_tImpl? _PinPullTimeInstance;
 
     public GameTime_t PinPullTime
     {
         get
         {
             _PinPullTimeOffset = _PinPullTimeOffset ?? Schema.GetOffset(0x8680ADEDFCD7B2E6);
-            return new GameTime_tImpl(_Handle + _PinPullTimeOffset!.Value);
+            var instance = _PinPullTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _PinPullTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _JustPulledPinOffset;
@@ -117,13 +126,16 @@ internal partial class CBaseCSGrenadeImpl : CCSWeaponBaseImpl, CBaseCSGrenade
         }
     }
     private static nint? _NextHoldTickOffset;
+    private GameTick_tImpl? _NextHoldTickInstance;
 
     public GameTick_t NextHoldTick
     {
         get
         {
             _NextHoldTickOffset = _NextHoldTickOffset ?? Schema.GetOffset(0x8680ADEDDB254738);
-            return new GameTick_tImpl(_Handle + _NextHoldTickOffset!.Value);
+            var instance = _NextHoldTickInstance ??= new GameTick_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NextHoldTickOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NextHoldFracOffset;

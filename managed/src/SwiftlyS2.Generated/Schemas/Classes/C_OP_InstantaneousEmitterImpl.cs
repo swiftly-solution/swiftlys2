@@ -17,23 +17,29 @@ internal partial class C_OP_InstantaneousEmitterImpl : CParticleFunctionEmitterI
     public C_OP_InstantaneousEmitterImpl(nint handle) : base(handle) { }
 
     private static nint? _ParticlesToEmitOffset;
+    private CParticleCollectionFloatInputImpl? _ParticlesToEmitInstance;
 
     public CParticleCollectionFloatInput ParticlesToEmit
     {
         get
         {
             _ParticlesToEmitOffset = _ParticlesToEmitOffset ?? Schema.GetOffset(0x39132039B1A158C6);
-            return new CParticleCollectionFloatInputImpl(_Handle + _ParticlesToEmitOffset!.Value);
+            var instance = _ParticlesToEmitInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParticlesToEmitOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StartTimeOffset;
+    private CParticleCollectionFloatInputImpl? _StartTimeInstance;
 
     public CParticleCollectionFloatInput StartTime
     {
         get
         {
             _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0x3913203967FE9DC4);
-            return new CParticleCollectionFloatInputImpl(_Handle + _StartTimeOffset!.Value);
+            var instance = _StartTimeInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _StartTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InitFromKilledParentParticlesOffset;
@@ -57,13 +63,16 @@ internal partial class C_OP_InstantaneousEmitterImpl : CParticleFunctionEmitterI
         }
     }
     private static nint? _ParentParticleScaleOffset;
+    private CParticleCollectionFloatInputImpl? _ParentParticleScaleInstance;
 
     public CParticleCollectionFloatInput ParentParticleScale
     {
         get
         {
             _ParentParticleScaleOffset = _ParentParticleScaleOffset ?? Schema.GetOffset(0x3913203967144ED5);
-            return new CParticleCollectionFloatInputImpl(_Handle + _ParentParticleScaleOffset!.Value);
+            var instance = _ParentParticleScaleInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParentParticleScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MaxEmittedPerFrameOffset;

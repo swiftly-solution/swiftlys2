@@ -77,13 +77,16 @@ internal partial class CEntityFlameImpl : CBaseEntityImpl, CEntityFlame
         }
     }
     private static nint? _LifetimeOffset;
+    private GameTime_tImpl? _LifetimeInstance;
 
     public GameTime_t Lifetime
     {
         get
         {
             _LifetimeOffset = _LifetimeOffset ?? Schema.GetOffset(0x386F199439B35564);
-            return new GameTime_tImpl(_Handle + _LifetimeOffset!.Value);
+            var instance = _LifetimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LifetimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AttackerOffset;

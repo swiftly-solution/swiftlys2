@@ -16,9 +16,18 @@ internal partial class FeTri_tImpl : SchemaClass, FeTri_t
 {
     public FeTri_tImpl(nint handle) : base(handle) { }
 
+    private static nint? _NodeOffset;
+    private SchemaFixedArray<ushort>? _NodeInstance;
+
     public ISchemaFixedArray<ushort> Node
     {
-        get => new SchemaFixedArray<ushort>(_Handle, 0x75C07D86CD6694B9, 3, 2, 2);
+        get
+        {
+            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0x75C07D86CD6694B9);
+            var instance = _NodeInstance ??= new SchemaFixedArray<ushort>(0, 0x75C07D86CD6694B9, 3, 2, 2);
+            instance.DangerousSetHandle(_Handle + _NodeOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _W1Offset;
 

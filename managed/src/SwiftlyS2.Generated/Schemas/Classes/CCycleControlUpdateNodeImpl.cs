@@ -27,13 +27,16 @@ internal partial class CCycleControlUpdateNodeImpl : CUnaryUpdateNodeImpl, CCycl
         }
     }
     private static nint? _ParamIndexOffset;
+    private CAnimParamHandleImpl? _ParamIndexInstance;
 
     public CAnimParamHandle ParamIndex
     {
         get
         {
             _ParamIndexOffset = _ParamIndexOffset ?? Schema.GetOffset(0xB811C15C61990A86);
-            return new CAnimParamHandleImpl(_Handle + _ParamIndexOffset!.Value);
+            var instance = _ParamIndexInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamIndexOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LockWhenWaningOffset;

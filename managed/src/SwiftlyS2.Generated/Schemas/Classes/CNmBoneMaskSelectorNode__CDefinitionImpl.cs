@@ -47,23 +47,29 @@ internal partial class CNmBoneMaskSelectorNode__CDefinitionImpl : CNmBoneMaskVal
         }
     }
     private static nint? _MaskNodeIndicesOffset;
+    private SchemaUntypedField? _MaskNodeIndicesInstance;
 
     public SchemaUntypedField MaskNodeIndices
     {
         get
         {
             _MaskNodeIndicesOffset = _MaskNodeIndicesOffset ?? Schema.GetOffset(0xA90158703326692E);
-            return new SchemaUntypedField(_Handle + _MaskNodeIndicesOffset!.Value);
+            var instance = _MaskNodeIndicesInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _MaskNodeIndicesOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ParameterValuesOffset;
+    private SchemaUntypedField? _ParameterValuesInstance;
 
     public SchemaUntypedField ParameterValues
     {
         get
         {
             _ParameterValuesOffset = _ParameterValuesOffset ?? Schema.GetOffset(0xA90158709D777E36);
-            return new SchemaUntypedField(_Handle + _ParameterValuesOffset!.Value);
+            var instance = _ParameterValuesInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ParameterValuesOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BlendTimeSecondsOffset;

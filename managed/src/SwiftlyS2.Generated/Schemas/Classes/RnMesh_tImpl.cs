@@ -47,13 +47,16 @@ internal partial class RnMesh_tImpl : SchemaClass, RnMesh_t
         }
     }
     private static nint? _VerticesOffset;
+    private SchemaUntypedField? _VerticesInstance;
 
     public SchemaUntypedField Vertices
     {
         get
         {
             _VerticesOffset = _VerticesOffset ?? Schema.GetOffset(0x5F23FA63E4F9760E);
-            return new SchemaUntypedField(_Handle + _VerticesOffset!.Value);
+            var instance = _VerticesInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _VerticesOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TrianglesOffset;

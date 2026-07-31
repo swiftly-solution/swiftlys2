@@ -127,43 +127,55 @@ internal partial class AI_BaseNPC_DebugSnapshotData_tImpl : DebugSnapshotBaseStr
         }
     }
     private static nint? _AnimgraphOffset;
+    private AI_BaseNPCAnimGraph_DebugSnapshotData_tImpl? _AnimgraphInstance;
 
     public AI_BaseNPCAnimGraph_DebugSnapshotData_t Animgraph
     {
         get
         {
             _AnimgraphOffset = _AnimgraphOffset ?? Schema.GetOffset(0x92164B57BA9B5054);
-            return new AI_BaseNPCAnimGraph_DebugSnapshotData_tImpl(_Handle + _AnimgraphOffset!.Value);
+            var instance = _AnimgraphInstance ??= new AI_BaseNPCAnimGraph_DebugSnapshotData_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _AnimgraphOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NavigatorOffset;
+    private AI_Navigator_DebugSnapshotData_tImpl? _NavigatorInstance;
 
     public AI_Navigator_DebugSnapshotData_t Navigator
     {
         get
         {
             _NavigatorOffset = _NavigatorOffset ?? Schema.GetOffset(0x92164B5702BB9C3E);
-            return new AI_Navigator_DebugSnapshotData_tImpl(_Handle + _NavigatorOffset!.Value);
+            var instance = _NavigatorInstance ??= new AI_Navigator_DebugSnapshotData_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NavigatorOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MotorServicesOffset;
+    private AI_MotorServices_DebugSnapshotData_tImpl? _MotorServicesInstance;
 
     public AI_MotorServices_DebugSnapshotData_t MotorServices
     {
         get
         {
             _MotorServicesOffset = _MotorServicesOffset ?? Schema.GetOffset(0x92164B573FC09BDE);
-            return new AI_MotorServices_DebugSnapshotData_tImpl(_Handle + _MotorServicesOffset!.Value);
+            var instance = _MotorServicesInstance ??= new AI_MotorServices_DebugSnapshotData_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _MotorServicesOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FacingServicesOffset;
+    private AI_FacingServices_DebugSnapshotData_tImpl? _FacingServicesInstance;
 
     public AI_FacingServices_DebugSnapshotData_t FacingServices
     {
         get
         {
             _FacingServicesOffset = _FacingServicesOffset ?? Schema.GetOffset(0x92164B57F3306973);
-            return new AI_FacingServices_DebugSnapshotData_tImpl(_Handle + _FacingServicesOffset!.Value);
+            var instance = _FacingServicesInstance ??= new AI_FacingServices_DebugSnapshotData_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FacingServicesOffset!.Value);
+            return instance;
         }
     }
 

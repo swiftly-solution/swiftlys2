@@ -32,13 +32,16 @@ internal partial class CPulseCell_TestWaitWithAutoTracepointsImpl : CPulseCell_B
         }
     }
     private static nint? _WakeResumeOffset;
+    private CPulse_ResumePointImpl? _WakeResumeInstance;
 
     public CPulse_ResumePoint WakeResume
     {
         get
         {
             _WakeResumeOffset = _WakeResumeOffset ?? Schema.GetOffset(0x3624544C31F86DC2);
-            return new CPulse_ResumePointImpl(_Handle + _WakeResumeOffset!.Value);
+            var instance = _WakeResumeInstance ??= new CPulse_ResumePointImpl(0);
+            instance.DangerousSetHandle(_Handle + _WakeResumeOffset!.Value);
+            return instance;
         }
     }
 

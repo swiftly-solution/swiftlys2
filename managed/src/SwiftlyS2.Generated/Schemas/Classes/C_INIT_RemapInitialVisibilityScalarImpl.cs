@@ -17,13 +17,16 @@ internal partial class C_INIT_RemapInitialVisibilityScalarImpl : CParticleFuncti
     public C_INIT_RemapInitialVisibilityScalarImpl(nint handle) : base(handle) { }
 
     private static nint? _FieldOutputOffset;
+    private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
             _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x6EA0C1DE5729606);
-            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+            var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InputMinOffset;

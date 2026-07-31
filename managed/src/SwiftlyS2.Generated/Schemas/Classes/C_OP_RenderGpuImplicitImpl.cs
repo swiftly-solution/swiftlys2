@@ -47,33 +47,42 @@ internal partial class C_OP_RenderGpuImplicitImpl : CParticleFunctionRendererImp
         }
     }
     private static nint? _GridSizeOffset;
+    private CParticleCollectionRendererFloatInputImpl? _GridSizeInstance;
 
     public CParticleCollectionRendererFloatInput GridSize
     {
         get
         {
             _GridSizeOffset = _GridSizeOffset ?? Schema.GetOffset(0xF780A8E456E2F5C);
-            return new CParticleCollectionRendererFloatInputImpl(_Handle + _GridSizeOffset!.Value);
+            var instance = _GridSizeInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _GridSizeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RadiusScaleOffset;
+    private CParticleCollectionRendererFloatInputImpl? _RadiusScaleInstance;
 
     public CParticleCollectionRendererFloatInput RadiusScale
     {
         get
         {
             _RadiusScaleOffset = _RadiusScaleOffset ?? Schema.GetOffset(0xF780A8E15F78967);
-            return new CParticleCollectionRendererFloatInputImpl(_Handle + _RadiusScaleOffset!.Value);
+            var instance = _RadiusScaleInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _RadiusScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _IsosurfaceThresholdOffset;
+    private CParticleCollectionRendererFloatInputImpl? _IsosurfaceThresholdInstance;
 
     public CParticleCollectionRendererFloatInput IsosurfaceThreshold
     {
         get
         {
             _IsosurfaceThresholdOffset = _IsosurfaceThresholdOffset ?? Schema.GetOffset(0xF780A8E32E25824);
-            return new CParticleCollectionRendererFloatInputImpl(_Handle + _IsosurfaceThresholdOffset!.Value);
+            var instance = _IsosurfaceThresholdInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _IsosurfaceThresholdOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ScaleCPOffset;

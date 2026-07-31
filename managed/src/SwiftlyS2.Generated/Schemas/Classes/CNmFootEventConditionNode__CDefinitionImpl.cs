@@ -37,13 +37,16 @@ internal partial class CNmFootEventConditionNode__CDefinitionImpl : CNmBoolValue
         }
     }
     private static nint? _EventConditionRulesOffset;
+    private CNmBitFlagsImpl? _EventConditionRulesInstance;
 
     public CNmBitFlags EventConditionRules
     {
         get
         {
             _EventConditionRulesOffset = _EventConditionRulesOffset ?? Schema.GetOffset(0xA837BCFEA904315F);
-            return new CNmBitFlagsImpl(_Handle + _EventConditionRulesOffset!.Value);
+            var instance = _EventConditionRulesInstance ??= new CNmBitFlagsImpl(0);
+            instance.DangerousSetHandle(_Handle + _EventConditionRulesOffset!.Value);
+            return instance;
         }
     }
 

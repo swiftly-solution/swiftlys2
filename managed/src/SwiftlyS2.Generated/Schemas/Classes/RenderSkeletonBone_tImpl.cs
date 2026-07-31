@@ -57,13 +57,16 @@ internal partial class RenderSkeletonBone_tImpl : SchemaClass, RenderSkeletonBon
         }
     }
     private static nint? _BboxOffset;
+    private SkeletonBoneBounds_tImpl? _BboxInstance;
 
     public SkeletonBoneBounds_t Bbox
     {
         get
         {
             _BboxOffset = _BboxOffset ?? Schema.GetOffset(0x6A3BCC9B39392A72);
-            return new SkeletonBoneBounds_tImpl(_Handle + _BboxOffset!.Value);
+            var instance = _BboxInstance ??= new SkeletonBoneBounds_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _BboxOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SphereRadiusOffset;

@@ -42,13 +42,16 @@ internal partial class ParticleControlPointConfiguration_tImpl : SchemaClass, Pa
         }
     }
     private static nint? _PreviewStateOffset;
+    private ParticlePreviewState_tImpl? _PreviewStateInstance;
 
     public ParticlePreviewState_t PreviewState
     {
         get
         {
             _PreviewStateOffset = _PreviewStateOffset ?? Schema.GetOffset(0xC54E49C79E440558);
-            return new ParticlePreviewState_tImpl(_Handle + _PreviewStateOffset!.Value);
+            var instance = _PreviewStateInstance ??= new ParticlePreviewState_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _PreviewStateOffset!.Value);
+            return instance;
         }
     }
 

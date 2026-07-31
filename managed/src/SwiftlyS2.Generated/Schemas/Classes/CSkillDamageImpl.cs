@@ -17,13 +17,16 @@ internal partial class CSkillDamageImpl : SchemaClass, CSkillDamage
     public CSkillDamageImpl(nint handle) : base(handle) { }
 
     private static nint? _DamageOffset;
+    private CSkillFloatImpl? _DamageInstance;
 
     public CSkillFloat Damage
     {
         get
         {
             _DamageOffset = _DamageOffset ?? Schema.GetOffset(0x6A323D82DC60E53E);
-            return new CSkillFloatImpl(_Handle + _DamageOffset!.Value);
+            var instance = _DamageInstance ??= new CSkillFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _DamageOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NPCDamageScalarVsNPCOffset;

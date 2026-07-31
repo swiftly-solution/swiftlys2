@@ -17,33 +17,42 @@ internal partial class C_OP_RenderBlobsImpl : CParticleFunctionRendererImpl, C_O
     public C_OP_RenderBlobsImpl(nint handle) : base(handle) { }
 
     private static nint? _CubeWidthOffset;
+    private CParticleCollectionRendererFloatInputImpl? _CubeWidthInstance;
 
     public CParticleCollectionRendererFloatInput CubeWidth
     {
         get
         {
             _CubeWidthOffset = _CubeWidthOffset ?? Schema.GetOffset(0xB25239A3E172FDCC);
-            return new CParticleCollectionRendererFloatInputImpl(_Handle + _CubeWidthOffset!.Value);
+            var instance = _CubeWidthInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _CubeWidthOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CutoffRadiusOffset;
+    private CParticleCollectionRendererFloatInputImpl? _CutoffRadiusInstance;
 
     public CParticleCollectionRendererFloatInput CutoffRadius
     {
         get
         {
             _CutoffRadiusOffset = _CutoffRadiusOffset ?? Schema.GetOffset(0xB25239A33B9D5B46);
-            return new CParticleCollectionRendererFloatInputImpl(_Handle + _CutoffRadiusOffset!.Value);
+            var instance = _CutoffRadiusInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _CutoffRadiusOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RenderRadiusOffset;
+    private CParticleCollectionRendererFloatInputImpl? _RenderRadiusInstance;
 
     public CParticleCollectionRendererFloatInput RenderRadius
     {
         get
         {
             _RenderRadiusOffset = _RenderRadiusOffset ?? Schema.GetOffset(0xB25239A35157484B);
-            return new CParticleCollectionRendererFloatInputImpl(_Handle + _RenderRadiusOffset!.Value);
+            var instance = _RenderRadiusInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _RenderRadiusOffset!.Value);
+            return instance;
         }
     }
     private static nint? _VertexCountKbOffset;

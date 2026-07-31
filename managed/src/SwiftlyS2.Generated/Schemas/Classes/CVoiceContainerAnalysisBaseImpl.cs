@@ -17,13 +17,16 @@ internal partial class CVoiceContainerAnalysisBaseImpl : SchemaClass, CVoiceCont
     public CVoiceContainerAnalysisBaseImpl(nint handle) : base(handle) { }
 
     private static nint? _CurveOffset;
+    private SchemaUntypedField? _CurveInstance;
 
     public SchemaUntypedField Curve
     {
         get
         {
             _CurveOffset = _CurveOffset ?? Schema.GetOffset(0xC0BE2FE0BFFA0B34);
-            return new SchemaUntypedField(_Handle + _CurveOffset!.Value);
+            var instance = _CurveInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _CurveOffset!.Value);
+            return instance;
         }
     }
 

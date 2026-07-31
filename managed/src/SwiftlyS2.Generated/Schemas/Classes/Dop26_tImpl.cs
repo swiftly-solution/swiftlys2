@@ -16,9 +16,18 @@ internal partial class Dop26_tImpl : SchemaClass, Dop26_t
 {
     public Dop26_tImpl(nint handle) : base(handle) { }
 
+    private static nint? _SupportOffset;
+    private SchemaFixedArray<float>? _SupportInstance;
+
     public ISchemaFixedArray<float> Support
     {
-        get => new SchemaFixedArray<float>(_Handle, 0xBBAD032FAD766CEA, 26, 4, 4);
+        get
+        {
+            _SupportOffset = _SupportOffset ?? Schema.GetOffset(0xBBAD032FAD766CEA);
+            var instance = _SupportInstance ??= new SchemaFixedArray<float>(0, 0xBBAD032FAD766CEA, 26, 4, 4);
+            instance.DangerousSetHandle(_Handle + _SupportOffset!.Value);
+            return instance;
+        }
     }
 
 }

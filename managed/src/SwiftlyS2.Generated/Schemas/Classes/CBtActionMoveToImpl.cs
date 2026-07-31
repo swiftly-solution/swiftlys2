@@ -102,33 +102,42 @@ internal partial class CBtActionMoveToImpl : CBtNodeImpl, CBtActionMoveTo
         }
     }
     private static nint? _CheckApproximateCornersTimerOffset;
+    private CountdownTimerImpl? _CheckApproximateCornersTimerInstance;
 
     public CountdownTimer CheckApproximateCornersTimer
     {
         get
         {
             _CheckApproximateCornersTimerOffset = _CheckApproximateCornersTimerOffset ?? Schema.GetOffset(0xD3E7538689360D84);
-            return new CountdownTimerImpl(_Handle + _CheckApproximateCornersTimerOffset!.Value);
+            var instance = _CheckApproximateCornersTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _CheckApproximateCornersTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CheckHighPriorityItemOffset;
+    private CountdownTimerImpl? _CheckHighPriorityItemInstance;
 
     public CountdownTimer CheckHighPriorityItem
     {
         get
         {
             _CheckHighPriorityItemOffset = _CheckHighPriorityItemOffset ?? Schema.GetOffset(0xD3E7538619EE60B4);
-            return new CountdownTimerImpl(_Handle + _CheckHighPriorityItemOffset!.Value);
+            var instance = _CheckHighPriorityItemInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _CheckHighPriorityItemOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RepathTimerOffset;
+    private CountdownTimerImpl? _RepathTimerInstance;
 
     public CountdownTimer RepathTimer
     {
         get
         {
             _RepathTimerOffset = _RepathTimerOffset ?? Schema.GetOffset(0xD3E753866BF3B99C);
-            return new CountdownTimerImpl(_Handle + _RepathTimerOffset!.Value);
+            var instance = _RepathTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _RepathTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ArrivalEpsilonOffset;

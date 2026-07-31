@@ -17,13 +17,16 @@ internal partial class CPulseGraphExecutionHistoryImpl : SchemaClass, CPulseGrap
     public CPulseGraphExecutionHistoryImpl(nint handle) : base(handle) { }
 
     private static nint? _InstanceIDOffset;
+    private PulseGraphInstanceID_tImpl? _InstanceIDInstance;
 
     public PulseGraphInstanceID_t InstanceID
     {
         get
         {
             _InstanceIDOffset = _InstanceIDOffset ?? Schema.GetOffset(0x2DC54ABB24192813);
-            return new PulseGraphInstanceID_tImpl(_Handle + _InstanceIDOffset!.Value);
+            var instance = _InstanceIDInstance ??= new PulseGraphInstanceID_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _InstanceIDOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StrFileNameOffset;
@@ -52,23 +55,29 @@ internal partial class CPulseGraphExecutionHistoryImpl : SchemaClass, CPulseGrap
         }
     }
     private static nint? _MapCellDescOffset;
+    private SchemaUntypedField? _MapCellDescInstance;
 
     public SchemaUntypedField MapCellDesc
     {
         get
         {
             _MapCellDescOffset = _MapCellDescOffset ?? Schema.GetOffset(0x2DC54ABB7E9FEC74);
-            return new SchemaUntypedField(_Handle + _MapCellDescOffset!.Value);
+            var instance = _MapCellDescInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _MapCellDescOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MapCursorDescOffset;
+    private SchemaUntypedField? _MapCursorDescInstance;
 
     public SchemaUntypedField MapCursorDesc
     {
         get
         {
             _MapCursorDescOffset = _MapCursorDescOffset ?? Schema.GetOffset(0x2DC54ABBED035BB6);
-            return new SchemaUntypedField(_Handle + _MapCursorDescOffset!.Value);
+            var instance = _MapCursorDescInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _MapCursorDescOffset!.Value);
+            return instance;
         }
     }
 

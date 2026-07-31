@@ -27,33 +27,42 @@ internal partial class C_OP_MovementLoopInsideSphereImpl : CParticleFunctionOper
         }
     }
     private static nint? _DistanceOffset;
+    private CParticleCollectionFloatInputImpl? _DistanceInstance;
 
     public CParticleCollectionFloatInput Distance
     {
         get
         {
             _DistanceOffset = _DistanceOffset ?? Schema.GetOffset(0x7C19959F00DC4A68);
-            return new CParticleCollectionFloatInputImpl(_Handle + _DistanceOffset!.Value);
+            var instance = _DistanceInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _DistanceOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ScaleOffset;
+    private CParticleCollectionVecInputImpl? _ScaleInstance;
 
     public CParticleCollectionVecInput Scale
     {
         get
         {
             _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x7C19959F5F596B51);
-            return new CParticleCollectionVecInputImpl(_Handle + _ScaleOffset!.Value);
+            var instance = _ScaleInstance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DistSqrAttrOffset;
+    private ParticleAttributeIndex_tImpl? _DistSqrAttrInstance;
 
     public ParticleAttributeIndex_t DistSqrAttr
     {
         get
         {
             _DistSqrAttrOffset = _DistSqrAttrOffset ?? Schema.GetOffset(0x7C19959F767818FE);
-            return new ParticleAttributeIndex_tImpl(_Handle + _DistSqrAttrOffset!.Value);
+            var instance = _DistSqrAttrInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _DistSqrAttrOffset!.Value);
+            return instance;
         }
     }
 

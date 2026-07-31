@@ -197,23 +197,29 @@ internal partial class CCS2PawnGraphControllerImpl : CCS2WeaponGraphControllerIm
         }
     }
     private static nint? _LeftFootTargetOffset;
+    private SchemaUntypedField? _LeftFootTargetInstance;
 
     public SchemaUntypedField LeftFootTarget
     {
         get
         {
             _LeftFootTargetOffset = _LeftFootTargetOffset ?? Schema.GetOffset(0x716A0F88B572843D);
-            return new SchemaUntypedField(_Handle + _LeftFootTargetOffset!.Value);
+            var instance = _LeftFootTargetInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _LeftFootTargetOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RightFootTargetOffset;
+    private SchemaUntypedField? _RightFootTargetInstance;
 
     public SchemaUntypedField RightFootTarget
     {
         get
         {
             _RightFootTargetOffset = _RightFootTargetOffset ?? Schema.GetOffset(0x716A0F883ABA0A2C);
-            return new SchemaUntypedField(_Handle + _RightFootTargetOffset!.Value);
+            var instance = _RightFootTargetInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _RightFootTargetOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FlashedAmountOffset;

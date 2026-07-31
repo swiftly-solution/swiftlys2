@@ -77,13 +77,16 @@ internal partial class CMathRemapImpl : CLogicalEntityImpl, CMathRemap
         }
     }
     private static nint? _OutValueOffset;
+    private SchemaUntypedField? _OutValueInstance;
 
     public SchemaUntypedField OutValue
     {
         get
         {
             _OutValueOffset = _OutValueOffset ?? Schema.GetOffset(0xDE4BD86DB5358CB4);
-            return new SchemaUntypedField(_Handle + _OutValueOffset!.Value);
+            var instance = _OutValueInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OutValueOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OnRoseAboveMinOffset;

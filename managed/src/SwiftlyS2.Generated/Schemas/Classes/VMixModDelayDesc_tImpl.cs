@@ -17,13 +17,16 @@ internal partial class VMixModDelayDesc_tImpl : SchemaClass, VMixModDelayDesc_t
     public VMixModDelayDesc_tImpl(nint handle) : base(handle) { }
 
     private static nint? _FeedbackFilterOffset;
+    private VMixFilterDesc_tImpl? _FeedbackFilterInstance;
 
     public VMixFilterDesc_t FeedbackFilter
     {
         get
         {
             _FeedbackFilterOffset = _FeedbackFilterOffset ?? Schema.GetOffset(0x7E7D84907C227CDC);
-            return new VMixFilterDesc_tImpl(_Handle + _FeedbackFilterOffset!.Value);
+            var instance = _FeedbackFilterInstance ??= new VMixFilterDesc_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FeedbackFilterOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PhaseInvertOffset;

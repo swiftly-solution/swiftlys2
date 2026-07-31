@@ -17,33 +17,42 @@ internal partial class C_OP_GameLiquidSpillImpl : CParticleFunctionRendererImpl,
     public C_OP_GameLiquidSpillImpl(nint handle) : base(handle) { }
 
     private static nint? _LiquidContentsFieldOffset;
+    private CParticleCollectionFloatInputImpl? _LiquidContentsFieldInstance;
 
     public CParticleCollectionFloatInput LiquidContentsField
     {
         get
         {
             _LiquidContentsFieldOffset = _LiquidContentsFieldOffset ?? Schema.GetOffset(0xB07185274F9A10CB);
-            return new CParticleCollectionFloatInputImpl(_Handle + _LiquidContentsFieldOffset!.Value);
+            var instance = _LiquidContentsFieldInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _LiquidContentsFieldOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ExpirationTimeOffset;
+    private CParticleCollectionFloatInputImpl? _ExpirationTimeInstance;
 
     public CParticleCollectionFloatInput ExpirationTime
     {
         get
         {
             _ExpirationTimeOffset = _ExpirationTimeOffset ?? Schema.GetOffset(0xB07185272A34213F);
-            return new CParticleCollectionFloatInputImpl(_Handle + _ExpirationTimeOffset!.Value);
+            var instance = _ExpirationTimeInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ExpirationTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RadiusOffset;
+    private CParticleCollectionFloatInputImpl? _RadiusInstance;
 
     public CParticleCollectionFloatInput Radius
     {
         get
         {
             _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0xB07185275ACFC08D);
-            return new CParticleCollectionFloatInputImpl(_Handle + _RadiusOffset!.Value);
+            var instance = _RadiusInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _RadiusOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CheckExposedToSkyOffset;
@@ -57,13 +66,16 @@ internal partial class C_OP_GameLiquidSpillImpl : CParticleFunctionRendererImpl,
         }
     }
     private static nint? _AmountAttributeOffset;
+    private ParticleAttributeIndex_tImpl? _AmountAttributeInstance;
 
     public ParticleAttributeIndex_t AmountAttribute
     {
         get
         {
             _AmountAttributeOffset = _AmountAttributeOffset ?? Schema.GetOffset(0xB071852755424147);
-            return new ParticleAttributeIndex_tImpl(_Handle + _AmountAttributeOffset!.Value);
+            var instance = _AmountAttributeInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _AmountAttributeOffset!.Value);
+            return instance;
         }
     }
 

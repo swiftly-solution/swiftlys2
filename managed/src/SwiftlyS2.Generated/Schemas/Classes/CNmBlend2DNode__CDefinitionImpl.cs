@@ -17,43 +17,55 @@ internal partial class CNmBlend2DNode__CDefinitionImpl : CNmPoseNode__CDefinitio
     public CNmBlend2DNode__CDefinitionImpl(nint handle) : base(handle) { }
 
     private static nint? _SourceNodeIndicesOffset;
+    private SchemaUntypedField? _SourceNodeIndicesInstance;
 
     public SchemaUntypedField SourceNodeIndices
     {
         get
         {
             _SourceNodeIndicesOffset = _SourceNodeIndicesOffset ?? Schema.GetOffset(0x965A04D8E90F1FE1);
-            return new SchemaUntypedField(_Handle + _SourceNodeIndicesOffset!.Value);
+            var instance = _SourceNodeIndicesInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _SourceNodeIndicesOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ValuesOffset;
+    private SchemaUntypedField? _ValuesInstance;
 
     public SchemaUntypedField Values
     {
         get
         {
             _ValuesOffset = _ValuesOffset ?? Schema.GetOffset(0x965A04D8FBEDDADB);
-            return new SchemaUntypedField(_Handle + _ValuesOffset!.Value);
+            var instance = _ValuesInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ValuesOffset!.Value);
+            return instance;
         }
     }
     private static nint? _IndicesOffset;
+    private SchemaUntypedField? _IndicesInstance;
 
     public SchemaUntypedField Indices
     {
         get
         {
             _IndicesOffset = _IndicesOffset ?? Schema.GetOffset(0x965A04D8CF5DEE92);
-            return new SchemaUntypedField(_Handle + _IndicesOffset!.Value);
+            var instance = _IndicesInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _IndicesOffset!.Value);
+            return instance;
         }
     }
     private static nint? _HullIndicesOffset;
+    private SchemaUntypedField? _HullIndicesInstance;
 
     public SchemaUntypedField HullIndices
     {
         get
         {
             _HullIndicesOffset = _HullIndicesOffset ?? Schema.GetOffset(0x965A04D8A014D83B);
-            return new SchemaUntypedField(_Handle + _HullIndicesOffset!.Value);
+            var instance = _HullIndicesInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _HullIndicesOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InputParameterNodeIdx0Offset;

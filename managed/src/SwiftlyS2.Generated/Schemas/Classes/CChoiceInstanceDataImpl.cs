@@ -17,13 +17,16 @@ internal partial class CChoiceInstanceDataImpl : SchemaClass, CChoiceInstanceDat
     public CChoiceInstanceDataImpl(nint handle) : base(handle) { }
 
     private static nint? _CurrentChoiceOffset;
+    private SchemaUntypedField? _CurrentChoiceInstance;
 
     public SchemaUntypedField CurrentChoice
     {
         get
         {
             _CurrentChoiceOffset = _CurrentChoiceOffset ?? Schema.GetOffset(0x5F93659E47121CD9);
-            return new SchemaUntypedField(_Handle + _CurrentChoiceOffset!.Value);
+            var instance = _CurrentChoiceInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _CurrentChoiceOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PreviousChoiceOffset;
@@ -37,13 +40,16 @@ internal partial class CChoiceInstanceDataImpl : SchemaClass, CChoiceInstanceDat
         }
     }
     private static nint? _ClipStartTimeOffset;
+    private SchemaUntypedField? _ClipStartTimeInstance;
 
     public SchemaUntypedField ClipStartTime
     {
         get
         {
             _ClipStartTimeOffset = _ClipStartTimeOffset ?? Schema.GetOffset(0x5F93659E5BAB4702);
-            return new SchemaUntypedField(_Handle + _ClipStartTimeOffset!.Value);
+            var instance = _ClipStartTimeInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ClipStartTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ChoicePreviousCycleOffset;

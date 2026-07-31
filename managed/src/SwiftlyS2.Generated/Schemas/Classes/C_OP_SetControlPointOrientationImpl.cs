@@ -87,13 +87,16 @@ internal partial class C_OP_SetControlPointOrientationImpl : CParticleFunctionPr
         }
     }
     private static nint? _InterpolationOffset;
+    private CParticleCollectionFloatInputImpl? _InterpolationInstance;
 
     public CParticleCollectionFloatInput Interpolation
     {
         get
         {
             _InterpolationOffset = _InterpolationOffset ?? Schema.GetOffset(0x2461079CCF55B987);
-            return new CParticleCollectionFloatInputImpl(_Handle + _InterpolationOffset!.Value);
+            var instance = _InterpolationInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _InterpolationOffset!.Value);
+            return instance;
         }
     }
 

@@ -67,23 +67,29 @@ internal partial class C_OP_PlanarConstraintImpl : CParticleFunctionConstraintIm
         }
     }
     private static nint? _RadiusScaleOffset;
+    private CPerParticleFloatInputImpl? _RadiusScaleInstance;
 
     public CPerParticleFloatInput RadiusScale
     {
         get
         {
             _RadiusScaleOffset = _RadiusScaleOffset ?? Schema.GetOffset(0x1440B2AEA7A20159);
-            return new CPerParticleFloatInputImpl(_Handle + _RadiusScaleOffset!.Value);
+            var instance = _RadiusScaleInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _RadiusScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MaximumDistanceToCPOffset;
+    private CParticleCollectionFloatInputImpl? _MaximumDistanceToCPInstance;
 
     public CParticleCollectionFloatInput MaximumDistanceToCP
     {
         get
         {
             _MaximumDistanceToCPOffset = _MaximumDistanceToCPOffset ?? Schema.GetOffset(0x1440B2AE91B48FEA);
-            return new CParticleCollectionFloatInputImpl(_Handle + _MaximumDistanceToCPOffset!.Value);
+            var instance = _MaximumDistanceToCPInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _MaximumDistanceToCPOffset!.Value);
+            return instance;
         }
     }
     private static nint? _UseOldCodeOffset;

@@ -56,13 +56,31 @@ internal partial class VPhysXConstraintParams_tImpl : SchemaClass, VPhysXConstra
             return ref _Handle.AsRef<byte>(_FlagsOffset!.Value);
         }
     }
+    private static nint? _AnchorOffset;
+    private SchemaFixedArray<Vector>? _AnchorInstance;
+
     public ISchemaFixedArray<Vector> Anchor
     {
-        get => new SchemaFixedArray<Vector>(_Handle, 0xF2BDF6AD23E10E54, 2, 12, 4);
+        get
+        {
+            _AnchorOffset = _AnchorOffset ?? Schema.GetOffset(0xF2BDF6AD23E10E54);
+            var instance = _AnchorInstance ??= new SchemaFixedArray<Vector>(0, 0xF2BDF6AD23E10E54, 2, 12, 4);
+            instance.DangerousSetHandle(_Handle + _AnchorOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _AxesOffset;
+    private SchemaFixedArray<QuaternionStorage>? _AxesInstance;
+
     public ISchemaFixedArray<QuaternionStorage> Axes
     {
-        get => new SchemaFixedArray<QuaternionStorage>(_Handle, 0xF2BDF6AD23115F58, 2, 16, 4);
+        get
+        {
+            _AxesOffset = _AxesOffset ?? Schema.GetOffset(0xF2BDF6AD23115F58);
+            var instance = _AxesInstance ??= new SchemaFixedArray<QuaternionStorage>(0, 0xF2BDF6AD23115F58, 2, 16, 4);
+            instance.DangerousSetHandle(_Handle + _AxesOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _MaxForceOffset;
 

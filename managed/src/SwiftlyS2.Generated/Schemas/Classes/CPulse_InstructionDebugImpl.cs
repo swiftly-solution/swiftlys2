@@ -17,33 +17,42 @@ internal partial class CPulse_InstructionDebugImpl : SchemaClass, CPulse_Instruc
     public CPulse_InstructionDebugImpl(nint handle) : base(handle) { }
 
     private static nint? _FlowNodeIDOffset;
+    private PulseDocNodeID_tImpl? _FlowNodeIDInstance;
 
     public PulseDocNodeID_t FlowNodeID
     {
         get
         {
             _FlowNodeIDOffset = _FlowNodeIDOffset ?? Schema.GetOffset(0xD615D74B8ED47FBC);
-            return new PulseDocNodeID_tImpl(_Handle + _FlowNodeIDOffset!.Value);
+            var instance = _FlowNodeIDInstance ??= new PulseDocNodeID_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FlowNodeIDOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ValueNodeIDOffset;
+    private PulseDocNodeID_tImpl? _ValueNodeIDInstance;
 
     public PulseDocNodeID_t ValueNodeID
     {
         get
         {
             _ValueNodeIDOffset = _ValueNodeIDOffset ?? Schema.GetOffset(0xD615D74BF8348FC7);
-            return new PulseDocNodeID_tImpl(_Handle + _ValueNodeIDOffset!.Value);
+            var instance = _ValueNodeIDInstance ??= new PulseDocNodeID_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _ValueNodeIDOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SequencePointNameOffset;
+    private SchemaUntypedField? _SequencePointNameInstance;
 
     public SchemaUntypedField SequencePointName
     {
         get
         {
             _SequencePointNameOffset = _SequencePointNameOffset ?? Schema.GetOffset(0xD615D74BF45FA85D);
-            return new SchemaUntypedField(_Handle + _SequencePointNameOffset!.Value);
+            var instance = _SequencePointNameInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _SequencePointNameOffset!.Value);
+            return instance;
         }
     }
 

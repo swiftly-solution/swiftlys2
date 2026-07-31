@@ -16,9 +16,18 @@ internal partial class CSkillIntImpl : SchemaClass, CSkillInt
 {
     public CSkillIntImpl(nint handle) : base(handle) { }
 
+    private static nint? _ValueOffset;
+    private SchemaFixedArray<int>? _ValueInstance;
+
     public ISchemaFixedArray<int> Value
     {
-        get => new SchemaFixedArray<int>(_Handle, 0xE86F537C7F437844, 4, 4, 4);
+        get
+        {
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0xE86F537C7F437844);
+            var instance = _ValueInstance ??= new SchemaFixedArray<int>(0, 0xE86F537C7F437844, 4, 4, 4);
+            instance.DangerousSetHandle(_Handle + _ValueOffset!.Value);
+            return instance;
+        }
     }
 
 }

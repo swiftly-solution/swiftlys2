@@ -107,23 +107,29 @@ internal partial class CEconItemViewImpl : IEconItemInterfaceImpl, CEconItemView
         }
     }
     private static nint? _AttributeListOffset;
+    private CAttributeListImpl? _AttributeListInstance;
 
     public CAttributeList AttributeList
     {
         get
         {
             _AttributeListOffset = _AttributeListOffset ?? Schema.GetOffset(0xE1A93F25EF065D97);
-            return new CAttributeListImpl(_Handle + _AttributeListOffset!.Value);
+            var instance = _AttributeListInstance ??= new CAttributeListImpl(0);
+            instance.DangerousSetHandle(_Handle + _AttributeListOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NetworkedDynamicAttributesOffset;
+    private CAttributeListImpl? _NetworkedDynamicAttributesInstance;
 
     public CAttributeList NetworkedDynamicAttributes
     {
         get
         {
             _NetworkedDynamicAttributesOffset = _NetworkedDynamicAttributesOffset ?? Schema.GetOffset(0xE1A93F25B576449C);
-            return new CAttributeListImpl(_Handle + _NetworkedDynamicAttributesOffset!.Value);
+            var instance = _NetworkedDynamicAttributesInstance ??= new CAttributeListImpl(0);
+            instance.DangerousSetHandle(_Handle + _NetworkedDynamicAttributesOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CustomNameOffset;

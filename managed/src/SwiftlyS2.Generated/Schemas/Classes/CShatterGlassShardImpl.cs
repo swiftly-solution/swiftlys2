@@ -267,13 +267,16 @@ internal partial class CShatterGlassShardImpl : SchemaClass, CShatterGlassShard
         }
     }
     private static nint? _PhysicsEntitySpawnedAtTimeOffset;
+    private GameTime_tImpl? _PhysicsEntitySpawnedAtTimeInstance;
 
     public GameTime_t PhysicsEntitySpawnedAtTime
     {
         get
         {
             _PhysicsEntitySpawnedAtTimeOffset = _PhysicsEntitySpawnedAtTimeOffset ?? Schema.GetOffset(0x1350BEC3AA81B16F);
-            return new GameTime_tImpl(_Handle + _PhysicsEntitySpawnedAtTimeOffset!.Value);
+            var instance = _PhysicsEntitySpawnedAtTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _PhysicsEntitySpawnedAtTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _EntityHittingMeOffset;

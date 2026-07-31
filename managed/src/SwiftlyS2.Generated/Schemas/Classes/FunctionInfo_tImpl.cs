@@ -52,13 +52,16 @@ internal partial class FunctionInfo_tImpl : SchemaClass, FunctionInfo_t
         }
     }
     private static nint? _IndexOffset;
+    private FuseFunctionIndex_tImpl? _IndexInstance;
 
     public FuseFunctionIndex_t Index
     {
         get
         {
             _IndexOffset = _IndexOffset ?? Schema.GetOffset(0xFCE0933AB73DBE67);
-            return new FuseFunctionIndex_tImpl(_Handle + _IndexOffset!.Value);
+            var instance = _IndexInstance ??= new FuseFunctionIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _IndexOffset!.Value);
+            return instance;
         }
     }
     private static nint? _IsPureOffset;

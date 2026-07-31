@@ -27,63 +27,81 @@ internal partial class C_OP_CurlNoiseForceImpl : CParticleFunctionForceImpl, C_O
         }
     }
     private static nint? _NoiseFreqOffset;
+    private CPerParticleVecInputImpl? _NoiseFreqInstance;
 
     public CPerParticleVecInput NoiseFreq
     {
         get
         {
             _NoiseFreqOffset = _NoiseFreqOffset ?? Schema.GetOffset(0xC8D644B20A299A63);
-            return new CPerParticleVecInputImpl(_Handle + _NoiseFreqOffset!.Value);
+            var instance = _NoiseFreqInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _NoiseFreqOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NoiseScaleOffset;
+    private CPerParticleVecInputImpl? _NoiseScaleInstance;
 
     public CPerParticleVecInput NoiseScale
     {
         get
         {
             _NoiseScaleOffset = _NoiseScaleOffset ?? Schema.GetOffset(0xC8D644B29CE92E45);
-            return new CPerParticleVecInputImpl(_Handle + _NoiseScaleOffset!.Value);
+            var instance = _NoiseScaleInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _NoiseScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OffsetOffset;
+    private CPerParticleVecInputImpl? _OffsetInstance;
 
     public CPerParticleVecInput Offset
     {
         get
         {
             _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0xC8D644B2BD25CC2A);
-            return new CPerParticleVecInputImpl(_Handle + _OffsetOffset!.Value);
+            var instance = _OffsetInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _OffsetOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OffsetRateOffset;
+    private CPerParticleVecInputImpl? _OffsetRateInstance;
 
     public CPerParticleVecInput OffsetRate
     {
         get
         {
             _OffsetRateOffset = _OffsetRateOffset ?? Schema.GetOffset(0xC8D644B23D58FFB8);
-            return new CPerParticleVecInputImpl(_Handle + _OffsetRateOffset!.Value);
+            var instance = _OffsetRateInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _OffsetRateOffset!.Value);
+            return instance;
         }
     }
     private static nint? _WorleySeedOffset;
+    private CPerParticleFloatInputImpl? _WorleySeedInstance;
 
     public CPerParticleFloatInput WorleySeed
     {
         get
         {
             _WorleySeedOffset = _WorleySeedOffset ?? Schema.GetOffset(0xC8D644B2D6881198);
-            return new CPerParticleFloatInputImpl(_Handle + _WorleySeedOffset!.Value);
+            var instance = _WorleySeedInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _WorleySeedOffset!.Value);
+            return instance;
         }
     }
     private static nint? _WorleyJitterOffset;
+    private CPerParticleFloatInputImpl? _WorleyJitterInstance;
 
     public CPerParticleFloatInput WorleyJitter
     {
         get
         {
             _WorleyJitterOffset = _WorleyJitterOffset ?? Schema.GetOffset(0xC8D644B2C7509CCF);
-            return new CPerParticleFloatInputImpl(_Handle + _WorleyJitterOffset!.Value);
+            var instance = _WorleyJitterInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _WorleyJitterOffset!.Value);
+            return instance;
         }
     }
 

@@ -17,23 +17,29 @@ internal partial class CPulseCell_Outflow_ListenForAnimgraphTagImpl : CPulseCell
     public CPulseCell_Outflow_ListenForAnimgraphTagImpl(nint handle) : base(handle) { }
 
     private static nint? _OnStartOffset;
+    private CPulse_ResumePointImpl? _OnStartInstance;
 
     public CPulse_ResumePoint OnStart
     {
         get
         {
             _OnStartOffset = _OnStartOffset ?? Schema.GetOffset(0xAD79BF78C3FE848C);
-            return new CPulse_ResumePointImpl(_Handle + _OnStartOffset!.Value);
+            var instance = _OnStartInstance ??= new CPulse_ResumePointImpl(0);
+            instance.DangerousSetHandle(_Handle + _OnStartOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OnEndOffset;
+    private CPulse_ResumePointImpl? _OnEndInstance;
 
     public CPulse_ResumePoint OnEnd
     {
         get
         {
             _OnEndOffset = _OnEndOffset ?? Schema.GetOffset(0xAD79BF78B88A4375);
-            return new CPulse_ResumePointImpl(_Handle + _OnEndOffset!.Value);
+            var instance = _OnEndInstance ??= new CPulse_ResumePointImpl(0);
+            instance.DangerousSetHandle(_Handle + _OnEndOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TagNameOffset;

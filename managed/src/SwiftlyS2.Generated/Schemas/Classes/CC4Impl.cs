@@ -57,13 +57,16 @@ internal partial class CC4Impl : CCSWeaponBaseImpl, CC4
         }
     }
     private static nint? _ArmedTimeOffset;
+    private GameTime_tImpl? _ArmedTimeInstance;
 
     public GameTime_t ArmedTime
     {
         get
         {
             _ArmedTimeOffset = _ArmedTimeOffset ?? Schema.GetOffset(0x1D49B0B54C4C86C9);
-            return new GameTime_tImpl(_Handle + _ArmedTimeOffset!.Value);
+            var instance = _ArmedTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _ArmedTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BombPlacedAnimationOffset;
@@ -87,13 +90,16 @@ internal partial class CC4Impl : CCSWeaponBaseImpl, CC4
         }
     }
     private static nint? _EntitySpottedStateOffset;
+    private EntitySpottedState_tImpl? _EntitySpottedStateInstance;
 
     public EntitySpottedState_t EntitySpottedState
     {
         get
         {
             _EntitySpottedStateOffset = _EntitySpottedStateOffset ?? Schema.GetOffset(0x1D49B0B5032B547C);
-            return new EntitySpottedState_tImpl(_Handle + _EntitySpottedStateOffset!.Value);
+            var instance = _EntitySpottedStateInstance ??= new EntitySpottedState_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _EntitySpottedStateOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SpotRulesOffset;
@@ -106,9 +112,18 @@ internal partial class CC4Impl : CCSWeaponBaseImpl, CC4
             return ref _Handle.AsRef<int>(_SpotRulesOffset!.Value);
         }
     }
+    private static nint? _PlayedArmingBeepsOffset;
+    private SchemaFixedArray<bool>? _PlayedArmingBeepsInstance;
+
     public ISchemaFixedArray<bool> PlayedArmingBeeps
     {
-        get => new SchemaFixedArray<bool>(_Handle, 0x1D49B0B525D5D369, 7, 1, 1);
+        get
+        {
+            _PlayedArmingBeepsOffset = _PlayedArmingBeepsOffset ?? Schema.GetOffset(0x1D49B0B525D5D369);
+            var instance = _PlayedArmingBeepsInstance ??= new SchemaFixedArray<bool>(0, 0x1D49B0B525D5D369, 7, 1, 1);
+            instance.DangerousSetHandle(_Handle + _PlayedArmingBeepsOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _BombPlantedOffset;
 

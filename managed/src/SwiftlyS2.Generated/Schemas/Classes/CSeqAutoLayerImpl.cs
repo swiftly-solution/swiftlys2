@@ -37,13 +37,16 @@ internal partial class CSeqAutoLayerImpl : SchemaClass, CSeqAutoLayer
         }
     }
     private static nint? _FlagsOffset;
+    private CSeqAutoLayerFlagImpl? _FlagsInstance;
 
     public CSeqAutoLayerFlag Flags
     {
         get
         {
             _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x1506328FDC74A14C);
-            return new CSeqAutoLayerFlagImpl(_Handle + _FlagsOffset!.Value);
+            var instance = _FlagsInstance ??= new CSeqAutoLayerFlagImpl(0);
+            instance.DangerousSetHandle(_Handle + _FlagsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StartOffset;

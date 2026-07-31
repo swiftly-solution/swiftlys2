@@ -27,6 +27,7 @@ internal partial class CEntityComponentHelperImpl : SchemaClass, CEntityComponen
         }
     }
     private static nint? _InfoOffset;
+    private EntComponentInfo_tImpl? _InfoInstance;
 
     public EntComponentInfo_t? Info
     {
@@ -34,7 +35,10 @@ internal partial class CEntityComponentHelperImpl : SchemaClass, CEntityComponen
         {
             _InfoOffset = _InfoOffset ?? Schema.GetOffset(0x714DB3840F0BFD1B);
             var ptr = _Handle.Read<nint>(_InfoOffset!.Value);
-            return ptr.IsValidPtr() ? new EntComponentInfo_tImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _InfoInstance ??= new EntComponentInfo_tImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _PriorityOffset;
@@ -48,6 +52,7 @@ internal partial class CEntityComponentHelperImpl : SchemaClass, CEntityComponen
         }
     }
     private static nint? _NextOffset;
+    private CEntityComponentHelperImpl? _NextInstance;
 
     public CEntityComponentHelper? Next
     {
@@ -55,7 +60,10 @@ internal partial class CEntityComponentHelperImpl : SchemaClass, CEntityComponen
         {
             _NextOffset = _NextOffset ?? Schema.GetOffset(0x714DB38432B11E0E);
             var ptr = _Handle.Read<nint>(_NextOffset!.Value);
-            return ptr.IsValidPtr() ? new CEntityComponentHelperImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _NextInstance ??= new CEntityComponentHelperImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
 

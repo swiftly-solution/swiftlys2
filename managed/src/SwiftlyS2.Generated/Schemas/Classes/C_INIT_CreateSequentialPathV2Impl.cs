@@ -17,23 +17,29 @@ internal partial class C_INIT_CreateSequentialPathV2Impl : CParticleFunctionInit
     public C_INIT_CreateSequentialPathV2Impl(nint handle) : base(handle) { }
 
     private static nint? _MaxDistanceOffset;
+    private CPerParticleFloatInputImpl? _MaxDistanceInstance;
 
     public CPerParticleFloatInput MaxDistance
     {
         get
         {
             _MaxDistanceOffset = _MaxDistanceOffset ?? Schema.GetOffset(0xEC06632A844E396A);
-            return new CPerParticleFloatInputImpl(_Handle + _MaxDistanceOffset!.Value);
+            var instance = _MaxDistanceInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _MaxDistanceOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NumToAssignOffset;
+    private CParticleCollectionFloatInputImpl? _NumToAssignInstance;
 
     public CParticleCollectionFloatInput NumToAssign
     {
         get
         {
             _NumToAssignOffset = _NumToAssignOffset ?? Schema.GetOffset(0xEC06632AF73366BD);
-            return new CParticleCollectionFloatInputImpl(_Handle + _NumToAssignOffset!.Value);
+            var instance = _NumToAssignInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _NumToAssignOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LoopOffset;
@@ -67,13 +73,16 @@ internal partial class C_INIT_CreateSequentialPathV2Impl : CParticleFunctionInit
         }
     }
     private static nint? _PathParamsOffset;
+    private CPathParametersImpl? _PathParamsInstance;
 
     public CPathParameters PathParams
     {
         get
         {
             _PathParamsOffset = _PathParamsOffset ?? Schema.GetOffset(0xEC06632A3C10092C);
-            return new CPathParametersImpl(_Handle + _PathParamsOffset!.Value);
+            var instance = _PathParamsInstance ??= new CPathParametersImpl(0);
+            instance.DangerousSetHandle(_Handle + _PathParamsOffset!.Value);
+            return instance;
         }
     }
 

@@ -61,9 +61,18 @@ internal partial class FeModelSelfCollisionLayer_tImpl : SchemaClass, FeModelSel
             return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
         }
     }
+    private static nint? _EndIdxOffset;
+    private SchemaFixedArray<uint>? _EndIdxInstance;
+
     public ISchemaFixedArray<uint> EndIdx
     {
-        get => new SchemaFixedArray<uint>(_Handle, 0x49A18705A8AEBFA9, 4, 4, 4);
+        get
+        {
+            _EndIdxOffset = _EndIdxOffset ?? Schema.GetOffset(0x49A18705A8AEBFA9);
+            var instance = _EndIdxInstance ??= new SchemaFixedArray<uint>(0, 0x49A18705A8AEBFA9, 4, 4, 4);
+            instance.DangerousSetHandle(_Handle + _EndIdxOffset!.Value);
+            return instance;
+        }
     }
 
 }

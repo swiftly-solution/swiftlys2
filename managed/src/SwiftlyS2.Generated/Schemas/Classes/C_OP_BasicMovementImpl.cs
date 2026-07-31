@@ -17,33 +17,42 @@ internal partial class C_OP_BasicMovementImpl : CParticleFunctionOperatorImpl, C
     public C_OP_BasicMovementImpl(nint handle) : base(handle) { }
 
     private static nint? _GravityOffset;
+    private CParticleCollectionVecInputImpl? _GravityInstance;
 
     public CParticleCollectionVecInput Gravity
     {
         get
         {
             _GravityOffset = _GravityOffset ?? Schema.GetOffset(0xC8273B20790C70C5);
-            return new CParticleCollectionVecInputImpl(_Handle + _GravityOffset!.Value);
+            var instance = _GravityInstance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _GravityOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DragOffset;
+    private CParticleCollectionFloatInputImpl? _DragInstance;
 
     public CParticleCollectionFloatInput Drag
     {
         get
         {
             _DragOffset = _DragOffset ?? Schema.GetOffset(0xC8273B2050DA6497);
-            return new CParticleCollectionFloatInputImpl(_Handle + _DragOffset!.Value);
+            var instance = _DragInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _DragOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MassControlsOffset;
+    private CParticleMassCalculationParametersImpl? _MassControlsInstance;
 
     public CParticleMassCalculationParameters MassControls
     {
         get
         {
             _MassControlsOffset = _MassControlsOffset ?? Schema.GetOffset(0xC8273B2039CBEACB);
-            return new CParticleMassCalculationParametersImpl(_Handle + _MassControlsOffset!.Value);
+            var instance = _MassControlsInstance ??= new CParticleMassCalculationParametersImpl(0);
+            instance.DangerousSetHandle(_Handle + _MassControlsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MaxConstraintPassesOffset;

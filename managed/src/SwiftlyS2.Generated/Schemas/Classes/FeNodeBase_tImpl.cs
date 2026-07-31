@@ -26,9 +26,18 @@ internal partial class FeNodeBase_tImpl : SchemaClass, FeNodeBase_t
             return ref _Handle.AsRef<ushort>(_NodeOffset!.Value);
         }
     }
+    private static nint? _DummyOffset;
+    private SchemaFixedArray<ushort>? _DummyInstance;
+
     public ISchemaFixedArray<ushort> Dummy
     {
-        get => new SchemaFixedArray<ushort>(_Handle, 0x74CA29BECD8BAE5F, 3, 2, 2);
+        get
+        {
+            _DummyOffset = _DummyOffset ?? Schema.GetOffset(0x74CA29BECD8BAE5F);
+            var instance = _DummyInstance ??= new SchemaFixedArray<ushort>(0, 0x74CA29BECD8BAE5F, 3, 2, 2);
+            instance.DangerousSetHandle(_Handle + _DummyOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _NodeX0Offset;
 

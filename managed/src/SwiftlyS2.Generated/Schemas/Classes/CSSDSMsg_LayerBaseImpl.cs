@@ -17,13 +17,16 @@ internal partial class CSSDSMsg_LayerBaseImpl : SchemaClass, CSSDSMsg_LayerBase
     public CSSDSMsg_LayerBaseImpl(nint handle) : base(handle) { }
 
     private static nint? _ViewIdOffset;
+    private SceneViewId_tImpl? _ViewIdInstance;
 
     public SceneViewId_t ViewId
     {
         get
         {
             _ViewIdOffset = _ViewIdOffset ?? Schema.GetOffset(0x9F18C5E5E976CB25);
-            return new SceneViewId_tImpl(_Handle + _ViewIdOffset!.Value);
+            var instance = _ViewIdInstance ??= new SceneViewId_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _ViewIdOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ViewNameOffset;

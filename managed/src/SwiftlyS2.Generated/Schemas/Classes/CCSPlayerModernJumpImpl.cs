@@ -17,13 +17,16 @@ internal partial class CCSPlayerModernJumpImpl : SchemaClass, CCSPlayerModernJum
     public CCSPlayerModernJumpImpl(nint handle) : base(handle) { }
 
     private static nint? _LastActualJumpPressTickOffset;
+    private GameTick_tImpl? _LastActualJumpPressTickInstance;
 
     public GameTick_t LastActualJumpPressTick
     {
         get
         {
             _LastActualJumpPressTickOffset = _LastActualJumpPressTickOffset ?? Schema.GetOffset(0x8CD8CF82BF93929F);
-            return new GameTick_tImpl(_Handle + _LastActualJumpPressTickOffset!.Value);
+            var instance = _LastActualJumpPressTickInstance ??= new GameTick_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastActualJumpPressTickOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LastActualJumpPressFracOffset;
@@ -37,13 +40,16 @@ internal partial class CCSPlayerModernJumpImpl : SchemaClass, CCSPlayerModernJum
         }
     }
     private static nint? _LastUsableJumpPressTickOffset;
+    private GameTick_tImpl? _LastUsableJumpPressTickInstance;
 
     public GameTick_t LastUsableJumpPressTick
     {
         get
         {
             _LastUsableJumpPressTickOffset = _LastUsableJumpPressTickOffset ?? Schema.GetOffset(0x8CD8CF8276B8735D);
-            return new GameTick_tImpl(_Handle + _LastUsableJumpPressTickOffset!.Value);
+            var instance = _LastUsableJumpPressTickInstance ??= new GameTick_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastUsableJumpPressTickOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LastUsableJumpPressFracOffset;
@@ -57,13 +63,16 @@ internal partial class CCSPlayerModernJumpImpl : SchemaClass, CCSPlayerModernJum
         }
     }
     private static nint? _LastLandedTickOffset;
+    private GameTick_tImpl? _LastLandedTickInstance;
 
     public GameTick_t LastLandedTick
     {
         get
         {
             _LastLandedTickOffset = _LastLandedTickOffset ?? Schema.GetOffset(0x8CD8CF82680C80AC);
-            return new GameTick_tImpl(_Handle + _LastLandedTickOffset!.Value);
+            var instance = _LastLandedTickInstance ??= new GameTick_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastLandedTickOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LastLandedFracOffset;

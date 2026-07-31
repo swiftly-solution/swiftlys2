@@ -57,23 +57,29 @@ internal partial class C_OP_MovementMoveAlongSkinnedCPSnapshotImpl : CParticleFu
         }
     }
     private static nint? _InterpolationOffset;
+    private CPerParticleFloatInputImpl? _InterpolationInstance;
 
     public CPerParticleFloatInput Interpolation
     {
         get
         {
             _InterpolationOffset = _InterpolationOffset ?? Schema.GetOffset(0xBF34A6C9CF55B987);
-            return new CPerParticleFloatInputImpl(_Handle + _InterpolationOffset!.Value);
+            var instance = _InterpolationInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _InterpolationOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TValueOffset;
+    private CPerParticleFloatInputImpl? _TValueInstance;
 
     public CPerParticleFloatInput TValue
     {
         get
         {
             _TValueOffset = _TValueOffset ?? Schema.GetOffset(0xBF34A6C9B4CE908E);
-            return new CPerParticleFloatInputImpl(_Handle + _TValueOffset!.Value);
+            var instance = _TValueInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _TValueOffset!.Value);
+            return instance;
         }
     }
 

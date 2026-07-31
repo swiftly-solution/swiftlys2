@@ -17,33 +17,42 @@ internal partial class C_OP_DirectionBetweenVecsToVecImpl : CParticleFunctionOpe
     public C_OP_DirectionBetweenVecsToVecImpl(nint handle) : base(handle) { }
 
     private static nint? _FieldOutputOffset;
+    private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
             _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x6022BA82E5729606);
-            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+            var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
+            return instance;
         }
     }
     private static nint? _Point1Offset;
+    private CPerParticleVecInputImpl? _Point1Instance;
 
     public CPerParticleVecInput Point1
     {
         get
         {
             _Point1Offset = _Point1Offset ?? Schema.GetOffset(0x6022BA8204AD2BC0);
-            return new CPerParticleVecInputImpl(_Handle + _Point1Offset!.Value);
+            var instance = _Point1Instance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _Point1Offset!.Value);
+            return instance;
         }
     }
     private static nint? _Point2Offset;
+    private CPerParticleVecInputImpl? _Point2Instance;
 
     public CPerParticleVecInput Point2
     {
         get
         {
             _Point2Offset = _Point2Offset ?? Schema.GetOffset(0x6022BA8207AD3079);
-            return new CPerParticleVecInputImpl(_Handle + _Point2Offset!.Value);
+            var instance = _Point2Instance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _Point2Offset!.Value);
+            return instance;
         }
     }
 

@@ -17,33 +17,42 @@ internal partial class CPulse_RegisterInfoImpl : SchemaClass, CPulse_RegisterInf
     public CPulse_RegisterInfoImpl(nint handle) : base(handle) { }
 
     private static nint? _RegOffset;
+    private PulseRuntimeRegisterIndex_tImpl? _RegInstance;
 
     public PulseRuntimeRegisterIndex_t Reg
     {
         get
         {
             _RegOffset = _RegOffset ?? Schema.GetOffset(0x8D60BE3D464A7749);
-            return new PulseRuntimeRegisterIndex_tImpl(_Handle + _RegOffset!.Value);
+            var instance = _RegInstance ??= new PulseRuntimeRegisterIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _RegOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TypeOffset;
+    private SchemaUntypedField? _TypeInstance;
 
     public SchemaUntypedField Type
     {
         get
         {
             _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x8D60BE3D8ED6D5CD);
-            return new SchemaUntypedField(_Handle + _TypeOffset!.Value);
+            var instance = _TypeInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _TypeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OriginNameOffset;
+    private SchemaUntypedField? _OriginNameInstance;
 
     public SchemaUntypedField OriginName
     {
         get
         {
             _OriginNameOffset = _OriginNameOffset ?? Schema.GetOffset(0x8D60BE3D745ADAEC);
-            return new SchemaUntypedField(_Handle + _OriginNameOffset!.Value);
+            var instance = _OriginNameInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OriginNameOffset!.Value);
+            return instance;
         }
     }
     private static nint? _WrittenByInstructionOffset;

@@ -27,6 +27,7 @@ internal partial class CAttributeListImpl : SchemaClass, CAttributeList
         }
     }
     private static nint? _ManagerOffset;
+    private CAttributeManagerImpl? _ManagerInstance;
 
     public CAttributeManager? Manager
     {
@@ -34,7 +35,10 @@ internal partial class CAttributeListImpl : SchemaClass, CAttributeList
         {
             _ManagerOffset = _ManagerOffset ?? Schema.GetOffset(0x1028A18AB9A09BE6);
             var ptr = _Handle.Read<nint>(_ManagerOffset!.Value);
-            return ptr.IsValidPtr() ? new CAttributeManagerImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _ManagerInstance ??= new CAttributeManagerImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
 

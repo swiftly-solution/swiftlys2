@@ -77,13 +77,16 @@ internal partial class CBoneMaskUpdateNodeImpl : CBinaryUpdateNodeImpl, CBoneMas
         }
     }
     private static nint? _BlendParameterOffset;
+    private CAnimParamHandleImpl? _BlendParameterInstance;
 
     public CAnimParamHandle BlendParameter
     {
         get
         {
             _BlendParameterOffset = _BlendParameterOffset ?? Schema.GetOffset(0x213CBA4D40990659);
-            return new CAnimParamHandleImpl(_Handle + _BlendParameterOffset!.Value);
+            var instance = _BlendParameterInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _BlendParameterOffset!.Value);
+            return instance;
         }
     }
 

@@ -17,6 +17,7 @@ internal partial class CCSPlayerControllerImpl : CBasePlayerControllerImpl, CCSP
     public CCSPlayerControllerImpl(nint handle) : base(handle) { }
 
     private static nint? _InGameMoneyServicesOffset;
+    private CCSPlayerController_InGameMoneyServicesImpl? _InGameMoneyServicesInstance;
 
     public CCSPlayerController_InGameMoneyServices? InGameMoneyServices
     {
@@ -24,10 +25,14 @@ internal partial class CCSPlayerControllerImpl : CBasePlayerControllerImpl, CCSP
         {
             _InGameMoneyServicesOffset = _InGameMoneyServicesOffset ?? Schema.GetOffset(0x28ECD7A184B7AA82);
             var ptr = _Handle.Read<nint>(_InGameMoneyServicesOffset!.Value);
-            return ptr.IsValidPtr() ? new CCSPlayerController_InGameMoneyServicesImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _InGameMoneyServicesInstance ??= new CCSPlayerController_InGameMoneyServicesImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _InventoryServicesOffset;
+    private CCSPlayerController_InventoryServicesImpl? _InventoryServicesInstance;
 
     public CCSPlayerController_InventoryServices? InventoryServices
     {
@@ -35,10 +40,14 @@ internal partial class CCSPlayerControllerImpl : CBasePlayerControllerImpl, CCSP
         {
             _InventoryServicesOffset = _InventoryServicesOffset ?? Schema.GetOffset(0x28ECD7A1E5A0A8C9);
             var ptr = _Handle.Read<nint>(_InventoryServicesOffset!.Value);
-            return ptr.IsValidPtr() ? new CCSPlayerController_InventoryServicesImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _InventoryServicesInstance ??= new CCSPlayerController_InventoryServicesImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _ActionTrackingServicesOffset;
+    private CCSPlayerController_ActionTrackingServicesImpl? _ActionTrackingServicesInstance;
 
     public CCSPlayerController_ActionTrackingServices? ActionTrackingServices
     {
@@ -46,10 +55,14 @@ internal partial class CCSPlayerControllerImpl : CBasePlayerControllerImpl, CCSP
         {
             _ActionTrackingServicesOffset = _ActionTrackingServicesOffset ?? Schema.GetOffset(0x28ECD7A1B8174144);
             var ptr = _Handle.Read<nint>(_ActionTrackingServicesOffset!.Value);
-            return ptr.IsValidPtr() ? new CCSPlayerController_ActionTrackingServicesImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _ActionTrackingServicesInstance ??= new CCSPlayerController_ActionTrackingServicesImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _DamageServicesOffset;
+    private CCSPlayerController_DamageServicesImpl? _DamageServicesInstance;
 
     public CCSPlayerController_DamageServices? DamageServices
     {
@@ -57,7 +70,10 @@ internal partial class CCSPlayerControllerImpl : CBasePlayerControllerImpl, CCSP
         {
             _DamageServicesOffset = _DamageServicesOffset ?? Schema.GetOffset(0x28ECD7A1A2CE0372);
             var ptr = _Handle.Read<nint>(_DamageServicesOffset!.Value);
-            return ptr.IsValidPtr() ? new CCSPlayerController_DamageServicesImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _DamageServicesInstance ??= new CCSPlayerController_DamageServicesImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _PingOffset;
@@ -116,13 +132,16 @@ internal partial class CCSPlayerControllerImpl : CBasePlayerControllerImpl, CCSP
         }
     }
     private static nint? _ForceTeamTimeOffset;
+    private GameTime_tImpl? _ForceTeamTimeInstance;
 
     public GameTime_t ForceTeamTime
     {
         get
         {
             _ForceTeamTimeOffset = _ForceTeamTimeOffset ?? Schema.GetOffset(0x28ECD7A143249332);
-            return new GameTime_tImpl(_Handle + _ForceTeamTimeOffset!.Value);
+            var instance = _ForceTeamTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _ForceTeamTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CompTeammateColorOffset;
@@ -226,13 +245,16 @@ internal partial class CCSPlayerControllerImpl : CBasePlayerControllerImpl, CCSP
         }
     }
     private static nint? _LastJoinTeamTimeOffset;
+    private GameTime_tImpl? _LastJoinTeamTimeInstance;
 
     public GameTime_t LastJoinTeamTime
     {
         get
         {
             _LastJoinTeamTimeOffset = _LastJoinTeamTimeOffset ?? Schema.GetOffset(0x28ECD7A1B2DAFB07);
-            return new GameTime_tImpl(_Handle + _LastJoinTeamTimeOffset!.Value);
+            var instance = _LastJoinTeamTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastJoinTeamTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ClanOffset;
@@ -720,9 +742,18 @@ internal partial class CCSPlayerControllerImpl : CBasePlayerControllerImpl, CCSP
             return ref _Handle.AsRef<int>(_RoundsWonOffset!.Value);
         }
     }
+    private static nint? _RecentKillQueueOffset;
+    private SchemaFixedArray<byte>? _RecentKillQueueInstance;
+
     public ISchemaFixedArray<byte> RecentKillQueue
     {
-        get => new SchemaFixedArray<byte>(_Handle, 0x28ECD7A12540EEA5, 8, 1, 1);
+        get
+        {
+            _RecentKillQueueOffset = _RecentKillQueueOffset ?? Schema.GetOffset(0x28ECD7A12540EEA5);
+            var instance = _RecentKillQueueInstance ??= new SchemaFixedArray<byte>(0, 0x28ECD7A12540EEA5, 8, 1, 1);
+            instance.DangerousSetHandle(_Handle + _RecentKillQueueOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _FirstKillOffset;
 
@@ -815,13 +846,16 @@ internal partial class CCSPlayerControllerImpl : CBasePlayerControllerImpl, CCSP
         }
     }
     private static nint? _LastHeldVoteTimerOffset;
+    private IntervalTimerImpl? _LastHeldVoteTimerInstance;
 
     public IntervalTimer LastHeldVoteTimer
     {
         get
         {
             _LastHeldVoteTimerOffset = _LastHeldVoteTimerOffset ?? Schema.GetOffset(0x28ECD7A1CBB0044F);
-            return new IntervalTimerImpl(_Handle + _LastHeldVoteTimerOffset!.Value);
+            var instance = _LastHeldVoteTimerInstance ??= new IntervalTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastHeldVoteTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ShowHintsOffset;
@@ -895,23 +929,29 @@ internal partial class CCSPlayerControllerImpl : CBasePlayerControllerImpl, CCSP
         }
     }
     private static nint? _LastTeamDamageWarningTimeOffset;
+    private GameTime_tImpl? _LastTeamDamageWarningTimeInstance;
 
     public GameTime_t LastTeamDamageWarningTime
     {
         get
         {
             _LastTeamDamageWarningTimeOffset = _LastTeamDamageWarningTimeOffset ?? Schema.GetOffset(0x28ECD7A1570CFFD2);
-            return new GameTime_tImpl(_Handle + _LastTeamDamageWarningTimeOffset!.Value);
+            var instance = _LastTeamDamageWarningTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastTeamDamageWarningTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LastTimePlayerWasDisconnectedForPawnsRemoveOffset;
+    private GameTime_tImpl? _LastTimePlayerWasDisconnectedForPawnsRemoveInstance;
 
     public GameTime_t LastTimePlayerWasDisconnectedForPawnsRemove
     {
         get
         {
             _LastTimePlayerWasDisconnectedForPawnsRemoveOffset = _LastTimePlayerWasDisconnectedForPawnsRemoveOffset ?? Schema.GetOffset(0x28ECD7A196817413);
-            return new GameTime_tImpl(_Handle + _LastTimePlayerWasDisconnectedForPawnsRemoveOffset!.Value);
+            var instance = _LastTimePlayerWasDisconnectedForPawnsRemoveInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastTimePlayerWasDisconnectedForPawnsRemoveOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SuspiciousHitCountOffset;

@@ -17,13 +17,16 @@ internal partial class C_INIT_NormalAlignToCPImpl : CParticleFunctionInitializer
     public C_INIT_NormalAlignToCPImpl(nint handle) : base(handle) { }
 
     private static nint? _TransformInputOffset;
+    private CParticleTransformInputImpl? _TransformInputInstance;
 
     public CParticleTransformInput TransformInput
     {
         get
         {
             _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0xFA0441643A9ED669);
-            return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+            var instance = _TransformInputInstance ??= new CParticleTransformInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _TransformInputOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ControlPointAxisOffset;

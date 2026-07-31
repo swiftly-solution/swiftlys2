@@ -117,13 +117,16 @@ internal partial class CPhysMagnetImpl : CBaseAnimGraphImpl, CPhysMagnet
         }
     }
     private static nint? _NextSuckTimeOffset;
+    private GameTime_tImpl? _NextSuckTimeInstance;
 
     public GameTime_t NextSuckTime
     {
         get
         {
             _NextSuckTimeOffset = _NextSuckTimeOffset ?? Schema.GetOffset(0x577289102E3592CD);
-            return new GameTime_tImpl(_Handle + _NextSuckTimeOffset!.Value);
+            var instance = _NextSuckTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NextSuckTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MaxObjectsAttachedOffset;

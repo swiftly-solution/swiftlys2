@@ -37,13 +37,16 @@ internal partial class FeCollisionPlane_tImpl : SchemaClass, FeCollisionPlane_t
         }
     }
     private static nint? _PlaneOffset;
+    private RnPlane_tImpl? _PlaneInstance;
 
     public RnPlane_t Plane
     {
         get
         {
             _PlaneOffset = _PlaneOffset ?? Schema.GetOffset(0xF8EBA995671CB5D5);
-            return new RnPlane_tImpl(_Handle + _PlaneOffset!.Value);
+            var instance = _PlaneInstance ??= new RnPlane_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _PlaneOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StrengthOffset;

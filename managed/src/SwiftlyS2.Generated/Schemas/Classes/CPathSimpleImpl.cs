@@ -17,13 +17,16 @@ internal partial class CPathSimpleImpl : CBaseEntityImpl, CPathSimple
     public CPathSimpleImpl(nint handle) : base(handle) { }
 
     private static nint? _CPathQueryComponentOffset;
+    private CPathQueryComponentImpl? _CPathQueryComponentInstance;
 
     public CPathQueryComponent CPathQueryComponent
     {
         get
         {
             _CPathQueryComponentOffset = _CPathQueryComponentOffset ?? Schema.GetOffset(0x10936CB34513F542);
-            return new CPathQueryComponentImpl(_Handle + _CPathQueryComponentOffset!.Value);
+            var instance = _CPathQueryComponentInstance ??= new CPathQueryComponentImpl(0);
+            instance.DangerousSetHandle(_Handle + _CPathQueryComponentOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PathStringOffset;

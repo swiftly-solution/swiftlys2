@@ -27,13 +27,16 @@ internal partial class CCommentarySystemImpl : SchemaClass, CCommentarySystem
         }
     }
     private static nint? _NextTeleportTimeOffset;
+    private GameTime_tImpl? _NextTeleportTimeInstance;
 
     public GameTime_t NextTeleportTime
     {
         get
         {
             _NextTeleportTimeOffset = _NextTeleportTimeOffset ?? Schema.GetOffset(0x87CBBE6A92701808);
-            return new GameTime_tImpl(_Handle + _NextTeleportTimeOffset!.Value);
+            var instance = _NextTeleportTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NextTeleportTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TeleportStageOffset;

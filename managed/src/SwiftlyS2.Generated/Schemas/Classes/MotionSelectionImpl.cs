@@ -17,43 +17,55 @@ internal partial class MotionSelectionImpl : SchemaClass, MotionSelection
     public MotionSelectionImpl(nint handle) : base(handle) { }
 
     private static nint? _ConfigIndexOffset;
+    private NetVarConfigIndexImpl? _ConfigIndexInstance;
 
     public NetVarConfigIndex ConfigIndex
     {
         get
         {
             _ConfigIndexOffset = _ConfigIndexOffset ?? Schema.GetOffset(0x6004D4E3636A4289);
-            return new NetVarConfigIndexImpl(_Handle + _ConfigIndexOffset!.Value);
+            var instance = _ConfigIndexInstance ??= new NetVarConfigIndexImpl(0);
+            instance.DangerousSetHandle(_Handle + _ConfigIndexOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CycleZeroTimeOffset;
+    private SchemaUntypedField? _CycleZeroTimeInstance;
 
     public SchemaUntypedField CycleZeroTime
     {
         get
         {
             _CycleZeroTimeOffset = _CycleZeroTimeOffset ?? Schema.GetOffset(0x6004D4E340321698);
-            return new SchemaUntypedField(_Handle + _CycleZeroTimeOffset!.Value);
+            var instance = _CycleZeroTimeInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _CycleZeroTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PlaybackSpeedOffset;
+    private SchemaUntypedField? _PlaybackSpeedInstance;
 
     public SchemaUntypedField PlaybackSpeed
     {
         get
         {
             _PlaybackSpeedOffset = _PlaybackSpeedOffset ?? Schema.GetOffset(0x6004D4E3FA2B402D);
-            return new SchemaUntypedField(_Handle + _PlaybackSpeedOffset!.Value);
+            var instance = _PlaybackSpeedInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _PlaybackSpeedOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StartTimeOffset;
+    private SchemaUntypedField? _StartTimeInstance;
 
     public SchemaUntypedField StartTime
     {
         get
         {
             _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0x6004D4E367FE9DC4);
-            return new SchemaUntypedField(_Handle + _StartTimeOffset!.Value);
+            var instance = _StartTimeInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _StartTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SampleOffset;

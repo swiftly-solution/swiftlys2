@@ -37,6 +37,7 @@ internal partial class ResponseParamsImpl : SchemaClass, ResponseParams
         }
     }
     private static nint? _FollowupOffset;
+    private ResponseFollowupImpl? _FollowupInstance;
 
     public ResponseFollowup? Followup
     {
@@ -44,7 +45,10 @@ internal partial class ResponseParamsImpl : SchemaClass, ResponseParams
         {
             _FollowupOffset = _FollowupOffset ?? Schema.GetOffset(0x5C5BE8C481D8C38F);
             var ptr = _Handle.Read<nint>(_FollowupOffset!.Value);
-            return ptr.IsValidPtr() ? new ResponseFollowupImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _FollowupInstance ??= new ResponseFollowupImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
 

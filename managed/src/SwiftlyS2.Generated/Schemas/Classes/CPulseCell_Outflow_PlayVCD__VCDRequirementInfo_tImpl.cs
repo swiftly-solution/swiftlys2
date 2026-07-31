@@ -27,13 +27,16 @@ internal partial class CPulseCell_Outflow_PlayVCD__VCDRequirementInfo_tImpl : Sc
         }
     }
     private static nint? _OutflowOffset;
+    private CPulse_OutflowConnectionImpl? _OutflowInstance;
 
     public CPulse_OutflowConnection Outflow
     {
         get
         {
             _OutflowOffset = _OutflowOffset ?? Schema.GetOffset(0xB1E264BFA23DA55B);
-            return new CPulse_OutflowConnectionImpl(_Handle + _OutflowOffset!.Value);
+            var instance = _OutflowInstance ??= new CPulse_OutflowConnectionImpl(0);
+            instance.DangerousSetHandle(_Handle + _OutflowOffset!.Value);
+            return instance;
         }
     }
 

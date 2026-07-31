@@ -17,13 +17,16 @@ internal partial class ParamSpanSample_tImpl : SchemaClass, ParamSpanSample_t
     public ParamSpanSample_tImpl(nint handle) : base(handle) { }
 
     private static nint? _ValueOffset;
+    private SchemaUntypedField? _ValueInstance;
 
     public SchemaUntypedField Value
     {
         get
         {
             _ValueOffset = _ValueOffset ?? Schema.GetOffset(0x37E203136B99AEEA);
-            return new SchemaUntypedField(_Handle + _ValueOffset!.Value);
+            var instance = _ValueInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ValueOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CycleOffset;

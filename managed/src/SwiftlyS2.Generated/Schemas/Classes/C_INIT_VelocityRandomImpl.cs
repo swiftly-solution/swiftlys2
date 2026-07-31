@@ -27,43 +27,55 @@ internal partial class C_INIT_VelocityRandomImpl : CParticleFunctionInitializerI
         }
     }
     private static nint? _SpeedMinOffset;
+    private CPerParticleFloatInputImpl? _SpeedMinInstance;
 
     public CPerParticleFloatInput SpeedMin
     {
         get
         {
             _SpeedMinOffset = _SpeedMinOffset ?? Schema.GetOffset(0xFCCBA9EB989E1F8);
-            return new CPerParticleFloatInputImpl(_Handle + _SpeedMinOffset!.Value);
+            var instance = _SpeedMinInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _SpeedMinOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SpeedMaxOffset;
+    private CPerParticleFloatInputImpl? _SpeedMaxInstance;
 
     public CPerParticleFloatInput SpeedMax
     {
         get
         {
             _SpeedMaxOffset = _SpeedMaxOffset ?? Schema.GetOffset(0xFCCBA9ECF9D8C52);
-            return new CPerParticleFloatInputImpl(_Handle + _SpeedMaxOffset!.Value);
+            var instance = _SpeedMaxInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _SpeedMaxOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LocalCoordinateSystemSpeedMinOffset;
+    private CPerParticleVecInputImpl? _LocalCoordinateSystemSpeedMinInstance;
 
     public CPerParticleVecInput LocalCoordinateSystemSpeedMin
     {
         get
         {
             _LocalCoordinateSystemSpeedMinOffset = _LocalCoordinateSystemSpeedMinOffset ?? Schema.GetOffset(0xFCCBA9EA4A0F1AE);
-            return new CPerParticleVecInputImpl(_Handle + _LocalCoordinateSystemSpeedMinOffset!.Value);
+            var instance = _LocalCoordinateSystemSpeedMinInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _LocalCoordinateSystemSpeedMinOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LocalCoordinateSystemSpeedMaxOffset;
+    private CPerParticleVecInputImpl? _LocalCoordinateSystemSpeedMaxInstance;
 
     public CPerParticleVecInput LocalCoordinateSystemSpeedMax
     {
         get
         {
             _LocalCoordinateSystemSpeedMaxOffset = _LocalCoordinateSystemSpeedMaxOffset ?? Schema.GetOffset(0xFCCBA9E968D53EC);
-            return new CPerParticleVecInputImpl(_Handle + _LocalCoordinateSystemSpeedMaxOffset!.Value);
+            var instance = _LocalCoordinateSystemSpeedMaxInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _LocalCoordinateSystemSpeedMaxOffset!.Value);
+            return instance;
         }
     }
     private static nint? _IgnoreDTOffset;
@@ -77,13 +89,16 @@ internal partial class C_INIT_VelocityRandomImpl : CParticleFunctionInitializerI
         }
     }
     private static nint? _RandomnessParametersOffset;
+    private CRandomNumberGeneratorParametersImpl? _RandomnessParametersInstance;
 
     public CRandomNumberGeneratorParameters RandomnessParameters
     {
         get
         {
             _RandomnessParametersOffset = _RandomnessParametersOffset ?? Schema.GetOffset(0xFCCBA9E7EDF50AD);
-            return new CRandomNumberGeneratorParametersImpl(_Handle + _RandomnessParametersOffset!.Value);
+            var instance = _RandomnessParametersInstance ??= new CRandomNumberGeneratorParametersImpl(0);
+            instance.DangerousSetHandle(_Handle + _RandomnessParametersOffset!.Value);
+            return instance;
         }
     }
 

@@ -17,23 +17,29 @@ internal partial class C_OP_SetFloatCollectionImpl : CParticleFunctionOperatorIm
     public C_OP_SetFloatCollectionImpl(nint handle) : base(handle) { }
 
     private static nint? _InputValueOffset;
+    private CParticleCollectionFloatInputImpl? _InputValueInstance;
 
     public CParticleCollectionFloatInput InputValue
     {
         get
         {
             _InputValueOffset = _InputValueOffset ?? Schema.GetOffset(0x72EFBE1734445438);
-            return new CParticleCollectionFloatInputImpl(_Handle + _InputValueOffset!.Value);
+            var instance = _InputValueInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _InputValueOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OutputFieldOffset;
+    private ParticleAttributeIndex_tImpl? _OutputFieldInstance;
 
     public ParticleAttributeIndex_t OutputField
     {
         get
         {
             _OutputFieldOffset = _OutputFieldOffset ?? Schema.GetOffset(0x72EFBE17324F6F74);
-            return new ParticleAttributeIndex_tImpl(_Handle + _OutputFieldOffset!.Value);
+            var instance = _OutputFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _OutputFieldOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SetMethodOffset;
@@ -47,13 +53,16 @@ internal partial class C_OP_SetFloatCollectionImpl : CParticleFunctionOperatorIm
         }
     }
     private static nint? _LerpOffset;
+    private CParticleCollectionFloatInputImpl? _LerpInstance;
 
     public CParticleCollectionFloatInput Lerp
     {
         get
         {
             _LerpOffset = _LerpOffset ?? Schema.GetOffset(0x72EFBE175C17F8E8);
-            return new CParticleCollectionFloatInputImpl(_Handle + _LerpOffset!.Value);
+            var instance = _LerpInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _LerpOffset!.Value);
+            return instance;
         }
     }
 

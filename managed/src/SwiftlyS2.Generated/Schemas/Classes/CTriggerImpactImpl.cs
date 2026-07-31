@@ -47,13 +47,16 @@ internal partial class CTriggerImpactImpl : CTriggerMultipleImpl, CTriggerImpact
         }
     }
     private static nint? _OutputForceOffset;
+    private SchemaUntypedField? _OutputForceInstance;
 
     public SchemaUntypedField OutputForce
     {
         get
         {
             _OutputForceOffset = _OutputForceOffset ?? Schema.GetOffset(0x2A6A2B488653AFA9);
-            return new SchemaUntypedField(_Handle + _OutputForceOffset!.Value);
+            var instance = _OutputForceInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OutputForceOffset!.Value);
+            return instance;
         }
     }
 

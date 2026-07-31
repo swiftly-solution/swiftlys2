@@ -17,33 +17,42 @@ internal partial class CFollowTargetUpdateNodeImpl : CUnaryUpdateNodeImpl, CFoll
     public CFollowTargetUpdateNodeImpl(nint handle) : base(handle) { }
 
     private static nint? _OpFixedDataOffset;
+    private FollowTargetOpFixedSettings_tImpl? _OpFixedDataInstance;
 
     public FollowTargetOpFixedSettings_t OpFixedData
     {
         get
         {
             _OpFixedDataOffset = _OpFixedDataOffset ?? Schema.GetOffset(0x2A45E9CB6960AF8C);
-            return new FollowTargetOpFixedSettings_tImpl(_Handle + _OpFixedDataOffset!.Value);
+            var instance = _OpFixedDataInstance ??= new FollowTargetOpFixedSettings_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _OpFixedDataOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ParameterPositionOffset;
+    private CAnimParamHandleImpl? _ParameterPositionInstance;
 
     public CAnimParamHandle ParameterPosition
     {
         get
         {
             _ParameterPositionOffset = _ParameterPositionOffset ?? Schema.GetOffset(0x2A45E9CBDA71CD41);
-            return new CAnimParamHandleImpl(_Handle + _ParameterPositionOffset!.Value);
+            var instance = _ParameterPositionInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParameterPositionOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ParameterOrientationOffset;
+    private CAnimParamHandleImpl? _ParameterOrientationInstance;
 
     public CAnimParamHandle ParameterOrientation
     {
         get
         {
             _ParameterOrientationOffset = _ParameterOrientationOffset ?? Schema.GetOffset(0x2A45E9CB1320E9C8);
-            return new CAnimParamHandleImpl(_Handle + _ParameterOrientationOffset!.Value);
+            var instance = _ParameterOrientationInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParameterOrientationOffset!.Value);
+            return instance;
         }
     }
 

@@ -17,23 +17,29 @@ internal partial class C_OP_RenderClientPhysicsImpulseImpl : CParticleFunctionRe
     public C_OP_RenderClientPhysicsImpulseImpl(nint handle) : base(handle) { }
 
     private static nint? _RadiusOffset;
+    private CPerParticleFloatInputImpl? _RadiusInstance;
 
     public CPerParticleFloatInput Radius
     {
         get
         {
             _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x618F365ACFC08D);
-            return new CPerParticleFloatInputImpl(_Handle + _RadiusOffset!.Value);
+            var instance = _RadiusInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _RadiusOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MagnitudeOffset;
+    private CPerParticleFloatInputImpl? _MagnitudeInstance;
 
     public CPerParticleFloatInput Magnitude
     {
         get
         {
             _MagnitudeOffset = _MagnitudeOffset ?? Schema.GetOffset(0x618F36ED0A1D8B);
-            return new CPerParticleFloatInputImpl(_Handle + _MagnitudeOffset!.Value);
+            var instance = _MagnitudeInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _MagnitudeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SimIdFilterOffset;

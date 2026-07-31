@@ -17,13 +17,16 @@ internal partial class CJumpHelperUpdateNodeImpl : CSequenceUpdateNodeImpl, CJum
     public CJumpHelperUpdateNodeImpl(nint handle) : base(handle) { }
 
     private static nint? _TargetParamOffset;
+    private CAnimParamHandleImpl? _TargetParamInstance;
 
     public CAnimParamHandle TargetParam
     {
         get
         {
             _TargetParamOffset = _TargetParamOffset ?? Schema.GetOffset(0xB5EA3127D85B45EB);
-            return new CAnimParamHandleImpl(_Handle + _TargetParamOffset!.Value);
+            var instance = _TargetParamInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _TargetParamOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OriginalJumpMovementOffset;
@@ -76,9 +79,18 @@ internal partial class CJumpHelperUpdateNodeImpl : CSequenceUpdateNodeImpl, CJum
             return ref _Handle.AsRef<JumpCorrectionMethod>(_CorrectionMethodOffset!.Value);
         }
     }
+    private static nint? _TranslationAxisOffset;
+    private SchemaFixedArray<bool>? _TranslationAxisInstance;
+
     public ISchemaFixedArray<bool> TranslationAxis
     {
-        get => new SchemaFixedArray<bool>(_Handle, 0xB5EA3127F062387D, 3, 1, 1);
+        get
+        {
+            _TranslationAxisOffset = _TranslationAxisOffset ?? Schema.GetOffset(0xB5EA3127F062387D);
+            var instance = _TranslationAxisInstance ??= new SchemaFixedArray<bool>(0, 0xB5EA3127F062387D, 3, 1, 1);
+            instance.DangerousSetHandle(_Handle + _TranslationAxisOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _ScaleSpeedOffset;
 

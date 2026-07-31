@@ -17,13 +17,16 @@ internal partial class CExpressionActionUpdaterImpl : CAnimActionUpdaterImpl, CE
     public CExpressionActionUpdaterImpl(nint handle) : base(handle) { }
 
     private static nint? _ParamOffset;
+    private CAnimParamHandleImpl? _ParamInstance;
 
     public CAnimParamHandle Param
     {
         get
         {
             _ParamOffset = _ParamOffset ?? Schema.GetOffset(0x3B8502F3679286A4);
-            return new CAnimParamHandleImpl(_Handle + _ParamOffset!.Value);
+            var instance = _ParamInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ParamTypeOffset;
@@ -37,13 +40,16 @@ internal partial class CExpressionActionUpdaterImpl : CAnimActionUpdaterImpl, CE
         }
     }
     private static nint? _ScriptOffset;
+    private AnimScriptHandleImpl? _ScriptInstance;
 
     public AnimScriptHandle Script
     {
         get
         {
             _ScriptOffset = _ScriptOffset ?? Schema.GetOffset(0x3B8502F329D70FB0);
-            return new AnimScriptHandleImpl(_Handle + _ScriptOffset!.Value);
+            var instance = _ScriptInstance ??= new AnimScriptHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _ScriptOffset!.Value);
+            return instance;
         }
     }
 

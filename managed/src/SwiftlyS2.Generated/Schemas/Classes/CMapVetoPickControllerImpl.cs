@@ -76,45 +76,135 @@ internal partial class CMapVetoPickControllerImpl : CBaseEntityImpl, CMapVetoPic
             return ref _Handle.AsRef<int>(_TeamWinningCoinTossOffset!.Value);
         }
     }
+    private static nint? _TeamWithFirstChoiceOffset;
+    private SchemaFixedArray<int>? _TeamWithFirstChoiceInstance;
+
     public ISchemaFixedArray<int> TeamWithFirstChoice
     {
-        get => new SchemaFixedArray<int>(_Handle, 0xD5DDD68D8887D005, 64, 4, 4);
+        get
+        {
+            _TeamWithFirstChoiceOffset = _TeamWithFirstChoiceOffset ?? Schema.GetOffset(0xD5DDD68D8887D005);
+            var instance = _TeamWithFirstChoiceInstance ??= new SchemaFixedArray<int>(0, 0xD5DDD68D8887D005, 64, 4, 4);
+            instance.DangerousSetHandle(_Handle + _TeamWithFirstChoiceOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _VoteMapIdsListOffset;
+    private SchemaFixedArray<int>? _VoteMapIdsListInstance;
+
     public ISchemaFixedArray<int> VoteMapIdsList
     {
-        get => new SchemaFixedArray<int>(_Handle, 0xD5DDD68DE64EA3ED, 7, 4, 4);
+        get
+        {
+            _VoteMapIdsListOffset = _VoteMapIdsListOffset ?? Schema.GetOffset(0xD5DDD68DE64EA3ED);
+            var instance = _VoteMapIdsListInstance ??= new SchemaFixedArray<int>(0, 0xD5DDD68DE64EA3ED, 7, 4, 4);
+            instance.DangerousSetHandle(_Handle + _VoteMapIdsListOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _AccountIDsOffset;
+    private SchemaFixedArray<int>? _AccountIDsInstance;
+
     public ISchemaFixedArray<int> AccountIDs
     {
-        get => new SchemaFixedArray<int>(_Handle, 0xD5DDD68D2F303A1A, 64, 4, 4);
+        get
+        {
+            _AccountIDsOffset = _AccountIDsOffset ?? Schema.GetOffset(0xD5DDD68D2F303A1A);
+            var instance = _AccountIDsInstance ??= new SchemaFixedArray<int>(0, 0xD5DDD68D2F303A1A, 64, 4, 4);
+            instance.DangerousSetHandle(_Handle + _AccountIDsOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _MapId0Offset;
+    private SchemaFixedArray<int>? _MapId0Instance;
+
     public ISchemaFixedArray<int> MapId0
     {
-        get => new SchemaFixedArray<int>(_Handle, 0xD5DDD68D9E2BC198, 64, 4, 4);
+        get
+        {
+            _MapId0Offset = _MapId0Offset ?? Schema.GetOffset(0xD5DDD68D9E2BC198);
+            var instance = _MapId0Instance ??= new SchemaFixedArray<int>(0, 0xD5DDD68D9E2BC198, 64, 4, 4);
+            instance.DangerousSetHandle(_Handle + _MapId0Offset!.Value);
+            return instance;
+        }
     }
+    private static nint? _MapId1Offset;
+    private SchemaFixedArray<int>? _MapId1Instance;
+
     public ISchemaFixedArray<int> MapId1
     {
-        get => new SchemaFixedArray<int>(_Handle, 0xD5DDD68D9F2BC32B, 64, 4, 4);
+        get
+        {
+            _MapId1Offset = _MapId1Offset ?? Schema.GetOffset(0xD5DDD68D9F2BC32B);
+            var instance = _MapId1Instance ??= new SchemaFixedArray<int>(0, 0xD5DDD68D9F2BC32B, 64, 4, 4);
+            instance.DangerousSetHandle(_Handle + _MapId1Offset!.Value);
+            return instance;
+        }
     }
+    private static nint? _MapId2Offset;
+    private SchemaFixedArray<int>? _MapId2Instance;
+
     public ISchemaFixedArray<int> MapId2
     {
-        get => new SchemaFixedArray<int>(_Handle, 0xD5DDD68DA02BC4BE, 64, 4, 4);
+        get
+        {
+            _MapId2Offset = _MapId2Offset ?? Schema.GetOffset(0xD5DDD68DA02BC4BE);
+            var instance = _MapId2Instance ??= new SchemaFixedArray<int>(0, 0xD5DDD68DA02BC4BE, 64, 4, 4);
+            instance.DangerousSetHandle(_Handle + _MapId2Offset!.Value);
+            return instance;
+        }
     }
+    private static nint? _MapId3Offset;
+    private SchemaFixedArray<int>? _MapId3Instance;
+
     public ISchemaFixedArray<int> MapId3
     {
-        get => new SchemaFixedArray<int>(_Handle, 0xD5DDD68DA12BC651, 64, 4, 4);
+        get
+        {
+            _MapId3Offset = _MapId3Offset ?? Schema.GetOffset(0xD5DDD68DA12BC651);
+            var instance = _MapId3Instance ??= new SchemaFixedArray<int>(0, 0xD5DDD68DA12BC651, 64, 4, 4);
+            instance.DangerousSetHandle(_Handle + _MapId3Offset!.Value);
+            return instance;
+        }
     }
+    private static nint? _MapId4Offset;
+    private SchemaFixedArray<int>? _MapId4Instance;
+
     public ISchemaFixedArray<int> MapId4
     {
-        get => new SchemaFixedArray<int>(_Handle, 0xD5DDD68DA22BC7E4, 64, 4, 4);
+        get
+        {
+            _MapId4Offset = _MapId4Offset ?? Schema.GetOffset(0xD5DDD68DA22BC7E4);
+            var instance = _MapId4Instance ??= new SchemaFixedArray<int>(0, 0xD5DDD68DA22BC7E4, 64, 4, 4);
+            instance.DangerousSetHandle(_Handle + _MapId4Offset!.Value);
+            return instance;
+        }
     }
+    private static nint? _MapId5Offset;
+    private SchemaFixedArray<int>? _MapId5Instance;
+
     public ISchemaFixedArray<int> MapId5
     {
-        get => new SchemaFixedArray<int>(_Handle, 0xD5DDD68DA32BC977, 64, 4, 4);
+        get
+        {
+            _MapId5Offset = _MapId5Offset ?? Schema.GetOffset(0xD5DDD68DA32BC977);
+            var instance = _MapId5Instance ??= new SchemaFixedArray<int>(0, 0xD5DDD68DA32BC977, 64, 4, 4);
+            instance.DangerousSetHandle(_Handle + _MapId5Offset!.Value);
+            return instance;
+        }
     }
+    private static nint? _StartingSide0Offset;
+    private SchemaFixedArray<int>? _StartingSide0Instance;
+
     public ISchemaFixedArray<int> StartingSide0
     {
-        get => new SchemaFixedArray<int>(_Handle, 0xD5DDD68DDAE5D5BA, 64, 4, 4);
+        get
+        {
+            _StartingSide0Offset = _StartingSide0Offset ?? Schema.GetOffset(0xD5DDD68DDAE5D5BA);
+            var instance = _StartingSide0Instance ??= new SchemaFixedArray<int>(0, 0xD5DDD68DDAE5D5BA, 64, 4, 4);
+            instance.DangerousSetHandle(_Handle + _StartingSide0Offset!.Value);
+            return instance;
+        }
     }
     private static nint? _CurrentPhaseOffset;
 
@@ -147,53 +237,68 @@ internal partial class CMapVetoPickControllerImpl : CBaseEntityImpl, CMapVetoPic
         }
     }
     private static nint? _OnMapVetoedOffset;
+    private SchemaUntypedField? _OnMapVetoedInstance;
 
     public SchemaUntypedField OnMapVetoed
     {
         get
         {
             _OnMapVetoedOffset = _OnMapVetoedOffset ?? Schema.GetOffset(0xD5DDD68D6C16E77B);
-            return new SchemaUntypedField(_Handle + _OnMapVetoedOffset!.Value);
+            var instance = _OnMapVetoedInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OnMapVetoedOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OnMapPickedOffset;
+    private SchemaUntypedField? _OnMapPickedInstance;
 
     public SchemaUntypedField OnMapPicked
     {
         get
         {
             _OnMapPickedOffset = _OnMapPickedOffset ?? Schema.GetOffset(0xD5DDD68DF50BA186);
-            return new SchemaUntypedField(_Handle + _OnMapPickedOffset!.Value);
+            var instance = _OnMapPickedInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OnMapPickedOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OnSidesPickedOffset;
+    private SchemaUntypedField? _OnSidesPickedInstance;
 
     public SchemaUntypedField OnSidesPicked
     {
         get
         {
             _OnSidesPickedOffset = _OnSidesPickedOffset ?? Schema.GetOffset(0xD5DDD68DC852D128);
-            return new SchemaUntypedField(_Handle + _OnSidesPickedOffset!.Value);
+            var instance = _OnSidesPickedInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OnSidesPickedOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OnNewPhaseStartedOffset;
+    private SchemaUntypedField? _OnNewPhaseStartedInstance;
 
     public SchemaUntypedField OnNewPhaseStarted
     {
         get
         {
             _OnNewPhaseStartedOffset = _OnNewPhaseStartedOffset ?? Schema.GetOffset(0xD5DDD68D40B650EE);
-            return new SchemaUntypedField(_Handle + _OnNewPhaseStartedOffset!.Value);
+            var instance = _OnNewPhaseStartedInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OnNewPhaseStartedOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OnLevelTransitionOffset;
+    private SchemaUntypedField? _OnLevelTransitionInstance;
 
     public SchemaUntypedField OnLevelTransition
     {
         get
         {
             _OnLevelTransitionOffset = _OnLevelTransitionOffset ?? Schema.GetOffset(0xD5DDD68D2AEE71AD);
-            return new SchemaUntypedField(_Handle + _OnLevelTransitionOffset!.Value);
+            var instance = _OnLevelTransitionInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OnLevelTransitionOffset!.Value);
+            return instance;
         }
     }
 

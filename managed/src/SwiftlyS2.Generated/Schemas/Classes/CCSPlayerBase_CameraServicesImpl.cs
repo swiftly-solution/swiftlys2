@@ -37,13 +37,16 @@ internal partial class CCSPlayerBase_CameraServicesImpl : CPlayer_CameraServices
         }
     }
     private static nint? _FOVTimeOffset;
+    private GameTime_tImpl? _FOVTimeInstance;
 
     public GameTime_t FOVTime
     {
         get
         {
             _FOVTimeOffset = _FOVTimeOffset ?? Schema.GetOffset(0x5B25D9024B291C67);
-            return new GameTime_tImpl(_Handle + _FOVTimeOffset!.Value);
+            var instance = _FOVTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FOVTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FOVRateOffset;

@@ -17,13 +17,16 @@ internal partial class CCSGameModeRules_DeathmatchImpl : CCSGameModeRulesImpl, C
     public CCSGameModeRules_DeathmatchImpl(nint handle) : base(handle) { }
 
     private static nint? _DMBonusStartTimeOffset;
+    private GameTime_tImpl? _DMBonusStartTimeInstance;
 
     public GameTime_t DMBonusStartTime
     {
         get
         {
             _DMBonusStartTimeOffset = _DMBonusStartTimeOffset ?? Schema.GetOffset(0x77BC0D42870B2CD0);
-            return new GameTime_tImpl(_Handle + _DMBonusStartTimeOffset!.Value);
+            var instance = _DMBonusStartTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _DMBonusStartTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DMBonusTimeLengthOffset;

@@ -27,23 +27,29 @@ internal partial class CFootAdjustmentUpdateNodeImpl : CUnaryUpdateNodeImpl, CFo
         }
     }
     private static nint? _BasePoseCacheHandleOffset;
+    private CPoseHandleImpl? _BasePoseCacheHandleInstance;
 
     public CPoseHandle BasePoseCacheHandle
     {
         get
         {
             _BasePoseCacheHandleOffset = _BasePoseCacheHandleOffset ?? Schema.GetOffset(0x667ADE240690C505);
-            return new CPoseHandleImpl(_Handle + _BasePoseCacheHandleOffset!.Value);
+            var instance = _BasePoseCacheHandleInstance ??= new CPoseHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _BasePoseCacheHandleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FacingTargetOffset;
+    private CAnimParamHandleImpl? _FacingTargetInstance;
 
     public CAnimParamHandle FacingTarget
     {
         get
         {
             _FacingTargetOffset = _FacingTargetOffset ?? Schema.GetOffset(0x667ADE24ED73C452);
-            return new CAnimParamHandleImpl(_Handle + _FacingTargetOffset!.Value);
+            var instance = _FacingTargetInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _FacingTargetOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TurnTimeMinOffset;

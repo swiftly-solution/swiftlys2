@@ -26,9 +26,18 @@ internal partial class CCSPlayerController_InventoryServicesImpl : CPlayerContro
             return ref _Handle.AsRef<ushort>(_MusicIDOffset!.Value);
         }
     }
+    private static nint? _RankOffset;
+    private SchemaFixedArray<MedalRank_t>? _RankInstance;
+
     public ISchemaFixedArray<MedalRank_t> Rank
     {
-        get => new SchemaFixedArray<MedalRank_t>(_Handle, 0xC1D007826A7861C7, 6, 4, 4);
+        get
+        {
+            _RankOffset = _RankOffset ?? Schema.GetOffset(0xC1D007826A7861C7);
+            var instance = _RankInstance ??= new SchemaFixedArray<MedalRank_t>(0, 0xC1D007826A7861C7, 6, 4, 4);
+            instance.DangerousSetHandle(_Handle + _RankOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _PersonaDataPublicLevelOffset;
 
@@ -80,9 +89,18 @@ internal partial class CCSPlayerController_InventoryServicesImpl : CPlayerContro
             return ref _Handle.AsRef<int>(_PersonaDataXpTrailLevelOffset!.Value);
         }
     }
+    private static nint? _EquippedPlayerSprayIDsOffset;
+    private SchemaFixedArray<uint>? _EquippedPlayerSprayIDsInstance;
+
     public ISchemaFixedArray<uint> EquippedPlayerSprayIDs
     {
-        get => new SchemaFixedArray<uint>(_Handle, 0xC1D00782CE970C93, 1, 4, 4);
+        get
+        {
+            _EquippedPlayerSprayIDsOffset = _EquippedPlayerSprayIDsOffset ?? Schema.GetOffset(0xC1D00782CE970C93);
+            var instance = _EquippedPlayerSprayIDsInstance ??= new SchemaFixedArray<uint>(0, 0xC1D00782CE970C93, 1, 4, 4);
+            instance.DangerousSetHandle(_Handle + _EquippedPlayerSprayIDsOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _CurrentLoadoutHashOffset;
 

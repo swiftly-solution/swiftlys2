@@ -17,13 +17,16 @@ internal partial class C_OP_RenderSpritesImpl : CBaseRendererSource2Impl, C_OP_R
     public C_OP_RenderSpritesImpl(nint handle) : base(handle) { }
 
     private static nint? _SequenceOverrideOffset;
+    private CParticleCollectionRendererFloatInputImpl? _SequenceOverrideInstance;
 
     public CParticleCollectionRendererFloatInput SequenceOverride
     {
         get
         {
             _SequenceOverrideOffset = _SequenceOverrideOffset ?? Schema.GetOffset(0x35C7913533862044);
-            return new CParticleCollectionRendererFloatInputImpl(_Handle + _SequenceOverrideOffset!.Value);
+            var instance = _SequenceOverrideInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _SequenceOverrideOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SequenceNumbersAreRawSequenceIndicesOffset;
@@ -67,53 +70,68 @@ internal partial class C_OP_RenderSpritesImpl : CBaseRendererSource2Impl, C_OP_R
         }
     }
     private static nint? _MinSizeOffset;
+    private CParticleCollectionRendererFloatInputImpl? _MinSizeInstance;
 
     public CParticleCollectionRendererFloatInput MinSize
     {
         get
         {
             _MinSizeOffset = _MinSizeOffset ?? Schema.GetOffset(0x35C79135BDC3B198);
-            return new CParticleCollectionRendererFloatInputImpl(_Handle + _MinSizeOffset!.Value);
+            var instance = _MinSizeInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _MinSizeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MaxSizeOffset;
+    private CParticleCollectionRendererFloatInputImpl? _MaxSizeInstance;
 
     public CParticleCollectionRendererFloatInput MaxSize
     {
         get
         {
             _MaxSizeOffset = _MaxSizeOffset ?? Schema.GetOffset(0x35C791358CA4E6BE);
-            return new CParticleCollectionRendererFloatInputImpl(_Handle + _MaxSizeOffset!.Value);
+            var instance = _MaxSizeInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _MaxSizeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SubPixelAAScaleOffset;
+    private CParticleCollectionRendererFloatInputImpl? _SubPixelAAScaleInstance;
 
     public CParticleCollectionRendererFloatInput SubPixelAAScale
     {
         get
         {
             _SubPixelAAScaleOffset = _SubPixelAAScaleOffset ?? Schema.GetOffset(0x35C791353801ACCB);
-            return new CParticleCollectionRendererFloatInputImpl(_Handle + _SubPixelAAScaleOffset!.Value);
+            var instance = _SubPixelAAScaleInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _SubPixelAAScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StartFadeSizeOffset;
+    private CParticleCollectionRendererFloatInputImpl? _StartFadeSizeInstance;
 
     public CParticleCollectionRendererFloatInput StartFadeSize
     {
         get
         {
             _StartFadeSizeOffset = _StartFadeSizeOffset ?? Schema.GetOffset(0x35C79135BA251D92);
-            return new CParticleCollectionRendererFloatInputImpl(_Handle + _StartFadeSizeOffset!.Value);
+            var instance = _StartFadeSizeInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _StartFadeSizeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _EndFadeSizeOffset;
+    private CParticleCollectionRendererFloatInputImpl? _EndFadeSizeInstance;
 
     public CParticleCollectionRendererFloatInput EndFadeSize
     {
         get
         {
             _EndFadeSizeOffset = _EndFadeSizeOffset ?? Schema.GetOffset(0x35C791352D3FD423);
-            return new CParticleCollectionRendererFloatInputImpl(_Handle + _EndFadeSizeOffset!.Value);
+            var instance = _EndFadeSizeInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _EndFadeSizeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StartFadeDotOffset;
@@ -257,33 +275,42 @@ internal partial class C_OP_RenderSpritesImpl : CBaseRendererSource2Impl, C_OP_R
         }
     }
     private static nint? _LightingOverrideOffset;
+    private CParticleCollectionRendererVecInputImpl? _LightingOverrideInstance;
 
     public CParticleCollectionRendererVecInput LightingOverride
     {
         get
         {
             _LightingOverrideOffset = _LightingOverrideOffset ?? Schema.GetOffset(0x35C791354A443819);
-            return new CParticleCollectionRendererVecInputImpl(_Handle + _LightingOverrideOffset!.Value);
+            var instance = _LightingOverrideInstance ??= new CParticleCollectionRendererVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _LightingOverrideOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LightingTessellationOffset;
+    private CParticleCollectionRendererFloatInputImpl? _LightingTessellationInstance;
 
     public CParticleCollectionRendererFloatInput LightingTessellation
     {
         get
         {
             _LightingTessellationOffset = _LightingTessellationOffset ?? Schema.GetOffset(0x35C791354CFEA24E);
-            return new CParticleCollectionRendererFloatInputImpl(_Handle + _LightingTessellationOffset!.Value);
+            var instance = _LightingTessellationInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _LightingTessellationOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LightingDirectionalityOffset;
+    private CParticleCollectionRendererFloatInputImpl? _LightingDirectionalityInstance;
 
     public CParticleCollectionRendererFloatInput LightingDirectionality
     {
         get
         {
             _LightingDirectionalityOffset = _LightingDirectionalityOffset ?? Schema.GetOffset(0x35C7913575690583);
-            return new CParticleCollectionRendererFloatInputImpl(_Handle + _LightingDirectionalityOffset!.Value);
+            var instance = _LightingDirectionalityInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _LightingDirectionalityOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ParticleShadowsOffset;
@@ -307,13 +334,16 @@ internal partial class C_OP_RenderSpritesImpl : CBaseRendererSource2Impl, C_OP_R
         }
     }
     private static nint? _ReplicationParametersOffset;
+    private CReplicationParametersImpl? _ReplicationParametersInstance;
 
     public CReplicationParameters ReplicationParameters
     {
         get
         {
             _ReplicationParametersOffset = _ReplicationParametersOffset ?? Schema.GetOffset(0x35C79135C63216ED);
-            return new CReplicationParametersImpl(_Handle + _ReplicationParametersOffset!.Value);
+            var instance = _ReplicationParametersInstance ??= new CReplicationParametersImpl(0);
+            instance.DangerousSetHandle(_Handle + _ReplicationParametersOffset!.Value);
+            return instance;
         }
     }
 

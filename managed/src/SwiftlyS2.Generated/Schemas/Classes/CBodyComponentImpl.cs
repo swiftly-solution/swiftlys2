@@ -17,6 +17,7 @@ internal partial class CBodyComponentImpl : CEntityComponentImpl, CBodyComponent
     public CBodyComponentImpl(nint handle) : base(handle) { }
 
     private static nint? _SceneNodeOffset;
+    private CGameSceneNodeImpl? _SceneNodeInstance;
 
     public CGameSceneNode? SceneNode
     {
@@ -24,7 +25,10 @@ internal partial class CBodyComponentImpl : CEntityComponentImpl, CBodyComponent
         {
             _SceneNodeOffset = _SceneNodeOffset ?? Schema.GetOffset(0x4EF2C865D7D13495);
             var ptr = _Handle.Read<nint>(_SceneNodeOffset!.Value);
-            return ptr.IsValidPtr() ? new CGameSceneNodeImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _SceneNodeInstance ??= new CGameSceneNodeImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? ___m_pChainEntityOffset;

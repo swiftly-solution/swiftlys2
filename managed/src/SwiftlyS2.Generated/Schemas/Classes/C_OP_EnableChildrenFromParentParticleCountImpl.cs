@@ -37,13 +37,16 @@ internal partial class C_OP_EnableChildrenFromParentParticleCountImpl : CParticl
         }
     }
     private static nint? _NumChildrenToEnableOffset;
+    private CParticleCollectionFloatInputImpl? _NumChildrenToEnableInstance;
 
     public CParticleCollectionFloatInput NumChildrenToEnable
     {
         get
         {
             _NumChildrenToEnableOffset = _NumChildrenToEnableOffset ?? Schema.GetOffset(0xDF13D5F28039247A);
-            return new CParticleCollectionFloatInputImpl(_Handle + _NumChildrenToEnableOffset!.Value);
+            var instance = _NumChildrenToEnableInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _NumChildrenToEnableOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DisableChildrenOffset;

@@ -17,6 +17,7 @@ internal partial class WrappedPhysicsJoint_tImpl : SchemaClass, WrappedPhysicsJo
     public WrappedPhysicsJoint_tImpl(nint handle) : base(handle) { }
 
     private static nint? _JointOffset;
+    private IPhysicsJointImpl? _JointInstance;
 
     public IPhysicsJoint? Joint
     {
@@ -24,7 +25,10 @@ internal partial class WrappedPhysicsJoint_tImpl : SchemaClass, WrappedPhysicsJo
         {
             _JointOffset = _JointOffset ?? Schema.GetOffset(0x7E3E532204C90C61);
             var ptr = _Handle.Read<nint>(_JointOffset!.Value);
-            return ptr.IsValidPtr() ? new IPhysicsJointImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _JointInstance ??= new IPhysicsJointImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
 

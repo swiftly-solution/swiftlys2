@@ -16,9 +16,18 @@ internal partial class CFiringModeIntImpl : SchemaClass, CFiringModeInt
 {
     public CFiringModeIntImpl(nint handle) : base(handle) { }
 
+    private static nint? _ValuesOffset;
+    private SchemaFixedArray<int>? _ValuesInstance;
+
     public ISchemaFixedArray<int> Values
     {
-        get => new SchemaFixedArray<int>(_Handle, 0x528A6FDFD7175D77, 2, 4, 4);
+        get
+        {
+            _ValuesOffset = _ValuesOffset ?? Schema.GetOffset(0x528A6FDFD7175D77);
+            var instance = _ValuesInstance ??= new SchemaFixedArray<int>(0, 0x528A6FDFD7175D77, 2, 4, 4);
+            instance.DangerousSetHandle(_Handle + _ValuesOffset!.Value);
+            return instance;
+        }
     }
 
 }

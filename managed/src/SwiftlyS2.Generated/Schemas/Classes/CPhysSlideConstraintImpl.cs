@@ -107,13 +107,16 @@ internal partial class CPhysSlideConstraintImpl : CPhysConstraintImpl, CPhysSlid
         }
     }
     private static nint? _SoundInfoOffset;
+    private ConstraintSoundInfoImpl? _SoundInfoInstance;
 
     public ConstraintSoundInfo SoundInfo
     {
         get
         {
             _SoundInfoOffset = _SoundInfoOffset ?? Schema.GetOffset(0xA91FF5D085F704E8);
-            return new ConstraintSoundInfoImpl(_Handle + _SoundInfoOffset!.Value);
+            var instance = _SoundInfoInstance ??= new ConstraintSoundInfoImpl(0);
+            instance.DangerousSetHandle(_Handle + _SoundInfoOffset!.Value);
+            return instance;
         }
     }
 

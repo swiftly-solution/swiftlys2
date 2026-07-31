@@ -37,13 +37,16 @@ internal partial class lerpdata_tImpl : SchemaClass, lerpdata_t
         }
     }
     private static nint? _StartTimeOffset;
+    private GameTime_tImpl? _StartTimeInstance;
 
     public GameTime_t StartTime
     {
         get
         {
             _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0x70C58DAB67FE9DC4);
-            return new GameTime_tImpl(_Handle + _StartTimeOffset!.Value);
+            var instance = _StartTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _StartTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StartOriginOffset;
@@ -67,13 +70,16 @@ internal partial class lerpdata_tImpl : SchemaClass, lerpdata_t
         }
     }
     private static nint? _FXIndexOffset;
+    private ParticleIndex_tImpl? _FXIndexInstance;
 
     public ParticleIndex_t FXIndex
     {
         get
         {
             _FXIndexOffset = _FXIndexOffset ?? Schema.GetOffset(0x70C58DAB1E8452FD);
-            return new ParticleIndex_tImpl(_Handle + _FXIndexOffset!.Value);
+            var instance = _FXIndexInstance ??= new ParticleIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FXIndexOffset!.Value);
+            return instance;
         }
     }
 

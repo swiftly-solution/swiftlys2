@@ -17,16 +17,20 @@ internal partial class CCSPlayerPawnBaseImpl : CBasePlayerPawnImpl, CCSPlayerPaw
     public CCSPlayerPawnBaseImpl(nint handle) : base(handle) { }
 
     private static nint? _CTouchExpansionComponentOffset;
+    private CTouchExpansionComponentImpl? _CTouchExpansionComponentInstance;
 
     public CTouchExpansionComponent CTouchExpansionComponent
     {
         get
         {
             _CTouchExpansionComponentOffset = _CTouchExpansionComponentOffset ?? Schema.GetOffset(0xD8F889768A159531);
-            return new CTouchExpansionComponentImpl(_Handle + _CTouchExpansionComponentOffset!.Value);
+            var instance = _CTouchExpansionComponentInstance ??= new CTouchExpansionComponentImpl(0);
+            instance.DangerousSetHandle(_Handle + _CTouchExpansionComponentOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PingServicesOffset;
+    private CCSPlayer_PingServicesImpl? _PingServicesInstance;
 
     public CCSPlayer_PingServices? PingServices
     {
@@ -34,27 +38,36 @@ internal partial class CCSPlayerPawnBaseImpl : CBasePlayerPawnImpl, CCSPlayerPaw
         {
             _PingServicesOffset = _PingServicesOffset ?? Schema.GetOffset(0xD8F889767A1487DF);
             var ptr = _Handle.Read<nint>(_PingServicesOffset!.Value);
-            return ptr.IsValidPtr() ? new CCSPlayer_PingServicesImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _PingServicesInstance ??= new CCSPlayer_PingServicesImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _BlindUntilTimeOffset;
+    private GameTime_tImpl? _BlindUntilTimeInstance;
 
     public GameTime_t BlindUntilTime
     {
         get
         {
             _BlindUntilTimeOffset = _BlindUntilTimeOffset ?? Schema.GetOffset(0xD8F889765869ECC5);
-            return new GameTime_tImpl(_Handle + _BlindUntilTimeOffset!.Value);
+            var instance = _BlindUntilTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _BlindUntilTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BlindStartTimeOffset;
+    private GameTime_tImpl? _BlindStartTimeInstance;
 
     public GameTime_t BlindStartTime
     {
         get
         {
             _BlindStartTimeOffset = _BlindStartTimeOffset ?? Schema.GetOffset(0xD8F88976540D0351);
-            return new GameTime_tImpl(_Handle + _BlindStartTimeOffset!.Value);
+            var instance = _BlindStartTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _BlindStartTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PlayerStateOffset;

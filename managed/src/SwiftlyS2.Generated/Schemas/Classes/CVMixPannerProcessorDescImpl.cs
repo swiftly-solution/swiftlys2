@@ -17,13 +17,16 @@ internal partial class CVMixPannerProcessorDescImpl : CVMixBaseProcessorDescImpl
     public CVMixPannerProcessorDescImpl(nint handle) : base(handle) { }
 
     private static nint? _DescOffset;
+    private VMixPannerDesc_tImpl? _DescInstance;
 
     public VMixPannerDesc_t Desc
     {
         get
         {
             _DescOffset = _DescOffset ?? Schema.GetOffset(0x4120AA4327917BC0);
-            return new VMixPannerDesc_tImpl(_Handle + _DescOffset!.Value);
+            var instance = _DescInstance ??= new VMixPannerDesc_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _DescOffset!.Value);
+            return instance;
         }
     }
 

@@ -17,13 +17,16 @@ internal partial class CLookAtUpdateNodeImpl : CUnaryUpdateNodeImpl, CLookAtUpda
     public CLookAtUpdateNodeImpl(nint handle) : base(handle) { }
 
     private static nint? _OpFixedSettingsOffset;
+    private LookAtOpFixedSettings_tImpl? _OpFixedSettingsInstance;
 
     public LookAtOpFixedSettings_t OpFixedSettings
     {
         get
         {
             _OpFixedSettingsOffset = _OpFixedSettingsOffset ?? Schema.GetOffset(0xC17476D5E533AB09);
-            return new LookAtOpFixedSettings_tImpl(_Handle + _OpFixedSettingsOffset!.Value);
+            var instance = _OpFixedSettingsInstance ??= new LookAtOpFixedSettings_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _OpFixedSettingsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TargetOffset;
@@ -37,23 +40,29 @@ internal partial class CLookAtUpdateNodeImpl : CUnaryUpdateNodeImpl, CLookAtUpda
         }
     }
     private static nint? _ParamIndexOffset;
+    private CAnimParamHandleImpl? _ParamIndexInstance;
 
     public CAnimParamHandle ParamIndex
     {
         get
         {
             _ParamIndexOffset = _ParamIndexOffset ?? Schema.GetOffset(0xC17476D561990A86);
-            return new CAnimParamHandleImpl(_Handle + _ParamIndexOffset!.Value);
+            var instance = _ParamIndexInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamIndexOffset!.Value);
+            return instance;
         }
     }
     private static nint? _WeightParamIndexOffset;
+    private CAnimParamHandleImpl? _WeightParamIndexInstance;
 
     public CAnimParamHandle WeightParamIndex
     {
         get
         {
             _WeightParamIndexOffset = _WeightParamIndexOffset ?? Schema.GetOffset(0xC17476D50F2AED7A);
-            return new CAnimParamHandleImpl(_Handle + _WeightParamIndexOffset!.Value);
+            var instance = _WeightParamIndexInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _WeightParamIndexOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ResetChildOffset;

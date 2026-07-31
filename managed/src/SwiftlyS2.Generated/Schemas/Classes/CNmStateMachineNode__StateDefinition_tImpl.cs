@@ -37,13 +37,16 @@ internal partial class CNmStateMachineNode__StateDefinition_tImpl : SchemaClass,
         }
     }
     private static nint? _TransitionDefinitionsOffset;
+    private SchemaUntypedField? _TransitionDefinitionsInstance;
 
     public SchemaUntypedField TransitionDefinitions
     {
         get
         {
             _TransitionDefinitionsOffset = _TransitionDefinitionsOffset ?? Schema.GetOffset(0x539BB818F02EF580);
-            return new SchemaUntypedField(_Handle + _TransitionDefinitionsOffset!.Value);
+            var instance = _TransitionDefinitionsInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _TransitionDefinitionsOffset!.Value);
+            return instance;
         }
     }
 

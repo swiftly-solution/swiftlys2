@@ -17,13 +17,16 @@ internal partial class CVoiceContainerLoopTriggerWithRandomPannerImpl : CVoiceCo
     public CVoiceContainerLoopTriggerWithRandomPannerImpl(nint handle) : base(handle) { }
 
     private static nint? _RandomPannerControlsOffset;
+    private CRandomPannerControlsImpl? _RandomPannerControlsInstance;
 
     public CRandomPannerControls RandomPannerControls
     {
         get
         {
             _RandomPannerControlsOffset = _RandomPannerControlsOffset ?? Schema.GetOffset(0x20EAB9B0788B5490);
-            return new CRandomPannerControlsImpl(_Handle + _RandomPannerControlsOffset!.Value);
+            var instance = _RandomPannerControlsInstance ??= new CRandomPannerControlsImpl(0);
+            instance.DangerousSetHandle(_Handle + _RandomPannerControlsOffset!.Value);
+            return instance;
         }
     }
 

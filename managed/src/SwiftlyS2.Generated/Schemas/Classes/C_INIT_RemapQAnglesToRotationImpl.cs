@@ -17,13 +17,16 @@ internal partial class C_INIT_RemapQAnglesToRotationImpl : CParticleFunctionInit
     public C_INIT_RemapQAnglesToRotationImpl(nint handle) : base(handle) { }
 
     private static nint? _TransformInputOffset;
+    private CParticleTransformInputImpl? _TransformInputInstance;
 
     public CParticleTransformInput TransformInput
     {
         get
         {
             _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0xD24C8C15B3FDC289);
-            return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+            var instance = _TransformInputInstance ??= new CParticleTransformInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _TransformInputOffset!.Value);
+            return instance;
         }
     }
 

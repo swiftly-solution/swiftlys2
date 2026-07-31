@@ -17,13 +17,16 @@ internal partial class CAimMatrixUpdateNodeImpl : CUnaryUpdateNodeImpl, CAimMatr
     public CAimMatrixUpdateNodeImpl(nint handle) : base(handle) { }
 
     private static nint? _OpFixedSettingsOffset;
+    private AimMatrixOpFixedSettings_tImpl? _OpFixedSettingsInstance;
 
     public AimMatrixOpFixedSettings_t OpFixedSettings
     {
         get
         {
             _OpFixedSettingsOffset = _OpFixedSettingsOffset ?? Schema.GetOffset(0xB3687A53E533AB09);
-            return new AimMatrixOpFixedSettings_tImpl(_Handle + _OpFixedSettingsOffset!.Value);
+            var instance = _OpFixedSettingsInstance ??= new AimMatrixOpFixedSettings_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _OpFixedSettingsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TargetOffset;
@@ -37,23 +40,29 @@ internal partial class CAimMatrixUpdateNodeImpl : CUnaryUpdateNodeImpl, CAimMatr
         }
     }
     private static nint? _ParamIndexOffset;
+    private CAnimParamHandleImpl? _ParamIndexInstance;
 
     public CAnimParamHandle ParamIndex
     {
         get
         {
             _ParamIndexOffset = _ParamIndexOffset ?? Schema.GetOffset(0xB3687A5361990A86);
-            return new CAnimParamHandleImpl(_Handle + _ParamIndexOffset!.Value);
+            var instance = _ParamIndexInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamIndexOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SequenceOffset;
+    private HSequenceImpl? _SequenceInstance;
 
     public HSequence Sequence
     {
         get
         {
             _SequenceOffset = _SequenceOffset ?? Schema.GetOffset(0xB3687A53E0A0598E);
-            return new HSequenceImpl(_Handle + _SequenceOffset!.Value);
+            var instance = _SequenceInstance ??= new HSequenceImpl(0);
+            instance.DangerousSetHandle(_Handle + _SequenceOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ResetChildOffset;

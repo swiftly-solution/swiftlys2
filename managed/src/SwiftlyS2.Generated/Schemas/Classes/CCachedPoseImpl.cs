@@ -37,13 +37,16 @@ internal partial class CCachedPoseImpl : SchemaClass, CCachedPose
         }
     }
     private static nint? _SequenceOffset;
+    private HSequenceImpl? _SequenceInstance;
 
     public HSequence Sequence
     {
         get
         {
             _SequenceOffset = _SequenceOffset ?? Schema.GetOffset(0x4B6C2359E0A0598E);
-            return new HSequenceImpl(_Handle + _SequenceOffset!.Value);
+            var instance = _SequenceInstance ??= new HSequenceImpl(0);
+            instance.DangerousSetHandle(_Handle + _SequenceOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CycleOffset;

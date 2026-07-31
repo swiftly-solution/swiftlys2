@@ -17,23 +17,29 @@ internal partial class ConstraintSoundInfoImpl : SchemaClass, ConstraintSoundInf
     public ConstraintSoundInfoImpl(nint handle) : base(handle) { }
 
     private static nint? _SamplerOffset;
+    private VelocitySamplerImpl? _SamplerInstance;
 
     public VelocitySampler Sampler
     {
         get
         {
             _SamplerOffset = _SamplerOffset ?? Schema.GetOffset(0x79068C49FCCD6193);
-            return new VelocitySamplerImpl(_Handle + _SamplerOffset!.Value);
+            var instance = _SamplerInstance ??= new VelocitySamplerImpl(0);
+            instance.DangerousSetHandle(_Handle + _SamplerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SoundProfileOffset;
+    private SimpleConstraintSoundProfileImpl? _SoundProfileInstance;
 
     public SimpleConstraintSoundProfile SoundProfile
     {
         get
         {
             _SoundProfileOffset = _SoundProfileOffset ?? Schema.GetOffset(0x79068C49D9300921);
-            return new SimpleConstraintSoundProfileImpl(_Handle + _SoundProfileOffset!.Value);
+            var instance = _SoundProfileInstance ??= new SimpleConstraintSoundProfileImpl(0);
+            instance.DangerousSetHandle(_Handle + _SoundProfileOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ForwardAxisOffset;

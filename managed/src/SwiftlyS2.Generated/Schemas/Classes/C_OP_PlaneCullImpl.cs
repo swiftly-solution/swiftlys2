@@ -27,13 +27,16 @@ internal partial class C_OP_PlaneCullImpl : CParticleFunctionOperatorImpl, C_OP_
         }
     }
     private static nint? _PlaneDirectionOffset;
+    private CParticleCollectionVecInputImpl? _PlaneDirectionInstance;
 
     public CParticleCollectionVecInput PlaneDirection
     {
         get
         {
             _PlaneDirectionOffset = _PlaneDirectionOffset ?? Schema.GetOffset(0x352AAF45B00A585A);
-            return new CParticleCollectionVecInputImpl(_Handle + _PlaneDirectionOffset!.Value);
+            var instance = _PlaneDirectionInstance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _PlaneDirectionOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LocalSpaceOffset;

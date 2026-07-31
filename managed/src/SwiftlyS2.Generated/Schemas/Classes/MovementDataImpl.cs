@@ -27,63 +27,81 @@ internal partial class MovementDataImpl : SchemaClass, MovementData
         }
     }
     private static nint? _MoveDirOffset;
+    private SchemaUntypedField? _MoveDirInstance;
 
     public SchemaUntypedField MoveDir
     {
         get
         {
             _MoveDirOffset = _MoveDirOffset ?? Schema.GetOffset(0x9D7793403C9821BF);
-            return new SchemaUntypedField(_Handle + _MoveDirOffset!.Value);
+            var instance = _MoveDirInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _MoveDirOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AccelerationOffset;
+    private SchemaUntypedField? _AccelerationInstance;
 
     public SchemaUntypedField Acceleration
     {
         get
         {
             _AccelerationOffset = _AccelerationOffset ?? Schema.GetOffset(0x9D77934018AF3A91);
-            return new SchemaUntypedField(_Handle + _AccelerationOffset!.Value);
+            var instance = _AccelerationInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _AccelerationOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CurrentMoveSpeedOffset;
+    private SchemaUntypedField? _CurrentMoveSpeedInstance;
 
     public SchemaUntypedField CurrentMoveSpeed
     {
         get
         {
             _CurrentMoveSpeedOffset = _CurrentMoveSpeedOffset ?? Schema.GetOffset(0x9D7793402DC5BA78);
-            return new SchemaUntypedField(_Handle + _CurrentMoveSpeedOffset!.Value);
+            var instance = _CurrentMoveSpeedInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _CurrentMoveSpeedOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TargetMoveSpeedOffset;
+    private SchemaUntypedField? _TargetMoveSpeedInstance;
 
     public SchemaUntypedField TargetMoveSpeed
     {
         get
         {
             _TargetMoveSpeedOffset = _TargetMoveSpeedOffset ?? Schema.GetOffset(0x9D7793404E0A57EA);
-            return new SchemaUntypedField(_Handle + _TargetMoveSpeedOffset!.Value);
+            var instance = _TargetMoveSpeedInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _TargetMoveSpeedOffset!.Value);
+            return instance;
         }
     }
     private static nint? _GoalDistanceOffset;
+    private SchemaUntypedField? _GoalDistanceInstance;
 
     public SchemaUntypedField GoalDistance
     {
         get
         {
             _GoalDistanceOffset = _GoalDistanceOffset ?? Schema.GetOffset(0x9D77934093CDFB0B);
-            return new SchemaUntypedField(_Handle + _GoalDistanceOffset!.Value);
+            var instance = _GoalDistanceInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _GoalDistanceOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BoundaryRadiusOffset;
+    private SchemaUntypedField? _BoundaryRadiusInstance;
 
     public SchemaUntypedField BoundaryRadius
     {
         get
         {
             _BoundaryRadiusOffset = _BoundaryRadiusOffset ?? Schema.GetOffset(0x9D779340EAA8B14F);
-            return new SchemaUntypedField(_Handle + _BoundaryRadiusOffset!.Value);
+            var instance = _BoundaryRadiusInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _BoundaryRadiusOffset!.Value);
+            return instance;
         }
     }
     private static nint? _GoalChangedOffset;
@@ -97,23 +115,29 @@ internal partial class MovementDataImpl : SchemaClass, MovementData
         }
     }
     private static nint? _HasPathOffset;
+    private SchemaUntypedField? _HasPathInstance;
 
     public SchemaUntypedField HasPath
     {
         get
         {
             _HasPathOffset = _HasPathOffset ?? Schema.GetOffset(0x9D77934055BD9884);
-            return new SchemaUntypedField(_Handle + _HasPathOffset!.Value);
+            var instance = _HasPathInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _HasPathOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FacingHeadingOffset;
+    private SchemaUntypedField? _FacingHeadingInstance;
 
     public SchemaUntypedField FacingHeading
     {
         get
         {
             _FacingHeadingOffset = _FacingHeadingOffset ?? Schema.GetOffset(0x9D779340468A8059);
-            return new SchemaUntypedField(_Handle + _FacingHeadingOffset!.Value);
+            var instance = _FacingHeadingInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _FacingHeadingOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ManualFacingDirectionOffset;
@@ -137,53 +161,68 @@ internal partial class MovementDataImpl : SchemaClass, MovementData
         }
     }
     private static nint? _FacingModeOffset;
+    private SchemaUntypedField? _FacingModeInstance;
 
     public SchemaUntypedField FacingMode
     {
         get
         {
             _FacingModeOffset = _FacingModeOffset ?? Schema.GetOffset(0x9D779340E554ACBC);
-            return new SchemaUntypedField(_Handle + _FacingModeOffset!.Value);
+            var instance = _FacingModeInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _FacingModeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ForceFacingOffset;
+    private SchemaUntypedField? _ForceFacingInstance;
 
     public SchemaUntypedField ForceFacing
     {
         get
         {
             _ForceFacingOffset = _ForceFacingOffset ?? Schema.GetOffset(0x9D77934053CE3CEE);
-            return new SchemaUntypedField(_Handle + _ForceFacingOffset!.Value);
+            var instance = _ForceFacingInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ForceFacingOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ActiveMotorIndexOffset;
+    private SchemaUntypedField? _ActiveMotorIndexInstance;
 
     public SchemaUntypedField ActiveMotorIndex
     {
         get
         {
             _ActiveMotorIndexOffset = _ActiveMotorIndexOffset ?? Schema.GetOffset(0x9D7793405A3853D4);
-            return new SchemaUntypedField(_Handle + _ActiveMotorIndexOffset!.Value);
+            var instance = _ActiveMotorIndexInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ActiveMotorIndexOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OnGroundOffset;
+    private SchemaUntypedField? _OnGroundInstance;
 
     public SchemaUntypedField OnGround
     {
         get
         {
             _OnGroundOffset = _OnGroundOffset ?? Schema.GetOffset(0x9D779340E1C4912B);
-            return new SchemaUntypedField(_Handle + _OnGroundOffset!.Value);
+            var instance = _OnGroundInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OnGroundOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FacingPositionOffset;
+    private SchemaUntypedField? _FacingPositionInstance;
 
     public SchemaUntypedField FacingPosition
     {
         get
         {
             _FacingPositionOffset = _FacingPositionOffset ?? Schema.GetOffset(0x9D779340475A3AA8);
-            return new SchemaUntypedField(_Handle + _FacingPositionOffset!.Value);
+            var instance = _FacingPositionInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _FacingPositionOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PrevFacingPositionOffset;

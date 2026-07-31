@@ -16,9 +16,18 @@ internal partial class RnWing_tImpl : SchemaClass, RnWing_t
 {
     public RnWing_tImpl(nint handle) : base(handle) { }
 
+    private static nint? _IndexOffset;
+    private SchemaFixedArray<int>? _IndexInstance;
+
     public ISchemaFixedArray<int> Index
     {
-        get => new SchemaFixedArray<int>(_Handle, 0xED8A9D45B73DBE67, 3, 4, 4);
+        get
+        {
+            _IndexOffset = _IndexOffset ?? Schema.GetOffset(0xED8A9D45B73DBE67);
+            var instance = _IndexInstance ??= new SchemaFixedArray<int>(0, 0xED8A9D45B73DBE67, 3, 4, 4);
+            instance.DangerousSetHandle(_Handle + _IndexOffset!.Value);
+            return instance;
+        }
     }
 
 }

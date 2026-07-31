@@ -27,23 +27,29 @@ internal partial class C_OP_AttractToControlPointImpl : CParticleFunctionForceIm
         }
     }
     private static nint? _ForceAmountOffset;
+    private CPerParticleFloatInputImpl? _ForceAmountInstance;
 
     public CPerParticleFloatInput ForceAmount
     {
         get
         {
             _ForceAmountOffset = _ForceAmountOffset ?? Schema.GetOffset(0xBD30C24A70831A84);
-            return new CPerParticleFloatInputImpl(_Handle + _ForceAmountOffset!.Value);
+            var instance = _ForceAmountInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ForceAmountOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MinimumDistanceOffset;
+    private CPerParticleFloatInputImpl? _MinimumDistanceInstance;
 
     public CPerParticleFloatInput MinimumDistance
     {
         get
         {
             _MinimumDistanceOffset = _MinimumDistanceOffset ?? Schema.GetOffset(0xBD30C24A9AC4C964);
-            return new CPerParticleFloatInputImpl(_Handle + _MinimumDistanceOffset!.Value);
+            var instance = _MinimumDistanceInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _MinimumDistanceOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FalloffPowerOffset;
@@ -57,23 +63,29 @@ internal partial class C_OP_AttractToControlPointImpl : CParticleFunctionForceIm
         }
     }
     private static nint? _TransformInputOffset;
+    private CParticleTransformInputImpl? _TransformInputInstance;
 
     public CParticleTransformInput TransformInput
     {
         get
         {
             _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0xBD30C24AB3FDC289);
-            return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+            var instance = _TransformInputInstance ??= new CParticleTransformInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _TransformInputOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ForceAmountMinOffset;
+    private CPerParticleFloatInputImpl? _ForceAmountMinInstance;
 
     public CPerParticleFloatInput ForceAmountMin
     {
         get
         {
             _ForceAmountMinOffset = _ForceAmountMinOffset ?? Schema.GetOffset(0xBD30C24AEBB56458);
-            return new CPerParticleFloatInputImpl(_Handle + _ForceAmountMinOffset!.Value);
+            var instance = _ForceAmountMinInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ForceAmountMinOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ApplyMinForceOffset;

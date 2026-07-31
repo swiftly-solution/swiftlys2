@@ -62,23 +62,29 @@ internal partial class MoodAnimationLayer_tImpl : SchemaClass, MoodAnimationLaye
         }
     }
     private static nint? _IntensityOffset;
+    private CRangeFloatImpl? _IntensityInstance;
 
     public CRangeFloat Intensity
     {
         get
         {
             _IntensityOffset = _IntensityOffset ?? Schema.GetOffset(0x3663914267B5578C);
-            return new CRangeFloatImpl(_Handle + _IntensityOffset!.Value);
+            var instance = _IntensityInstance ??= new CRangeFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _IntensityOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DurationScaleOffset;
+    private CRangeFloatImpl? _DurationScaleInstance;
 
     public CRangeFloat DurationScale
     {
         get
         {
             _DurationScaleOffset = _DurationScaleOffset ?? Schema.GetOffset(0x36639142776D4203);
-            return new CRangeFloatImpl(_Handle + _DurationScaleOffset!.Value);
+            var instance = _DurationScaleInstance ??= new CRangeFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _DurationScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ScaleWithIntsOffset;
@@ -92,33 +98,42 @@ internal partial class MoodAnimationLayer_tImpl : SchemaClass, MoodAnimationLaye
         }
     }
     private static nint? _NextStartOffset;
+    private CRangeFloatImpl? _NextStartInstance;
 
     public CRangeFloat NextStart
     {
         get
         {
             _NextStartOffset = _NextStartOffset ?? Schema.GetOffset(0x3663914202956BDE);
-            return new CRangeFloatImpl(_Handle + _NextStartOffset!.Value);
+            var instance = _NextStartInstance ??= new CRangeFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _NextStartOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StartOffsetOffset;
+    private CRangeFloatImpl? _StartOffsetInstance;
 
     public CRangeFloat StartOffset
     {
         get
         {
             _StartOffsetOffset = _StartOffsetOffset ?? Schema.GetOffset(0x3663914269A449AA);
-            return new CRangeFloatImpl(_Handle + _StartOffsetOffset!.Value);
+            var instance = _StartOffsetInstance ??= new CRangeFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _StartOffsetOffset!.Value);
+            return instance;
         }
     }
     private static nint? _EndOffsetOffset;
+    private CRangeFloatImpl? _EndOffsetInstance;
 
     public CRangeFloat EndOffset
     {
         get
         {
             _EndOffsetOffset = _EndOffsetOffset ?? Schema.GetOffset(0x36639142C863E027);
-            return new CRangeFloatImpl(_Handle + _EndOffsetOffset!.Value);
+            var instance = _EndOffsetInstance ??= new CRangeFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _EndOffsetOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FadeInOffset;

@@ -17,13 +17,16 @@ internal partial class FeSimdQuad_tImpl : SchemaClass, FeSimdQuad_t
     public FeSimdQuad_tImpl(nint handle) : base(handle) { }
 
     private static nint? _NodeOffset;
+    private SchemaUntypedField? _NodeInstance;
 
     public SchemaUntypedField Node
     {
         get
         {
             _NodeOffset = _NodeOffset ?? Schema.GetOffset(0xB82B061DCD6694B9);
-            return new SchemaUntypedField(_Handle + _NodeOffset!.Value);
+            var instance = _NodeInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _NodeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _F4SlackOffset;
@@ -36,13 +39,31 @@ internal partial class FeSimdQuad_tImpl : SchemaClass, FeSimdQuad_t
             return ref _Handle.AsRef<fltx4>(_F4SlackOffset!.Value);
         }
     }
+    private static nint? _ShapeOffset;
+    private SchemaFixedArray<FourVectors>? _ShapeInstance;
+
     public ISchemaFixedArray<FourVectors> Shape
     {
-        get => new SchemaFixedArray<FourVectors>(_Handle, 0xB82B061DE159551A, 4, 48, 16);
+        get
+        {
+            _ShapeOffset = _ShapeOffset ?? Schema.GetOffset(0xB82B061DE159551A);
+            var instance = _ShapeInstance ??= new SchemaFixedArray<FourVectors>(0, 0xB82B061DE159551A, 4, 48, 16);
+            instance.DangerousSetHandle(_Handle + _ShapeOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _F4WeightsOffset;
+    private SchemaFixedArray<fltx4>? _F4WeightsInstance;
+
     public ISchemaFixedArray<fltx4> F4Weights
     {
-        get => new SchemaFixedArray<fltx4>(_Handle, 0xB82B061DDCFBCC00, 4, 16, 16);
+        get
+        {
+            _F4WeightsOffset = _F4WeightsOffset ?? Schema.GetOffset(0xB82B061DDCFBCC00);
+            var instance = _F4WeightsInstance ??= new SchemaFixedArray<fltx4>(0, 0xB82B061DDCFBCC00, 4, 16, 16);
+            instance.DangerousSetHandle(_Handle + _F4WeightsOffset!.Value);
+            return instance;
+        }
     }
 
 }

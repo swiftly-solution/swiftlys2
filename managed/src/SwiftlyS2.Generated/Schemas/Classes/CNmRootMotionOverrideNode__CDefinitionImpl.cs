@@ -87,13 +87,16 @@ internal partial class CNmRootMotionOverrideNode__CDefinitionImpl : CNmPassthrou
         }
     }
     private static nint? _OverrideFlagsOffset;
+    private CNmBitFlagsImpl? _OverrideFlagsInstance;
 
     public CNmBitFlags OverrideFlags
     {
         get
         {
             _OverrideFlagsOffset = _OverrideFlagsOffset ?? Schema.GetOffset(0x63AAD28BBDB571A4);
-            return new CNmBitFlagsImpl(_Handle + _OverrideFlagsOffset!.Value);
+            var instance = _OverrideFlagsInstance ??= new CNmBitFlagsImpl(0);
+            instance.DangerousSetHandle(_Handle + _OverrideFlagsOffset!.Value);
+            return instance;
         }
     }
 

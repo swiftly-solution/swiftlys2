@@ -177,13 +177,16 @@ internal partial class fogparams_tImpl : SchemaClass, fogparams_t
         }
     }
     private static nint? _LerptimeOffset;
+    private GameTime_tImpl? _LerptimeInstance;
 
     public GameTime_t Lerptime
     {
         get
         {
             _LerptimeOffset = _LerptimeOffset ?? Schema.GetOffset(0xCE352DA6F1157821);
-            return new GameTime_tImpl(_Handle + _LerptimeOffset!.Value);
+            var instance = _LerptimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LerptimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DurationOffset;

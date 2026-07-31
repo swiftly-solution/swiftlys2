@@ -17,33 +17,42 @@ internal partial class C_INIT_CheckParticleForWaterImpl : CParticleFunctionIniti
     public C_INIT_CheckParticleForWaterImpl(nint handle) : base(handle) { }
 
     private static nint? _RadiusOffset;
+    private CPerParticleFloatInputImpl? _RadiusInstance;
 
     public CPerParticleFloatInput Radius
     {
         get
         {
             _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x6829046A5ACFC08D);
-            return new CPerParticleFloatInputImpl(_Handle + _RadiusOffset!.Value);
+            var instance = _RadiusInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _RadiusOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FieldOutputOffset;
+    private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
             _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x6829046AE5729606);
-            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+            var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OutputRemapOffset;
+    private CParticleRemapFloatInputImpl? _OutputRemapInstance;
 
     public CParticleRemapFloatInput OutputRemap
     {
         get
         {
             _OutputRemapOffset = _OutputRemapOffset ?? Schema.GetOffset(0x6829046A1239396F);
-            return new CParticleRemapFloatInputImpl(_Handle + _OutputRemapOffset!.Value);
+            var instance = _OutputRemapInstance ??= new CParticleRemapFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _OutputRemapOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SetMethodOffset;

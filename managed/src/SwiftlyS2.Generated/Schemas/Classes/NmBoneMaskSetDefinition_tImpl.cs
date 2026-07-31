@@ -27,13 +27,16 @@ internal partial class NmBoneMaskSetDefinition_tImpl : SchemaClass, NmBoneMaskSe
         }
     }
     private static nint? _PrimaryWeightListOffset;
+    private CNmBoneWeightListImpl? _PrimaryWeightListInstance;
 
     public CNmBoneWeightList PrimaryWeightList
     {
         get
         {
             _PrimaryWeightListOffset = _PrimaryWeightListOffset ?? Schema.GetOffset(0xEA1211603AF7FF49);
-            return new CNmBoneWeightListImpl(_Handle + _PrimaryWeightListOffset!.Value);
+            var instance = _PrimaryWeightListInstance ??= new CNmBoneWeightListImpl(0);
+            instance.DangerousSetHandle(_Handle + _PrimaryWeightListOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SecondaryWeightListsOffset;

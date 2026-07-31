@@ -27,13 +27,16 @@ internal partial class FootLockPoseOpFixedSettingsImpl : SchemaClass, FootLockPo
         }
     }
     private static nint? _HipDampingSettingsOffset;
+    private CAnimInputDampingImpl? _HipDampingSettingsInstance;
 
     public CAnimInputDamping HipDampingSettings
     {
         get
         {
             _HipDampingSettingsOffset = _HipDampingSettingsOffset ?? Schema.GetOffset(0x1246AD6B3453D635);
-            return new CAnimInputDampingImpl(_Handle + _HipDampingSettingsOffset!.Value);
+            var instance = _HipDampingSettingsInstance ??= new CAnimInputDampingImpl(0);
+            instance.DangerousSetHandle(_Handle + _HipDampingSettingsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _HipBoneIndexOffset;

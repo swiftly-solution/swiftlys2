@@ -57,53 +57,68 @@ internal partial class CFootCycleDefinitionImpl : SchemaClass, CFootCycleDefinit
         }
     }
     private static nint? _StanceCycleOffset;
+    private CAnimCycleImpl? _StanceCycleInstance;
 
     public CAnimCycle StanceCycle
     {
         get
         {
             _StanceCycleOffset = _StanceCycleOffset ?? Schema.GetOffset(0x6D604C954EDCBD91);
-            return new CAnimCycleImpl(_Handle + _StanceCycleOffset!.Value);
+            var instance = _StanceCycleInstance ??= new CAnimCycleImpl(0);
+            instance.DangerousSetHandle(_Handle + _StanceCycleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FootLiftCycleOffset;
+    private CFootCycleImpl? _FootLiftCycleInstance;
 
     public CFootCycle FootLiftCycle
     {
         get
         {
             _FootLiftCycleOffset = _FootLiftCycleOffset ?? Schema.GetOffset(0x6D604C9553A7B946);
-            return new CFootCycleImpl(_Handle + _FootLiftCycleOffset!.Value);
+            var instance = _FootLiftCycleInstance ??= new CFootCycleImpl(0);
+            instance.DangerousSetHandle(_Handle + _FootLiftCycleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FootOffCycleOffset;
+    private CFootCycleImpl? _FootOffCycleInstance;
 
     public CFootCycle FootOffCycle
     {
         get
         {
             _FootOffCycleOffset = _FootOffCycleOffset ?? Schema.GetOffset(0x6D604C959AC5AE30);
-            return new CFootCycleImpl(_Handle + _FootOffCycleOffset!.Value);
+            var instance = _FootOffCycleInstance ??= new CFootCycleImpl(0);
+            instance.DangerousSetHandle(_Handle + _FootOffCycleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FootStrikeCycleOffset;
+    private CFootCycleImpl? _FootStrikeCycleInstance;
 
     public CFootCycle FootStrikeCycle
     {
         get
         {
             _FootStrikeCycleOffset = _FootStrikeCycleOffset ?? Schema.GetOffset(0x6D604C95E4D3DC2B);
-            return new CFootCycleImpl(_Handle + _FootStrikeCycleOffset!.Value);
+            var instance = _FootStrikeCycleInstance ??= new CFootCycleImpl(0);
+            instance.DangerousSetHandle(_Handle + _FootStrikeCycleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FootLandCycleOffset;
+    private CFootCycleImpl? _FootLandCycleInstance;
 
     public CFootCycle FootLandCycle
     {
         get
         {
             _FootLandCycleOffset = _FootLandCycleOffset ?? Schema.GetOffset(0x6D604C954C100B46);
-            return new CFootCycleImpl(_Handle + _FootLandCycleOffset!.Value);
+            var instance = _FootLandCycleInstance ??= new CFootCycleImpl(0);
+            instance.DangerousSetHandle(_Handle + _FootLandCycleOffset!.Value);
+            return instance;
         }
     }
 

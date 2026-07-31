@@ -27,23 +27,29 @@ internal partial class CSeqSynthAnimDescImpl : SchemaClass, CSeqSynthAnimDesc
         }
     }
     private static nint? _FlagsOffset;
+    private CSeqSeqDescFlagImpl? _FlagsInstance;
 
     public CSeqSeqDescFlag Flags
     {
         get
         {
             _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x7D8317C1DC74A14C);
-            return new CSeqSeqDescFlagImpl(_Handle + _FlagsOffset!.Value);
+            var instance = _FlagsInstance ??= new CSeqSeqDescFlagImpl(0);
+            instance.DangerousSetHandle(_Handle + _FlagsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TransitionOffset;
+    private CSeqTransitionImpl? _TransitionInstance;
 
     public CSeqTransition Transition
     {
         get
         {
             _TransitionOffset = _TransitionOffset ?? Schema.GetOffset(0x7D8317C182B0A282);
-            return new CSeqTransitionImpl(_Handle + _TransitionOffset!.Value);
+            var instance = _TransitionInstance ??= new CSeqTransitionImpl(0);
+            instance.DangerousSetHandle(_Handle + _TransitionOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LocalBaseReferenceOffset;

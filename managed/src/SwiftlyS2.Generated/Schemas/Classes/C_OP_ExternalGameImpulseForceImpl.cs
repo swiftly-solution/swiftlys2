@@ -17,13 +17,16 @@ internal partial class C_OP_ExternalGameImpulseForceImpl : CParticleFunctionForc
     public C_OP_ExternalGameImpulseForceImpl(nint handle) : base(handle) { }
 
     private static nint? _ForceScaleOffset;
+    private CPerParticleFloatInputImpl? _ForceScaleInstance;
 
     public CPerParticleFloatInput ForceScale
     {
         get
         {
             _ForceScaleOffset = _ForceScaleOffset ?? Schema.GetOffset(0x9579EDD64817F390);
-            return new CPerParticleFloatInputImpl(_Handle + _ForceScaleOffset!.Value);
+            var instance = _ForceScaleInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ForceScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RopesOffset;

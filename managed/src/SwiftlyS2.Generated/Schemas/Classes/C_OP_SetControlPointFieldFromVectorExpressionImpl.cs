@@ -27,43 +27,55 @@ internal partial class C_OP_SetControlPointFieldFromVectorExpressionImpl : CPart
         }
     }
     private static nint? _Input1Offset;
+    private CParticleCollectionVecInputImpl? _Input1Instance;
 
     public CParticleCollectionVecInput Input1
     {
         get
         {
             _Input1Offset = _Input1Offset ?? Schema.GetOffset(0x1A9FFD07A155BDDE);
-            return new CParticleCollectionVecInputImpl(_Handle + _Input1Offset!.Value);
+            var instance = _Input1Instance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _Input1Offset!.Value);
+            return instance;
         }
     }
     private static nint? _Input2Offset;
+    private CParticleCollectionVecInputImpl? _Input2Instance;
 
     public CParticleCollectionVecInput Input2
     {
         get
         {
             _Input2Offset = _Input2Offset ?? Schema.GetOffset(0x1A9FFD07A055BC4B);
-            return new CParticleCollectionVecInputImpl(_Handle + _Input2Offset!.Value);
+            var instance = _Input2Instance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _Input2Offset!.Value);
+            return instance;
         }
     }
     private static nint? _LerpOffset;
+    private CPerParticleFloatInputImpl? _LerpInstance;
 
     public CPerParticleFloatInput Lerp
     {
         get
         {
             _LerpOffset = _LerpOffset ?? Schema.GetOffset(0x1A9FFD07622FAB06);
-            return new CPerParticleFloatInputImpl(_Handle + _LerpOffset!.Value);
+            var instance = _LerpInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _LerpOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OutputRemapOffset;
+    private CParticleRemapFloatInputImpl? _OutputRemapInstance;
 
     public CParticleRemapFloatInput OutputRemap
     {
         get
         {
             _OutputRemapOffset = _OutputRemapOffset ?? Schema.GetOffset(0x1A9FFD071239396F);
-            return new CParticleRemapFloatInputImpl(_Handle + _OutputRemapOffset!.Value);
+            var instance = _OutputRemapInstance ??= new CParticleRemapFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _OutputRemapOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OutputCPOffset;

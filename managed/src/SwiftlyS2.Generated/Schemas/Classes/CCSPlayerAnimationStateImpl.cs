@@ -77,33 +77,42 @@ internal partial class CCSPlayerAnimationStateImpl : SchemaClass, CCSPlayerAnima
         }
     }
     private static nint? _ActionStartTickOffset;
+    private GameTick_tImpl? _ActionStartTickInstance;
 
     public GameTick_t ActionStartTick
     {
         get
         {
             _ActionStartTickOffset = _ActionStartTickOffset ?? Schema.GetOffset(0x61E9023E5731D994);
-            return new GameTick_tImpl(_Handle + _ActionStartTickOffset!.Value);
+            var instance = _ActionStartTickInstance ??= new GameTick_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _ActionStartTickOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StaticAimTimerStartTickOffset;
+    private GameTick_tImpl? _StaticAimTimerStartTickInstance;
 
     public GameTick_t StaticAimTimerStartTick
     {
         get
         {
             _StaticAimTimerStartTickOffset = _StaticAimTimerStartTickOffset ?? Schema.GetOffset(0x61E9023EE8A0C512);
-            return new GameTick_tImpl(_Handle + _StaticAimTimerStartTickOffset!.Value);
+            var instance = _StaticAimTimerStartTickInstance ??= new GameTick_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _StaticAimTimerStartTickOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PlantAndTurnStartTickOffset;
+    private GameTick_tImpl? _PlantAndTurnStartTickInstance;
 
     public GameTick_t PlantAndTurnStartTick
     {
         get
         {
             _PlantAndTurnStartTickOffset = _PlantAndTurnStartTickOffset ?? Schema.GetOffset(0x61E9023E9CE2D259);
-            return new GameTick_tImpl(_Handle + _PlantAndTurnStartTickOffset!.Value);
+            var instance = _PlantAndTurnStartTickInstance ??= new GameTick_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _PlantAndTurnStartTickOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TurnOnSpotAngleOffset;

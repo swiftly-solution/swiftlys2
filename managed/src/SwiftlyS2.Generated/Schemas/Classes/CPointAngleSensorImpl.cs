@@ -82,13 +82,16 @@ internal partial class CPointAngleSensorImpl : CPointEntityImpl, CPointAngleSens
         }
     }
     private static nint? _FacingTimeOffset;
+    private GameTime_tImpl? _FacingTimeInstance;
 
     public GameTime_t FacingTime
     {
         get
         {
             _FacingTimeOffset = _FacingTimeOffset ?? Schema.GetOffset(0x1E43560177B926C8);
-            return new GameTime_tImpl(_Handle + _FacingTimeOffset!.Value);
+            var instance = _FacingTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FacingTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FiredOffset;
@@ -122,23 +125,29 @@ internal partial class CPointAngleSensorImpl : CPointEntityImpl, CPointAngleSens
         }
     }
     private static nint? _TargetDirOffset;
+    private SchemaUntypedField? _TargetDirInstance;
 
     public SchemaUntypedField TargetDir
     {
         get
         {
             _TargetDirOffset = _TargetDirOffset ?? Schema.GetOffset(0x1E435601946F7FDF);
-            return new SchemaUntypedField(_Handle + _TargetDirOffset!.Value);
+            var instance = _TargetDirInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _TargetDirOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FacingPercentageOffset;
+    private SchemaUntypedField? _FacingPercentageInstance;
 
     public SchemaUntypedField FacingPercentage
     {
         get
         {
             _FacingPercentageOffset = _FacingPercentageOffset ?? Schema.GetOffset(0x1E4356018B451097);
-            return new SchemaUntypedField(_Handle + _FacingPercentageOffset!.Value);
+            var instance = _FacingPercentageInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _FacingPercentageOffset!.Value);
+            return instance;
         }
     }
 

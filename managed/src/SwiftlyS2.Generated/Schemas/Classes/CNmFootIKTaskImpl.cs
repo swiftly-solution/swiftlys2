@@ -77,23 +77,29 @@ internal partial class CNmFootIKTaskImpl : CNmPoseTaskImpl, CNmFootIKTask
         }
     }
     private static nint? _LeftTargetOffset;
+    private CNmTargetImpl? _LeftTargetInstance;
 
     public CNmTarget LeftTarget
     {
         get
         {
             _LeftTargetOffset = _LeftTargetOffset ?? Schema.GetOffset(0xF852CEF690AB1D19);
-            return new CNmTargetImpl(_Handle + _LeftTargetOffset!.Value);
+            var instance = _LeftTargetInstance ??= new CNmTargetImpl(0);
+            instance.DangerousSetHandle(_Handle + _LeftTargetOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RightTargetOffset;
+    private CNmTargetImpl? _RightTargetInstance;
 
     public CNmTarget RightTarget
     {
         get
         {
             _RightTargetOffset = _RightTargetOffset ?? Schema.GetOffset(0xF852CEF66A4CA0A8);
-            return new CNmTargetImpl(_Handle + _RightTargetOffset!.Value);
+            var instance = _RightTargetInstance ??= new CNmTargetImpl(0);
+            instance.DangerousSetHandle(_Handle + _RightTargetOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BlendModeOffset;

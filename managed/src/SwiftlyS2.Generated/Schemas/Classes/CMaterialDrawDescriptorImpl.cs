@@ -167,23 +167,29 @@ internal partial class CMaterialDrawDescriptorImpl : SchemaClass, CMaterialDrawD
         }
     }
     private static nint? _IndexBufferOffset;
+    private CRenderBufferBindingImpl? _IndexBufferInstance;
 
     public CRenderBufferBinding IndexBuffer
     {
         get
         {
             _IndexBufferOffset = _IndexBufferOffset ?? Schema.GetOffset(0xE7C210003C0C2701);
-            return new CRenderBufferBindingImpl(_Handle + _IndexBufferOffset!.Value);
+            var instance = _IndexBufferInstance ??= new CRenderBufferBindingImpl(0);
+            instance.DangerousSetHandle(_Handle + _IndexBufferOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MeshletPackedIVBOffset;
+    private CRenderBufferBindingImpl? _MeshletPackedIVBInstance;
 
     public CRenderBufferBinding MeshletPackedIVB
     {
         get
         {
             _MeshletPackedIVBOffset = _MeshletPackedIVBOffset ?? Schema.GetOffset(0xE7C21000015D34E4);
-            return new CRenderBufferBindingImpl(_Handle + _MeshletPackedIVBOffset!.Value);
+            var instance = _MeshletPackedIVBInstance ??= new CRenderBufferBindingImpl(0);
+            instance.DangerousSetHandle(_Handle + _MeshletPackedIVBOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MaterialOffset;

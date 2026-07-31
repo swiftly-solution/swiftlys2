@@ -42,23 +42,29 @@ internal partial class ParticleNamedValueSource_tImpl : SchemaClass, ParticleNam
         }
     }
     private static nint? _ValueTypeOffset;
+    private SchemaUntypedField? _ValueTypeInstance;
 
     public SchemaUntypedField ValueType
     {
         get
         {
             _ValueTypeOffset = _ValueTypeOffset ?? Schema.GetOffset(0x740B6BEFC2A673CA);
-            return new SchemaUntypedField(_Handle + _ValueTypeOffset!.Value);
+            var instance = _ValueTypeInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ValueTypeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DefaultConfigOffset;
+    private ParticleNamedValueConfiguration_tImpl? _DefaultConfigInstance;
 
     public ParticleNamedValueConfiguration_t DefaultConfig
     {
         get
         {
             _DefaultConfigOffset = _DefaultConfigOffset ?? Schema.GetOffset(0x740B6BEF05A58128);
-            return new ParticleNamedValueConfiguration_tImpl(_Handle + _DefaultConfigOffset!.Value);
+            var instance = _DefaultConfigInstance ??= new ParticleNamedValueConfiguration_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _DefaultConfigOffset!.Value);
+            return instance;
         }
     }
 

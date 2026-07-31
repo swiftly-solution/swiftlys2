@@ -16,18 +16,30 @@ internal partial class CDirectionalBlendUpdateNodeImpl : CLeafUpdateNodeImpl, CD
 {
     public CDirectionalBlendUpdateNodeImpl(nint handle) : base(handle) { }
 
+    private static nint? _SequencesOffset;
+    private SchemaClassFixedArray<HSequence>? _SequencesInstance;
+
     public ISchemaClassFixedArray<HSequence> Sequences
     {
-        get => new SchemaClassFixedArray<HSequence>(_Handle, 0xD7E03CEC996DA947, 8, 4, 4);
+        get
+        {
+            _SequencesOffset = _SequencesOffset ?? Schema.GetOffset(0xD7E03CEC996DA947);
+            var instance = _SequencesInstance ??= new SchemaClassFixedArray<HSequence>(0, 0xD7E03CEC996DA947, 8, 4, 4);
+            instance.DangerousSetHandle(_Handle + _SequencesOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _DampingOffset;
+    private CAnimInputDampingImpl? _DampingInstance;
 
     public CAnimInputDamping Damping
     {
         get
         {
             _DampingOffset = _DampingOffset ?? Schema.GetOffset(0xD7E03CEC15440FB5);
-            return new CAnimInputDampingImpl(_Handle + _DampingOffset!.Value);
+            var instance = _DampingInstance ??= new CAnimInputDampingImpl(0);
+            instance.DangerousSetHandle(_Handle + _DampingOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BlendValueSourceOffset;
@@ -41,13 +53,16 @@ internal partial class CDirectionalBlendUpdateNodeImpl : CLeafUpdateNodeImpl, CD
         }
     }
     private static nint? _ParamIndexOffset;
+    private CAnimParamHandleImpl? _ParamIndexInstance;
 
     public CAnimParamHandle ParamIndex
     {
         get
         {
             _ParamIndexOffset = _ParamIndexOffset ?? Schema.GetOffset(0xD7E03CEC61990A86);
-            return new CAnimParamHandleImpl(_Handle + _ParamIndexOffset!.Value);
+            var instance = _ParamIndexInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamIndexOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PlaybackSpeedOffset;

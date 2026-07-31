@@ -17,13 +17,16 @@ internal partial class CEnvGlobalImpl : CLogicalEntityImpl, CEnvGlobal
     public CEnvGlobalImpl(nint handle) : base(handle) { }
 
     private static nint? _OutCounterOffset;
+    private SchemaUntypedField? _OutCounterInstance;
 
     public SchemaUntypedField OutCounter
     {
         get
         {
             _OutCounterOffset = _OutCounterOffset ?? Schema.GetOffset(0xC5E41E3E69415251);
-            return new SchemaUntypedField(_Handle + _OutCounterOffset!.Value);
+            var instance = _OutCounterInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OutCounterOffset!.Value);
+            return instance;
         }
     }
     private static nint? _GlobalstateOffset;

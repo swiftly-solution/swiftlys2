@@ -52,13 +52,16 @@ internal partial class CLogicEventListenerImpl : CLogicalEntityImpl, CLogicEvent
         }
     }
     private static nint? _OnEventFiredOffset;
+    private SchemaUntypedField? _OnEventFiredInstance;
 
     public SchemaUntypedField OnEventFired
     {
         get
         {
             _OnEventFiredOffset = _OnEventFiredOffset ?? Schema.GetOffset(0xD797C990E84EA158);
-            return new SchemaUntypedField(_Handle + _OnEventFiredOffset!.Value);
+            var instance = _OnEventFiredInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OnEventFiredOffset!.Value);
+            return instance;
         }
     }
 

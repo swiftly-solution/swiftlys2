@@ -47,33 +47,42 @@ internal partial class CFuseSymbolTableImpl : SchemaClass, CFuseSymbolTable
         }
     }
     private static nint? _ConstantMapOffset;
+    private SchemaUntypedField? _ConstantMapInstance;
 
     public SchemaUntypedField ConstantMap
     {
         get
         {
             _ConstantMapOffset = _ConstantMapOffset ?? Schema.GetOffset(0xD8A03B4198BF6E51);
-            return new SchemaUntypedField(_Handle + _ConstantMapOffset!.Value);
+            var instance = _ConstantMapInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ConstantMapOffset!.Value);
+            return instance;
         }
     }
     private static nint? _VariableMapOffset;
+    private SchemaUntypedField? _VariableMapInstance;
 
     public SchemaUntypedField VariableMap
     {
         get
         {
             _VariableMapOffset = _VariableMapOffset ?? Schema.GetOffset(0xD8A03B410FDE3671);
-            return new SchemaUntypedField(_Handle + _VariableMapOffset!.Value);
+            var instance = _VariableMapInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _VariableMapOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FunctionMapOffset;
+    private SchemaUntypedField? _FunctionMapInstance;
 
     public SchemaUntypedField FunctionMap
     {
         get
         {
             _FunctionMapOffset = _FunctionMapOffset ?? Schema.GetOffset(0xD8A03B4147A33EC5);
-            return new SchemaUntypedField(_Handle + _FunctionMapOffset!.Value);
+            var instance = _FunctionMapInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _FunctionMapOffset!.Value);
+            return instance;
         }
     }
 

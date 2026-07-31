@@ -52,6 +52,7 @@ internal partial class CSoundContainerReferenceImpl : SchemaClass, CSoundContain
         }
     }
     private static nint? _Sound1Offset;
+    private CVoiceContainerBaseImpl? _Sound1Instance;
 
     public CVoiceContainerBase? Sound1
     {
@@ -59,7 +60,10 @@ internal partial class CSoundContainerReferenceImpl : SchemaClass, CSoundContain
         {
             _Sound1Offset = _Sound1Offset ?? Schema.GetOffset(0x4663CCA13D8D58B6);
             var ptr = _Handle.Read<nint>(_Sound1Offset!.Value);
-            return ptr.IsValidPtr() ? new CVoiceContainerBaseImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _Sound1Instance ??= new CVoiceContainerBaseImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
 

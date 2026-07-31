@@ -37,13 +37,16 @@ internal partial class CVoiceContainerShapedNoiseImpl : CVoiceContainerGenerator
         }
     }
     private static nint? _FrequencySweepOffset;
+    private SchemaUntypedField? _FrequencySweepInstance;
 
     public SchemaUntypedField FrequencySweep
     {
         get
         {
             _FrequencySweepOffset = _FrequencySweepOffset ?? Schema.GetOffset(0xC5821362B670CD0F);
-            return new SchemaUntypedField(_Handle + _FrequencySweepOffset!.Value);
+            var instance = _FrequencySweepInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _FrequencySweepOffset!.Value);
+            return instance;
         }
     }
     private static nint? _UseCurveForResonanceOffset;
@@ -67,13 +70,16 @@ internal partial class CVoiceContainerShapedNoiseImpl : CVoiceContainerGenerator
         }
     }
     private static nint? _ResonanceSweepOffset;
+    private SchemaUntypedField? _ResonanceSweepInstance;
 
     public SchemaUntypedField ResonanceSweep
     {
         get
         {
             _ResonanceSweepOffset = _ResonanceSweepOffset ?? Schema.GetOffset(0xC582136250CFD679);
-            return new SchemaUntypedField(_Handle + _ResonanceSweepOffset!.Value);
+            var instance = _ResonanceSweepInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ResonanceSweepOffset!.Value);
+            return instance;
         }
     }
     private static nint? _UseCurveForAmplitudeOffset;
@@ -97,13 +103,16 @@ internal partial class CVoiceContainerShapedNoiseImpl : CVoiceContainerGenerator
         }
     }
     private static nint? _GainSweepOffset;
+    private SchemaUntypedField? _GainSweepInstance;
 
     public SchemaUntypedField GainSweep
     {
         get
         {
             _GainSweepOffset = _GainSweepOffset ?? Schema.GetOffset(0xC582136246A13F7A);
-            return new SchemaUntypedField(_Handle + _GainSweepOffset!.Value);
+            var instance = _GainSweepInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _GainSweepOffset!.Value);
+            return instance;
         }
     }
 

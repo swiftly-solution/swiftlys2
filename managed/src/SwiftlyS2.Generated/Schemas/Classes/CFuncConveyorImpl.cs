@@ -82,13 +82,16 @@ internal partial class CFuncConveyorImpl : CBaseModelEntityImpl, CFuncConveyor
         }
     }
     private static nint? _TransitionStartTickOffset;
+    private GameTick_tImpl? _TransitionStartTickInstance;
 
     public GameTick_t TransitionStartTick
     {
         get
         {
             _TransitionStartTickOffset = _TransitionStartTickOffset ?? Schema.GetOffset(0x6E29EBA9FB464AF3);
-            return new GameTick_tImpl(_Handle + _TransitionStartTickOffset!.Value);
+            var instance = _TransitionStartTickInstance ??= new GameTick_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _TransitionStartTickOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TransitionDurationTicksOffset;

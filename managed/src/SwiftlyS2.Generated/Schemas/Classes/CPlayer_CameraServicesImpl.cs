@@ -27,13 +27,16 @@ internal partial class CPlayer_CameraServicesImpl : CPlayerPawnComponentImpl, CP
         }
     }
     private static nint? _CsViewPunchAngleTickOffset;
+    private GameTick_tImpl? _CsViewPunchAngleTickInstance;
 
     public GameTick_t CsViewPunchAngleTick
     {
         get
         {
             _CsViewPunchAngleTickOffset = _CsViewPunchAngleTickOffset ?? Schema.GetOffset(0xCF10767832A08EC);
-            return new GameTick_tImpl(_Handle + _CsViewPunchAngleTickOffset!.Value);
+            var instance = _CsViewPunchAngleTickInstance ??= new GameTick_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _CsViewPunchAngleTickOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CsViewPunchAngleTickRatioOffset;
@@ -47,13 +50,16 @@ internal partial class CPlayer_CameraServicesImpl : CPlayerPawnComponentImpl, CP
         }
     }
     private static nint? _PlayerFogOffset;
+    private fogplayerparams_tImpl? _PlayerFogInstance;
 
     public fogplayerparams_t PlayerFog
     {
         get
         {
             _PlayerFogOffset = _PlayerFogOffset ?? Schema.GetOffset(0xCF1076781FBA280);
-            return new fogplayerparams_tImpl(_Handle + _PlayerFogOffset!.Value);
+            var instance = _PlayerFogInstance ??= new fogplayerparams_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _PlayerFogOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ColorCorrectionCtrlOffset;
@@ -87,13 +93,16 @@ internal partial class CPlayer_CameraServicesImpl : CPlayerPawnComponentImpl, CP
         }
     }
     private static nint? _AudioOffset;
+    private audioparams_tImpl? _AudioInstance;
 
     public audioparams_t Audio
     {
         get
         {
             _AudioOffset = _AudioOffset ?? Schema.GetOffset(0xCF1076722E8C9B9);
-            return new audioparams_tImpl(_Handle + _AudioOffset!.Value);
+            var instance = _AudioInstance ??= new audioparams_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _AudioOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PostProcessingVolumesOffset;

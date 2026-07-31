@@ -27,13 +27,16 @@ internal partial class CNmIDEventPercentageThroughNode__CDefinitionImpl : CNmBoo
         }
     }
     private static nint? _EventConditionRulesOffset;
+    private CNmBitFlagsImpl? _EventConditionRulesInstance;
 
     public CNmBitFlags EventConditionRules
     {
         get
         {
             _EventConditionRulesOffset = _EventConditionRulesOffset ?? Schema.GetOffset(0x3912E59A904315F);
-            return new CNmBitFlagsImpl(_Handle + _EventConditionRulesOffset!.Value);
+            var instance = _EventConditionRulesInstance ??= new CNmBitFlagsImpl(0);
+            instance.DangerousSetHandle(_Handle + _EventConditionRulesOffset!.Value);
+            return instance;
         }
     }
     private static nint? _EventIDOffset;

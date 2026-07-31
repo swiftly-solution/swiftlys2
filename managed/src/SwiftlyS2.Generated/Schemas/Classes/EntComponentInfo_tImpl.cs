@@ -97,6 +97,7 @@ internal partial class EntComponentInfo_tImpl : SchemaClass, EntComponentInfo_t
         }
     }
     private static nint? _BaseClassComponentHelperOffset;
+    private CEntityComponentHelperImpl? _BaseClassComponentHelperInstance;
 
     public CEntityComponentHelper? BaseClassComponentHelper
     {
@@ -104,7 +105,10 @@ internal partial class EntComponentInfo_tImpl : SchemaClass, EntComponentInfo_t
         {
             _BaseClassComponentHelperOffset = _BaseClassComponentHelperOffset ?? Schema.GetOffset(0xDEAD526A9799DD51);
             var ptr = _Handle.Read<nint>(_BaseClassComponentHelperOffset!.Value);
-            return ptr.IsValidPtr() ? new CEntityComponentHelperImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _BaseClassComponentHelperInstance ??= new CEntityComponentHelperImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
 

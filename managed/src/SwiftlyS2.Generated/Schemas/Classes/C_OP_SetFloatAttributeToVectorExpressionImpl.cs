@@ -27,43 +27,55 @@ internal partial class C_OP_SetFloatAttributeToVectorExpressionImpl : CParticleF
         }
     }
     private static nint? _Input1Offset;
+    private CPerParticleVecInputImpl? _Input1Instance;
 
     public CPerParticleVecInput Input1
     {
         get
         {
             _Input1Offset = _Input1Offset ?? Schema.GetOffset(0x26D81DE17F27DA);
-            return new CPerParticleVecInputImpl(_Handle + _Input1Offset!.Value);
+            var instance = _Input1Instance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _Input1Offset!.Value);
+            return instance;
         }
     }
     private static nint? _Input2Offset;
+    private CPerParticleVecInputImpl? _Input2Instance;
 
     public CPerParticleVecInput Input2
     {
         get
         {
             _Input2Offset = _Input2Offset ?? Schema.GetOffset(0x26D81DE07F2647);
-            return new CPerParticleVecInputImpl(_Handle + _Input2Offset!.Value);
+            var instance = _Input2Instance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _Input2Offset!.Value);
+            return instance;
         }
     }
     private static nint? _OutputRemapOffset;
+    private CParticleRemapFloatInputImpl? _OutputRemapInstance;
 
     public CParticleRemapFloatInput OutputRemap
     {
         get
         {
             _OutputRemapOffset = _OutputRemapOffset ?? Schema.GetOffset(0x26D81D1239396F);
-            return new CParticleRemapFloatInputImpl(_Handle + _OutputRemapOffset!.Value);
+            var instance = _OutputRemapInstance ??= new CParticleRemapFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _OutputRemapOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OutputFieldOffset;
+    private ParticleAttributeIndex_tImpl? _OutputFieldInstance;
 
     public ParticleAttributeIndex_t OutputField
     {
         get
         {
             _OutputFieldOffset = _OutputFieldOffset ?? Schema.GetOffset(0x26D81D324F6F74);
-            return new ParticleAttributeIndex_tImpl(_Handle + _OutputFieldOffset!.Value);
+            var instance = _OutputFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _OutputFieldOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SetMethodOffset;

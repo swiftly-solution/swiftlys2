@@ -37,23 +37,29 @@ internal partial class CCSGameRulesImpl : CTeamplayRulesImpl, CCSGameRules
         }
     }
     private static nint? _WarmupPeriodEndOffset;
+    private GameTime_tImpl? _WarmupPeriodEndInstance;
 
     public GameTime_t WarmupPeriodEnd
     {
         get
         {
             _WarmupPeriodEndOffset = _WarmupPeriodEndOffset ?? Schema.GetOffset(0x6295CF65BD3AFF1D);
-            return new GameTime_tImpl(_Handle + _WarmupPeriodEndOffset!.Value);
+            var instance = _WarmupPeriodEndInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _WarmupPeriodEndOffset!.Value);
+            return instance;
         }
     }
     private static nint? _WarmupPeriodStartOffset;
+    private GameTime_tImpl? _WarmupPeriodStartInstance;
 
     public GameTime_t WarmupPeriodStart
     {
         get
         {
             _WarmupPeriodStartOffset = _WarmupPeriodStartOffset ?? Schema.GetOffset(0x6295CF6541805884);
-            return new GameTime_tImpl(_Handle + _WarmupPeriodStartOffset!.Value);
+            var instance = _WarmupPeriodStartInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _WarmupPeriodStartOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TerroristTimeOutActiveOffset;
@@ -167,23 +173,29 @@ internal partial class CCSGameRulesImpl : CTeamplayRulesImpl, CCSGameRules
         }
     }
     private static nint? _RoundStartTimeOffset;
+    private GameTime_tImpl? _RoundStartTimeInstance;
 
     public GameTime_t RoundStartTime
     {
         get
         {
             _RoundStartTimeOffset = _RoundStartTimeOffset ?? Schema.GetOffset(0x6295CF65C262EE3C);
-            return new GameTime_tImpl(_Handle + _RoundStartTimeOffset!.Value);
+            var instance = _RoundStartTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _RoundStartTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RestartRoundTimeOffset;
+    private GameTime_tImpl? _RestartRoundTimeInstance;
 
     public GameTime_t RestartRoundTime
     {
         get
         {
             _RestartRoundTimeOffset = _RestartRoundTimeOffset ?? Schema.GetOffset(0x6295CF65F8CD3077);
-            return new GameTime_tImpl(_Handle + _RestartRoundTimeOffset!.Value);
+            var instance = _RestartRoundTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _RestartRoundTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _GameRestartOffset;
@@ -467,23 +479,29 @@ internal partial class CCSGameRulesImpl : CTeamplayRulesImpl, CCSGameRules
         }
     }
     private static nint? _CMMItemDropRevealStartTimeOffset;
+    private GameTime_tImpl? _CMMItemDropRevealStartTimeInstance;
 
     public GameTime_t CMMItemDropRevealStartTime
     {
         get
         {
             _CMMItemDropRevealStartTimeOffset = _CMMItemDropRevealStartTimeOffset ?? Schema.GetOffset(0x6295CF659669E4BE);
-            return new GameTime_tImpl(_Handle + _CMMItemDropRevealStartTimeOffset!.Value);
+            var instance = _CMMItemDropRevealStartTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _CMMItemDropRevealStartTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CMMItemDropRevealEndTimeOffset;
+    private GameTime_tImpl? _CMMItemDropRevealEndTimeInstance;
 
     public GameTime_t CMMItemDropRevealEndTime
     {
         get
         {
             _CMMItemDropRevealEndTimeOffset = _CMMItemDropRevealEndTimeOffset ?? Schema.GetOffset(0x6295CF65DDD1C05B);
-            return new GameTime_tImpl(_Handle + _CMMItemDropRevealEndTimeOffset!.Value);
+            var instance = _CMMItemDropRevealEndTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _CMMItemDropRevealEndTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _IsDroppingItemsOffset;
@@ -526,13 +544,31 @@ internal partial class CCSGameRulesImpl : CTeamplayRulesImpl, CCSGameRules
             return ref _Handle.AsRef<bool>(_BombPlantedOffset!.Value);
         }
     }
+    private static nint? _ProhibitedItemIndicesOffset;
+    private SchemaFixedArray<ushort>? _ProhibitedItemIndicesInstance;
+
     public ISchemaFixedArray<ushort> ProhibitedItemIndices
     {
-        get => new SchemaFixedArray<ushort>(_Handle, 0x6295CF65BFE8D026, 100, 2, 2);
+        get
+        {
+            _ProhibitedItemIndicesOffset = _ProhibitedItemIndicesOffset ?? Schema.GetOffset(0x6295CF65BFE8D026);
+            var instance = _ProhibitedItemIndicesInstance ??= new SchemaFixedArray<ushort>(0, 0x6295CF65BFE8D026, 100, 2, 2);
+            instance.DangerousSetHandle(_Handle + _ProhibitedItemIndicesOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _TournamentActiveCasterAccountsOffset;
+    private SchemaFixedArray<uint>? _TournamentActiveCasterAccountsInstance;
+
     public ISchemaFixedArray<uint> TournamentActiveCasterAccounts
     {
-        get => new SchemaFixedArray<uint>(_Handle, 0x6295CF6525481301, 4, 4, 4);
+        get
+        {
+            _TournamentActiveCasterAccountsOffset = _TournamentActiveCasterAccountsOffset ?? Schema.GetOffset(0x6295CF6525481301);
+            var instance = _TournamentActiveCasterAccountsInstance ??= new SchemaFixedArray<uint>(0, 0x6295CF6525481301, 4, 4, 4);
+            instance.DangerousSetHandle(_Handle + _TournamentActiveCasterAccountsOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _NumBestOfMapsOffset;
 
@@ -604,25 +640,70 @@ internal partial class CCSGameRulesImpl : CTeamplayRulesImpl, CCSGameRules
             return ref _Handle.AsRef<bool>(_CTCantBuyOffset!.Value);
         }
     }
+    private static nint? _MatchStats_RoundResultsOffset;
+    private SchemaFixedArray<int>? _MatchStats_RoundResultsInstance;
+
     public ISchemaFixedArray<int> MatchStats_RoundResults
     {
-        get => new SchemaFixedArray<int>(_Handle, 0x6295CF652BF6608F, 30, 4, 4);
+        get
+        {
+            _MatchStats_RoundResultsOffset = _MatchStats_RoundResultsOffset ?? Schema.GetOffset(0x6295CF652BF6608F);
+            var instance = _MatchStats_RoundResultsInstance ??= new SchemaFixedArray<int>(0, 0x6295CF652BF6608F, 30, 4, 4);
+            instance.DangerousSetHandle(_Handle + _MatchStats_RoundResultsOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _MatchStats_PlayersAlive_CTOffset;
+    private SchemaFixedArray<int>? _MatchStats_PlayersAlive_CTInstance;
+
     public ISchemaFixedArray<int> MatchStats_PlayersAlive_CT
     {
-        get => new SchemaFixedArray<int>(_Handle, 0x6295CF650A468F9C, 30, 4, 4);
+        get
+        {
+            _MatchStats_PlayersAlive_CTOffset = _MatchStats_PlayersAlive_CTOffset ?? Schema.GetOffset(0x6295CF650A468F9C);
+            var instance = _MatchStats_PlayersAlive_CTInstance ??= new SchemaFixedArray<int>(0, 0x6295CF650A468F9C, 30, 4, 4);
+            instance.DangerousSetHandle(_Handle + _MatchStats_PlayersAlive_CTOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _MatchStats_PlayersAlive_TOffset;
+    private SchemaFixedArray<int>? _MatchStats_PlayersAlive_TInstance;
+
     public ISchemaFixedArray<int> MatchStats_PlayersAlive_T
     {
-        get => new SchemaFixedArray<int>(_Handle, 0x6295CF65DCEE8755, 30, 4, 4);
+        get
+        {
+            _MatchStats_PlayersAlive_TOffset = _MatchStats_PlayersAlive_TOffset ?? Schema.GetOffset(0x6295CF65DCEE8755);
+            var instance = _MatchStats_PlayersAlive_TInstance ??= new SchemaFixedArray<int>(0, 0x6295CF65DCEE8755, 30, 4, 4);
+            instance.DangerousSetHandle(_Handle + _MatchStats_PlayersAlive_TOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _TeamRespawnWaveTimesOffset;
+    private SchemaFixedArray<float>? _TeamRespawnWaveTimesInstance;
+
     public ISchemaFixedArray<float> TeamRespawnWaveTimes
     {
-        get => new SchemaFixedArray<float>(_Handle, 0x6295CF65A15A30B1, 32, 4, 4);
+        get
+        {
+            _TeamRespawnWaveTimesOffset = _TeamRespawnWaveTimesOffset ?? Schema.GetOffset(0x6295CF65A15A30B1);
+            var instance = _TeamRespawnWaveTimesInstance ??= new SchemaFixedArray<float>(0, 0x6295CF65A15A30B1, 32, 4, 4);
+            instance.DangerousSetHandle(_Handle + _TeamRespawnWaveTimesOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _NextRespawnWaveOffset;
+    private SchemaClassFixedArray<GameTime_t>? _NextRespawnWaveInstance;
+
     public ISchemaClassFixedArray<GameTime_t> NextRespawnWave
     {
-        get => new SchemaClassFixedArray<GameTime_t>(_Handle, 0x6295CF65F28FB62F, 32, 4, 4);
+        get
+        {
+            _NextRespawnWaveOffset = _NextRespawnWaveOffset ?? Schema.GetOffset(0x6295CF65F28FB62F);
+            var instance = _NextRespawnWaveInstance ??= new SchemaClassFixedArray<GameTime_t>(0, 0x6295CF65F28FB62F, 32, 4, 4);
+            instance.DangerousSetHandle(_Handle + _NextRespawnWaveOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _MinimapMinsOffset;
 
@@ -644,9 +725,18 @@ internal partial class CCSGameRulesImpl : CTeamplayRulesImpl, CCSGameRules
             return ref _Handle.AsRef<Vector>(_MinimapMaxsOffset!.Value);
         }
     }
+    private static nint? _MinimapVerticalSectionHeightsOffset;
+    private SchemaFixedArray<float>? _MinimapVerticalSectionHeightsInstance;
+
     public ISchemaFixedArray<float> MinimapVerticalSectionHeights
     {
-        get => new SchemaFixedArray<float>(_Handle, 0x6295CF6537ADB2EF, 8, 4, 4);
+        get
+        {
+            _MinimapVerticalSectionHeightsOffset = _MinimapVerticalSectionHeightsOffset ?? Schema.GetOffset(0x6295CF6537ADB2EF);
+            var instance = _MinimapVerticalSectionHeightsInstance ??= new SchemaFixedArray<float>(0, 0x6295CF6537ADB2EF, 8, 4, 4);
+            instance.DangerousSetHandle(_Handle + _MinimapVerticalSectionHeightsOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _UllLocalMatchIDOffset;
 
@@ -658,13 +748,31 @@ internal partial class CCSGameRulesImpl : CTeamplayRulesImpl, CCSGameRules
             return ref _Handle.AsRef<ulong>(_UllLocalMatchIDOffset!.Value);
         }
     }
+    private static nint? _EndMatchMapGroupVoteTypesOffset;
+    private SchemaFixedArray<int>? _EndMatchMapGroupVoteTypesInstance;
+
     public ISchemaFixedArray<int> EndMatchMapGroupVoteTypes
     {
-        get => new SchemaFixedArray<int>(_Handle, 0x6295CF65B4DAF10B, 10, 4, 4);
+        get
+        {
+            _EndMatchMapGroupVoteTypesOffset = _EndMatchMapGroupVoteTypesOffset ?? Schema.GetOffset(0x6295CF65B4DAF10B);
+            var instance = _EndMatchMapGroupVoteTypesInstance ??= new SchemaFixedArray<int>(0, 0x6295CF65B4DAF10B, 10, 4, 4);
+            instance.DangerousSetHandle(_Handle + _EndMatchMapGroupVoteTypesOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _EndMatchMapGroupVoteOptionsOffset;
+    private SchemaFixedArray<int>? _EndMatchMapGroupVoteOptionsInstance;
+
     public ISchemaFixedArray<int> EndMatchMapGroupVoteOptions
     {
-        get => new SchemaFixedArray<int>(_Handle, 0x6295CF65BCAA50F4, 10, 4, 4);
+        get
+        {
+            _EndMatchMapGroupVoteOptionsOffset = _EndMatchMapGroupVoteOptionsOffset ?? Schema.GetOffset(0x6295CF65BCAA50F4);
+            var instance = _EndMatchMapGroupVoteOptionsInstance ??= new SchemaFixedArray<int>(0, 0x6295CF65BCAA50F4, 10, 4, 4);
+            instance.DangerousSetHandle(_Handle + _EndMatchMapGroupVoteOptionsOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _EndMatchMapVoteWinnerOffset;
 
@@ -707,23 +815,29 @@ internal partial class CCSGameRulesImpl : CTeamplayRulesImpl, CCSGameRules
         }
     }
     private static nint? _IntermissionStartTimeOffset;
+    private GameTime_tImpl? _IntermissionStartTimeInstance;
 
     public GameTime_t IntermissionStartTime
     {
         get
         {
             _IntermissionStartTimeOffset = _IntermissionStartTimeOffset ?? Schema.GetOffset(0x6295CF65AAE918DC);
-            return new GameTime_tImpl(_Handle + _IntermissionStartTimeOffset!.Value);
+            var instance = _IntermissionStartTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _IntermissionStartTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _IntermissionEndTimeOffset;
+    private GameTime_tImpl? _IntermissionEndTimeInstance;
 
     public GameTime_t IntermissionEndTime
     {
         get
         {
             _IntermissionEndTimeOffset = _IntermissionEndTimeOffset ?? Schema.GetOffset(0x6295CF652001CDA5);
-            return new GameTime_tImpl(_Handle + _IntermissionEndTimeOffset!.Value);
+            var instance = _IntermissionEndTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _IntermissionEndTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LevelInitializedOffset;
@@ -1502,13 +1616,16 @@ internal partial class CCSGameRulesImpl : CTeamplayRulesImpl, CCSGameRules
         }
     }
     private static nint? _PhaseChangeAnnouncementTimeOffset;
+    private GameTime_tImpl? _PhaseChangeAnnouncementTimeInstance;
 
     public GameTime_t PhaseChangeAnnouncementTime
     {
         get
         {
             _PhaseChangeAnnouncementTimeOffset = _PhaseChangeAnnouncementTimeOffset ?? Schema.GetOffset(0x6295CF65C4D59336);
-            return new GameTime_tImpl(_Handle + _PhaseChangeAnnouncementTimeOffset!.Value);
+            var instance = _PhaseChangeAnnouncementTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _PhaseChangeAnnouncementTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NextUpdateTeamClanNamesTimeOffset;
@@ -1522,13 +1639,16 @@ internal partial class CCSGameRulesImpl : CTeamplayRulesImpl, CCSGameRules
         }
     }
     private static nint? _LastThinkTimeOffset;
+    private GameTime_tImpl? _LastThinkTimeInstance;
 
     public GameTime_t LastThinkTime
     {
         get
         {
             _LastThinkTimeOffset = _LastThinkTimeOffset ?? Schema.GetOffset(0x6295CF65D901F6A0);
-            return new GameTime_tImpl(_Handle + _LastThinkTimeOffset!.Value);
+            var instance = _LastThinkTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastThinkTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AccumulatedRoundOffDamageOffset;
@@ -1582,6 +1702,7 @@ internal partial class CCSGameRulesImpl : CTeamplayRulesImpl, CCSGameRules
         }
     }
     private static nint? _GameModeRulesOffset;
+    private CCSGameModeRulesImpl? _GameModeRulesInstance;
 
     public CCSGameModeRules? GameModeRules
     {
@@ -1589,17 +1710,23 @@ internal partial class CCSGameRulesImpl : CTeamplayRulesImpl, CCSGameRules
         {
             _GameModeRulesOffset = _GameModeRulesOffset ?? Schema.GetOffset(0x6295CF650B12F105);
             var ptr = _Handle.Read<nint>(_GameModeRulesOffset!.Value);
-            return ptr.IsValidPtr() ? new CCSGameModeRulesImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _GameModeRulesInstance ??= new CCSGameModeRulesImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _BtGlobalBlackboardOffset;
+    private SchemaUntypedField? _BtGlobalBlackboardInstance;
 
     public SchemaUntypedField BtGlobalBlackboard
     {
         get
         {
             _BtGlobalBlackboardOffset = _BtGlobalBlackboardOffset ?? Schema.GetOffset(0x6295CF654E62FE91);
-            return new SchemaUntypedField(_Handle + _BtGlobalBlackboardOffset!.Value);
+            var instance = _BtGlobalBlackboardInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _BtGlobalBlackboardOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PlayerResourceOffset;
@@ -1613,22 +1740,43 @@ internal partial class CCSGameRulesImpl : CTeamplayRulesImpl, CCSGameRules
         }
     }
     private static nint? _RetakeRulesOffset;
+    private CRetakeGameRulesImpl? _RetakeRulesInstance;
 
     public CRetakeGameRules RetakeRules
     {
         get
         {
             _RetakeRulesOffset = _RetakeRulesOffset ?? Schema.GetOffset(0x6295CF65DB6D258A);
-            return new CRetakeGameRulesImpl(_Handle + _RetakeRulesOffset!.Value);
+            var instance = _RetakeRulesInstance ??= new CRetakeGameRulesImpl(0);
+            instance.DangerousSetHandle(_Handle + _RetakeRulesOffset!.Value);
+            return instance;
         }
     }
+    private static nint? _TeamUniqueKillWeaponsMatchOffset;
+    private SchemaFixedArray<CUtlVector<int>>? _TeamUniqueKillWeaponsMatchInstance;
+
     public ISchemaFixedArray<CUtlVector<int>> TeamUniqueKillWeaponsMatch
     {
-        get => new SchemaFixedArray<CUtlVector<int>>(_Handle, 0x6295CF65EB474B78, 4, 24, 8);
+        get
+        {
+            _TeamUniqueKillWeaponsMatchOffset = _TeamUniqueKillWeaponsMatchOffset ?? Schema.GetOffset(0x6295CF65EB474B78);
+            var instance = _TeamUniqueKillWeaponsMatchInstance ??= new SchemaFixedArray<CUtlVector<int>>(0, 0x6295CF65EB474B78, 4, 24, 8);
+            instance.DangerousSetHandle(_Handle + _TeamUniqueKillWeaponsMatchOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _TeamLastKillUsedUniqueWeaponMatchOffset;
+    private SchemaFixedArray<bool>? _TeamLastKillUsedUniqueWeaponMatchInstance;
+
     public ISchemaFixedArray<bool> TeamLastKillUsedUniqueWeaponMatch
     {
-        get => new SchemaFixedArray<bool>(_Handle, 0x6295CF65BCB471EB, 4, 1, 1);
+        get
+        {
+            _TeamLastKillUsedUniqueWeaponMatchOffset = _TeamLastKillUsedUniqueWeaponMatchOffset ?? Schema.GetOffset(0x6295CF65BCB471EB);
+            var instance = _TeamLastKillUsedUniqueWeaponMatchInstance ??= new SchemaFixedArray<bool>(0, 0x6295CF65BCB471EB, 4, 1, 1);
+            instance.DangerousSetHandle(_Handle + _TeamLastKillUsedUniqueWeaponMatchOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _MatchEndCountOffset;
 
@@ -1671,13 +1819,16 @@ internal partial class CCSGameRulesImpl : CTeamplayRulesImpl, CCSGameRules
         }
     }
     private static nint? _TeamIntroPeriodEndOffset;
+    private GameTime_tImpl? _TeamIntroPeriodEndInstance;
 
     public GameTime_t TeamIntroPeriodEnd
     {
         get
         {
             _TeamIntroPeriodEndOffset = _TeamIntroPeriodEndOffset ?? Schema.GetOffset(0x6295CF65E9D7AE78);
-            return new GameTime_tImpl(_Handle + _TeamIntroPeriodEndOffset!.Value);
+            var instance = _TeamIntroPeriodEndInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _TeamIntroPeriodEndOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PlayedTeamIntroVOOffset;

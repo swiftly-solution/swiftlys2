@@ -17,13 +17,16 @@ internal partial class CSkyCameraImpl : CBaseEntityImpl, CSkyCamera
     public CSkyCameraImpl(nint handle) : base(handle) { }
 
     private static nint? _SkyboxDataOffset;
+    private sky3dparams_tImpl? _SkyboxDataInstance;
 
     public sky3dparams_t SkyboxData
     {
         get
         {
             _SkyboxDataOffset = _SkyboxDataOffset ?? Schema.GetOffset(0xCD44EF44CDA0772B);
-            return new sky3dparams_tImpl(_Handle + _SkyboxDataOffset!.Value);
+            var instance = _SkyboxDataInstance ??= new sky3dparams_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _SkyboxDataOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SkyboxSlotTokenOffset;
@@ -47,6 +50,7 @@ internal partial class CSkyCameraImpl : CBaseEntityImpl, CSkyCamera
         }
     }
     private static nint? _NextOffset;
+    private CSkyCameraImpl? _NextInstance;
 
     public CSkyCamera? Next
     {
@@ -54,7 +58,10 @@ internal partial class CSkyCameraImpl : CBaseEntityImpl, CSkyCamera
         {
             _NextOffset = _NextOffset ?? Schema.GetOffset(0xCD44EF4432B11E0E);
             var ptr = _Handle.Read<nint>(_NextOffset!.Value);
-            return ptr.IsValidPtr() ? new CSkyCameraImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _NextInstance ??= new CSkyCameraImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
 

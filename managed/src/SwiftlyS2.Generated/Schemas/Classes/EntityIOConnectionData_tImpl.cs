@@ -107,13 +107,16 @@ internal partial class EntityIOConnectionData_tImpl : SchemaClass, EntityIOConne
         }
     }
     private static nint? _ParamMapOffset;
+    private SchemaUntypedField? _ParamMapInstance;
 
     public SchemaUntypedField ParamMap
     {
         get
         {
             _ParamMapOffset = _ParamMapOffset ?? Schema.GetOffset(0xDEBEBB4DF64DD25C);
-            return new SchemaUntypedField(_Handle + _ParamMapOffset!.Value);
+            var instance = _ParamMapInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ParamMapOffset!.Value);
+            return instance;
         }
     }
 

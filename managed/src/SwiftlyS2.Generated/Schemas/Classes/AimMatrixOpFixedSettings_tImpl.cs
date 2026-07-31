@@ -17,28 +17,43 @@ internal partial class AimMatrixOpFixedSettings_tImpl : SchemaClass, AimMatrixOp
     public AimMatrixOpFixedSettings_tImpl(nint handle) : base(handle) { }
 
     private static nint? _AttachmentOffset;
+    private CAnimAttachmentImpl? _AttachmentInstance;
 
     public CAnimAttachment Attachment
     {
         get
         {
             _AttachmentOffset = _AttachmentOffset ?? Schema.GetOffset(0xE059B1E02C5CA308);
-            return new CAnimAttachmentImpl(_Handle + _AttachmentOffset!.Value);
+            var instance = _AttachmentInstance ??= new CAnimAttachmentImpl(0);
+            instance.DangerousSetHandle(_Handle + _AttachmentOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DampingOffset;
+    private CAnimInputDampingImpl? _DampingInstance;
 
     public CAnimInputDamping Damping
     {
         get
         {
             _DampingOffset = _DampingOffset ?? Schema.GetOffset(0xE059B1E015440FB5);
-            return new CAnimInputDampingImpl(_Handle + _DampingOffset!.Value);
+            var instance = _DampingInstance ??= new CAnimInputDampingImpl(0);
+            instance.DangerousSetHandle(_Handle + _DampingOffset!.Value);
+            return instance;
         }
     }
+    private static nint? _PoseCacheHandlesOffset;
+    private SchemaClassFixedArray<CPoseHandle>? _PoseCacheHandlesInstance;
+
     public ISchemaClassFixedArray<CPoseHandle> PoseCacheHandles
     {
-        get => new SchemaClassFixedArray<CPoseHandle>(_Handle, 0xE059B1E0E7BA8E61, 10, 4, 2);
+        get
+        {
+            _PoseCacheHandlesOffset = _PoseCacheHandlesOffset ?? Schema.GetOffset(0xE059B1E0E7BA8E61);
+            var instance = _PoseCacheHandlesInstance ??= new SchemaClassFixedArray<CPoseHandle>(0, 0xE059B1E0E7BA8E61, 10, 4, 2);
+            instance.DangerousSetHandle(_Handle + _PoseCacheHandlesOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _BlendModeOffset;
 
@@ -131,13 +146,16 @@ internal partial class AimMatrixOpFixedSettings_tImpl : SchemaClass, AimMatrixOp
         }
     }
     private static nint? _BiasAndClampBlendCurveOffset;
+    private CBlendCurveImpl? _BiasAndClampBlendCurveInstance;
 
     public CBlendCurve BiasAndClampBlendCurve
     {
         get
         {
             _BiasAndClampBlendCurveOffset = _BiasAndClampBlendCurveOffset ?? Schema.GetOffset(0xE059B1E0D81016FE);
-            return new CBlendCurveImpl(_Handle + _BiasAndClampBlendCurveOffset!.Value);
+            var instance = _BiasAndClampBlendCurveInstance ??= new CBlendCurveImpl(0);
+            instance.DangerousSetHandle(_Handle + _BiasAndClampBlendCurveOffset!.Value);
+            return instance;
         }
     }
 

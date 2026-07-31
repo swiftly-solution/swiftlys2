@@ -77,43 +77,55 @@ internal partial class CPhysSurfacePropertiesImpl : SchemaClass, CPhysSurfacePro
         }
     }
     private static nint? _PhysicsOffset;
+    private CPhysSurfacePropertiesPhysicsImpl? _PhysicsInstance;
 
     public CPhysSurfacePropertiesPhysics Physics
     {
         get
         {
             _PhysicsOffset = _PhysicsOffset ?? Schema.GetOffset(0x682A3134B4C7F5C2);
-            return new CPhysSurfacePropertiesPhysicsImpl(_Handle + _PhysicsOffset!.Value);
+            var instance = _PhysicsInstance ??= new CPhysSurfacePropertiesPhysicsImpl(0);
+            instance.DangerousSetHandle(_Handle + _PhysicsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _VehicleParamsOffset;
+    private CPhysSurfacePropertiesVehicleImpl? _VehicleParamsInstance;
 
     public CPhysSurfacePropertiesVehicle VehicleParams
     {
         get
         {
             _VehicleParamsOffset = _VehicleParamsOffset ?? Schema.GetOffset(0x682A3134FF85787D);
-            return new CPhysSurfacePropertiesVehicleImpl(_Handle + _VehicleParamsOffset!.Value);
+            var instance = _VehicleParamsInstance ??= new CPhysSurfacePropertiesVehicleImpl(0);
+            instance.DangerousSetHandle(_Handle + _VehicleParamsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AudioSoundsOffset;
+    private CPhysSurfacePropertiesSoundNamesImpl? _AudioSoundsInstance;
 
     public CPhysSurfacePropertiesSoundNames AudioSounds
     {
         get
         {
             _AudioSoundsOffset = _AudioSoundsOffset ?? Schema.GetOffset(0x682A3134F7E0C689);
-            return new CPhysSurfacePropertiesSoundNamesImpl(_Handle + _AudioSoundsOffset!.Value);
+            var instance = _AudioSoundsInstance ??= new CPhysSurfacePropertiesSoundNamesImpl(0);
+            instance.DangerousSetHandle(_Handle + _AudioSoundsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AudioParamsOffset;
+    private CPhysSurfacePropertiesAudioImpl? _AudioParamsInstance;
 
     public CPhysSurfacePropertiesAudio AudioParams
     {
         get
         {
             _AudioParamsOffset = _AudioParamsOffset ?? Schema.GetOffset(0x682A3134BCDFAD3F);
-            return new CPhysSurfacePropertiesAudioImpl(_Handle + _AudioParamsOffset!.Value);
+            var instance = _AudioParamsInstance ??= new CPhysSurfacePropertiesAudioImpl(0);
+            instance.DangerousSetHandle(_Handle + _AudioParamsOffset!.Value);
+            return instance;
         }
     }
 

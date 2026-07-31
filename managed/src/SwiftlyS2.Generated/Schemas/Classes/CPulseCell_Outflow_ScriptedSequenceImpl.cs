@@ -72,13 +72,16 @@ internal partial class CPulseCell_Outflow_ScriptedSequenceImpl : CPulseCell_Base
         }
     }
     private static nint? _ScriptedSequenceDataMainOffset;
+    private PulseScriptedSequenceData_tImpl? _ScriptedSequenceDataMainInstance;
 
     public PulseScriptedSequenceData_t ScriptedSequenceDataMain
     {
         get
         {
             _ScriptedSequenceDataMainOffset = _ScriptedSequenceDataMainOffset ?? Schema.GetOffset(0x462EA7DE03F2FF03);
-            return new PulseScriptedSequenceData_tImpl(_Handle + _ScriptedSequenceDataMainOffset!.Value);
+            var instance = _ScriptedSequenceDataMainInstance ??= new PulseScriptedSequenceData_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _ScriptedSequenceDataMainOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AdditionalActorsOffset;
@@ -92,13 +95,16 @@ internal partial class CPulseCell_Outflow_ScriptedSequenceImpl : CPulseCell_Base
         }
     }
     private static nint? _OnFinishedOffset;
+    private CPulse_ResumePointImpl? _OnFinishedInstance;
 
     public CPulse_ResumePoint OnFinished
     {
         get
         {
             _OnFinishedOffset = _OnFinishedOffset ?? Schema.GetOffset(0x462EA7DE8D903E5E);
-            return new CPulse_ResumePointImpl(_Handle + _OnFinishedOffset!.Value);
+            var instance = _OnFinishedInstance ??= new CPulse_ResumePointImpl(0);
+            instance.DangerousSetHandle(_Handle + _OnFinishedOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TriggersOffset;

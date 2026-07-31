@@ -17,33 +17,42 @@ internal partial class CPulseBreakpointLocationImpl : SchemaClass, CPulseBreakpo
     public CPulseBreakpointLocationImpl(nint handle) : base(handle) { }
 
     private static nint? _NodeIDOffset;
+    private PulseDocNodeID_tImpl? _NodeIDInstance;
 
     public PulseDocNodeID_t NodeID
     {
         get
         {
             _NodeIDOffset = _NodeIDOffset ?? Schema.GetOffset(0x985BB7CF66BE98D8);
-            return new PulseDocNodeID_tImpl(_Handle + _NodeIDOffset!.Value);
+            var instance = _NodeIDInstance ??= new PulseDocNodeID_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NodeIDOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SequencePointOffset;
+    private SchemaUntypedField? _SequencePointInstance;
 
     public SchemaUntypedField SequencePoint
     {
         get
         {
             _SequencePointOffset = _SequencePointOffset ?? Schema.GetOffset(0x985BB7CF9996CEDE);
-            return new SchemaUntypedField(_Handle + _SequencePointOffset!.Value);
+            var instance = _SequencePointInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _SequencePointOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PortNameOffset;
+    private SchemaUntypedField? _PortNameInstance;
 
     public SchemaUntypedField PortName
     {
         get
         {
             _PortNameOffset = _PortNameOffset ?? Schema.GetOffset(0x985BB7CF07237B65);
-            return new SchemaUntypedField(_Handle + _PortNameOffset!.Value);
+            var instance = _PortNameInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _PortNameOffset!.Value);
+            return instance;
         }
     }
 

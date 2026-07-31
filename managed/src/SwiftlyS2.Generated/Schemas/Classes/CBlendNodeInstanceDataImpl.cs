@@ -57,13 +57,16 @@ internal partial class CBlendNodeInstanceDataImpl : SchemaClass, CBlendNodeInsta
         }
     }
     private static nint? _BlendValueOffset;
+    private SchemaUntypedField? _BlendValueInstance;
 
     public SchemaUntypedField BlendValue
     {
         get
         {
             _BlendValueOffset = _BlendValueOffset ?? Schema.GetOffset(0xCAC3ECEE14CD067);
-            return new SchemaUntypedField(_Handle + _BlendValueOffset!.Value);
+            var instance = _BlendValueInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _BlendValueOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DurationOffset;
@@ -77,13 +80,16 @@ internal partial class CBlendNodeInstanceDataImpl : SchemaClass, CBlendNodeInsta
         }
     }
     private static nint? _ResetCountOffset;
+    private SchemaUntypedField? _ResetCountInstance;
 
     public SchemaUntypedField ResetCount
     {
         get
         {
             _ResetCountOffset = _ResetCountOffset ?? Schema.GetOffset(0xCAC3ECE89B18BCF);
-            return new SchemaUntypedField(_Handle + _ResetCountOffset!.Value);
+            var instance = _ResetCountInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ResetCountOffset!.Value);
+            return instance;
         }
     }
 

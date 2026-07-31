@@ -77,13 +77,16 @@ internal partial class CEntityDissolveImpl : CBaseModelEntityImpl, CEntityDissol
         }
     }
     private static nint? _StartTimeOffset;
+    private GameTime_tImpl? _StartTimeInstance;
 
     public GameTime_t StartTime
     {
         get
         {
             _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0x443F205E67FE9DC4);
-            return new GameTime_tImpl(_Handle + _StartTimeOffset!.Value);
+            var instance = _StartTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _StartTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DissolveTypeOffset;

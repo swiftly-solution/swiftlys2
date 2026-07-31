@@ -67,13 +67,16 @@ internal partial class CAnimationGroupImpl : SchemaClass, CAnimationGroup
         }
     }
     private static nint? _DecodeKeyOffset;
+    private CAnimKeyDataImpl? _DecodeKeyInstance;
 
     public CAnimKeyData DecodeKey
     {
         get
         {
             _DecodeKeyOffset = _DecodeKeyOffset ?? Schema.GetOffset(0x338D4483923D44D6);
-            return new CAnimKeyDataImpl(_Handle + _DecodeKeyOffset!.Value);
+            var instance = _DecodeKeyInstance ??= new CAnimKeyDataImpl(0);
+            instance.DangerousSetHandle(_Handle + _DecodeKeyOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ScriptsOffset;

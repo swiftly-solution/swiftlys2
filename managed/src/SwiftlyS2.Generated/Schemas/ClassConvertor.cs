@@ -6,7 +6,8 @@ internal static class ClassConvertor
 {
     public static CEntityInstance ConvertEntityByDesignerName( nint address, string designerName )
     {
-        return designerName switch {
+        return designerName switch
+        {
             "func_nav_avoidance_obstacle" => new CFuncNavObstructionImpl(address),
             "wearable_item" => new CEconWearableImpl(address),
             "trigger_detect_explosion" => new CTriggerDetectExplosionImpl(address),

@@ -17,23 +17,29 @@ internal partial class CCycleClipInstanceDataImpl : SchemaClass, CCycleClipInsta
     public CCycleClipInstanceDataImpl(nint handle) : base(handle) { }
 
     private static nint? _CycleOffset;
+    private SchemaUntypedField? _CycleInstance;
 
     public SchemaUntypedField Cycle
     {
         get
         {
             _CycleOffset = _CycleOffset ?? Schema.GetOffset(0x2AACBED50C77829F);
-            return new SchemaUntypedField(_Handle + _CycleOffset!.Value);
+            var instance = _CycleInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _CycleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PrevCycleOffset;
+    private SchemaUntypedField? _PrevCycleInstance;
 
     public SchemaUntypedField PrevCycle
     {
         get
         {
             _PrevCycleOffset = _PrevCycleOffset ?? Schema.GetOffset(0x2AACBED5AA0F5CF4);
-            return new SchemaUntypedField(_Handle + _PrevCycleOffset!.Value);
+            var instance = _PrevCycleInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _PrevCycleOffset!.Value);
+            return instance;
         }
     }
 

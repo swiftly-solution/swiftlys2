@@ -57,13 +57,16 @@ internal partial class CGameChoreoServicesImpl : IChoreoServicesImpl, CGameChore
         }
     }
     private static nint? _TimeStartedStateOffset;
+    private GameTime_tImpl? _TimeStartedStateInstance;
 
     public GameTime_t TimeStartedState
     {
         get
         {
             _TimeStartedStateOffset = _TimeStartedStateOffset ?? Schema.GetOffset(0xF5FFE2B20BD38900);
-            return new GameTime_tImpl(_Handle + _TimeStartedStateOffset!.Value);
+            var instance = _TimeStartedStateInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _TimeStartedStateOffset!.Value);
+            return instance;
         }
     }
 

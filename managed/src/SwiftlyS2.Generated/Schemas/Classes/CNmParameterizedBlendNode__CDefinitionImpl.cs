@@ -17,13 +17,16 @@ internal partial class CNmParameterizedBlendNode__CDefinitionImpl : CNmPoseNode_
     public CNmParameterizedBlendNode__CDefinitionImpl(nint handle) : base(handle) { }
 
     private static nint? _SourceNodeIndicesOffset;
+    private SchemaUntypedField? _SourceNodeIndicesInstance;
 
     public SchemaUntypedField SourceNodeIndices
     {
         get
         {
             _SourceNodeIndicesOffset = _SourceNodeIndicesOffset ?? Schema.GetOffset(0x83A56F31E90F1FE1);
-            return new SchemaUntypedField(_Handle + _SourceNodeIndicesOffset!.Value);
+            var instance = _SourceNodeIndicesInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _SourceNodeIndicesOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InputParameterValueNodeIdxOffset;

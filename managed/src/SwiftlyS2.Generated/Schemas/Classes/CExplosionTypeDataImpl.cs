@@ -17,23 +17,29 @@ internal partial class CExplosionTypeDataImpl : SchemaClass, CExplosionTypeData
     public CExplosionTypeDataImpl(nint handle) : base(handle) { }
 
     private static nint? _SoundNameOffset;
+    private SchemaUntypedField? _SoundNameInstance;
 
     public SchemaUntypedField SoundName
     {
         get
         {
             _SoundNameOffset = _SoundNameOffset ?? Schema.GetOffset(0x53BD97FD87A55E2F);
-            return new SchemaUntypedField(_Handle + _SoundNameOffset!.Value);
+            var instance = _SoundNameInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _SoundNameOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ParticleEffectOffset;
+    private SchemaUntypedField? _ParticleEffectInstance;
 
     public SchemaUntypedField ParticleEffect
     {
         get
         {
             _ParticleEffectOffset = _ParticleEffectOffset ?? Schema.GetOffset(0x53BD97FDB4EA2DBA);
-            return new SchemaUntypedField(_Handle + _ParticleEffectOffset!.Value);
+            var instance = _ParticleEffectInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ParticleEffectOffset!.Value);
+            return instance;
         }
     }
     private static nint? _IsIncindiaryOffset;

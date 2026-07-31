@@ -162,13 +162,16 @@ internal partial class CBarnLightImpl : CBaseModelEntityImpl, CBarnLight
         }
     }
     private static nint? _LightStyleStartTimeOffset;
+    private GameTime_tImpl? _LightStyleStartTimeInstance;
 
     public GameTime_t LightStyleStartTime
     {
         get
         {
             _LightStyleStartTimeOffset = _LightStyleStartTimeOffset ?? Schema.GetOffset(0xB5E331D1A3B159A3);
-            return new GameTime_tImpl(_Handle + _LightStyleStartTimeOffset!.Value);
+            var instance = _LightStyleStartTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LightStyleStartTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _QueuedLightStyleStringsOffset;
@@ -201,9 +204,18 @@ internal partial class CBarnLightImpl : CBaseModelEntityImpl, CBarnLight
             return ref _Handle.AsRef<CUtlVector<CHandle<CBaseModelEntity>>>(_LightStyleTargetsOffset!.Value);
         }
     }
+    private static nint? _StyleEventOffset;
+    private SchemaFixedArray<CEntityIOOutput>? _StyleEventInstance;
+
     public ISchemaFixedArray<CEntityIOOutput> StyleEvent
     {
-        get => new SchemaFixedArray<CEntityIOOutput>(_Handle, 0xB5E331D15EEF4062, 4, 24, 8);
+        get
+        {
+            _StyleEventOffset = _StyleEventOffset ?? Schema.GetOffset(0xB5E331D15EEF4062);
+            var instance = _StyleEventInstance ??= new SchemaFixedArray<CEntityIOOutput>(0, 0xB5E331D15EEF4062, 4, 24, 8);
+            instance.DangerousSetHandle(_Handle + _StyleEventOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _LightCookieOffset;
 

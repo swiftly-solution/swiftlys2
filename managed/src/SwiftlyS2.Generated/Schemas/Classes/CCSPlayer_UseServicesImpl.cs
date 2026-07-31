@@ -27,23 +27,29 @@ internal partial class CCSPlayer_UseServicesImpl : CPlayer_UseServicesImpl, CCSP
         }
     }
     private static nint? _LastUseTimeStampOffset;
+    private GameTime_tImpl? _LastUseTimeStampInstance;
 
     public GameTime_t LastUseTimeStamp
     {
         get
         {
             _LastUseTimeStampOffset = _LastUseTimeStampOffset ?? Schema.GetOffset(0xE5F7189104BF376E);
-            return new GameTime_tImpl(_Handle + _LastUseTimeStampOffset!.Value);
+            var instance = _LastUseTimeStampInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastUseTimeStampOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TimeLastUsedWindowOffset;
+    private GameTime_tImpl? _TimeLastUsedWindowInstance;
 
     public GameTime_t TimeLastUsedWindow
     {
         get
         {
             _TimeLastUsedWindowOffset = _TimeLastUsedWindowOffset ?? Schema.GetOffset(0xE5F7189165762AEB);
-            return new GameTime_tImpl(_Handle + _TimeLastUsedWindowOffset!.Value);
+            var instance = _TimeLastUsedWindowInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _TimeLastUsedWindowOffset!.Value);
+            return instance;
         }
     }
 

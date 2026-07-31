@@ -17,6 +17,7 @@ internal partial class CCSPlayerController_InventoryServices__NetworkedLoadoutSl
     public CCSPlayerController_InventoryServices__NetworkedLoadoutSlot_tImpl(nint handle) : base(handle) { }
 
     private static nint? _ItemOffset;
+    private CEconItemViewImpl? _ItemInstance;
 
     public CEconItemView? Item
     {
@@ -24,7 +25,10 @@ internal partial class CCSPlayerController_InventoryServices__NetworkedLoadoutSl
         {
             _ItemOffset = _ItemOffset ?? Schema.GetOffset(0x16C4EAAC5C1539E8);
             var ptr = _Handle.Read<nint>(_ItemOffset!.Value);
-            return ptr.IsValidPtr() ? new CEconItemViewImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _ItemInstance ??= new CEconItemViewImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _TeamOffset;

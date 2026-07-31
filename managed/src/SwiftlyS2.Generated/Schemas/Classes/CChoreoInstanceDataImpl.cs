@@ -16,9 +16,18 @@ internal partial class CChoreoInstanceDataImpl : SchemaClass, CChoreoInstanceDat
 {
     public CChoreoInstanceDataImpl(nint handle) : base(handle) { }
 
+    private static nint? _AnimOverlayOffset;
+    private SchemaClassFixedArray<CAnimationLayer>? _AnimOverlayInstance;
+
     public ISchemaClassFixedArray<CAnimationLayer> AnimOverlay
     {
-        get => new SchemaClassFixedArray<CAnimationLayer>(_Handle, 0xD3B066AB24E8AAA0, 12, 76, 4);
+        get
+        {
+            _AnimOverlayOffset = _AnimOverlayOffset ?? Schema.GetOffset(0xD3B066AB24E8AAA0);
+            var instance = _AnimOverlayInstance ??= new SchemaClassFixedArray<CAnimationLayer>(0, 0xD3B066AB24E8AAA0, 12, 76, 4);
+            instance.DangerousSetHandle(_Handle + _AnimOverlayOffset!.Value);
+            return instance;
+        }
     }
 
 }

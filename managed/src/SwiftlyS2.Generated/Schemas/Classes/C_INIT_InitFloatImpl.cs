@@ -17,23 +17,29 @@ internal partial class C_INIT_InitFloatImpl : CParticleFunctionInitializerImpl, 
     public C_INIT_InitFloatImpl(nint handle) : base(handle) { }
 
     private static nint? _InputValueOffset;
+    private CPerParticleFloatInputImpl? _InputValueInstance;
 
     public CPerParticleFloatInput InputValue
     {
         get
         {
             _InputValueOffset = _InputValueOffset ?? Schema.GetOffset(0x6A1DAB2A34445438);
-            return new CPerParticleFloatInputImpl(_Handle + _InputValueOffset!.Value);
+            var instance = _InputValueInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _InputValueOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OutputFieldOffset;
+    private ParticleAttributeIndex_tImpl? _OutputFieldInstance;
 
     public ParticleAttributeIndex_t OutputField
     {
         get
         {
             _OutputFieldOffset = _OutputFieldOffset ?? Schema.GetOffset(0x6A1DAB2A324F6F74);
-            return new ParticleAttributeIndex_tImpl(_Handle + _OutputFieldOffset!.Value);
+            var instance = _OutputFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _OutputFieldOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SetMethodOffset;
@@ -47,13 +53,16 @@ internal partial class C_INIT_InitFloatImpl : CParticleFunctionInitializerImpl, 
         }
     }
     private static nint? _InputStrengthOffset;
+    private CPerParticleFloatInputImpl? _InputStrengthInstance;
 
     public CPerParticleFloatInput InputStrength
     {
         get
         {
             _InputStrengthOffset = _InputStrengthOffset ?? Schema.GetOffset(0x6A1DAB2ABAC712FE);
-            return new CPerParticleFloatInputImpl(_Handle + _InputStrengthOffset!.Value);
+            var instance = _InputStrengthInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _InputStrengthOffset!.Value);
+            return instance;
         }
     }
 

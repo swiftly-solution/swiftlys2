@@ -17,6 +17,7 @@ internal partial class CBaseModelEntityImpl : CBaseEntityImpl, CBaseModelEntity
     public CBaseModelEntityImpl(nint handle) : base(handle) { }
 
     private static nint? _CRenderComponentOffset;
+    private CRenderComponentImpl? _CRenderComponentInstance;
 
     public CRenderComponent? CRenderComponent
     {
@@ -24,20 +25,27 @@ internal partial class CBaseModelEntityImpl : CBaseEntityImpl, CBaseModelEntity
         {
             _CRenderComponentOffset = _CRenderComponentOffset ?? Schema.GetOffset(0x517849F7E8F59505);
             var ptr = _Handle.Read<nint>(_CRenderComponentOffset!.Value);
-            return ptr.IsValidPtr() ? new CRenderComponentImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _CRenderComponentInstance ??= new CRenderComponentImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _CHitboxComponentOffset;
+    private CHitboxComponentImpl? _CHitboxComponentInstance;
 
     public CHitboxComponent CHitboxComponent
     {
         get
         {
             _CHitboxComponentOffset = _CHitboxComponentOffset ?? Schema.GetOffset(0x517849F70E786123);
-            return new CHitboxComponentImpl(_Handle + _CHitboxComponentOffset!.Value);
+            var instance = _CHitboxComponentInstance ??= new CHitboxComponentImpl(0);
+            instance.DangerousSetHandle(_Handle + _CHitboxComponentOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ChoreoComponentOffset;
+    private CChoreoComponentImpl? _ChoreoComponentInstance;
 
     public CChoreoComponent? ChoreoComponent
     {
@@ -45,7 +53,10 @@ internal partial class CBaseModelEntityImpl : CBaseEntityImpl, CBaseModelEntity
         {
             _ChoreoComponentOffset = _ChoreoComponentOffset ?? Schema.GetOffset(0x517849F79C0DA7BC);
             var ptr = _Handle.Read<nint>(_ChoreoComponentOffset!.Value);
-            return ptr.IsValidPtr() ? new CChoreoComponentImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _ChoreoComponentInstance ??= new CChoreoComponentImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _DestructiblePartInitialStateDestructed0Offset;
@@ -199,6 +210,7 @@ internal partial class CBaseModelEntityImpl : CBaseEntityImpl, CBaseModelEntity
         }
     }
     private static nint? _DestructiblePartsSystemComponentOffset;
+    private CDestructiblePartsComponentImpl? _DestructiblePartsSystemComponentInstance;
 
     public CDestructiblePartsComponent? DestructiblePartsSystemComponent
     {
@@ -206,27 +218,36 @@ internal partial class CBaseModelEntityImpl : CBaseEntityImpl, CBaseModelEntity
         {
             _DestructiblePartsSystemComponentOffset = _DestructiblePartsSystemComponentOffset ?? Schema.GetOffset(0x517849F77992C14B);
             var ptr = _Handle.Read<nint>(_DestructiblePartsSystemComponentOffset!.Value);
-            return ptr.IsValidPtr() ? new CDestructiblePartsComponentImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _DestructiblePartsSystemComponentInstance ??= new CDestructiblePartsComponentImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _OnDestructibleHitGroupDamageLevelChangedOffset;
+    private SchemaUntypedField? _OnDestructibleHitGroupDamageLevelChangedInstance;
 
     public SchemaUntypedField OnDestructibleHitGroupDamageLevelChanged
     {
         get
         {
             _OnDestructibleHitGroupDamageLevelChangedOffset = _OnDestructibleHitGroupDamageLevelChangedOffset ?? Schema.GetOffset(0x517849F72743C319);
-            return new SchemaUntypedField(_Handle + _OnDestructibleHitGroupDamageLevelChangedOffset!.Value);
+            var instance = _OnDestructibleHitGroupDamageLevelChangedInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OnDestructibleHitGroupDamageLevelChangedOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DissolveStartTimeOffset;
+    private GameTime_tImpl? _DissolveStartTimeInstance;
 
     public GameTime_t DissolveStartTime
     {
         get
         {
             _DissolveStartTimeOffset = _DissolveStartTimeOffset ?? Schema.GetOffset(0x517849F7833C5731);
-            return new GameTime_tImpl(_Handle + _DissolveStartTimeOffset!.Value);
+            var instance = _DissolveStartTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _DissolveStartTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OnIgniteOffset;
@@ -310,23 +331,29 @@ internal partial class CBaseModelEntityImpl : CBaseEntityImpl, CBaseModelEntity
         }
     }
     private static nint? _CollisionOffset;
+    private CCollisionPropertyImpl? _CollisionInstance;
 
     public CCollisionProperty Collision
     {
         get
         {
             _CollisionOffset = _CollisionOffset ?? Schema.GetOffset(0x517849F7AE8E690F);
-            return new CCollisionPropertyImpl(_Handle + _CollisionOffset!.Value);
+            var instance = _CollisionInstance ??= new CCollisionPropertyImpl(0);
+            instance.DangerousSetHandle(_Handle + _CollisionOffset!.Value);
+            return instance;
         }
     }
     private static nint? _GlowOffset;
+    private CGlowPropertyImpl? _GlowInstance;
 
     public CGlowProperty Glow
     {
         get
         {
             _GlowOffset = _GlowOffset ?? Schema.GetOffset(0x517849F7A7E70C3C);
-            return new CGlowPropertyImpl(_Handle + _GlowOffset!.Value);
+            var instance = _GlowInstance ??= new CGlowPropertyImpl(0);
+            instance.DangerousSetHandle(_Handle + _GlowOffset!.Value);
+            return instance;
         }
     }
     private static nint? _GlowBackfaceMultOffset;
@@ -390,28 +417,43 @@ internal partial class CBaseModelEntityImpl : CBaseEntityImpl, CBaseModelEntity
         }
     }
     private static nint? _BodyGroupChoicesOffset;
+    private SchemaUntypedField? _BodyGroupChoicesInstance;
 
     public SchemaUntypedField BodyGroupChoices
     {
         get
         {
             _BodyGroupChoicesOffset = _BodyGroupChoicesOffset ?? Schema.GetOffset(0x517849F7BA57332C);
-            return new SchemaUntypedField(_Handle + _BodyGroupChoicesOffset!.Value);
+            var instance = _BodyGroupChoicesInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _BodyGroupChoicesOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ViewOffsetOffset;
+    private CNetworkViewOffsetVectorImpl? _ViewOffsetInstance;
 
     public CNetworkViewOffsetVector ViewOffset
     {
         get
         {
             _ViewOffsetOffset = _ViewOffsetOffset ?? Schema.GetOffset(0x517849F739DB834B);
-            return new CNetworkViewOffsetVectorImpl(_Handle + _ViewOffsetOffset!.Value);
+            var instance = _ViewOffsetInstance ??= new CNetworkViewOffsetVectorImpl(0);
+            instance.DangerousSetHandle(_Handle + _ViewOffsetOffset!.Value);
+            return instance;
         }
     }
+    private static nint? _DisabledHitGroupsOffset;
+    private SchemaFixedArray<uint>? _DisabledHitGroupsInstance;
+
     public ISchemaFixedArray<uint> DisabledHitGroups
     {
-        get => new SchemaFixedArray<uint>(_Handle, 0x517849F7DDB01736, 1, 4, 4);
+        get
+        {
+            _DisabledHitGroupsOffset = _DisabledHitGroupsOffset ?? Schema.GetOffset(0x517849F7DDB01736);
+            var instance = _DisabledHitGroupsInstance ??= new SchemaFixedArray<uint>(0, 0x517849F7DDB01736, 1, 4, 4);
+            instance.DangerousSetHandle(_Handle + _DisabledHitGroupsOffset!.Value);
+            return instance;
+        }
     }
 
     public void CHitboxComponentUpdated() => Schema.Update(_Handle, 0x517849F70E786123);

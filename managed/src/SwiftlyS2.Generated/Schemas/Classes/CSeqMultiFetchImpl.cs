@@ -17,13 +17,16 @@ internal partial class CSeqMultiFetchImpl : SchemaClass, CSeqMultiFetch
     public CSeqMultiFetchImpl(nint handle) : base(handle) { }
 
     private static nint? _FlagsOffset;
+    private CSeqMultiFetchFlagImpl? _FlagsInstance;
 
     public CSeqMultiFetchFlag Flags
     {
         get
         {
             _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x3846FD62DC74A14C);
-            return new CSeqMultiFetchFlagImpl(_Handle + _FlagsOffset!.Value);
+            var instance = _FlagsInstance ??= new CSeqMultiFetchFlagImpl(0);
+            instance.DangerousSetHandle(_Handle + _FlagsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LocalReferenceArrayOffset;
@@ -36,13 +39,31 @@ internal partial class CSeqMultiFetchImpl : SchemaClass, CSeqMultiFetch
             return ref _Handle.AsRef<CUtlVector<short>>(_LocalReferenceArrayOffset!.Value);
         }
     }
+    private static nint? _GroupSizeOffset;
+    private SchemaFixedArray<int>? _GroupSizeInstance;
+
     public ISchemaFixedArray<int> GroupSize
     {
-        get => new SchemaFixedArray<int>(_Handle, 0x3846FD6258533CF9, 2, 4, 4);
+        get
+        {
+            _GroupSizeOffset = _GroupSizeOffset ?? Schema.GetOffset(0x3846FD6258533CF9);
+            var instance = _GroupSizeInstance ??= new SchemaFixedArray<int>(0, 0x3846FD6258533CF9, 2, 4, 4);
+            instance.DangerousSetHandle(_Handle + _GroupSizeOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _LocalPoseOffset;
+    private SchemaFixedArray<int>? _LocalPoseInstance;
+
     public ISchemaFixedArray<int> LocalPose
     {
-        get => new SchemaFixedArray<int>(_Handle, 0x3846FD6270BF8111, 2, 4, 4);
+        get
+        {
+            _LocalPoseOffset = _LocalPoseOffset ?? Schema.GetOffset(0x3846FD6270BF8111);
+            var instance = _LocalPoseInstance ??= new SchemaFixedArray<int>(0, 0x3846FD6270BF8111, 2, 4, 4);
+            instance.DangerousSetHandle(_Handle + _LocalPoseOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _PoseKeyArray0Offset;
 
@@ -94,9 +115,18 @@ internal partial class CSeqMultiFetchImpl : SchemaClass, CSeqMultiFetch
             return ref _Handle.AsRef<bool>(_FixedBlendWeightOffset!.Value);
         }
     }
+    private static nint? _FixedBlendWeightValsOffset;
+    private SchemaFixedArray<float>? _FixedBlendWeightValsInstance;
+
     public ISchemaFixedArray<float> FixedBlendWeightVals
     {
-        get => new SchemaFixedArray<float>(_Handle, 0x3846FD6221B3BB76, 2, 4, 4);
+        get
+        {
+            _FixedBlendWeightValsOffset = _FixedBlendWeightValsOffset ?? Schema.GetOffset(0x3846FD6221B3BB76);
+            var instance = _FixedBlendWeightValsInstance ??= new SchemaFixedArray<float>(0, 0x3846FD6221B3BB76, 2, 4, 4);
+            instance.DangerousSetHandle(_Handle + _FixedBlendWeightValsOffset!.Value);
+            return instance;
+        }
     }
 
 }

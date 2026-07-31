@@ -27,13 +27,16 @@ internal partial class CMovementStatsPropertyImpl : SchemaClass, CMovementStatsP
         }
     }
     private static nint? _EmaMovementDirectionOffset;
+    private CVectorExponentialMovingAverageImpl? _EmaMovementDirectionInstance;
 
     public CVectorExponentialMovingAverage EmaMovementDirection
     {
         get
         {
             _EmaMovementDirectionOffset = _EmaMovementDirectionOffset ?? Schema.GetOffset(0xDE38DFFB3878FC8C);
-            return new CVectorExponentialMovingAverageImpl(_Handle + _EmaMovementDirectionOffset!.Value);
+            var instance = _EmaMovementDirectionInstance ??= new CVectorExponentialMovingAverageImpl(0);
+            instance.DangerousSetHandle(_Handle + _EmaMovementDirectionOffset!.Value);
+            return instance;
         }
     }
 

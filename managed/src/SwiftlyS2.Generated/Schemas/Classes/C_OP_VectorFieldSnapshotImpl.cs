@@ -27,13 +27,16 @@ internal partial class C_OP_VectorFieldSnapshotImpl : CParticleFunctionOperatorI
         }
     }
     private static nint? _AttributeToWriteOffset;
+    private ParticleAttributeIndex_tImpl? _AttributeToWriteInstance;
 
     public ParticleAttributeIndex_t AttributeToWrite
     {
         get
         {
             _AttributeToWriteOffset = _AttributeToWriteOffset ?? Schema.GetOffset(0x4679512A389A3CC1);
-            return new ParticleAttributeIndex_tImpl(_Handle + _AttributeToWriteOffset!.Value);
+            var instance = _AttributeToWriteInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _AttributeToWriteOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LocalSpaceCPOffset;
@@ -47,23 +50,29 @@ internal partial class C_OP_VectorFieldSnapshotImpl : CParticleFunctionOperatorI
         }
     }
     private static nint? _InterpolationOffset;
+    private CPerParticleFloatInputImpl? _InterpolationInstance;
 
     public CPerParticleFloatInput Interpolation
     {
         get
         {
             _InterpolationOffset = _InterpolationOffset ?? Schema.GetOffset(0x4679512ACF55B987);
-            return new CPerParticleFloatInputImpl(_Handle + _InterpolationOffset!.Value);
+            var instance = _InterpolationInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _InterpolationOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ScaleOffset;
+    private CPerParticleVecInputImpl? _ScaleInstance;
 
     public CPerParticleVecInput Scale
     {
         get
         {
             _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x4679512A5F596B51);
-            return new CPerParticleVecInputImpl(_Handle + _ScaleOffset!.Value);
+            var instance = _ScaleInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BoundaryDampeningOffset;

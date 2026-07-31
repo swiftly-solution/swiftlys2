@@ -77,13 +77,16 @@ internal partial class C_OP_MaintainSequentialPathImpl : CParticleFunctionOperat
         }
     }
     private static nint? _PathParamsOffset;
+    private CPathParametersImpl? _PathParamsInstance;
 
     public CPathParameters PathParams
     {
         get
         {
             _PathParamsOffset = _PathParamsOffset ?? Schema.GetOffset(0x3F7004B83C10092C);
-            return new CPathParametersImpl(_Handle + _PathParamsOffset!.Value);
+            var instance = _PathParamsInstance ??= new CPathParametersImpl(0);
+            instance.DangerousSetHandle(_Handle + _PathParamsOffset!.Value);
+            return instance;
         }
     }
 

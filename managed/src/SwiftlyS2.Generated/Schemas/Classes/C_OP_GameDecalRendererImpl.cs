@@ -57,73 +57,94 @@ internal partial class C_OP_GameDecalRendererImpl : CParticleFunctionRendererImp
         }
     }
     private static nint? _StartPosOffset;
+    private CPerParticleVecInputImpl? _StartPosInstance;
 
     public CPerParticleVecInput StartPos
     {
         get
         {
             _StartPosOffset = _StartPosOffset ?? Schema.GetOffset(0x42DAAA6726654BFF);
-            return new CPerParticleVecInputImpl(_Handle + _StartPosOffset!.Value);
+            var instance = _StartPosInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _StartPosOffset!.Value);
+            return instance;
         }
     }
     private static nint? _EndPosOffset;
+    private CPerParticleVecInputImpl? _EndPosInstance;
 
     public CPerParticleVecInput EndPos
     {
         get
         {
             _EndPosOffset = _EndPosOffset ?? Schema.GetOffset(0x42DAAA678DD24760);
-            return new CPerParticleVecInputImpl(_Handle + _EndPosOffset!.Value);
+            var instance = _EndPosInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _EndPosOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TraceBloatOffset;
+    private CPerParticleFloatInputImpl? _TraceBloatInstance;
 
     public CPerParticleFloatInput TraceBloat
     {
         get
         {
             _TraceBloatOffset = _TraceBloatOffset ?? Schema.GetOffset(0x42DAAA674BE375F2);
-            return new CPerParticleFloatInputImpl(_Handle + _TraceBloatOffset!.Value);
+            var instance = _TraceBloatInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _TraceBloatOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DecalSizeOffset;
+    private CPerParticleFloatInputImpl? _DecalSizeInstance;
 
     public CPerParticleFloatInput DecalSize
     {
         get
         {
             _DecalSizeOffset = _DecalSizeOffset ?? Schema.GetOffset(0x42DAAA6788E12609);
-            return new CPerParticleFloatInputImpl(_Handle + _DecalSizeOffset!.Value);
+            var instance = _DecalSizeInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _DecalSizeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DecalGroupIndexOffset;
+    private CPerParticleFloatInputImpl? _DecalGroupIndexInstance;
 
     public CPerParticleFloatInput DecalGroupIndex
     {
         get
         {
             _DecalGroupIndexOffset = _DecalGroupIndexOffset ?? Schema.GetOffset(0x42DAAA6784206313);
-            return new CPerParticleFloatInputImpl(_Handle + _DecalGroupIndexOffset!.Value);
+            var instance = _DecalGroupIndexInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _DecalGroupIndexOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DecalRotationOffset;
+    private CPerParticleFloatInputImpl? _DecalRotationInstance;
 
     public CPerParticleFloatInput DecalRotation
     {
         get
         {
             _DecalRotationOffset = _DecalRotationOffset ?? Schema.GetOffset(0x42DAAA6788A29A9E);
-            return new CPerParticleFloatInputImpl(_Handle + _DecalRotationOffset!.Value);
+            var instance = _DecalRotationInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _DecalRotationOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ModulationColorOffset;
+    private CPerParticleVecInputImpl? _ModulationColorInstance;
 
     public CPerParticleVecInput ModulationColor
     {
         get
         {
             _ModulationColorOffset = _ModulationColorOffset ?? Schema.GetOffset(0x42DAAA67C39DA78E);
-            return new CPerParticleVecInputImpl(_Handle + _ModulationColorOffset!.Value);
+            var instance = _ModulationColorInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ModulationColorOffset!.Value);
+            return instance;
         }
     }
     private static nint? _UseGameDefaultDecalSizeOffset;

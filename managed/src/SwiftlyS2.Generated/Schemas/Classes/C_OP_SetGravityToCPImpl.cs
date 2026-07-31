@@ -37,13 +37,16 @@ internal partial class C_OP_SetGravityToCPImpl : CParticleFunctionPreEmissionImp
         }
     }
     private static nint? _ScaleOffset;
+    private CParticleCollectionFloatInputImpl? _ScaleInstance;
 
     public CParticleCollectionFloatInput Scale
     {
         get
         {
             _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0xBA369CBDB731A42F);
-            return new CParticleCollectionFloatInputImpl(_Handle + _ScaleOffset!.Value);
+            var instance = _ScaleInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SetPositionOffset;

@@ -97,13 +97,16 @@ internal partial class AnimationSnapshotBase_tImpl : SchemaClass, AnimationSnaps
         }
     }
     private static nint? _DecodeDumpOffset;
+    private AnimationDecodeDebugDumpElement_tImpl? _DecodeDumpInstance;
 
     public AnimationDecodeDebugDumpElement_t DecodeDump
     {
         get
         {
             _DecodeDumpOffset = _DecodeDumpOffset ?? Schema.GetOffset(0x608F9332577A819);
-            return new AnimationDecodeDebugDumpElement_tImpl(_Handle + _DecodeDumpOffset!.Value);
+            var instance = _DecodeDumpInstance ??= new AnimationDecodeDebugDumpElement_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _DecodeDumpOffset!.Value);
+            return instance;
         }
     }
 

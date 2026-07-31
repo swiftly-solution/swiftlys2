@@ -17,23 +17,29 @@ internal partial class CRagdollPropImpl : CBaseAnimGraphImpl, CRagdollProp
     public CRagdollPropImpl(nint handle) : base(handle) { }
 
     private static nint? _CPropDataComponentOffset;
+    private CPropDataComponentImpl? _CPropDataComponentInstance;
 
     public CPropDataComponent CPropDataComponent
     {
         get
         {
             _CPropDataComponentOffset = _CPropDataComponentOffset ?? Schema.GetOffset(0x9505BA78ACBC1DDE);
-            return new CPropDataComponentImpl(_Handle + _CPropDataComponentOffset!.Value);
+            var instance = _CPropDataComponentInstance ??= new CPropDataComponentImpl(0);
+            instance.DangerousSetHandle(_Handle + _CPropDataComponentOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RagdollOffset;
+    private ragdoll_tImpl? _RagdollInstance;
 
     public ragdoll_t Ragdoll
     {
         get
         {
             _RagdollOffset = _RagdollOffset ?? Schema.GetOffset(0x9505BA78F62C6568);
-            return new ragdoll_tImpl(_Handle + _RagdollOffset!.Value);
+            var instance = _RagdollInstance ??= new ragdoll_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _RagdollOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StartDisabledOffset;
@@ -197,23 +203,29 @@ internal partial class CRagdollPropImpl : CBaseAnimGraphImpl, CRagdollProp
         }
     }
     private static nint? _LastPhysicsInfluenceTimeOffset;
+    private GameTime_tImpl? _LastPhysicsInfluenceTimeInstance;
 
     public GameTime_t LastPhysicsInfluenceTime
     {
         get
         {
             _LastPhysicsInfluenceTimeOffset = _LastPhysicsInfluenceTimeOffset ?? Schema.GetOffset(0x9505BA785B5C0E32);
-            return new GameTime_tImpl(_Handle + _LastPhysicsInfluenceTimeOffset!.Value);
+            var instance = _LastPhysicsInfluenceTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastPhysicsInfluenceTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FadeOutStartTimeOffset;
+    private GameTime_tImpl? _FadeOutStartTimeInstance;
 
     public GameTime_t FadeOutStartTime
     {
         get
         {
             _FadeOutStartTimeOffset = _FadeOutStartTimeOffset ?? Schema.GetOffset(0x9505BA78A63078C0);
-            return new GameTime_tImpl(_Handle + _FadeOutStartTimeOffset!.Value);
+            var instance = _FadeOutStartTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FadeOutStartTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FadeTimeOffset;
@@ -237,23 +249,29 @@ internal partial class CRagdollPropImpl : CBaseAnimGraphImpl, CRagdollProp
         }
     }
     private static nint? _AwakeTimeOffset;
+    private GameTime_tImpl? _AwakeTimeInstance;
 
     public GameTime_t AwakeTime
     {
         get
         {
             _AwakeTimeOffset = _AwakeTimeOffset ?? Schema.GetOffset(0x9505BA78D471FE9B);
-            return new GameTime_tImpl(_Handle + _AwakeTimeOffset!.Value);
+            var instance = _AwakeTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _AwakeTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LastOriginChangeTimeOffset;
+    private GameTime_tImpl? _LastOriginChangeTimeInstance;
 
     public GameTime_t LastOriginChangeTime
     {
         get
         {
             _LastOriginChangeTimeOffset = _LastOriginChangeTimeOffset ?? Schema.GetOffset(0x9505BA78B66C9A18);
-            return new GameTime_tImpl(_Handle + _LastOriginChangeTimeOffset!.Value);
+            var instance = _LastOriginChangeTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastOriginChangeTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StrOriginClassNameOffset;

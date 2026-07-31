@@ -47,13 +47,16 @@ internal partial class CLogicPlayerProxyImpl : CLogicalEntityImpl, CLogicPlayerP
         }
     }
     private static nint? _RequestedPlayerHealthOffset;
+    private SchemaUntypedField? _RequestedPlayerHealthInstance;
 
     public SchemaUntypedField RequestedPlayerHealth
     {
         get
         {
             _RequestedPlayerHealthOffset = _RequestedPlayerHealthOffset ?? Schema.GetOffset(0x81D444EBF1F83D58);
-            return new SchemaUntypedField(_Handle + _RequestedPlayerHealthOffset!.Value);
+            var instance = _RequestedPlayerHealthInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _RequestedPlayerHealthOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PlayerOffset;

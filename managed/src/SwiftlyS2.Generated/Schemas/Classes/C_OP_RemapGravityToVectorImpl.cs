@@ -17,23 +17,29 @@ internal partial class C_OP_RemapGravityToVectorImpl : CParticleFunctionOperator
     public C_OP_RemapGravityToVectorImpl(nint handle) : base(handle) { }
 
     private static nint? _Input1Offset;
+    private CPerParticleVecInputImpl? _Input1Instance;
 
     public CPerParticleVecInput Input1
     {
         get
         {
             _Input1Offset = _Input1Offset ?? Schema.GetOffset(0x3777A3A2E17F27DA);
-            return new CPerParticleVecInputImpl(_Handle + _Input1Offset!.Value);
+            var instance = _Input1Instance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _Input1Offset!.Value);
+            return instance;
         }
     }
     private static nint? _OutputFieldOffset;
+    private ParticleAttributeIndex_tImpl? _OutputFieldInstance;
 
     public ParticleAttributeIndex_t OutputField
     {
         get
         {
             _OutputFieldOffset = _OutputFieldOffset ?? Schema.GetOffset(0x3777A3A2324F6F74);
-            return new ParticleAttributeIndex_tImpl(_Handle + _OutputFieldOffset!.Value);
+            var instance = _OutputFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _OutputFieldOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SetMethodOffset;

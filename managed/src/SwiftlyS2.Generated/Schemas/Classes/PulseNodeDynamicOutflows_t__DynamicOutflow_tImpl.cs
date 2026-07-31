@@ -27,13 +27,16 @@ internal partial class PulseNodeDynamicOutflows_t__DynamicOutflow_tImpl : Schema
         }
     }
     private static nint? _ConnectionOffset;
+    private CPulse_OutflowConnectionImpl? _ConnectionInstance;
 
     public CPulse_OutflowConnection Connection
     {
         get
         {
             _ConnectionOffset = _ConnectionOffset ?? Schema.GetOffset(0x4ACC8D5D4CD5F59);
-            return new CPulse_OutflowConnectionImpl(_Handle + _ConnectionOffset!.Value);
+            var instance = _ConnectionInstance ??= new CPulse_OutflowConnectionImpl(0);
+            instance.DangerousSetHandle(_Handle + _ConnectionOffset!.Value);
+            return instance;
         }
     }
 

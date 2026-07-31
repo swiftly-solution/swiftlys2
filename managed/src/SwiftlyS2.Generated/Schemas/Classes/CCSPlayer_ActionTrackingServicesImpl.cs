@@ -37,23 +37,29 @@ internal partial class CCSPlayer_ActionTrackingServicesImpl : CPlayerPawnCompone
         }
     }
     private static nint? _WeaponPurchasesThisMatchOffset;
+    private WeaponPurchaseTracker_tImpl? _WeaponPurchasesThisMatchInstance;
 
     public WeaponPurchaseTracker_t WeaponPurchasesThisMatch
     {
         get
         {
             _WeaponPurchasesThisMatchOffset = _WeaponPurchasesThisMatchOffset ?? Schema.GetOffset(0xC890019D43F68EE0);
-            return new WeaponPurchaseTracker_tImpl(_Handle + _WeaponPurchasesThisMatchOffset!.Value);
+            var instance = _WeaponPurchasesThisMatchInstance ??= new WeaponPurchaseTracker_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _WeaponPurchasesThisMatchOffset!.Value);
+            return instance;
         }
     }
     private static nint? _WeaponPurchasesThisRoundOffset;
+    private WeaponPurchaseTracker_tImpl? _WeaponPurchasesThisRoundInstance;
 
     public WeaponPurchaseTracker_t WeaponPurchasesThisRound
     {
         get
         {
             _WeaponPurchasesThisRoundOffset = _WeaponPurchasesThisRoundOffset ?? Schema.GetOffset(0xC890019D7C64F835);
-            return new WeaponPurchaseTracker_tImpl(_Handle + _WeaponPurchasesThisRoundOffset!.Value);
+            var instance = _WeaponPurchasesThisRoundInstance ??= new WeaponPurchaseTracker_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _WeaponPurchasesThisRoundOffset!.Value);
+            return instance;
         }
     }
 

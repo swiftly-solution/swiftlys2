@@ -62,13 +62,16 @@ internal partial class CTriggerProximityImpl : CBaseTriggerImpl, CTriggerProximi
         }
     }
     private static nint? _NearestEntityDistanceOffset;
+    private SchemaUntypedField? _NearestEntityDistanceInstance;
 
     public SchemaUntypedField NearestEntityDistance
     {
         get
         {
             _NearestEntityDistanceOffset = _NearestEntityDistanceOffset ?? Schema.GetOffset(0x98F0621F28AD73D5);
-            return new SchemaUntypedField(_Handle + _NearestEntityDistanceOffset!.Value);
+            var instance = _NearestEntityDistanceInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _NearestEntityDistanceOffset!.Value);
+            return instance;
         }
     }
 

@@ -17,13 +17,16 @@ internal partial class FootFixedSettingsImpl : SchemaClass, FootFixedSettings
     public FootFixedSettingsImpl(nint handle) : base(handle) { }
 
     private static nint? _TraceSettingsOffset;
+    private TraceSettings_tImpl? _TraceSettingsInstance;
 
     public TraceSettings_t TraceSettings
     {
         get
         {
             _TraceSettingsOffset = _TraceSettingsOffset ?? Schema.GetOffset(0x3401F9D0115F2D3B);
-            return new TraceSettings_tImpl(_Handle + _TraceSettingsOffset!.Value);
+            var instance = _TraceSettingsInstance ??= new TraceSettings_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _TraceSettingsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FootBaseBindPosePositionMSOffset;

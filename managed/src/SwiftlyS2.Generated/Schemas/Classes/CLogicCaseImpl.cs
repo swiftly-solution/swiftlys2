@@ -16,9 +16,18 @@ internal partial class CLogicCaseImpl : CLogicalEntityImpl, CLogicCase
 {
     public CLogicCaseImpl(nint handle) : base(handle) { }
 
+    private static nint? _CaseOffset;
+    private SchemaStringFixedArray? _CaseInstance;
+
     public ISchemaStringFixedArray Case
     {
-        get => new SchemaStringFixedArray(_Handle, 0x4B6BB20CBD726255, 32, 8, 8);
+        get
+        {
+            _CaseOffset = _CaseOffset ?? Schema.GetOffset(0x4B6BB20CBD726255);
+            var instance = _CaseInstance ??= new SchemaStringFixedArray(0, 0x4B6BB20CBD726255, 32, 8, 8);
+            instance.DangerousSetHandle(_Handle + _CaseOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _ShuffleCasesOffset;
 
@@ -40,22 +49,43 @@ internal partial class CLogicCaseImpl : CLogicalEntityImpl, CLogicCase
             return ref _Handle.AsRef<int>(_LastShuffleCaseOffset!.Value);
         }
     }
+    private static nint? _UchShuffleCaseMapOffset;
+    private SchemaFixedArray<byte>? _UchShuffleCaseMapInstance;
+
     public ISchemaFixedArray<byte> UchShuffleCaseMap
     {
-        get => new SchemaFixedArray<byte>(_Handle, 0x4B6BB20CF9FC41AE, 32, 1, 1);
+        get
+        {
+            _UchShuffleCaseMapOffset = _UchShuffleCaseMapOffset ?? Schema.GetOffset(0x4B6BB20CF9FC41AE);
+            var instance = _UchShuffleCaseMapInstance ??= new SchemaFixedArray<byte>(0, 0x4B6BB20CF9FC41AE, 32, 1, 1);
+            instance.DangerousSetHandle(_Handle + _UchShuffleCaseMapOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _OnCaseOffset;
+    private SchemaFixedArray<CEntityIOOutput>? _OnCaseInstance;
+
     public ISchemaFixedArray<CEntityIOOutput> OnCase
     {
-        get => new SchemaFixedArray<CEntityIOOutput>(_Handle, 0x4B6BB20CF8743C7C, 32, 24, 8);
+        get
+        {
+            _OnCaseOffset = _OnCaseOffset ?? Schema.GetOffset(0x4B6BB20CF8743C7C);
+            var instance = _OnCaseInstance ??= new SchemaFixedArray<CEntityIOOutput>(0, 0x4B6BB20CF8743C7C, 32, 24, 8);
+            instance.DangerousSetHandle(_Handle + _OnCaseOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _OnDefaultOffset;
+    private SchemaUntypedField? _OnDefaultInstance;
 
     public SchemaUntypedField OnDefault
     {
         get
         {
             _OnDefaultOffset = _OnDefaultOffset ?? Schema.GetOffset(0x4B6BB20C4B03C3CD);
-            return new SchemaUntypedField(_Handle + _OnDefaultOffset!.Value);
+            var instance = _OnDefaultInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OnDefaultOffset!.Value);
+            return instance;
         }
     }
 

@@ -37,23 +37,29 @@ internal partial class constraint_hingeparams_tImpl : SchemaClass, constraint_hi
         }
     }
     private static nint? _HingeAxisOffset;
+    private constraint_axislimit_tImpl? _HingeAxisInstance;
 
     public constraint_axislimit_t HingeAxis
     {
         get
         {
             _HingeAxisOffset = _HingeAxisOffset ?? Schema.GetOffset(0x790804C33BD096FD);
-            return new constraint_axislimit_tImpl(_Handle + _HingeAxisOffset!.Value);
+            var instance = _HingeAxisInstance ??= new constraint_axislimit_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _HingeAxisOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ConstraintOffset;
+    private constraint_breakableparams_tImpl? _ConstraintInstance;
 
     public constraint_breakableparams_t Constraint
     {
         get
         {
             _ConstraintOffset = _ConstraintOffset ?? Schema.GetOffset(0x790804C3B822E25A);
-            return new constraint_breakableparams_tImpl(_Handle + _ConstraintOffset!.Value);
+            var instance = _ConstraintInstance ??= new constraint_breakableparams_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _ConstraintOffset!.Value);
+            return instance;
         }
     }
 

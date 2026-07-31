@@ -37,13 +37,16 @@ internal partial class CCSWeaponBaseVDataImpl : CBasePlayerWeaponVDataImpl, CCSW
         }
     }
     private static nint? _AnimSkeletonOffset;
+    private SchemaUntypedField? _AnimSkeletonInstance;
 
     public SchemaUntypedField AnimSkeleton
     {
         get
         {
             _AnimSkeletonOffset = _AnimSkeletonOffset ?? Schema.GetOffset(0x62FB770599001426);
-            return new SchemaUntypedField(_Handle + _AnimSkeletonOffset!.Value);
+            var instance = _AnimSkeletonInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _AnimSkeletonOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MuzzlePos0Offset;
@@ -67,13 +70,16 @@ internal partial class CCSWeaponBaseVDataImpl : CBasePlayerWeaponVDataImpl, CCSW
         }
     }
     private static nint? _TracerParticleOffset;
+    private SchemaUntypedField? _TracerParticleInstance;
 
     public SchemaUntypedField TracerParticle
     {
         get
         {
             _TracerParticleOffset = _TracerParticleOffset ?? Schema.GetOffset(0x62FB77052069597B);
-            return new SchemaUntypedField(_Handle + _TracerParticleOffset!.Value);
+            var instance = _TracerParticleInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _TracerParticleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _GearSlotOffset;
@@ -257,13 +263,16 @@ internal partial class CCSWeaponBaseVDataImpl : CBasePlayerWeaponVDataImpl, CCSW
         }
     }
     private static nint? _CycleTimeOffset;
+    private CFiringModeFloatImpl? _CycleTimeInstance;
 
     public CFiringModeFloat CycleTime
     {
         get
         {
             _CycleTimeOffset = _CycleTimeOffset ?? Schema.GetOffset(0x62FB77059EE036CE);
-            return new CFiringModeFloatImpl(_Handle + _CycleTimeOffset!.Value);
+            var instance = _CycleTimeInstance ??= new CFiringModeFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _CycleTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CycleTimeWhenInBurstModeOffset;
@@ -287,143 +296,185 @@ internal partial class CCSWeaponBaseVDataImpl : CBasePlayerWeaponVDataImpl, CCSW
         }
     }
     private static nint? _MaxSpeedOffset;
+    private CFiringModeFloatImpl? _MaxSpeedInstance;
 
     public CFiringModeFloat MaxSpeed
     {
         get
         {
             _MaxSpeedOffset = _MaxSpeedOffset ?? Schema.GetOffset(0x62FB7705EC4C9592);
-            return new CFiringModeFloatImpl(_Handle + _MaxSpeedOffset!.Value);
+            var instance = _MaxSpeedInstance ??= new CFiringModeFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _MaxSpeedOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SpreadOffset;
+    private CFiringModeFloatImpl? _SpreadInstance;
 
     public CFiringModeFloat Spread
     {
         get
         {
             _SpreadOffset = _SpreadOffset ?? Schema.GetOffset(0x62FB77059AE479A0);
-            return new CFiringModeFloatImpl(_Handle + _SpreadOffset!.Value);
+            var instance = _SpreadInstance ??= new CFiringModeFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _SpreadOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InaccuracyCrouchOffset;
+    private CFiringModeFloatImpl? _InaccuracyCrouchInstance;
 
     public CFiringModeFloat InaccuracyCrouch
     {
         get
         {
             _InaccuracyCrouchOffset = _InaccuracyCrouchOffset ?? Schema.GetOffset(0x62FB77058292DF17);
-            return new CFiringModeFloatImpl(_Handle + _InaccuracyCrouchOffset!.Value);
+            var instance = _InaccuracyCrouchInstance ??= new CFiringModeFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _InaccuracyCrouchOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InaccuracyStandOffset;
+    private CFiringModeFloatImpl? _InaccuracyStandInstance;
 
     public CFiringModeFloat InaccuracyStand
     {
         get
         {
             _InaccuracyStandOffset = _InaccuracyStandOffset ?? Schema.GetOffset(0x62FB77054F7B5FDF);
-            return new CFiringModeFloatImpl(_Handle + _InaccuracyStandOffset!.Value);
+            var instance = _InaccuracyStandInstance ??= new CFiringModeFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _InaccuracyStandOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InaccuracyJumpOffset;
+    private CFiringModeFloatImpl? _InaccuracyJumpInstance;
 
     public CFiringModeFloat InaccuracyJump
     {
         get
         {
             _InaccuracyJumpOffset = _InaccuracyJumpOffset ?? Schema.GetOffset(0x62FB7705C43E18E9);
-            return new CFiringModeFloatImpl(_Handle + _InaccuracyJumpOffset!.Value);
+            var instance = _InaccuracyJumpInstance ??= new CFiringModeFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _InaccuracyJumpOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InaccuracyLandOffset;
+    private CFiringModeFloatImpl? _InaccuracyLandInstance;
 
     public CFiringModeFloat InaccuracyLand
     {
         get
         {
             _InaccuracyLandOffset = _InaccuracyLandOffset ?? Schema.GetOffset(0x62FB77058A797810);
-            return new CFiringModeFloatImpl(_Handle + _InaccuracyLandOffset!.Value);
+            var instance = _InaccuracyLandInstance ??= new CFiringModeFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _InaccuracyLandOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InaccuracyLadderOffset;
+    private CFiringModeFloatImpl? _InaccuracyLadderInstance;
 
     public CFiringModeFloat InaccuracyLadder
     {
         get
         {
             _InaccuracyLadderOffset = _InaccuracyLadderOffset ?? Schema.GetOffset(0x62FB7705EAC7C4C5);
-            return new CFiringModeFloatImpl(_Handle + _InaccuracyLadderOffset!.Value);
+            var instance = _InaccuracyLadderInstance ??= new CFiringModeFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _InaccuracyLadderOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InaccuracyFireOffset;
+    private CFiringModeFloatImpl? _InaccuracyFireInstance;
 
     public CFiringModeFloat InaccuracyFire
     {
         get
         {
             _InaccuracyFireOffset = _InaccuracyFireOffset ?? Schema.GetOffset(0x62FB770598CB9215);
-            return new CFiringModeFloatImpl(_Handle + _InaccuracyFireOffset!.Value);
+            var instance = _InaccuracyFireInstance ??= new CFiringModeFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _InaccuracyFireOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InaccuracyMoveOffset;
+    private CFiringModeFloatImpl? _InaccuracyMoveInstance;
 
     public CFiringModeFloat InaccuracyMove
     {
         get
         {
             _InaccuracyMoveOffset = _InaccuracyMoveOffset ?? Schema.GetOffset(0x62FB7705724CFCB0);
-            return new CFiringModeFloatImpl(_Handle + _InaccuracyMoveOffset!.Value);
+            var instance = _InaccuracyMoveInstance ??= new CFiringModeFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _InaccuracyMoveOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RecoilAngleOffset;
+    private CFiringModeFloatImpl? _RecoilAngleInstance;
 
     public CFiringModeFloat RecoilAngle
     {
         get
         {
             _RecoilAngleOffset = _RecoilAngleOffset ?? Schema.GetOffset(0x62FB7705D60D8F48);
-            return new CFiringModeFloatImpl(_Handle + _RecoilAngleOffset!.Value);
+            var instance = _RecoilAngleInstance ??= new CFiringModeFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _RecoilAngleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RecoilAngleVarianceOffset;
+    private CFiringModeFloatImpl? _RecoilAngleVarianceInstance;
 
     public CFiringModeFloat RecoilAngleVariance
     {
         get
         {
             _RecoilAngleVarianceOffset = _RecoilAngleVarianceOffset ?? Schema.GetOffset(0x62FB77059780CA6B);
-            return new CFiringModeFloatImpl(_Handle + _RecoilAngleVarianceOffset!.Value);
+            var instance = _RecoilAngleVarianceInstance ??= new CFiringModeFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _RecoilAngleVarianceOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RecoilMagnitudeOffset;
+    private CFiringModeFloatImpl? _RecoilMagnitudeInstance;
 
     public CFiringModeFloat RecoilMagnitude
     {
         get
         {
             _RecoilMagnitudeOffset = _RecoilMagnitudeOffset ?? Schema.GetOffset(0x62FB77051FEEF3A5);
-            return new CFiringModeFloatImpl(_Handle + _RecoilMagnitudeOffset!.Value);
+            var instance = _RecoilMagnitudeInstance ??= new CFiringModeFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _RecoilMagnitudeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RecoilMagnitudeVarianceOffset;
+    private CFiringModeFloatImpl? _RecoilMagnitudeVarianceInstance;
 
     public CFiringModeFloat RecoilMagnitudeVariance
     {
         get
         {
             _RecoilMagnitudeVarianceOffset = _RecoilMagnitudeVarianceOffset ?? Schema.GetOffset(0x62FB77058FED537E);
-            return new CFiringModeFloatImpl(_Handle + _RecoilMagnitudeVarianceOffset!.Value);
+            var instance = _RecoilMagnitudeVarianceInstance ??= new CFiringModeFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _RecoilMagnitudeVarianceOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TracerFrequencyOffset;
+    private CFiringModeIntImpl? _TracerFrequencyInstance;
 
     public CFiringModeInt TracerFrequency
     {
         get
         {
             _TracerFrequencyOffset = _TracerFrequencyOffset ?? Schema.GetOffset(0x62FB7705E42D0FCE);
-            return new CFiringModeIntImpl(_Handle + _TracerFrequencyOffset!.Value);
+            var instance = _TracerFrequencyInstance ??= new CFiringModeIntImpl(0);
+            instance.DangerousSetHandle(_Handle + _TracerFrequencyOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InaccuracyJumpInitialOffset;

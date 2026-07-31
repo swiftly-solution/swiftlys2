@@ -62,23 +62,29 @@ internal partial class C_OP_MultiSegmentDisplaySnapshotGeneratorImpl : CParticle
         }
     }
     private static nint? _ValueOffset;
+    private CParticleCollectionFloatInputImpl? _ValueInstance;
 
     public CParticleCollectionFloatInput Value
     {
         get
         {
             _ValueOffset = _ValueOffset ?? Schema.GetOffset(0xAF1E9A288DFCB984);
-            return new CParticleCollectionFloatInputImpl(_Handle + _ValueOffset!.Value);
+            var instance = _ValueInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ValueOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ScollOffsetOffset;
+    private CParticleCollectionFloatInputImpl? _ScollOffsetInstance;
 
     public CParticleCollectionFloatInput ScollOffset
     {
         get
         {
             _ScollOffsetOffset = _ScollOffsetOffset ?? Schema.GetOffset(0xAF1E9A287C73B6E9);
-            return new CParticleCollectionFloatInputImpl(_Handle + _ScollOffsetOffset!.Value);
+            var instance = _ScollOffsetInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ScollOffsetOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SpecialCharListOffset;
@@ -92,63 +98,81 @@ internal partial class C_OP_MultiSegmentDisplaySnapshotGeneratorImpl : CParticle
         }
     }
     private static nint? _ColorUnlitOffset;
+    private CParticleCollectionVecInputImpl? _ColorUnlitInstance;
 
     public CParticleCollectionVecInput ColorUnlit
     {
         get
         {
             _ColorUnlitOffset = _ColorUnlitOffset ?? Schema.GetOffset(0xAF1E9A28C4809660);
-            return new CParticleCollectionVecInputImpl(_Handle + _ColorUnlitOffset!.Value);
+            var instance = _ColorUnlitInstance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ColorUnlitOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ColorLitOffset;
+    private CParticleCollectionVecInputImpl? _ColorLitInstance;
 
     public CParticleCollectionVecInput ColorLit
     {
         get
         {
             _ColorLitOffset = _ColorLitOffset ?? Schema.GetOffset(0xAF1E9A28A908C2C1);
-            return new CParticleCollectionVecInputImpl(_Handle + _ColorLitOffset!.Value);
+            var instance = _ColorLitInstance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ColorLitOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RadiusOffset;
+    private CParticleCollectionFloatInputImpl? _RadiusInstance;
 
     public CParticleCollectionFloatInput Radius
     {
         get
         {
             _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0xAF1E9A285ACFC08D);
-            return new CParticleCollectionFloatInputImpl(_Handle + _RadiusOffset!.Value);
+            var instance = _RadiusInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _RadiusOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SpacingOffset;
+    private CParticleCollectionFloatInputImpl? _SpacingInstance;
 
     public CParticleCollectionFloatInput Spacing
     {
         get
         {
             _SpacingOffset = _SpacingOffset ?? Schema.GetOffset(0xAF1E9A282B86F1BC);
-            return new CParticleCollectionFloatInputImpl(_Handle + _SpacingOffset!.Value);
+            var instance = _SpacingInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _SpacingOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MinCountOffset;
+    private CParticleCollectionFloatInputImpl? _MinCountInstance;
 
     public CParticleCollectionFloatInput MinCount
     {
         get
         {
             _MinCountOffset = _MinCountOffset ?? Schema.GetOffset(0xAF1E9A280C26E410);
-            return new CParticleCollectionFloatInputImpl(_Handle + _MinCountOffset!.Value);
+            var instance = _MinCountInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _MinCountOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MaxCountOffset;
+    private CParticleCollectionFloatInputImpl? _MaxCountInstance;
 
     public CParticleCollectionFloatInput MaxCount
     {
         get
         {
             _MaxCountOffset = _MaxCountOffset ?? Schema.GetOffset(0xAF1E9A28E9750CDE);
-            return new CParticleCollectionFloatInputImpl(_Handle + _MaxCountOffset!.Value);
+            var instance = _MaxCountInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _MaxCountOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PrependEmptyOffset;
@@ -162,13 +186,16 @@ internal partial class C_OP_MultiSegmentDisplaySnapshotGeneratorImpl : CParticle
         }
     }
     private static nint? _DigitsAfterDecimalOffset;
+    private CParticleCollectionFloatInputImpl? _DigitsAfterDecimalInstance;
 
     public CParticleCollectionFloatInput DigitsAfterDecimal
     {
         get
         {
             _DigitsAfterDecimalOffset = _DigitsAfterDecimalOffset ?? Schema.GetOffset(0xAF1E9A2806E992DC);
-            return new CParticleCollectionFloatInputImpl(_Handle + _DigitsAfterDecimalOffset!.Value);
+            var instance = _DigitsAfterDecimalInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _DigitsAfterDecimalOffset!.Value);
+            return instance;
         }
     }
 

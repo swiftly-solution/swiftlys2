@@ -27,33 +27,42 @@ internal partial class CParticleMassCalculationParametersImpl : SchemaClass, CPa
         }
     }
     private static nint? _RadiusOffset;
+    private CPerParticleFloatInputImpl? _RadiusInstance;
 
     public CPerParticleFloatInput Radius
     {
         get
         {
             _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0xAA3341F95ACFC08D);
-            return new CPerParticleFloatInputImpl(_Handle + _RadiusOffset!.Value);
+            var instance = _RadiusInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _RadiusOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NominalRadiusOffset;
+    private CPerParticleFloatInputImpl? _NominalRadiusInstance;
 
     public CPerParticleFloatInput NominalRadius
     {
         get
         {
             _NominalRadiusOffset = _NominalRadiusOffset ?? Schema.GetOffset(0xAA3341F9B6692A73);
-            return new CPerParticleFloatInputImpl(_Handle + _NominalRadiusOffset!.Value);
+            var instance = _NominalRadiusInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _NominalRadiusOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ScaleOffset;
+    private CPerParticleFloatInputImpl? _ScaleInstance;
 
     public CPerParticleFloatInput Scale
     {
         get
         {
             _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0xAA3341F9B731A42F);
-            return new CPerParticleFloatInputImpl(_Handle + _ScaleOffset!.Value);
+            var instance = _ScaleInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ScaleOffset!.Value);
+            return instance;
         }
     }
 

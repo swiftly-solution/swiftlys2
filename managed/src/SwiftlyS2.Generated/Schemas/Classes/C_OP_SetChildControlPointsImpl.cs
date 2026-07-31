@@ -47,13 +47,16 @@ internal partial class C_OP_SetChildControlPointsImpl : CParticleFunctionOperato
         }
     }
     private static nint? _FirstSourcePointOffset;
+    private CParticleCollectionFloatInputImpl? _FirstSourcePointInstance;
 
     public CParticleCollectionFloatInput FirstSourcePoint
     {
         get
         {
             _FirstSourcePointOffset = _FirstSourcePointOffset ?? Schema.GetOffset(0x421254139D7DC18E);
-            return new CParticleCollectionFloatInputImpl(_Handle + _FirstSourcePointOffset!.Value);
+            var instance = _FirstSourcePointInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _FirstSourcePointOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ReverseOffset;

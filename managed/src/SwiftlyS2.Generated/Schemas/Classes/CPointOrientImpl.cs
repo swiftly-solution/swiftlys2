@@ -82,13 +82,16 @@ internal partial class CPointOrientImpl : CBaseEntityImpl, CPointOrient
         }
     }
     private static nint? _LastGameTimeOffset;
+    private GameTime_tImpl? _LastGameTimeInstance;
 
     public GameTime_t LastGameTime
     {
         get
         {
             _LastGameTimeOffset = _LastGameTimeOffset ?? Schema.GetOffset(0x31E4EBC591D10404);
-            return new GameTime_tImpl(_Handle + _LastGameTimeOffset!.Value);
+            var instance = _LastGameTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastGameTimeOffset!.Value);
+            return instance;
         }
     }
 

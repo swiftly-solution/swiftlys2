@@ -97,13 +97,16 @@ internal partial class CTriggerFanImpl : CBaseTriggerImpl, CTriggerFan
         }
     }
     private static nint? _RampTimerOffset;
+    private CountdownTimerImpl? _RampTimerInstance;
 
     public CountdownTimer RampTimer
     {
         get
         {
             _RampTimerOffset = _RampTimerOffset ?? Schema.GetOffset(0x6A8B5C2B21725ED6);
-            return new CountdownTimerImpl(_Handle + _RampTimerOffset!.Value);
+            var instance = _RampTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _RampTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FanOriginWSOffset;

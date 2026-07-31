@@ -26,9 +26,18 @@ internal partial class SceneObject_tImpl : SchemaClass, SceneObject_t
             return ref _Handle.AsRef<uint>(_ObjectIDOffset!.Value);
         }
     }
+    private static nint? _TransformOffset;
+    private SchemaFixedArray<Vector4D>? _TransformInstance;
+
     public ISchemaFixedArray<Vector4D> Transform
     {
-        get => new SchemaFixedArray<Vector4D>(_Handle, 0xD71D9993EAAE256F, 3, 16, 4);
+        get
+        {
+            _TransformOffset = _TransformOffset ?? Schema.GetOffset(0xD71D9993EAAE256F);
+            var instance = _TransformInstance ??= new SchemaFixedArray<Vector4D>(0, 0xD71D9993EAAE256F, 3, 16, 4);
+            instance.DangerousSetHandle(_Handle + _TransformOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _FadeStartDistanceOffset;
 

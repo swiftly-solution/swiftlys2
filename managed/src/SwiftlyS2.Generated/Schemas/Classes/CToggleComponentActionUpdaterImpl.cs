@@ -17,13 +17,16 @@ internal partial class CToggleComponentActionUpdaterImpl : CAnimActionUpdaterImp
     public CToggleComponentActionUpdaterImpl(nint handle) : base(handle) { }
 
     private static nint? _ComponentIDOffset;
+    private AnimComponentIDImpl? _ComponentIDInstance;
 
     public AnimComponentID ComponentID
     {
         get
         {
             _ComponentIDOffset = _ComponentIDOffset ?? Schema.GetOffset(0x4641AA28C1B9267D);
-            return new AnimComponentIDImpl(_Handle + _ComponentIDOffset!.Value);
+            var instance = _ComponentIDInstance ??= new AnimComponentIDImpl(0);
+            instance.DangerousSetHandle(_Handle + _ComponentIDOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SetEnabledOffset;

@@ -17,33 +17,42 @@ internal partial class C_OP_RenderCablesImpl : CParticleFunctionRendererImpl, C_
     public C_OP_RenderCablesImpl(nint handle) : base(handle) { }
 
     private static nint? _RadiusScaleOffset;
+    private CParticleCollectionFloatInputImpl? _RadiusScaleInstance;
 
     public CParticleCollectionFloatInput RadiusScale
     {
         get
         {
             _RadiusScaleOffset = _RadiusScaleOffset ?? Schema.GetOffset(0x16498877A7A20159);
-            return new CParticleCollectionFloatInputImpl(_Handle + _RadiusScaleOffset!.Value);
+            var instance = _RadiusScaleInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _RadiusScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AlphaScaleOffset;
+    private CParticleCollectionFloatInputImpl? _AlphaScaleInstance;
 
     public CParticleCollectionFloatInput AlphaScale
     {
         get
         {
             _AlphaScaleOffset = _AlphaScaleOffset ?? Schema.GetOffset(0x16498877EC6D3C25);
-            return new CParticleCollectionFloatInputImpl(_Handle + _AlphaScaleOffset!.Value);
+            var instance = _AlphaScaleInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _AlphaScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ColorScaleOffset;
+    private CParticleCollectionVecInputImpl? _ColorScaleInstance;
 
     public CParticleCollectionVecInput ColorScale
     {
         get
         {
             _ColorScaleOffset = _ColorScaleOffset ?? Schema.GetOffset(0x164988779F9BB8BA);
-            return new CParticleCollectionVecInputImpl(_Handle + _ColorScaleOffset!.Value);
+            var instance = _ColorScaleInstance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ColorScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ColorBlendTypeOffset;
@@ -77,63 +86,81 @@ internal partial class C_OP_RenderCablesImpl : CParticleFunctionRendererImpl, C_
         }
     }
     private static nint? _TextureRepeatsPerSegmentOffset;
+    private CParticleCollectionFloatInputImpl? _TextureRepeatsPerSegmentInstance;
 
     public CParticleCollectionFloatInput TextureRepeatsPerSegment
     {
         get
         {
             _TextureRepeatsPerSegmentOffset = _TextureRepeatsPerSegmentOffset ?? Schema.GetOffset(0x164988774C265576);
-            return new CParticleCollectionFloatInputImpl(_Handle + _TextureRepeatsPerSegmentOffset!.Value);
+            var instance = _TextureRepeatsPerSegmentInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _TextureRepeatsPerSegmentOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TextureRepeatsCircumferenceOffset;
+    private CParticleCollectionFloatInputImpl? _TextureRepeatsCircumferenceInstance;
 
     public CParticleCollectionFloatInput TextureRepeatsCircumference
     {
         get
         {
             _TextureRepeatsCircumferenceOffset = _TextureRepeatsCircumferenceOffset ?? Schema.GetOffset(0x1649887730DF1DF3);
-            return new CParticleCollectionFloatInputImpl(_Handle + _TextureRepeatsCircumferenceOffset!.Value);
+            var instance = _TextureRepeatsCircumferenceInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _TextureRepeatsCircumferenceOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ColorMapOffsetVOffset;
+    private CParticleCollectionFloatInputImpl? _ColorMapOffsetVInstance;
 
     public CParticleCollectionFloatInput ColorMapOffsetV
     {
         get
         {
             _ColorMapOffsetVOffset = _ColorMapOffsetVOffset ?? Schema.GetOffset(0x164988773012E667);
-            return new CParticleCollectionFloatInputImpl(_Handle + _ColorMapOffsetVOffset!.Value);
+            var instance = _ColorMapOffsetVInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ColorMapOffsetVOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ColorMapOffsetUOffset;
+    private CParticleCollectionFloatInputImpl? _ColorMapOffsetUInstance;
 
     public CParticleCollectionFloatInput ColorMapOffsetU
     {
         get
         {
             _ColorMapOffsetUOffset = _ColorMapOffsetUOffset ?? Schema.GetOffset(0x164988773112E7FA);
-            return new CParticleCollectionFloatInputImpl(_Handle + _ColorMapOffsetUOffset!.Value);
+            var instance = _ColorMapOffsetUInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ColorMapOffsetUOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NormalMapOffsetVOffset;
+    private CParticleCollectionFloatInputImpl? _NormalMapOffsetVInstance;
 
     public CParticleCollectionFloatInput NormalMapOffsetV
     {
         get
         {
             _NormalMapOffsetVOffset = _NormalMapOffsetVOffset ?? Schema.GetOffset(0x164988775228495D);
-            return new CParticleCollectionFloatInputImpl(_Handle + _NormalMapOffsetVOffset!.Value);
+            var instance = _NormalMapOffsetVInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _NormalMapOffsetVOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NormalMapOffsetUOffset;
+    private CParticleCollectionFloatInputImpl? _NormalMapOffsetUInstance;
 
     public CParticleCollectionFloatInput NormalMapOffsetU
     {
         get
         {
             _NormalMapOffsetUOffset = _NormalMapOffsetUOffset ?? Schema.GetOffset(0x164988774F2844A4);
-            return new CParticleCollectionFloatInputImpl(_Handle + _NormalMapOffsetUOffset!.Value);
+            var instance = _NormalMapOffsetUInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _NormalMapOffsetUOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DrawCableCapsOffset;
@@ -227,13 +254,16 @@ internal partial class C_OP_RenderCablesImpl : CParticleFunctionRendererImpl, C_
         }
     }
     private static nint? _LightingTransformOffset;
+    private CParticleTransformInputImpl? _LightingTransformInstance;
 
     public CParticleTransformInput LightingTransform
     {
         get
         {
             _LightingTransformOffset = _LightingTransformOffset ?? Schema.GetOffset(0x164988776557F58F);
-            return new CParticleTransformInputImpl(_Handle + _LightingTransformOffset!.Value);
+            var instance = _LightingTransformInstance ??= new CParticleTransformInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _LightingTransformOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MaterialFloatVarsOffset;

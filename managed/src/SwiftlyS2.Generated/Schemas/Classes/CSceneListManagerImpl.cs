@@ -26,13 +26,31 @@ internal partial class CSceneListManagerImpl : CLogicalEntityImpl, CSceneListMan
             return ref _Handle.AsRef<CUtlVector<CHandle<CSceneListManager>>>(_ListManagersOffset!.Value);
         }
     }
+    private static nint? _ScenesOffset;
+    private SchemaStringFixedArray? _ScenesInstance;
+
     public ISchemaStringFixedArray Scenes
     {
-        get => new SchemaStringFixedArray(_Handle, 0x6DF51C6D967363E8, 16, 8, 8);
+        get
+        {
+            _ScenesOffset = _ScenesOffset ?? Schema.GetOffset(0x6DF51C6D967363E8);
+            var instance = _ScenesInstance ??= new SchemaStringFixedArray(0, 0x6DF51C6D967363E8, 16, 8, 8);
+            instance.DangerousSetHandle(_Handle + _ScenesOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _Scenes1Offset;
+    private SchemaFixedArray<CHandle<CBaseEntity>>? _Scenes1Instance;
+
     public ISchemaFixedArray<CHandle<CBaseEntity>> Scenes1
     {
-        get => new SchemaFixedArray<CHandle<CBaseEntity>>(_Handle, 0x6DF51C6D2B7EE872, 16, 4, 4);
+        get
+        {
+            _Scenes1Offset = _Scenes1Offset ?? Schema.GetOffset(0x6DF51C6D2B7EE872);
+            var instance = _Scenes1Instance ??= new SchemaFixedArray<CHandle<CBaseEntity>>(0, 0x6DF51C6D2B7EE872, 16, 4, 4);
+            instance.DangerousSetHandle(_Handle + _Scenes1Offset!.Value);
+            return instance;
+        }
     }
 
 }

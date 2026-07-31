@@ -17,43 +17,55 @@ internal partial class CPulseGraphDefImpl : SchemaClass, CPulseGraphDef
     public CPulseGraphDefImpl(nint handle) : base(handle) { }
 
     private static nint? _DomainIdentifierOffset;
+    private SchemaUntypedField? _DomainIdentifierInstance;
 
     public SchemaUntypedField DomainIdentifier
     {
         get
         {
             _DomainIdentifierOffset = _DomainIdentifierOffset ?? Schema.GetOffset(0x2A792CD89A57EDFA);
-            return new SchemaUntypedField(_Handle + _DomainIdentifierOffset!.Value);
+            var instance = _DomainIdentifierInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _DomainIdentifierOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DomainSubTypeOffset;
+    private SchemaUntypedField? _DomainSubTypeInstance;
 
     public SchemaUntypedField DomainSubType
     {
         get
         {
             _DomainSubTypeOffset = _DomainSubTypeOffset ?? Schema.GetOffset(0x2A792CD83A580FB9);
-            return new SchemaUntypedField(_Handle + _DomainSubTypeOffset!.Value);
+            var instance = _DomainSubTypeInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _DomainSubTypeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ParentMapNameOffset;
+    private SchemaUntypedField? _ParentMapNameInstance;
 
     public SchemaUntypedField ParentMapName
     {
         get
         {
             _ParentMapNameOffset = _ParentMapNameOffset ?? Schema.GetOffset(0x2A792CD8A9A81AA2);
-            return new SchemaUntypedField(_Handle + _ParentMapNameOffset!.Value);
+            var instance = _ParentMapNameInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ParentMapNameOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ParentXmlNameOffset;
+    private SchemaUntypedField? _ParentXmlNameInstance;
 
     public SchemaUntypedField ParentXmlName
     {
         get
         {
             _ParentXmlNameOffset = _ParentXmlNameOffset ?? Schema.GetOffset(0x2A792CD80689878D);
-            return new SchemaUntypedField(_Handle + _ParentXmlNameOffset!.Value);
+            var instance = _ParentXmlNameInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ParentXmlNameOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ChunksOffset;

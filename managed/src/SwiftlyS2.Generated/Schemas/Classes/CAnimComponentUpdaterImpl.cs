@@ -32,13 +32,16 @@ internal partial class CAnimComponentUpdaterImpl : SchemaClass, CAnimComponentUp
         }
     }
     private static nint? _IdOffset;
+    private AnimComponentIDImpl? _IdInstance;
 
     public AnimComponentID Id
     {
         get
         {
             _IdOffset = _IdOffset ?? Schema.GetOffset(0x3E0F51C7B4B6E980);
-            return new AnimComponentIDImpl(_Handle + _IdOffset!.Value);
+            var instance = _IdInstance ??= new AnimComponentIDImpl(0);
+            instance.DangerousSetHandle(_Handle + _IdOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NetworkModeOffset;

@@ -57,13 +57,16 @@ internal partial class VMixDualCompressorDesc_tImpl : SchemaClass, VMixDualCompr
         }
     }
     private static nint? _BandDescOffset;
+    private VMixDynamicsBand_tImpl? _BandDescInstance;
 
     public VMixDynamicsBand_t BandDesc
     {
         get
         {
             _BandDescOffset = _BandDescOffset ?? Schema.GetOffset(0x6B9BDFD804203F47);
-            return new VMixDynamicsBand_tImpl(_Handle + _BandDescOffset!.Value);
+            var instance = _BandDescInstance ??= new VMixDynamicsBand_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _BandDescOffset!.Value);
+            return instance;
         }
     }
 

@@ -17,6 +17,7 @@ internal partial class EventBugBugComplete_tImpl : SchemaClass, EventBugBugCompl
     public EventBugBugComplete_tImpl(nint handle) : base(handle) { }
 
     private static nint? _PayloadOffset;
+    private EventBugBug_tImpl? _PayloadInstance;
 
     public EventBugBug_t? Payload
     {
@@ -24,7 +25,10 @@ internal partial class EventBugBugComplete_tImpl : SchemaClass, EventBugBugCompl
         {
             _PayloadOffset = _PayloadOffset ?? Schema.GetOffset(0x55D3BCF778E9157F);
             var ptr = _Handle.Read<nint>(_PayloadOffset!.Value);
-            return ptr.IsValidPtr() ? new EventBugBug_tImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _PayloadInstance ??= new EventBugBug_tImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
 

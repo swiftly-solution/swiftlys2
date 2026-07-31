@@ -87,13 +87,16 @@ internal partial class vphysics_save_ragdoll_control_tImpl : SchemaClass, vphysi
         }
     }
     private static nint? _AngularVelocityAccumulatorOffset;
+    private SchemaUntypedField? _AngularVelocityAccumulatorInstance;
 
     public SchemaUntypedField AngularVelocityAccumulator
     {
         get
         {
             _AngularVelocityAccumulatorOffset = _AngularVelocityAccumulatorOffset ?? Schema.GetOffset(0x72246FEF6A0C2134);
-            return new SchemaUntypedField(_Handle + _AngularVelocityAccumulatorOffset!.Value);
+            var instance = _AngularVelocityAccumulatorInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _AngularVelocityAccumulatorOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ForceAccumulatorOffset;

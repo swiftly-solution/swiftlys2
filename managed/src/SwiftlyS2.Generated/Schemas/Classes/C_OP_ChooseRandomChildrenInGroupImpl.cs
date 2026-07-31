@@ -27,13 +27,16 @@ internal partial class C_OP_ChooseRandomChildrenInGroupImpl : CParticleFunctionP
         }
     }
     private static nint? _NumberOfChildrenOffset;
+    private CParticleCollectionFloatInputImpl? _NumberOfChildrenInstance;
 
     public CParticleCollectionFloatInput NumberOfChildren
     {
         get
         {
             _NumberOfChildrenOffset = _NumberOfChildrenOffset ?? Schema.GetOffset(0xF79CD8160275D868);
-            return new CParticleCollectionFloatInputImpl(_Handle + _NumberOfChildrenOffset!.Value);
+            var instance = _NumberOfChildrenInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _NumberOfChildrenOffset!.Value);
+            return instance;
         }
     }
 

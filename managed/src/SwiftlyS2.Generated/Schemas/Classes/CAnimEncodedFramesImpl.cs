@@ -57,13 +57,16 @@ internal partial class CAnimEncodedFramesImpl : SchemaClass, CAnimEncodedFrames
         }
     }
     private static nint? _UsageDifferencesOffset;
+    private CAnimEncodeDifferenceImpl? _UsageDifferencesInstance;
 
     public CAnimEncodeDifference UsageDifferences
     {
         get
         {
             _UsageDifferencesOffset = _UsageDifferencesOffset ?? Schema.GetOffset(0x63992F5D27B13638);
-            return new CAnimEncodeDifferenceImpl(_Handle + _UsageDifferencesOffset!.Value);
+            var instance = _UsageDifferencesInstance ??= new CAnimEncodeDifferenceImpl(0);
+            instance.DangerousSetHandle(_Handle + _UsageDifferencesOffset!.Value);
+            return instance;
         }
     }
 

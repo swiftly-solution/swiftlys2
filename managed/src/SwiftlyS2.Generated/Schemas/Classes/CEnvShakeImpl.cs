@@ -72,23 +72,29 @@ internal partial class CEnvShakeImpl : CPointEntityImpl, CEnvShake
         }
     }
     private static nint? _StopTimeOffset;
+    private GameTime_tImpl? _StopTimeInstance;
 
     public GameTime_t StopTime
     {
         get
         {
             _StopTimeOffset = _StopTimeOffset ?? Schema.GetOffset(0x10FEA9456BFFEDC4);
-            return new GameTime_tImpl(_Handle + _StopTimeOffset!.Value);
+            var instance = _StopTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _StopTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NextShakeOffset;
+    private GameTime_tImpl? _NextShakeInstance;
 
     public GameTime_t NextShake
     {
         get
         {
             _NextShakeOffset = _NextShakeOffset ?? Schema.GetOffset(0x10FEA94563E0833E);
-            return new GameTime_tImpl(_Handle + _NextShakeOffset!.Value);
+            var instance = _NextShakeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NextShakeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CurrentAmpOffset;
@@ -112,6 +118,7 @@ internal partial class CEnvShakeImpl : CPointEntityImpl, CEnvShake
         }
     }
     private static nint? _ShakeControllerOffset;
+    private IPhysicsMotionControllerImpl? _ShakeControllerInstance;
 
     public IPhysicsMotionController? ShakeController
     {
@@ -119,17 +126,23 @@ internal partial class CEnvShakeImpl : CPointEntityImpl, CEnvShake
         {
             _ShakeControllerOffset = _ShakeControllerOffset ?? Schema.GetOffset(0x10FEA9457B0190A7);
             var ptr = _Handle.Read<nint>(_ShakeControllerOffset!.Value);
-            return ptr.IsValidPtr() ? new IPhysicsMotionControllerImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _ShakeControllerInstance ??= new IPhysicsMotionControllerImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _ShakeCallbackOffset;
+    private CPhysicsShakeImpl? _ShakeCallbackInstance;
 
     public CPhysicsShake ShakeCallback
     {
         get
         {
             _ShakeCallbackOffset = _ShakeCallbackOffset ?? Schema.GetOffset(0x10FEA945C4E1E076);
-            return new CPhysicsShakeImpl(_Handle + _ShakeCallbackOffset!.Value);
+            var instance = _ShakeCallbackInstance ??= new CPhysicsShakeImpl(0);
+            instance.DangerousSetHandle(_Handle + _ShakeCallbackOffset!.Value);
+            return instance;
         }
     }
 

@@ -17,13 +17,16 @@ internal partial class CNmFloatRangeComparisonNode__CDefinitionImpl : CNmBoolVal
     public CNmFloatRangeComparisonNode__CDefinitionImpl(nint handle) : base(handle) { }
 
     private static nint? _RangeOffset;
+    private SchemaUntypedField? _RangeInstance;
 
     public SchemaUntypedField Range
     {
         get
         {
             _RangeOffset = _RangeOffset ?? Schema.GetOffset(0x6F364CB3D639CF2);
-            return new SchemaUntypedField(_Handle + _RangeOffset!.Value);
+            var instance = _RangeInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _RangeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InputValueNodeIdxOffset;

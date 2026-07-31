@@ -77,13 +77,16 @@ internal partial class CSchemaSystemInternalRegistrationImpl : SchemaClass, CSch
         }
     }
     private static nint? _RotationVectorOffset;
+    private SchemaUntypedField? _RotationVectorInstance;
 
     public SchemaUntypedField RotationVector
     {
         get
         {
             _RotationVectorOffset = _RotationVectorOffset ?? Schema.GetOffset(0xDDD6CA30D5A2443C);
-            return new SchemaUntypedField(_Handle + _RotationVectorOffset!.Value);
+            var instance = _RotationVectorInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _RotationVectorOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RadianEulerOffset;
@@ -97,13 +100,16 @@ internal partial class CSchemaSystemInternalRegistrationImpl : SchemaClass, CSch
         }
     }
     private static nint? _DegreeEulerOffset;
+    private SchemaUntypedField? _DegreeEulerInstance;
 
     public SchemaUntypedField DegreeEuler
     {
         get
         {
             _DegreeEulerOffset = _DegreeEulerOffset ?? Schema.GetOffset(0xDDD6CA30FCD6D92E);
-            return new SchemaUntypedField(_Handle + _DegreeEulerOffset!.Value);
+            var instance = _DegreeEulerInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _DegreeEulerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _QuaternionStorageOffset;
@@ -167,6 +173,7 @@ internal partial class CSchemaSystemInternalRegistrationImpl : SchemaClass, CSch
         }
     }
     private static nint? _KeyValuesOffset;
+    private SchemaUntypedField? _KeyValuesInstance;
 
     public SchemaUntypedField? KeyValues
     {
@@ -174,7 +181,10 @@ internal partial class CSchemaSystemInternalRegistrationImpl : SchemaClass, CSch
         {
             _KeyValuesOffset = _KeyValuesOffset ?? Schema.GetOffset(0xDDD6CA3011F5FBEC);
             var ptr = _Handle.Read<nint>(_KeyValuesOffset!.Value);
-            return ptr.IsValidPtr() ? new SchemaUntypedField(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _KeyValuesInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _CUtlBinaryBlockOffset;
@@ -203,13 +213,16 @@ internal partial class CSchemaSystemInternalRegistrationImpl : SchemaClass, CSch
         }
     }
     private static nint? _CUtlSymbolOffset;
+    private SchemaUntypedField? _CUtlSymbolInstance;
 
     public SchemaUntypedField CUtlSymbol
     {
         get
         {
             _CUtlSymbolOffset = _CUtlSymbolOffset ?? Schema.GetOffset(0xDDD6CA30EA008FA9);
-            return new SchemaUntypedField(_Handle + _CUtlSymbolOffset!.Value);
+            var instance = _CUtlSymbolInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _CUtlSymbolOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StringTokenOffset;
@@ -223,33 +236,42 @@ internal partial class CSchemaSystemInternalRegistrationImpl : SchemaClass, CSch
         }
     }
     private static nint? _StringTokenWithStorageOffset;
+    private SchemaUntypedField? _StringTokenWithStorageInstance;
 
     public SchemaUntypedField StringTokenWithStorage
     {
         get
         {
             _StringTokenWithStorageOffset = _StringTokenWithStorageOffset ?? Schema.GetOffset(0xDDD6CA30A8DD475A);
-            return new SchemaUntypedField(_Handle + _StringTokenWithStorageOffset!.Value);
+            var instance = _StringTokenWithStorageInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _StringTokenWithStorageOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ResourceTypesOffset;
+    private SchemaUntypedField? _ResourceTypesInstance;
 
     public SchemaUntypedField ResourceTypes
     {
         get
         {
             _ResourceTypesOffset = _ResourceTypesOffset ?? Schema.GetOffset(0xDDD6CA30410F830A);
-            return new SchemaUntypedField(_Handle + _ResourceTypesOffset!.Value);
+            var instance = _ResourceTypesInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ResourceTypesOffset!.Value);
+            return instance;
         }
     }
     private static nint? _KV3Offset;
+    private SchemaUntypedField? _KV3Instance;
 
     public SchemaUntypedField KV3
     {
         get
         {
             _KV3Offset = _KV3Offset ?? Schema.GetOffset(0xDDD6CA302E1AEFC5);
-            return new SchemaUntypedField(_Handle + _KV3Offset!.Value);
+            var instance = _KV3Instance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _KV3Offset!.Value);
+            return instance;
         }
     }
 

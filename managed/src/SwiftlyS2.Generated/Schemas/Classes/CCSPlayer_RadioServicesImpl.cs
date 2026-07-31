@@ -17,38 +17,56 @@ internal partial class CCSPlayer_RadioServicesImpl : CPlayerPawnComponentImpl, C
     public CCSPlayer_RadioServicesImpl(nint handle) : base(handle) { }
 
     private static nint? _GotHostageTalkTimerOffset;
+    private GameTime_tImpl? _GotHostageTalkTimerInstance;
 
     public GameTime_t GotHostageTalkTimer
     {
         get
         {
             _GotHostageTalkTimerOffset = _GotHostageTalkTimerOffset ?? Schema.GetOffset(0x8E7F7B35729FE1A3);
-            return new GameTime_tImpl(_Handle + _GotHostageTalkTimerOffset!.Value);
+            var instance = _GotHostageTalkTimerInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _GotHostageTalkTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DefusingTalkTimerOffset;
+    private GameTime_tImpl? _DefusingTalkTimerInstance;
 
     public GameTime_t DefusingTalkTimer
     {
         get
         {
             _DefusingTalkTimerOffset = _DefusingTalkTimerOffset ?? Schema.GetOffset(0x8E7F7B355AF7F835);
-            return new GameTime_tImpl(_Handle + _DefusingTalkTimerOffset!.Value);
+            var instance = _DefusingTalkTimerInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _DefusingTalkTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _C4PlantTalkTimerOffset;
+    private GameTime_tImpl? _C4PlantTalkTimerInstance;
 
     public GameTime_t C4PlantTalkTimer
     {
         get
         {
             _C4PlantTalkTimerOffset = _C4PlantTalkTimerOffset ?? Schema.GetOffset(0x8E7F7B35CE58ABD4);
-            return new GameTime_tImpl(_Handle + _C4PlantTalkTimerOffset!.Value);
+            var instance = _C4PlantTalkTimerInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _C4PlantTalkTimerOffset!.Value);
+            return instance;
         }
     }
+    private static nint? _RadioTokenSlotsOffset;
+    private SchemaClassFixedArray<GameTime_t>? _RadioTokenSlotsInstance;
+
     public ISchemaClassFixedArray<GameTime_t> RadioTokenSlots
     {
-        get => new SchemaClassFixedArray<GameTime_t>(_Handle, 0x8E7F7B356FB722D0, 3, 4, 4);
+        get
+        {
+            _RadioTokenSlotsOffset = _RadioTokenSlotsOffset ?? Schema.GetOffset(0x8E7F7B356FB722D0);
+            var instance = _RadioTokenSlotsInstance ??= new SchemaClassFixedArray<GameTime_t>(0, 0x8E7F7B356FB722D0, 3, 4, 4);
+            instance.DangerousSetHandle(_Handle + _RadioTokenSlotsOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _IgnoreRadioOffset;
 

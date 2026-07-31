@@ -207,13 +207,16 @@ internal partial class CDecalInstanceImpl : SchemaClass, CDecalInstance
         }
     }
     private static nint? _PlaceTimeOffset;
+    private GameTime_tImpl? _PlaceTimeInstance;
 
     public GameTime_t PlaceTime
     {
         get
         {
             _PlaceTimeOffset = _PlaceTimeOffset ?? Schema.GetOffset(0x88CA447C1103AE77);
-            return new GameTime_tImpl(_Handle + _PlaceTimeOffset!.Value);
+            var instance = _PlaceTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _PlaceTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FadeStartTimeOffset;

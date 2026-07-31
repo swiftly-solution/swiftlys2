@@ -77,13 +77,16 @@ internal partial class CFishPoolImpl : CBaseEntityImpl, CFishPool
         }
     }
     private static nint? _VisTimerOffset;
+    private CountdownTimerImpl? _VisTimerInstance;
 
     public CountdownTimer VisTimer
     {
         get
         {
             _VisTimerOffset = _VisTimerOffset ?? Schema.GetOffset(0x1B71368AC8E45FB6);
-            return new CountdownTimerImpl(_Handle + _VisTimerOffset!.Value);
+            var instance = _VisTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _VisTimerOffset!.Value);
+            return instance;
         }
     }
 

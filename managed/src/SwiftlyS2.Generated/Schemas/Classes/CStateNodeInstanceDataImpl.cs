@@ -17,13 +17,16 @@ internal partial class CStateNodeInstanceDataImpl : SchemaClass, CStateNodeInsta
     public CStateNodeInstanceDataImpl(nint handle) : base(handle) { }
 
     private static nint? _StateWeightsOffset;
+    private SchemaUntypedField? _StateWeightsInstance;
 
     public SchemaUntypedField StateWeights
     {
         get
         {
             _StateWeightsOffset = _StateWeightsOffset ?? Schema.GetOffset(0x6EAD9ECCC8386A37);
-            return new SchemaUntypedField(_Handle + _StateWeightsOffset!.Value);
+            var instance = _StateWeightsInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _StateWeightsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TransitionVelocityDeltaWSOffset;
@@ -37,23 +40,29 @@ internal partial class CStateNodeInstanceDataImpl : SchemaClass, CStateNodeInsta
         }
     }
     private static nint? _CurrentStateStartTimeOffset;
+    private SchemaUntypedField? _CurrentStateStartTimeInstance;
 
     public SchemaUntypedField CurrentStateStartTime
     {
         get
         {
             _CurrentStateStartTimeOffset = _CurrentStateStartTimeOffset ?? Schema.GetOffset(0x6EAD9ECCEE295544);
-            return new SchemaUntypedField(_Handle + _CurrentStateStartTimeOffset!.Value);
+            var instance = _CurrentStateStartTimeInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _CurrentStateStartTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ResetCountOffset;
+    private SchemaUntypedField? _ResetCountInstance;
 
     public SchemaUntypedField ResetCount
     {
         get
         {
             _ResetCountOffset = _ResetCountOffset ?? Schema.GetOffset(0x6EAD9ECC89B18BCF);
-            return new SchemaUntypedField(_Handle + _ResetCountOffset!.Value);
+            var instance = _ResetCountInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ResetCountOffset!.Value);
+            return instance;
         }
     }
 

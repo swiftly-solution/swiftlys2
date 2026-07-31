@@ -17,13 +17,16 @@ internal partial class CSimpleSimTimerImpl : SchemaClass, CSimpleSimTimer
     public CSimpleSimTimerImpl(nint handle) : base(handle) { }
 
     private static nint? _NextOffset;
+    private GameTime_tImpl? _NextInstance;
 
     public GameTime_t Next
     {
         get
         {
             _NextOffset = _NextOffset ?? Schema.GetOffset(0x4169D31C3BE2574E);
-            return new GameTime_tImpl(_Handle + _NextOffset!.Value);
+            var instance = _NextInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NextOffset!.Value);
+            return instance;
         }
     }
     private static nint? _WorldGroupIdOffset;

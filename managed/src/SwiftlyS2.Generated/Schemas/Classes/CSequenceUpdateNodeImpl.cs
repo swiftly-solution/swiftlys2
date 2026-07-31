@@ -17,13 +17,16 @@ internal partial class CSequenceUpdateNodeImpl : CSequenceUpdateNodeBaseImpl, CS
     public CSequenceUpdateNodeImpl(nint handle) : base(handle) { }
 
     private static nint? _SequenceOffset;
+    private HSequenceImpl? _SequenceInstance;
 
     public HSequence Sequence
     {
         get
         {
             _SequenceOffset = _SequenceOffset ?? Schema.GetOffset(0xB5F91396E0A0598E);
-            return new HSequenceImpl(_Handle + _SequenceOffset!.Value);
+            var instance = _SequenceInstance ??= new HSequenceImpl(0);
+            instance.DangerousSetHandle(_Handle + _SequenceOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DurationOffset;
@@ -37,13 +40,16 @@ internal partial class CSequenceUpdateNodeImpl : CSequenceUpdateNodeBaseImpl, CS
         }
     }
     private static nint? _ParamSpansOffset;
+    private CParamSpanUpdaterImpl? _ParamSpansInstance;
 
     public CParamSpanUpdater ParamSpans
     {
         get
         {
             _ParamSpansOffset = _ParamSpansOffset ?? Schema.GetOffset(0xB5F91396DAC91553);
-            return new CParamSpanUpdaterImpl(_Handle + _ParamSpansOffset!.Value);
+            var instance = _ParamSpansInstance ??= new CParamSpanUpdaterImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamSpansOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TagsOffset;

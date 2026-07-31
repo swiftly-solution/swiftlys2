@@ -37,13 +37,16 @@ internal partial class C_INIT_SetHitboxToClosestImpl : CParticleFunctionInitiali
         }
     }
     private static nint? _HitBoxScaleOffset;
+    private CParticleCollectionVecInputImpl? _HitBoxScaleInstance;
 
     public CParticleCollectionVecInput HitBoxScale
     {
         get
         {
             _HitBoxScaleOffset = _HitBoxScaleOffset ?? Schema.GetOffset(0x10F3322C58EE3FB7);
-            return new CParticleCollectionVecInputImpl(_Handle + _HitBoxScaleOffset!.Value);
+            var instance = _HitBoxScaleInstance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _HitBoxScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _HitboxSetNameOffset;
@@ -92,13 +95,16 @@ internal partial class C_INIT_SetHitboxToClosestImpl : CParticleFunctionInitiali
         }
     }
     private static nint? _HybridRatioOffset;
+    private CParticleCollectionFloatInputImpl? _HybridRatioInstance;
 
     public CParticleCollectionFloatInput HybridRatio
     {
         get
         {
             _HybridRatioOffset = _HybridRatioOffset ?? Schema.GetOffset(0x10F3322CC2A9455C);
-            return new CParticleCollectionFloatInputImpl(_Handle + _HybridRatioOffset!.Value);
+            var instance = _HybridRatioInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _HybridRatioOffset!.Value);
+            return instance;
         }
     }
     private static nint? _UpdatePositionOffset;

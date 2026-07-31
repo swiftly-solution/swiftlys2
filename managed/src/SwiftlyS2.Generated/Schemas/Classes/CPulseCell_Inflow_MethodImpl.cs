@@ -17,13 +17,16 @@ internal partial class CPulseCell_Inflow_MethodImpl : CPulseCell_Inflow_BaseEntr
     public CPulseCell_Inflow_MethodImpl(nint handle) : base(handle) { }
 
     private static nint? _MethodNameOffset;
+    private SchemaUntypedField? _MethodNameInstance;
 
     public SchemaUntypedField MethodName
     {
         get
         {
             _MethodNameOffset = _MethodNameOffset ?? Schema.GetOffset(0xFB5926557D863B13);
-            return new SchemaUntypedField(_Handle + _MethodNameOffset!.Value);
+            var instance = _MethodNameInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _MethodNameOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DescriptionOffset;
@@ -52,13 +55,16 @@ internal partial class CPulseCell_Inflow_MethodImpl : CPulseCell_Inflow_BaseEntr
         }
     }
     private static nint? _ReturnTypeOffset;
+    private SchemaUntypedField? _ReturnTypeInstance;
 
     public SchemaUntypedField ReturnType
     {
         get
         {
             _ReturnTypeOffset = _ReturnTypeOffset ?? Schema.GetOffset(0xFB59265566333D67);
-            return new SchemaUntypedField(_Handle + _ReturnTypeOffset!.Value);
+            var instance = _ReturnTypeInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ReturnTypeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ArgsOffset;

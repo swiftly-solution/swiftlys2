@@ -67,13 +67,16 @@ internal partial class CNmClipNode__CDefinitionImpl : CNmClipReferenceNode__CDef
         }
     }
     private static nint? _GraphEventsOffset;
+    private SchemaUntypedField? _GraphEventsInstance;
 
     public SchemaUntypedField GraphEvents
     {
         get
         {
             _GraphEventsOffset = _GraphEventsOffset ?? Schema.GetOffset(0x9BA44A1314A73162);
-            return new SchemaUntypedField(_Handle + _GraphEventsOffset!.Value);
+            var instance = _GraphEventsInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _GraphEventsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SpeedMultiplierOffset;

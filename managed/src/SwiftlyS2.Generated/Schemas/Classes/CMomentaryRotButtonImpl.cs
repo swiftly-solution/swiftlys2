@@ -17,13 +17,16 @@ internal partial class CMomentaryRotButtonImpl : CRotButtonImpl, CMomentaryRotBu
     public CMomentaryRotButtonImpl(nint handle) : base(handle) { }
 
     private static nint? _PositionOffset;
+    private SchemaUntypedField? _PositionInstance;
 
     public SchemaUntypedField Position
     {
         get
         {
             _PositionOffset = _PositionOffset ?? Schema.GetOffset(0x85A553CDFC27FA8A);
-            return new SchemaUntypedField(_Handle + _PositionOffset!.Value);
+            var instance = _PositionInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _PositionOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OnUnpressedOffset;

@@ -37,13 +37,16 @@ internal partial class PairedSequence_tImpl : SchemaClass, PairedSequence_t
         }
     }
     private static nint? _SequenceOffset;
+    private SchemaUntypedField? _SequenceInstance;
 
     public SchemaUntypedField Sequence
     {
         get
         {
             _SequenceOffset = _SequenceOffset ?? Schema.GetOffset(0x6B47213EE0A0598E);
-            return new SchemaUntypedField(_Handle + _SequenceOffset!.Value);
+            var instance = _SequenceInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _SequenceOffset!.Value);
+            return instance;
         }
     }
 

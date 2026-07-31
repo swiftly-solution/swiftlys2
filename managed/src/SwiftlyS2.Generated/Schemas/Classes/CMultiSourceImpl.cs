@@ -16,13 +16,31 @@ internal partial class CMultiSourceImpl : CLogicalEntityImpl, CMultiSource
 {
     public CMultiSourceImpl(nint handle) : base(handle) { }
 
+    private static nint? _RgEntitiesOffset;
+    private SchemaFixedArray<CHandle<CBaseEntity>>? _RgEntitiesInstance;
+
     public ISchemaFixedArray<CHandle<CBaseEntity>> RgEntities
     {
-        get => new SchemaFixedArray<CHandle<CBaseEntity>>(_Handle, 0x87DC5C660CB2E479, 32, 4, 4);
+        get
+        {
+            _RgEntitiesOffset = _RgEntitiesOffset ?? Schema.GetOffset(0x87DC5C660CB2E479);
+            var instance = _RgEntitiesInstance ??= new SchemaFixedArray<CHandle<CBaseEntity>>(0, 0x87DC5C660CB2E479, 32, 4, 4);
+            instance.DangerousSetHandle(_Handle + _RgEntitiesOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _RgTriggeredOffset;
+    private SchemaFixedArray<int>? _RgTriggeredInstance;
+
     public ISchemaFixedArray<int> RgTriggered
     {
-        get => new SchemaFixedArray<int>(_Handle, 0x87DC5C664616C37F, 32, 4, 4);
+        get
+        {
+            _RgTriggeredOffset = _RgTriggeredOffset ?? Schema.GetOffset(0x87DC5C664616C37F);
+            var instance = _RgTriggeredInstance ??= new SchemaFixedArray<int>(0, 0x87DC5C664616C37F, 32, 4, 4);
+            instance.DangerousSetHandle(_Handle + _RgTriggeredOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _OnTriggerOffset;
 

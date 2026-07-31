@@ -47,13 +47,16 @@ internal partial class CPhysicsEntitySolverImpl : CLogicalEntityImpl, CPhysicsEn
         }
     }
     private static nint? _CancelTimeOffset;
+    private GameTime_tImpl? _CancelTimeInstance;
 
     public GameTime_t CancelTime
     {
         get
         {
             _CancelTimeOffset = _CancelTimeOffset ?? Schema.GetOffset(0x2948C36F12944512);
-            return new GameTime_tImpl(_Handle + _CancelTimeOffset!.Value);
+            var instance = _CancelTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _CancelTimeOffset!.Value);
+            return instance;
         }
     }
 

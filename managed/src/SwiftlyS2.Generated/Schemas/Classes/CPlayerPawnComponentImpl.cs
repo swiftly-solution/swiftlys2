@@ -27,13 +27,16 @@ internal partial class CPlayerPawnComponentImpl : SchemaClass, CPlayerPawnCompon
         }
     }
     private static nint? _ComponentGraphControllerOffset;
+    private CAnimGraphControllerPtrImpl? _ComponentGraphControllerInstance;
 
     public CAnimGraphControllerPtr ComponentGraphController
     {
         get
         {
             _ComponentGraphControllerOffset = _ComponentGraphControllerOffset ?? Schema.GetOffset(0x8B6AC9BCA605975A);
-            return new CAnimGraphControllerPtrImpl(_Handle + _ComponentGraphControllerOffset!.Value);
+            var instance = _ComponentGraphControllerInstance ??= new CAnimGraphControllerPtrImpl(0);
+            instance.DangerousSetHandle(_Handle + _ComponentGraphControllerOffset!.Value);
+            return instance;
         }
     }
 

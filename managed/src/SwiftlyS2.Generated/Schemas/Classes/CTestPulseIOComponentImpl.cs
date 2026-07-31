@@ -32,13 +32,16 @@ internal partial class CTestPulseIOComponentImpl : SchemaClass, CTestPulseIOComp
         }
     }
     private static nint? _OnComponentTestFuncOffset;
+    private SchemaUntypedField? _OnComponentTestFuncInstance;
 
     public SchemaUntypedField OnComponentTestFunc
     {
         get
         {
             _OnComponentTestFuncOffset = _OnComponentTestFuncOffset ?? Schema.GetOffset(0x38B7AE6E61B44981);
-            return new SchemaUntypedField(_Handle + _OnComponentTestFuncOffset!.Value);
+            var instance = _OnComponentTestFuncInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OnComponentTestFuncOffset!.Value);
+            return instance;
         }
     }
 

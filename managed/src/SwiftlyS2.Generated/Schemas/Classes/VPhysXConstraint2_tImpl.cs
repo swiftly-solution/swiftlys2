@@ -47,13 +47,16 @@ internal partial class VPhysXConstraint2_tImpl : SchemaClass, VPhysXConstraint2_
         }
     }
     private static nint? _ParamsOffset;
+    private VPhysXConstraintParams_tImpl? _ParamsInstance;
 
     public VPhysXConstraintParams_t Params
     {
         get
         {
             _ParamsOffset = _ParamsOffset ?? Schema.GetOffset(0x6FB758FD640EA8F3);
-            return new VPhysXConstraintParams_tImpl(_Handle + _ParamsOffset!.Value);
+            var instance = _ParamsInstance ??= new VPhysXConstraintParams_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamsOffset!.Value);
+            return instance;
         }
     }
 

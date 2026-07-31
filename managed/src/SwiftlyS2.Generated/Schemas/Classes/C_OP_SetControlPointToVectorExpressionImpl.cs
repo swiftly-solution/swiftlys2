@@ -37,33 +37,42 @@ internal partial class C_OP_SetControlPointToVectorExpressionImpl : CParticleFun
         }
     }
     private static nint? _Input1Offset;
+    private CParticleCollectionVecInputImpl? _Input1Instance;
 
     public CParticleCollectionVecInput Input1
     {
         get
         {
             _Input1Offset = _Input1Offset ?? Schema.GetOffset(0x67E9EFDEE17F27DA);
-            return new CParticleCollectionVecInputImpl(_Handle + _Input1Offset!.Value);
+            var instance = _Input1Instance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _Input1Offset!.Value);
+            return instance;
         }
     }
     private static nint? _Input2Offset;
+    private CParticleCollectionVecInputImpl? _Input2Instance;
 
     public CParticleCollectionVecInput Input2
     {
         get
         {
             _Input2Offset = _Input2Offset ?? Schema.GetOffset(0x67E9EFDEE07F2647);
-            return new CParticleCollectionVecInputImpl(_Handle + _Input2Offset!.Value);
+            var instance = _Input2Instance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _Input2Offset!.Value);
+            return instance;
         }
     }
     private static nint? _LerpOffset;
+    private CPerParticleFloatInputImpl? _LerpInstance;
 
     public CPerParticleFloatInput Lerp
     {
         get
         {
             _LerpOffset = _LerpOffset ?? Schema.GetOffset(0x67E9EFDE622FAB06);
-            return new CPerParticleFloatInputImpl(_Handle + _LerpOffset!.Value);
+            var instance = _LerpInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _LerpOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NormalizedOutputOffset;

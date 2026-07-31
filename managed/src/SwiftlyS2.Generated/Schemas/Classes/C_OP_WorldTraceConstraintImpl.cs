@@ -172,43 +172,55 @@ internal partial class C_OP_WorldTraceConstraintImpl : CParticleFunctionConstrai
         }
     }
     private static nint? _RadiusScaleOffset;
+    private CPerParticleFloatInputImpl? _RadiusScaleInstance;
 
     public CPerParticleFloatInput RadiusScale
     {
         get
         {
             _RadiusScaleOffset = _RadiusScaleOffset ?? Schema.GetOffset(0xD88A859FA7A20159);
-            return new CPerParticleFloatInputImpl(_Handle + _RadiusScaleOffset!.Value);
+            var instance = _RadiusScaleInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _RadiusScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BounceAmountOffset;
+    private CPerParticleFloatInputImpl? _BounceAmountInstance;
 
     public CPerParticleFloatInput BounceAmount
     {
         get
         {
             _BounceAmountOffset = _BounceAmountOffset ?? Schema.GetOffset(0xD88A859F43A3ECA3);
-            return new CPerParticleFloatInputImpl(_Handle + _BounceAmountOffset!.Value);
+            var instance = _BounceAmountInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _BounceAmountOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SlideAmountOffset;
+    private CPerParticleFloatInputImpl? _SlideAmountInstance;
 
     public CPerParticleFloatInput SlideAmount
     {
         get
         {
             _SlideAmountOffset = _SlideAmountOffset ?? Schema.GetOffset(0xD88A859F674011EC);
-            return new CPerParticleFloatInputImpl(_Handle + _SlideAmountOffset!.Value);
+            var instance = _SlideAmountInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _SlideAmountOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RandomDirScaleOffset;
+    private CPerParticleFloatInputImpl? _RandomDirScaleInstance;
 
     public CPerParticleFloatInput RandomDirScale
     {
         get
         {
             _RandomDirScaleOffset = _RandomDirScaleOffset ?? Schema.GetOffset(0xD88A859FDAE4B057);
-            return new CPerParticleFloatInputImpl(_Handle + _RandomDirScaleOffset!.Value);
+            var instance = _RandomDirScaleInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _RandomDirScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DecayBounceOffset;
@@ -252,43 +264,55 @@ internal partial class C_OP_WorldTraceConstraintImpl : CParticleFunctionConstrai
         }
     }
     private static nint? _StickOnCollisionFieldOffset;
+    private ParticleAttributeIndex_tImpl? _StickOnCollisionFieldInstance;
 
     public ParticleAttributeIndex_t StickOnCollisionField
     {
         get
         {
             _StickOnCollisionFieldOffset = _StickOnCollisionFieldOffset ?? Schema.GetOffset(0xD88A859FA94734FA);
-            return new ParticleAttributeIndex_tImpl(_Handle + _StickOnCollisionFieldOffset!.Value);
+            var instance = _StickOnCollisionFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _StickOnCollisionFieldOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StopSpeedOffset;
+    private CPerParticleFloatInputImpl? _StopSpeedInstance;
 
     public CPerParticleFloatInput StopSpeed
     {
         get
         {
             _StopSpeedOffset = _StopSpeedOffset ?? Schema.GetOffset(0xD88A859FC6DE3582);
-            return new CPerParticleFloatInputImpl(_Handle + _StopSpeedOffset!.Value);
+            var instance = _StopSpeedInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _StopSpeedOffset!.Value);
+            return instance;
         }
     }
     private static nint? _EntityStickDataFieldOffset;
+    private ParticleAttributeIndex_tImpl? _EntityStickDataFieldInstance;
 
     public ParticleAttributeIndex_t EntityStickDataField
     {
         get
         {
             _EntityStickDataFieldOffset = _EntityStickDataFieldOffset ?? Schema.GetOffset(0xD88A859F9BA1B8FA);
-            return new ParticleAttributeIndex_tImpl(_Handle + _EntityStickDataFieldOffset!.Value);
+            var instance = _EntityStickDataFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _EntityStickDataFieldOffset!.Value);
+            return instance;
         }
     }
     private static nint? _EntityStickNormalFieldOffset;
+    private ParticleAttributeIndex_tImpl? _EntityStickNormalFieldInstance;
 
     public ParticleAttributeIndex_t EntityStickNormalField
     {
         get
         {
             _EntityStickNormalFieldOffset = _EntityStickNormalFieldOffset ?? Schema.GetOffset(0xD88A859FBB3D8ECF);
-            return new ParticleAttributeIndex_tImpl(_Handle + _EntityStickNormalFieldOffset!.Value);
+            var instance = _EntityStickNormalFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _EntityStickNormalFieldOffset!.Value);
+            return instance;
         }
     }
 

@@ -27,33 +27,42 @@ internal partial class C_OP_RepeatedTriggerChildGroupImpl : CParticleFunctionPre
         }
     }
     private static nint? _ClusterRefireTimeOffset;
+    private CParticleCollectionFloatInputImpl? _ClusterRefireTimeInstance;
 
     public CParticleCollectionFloatInput ClusterRefireTime
     {
         get
         {
             _ClusterRefireTimeOffset = _ClusterRefireTimeOffset ?? Schema.GetOffset(0x3D9A0D47E6BEEAB);
-            return new CParticleCollectionFloatInputImpl(_Handle + _ClusterRefireTimeOffset!.Value);
+            var instance = _ClusterRefireTimeInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ClusterRefireTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ClusterSizeOffset;
+    private CParticleCollectionFloatInputImpl? _ClusterSizeInstance;
 
     public CParticleCollectionFloatInput ClusterSize
     {
         get
         {
             _ClusterSizeOffset = _ClusterSizeOffset ?? Schema.GetOffset(0x3D9A0D4A7549FF6);
-            return new CParticleCollectionFloatInputImpl(_Handle + _ClusterSizeOffset!.Value);
+            var instance = _ClusterSizeInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ClusterSizeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ClusterCooldownOffset;
+    private CParticleCollectionFloatInputImpl? _ClusterCooldownInstance;
 
     public CParticleCollectionFloatInput ClusterCooldown
     {
         get
         {
             _ClusterCooldownOffset = _ClusterCooldownOffset ?? Schema.GetOffset(0x3D9A0D4753687EA);
-            return new CParticleCollectionFloatInputImpl(_Handle + _ClusterCooldownOffset!.Value);
+            var instance = _ClusterCooldownInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ClusterCooldownOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LimitChildCountOffset;

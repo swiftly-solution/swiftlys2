@@ -27,13 +27,16 @@ internal partial class PulseGraphExecutionHistoryNodeDesc_tImpl : SchemaClass, P
         }
     }
     private static nint? _StrBindingNameOffset;
+    private SchemaUntypedField? _StrBindingNameInstance;
 
     public SchemaUntypedField StrBindingName
     {
         get
         {
             _StrBindingNameOffset = _StrBindingNameOffset ?? Schema.GetOffset(0x7F4ECA021A5069AA);
-            return new SchemaUntypedField(_Handle + _StrBindingNameOffset!.Value);
+            var instance = _StrBindingNameInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _StrBindingNameOffset!.Value);
+            return instance;
         }
     }
 

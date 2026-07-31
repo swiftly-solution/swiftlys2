@@ -247,13 +247,16 @@ internal partial class CFuncTrackTrainImpl : CBaseModelEntityImpl, CFuncTrackTra
         }
     }
     private static nint? _NextMoveSoundTimeOffset;
+    private GameTime_tImpl? _NextMoveSoundTimeInstance;
 
     public GameTime_t NextMoveSoundTime
     {
         get
         {
             _NextMoveSoundTimeOffset = _NextMoveSoundTimeOffset ?? Schema.GetOffset(0x416637FB05BD176B);
-            return new GameTime_tImpl(_Handle + _NextMoveSoundTimeOffset!.Value);
+            var instance = _NextMoveSoundTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NextMoveSoundTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MoveSoundMinPitchOffset;
@@ -347,13 +350,16 @@ internal partial class CFuncTrackTrainImpl : CBaseModelEntityImpl, CFuncTrackTra
         }
     }
     private static nint? _SpeedChangeTimeOffset;
+    private GameTime_tImpl? _SpeedChangeTimeInstance;
 
     public GameTime_t SpeedChangeTime
     {
         get
         {
             _SpeedChangeTimeOffset = _SpeedChangeTimeOffset ?? Schema.GetOffset(0x416637FBCC334417);
-            return new GameTime_tImpl(_Handle + _SpeedChangeTimeOffset!.Value);
+            var instance = _SpeedChangeTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _SpeedChangeTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AccelSpeedOffset;
@@ -387,13 +393,16 @@ internal partial class CFuncTrackTrainImpl : CBaseModelEntityImpl, CFuncTrackTra
         }
     }
     private static nint? _NextMPSoundTimeOffset;
+    private GameTime_tImpl? _NextMPSoundTimeInstance;
 
     public GameTime_t NextMPSoundTime
     {
         get
         {
             _NextMPSoundTimeOffset = _NextMPSoundTimeOffset ?? Schema.GetOffset(0x416637FB251847DB);
-            return new GameTime_tImpl(_Handle + _NextMPSoundTimeOffset!.Value);
+            var instance = _NextMPSoundTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NextMPSoundTimeOffset!.Value);
+            return instance;
         }
     }
 

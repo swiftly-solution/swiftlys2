@@ -27,23 +27,29 @@ internal partial class ChainToSolveData_tImpl : SchemaClass, ChainToSolveData_t
         }
     }
     private static nint? _SolverSettingsOffset;
+    private IKSolverSettings_tImpl? _SolverSettingsInstance;
 
     public IKSolverSettings_t SolverSettings
     {
         get
         {
             _SolverSettingsOffset = _SolverSettingsOffset ?? Schema.GetOffset(0x87A241BDE19D8233);
-            return new IKSolverSettings_tImpl(_Handle + _SolverSettingsOffset!.Value);
+            var instance = _SolverSettingsInstance ??= new IKSolverSettings_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _SolverSettingsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TargetSettingsOffset;
+    private IKTargetSettings_tImpl? _TargetSettingsInstance;
 
     public IKTargetSettings_t TargetSettings
     {
         get
         {
             _TargetSettingsOffset = _TargetSettingsOffset ?? Schema.GetOffset(0x87A241BDD6828E35);
-            return new IKTargetSettings_tImpl(_Handle + _TargetSettingsOffset!.Value);
+            var instance = _TargetSettingsInstance ??= new IKTargetSettings_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _TargetSettingsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DebugSettingOffset;

@@ -67,33 +67,42 @@ internal partial class RsBlendStateDesc_tImpl : SchemaClass, RsBlendStateDesc_t
         }
     }
     private static nint? _BlendOpBitsOffset;
+    private SchemaUntypedField? _BlendOpBitsInstance;
 
     public SchemaUntypedField BlendOpBits
     {
         get
         {
             _BlendOpBitsOffset = _BlendOpBitsOffset ?? Schema.GetOffset(0x5A78EC7824A9742B);
-            return new SchemaUntypedField(_Handle + _BlendOpBitsOffset!.Value);
+            var instance = _BlendOpBitsInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _BlendOpBitsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AlphaToCoverageEnableOffset;
+    private SchemaUntypedField? _AlphaToCoverageEnableInstance;
 
     public SchemaUntypedField AlphaToCoverageEnable
     {
         get
         {
             _AlphaToCoverageEnableOffset = _AlphaToCoverageEnableOffset ?? Schema.GetOffset(0x5A78EC7860C58F3B);
-            return new SchemaUntypedField(_Handle + _AlphaToCoverageEnableOffset!.Value);
+            var instance = _AlphaToCoverageEnableInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _AlphaToCoverageEnableOffset!.Value);
+            return instance;
         }
     }
     private static nint? _IndependentBlendEnableOffset;
+    private SchemaUntypedField? _IndependentBlendEnableInstance;
 
     public SchemaUntypedField IndependentBlendEnable
     {
         get
         {
             _IndependentBlendEnableOffset = _IndependentBlendEnableOffset ?? Schema.GetOffset(0x5A78EC78E42575C7);
-            return new SchemaUntypedField(_Handle + _IndependentBlendEnableOffset!.Value);
+            var instance = _IndependentBlendEnableInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _IndependentBlendEnableOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BlendOpAlphaBitsOffset;

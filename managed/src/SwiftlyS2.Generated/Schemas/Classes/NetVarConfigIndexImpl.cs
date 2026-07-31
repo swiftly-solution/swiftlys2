@@ -17,13 +17,16 @@ internal partial class NetVarConfigIndexImpl : SchemaClass, NetVarConfigIndex
     public NetVarConfigIndexImpl(nint handle) : base(handle) { }
 
     private static nint? _IndexOffset;
+    private SchemaUntypedField? _IndexInstance;
 
     public SchemaUntypedField Index
     {
         get
         {
             _IndexOffset = _IndexOffset ?? Schema.GetOffset(0x51249341491963CB);
-            return new SchemaUntypedField(_Handle + _IndexOffset!.Value);
+            var instance = _IndexInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _IndexOffset!.Value);
+            return instance;
         }
     }
 

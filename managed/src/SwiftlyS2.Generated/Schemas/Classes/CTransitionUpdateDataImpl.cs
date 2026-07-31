@@ -37,23 +37,29 @@ internal partial class CTransitionUpdateDataImpl : SchemaClass, CTransitionUpdat
         }
     }
     private static nint? _HandshakeMaskToDisableFirstOffset;
+    private SchemaUntypedField? _HandshakeMaskToDisableFirstInstance;
 
     public SchemaUntypedField HandshakeMaskToDisableFirst
     {
         get
         {
             _HandshakeMaskToDisableFirstOffset = _HandshakeMaskToDisableFirstOffset ?? Schema.GetOffset(0xF3F18D08E58422C5);
-            return new SchemaUntypedField(_Handle + _HandshakeMaskToDisableFirstOffset!.Value);
+            var instance = _HandshakeMaskToDisableFirstInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _HandshakeMaskToDisableFirstOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DisabledOffset;
+    private SchemaUntypedField? _DisabledInstance;
 
     public SchemaUntypedField Disabled
     {
         get
         {
             _DisabledOffset = _DisabledOffset ?? Schema.GetOffset(0xF3F18D083A7C5965);
-            return new SchemaUntypedField(_Handle + _DisabledOffset!.Value);
+            var instance = _DisabledInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _DisabledOffset!.Value);
+            return instance;
         }
     }
 

@@ -57,13 +57,16 @@ internal partial class C_INIT_InitFromVectorFieldSnapshotImpl : CParticleFunctio
         }
     }
     private static nint? _ScaleOffset;
+    private CPerParticleVecInputImpl? _ScaleInstance;
 
     public CPerParticleVecInput Scale
     {
         get
         {
             _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x1F4AA8715F596B51);
-            return new CPerParticleVecInputImpl(_Handle + _ScaleOffset!.Value);
+            var instance = _ScaleInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ScaleOffset!.Value);
+            return instance;
         }
     }
 

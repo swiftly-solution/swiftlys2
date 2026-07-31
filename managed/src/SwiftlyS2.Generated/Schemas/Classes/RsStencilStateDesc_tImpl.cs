@@ -17,93 +17,120 @@ internal partial class RsStencilStateDesc_tImpl : SchemaClass, RsStencilStateDes
     public RsStencilStateDesc_tImpl(nint handle) : base(handle) { }
 
     private static nint? _FrontStencilFuncOffset;
+    private SchemaUntypedField? _FrontStencilFuncInstance;
 
     public SchemaUntypedField FrontStencilFunc
     {
         get
         {
             _FrontStencilFuncOffset = _FrontStencilFuncOffset ?? Schema.GetOffset(0xA65B7AC581FBEC02);
-            return new SchemaUntypedField(_Handle + _FrontStencilFuncOffset!.Value);
+            var instance = _FrontStencilFuncInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _FrontStencilFuncOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BackStencilFuncOffset;
+    private SchemaUntypedField? _BackStencilFuncInstance;
 
     public SchemaUntypedField BackStencilFunc
     {
         get
         {
             _BackStencilFuncOffset = _BackStencilFuncOffset ?? Schema.GetOffset(0xA65B7AC520B49048);
-            return new SchemaUntypedField(_Handle + _BackStencilFuncOffset!.Value);
+            var instance = _BackStencilFuncInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _BackStencilFuncOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StencilEnableOffset;
+    private SchemaUntypedField? _StencilEnableInstance;
 
     public SchemaUntypedField StencilEnable
     {
         get
         {
             _StencilEnableOffset = _StencilEnableOffset ?? Schema.GetOffset(0xA65B7AC54518B5FC);
-            return new SchemaUntypedField(_Handle + _StencilEnableOffset!.Value);
+            var instance = _StencilEnableInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _StencilEnableOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FrontStencilFailOpOffset;
+    private SchemaUntypedField? _FrontStencilFailOpInstance;
 
     public SchemaUntypedField FrontStencilFailOp
     {
         get
         {
             _FrontStencilFailOpOffset = _FrontStencilFailOpOffset ?? Schema.GetOffset(0xA65B7AC59A6D86EF);
-            return new SchemaUntypedField(_Handle + _FrontStencilFailOpOffset!.Value);
+            var instance = _FrontStencilFailOpInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _FrontStencilFailOpOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FrontStencilDepthFailOpOffset;
+    private SchemaUntypedField? _FrontStencilDepthFailOpInstance;
 
     public SchemaUntypedField FrontStencilDepthFailOp
     {
         get
         {
             _FrontStencilDepthFailOpOffset = _FrontStencilDepthFailOpOffset ?? Schema.GetOffset(0xA65B7AC5E8761D3E);
-            return new SchemaUntypedField(_Handle + _FrontStencilDepthFailOpOffset!.Value);
+            var instance = _FrontStencilDepthFailOpInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _FrontStencilDepthFailOpOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FrontStencilPassOpOffset;
+    private SchemaUntypedField? _FrontStencilPassOpInstance;
 
     public SchemaUntypedField FrontStencilPassOp
     {
         get
         {
             _FrontStencilPassOpOffset = _FrontStencilPassOpOffset ?? Schema.GetOffset(0xA65B7AC586875BA2);
-            return new SchemaUntypedField(_Handle + _FrontStencilPassOpOffset!.Value);
+            var instance = _FrontStencilPassOpInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _FrontStencilPassOpOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BackStencilFailOpOffset;
+    private SchemaUntypedField? _BackStencilFailOpInstance;
 
     public SchemaUntypedField BackStencilFailOp
     {
         get
         {
             _BackStencilFailOpOffset = _BackStencilFailOpOffset ?? Schema.GetOffset(0xA65B7AC557603E59);
-            return new SchemaUntypedField(_Handle + _BackStencilFailOpOffset!.Value);
+            var instance = _BackStencilFailOpInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _BackStencilFailOpOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BackStencilDepthFailOpOffset;
+    private SchemaUntypedField? _BackStencilDepthFailOpInstance;
 
     public SchemaUntypedField BackStencilDepthFailOp
     {
         get
         {
             _BackStencilDepthFailOpOffset = _BackStencilDepthFailOpOffset ?? Schema.GetOffset(0xA65B7AC5EA6F7BAC);
-            return new SchemaUntypedField(_Handle + _BackStencilDepthFailOpOffset!.Value);
+            var instance = _BackStencilDepthFailOpInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _BackStencilDepthFailOpOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BackStencilPassOpOffset;
+    private SchemaUntypedField? _BackStencilPassOpInstance;
 
     public SchemaUntypedField BackStencilPassOp
     {
         get
         {
             _BackStencilPassOpOffset = _BackStencilPassOpOffset ?? Schema.GetOffset(0xA65B7AC51276F800);
-            return new SchemaUntypedField(_Handle + _BackStencilPassOpOffset!.Value);
+            var instance = _BackStencilPassOpInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _BackStencilPassOpOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StencilReadMaskOffset;

@@ -37,6 +37,7 @@ internal partial class CSplineConstraintImpl : CPhysConstraintImpl, CSplineConst
         }
     }
     private static nint? _SplineBodyOffset;
+    private IPhysicsBodyImpl? _SplineBodyInstance;
 
     public IPhysicsBody? SplineBody
     {
@@ -44,7 +45,10 @@ internal partial class CSplineConstraintImpl : CPhysConstraintImpl, CSplineConst
         {
             _SplineBodyOffset = _SplineBodyOffset ?? Schema.GetOffset(0xC2DC06A0D6C1EF02);
             var ptr = _Handle.Read<nint>(_SplineBodyOffset!.Value);
-            return ptr.IsValidPtr() ? new IPhysicsBodyImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _SplineBodyInstance ??= new IPhysicsBodyImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _EnableLateralConstraintOffset;
@@ -148,13 +152,16 @@ internal partial class CSplineConstraintImpl : CPhysConstraintImpl, CSplineConst
         }
     }
     private static nint? _StartTransitionTimeOffset;
+    private GameTime_tImpl? _StartTransitionTimeInstance;
 
     public GameTime_t StartTransitionTime
     {
         get
         {
             _StartTransitionTimeOffset = _StartTransitionTimeOffset ?? Schema.GetOffset(0xC2DC06A0527F6AA9);
-            return new GameTime_tImpl(_Handle + _StartTransitionTimeOffset!.Value);
+            var instance = _StartTransitionTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _StartTransitionTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TangentSpaceAnchorAtTransitionStartOffset;

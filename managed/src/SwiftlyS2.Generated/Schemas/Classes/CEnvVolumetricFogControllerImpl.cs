@@ -177,33 +177,42 @@ internal partial class CEnvVolumetricFogControllerImpl : CBaseEntityImpl, CEnvVo
         }
     }
     private static nint? _StartAnisoTimeOffset;
+    private GameTime_tImpl? _StartAnisoTimeInstance;
 
     public GameTime_t StartAnisoTime
     {
         get
         {
             _StartAnisoTimeOffset = _StartAnisoTimeOffset ?? Schema.GetOffset(0x2A8A520F84853AEE);
-            return new GameTime_tImpl(_Handle + _StartAnisoTimeOffset!.Value);
+            var instance = _StartAnisoTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _StartAnisoTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StartScatterTimeOffset;
+    private GameTime_tImpl? _StartScatterTimeInstance;
 
     public GameTime_t StartScatterTime
     {
         get
         {
             _StartScatterTimeOffset = _StartScatterTimeOffset ?? Schema.GetOffset(0x2A8A520F550791B8);
-            return new GameTime_tImpl(_Handle + _StartScatterTimeOffset!.Value);
+            var instance = _StartScatterTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _StartScatterTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StartDrawDistanceTimeOffset;
+    private GameTime_tImpl? _StartDrawDistanceTimeInstance;
 
     public GameTime_t StartDrawDistanceTime
     {
         get
         {
             _StartDrawDistanceTimeOffset = _StartDrawDistanceTimeOffset ?? Schema.GetOffset(0x2A8A520F0108704D);
-            return new GameTime_tImpl(_Handle + _StartDrawDistanceTimeOffset!.Value);
+            var instance = _StartDrawDistanceTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _StartDrawDistanceTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StartAnisotropyOffset;

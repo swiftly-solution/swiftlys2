@@ -47,13 +47,16 @@ internal partial class VMixAutoFilterDesc_tImpl : SchemaClass, VMixAutoFilterDes
         }
     }
     private static nint? _FilterOffset;
+    private VMixFilterDesc_tImpl? _FilterInstance;
 
     public VMixFilterDesc_t Filter
     {
         get
         {
             _FilterOffset = _FilterOffset ?? Schema.GetOffset(0xCE0A02A634A7917);
-            return new VMixFilterDesc_tImpl(_Handle + _FilterOffset!.Value);
+            var instance = _FilterInstance ??= new VMixFilterDesc_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FilterOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LFOAmountOffset;

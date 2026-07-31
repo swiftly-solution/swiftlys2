@@ -17,23 +17,29 @@ internal partial class C_OP_LockToBoneImpl : CParticleFunctionOperatorImpl, C_OP
     public C_OP_LockToBoneImpl(nint handle) : base(handle) { }
 
     private static nint? _ModelInputOffset;
+    private CParticleModelInputImpl? _ModelInputInstance;
 
     public CParticleModelInput ModelInput
     {
         get
         {
             _ModelInputOffset = _ModelInputOffset ?? Schema.GetOffset(0xF6C2B94DEB74120E);
-            return new CParticleModelInputImpl(_Handle + _ModelInputOffset!.Value);
+            var instance = _ModelInputInstance ??= new CParticleModelInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ModelInputOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TransformInputOffset;
+    private CParticleTransformInputImpl? _TransformInputInstance;
 
     public CParticleTransformInput TransformInput
     {
         get
         {
             _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0xF6C2B94D3A9ED669);
-            return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+            var instance = _TransformInputInstance ??= new CParticleTransformInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _TransformInputOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LifeTimeFadeStartOffset;
@@ -112,23 +118,29 @@ internal partial class C_OP_LockToBoneImpl : CParticleFunctionOperatorImpl, C_OP
         }
     }
     private static nint? _FieldOutputOffset;
+    private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
             _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0xF6C2B94DE5729606);
-            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+            var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FieldOutputPrevOffset;
+    private ParticleAttributeIndex_tImpl? _FieldOutputPrevInstance;
 
     public ParticleAttributeIndex_t FieldOutputPrev
     {
         get
         {
             _FieldOutputPrevOffset = _FieldOutputPrevOffset ?? Schema.GetOffset(0xF6C2B94D68D9463B);
-            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputPrevOffset!.Value);
+            var instance = _FieldOutputPrevInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FieldOutputPrevOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RotationSetTypeOffset;
@@ -152,23 +164,29 @@ internal partial class C_OP_LockToBoneImpl : CParticleFunctionOperatorImpl, C_OP
         }
     }
     private static nint? _RotationOffset;
+    private CPerParticleVecInputImpl? _RotationInstance;
 
     public CPerParticleVecInput Rotation
     {
         get
         {
             _RotationOffset = _RotationOffset ?? Schema.GetOffset(0xF6C2B94D1992E6BF);
-            return new CPerParticleVecInputImpl(_Handle + _RotationOffset!.Value);
+            var instance = _RotationInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _RotationOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RotLerpOffset;
+    private CPerParticleFloatInputImpl? _RotLerpInstance;
 
     public CPerParticleFloatInput RotLerp
     {
         get
         {
             _RotLerpOffset = _RotLerpOffset ?? Schema.GetOffset(0xF6C2B94D2C030C4D);
-            return new CPerParticleFloatInputImpl(_Handle + _RotLerpOffset!.Value);
+            var instance = _RotLerpInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _RotLerpOffset!.Value);
+            return instance;
         }
     }
 

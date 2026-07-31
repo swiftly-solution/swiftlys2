@@ -46,13 +46,31 @@ internal partial class CDirectPlaybackInstanceDataImpl : SchemaClass, CDirectPla
             return ref _Handle.AsRef<float>(_InterpEndTimeOffset!.Value);
         }
     }
+    private static nint? _WeightsOffset;
+    private SchemaFixedArray<float>? _WeightsInstance;
+
     public ISchemaFixedArray<float> Weights
     {
-        get => new SchemaFixedArray<float>(_Handle, 0x280B3A7177B2F91E, 4, 4, 4);
+        get
+        {
+            _WeightsOffset = _WeightsOffset ?? Schema.GetOffset(0x280B3A7177B2F91E);
+            var instance = _WeightsInstance ??= new SchemaFixedArray<float>(0, 0x280B3A7177B2F91E, 4, 4, 4);
+            instance.DangerousSetHandle(_Handle + _WeightsOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _SequencesOffset;
+    private SchemaClassFixedArray<SequenceData>? _SequencesInstance;
+
     public ISchemaClassFixedArray<SequenceData> Sequences
     {
-        get => new SchemaClassFixedArray<SequenceData>(_Handle, 0x280B3A713992EBA1, 4, 56, 4);
+        get
+        {
+            _SequencesOffset = _SequencesOffset ?? Schema.GetOffset(0x280B3A713992EBA1);
+            var instance = _SequencesInstance ??= new SchemaClassFixedArray<SequenceData>(0, 0x280B3A713992EBA1, 4, 56, 4);
+            instance.DangerousSetHandle(_Handle + _SequencesOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _CurrentSequenceIndexOffset;
 
@@ -65,13 +83,16 @@ internal partial class CDirectPlaybackInstanceDataImpl : SchemaClass, CDirectPla
         }
     }
     private static nint? _CurrentSequenceDataOffset;
+    private SchemaUntypedField? _CurrentSequenceDataInstance;
 
     public SchemaUntypedField CurrentSequenceData
     {
         get
         {
             _CurrentSequenceDataOffset = _CurrentSequenceDataOffset ?? Schema.GetOffset(0x280B3A71B3502A9B);
-            return new SchemaUntypedField(_Handle + _CurrentSequenceDataOffset!.Value);
+            var instance = _CurrentSequenceDataInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _CurrentSequenceDataOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FadeInTimeOffset;
@@ -95,13 +116,16 @@ internal partial class CDirectPlaybackInstanceDataImpl : SchemaClass, CDirectPla
         }
     }
     private static nint? _ForcedCycleOffset;
+    private SchemaUntypedField? _ForcedCycleInstance;
 
     public SchemaUntypedField ForcedCycle
     {
         get
         {
             _ForcedCycleOffset = _ForcedCycleOffset ?? Schema.GetOffset(0x280B3A7110FE2984);
-            return new SchemaUntypedField(_Handle + _ForcedCycleOffset!.Value);
+            var instance = _ForcedCycleInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ForcedCycleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ResetPendingOffset;
@@ -115,13 +139,16 @@ internal partial class CDirectPlaybackInstanceDataImpl : SchemaClass, CDirectPla
         }
     }
     private static nint? _SequenceCycleZeroTimeOffset;
+    private SchemaUntypedField? _SequenceCycleZeroTimeInstance;
 
     public SchemaUntypedField SequenceCycleZeroTime
     {
         get
         {
             _SequenceCycleZeroTimeOffset = _SequenceCycleZeroTimeOffset ?? Schema.GetOffset(0x280B3A7192A3CA95);
-            return new SchemaUntypedField(_Handle + _SequenceCycleZeroTimeOffset!.Value);
+            var instance = _SequenceCycleZeroTimeInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _SequenceCycleZeroTimeOffset!.Value);
+            return instance;
         }
     }
 

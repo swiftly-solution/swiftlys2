@@ -17,23 +17,29 @@ internal partial class CPulseCell_TestWaitWithCursorStateImpl : CPulseCell_BaseY
     public CPulseCell_TestWaitWithCursorStateImpl(nint handle) : base(handle) { }
 
     private static nint? _WakeResumeOffset;
+    private CPulse_ResumePointImpl? _WakeResumeInstance;
 
     public CPulse_ResumePoint WakeResume
     {
         get
         {
             _WakeResumeOffset = _WakeResumeOffset ?? Schema.GetOffset(0xB1305BB431F86DC2);
-            return new CPulse_ResumePointImpl(_Handle + _WakeResumeOffset!.Value);
+            var instance = _WakeResumeInstance ??= new CPulse_ResumePointImpl(0);
+            instance.DangerousSetHandle(_Handle + _WakeResumeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _WakeFailOffset;
+    private CPulse_ResumePointImpl? _WakeFailInstance;
 
     public CPulse_ResumePoint WakeFail
     {
         get
         {
             _WakeFailOffset = _WakeFailOffset ?? Schema.GetOffset(0xB1305BB4BE921FF5);
-            return new CPulse_ResumePointImpl(_Handle + _WakeFailOffset!.Value);
+            var instance = _WakeFailInstance ??= new CPulse_ResumePointImpl(0);
+            instance.DangerousSetHandle(_Handle + _WakeFailOffset!.Value);
+            return instance;
         }
     }
 

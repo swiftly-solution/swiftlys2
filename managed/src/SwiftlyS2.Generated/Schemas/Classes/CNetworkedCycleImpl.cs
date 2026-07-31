@@ -37,33 +37,42 @@ internal partial class CNetworkedCycleImpl : SchemaClass, CNetworkedCycle
         }
     }
     private static nint? _CyclesPerSecondOffset;
+    private SchemaUntypedField? _CyclesPerSecondInstance;
 
     public SchemaUntypedField CyclesPerSecond
     {
         get
         {
             _CyclesPerSecondOffset = _CyclesPerSecondOffset ?? Schema.GetOffset(0x9B2966A544417193);
-            return new SchemaUntypedField(_Handle + _CyclesPerSecondOffset!.Value);
+            var instance = _CyclesPerSecondInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _CyclesPerSecondOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CycleZeroTimeOffset;
+    private SchemaUntypedField? _CycleZeroTimeInstance;
 
     public SchemaUntypedField CycleZeroTime
     {
         get
         {
             _CycleZeroTimeOffset = _CycleZeroTimeOffset ?? Schema.GetOffset(0x9B2966A540321698);
-            return new SchemaUntypedField(_Handle + _CycleZeroTimeOffset!.Value);
+            var instance = _CycleZeroTimeInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _CycleZeroTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ResetCountOffset;
+    private SchemaUntypedField? _ResetCountInstance;
 
     public SchemaUntypedField ResetCount
     {
         get
         {
             _ResetCountOffset = _ResetCountOffset ?? Schema.GetOffset(0x9B2966A589B18BCF);
-            return new SchemaUntypedField(_Handle + _ResetCountOffset!.Value);
+            var instance = _ResetCountInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ResetCountOffset!.Value);
+            return instance;
         }
     }
 

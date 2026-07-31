@@ -17,13 +17,16 @@ internal partial class CNmBoneWeightListImpl : SchemaClass, CNmBoneWeightList
     public CNmBoneWeightListImpl(nint handle) : base(handle) { }
 
     private static nint? _SkeletonNameOffset;
+    private SchemaUntypedField? _SkeletonNameInstance;
 
     public SchemaUntypedField SkeletonName
     {
         get
         {
             _SkeletonNameOffset = _SkeletonNameOffset ?? Schema.GetOffset(0xA16307391879D68D);
-            return new SchemaUntypedField(_Handle + _SkeletonNameOffset!.Value);
+            var instance = _SkeletonNameInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _SkeletonNameOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BoneIDsOffset;

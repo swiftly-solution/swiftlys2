@@ -27,13 +27,16 @@ internal partial class CMotionSearchNodeImpl : SchemaClass, CMotionSearchNode
         }
     }
     private static nint? _QuantizerOffset;
+    private CVectorQuantizerImpl? _QuantizerInstance;
 
     public CVectorQuantizer Quantizer
     {
         get
         {
             _QuantizerOffset = _QuantizerOffset ?? Schema.GetOffset(0x7CB28AA0C7DE6374);
-            return new CVectorQuantizerImpl(_Handle + _QuantizerOffset!.Value);
+            var instance = _QuantizerInstance ??= new CVectorQuantizerImpl(0);
+            instance.DangerousSetHandle(_Handle + _QuantizerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SampleCodesOffset;

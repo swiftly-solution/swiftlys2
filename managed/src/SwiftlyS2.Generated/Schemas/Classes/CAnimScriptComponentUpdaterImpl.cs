@@ -17,13 +17,16 @@ internal partial class CAnimScriptComponentUpdaterImpl : CAnimComponentUpdaterIm
     public CAnimScriptComponentUpdaterImpl(nint handle) : base(handle) { }
 
     private static nint? _ScriptOffset;
+    private AnimScriptHandleImpl? _ScriptInstance;
 
     public AnimScriptHandle Script
     {
         get
         {
             _ScriptOffset = _ScriptOffset ?? Schema.GetOffset(0x2BD2101829D70FB0);
-            return new AnimScriptHandleImpl(_Handle + _ScriptOffset!.Value);
+            var instance = _ScriptInstance ??= new AnimScriptHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _ScriptOffset!.Value);
+            return instance;
         }
     }
 

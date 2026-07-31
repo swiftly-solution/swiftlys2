@@ -62,13 +62,16 @@ internal partial class C_OP_CreateParticleSystemRendererImpl : CParticleFunction
         }
     }
     private static nint? _AggregationPosOffset;
+    private CPerParticleVecInputImpl? _AggregationPosInstance;
 
     public CPerParticleVecInput AggregationPos
     {
         get
         {
             _AggregationPosOffset = _AggregationPosOffset ?? Schema.GetOffset(0xB86C827D49456289);
-            return new CPerParticleVecInputImpl(_Handle + _AggregationPosOffset!.Value);
+            var instance = _AggregationPosInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _AggregationPosOffset!.Value);
+            return instance;
         }
     }
 

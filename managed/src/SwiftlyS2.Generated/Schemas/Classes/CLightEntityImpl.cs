@@ -17,6 +17,7 @@ internal partial class CLightEntityImpl : CBaseModelEntityImpl, CLightEntity
     public CLightEntityImpl(nint handle) : base(handle) { }
 
     private static nint? _CLightComponentOffset;
+    private CLightComponentImpl? _CLightComponentInstance;
 
     public CLightComponent? CLightComponent
     {
@@ -24,7 +25,10 @@ internal partial class CLightEntityImpl : CBaseModelEntityImpl, CLightEntity
         {
             _CLightComponentOffset = _CLightComponentOffset ?? Schema.GetOffset(0xA3C95F05104F0185);
             var ptr = _Handle.Read<nint>(_CLightComponentOffset!.Value);
-            return ptr.IsValidPtr() ? new CLightComponentImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _CLightComponentInstance ??= new CLightComponentImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
 

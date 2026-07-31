@@ -27,23 +27,29 @@ internal partial class BlendItem_tImpl : SchemaClass, BlendItem_t
         }
     }
     private static nint? _ChildOffset;
+    private CAnimUpdateNodeRefImpl? _ChildInstance;
 
     public CAnimUpdateNodeRef Child
     {
         get
         {
             _ChildOffset = _ChildOffset ?? Schema.GetOffset(0x8FC30544A0B773F);
-            return new CAnimUpdateNodeRefImpl(_Handle + _ChildOffset!.Value);
+            var instance = _ChildInstance ??= new CAnimUpdateNodeRefImpl(0);
+            instance.DangerousSetHandle(_Handle + _ChildOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SequenceOffset;
+    private HSequenceImpl? _SequenceInstance;
 
     public HSequence Sequence
     {
         get
         {
             _SequenceOffset = _SequenceOffset ?? Schema.GetOffset(0x8FC3054E0A0598E);
-            return new HSequenceImpl(_Handle + _SequenceOffset!.Value);
+            var instance = _SequenceInstance ??= new HSequenceImpl(0);
+            instance.DangerousSetHandle(_Handle + _SequenceOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PosOffset;

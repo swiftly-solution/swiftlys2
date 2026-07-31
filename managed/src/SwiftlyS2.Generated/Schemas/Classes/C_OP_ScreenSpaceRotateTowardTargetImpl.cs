@@ -17,23 +17,29 @@ internal partial class C_OP_ScreenSpaceRotateTowardTargetImpl : CParticleFunctio
     public C_OP_ScreenSpaceRotateTowardTargetImpl(nint handle) : base(handle) { }
 
     private static nint? _TargetPositionOffset;
+    private CPerParticleVecInputImpl? _TargetPositionInstance;
 
     public CPerParticleVecInput TargetPosition
     {
         get
         {
             _TargetPositionOffset = _TargetPositionOffset ?? Schema.GetOffset(0xD66164FC554C563B);
-            return new CPerParticleVecInputImpl(_Handle + _TargetPositionOffset!.Value);
+            var instance = _TargetPositionInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _TargetPositionOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OutputRemapOffset;
+    private CParticleRemapFloatInputImpl? _OutputRemapInstance;
 
     public CParticleRemapFloatInput OutputRemap
     {
         get
         {
             _OutputRemapOffset = _OutputRemapOffset ?? Schema.GetOffset(0xD66164FC1239396F);
-            return new CParticleRemapFloatInputImpl(_Handle + _OutputRemapOffset!.Value);
+            var instance = _OutputRemapInstance ??= new CParticleRemapFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _OutputRemapOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SetMethodOffset;
@@ -47,13 +53,16 @@ internal partial class C_OP_ScreenSpaceRotateTowardTargetImpl : CParticleFunctio
         }
     }
     private static nint? _ScreenEdgeAlignmentDistanceOffset;
+    private CPerParticleFloatInputImpl? _ScreenEdgeAlignmentDistanceInstance;
 
     public CPerParticleFloatInput ScreenEdgeAlignmentDistance
     {
         get
         {
             _ScreenEdgeAlignmentDistanceOffset = _ScreenEdgeAlignmentDistanceOffset ?? Schema.GetOffset(0xD66164FCDB3D3EAC);
-            return new CPerParticleFloatInputImpl(_Handle + _ScreenEdgeAlignmentDistanceOffset!.Value);
+            var instance = _ScreenEdgeAlignmentDistanceInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ScreenEdgeAlignmentDistanceOffset!.Value);
+            return instance;
         }
     }
 

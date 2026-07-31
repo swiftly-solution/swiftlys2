@@ -267,6 +267,7 @@ internal partial class CPointCameraImpl : CBaseEntityImpl, CPointCamera
         }
     }
     private static nint? _NextOffset;
+    private CPointCameraImpl? _NextInstance;
 
     public CPointCamera? Next
     {
@@ -274,7 +275,10 @@ internal partial class CPointCameraImpl : CBaseEntityImpl, CPointCamera
         {
             _NextOffset = _NextOffset ?? Schema.GetOffset(0x3E5CC08332B11E0E);
             var ptr = _Handle.Read<nint>(_NextOffset!.Value);
-            return ptr.IsValidPtr() ? new CPointCameraImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _NextInstance ??= new CPointCameraImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
 

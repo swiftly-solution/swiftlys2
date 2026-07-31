@@ -57,43 +57,55 @@ internal partial class C_OP_RemapDotProductToCPImpl : CParticleFunctionPreEmissi
         }
     }
     private static nint? _InputMinOffset;
+    private CParticleCollectionFloatInputImpl? _InputMinInstance;
 
     public CParticleCollectionFloatInput InputMin
     {
         get
         {
             _InputMinOffset = _InputMinOffset ?? Schema.GetOffset(0xDC012AAEE88A0D0F);
-            return new CParticleCollectionFloatInputImpl(_Handle + _InputMinOffset!.Value);
+            var instance = _InputMinInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _InputMinOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InputMaxOffset;
+    private CParticleCollectionFloatInputImpl? _InputMaxInstance;
 
     public CParticleCollectionFloatInput InputMax
     {
         get
         {
             _InputMaxOffset = _InputMaxOffset ?? Schema.GetOffset(0xDC012AAED6766901);
-            return new CParticleCollectionFloatInputImpl(_Handle + _InputMaxOffset!.Value);
+            var instance = _InputMaxInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _InputMaxOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OutputMinOffset;
+    private CParticleCollectionFloatInputImpl? _OutputMinInstance;
 
     public CParticleCollectionFloatInput OutputMin
     {
         get
         {
             _OutputMinOffset = _OutputMinOffset ?? Schema.GetOffset(0xDC012AAE5F8D7716);
-            return new CParticleCollectionFloatInputImpl(_Handle + _OutputMinOffset!.Value);
+            var instance = _OutputMinInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _OutputMinOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OutputMaxOffset;
+    private CParticleCollectionFloatInputImpl? _OutputMaxInstance;
 
     public CParticleCollectionFloatInput OutputMax
     {
         get
         {
             _OutputMaxOffset = _OutputMaxOffset ?? Schema.GetOffset(0xDC012AAE51A0E8C4);
-            return new CParticleCollectionFloatInputImpl(_Handle + _OutputMaxOffset!.Value);
+            var instance = _OutputMaxInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _OutputMaxOffset!.Value);
+            return instance;
         }
     }
 

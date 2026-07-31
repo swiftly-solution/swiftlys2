@@ -17,6 +17,7 @@ internal partial class CHostageExpresserShimImpl : CBaseCombatCharacterImpl, CHo
     public CHostageExpresserShimImpl(nint handle) : base(handle) { }
 
     private static nint? _ExpresserOffset;
+    private CAI_ExpresserImpl? _ExpresserInstance;
 
     public CAI_Expresser? Expresser
     {
@@ -24,7 +25,10 @@ internal partial class CHostageExpresserShimImpl : CBaseCombatCharacterImpl, CHo
         {
             _ExpresserOffset = _ExpresserOffset ?? Schema.GetOffset(0xD6B3DCE7697CAC2A);
             var ptr = _Handle.Read<nint>(_ExpresserOffset!.Value);
-            return ptr.IsValidPtr() ? new CAI_ExpresserImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _ExpresserInstance ??= new CAI_ExpresserImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
 

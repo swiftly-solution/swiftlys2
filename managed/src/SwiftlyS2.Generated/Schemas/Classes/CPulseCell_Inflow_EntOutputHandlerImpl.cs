@@ -17,33 +17,42 @@ internal partial class CPulseCell_Inflow_EntOutputHandlerImpl : CPulseCell_Inflo
     public CPulseCell_Inflow_EntOutputHandlerImpl(nint handle) : base(handle) { }
 
     private static nint? _SourceEntityOffset;
+    private SchemaUntypedField? _SourceEntityInstance;
 
     public SchemaUntypedField SourceEntity
     {
         get
         {
             _SourceEntityOffset = _SourceEntityOffset ?? Schema.GetOffset(0x8C9310C4AD2DB063);
-            return new SchemaUntypedField(_Handle + _SourceEntityOffset!.Value);
+            var instance = _SourceEntityInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _SourceEntityOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SourceOutputOffset;
+    private SchemaUntypedField? _SourceOutputInstance;
 
     public SchemaUntypedField SourceOutput
     {
         get
         {
             _SourceOutputOffset = _SourceOutputOffset ?? Schema.GetOffset(0x8C9310C42D46D7F5);
-            return new SchemaUntypedField(_Handle + _SourceOutputOffset!.Value);
+            var instance = _SourceOutputInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _SourceOutputOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ExpectedParamTypeOffset;
+    private SchemaUntypedField? _ExpectedParamTypeInstance;
 
     public SchemaUntypedField ExpectedParamType
     {
         get
         {
             _ExpectedParamTypeOffset = _ExpectedParamTypeOffset ?? Schema.GetOffset(0x8C9310C41C1CB8A6);
-            return new SchemaUntypedField(_Handle + _ExpectedParamTypeOffset!.Value);
+            var instance = _ExpectedParamTypeInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ExpectedParamTypeOffset!.Value);
+            return instance;
         }
     }
 

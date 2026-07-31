@@ -97,23 +97,29 @@ internal partial class CSmokeGrenadeProjectileImpl : CBaseCSGrenadeProjectileImp
         }
     }
     private static nint? _LastBounceOffset;
+    private GameTime_tImpl? _LastBounceInstance;
 
     public GameTime_t LastBounce
     {
         get
         {
             _LastBounceOffset = _LastBounceOffset ?? Schema.GetOffset(0xE31DC1B8A4A556A7);
-            return new GameTime_tImpl(_Handle + _LastBounceOffset!.Value);
+            var instance = _LastBounceInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastBounceOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FllastSimulationTimeOffset;
+    private GameTime_tImpl? _FllastSimulationTimeInstance;
 
     public GameTime_t FllastSimulationTime
     {
         get
         {
             _FllastSimulationTimeOffset = _FllastSimulationTimeOffset ?? Schema.GetOffset(0xE31DC1B8F56D1EED);
-            return new GameTime_tImpl(_Handle + _FllastSimulationTimeOffset!.Value);
+            var instance = _FllastSimulationTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FllastSimulationTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ExplodeFromInfernoOffset;

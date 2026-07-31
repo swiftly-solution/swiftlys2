@@ -37,23 +37,29 @@ internal partial class CNmIDToFloatNode__CDefinitionImpl : CNmFloatValueNode__CD
         }
     }
     private static nint? _IDsOffset;
+    private SchemaUntypedField? _IDsInstance;
 
     public SchemaUntypedField IDs
     {
         get
         {
             _IDsOffset = _IDsOffset ?? Schema.GetOffset(0x9F6F687D0C180009);
-            return new SchemaUntypedField(_Handle + _IDsOffset!.Value);
+            var instance = _IDsInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _IDsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ValuesOffset;
+    private SchemaUntypedField? _ValuesInstance;
 
     public SchemaUntypedField Values
     {
         get
         {
             _ValuesOffset = _ValuesOffset ?? Schema.GetOffset(0x9F6F687DFBEDDADB);
-            return new SchemaUntypedField(_Handle + _ValuesOffset!.Value);
+            var instance = _ValuesInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ValuesOffset!.Value);
+            return instance;
         }
     }
 

@@ -57,23 +57,29 @@ internal partial class CChoreoComponentImpl : SchemaClass, CChoreoComponent
         }
     }
     private static nint? _NextSceneEventIdOffset;
+    private SceneEventId_tImpl? _NextSceneEventIdInstance;
 
     public SceneEventId_t NextSceneEventId
     {
         get
         {
             _NextSceneEventIdOffset = _NextSceneEventIdOffset ?? Schema.GetOffset(0x1CE3A873756F461);
-            return new SceneEventId_tImpl(_Handle + _NextSceneEventIdOffset!.Value);
+            var instance = _NextSceneEventIdInstance ??= new SceneEventId_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NextSceneEventIdOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AllowResponsesEndTimeOffset;
+    private GameTime_tImpl? _AllowResponsesEndTimeInstance;
 
     public GameTime_t AllowResponsesEndTime
     {
         get
         {
             _AllowResponsesEndTimeOffset = _AllowResponsesEndTimeOffset ?? Schema.GetOffset(0x1CE3A8758EB0248);
-            return new GameTime_tImpl(_Handle + _AllowResponsesEndTimeOffset!.Value);
+            var instance = _AllowResponsesEndTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _AllowResponsesEndTimeOffset!.Value);
+            return instance;
         }
     }
 

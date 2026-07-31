@@ -27,13 +27,16 @@ internal partial class CPAssignment_tImpl : SchemaClass, CPAssignment_t
         }
     }
     private static nint? _PosOffset;
+    private CPerParticleVecInputImpl? _PosInstance;
 
     public CPerParticleVecInput Pos
     {
         get
         {
             _PosOffset = _PosOffset ?? Schema.GetOffset(0xEB6A63F0DFC9BE09);
-            return new CPerParticleVecInputImpl(_Handle + _PosOffset!.Value);
+            var instance = _PosInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _PosOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OrientationModeOffset;

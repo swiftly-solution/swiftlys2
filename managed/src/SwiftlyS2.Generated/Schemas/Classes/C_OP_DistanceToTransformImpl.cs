@@ -17,63 +17,81 @@ internal partial class C_OP_DistanceToTransformImpl : CParticleFunctionOperatorI
     public C_OP_DistanceToTransformImpl(nint handle) : base(handle) { }
 
     private static nint? _FieldOutputOffset;
+    private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
             _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x4E442549E5729606);
-            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+            var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InputMinOffset;
+    private CPerParticleFloatInputImpl? _InputMinInstance;
 
     public CPerParticleFloatInput InputMin
     {
         get
         {
             _InputMinOffset = _InputMinOffset ?? Schema.GetOffset(0x4E442549E88A0D0F);
-            return new CPerParticleFloatInputImpl(_Handle + _InputMinOffset!.Value);
+            var instance = _InputMinInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _InputMinOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InputMaxOffset;
+    private CPerParticleFloatInputImpl? _InputMaxInstance;
 
     public CPerParticleFloatInput InputMax
     {
         get
         {
             _InputMaxOffset = _InputMaxOffset ?? Schema.GetOffset(0x4E442549D6766901);
-            return new CPerParticleFloatInputImpl(_Handle + _InputMaxOffset!.Value);
+            var instance = _InputMaxInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _InputMaxOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OutputMinOffset;
+    private CPerParticleFloatInputImpl? _OutputMinInstance;
 
     public CPerParticleFloatInput OutputMin
     {
         get
         {
             _OutputMinOffset = _OutputMinOffset ?? Schema.GetOffset(0x4E4425495F8D7716);
-            return new CPerParticleFloatInputImpl(_Handle + _OutputMinOffset!.Value);
+            var instance = _OutputMinInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _OutputMinOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OutputMaxOffset;
+    private CPerParticleFloatInputImpl? _OutputMaxInstance;
 
     public CPerParticleFloatInput OutputMax
     {
         get
         {
             _OutputMaxOffset = _OutputMaxOffset ?? Schema.GetOffset(0x4E44254951A0E8C4);
-            return new CPerParticleFloatInputImpl(_Handle + _OutputMaxOffset!.Value);
+            var instance = _OutputMaxInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _OutputMaxOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TransformStartOffset;
+    private CParticleTransformInputImpl? _TransformStartInstance;
 
     public CParticleTransformInput TransformStart
     {
         get
         {
             _TransformStartOffset = _TransformStartOffset ?? Schema.GetOffset(0x4E442549D94FA7F9);
-            return new CParticleTransformInputImpl(_Handle + _TransformStartOffset!.Value);
+            var instance = _TransformStartInstance ??= new CParticleTransformInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _TransformStartOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LOSOffset;
@@ -162,13 +180,16 @@ internal partial class C_OP_DistanceToTransformImpl : CParticleFunctionOperatorI
         }
     }
     private static nint? _ComponentScaleOffset;
+    private CPerParticleVecInputImpl? _ComponentScaleInstance;
 
     public CPerParticleVecInput ComponentScale
     {
         get
         {
             _ComponentScaleOffset = _ComponentScaleOffset ?? Schema.GetOffset(0x4E442549B17954E2);
-            return new CPerParticleVecInputImpl(_Handle + _ComponentScaleOffset!.Value);
+            var instance = _ComponentScaleInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ComponentScaleOffset!.Value);
+            return instance;
         }
     }
 

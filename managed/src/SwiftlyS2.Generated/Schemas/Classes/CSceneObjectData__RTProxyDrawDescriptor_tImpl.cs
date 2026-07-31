@@ -37,13 +37,16 @@ internal partial class CSceneObjectData__RTProxyDrawDescriptor_tImpl : SchemaCla
         }
     }
     private static nint? _DrawDescOffset;
+    private CMaterialDrawDescriptorImpl? _DrawDescInstance;
 
     public CMaterialDrawDescriptor DrawDesc
     {
         get
         {
             _DrawDescOffset = _DrawDescOffset ?? Schema.GetOffset(0x2393DBEDD28090CE);
-            return new CMaterialDrawDescriptorImpl(_Handle + _DrawDescOffset!.Value);
+            var instance = _DrawDescInstance ??= new CMaterialDrawDescriptorImpl(0);
+            instance.DangerousSetHandle(_Handle + _DrawDescOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MWorldFromLocalOffset;

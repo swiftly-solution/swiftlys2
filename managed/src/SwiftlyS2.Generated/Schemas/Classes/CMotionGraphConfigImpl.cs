@@ -16,9 +16,18 @@ internal partial class CMotionGraphConfigImpl : SchemaClass, CMotionGraphConfig
 {
     public CMotionGraphConfigImpl(nint handle) : base(handle) { }
 
+    private static nint? _ParamValuesOffset;
+    private SchemaFixedArray<float>? _ParamValuesInstance;
+
     public ISchemaFixedArray<float> ParamValues
     {
-        get => new SchemaFixedArray<float>(_Handle, 0x851F6EEA365BD3F8, 4, 4, 4);
+        get
+        {
+            _ParamValuesOffset = _ParamValuesOffset ?? Schema.GetOffset(0x851F6EEA365BD3F8);
+            var instance = _ParamValuesInstance ??= new SchemaFixedArray<float>(0, 0x851F6EEA365BD3F8, 4, 4, 4);
+            instance.DangerousSetHandle(_Handle + _ParamValuesOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _DurationOffset;
 
@@ -31,13 +40,16 @@ internal partial class CMotionGraphConfigImpl : SchemaClass, CMotionGraphConfig
         }
     }
     private static nint? _MotionIndexOffset;
+    private MotionIndexImpl? _MotionIndexInstance;
 
     public MotionIndex MotionIndex
     {
         get
         {
             _MotionIndexOffset = _MotionIndexOffset ?? Schema.GetOffset(0x851F6EEABF50B8E1);
-            return new MotionIndexImpl(_Handle + _MotionIndexOffset!.Value);
+            var instance = _MotionIndexInstance ??= new MotionIndexImpl(0);
+            instance.DangerousSetHandle(_Handle + _MotionIndexOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SampleStartOffset;

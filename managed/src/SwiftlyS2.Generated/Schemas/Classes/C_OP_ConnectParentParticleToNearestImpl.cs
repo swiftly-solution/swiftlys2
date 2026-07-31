@@ -47,23 +47,29 @@ internal partial class C_OP_ConnectParentParticleToNearestImpl : CParticleFuncti
         }
     }
     private static nint? _RadiusScaleOffset;
+    private CParticleCollectionFloatInputImpl? _RadiusScaleInstance;
 
     public CParticleCollectionFloatInput RadiusScale
     {
         get
         {
             _RadiusScaleOffset = _RadiusScaleOffset ?? Schema.GetOffset(0x9C608BD0A7A20159);
-            return new CParticleCollectionFloatInputImpl(_Handle + _RadiusScaleOffset!.Value);
+            var instance = _RadiusScaleInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _RadiusScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ParentRadiusScaleOffset;
+    private CParticleCollectionFloatInputImpl? _ParentRadiusScaleInstance;
 
     public CParticleCollectionFloatInput ParentRadiusScale
     {
         get
         {
             _ParentRadiusScaleOffset = _ParentRadiusScaleOffset ?? Schema.GetOffset(0x9C608BD0CD77EF69);
-            return new CParticleCollectionFloatInputImpl(_Handle + _ParentRadiusScaleOffset!.Value);
+            var instance = _ParentRadiusScaleInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParentRadiusScaleOffset!.Value);
+            return instance;
         }
     }
 

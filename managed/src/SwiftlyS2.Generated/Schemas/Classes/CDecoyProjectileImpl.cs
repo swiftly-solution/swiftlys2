@@ -37,13 +37,16 @@ internal partial class CDecoyProjectileImpl : CBaseCSGrenadeProjectileImpl, CDec
         }
     }
     private static nint? _ExpireTimeOffset;
+    private GameTime_tImpl? _ExpireTimeInstance;
 
     public GameTime_t ExpireTime
     {
         get
         {
             _ExpireTimeOffset = _ExpireTimeOffset ?? Schema.GetOffset(0x696291216D61853F);
-            return new GameTime_tImpl(_Handle + _ExpireTimeOffset!.Value);
+            var instance = _ExpireTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _ExpireTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DecoyWeaponDefIndexOffset;

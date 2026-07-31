@@ -17,23 +17,29 @@ internal partial class C_INIT_CreateWithinBoxImpl : CParticleFunctionInitializer
     public C_INIT_CreateWithinBoxImpl(nint handle) : base(handle) { }
 
     private static nint? _MinOffset;
+    private CPerParticleVecInputImpl? _MinInstance;
 
     public CPerParticleVecInput Min
     {
         get
         {
             _MinOffset = _MinOffset ?? Schema.GetOffset(0x331A2B22B0765F37);
-            return new CPerParticleVecInputImpl(_Handle + _MinOffset!.Value);
+            var instance = _MinInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _MinOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MaxOffset;
+    private CPerParticleVecInputImpl? _MaxInstance;
 
     public CPerParticleVecInput Max
     {
         get
         {
             _MaxOffset = _MaxOffset ?? Schema.GetOffset(0x331A2B22BE89FCF9);
-            return new CPerParticleVecInputImpl(_Handle + _MaxOffset!.Value);
+            var instance = _MaxInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _MaxOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ControlPointNumberOffset;
@@ -57,13 +63,16 @@ internal partial class C_INIT_CreateWithinBoxImpl : CParticleFunctionInitializer
         }
     }
     private static nint? _RandomnessParametersOffset;
+    private CRandomNumberGeneratorParametersImpl? _RandomnessParametersInstance;
 
     public CRandomNumberGeneratorParameters RandomnessParameters
     {
         get
         {
             _RandomnessParametersOffset = _RandomnessParametersOffset ?? Schema.GetOffset(0x331A2B227EDF50AD);
-            return new CRandomNumberGeneratorParametersImpl(_Handle + _RandomnessParametersOffset!.Value);
+            var instance = _RandomnessParametersInstance ??= new CRandomNumberGeneratorParametersImpl(0);
+            instance.DangerousSetHandle(_Handle + _RandomnessParametersOffset!.Value);
+            return instance;
         }
     }
     private static nint? _UseNewCodeOffset;

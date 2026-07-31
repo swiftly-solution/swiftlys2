@@ -36,9 +36,18 @@ internal partial class CVoteControllerImpl : CBaseEntityImpl, CVoteController
             return ref _Handle.AsRef<int>(_OnlyTeamToVoteOffset!.Value);
         }
     }
+    private static nint? _VoteOptionCountOffset;
+    private SchemaFixedArray<int>? _VoteOptionCountInstance;
+
     public ISchemaFixedArray<int> VoteOptionCount
     {
-        get => new SchemaFixedArray<int>(_Handle, 0x6F560B0614DBD0DF, 5, 4, 4);
+        get
+        {
+            _VoteOptionCountOffset = _VoteOptionCountOffset ?? Schema.GetOffset(0x6F560B0614DBD0DF);
+            var instance = _VoteOptionCountInstance ??= new SchemaFixedArray<int>(0, 0x6F560B0614DBD0DF, 5, 4, 4);
+            instance.DangerousSetHandle(_Handle + _VoteOptionCountOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _PotentialVotesOffset;
 
@@ -61,38 +70,56 @@ internal partial class CVoteControllerImpl : CBaseEntityImpl, CVoteController
         }
     }
     private static nint? _AcceptingVotesTimerOffset;
+    private CountdownTimerImpl? _AcceptingVotesTimerInstance;
 
     public CountdownTimer AcceptingVotesTimer
     {
         get
         {
             _AcceptingVotesTimerOffset = _AcceptingVotesTimerOffset ?? Schema.GetOffset(0x6F560B069E336B15);
-            return new CountdownTimerImpl(_Handle + _AcceptingVotesTimerOffset!.Value);
+            var instance = _AcceptingVotesTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _AcceptingVotesTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ExecuteCommandTimerOffset;
+    private CountdownTimerImpl? _ExecuteCommandTimerInstance;
 
     public CountdownTimer ExecuteCommandTimer
     {
         get
         {
             _ExecuteCommandTimerOffset = _ExecuteCommandTimerOffset ?? Schema.GetOffset(0x6F560B06CAF2ECEE);
-            return new CountdownTimerImpl(_Handle + _ExecuteCommandTimerOffset!.Value);
+            var instance = _ExecuteCommandTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _ExecuteCommandTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ResetVoteTimerOffset;
+    private CountdownTimerImpl? _ResetVoteTimerInstance;
 
     public CountdownTimer ResetVoteTimer
     {
         get
         {
             _ResetVoteTimerOffset = _ResetVoteTimerOffset ?? Schema.GetOffset(0x6F560B06B54CD305);
-            return new CountdownTimerImpl(_Handle + _ResetVoteTimerOffset!.Value);
+            var instance = _ResetVoteTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _ResetVoteTimerOffset!.Value);
+            return instance;
         }
     }
+    private static nint? _VotesCastOffset;
+    private SchemaFixedArray<int>? _VotesCastInstance;
+
     public ISchemaFixedArray<int> VotesCast
     {
-        get => new SchemaFixedArray<int>(_Handle, 0x6F560B060247527D, 64, 4, 4);
+        get
+        {
+            _VotesCastOffset = _VotesCastOffset ?? Schema.GetOffset(0x6F560B060247527D);
+            var instance = _VotesCastInstance ??= new SchemaFixedArray<int>(0, 0x6F560B060247527D, 64, 4, 4);
+            instance.DangerousSetHandle(_Handle + _VotesCastOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _PlayerHoldingVoteOffset;
 

@@ -27,13 +27,16 @@ internal partial class TwoBoneIKSettings_tImpl : SchemaClass, TwoBoneIKSettings_
         }
     }
     private static nint? _EndEffectorAttachmentOffset;
+    private CAnimAttachmentImpl? _EndEffectorAttachmentInstance;
 
     public CAnimAttachment EndEffectorAttachment
     {
         get
         {
             _EndEffectorAttachmentOffset = _EndEffectorAttachmentOffset ?? Schema.GetOffset(0xBE0915516872873B);
-            return new CAnimAttachmentImpl(_Handle + _EndEffectorAttachmentOffset!.Value);
+            var instance = _EndEffectorAttachmentInstance ??= new CAnimAttachmentImpl(0);
+            instance.DangerousSetHandle(_Handle + _EndEffectorAttachmentOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TargetTypeOffset;
@@ -47,13 +50,16 @@ internal partial class TwoBoneIKSettings_tImpl : SchemaClass, TwoBoneIKSettings_
         }
     }
     private static nint? _TargetAttachmentOffset;
+    private CAnimAttachmentImpl? _TargetAttachmentInstance;
 
     public CAnimAttachment TargetAttachment
     {
         get
         {
             _TargetAttachmentOffset = _TargetAttachmentOffset ?? Schema.GetOffset(0xBE091551C90DDA55);
-            return new CAnimAttachmentImpl(_Handle + _TargetAttachmentOffset!.Value);
+            var instance = _TargetAttachmentInstance ??= new CAnimAttachmentImpl(0);
+            instance.DangerousSetHandle(_Handle + _TargetAttachmentOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TargetBoneIndexOffset;
@@ -67,23 +73,29 @@ internal partial class TwoBoneIKSettings_tImpl : SchemaClass, TwoBoneIKSettings_
         }
     }
     private static nint? _PositionParamOffset;
+    private CAnimParamHandleImpl? _PositionParamInstance;
 
     public CAnimParamHandle PositionParam
     {
         get
         {
             _PositionParamOffset = _PositionParamOffset ?? Schema.GetOffset(0xBE091551FF710245);
-            return new CAnimParamHandleImpl(_Handle + _PositionParamOffset!.Value);
+            var instance = _PositionParamInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _PositionParamOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RotationParamOffset;
+    private CAnimParamHandleImpl? _RotationParamInstance;
 
     public CAnimParamHandle RotationParam
     {
         get
         {
             _RotationParamOffset = _RotationParamOffset ?? Schema.GetOffset(0xBE09155193200F16);
-            return new CAnimParamHandleImpl(_Handle + _RotationParamOffset!.Value);
+            var instance = _RotationParamInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _RotationParamOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AlwaysUseFallbackHingeOffset;

@@ -17,43 +17,55 @@ internal partial class CPulse_OutputConnectionImpl : SchemaClass, CPulse_OutputC
     public CPulse_OutputConnectionImpl(nint handle) : base(handle) { }
 
     private static nint? _SourceOutputOffset;
+    private SchemaUntypedField? _SourceOutputInstance;
 
     public SchemaUntypedField SourceOutput
     {
         get
         {
             _SourceOutputOffset = _SourceOutputOffset ?? Schema.GetOffset(0x6DEBCD452D46D7F5);
-            return new SchemaUntypedField(_Handle + _SourceOutputOffset!.Value);
+            var instance = _SourceOutputInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _SourceOutputOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TargetEntityOffset;
+    private SchemaUntypedField? _TargetEntityInstance;
 
     public SchemaUntypedField TargetEntity
     {
         get
         {
             _TargetEntityOffset = _TargetEntityOffset ?? Schema.GetOffset(0x6DEBCD45948B1533);
-            return new SchemaUntypedField(_Handle + _TargetEntityOffset!.Value);
+            var instance = _TargetEntityInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _TargetEntityOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TargetInputOffset;
+    private SchemaUntypedField? _TargetInputInstance;
 
     public SchemaUntypedField TargetInput
     {
         get
         {
             _TargetInputOffset = _TargetInputOffset ?? Schema.GetOffset(0x6DEBCD45F1A0003C);
-            return new SchemaUntypedField(_Handle + _TargetInputOffset!.Value);
+            var instance = _TargetInputInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _TargetInputOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ParamOffset;
+    private SchemaUntypedField? _ParamInstance;
 
     public SchemaUntypedField Param
     {
         get
         {
             _ParamOffset = _ParamOffset ?? Schema.GetOffset(0x6DEBCD45E85FEBB2);
-            return new SchemaUntypedField(_Handle + _ParamOffset!.Value);
+            var instance = _ParamInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ParamOffset!.Value);
+            return instance;
         }
     }
 

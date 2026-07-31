@@ -17,23 +17,29 @@ internal partial class CPulseCell_Step_CallExternalMethodImpl : CPulseCell_BaseY
     public CPulseCell_Step_CallExternalMethodImpl(nint handle) : base(handle) { }
 
     private static nint? _MethodNameOffset;
+    private SchemaUntypedField? _MethodNameInstance;
 
     public SchemaUntypedField MethodName
     {
         get
         {
             _MethodNameOffset = _MethodNameOffset ?? Schema.GetOffset(0x6A5B3EF57D863B13);
-            return new SchemaUntypedField(_Handle + _MethodNameOffset!.Value);
+            var instance = _MethodNameInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _MethodNameOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BlackboardIndexOffset;
+    private PulseRuntimeBlackboardReferenceIndex_tImpl? _BlackboardIndexInstance;
 
     public PulseRuntimeBlackboardReferenceIndex_t BlackboardIndex
     {
         get
         {
             _BlackboardIndexOffset = _BlackboardIndexOffset ?? Schema.GetOffset(0x6A5B3EF5C76B0A2C);
-            return new PulseRuntimeBlackboardReferenceIndex_tImpl(_Handle + _BlackboardIndexOffset!.Value);
+            var instance = _BlackboardIndexInstance ??= new PulseRuntimeBlackboardReferenceIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _BlackboardIndexOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ExpectedArgsOffset;
@@ -57,13 +63,16 @@ internal partial class CPulseCell_Step_CallExternalMethodImpl : CPulseCell_BaseY
         }
     }
     private static nint? _OnFinishedOffset;
+    private CPulse_ResumePointImpl? _OnFinishedInstance;
 
     public CPulse_ResumePoint OnFinished
     {
         get
         {
             _OnFinishedOffset = _OnFinishedOffset ?? Schema.GetOffset(0x6A5B3EF58D903E5E);
-            return new CPulse_ResumePointImpl(_Handle + _OnFinishedOffset!.Value);
+            var instance = _OnFinishedInstance ??= new CPulse_ResumePointImpl(0);
+            instance.DangerousSetHandle(_Handle + _OnFinishedOffset!.Value);
+            return instance;
         }
     }
 

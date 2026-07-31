@@ -32,13 +32,16 @@ internal partial class PermModelData_tImpl : SchemaClass, PermModelData_t
         }
     }
     private static nint? _ModelInfoOffset;
+    private PermModelInfo_tImpl? _ModelInfoInstance;
 
     public PermModelInfo_t ModelInfo
     {
         get
         {
             _ModelInfoOffset = _ModelInfoOffset ?? Schema.GetOffset(0x3E367D0B506D8FE2);
-            return new PermModelInfo_tImpl(_Handle + _ModelInfoOffset!.Value);
+            var instance = _ModelInfoInstance ??= new PermModelInfo_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _ModelInfoOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ExtPartsOffset;
@@ -172,13 +175,16 @@ internal partial class PermModelData_tImpl : SchemaClass, PermModelData_t
         }
     }
     private static nint? _ModelSkeletonOffset;
+    private ModelSkeletonData_tImpl? _ModelSkeletonInstance;
 
     public ModelSkeletonData_t ModelSkeleton
     {
         get
         {
             _ModelSkeletonOffset = _ModelSkeletonOffset ?? Schema.GetOffset(0x3E367D0BAFF3E579);
-            return new ModelSkeletonData_tImpl(_Handle + _ModelSkeletonOffset!.Value);
+            var instance = _ModelSkeletonInstance ??= new ModelSkeletonData_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _ModelSkeletonOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RemappingTableOffset;
@@ -212,6 +218,7 @@ internal partial class PermModelData_tImpl : SchemaClass, PermModelData_t
         }
     }
     private static nint? _ModelConfigListOffset;
+    private CModelConfigListImpl? _ModelConfigListInstance;
 
     public CModelConfigList? ModelConfigList
     {
@@ -219,7 +226,10 @@ internal partial class PermModelData_tImpl : SchemaClass, PermModelData_t
         {
             _ModelConfigListOffset = _ModelConfigListOffset ?? Schema.GetOffset(0x3E367D0B99085156);
             var ptr = _Handle.Read<nint>(_ModelConfigListOffset!.Value);
-            return ptr.IsValidPtr() ? new CModelConfigListImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _ModelConfigListInstance ??= new CModelConfigListImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _BodyGroupsHiddenInToolsOffset;

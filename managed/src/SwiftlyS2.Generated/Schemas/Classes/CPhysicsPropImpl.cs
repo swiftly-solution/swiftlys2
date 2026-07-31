@@ -227,13 +227,16 @@ internal partial class CPhysicsPropImpl : CBreakablePropImpl, CPhysicsProp
         }
     }
     private static nint? _LastBurnOffset;
+    private GameTime_tImpl? _LastBurnInstance;
 
     public GameTime_t LastBurn
     {
         get
         {
             _LastBurnOffset = _LastBurnOffset ?? Schema.GetOffset(0xC3FD37FE7EF64B16);
-            return new GameTime_tImpl(_Handle + _LastBurnOffset!.Value);
+            var instance = _LastBurnInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastBurnOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DynamicContinuousContactBehaviorOffset;
@@ -247,13 +250,16 @@ internal partial class CPhysicsPropImpl : CBreakablePropImpl, CPhysicsProp
         }
     }
     private static nint? _NextCheckDisableMotionContactsTimeOffset;
+    private GameTime_tImpl? _NextCheckDisableMotionContactsTimeInstance;
 
     public GameTime_t NextCheckDisableMotionContactsTime
     {
         get
         {
             _NextCheckDisableMotionContactsTimeOffset = _NextCheckDisableMotionContactsTimeOffset ?? Schema.GetOffset(0xC3FD37FE50052C1A);
-            return new GameTime_tImpl(_Handle + _NextCheckDisableMotionContactsTimeOffset!.Value);
+            var instance = _NextCheckDisableMotionContactsTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NextCheckDisableMotionContactsTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InitialGlowStateOffset;
@@ -386,13 +392,31 @@ internal partial class CPhysicsPropImpl : CBreakablePropImpl, CPhysicsProp
             return ref _Handle.AsRef<CPhysicsProp__CrateType_t>(_CrateTypeOffset!.Value);
         }
     }
+    private static nint? _StrItemClassOffset;
+    private SchemaStringFixedArray? _StrItemClassInstance;
+
     public ISchemaStringFixedArray StrItemClass
     {
-        get => new SchemaStringFixedArray(_Handle, 0xC3FD37FE35D963A1, 4, 8, 8);
+        get
+        {
+            _StrItemClassOffset = _StrItemClassOffset ?? Schema.GetOffset(0xC3FD37FE35D963A1);
+            var instance = _StrItemClassInstance ??= new SchemaStringFixedArray(0, 0xC3FD37FE35D963A1, 4, 8, 8);
+            instance.DangerousSetHandle(_Handle + _StrItemClassOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _ItemCountOffset;
+    private SchemaFixedArray<int>? _ItemCountInstance;
+
     public ISchemaFixedArray<int> ItemCount
     {
-        get => new SchemaFixedArray<int>(_Handle, 0xC3FD37FEA5886501, 4, 4, 4);
+        get
+        {
+            _ItemCountOffset = _ItemCountOffset ?? Schema.GetOffset(0xC3FD37FEA5886501);
+            var instance = _ItemCountInstance ??= new SchemaFixedArray<int>(0, 0xC3FD37FEA5886501, 4, 4, 4);
+            instance.DangerousSetHandle(_Handle + _ItemCountOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _RemovableForAmmoBalancingOffset;
 

@@ -17,13 +17,16 @@ internal partial class CPulseCell_InlineNodeSkipSelectorImpl : CPulseCell_BaseFl
     public CPulseCell_InlineNodeSkipSelectorImpl(nint handle) : base(handle) { }
 
     private static nint? _FlowNodeIDOffset;
+    private PulseDocNodeID_tImpl? _FlowNodeIDInstance;
 
     public PulseDocNodeID_t FlowNodeID
     {
         get
         {
             _FlowNodeIDOffset = _FlowNodeIDOffset ?? Schema.GetOffset(0x43AF14578ED47FBC);
-            return new PulseDocNodeID_tImpl(_Handle + _FlowNodeIDOffset!.Value);
+            var instance = _FlowNodeIDInstance ??= new PulseDocNodeID_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FlowNodeIDOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AndOffset;
@@ -37,23 +40,29 @@ internal partial class CPulseCell_InlineNodeSkipSelectorImpl : CPulseCell_BaseFl
         }
     }
     private static nint? _PassOutflowOffset;
+    private PulseSelectorOutflowList_tImpl? _PassOutflowInstance;
 
     public PulseSelectorOutflowList_t PassOutflow
     {
         get
         {
             _PassOutflowOffset = _PassOutflowOffset ?? Schema.GetOffset(0x43AF145724AA6434);
-            return new PulseSelectorOutflowList_tImpl(_Handle + _PassOutflowOffset!.Value);
+            var instance = _PassOutflowInstance ??= new PulseSelectorOutflowList_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _PassOutflowOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FailOutflowOffset;
+    private CPulse_OutflowConnectionImpl? _FailOutflowInstance;
 
     public CPulse_OutflowConnection FailOutflow
     {
         get
         {
             _FailOutflowOffset = _FailOutflowOffset ?? Schema.GetOffset(0x43AF1457AC90C0E3);
-            return new CPulse_OutflowConnectionImpl(_Handle + _FailOutflowOffset!.Value);
+            var instance = _FailOutflowInstance ??= new CPulse_OutflowConnectionImpl(0);
+            instance.DangerousSetHandle(_Handle + _FailOutflowOffset!.Value);
+            return instance;
         }
     }
 

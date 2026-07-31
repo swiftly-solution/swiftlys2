@@ -37,23 +37,29 @@ internal partial class C_OP_SetSingleControlPointPositionImpl : CParticleFunctio
         }
     }
     private static nint? _CP1PosOffset;
+    private CParticleCollectionVecInputImpl? _CP1PosInstance;
 
     public CParticleCollectionVecInput CP1Pos
     {
         get
         {
             _CP1PosOffset = _CP1PosOffset ?? Schema.GetOffset(0xFE0B7A4D408288D9);
-            return new CParticleCollectionVecInputImpl(_Handle + _CP1PosOffset!.Value);
+            var instance = _CP1PosInstance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _CP1PosOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TransformInputOffset;
+    private CParticleTransformInputImpl? _TransformInputInstance;
 
     public CParticleTransformInput TransformInput
     {
         get
         {
             _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0xFE0B7A4D3A9ED669);
-            return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+            var instance = _TransformInputInstance ??= new CParticleTransformInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _TransformInputOffset!.Value);
+            return instance;
         }
     }
 

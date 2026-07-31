@@ -17,23 +17,29 @@ internal partial class C_OP_DragRelativeToPlaneImpl : CParticleFunctionOperatorI
     public C_OP_DragRelativeToPlaneImpl(nint handle) : base(handle) { }
 
     private static nint? _DragAtPlaneOffset;
+    private CParticleCollectionFloatInputImpl? _DragAtPlaneInstance;
 
     public CParticleCollectionFloatInput DragAtPlane
     {
         get
         {
             _DragAtPlaneOffset = _DragAtPlaneOffset ?? Schema.GetOffset(0x9D049848176259A2);
-            return new CParticleCollectionFloatInputImpl(_Handle + _DragAtPlaneOffset!.Value);
+            var instance = _DragAtPlaneInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _DragAtPlaneOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FalloffOffset;
+    private CParticleCollectionFloatInputImpl? _FalloffInstance;
 
     public CParticleCollectionFloatInput Falloff
     {
         get
         {
             _FalloffOffset = _FalloffOffset ?? Schema.GetOffset(0x9D049848FA143DCB);
-            return new CParticleCollectionFloatInputImpl(_Handle + _FalloffOffset!.Value);
+            var instance = _FalloffInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _FalloffOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DirectionalOffset;
@@ -47,13 +53,16 @@ internal partial class C_OP_DragRelativeToPlaneImpl : CParticleFunctionOperatorI
         }
     }
     private static nint? _PlaneNormalOffset;
+    private CParticleCollectionVecInputImpl? _PlaneNormalInstance;
 
     public CParticleCollectionVecInput PlaneNormal
     {
         get
         {
             _PlaneNormalOffset = _PlaneNormalOffset ?? Schema.GetOffset(0x9D04984821103682);
-            return new CParticleCollectionVecInputImpl(_Handle + _PlaneNormalOffset!.Value);
+            var instance = _PlaneNormalInstance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _PlaneNormalOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ControlPointNumberOffset;

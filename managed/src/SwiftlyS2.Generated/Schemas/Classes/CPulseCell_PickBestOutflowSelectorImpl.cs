@@ -27,13 +27,16 @@ internal partial class CPulseCell_PickBestOutflowSelectorImpl : CPulseCell_BaseF
         }
     }
     private static nint? _OutflowListOffset;
+    private PulseSelectorOutflowList_tImpl? _OutflowListInstance;
 
     public PulseSelectorOutflowList_t OutflowList
     {
         get
         {
             _OutflowListOffset = _OutflowListOffset ?? Schema.GetOffset(0x7239DF041461E743);
-            return new PulseSelectorOutflowList_tImpl(_Handle + _OutflowListOffset!.Value);
+            var instance = _OutflowListInstance ??= new PulseSelectorOutflowList_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _OutflowListOffset!.Value);
+            return instance;
         }
     }
 

@@ -92,13 +92,16 @@ internal partial class CParticleSystemImpl : CBaseModelEntityImpl, CParticleSyst
         }
     }
     private static nint? _StartTimeOffset;
+    private GameTime_tImpl? _StartTimeInstance;
 
     public GameTime_t StartTime
     {
         get
         {
             _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0x8F6D2B2567FE9DC4);
-            return new GameTime_tImpl(_Handle + _StartTimeOffset!.Value);
+            var instance = _StartTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _StartTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PreSimTimeOffset;
@@ -111,17 +114,44 @@ internal partial class CParticleSystemImpl : CBaseModelEntityImpl, CParticleSyst
             return ref _Handle.AsRef<float>(_PreSimTimeOffset!.Value);
         }
     }
+    private static nint? _ServerControlPointsOffset;
+    private SchemaFixedArray<Vector>? _ServerControlPointsInstance;
+
     public ISchemaFixedArray<Vector> ServerControlPoints
     {
-        get => new SchemaFixedArray<Vector>(_Handle, 0x8F6D2B2561386048, 4, 12, 4);
+        get
+        {
+            _ServerControlPointsOffset = _ServerControlPointsOffset ?? Schema.GetOffset(0x8F6D2B2561386048);
+            var instance = _ServerControlPointsInstance ??= new SchemaFixedArray<Vector>(0, 0x8F6D2B2561386048, 4, 12, 4);
+            instance.DangerousSetHandle(_Handle + _ServerControlPointsOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _ServerControlPointAssignmentsOffset;
+    private SchemaFixedArray<byte>? _ServerControlPointAssignmentsInstance;
+
     public ISchemaFixedArray<byte> ServerControlPointAssignments
     {
-        get => new SchemaFixedArray<byte>(_Handle, 0x8F6D2B25E9DEDAC8, 4, 1, 1);
+        get
+        {
+            _ServerControlPointAssignmentsOffset = _ServerControlPointAssignmentsOffset ?? Schema.GetOffset(0x8F6D2B25E9DEDAC8);
+            var instance = _ServerControlPointAssignmentsInstance ??= new SchemaFixedArray<byte>(0, 0x8F6D2B25E9DEDAC8, 4, 1, 1);
+            instance.DangerousSetHandle(_Handle + _ServerControlPointAssignmentsOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _ControlPointEntsOffset;
+    private SchemaFixedArray<CHandle<CBaseEntity>>? _ControlPointEntsInstance;
+
     public ISchemaFixedArray<CHandle<CBaseEntity>> ControlPointEnts
     {
-        get => new SchemaFixedArray<CHandle<CBaseEntity>>(_Handle, 0x8F6D2B25ECA36598, 64, 4, 4);
+        get
+        {
+            _ControlPointEntsOffset = _ControlPointEntsOffset ?? Schema.GetOffset(0x8F6D2B25ECA36598);
+            var instance = _ControlPointEntsInstance ??= new SchemaFixedArray<CHandle<CBaseEntity>>(0, 0x8F6D2B25ECA36598, 64, 4, 4);
+            instance.DangerousSetHandle(_Handle + _ControlPointEntsOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _DataStringLocalizedOffset;
 
@@ -203,9 +233,18 @@ internal partial class CParticleSystemImpl : CBaseModelEntityImpl, CParticleSyst
             Schema.SetString(_Handle, _EffectNameOffset!.Value, value);
         }
     }
+    private static nint? _ControlPointNamesOffset;
+    private SchemaStringFixedArray? _ControlPointNamesInstance;
+
     public ISchemaStringFixedArray ControlPointNames
     {
-        get => new SchemaStringFixedArray(_Handle, 0x8F6D2B258DBFEC78, 64, 8, 8);
+        get
+        {
+            _ControlPointNamesOffset = _ControlPointNamesOffset ?? Schema.GetOffset(0x8F6D2B258DBFEC78);
+            var instance = _ControlPointNamesInstance ??= new SchemaStringFixedArray(0, 0x8F6D2B258DBFEC78, 64, 8, 8);
+            instance.DangerousSetHandle(_Handle + _ControlPointNamesOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _DataCPOffset;
 

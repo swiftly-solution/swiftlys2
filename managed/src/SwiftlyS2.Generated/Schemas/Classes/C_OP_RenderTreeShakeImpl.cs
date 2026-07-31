@@ -27,13 +27,16 @@ internal partial class C_OP_RenderTreeShakeImpl : CParticleFunctionRendererImpl,
         }
     }
     private static nint? _PeakStrengthFieldOverrideOffset;
+    private ParticleAttributeIndex_tImpl? _PeakStrengthFieldOverrideInstance;
 
     public ParticleAttributeIndex_t PeakStrengthFieldOverride
     {
         get
         {
             _PeakStrengthFieldOverrideOffset = _PeakStrengthFieldOverrideOffset ?? Schema.GetOffset(0x8EB4A28D78E18331);
-            return new ParticleAttributeIndex_tImpl(_Handle + _PeakStrengthFieldOverrideOffset!.Value);
+            var instance = _PeakStrengthFieldOverrideInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _PeakStrengthFieldOverrideOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RadiusOffset;
@@ -47,13 +50,16 @@ internal partial class C_OP_RenderTreeShakeImpl : CParticleFunctionRendererImpl,
         }
     }
     private static nint? _RadiusFieldOverrideOffset;
+    private ParticleAttributeIndex_tImpl? _RadiusFieldOverrideInstance;
 
     public ParticleAttributeIndex_t RadiusFieldOverride
     {
         get
         {
             _RadiusFieldOverrideOffset = _RadiusFieldOverrideOffset ?? Schema.GetOffset(0x8EB4A28D53B0BAA1);
-            return new ParticleAttributeIndex_tImpl(_Handle + _RadiusFieldOverrideOffset!.Value);
+            var instance = _RadiusFieldOverrideInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _RadiusFieldOverrideOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ShakeDurationOffset;

@@ -27,13 +27,16 @@ internal partial class NmSyncTrackTime_tImpl : SchemaClass, NmSyncTrackTime_t
         }
     }
     private static nint? _PercentageThroughOffset;
+    private NmPercent_tImpl? _PercentageThroughInstance;
 
     public NmPercent_t PercentageThrough
     {
         get
         {
             _PercentageThroughOffset = _PercentageThroughOffset ?? Schema.GetOffset(0x12BF3F3C77B731AA);
-            return new NmPercent_tImpl(_Handle + _PercentageThroughOffset!.Value);
+            var instance = _PercentageThroughInstance ??= new NmPercent_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _PercentageThroughOffset!.Value);
+            return instance;
         }
     }
 

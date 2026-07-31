@@ -57,13 +57,16 @@ internal partial class CAnimEventDefinitionImpl : SchemaClass, CAnimEventDefinit
         }
     }
     private static nint? _EventDataOffset;
+    private SchemaUntypedField? _EventDataInstance;
 
     public SchemaUntypedField EventData
     {
         get
         {
             _EventDataOffset = _EventDataOffset ?? Schema.GetOffset(0x27C8C8BC03E547A7);
-            return new SchemaUntypedField(_Handle + _EventDataOffset!.Value);
+            var instance = _EventDataInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _EventDataOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LegacyOptionsOffset;

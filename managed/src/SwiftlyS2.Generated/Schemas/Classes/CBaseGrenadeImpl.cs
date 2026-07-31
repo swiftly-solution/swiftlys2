@@ -87,13 +87,16 @@ internal partial class CBaseGrenadeImpl : CBaseAnimGraphImpl, CBaseGrenade
         }
     }
     private static nint? _DetonateTimeOffset;
+    private GameTime_tImpl? _DetonateTimeInstance;
 
     public GameTime_t DetonateTime
     {
         get
         {
             _DetonateTimeOffset = _DetonateTimeOffset ?? Schema.GetOffset(0xB6ACD98F884102F2);
-            return new GameTime_tImpl(_Handle + _DetonateTimeOffset!.Value);
+            var instance = _DetonateTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _DetonateTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _WarnAITimeOffset;
@@ -157,13 +160,16 @@ internal partial class CBaseGrenadeImpl : CBaseAnimGraphImpl, CBaseGrenade
         }
     }
     private static nint? _NextAttackOffset;
+    private GameTime_tImpl? _NextAttackInstance;
 
     public GameTime_t NextAttack
     {
         get
         {
             _NextAttackOffset = _NextAttackOffset ?? Schema.GetOffset(0xB6ACD98F3DFDCDEA);
-            return new GameTime_tImpl(_Handle + _NextAttackOffset!.Value);
+            var instance = _NextAttackInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NextAttackOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OriginalThrowerOffset;

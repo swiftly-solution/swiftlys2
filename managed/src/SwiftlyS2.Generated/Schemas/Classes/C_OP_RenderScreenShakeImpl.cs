@@ -57,43 +57,55 @@ internal partial class C_OP_RenderScreenShakeImpl : CParticleFunctionRendererImp
         }
     }
     private static nint? _RadiusFieldOffset;
+    private ParticleAttributeIndex_tImpl? _RadiusFieldInstance;
 
     public ParticleAttributeIndex_t RadiusField
     {
         get
         {
             _RadiusFieldOffset = _RadiusFieldOffset ?? Schema.GetOffset(0x375088494B15FC11);
-            return new ParticleAttributeIndex_tImpl(_Handle + _RadiusFieldOffset!.Value);
+            var instance = _RadiusFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _RadiusFieldOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DurationFieldOffset;
+    private ParticleAttributeIndex_tImpl? _DurationFieldInstance;
 
     public ParticleAttributeIndex_t DurationField
     {
         get
         {
             _DurationFieldOffset = _DurationFieldOffset ?? Schema.GetOffset(0x37508849B21EDAAB);
-            return new ParticleAttributeIndex_tImpl(_Handle + _DurationFieldOffset!.Value);
+            var instance = _DurationFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _DurationFieldOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FrequencyFieldOffset;
+    private ParticleAttributeIndex_tImpl? _FrequencyFieldInstance;
 
     public ParticleAttributeIndex_t FrequencyField
     {
         get
         {
             _FrequencyFieldOffset = _FrequencyFieldOffset ?? Schema.GetOffset(0x37508849DDA055AF);
-            return new ParticleAttributeIndex_tImpl(_Handle + _FrequencyFieldOffset!.Value);
+            var instance = _FrequencyFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FrequencyFieldOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AmplitudeFieldOffset;
+    private ParticleAttributeIndex_tImpl? _AmplitudeFieldInstance;
 
     public ParticleAttributeIndex_t AmplitudeField
     {
         get
         {
             _AmplitudeFieldOffset = _AmplitudeFieldOffset ?? Schema.GetOffset(0x37508849F8F54FD2);
-            return new ParticleAttributeIndex_tImpl(_Handle + _AmplitudeFieldOffset!.Value);
+            var instance = _AmplitudeFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _AmplitudeFieldOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FilterCPOffset;

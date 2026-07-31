@@ -107,33 +107,42 @@ internal partial class CBtActionAimImpl : CBtNodeImpl, CBtActionAim
         }
     }
     private static nint? _AimTimerOffset;
+    private CountdownTimerImpl? _AimTimerInstance;
 
     public CountdownTimer AimTimer
     {
         get
         {
             _AimTimerOffset = _AimTimerOffset ?? Schema.GetOffset(0x4358751330E31F47);
-            return new CountdownTimerImpl(_Handle + _AimTimerOffset!.Value);
+            var instance = _AimTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _AimTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SniperHoldTimerOffset;
+    private CountdownTimerImpl? _SniperHoldTimerInstance;
 
     public CountdownTimer SniperHoldTimer
     {
         get
         {
             _SniperHoldTimerOffset = _SniperHoldTimerOffset ?? Schema.GetOffset(0x43587513B206F2AC);
-            return new CountdownTimerImpl(_Handle + _SniperHoldTimerOffset!.Value);
+            var instance = _SniperHoldTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _SniperHoldTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FocusIntervalTimerOffset;
+    private CountdownTimerImpl? _FocusIntervalTimerInstance;
 
     public CountdownTimer FocusIntervalTimer
     {
         get
         {
             _FocusIntervalTimerOffset = _FocusIntervalTimerOffset ?? Schema.GetOffset(0x43587513267063CB);
-            return new CountdownTimerImpl(_Handle + _FocusIntervalTimerOffset!.Value);
+            var instance = _FocusIntervalTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _FocusIntervalTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AcquiredOffset;

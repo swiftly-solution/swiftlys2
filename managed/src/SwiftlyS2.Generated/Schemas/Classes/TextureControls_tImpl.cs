@@ -17,73 +17,94 @@ internal partial class TextureControls_tImpl : SchemaClass, TextureControls_t
     public TextureControls_tImpl(nint handle) : base(handle) { }
 
     private static nint? _FinalTextureScaleUOffset;
+    private CParticleCollectionRendererFloatInputImpl? _FinalTextureScaleUInstance;
 
     public CParticleCollectionRendererFloatInput FinalTextureScaleU
     {
         get
         {
             _FinalTextureScaleUOffset = _FinalTextureScaleUOffset ?? Schema.GetOffset(0x6019C255986FEDD1);
-            return new CParticleCollectionRendererFloatInputImpl(_Handle + _FinalTextureScaleUOffset!.Value);
+            var instance = _FinalTextureScaleUInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _FinalTextureScaleUOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FinalTextureScaleVOffset;
+    private CParticleCollectionRendererFloatInputImpl? _FinalTextureScaleVInstance;
 
     public CParticleCollectionRendererFloatInput FinalTextureScaleV
     {
         get
         {
             _FinalTextureScaleVOffset = _FinalTextureScaleVOffset ?? Schema.GetOffset(0x6019C255956FE918);
-            return new CParticleCollectionRendererFloatInputImpl(_Handle + _FinalTextureScaleVOffset!.Value);
+            var instance = _FinalTextureScaleVInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _FinalTextureScaleVOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FinalTextureOffsetUOffset;
+    private CParticleCollectionRendererFloatInputImpl? _FinalTextureOffsetUInstance;
 
     public CParticleCollectionRendererFloatInput FinalTextureOffsetU
     {
         get
         {
             _FinalTextureOffsetUOffset = _FinalTextureOffsetUOffset ?? Schema.GetOffset(0x6019C25524B7447E);
-            return new CParticleCollectionRendererFloatInputImpl(_Handle + _FinalTextureOffsetUOffset!.Value);
+            var instance = _FinalTextureOffsetUInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _FinalTextureOffsetUOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FinalTextureOffsetVOffset;
+    private CParticleCollectionRendererFloatInputImpl? _FinalTextureOffsetVInstance;
 
     public CParticleCollectionRendererFloatInput FinalTextureOffsetV
     {
         get
         {
             _FinalTextureOffsetVOffset = _FinalTextureOffsetVOffset ?? Schema.GetOffset(0x6019C25523B742EB);
-            return new CParticleCollectionRendererFloatInputImpl(_Handle + _FinalTextureOffsetVOffset!.Value);
+            var instance = _FinalTextureOffsetVInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _FinalTextureOffsetVOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FinalTextureUVRotationOffset;
+    private CParticleCollectionRendererFloatInputImpl? _FinalTextureUVRotationInstance;
 
     public CParticleCollectionRendererFloatInput FinalTextureUVRotation
     {
         get
         {
             _FinalTextureUVRotationOffset = _FinalTextureUVRotationOffset ?? Schema.GetOffset(0x6019C2550D61C771);
-            return new CParticleCollectionRendererFloatInputImpl(_Handle + _FinalTextureUVRotationOffset!.Value);
+            var instance = _FinalTextureUVRotationInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _FinalTextureUVRotationOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ZoomScaleOffset;
+    private CParticleCollectionRendererFloatInputImpl? _ZoomScaleInstance;
 
     public CParticleCollectionRendererFloatInput ZoomScale
     {
         get
         {
             _ZoomScaleOffset = _ZoomScaleOffset ?? Schema.GetOffset(0x6019C25565643B72);
-            return new CParticleCollectionRendererFloatInputImpl(_Handle + _ZoomScaleOffset!.Value);
+            var instance = _ZoomScaleInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ZoomScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DistortionOffset;
+    private CParticleCollectionRendererFloatInputImpl? _DistortionInstance;
 
     public CParticleCollectionRendererFloatInput Distortion
     {
         get
         {
             _DistortionOffset = _DistortionOffset ?? Schema.GetOffset(0x6019C25570283608);
-            return new CParticleCollectionRendererFloatInputImpl(_Handle + _DistortionOffset!.Value);
+            var instance = _DistortionInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _DistortionOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RandomizeOffsetsOffset;

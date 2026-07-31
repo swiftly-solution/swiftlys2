@@ -37,13 +37,16 @@ internal partial class CNmIDComparisonNode__CDefinitionImpl : CNmBoolValueNode__
         }
     }
     private static nint? _ComparisionIDsOffset;
+    private SchemaUntypedField? _ComparisionIDsInstance;
 
     public SchemaUntypedField ComparisionIDs
     {
         get
         {
             _ComparisionIDsOffset = _ComparisionIDsOffset ?? Schema.GetOffset(0xE0D928B5E68D53FD);
-            return new SchemaUntypedField(_Handle + _ComparisionIDsOffset!.Value);
+            var instance = _ComparisionIDsInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ComparisionIDsOffset!.Value);
+            return instance;
         }
     }
 

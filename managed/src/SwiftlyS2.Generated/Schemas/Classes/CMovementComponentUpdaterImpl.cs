@@ -27,13 +27,16 @@ internal partial class CMovementComponentUpdaterImpl : CAnimComponentUpdaterImpl
         }
     }
     private static nint? _FacingDampingOffset;
+    private CAnimInputDampingImpl? _FacingDampingInstance;
 
     public CAnimInputDamping FacingDamping
     {
         get
         {
             _FacingDampingOffset = _FacingDampingOffset ?? Schema.GetOffset(0xCAAB73F9A430F4B);
-            return new CAnimInputDampingImpl(_Handle + _FacingDampingOffset!.Value);
+            var instance = _FacingDampingInstance ??= new CAnimInputDampingImpl(0);
+            instance.DangerousSetHandle(_Handle + _FacingDampingOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DefaultMotorIndexOffset;
@@ -86,9 +89,18 @@ internal partial class CMovementComponentUpdaterImpl : CAnimComponentUpdaterImpl
             return ref _Handle.AsRef<bool>(_NetworkFacingOffset!.Value);
         }
     }
+    private static nint? _ParamHandlesOffset;
+    private SchemaClassFixedArray<CAnimParamHandle>? _ParamHandlesInstance;
+
     public ISchemaClassFixedArray<CAnimParamHandle> ParamHandles
     {
-        get => new SchemaClassFixedArray<CAnimParamHandle>(_Handle, 0xCAAB73FF6A771ED, 34, 2, 1);
+        get
+        {
+            _ParamHandlesOffset = _ParamHandlesOffset ?? Schema.GetOffset(0xCAAB73FF6A771ED);
+            var instance = _ParamHandlesInstance ??= new SchemaClassFixedArray<CAnimParamHandle>(0, 0xCAAB73FF6A771ED, 34, 2, 1);
+            instance.DangerousSetHandle(_Handle + _ParamHandlesOffset!.Value);
+            return instance;
+        }
     }
 
 }

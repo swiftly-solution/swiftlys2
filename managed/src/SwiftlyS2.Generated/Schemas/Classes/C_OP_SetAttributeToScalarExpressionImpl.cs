@@ -27,43 +27,55 @@ internal partial class C_OP_SetAttributeToScalarExpressionImpl : CParticleFuncti
         }
     }
     private static nint? _Input1Offset;
+    private CPerParticleFloatInputImpl? _Input1Instance;
 
     public CPerParticleFloatInput Input1
     {
         get
         {
             _Input1Offset = _Input1Offset ?? Schema.GetOffset(0x3D6339D6E9DA2E24);
-            return new CPerParticleFloatInputImpl(_Handle + _Input1Offset!.Value);
+            var instance = _Input1Instance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _Input1Offset!.Value);
+            return instance;
         }
     }
     private static nint? _Input2Offset;
+    private CPerParticleFloatInputImpl? _Input2Instance;
 
     public CPerParticleFloatInput Input2
     {
         get
         {
             _Input2Offset = _Input2Offset ?? Schema.GetOffset(0x3D6339D6ECDA32DD);
-            return new CPerParticleFloatInputImpl(_Handle + _Input2Offset!.Value);
+            var instance = _Input2Instance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _Input2Offset!.Value);
+            return instance;
         }
     }
     private static nint? _OutputRemapOffset;
+    private CParticleRemapFloatInputImpl? _OutputRemapInstance;
 
     public CParticleRemapFloatInput OutputRemap
     {
         get
         {
             _OutputRemapOffset = _OutputRemapOffset ?? Schema.GetOffset(0x3D6339D61239396F);
-            return new CParticleRemapFloatInputImpl(_Handle + _OutputRemapOffset!.Value);
+            var instance = _OutputRemapInstance ??= new CParticleRemapFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _OutputRemapOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OutputFieldOffset;
+    private ParticleAttributeIndex_tImpl? _OutputFieldInstance;
 
     public ParticleAttributeIndex_t OutputField
     {
         get
         {
             _OutputFieldOffset = _OutputFieldOffset ?? Schema.GetOffset(0x3D6339D6324F6F74);
-            return new ParticleAttributeIndex_tImpl(_Handle + _OutputFieldOffset!.Value);
+            var instance = _OutputFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _OutputFieldOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SetMethodOffset;

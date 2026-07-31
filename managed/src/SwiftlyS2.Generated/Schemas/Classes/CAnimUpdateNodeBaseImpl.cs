@@ -17,13 +17,16 @@ internal partial class CAnimUpdateNodeBaseImpl : SchemaClass, CAnimUpdateNodeBas
     public CAnimUpdateNodeBaseImpl(nint handle) : base(handle) { }
 
     private static nint? _NodePathOffset;
+    private CAnimNodePathImpl? _NodePathInstance;
 
     public CAnimNodePath NodePath
     {
         get
         {
             _NodePathOffset = _NodePathOffset ?? Schema.GetOffset(0xA16B836B69EE5E4E);
-            return new CAnimNodePathImpl(_Handle + _NodePathOffset!.Value);
+            var instance = _NodePathInstance ??= new CAnimNodePathImpl(0);
+            instance.DangerousSetHandle(_Handle + _NodePathOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NetworkModeOffset;

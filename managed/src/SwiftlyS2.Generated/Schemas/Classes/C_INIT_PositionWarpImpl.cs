@@ -17,23 +17,29 @@ internal partial class C_INIT_PositionWarpImpl : CParticleFunctionInitializerImp
     public C_INIT_PositionWarpImpl(nint handle) : base(handle) { }
 
     private static nint? _WarpMinOffset;
+    private CParticleCollectionVecInputImpl? _WarpMinInstance;
 
     public CParticleCollectionVecInput WarpMin
     {
         get
         {
             _WarpMinOffset = _WarpMinOffset ?? Schema.GetOffset(0x15BDD34F1B8A7F09);
-            return new CParticleCollectionVecInputImpl(_Handle + _WarpMinOffset!.Value);
+            var instance = _WarpMinInstance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _WarpMinOffset!.Value);
+            return instance;
         }
     }
     private static nint? _WarpMaxOffset;
+    private CParticleCollectionVecInputImpl? _WarpMaxInstance;
 
     public CParticleCollectionVecInput WarpMax
     {
         get
         {
             _WarpMaxOffset = _WarpMaxOffset ?? Schema.GetOffset(0x15BDD34F0D76E147);
-            return new CParticleCollectionVecInputImpl(_Handle + _WarpMaxOffset!.Value);
+            var instance = _WarpMaxInstance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _WarpMaxOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ScaleControlPointNumberOffset;

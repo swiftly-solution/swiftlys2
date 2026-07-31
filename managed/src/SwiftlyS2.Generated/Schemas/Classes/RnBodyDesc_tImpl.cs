@@ -81,9 +81,18 @@ internal partial class RnBodyDesc_tImpl : SchemaClass, RnBodyDesc_t
             return ref _Handle.AsRef<Vector>(_LocalMassCenterOffset!.Value);
         }
     }
+    private static nint? _LocalInertiaInvOffset;
+    private SchemaFixedArray<Vector>? _LocalInertiaInvInstance;
+
     public ISchemaFixedArray<Vector> LocalInertiaInv
     {
-        get => new SchemaFixedArray<Vector>(_Handle, 0xB8BC9637AF2EEFAD, 3, 12, 4);
+        get
+        {
+            _LocalInertiaInvOffset = _LocalInertiaInvOffset ?? Schema.GetOffset(0xB8BC9637AF2EEFAD);
+            var instance = _LocalInertiaInvInstance ??= new SchemaFixedArray<Vector>(0, 0xB8BC9637AF2EEFAD, 3, 12, 4);
+            instance.DangerousSetHandle(_Handle + _LocalInertiaInvOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _MassInvOffset;
 

@@ -97,13 +97,16 @@ internal partial class C_OP_RenderProjectedImpl : CParticleFunctionRendererImpl,
         }
     }
     private static nint? _MaterialSelectionOffset;
+    private CPerParticleFloatInputImpl? _MaterialSelectionInstance;
 
     public CPerParticleFloatInput MaterialSelection
     {
         get
         {
             _MaterialSelectionOffset = _MaterialSelectionOffset ?? Schema.GetOffset(0xA370F3075A88A590);
-            return new CPerParticleFloatInputImpl(_Handle + _MaterialSelectionOffset!.Value);
+            var instance = _MaterialSelectionInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _MaterialSelectionOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AnimationTimeScaleOffset;
@@ -137,53 +140,68 @@ internal partial class C_OP_RenderProjectedImpl : CParticleFunctionRendererImpl,
         }
     }
     private static nint? _RadiusScaleOffset;
+    private CParticleCollectionFloatInputImpl? _RadiusScaleInstance;
 
     public CParticleCollectionFloatInput RadiusScale
     {
         get
         {
             _RadiusScaleOffset = _RadiusScaleOffset ?? Schema.GetOffset(0xA370F307A7A20159);
-            return new CParticleCollectionFloatInputImpl(_Handle + _RadiusScaleOffset!.Value);
+            var instance = _RadiusScaleInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _RadiusScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AlphaScaleOffset;
+    private CParticleCollectionFloatInputImpl? _AlphaScaleInstance;
 
     public CParticleCollectionFloatInput AlphaScale
     {
         get
         {
             _AlphaScaleOffset = _AlphaScaleOffset ?? Schema.GetOffset(0xA370F307EC6D3C25);
-            return new CParticleCollectionFloatInputImpl(_Handle + _AlphaScaleOffset!.Value);
+            var instance = _AlphaScaleInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _AlphaScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RollScaleOffset;
+    private CParticleCollectionFloatInputImpl? _RollScaleInstance;
 
     public CParticleCollectionFloatInput RollScale
     {
         get
         {
             _RollScaleOffset = _RollScaleOffset ?? Schema.GetOffset(0xA370F307F2113F72);
-            return new CParticleCollectionFloatInputImpl(_Handle + _RollScaleOffset!.Value);
+            var instance = _RollScaleInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _RollScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _Alpha2FieldOffset;
+    private ParticleAttributeIndex_tImpl? _Alpha2FieldInstance;
 
     public ParticleAttributeIndex_t Alpha2Field
     {
         get
         {
             _Alpha2FieldOffset = _Alpha2FieldOffset ?? Schema.GetOffset(0xA370F307F60EADC1);
-            return new ParticleAttributeIndex_tImpl(_Handle + _Alpha2FieldOffset!.Value);
+            var instance = _Alpha2FieldInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _Alpha2FieldOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ColorScaleOffset;
+    private CParticleCollectionVecInputImpl? _ColorScaleInstance;
 
     public CParticleCollectionVecInput ColorScale
     {
         get
         {
             _ColorScaleOffset = _ColorScaleOffset ?? Schema.GetOffset(0xA370F3079F9BB8BA);
-            return new CParticleCollectionVecInputImpl(_Handle + _ColorScaleOffset!.Value);
+            var instance = _ColorScaleInstance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ColorScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ColorBlendTypeOffset;

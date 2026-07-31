@@ -17,23 +17,29 @@ internal partial class CPulse_OutflowConnectionImpl : SchemaClass, CPulse_Outflo
     public CPulse_OutflowConnectionImpl(nint handle) : base(handle) { }
 
     private static nint? _SourceOutflowNameOffset;
+    private SchemaUntypedField? _SourceOutflowNameInstance;
 
     public SchemaUntypedField SourceOutflowName
     {
         get
         {
             _SourceOutflowNameOffset = _SourceOutflowNameOffset ?? Schema.GetOffset(0x58023C685EA2FFCF);
-            return new SchemaUntypedField(_Handle + _SourceOutflowNameOffset!.Value);
+            var instance = _SourceOutflowNameInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _SourceOutflowNameOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DestChunkOffset;
+    private PulseRuntimeChunkIndex_tImpl? _DestChunkInstance;
 
     public PulseRuntimeChunkIndex_t DestChunk
     {
         get
         {
             _DestChunkOffset = _DestChunkOffset ?? Schema.GetOffset(0x58023C68D6AC502E);
-            return new PulseRuntimeChunkIndex_tImpl(_Handle + _DestChunkOffset!.Value);
+            var instance = _DestChunkInstance ??= new PulseRuntimeChunkIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _DestChunkOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InstructionOffset;
@@ -47,13 +53,16 @@ internal partial class CPulse_OutflowConnectionImpl : SchemaClass, CPulse_Outflo
         }
     }
     private static nint? _OutflowRegisterMapOffset;
+    private PulseRegisterMap_tImpl? _OutflowRegisterMapInstance;
 
     public PulseRegisterMap_t OutflowRegisterMap
     {
         get
         {
             _OutflowRegisterMapOffset = _OutflowRegisterMapOffset ?? Schema.GetOffset(0x58023C68F89A90F8);
-            return new PulseRegisterMap_tImpl(_Handle + _OutflowRegisterMapOffset!.Value);
+            var instance = _OutflowRegisterMapInstance ??= new PulseRegisterMap_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _OutflowRegisterMapOffset!.Value);
+            return instance;
         }
     }
 

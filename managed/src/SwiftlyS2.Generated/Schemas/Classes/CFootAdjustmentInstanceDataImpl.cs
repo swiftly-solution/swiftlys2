@@ -17,23 +17,29 @@ internal partial class CFootAdjustmentInstanceDataImpl : SchemaClass, CFootAdjus
     public CFootAdjustmentInstanceDataImpl(nint handle) : base(handle) { }
 
     private static nint? _StartTimeOffset;
+    private SchemaUntypedField? _StartTimeInstance;
 
     public SchemaUntypedField StartTime
     {
         get
         {
             _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0xB15F962667FE9DC4);
-            return new SchemaUntypedField(_Handle + _StartTimeOffset!.Value);
+            var instance = _StartTimeInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _StartTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DurationOffset;
+    private SchemaUntypedField? _DurationInstance;
 
     public SchemaUntypedField Duration
     {
         get
         {
             _DurationOffset = _DurationOffset ?? Schema.GetOffset(0xB15F9626BC5E3BAB);
-            return new SchemaUntypedField(_Handle + _DurationOffset!.Value);
+            var instance = _DurationInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _DurationOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StartHeadingWSOffset;

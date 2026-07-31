@@ -27,13 +27,16 @@ internal partial class CNmFloatClampNode__CDefinitionImpl : CNmFloatValueNode__C
         }
     }
     private static nint? _ClampRangeOffset;
+    private SchemaUntypedField? _ClampRangeInstance;
 
     public SchemaUntypedField ClampRange
     {
         get
         {
             _ClampRangeOffset = _ClampRangeOffset ?? Schema.GetOffset(0x77C3AAE2FED5C4A1);
-            return new SchemaUntypedField(_Handle + _ClampRangeOffset!.Value);
+            var instance = _ClampRangeInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ClampRangeOffset!.Value);
+            return instance;
         }
     }
 

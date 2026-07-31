@@ -97,13 +97,16 @@ internal partial class CFollowPathUpdateNodeImpl : CUnaryUpdateNodeImpl, CFollow
         }
     }
     private static nint? _TurnDampingOffset;
+    private CAnimInputDampingImpl? _TurnDampingInstance;
 
     public CAnimInputDamping TurnDamping
     {
         get
         {
             _TurnDampingOffset = _TurnDampingOffset ?? Schema.GetOffset(0x20514621822D585C);
-            return new CAnimInputDampingImpl(_Handle + _TurnDampingOffset!.Value);
+            var instance = _TurnDampingInstance ??= new CAnimInputDampingImpl(0);
+            instance.DangerousSetHandle(_Handle + _TurnDampingOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FacingTargetOffset;
@@ -117,13 +120,16 @@ internal partial class CFollowPathUpdateNodeImpl : CUnaryUpdateNodeImpl, CFollow
         }
     }
     private static nint? _ParamOffset;
+    private CAnimParamHandleImpl? _ParamInstance;
 
     public CAnimParamHandle Param
     {
         get
         {
             _ParamOffset = _ParamOffset ?? Schema.GetOffset(0x20514621679286A4);
-            return new CAnimParamHandleImpl(_Handle + _ParamOffset!.Value);
+            var instance = _ParamInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TurnToFaceOffsetOffset;

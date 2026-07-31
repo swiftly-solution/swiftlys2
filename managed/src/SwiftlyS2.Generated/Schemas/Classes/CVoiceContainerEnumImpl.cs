@@ -17,13 +17,16 @@ internal partial class CVoiceContainerEnumImpl : CVoiceContainerBaseImpl, CVoice
     public CVoiceContainerEnumImpl(nint handle) : base(handle) { }
 
     private static nint? _SoundsToPlayOffset;
+    private CSoundContainerReferenceArrayImpl? _SoundsToPlayInstance;
 
     public CSoundContainerReferenceArray SoundsToPlay
     {
         get
         {
             _SoundsToPlayOffset = _SoundsToPlayOffset ?? Schema.GetOffset(0x7B05DBE2DCB5F70E);
-            return new CSoundContainerReferenceArrayImpl(_Handle + _SoundsToPlayOffset!.Value);
+            var instance = _SoundsToPlayInstance ??= new CSoundContainerReferenceArrayImpl(0);
+            instance.DangerousSetHandle(_Handle + _SoundsToPlayOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SelectionOffset;

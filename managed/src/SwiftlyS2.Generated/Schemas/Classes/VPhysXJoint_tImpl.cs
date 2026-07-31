@@ -117,13 +117,16 @@ internal partial class VPhysXJoint_tImpl : SchemaClass, VPhysXJoint_t
         }
     }
     private static nint? _LinearLimitOffset;
+    private VPhysXRange_tImpl? _LinearLimitInstance;
 
     public VPhysXRange_t LinearLimit
     {
         get
         {
             _LinearLimitOffset = _LinearLimitOffset ?? Schema.GetOffset(0x336EF6EE6B07DCE3);
-            return new VPhysXRange_tImpl(_Handle + _LinearLimitOffset!.Value);
+            var instance = _LinearLimitInstance ??= new VPhysXRange_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LinearLimitOffset!.Value);
+            return instance;
         }
     }
     private static nint? _EnableLinearMotorOffset;
@@ -167,13 +170,16 @@ internal partial class VPhysXJoint_tImpl : SchemaClass, VPhysXJoint_t
         }
     }
     private static nint? _SwingLimitOffset;
+    private VPhysXRange_tImpl? _SwingLimitInstance;
 
     public VPhysXRange_t SwingLimit
     {
         get
         {
             _SwingLimitOffset = _SwingLimitOffset ?? Schema.GetOffset(0x336EF6EEB5B3FDD8);
-            return new VPhysXRange_tImpl(_Handle + _SwingLimitOffset!.Value);
+            var instance = _SwingLimitInstance ??= new VPhysXRange_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _SwingLimitOffset!.Value);
+            return instance;
         }
     }
     private static nint? _EnableTwistLimitOffset;
@@ -187,13 +193,16 @@ internal partial class VPhysXJoint_tImpl : SchemaClass, VPhysXJoint_t
         }
     }
     private static nint? _TwistLimitOffset;
+    private VPhysXRange_tImpl? _TwistLimitInstance;
 
     public VPhysXRange_t TwistLimit
     {
         get
         {
             _TwistLimitOffset = _TwistLimitOffset ?? Schema.GetOffset(0x336EF6EE42713723);
-            return new VPhysXRange_tImpl(_Handle + _TwistLimitOffset!.Value);
+            var instance = _TwistLimitInstance ??= new VPhysXRange_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _TwistLimitOffset!.Value);
+            return instance;
         }
     }
     private static nint? _EnableAngularMotorOffset;

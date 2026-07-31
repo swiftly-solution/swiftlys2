@@ -57,13 +57,16 @@ internal partial class C_OP_ConstrainDistanceToPathImpl : CParticleFunctionConst
         }
     }
     private static nint? _PathParametersOffset;
+    private CPathParametersImpl? _PathParametersInstance;
 
     public CPathParameters PathParameters
     {
         get
         {
             _PathParametersOffset = _PathParametersOffset ?? Schema.GetOffset(0x8146F7878C111646);
-            return new CPathParametersImpl(_Handle + _PathParametersOffset!.Value);
+            var instance = _PathParametersInstance ??= new CPathParametersImpl(0);
+            instance.DangerousSetHandle(_Handle + _PathParametersOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TravelTimeOffset;
@@ -77,23 +80,29 @@ internal partial class C_OP_ConstrainDistanceToPathImpl : CParticleFunctionConst
         }
     }
     private static nint? _FieldScaleOffset;
+    private ParticleAttributeIndex_tImpl? _FieldScaleInstance;
 
     public ParticleAttributeIndex_t FieldScale
     {
         get
         {
             _FieldScaleOffset = _FieldScaleOffset ?? Schema.GetOffset(0x8146F787BE94CE93);
-            return new ParticleAttributeIndex_tImpl(_Handle + _FieldScaleOffset!.Value);
+            var instance = _FieldScaleInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FieldScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ManualTFieldOffset;
+    private ParticleAttributeIndex_tImpl? _ManualTFieldInstance;
 
     public ParticleAttributeIndex_t ManualTField
     {
         get
         {
             _ManualTFieldOffset = _ManualTFieldOffset ?? Schema.GetOffset(0x8146F7871190C51B);
-            return new ParticleAttributeIndex_tImpl(_Handle + _ManualTFieldOffset!.Value);
+            var instance = _ManualTFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _ManualTFieldOffset!.Value);
+            return instance;
         }
     }
 

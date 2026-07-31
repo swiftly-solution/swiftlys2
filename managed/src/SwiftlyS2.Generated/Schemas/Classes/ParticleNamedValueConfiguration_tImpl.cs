@@ -32,13 +32,16 @@ internal partial class ParticleNamedValueConfiguration_tImpl : SchemaClass, Part
         }
     }
     private static nint? _ConfigValueOffset;
+    private SchemaUntypedField? _ConfigValueInstance;
 
     public SchemaUntypedField ConfigValue
     {
         get
         {
             _ConfigValueOffset = _ConfigValueOffset ?? Schema.GetOffset(0x4C42AD0ECF981D3C);
-            return new SchemaUntypedField(_Handle + _ConfigValueOffset!.Value);
+            var instance = _ConfigValueInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ConfigValueOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BoundValuePathOffset;

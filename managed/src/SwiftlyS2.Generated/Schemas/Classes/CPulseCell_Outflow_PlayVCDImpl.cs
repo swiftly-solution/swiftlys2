@@ -27,23 +27,29 @@ internal partial class CPulseCell_Outflow_PlayVCDImpl : CPulseCell_Outflow_PlayV
         }
     }
     private static nint? _OnPausedOffset;
+    private CPulse_OutflowConnectionImpl? _OnPausedInstance;
 
     public CPulse_OutflowConnection OnPaused
     {
         get
         {
             _OnPausedOffset = _OnPausedOffset ?? Schema.GetOffset(0xB095B41491D78012);
-            return new CPulse_OutflowConnectionImpl(_Handle + _OnPausedOffset!.Value);
+            var instance = _OnPausedInstance ??= new CPulse_OutflowConnectionImpl(0);
+            instance.DangerousSetHandle(_Handle + _OnPausedOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OnResumedOffset;
+    private CPulse_OutflowConnectionImpl? _OnResumedInstance;
 
     public CPulse_OutflowConnection OnResumed
     {
         get
         {
             _OnResumedOffset = _OnResumedOffset ?? Schema.GetOffset(0xB095B414CCA87325);
-            return new CPulse_OutflowConnectionImpl(_Handle + _OnResumedOffset!.Value);
+            var instance = _OnResumedInstance ??= new CPulse_OutflowConnectionImpl(0);
+            instance.DangerousSetHandle(_Handle + _OnResumedOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OutRequirementsOffset;

@@ -17,13 +17,16 @@ internal partial class ActiveModelConfig_tImpl : SchemaClass, ActiveModelConfig_
     public ActiveModelConfig_tImpl(nint handle) : base(handle) { }
 
     private static nint? _HandleOffset;
+    private ModelConfigHandle_tImpl? _HandleInstance;
 
     public ModelConfigHandle_t Handle
     {
         get
         {
             _HandleOffset = _HandleOffset ?? Schema.GetOffset(0x554D81919D208453);
-            return new ModelConfigHandle_tImpl(_Handle + _HandleOffset!.Value);
+            var instance = _HandleInstance ??= new ModelConfigHandle_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _HandleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NameOffset;

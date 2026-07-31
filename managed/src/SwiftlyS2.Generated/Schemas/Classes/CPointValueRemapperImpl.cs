@@ -327,13 +327,16 @@ internal partial class CPointValueRemapperImpl : CBaseEntityImpl, CPointValueRem
         }
     }
     private static nint? _PreviousUpdateTickTimeOffset;
+    private GameTime_tImpl? _PreviousUpdateTickTimeInstance;
 
     public GameTime_t PreviousUpdateTickTime
     {
         get
         {
             _PreviousUpdateTickTimeOffset = _PreviousUpdateTickTimeOffset ?? Schema.GetOffset(0xA8CB433DB5083C83);
-            return new GameTime_tImpl(_Handle + _PreviousUpdateTickTimeOffset!.Value);
+            var instance = _PreviousUpdateTickTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _PreviousUpdateTickTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PreviousTestPointOffset;
@@ -442,23 +445,29 @@ internal partial class CPointValueRemapperImpl : CBaseEntityImpl, CPointValueRem
         }
     }
     private static nint? _PositionOffset;
+    private SchemaUntypedField? _PositionInstance;
 
     public SchemaUntypedField Position
     {
         get
         {
             _PositionOffset = _PositionOffset ?? Schema.GetOffset(0xA8CB433DFC27FA8A);
-            return new SchemaUntypedField(_Handle + _PositionOffset!.Value);
+            var instance = _PositionInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _PositionOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PositionDeltaOffset;
+    private SchemaUntypedField? _PositionDeltaInstance;
 
     public SchemaUntypedField PositionDelta
     {
         get
         {
             _PositionDeltaOffset = _PositionDeltaOffset ?? Schema.GetOffset(0xA8CB433DB249BB1C);
-            return new SchemaUntypedField(_Handle + _PositionDeltaOffset!.Value);
+            var instance = _PositionDeltaInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _PositionDeltaOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OnReachedValueZeroOffset;

@@ -57,13 +57,16 @@ internal partial class CTriggerLookImpl : CTriggerOnceImpl, CTriggerLook
         }
     }
     private static nint? _LookTimeLastOffset;
+    private GameTime_tImpl? _LookTimeLastInstance;
 
     public GameTime_t LookTimeLast
     {
         get
         {
             _LookTimeLastOffset = _LookTimeLastOffset ?? Schema.GetOffset(0x400CA691C3304509);
-            return new GameTime_tImpl(_Handle + _LookTimeLastOffset!.Value);
+            var instance = _LookTimeLastInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LookTimeLastOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TimeoutDurationOffset;

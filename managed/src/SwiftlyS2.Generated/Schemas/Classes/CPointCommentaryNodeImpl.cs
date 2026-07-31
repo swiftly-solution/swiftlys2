@@ -162,13 +162,16 @@ internal partial class CPointCommentaryNodeImpl : CBaseAnimGraphImpl, CPointComm
         }
     }
     private static nint? _FinishedTimeOffset;
+    private GameTime_tImpl? _FinishedTimeInstance;
 
     public GameTime_t FinishedTime
     {
         get
         {
             _FinishedTimeOffset = _FinishedTimeOffset ?? Schema.GetOffset(0x1EE820D5E2616940);
-            return new GameTime_tImpl(_Handle + _FinishedTimeOffset!.Value);
+            var instance = _FinishedTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FinishedTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FinishOriginOffset;
@@ -232,13 +235,16 @@ internal partial class CPointCommentaryNodeImpl : CBaseAnimGraphImpl, CPointComm
         }
     }
     private static nint? _AbortedPlaybackAtOffset;
+    private GameTime_tImpl? _AbortedPlaybackAtInstance;
 
     public GameTime_t AbortedPlaybackAt
     {
         get
         {
             _AbortedPlaybackAtOffset = _AbortedPlaybackAtOffset ?? Schema.GetOffset(0x1EE820D5A444B332);
-            return new GameTime_tImpl(_Handle + _AbortedPlaybackAtOffset!.Value);
+            var instance = _AbortedPlaybackAtInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _AbortedPlaybackAtOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OnCommentaryStartedOffset;
@@ -272,13 +278,16 @@ internal partial class CPointCommentaryNodeImpl : CBaseAnimGraphImpl, CPointComm
         }
     }
     private static nint? _StartTimeOffset;
+    private GameTime_tImpl? _StartTimeInstance;
 
     public GameTime_t StartTime
     {
         get
         {
             _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0x1EE820D567FE9DC4);
-            return new GameTime_tImpl(_Handle + _StartTimeOffset!.Value);
+            var instance = _StartTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _StartTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StartTimeInCommentaryOffset;

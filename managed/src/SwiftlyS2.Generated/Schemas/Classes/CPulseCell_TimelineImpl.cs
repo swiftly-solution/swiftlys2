@@ -37,13 +37,16 @@ internal partial class CPulseCell_TimelineImpl : CPulseCell_BaseYieldingInflowIm
         }
     }
     private static nint? _OnFinishedOffset;
+    private CPulse_ResumePointImpl? _OnFinishedInstance;
 
     public CPulse_ResumePoint OnFinished
     {
         get
         {
             _OnFinishedOffset = _OnFinishedOffset ?? Schema.GetOffset(0xF1185F938D903E5E);
-            return new CPulse_ResumePointImpl(_Handle + _OnFinishedOffset!.Value);
+            var instance = _OnFinishedInstance ??= new CPulse_ResumePointImpl(0);
+            instance.DangerousSetHandle(_Handle + _OnFinishedOffset!.Value);
+            return instance;
         }
     }
 

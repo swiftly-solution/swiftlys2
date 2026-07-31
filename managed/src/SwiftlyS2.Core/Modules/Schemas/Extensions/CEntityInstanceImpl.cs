@@ -4,30 +4,17 @@ using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Shared.EntitySystem;
 using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Core.EntitySystem;
-using SwiftlyS2.Core.Schemas;
-using SwiftlyS2.Core.Extensions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
 internal partial class CEntityInstanceImpl : CEntityInstance, IEquatable<CEntityInstance>
 {
-    private CEntityIdentityImpl _identity = new(0);
-
-    public uint Index => Identity?.EntityHandle.EntityIndex ?? uint.MaxValue;
-    public string DesignerName => Identity?.DesignerName ?? string.Empty;
+    public uint Index => Entity?.EntityHandle.EntityIndex ?? uint.MaxValue;
+    public string DesignerName => Entity?.DesignerName ?? string.Empty;
 
     public CEntityIdentity? Identity {
         get {
-            _EntityOffset ??= Schema.GetOffset(0xB6DD442EA8A45978);
-
-            var ptr = _Handle.Read<nint>(_EntityOffset!.Value);
-            if (ptr == nint.Zero)
-            {
-                return null;
-            }
-
-            _identity.DangerousSetHandle(ptr);
-            return _identity;
+            return Entity;
         }
     }
 

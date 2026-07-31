@@ -16,9 +16,18 @@ internal partial class CPhysLengthImpl : CPhysConstraintImpl, CPhysLength
 {
     public CPhysLengthImpl(nint handle) : base(handle) { }
 
+    private static nint? _OffsetOffset;
+    private SchemaFixedArray<Vector>? _OffsetInstance;
+
     public ISchemaFixedArray<Vector> Offset
     {
-        get => new SchemaFixedArray<Vector>(_Handle, 0x9203A50AF836806A, 2, 12, 4);
+        get
+        {
+            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0x9203A50AF836806A);
+            var instance = _OffsetInstance ??= new SchemaFixedArray<Vector>(0, 0x9203A50AF836806A, 2, 12, 4);
+            instance.DangerousSetHandle(_Handle + _OffsetOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _AttachOffset;
 

@@ -17,23 +17,29 @@ internal partial class C_OP_SetUserEventImpl : CParticleFunctionOperatorImpl, C_
     public C_OP_SetUserEventImpl(nint handle) : base(handle) { }
 
     private static nint? _InputOffset;
+    private CPerParticleFloatInputImpl? _InputInstance;
 
     public CPerParticleFloatInput Input
     {
         get
         {
             _InputOffset = _InputOffset ?? Schema.GetOffset(0x9A6F6FB81D4B7FFD);
-            return new CPerParticleFloatInputImpl(_Handle + _InputOffset!.Value);
+            var instance = _InputInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _InputOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RisingEdgeOffset;
+    private CPerParticleFloatInputImpl? _RisingEdgeInstance;
 
     public CPerParticleFloatInput RisingEdge
     {
         get
         {
             _RisingEdgeOffset = _RisingEdgeOffset ?? Schema.GetOffset(0x9A6F6FB8DCFBDCF4);
-            return new CPerParticleFloatInputImpl(_Handle + _RisingEdgeOffset!.Value);
+            var instance = _RisingEdgeInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _RisingEdgeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RisingEventTypeOffset;
@@ -47,13 +53,16 @@ internal partial class C_OP_SetUserEventImpl : CParticleFunctionOperatorImpl, C_
         }
     }
     private static nint? _FallingEdgeOffset;
+    private CPerParticleFloatInputImpl? _FallingEdgeInstance;
 
     public CPerParticleFloatInput FallingEdge
     {
         get
         {
             _FallingEdgeOffset = _FallingEdgeOffset ?? Schema.GetOffset(0x9A6F6FB8CBE5115B);
-            return new CPerParticleFloatInputImpl(_Handle + _FallingEdgeOffset!.Value);
+            var instance = _FallingEdgeInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _FallingEdgeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FallingEventTypeOffset;

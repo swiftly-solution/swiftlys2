@@ -17,33 +17,42 @@ internal partial class C_OP_SelectivelyEnableChildrenImpl : CParticleFunctionPre
     public C_OP_SelectivelyEnableChildrenImpl(nint handle) : base(handle) { }
 
     private static nint? _ChildGroupIDOffset;
+    private CParticleCollectionFloatInputImpl? _ChildGroupIDInstance;
 
     public CParticleCollectionFloatInput ChildGroupID
     {
         get
         {
             _ChildGroupIDOffset = _ChildGroupIDOffset ?? Schema.GetOffset(0x73804886E3F3C965);
-            return new CParticleCollectionFloatInputImpl(_Handle + _ChildGroupIDOffset!.Value);
+            var instance = _ChildGroupIDInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ChildGroupIDOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FirstChildOffset;
+    private CParticleCollectionFloatInputImpl? _FirstChildInstance;
 
     public CParticleCollectionFloatInput FirstChild
     {
         get
         {
             _FirstChildOffset = _FirstChildOffset ?? Schema.GetOffset(0x738048862DF4A8BD);
-            return new CParticleCollectionFloatInputImpl(_Handle + _FirstChildOffset!.Value);
+            var instance = _FirstChildInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _FirstChildOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NumChildrenToEnableOffset;
+    private CParticleCollectionFloatInputImpl? _NumChildrenToEnableInstance;
 
     public CParticleCollectionFloatInput NumChildrenToEnable
     {
         get
         {
             _NumChildrenToEnableOffset = _NumChildrenToEnableOffset ?? Schema.GetOffset(0x738048868039247A);
-            return new CParticleCollectionFloatInputImpl(_Handle + _NumChildrenToEnableOffset!.Value);
+            var instance = _NumChildrenToEnableInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _NumChildrenToEnableOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PlayEndcapOnStopOffset;

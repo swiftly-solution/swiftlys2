@@ -57,13 +57,16 @@ internal partial class CFuncTrainImpl : CBasePlatTrainImpl, CFuncTrain
         }
     }
     private static nint? _NextBlockTimeOffset;
+    private GameTime_tImpl? _NextBlockTimeInstance;
 
     public GameTime_t NextBlockTime
     {
         get
         {
             _NextBlockTimeOffset = _NextBlockTimeOffset ?? Schema.GetOffset(0xAAD8EE8E82BC1902);
-            return new GameTime_tImpl(_Handle + _NextBlockTimeOffset!.Value);
+            var instance = _NextBlockTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NextBlockTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LastTargetOffset;

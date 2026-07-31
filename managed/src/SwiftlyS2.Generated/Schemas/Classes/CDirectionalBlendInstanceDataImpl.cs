@@ -47,43 +47,55 @@ internal partial class CDirectionalBlendInstanceDataImpl : SchemaClass, CDirecti
         }
     }
     private static nint? _PlaybackRateOffset;
+    private SchemaUntypedField? _PlaybackRateInstance;
 
     public SchemaUntypedField PlaybackRate
     {
         get
         {
             _PlaybackRateOffset = _PlaybackRateOffset ?? Schema.GetOffset(0x5968C1DEC396F9D8);
-            return new SchemaUntypedField(_Handle + _PlaybackRateOffset!.Value);
+            var instance = _PlaybackRateInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _PlaybackRateOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CycleZeroTimeOffset;
+    private SchemaUntypedField? _CycleZeroTimeInstance;
 
     public SchemaUntypedField CycleZeroTime
     {
         get
         {
             _CycleZeroTimeOffset = _CycleZeroTimeOffset ?? Schema.GetOffset(0x5968C1DE40321698);
-            return new SchemaUntypedField(_Handle + _CycleZeroTimeOffset!.Value);
+            var instance = _CycleZeroTimeInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _CycleZeroTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ResetCycleValueOffset;
+    private SchemaUntypedField? _ResetCycleValueInstance;
 
     public SchemaUntypedField ResetCycleValue
     {
         get
         {
             _ResetCycleValueOffset = _ResetCycleValueOffset ?? Schema.GetOffset(0x5968C1DE9897AC3F);
-            return new SchemaUntypedField(_Handle + _ResetCycleValueOffset!.Value);
+            var instance = _ResetCycleValueInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ResetCycleValueOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ResetCountOffset;
+    private SchemaUntypedField? _ResetCountInstance;
 
     public SchemaUntypedField ResetCount
     {
         get
         {
             _ResetCountOffset = _ResetCountOffset ?? Schema.GetOffset(0x5968C1DE89B18BCF);
-            return new SchemaUntypedField(_Handle + _ResetCountOffset!.Value);
+            var instance = _ResetCountInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ResetCountOffset!.Value);
+            return instance;
         }
     }
 

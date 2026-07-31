@@ -16,17 +16,44 @@ internal partial class CCSPlayerResourceImpl : CBaseEntityImpl, CCSPlayerResourc
 {
     public CCSPlayerResourceImpl(nint handle) : base(handle) { }
 
+    private static nint? _HostageAliveOffset;
+    private SchemaFixedArray<bool>? _HostageAliveInstance;
+
     public ISchemaFixedArray<bool> HostageAlive
     {
-        get => new SchemaFixedArray<bool>(_Handle, 0xBEE9B9154C5B2E7F, 12, 1, 1);
+        get
+        {
+            _HostageAliveOffset = _HostageAliveOffset ?? Schema.GetOffset(0xBEE9B9154C5B2E7F);
+            var instance = _HostageAliveInstance ??= new SchemaFixedArray<bool>(0, 0xBEE9B9154C5B2E7F, 12, 1, 1);
+            instance.DangerousSetHandle(_Handle + _HostageAliveOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _IsHostageFollowingSomeoneOffset;
+    private SchemaFixedArray<bool>? _IsHostageFollowingSomeoneInstance;
+
     public ISchemaFixedArray<bool> IsHostageFollowingSomeone
     {
-        get => new SchemaFixedArray<bool>(_Handle, 0xBEE9B9153F8AA9BB, 12, 1, 1);
+        get
+        {
+            _IsHostageFollowingSomeoneOffset = _IsHostageFollowingSomeoneOffset ?? Schema.GetOffset(0xBEE9B9153F8AA9BB);
+            var instance = _IsHostageFollowingSomeoneInstance ??= new SchemaFixedArray<bool>(0, 0xBEE9B9153F8AA9BB, 12, 1, 1);
+            instance.DangerousSetHandle(_Handle + _IsHostageFollowingSomeoneOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _HostageEntityIDsOffset;
+    private SchemaFixedArray<uint>? _HostageEntityIDsInstance;
+
     public ISchemaFixedArray<uint> HostageEntityIDs
     {
-        get => new SchemaFixedArray<uint>(_Handle, 0xBEE9B9150EEFA350, 12, 4, 4);
+        get
+        {
+            _HostageEntityIDsOffset = _HostageEntityIDsOffset ?? Schema.GetOffset(0xBEE9B9150EEFA350);
+            var instance = _HostageEntityIDsInstance ??= new SchemaFixedArray<uint>(0, 0xBEE9B9150EEFA350, 12, 4, 4);
+            instance.DangerousSetHandle(_Handle + _HostageEntityIDsOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _BombsiteCenterAOffset;
 
@@ -48,17 +75,44 @@ internal partial class CCSPlayerResourceImpl : CBaseEntityImpl, CCSPlayerResourc
             return ref _Handle.AsRef<Vector>(_BombsiteCenterBOffset!.Value);
         }
     }
+    private static nint? _HostageRescueXOffset;
+    private SchemaFixedArray<int>? _HostageRescueXInstance;
+
     public ISchemaFixedArray<int> HostageRescueX
     {
-        get => new SchemaFixedArray<int>(_Handle, 0xBEE9B91584FE2109, 4, 4, 4);
+        get
+        {
+            _HostageRescueXOffset = _HostageRescueXOffset ?? Schema.GetOffset(0xBEE9B91584FE2109);
+            var instance = _HostageRescueXInstance ??= new SchemaFixedArray<int>(0, 0xBEE9B91584FE2109, 4, 4, 4);
+            instance.DangerousSetHandle(_Handle + _HostageRescueXOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _HostageRescueYOffset;
+    private SchemaFixedArray<int>? _HostageRescueYInstance;
+
     public ISchemaFixedArray<int> HostageRescueY
     {
-        get => new SchemaFixedArray<int>(_Handle, 0xBEE9B91583FE1F76, 4, 4, 4);
+        get
+        {
+            _HostageRescueYOffset = _HostageRescueYOffset ?? Schema.GetOffset(0xBEE9B91583FE1F76);
+            var instance = _HostageRescueYInstance ??= new SchemaFixedArray<int>(0, 0xBEE9B91583FE1F76, 4, 4, 4);
+            instance.DangerousSetHandle(_Handle + _HostageRescueYOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _HostageRescueZOffset;
+    private SchemaFixedArray<int>? _HostageRescueZInstance;
+
     public ISchemaFixedArray<int> HostageRescueZ
     {
-        get => new SchemaFixedArray<int>(_Handle, 0xBEE9B91582FE1DE3, 4, 4, 4);
+        get
+        {
+            _HostageRescueZOffset = _HostageRescueZOffset ?? Schema.GetOffset(0xBEE9B91582FE1DE3);
+            var instance = _HostageRescueZInstance ??= new SchemaFixedArray<int>(0, 0xBEE9B91582FE1DE3, 4, 4, 4);
+            instance.DangerousSetHandle(_Handle + _HostageRescueZOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _EndMatchNextMapAllVotedOffset;
 

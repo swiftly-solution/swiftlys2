@@ -27,13 +27,16 @@ internal partial class CountdownTimerImpl : SchemaClass, CountdownTimer
         }
     }
     private static nint? _TimestampOffset;
+    private GameTime_tImpl? _TimestampInstance;
 
     public GameTime_t Timestamp
     {
         get
         {
             _TimestampOffset = _TimestampOffset ?? Schema.GetOffset(0x8A632F1B6C56F43);
-            return new GameTime_tImpl(_Handle + _TimestampOffset!.Value);
+            var instance = _TimestampInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _TimestampOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TimescaleOffset;

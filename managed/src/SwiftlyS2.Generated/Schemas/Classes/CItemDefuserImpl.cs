@@ -17,13 +17,16 @@ internal partial class CItemDefuserImpl : CItemImpl, CItemDefuser
     public CItemDefuserImpl(nint handle) : base(handle) { }
 
     private static nint? _EntitySpottedStateOffset;
+    private EntitySpottedState_tImpl? _EntitySpottedStateInstance;
 
     public EntitySpottedState_t EntitySpottedState
     {
         get
         {
             _EntitySpottedStateOffset = _EntitySpottedStateOffset ?? Schema.GetOffset(0xC9362933032B547C);
-            return new EntitySpottedState_tImpl(_Handle + _EntitySpottedStateOffset!.Value);
+            var instance = _EntitySpottedStateInstance ??= new EntitySpottedState_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _EntitySpottedStateOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SpotRulesOffset;

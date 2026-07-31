@@ -17,23 +17,29 @@ internal partial class CVoiceContainerBlenderImpl : CVoiceContainerBaseImpl, CVo
     public CVoiceContainerBlenderImpl(nint handle) : base(handle) { }
 
     private static nint? _FirstSoundOffset;
+    private CSoundContainerReferenceImpl? _FirstSoundInstance;
 
     public CSoundContainerReference FirstSound
     {
         get
         {
             _FirstSoundOffset = _FirstSoundOffset ?? Schema.GetOffset(0xB05752DD666B0138);
-            return new CSoundContainerReferenceImpl(_Handle + _FirstSoundOffset!.Value);
+            var instance = _FirstSoundInstance ??= new CSoundContainerReferenceImpl(0);
+            instance.DangerousSetHandle(_Handle + _FirstSoundOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SecondSoundOffset;
+    private CSoundContainerReferenceImpl? _SecondSoundInstance;
 
     public CSoundContainerReference SecondSound
     {
         get
         {
             _SecondSoundOffset = _SecondSoundOffset ?? Schema.GetOffset(0xB05752DDA2BC3E5C);
-            return new CSoundContainerReferenceImpl(_Handle + _SecondSoundOffset!.Value);
+            var instance = _SecondSoundInstance ??= new CSoundContainerReferenceImpl(0);
+            instance.DangerousSetHandle(_Handle + _SecondSoundOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BlendFactorOffset;

@@ -17,13 +17,16 @@ internal partial class CVMixSubgraphSwitchProcessorDescImpl : CVMixBaseProcessor
     public CVMixSubgraphSwitchProcessorDescImpl(nint handle) : base(handle) { }
 
     private static nint? _DescOffset;
+    private VMixSubgraphSwitchDesc_tImpl? _DescInstance;
 
     public VMixSubgraphSwitchDesc_t Desc
     {
         get
         {
             _DescOffset = _DescOffset ?? Schema.GetOffset(0x2DD364BD27917BC0);
-            return new VMixSubgraphSwitchDesc_tImpl(_Handle + _DescOffset!.Value);
+            var instance = _DescInstance ??= new VMixSubgraphSwitchDesc_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _DescOffset!.Value);
+            return instance;
         }
     }
 

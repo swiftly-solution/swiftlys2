@@ -17,13 +17,16 @@ internal partial class CPulseCell_Outflow_ListenForEntityOutputImpl : CPulseCell
     public CPulseCell_Outflow_ListenForEntityOutputImpl(nint handle) : base(handle) { }
 
     private static nint? _OnFiredOffset;
+    private SignatureOutflow_ResumeImpl? _OnFiredInstance;
 
     public SignatureOutflow_Resume OnFired
     {
         get
         {
             _OnFiredOffset = _OnFiredOffset ?? Schema.GetOffset(0xCB35163784825730);
-            return new SignatureOutflow_ResumeImpl(_Handle + _OnFiredOffset!.Value);
+            var instance = _OnFiredInstance ??= new SignatureOutflow_ResumeImpl(0);
+            instance.DangerousSetHandle(_Handle + _OnFiredOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StrEntityOutputOffset;

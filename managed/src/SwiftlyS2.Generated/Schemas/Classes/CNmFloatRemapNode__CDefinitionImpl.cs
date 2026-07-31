@@ -27,23 +27,29 @@ internal partial class CNmFloatRemapNode__CDefinitionImpl : CNmFloatValueNode__C
         }
     }
     private static nint? _InputRangeOffset;
+    private CNmFloatRemapNode__RemapRange_tImpl? _InputRangeInstance;
 
     public CNmFloatRemapNode__RemapRange_t InputRange
     {
         get
         {
             _InputRangeOffset = _InputRangeOffset ?? Schema.GetOffset(0x51692934096AEBF0);
-            return new CNmFloatRemapNode__RemapRange_tImpl(_Handle + _InputRangeOffset!.Value);
+            var instance = _InputRangeInstance ??= new CNmFloatRemapNode__RemapRange_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _InputRangeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OutputRangeOffset;
+    private CNmFloatRemapNode__RemapRange_tImpl? _OutputRangeInstance;
 
     public CNmFloatRemapNode__RemapRange_t OutputRange
     {
         get
         {
             _OutputRangeOffset = _OutputRangeOffset ?? Schema.GetOffset(0x5169293437E0CA29);
-            return new CNmFloatRemapNode__RemapRange_tImpl(_Handle + _OutputRangeOffset!.Value);
+            var instance = _OutputRangeInstance ??= new CNmFloatRemapNode__RemapRange_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _OutputRangeOffset!.Value);
+            return instance;
         }
     }
 

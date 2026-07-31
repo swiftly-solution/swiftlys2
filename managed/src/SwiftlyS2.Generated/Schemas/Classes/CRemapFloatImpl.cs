@@ -16,9 +16,18 @@ internal partial class CRemapFloatImpl : SchemaClass, CRemapFloat
 {
     public CRemapFloatImpl(nint handle) : base(handle) { }
 
+    private static nint? _ValueOffset;
+    private SchemaFixedArray<float>? _ValueInstance;
+
     public ISchemaFixedArray<float> Value
     {
-        get => new SchemaFixedArray<float>(_Handle, 0x49763A6B7F437844, 4, 4, 4);
+        get
+        {
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0x49763A6B7F437844);
+            var instance = _ValueInstance ??= new SchemaFixedArray<float>(0, 0x49763A6B7F437844, 4, 4, 4);
+            instance.DangerousSetHandle(_Handle + _ValueOffset!.Value);
+            return instance;
+        }
     }
 
 }

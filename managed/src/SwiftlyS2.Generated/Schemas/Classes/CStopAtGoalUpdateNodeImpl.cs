@@ -57,13 +57,16 @@ internal partial class CStopAtGoalUpdateNodeImpl : CUnaryUpdateNodeImpl, CStopAt
         }
     }
     private static nint? _DampingOffset;
+    private CAnimInputDampingImpl? _DampingInstance;
 
     public CAnimInputDamping Damping
     {
         get
         {
             _DampingOffset = _DampingOffset ?? Schema.GetOffset(0x4889F82915440FB5);
-            return new CAnimInputDampingImpl(_Handle + _DampingOffset!.Value);
+            var instance = _DampingInstance ??= new CAnimInputDampingImpl(0);
+            instance.DangerousSetHandle(_Handle + _DampingOffset!.Value);
+            return instance;
         }
     }
 

@@ -37,73 +37,94 @@ internal partial class C_INIT_InitialVelocityNoiseImpl : CParticleFunctionInitia
         }
     }
     private static nint? _OffsetLocOffset;
+    private CPerParticleVecInputImpl? _OffsetLocInstance;
 
     public CPerParticleVecInput OffsetLoc
     {
         get
         {
             _OffsetLocOffset = _OffsetLocOffset ?? Schema.GetOffset(0x4F8B7A61EFAB26AC);
-            return new CPerParticleVecInputImpl(_Handle + _OffsetLocOffset!.Value);
+            var instance = _OffsetLocInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _OffsetLocOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OffsetOffset;
+    private CPerParticleFloatInputImpl? _OffsetInstance;
 
     public CPerParticleFloatInput Offset
     {
         get
         {
             _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0x4F8B7A617F14BA34);
-            return new CPerParticleFloatInputImpl(_Handle + _OffsetOffset!.Value);
+            var instance = _OffsetInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _OffsetOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OutputMinOffset;
+    private CPerParticleVecInputImpl? _OutputMinInstance;
 
     public CPerParticleVecInput OutputMin
     {
         get
         {
             _OutputMinOffset = _OutputMinOffset ?? Schema.GetOffset(0x4F8B7A612EFED678);
-            return new CPerParticleVecInputImpl(_Handle + _OutputMinOffset!.Value);
+            var instance = _OutputMinInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _OutputMinOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OutputMaxOffset;
+    private CPerParticleVecInputImpl? _OutputMaxInstance;
 
     public CPerParticleVecInput OutputMax
     {
         get
         {
             _OutputMaxOffset = _OutputMaxOffset ?? Schema.GetOffset(0x4F8B7A61451280D2);
-            return new CPerParticleVecInputImpl(_Handle + _OutputMaxOffset!.Value);
+            var instance = _OutputMaxInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _OutputMaxOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NoiseScaleOffset;
+    private CPerParticleFloatInputImpl? _NoiseScaleInstance;
 
     public CPerParticleFloatInput NoiseScale
     {
         get
         {
             _NoiseScaleOffset = _NoiseScaleOffset ?? Schema.GetOffset(0x4F8B7A6132FE2EF3);
-            return new CPerParticleFloatInputImpl(_Handle + _NoiseScaleOffset!.Value);
+            var instance = _NoiseScaleInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _NoiseScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NoiseScaleLocOffset;
+    private CPerParticleFloatInputImpl? _NoiseScaleLocInstance;
 
     public CPerParticleFloatInput NoiseScaleLoc
     {
         get
         {
             _NoiseScaleLocOffset = _NoiseScaleLocOffset ?? Schema.GetOffset(0x4F8B7A61A9F4B0DF);
-            return new CPerParticleFloatInputImpl(_Handle + _NoiseScaleLocOffset!.Value);
+            var instance = _NoiseScaleLocInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _NoiseScaleLocOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TransformInputOffset;
+    private CParticleTransformInputImpl? _TransformInputInstance;
 
     public CParticleTransformInput TransformInput
     {
         get
         {
             _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0x4F8B7A61B3FDC289);
-            return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+            var instance = _TransformInputInstance ??= new CParticleTransformInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _TransformInputOffset!.Value);
+            return instance;
         }
     }
     private static nint? _IgnoreDtOffset;

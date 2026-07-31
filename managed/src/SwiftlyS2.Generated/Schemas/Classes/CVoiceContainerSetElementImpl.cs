@@ -17,13 +17,16 @@ internal partial class CVoiceContainerSetElementImpl : SchemaClass, CVoiceContai
     public CVoiceContainerSetElementImpl(nint handle) : base(handle) { }
 
     private static nint? _SoundOffset;
+    private CSoundContainerReferenceImpl? _SoundInstance;
 
     public CSoundContainerReference Sound
     {
         get
         {
             _SoundOffset = _SoundOffset ?? Schema.GetOffset(0x1280027B4E1C4FB4);
-            return new CSoundContainerReferenceImpl(_Handle + _SoundOffset!.Value);
+            var instance = _SoundInstance ??= new CSoundContainerReferenceImpl(0);
+            instance.DangerousSetHandle(_Handle + _SoundOffset!.Value);
+            return instance;
         }
     }
     private static nint? _VolumeDBOffset;

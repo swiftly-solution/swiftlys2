@@ -37,13 +37,16 @@ internal partial class CMolotovProjectileImpl : CBaseCSGrenadeProjectileImpl, CM
         }
     }
     private static nint? _StillTimerOffset;
+    private IntervalTimerImpl? _StillTimerInstance;
 
     public IntervalTimer StillTimer
     {
         get
         {
             _StillTimerOffset = _StillTimerOffset ?? Schema.GetOffset(0xA239EA8F2772246E);
-            return new IntervalTimerImpl(_Handle + _StillTimerOffset!.Value);
+            var instance = _StillTimerInstance ??= new IntervalTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _StillTimerOffset!.Value);
+            return instance;
         }
     }
 

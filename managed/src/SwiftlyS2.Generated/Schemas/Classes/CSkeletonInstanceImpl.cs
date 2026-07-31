@@ -17,13 +17,16 @@ internal partial class CSkeletonInstanceImpl : CGameSceneNodeImpl, CSkeletonInst
     public CSkeletonInstanceImpl(nint handle) : base(handle) { }
 
     private static nint? _ModelStateOffset;
+    private CModelStateImpl? _ModelStateInstance;
 
     public CModelState ModelState
     {
         get
         {
             _ModelStateOffset = _ModelStateOffset ?? Schema.GetOffset(0xD6C6252E52AC8C4F);
-            return new CModelStateImpl(_Handle + _ModelStateOffset!.Value);
+            var instance = _ModelStateInstance ??= new CModelStateImpl(0);
+            instance.DangerousSetHandle(_Handle + _ModelStateOffset!.Value);
+            return instance;
         }
     }
     private static nint? _UseParentRenderBoundsOffset;

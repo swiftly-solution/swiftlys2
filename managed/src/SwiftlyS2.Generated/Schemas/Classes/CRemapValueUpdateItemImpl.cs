@@ -17,23 +17,29 @@ internal partial class CRemapValueUpdateItemImpl : SchemaClass, CRemapValueUpdat
     public CRemapValueUpdateItemImpl(nint handle) : base(handle) { }
 
     private static nint? _ParamInOffset;
+    private CAnimParamHandleImpl? _ParamInInstance;
 
     public CAnimParamHandle ParamIn
     {
         get
         {
             _ParamInOffset = _ParamInOffset ?? Schema.GetOffset(0x93C5E8D6ED40E37B);
-            return new CAnimParamHandleImpl(_Handle + _ParamInOffset!.Value);
+            var instance = _ParamInInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamInOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ParamOutOffset;
+    private CAnimParamHandleImpl? _ParamOutInstance;
 
     public CAnimParamHandle ParamOut
     {
         get
         {
             _ParamOutOffset = _ParamOutOffset ?? Schema.GetOffset(0x93C5E8D6AA5799A8);
-            return new CAnimParamHandleImpl(_Handle + _ParamOutOffset!.Value);
+            var instance = _ParamOutInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamOutOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MinInputValueOffset;

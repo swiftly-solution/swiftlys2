@@ -17,6 +17,7 @@ internal partial class CCSPlayerPawnImpl : CCSPlayerPawnBaseImpl, CCSPlayerPawn
     public CCSPlayerPawnImpl(nint handle) : base(handle) { }
 
     private static nint? _BulletServicesOffset;
+    private CCSPlayer_BulletServicesImpl? _BulletServicesInstance;
 
     public CCSPlayer_BulletServices? BulletServices
     {
@@ -24,10 +25,14 @@ internal partial class CCSPlayerPawnImpl : CCSPlayerPawnBaseImpl, CCSPlayerPawn
         {
             _BulletServicesOffset = _BulletServicesOffset ?? Schema.GetOffset(0xC7614AAB8E2741BB);
             var ptr = _Handle.Read<nint>(_BulletServicesOffset!.Value);
-            return ptr.IsValidPtr() ? new CCSPlayer_BulletServicesImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _BulletServicesInstance ??= new CCSPlayer_BulletServicesImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _HostageServicesOffset;
+    private CCSPlayer_HostageServicesImpl? _HostageServicesInstance;
 
     public CCSPlayer_HostageServices? HostageServices
     {
@@ -35,10 +40,14 @@ internal partial class CCSPlayerPawnImpl : CCSPlayerPawnBaseImpl, CCSPlayerPawn
         {
             _HostageServicesOffset = _HostageServicesOffset ?? Schema.GetOffset(0xC7614AAB63EBD1D8);
             var ptr = _Handle.Read<nint>(_HostageServicesOffset!.Value);
-            return ptr.IsValidPtr() ? new CCSPlayer_HostageServicesImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _HostageServicesInstance ??= new CCSPlayer_HostageServicesImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _BuyServicesOffset;
+    private CCSPlayer_BuyServicesImpl? _BuyServicesInstance;
 
     public CCSPlayer_BuyServices? BuyServices
     {
@@ -46,10 +55,14 @@ internal partial class CCSPlayerPawnImpl : CCSPlayerPawnBaseImpl, CCSPlayerPawn
         {
             _BuyServicesOffset = _BuyServicesOffset ?? Schema.GetOffset(0xC7614AAB807A410D);
             var ptr = _Handle.Read<nint>(_BuyServicesOffset!.Value);
-            return ptr.IsValidPtr() ? new CCSPlayer_BuyServicesImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _BuyServicesInstance ??= new CCSPlayer_BuyServicesImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _ActionTrackingServicesOffset;
+    private CCSPlayer_ActionTrackingServicesImpl? _ActionTrackingServicesInstance;
 
     public CCSPlayer_ActionTrackingServices? ActionTrackingServices
     {
@@ -57,10 +70,14 @@ internal partial class CCSPlayerPawnImpl : CCSPlayerPawnBaseImpl, CCSPlayerPawn
         {
             _ActionTrackingServicesOffset = _ActionTrackingServicesOffset ?? Schema.GetOffset(0xC7614AABB8174144);
             var ptr = _Handle.Read<nint>(_ActionTrackingServicesOffset!.Value);
-            return ptr.IsValidPtr() ? new CCSPlayer_ActionTrackingServicesImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _ActionTrackingServicesInstance ??= new CCSPlayer_ActionTrackingServicesImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _AimPunchServicesOffset;
+    private CCSPlayer_AimPunchServicesImpl? _AimPunchServicesInstance;
 
     public CCSPlayer_AimPunchServices? AimPunchServices
     {
@@ -68,10 +85,14 @@ internal partial class CCSPlayerPawnImpl : CCSPlayerPawnBaseImpl, CCSPlayerPawn
         {
             _AimPunchServicesOffset = _AimPunchServicesOffset ?? Schema.GetOffset(0xC7614AAB268624B4);
             var ptr = _Handle.Read<nint>(_AimPunchServicesOffset!.Value);
-            return ptr.IsValidPtr() ? new CCSPlayer_AimPunchServicesImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _AimPunchServicesInstance ??= new CCSPlayer_AimPunchServicesImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _RadioServicesOffset;
+    private CCSPlayer_RadioServicesImpl? _RadioServicesInstance;
 
     public CCSPlayer_RadioServices? RadioServices
     {
@@ -79,10 +100,14 @@ internal partial class CCSPlayerPawnImpl : CCSPlayerPawnBaseImpl, CCSPlayerPawn
         {
             _RadioServicesOffset = _RadioServicesOffset ?? Schema.GetOffset(0xC7614AAB6C70C036);
             var ptr = _Handle.Read<nint>(_RadioServicesOffset!.Value);
-            return ptr.IsValidPtr() ? new CCSPlayer_RadioServicesImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _RadioServicesInstance ??= new CCSPlayer_RadioServicesImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _DamageReactServicesOffset;
+    private CCSPlayer_DamageReactServicesImpl? _DamageReactServicesInstance;
 
     public CCSPlayer_DamageReactServices? DamageReactServices
     {
@@ -90,7 +115,10 @@ internal partial class CCSPlayerPawnImpl : CCSPlayerPawnBaseImpl, CCSPlayerPawn
         {
             _DamageReactServicesOffset = _DamageReactServicesOffset ?? Schema.GetOffset(0xC7614AABF4CD61D9);
             var ptr = _Handle.Read<nint>(_DamageReactServicesOffset!.Value);
-            return ptr.IsValidPtr() ? new CCSPlayer_DamageReactServicesImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _DamageReactServicesInstance ??= new CCSPlayer_DamageReactServicesImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _CharacterDefIndexOffset;
@@ -274,13 +302,16 @@ internal partial class CCSPlayerPawnImpl : CCSPlayerPawnBaseImpl, CCSPlayerPawn
         }
     }
     private static nint? _HealthShotBoostExpirationTimeOffset;
+    private GameTime_tImpl? _HealthShotBoostExpirationTimeInstance;
 
     public GameTime_t HealthShotBoostExpirationTime
     {
         get
         {
             _HealthShotBoostExpirationTimeOffset = _HealthShotBoostExpirationTimeOffset ?? Schema.GetOffset(0xC7614AABEC487ACC);
-            return new GameTime_tImpl(_Handle + _HealthShotBoostExpirationTimeOffset!.Value);
+            var instance = _HealthShotBoostExpirationTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _HealthShotBoostExpirationTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LandingTimeSecondsOffset;
@@ -304,13 +335,16 @@ internal partial class CCSPlayerPawnImpl : CCSPlayerPawnBaseImpl, CCSPlayerPawn
         }
     }
     private static nint? _LastLandTimeOffset;
+    private GameTime_tImpl? _LastLandTimeInstance;
 
     public GameTime_t LastLandTime
     {
         get
         {
             _LastLandTimeOffset = _LastLandTimeOffset ?? Schema.GetOffset(0xC7614AAB21F4A3D1);
-            return new GameTime_tImpl(_Handle + _LastLandTimeOffset!.Value);
+            var instance = _LastLandTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastLandTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OnGroundLastTickOffset;
@@ -334,23 +368,29 @@ internal partial class CCSPlayerPawnImpl : CCSPlayerPawnBaseImpl, CCSPlayerPawn
         }
     }
     private static nint? _TimeOfLastInjuryOffset;
+    private GameTime_tImpl? _TimeOfLastInjuryInstance;
 
     public GameTime_t TimeOfLastInjury
     {
         get
         {
             _TimeOfLastInjuryOffset = _TimeOfLastInjuryOffset ?? Schema.GetOffset(0xC7614AABD7B4663C);
-            return new GameTime_tImpl(_Handle + _TimeOfLastInjuryOffset!.Value);
+            var instance = _TimeOfLastInjuryInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _TimeOfLastInjuryOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NextSprayDecalTimeOffset;
+    private GameTime_tImpl? _NextSprayDecalTimeInstance;
 
     public GameTime_t NextSprayDecalTime
     {
         get
         {
             _NextSprayDecalTimeOffset = _NextSprayDecalTimeOffset ?? Schema.GetOffset(0xC7614AAB53790011);
-            return new GameTime_tImpl(_Handle + _NextSprayDecalTimeOffset!.Value);
+            var instance = _NextSprayDecalTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NextSprayDecalTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NextSprayDecalTimeExpeditedOffset;
@@ -419,13 +459,16 @@ internal partial class CCSPlayerPawnImpl : CCSPlayerPawnBaseImpl, CCSPlayerPawn
         }
     }
     private static nint? _EconGlovesOffset;
+    private CEconItemViewImpl? _EconGlovesInstance;
 
     public CEconItemView EconGloves
     {
         get
         {
             _EconGlovesOffset = _EconGlovesOffset ?? Schema.GetOffset(0xC7614AAB58DEE8E2);
-            return new CEconItemViewImpl(_Handle + _EconGlovesOffset!.Value);
+            var instance = _EconGlovesInstance ??= new CEconItemViewImpl(0);
+            instance.DangerousSetHandle(_Handle + _EconGlovesOffset!.Value);
+            return instance;
         }
     }
     private static nint? _EconGlovesChangedOffset;
@@ -459,13 +502,16 @@ internal partial class CCSPlayerPawnImpl : CCSPlayerPawnBaseImpl, CCSPlayerPawn
         }
     }
     private static nint? _SwitchedHandednessTimeOffset;
+    private GameTime_tImpl? _SwitchedHandednessTimeInstance;
 
     public GameTime_t SwitchedHandednessTime
     {
         get
         {
             _SwitchedHandednessTimeOffset = _SwitchedHandednessTimeOffset ?? Schema.GetOffset(0xC7614AAB40B8D9FE);
-            return new GameTime_tImpl(_Handle + _SwitchedHandednessTimeOffset!.Value);
+            var instance = _SwitchedHandednessTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _SwitchedHandednessTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ViewmodelOffsetXOffset;
@@ -569,13 +615,16 @@ internal partial class CCSPlayerPawnImpl : CCSPlayerPawnBaseImpl, CCSPlayerPawn
         }
     }
     private static nint? _AllowAutoFollowTimeOffset;
+    private GameTime_tImpl? _AllowAutoFollowTimeInstance;
 
     public GameTime_t AllowAutoFollowTime
     {
         get
         {
             _AllowAutoFollowTimeOffset = _AllowAutoFollowTimeOffset ?? Schema.GetOffset(0xC7614AABA781FC01);
-            return new GameTime_tImpl(_Handle + _AllowAutoFollowTimeOffset!.Value);
+            var instance = _AllowAutoFollowTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _AllowAutoFollowTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ResetArmorNextSpawnOffset;
@@ -599,13 +648,16 @@ internal partial class CCSPlayerPawnImpl : CCSPlayerPawnBaseImpl, CCSPlayerPawn
         }
     }
     private static nint? _EntitySpottedStateOffset;
+    private EntitySpottedState_tImpl? _EntitySpottedStateInstance;
 
     public EntitySpottedState_t EntitySpottedState
     {
         get
         {
             _EntitySpottedStateOffset = _EntitySpottedStateOffset ?? Schema.GetOffset(0xC7614AAB032B547C);
-            return new EntitySpottedState_tImpl(_Handle + _EntitySpottedStateOffset!.Value);
+            var instance = _EntitySpottedStateInstance ??= new EntitySpottedState_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _EntitySpottedStateOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SpotRulesOffset;
@@ -669,13 +721,16 @@ internal partial class CCSPlayerPawnImpl : CCSPlayerPawnBaseImpl, CCSPlayerPawn
         }
     }
     private static nint? _EmitSoundTimeOffset;
+    private GameTime_tImpl? _EmitSoundTimeInstance;
 
     public GameTime_t EmitSoundTime
     {
         get
         {
             _EmitSoundTimeOffset = _EmitSoundTimeOffset ?? Schema.GetOffset(0xC7614AABC6FA84FA);
-            return new GameTime_tImpl(_Handle + _EmitSoundTimeOffset!.Value);
+            var instance = _EmitSoundTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _EmitSoundTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InNoDefuseAreaOffset;
@@ -809,6 +864,7 @@ internal partial class CCSPlayerPawnImpl : CCSPlayerPawnBaseImpl, CCSPlayerPawn
         }
     }
     private static nint? _BotOffset;
+    private CCSBotImpl? _BotInstance;
 
     public CCSBot? Bot
     {
@@ -816,7 +872,10 @@ internal partial class CCSPlayerPawnImpl : CCSPlayerPawnBaseImpl, CCSPlayerPawn
         {
             _BotOffset = _BotOffset ?? Schema.GetOffset(0xC7614AAB172AF0B4);
             var ptr = _Handle.Read<nint>(_BotOffset!.Value);
-            return ptr.IsValidPtr() ? new CCSBotImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _BotInstance ??= new CCSBotImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _BotAllowActiveOffset;
@@ -949,9 +1008,18 @@ internal partial class CCSPlayerPawnImpl : CCSPlayerPawnBaseImpl, CCSPlayerPawn
             return ref _Handle.AsRef<Vector>(_DeathInfoOriginOffset!.Value);
         }
     }
+    private static nint? _PlayerPatchEconIndicesOffset;
+    private SchemaFixedArray<uint>? _PlayerPatchEconIndicesInstance;
+
     public ISchemaFixedArray<uint> PlayerPatchEconIndices
     {
-        get => new SchemaFixedArray<uint>(_Handle, 0xC7614AABECA447BC, 5, 4, 4);
+        get
+        {
+            _PlayerPatchEconIndicesOffset = _PlayerPatchEconIndicesOffset ?? Schema.GetOffset(0xC7614AABECA447BC);
+            var instance = _PlayerPatchEconIndicesInstance ??= new SchemaFixedArray<uint>(0, 0xC7614AABECA447BC, 5, 4, 4);
+            instance.DangerousSetHandle(_Handle + _PlayerPatchEconIndicesOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _GunGameImmunityColorOffset;
 
@@ -964,13 +1032,16 @@ internal partial class CCSPlayerPawnImpl : CCSPlayerPawnBaseImpl, CCSPlayerPawn
         }
     }
     private static nint? _GrenadeParameterStashTimeOffset;
+    private GameTime_tImpl? _GrenadeParameterStashTimeInstance;
 
     public GameTime_t GrenadeParameterStashTime
     {
         get
         {
             _GrenadeParameterStashTimeOffset = _GrenadeParameterStashTimeOffset ?? Schema.GetOffset(0xC7614AAB86725FE0);
-            return new GameTime_tImpl(_Handle + _GrenadeParameterStashTimeOffset!.Value);
+            var instance = _GrenadeParameterStashTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _GrenadeParameterStashTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _GrenadeParametersStashedOffset;
@@ -1034,13 +1105,16 @@ internal partial class CCSPlayerPawnImpl : CCSPlayerPawnBaseImpl, CCSPlayerPawn
         }
     }
     private static nint? _ImmuneToGunGameDamageTimeOffset;
+    private GameTime_tImpl? _ImmuneToGunGameDamageTimeInstance;
 
     public GameTime_t ImmuneToGunGameDamageTime
     {
         get
         {
             _ImmuneToGunGameDamageTimeOffset = _ImmuneToGunGameDamageTimeOffset ?? Schema.GetOffset(0xC7614AAB8305FCCB);
-            return new GameTime_tImpl(_Handle + _ImmuneToGunGameDamageTimeOffset!.Value);
+            var instance = _ImmuneToGunGameDamageTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _ImmuneToGunGameDamageTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _GunGameImmunityOffset;

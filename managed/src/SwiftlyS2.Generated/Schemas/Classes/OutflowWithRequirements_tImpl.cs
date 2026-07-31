@@ -17,23 +17,29 @@ internal partial class OutflowWithRequirements_tImpl : SchemaClass, OutflowWithR
     public OutflowWithRequirements_tImpl(nint handle) : base(handle) { }
 
     private static nint? _ConnectionOffset;
+    private CPulse_OutflowConnectionImpl? _ConnectionInstance;
 
     public CPulse_OutflowConnection Connection
     {
         get
         {
             _ConnectionOffset = _ConnectionOffset ?? Schema.GetOffset(0x5BFC4DD4D4CD5F59);
-            return new CPulse_OutflowConnectionImpl(_Handle + _ConnectionOffset!.Value);
+            var instance = _ConnectionInstance ??= new CPulse_OutflowConnectionImpl(0);
+            instance.DangerousSetHandle(_Handle + _ConnectionOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DestinationFlowNodeIDOffset;
+    private PulseDocNodeID_tImpl? _DestinationFlowNodeIDInstance;
 
     public PulseDocNodeID_t DestinationFlowNodeID
     {
         get
         {
             _DestinationFlowNodeIDOffset = _DestinationFlowNodeIDOffset ?? Schema.GetOffset(0x5BFC4DD4C986A186);
-            return new PulseDocNodeID_tImpl(_Handle + _DestinationFlowNodeIDOffset!.Value);
+            var instance = _DestinationFlowNodeIDInstance ??= new PulseDocNodeID_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _DestinationFlowNodeIDOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RequirementNodeIDsOffset;

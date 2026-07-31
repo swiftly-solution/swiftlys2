@@ -17,13 +17,16 @@ internal partial class C_OP_RenderPostProcessingImpl : CParticleFunctionRenderer
     public C_OP_RenderPostProcessingImpl(nint handle) : base(handle) { }
 
     private static nint? _PostProcessStrengthOffset;
+    private CPerParticleFloatInputImpl? _PostProcessStrengthInstance;
 
     public CPerParticleFloatInput PostProcessStrength
     {
         get
         {
             _PostProcessStrengthOffset = _PostProcessStrengthOffset ?? Schema.GetOffset(0xD64D179C653C1A17);
-            return new CPerParticleFloatInputImpl(_Handle + _PostProcessStrengthOffset!.Value);
+            var instance = _PostProcessStrengthInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _PostProcessStrengthOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PostTextureOffset;

@@ -17,13 +17,16 @@ internal partial class CSpeedScaleUpdateNodeImpl : CUnaryUpdateNodeImpl, CSpeedS
     public CSpeedScaleUpdateNodeImpl(nint handle) : base(handle) { }
 
     private static nint? _ParamIndexOffset;
+    private CAnimParamHandleImpl? _ParamIndexInstance;
 
     public CAnimParamHandle ParamIndex
     {
         get
         {
             _ParamIndexOffset = _ParamIndexOffset ?? Schema.GetOffset(0xD43012BC61990A86);
-            return new CAnimParamHandleImpl(_Handle + _ParamIndexOffset!.Value);
+            var instance = _ParamIndexInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamIndexOffset!.Value);
+            return instance;
         }
     }
 

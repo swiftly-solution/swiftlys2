@@ -17,13 +17,16 @@ internal partial class FeSimdSpringIntegrator_tImpl : SchemaClass, FeSimdSpringI
     public FeSimdSpringIntegrator_tImpl(nint handle) : base(handle) { }
 
     private static nint? _NodeOffset;
+    private SchemaUntypedField? _NodeInstance;
 
     public SchemaUntypedField Node
     {
         get
         {
             _NodeOffset = _NodeOffset ?? Schema.GetOffset(0xF9413B96CD6694B9);
-            return new SchemaUntypedField(_Handle + _NodeOffset!.Value);
+            var instance = _NodeInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _NodeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SpringRestLengthOffset;

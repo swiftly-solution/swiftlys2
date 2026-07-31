@@ -16,9 +16,18 @@ internal partial class FeSpringIntegrator_tImpl : SchemaClass, FeSpringIntegrato
 {
     public FeSpringIntegrator_tImpl(nint handle) : base(handle) { }
 
+    private static nint? _NodeOffset;
+    private SchemaFixedArray<ushort>? _NodeInstance;
+
     public ISchemaFixedArray<ushort> Node
     {
-        get => new SchemaFixedArray<ushort>(_Handle, 0xFC6DF38BCD6694B9, 2, 2, 2);
+        get
+        {
+            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0xFC6DF38BCD6694B9);
+            var instance = _NodeInstance ??= new SchemaFixedArray<ushort>(0, 0xFC6DF38BCD6694B9, 2, 2, 2);
+            instance.DangerousSetHandle(_Handle + _NodeOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _SpringRestLengthOffset;
 

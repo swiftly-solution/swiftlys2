@@ -17,13 +17,16 @@ internal partial class C_INIT_SkyVisCullImpl : CParticleFunctionInitializerImpl,
     public C_INIT_SkyVisCullImpl(nint handle) : base(handle) { }
 
     private static nint? _TestDirOffset;
+    private CParticleCollectionVecInputImpl? _TestDirInstance;
 
     public CParticleCollectionVecInput TestDir
     {
         get
         {
             _TestDirOffset = _TestDirOffset ?? Schema.GetOffset(0x73742D57C17166B4);
-            return new CParticleCollectionVecInputImpl(_Handle + _TestDirOffset!.Value);
+            var instance = _TestDirInstance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _TestDirOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TraceSetOffset;

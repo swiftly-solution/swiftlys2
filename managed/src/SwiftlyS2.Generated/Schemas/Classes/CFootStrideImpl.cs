@@ -17,23 +17,29 @@ internal partial class CFootStrideImpl : SchemaClass, CFootStride
     public CFootStrideImpl(nint handle) : base(handle) { }
 
     private static nint? _DefinitionOffset;
+    private CFootCycleDefinitionImpl? _DefinitionInstance;
 
     public CFootCycleDefinition Definition
     {
         get
         {
             _DefinitionOffset = _DefinitionOffset ?? Schema.GetOffset(0x6093B6FA95E6F40);
-            return new CFootCycleDefinitionImpl(_Handle + _DefinitionOffset!.Value);
+            var instance = _DefinitionInstance ??= new CFootCycleDefinitionImpl(0);
+            instance.DangerousSetHandle(_Handle + _DefinitionOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TrajectoriesOffset;
+    private CFootTrajectoriesImpl? _TrajectoriesInstance;
 
     public CFootTrajectories Trajectories
     {
         get
         {
             _TrajectoriesOffset = _TrajectoriesOffset ?? Schema.GetOffset(0x6093B6F7964C78C);
-            return new CFootTrajectoriesImpl(_Handle + _TrajectoriesOffset!.Value);
+            var instance = _TrajectoriesInstance ??= new CFootTrajectoriesImpl(0);
+            instance.DangerousSetHandle(_Handle + _TrajectoriesOffset!.Value);
+            return instance;
         }
     }
 

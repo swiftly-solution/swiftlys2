@@ -27,33 +27,42 @@ internal partial class IKTargetSettings_tImpl : SchemaClass, IKTargetSettings_t
         }
     }
     private static nint? _BoneOffset;
+    private IKBoneNameAndIndex_tImpl? _BoneInstance;
 
     public IKBoneNameAndIndex_t Bone
     {
         get
         {
             _BoneOffset = _BoneOffset ?? Schema.GetOffset(0xE4055546193FC60F);
-            return new IKBoneNameAndIndex_tImpl(_Handle + _BoneOffset!.Value);
+            var instance = _BoneInstance ??= new IKBoneNameAndIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _BoneOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AnimgraphParameterNamePositionOffset;
+    private AnimParamIDImpl? _AnimgraphParameterNamePositionInstance;
 
     public AnimParamID AnimgraphParameterNamePosition
     {
         get
         {
             _AnimgraphParameterNamePositionOffset = _AnimgraphParameterNamePositionOffset ?? Schema.GetOffset(0xE4055546D9047CE3);
-            return new AnimParamIDImpl(_Handle + _AnimgraphParameterNamePositionOffset!.Value);
+            var instance = _AnimgraphParameterNamePositionInstance ??= new AnimParamIDImpl(0);
+            instance.DangerousSetHandle(_Handle + _AnimgraphParameterNamePositionOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AnimgraphParameterNameOrientationOffset;
+    private AnimParamIDImpl? _AnimgraphParameterNameOrientationInstance;
 
     public AnimParamID AnimgraphParameterNameOrientation
     {
         get
         {
             _AnimgraphParameterNameOrientationOffset = _AnimgraphParameterNameOrientationOffset ?? Schema.GetOffset(0xE4055546C162E1CA);
-            return new AnimParamIDImpl(_Handle + _AnimgraphParameterNameOrientationOffset!.Value);
+            var instance = _AnimgraphParameterNameOrientationInstance ??= new AnimParamIDImpl(0);
+            instance.DangerousSetHandle(_Handle + _AnimgraphParameterNameOrientationOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TargetCoordSystemOffset;

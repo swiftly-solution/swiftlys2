@@ -47,13 +47,16 @@ internal partial class CAudioSentenceImpl : SchemaClass, CAudioSentence
         }
     }
     private static nint? _MorphDataOffset;
+    private CAudioMorphDataImpl? _MorphDataInstance;
 
     public CAudioMorphData MorphData
     {
         get
         {
             _MorphDataOffset = _MorphDataOffset ?? Schema.GetOffset(0x25F8D719A8207F65);
-            return new CAudioMorphDataImpl(_Handle + _MorphDataOffset!.Value);
+            var instance = _MorphDataInstance ??= new CAudioMorphDataImpl(0);
+            instance.DangerousSetHandle(_Handle + _MorphDataOffset!.Value);
+            return instance;
         }
     }
 

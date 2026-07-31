@@ -162,13 +162,16 @@ internal partial class WorldNode_tImpl : SchemaClass, WorldNode_t
         }
     }
     private static nint? _NodeLightingInfoOffset;
+    private BakedLightingInfo_tImpl? _NodeLightingInfoInstance;
 
     public BakedLightingInfo_t NodeLightingInfo
     {
         get
         {
             _NodeLightingInfoOffset = _NodeLightingInfoOffset ?? Schema.GetOffset(0xFC3104800E25D839);
-            return new BakedLightingInfo_tImpl(_Handle + _NodeLightingInfoOffset!.Value);
+            var instance = _NodeLightingInfoInstance ??= new BakedLightingInfo_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NodeLightingInfoOffset!.Value);
+            return instance;
         }
     }
     private static nint? _HasBakedGeometryFlagOffset;

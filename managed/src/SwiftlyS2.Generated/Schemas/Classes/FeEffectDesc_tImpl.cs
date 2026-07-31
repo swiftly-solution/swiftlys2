@@ -52,13 +52,16 @@ internal partial class FeEffectDesc_tImpl : SchemaClass, FeEffectDesc_t
         }
     }
     private static nint? _ParamsOffset;
+    private SchemaUntypedField? _ParamsInstance;
 
     public SchemaUntypedField Params
     {
         get
         {
             _ParamsOffset = _ParamsOffset ?? Schema.GetOffset(0x3462F543900020D3);
-            return new SchemaUntypedField(_Handle + _ParamsOffset!.Value);
+            var instance = _ParamsInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ParamsOffset!.Value);
+            return instance;
         }
     }
 

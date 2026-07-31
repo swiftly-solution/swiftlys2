@@ -17,13 +17,16 @@ internal partial class CPhysHingeImpl : CPhysConstraintImpl, CPhysHinge
     public CPhysHingeImpl(nint handle) : base(handle) { }
 
     private static nint? _SoundInfoOffset;
+    private ConstraintSoundInfoImpl? _SoundInfoInstance;
 
     public ConstraintSoundInfo SoundInfo
     {
         get
         {
             _SoundInfoOffset = _SoundInfoOffset ?? Schema.GetOffset(0xFCB149B185F704E8);
-            return new ConstraintSoundInfoImpl(_Handle + _SoundInfoOffset!.Value);
+            var instance = _SoundInfoInstance ??= new ConstraintSoundInfoImpl(0);
+            instance.DangerousSetHandle(_Handle + _SoundInfoOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NotifyMinLimitReachedOffset;
@@ -67,13 +70,16 @@ internal partial class CPhysHingeImpl : CPhysConstraintImpl, CPhysHinge
         }
     }
     private static nint? _HingeOffset;
+    private constraint_hingeparams_tImpl? _HingeInstance;
 
     public constraint_hingeparams_t Hinge
     {
         get
         {
             _HingeOffset = _HingeOffset ?? Schema.GetOffset(0xFCB149B13923C0AC);
-            return new constraint_hingeparams_tImpl(_Handle + _HingeOffset!.Value);
+            var instance = _HingeInstance ??= new constraint_hingeparams_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _HingeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _HingeFrictionOffset;

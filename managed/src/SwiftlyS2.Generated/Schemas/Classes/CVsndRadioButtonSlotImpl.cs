@@ -27,13 +27,16 @@ internal partial class CVsndRadioButtonSlotImpl : SchemaClass, CVsndRadioButtonS
         }
     }
     private static nint? _VsndOffset;
+    private CSoundContainerReferenceImpl? _VsndInstance;
 
     public CSoundContainerReference Vsnd
     {
         get
         {
             _VsndOffset = _VsndOffset ?? Schema.GetOffset(0xB3DE3CEE865F386C);
-            return new CSoundContainerReferenceImpl(_Handle + _VsndOffset!.Value);
+            var instance = _VsndInstance ??= new CSoundContainerReferenceImpl(0);
+            instance.DangerousSetHandle(_Handle + _VsndOffset!.Value);
+            return instance;
         }
     }
     private static nint? _EnableEndcapOffset;
@@ -47,13 +50,16 @@ internal partial class CVsndRadioButtonSlotImpl : SchemaClass, CVsndRadioButtonS
         }
     }
     private static nint? _EndcapVsndOffset;
+    private CSoundContainerReferenceImpl? _EndcapVsndInstance;
 
     public CSoundContainerReference EndcapVsnd
     {
         get
         {
             _EndcapVsndOffset = _EndcapVsndOffset ?? Schema.GetOffset(0xB3DE3CEEAD14708F);
-            return new CSoundContainerReferenceImpl(_Handle + _EndcapVsndOffset!.Value);
+            var instance = _EndcapVsndInstance ??= new CSoundContainerReferenceImpl(0);
+            instance.DangerousSetHandle(_Handle + _EndcapVsndOffset!.Value);
+            return instance;
         }
     }
     private static nint? _EnableLoopcapOffset;
@@ -67,13 +73,16 @@ internal partial class CVsndRadioButtonSlotImpl : SchemaClass, CVsndRadioButtonS
         }
     }
     private static nint? _LoopcapVsndOffset;
+    private CSoundContainerReferenceImpl? _LoopcapVsndInstance;
 
     public CSoundContainerReference LoopcapVsnd
     {
         get
         {
             _LoopcapVsndOffset = _LoopcapVsndOffset ?? Schema.GetOffset(0xB3DE3CEE99377240);
-            return new CSoundContainerReferenceImpl(_Handle + _LoopcapVsndOffset!.Value);
+            var instance = _LoopcapVsndInstance ??= new CSoundContainerReferenceImpl(0);
+            instance.DangerousSetHandle(_Handle + _LoopcapVsndOffset!.Value);
+            return instance;
         }
     }
     private static nint? _GroupOffset;

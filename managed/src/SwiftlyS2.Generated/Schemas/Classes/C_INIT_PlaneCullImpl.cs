@@ -27,13 +27,16 @@ internal partial class C_INIT_PlaneCullImpl : CParticleFunctionInitializerImpl, 
         }
     }
     private static nint? _DistanceOffset;
+    private CParticleCollectionFloatInputImpl? _DistanceInstance;
 
     public CParticleCollectionFloatInput Distance
     {
         get
         {
             _DistanceOffset = _DistanceOffset ?? Schema.GetOffset(0xCFA7A11000DC4A68);
-            return new CParticleCollectionFloatInputImpl(_Handle + _DistanceOffset!.Value);
+            var instance = _DistanceInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _DistanceOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CullInsideOffset;

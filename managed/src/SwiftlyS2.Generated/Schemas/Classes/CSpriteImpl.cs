@@ -37,13 +37,16 @@ internal partial class CSpriteImpl : CBaseModelEntityImpl, CSprite
         }
     }
     private static nint? _AttachmentOffset;
+    private AttachmentHandle_tImpl? _AttachmentInstance;
 
     public AttachmentHandle_t Attachment
     {
         get
         {
             _AttachmentOffset = _AttachmentOffset ?? Schema.GetOffset(0xAAF88CE3E3BF4024);
-            return new AttachmentHandle_tImpl(_Handle + _AttachmentOffset!.Value);
+            var instance = _AttachmentInstance ??= new AttachmentHandle_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _AttachmentOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SpriteFramerateOffset;
@@ -67,13 +70,16 @@ internal partial class CSpriteImpl : CBaseModelEntityImpl, CSprite
         }
     }
     private static nint? _DieTimeOffset;
+    private GameTime_tImpl? _DieTimeInstance;
 
     public GameTime_t DieTime
     {
         get
         {
             _DieTimeOffset = _DieTimeOffset ?? Schema.GetOffset(0xAAF88CE361B33206);
-            return new GameTime_tImpl(_Handle + _DieTimeOffset!.Value);
+            var instance = _DieTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _DieTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BrightnessOffset;
@@ -147,13 +153,16 @@ internal partial class CSpriteImpl : CBaseModelEntityImpl, CSprite
         }
     }
     private static nint? _LastTimeOffset;
+    private GameTime_tImpl? _LastTimeInstance;
 
     public GameTime_t LastTime
     {
         get
         {
             _LastTimeOffset = _LastTimeOffset ?? Schema.GetOffset(0xAAF88CE32E79549E);
-            return new GameTime_tImpl(_Handle + _LastTimeOffset!.Value);
+            var instance = _LastTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MaxFrameOffset;
@@ -187,13 +196,16 @@ internal partial class CSpriteImpl : CBaseModelEntityImpl, CSprite
         }
     }
     private static nint? _ScaleTimeStartOffset;
+    private GameTime_tImpl? _ScaleTimeStartInstance;
 
     public GameTime_t ScaleTimeStart
     {
         get
         {
             _ScaleTimeStartOffset = _ScaleTimeStartOffset ?? Schema.GetOffset(0xAAF88CE303EA4A2E);
-            return new GameTime_tImpl(_Handle + _ScaleTimeStartOffset!.Value);
+            var instance = _ScaleTimeStartInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _ScaleTimeStartOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StartBrightnessOffset;
@@ -217,13 +229,16 @@ internal partial class CSpriteImpl : CBaseModelEntityImpl, CSprite
         }
     }
     private static nint? _BrightnessTimeStartOffset;
+    private GameTime_tImpl? _BrightnessTimeStartInstance;
 
     public GameTime_t BrightnessTimeStart
     {
         get
         {
             _BrightnessTimeStartOffset = _BrightnessTimeStartOffset ?? Schema.GetOffset(0xAAF88CE3478AFDAF);
-            return new GameTime_tImpl(_Handle + _BrightnessTimeStartOffset!.Value);
+            var instance = _BrightnessTimeStartInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _BrightnessTimeStartOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SpriteWidthOffset;

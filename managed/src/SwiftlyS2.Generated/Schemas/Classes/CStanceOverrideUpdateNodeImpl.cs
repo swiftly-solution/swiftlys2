@@ -27,23 +27,29 @@ internal partial class CStanceOverrideUpdateNodeImpl : CUnaryUpdateNodeImpl, CSt
         }
     }
     private static nint? _StanceSourceNodeOffset;
+    private CAnimUpdateNodeRefImpl? _StanceSourceNodeInstance;
 
     public CAnimUpdateNodeRef StanceSourceNode
     {
         get
         {
             _StanceSourceNodeOffset = _StanceSourceNodeOffset ?? Schema.GetOffset(0x322EE1B7D25DA07A);
-            return new CAnimUpdateNodeRefImpl(_Handle + _StanceSourceNodeOffset!.Value);
+            var instance = _StanceSourceNodeInstance ??= new CAnimUpdateNodeRefImpl(0);
+            instance.DangerousSetHandle(_Handle + _StanceSourceNodeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ParameterOffset;
+    private CAnimParamHandleImpl? _ParameterInstance;
 
     public CAnimParamHandle Parameter
     {
         get
         {
             _ParameterOffset = _ParameterOffset ?? Schema.GetOffset(0x322EE1B70C7008F6);
-            return new CAnimParamHandleImpl(_Handle + _ParameterOffset!.Value);
+            var instance = _ParameterInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParameterOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ModeOffset;

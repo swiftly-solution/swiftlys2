@@ -52,43 +52,55 @@ internal partial class CNmMaterialAttributeEventImpl : CNmEventImpl, CNmMaterial
         }
     }
     private static nint? _XOffset;
+    private SchemaUntypedField? _XInstance;
 
     public SchemaUntypedField X
     {
         get
         {
             _XOffset = _XOffset ?? Schema.GetOffset(0xFC131DADBC57BA7);
-            return new SchemaUntypedField(_Handle + _XOffset!.Value);
+            var instance = _XInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _XOffset!.Value);
+            return instance;
         }
     }
     private static nint? _YOffset;
+    private SchemaUntypedField? _YInstance;
 
     public SchemaUntypedField Y
     {
         get
         {
             _YOffset = _YOffset ?? Schema.GetOffset(0xFC131DADAC57A14);
-            return new SchemaUntypedField(_Handle + _YOffset!.Value);
+            var instance = _YInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _YOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ZOffset;
+    private SchemaUntypedField? _ZInstance;
 
     public SchemaUntypedField Z
     {
         get
         {
             _ZOffset = _ZOffset ?? Schema.GetOffset(0xFC131DADDC57ECD);
-            return new SchemaUntypedField(_Handle + _ZOffset!.Value);
+            var instance = _ZInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ZOffset!.Value);
+            return instance;
         }
     }
     private static nint? _WOffset;
+    private SchemaUntypedField? _WInstance;
 
     public SchemaUntypedField W
     {
         get
         {
             _WOffset = _WOffset ?? Schema.GetOffset(0xFC131DAD0C56A56);
-            return new SchemaUntypedField(_Handle + _WOffset!.Value);
+            var instance = _WInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _WOffset!.Value);
+            return instance;
         }
     }
 

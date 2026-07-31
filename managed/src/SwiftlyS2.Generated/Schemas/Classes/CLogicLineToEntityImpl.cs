@@ -17,13 +17,16 @@ internal partial class CLogicLineToEntityImpl : CLogicalEntityImpl, CLogicLineTo
     public CLogicLineToEntityImpl(nint handle) : base(handle) { }
 
     private static nint? _LineOffset;
+    private SchemaUntypedField? _LineInstance;
 
     public SchemaUntypedField Line
     {
         get
         {
             _LineOffset = _LineOffset ?? Schema.GetOffset(0x61067DC85589FAA7);
-            return new SchemaUntypedField(_Handle + _LineOffset!.Value);
+            var instance = _LineInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _LineOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SourceNameOffset;

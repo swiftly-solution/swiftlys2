@@ -57,33 +57,42 @@ internal partial class C_OP_RenderMaterialProxyImpl : CParticleFunctionRendererI
         }
     }
     private static nint? _MaterialOverrideEnabledOffset;
+    private CParticleCollectionFloatInputImpl? _MaterialOverrideEnabledInstance;
 
     public CParticleCollectionFloatInput MaterialOverrideEnabled
     {
         get
         {
             _MaterialOverrideEnabledOffset = _MaterialOverrideEnabledOffset ?? Schema.GetOffset(0xA725805832275723);
-            return new CParticleCollectionFloatInputImpl(_Handle + _MaterialOverrideEnabledOffset!.Value);
+            var instance = _MaterialOverrideEnabledInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _MaterialOverrideEnabledOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ColorScaleOffset;
+    private CParticleCollectionVecInputImpl? _ColorScaleInstance;
 
     public CParticleCollectionVecInput ColorScale
     {
         get
         {
             _ColorScaleOffset = _ColorScaleOffset ?? Schema.GetOffset(0xA72580589F9BB8BA);
-            return new CParticleCollectionVecInputImpl(_Handle + _ColorScaleOffset!.Value);
+            var instance = _ColorScaleInstance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ColorScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AlphaOffset;
+    private CPerParticleFloatInputImpl? _AlphaInstance;
 
     public CPerParticleFloatInput Alpha
     {
         get
         {
             _AlphaOffset = _AlphaOffset ?? Schema.GetOffset(0xA7258058A0DB7DD1);
-            return new CPerParticleFloatInputImpl(_Handle + _AlphaOffset!.Value);
+            var instance = _AlphaInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _AlphaOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ColorBlendTypeOffset;

@@ -17,23 +17,29 @@ internal partial class CPulseCell_Inflow_BaseEntrypointImpl : CPulseCell_BaseFlo
     public CPulseCell_Inflow_BaseEntrypointImpl(nint handle) : base(handle) { }
 
     private static nint? _EntryChunkOffset;
+    private PulseRuntimeChunkIndex_tImpl? _EntryChunkInstance;
 
     public PulseRuntimeChunkIndex_t EntryChunk
     {
         get
         {
             _EntryChunkOffset = _EntryChunkOffset ?? Schema.GetOffset(0x1747DEDF279F0A60);
-            return new PulseRuntimeChunkIndex_tImpl(_Handle + _EntryChunkOffset!.Value);
+            var instance = _EntryChunkInstance ??= new PulseRuntimeChunkIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _EntryChunkOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RegisterMapOffset;
+    private PulseRegisterMap_tImpl? _RegisterMapInstance;
 
     public PulseRegisterMap_t RegisterMap
     {
         get
         {
             _RegisterMapOffset = _RegisterMapOffset ?? Schema.GetOffset(0x1747DEDF7BD4CE96);
-            return new PulseRegisterMap_tImpl(_Handle + _RegisterMapOffset!.Value);
+            var instance = _RegisterMapInstance ??= new PulseRegisterMap_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _RegisterMapOffset!.Value);
+            return instance;
         }
     }
 

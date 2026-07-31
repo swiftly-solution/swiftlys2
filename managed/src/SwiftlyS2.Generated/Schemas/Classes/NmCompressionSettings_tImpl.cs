@@ -17,43 +17,55 @@ internal partial class NmCompressionSettings_tImpl : SchemaClass, NmCompressionS
     public NmCompressionSettings_tImpl(nint handle) : base(handle) { }
 
     private static nint? _TranslationRangeXOffset;
+    private NmCompressionSettings_t__QuantizationRange_tImpl? _TranslationRangeXInstance;
 
     public NmCompressionSettings_t__QuantizationRange_t TranslationRangeX
     {
         get
         {
             _TranslationRangeXOffset = _TranslationRangeXOffset ?? Schema.GetOffset(0xA8EC8858BF2C2B);
-            return new NmCompressionSettings_t__QuantizationRange_tImpl(_Handle + _TranslationRangeXOffset!.Value);
+            var instance = _TranslationRangeXInstance ??= new NmCompressionSettings_t__QuantizationRange_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _TranslationRangeXOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TranslationRangeYOffset;
+    private NmCompressionSettings_t__QuantizationRange_tImpl? _TranslationRangeYInstance;
 
     public NmCompressionSettings_t__QuantizationRange_t TranslationRangeY
     {
         get
         {
             _TranslationRangeYOffset = _TranslationRangeYOffset ?? Schema.GetOffset(0xA8EC8857BF2A98);
-            return new NmCompressionSettings_t__QuantizationRange_tImpl(_Handle + _TranslationRangeYOffset!.Value);
+            var instance = _TranslationRangeYInstance ??= new NmCompressionSettings_t__QuantizationRange_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _TranslationRangeYOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TranslationRangeZOffset;
+    private NmCompressionSettings_t__QuantizationRange_tImpl? _TranslationRangeZInstance;
 
     public NmCompressionSettings_t__QuantizationRange_t TranslationRangeZ
     {
         get
         {
             _TranslationRangeZOffset = _TranslationRangeZOffset ?? Schema.GetOffset(0xA8EC885ABF2F51);
-            return new NmCompressionSettings_t__QuantizationRange_tImpl(_Handle + _TranslationRangeZOffset!.Value);
+            var instance = _TranslationRangeZInstance ??= new NmCompressionSettings_t__QuantizationRange_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _TranslationRangeZOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ScaleRangeOffset;
+    private NmCompressionSettings_t__QuantizationRange_tImpl? _ScaleRangeInstance;
 
     public NmCompressionSettings_t__QuantizationRange_t ScaleRange
     {
         get
         {
             _ScaleRangeOffset = _ScaleRangeOffset ?? Schema.GetOffset(0xA8EC88E96F803E);
-            return new NmCompressionSettings_t__QuantizationRange_tImpl(_Handle + _ScaleRangeOffset!.Value);
+            var instance = _ScaleRangeInstance ??= new NmCompressionSettings_t__QuantizationRange_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _ScaleRangeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TrackReadOffsetOffset;

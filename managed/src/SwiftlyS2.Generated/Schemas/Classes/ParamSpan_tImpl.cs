@@ -27,13 +27,16 @@ internal partial class ParamSpan_tImpl : SchemaClass, ParamSpan_t
         }
     }
     private static nint? _ParamOffset;
+    private CAnimParamHandleImpl? _ParamInstance;
 
     public CAnimParamHandle Param
     {
         get
         {
             _ParamOffset = _ParamOffset ?? Schema.GetOffset(0x5EE209D9679286A4);
-            return new CAnimParamHandleImpl(_Handle + _ParamOffset!.Value);
+            var instance = _ParamInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ParamTypeOffset;

@@ -36,22 +36,43 @@ internal partial class CTestEffectImpl : CBaseEntityImpl, CTestEffect
             return ref _Handle.AsRef<int>(_BeamOffset!.Value);
         }
     }
+    private static nint? _Beam1Offset;
+    private SchemaFixedArray<CHandle<CBeam>>? _Beam1Instance;
+
     public ISchemaFixedArray<CHandle<CBeam>> Beam1
     {
-        get => new SchemaFixedArray<CHandle<CBeam>>(_Handle, 0xF4103FBFC4017428, 24, 4, 4);
+        get
+        {
+            _Beam1Offset = _Beam1Offset ?? Schema.GetOffset(0xF4103FBFC4017428);
+            var instance = _Beam1Instance ??= new SchemaFixedArray<CHandle<CBeam>>(0, 0xF4103FBFC4017428, 24, 4, 4);
+            instance.DangerousSetHandle(_Handle + _Beam1Offset!.Value);
+            return instance;
+        }
     }
+    private static nint? _BeamTimeOffset;
+    private SchemaClassFixedArray<GameTime_t>? _BeamTimeInstance;
+
     public ISchemaClassFixedArray<GameTime_t> BeamTime
     {
-        get => new SchemaClassFixedArray<GameTime_t>(_Handle, 0xF4103FBF60293F01, 24, 4, 4);
+        get
+        {
+            _BeamTimeOffset = _BeamTimeOffset ?? Schema.GetOffset(0xF4103FBF60293F01);
+            var instance = _BeamTimeInstance ??= new SchemaClassFixedArray<GameTime_t>(0, 0xF4103FBF60293F01, 24, 4, 4);
+            instance.DangerousSetHandle(_Handle + _BeamTimeOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _StartTimeOffset;
+    private GameTime_tImpl? _StartTimeInstance;
 
     public GameTime_t StartTime
     {
         get
         {
             _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0xF4103FBF67FE9DC4);
-            return new GameTime_tImpl(_Handle + _StartTimeOffset!.Value);
+            var instance = _StartTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _StartTimeOffset!.Value);
+            return instance;
         }
     }
 

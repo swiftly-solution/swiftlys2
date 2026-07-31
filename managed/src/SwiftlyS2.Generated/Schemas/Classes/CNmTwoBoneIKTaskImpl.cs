@@ -47,13 +47,16 @@ internal partial class CNmTwoBoneIKTaskImpl : CNmPoseTaskImpl, CNmTwoBoneIKTask
         }
     }
     private static nint? _EffectorTargetOffset;
+    private CNmTargetImpl? _EffectorTargetInstance;
 
     public CNmTarget EffectorTarget
     {
         get
         {
             _EffectorTargetOffset = _EffectorTargetOffset ?? Schema.GetOffset(0xE29DE6F88D86AF5C);
-            return new CNmTargetImpl(_Handle + _EffectorTargetOffset!.Value);
+            var instance = _EffectorTargetInstance ??= new CNmTargetImpl(0);
+            instance.DangerousSetHandle(_Handle + _EffectorTargetOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BlendModeOffset;

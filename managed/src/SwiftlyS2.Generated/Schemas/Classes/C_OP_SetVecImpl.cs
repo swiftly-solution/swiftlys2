@@ -17,23 +17,29 @@ internal partial class C_OP_SetVecImpl : CParticleFunctionOperatorImpl, C_OP_Set
     public C_OP_SetVecImpl(nint handle) : base(handle) { }
 
     private static nint? _InputValueOffset;
+    private CPerParticleVecInputImpl? _InputValueInstance;
 
     public CPerParticleVecInput InputValue
     {
         get
         {
             _InputValueOffset = _InputValueOffset ?? Schema.GetOffset(0x24E155B734445438);
-            return new CPerParticleVecInputImpl(_Handle + _InputValueOffset!.Value);
+            var instance = _InputValueInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _InputValueOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OutputFieldOffset;
+    private ParticleAttributeIndex_tImpl? _OutputFieldInstance;
 
     public ParticleAttributeIndex_t OutputField
     {
         get
         {
             _OutputFieldOffset = _OutputFieldOffset ?? Schema.GetOffset(0x24E155B7324F6F74);
-            return new ParticleAttributeIndex_tImpl(_Handle + _OutputFieldOffset!.Value);
+            var instance = _OutputFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _OutputFieldOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SetMethodOffset;
@@ -47,13 +53,16 @@ internal partial class C_OP_SetVecImpl : CParticleFunctionOperatorImpl, C_OP_Set
         }
     }
     private static nint? _LerpOffset;
+    private CPerParticleFloatInputImpl? _LerpInstance;
 
     public CPerParticleFloatInput Lerp
     {
         get
         {
             _LerpOffset = _LerpOffset ?? Schema.GetOffset(0x24E155B75C17F8E8);
-            return new CPerParticleFloatInputImpl(_Handle + _LerpOffset!.Value);
+            var instance = _LerpInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _LerpOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NormalizedOutputOffset;

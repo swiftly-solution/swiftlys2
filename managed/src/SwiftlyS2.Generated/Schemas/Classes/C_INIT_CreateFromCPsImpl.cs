@@ -47,13 +47,16 @@ internal partial class C_INIT_CreateFromCPsImpl : CParticleFunctionInitializerIm
         }
     }
     private static nint? _DynamicCPCountOffset;
+    private CParticleCollectionFloatInputImpl? _DynamicCPCountInstance;
 
     public CParticleCollectionFloatInput DynamicCPCount
     {
         get
         {
             _DynamicCPCountOffset = _DynamicCPCountOffset ?? Schema.GetOffset(0x2593FF96DF30CE38);
-            return new CParticleCollectionFloatInputImpl(_Handle + _DynamicCPCountOffset!.Value);
+            var instance = _DynamicCPCountInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _DynamicCPCountOffset!.Value);
+            return instance;
         }
     }
 

@@ -47,13 +47,16 @@ internal partial class CEnvTiltImpl : CPointEntityImpl, CEnvTilt
         }
     }
     private static nint? _StopTimeOffset;
+    private GameTime_tImpl? _StopTimeInstance;
 
     public GameTime_t StopTime
     {
         get
         {
             _StopTimeOffset = _StopTimeOffset ?? Schema.GetOffset(0xF90425166BFFEDC4);
-            return new GameTime_tImpl(_Handle + _StopTimeOffset!.Value);
+            var instance = _StopTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _StopTimeOffset!.Value);
+            return instance;
         }
     }
 

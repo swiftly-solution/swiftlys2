@@ -37,13 +37,16 @@ internal partial class CSceneEventInfoImpl : SchemaClass, CSceneEventInfo
         }
     }
     private static nint? _SequenceOffset;
+    private HSequenceImpl? _SequenceInstance;
 
     public HSequence Sequence
     {
         get
         {
             _SequenceOffset = _SequenceOffset ?? Schema.GetOffset(0x38A9D25EE0A0598E);
-            return new HSequenceImpl(_Handle + _SequenceOffset!.Value);
+            var instance = _SequenceInstance ??= new HSequenceImpl(0);
+            instance.DangerousSetHandle(_Handle + _SequenceOffset!.Value);
+            return instance;
         }
     }
     private static nint? _WeightOffset;
@@ -147,13 +150,16 @@ internal partial class CSceneEventInfoImpl : SchemaClass, CSceneEventInfo
         }
     }
     private static nint? _NextOffset;
+    private GameTime_tImpl? _NextInstance;
 
     public GameTime_t Next
     {
         get
         {
             _NextOffset = _NextOffset ?? Schema.GetOffset(0x38A9D25E3BE2574E);
-            return new GameTime_tImpl(_Handle + _NextOffset!.Value);
+            var instance = _NextInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NextOffset!.Value);
+            return instance;
         }
     }
     private static nint? _IsGestureOffset;
@@ -187,13 +193,16 @@ internal partial class CSceneEventInfoImpl : SchemaClass, CSceneEventInfo
         }
     }
     private static nint? _SceneEventIdOffset;
+    private SceneEventId_tImpl? _SceneEventIdInstance;
 
     public SceneEventId_t SceneEventId
     {
         get
         {
             _SceneEventIdOffset = _SceneEventIdOffset ?? Schema.GetOffset(0x38A9D25EE76A0188);
-            return new SceneEventId_tImpl(_Handle + _SceneEventIdOffset!.Value);
+            var instance = _SceneEventIdInstance ??= new SceneEventId_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _SceneEventIdOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ClientSideOffset;

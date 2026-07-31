@@ -17,33 +17,42 @@ internal partial class PulseRegisterMap_tImpl : SchemaClass, PulseRegisterMap_t
     public PulseRegisterMap_tImpl(nint handle) : base(handle) { }
 
     private static nint? _InparamsOffset;
+    private SchemaUntypedField? _InparamsInstance;
 
     public SchemaUntypedField Inparams
     {
         get
         {
             _InparamsOffset = _InparamsOffset ?? Schema.GetOffset(0x833FEA64B9B18E04);
-            return new SchemaUntypedField(_Handle + _InparamsOffset!.Value);
+            var instance = _InparamsInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _InparamsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InparamsWhichCanBeMovedOffset;
+    private SchemaUntypedField? _InparamsWhichCanBeMovedInstance;
 
     public SchemaUntypedField InparamsWhichCanBeMoved
     {
         get
         {
             _InparamsWhichCanBeMovedOffset = _InparamsWhichCanBeMovedOffset ?? Schema.GetOffset(0x833FEA6405245E23);
-            return new SchemaUntypedField(_Handle + _InparamsWhichCanBeMovedOffset!.Value);
+            var instance = _InparamsWhichCanBeMovedInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _InparamsWhichCanBeMovedOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OutparamsOffset;
+    private SchemaUntypedField? _OutparamsInstance;
 
     public SchemaUntypedField Outparams
     {
         get
         {
             _OutparamsOffset = _OutparamsOffset ?? Schema.GetOffset(0x833FEA64798D964D);
-            return new SchemaUntypedField(_Handle + _OutparamsOffset!.Value);
+            var instance = _OutparamsInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OutparamsOffset!.Value);
+            return instance;
         }
     }
 

@@ -17,13 +17,16 @@ internal partial class CGenericShapeProxyImpl : SchemaClass, CGenericShapeProxy
     public CGenericShapeProxyImpl(nint handle) : base(handle) { }
 
     private static nint? _VertsOffset;
+    private SchemaUntypedField? _VertsInstance;
 
     public SchemaUntypedField Verts
     {
         get
         {
             _VertsOffset = _VertsOffset ?? Schema.GetOffset(0xCEAA54A4FCD95543);
-            return new SchemaUntypedField(_Handle + _VertsOffset!.Value);
+            var instance = _VertsInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _VertsOffset!.Value);
+            return instance;
         }
     }
 

@@ -27,33 +27,42 @@ internal partial class C_OP_SetControlPointFieldToScalarExpressionImpl : CPartic
         }
     }
     private static nint? _Input1Offset;
+    private CParticleCollectionFloatInputImpl? _Input1Instance;
 
     public CParticleCollectionFloatInput Input1
     {
         get
         {
             _Input1Offset = _Input1Offset ?? Schema.GetOffset(0x6A8A3411E9DA2E24);
-            return new CParticleCollectionFloatInputImpl(_Handle + _Input1Offset!.Value);
+            var instance = _Input1Instance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _Input1Offset!.Value);
+            return instance;
         }
     }
     private static nint? _Input2Offset;
+    private CParticleCollectionFloatInputImpl? _Input2Instance;
 
     public CParticleCollectionFloatInput Input2
     {
         get
         {
             _Input2Offset = _Input2Offset ?? Schema.GetOffset(0x6A8A3411ECDA32DD);
-            return new CParticleCollectionFloatInputImpl(_Handle + _Input2Offset!.Value);
+            var instance = _Input2Instance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _Input2Offset!.Value);
+            return instance;
         }
     }
     private static nint? _OutputRemapOffset;
+    private CParticleRemapFloatInputImpl? _OutputRemapInstance;
 
     public CParticleRemapFloatInput OutputRemap
     {
         get
         {
             _OutputRemapOffset = _OutputRemapOffset ?? Schema.GetOffset(0x6A8A34111239396F);
-            return new CParticleRemapFloatInputImpl(_Handle + _OutputRemapOffset!.Value);
+            var instance = _OutputRemapInstance ??= new CParticleRemapFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _OutputRemapOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OutputCPOffset;
@@ -77,13 +86,16 @@ internal partial class C_OP_SetControlPointFieldToScalarExpressionImpl : CPartic
         }
     }
     private static nint? _InterpolationOffset;
+    private CParticleCollectionFloatInputImpl? _InterpolationInstance;
 
     public CParticleCollectionFloatInput Interpolation
     {
         get
         {
             _InterpolationOffset = _InterpolationOffset ?? Schema.GetOffset(0x6A8A3411CF55B987);
-            return new CParticleCollectionFloatInputImpl(_Handle + _InterpolationOffset!.Value);
+            var instance = _InterpolationInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _InterpolationOffset!.Value);
+            return instance;
         }
     }
 

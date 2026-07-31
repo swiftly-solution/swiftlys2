@@ -72,13 +72,16 @@ internal partial class C_OP_DecayMaintainCountImpl : CParticleFunctionOperatorIm
         }
     }
     private static nint? _ScaleOffset;
+    private CParticleCollectionFloatInputImpl? _ScaleInstance;
 
     public CParticleCollectionFloatInput Scale
     {
         get
         {
             _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x168E27F3B731A42F);
-            return new CParticleCollectionFloatInputImpl(_Handle + _ScaleOffset!.Value);
+            var instance = _ScaleInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _KillNewestOffset;

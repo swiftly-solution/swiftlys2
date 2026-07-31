@@ -17,33 +17,42 @@ internal partial class C_INIT_PositionPlaceOnGroundImpl : CParticleFunctionIniti
     public C_INIT_PositionPlaceOnGroundImpl(nint handle) : base(handle) { }
 
     private static nint? _OffsetOffset;
+    private CPerParticleFloatInputImpl? _OffsetInstance;
 
     public CPerParticleFloatInput Offset
     {
         get
         {
             _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0xA022821E7F14BA34);
-            return new CPerParticleFloatInputImpl(_Handle + _OffsetOffset!.Value);
+            var instance = _OffsetInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _OffsetOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MaxTraceLengthOffset;
+    private CPerParticleFloatInputImpl? _MaxTraceLengthInstance;
 
     public CPerParticleFloatInput MaxTraceLength
     {
         get
         {
             _MaxTraceLengthOffset = _MaxTraceLengthOffset ?? Schema.GetOffset(0xA022821E543C3798);
-            return new CPerParticleFloatInputImpl(_Handle + _MaxTraceLengthOffset!.Value);
+            var instance = _MaxTraceLengthInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _MaxTraceLengthOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TraceDirOffset;
+    private CPerParticleVecInputImpl? _TraceDirInstance;
 
     public CPerParticleVecInput TraceDir
     {
         get
         {
             _TraceDirOffset = _TraceDirOffset ?? Schema.GetOffset(0xA022821EB3F09745);
-            return new CPerParticleVecInputImpl(_Handle + _TraceDirOffset!.Value);
+            var instance = _TraceDirInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _TraceDirOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CollisionGroupNameOffset;
@@ -92,13 +101,16 @@ internal partial class C_INIT_PositionPlaceOnGroundImpl : CParticleFunctionIniti
         }
     }
     private static nint? _AttributeOffset;
+    private ParticleAttributeIndex_tImpl? _AttributeInstance;
 
     public ParticleAttributeIndex_t Attribute
     {
         get
         {
             _AttributeOffset = _AttributeOffset ?? Schema.GetOffset(0xA022821E7FE8DE0B);
-            return new ParticleAttributeIndex_tImpl(_Handle + _AttributeOffset!.Value);
+            var instance = _AttributeInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _AttributeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SetPXYZOnlyOffset;
@@ -122,13 +134,16 @@ internal partial class C_INIT_PositionPlaceOnGroundImpl : CParticleFunctionIniti
         }
     }
     private static nint? _GroundNormalAttributeOffset;
+    private ParticleAttributeIndex_tImpl? _GroundNormalAttributeInstance;
 
     public ParticleAttributeIndex_t GroundNormalAttribute
     {
         get
         {
             _GroundNormalAttributeOffset = _GroundNormalAttributeOffset ?? Schema.GetOffset(0xA022821E64EE124B);
-            return new ParticleAttributeIndex_tImpl(_Handle + _GroundNormalAttributeOffset!.Value);
+            var instance = _GroundNormalAttributeInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _GroundNormalAttributeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OffsetonColOnlyOffset;

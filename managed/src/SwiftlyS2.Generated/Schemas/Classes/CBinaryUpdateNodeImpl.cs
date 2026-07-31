@@ -17,23 +17,29 @@ internal partial class CBinaryUpdateNodeImpl : CAnimUpdateNodeBaseImpl, CBinaryU
     public CBinaryUpdateNodeImpl(nint handle) : base(handle) { }
 
     private static nint? _Child1Offset;
+    private CAnimUpdateNodeRefImpl? _Child1Instance;
 
     public CAnimUpdateNodeRef Child1
     {
         get
         {
             _Child1Offset = _Child1Offset ?? Schema.GetOffset(0xA1CFA91E9E0C6B0A);
-            return new CAnimUpdateNodeRefImpl(_Handle + _Child1Offset!.Value);
+            var instance = _Child1Instance ??= new CAnimUpdateNodeRefImpl(0);
+            instance.DangerousSetHandle(_Handle + _Child1Offset!.Value);
+            return instance;
         }
     }
     private static nint? _Child2Offset;
+    private CAnimUpdateNodeRefImpl? _Child2Instance;
 
     public CAnimUpdateNodeRef Child2
     {
         get
         {
             _Child2Offset = _Child2Offset ?? Schema.GetOffset(0xA1CFA91E9D0C6977);
-            return new CAnimUpdateNodeRefImpl(_Handle + _Child2Offset!.Value);
+            var instance = _Child2Instance ??= new CAnimUpdateNodeRefImpl(0);
+            instance.DangerousSetHandle(_Handle + _Child2Offset!.Value);
+            return instance;
         }
     }
     private static nint? _TimingBehaviorOffset;

@@ -27,13 +27,16 @@ internal partial class CPulseCell_TestYieldWithObservablesImpl : CPulseCell_Base
         }
     }
     private static nint? _LiveFloatValueOffset;
+    private SchemaUntypedField? _LiveFloatValueInstance;
 
     public SchemaUntypedField LiveFloatValue
     {
         get
         {
             _LiveFloatValueOffset = _LiveFloatValueOffset ?? Schema.GetOffset(0x918E5C15AE6334B8);
-            return new SchemaUntypedField(_Handle + _LiveFloatValueOffset!.Value);
+            var instance = _LiveFloatValueInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _LiveFloatValueOffset!.Value);
+            return instance;
         }
     }
     private static nint? _WatchForStringValueOffset;
@@ -52,23 +55,29 @@ internal partial class CPulseCell_TestYieldWithObservablesImpl : CPulseCell_Base
         }
     }
     private static nint? _LiveStringValueOffset;
+    private SchemaUntypedField? _LiveStringValueInstance;
 
     public SchemaUntypedField LiveStringValue
     {
         get
         {
             _LiveStringValueOffset = _LiveStringValueOffset ?? Schema.GetOffset(0x918E5C1560EA3A03);
-            return new SchemaUntypedField(_Handle + _LiveStringValueOffset!.Value);
+            var instance = _LiveStringValueInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _LiveStringValueOffset!.Value);
+            return instance;
         }
     }
     private static nint? _WakeResumeOffset;
+    private CPulse_ResumePointImpl? _WakeResumeInstance;
 
     public CPulse_ResumePoint WakeResume
     {
         get
         {
             _WakeResumeOffset = _WakeResumeOffset ?? Schema.GetOffset(0x918E5C1531F86DC2);
-            return new CPulse_ResumePointImpl(_Handle + _WakeResumeOffset!.Value);
+            var instance = _WakeResumeInstance ??= new CPulse_ResumePointImpl(0);
+            instance.DangerousSetHandle(_Handle + _WakeResumeOffset!.Value);
+            return instance;
         }
     }
 

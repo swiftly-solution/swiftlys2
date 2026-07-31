@@ -46,9 +46,18 @@ internal partial class constraint_breakableparams_tImpl : SchemaClass, constrain
             return ref _Handle.AsRef<float>(_TorqueLimitOffset!.Value);
         }
     }
+    private static nint? _BodyMassScaleOffset;
+    private SchemaFixedArray<float>? _BodyMassScaleInstance;
+
     public ISchemaFixedArray<float> BodyMassScale
     {
-        get => new SchemaFixedArray<float>(_Handle, 0xEDA0F3775BED8FB5, 2, 4, 4);
+        get
+        {
+            _BodyMassScaleOffset = _BodyMassScaleOffset ?? Schema.GetOffset(0xEDA0F3775BED8FB5);
+            var instance = _BodyMassScaleInstance ??= new SchemaFixedArray<float>(0, 0xEDA0F3775BED8FB5, 2, 4, 4);
+            instance.DangerousSetHandle(_Handle + _BodyMassScaleOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _IsActiveOffset;
 

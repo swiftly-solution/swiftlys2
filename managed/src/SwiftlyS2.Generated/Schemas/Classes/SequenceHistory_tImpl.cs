@@ -17,23 +17,29 @@ internal partial class SequenceHistory_tImpl : SchemaClass, SequenceHistory_t
     public SequenceHistory_tImpl(nint handle) : base(handle) { }
 
     private static nint? _SequenceOffset;
+    private HSequenceImpl? _SequenceInstance;
 
     public HSequence Sequence
     {
         get
         {
             _SequenceOffset = _SequenceOffset ?? Schema.GetOffset(0x8B1B0C2BE0A0598E);
-            return new HSequenceImpl(_Handle + _SequenceOffset!.Value);
+            var instance = _SequenceInstance ??= new HSequenceImpl(0);
+            instance.DangerousSetHandle(_Handle + _SequenceOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SeqStartTimeOffset;
+    private GameTime_tImpl? _SeqStartTimeInstance;
 
     public GameTime_t SeqStartTime
     {
         get
         {
             _SeqStartTimeOffset = _SeqStartTimeOffset ?? Schema.GetOffset(0x8B1B0C2B9120356F);
-            return new GameTime_tImpl(_Handle + _SeqStartTimeOffset!.Value);
+            var instance = _SeqStartTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _SeqStartTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SeqFixedCycleOffset;

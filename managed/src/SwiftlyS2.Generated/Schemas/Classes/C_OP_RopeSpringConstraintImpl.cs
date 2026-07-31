@@ -17,33 +17,42 @@ internal partial class C_OP_RopeSpringConstraintImpl : CParticleFunctionConstrai
     public C_OP_RopeSpringConstraintImpl(nint handle) : base(handle) { }
 
     private static nint? _RestLengthOffset;
+    private CParticleCollectionFloatInputImpl? _RestLengthInstance;
 
     public CParticleCollectionFloatInput RestLength
     {
         get
         {
             _RestLengthOffset = _RestLengthOffset ?? Schema.GetOffset(0x2CF6156393AC4079);
-            return new CParticleCollectionFloatInputImpl(_Handle + _RestLengthOffset!.Value);
+            var instance = _RestLengthInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _RestLengthOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MinDistanceOffset;
+    private CParticleCollectionFloatInputImpl? _MinDistanceInstance;
 
     public CParticleCollectionFloatInput MinDistance
     {
         get
         {
             _MinDistanceOffset = _MinDistanceOffset ?? Schema.GetOffset(0x2CF6156392BCAD06);
-            return new CParticleCollectionFloatInputImpl(_Handle + _MinDistanceOffset!.Value);
+            var instance = _MinDistanceInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _MinDistanceOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MaxDistanceOffset;
+    private CParticleCollectionFloatInputImpl? _MaxDistanceInstance;
 
     public CParticleCollectionFloatInput MaxDistance
     {
         get
         {
             _MaxDistanceOffset = _MaxDistanceOffset ?? Schema.GetOffset(0x2CF6156398893360);
-            return new CParticleCollectionFloatInputImpl(_Handle + _MaxDistanceOffset!.Value);
+            var instance = _MaxDistanceInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _MaxDistanceOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AdjustmentScaleOffset;
@@ -57,13 +66,16 @@ internal partial class C_OP_RopeSpringConstraintImpl : CParticleFunctionConstrai
         }
     }
     private static nint? _InitialRestingLengthOffset;
+    private CParticleCollectionFloatInputImpl? _InitialRestingLengthInstance;
 
     public CParticleCollectionFloatInput InitialRestingLength
     {
         get
         {
             _InitialRestingLengthOffset = _InitialRestingLengthOffset ?? Schema.GetOffset(0x2CF61563FE9273C1);
-            return new CParticleCollectionFloatInputImpl(_Handle + _InitialRestingLengthOffset!.Value);
+            var instance = _InitialRestingLengthInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _InitialRestingLengthOffset!.Value);
+            return instance;
         }
     }
 

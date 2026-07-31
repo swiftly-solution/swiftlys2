@@ -17,43 +17,55 @@ internal partial class C_OP_LerpToOtherAttributeImpl : CParticleFunctionOperator
     public C_OP_LerpToOtherAttributeImpl(nint handle) : base(handle) { }
 
     private static nint? _InterpolationOffset;
+    private CPerParticleFloatInputImpl? _InterpolationInstance;
 
     public CPerParticleFloatInput Interpolation
     {
         get
         {
             _InterpolationOffset = _InterpolationOffset ?? Schema.GetOffset(0x1F92A80BCF55B987);
-            return new CPerParticleFloatInputImpl(_Handle + _InterpolationOffset!.Value);
+            var instance = _InterpolationInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _InterpolationOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FieldInputFromOffset;
+    private ParticleAttributeIndex_tImpl? _FieldInputFromInstance;
 
     public ParticleAttributeIndex_t FieldInputFrom
     {
         get
         {
             _FieldInputFromOffset = _FieldInputFromOffset ?? Schema.GetOffset(0x1F92A80BB0E75581);
-            return new ParticleAttributeIndex_tImpl(_Handle + _FieldInputFromOffset!.Value);
+            var instance = _FieldInputFromInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FieldInputFromOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FieldInputOffset;
+    private ParticleAttributeIndex_tImpl? _FieldInputInstance;
 
     public ParticleAttributeIndex_t FieldInput
     {
         get
         {
             _FieldInputOffset = _FieldInputOffset ?? Schema.GetOffset(0x1F92A80BAE775669);
-            return new ParticleAttributeIndex_tImpl(_Handle + _FieldInputOffset!.Value);
+            var instance = _FieldInputInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FieldInputOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FieldOutputOffset;
+    private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
             _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x1F92A80BE5729606);
-            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+            var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
+            return instance;
         }
     }
 

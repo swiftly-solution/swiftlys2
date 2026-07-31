@@ -17,53 +17,68 @@ internal partial class CPulse_CallInfoImpl : SchemaClass, CPulse_CallInfo
     public CPulse_CallInfoImpl(nint handle) : base(handle) { }
 
     private static nint? _PortNameOffset;
+    private SchemaUntypedField? _PortNameInstance;
 
     public SchemaUntypedField PortName
     {
         get
         {
             _PortNameOffset = _PortNameOffset ?? Schema.GetOffset(0x6ADF88D807237B65);
-            return new SchemaUntypedField(_Handle + _PortNameOffset!.Value);
+            var instance = _PortNameInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _PortNameOffset!.Value);
+            return instance;
         }
     }
     private static nint? _EditorNodeIDOffset;
+    private PulseDocNodeID_tImpl? _EditorNodeIDInstance;
 
     public PulseDocNodeID_t EditorNodeID
     {
         get
         {
             _EditorNodeIDOffset = _EditorNodeIDOffset ?? Schema.GetOffset(0x6ADF88D88D964CBD);
-            return new PulseDocNodeID_tImpl(_Handle + _EditorNodeIDOffset!.Value);
+            var instance = _EditorNodeIDInstance ??= new PulseDocNodeID_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _EditorNodeIDOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RegisterMapOffset;
+    private PulseRegisterMap_tImpl? _RegisterMapInstance;
 
     public PulseRegisterMap_t RegisterMap
     {
         get
         {
             _RegisterMapOffset = _RegisterMapOffset ?? Schema.GetOffset(0x6ADF88D87BD4CE96);
-            return new PulseRegisterMap_tImpl(_Handle + _RegisterMapOffset!.Value);
+            var instance = _RegisterMapInstance ??= new PulseRegisterMap_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _RegisterMapOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CallMethodIDOffset;
+    private PulseDocNodeID_tImpl? _CallMethodIDInstance;
 
     public PulseDocNodeID_t CallMethodID
     {
         get
         {
             _CallMethodIDOffset = _CallMethodIDOffset ?? Schema.GetOffset(0x6ADF88D805714471);
-            return new PulseDocNodeID_tImpl(_Handle + _CallMethodIDOffset!.Value);
+            var instance = _CallMethodIDInstance ??= new PulseDocNodeID_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _CallMethodIDOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SrcChunkOffset;
+    private PulseRuntimeChunkIndex_tImpl? _SrcChunkInstance;
 
     public PulseRuntimeChunkIndex_t SrcChunk
     {
         get
         {
             _SrcChunkOffset = _SrcChunkOffset ?? Schema.GetOffset(0x6ADF88D8313F814A);
-            return new PulseRuntimeChunkIndex_tImpl(_Handle + _SrcChunkOffset!.Value);
+            var instance = _SrcChunkInstance ??= new PulseRuntimeChunkIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _SrcChunkOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SrcInstructionOffset;

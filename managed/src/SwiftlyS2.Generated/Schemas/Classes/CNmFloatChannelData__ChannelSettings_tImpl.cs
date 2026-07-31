@@ -17,13 +17,16 @@ internal partial class CNmFloatChannelData__ChannelSettings_tImpl : SchemaClass,
     public CNmFloatChannelData__ChannelSettings_tImpl(nint handle) : base(handle) { }
 
     private static nint? _RangeOffset;
+    private NmCompressionSettings_t__QuantizationRange_tImpl? _RangeInstance;
 
     public NmCompressionSettings_t__QuantizationRange_t Range
     {
         get
         {
             _RangeOffset = _RangeOffset ?? Schema.GetOffset(0x83B066E33D639CF2);
-            return new NmCompressionSettings_t__QuantizationRange_tImpl(_Handle + _RangeOffset!.Value);
+            var instance = _RangeInstance ??= new NmCompressionSettings_t__QuantizationRange_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _RangeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _IsStaticOffset;

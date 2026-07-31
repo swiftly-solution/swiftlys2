@@ -52,13 +52,16 @@ internal partial class CDestructiblePart_DamageLevelImpl : SchemaClass, CDestruc
         }
     }
     private static nint? _HealthOffset;
+    private CSkillIntImpl? _HealthInstance;
 
     public CSkillInt Health
     {
         get
         {
             _HealthOffset = _HealthOffset ?? Schema.GetOffset(0xF69D69CB6E9C4CC3);
-            return new CSkillIntImpl(_Handle + _HealthOffset!.Value);
+            var instance = _HealthInstance ??= new CSkillIntImpl(0);
+            instance.DangerousSetHandle(_Handle + _HealthOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CriticalDamagePercentOffset;
@@ -112,13 +115,16 @@ internal partial class CDestructiblePart_DamageLevelImpl : SchemaClass, CDestruc
         }
     }
     private static nint? _DeathDestroyTimeOffset;
+    private CRangeFloatImpl? _DeathDestroyTimeInstance;
 
     public CRangeFloat DeathDestroyTime
     {
         get
         {
             _DeathDestroyTimeOffset = _DeathDestroyTimeOffset ?? Schema.GetOffset(0xF69D69CB29D83EA2);
-            return new CRangeFloatImpl(_Handle + _DeathDestroyTimeOffset!.Value);
+            var instance = _DeathDestroyTimeInstance ??= new CRangeFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _DeathDestroyTimeOffset!.Value);
+            return instance;
         }
     }
 

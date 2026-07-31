@@ -37,13 +37,16 @@ internal partial class C_OP_DistanceCullImpl : CParticleFunctionOperatorImpl, C_
         }
     }
     private static nint? _DistanceOffset;
+    private CParticleCollectionFloatInputImpl? _DistanceInstance;
 
     public CParticleCollectionFloatInput Distance
     {
         get
         {
             _DistanceOffset = _DistanceOffset ?? Schema.GetOffset(0x7252AA5200DC4A68);
-            return new CParticleCollectionFloatInputImpl(_Handle + _DistanceOffset!.Value);
+            var instance = _DistanceInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _DistanceOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CullInsideOffset;
@@ -57,13 +60,16 @@ internal partial class C_OP_DistanceCullImpl : CParticleFunctionOperatorImpl, C_
         }
     }
     private static nint? _AttributeOffset;
+    private ParticleAttributeIndex_tImpl? _AttributeInstance;
 
     public ParticleAttributeIndex_t Attribute
     {
         get
         {
             _AttributeOffset = _AttributeOffset ?? Schema.GetOffset(0x7252AA527FE8DE0B);
-            return new ParticleAttributeIndex_tImpl(_Handle + _AttributeOffset!.Value);
+            var instance = _AttributeInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _AttributeOffset!.Value);
+            return instance;
         }
     }
 

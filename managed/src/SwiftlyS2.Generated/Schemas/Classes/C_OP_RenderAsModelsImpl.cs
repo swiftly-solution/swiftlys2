@@ -57,33 +57,42 @@ internal partial class C_OP_RenderAsModelsImpl : CParticleFunctionRendererImpl, 
         }
     }
     private static nint? _XAxisScalingAttributeOffset;
+    private ParticleAttributeIndex_tImpl? _XAxisScalingAttributeInstance;
 
     public ParticleAttributeIndex_t XAxisScalingAttribute
     {
         get
         {
             _XAxisScalingAttributeOffset = _XAxisScalingAttributeOffset ?? Schema.GetOffset(0x634E6CCB0E363ADD);
-            return new ParticleAttributeIndex_tImpl(_Handle + _XAxisScalingAttributeOffset!.Value);
+            var instance = _XAxisScalingAttributeInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _XAxisScalingAttributeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _YAxisScalingAttributeOffset;
+    private ParticleAttributeIndex_tImpl? _YAxisScalingAttributeInstance;
 
     public ParticleAttributeIndex_t YAxisScalingAttribute
     {
         get
         {
             _YAxisScalingAttributeOffset = _YAxisScalingAttributeOffset ?? Schema.GetOffset(0x634E6CCBC293ED92);
-            return new ParticleAttributeIndex_tImpl(_Handle + _YAxisScalingAttributeOffset!.Value);
+            var instance = _YAxisScalingAttributeInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _YAxisScalingAttributeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ZAxisScalingAttributeOffset;
+    private ParticleAttributeIndex_tImpl? _ZAxisScalingAttributeInstance;
 
     public ParticleAttributeIndex_t ZAxisScalingAttribute
     {
         get
         {
             _ZAxisScalingAttributeOffset = _ZAxisScalingAttributeOffset ?? Schema.GetOffset(0x634E6CCBC34C4EDF);
-            return new ParticleAttributeIndex_tImpl(_Handle + _ZAxisScalingAttributeOffset!.Value);
+            var instance = _ZAxisScalingAttributeInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _ZAxisScalingAttributeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SizeCullBloatOffset;

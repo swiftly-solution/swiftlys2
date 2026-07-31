@@ -37,23 +37,29 @@ internal partial class CMoverInstanceDataImpl : SchemaClass, CMoverInstanceData
         }
     }
     private static nint? _RotationOffset;
+    private SchemaUntypedField? _RotationInstance;
 
     public SchemaUntypedField Rotation
     {
         get
         {
             _RotationOffset = _RotationOffset ?? Schema.GetOffset(0x4E0C5C3C8A84EDDF);
-            return new SchemaUntypedField(_Handle + _RotationOffset!.Value);
+            var instance = _RotationInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _RotationOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TargetOrientationOffset;
+    private SchemaUntypedField? _TargetOrientationInstance;
 
     public SchemaUntypedField TargetOrientation
     {
         get
         {
             _TargetOrientationOffset = _TargetOrientationOffset ?? Schema.GetOffset(0x4E0C5C3CEA8C11A2);
-            return new SchemaUntypedField(_Handle + _TargetOrientationOffset!.Value);
+            var instance = _TargetOrientationInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _TargetOrientationOffset!.Value);
+            return instance;
         }
     }
 

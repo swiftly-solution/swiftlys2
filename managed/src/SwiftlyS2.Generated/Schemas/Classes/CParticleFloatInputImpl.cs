@@ -47,13 +47,16 @@ internal partial class CParticleFloatInputImpl : CParticleInputImpl, CParticleFl
         }
     }
     private static nint? _NamedValueOffset;
+    private SchemaUntypedField? _NamedValueInstance;
 
     public SchemaUntypedField NamedValue
     {
         get
         {
             _NamedValueOffset = _NamedValueOffset ?? Schema.GetOffset(0x4330CD32E0618727);
-            return new SchemaUntypedField(_Handle + _NamedValueOffset!.Value);
+            var instance = _NamedValueInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _NamedValueOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ControlPointOffset;
@@ -67,23 +70,29 @@ internal partial class CParticleFloatInputImpl : CParticleInputImpl, CParticleFl
         }
     }
     private static nint? _ScalarAttributeOffset;
+    private ParticleAttributeIndex_tImpl? _ScalarAttributeInstance;
 
     public ParticleAttributeIndex_t ScalarAttribute
     {
         get
         {
             _ScalarAttributeOffset = _ScalarAttributeOffset ?? Schema.GetOffset(0x4330CD32263301AB);
-            return new ParticleAttributeIndex_tImpl(_Handle + _ScalarAttributeOffset!.Value);
+            var instance = _ScalarAttributeInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _ScalarAttributeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _VectorAttributeOffset;
+    private ParticleAttributeIndex_tImpl? _VectorAttributeInstance;
 
     public ParticleAttributeIndex_t VectorAttribute
     {
         get
         {
             _VectorAttributeOffset = _VectorAttributeOffset ?? Schema.GetOffset(0x4330CD322B36D79A);
-            return new ParticleAttributeIndex_tImpl(_Handle + _VectorAttributeOffset!.Value);
+            var instance = _VectorAttributeInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _VectorAttributeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _VectorComponentOffset;
@@ -212,13 +221,16 @@ internal partial class CParticleFloatInputImpl : CParticleInputImpl, CParticleFl
         }
     }
     private static nint? _NoiseInputVectorAttributeOffset;
+    private ParticleAttributeIndex_tImpl? _NoiseInputVectorAttributeInstance;
 
     public ParticleAttributeIndex_t NoiseInputVectorAttribute
     {
         get
         {
             _NoiseInputVectorAttributeOffset = _NoiseInputVectorAttributeOffset ?? Schema.GetOffset(0x4330CD3229C275A0);
-            return new ParticleAttributeIndex_tImpl(_Handle + _NoiseInputVectorAttributeOffset!.Value);
+            var instance = _NoiseInputVectorAttributeInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NoiseInputVectorAttributeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NoiseOutputMinOffset;
@@ -502,13 +514,16 @@ internal partial class CParticleFloatInputImpl : CParticleInputImpl, CParticleFl
         }
     }
     private static nint? _CurveOffset;
+    private SchemaUntypedField? _CurveInstance;
 
     public SchemaUntypedField Curve
     {
         get
         {
             _CurveOffset = _CurveOffset ?? Schema.GetOffset(0x4330CD323389BB94);
-            return new SchemaUntypedField(_Handle + _CurveOffset!.Value);
+            var instance = _CurveInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _CurveOffset!.Value);
+            return instance;
         }
     }
 

@@ -32,13 +32,16 @@ internal partial class FloatInputMaterialVariable_tImpl : SchemaClass, FloatInpu
         }
     }
     private static nint? _InputOffset;
+    private CParticleCollectionFloatInputImpl? _InputInstance;
 
     public CParticleCollectionFloatInput Input
     {
         get
         {
             _InputOffset = _InputOffset ?? Schema.GetOffset(0xEFEA50FD1D4B7FFD);
-            return new CParticleCollectionFloatInputImpl(_Handle + _InputOffset!.Value);
+            var instance = _InputInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _InputOffset!.Value);
+            return instance;
         }
     }
 

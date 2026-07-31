@@ -17,23 +17,29 @@ internal partial class CNmParameterizedClipSelectorNode__CDefinitionImpl : CNmCl
     public CNmParameterizedClipSelectorNode__CDefinitionImpl(nint handle) : base(handle) { }
 
     private static nint? _OptionNodeIndicesOffset;
+    private SchemaUntypedField? _OptionNodeIndicesInstance;
 
     public SchemaUntypedField OptionNodeIndices
     {
         get
         {
             _OptionNodeIndicesOffset = _OptionNodeIndicesOffset ?? Schema.GetOffset(0xF7011439DA97B15D);
-            return new SchemaUntypedField(_Handle + _OptionNodeIndicesOffset!.Value);
+            var instance = _OptionNodeIndicesInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OptionNodeIndicesOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OptionWeightsOffset;
+    private SchemaUntypedField? _OptionWeightsInstance;
 
     public SchemaUntypedField OptionWeights
     {
         get
         {
             _OptionWeightsOffset = _OptionWeightsOffset ?? Schema.GetOffset(0xF701143931D94DB5);
-            return new SchemaUntypedField(_Handle + _OptionWeightsOffset!.Value);
+            var instance = _OptionWeightsInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OptionWeightsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ParameterNodeIdxOffset;

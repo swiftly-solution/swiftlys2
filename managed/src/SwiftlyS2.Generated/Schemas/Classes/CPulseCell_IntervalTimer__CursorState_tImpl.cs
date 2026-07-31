@@ -17,23 +17,29 @@ internal partial class CPulseCell_IntervalTimer__CursorState_tImpl : SchemaClass
     public CPulseCell_IntervalTimer__CursorState_tImpl(nint handle) : base(handle) { }
 
     private static nint? _StartTimeOffset;
+    private GameTime_tImpl? _StartTimeInstance;
 
     public GameTime_t StartTime
     {
         get
         {
             _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0x63BF122697B5FA8E);
-            return new GameTime_tImpl(_Handle + _StartTimeOffset!.Value);
+            var instance = _StartTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _StartTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _EndTimeOffset;
+    private GameTime_tImpl? _EndTimeInstance;
 
     public GameTime_t EndTime
     {
         get
         {
             _EndTimeOffset = _EndTimeOffset ?? Schema.GetOffset(0x63BF12267AA8F56B);
-            return new GameTime_tImpl(_Handle + _EndTimeOffset!.Value);
+            var instance = _EndTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _EndTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _WaitIntervalOffset;

@@ -142,13 +142,16 @@ internal partial class CPointTemplateImpl : CLogicalEntityImpl, CPointTemplate
         }
     }
     private static nint? _OnEntitySpawnedOffset;
+    private SchemaUntypedField? _OnEntitySpawnedInstance;
 
     public SchemaUntypedField OnEntitySpawned
     {
         get
         {
             _OnEntitySpawnedOffset = _OnEntitySpawnedOffset ?? Schema.GetOffset(0x7085DB4EA5F5548F);
-            return new SchemaUntypedField(_Handle + _OnEntitySpawnedOffset!.Value);
+            var instance = _OnEntitySpawnedInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OnEntitySpawnedOffset!.Value);
+            return instance;
         }
     }
 

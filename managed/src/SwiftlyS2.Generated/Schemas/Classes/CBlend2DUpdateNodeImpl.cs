@@ -37,13 +37,16 @@ internal partial class CBlend2DUpdateNodeImpl : CAnimUpdateNodeBaseImpl, CBlend2
         }
     }
     private static nint? _ParamSpansOffset;
+    private CParamSpanUpdaterImpl? _ParamSpansInstance;
 
     public CParamSpanUpdater ParamSpans
     {
         get
         {
             _ParamSpansOffset = _ParamSpansOffset ?? Schema.GetOffset(0xEA40B5ADAC91553);
-            return new CParamSpanUpdaterImpl(_Handle + _ParamSpansOffset!.Value);
+            var instance = _ParamSpansInstance ??= new CParamSpanUpdaterImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamSpansOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NodeItemIndicesOffset;
@@ -57,13 +60,16 @@ internal partial class CBlend2DUpdateNodeImpl : CAnimUpdateNodeBaseImpl, CBlend2
         }
     }
     private static nint? _DampingOffset;
+    private CAnimInputDampingImpl? _DampingInstance;
 
     public CAnimInputDamping Damping
     {
         get
         {
             _DampingOffset = _DampingOffset ?? Schema.GetOffset(0xEA40B5A15440FB5);
-            return new CAnimInputDampingImpl(_Handle + _DampingOffset!.Value);
+            var instance = _DampingInstance ??= new CAnimInputDampingImpl(0);
+            instance.DangerousSetHandle(_Handle + _DampingOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BlendSourceXOffset;
@@ -77,13 +83,16 @@ internal partial class CBlend2DUpdateNodeImpl : CAnimUpdateNodeBaseImpl, CBlend2
         }
     }
     private static nint? _ParamXOffset;
+    private CAnimParamHandleImpl? _ParamXInstance;
 
     public CAnimParamHandle ParamX
     {
         get
         {
             _ParamXOffset = _ParamXOffset ?? Schema.GetOffset(0xEA40B5A4D0E84BE);
-            return new CAnimParamHandleImpl(_Handle + _ParamXOffset!.Value);
+            var instance = _ParamXInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamXOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BlendSourceYOffset;
@@ -97,13 +106,16 @@ internal partial class CBlend2DUpdateNodeImpl : CAnimUpdateNodeBaseImpl, CBlend2
         }
     }
     private static nint? _ParamYOffset;
+    private CAnimParamHandleImpl? _ParamYInstance;
 
     public CAnimParamHandle ParamY
     {
         get
         {
             _ParamYOffset = _ParamYOffset ?? Schema.GetOffset(0xEA40B5A4E0E8651);
-            return new CAnimParamHandleImpl(_Handle + _ParamYOffset!.Value);
+            var instance = _ParamYInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamYOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BlendModeOffset;

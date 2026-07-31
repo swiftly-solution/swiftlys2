@@ -57,33 +57,42 @@ internal partial class CBaseTrailRendererImpl : CBaseRendererSource2Impl, CBaseT
         }
     }
     private static nint? _StartFadeSizeOffset;
+    private CParticleCollectionRendererFloatInputImpl? _StartFadeSizeInstance;
 
     public CParticleCollectionRendererFloatInput StartFadeSize
     {
         get
         {
             _StartFadeSizeOffset = _StartFadeSizeOffset ?? Schema.GetOffset(0x2FCF7FA6BA251D92);
-            return new CParticleCollectionRendererFloatInputImpl(_Handle + _StartFadeSizeOffset!.Value);
+            var instance = _StartFadeSizeInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _StartFadeSizeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _EndFadeSizeOffset;
+    private CParticleCollectionRendererFloatInputImpl? _EndFadeSizeInstance;
 
     public CParticleCollectionRendererFloatInput EndFadeSize
     {
         get
         {
             _EndFadeSizeOffset = _EndFadeSizeOffset ?? Schema.GetOffset(0x2FCF7FA62D3FD423);
-            return new CParticleCollectionRendererFloatInputImpl(_Handle + _EndFadeSizeOffset!.Value);
+            var instance = _EndFadeSizeInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _EndFadeSizeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SubPixelAAScaleOffset;
+    private CParticleCollectionRendererFloatInputImpl? _SubPixelAAScaleInstance;
 
     public CParticleCollectionRendererFloatInput SubPixelAAScale
     {
         get
         {
             _SubPixelAAScaleOffset = _SubPixelAAScaleOffset ?? Schema.GetOffset(0x2FCF7FA63801ACCB);
-            return new CParticleCollectionRendererFloatInputImpl(_Handle + _SubPixelAAScaleOffset!.Value);
+            var instance = _SubPixelAAScaleInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _SubPixelAAScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ClampVOffset;

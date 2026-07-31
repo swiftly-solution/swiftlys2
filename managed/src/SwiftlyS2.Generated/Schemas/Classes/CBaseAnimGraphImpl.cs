@@ -17,23 +17,29 @@ internal partial class CBaseAnimGraphImpl : CBaseModelEntityImpl, CBaseAnimGraph
     public CBaseAnimGraphImpl(nint handle) : base(handle) { }
 
     private static nint? _GraphControllerManagerOffset;
+    private CAnimGraphControllerManagerImpl? _GraphControllerManagerInstance;
 
     public CAnimGraphControllerManager GraphControllerManager
     {
         get
         {
             _GraphControllerManagerOffset = _GraphControllerManagerOffset ?? Schema.GetOffset(0xE501DB1EF1B20F5A);
-            return new CAnimGraphControllerManagerImpl(_Handle + _GraphControllerManagerOffset!.Value);
+            var instance = _GraphControllerManagerInstance ??= new CAnimGraphControllerManagerImpl(0);
+            instance.DangerousSetHandle(_Handle + _GraphControllerManagerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MainGraphControllerOffset;
+    private CAnimGraphControllerPtrImpl? _MainGraphControllerInstance;
 
     public CAnimGraphControllerPtr MainGraphController
     {
         get
         {
             _MainGraphControllerOffset = _MainGraphControllerOffset ?? Schema.GetOffset(0xE501DB1E655CC5F6);
-            return new CAnimGraphControllerPtrImpl(_Handle + _MainGraphControllerOffset!.Value);
+            var instance = _MainGraphControllerInstance ??= new CAnimGraphControllerPtrImpl(0);
+            instance.DangerousSetHandle(_Handle + _MainGraphControllerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InitiallyPopulateInterpHistoryOffset;
@@ -47,13 +53,16 @@ internal partial class CBaseAnimGraphImpl : CBaseModelEntityImpl, CBaseAnimGraph
         }
     }
     private static nint? _OnLayerCycleUpdatedOffset;
+    private SchemaUntypedField? _OnLayerCycleUpdatedInstance;
 
     public SchemaUntypedField OnLayerCycleUpdated
     {
         get
         {
             _OnLayerCycleUpdatedOffset = _OnLayerCycleUpdatedOffset ?? Schema.GetOffset(0xE501DB1EDEFC292C);
-            return new SchemaUntypedField(_Handle + _OnLayerCycleUpdatedOffset!.Value);
+            var instance = _OnLayerCycleUpdatedInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OnLayerCycleUpdatedOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OnExternalChoreoGraphChangedOffset;
@@ -67,6 +76,7 @@ internal partial class CBaseAnimGraphImpl : CBaseModelEntityImpl, CBaseAnimGraph
         }
     }
     private static nint? _ChoreoServicesOffset;
+    private IChoreoServicesImpl? _ChoreoServicesInstance;
 
     public IChoreoServices? ChoreoServices
     {
@@ -74,7 +84,10 @@ internal partial class CBaseAnimGraphImpl : CBaseModelEntityImpl, CBaseAnimGraph
         {
             _ChoreoServicesOffset = _ChoreoServicesOffset ?? Schema.GetOffset(0xE501DB1E89C6D559);
             var ptr = _Handle.Read<nint>(_ChoreoServicesOffset!.Value);
-            return ptr.IsValidPtr() ? new IChoreoServicesImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _ChoreoServicesInstance ??= new IChoreoServicesImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _AnimGraphUpdateEnabledOffset;
@@ -118,6 +131,7 @@ internal partial class CBaseAnimGraphImpl : CBaseModelEntityImpl, CBaseAnimGraph
         }
     }
     private static nint? _RagdollControlOffset;
+    private IPhysicsRagdollControlImpl? _RagdollControlInstance;
 
     public IPhysicsRagdollControl? RagdollControl
     {
@@ -125,17 +139,23 @@ internal partial class CBaseAnimGraphImpl : CBaseModelEntityImpl, CBaseAnimGraph
         {
             _RagdollControlOffset = _RagdollControlOffset ?? Schema.GetOffset(0xE501DB1EFF37C12F);
             var ptr = _Handle.Read<nint>(_RagdollControlOffset!.Value);
-            return ptr.IsValidPtr() ? new IPhysicsRagdollControlImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _RagdollControlInstance ??= new IPhysicsRagdollControlImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _RagdollPoseOffset;
+    private PhysicsRagdollPose_tImpl? _RagdollPoseInstance;
 
     public PhysicsRagdollPose_t RagdollPose
     {
         get
         {
             _RagdollPoseOffset = _RagdollPoseOffset ?? Schema.GetOffset(0xE501DB1E49F01F45);
-            return new PhysicsRagdollPose_tImpl(_Handle + _RagdollPoseOffset!.Value);
+            var instance = _RagdollPoseInstance ??= new PhysicsRagdollPose_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _RagdollPoseOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RagdollEnabledOffset;

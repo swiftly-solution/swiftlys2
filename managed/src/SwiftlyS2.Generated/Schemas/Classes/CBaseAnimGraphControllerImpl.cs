@@ -27,13 +27,16 @@ internal partial class CBaseAnimGraphControllerImpl : CSkeletonAnimationControll
         }
     }
     private static nint? _NextExternalGraphHandleOffset;
+    private ExternalAnimGraphHandle_tImpl? _NextExternalGraphHandleInstance;
 
     public ExternalAnimGraphHandle_t NextExternalGraphHandle
     {
         get
         {
             _NextExternalGraphHandleOffset = _NextExternalGraphHandleOffset ?? Schema.GetOffset(0xFA1FB81E8F65A277);
-            return new ExternalAnimGraphHandle_tImpl(_Handle + _NextExternalGraphHandleOffset!.Value);
+            var instance = _NextExternalGraphHandleInstance ??= new ExternalAnimGraphHandle_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NextExternalGraphHandleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SecondarySkeletonSlotIDsOffset;
@@ -87,23 +90,29 @@ internal partial class CBaseAnimGraphControllerImpl : CSkeletonAnimationControll
         }
     }
     private static nint? _SequenceOffset;
+    private HSequenceImpl? _SequenceInstance;
 
     public HSequence Sequence
     {
         get
         {
             _SequenceOffset = _SequenceOffset ?? Schema.GetOffset(0xFA1FB81EE0A0598E);
-            return new HSequenceImpl(_Handle + _SequenceOffset!.Value);
+            var instance = _SequenceInstance ??= new HSequenceImpl(0);
+            instance.DangerousSetHandle(_Handle + _SequenceOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SeqStartTimeOffset;
+    private GameTime_tImpl? _SeqStartTimeInstance;
 
     public GameTime_t SeqStartTime
     {
         get
         {
             _SeqStartTimeOffset = _SeqStartTimeOffset ?? Schema.GetOffset(0xFA1FB81E9120356F);
-            return new GameTime_tImpl(_Handle + _SeqStartTimeOffset!.Value);
+            var instance = _SeqStartTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _SeqStartTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SeqFixedCycleOffset;
@@ -187,13 +196,16 @@ internal partial class CBaseAnimGraphControllerImpl : CSkeletonAnimationControll
         }
     }
     private static nint? _PrevAnimUpdateTickOffset;
+    private GameTick_tImpl? _PrevAnimUpdateTickInstance;
 
     public GameTick_t PrevAnimUpdateTick
     {
         get
         {
             _PrevAnimUpdateTickOffset = _PrevAnimUpdateTickOffset ?? Schema.GetOffset(0xFA1FB81EF7E0158D);
-            return new GameTick_tImpl(_Handle + _PrevAnimUpdateTickOffset!.Value);
+            var instance = _PrevAnimUpdateTickInstance ??= new GameTick_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _PrevAnimUpdateTickOffset!.Value);
+            return instance;
         }
     }
     private static nint? _GraphDefinitionAG2Offset;
@@ -267,13 +279,16 @@ internal partial class CBaseAnimGraphControllerImpl : CSkeletonAnimationControll
         }
     }
     private static nint? _PrimaryGraphIdOffset;
+    private ResourceId_tImpl? _PrimaryGraphIdInstance;
 
     public ResourceId_t PrimaryGraphId
     {
         get
         {
             _PrimaryGraphIdOffset = _PrimaryGraphIdOffset ?? Schema.GetOffset(0xFA1FB81E1B851336);
-            return new ResourceId_tImpl(_Handle + _PrimaryGraphIdOffset!.Value);
+            var instance = _PrimaryGraphIdInstance ??= new ResourceId_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _PrimaryGraphIdOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ExternalGraphIdsOffset;
@@ -307,23 +322,29 @@ internal partial class CBaseAnimGraphControllerImpl : CSkeletonAnimationControll
         }
     }
     private static nint? _GraphInstanceAG2Offset;
+    private CAnimGraph2InstancePtrImpl? _GraphInstanceAG2Instance;
 
     public CAnimGraph2InstancePtr GraphInstanceAG2
     {
         get
         {
             _GraphInstanceAG2Offset = _GraphInstanceAG2Offset ?? Schema.GetOffset(0xFA1FB81E1D1203E0);
-            return new CAnimGraph2InstancePtrImpl(_Handle + _GraphInstanceAG2Offset!.Value);
+            var instance = _GraphInstanceAG2Instance ??= new CAnimGraph2InstancePtrImpl(0);
+            instance.DangerousSetHandle(_Handle + _GraphInstanceAG2Offset!.Value);
+            return instance;
         }
     }
     private static nint? _ExternalGraphsOffset;
+    private CExternalAnimGraphListImpl? _ExternalGraphsInstance;
 
     public CExternalAnimGraphList ExternalGraphs
     {
         get
         {
             _ExternalGraphsOffset = _ExternalGraphsOffset ?? Schema.GetOffset(0xFA1FB81E932F0BC3);
-            return new CExternalAnimGraphListImpl(_Handle + _ExternalGraphsOffset!.Value);
+            var instance = _ExternalGraphsInstance ??= new CExternalAnimGraphListImpl(0);
+            instance.DangerousSetHandle(_Handle + _ExternalGraphsOffset!.Value);
+            return instance;
         }
     }
 

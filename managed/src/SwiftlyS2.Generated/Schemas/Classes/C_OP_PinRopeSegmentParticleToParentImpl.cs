@@ -27,23 +27,29 @@ internal partial class C_OP_PinRopeSegmentParticleToParentImpl : CParticleFuncti
         }
     }
     private static nint? _ParticleNumberOffset;
+    private CParticleCollectionFloatInputImpl? _ParticleNumberInstance;
 
     public CParticleCollectionFloatInput ParticleNumber
     {
         get
         {
             _ParticleNumberOffset = _ParticleNumberOffset ?? Schema.GetOffset(0x5F59F78E12F26402);
-            return new CParticleCollectionFloatInputImpl(_Handle + _ParticleNumberOffset!.Value);
+            var instance = _ParticleNumberInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParticleNumberOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InterpolationOffset;
+    private CPerParticleFloatInputImpl? _InterpolationInstance;
 
     public CPerParticleFloatInput Interpolation
     {
         get
         {
             _InterpolationOffset = _InterpolationOffset ?? Schema.GetOffset(0x5F59F78ECF55B987);
-            return new CPerParticleFloatInputImpl(_Handle + _InterpolationOffset!.Value);
+            var instance = _InterpolationInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _InterpolationOffset!.Value);
+            return instance;
         }
     }
 

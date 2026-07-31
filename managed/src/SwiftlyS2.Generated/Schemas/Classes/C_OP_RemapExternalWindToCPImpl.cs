@@ -37,13 +37,16 @@ internal partial class C_OP_RemapExternalWindToCPImpl : CParticleFunctionPreEmis
         }
     }
     private static nint? _ScaleOffset;
+    private CParticleCollectionVecInputImpl? _ScaleInstance;
 
     public CParticleCollectionVecInput Scale
     {
         get
         {
             _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x19366DF95F596B51);
-            return new CParticleCollectionVecInputImpl(_Handle + _ScaleOffset!.Value);
+            var instance = _ScaleInstance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SetMagnitudeOffset;

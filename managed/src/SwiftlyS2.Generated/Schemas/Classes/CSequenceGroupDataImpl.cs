@@ -137,13 +137,16 @@ internal partial class CSequenceGroupDataImpl : SchemaClass, CSequenceGroupData
         }
     }
     private static nint? _KeyValuesOffset;
+    private SchemaUntypedField? _KeyValuesInstance;
 
     public SchemaUntypedField KeyValues
     {
         get
         {
             _KeyValuesOffset = _KeyValuesOffset ?? Schema.GetOffset(0xF2F9B8221578BC2);
-            return new SchemaUntypedField(_Handle + _KeyValuesOffset!.Value);
+            var instance = _KeyValuesInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _KeyValuesOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LocalIKAutoplayLockArrayOffset;

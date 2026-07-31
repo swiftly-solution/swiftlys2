@@ -17,23 +17,29 @@ internal partial class C_INIT_CreateParticleImpulseImpl : CParticleFunctionIniti
     public C_INIT_CreateParticleImpulseImpl(nint handle) : base(handle) { }
 
     private static nint? _InputRadiusOffset;
+    private CPerParticleFloatInputImpl? _InputRadiusInstance;
 
     public CPerParticleFloatInput InputRadius
     {
         get
         {
             _InputRadiusOffset = _InputRadiusOffset ?? Schema.GetOffset(0x1617EF931F5CA2F9);
-            return new CPerParticleFloatInputImpl(_Handle + _InputRadiusOffset!.Value);
+            var instance = _InputRadiusInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _InputRadiusOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InputMagnitudeOffset;
+    private CPerParticleFloatInputImpl? _InputMagnitudeInstance;
 
     public CPerParticleFloatInput InputMagnitude
     {
         get
         {
             _InputMagnitudeOffset = _InputMagnitudeOffset ?? Schema.GetOffset(0x1617EF938E8975B7);
-            return new CPerParticleFloatInputImpl(_Handle + _InputMagnitudeOffset!.Value);
+            var instance = _InputMagnitudeInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _InputMagnitudeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FalloffFunctionOffset;
@@ -47,13 +53,16 @@ internal partial class C_INIT_CreateParticleImpulseImpl : CParticleFunctionIniti
         }
     }
     private static nint? _InputFalloffExpOffset;
+    private CPerParticleFloatInputImpl? _InputFalloffExpInstance;
 
     public CPerParticleFloatInput InputFalloffExp
     {
         get
         {
             _InputFalloffExpOffset = _InputFalloffExpOffset ?? Schema.GetOffset(0x1617EF9356063396);
-            return new CPerParticleFloatInputImpl(_Handle + _InputFalloffExpOffset!.Value);
+            var instance = _InputFalloffExpInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _InputFalloffExpOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ImpulseTypeOffset;

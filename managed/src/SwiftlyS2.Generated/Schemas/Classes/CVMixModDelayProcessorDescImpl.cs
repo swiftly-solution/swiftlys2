@@ -17,13 +17,16 @@ internal partial class CVMixModDelayProcessorDescImpl : CVMixBaseProcessorDescIm
     public CVMixModDelayProcessorDescImpl(nint handle) : base(handle) { }
 
     private static nint? _DescOffset;
+    private VMixModDelayDesc_tImpl? _DescInstance;
 
     public VMixModDelayDesc_t Desc
     {
         get
         {
             _DescOffset = _DescOffset ?? Schema.GetOffset(0x95A0CCB627917BC0);
-            return new VMixModDelayDesc_tImpl(_Handle + _DescOffset!.Value);
+            var instance = _DescInstance ??= new VMixModDelayDesc_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _DescOffset!.Value);
+            return instance;
         }
     }
 

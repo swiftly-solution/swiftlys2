@@ -17,13 +17,16 @@ internal partial class CNetworkedSequenceOperationImpl : SchemaClass, CNetworked
     public CNetworkedSequenceOperationImpl(nint handle) : base(handle) { }
 
     private static nint? _SequenceOffset;
+    private HSequenceImpl? _SequenceInstance;
 
     public HSequence Sequence
     {
         get
         {
             _SequenceOffset = _SequenceOffset ?? Schema.GetOffset(0x3EA8ECC5E0A0598E);
-            return new HSequenceImpl(_Handle + _SequenceOffset!.Value);
+            var instance = _SequenceInstance ??= new HSequenceImpl(0);
+            instance.DangerousSetHandle(_Handle + _SequenceOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PrevCycleOffset;

@@ -82,13 +82,16 @@ internal partial class CDebugSnapshotData_tImpl : SchemaClass, CDebugSnapshotDat
         }
     }
     private static nint? _UserShapeOffset;
+    private CGenericShapeProxyImpl? _UserShapeInstance;
 
     public CGenericShapeProxy UserShape
     {
         get
         {
             _UserShapeOffset = _UserShapeOffset ?? Schema.GetOffset(0x9C6DA5655E98A6F);
-            return new CGenericShapeProxyImpl(_Handle + _UserShapeOffset!.Value);
+            var instance = _UserShapeInstance ??= new CGenericShapeProxyImpl(0);
+            instance.DangerousSetHandle(_Handle + _UserShapeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DrawColorOffset;
@@ -112,6 +115,7 @@ internal partial class CDebugSnapshotData_tImpl : SchemaClass, CDebugSnapshotDat
         }
     }
     private static nint? _StructuredDataOffset;
+    private DebugSnapshotBaseStructuredData_tImpl? _StructuredDataInstance;
 
     public DebugSnapshotBaseStructuredData_t? StructuredData
     {
@@ -119,7 +123,10 @@ internal partial class CDebugSnapshotData_tImpl : SchemaClass, CDebugSnapshotDat
         {
             _StructuredDataOffset = _StructuredDataOffset ?? Schema.GetOffset(0x9C6DA5642C5A5E8);
             var ptr = _Handle.Read<nint>(_StructuredDataOffset!.Value);
-            return ptr.IsValidPtr() ? new DebugSnapshotBaseStructuredData_tImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _StructuredDataInstance ??= new DebugSnapshotBaseStructuredData_tImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _EntityOffset;

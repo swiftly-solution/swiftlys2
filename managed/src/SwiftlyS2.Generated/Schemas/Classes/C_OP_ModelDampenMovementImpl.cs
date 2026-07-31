@@ -72,13 +72,16 @@ internal partial class C_OP_ModelDampenMovementImpl : CParticleFunctionOperatorI
         }
     }
     private static nint? _PosOffsetOffset;
+    private CPerParticleVecInputImpl? _PosOffsetInstance;
 
     public CPerParticleVecInput PosOffset
     {
         get
         {
             _PosOffsetOffset = _PosOffsetOffset ?? Schema.GetOffset(0x74BD8BB655D114B6);
-            return new CPerParticleVecInputImpl(_Handle + _PosOffsetOffset!.Value);
+            var instance = _PosOffsetInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _PosOffsetOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DragOffset;

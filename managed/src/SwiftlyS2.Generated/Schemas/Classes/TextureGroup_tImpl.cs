@@ -47,13 +47,16 @@ internal partial class TextureGroup_tImpl : SchemaClass, TextureGroup_t
         }
     }
     private static nint? _GradientOffset;
+    private SchemaUntypedField? _GradientInstance;
 
     public SchemaUntypedField Gradient
     {
         get
         {
             _GradientOffset = _GradientOffset ?? Schema.GetOffset(0x3186D83405C95F25);
-            return new SchemaUntypedField(_Handle + _GradientOffset!.Value);
+            var instance = _GradientInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _GradientOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TextureTypeOffset;
@@ -87,23 +90,29 @@ internal partial class TextureGroup_tImpl : SchemaClass, TextureGroup_t
         }
     }
     private static nint? _TextureBlendOffset;
+    private CParticleCollectionRendererFloatInputImpl? _TextureBlendInstance;
 
     public CParticleCollectionRendererFloatInput TextureBlend
     {
         get
         {
             _TextureBlendOffset = _TextureBlendOffset ?? Schema.GetOffset(0x3186D8343577569D);
-            return new CParticleCollectionRendererFloatInputImpl(_Handle + _TextureBlendOffset!.Value);
+            var instance = _TextureBlendInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _TextureBlendOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TextureControlsOffset;
+    private TextureControls_tImpl? _TextureControlsInstance;
 
     public TextureControls_t TextureControls
     {
         get
         {
             _TextureControlsOffset = _TextureControlsOffset ?? Schema.GetOffset(0x3186D834AD3B9D2E);
-            return new TextureControls_tImpl(_Handle + _TextureControlsOffset!.Value);
+            var instance = _TextureControlsInstance ??= new TextureControls_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _TextureControlsOffset!.Value);
+            return instance;
         }
     }
 

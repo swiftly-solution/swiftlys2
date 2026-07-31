@@ -37,13 +37,16 @@ internal partial class CNmParameterizedBlendNode__BlendRange_tImpl : SchemaClass
         }
     }
     private static nint? _ParameterValueRangeOffset;
+    private SchemaUntypedField? _ParameterValueRangeInstance;
 
     public SchemaUntypedField ParameterValueRange
     {
         get
         {
             _ParameterValueRangeOffset = _ParameterValueRangeOffset ?? Schema.GetOffset(0x17812ECC64AF37AE);
-            return new SchemaUntypedField(_Handle + _ParameterValueRangeOffset!.Value);
+            var instance = _ParameterValueRangeInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ParameterValueRangeOffset!.Value);
+            return instance;
         }
     }
 

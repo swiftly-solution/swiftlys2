@@ -16,9 +16,18 @@ internal partial class VMixEQ8Desc_tImpl : SchemaClass, VMixEQ8Desc_t
 {
     public VMixEQ8Desc_tImpl(nint handle) : base(handle) { }
 
+    private static nint? _StagesOffset;
+    private SchemaClassFixedArray<VMixFilterDesc_t>? _StagesInstance;
+
     public ISchemaClassFixedArray<VMixFilterDesc_t> Stages
     {
-        get => new SchemaClassFixedArray<VMixFilterDesc_t>(_Handle, 0xBF8A6F07B955349A, 8, 16, 4);
+        get
+        {
+            _StagesOffset = _StagesOffset ?? Schema.GetOffset(0xBF8A6F07B955349A);
+            var instance = _StagesInstance ??= new SchemaClassFixedArray<VMixFilterDesc_t>(0, 0xBF8A6F07B955349A, 8, 16, 4);
+            instance.DangerousSetHandle(_Handle + _StagesOffset!.Value);
+            return instance;
+        }
     }
 
 }

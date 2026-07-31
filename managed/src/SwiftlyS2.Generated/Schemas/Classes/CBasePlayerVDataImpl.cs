@@ -17,73 +17,94 @@ internal partial class CBasePlayerVDataImpl : CEntitySubclassVDataBaseImpl, CBas
     public CBasePlayerVDataImpl(nint handle) : base(handle) { }
 
     private static nint? _ModelNameOffset;
+    private SchemaUntypedField? _ModelNameInstance;
 
     public SchemaUntypedField ModelName
     {
         get
         {
             _ModelNameOffset = _ModelNameOffset ?? Schema.GetOffset(0x89A654F0002A227C);
-            return new SchemaUntypedField(_Handle + _ModelNameOffset!.Value);
+            var instance = _ModelNameInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ModelNameOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ModelNameAg2OverrideOffset;
+    private SchemaUntypedField? _ModelNameAg2OverrideInstance;
 
     public SchemaUntypedField ModelNameAg2Override
     {
         get
         {
             _ModelNameAg2OverrideOffset = _ModelNameAg2OverrideOffset ?? Schema.GetOffset(0x89A654F0A1FED936);
-            return new SchemaUntypedField(_Handle + _ModelNameAg2OverrideOffset!.Value);
+            var instance = _ModelNameAg2OverrideInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ModelNameAg2OverrideOffset!.Value);
+            return instance;
         }
     }
     private static nint? _HeadDamageMultiplierOffset;
+    private CSkillFloatImpl? _HeadDamageMultiplierInstance;
 
     public CSkillFloat HeadDamageMultiplier
     {
         get
         {
             _HeadDamageMultiplierOffset = _HeadDamageMultiplierOffset ?? Schema.GetOffset(0x89A654F0306CEA07);
-            return new CSkillFloatImpl(_Handle + _HeadDamageMultiplierOffset!.Value);
+            var instance = _HeadDamageMultiplierInstance ??= new CSkillFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _HeadDamageMultiplierOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ChestDamageMultiplierOffset;
+    private CSkillFloatImpl? _ChestDamageMultiplierInstance;
 
     public CSkillFloat ChestDamageMultiplier
     {
         get
         {
             _ChestDamageMultiplierOffset = _ChestDamageMultiplierOffset ?? Schema.GetOffset(0x89A654F0C82E808E);
-            return new CSkillFloatImpl(_Handle + _ChestDamageMultiplierOffset!.Value);
+            var instance = _ChestDamageMultiplierInstance ??= new CSkillFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _ChestDamageMultiplierOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StomachDamageMultiplierOffset;
+    private CSkillFloatImpl? _StomachDamageMultiplierInstance;
 
     public CSkillFloat StomachDamageMultiplier
     {
         get
         {
             _StomachDamageMultiplierOffset = _StomachDamageMultiplierOffset ?? Schema.GetOffset(0x89A654F0F84BFAFA);
-            return new CSkillFloatImpl(_Handle + _StomachDamageMultiplierOffset!.Value);
+            var instance = _StomachDamageMultiplierInstance ??= new CSkillFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _StomachDamageMultiplierOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ArmDamageMultiplierOffset;
+    private CSkillFloatImpl? _ArmDamageMultiplierInstance;
 
     public CSkillFloat ArmDamageMultiplier
     {
         get
         {
             _ArmDamageMultiplierOffset = _ArmDamageMultiplierOffset ?? Schema.GetOffset(0x89A654F071454291);
-            return new CSkillFloatImpl(_Handle + _ArmDamageMultiplierOffset!.Value);
+            var instance = _ArmDamageMultiplierInstance ??= new CSkillFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _ArmDamageMultiplierOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LegDamageMultiplierOffset;
+    private CSkillFloatImpl? _LegDamageMultiplierInstance;
 
     public CSkillFloat LegDamageMultiplier
     {
         get
         {
             _LegDamageMultiplierOffset = _LegDamageMultiplierOffset ?? Schema.GetOffset(0x89A654F0F2F8B1BB);
-            return new CSkillFloatImpl(_Handle + _LegDamageMultiplierOffset!.Value);
+            var instance = _LegDamageMultiplierInstance ??= new CSkillFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _LegDamageMultiplierOffset!.Value);
+            return instance;
         }
     }
     private static nint? _HoldBreathTimeOffset;

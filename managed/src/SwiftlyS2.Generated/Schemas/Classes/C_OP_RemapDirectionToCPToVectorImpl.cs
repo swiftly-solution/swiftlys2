@@ -27,13 +27,16 @@ internal partial class C_OP_RemapDirectionToCPToVectorImpl : CParticleFunctionOp
         }
     }
     private static nint? _FieldOutputOffset;
+    private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
             _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x80443C5BE5729606);
-            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+            var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ScaleOffset;
@@ -77,13 +80,16 @@ internal partial class C_OP_RemapDirectionToCPToVectorImpl : CParticleFunctionOp
         }
     }
     private static nint? _FieldStrengthOffset;
+    private ParticleAttributeIndex_tImpl? _FieldStrengthInstance;
 
     public ParticleAttributeIndex_t FieldStrength
     {
         get
         {
             _FieldStrengthOffset = _FieldStrengthOffset ?? Schema.GetOffset(0x80443C5BDBA3663E);
-            return new ParticleAttributeIndex_tImpl(_Handle + _FieldStrengthOffset!.Value);
+            var instance = _FieldStrengthInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FieldStrengthOffset!.Value);
+            return instance;
         }
     }
 

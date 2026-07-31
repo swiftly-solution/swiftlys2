@@ -17,13 +17,16 @@ internal partial class CNmTargetSelectorNode__CDefinitionImpl : CNmClipReference
     public CNmTargetSelectorNode__CDefinitionImpl(nint handle) : base(handle) { }
 
     private static nint? _OptionNodeIndicesOffset;
+    private SchemaUntypedField? _OptionNodeIndicesInstance;
 
     public SchemaUntypedField OptionNodeIndices
     {
         get
         {
             _OptionNodeIndicesOffset = _OptionNodeIndicesOffset ?? Schema.GetOffset(0xFEF535E9DA97B15D);
-            return new SchemaUntypedField(_Handle + _OptionNodeIndicesOffset!.Value);
+            var instance = _OptionNodeIndicesInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OptionNodeIndicesOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OrientationScoreWeightOffset;

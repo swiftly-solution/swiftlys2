@@ -17,13 +17,16 @@ internal partial class EntityIOQueuePrioritizedEvent_tImpl : SchemaClass, Entity
     public EntityIOQueuePrioritizedEvent_tImpl(nint handle) : base(handle) { }
 
     private static nint? _FireTimeOffset;
+    private GameTime_tImpl? _FireTimeInstance;
 
     public GameTime_t FireTime
     {
         get
         {
             _FireTimeOffset = _FireTimeOffset ?? Schema.GetOffset(0xE77B3E33873CD172);
-            return new GameTime_tImpl(_Handle + _FireTimeOffset!.Value);
+            var instance = _FireTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FireTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TargetTypeOffset;

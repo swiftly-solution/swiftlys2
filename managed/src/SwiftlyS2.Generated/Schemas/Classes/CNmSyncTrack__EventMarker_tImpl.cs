@@ -17,13 +17,16 @@ internal partial class CNmSyncTrack__EventMarker_tImpl : SchemaClass, CNmSyncTra
     public CNmSyncTrack__EventMarker_tImpl(nint handle) : base(handle) { }
 
     private static nint? _StartTimeOffset;
+    private NmPercent_tImpl? _StartTimeInstance;
 
     public NmPercent_t StartTime
     {
         get
         {
             _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0x1BCC69006330E7EE);
-            return new NmPercent_tImpl(_Handle + _StartTimeOffset!.Value);
+            var instance = _StartTimeInstance ??= new NmPercent_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _StartTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _IDOffset;

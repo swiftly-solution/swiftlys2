@@ -17,6 +17,7 @@ internal partial class CBotImpl : SchemaClass, CBot
     public CBotImpl(nint handle) : base(handle) { }
 
     private static nint? _ControllerOffset;
+    private CCSPlayerControllerImpl? _ControllerInstance;
 
     public CCSPlayerController? Controller
     {
@@ -24,10 +25,14 @@ internal partial class CBotImpl : SchemaClass, CBot
         {
             _ControllerOffset = _ControllerOffset ?? Schema.GetOffset(0x804AC5DB8F2DD553);
             var ptr = _Handle.Read<nint>(_ControllerOffset!.Value);
-            return ptr.IsValidPtr() ? new CCSPlayerControllerImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _ControllerInstance ??= new CCSPlayerControllerImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _PlayerOffset;
+    private CCSPlayerPawnImpl? _PlayerInstance;
 
     public CCSPlayerPawn? Player
     {
@@ -35,7 +40,10 @@ internal partial class CBotImpl : SchemaClass, CBot
         {
             _PlayerOffset = _PlayerOffset ?? Schema.GetOffset(0x804AC5DB2EC01D0E);
             var ptr = _Handle.Read<nint>(_PlayerOffset!.Value);
-            return ptr.IsValidPtr() ? new CCSPlayerPawnImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _PlayerInstance ??= new CCSPlayerPawnImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _HasSpawnedOffset;

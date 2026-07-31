@@ -147,6 +147,7 @@ internal partial class CPhysMotorImpl : CLogicalEntityImpl, CPhysMotor
         }
     }
     private static nint? _FixedWorldBodyOffset;
+    private IPhysicsBodyImpl? _FixedWorldBodyInstance;
 
     public IPhysicsBody? FixedWorldBody
     {
@@ -154,10 +155,14 @@ internal partial class CPhysMotorImpl : CLogicalEntityImpl, CPhysMotor
         {
             _FixedWorldBodyOffset = _FixedWorldBodyOffset ?? Schema.GetOffset(0x88C095BF146EC531);
             var ptr = _Handle.Read<nint>(_FixedWorldBodyOffset!.Value);
-            return ptr.IsValidPtr() ? new IPhysicsBodyImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _FixedWorldBodyInstance ??= new IPhysicsBodyImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _MotorJointOffset;
+    private IPhysicsJointImpl? _MotorJointInstance;
 
     public IPhysicsJoint? MotorJoint
     {
@@ -165,17 +170,23 @@ internal partial class CPhysMotorImpl : CLogicalEntityImpl, CPhysMotor
         {
             _MotorJointOffset = _MotorJointOffset ?? Schema.GetOffset(0x88C095BFDD87FD18);
             var ptr = _Handle.Read<nint>(_MotorJointOffset!.Value);
-            return ptr.IsValidPtr() ? new IPhysicsJointImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _MotorJointInstance ??= new IPhysicsJointImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _MotorOffset;
+    private CMotorControllerImpl? _MotorInstance;
 
     public CMotorController Motor
     {
         get
         {
             _MotorOffset = _MotorOffset ?? Schema.GetOffset(0x88C095BF373E4F92);
-            return new CMotorControllerImpl(_Handle + _MotorOffset!.Value);
+            var instance = _MotorInstance ??= new CMotorControllerImpl(0);
+            instance.DangerousSetHandle(_Handle + _MotorOffset!.Value);
+            return instance;
         }
     }
 

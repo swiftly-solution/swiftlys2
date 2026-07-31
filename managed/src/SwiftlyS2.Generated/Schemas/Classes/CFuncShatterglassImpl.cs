@@ -57,33 +57,42 @@ internal partial class CFuncShatterglassImpl : CBaseModelEntityImpl, CFuncShatte
         }
     }
     private static nint? _LastShatterSoundEmitTimeOffset;
+    private GameTime_tImpl? _LastShatterSoundEmitTimeInstance;
 
     public GameTime_t LastShatterSoundEmitTime
     {
         get
         {
             _LastShatterSoundEmitTimeOffset = _LastShatterSoundEmitTimeOffset ?? Schema.GetOffset(0xB755F0FB1708F9B9);
-            return new GameTime_tImpl(_Handle + _LastShatterSoundEmitTimeOffset!.Value);
+            var instance = _LastShatterSoundEmitTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastShatterSoundEmitTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LastCleanupTimeOffset;
+    private GameTime_tImpl? _LastCleanupTimeInstance;
 
     public GameTime_t LastCleanupTime
     {
         get
         {
             _LastCleanupTimeOffset = _LastCleanupTimeOffset ?? Schema.GetOffset(0xB755F0FBB24E6FB0);
-            return new GameTime_tImpl(_Handle + _LastCleanupTimeOffset!.Value);
+            var instance = _LastCleanupTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastCleanupTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InitAtTimeOffset;
+    private GameTime_tImpl? _InitAtTimeInstance;
 
     public GameTime_t InitAtTime
     {
         get
         {
             _InitAtTimeOffset = _InitAtTimeOffset ?? Schema.GetOffset(0xB755F0FBBBC7C1A5);
-            return new GameTime_tImpl(_Handle + _InitAtTimeOffset!.Value);
+            var instance = _InitAtTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _InitAtTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _GlassThicknessOffset;

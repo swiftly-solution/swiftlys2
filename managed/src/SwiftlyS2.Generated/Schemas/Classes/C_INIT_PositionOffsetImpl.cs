@@ -17,33 +17,42 @@ internal partial class C_INIT_PositionOffsetImpl : CParticleFunctionInitializerI
     public C_INIT_PositionOffsetImpl(nint handle) : base(handle) { }
 
     private static nint? _OffsetMinOffset;
+    private CPerParticleVecInputImpl? _OffsetMinInstance;
 
     public CPerParticleVecInput OffsetMin
     {
         get
         {
             _OffsetMinOffset = _OffsetMinOffset ?? Schema.GetOffset(0x263FD76A7E1ECBDE);
-            return new CPerParticleVecInputImpl(_Handle + _OffsetMinOffset!.Value);
+            var instance = _OffsetMinInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _OffsetMinOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OffsetMaxOffset;
+    private CPerParticleVecInputImpl? _OffsetMaxInstance;
 
     public CPerParticleVecInput OffsetMax
     {
         get
         {
             _OffsetMaxOffset = _OffsetMaxOffset ?? Schema.GetOffset(0x263FD76A9009CD7C);
-            return new CPerParticleVecInputImpl(_Handle + _OffsetMaxOffset!.Value);
+            var instance = _OffsetMaxInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _OffsetMaxOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TransformInputOffset;
+    private CParticleTransformInputImpl? _TransformInputInstance;
 
     public CParticleTransformInput TransformInput
     {
         get
         {
             _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0x263FD76AB3FDC289);
-            return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+            var instance = _TransformInputInstance ??= new CParticleTransformInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _TransformInputOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LocalCoordsOffset;
@@ -67,13 +76,16 @@ internal partial class C_INIT_PositionOffsetImpl : CParticleFunctionInitializerI
         }
     }
     private static nint? _RandomnessParametersOffset;
+    private CRandomNumberGeneratorParametersImpl? _RandomnessParametersInstance;
 
     public CRandomNumberGeneratorParameters RandomnessParameters
     {
         get
         {
             _RandomnessParametersOffset = _RandomnessParametersOffset ?? Schema.GetOffset(0x263FD76A7EDF50AD);
-            return new CRandomNumberGeneratorParametersImpl(_Handle + _RandomnessParametersOffset!.Value);
+            var instance = _RandomnessParametersInstance ??= new CRandomNumberGeneratorParametersImpl(0);
+            instance.DangerousSetHandle(_Handle + _RandomnessParametersOffset!.Value);
+            return instance;
         }
     }
 

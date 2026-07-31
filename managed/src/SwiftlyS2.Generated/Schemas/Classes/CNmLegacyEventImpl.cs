@@ -32,13 +32,16 @@ internal partial class CNmLegacyEventImpl : CNmEventImpl, CNmLegacyEvent
         }
     }
     private static nint? _KVOffset;
+    private SchemaUntypedField? _KVInstance;
 
     public SchemaUntypedField KV
     {
         get
         {
             _KVOffset = _KVOffset ?? Schema.GetOffset(0x78C36574F70B8074);
-            return new SchemaUntypedField(_Handle + _KVOffset!.Value);
+            var instance = _KVInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _KVOffset!.Value);
+            return instance;
         }
     }
 

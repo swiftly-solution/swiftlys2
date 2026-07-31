@@ -57,13 +57,16 @@ internal partial class CAnimParameterBaseImpl : SchemaClass, CAnimParameterBase
         }
     }
     private static nint? _IdOffset;
+    private AnimParamIDImpl? _IdInstance;
 
     public AnimParamID Id
     {
         get
         {
             _IdOffset = _IdOffset ?? Schema.GetOffset(0x9E097C8FB4B6E980);
-            return new AnimParamIDImpl(_Handle + _IdOffset!.Value);
+            var instance = _IdInstance ??= new AnimParamIDImpl(0);
+            instance.DangerousSetHandle(_Handle + _IdOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ComponentNameOffset;

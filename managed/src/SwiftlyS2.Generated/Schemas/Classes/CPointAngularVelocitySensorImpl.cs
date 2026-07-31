@@ -57,13 +57,16 @@ internal partial class CPointAngularVelocitySensorImpl : CPointEntityImpl, CPoin
         }
     }
     private static nint? _FireTimeOffset;
+    private GameTime_tImpl? _FireTimeInstance;
 
     public GameTime_t FireTime
     {
         get
         {
             _FireTimeOffset = _FireTimeOffset ?? Schema.GetOffset(0x5B09D8F873CD172);
-            return new GameTime_tImpl(_Handle + _FireTimeOffset!.Value);
+            var instance = _FireTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FireTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FireIntervalOffset;
@@ -117,13 +120,16 @@ internal partial class CPointAngularVelocitySensorImpl : CPointEntityImpl, CPoin
         }
     }
     private static nint? _AngularVelocityOffset;
+    private SchemaUntypedField? _AngularVelocityInstance;
 
     public SchemaUntypedField AngularVelocity
     {
         get
         {
             _AngularVelocityOffset = _AngularVelocityOffset ?? Schema.GetOffset(0x5B09D8FA4D9E2BE);
-            return new SchemaUntypedField(_Handle + _AngularVelocityOffset!.Value);
+            var instance = _AngularVelocityInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _AngularVelocityOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OnLessThanOffset;

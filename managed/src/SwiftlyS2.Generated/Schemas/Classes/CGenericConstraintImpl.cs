@@ -177,33 +177,42 @@ internal partial class CGenericConstraintImpl : CPhysConstraintImpl, CGenericCon
         }
     }
     private static nint? _BreakAfterTimeStartTimeXOffset;
+    private GameTime_tImpl? _BreakAfterTimeStartTimeXInstance;
 
     public GameTime_t BreakAfterTimeStartTimeX
     {
         get
         {
             _BreakAfterTimeStartTimeXOffset = _BreakAfterTimeStartTimeXOffset ?? Schema.GetOffset(0x169828480B0683A6);
-            return new GameTime_tImpl(_Handle + _BreakAfterTimeStartTimeXOffset!.Value);
+            var instance = _BreakAfterTimeStartTimeXInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _BreakAfterTimeStartTimeXOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BreakAfterTimeStartTimeYOffset;
+    private GameTime_tImpl? _BreakAfterTimeStartTimeYInstance;
 
     public GameTime_t BreakAfterTimeStartTimeY
     {
         get
         {
             _BreakAfterTimeStartTimeYOffset = _BreakAfterTimeStartTimeYOffset ?? Schema.GetOffset(0x169828480C068539);
-            return new GameTime_tImpl(_Handle + _BreakAfterTimeStartTimeYOffset!.Value);
+            var instance = _BreakAfterTimeStartTimeYInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _BreakAfterTimeStartTimeYOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BreakAfterTimeStartTimeZOffset;
+    private GameTime_tImpl? _BreakAfterTimeStartTimeZInstance;
 
     public GameTime_t BreakAfterTimeStartTimeZ
     {
         get
         {
             _BreakAfterTimeStartTimeZOffset = _BreakAfterTimeStartTimeZOffset ?? Schema.GetOffset(0x1698284809068080);
-            return new GameTime_tImpl(_Handle + _BreakAfterTimeStartTimeZOffset!.Value);
+            var instance = _BreakAfterTimeStartTimeZInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _BreakAfterTimeStartTimeZOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BreakAfterTimeThresholdXOffset;
@@ -297,33 +306,42 @@ internal partial class CGenericConstraintImpl : CPhysConstraintImpl, CGenericCon
         }
     }
     private static nint? _NotifyForceLastTimeXOffset;
+    private GameTime_tImpl? _NotifyForceLastTimeXInstance;
 
     public GameTime_t NotifyForceLastTimeX
     {
         get
         {
             _NotifyForceLastTimeXOffset = _NotifyForceLastTimeXOffset ?? Schema.GetOffset(0x169828485B7371B4);
-            return new GameTime_tImpl(_Handle + _NotifyForceLastTimeXOffset!.Value);
+            var instance = _NotifyForceLastTimeXInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NotifyForceLastTimeXOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NotifyForceLastTimeYOffset;
+    private GameTime_tImpl? _NotifyForceLastTimeYInstance;
 
     public GameTime_t NotifyForceLastTimeY
     {
         get
         {
             _NotifyForceLastTimeYOffset = _NotifyForceLastTimeYOffset ?? Schema.GetOffset(0x169828485C737347);
-            return new GameTime_tImpl(_Handle + _NotifyForceLastTimeYOffset!.Value);
+            var instance = _NotifyForceLastTimeYInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NotifyForceLastTimeYOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NotifyForceLastTimeZOffset;
+    private GameTime_tImpl? _NotifyForceLastTimeZInstance;
 
     public GameTime_t NotifyForceLastTimeZ
     {
         get
         {
             _NotifyForceLastTimeZOffset = _NotifyForceLastTimeZOffset ?? Schema.GetOffset(0x169828485D7374DA);
-            return new GameTime_tImpl(_Handle + _NotifyForceLastTimeZOffset!.Value);
+            var instance = _NotifyForceLastTimeZInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NotifyForceLastTimeZOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AxisNotifiedXOffset;

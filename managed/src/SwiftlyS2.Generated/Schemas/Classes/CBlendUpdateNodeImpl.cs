@@ -67,23 +67,29 @@ internal partial class CBlendUpdateNodeImpl : CAnimUpdateNodeBaseImpl, CBlendUpd
         }
     }
     private static nint? _ParamIndexOffset;
+    private CAnimParamHandleImpl? _ParamIndexInstance;
 
     public CAnimParamHandle ParamIndex
     {
         get
         {
             _ParamIndexOffset = _ParamIndexOffset ?? Schema.GetOffset(0xD72498B461990A86);
-            return new CAnimParamHandleImpl(_Handle + _ParamIndexOffset!.Value);
+            var instance = _ParamIndexInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamIndexOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DampingOffset;
+    private CAnimInputDampingImpl? _DampingInstance;
 
     public CAnimInputDamping Damping
     {
         get
         {
             _DampingOffset = _DampingOffset ?? Schema.GetOffset(0xD72498B415440FB5);
-            return new CAnimInputDampingImpl(_Handle + _DampingOffset!.Value);
+            var instance = _DampingInstance ??= new CAnimInputDampingImpl(0);
+            instance.DangerousSetHandle(_Handle + _DampingOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BlendKeyTypeOffset;

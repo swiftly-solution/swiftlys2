@@ -37,33 +37,42 @@ internal partial class CSelectorUpdateNodeImpl : CAnimUpdateNodeBaseImpl, CSelec
         }
     }
     private static nint? _BlendCurveOffset;
+    private CBlendCurveImpl? _BlendCurveInstance;
 
     public CBlendCurve BlendCurve
     {
         get
         {
             _BlendCurveOffset = _BlendCurveOffset ?? Schema.GetOffset(0x23CD95F291978183);
-            return new CBlendCurveImpl(_Handle + _BlendCurveOffset!.Value);
+            var instance = _BlendCurveInstance ??= new CBlendCurveImpl(0);
+            instance.DangerousSetHandle(_Handle + _BlendCurveOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BlendTimeOffset;
+    private SchemaUntypedField? _BlendTimeInstance;
 
     public SchemaUntypedField BlendTime
     {
         get
         {
             _BlendTimeOffset = _BlendTimeOffset ?? Schema.GetOffset(0x23CD95F2A6206E9F);
-            return new SchemaUntypedField(_Handle + _BlendTimeOffset!.Value);
+            var instance = _BlendTimeInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _BlendTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ParameterOffset;
+    private CAnimParamHandleImpl? _ParameterInstance;
 
     public CAnimParamHandle Parameter
     {
         get
         {
             _ParameterOffset = _ParameterOffset ?? Schema.GetOffset(0x23CD95F20C7008F6);
-            return new CAnimParamHandleImpl(_Handle + _ParameterOffset!.Value);
+            var instance = _ParameterInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParameterOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TagIndexOffset;

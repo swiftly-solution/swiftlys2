@@ -27,13 +27,16 @@ internal partial class CStateMachineInstanceDataImpl : SchemaClass, CStateMachin
         }
     }
     private static nint? _CurrentTransitionIndexOffset;
+    private SchemaUntypedField? _CurrentTransitionIndexInstance;
 
     public SchemaUntypedField CurrentTransitionIndex
     {
         get
         {
             _CurrentTransitionIndexOffset = _CurrentTransitionIndexOffset ?? Schema.GetOffset(0x45CA315703E0E5EF);
-            return new SchemaUntypedField(_Handle + _CurrentTransitionIndexOffset!.Value);
+            var instance = _CurrentTransitionIndexInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _CurrentTransitionIndexOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PrevStateIndexOffset;

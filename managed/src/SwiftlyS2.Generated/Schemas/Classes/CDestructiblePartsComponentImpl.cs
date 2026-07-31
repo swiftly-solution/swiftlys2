@@ -47,13 +47,16 @@ internal partial class CDestructiblePartsComponentImpl : SchemaClass, CDestructi
         }
     }
     private static nint? _AnimGraphDestructibleGraphControllerOffset;
+    private CAnimGraphControllerPtrImpl? _AnimGraphDestructibleGraphControllerInstance;
 
     public CAnimGraphControllerPtr AnimGraphDestructibleGraphController
     {
         get
         {
             _AnimGraphDestructibleGraphControllerOffset = _AnimGraphDestructibleGraphControllerOffset ?? Schema.GetOffset(0xE69A9E5185A33CD0);
-            return new CAnimGraphControllerPtrImpl(_Handle + _AnimGraphDestructibleGraphControllerOffset!.Value);
+            var instance = _AnimGraphDestructibleGraphControllerInstance ??= new CAnimGraphControllerPtrImpl(0);
+            instance.DangerousSetHandle(_Handle + _AnimGraphDestructibleGraphControllerOffset!.Value);
+            return instance;
         }
     }
 

@@ -17,23 +17,29 @@ internal partial class TargetSelectorInstanceData_tImpl : SchemaClass, TargetSel
     public TargetSelectorInstanceData_tImpl(nint handle) : base(handle) { }
 
     private static nint? _CurrentIndexOffset;
+    private SchemaUntypedField? _CurrentIndexInstance;
 
     public SchemaUntypedField CurrentIndex
     {
         get
         {
             _CurrentIndexOffset = _CurrentIndexOffset ?? Schema.GetOffset(0xE96408C1883AA9CE);
-            return new SchemaUntypedField(_Handle + _CurrentIndexOffset!.Value);
+            var instance = _CurrentIndexInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _CurrentIndexOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MSRootMotionAnlyzerTargetOffset;
+    private SchemaUntypedField? _MSRootMotionAnlyzerTargetInstance;
 
     public SchemaUntypedField MSRootMotionAnlyzerTarget
     {
         get
         {
             _MSRootMotionAnlyzerTargetOffset = _MSRootMotionAnlyzerTargetOffset ?? Schema.GetOffset(0xE96408C1FB915109);
-            return new SchemaUntypedField(_Handle + _MSRootMotionAnlyzerTargetOffset!.Value);
+            var instance = _MSRootMotionAnlyzerTargetInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _MSRootMotionAnlyzerTargetOffset!.Value);
+            return instance;
         }
     }
 

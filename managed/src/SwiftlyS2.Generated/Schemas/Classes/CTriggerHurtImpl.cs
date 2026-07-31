@@ -47,13 +47,16 @@ internal partial class CTriggerHurtImpl : CBaseTriggerImpl, CTriggerHurt
         }
     }
     private static nint? _LastDmgTimeOffset;
+    private GameTime_tImpl? _LastDmgTimeInstance;
 
     public GameTime_t LastDmgTime
     {
         get
         {
             _LastDmgTimeOffset = _LastDmgTimeOffset ?? Schema.GetOffset(0x8D022787BF3F1360);
-            return new GameTime_tImpl(_Handle + _LastDmgTimeOffset!.Value);
+            var instance = _LastDmgTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastDmgTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ForgivenessDelayOffset;

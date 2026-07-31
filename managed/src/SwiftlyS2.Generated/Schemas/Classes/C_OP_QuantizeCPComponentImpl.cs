@@ -17,13 +17,16 @@ internal partial class C_OP_QuantizeCPComponentImpl : CParticleFunctionPreEmissi
     public C_OP_QuantizeCPComponentImpl(nint handle) : base(handle) { }
 
     private static nint? _InputValueOffset;
+    private CParticleCollectionFloatInputImpl? _InputValueInstance;
 
     public CParticleCollectionFloatInput InputValue
     {
         get
         {
             _InputValueOffset = _InputValueOffset ?? Schema.GetOffset(0xDE980890EEDF8362);
-            return new CParticleCollectionFloatInputImpl(_Handle + _InputValueOffset!.Value);
+            var instance = _InputValueInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _InputValueOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CPOutputOffset;
@@ -47,13 +50,16 @@ internal partial class C_OP_QuantizeCPComponentImpl : CParticleFunctionPreEmissi
         }
     }
     private static nint? _QuantizeValueOffset;
+    private CParticleCollectionFloatInputImpl? _QuantizeValueInstance;
 
     public CParticleCollectionFloatInput QuantizeValue
     {
         get
         {
             _QuantizeValueOffset = _QuantizeValueOffset ?? Schema.GetOffset(0xDE98089065E1A349);
-            return new CParticleCollectionFloatInputImpl(_Handle + _QuantizeValueOffset!.Value);
+            var instance = _QuantizeValueInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _QuantizeValueOffset!.Value);
+            return instance;
         }
     }
 

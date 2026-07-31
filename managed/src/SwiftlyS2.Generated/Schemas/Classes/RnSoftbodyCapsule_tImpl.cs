@@ -16,9 +16,18 @@ internal partial class RnSoftbodyCapsule_tImpl : SchemaClass, RnSoftbodyCapsule_
 {
     public RnSoftbodyCapsule_tImpl(nint handle) : base(handle) { }
 
+    private static nint? _CenterOffset;
+    private SchemaFixedArray<Vector>? _CenterInstance;
+
     public ISchemaFixedArray<Vector> Center
     {
-        get => new SchemaFixedArray<Vector>(_Handle, 0x896978BC82A5908, 2, 12, 4);
+        get
+        {
+            _CenterOffset = _CenterOffset ?? Schema.GetOffset(0x896978BC82A5908);
+            var instance = _CenterInstance ??= new SchemaFixedArray<Vector>(0, 0x896978BC82A5908, 2, 12, 4);
+            instance.DangerousSetHandle(_Handle + _CenterOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _RadiusOffset;
 
@@ -30,9 +39,18 @@ internal partial class RnSoftbodyCapsule_tImpl : SchemaClass, RnSoftbodyCapsule_
             return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
         }
     }
+    private static nint? _ParticleOffset;
+    private SchemaFixedArray<ushort>? _ParticleInstance;
+
     public ISchemaFixedArray<ushort> Particle
     {
-        get => new SchemaFixedArray<ushort>(_Handle, 0x896978B863A8E83, 2, 2, 2);
+        get
+        {
+            _ParticleOffset = _ParticleOffset ?? Schema.GetOffset(0x896978B863A8E83);
+            var instance = _ParticleInstance ??= new SchemaFixedArray<ushort>(0, 0x896978B863A8E83, 2, 2, 2);
+            instance.DangerousSetHandle(_Handle + _ParticleOffset!.Value);
+            return instance;
+        }
     }
 
 }

@@ -17,13 +17,16 @@ internal partial class CFogControllerImpl : CBaseEntityImpl, CFogController
     public CFogControllerImpl(nint handle) : base(handle) { }
 
     private static nint? _FogOffset;
+    private fogparams_tImpl? _FogInstance;
 
     public fogparams_t Fog
     {
         get
         {
             _FogOffset = _FogOffset ?? Schema.GetOffset(0x719804B29014635F);
-            return new fogparams_tImpl(_Handle + _FogOffset!.Value);
+            var instance = _FogInstance ??= new fogparams_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FogOffset!.Value);
+            return instance;
         }
     }
     private static nint? _UseAnglesOffset;

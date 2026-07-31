@@ -27,63 +27,81 @@ internal partial class PGDInstruction_tImpl : SchemaClass, PGDInstruction_t
         }
     }
     private static nint? _VarOffset;
+    private PulseRuntimeVarIndex_tImpl? _VarInstance;
 
     public PulseRuntimeVarIndex_t Var
     {
         get
         {
             _VarOffset = _VarOffset ?? Schema.GetOffset(0xE64AC707FD79AE3A);
-            return new PulseRuntimeVarIndex_tImpl(_Handle + _VarOffset!.Value);
+            var instance = _VarInstance ??= new PulseRuntimeVarIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _VarOffset!.Value);
+            return instance;
         }
     }
     private static nint? _Reg0Offset;
+    private PulseRuntimeRegisterIndex_tImpl? _Reg0Instance;
 
     public PulseRuntimeRegisterIndex_t Reg0
     {
         get
         {
             _Reg0Offset = _Reg0Offset ?? Schema.GetOffset(0xE64AC707203A137B);
-            return new PulseRuntimeRegisterIndex_tImpl(_Handle + _Reg0Offset!.Value);
+            var instance = _Reg0Instance ??= new PulseRuntimeRegisterIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _Reg0Offset!.Value);
+            return instance;
         }
     }
     private static nint? _Reg1Offset;
+    private PulseRuntimeRegisterIndex_tImpl? _Reg1Instance;
 
     public PulseRuntimeRegisterIndex_t Reg1
     {
         get
         {
             _Reg1Offset = _Reg1Offset ?? Schema.GetOffset(0xE64AC7071F3A11E8);
-            return new PulseRuntimeRegisterIndex_tImpl(_Handle + _Reg1Offset!.Value);
+            var instance = _Reg1Instance ??= new PulseRuntimeRegisterIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _Reg1Offset!.Value);
+            return instance;
         }
     }
     private static nint? _Reg2Offset;
+    private PulseRuntimeRegisterIndex_tImpl? _Reg2Instance;
 
     public PulseRuntimeRegisterIndex_t Reg2
     {
         get
         {
             _Reg2Offset = _Reg2Offset ?? Schema.GetOffset(0xE64AC707223A16A1);
-            return new PulseRuntimeRegisterIndex_tImpl(_Handle + _Reg2Offset!.Value);
+            var instance = _Reg2Instance ??= new PulseRuntimeRegisterIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _Reg2Offset!.Value);
+            return instance;
         }
     }
     private static nint? _InvokeBindingIndexOffset;
+    private PulseRuntimeInvokeIndex_tImpl? _InvokeBindingIndexInstance;
 
     public PulseRuntimeInvokeIndex_t InvokeBindingIndex
     {
         get
         {
             _InvokeBindingIndexOffset = _InvokeBindingIndexOffset ?? Schema.GetOffset(0xE64AC707758774C2);
-            return new PulseRuntimeInvokeIndex_tImpl(_Handle + _InvokeBindingIndexOffset!.Value);
+            var instance = _InvokeBindingIndexInstance ??= new PulseRuntimeInvokeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _InvokeBindingIndexOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ChunkOffset;
+    private PulseRuntimeChunkIndex_tImpl? _ChunkInstance;
 
     public PulseRuntimeChunkIndex_t Chunk
     {
         get
         {
             _ChunkOffset = _ChunkOffset ?? Schema.GetOffset(0xE64AC7071B1DB366);
-            return new PulseRuntimeChunkIndex_tImpl(_Handle + _ChunkOffset!.Value);
+            var instance = _ChunkInstance ??= new PulseRuntimeChunkIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _ChunkOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DestInstructionOffset;
@@ -97,43 +115,55 @@ internal partial class PGDInstruction_tImpl : SchemaClass, PGDInstruction_t
         }
     }
     private static nint? _CallInfoIndexOffset;
+    private PulseRuntimeCallInfoIndex_tImpl? _CallInfoIndexInstance;
 
     public PulseRuntimeCallInfoIndex_t CallInfoIndex
     {
         get
         {
             _CallInfoIndexOffset = _CallInfoIndexOffset ?? Schema.GetOffset(0xE64AC7075A5CA29B);
-            return new PulseRuntimeCallInfoIndex_tImpl(_Handle + _CallInfoIndexOffset!.Value);
+            var instance = _CallInfoIndexInstance ??= new PulseRuntimeCallInfoIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _CallInfoIndexOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ConstIdxOffset;
+    private PulseRuntimeConstantIndex_tImpl? _ConstIdxInstance;
 
     public PulseRuntimeConstantIndex_t ConstIdx
     {
         get
         {
             _ConstIdxOffset = _ConstIdxOffset ?? Schema.GetOffset(0xE64AC707800942FF);
-            return new PulseRuntimeConstantIndex_tImpl(_Handle + _ConstIdxOffset!.Value);
+            var instance = _ConstIdxInstance ??= new PulseRuntimeConstantIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _ConstIdxOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DomainValueIdxOffset;
+    private PulseRuntimeDomainValueIndex_tImpl? _DomainValueIdxInstance;
 
     public PulseRuntimeDomainValueIndex_t DomainValueIdx
     {
         get
         {
             _DomainValueIdxOffset = _DomainValueIdxOffset ?? Schema.GetOffset(0xE64AC70716115525);
-            return new PulseRuntimeDomainValueIndex_tImpl(_Handle + _DomainValueIdxOffset!.Value);
+            var instance = _DomainValueIdxInstance ??= new PulseRuntimeDomainValueIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _DomainValueIdxOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BlackboardReferenceIdxOffset;
+    private PulseRuntimeBlackboardReferenceIndex_tImpl? _BlackboardReferenceIdxInstance;
 
     public PulseRuntimeBlackboardReferenceIndex_t BlackboardReferenceIdx
     {
         get
         {
             _BlackboardReferenceIdxOffset = _BlackboardReferenceIdxOffset ?? Schema.GetOffset(0xE64AC70727CB71C0);
-            return new PulseRuntimeBlackboardReferenceIndex_tImpl(_Handle + _BlackboardReferenceIdxOffset!.Value);
+            var instance = _BlackboardReferenceIdxInstance ??= new PulseRuntimeBlackboardReferenceIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _BlackboardReferenceIdxOffset!.Value);
+            return instance;
         }
     }
 

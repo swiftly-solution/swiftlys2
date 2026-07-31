@@ -107,13 +107,16 @@ internal partial class CSoundEventEntityImpl : CBaseEntityImpl, CSoundEventEntit
         }
     }
     private static nint? _OnGUIDChangedOffset;
+    private SchemaUntypedField? _OnGUIDChangedInstance;
 
     public SchemaUntypedField OnGUIDChanged
     {
         get
         {
             _OnGUIDChangedOffset = _OnGUIDChangedOffset ?? Schema.GetOffset(0x85BC270C2173B7A3);
-            return new SchemaUntypedField(_Handle + _OnGUIDChangedOffset!.Value);
+            var instance = _OnGUIDChangedInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OnGUIDChangedOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OnSoundFinishedOffset;

@@ -27,13 +27,16 @@ internal partial class AmmoTypeInfo_tImpl : SchemaClass, AmmoTypeInfo_t
         }
     }
     private static nint? _SplashSizeOffset;
+    private CRangeIntImpl? _SplashSizeInstance;
 
     public CRangeInt SplashSize
     {
         get
         {
             _SplashSizeOffset = _SplashSizeOffset ?? Schema.GetOffset(0xFC774B045E320D3);
-            return new CRangeIntImpl(_Handle + _SplashSizeOffset!.Value);
+            var instance = _SplashSizeInstance ??= new CRangeIntImpl(0);
+            instance.DangerousSetHandle(_Handle + _SplashSizeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FlagsOffset;
@@ -57,13 +60,16 @@ internal partial class AmmoTypeInfo_tImpl : SchemaClass, AmmoTypeInfo_t
         }
     }
     private static nint? _SpeedOffset;
+    private CRangeFloatImpl? _SpeedInstance;
 
     public CRangeFloat Speed
     {
         get
         {
             _SpeedOffset = _SpeedOffset ?? Schema.GetOffset(0xFC774B0C631B7EA);
-            return new CRangeFloatImpl(_Handle + _SpeedOffset!.Value);
+            var instance = _SpeedInstance ??= new CRangeFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _SpeedOffset!.Value);
+            return instance;
         }
     }
 

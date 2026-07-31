@@ -17,53 +17,68 @@ internal partial class C_INIT_DistanceToCPInitImpl : CParticleFunctionInitialize
     public C_INIT_DistanceToCPInitImpl(nint handle) : base(handle) { }
 
     private static nint? _FieldOutputOffset;
+    private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
             _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x59C1B9D5E5729606);
-            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+            var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InputMinOffset;
+    private CPerParticleFloatInputImpl? _InputMinInstance;
 
     public CPerParticleFloatInput InputMin
     {
         get
         {
             _InputMinOffset = _InputMinOffset ?? Schema.GetOffset(0x59C1B9D5E88A0D0F);
-            return new CPerParticleFloatInputImpl(_Handle + _InputMinOffset!.Value);
+            var instance = _InputMinInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _InputMinOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InputMaxOffset;
+    private CPerParticleFloatInputImpl? _InputMaxInstance;
 
     public CPerParticleFloatInput InputMax
     {
         get
         {
             _InputMaxOffset = _InputMaxOffset ?? Schema.GetOffset(0x59C1B9D5D6766901);
-            return new CPerParticleFloatInputImpl(_Handle + _InputMaxOffset!.Value);
+            var instance = _InputMaxInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _InputMaxOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OutputMinOffset;
+    private CPerParticleFloatInputImpl? _OutputMinInstance;
 
     public CPerParticleFloatInput OutputMin
     {
         get
         {
             _OutputMinOffset = _OutputMinOffset ?? Schema.GetOffset(0x59C1B9D55F8D7716);
-            return new CPerParticleFloatInputImpl(_Handle + _OutputMinOffset!.Value);
+            var instance = _OutputMinInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _OutputMinOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OutputMaxOffset;
+    private CPerParticleFloatInputImpl? _OutputMaxInstance;
 
     public CPerParticleFloatInput OutputMax
     {
         get
         {
             _OutputMaxOffset = _OutputMaxOffset ?? Schema.GetOffset(0x59C1B9D551A0E8C4);
-            return new CPerParticleFloatInputImpl(_Handle + _OutputMaxOffset!.Value);
+            var instance = _OutputMaxInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _OutputMaxOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StartCPOffset;
@@ -112,13 +127,16 @@ internal partial class C_INIT_DistanceToCPInitImpl : CParticleFunctionInitialize
         }
     }
     private static nint? _MaxTraceLengthOffset;
+    private CPerParticleFloatInputImpl? _MaxTraceLengthInstance;
 
     public CPerParticleFloatInput MaxTraceLength
     {
         get
         {
             _MaxTraceLengthOffset = _MaxTraceLengthOffset ?? Schema.GetOffset(0x59C1B9D5543C3798);
-            return new CPerParticleFloatInputImpl(_Handle + _MaxTraceLengthOffset!.Value);
+            var instance = _MaxTraceLengthInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _MaxTraceLengthOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LOSScaleOffset;

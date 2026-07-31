@@ -47,23 +47,29 @@ internal partial class C_OP_SetPerChildControlPointImpl : CParticleFunctionOpera
         }
     }
     private static nint? _ParticleIncrementOffset;
+    private CParticleCollectionFloatInputImpl? _ParticleIncrementInstance;
 
     public CParticleCollectionFloatInput ParticleIncrement
     {
         get
         {
             _ParticleIncrementOffset = _ParticleIncrementOffset ?? Schema.GetOffset(0xC456E2B973AF63D0);
-            return new CParticleCollectionFloatInputImpl(_Handle + _ParticleIncrementOffset!.Value);
+            var instance = _ParticleIncrementInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParticleIncrementOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FirstSourcePointOffset;
+    private CParticleCollectionFloatInputImpl? _FirstSourcePointInstance;
 
     public CParticleCollectionFloatInput FirstSourcePoint
     {
         get
         {
             _FirstSourcePointOffset = _FirstSourcePointOffset ?? Schema.GetOffset(0xC456E2B99D7DC18E);
-            return new CParticleCollectionFloatInputImpl(_Handle + _FirstSourcePointOffset!.Value);
+            var instance = _FirstSourcePointInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _FirstSourcePointOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SetOrientationOffset;
@@ -77,13 +83,16 @@ internal partial class C_OP_SetPerChildControlPointImpl : CParticleFunctionOpera
         }
     }
     private static nint? _OrientationFieldOffset;
+    private ParticleAttributeIndex_tImpl? _OrientationFieldInstance;
 
     public ParticleAttributeIndex_t OrientationField
     {
         get
         {
             _OrientationFieldOffset = _OrientationFieldOffset ?? Schema.GetOffset(0xC456E2B9FFE45E9F);
-            return new ParticleAttributeIndex_tImpl(_Handle + _OrientationFieldOffset!.Value);
+            var instance = _OrientationFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _OrientationFieldOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NumBasedOnParticleCountOffset;

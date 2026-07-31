@@ -17,13 +17,16 @@ internal partial class CMotionGraphImpl : SchemaClass, CMotionGraph
     public CMotionGraphImpl(nint handle) : base(handle) { }
 
     private static nint? _ParamSpansOffset;
+    private CParamSpanUpdaterImpl? _ParamSpansInstance;
 
     public CParamSpanUpdater ParamSpans
     {
         get
         {
             _ParamSpansOffset = _ParamSpansOffset ?? Schema.GetOffset(0xA24822FCDAC91553);
-            return new CParamSpanUpdaterImpl(_Handle + _ParamSpansOffset!.Value);
+            var instance = _ParamSpansInstance ??= new CParamSpanUpdaterImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamSpansOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TagsOffset;
@@ -37,13 +40,16 @@ internal partial class CMotionGraphImpl : SchemaClass, CMotionGraph
         }
     }
     private static nint? _RootNodeOffset;
+    private SchemaUntypedField? _RootNodeInstance;
 
     public SchemaUntypedField RootNode
     {
         get
         {
             _RootNodeOffset = _RootNodeOffset ?? Schema.GetOffset(0xA24822FC8BB07023);
-            return new SchemaUntypedField(_Handle + _RootNodeOffset!.Value);
+            var instance = _RootNodeInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _RootNodeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ParameterCountOffset;

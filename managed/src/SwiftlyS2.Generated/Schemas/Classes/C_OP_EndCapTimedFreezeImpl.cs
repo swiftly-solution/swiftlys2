@@ -17,13 +17,16 @@ internal partial class C_OP_EndCapTimedFreezeImpl : CParticleFunctionOperatorImp
     public C_OP_EndCapTimedFreezeImpl(nint handle) : base(handle) { }
 
     private static nint? _FreezeTimeOffset;
+    private CParticleCollectionFloatInputImpl? _FreezeTimeInstance;
 
     public CParticleCollectionFloatInput FreezeTime
     {
         get
         {
             _FreezeTimeOffset = _FreezeTimeOffset ?? Schema.GetOffset(0xE8E243ACEAB1B29);
-            return new CParticleCollectionFloatInputImpl(_Handle + _FreezeTimeOffset!.Value);
+            var instance = _FreezeTimeInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _FreezeTimeOffset!.Value);
+            return instance;
         }
     }
 

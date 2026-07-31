@@ -17,23 +17,29 @@ internal partial class C_OP_SetControlPointRotationImpl : CParticleFunctionPreEm
     public C_OP_SetControlPointRotationImpl(nint handle) : base(handle) { }
 
     private static nint? _RotAxisOffset;
+    private CParticleCollectionVecInputImpl? _RotAxisInstance;
 
     public CParticleCollectionVecInput RotAxis
     {
         get
         {
             _RotAxisOffset = _RotAxisOffset ?? Schema.GetOffset(0x8F20B2F891872163);
-            return new CParticleCollectionVecInputImpl(_Handle + _RotAxisOffset!.Value);
+            var instance = _RotAxisInstance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _RotAxisOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RotRateOffset;
+    private CParticleCollectionFloatInputImpl? _RotRateInstance;
 
     public CParticleCollectionFloatInput RotRate
     {
         get
         {
             _RotRateOffset = _RotRateOffset ?? Schema.GetOffset(0x8F20B2F86747B556);
-            return new CParticleCollectionFloatInputImpl(_Handle + _RotRateOffset!.Value);
+            var instance = _RotRateInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _RotRateOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CPOffset;

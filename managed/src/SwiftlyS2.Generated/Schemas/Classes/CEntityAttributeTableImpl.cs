@@ -17,23 +17,29 @@ internal partial class CEntityAttributeTableImpl : SchemaClass, CEntityAttribute
     public CEntityAttributeTableImpl(nint handle) : base(handle) { }
 
     private static nint? _AttributesOffset;
+    private SchemaUntypedField? _AttributesInstance;
 
     public SchemaUntypedField Attributes
     {
         get
         {
             _AttributesOffset = _AttributesOffset ?? Schema.GetOffset(0x5C8260D7E139C14);
-            return new SchemaUntypedField(_Handle + _AttributesOffset!.Value);
+            var instance = _AttributesInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _AttributesOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NamesOffset;
+    private SchemaUntypedField? _NamesInstance;
 
     public SchemaUntypedField Names
     {
         get
         {
             _NamesOffset = _NamesOffset ?? Schema.GetOffset(0x5C8260D8137270F);
-            return new SchemaUntypedField(_Handle + _NamesOffset!.Value);
+            var instance = _NamesInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _NamesOffset!.Value);
+            return instance;
         }
     }
 

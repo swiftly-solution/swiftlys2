@@ -27,13 +27,16 @@ internal partial class C_OP_CPVelocityForceImpl : CParticleFunctionForceImpl, C_
         }
     }
     private static nint? _ScaleOffset;
+    private CPerParticleFloatInputImpl? _ScaleInstance;
 
     public CPerParticleFloatInput Scale
     {
         get
         {
             _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x4C04FC84B731A42F);
-            return new CPerParticleFloatInputImpl(_Handle + _ScaleOffset!.Value);
+            var instance = _ScaleInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ScaleOffset!.Value);
+            return instance;
         }
     }
 

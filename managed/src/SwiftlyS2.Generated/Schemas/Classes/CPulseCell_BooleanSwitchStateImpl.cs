@@ -17,33 +17,42 @@ internal partial class CPulseCell_BooleanSwitchStateImpl : CPulseCell_BaseStateI
     public CPulseCell_BooleanSwitchStateImpl(nint handle) : base(handle) { }
 
     private static nint? _ConditionOffset;
+    private SchemaUntypedField? _ConditionInstance;
 
     public SchemaUntypedField Condition
     {
         get
         {
             _ConditionOffset = _ConditionOffset ?? Schema.GetOffset(0xB0380EFD5F2A883E);
-            return new SchemaUntypedField(_Handle + _ConditionOffset!.Value);
+            var instance = _ConditionInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ConditionOffset!.Value);
+            return instance;
         }
     }
     private static nint? _WhenTrueOffset;
+    private CPulse_OutflowConnectionImpl? _WhenTrueInstance;
 
     public CPulse_OutflowConnection WhenTrue
     {
         get
         {
             _WhenTrueOffset = _WhenTrueOffset ?? Schema.GetOffset(0xB0380EFDB329ED61);
-            return new CPulse_OutflowConnectionImpl(_Handle + _WhenTrueOffset!.Value);
+            var instance = _WhenTrueInstance ??= new CPulse_OutflowConnectionImpl(0);
+            instance.DangerousSetHandle(_Handle + _WhenTrueOffset!.Value);
+            return instance;
         }
     }
     private static nint? _WhenFalseOffset;
+    private CPulse_OutflowConnectionImpl? _WhenFalseInstance;
 
     public CPulse_OutflowConnection WhenFalse
     {
         get
         {
             _WhenFalseOffset = _WhenFalseOffset ?? Schema.GetOffset(0xB0380EFD4DD1A01C);
-            return new CPulse_OutflowConnectionImpl(_Handle + _WhenFalseOffset!.Value);
+            var instance = _WhenFalseInstance ??= new CPulse_OutflowConnectionImpl(0);
+            instance.DangerousSetHandle(_Handle + _WhenFalseOffset!.Value);
+            return instance;
         }
     }
 

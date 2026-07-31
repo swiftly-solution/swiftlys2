@@ -27,13 +27,16 @@ internal partial class CConstantForceControllerImpl : SchemaClass, CConstantForc
         }
     }
     private static nint? _AngularOffset;
+    private SchemaUntypedField? _AngularInstance;
 
     public SchemaUntypedField Angular
     {
         get
         {
             _AngularOffset = _AngularOffset ?? Schema.GetOffset(0x37030A8D74E0EB09);
-            return new SchemaUntypedField(_Handle + _AngularOffset!.Value);
+            var instance = _AngularInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _AngularOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LinearSaveOffset;
@@ -47,13 +50,16 @@ internal partial class CConstantForceControllerImpl : SchemaClass, CConstantForc
         }
     }
     private static nint? _AngularSaveOffset;
+    private SchemaUntypedField? _AngularSaveInstance;
 
     public SchemaUntypedField AngularSave
     {
         get
         {
             _AngularSaveOffset = _AngularSaveOffset ?? Schema.GetOffset(0x37030A8D8294323C);
-            return new SchemaUntypedField(_Handle + _AngularSaveOffset!.Value);
+            var instance = _AngularSaveInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _AngularSaveOffset!.Value);
+            return instance;
         }
     }
 

@@ -27,13 +27,16 @@ internal partial class C_OP_PinParticleToCPImpl : CParticleFunctionOperatorImpl,
         }
     }
     private static nint? _OffsetOffset;
+    private CParticleCollectionVecInputImpl? _OffsetInstance;
 
     public CParticleCollectionVecInput Offset
     {
         get
         {
             _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0xE4FC7398BD25CC2A);
-            return new CParticleCollectionVecInputImpl(_Handle + _OffsetOffset!.Value);
+            var instance = _OffsetInstance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _OffsetOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OffsetLocalOffset;
@@ -57,13 +60,16 @@ internal partial class C_OP_PinParticleToCPImpl : CParticleFunctionOperatorImpl,
         }
     }
     private static nint? _ParticleNumberOffset;
+    private CParticleCollectionFloatInputImpl? _ParticleNumberInstance;
 
     public CParticleCollectionFloatInput ParticleNumber
     {
         get
         {
             _ParticleNumberOffset = _ParticleNumberOffset ?? Schema.GetOffset(0xE4FC739812F26402);
-            return new CParticleCollectionFloatInputImpl(_Handle + _ParticleNumberOffset!.Value);
+            var instance = _ParticleNumberInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParticleNumberOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PinBreakTypeOffset;
@@ -77,33 +83,42 @@ internal partial class C_OP_PinParticleToCPImpl : CParticleFunctionOperatorImpl,
         }
     }
     private static nint? _BreakDistanceOffset;
+    private CParticleCollectionFloatInputImpl? _BreakDistanceInstance;
 
     public CParticleCollectionFloatInput BreakDistance
     {
         get
         {
             _BreakDistanceOffset = _BreakDistanceOffset ?? Schema.GetOffset(0xE4FC7398AD760DA9);
-            return new CParticleCollectionFloatInputImpl(_Handle + _BreakDistanceOffset!.Value);
+            var instance = _BreakDistanceInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _BreakDistanceOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BreakSpeedOffset;
+    private CParticleCollectionFloatInputImpl? _BreakSpeedInstance;
 
     public CParticleCollectionFloatInput BreakSpeed
     {
         get
         {
             _BreakSpeedOffset = _BreakSpeedOffset ?? Schema.GetOffset(0xE4FC739817DB9AD5);
-            return new CParticleCollectionFloatInputImpl(_Handle + _BreakSpeedOffset!.Value);
+            var instance = _BreakSpeedInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _BreakSpeedOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AgeOffset;
+    private CParticleCollectionFloatInputImpl? _AgeInstance;
 
     public CParticleCollectionFloatInput Age
     {
         get
         {
             _AgeOffset = _AgeOffset ?? Schema.GetOffset(0xE4FC73984F7B4AF6);
-            return new CParticleCollectionFloatInputImpl(_Handle + _AgeOffset!.Value);
+            var instance = _AgeInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _AgeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BreakControlPointNumberOffset;
@@ -127,23 +142,29 @@ internal partial class C_OP_PinParticleToCPImpl : CParticleFunctionOperatorImpl,
         }
     }
     private static nint? _BreakValueOffset;
+    private CParticleCollectionFloatInputImpl? _BreakValueInstance;
 
     public CParticleCollectionFloatInput BreakValue
     {
         get
         {
             _BreakValueOffset = _BreakValueOffset ?? Schema.GetOffset(0xE4FC7398D120F44B);
-            return new CParticleCollectionFloatInputImpl(_Handle + _BreakValueOffset!.Value);
+            var instance = _BreakValueInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _BreakValueOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InterpolationOffset;
+    private CPerParticleFloatInputImpl? _InterpolationInstance;
 
     public CPerParticleFloatInput Interpolation
     {
         get
         {
             _InterpolationOffset = _InterpolationOffset ?? Schema.GetOffset(0xE4FC7398CF55B987);
-            return new CPerParticleFloatInputImpl(_Handle + _InterpolationOffset!.Value);
+            var instance = _InterpolationInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _InterpolationOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RetainInitialVelocityOffset;

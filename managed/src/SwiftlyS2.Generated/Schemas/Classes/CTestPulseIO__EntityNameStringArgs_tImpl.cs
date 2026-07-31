@@ -17,13 +17,16 @@ internal partial class CTestPulseIO__EntityNameStringArgs_tImpl : SchemaClass, C
     public CTestPulseIO__EntityNameStringArgs_tImpl(nint handle) : base(handle) { }
 
     private static nint? _NameAOffset;
+    private SchemaUntypedField? _NameAInstance;
 
     public SchemaUntypedField NameA
     {
         get
         {
             _NameAOffset = _NameAOffset ?? Schema.GetOffset(0xD922F2E0F8E58DE5);
-            return new SchemaUntypedField(_Handle + _NameAOffset!.Value);
+            var instance = _NameAInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _NameAOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StrValueBOffset;

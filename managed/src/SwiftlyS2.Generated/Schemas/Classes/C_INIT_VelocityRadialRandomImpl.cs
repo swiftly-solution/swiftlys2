@@ -37,43 +37,55 @@ internal partial class C_INIT_VelocityRadialRandomImpl : CParticleFunctionInitia
         }
     }
     private static nint? _PositionOffset;
+    private CPerParticleVecInputImpl? _PositionInstance;
 
     public CPerParticleVecInput Position
     {
         get
         {
             _PositionOffset = _PositionOffset ?? Schema.GetOffset(0x61A3C8D5E092EE6A);
-            return new CPerParticleVecInputImpl(_Handle + _PositionOffset!.Value);
+            var instance = _PositionInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _PositionOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FwdOffset;
+    private CPerParticleVecInputImpl? _FwdInstance;
 
     public CPerParticleVecInput Fwd
     {
         get
         {
             _FwdOffset = _FwdOffset ?? Schema.GetOffset(0x61A3C8D5974CB62A);
-            return new CPerParticleVecInputImpl(_Handle + _FwdOffset!.Value);
+            var instance = _FwdInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _FwdOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SpeedMinOffset;
+    private CPerParticleFloatInputImpl? _SpeedMinInstance;
 
     public CPerParticleFloatInput SpeedMin
     {
         get
         {
             _SpeedMinOffset = _SpeedMinOffset ?? Schema.GetOffset(0x61A3C8D5B989E1F8);
-            return new CPerParticleFloatInputImpl(_Handle + _SpeedMinOffset!.Value);
+            var instance = _SpeedMinInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _SpeedMinOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SpeedMaxOffset;
+    private CPerParticleFloatInputImpl? _SpeedMaxInstance;
 
     public CPerParticleFloatInput SpeedMax
     {
         get
         {
             _SpeedMaxOffset = _SpeedMaxOffset ?? Schema.GetOffset(0x61A3C8D5CF9D8C52);
-            return new CPerParticleFloatInputImpl(_Handle + _SpeedMaxOffset!.Value);
+            var instance = _SpeedMaxInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _SpeedMaxOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LocalCoordinateSystemSpeedScaleOffset;

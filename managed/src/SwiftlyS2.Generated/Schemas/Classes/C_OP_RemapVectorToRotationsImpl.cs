@@ -17,23 +17,29 @@ internal partial class C_OP_RemapVectorToRotationsImpl : CParticleFunctionOperat
     public C_OP_RemapVectorToRotationsImpl(nint handle) : base(handle) { }
 
     private static nint? _InputOffset;
+    private CPerParticleVecInputImpl? _InputInstance;
 
     public CPerParticleVecInput Input
     {
         get
         {
             _InputOffset = _InputOffset ?? Schema.GetOffset(0x2587C21B1EA0ED5B);
-            return new CPerParticleVecInputImpl(_Handle + _InputOffset!.Value);
+            var instance = _InputInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _InputOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RotationOffset;
+    private CPerParticleVecInputImpl? _RotationInstance;
 
     public CPerParticleVecInput Rotation
     {
         get
         {
             _RotationOffset = _RotationOffset ?? Schema.GetOffset(0x2587C21B1992E6BF);
-            return new CPerParticleVecInputImpl(_Handle + _RotationOffset!.Value);
+            var instance = _RotationInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _RotationOffset!.Value);
+            return instance;
         }
     }
 

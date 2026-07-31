@@ -27,13 +27,16 @@ internal partial class CParticleTransformInputImpl : CParticleInputImpl, CPartic
         }
     }
     private static nint? _NamedValueOffset;
+    private SchemaUntypedField? _NamedValueInstance;
 
     public SchemaUntypedField NamedValue
     {
         get
         {
             _NamedValueOffset = _NamedValueOffset ?? Schema.GetOffset(0x9DF3328CE0618727);
-            return new SchemaUntypedField(_Handle + _NamedValueOffset!.Value);
+            var instance = _NamedValueInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _NamedValueOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FollowNamedValueOffset;

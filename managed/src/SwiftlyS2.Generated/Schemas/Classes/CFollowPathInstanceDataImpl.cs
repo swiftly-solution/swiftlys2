@@ -17,13 +17,16 @@ internal partial class CFollowPathInstanceDataImpl : SchemaClass, CFollowPathIns
     public CFollowPathInstanceDataImpl(nint handle) : base(handle) { }
 
     private static nint? _XLastPredictedTransformsDeltasOffset;
+    private SchemaUntypedField? _XLastPredictedTransformsDeltasInstance;
 
     public SchemaUntypedField XLastPredictedTransformsDeltas
     {
         get
         {
             _XLastPredictedTransformsDeltasOffset = _XLastPredictedTransformsDeltasOffset ?? Schema.GetOffset(0x558B9B8B483A040B);
-            return new SchemaUntypedField(_Handle + _XLastPredictedTransformsDeltasOffset!.Value);
+            var instance = _XLastPredictedTransformsDeltasInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _XLastPredictedTransformsDeltasOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DampedTurnValueOffset;
@@ -47,13 +50,16 @@ internal partial class CFollowPathInstanceDataImpl : SchemaClass, CFollowPathIns
         }
     }
     private static nint? _PredictionScaleOffset;
+    private SchemaUntypedField? _PredictionScaleInstance;
 
     public SchemaUntypedField PredictionScale
     {
         get
         {
             _PredictionScaleOffset = _PredictionScaleOffset ?? Schema.GetOffset(0x558B9B8BE91D4B2C);
-            return new SchemaUntypedField(_Handle + _PredictionScaleOffset!.Value);
+            var instance = _PredictionScaleInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _PredictionScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LastPathTimeOffset;

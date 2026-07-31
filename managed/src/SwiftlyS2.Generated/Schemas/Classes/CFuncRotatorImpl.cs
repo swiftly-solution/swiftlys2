@@ -172,13 +172,16 @@ internal partial class CFuncRotatorImpl : CBaseModelEntityImpl, CFuncRotator
         }
     }
     private static nint? _TickRotateRanOffset;
+    private GameTick_tImpl? _TickRotateRanInstance;
 
     public GameTick_t TickRotateRan
     {
         get
         {
             _TickRotateRanOffset = _TickRotateRanOffset ?? Schema.GetOffset(0x73DA1BB9B490BCBC);
-            return new GameTick_tImpl(_Handle + _TickRotateRanOffset!.Value);
+            var instance = _TickRotateRanInstance ??= new GameTick_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _TickRotateRanOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StartedRotatingOffset;
@@ -192,13 +195,16 @@ internal partial class CFuncRotatorImpl : CBaseModelEntityImpl, CFuncRotator
         }
     }
     private static nint? _RotationSummaryOffset;
+    private FuncRotatorRotationSummary_tImpl? _RotationSummaryInstance;
 
     public FuncRotatorRotationSummary_t RotationSummary
     {
         get
         {
             _RotationSummaryOffset = _RotationSummaryOffset ?? Schema.GetOffset(0x73DA1BB949F8A259);
-            return new FuncRotatorRotationSummary_tImpl(_Handle + _RotationSummaryOffset!.Value);
+            var instance = _RotationSummaryInstance ??= new FuncRotatorRotationSummary_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _RotationSummaryOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TimeToReachMaxSpeedOffset;
@@ -222,23 +228,29 @@ internal partial class CFuncRotatorImpl : CBaseModelEntityImpl, CFuncRotator
         }
     }
     private static nint? _TimeRotationStartOffset;
+    private GameTime_tImpl? _TimeRotationStartInstance;
 
     public GameTime_t TimeRotationStart
     {
         get
         {
             _TimeRotationStartOffset = _TimeRotationStartOffset ?? Schema.GetOffset(0x73DA1BB952C0B2E8);
-            return new GameTime_tImpl(_Handle + _TimeRotationStartOffset!.Value);
+            var instance = _TimeRotationStartInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _TimeRotationStartOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TimeRotationStopOffset;
+    private GameTime_tImpl? _TimeRotationStopInstance;
 
     public GameTime_t TimeRotationStop
     {
         get
         {
             _TimeRotationStopOffset = _TimeRotationStopOffset ?? Schema.GetOffset(0x73DA1BB955A9F3CC);
-            return new GameTime_tImpl(_Handle + _TimeRotationStopOffset!.Value);
+            var instance = _TimeRotationStopInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _TimeRotationStopOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StartSpeedOffset;

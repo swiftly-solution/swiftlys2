@@ -37,23 +37,29 @@ internal partial class CLogicNPCCounterImpl : CBaseEntityImpl, CLogicNPCCounter
         }
     }
     private static nint? _OnFactorAllOffset;
+    private SchemaUntypedField? _OnFactorAllInstance;
 
     public SchemaUntypedField OnFactorAll
     {
         get
         {
             _OnFactorAllOffset = _OnFactorAllOffset ?? Schema.GetOffset(0x485D8879E34F3A26);
-            return new SchemaUntypedField(_Handle + _OnFactorAllOffset!.Value);
+            var instance = _OnFactorAllInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OnFactorAllOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OnMinPlayerDistAllOffset;
+    private SchemaUntypedField? _OnMinPlayerDistAllInstance;
 
     public SchemaUntypedField OnMinPlayerDistAll
     {
         get
         {
             _OnMinPlayerDistAllOffset = _OnMinPlayerDistAllOffset ?? Schema.GetOffset(0x485D887936FA93F4);
-            return new SchemaUntypedField(_Handle + _OnMinPlayerDistAllOffset!.Value);
+            var instance = _OnMinPlayerDistAllInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OnMinPlayerDistAllOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OnMinCount_1Offset;
@@ -77,23 +83,29 @@ internal partial class CLogicNPCCounterImpl : CBaseEntityImpl, CLogicNPCCounter
         }
     }
     private static nint? _OnFactor_1Offset;
+    private SchemaUntypedField? _OnFactor_1Instance;
 
     public SchemaUntypedField OnFactor_1
     {
         get
         {
             _OnFactor_1Offset = _OnFactor_1Offset ?? Schema.GetOffset(0x485D8879A2844CEF);
-            return new SchemaUntypedField(_Handle + _OnFactor_1Offset!.Value);
+            var instance = _OnFactor_1Instance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OnFactor_1Offset!.Value);
+            return instance;
         }
     }
     private static nint? _OnMinPlayerDist_1Offset;
+    private SchemaUntypedField? _OnMinPlayerDist_1Instance;
 
     public SchemaUntypedField OnMinPlayerDist_1
     {
         get
         {
             _OnMinPlayerDist_1Offset = _OnMinPlayerDist_1Offset ?? Schema.GetOffset(0x485D8879C69B333D);
-            return new SchemaUntypedField(_Handle + _OnMinPlayerDist_1Offset!.Value);
+            var instance = _OnMinPlayerDist_1Instance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OnMinPlayerDist_1Offset!.Value);
+            return instance;
         }
     }
     private static nint? _OnMinCount_2Offset;
@@ -117,23 +129,29 @@ internal partial class CLogicNPCCounterImpl : CBaseEntityImpl, CLogicNPCCounter
         }
     }
     private static nint? _OnFactor_2Offset;
+    private SchemaUntypedField? _OnFactor_2Instance;
 
     public SchemaUntypedField OnFactor_2
     {
         get
         {
             _OnFactor_2Offset = _OnFactor_2Offset ?? Schema.GetOffset(0x485D8879A3844E82);
-            return new SchemaUntypedField(_Handle + _OnFactor_2Offset!.Value);
+            var instance = _OnFactor_2Instance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OnFactor_2Offset!.Value);
+            return instance;
         }
     }
     private static nint? _OnMinPlayerDist_2Offset;
+    private SchemaUntypedField? _OnMinPlayerDist_2Instance;
 
     public SchemaUntypedField OnMinPlayerDist_2
     {
         get
         {
             _OnMinPlayerDist_2Offset = _OnMinPlayerDist_2Offset ?? Schema.GetOffset(0x485D8879C39B2E84);
-            return new SchemaUntypedField(_Handle + _OnMinPlayerDist_2Offset!.Value);
+            var instance = _OnMinPlayerDist_2Instance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OnMinPlayerDist_2Offset!.Value);
+            return instance;
         }
     }
     private static nint? _OnMinCount_3Offset;
@@ -157,23 +175,29 @@ internal partial class CLogicNPCCounterImpl : CBaseEntityImpl, CLogicNPCCounter
         }
     }
     private static nint? _OnFactor_3Offset;
+    private SchemaUntypedField? _OnFactor_3Instance;
 
     public SchemaUntypedField OnFactor_3
     {
         get
         {
             _OnFactor_3Offset = _OnFactor_3Offset ?? Schema.GetOffset(0x485D8879A4845015);
-            return new SchemaUntypedField(_Handle + _OnFactor_3Offset!.Value);
+            var instance = _OnFactor_3Instance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OnFactor_3Offset!.Value);
+            return instance;
         }
     }
     private static nint? _OnMinPlayerDist_3Offset;
+    private SchemaUntypedField? _OnMinPlayerDist_3Instance;
 
     public SchemaUntypedField OnMinPlayerDist_3
     {
         get
         {
             _OnMinPlayerDist_3Offset = _OnMinPlayerDist_3Offset ?? Schema.GetOffset(0x485D8879C49B3017);
-            return new SchemaUntypedField(_Handle + _OnMinPlayerDist_3Offset!.Value);
+            var instance = _OnMinPlayerDist_3Instance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OnMinPlayerDist_3Offset!.Value);
+            return instance;
         }
     }
     private static nint? _SourceOffset;

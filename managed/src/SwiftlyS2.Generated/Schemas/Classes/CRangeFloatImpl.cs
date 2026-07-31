@@ -16,9 +16,18 @@ internal partial class CRangeFloatImpl : SchemaClass, CRangeFloat
 {
     public CRangeFloatImpl(nint handle) : base(handle) { }
 
+    private static nint? _ValueOffset;
+    private SchemaFixedArray<float>? _ValueInstance;
+
     public ISchemaFixedArray<float> Value
     {
-        get => new SchemaFixedArray<float>(_Handle, 0xD3CD83EB7F437844, 2, 4, 4);
+        get
+        {
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0xD3CD83EB7F437844);
+            var instance = _ValueInstance ??= new SchemaFixedArray<float>(0, 0xD3CD83EB7F437844, 2, 4, 4);
+            instance.DangerousSetHandle(_Handle + _ValueOffset!.Value);
+            return instance;
+        }
     }
 
 }

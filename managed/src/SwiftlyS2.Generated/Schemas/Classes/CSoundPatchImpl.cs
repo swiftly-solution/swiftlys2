@@ -17,23 +17,29 @@ internal partial class CSoundPatchImpl : SchemaClass, CSoundPatch
     public CSoundPatchImpl(nint handle) : base(handle) { }
 
     private static nint? _PitchOffset;
+    private CSoundEnvelopeImpl? _PitchInstance;
 
     public CSoundEnvelope Pitch
     {
         get
         {
             _PitchOffset = _PitchOffset ?? Schema.GetOffset(0xBE66ED3D12AC36D1);
-            return new CSoundEnvelopeImpl(_Handle + _PitchOffset!.Value);
+            var instance = _PitchInstance ??= new CSoundEnvelopeImpl(0);
+            instance.DangerousSetHandle(_Handle + _PitchOffset!.Value);
+            return instance;
         }
     }
     private static nint? _VolumeOffset;
+    private CSoundEnvelopeImpl? _VolumeInstance;
 
     public CSoundEnvelope Volume
     {
         get
         {
             _VolumeOffset = _VolumeOffset ?? Schema.GetOffset(0xBE66ED3DE3962F2F);
-            return new CSoundEnvelopeImpl(_Handle + _VolumeOffset!.Value);
+            var instance = _VolumeInstance ??= new CSoundEnvelopeImpl(0);
+            instance.DangerousSetHandle(_Handle + _VolumeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ShutdownTimeOffset;
@@ -112,13 +118,16 @@ internal partial class CSoundPatchImpl : SchemaClass, CSoundPatch
         }
     }
     private static nint? _FilterOffset;
+    private CCopyRecipientFilterImpl? _FilterInstance;
 
     public CCopyRecipientFilter Filter
     {
         get
         {
             _FilterOffset = _FilterOffset ?? Schema.GetOffset(0xBE66ED3D368220F7);
-            return new CCopyRecipientFilterImpl(_Handle + _FilterOffset!.Value);
+            var instance = _FilterInstance ??= new CCopyRecipientFilterImpl(0);
+            instance.DangerousSetHandle(_Handle + _FilterOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CloseCaptionDurationOffset;

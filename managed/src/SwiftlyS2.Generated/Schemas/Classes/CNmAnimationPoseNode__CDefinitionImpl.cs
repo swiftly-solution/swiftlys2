@@ -37,13 +37,16 @@ internal partial class CNmAnimationPoseNode__CDefinitionImpl : CNmPoseNode__CDef
         }
     }
     private static nint? _InputTimeRemapRangeOffset;
+    private SchemaUntypedField? _InputTimeRemapRangeInstance;
 
     public SchemaUntypedField InputTimeRemapRange
     {
         get
         {
             _InputTimeRemapRangeOffset = _InputTimeRemapRangeOffset ?? Schema.GetOffset(0xAEB5DD4EE53BDBD4);
-            return new SchemaUntypedField(_Handle + _InputTimeRemapRangeOffset!.Value);
+            var instance = _InputTimeRemapRangeInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _InputTimeRemapRangeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _UserSpecifiedTimeOffset;

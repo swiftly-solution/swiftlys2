@@ -67,23 +67,29 @@ internal partial class CVoiceContainerStaticAdditiveSynth__CHarmonicImpl : Schem
         }
     }
     private static nint? _CurveOffset;
+    private SchemaUntypedField? _CurveInstance;
 
     public SchemaUntypedField Curve
     {
         get
         {
             _CurveOffset = _CurveOffset ?? Schema.GetOffset(0xC47956E9BFFA0B34);
-            return new SchemaUntypedField(_Handle + _CurveOffset!.Value);
+            var instance = _CurveInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _CurveOffset!.Value);
+            return instance;
         }
     }
     private static nint? _VolumeScalingOffset;
+    private CVoiceContainerStaticAdditiveSynth__CGainScalePerInstanceImpl? _VolumeScalingInstance;
 
     public CVoiceContainerStaticAdditiveSynth__CGainScalePerInstance VolumeScaling
     {
         get
         {
             _VolumeScalingOffset = _VolumeScalingOffset ?? Schema.GetOffset(0xC47956E9820320D8);
-            return new CVoiceContainerStaticAdditiveSynth__CGainScalePerInstanceImpl(_Handle + _VolumeScalingOffset!.Value);
+            var instance = _VolumeScalingInstance ??= new CVoiceContainerStaticAdditiveSynth__CGainScalePerInstanceImpl(0);
+            instance.DangerousSetHandle(_Handle + _VolumeScalingOffset!.Value);
+            return instance;
         }
     }
 

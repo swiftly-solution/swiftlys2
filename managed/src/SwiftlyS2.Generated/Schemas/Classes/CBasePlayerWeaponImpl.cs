@@ -17,13 +17,16 @@ internal partial class CBasePlayerWeaponImpl : CEconEntityImpl, CBasePlayerWeapo
     public CBasePlayerWeaponImpl(nint handle) : base(handle) { }
 
     private static nint? _NextPrimaryAttackTickOffset;
+    private GameTick_tImpl? _NextPrimaryAttackTickInstance;
 
     public GameTick_t NextPrimaryAttackTick
     {
         get
         {
             _NextPrimaryAttackTickOffset = _NextPrimaryAttackTickOffset ?? Schema.GetOffset(0x4174B75E11BA24E3);
-            return new GameTick_tImpl(_Handle + _NextPrimaryAttackTickOffset!.Value);
+            var instance = _NextPrimaryAttackTickInstance ??= new GameTick_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NextPrimaryAttackTickOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NextPrimaryAttackTickRatioOffset;
@@ -37,13 +40,16 @@ internal partial class CBasePlayerWeaponImpl : CEconEntityImpl, CBasePlayerWeapo
         }
     }
     private static nint? _NextSecondaryAttackTickOffset;
+    private GameTick_tImpl? _NextSecondaryAttackTickInstance;
 
     public GameTick_t NextSecondaryAttackTick
     {
         get
         {
             _NextSecondaryAttackTickOffset = _NextSecondaryAttackTickOffset ?? Schema.GetOffset(0x4174B75EDE66C257);
-            return new GameTick_tImpl(_Handle + _NextSecondaryAttackTickOffset!.Value);
+            var instance = _NextSecondaryAttackTickInstance ??= new GameTick_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NextSecondaryAttackTickOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NextSecondaryAttackTickRatioOffset;
@@ -76,9 +82,18 @@ internal partial class CBasePlayerWeaponImpl : CEconEntityImpl, CBasePlayerWeapo
             return ref _Handle.AsRef<int>(_Clip2Offset!.Value);
         }
     }
+    private static nint? _ReserveAmmoOffset;
+    private SchemaFixedArray<int>? _ReserveAmmoInstance;
+
     public ISchemaFixedArray<int> ReserveAmmo
     {
-        get => new SchemaFixedArray<int>(_Handle, 0x4174B75EB3FEBB0B, 2, 4, 4);
+        get
+        {
+            _ReserveAmmoOffset = _ReserveAmmoOffset ?? Schema.GetOffset(0x4174B75EB3FEBB0B);
+            var instance = _ReserveAmmoInstance ??= new SchemaFixedArray<int>(0, 0x4174B75EB3FEBB0B, 2, 4, 4);
+            instance.DangerousSetHandle(_Handle + _ReserveAmmoOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _OnPlayerUseOffset;
 

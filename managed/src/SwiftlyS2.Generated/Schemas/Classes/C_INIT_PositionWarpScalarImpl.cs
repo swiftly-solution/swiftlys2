@@ -37,13 +37,16 @@ internal partial class C_INIT_PositionWarpScalarImpl : CParticleFunctionInitiali
         }
     }
     private static nint? _InputValueOffset;
+    private CPerParticleFloatInputImpl? _InputValueInstance;
 
     public CPerParticleFloatInput InputValue
     {
         get
         {
             _InputValueOffset = _InputValueOffset ?? Schema.GetOffset(0x36E4094334445438);
-            return new CPerParticleFloatInputImpl(_Handle + _InputValueOffset!.Value);
+            var instance = _InputValueInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _InputValueOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PrevPosScaleOffset;

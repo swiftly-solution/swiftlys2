@@ -17,13 +17,16 @@ internal partial class C_OP_CycleScalarImpl : CParticleFunctionOperatorImpl, C_O
     public C_OP_CycleScalarImpl(nint handle) : base(handle) { }
 
     private static nint? _DestFieldOffset;
+    private ParticleAttributeIndex_tImpl? _DestFieldInstance;
 
     public ParticleAttributeIndex_t DestField
     {
         get
         {
             _DestFieldOffset = _DestFieldOffset ?? Schema.GetOffset(0x8E3188612E3589F3);
-            return new ParticleAttributeIndex_tImpl(_Handle + _DestFieldOffset!.Value);
+            var instance = _DestFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _DestFieldOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StartValueOffset;

@@ -52,13 +52,16 @@ internal partial class CFeNamedJiggleBoneImpl : SchemaClass, CFeNamedJiggleBone
         }
     }
     private static nint? _JiggleBoneOffset;
+    private CFeJiggleBoneImpl? _JiggleBoneInstance;
 
     public CFeJiggleBone JiggleBone
     {
         get
         {
             _JiggleBoneOffset = _JiggleBoneOffset ?? Schema.GetOffset(0x51055B3A6038C557);
-            return new CFeJiggleBoneImpl(_Handle + _JiggleBoneOffset!.Value);
+            var instance = _JiggleBoneInstance ??= new CFeJiggleBoneImpl(0);
+            instance.DangerousSetHandle(_Handle + _JiggleBoneOffset!.Value);
+            return instance;
         }
     }
 

@@ -37,33 +37,42 @@ internal partial class CPulseCell_TestWaitWithCursorState__CursorState_tImpl : S
         }
     }
     private static nint? _SelfCursorOffset;
+    private SchemaUntypedField? _SelfCursorInstance;
 
     public SchemaUntypedField SelfCursor
     {
         get
         {
             _SelfCursorOffset = _SelfCursorOffset ?? Schema.GetOffset(0x9C2318A405F3C953);
-            return new SchemaUntypedField(_Handle + _SelfCursorOffset!.Value);
+            var instance = _SelfCursorInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _SelfCursorOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SelfCellInstanceUntypedOffset;
+    private SchemaUntypedField? _SelfCellInstanceUntypedInstance;
 
     public SchemaUntypedField SelfCellInstanceUntyped
     {
         get
         {
             _SelfCellInstanceUntypedOffset = _SelfCellInstanceUntypedOffset ?? Schema.GetOffset(0x9C2318A42AA23A43);
-            return new SchemaUntypedField(_Handle + _SelfCellInstanceUntypedOffset!.Value);
+            var instance = _SelfCellInstanceUntypedInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _SelfCellInstanceUntypedOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SelfCellInstanceOffset;
+    private SchemaUntypedField? _SelfCellInstanceInstance;
 
     public SchemaUntypedField SelfCellInstance
     {
         get
         {
             _SelfCellInstanceOffset = _SelfCellInstanceOffset ?? Schema.GetOffset(0x9C2318A4F6CABDEE);
-            return new SchemaUntypedField(_Handle + _SelfCellInstanceOffset!.Value);
+            var instance = _SelfCellInstanceInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _SelfCellInstanceOffset!.Value);
+            return instance;
         }
     }
 

@@ -112,13 +112,16 @@ internal partial class CBaseCombatCharacterImpl : CBaseAnimGraphImpl, CBaseComba
         }
     }
     private static nint? _MovementStatsOffset;
+    private CMovementStatsPropertyImpl? _MovementStatsInstance;
 
     public CMovementStatsProperty MovementStats
     {
         get
         {
             _MovementStatsOffset = _MovementStatsOffset ?? Schema.GetOffset(0xB47DE3DE4CF2CCDB);
-            return new CMovementStatsPropertyImpl(_Handle + _MovementStatsOffset!.Value);
+            var instance = _MovementStatsInstance ??= new CMovementStatsPropertyImpl(0);
+            instance.DangerousSetHandle(_Handle + _MovementStatsOffset!.Value);
+            return instance;
         }
     }
 

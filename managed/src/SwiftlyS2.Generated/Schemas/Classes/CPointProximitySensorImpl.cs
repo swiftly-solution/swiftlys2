@@ -37,13 +37,16 @@ internal partial class CPointProximitySensorImpl : CPointEntityImpl, CPointProxi
         }
     }
     private static nint? _DistanceOffset;
+    private SchemaUntypedField? _DistanceInstance;
 
     public SchemaUntypedField Distance
     {
         get
         {
             _DistanceOffset = _DistanceOffset ?? Schema.GetOffset(0x769A8B13978BC0E2);
-            return new SchemaUntypedField(_Handle + _DistanceOffset!.Value);
+            var instance = _DistanceInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _DistanceOffset!.Value);
+            return instance;
         }
     }
 

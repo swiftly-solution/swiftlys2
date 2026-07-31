@@ -37,6 +37,7 @@ internal partial class CHintMessageQueueImpl : SchemaClass, CHintMessageQueue
         }
     }
     private static nint? _PlayerControllerOffset;
+    private CBasePlayerControllerImpl? _PlayerControllerInstance;
 
     public CBasePlayerController? PlayerController
     {
@@ -44,7 +45,10 @@ internal partial class CHintMessageQueueImpl : SchemaClass, CHintMessageQueue
         {
             _PlayerControllerOffset = _PlayerControllerOffset ?? Schema.GetOffset(0xBE13489DCE6762E);
             var ptr = _Handle.Read<nint>(_PlayerControllerOffset!.Value);
-            return ptr.IsValidPtr() ? new CBasePlayerControllerImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _PlayerControllerInstance ??= new CBasePlayerControllerImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
 

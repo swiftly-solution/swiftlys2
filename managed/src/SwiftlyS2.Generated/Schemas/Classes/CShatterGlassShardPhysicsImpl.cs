@@ -27,13 +27,16 @@ internal partial class CShatterGlassShardPhysicsImpl : CBaseModelEntityImpl, CSh
         }
     }
     private static nint? _ShardDescOffset;
+    private shard_model_desc_tImpl? _ShardDescInstance;
 
     public shard_model_desc_t ShardDesc
     {
         get
         {
             _ShardDescOffset = _ShardDescOffset ?? Schema.GetOffset(0xC24E77982CBF17C6);
-            return new shard_model_desc_tImpl(_Handle + _ShardDescOffset!.Value);
+            var instance = _ShardDescInstance ??= new shard_model_desc_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _ShardDescOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PoolStateOffset;

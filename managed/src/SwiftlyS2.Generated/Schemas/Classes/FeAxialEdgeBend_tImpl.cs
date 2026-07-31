@@ -46,13 +46,31 @@ internal partial class FeAxialEdgeBend_tImpl : SchemaClass, FeAxialEdgeBend_t
             return ref _Handle.AsRef<float>(_DistOffset!.Value);
         }
     }
+    private static nint? _WeightOffset;
+    private SchemaFixedArray<float>? _WeightInstance;
+
     public ISchemaFixedArray<float> Weight
     {
-        get => new SchemaFixedArray<float>(_Handle, 0x6CF84D70CFFC66CB, 4, 4, 4);
+        get
+        {
+            _WeightOffset = _WeightOffset ?? Schema.GetOffset(0x6CF84D70CFFC66CB);
+            var instance = _WeightInstance ??= new SchemaFixedArray<float>(0, 0x6CF84D70CFFC66CB, 4, 4, 4);
+            instance.DangerousSetHandle(_Handle + _WeightOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _NodeOffset;
+    private SchemaFixedArray<ushort>? _NodeInstance;
+
     public ISchemaFixedArray<ushort> Node
     {
-        get => new SchemaFixedArray<ushort>(_Handle, 0x6CF84D70CD6694B9, 6, 2, 2);
+        get
+        {
+            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0x6CF84D70CD6694B9);
+            var instance = _NodeInstance ??= new SchemaFixedArray<ushort>(0, 0x6CF84D70CD6694B9, 6, 2, 2);
+            instance.DangerousSetHandle(_Handle + _NodeOffset!.Value);
+            return instance;
+        }
     }
 
 }

@@ -17,23 +17,29 @@ internal partial class C_INIT_VelocityFromCPImpl : CParticleFunctionInitializerI
     public C_INIT_VelocityFromCPImpl(nint handle) : base(handle) { }
 
     private static nint? _VelocityInputOffset;
+    private CParticleCollectionVecInputImpl? _VelocityInputInstance;
 
     public CParticleCollectionVecInput VelocityInput
     {
         get
         {
             _VelocityInputOffset = _VelocityInputOffset ?? Schema.GetOffset(0x1788D69A30C18956);
-            return new CParticleCollectionVecInputImpl(_Handle + _VelocityInputOffset!.Value);
+            var instance = _VelocityInputInstance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _VelocityInputOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TransformInputOffset;
+    private CParticleTransformInputImpl? _TransformInputInstance;
 
     public CParticleTransformInput TransformInput
     {
         get
         {
             _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0x1788D69A3A9ED669);
-            return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+            var instance = _TransformInputInstance ??= new CParticleTransformInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _TransformInputOffset!.Value);
+            return instance;
         }
     }
     private static nint? _VelocityScaleOffset;

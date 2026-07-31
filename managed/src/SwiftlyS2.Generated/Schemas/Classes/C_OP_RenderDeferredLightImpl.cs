@@ -57,23 +57,29 @@ internal partial class C_OP_RenderDeferredLightImpl : CParticleFunctionRendererI
         }
     }
     private static nint? _Alpha2FieldOffset;
+    private ParticleAttributeIndex_tImpl? _Alpha2FieldInstance;
 
     public ParticleAttributeIndex_t Alpha2Field
     {
         get
         {
             _Alpha2FieldOffset = _Alpha2FieldOffset ?? Schema.GetOffset(0x44291266F60EADC1);
-            return new ParticleAttributeIndex_tImpl(_Handle + _Alpha2FieldOffset!.Value);
+            var instance = _Alpha2FieldInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _Alpha2FieldOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ColorScaleOffset;
+    private CParticleCollectionVecInputImpl? _ColorScaleInstance;
 
     public CParticleCollectionVecInput ColorScale
     {
         get
         {
             _ColorScaleOffset = _ColorScaleOffset ?? Schema.GetOffset(0x442912669F9BB8BA);
-            return new CParticleCollectionVecInputImpl(_Handle + _ColorScaleOffset!.Value);
+            var instance = _ColorScaleInstance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ColorScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ColorBlendTypeOffset;
@@ -127,33 +133,42 @@ internal partial class C_OP_RenderDeferredLightImpl : CParticleFunctionRendererI
         }
     }
     private static nint? _AlphaTestPointFieldOffset;
+    private ParticleAttributeIndex_tImpl? _AlphaTestPointFieldInstance;
 
     public ParticleAttributeIndex_t AlphaTestPointField
     {
         get
         {
             _AlphaTestPointFieldOffset = _AlphaTestPointFieldOffset ?? Schema.GetOffset(0x442912666AD21C15);
-            return new ParticleAttributeIndex_tImpl(_Handle + _AlphaTestPointFieldOffset!.Value);
+            var instance = _AlphaTestPointFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _AlphaTestPointFieldOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AlphaTestRangeFieldOffset;
+    private ParticleAttributeIndex_tImpl? _AlphaTestRangeFieldInstance;
 
     public ParticleAttributeIndex_t AlphaTestRangeField
     {
         get
         {
             _AlphaTestRangeFieldOffset = _AlphaTestRangeFieldOffset ?? Schema.GetOffset(0x442912663E3E66D4);
-            return new ParticleAttributeIndex_tImpl(_Handle + _AlphaTestRangeFieldOffset!.Value);
+            var instance = _AlphaTestRangeFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _AlphaTestRangeFieldOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AlphaTestSharpnessFieldOffset;
+    private ParticleAttributeIndex_tImpl? _AlphaTestSharpnessFieldInstance;
 
     public ParticleAttributeIndex_t AlphaTestSharpnessField
     {
         get
         {
             _AlphaTestSharpnessFieldOffset = _AlphaTestSharpnessFieldOffset ?? Schema.GetOffset(0x44291266BCB74B82);
-            return new ParticleAttributeIndex_tImpl(_Handle + _AlphaTestSharpnessFieldOffset!.Value);
+            var instance = _AlphaTestSharpnessFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _AlphaTestSharpnessFieldOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TextureOffset;

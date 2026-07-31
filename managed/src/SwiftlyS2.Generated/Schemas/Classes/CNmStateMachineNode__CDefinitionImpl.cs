@@ -17,13 +17,16 @@ internal partial class CNmStateMachineNode__CDefinitionImpl : CNmPoseNode__CDefi
     public CNmStateMachineNode__CDefinitionImpl(nint handle) : base(handle) { }
 
     private static nint? _StateDefinitionsOffset;
+    private SchemaUntypedField? _StateDefinitionsInstance;
 
     public SchemaUntypedField StateDefinitions
     {
         get
         {
             _StateDefinitionsOffset = _StateDefinitionsOffset ?? Schema.GetOffset(0xA73F392775230B54);
-            return new SchemaUntypedField(_Handle + _StateDefinitionsOffset!.Value);
+            var instance = _StateDefinitionsInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _StateDefinitionsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DefaultStateIndexOffset;

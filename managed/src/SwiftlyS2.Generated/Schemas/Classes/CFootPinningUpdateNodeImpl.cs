@@ -17,13 +17,16 @@ internal partial class CFootPinningUpdateNodeImpl : CUnaryUpdateNodeImpl, CFootP
     public CFootPinningUpdateNodeImpl(nint handle) : base(handle) { }
 
     private static nint? _PoseOpFixedDataOffset;
+    private FootPinningPoseOpFixedData_tImpl? _PoseOpFixedDataInstance;
 
     public FootPinningPoseOpFixedData_t PoseOpFixedData
     {
         get
         {
             _PoseOpFixedDataOffset = _PoseOpFixedDataOffset ?? Schema.GetOffset(0x9D0C68166EC45627);
-            return new FootPinningPoseOpFixedData_tImpl(_Handle + _PoseOpFixedDataOffset!.Value);
+            var instance = _PoseOpFixedDataInstance ??= new FootPinningPoseOpFixedData_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _PoseOpFixedDataOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TimingSourceOffset;

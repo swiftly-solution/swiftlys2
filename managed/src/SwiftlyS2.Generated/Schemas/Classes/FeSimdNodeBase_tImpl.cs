@@ -16,38 +16,95 @@ internal partial class FeSimdNodeBase_tImpl : SchemaClass, FeSimdNodeBase_t
 {
     public FeSimdNodeBase_tImpl(nint handle) : base(handle) { }
 
+    private static nint? _NodeOffset;
+    private SchemaFixedArray<ushort>? _NodeInstance;
+
     public ISchemaFixedArray<ushort> Node
     {
-        get => new SchemaFixedArray<ushort>(_Handle, 0x8B863723CD6694B9, 4, 2, 2);
+        get
+        {
+            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0x8B863723CD6694B9);
+            var instance = _NodeInstance ??= new SchemaFixedArray<ushort>(0, 0x8B863723CD6694B9, 4, 2, 2);
+            instance.DangerousSetHandle(_Handle + _NodeOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _NodeX0Offset;
+    private SchemaFixedArray<ushort>? _NodeX0Instance;
+
     public ISchemaFixedArray<ushort> NodeX0
     {
-        get => new SchemaFixedArray<ushort>(_Handle, 0x8B86372381C7FEB9, 4, 2, 2);
+        get
+        {
+            _NodeX0Offset = _NodeX0Offset ?? Schema.GetOffset(0x8B86372381C7FEB9);
+            var instance = _NodeX0Instance ??= new SchemaFixedArray<ushort>(0, 0x8B86372381C7FEB9, 4, 2, 2);
+            instance.DangerousSetHandle(_Handle + _NodeX0Offset!.Value);
+            return instance;
+        }
     }
+    private static nint? _NodeX1Offset;
+    private SchemaFixedArray<ushort>? _NodeX1Instance;
+
     public ISchemaFixedArray<ushort> NodeX1
     {
-        get => new SchemaFixedArray<ushort>(_Handle, 0x8B86372380C7FD26, 4, 2, 2);
+        get
+        {
+            _NodeX1Offset = _NodeX1Offset ?? Schema.GetOffset(0x8B86372380C7FD26);
+            var instance = _NodeX1Instance ??= new SchemaFixedArray<ushort>(0, 0x8B86372380C7FD26, 4, 2, 2);
+            instance.DangerousSetHandle(_Handle + _NodeX1Offset!.Value);
+            return instance;
+        }
     }
+    private static nint? _NodeY0Offset;
+    private SchemaFixedArray<ushort>? _NodeY0Instance;
+
     public ISchemaFixedArray<ushort> NodeY0
     {
-        get => new SchemaFixedArray<ushort>(_Handle, 0x8B8637237BC5B6B0, 4, 2, 2);
+        get
+        {
+            _NodeY0Offset = _NodeY0Offset ?? Schema.GetOffset(0x8B8637237BC5B6B0);
+            var instance = _NodeY0Instance ??= new SchemaFixedArray<ushort>(0, 0x8B8637237BC5B6B0, 4, 2, 2);
+            instance.DangerousSetHandle(_Handle + _NodeY0Offset!.Value);
+            return instance;
+        }
     }
+    private static nint? _NodeY1Offset;
+    private SchemaFixedArray<ushort>? _NodeY1Instance;
+
     public ISchemaFixedArray<ushort> NodeY1
     {
-        get => new SchemaFixedArray<ushort>(_Handle, 0x8B8637237CC5B843, 4, 2, 2);
+        get
+        {
+            _NodeY1Offset = _NodeY1Offset ?? Schema.GetOffset(0x8B8637237CC5B843);
+            var instance = _NodeY1Instance ??= new SchemaFixedArray<ushort>(0, 0x8B8637237CC5B843, 4, 2, 2);
+            instance.DangerousSetHandle(_Handle + _NodeY1Offset!.Value);
+            return instance;
+        }
     }
+    private static nint? _DummyOffset;
+    private SchemaFixedArray<ushort>? _DummyInstance;
+
     public ISchemaFixedArray<ushort> Dummy
     {
-        get => new SchemaFixedArray<ushort>(_Handle, 0x8B863723CD8BAE5F, 4, 2, 2);
+        get
+        {
+            _DummyOffset = _DummyOffset ?? Schema.GetOffset(0x8B863723CD8BAE5F);
+            var instance = _DummyInstance ??= new SchemaFixedArray<ushort>(0, 0x8B863723CD8BAE5F, 4, 2, 2);
+            instance.DangerousSetHandle(_Handle + _DummyOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _AdjustOffset;
+    private FourQuaternionsImpl? _AdjustInstance;
 
     public FourQuaternions Adjust
     {
         get
         {
             _AdjustOffset = _AdjustOffset ?? Schema.GetOffset(0x8B8637230F6C0983);
-            return new FourQuaternionsImpl(_Handle + _AdjustOffset!.Value);
+            var instance = _AdjustInstance ??= new FourQuaternionsImpl(0);
+            instance.DangerousSetHandle(_Handle + _AdjustOffset!.Value);
+            return instance;
         }
     }
 

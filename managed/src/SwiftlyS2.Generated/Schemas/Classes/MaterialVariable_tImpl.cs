@@ -32,13 +32,16 @@ internal partial class MaterialVariable_tImpl : SchemaClass, MaterialVariable_t
         }
     }
     private static nint? _VariableFieldOffset;
+    private ParticleAttributeIndex_tImpl? _VariableFieldInstance;
 
     public ParticleAttributeIndex_t VariableField
     {
         get
         {
             _VariableFieldOffset = _VariableFieldOffset ?? Schema.GetOffset(0xCACB71DBF868E9B3);
-            return new ParticleAttributeIndex_tImpl(_Handle + _VariableFieldOffset!.Value);
+            var instance = _VariableFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _VariableFieldOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ScaleOffset;

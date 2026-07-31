@@ -17,23 +17,29 @@ internal partial class SelectorInstanceData_tImpl : SchemaClass, SelectorInstanc
     public SelectorInstanceData_tImpl(nint handle) : base(handle) { }
 
     private static nint? _WeightsOffset;
+    private SchemaUntypedField? _WeightsInstance;
 
     public SchemaUntypedField Weights
     {
         get
         {
             _WeightsOffset = _WeightsOffset ?? Schema.GetOffset(0x9F2CBD2C77B2F91E);
-            return new SchemaUntypedField(_Handle + _WeightsOffset!.Value);
+            var instance = _WeightsInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _WeightsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CurrentIndexStartTimeOffset;
+    private SchemaUntypedField? _CurrentIndexStartTimeInstance;
 
     public SchemaUntypedField CurrentIndexStartTime
     {
         get
         {
             _CurrentIndexStartTimeOffset = _CurrentIndexStartTimeOffset ?? Schema.GetOffset(0x9F2CBD2C31724957);
-            return new SchemaUntypedField(_Handle + _CurrentIndexStartTimeOffset!.Value);
+            var instance = _CurrentIndexStartTimeInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _CurrentIndexStartTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CurrentIndexOffset;

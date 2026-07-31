@@ -57,43 +57,55 @@ internal partial class C_OP_RenderSoundImpl : CParticleFunctionRendererImpl, C_O
         }
     }
     private static nint? _SndLvlFieldOffset;
+    private ParticleAttributeIndex_tImpl? _SndLvlFieldInstance;
 
     public ParticleAttributeIndex_t SndLvlField
     {
         get
         {
             _SndLvlFieldOffset = _SndLvlFieldOffset ?? Schema.GetOffset(0xBDBBFDFC17E2BD46);
-            return new ParticleAttributeIndex_tImpl(_Handle + _SndLvlFieldOffset!.Value);
+            var instance = _SndLvlFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _SndLvlFieldOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DurationFieldOffset;
+    private ParticleAttributeIndex_tImpl? _DurationFieldInstance;
 
     public ParticleAttributeIndex_t DurationField
     {
         get
         {
             _DurationFieldOffset = _DurationFieldOffset ?? Schema.GetOffset(0xBDBBFDFCB21EDAAB);
-            return new ParticleAttributeIndex_tImpl(_Handle + _DurationFieldOffset!.Value);
+            var instance = _DurationFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _DurationFieldOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PitchFieldOffset;
+    private ParticleAttributeIndex_tImpl? _PitchFieldInstance;
 
     public ParticleAttributeIndex_t PitchField
     {
         get
         {
             _PitchFieldOffset = _PitchFieldOffset ?? Schema.GetOffset(0xBDBBFDFC6E37791F);
-            return new ParticleAttributeIndex_tImpl(_Handle + _PitchFieldOffset!.Value);
+            var instance = _PitchFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _PitchFieldOffset!.Value);
+            return instance;
         }
     }
     private static nint? _VolumeFieldOffset;
+    private ParticleAttributeIndex_tImpl? _VolumeFieldInstance;
 
     public ParticleAttributeIndex_t VolumeField
     {
         get
         {
             _VolumeFieldOffset = _VolumeFieldOffset ?? Schema.GetOffset(0xBDBBFDFC3F07D465);
-            return new ParticleAttributeIndex_tImpl(_Handle + _VolumeFieldOffset!.Value);
+            var instance = _VolumeFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _VolumeFieldOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ChannelOffset;

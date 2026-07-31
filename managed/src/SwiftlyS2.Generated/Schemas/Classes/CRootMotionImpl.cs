@@ -17,13 +17,16 @@ internal partial class CRootMotionImpl : SchemaClass, CRootMotion
     public CRootMotionImpl(nint handle) : base(handle) { }
 
     private static nint? _DeltaTransformOffset;
+    private SchemaUntypedField? _DeltaTransformInstance;
 
     public SchemaUntypedField DeltaTransform
     {
         get
         {
             _DeltaTransformOffset = _DeltaTransformOffset ?? Schema.GetOffset(0xC7D44244B5B7D687);
-            return new SchemaUntypedField(_Handle + _DeltaTransformOffset!.Value);
+            var instance = _DeltaTransformInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _DeltaTransformOffset!.Value);
+            return instance;
         }
     }
     private static nint? _VelocityMSOffset;

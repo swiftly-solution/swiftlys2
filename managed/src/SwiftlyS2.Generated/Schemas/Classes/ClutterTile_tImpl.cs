@@ -37,13 +37,16 @@ internal partial class ClutterTile_tImpl : SchemaClass, ClutterTile_t
         }
     }
     private static nint? _BoundsWsOffset;
+    private AABB_tImpl? _BoundsWsInstance;
 
     public AABB_t BoundsWs
     {
         get
         {
             _BoundsWsOffset = _BoundsWsOffset ?? Schema.GetOffset(0xAC4066F1BE54855A);
-            return new AABB_tImpl(_Handle + _BoundsWsOffset!.Value);
+            var instance = _BoundsWsInstance ??= new AABB_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _BoundsWsOffset!.Value);
+            return instance;
         }
     }
 

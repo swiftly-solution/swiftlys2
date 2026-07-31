@@ -77,13 +77,16 @@ internal partial class RTProxyBLAS_tImpl : SchemaClass, RTProxyBLAS_t
         }
     }
     private static nint? _BoundLsOffset;
+    private AABB_tImpl? _BoundLsInstance;
 
     public AABB_t BoundLs
     {
         get
         {
             _BoundLsOffset = _BoundLsOffset ?? Schema.GetOffset(0x1854A2C164BE442);
-            return new AABB_tImpl(_Handle + _BoundLsOffset!.Value);
+            var instance = _BoundLsInstance ??= new AABB_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _BoundLsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _VertexOriginLsOffset;

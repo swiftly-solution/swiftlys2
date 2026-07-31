@@ -27,13 +27,16 @@ internal partial class C_INIT_CreateAlongPathImpl : CParticleFunctionInitializer
         }
     }
     private static nint? _PathParamsOffset;
+    private CPathParametersImpl? _PathParamsInstance;
 
     public CPathParameters PathParams
     {
         get
         {
             _PathParamsOffset = _PathParamsOffset ?? Schema.GetOffset(0x655F7B0C3C10092C);
-            return new CPathParametersImpl(_Handle + _PathParamsOffset!.Value);
+            var instance = _PathParamsInstance ??= new CPathParametersImpl(0);
+            instance.DangerousSetHandle(_Handle + _PathParamsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _UseRandomCPsOffset;

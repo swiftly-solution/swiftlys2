@@ -42,13 +42,16 @@ internal partial class VariableInfo_tImpl : SchemaClass, VariableInfo_t
         }
     }
     private static nint? _IndexOffset;
+    private FuseVariableIndex_tImpl? _IndexInstance;
 
     public FuseVariableIndex_t Index
     {
         get
         {
             _IndexOffset = _IndexOffset ?? Schema.GetOffset(0xED8F756EB73DBE67);
-            return new FuseVariableIndex_tImpl(_Handle + _IndexOffset!.Value);
+            var instance = _IndexInstance ??= new FuseVariableIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _IndexOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NumComponentsOffset;

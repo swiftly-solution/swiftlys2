@@ -37,43 +37,55 @@ internal partial class CLogicCompareImpl : CLogicalEntityImpl, CLogicCompare
         }
     }
     private static nint? _OnLessThanOffset;
+    private SchemaUntypedField? _OnLessThanInstance;
 
     public SchemaUntypedField OnLessThan
     {
         get
         {
             _OnLessThanOffset = _OnLessThanOffset ?? Schema.GetOffset(0xCEFDBF2FB6AC02FE);
-            return new SchemaUntypedField(_Handle + _OnLessThanOffset!.Value);
+            var instance = _OnLessThanInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OnLessThanOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OnEqualToOffset;
+    private SchemaUntypedField? _OnEqualToInstance;
 
     public SchemaUntypedField OnEqualTo
     {
         get
         {
             _OnEqualToOffset = _OnEqualToOffset ?? Schema.GetOffset(0xCEFDBF2F87EEC581);
-            return new SchemaUntypedField(_Handle + _OnEqualToOffset!.Value);
+            var instance = _OnEqualToInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OnEqualToOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OnNotEqualToOffset;
+    private SchemaUntypedField? _OnNotEqualToInstance;
 
     public SchemaUntypedField OnNotEqualTo
     {
         get
         {
             _OnNotEqualToOffset = _OnNotEqualToOffset ?? Schema.GetOffset(0xCEFDBF2FDA1680D6);
-            return new SchemaUntypedField(_Handle + _OnNotEqualToOffset!.Value);
+            var instance = _OnNotEqualToInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OnNotEqualToOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OnGreaterThanOffset;
+    private SchemaUntypedField? _OnGreaterThanInstance;
 
     public SchemaUntypedField OnGreaterThan
     {
         get
         {
             _OnGreaterThanOffset = _OnGreaterThanOffset ?? Schema.GetOffset(0xCEFDBF2F50BD472D);
-            return new SchemaUntypedField(_Handle + _OnGreaterThanOffset!.Value);
+            var instance = _OnGreaterThanInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OnGreaterThanOffset!.Value);
+            return instance;
         }
     }
 

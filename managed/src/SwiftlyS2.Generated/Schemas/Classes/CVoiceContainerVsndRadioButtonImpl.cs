@@ -32,163 +32,211 @@ internal partial class CVoiceContainerVsndRadioButtonImpl : CVoiceContainerBaseI
         }
     }
     private static nint? _Slot1Offset;
+    private CVsndRadioButtonSlotImpl? _Slot1Instance;
 
     public CVsndRadioButtonSlot Slot1
     {
         get
         {
             _Slot1Offset = _Slot1Offset ?? Schema.GetOffset(0xFE4E4FC93B0D1A60);
-            return new CVsndRadioButtonSlotImpl(_Handle + _Slot1Offset!.Value);
+            var instance = _Slot1Instance ??= new CVsndRadioButtonSlotImpl(0);
+            instance.DangerousSetHandle(_Handle + _Slot1Offset!.Value);
+            return instance;
         }
     }
     private static nint? _Slot2Offset;
+    private CVsndRadioButtonSlotImpl? _Slot2Instance;
 
     public CVsndRadioButtonSlot Slot2
     {
         get
         {
             _Slot2Offset = _Slot2Offset ?? Schema.GetOffset(0xFE4E4FC93E0D1F19);
-            return new CVsndRadioButtonSlotImpl(_Handle + _Slot2Offset!.Value);
+            var instance = _Slot2Instance ??= new CVsndRadioButtonSlotImpl(0);
+            instance.DangerousSetHandle(_Handle + _Slot2Offset!.Value);
+            return instance;
         }
     }
     private static nint? _Slot3Offset;
+    private CVsndRadioButtonSlotImpl? _Slot3Instance;
 
     public CVsndRadioButtonSlot Slot3
     {
         get
         {
             _Slot3Offset = _Slot3Offset ?? Schema.GetOffset(0xFE4E4FC93D0D1D86);
-            return new CVsndRadioButtonSlotImpl(_Handle + _Slot3Offset!.Value);
+            var instance = _Slot3Instance ??= new CVsndRadioButtonSlotImpl(0);
+            instance.DangerousSetHandle(_Handle + _Slot3Offset!.Value);
+            return instance;
         }
     }
     private static nint? _Slot4Offset;
+    private CVsndRadioButtonSlotImpl? _Slot4Instance;
 
     public CVsndRadioButtonSlot Slot4
     {
         get
         {
             _Slot4Offset = _Slot4Offset ?? Schema.GetOffset(0xFE4E4FC9400D223F);
-            return new CVsndRadioButtonSlotImpl(_Handle + _Slot4Offset!.Value);
+            var instance = _Slot4Instance ??= new CVsndRadioButtonSlotImpl(0);
+            instance.DangerousSetHandle(_Handle + _Slot4Offset!.Value);
+            return instance;
         }
     }
     private static nint? _Slot5Offset;
+    private CVsndRadioButtonSlotImpl? _Slot5Instance;
 
     public CVsndRadioButtonSlot Slot5
     {
         get
         {
             _Slot5Offset = _Slot5Offset ?? Schema.GetOffset(0xFE4E4FC93F0D20AC);
-            return new CVsndRadioButtonSlotImpl(_Handle + _Slot5Offset!.Value);
+            var instance = _Slot5Instance ??= new CVsndRadioButtonSlotImpl(0);
+            instance.DangerousSetHandle(_Handle + _Slot5Offset!.Value);
+            return instance;
         }
     }
     private static nint? _Slot6Offset;
+    private CVsndRadioButtonSlotImpl? _Slot6Instance;
 
     public CVsndRadioButtonSlot Slot6
     {
         get
         {
             _Slot6Offset = _Slot6Offset ?? Schema.GetOffset(0xFE4E4FC9420D2565);
-            return new CVsndRadioButtonSlotImpl(_Handle + _Slot6Offset!.Value);
+            var instance = _Slot6Instance ??= new CVsndRadioButtonSlotImpl(0);
+            instance.DangerousSetHandle(_Handle + _Slot6Offset!.Value);
+            return instance;
         }
     }
     private static nint? _Slot7Offset;
+    private CVsndRadioButtonSlotImpl? _Slot7Instance;
 
     public CVsndRadioButtonSlot Slot7
     {
         get
         {
             _Slot7Offset = _Slot7Offset ?? Schema.GetOffset(0xFE4E4FC9410D23D2);
-            return new CVsndRadioButtonSlotImpl(_Handle + _Slot7Offset!.Value);
+            var instance = _Slot7Instance ??= new CVsndRadioButtonSlotImpl(0);
+            instance.DangerousSetHandle(_Handle + _Slot7Offset!.Value);
+            return instance;
         }
     }
     private static nint? _Slot8Offset;
+    private CVsndRadioButtonSlotImpl? _Slot8Instance;
 
     public CVsndRadioButtonSlot Slot8
     {
         get
         {
             _Slot8Offset = _Slot8Offset ?? Schema.GetOffset(0xFE4E4FC9440D288B);
-            return new CVsndRadioButtonSlotImpl(_Handle + _Slot8Offset!.Value);
+            var instance = _Slot8Instance ??= new CVsndRadioButtonSlotImpl(0);
+            instance.DangerousSetHandle(_Handle + _Slot8Offset!.Value);
+            return instance;
         }
     }
     private static nint? _Slot9Offset;
+    private CVsndRadioButtonSlotImpl? _Slot9Instance;
 
     public CVsndRadioButtonSlot Slot9
     {
         get
         {
             _Slot9Offset = _Slot9Offset ?? Schema.GetOffset(0xFE4E4FC9430D26F8);
-            return new CVsndRadioButtonSlotImpl(_Handle + _Slot9Offset!.Value);
+            var instance = _Slot9Instance ??= new CVsndRadioButtonSlotImpl(0);
+            instance.DangerousSetHandle(_Handle + _Slot9Offset!.Value);
+            return instance;
         }
     }
     private static nint? _Slot10Offset;
+    private CVsndRadioButtonSlotImpl? _Slot10Instance;
 
     public CVsndRadioButtonSlot Slot10
     {
         get
         {
             _Slot10Offset = _Slot10Offset ?? Schema.GetOffset(0xFE4E4FC945A06BF0);
-            return new CVsndRadioButtonSlotImpl(_Handle + _Slot10Offset!.Value);
+            var instance = _Slot10Instance ??= new CVsndRadioButtonSlotImpl(0);
+            instance.DangerousSetHandle(_Handle + _Slot10Offset!.Value);
+            return instance;
         }
     }
     private static nint? _Slot11Offset;
+    private CVsndRadioButtonSlotImpl? _Slot11Instance;
 
     public CVsndRadioButtonSlot Slot11
     {
         get
         {
             _Slot11Offset = _Slot11Offset ?? Schema.GetOffset(0xFE4E4FC946A06D83);
-            return new CVsndRadioButtonSlotImpl(_Handle + _Slot11Offset!.Value);
+            var instance = _Slot11Instance ??= new CVsndRadioButtonSlotImpl(0);
+            instance.DangerousSetHandle(_Handle + _Slot11Offset!.Value);
+            return instance;
         }
     }
     private static nint? _Slot12Offset;
+    private CVsndRadioButtonSlotImpl? _Slot12Instance;
 
     public CVsndRadioButtonSlot Slot12
     {
         get
         {
             _Slot12Offset = _Slot12Offset ?? Schema.GetOffset(0xFE4E4FC947A06F16);
-            return new CVsndRadioButtonSlotImpl(_Handle + _Slot12Offset!.Value);
+            var instance = _Slot12Instance ??= new CVsndRadioButtonSlotImpl(0);
+            instance.DangerousSetHandle(_Handle + _Slot12Offset!.Value);
+            return instance;
         }
     }
     private static nint? _Slot13Offset;
+    private CVsndRadioButtonSlotImpl? _Slot13Instance;
 
     public CVsndRadioButtonSlot Slot13
     {
         get
         {
             _Slot13Offset = _Slot13Offset ?? Schema.GetOffset(0xFE4E4FC948A070A9);
-            return new CVsndRadioButtonSlotImpl(_Handle + _Slot13Offset!.Value);
+            var instance = _Slot13Instance ??= new CVsndRadioButtonSlotImpl(0);
+            instance.DangerousSetHandle(_Handle + _Slot13Offset!.Value);
+            return instance;
         }
     }
     private static nint? _Slot14Offset;
+    private CVsndRadioButtonSlotImpl? _Slot14Instance;
 
     public CVsndRadioButtonSlot Slot14
     {
         get
         {
             _Slot14Offset = _Slot14Offset ?? Schema.GetOffset(0xFE4E4FC949A0723C);
-            return new CVsndRadioButtonSlotImpl(_Handle + _Slot14Offset!.Value);
+            var instance = _Slot14Instance ??= new CVsndRadioButtonSlotImpl(0);
+            instance.DangerousSetHandle(_Handle + _Slot14Offset!.Value);
+            return instance;
         }
     }
     private static nint? _Slot15Offset;
+    private CVsndRadioButtonSlotImpl? _Slot15Instance;
 
     public CVsndRadioButtonSlot Slot15
     {
         get
         {
             _Slot15Offset = _Slot15Offset ?? Schema.GetOffset(0xFE4E4FC94AA073CF);
-            return new CVsndRadioButtonSlotImpl(_Handle + _Slot15Offset!.Value);
+            var instance = _Slot15Instance ??= new CVsndRadioButtonSlotImpl(0);
+            instance.DangerousSetHandle(_Handle + _Slot15Offset!.Value);
+            return instance;
         }
     }
     private static nint? _Slot16Offset;
+    private CVsndRadioButtonSlotImpl? _Slot16Instance;
 
     public CVsndRadioButtonSlot Slot16
     {
         get
         {
             _Slot16Offset = _Slot16Offset ?? Schema.GetOffset(0xFE4E4FC94BA07562);
-            return new CVsndRadioButtonSlotImpl(_Handle + _Slot16Offset!.Value);
+            var instance = _Slot16Instance ??= new CVsndRadioButtonSlotImpl(0);
+            instance.DangerousSetHandle(_Handle + _Slot16Offset!.Value);
+            return instance;
         }
     }
 

@@ -17,13 +17,16 @@ internal partial class C_OP_PercentageBetweenTransformsImpl : CParticleFunctionO
     public C_OP_PercentageBetweenTransformsImpl(nint handle) : base(handle) { }
 
     private static nint? _FieldOutputOffset;
+    private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
             _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x37F3E6E6E5729606);
-            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+            var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InputMinOffset;
@@ -67,23 +70,29 @@ internal partial class C_OP_PercentageBetweenTransformsImpl : CParticleFunctionO
         }
     }
     private static nint? _TransformStartOffset;
+    private CParticleTransformInputImpl? _TransformStartInstance;
 
     public CParticleTransformInput TransformStart
     {
         get
         {
             _TransformStartOffset = _TransformStartOffset ?? Schema.GetOffset(0x37F3E6E6D94FA7F9);
-            return new CParticleTransformInputImpl(_Handle + _TransformStartOffset!.Value);
+            var instance = _TransformStartInstance ??= new CParticleTransformInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _TransformStartOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TransformEndOffset;
+    private CParticleTransformInputImpl? _TransformEndInstance;
 
     public CParticleTransformInput TransformEnd
     {
         get
         {
             _TransformEndOffset = _TransformEndOffset ?? Schema.GetOffset(0x37F3E6E60C3277C8);
-            return new CParticleTransformInputImpl(_Handle + _TransformEndOffset!.Value);
+            var instance = _TransformEndInstance ??= new CParticleTransformInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _TransformEndOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SetMethodOffset;

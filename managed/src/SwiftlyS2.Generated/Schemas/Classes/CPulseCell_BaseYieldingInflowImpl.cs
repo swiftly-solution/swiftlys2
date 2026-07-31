@@ -17,23 +17,29 @@ internal partial class CPulseCell_BaseYieldingInflowImpl : CPulseCell_BaseFlowIm
     public CPulseCell_BaseYieldingInflowImpl(nint handle) : base(handle) { }
 
     private static nint? _BaseFlow_OnAfterCancelOffset;
+    private CPulse_ResumePointImpl? _BaseFlow_OnAfterCancelInstance;
 
     public CPulse_ResumePoint BaseFlow_OnAfterCancel
     {
         get
         {
             _BaseFlow_OnAfterCancelOffset = _BaseFlow_OnAfterCancelOffset ?? Schema.GetOffset(0x9A860DAD56A57A30);
-            return new CPulse_ResumePointImpl(_Handle + _BaseFlow_OnAfterCancelOffset!.Value);
+            var instance = _BaseFlow_OnAfterCancelInstance ??= new CPulse_ResumePointImpl(0);
+            instance.DangerousSetHandle(_Handle + _BaseFlow_OnAfterCancelOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BaseFlow_WhileActiveOffset;
+    private CPulse_ResumePointImpl? _BaseFlow_WhileActiveInstance;
 
     public CPulse_ResumePoint BaseFlow_WhileActive
     {
         get
         {
             _BaseFlow_WhileActiveOffset = _BaseFlow_WhileActiveOffset ?? Schema.GetOffset(0x9A860DAD51C198E0);
-            return new CPulse_ResumePointImpl(_Handle + _BaseFlow_WhileActiveOffset!.Value);
+            var instance = _BaseFlow_WhileActiveInstance ??= new CPulse_ResumePointImpl(0);
+            instance.DangerousSetHandle(_Handle + _BaseFlow_WhileActiveOffset!.Value);
+            return instance;
         }
     }
 

@@ -27,23 +27,29 @@ internal partial class CNmGraphEventConditionNode__CDefinitionImpl : CNmBoolValu
         }
     }
     private static nint? _EventConditionRulesOffset;
+    private CNmBitFlagsImpl? _EventConditionRulesInstance;
 
     public CNmBitFlags EventConditionRules
     {
         get
         {
             _EventConditionRulesOffset = _EventConditionRulesOffset ?? Schema.GetOffset(0x88067348A904315F);
-            return new CNmBitFlagsImpl(_Handle + _EventConditionRulesOffset!.Value);
+            var instance = _EventConditionRulesInstance ??= new CNmBitFlagsImpl(0);
+            instance.DangerousSetHandle(_Handle + _EventConditionRulesOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ConditionsOffset;
+    private SchemaUntypedField? _ConditionsInstance;
 
     public SchemaUntypedField Conditions
     {
         get
         {
             _ConditionsOffset = _ConditionsOffset ?? Schema.GetOffset(0x88067348EDDF6757);
-            return new SchemaUntypedField(_Handle + _ConditionsOffset!.Value);
+            var instance = _ConditionsInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ConditionsOffset!.Value);
+            return instance;
         }
     }
 

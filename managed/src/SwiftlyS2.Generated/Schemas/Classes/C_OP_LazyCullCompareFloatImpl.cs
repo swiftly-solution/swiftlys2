@@ -17,33 +17,42 @@ internal partial class C_OP_LazyCullCompareFloatImpl : CParticleFunctionOperator
     public C_OP_LazyCullCompareFloatImpl(nint handle) : base(handle) { }
 
     private static nint? _Comparsion1Offset;
+    private CPerParticleFloatInputImpl? _Comparsion1Instance;
 
     public CPerParticleFloatInput Comparsion1
     {
         get
         {
             _Comparsion1Offset = _Comparsion1Offset ?? Schema.GetOffset(0x9D0DCAD079865299);
-            return new CPerParticleFloatInputImpl(_Handle + _Comparsion1Offset!.Value);
+            var instance = _Comparsion1Instance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _Comparsion1Offset!.Value);
+            return instance;
         }
     }
     private static nint? _Comparsion2Offset;
+    private CPerParticleFloatInputImpl? _Comparsion2Instance;
 
     public CPerParticleFloatInput Comparsion2
     {
         get
         {
             _Comparsion2Offset = _Comparsion2Offset ?? Schema.GetOffset(0x9D0DCAD076864DE0);
-            return new CPerParticleFloatInputImpl(_Handle + _Comparsion2Offset!.Value);
+            var instance = _Comparsion2Instance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _Comparsion2Offset!.Value);
+            return instance;
         }
     }
     private static nint? _CullTimeOffset;
+    private CPerParticleFloatInputImpl? _CullTimeInstance;
 
     public CPerParticleFloatInput CullTime
     {
         get
         {
             _CullTimeOffset = _CullTimeOffset ?? Schema.GetOffset(0x9D0DCAD0AE2A76FA);
-            return new CPerParticleFloatInputImpl(_Handle + _CullTimeOffset!.Value);
+            var instance = _CullTimeInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _CullTimeOffset!.Value);
+            return instance;
         }
     }
 

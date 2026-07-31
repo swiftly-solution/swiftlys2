@@ -32,13 +32,16 @@ internal partial class VecInputMaterialVariable_tImpl : SchemaClass, VecInputMat
         }
     }
     private static nint? _InputOffset;
+    private CParticleCollectionVecInputImpl? _InputInstance;
 
     public CParticleCollectionVecInput Input
     {
         get
         {
             _InputOffset = _InputOffset ?? Schema.GetOffset(0x3A84C75D1EA0ED5B);
-            return new CParticleCollectionVecInputImpl(_Handle + _InputOffset!.Value);
+            var instance = _InputInstance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _InputOffset!.Value);
+            return instance;
         }
     }
 

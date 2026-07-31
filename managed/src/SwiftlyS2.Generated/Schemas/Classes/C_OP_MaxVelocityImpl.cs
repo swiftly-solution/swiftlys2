@@ -17,23 +17,29 @@ internal partial class C_OP_MaxVelocityImpl : CParticleFunctionOperatorImpl, C_O
     public C_OP_MaxVelocityImpl(nint handle) : base(handle) { }
 
     private static nint? _MaxVelocityOffset;
+    private CPerParticleFloatInputImpl? _MaxVelocityInstance;
 
     public CPerParticleFloatInput MaxVelocity
     {
         get
         {
             _MaxVelocityOffset = _MaxVelocityOffset ?? Schema.GetOffset(0xE7D67D7E281BD640);
-            return new CPerParticleFloatInputImpl(_Handle + _MaxVelocityOffset!.Value);
+            var instance = _MaxVelocityInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _MaxVelocityOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MinVelocityOffset;
+    private CPerParticleFloatInputImpl? _MinVelocityInstance;
 
     public CPerParticleFloatInput MinVelocity
     {
         get
         {
             _MinVelocityOffset = _MinVelocityOffset ?? Schema.GetOffset(0xE7D67D7EAE8F0ADE);
-            return new CPerParticleFloatInputImpl(_Handle + _MinVelocityOffset!.Value);
+            var instance = _MinVelocityInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _MinVelocityOffset!.Value);
+            return instance;
         }
     }
 

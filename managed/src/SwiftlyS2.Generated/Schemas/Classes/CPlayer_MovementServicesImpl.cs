@@ -27,13 +27,16 @@ internal partial class CPlayer_MovementServicesImpl : CPlayerPawnComponentImpl, 
         }
     }
     private static nint? _ButtonsOffset;
+    private CInButtonStateImpl? _ButtonsInstance;
 
     public CInButtonState Buttons
     {
         get
         {
             _ButtonsOffset = _ButtonsOffset ?? Schema.GetOffset(0xD5BDF28998CCEF82);
-            return new CInButtonStateImpl(_Handle + _ButtonsOffset!.Value);
+            var instance = _ButtonsInstance ??= new CInButtonStateImpl(0);
+            instance.DangerousSetHandle(_Handle + _ButtonsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _QueuedButtonDownMaskOffset;
@@ -66,9 +69,18 @@ internal partial class CPlayer_MovementServicesImpl : CPlayerPawnComponentImpl, 
             return ref _Handle.AsRef<ulong>(_ButtonDoublePressedOffset!.Value);
         }
     }
+    private static nint? _ButtonPressedCmdNumberOffset;
+    private SchemaFixedArray<uint>? _ButtonPressedCmdNumberInstance;
+
     public ISchemaFixedArray<uint> ButtonPressedCmdNumber
     {
-        get => new SchemaFixedArray<uint>(_Handle, 0xD5BDF289A7854580, 64, 4, 4);
+        get
+        {
+            _ButtonPressedCmdNumberOffset = _ButtonPressedCmdNumberOffset ?? Schema.GetOffset(0xD5BDF289A7854580);
+            var instance = _ButtonPressedCmdNumberInstance ??= new SchemaFixedArray<uint>(0, 0xD5BDF289A7854580, 64, 4, 4);
+            instance.DangerousSetHandle(_Handle + _ButtonPressedCmdNumberOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _LastCommandNumberProcessedOffset;
 
@@ -130,9 +142,18 @@ internal partial class CPlayer_MovementServicesImpl : CPlayerPawnComponentImpl, 
             return ref _Handle.AsRef<float>(_MaxspeedOffset!.Value);
         }
     }
+    private static nint? _ForceSubtickMoveWhenOffset;
+    private SchemaFixedArray<float>? _ForceSubtickMoveWhenInstance;
+
     public ISchemaFixedArray<float> ForceSubtickMoveWhen
     {
-        get => new SchemaFixedArray<float>(_Handle, 0xD5BDF28999115A07, 4, 4, 4);
+        get
+        {
+            _ForceSubtickMoveWhenOffset = _ForceSubtickMoveWhenOffset ?? Schema.GetOffset(0xD5BDF28999115A07);
+            var instance = _ForceSubtickMoveWhenInstance ??= new SchemaFixedArray<float>(0, 0xD5BDF28999115A07, 4, 4, 4);
+            instance.DangerousSetHandle(_Handle + _ForceSubtickMoveWhenOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _ForwardMoveOffset;
 

@@ -47,13 +47,16 @@ internal partial class CAmbientGenericImpl : CPointEntityImpl, CAmbientGeneric
         }
     }
     private static nint? _DpvOffset;
+    private dynpitchvol_tImpl? _DpvInstance;
 
     public dynpitchvol_t Dpv
     {
         get
         {
             _DpvOffset = _DpvOffset ?? Schema.GetOffset(0xD45BE96FD7C5AFFD);
-            return new dynpitchvol_tImpl(_Handle + _DpvOffset!.Value);
+            var instance = _DpvInstance ??= new dynpitchvol_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _DpvOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ActiveOffset;

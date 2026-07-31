@@ -17,13 +17,16 @@ internal partial class CAnimationLayerImpl : SchemaClass, CAnimationLayer
     public CAnimationLayerImpl(nint handle) : base(handle) { }
 
     private static nint? _SequenceOffset;
+    private SchemaUntypedField? _SequenceInstance;
 
     public SchemaUntypedField Sequence
     {
         get
         {
             _SequenceOffset = _SequenceOffset ?? Schema.GetOffset(0x5FD3D565E0A0598E);
-            return new SchemaUntypedField(_Handle + _SequenceOffset!.Value);
+            var instance = _SequenceInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _SequenceOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PrevCycleOffset;
@@ -37,33 +40,42 @@ internal partial class CAnimationLayerImpl : SchemaClass, CAnimationLayer
         }
     }
     private static nint? _CycleOffset;
+    private SchemaUntypedField? _CycleInstance;
 
     public SchemaUntypedField Cycle
     {
         get
         {
             _CycleOffset = _CycleOffset ?? Schema.GetOffset(0x5FD3D5650C77829F);
-            return new SchemaUntypedField(_Handle + _CycleOffset!.Value);
+            var instance = _CycleInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _CycleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _WeightOffset;
+    private SchemaUntypedField? _WeightInstance;
 
     public SchemaUntypedField Weight
     {
         get
         {
             _WeightOffset = _WeightOffset ?? Schema.GetOffset(0x5FD3D5657B81E7AB);
-            return new SchemaUntypedField(_Handle + _WeightOffset!.Value);
+            var instance = _WeightInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _WeightOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OrderOffset;
+    private SchemaUntypedField? _OrderInstance;
 
     public SchemaUntypedField Order
     {
         get
         {
             _OrderOffset = _OrderOffset ?? Schema.GetOffset(0x5FD3D5656B8529A3);
-            return new SchemaUntypedField(_Handle + _OrderOffset!.Value);
+            var instance = _OrderInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OrderOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LoopingOffset;

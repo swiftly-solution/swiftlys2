@@ -42,23 +42,29 @@ internal partial class C_INIT_InitFromCPSnapshotImpl : CParticleFunctionInitiali
         }
     }
     private static nint? _AttributeToReadOffset;
+    private ParticleAttributeIndex_tImpl? _AttributeToReadInstance;
 
     public ParticleAttributeIndex_t AttributeToRead
     {
         get
         {
             _AttributeToReadOffset = _AttributeToReadOffset ?? Schema.GetOffset(0x772EF71BE0F61F9E);
-            return new ParticleAttributeIndex_tImpl(_Handle + _AttributeToReadOffset!.Value);
+            var instance = _AttributeToReadInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _AttributeToReadOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AttributeToWriteOffset;
+    private ParticleAttributeIndex_tImpl? _AttributeToWriteInstance;
 
     public ParticleAttributeIndex_t AttributeToWrite
     {
         get
         {
             _AttributeToWriteOffset = _AttributeToWriteOffset ?? Schema.GetOffset(0x772EF71B389A3CC1);
-            return new ParticleAttributeIndex_tImpl(_Handle + _AttributeToWriteOffset!.Value);
+            var instance = _AttributeToWriteInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _AttributeToWriteOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LocalSpaceCPOffset;
@@ -92,23 +98,29 @@ internal partial class C_INIT_InitFromCPSnapshotImpl : CParticleFunctionInitiali
         }
     }
     private static nint? _SnapShotIncrementOffset;
+    private CParticleCollectionFloatInputImpl? _SnapShotIncrementInstance;
 
     public CParticleCollectionFloatInput SnapShotIncrement
     {
         get
         {
             _SnapShotIncrementOffset = _SnapShotIncrementOffset ?? Schema.GetOffset(0x772EF71BC1AED602);
-            return new CParticleCollectionFloatInputImpl(_Handle + _SnapShotIncrementOffset!.Value);
+            var instance = _SnapShotIncrementInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _SnapShotIncrementOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ManualSnapshotIndexOffset;
+    private CPerParticleFloatInputImpl? _ManualSnapshotIndexInstance;
 
     public CPerParticleFloatInput ManualSnapshotIndex
     {
         get
         {
             _ManualSnapshotIndexOffset = _ManualSnapshotIndexOffset ?? Schema.GetOffset(0x772EF71BA02E904D);
-            return new CPerParticleFloatInputImpl(_Handle + _ManualSnapshotIndexOffset!.Value);
+            var instance = _ManualSnapshotIndexInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ManualSnapshotIndexOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RandomSeedOffset;

@@ -17,23 +17,29 @@ internal partial class C_OP_ConstrainDistanceImpl : CParticleFunctionConstraintI
     public C_OP_ConstrainDistanceImpl(nint handle) : base(handle) { }
 
     private static nint? _MinDistanceOffset;
+    private CParticleCollectionFloatInputImpl? _MinDistanceInstance;
 
     public CParticleCollectionFloatInput MinDistance
     {
         get
         {
             _MinDistanceOffset = _MinDistanceOffset ?? Schema.GetOffset(0xDF3E3FA1F016B7AC);
-            return new CParticleCollectionFloatInputImpl(_Handle + _MinDistanceOffset!.Value);
+            var instance = _MinDistanceInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _MinDistanceOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MaxDistanceOffset;
+    private CParticleCollectionFloatInputImpl? _MaxDistanceInstance;
 
     public CParticleCollectionFloatInput MaxDistance
     {
         get
         {
             _MaxDistanceOffset = _MaxDistanceOffset ?? Schema.GetOffset(0xDF3E3FA1844E396A);
-            return new CParticleCollectionFloatInputImpl(_Handle + _MaxDistanceOffset!.Value);
+            var instance = _MaxDistanceInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _MaxDistanceOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ControlPointNumberOffset;

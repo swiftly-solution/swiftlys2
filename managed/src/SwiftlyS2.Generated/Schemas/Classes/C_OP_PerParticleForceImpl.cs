@@ -17,23 +17,29 @@ internal partial class C_OP_PerParticleForceImpl : CParticleFunctionForceImpl, C
     public C_OP_PerParticleForceImpl(nint handle) : base(handle) { }
 
     private static nint? _ForceScaleOffset;
+    private CPerParticleFloatInputImpl? _ForceScaleInstance;
 
     public CPerParticleFloatInput ForceScale
     {
         get
         {
             _ForceScaleOffset = _ForceScaleOffset ?? Schema.GetOffset(0x70EFAEAD4817F390);
-            return new CPerParticleFloatInputImpl(_Handle + _ForceScaleOffset!.Value);
+            var instance = _ForceScaleInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ForceScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ForceOffset;
+    private CPerParticleVecInputImpl? _ForceInstance;
 
     public CPerParticleVecInput Force
     {
         get
         {
             _ForceOffset = _ForceOffset ?? Schema.GetOffset(0x70EFAEADE530B0A8);
-            return new CPerParticleVecInputImpl(_Handle + _ForceOffset!.Value);
+            var instance = _ForceInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ForceOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CPOffset;

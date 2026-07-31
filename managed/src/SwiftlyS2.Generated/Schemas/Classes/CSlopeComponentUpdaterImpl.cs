@@ -27,63 +27,81 @@ internal partial class CSlopeComponentUpdaterImpl : CAnimComponentUpdaterImpl, C
         }
     }
     private static nint? _SlopeAngleOffset;
+    private CAnimParamHandleImpl? _SlopeAngleInstance;
 
     public CAnimParamHandle SlopeAngle
     {
         get
         {
             _SlopeAngleOffset = _SlopeAngleOffset ?? Schema.GetOffset(0xC0FC4829ED49556D);
-            return new CAnimParamHandleImpl(_Handle + _SlopeAngleOffset!.Value);
+            var instance = _SlopeAngleInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _SlopeAngleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SlopeAngleFrontOffset;
+    private CAnimParamHandleImpl? _SlopeAngleFrontInstance;
 
     public CAnimParamHandle SlopeAngleFront
     {
         get
         {
             _SlopeAngleFrontOffset = _SlopeAngleFrontOffset ?? Schema.GetOffset(0xC0FC48291ED54070);
-            return new CAnimParamHandleImpl(_Handle + _SlopeAngleFrontOffset!.Value);
+            var instance = _SlopeAngleFrontInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _SlopeAngleFrontOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SlopeAngleSideOffset;
+    private CAnimParamHandleImpl? _SlopeAngleSideInstance;
 
     public CAnimParamHandle SlopeAngleSide
     {
         get
         {
             _SlopeAngleSideOffset = _SlopeAngleSideOffset ?? Schema.GetOffset(0xC0FC4829E6ADA076);
-            return new CAnimParamHandleImpl(_Handle + _SlopeAngleSideOffset!.Value);
+            var instance = _SlopeAngleSideInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _SlopeAngleSideOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SlopeHeadingOffset;
+    private CAnimParamHandleImpl? _SlopeHeadingInstance;
 
     public CAnimParamHandle SlopeHeading
     {
         get
         {
             _SlopeHeadingOffset = _SlopeHeadingOffset ?? Schema.GetOffset(0xC0FC482945A85028);
-            return new CAnimParamHandleImpl(_Handle + _SlopeHeadingOffset!.Value);
+            var instance = _SlopeHeadingInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _SlopeHeadingOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SlopeNormalOffset;
+    private CAnimParamHandleImpl? _SlopeNormalInstance;
 
     public CAnimParamHandle SlopeNormal
     {
         get
         {
             _SlopeNormalOffset = _SlopeNormalOffset ?? Schema.GetOffset(0xC0FC48292A185DE5);
-            return new CAnimParamHandleImpl(_Handle + _SlopeNormalOffset!.Value);
+            var instance = _SlopeNormalInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _SlopeNormalOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SlopeNormal_WorldSpaceOffset;
+    private CAnimParamHandleImpl? _SlopeNormal_WorldSpaceInstance;
 
     public CAnimParamHandle SlopeNormal_WorldSpace
     {
         get
         {
             _SlopeNormal_WorldSpaceOffset = _SlopeNormal_WorldSpaceOffset ?? Schema.GetOffset(0xC0FC48290CCD648C);
-            return new CAnimParamHandleImpl(_Handle + _SlopeNormal_WorldSpaceOffset!.Value);
+            var instance = _SlopeNormal_WorldSpaceInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _SlopeNormal_WorldSpaceOffset!.Value);
+            return instance;
         }
     }
 

@@ -507,13 +507,16 @@ internal partial class CScriptedSequenceImpl : CBaseEntityImpl, CScriptedSequenc
         }
     }
     private static nint? _StartTimeOffset;
+    private GameTime_tImpl? _StartTimeInstance;
 
     public GameTime_t StartTime
     {
         get
         {
             _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0xBB0C45ED6330E7EE);
-            return new GameTime_tImpl(_Handle + _StartTimeOffset!.Value);
+            var instance = _StartTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _StartTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _WaitForBeginSequenceOffset;
@@ -776,9 +779,18 @@ internal partial class CScriptedSequenceImpl : CBaseEntityImpl, CScriptedSequenc
             return ref _Handle.AsRef<CEntityIOOutput>(_OnCancelFailedSequenceOffset!.Value);
         }
     }
+    private static nint? _OnScriptEventOffset;
+    private SchemaFixedArray<CEntityIOOutput>? _OnScriptEventInstance;
+
     public ISchemaFixedArray<CEntityIOOutput> OnScriptEvent
     {
-        get => new SchemaFixedArray<CEntityIOOutput>(_Handle, 0xBB0C45ED8A68F621, 8, 24, 8);
+        get
+        {
+            _OnScriptEventOffset = _OnScriptEventOffset ?? Schema.GetOffset(0xBB0C45ED8A68F621);
+            var instance = _OnScriptEventInstance ??= new SchemaFixedArray<CEntityIOOutput>(0, 0xBB0C45ED8A68F621, 8, 24, 8);
+            instance.DangerousSetHandle(_Handle + _OnScriptEventOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _MatOtherToMainOffset;
 

@@ -27,23 +27,29 @@ internal partial class CChoreo_GraphControllerImpl : CAnimGraphControllerBaseImp
         }
     }
     private static nint? _TChoreoTargetWarpOffset;
+    private SchemaUntypedField? _TChoreoTargetWarpInstance;
 
     public SchemaUntypedField TChoreoTargetWarp
     {
         get
         {
             _TChoreoTargetWarpOffset = _TChoreoTargetWarpOffset ?? Schema.GetOffset(0x49D3EABB02B3B9AE);
-            return new SchemaUntypedField(_Handle + _TChoreoTargetWarpOffset!.Value);
+            var instance = _TChoreoTargetWarpInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _TChoreoTargetWarpOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TChoreoExitWarpOffset;
+    private SchemaUntypedField? _TChoreoExitWarpInstance;
 
     public SchemaUntypedField TChoreoExitWarp
     {
         get
         {
             _TChoreoExitWarpOffset = _TChoreoExitWarpOffset ?? Schema.GetOffset(0x49D3EABBA4952AE7);
-            return new SchemaUntypedField(_Handle + _TChoreoExitWarpOffset!.Value);
+            var instance = _TChoreoExitWarpInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _TChoreoExitWarpOffset!.Value);
+            return instance;
         }
     }
 

@@ -17,13 +17,16 @@ internal partial class CFootLockUpdateNodeImpl : CUnaryUpdateNodeImpl, CFootLock
     public CFootLockUpdateNodeImpl(nint handle) : base(handle) { }
 
     private static nint? _OpFixedSettingsOffset;
+    private FootLockPoseOpFixedSettingsImpl? _OpFixedSettingsInstance;
 
     public FootLockPoseOpFixedSettings OpFixedSettings
     {
         get
         {
             _OpFixedSettingsOffset = _OpFixedSettingsOffset ?? Schema.GetOffset(0xA8F37E8E533AB09);
-            return new FootLockPoseOpFixedSettingsImpl(_Handle + _OpFixedSettingsOffset!.Value);
+            var instance = _OpFixedSettingsInstance ??= new FootLockPoseOpFixedSettingsImpl(0);
+            instance.DangerousSetHandle(_Handle + _OpFixedSettingsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FootSettingsOffset;
@@ -37,23 +40,29 @@ internal partial class CFootLockUpdateNodeImpl : CUnaryUpdateNodeImpl, CFootLock
         }
     }
     private static nint? _HipShiftDampingOffset;
+    private CAnimInputDampingImpl? _HipShiftDampingInstance;
 
     public CAnimInputDamping HipShiftDamping
     {
         get
         {
             _HipShiftDampingOffset = _HipShiftDampingOffset ?? Schema.GetOffset(0xA8F37E80EA57628);
-            return new CAnimInputDampingImpl(_Handle + _HipShiftDampingOffset!.Value);
+            var instance = _HipShiftDampingInstance ??= new CAnimInputDampingImpl(0);
+            instance.DangerousSetHandle(_Handle + _HipShiftDampingOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RootHeightDampingOffset;
+    private CAnimInputDampingImpl? _RootHeightDampingInstance;
 
     public CAnimInputDamping RootHeightDamping
     {
         get
         {
             _RootHeightDampingOffset = _RootHeightDampingOffset ?? Schema.GetOffset(0xA8F37E84DE10164);
-            return new CAnimInputDampingImpl(_Handle + _RootHeightDampingOffset!.Value);
+            var instance = _RootHeightDampingInstance ??= new CAnimInputDampingImpl(0);
+            instance.DangerousSetHandle(_Handle + _RootHeightDampingOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StrideCurveScaleOffset;

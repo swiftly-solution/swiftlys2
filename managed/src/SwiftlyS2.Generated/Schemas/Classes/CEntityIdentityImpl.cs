@@ -97,6 +97,7 @@ internal partial class CEntityIdentityImpl : SchemaClass, CEntityIdentity
         }
     }
     private static nint? _AttributesOffset;
+    private CEntityAttributeTableImpl? _AttributesInstance;
 
     public CEntityAttributeTable? Attributes
     {
@@ -104,10 +105,14 @@ internal partial class CEntityIdentityImpl : SchemaClass, CEntityIdentity
         {
             _AttributesOffset = _AttributesOffset ?? Schema.GetOffset(0xAE42345F1DCF7962);
             var ptr = _Handle.Read<nint>(_AttributesOffset!.Value);
-            return ptr.IsValidPtr() ? new CEntityAttributeTableImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _AttributesInstance ??= new CEntityAttributeTableImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _PrevOffset;
+    private CEntityIdentityImpl? _PrevInstance;
 
     public CEntityIdentity? Prev
     {
@@ -115,10 +120,14 @@ internal partial class CEntityIdentityImpl : SchemaClass, CEntityIdentity
         {
             _PrevOffset = _PrevOffset ?? Schema.GetOffset(0xAE42345FD49AD9AA);
             var ptr = _Handle.Read<nint>(_PrevOffset!.Value);
-            return ptr.IsValidPtr() ? new CEntityIdentityImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _PrevInstance ??= new CEntityIdentityImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _NextOffset;
+    private CEntityIdentityImpl? _NextInstance;
 
     public CEntityIdentity? Next
     {
@@ -126,10 +135,14 @@ internal partial class CEntityIdentityImpl : SchemaClass, CEntityIdentity
         {
             _NextOffset = _NextOffset ?? Schema.GetOffset(0xAE42345F32B11E0E);
             var ptr = _Handle.Read<nint>(_NextOffset!.Value);
-            return ptr.IsValidPtr() ? new CEntityIdentityImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _NextInstance ??= new CEntityIdentityImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _PrevByClassOffset;
+    private CEntityIdentityImpl? _PrevByClassInstance;
 
     public CEntityIdentity? PrevByClass
     {
@@ -137,10 +150,14 @@ internal partial class CEntityIdentityImpl : SchemaClass, CEntityIdentity
         {
             _PrevByClassOffset = _PrevByClassOffset ?? Schema.GetOffset(0xAE42345F1F46E9A5);
             var ptr = _Handle.Read<nint>(_PrevByClassOffset!.Value);
-            return ptr.IsValidPtr() ? new CEntityIdentityImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _PrevByClassInstance ??= new CEntityIdentityImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _NextByClassOffset;
+    private CEntityIdentityImpl? _NextByClassInstance;
 
     public CEntityIdentity? NextByClass
     {
@@ -148,7 +165,10 @@ internal partial class CEntityIdentityImpl : SchemaClass, CEntityIdentity
         {
             _NextByClassOffset = _NextByClassOffset ?? Schema.GetOffset(0xAE42345F908D6209);
             var ptr = _Handle.Read<nint>(_NextByClassOffset!.Value);
-            return ptr.IsValidPtr() ? new CEntityIdentityImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _NextByClassInstance ??= new CEntityIdentityImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
 

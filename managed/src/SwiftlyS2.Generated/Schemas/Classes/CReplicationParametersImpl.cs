@@ -37,53 +37,68 @@ internal partial class CReplicationParametersImpl : SchemaClass, CReplicationPar
         }
     }
     private static nint? _MinRandomRadiusScaleOffset;
+    private CParticleCollectionFloatInputImpl? _MinRandomRadiusScaleInstance;
 
     public CParticleCollectionFloatInput MinRandomRadiusScale
     {
         get
         {
             _MinRandomRadiusScaleOffset = _MinRandomRadiusScaleOffset ?? Schema.GetOffset(0xFA909F208CBF88EE);
-            return new CParticleCollectionFloatInputImpl(_Handle + _MinRandomRadiusScaleOffset!.Value);
+            var instance = _MinRandomRadiusScaleInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _MinRandomRadiusScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MaxRandomRadiusScaleOffset;
+    private CParticleCollectionFloatInputImpl? _MaxRandomRadiusScaleInstance;
 
     public CParticleCollectionFloatInput MaxRandomRadiusScale
     {
         get
         {
             _MaxRandomRadiusScaleOffset = _MaxRandomRadiusScaleOffset ?? Schema.GetOffset(0xFA909F2022697B5C);
-            return new CParticleCollectionFloatInputImpl(_Handle + _MaxRandomRadiusScaleOffset!.Value);
+            var instance = _MaxRandomRadiusScaleInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _MaxRandomRadiusScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MinRandomDisplacementOffset;
+    private CParticleCollectionVecInputImpl? _MinRandomDisplacementInstance;
 
     public CParticleCollectionVecInput MinRandomDisplacement
     {
         get
         {
             _MinRandomDisplacementOffset = _MinRandomDisplacementOffset ?? Schema.GetOffset(0xFA909F20808FB77F);
-            return new CParticleCollectionVecInputImpl(_Handle + _MinRandomDisplacementOffset!.Value);
+            var instance = _MinRandomDisplacementInstance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _MinRandomDisplacementOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MaxRandomDisplacementOffset;
+    private CParticleCollectionVecInputImpl? _MaxRandomDisplacementInstance;
 
     public CParticleCollectionVecInput MaxRandomDisplacement
     {
         get
         {
             _MaxRandomDisplacementOffset = _MaxRandomDisplacementOffset ?? Schema.GetOffset(0xFA909F20FF279F49);
-            return new CParticleCollectionVecInputImpl(_Handle + _MaxRandomDisplacementOffset!.Value);
+            var instance = _MaxRandomDisplacementInstance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _MaxRandomDisplacementOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ModellingScaleOffset;
+    private CParticleCollectionFloatInputImpl? _ModellingScaleInstance;
 
     public CParticleCollectionFloatInput ModellingScale
     {
         get
         {
             _ModellingScaleOffset = _ModellingScaleOffset ?? Schema.GetOffset(0xFA909F20BE93B72A);
-            return new CParticleCollectionFloatInputImpl(_Handle + _ModellingScaleOffset!.Value);
+            var instance = _ModellingScaleInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ModellingScaleOffset!.Value);
+            return instance;
         }
     }
 

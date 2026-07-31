@@ -47,13 +47,16 @@ internal partial class CFuncRotatingImpl : CBaseModelEntityImpl, CFuncRotating
         }
     }
     private static nint? _LocalRotationVectorOffset;
+    private SchemaUntypedField? _LocalRotationVectorInstance;
 
     public SchemaUntypedField LocalRotationVector
     {
         get
         {
             _LocalRotationVectorOffset = _LocalRotationVectorOffset ?? Schema.GetOffset(0x1A29EA946ACE06C5);
-            return new SchemaUntypedField(_Handle + _LocalRotationVectorOffset!.Value);
+            var instance = _LocalRotationVectorInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _LocalRotationVectorOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SpeedOffset;

@@ -17,23 +17,29 @@ internal partial class CMeshletDescriptorImpl : SchemaClass, CMeshletDescriptor
     public CMeshletDescriptorImpl(nint handle) : base(handle) { }
 
     private static nint? _PackedAABBOffset;
+    private PackedAABB_tImpl? _PackedAABBInstance;
 
     public PackedAABB_t PackedAABB
     {
         get
         {
             _PackedAABBOffset = _PackedAABBOffset ?? Schema.GetOffset(0xAF93495D8D638233);
-            return new PackedAABB_tImpl(_Handle + _PackedAABBOffset!.Value);
+            var instance = _PackedAABBInstance ??= new PackedAABB_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _PackedAABBOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CullingDataOffset;
+    private CDrawCullingDataImpl? _CullingDataInstance;
 
     public CDrawCullingData CullingData
     {
         get
         {
             _CullingDataOffset = _CullingDataOffset ?? Schema.GetOffset(0xAF93495DA6D54DC3);
-            return new CDrawCullingDataImpl(_Handle + _CullingDataOffset!.Value);
+            var instance = _CullingDataInstance ??= new CDrawCullingDataImpl(0);
+            instance.DangerousSetHandle(_Handle + _CullingDataOffset!.Value);
+            return instance;
         }
     }
     private static nint? _VertexOffsetOffset;

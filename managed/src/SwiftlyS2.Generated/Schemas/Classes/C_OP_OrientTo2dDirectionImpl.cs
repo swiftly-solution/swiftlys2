@@ -17,13 +17,16 @@ internal partial class C_OP_OrientTo2dDirectionImpl : CParticleFunctionOperatorI
     public C_OP_OrientTo2dDirectionImpl(nint handle) : base(handle) { }
 
     private static nint? _InputOffset;
+    private CPerParticleVecInputImpl? _InputInstance;
 
     public CPerParticleVecInput Input
     {
         get
         {
             _InputOffset = _InputOffset ?? Schema.GetOffset(0x2AC61F041EA0ED5B);
-            return new CPerParticleVecInputImpl(_Handle + _InputOffset!.Value);
+            var instance = _InputInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _InputOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RotOffsetOffset;
@@ -47,13 +50,16 @@ internal partial class C_OP_OrientTo2dDirectionImpl : CParticleFunctionOperatorI
         }
     }
     private static nint? _FieldOutputOffset;
+    private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
             _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x2AC61F04E5729606);
-            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+            var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
+            return instance;
         }
     }
 

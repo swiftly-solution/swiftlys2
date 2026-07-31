@@ -67,13 +67,16 @@ internal partial class CNmTransitionNode__CDefinitionImpl : CNmPoseNode__CDefini
         }
     }
     private static nint? _BoneMaskBlendInTimePercentageOffset;
+    private NmPercent_tImpl? _BoneMaskBlendInTimePercentageInstance;
 
     public NmPercent_t BoneMaskBlendInTimePercentage
     {
         get
         {
             _BoneMaskBlendInTimePercentageOffset = _BoneMaskBlendInTimePercentageOffset ?? Schema.GetOffset(0x23B71EF83CBCEB24);
-            return new NmPercent_tImpl(_Handle + _BoneMaskBlendInTimePercentageOffset!.Value);
+            var instance = _BoneMaskBlendInTimePercentageInstance ??= new NmPercent_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _BoneMaskBlendInTimePercentageOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TimeOffsetOffset;
@@ -87,13 +90,16 @@ internal partial class CNmTransitionNode__CDefinitionImpl : CNmPoseNode__CDefini
         }
     }
     private static nint? _TransitionOptionsOffset;
+    private CNmBitFlagsImpl? _TransitionOptionsInstance;
 
     public CNmBitFlags TransitionOptions
     {
         get
         {
             _TransitionOptionsOffset = _TransitionOptionsOffset ?? Schema.GetOffset(0x23B71EF8875C9EAC);
-            return new CNmBitFlagsImpl(_Handle + _TransitionOptionsOffset!.Value);
+            var instance = _TransitionOptionsInstance ??= new CNmBitFlagsImpl(0);
+            instance.DangerousSetHandle(_Handle + _TransitionOptionsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TargetSyncIDNodeIdxOffset;

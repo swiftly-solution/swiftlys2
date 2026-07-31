@@ -17,33 +17,42 @@ internal partial class C_OP_ContinuousEmitterImpl : CParticleFunctionEmitterImpl
     public C_OP_ContinuousEmitterImpl(nint handle) : base(handle) { }
 
     private static nint? _EmissionDurationOffset;
+    private CParticleCollectionFloatInputImpl? _EmissionDurationInstance;
 
     public CParticleCollectionFloatInput EmissionDuration
     {
         get
         {
             _EmissionDurationOffset = _EmissionDurationOffset ?? Schema.GetOffset(0x6B2A982090181C90);
-            return new CParticleCollectionFloatInputImpl(_Handle + _EmissionDurationOffset!.Value);
+            var instance = _EmissionDurationInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _EmissionDurationOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StartTimeOffset;
+    private CParticleCollectionFloatInputImpl? _StartTimeInstance;
 
     public CParticleCollectionFloatInput StartTime
     {
         get
         {
             _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0x6B2A982067FE9DC4);
-            return new CParticleCollectionFloatInputImpl(_Handle + _StartTimeOffset!.Value);
+            var instance = _StartTimeInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _StartTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _EmitRateOffset;
+    private CParticleCollectionFloatInputImpl? _EmitRateInstance;
 
     public CParticleCollectionFloatInput EmitRate
     {
         get
         {
             _EmitRateOffset = _EmitRateOffset ?? Schema.GetOffset(0x6B2A982062DC20CE);
-            return new CParticleCollectionFloatInputImpl(_Handle + _EmitRateOffset!.Value);
+            var instance = _EmitRateInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _EmitRateOffset!.Value);
+            return instance;
         }
     }
     private static nint? _EmissionScaleOffset;

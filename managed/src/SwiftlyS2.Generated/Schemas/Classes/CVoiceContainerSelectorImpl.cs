@@ -27,13 +27,16 @@ internal partial class CVoiceContainerSelectorImpl : CVoiceContainerBaseImpl, CV
         }
     }
     private static nint? _SoundsToPlayOffset;
+    private CSoundContainerReferenceArrayImpl? _SoundsToPlayInstance;
 
     public CSoundContainerReferenceArray SoundsToPlay
     {
         get
         {
             _SoundsToPlayOffset = _SoundsToPlayOffset ?? Schema.GetOffset(0xF16C473ADCB5F70E);
-            return new CSoundContainerReferenceArrayImpl(_Handle + _SoundsToPlayOffset!.Value);
+            var instance = _SoundsToPlayInstance ??= new CSoundContainerReferenceArrayImpl(0);
+            instance.DangerousSetHandle(_Handle + _SoundsToPlayOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ProbabilityWeightsOffset;

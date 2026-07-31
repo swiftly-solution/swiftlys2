@@ -17,23 +17,29 @@ internal partial class C_OP_MoveToHitboxImpl : CParticleFunctionOperatorImpl, C_
     public C_OP_MoveToHitboxImpl(nint handle) : base(handle) { }
 
     private static nint? _ModelInputOffset;
+    private CParticleModelInputImpl? _ModelInputInstance;
 
     public CParticleModelInput ModelInput
     {
         get
         {
             _ModelInputOffset = _ModelInputOffset ?? Schema.GetOffset(0x4ACEA8FFEB74120E);
-            return new CParticleModelInputImpl(_Handle + _ModelInputOffset!.Value);
+            var instance = _ModelInputInstance ??= new CParticleModelInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ModelInputOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TransformInputOffset;
+    private CParticleTransformInputImpl? _TransformInputInstance;
 
     public CParticleTransformInput TransformInput
     {
         get
         {
             _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0x4ACEA8FF3A9ED669);
-            return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+            var instance = _TransformInputInstance ??= new CParticleTransformInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _TransformInputOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LifeTimeLerpStartOffset;
@@ -102,13 +108,16 @@ internal partial class C_OP_MoveToHitboxImpl : CParticleFunctionOperatorImpl, C_
         }
     }
     private static nint? _InterpolationOffset;
+    private CPerParticleFloatInputImpl? _InterpolationInstance;
 
     public CPerParticleFloatInput Interpolation
     {
         get
         {
             _InterpolationOffset = _InterpolationOffset ?? Schema.GetOffset(0x4ACEA8FFCF55B987);
-            return new CPerParticleFloatInputImpl(_Handle + _InterpolationOffset!.Value);
+            var instance = _InterpolationInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _InterpolationOffset!.Value);
+            return instance;
         }
     }
 

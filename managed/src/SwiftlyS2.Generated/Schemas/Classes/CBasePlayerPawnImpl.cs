@@ -17,6 +17,7 @@ internal partial class CBasePlayerPawnImpl : CBaseCombatCharacterImpl, CBasePlay
     public CBasePlayerPawnImpl(nint handle) : base(handle) { }
 
     private static nint? _WeaponServicesOffset;
+    private CPlayer_WeaponServicesImpl? _WeaponServicesInstance;
 
     public CPlayer_WeaponServices? WeaponServices
     {
@@ -24,10 +25,14 @@ internal partial class CBasePlayerPawnImpl : CBaseCombatCharacterImpl, CBasePlay
         {
             _WeaponServicesOffset = _WeaponServicesOffset ?? Schema.GetOffset(0xCA2EED0451B23A93);
             var ptr = _Handle.Read<nint>(_WeaponServicesOffset!.Value);
-            return ptr.IsValidPtr() ? new CPlayer_WeaponServicesImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _WeaponServicesInstance ??= new CPlayer_WeaponServicesImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _ItemServicesOffset;
+    private CPlayer_ItemServicesImpl? _ItemServicesInstance;
 
     public CPlayer_ItemServices? ItemServices
     {
@@ -35,10 +40,14 @@ internal partial class CBasePlayerPawnImpl : CBaseCombatCharacterImpl, CBasePlay
         {
             _ItemServicesOffset = _ItemServicesOffset ?? Schema.GetOffset(0xCA2EED04AABBB9B8);
             var ptr = _Handle.Read<nint>(_ItemServicesOffset!.Value);
-            return ptr.IsValidPtr() ? new CPlayer_ItemServicesImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _ItemServicesInstance ??= new CPlayer_ItemServicesImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _AutoaimServicesOffset;
+    private CPlayer_AutoaimServicesImpl? _AutoaimServicesInstance;
 
     public CPlayer_AutoaimServices? AutoaimServices
     {
@@ -46,10 +55,14 @@ internal partial class CBasePlayerPawnImpl : CBaseCombatCharacterImpl, CBasePlay
         {
             _AutoaimServicesOffset = _AutoaimServicesOffset ?? Schema.GetOffset(0xCA2EED0413209115);
             var ptr = _Handle.Read<nint>(_AutoaimServicesOffset!.Value);
-            return ptr.IsValidPtr() ? new CPlayer_AutoaimServicesImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _AutoaimServicesInstance ??= new CPlayer_AutoaimServicesImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _ObserverServicesOffset;
+    private CPlayer_ObserverServicesImpl? _ObserverServicesInstance;
 
     public CPlayer_ObserverServices? ObserverServices
     {
@@ -57,10 +70,14 @@ internal partial class CBasePlayerPawnImpl : CBaseCombatCharacterImpl, CBasePlay
         {
             _ObserverServicesOffset = _ObserverServicesOffset ?? Schema.GetOffset(0xCA2EED044ED1A579);
             var ptr = _Handle.Read<nint>(_ObserverServicesOffset!.Value);
-            return ptr.IsValidPtr() ? new CPlayer_ObserverServicesImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _ObserverServicesInstance ??= new CPlayer_ObserverServicesImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _WaterServicesOffset;
+    private CPlayer_WaterServicesImpl? _WaterServicesInstance;
 
     public CPlayer_WaterServices? WaterServices
     {
@@ -68,10 +85,14 @@ internal partial class CBasePlayerPawnImpl : CBaseCombatCharacterImpl, CBasePlay
         {
             _WaterServicesOffset = _WaterServicesOffset ?? Schema.GetOffset(0xCA2EED04A5653452);
             var ptr = _Handle.Read<nint>(_WaterServicesOffset!.Value);
-            return ptr.IsValidPtr() ? new CPlayer_WaterServicesImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _WaterServicesInstance ??= new CPlayer_WaterServicesImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _UseServicesOffset;
+    private CPlayer_UseServicesImpl? _UseServicesInstance;
 
     public CPlayer_UseServices? UseServices
     {
@@ -79,10 +100,14 @@ internal partial class CBasePlayerPawnImpl : CBaseCombatCharacterImpl, CBasePlay
         {
             _UseServicesOffset = _UseServicesOffset ?? Schema.GetOffset(0xCA2EED04A87C910A);
             var ptr = _Handle.Read<nint>(_UseServicesOffset!.Value);
-            return ptr.IsValidPtr() ? new CPlayer_UseServicesImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _UseServicesInstance ??= new CPlayer_UseServicesImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _FlashlightServicesOffset;
+    private CPlayer_FlashlightServicesImpl? _FlashlightServicesInstance;
 
     public CPlayer_FlashlightServices? FlashlightServices
     {
@@ -90,10 +115,14 @@ internal partial class CBasePlayerPawnImpl : CBaseCombatCharacterImpl, CBasePlay
         {
             _FlashlightServicesOffset = _FlashlightServicesOffset ?? Schema.GetOffset(0xCA2EED046CF76641);
             var ptr = _Handle.Read<nint>(_FlashlightServicesOffset!.Value);
-            return ptr.IsValidPtr() ? new CPlayer_FlashlightServicesImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _FlashlightServicesInstance ??= new CPlayer_FlashlightServicesImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _CameraServicesOffset;
+    private CPlayer_CameraServicesImpl? _CameraServicesInstance;
 
     public CPlayer_CameraServices? CameraServices
     {
@@ -101,10 +130,14 @@ internal partial class CBasePlayerPawnImpl : CBaseCombatCharacterImpl, CBasePlay
         {
             _CameraServicesOffset = _CameraServicesOffset ?? Schema.GetOffset(0xCA2EED043B7DFD20);
             var ptr = _Handle.Read<nint>(_CameraServicesOffset!.Value);
-            return ptr.IsValidPtr() ? new CPlayer_CameraServicesImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _CameraServicesInstance ??= new CPlayer_CameraServicesImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _MovementServicesOffset;
+    private CPlayer_MovementServicesImpl? _MovementServicesInstance;
 
     public CPlayer_MovementServices? MovementServices
     {
@@ -112,7 +145,10 @@ internal partial class CBasePlayerPawnImpl : CBaseCombatCharacterImpl, CBasePlay
         {
             _MovementServicesOffset = _MovementServicesOffset ?? Schema.GetOffset(0xCA2EED04CF73E28A);
             var ptr = _Handle.Read<nint>(_MovementServicesOffset!.Value);
-            return ptr.IsValidPtr() ? new CPlayer_MovementServicesImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _MovementServicesInstance ??= new CPlayer_MovementServicesImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _ServerViewAngleChangesOffset;
@@ -156,43 +192,55 @@ internal partial class CBasePlayerPawnImpl : CBaseCombatCharacterImpl, CBasePlay
         }
     }
     private static nint? _Skybox3dOffset;
+    private sky3dparams_tImpl? _Skybox3dInstance;
 
     public sky3dparams_t Skybox3d
     {
         get
         {
             _Skybox3dOffset = _Skybox3dOffset ?? Schema.GetOffset(0xCA2EED0451DA4DBC);
-            return new sky3dparams_tImpl(_Handle + _Skybox3dOffset!.Value);
+            var instance = _Skybox3dInstance ??= new sky3dparams_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _Skybox3dOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TimeLastHurtOffset;
+    private GameTime_tImpl? _TimeLastHurtInstance;
 
     public GameTime_t TimeLastHurt
     {
         get
         {
             _TimeLastHurtOffset = _TimeLastHurtOffset ?? Schema.GetOffset(0xCA2EED048FA4AFB1);
-            return new GameTime_tImpl(_Handle + _TimeLastHurtOffset!.Value);
+            var instance = _TimeLastHurtInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _TimeLastHurtOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DeathTimeOffset;
+    private GameTime_tImpl? _DeathTimeInstance;
 
     public GameTime_t DeathTime
     {
         get
         {
             _DeathTimeOffset = _DeathTimeOffset ?? Schema.GetOffset(0xCA2EED0407F7A70A);
-            return new GameTime_tImpl(_Handle + _DeathTimeOffset!.Value);
+            var instance = _DeathTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _DeathTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NextSuicideTimeOffset;
+    private GameTime_tImpl? _NextSuicideTimeInstance;
 
     public GameTime_t NextSuicideTime
     {
         get
         {
             _NextSuicideTimeOffset = _NextSuicideTimeOffset ?? Schema.GetOffset(0xCA2EED04735FDC79);
-            return new GameTime_tImpl(_Handle + _NextSuicideTimeOffset!.Value);
+            var instance = _NextSuicideTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NextSuicideTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InitHUDOffset;
@@ -206,6 +254,7 @@ internal partial class CBasePlayerPawnImpl : CBaseCombatCharacterImpl, CBasePlay
         }
     }
     private static nint? _ExpresserOffset;
+    private CAI_ExpresserImpl? _ExpresserInstance;
 
     public CAI_Expresser? Expresser
     {
@@ -213,7 +262,10 @@ internal partial class CBasePlayerPawnImpl : CBaseCombatCharacterImpl, CBasePlay
         {
             _ExpresserOffset = _ExpresserOffset ?? Schema.GetOffset(0xCA2EED04697CAC2A);
             var ptr = _Handle.Read<nint>(_ExpresserOffset!.Value);
-            return ptr.IsValidPtr() ? new CAI_ExpresserImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _ExpresserInstance ??= new CAI_ExpresserImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _ControllerOffset;

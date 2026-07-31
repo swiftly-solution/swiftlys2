@@ -16,9 +16,18 @@ internal partial class CPathMoverEntitySpawnerImpl : CLogicalEntityImpl, CPathMo
 {
     public CPathMoverEntitySpawnerImpl(nint handle) : base(handle) { }
 
+    private static nint? _SpawnTemplatesOffset;
+    private SchemaStringFixedArray? _SpawnTemplatesInstance;
+
     public ISchemaStringFixedArray SpawnTemplates
     {
-        get => new SchemaStringFixedArray(_Handle, 0x384C46FF10ABEA92, 4, 8, 8);
+        get
+        {
+            _SpawnTemplatesOffset = _SpawnTemplatesOffset ?? Schema.GetOffset(0x384C46FF10ABEA92);
+            var instance = _SpawnTemplatesInstance ??= new SchemaStringFixedArray(0, 0x384C46FF10ABEA92, 4, 8, 8);
+            instance.DangerousSetHandle(_Handle + _SpawnTemplatesOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _SpawnIndexOffset;
 
@@ -61,13 +70,16 @@ internal partial class CPathMoverEntitySpawnerImpl : CLogicalEntityImpl, CPathMo
         }
     }
     private static nint? _MapSpawnedMoverTemplatesOffset;
+    private SchemaUntypedField? _MapSpawnedMoverTemplatesInstance;
 
     public SchemaUntypedField MapSpawnedMoverTemplates
     {
         get
         {
             _MapSpawnedMoverTemplatesOffset = _MapSpawnedMoverTemplatesOffset ?? Schema.GetOffset(0x384C46FF143D8DBD);
-            return new SchemaUntypedField(_Handle + _MapSpawnedMoverTemplatesOffset!.Value);
+            var instance = _MapSpawnedMoverTemplatesInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _MapSpawnedMoverTemplatesOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MaxActiveOffset;
@@ -91,13 +103,16 @@ internal partial class CPathMoverEntitySpawnerImpl : CLogicalEntityImpl, CPathMo
         }
     }
     private static nint? _LastSpawnTimeOffset;
+    private GameTime_tImpl? _LastSpawnTimeInstance;
 
     public GameTime_t LastSpawnTime
     {
         get
         {
             _LastSpawnTimeOffset = _LastSpawnTimeOffset ?? Schema.GetOffset(0x384C46FFB880B76B);
-            return new GameTime_tImpl(_Handle + _LastSpawnTimeOffset!.Value);
+            var instance = _LastSpawnTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastSpawnTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _EnabledOffset;

@@ -32,13 +32,16 @@ internal partial class CStateUpdateDataImpl : SchemaClass, CStateUpdateData
         }
     }
     private static nint? _ScriptOffset;
+    private AnimScriptHandleImpl? _ScriptInstance;
 
     public AnimScriptHandle Script
     {
         get
         {
             _ScriptOffset = _ScriptOffset ?? Schema.GetOffset(0xD984C8C629D70FB0);
-            return new AnimScriptHandleImpl(_Handle + _ScriptOffset!.Value);
+            var instance = _ScriptInstance ??= new AnimScriptHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _ScriptOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TransitionIndicesOffset;
@@ -62,63 +65,81 @@ internal partial class CStateUpdateDataImpl : SchemaClass, CStateUpdateData
         }
     }
     private static nint? _StateIDOffset;
+    private AnimStateIDImpl? _StateIDInstance;
 
     public AnimStateID StateID
     {
         get
         {
             _StateIDOffset = _StateIDOffset ?? Schema.GetOffset(0xD984C8C65362B56B);
-            return new AnimStateIDImpl(_Handle + _StateIDOffset!.Value);
+            var instance = _StateIDInstance ??= new AnimStateIDImpl(0);
+            instance.DangerousSetHandle(_Handle + _StateIDOffset!.Value);
+            return instance;
         }
     }
     private static nint? _IsStartStateOffset;
+    private SchemaUntypedField? _IsStartStateInstance;
 
     public SchemaUntypedField IsStartState
     {
         get
         {
             _IsStartStateOffset = _IsStartStateOffset ?? Schema.GetOffset(0xD984C8C6B4CEE040);
-            return new SchemaUntypedField(_Handle + _IsStartStateOffset!.Value);
+            var instance = _IsStartStateInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _IsStartStateOffset!.Value);
+            return instance;
         }
     }
     private static nint? _IsEndStateOffset;
+    private SchemaUntypedField? _IsEndStateInstance;
 
     public SchemaUntypedField IsEndState
     {
         get
         {
             _IsEndStateOffset = _IsEndStateOffset ?? Schema.GetOffset(0xD984C8C65C2338AF);
-            return new SchemaUntypedField(_Handle + _IsEndStateOffset!.Value);
+            var instance = _IsEndStateInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _IsEndStateOffset!.Value);
+            return instance;
         }
     }
     private static nint? _IsPassthroughOffset;
+    private SchemaUntypedField? _IsPassthroughInstance;
 
     public SchemaUntypedField IsPassthrough
     {
         get
         {
             _IsPassthroughOffset = _IsPassthroughOffset ?? Schema.GetOffset(0xD984C8C6F0AD9431);
-            return new SchemaUntypedField(_Handle + _IsPassthroughOffset!.Value);
+            var instance = _IsPassthroughInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _IsPassthroughOffset!.Value);
+            return instance;
         }
     }
     private static nint? _IsPassthroughRootMotionOffset;
+    private SchemaUntypedField? _IsPassthroughRootMotionInstance;
 
     public SchemaUntypedField IsPassthroughRootMotion
     {
         get
         {
             _IsPassthroughRootMotionOffset = _IsPassthroughRootMotionOffset ?? Schema.GetOffset(0xD984C8C64B319C83);
-            return new SchemaUntypedField(_Handle + _IsPassthroughRootMotionOffset!.Value);
+            var instance = _IsPassthroughRootMotionInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _IsPassthroughRootMotionOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PreEvaluatePassthroughTransitionPathOffset;
+    private SchemaUntypedField? _PreEvaluatePassthroughTransitionPathInstance;
 
     public SchemaUntypedField PreEvaluatePassthroughTransitionPath
     {
         get
         {
             _PreEvaluatePassthroughTransitionPathOffset = _PreEvaluatePassthroughTransitionPathOffset ?? Schema.GetOffset(0xD984C8C60DFCB92D);
-            return new SchemaUntypedField(_Handle + _PreEvaluatePassthroughTransitionPathOffset!.Value);
+            var instance = _PreEvaluatePassthroughTransitionPathInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _PreEvaluatePassthroughTransitionPathOffset!.Value);
+            return instance;
         }
     }
 

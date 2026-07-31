@@ -17,13 +17,16 @@ internal partial class World_tImpl : SchemaClass, World_t
     public World_tImpl(nint handle) : base(handle) { }
 
     private static nint? _BuilderParamsOffset;
+    private WorldBuilderParams_tImpl? _BuilderParamsInstance;
 
     public WorldBuilderParams_t BuilderParams
     {
         get
         {
             _BuilderParamsOffset = _BuilderParamsOffset ?? Schema.GetOffset(0x4CBF8350CE4EEF26);
-            return new WorldBuilderParams_tImpl(_Handle + _BuilderParamsOffset!.Value);
+            var instance = _BuilderParamsInstance ??= new WorldBuilderParams_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _BuilderParamsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _WorldNodesOffset;
@@ -37,13 +40,16 @@ internal partial class World_tImpl : SchemaClass, World_t
         }
     }
     private static nint? _WorldLightingInfoOffset;
+    private BakedLightingInfo_tImpl? _WorldLightingInfoInstance;
 
     public BakedLightingInfo_t WorldLightingInfo
     {
         get
         {
             _WorldLightingInfoOffset = _WorldLightingInfoOffset ?? Schema.GetOffset(0x4CBF83508B843A17);
-            return new BakedLightingInfo_tImpl(_Handle + _WorldLightingInfoOffset!.Value);
+            var instance = _WorldLightingInfoInstance ??= new BakedLightingInfo_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _WorldLightingInfoOffset!.Value);
+            return instance;
         }
     }
     private static nint? _EntityLumpsOffset;

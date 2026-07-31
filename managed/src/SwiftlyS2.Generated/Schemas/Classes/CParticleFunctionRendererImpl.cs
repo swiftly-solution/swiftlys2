@@ -17,13 +17,16 @@ internal partial class CParticleFunctionRendererImpl : CParticleFunctionImpl, CP
     public CParticleFunctionRendererImpl(nint handle) : base(handle) { }
 
     private static nint? _VisibilityInputsOffset;
+    private CParticleVisibilityInputsImpl? _VisibilityInputsInstance;
 
     public CParticleVisibilityInputs VisibilityInputs
     {
         get
         {
             _VisibilityInputsOffset = _VisibilityInputsOffset ?? Schema.GetOffset(0xAE332DA3CF8264F8);
-            return new CParticleVisibilityInputsImpl(_Handle + _VisibilityInputsOffset!.Value);
+            var instance = _VisibilityInputsInstance ??= new CParticleVisibilityInputsImpl(0);
+            instance.DangerousSetHandle(_Handle + _VisibilityInputsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CannotBeRefractedOffset;

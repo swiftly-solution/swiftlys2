@@ -27,13 +27,16 @@ internal partial class CPlantedC4Impl : CBaseAnimGraphImpl, CPlantedC4
         }
     }
     private static nint? _C4BlowOffset;
+    private GameTime_tImpl? _C4BlowInstance;
 
     public GameTime_t C4Blow
     {
         get
         {
             _C4BlowOffset = _C4BlowOffset ?? Schema.GetOffset(0xE1614C812C4CFDAC);
-            return new GameTime_tImpl(_Handle + _C4BlowOffset!.Value);
+            var instance = _C4BlowInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _C4BlowOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BombSiteOffset;
@@ -67,13 +70,16 @@ internal partial class CPlantedC4Impl : CBaseAnimGraphImpl, CPlantedC4
         }
     }
     private static nint? _AttributeManagerOffset;
+    private CAttributeContainerImpl? _AttributeManagerInstance;
 
     public CAttributeContainer AttributeManager
     {
         get
         {
             _AttributeManagerOffset = _AttributeManagerOffset ?? Schema.GetOffset(0xE1614C81537B0586);
-            return new CAttributeContainerImpl(_Handle + _AttributeManagerOffset!.Value);
+            var instance = _AttributeManagerInstance ??= new CAttributeContainerImpl(0);
+            instance.DangerousSetHandle(_Handle + _AttributeManagerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OnBombDefusedOffset;
@@ -117,13 +123,16 @@ internal partial class CPlantedC4Impl : CBaseAnimGraphImpl, CPlantedC4
         }
     }
     private static nint? _EntitySpottedStateOffset;
+    private EntitySpottedState_tImpl? _EntitySpottedStateInstance;
 
     public EntitySpottedState_t EntitySpottedState
     {
         get
         {
             _EntitySpottedStateOffset = _EntitySpottedStateOffset ?? Schema.GetOffset(0xE1614C81032B547C);
-            return new EntitySpottedState_tImpl(_Handle + _EntitySpottedStateOffset!.Value);
+            var instance = _EntitySpottedStateInstance ??= new EntitySpottedState_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _EntitySpottedStateOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SpotRulesOffset;
@@ -187,13 +196,16 @@ internal partial class CPlantedC4Impl : CBaseAnimGraphImpl, CPlantedC4
         }
     }
     private static nint? _LastDefuseTimeOffset;
+    private GameTime_tImpl? _LastDefuseTimeInstance;
 
     public GameTime_t LastDefuseTime
     {
         get
         {
             _LastDefuseTimeOffset = _LastDefuseTimeOffset ?? Schema.GetOffset(0xE1614C81F3BD810E);
-            return new GameTime_tImpl(_Handle + _LastDefuseTimeOffset!.Value);
+            var instance = _LastDefuseTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastDefuseTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DefuseLengthOffset;
@@ -207,13 +219,16 @@ internal partial class CPlantedC4Impl : CBaseAnimGraphImpl, CPlantedC4
         }
     }
     private static nint? _DefuseCountDownOffset;
+    private GameTime_tImpl? _DefuseCountDownInstance;
 
     public GameTime_t DefuseCountDown
     {
         get
         {
             _DefuseCountDownOffset = _DefuseCountDownOffset ?? Schema.GetOffset(0xE1614C81BCF3DB7C);
-            return new GameTime_tImpl(_Handle + _DefuseCountDownOffset!.Value);
+            var instance = _DefuseCountDownInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _DefuseCountDownOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BombDefuserOffset;
@@ -246,18 +261,30 @@ internal partial class CPlantedC4Impl : CBaseAnimGraphImpl, CPlantedC4
             return ref _Handle.AsRef<bool>(_VoiceAlertFiredOffset!.Value);
         }
     }
+    private static nint? _VoiceAlertPlayedOffset;
+    private SchemaFixedArray<bool>? _VoiceAlertPlayedInstance;
+
     public ISchemaFixedArray<bool> VoiceAlertPlayed
     {
-        get => new SchemaFixedArray<bool>(_Handle, 0xE1614C812559EA7A, 4, 1, 1);
+        get
+        {
+            _VoiceAlertPlayedOffset = _VoiceAlertPlayedOffset ?? Schema.GetOffset(0xE1614C812559EA7A);
+            var instance = _VoiceAlertPlayedInstance ??= new SchemaFixedArray<bool>(0, 0xE1614C812559EA7A, 4, 1, 1);
+            instance.DangerousSetHandle(_Handle + _VoiceAlertPlayedOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _NextBotBeepTimeOffset;
+    private GameTime_tImpl? _NextBotBeepTimeInstance;
 
     public GameTime_t NextBotBeepTime
     {
         get
         {
             _NextBotBeepTimeOffset = _NextBotBeepTimeOffset ?? Schema.GetOffset(0xE1614C81DCAF5642);
-            return new GameTime_tImpl(_Handle + _NextBotBeepTimeOffset!.Value);
+            var instance = _NextBotBeepTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NextBotBeepTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CatchUpToPlayerEyeOffset;
@@ -271,13 +298,16 @@ internal partial class CPlantedC4Impl : CBaseAnimGraphImpl, CPlantedC4
         }
     }
     private static nint? _LastSpinDetectionTimeOffset;
+    private GameTime_tImpl? _LastSpinDetectionTimeInstance;
 
     public GameTime_t LastSpinDetectionTime
     {
         get
         {
             _LastSpinDetectionTimeOffset = _LastSpinDetectionTimeOffset ?? Schema.GetOffset(0xE1614C811BF3E683);
-            return new GameTime_tImpl(_Handle + _LastSpinDetectionTimeOffset!.Value);
+            var instance = _LastSpinDetectionTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastSpinDetectionTimeOffset!.Value);
+            return instance;
         }
     }
 

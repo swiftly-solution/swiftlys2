@@ -16,9 +16,18 @@ internal partial class CAnimNodePathImpl : SchemaClass, CAnimNodePath
 {
     public CAnimNodePathImpl(nint handle) : base(handle) { }
 
+    private static nint? _PathOffset;
+    private SchemaClassFixedArray<AnimNodeID>? _PathInstance;
+
     public ISchemaClassFixedArray<AnimNodeID> Path
     {
-        get => new SchemaClassFixedArray<AnimNodeID>(_Handle, 0xE070E30C2915C8D6, 11, 4, 4);
+        get
+        {
+            _PathOffset = _PathOffset ?? Schema.GetOffset(0xE070E30C2915C8D6);
+            var instance = _PathInstance ??= new SchemaClassFixedArray<AnimNodeID>(0, 0xE070E30C2915C8D6, 11, 4, 4);
+            instance.DangerousSetHandle(_Handle + _PathOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _CountOffset;
 

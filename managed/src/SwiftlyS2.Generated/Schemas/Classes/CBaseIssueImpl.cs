@@ -77,6 +77,7 @@ internal partial class CBaseIssueImpl : SchemaClass, CBaseIssue
         }
     }
     private static nint? _VoteControllerOffset;
+    private CVoteControllerImpl? _VoteControllerInstance;
 
     public CVoteController? VoteController
     {
@@ -84,7 +85,10 @@ internal partial class CBaseIssueImpl : SchemaClass, CBaseIssue
         {
             _VoteControllerOffset = _VoteControllerOffset ?? Schema.GetOffset(0xE0727D1ECB818C7B);
             var ptr = _Handle.Read<nint>(_VoteControllerOffset!.Value);
-            return ptr.IsValidPtr() ? new CVoteControllerImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _VoteControllerInstance ??= new CVoteControllerImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
 

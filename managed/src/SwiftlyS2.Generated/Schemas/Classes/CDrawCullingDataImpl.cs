@@ -16,9 +16,18 @@ internal partial class CDrawCullingDataImpl : SchemaClass, CDrawCullingData
 {
     public CDrawCullingDataImpl(nint handle) : base(handle) { }
 
+    private static nint? _ConeAxisOffset;
+    private SchemaFixedArray<byte>? _ConeAxisInstance;
+
     public ISchemaFixedArray<byte> ConeAxis
     {
-        get => new SchemaFixedArray<byte>(_Handle, 0x80665970C59E234F, 3, 1, 1);
+        get
+        {
+            _ConeAxisOffset = _ConeAxisOffset ?? Schema.GetOffset(0x80665970C59E234F);
+            var instance = _ConeAxisInstance ??= new SchemaFixedArray<byte>(0, 0x80665970C59E234F, 3, 1, 1);
+            instance.DangerousSetHandle(_Handle + _ConeAxisOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _ConeCutoffOffset;
 

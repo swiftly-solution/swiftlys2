@@ -17,13 +17,16 @@ internal partial class CMoverUpdateNodeImpl : CUnaryUpdateNodeImpl, CMoverUpdate
     public CMoverUpdateNodeImpl(nint handle) : base(handle) { }
 
     private static nint? _DampingOffset;
+    private CAnimInputDampingImpl? _DampingInstance;
 
     public CAnimInputDamping Damping
     {
         get
         {
             _DampingOffset = _DampingOffset ?? Schema.GetOffset(0x42BA18A215440FB5);
-            return new CAnimInputDampingImpl(_Handle + _DampingOffset!.Value);
+            var instance = _DampingInstance ??= new CAnimInputDampingImpl(0);
+            instance.DangerousSetHandle(_Handle + _DampingOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FacingTargetOffset;
@@ -37,33 +40,42 @@ internal partial class CMoverUpdateNodeImpl : CUnaryUpdateNodeImpl, CMoverUpdate
         }
     }
     private static nint? _MoveVecParamOffset;
+    private CAnimParamHandleImpl? _MoveVecParamInstance;
 
     public CAnimParamHandle MoveVecParam
     {
         get
         {
             _MoveVecParamOffset = _MoveVecParamOffset ?? Schema.GetOffset(0x42BA18A22C2934BD);
-            return new CAnimParamHandleImpl(_Handle + _MoveVecParamOffset!.Value);
+            var instance = _MoveVecParamInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _MoveVecParamOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MoveHeadingParamOffset;
+    private CAnimParamHandleImpl? _MoveHeadingParamInstance;
 
     public CAnimParamHandle MoveHeadingParam
     {
         get
         {
             _MoveHeadingParamOffset = _MoveHeadingParamOffset ?? Schema.GetOffset(0x42BA18A283A456D1);
-            return new CAnimParamHandleImpl(_Handle + _MoveHeadingParamOffset!.Value);
+            var instance = _MoveHeadingParamInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _MoveHeadingParamOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TurnToFaceParamOffset;
+    private CAnimParamHandleImpl? _TurnToFaceParamInstance;
 
     public CAnimParamHandle TurnToFaceParam
     {
         get
         {
             _TurnToFaceParamOffset = _TurnToFaceParamOffset ?? Schema.GetOffset(0x42BA18A275778205);
-            return new CAnimParamHandleImpl(_Handle + _TurnToFaceParamOffset!.Value);
+            var instance = _TurnToFaceParamInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _TurnToFaceParamOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TurnToFaceOffsetOffset;

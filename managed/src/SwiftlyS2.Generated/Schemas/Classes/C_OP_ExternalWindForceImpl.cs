@@ -17,23 +17,29 @@ internal partial class C_OP_ExternalWindForceImpl : CParticleFunctionForceImpl, 
     public C_OP_ExternalWindForceImpl(nint handle) : base(handle) { }
 
     private static nint? _SamplePositionOffset;
+    private CPerParticleVecInputImpl? _SamplePositionInstance;
 
     public CPerParticleVecInput SamplePosition
     {
         get
         {
             _SamplePositionOffset = _SamplePositionOffset ?? Schema.GetOffset(0xFE6646FBC3F6C534);
-            return new CPerParticleVecInputImpl(_Handle + _SamplePositionOffset!.Value);
+            var instance = _SamplePositionInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _SamplePositionOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ScaleOffset;
+    private CPerParticleVecInputImpl? _ScaleInstance;
 
     public CPerParticleVecInput Scale
     {
         get
         {
             _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0xFE6646FB5F596B51);
-            return new CPerParticleVecInputImpl(_Handle + _ScaleOffset!.Value);
+            var instance = _ScaleInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SampleWindOffset;
@@ -77,13 +83,16 @@ internal partial class C_OP_ExternalWindForceImpl : CParticleFunctionForceImpl, 
         }
     }
     private static nint? _GravityForceOffset;
+    private CPerParticleVecInputImpl? _GravityForceInstance;
 
     public CPerParticleVecInput GravityForce
     {
         get
         {
             _GravityForceOffset = _GravityForceOffset ?? Schema.GetOffset(0xFE6646FB2E2EF2C4);
-            return new CPerParticleVecInputImpl(_Handle + _GravityForceOffset!.Value);
+            var instance = _GravityForceInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _GravityForceOffset!.Value);
+            return instance;
         }
     }
     private static nint? _UseBasicMovementGravityOffset;
@@ -97,33 +106,42 @@ internal partial class C_OP_ExternalWindForceImpl : CParticleFunctionForceImpl, 
         }
     }
     private static nint? _LocalGravityScaleOffset;
+    private CPerParticleFloatInputImpl? _LocalGravityScaleInstance;
 
     public CPerParticleFloatInput LocalGravityScale
     {
         get
         {
             _LocalGravityScaleOffset = _LocalGravityScaleOffset ?? Schema.GetOffset(0xFE6646FBD7EB148E);
-            return new CPerParticleFloatInputImpl(_Handle + _LocalGravityScaleOffset!.Value);
+            var instance = _LocalGravityScaleInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _LocalGravityScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LocalBuoyancyScaleOffset;
+    private CPerParticleFloatInputImpl? _LocalBuoyancyScaleInstance;
 
     public CPerParticleFloatInput LocalBuoyancyScale
     {
         get
         {
             _LocalBuoyancyScaleOffset = _LocalBuoyancyScaleOffset ?? Schema.GetOffset(0xFE6646FBC6A6171E);
-            return new CPerParticleFloatInputImpl(_Handle + _LocalBuoyancyScaleOffset!.Value);
+            var instance = _LocalBuoyancyScaleInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _LocalBuoyancyScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BuoyancyForceOffset;
+    private CPerParticleVecInputImpl? _BuoyancyForceInstance;
 
     public CPerParticleVecInput BuoyancyForce
     {
         get
         {
             _BuoyancyForceOffset = _BuoyancyForceOffset ?? Schema.GetOffset(0xFE6646FBCA7F361E);
-            return new CPerParticleVecInputImpl(_Handle + _BuoyancyForceOffset!.Value);
+            var instance = _BuoyancyForceInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _BuoyancyForceOffset!.Value);
+            return instance;
         }
     }
 

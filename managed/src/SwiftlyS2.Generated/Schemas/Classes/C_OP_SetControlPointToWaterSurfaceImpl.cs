@@ -67,13 +67,16 @@ internal partial class C_OP_SetControlPointToWaterSurfaceImpl : CParticleFunctio
         }
     }
     private static nint? _RetestRateOffset;
+    private CParticleCollectionFloatInputImpl? _RetestRateInstance;
 
     public CParticleCollectionFloatInput RetestRate
     {
         get
         {
             _RetestRateOffset = _RetestRateOffset ?? Schema.GetOffset(0x5BA6BFAD38DA66AC);
-            return new CParticleCollectionFloatInputImpl(_Handle + _RetestRateOffset!.Value);
+            var instance = _RetestRateInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _RetestRateOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AdaptiveThresholdOffset;

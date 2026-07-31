@@ -17,13 +17,16 @@ internal partial class RnCompoundDesc_tImpl : RnShapeDesc_tImpl, RnCompoundDesc_
     public RnCompoundDesc_tImpl(nint handle) : base(handle) { }
 
     private static nint? _CompoundOffset;
+    private RnCompound_tImpl? _CompoundInstance;
 
     public RnCompound_t Compound
     {
         get
         {
             _CompoundOffset = _CompoundOffset ?? Schema.GetOffset(0x406628122A63725C);
-            return new RnCompound_tImpl(_Handle + _CompoundOffset!.Value);
+            var instance = _CompoundInstance ??= new RnCompound_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _CompoundOffset!.Value);
+            return instance;
         }
     }
 

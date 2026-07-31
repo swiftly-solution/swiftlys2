@@ -67,23 +67,29 @@ internal partial class CMathCounterImpl : CLogicalEntityImpl, CMathCounter
         }
     }
     private static nint? _OutValueOffset;
+    private SchemaUntypedField? _OutValueInstance;
 
     public SchemaUntypedField OutValue
     {
         get
         {
             _OutValueOffset = _OutValueOffset ?? Schema.GetOffset(0x516742BCB5358CB4);
-            return new SchemaUntypedField(_Handle + _OutValueOffset!.Value);
+            var instance = _OutValueInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OutValueOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OnGetValueOffset;
+    private SchemaUntypedField? _OnGetValueInstance;
 
     public SchemaUntypedField OnGetValue
     {
         get
         {
             _OnGetValueOffset = _OnGetValueOffset ?? Schema.GetOffset(0x516742BC4246EF45);
-            return new SchemaUntypedField(_Handle + _OnGetValueOffset!.Value);
+            var instance = _OnGetValueInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OnGetValueOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OnHitMinOffset;

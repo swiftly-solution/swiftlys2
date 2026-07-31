@@ -37,13 +37,16 @@ internal partial class CBtNodeConditionInactiveImpl : CBtNodeConditionImpl, CBtN
         }
     }
     private static nint? _SensorInactivityTimerOffset;
+    private CountdownTimerImpl? _SensorInactivityTimerInstance;
 
     public CountdownTimer SensorInactivityTimer
     {
         get
         {
             _SensorInactivityTimerOffset = _SensorInactivityTimerOffset ?? Schema.GetOffset(0x1AB44FB0D921DF72);
-            return new CountdownTimerImpl(_Handle + _SensorInactivityTimerOffset!.Value);
+            var instance = _SensorInactivityTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _SensorInactivityTimerOffset!.Value);
+            return instance;
         }
     }
 

@@ -27,6 +27,7 @@ internal partial class CGameSceneNodeImpl : SchemaClass, CGameSceneNode
         }
     }
     private static nint? _OwnerOffset;
+    private CEntityInstanceImpl? _OwnerInstance;
 
     public CEntityInstance? Owner
     {
@@ -34,10 +35,14 @@ internal partial class CGameSceneNodeImpl : SchemaClass, CGameSceneNode
         {
             _OwnerOffset = _OwnerOffset ?? Schema.GetOffset(0xD9451D9406B325DA);
             var ptr = _Handle.Read<nint>(_OwnerOffset!.Value);
-            return ptr.IsValidPtr() ? new CEntityInstanceImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _OwnerInstance ??= new CEntityInstanceImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _ParentOffset;
+    private CGameSceneNodeImpl? _ParentInstance;
 
     public CGameSceneNode? Parent
     {
@@ -45,10 +50,14 @@ internal partial class CGameSceneNodeImpl : SchemaClass, CGameSceneNode
         {
             _ParentOffset = _ParentOffset ?? Schema.GetOffset(0xD9451D94B89C7C3F);
             var ptr = _Handle.Read<nint>(_ParentOffset!.Value);
-            return ptr.IsValidPtr() ? new CGameSceneNodeImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _ParentInstance ??= new CGameSceneNodeImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _ChildOffset;
+    private CGameSceneNodeImpl? _ChildInstance;
 
     public CGameSceneNode? Child
     {
@@ -56,10 +65,14 @@ internal partial class CGameSceneNodeImpl : SchemaClass, CGameSceneNode
         {
             _ChildOffset = _ChildOffset ?? Schema.GetOffset(0xD9451D944A0B773F);
             var ptr = _Handle.Read<nint>(_ChildOffset!.Value);
-            return ptr.IsValidPtr() ? new CGameSceneNodeImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _ChildInstance ??= new CGameSceneNodeImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _NextSiblingOffset;
+    private CGameSceneNodeImpl? _NextSiblingInstance;
 
     public CGameSceneNode? NextSibling
     {
@@ -67,27 +80,36 @@ internal partial class CGameSceneNodeImpl : SchemaClass, CGameSceneNode
         {
             _NextSiblingOffset = _NextSiblingOffset ?? Schema.GetOffset(0xD9451D9440E828FC);
             var ptr = _Handle.Read<nint>(_NextSiblingOffset!.Value);
-            return ptr.IsValidPtr() ? new CGameSceneNodeImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _NextSiblingInstance ??= new CGameSceneNodeImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _Parent1Offset;
+    private CGameSceneNodeHandleImpl? _Parent1Instance;
 
     public CGameSceneNodeHandle Parent1
     {
         get
         {
             _Parent1Offset = _Parent1Offset ?? Schema.GetOffset(0xD9451D949FD3A1B7);
-            return new CGameSceneNodeHandleImpl(_Handle + _Parent1Offset!.Value);
+            var instance = _Parent1Instance ??= new CGameSceneNodeHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _Parent1Offset!.Value);
+            return instance;
         }
     }
     private static nint? _OriginOffset;
+    private CNetworkOriginCellCoordQuantizedVectorImpl? _OriginInstance;
 
     public CNetworkOriginCellCoordQuantizedVector Origin
     {
         get
         {
             _OriginOffset = _OriginOffset ?? Schema.GetOffset(0xD9451D94559D81AF);
-            return new CNetworkOriginCellCoordQuantizedVectorImpl(_Handle + _OriginOffset!.Value);
+            var instance = _OriginInstance ??= new CNetworkOriginCellCoordQuantizedVectorImpl(0);
+            instance.DangerousSetHandle(_Handle + _OriginOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RotationOffset;
@@ -181,93 +203,120 @@ internal partial class CGameSceneNodeImpl : SchemaClass, CGameSceneNode
         }
     }
     private static nint? _DirtyHierarchyOffset;
+    private SchemaUntypedField? _DirtyHierarchyInstance;
 
     public SchemaUntypedField DirtyHierarchy
     {
         get
         {
             _DirtyHierarchyOffset = _DirtyHierarchyOffset ?? Schema.GetOffset(0xD9451D947012AE3E);
-            return new SchemaUntypedField(_Handle + _DirtyHierarchyOffset!.Value);
+            var instance = _DirtyHierarchyInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _DirtyHierarchyOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DirtyBoneMergeInfoOffset;
+    private SchemaUntypedField? _DirtyBoneMergeInfoInstance;
 
     public SchemaUntypedField DirtyBoneMergeInfo
     {
         get
         {
             _DirtyBoneMergeInfoOffset = _DirtyBoneMergeInfoOffset ?? Schema.GetOffset(0xD9451D94C0CDCFD7);
-            return new SchemaUntypedField(_Handle + _DirtyBoneMergeInfoOffset!.Value);
+            var instance = _DirtyBoneMergeInfoInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _DirtyBoneMergeInfoOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NetworkedPositionChangedOffset;
+    private SchemaUntypedField? _NetworkedPositionChangedInstance;
 
     public SchemaUntypedField NetworkedPositionChanged
     {
         get
         {
             _NetworkedPositionChangedOffset = _NetworkedPositionChangedOffset ?? Schema.GetOffset(0xD9451D94CE9CD1FD);
-            return new SchemaUntypedField(_Handle + _NetworkedPositionChangedOffset!.Value);
+            var instance = _NetworkedPositionChangedInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _NetworkedPositionChangedOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NetworkedAnglesChangedOffset;
+    private SchemaUntypedField? _NetworkedAnglesChangedInstance;
 
     public SchemaUntypedField NetworkedAnglesChanged
     {
         get
         {
             _NetworkedAnglesChangedOffset = _NetworkedAnglesChangedOffset ?? Schema.GetOffset(0xD9451D944D31E168);
-            return new SchemaUntypedField(_Handle + _NetworkedAnglesChangedOffset!.Value);
+            var instance = _NetworkedAnglesChangedInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _NetworkedAnglesChangedOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NetworkedScaleChangedOffset;
+    private SchemaUntypedField? _NetworkedScaleChangedInstance;
 
     public SchemaUntypedField NetworkedScaleChanged
     {
         get
         {
             _NetworkedScaleChangedOffset = _NetworkedScaleChangedOffset ?? Schema.GetOffset(0xD9451D94FBE9F8E2);
-            return new SchemaUntypedField(_Handle + _NetworkedScaleChangedOffset!.Value);
+            var instance = _NetworkedScaleChangedInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _NetworkedScaleChangedOffset!.Value);
+            return instance;
         }
     }
     private static nint? _WillBeCallingPostDataUpdateOffset;
+    private SchemaUntypedField? _WillBeCallingPostDataUpdateInstance;
 
     public SchemaUntypedField WillBeCallingPostDataUpdate
     {
         get
         {
             _WillBeCallingPostDataUpdateOffset = _WillBeCallingPostDataUpdateOffset ?? Schema.GetOffset(0xD9451D94352742F3);
-            return new SchemaUntypedField(_Handle + _WillBeCallingPostDataUpdateOffset!.Value);
+            var instance = _WillBeCallingPostDataUpdateInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _WillBeCallingPostDataUpdateOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BoneMergeFlexOffset;
+    private SchemaUntypedField? _BoneMergeFlexInstance;
 
     public SchemaUntypedField BoneMergeFlex
     {
         get
         {
             _BoneMergeFlexOffset = _BoneMergeFlexOffset ?? Schema.GetOffset(0xD9451D948B6BC852);
-            return new SchemaUntypedField(_Handle + _BoneMergeFlexOffset!.Value);
+            var instance = _BoneMergeFlexInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _BoneMergeFlexOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LatchAbsOriginOffset;
+    private SchemaUntypedField? _LatchAbsOriginInstance;
 
     public SchemaUntypedField LatchAbsOrigin
     {
         get
         {
             _LatchAbsOriginOffset = _LatchAbsOriginOffset ?? Schema.GetOffset(0xD9451D94BB41CC11);
-            return new SchemaUntypedField(_Handle + _LatchAbsOriginOffset!.Value);
+            var instance = _LatchAbsOriginInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _LatchAbsOriginOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DirtyBoneMergeBoneToRootOffset;
+    private SchemaUntypedField? _DirtyBoneMergeBoneToRootInstance;
 
     public SchemaUntypedField DirtyBoneMergeBoneToRoot
     {
         get
         {
             _DirtyBoneMergeBoneToRootOffset = _DirtyBoneMergeBoneToRootOffset ?? Schema.GetOffset(0xD9451D9472001FC8);
-            return new SchemaUntypedField(_Handle + _DirtyBoneMergeBoneToRootOffset!.Value);
+            var instance = _DirtyBoneMergeBoneToRootInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _DirtyBoneMergeBoneToRootOffset!.Value);
+            return instance;
         }
     }
     private static nint? _HierarchicalDepthOffset;

@@ -16,21 +16,57 @@ internal partial class CInfernoImpl : CBaseModelEntityImpl, CInferno
 {
     public CInfernoImpl(nint handle) : base(handle) { }
 
+    private static nint? _FirePositionsOffset;
+    private SchemaFixedArray<Vector>? _FirePositionsInstance;
+
     public ISchemaFixedArray<Vector> FirePositions
     {
-        get => new SchemaFixedArray<Vector>(_Handle, 0xABE104C91E992007, 64, 12, 4);
+        get
+        {
+            _FirePositionsOffset = _FirePositionsOffset ?? Schema.GetOffset(0xABE104C91E992007);
+            var instance = _FirePositionsInstance ??= new SchemaFixedArray<Vector>(0, 0xABE104C91E992007, 64, 12, 4);
+            instance.DangerousSetHandle(_Handle + _FirePositionsOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _FireParentPositionsOffset;
+    private SchemaFixedArray<Vector>? _FireParentPositionsInstance;
+
     public ISchemaFixedArray<Vector> FireParentPositions
     {
-        get => new SchemaFixedArray<Vector>(_Handle, 0xABE104C9A58B35D7, 64, 12, 4);
+        get
+        {
+            _FireParentPositionsOffset = _FireParentPositionsOffset ?? Schema.GetOffset(0xABE104C9A58B35D7);
+            var instance = _FireParentPositionsInstance ??= new SchemaFixedArray<Vector>(0, 0xABE104C9A58B35D7, 64, 12, 4);
+            instance.DangerousSetHandle(_Handle + _FireParentPositionsOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _FireIsBurningOffset;
+    private SchemaFixedArray<bool>? _FireIsBurningInstance;
+
     public ISchemaFixedArray<bool> FireIsBurning
     {
-        get => new SchemaFixedArray<bool>(_Handle, 0xABE104C9E5CD906C, 64, 1, 1);
+        get
+        {
+            _FireIsBurningOffset = _FireIsBurningOffset ?? Schema.GetOffset(0xABE104C9E5CD906C);
+            var instance = _FireIsBurningInstance ??= new SchemaFixedArray<bool>(0, 0xABE104C9E5CD906C, 64, 1, 1);
+            instance.DangerousSetHandle(_Handle + _FireIsBurningOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _BurnNormalOffset;
+    private SchemaFixedArray<Vector>? _BurnNormalInstance;
+
     public ISchemaFixedArray<Vector> BurnNormal
     {
-        get => new SchemaFixedArray<Vector>(_Handle, 0xABE104C9382663DB, 64, 12, 4);
+        get
+        {
+            _BurnNormalOffset = _BurnNormalOffset ?? Schema.GetOffset(0xABE104C9382663DB);
+            var instance = _BurnNormalInstance ??= new SchemaFixedArray<Vector>(0, 0xABE104C9382663DB, 64, 12, 4);
+            instance.DangerousSetHandle(_Handle + _BurnNormalOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _FireCountOffset;
 
@@ -93,33 +129,42 @@ internal partial class CInfernoImpl : CBaseModelEntityImpl, CInferno
         }
     }
     private static nint? _ExtentOffset;
+    private ExtentImpl? _ExtentInstance;
 
     public Extent Extent
     {
         get
         {
             _ExtentOffset = _ExtentOffset ?? Schema.GetOffset(0xABE104C9DD2CA0B9);
-            return new ExtentImpl(_Handle + _ExtentOffset!.Value);
+            var instance = _ExtentInstance ??= new ExtentImpl(0);
+            instance.DangerousSetHandle(_Handle + _ExtentOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DamageTimerOffset;
+    private CountdownTimerImpl? _DamageTimerInstance;
 
     public CountdownTimer DamageTimer
     {
         get
         {
             _DamageTimerOffset = _DamageTimerOffset ?? Schema.GetOffset(0xABE104C979F45751);
-            return new CountdownTimerImpl(_Handle + _DamageTimerOffset!.Value);
+            var instance = _DamageTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _DamageTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DamageRampTimerOffset;
+    private CountdownTimerImpl? _DamageRampTimerInstance;
 
     public CountdownTimer DamageRampTimer
     {
         get
         {
             _DamageRampTimerOffset = _DamageRampTimerOffset ?? Schema.GetOffset(0xABE104C9400054C9);
-            return new CountdownTimerImpl(_Handle + _DamageRampTimerOffset!.Value);
+            var instance = _DamageRampTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _DamageRampTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SplashVelocityOffset;
@@ -163,13 +208,16 @@ internal partial class CInfernoImpl : CBaseModelEntityImpl, CInferno
         }
     }
     private static nint? _ActiveTimerOffset;
+    private IntervalTimerImpl? _ActiveTimerInstance;
 
     public IntervalTimer ActiveTimer
     {
         get
         {
             _ActiveTimerOffset = _ActiveTimerOffset ?? Schema.GetOffset(0xABE104C946FF8D04);
-            return new IntervalTimerImpl(_Handle + _ActiveTimerOffset!.Value);
+            var instance = _ActiveTimerInstance ??= new IntervalTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _ActiveTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FireSpawnOffsetOffset;
@@ -203,23 +251,29 @@ internal partial class CInfernoImpl : CBaseModelEntityImpl, CInferno
         }
     }
     private static nint? _BookkeepingTimerOffset;
+    private CountdownTimerImpl? _BookkeepingTimerInstance;
 
     public CountdownTimer BookkeepingTimer
     {
         get
         {
             _BookkeepingTimerOffset = _BookkeepingTimerOffset ?? Schema.GetOffset(0xABE104C975065DCC);
-            return new CountdownTimerImpl(_Handle + _BookkeepingTimerOffset!.Value);
+            var instance = _BookkeepingTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _BookkeepingTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NextSpreadTimerOffset;
+    private CountdownTimerImpl? _NextSpreadTimerInstance;
 
     public CountdownTimer NextSpreadTimer
     {
         get
         {
             _NextSpreadTimerOffset = _NextSpreadTimerOffset ?? Schema.GetOffset(0xABE104C93045281C);
-            return new CountdownTimerImpl(_Handle + _NextSpreadTimerOffset!.Value);
+            var instance = _NextSpreadTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _NextSpreadTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SourceItemDefIndexOffset;

@@ -17,23 +17,29 @@ internal partial class CNmEventImpl : SchemaClass, CNmEvent
     public CNmEventImpl(nint handle) : base(handle) { }
 
     private static nint? _StartTimeOffset;
+    private NmPercent_tImpl? _StartTimeInstance;
 
     public NmPercent_t StartTime
     {
         get
         {
             _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0xF987100967FE9DC4);
-            return new NmPercent_tImpl(_Handle + _StartTimeOffset!.Value);
+            var instance = _StartTimeInstance ??= new NmPercent_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _StartTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DurationOffset;
+    private NmPercent_tImpl? _DurationInstance;
 
     public NmPercent_t Duration
     {
         get
         {
             _DurationOffset = _DurationOffset ?? Schema.GetOffset(0xF9871009BC5E3BAB);
-            return new NmPercent_tImpl(_Handle + _DurationOffset!.Value);
+            var instance = _DurationInstance ??= new NmPercent_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _DurationOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SyncIDOffset;

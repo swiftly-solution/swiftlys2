@@ -17,13 +17,16 @@ internal partial class CPulse_PublicOutputImpl : SchemaClass, CPulse_PublicOutpu
     public CPulse_PublicOutputImpl(nint handle) : base(handle) { }
 
     private static nint? _NameOffset;
+    private SchemaUntypedField? _NameInstance;
 
     public SchemaUntypedField Name
     {
         get
         {
             _NameOffset = _NameOffset ?? Schema.GetOffset(0x74B3BCA4CAE8A266);
-            return new SchemaUntypedField(_Handle + _NameOffset!.Value);
+            var instance = _NameInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _NameOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DescriptionOffset;

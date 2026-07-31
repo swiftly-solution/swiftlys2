@@ -17,13 +17,16 @@ internal partial class CStateActionUpdaterImpl : SchemaClass, CStateActionUpdate
     public CStateActionUpdaterImpl(nint handle) : base(handle) { }
 
     private static nint? _ActionOffset;
+    private SchemaUntypedField? _ActionInstance;
 
     public SchemaUntypedField Action
     {
         get
         {
             _ActionOffset = _ActionOffset ?? Schema.GetOffset(0xCA33DCAAE9CB47D5);
-            return new SchemaUntypedField(_Handle + _ActionOffset!.Value);
+            var instance = _ActionInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ActionOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BehaviorOffset;

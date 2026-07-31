@@ -17,53 +17,68 @@ internal partial class C_INIT_MoveBetweenPointsImpl : CParticleFunctionInitializ
     public C_INIT_MoveBetweenPointsImpl(nint handle) : base(handle) { }
 
     private static nint? _SpeedMinOffset;
+    private CPerParticleFloatInputImpl? _SpeedMinInstance;
 
     public CPerParticleFloatInput SpeedMin
     {
         get
         {
             _SpeedMinOffset = _SpeedMinOffset ?? Schema.GetOffset(0xE2F19642B52776BE);
-            return new CPerParticleFloatInputImpl(_Handle + _SpeedMinOffset!.Value);
+            var instance = _SpeedMinInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _SpeedMinOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SpeedMaxOffset;
+    private CPerParticleFloatInputImpl? _SpeedMaxInstance;
 
     public CPerParticleFloatInput SpeedMax
     {
         get
         {
             _SpeedMaxOffset = _SpeedMaxOffset ?? Schema.GetOffset(0xE2F19642C7140B5C);
-            return new CPerParticleFloatInputImpl(_Handle + _SpeedMaxOffset!.Value);
+            var instance = _SpeedMaxInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _SpeedMaxOffset!.Value);
+            return instance;
         }
     }
     private static nint? _EndSpreadOffset;
+    private CPerParticleFloatInputImpl? _EndSpreadInstance;
 
     public CPerParticleFloatInput EndSpread
     {
         get
         {
             _EndSpreadOffset = _EndSpreadOffset ?? Schema.GetOffset(0xE2F196423D9143DB);
-            return new CPerParticleFloatInputImpl(_Handle + _EndSpreadOffset!.Value);
+            var instance = _EndSpreadInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _EndSpreadOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StartOffsetOffset;
+    private CPerParticleFloatInputImpl? _StartOffsetInstance;
 
     public CPerParticleFloatInput StartOffset
     {
         get
         {
             _StartOffsetOffset = _StartOffsetOffset ?? Schema.GetOffset(0xE2F1964269A449AA);
-            return new CPerParticleFloatInputImpl(_Handle + _StartOffsetOffset!.Value);
+            var instance = _StartOffsetInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _StartOffsetOffset!.Value);
+            return instance;
         }
     }
     private static nint? _EndOffsetOffset;
+    private CPerParticleFloatInputImpl? _EndOffsetInstance;
 
     public CPerParticleFloatInput EndOffset
     {
         get
         {
             _EndOffsetOffset = _EndOffsetOffset ?? Schema.GetOffset(0xE2F19642C863E027);
-            return new CPerParticleFloatInputImpl(_Handle + _EndOffsetOffset!.Value);
+            var instance = _EndOffsetInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _EndOffsetOffset!.Value);
+            return instance;
         }
     }
     private static nint? _EndControlPointNumberOffset;

@@ -57,23 +57,29 @@ internal partial class CCSWeaponBaseImpl : CBasePlayerWeaponImpl, CCSWeaponBase
         }
     }
     private static nint? _WeaponGameplayAnimStateTimestampOffset;
+    private GameTime_tImpl? _WeaponGameplayAnimStateTimestampInstance;
 
     public GameTime_t WeaponGameplayAnimStateTimestamp
     {
         get
         {
             _WeaponGameplayAnimStateTimestampOffset = _WeaponGameplayAnimStateTimestampOffset ?? Schema.GetOffset(0x8102BA51180F65AD);
-            return new GameTime_tImpl(_Handle + _WeaponGameplayAnimStateTimestampOffset!.Value);
+            var instance = _WeaponGameplayAnimStateTimestampInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _WeaponGameplayAnimStateTimestampOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InspectCancelCompleteTimeOffset;
+    private GameTime_tImpl? _InspectCancelCompleteTimeInstance;
 
     public GameTime_t InspectCancelCompleteTime
     {
         get
         {
             _InspectCancelCompleteTimeOffset = _InspectCancelCompleteTimeOffset ?? Schema.GetOffset(0x8102BA51A9C029E5);
-            return new GameTime_tImpl(_Handle + _InspectCancelCompleteTimeOffset!.Value);
+            var instance = _InspectCancelCompleteTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _InspectCancelCompleteTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InspectPendingOffset;
@@ -177,13 +183,16 @@ internal partial class CCSWeaponBaseImpl : CBasePlayerWeaponImpl, CCSWeaponBase
         }
     }
     private static nint? _LastAccuracyUpdateTimeOffset;
+    private GameTime_tImpl? _LastAccuracyUpdateTimeInstance;
 
     public GameTime_t LastAccuracyUpdateTime
     {
         get
         {
             _LastAccuracyUpdateTimeOffset = _LastAccuracyUpdateTimeOffset ?? Schema.GetOffset(0x8102BA514B746ABE);
-            return new GameTime_tImpl(_Handle + _LastAccuracyUpdateTimeOffset!.Value);
+            var instance = _LastAccuracyUpdateTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastAccuracyUpdateTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AccuracySmoothedForZoomOffset;
@@ -227,13 +236,16 @@ internal partial class CCSWeaponBaseImpl : CBasePlayerWeaponImpl, CCSWeaponBase
         }
     }
     private static nint? _PostponeFireReadyTicksOffset;
+    private GameTick_tImpl? _PostponeFireReadyTicksInstance;
 
     public GameTick_t PostponeFireReadyTicks
     {
         get
         {
             _PostponeFireReadyTicksOffset = _PostponeFireReadyTicksOffset ?? Schema.GetOffset(0x8102BA51EF9494E8);
-            return new GameTick_tImpl(_Handle + _PostponeFireReadyTicksOffset!.Value);
+            var instance = _PostponeFireReadyTicksInstance ??= new GameTick_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _PostponeFireReadyTicksOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PostponeFireReadyFracOffset;
@@ -257,23 +269,29 @@ internal partial class CCSWeaponBaseImpl : CBasePlayerWeaponImpl, CCSWeaponBase
         }
     }
     private static nint? _DeployTickOffset;
+    private GameTick_tImpl? _DeployTickInstance;
 
     public GameTick_t DeployTick
     {
         get
         {
             _DeployTickOffset = _DeployTickOffset ?? Schema.GetOffset(0x8102BA51FB490B1F);
-            return new GameTick_tImpl(_Handle + _DeployTickOffset!.Value);
+            var instance = _DeployTickInstance ??= new GameTick_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _DeployTickOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DroppedAtTimeOffset;
+    private GameTime_tImpl? _DroppedAtTimeInstance;
 
     public GameTime_t DroppedAtTime
     {
         get
         {
             _DroppedAtTimeOffset = _DroppedAtTimeOffset ?? Schema.GetOffset(0x8102BA51C3A8936F);
-            return new GameTime_tImpl(_Handle + _DroppedAtTimeOffset!.Value);
+            var instance = _DroppedAtTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _DroppedAtTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _IsHauledBackOffset;
@@ -297,13 +315,16 @@ internal partial class CCSWeaponBaseImpl : CBasePlayerWeaponImpl, CCSWeaponBase
         }
     }
     private static nint? _TimeSilencerSwitchCompleteOffset;
+    private GameTime_tImpl? _TimeSilencerSwitchCompleteInstance;
 
     public GameTime_t TimeSilencerSwitchComplete
     {
         get
         {
             _TimeSilencerSwitchCompleteOffset = _TimeSilencerSwitchCompleteOffset ?? Schema.GetOffset(0x8102BA51DCB190FA);
-            return new GameTime_tImpl(_Handle + _TimeSilencerSwitchCompleteOffset!.Value);
+            var instance = _TimeSilencerSwitchCompleteInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _TimeSilencerSwitchCompleteOffset!.Value);
+            return instance;
         }
     }
     private static nint? _WeaponActionPlaybackRateOffset;
@@ -377,33 +398,42 @@ internal partial class CCSWeaponBaseImpl : CBasePlayerWeaponImpl, CCSWeaponBase
         }
     }
     private static nint? _NextOwnerTouchTimeOffset;
+    private GameTime_tImpl? _NextOwnerTouchTimeInstance;
 
     public GameTime_t NextOwnerTouchTime
     {
         get
         {
             _NextOwnerTouchTimeOffset = _NextOwnerTouchTimeOffset ?? Schema.GetOffset(0x8102BA51FECB784F);
-            return new GameTime_tImpl(_Handle + _NextOwnerTouchTimeOffset!.Value);
+            var instance = _NextOwnerTouchTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NextOwnerTouchTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NextPrevOwnerTouchTimeOffset;
+    private GameTime_tImpl? _NextPrevOwnerTouchTimeInstance;
 
     public GameTime_t NextPrevOwnerTouchTime
     {
         get
         {
             _NextPrevOwnerTouchTimeOffset = _NextPrevOwnerTouchTimeOffset ?? Schema.GetOffset(0x8102BA515C688482);
-            return new GameTime_tImpl(_Handle + _NextPrevOwnerTouchTimeOffset!.Value);
+            var instance = _NextPrevOwnerTouchTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NextPrevOwnerTouchTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NextPrevOwnerUseTimeOffset;
+    private GameTime_tImpl? _NextPrevOwnerUseTimeInstance;
 
     public GameTime_t NextPrevOwnerUseTime
     {
         get
         {
             _NextPrevOwnerUseTimeOffset = _NextPrevOwnerUseTimeOffset ?? Schema.GetOffset(0x8102BA51C84F06AE);
-            return new GameTime_tImpl(_Handle + _NextPrevOwnerUseTimeOffset!.Value);
+            var instance = _NextPrevOwnerUseTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NextPrevOwnerUseTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PrevOwnerOffset;
@@ -417,13 +447,16 @@ internal partial class CCSWeaponBaseImpl : CBasePlayerWeaponImpl, CCSWeaponBase
         }
     }
     private static nint? _DropTickOffset;
+    private GameTick_tImpl? _DropTickInstance;
 
     public GameTick_t DropTick
     {
         get
         {
             _DropTickOffset = _DropTickOffset ?? Schema.GetOffset(0x8102BA51B2FC22F5);
-            return new GameTick_tImpl(_Handle + _DropTickOffset!.Value);
+            var instance = _DropTickInstance ??= new GameTick_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _DropTickOffset!.Value);
+            return instance;
         }
     }
     private static nint? _WasActiveWeaponWhenDroppedOffset;
@@ -447,13 +480,16 @@ internal partial class CCSWeaponBaseImpl : CBasePlayerWeaponImpl, CCSWeaponBase
         }
     }
     private static nint? _LastShotTimeOffset;
+    private GameTime_tImpl? _LastShotTimeInstance;
 
     public GameTime_t LastShotTime
     {
         get
         {
             _LastShotTimeOffset = _LastShotTimeOffset ?? Schema.GetOffset(0x8102BA517A37978C);
-            return new GameTime_tImpl(_Handle + _LastShotTimeOffset!.Value);
+            var instance = _LastShotTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastShotTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _WasOwnedByCTOffset;
@@ -487,13 +523,16 @@ internal partial class CCSWeaponBaseImpl : CBasePlayerWeaponImpl, CCSWeaponBase
         }
     }
     private static nint? _IronSightControllerOffset;
+    private CIronSightControllerImpl? _IronSightControllerInstance;
 
     public CIronSightController IronSightController
     {
         get
         {
             _IronSightControllerOffset = _IronSightControllerOffset ?? Schema.GetOffset(0x8102BA5189739F40);
-            return new CIronSightControllerImpl(_Handle + _IronSightControllerOffset!.Value);
+            var instance = _IronSightControllerInstance ??= new CIronSightControllerImpl(0);
+            instance.DangerousSetHandle(_Handle + _IronSightControllerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _IronSightModeOffset;
@@ -507,13 +546,16 @@ internal partial class CCSWeaponBaseImpl : CBasePlayerWeaponImpl, CCSWeaponBase
         }
     }
     private static nint? _LastLOSTraceFailureTimeOffset;
+    private GameTime_tImpl? _LastLOSTraceFailureTimeInstance;
 
     public GameTime_t LastLOSTraceFailureTime
     {
         get
         {
             _LastLOSTraceFailureTimeOffset = _LastLOSTraceFailureTimeOffset ?? Schema.GetOffset(0x8102BA51EFA6E48B);
-            return new GameTime_tImpl(_Handle + _LastLOSTraceFailureTimeOffset!.Value);
+            var instance = _LastLOSTraceFailureTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastLOSTraceFailureTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _WatTickOffsetOffset;
@@ -527,13 +569,16 @@ internal partial class CCSWeaponBaseImpl : CBasePlayerWeaponImpl, CCSWeaponBase
         }
     }
     private static nint? _LastShakeTimeOffset;
+    private GameTime_tImpl? _LastShakeTimeInstance;
 
     public GameTime_t LastShakeTime
     {
         get
         {
             _LastShakeTimeOffset = _LastShakeTimeOffset ?? Schema.GetOffset(0x8102BA517BD64C62);
-            return new GameTime_tImpl(_Handle + _LastShakeTimeOffset!.Value);
+            var instance = _LastShakeTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastShakeTimeOffset!.Value);
+            return instance;
         }
     }
 

@@ -36,13 +36,31 @@ internal partial class FeStiffHingeBuild_tImpl : SchemaClass, FeStiffHingeBuild_
             return ref _Handle.AsRef<float>(_StrengthOffset!.Value);
         }
     }
+    private static nint? _MotionBiasOffset;
+    private SchemaFixedArray<float>? _MotionBiasInstance;
+
     public ISchemaFixedArray<float> MotionBias
     {
-        get => new SchemaFixedArray<float>(_Handle, 0x41A81A582CDDBF14, 3, 4, 4);
+        get
+        {
+            _MotionBiasOffset = _MotionBiasOffset ?? Schema.GetOffset(0x41A81A582CDDBF14);
+            var instance = _MotionBiasInstance ??= new SchemaFixedArray<float>(0, 0x41A81A582CDDBF14, 3, 4, 4);
+            instance.DangerousSetHandle(_Handle + _MotionBiasOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _NodeOffset;
+    private SchemaFixedArray<ushort>? _NodeInstance;
+
     public ISchemaFixedArray<ushort> Node
     {
-        get => new SchemaFixedArray<ushort>(_Handle, 0x41A81A58CD6694B9, 3, 2, 2);
+        get
+        {
+            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0x41A81A58CD6694B9);
+            var instance = _NodeInstance ??= new SchemaFixedArray<ushort>(0, 0x41A81A58CD6694B9, 3, 2, 2);
+            instance.DangerousSetHandle(_Handle + _NodeOffset!.Value);
+            return instance;
+        }
     }
 
 }

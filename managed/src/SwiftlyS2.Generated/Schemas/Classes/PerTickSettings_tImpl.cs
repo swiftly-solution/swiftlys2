@@ -47,13 +47,16 @@ internal partial class PerTickSettings_tImpl : SchemaClass, PerTickSettings_t
         }
     }
     private static nint? _RootMotionOffset;
+    private CRootMotionImpl? _RootMotionInstance;
 
     public CRootMotion RootMotion
     {
         get
         {
             _RootMotionOffset = _RootMotionOffset ?? Schema.GetOffset(0x11D36C0F664A3F27);
-            return new CRootMotionImpl(_Handle + _RootMotionOffset!.Value);
+            var instance = _RootMotionInstance ??= new CRootMotionImpl(0);
+            instance.DangerousSetHandle(_Handle + _RootMotionOffset!.Value);
+            return instance;
         }
     }
     private static nint? _UpdateIDOffset;

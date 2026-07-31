@@ -17,13 +17,16 @@ internal partial class CParticleFunctionImpl : SchemaClass, CParticleFunction
     public CParticleFunctionImpl(nint handle) : base(handle) { }
 
     private static nint? _OpStrengthOffset;
+    private CParticleCollectionFloatInputImpl? _OpStrengthInstance;
 
     public CParticleCollectionFloatInput OpStrength
     {
         get
         {
             _OpStrengthOffset = _OpStrengthOffset ?? Schema.GetOffset(0x4E0CACB41DD56291);
-            return new CParticleCollectionFloatInputImpl(_Handle + _OpStrengthOffset!.Value);
+            var instance = _OpStrengthInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _OpStrengthOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OpEndCapStateOffset;

@@ -117,13 +117,16 @@ internal partial class C_INIT_InitSkinnedPositionFromCPSnapshotImpl : CParticleF
         }
     }
     private static nint? _ReadIndexOffset;
+    private CPerParticleFloatInputImpl? _ReadIndexInstance;
 
     public CPerParticleFloatInput ReadIndex
     {
         get
         {
             _ReadIndexOffset = _ReadIndexOffset ?? Schema.GetOffset(0xD1B6E4147E9602C9);
-            return new CPerParticleFloatInputImpl(_Handle + _ReadIndexOffset!.Value);
+            var instance = _ReadIndexInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ReadIndexOffset!.Value);
+            return instance;
         }
     }
     private static nint? _IncrementOffset;

@@ -27,33 +27,42 @@ internal partial class COrientationWarpUpdateNodeImpl : CUnaryUpdateNodeImpl, CO
         }
     }
     private static nint? _TargetParamOffset;
+    private CAnimParamHandleImpl? _TargetParamInstance;
 
     public CAnimParamHandle TargetParam
     {
         get
         {
             _TargetParamOffset = _TargetParamOffset ?? Schema.GetOffset(0xD75D3B63D85B45EB);
-            return new CAnimParamHandleImpl(_Handle + _TargetParamOffset!.Value);
+            var instance = _TargetParamInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _TargetParamOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TargetPositionParamOffset;
+    private CAnimParamHandleImpl? _TargetPositionParamInstance;
 
     public CAnimParamHandle TargetPositionParam
     {
         get
         {
             _TargetPositionParamOffset = _TargetPositionParamOffset ?? Schema.GetOffset(0xD75D3B63550BBF72);
-            return new CAnimParamHandleImpl(_Handle + _TargetPositionParamOffset!.Value);
+            var instance = _TargetPositionParamInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _TargetPositionParamOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FallbackTargetPositionParamOffset;
+    private CAnimParamHandleImpl? _FallbackTargetPositionParamInstance;
 
     public CAnimParamHandle FallbackTargetPositionParam
     {
         get
         {
             _FallbackTargetPositionParamOffset = _FallbackTargetPositionParamOffset ?? Schema.GetOffset(0xD75D3B63E8F94D78);
-            return new CAnimParamHandleImpl(_Handle + _FallbackTargetPositionParamOffset!.Value);
+            var instance = _FallbackTargetPositionParamInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _FallbackTargetPositionParamOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TargetOffsetModeOffset;
@@ -77,23 +86,29 @@ internal partial class COrientationWarpUpdateNodeImpl : CUnaryUpdateNodeImpl, CO
         }
     }
     private static nint? _TargetOffsetParamOffset;
+    private CAnimParamHandleImpl? _TargetOffsetParamInstance;
 
     public CAnimParamHandle TargetOffsetParam
     {
         get
         {
             _TargetOffsetParamOffset = _TargetOffsetParamOffset ?? Schema.GetOffset(0xD75D3B63BA3F5E7A);
-            return new CAnimParamHandleImpl(_Handle + _TargetOffsetParamOffset!.Value);
+            var instance = _TargetOffsetParamInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _TargetOffsetParamOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DampingOffset;
+    private CAnimInputDampingImpl? _DampingInstance;
 
     public CAnimInputDamping Damping
     {
         get
         {
             _DampingOffset = _DampingOffset ?? Schema.GetOffset(0xD75D3B6315440FB5);
-            return new CAnimInputDampingImpl(_Handle + _DampingOffset!.Value);
+            var instance = _DampingInstance ??= new CAnimInputDampingImpl(0);
+            instance.DangerousSetHandle(_Handle + _DampingOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RootMotionSourceOffset;

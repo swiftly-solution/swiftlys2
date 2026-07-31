@@ -57,13 +57,16 @@ internal partial class C_OP_OscillateVectorImpl : CParticleFunctionOperatorImpl,
         }
     }
     private static nint? _FieldOffset;
+    private ParticleAttributeIndex_tImpl? _FieldInstance;
 
     public ParticleAttributeIndex_t Field
     {
         get
         {
             _FieldOffset = _FieldOffset ?? Schema.GetOffset(0xEECAE90AC257B93B);
-            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOffset!.Value);
+            var instance = _FieldInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FieldOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ProportionalOffset;
@@ -137,33 +140,42 @@ internal partial class C_OP_OscillateVectorImpl : CParticleFunctionOperatorImpl,
         }
     }
     private static nint? _OscMultOffset;
+    private CPerParticleFloatInputImpl? _OscMultInstance;
 
     public CPerParticleFloatInput OscMult
     {
         get
         {
             _OscMultOffset = _OscMultOffset ?? Schema.GetOffset(0xEECAE90A16278E94);
-            return new CPerParticleFloatInputImpl(_Handle + _OscMultOffset!.Value);
+            var instance = _OscMultInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _OscMultOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OscAddOffset;
+    private CPerParticleFloatInputImpl? _OscAddInstance;
 
     public CPerParticleFloatInput OscAdd
     {
         get
         {
             _OscAddOffset = _OscAddOffset ?? Schema.GetOffset(0xEECAE90A7B38A63D);
-            return new CPerParticleFloatInputImpl(_Handle + _OscAddOffset!.Value);
+            var instance = _OscAddInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _OscAddOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RateScaleOffset;
+    private CPerParticleFloatInputImpl? _RateScaleInstance;
 
     public CPerParticleFloatInput RateScale
     {
         get
         {
             _RateScaleOffset = _RateScaleOffset ?? Schema.GetOffset(0xEECAE90A58CBF9C1);
-            return new CPerParticleFloatInputImpl(_Handle + _RateScaleOffset!.Value);
+            var instance = _RateScaleInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _RateScaleOffset!.Value);
+            return instance;
         }
     }
 

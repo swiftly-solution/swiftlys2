@@ -17,27 +17,42 @@ internal partial class CLeanMatrixUpdateNodeImpl : CLeafUpdateNodeImpl, CLeanMat
     public CLeanMatrixUpdateNodeImpl(nint handle) : base(handle) { }
 
     private static nint? _FrameCornersOffset;
+    private SchemaUntypedField? _FrameCornersInstance;
 
     public SchemaUntypedField FrameCorners
     {
         get
         {
             _FrameCornersOffset = _FrameCornersOffset ?? Schema.GetOffset(0xDB33C9A617463774);
-            return new SchemaUntypedField(_Handle + _FrameCornersOffset!.Value);
+            var instance = _FrameCornersInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _FrameCornersOffset!.Value);
+            return instance;
         }
     }
+    private static nint? _PosesOffset;
+    private SchemaClassFixedArray<CPoseHandle>? _PosesInstance;
+
     public ISchemaClassFixedArray<CPoseHandle> Poses
     {
-        get => new SchemaClassFixedArray<CPoseHandle>(_Handle, 0xDB33C9A6B851C9F5, 9, 4, 2);
+        get
+        {
+            _PosesOffset = _PosesOffset ?? Schema.GetOffset(0xDB33C9A6B851C9F5);
+            var instance = _PosesInstance ??= new SchemaClassFixedArray<CPoseHandle>(0, 0xDB33C9A6B851C9F5, 9, 4, 2);
+            instance.DangerousSetHandle(_Handle + _PosesOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _DampingOffset;
+    private CAnimInputDampingImpl? _DampingInstance;
 
     public CAnimInputDamping Damping
     {
         get
         {
             _DampingOffset = _DampingOffset ?? Schema.GetOffset(0xDB33C9A615440FB5);
-            return new CAnimInputDampingImpl(_Handle + _DampingOffset!.Value);
+            var instance = _DampingInstance ??= new CAnimInputDampingImpl(0);
+            instance.DangerousSetHandle(_Handle + _DampingOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BlendSourceOffset;
@@ -51,13 +66,16 @@ internal partial class CLeanMatrixUpdateNodeImpl : CLeafUpdateNodeImpl, CLeanMat
         }
     }
     private static nint? _ParamIndexOffset;
+    private CAnimParamHandleImpl? _ParamIndexInstance;
 
     public CAnimParamHandle ParamIndex
     {
         get
         {
             _ParamIndexOffset = _ParamIndexOffset ?? Schema.GetOffset(0xDB33C9A661990A86);
-            return new CAnimParamHandleImpl(_Handle + _ParamIndexOffset!.Value);
+            var instance = _ParamIndexInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamIndexOffset!.Value);
+            return instance;
         }
     }
     private static nint? _VerticalAxisOffset;
@@ -81,13 +99,16 @@ internal partial class CLeanMatrixUpdateNodeImpl : CLeafUpdateNodeImpl, CLeanMat
         }
     }
     private static nint? _SequenceOffset;
+    private HSequenceImpl? _SequenceInstance;
 
     public HSequence Sequence
     {
         get
         {
             _SequenceOffset = _SequenceOffset ?? Schema.GetOffset(0xDB33C9A6E0A0598E);
-            return new HSequenceImpl(_Handle + _SequenceOffset!.Value);
+            var instance = _SequenceInstance ??= new HSequenceImpl(0);
+            instance.DangerousSetHandle(_Handle + _SequenceOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MaxValueOffset;

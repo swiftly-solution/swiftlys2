@@ -57,13 +57,16 @@ internal partial class CHostageImpl : CHostageExpresserShimImpl, CHostage
         }
     }
     private static nint? _EntitySpottedStateOffset;
+    private EntitySpottedState_tImpl? _EntitySpottedStateInstance;
 
     public EntitySpottedState_t EntitySpottedState
     {
         get
         {
             _EntitySpottedStateOffset = _EntitySpottedStateOffset ?? Schema.GetOffset(0x1A122BDF032B547C);
-            return new EntitySpottedState_tImpl(_Handle + _EntitySpottedStateOffset!.Value);
+            var instance = _EntitySpottedStateInstance ??= new EntitySpottedState_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _EntitySpottedStateOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SpotRulesOffset;
@@ -167,13 +170,16 @@ internal partial class CHostageImpl : CHostageExpresserShimImpl, CHostage
         }
     }
     private static nint? _ReuseTimerOffset;
+    private CountdownTimerImpl? _ReuseTimerInstance;
 
     public CountdownTimer ReuseTimer
     {
         get
         {
             _ReuseTimerOffset = _ReuseTimerOffset ?? Schema.GetOffset(0x1A122BDF6D7BFBA8);
-            return new CountdownTimerImpl(_Handle + _ReuseTimerOffset!.Value);
+            var instance = _ReuseTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _ReuseTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _HasBeenUsedOffset;
@@ -217,13 +223,16 @@ internal partial class CHostageImpl : CHostageExpresserShimImpl, CHostage
         }
     }
     private static nint? _JumpTimerOffset;
+    private CountdownTimerImpl? _JumpTimerInstance;
 
     public CountdownTimer JumpTimer
     {
         get
         {
             _JumpTimerOffset = _JumpTimerOffset ?? Schema.GetOffset(0x1A122BDF6CBF3C9A);
-            return new CountdownTimerImpl(_Handle + _JumpTimerOffset!.Value);
+            var instance = _JumpTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _JumpTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _IsWaitingForLeaderOffset;
@@ -237,43 +246,55 @@ internal partial class CHostageImpl : CHostageExpresserShimImpl, CHostage
         }
     }
     private static nint? _RepathTimerOffset;
+    private CountdownTimerImpl? _RepathTimerInstance;
 
     public CountdownTimer RepathTimer
     {
         get
         {
             _RepathTimerOffset = _RepathTimerOffset ?? Schema.GetOffset(0x1A122BDF4AEA977C);
-            return new CountdownTimerImpl(_Handle + _RepathTimerOffset!.Value);
+            var instance = _RepathTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _RepathTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InhibitDoorTimerOffset;
+    private CountdownTimerImpl? _InhibitDoorTimerInstance;
 
     public CountdownTimer InhibitDoorTimer
     {
         get
         {
             _InhibitDoorTimerOffset = _InhibitDoorTimerOffset ?? Schema.GetOffset(0x1A122BDF4CDEAEF5);
-            return new CountdownTimerImpl(_Handle + _InhibitDoorTimerOffset!.Value);
+            var instance = _InhibitDoorTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _InhibitDoorTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InhibitObstacleAvoidanceTimerOffset;
+    private CountdownTimerImpl? _InhibitObstacleAvoidanceTimerInstance;
 
     public CountdownTimer InhibitObstacleAvoidanceTimer
     {
         get
         {
             _InhibitObstacleAvoidanceTimerOffset = _InhibitObstacleAvoidanceTimerOffset ?? Schema.GetOffset(0x1A122BDF6310A196);
-            return new CountdownTimerImpl(_Handle + _InhibitObstacleAvoidanceTimerOffset!.Value);
+            var instance = _InhibitObstacleAvoidanceTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _InhibitObstacleAvoidanceTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _WiggleTimerOffset;
+    private CountdownTimerImpl? _WiggleTimerInstance;
 
     public CountdownTimer WiggleTimer
     {
         get
         {
             _WiggleTimerOffset = _WiggleTimerOffset ?? Schema.GetOffset(0x1A122BDFEDBA9421);
-            return new CountdownTimerImpl(_Handle + _WiggleTimerOffset!.Value);
+            var instance = _WiggleTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _WiggleTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _IsAdjustedOffset;
@@ -307,13 +328,16 @@ internal partial class CHostageImpl : CHostageExpresserShimImpl, CHostage
         }
     }
     private static nint? _LastGrabTimeOffset;
+    private GameTime_tImpl? _LastGrabTimeInstance;
 
     public GameTime_t LastGrabTime
     {
         get
         {
             _LastGrabTimeOffset = _LastGrabTimeOffset ?? Schema.GetOffset(0x1A122BDFCF347506);
-            return new GameTime_tImpl(_Handle + _LastGrabTimeOffset!.Value);
+            var instance = _LastGrabTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastGrabTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PositionWhenStartedDroppingToGroundOffset;
@@ -337,33 +361,42 @@ internal partial class CHostageImpl : CHostageExpresserShimImpl, CHostage
         }
     }
     private static nint? _RescueStartTimeOffset;
+    private GameTime_tImpl? _RescueStartTimeInstance;
 
     public GameTime_t RescueStartTime
     {
         get
         {
             _RescueStartTimeOffset = _RescueStartTimeOffset ?? Schema.GetOffset(0x1A122BDF6085D94B);
-            return new GameTime_tImpl(_Handle + _RescueStartTimeOffset!.Value);
+            var instance = _RescueStartTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _RescueStartTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _GrabSuccessTimeOffset;
+    private GameTime_tImpl? _GrabSuccessTimeInstance;
 
     public GameTime_t GrabSuccessTime
     {
         get
         {
             _GrabSuccessTimeOffset = _GrabSuccessTimeOffset ?? Schema.GetOffset(0x1A122BDF2EA3F531);
-            return new GameTime_tImpl(_Handle + _GrabSuccessTimeOffset!.Value);
+            var instance = _GrabSuccessTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _GrabSuccessTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DropStartTimeOffset;
+    private GameTime_tImpl? _DropStartTimeInstance;
 
     public GameTime_t DropStartTime
     {
         get
         {
             _DropStartTimeOffset = _DropStartTimeOffset ?? Schema.GetOffset(0x1A122BDF61FA47CF);
-            return new GameTime_tImpl(_Handle + _DropStartTimeOffset!.Value);
+            var instance = _DropStartTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _DropStartTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ApproachRewardPayoutsOffset;

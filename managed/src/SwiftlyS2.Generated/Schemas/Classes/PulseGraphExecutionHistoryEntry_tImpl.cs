@@ -17,23 +17,29 @@ internal partial class PulseGraphExecutionHistoryEntry_tImpl : SchemaClass, Puls
     public PulseGraphExecutionHistoryEntry_tImpl(nint handle) : base(handle) { }
 
     private static nint? _CursorIDOffset;
+    private PulseCursorID_tImpl? _CursorIDInstance;
 
     public PulseCursorID_t CursorID
     {
         get
         {
             _CursorIDOffset = _CursorIDOffset ?? Schema.GetOffset(0x9346B0AB0B44CBF6);
-            return new PulseCursorID_tImpl(_Handle + _CursorIDOffset!.Value);
+            var instance = _CursorIDInstance ??= new PulseCursorID_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _CursorIDOffset!.Value);
+            return instance;
         }
     }
     private static nint? _EditorIDOffset;
+    private PulseDocNodeID_tImpl? _EditorIDInstance;
 
     public PulseDocNodeID_t EditorID
     {
         get
         {
             _EditorIDOffset = _EditorIDOffset ?? Schema.GetOffset(0x9346B0AB74188E69);
-            return new PulseDocNodeID_tImpl(_Handle + _EditorIDOffset!.Value);
+            var instance = _EditorIDInstance ??= new PulseDocNodeID_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _EditorIDOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ExecTimeOffset;
@@ -57,13 +63,16 @@ internal partial class PulseGraphExecutionHistoryEntry_tImpl : SchemaClass, Puls
         }
     }
     private static nint? _TagNameOffset;
+    private SchemaUntypedField? _TagNameInstance;
 
     public SchemaUntypedField TagName
     {
         get
         {
             _TagNameOffset = _TagNameOffset ?? Schema.GetOffset(0x9346B0ABBD7B50F8);
-            return new SchemaUntypedField(_Handle + _TagNameOffset!.Value);
+            var instance = _TagNameInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _TagNameOffset!.Value);
+            return instance;
         }
     }
 

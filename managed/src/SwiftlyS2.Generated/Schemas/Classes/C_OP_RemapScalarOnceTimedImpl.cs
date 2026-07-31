@@ -27,23 +27,29 @@ internal partial class C_OP_RemapScalarOnceTimedImpl : CParticleFunctionOperator
         }
     }
     private static nint? _FieldInputOffset;
+    private ParticleAttributeIndex_tImpl? _FieldInputInstance;
 
     public ParticleAttributeIndex_t FieldInput
     {
         get
         {
             _FieldInputOffset = _FieldInputOffset ?? Schema.GetOffset(0xF5150932AE775669);
-            return new ParticleAttributeIndex_tImpl(_Handle + _FieldInputOffset!.Value);
+            var instance = _FieldInputInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FieldInputOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FieldOutputOffset;
+    private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
             _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0xF5150932E5729606);
-            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+            var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InputMinOffset;

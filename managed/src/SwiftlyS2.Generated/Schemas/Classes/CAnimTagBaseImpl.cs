@@ -52,13 +52,16 @@ internal partial class CAnimTagBaseImpl : SchemaClass, CAnimTagBase
         }
     }
     private static nint? _TagIDOffset;
+    private AnimTagIDImpl? _TagIDInstance;
 
     public AnimTagID TagID
     {
         get
         {
             _TagIDOffset = _TagIDOffset ?? Schema.GetOffset(0x8F7709C41F65DDFE);
-            return new AnimTagIDImpl(_Handle + _TagIDOffset!.Value);
+            var instance = _TagIDInstance ??= new AnimTagIDImpl(0);
+            instance.DangerousSetHandle(_Handle + _TagIDOffset!.Value);
+            return instance;
         }
     }
     private static nint? _IsReferencedOffset;

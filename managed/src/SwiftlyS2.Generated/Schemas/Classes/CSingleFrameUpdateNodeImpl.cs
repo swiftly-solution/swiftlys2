@@ -27,23 +27,29 @@ internal partial class CSingleFrameUpdateNodeImpl : CLeafUpdateNodeImpl, CSingle
         }
     }
     private static nint? _PoseCacheHandleOffset;
+    private CPoseHandleImpl? _PoseCacheHandleInstance;
 
     public CPoseHandle PoseCacheHandle
     {
         get
         {
             _PoseCacheHandleOffset = _PoseCacheHandleOffset ?? Schema.GetOffset(0x5A65D6164719447A);
-            return new CPoseHandleImpl(_Handle + _PoseCacheHandleOffset!.Value);
+            var instance = _PoseCacheHandleInstance ??= new CPoseHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _PoseCacheHandleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SequenceOffset;
+    private HSequenceImpl? _SequenceInstance;
 
     public HSequence Sequence
     {
         get
         {
             _SequenceOffset = _SequenceOffset ?? Schema.GetOffset(0x5A65D616E0A0598E);
-            return new HSequenceImpl(_Handle + _SequenceOffset!.Value);
+            var instance = _SequenceInstance ??= new HSequenceImpl(0);
+            instance.DangerousSetHandle(_Handle + _SequenceOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CycleOffset;

@@ -17,23 +17,29 @@ internal partial class CNmFloatSelectorNode__CDefinitionImpl : CNmFloatValueNode
     public CNmFloatSelectorNode__CDefinitionImpl(nint handle) : base(handle) { }
 
     private static nint? _ConditionNodeIndicesOffset;
+    private SchemaUntypedField? _ConditionNodeIndicesInstance;
 
     public SchemaUntypedField ConditionNodeIndices
     {
         get
         {
             _ConditionNodeIndicesOffset = _ConditionNodeIndicesOffset ?? Schema.GetOffset(0xA387F8324A144D0F);
-            return new SchemaUntypedField(_Handle + _ConditionNodeIndicesOffset!.Value);
+            var instance = _ConditionNodeIndicesInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ConditionNodeIndicesOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ValuesOffset;
+    private SchemaUntypedField? _ValuesInstance;
 
     public SchemaUntypedField Values
     {
         get
         {
             _ValuesOffset = _ValuesOffset ?? Schema.GetOffset(0xA387F832FBEDDADB);
-            return new SchemaUntypedField(_Handle + _ValuesOffset!.Value);
+            var instance = _ValuesInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ValuesOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DefaultValueOffset;

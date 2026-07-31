@@ -17,23 +17,29 @@ internal partial class CMotionSearchDBImpl : SchemaClass, CMotionSearchDB
     public CMotionSearchDBImpl(nint handle) : base(handle) { }
 
     private static nint? _RootNodeOffset;
+    private CMotionSearchNodeImpl? _RootNodeInstance;
 
     public CMotionSearchNode RootNode
     {
         get
         {
             _RootNodeOffset = _RootNodeOffset ?? Schema.GetOffset(0x5F49286C3D5FF0D);
-            return new CMotionSearchNodeImpl(_Handle + _RootNodeOffset!.Value);
+            var instance = _RootNodeInstance ??= new CMotionSearchNodeImpl(0);
+            instance.DangerousSetHandle(_Handle + _RootNodeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ResidualQuantizerOffset;
+    private CProductQuantizerImpl? _ResidualQuantizerInstance;
 
     public CProductQuantizer ResidualQuantizer
     {
         get
         {
             _ResidualQuantizerOffset = _ResidualQuantizerOffset ?? Schema.GetOffset(0x5F49286A3EDA009);
-            return new CProductQuantizerImpl(_Handle + _ResidualQuantizerOffset!.Value);
+            var instance = _ResidualQuantizerInstance ??= new CProductQuantizerImpl(0);
+            instance.DangerousSetHandle(_Handle + _ResidualQuantizerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CodeIndicesOffset;

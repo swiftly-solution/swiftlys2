@@ -47,13 +47,16 @@ internal partial class ResponseContext_tImpl : SchemaClass, ResponseContext_t
         }
     }
     private static nint? _ExpirationTimeOffset;
+    private GameTime_tImpl? _ExpirationTimeInstance;
 
     public GameTime_t ExpirationTime
     {
         get
         {
             _ExpirationTimeOffset = _ExpirationTimeOffset ?? Schema.GetOffset(0x8F5A90A20389142D);
-            return new GameTime_tImpl(_Handle + _ExpirationTimeOffset!.Value);
+            var instance = _ExpirationTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _ExpirationTimeOffset!.Value);
+            return instance;
         }
     }
 

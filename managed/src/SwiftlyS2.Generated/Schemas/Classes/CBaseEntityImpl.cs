@@ -17,6 +17,7 @@ internal partial class CBaseEntityImpl : CEntityInstanceImpl, CBaseEntity
     public CBaseEntityImpl(nint handle) : base(handle) { }
 
     private static nint? _CBodyComponentOffset;
+    private CBodyComponentImpl? _CBodyComponentInstance;
 
     public CBodyComponent? CBodyComponent
     {
@@ -24,17 +25,23 @@ internal partial class CBaseEntityImpl : CEntityInstanceImpl, CBaseEntity
         {
             _CBodyComponentOffset = _CBodyComponentOffset ?? Schema.GetOffset(0x9DC483B8D116E3C5);
             var ptr = _Handle.Read<nint>(_CBodyComponentOffset!.Value);
-            return ptr.IsValidPtr() ? new CBodyComponentImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _CBodyComponentInstance ??= new CBodyComponentImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _NetworkTransmitComponentOffset;
+    private CNetworkTransmitComponentImpl? _NetworkTransmitComponentInstance;
 
     public CNetworkTransmitComponent NetworkTransmitComponent
     {
         get
         {
             _NetworkTransmitComponentOffset = _NetworkTransmitComponentOffset ?? Schema.GetOffset(0x9DC483B8FF010CE4);
-            return new CNetworkTransmitComponentImpl(_Handle + _NetworkTransmitComponentOffset!.Value);
+            var instance = _NetworkTransmitComponentInstance ??= new CNetworkTransmitComponentImpl(0);
+            instance.DangerousSetHandle(_Handle + _NetworkTransmitComponentOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ThinkFunctionsOffset;
@@ -58,13 +65,16 @@ internal partial class CBaseEntityImpl : CEntityInstanceImpl, CBaseEntity
         }
     }
     private static nint? _LastThinkTickOffset;
+    private GameTick_tImpl? _LastThinkTickInstance;
 
     public GameTick_t LastThinkTick
     {
         get
         {
             _LastThinkTickOffset = _LastThinkTickOffset ?? Schema.GetOffset(0x9DC483B8CE8FE7F2);
-            return new GameTick_tImpl(_Handle + _LastThinkTickOffset!.Value);
+            var instance = _LastThinkTickInstance ??= new GameTick_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastThinkTickOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DisabledContextThinksOffset;
@@ -98,13 +108,16 @@ internal partial class CBaseEntityImpl : CEntityInstanceImpl, CBaseEntity
         }
     }
     private static nint? _ThinkOffset;
+    private SchemaUntypedField? _ThinkInstance;
 
     public SchemaUntypedField Think
     {
         get
         {
             _ThinkOffset = _ThinkOffset ?? Schema.GetOffset(0x9DC483B8BF50ED7B);
-            return new SchemaUntypedField(_Handle + _ThinkOffset!.Value);
+            var instance = _ThinkInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ThinkOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ResponseContextsOffset;
@@ -133,43 +146,55 @@ internal partial class CBaseEntityImpl : CEntityInstanceImpl, CBaseEntity
         }
     }
     private static nint? _PfnTouchOffset;
+    private SchemaUntypedField? _PfnTouchInstance;
 
     public SchemaUntypedField PfnTouch
     {
         get
         {
             _PfnTouchOffset = _PfnTouchOffset ?? Schema.GetOffset(0x9DC483B880C078F6);
-            return new SchemaUntypedField(_Handle + _PfnTouchOffset!.Value);
+            var instance = _PfnTouchInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _PfnTouchOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PfnUseOffset;
+    private SchemaUntypedField? _PfnUseInstance;
 
     public SchemaUntypedField PfnUse
     {
         get
         {
             _PfnUseOffset = _PfnUseOffset ?? Schema.GetOffset(0x9DC483B8B37E14B6);
-            return new SchemaUntypedField(_Handle + _PfnUseOffset!.Value);
+            var instance = _PfnUseInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _PfnUseOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PfnBlockedOffset;
+    private SchemaUntypedField? _PfnBlockedInstance;
 
     public SchemaUntypedField PfnBlocked
     {
         get
         {
             _PfnBlockedOffset = _PfnBlockedOffset ?? Schema.GetOffset(0x9DC483B8C22ED911);
-            return new SchemaUntypedField(_Handle + _PfnBlockedOffset!.Value);
+            var instance = _PfnBlockedInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _PfnBlockedOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PfnMoveDoneOffset;
+    private SchemaUntypedField? _PfnMoveDoneInstance;
 
     public SchemaUntypedField PfnMoveDone
     {
         get
         {
             _PfnMoveDoneOffset = _PfnMoveDoneOffset ?? Schema.GetOffset(0x9DC483B8B5DF02BE);
-            return new SchemaUntypedField(_Handle + _PfnMoveDoneOffset!.Value);
+            var instance = _PfnMoveDoneInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _PfnMoveDoneOffset!.Value);
+            return instance;
         }
     }
     private static nint? _HealthOffset;
@@ -393,13 +418,16 @@ internal partial class CBaseEntityImpl : CEntityInstanceImpl, CBaseEntity
         }
     }
     private static nint? _CreateTimeOffset;
+    private GameTime_tImpl? _CreateTimeInstance;
 
     public GameTime_t CreateTime
     {
         get
         {
             _CreateTimeOffset = _CreateTimeOffset ?? Schema.GetOffset(0x9DC483B875C91626);
-            return new GameTime_tImpl(_Handle + _CreateTimeOffset!.Value);
+            var instance = _CreateTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _CreateTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ClientSideRagdollOffset;
@@ -493,13 +521,16 @@ internal partial class CBaseEntityImpl : CEntityInstanceImpl, CBaseEntity
         }
     }
     private static nint? _NextThinkTickOffset;
+    private GameTick_tImpl? _NextThinkTickInstance;
 
     public GameTick_t NextThinkTick
     {
         get
         {
             _NextThinkTickOffset = _NextThinkTickOffset ?? Schema.GetOffset(0x9DC483B8B7CEF021);
-            return new GameTick_tImpl(_Handle + _NextThinkTickOffset!.Value);
+            var instance = _NextThinkTickInstance ??= new GameTick_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NextThinkTickOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SimulationTickOffset;
@@ -543,13 +574,16 @@ internal partial class CBaseEntityImpl : CEntityInstanceImpl, CBaseEntity
         }
     }
     private static nint? _VelocityOffset;
+    private CNetworkVelocityVectorImpl? _VelocityInstance;
 
     public CNetworkVelocityVector Velocity
     {
         get
         {
             _VelocityOffset = _VelocityOffset ?? Schema.GetOffset(0x9DC483B87CF77892);
-            return new CNetworkVelocityVectorImpl(_Handle + _VelocityOffset!.Value);
+            var instance = _VelocityInstance ??= new CNetworkVelocityVectorImpl(0);
+            instance.DangerousSetHandle(_Handle + _VelocityOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BaseVelocityOffset;
@@ -573,6 +607,7 @@ internal partial class CBaseEntityImpl : CEntityInstanceImpl, CBaseEntity
         }
     }
     private static nint? _CollisionOffset;
+    private CCollisionPropertyImpl? _CollisionInstance;
 
     public CCollisionProperty? Collision
     {
@@ -580,7 +615,10 @@ internal partial class CBaseEntityImpl : CEntityInstanceImpl, CBaseEntity
         {
             _CollisionOffset = _CollisionOffset ?? Schema.GetOffset(0x9DC483B8C1E3AAA1);
             var ptr = _Handle.Read<nint>(_CollisionOffset!.Value);
-            return ptr.IsValidPtr() ? new CCollisionPropertyImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _CollisionInstance ??= new CCollisionPropertyImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _EffectEntityOffset;
@@ -804,13 +842,16 @@ internal partial class CBaseEntityImpl : CEntityInstanceImpl, CBaseEntity
         }
     }
     private static nint? _NavIgnoreUntilTimeOffset;
+    private GameTime_tImpl? _NavIgnoreUntilTimeInstance;
 
     public GameTime_t NavIgnoreUntilTime
     {
         get
         {
             _NavIgnoreUntilTimeOffset = _NavIgnoreUntilTimeOffset ?? Schema.GetOffset(0x9DC483B88228BC8B);
-            return new GameTime_tImpl(_Handle + _NavIgnoreUntilTimeOffset!.Value);
+            var instance = _NavIgnoreUntilTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NavIgnoreUntilTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AngVelocityOffset;
@@ -884,6 +925,7 @@ internal partial class CBaseEntityImpl : CEntityInstanceImpl, CBaseEntity
         }
     }
     private static nint? _PulseGraphInstanceOffset;
+    private CPulseGraphInstance_ServerEntityImpl? _PulseGraphInstanceInstance;
 
     public CPulseGraphInstance_ServerEntity? PulseGraphInstance
     {
@@ -891,7 +933,10 @@ internal partial class CBaseEntityImpl : CEntityInstanceImpl, CBaseEntity
         {
             _PulseGraphInstanceOffset = _PulseGraphInstanceOffset ?? Schema.GetOffset(0x9DC483B87D608947);
             var ptr = _Handle.Read<nint>(_PulseGraphInstanceOffset!.Value);
-            return ptr.IsValidPtr() ? new CPulseGraphInstance_ServerEntityImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _PulseGraphInstanceInstance ??= new CPulseGraphInstance_ServerEntityImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
 

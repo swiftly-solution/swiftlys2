@@ -17,13 +17,16 @@ internal partial class CMarkupSearchHelperImpl : SchemaClass, CMarkupSearchHelpe
     public CMarkupSearchHelperImpl(nint handle) : base(handle) { }
 
     private static nint? _NavHullOffset;
+    private NavHull_tImpl? _NavHullInstance;
 
     public NavHull_t NavHull
     {
         get
         {
             _NavHullOffset = _NavHullOffset ?? Schema.GetOffset(0x5F5CEF8ACDC085E1);
-            return new NavHull_tImpl(_Handle + _NavHullOffset!.Value);
+            var instance = _NavHullInstance ??= new NavHull_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NavHullOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TagStringOffset;

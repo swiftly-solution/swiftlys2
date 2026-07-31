@@ -127,6 +127,7 @@ internal partial class VPhysXAggregateData_tImpl : SchemaClass, VPhysXAggregateD
         }
     }
     private static nint? _FeModelOffset;
+    private PhysFeModelDesc_tImpl? _FeModelInstance;
 
     public PhysFeModelDesc_t? FeModel
     {
@@ -134,7 +135,10 @@ internal partial class VPhysXAggregateData_tImpl : SchemaClass, VPhysXAggregateD
         {
             _FeModelOffset = _FeModelOffset ?? Schema.GetOffset(0xB689D5A1299418A7);
             var ptr = _Handle.Read<nint>(_FeModelOffset!.Value);
-            return ptr.IsValidPtr() ? new PhysFeModelDesc_tImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _FeModelInstance ??= new PhysFeModelDesc_tImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _BoneParentsOffset;

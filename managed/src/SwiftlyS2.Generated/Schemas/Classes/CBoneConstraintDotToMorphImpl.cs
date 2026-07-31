@@ -61,9 +61,18 @@ internal partial class CBoneConstraintDotToMorphImpl : CBoneConstraintBaseImpl, 
             Schema.SetCUtlString(_Handle, _MorphChannelNameOffset!.Value, value);
         }
     }
+    private static nint? _RemapOffset;
+    private SchemaFixedArray<float>? _RemapInstance;
+
     public ISchemaFixedArray<float> Remap
     {
-        get => new SchemaFixedArray<float>(_Handle, 0x75939F07BE3DB1A0, 4, 4, 4);
+        get
+        {
+            _RemapOffset = _RemapOffset ?? Schema.GetOffset(0x75939F07BE3DB1A0);
+            var instance = _RemapInstance ??= new SchemaFixedArray<float>(0, 0x75939F07BE3DB1A0, 4, 4, 4);
+            instance.DangerousSetHandle(_Handle + _RemapOffset!.Value);
+            return instance;
+        }
     }
 
 }

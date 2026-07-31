@@ -57,13 +57,16 @@ internal partial class C_INIT_SetHitboxToModelImpl : CParticleFunctionInitialize
         }
     }
     private static nint? _HitBoxScaleOffset;
+    private CParticleCollectionVecInputImpl? _HitBoxScaleInstance;
 
     public CParticleCollectionVecInput HitBoxScale
     {
         get
         {
             _HitBoxScaleOffset = _HitBoxScaleOffset ?? Schema.GetOffset(0x7129E7BA58EE3FB7);
-            return new CParticleCollectionVecInputImpl(_Handle + _HitBoxScaleOffset!.Value);
+            var instance = _HitBoxScaleInstance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _HitBoxScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DirectionBiasOffset;
@@ -112,13 +115,16 @@ internal partial class C_INIT_SetHitboxToModelImpl : CParticleFunctionInitialize
         }
     }
     private static nint? _ShellSizeOffset;
+    private CParticleCollectionFloatInputImpl? _ShellSizeInstance;
 
     public CParticleCollectionFloatInput ShellSize
     {
         get
         {
             _ShellSizeOffset = _ShellSizeOffset ?? Schema.GetOffset(0x7129E7BA04D01B22);
-            return new CParticleCollectionFloatInputImpl(_Handle + _ShellSizeOffset!.Value);
+            var instance = _ShellSizeInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ShellSizeOffset!.Value);
+            return instance;
         }
     }
 

@@ -17,13 +17,16 @@ internal partial class CCSPlayer_MovementServicesImpl : CPlayer_MovementServices
     public CCSPlayer_MovementServicesImpl(nint handle) : base(handle) { }
 
     private static nint? _AnimationStateOffset;
+    private CCSPlayerAnimationStateImpl? _AnimationStateInstance;
 
     public CCSPlayerAnimationState AnimationState
     {
         get
         {
             _AnimationStateOffset = _AnimationStateOffset ?? Schema.GetOffset(0xD20D9A03347C94DE);
-            return new CCSPlayerAnimationStateImpl(_Handle + _AnimationStateOffset!.Value);
+            var instance = _AnimationStateInstance ??= new CCSPlayerAnimationStateImpl(0);
+            instance.DangerousSetHandle(_Handle + _AnimationStateOffset!.Value);
+            return instance;
         }
     }
     private static nint? _UsingGroundTopologyOffsetOffset;
@@ -317,13 +320,16 @@ internal partial class CCSPlayer_MovementServicesImpl : CPlayer_MovementServices
         }
     }
     private static nint? _StashGrenadeParameterWhenOffset;
+    private GameTime_tImpl? _StashGrenadeParameterWhenInstance;
 
     public GameTime_t StashGrenadeParameterWhen
     {
         get
         {
             _StashGrenadeParameterWhenOffset = _StashGrenadeParameterWhenOffset ?? Schema.GetOffset(0xD20D9A03FCB5208F);
-            return new GameTime_tImpl(_Handle + _StashGrenadeParameterWhenOffset!.Value);
+            var instance = _StashGrenadeParameterWhenInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _StashGrenadeParameterWhenOffset!.Value);
+            return instance;
         }
     }
     private static nint? _UseFrictionStashedSpeedOffset;
@@ -427,33 +433,42 @@ internal partial class CCSPlayer_MovementServicesImpl : CPlayer_MovementServices
         }
     }
     private static nint? _LegacyJumpOffset;
+    private CCSPlayerLegacyJumpImpl? _LegacyJumpInstance;
 
     public CCSPlayerLegacyJump LegacyJump
     {
         get
         {
             _LegacyJumpOffset = _LegacyJumpOffset ?? Schema.GetOffset(0xD20D9A03316C1A66);
-            return new CCSPlayerLegacyJumpImpl(_Handle + _LegacyJumpOffset!.Value);
+            var instance = _LegacyJumpInstance ??= new CCSPlayerLegacyJumpImpl(0);
+            instance.DangerousSetHandle(_Handle + _LegacyJumpOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ModernJumpOffset;
+    private CCSPlayerModernJumpImpl? _ModernJumpInstance;
 
     public CCSPlayerModernJump ModernJump
     {
         get
         {
             _ModernJumpOffset = _ModernJumpOffset ?? Schema.GetOffset(0xD20D9A03552BD122);
-            return new CCSPlayerModernJumpImpl(_Handle + _ModernJumpOffset!.Value);
+            var instance = _ModernJumpInstance ??= new CCSPlayerModernJumpImpl(0);
+            instance.DangerousSetHandle(_Handle + _ModernJumpOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LastJumpTickOffset;
+    private GameTick_tImpl? _LastJumpTickInstance;
 
     public GameTick_t LastJumpTick
     {
         get
         {
             _LastJumpTickOffset = _LastJumpTickOffset ?? Schema.GetOffset(0xD20D9A03B2C4EE6C);
-            return new GameTick_tImpl(_Handle + _LastJumpTickOffset!.Value);
+            var instance = _LastJumpTickInstance ??= new GameTick_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastJumpTickOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LastJumpFracOffset;

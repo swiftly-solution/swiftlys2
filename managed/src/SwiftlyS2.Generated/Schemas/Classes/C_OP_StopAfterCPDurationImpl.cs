@@ -17,13 +17,16 @@ internal partial class C_OP_StopAfterCPDurationImpl : CParticleFunctionPreEmissi
     public C_OP_StopAfterCPDurationImpl(nint handle) : base(handle) { }
 
     private static nint? _DurationOffset;
+    private CParticleCollectionFloatInputImpl? _DurationInstance;
 
     public CParticleCollectionFloatInput Duration
     {
         get
         {
             _DurationOffset = _DurationOffset ?? Schema.GetOffset(0xFC2AFAC6BC5E3BAB);
-            return new CParticleCollectionFloatInputImpl(_Handle + _DurationOffset!.Value);
+            var instance = _DurationInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _DurationOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DestroyImmediatelyOffset;

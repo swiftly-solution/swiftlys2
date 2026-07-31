@@ -106,9 +106,18 @@ internal partial class VMixDynamics3BandDesc_tImpl : SchemaClass, VMixDynamics3B
             return ref _Handle.AsRef<bool>(_PeakModeOffset!.Value);
         }
     }
+    private static nint? _BandDescOffset;
+    private SchemaClassFixedArray<VMixDynamicsBand_t>? _BandDescInstance;
+
     public ISchemaClassFixedArray<VMixDynamicsBand_t> BandDesc
     {
-        get => new SchemaClassFixedArray<VMixDynamicsBand_t>(_Handle, 0xA4A1000D04203F47, 3, 36, 4);
+        get
+        {
+            _BandDescOffset = _BandDescOffset ?? Schema.GetOffset(0xA4A1000D04203F47);
+            var instance = _BandDescInstance ??= new SchemaClassFixedArray<VMixDynamicsBand_t>(0, 0xA4A1000D04203F47, 3, 36, 4);
+            instance.DangerousSetHandle(_Handle + _BandDescOffset!.Value);
+            return instance;
+        }
     }
 
 }

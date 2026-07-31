@@ -32,13 +32,16 @@ internal partial class CAnimGraphModelBindingImpl : SchemaClass, CAnimGraphModel
         }
     }
     private static nint? _SharedDataOffset;
+    private SchemaUntypedField? _SharedDataInstance;
 
     public SchemaUntypedField SharedData
     {
         get
         {
             _SharedDataOffset = _SharedDataOffset ?? Schema.GetOffset(0xC0F29633D0085FE6);
-            return new SchemaUntypedField(_Handle + _SharedDataOffset!.Value);
+            var instance = _SharedDataInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _SharedDataOffset!.Value);
+            return instance;
         }
     }
 

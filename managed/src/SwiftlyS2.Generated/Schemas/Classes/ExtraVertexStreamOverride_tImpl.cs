@@ -47,13 +47,16 @@ internal partial class ExtraVertexStreamOverride_tImpl : BaseSceneObjectOverride
         }
     }
     private static nint? _ExtraBufferBindingOffset;
+    private CRenderBufferBindingImpl? _ExtraBufferBindingInstance;
 
     public CRenderBufferBinding ExtraBufferBinding
     {
         get
         {
             _ExtraBufferBindingOffset = _ExtraBufferBindingOffset ?? Schema.GetOffset(0x38857FE800630FD0);
-            return new CRenderBufferBindingImpl(_Handle + _ExtraBufferBindingOffset!.Value);
+            var instance = _ExtraBufferBindingInstance ??= new CRenderBufferBindingImpl(0);
+            instance.DangerousSetHandle(_Handle + _ExtraBufferBindingOffset!.Value);
+            return instance;
         }
     }
 

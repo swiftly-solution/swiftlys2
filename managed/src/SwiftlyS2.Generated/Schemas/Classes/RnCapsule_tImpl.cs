@@ -16,9 +16,18 @@ internal partial class RnCapsule_tImpl : SchemaClass, RnCapsule_t
 {
     public RnCapsule_tImpl(nint handle) : base(handle) { }
 
+    private static nint? _CenterOffset;
+    private SchemaFixedArray<Vector>? _CenterInstance;
+
     public ISchemaFixedArray<Vector> Center
     {
-        get => new SchemaFixedArray<Vector>(_Handle, 0xA2412C03C82A5908, 2, 12, 4);
+        get
+        {
+            _CenterOffset = _CenterOffset ?? Schema.GetOffset(0xA2412C03C82A5908);
+            var instance = _CenterInstance ??= new SchemaFixedArray<Vector>(0, 0xA2412C03C82A5908, 2, 12, 4);
+            instance.DangerousSetHandle(_Handle + _CenterOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _RadiusOffset;
 

@@ -17,33 +17,42 @@ internal partial class CBasePlayerWeaponVDataImpl : CEntitySubclassVDataBaseImpl
     public CBasePlayerWeaponVDataImpl(nint handle) : base(handle) { }
 
     private static nint? _WorldModelOffset;
+    private SchemaUntypedField? _WorldModelInstance;
 
     public SchemaUntypedField WorldModel
     {
         get
         {
             _WorldModelOffset = _WorldModelOffset ?? Schema.GetOffset(0x64E418A0B9041909);
-            return new SchemaUntypedField(_Handle + _WorldModelOffset!.Value);
+            var instance = _WorldModelInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _WorldModelOffset!.Value);
+            return instance;
         }
     }
     private static nint? _WorldModelAg2OverrideOffset;
+    private SchemaUntypedField? _WorldModelAg2OverrideInstance;
 
     public SchemaUntypedField WorldModelAg2Override
     {
         get
         {
             _WorldModelAg2OverrideOffset = _WorldModelAg2OverrideOffset ?? Schema.GetOffset(0x64E418A0FBF9D8C5);
-            return new SchemaUntypedField(_Handle + _WorldModelAg2OverrideOffset!.Value);
+            var instance = _WorldModelAg2OverrideInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _WorldModelAg2OverrideOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ToolsOnlyOwnerModelNameOffset;
+    private SchemaUntypedField? _ToolsOnlyOwnerModelNameInstance;
 
     public SchemaUntypedField ToolsOnlyOwnerModelName
     {
         get
         {
             _ToolsOnlyOwnerModelNameOffset = _ToolsOnlyOwnerModelNameOffset ?? Schema.GetOffset(0x64E418A06DD9DD04);
-            return new SchemaUntypedField(_Handle + _ToolsOnlyOwnerModelNameOffset!.Value);
+            var instance = _ToolsOnlyOwnerModelNameInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ToolsOnlyOwnerModelNameOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BuiltRightHandedOffset;
@@ -67,23 +76,29 @@ internal partial class CBasePlayerWeaponVDataImpl : CEntitySubclassVDataBaseImpl
         }
     }
     private static nint? _MuzzleAttachmentOffset;
+    private SchemaUntypedField? _MuzzleAttachmentInstance;
 
     public SchemaUntypedField MuzzleAttachment
     {
         get
         {
             _MuzzleAttachmentOffset = _MuzzleAttachmentOffset ?? Schema.GetOffset(0x64E418A0E8A8FEA2);
-            return new SchemaUntypedField(_Handle + _MuzzleAttachmentOffset!.Value);
+            var instance = _MuzzleAttachmentInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _MuzzleAttachmentOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MuzzleFlashParticleOffset;
+    private SchemaUntypedField? _MuzzleFlashParticleInstance;
 
     public SchemaUntypedField MuzzleFlashParticle
     {
         get
         {
             _MuzzleFlashParticleOffset = _MuzzleFlashParticleOffset ?? Schema.GetOffset(0x64E418A0CE0726A3);
-            return new SchemaUntypedField(_Handle + _MuzzleFlashParticleOffset!.Value);
+            var instance = _MuzzleFlashParticleInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _MuzzleFlashParticleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MuzzleFlashParticleConfigOffset;
@@ -102,13 +117,16 @@ internal partial class CBasePlayerWeaponVDataImpl : CEntitySubclassVDataBaseImpl
         }
     }
     private static nint? _BarrelSmokeParticleOffset;
+    private SchemaUntypedField? _BarrelSmokeParticleInstance;
 
     public SchemaUntypedField BarrelSmokeParticle
     {
         get
         {
             _BarrelSmokeParticleOffset = _BarrelSmokeParticleOffset ?? Schema.GetOffset(0x64E418A03406364F);
-            return new SchemaUntypedField(_Handle + _BarrelSmokeParticleOffset!.Value);
+            var instance = _BarrelSmokeParticleInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _BarrelSmokeParticleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MuzzleSmokeShotThresholdOffset;
@@ -202,23 +220,29 @@ internal partial class CBasePlayerWeaponVDataImpl : CEntitySubclassVDataBaseImpl
         }
     }
     private static nint? _PrimaryAmmoTypeOffset;
+    private AmmoIndex_tImpl? _PrimaryAmmoTypeInstance;
 
     public AmmoIndex_t PrimaryAmmoType
     {
         get
         {
             _PrimaryAmmoTypeOffset = _PrimaryAmmoTypeOffset ?? Schema.GetOffset(0x64E418A05686E507);
-            return new AmmoIndex_tImpl(_Handle + _PrimaryAmmoTypeOffset!.Value);
+            var instance = _PrimaryAmmoTypeInstance ??= new AmmoIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _PrimaryAmmoTypeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SecondaryAmmoTypeOffset;
+    private AmmoIndex_tImpl? _SecondaryAmmoTypeInstance;
 
     public AmmoIndex_t SecondaryAmmoType
     {
         get
         {
             _SecondaryAmmoTypeOffset = _SecondaryAmmoTypeOffset ?? Schema.GetOffset(0x64E418A046D1E9A7);
-            return new AmmoIndex_tImpl(_Handle + _SecondaryAmmoTypeOffset!.Value);
+            var instance = _SecondaryAmmoTypeInstance ??= new AmmoIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _SecondaryAmmoTypeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MaxClip1Offset;
@@ -332,13 +356,16 @@ internal partial class CBasePlayerWeaponVDataImpl : CEntitySubclassVDataBaseImpl
         }
     }
     private static nint? _ShootSoundsOffset;
+    private SchemaUntypedField? _ShootSoundsInstance;
 
     public SchemaUntypedField ShootSounds
     {
         get
         {
             _ShootSoundsOffset = _ShootSoundsOffset ?? Schema.GetOffset(0x64E418A0DF14A83B);
-            return new SchemaUntypedField(_Handle + _ShootSoundsOffset!.Value);
+            var instance = _ShootSoundsInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ShootSoundsOffset!.Value);
+            return instance;
         }
     }
 

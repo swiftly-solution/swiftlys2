@@ -26,9 +26,18 @@ internal partial class EntitySpottedState_tImpl : SchemaClass, EntitySpottedStat
             return ref _Handle.AsRef<bool>(_SpottedOffset!.Value);
         }
     }
+    private static nint? _SpottedByMaskOffset;
+    private SchemaFixedArray<uint>? _SpottedByMaskInstance;
+
     public ISchemaFixedArray<uint> SpottedByMask
     {
-        get => new SchemaFixedArray<uint>(_Handle, 0x6E33B0170BD77207, 2, 4, 4);
+        get
+        {
+            _SpottedByMaskOffset = _SpottedByMaskOffset ?? Schema.GetOffset(0x6E33B0170BD77207);
+            var instance = _SpottedByMaskInstance ??= new SchemaFixedArray<uint>(0, 0x6E33B0170BD77207, 2, 4, 4);
+            instance.DangerousSetHandle(_Handle + _SpottedByMaskOffset!.Value);
+            return instance;
+        }
     }
 
     public void SpottedUpdated() => Schema.Update(_Handle, 0x6E33B0176DE4F1CA);

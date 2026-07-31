@@ -16,9 +16,18 @@ internal partial class FeSourceEdge_tImpl : SchemaClass, FeSourceEdge_t
 {
     public FeSourceEdge_tImpl(nint handle) : base(handle) { }
 
+    private static nint? _NodeOffset;
+    private SchemaFixedArray<ushort>? _NodeInstance;
+
     public ISchemaFixedArray<ushort> Node
     {
-        get => new SchemaFixedArray<ushort>(_Handle, 0x88268BD3CD6694B9, 2, 2, 2);
+        get
+        {
+            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0x88268BD3CD6694B9);
+            var instance = _NodeInstance ??= new SchemaFixedArray<ushort>(0, 0x88268BD3CD6694B9, 2, 2, 2);
+            instance.DangerousSetHandle(_Handle + _NodeOffset!.Value);
+            return instance;
+        }
     }
 
 }

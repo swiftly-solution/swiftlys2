@@ -87,13 +87,16 @@ internal partial class C_OP_RenderRopesImpl : CBaseRendererSource2Impl, C_OP_Ren
         }
     }
     private static nint? _SubPixelAAScaleOffset;
+    private CParticleCollectionRendererFloatInputImpl? _SubPixelAAScaleInstance;
 
     public CParticleCollectionRendererFloatInput SubPixelAAScale
     {
         get
         {
             _SubPixelAAScaleOffset = _SubPixelAAScaleOffset ?? Schema.GetOffset(0x9BCDD8B23801ACCB);
-            return new CParticleCollectionRendererFloatInputImpl(_Handle + _SubPixelAAScaleOffset!.Value);
+            var instance = _SubPixelAAScaleInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _SubPixelAAScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RadiusTaperOffset;
@@ -137,33 +140,42 @@ internal partial class C_OP_RenderRopesImpl : CBaseRendererSource2Impl, C_OP_Ren
         }
     }
     private static nint? _TextureVWorldSizeOffset;
+    private CParticleCollectionRendererFloatInputImpl? _TextureVWorldSizeInstance;
 
     public CParticleCollectionRendererFloatInput TextureVWorldSize
     {
         get
         {
             _TextureVWorldSizeOffset = _TextureVWorldSizeOffset ?? Schema.GetOffset(0x9BCDD8B230B8BF35);
-            return new CParticleCollectionRendererFloatInputImpl(_Handle + _TextureVWorldSizeOffset!.Value);
+            var instance = _TextureVWorldSizeInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _TextureVWorldSizeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TextureVScrollRateOffset;
+    private CParticleCollectionRendererFloatInputImpl? _TextureVScrollRateInstance;
 
     public CParticleCollectionRendererFloatInput TextureVScrollRate
     {
         get
         {
             _TextureVScrollRateOffset = _TextureVScrollRateOffset ?? Schema.GetOffset(0x9BCDD8B2DC8A591B);
-            return new CParticleCollectionRendererFloatInputImpl(_Handle + _TextureVScrollRateOffset!.Value);
+            var instance = _TextureVScrollRateInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _TextureVScrollRateOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TextureVOffsetOffset;
+    private CParticleCollectionRendererFloatInputImpl? _TextureVOffsetInstance;
 
     public CParticleCollectionRendererFloatInput TextureVOffset
     {
         get
         {
             _TextureVOffsetOffset = _TextureVOffsetOffset ?? Schema.GetOffset(0x9BCDD8B21502ED5B);
-            return new CParticleCollectionRendererFloatInputImpl(_Handle + _TextureVOffsetOffset!.Value);
+            var instance = _TextureVOffsetInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _TextureVOffsetOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TextureVParamsCPOffset;
@@ -247,13 +259,16 @@ internal partial class C_OP_RenderRopesImpl : CBaseRendererSource2Impl, C_OP_Ren
         }
     }
     private static nint? _ScalarFieldForTextureCoordinateOffset;
+    private ParticleAttributeIndex_tImpl? _ScalarFieldForTextureCoordinateInstance;
 
     public ParticleAttributeIndex_t ScalarFieldForTextureCoordinate
     {
         get
         {
             _ScalarFieldForTextureCoordinateOffset = _ScalarFieldForTextureCoordinateOffset ?? Schema.GetOffset(0x9BCDD8B2455C28F7);
-            return new ParticleAttributeIndex_tImpl(_Handle + _ScalarFieldForTextureCoordinateOffset!.Value);
+            var instance = _ScalarFieldForTextureCoordinateInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _ScalarFieldForTextureCoordinateOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ScalarAttributeTextureCoordScaleOffset;
@@ -287,13 +302,16 @@ internal partial class C_OP_RenderRopesImpl : CBaseRendererSource2Impl, C_OP_Ren
         }
     }
     private static nint? _SplitFieldOffset;
+    private ParticleAttributeIndex_tImpl? _SplitFieldInstance;
 
     public ParticleAttributeIndex_t SplitField
     {
         get
         {
             _SplitFieldOffset = _SplitFieldOffset ?? Schema.GetOffset(0x9BCDD8B205F58FA9);
-            return new ParticleAttributeIndex_tImpl(_Handle + _SplitFieldOffset!.Value);
+            var instance = _SplitFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _SplitFieldOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SortBySegmentIDOffset;
@@ -317,13 +335,16 @@ internal partial class C_OP_RenderRopesImpl : CBaseRendererSource2Impl, C_OP_Ren
         }
     }
     private static nint? _VectorFieldForOrientationOffset;
+    private ParticleAttributeIndex_tImpl? _VectorFieldForOrientationInstance;
 
     public ParticleAttributeIndex_t VectorFieldForOrientation
     {
         get
         {
             _VectorFieldForOrientationOffset = _VectorFieldForOrientationOffset ?? Schema.GetOffset(0x9BCDD8B2D2DFF7F5);
-            return new ParticleAttributeIndex_tImpl(_Handle + _VectorFieldForOrientationOffset!.Value);
+            var instance = _VectorFieldForOrientationInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _VectorFieldForOrientationOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DrawAsOpaqueOffset;

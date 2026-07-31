@@ -27,13 +27,16 @@ internal partial class SkeletonAnimCapture_t__Frame_tImpl : SchemaClass, Skeleto
         }
     }
     private static nint? _StampOffset;
+    private SkeletonAnimCapture_t__FrameStamp_tImpl? _StampInstance;
 
     public SkeletonAnimCapture_t__FrameStamp_t Stamp
     {
         get
         {
             _StampOffset = _StampOffset ?? Schema.GetOffset(0x413CC2EE11943004);
-            return new SkeletonAnimCapture_t__FrameStamp_tImpl(_Handle + _StampOffset!.Value);
+            var instance = _StampInstance ??= new SkeletonAnimCapture_t__FrameStamp_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _StampOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TransformOffset;

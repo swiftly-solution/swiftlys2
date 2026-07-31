@@ -17,13 +17,16 @@ internal partial class CCSPlayer_WeaponServicesImpl : CPlayer_WeaponServicesImpl
     public CCSPlayer_WeaponServicesImpl(nint handle) : base(handle) { }
 
     private static nint? _NextAttackOffset;
+    private GameTime_tImpl? _NextAttackInstance;
 
     public GameTime_t NextAttack
     {
         get
         {
             _NextAttackOffset = _NextAttackOffset ?? Schema.GetOffset(0x13067CB23DFDCDEA);
-            return new GameTime_tImpl(_Handle + _NextAttackOffset!.Value);
+            var instance = _NextAttackInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NextAttackOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SavedWeaponOffset;

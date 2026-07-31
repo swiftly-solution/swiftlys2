@@ -57,13 +57,16 @@ internal partial class CRR_ResponseImpl : SchemaClass, CRR_Response
         }
     }
     private static nint? _ParamsOffset;
+    private ResponseParamsImpl? _ParamsInstance;
 
     public ResponseParams Params
     {
         get
         {
             _ParamsOffset = _ParamsOffset ?? Schema.GetOffset(0x7B800878900020D3);
-            return new ResponseParamsImpl(_Handle + _ParamsOffset!.Value);
+            var instance = _ParamsInstance ??= new ResponseParamsImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MatchScoreOffset;
@@ -117,23 +120,29 @@ internal partial class CRR_ResponseImpl : SchemaClass, CRR_Response
         }
     }
     private static nint? _FollowupOffset;
+    private ResponseFollowupImpl? _FollowupInstance;
 
     public ResponseFollowup Followup
     {
         get
         {
             _FollowupOffset = _FollowupOffset ?? Schema.GetOffset(0x7B800878B1F72BFD);
-            return new ResponseFollowupImpl(_Handle + _FollowupOffset!.Value);
+            var instance = _FollowupInstance ??= new ResponseFollowupImpl(0);
+            instance.DangerousSetHandle(_Handle + _FollowupOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RecipientFilterOffset;
+    private SchemaUntypedField? _RecipientFilterInstance;
 
     public SchemaUntypedField RecipientFilter
     {
         get
         {
             _RecipientFilterOffset = _RecipientFilterOffset ?? Schema.GetOffset(0x7B800878CC301E4A);
-            return new SchemaUntypedField(_Handle + _RecipientFilterOffset!.Value);
+            var instance = _RecipientFilterInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _RecipientFilterOffset!.Value);
+            return instance;
         }
     }
 

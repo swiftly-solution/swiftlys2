@@ -17,13 +17,16 @@ internal partial class C_INIT_InitFromParentKilledImpl : CParticleFunctionInitia
     public C_INIT_InitFromParentKilledImpl(nint handle) : base(handle) { }
 
     private static nint? _AttributeToCopyOffset;
+    private ParticleAttributeIndex_tImpl? _AttributeToCopyInstance;
 
     public ParticleAttributeIndex_t AttributeToCopy
     {
         get
         {
             _AttributeToCopyOffset = _AttributeToCopyOffset ?? Schema.GetOffset(0x4CE3F9811953739B);
-            return new ParticleAttributeIndex_tImpl(_Handle + _AttributeToCopyOffset!.Value);
+            var instance = _AttributeToCopyInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _AttributeToCopyOffset!.Value);
+            return instance;
         }
     }
     private static nint? _EventTypeOffset;

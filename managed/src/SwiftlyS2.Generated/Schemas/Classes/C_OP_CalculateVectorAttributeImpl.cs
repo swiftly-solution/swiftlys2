@@ -27,13 +27,16 @@ internal partial class C_OP_CalculateVectorAttributeImpl : CParticleFunctionOper
         }
     }
     private static nint? _FieldInput1Offset;
+    private ParticleAttributeIndex_tImpl? _FieldInput1Instance;
 
     public ParticleAttributeIndex_t FieldInput1
     {
         get
         {
             _FieldInput1Offset = _FieldInput1Offset ?? Schema.GetOffset(0x447A59BCFDDCEC88);
-            return new ParticleAttributeIndex_tImpl(_Handle + _FieldInput1Offset!.Value);
+            var instance = _FieldInput1Instance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FieldInput1Offset!.Value);
+            return instance;
         }
     }
     private static nint? _InputScale1Offset;
@@ -47,13 +50,16 @@ internal partial class C_OP_CalculateVectorAttributeImpl : CParticleFunctionOper
         }
     }
     private static nint? _FieldInput2Offset;
+    private ParticleAttributeIndex_tImpl? _FieldInput2Instance;
 
     public ParticleAttributeIndex_t FieldInput2
     {
         get
         {
             _FieldInput2Offset = _FieldInput2Offset ?? Schema.GetOffset(0x447A59BC00DCF141);
-            return new ParticleAttributeIndex_tImpl(_Handle + _FieldInput2Offset!.Value);
+            var instance = _FieldInput2Instance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FieldInput2Offset!.Value);
+            return instance;
         }
     }
     private static nint? _InputScale2Offset;
@@ -67,13 +73,16 @@ internal partial class C_OP_CalculateVectorAttributeImpl : CParticleFunctionOper
         }
     }
     private static nint? _ControlPointInput1Offset;
+    private ControlPointReference_tImpl? _ControlPointInput1Instance;
 
     public ControlPointReference_t ControlPointInput1
     {
         get
         {
             _ControlPointInput1Offset = _ControlPointInput1Offset ?? Schema.GetOffset(0x447A59BC2FE852C3);
-            return new ControlPointReference_tImpl(_Handle + _ControlPointInput1Offset!.Value);
+            var instance = _ControlPointInput1Instance ??= new ControlPointReference_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _ControlPointInput1Offset!.Value);
+            return instance;
         }
     }
     private static nint? _ControlPointScale1Offset;
@@ -87,13 +96,16 @@ internal partial class C_OP_CalculateVectorAttributeImpl : CParticleFunctionOper
         }
     }
     private static nint? _ControlPointInput2Offset;
+    private ControlPointReference_tImpl? _ControlPointInput2Instance;
 
     public ControlPointReference_t ControlPointInput2
     {
         get
         {
             _ControlPointInput2Offset = _ControlPointInput2Offset ?? Schema.GetOffset(0x447A59BC30E85456);
-            return new ControlPointReference_tImpl(_Handle + _ControlPointInput2Offset!.Value);
+            var instance = _ControlPointInput2Instance ??= new ControlPointReference_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _ControlPointInput2Offset!.Value);
+            return instance;
         }
     }
     private static nint? _ControlPointScale2Offset;
@@ -107,13 +119,16 @@ internal partial class C_OP_CalculateVectorAttributeImpl : CParticleFunctionOper
         }
     }
     private static nint? _FieldOutputOffset;
+    private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
             _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x447A59BCE5729606);
-            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+            var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FinalOutputScaleOffset;

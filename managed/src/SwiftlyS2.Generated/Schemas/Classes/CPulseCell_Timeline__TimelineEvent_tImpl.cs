@@ -27,13 +27,16 @@ internal partial class CPulseCell_Timeline__TimelineEvent_tImpl : SchemaClass, C
         }
     }
     private static nint? _EventOutflowOffset;
+    private CPulse_OutflowConnectionImpl? _EventOutflowInstance;
 
     public CPulse_OutflowConnection EventOutflow
     {
         get
         {
             _EventOutflowOffset = _EventOutflowOffset ?? Schema.GetOffset(0x1CEAA89BC72D3231);
-            return new CPulse_OutflowConnectionImpl(_Handle + _EventOutflowOffset!.Value);
+            var instance = _EventOutflowInstance ??= new CPulse_OutflowConnectionImpl(0);
+            instance.DangerousSetHandle(_Handle + _EventOutflowOffset!.Value);
+            return instance;
         }
     }
 

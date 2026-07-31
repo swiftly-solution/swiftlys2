@@ -16,9 +16,18 @@ internal partial class FeTaperedCapsuleStretch_tImpl : SchemaClass, FeTaperedCap
 {
     public FeTaperedCapsuleStretch_tImpl(nint handle) : base(handle) { }
 
+    private static nint? _NodeOffset;
+    private SchemaFixedArray<ushort>? _NodeInstance;
+
     public ISchemaFixedArray<ushort> Node
     {
-        get => new SchemaFixedArray<ushort>(_Handle, 0x627474D0CD6694B9, 2, 2, 2);
+        get
+        {
+            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0x627474D0CD6694B9);
+            var instance = _NodeInstance ??= new SchemaFixedArray<ushort>(0, 0x627474D0CD6694B9, 2, 2, 2);
+            instance.DangerousSetHandle(_Handle + _NodeOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _CollisionMaskOffset;
 
@@ -40,9 +49,18 @@ internal partial class FeTaperedCapsuleStretch_tImpl : SchemaClass, FeTaperedCap
             return ref _Handle.AsRef<ushort>(_DummyOffset!.Value);
         }
     }
+    private static nint? _RadiusOffset;
+    private SchemaFixedArray<float>? _RadiusInstance;
+
     public ISchemaFixedArray<float> Radius
     {
-        get => new SchemaFixedArray<float>(_Handle, 0x627474D095FBF7AD, 2, 4, 4);
+        get
+        {
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x627474D095FBF7AD);
+            var instance = _RadiusInstance ??= new SchemaFixedArray<float>(0, 0x627474D095FBF7AD, 2, 4, 4);
+            instance.DangerousSetHandle(_Handle + _RadiusOffset!.Value);
+            return instance;
+        }
     }
 
 }

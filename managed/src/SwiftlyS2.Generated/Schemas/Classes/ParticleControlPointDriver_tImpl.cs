@@ -17,13 +17,16 @@ internal partial class ParticleControlPointDriver_tImpl : SchemaClass, ParticleC
     public ParticleControlPointDriver_tImpl(nint handle) : base(handle) { }
 
     private static nint? _ControlPointOffset;
+    private SchemaUntypedField? _ControlPointInstance;
 
     public SchemaUntypedField ControlPoint
     {
         get
         {
             _ControlPointOffset = _ControlPointOffset ?? Schema.GetOffset(0xB7C66843E9EC8FF5);
-            return new SchemaUntypedField(_Handle + _ControlPointOffset!.Value);
+            var instance = _ControlPointInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ControlPointOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AttachTypeOffset;

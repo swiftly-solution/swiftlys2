@@ -57,13 +57,16 @@ internal partial class AI_DefaultNPC_DebugSnapshotData_tImpl : DebugSnapshotBase
         }
     }
     private static nint? _Path_queryOffset;
+    private AI_DefaultNPC_DebugSnapshotData_t__PathQuery_tImpl? _Path_queryInstance;
 
     public AI_DefaultNPC_DebugSnapshotData_t__PathQuery_t Path_query
     {
         get
         {
             _Path_queryOffset = _Path_queryOffset ?? Schema.GetOffset(0xADB6DBDF39D1C6D9);
-            return new AI_DefaultNPC_DebugSnapshotData_t__PathQuery_tImpl(_Handle + _Path_queryOffset!.Value);
+            var instance = _Path_queryInstance ??= new AI_DefaultNPC_DebugSnapshotData_t__PathQuery_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _Path_queryOffset!.Value);
+            return instance;
         }
     }
     private static nint? _Path_queries_speculativeOffset;

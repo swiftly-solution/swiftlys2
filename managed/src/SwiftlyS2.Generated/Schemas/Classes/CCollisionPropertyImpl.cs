@@ -17,13 +17,16 @@ internal partial class CCollisionPropertyImpl : SchemaClass, CCollisionProperty
     public CCollisionPropertyImpl(nint handle) : base(handle) { }
 
     private static nint? _CollisionAttributeOffset;
+    private VPhysicsCollisionAttribute_tImpl? _CollisionAttributeInstance;
 
     public VPhysicsCollisionAttribute_t CollisionAttribute
     {
         get
         {
             _CollisionAttributeOffset = _CollisionAttributeOffset ?? Schema.GetOffset(0x794D87F77E1AEF05);
-            return new VPhysicsCollisionAttribute_tImpl(_Handle + _CollisionAttributeOffset!.Value);
+            var instance = _CollisionAttributeInstance ??= new VPhysicsCollisionAttribute_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _CollisionAttributeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MinsOffset;

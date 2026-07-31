@@ -37,13 +37,16 @@ internal partial class C_OP_LocalAccelerationForceImpl : CParticleFunctionForceI
         }
     }
     private static nint? _AccelOffset;
+    private CParticleCollectionVecInputImpl? _AccelInstance;
 
     public CParticleCollectionVecInput Accel
     {
         get
         {
             _AccelOffset = _AccelOffset ?? Schema.GetOffset(0x3A562A9FEA9A0D73);
-            return new CParticleCollectionVecInputImpl(_Handle + _AccelOffset!.Value);
+            var instance = _AccelInstance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _AccelOffset!.Value);
+            return instance;
         }
     }
 

@@ -16,23 +16,44 @@ internal partial class FeEdgeDesc_tImpl : SchemaClass, FeEdgeDesc_t
 {
     public FeEdgeDesc_tImpl(nint handle) : base(handle) { }
 
+    private static nint? _EdgeOffset;
+    private SchemaFixedArray<ushort>? _EdgeInstance;
+
     public ISchemaFixedArray<ushort> Edge
     {
-        get => new SchemaFixedArray<ushort>(_Handle, 0xD483120F9FB47768, 2, 2, 2);
+        get
+        {
+            _EdgeOffset = _EdgeOffset ?? Schema.GetOffset(0xD483120F9FB47768);
+            var instance = _EdgeInstance ??= new SchemaFixedArray<ushort>(0, 0xD483120F9FB47768, 2, 2, 2);
+            instance.DangerousSetHandle(_Handle + _EdgeOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _SideOffset;
+    private SchemaUntypedField? _SideInstance;
 
     public SchemaUntypedField Side
     {
         get
         {
             _SideOffset = _SideOffset ?? Schema.GetOffset(0xD483120FA0D97E1A);
-            return new SchemaUntypedField(_Handle + _SideOffset!.Value);
+            var instance = _SideInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _SideOffset!.Value);
+            return instance;
         }
     }
+    private static nint? _VirtElemOffset;
+    private SchemaFixedArray<ushort>? _VirtElemInstance;
+
     public ISchemaFixedArray<ushort> VirtElem
     {
-        get => new SchemaFixedArray<ushort>(_Handle, 0xD483120F64A695A5, 2, 2, 2);
+        get
+        {
+            _VirtElemOffset = _VirtElemOffset ?? Schema.GetOffset(0xD483120F64A695A5);
+            var instance = _VirtElemInstance ??= new SchemaFixedArray<ushort>(0, 0xD483120F64A695A5, 2, 2, 2);
+            instance.DangerousSetHandle(_Handle + _VirtElemOffset!.Value);
+            return instance;
+        }
     }
 
 }

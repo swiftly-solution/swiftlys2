@@ -17,13 +17,16 @@ internal partial class C_OP_DecayOffscreenImpl : CParticleFunctionOperatorImpl, 
     public C_OP_DecayOffscreenImpl(nint handle) : base(handle) { }
 
     private static nint? _OffscreenTimeOffset;
+    private CParticleCollectionFloatInputImpl? _OffscreenTimeInstance;
 
     public CParticleCollectionFloatInput OffscreenTime
     {
         get
         {
             _OffscreenTimeOffset = _OffscreenTimeOffset ?? Schema.GetOffset(0xA253F9AEB096E1F1);
-            return new CParticleCollectionFloatInputImpl(_Handle + _OffscreenTimeOffset!.Value);
+            var instance = _OffscreenTimeInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _OffscreenTimeOffset!.Value);
+            return instance;
         }
     }
 

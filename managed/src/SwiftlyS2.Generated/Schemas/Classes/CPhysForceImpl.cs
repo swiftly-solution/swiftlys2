@@ -17,6 +17,7 @@ internal partial class CPhysForceImpl : CPointEntityImpl, CPhysForce
     public CPhysForceImpl(nint handle) : base(handle) { }
 
     private static nint? _ControllerOffset;
+    private IPhysicsMotionControllerImpl? _ControllerInstance;
 
     public IPhysicsMotionController? Controller
     {
@@ -24,7 +25,10 @@ internal partial class CPhysForceImpl : CPointEntityImpl, CPhysForce
         {
             _ControllerOffset = _ControllerOffset ?? Schema.GetOffset(0x29E850D58F2DD553);
             var ptr = _Handle.Read<nint>(_ControllerOffset!.Value);
-            return ptr.IsValidPtr() ? new IPhysicsMotionControllerImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _ControllerInstance ??= new IPhysicsMotionControllerImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _NameAttachOffset;
@@ -83,13 +87,16 @@ internal partial class CPhysForceImpl : CPointEntityImpl, CPhysForce
         }
     }
     private static nint? _IntegratorOffset;
+    private CConstantForceControllerImpl? _IntegratorInstance;
 
     public CConstantForceController Integrator
     {
         get
         {
             _IntegratorOffset = _IntegratorOffset ?? Schema.GetOffset(0x29E850D5BC2E3924);
-            return new CConstantForceControllerImpl(_Handle + _IntegratorOffset!.Value);
+            var instance = _IntegratorInstance ??= new CConstantForceControllerImpl(0);
+            instance.DangerousSetHandle(_Handle + _IntegratorOffset!.Value);
+            return instance;
         }
     }
 

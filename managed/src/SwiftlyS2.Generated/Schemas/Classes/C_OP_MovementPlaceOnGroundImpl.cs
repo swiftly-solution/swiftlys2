@@ -17,13 +17,16 @@ internal partial class C_OP_MovementPlaceOnGroundImpl : CParticleFunctionOperato
     public C_OP_MovementPlaceOnGroundImpl(nint handle) : base(handle) { }
 
     private static nint? _OffsetOffset;
+    private CPerParticleFloatInputImpl? _OffsetInstance;
 
     public CPerParticleFloatInput Offset
     {
         get
         {
             _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0x53323DE97F14BA34);
-            return new CPerParticleFloatInputImpl(_Handle + _OffsetOffset!.Value);
+            var instance = _OffsetInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _OffsetOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MaxTraceLengthOffset;
@@ -47,13 +50,16 @@ internal partial class C_OP_MovementPlaceOnGroundImpl : CParticleFunctionOperato
         }
     }
     private static nint? _TraceDirOffset;
+    private CPerParticleVecInputImpl? _TraceDirInstance;
 
     public CPerParticleVecInput TraceDir
     {
         get
         {
             _TraceDirOffset = _TraceDirOffset ?? Schema.GetOffset(0x53323DE9B3F09745);
-            return new CPerParticleVecInputImpl(_Handle + _TraceDirOffset!.Value);
+            var instance = _TraceDirInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _TraceDirOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TraceOffsetOffset;

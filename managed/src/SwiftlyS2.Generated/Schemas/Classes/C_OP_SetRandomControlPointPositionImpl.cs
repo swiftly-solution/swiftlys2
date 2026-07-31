@@ -57,13 +57,16 @@ internal partial class C_OP_SetRandomControlPointPositionImpl : CParticleFunctio
         }
     }
     private static nint? _ReRandomRateOffset;
+    private CParticleCollectionFloatInputImpl? _ReRandomRateInstance;
 
     public CParticleCollectionFloatInput ReRandomRate
     {
         get
         {
             _ReRandomRateOffset = _ReRandomRateOffset ?? Schema.GetOffset(0x4E797BEA98F44A13);
-            return new CParticleCollectionFloatInputImpl(_Handle + _ReRandomRateOffset!.Value);
+            var instance = _ReRandomRateInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ReRandomRateOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CPMinPosOffset;
@@ -87,13 +90,16 @@ internal partial class C_OP_SetRandomControlPointPositionImpl : CParticleFunctio
         }
     }
     private static nint? _InterpolationOffset;
+    private CParticleCollectionFloatInputImpl? _InterpolationInstance;
 
     public CParticleCollectionFloatInput Interpolation
     {
         get
         {
             _InterpolationOffset = _InterpolationOffset ?? Schema.GetOffset(0x4E797BEACF55B987);
-            return new CParticleCollectionFloatInputImpl(_Handle + _InterpolationOffset!.Value);
+            var instance = _InterpolationInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _InterpolationOffset!.Value);
+            return instance;
         }
     }
 

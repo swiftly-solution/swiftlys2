@@ -16,9 +16,18 @@ internal partial class OldFeEdge_tImpl : SchemaClass, OldFeEdge_t
 {
     public OldFeEdge_tImpl(nint handle) : base(handle) { }
 
+    private static nint? _KOffset;
+    private SchemaFixedArray<float>? _KInstance;
+
     public ISchemaFixedArray<float> K
     {
-        get => new SchemaFixedArray<float>(_Handle, 0xBAF074C17C12054C, 3, 4, 4);
+        get
+        {
+            _KOffset = _KOffset ?? Schema.GetOffset(0xBAF074C17C12054C);
+            var instance = _KInstance ??= new SchemaFixedArray<float>(0, 0xBAF074C17C12054C, 3, 4, 4);
+            instance.DangerousSetHandle(_Handle + _KOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _InvAOffset;
 
@@ -110,13 +119,31 @@ internal partial class OldFeEdge_tImpl : SchemaClass, OldFeEdge_t
             return ref _Handle.AsRef<float>(_AxialModelDistOffset!.Value);
         }
     }
+    private static nint? _AxialModelWeightsOffset;
+    private SchemaFixedArray<float>? _AxialModelWeightsInstance;
+
     public ISchemaFixedArray<float> AxialModelWeights
     {
-        get => new SchemaFixedArray<float>(_Handle, 0xBAF074C1D9CDB73E, 4, 4, 4);
+        get
+        {
+            _AxialModelWeightsOffset = _AxialModelWeightsOffset ?? Schema.GetOffset(0xBAF074C1D9CDB73E);
+            var instance = _AxialModelWeightsInstance ??= new SchemaFixedArray<float>(0, 0xBAF074C1D9CDB73E, 4, 4, 4);
+            instance.DangerousSetHandle(_Handle + _AxialModelWeightsOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _NodeOffset;
+    private SchemaFixedArray<ushort>? _NodeInstance;
+
     public ISchemaFixedArray<ushort> Node
     {
-        get => new SchemaFixedArray<ushort>(_Handle, 0xBAF074C1F6FB9B19, 4, 2, 2);
+        get
+        {
+            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0xBAF074C1F6FB9B19);
+            var instance = _NodeInstance ??= new SchemaFixedArray<ushort>(0, 0xBAF074C1F6FB9B19, 4, 2, 2);
+            instance.DangerousSetHandle(_Handle + _NodeOffset!.Value);
+            return instance;
+        }
     }
 
 }

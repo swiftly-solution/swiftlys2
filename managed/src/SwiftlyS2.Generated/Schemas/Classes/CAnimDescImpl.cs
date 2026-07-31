@@ -27,13 +27,16 @@ internal partial class CAnimDescImpl : SchemaClass, CAnimDesc
         }
     }
     private static nint? _FlagsOffset;
+    private CAnimDesc_FlagImpl? _FlagsInstance;
 
     public CAnimDesc_Flag Flags
     {
         get
         {
             _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0xF48A6666DC74A14C);
-            return new CAnimDesc_FlagImpl(_Handle + _FlagsOffset!.Value);
+            var instance = _FlagsInstance ??= new CAnimDesc_FlagImpl(0);
+            instance.DangerousSetHandle(_Handle + _FlagsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FpsOffset;
@@ -47,13 +50,16 @@ internal partial class CAnimDescImpl : SchemaClass, CAnimDesc
         }
     }
     private static nint? _DataOffset;
+    private CAnimEncodedFramesImpl? _DataInstance;
 
     public CAnimEncodedFrames Data
     {
         get
         {
             _DataOffset = _DataOffset ?? Schema.GetOffset(0xF48A66661621C725);
-            return new CAnimEncodedFramesImpl(_Handle + _DataOffset!.Value);
+            var instance = _DataInstance ??= new CAnimEncodedFramesImpl(0);
+            instance.DangerousSetHandle(_Handle + _DataOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MovementArrayOffset;
@@ -157,13 +163,16 @@ internal partial class CAnimDescImpl : SchemaClass, CAnimDesc
         }
     }
     private static nint? _SequenceParamsOffset;
+    private CAnimSequenceParamsImpl? _SequenceParamsInstance;
 
     public CAnimSequenceParams SequenceParams
     {
         get
         {
             _SequenceParamsOffset = _SequenceParamsOffset ?? Schema.GetOffset(0xF48A666645F20F3E);
-            return new CAnimSequenceParamsImpl(_Handle + _SequenceParamsOffset!.Value);
+            var instance = _SequenceParamsInstance ??= new CAnimSequenceParamsImpl(0);
+            instance.DangerousSetHandle(_Handle + _SequenceParamsOffset!.Value);
+            return instance;
         }
     }
 

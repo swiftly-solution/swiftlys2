@@ -37,13 +37,16 @@ internal partial class CNmLayerBlendNode__CDefinitionImpl : CNmPoseNode__CDefini
         }
     }
     private static nint? _LayerDefinitionOffset;
+    private SchemaUntypedField? _LayerDefinitionInstance;
 
     public SchemaUntypedField LayerDefinition
     {
         get
         {
             _LayerDefinitionOffset = _LayerDefinitionOffset ?? Schema.GetOffset(0xF9CDDBC51AE2DAAF);
-            return new SchemaUntypedField(_Handle + _LayerDefinitionOffset!.Value);
+            var instance = _LayerDefinitionInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _LayerDefinitionOffset!.Value);
+            return instance;
         }
     }
 

@@ -17,33 +17,42 @@ internal partial class CPrecipitationVDataImpl : CEntitySubclassVDataBaseImpl, C
     public CPrecipitationVDataImpl(nint handle) : base(handle) { }
 
     private static nint? _ParticlePrecipitationEffectOffset;
+    private SchemaUntypedField? _ParticlePrecipitationEffectInstance;
 
     public SchemaUntypedField ParticlePrecipitationEffect
     {
         get
         {
             _ParticlePrecipitationEffectOffset = _ParticlePrecipitationEffectOffset ?? Schema.GetOffset(0x4F75C25D9E8770E0);
-            return new SchemaUntypedField(_Handle + _ParticlePrecipitationEffectOffset!.Value);
+            var instance = _ParticlePrecipitationEffectInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ParticlePrecipitationEffectOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ParticlePrecipitationPuddleEffectOffset;
+    private SchemaUntypedField? _ParticlePrecipitationPuddleEffectInstance;
 
     public SchemaUntypedField ParticlePrecipitationPuddleEffect
     {
         get
         {
             _ParticlePrecipitationPuddleEffectOffset = _ParticlePrecipitationPuddleEffectOffset ?? Schema.GetOffset(0x4F75C25D63135904);
-            return new SchemaUntypedField(_Handle + _ParticlePrecipitationPuddleEffectOffset!.Value);
+            var instance = _ParticlePrecipitationPuddleEffectInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ParticlePrecipitationPuddleEffectOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ParticlePrecipitationPostEffectOffset;
+    private SchemaUntypedField? _ParticlePrecipitationPostEffectInstance;
 
     public SchemaUntypedField ParticlePrecipitationPostEffect
     {
         get
         {
             _ParticlePrecipitationPostEffectOffset = _ParticlePrecipitationPostEffectOffset ?? Schema.GetOffset(0x4F75C25DAA7F13AE);
-            return new SchemaUntypedField(_Handle + _ParticlePrecipitationPostEffectOffset!.Value);
+            var instance = _ParticlePrecipitationPostEffectInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ParticlePrecipitationPostEffectOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InnerDistanceOffset;
@@ -122,13 +131,16 @@ internal partial class CPrecipitationVDataImpl : CEntitySubclassVDataBaseImpl, C
         }
     }
     private static nint? _SnapshotFilterOffset;
+    private PrecipitationFilter_tImpl? _SnapshotFilterInstance;
 
     public PrecipitationFilter_t SnapshotFilter
     {
         get
         {
             _SnapshotFilterOffset = _SnapshotFilterOffset ?? Schema.GetOffset(0x4F75C25DE6E146FF);
-            return new PrecipitationFilter_tImpl(_Handle + _SnapshotFilterOffset!.Value);
+            var instance = _SnapshotFilterInstance ??= new PrecipitationFilter_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _SnapshotFilterOffset!.Value);
+            return instance;
         }
     }
 

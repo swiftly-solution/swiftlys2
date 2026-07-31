@@ -37,13 +37,16 @@ internal partial class locksound_tImpl : SchemaClass, locksound_t
         }
     }
     private static nint? _FlwaitSoundOffset;
+    private GameTime_tImpl? _FlwaitSoundInstance;
 
     public GameTime_t FlwaitSound
     {
         get
         {
             _FlwaitSoundOffset = _FlwaitSoundOffset ?? Schema.GetOffset(0xDAD0AE2297A4A845);
-            return new GameTime_tImpl(_Handle + _FlwaitSoundOffset!.Value);
+            var instance = _FlwaitSoundInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FlwaitSoundOffset!.Value);
+            return instance;
         }
     }
 

@@ -72,33 +72,42 @@ internal partial class CCSGO_TeamPreviewCharacterPositionImpl : CBaseEntityImpl,
         }
     }
     private static nint? _AgentItemOffset;
+    private CEconItemViewImpl? _AgentItemInstance;
 
     public CEconItemView AgentItem
     {
         get
         {
             _AgentItemOffset = _AgentItemOffset ?? Schema.GetOffset(0x58B5CA366B625605);
-            return new CEconItemViewImpl(_Handle + _AgentItemOffset!.Value);
+            var instance = _AgentItemInstance ??= new CEconItemViewImpl(0);
+            instance.DangerousSetHandle(_Handle + _AgentItemOffset!.Value);
+            return instance;
         }
     }
     private static nint? _GlovesItemOffset;
+    private CEconItemViewImpl? _GlovesItemInstance;
 
     public CEconItemView GlovesItem
     {
         get
         {
             _GlovesItemOffset = _GlovesItemOffset ?? Schema.GetOffset(0x58B5CA3692931DD0);
-            return new CEconItemViewImpl(_Handle + _GlovesItemOffset!.Value);
+            var instance = _GlovesItemInstance ??= new CEconItemViewImpl(0);
+            instance.DangerousSetHandle(_Handle + _GlovesItemOffset!.Value);
+            return instance;
         }
     }
     private static nint? _WeaponItemOffset;
+    private CEconItemViewImpl? _WeaponItemInstance;
 
     public CEconItemView WeaponItem
     {
         get
         {
             _WeaponItemOffset = _WeaponItemOffset ?? Schema.GetOffset(0x58B5CA3689437C5A);
-            return new CEconItemViewImpl(_Handle + _WeaponItemOffset!.Value);
+            var instance = _WeaponItemInstance ??= new CEconItemViewImpl(0);
+            instance.DangerousSetHandle(_Handle + _WeaponItemOffset!.Value);
+            return instance;
         }
     }
 

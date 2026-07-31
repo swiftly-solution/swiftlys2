@@ -17,63 +17,81 @@ internal partial class CAI_ExpresserImpl : SchemaClass, CAI_Expresser
     public CAI_ExpresserImpl(nint handle) : base(handle) { }
 
     private static nint? _ConceptCooldownsOffset;
+    private SchemaUntypedField? _ConceptCooldownsInstance;
 
     public SchemaUntypedField ConceptCooldowns
     {
         get
         {
             _ConceptCooldownsOffset = _ConceptCooldownsOffset ?? Schema.GetOffset(0xFB9DA1AC3E92F68F);
-            return new SchemaUntypedField(_Handle + _ConceptCooldownsOffset!.Value);
+            var instance = _ConceptCooldownsInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ConceptCooldownsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RuleCooldownsOffset;
+    private SchemaUntypedField? _RuleCooldownsInstance;
 
     public SchemaUntypedField RuleCooldowns
     {
         get
         {
             _RuleCooldownsOffset = _RuleCooldownsOffset ?? Schema.GetOffset(0xFB9DA1AC67C524CF);
-            return new SchemaUntypedField(_Handle + _RuleCooldownsOffset!.Value);
+            var instance = _RuleCooldownsInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _RuleCooldownsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StopTalkTimeOffset;
+    private GameTime_tImpl? _StopTalkTimeInstance;
 
     public GameTime_t StopTalkTime
     {
         get
         {
             _StopTalkTimeOffset = _StopTalkTimeOffset ?? Schema.GetOffset(0xFB9DA1AC36131EC4);
-            return new GameTime_tImpl(_Handle + _StopTalkTimeOffset!.Value);
+            var instance = _StopTalkTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _StopTalkTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StopTalkTimeWithoutDelayOffset;
+    private GameTime_tImpl? _StopTalkTimeWithoutDelayInstance;
 
     public GameTime_t StopTalkTimeWithoutDelay
     {
         get
         {
             _StopTalkTimeWithoutDelayOffset = _StopTalkTimeWithoutDelayOffset ?? Schema.GetOffset(0xFB9DA1ACB3CAE32F);
-            return new GameTime_tImpl(_Handle + _StopTalkTimeWithoutDelayOffset!.Value);
+            var instance = _StopTalkTimeWithoutDelayInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _StopTalkTimeWithoutDelayOffset!.Value);
+            return instance;
         }
     }
     private static nint? _QueuedSpeechTimeOffset;
+    private GameTime_tImpl? _QueuedSpeechTimeInstance;
 
     public GameTime_t QueuedSpeechTime
     {
         get
         {
             _QueuedSpeechTimeOffset = _QueuedSpeechTimeOffset ?? Schema.GetOffset(0xFB9DA1AC93DE376D);
-            return new GameTime_tImpl(_Handle + _QueuedSpeechTimeOffset!.Value);
+            var instance = _QueuedSpeechTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _QueuedSpeechTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BlockedTalkTimeOffset;
+    private GameTime_tImpl? _BlockedTalkTimeInstance;
 
     public GameTime_t BlockedTalkTime
     {
         get
         {
             _BlockedTalkTimeOffset = _BlockedTalkTimeOffset ?? Schema.GetOffset(0xFB9DA1AC2A2AC272);
-            return new GameTime_tImpl(_Handle + _BlockedTalkTimeOffset!.Value);
+            var instance = _BlockedTalkTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _BlockedTalkTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _VoicePitchOffset;
@@ -87,13 +105,16 @@ internal partial class CAI_ExpresserImpl : SchemaClass, CAI_Expresser
         }
     }
     private static nint? _LastTimeAcceptedSpeakOffset;
+    private GameTime_tImpl? _LastTimeAcceptedSpeakInstance;
 
     public GameTime_t LastTimeAcceptedSpeak
     {
         get
         {
             _LastTimeAcceptedSpeakOffset = _LastTimeAcceptedSpeakOffset ?? Schema.GetOffset(0xFB9DA1AC8D9FF64F);
-            return new GameTime_tImpl(_Handle + _LastTimeAcceptedSpeakOffset!.Value);
+            var instance = _LastTimeAcceptedSpeakInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastTimeAcceptedSpeakOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AllowSpeakingInterruptsOffset;
@@ -137,6 +158,7 @@ internal partial class CAI_ExpresserImpl : SchemaClass, CAI_Expresser
         }
     }
     private static nint? _OuterOffset;
+    private CBaseModelEntityImpl? _OuterInstance;
 
     public CBaseModelEntity? Outer
     {
@@ -144,7 +166,10 @@ internal partial class CAI_ExpresserImpl : SchemaClass, CAI_Expresser
         {
             _OuterOffset = _OuterOffset ?? Schema.GetOffset(0xFB9DA1AC7359CF3A);
             var ptr = _Handle.Read<nint>(_OuterOffset!.Value);
-            return ptr.IsValidPtr() ? new CBaseModelEntityImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _OuterInstance ??= new CBaseModelEntityImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
 

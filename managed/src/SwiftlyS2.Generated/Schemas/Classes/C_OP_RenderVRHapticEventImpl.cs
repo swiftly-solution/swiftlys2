@@ -47,13 +47,16 @@ internal partial class C_OP_RenderVRHapticEventImpl : CParticleFunctionRendererI
         }
     }
     private static nint? _AmplitudeOffset;
+    private CPerParticleFloatInputImpl? _AmplitudeInstance;
 
     public CPerParticleFloatInput Amplitude
     {
         get
         {
             _AmplitudeOffset = _AmplitudeOffset ?? Schema.GetOffset(0xB83C5242B44B0E18);
-            return new CPerParticleFloatInputImpl(_Handle + _AmplitudeOffset!.Value);
+            var instance = _AmplitudeInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _AmplitudeOffset!.Value);
+            return instance;
         }
     }
 

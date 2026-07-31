@@ -47,6 +47,7 @@ internal partial class CNmGraphDefinitionImpl : SchemaClass, CNmGraphDefinition
         }
     }
     private static nint? _UserDataOffset;
+    private CNmGraphVariationUserDataImpl? _UserDataInstance;
 
     public CNmGraphVariationUserData? UserData
     {
@@ -54,7 +55,10 @@ internal partial class CNmGraphDefinitionImpl : SchemaClass, CNmGraphDefinition
         {
             _UserDataOffset = _UserDataOffset ?? Schema.GetOffset(0xE028E08CBDF39484);
             var ptr = _Handle.Read<nint>(_UserDataOffset!.Value);
-            return ptr.IsValidPtr() ? new CNmGraphVariationUserDataImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _UserDataInstance ??= new CNmGraphVariationUserDataImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _PersistentNodeIndicesOffset;

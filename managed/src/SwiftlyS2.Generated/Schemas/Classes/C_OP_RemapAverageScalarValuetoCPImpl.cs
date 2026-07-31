@@ -27,13 +27,16 @@ internal partial class C_OP_RemapAverageScalarValuetoCPImpl : CParticleFunctionP
         }
     }
     private static nint? _DecimalPlacesOffset;
+    private CParticleCollectionFloatInputImpl? _DecimalPlacesInstance;
 
     public CParticleCollectionFloatInput DecimalPlaces
     {
         get
         {
             _DecimalPlacesOffset = _DecimalPlacesOffset ?? Schema.GetOffset(0x98EDCBBCB314ED06);
-            return new CParticleCollectionFloatInputImpl(_Handle + _DecimalPlacesOffset!.Value);
+            var instance = _DecimalPlacesInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _DecimalPlacesOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OutControlPointNumberOffset;
@@ -57,23 +60,29 @@ internal partial class C_OP_RemapAverageScalarValuetoCPImpl : CParticleFunctionP
         }
     }
     private static nint? _FieldOffset;
+    private ParticleAttributeIndex_tImpl? _FieldInstance;
 
     public ParticleAttributeIndex_t Field
     {
         get
         {
             _FieldOffset = _FieldOffset ?? Schema.GetOffset(0x98EDCBBCC257B93B);
-            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOffset!.Value);
+            var instance = _FieldInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FieldOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OutputRemapOffset;
+    private CParticleRemapFloatInputImpl? _OutputRemapInstance;
 
     public CParticleRemapFloatInput OutputRemap
     {
         get
         {
             _OutputRemapOffset = _OutputRemapOffset ?? Schema.GetOffset(0x98EDCBBC1239396F);
-            return new CParticleRemapFloatInputImpl(_Handle + _OutputRemapOffset!.Value);
+            var instance = _OutputRemapInstance ??= new CParticleRemapFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _OutputRemapOffset!.Value);
+            return instance;
         }
     }
 

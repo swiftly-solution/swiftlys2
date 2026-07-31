@@ -47,13 +47,16 @@ internal partial class WorldBuilderParams_tImpl : SchemaClass, WorldBuilderParam
         }
     }
     private static nint? _BakedLightingInfoOffset;
+    private BakedLightingInfo_tImpl? _BakedLightingInfoInstance;
 
     public BakedLightingInfo_t BakedLightingInfo
     {
         get
         {
             _BakedLightingInfoOffset = _BakedLightingInfoOffset ?? Schema.GetOffset(0x37270ACBC2128E04);
-            return new BakedLightingInfo_tImpl(_Handle + _BakedLightingInfoOffset!.Value);
+            var instance = _BakedLightingInfoInstance ??= new BakedLightingInfo_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _BakedLightingInfoOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CompileTimestampOffset;

@@ -27,13 +27,16 @@ internal partial class CCSPlayerController_ActionTrackingServicesImpl : CPlayerC
         }
     }
     private static nint? _MatchStatsOffset;
+    private CSMatchStats_tImpl? _MatchStatsInstance;
 
     public CSMatchStats_t MatchStats
     {
         get
         {
             _MatchStatsOffset = _MatchStatsOffset ?? Schema.GetOffset(0x96DF63C11729A24D);
-            return new CSMatchStats_tImpl(_Handle + _MatchStatsOffset!.Value);
+            var instance = _MatchStatsInstance ??= new CSMatchStats_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _MatchStatsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NumRoundKillsOffset;

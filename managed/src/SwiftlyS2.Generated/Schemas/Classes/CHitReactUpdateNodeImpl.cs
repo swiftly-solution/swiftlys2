@@ -17,63 +17,81 @@ internal partial class CHitReactUpdateNodeImpl : CUnaryUpdateNodeImpl, CHitReact
     public CHitReactUpdateNodeImpl(nint handle) : base(handle) { }
 
     private static nint? _OpFixedSettingsOffset;
+    private HitReactFixedSettings_tImpl? _OpFixedSettingsInstance;
 
     public HitReactFixedSettings_t OpFixedSettings
     {
         get
         {
             _OpFixedSettingsOffset = _OpFixedSettingsOffset ?? Schema.GetOffset(0x64E4D4A7E533AB09);
-            return new HitReactFixedSettings_tImpl(_Handle + _OpFixedSettingsOffset!.Value);
+            var instance = _OpFixedSettingsInstance ??= new HitReactFixedSettings_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _OpFixedSettingsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TriggerParamOffset;
+    private CAnimParamHandleImpl? _TriggerParamInstance;
 
     public CAnimParamHandle TriggerParam
     {
         get
         {
             _TriggerParamOffset = _TriggerParamOffset ?? Schema.GetOffset(0x64E4D4A7AA3B4860);
-            return new CAnimParamHandleImpl(_Handle + _TriggerParamOffset!.Value);
+            var instance = _TriggerParamInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _TriggerParamOffset!.Value);
+            return instance;
         }
     }
     private static nint? _HitBoneParamOffset;
+    private CAnimParamHandleImpl? _HitBoneParamInstance;
 
     public CAnimParamHandle HitBoneParam
     {
         get
         {
             _HitBoneParamOffset = _HitBoneParamOffset ?? Schema.GetOffset(0x64E4D4A70CD5764D);
-            return new CAnimParamHandleImpl(_Handle + _HitBoneParamOffset!.Value);
+            var instance = _HitBoneParamInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _HitBoneParamOffset!.Value);
+            return instance;
         }
     }
     private static nint? _HitOffsetParamOffset;
+    private CAnimParamHandleImpl? _HitOffsetParamInstance;
 
     public CAnimParamHandle HitOffsetParam
     {
         get
         {
             _HitOffsetParamOffset = _HitOffsetParamOffset ?? Schema.GetOffset(0x64E4D4A7F1CA4A4A);
-            return new CAnimParamHandleImpl(_Handle + _HitOffsetParamOffset!.Value);
+            var instance = _HitOffsetParamInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _HitOffsetParamOffset!.Value);
+            return instance;
         }
     }
     private static nint? _HitDirectionParamOffset;
+    private CAnimParamHandleImpl? _HitDirectionParamInstance;
 
     public CAnimParamHandle HitDirectionParam
     {
         get
         {
             _HitDirectionParamOffset = _HitDirectionParamOffset ?? Schema.GetOffset(0x64E4D4A76F980EDC);
-            return new CAnimParamHandleImpl(_Handle + _HitDirectionParamOffset!.Value);
+            var instance = _HitDirectionParamInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _HitDirectionParamOffset!.Value);
+            return instance;
         }
     }
     private static nint? _HitStrengthParamOffset;
+    private CAnimParamHandleImpl? _HitStrengthParamInstance;
 
     public CAnimParamHandle HitStrengthParam
     {
         get
         {
             _HitStrengthParamOffset = _HitStrengthParamOffset ?? Schema.GetOffset(0x64E4D4A7BD447408);
-            return new CAnimParamHandleImpl(_Handle + _HitStrengthParamOffset!.Value);
+            var instance = _HitStrengthParamInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _HitStrengthParamOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MinDelayBetweenHitsOffset;

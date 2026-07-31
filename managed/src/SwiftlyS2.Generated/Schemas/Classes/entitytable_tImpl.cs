@@ -122,6 +122,7 @@ internal partial class entitytable_tImpl : SchemaClass, entitytable_t
         }
     }
     private static nint? _PrecacheEntityKeysOffset;
+    private SchemaUntypedField? _PrecacheEntityKeysInstance;
 
     public SchemaUntypedField? PrecacheEntityKeys
     {
@@ -129,7 +130,10 @@ internal partial class entitytable_tImpl : SchemaClass, entitytable_t
         {
             _PrecacheEntityKeysOffset = _PrecacheEntityKeysOffset ?? Schema.GetOffset(0x1E0697B560FC00F1);
             var ptr = _Handle.Read<nint>(_PrecacheEntityKeysOffset!.Value);
-            return ptr.IsValidPtr() ? new SchemaUntypedField(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _PrecacheEntityKeysInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
 

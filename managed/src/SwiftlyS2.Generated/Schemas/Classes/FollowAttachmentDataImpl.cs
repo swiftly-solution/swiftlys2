@@ -27,13 +27,16 @@ internal partial class FollowAttachmentDataImpl : SchemaClass, FollowAttachmentD
         }
     }
     private static nint? _AttachmentHandleOffset;
+    private AttachmentHandle_tImpl? _AttachmentHandleInstance;
 
     public AttachmentHandle_t AttachmentHandle
     {
         get
         {
             _AttachmentHandleOffset = _AttachmentHandleOffset ?? Schema.GetOffset(0x7E37AD4DA203035E);
-            return new AttachmentHandle_tImpl(_Handle + _AttachmentHandleOffset!.Value);
+            var instance = _AttachmentHandleInstance ??= new AttachmentHandle_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _AttachmentHandleOffset!.Value);
+            return instance;
         }
     }
 

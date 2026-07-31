@@ -27,13 +27,16 @@ internal partial class C_OP_RenderFlattenGrassImpl : CParticleFunctionRendererIm
         }
     }
     private static nint? _StrengthFieldOverrideOffset;
+    private ParticleAttributeIndex_tImpl? _StrengthFieldOverrideInstance;
 
     public ParticleAttributeIndex_t StrengthFieldOverride
     {
         get
         {
             _StrengthFieldOverrideOffset = _StrengthFieldOverrideOffset ?? Schema.GetOffset(0x81877FD91996F4F8);
-            return new ParticleAttributeIndex_tImpl(_Handle + _StrengthFieldOverrideOffset!.Value);
+            var instance = _StrengthFieldOverrideInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _StrengthFieldOverrideOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RadiusScaleOffset;

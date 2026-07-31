@@ -17,13 +17,16 @@ internal partial class CCSPlayer_AimPunchServicesImpl : CPlayerPawnComponentImpl
     public CCSPlayer_AimPunchServicesImpl(nint handle) : base(handle) { }
 
     private static nint? _PredictableBaseTickOffset;
+    private GameTick_tImpl? _PredictableBaseTickInstance;
 
     public GameTick_t PredictableBaseTick
     {
         get
         {
             _PredictableBaseTickOffset = _PredictableBaseTickOffset ?? Schema.GetOffset(0xDFFC786DC958216A);
-            return new GameTick_tImpl(_Handle + _PredictableBaseTickOffset!.Value);
+            var instance = _PredictableBaseTickInstance ??= new GameTick_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _PredictableBaseTickOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PredictableBaseTickInterpAmountOffset;
@@ -57,13 +60,16 @@ internal partial class CCSPlayer_AimPunchServicesImpl : CPlayerPawnComponentImpl
         }
     }
     private static nint? _UnpredictableBaseTickOffset;
+    private GameTick_tImpl? _UnpredictableBaseTickInstance;
 
     public GameTick_t UnpredictableBaseTick
     {
         get
         {
             _UnpredictableBaseTickOffset = _UnpredictableBaseTickOffset ?? Schema.GetOffset(0xDFFC786DD8B95A17);
-            return new GameTick_tImpl(_Handle + _UnpredictableBaseTickOffset!.Value);
+            var instance = _UnpredictableBaseTickInstance ??= new GameTick_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _UnpredictableBaseTickOffset!.Value);
+            return instance;
         }
     }
     private static nint? _UnpredictableBaseAngleOffset;

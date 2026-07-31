@@ -47,13 +47,16 @@ internal partial class C_OP_SetControlPointPositionToRandomActiveCPImpl : CParti
         }
     }
     private static nint? _ResetRateOffset;
+    private CParticleCollectionFloatInputImpl? _ResetRateInstance;
 
     public CParticleCollectionFloatInput ResetRate
     {
         get
         {
             _ResetRateOffset = _ResetRateOffset ?? Schema.GetOffset(0x7B108D369E741FFC);
-            return new CParticleCollectionFloatInputImpl(_Handle + _ResetRateOffset!.Value);
+            var instance = _ResetRateInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ResetRateOffset!.Value);
+            return instance;
         }
     }
 

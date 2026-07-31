@@ -17,83 +17,107 @@ internal partial class CAimCameraUpdateNodeImpl : CUnaryUpdateNodeImpl, CAimCame
     public CAimCameraUpdateNodeImpl(nint handle) : base(handle) { }
 
     private static nint? _ParameterPositionOffset;
+    private CAnimParamHandleImpl? _ParameterPositionInstance;
 
     public CAnimParamHandle ParameterPosition
     {
         get
         {
             _ParameterPositionOffset = _ParameterPositionOffset ?? Schema.GetOffset(0xE8DD6D01DA71CD41);
-            return new CAnimParamHandleImpl(_Handle + _ParameterPositionOffset!.Value);
+            var instance = _ParameterPositionInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParameterPositionOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ParameterOrientationOffset;
+    private CAnimParamHandleImpl? _ParameterOrientationInstance;
 
     public CAnimParamHandle ParameterOrientation
     {
         get
         {
             _ParameterOrientationOffset = _ParameterOrientationOffset ?? Schema.GetOffset(0xE8DD6D011320E9C8);
-            return new CAnimParamHandleImpl(_Handle + _ParameterOrientationOffset!.Value);
+            var instance = _ParameterOrientationInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParameterOrientationOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ParameterPelvisOffsetOffset;
+    private CAnimParamHandleImpl? _ParameterPelvisOffsetInstance;
 
     public CAnimParamHandle ParameterPelvisOffset
     {
         get
         {
             _ParameterPelvisOffsetOffset = _ParameterPelvisOffsetOffset ?? Schema.GetOffset(0xE8DD6D01C4C67FA8);
-            return new CAnimParamHandleImpl(_Handle + _ParameterPelvisOffsetOffset!.Value);
+            var instance = _ParameterPelvisOffsetInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParameterPelvisOffsetOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ParameterCameraOnlyOffset;
+    private CAnimParamHandleImpl? _ParameterCameraOnlyInstance;
 
     public CAnimParamHandle ParameterCameraOnly
     {
         get
         {
             _ParameterCameraOnlyOffset = _ParameterCameraOnlyOffset ?? Schema.GetOffset(0xE8DD6D013A129627);
-            return new CAnimParamHandleImpl(_Handle + _ParameterCameraOnlyOffset!.Value);
+            var instance = _ParameterCameraOnlyInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParameterCameraOnlyOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ParameterWeaponDepenetrationDistanceOffset;
+    private CAnimParamHandleImpl? _ParameterWeaponDepenetrationDistanceInstance;
 
     public CAnimParamHandle ParameterWeaponDepenetrationDistance
     {
         get
         {
             _ParameterWeaponDepenetrationDistanceOffset = _ParameterWeaponDepenetrationDistanceOffset ?? Schema.GetOffset(0xE8DD6D01316BB0BD);
-            return new CAnimParamHandleImpl(_Handle + _ParameterWeaponDepenetrationDistanceOffset!.Value);
+            var instance = _ParameterWeaponDepenetrationDistanceInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParameterWeaponDepenetrationDistanceOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ParameterWeaponDepenetrationDeltaOffset;
+    private CAnimParamHandleImpl? _ParameterWeaponDepenetrationDeltaInstance;
 
     public CAnimParamHandle ParameterWeaponDepenetrationDelta
     {
         get
         {
             _ParameterWeaponDepenetrationDeltaOffset = _ParameterWeaponDepenetrationDeltaOffset ?? Schema.GetOffset(0xE8DD6D01D6C8CDF0);
-            return new CAnimParamHandleImpl(_Handle + _ParameterWeaponDepenetrationDeltaOffset!.Value);
+            var instance = _ParameterWeaponDepenetrationDeltaInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParameterWeaponDepenetrationDeltaOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ParameterCameraClearanceDistanceOffset;
+    private CAnimParamHandleImpl? _ParameterCameraClearanceDistanceInstance;
 
     public CAnimParamHandle ParameterCameraClearanceDistance
     {
         get
         {
             _ParameterCameraClearanceDistanceOffset = _ParameterCameraClearanceDistanceOffset ?? Schema.GetOffset(0xE8DD6D01F4F2C992);
-            return new CAnimParamHandleImpl(_Handle + _ParameterCameraClearanceDistanceOffset!.Value);
+            var instance = _ParameterCameraClearanceDistanceInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParameterCameraClearanceDistanceOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OpFixedSettingsOffset;
+    private AimCameraOpFixedSettings_tImpl? _OpFixedSettingsInstance;
 
     public AimCameraOpFixedSettings_t OpFixedSettings
     {
         get
         {
             _OpFixedSettingsOffset = _OpFixedSettingsOffset ?? Schema.GetOffset(0xE8DD6D01E533AB09);
-            return new AimCameraOpFixedSettings_tImpl(_Handle + _OpFixedSettingsOffset!.Value);
+            var instance = _OpFixedSettingsInstance ??= new AimCameraOpFixedSettings_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _OpFixedSettingsOffset!.Value);
+            return instance;
         }
     }
 

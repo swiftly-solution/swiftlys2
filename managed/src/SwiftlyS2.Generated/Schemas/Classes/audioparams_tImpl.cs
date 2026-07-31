@@ -16,9 +16,18 @@ internal partial class audioparams_tImpl : SchemaClass, audioparams_t
 {
     public audioparams_tImpl(nint handle) : base(handle) { }
 
+    private static nint? _LocalSoundOffset;
+    private SchemaFixedArray<Vector>? _LocalSoundInstance;
+
     public ISchemaFixedArray<Vector> LocalSound
     {
-        get => new SchemaFixedArray<Vector>(_Handle, 0x6D349E3CCE184A47, 8, 12, 4);
+        get
+        {
+            _LocalSoundOffset = _LocalSoundOffset ?? Schema.GetOffset(0x6D349E3CCE184A47);
+            var instance = _LocalSoundInstance ??= new SchemaFixedArray<Vector>(0, 0x6D349E3CCE184A47, 8, 12, 4);
+            instance.DangerousSetHandle(_Handle + _LocalSoundOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _SoundscapeIndexOffset;
 

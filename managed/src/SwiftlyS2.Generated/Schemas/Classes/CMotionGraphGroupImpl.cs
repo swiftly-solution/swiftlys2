@@ -17,13 +17,16 @@ internal partial class CMotionGraphGroupImpl : SchemaClass, CMotionGraphGroup
     public CMotionGraphGroupImpl(nint handle) : base(handle) { }
 
     private static nint? _SearchDBOffset;
+    private CMotionSearchDBImpl? _SearchDBInstance;
 
     public CMotionSearchDB SearchDB
     {
         get
         {
             _SearchDBOffset = _SearchDBOffset ?? Schema.GetOffset(0x34D64AAF5662226F);
-            return new CMotionSearchDBImpl(_Handle + _SearchDBOffset!.Value);
+            var instance = _SearchDBInstance ??= new CMotionSearchDBImpl(0);
+            instance.DangerousSetHandle(_Handle + _SearchDBOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MotionGraphsOffset;
@@ -57,13 +60,16 @@ internal partial class CMotionGraphGroupImpl : SchemaClass, CMotionGraphGroup
         }
     }
     private static nint? _IsActiveScriptOffset;
+    private AnimScriptHandleImpl? _IsActiveScriptInstance;
 
     public AnimScriptHandle IsActiveScript
     {
         get
         {
             _IsActiveScriptOffset = _IsActiveScriptOffset ?? Schema.GetOffset(0x34D64AAFF2DBEC2A);
-            return new AnimScriptHandleImpl(_Handle + _IsActiveScriptOffset!.Value);
+            var instance = _IsActiveScriptInstance ??= new AnimScriptHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _IsActiveScriptOffset!.Value);
+            return instance;
         }
     }
 

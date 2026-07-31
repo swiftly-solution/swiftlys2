@@ -57,23 +57,29 @@ internal partial class CColorCorrectionImpl : CBaseEntityImpl, CColorCorrection
         }
     }
     private static nint? _TimeStartFadeInOffset;
+    private GameTime_tImpl? _TimeStartFadeInInstance;
 
     public GameTime_t TimeStartFadeIn
     {
         get
         {
             _TimeStartFadeInOffset = _TimeStartFadeInOffset ?? Schema.GetOffset(0x86645E1175A6B4B7);
-            return new GameTime_tImpl(_Handle + _TimeStartFadeInOffset!.Value);
+            var instance = _TimeStartFadeInInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _TimeStartFadeInOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TimeStartFadeOutOffset;
+    private GameTime_tImpl? _TimeStartFadeOutInstance;
 
     public GameTime_t TimeStartFadeOut
     {
         get
         {
             _TimeStartFadeOutOffset = _TimeStartFadeOutOffset ?? Schema.GetOffset(0x86645E118028C93C);
-            return new GameTime_tImpl(_Handle + _TimeStartFadeOutOffset!.Value);
+            var instance = _TimeStartFadeOutInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _TimeStartFadeOutOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MaxWeightOffset;

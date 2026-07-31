@@ -27,53 +27,68 @@ internal partial class C_OP_ModelSurfaceSnapshotGeneratorImpl : CParticleFunctio
         }
     }
     private static nint? _ModelInputOffset;
+    private CParticleModelInputImpl? _ModelInputInstance;
 
     public CParticleModelInput ModelInput
     {
         get
         {
             _ModelInputOffset = _ModelInputOffset ?? Schema.GetOffset(0xCFB908DEEB74120E);
-            return new CParticleModelInputImpl(_Handle + _ModelInputOffset!.Value);
+            var instance = _ModelInputInstance ??= new CParticleModelInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ModelInputOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RecalcRateOffset;
+    private CParticleCollectionFloatInputImpl? _RecalcRateInstance;
 
     public CParticleCollectionFloatInput RecalcRate
     {
         get
         {
             _RecalcRateOffset = _RecalcRateOffset ?? Schema.GetOffset(0xCFB908DE4DBA63D9);
-            return new CParticleCollectionFloatInputImpl(_Handle + _RecalcRateOffset!.Value);
+            var instance = _RecalcRateInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _RecalcRateOffset!.Value);
+            return instance;
         }
     }
     private static nint? _USpacingOffset;
+    private CParticleCollectionFloatInputImpl? _USpacingInstance;
 
     public CParticleCollectionFloatInput USpacing
     {
         get
         {
             _USpacingOffset = _USpacingOffset ?? Schema.GetOffset(0xCFB908DECF6DFAF3);
-            return new CParticleCollectionFloatInputImpl(_Handle + _USpacingOffset!.Value);
+            var instance = _USpacingInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _USpacingOffset!.Value);
+            return instance;
         }
     }
     private static nint? _VSpacingOffset;
+    private CParticleCollectionFloatInputImpl? _VSpacingInstance;
 
     public CParticleCollectionFloatInput VSpacing
     {
         get
         {
             _VSpacingOffset = _VSpacingOffset ?? Schema.GetOffset(0xCFB908DE60D31FE0);
-            return new CParticleCollectionFloatInputImpl(_Handle + _VSpacingOffset!.Value);
+            var instance = _VSpacingInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _VSpacingOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SurfaceOffsetOffset;
+    private CParticleCollectionFloatInputImpl? _SurfaceOffsetInstance;
 
     public CParticleCollectionFloatInput SurfaceOffset
     {
         get
         {
             _SurfaceOffsetOffset = _SurfaceOffsetOffset ?? Schema.GetOffset(0xCFB908DE6276F65D);
-            return new CParticleCollectionFloatInputImpl(_Handle + _SurfaceOffsetOffset!.Value);
+            var instance = _SurfaceOffsetInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _SurfaceOffsetOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SetNormalOffset;

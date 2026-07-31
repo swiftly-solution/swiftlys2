@@ -67,33 +67,42 @@ internal partial class C_INIT_CreateOnModelAtHeightImpl : CParticleFunctionIniti
         }
     }
     private static nint? _DesiredHeightOffset;
+    private CParticleCollectionFloatInputImpl? _DesiredHeightInstance;
 
     public CParticleCollectionFloatInput DesiredHeight
     {
         get
         {
             _DesiredHeightOffset = _DesiredHeightOffset ?? Schema.GetOffset(0xBB8B79F6D72286F4);
-            return new CParticleCollectionFloatInputImpl(_Handle + _DesiredHeightOffset!.Value);
+            var instance = _DesiredHeightInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _DesiredHeightOffset!.Value);
+            return instance;
         }
     }
     private static nint? _HitBoxScaleOffset;
+    private CParticleCollectionVecInputImpl? _HitBoxScaleInstance;
 
     public CParticleCollectionVecInput HitBoxScale
     {
         get
         {
             _HitBoxScaleOffset = _HitBoxScaleOffset ?? Schema.GetOffset(0xBB8B79F658EE3FB7);
-            return new CParticleCollectionVecInputImpl(_Handle + _HitBoxScaleOffset!.Value);
+            var instance = _HitBoxScaleInstance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _HitBoxScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DirectionBiasOffset;
+    private CParticleCollectionVecInputImpl? _DirectionBiasInstance;
 
     public CParticleCollectionVecInput DirectionBias
     {
         get
         {
             _DirectionBiasOffset = _DirectionBiasOffset ?? Schema.GetOffset(0xBB8B79F65A1697CF);
-            return new CParticleCollectionVecInputImpl(_Handle + _DirectionBiasOffset!.Value);
+            var instance = _DirectionBiasInstance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _DirectionBiasOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BiasTypeOffset;
@@ -142,23 +151,29 @@ internal partial class C_INIT_CreateOnModelAtHeightImpl : CParticleFunctionIniti
         }
     }
     private static nint? _HitboxVelocityScaleOffset;
+    private CParticleCollectionFloatInputImpl? _HitboxVelocityScaleInstance;
 
     public CParticleCollectionFloatInput HitboxVelocityScale
     {
         get
         {
             _HitboxVelocityScaleOffset = _HitboxVelocityScaleOffset ?? Schema.GetOffset(0xBB8B79F65BE2EDCC);
-            return new CParticleCollectionFloatInputImpl(_Handle + _HitboxVelocityScaleOffset!.Value);
+            var instance = _HitboxVelocityScaleInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _HitboxVelocityScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MaxBoneVelocityOffset;
+    private CParticleCollectionFloatInputImpl? _MaxBoneVelocityInstance;
 
     public CParticleCollectionFloatInput MaxBoneVelocity
     {
         get
         {
             _MaxBoneVelocityOffset = _MaxBoneVelocityOffset ?? Schema.GetOffset(0xBB8B79F660C6A35A);
-            return new CParticleCollectionFloatInputImpl(_Handle + _MaxBoneVelocityOffset!.Value);
+            var instance = _MaxBoneVelocityInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _MaxBoneVelocityOffset!.Value);
+            return instance;
         }
     }
 

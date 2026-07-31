@@ -262,23 +262,29 @@ internal partial class CFuncMoverImpl : CBaseModelEntityImpl, CFuncMover
         }
     }
     private static nint? _TimeMovementStartOffset;
+    private GameTime_tImpl? _TimeMovementStartInstance;
 
     public GameTime_t TimeMovementStart
     {
         get
         {
             _TimeMovementStartOffset = _TimeMovementStartOffset ?? Schema.GetOffset(0x320E8B69CD2B8B85);
-            return new GameTime_tImpl(_Handle + _TimeMovementStartOffset!.Value);
+            var instance = _TimeMovementStartInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _TimeMovementStartOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TimeMovementStopOffset;
+    private GameTime_tImpl? _TimeMovementStopInstance;
 
     public GameTime_t TimeMovementStop
     {
         get
         {
             _TimeMovementStopOffset = _TimeMovementStopOffset ?? Schema.GetOffset(0x320E8B696E9B82D7);
-            return new GameTime_tImpl(_Handle + _TimeMovementStopOffset!.Value);
+            var instance = _TimeMovementStopInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _TimeMovementStopOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StopAtNodeOffset;
@@ -442,13 +448,16 @@ internal partial class CFuncMoverImpl : CBaseModelEntityImpl, CFuncMover
         }
     }
     private static nint? _TimeStartOrientationChangeOffset;
+    private GameTime_tImpl? _TimeStartOrientationChangeInstance;
 
     public GameTime_t TimeStartOrientationChange
     {
         get
         {
             _TimeStartOrientationChangeOffset = _TimeStartOrientationChangeOffset ?? Schema.GetOffset(0x320E8B698090B2A8);
-            return new GameTime_tImpl(_Handle + _TimeStartOrientationChangeOffset!.Value);
+            var instance = _TimeStartOrientationChangeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _TimeStartOrientationChangeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TimeToBlendToNewOrientationOffset;
@@ -502,13 +511,16 @@ internal partial class CFuncMoverImpl : CBaseModelEntityImpl, CFuncMover
         }
     }
     private static nint? _OnNodePassedOffset;
+    private SchemaUntypedField? _OnNodePassedInstance;
 
     public SchemaUntypedField OnNodePassed
     {
         get
         {
             _OnNodePassedOffset = _OnNodePassedOffset ?? Schema.GetOffset(0x320E8B69709328FC);
-            return new SchemaUntypedField(_Handle + _OnNodePassedOffset!.Value);
+            var instance = _OnNodePassedInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OnNodePassedOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OrientationMatchEntityNameOffset;
@@ -962,23 +974,29 @@ internal partial class CFuncMoverImpl : CBaseModelEntityImpl, CFuncMover
         }
     }
     private static nint? _TickMovementRanOffset;
+    private GameTick_tImpl? _TickMovementRanInstance;
 
     public GameTick_t TickMovementRan
     {
         get
         {
             _TickMovementRanOffset = _TickMovementRanOffset ?? Schema.GetOffset(0x320E8B694A0C4C8E);
-            return new GameTick_tImpl(_Handle + _TickMovementRanOffset!.Value);
+            var instance = _TickMovementRanInstance ??= new GameTick_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _TickMovementRanOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MovementSummaryOffset;
+    private FuncMoverMovementSummary_tImpl? _MovementSummaryInstance;
 
     public FuncMoverMovementSummary_t MovementSummary
     {
         get
         {
             _MovementSummaryOffset = _MovementSummaryOffset ?? Schema.GetOffset(0x320E8B69C49463D0);
-            return new FuncMoverMovementSummary_tImpl(_Handle + _MovementSummaryOffset!.Value);
+            var instance = _MovementSummaryInstance ??= new FuncMoverMovementSummary_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _MovementSummaryOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StopFromBeginStopTargetOffset;

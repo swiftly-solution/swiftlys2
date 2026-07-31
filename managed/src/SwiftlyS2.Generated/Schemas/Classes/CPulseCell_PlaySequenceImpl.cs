@@ -32,23 +32,29 @@ internal partial class CPulseCell_PlaySequenceImpl : CPulseCell_BaseYieldingInfl
         }
     }
     private static nint? _PulseAnimEventsOffset;
+    private PulseNodeDynamicOutflows_tImpl? _PulseAnimEventsInstance;
 
     public PulseNodeDynamicOutflows_t PulseAnimEvents
     {
         get
         {
             _PulseAnimEventsOffset = _PulseAnimEventsOffset ?? Schema.GetOffset(0xE313765B10F0A082);
-            return new PulseNodeDynamicOutflows_tImpl(_Handle + _PulseAnimEventsOffset!.Value);
+            var instance = _PulseAnimEventsInstance ??= new PulseNodeDynamicOutflows_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _PulseAnimEventsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OnFinishedOffset;
+    private CPulse_ResumePointImpl? _OnFinishedInstance;
 
     public CPulse_ResumePoint OnFinished
     {
         get
         {
             _OnFinishedOffset = _OnFinishedOffset ?? Schema.GetOffset(0xE313765B8D903E5E);
-            return new CPulse_ResumePointImpl(_Handle + _OnFinishedOffset!.Value);
+            var instance = _OnFinishedInstance ??= new CPulse_ResumePointImpl(0);
+            instance.DangerousSetHandle(_Handle + _OnFinishedOffset!.Value);
+            return instance;
         }
     }
 

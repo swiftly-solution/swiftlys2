@@ -67,13 +67,16 @@ internal partial class C_OP_SetControlPointToCPVelocityImpl : CParticleFunctionP
         }
     }
     private static nint? _ComparisonVelocityOffset;
+    private CParticleCollectionVecInputImpl? _ComparisonVelocityInstance;
 
     public CParticleCollectionVecInput ComparisonVelocity
     {
         get
         {
             _ComparisonVelocityOffset = _ComparisonVelocityOffset ?? Schema.GetOffset(0x8D70A05723BF409F);
-            return new CParticleCollectionVecInputImpl(_Handle + _ComparisonVelocityOffset!.Value);
+            var instance = _ComparisonVelocityInstance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ComparisonVelocityOffset!.Value);
+            return instance;
         }
     }
 

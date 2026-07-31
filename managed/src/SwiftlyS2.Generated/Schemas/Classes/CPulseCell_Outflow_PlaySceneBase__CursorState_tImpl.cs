@@ -37,13 +37,16 @@ internal partial class CPulseCell_Outflow_PlaySceneBase__CursorState_tImpl : Sch
         }
     }
     private static nint? _CursorIDToEventIDOffset;
+    private SchemaUntypedField? _CursorIDToEventIDInstance;
 
     public SchemaUntypedField CursorIDToEventID
     {
         get
         {
             _CursorIDToEventIDOffset = _CursorIDToEventIDOffset ?? Schema.GetOffset(0x16AE3F0209272D0);
-            return new SchemaUntypedField(_Handle + _CursorIDToEventIDOffset!.Value);
+            var instance = _CursorIDToEventIDInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _CursorIDToEventIDOffset!.Value);
+            return instance;
         }
     }
 

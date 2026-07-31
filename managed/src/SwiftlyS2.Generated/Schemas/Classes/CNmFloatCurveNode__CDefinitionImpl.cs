@@ -27,13 +27,16 @@ internal partial class CNmFloatCurveNode__CDefinitionImpl : CNmFloatValueNode__C
         }
     }
     private static nint? _CurveOffset;
+    private SchemaUntypedField? _CurveInstance;
 
     public SchemaUntypedField Curve
     {
         get
         {
             _CurveOffset = _CurveOffset ?? Schema.GetOffset(0x34D6839ABFFA0B34);
-            return new SchemaUntypedField(_Handle + _CurveOffset!.Value);
+            var instance = _CurveInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _CurveOffset!.Value);
+            return instance;
         }
     }
 

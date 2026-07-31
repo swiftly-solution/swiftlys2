@@ -17,33 +17,42 @@ internal partial class C_OP_MovementRotateParticleAroundAxisImpl : CParticleFunc
     public C_OP_MovementRotateParticleAroundAxisImpl(nint handle) : base(handle) { }
 
     private static nint? _RotAxisOffset;
+    private CParticleCollectionVecInputImpl? _RotAxisInstance;
 
     public CParticleCollectionVecInput RotAxis
     {
         get
         {
             _RotAxisOffset = _RotAxisOffset ?? Schema.GetOffset(0x44C1E1F191872163);
-            return new CParticleCollectionVecInputImpl(_Handle + _RotAxisOffset!.Value);
+            var instance = _RotAxisInstance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _RotAxisOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RotRateOffset;
+    private CParticleCollectionFloatInputImpl? _RotRateInstance;
 
     public CParticleCollectionFloatInput RotRate
     {
         get
         {
             _RotRateOffset = _RotRateOffset ?? Schema.GetOffset(0x44C1E1F16747B556);
-            return new CParticleCollectionFloatInputImpl(_Handle + _RotRateOffset!.Value);
+            var instance = _RotRateInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _RotRateOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TransformInputOffset;
+    private CParticleTransformInputImpl? _TransformInputInstance;
 
     public CParticleTransformInput TransformInput
     {
         get
         {
             _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0x44C1E1F1B3FDC289);
-            return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+            var instance = _TransformInputInstance ??= new CParticleTransformInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _TransformInputOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LocalSpaceOffset;

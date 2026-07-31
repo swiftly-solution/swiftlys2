@@ -17,23 +17,29 @@ internal partial class CNmIDBasedSelectorNode__CDefinitionImpl : CNmPoseNode__CD
     public CNmIDBasedSelectorNode__CDefinitionImpl(nint handle) : base(handle) { }
 
     private static nint? _OptionNodeIndicesOffset;
+    private SchemaUntypedField? _OptionNodeIndicesInstance;
 
     public SchemaUntypedField OptionNodeIndices
     {
         get
         {
             _OptionNodeIndicesOffset = _OptionNodeIndicesOffset ?? Schema.GetOffset(0x28793D28DA97B15D);
-            return new SchemaUntypedField(_Handle + _OptionNodeIndicesOffset!.Value);
+            var instance = _OptionNodeIndicesInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OptionNodeIndicesOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OptionIDsOffset;
+    private SchemaUntypedField? _OptionIDsInstance;
 
     public SchemaUntypedField OptionIDs
     {
         get
         {
             _OptionIDsOffset = _OptionIDsOffset ?? Schema.GetOffset(0x28793D288B69497E);
-            return new SchemaUntypedField(_Handle + _OptionIDsOffset!.Value);
+            var instance = _OptionIDsInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OptionIDsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ParameterNodeIdxOffset;

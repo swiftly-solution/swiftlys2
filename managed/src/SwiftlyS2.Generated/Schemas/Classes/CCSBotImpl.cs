@@ -62,13 +62,16 @@ internal partial class CCSBotImpl : CBotImpl, CCSBot
         }
     }
     private static nint? _RogueTimerOffset;
+    private CountdownTimerImpl? _RogueTimerInstance;
 
     public CountdownTimer RogueTimer
     {
         get
         {
             _RogueTimerOffset = _RogueTimerOffset ?? Schema.GetOffset(0x1CFE165D9929D03A);
-            return new CountdownTimerImpl(_Handle + _RogueTimerOffset!.Value);
+            var instance = _RogueTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _RogueTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DiedLastRoundOffset;
@@ -112,13 +115,16 @@ internal partial class CCSBotImpl : CBotImpl, CCSBot
         }
     }
     private static nint? _SurpriseTimerOffset;
+    private CountdownTimerImpl? _SurpriseTimerInstance;
 
     public CountdownTimer SurpriseTimer
     {
         get
         {
             _SurpriseTimerOffset = _SurpriseTimerOffset ?? Schema.GetOffset(0x1CFE165DA36B5C8B);
-            return new CountdownTimerImpl(_Handle + _SurpriseTimerOffset!.Value);
+            var instance = _SurpriseTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _SurpriseTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AllowActiveOffset;
@@ -172,43 +178,55 @@ internal partial class CCSBotImpl : CBotImpl, CCSBot
         }
     }
     private static nint? _HurryTimerOffset;
+    private CountdownTimerImpl? _HurryTimerInstance;
 
     public CountdownTimer HurryTimer
     {
         get
         {
             _HurryTimerOffset = _HurryTimerOffset ?? Schema.GetOffset(0x1CFE165DFDAD0CF6);
-            return new CountdownTimerImpl(_Handle + _HurryTimerOffset!.Value);
+            var instance = _HurryTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _HurryTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AlertTimerOffset;
+    private CountdownTimerImpl? _AlertTimerInstance;
 
     public CountdownTimer AlertTimer
     {
         get
         {
             _AlertTimerOffset = _AlertTimerOffset ?? Schema.GetOffset(0x1CFE165DCF6A9726);
-            return new CountdownTimerImpl(_Handle + _AlertTimerOffset!.Value);
+            var instance = _AlertTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _AlertTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SneakTimerOffset;
+    private CountdownTimerImpl? _SneakTimerInstance;
 
     public CountdownTimer SneakTimer
     {
         get
         {
             _SneakTimerOffset = _SneakTimerOffset ?? Schema.GetOffset(0x1CFE165D90AB3A2C);
-            return new CountdownTimerImpl(_Handle + _SneakTimerOffset!.Value);
+            var instance = _SneakTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _SneakTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PanicTimerOffset;
+    private CountdownTimerImpl? _PanicTimerInstance;
 
     public CountdownTimer PanicTimer
     {
         get
         {
             _PanicTimerOffset = _PanicTimerOffset ?? Schema.GetOffset(0x1CFE165DD2FFC665);
-            return new CountdownTimerImpl(_Handle + _PanicTimerOffset!.Value);
+            var instance = _PanicTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _PanicTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StateTimestampOffset;
@@ -312,13 +330,16 @@ internal partial class CCSBotImpl : CBotImpl, CCSBot
         }
     }
     private static nint? _StillTimerOffset;
+    private IntervalTimerImpl? _StillTimerInstance;
 
     public IntervalTimer StillTimer
     {
         get
         {
             _StillTimerOffset = _StillTimerOffset ?? Schema.GetOffset(0x1CFE165D2772246E);
-            return new IntervalTimerImpl(_Handle + _StillTimerOffset!.Value);
+            var instance = _StillTimerInstance ??= new IntervalTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _StillTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _EyeAnglesUnderPathFinderControlOffset;
@@ -342,33 +363,42 @@ internal partial class CCSBotImpl : CBotImpl, CCSBot
         }
     }
     private static nint? _AreaEnteredTimestampOffset;
+    private GameTime_tImpl? _AreaEnteredTimestampInstance;
 
     public GameTime_t AreaEnteredTimestamp
     {
         get
         {
             _AreaEnteredTimestampOffset = _AreaEnteredTimestampOffset ?? Schema.GetOffset(0x1CFE165D024F57F1);
-            return new GameTime_tImpl(_Handle + _AreaEnteredTimestampOffset!.Value);
+            var instance = _AreaEnteredTimestampInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _AreaEnteredTimestampOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RepathTimerOffset;
+    private CountdownTimerImpl? _RepathTimerInstance;
 
     public CountdownTimer RepathTimer
     {
         get
         {
             _RepathTimerOffset = _RepathTimerOffset ?? Schema.GetOffset(0x1CFE165D4AEA977C);
-            return new CountdownTimerImpl(_Handle + _RepathTimerOffset!.Value);
+            var instance = _RepathTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _RepathTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AvoidFriendTimerOffset;
+    private CountdownTimerImpl? _AvoidFriendTimerInstance;
 
     public CountdownTimer AvoidFriendTimer
     {
         get
         {
             _AvoidFriendTimerOffset = _AvoidFriendTimerOffset ?? Schema.GetOffset(0x1CFE165D71F4289B);
-            return new CountdownTimerImpl(_Handle + _AvoidFriendTimerOffset!.Value);
+            var instance = _AvoidFriendTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _AvoidFriendTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _IsFriendInTheWayOffset;
@@ -382,13 +412,16 @@ internal partial class CCSBotImpl : CBotImpl, CCSBot
         }
     }
     private static nint? _PoliteTimerOffset;
+    private CountdownTimerImpl? _PoliteTimerInstance;
 
     public CountdownTimer PoliteTimer
     {
         get
         {
             _PoliteTimerOffset = _PoliteTimerOffset ?? Schema.GetOffset(0x1CFE165D2C92F065);
-            return new CountdownTimerImpl(_Handle + _PoliteTimerOffset!.Value);
+            var instance = _PoliteTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _PoliteTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _IsWaitingBehindFriendOffset;
@@ -412,38 +445,56 @@ internal partial class CCSBotImpl : CBotImpl, CCSBot
         }
     }
     private static nint? _MustRunTimerOffset;
+    private CountdownTimerImpl? _MustRunTimerInstance;
 
     public CountdownTimer MustRunTimer
     {
         get
         {
             _MustRunTimerOffset = _MustRunTimerOffset ?? Schema.GetOffset(0x1CFE165D45DDFB8A);
-            return new CountdownTimerImpl(_Handle + _MustRunTimerOffset!.Value);
+            var instance = _MustRunTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _MustRunTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _WaitTimerOffset;
+    private CountdownTimerImpl? _WaitTimerInstance;
 
     public CountdownTimer WaitTimer
     {
         get
         {
             _WaitTimerOffset = _WaitTimerOffset ?? Schema.GetOffset(0x1CFE165D65FC5371);
-            return new CountdownTimerImpl(_Handle + _WaitTimerOffset!.Value);
+            var instance = _WaitTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _WaitTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _UpdateTravelDistanceTimerOffset;
+    private CountdownTimerImpl? _UpdateTravelDistanceTimerInstance;
 
     public CountdownTimer UpdateTravelDistanceTimer
     {
         get
         {
             _UpdateTravelDistanceTimerOffset = _UpdateTravelDistanceTimerOffset ?? Schema.GetOffset(0x1CFE165D67E5EA78);
-            return new CountdownTimerImpl(_Handle + _UpdateTravelDistanceTimerOffset!.Value);
+            var instance = _UpdateTravelDistanceTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _UpdateTravelDistanceTimerOffset!.Value);
+            return instance;
         }
     }
+    private static nint? _PlayerTravelDistanceOffset;
+    private SchemaFixedArray<float>? _PlayerTravelDistanceInstance;
+
     public ISchemaFixedArray<float> PlayerTravelDistance
     {
-        get => new SchemaFixedArray<float>(_Handle, 0x1CFE165DA4B8EEEF, 64, 4, 4);
+        get
+        {
+            _PlayerTravelDistanceOffset = _PlayerTravelDistanceOffset ?? Schema.GetOffset(0x1CFE165DA4B8EEEF);
+            var instance = _PlayerTravelDistanceInstance ??= new SchemaFixedArray<float>(0, 0x1CFE165DA4B8EEEF, 64, 4, 4);
+            instance.DangerousSetHandle(_Handle + _PlayerTravelDistanceOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _TravelDistancePhaseOffset;
 
@@ -506,23 +557,29 @@ internal partial class CCSBotImpl : CBotImpl, CCSBot
         }
     }
     private static nint? _InhibitWaitingForHostageTimerOffset;
+    private CountdownTimerImpl? _InhibitWaitingForHostageTimerInstance;
 
     public CountdownTimer InhibitWaitingForHostageTimer
     {
         get
         {
             _InhibitWaitingForHostageTimerOffset = _InhibitWaitingForHostageTimerOffset ?? Schema.GetOffset(0x1CFE165D12E79190);
-            return new CountdownTimerImpl(_Handle + _InhibitWaitingForHostageTimerOffset!.Value);
+            var instance = _InhibitWaitingForHostageTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _InhibitWaitingForHostageTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _WaitForHostageTimerOffset;
+    private CountdownTimerImpl? _WaitForHostageTimerInstance;
 
     public CountdownTimer WaitForHostageTimer
     {
         get
         {
             _WaitForHostageTimerOffset = _WaitForHostageTimerOffset ?? Schema.GetOffset(0x1CFE165D2BFAE489);
-            return new CountdownTimerImpl(_Handle + _WaitForHostageTimerOffset!.Value);
+            var instance = _WaitForHostageTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _WaitForHostageTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NoisePositionOffset;
@@ -556,6 +613,7 @@ internal partial class CCSBotImpl : CBotImpl, CCSBot
         }
     }
     private static nint? _NoiseSourceOffset;
+    private CCSPlayerPawnImpl? _NoiseSourceInstance;
 
     public CCSPlayerPawn? NoiseSource
     {
@@ -563,17 +621,23 @@ internal partial class CCSBotImpl : CBotImpl, CCSBot
         {
             _NoiseSourceOffset = _NoiseSourceOffset ?? Schema.GetOffset(0x1CFE165D6FD60BAC);
             var ptr = _Handle.Read<nint>(_NoiseSourceOffset!.Value);
-            return ptr.IsValidPtr() ? new CCSPlayerPawnImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _NoiseSourceInstance ??= new CCSPlayerPawnImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _NoiseBendTimerOffset;
+    private CountdownTimerImpl? _NoiseBendTimerInstance;
 
     public CountdownTimer NoiseBendTimer
     {
         get
         {
             _NoiseBendTimerOffset = _NoiseBendTimerOffset ?? Schema.GetOffset(0x1CFE165D0106074F);
-            return new CountdownTimerImpl(_Handle + _NoiseBendTimerOffset!.Value);
+            var instance = _NoiseBendTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _NoiseBendTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BentNoisePositionOffset;
@@ -752,33 +816,42 @@ internal partial class CCSBotImpl : CBotImpl, CCSBot
         }
     }
     private static nint? _ViewSteadyTimerOffset;
+    private IntervalTimerImpl? _ViewSteadyTimerInstance;
 
     public IntervalTimer ViewSteadyTimer
     {
         get
         {
             _ViewSteadyTimerOffset = _ViewSteadyTimerOffset ?? Schema.GetOffset(0x1CFE165D634A52D7);
-            return new IntervalTimerImpl(_Handle + _ViewSteadyTimerOffset!.Value);
+            var instance = _ViewSteadyTimerInstance ??= new IntervalTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _ViewSteadyTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TossGrenadeTimerOffset;
+    private CountdownTimerImpl? _TossGrenadeTimerInstance;
 
     public CountdownTimer TossGrenadeTimer
     {
         get
         {
             _TossGrenadeTimerOffset = _TossGrenadeTimerOffset ?? Schema.GetOffset(0x1CFE165DB6FBFF99);
-            return new CountdownTimerImpl(_Handle + _TossGrenadeTimerOffset!.Value);
+            var instance = _TossGrenadeTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _TossGrenadeTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _IsAvoidingGrenadeOffset;
+    private CountdownTimerImpl? _IsAvoidingGrenadeInstance;
 
     public CountdownTimer IsAvoidingGrenade
     {
         get
         {
             _IsAvoidingGrenadeOffset = _IsAvoidingGrenadeOffset ?? Schema.GetOffset(0x1CFE165D3ACC70E8);
-            return new CountdownTimerImpl(_Handle + _IsAvoidingGrenadeOffset!.Value);
+            var instance = _IsAvoidingGrenadeInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _IsAvoidingGrenadeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SpotCheckTimestampOffset;
@@ -892,13 +965,16 @@ internal partial class CCSBotImpl : CBotImpl, CCSBot
         }
     }
     private static nint? _TargetSpotTimeOffset;
+    private GameTime_tImpl? _TargetSpotTimeInstance;
 
     public GameTime_t TargetSpotTime
     {
         get
         {
             _TargetSpotTimeOffset = _TargetSpotTimeOffset ?? Schema.GetOffset(0x1CFE165DFAA023C9);
-            return new GameTime_tImpl(_Handle + _TargetSpotTimeOffset!.Value);
+            var instance = _TargetSpotTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _TargetSpotTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AimFocusOffset;
@@ -922,23 +998,29 @@ internal partial class CCSBotImpl : CBotImpl, CCSBot
         }
     }
     private static nint? _AimFocusNextUpdateOffset;
+    private GameTime_tImpl? _AimFocusNextUpdateInstance;
 
     public GameTime_t AimFocusNextUpdate
     {
         get
         {
             _AimFocusNextUpdateOffset = _AimFocusNextUpdateOffset ?? Schema.GetOffset(0x1CFE165D171BF4E6);
-            return new GameTime_tImpl(_Handle + _AimFocusNextUpdateOffset!.Value);
+            var instance = _AimFocusNextUpdateInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _AimFocusNextUpdateOffset!.Value);
+            return instance;
         }
     }
     private static nint? _IgnoreEnemiesTimerOffset;
+    private CountdownTimerImpl? _IgnoreEnemiesTimerInstance;
 
     public CountdownTimer IgnoreEnemiesTimer
     {
         get
         {
             _IgnoreEnemiesTimerOffset = _IgnoreEnemiesTimerOffset ?? Schema.GetOffset(0x1CFE165DCFC4C322);
-            return new CountdownTimerImpl(_Handle + _IgnoreEnemiesTimerOffset!.Value);
+            var instance = _IgnoreEnemiesTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _IgnoreEnemiesTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _EnemyOffset;
@@ -1092,13 +1174,16 @@ internal partial class CCSBotImpl : CBotImpl, CCSBot
         }
     }
     private static nint? _AttentionIntervalOffset;
+    private IntervalTimerImpl? _AttentionIntervalInstance;
 
     public IntervalTimer AttentionInterval
     {
         get
         {
             _AttentionIntervalOffset = _AttentionIntervalOffset ?? Schema.GetOffset(0x1CFE165D90537394);
-            return new IntervalTimerImpl(_Handle + _AttentionIntervalOffset!.Value);
+            var instance = _AttentionIntervalInstance ??= new IntervalTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _AttentionIntervalOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AttackerOffset;
@@ -1122,13 +1207,16 @@ internal partial class CCSBotImpl : CBotImpl, CCSBot
         }
     }
     private static nint? _BurnedByFlamesTimerOffset;
+    private IntervalTimerImpl? _BurnedByFlamesTimerInstance;
 
     public IntervalTimer BurnedByFlamesTimer
     {
         get
         {
             _BurnedByFlamesTimerOffset = _BurnedByFlamesTimerOffset ?? Schema.GetOffset(0x1CFE165D399D4DA9);
-            return new IntervalTimerImpl(_Handle + _BurnedByFlamesTimerOffset!.Value);
+            var instance = _BurnedByFlamesTimerInstance ??= new IntervalTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _BurnedByFlamesTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LastVictimIDOffset;
@@ -1162,43 +1250,55 @@ internal partial class CCSBotImpl : CBotImpl, CCSBot
         }
     }
     private static nint? _EquipTimerOffset;
+    private IntervalTimerImpl? _EquipTimerInstance;
 
     public IntervalTimer EquipTimer
     {
         get
         {
             _EquipTimerOffset = _EquipTimerOffset ?? Schema.GetOffset(0x1CFE165D1E504868);
-            return new IntervalTimerImpl(_Handle + _EquipTimerOffset!.Value);
+            var instance = _EquipTimerInstance ??= new IntervalTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _EquipTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ZoomTimerOffset;
+    private CountdownTimerImpl? _ZoomTimerInstance;
 
     public CountdownTimer ZoomTimer
     {
         get
         {
             _ZoomTimerOffset = _ZoomTimerOffset ?? Schema.GetOffset(0x1CFE165D690C50D3);
-            return new CountdownTimerImpl(_Handle + _ZoomTimerOffset!.Value);
+            var instance = _ZoomTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _ZoomTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FireWeaponTimestampOffset;
+    private GameTime_tImpl? _FireWeaponTimestampInstance;
 
     public GameTime_t FireWeaponTimestamp
     {
         get
         {
             _FireWeaponTimestampOffset = _FireWeaponTimestampOffset ?? Schema.GetOffset(0x1CFE165D458E6273);
-            return new GameTime_tImpl(_Handle + _FireWeaponTimestampOffset!.Value);
+            var instance = _FireWeaponTimestampInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FireWeaponTimestampOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LookForWeaponsOnGroundTimerOffset;
+    private CountdownTimerImpl? _LookForWeaponsOnGroundTimerInstance;
 
     public CountdownTimer LookForWeaponsOnGroundTimer
     {
         get
         {
             _LookForWeaponsOnGroundTimerOffset = _LookForWeaponsOnGroundTimerOffset ?? Schema.GetOffset(0x1CFE165D1A0D7A39);
-            return new CountdownTimerImpl(_Handle + _LookForWeaponsOnGroundTimerOffset!.Value);
+            var instance = _LookForWeaponsOnGroundTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _LookForWeaponsOnGroundTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _IsSleepingOffset;
@@ -1222,13 +1322,16 @@ internal partial class CCSBotImpl : CBotImpl, CCSBot
         }
     }
     private static nint? _SawEnemySniperTimerOffset;
+    private CountdownTimerImpl? _SawEnemySniperTimerInstance;
 
     public CountdownTimer SawEnemySniperTimer
     {
         get
         {
             _SawEnemySniperTimerOffset = _SawEnemySniperTimerOffset ?? Schema.GetOffset(0x1CFE165DBB2E748A);
-            return new CountdownTimerImpl(_Handle + _SawEnemySniperTimerOffset!.Value);
+            var instance = _SawEnemySniperTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _SawEnemySniperTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _EnemyQueueIndexOffset;
@@ -1272,13 +1375,16 @@ internal partial class CCSBotImpl : CBotImpl, CCSBot
         }
     }
     private static nint? _StuckTimestampOffset;
+    private GameTime_tImpl? _StuckTimestampInstance;
 
     public GameTime_t StuckTimestamp
     {
         get
         {
             _StuckTimestampOffset = _StuckTimestampOffset ?? Schema.GetOffset(0x1CFE165D1B5BADA9);
-            return new GameTime_tImpl(_Handle + _StuckTimestampOffset!.Value);
+            var instance = _StuckTimestampInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _StuckTimestampOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StuckSpotOffset;
@@ -1292,38 +1398,56 @@ internal partial class CCSBotImpl : CBotImpl, CCSBot
         }
     }
     private static nint? _WiggleTimerOffset;
+    private CountdownTimerImpl? _WiggleTimerInstance;
 
     public CountdownTimer WiggleTimer
     {
         get
         {
             _WiggleTimerOffset = _WiggleTimerOffset ?? Schema.GetOffset(0x1CFE165DEDBA9421);
-            return new CountdownTimerImpl(_Handle + _WiggleTimerOffset!.Value);
+            var instance = _WiggleTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _WiggleTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StuckJumpTimerOffset;
+    private CountdownTimerImpl? _StuckJumpTimerInstance;
 
     public CountdownTimer StuckJumpTimer
     {
         get
         {
             _StuckJumpTimerOffset = _StuckJumpTimerOffset ?? Schema.GetOffset(0x1CFE165D1C8E034C);
-            return new CountdownTimerImpl(_Handle + _StuckJumpTimerOffset!.Value);
+            var instance = _StuckJumpTimerInstance ??= new CountdownTimerImpl(0);
+            instance.DangerousSetHandle(_Handle + _StuckJumpTimerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NextCleanupCheckTimestampOffset;
+    private GameTime_tImpl? _NextCleanupCheckTimestampInstance;
 
     public GameTime_t NextCleanupCheckTimestamp
     {
         get
         {
             _NextCleanupCheckTimestampOffset = _NextCleanupCheckTimestampOffset ?? Schema.GetOffset(0x1CFE165DB61EB6BC);
-            return new GameTime_tImpl(_Handle + _NextCleanupCheckTimestampOffset!.Value);
+            var instance = _NextCleanupCheckTimestampInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NextCleanupCheckTimestampOffset!.Value);
+            return instance;
         }
     }
+    private static nint? _AvgVelOffset;
+    private SchemaFixedArray<float>? _AvgVelInstance;
+
     public ISchemaFixedArray<float> AvgVel
     {
-        get => new SchemaFixedArray<float>(_Handle, 0x1CFE165D99077BFE, 10, 4, 4);
+        get
+        {
+            _AvgVelOffset = _AvgVelOffset ?? Schema.GetOffset(0x1CFE165D99077BFE);
+            var instance = _AvgVelInstance ??= new SchemaFixedArray<float>(0, 0x1CFE165D99077BFE, 10, 4, 4);
+            instance.DangerousSetHandle(_Handle + _AvgVelOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _AvgVelIndexOffset;
 

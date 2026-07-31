@@ -37,13 +37,16 @@ internal partial class VPhysXBodyPart_tImpl : SchemaClass, VPhysXBodyPart_t
         }
     }
     private static nint? _RnShapeOffset;
+    private VPhysics2ShapeDef_tImpl? _RnShapeInstance;
 
     public VPhysics2ShapeDef_t RnShape
     {
         get
         {
             _RnShapeOffset = _RnShapeOffset ?? Schema.GetOffset(0x53DE59CDD69E7012);
-            return new VPhysics2ShapeDef_tImpl(_Handle + _RnShapeOffset!.Value);
+            var instance = _RnShapeInstance ??= new VPhysics2ShapeDef_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _RnShapeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CollisionAttributeIndexOffset;

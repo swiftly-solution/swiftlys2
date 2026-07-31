@@ -17,13 +17,16 @@ internal partial class CEconEntityImpl : CBaseAnimGraphImpl, CEconEntity
     public CEconEntityImpl(nint handle) : base(handle) { }
 
     private static nint? _AttributeManagerOffset;
+    private CAttributeContainerImpl? _AttributeManagerInstance;
 
     public CAttributeContainer AttributeManager
     {
         get
         {
             _AttributeManagerOffset = _AttributeManagerOffset ?? Schema.GetOffset(0xCD91F684537B0586);
-            return new CAttributeContainerImpl(_Handle + _AttributeManagerOffset!.Value);
+            var instance = _AttributeManagerInstance ??= new CAttributeContainerImpl(0);
+            instance.DangerousSetHandle(_Handle + _AttributeManagerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OriginalOwnerXuidLowOffset;

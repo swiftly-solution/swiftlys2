@@ -77,13 +77,16 @@ internal partial class FuncMoverMovementSummary_tImpl : SchemaClass, FuncMoverMo
         }
     }
     private static nint? _TickOffset;
+    private GameTick_tImpl? _TickInstance;
 
     public GameTick_t Tick
     {
         get
         {
             _TickOffset = _TickOffset ?? Schema.GetOffset(0x9909AC4E0BD7428);
-            return new GameTick_tImpl(_Handle + _TickOffset!.Value);
+            var instance = _TickInstance ??= new GameTick_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _TickOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PathMoverOffset;

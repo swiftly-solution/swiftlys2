@@ -17,13 +17,16 @@ internal partial class EventSetTime_tImpl : SchemaClass, EventSetTime_t
     public EventSetTime_tImpl(nint handle) : base(handle) { }
 
     private static nint? _LoopStateOffset;
+    private EngineLoopState_tImpl? _LoopStateInstance;
 
     public EngineLoopState_t LoopState
     {
         get
         {
             _LoopStateOffset = _LoopStateOffset ?? Schema.GetOffset(0x260F6EEFF928A2EC);
-            return new EngineLoopState_tImpl(_Handle + _LoopStateOffset!.Value);
+            var instance = _LoopStateInstance ??= new EngineLoopState_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LoopStateOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ClientOutputFramesOffset;

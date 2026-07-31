@@ -57,6 +57,7 @@ internal partial class KeyGroup_tImpl : SchemaClass, KeyGroup_t
         }
     }
     private static nint? _VelocityZonesOffset;
+    private VelocityZone_tImpl? _VelocityZonesInstance;
 
     public VelocityZone_t? VelocityZones
     {
@@ -64,7 +65,10 @@ internal partial class KeyGroup_tImpl : SchemaClass, KeyGroup_t
         {
             _VelocityZonesOffset = _VelocityZonesOffset ?? Schema.GetOffset(0xE9753CBCCDE38D17);
             var ptr = _Handle.Read<nint>(_VelocityZonesOffset!.Value);
-            return ptr.IsValidPtr() ? new VelocityZone_tImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _VelocityZonesInstance ??= new VelocityZone_tImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
 

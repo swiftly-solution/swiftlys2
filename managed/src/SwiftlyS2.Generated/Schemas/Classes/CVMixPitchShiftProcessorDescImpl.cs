@@ -17,13 +17,16 @@ internal partial class CVMixPitchShiftProcessorDescImpl : CVMixBaseProcessorDesc
     public CVMixPitchShiftProcessorDescImpl(nint handle) : base(handle) { }
 
     private static nint? _DescOffset;
+    private VMixPitchShiftDesc_tImpl? _DescInstance;
 
     public VMixPitchShiftDesc_t Desc
     {
         get
         {
             _DescOffset = _DescOffset ?? Schema.GetOffset(0x56460FA127917BC0);
-            return new VMixPitchShiftDesc_tImpl(_Handle + _DescOffset!.Value);
+            var instance = _DescInstance ??= new VMixPitchShiftDesc_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _DescOffset!.Value);
+            return instance;
         }
     }
 

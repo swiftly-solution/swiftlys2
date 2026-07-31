@@ -27,23 +27,29 @@ internal partial class CNmSyncTrack__Event_tImpl : SchemaClass, CNmSyncTrack__Ev
         }
     }
     private static nint? _StartTimeOffset;
+    private NmPercent_tImpl? _StartTimeInstance;
 
     public NmPercent_t StartTime
     {
         get
         {
             _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0x8B8C5B0A6330E7EE);
-            return new NmPercent_tImpl(_Handle + _StartTimeOffset!.Value);
+            var instance = _StartTimeInstance ??= new NmPercent_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _StartTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DurationOffset;
+    private NmPercent_tImpl? _DurationInstance;
 
     public NmPercent_t Duration
     {
         get
         {
             _DurationOffset = _DurationOffset ?? Schema.GetOffset(0x8B8C5B0A3D9FF5AD);
-            return new NmPercent_tImpl(_Handle + _DurationOffset!.Value);
+            var instance = _DurationInstance ??= new NmPercent_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _DurationOffset!.Value);
+            return instance;
         }
     }
 

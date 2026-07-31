@@ -17,23 +17,29 @@ internal partial class C_INIT_CreateOnModelImpl : CParticleFunctionInitializerIm
     public C_INIT_CreateOnModelImpl(nint handle) : base(handle) { }
 
     private static nint? _ModelInputOffset;
+    private CParticleModelInputImpl? _ModelInputInstance;
 
     public CParticleModelInput ModelInput
     {
         get
         {
             _ModelInputOffset = _ModelInputOffset ?? Schema.GetOffset(0xD7E11944EB74120E);
-            return new CParticleModelInputImpl(_Handle + _ModelInputOffset!.Value);
+            var instance = _ModelInputInstance ??= new CParticleModelInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ModelInputOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TransformInputOffset;
+    private CParticleTransformInputImpl? _TransformInputInstance;
 
     public CParticleTransformInput TransformInput
     {
         get
         {
             _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0xD7E119443A9ED669);
-            return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+            var instance = _TransformInputInstance ??= new CParticleTransformInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _TransformInputOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ForceInModelOffset;
@@ -67,13 +73,16 @@ internal partial class C_INIT_CreateOnModelImpl : CParticleFunctionInitializerIm
         }
     }
     private static nint? _DesiredHitboxOffset;
+    private CParticleCollectionFloatInputImpl? _DesiredHitboxInstance;
 
     public CParticleCollectionFloatInput DesiredHitbox
     {
         get
         {
             _DesiredHitboxOffset = _DesiredHitboxOffset ?? Schema.GetOffset(0xD7E11944FD09531B);
-            return new CParticleCollectionFloatInputImpl(_Handle + _DesiredHitboxOffset!.Value);
+            var instance = _DesiredHitboxInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _DesiredHitboxOffset!.Value);
+            return instance;
         }
     }
     private static nint? _HitboxValueFromControlPointIndexOffset;
@@ -87,13 +96,16 @@ internal partial class C_INIT_CreateOnModelImpl : CParticleFunctionInitializerIm
         }
     }
     private static nint? _HitBoxScaleOffset;
+    private CParticleCollectionVecInputImpl? _HitBoxScaleInstance;
 
     public CParticleCollectionVecInput HitBoxScale
     {
         get
         {
             _HitBoxScaleOffset = _HitBoxScaleOffset ?? Schema.GetOffset(0xD7E1194458EE3FB7);
-            return new CParticleCollectionVecInputImpl(_Handle + _HitBoxScaleOffset!.Value);
+            var instance = _HitBoxScaleInstance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _HitBoxScaleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BoneVelocityOffset;
@@ -117,13 +129,16 @@ internal partial class C_INIT_CreateOnModelImpl : CParticleFunctionInitializerIm
         }
     }
     private static nint? _DirectionBiasOffset;
+    private CParticleCollectionVecInputImpl? _DirectionBiasInstance;
 
     public CParticleCollectionVecInput DirectionBias
     {
         get
         {
             _DirectionBiasOffset = _DirectionBiasOffset ?? Schema.GetOffset(0xD7E119445A1697CF);
-            return new CParticleCollectionVecInputImpl(_Handle + _DirectionBiasOffset!.Value);
+            var instance = _DirectionBiasInstance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _DirectionBiasOffset!.Value);
+            return instance;
         }
     }
     private static nint? _HitboxSetNameOffset;
@@ -172,13 +187,16 @@ internal partial class C_INIT_CreateOnModelImpl : CParticleFunctionInitializerIm
         }
     }
     private static nint? _ShellSizeOffset;
+    private CParticleCollectionFloatInputImpl? _ShellSizeInstance;
 
     public CParticleCollectionFloatInput ShellSize
     {
         get
         {
             _ShellSizeOffset = _ShellSizeOffset ?? Schema.GetOffset(0xD7E1194404D01B22);
-            return new CParticleCollectionFloatInputImpl(_Handle + _ShellSizeOffset!.Value);
+            var instance = _ShellSizeInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ShellSizeOffset!.Value);
+            return instance;
         }
     }
 

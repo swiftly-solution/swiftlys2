@@ -17,53 +17,68 @@ internal partial class CStateNodeTransitionDataImpl : SchemaClass, CStateNodeTra
     public CStateNodeTransitionDataImpl(nint handle) : base(handle) { }
 
     private static nint? _CurveOffset;
+    private CBlendCurveImpl? _CurveInstance;
 
     public CBlendCurve Curve
     {
         get
         {
             _CurveOffset = _CurveOffset ?? Schema.GetOffset(0xFC9FD460BFFA0B34);
-            return new CBlendCurveImpl(_Handle + _CurveOffset!.Value);
+            var instance = _CurveInstance ??= new CBlendCurveImpl(0);
+            instance.DangerousSetHandle(_Handle + _CurveOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BlendDurationOffset;
+    private SchemaUntypedField? _BlendDurationInstance;
 
     public SchemaUntypedField BlendDuration
     {
         get
         {
             _BlendDurationOffset = _BlendDurationOffset ?? Schema.GetOffset(0xFC9FD460BC9B1228);
-            return new SchemaUntypedField(_Handle + _BlendDurationOffset!.Value);
+            var instance = _BlendDurationInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _BlendDurationOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ResetCycleValueOffset;
+    private SchemaUntypedField? _ResetCycleValueInstance;
 
     public SchemaUntypedField ResetCycleValue
     {
         get
         {
             _ResetCycleValueOffset = _ResetCycleValueOffset ?? Schema.GetOffset(0xFC9FD4609897AC3F);
-            return new SchemaUntypedField(_Handle + _ResetCycleValueOffset!.Value);
+            var instance = _ResetCycleValueInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ResetCycleValueOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ResetOffset;
+    private SchemaUntypedField? _ResetInstance;
 
     public SchemaUntypedField Reset
     {
         get
         {
             _ResetOffset = _ResetOffset ?? Schema.GetOffset(0xFC9FD460F99F9AA0);
-            return new SchemaUntypedField(_Handle + _ResetOffset!.Value);
+            var instance = _ResetInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ResetOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ResetCycleOptionOffset;
+    private SchemaUntypedField? _ResetCycleOptionInstance;
 
     public SchemaUntypedField ResetCycleOption
     {
         get
         {
             _ResetCycleOptionOffset = _ResetCycleOptionOffset ?? Schema.GetOffset(0xFC9FD460A597A1E3);
-            return new SchemaUntypedField(_Handle + _ResetCycleOptionOffset!.Value);
+            var instance = _ResetCycleOptionInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ResetCycleOptionOffset!.Value);
+            return instance;
         }
     }
 

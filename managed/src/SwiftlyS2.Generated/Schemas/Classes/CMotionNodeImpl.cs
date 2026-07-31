@@ -32,13 +32,16 @@ internal partial class CMotionNodeImpl : SchemaClass, CMotionNode
         }
     }
     private static nint? _IdOffset;
+    private AnimNodeIDImpl? _IdInstance;
 
     public AnimNodeID Id
     {
         get
         {
             _IdOffset = _IdOffset ?? Schema.GetOffset(0xB29D0464B4B6E980);
-            return new AnimNodeIDImpl(_Handle + _IdOffset!.Value);
+            var instance = _IdInstance ??= new AnimNodeIDImpl(0);
+            instance.DangerousSetHandle(_Handle + _IdOffset!.Value);
+            return instance;
         }
     }
 

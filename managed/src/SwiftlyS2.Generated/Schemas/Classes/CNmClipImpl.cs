@@ -77,43 +77,55 @@ internal partial class CNmClipImpl : SchemaClass, CNmClip
         }
     }
     private static nint? _SecondaryAnimationsOffset;
+    private SchemaUntypedField? _SecondaryAnimationsInstance;
 
     public SchemaUntypedField SecondaryAnimations
     {
         get
         {
             _SecondaryAnimationsOffset = _SecondaryAnimationsOffset ?? Schema.GetOffset(0x3FC883BD9A6B439E);
-            return new SchemaUntypedField(_Handle + _SecondaryAnimationsOffset!.Value);
+            var instance = _SecondaryAnimationsInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _SecondaryAnimationsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FloatChannelDataOffset;
+    private SchemaUntypedField? _FloatChannelDataInstance;
 
     public SchemaUntypedField FloatChannelData
     {
         get
         {
             _FloatChannelDataOffset = _FloatChannelDataOffset ?? Schema.GetOffset(0x3FC883BD03D8C18C);
-            return new SchemaUntypedField(_Handle + _FloatChannelDataOffset!.Value);
+            var instance = _FloatChannelDataInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _FloatChannelDataOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SyncTrackOffset;
+    private CNmSyncTrackImpl? _SyncTrackInstance;
 
     public CNmSyncTrack SyncTrack
     {
         get
         {
             _SyncTrackOffset = _SyncTrackOffset ?? Schema.GetOffset(0x3FC883BDB268BEE9);
-            return new CNmSyncTrackImpl(_Handle + _SyncTrackOffset!.Value);
+            var instance = _SyncTrackInstance ??= new CNmSyncTrackImpl(0);
+            instance.DangerousSetHandle(_Handle + _SyncTrackOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RootMotionOffset;
+    private CNmRootMotionDataImpl? _RootMotionInstance;
 
     public CNmRootMotionData RootMotion
     {
         get
         {
             _RootMotionOffset = _RootMotionOffset ?? Schema.GetOffset(0x3FC883BD664A3F27);
-            return new CNmRootMotionDataImpl(_Handle + _RootMotionOffset!.Value);
+            var instance = _RootMotionInstance ??= new CNmRootMotionDataImpl(0);
+            instance.DangerousSetHandle(_Handle + _RootMotionOffset!.Value);
+            return instance;
         }
     }
     private static nint? _IsAdditiveOffset;

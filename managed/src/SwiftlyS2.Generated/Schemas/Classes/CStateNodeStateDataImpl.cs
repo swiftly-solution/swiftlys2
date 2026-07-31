@@ -17,33 +17,42 @@ internal partial class CStateNodeStateDataImpl : SchemaClass, CStateNodeStateDat
     public CStateNodeStateDataImpl(nint handle) : base(handle) { }
 
     private static nint? _ChildOffset;
+    private CAnimUpdateNodeRefImpl? _ChildInstance;
 
     public CAnimUpdateNodeRef Child
     {
         get
         {
             _ChildOffset = _ChildOffset ?? Schema.GetOffset(0x6AB991A04A0B773F);
-            return new CAnimUpdateNodeRefImpl(_Handle + _ChildOffset!.Value);
+            var instance = _ChildInstance ??= new CAnimUpdateNodeRefImpl(0);
+            instance.DangerousSetHandle(_Handle + _ChildOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ExclusiveRootMotionOffset;
+    private SchemaUntypedField? _ExclusiveRootMotionInstance;
 
     public SchemaUntypedField ExclusiveRootMotion
     {
         get
         {
             _ExclusiveRootMotionOffset = _ExclusiveRootMotionOffset ?? Schema.GetOffset(0x6AB991A019C8014D);
-            return new SchemaUntypedField(_Handle + _ExclusiveRootMotionOffset!.Value);
+            var instance = _ExclusiveRootMotionInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ExclusiveRootMotionOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ExclusiveRootMotionFirstFrameOffset;
+    private SchemaUntypedField? _ExclusiveRootMotionFirstFrameInstance;
 
     public SchemaUntypedField ExclusiveRootMotionFirstFrame
     {
         get
         {
             _ExclusiveRootMotionFirstFrameOffset = _ExclusiveRootMotionFirstFrameOffset ?? Schema.GetOffset(0x6AB991A0220BA45A);
-            return new SchemaUntypedField(_Handle + _ExclusiveRootMotionFirstFrameOffset!.Value);
+            var instance = _ExclusiveRootMotionFirstFrameInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ExclusiveRootMotionFirstFrameOffset!.Value);
+            return instance;
         }
     }
 

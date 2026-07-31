@@ -156,9 +156,18 @@ internal partial class CPlayerSprayDecalImpl : CModelPointEntityImpl, CPlayerSpr
             return ref _Handle.AsRef<byte>(_VersionOffset!.Value);
         }
     }
+    private static nint? _SignatureOffset;
+    private SchemaFixedArray<byte>? _SignatureInstance;
+
     public ISchemaFixedArray<byte> Signature
     {
-        get => new SchemaFixedArray<byte>(_Handle, 0x782380E133A8D6DC, 128, 1, 1);
+        get
+        {
+            _SignatureOffset = _SignatureOffset ?? Schema.GetOffset(0x782380E133A8D6DC);
+            var instance = _SignatureInstance ??= new SchemaFixedArray<byte>(0, 0x782380E133A8D6DC, 128, 1, 1);
+            instance.DangerousSetHandle(_Handle + _SignatureOffset!.Value);
+            return instance;
+        }
     }
 
     public void UniqueIDUpdated() => Schema.Update(_Handle, 0x782380E1C7F9595F);

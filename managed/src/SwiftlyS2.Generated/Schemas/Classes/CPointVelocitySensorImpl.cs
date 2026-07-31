@@ -67,13 +67,16 @@ internal partial class CPointVelocitySensorImpl : CPointEntityImpl, CPointVeloci
         }
     }
     private static nint? _VelocityOffset;
+    private SchemaUntypedField? _VelocityInstance;
 
     public SchemaUntypedField Velocity
     {
         get
         {
             _VelocityOffset = _VelocityOffset ?? Schema.GetOffset(0x96CA23219B4CC8B2);
-            return new SchemaUntypedField(_Handle + _VelocityOffset!.Value);
+            var instance = _VelocityInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _VelocityOffset!.Value);
+            return instance;
         }
     }
 

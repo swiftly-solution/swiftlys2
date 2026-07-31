@@ -32,13 +32,16 @@ internal partial class CModelConfigElement_CommandImpl : CModelConfigElementImpl
         }
     }
     private static nint? _ArgsOffset;
+    private SchemaUntypedField? _ArgsInstance;
 
     public SchemaUntypedField Args
     {
         get
         {
             _ArgsOffset = _ArgsOffset ?? Schema.GetOffset(0x89334ED9DAB98BBC);
-            return new SchemaUntypedField(_Handle + _ArgsOffset!.Value);
+            var instance = _ArgsInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ArgsOffset!.Value);
+            return instance;
         }
     }
 

@@ -27,13 +27,16 @@ internal partial class CSolveIKChainUpdateNodeImpl : CUnaryUpdateNodeImpl, CSolv
         }
     }
     private static nint? _OpFixedDataOffset;
+    private SolveIKChainPoseOpFixedSettings_tImpl? _OpFixedDataInstance;
 
     public SolveIKChainPoseOpFixedSettings_t OpFixedData
     {
         get
         {
             _OpFixedDataOffset = _OpFixedDataOffset ?? Schema.GetOffset(0xE78F1D1F6960AF8C);
-            return new SolveIKChainPoseOpFixedSettings_tImpl(_Handle + _OpFixedDataOffset!.Value);
+            var instance = _OpFixedDataInstance ??= new SolveIKChainPoseOpFixedSettings_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _OpFixedDataOffset!.Value);
+            return instance;
         }
     }
 

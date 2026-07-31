@@ -46,9 +46,18 @@ internal partial class VelocityZone_tImpl : SchemaClass, VelocityZone_t
             return ref _Handle.AsRef<byte>(_NumSamplesOffset!.Value);
         }
     }
+    private static nint? _SamplesOffset;
+    private SchemaFixedArray<uint>? _SamplesInstance;
+
     public ISchemaFixedArray<uint> Samples
     {
-        get => new SchemaFixedArray<uint>(_Handle, 0xEA149027730A51EA, 4, 4, 4);
+        get
+        {
+            _SamplesOffset = _SamplesOffset ?? Schema.GetOffset(0xEA149027730A51EA);
+            var instance = _SamplesInstance ??= new SchemaFixedArray<uint>(0, 0xEA149027730A51EA, 4, 4, 4);
+            instance.DangerousSetHandle(_Handle + _SamplesOffset!.Value);
+            return instance;
+        }
     }
 
 }

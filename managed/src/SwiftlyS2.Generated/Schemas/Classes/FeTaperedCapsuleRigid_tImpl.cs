@@ -16,9 +16,18 @@ internal partial class FeTaperedCapsuleRigid_tImpl : SchemaClass, FeTaperedCapsu
 {
     public FeTaperedCapsuleRigid_tImpl(nint handle) : base(handle) { }
 
+    private static nint? _SphereOffset;
+    private SchemaFixedArray<fltx4>? _SphereInstance;
+
     public ISchemaFixedArray<fltx4> Sphere
     {
-        get => new SchemaFixedArray<fltx4>(_Handle, 0x4B2017EE9E2AC48C, 2, 16, 16);
+        get
+        {
+            _SphereOffset = _SphereOffset ?? Schema.GetOffset(0x4B2017EE9E2AC48C);
+            var instance = _SphereInstance ??= new SchemaFixedArray<fltx4>(0, 0x4B2017EE9E2AC48C, 2, 16, 16);
+            instance.DangerousSetHandle(_Handle + _SphereOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _NodeOffset;
 

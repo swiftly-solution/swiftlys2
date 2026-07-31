@@ -17,13 +17,16 @@ internal partial class CPulseCell_Step_PublicOutputImpl : CPulseCell_BaseFlowImp
     public CPulseCell_Step_PublicOutputImpl(nint handle) : base(handle) { }
 
     private static nint? _OutputIndexOffset;
+    private PulseRuntimeOutputIndex_tImpl? _OutputIndexInstance;
 
     public PulseRuntimeOutputIndex_t OutputIndex
     {
         get
         {
             _OutputIndexOffset = _OutputIndexOffset ?? Schema.GetOffset(0x40053C931E4D5BA0);
-            return new PulseRuntimeOutputIndex_tImpl(_Handle + _OutputIndexOffset!.Value);
+            var instance = _OutputIndexInstance ??= new PulseRuntimeOutputIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _OutputIndexOffset!.Value);
+            return instance;
         }
     }
 

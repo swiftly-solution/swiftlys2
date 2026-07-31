@@ -72,13 +72,16 @@ internal partial class CColorCorrectionVolumeImpl : CBaseTriggerImpl, CColorCorr
         }
     }
     private static nint? _LastEnterTimeOffset;
+    private GameTime_tImpl? _LastEnterTimeInstance;
 
     public GameTime_t LastEnterTime
     {
         get
         {
             _LastEnterTimeOffset = _LastEnterTimeOffset ?? Schema.GetOffset(0x78A9E01B01977F10);
-            return new GameTime_tImpl(_Handle + _LastEnterTimeOffset!.Value);
+            var instance = _LastEnterTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastEnterTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LastExitWeightOffset;
@@ -92,13 +95,16 @@ internal partial class CColorCorrectionVolumeImpl : CBaseTriggerImpl, CColorCorr
         }
     }
     private static nint? _LastExitTimeOffset;
+    private GameTime_tImpl? _LastExitTimeInstance;
 
     public GameTime_t LastExitTime
     {
         get
         {
             _LastExitTimeOffset = _LastExitTimeOffset ?? Schema.GetOffset(0x78A9E01B183C8DF0);
-            return new GameTime_tImpl(_Handle + _LastExitTimeOffset!.Value);
+            var instance = _LastExitTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastExitTimeOffset!.Value);
+            return instance;
         }
     }
 

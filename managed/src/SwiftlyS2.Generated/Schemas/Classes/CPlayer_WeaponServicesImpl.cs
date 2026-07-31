@@ -46,9 +46,18 @@ internal partial class CPlayer_WeaponServicesImpl : CPlayerPawnComponentImpl, CP
             return ref _Handle.AsRef<CHandle<CBasePlayerWeapon>>(_LastWeaponOffset!.Value);
         }
     }
+    private static nint? _AmmoOffset;
+    private SchemaFixedArray<ushort>? _AmmoInstance;
+
     public ISchemaFixedArray<ushort> Ammo
     {
-        get => new SchemaFixedArray<ushort>(_Handle, 0x634D22800D59E6CA, 32, 2, 2);
+        get
+        {
+            _AmmoOffset = _AmmoOffset ?? Schema.GetOffset(0x634D22800D59E6CA);
+            var instance = _AmmoInstance ??= new SchemaFixedArray<ushort>(0, 0x634D22800D59E6CA, 32, 2, 2);
+            instance.DangerousSetHandle(_Handle + _AmmoOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _PreventWeaponPickupOffset;
 

@@ -46,9 +46,18 @@ internal partial class FeNodeStrayBox_tImpl : SchemaClass, FeNodeStrayBox_t
             return ref _Handle.AsRef<Vector>(_MaxOffset!.Value);
         }
     }
+    private static nint? _NodeOffset;
+    private SchemaFixedArray<ushort>? _NodeInstance;
+
     public ISchemaFixedArray<ushort> Node
     {
-        get => new SchemaFixedArray<ushort>(_Handle, 0x6809134DCD6694B9, 2, 2, 2);
+        get
+        {
+            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0x6809134DCD6694B9);
+            var instance = _NodeInstance ??= new SchemaFixedArray<ushort>(0, 0x6809134DCD6694B9, 2, 2, 2);
+            instance.DangerousSetHandle(_Handle + _NodeOffset!.Value);
+            return instance;
+        }
     }
 
 }

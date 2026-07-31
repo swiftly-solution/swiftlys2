@@ -42,23 +42,29 @@ internal partial class C_OP_ClientPhysicsImpl : CParticleFunctionRendererImpl, C
         }
     }
     private static nint? _PlayerWakeRadiusOffset;
+    private CParticleCollectionFloatInputImpl? _PlayerWakeRadiusInstance;
 
     public CParticleCollectionFloatInput PlayerWakeRadius
     {
         get
         {
             _PlayerWakeRadiusOffset = _PlayerWakeRadiusOffset ?? Schema.GetOffset(0xD58F5C47E624F15C);
-            return new CParticleCollectionFloatInputImpl(_Handle + _PlayerWakeRadiusOffset!.Value);
+            var instance = _PlayerWakeRadiusInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _PlayerWakeRadiusOffset!.Value);
+            return instance;
         }
     }
     private static nint? _VehicleWakeRadiusOffset;
+    private CParticleCollectionFloatInputImpl? _VehicleWakeRadiusInstance;
 
     public CParticleCollectionFloatInput VehicleWakeRadius
     {
         get
         {
             _VehicleWakeRadiusOffset = _VehicleWakeRadiusOffset ?? Schema.GetOffset(0xD58F5C4733A7C27B);
-            return new CParticleCollectionFloatInputImpl(_Handle + _VehicleWakeRadiusOffset!.Value);
+            var instance = _VehicleWakeRadiusInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _VehicleWakeRadiusOffset!.Value);
+            return instance;
         }
     }
     private static nint? _UseHighQualitySimulationOffset;
@@ -152,23 +158,29 @@ internal partial class C_OP_ClientPhysicsImpl : CParticleFunctionRendererImpl, C
         }
     }
     private static nint? _NoCollisionAttributeOffset;
+    private ParticleAttributeIndex_tImpl? _NoCollisionAttributeInstance;
 
     public ParticleAttributeIndex_t NoCollisionAttribute
     {
         get
         {
             _NoCollisionAttributeOffset = _NoCollisionAttributeOffset ?? Schema.GetOffset(0xD58F5C47EB328EB2);
-            return new ParticleAttributeIndex_tImpl(_Handle + _NoCollisionAttributeOffset!.Value);
+            var instance = _NoCollisionAttributeInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NoCollisionAttributeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ZeroGravityAttributeOffset;
+    private ParticleAttributeIndex_tImpl? _ZeroGravityAttributeInstance;
 
     public ParticleAttributeIndex_t ZeroGravityAttribute
     {
         get
         {
             _ZeroGravityAttributeOffset = _ZeroGravityAttributeOffset ?? Schema.GetOffset(0xD58F5C478415ACED);
-            return new ParticleAttributeIndex_tImpl(_Handle + _ZeroGravityAttributeOffset!.Value);
+            var instance = _ZeroGravityAttributeInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _ZeroGravityAttributeOffset!.Value);
+            return instance;
         }
     }
 

@@ -37,23 +37,29 @@ internal partial class CGamePlayerZoneImpl : CRuleBrushEntityImpl, CGamePlayerZo
         }
     }
     private static nint? _PlayersInCountOffset;
+    private SchemaUntypedField? _PlayersInCountInstance;
 
     public SchemaUntypedField PlayersInCount
     {
         get
         {
             _PlayersInCountOffset = _PlayersInCountOffset ?? Schema.GetOffset(0x35811C9706A59501);
-            return new SchemaUntypedField(_Handle + _PlayersInCountOffset!.Value);
+            var instance = _PlayersInCountInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _PlayersInCountOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PlayersOutCountOffset;
+    private SchemaUntypedField? _PlayersOutCountInstance;
 
     public SchemaUntypedField PlayersOutCount
     {
         get
         {
             _PlayersOutCountOffset = _PlayersOutCountOffset ?? Schema.GetOffset(0x35811C976894D862);
-            return new SchemaUntypedField(_Handle + _PlayersOutCountOffset!.Value);
+            var instance = _PlayersOutCountInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _PlayersOutCountOffset!.Value);
+            return instance;
         }
     }
 

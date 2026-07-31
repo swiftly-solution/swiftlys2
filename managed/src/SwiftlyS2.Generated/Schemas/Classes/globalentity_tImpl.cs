@@ -17,23 +17,29 @@ internal partial class globalentity_tImpl : SchemaClass, globalentity_t
     public globalentity_tImpl(nint handle) : base(handle) { }
 
     private static nint? _NameOffset;
+    private SchemaUntypedField? _NameInstance;
 
     public SchemaUntypedField Name
     {
         get
         {
             _NameOffset = _NameOffset ?? Schema.GetOffset(0x8C8300068D39BDE6);
-            return new SchemaUntypedField(_Handle + _NameOffset!.Value);
+            var instance = _NameInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _NameOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LevelNameOffset;
+    private SchemaUntypedField? _LevelNameInstance;
 
     public SchemaUntypedField LevelName
     {
         get
         {
             _LevelNameOffset = _LevelNameOffset ?? Schema.GetOffset(0x8C83000606F640FE);
-            return new SchemaUntypedField(_Handle + _LevelNameOffset!.Value);
+            var instance = _LevelNameInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _LevelNameOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StateOffset;

@@ -17,6 +17,7 @@ internal partial class IPhysAggregateInstanceImpl : IPhysicsBodyListImpl, IPhysA
     public IPhysAggregateInstanceImpl(nint handle) : base(handle) { }
 
     private static nint? _SkeletonOffset;
+    private SchemaUntypedField? _SkeletonInstance;
 
     public SchemaUntypedField? Skeleton
     {
@@ -24,7 +25,10 @@ internal partial class IPhysAggregateInstanceImpl : IPhysicsBodyListImpl, IPhysA
         {
             _SkeletonOffset = _SkeletonOffset ?? Schema.GetOffset(0xF10205DC44BBF688);
             var ptr = _Handle.Read<nint>(_SkeletonOffset!.Value);
-            return ptr.IsValidPtr() ? new SchemaUntypedField(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _SkeletonInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _IsAxisAlignedOffset;

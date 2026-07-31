@@ -17,13 +17,16 @@ internal partial class C_OP_ScreenSpacePositionOfTargetImpl : CParticleFunctionO
     public C_OP_ScreenSpacePositionOfTargetImpl(nint handle) : base(handle) { }
 
     private static nint? _TargetPositionOffset;
+    private CPerParticleVecInputImpl? _TargetPositionInstance;
 
     public CPerParticleVecInput TargetPosition
     {
         get
         {
             _TargetPositionOffset = _TargetPositionOffset ?? Schema.GetOffset(0x5FF537BA554C563B);
-            return new CPerParticleVecInputImpl(_Handle + _TargetPositionOffset!.Value);
+            var instance = _TargetPositionInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _TargetPositionOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OututBehindnessOffset;
@@ -37,23 +40,29 @@ internal partial class C_OP_ScreenSpacePositionOfTargetImpl : CParticleFunctionO
         }
     }
     private static nint? _BehindFieldOutputOffset;
+    private ParticleAttributeIndex_tImpl? _BehindFieldOutputInstance;
 
     public ParticleAttributeIndex_t BehindFieldOutput
     {
         get
         {
             _BehindFieldOutputOffset = _BehindFieldOutputOffset ?? Schema.GetOffset(0x5FF537BA69F4F392);
-            return new ParticleAttributeIndex_tImpl(_Handle + _BehindFieldOutputOffset!.Value);
+            var instance = _BehindFieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _BehindFieldOutputOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BehindOutputRemapOffset;
+    private CParticleRemapFloatInputImpl? _BehindOutputRemapInstance;
 
     public CParticleRemapFloatInput BehindOutputRemap
     {
         get
         {
             _BehindOutputRemapOffset = _BehindOutputRemapOffset ?? Schema.GetOffset(0x5FF537BA4B35FBF3);
-            return new CParticleRemapFloatInputImpl(_Handle + _BehindOutputRemapOffset!.Value);
+            var instance = _BehindOutputRemapInstance ??= new CParticleRemapFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _BehindOutputRemapOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BehindSetMethodOffset;

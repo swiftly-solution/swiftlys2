@@ -17,13 +17,16 @@ internal partial class CNmConstTargetNode__CDefinitionImpl : CNmTargetValueNode_
     public CNmConstTargetNode__CDefinitionImpl(nint handle) : base(handle) { }
 
     private static nint? _ValueOffset;
+    private CNmTargetImpl? _ValueInstance;
 
     public CNmTarget Value
     {
         get
         {
             _ValueOffset = _ValueOffset ?? Schema.GetOffset(0xC54E1DF56B99AEEA);
-            return new CNmTargetImpl(_Handle + _ValueOffset!.Value);
+            var instance = _ValueInstance ??= new CNmTargetImpl(0);
+            instance.DangerousSetHandle(_Handle + _ValueOffset!.Value);
+            return instance;
         }
     }
 

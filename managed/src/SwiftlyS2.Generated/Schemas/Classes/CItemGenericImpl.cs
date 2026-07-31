@@ -57,13 +57,16 @@ internal partial class CItemGenericImpl : CItemImpl, CItemGeneric
         }
     }
     private static nint? _LastPickupCheckOffset;
+    private GameTime_tImpl? _LastPickupCheckInstance;
 
     public GameTime_t LastPickupCheck
     {
         get
         {
             _LastPickupCheckOffset = _LastPickupCheckOffset ?? Schema.GetOffset(0xE5C051B6CE974DB1);
-            return new GameTime_tImpl(_Handle + _LastPickupCheckOffset!.Value);
+            var instance = _LastPickupCheckInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastPickupCheckOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PlayerCounterListenerAddedOffset;

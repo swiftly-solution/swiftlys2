@@ -16,21 +16,57 @@ internal partial class RenderHairStrandInfo_tImpl : SchemaClass, RenderHairStran
 {
     public RenderHairStrandInfo_tImpl(nint handle) : base(handle) { }
 
+    private static nint? _GuideHairIndices_nSurfaceTriIndexOffset;
+    private SchemaFixedArray<uint>? _GuideHairIndices_nSurfaceTriIndexInstance;
+
     public ISchemaFixedArray<uint> GuideHairIndices_nSurfaceTriIndex
     {
-        get => new SchemaFixedArray<uint>(_Handle, 0x9037AEC699AC7193, 2, 4, 4);
+        get
+        {
+            _GuideHairIndices_nSurfaceTriIndexOffset = _GuideHairIndices_nSurfaceTriIndexOffset ?? Schema.GetOffset(0x9037AEC699AC7193);
+            var instance = _GuideHairIndices_nSurfaceTriIndexInstance ??= new SchemaFixedArray<uint>(0, 0x9037AEC699AC7193, 2, 4, 4);
+            instance.DangerousSetHandle(_Handle + _GuideHairIndices_nSurfaceTriIndexOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _GuideBary_vBaseBaryOffset;
+    private SchemaFixedArray<ushort>? _GuideBary_vBaseBaryInstance;
+
     public ISchemaFixedArray<ushort> GuideBary_vBaseBary
     {
-        get => new SchemaFixedArray<ushort>(_Handle, 0x9037AEC6B3848BF7, 4, 2, 2);
+        get
+        {
+            _GuideBary_vBaseBaryOffset = _GuideBary_vBaseBaryOffset ?? Schema.GetOffset(0x9037AEC6B3848BF7);
+            var instance = _GuideBary_vBaseBaryInstance ??= new SchemaFixedArray<ushort>(0, 0x9037AEC6B3848BF7, 4, 2, 2);
+            instance.DangerousSetHandle(_Handle + _GuideBary_vBaseBaryOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _RootOffset_flLengthScaleOffset;
+    private SchemaFixedArray<ushort>? _RootOffset_flLengthScaleInstance;
+
     public ISchemaFixedArray<ushort> RootOffset_flLengthScale
     {
-        get => new SchemaFixedArray<ushort>(_Handle, 0x9037AEC67324D845, 4, 2, 2);
+        get
+        {
+            _RootOffset_flLengthScaleOffset = _RootOffset_flLengthScaleOffset ?? Schema.GetOffset(0x9037AEC67324D845);
+            var instance = _RootOffset_flLengthScaleInstance ??= new SchemaFixedArray<ushort>(0, 0x9037AEC67324D845, 4, 2, 2);
+            instance.DangerousSetHandle(_Handle + _RootOffset_flLengthScaleOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _PackedBaseUvOffset;
+    private SchemaFixedArray<ushort>? _PackedBaseUvInstance;
+
     public ISchemaFixedArray<ushort> PackedBaseUv
     {
-        get => new SchemaFixedArray<ushort>(_Handle, 0x9037AEC6D5457D8B, 2, 2, 2);
+        get
+        {
+            _PackedBaseUvOffset = _PackedBaseUvOffset ?? Schema.GetOffset(0x9037AEC6D5457D8B);
+            var instance = _PackedBaseUvInstance ??= new SchemaFixedArray<ushort>(0, 0x9037AEC6D5457D8B, 2, 2, 2);
+            instance.DangerousSetHandle(_Handle + _PackedBaseUvOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _PackedSurfaceNormalOsOffset;
 

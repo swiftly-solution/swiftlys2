@@ -32,13 +32,16 @@ internal partial class CGameTextImpl : CRulePointEntityImpl, CGameText
         }
     }
     private static nint? _TextParmsOffset;
+    private hudtextparms_tImpl? _TextParmsInstance;
 
     public hudtextparms_t TextParms
     {
         get
         {
             _TextParmsOffset = _TextParmsOffset ?? Schema.GetOffset(0x8AF5579715FCA35D);
-            return new hudtextparms_tImpl(_Handle + _TextParmsOffset!.Value);
+            var instance = _TextParmsInstance ??= new hudtextparms_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _TextParmsOffset!.Value);
+            return instance;
         }
     }
 

@@ -17,33 +17,42 @@ internal partial class C_OP_RemapCrossProductOfTwoVectorsToVectorImpl : CParticl
     public C_OP_RemapCrossProductOfTwoVectorsToVectorImpl(nint handle) : base(handle) { }
 
     private static nint? _InputVec1Offset;
+    private CPerParticleVecInputImpl? _InputVec1Instance;
 
     public CPerParticleVecInput InputVec1
     {
         get
         {
             _InputVec1Offset = _InputVec1Offset ?? Schema.GetOffset(0x4B4531D84584355A);
-            return new CPerParticleVecInputImpl(_Handle + _InputVec1Offset!.Value);
+            var instance = _InputVec1Instance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _InputVec1Offset!.Value);
+            return instance;
         }
     }
     private static nint? _InputVec2Offset;
+    private CPerParticleVecInputImpl? _InputVec2Instance;
 
     public CPerParticleVecInput InputVec2
     {
         get
         {
             _InputVec2Offset = _InputVec2Offset ?? Schema.GetOffset(0x4B4531D8448433C7);
-            return new CPerParticleVecInputImpl(_Handle + _InputVec2Offset!.Value);
+            var instance = _InputVec2Instance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _InputVec2Offset!.Value);
+            return instance;
         }
     }
     private static nint? _FieldOutputOffset;
+    private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
             _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x4B4531D8E5729606);
-            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+            var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NormalizeOffset;

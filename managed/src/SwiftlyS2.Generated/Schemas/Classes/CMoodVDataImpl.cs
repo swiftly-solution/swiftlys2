@@ -17,13 +17,16 @@ internal partial class CMoodVDataImpl : SchemaClass, CMoodVData
     public CMoodVDataImpl(nint handle) : base(handle) { }
 
     private static nint? _ModelNameOffset;
+    private SchemaUntypedField? _ModelNameInstance;
 
     public SchemaUntypedField ModelName
     {
         get
         {
             _ModelNameOffset = _ModelNameOffset ?? Schema.GetOffset(0x3C9F4201002A227C);
-            return new SchemaUntypedField(_Handle + _ModelNameOffset!.Value);
+            var instance = _ModelNameInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ModelNameOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MoodTypeOffset;

@@ -27,13 +27,16 @@ internal partial class CPulseCell_WaitForCursorsWithTagBaseImpl : CPulseCell_Bas
         }
     }
     private static nint? _WaitCompleteOffset;
+    private CPulse_ResumePointImpl? _WaitCompleteInstance;
 
     public CPulse_ResumePoint WaitComplete
     {
         get
         {
             _WaitCompleteOffset = _WaitCompleteOffset ?? Schema.GetOffset(0xA8108DB02C41AD97);
-            return new CPulse_ResumePointImpl(_Handle + _WaitCompleteOffset!.Value);
+            var instance = _WaitCompleteInstance ??= new CPulse_ResumePointImpl(0);
+            instance.DangerousSetHandle(_Handle + _WaitCompleteOffset!.Value);
+            return instance;
         }
     }
 

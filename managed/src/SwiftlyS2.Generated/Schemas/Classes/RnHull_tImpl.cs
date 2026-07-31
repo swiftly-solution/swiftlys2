@@ -37,13 +37,16 @@ internal partial class RnHull_tImpl : SchemaClass, RnHull_t
         }
     }
     private static nint? _BoundsOffset;
+    private AABB_tImpl? _BoundsInstance;
 
     public AABB_t Bounds
     {
         get
         {
             _BoundsOffset = _BoundsOffset ?? Schema.GetOffset(0x856EB4A1ABF76288);
-            return new AABB_tImpl(_Handle + _BoundsOffset!.Value);
+            var instance = _BoundsInstance ??= new AABB_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _BoundsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OrthographicAreasOffset;
@@ -117,6 +120,7 @@ internal partial class RnHull_tImpl : SchemaClass, RnHull_t
         }
     }
     private static nint? _RegionSVMOffset;
+    private CRegionSVMImpl? _RegionSVMInstance;
 
     public CRegionSVM? RegionSVM
     {
@@ -124,7 +128,10 @@ internal partial class RnHull_tImpl : SchemaClass, RnHull_t
         {
             _RegionSVMOffset = _RegionSVMOffset ?? Schema.GetOffset(0x856EB4A18AD82DC9);
             var ptr = _Handle.Read<nint>(_RegionSVMOffset!.Value);
-            return ptr.IsValidPtr() ? new CRegionSVMImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _RegionSVMInstance ??= new CRegionSVMImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _VerticesOffset;

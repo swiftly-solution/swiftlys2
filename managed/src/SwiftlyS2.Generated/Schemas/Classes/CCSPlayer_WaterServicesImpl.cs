@@ -17,13 +17,16 @@ internal partial class CCSPlayer_WaterServicesImpl : CPlayer_WaterServicesImpl, 
     public CCSPlayer_WaterServicesImpl(nint handle) : base(handle) { }
 
     private static nint? _NextDrownDamageTimeOffset;
+    private GameTime_tImpl? _NextDrownDamageTimeInstance;
 
     public GameTime_t NextDrownDamageTime
     {
         get
         {
             _NextDrownDamageTimeOffset = _NextDrownDamageTimeOffset ?? Schema.GetOffset(0x81EE3221161B7836);
-            return new GameTime_tImpl(_Handle + _NextDrownDamageTimeOffset!.Value);
+            var instance = _NextDrownDamageTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NextDrownDamageTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DrownDmgRateOffset;
@@ -37,13 +40,16 @@ internal partial class CCSPlayer_WaterServicesImpl : CPlayer_WaterServicesImpl, 
         }
     }
     private static nint? _AirFinishedTimeOffset;
+    private GameTime_tImpl? _AirFinishedTimeInstance;
 
     public GameTime_t AirFinishedTime
     {
         get
         {
             _AirFinishedTimeOffset = _AirFinishedTimeOffset ?? Schema.GetOffset(0x81EE3221F32CD208);
-            return new GameTime_tImpl(_Handle + _AirFinishedTimeOffset!.Value);
+            var instance = _AirFinishedTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _AirFinishedTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _WaterJumpTimeOffset;

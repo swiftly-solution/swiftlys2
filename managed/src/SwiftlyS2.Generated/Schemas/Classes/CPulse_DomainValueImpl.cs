@@ -37,13 +37,16 @@ internal partial class CPulse_DomainValueImpl : SchemaClass, CPulse_DomainValue
         }
     }
     private static nint? _RequiredRuntimeTypeOffset;
+    private SchemaUntypedField? _RequiredRuntimeTypeInstance;
 
     public SchemaUntypedField RequiredRuntimeType
     {
         get
         {
             _RequiredRuntimeTypeOffset = _RequiredRuntimeTypeOffset ?? Schema.GetOffset(0x8F29D6013355393C);
-            return new SchemaUntypedField(_Handle + _RequiredRuntimeTypeOffset!.Value);
+            var instance = _RequiredRuntimeTypeInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _RequiredRuntimeTypeOffset!.Value);
+            return instance;
         }
     }
 

@@ -77,13 +77,16 @@ internal partial class C_OP_SetPerChildControlPointFromAttributeImpl : CParticle
         }
     }
     private static nint? _AttributeToReadOffset;
+    private ParticleAttributeIndex_tImpl? _AttributeToReadInstance;
 
     public ParticleAttributeIndex_t AttributeToRead
     {
         get
         {
             _AttributeToReadOffset = _AttributeToReadOffset ?? Schema.GetOffset(0x4217F56BE0F61F9E);
-            return new ParticleAttributeIndex_tImpl(_Handle + _AttributeToReadOffset!.Value);
+            var instance = _AttributeToReadInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _AttributeToReadOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CPFieldOffset;

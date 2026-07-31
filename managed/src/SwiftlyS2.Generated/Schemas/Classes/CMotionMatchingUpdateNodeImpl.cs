@@ -17,13 +17,16 @@ internal partial class CMotionMatchingUpdateNodeImpl : CLeafUpdateNodeImpl, CMot
     public CMotionMatchingUpdateNodeImpl(nint handle) : base(handle) { }
 
     private static nint? _DataSetOffset;
+    private CMotionDataSetImpl? _DataSetInstance;
 
     public CMotionDataSet DataSet
     {
         get
         {
             _DataSetOffset = _DataSetOffset ?? Schema.GetOffset(0x69501C92DA4F8423);
-            return new CMotionDataSetImpl(_Handle + _DataSetOffset!.Value);
+            var instance = _DataSetInstance ??= new CMotionDataSetImpl(0);
+            instance.DangerousSetHandle(_Handle + _DataSetOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MetricsOffset;
@@ -87,13 +90,16 @@ internal partial class CMotionMatchingUpdateNodeImpl : CLeafUpdateNodeImpl, CMot
         }
     }
     private static nint? _BlendCurveOffset;
+    private CBlendCurveImpl? _BlendCurveInstance;
 
     public CBlendCurve BlendCurve
     {
         get
         {
             _BlendCurveOffset = _BlendCurveOffset ?? Schema.GetOffset(0x69501C9291978183);
-            return new CBlendCurveImpl(_Handle + _BlendCurveOffset!.Value);
+            var instance = _BlendCurveInstance ??= new CBlendCurveImpl(0);
+            instance.DangerousSetHandle(_Handle + _BlendCurveOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SampleRateOffset;
@@ -187,13 +193,16 @@ internal partial class CMotionMatchingUpdateNodeImpl : CLeafUpdateNodeImpl, CMot
         }
     }
     private static nint? _DistanceScale_DampingOffset;
+    private CAnimInputDampingImpl? _DistanceScale_DampingInstance;
 
     public CAnimInputDamping DistanceScale_Damping
     {
         get
         {
             _DistanceScale_DampingOffset = _DistanceScale_DampingOffset ?? Schema.GetOffset(0x69501C92EA57FBF5);
-            return new CAnimInputDampingImpl(_Handle + _DistanceScale_DampingOffset!.Value);
+            var instance = _DistanceScale_DampingInstance ??= new CAnimInputDampingImpl(0);
+            instance.DangerousSetHandle(_Handle + _DistanceScale_DampingOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DistanceScale_OuterRadiusOffset;

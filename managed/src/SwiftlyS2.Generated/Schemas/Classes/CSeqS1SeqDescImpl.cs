@@ -27,23 +27,29 @@ internal partial class CSeqS1SeqDescImpl : SchemaClass, CSeqS1SeqDesc
         }
     }
     private static nint? _FlagsOffset;
+    private CSeqSeqDescFlagImpl? _FlagsInstance;
 
     public CSeqSeqDescFlag Flags
     {
         get
         {
             _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x6EF81935DC74A14C);
-            return new CSeqSeqDescFlagImpl(_Handle + _FlagsOffset!.Value);
+            var instance = _FlagsInstance ??= new CSeqSeqDescFlagImpl(0);
+            instance.DangerousSetHandle(_Handle + _FlagsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FetchOffset;
+    private CSeqMultiFetchImpl? _FetchInstance;
 
     public CSeqMultiFetch Fetch
     {
         get
         {
             _FetchOffset = _FetchOffset ?? Schema.GetOffset(0x6EF81935ED8BE703);
-            return new CSeqMultiFetchImpl(_Handle + _FetchOffset!.Value);
+            var instance = _FetchInstance ??= new CSeqMultiFetchImpl(0);
+            instance.DangerousSetHandle(_Handle + _FetchOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LocalWeightlistOffset;
@@ -77,23 +83,29 @@ internal partial class CSeqS1SeqDescImpl : SchemaClass, CSeqS1SeqDesc
         }
     }
     private static nint? _TransitionOffset;
+    private CSeqTransitionImpl? _TransitionInstance;
 
     public CSeqTransition Transition
     {
         get
         {
             _TransitionOffset = _TransitionOffset ?? Schema.GetOffset(0x6EF8193582B0A282);
-            return new CSeqTransitionImpl(_Handle + _TransitionOffset!.Value);
+            var instance = _TransitionInstance ??= new CSeqTransitionImpl(0);
+            instance.DangerousSetHandle(_Handle + _TransitionOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SequenceKeysOffset;
+    private SchemaUntypedField? _SequenceKeysInstance;
 
     public SchemaUntypedField SequenceKeys
     {
         get
         {
             _SequenceKeysOffset = _SequenceKeysOffset ?? Schema.GetOffset(0x6EF81935C7ACD18C);
-            return new SchemaUntypedField(_Handle + _SequenceKeysOffset!.Value);
+            var instance = _SequenceKeysInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _SequenceKeysOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LegacyKeyValueTextOffset;

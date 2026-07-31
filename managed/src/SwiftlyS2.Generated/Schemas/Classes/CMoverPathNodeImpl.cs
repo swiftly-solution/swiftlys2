@@ -17,53 +17,68 @@ internal partial class CMoverPathNodeImpl : CPathNodeImpl, CMoverPathNode
     public CMoverPathNodeImpl(nint handle) : base(handle) { }
 
     private static nint? _OnStartFromOrInSegmentOffset;
+    private SchemaUntypedField? _OnStartFromOrInSegmentInstance;
 
     public SchemaUntypedField OnStartFromOrInSegment
     {
         get
         {
             _OnStartFromOrInSegmentOffset = _OnStartFromOrInSegmentOffset ?? Schema.GetOffset(0x5847AABC6622BECB);
-            return new SchemaUntypedField(_Handle + _OnStartFromOrInSegmentOffset!.Value);
+            var instance = _OnStartFromOrInSegmentInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OnStartFromOrInSegmentOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OnStoppedAtOrInSegmentOffset;
+    private SchemaUntypedField? _OnStoppedAtOrInSegmentInstance;
 
     public SchemaUntypedField OnStoppedAtOrInSegment
     {
         get
         {
             _OnStoppedAtOrInSegmentOffset = _OnStoppedAtOrInSegmentOffset ?? Schema.GetOffset(0x5847AABCBF4204DB);
-            return new SchemaUntypedField(_Handle + _OnStoppedAtOrInSegmentOffset!.Value);
+            var instance = _OnStoppedAtOrInSegmentInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OnStoppedAtOrInSegmentOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OnPassThroughOffset;
+    private SchemaUntypedField? _OnPassThroughInstance;
 
     public SchemaUntypedField OnPassThrough
     {
         get
         {
             _OnPassThroughOffset = _OnPassThroughOffset ?? Schema.GetOffset(0x5847AABC3A5F20B6);
-            return new SchemaUntypedField(_Handle + _OnPassThroughOffset!.Value);
+            var instance = _OnPassThroughInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OnPassThroughOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OnPassThroughForwardOffset;
+    private SchemaUntypedField? _OnPassThroughForwardInstance;
 
     public SchemaUntypedField OnPassThroughForward
     {
         get
         {
             _OnPassThroughForwardOffset = _OnPassThroughForwardOffset ?? Schema.GetOffset(0x5847AABCA62F443B);
-            return new SchemaUntypedField(_Handle + _OnPassThroughForwardOffset!.Value);
+            var instance = _OnPassThroughForwardInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OnPassThroughForwardOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OnPassThroughReverseOffset;
+    private SchemaUntypedField? _OnPassThroughReverseInstance;
 
     public SchemaUntypedField OnPassThroughReverse
     {
         get
         {
             _OnPassThroughReverseOffset = _OnPassThroughReverseOffset ?? Schema.GetOffset(0x5847AABC37667FA8);
-            return new SchemaUntypedField(_Handle + _OnPassThroughReverseOffset!.Value);
+            var instance = _OnPassThroughReverseInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OnPassThroughReverseOffset!.Value);
+            return instance;
         }
     }
 

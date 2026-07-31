@@ -17,13 +17,16 @@ internal partial class C_OP_MaintainEmitterImpl : CParticleFunctionEmitterImpl, 
     public C_OP_MaintainEmitterImpl(nint handle) : base(handle) { }
 
     private static nint? _ParticlesToMaintainOffset;
+    private CParticleCollectionFloatInputImpl? _ParticlesToMaintainInstance;
 
     public CParticleCollectionFloatInput ParticlesToMaintain
     {
         get
         {
             _ParticlesToMaintainOffset = _ParticlesToMaintainOffset ?? Schema.GetOffset(0xAD7D6862537AE378);
-            return new CParticleCollectionFloatInputImpl(_Handle + _ParticlesToMaintainOffset!.Value);
+            var instance = _ParticlesToMaintainInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParticlesToMaintainOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StartTimeOffset;
@@ -37,13 +40,16 @@ internal partial class C_OP_MaintainEmitterImpl : CParticleFunctionEmitterImpl, 
         }
     }
     private static nint? _EmissionDurationOffset;
+    private CParticleCollectionFloatInputImpl? _EmissionDurationInstance;
 
     public CParticleCollectionFloatInput EmissionDuration
     {
         get
         {
             _EmissionDurationOffset = _EmissionDurationOffset ?? Schema.GetOffset(0xAD7D686290181C90);
-            return new CParticleCollectionFloatInputImpl(_Handle + _EmissionDurationOffset!.Value);
+            var instance = _EmissionDurationInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _EmissionDurationOffset!.Value);
+            return instance;
         }
     }
     private static nint? _EmissionRateOffset;
@@ -102,13 +108,16 @@ internal partial class C_OP_MaintainEmitterImpl : CParticleFunctionEmitterImpl, 
         }
     }
     private static nint? _ScaleOffset;
+    private CParticleCollectionFloatInputImpl? _ScaleInstance;
 
     public CParticleCollectionFloatInput Scale
     {
         get
         {
             _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0xAD7D6862B731A42F);
-            return new CParticleCollectionFloatInputImpl(_Handle + _ScaleOffset!.Value);
+            var instance = _ScaleInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ScaleOffset!.Value);
+            return instance;
         }
     }
 

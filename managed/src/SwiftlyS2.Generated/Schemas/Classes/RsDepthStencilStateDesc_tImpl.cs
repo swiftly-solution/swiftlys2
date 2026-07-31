@@ -17,43 +17,55 @@ internal partial class RsDepthStencilStateDesc_tImpl : SchemaClass, RsDepthStenc
     public RsDepthStencilStateDesc_tImpl(nint handle) : base(handle) { }
 
     private static nint? _DepthTestEnableOffset;
+    private SchemaUntypedField? _DepthTestEnableInstance;
 
     public SchemaUntypedField DepthTestEnable
     {
         get
         {
             _DepthTestEnableOffset = _DepthTestEnableOffset ?? Schema.GetOffset(0x9026AFA806421799);
-            return new SchemaUntypedField(_Handle + _DepthTestEnableOffset!.Value);
+            var instance = _DepthTestEnableInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _DepthTestEnableOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DepthWriteEnableOffset;
+    private SchemaUntypedField? _DepthWriteEnableInstance;
 
     public SchemaUntypedField DepthWriteEnable
     {
         get
         {
             _DepthWriteEnableOffset = _DepthWriteEnableOffset ?? Schema.GetOffset(0x9026AFA88D8085FE);
-            return new SchemaUntypedField(_Handle + _DepthWriteEnableOffset!.Value);
+            var instance = _DepthWriteEnableInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _DepthWriteEnableOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DepthFuncOffset;
+    private SchemaUntypedField? _DepthFuncInstance;
 
     public SchemaUntypedField DepthFunc
     {
         get
         {
             _DepthFuncOffset = _DepthFuncOffset ?? Schema.GetOffset(0x9026AFA8B47FC61C);
-            return new SchemaUntypedField(_Handle + _DepthFuncOffset!.Value);
+            var instance = _DepthFuncInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _DepthFuncOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StencilStateOffset;
+    private RsStencilStateDesc_tImpl? _StencilStateInstance;
 
     public RsStencilStateDesc_t StencilState
     {
         get
         {
             _StencilStateOffset = _StencilStateOffset ?? Schema.GetOffset(0x9026AFA828EA33C4);
-            return new RsStencilStateDesc_tImpl(_Handle + _StencilStateOffset!.Value);
+            var instance = _StencilStateInstance ??= new RsStencilStateDesc_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _StencilStateOffset!.Value);
+            return instance;
         }
     }
 

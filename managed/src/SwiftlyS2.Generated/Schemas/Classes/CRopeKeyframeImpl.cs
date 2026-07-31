@@ -217,23 +217,29 @@ internal partial class CRopeKeyframeImpl : CBaseModelEntityImpl, CRopeKeyframe
         }
     }
     private static nint? _StartAttachmentOffset;
+    private AttachmentHandle_tImpl? _StartAttachmentInstance;
 
     public AttachmentHandle_t StartAttachment
     {
         get
         {
             _StartAttachmentOffset = _StartAttachmentOffset ?? Schema.GetOffset(0x76EE758E1022E6F5);
-            return new AttachmentHandle_tImpl(_Handle + _StartAttachmentOffset!.Value);
+            var instance = _StartAttachmentInstance ??= new AttachmentHandle_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _StartAttachmentOffset!.Value);
+            return instance;
         }
     }
     private static nint? _EndAttachmentOffset;
+    private AttachmentHandle_tImpl? _EndAttachmentInstance;
 
     public AttachmentHandle_t EndAttachment
     {
         get
         {
             _EndAttachmentOffset = _EndAttachmentOffset ?? Schema.GetOffset(0x76EE758ED537713C);
-            return new AttachmentHandle_tImpl(_Handle + _EndAttachmentOffset!.Value);
+            var instance = _EndAttachmentInstance ??= new AttachmentHandle_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _EndAttachmentOffset!.Value);
+            return instance;
         }
     }
 

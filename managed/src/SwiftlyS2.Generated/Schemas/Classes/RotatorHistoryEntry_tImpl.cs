@@ -27,13 +27,16 @@ internal partial class RotatorHistoryEntry_tImpl : SchemaClass, RotatorHistoryEn
         }
     }
     private static nint? _TimeRotationStartOffset;
+    private GameTime_tImpl? _TimeRotationStartInstance;
 
     public GameTime_t TimeRotationStart
     {
         get
         {
             _TimeRotationStartOffset = _TimeRotationStartOffset ?? Schema.GetOffset(0xB27D5BA9A2B2E208);
-            return new GameTime_tImpl(_Handle + _TimeRotationStartOffset!.Value);
+            var instance = _TimeRotationStartInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _TimeRotationStartOffset!.Value);
+            return instance;
         }
     }
 

@@ -17,13 +17,16 @@ internal partial class thinkfunc_tImpl : SchemaClass, thinkfunc_t
     public thinkfunc_tImpl(nint handle) : base(handle) { }
 
     private static nint? _ThinkOffset;
+    private SchemaUntypedField? _ThinkInstance;
 
     public SchemaUntypedField Think
     {
         get
         {
             _ThinkOffset = _ThinkOffset ?? Schema.GetOffset(0x8ED693FABF50ED7B);
-            return new SchemaUntypedField(_Handle + _ThinkOffset!.Value);
+            var instance = _ThinkInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ThinkOffset!.Value);
+            return instance;
         }
     }
     private static nint? _FnOffset;
@@ -47,23 +50,29 @@ internal partial class thinkfunc_tImpl : SchemaClass, thinkfunc_t
         }
     }
     private static nint? _NextThinkTickOffset;
+    private GameTick_tImpl? _NextThinkTickInstance;
 
     public GameTick_t NextThinkTick
     {
         get
         {
             _NextThinkTickOffset = _NextThinkTickOffset ?? Schema.GetOffset(0x8ED693FAB7CEF021);
-            return new GameTick_tImpl(_Handle + _NextThinkTickOffset!.Value);
+            var instance = _NextThinkTickInstance ??= new GameTick_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NextThinkTickOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LastThinkTickOffset;
+    private GameTick_tImpl? _LastThinkTickInstance;
 
     public GameTick_t LastThinkTick
     {
         get
         {
             _LastThinkTickOffset = _LastThinkTickOffset ?? Schema.GetOffset(0x8ED693FACE8FE7F2);
-            return new GameTick_tImpl(_Handle + _LastThinkTickOffset!.Value);
+            var instance = _LastThinkTickInstance ??= new GameTick_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastThinkTickOffset!.Value);
+            return instance;
         }
     }
 

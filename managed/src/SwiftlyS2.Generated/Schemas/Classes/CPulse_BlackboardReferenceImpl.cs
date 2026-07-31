@@ -27,23 +27,29 @@ internal partial class CPulse_BlackboardReferenceImpl : SchemaClass, CPulse_Blac
         }
     }
     private static nint? _BlackboardResource1Offset;
+    private SchemaUntypedField? _BlackboardResource1Instance;
 
     public SchemaUntypedField BlackboardResource1
     {
         get
         {
             _BlackboardResource1Offset = _BlackboardResource1Offset ?? Schema.GetOffset(0xEF83970A83127470);
-            return new SchemaUntypedField(_Handle + _BlackboardResource1Offset!.Value);
+            var instance = _BlackboardResource1Instance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _BlackboardResource1Offset!.Value);
+            return instance;
         }
     }
     private static nint? _NodeIDOffset;
+    private PulseDocNodeID_tImpl? _NodeIDInstance;
 
     public PulseDocNodeID_t NodeID
     {
         get
         {
             _NodeIDOffset = _NodeIDOffset ?? Schema.GetOffset(0xEF83970A0FD6755C);
-            return new PulseDocNodeID_tImpl(_Handle + _NodeIDOffset!.Value);
+            var instance = _NodeIDInstance ??= new PulseDocNodeID_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NodeIDOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NodeNameOffset;

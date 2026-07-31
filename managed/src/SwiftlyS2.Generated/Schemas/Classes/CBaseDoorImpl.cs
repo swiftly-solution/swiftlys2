@@ -37,13 +37,16 @@ internal partial class CBaseDoorImpl : CBaseToggleImpl, CBaseDoor
         }
     }
     private static nint? _LsOffset;
+    private locksound_tImpl? _LsInstance;
 
     public locksound_t Ls
     {
         get
         {
             _LsOffset = _LsOffset ?? Schema.GetOffset(0x798B70E7D3B05E88);
-            return new locksound_tImpl(_Handle + _LsOffset!.Value);
+            var instance = _LsInstance ??= new locksound_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ForceClosedOffset;

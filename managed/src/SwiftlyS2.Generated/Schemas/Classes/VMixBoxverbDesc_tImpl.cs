@@ -87,13 +87,16 @@ internal partial class VMixBoxverbDesc_tImpl : SchemaClass, VMixBoxverbDesc_t
         }
     }
     private static nint? _FilterTypeOffset;
+    private VMixFilterDesc_tImpl? _FilterTypeInstance;
 
     public VMixFilterDesc_t FilterType
     {
         get
         {
             _FilterTypeOffset = _FilterTypeOffset ?? Schema.GetOffset(0x70C7542D7E582F6F);
-            return new VMixFilterDesc_tImpl(_Handle + _FilterTypeOffset!.Value);
+            var instance = _FilterTypeInstance ??= new VMixFilterDesc_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FilterTypeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _WidthOffset;

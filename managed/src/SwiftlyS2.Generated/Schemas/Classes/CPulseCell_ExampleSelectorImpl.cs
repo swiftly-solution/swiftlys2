@@ -17,13 +17,16 @@ internal partial class CPulseCell_ExampleSelectorImpl : CPulseCell_BaseFlowImpl,
     public CPulseCell_ExampleSelectorImpl(nint handle) : base(handle) { }
 
     private static nint? _OutflowListOffset;
+    private PulseSelectorOutflowList_tImpl? _OutflowListInstance;
 
     public PulseSelectorOutflowList_t OutflowList
     {
         get
         {
             _OutflowListOffset = _OutflowListOffset ?? Schema.GetOffset(0x97417F8B1461E743);
-            return new PulseSelectorOutflowList_tImpl(_Handle + _OutflowListOffset!.Value);
+            var instance = _OutflowListInstance ??= new PulseSelectorOutflowList_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _OutflowListOffset!.Value);
+            return instance;
         }
     }
 

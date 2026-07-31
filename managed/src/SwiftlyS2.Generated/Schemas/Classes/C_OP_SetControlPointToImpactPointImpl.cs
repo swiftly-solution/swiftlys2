@@ -47,13 +47,16 @@ internal partial class C_OP_SetControlPointToImpactPointImpl : CParticleFunction
         }
     }
     private static nint? _TraceLengthOffset;
+    private CParticleCollectionFloatInputImpl? _TraceLengthInstance;
 
     public CParticleCollectionFloatInput TraceLength
     {
         get
         {
             _TraceLengthOffset = _TraceLengthOffset ?? Schema.GetOffset(0x5ED2C481F5A5DE40);
-            return new CParticleCollectionFloatInputImpl(_Handle + _TraceLengthOffset!.Value);
+            var instance = _TraceLengthInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _TraceLengthOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StartOffsetOffset;

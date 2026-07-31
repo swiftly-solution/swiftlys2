@@ -17,13 +17,16 @@ internal partial class FeSimdAnimStrayRadius_tImpl : SchemaClass, FeSimdAnimStra
     public FeSimdAnimStrayRadius_tImpl(nint handle) : base(handle) { }
 
     private static nint? _NodeOffset;
+    private SchemaUntypedField? _NodeInstance;
 
     public SchemaUntypedField Node
     {
         get
         {
             _NodeOffset = _NodeOffset ?? Schema.GetOffset(0xEEC96A9CCD6694B9);
-            return new SchemaUntypedField(_Handle + _NodeOffset!.Value);
+            var instance = _NodeInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _NodeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MaxDistOffset;

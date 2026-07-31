@@ -17,13 +17,16 @@ internal partial class CBreakableImpl : CBaseModelEntityImpl, CBreakable
     public CBreakableImpl(nint handle) : base(handle) { }
 
     private static nint? _CPropDataComponentOffset;
+    private CPropDataComponentImpl? _CPropDataComponentInstance;
 
     public CPropDataComponent CPropDataComponent
     {
         get
         {
             _CPropDataComponentOffset = _CPropDataComponentOffset ?? Schema.GetOffset(0xC5CDE329ACBC1DDE);
-            return new CPropDataComponentImpl(_Handle + _CPropDataComponentOffset!.Value);
+            var instance = _CPropDataComponentInstance ??= new CPropDataComponentImpl(0);
+            instance.DangerousSetHandle(_Handle + _CPropDataComponentOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MaterialOffset;
@@ -147,13 +150,16 @@ internal partial class CBreakableImpl : CBaseModelEntityImpl, CBreakable
         }
     }
     private static nint? _OnHealthChangedOffset;
+    private SchemaUntypedField? _OnHealthChangedInstance;
 
     public SchemaUntypedField OnHealthChanged
     {
         get
         {
             _OnHealthChangedOffset = _OnHealthChangedOffset ?? Schema.GetOffset(0xC5CDE329EAC125B2);
-            return new SchemaUntypedField(_Handle + _OnHealthChangedOffset!.Value);
+            var instance = _OnHealthChangedInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OnHealthChangedOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PerformanceModeOffset;
@@ -177,13 +183,16 @@ internal partial class CBreakableImpl : CBaseModelEntityImpl, CBreakable
         }
     }
     private static nint? _LastPhysicsInfluenceTimeOffset;
+    private GameTime_tImpl? _LastPhysicsInfluenceTimeInstance;
 
     public GameTime_t LastPhysicsInfluenceTime
     {
         get
         {
             _LastPhysicsInfluenceTimeOffset = _LastPhysicsInfluenceTimeOffset ?? Schema.GetOffset(0xC5CDE3295B5C0E32);
-            return new GameTime_tImpl(_Handle + _LastPhysicsInfluenceTimeOffset!.Value);
+            var instance = _LastPhysicsInfluenceTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastPhysicsInfluenceTimeOffset!.Value);
+            return instance;
         }
     }
 

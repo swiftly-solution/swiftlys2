@@ -17,13 +17,16 @@ internal partial class CBodyComponentSkeletonInstanceImpl : CBodyComponentImpl, 
     public CBodyComponentSkeletonInstanceImpl(nint handle) : base(handle) { }
 
     private static nint? _SkeletonInstanceOffset;
+    private CSkeletonInstanceImpl? _SkeletonInstanceInstance;
 
     public CSkeletonInstance SkeletonInstance
     {
         get
         {
             _SkeletonInstanceOffset = _SkeletonInstanceOffset ?? Schema.GetOffset(0x4581C459228537B9);
-            return new CSkeletonInstanceImpl(_Handle + _SkeletonInstanceOffset!.Value);
+            var instance = _SkeletonInstanceInstance ??= new CSkeletonInstanceImpl(0);
+            instance.DangerousSetHandle(_Handle + _SkeletonInstanceOffset!.Value);
+            return instance;
         }
     }
 

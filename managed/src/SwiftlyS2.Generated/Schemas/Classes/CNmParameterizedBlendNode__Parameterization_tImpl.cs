@@ -17,23 +17,29 @@ internal partial class CNmParameterizedBlendNode__Parameterization_tImpl : Schem
     public CNmParameterizedBlendNode__Parameterization_tImpl(nint handle) : base(handle) { }
 
     private static nint? _BlendRangesOffset;
+    private SchemaUntypedField? _BlendRangesInstance;
 
     public SchemaUntypedField BlendRanges
     {
         get
         {
             _BlendRangesOffset = _BlendRangesOffset ?? Schema.GetOffset(0xD342D3196DA1C61A);
-            return new SchemaUntypedField(_Handle + _BlendRangesOffset!.Value);
+            var instance = _BlendRangesInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _BlendRangesOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ParameterRangeOffset;
+    private SchemaUntypedField? _ParameterRangeInstance;
 
     public SchemaUntypedField ParameterRange
     {
         get
         {
             _ParameterRangeOffset = _ParameterRangeOffset ?? Schema.GetOffset(0xD342D319E7E71E25);
-            return new SchemaUntypedField(_Handle + _ParameterRangeOffset!.Value);
+            var instance = _ParameterRangeInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ParameterRangeOffset!.Value);
+            return instance;
         }
     }
 

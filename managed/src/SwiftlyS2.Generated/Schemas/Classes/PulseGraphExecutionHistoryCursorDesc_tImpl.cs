@@ -27,23 +27,29 @@ internal partial class PulseGraphExecutionHistoryCursorDesc_tImpl : SchemaClass,
         }
     }
     private static nint? _SpawnNodeIDOffset;
+    private PulseDocNodeID_tImpl? _SpawnNodeIDInstance;
 
     public PulseDocNodeID_t SpawnNodeID
     {
         get
         {
             _SpawnNodeIDOffset = _SpawnNodeIDOffset ?? Schema.GetOffset(0xC94C4C1C95FE4E15);
-            return new PulseDocNodeID_tImpl(_Handle + _SpawnNodeIDOffset!.Value);
+            var instance = _SpawnNodeIDInstance ??= new PulseDocNodeID_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _SpawnNodeIDOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RetiredAtNodeIDOffset;
+    private PulseDocNodeID_tImpl? _RetiredAtNodeIDInstance;
 
     public PulseDocNodeID_t RetiredAtNodeID
     {
         get
         {
             _RetiredAtNodeIDOffset = _RetiredAtNodeIDOffset ?? Schema.GetOffset(0xC94C4C1C7FD10E42);
-            return new PulseDocNodeID_tImpl(_Handle + _RetiredAtNodeIDOffset!.Value);
+            var instance = _RetiredAtNodeIDInstance ??= new PulseDocNodeID_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _RetiredAtNodeIDOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LastReferencedOffset;

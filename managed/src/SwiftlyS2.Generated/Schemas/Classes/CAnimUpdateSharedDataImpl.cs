@@ -27,13 +27,16 @@ internal partial class CAnimUpdateSharedDataImpl : SchemaClass, CAnimUpdateShare
         }
     }
     private static nint? _NodeIndexMapOffset;
+    private SchemaUntypedField? _NodeIndexMapInstance;
 
     public SchemaUntypedField NodeIndexMap
     {
         get
         {
             _NodeIndexMapOffset = _NodeIndexMapOffset ?? Schema.GetOffset(0xA294DB47D3B3E7A3);
-            return new SchemaUntypedField(_Handle + _NodeIndexMapOffset!.Value);
+            var instance = _NodeIndexMapInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _NodeIndexMapOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ComponentsOffset;
@@ -47,73 +50,94 @@ internal partial class CAnimUpdateSharedDataImpl : SchemaClass, CAnimUpdateShare
         }
     }
     private static nint? _ParamListUpdaterOffset;
+    private SchemaUntypedField? _ParamListUpdaterInstance;
 
     public SchemaUntypedField ParamListUpdater
     {
         get
         {
             _ParamListUpdaterOffset = _ParamListUpdaterOffset ?? Schema.GetOffset(0xA294DB4784AA7F15);
-            return new SchemaUntypedField(_Handle + _ParamListUpdaterOffset!.Value);
+            var instance = _ParamListUpdaterInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ParamListUpdaterOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TagManagerUpdaterOffset;
+    private SchemaUntypedField? _TagManagerUpdaterInstance;
 
     public SchemaUntypedField TagManagerUpdater
     {
         get
         {
             _TagManagerUpdaterOffset = _TagManagerUpdaterOffset ?? Schema.GetOffset(0xA294DB47432E460D);
-            return new SchemaUntypedField(_Handle + _TagManagerUpdaterOffset!.Value);
+            var instance = _TagManagerUpdaterInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _TagManagerUpdaterOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ScriptManagerOffset;
+    private SchemaUntypedField? _ScriptManagerInstance;
 
     public SchemaUntypedField ScriptManager
     {
         get
         {
             _ScriptManagerOffset = _ScriptManagerOffset ?? Schema.GetOffset(0xA294DB47F4257D31);
-            return new SchemaUntypedField(_Handle + _ScriptManagerOffset!.Value);
+            var instance = _ScriptManagerInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ScriptManagerOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SettingsOffset;
+    private CAnimGraphSettingsManagerImpl? _SettingsInstance;
 
     public CAnimGraphSettingsManager Settings
     {
         get
         {
             _SettingsOffset = _SettingsOffset ?? Schema.GetOffset(0xA294DB47B3DE33A8);
-            return new CAnimGraphSettingsManagerImpl(_Handle + _SettingsOffset!.Value);
+            var instance = _SettingsInstance ??= new CAnimGraphSettingsManagerImpl(0);
+            instance.DangerousSetHandle(_Handle + _SettingsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StaticPoseCacheOffset;
+    private SchemaUntypedField? _StaticPoseCacheInstance;
 
     public SchemaUntypedField StaticPoseCache
     {
         get
         {
             _StaticPoseCacheOffset = _StaticPoseCacheOffset ?? Schema.GetOffset(0xA294DB475BFC0C1E);
-            return new SchemaUntypedField(_Handle + _StaticPoseCacheOffset!.Value);
+            var instance = _StaticPoseCacheInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _StaticPoseCacheOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SkeletonOffset;
+    private SchemaUntypedField? _SkeletonInstance;
 
     public SchemaUntypedField Skeleton
     {
         get
         {
             _SkeletonOffset = _SkeletonOffset ?? Schema.GetOffset(0xA294DB4744BBF688);
-            return new SchemaUntypedField(_Handle + _SkeletonOffset!.Value);
+            var instance = _SkeletonInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _SkeletonOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RootNodePathOffset;
+    private CAnimNodePathImpl? _RootNodePathInstance;
 
     public CAnimNodePath RootNodePath
     {
         get
         {
             _RootNodePathOffset = _RootNodePathOffset ?? Schema.GetOffset(0xA294DB476893B9EE);
-            return new CAnimNodePathImpl(_Handle + _RootNodePathOffset!.Value);
+            var instance = _RootNodePathInstance ??= new CAnimNodePathImpl(0);
+            instance.DangerousSetHandle(_Handle + _RootNodePathOffset!.Value);
+            return instance;
         }
     }
 

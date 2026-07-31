@@ -17,13 +17,16 @@ internal partial class CBreakablePropImpl : CBasePropImpl, CBreakableProp
     public CBreakablePropImpl(nint handle) : base(handle) { }
 
     private static nint? _CPropDataComponentOffset;
+    private CPropDataComponentImpl? _CPropDataComponentInstance;
 
     public CPropDataComponent CPropDataComponent
     {
         get
         {
             _CPropDataComponentOffset = _CPropDataComponentOffset ?? Schema.GetOffset(0xD9F5AF34ACBC1DDE);
-            return new CPropDataComponentImpl(_Handle + _CPropDataComponentOffset!.Value);
+            var instance = _CPropDataComponentInstance ??= new CPropDataComponentImpl(0);
+            instance.DangerousSetHandle(_Handle + _CPropDataComponentOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OnStartDeathOffset;
@@ -47,13 +50,16 @@ internal partial class CBreakablePropImpl : CBasePropImpl, CBreakableProp
         }
     }
     private static nint? _OnHealthChangedOffset;
+    private SchemaUntypedField? _OnHealthChangedInstance;
 
     public SchemaUntypedField OnHealthChanged
     {
         get
         {
             _OnHealthChangedOffset = _OnHealthChangedOffset ?? Schema.GetOffset(0xD9F5AF34EAC125B2);
-            return new SchemaUntypedField(_Handle + _OnHealthChangedOffset!.Value);
+            var instance = _OnHealthChangedInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _OnHealthChangedOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OnTakeDamageOffset;
@@ -147,13 +153,16 @@ internal partial class CBreakablePropImpl : CBasePropImpl, CBreakableProp
         }
     }
     private static nint? _PreventDamageBeforeTimeOffset;
+    private GameTime_tImpl? _PreventDamageBeforeTimeInstance;
 
     public GameTime_t PreventDamageBeforeTime
     {
         get
         {
             _PreventDamageBeforeTimeOffset = _PreventDamageBeforeTimeOffset ?? Schema.GetOffset(0xD9F5AF34431B46E8);
-            return new GameTime_tImpl(_Handle + _PreventDamageBeforeTimeOffset!.Value);
+            var instance = _PreventDamageBeforeTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _PreventDamageBeforeTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BreakableContentsTypeOffset;
@@ -317,13 +326,16 @@ internal partial class CBreakablePropImpl : CBasePropImpl, CBreakableProp
         }
     }
     private static nint? _LastPhysicsInfluenceTimeOffset;
+    private GameTime_tImpl? _LastPhysicsInfluenceTimeInstance;
 
     public GameTime_t LastPhysicsInfluenceTime
     {
         get
         {
             _LastPhysicsInfluenceTimeOffset = _LastPhysicsInfluenceTimeOffset ?? Schema.GetOffset(0xD9F5AF345B5C0E32);
-            return new GameTime_tImpl(_Handle + _LastPhysicsInfluenceTimeOffset!.Value);
+            var instance = _LastPhysicsInfluenceTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastPhysicsInfluenceTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DefaultFadeScaleOffset;

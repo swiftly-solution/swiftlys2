@@ -17,23 +17,29 @@ internal partial class C_OP_BoxConstraintImpl : CParticleFunctionConstraintImpl,
     public C_OP_BoxConstraintImpl(nint handle) : base(handle) { }
 
     private static nint? _MinOffset;
+    private CParticleCollectionVecInputImpl? _MinInstance;
 
     public CParticleCollectionVecInput Min
     {
         get
         {
             _MinOffset = _MinOffset ?? Schema.GetOffset(0x111EED71B0765F37);
-            return new CParticleCollectionVecInputImpl(_Handle + _MinOffset!.Value);
+            var instance = _MinInstance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _MinOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MaxOffset;
+    private CParticleCollectionVecInputImpl? _MaxInstance;
 
     public CParticleCollectionVecInput Max
     {
         get
         {
             _MaxOffset = _MaxOffset ?? Schema.GetOffset(0x111EED71BE89FCF9);
-            return new CParticleCollectionVecInputImpl(_Handle + _MaxOffset!.Value);
+            var instance = _MaxInstance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _MaxOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CPOffset;

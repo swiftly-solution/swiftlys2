@@ -77,13 +77,16 @@ internal partial class CBaseCSGrenadeProjectileImpl : CBaseGrenadeImpl, CBaseCSG
         }
     }
     private static nint? _SpawnTimeOffset;
+    private GameTime_tImpl? _SpawnTimeInstance;
 
     public GameTime_t SpawnTime
     {
         get
         {
             _SpawnTimeOffset = _SpawnTimeOffset ?? Schema.GetOffset(0xC09C67029596A16B);
-            return new GameTime_tImpl(_Handle + _SpawnTimeOffset!.Value);
+            var instance = _SpawnTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _SpawnTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OGSExtraFlagsOffset;
@@ -127,23 +130,29 @@ internal partial class CBaseCSGrenadeProjectileImpl : CBaseGrenadeImpl, CBaseCSG
         }
     }
     private static nint? _LastBounceSoundTimeOffset;
+    private GameTime_tImpl? _LastBounceSoundTimeInstance;
 
     public GameTime_t LastBounceSoundTime
     {
         get
         {
             _LastBounceSoundTimeOffset = _LastBounceSoundTimeOffset ?? Schema.GetOffset(0xC09C670206AF4AB7);
-            return new GameTime_tImpl(_Handle + _LastBounceSoundTimeOffset!.Value);
+            var instance = _LastBounceSoundTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LastBounceSoundTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _GrenadeSpinOffset;
+    private SchemaUntypedField? _GrenadeSpinInstance;
 
     public SchemaUntypedField GrenadeSpin
     {
         get
         {
             _GrenadeSpinOffset = _GrenadeSpinOffset ?? Schema.GetOffset(0xC09C67025A836591);
-            return new SchemaUntypedField(_Handle + _GrenadeSpinOffset!.Value);
+            var instance = _GrenadeSpinInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _GrenadeSpinOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LastHitSurfaceNormalOffset;

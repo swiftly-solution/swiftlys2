@@ -27,23 +27,29 @@ internal partial class ParticleNode_tImpl : SchemaClass, ParticleNode_t
         }
     }
     private static nint? _IndexOffset;
+    private ParticleIndex_tImpl? _IndexInstance;
 
     public ParticleIndex_t Index
     {
         get
         {
             _IndexOffset = _IndexOffset ?? Schema.GetOffset(0xBECF421C8F270140);
-            return new ParticleIndex_tImpl(_Handle + _IndexOffset!.Value);
+            var instance = _IndexInstance ??= new ParticleIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _IndexOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StartTimeOffset;
+    private GameTime_tImpl? _StartTimeInstance;
 
     public GameTime_t StartTime
     {
         get
         {
             _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0xBECF421C67FE9DC4);
-            return new GameTime_tImpl(_Handle + _StartTimeOffset!.Value);
+            var instance = _StartTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _StartTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _GrowthDurationOffset;

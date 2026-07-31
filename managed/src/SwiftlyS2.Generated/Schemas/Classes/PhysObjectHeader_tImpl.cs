@@ -77,23 +77,29 @@ internal partial class PhysObjectHeader_tImpl : SchemaClass, PhysObjectHeader_t
         }
     }
     private static nint? _BboxOffset;
+    private AABB_tImpl? _BboxInstance;
 
     public AABB_t Bbox
     {
         get
         {
             _BboxOffset = _BboxOffset ?? Schema.GetOffset(0xBB54A90094AAAED2);
-            return new AABB_tImpl(_Handle + _BboxOffset!.Value);
+            var instance = _BboxInstance ??= new AABB_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _BboxOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SphereOffset;
+    private physics_save_sphere_tImpl? _SphereInstance;
 
     public physics_save_sphere_t Sphere
     {
         get
         {
             _SphereOffset = _SphereOffset ?? Schema.GetOffset(0xBB54A900AFD98518);
-            return new physics_save_sphere_tImpl(_Handle + _SphereOffset!.Value);
+            var instance = _SphereInstance ??= new physics_save_sphere_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _SphereOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CollideOffset;

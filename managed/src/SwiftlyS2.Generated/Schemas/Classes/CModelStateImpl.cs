@@ -42,6 +42,7 @@ internal partial class CModelStateImpl : SchemaClass, CModelState
         }
     }
     private static nint? _VPhysicsAggregateOffset;
+    private IPhysAggregateInstanceImpl? _VPhysicsAggregateInstance;
 
     public IPhysAggregateInstance? VPhysicsAggregate
     {
@@ -49,7 +50,10 @@ internal partial class CModelStateImpl : SchemaClass, CModelState
         {
             _VPhysicsAggregateOffset = _VPhysicsAggregateOffset ?? Schema.GetOffset(0xC0A51C089AC0B13);
             var ptr = _Handle.Read<nint>(_VPhysicsAggregateOffset!.Value);
-            return ptr.IsValidPtr() ? new IPhysAggregateInstanceImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _VPhysicsAggregateInstance ??= new IPhysAggregateInstanceImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
     private static nint? _RootBoneOffset_xOffset;

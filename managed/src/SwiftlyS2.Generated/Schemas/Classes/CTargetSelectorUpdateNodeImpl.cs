@@ -37,43 +37,55 @@ internal partial class CTargetSelectorUpdateNodeImpl : CAnimUpdateNodeBaseImpl, 
         }
     }
     private static nint? _TargetPositionOffset;
+    private CAnimParamHandleImpl? _TargetPositionInstance;
 
     public CAnimParamHandle TargetPosition
     {
         get
         {
             _TargetPositionOffset = _TargetPositionOffset ?? Schema.GetOffset(0x37AB6CCBD1F40125);
-            return new CAnimParamHandleImpl(_Handle + _TargetPositionOffset!.Value);
+            var instance = _TargetPositionInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _TargetPositionOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TargetFacePositionParameterOffset;
+    private CAnimParamHandleImpl? _TargetFacePositionParameterInstance;
 
     public CAnimParamHandle TargetFacePositionParameter
     {
         get
         {
             _TargetFacePositionParameterOffset = _TargetFacePositionParameterOffset ?? Schema.GetOffset(0x37AB6CCB1102D56F);
-            return new CAnimParamHandleImpl(_Handle + _TargetFacePositionParameterOffset!.Value);
+            var instance = _TargetFacePositionParameterInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _TargetFacePositionParameterOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MoveHeadingParameterOffset;
+    private CAnimParamHandleImpl? _MoveHeadingParameterInstance;
 
     public CAnimParamHandle MoveHeadingParameter
     {
         get
         {
             _MoveHeadingParameterOffset = _MoveHeadingParameterOffset ?? Schema.GetOffset(0x37AB6CCB3A7267CF);
-            return new CAnimParamHandleImpl(_Handle + _MoveHeadingParameterOffset!.Value);
+            var instance = _MoveHeadingParameterInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _MoveHeadingParameterOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DesiredMoveHeadingParameterOffset;
+    private CAnimParamHandleImpl? _DesiredMoveHeadingParameterInstance;
 
     public CAnimParamHandle DesiredMoveHeadingParameter
     {
         get
         {
             _DesiredMoveHeadingParameterOffset = _DesiredMoveHeadingParameterOffset ?? Schema.GetOffset(0x37AB6CCBC6298DFB);
-            return new CAnimParamHandleImpl(_Handle + _DesiredMoveHeadingParameterOffset!.Value);
+            var instance = _DesiredMoveHeadingParameterInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _DesiredMoveHeadingParameterOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TargetPositionIsWorldSpaceOffset;

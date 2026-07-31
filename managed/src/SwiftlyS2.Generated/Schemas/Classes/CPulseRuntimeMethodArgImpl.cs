@@ -17,13 +17,16 @@ internal partial class CPulseRuntimeMethodArgImpl : SchemaClass, CPulseRuntimeMe
     public CPulseRuntimeMethodArgImpl(nint handle) : base(handle) { }
 
     private static nint? _NameOffset;
+    private SchemaUntypedField? _NameInstance;
 
     public SchemaUntypedField Name
     {
         get
         {
             _NameOffset = _NameOffset ?? Schema.GetOffset(0xA8B175BCCAE8A266);
-            return new SchemaUntypedField(_Handle + _NameOffset!.Value);
+            var instance = _NameInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _NameOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DescriptionOffset;
@@ -42,13 +45,16 @@ internal partial class CPulseRuntimeMethodArgImpl : SchemaClass, CPulseRuntimeMe
         }
     }
     private static nint? _TypeOffset;
+    private SchemaUntypedField? _TypeInstance;
 
     public SchemaUntypedField Type
     {
         get
         {
             _TypeOffset = _TypeOffset ?? Schema.GetOffset(0xA8B175BC8ED6D5CD);
-            return new SchemaUntypedField(_Handle + _TypeOffset!.Value);
+            var instance = _TypeInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _TypeOffset!.Value);
+            return instance;
         }
     }
 

@@ -16,9 +16,18 @@ internal partial class FeKelagerBend2_tImpl : SchemaClass, FeKelagerBend2_t
 {
     public FeKelagerBend2_tImpl(nint handle) : base(handle) { }
 
+    private static nint? _WeightOffset;
+    private SchemaFixedArray<float>? _WeightInstance;
+
     public ISchemaFixedArray<float> Weight
     {
-        get => new SchemaFixedArray<float>(_Handle, 0x702E10E1CFFC66CB, 3, 4, 4);
+        get
+        {
+            _WeightOffset = _WeightOffset ?? Schema.GetOffset(0x702E10E1CFFC66CB);
+            var instance = _WeightInstance ??= new SchemaFixedArray<float>(0, 0x702E10E1CFFC66CB, 3, 4, 4);
+            instance.DangerousSetHandle(_Handle + _WeightOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _Height0Offset;
 
@@ -30,9 +39,18 @@ internal partial class FeKelagerBend2_tImpl : SchemaClass, FeKelagerBend2_t
             return ref _Handle.AsRef<float>(_Height0Offset!.Value);
         }
     }
+    private static nint? _NodeOffset;
+    private SchemaFixedArray<ushort>? _NodeInstance;
+
     public ISchemaFixedArray<ushort> Node
     {
-        get => new SchemaFixedArray<ushort>(_Handle, 0x702E10E1CD6694B9, 3, 2, 2);
+        get
+        {
+            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0x702E10E1CD6694B9);
+            var instance = _NodeInstance ??= new SchemaFixedArray<ushort>(0, 0x702E10E1CD6694B9, 3, 2, 2);
+            instance.DangerousSetHandle(_Handle + _NodeOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _ReservedOffset;
 

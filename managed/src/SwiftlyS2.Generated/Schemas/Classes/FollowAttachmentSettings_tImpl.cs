@@ -17,13 +17,16 @@ internal partial class FollowAttachmentSettings_tImpl : SchemaClass, FollowAttac
     public FollowAttachmentSettings_tImpl(nint handle) : base(handle) { }
 
     private static nint? _AttachmentOffset;
+    private CAnimAttachmentImpl? _AttachmentInstance;
 
     public CAnimAttachment Attachment
     {
         get
         {
             _AttachmentOffset = _AttachmentOffset ?? Schema.GetOffset(0x94FFC64B2C5CA308);
-            return new CAnimAttachmentImpl(_Handle + _AttachmentOffset!.Value);
+            var instance = _AttachmentInstance ??= new CAnimAttachmentImpl(0);
+            instance.DangerousSetHandle(_Handle + _AttachmentOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BoneIndexOffset;
@@ -37,13 +40,16 @@ internal partial class FollowAttachmentSettings_tImpl : SchemaClass, FollowAttac
         }
     }
     private static nint? _AttachmentHandleOffset;
+    private AttachmentHandle_tImpl? _AttachmentHandleInstance;
 
     public AttachmentHandle_t AttachmentHandle
     {
         get
         {
             _AttachmentHandleOffset = _AttachmentHandleOffset ?? Schema.GetOffset(0x94FFC64BA203035E);
-            return new AttachmentHandle_tImpl(_Handle + _AttachmentHandleOffset!.Value);
+            var instance = _AttachmentHandleInstance ??= new AttachmentHandle_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _AttachmentHandleOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MatchTranslationOffset;

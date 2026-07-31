@@ -692,13 +692,16 @@ internal partial class CLightComponentImpl : CEntityComponentImpl, CLightCompone
         }
     }
     private static nint? _LightStyleStartTimeOffset;
+    private GameTime_tImpl? _LightStyleStartTimeInstance;
 
     public GameTime_t LightStyleStartTime
     {
         get
         {
             _LightStyleStartTimeOffset = _LightStyleStartTimeOffset ?? Schema.GetOffset(0x15B1C6A5A3B159A3);
-            return new GameTime_tImpl(_Handle + _LightStyleStartTimeOffset!.Value);
+            var instance = _LightStyleStartTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LightStyleStartTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CapsuleLengthOffset;

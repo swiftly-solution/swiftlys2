@@ -17,13 +17,16 @@ internal partial class CPulse_VariableImpl : SchemaClass, CPulse_Variable
     public CPulse_VariableImpl(nint handle) : base(handle) { }
 
     private static nint? _NameOffset;
+    private SchemaUntypedField? _NameInstance;
 
     public SchemaUntypedField Name
     {
         get
         {
             _NameOffset = _NameOffset ?? Schema.GetOffset(0x598DEA5CCAE8A266);
-            return new SchemaUntypedField(_Handle + _NameOffset!.Value);
+            var instance = _NameInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _NameOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DescriptionOffset;
@@ -42,23 +45,29 @@ internal partial class CPulse_VariableImpl : SchemaClass, CPulse_Variable
         }
     }
     private static nint? _TypeOffset;
+    private SchemaUntypedField? _TypeInstance;
 
     public SchemaUntypedField Type
     {
         get
         {
             _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x598DEA5C8ED6D5CD);
-            return new SchemaUntypedField(_Handle + _TypeOffset!.Value);
+            var instance = _TypeInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _TypeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DefaultValueOffset;
+    private SchemaUntypedField? _DefaultValueInstance;
 
     public SchemaUntypedField DefaultValue
     {
         get
         {
             _DefaultValueOffset = _DefaultValueOffset ?? Schema.GetOffset(0x598DEA5CC6E9593F);
-            return new SchemaUntypedField(_Handle + _DefaultValueOffset!.Value);
+            var instance = _DefaultValueInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _DefaultValueOffset!.Value);
+            return instance;
         }
     }
     private static nint? _KeysSourceOffset;
@@ -92,23 +101,29 @@ internal partial class CPulse_VariableImpl : SchemaClass, CPulse_Variable
         }
     }
     private static nint? _EditorNodeIDOffset;
+    private PulseDocNodeID_tImpl? _EditorNodeIDInstance;
 
     public PulseDocNodeID_t EditorNodeID
     {
         get
         {
             _EditorNodeIDOffset = _EditorNodeIDOffset ?? Schema.GetOffset(0x598DEA5C8D964CBD);
-            return new PulseDocNodeID_tImpl(_Handle + _EditorNodeIDOffset!.Value);
+            var instance = _EditorNodeIDInstance ??= new PulseDocNodeID_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _EditorNodeIDOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MetadataOffset;
+    private SchemaUntypedField? _MetadataInstance;
 
     public SchemaUntypedField Metadata
     {
         get
         {
             _MetadataOffset = _MetadataOffset ?? Schema.GetOffset(0x598DEA5CCEFAFFC0);
-            return new SchemaUntypedField(_Handle + _MetadataOffset!.Value);
+            var instance = _MetadataInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _MetadataOffset!.Value);
+            return instance;
         }
     }
 

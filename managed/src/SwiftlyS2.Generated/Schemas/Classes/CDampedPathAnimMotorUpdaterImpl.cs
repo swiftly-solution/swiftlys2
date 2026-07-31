@@ -37,23 +37,29 @@ internal partial class CDampedPathAnimMotorUpdaterImpl : CPathAnimMotorUpdaterBa
         }
     }
     private static nint? _AnticipationPosParamOffset;
+    private CAnimParamHandleImpl? _AnticipationPosParamInstance;
 
     public CAnimParamHandle AnticipationPosParam
     {
         get
         {
             _AnticipationPosParamOffset = _AnticipationPosParamOffset ?? Schema.GetOffset(0x1519DE4D86389829);
-            return new CAnimParamHandleImpl(_Handle + _AnticipationPosParamOffset!.Value);
+            var instance = _AnticipationPosParamInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _AnticipationPosParamOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AnticipationHeadingParamOffset;
+    private CAnimParamHandleImpl? _AnticipationHeadingParamInstance;
 
     public CAnimParamHandle AnticipationHeadingParam
     {
         get
         {
             _AnticipationHeadingParamOffset = _AnticipationHeadingParamOffset ?? Schema.GetOffset(0x1519DE4D095DAB6D);
-            return new CAnimParamHandleImpl(_Handle + _AnticipationHeadingParamOffset!.Value);
+            var instance = _AnticipationHeadingParamInstance ??= new CAnimParamHandleImpl(0);
+            instance.DangerousSetHandle(_Handle + _AnticipationHeadingParamOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SpringConstantOffset;

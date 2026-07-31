@@ -57,13 +57,16 @@ internal partial class CTriggerLerpObjectImpl : CBaseTriggerImpl, CTriggerLerpOb
         }
     }
     private static nint? _LerpTargetAttachment2Offset;
+    private AttachmentHandle_tImpl? _LerpTargetAttachment2Instance;
 
     public AttachmentHandle_t LerpTargetAttachment2
     {
         get
         {
             _LerpTargetAttachment2Offset = _LerpTargetAttachment2Offset ?? Schema.GetOffset(0x42FE8EA4FC3162AA);
-            return new AttachmentHandle_tImpl(_Handle + _LerpTargetAttachment2Offset!.Value);
+            var instance = _LerpTargetAttachment2Instance ??= new AttachmentHandle_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LerpTargetAttachment2Offset!.Value);
+            return instance;
         }
     }
     private static nint? _LerpDurationOffset;

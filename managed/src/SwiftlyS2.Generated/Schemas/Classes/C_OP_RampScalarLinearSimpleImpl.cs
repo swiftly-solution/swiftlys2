@@ -47,13 +47,16 @@ internal partial class C_OP_RampScalarLinearSimpleImpl : CParticleFunctionOperat
         }
     }
     private static nint? _FieldOffset;
+    private ParticleAttributeIndex_tImpl? _FieldInstance;
 
     public ParticleAttributeIndex_t Field
     {
         get
         {
             _FieldOffset = _FieldOffset ?? Schema.GetOffset(0xCD04073EC257B93B);
-            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOffset!.Value);
+            var instance = _FieldInstance ??= new ParticleAttributeIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FieldOffset!.Value);
+            return instance;
         }
     }
 

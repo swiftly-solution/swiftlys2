@@ -52,13 +52,16 @@ internal partial class CSndBeatPatternImpl : SchemaClass, CSndBeatPattern
         }
     }
     private static nint? _TimeSignatureOffset;
+    private SndBeatTimeSignature_tImpl? _TimeSignatureInstance;
 
     public SndBeatTimeSignature_t TimeSignature
     {
         get
         {
             _TimeSignatureOffset = _TimeSignatureOffset ?? Schema.GetOffset(0x6C0E36655C8CE99E);
-            return new SndBeatTimeSignature_tImpl(_Handle + _TimeSignatureOffset!.Value);
+            var instance = _TimeSignatureInstance ??= new SndBeatTimeSignature_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _TimeSignatureOffset!.Value);
+            return instance;
         }
     }
     private static nint? _LengthOffset;

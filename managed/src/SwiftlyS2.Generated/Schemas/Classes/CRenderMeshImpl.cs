@@ -17,13 +17,16 @@ internal partial class CRenderMeshImpl : SchemaClass, CRenderMesh
     public CRenderMeshImpl(nint handle) : base(handle) { }
 
     private static nint? _SceneObjectsOffset;
+    private SchemaUntypedField? _SceneObjectsInstance;
 
     public SchemaUntypedField SceneObjects
     {
         get
         {
             _SceneObjectsOffset = _SceneObjectsOffset ?? Schema.GetOffset(0x8593C3BF332235A1);
-            return new SchemaUntypedField(_Handle + _SceneObjectsOffset!.Value);
+            var instance = _SceneObjectsInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _SceneObjectsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ConstraintsOffset;
@@ -37,13 +40,16 @@ internal partial class CRenderMeshImpl : SchemaClass, CRenderMesh
         }
     }
     private static nint? _SkeletonOffset;
+    private CRenderSkeletonImpl? _SkeletonInstance;
 
     public CRenderSkeleton Skeleton
     {
         get
         {
             _SkeletonOffset = _SkeletonOffset ?? Schema.GetOffset(0x8593C3BFE77F030E);
-            return new CRenderSkeletonImpl(_Handle + _SkeletonOffset!.Value);
+            var instance = _SkeletonInstance ??= new CRenderSkeletonImpl(0);
+            instance.DangerousSetHandle(_Handle + _SkeletonOffset!.Value);
+            return instance;
         }
     }
     private static nint? _UseUV2ForChartingOffset;
@@ -67,16 +73,20 @@ internal partial class CRenderMeshImpl : SchemaClass, CRenderMesh
         }
     }
     private static nint? _MeshDeformParamsOffset;
+    private DynamicMeshDeformParams_tImpl? _MeshDeformParamsInstance;
 
     public DynamicMeshDeformParams_t MeshDeformParams
     {
         get
         {
             _MeshDeformParamsOffset = _MeshDeformParamsOffset ?? Schema.GetOffset(0x8593C3BF061DBB9B);
-            return new DynamicMeshDeformParams_tImpl(_Handle + _MeshDeformParamsOffset!.Value);
+            var instance = _MeshDeformParamsInstance ??= new DynamicMeshDeformParams_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _MeshDeformParamsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _GroomDataOffset;
+    private CRenderGroomImpl? _GroomDataInstance;
 
     public CRenderGroom? GroomData
     {
@@ -84,7 +94,10 @@ internal partial class CRenderMeshImpl : SchemaClass, CRenderMesh
         {
             _GroomDataOffset = _GroomDataOffset ?? Schema.GetOffset(0x8593C3BFCFCDEA93);
             var ptr = _Handle.Read<nint>(_GroomDataOffset!.Value);
-            return ptr.IsValidPtr() ? new CRenderGroomImpl(ptr) : null;
+            if (!ptr.IsValidPtr()) return null;
+            var instance = _GroomDataInstance ??= new CRenderGroomImpl(0);
+            instance.DangerousSetHandle(ptr);
+            return instance;
         }
     }
 

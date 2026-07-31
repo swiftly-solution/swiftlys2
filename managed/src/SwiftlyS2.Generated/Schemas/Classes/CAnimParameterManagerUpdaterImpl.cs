@@ -27,23 +27,29 @@ internal partial class CAnimParameterManagerUpdaterImpl : SchemaClass, CAnimPara
         }
     }
     private static nint? _IdToIndexMapOffset;
+    private SchemaUntypedField? _IdToIndexMapInstance;
 
     public SchemaUntypedField IdToIndexMap
     {
         get
         {
             _IdToIndexMapOffset = _IdToIndexMapOffset ?? Schema.GetOffset(0x2289044E7B873A5F);
-            return new SchemaUntypedField(_Handle + _IdToIndexMapOffset!.Value);
+            var instance = _IdToIndexMapInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _IdToIndexMapOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NameToIndexMapOffset;
+    private SchemaUntypedField? _NameToIndexMapInstance;
 
     public SchemaUntypedField NameToIndexMap
     {
         get
         {
             _NameToIndexMapOffset = _NameToIndexMapOffset ?? Schema.GetOffset(0x2289044EDA1FC14D);
-            return new SchemaUntypedField(_Handle + _NameToIndexMapOffset!.Value);
+            var instance = _NameToIndexMapInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _NameToIndexMapOffset!.Value);
+            return instance;
         }
     }
     private static nint? _IndexToHandleOffset;
@@ -67,13 +73,16 @@ internal partial class CAnimParameterManagerUpdaterImpl : SchemaClass, CAnimPara
         }
     }
     private static nint? _AutoResetMapOffset;
+    private SchemaUntypedField? _AutoResetMapInstance;
 
     public SchemaUntypedField AutoResetMap
     {
         get
         {
             _AutoResetMapOffset = _AutoResetMapOffset ?? Schema.GetOffset(0x2289044E024CB2F5);
-            return new SchemaUntypedField(_Handle + _AutoResetMapOffset!.Value);
+            var instance = _AutoResetMapInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _AutoResetMapOffset!.Value);
+            return instance;
         }
     }
 

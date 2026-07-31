@@ -117,13 +117,16 @@ internal partial class CEffectDataImpl : SchemaClass, CEffectData
         }
     }
     private static nint? _EffectIndexOffset;
+    private SchemaUntypedField? _EffectIndexInstance;
 
     public SchemaUntypedField EffectIndex
     {
         get
         {
             _EffectIndexOffset = _EffectIndexOffset ?? Schema.GetOffset(0x15CC7C678EBB71E4);
-            return new SchemaUntypedField(_Handle + _EffectIndexOffset!.Value);
+            var instance = _EffectIndexInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _EffectIndexOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DamageTypeOffset;
@@ -187,13 +190,16 @@ internal partial class CEffectDataImpl : SchemaClass, CEffectData
         }
     }
     private static nint? _AttachmentIndexOffset;
+    private AttachmentHandle_tImpl? _AttachmentIndexInstance;
 
     public AttachmentHandle_t AttachmentIndex
     {
         get
         {
             _AttachmentIndexOffset = _AttachmentIndexOffset ?? Schema.GetOffset(0x15CC7C677A529580);
-            return new AttachmentHandle_tImpl(_Handle + _AttachmentIndexOffset!.Value);
+            var instance = _AttachmentIndexInstance ??= new AttachmentHandle_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _AttachmentIndexOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AttachmentNameOffset;

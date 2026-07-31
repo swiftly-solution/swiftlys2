@@ -77,13 +77,16 @@ internal partial class CNmChainLookatNode__CDefinitionImpl : CNmPassthroughNode_
         }
     }
     private static nint? _ChainWeightsOffset;
+    private SchemaUntypedField? _ChainWeightsInstance;
 
     public SchemaUntypedField ChainWeights
     {
         get
         {
             _ChainWeightsOffset = _ChainWeightsOffset ?? Schema.GetOffset(0x3D36690261882157);
-            return new SchemaUntypedField(_Handle + _ChainWeightsOffset!.Value);
+            var instance = _ChainWeightsInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ChainWeightsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ChainLengthOffset;

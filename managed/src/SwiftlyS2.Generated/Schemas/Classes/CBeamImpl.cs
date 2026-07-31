@@ -37,13 +37,16 @@ internal partial class CBeamImpl : CBaseModelEntityImpl, CBeam
         }
     }
     private static nint? _FireTimeOffset;
+    private GameTime_tImpl? _FireTimeInstance;
 
     public GameTime_t FireTime
     {
         get
         {
             _FireTimeOffset = _FireTimeOffset ?? Schema.GetOffset(0x4BCF3CE5873CD172);
-            return new GameTime_tImpl(_Handle + _FireTimeOffset!.Value);
+            var instance = _FireTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _FireTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _DamageOffset;
@@ -106,13 +109,31 @@ internal partial class CBeamImpl : CBaseModelEntityImpl, CBeam
             return ref _Handle.AsRef<uint>(_BeamFlagsOffset!.Value);
         }
     }
+    private static nint? _AttachEntityOffset;
+    private SchemaFixedArray<CHandle<CBaseEntity>>? _AttachEntityInstance;
+
     public ISchemaFixedArray<CHandle<CBaseEntity>> AttachEntity
     {
-        get => new SchemaFixedArray<CHandle<CBaseEntity>>(_Handle, 0x4BCF3CE56BCDCAD1, 10, 4, 4);
+        get
+        {
+            _AttachEntityOffset = _AttachEntityOffset ?? Schema.GetOffset(0x4BCF3CE56BCDCAD1);
+            var instance = _AttachEntityInstance ??= new SchemaFixedArray<CHandle<CBaseEntity>>(0, 0x4BCF3CE56BCDCAD1, 10, 4, 4);
+            instance.DangerousSetHandle(_Handle + _AttachEntityOffset!.Value);
+            return instance;
+        }
     }
+    private static nint? _AttachIndexOffset;
+    private SchemaClassFixedArray<AttachmentHandle_t>? _AttachIndexInstance;
+
     public ISchemaClassFixedArray<AttachmentHandle_t> AttachIndex
     {
-        get => new SchemaClassFixedArray<AttachmentHandle_t>(_Handle, 0x4BCF3CE5502E5BEC, 10, 1, 1);
+        get
+        {
+            _AttachIndexOffset = _AttachIndexOffset ?? Schema.GetOffset(0x4BCF3CE5502E5BEC);
+            var instance = _AttachIndexInstance ??= new SchemaClassFixedArray<AttachmentHandle_t>(0, 0x4BCF3CE5502E5BEC, 10, 1, 1);
+            instance.DangerousSetHandle(_Handle + _AttachIndexOffset!.Value);
+            return instance;
+        }
     }
     private static nint? _WidthOffset;
 

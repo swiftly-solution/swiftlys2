@@ -17,53 +17,68 @@ internal partial class C_OP_SpringToVectorConstraintImpl : CParticleFunctionCons
     public C_OP_SpringToVectorConstraintImpl(nint handle) : base(handle) { }
 
     private static nint? _RestLengthOffset;
+    private CPerParticleFloatInputImpl? _RestLengthInstance;
 
     public CPerParticleFloatInput RestLength
     {
         get
         {
             _RestLengthOffset = _RestLengthOffset ?? Schema.GetOffset(0xF442244193AC4079);
-            return new CPerParticleFloatInputImpl(_Handle + _RestLengthOffset!.Value);
+            var instance = _RestLengthInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _RestLengthOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MinDistanceOffset;
+    private CPerParticleFloatInputImpl? _MinDistanceInstance;
 
     public CPerParticleFloatInput MinDistance
     {
         get
         {
             _MinDistanceOffset = _MinDistanceOffset ?? Schema.GetOffset(0xF442244192BCAD06);
-            return new CPerParticleFloatInputImpl(_Handle + _MinDistanceOffset!.Value);
+            var instance = _MinDistanceInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _MinDistanceOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MaxDistanceOffset;
+    private CPerParticleFloatInputImpl? _MaxDistanceInstance;
 
     public CPerParticleFloatInput MaxDistance
     {
         get
         {
             _MaxDistanceOffset = _MaxDistanceOffset ?? Schema.GetOffset(0xF442244198893360);
-            return new CPerParticleFloatInputImpl(_Handle + _MaxDistanceOffset!.Value);
+            var instance = _MaxDistanceInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _MaxDistanceOffset!.Value);
+            return instance;
         }
     }
     private static nint? _RestingLengthOffset;
+    private CPerParticleFloatInputImpl? _RestingLengthInstance;
 
     public CPerParticleFloatInput RestingLength
     {
         get
         {
             _RestingLengthOffset = _RestingLengthOffset ?? Schema.GetOffset(0xF4422441BB988EAF);
-            return new CPerParticleFloatInputImpl(_Handle + _RestingLengthOffset!.Value);
+            var instance = _RestingLengthInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _RestingLengthOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AnchorVectorOffset;
+    private CPerParticleVecInputImpl? _AnchorVectorInstance;
 
     public CPerParticleVecInput AnchorVector
     {
         get
         {
             _AnchorVectorOffset = _AnchorVectorOffset ?? Schema.GetOffset(0xF442244180D613F3);
-            return new CPerParticleVecInputImpl(_Handle + _AnchorVectorOffset!.Value);
+            var instance = _AnchorVectorInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _AnchorVectorOffset!.Value);
+            return instance;
         }
     }
 
