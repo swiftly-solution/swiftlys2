@@ -42,8 +42,8 @@ enum MessageType : uint8_t
 
 struct BlockedTransmitInfo
 {
-    uint64_t blockedMask[MAX_EDICTS >> 6] = { 0 };
-    std::vector<uint8_t> activeMasks;
+    CBitVec<MAX_EDICTS> blockedTransmitBits;
+    CBitVec<MAX_EDICTS_QWORDS> blockedTransmitMasks;
 };
 
 class IPlayer

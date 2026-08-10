@@ -151,60 +151,39 @@ void Bridge_Player_Kick(int playerid, const char* reason, int gamereason)
 
 void Bridge_Player_ShouldBlockTransmitEntity(int playerid, int entityidx, bool shouldBlockTransmit)
 {
-    if (playerid + 1 == entityidx)
-    {
-        return;
-    }
+    if (playerid + 1 == entityidx) return;
 
     static auto playerManager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
     auto player = playerManager->GetPlayer(playerid);
-    if (!player)
-    {
-        return;
-    }
+    if (!player) return;
 
     auto& bv = player->GetBlockedTransmittingBits();
+    uint64_t* blockedTransmitBitsBase = (uint64_t*)bv.blockedTransmitBits.Base();
 
-    auto dword = entityidx >> 6;
+    auto qword = entityidx >> 6;
     if (shouldBlockTransmit)
     {
-        bool wasEmpty = (bv.blockedMask[dword] == 0);
-        bv.blockedMask[dword] |= (1ULL << (entityidx % 64));
-        if (wasEmpty)
-        {
-            bv.activeMasks.push_back(dword);
-        }
+        bool wasEmpty = blockedTransmitBitsBase[qword] == 0;
+        bv.blockedTransmitBits.Set(entityidx);
+        if (wasEmpty) bv.blockedTransmitMasks.Set(qword);
     }
     else
     {
-        bv.blockedMask[dword] &= ~(1ULL << (entityidx % 64));
-        if (bv.blockedMask[dword] == 0)
-        {
-            auto it = std::find(bv.activeMasks.begin(), bv.activeMasks.end(), dword);
-            if (it != bv.activeMasks.end())
-            {
-                bv.activeMasks.erase(it);
-            }
-        }
+        bv.blockedTransmitBits.Clear(entityidx);
+        if (blockedTransmitBitsBase[qword] == 0) bv.blockedTransmitMasks.Clear(qword);
     }
 }
 
 bool Bridge_Player_IsTransmitEntityBlocked(int playerid, int entityidx)
 {
-    if (playerid + 1 == entityidx)
-    {
-        return false;
-    }
+    if (playerid + 1 == entityidx) return false;
 
     static auto playerManager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
     auto player = playerManager->GetPlayer(playerid);
-    if (!player)
-    {
-        return false;
-    }
+    if (!player) return false;
 
     auto& bv = player->GetBlockedTransmittingBits();
-    return (bv.blockedMask[entityidx >> 6] & (1ULL << (entityidx % 64))) != 0;
+    return bv.blockedTransmitBits.IsBitSet(entityidx);
 }
 
 void Bridge_Player_ClearTransmitEntityBlocked(int playerid)
@@ -215,9 +194,8 @@ void Bridge_Player_ClearTransmitEntityBlocked(int playerid)
         return;
 
     auto& bv = player->GetBlockedTransmittingBits();
-    for (int i = 0; i < 256; i++)
-        bv.blockedMask[i] = 0;
-    bv.activeMasks.clear();
+    bv.blockedTransmitBits.ClearAll();
+    bv.blockedTransmitMasks.ClearAll();
 }
 
 char* Bridge_Player_GetLanguage(int* size, int playerid)

@@ -25,6 +25,7 @@
 #define CCSGameRulesProxy_m_pGameRules 0x242D3ADB925C1F40
 
 CEntityListener g_entityListener;
+CBitVec<MAX_EDICTS> g_ShouldBeAlwaysTransmitted;
 
 extern void* g_pOnEntityCreatedCallback;
 extern void* g_pOnEntityDeletedCallback;
@@ -47,27 +48,25 @@ void CEntityListener::OnEntityCreated(CEntityInstance* pEntity)
 {
     if (g_pOnEntityCreatedCallback)
         reinterpret_cast<void(*)(void*)>(g_pOnEntityCreatedCallback)(pEntity);
+
+    std::string classname = pEntity->GetClassname();
+    if(classname.find("pawn") != std::string::npos || classname.find("weapon") != std::string::npos)
+        g_ShouldBeAlwaysTransmitted.Set(pEntity->GetEntityIndex().Get());
 }
 
 void CEntityListener::OnEntityDeleted(CEntityInstance* pEntity)
 {
     static auto playermanager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
+    auto entindex = pEntity->m_pEntity->m_EHandle.GetEntryIndex();
+    auto qword = entindex >> 6;
     for (int i = 0; i < 64; i++) {
         auto player = playermanager->GetPlayer(i);
         if (!player) continue;
         auto& transmittingBits = player->GetBlockedTransmittingBits();
 
-        auto entindex = pEntity->m_pEntity->m_EHandle.GetEntryIndex();
-        auto dword = entindex >> 6;
-
-        auto result = std::find(transmittingBits.activeMasks.begin(), transmittingBits.activeMasks.end(), dword);
-
-        if (result == transmittingBits.activeMasks.end()) {
-            continue;
-        }
-
-        transmittingBits.blockedMask[dword] &= ~(1ULL << (entindex % 64));
-        if (transmittingBits.blockedMask[dword] == 0) transmittingBits.activeMasks.erase(result);
+        transmittingBits.blockedTransmitBits.Clear(entindex);
+        uint64_t* transmitBitsBase = (uint64_t*)transmittingBits.blockedTransmitBits.Base();
+        if(transmitBitsBase[qword] == 0) transmittingBits.blockedTransmitMasks.Clear(qword);
     }
 
     if (g_pOnEntityDeletedCallback)

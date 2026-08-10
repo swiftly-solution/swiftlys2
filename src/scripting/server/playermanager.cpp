@@ -37,44 +37,23 @@ void Bridge_PlayerManager_SendMessage(int kind, const char* message, int duratio
     playerManager->SendMsg((MessageType)kind, message, duration);
 }
 
+void Bridge_Player_ShouldBlockTransmitEntity(int playerid, int entityidx, bool shouldBlockTransmit);
+
 void Bridge_PlayerManager_ShouldBlockTransmitEntity(int entityidx, bool shouldBlockTransmit)
 {
     static auto playerManager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
-    auto dword = entityidx >> 6;
-    for (int i = 0; i < playerManager->GetPlayerCap(); i++) {
-        auto player = playerManager->GetPlayer(i);
-        if (!player) continue;
-
-        if (i + 1 == entityidx) continue;
-
-        auto& bv = player->GetBlockedTransmittingBits();
-
-        if (shouldBlockTransmit) {
-            bool wasEmpty = (bv.blockedMask[dword] == 0);
-            bv.blockedMask[dword] |= (1ULL << (entityidx % 64));
-            if (wasEmpty) bv.activeMasks.push_back(dword);
-        }
-        else {
-            bv.blockedMask[dword] &= ~(1ULL << (entityidx % 64));
-            if (bv.blockedMask[dword] == 0) {
-                auto dwordIt = std::find(bv.activeMasks.begin(), bv.activeMasks.end(), dword);
-                if (dwordIt != bv.activeMasks.end()) bv.activeMasks.erase(dwordIt);
-            }
-        }
-    }
+    auto qword = entityidx >> 6;
+    for (int i = 0; i < playerManager->GetPlayerCap(); i++)
+        Bridge_Player_ShouldBlockTransmitEntity(i, entityidx, shouldBlockTransmit);
 }
+
+void Bridge_Player_ClearTransmitEntityBlocked(int playerid);
 
 void Bridge_PlayerManager_ClearAllBlockedTransmitEntity()
 {
     static auto playerManager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
-    for (int i = 0; i < playerManager->GetPlayerCap(); i++) {
-        auto player = playerManager->GetPlayer(i);
-        if (!player) continue;
-
-        auto& bv = player->GetBlockedTransmittingBits();
-        bv.activeMasks.clear();
-        for (int j = 0; j < (MAX_EDICTS >> 6); j++) bv.blockedMask[j] = 0;
-    }
+    for (int i = 0; i < playerManager->GetPlayerCap(); i++)
+        Bridge_Player_ClearTransmitEntityBlocked(i);
 }
 
 DEFINE_NATIVE("PlayerManager.GetPlayerCount", Bridge_PlayerManager_GetPlayerCount);

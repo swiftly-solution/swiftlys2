@@ -53,6 +53,7 @@ IVFunctionHook* g_pClientDisconnectHook = nullptr;
 IVFunctionHook* g_pClientPutInServerHook = nullptr;
 
 IVFunctionHook* g_pCheckTransmitHook = nullptr;
+extern CBitVec<MAX_EDICTS> g_ShouldBeAlwaysTransmitted;
 
 void OnGameFramePlayerHook(void* _this, bool simulate, bool first, bool last);
 
@@ -196,37 +197,26 @@ void CheckTransmitHook(void* _this, CCheckTransmitInfo** ppInfoList, int infoCou
         }
 
         auto& blockedBits = player->GetBlockedTransmittingBits();
-        if (blockedBits.activeMasks.empty()) continue;
-
         uint64_t* transmitEntityBase = reinterpret_cast<uint64_t*>(pInfo->m_pTransmitEntity->Base());
         uint64_t* transmitNonPlayersBase = reinterpret_cast<uint64_t*>(pInfo->m_pTransmitNonPlayers->Base());
-        auto& activeMasks = blockedBits.activeMasks;
 
-        // NUM_MASKS_ACTIVE ops = NUM_MASKS_ACTIVE*64 bits -> 64 players -> NUM_MASKS_ACTIVE*64 ops
-        if (!activeMasks.empty())
-        {
-            for (auto& dword : activeMasks)
-            {
-                transmitEntityBase[dword] &= ~blockedBits.blockedMask[dword];
-                transmitNonPlayersBase[dword] |= blockedBits.blockedMask[dword];
-            }
-        }
+        auto& blockedTransmitMasks = blockedBits.blockedTransmitMasks;
+        uint64_t* blockedTransmitMasksBase = reinterpret_cast<uint64_t*>(blockedTransmitMasks.Base());
+        uint64_t* blockedTransmitBitsBase = reinterpret_cast<uint64_t*>(blockedBits.blockedTransmitBits.Base());
+        uint64_t* shouldAlwaysBeTransmittedBase = reinterpret_cast<uint64_t*>(g_ShouldBeAlwaysTransmitted.Base());
 
-        // 512 ops = 16k bits -> 64 players -> 32k ops
-        // for (int i = pInfo->m_pTransmitEntity->GetNumDWords() - 1; i >= 0; i--) {
-        //     uint32_t& word = base[i];
-        //     uint32_t& wordAlways = baseAlways[i];
+        for(int j = 0; j < 4; j++)
+            if(blockedTransmitMasksBase[j] != 0)
+                for(int k = 0; k < 64; k++)
+                {
+                    int qword = (j<<6) + k;
+                    if(blockedTransmitMasks.IsBitSet(qword)) {
+                        transmitEntityBase[qword] &= ~blockedTransmitBitsBase[qword];
 
-        //     word &= ~blockedBase[i];
-        //     wordAlways &= ~blockedBase[i];
-        // }
-
-        // 16k ops = 16k bits -> 64 players -> 1M ops
-        /*
-        for (int i = 0; i < 16384; i++)
-            if (blockedBits.IsBitSet(i))
-                pInfo->m_pTransmitEntity->Clear(i);
-        */
+                        if(shouldAlwaysBeTransmittedBase[qword])
+                            transmitNonPlayersBase[qword] |= shouldAlwaysBeTransmittedBase[qword];
+                    }
+                }
     }
 }
 
