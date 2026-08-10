@@ -198,7 +198,8 @@ void CheckTransmitHook(void* _this, CCheckTransmitInfo** ppInfoList, int infoCou
         auto& blockedBits = player->GetBlockedTransmittingBits();
         if (blockedBits.activeMasks.empty()) continue;
 
-        uint64_t* base = reinterpret_cast<uint64_t*>(pInfo->m_pTransmitEntity->Base());
+        uint64_t* transmitEntityBase = reinterpret_cast<uint64_t*>(pInfo->m_pTransmitEntity->Base());
+        uint64_t* transmitNonPlayersBase = reinterpret_cast<uint64_t*>(pInfo->m_pTransmitNonPlayers->Base());
         auto& activeMasks = blockedBits.activeMasks;
 
         // NUM_MASKS_ACTIVE ops = NUM_MASKS_ACTIVE*64 bits -> 64 players -> NUM_MASKS_ACTIVE*64 ops
@@ -206,7 +207,8 @@ void CheckTransmitHook(void* _this, CCheckTransmitInfo** ppInfoList, int infoCou
         {
             for (auto& dword : activeMasks)
             {
-                base[dword] &= ~blockedBits.blockedMask[dword];
+                transmitEntityBase[dword] &= ~blockedBits.blockedMask[dword];
+                transmitNonPlayersBase[dword] |= blockedBits.blockedMask[dword];
             }
         }
 
