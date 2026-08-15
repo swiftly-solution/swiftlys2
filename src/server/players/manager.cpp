@@ -67,7 +67,8 @@ void CheckTransmitHook(void* _this, CCheckTransmitInfo** ppInfoList, int infoCou
 
 void CPlayerManager::Initialize()
 {
-    g_Players.fill(std::nullopt);
+    for (auto& player : g_Players)
+        player.reset();
 
     auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
     auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
