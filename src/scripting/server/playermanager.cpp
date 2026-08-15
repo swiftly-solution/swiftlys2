@@ -42,7 +42,6 @@ void Bridge_Player_ShouldBlockTransmitEntity(int playerid, int entityidx, bool s
 void Bridge_PlayerManager_ShouldBlockTransmitEntity(int entityidx, bool shouldBlockTransmit)
 {
     static auto playerManager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
-    auto qword = entityidx >> 6;
     for (int i = 0; i < playerManager->GetPlayerCap(); i++)
         Bridge_Player_ShouldBlockTransmitEntity(i, entityidx, shouldBlockTransmit);
 }

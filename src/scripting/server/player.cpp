@@ -158,6 +158,7 @@ void Bridge_Player_ShouldBlockTransmitEntity(int playerid, int entityidx, bool s
     if (!player) return;
 
     auto& bv = player->GetBlockedTransmittingBits();
+    std::unique_lock lock(bv.mutex);
     uint64_t* blockedTransmitBitsBase = (uint64_t*)bv.blockedTransmitBits.Base();
 
     auto qword = entityidx >> 6;
@@ -183,6 +184,7 @@ bool Bridge_Player_IsTransmitEntityBlocked(int playerid, int entityidx)
     if (!player) return false;
 
     auto& bv = player->GetBlockedTransmittingBits();
+    std::shared_lock lock(bv.mutex);
     return bv.blockedTransmitBits.IsBitSet(entityidx);
 }
 
@@ -194,6 +196,7 @@ void Bridge_Player_ClearTransmitEntityBlocked(int playerid)
         return;
 
     auto& bv = player->GetBlockedTransmittingBits();
+    std::unique_lock lock(bv.mutex);
     bv.blockedTransmitBits.ClearAll();
     bv.blockedTransmitMasks.ClearAll();
 }
