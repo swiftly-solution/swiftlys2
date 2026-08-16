@@ -21,9 +21,9 @@
 
 #include <cstdint>
 #include <string>
-#include <shared_mutex>
 
 #include <api/engine/voicemanager/voicemanager.h>
+#include <api/utils/mutex.h>
 
 #include <public/bitvec.h>
 #include <public/const.h>
@@ -45,7 +45,7 @@ struct BlockedTransmitInfo
 {
     CBitVec<MAX_EDICTS> blockedTransmitBits;
     CBitVec<MAX_EDICTS_QWORDS> blockedTransmitMasks;
-    std::shared_mutex mutex;
+    QueueMutex mutex;
 };
 
 class IPlayer

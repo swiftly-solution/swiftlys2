@@ -21,7 +21,6 @@
 
 #include <api/interfaces/manager.h>
 #include <api/shared/plat.h>
-#include <shared_mutex>
 
 #define CCSGameRulesProxy_m_pGameRules 0x242D3ADB925C1F40
 
@@ -62,7 +61,7 @@ void CEntityListener::OnEntityDeleted(CEntityInstance* pEntity)
         if (!player) continue;
 
         auto& transmittingBits = player->GetBlockedTransmittingBits();
-        std::unique_lock lock(transmittingBits.mutex);
+        QueueLockGuard lock(transmittingBits.mutex);
 
         transmittingBits.blockedTransmitBits.Clear(entindex);
         uint64_t* transmitBitsBase = (uint64_t*)transmittingBits.blockedTransmitBits.Base();

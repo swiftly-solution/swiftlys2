@@ -198,7 +198,7 @@ void CheckTransmitHook(void* _this, CCheckTransmitInfo** ppInfoList, int infoCou
 
         auto& blockedBits = player->GetBlockedTransmittingBits();
         
-        std::shared_lock lock(blockedBits.mutex);
+        QueueLockGuard lock(blockedBits.mutex);
         
         uint64_t* transmitEntityBase = reinterpret_cast<uint64_t*>(pInfo->m_pTransmitEntity->Base());
 
