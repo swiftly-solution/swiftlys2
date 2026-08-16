@@ -26,8 +26,6 @@
 #define CCSGameRulesProxy_m_pGameRules 0x242D3ADB925C1F40
 
 CEntityListener g_entityListener;
-CBitVec<MAX_EDICTS> g_ShouldBeAlwaysTransmitted;
-std::shared_mutex g_BitVecMutex;
 
 extern void* g_pOnEntityCreatedCallback;
 extern void* g_pOnEntityDeletedCallback;
@@ -50,12 +48,6 @@ void CEntityListener::OnEntityCreated(CEntityInstance* pEntity)
 {
     if (g_pOnEntityCreatedCallback)
         reinterpret_cast<void(*)(void*)>(g_pOnEntityCreatedCallback)(pEntity);
-
-    std::string classname = pEntity->GetClassname();
-    if(classname.find("pawn") != std::string::npos || classname.find("weapon") != std::string::npos) {
-        std::unique_lock lock(g_BitVecMutex);
-        g_ShouldBeAlwaysTransmitted.Set(pEntity->GetEntityIndex().Get());
-    }
 }
 
 void CEntityListener::OnEntityDeleted(CEntityInstance* pEntity)

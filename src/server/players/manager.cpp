@@ -26,7 +26,6 @@
 #include "usercmd.pb.h"
 
 #include <s2binlib/s2binlib.h>
-#include <shared_mutex>
 
 #include <api/shared/string.h>
 #include <api/sdk/recipientfilter.h>
@@ -54,8 +53,6 @@ IVFunctionHook* g_pClientDisconnectHook = nullptr;
 IVFunctionHook* g_pClientPutInServerHook = nullptr;
 
 IVFunctionHook* g_pCheckTransmitHook = nullptr;
-extern CBitVec<MAX_EDICTS> g_ShouldBeAlwaysTransmitted;
-extern std::shared_mutex g_BitVecMutex;
 
 void OnGameFramePlayerHook(void* _this, bool simulate, bool first, bool last);
 
@@ -202,27 +199,19 @@ void CheckTransmitHook(void* _this, CCheckTransmitInfo** ppInfoList, int infoCou
         auto& blockedBits = player->GetBlockedTransmittingBits();
         
         std::shared_lock lock(blockedBits.mutex);
-        std::shared_lock lock2(g_BitVecMutex);
         
         uint64_t* transmitEntityBase = reinterpret_cast<uint64_t*>(pInfo->m_pTransmitEntity->Base());
-        uint64_t* transmitNonPlayersBase = reinterpret_cast<uint64_t*>(pInfo->m_pTransmitNonPlayers->Base());
 
         auto& blockedTransmitMasks = blockedBits.blockedTransmitMasks;
         uint64_t* blockedTransmitMasksBase = reinterpret_cast<uint64_t*>(blockedTransmitMasks.Base());
         uint64_t* blockedTransmitBitsBase = reinterpret_cast<uint64_t*>(blockedBits.blockedTransmitBits.Base());
-        uint64_t* shouldAlwaysBeTransmittedBase = reinterpret_cast<uint64_t*>(g_ShouldBeAlwaysTransmitted.Base());
 
         for(int j = 0; j < 4; j++)
             if(blockedTransmitMasksBase[j] != 0)
                 for(int k = 0; k < 64; k++)
                 {
                     int qword = (j<<6) + k;
-                    if(blockedTransmitMasks.IsBitSet(qword)) {
-                        transmitEntityBase[qword] &= ~blockedTransmitBitsBase[qword];
-
-                        if(shouldAlwaysBeTransmittedBase[qword])
-                            transmitNonPlayersBase[qword] |= shouldAlwaysBeTransmittedBase[qword];
-                    }
+                    if(blockedTransmitMasks.IsBitSet(qword)) transmitEntityBase[qword] &= ~blockedTransmitBitsBase[qword];
                 }
     }
 }
