@@ -81,8 +81,6 @@ void GameDataSignatures::Load(const std::string& game)
                 auto lib = value["lib"].get<std::string>();
                 auto signature = value[WIN_LINUX("windows", "linux")].get<std::string>();
 
-                logger->Info("GameData", fmt::format("Searching for signature '{}'...\n", key));
-
                 void* sig = nullptr;
                 if (signature.at(0) == '@' && signature.find(" ") == std::string::npos) s2binlib_find_symbol(lib.c_str(), signature.substr(1).c_str(), &sig);
                 else sig = FindSignature(lib, signature);
@@ -94,7 +92,6 @@ void GameDataSignatures::Load(const std::string& game)
                 else
                 {
                     m_mSignatures.insert({ key, sig });
-                    logger->Info("GameData", fmt::format("Loaded signature '{}' => '{}' (lib='{}').\n", key, sig, lib));
                 }
             }
         }
@@ -103,6 +100,8 @@ void GameDataSignatures::Load(const std::string& game)
             continue;
         }
     }
+
+    logger->Info("GameData", fmt::format("Loaded {} signatures.\n", m_mSignatures.size()));
 }
 
 bool GameDataSignatures::Exists(const std::string& name)

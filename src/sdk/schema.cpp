@@ -121,7 +121,6 @@ void CSDKSchema::Load()
             result = s2binlib_find_networkvar_vtable_statechanged((uint64_t)vtable, &index);
             if (result == 0) {
                 inlineNetworkVarVtbs[(uint64_t)vtable] = index;
-                logger->Info("SDK", fmt::format("Loaded vfunc '{}::{}->StateChanged' => {}.\n", name.first, name.second, index));
             }
             else {
                 logger->Error("SDK", fmt::format("Failed to find inline network var vtable state changed: {}, error: {}\n", name.first, name.second, result));

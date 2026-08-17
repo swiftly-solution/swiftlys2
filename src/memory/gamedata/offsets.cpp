@@ -72,7 +72,6 @@ void GameDataOffsets::Load(const std::string& game)
                 }
 
                 m_mOffsets.insert({ key, value[WIN_LINUX("windows", "linux")].get<int>() });
-                logger->Info("GameData", fmt::format("Loaded offset '{}' => '{}'.\n", key, value[WIN_LINUX("windows", "linux")].get<int>()));
             }
         }
         catch (json::parse_error& e) {
@@ -80,6 +79,7 @@ void GameDataOffsets::Load(const std::string& game)
             continue;
         }
     }
+    logger->Info("GameData", fmt::format("Loaded {} offsets.\n", m_mOffsets.size()));
 }
 
 bool GameDataOffsets::Exists(const std::string& name)
