@@ -113,9 +113,6 @@ void StartupServerHook(void* _this, const GameSessionConfiguration_t& config, IS
     g_pGameEntitySystem = entSystem;
     g_pGameEntitySystem->AddListenerEntity(&g_entityListener);
 
-    auto sdkschema = g_ifaceService.FetchInterface<ISDKSchema>(SDKSCHEMA_INTERFACE_VERSION);
-    sdkschema->DumpEntitySystem();
-
     g_bDone = true;
 }
 

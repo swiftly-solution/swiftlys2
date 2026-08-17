@@ -27,7 +27,6 @@
 
 #include <api/interfaces/manager.h>
 #include <api/shared/files.h>
-#include <api/shared/jsonc.h>
 #include <api/shared/plat.h>
 #include <api/memory/virtual/call.h>    
 
@@ -41,8 +40,6 @@ std::unordered_map<uint64_t, SchemaField, FNV1aHasher64> offsets;
 std::unordered_map<uint32_t, SchemaClass, FNV1aHasher32> classes;
 std::unordered_map<uint64_t, uint64_t, FNV1aHasher64> inlineNetworkVarVtbs;
 std::unordered_map<uint32_t, inputfunc_t*, FNV1aHasher32> datamapFunctions;
-
-json sdkJson;
 
 // Special inline classes for state changed
 // These fields has vtable "CLASS::NetworkVar_FIELDNAME"
@@ -109,8 +106,6 @@ void CSDKSchema::Load()
     auto schemaSystem = g_ifaceService.FetchInterface<CSchemaSystem>(SCHEMASYSTEM_INTERFACE_VERSION);
     auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
 
-    json datamapsJson;
-
     logger->Info("SDK", "Loading inline network var vtables...\n");
 
     for (auto& name : inlineNetworkVarVtbNames) {
@@ -141,8 +136,7 @@ void CSDKSchema::Load()
 
     FOR_EACH_MAP(gts->m_DeclaredClasses.m_Map, iter)
     {
-        ReadClasses(gts->m_DeclaredClasses.m_Map.Element(iter), sdkJson);
-        ReadClassDatamap(gts->m_DeclaredClasses.m_Map.Element(iter), datamapsJson);
+        ReadClasses(gts->m_DeclaredClasses.m_Map.Element(iter));
     }
 
     for (int i = 0; i < schemaSystem->m_TypeScopes.GetNumStrings(); i++)
@@ -153,119 +147,13 @@ void CSDKSchema::Load()
 
         FOR_EACH_MAP(ts->m_DeclaredClasses.m_Map, iter)
         {
-            ReadClasses(ts->m_DeclaredClasses.m_Map.Element(iter), sdkJson);
-            ReadClassDatamap(ts->m_DeclaredClasses.m_Map.Element(iter), datamapsJson);
+            ReadClasses(ts->m_DeclaredClasses.m_Map.Element(iter));
         }
     }
 
     logger->Info("SDK", fmt::format("Finished loading {} SDK classes ({} fields).\n", classes_count, offsets.size()));
 
-    logger->Info("SDK", "Loading SDK enums...\n");
-
-    int enums_count = gts->m_DeclaredEnums.m_Map.Count();
-
-    FOR_EACH_MAP(gts->m_DeclaredEnums.m_Map, iter)
-    {
-        ReadEnums(gts->m_DeclaredEnums.m_Map.Element(iter), sdkJson);
-    }
-
-    for (int i = 0; i < schemaSystem->m_TypeScopes.GetNumStrings(); i++)
-    {
-        auto ts = schemaSystem->m_TypeScopes[i];
-
-        enums_count += ts->m_DeclaredEnums.m_Map.Count();
-
-        FOR_EACH_MAP(ts->m_DeclaredEnums.m_Map, iter)
-        {
-            ReadEnums(ts->m_DeclaredEnums.m_Map.Element(iter), sdkJson);
-        }
-    }
-
-    logger->Info("SDK", fmt::format("Finished loading {} SDK enums.\n", enums_count));
-
     schemaSystem->PrintSchemaStats("");
-
-    WriteJSON(g_SwiftlyCore.GetCorePath() + "gamedata/cs2/sdk.json", sdkJson);
-    WriteJSON(g_SwiftlyCore.GetCorePath() + "gamedata/cs2/datamaps.json", datamapsJson);
-}
-
-void CSDKSchema::DumpEntitySystem()
-{
-#ifdef _WIN32
-    auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
-    json entitySystemJson;
-    json networkedFieldsJson;
-
-    std::vector<std::pair<CEntityClass*, std::string>> entityClasses;
-
-    FOR_EACH_MAP_FAST(GameEntitySystem()->m_entClassesByClassname, i)
-    {
-        entityClasses.push_back({ GameEntitySystem()->m_entClassesByClassname[i], GameEntitySystem()->m_entClassesByClassname.Key(i) });
-    }
-
-    std::unordered_set<std::string> visitedModules;
-    std::set<uint64_t> networkedFields;
-
-    uint32_t class_hash = 0;
-    uint64_t fieldHash = 0;
-
-    for (auto& entityClass : entityClasses)
-    {
-        auto classInfo = entityClass.first->m_pNetworkSerializerInfo;
-        auto database = classInfo->m_pDatabase;
-        std::string moduleName = database->m_ModuleName.Get();
-        if (visitedModules.find(moduleName) == visitedModules.end())
-        {
-            visitedModules.emplace(moduleName);
-            FOR_EACH_MAP_FAST(database->m_ClassInfos, i)
-            {
-                auto className = database->m_ClassInfos.Key(i);
-                auto classInfo = database->m_ClassInfos[i];
-                class_hash = hash_32_fnv1a_const(className);
-                auto arr = json::array();
-                FOR_EACH_VEC(classInfo->m_Fields, j)
-                {
-                    auto fieldInfo = classInfo->m_Fields[j];
-                    arr.push_back(fieldInfo->m_pszFieldName.Get());
-                    fieldHash = ((uint64_t)(class_hash) << 32 | hash_32_fnv1a_const(fieldInfo->m_pszFieldName.Get()));
-                    networkedFields.insert(fieldHash);
-                }
-                networkedFieldsJson["classes"][className] = arr;
-            }
-        }
-
-        entitySystemJson["entity_classes"].push_back({
-            {"class_name", entityClass.first->m_pClassInfo->m_pszCPPClassname},
-            {"designer_name", entityClass.second},
-            });
-    }
-
-    for (auto& classObj : sdkJson["classes"])
-    {
-        if (!classObj.contains("name_hash") || !classObj["name_hash"].is_number_unsigned())
-            continue;
-
-        if (classObj.contains("fields") && classObj["fields"].is_array())
-        {
-            for (auto& field : classObj["fields"])
-            {
-                if (field.contains("name_hash") && field["name_hash"].is_number_unsigned())
-                {
-                    uint64_t field_name_hash = field["name_hash"].get<uint64_t>();
-
-                    if (networkedFields.find(field_name_hash) != networkedFields.end())
-                    {
-                        field["networked"] = true;
-                    }
-                }
-            }
-        }
-    }
-
-    logger->Info("SDK", fmt::format("Mapped {} SDK classes to entity classnames.\n", entityClasses.size()));
-    WriteJSON(g_SwiftlyCore.GetCorePath() + "gamedata/cs2/entitysystem.json", entitySystemJson);
-    WriteJSON(g_SwiftlyCore.GetCorePath() + "gamedata/cs2/sdk.json", sdkJson);
-#endif
 }
 
 void CSDKSchema::SetStateChanged(void* pEntity, const char* sClassName, const char* sMemberName)

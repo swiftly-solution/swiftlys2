@@ -49,7 +49,6 @@ public:
     virtual inputfunc_t* GetDatamapFunction(uint32_t uHash) = 0;
 
     virtual void Load() = 0;
-    virtual void DumpEntitySystem() = 0;
 };
 
 #endif

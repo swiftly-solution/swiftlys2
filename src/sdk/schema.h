@@ -31,9 +31,7 @@
 
 using json = nlohmann::json;
 
-void ReadClasses(CSchemaType_DeclaredClass* declClass, json& outJson);
-void ReadEnums(CSchemaType_DeclaredEnum* declClass, json& outJson);
-void ReadClassDatamap(CSchemaType_DeclaredClass* declClass, json& outJson);
+void ReadClasses(CSchemaType_DeclaredClass* declClass);
 
 class CSDKSchema : public ISDKSchema
 {
@@ -60,7 +58,6 @@ public:
     virtual inputfunc_t* GetDatamapFunction(uint32_t uHash) override;
 
     virtual void Load() override;
-    virtual void DumpEntitySystem() override;
 };
 
 struct SchemaField
