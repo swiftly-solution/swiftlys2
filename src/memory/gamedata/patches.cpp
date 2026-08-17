@@ -86,7 +86,6 @@ void GameDataPatches::Load(const std::string& game)
 
                 auto patch = value[WIN_LINUX("windows", "linux")].get<std::string>();
                 m_mPatches.insert({ key, {patch, signature} });
-                logger->Info("GameData", fmt::format("Loaded patch '{}' => '{}' (signature='{}').\n", key, patch, signature));
             }
         }
         catch (json::parse_error& e) {
@@ -94,6 +93,8 @@ void GameDataPatches::Load(const std::string& game)
             continue;
         }
     }
+
+    logger->Info("GameData", fmt::format("Loaded {} patches.\n", m_mPatches.size()));
 }
 
 bool GameDataPatches::Exists(const std::string& name)

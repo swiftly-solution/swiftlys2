@@ -23,6 +23,8 @@
 #include <public/steam/steam_api_common.h>
 #include <public/steam/isteamugc.h>
 
+typedef void* (*CreateIFaceFn)(const char* name, int* returnCode);
+
 enum class BridgeKind_t
 {
     SwiftlyLoader = 0,
@@ -36,7 +38,7 @@ private:
     std::string m_sLogPath;
 
 public:
-    bool Load(BridgeKind_t kind);
+    bool Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFaceFn engineFactory);
     bool Unload();
 
     void OnMapLoad(std::string map_name);

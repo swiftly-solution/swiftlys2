@@ -16,16 +16,15 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ************************************************************************************************/
 
-#include <core/entrypoint.h>
+#include "env.h"
 
-#include <api/dll/extern.h>
+#include <cstdlib>
 
-SW_API bool StartCore(CreateIFaceFn serverFactory, CreateIFaceFn engineFactory)
+void putenv(const char* variable, const char* value, int replace)
 {
-    return g_SwiftlyCore.Load(BridgeKind_t::SwiftlyLoader, serverFactory, engineFactory);
-}
-
-SW_API bool StopCore()
-{
-    return g_SwiftlyCore.Unload();
+#ifdef _WIN32
+    _putenv_s(variable, value);
+#else
+    setenv(variable, value, replace);
+#endif
 }

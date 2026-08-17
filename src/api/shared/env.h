@@ -16,16 +16,9 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ************************************************************************************************/
 
-#include <core/entrypoint.h>
+#ifndef src_api_shared_env_h
+#define src_api_shared_env_h
 
-#include <api/dll/extern.h>
+void putenv(const char* variable, const char* value, int replace);
 
-SW_API bool StartCore(CreateIFaceFn serverFactory, CreateIFaceFn engineFactory)
-{
-    return g_SwiftlyCore.Load(BridgeKind_t::SwiftlyLoader, serverFactory, engineFactory);
-}
-
-SW_API bool StopCore()
-{
-    return g_SwiftlyCore.Unload();
-}
+#endif

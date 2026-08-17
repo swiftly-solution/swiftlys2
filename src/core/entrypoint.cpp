@@ -22,6 +22,8 @@
 #include <api/interfaces/manager.h>
 #include <api/memory/hooks/manager.h>
 #include <api/scripting/scripting.h>
+#include <api/shared/env.h>
+
 #include <core/managed/host/host.h>
 
 #include "managed/host/dynlib.h"
@@ -60,6 +62,9 @@ SwiftlyCore g_SwiftlyCore;
 InterfacesManager g_ifaceService;
 std::thread::id g_mainThreadId;
 
+CreateIFaceFn g_pServerFactory = nullptr;
+CreateIFaceFn g_pEngineFactory = nullptr;
+
 INetworkMessages* networkMessages = nullptr;
 
 IVFunctionHook* g_pGameServerSteamAPIActivated = nullptr;
@@ -80,8 +85,10 @@ bool LoopInitHook(void* _this, KeyValues* pKeyValues, void* pRegistry);
 
 extern ICvar* g_pCVar;
 
-bool SwiftlyCore::Load(BridgeKind_t kind)
+bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFaceFn engineFactory)
 {
+    g_pServerFactory = serverFactory;
+    g_pEngineFactory = engineFactory;
 
     g_mainThreadId = std::this_thread::get_id();
 
@@ -134,21 +141,13 @@ bool SwiftlyCore::Load(BridgeKind_t kind)
     const char* logLevel = CommandLine()->ParmValue(CUtlStringToken("-sw_loglevel"));
     if (logLevel)
     {
-#ifdef _WIN32
-        _putenv_s("SWIFTLY_LOG_LEVEL", logLevel);
-#else
-        setenv("SWIFTLY_LOG_LEVEL", logLevel, 1);
-#endif
+        putenv("SWIFTLY_LOG_LEVEL", logLevel, 1);
     }
 
     const char* hideLogInConsole = CommandLine()->ParmValue(CUtlStringToken("-sw_hide_logs_in_console"));
     if (hideLogInConsole)
     {
-#ifdef _WIN32
-        _putenv_s("SWIFTLY_HIDE_LOG_IN_CONSOLE", hideLogInConsole);
-#else
-        setenv("SWIFTLY_HIDE_LOG_IN_CONSOLE", hideLogInConsole, 1);
-#endif
+        putenv("SWIFTLY_HIDE_LOG_IN_CONSOLE", hideLogInConsole, 1);
     }
 
     if (GetCurrentGame() == "unknown")
@@ -299,13 +298,9 @@ bool SwiftlyCore::Load(BridgeKind_t kind)
         managedLogEnabled = *b;
     if (int* i = std::get_if<int>(&configuration->GetValue("core.ConsoleLogger.WriteIntervalMs")))
         managedLogInterval = (*i > 0) ? *i : 2000;
-#ifdef _WIN32
-    _putenv_s("SWIFTLY_MANAGED_LOG_ENABLE", managedLogEnabled ? "1" : "0");
-    _putenv_s("SWIFTLY_MANAGED_LOG_INTERVAL_MS", std::to_string(managedLogInterval).c_str());
-#else
-    setenv("SWIFTLY_MANAGED_LOG_ENABLE", managedLogEnabled ? "1" : "0", 1);
-    setenv("SWIFTLY_MANAGED_LOG_INTERVAL_MS", std::to_string(managedLogInterval).c_str(), 1);
-#endif
+
+    putenv("SWIFTLY_MANAGED_LOG_ENABLE", managedLogEnabled ? "1" : "0", 1);
+    putenv("SWIFTLY_MANAGED_LOG_INTERVAL_MS", std::to_string(managedLogInterval).c_str(), 1);
 
     if (!InitializeDotNetAPI(scripting->GetNativeFunctions(), scripting->GetNativeFunctionsCount(), std::string(Plat_GetGameDirectory()) + "/csgo/" + m_sLogPath))
     {
@@ -471,72 +466,15 @@ void SwiftlyCore::OnMapUnload()
     current_map = "";
 }
 
-std::map<std::string, void*> g_mInterfacesCache;
-
 void* SwiftlyCore::GetInterface(const std::string& interface_name)
 {
-    auto it = g_mInterfacesCache.find(interface_name);
-    if (it != g_mInterfacesCache.end())
-    {
-        return it->second;
-    }
+    int returnCode = 0;
 
-    void* ifaceptr = nullptr;
-    void* ifaceCreate = nullptr;
-    if (INTERFACEVERSION_SERVERGAMEDLL == interface_name || INTERFACEVERSION_SERVERGAMECLIENTS == interface_name || SOURCE2GAMEENTITIES_INTERFACE_VERSION == interface_name)
-    {
-        void* lib = load_library((const char_t*)WIN_LINUX(StringWide((Plat_GetGameDirectory() + std::string("\\csgo\\bin\\win64\\server.dll"))).c_str(), (Plat_GetGameDirectory() + std::string("/csgo/bin/linuxsteamrt64/libserver.so")).c_str()));
-        ifaceCreate = get_export(lib, "CreateInterface");
-        unload_library(lib);
-    }
-    else if (SCHEMASYSTEM_INTERFACE_VERSION == interface_name)
-    {
-        void* lib = load_library((const char_t*)WIN_LINUX(StringWide(Plat_GetGameDirectory() + std::string("\\bin\\win64\\schemasystem.dll")).c_str(), (Plat_GetGameDirectory() + std::string("/bin/linuxsteamrt64/libschemasystem.so")).c_str()));
-        ifaceCreate = get_export(lib, "CreateInterface");
-        unload_library(lib);
-    }
-    else if (CVAR_INTERFACE_VERSION == interface_name)
-    {
-        void* lib = load_library((const char_t*)WIN_LINUX(StringWide(Plat_GetGameDirectory() + std::string("\\bin\\win64\\tier0.dll")).c_str(), (Plat_GetGameDirectory() + std::string("/bin/linuxsteamrt64/libtier0.so")).c_str()));
-        ifaceCreate = get_export(lib, "CreateInterface");
-        unload_library(lib);
-    }
-    else if (NETWORKMESSAGES_INTERFACE_VERSION == interface_name || NETWORKSYSTEM_INTERFACE_VERSION == interface_name)
-    {
-        void* lib = load_library((const char_t*)WIN_LINUX(StringWide(Plat_GetGameDirectory() + std::string("\\bin\\win64\\networksystem.dll")).c_str(), (Plat_GetGameDirectory() + std::string("/bin/linuxsteamrt64/libnetworksystem.so")).c_str()));
-        ifaceCreate = get_export(lib, "CreateInterface");
-        unload_library(lib);
-    }
-    else if (SOUNDSYSTEM_INTERFACE_VERSION == interface_name || SOUNDOPSYSTEM_INTERFACE_VERSION == interface_name)
-    {
-        void* lib = load_library((const char_t*)WIN_LINUX(StringWide(Plat_GetGameDirectory() + std::string("\\bin\\win64\\soundsystem.dll")).c_str(), (Plat_GetGameDirectory() + std::string("/bin/linuxsteamrt64/libsoundsystem.so")).c_str()));
-        ifaceCreate = get_export(lib, "CreateInterface");
-        unload_library(lib);
-    }
-    else if (FILESYSTEM_INTERFACE_VERSION == interface_name)
-    {
-        void* lib = load_library((const char_t*)WIN_LINUX(StringWide(Plat_GetGameDirectory() + std::string("\\bin\\win64\\filesystem_stdio.dll")).c_str(), (Plat_GetGameDirectory() + std::string("/bin/linuxsteamrt64/libfilesystem_stdio.so")).c_str()));
-        ifaceCreate = get_export(lib, "CreateInterface");
-        unload_library(lib);
-    }
-    else
-    {
-        void* lib = load_library((const char_t*)WIN_LINUX(StringWide(Plat_GetGameDirectory() + std::string("\\bin\\win64\\engine2.dll")).c_str(), (Plat_GetGameDirectory() + std::string("/bin/linuxsteamrt64/libengine2.so")).c_str()));
-        ifaceCreate = get_export(lib, "CreateInterface");
-        unload_library(lib);
-    }
+    void* iface = g_pServerFactory(interface_name.c_str(), &returnCode);
+    if (iface != nullptr) return iface;
 
-    if (ifaceCreate != nullptr)
-    {
-        ifaceptr = reinterpret_cast<void* (*)(const char*, int*)>(ifaceCreate)(interface_name.c_str(), nullptr);
-    }
-
-    if (ifaceptr != nullptr)
-    {
-        g_mInterfacesCache.insert({ interface_name, ifaceptr });
-    }
-
-    return ifaceptr;
+    iface = g_pEngineFactory(interface_name.c_str(), &returnCode);
+    return iface;
 }
 
 void SwiftlyCore::SendConsoleMessage(const std::string& message)
