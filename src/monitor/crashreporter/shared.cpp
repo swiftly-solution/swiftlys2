@@ -89,7 +89,7 @@ void CrashReporter::Init()
 
         for (const auto& f : fileNames)
         {
-            if (f.size() >= 13 && f.substr(f.size() - 13) == "crashinfo.json")
+            if (ends_with(f, "crashinfo.json"))
             {
                 hasCrashInfo = true;
                 break;
@@ -101,7 +101,7 @@ void CrashReporter::Init()
 
         for (const auto& f : fileNames)
         {
-            if (f.size() > 4 && f.substr(f.size() - 4) == ".dmp")
+            if (ends_with(f, ".dmp"))
             {
                 dmpRelPath = f;
                 break;
