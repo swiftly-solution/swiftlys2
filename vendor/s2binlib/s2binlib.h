@@ -254,6 +254,12 @@ int s2binlib_find_string_rva(const char* binary_name, const char* string, void**
 /// @return 0 on success, negative error code on failure
 int s2binlib_find_string(const char* binary_name, const char* string, void** result);
 
+/// Dump all printable ASCII strings and their relative virtual addresses to a JSON file
+/// @param binary_name Name of the binary to scan
+/// @param output_path UTF-8 path of the JSON file to create or overwrite
+/// @return 0 on success, negative error code on failure
+int s2binlib_dump_strings_to_json(const char* binary_name, const char* output_path);
+
 // ============================================================================
 // Module Base Address Functions
 // ============================================================================
@@ -519,6 +525,38 @@ int s2binlib_find_func_with_string_rva(const char* binary_name, const char* stri
 /// @param result Pointer to store the function start memory address
 /// @return 0 on success, negative error code on failure
 int s2binlib_find_func_with_string(const char* binary_name, const char* string, void** result);
+
+/// Find the call inside a function (by RVA) whose argument references a given xref target RVA, return the called function's RVA
+/// @param binary_name Name of the binary
+/// @param func_start_rva RVA of the function to search inside
+/// @param target_rva RVA that must be referenced by a RIP-relative operand of an argument-setup instruction
+/// @param result Pointer to store the resulting call target RVA
+/// @return 0 on success, negative error code on failure
+int s2binlib_find_call_with_xref_arg_rva(const char* binary_name, uint64_t func_start_rva, uint64_t target_rva, uint64_t* result);
+
+/// Find the call inside a function (by pointer) whose argument references a given xref target pointer, return the called function's memory address
+/// @param binary_name Name of the binary
+/// @param func_start Memory address of the function to search inside
+/// @param target Memory address that must be referenced by a RIP-relative operand of an argument-setup instruction
+/// @param result Pointer to store the resulting call target memory address
+/// @return 0 on success, negative error code on failure
+int s2binlib_find_call_with_xref_arg(const char* binary_name, void* func_start, void* target, void** result);
+
+/// Find the call inside a function (by RVA) whose argument loads a given string, return the called function's RVA
+/// @param binary_name Name of the binary
+/// @param func_start_rva RVA of the function to search inside
+/// @param string String that must be loaded by an argument-setup instruction
+/// @param result Pointer to store the resulting call target RVA
+/// @return 0 on success, negative error code on failure
+int s2binlib_find_call_with_string_arg_rva(const char* binary_name, uint64_t func_start_rva, const char* string, uint64_t* result);
+
+/// Find the call inside a function (by pointer) whose argument loads a given string, return the called function's memory address
+/// @param binary_name Name of the binary
+/// @param func_start Memory address of the function to search inside
+/// @param string String that must be loaded by an argument-setup instruction
+/// @param result Pointer to store the resulting call target memory address
+/// @return 0 on success, negative error code on failure
+int s2binlib_find_call_with_string_arg(const char* binary_name, void* func_start, const char* string, void** result);
 
 // ============================================================================
 // JIT and Trampoline Functions

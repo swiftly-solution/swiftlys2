@@ -16,23 +16,14 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ************************************************************************************************/
 
-#include "serverlist.h"
-#include "preload.h"
-#include "filesystem.h"
+#ifndef src_engine_fixes_preload_h
+#define src_engine_fixes_preload_h
 
-ServerListFix g_ServerListFix;
-PreloadDLLFix g_PreloadDLLFix;
-FileSystemFix g_FileSystemFix;
-
-void StartFixes()
+class PreloadDLLFix
 {
-    g_FileSystemFix.Start();
-    g_ServerListFix.Start();
-    g_PreloadDLLFix.Start();
-}
+public:
+    void Start();
+    void Stop();
+};
 
-void StopFixes()
-{
-    g_PreloadDLLFix.Stop();
-    g_ServerListFix.Stop();
-}
+#endif

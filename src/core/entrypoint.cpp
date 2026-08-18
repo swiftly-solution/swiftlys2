@@ -72,12 +72,6 @@ IVFunctionHook* g_pGameServerSteamAPIDeactivated = nullptr;
 
 IVFunctionHook* g_pLoopInitHook = nullptr;
 
-#ifdef _WIN32
-#include <regex>
-IFunctionHook* g_pPreloadDLLHook = nullptr;
-void __fastcall PreloadDLLHook(HMODULE hModule);
-#endif
-
 void GameServerSteamAPIActivatedHook(void* _this);
 void GameServerSteamAPIDeactivatedHook(void* _this);
 
@@ -111,24 +105,10 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
     crashreporter->Init();
 
     s2binlib_initialize(Plat_GetGameDirectory(), "csgo");
-
-#ifdef _WIN32
     void* libServer = load_library((const char_t*)WIN_LINUX(StringWide((Plat_GetGameDirectory() + std::string("\\csgo\\bin\\win64\\server.dll"))).c_str(), (Plat_GetGameDirectory() + std::string("/csgo/bin/linuxsteamrt64/libserver.so")).c_str()));
     void* libEngine = load_library((const char_t*)WIN_LINUX(StringWide(Plat_GetGameDirectory() + std::string("\\bin\\win64\\engine2.dll")).c_str(), (Plat_GetGameDirectory() + std::string("/bin/linuxsteamrt64/libengine2.so")).c_str()));
     s2binlib_set_module_base_from_pointer("server", libServer);
     s2binlib_set_module_base_from_pointer("engine2", libEngine);
-
-    // Hook PreloadDLL to skip managed DLLs
-    void* preloadDLLAddr = nullptr;
-    s2binlib_pattern_scan("engine2", "48 89 4C 24 ? 53 56 57 48 83 EC ? 48 8B F1", &preloadDLLAddr);
-    if (preloadDLLAddr)
-    {
-        auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
-        g_pPreloadDLLHook = hooksmanager->CreateFunctionHook();
-        g_pPreloadDLLHook->SetHookFunction(preloadDLLAddr, reinterpret_cast<void*>(PreloadDLLHook));
-        g_pPreloadDLLHook->Enable();
-    }
-#endif
 
     auto cvars = g_ifaceService.FetchInterface<ICvar>(CVAR_INTERFACE_VERSION);
     g_pCVar = cvars;
@@ -363,38 +343,6 @@ bool SwiftlyCore::Unload()
 
     return true;
 }
-
-#ifdef _WIN32
-void __fastcall PreloadDLLHook(HMODULE hModule)
-{
-    if (!g_pPreloadDLLHook || !g_pPreloadDLLHook->GetOriginal())
-    {
-        return;
-    }
-
-    if (hModule)
-    {
-        char modulePath[MAX_PATH] = { 0 };
-        DWORD len = GetModuleFileNameA(hModule, modulePath, MAX_PATH);
-        if (len > 0 && len < MAX_PATH)
-        {
-            // Skip DLLs in managed and exports directory
-            static const std::regex skipPattern(R"([/\\](bin[/\\]managed|resources[/\\]exports)[/\\])", std::regex_constants::icase);
-            if (std::regex_search(modulePath, skipPattern))
-            {
-                auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
-                if (logger)
-                {
-                    logger->Info("PreloadDLL", fmt::format("Skipping DLL: {}\n", modulePath));
-                }
-                return;
-            }
-        }
-    }
-
-    return reinterpret_cast<decltype(&PreloadDLLHook)>(g_pPreloadDLLHook->GetOriginal())(hModule);
-}
-#endif
 
 void GameServerSteamAPIActivatedHook(void* _this)
 {

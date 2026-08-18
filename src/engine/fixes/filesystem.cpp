@@ -16,23 +16,23 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ************************************************************************************************/
 
-#include "serverlist.h"
-#include "preload.h"
 #include "filesystem.h"
 
-ServerListFix g_ServerListFix;
-PreloadDLLFix g_PreloadDLLFix;
-FileSystemFix g_FileSystemFix;
+#include <api/shared/plat.h>
+#include <api/interfaces/manager.h>
+#include <core/entrypoint.h>
 
-void StartFixes()
-{
-    g_FileSystemFix.Start();
-    g_ServerListFix.Start();
-    g_PreloadDLLFix.Start();
-}
+#include <public/filesystem.h>
+#include <fmt/format.h>
 
-void StopFixes()
+void FileSystemFix::Start()
 {
-    g_PreloadDLLFix.Stop();
-    g_ServerListFix.Stop();
+    auto filesystem = g_ifaceService.FetchInterface<IFileSystem>(FILESYSTEM_INTERFACE_VERSION);
+
+    std::string csgo_path = fmt::format("{}{}csgo", Plat_GetGameDirectory(), WIN_LINUX("\\", "/"));
+    std::string swiftly_path = fmt::format("{}{}{}", csgo_path, WIN_LINUX("\\", "/"), g_SwiftlyCore.GetCorePath());
+
+    filesystem->RemoveSearchPath(swiftly_path.c_str(), "GAME");
+    filesystem->RemoveSearchPaths("DEFAULT_WRITE_PATH");
+    filesystem->AddSearchPath(csgo_path.c_str(), "DEFAULT_WRITE_PATH", PATH_ADD_TO_TAIL, SEARCH_PATH_PRIORITY_DEFAULT, 0);
 }
