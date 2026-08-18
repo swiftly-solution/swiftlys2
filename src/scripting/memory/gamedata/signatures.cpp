@@ -17,18 +17,16 @@
  ************************************************************************************************/
 
 #include <scripting/scripting.h>
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 
 bool Bridge_GameData_Signatures_Exists(const char* name)
 {
-    static auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-    return gamedata->GetSignatures()->Exists(name);
+    return g_pGameDataManager->GetSignatures()->Exists(name);
 }
 
 void* Bridge_GameData_Signatures_Fetch(const char* name)
 {
-    static auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-    return gamedata->GetSignatures()->Fetch(name);
+    return g_pGameDataManager->GetSignatures()->Fetch(name);
 }
 
 DEFINE_NATIVE("Signatures.Exists", Bridge_GameData_Signatures_Exists);

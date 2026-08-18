@@ -25,7 +25,7 @@
 #include <fmt/format.h>
 
 #include <algorithm>
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 #include <cctype>
 #include <cstdlib>
 #include <unordered_map>

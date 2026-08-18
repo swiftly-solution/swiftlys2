@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ************************************************************************************************/
 
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 #include <api/shared/files.h>
 #include <api/shared/string.h>
 #include <api/shared/plat.h>
@@ -44,13 +44,11 @@ struct CBaseGameSystemFactory_t : public IGameSystemFactory {
 
 static char* Bridge_EngineHelpers_CopyString(const std::string& value, int* size)
 {
-    static auto memory = g_ifaceService.FetchInterface<IMemoryAllocator>(MEMORYALLOCATOR_INTERFACE_VERSION);
-
     int outSize = static_cast<int>(value.size());
     *size = outSize;
 
-    char* out = (char*)memory->Alloc(outSize + 1);
-    memory->Copy(out, (void*)value.c_str(), outSize);
+    char* out = (char*)g_pMemoryAllocator->Alloc(outSize + 1);
+    g_pMemoryAllocator->Copy(out, (void*)value.c_str(), outSize);
     out[outSize] = '\0';
 
     return out;
@@ -60,14 +58,11 @@ bool Bridge_EngineHelpers_IsMapValid(const char* map_name)
 {
     if (!map_name) return false;
 
-    auto engine = g_ifaceService.FetchInterface<IVEngineServer2>(INTERFACEVERSION_VENGINESERVER);
-    auto filesystem = g_ifaceService.FetchInterface<IFileSystem>(FILESYSTEM_INTERFACE_VERSION);
-
     static CBufferStringGrowable<MAX_PATH> s_sWorkingDir;
-    ExecuteOnce(filesystem->GetSearchPath("EXECUTABLE_PATH", GET_SEARCH_PATH_ALL, s_sWorkingDir, 1));
+    ExecuteOnce(g_pGameFileSystem->GetSearchPath("EXECUTABLE_PATH", GET_SEARCH_PATH_ALL, s_sWorkingDir, 1));
 
     return (
-        engine->IsMapValid(map_name) ||
+        g_pGameEngine->IsMapValid(map_name) ||
         Files::ExistsPath(fmt::format("{}steamapps/workshop/content/730/{}/{}.vpk", s_sWorkingDir.Get(), map_name, map_name)) ||
         Files::ExistsPath(fmt::format("{}steamapps/workshop/content/730/{}/{}_dir.vpk", s_sWorkingDir.Get(), map_name, map_name))
         );
@@ -77,10 +72,7 @@ void Bridge_EngineHelpers_ExecuteCommand(const char* command)
 {
     if (!command) return;
 
-    auto engine = g_ifaceService.FetchInterface<IVEngineServer2>(INTERFACEVERSION_VENGINESERVER);
-    if (!engine) return;
-
-    engine->ServerCommand(command);
+    g_pGameEngine->ServerCommand(command);
 }
 
 void* Bridge_EngineHelpers_FindGameSystemByName(const char* name)
@@ -142,23 +134,21 @@ char* Bridge_EngineHelpers_GetMenuSettings(int* size)
 {
     std::string s;
 
-    auto configuration = g_ifaceService.FetchInterface<IConfiguration>(CONFIGURATION_INTERFACE_VERSION);
     try {
         std::vector<std::string> settings = {
-                std::get<std::string>(configuration->GetValue("core.Menu.NavigationPrefix")),
-                std::get<std::string>(configuration->GetValue("core.Menu.InputMode")),
-                std::get<std::string>(configuration->GetValue("core.Menu.Buttons.Use")),
-                std::get<std::string>(configuration->GetValue("core.Menu.Buttons.Scroll")),
-                std::get<std::string>(configuration->GetValue("core.Menu.Buttons.ScrollBack")),
-                std::get<std::string>(configuration->GetValue("core.Menu.Buttons.Exit")),
-                std::get<std::string>(configuration->GetValue("core.Menu.Sound.Use.Name")),
-                std::to_string(std::get<double>(configuration->GetValue("core.Menu.Sound.Use.Volume"))),
-                std::get<std::string>(configuration->GetValue("core.Menu.Sound.Scroll.Name")),
-                std::to_string(std::get<double>(configuration->GetValue("core.Menu.Sound.Scroll.Volume"))),
-                std::get<std::string>(configuration->GetValue("core.Menu.Sound.Exit.Name")),
-                std::to_string(std::get<double>(configuration->GetValue("core.Menu.Sound.Exit.Volume"))),
-                // std::to_string(std::get<int>(configuration->GetValue("core.Menu.KindSettings.Center.ItemsPerPage"))),
-                std::to_string(std::get<int>(configuration->GetValue("core.Menu.ItemsPerPage"))),
+                std::get<std::string>(g_pConfiguration->GetValue("core.Menu.NavigationPrefix")),
+                std::get<std::string>(g_pConfiguration->GetValue("core.Menu.InputMode")),
+                std::get<std::string>(g_pConfiguration->GetValue("core.Menu.Buttons.Use")),
+                std::get<std::string>(g_pConfiguration->GetValue("core.Menu.Buttons.Scroll")),
+                std::get<std::string>(g_pConfiguration->GetValue("core.Menu.Buttons.ScrollBack")),
+                std::get<std::string>(g_pConfiguration->GetValue("core.Menu.Buttons.Exit")),
+                std::get<std::string>(g_pConfiguration->GetValue("core.Menu.Sound.Use.Name")),
+                std::to_string(std::get<double>(g_pConfiguration->GetValue("core.Menu.Sound.Use.Volume"))),
+                std::get<std::string>(g_pConfiguration->GetValue("core.Menu.Sound.Scroll.Name")),
+                std::to_string(std::get<double>(g_pConfiguration->GetValue("core.Menu.Sound.Scroll.Volume"))),
+                std::get<std::string>(g_pConfiguration->GetValue("core.Menu.Sound.Exit.Name")),
+                std::to_string(std::get<double>(g_pConfiguration->GetValue("core.Menu.Sound.Exit.Volume"))),
+                std::to_string(std::get<int>(g_pConfiguration->GetValue("core.Menu.ItemsPerPage"))),
         };
 
         s = implode(settings, "\x01");
@@ -173,22 +163,17 @@ char* Bridge_EngineHelpers_GetMenuSettings(int* size)
 
 void* Bridge_EngineHelpers_GetGlobalVars()
 {
-    auto engine = g_ifaceService.FetchInterface<IVEngineServer2>(INTERFACEVERSION_VENGINESERVER);
-    if (!engine) return nullptr;
-
-    return engine->GetServerGlobals();
+    return g_pGameEngine->GetServerGlobals();
 }
 
 void* Bridge_EngineHelpers_GetNetworkGameServer()
 {
-    return g_ifaceService.FetchInterface<INetworkServerService>(NETWORKSERVERSERVICE_INTERFACE_VERSION)->GetIGameServer();
+    return g_pGameNetworkServerService->GetIGameServer();
 }
 
 char* Bridge_EngineHelpers_GetIP(int* size)
 {
-    auto networksystem = g_ifaceService.FetchInterface<INetworkSystem>(NETWORKSYSTEM_INTERFACE_VERSION);
-
-    auto& addr = networksystem->GetPublicAdr();
+    auto& addr = g_pGameNetworkSystem->GetPublicAdr();
     std::string s = fmt::format("{}.{}.{}.{}", addr.ip[0], addr.ip[1], addr.ip[2], addr.ip[3]);
 
     return Bridge_EngineHelpers_CopyString(s, size);
@@ -205,8 +190,7 @@ char* Bridge_EngineHelpers_GetWorkshopId(int* size)
 
 void Bridge_EngineHelpers_DispatchParticleEffect(const char* particleName, uint attachmentType, void* entity, byte attachmentPoint, const char* attachmentName, bool resetAllParticlesOnEntity, int splitScreenSlot, uint64_t filtermask)
 {
-    auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-    auto func = gamedata->GetSignatures()->Fetch("DispatchParticleEffect");
+    auto func = g_pGameDataManager->GetSignatures()->Fetch("DispatchParticleEffect");
     CRecipientFilter a;
     *(uint64_t*)(a.GetRecipients().Base()) = filtermask;
     reinterpret_cast<void(*)(const char*, uint, void*, byte, CUtlSymbolLarge, bool, int, CRecipientFilter, byte)>(func)(particleName, attachmentType, entity, attachmentPoint, CUtlSymbolLarge(attachmentName), resetAllParticlesOnEntity, splitScreenSlot, a, 0);

@@ -17,28 +17,25 @@
  ************************************************************************************************/
 
 #include <scripting/scripting.h>
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 #include <thread>
 
 extern std::thread::id g_mainThreadId;
 
 static char* Bridge_Core_CopyString(const std::string& value, int* size)
 {
-    static auto memory = g_ifaceService.FetchInterface<IMemoryAllocator>(MEMORYALLOCATOR_INTERFACE_VERSION);
-
     int outSize = static_cast<int>(value.size());
     *size = outSize;
 
-    char* out = (char*)memory->Alloc(outSize + 1);
-    memory->Copy(out, (void*)value.c_str(), outSize);
+    char* out = (char*)g_pMemoryAllocator->Alloc(outSize + 1);
+    g_pMemoryAllocator->Copy(out, (void*)value.c_str(), outSize);
     out[outSize] = '\0';
     return out;
 }
 
 uint8_t Bridge_Core_PluginManualLoadState()
 {
-    static auto config = g_ifaceService.FetchInterface<IConfiguration>(CONFIGURATION_INTERFACE_VERSION);
-    if (bool* b = std::get_if<bool>(&config->GetValue("core.ManualLoadPlugins")))
+    if (bool* b = std::get_if<bool>(&g_pConfiguration->GetValue("core.ManualLoadPlugins")))
     {
         return *b ? 1 : 0;
     }
@@ -47,15 +44,12 @@ uint8_t Bridge_Core_PluginManualLoadState()
 
 char* Bridge_Core_PluginLoadOrder(int* size)
 {
-    static auto config = g_ifaceService.FetchInterface<IConfiguration>(CONFIGURATION_INTERFACE_VERSION);
-    static auto memory = g_ifaceService.FetchInterface<IMemoryAllocator>(MEMORYALLOCATOR_INTERFACE_VERSION);
-
-    if (std::string* vec = std::get_if<std::string>(&config->GetValue("core.PluginLoadOrder")))
+    if (std::string* vec = std::get_if<std::string>(&g_pConfiguration->GetValue("core.PluginLoadOrder")))
     {
         int stringSize = vec->size();
         *size = stringSize;
-        void* buffer = memory->Alloc(stringSize + 1);
-        memory->Copy(buffer, (void*)vec->c_str(), stringSize);
+        void* buffer = g_pMemoryAllocator->Alloc(stringSize + 1);
+        g_pMemoryAllocator->Copy(buffer, (void*)vec->c_str(), stringSize);
         return (char*)buffer;
     }
 
@@ -64,8 +58,7 @@ char* Bridge_Core_PluginLoadOrder(int* size)
 
 uint8_t Bridge_Core_EnableProfilerByDefault()
 {
-    static auto config = g_ifaceService.FetchInterface<IConfiguration>(CONFIGURATION_INTERFACE_VERSION);
-    if (bool* b = std::get_if<bool>(&config->GetValue("core.EnableProfiler")))
+    if (bool* b = std::get_if<bool>(&g_pConfiguration->GetValue("core.EnableProfiler")))
     {
         return *b ? 1 : 0;
     }

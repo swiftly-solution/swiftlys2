@@ -17,18 +17,16 @@
  ************************************************************************************************/
 
 #include <scripting/scripting.h>
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 
 bool Bridge_GameData_Offsets_Exists(const char* name)
 {
-    static auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-    return gamedata->GetOffsets()->Exists(name);
+    return g_pGameDataManager->GetOffsets()->Exists(name);
 }
 
 int Bridge_GameData_Offsets_Fetch(const char* name)
 {
-    static auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-    return gamedata->GetOffsets()->Fetch(name);
+    return g_pGameDataManager->GetOffsets()->Fetch(name);
 }
 
 DEFINE_NATIVE("Offsets.Exists", Bridge_GameData_Offsets_Exists);

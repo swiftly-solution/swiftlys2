@@ -23,7 +23,7 @@
 #include "signatures.h"
 
 #include <public/eiface.h>
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 #include <api/shared/string.h>
 #include <api/shared/plat.h>
 #include <api/shared/files.h>

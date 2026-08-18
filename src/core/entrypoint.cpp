@@ -19,7 +19,7 @@
 #include "entrypoint.h"
 #include "console/colors.h"
 #include <api/interfaces/interfaces.h>
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 #include <api/memory/hooks/manager.h>
 #include <api/scripting/scripting.h>
 #include <api/shared/env.h>
@@ -59,13 +59,10 @@
 #include <monitor/consolelogger/consolelogger.h>
 
 SwiftlyCore g_SwiftlyCore;
-InterfacesManager g_ifaceService;
 std::thread::id g_mainThreadId;
 
 CreateIFaceFn g_pServerFactory = nullptr;
 CreateIFaceFn g_pEngineFactory = nullptr;
-
-INetworkMessages* networkMessages = nullptr;
 
 IVFunctionHook* g_pGameServerSteamAPIActivated = nullptr;
 IVFunctionHook* g_pGameServerSteamAPIDeactivated = nullptr;
@@ -83,10 +80,9 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
 {
     g_pServerFactory = serverFactory;
     g_pEngineFactory = engineFactory;
-
     g_mainThreadId = std::this_thread::get_id();
-
     m_iKind = kind;
+
     SetupConsoleColors();
 
     m_sCorePath = CommandLine()->ParmValue(CUtlStringToken("-sw_path"), WIN_LINUX("addons\\swiftlys2", "addons/swiftlys2"));
@@ -101,22 +97,32 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
     }
     m_sLogPath = replace(m_sLogPath, WIN_LINUX("addons\\swiftlys2", "addons/swiftlys2"), m_sCorePath);
 
-    auto crashreporter = g_ifaceService.FetchInterface<ICrashReporter>(CRASHREPORTER_INTERFACE_VERSION);
-    crashreporter->Init();
+    g_pCrashReporter->Init();
+
+    g_pGameFileSystem = (IFileSystem*)GetInterface(FILESYSTEM_INTERFACE_VERSION);
+    g_pGameEngine = (IVEngineServer2*)GetInterface(INTERFACEVERSION_VENGINESERVER);
+    g_pGameEventSystem = (IGameEventSystem*)GetInterface(GAMEEVENTSYSTEM_INTERFACE_VERSION);
+    g_pGameSoundSystem = GetInterface(SOUNDSYSTEM_INTERFACE_VERSION);
+    g_pGameNetworkMessages = (INetworkMessages*)GetInterface(NETWORKMESSAGES_INTERFACE_VERSION);
+    g_pGameNetworkSystem = (INetworkSystem*)GetInterface(NETWORKSYSTEM_INTERFACE_VERSION);
+    g_pGameNetworkServerService = (INetworkServerService*)GetInterface(NETWORKSERVERSERVICE_INTERFACE_VERSION);
+    g_pGameCvar = (ICvar*)GetInterface(CVAR_INTERFACE_VERSION);
+    g_pGameSchemaSystem = (CSchemaSystem*)GetInterface(SCHEMASYSTEM_INTERFACE_VERSION);
+    g_pGameNetworkStringTableContainer = (INetworkStringTableContainer*)GetInterface(SOURCE2ENGINETOSERVERSTRINGTABLE_INTERFACE_VERSION);
+    g_pGameClientsService = (ISource2GameClients*)GetInterface(INTERFACEVERSION_SERVERGAMECLIENTS);
+    g_pGameResources = GetInterface(GAMERESOURCESERVICESERVER_INTERFACE_VERSION);
 
     s2binlib_initialize(Plat_GetGameDirectory(), "csgo");
-    void* libServer = load_library((const char_t*)WIN_LINUX(StringWide((Plat_GetGameDirectory() + std::string("\\csgo\\bin\\win64\\server.dll"))).c_str(), (Plat_GetGameDirectory() + std::string("/csgo/bin/linuxsteamrt64/libserver.so")).c_str()));
-    void* libEngine = load_library((const char_t*)WIN_LINUX(StringWide(Plat_GetGameDirectory() + std::string("\\bin\\win64\\engine2.dll")).c_str(), (Plat_GetGameDirectory() + std::string("/bin/linuxsteamrt64/libengine2.so")).c_str()));
+
+#ifdef _WIN32
+    void* libServer = load_library(StringWide(Plat_GetGameDirectory() + std::string("\\csgo\\bin\\win64\\server.dll")).c_str());
+    void* libEngine = load_library(StringWide(Plat_GetGameDirectory() + std::string("\\bin\\win64\\engine2.dll")).c_str());
     s2binlib_set_module_base_from_pointer("server", libServer);
     s2binlib_set_module_base_from_pointer("engine2", libEngine);
+#endif
 
-    auto cvars = g_ifaceService.FetchInterface<ICvar>(CVAR_INTERFACE_VERSION);
-    g_pCVar = cvars;
+    g_pCVar = g_pGameCvar;
     ConVar_Register(FCVAR_RELEASE | FCVAR_SERVER_CAN_EXECUTE | FCVAR_CLIENT_CAN_EXECUTE | FCVAR_GAMEDLL, nullptr, nullptr);
-
-    networkMessages = g_ifaceService.FetchInterface<INetworkMessages>(NETWORKMESSAGES_INTERFACE_VERSION);
-
-    auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
 
     const char* logLevel = CommandLine()->ParmValue(CUtlStringToken("-sw_loglevel"));
     if (logLevel)
@@ -132,160 +138,134 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
 
     if (GetCurrentGame() == "unknown")
     {
-        auto engine = g_ifaceService.FetchInterface<IVEngineServer2>(INTERFACEVERSION_VENGINESERVER);
-        if (engine)
+        if (g_pGameEngine)
         {
-            logger->Error("Entrypoint", fmt::format("Unknown game detected. App ID: {}", engine->GetAppID()));
+            g_pLogger->Error("Entrypoint", fmt::format("Unknown game detected. App ID: {}", g_pGameEngine->GetAppID()));
         }
         else
         {
-            logger->Error("Entrypoint", "Unknown game detected. No engine interface available.");
+            g_pLogger->Error("Entrypoint", "Unknown game detected. No engine interface available.");
         }
         return false;
     }
 
-    auto configuration = g_ifaceService.FetchInterface<IConfiguration>(CONFIGURATION_INTERFACE_VERSION);
-    configuration->InitializeExamples();
-    if (!configuration->Load())
+    g_pConfiguration->InitializeExamples();
+    if (!g_pConfiguration->Load())
     {
-        logger->Error("Entrypoint", "Couldn't load the core configuration.");
+        g_pLogger->Error("Entrypoint", "Couldn't load the core configuration.");
         return false;
     }
 
-    if (int* level = std::get_if<int>(&configuration->GetValue("core.DotnetCrashTracerLevel")))
+    if (int* level = std::get_if<int>(&g_pConfiguration->GetValue("core.DotnetCrashTracerLevel")))
     {
         if (*level > 0)
         {
-            auto crashreporter = g_ifaceService.FetchInterface<ICrashReporter>(CRASHREPORTER_INTERFACE_VERSION);
-            crashreporter->EnableDotnetCrashTracer(*level);
+            g_pCrashReporter->EnableDotnetCrashTracer(*level);
         }
     }
 
-    auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-    gamedata->GetOffsets()->Load(GetCurrentGame());
-    gamedata->GetSignatures()->Load(GetCurrentGame());
-    gamedata->GetPatches()->Load(GetCurrentGame());
+    g_pGameDataManager->GetOffsets()->Load(GetCurrentGame());
+    g_pGameDataManager->GetSignatures()->Load(GetCurrentGame());
+    g_pGameDataManager->GetPatches()->Load(GetCurrentGame());
 
-    auto sdkclass = g_ifaceService.FetchInterface<ISDKSchema>(SDKSCHEMA_INTERFACE_VERSION);
-    sdkclass->Load();
+    g_pSDKSchema->Load();
 
-    if (std::string* s = std::get_if<std::string>(&configuration->GetValue("core.PatchesToPerform")))
+    if (std::string* s = std::get_if<std::string>(&g_pConfiguration->GetValue("core.PatchesToPerform")))
     {
         auto patches = explodeToSet(*s, " ");
         for (const auto& patch : patches)
         {
-            if (gamedata->GetPatches()->Exists(patch))
+            if (g_pGameDataManager->GetPatches()->Exists(patch))
             {
-                gamedata->GetPatches()->Apply(patch);
-                logger->Info("Patching", fmt::format("Applied patch: {}\n", patch));
+                g_pGameDataManager->GetPatches()->Apply(patch);
+                g_pLogger->Info("Patching", fmt::format("Applied patch: {}\n", patch));
             }
             else
             {
-                logger->Warning("Patching", fmt::format("Couldn't find patch: {}\n", patch));
+                g_pLogger->Warning("Patching", fmt::format("Couldn't find patch: {}\n", patch));
             }
         }
 
-        if (gamedata->GetPatches()->Exists("SetSchemaHammerUniqueId")) {
-            gamedata->GetPatches()->Apply("SetSchemaHammerUniqueId");
-            logger->Info("Patching", "Applied patch: SetSchemaHammerUniqueId\n");
+        if (g_pGameDataManager->GetPatches()->Exists("SetSchemaHammerUniqueId")) {
+            g_pGameDataManager->GetPatches()->Apply("SetSchemaHammerUniqueId");
+            g_pLogger->Info("Patching", "Applied patch: SetSchemaHammerUniqueId\n");
         }
         else {
-            logger->Warning("Patching", "Couldn't find patch: SetSchemaHammerUniqueId\n");
+            g_pLogger->Warning("Patching", "Couldn't find patch: SetSchemaHammerUniqueId\n");
         }
     }
 
-    auto consoleoutput = g_ifaceService.FetchInterface<IConsoleOutput>(CONSOLEOUTPUT_INTERFACE_VERSION);
-    consoleoutput->Initialize();
-
+    g_pConsoleOutput->Initialize();
     g_ConsoleLogger.Initialize();
 
-    if (bool* b = std::get_if<bool>(&configuration->GetValue("core.ConsoleFilter")))
+    if (bool* b = std::get_if<bool>(&g_pConfiguration->GetValue("core.ConsoleFilter")))
     {
         if (*b)
         {
-            consoleoutput->ToggleFilter();
+            g_pConsoleOutput->ToggleFilter();
         }
     }
 
-    auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
-    entsystem->Initialize();
+    g_pEntSystem->Initialize();
 
-    auto cvarmanager = g_ifaceService.FetchInterface<IConvarManager>(CONVARMANAGER_INTERFACE_VERSION);
-    cvarmanager->Initialize();
+    g_pConvarManager->Initialize();
 
-    auto evmanager = g_ifaceService.FetchInterface<IEventManager>(GAMEEVENTMANAGER_INTERFACE_VERSION);
-    evmanager->Initialize(GetCurrentGame());
+    g_pGameEventManager->Initialize();
 
     if (!InitGameSystem())
     {
-        logger->Error("Game System", "Couldn't initialize the Game System.\n");
+        g_pLogger->Error("Game System", "Couldn't initialize the Game System.\n");
         return false;
     }
 
-    auto playermanager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
-    playermanager->Initialize();
+    g_pPlayerManager->Initialize();
+    g_pDatabaseManager->Initialize();
+    g_pTranslations->Initialize();
+    g_pNetMessages->Initialize();
+    g_pVoiceManager->Initialize();
+    g_pServerCommands->Initialize();
 
-    auto databasemanager = g_ifaceService.FetchInterface<IDatabaseManager>(DATABASEMANAGER_INTERFACE_VERSION);
-    databasemanager->Initialize();
-
-    auto translations = g_ifaceService.FetchInterface<ITranslations>(TRANSLATIONS_INTERFACE_VERSION);
-    translations->Initialize();
-
-    auto netmessages = g_ifaceService.FetchInterface<INetMessages>(NETMESSAGES_INTERFACE_VERSION);
-    netmessages->Initialize();
-
-    auto voicemanager = g_ifaceService.FetchInterface<IVoiceManager>(VOICEMANAGER_INTERFACE_VERSION);
-    voicemanager->Initialize();
-
-    auto servercommands = g_ifaceService.FetchInterface<IServerCommands>(SERVERCOMMANDS_INTERFACE_VERSION);
-    servercommands->Initialize();
-
-    auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
-    hooksmanager->Initialize();
+    g_pHooksManager->Initialize();
 
     void* loopmodeLevelLoad = nullptr;
     s2binlib_find_vtable("engine2", "CLoopModeLevelLoad", &loopmodeLevelLoad);
 
-    g_pLoopInitHook = hooksmanager->CreateVFunctionHook();
-    g_pLoopInitHook->SetHookFunction(loopmodeLevelLoad, gamedata->GetOffsets()->Fetch("ILoopMode::LoopInit"), (void*)LoopInitHook, true);
+    g_pLoopInitHook = g_pHooksManager->CreateVFunctionHook();
+    g_pLoopInitHook->SetHookFunction(loopmodeLevelLoad, g_pGameDataManager->GetOffsets()->Fetch("ILoopMode::LoopInit"), (void*)LoopInitHook, true);
     g_pLoopInitHook->Enable();
 
     void* servervtable = nullptr;
     s2binlib_find_vtable("server", "CSource2Server", &servervtable);
 
-    g_pGameServerSteamAPIActivated = hooksmanager->CreateVFunctionHook();
-    g_pGameServerSteamAPIActivated->SetHookFunction(servervtable, gamedata->GetOffsets()->Fetch("IServerGameDLL::GameServerSteamAPIActivated"), (void*)GameServerSteamAPIActivatedHook, true);
+    g_pGameServerSteamAPIActivated = g_pHooksManager->CreateVFunctionHook();
+    g_pGameServerSteamAPIActivated->SetHookFunction(servervtable, g_pGameDataManager->GetOffsets()->Fetch("IServerGameDLL::GameServerSteamAPIActivated"), (void*)GameServerSteamAPIActivatedHook, true);
     g_pGameServerSteamAPIActivated->Enable();
 
-    g_pGameServerSteamAPIDeactivated = hooksmanager->CreateVFunctionHook();
-    g_pGameServerSteamAPIDeactivated->SetHookFunction(servervtable, gamedata->GetOffsets()->Fetch("IServerGameDLL::GameServerSteamAPIDeactivated"), (void*)GameServerSteamAPIDeactivatedHook, true);
+    g_pGameServerSteamAPIDeactivated = g_pHooksManager->CreateVFunctionHook();
+    g_pGameServerSteamAPIDeactivated->SetHookFunction(servervtable, g_pGameDataManager->GetOffsets()->Fetch("IServerGameDLL::GameServerSteamAPIDeactivated"), (void*)GameServerSteamAPIDeactivatedHook, true);
     g_pGameServerSteamAPIDeactivated->Enable();
 
     StartFixes();
 
-    auto scripting = g_ifaceService.FetchInterface<IScriptingAPI>(SCRIPTING_INTERFACE_VERSION);
-
     if (!InitializeHostFXR(std::string(Plat_GetGameDirectory()) + "/csgo/" + m_sCorePath))
     {
-        auto crashreporter = g_ifaceService.FetchInterface<ICrashReporter>(CRASHREPORTER_INTERFACE_VERSION);
-        crashreporter->ReportPreventionIncident("Managed", fmt::format("Couldn't initialize the .NET runtime. Make sure you installed `swiftlys2-{}-{}-with-runtimes.zip`.", WIN_LINUX("windows", "linux"), GetVersion()));
+        g_pCrashReporter->ReportPreventionIncident("Managed", fmt::format("Couldn't initialize the .NET runtime. Make sure you installed `swiftlys2-{}-{}-with-runtimes.zip`.", WIN_LINUX("windows", "linux"), GetVersion()));
         return true;
     }
 
     bool managedLogEnabled = true;
     int managedLogInterval = 2000;
-    if (bool* b = std::get_if<bool>(&configuration->GetValue("core.ConsoleLogger.ManagedEnable")))
+    if (bool* b = std::get_if<bool>(&g_pConfiguration->GetValue("core.ConsoleLogger.ManagedEnable")))
         managedLogEnabled = *b;
-    if (int* i = std::get_if<int>(&configuration->GetValue("core.ConsoleLogger.WriteIntervalMs")))
+    if (int* i = std::get_if<int>(&g_pConfiguration->GetValue("core.ConsoleLogger.WriteIntervalMs")))
         managedLogInterval = (*i > 0) ? *i : 2000;
 
     putenv("SWIFTLY_MANAGED_LOG_ENABLE", managedLogEnabled ? "1" : "0", 1);
     putenv("SWIFTLY_MANAGED_LOG_INTERVAL_MS", std::to_string(managedLogInterval).c_str(), 1);
 
-    if (!InitializeDotNetAPI(scripting->GetNativeFunctions(), scripting->GetNativeFunctionsCount(), std::string(Plat_GetGameDirectory()) + "/csgo/" + m_sLogPath))
+    if (!InitializeDotNetAPI(g_pScriptingAPI->GetNativeFunctions(), g_pScriptingAPI->GetNativeFunctionsCount(), std::string(Plat_GetGameDirectory()) + "/csgo/" + m_sLogPath))
     {
-        auto crashreporter = g_ifaceService.FetchInterface<ICrashReporter>(CRASHREPORTER_INTERFACE_VERSION);
-        crashreporter->ReportPreventionIncident("Managed", "Couldn't initialize the .NET scripting API.");
+        g_pCrashReporter->ReportPreventionIncident("Managed", "Couldn't initialize the .NET scripting API.");
         return true;
     }
 
@@ -294,41 +274,26 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
 
 bool SwiftlyCore::Unload()
 {
-    auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
-    hooksmanager->Shutdown();
-
-    auto playermanager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
-    playermanager->Shutdown();
-
-    auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
-    entsystem->Shutdown();
-
-    auto cvarmanager = g_ifaceService.FetchInterface<IConvarManager>(CONVARMANAGER_INTERFACE_VERSION);
-    cvarmanager->Shutdown();
-
-    auto evmanager = g_ifaceService.FetchInterface<IEventManager>(GAMEEVENTMANAGER_INTERFACE_VERSION);
-    evmanager->Shutdown();
-
-    auto netmessages = g_ifaceService.FetchInterface<INetMessages>(NETMESSAGES_INTERFACE_VERSION);
-    netmessages->Shutdown();
-
-    auto servercommands = g_ifaceService.FetchInterface<IServerCommands>(SERVERCOMMANDS_INTERFACE_VERSION);
-    servercommands->Shutdown();
-
-    auto voicemanager = g_ifaceService.FetchInterface<IVoiceManager>(VOICEMANAGER_INTERFACE_VERSION);
-    voicemanager->Shutdown();
+    g_pHooksManager->Shutdown();
+    g_pPlayerManager->Shutdown();
+    g_pEntSystem->Shutdown();
+    g_pConvarManager->Shutdown();
+    g_pGameEventManager->Shutdown();
+    g_pNetMessages->Shutdown();
+    g_pServerCommands->Shutdown();
+    g_pVoiceManager->Shutdown();
 
     if (g_pGameServerSteamAPIActivated != nullptr)
     {
         g_pGameServerSteamAPIActivated->Disable();
-        hooksmanager->DestroyVFunctionHook(g_pGameServerSteamAPIActivated);
+        g_pHooksManager->DestroyVFunctionHook(g_pGameServerSteamAPIActivated);
         g_pGameServerSteamAPIActivated = nullptr;
     }
 
     if (g_pGameServerSteamAPIDeactivated != nullptr)
     {
         g_pGameServerSteamAPIDeactivated->Disable();
-        hooksmanager->DestroyVFunctionHook(g_pGameServerSteamAPIDeactivated);
+        g_pHooksManager->DestroyVFunctionHook(g_pGameServerSteamAPIDeactivated);
         g_pGameServerSteamAPIDeactivated = nullptr;
     }
 
@@ -337,23 +302,19 @@ bool SwiftlyCore::Unload()
     ShutdownGameSystem();
 
     g_ConsoleLogger.Shutdown();
-
-    auto crashreporter = g_ifaceService.FetchInterface<ICrashReporter>(CRASHREPORTER_INTERFACE_VERSION);
-    crashreporter->Shutdown();
+    g_pCrashReporter->Shutdown();
 
     return true;
 }
 
 void GameServerSteamAPIActivatedHook(void* _this)
 {
-    auto engine = g_ifaceService.FetchInterface<IVEngineServer2>(INTERFACEVERSION_VENGINESERVER);
-    if (!engine->IsDedicatedServer())
+    if (!g_pGameEngine->IsDedicatedServer())
     {
         return reinterpret_cast<decltype(&GameServerSteamAPIActivatedHook)>(g_pGameServerSteamAPIActivated->GetOriginal())(_this);
     }
 
-    static auto playermanager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
-    playermanager->SteamAPIServerActivated();
+    g_pPlayerManager->SteamAPIServerActivated();
 
     return reinterpret_cast<decltype(&GameServerSteamAPIActivatedHook)>(g_pGameServerSteamAPIActivated->GetOriginal())(_this);
 }
@@ -432,13 +393,12 @@ void SwiftlyCore::SendConsoleMessage(const std::string& message)
 
 std::string SwiftlyCore::GetCurrentGame()
 {
-    auto engine = g_ifaceService.FetchInterface<IVEngineServer2>(INTERFACEVERSION_VENGINESERVER);
-    if (!engine)
+    if (!g_pGameEngine)
     {
         return "unknown";
     }
 
-    switch (engine->GetAppID())
+    switch (g_pGameEngine->GetAppID())
     {
     case 730:
         return "cs2";
@@ -449,13 +409,9 @@ std::string SwiftlyCore::GetCurrentGame()
 
 int SwiftlyCore::GetMaxGameClients()
 {
-    auto engine = g_ifaceService.FetchInterface<IVEngineServer2>(INTERFACEVERSION_VENGINESERVER);
-    if (!engine)
-    {
-        return 0;
-    }
+    if (!g_pGameEngine) return 0;
 
-    switch (engine->GetAppID())
+    switch (g_pGameEngine->GetAppID())
     {
     case 730:
         return 64;

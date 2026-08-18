@@ -19,7 +19,7 @@
 #include "gamesystem.h"
 
 #include <s2binlib/s2binlib.h>
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 
 CBaseGameSystemFactory** CBaseGameSystemFactory::sm_pFirst = nullptr;
 extern void* g_pOnPrecacheResourceCallback;
@@ -36,20 +36,16 @@ void BuildGameSessionManifestHook(void* _this, EventBuildGameSessionManifest_t* 
 
 bool InitGameSystem()
 {
-    auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
-    auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
-    auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-
     void* gameRulesGameSystemVTable = nullptr;
     s2binlib_find_vtable("server", "CGameRulesGameSystem", &gameRulesGameSystemVTable);
 
-    pOnPrecacheResourceCallbackHook = hooksmanager->CreateVFunctionHook();
-    pOnPrecacheResourceCallbackHook->SetHookFunction(gameRulesGameSystemVTable, gamedata->GetOffsets()->Fetch("IGameSystem::BuildGameSessionManifest"), (void*)BuildGameSessionManifestHook, true);
+    pOnPrecacheResourceCallbackHook = g_pHooksManager->CreateVFunctionHook();
+    pOnPrecacheResourceCallbackHook->SetHookFunction(gameRulesGameSystemVTable, g_pGameDataManager->GetOffsets()->Fetch("IGameSystem::BuildGameSessionManifest"), (void*)BuildGameSessionManifestHook, true);
     pOnPrecacheResourceCallbackHook->Enable();
 
-    void* ptr = gamedata->GetSignatures()->Fetch("IGameSystem::InitAllSystems->pFirst");
+    void* ptr = g_pGameDataManager->GetSignatures()->Fetch("IGameSystem::InitAllSystems->pFirst");
     if (!ptr) {
-        logger->Error("Game System", "Couldn't find signature for 'IGameSystem::InitAllSystems->pFirst'!\n");
+        g_pLogger->Error("Game System", "Couldn't find signature for 'IGameSystem::InitAllSystems->pFirst'!\n");
         return false;
     }
 
@@ -68,12 +64,10 @@ bool InitGameSystem()
 
 bool ShutdownGameSystem()
 {
-    auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
-
     if (pOnPrecacheResourceCallbackHook != nullptr)
     {
         pOnPrecacheResourceCallbackHook->Disable();
-        hooksmanager->DestroyVFunctionHook(pOnPrecacheResourceCallbackHook);
+        g_pHooksManager->DestroyVFunctionHook(pOnPrecacheResourceCallbackHook);
         pOnPrecacheResourceCallbackHook = nullptr;
     }
     return true;

@@ -16,8 +16,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ************************************************************************************************/
 
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 #include <scripting/scripting.h>
+#include <core/entrypoint.h>
 
 #include <memory/gamedata/manager.h>
 
@@ -25,20 +26,18 @@
 
 static char* Bridge_MemoryHelpers_CopyString(const std::string& value, int* size)
 {
-    static auto memory = g_ifaceService.FetchInterface<IMemoryAllocator>(MEMORYALLOCATOR_INTERFACE_VERSION);
-
     int outSize = static_cast<int>(value.size());
     *size = outSize;
 
-    char* out = (char*)memory->Alloc(outSize + 1);
-    memory->Copy(out, (void*)value.c_str(), outSize);
+    char* out = (char*)g_pMemoryAllocator->Alloc(outSize + 1);
+    g_pMemoryAllocator->Copy(out, (void*)value.c_str(), outSize);
     out[outSize] = '\0';
     return out;
 }
 
 void* Bridge_MemoryHelpers_FetchInterfaceByName(const char* iface_name)
 {
-    return g_ifaceService.FetchInterface<void>(iface_name);
+    return g_SwiftlyCore.GetInterface(iface_name);
 }
 
 void* Bridge_MemoryHelpers_GetVirtualTableAddress(const char* binary, const char* vtable_name)

@@ -18,7 +18,7 @@
 
 #include "netmessages.h"
 
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 #include <api/sdk/serversideclient.h>
 #include <memory/gamedata/manager.h>
 
@@ -43,25 +43,22 @@ bool SendNetMessage(CServerSideClient* client, CNetMessage* pData, NetChannelBuf
 
 void CNetMessages::Initialize()
 {
-    static auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
-    static auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-
-    g_pFilterMessageHook = hooksmanager->CreateFunctionHook();
-    g_pFilterMessageHook->SetHookFunction(gamedata->GetSignatures()->Fetch("INetworkMessageProcessingPreFilter::FilterMessage"), (void*)FilterMessage);
+    g_pFilterMessageHook = g_pHooksManager->CreateFunctionHook();
+    g_pFilterMessageHook->SetHookFunction(g_pGameDataManager->GetSignatures()->Fetch("INetworkMessageProcessingPreFilter::FilterMessage"), (void*)FilterMessage);
     g_pFilterMessageHook->Enable();
 
     void* gameEventSystem = nullptr;
     s2binlib_find_vtable("engine2", "CGameEventSystem", &gameEventSystem);
 
-    g_pPostEventAbstractHook = hooksmanager->CreateVFunctionHook();
-    g_pPostEventAbstractHook->SetHookFunction(gameEventSystem, gamedata->GetOffsets()->Fetch("IGameEventSystem::PostEventAbstract"), (void*)PostEventAbstractHook, true);
+    g_pPostEventAbstractHook = g_pHooksManager->CreateVFunctionHook();
+    g_pPostEventAbstractHook->SetHookFunction(gameEventSystem, g_pGameDataManager->GetOffsets()->Fetch("IGameEventSystem::PostEventAbstract"), (void*)PostEventAbstractHook, true);
     g_pPostEventAbstractHook->Enable();
 
     void* serverSideClientVTable = nullptr;
     s2binlib_find_vtable("engine2", "CServerSideClient", &serverSideClientVTable);
 
-    g_pSendNetMessageHook = hooksmanager->CreateVFunctionHook();
-    g_pSendNetMessageHook->SetHookFunction(serverSideClientVTable, gamedata->GetOffsets()->Fetch("CServerSideClient::SendNetMessage"), (void*)SendNetMessage, true);
+    g_pSendNetMessageHook = g_pHooksManager->CreateVFunctionHook();
+    g_pSendNetMessageHook->SetHookFunction(serverSideClientVTable, g_pGameDataManager->GetOffsets()->Fetch("CServerSideClient::SendNetMessage"), (void*)SendNetMessage, true);
     g_pSendNetMessageHook->Enable();
 }
 
@@ -70,10 +67,9 @@ void CNetMessages::Shutdown()
     g_pFilterMessageHook->Disable();
     g_pPostEventAbstractHook->Disable();
 
-    auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
-    hooksmanager->DestroyFunctionHook(g_pFilterMessageHook);
-    hooksmanager->DestroyVFunctionHook(g_pPostEventAbstractHook);
-    hooksmanager->DestroyVFunctionHook(g_pSendNetMessageHook);
+    g_pHooksManager->DestroyFunctionHook(g_pFilterMessageHook);
+    g_pHooksManager->DestroyVFunctionHook(g_pPostEventAbstractHook);
+    g_pHooksManager->DestroyVFunctionHook(g_pSendNetMessageHook);
 }
 
 bool SendNetMessage(CServerSideClient* client, CNetMessage* pData, NetChannelBufType_t bufType)
@@ -101,8 +97,7 @@ bool FilterMessage(void* client, CNetMessage* cMsg, INetChannel* netchan)
     if (!client) return reinterpret_cast<decltype(&FilterMessage)>(g_pFilterMessageHook->GetOriginal())(client, cMsg, netchan);
     if (!cMsg) return reinterpret_cast<decltype(&FilterMessage)>(g_pFilterMessageHook->GetOriginal())(client, cMsg, netchan);
 
-    static auto gameDataManager = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-    static auto playerIndex = gameDataManager->GetOffsets()->Fetch("CServerSideClientBase::m_nClientSlot") - WIN_LINUX(8, 48);
+    static auto playerIndex = g_pGameDataManager->GetOffsets()->Fetch("CServerSideClientBase::m_nClientSlot") - WIN_LINUX(8, 48);
 
     auto playerid = *(int*)((uintptr_t)client + playerIndex);
     int msgid = cMsg->GetNetMessage()->GetNetMessageInfo()->m_MessageId;

@@ -18,7 +18,7 @@
 
 #include "convars.h"
 
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 #include <api/sdk/recipientfilter.h>
 #include <api/sdk/serversideclient.h>
 
@@ -76,7 +76,6 @@ uint64_t g_uCreatedConCommandId = 0;
 
 IVFunctionHook* g_pProcessRespondCvarValueHook = nullptr;
 
-extern INetworkMessages* networkMessages;
 extern bool bypassPostEventAbstractHook;
 
 class CConvarListener : public IConVarListener
@@ -110,10 +109,7 @@ void ChangedConvarCallback(ConVarRefAbstract* ref, CSplitScreenSlot nSlot, const
 
 bool OnConvarQuery(CServerSideClientBase* client, const CNetMessagePB<CCLCMsg_RespondCvarValue>& msg)
 {
-    static auto cvarmanager = g_ifaceService.FetchInterface<IConvarManager>(CONVARMANAGER_INTERFACE_VERSION);
-
-    cvarmanager->OnClientQueryCvar(client->GetPlayerSlot().Get(), msg.name(), msg.value());
-
+    g_pConvarManager->OnClientQueryCvar(client->GetPlayerSlot().Get(), msg.name(), msg.value());
     return reinterpret_cast<bool(*)(CServerSideClientBase*, const CNetMessagePB<CCLCMsg_RespondCvarValue>&)>(g_pProcessRespondCvarValueHook->GetOriginal())(client, msg);
 }
 
@@ -122,21 +118,14 @@ void CConvarManager::Initialize()
     void* serverSideClientVTable;
     s2binlib_find_vtable("engine2", "CServerSideClient", &serverSideClientVTable);
 
-    static auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
-    static auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-
-    g_pProcessRespondCvarValueHook = hooksmanager->CreateVFunctionHook();
-    g_pProcessRespondCvarValueHook->SetHookFunction(serverSideClientVTable, gamedata->GetOffsets()->Fetch("CServerSideClient::ProcessRespondCvarValue"), reinterpret_cast<void*>(OnConvarQuery), true);
+    g_pProcessRespondCvarValueHook = g_pHooksManager->CreateVFunctionHook();
+    g_pProcessRespondCvarValueHook->SetHookFunction(serverSideClientVTable, g_pGameDataManager->GetOffsets()->Fetch("CServerSideClient::ProcessRespondCvarValue"), reinterpret_cast<void*>(OnConvarQuery), true);
     g_pProcessRespondCvarValueHook->Enable();
 
-    auto cvars = g_ifaceService.FetchInterface<ICvar>(CVAR_INTERFACE_VERSION);
-    cvars->InstallGlobalChangeCallback(ChangedConvarCallback);
-    cvars->RegisterCreationListeners(&g_CvarListener);
+    g_pGameCvar->InstallGlobalChangeCallback(ChangedConvarCallback);
+    g_pGameCvar->RegisterCreationListeners(&g_CvarListener);
 
-    static auto configuration = g_ifaceService.FetchInterface<IConfiguration>(CONFIGURATION_INTERFACE_VERSION);
-    static auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
-
-    if (bool* unlockedCvars = std::get_if<bool>(&configuration->GetValue("core.Unlocker.Convars")))
+    if (bool* unlockedCvars = std::get_if<bool>(&g_pConfiguration->GetValue("core.Unlocker.Convars")))
     {
         if (*unlockedCvars == true)
         {
@@ -150,17 +139,17 @@ void CConvarManager::Initialize()
                 unlockedConvars++;
             }
 
-            logger->Info("Unlocker", fmt::format("Unlocked {} convars.\n", unlockedConvars));
+            g_pLogger->Info("Unlocker", fmt::format("Unlocked {} convars.\n", unlockedConvars));
         }
     }
 
-    if (bool* unlockedConCommands = std::get_if<bool>(&configuration->GetValue("core.Unlocker.ConCommands")))
+    if (bool* unlockedConCommands = std::get_if<bool>(&g_pConfiguration->GetValue("core.Unlocker.ConCommands")))
     {
         if (*unlockedConCommands == true)
         {
             int unlockedCommands = 0;
 
-            ConCommandData* data = cvars->GetConCommandData(ConCommandRef());
+            ConCommandData* data = g_pGameCvar->GetConCommandData(ConCommandRef());
             for (ConCommandRef ref = ConCommandRef((uint16)0); ref.GetRawData() != data; ref = ConCommandRef(ref.GetAccessIndex() + 1))
             {
                 if (!ref.IsFlagSet(CONVAR_FLAGS_TO_REMOVE)) continue;
@@ -169,7 +158,7 @@ void CConvarManager::Initialize()
                 unlockedCommands++;
             }
 
-            logger->Info("Unlocker", fmt::format("Unlocked {} concommands.\n", unlockedCommands));
+            g_pLogger->Info("Unlocker", fmt::format("Unlocked {} concommands.\n", unlockedCommands));
         }
     }
 }
@@ -179,21 +168,17 @@ void CConvarManager::Shutdown()
     if (g_pProcessRespondCvarValueHook)
     {
         g_pProcessRespondCvarValueHook->Disable();
-        static auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
-        hooksmanager->DestroyVFunctionHook(g_pProcessRespondCvarValueHook);
+        g_pHooksManager->DestroyVFunctionHook(g_pProcessRespondCvarValueHook);
         g_pProcessRespondCvarValueHook = nullptr;
     }
 
-    auto cvars = g_ifaceService.FetchInterface<ICvar>(CVAR_INTERFACE_VERSION);
-    cvars->RemoveGlobalChangeCallback(ChangedConvarCallback);
-    cvars->RemoveCreationListeners(&g_CvarListener);
+    g_pGameCvar->RemoveGlobalChangeCallback(ChangedConvarCallback);
+    g_pGameCvar->RemoveCreationListeners(&g_CvarListener);
 }
 
 void CConvarManager::QueryClientConvar(int playerid, std::string cvar_name)
 {
-    static auto gameEventSystem = g_ifaceService.FetchInterface<IGameEventSystem>(GAMEEVENTSYSTEM_INTERFACE_VERSION);
-
-    auto netmsg = networkMessages->FindNetworkMessagePartial("GetCvarValue");
+    auto netmsg = g_pGameNetworkMessages->FindNetworkMessagePartial("GetCvarValue");
     auto msg = netmsg->AllocateMessage()->ToPB<CSVCMsg_GetCvarValue>();
 
     msg->set_cvar_name(cvar_name);
@@ -201,7 +186,7 @@ void CConvarManager::QueryClientConvar(int playerid, std::string cvar_name)
     bypassPostEventAbstractHook = true;
 
     CSingleRecipientFilter filter(playerid);
-    gameEventSystem->PostEventAbstract(-1, false, &filter, netmsg, msg, 0);
+    g_pGameEventSystem->PostEventAbstract(-1, false, &filter, netmsg, msg, 0);
 
     bypassPostEventAbstractHook = false;
 
@@ -474,8 +459,7 @@ ConvarValue CConvarManager::GetConvarValue(std::string cvar_name)
         return cvar.GetAs<QAngle>(server);
     }
     else {
-        static auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
-        logger->Error("Convars", fmt::format("Unsupported ConVar type: {}", (int)cvar.GetType()));
+        g_pLogger->Error("Convars", fmt::format("Unsupported ConVar type: {}", (int)cvar.GetType()));
         return 0;
     }
 }
@@ -546,9 +530,7 @@ void CConvarManager::SetConvarValue(std::string cvar_name, ConvarValue value)
 
 void CConvarManager::SetClientConvar(int playerid, const std::string& cvar_name, const std::string& value)
 {
-    static auto gameEventSystem = g_ifaceService.FetchInterface<IGameEventSystem>(GAMEEVENTSYSTEM_INTERFACE_VERSION);
-
-    const auto netmsg = networkMessages->FindNetworkMessageById(6);
+    const auto netmsg = g_pGameNetworkMessages->FindNetworkMessageById(6);
     auto msg = netmsg->AllocateMessage()->ToPB<CNETMsg_SetConVar>();
 
     CMsg_CVars_CVar* cvar = msg->mutable_convars()->add_cvars();
@@ -558,7 +540,7 @@ void CConvarManager::SetClientConvar(int playerid, const std::string& cvar_name,
     bypassPostEventAbstractHook = true;
 
     CSingleRecipientFilter filter(playerid);
-    gameEventSystem->PostEventAbstract(-1, false, &filter, netmsg, msg, 0);
+    g_pGameEventSystem->PostEventAbstract(-1, false, &filter, netmsg, msg, 0);
 
     bypassPostEventAbstractHook = false;
 

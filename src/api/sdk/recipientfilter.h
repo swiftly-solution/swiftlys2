@@ -3,7 +3,7 @@
 #define _recipient_filter_h
 
 #include <public/irecipientfilter.h>
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 
 #define INVALID_PLAYER_SLOT_INDEX -1
 #define INVALID_PLAYER_SLOT CPlayerSlot( INVALID_PLAYER_SLOT_INDEX )
@@ -34,12 +34,10 @@ public:
 
     void AddAllPlayers(void)
     {
-        auto engine = g_ifaceService.FetchInterface<IVEngineServer2>(INTERFACEVERSION_VENGINESERVER);
-
         m_Recipients.ClearAll();
 
         for (int i = 0; i < ABSOLUTE_PLAYER_LIMIT; i++)
-            if (engine->GetClientSteamID(i) != nullptr)
+            if (g_pGameEngine->GetClientSteamID(i) != nullptr)
                 AddRecipient(i);
     }
 

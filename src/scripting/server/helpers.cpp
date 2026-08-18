@@ -17,20 +17,17 @@
  ************************************************************************************************/
 
 #include <scripting/scripting.h>
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 
 char* Bridge_ServerHelpers_GetServerLanguage(int* size)
 {
-    static auto configuration = g_ifaceService.FetchInterface<IConfiguration>(CONFIGURATION_INTERFACE_VERSION);
-    static auto memory = g_ifaceService.FetchInterface<IMemoryAllocator>(MEMORYALLOCATOR_INTERFACE_VERSION);
-
-    std::string s = std::get<std::string>(configuration->GetValue("core.Language"));
+    std::string s = std::get<std::string>(g_pConfiguration->GetValue("core.Language"));
 
     int sz = s.size();
     *size = sz;
-    char* out = (char*)memory->Alloc(sz + 1);
+    char* out = (char*)g_pMemoryAllocator->Alloc(sz + 1);
 
-    memory->Copy(out, (void*)s.c_str(), sz);
+    g_pMemoryAllocator->Copy(out, (void*)s.c_str(), sz);
     out[sz] = '\0';
 
     return out;
@@ -38,20 +35,17 @@ char* Bridge_ServerHelpers_GetServerLanguage(int* size)
 
 bool Bridge_ServerHelpers_UsePlayerLanguage()
 {
-    static auto configuration = g_ifaceService.FetchInterface<IConfiguration>(CONFIGURATION_INTERFACE_VERSION);
-    return std::get<bool>(configuration->GetValue("core.UsePlayerLanguage"));
+    return std::get<bool>(g_pConfiguration->GetValue("core.UsePlayerLanguage"));
 }
 
 bool Bridge_ServerHelpers_IsFollowingServerGuidelines()
 {
-    static auto configuration = g_ifaceService.FetchInterface<IConfiguration>(CONFIGURATION_INTERFACE_VERSION);
-    return std::get<bool>(configuration->GetValue("core.FollowCS2ServerGuidelines"));
+    return std::get<bool>(g_pConfiguration->GetValue("core.FollowCS2ServerGuidelines"));
 }
 
 bool Bridge_ServerHelpers_UseAutoHotReload()
 {
-    static auto configuration = g_ifaceService.FetchInterface<IConfiguration>(CONFIGURATION_INTERFACE_VERSION);
-    return std::get<bool>(configuration->GetValue("core.AutoHotReload"));
+    return std::get<bool>(g_pConfiguration->GetValue("core.AutoHotReload"));
 }
 
 DEFINE_NATIVE("ServerHelpers.GetServerLanguage", Bridge_ServerHelpers_GetServerLanguage);

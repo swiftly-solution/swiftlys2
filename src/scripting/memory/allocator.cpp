@@ -17,54 +17,46 @@
  ************************************************************************************************/
 
 #include <scripting/scripting.h>
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 
 void* Bridge_Memory_Alloc(uint64_t size)
 {
-    auto memalloc = g_ifaceService.FetchInterface<IMemoryAllocator>(MEMORYALLOCATOR_INTERFACE_VERSION);
-    return memalloc->Alloc(size);
+    return g_pMemoryAllocator->Alloc(size);
 }
 
 void Bridge_Memory_Free(void* ptr)
 {
-    auto memalloc = g_ifaceService.FetchInterface<IMemoryAllocator>(MEMORYALLOCATOR_INTERFACE_VERSION);
-    memalloc->Free(ptr);
+    g_pMemoryAllocator->Free(ptr);
 }
 
 void* Bridge_Memory_Resize(void* ptr, uint64_t newSize)
 {
-    auto memalloc = g_ifaceService.FetchInterface<IMemoryAllocator>(MEMORYALLOCATOR_INTERFACE_VERSION);
-    return memalloc->Resize(ptr, newSize);
+    return g_pMemoryAllocator->Resize(ptr, newSize);
 }
 
 uint64_t Bridge_Memory_GetSize(void* ptr)
 {
-    auto memalloc = g_ifaceService.FetchInterface<IMemoryAllocator>(MEMORYALLOCATOR_INTERFACE_VERSION);
-    return memalloc->GetSize(ptr);
+    return g_pMemoryAllocator->GetSize(ptr);
 }
 
 uint64_t Bridge_Memory_GetTotalAllocated()
 {
-    auto memalloc = g_ifaceService.FetchInterface<IMemoryAllocator>(MEMORYALLOCATOR_INTERFACE_VERSION);
-    return memalloc->GetTotalAllocated();
+    return g_pMemoryAllocator->GetTotalAllocated();
 }
 
 bool Bridge_Memory_IsPointerValid(void* ptr)
 {
-    auto memalloc = g_ifaceService.FetchInterface<IMemoryAllocator>(MEMORYALLOCATOR_INTERFACE_VERSION);
-    return memalloc->IsPointerValid(ptr);
+    return g_pMemoryAllocator->IsPointerValid(ptr);
 }
 
 void Bridge_Memory_Copy(void* dest, void* src, uint64_t size)
 {
-    auto memalloc = g_ifaceService.FetchInterface<IMemoryAllocator>(MEMORYALLOCATOR_INTERFACE_VERSION);
-    memalloc->Copy(dest, src, size);
+    g_pMemoryAllocator->Copy(dest, src, size);
 }
 
 void Bridge_Memory_Move(void* dest, void* src, uint64_t size)
 {
-    auto memalloc = g_ifaceService.FetchInterface<IMemoryAllocator>(MEMORYALLOCATOR_INTERFACE_VERSION);
-    memalloc->Move(dest, src, size);
+    g_pMemoryAllocator->Move(dest, src, size);
 }
 
 DEFINE_NATIVE("Allocator.Alloc", Bridge_Memory_Alloc);

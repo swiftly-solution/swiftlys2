@@ -18,7 +18,7 @@
 
 #include "manager.h"
 
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 
 #include <api/shared/string.h>
 
@@ -70,38 +70,34 @@ void CommandsCallback(const CCommandContext& context, const CCommand& args)
 
 void CServerCommands::Initialize()
 {
-    static auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
-    static auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-
     void* ccvarVTable;
     s2binlib_find_vtable("tier0", "CCvar", &ccvarVTable);
 
-    dispatchConCommandHook = hooksmanager->CreateVFunctionHook();
-    dispatchConCommandHook->SetHookFunction(ccvarVTable, gamedata->GetOffsets()->Fetch("ICvar::DispatchConCommand"), (void*)DispatchConCommand, true);
+    dispatchConCommandHook = g_pHooksManager->CreateVFunctionHook();
+    dispatchConCommandHook->SetHookFunction(ccvarVTable, g_pGameDataManager->GetOffsets()->Fetch("ICvar::DispatchConCommand"), (void*)DispatchConCommand, true);
     dispatchConCommandHook->Enable();
 
     void* gameclientsvtable = nullptr;
     s2binlib_find_vtable("server", "CSource2GameClients", &gameclientsvtable);
 
-    clientCommandHook2 = hooksmanager->CreateVFunctionHook();
-    clientCommandHook2->SetHookFunction(gameclientsvtable, gamedata->GetOffsets()->Fetch("IServerGameClients::ClientCommand"), (void*)ClientCommandHook2, true);
+    clientCommandHook2 = g_pHooksManager->CreateVFunctionHook();
+    clientCommandHook2->SetHookFunction(gameclientsvtable, g_pGameDataManager->GetOffsets()->Fetch("IServerGameClients::ClientCommand"), (void*)ClientCommandHook2, true);
     clientCommandHook2->Enable();
 }
 
 void CServerCommands::Shutdown()
 {
-    static auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
     if (dispatchConCommandHook)
     {
         dispatchConCommandHook->Disable();
-        hooksmanager->DestroyVFunctionHook(dispatchConCommandHook);
+        g_pHooksManager->DestroyVFunctionHook(dispatchConCommandHook);
         dispatchConCommandHook = nullptr;
     }
 
     if (clientCommandHook2)
     {
         clientCommandHook2->Disable();
-        hooksmanager->DestroyVFunctionHook(clientCommandHook2);
+        g_pHooksManager->DestroyVFunctionHook(clientCommandHook2);
         clientCommandHook2 = nullptr;
     }
 }
@@ -117,10 +113,7 @@ int CServerCommands::HandleCommand(int playerid, const std::string& text, bool d
         return -1;
     }
 
-    static auto playermanager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
-    static auto configuration = g_ifaceService.FetchInterface<IConfiguration>(CONFIGURATION_INTERFACE_VERSION);
-
-    IPlayer* player = playermanager->GetPlayer(playerid);
+    IPlayer* player = g_pPlayerManager->GetPlayer(playerid);
     if (player == nullptr)
     {
         return -1;
@@ -128,12 +121,12 @@ int CServerCommands::HandleCommand(int playerid, const std::string& text, bool d
 
     if (commandPrefixes.size() == 0)
     {
-        commandPrefixes = explodeToSet(std::get<std::string>(configuration->GetValue("core.CommandPrefixes")), " ");
+        commandPrefixes = explodeToSet(std::get<std::string>(g_pConfiguration->GetValue("core.CommandPrefixes")), " ");
     }
 
     if (silentCommandPrefixes.size() == 0)
     {
-        silentCommandPrefixes = explodeToSet(std::get<std::string>(configuration->GetValue("core.CommandSilentPrefixes")), " ");
+        silentCommandPrefixes = explodeToSet(std::get<std::string>(g_pConfiguration->GetValue("core.CommandSilentPrefixes")), " ");
     }
 
     bool isCommand = false;
@@ -371,8 +364,7 @@ void CServerCommands::SetClientChatHandler(std::function<int(int, const std::str
 
 void ClientCommandHook2(void* thisPtr, CPlayerSlot slot, const CCommand& args)
 {
-    static auto servercommands = g_ifaceService.FetchInterface<IServerCommands>(SERVERCOMMANDS_INTERFACE_VERSION);
-    if (!servercommands->HandleClientCommand(slot.Get(), args.GetCommandString()))
+    if (!g_pServerCommands->HandleClientCommand(slot.Get(), args.GetCommandString()))
     {
         return;
     }
@@ -382,16 +374,13 @@ void ClientCommandHook2(void* thisPtr, CPlayerSlot slot, const CCommand& args)
 void DispatchConCommand(void* thisPtr, ConCommandRef cmd, const CCommandContext& ctx, const CCommand& args)
 {
     CPlayerSlot slot = ctx.GetPlayerSlot();
-    static auto servercommands = g_ifaceService.FetchInterface<IServerCommands>(SERVERCOMMANDS_INTERFACE_VERSION);
-    static auto playermanager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
-    static auto eventmanager = g_ifaceService.FetchInterface<IEventManager>(GAMEEVENTMANAGER_INTERFACE_VERSION);
 
     std::string gameText = "";
     bool shouldSend = true;
 
     if (slot.Get() != -1)
     {
-        if (!servercommands->HandleClientCommand(slot.Get(), args.GetCommandString()))
+        if (!g_pServerCommands->HandleClientCommand(slot.Get(), args.GetCommandString()))
         {
             return;
         }
@@ -399,7 +388,7 @@ void DispatchConCommand(void* thisPtr, ConCommandRef cmd, const CCommandContext&
         std::string command = args.Arg(0);
         if (command == "say" || command == "say_team")
         {
-            auto player = playermanager->GetPlayer(slot.Get());
+            auto player = g_pPlayerManager->GetPlayer(slot.Get());
             if (!player)
             {
                 return;
@@ -433,9 +422,9 @@ void DispatchConCommand(void* thisPtr, ConCommandRef cmd, const CCommandContext&
             }
 
             gameText = text;
-            shouldSend = (servercommands->HandleCommand(slot.Get(), text, true) != 2);
+            shouldSend = (g_pServerCommands->HandleCommand(slot.Get(), text, true) != 2);
 
-            if (shouldSend && !servercommands->HandleClientChat(slot.Get(), text, teamonly))
+            if (shouldSend && !g_pServerCommands->HandleClientChat(slot.Get(), text, teamonly))
             {
                 shouldSend = false;
             }
@@ -444,5 +433,5 @@ void DispatchConCommand(void* thisPtr, ConCommandRef cmd, const CCommandContext&
 
     if (shouldSend) reinterpret_cast<decltype(&DispatchConCommand)>(dispatchConCommandHook->GetOriginal())(thisPtr, cmd, ctx, args);
 
-    if (gameText != "") servercommands->HandleCommand(slot.Get(), gameText, false);
+    if (gameText != "") g_pServerCommands->HandleCommand(slot.Get(), gameText, false);
 }

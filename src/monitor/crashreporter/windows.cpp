@@ -18,7 +18,7 @@
 
 #ifdef _WIN32
 
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 #include <api/shared/files.h>
 
 #include "crashreporter.h"
@@ -113,15 +113,14 @@ LONG CALLBACK BreakpadVectoredHandler(_In_ PEXCEPTION_POINTERS ExceptionInfo)
 
 static bool windowsDumpCallback(const wchar_t* dumpPath, const wchar_t* minidump_id, void* context, EXCEPTION_POINTERS* exinfo, MDRawAssertionInfo* assertion, bool succeeded)
 {
-    static auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
     std::string dmpFolder = StringTight(dumpPath);
     ConsoleLogger_FlushForCrash();
 
-    auto tracerLevel = g_ifaceService.FetchInterface<ICrashReporter>(CRASHREPORTER_INTERFACE_VERSION)->GetDotnetCrashTracerLevel();
+    auto tracerLevel = g_pCrashReporter->GetDotnetCrashTracerLevel();
     if (tracerLevel > 0)
     {
         std::string tracerPath = dmpFolder + "\\managedtrace.txt";
-        logger->Warning("Crash Reporter", fmt::format("Dumping managed trace to: {}\n", tracerPath));
+        g_pLogger->Warning("Crash Reporter", fmt::format("Dumping managed trace to: {}\n", tracerPath));
         TracerDump(g_SwiftlyCore.GetCorePath(), tracerPath.c_str());
     }
 
@@ -130,12 +129,12 @@ static bool windowsDumpCallback(const wchar_t* dumpPath, const wchar_t* minidump
     std::string mdmpPath = fmt::format("{}\\{}.dmp", dmpFolder, mdmpId);
 
     if (!succeeded) {
-        logger->Error("Crash Reporter", fmt::format("Failed to write minidump to '{}'\n", mdmpPath));
+        g_pLogger->Error("Crash Reporter", fmt::format("Failed to write minidump to '{}'\n", mdmpPath));
         return succeeded;
     }
 
     g_dumpWritten = true;
-    logger->Info("Crash Reporter", fmt::format("Minidump written to '{}'\n", mdmpPath));
+    g_pLogger->Info("Crash Reporter", fmt::format("Minidump written to '{}'\n", mdmpPath));
 
     google_breakpad::SimpleSymbolSupplier symbolSupplier("");
     google_breakpad::BasicSourceLineResolver resolver;
@@ -147,14 +146,14 @@ static bool windowsDumpCallback(const wchar_t* dumpPath, const wchar_t* minidump
 
     google_breakpad::Minidump mdmp(mdmpPath);
     if (!mdmp.Read()) {
-        logger->Error("Crash Reporter", fmt::format("Failed to read minidump from '{}'\n", mdmpPath));
+        g_pLogger->Error("Crash Reporter", fmt::format("Failed to read minidump from '{}'\n", mdmpPath));
         return succeeded;
     }
     else {
         google_breakpad::ProcessState processState;
         if (minidump_processor.Process(&mdmp, &processState) != google_breakpad::PROCESS_OK)
         {
-            logger->Error("Crash Reporter", fmt::format("MinidumpProcessor::Process failed\n", mdmpPath));
+            g_pLogger->Error("Crash Reporter", fmt::format("MinidumpProcessor::Process failed\n", mdmpPath));
         }
         else
         {
@@ -168,8 +167,6 @@ static bool windowsDumpCallback(const wchar_t* dumpPath, const wchar_t* minidump
 
 void ParseAndWriteCrashInfo(const std::string& mdmpAbsPath, const std::string& crashInfoRelPath)
 {
-    static auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
-
     google_breakpad::SimpleSymbolSupplier symbolSupplier("");
     google_breakpad::BasicSourceLineResolver resolver;
     google_breakpad::MinidumpProcessor minidump_processor(&symbolSupplier, &resolver);
@@ -181,14 +178,14 @@ void ParseAndWriteCrashInfo(const std::string& mdmpAbsPath, const std::string& c
     google_breakpad::Minidump mdmp(mdmpAbsPath);
     if (!mdmp.Read())
     {
-        logger->Error("Crash Reporter", fmt::format("Failed to read minidump from '{}'\n", mdmpAbsPath));
+        g_pLogger->Error("Crash Reporter", fmt::format("Failed to read minidump from '{}'\n", mdmpAbsPath));
         return;
     }
 
     google_breakpad::ProcessState processState;
     if (minidump_processor.Process(&mdmp, &processState) != google_breakpad::PROCESS_OK)
     {
-        logger->Error("Crash Reporter", fmt::format("MinidumpProcessor::Process failed for '{}'\n", mdmpAbsPath));
+        g_pLogger->Error("Crash Reporter", fmt::format("MinidumpProcessor::Process failed for '{}'\n", mdmpAbsPath));
         return;
     }
 

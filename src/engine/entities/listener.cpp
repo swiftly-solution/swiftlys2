@@ -19,7 +19,7 @@
 #include "listener.h"
 #include "entitysystem.h"
 
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 #include <api/shared/plat.h>
 
 #define CCSGameRulesProxy_m_pGameRules 0x242D3ADB925C1F40
@@ -51,13 +51,11 @@ void CEntityListener::OnEntityCreated(CEntityInstance* pEntity)
 
 void CEntityListener::OnEntityDeleted(CEntityInstance* pEntity)
 {
-    auto playermanager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
-    
     auto entindex = pEntity->m_pEntity->m_EHandle.GetEntryIndex();
     auto qword = entindex >> 6;
 
     for (int i = 0; i < 64; i++) {
-        auto player = playermanager->GetPlayer(i);
+        auto player = g_pPlayerManager->GetPlayer(i);
         if (!player) continue;
 
         auto& transmittingBits = player->GetBlockedTransmittingBits();
@@ -65,7 +63,7 @@ void CEntityListener::OnEntityDeleted(CEntityInstance* pEntity)
 
         transmittingBits.blockedTransmitBits.Clear(entindex);
         uint64_t* transmitBitsBase = (uint64_t*)transmittingBits.blockedTransmitBits.Base();
-        if(transmitBitsBase[qword] == 0) transmittingBits.blockedTransmitMasks.Clear(qword);
+        if (transmitBitsBase[qword] == 0) transmittingBits.blockedTransmitMasks.Clear(qword);
     }
 
     if (g_pOnEntityDeletedCallback)

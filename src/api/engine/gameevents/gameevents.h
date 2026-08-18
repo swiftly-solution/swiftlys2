@@ -27,7 +27,7 @@
 class IEventManager
 {
 public:
-    virtual void Initialize(std::string game_name) = 0;
+    virtual void Initialize() = 0;
     virtual void Shutdown() = 0;
 
     virtual void RegisterGameEventsListeners(bool shouldRegister) = 0;

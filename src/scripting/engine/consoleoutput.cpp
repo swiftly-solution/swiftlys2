@@ -16,66 +16,57 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ************************************************************************************************/
 
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 #include <scripting/scripting.h>
 
 #include <api/shared/string.h>
 
 static char* Bridge_ConsoleOutput_CopyString(const std::string& value, int* size)
 {
-    static auto memory = g_ifaceService.FetchInterface<IMemoryAllocator>(MEMORYALLOCATOR_INTERFACE_VERSION);
-
     int outSize = static_cast<int>(value.size());
     *size = outSize;
 
-    char* out = (char*)memory->Alloc(outSize + 1);
-    memory->Copy(out, (void*)value.c_str(), outSize);
+    char* out = (char*)g_pMemoryAllocator->Alloc(outSize + 1);
+    g_pMemoryAllocator->Copy(out, (void*)value.c_str(), outSize);
     out[outSize] = '\0';
     return out;
 }
 
 uint64_t Bridge_ConsoleOutput_AddConsoleListener(void* callback)
 {
-    auto consoleOutput = g_ifaceService.FetchInterface<IConsoleOutput>(CONSOLEOUTPUT_INTERFACE_VERSION);
-    return consoleOutput->AddConsoleListener([callback](const std::string& text) {
+    return g_pConsoleOutput->AddConsoleListener([callback](const std::string& text) {
         reinterpret_cast<void(*)(const char*)>(callback)(text.c_str());
         });
 }
 
 void Bridge_ConsoleOutput_RemoveConsoleListener(uint64_t listenerId)
 {
-    auto consoleOutput = g_ifaceService.FetchInterface<IConsoleOutput>(CONSOLEOUTPUT_INTERFACE_VERSION);
-    consoleOutput->RemoveConsoleListener(listenerId);
+    g_pConsoleOutput->RemoveConsoleListener(listenerId);
 }
 
 bool Bridge_ConsoleOutput_IsEnabled()
 {
-    auto consoleOutput = g_ifaceService.FetchInterface<IConsoleOutput>(CONSOLEOUTPUT_INTERFACE_VERSION);
-    return consoleOutput->IsEnabled();
+    return g_pConsoleOutput->IsEnabled();
 }
 
 void Bridge_ConsoleOutput_ToggleFilter()
 {
-    auto consoleOutput = g_ifaceService.FetchInterface<IConsoleOutput>(CONSOLEOUTPUT_INTERFACE_VERSION);
-    consoleOutput->ToggleFilter();
+    g_pConsoleOutput->ToggleFilter();
 }
 
 void Bridge_ConsoleOutput_ReloadFilterConfiguration()
 {
-    auto consoleOutput = g_ifaceService.FetchInterface<IConsoleOutput>(CONSOLEOUTPUT_INTERFACE_VERSION);
-    consoleOutput->ReloadFilterConfiguration();
+    g_pConsoleOutput->ReloadFilterConfiguration();
 }
 
 bool Bridge_ConsoleOutput_NeedsFiltering(const char* text)
 {
-    auto consoleOutput = g_ifaceService.FetchInterface<IConsoleOutput>(CONSOLEOUTPUT_INTERFACE_VERSION);
-    return consoleOutput->NeedsFiltering((char*)text);
+    return g_pConsoleOutput->NeedsFiltering((char*)text);
 }
 
 char* Bridge_ConsoleOutput_GetCounterText(int* size)
 {
-    auto consoleOutput = g_ifaceService.FetchInterface<IConsoleOutput>(CONSOLEOUTPUT_INTERFACE_VERSION);
-    std::string counterText = consoleOutput->GetCounterText();
+    std::string counterText = g_pConsoleOutput->GetCounterText();
 
     return Bridge_ConsoleOutput_CopyString(counterText, size);
 }

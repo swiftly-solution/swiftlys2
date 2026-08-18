@@ -17,7 +17,7 @@
  ************************************************************************************************/
 
 #include <scripting/scripting.h>
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 
 void* g_pOnGameTickCallback = nullptr;
 void* g_pOnClientConnectCallback = nullptr;

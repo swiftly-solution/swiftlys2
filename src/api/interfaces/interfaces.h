@@ -39,6 +39,8 @@
 #include <api/network/database/manager.h>
 #include <api/network/netmessages/netmessages.h>
 
+#include <api/scripting/scripting.h>
+
 #include <api/sdk/schema.h>
 
 #include <api/server/commands/manager.h>
@@ -46,27 +48,55 @@
 #include <api/server/players/manager.h>
 #include <api/server/translations/translations.h>
 
-SW_API void* GetPureInterface(const char* iface_name);
+#include <public/filesystem.h>
+#include <public/eiface.h>
+#include <public/engine/igameeventsystem.h>
+#include <public/networksystem/inetworkmessages.h>
+#include <public/networksystem/inetworksystem.h>
+#include <public/iserver.h>
+#include <public/icvar.h>
+#include <public/schemasystem/schemasystem.h>
+#include <public/networkstringtabledefs.h>
 
-#define EXTENSIONMANAGER_INTERFACE_VERSION                  "ExtensionManagerAPI"
-#define LOGGER_INTERFACE_VERSION                            "LoggerAPI"
-#define MEMORYALLOCATOR_INTERFACE_VERSION                   "MemoryAllocatorAPI"
-#define CRASHREPORTER_INTERFACE_VERSION                     "CrashReporterAPI"
-#define HOOKSMANAGER_INTERFACE_VERSION                      "HooksManagerAPI"
-#define GAMEDATA_INTERFACE_VERSION                          "GameDataAPI"
-#define CONFIGURATION_INTERFACE_VERSION                     "ConfigurationAPI"
-#define ENTITYSYSTEM_INTERFACE_VERSION                      "EntitySystemAPI"
-#define SDKSCHEMA_INTERFACE_VERSION                         "SDKSchemaAPI"
-#define CONVARMANAGER_INTERFACE_VERSION                     "ConVarManagerAPI"
-#define GAMEEVENTMANAGER_INTERFACE_VERSION                  "GameEventManagerAPI"
-#define VOICEMANAGER_INTERFACE_VERSION                      "VoiceManagerAPI"
-#define SCRIPTING_INTERFACE_VERSION                         "ScriptingAPI"
-#define PLAYERMANAGER_INTERFACE_VERSION                     "PlayerManagerAPI"
-#define SOUNDEVENTMANAGER_INTERFACE_VERSION                 "SoundEventManagerAPI"
-#define DATABASEMANAGER_INTERFACE_VERSION                   "DatabaseManagerAPI"
-#define TRANSLATIONS_INTERFACE_VERSION                      "TranslationsAPI"
-#define SERVERCOMMANDS_INTERFACE_VERSION                    "ServerCommandsAPI"
-#define NETMESSAGES_INTERFACE_VERSION                       "NetMessagesAPI"
-#define CONSOLEOUTPUT_INTERFACE_VERSION                     "ConsoleOutputAPI"
+ /**
+  * Project Interfaces
+  */
+
+extern ILogger* g_pLogger;
+extern IMemoryAllocator* g_pMemoryAllocator;
+extern ICrashReporter* g_pCrashReporter;
+extern IHooksManager* g_pHooksManager;
+extern IGameDataManager* g_pGameDataManager;
+extern IConfiguration* g_pConfiguration;
+extern IEntitySystem* g_pEntSystem;
+extern ISDKSchema* g_pSDKSchema;
+extern IConvarManager* g_pConvarManager;
+extern IEventManager* g_pGameEventManager;
+extern IScriptingAPI* g_pScriptingAPI;
+extern IPlayerManager* g_pPlayerManager;
+extern IVoiceManager* g_pVoiceManager;
+extern ISoundEventManager* g_pSoundEventManager;
+extern IDatabaseManager* g_pDatabaseManager;
+extern ITranslations* g_pTranslations;
+extern IServerCommands* g_pServerCommands;
+extern INetMessages* g_pNetMessages;
+extern IConsoleOutput* g_pConsoleOutput;
+
+/**
+ * Game Interfaces
+ */
+
+extern IFileSystem* g_pGameFileSystem;
+extern IVEngineServer2* g_pGameEngine;
+extern IGameEventSystem* g_pGameEventSystem;
+extern void* g_pGameSoundSystem;
+extern INetworkMessages* g_pGameNetworkMessages;
+extern INetworkSystem* g_pGameNetworkSystem;
+extern INetworkServerService* g_pGameNetworkServerService;
+extern ICvar* g_pGameCvar;
+extern CSchemaSystem* g_pGameSchemaSystem;
+extern INetworkStringTableContainer* g_pGameNetworkStringTableContainer;
+extern ISource2GameClients* g_pGameClientsService;
+extern void* g_pGameResources;
 
 #endif

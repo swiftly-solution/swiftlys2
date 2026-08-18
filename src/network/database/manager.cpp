@@ -22,7 +22,7 @@
 #include <api/shared/jsonc.h>
 #include <string>
 
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 
 #include <core/entrypoint.h>
 
@@ -156,11 +156,9 @@ void CDatabaseManager::Initialize()
     std::string filePath = g_SwiftlyCore.GetCorePath() + "configs/database.jsonc";
     json j = parseJsonc(Files::Read(filePath));
 
-    auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
-
     if (j.empty())
     {
-        logger->Error("Database Manager", fmt::format("Failed to load database config. The '{}' file is missing or invalid.\n", filePath));
+        g_pLogger->Error("Database Manager", fmt::format("Failed to load database config. The '{}' file is missing or invalid.\n", filePath));
         return;
     }
 
@@ -168,7 +166,7 @@ void CDatabaseManager::Initialize()
 
     if (!j.contains("connections") || !j["connections"].is_object())
     {
-        logger->Error("Database Manager", "Database config missing 'connections' object.\n");
+        g_pLogger->Error("Database Manager", "Database config missing 'connections' object.\n");
         return;
     }
 
@@ -203,7 +201,7 @@ void CDatabaseManager::Initialize()
         }
     }
 
-    logger->Info("Database Manager", fmt::format("Loaded {} database connections. (Default Connection: {})\n", m_mConnections.size(), m_sDefaultConnectionName));
+    g_pLogger->Info("Database Manager", fmt::format("Loaded {} database connections. (Default Connection: {})\n", m_mConnections.size(), m_sDefaultConnectionName));
 }
 
 std::string CDatabaseManager::GetDefaultDriver()

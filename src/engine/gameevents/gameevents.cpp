@@ -18,7 +18,7 @@
 
 #include "gameevents.h"
 
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 
 #include <api/shared/files.h>
 #include <api/shared/jsonc.h>
@@ -65,38 +65,34 @@ void StartupServerEventHook(void* _this, const GameSessionConfiguration_t& confi
 IVFunctionHook* g_pFireEventHook = nullptr;
 bool FireEventHook(IGameEventManager2* _this, IGameEvent* event, bool bDontBroadcast);
 
-void CEventManager::Initialize(std::string game_name)
+void CEventManager::Initialize()
 {
     void* CGameEventManagerVTable;
     s2binlib_find_vtable("server", "CGameEventManager", &CGameEventManagerVTable);
 
-    auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
-    auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-    auto server = g_ifaceService.FetchInterface<ISource2Server>(SOURCE2SERVER_INTERFACE_VERSION);
-
     void* netserverservice = nullptr;
     s2binlib_find_vtable("engine2", "CNetworkServerService", &netserverservice);
 
-    g_pStartupServerEventHook = hooksmanager->CreateVFunctionHook();
-    g_pStartupServerEventHook->SetHookFunction(netserverservice, gamedata->GetOffsets()->Fetch("INetworkServerService::StartupServer"), reinterpret_cast<void*>(StartupServerEventHook), true);
+    g_pStartupServerEventHook = g_pHooksManager->CreateVFunctionHook();
+    g_pStartupServerEventHook->SetHookFunction(netserverservice, g_pGameDataManager->GetOffsets()->Fetch("INetworkServerService::StartupServer"), reinterpret_cast<void*>(StartupServerEventHook), true);
     g_pStartupServerEventHook->Enable();
 
-    uintptr_t rawGameEventManager = (uintptr_t)(gamedata->GetSignatures()->Fetch("CSource2Server::g_GameEventManager"));
+    uintptr_t rawGameEventManager = (uintptr_t)(g_pGameDataManager->GetSignatures()->Fetch("CSource2Server::g_GameEventManager"));
 
     rawGameEventManager += WIN_LINUX(95, 103) + 3;
     rawGameEventManager += 4 + *(int*)(rawGameEventManager);
 
     g_gameEventManager = *(IGameEventManager2**)(rawGameEventManager);
 
-    g_pFireEventHook = hooksmanager->CreateVFunctionHook();
-    g_pFireEventHook->SetHookFunction(g_gameEventManager, gamedata->GetOffsets()->Fetch("IGameEventManager2::FireEvent"), reinterpret_cast<void*>(FireEventHook), false);
+    g_pFireEventHook = g_pHooksManager->CreateVFunctionHook();
+    g_pFireEventHook->SetHookFunction(g_gameEventManager, g_pGameDataManager->GetOffsets()->Fetch("IGameEventManager2::FireEvent"), reinterpret_cast<void*>(FireEventHook), false);
     g_pFireEventHook->Enable();
 
     void* servervtable = nullptr;
     s2binlib_find_vtable("server", "CSource2Server", &servervtable);
 
-    g_PreworldUpdateHook = hooksmanager->CreateVFunctionHook();
-    g_PreworldUpdateHook->SetHookFunction(servervtable, gamedata->GetOffsets()->Fetch("IServerGameDLL::PreWorldUpdate"), reinterpret_cast<void*>(PreworldUpdateHook), true);
+    g_PreworldUpdateHook = g_pHooksManager->CreateVFunctionHook();
+    g_PreworldUpdateHook->SetHookFunction(servervtable, g_pGameDataManager->GetOffsets()->Fetch("IServerGameDLL::PreWorldUpdate"), reinterpret_cast<void*>(PreworldUpdateHook), true);
     g_PreworldUpdateHook->Enable();
 
     RegisterGameEventListener("player_spawn");
@@ -104,26 +100,24 @@ void CEventManager::Initialize(std::string game_name)
 
 void CEventManager::Shutdown()
 {
-    static auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
-
     if (g_pStartupServerEventHook)
     {
         g_pStartupServerEventHook->Disable();
-        hooksmanager->DestroyVFunctionHook(g_pStartupServerEventHook);
+        g_pHooksManager->DestroyVFunctionHook(g_pStartupServerEventHook);
         g_pStartupServerEventHook = nullptr;
     }
 
     if (g_GameFrameHookEventManager)
     {
         g_GameFrameHookEventManager->Disable();
-        hooksmanager->DestroyFunctionHook(g_GameFrameHookEventManager);
+        g_pHooksManager->DestroyFunctionHook(g_GameFrameHookEventManager);
         g_GameFrameHookEventManager = nullptr;
     }
 
     if (g_pFireEventHook)
     {
         g_pFireEventHook->Disable();
-        hooksmanager->DestroyVFunctionHook(g_pFireEventHook);
+        g_pHooksManager->DestroyVFunctionHook(g_pFireEventHook);
         g_pFireEventHook = nullptr;
     }
 }
@@ -172,8 +166,7 @@ bool FireEventHook(IGameEventManager2* _this, IGameEvent* event, bool bDontBroad
     {
         int userid = dupEvent->GetInt("userid", -1);
         if (userid != -1) {
-            static auto playerManager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
-            auto player = playerManager->GetPlayer(userid);
+            auto player = g_pPlayerManager->GetPlayer(userid);
             if (player) player->SetFirstSpawn(false);
         }
     }
@@ -196,9 +189,7 @@ bool FireEventHook(IGameEventManager2* _this, IGameEvent* event, bool bDontBroad
 void StartupServerEventHook(void* _this, const GameSessionConfiguration_t& config, ISource2WorldSession* a, const char* b)
 {
     reinterpret_cast<decltype(&StartupServerEventHook)>(g_pStartupServerEventHook->GetOriginal())(_this, config, a, b);
-
-    auto evmanager = g_ifaceService.FetchInterface<IEventManager>(GAMEEVENTMANAGER_INTERFACE_VERSION);
-    evmanager->RegisterGameEventsListeners(true);
+    g_pGameEventManager->RegisterGameEventsListeners(true);
 }
 
 void CEventManager::RegisterGameEventsListeners(bool shouldRegister)
@@ -228,8 +219,7 @@ void CEventManager::RegisterGameEventListener(std::string event_name)
         if (!g_gameEventManager->FindListener(this, event_name.c_str()))
             g_gameEventManager->AddListener(this, event_name.c_str(), true);
 
-        auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
-        logger->Debug("Game Events", fmt::format("Registered listener for event '{}'.\n", event_name));
+        g_pLogger->Debug("Game Events", fmt::format("Registered listener for event '{}'.\n", event_name));
     }
 }
 

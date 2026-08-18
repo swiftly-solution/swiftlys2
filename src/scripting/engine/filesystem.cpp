@@ -17,21 +17,17 @@
  ************************************************************************************************/
 
 #include <scripting/scripting.h>
-#include <api/interfaces/manager.h>
-
-#include <public/filesystem.h>
+#include <api/interfaces/interfaces.h>
 
 static char* Bridge_FileSystem_CopyString(const std::string& value, int* size)
 {
-    static auto memory = g_ifaceService.FetchInterface<IMemoryAllocator>(MEMORYALLOCATOR_INTERFACE_VERSION);
-
     int outSize = static_cast<int>(value.size());
     *size = outSize;
 
-    char* out = (char*)memory->Alloc(outSize + 1);
+    char* out = (char*)g_pMemoryAllocator->Alloc(outSize + 1);
     if (outSize > 0)
     {
-        memory->Copy(out, (void*)value.data(), outSize);
+        g_pMemoryAllocator->Copy(out, (void*)value.data(), outSize);
     }
 
     out[outSize] = '\0';
@@ -40,10 +36,8 @@ static char* Bridge_FileSystem_CopyString(const std::string& value, int* size)
 
 char* Bridge_FileSystem_GetSearchPath(int* size, char* pathId, int32_t searchPathType, int32_t searchPathsToGet)
 {
-    static auto filesystem = g_ifaceService.FetchInterface<IFileSystem>(FILESYSTEM_INTERFACE_VERSION);
-
     CBufferStringGrowable<MAX_PATH> searchPath;
-    filesystem->GetSearchPath(pathId, (GetSearchPathTypes_t)searchPathType, searchPath, searchPathsToGet);
+    g_pGameFileSystem->GetSearchPath(pathId, (GetSearchPathTypes_t)searchPathType, searchPath, searchPathsToGet);
 
     std::string result = searchPath.Get();
     return Bridge_FileSystem_CopyString(result, size);
@@ -51,46 +45,34 @@ char* Bridge_FileSystem_GetSearchPath(int* size, char* pathId, int32_t searchPat
 
 bool Bridge_FileSystem_FileExists(char* fileName, char* pathId)
 {
-    static auto filesystem = g_ifaceService.FetchInterface<IFileSystem>(FILESYSTEM_INTERFACE_VERSION);
-
-    return filesystem->FileExists(fileName, pathId);
+    return g_pGameFileSystem->FileExists(fileName, pathId);
 }
 
 void Bridge_FileSystem_AddSearchPath(char* path, char* pathId, int32_t searchPathAdd, int32_t searchPathPriority)
 {
-    static auto filesystem = g_ifaceService.FetchInterface<IFileSystem>(FILESYSTEM_INTERFACE_VERSION);
-
-    filesystem->AddSearchPath(path, pathId, (SearchPathAdd_t)searchPathAdd, (SearchPathPriority_t)searchPathPriority, 0);
+    g_pGameFileSystem->AddSearchPath(path, pathId, (SearchPathAdd_t)searchPathAdd, (SearchPathPriority_t)searchPathPriority, 0);
 }
 
 bool Bridge_FileSystem_RemoveSearchPath(char* path, char* pathId)
 {
-    static auto filesystem = g_ifaceService.FetchInterface<IFileSystem>(FILESYSTEM_INTERFACE_VERSION);
-
-    return filesystem->RemoveSearchPath(path, pathId);
+    return g_pGameFileSystem->RemoveSearchPath(path, pathId);
 }
 
 bool Bridge_FileSystem_IsDirectory(char* path, char* pathId)
 {
-    static auto filesystem = g_ifaceService.FetchInterface<IFileSystem>(FILESYSTEM_INTERFACE_VERSION);
-
-    return filesystem->IsDirectory(path, pathId);
+    return g_pGameFileSystem->IsDirectory(path, pathId);
 }
 
 void Bridge_FileSystem_PrintSearchPaths()
 {
-    static auto filesystem = g_ifaceService.FetchInterface<IFileSystem>(FILESYSTEM_INTERFACE_VERSION);
-
-    filesystem->PrintSearchPaths();
+    g_pGameFileSystem->PrintSearchPaths();
 }
 
 char* Bridge_FileSystem_ReadFile(int* size, char* fileName, char* pathId)
 {
-    static auto filesystem = g_ifaceService.FetchInterface<IFileSystem>(FILESYSTEM_INTERFACE_VERSION);
-
     CUtlBuffer buf;
 
-    int fileSize = filesystem->Size(fileName, pathId);
+    int fileSize = g_pGameFileSystem->Size(fileName, pathId);
     if (fileSize <= 0)
     {
         return Bridge_FileSystem_CopyString("", size);
@@ -98,7 +80,7 @@ char* Bridge_FileSystem_ReadFile(int* size, char* fileName, char* pathId)
 
     buf.EnsureCapacity(fileSize);
 
-    bool success = filesystem->ReadFile(fileName, pathId, buf, fileSize);
+    bool success = g_pGameFileSystem->ReadFile(fileName, pathId, buf, fileSize);
 
     if (!success)
     {
@@ -111,47 +93,35 @@ char* Bridge_FileSystem_ReadFile(int* size, char* fileName, char* pathId)
 
 bool Bridge_FileSystem_WriteFile(char* fileName, char* pathId, char* inputBuffer)
 {
-    static auto filesystem = g_ifaceService.FetchInterface<IFileSystem>(FILESYSTEM_INTERFACE_VERSION);
-
     CUtlBuffer buf;
     buf.Put(inputBuffer, strlen(inputBuffer) + 1);
 
-    return filesystem->WriteFile(fileName, pathId, buf);
+    return g_pGameFileSystem->WriteFile(fileName, pathId, buf);
 }
 
 uint32_t Bridge_FileSystem_GetFileSize(char* fileName, char* pathId)
 {
-    static auto filesystem = g_ifaceService.FetchInterface<IFileSystem>(FILESYSTEM_INTERFACE_VERSION);
-
-    return filesystem->Size(fileName, pathId);
+    return g_pGameFileSystem->Size(fileName, pathId);
 }
 
 bool Bridge_FileSystem_PrecacheFile(char* fileName, char* pathId)
 {
-    static auto filesystem = g_ifaceService.FetchInterface<IFileSystem>(FILESYSTEM_INTERFACE_VERSION);
-
-    return filesystem->Precache(fileName, pathId);
+    return g_pGameFileSystem->Precache(fileName, pathId);
 }
 
 bool Bridge_FileSystem_IsFileWritable(char* fileName, char* pathId)
 {
-    static auto filesystem = g_ifaceService.FetchInterface<IFileSystem>(FILESYSTEM_INTERFACE_VERSION);
-
-    return filesystem->IsFileWritable(fileName, pathId);
+    return g_pGameFileSystem->IsFileWritable(fileName, pathId);
 }
 
 bool Bridge_FileSystem_SetFileWritable(char* fileName, char* pathId, bool writable)
 {
-    static auto filesystem = g_ifaceService.FetchInterface<IFileSystem>(FILESYSTEM_INTERFACE_VERSION);
-
-    return filesystem->SetFileWritable(fileName, writable, pathId);
+    return g_pGameFileSystem->SetFileWritable(fileName, writable, pathId);
 }
 
 void Bridge_FileSystem_FindFileAbsoluteList(void* outVector, const char* wildcard, const char* pathId)
 {
-    static auto filesystem = g_ifaceService.FetchInterface<IFileSystem>(FILESYSTEM_INTERFACE_VERSION);
-
-    filesystem->FindFileAbsoluteList(*reinterpret_cast<CUtlVector<CUtlString>*>(outVector), wildcard, pathId);
+    g_pGameFileSystem->FindFileAbsoluteList(*reinterpret_cast<CUtlVector<CUtlString>*>(outVector), wildcard, pathId);
 }
 
 DEFINE_NATIVE("FileSystem.GetSearchPath", Bridge_FileSystem_GetSearchPath);

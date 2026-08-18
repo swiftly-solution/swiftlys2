@@ -16,32 +16,28 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ************************************************************************************************/
 
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 #include <scripting/scripting.h>
 
 static char* Bridge_Sounds_CopyString(const std::string& value, int* size)
 {
-    static auto memory = g_ifaceService.FetchInterface<IMemoryAllocator>(MEMORYALLOCATOR_INTERFACE_VERSION);
-
     int outSize = static_cast<int>(value.size());
     *size = outSize;
 
-    char* out = (char*)memory->Alloc(outSize + 1);
-    memory->Copy(out, (void*)value.c_str(), outSize);
+    char* out = (char*)g_pMemoryAllocator->Alloc(outSize + 1);
+    g_pMemoryAllocator->Copy(out, (void*)value.c_str(), outSize);
     out[outSize] = '\0';
     return out;
 }
 
 void* Bridge_Sounds_CreateSoundEvent()
 {
-    auto soundsmanager = g_ifaceService.FetchInterface<ISoundEventManager>(SOUNDEVENTMANAGER_INTERFACE_VERSION);
-    return soundsmanager->CreateSoundEvent();
+    return g_pSoundEventManager->CreateSoundEvent();
 }
 
 void Bridge_Sounds_DestroySoundEvent(void* event)
 {
-    auto soundsmanager = g_ifaceService.FetchInterface<ISoundEventManager>(SOUNDEVENTMANAGER_INTERFACE_VERSION);
-    soundsmanager->DestroySoundEvent((ISoundEvent*)event);
+    g_pSoundEventManager->DestroySoundEvent((ISoundEvent*)event);
 }
 
 uint32_t Bridge_Sounds_Emit(void* event)

@@ -16,34 +16,30 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ************************************************************************************************/
 
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 #include <networkstringtabledefs.h>
 #include <scripting/scripting.h>
 #include <sstream>
 
 static char* Bridge_StringTable_CopyString(const std::string& value, int* size)
 {
-    static auto memory = g_ifaceService.FetchInterface<IMemoryAllocator>(MEMORYALLOCATOR_INTERFACE_VERSION);
-
     int outSize = static_cast<int>(value.size());
     *size = outSize;
 
-    char* out = (char*)memory->Alloc(outSize + 1);
-    memory->Copy(out, (void*)value.c_str(), outSize);
+    char* out = (char*)g_pMemoryAllocator->Alloc(outSize + 1);
+    g_pMemoryAllocator->Copy(out, (void*)value.c_str(), outSize);
     out[outSize] = '\0';
     return out;
 }
 
 INetworkStringTable* Bridge_StringTable_ContainerFindTable(const char* tableName)
 {
-    static auto container = g_ifaceService.FetchInterface<INetworkStringTableContainer>(SOURCE2ENGINETOSERVERSTRINGTABLE_INTERFACE_VERSION);
-    return container->FindTable(tableName);
+    return g_pGameNetworkStringTableContainer->FindTable(tableName);
 }
 
 INetworkStringTable* Bridge_StringTable_ContainerGetTableById(TABLEID tableId)
 {
-    static auto container = g_ifaceService.FetchInterface<INetworkStringTableContainer>(SOURCE2ENGINETOSERVERSTRINGTABLE_INTERFACE_VERSION);
-    return container->GetTable(tableId);
+    return g_pGameNetworkStringTableContainer->GetTable(tableId);
 }
 
 int Bridge_StringTable_GetTableId(INetworkStringTable* table)
@@ -126,7 +122,8 @@ int Bridge_StringTable_Serialize(uint8_t* out, INetworkStringTable* table, int s
         buf.WriteOneBit(1);
         buf.WriteOneBit(0);
         buf.WriteString(keyName);
-    } else {
+    }
+    else {
         buf.WriteOneBit(0);
     }
 
@@ -134,12 +131,13 @@ int Bridge_StringTable_Serialize(uint8_t* out, INetworkStringTable* table, int s
         buf.WriteOneBit(1);
         buf.WriteUBitVar(userDataSize);
         buf.WriteBytes(userData, userDataSize);
-    } else {
+    }
+    else {
         buf.WriteOneBit(0);
     }
 
     if (buf.IsOverflowed()) return maxSize;
-    
+
     return buf.GetNumBytesWritten();
 }
 

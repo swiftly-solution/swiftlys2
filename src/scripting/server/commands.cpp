@@ -16,31 +16,19 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ************************************************************************************************/
 
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 #include <scripting/scripting.h>
 
 #include <api/shared/string.h>
 
 uint64_t Bridge_Commands_RegisterCommand(const char* commandName, bool registerRaw, const char* helpText)
 {
-    auto servercommands = g_ifaceService.FetchInterface<IServerCommands>(SERVERCOMMANDS_INTERFACE_VERSION);
-    if (!servercommands)
-    {
-        return 0;
-    }
-
-    return servercommands->RegisterCommand(commandName, registerRaw, helpText);
+    return g_pServerCommands->RegisterCommand(commandName, registerRaw, helpText);
 }
 
 void Bridge_Commands_SetCommandHandler(void* callback)
 {
-    auto servercommands = g_ifaceService.FetchInterface<IServerCommands>(SERVERCOMMANDS_INTERFACE_VERSION);
-    if (!servercommands)
-    {
-        return;
-    }
-
-    servercommands->SetCommandHandler(
+    g_pServerCommands->SetCommandHandler(
         [callback](std::string commandName, int playerid, std::vector<std::string> args, std::string originalCommandName, std::string selectedPrefix, bool isSilentCommand) -> void
         {
             static std::string cmd_name;
@@ -61,46 +49,34 @@ void Bridge_Commands_SetCommandHandler(void* callback)
 
 void Bridge_Commands_UnregisterCommand(uint64_t callbackID)
 {
-    auto servercommands = g_ifaceService.FetchInterface<IServerCommands>(SERVERCOMMANDS_INTERFACE_VERSION);
-    servercommands->UnregisterCommand(callbackID);
+    g_pServerCommands->UnregisterCommand(callbackID);
 }
 
 uint8_t Bridge_Commands_IsCommandRegistered(const char* commandName)
 {
-    auto servercommands = g_ifaceService.FetchInterface<IServerCommands>(SERVERCOMMANDS_INTERFACE_VERSION);
-    return servercommands->IsCommandRegistered(commandName) ? 1 : 0;
+    return g_pServerCommands->IsCommandRegistered(commandName) ? 1 : 0;
 }
 
 uint64_t Bridge_Commands_RegisterAlias(const char* alias, const char* command, bool registerRaw)
 {
-    auto servercommands = g_ifaceService.FetchInterface<IServerCommands>(SERVERCOMMANDS_INTERFACE_VERSION);
-    return servercommands->RegisterAlias(alias, command, registerRaw);
+    return g_pServerCommands->RegisterAlias(alias, command, registerRaw);
 }
 
 void Bridge_Commands_UnregisterAlias(uint64_t callbackID)
 {
-    auto servercommands = g_ifaceService.FetchInterface<IServerCommands>(SERVERCOMMANDS_INTERFACE_VERSION);
-    servercommands->UnregisterAlias(callbackID);
+    g_pServerCommands->UnregisterAlias(callbackID);
 }
 
 void Bridge_Commands_SetClientCommandHandler(void* callback)
 {
-    auto servercommands = g_ifaceService.FetchInterface<IServerCommands>(SERVERCOMMANDS_INTERFACE_VERSION);
-    if (!servercommands)
-        return;
-
-    servercommands->SetClientCommandHandler([callback](int playerid, const std::string& command) -> int {
+    g_pServerCommands->SetClientCommandHandler([callback](int playerid, const std::string& command) -> int {
         return reinterpret_cast<int (*)(int, const char*)>(callback)(playerid, command.c_str());
         });
 }
 
 void Bridge_Commands_SetClientChatHandler(void* callback)
 {
-    auto servercommands = g_ifaceService.FetchInterface<IServerCommands>(SERVERCOMMANDS_INTERFACE_VERSION);
-    if (!servercommands)
-        return;
-
-    servercommands->SetClientChatHandler([callback](int playerid, const std::string& text, bool teamonly) -> int {
+    g_pServerCommands->SetClientChatHandler([callback](int playerid, const std::string& text, bool teamonly) -> int {
         return reinterpret_cast<int (*)(int, const char*, uint8_t)>(callback)(playerid, text.c_str(), teamonly ? 1 : 0);
         });
 }

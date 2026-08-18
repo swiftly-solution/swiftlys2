@@ -18,7 +18,7 @@
 
 #include "translations.h"
 
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 
 #include <api/shared/files.h>
 #include <api/shared/jsonc.h>
@@ -64,17 +64,13 @@ static std::map<std::string, std::string> l_mLanguages = {
 
 void CTranslations::Initialize()
 {
-    auto cvarmanager = g_ifaceService.FetchInterface<IConvarManager>(CONVARMANAGER_INTERFACE_VERSION);
-
-    cvarmanager->AddQueryClientCvarCallback([](int playerid, std::string cvar_name, std::string cvar_value) {
+    g_pConvarManager->AddQueryClientCvarCallback([](int playerid, std::string cvar_name, std::string cvar_value) {
         if (cvar_name != "cl_language") return;
 
-        auto configuration = g_ifaceService.FetchInterface<IConfiguration>(CONFIGURATION_INTERFACE_VERSION);
-        auto playermanager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
-        auto player = playermanager->GetPlayer(playerid);
+        auto player = g_pPlayerManager->GetPlayer(playerid);
         if (!player) return;
 
         auto it = l_mLanguages.find(cvar_value);
-        player->SetLanguage(it != l_mLanguages.end() ? it->second : std::get<std::string>(configuration->GetValue("core.Language")));
+        player->SetLanguage(it != l_mLanguages.end() ? it->second : std::get<std::string>(g_pConfiguration->GetValue("core.Language")));
         });
 }

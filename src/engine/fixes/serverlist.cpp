@@ -16,7 +16,7 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ************************************************************************************************/
 
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 #include <core/entrypoint.h>
 
 #include <public/tier0/platform.h>
@@ -33,15 +33,11 @@ void GameFrame(void* _this, bool simulate, bool first, bool last);
 
 void ServerListFix::Start()
 {
-    auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
-    auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-
     void* servervtable = nullptr;
     s2binlib_find_vtable("server", "CSource2Server", &servervtable);
 
-    g_GameFrameHook = hooksmanager->CreateVFunctionHook();
-
-    g_GameFrameHook->SetHookFunction(servervtable, gamedata->GetOffsets()->Fetch("IServerGameDLL::GameFrame"), reinterpret_cast<void*>(GameFrame), true);
+    g_GameFrameHook = g_pHooksManager->CreateVFunctionHook();
+    g_GameFrameHook->SetHookFunction(servervtable, g_pGameDataManager->GetOffsets()->Fetch("IServerGameDLL::GameFrame"), reinterpret_cast<void*>(GameFrame), true);
     g_GameFrameHook->Enable();
 }
 
@@ -50,8 +46,7 @@ void ServerListFix::Stop()
     if (g_GameFrameHook)
     {
         g_GameFrameHook->Disable();
-        static auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
-        hooksmanager->DestroyVFunctionHook(g_GameFrameHook);
+        g_pHooksManager->DestroyVFunctionHook(g_GameFrameHook);
     }
 }
 
@@ -65,25 +60,21 @@ void GameFrame(void* _this, bool simulate, bool first, bool last)
     {
         l_NextUpdate = curtime + 5.0;
 
-        static auto engine = g_ifaceService.FetchInterface<IVEngineServer2>(INTERFACEVERSION_VENGINESERVER);
-        static auto gameclients = g_ifaceService.FetchInterface<ISource2GameClients>(INTERFACEVERSION_SERVERGAMECLIENTS);
+        auto steamGameServer = SteamGameServer();
+        if (!steamGameServer) return;
 
-        static auto playermanager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
-        static auto schema = g_ifaceService.FetchInterface<ISDKSchema>(SDKSCHEMA_INTERFACE_VERSION);
-
-        for (int i = 0; i < playermanager->GetPlayerCap(); i++)
+        for (int i = 0; i < g_pPlayerManager->GetPlayerCap(); i++)
         {
-            auto steamid = engine->GetClientSteamID(i);
+            auto steamid = g_pGameEngine->GetClientSteamID(i);
             if (!steamid) continue;
 
-            auto player = playermanager->GetPlayer(i);
+            auto player = g_pPlayerManager->GetPlayer(i);
             if (!player) continue;
 
             auto controller = player->GetController();
             if (!controller) continue;
 
-            if (SteamGameServer())
-                SteamGameServer()->BUpdateUserData(*steamid, (const char*)(schema->GetPropPtr(controller, 4141622183986322747)), gameclients->GetPlayerScore(i)); // CBasePlayerController::PlayerName
+            steamGameServer->BUpdateUserData(*steamid, (const char*)(g_pSDKSchema->GetPropPtr(controller, 4141622183986322747)), g_pGameClientsService->GetPlayerScore(i)); // CBasePlayerController::PlayerName
         }
     }
 }

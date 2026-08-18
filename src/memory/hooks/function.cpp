@@ -18,7 +18,7 @@
 
 #include "function.h"
 
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 
 void FunctionHook::Enable()
 {
@@ -46,8 +46,7 @@ bool FunctionHook::IsEnabled()
 
 void FunctionHook::SetHookFunction(const std::string& functionSignature, void* callback)
 {
-    static auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-    void* functionAddress = gamedata->GetSignatures()->Fetch(functionSignature);
+    void* functionAddress = g_pGameDataManager->GetSignatures()->Fetch(functionSignature);
     if (!functionAddress) return;
 
     m_oHook = safetyhook::create_inline(functionAddress, callback, safetyhook::InlineHook::Flags::StartDisabled);

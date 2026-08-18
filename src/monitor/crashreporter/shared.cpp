@@ -21,7 +21,7 @@
 #undef PAGE_SIZE
 #endif
 
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 #include <api/shared/files.h>
 #include <api/shared/plat.h>
 #include <api/shared/string.h>
@@ -45,13 +45,11 @@ google_breakpad::ExceptionHandler* exceptionHandler = nullptr;
 
 void CrashReporter::Init()
 {
-    auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
-
     if (!Files::ExistsPath(g_SwiftlyCore.GetCorePath() + "dumps"))
     {
         if (!Files::CreateDir(g_SwiftlyCore.GetCorePath() + "dumps"))
         {
-            logger->Error("Crash Listener", "Couldn't create dumps folder.\n");
+            g_pLogger->Error("Crash Listener", "Couldn't create dumps folder.\n");
             return;
         }
     }
@@ -60,7 +58,7 @@ void CrashReporter::Init()
     {
         if (!Files::CreateDir(g_SwiftlyCore.GetCorePath() + "dumps/crashreport"))
         {
-            logger->Error("Crash Listener", "Couldn't create dumps crashreport folder.\n");
+            g_pLogger->Error("Crash Listener", "Couldn't create dumps crashreport folder.\n");
             return;
         }
     }
@@ -69,7 +67,7 @@ void CrashReporter::Init()
     {
         if (!Files::CreateDir(g_SwiftlyCore.GetCorePath() + "dumps/prevention"))
         {
-            logger->Error("Crash Listener", "Couldn't create dumps prevention folder.\n");
+            g_pLogger->Error("Crash Listener", "Couldn't create dumps prevention folder.\n");
             return;
         }
     }
@@ -111,7 +109,7 @@ void CrashReporter::Init()
         if (dmpRelPath.empty())
             continue;
 
-        logger->Info("Crash Reporter", fmt::format("Recovering crashinfo.json for: {}\n", dir));
+        g_pLogger->Info("Crash Reporter", fmt::format("Recovering crashinfo.json for: {}\n", dir));
         ParseAndWriteCrashInfo(Files::GeneratePath(dmpRelPath), dir + "/crashinfo.json");
     }
 
@@ -120,7 +118,7 @@ void CrashReporter::Init()
 
     if (!Files::CreateDir(g_relativeDumpPath))
     {
-        logger->Error("Crash Listener", "Couldn't create dump directory.\n");
+        g_pLogger->Error("Crash Listener", "Couldn't create dump directory.\n");
         return;
     }
 
@@ -145,8 +143,7 @@ void CrashReporter::Shutdown()
 
 void CrashReporter::EnableDotnetCrashTracer(int level)
 {
-    auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
-    logger->Warning("Crash Reporter", fmt::format("Dotnet crash tracer level set to: {}\n", level));
+    g_pLogger->Warning("Crash Reporter", fmt::format("Dotnet crash tracer level set to: {}\n", level));
 
     m_tracerLevel = level;
     if (level <= 0)
@@ -167,9 +164,7 @@ int CrashReporter::GetDotnetCrashTracerLevel()
 
 void CrashReporter::ReportPreventionIncident(std::string category, std::string reason)
 {
-    static auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
-
-    logger->Warning("Crash Prevention", "A crash has been prevented by Swiftly Core and the details will be listed below:\n");
+    g_pLogger->Warning("Crash Prevention", "A crash has been prevented by Swiftly Core and the details will be listed below:\n");
 
     TextTable backtraceTable('-', '|', '+');
 
@@ -190,7 +185,7 @@ void CrashReporter::ReportPreventionIncident(std::string category, std::string r
     }
 
     Files::Append(file_path, fmt::format("================================\nCategory: {}\nDetails: {}", category, reason), false);
-    logger->Warning("Crash Prevention", fmt::format("A log file has been created at: {}\n", file_path));
+    g_pLogger->Warning("Crash Prevention", fmt::format("A log file has been created at: {}\n", file_path));
 }
 
 #ifndef _WIN32

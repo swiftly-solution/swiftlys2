@@ -21,7 +21,7 @@
 #include <s2binlib/s2binlib.h>
 
 #include "preload.h"
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 #include <fmt/format.h>
 
 IFunctionHook* g_pPreloadDLLHook = nullptr;
@@ -45,11 +45,7 @@ void __fastcall PreloadDLLHook(HMODULE hModule)
             static const std::regex skipPattern(R"([/\\](bin[/\\]managed|resources[/\\]exports)[/\\])", std::regex_constants::icase);
             if (std::regex_search(modulePath, skipPattern))
             {
-                auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
-                if (logger)
-                {
-                    logger->Info("PreloadDLL", fmt::format("Skipping DLL: {}\n", modulePath));
-                }
+                g_pLogger->Info("PreloadDLL", fmt::format("Skipping DLL: {}\n", modulePath));
                 return;
             }
         }
@@ -66,8 +62,7 @@ void PreloadDLLFix::Start()
     s2binlib_find_func_with_string("engine2", "Could not PreloadLibrary %s - error %d: %s", &preloadDLLFunction);
     if (!preloadDLLFunction) return;
 
-    auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
-    g_pPreloadDLLHook = hooksmanager->CreateFunctionHook();
+    g_pPreloadDLLHook = g_pHooksManager->CreateFunctionHook();
     g_pPreloadDLLHook->SetHookFunction(preloadDLLFunction, reinterpret_cast<void*>(PreloadDLLHook));
     g_pPreloadDLLHook->Enable();
 #endif
@@ -78,10 +73,8 @@ void PreloadDLLFix::Stop()
 #ifdef _WIN32
     if (!g_pPreloadDLLHook) return;
 
-    auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
-
     g_pPreloadDLLHook->Disable();
-    hooksmanager->DestroyFunctionHook(g_pPreloadDLLHook);
+    g_pHooksManager->DestroyFunctionHook(g_pPreloadDLLHook);
     g_pPreloadDLLHook = nullptr;
 #endif
 }

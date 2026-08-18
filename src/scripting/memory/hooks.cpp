@@ -16,44 +16,38 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ************************************************************************************************/
 
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 #include <cstdio>
 #include <scripting/scripting.h>
 
 void* Bridge_Hooks_AllocateHook()
 {
-    auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
-    return hooksmanager->CreateFunctionHook();
+    return g_pHooksManager->CreateFunctionHook();
 }
 
 void* Bridge_Hooks_AllocateVHook()
 {
-    auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
-    return hooksmanager->CreateVFunctionHook();
+    return g_pHooksManager->CreateVFunctionHook();
 }
 
 void* Bridge_Hooks_AllocateMHook()
 {
-    auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
-    return hooksmanager->CreateMFunctionHook();
+    return g_pHooksManager->CreateMFunctionHook();
 }
 
 void Bridge_Hooks_DeallocateHook(void* hook)
 {
-    auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
-    hooksmanager->DestroyFunctionHook((IFunctionHook*)hook);
+    g_pHooksManager->DestroyFunctionHook((IFunctionHook*)hook);
 }
 
 void Bridge_Hooks_DeallocateVHook(void* hook)
 {
-    auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
-    hooksmanager->DestroyVFunctionHook((IVFunctionHook*)hook);
+    g_pHooksManager->DestroyVFunctionHook((IVFunctionHook*)hook);
 }
 
 void Bridge_Hooks_DeallocateMHook(void* hook)
 {
-    auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
-    hooksmanager->DestroyMFunctionHook((IMFunctionHook*)hook);
+    g_pHooksManager->DestroyMFunctionHook((IMFunctionHook*)hook);
 }
 
 void Bridge_Hooks_SetHook(void* hook, void* func, void* callback)

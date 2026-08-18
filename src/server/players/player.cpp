@@ -112,9 +112,9 @@ uint64_t sessionId = 1000;
 
 CServerSideClient* GetServerSideClient(int playerid)
 {
-    static auto offset = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION)->GetOffsets()->Fetch("CNetworkGameServer::m_Clients");
+    static auto offset = g_pGameDataManager->GetOffsets()->Fetch("CNetworkGameServer::m_Clients");
 
-    auto gameserver = g_ifaceService.FetchInterface<INetworkServerService>(NETWORKSERVERSERVICE_INTERFACE_VERSION)->GetIGameServer();
+    auto gameserver = g_pGameNetworkServerService->GetIGameServer();
 
     auto clients = ((CUtlVector<CServerSideClient*>*)((uintptr_t)gameserver + offset));
     return clients->Element(playerid);
@@ -136,13 +136,11 @@ void CPlayer::Shutdown()
 
     if (centerMessageEvent)
     {
-        static auto eventmanager = g_ifaceService.FetchInterface<IEventManager>(GAMEEVENTMANAGER_INTERFACE_VERSION);
-        eventmanager->GetGameEventManager()->FreeEvent(centerMessageEvent);
+        g_pGameEventManager->GetGameEventManager()->FreeEvent(centerMessageEvent);
         centerMessageEvent = nullptr;
     }
 }
 
-extern INetworkMessages* networkMessages;
 extern bool bypassPostEventAbstractHook;
 
 void CPlayer::SendMsg(MessageType type, const std::string& message, int duration = 5000)
@@ -173,15 +171,12 @@ void CPlayer::SendMsg(MessageType type, const std::string& message, int duration
                 msg += "\x01";
 
                 bool startsWithColor = (msg.at(0) == '[');
-                auto schema = g_ifaceService.FetchInterface<ISDKSchema>(SDKSCHEMA_INTERFACE_VERSION);
-                if (!schema)
-                    return;
 
                 auto controller = GetController();
                 if (!controller)
                     return;
 
-                msg = ProcessColor(message, *(int*)(schema->GetPropPtr(controller, CBaseEntity_m_iTeamNum)));
+                msg = ProcessColor(message, *(int*)(g_pSDKSchema->GetPropPtr(controller, CBaseEntity_m_iTeamNum)));
 
                 if (startsWithColor)
                     msg = " " + msg;
@@ -189,11 +184,7 @@ void CPlayer::SendMsg(MessageType type, const std::string& message, int duration
 
             auto splitMessage = explode(msg, "[newline]");
 
-            auto gameEventSystem = g_ifaceService.FetchInterface<IGameEventSystem>(GAMEEVENTSYSTEM_INTERFACE_VERSION);
-            if (!gameEventSystem)
-                return;
-
-            auto netmsg = networkMessages->FindNetworkMessagePartial("TextMsg");
+            auto netmsg = g_pGameNetworkMessages->FindNetworkMessagePartial("TextMsg");
 
             for (auto& part : splitMessage)
             {
@@ -205,7 +196,7 @@ void CPlayer::SendMsg(MessageType type, const std::string& message, int duration
                 bypassPostEventAbstractHook = true;
 
                 CSingleRecipientFilter filter(m_iPlayerId);
-                gameEventSystem->PostEventAbstract(-1, false, &filter, netmsg, pmsg, 0);
+                g_pGameEventSystem->PostEventAbstract(-1, false, &filter, netmsg, pmsg, 0);
 
                 bypassPostEventAbstractHook = false;
 
@@ -214,11 +205,7 @@ void CPlayer::SendMsg(MessageType type, const std::string& message, int duration
             }
         }
         else {
-            auto gameEventSystem = g_ifaceService.FetchInterface<IGameEventSystem>(GAMEEVENTSYSTEM_INTERFACE_VERSION);
-            if (!gameEventSystem)
-                return;
-
-            auto netmsg = networkMessages->FindNetworkMessagePartial("TextMsg");
+            auto netmsg = g_pGameNetworkMessages->FindNetworkMessagePartial("TextMsg");
             auto pmsg = netmsg->AllocateMessage()->ToPB<CUserMessageTextMsg>();
 
             pmsg->set_dest((int)type);
@@ -227,7 +214,7 @@ void CPlayer::SendMsg(MessageType type, const std::string& message, int duration
             bypassPostEventAbstractHook = true;
 
             CSingleRecipientFilter filter(m_iPlayerId);
-            gameEventSystem->PostEventAbstract(-1, false, &filter, netmsg, pmsg, 0);
+            g_pGameEventSystem->PostEventAbstract(-1, false, &filter, netmsg, pmsg, 0);
 
             bypassPostEventAbstractHook = false;
 
@@ -272,11 +259,7 @@ uint64_t CPlayer::GetUnauthorizedSteamID()
     if (IsFakeClient())
         return 0;
 
-    auto engine = g_ifaceService.FetchInterface<IVEngineServer2>(INTERFACEVERSION_VENGINESERVER);
-    if (!engine)
-        return m_uUnauthorizedSteamID;
-
-    auto steamid = engine->GetClientSteamID(m_iPlayerId);
+    auto steamid = g_pGameEngine->GetClientSteamID(m_iPlayerId);
     if (!steamid)
         return m_uUnauthorizedSteamID;
 
@@ -288,18 +271,10 @@ uint64_t CPlayer::GetSteamID()
     if (IsFakeClient())
         return 0;
 
-    auto config = g_ifaceService.FetchInterface<IConfiguration>(CONFIGURATION_INTERFACE_VERSION);
-    if (!config)
-        return 0;
-
-    auto s = std::get_if<std::string>(&config->GetValue("core.SteamAuth.Mode"));
+    auto s = std::get_if<std::string>(&g_pConfiguration->GetValue("core.SteamAuth.Mode"));
     if (m_bAuthorized)
     {
-        auto engine = g_ifaceService.FetchInterface<IVEngineServer2>(INTERFACEVERSION_VENGINESERVER);
-        if (!engine)
-            return 0;
-
-        auto steamid = engine->GetClientSteamID(m_iPlayerId);
+        auto steamid = g_pGameEngine->GetClientSteamID(m_iPlayerId);
         if (!steamid)
             return 0;
 
@@ -341,8 +316,7 @@ std::string& CPlayer::GetLanguage()
         return m_sLanguage;
     }
     else {
-        static auto configuration = g_ifaceService.FetchInterface<IConfiguration>(CONFIGURATION_INTERFACE_VERSION);
-        return std::get<std::string>(configuration->GetValue("core.Language"));
+        return std::get<std::string>(g_pConfiguration->GetValue("core.Language"));
     }
 }
 
@@ -354,9 +328,7 @@ void CPlayer::SetLanguage(const std::string& language)
 
 void* CPlayer::GetController()
 {
-    static auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
-
-    auto entitySystem = entsystem->GetEntitySystem();
+    auto entitySystem = g_pEntSystem->GetEntitySystem();
     if (!entitySystem)
         return nullptr;
 
@@ -366,13 +338,11 @@ void* CPlayer::GetController()
 
 void* CPlayer::GetPawn()
 {
-    static auto schema = g_ifaceService.FetchInterface<ISDKSchema>(SDKSCHEMA_INTERFACE_VERSION);
-
     auto controller = GetController();
     if (!controller)
         return nullptr;
 
-    auto pawn = schema->GetPropPtr(controller, CBasePlayerController_m_hPawn);
+    auto pawn = g_pSDKSchema->GetPropPtr(controller, CBasePlayerController_m_hPawn);
     if (!pawn)
         return nullptr;
 
@@ -382,13 +352,11 @@ void* CPlayer::GetPawn()
 
 void* CPlayer::GetPlayerPawn()
 {
-    static auto schema = g_ifaceService.FetchInterface<ISDKSchema>(SDKSCHEMA_INTERFACE_VERSION);
-
     auto controller = GetController();
     if (!controller)
         return nullptr;
 
-    auto playerPawn = schema->GetPropPtr(controller, CCSPlayerController_m_hPlayerPawn);
+    auto playerPawn = g_pSDKSchema->GetPropPtr(controller, CCSPlayerController_m_hPlayerPawn);
     if (!playerPawn)
         return nullptr;
 
@@ -418,22 +386,15 @@ uint64_t& CPlayer::GetPressedButtons()
 
 void CPlayer::PerformCommand(const std::string& command)
 {
-    auto engine = g_ifaceService.FetchInterface<IVEngineServer2>(INTERFACEVERSION_VENGINESERVER);
-    if (!engine)
-        return;
-    engine->ClientCommand(CPlayerSlot(m_iPlayerId), command.c_str());
+    g_pGameEngine->ClientCommand(CPlayerSlot(m_iPlayerId), command.c_str());
 }
 
 std::string CPlayer::GetIPAddress()
 {
-    auto engine = g_ifaceService.FetchInterface<IVEngineServer2>(INTERFACEVERSION_VENGINESERVER);
-    if (!engine)
-        return "";
-
     if (m_iPlayerId < 0 || m_iPlayerId > 63)
         return "";
 
-    auto pNetChan = engine->GetPlayerNetInfo(m_iPlayerId);
+    auto pNetChan = g_pGameEngine->GetPlayerNetInfo(m_iPlayerId);
     if (!pNetChan)
         return "";
 
@@ -442,10 +403,7 @@ std::string CPlayer::GetIPAddress()
 
 void CPlayer::Kick(const std::string& sReason, int uReason)
 {
-    auto engine = g_ifaceService.FetchInterface<IVEngineServer2>(INTERFACEVERSION_VENGINESERVER);
-    if (!engine)
-        return;
-    engine->KickClient(m_iPlayerId, sReason.c_str(), uReason);
+    g_pGameEngine->KickClient(m_iPlayerId, sReason.c_str(), uReason);
 }
 
 BlockedTransmitInfo& CPlayer::GetBlockedTransmittingBits()
@@ -468,16 +426,14 @@ typedef IGameEventListener2* (*GetLegacyGameEventListener)(CPlayerSlot slot);
 
 void CPlayer::Think()
 {
-    static auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-    static auto eventmanager = g_ifaceService.FetchInterface<IEventManager>(GAMEEVENTMANAGER_INTERFACE_VERSION);
-    static auto pListenerSig = gamedata->GetSignatures()->Fetch("LegacyGameEventListener");
+    static auto pListenerSig = g_pGameDataManager->GetSignatures()->Fetch("LegacyGameEventListener");
     if (pListenerSig)
     {
         auto listener = reinterpret_cast<GetLegacyGameEventListener>(pListenerSig)(m_iPlayerId);
         if (listener)
         {
             if (!centerMessageEvent)
-                centerMessageEvent = eventmanager->GetGameEventManager()->CreateEvent("show_survival_respawn_status");
+                centerMessageEvent = g_pGameEventManager->GetGameEventManager()->CreateEvent("show_survival_respawn_status");
 
             if (centerMessageEvent)
             {
@@ -510,17 +466,15 @@ void CPlayer::Think()
 
     auto pawn = GetPawn();
 
-    static auto sdkschema = g_ifaceService.FetchInterface<ISDKSchema>(SDKSCHEMA_INTERFACE_VERSION);
-
     if (pawn)
     {
-        auto& movementServices = *(void**)sdkschema->GetPropPtr(pawn, CBasePlayerPawn_m_pMovementServices);
+        auto& movementServices = *(void**)g_pSDKSchema->GetPropPtr(pawn, CBasePlayerPawn_m_pMovementServices);
         if (movementServices)
         {
-            void* buttons = sdkschema->GetPropPtr(movementServices, CPlayer_MovementServices_m_nButtons);
+            void* buttons = g_pSDKSchema->GetPropPtr(movementServices, CPlayer_MovementServices_m_nButtons);
             if (buttons)
             {
-                uint64_t* states = (uint64_t*)sdkschema->GetPropPtr(buttons, CInButtonState_m_pButtonStates);
+                uint64_t* states = (uint64_t*)g_pSDKSchema->GetPropPtr(buttons, CInButtonState_m_pButtonStates);
                 uint64_t& newButtons = states[0];
                 if (newButtons != m_uPressedButtons)
                 {

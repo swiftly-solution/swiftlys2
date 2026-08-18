@@ -25,7 +25,7 @@
 
 #include <core/entrypoint.h>
 
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 #include <api/shared/files.h>
 #include <api/shared/plat.h>
 #include <api/memory/virtual/call.h>    
@@ -103,10 +103,7 @@ private:
 
 void CSDKSchema::Load()
 {
-    auto schemaSystem = g_ifaceService.FetchInterface<CSchemaSystem>(SCHEMASYSTEM_INTERFACE_VERSION);
-    auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
-
-    logger->Info("SDK", "Loading inline network var vtables...\n");
+    g_pLogger->Info("SDK", "Loading inline network var vtables...\n");
 
     for (auto& name : inlineNetworkVarVtbNames) {
         void* vtable;
@@ -118,19 +115,19 @@ void CSDKSchema::Load()
                 inlineNetworkVarVtbs[(uint64_t)vtable] = index;
             }
             else {
-                logger->Error("SDK", fmt::format("Failed to find inline network var vtable state changed: {}, error: {}\n", name.first, name.second, result));
+                g_pLogger->Error("SDK", fmt::format("Failed to find inline network var vtable state changed: {}, error: {}\n", name.first, name.second, result));
             }
         }
         else {
-            logger->Error("SDK", fmt::format("Failed to find inline network var vtable: {}::{}, error: {}\n", name.first, name.second, result));
+            g_pLogger->Error("SDK", fmt::format("Failed to find inline network var vtable: {}::{}, error: {}\n", name.first, name.second, result));
         }
     }
 
-    logger->Info("SDK", fmt::format("Loaded {} inline network var vtables.\n", inlineNetworkVarVtbs.size()));
+    g_pLogger->Info("SDK", fmt::format("Loaded {} inline network var vtables.\n", inlineNetworkVarVtbs.size()));
 
-    logger->Info("SDK", "Loading SDK classes...\n");
+    g_pLogger->Info("SDK", "Loading SDK classes...\n");
 
-    auto gts = schemaSystem->GlobalTypeScope();
+    auto gts = g_pGameSchemaSystem->GlobalTypeScope();
 
     int classes_count = gts->m_DeclaredClasses.m_Map.Count();
 
@@ -139,9 +136,9 @@ void CSDKSchema::Load()
         ReadClasses(gts->m_DeclaredClasses.m_Map.Element(iter));
     }
 
-    for (int i = 0; i < schemaSystem->m_TypeScopes.GetNumStrings(); i++)
+    for (int i = 0; i < g_pGameSchemaSystem->m_TypeScopes.GetNumStrings(); i++)
     {
-        auto ts = schemaSystem->m_TypeScopes[i];
+        auto ts = g_pGameSchemaSystem->m_TypeScopes[i];
 
         classes_count += ts->m_DeclaredClasses.m_Map.Count();
 
@@ -151,9 +148,9 @@ void CSDKSchema::Load()
         }
     }
 
-    logger->Info("SDK", fmt::format("Finished loading {} SDK classes ({} fields).\n", classes_count, offsets.size()));
+    g_pLogger->Info("SDK", fmt::format("Finished loading {} SDK classes ({} fields).\n", classes_count, offsets.size()));
 
-    schemaSystem->PrintSchemaStats("");
+    g_pGameSchemaSystem->PrintSchemaStats("");
 }
 
 void CSDKSchema::SetStateChanged(void* pEntity, const char* sClassName, const char* sMemberName)

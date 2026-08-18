@@ -19,7 +19,7 @@
 #include "string.h"
 #include "plat.h"
 
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 
 #include <map>
 #include <random>
@@ -373,11 +373,9 @@ std::vector<std::string> TokenizeCommand(std::string cmd)
 
 void PrintTextTable(LogType type, std::string category, TextTable table)
 {
-    static auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
-
     std::vector<std::string> rows = explode(TableToString(table), "\n");
     for (int i = 0; i < rows.size() - 1; i++)
-        logger->Log(type, category, rows[i] + "\n");
+        g_pLogger->Log(type, category, rows[i] + "\n");
 }
 
 std::string& rtrim(std::string& s, const char* t)

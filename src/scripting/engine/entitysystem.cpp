@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ************************************************************************************************/
 
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 #include <scripting/scripting.h>
 
 #include <entityhandle.h>
@@ -24,26 +24,22 @@
 
 void Bridge_EntitySystem_Spawn(void* pEntity, void* pKeyValues)
 {
-    static auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
-    entsystem->Spawn(pEntity, pKeyValues);
+    g_pEntSystem->Spawn(pEntity, pKeyValues);
 }
 
 void Bridge_EntitySystem_Despawn(void* pEntity)
 {
-    static auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
-    entsystem->Despawn(pEntity);
+    g_pEntSystem->Despawn(pEntity);
 }
 
 void* Bridge_EntitySystem_GetEntitySystem()
 {
-    static auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
-    return entsystem->GetEntitySystem();
+    return g_pEntSystem->GetEntitySystem();
 }
 
 bool Bridge_EntitySystem_IsValid()
 {
-    static auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
-    return entsystem->GetEntitySystem() != nullptr;
+    return Bridge_EntitySystem_GetEntitySystem() != nullptr;
 }
 
 DEFINE_NATIVE("EntitySystem.Spawn", Bridge_EntitySystem_Spawn);

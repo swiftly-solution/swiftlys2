@@ -18,12 +18,13 @@
 
 #include "vfunction.h"
 
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
+#include <core/entrypoint.h>
 #include <s2binlib/s2binlib.h>
 
 void VFunctionHook::SetHookFunction(const std::string& iface_name, int index, void* callback)
 {
-    static auto iface = g_ifaceService.FetchInterface<void>(iface_name.c_str());
+    static auto iface = g_SwiftlyCore.GetInterface(iface_name);
     if (!iface) return;
 
     void* trampoline_addr = nullptr;

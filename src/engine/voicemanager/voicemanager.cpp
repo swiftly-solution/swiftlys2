@@ -18,7 +18,7 @@
 
 #include "voicemanager.h"
 
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 #include <s2binlib/s2binlib.h>
 
 IVFunctionHook* g_pSetClientListeningHook = nullptr;
@@ -33,60 +33,52 @@ void ClientVoiceHook(void* _this, CPlayerSlot slot);
 
 void CVoiceManager::Initialize()
 {
-    auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
-    auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-
-    g_pSetClientListeningHook = hooksmanager->CreateVFunctionHook();
-    g_pSetClientListeningHook->SetHookFunction(INTERFACEVERSION_VENGINESERVER, gamedata->GetOffsets()->Fetch("IVEngineServer2::SetClientListening"), (void*)SetClientListeningHook);
+    g_pSetClientListeningHook = g_pHooksManager->CreateVFunctionHook();
+    g_pSetClientListeningHook->SetHookFunction(INTERFACEVERSION_VENGINESERVER, g_pGameDataManager->GetOffsets()->Fetch("IVEngineServer2::SetClientListening"), (void*)SetClientListeningHook);
     g_pSetClientListeningHook->Enable();
 
     void* gameclientsvtable = nullptr;
     s2binlib_find_vtable("server", "CSource2GameClients", &gameclientsvtable);
 
-    g_pClientCommandHook = hooksmanager->CreateVFunctionHook();
-    g_pClientCommandHook->SetHookFunction(gameclientsvtable, gamedata->GetOffsets()->Fetch("IServerGameClients::ClientCommand"), (void*)ClientCommandHook, true);
+    g_pClientCommandHook = g_pHooksManager->CreateVFunctionHook();
+    g_pClientCommandHook->SetHookFunction(gameclientsvtable, g_pGameDataManager->GetOffsets()->Fetch("IServerGameClients::ClientCommand"), (void*)ClientCommandHook, true);
     g_pClientCommandHook->Enable();
 
-    g_pClientVoiceHook = hooksmanager->CreateVFunctionHook();
-    g_pClientVoiceHook->SetHookFunction(gameclientsvtable, gamedata->GetOffsets()->Fetch("IServerGameClients::ClientVoice"), (void*)ClientVoiceHook, true);
+    g_pClientVoiceHook = g_pHooksManager->CreateVFunctionHook();
+    g_pClientVoiceHook->SetHookFunction(gameclientsvtable, g_pGameDataManager->GetOffsets()->Fetch("IServerGameClients::ClientVoice"), (void*)ClientVoiceHook, true);
     g_pClientVoiceHook->Enable();
 }
 
 void CVoiceManager::Shutdown()
 {
-    auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
-
     if (g_pSetClientListeningHook)
     {
         g_pSetClientListeningHook->Disable();
-        hooksmanager->DestroyVFunctionHook(g_pSetClientListeningHook);
+        g_pHooksManager->DestroyVFunctionHook(g_pSetClientListeningHook);
         g_pSetClientListeningHook = nullptr;
     }
 
     if (g_pClientCommandHook)
     {
         g_pClientCommandHook->Disable();
-        hooksmanager->DestroyVFunctionHook(g_pClientCommandHook);
+        g_pHooksManager->DestroyVFunctionHook(g_pClientCommandHook);
         g_pClientCommandHook = nullptr;
     }
 
     if (g_pClientVoiceHook)
     {
         g_pClientVoiceHook->Disable();
-        hooksmanager->DestroyVFunctionHook(g_pClientVoiceHook);
+        g_pHooksManager->DestroyVFunctionHook(g_pClientVoiceHook);
         g_pClientVoiceHook = nullptr;
     }
 }
 
 bool SetClientListeningHook(void* _this, CPlayerSlot iReceiver, CPlayerSlot iSender, bool bListen)
 {
-    static auto playermanager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
-    static auto sdkschema = g_ifaceService.FetchInterface<ISDKSchema>(SDKSCHEMA_INTERFACE_VERSION);
-
-    IPlayer* receiver = playermanager->GetPlayer(iReceiver.Get());
+    IPlayer* receiver = g_pPlayerManager->GetPlayer(iReceiver.Get());
     if (!receiver) return reinterpret_cast<decltype(&SetClientListeningHook)>(g_pSetClientListeningHook->GetOriginal())(_this, iReceiver, iSender, bListen);
 
-    IPlayer* sender = playermanager->GetPlayer(iSender.Get());
+    IPlayer* sender = g_pPlayerManager->GetPlayer(iSender.Get());
     if (!sender) return reinterpret_cast<decltype(&SetClientListeningHook)>(g_pSetClientListeningHook->GetOriginal())(_this, iReceiver, iSender, bListen);
 
     auto& listenOverride = receiver->GetListenOverride(iSender.Get());
@@ -125,7 +117,7 @@ bool SetClientListeningHook(void* _this, CPlayerSlot iReceiver, CPlayerSlot iSen
         if (!senderController || !receiverController)
             return reinterpret_cast<decltype(&SetClientListeningHook)>(g_pSetClientListeningHook->GetOriginal())(_this, iReceiver, iSender, bListen);
 
-        bListen = (*(int*)(sdkschema->GetPropPtr(senderController, CBaseEntity_m_iTeamNum))) == (*(int*)(sdkschema->GetPropPtr(receiverController, CBaseEntity_m_iTeamNum)));
+        bListen = (*(int*)(g_pSDKSchema->GetPropPtr(senderController, CBaseEntity_m_iTeamNum))) == (*(int*)(g_pSDKSchema->GetPropPtr(receiverController, CBaseEntity_m_iTeamNum)));
         return reinterpret_cast<decltype(&SetClientListeningHook)>(g_pSetClientListeningHook->GetOriginal())(_this, iReceiver, iSender, bListen);
     }
 
@@ -134,8 +126,7 @@ bool SetClientListeningHook(void* _this, CPlayerSlot iReceiver, CPlayerSlot iSen
 
 void ClientCommandHook(void* _this, CPlayerSlot slot, const CCommand& args)
 {
-    static auto playermanager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
-    IPlayer* receiver = playermanager->GetPlayer(slot.Get());
+    IPlayer* receiver = g_pPlayerManager->GetPlayer(slot.Get());
     if (!receiver) return reinterpret_cast<decltype(&ClientCommandHook)>(g_pClientCommandHook->GetOriginal())(_this, slot, args);
 
     if (args.ArgC() > 1 && std::string(args.Arg(0)) == "vban")
@@ -161,8 +152,7 @@ void ClientVoiceHook(void* _this, CPlayerSlot slot)
 
 void CVoiceManager::SetClientListenOverride(int playerid, int targetid, ListenOverride override)
 {
-    auto playermanager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
-    auto player = playermanager->GetPlayer(playerid);
+    auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player) return;
 
     auto& listenOverrider = player->GetListenOverride(targetid);
@@ -171,8 +161,7 @@ void CVoiceManager::SetClientListenOverride(int playerid, int targetid, ListenOv
 
 ListenOverride CVoiceManager::GetClientListenOverride(int playerid, int targetid)
 {
-    auto playermanager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
-    auto player = playermanager->GetPlayer(playerid);
+    auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player) return Listen_Default;
 
     auto& listenOverrider = player->GetListenOverride(targetid);
@@ -181,8 +170,7 @@ ListenOverride CVoiceManager::GetClientListenOverride(int playerid, int targetid
 
 void CVoiceManager::SetClientVoiceFlags(int playerid, VoiceFlagValue flags)
 {
-    auto playermanager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
-    auto player = playermanager->GetPlayer(playerid);
+    auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player) return;
 
     auto& voiceFlags = player->GetVoiceFlags();
@@ -191,8 +179,7 @@ void CVoiceManager::SetClientVoiceFlags(int playerid, VoiceFlagValue flags)
 
 VoiceFlagValue CVoiceManager::GetClientVoiceFlags(int playerid)
 {
-    auto playermanager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
-    auto player = playermanager->GetPlayer(playerid);
+    auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player) return Speak_Normal;
 
     auto& voiceFlags = player->GetVoiceFlags();

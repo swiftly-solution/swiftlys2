@@ -16,99 +16,86 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ************************************************************************************************/
 
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 #include <scripting/scripting.h>
 
 static char* Bridge_Database_CopyString(const std::string& value, int* size)
 {
-    static auto memory = g_ifaceService.FetchInterface<IMemoryAllocator>(MEMORYALLOCATOR_INTERFACE_VERSION);
-
     int outSize = static_cast<int>(value.size());
     *size = outSize;
 
-    char* out = (char*)memory->Alloc(outSize + 1);
-    memory->Copy(out, (void*)value.c_str(), outSize);
+    char* out = (char*)g_pMemoryAllocator->Alloc(outSize + 1);
+    g_pMemoryAllocator->Copy(out, (void*)value.c_str(), outSize);
     out[outSize] = '\0';
     return out;
 }
 
 char* Bridge_Database_GetDefaultDriver(int* size)
 {
-    static auto db = g_ifaceService.FetchInterface<IDatabaseManager>(DATABASEMANAGER_INTERFACE_VERSION);
-    std::string o = db->GetDefaultDriver();
+    std::string o = g_pDatabaseManager->GetDefaultDriver();
 
     return Bridge_Database_CopyString(o, size);
 }
 
 char* Bridge_Database_GetDefaultConnectionName(int* size)
 {
-    static auto db = g_ifaceService.FetchInterface<IDatabaseManager>(DATABASEMANAGER_INTERFACE_VERSION);
-    std::string o = db->GetDefaultConnectionName();
+    std::string o = g_pDatabaseManager->GetDefaultConnectionName();
 
     return Bridge_Database_CopyString(o, size);
 }
 
 char* Bridge_Database_GetConnectionDriver(int* size, const char* connectionName)
 {
-    static auto db = g_ifaceService.FetchInterface<IDatabaseManager>(DATABASEMANAGER_INTERFACE_VERSION);
-    std::string o = db->GetConnection(connectionName).driver;
+    std::string o = g_pDatabaseManager->GetConnection(connectionName).driver;
     return Bridge_Database_CopyString(o, size);
 }
 
 char* Bridge_Database_GetConnectionHost(int* size, const char* connectionName)
 {
-    static auto db = g_ifaceService.FetchInterface<IDatabaseManager>(DATABASEMANAGER_INTERFACE_VERSION);
-    std::string o = db->GetConnection(connectionName).host;
+    std::string o = g_pDatabaseManager->GetConnection(connectionName).host;
     return Bridge_Database_CopyString(o, size);
 }
 
 char* Bridge_Database_GetConnectionDatabase(int* size, const char* connectionName)
 {
-    static auto db = g_ifaceService.FetchInterface<IDatabaseManager>(DATABASEMANAGER_INTERFACE_VERSION);
-    std::string o = db->GetConnection(connectionName).database;
+    std::string o = g_pDatabaseManager->GetConnection(connectionName).database;
     return Bridge_Database_CopyString(o, size);
 }
 
 char* Bridge_Database_GetConnectionUser(int* size, const char* connectionName)
 {
-    static auto db = g_ifaceService.FetchInterface<IDatabaseManager>(DATABASEMANAGER_INTERFACE_VERSION);
-    std::string o = db->GetConnection(connectionName).user;
+    std::string o = g_pDatabaseManager->GetConnection(connectionName).user;
     return Bridge_Database_CopyString(o, size);
 }
 
 char* Bridge_Database_GetConnectionPass(int* size, const char* connectionName)
 {
-    static auto db = g_ifaceService.FetchInterface<IDatabaseManager>(DATABASEMANAGER_INTERFACE_VERSION);
-    std::string o = db->GetConnection(connectionName).pass;
+    std::string o = g_pDatabaseManager->GetConnection(connectionName).pass;
     return Bridge_Database_CopyString(o, size);
 }
 
 uint32_t Bridge_Database_GetConnectionTimeout(const char* connectionName)
 {
-    static auto db = g_ifaceService.FetchInterface<IDatabaseManager>(DATABASEMANAGER_INTERFACE_VERSION);
-    auto conn = db->GetConnection(connectionName);
+    auto conn = g_pDatabaseManager->GetConnection(connectionName);
     return conn.timeout;
 }
 
 uint16_t Bridge_Database_GetConnectionPort(const char* connectionName)
 {
-    static auto db = g_ifaceService.FetchInterface<IDatabaseManager>(DATABASEMANAGER_INTERFACE_VERSION);
-    auto conn = db->GetConnection(connectionName);
+    auto conn = g_pDatabaseManager->GetConnection(connectionName);
     return conn.port;
 }
 
 char* Bridge_Database_GetConnectionRawUri(int* size, const char* connectionName)
 {
-    static auto db = g_ifaceService.FetchInterface<IDatabaseManager>(DATABASEMANAGER_INTERFACE_VERSION);
-    std::string o = db->GetConnection(connectionName).rawUri;
+    std::string o = g_pDatabaseManager->GetConnection(connectionName).rawUri;
 
     return Bridge_Database_CopyString(o, size);
 }
 
 bool Bridge_Database_ConnectionExists(const char* connectionName)
 {
-    static auto db = g_ifaceService.FetchInterface<IDatabaseManager>(DATABASEMANAGER_INTERFACE_VERSION);
-    return db->ConnectionExists(connectionName);
+    return g_pDatabaseManager->ConnectionExists(connectionName);
 }
 
 DEFINE_NATIVE("Database.GetDefaultDriver", Bridge_Database_GetDefaultDriver);

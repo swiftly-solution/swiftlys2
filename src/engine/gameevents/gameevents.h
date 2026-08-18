@@ -29,7 +29,7 @@
 class CEventManager : public IEventManager, public IGameEventListener2
 {
 public:
-    virtual void Initialize(std::string game_name) override;
+    virtual void Initialize() override;
     virtual void Shutdown() override;
 
     virtual void RegisterGameEventsListeners(bool shouldRegister) override;

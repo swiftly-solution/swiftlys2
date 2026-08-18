@@ -17,24 +17,21 @@
  ************************************************************************************************/
 
 #include <scripting/scripting.h>
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 
 void Bridge_GameData_Patches_Apply(const char* name)
 {
-    static auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-    gamedata->GetPatches()->Apply(name);
+    g_pGameDataManager->GetPatches()->Apply(name);
 }
 
 void Bridge_GameData_Patches_Revert(const char* name)
 {
-    static auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-    gamedata->GetPatches()->Revert(name);
+    g_pGameDataManager->GetPatches()->Revert(name);
 }
 
 bool Bridge_GameData_Patches_Exists(const char* name)
 {
-    static auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-    return gamedata->GetPatches()->Exists(name);
+    return g_pGameDataManager->GetPatches()->Exists(name);
 }
 
 DEFINE_NATIVE("Patches.Apply", Bridge_GameData_Patches_Apply);

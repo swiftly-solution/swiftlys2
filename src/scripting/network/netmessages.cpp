@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ************************************************************************************************/
 
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 #include <scripting/scripting.h>
 
 #include <public/engine/igameeventsystem.h>
@@ -110,24 +110,20 @@
         return return_value;                                                                                                                                                                                                                                   \
     }
 
-extern INetworkMessages* networkMessages;
-
 static char* Bridge_NetMessages_CopyString(const std::string& value, int* size)
 {
-    static auto memory = g_ifaceService.FetchInterface<IMemoryAllocator>(MEMORYALLOCATOR_INTERFACE_VERSION);
-
     int outSize = static_cast<int>(value.size());
     *size = outSize;
 
-    char* out = (char*)memory->Alloc(outSize + 1);
-    memory->Copy(out, (void*)value.c_str(), outSize);
+    char* out = (char*)g_pMemoryAllocator->Alloc(outSize + 1);
+    g_pMemoryAllocator->Copy(out, (void*)value.c_str(), outSize);
     out[outSize] = '\0';
     return out;
 }
 
 void* Bridge_NetMessages_AllocateNetMessageByID(int msgid)
 {
-    auto netmsg = networkMessages->FindNetworkMessageById(msgid);
+    auto netmsg = g_pGameNetworkMessages->FindNetworkMessageById(msgid);
     if (!netmsg)
     {
         return nullptr;
@@ -137,7 +133,7 @@ void* Bridge_NetMessages_AllocateNetMessageByID(int msgid)
 
 void* Bridge_NetMessages_AllocateNetMessageByPartialName(const char* name)
 {
-    auto netmsg = networkMessages->FindNetworkMessagePartial(name);
+    auto netmsg = g_pGameNetworkMessages->FindNetworkMessagePartial(name);
     if (!netmsg)
     {
         return nullptr;
@@ -942,9 +938,7 @@ void Bridge_NetMessages_SendMessage(void* pmsg, int msgid, int playerid)
 {
     CNetMessagePB<google::protobuf::Message>* msg = (CNetMessagePB<google::protobuf::Message>*)pmsg;
 
-    static auto gameEventSystem = g_ifaceService.FetchInterface<IGameEventSystem>(GAMEEVENTSYSTEM_INTERFACE_VERSION);
-
-    auto netmsg = networkMessages->FindNetworkMessageById(msgid);
+    auto netmsg = g_pGameNetworkMessages->FindNetworkMessageById(msgid);
     if (!netmsg)
     {
         return;
@@ -953,7 +947,7 @@ void Bridge_NetMessages_SendMessage(void* pmsg, int msgid, int playerid)
     bypassPostEventAbstractHook = true;
 
     CSingleRecipientFilter filter(playerid);
-    gameEventSystem->PostEventAbstract(-1, false, &filter, netmsg, msg, 0);
+    g_pGameEventSystem->PostEventAbstract(-1, false, &filter, netmsg, msg, 0);
 
     bypassPostEventAbstractHook = false;
 }
@@ -961,9 +955,7 @@ void Bridge_NetMessages_SendMessage(void* pmsg, int msgid, int playerid)
 void Bridge_NetMessages_SendMessageToPlayers(void* pmsg, int msgid, uint64_t playermask)
 {
     CNetMessagePB<google::protobuf::Message>* msg = (CNetMessagePB<google::protobuf::Message>*)pmsg;
-    static auto gameEventSystem = g_ifaceService.FetchInterface<IGameEventSystem>(GAMEEVENTSYSTEM_INTERFACE_VERSION);
-
-    auto netmsg = networkMessages->FindNetworkMessageById(msgid);
+    auto netmsg = g_pGameNetworkMessages->FindNetworkMessageById(msgid);
     if (!netmsg)
     {
         return;
@@ -978,42 +970,30 @@ void Bridge_NetMessages_SendMessageToPlayers(void* pmsg, int msgid, uint64_t pla
     // each having 4 bytes, to a single base with 8 bytes
     *(uint64_t*)(recipients.Base()) = playermask;
 
-    gameEventSystem->PostEventAbstract(-1, false, &filter, netmsg, msg, 0);
+    g_pGameEventSystem->PostEventAbstract(-1, false, &filter, netmsg, msg, 0);
 
     bypassPostEventAbstractHook = false;
 }
 
 void Bridge_NetMessages_SetNetMessageServerHook(void* callback_ptr)
 {
-    static auto netmessages = g_ifaceService.FetchInterface<INetMessages>(NETMESSAGES_INTERFACE_VERSION);
-    if (!netmessages)
-        return;
-
-    netmessages->SetServerMessageSendHandler([callback_ptr](uint64_t* clients, int messageid, void* msg) {
+    g_pNetMessages->SetServerMessageSendHandler([callback_ptr](uint64_t* clients, int messageid, void* msg) {
         return ((int (*)(uint64_t*, int, void*))callback_ptr)(clients, messageid, msg);
-    });
+        });
 }
 
 void Bridge_NetMessages_SetNetMessageClientHook(void* callback_ptr)
 {
-    static auto netmessages = g_ifaceService.FetchInterface<INetMessages>(NETMESSAGES_INTERFACE_VERSION);
-    if (!netmessages)
-        return;
-
-    netmessages->SetClientMessageSendHandler([callback_ptr](int playerid, int messageid, void* msg) {
+    g_pNetMessages->SetClientMessageSendHandler([callback_ptr](int playerid, int messageid, void* msg) {
         return ((int (*)(int, int, void*))callback_ptr)(playerid, messageid, msg);
-    });
+        });
 }
 
 void Bridge_NetMessages_SetNetMessageServerHookInternal(void* callback_ptr)
 {
-    static auto netmessages = g_ifaceService.FetchInterface<INetMessages>(NETMESSAGES_INTERFACE_VERSION);
-    if (!netmessages)
-        return;
-
-    netmessages->SetServerMessageInternalSendHandler([callback_ptr](int playerid, int messageid, void* msg) {
+    g_pNetMessages->SetServerMessageInternalSendHandler([callback_ptr](int playerid, int messageid, void* msg) {
         return ((int (*)(int, int, void*))callback_ptr)(playerid, messageid, msg);
-    });
+        });
 }
 
 DEFINE_NATIVE("NetMessages.AllocateNetMessageByID", Bridge_NetMessages_AllocateNetMessageByID);

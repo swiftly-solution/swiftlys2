@@ -27,7 +27,7 @@
 
 #include "listener.h"
 
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 #include <s2binlib/s2binlib.h>
 
 typedef void (*CBaseEntity_DispatchSpawn)(void*, void*);
@@ -53,31 +53,26 @@ void StartupServerHook(void* _this, const GameSessionConfiguration_t& config, IS
 
 void CEntSystem::Initialize()
 {
-    auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
-    auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-
-    g_pTraceShapeHook = hooksmanager->CreateFunctionHook();
-    g_pTraceShapeHook->SetHookFunction(gamedata->GetSignatures()->Fetch("TraceShape"), reinterpret_cast<void*>(TraceShapeHook));
+    g_pTraceShapeHook = g_pHooksManager->CreateFunctionHook();
+    g_pTraceShapeHook->SetHookFunction(g_pGameDataManager->GetSignatures()->Fetch("TraceShape"), reinterpret_cast<void*>(TraceShapeHook));
     g_pTraceShapeHook->Enable();
 
     void* netserverservice = nullptr;
     s2binlib_find_vtable("engine2", "CNetworkServerService", &netserverservice);
 
-    g_pStartupServerHook = hooksmanager->CreateVFunctionHook();
-    g_pStartupServerHook->SetHookFunction(netserverservice, gamedata->GetOffsets()->Fetch("INetworkServerService::StartupServer"), reinterpret_cast<void*>(StartupServerHook), true);
+    g_pStartupServerHook = g_pHooksManager->CreateVFunctionHook();
+    g_pStartupServerHook->SetHookFunction(netserverservice, g_pGameDataManager->GetOffsets()->Fetch("INetworkServerService::StartupServer"), reinterpret_cast<void*>(StartupServerHook), true);
     g_pStartupServerHook->Enable();
 }
 
 void CEntSystem::Shutdown()
 {
-    auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
-
     g_pTraceShapeHook->Disable();
-    hooksmanager->DestroyFunctionHook(g_pTraceShapeHook);
+    g_pHooksManager->DestroyFunctionHook(g_pTraceShapeHook);
     g_pTraceShapeHook = nullptr;
 
     g_pStartupServerHook->Disable();
-    hooksmanager->DestroyVFunctionHook(g_pStartupServerHook);
+    g_pHooksManager->DestroyVFunctionHook(g_pStartupServerHook);
     g_pStartupServerHook = nullptr;
 
     g_pGameEntitySystem->RemoveListenerEntity(&g_entityListener);
@@ -104,12 +99,7 @@ void StartupServerHook(void* _this, const GameSessionConfiguration_t& config, IS
 
     if (g_bDone) return;
 
-    auto pGameResService = g_ifaceService.FetchInterface<IGameResourceService>(GAMERESOURCESERVICESERVER_INTERFACE_VERSION);
-    if (!pGameResService) return;
-
-    auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-
-    CGameEntitySystem* entSystem = *reinterpret_cast<CGameEntitySystem**>((uintptr_t)(pGameResService)+gamedata->GetOffsets()->Fetch("GameEntitySystem"));
+    CGameEntitySystem* entSystem = *reinterpret_cast<CGameEntitySystem**>((uintptr_t)(g_pGameResources)+g_pGameDataManager->GetOffsets()->Fetch("GameEntitySystem"));
     g_pGameEntitySystem = entSystem;
     g_pGameEntitySystem->AddListenerEntity(&g_entityListener);
 
@@ -118,16 +108,14 @@ void StartupServerHook(void* _this, const GameSessionConfiguration_t& config, IS
 
 void CEntSystem::Spawn(void* pEntity, void* pKeyValues)
 {
-    static auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-    static auto sig = gamedata->GetSignatures()->Fetch("CBaseEntity::DispatchSpawn");
+    static auto sig = g_pGameDataManager->GetSignatures()->Fetch("CBaseEntity::DispatchSpawn");
 
     reinterpret_cast<CBaseEntity_DispatchSpawn>(sig)(pEntity, pKeyValues);
 }
 
 void CEntSystem::Despawn(void* pEntity)
 {
-    static auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-    static auto sig = gamedata->GetSignatures()->Fetch("UTIL::Remove");
+    static auto sig = g_pGameDataManager->GetSignatures()->Fetch("UTIL::Remove");
 
     reinterpret_cast<UTIL_Remove>(sig)(pEntity);
 }

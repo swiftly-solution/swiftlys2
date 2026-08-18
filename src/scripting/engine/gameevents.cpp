@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ************************************************************************************************/
 
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 
 #include <api/shared/string.h>
 
@@ -28,13 +28,11 @@ typedef IGameEventListener2* (*GetLegacyGameEventListener)(CPlayerSlot slot);
 
 static char* Bridge_GameEvents_CopyString(const std::string& value, int* size)
 {
-    static auto memory = g_ifaceService.FetchInterface<IMemoryAllocator>(MEMORYALLOCATOR_INTERFACE_VERSION);
-
     int outSize = static_cast<int>(value.size());
     *size = outSize;
 
-    char* out = (char*)memory->Alloc(outSize + 1);
-    memory->Copy(out, (void*)value.c_str(), outSize);
+    char* out = (char*)g_pMemoryAllocator->Alloc(outSize + 1);
+    g_pMemoryAllocator->Copy(out, (void*)value.c_str(), outSize);
     out[outSize] = '\0';
     return out;
 }
@@ -202,16 +200,12 @@ bool Bridge_GameEvents_IsLocal(void* event)
 
 void Bridge_GameEvents_RegisterListener(const char* eventName)
 {
-    static auto eventmanager = g_ifaceService.FetchInterface<IEventManager>(GAMEEVENTMANAGER_INTERFACE_VERSION);
-    eventmanager->RegisterGameEventListener(eventName);
+    g_pGameEventManager->RegisterGameEventListener(eventName);
 }
 
 void Bridge_GameEvents_SetListenerPreHandler(void* callback_ptr)
 {
-    static auto eventmanager = g_ifaceService.FetchInterface<IEventManager>(GAMEEVENTMANAGER_INTERFACE_VERSION);
-    if (!eventmanager) return;
-
-    eventmanager->SetGameEventFireHandler([callback_ptr](std::string& event_name, IGameEvent* event, bool& dont_broadcast, uint32_t& hash) -> int
+    g_pGameEventManager->SetGameEventFireHandler([callback_ptr](std::string& event_name, IGameEvent* event, bool& dont_broadcast, uint32_t& hash) -> int
         {
             typedef int (*CallbackType)(uint32_t hash, void* event, bool* dont_broadcast);
             return reinterpret_cast<CallbackType>(callback_ptr)(hash, event, &dont_broadcast);
@@ -220,10 +214,7 @@ void Bridge_GameEvents_SetListenerPreHandler(void* callback_ptr)
 
 void Bridge_GameEvents_SetListenerPostHandler(void* callback_ptr)
 {
-    static auto eventmanager = g_ifaceService.FetchInterface<IEventManager>(GAMEEVENTMANAGER_INTERFACE_VERSION);
-    if (!eventmanager) return;
-
-    eventmanager->SetPostGameEventFireHandler([callback_ptr](std::string& event_name, IGameEvent* event, bool& dont_broadcast, uint32_t& hash) -> int
+    g_pGameEventManager->SetPostGameEventFireHandler([callback_ptr](std::string& event_name, IGameEvent* event, bool& dont_broadcast, uint32_t& hash) -> int
         {
             typedef int (*CallbackType)(uint32_t hash, void* event, bool* dont_broadcast);
             return reinterpret_cast<CallbackType>(callback_ptr)(hash, event, &dont_broadcast);
@@ -232,41 +223,34 @@ void Bridge_GameEvents_SetListenerPostHandler(void* callback_ptr)
 
 void* Bridge_GameEvents_CreateEvent(const char* eventName)
 {
-    static auto eventmanager = g_ifaceService.FetchInterface<IEventManager>(GAMEEVENTMANAGER_INTERFACE_VERSION);
-    return eventmanager->GetGameEventManager()->CreateEvent(eventName);
+    return g_pGameEventManager->GetGameEventManager()->CreateEvent(eventName);
 }
 
 void Bridge_GameEvents_FreeEvent(void* event)
 {
-    static auto eventmanager = g_ifaceService.FetchInterface<IEventManager>(GAMEEVENTMANAGER_INTERFACE_VERSION);
-    eventmanager->GetGameEventManager()->FreeEvent((IGameEvent*)event);
+    g_pGameEventManager->GetGameEventManager()->FreeEvent((IGameEvent*)event);
 }
 
 void Bridge_GameEvents_FireEvent(void* event, bool dontBroadcast)
 {
     if (!event) return;
 
-    static auto eventmanager = g_ifaceService.FetchInterface<IEventManager>(GAMEEVENTMANAGER_INTERFACE_VERSION);
-    eventmanager->GetGameEventManager()->FireEvent((IGameEvent*)event, dontBroadcast);
+    g_pGameEventManager->GetGameEventManager()->FireEvent((IGameEvent*)event, dontBroadcast);
 }
 
 void Bridge_GameEvents_FireEventToClient(void* event, int playerid)
 {
     if (!event) return;
 
-    static auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-    static auto eventmanager = g_ifaceService.FetchInterface<IEventManager>(GAMEEVENTMANAGER_INTERFACE_VERSION);
-    static auto crashreporter = g_ifaceService.FetchInterface<ICrashReporter>(CRASHREPORTER_INTERFACE_VERSION);
-
-    static auto pListenerSig = gamedata->GetSignatures()->Fetch("LegacyGameEventListener");
+    static auto pListenerSig = g_pGameDataManager->GetSignatures()->Fetch("LegacyGameEventListener");
     if (!pListenerSig) return;
 
     auto listener = reinterpret_cast<GetLegacyGameEventListener>(pListenerSig)(playerid);
     if (!listener) return;
 
-    if (!eventmanager->GetGameEventManager()->FindListener(listener, ((IGameEvent*)event)->GetName()))
+    if (!g_pGameEventManager->GetGameEventManager()->FindListener(listener, ((IGameEvent*)event)->GetName()))
     {
-        return crashreporter->ReportPreventionIncident("GameEvents", fmt::format("Tried to fire event '{}' but the client isn't listening to this event.", ((IGameEvent*)event)->GetName()));
+        return g_pCrashReporter->ReportPreventionIncident("GameEvents", fmt::format("Tried to fire event '{}' but the client isn't listening to this event.", ((IGameEvent*)event)->GetName()));
     }
 
     listener->FireGameEvent((IGameEvent*)event);
@@ -274,30 +258,24 @@ void Bridge_GameEvents_FireEventToClient(void* event, int playerid)
 
 bool Bridge_GameEvents_IsPlayerListeningToEventName(int playerid, const char* eventName)
 {
-    static auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-    static auto eventmanager = g_ifaceService.FetchInterface<IEventManager>(GAMEEVENTMANAGER_INTERFACE_VERSION);
-
-    auto pListenerSig = gamedata->GetSignatures()->Fetch("LegacyGameEventListener");
+    auto pListenerSig = g_pGameDataManager->GetSignatures()->Fetch("LegacyGameEventListener");
     if (!pListenerSig) return false;
 
     auto listener = reinterpret_cast<GetLegacyGameEventListener>(pListenerSig)(playerid);
     if (!listener) return false;
 
-    return eventmanager->GetGameEventManager()->FindListener(listener, eventName);
+    return g_pGameEventManager->GetGameEventManager()->FindListener(listener, eventName);
 }
 
 bool Bridge_GameEvents_IsPlayerListeningToEvent(int playerid, void* event)
 {
-    static auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-    static auto eventmanager = g_ifaceService.FetchInterface<IEventManager>(GAMEEVENTMANAGER_INTERFACE_VERSION);
-
-    auto pListenerSig = gamedata->GetSignatures()->Fetch("LegacyGameEventListener");
+    auto pListenerSig = g_pGameDataManager->GetSignatures()->Fetch("LegacyGameEventListener");
     if (!pListenerSig) return false;
 
     auto listener = reinterpret_cast<GetLegacyGameEventListener>(pListenerSig)(playerid);
     if (!listener) return false;
 
-    return eventmanager->GetGameEventManager()->FindListener(listener, ((IGameEvent*)event)->GetName());
+    return g_pGameEventManager->GetGameEventManager()->FindListener(listener, ((IGameEvent*)event)->GetName());
 }
 
 DEFINE_NATIVE("GameEvents.GetBool", Bridge_GameEvents_GetBool);

@@ -16,31 +16,27 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ************************************************************************************************/
 
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 #include <scripting/scripting.h>
 
 void Bridge_SDK_Schema_SetStateChanged(void* pEntity, uint64_t uHash)
 {
-    static auto schema = g_ifaceService.FetchInterface<ISDKSchema>(SDKSCHEMA_INTERFACE_VERSION);
-    schema->SetStateChanged(pEntity, uHash);
+    g_pSDKSchema->SetStateChanged(pEntity, uHash);
 }
 
 int32_t Bridge_SDK_Schema_GetOffset(uint64_t uHash)
 {
-    static auto schema = g_ifaceService.FetchInterface<ISDKSchema>(SDKSCHEMA_INTERFACE_VERSION);
-    return schema->GetOffset(uHash);
+    return g_pSDKSchema->GetOffset(uHash);
 }
 
 void* Bridge_SDK_Schema_GetVData(void* pEntity)
 {
-    static auto schema = g_ifaceService.FetchInterface<ISDKSchema>(SDKSCHEMA_INTERFACE_VERSION);
-    return schema->GetVData(pEntity);
+    return g_pSDKSchema->GetVData(pEntity);
 }
 
 void* Bridge_SDK_Schema_GetDatamapFunction(uint32_t uHash)
 {
-    static auto schema = g_ifaceService.FetchInterface<ISDKSchema>(SDKSCHEMA_INTERFACE_VERSION);
-    return schema->GetDatamapFunction(uHash);
+    return g_pSDKSchema->GetDatamapFunction(uHash);
 }
 
 DEFINE_NATIVE("Schema.SetStateChanged", Bridge_SDK_Schema_SetStateChanged);

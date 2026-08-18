@@ -18,7 +18,7 @@
 
 #include "soundevent.h"
 
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 
 #include <public/networksystem/inetworkmessages.h>
 #include <public/engine/igameeventsystem.h>
@@ -67,20 +67,15 @@ uint32_t CSoundEvent::Emit()
         insert(buffer, fieldData->GetData(), SosFieldTypeSize(fieldData->GetType()));		// data
     }
 
-    auto networkmessage = g_ifaceService.FetchInterface<INetworkMessages>(NETWORKMESSAGES_INTERFACE_VERSION);
-    auto gameEventSystem = g_ifaceService.FetchInterface<IGameEventSystem>(GAMEEVENTSYSTEM_INTERFACE_VERSION);
-    auto soundsystem = g_ifaceService.FetchInterface<ISoundSystem>(SOUNDSYSTEM_INTERFACE_VERSION);
-    static auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-
     auto soundeventHash = MurmurHash2LowerCase(m_sName.c_str(), SOUNDEVENT_NAME_HASH_SEED);
-    INetworkMessageInternal* pNetMsg = networkmessage->FindNetworkMessageById(208);
+    INetworkMessageInternal* pNetMsg = g_pGameNetworkMessages->FindNetworkMessageById(208);
     auto data = pNetMsg->AllocateMessage()->ToPB<CMsgSosStartSoundEvent>();
 
     uint32_t guid;
 #ifdef _WIN32
-    CALL_VIRTUAL(void, gamedata->GetOffsets()->Fetch("CSoundSystem::TakeGuid"), soundsystem, &guid);
+    CALL_VIRTUAL(void, g_pGameDataManager->GetOffsets()->Fetch("CSoundSystem::TakeGuid"), g_pGameSoundSystem, &guid);
 #else
-    guid = CALL_VIRTUAL(uint32_t, gamedata->GetOffsets()->Fetch("CSoundSystem::TakeGuid"), soundsystem);
+    guid = CALL_VIRTUAL(uint32_t, g_pGameDataManager->GetOffsets()->Fetch("CSoundSystem::TakeGuid"), g_pGameSoundSystem);
 #endif
 
     data->set_soundevent_hash(soundeventHash);
@@ -91,7 +86,7 @@ uint32_t CSoundEvent::Emit()
 
     bypassPostEventAbstractHook = true;
 
-    gameEventSystem->PostEventAbstract(-1, false, &m_fClients, pNetMsg, data, 0);
+    g_pGameEventSystem->PostEventAbstract(-1, false, &m_fClients, pNetMsg, data, 0);
 
     bypassPostEventAbstractHook = false;
 

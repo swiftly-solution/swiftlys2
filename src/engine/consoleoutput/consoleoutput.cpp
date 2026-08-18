@@ -20,7 +20,7 @@
 
 #include <core/entrypoint.h>
 
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 #include <pcre2.h>
 #include <fmt/format.h>
 
@@ -47,7 +47,7 @@ int CLoggingSystem_LogDirectHook(void* loggingSystem, int channel, int severity,
     if (!str)
         return reinterpret_cast<decltype(&CLoggingSystem_LogDirectHook)>(g_CLoggingSystem_LogDirect_Hook->GetOriginal())(loggingSystem, channel, severity, leafCode, str, args);
 
-    if(skipNextNewlineOnlyLog && strcmp(str, "\n") == 0) {
+    if (skipNextNewlineOnlyLog && strcmp(str, "\n") == 0) {
         skipNextNewlineOnlyLog = false;
         return 0;
     }
@@ -60,8 +60,7 @@ int CLoggingSystem_LogDirectHook(void* loggingSystem, int channel, int severity,
         va_end(cpargs);
     }
 
-    static auto consoleoutput = g_ifaceService.FetchInterface<IConsoleOutput>(CONSOLEOUTPUT_INTERFACE_VERSION);
-    if (consoleoutput->NeedsFiltering(args ? buf : (char*)str)) return 0;
+    if (g_pConsoleOutput->NeedsFiltering(args ? buf : (char*)str)) return 0;
 
     for (const auto& [id, callback] : g_ConsoleListeners)
         callback(args ? buf : str);
@@ -71,13 +70,10 @@ int CLoggingSystem_LogDirectHook(void* loggingSystem, int channel, int severity,
 
 void CConsoleOutput::Initialize()
 {
-    auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
-    auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-
-    void* LogDirectAddr = gamedata->GetSignatures()->Fetch("CLoggingSystem::LogDirect");
+    void* LogDirectAddr = g_pGameDataManager->GetSignatures()->Fetch("CLoggingSystem::LogDirect");
     if (!LogDirectAddr) return;
 
-    g_CLoggingSystem_LogDirect_Hook = hooksmanager->CreateFunctionHook();
+    g_CLoggingSystem_LogDirect_Hook = g_pHooksManager->CreateFunctionHook();
     g_CLoggingSystem_LogDirect_Hook->SetHookFunction(LogDirectAddr, (void*)CLoggingSystem_LogDirectHook);
     g_CLoggingSystem_LogDirect_Hook->Enable();
 
@@ -86,23 +82,19 @@ void CConsoleOutput::Initialize()
 
 void CConsoleOutput::Shutdown()
 {
-    auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
-
     if (g_CLoggingSystem_LogDirect_Hook) {
         g_CLoggingSystem_LogDirect_Hook->Disable();
-        hooksmanager->DestroyFunctionHook(g_CLoggingSystem_LogDirect_Hook);
+        g_pHooksManager->DestroyFunctionHook(g_CLoggingSystem_LogDirect_Hook);
         g_CLoggingSystem_LogDirect_Hook = nullptr;
     }
 }
 
 void CConsoleOutput::ReloadFilterConfiguration()
 {
-    static auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
- 
     for (auto it = g_Filters.begin(); it != g_Filters.end(); ++it)
         pcre2_code_free(it->second);
 
-    for(auto it = g_FiltersMatchData.begin(); it != g_FiltersMatchData.end(); ++it)
+    for (auto it = g_FiltersMatchData.begin(); it != g_FiltersMatchData.end(); ++it)
         pcre2_match_data_free(it->second);
 
     g_Filters.clear();
@@ -120,14 +112,14 @@ void CConsoleOutput::ReloadFilterConfiguration()
 
         re = pcre2_compile((PCRE2_SPTR8)(value.get<std::string>().c_str()), PCRE2_ZERO_TERMINATED, 0, &errorcode, &erroffset, nullptr);
         if (!re) {
-            logger->Error("Console Filter", fmt::format("The regex for \"{}\" is not valid.\n", key));
-            logger->Error("Console Filter", fmt::format("Failed to compile at offset {}.\n", erroffset));
+            g_pLogger->Error("Console Filter", fmt::format("The regex for \"{}\" is not valid.\n", key));
+            g_pLogger->Error("Console Filter", fmt::format("Failed to compile at offset {}.\n", erroffset));
             continue;
         }
 
         pcre2_match_data* match_data = pcre2_match_data_create_from_pattern(re, nullptr);
-        if(!match_data) {
-            logger->Error("Console Filter", fmt::format("Failed to create match data for \"{}\".\n", key));
+        if (!match_data) {
+            g_pLogger->Error("Console Filter", fmt::format("Failed to create match data for \"{}\".\n", key));
             pcre2_code_free(re);
             continue;
         }

@@ -16,33 +16,29 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ************************************************************************************************/
 
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 #include <scripting/scripting.h>
 
 int Bridge_PlayerManager_GetPlayerCount()
 {
-    static auto playerManager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
-    return playerManager->GetPlayerCount();
+    return g_pPlayerManager->GetPlayerCount();
 }
 
 int Bridge_PlayerManager_GetPlayerCap()
 {
-    static auto playerManager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
-    return playerManager->GetPlayerCap();
+    return g_pPlayerManager->GetPlayerCap();
 }
 
 void Bridge_PlayerManager_SendMessage(int kind, const char* message, int duration)
 {
-    static auto playerManager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
-    playerManager->SendMsg((MessageType)kind, message, duration);
+    g_pPlayerManager->SendMsg((MessageType)kind, message, duration);
 }
 
 void Bridge_Player_ShouldBlockTransmitEntity(int playerid, int entityidx, bool shouldBlockTransmit);
 
 void Bridge_PlayerManager_ShouldBlockTransmitEntity(int entityidx, bool shouldBlockTransmit)
 {
-    static auto playerManager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
-    for (int i = 0; i < playerManager->GetPlayerCap(); i++)
+    for (int i = 0; i < g_pPlayerManager->GetPlayerCap(); i++)
         Bridge_Player_ShouldBlockTransmitEntity(i, entityidx, shouldBlockTransmit);
 }
 
@@ -50,8 +46,7 @@ void Bridge_Player_ClearTransmitEntityBlocked(int playerid);
 
 void Bridge_PlayerManager_ClearAllBlockedTransmitEntity()
 {
-    static auto playerManager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
-    for (int i = 0; i < playerManager->GetPlayerCap(); i++)
+    for (int i = 0; i < g_pPlayerManager->GetPlayerCap(); i++)
         Bridge_Player_ClearTransmitEntityBlocked(i);
 }
 

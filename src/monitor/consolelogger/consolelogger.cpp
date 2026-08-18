@@ -20,7 +20,7 @@
 
 #include <api/engine/consoleoutput/consoleoutput.h>
 #include <api/interfaces/interfaces.h>
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 #include <api/server/configuration/configuration.h>
 #include <api/shared/files.h>
 #include <api/shared/plat.h>
@@ -74,30 +74,28 @@ static std::string GetDateString()
 
 void ConsoleLogger::Initialize()
 {
-    auto config = g_ifaceService.FetchInterface<IConfiguration>(CONFIGURATION_INTERFACE_VERSION);
-
-    if (bool* b = std::get_if<bool>(&config->GetValue("core.ConsoleLogger.Enable")))
+    if (bool* b = std::get_if<bool>(&g_pConfiguration->GetValue("core.ConsoleLogger.Enable")))
         m_enabled = *b;
 
     if (!m_enabled)
         return;
 
-    if (int* i = std::get_if<int>(&config->GetValue("core.ConsoleLogger.WriteIntervalMs")))
+    if (int* i = std::get_if<int>(&g_pConfiguration->GetValue("core.ConsoleLogger.WriteIntervalMs")))
         m_writeIntervalMs = (*i > 0) ? *i : 2000;
 
-    if (bool* b = std::get_if<bool>(&config->GetValue("core.ConsoleLogger.ManagedEnable")))
+    if (bool* b = std::get_if<bool>(&g_pConfiguration->GetValue("core.ConsoleLogger.ManagedEnable")))
         m_managedEnabled = *b;
 
-    if (bool* b = std::get_if<bool>(&config->GetValue("core.ConsoleLogger.Rotation.Enable")))
+    if (bool* b = std::get_if<bool>(&g_pConfiguration->GetValue("core.ConsoleLogger.Rotation.Enable")))
         m_rotationEnabled = *b;
 
-    if (std::string* s = std::get_if<std::string>(&config->GetValue("core.ConsoleLogger.Rotation.Mode")))
+    if (std::string* s = std::get_if<std::string>(&g_pConfiguration->GetValue("core.ConsoleLogger.Rotation.Mode")))
         m_rotationMode = *s;
 
-    if (int* i = std::get_if<int>(&config->GetValue("core.ConsoleLogger.Rotation.MaximumFiles")))
+    if (int* i = std::get_if<int>(&g_pConfiguration->GetValue("core.ConsoleLogger.Rotation.MaximumFiles")))
         m_maxFiles = *i;
 
-    if (int* i = std::get_if<int>(&config->GetValue("core.ConsoleLogger.Rotation.DeleteOlderThanHours")))
+    if (int* i = std::get_if<int>(&g_pConfiguration->GetValue("core.ConsoleLogger.Rotation.DeleteOlderThanHours")))
         m_deleteOlderThanHours = *i;
 
     std::string logsBase = g_SwiftlyCore.GetCorePath() + "logs" + WIN_LINUX("\\", "/");
@@ -132,8 +130,7 @@ void ConsoleLogger::Initialize()
     m_thread = std::thread(&ConsoleLogger::WorkerThread, this);
     m_thread.detach();
 
-    auto consoleoutput = g_ifaceService.FetchInterface<IConsoleOutput>(CONSOLEOUTPUT_INTERFACE_VERSION);
-    m_listenerId = consoleoutput->AddConsoleListener([this](const std::string& message) {
+    m_listenerId = g_pConsoleOutput->AddConsoleListener([this](const std::string& message) {
         std::lock_guard<std::mutex> lock(m_mutex);
         m_queue.push(fmt::format("[{}] {}", GetTimestampString(), message));
         });
@@ -146,8 +143,7 @@ void ConsoleLogger::Shutdown()
 
     if (m_listenerId != UINT64_MAX)
     {
-        auto consoleoutput = g_ifaceService.FetchInterface<IConsoleOutput>(CONSOLEOUTPUT_INTERFACE_VERSION);
-        consoleoutput->RemoveConsoleListener(m_listenerId);
+        g_pConsoleOutput->RemoveConsoleListener(m_listenerId);
         m_listenerId = UINT64_MAX;
     }
 

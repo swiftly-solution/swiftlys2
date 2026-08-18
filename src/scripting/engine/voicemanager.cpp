@@ -16,31 +16,27 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ************************************************************************************************/
 
-#include <api/interfaces/manager.h>
+#include <api/interfaces/interfaces.h>
 #include <scripting/scripting.h>
 
 void Bridge_VoiceManager_SetClientListenOverride(int playerid, int targetid, int override)
 {
-    static auto voicemanager = g_ifaceService.FetchInterface<IVoiceManager>(VOICEMANAGER_INTERFACE_VERSION);
-    voicemanager->SetClientListenOverride(playerid, targetid, (ListenOverride)override);
+    g_pVoiceManager->SetClientListenOverride(playerid, targetid, (ListenOverride)override);
 }
 
 int Bridge_VoiceManager_GetClientListenOverride(int playerid, int targetid)
 {
-    static auto voicemanager = g_ifaceService.FetchInterface<IVoiceManager>(VOICEMANAGER_INTERFACE_VERSION);
-    return static_cast<int>(voicemanager->GetClientListenOverride(playerid, targetid));
+    return static_cast<int>(g_pVoiceManager->GetClientListenOverride(playerid, targetid));
 }
 
 void Bridge_VoiceManager_SetClientVoiceFlags(int playerid, int flags)
 {
-    static auto voicemanager = g_ifaceService.FetchInterface<IVoiceManager>(VOICEMANAGER_INTERFACE_VERSION);
-    voicemanager->SetClientVoiceFlags(playerid, (VoiceFlagValue)flags);
+    g_pVoiceManager->SetClientVoiceFlags(playerid, (VoiceFlagValue)flags);
 }
 
 int Bridge_VoiceManager_GetClientVoiceFlags(int playerid)
 {
-    static auto voicemanager = g_ifaceService.FetchInterface<IVoiceManager>(VOICEMANAGER_INTERFACE_VERSION);
-    return static_cast<int>(voicemanager->GetClientVoiceFlags(playerid));
+    return static_cast<int>(g_pVoiceManager->GetClientVoiceFlags(playerid));
 }
 
 DEFINE_NATIVE("VoiceManager.SetClientListenOverride", Bridge_VoiceManager_SetClientListenOverride);

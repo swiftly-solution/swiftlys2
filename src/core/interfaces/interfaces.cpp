@@ -45,8 +45,6 @@
 #include <server/players/manager.h>
 #include <server/translations/translations.h>
 
-#include <map>
-
 Logger g_Logger;
 MemoryAllocator g_MemoryAllocator;
 CrashReporter g_CrashReporter;
@@ -67,32 +65,35 @@ CServerCommands g_ServerCommands;
 CNetMessages g_NetMessages;
 CConsoleOutput g_ConsoleOutput;
 
-static const std::map<std::string, void*> g_Interfaces = {
-    {LOGGER_INTERFACE_VERSION, &g_Logger},
-    {MEMORYALLOCATOR_INTERFACE_VERSION, &g_MemoryAllocator},
-    {CRASHREPORTER_INTERFACE_VERSION, &g_CrashReporter},
-    {HOOKSMANAGER_INTERFACE_VERSION, &g_HooksManager},
-    {GAMEDATA_INTERFACE_VERSION, &g_GameDataManager},
-    {CONFIGURATION_INTERFACE_VERSION, &g_Configuration},
-    {ENTITYSYSTEM_INTERFACE_VERSION, &g_EntSystem},
-    {SDKSCHEMA_INTERFACE_VERSION, &g_SDKSchema},
-    {CONVARMANAGER_INTERFACE_VERSION, &g_ConvarManager},
-    {GAMEEVENTMANAGER_INTERFACE_VERSION, &g_GameEventManager},
-    {SCRIPTING_INTERFACE_VERSION, &g_ScriptingAPI},
-    {PLAYERMANAGER_INTERFACE_VERSION, &g_PlayerManager},
-    {VOICEMANAGER_INTERFACE_VERSION, &g_VoiceManager},
-    {SOUNDEVENTMANAGER_INTERFACE_VERSION, &g_SoundEventManager},
-    {DATABASEMANAGER_INTERFACE_VERSION, &g_DatabaseManager},
-    {TRANSLATIONS_INTERFACE_VERSION, &g_Translations},
-    {SERVERCOMMANDS_INTERFACE_VERSION, &g_ServerCommands},
-    {NETMESSAGES_INTERFACE_VERSION, &g_NetMessages},
-    {CONSOLEOUTPUT_INTERFACE_VERSION, &g_ConsoleOutput},
-};
+ILogger* g_pLogger = (ILogger*)&g_Logger;
+IMemoryAllocator* g_pMemoryAllocator = (IMemoryAllocator*)&g_MemoryAllocator;
+ICrashReporter* g_pCrashReporter = (ICrashReporter*)&g_CrashReporter;
+IHooksManager* g_pHooksManager = (IHooksManager*)&g_HooksManager;
+IGameDataManager* g_pGameDataManager = (IGameDataManager*)&g_GameDataManager;
+IConfiguration* g_pConfiguration = (IConfiguration*)&g_Configuration;
+IEntitySystem* g_pEntSystem = (IEntitySystem*)&g_EntSystem;
+ISDKSchema* g_pSDKSchema = (ISDKSchema*)&g_SDKSchema;
+IConvarManager* g_pConvarManager = (IConvarManager*)&g_ConvarManager;
+IEventManager* g_pGameEventManager = (IEventManager*)&g_GameEventManager;
+IScriptingAPI* g_pScriptingAPI = (IScriptingAPI*)&g_ScriptingAPI;
+IPlayerManager* g_pPlayerManager = (IPlayerManager*)&g_PlayerManager;
+IVoiceManager* g_pVoiceManager = (IVoiceManager*)&g_VoiceManager;
+ISoundEventManager* g_pSoundEventManager = (ISoundEventManager*)&g_SoundEventManager;
+IDatabaseManager* g_pDatabaseManager = (IDatabaseManager*)&g_DatabaseManager;
+ITranslations* g_pTranslations = (ITranslations*)&g_Translations;
+IServerCommands* g_pServerCommands = (IServerCommands*)&g_ServerCommands;
+INetMessages* g_pNetMessages = (INetMessages*)&g_NetMessages;
+IConsoleOutput* g_pConsoleOutput = (IConsoleOutput*)&g_ConsoleOutput;
 
-SW_API void* GetPureInterface(const char* iface_name)
-{
-    auto it = g_Interfaces.find(iface_name);
-    if (it != g_Interfaces.end()) return it->second;
-
-    return g_SwiftlyCore.GetInterface(iface_name);
-}
+IFileSystem* g_pGameFileSystem = nullptr;
+IVEngineServer2* g_pGameEngine = nullptr;
+IGameEventSystem* g_pGameEventSystem = nullptr;
+void* g_pGameSoundSystem = nullptr;
+INetworkMessages* g_pGameNetworkMessages = nullptr;
+INetworkSystem* g_pGameNetworkSystem = nullptr;
+INetworkServerService* g_pGameNetworkServerService = nullptr;
+ICvar* g_pGameCvar = nullptr;
+CSchemaSystem* g_pGameSchemaSystem = nullptr;
+INetworkStringTableContainer* g_pGameNetworkStringTableContainer = nullptr;
+ISource2GameClients* g_pGameClientsService = nullptr;
+void* g_pGameResources = nullptr;
