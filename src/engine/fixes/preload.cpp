@@ -22,6 +22,7 @@
 
 #include "preload.h"
 #include <api/interfaces/manager.h>
+#include <fmt/format.h>
 
 IFunctionHook* g_pPreloadDLLHook = nullptr;
 
