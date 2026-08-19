@@ -54,7 +54,7 @@ const int kNumHandledSignals = std::size(kExceptionSignals);
 static void CrashSignalHandler(int sig, siginfo_t* info, void* uctx)
 {
     if (exceptionHandler) exceptionHandler->HandleSignal(sig, info, uctx);
-    exit(1);
+    _exit(1);
 }
 
 void InitCrashReporterLinux()
@@ -123,7 +123,7 @@ bool linuxDumpCallback(const google_breakpad::MinidumpDescriptor& descriptor, vo
     if (!succeeded) {
         g_pLogger->Error("Crash Reporter", fmt::format("Failed to write minidump to '{}'\n", mdmpPath));
         ConsoleLogger_FlushForCrash();
-        exit(1);
+        _exit(1);
         return succeeded;
     }
 
@@ -141,7 +141,7 @@ bool linuxDumpCallback(const google_breakpad::MinidumpDescriptor& descriptor, vo
     if (!mdmp.Read()) {
         g_pLogger->Error("Crash Reporter", fmt::format("Failed to read minidump from '{}'\n", mdmpPath));
         ConsoleLogger_FlushForCrash();
-        exit(1);
+        _exit(1);
         return succeeded;
     }
     else {
@@ -158,7 +158,7 @@ bool linuxDumpCallback(const google_breakpad::MinidumpDescriptor& descriptor, vo
     }
 
     ConsoleLogger_FlushForCrash();
-    exit(1);
+    _exit(1);
     return succeeded;
 }
 
