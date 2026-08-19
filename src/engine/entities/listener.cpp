@@ -52,7 +52,6 @@ void CEntityListener::OnEntityCreated(CEntityInstance* pEntity)
 void CEntityListener::OnEntityDeleted(CEntityInstance* pEntity)
 {
     auto entindex = pEntity->m_pEntity->m_EHandle.GetEntryIndex();
-    auto qword = entindex >> 6;
 
     for (int i = 0; i < 64; i++) {
         auto player = g_pPlayerManager->GetPlayer(i);
@@ -62,8 +61,6 @@ void CEntityListener::OnEntityDeleted(CEntityInstance* pEntity)
         QueueLockGuard lock(transmittingBits.mutex);
 
         transmittingBits.blockedTransmitBits.Clear(entindex);
-        uint64_t* transmitBitsBase = (uint64_t*)transmittingBits.blockedTransmitBits.Base();
-        if (transmitBitsBase[qword] == 0) transmittingBits.blockedTransmitMasks.Clear(qword);
     }
 
     if (g_pOnEntityDeletedCallback)

@@ -19,6 +19,7 @@
 #include "manager.h"
 
 #include <api/interfaces/interfaces.h>
+#include <api/utils/bitvec.h>
 
 #include <core/entrypoint.h>
 
@@ -190,19 +191,8 @@ void CheckTransmitHook(void* _this, CCheckTransmitInfo** ppInfoList, int infoCou
 
         QueueLockGuard lock(blockedBits.mutex);
 
-        uint64_t* transmitEntityBase = reinterpret_cast<uint64_t*>(pInfo->m_pTransmitEntity->Base());
-
-        auto& blockedTransmitMasks = blockedBits.blockedTransmitMasks;
-        uint64_t* blockedTransmitMasksBase = reinterpret_cast<uint64_t*>(blockedTransmitMasks.Base());
-        uint64_t* blockedTransmitBitsBase = reinterpret_cast<uint64_t*>(blockedBits.blockedTransmitBits.Base());
-
-        for (int j = 0; j < 4; j++)
-            if (blockedTransmitMasksBase[j] != 0)
-                for (int k = 0; k < 64; k++)
-                {
-                    int qword = (j << 6) + k;
-                    if (blockedTransmitMasks.IsBitSet(qword)) transmitEntityBase[qword] &= ~blockedTransmitBitsBase[qword];
-                }
+        auto transmitEntity = reinterpret_cast<CBitVector<MAX_EDICTS>*>(pInfo->m_pTransmitEntity);
+        transmitEntity->Filter(blockedBits.blockedTransmitBits);
     }
 }
 

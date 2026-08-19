@@ -25,6 +25,7 @@
 #include <api/engine/voicemanager/voicemanager.h>
 #include <api/utils/mutex.h>
 
+#include <api/utils/bitvec.h>
 #include <public/bitvec.h>
 #include <public/const.h>
 
@@ -43,8 +44,7 @@ enum MessageType : uint8_t
 
 struct BlockedTransmitInfo
 {
-    CBitVec<MAX_EDICTS> blockedTransmitBits;
-    CBitVec<MAX_EDICTS_QWORDS> blockedTransmitMasks;
+    CBitVector<MAX_EDICTS> blockedTransmitBits;
     QueueMutex mutex;
 };
 

@@ -143,20 +143,9 @@ void Bridge_Player_ShouldBlockTransmitEntity(int playerid, int entityidx, bool s
 
     auto& bv = player->GetBlockedTransmittingBits();
     QueueLockGuard lock(bv.mutex);
-    uint64_t* blockedTransmitBitsBase = (uint64_t*)bv.blockedTransmitBits.Base();
 
-    auto qword = entityidx >> 6;
-    if (shouldBlockTransmit)
-    {
-        bool wasEmpty = blockedTransmitBitsBase[qword] == 0;
-        bv.blockedTransmitBits.Set(entityidx);
-        if (wasEmpty) bv.blockedTransmitMasks.Set(qword);
-    }
-    else
-    {
-        bv.blockedTransmitBits.Clear(entityidx);
-        if (blockedTransmitBitsBase[qword] == 0) bv.blockedTransmitMasks.Clear(qword);
-    }
+    if (shouldBlockTransmit) bv.blockedTransmitBits.Set(entityidx);
+    else bv.blockedTransmitBits.Clear(entityidx);
 }
 
 bool Bridge_Player_IsTransmitEntityBlocked(int playerid, int entityidx)
@@ -180,7 +169,6 @@ void Bridge_Player_ClearTransmitEntityBlocked(int playerid)
     auto& bv = player->GetBlockedTransmittingBits();
     QueueLockGuard lock(bv.mutex);
     bv.blockedTransmitBits.ClearAll();
-    bv.blockedTransmitMasks.ClearAll();
 }
 
 char* Bridge_Player_GetLanguage(int* size, int playerid)
