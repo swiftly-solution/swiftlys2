@@ -386,7 +386,8 @@ void DispatchConCommand(void* thisPtr, ConCommandRef cmd, const CCommandContext&
         }
 
         std::string command = args.Arg(0);
-        if (command == "say" || command == "say_team")
+        std::string command_lower = str_tolower(command);
+        if (command_lower == "say" || command_lower == "say_team")
         {
             auto player = g_pPlayerManager->GetPlayer(slot.Get());
             if (!player)
@@ -395,7 +396,7 @@ void DispatchConCommand(void* thisPtr, ConCommandRef cmd, const CCommandContext&
             }
 
             void* controller = player->GetController();
-            bool teamonly = (command == "say_team");
+            bool teamonly = (command_lower == "say_team");
             std::string rawCmd = args.GetCommandString();
             int cmdEnd;
             if (!rawCmd.empty() && rawCmd[0] == '"')
