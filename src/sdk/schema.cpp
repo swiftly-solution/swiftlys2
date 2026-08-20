@@ -39,7 +39,6 @@
 std::unordered_map<uint64_t, SchemaField, FNV1aHasher64> offsets;
 std::unordered_map<uint32_t, SchemaClass, FNV1aHasher32> classes;
 std::unordered_map<uint64_t, uint64_t, FNV1aHasher64> inlineNetworkVarVtbs;
-std::unordered_map<uint32_t, inputfunc_t*, FNV1aHasher32> datamapFunctions;
 
 // Special inline classes for state changed
 // These fields has vtable "CLASS::NetworkVar_FIELDNAME"
@@ -243,31 +242,19 @@ void* CSDKSchema::GetPropPtr(void* pEntity, uint64_t uHash)
     return reinterpret_cast<void*>((uintptr_t)pEntity + fieldInfo.m_uOffset);
 }
 
-void CSDKSchema::WritePropPtr(void* pEntity, const char* sClassName, const char* sMemberName, void* pValue, uint32_t size)
-{
-    uint32_t class_hash = hash_32_fnv1a_const(sClassName);
-    uint64_t fieldHash = ((uint64_t)(class_hash) << 32 | hash_32_fnv1a_const(sMemberName));
-
-    WritePropPtr(pEntity, fieldHash, pValue, size);
-}
-
-void CSDKSchema::WritePropPtr(void* pEntity, uint64_t uHash, void* pValue, uint32_t size)
-{
-    void* propPtr = GetPropPtr(pEntity, uHash);
-    if (!propPtr) return;
-
-    Plat_WriteMemory(propPtr, (uint8_t*)pValue, size);
-}
-
 void* CSDKSchema::GetVData(void* pEntity)
 {
     void* subclassPtr = GetPropPtr(pEntity, CBaseEntity_m_nSubclassID);
     return *(void**)((uintptr_t)subclassPtr + 4);
 }
 
-inputfunc_t* CSDKSchema::GetDatamapFunction(uint32_t uHash)
+void* CSDKSchema::GetDatamapFunction(const char* className, const char* functionName)
 {
-    auto it = datamapFunctions.find(uHash);
-    if (it == datamapFunctions.end()) return nullptr;
-    else return it->second;
+    auto entitySystem = g_pEntSystem->GetEntitySystem();
+
+    auto entityClassIndex = entitySystem->m_entClassesByCPPClassname.Find(className);
+    if (!entitySystem->m_entClassesByCPPClassname.IsValidIndex(entityClassIndex)) return nullptr;
+
+    auto entityClass = entitySystem->m_entClassesByCPPClassname[entityClassIndex];
+    return reinterpret_cast<void*>(entityClass->m_NameToThinkFunc(functionName));
 }

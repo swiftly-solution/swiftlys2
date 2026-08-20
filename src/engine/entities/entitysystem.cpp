@@ -92,18 +92,19 @@ void StartupServerHook(void* _this, const GameSessionConfiguration_t& config, IS
 {
     reinterpret_cast<decltype(&StartupServerHook)>(g_pStartupServerHook->GetOriginal())(_this, config, a, b);
 
+    if (!g_bDone)
+    {
+        CGameEntitySystem* entSystem = *reinterpret_cast<CGameEntitySystem**>((uintptr_t)(g_pGameResources)+g_pGameDataManager->GetOffsets()->Fetch("GameEntitySystem"));
+        g_pGameEntitySystem = entSystem;
+        g_pGameEntitySystem->AddListenerEntity(&g_entityListener);
+
+        g_bDone = true;
+    }
+
     if (g_pOnStartupServerCallback)
     {
         reinterpret_cast<void(*)()>(g_pOnStartupServerCallback)();
     }
-
-    if (g_bDone) return;
-
-    CGameEntitySystem* entSystem = *reinterpret_cast<CGameEntitySystem**>((uintptr_t)(g_pGameResources)+g_pGameDataManager->GetOffsets()->Fetch("GameEntitySystem"));
-    g_pGameEntitySystem = entSystem;
-    g_pGameEntitySystem->AddListenerEntity(&g_entityListener);
-
-    g_bDone = true;
 }
 
 void CEntSystem::Spawn(void* pEntity, void* pKeyValues)

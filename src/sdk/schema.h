@@ -50,12 +50,9 @@ public:
     virtual void* GetPropPtr(void* pEntity, const char* sClassName, const char* sMemberName) override;
     virtual void* GetPropPtr(void* pEntity, uint64_t uHash) override;
 
-    virtual void WritePropPtr(void* pEntity, const char* sClassName, const char* sMemberName, void* pValue, uint32_t size) override;
-    virtual void WritePropPtr(void* pEntity, uint64_t uHash, void* pValue, uint32_t size) override;
-
     virtual void* GetVData(void* pEntity) override;
 
-    virtual inputfunc_t* GetDatamapFunction(uint32_t uHash) override;
+    virtual void* GetDatamapFunction(const char* className, const char* functionName) override;
 
     virtual void Load() override;
 };

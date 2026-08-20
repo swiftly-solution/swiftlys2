@@ -220,16 +220,6 @@
         "windows": "48 8B C4 48 89 58 ? 4C 89 40 ? 48 89 48 ? 55 56 57 41 54 41 55 41 56 41 57 48 8D 6C 24",
         "linux": "55 48 8D 05 ? ? ? ? 48 89 E5 41 57 41 56 41 55 41 54 49 89 FC 53 48 81 EC ? ? ? ? 4C 8D 35"
     },
-    // Find any datamap function ( 'InventoryUpdateThink' for example )
-    // And check the xref of it except the definition xref
-    // It's function pointer will be passed to this function as the second parameter
-    // Another trace: 'CChoreoComponent::AddSceneEvent:  event->GetActor() was NULL!!!'
-    "DispatchDatamapFunction": {
-        "lib": "server",
-        "windows": "40 53 56 41 56 48 83 EC ? 0F 29 74 24",
-        // what the actual fuck is this signature
-        "linux": "55 8D 41"
-    },
     // Search for "#SFUI_Notice_YouDroppedWeapon"
     "CCSPlayer_WeaponServices::DropWeapon": {
         "lib": "server",

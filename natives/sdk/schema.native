@@ -3,4 +3,4 @@ class Schema
 void SetStateChanged = ptr entity, uint64 hash
 int32 GetOffset = uint64 hash
 ptr GetVData = ptr entity
-ptr GetDatamapFunction = uint32 hash
+ptr GetDatamapFunction = string className, string functionName

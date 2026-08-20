@@ -2,8 +2,6 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using Microsoft.Extensions.Logging;
-using Spectre.Console;
-using SwiftlyS2.Core.Datamaps;
 using SwiftlyS2.Core.Events;
 using SwiftlyS2.Core.Extensions;
 using SwiftlyS2.Shared;
@@ -28,7 +26,6 @@ internal class CoreHookService : IDisposable
         HookExecuteCommand();
         HookICvarFindConCommandTemplate();
         HookSteamServerAPIActivated();
-        HookDispatchDatamapFunction();
     }
 
     /*
@@ -59,7 +56,6 @@ internal class CoreHookService : IDisposable
     private delegate nint ICvarFindConCommandWindows( nint pICvar, nint pRet, nint pConCommandName, int unk1 );
     private delegate nint ICvarFindConCommandLinux( nint pICvar, nint pConCommandName, int unk1 );
     private delegate void SteamServerAPIActivated( nint pServer );
-    private delegate void DispatchDatamapFunction( nint a1, nint pDatamapFunc, nint a3, uint a4, nint a5, double a6 /* unknown */ );
 
     private IUnmanagedFunction<ExecuteCommand>? executeCommand;
     private Guid executeCommandGuid;
@@ -68,8 +64,6 @@ internal class CoreHookService : IDisposable
     private Guid findConCommandGuid;
     private IUnmanagedFunction<SteamServerAPIActivated>? steamServerAPIActivated;
     private Guid steamServerAPIActivatedGuid;
-    private IUnmanagedFunction<DispatchDatamapFunction>? dispatchDatamapFunction;
-    private Guid dispatchDatamapFunctionGuid;
 
     internal void HookExecuteCommand()
     {
@@ -215,44 +209,10 @@ internal class CoreHookService : IDisposable
         steamServerAPIActivated = null;
     }
 
-    internal void HookDispatchDatamapFunction()
-    {
-        var address = core.GameData.GetSignature("DispatchDatamapFunction");
-        dispatchDatamapFunction = core.Memory.GetUnmanagedFunctionByAddress<DispatchDatamapFunction>(address);
-        dispatchDatamapFunctionGuid = dispatchDatamapFunction.AddHook(next =>
-        {
-            return ( a1, pDatamapFunc, a3, a4, a5, a6 ) =>
-            {
-                try
-                {
-                    var func = pDatamapFunc;
-                    if (DatamapFunctionHookManager.TryGetHook(func, out var hook))
-                    {
-                        func = hook;
-                    }
-                    next()(a1, func, a3, a4, a5, a6);
-                }
-                catch (Exception e)
-                {
-                    if (!GlobalExceptionHandler.Handle(ref e)) return;
-                    AnsiConsole.WriteException(e);
-                }
-            };
-        });
-    }
-
-    internal void UnhookDispatchDatamapFunction()
-    {
-        if (dispatchDatamapFunction == null) return;
-        dispatchDatamapFunction.RemoveHook(dispatchDatamapFunctionGuid);
-        dispatchDatamapFunction = null;
-    }
-
     public void Dispose()
     {
         UnhookExecuteCommand();
         UnhookICvarFindConCommandTemplate();
         UnhookSteamServerAPIActivated();
-        UnhookDispatchDatamapFunction();
     }
 }

@@ -31,4 +31,9 @@ public interface IGameHooks
     /// Hooks related to entities.
     /// </summary>
     public IGameHookEntities Entities { get; }
+
+    /// <summary>
+    /// Datamap (think/touch/use) function hooks, grouped by owning schema class.
+    /// </summary>
+    public IGameHookDatamaps Datamaps { get; }
 }

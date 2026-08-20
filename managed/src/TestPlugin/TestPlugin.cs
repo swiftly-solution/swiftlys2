@@ -359,6 +359,12 @@ public class TestPlugin : BasePlugin
             return HookResult.CancelOriginal;
         });
 
+        Core.GameHooks.Datamaps.CCSPlayerController.InventoryUpdateThink.Pre += ( ref ctx ) =>
+        {
+            Console.WriteLine($"{ctx.SchemaObject.PlayerName} had inventory updated");
+            ctx.SetHookResult(HookResult.Continue);
+        };
+
         _ = Core.Configuration
             .InitializeJsonWithModel<PluginConfig>("test.jsonc", "Main")
             .InitializeTomlWithModel<PluginConfig>("test.toml", "Main")
@@ -680,7 +686,7 @@ public class TestPlugin : BasePlugin
     public void OnEntityCreated( IOnEntityCreatedEvent @event )
     {
         Console.WriteLine(@event.Entity.DesignerName);
-        if(@event.Entity is CCSPlayerPawn pawn && hide)
+        if (@event.Entity is CCSPlayerPawn pawn && hide)
         {
             pawn.SetTransmitState(false);
         }

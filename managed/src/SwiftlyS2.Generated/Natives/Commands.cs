@@ -10,6 +10,7 @@ namespace SwiftlyS2.Core.Natives;
 
 internal static class NativeCommands
 {
+
     private unsafe static delegate* unmanaged<byte*, byte, byte*, ulong> _RegisterCommand;
 
     /// <summary>

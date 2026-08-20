@@ -8,34 +8,41 @@ internal static class GameHooksAttributeParser
 {
     private record HookEntry(Func<IGameHooks, object> Accessor, EventInfo Pre, EventInfo Post);
 
+    private const int MaxDepth = 6;
+
     private static readonly Dictionary<Type, HookEntry> _hookMap = BuildHookMap();
 
     private static Dictionary<Type, HookEntry> BuildHookMap()
     {
         var map = new Dictionary<Type, HookEntry>();
+        Visit(typeof(IGameHooks), hooks => hooks, 0, []);
+        return map;
 
-        foreach (var categoryProp in typeof(IGameHooks).GetProperties())
+        void Visit( Type nodeType, Func<IGameHooks, object> accessorSoFar, int depth, HashSet<Type> visited )
         {
-            foreach (var eventsProp in categoryProp.PropertyType.GetProperties())
+            if (depth >= MaxDepth || !visited.Add(nodeType)) return;
+
+            foreach (var prop in nodeType.GetProperties())
             {
-                var eventsType = eventsProp.PropertyType;
-                var preEvent = eventsType.GetEvent("Pre");
-                var postEvent = eventsType.GetEvent("Post");
-                if (preEvent == null || postEvent == null) continue;
+                var propType = prop.PropertyType;
+                var preEvent = propType.GetEvent("Pre");
+                var postEvent = propType.GetEvent("Post");
 
-                var invoke = preEvent.EventHandlerType!.GetMethod("Invoke")!;
-                var dataType = invoke.GetParameters()[0].ParameterType.GetElementType()!;
+                var p = prop;
+                object nextAccessor( IGameHooks hooks ) => p.GetValue(accessorSoFar(hooks))!;
 
-                var catProp = categoryProp;
-                var evtProp = eventsProp;
-                object accessor(IGameHooks hooks) =>
-                    evtProp.GetValue(catProp.GetValue(hooks)!)!;
-
-                map[dataType] = new HookEntry(accessor, preEvent, postEvent);
+                if (preEvent != null && postEvent != null)
+                {
+                    var invoke = preEvent.EventHandlerType!.GetMethod("Invoke")!;
+                    var dataType = invoke.GetParameters()[0].ParameterType.GetElementType()!;
+                    map[dataType] = new HookEntry(nextAccessor, preEvent, postEvent);
+                }
+                else
+                {
+                    Visit(propType, nextAccessor, depth + 1, visited);
+                }
             }
         }
-
-        return map;
     }
 
     public static void ParseFromObject(this IGameHooks self, object instance)

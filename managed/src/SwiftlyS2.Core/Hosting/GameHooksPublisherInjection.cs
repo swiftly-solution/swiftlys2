@@ -8,6 +8,8 @@ internal static class GameHooksPublisherInjection
 {
     public static void UseGameHooksPublisher( this IServiceProvider self )
     {
-        GameHooksPublisher.Initialize(self.GetRequiredService<ISwiftlyCore>());
+        var core = self.GetRequiredService<ISwiftlyCore>();
+        GameHooksPublisher.Initialize(core);
+        DatamapHooksPublisher.Initialize(core);
     }
 }

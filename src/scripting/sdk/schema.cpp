@@ -34,9 +34,9 @@ void* Bridge_SDK_Schema_GetVData(void* pEntity)
     return g_pSDKSchema->GetVData(pEntity);
 }
 
-void* Bridge_SDK_Schema_GetDatamapFunction(uint32_t uHash)
+void* Bridge_SDK_Schema_GetDatamapFunction(const char* className, const char* functionName)
 {
-    return g_pSDKSchema->GetDatamapFunction(uHash);
+    return g_pSDKSchema->GetDatamapFunction(className, functionName);
 }
 
 DEFINE_NATIVE("Schema.SetStateChanged", Bridge_SDK_Schema_SetStateChanged);

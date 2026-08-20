@@ -34,11 +34,17 @@ internal static class NativeSchema
         return ret;
     }
 
-    private unsafe static delegate* unmanaged<uint, nint> _GetDatamapFunction;
+    private unsafe static delegate* unmanaged<byte*, byte*, nint> _GetDatamapFunction;
 
-    public unsafe static nint GetDatamapFunction(uint hash)
+    public unsafe static nint GetDatamapFunction(string className, string functionName)
     {
-        var ret = _GetDatamapFunction(hash);
-        return ret;
+        return StringAlloc.CreateCString(className, classNameBufferPtr =>
+        {
+            return StringAlloc.CreateCString(functionName, functionNameBufferPtr =>
+            {
+                var ret = _GetDatamapFunction((byte*)classNameBufferPtr, (byte*)functionNameBufferPtr);
+                return ret;
+            });
+        });
     }
 }

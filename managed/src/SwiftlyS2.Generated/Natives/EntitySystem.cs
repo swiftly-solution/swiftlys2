@@ -11,9 +11,9 @@ namespace SwiftlyS2.Core.Natives;
 internal static class NativeEntitySystem
 {
 
-    private unsafe static delegate* unmanaged< nint, nint, void > _Spawn;
+    private unsafe static delegate* unmanaged<nint, nint, void> _Spawn;
 
-    public unsafe static void Spawn( nint entity, nint keyvalues )
+    public unsafe static void Spawn(nint entity, nint keyvalues)
     {
         if (!NativeBinding.IsMainThread)
         {
@@ -22,9 +22,9 @@ internal static class NativeEntitySystem
         _Spawn(entity, keyvalues);
     }
 
-    private unsafe static delegate* unmanaged< nint, void > _Despawn;
+    private unsafe static delegate* unmanaged<nint, void> _Despawn;
 
-    public unsafe static void Despawn( nint entity )
+    public unsafe static void Despawn(nint entity)
     {
         if (!NativeBinding.IsMainThread)
         {
@@ -33,7 +33,7 @@ internal static class NativeEntitySystem
         _Despawn(entity);
     }
 
-    private unsafe static delegate* unmanaged< nint > _GetEntitySystem;
+    private unsafe static delegate* unmanaged<nint> _GetEntitySystem;
 
     public unsafe static nint GetEntitySystem()
     {
@@ -41,7 +41,7 @@ internal static class NativeEntitySystem
         return ret;
     }
 
-    private unsafe static delegate* unmanaged< byte > _IsValid;
+    private unsafe static delegate* unmanaged<byte> _IsValid;
 
     public unsafe static bool IsValid()
     {

@@ -4,7 +4,7 @@ using SwiftlyS2.Shared.Profiler;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class GameHooksService : IGameHooks, IDisposable
+internal sealed partial class GameHooksService : IGameHooks, IDisposable
 {
     internal readonly GameHookItem ItemsHook = new();
     internal readonly GameHookMovement MovementHook = new();
@@ -28,6 +28,7 @@ internal sealed class GameHooksService : IGameHooks, IDisposable
         this.profiler = profiler;
         this.logger = logger;
         GameHooksPublisher.Subscribe(this);
+        SubscribeDatamapsHooks();
     }
 
     ~GameHooksService()
@@ -83,6 +84,8 @@ internal sealed class GameHooksService : IGameHooks, IDisposable
         EntitiesHook.EndTouchHook.UnregisterListeners();
         EntitiesHook.AcceptInputHook.UnregisterListeners();
         EntitiesHook.FireOutputHook.UnregisterListeners();
+
+        DisposeDatamapsHooks();
 
         _disposed = true;
         GameHooksPublisher.Unsubscribe(this);
