@@ -28,21 +28,25 @@ class CBitVector
 public:
     bool IsBitSet(int bit)
     {
+        if (bit < 0 || bit >= N) return false;
         return (m_uData[bit >> 6] & (1ULL << (bit & 63))) != 0;
     }
 
     void Set(int bit)
     {
+        if (bit < 0 || bit >= N) return;
         m_uData[bit >> 6] |= (1ULL << (bit & 63));
     }
 
     uint64_t GetQWord(int qword)
     {
+        if (qword < 0 || qword >= NUM_QWORDS) return 0;
         return m_uData[qword];
     }
 
     void Clear(int bit)
     {
+        if (bit < 0 || bit >= N) return;
         m_uData[bit >> 6] &= ~(1ULL << (bit & 63));
     }
 
