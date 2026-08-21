@@ -7,8 +7,11 @@ using SwiftlyS2.Core.EntitySystem;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
+
 internal partial class CEntityInstanceImpl : CEntityInstance, IEquatable<CEntityInstance>
 {
+    private const uint MAX_EDICTS = 1 << 14;
+
     public uint Index => Entity?.EntityHandle.EntityIndex ?? uint.MaxValue;
     public string DesignerName => Entity?.DesignerName ?? string.Empty;
 
@@ -63,19 +66,36 @@ internal partial class CEntityInstanceImpl : CEntityInstance, IEquatable<CEntity
     public void SetTransmitState( bool transmitting, int playerId )
     {
         ThrowIfInvalidEntity();
-        NativePlayer.ShouldBlockTransmitEntity(playerId, (int)Index, !transmitting);
+        var index = Index;
+        if (index < 0 || index >= MAX_EDICTS)
+        {
+            throw new InvalidOperationException($"Cannot modify the transmit state of non-networked entity ({DesignerName}[{index}]) as it's not being transmitted to players.");
+        }
+        NativePlayer.ShouldBlockTransmitEntity(playerId, (int)index, !transmitting);
     }
 
     public void SetTransmitState( bool transmitting )
     {
         ThrowIfInvalidEntity();
-        NativePlayerManager.ShouldBlockTransmitEntity((int)Index, !transmitting);
+        var index = Index;
+        if (index < 0 || index >= MAX_EDICTS)
+        {
+            throw new InvalidOperationException($"Cannot modify the transmit state of non-networked entity ({DesignerName}[{index}]) as it's not being transmitted to players.");
+        }
+
+        NativePlayerManager.ShouldBlockTransmitEntity((int)index, !transmitting);
     }
 
     public bool IsTransmitting( int playerId )
     {
         ThrowIfInvalidEntity();
-        return !NativePlayer.IsTransmitEntityBlocked(playerId, (int)Index);
+        var index = Index;
+        if (index < 0 || index >= MAX_EDICTS)
+        {
+            throw new InvalidOperationException($"Cannot read the transmit state of non-networked entity ({DesignerName}[{index}]) as it's not being transmitted to players.");
+        }
+
+        return !NativePlayer.IsTransmitEntityBlocked(playerId, (int)index);
     }
 
     public void DispatchSpawn( CEntityKeyValues? entityKV = null )

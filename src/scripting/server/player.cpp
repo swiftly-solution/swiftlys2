@@ -136,6 +136,7 @@ void Bridge_Player_Kick(int playerid, const char* reason, int gamereason)
 
 void Bridge_Player_ShouldBlockTransmitEntity(int playerid, int entityidx, bool shouldBlockTransmit)
 {
+    if (entityidx < 0 || entityidx >= MAX_EDICTS) return;
     if (playerid + 1 == entityidx) return;
 
     auto player = g_pPlayerManager->GetPlayer(playerid);
@@ -150,6 +151,7 @@ void Bridge_Player_ShouldBlockTransmitEntity(int playerid, int entityidx, bool s
 
 bool Bridge_Player_IsTransmitEntityBlocked(int playerid, int entityidx)
 {
+    if (entityidx < 0 || entityidx >= MAX_EDICTS) return false;
     if (playerid + 1 == entityidx) return false;
 
     auto player = g_pPlayerManager->GetPlayer(playerid);

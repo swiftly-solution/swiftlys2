@@ -38,6 +38,8 @@ void Bridge_Player_ShouldBlockTransmitEntity(int playerid, int entityidx, bool s
 
 void Bridge_PlayerManager_ShouldBlockTransmitEntity(int entityidx, bool shouldBlockTransmit)
 {
+    if (entityidx < 0 || entityidx >= MAX_EDICTS) return;
+
     for (int i = 0; i < g_pPlayerManager->GetPlayerCap(); i++)
         Bridge_Player_ShouldBlockTransmitEntity(i, entityidx, shouldBlockTransmit);
 }
