@@ -18,8 +18,8 @@
 
 #include "schema.h"
 
-#include <set>
 #include <fmt/format.h>
+#include <s2binlib/s2binlib.h>
 
 bool IsStandardLayoutClass(SchemaClassInfoData_t* classData) {
     {
@@ -47,6 +47,8 @@ bool IsStandardLayoutClass(SchemaClassInfoData_t* classData) {
     return true;
 }
 
+std::string chainEntityIndex = "__m_pChainEntity";
+
 void FindChainer(bool& has_chainer, int& chainer_offset, CSchemaClassInfo* classInfo)
 {
     for (int i = 0; i < classInfo->m_nBaseClassCount; i++)
@@ -56,7 +58,7 @@ void FindChainer(bool& has_chainer, int& chainer_offset, CSchemaClassInfo* class
         {
             for (int j = 0; j < baseClass->m_nFieldCount; j++)
             {
-                if (baseClass->m_pFields[j].m_pszName == std::string("__m_pChainEntity"))
+                if (baseClass->m_pFields[j].m_pszName == chainEntityIndex)
                 {
                     has_chainer = true;
                     chainer_offset = baseClass->m_pFields[j].m_nSingleInheritanceOffset;
@@ -89,9 +91,6 @@ void ReadClasses(CSchemaType_DeclaredClass* declClass)
 
     uint32_t class_hash = hash_32_fnv1a_const(classInfo->m_pszName);
     bool isStruct = IsStandardLayoutClass(classInfo);
-
-    classes.insert({ class_hash, {isStruct, (uint32_t)classInfo->m_nSize, (uint32_t)classInfo->m_nAlignment, class_hash} });
-
     auto field_size = classInfo->m_nFieldCount;
     auto fields = classInfo->m_pFields;
 
@@ -100,7 +99,7 @@ void ReadClasses(CSchemaType_DeclaredClass* declClass)
 
     for (int i = 0; i < field_size; i++)
     {
-        if (fields[i].m_pszName == std::string("__m_pChainEntity"))
+        if (fields[i].m_pszName == chainEntityIndex)
         {
             has_chainer = true;
             chainer_offset = fields[i].m_nSingleInheritanceOffset;
@@ -116,8 +115,21 @@ void ReadClasses(CSchemaType_DeclaredClass* declClass)
     for (int i = 0; i < field_size; i++)
     {
         auto field = fields[i];
+
+        void* vtable = nullptr;
+        int stateChangedIndex = -1;
         uint64_t fieldHash = ((uint64_t)(class_hash) << 32 | hash_32_fnv1a_const(field.m_pszName));
 
-        offsets.insert({ fieldHash, { has_chainer, isStruct, (uint32_t)field.m_nSingleInheritanceOffset, chainer_offset } });
+        std::string networkVarName = std::string("NetworkVar_") + field.m_pszName;
+        int result = s2binlib_find_vtable_nested_2("server", classInfo->m_pszName, networkVarName.c_str(), &vtable);
+        if (result == 0) {
+            uint64_t index;
+            result = s2binlib_find_networkvar_vtable_statechanged((uint64_t)vtable, &index);
+            if (result == 0) {
+                stateChangedIndex = (int)index;
+            }
+        }
+
+        offsets.insert({ fieldHash, { has_chainer, isStruct, chainer_offset, stateChangedIndex, (uint32_t)field.m_nSingleInheritanceOffset } });
     }
 }

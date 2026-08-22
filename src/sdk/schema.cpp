@@ -30,60 +30,11 @@
 #include <api/shared/plat.h>
 #include <api/memory/virtual/call.h>    
 
-#include <s2binlib/s2binlib.h>
-
 #include <public/entity2/entityclass.h>
 
 #define CBaseEntity_m_nSubclassID 0x9DC483B8C02CE796
 
 std::unordered_map<uint64_t, SchemaField, FNV1aHasher64> offsets;
-std::unordered_map<uint32_t, SchemaClass, FNV1aHasher32> classes;
-std::unordered_map<uint64_t, uint64_t, FNV1aHasher64> inlineNetworkVarVtbs;
-
-// Special inline classes for state changed
-// These fields has vtable "CLASS::NetworkVar_FIELDNAME"
-// which has the virtual function to call state changed without entity pointer
-
-std::pair<const char*, const char*> inlineNetworkVarVtbNames[] = {
-    {"sky3dparams_t", "fog"},
-    {"CTriggerFan", "m_RampTimer"},
-    {"CSkyCamera", "m_skyboxData"},
-    {"CSkeletonInstance", "m_modelState"},
-    {"CShatterGlassShardPhysics", "m_ShardDesc"},
-    {"CPlayer_CameraServices", "m_audio"},
-    {"CPlayer_CameraServices", "m_PlayerFog"},
-    {"CPlantedC4", "m_entitySpottedState"},
-    {"CPlantedC4", "m_AttributeManager"},
-    {"CHostage", "m_reuseTimer"},
-    {"CHostage", "m_entitySpottedState"},
-    {"CGameSceneNode", "m_hParent"},
-    {"CFogController", "m_fog"},
-    {"CEnvWindController", "m_EnvWindShared"},
-    {"CEnvWind", "m_EnvWindShared"},
-    {"CEconItemView", "m_NetworkedDynamicAttributes"},
-    {"CEconItemView", "m_AttributeList"},
-    {"CEconEntity", "m_AttributeManager"},
-    {"CCollisionProperty", "m_collisionAttribute"},
-    {"CChicken", "m_AttributeManager"},
-    {"CCSPlayer_ActionTrackingServices", "m_weaponPurchasesThisRound"},
-    {"CCSPlayer_ActionTrackingServices", "m_weaponPurchasesThisMatch"},
-    {"CCSPlayerPawn", "m_entitySpottedState"},
-    {"CCSPlayerPawn", "m_EconGloves"},
-    {"CCSPlayerController_ActionTrackingServices", "m_matchStats"},
-    {"CCSGameRules", "m_RetakeRules"},
-    {"CCSGO_TeamPreviewCharacterPosition", "m_weaponItem"},
-    {"CCSGO_TeamPreviewCharacterPosition", "m_glovesItem"},
-    {"CCSGO_TeamPreviewCharacterPosition", "m_agentItem"},
-    {"CC4", "m_entitySpottedState"},
-    {"CBodyComponentSkeletonInstance", "m_skeletonInstance"},
-    {"CBodyComponentPoint", "m_sceneNode"},
-    {"CBodyComponentBaseAnimGraph", "m_animationController"},
-    {"CBasePlayerPawn", "m_skybox3d"},
-    {"CBaseModelEntity", "m_Glow"},
-    {"CBaseModelEntity", "m_Collision"},
-    {"CBaseAnimGraph", "m_RagdollPose"},
-    {"CAttributeContainer", "m_Item"},
-};
 
 class CNetworkVarChainer
 {
@@ -102,29 +53,7 @@ private:
 
 void CSDKSchema::Load()
 {
-    g_pLogger->Info("SDK", "Loading inline network var vtables...\n");
-
-    for (auto& name : inlineNetworkVarVtbNames) {
-        void* vtable;
-        int result = s2binlib_find_vtable_nested_2("server", name.first, (std::string("NetworkVar_") + name.second).c_str(), &vtable);
-        if (result == 0) {
-            uint64_t index;
-            result = s2binlib_find_networkvar_vtable_statechanged((uint64_t)vtable, &index);
-            if (result == 0) {
-                inlineNetworkVarVtbs[(uint64_t)vtable] = index;
-            }
-            else {
-                g_pLogger->Error("SDK", fmt::format("Failed to find inline network var vtable state changed: {}, error: {}\n", name.first, name.second, result));
-            }
-        }
-        else {
-            g_pLogger->Error("SDK", fmt::format("Failed to find inline network var vtable: {}::{}, error: {}\n", name.first, name.second, result));
-        }
-    }
-
-    g_pLogger->Info("SDK", fmt::format("Loaded {} inline network var vtables.\n", inlineNetworkVarVtbs.size()));
-
-    g_pLogger->Info("SDK", "Loading SDK classes...\n");
+    g_pLogger->Info("SDK", "Loading SDK classes and network var vtables...\n");
 
     auto gts = g_pGameSchemaSystem->GlobalTypeScope();
 
@@ -149,15 +78,14 @@ void CSDKSchema::Load()
 
     g_pLogger->Info("SDK", fmt::format("Finished loading {} SDK classes ({} fields).\n", classes_count, offsets.size()));
 
+    int networkVarFields = 0;
+    for (auto& [offset_hash, offset_data] : offsets)
+        if (offset_data.m_nStateChangedOffset != -1)
+            networkVarFields++;
+
+    g_pLogger->Info("SDK", fmt::format("Loaded {} network var fields.\n", networkVarFields));
+
     g_pGameSchemaSystem->PrintSchemaStats("");
-}
-
-void CSDKSchema::SetStateChanged(void* pEntity, const char* sClassName, const char* sMemberName)
-{
-    uint32_t class_hash = hash_32_fnv1a_const(sClassName);
-    uint64_t fieldHash = ((uint64_t)(class_hash) << 32 | hash_32_fnv1a_const(sMemberName));
-
-    SetStateChanged(pEntity, fieldHash);
 }
 
 void CSDKSchema::SetStateChanged(void* pEntity, uint64_t uHash)
@@ -169,12 +97,10 @@ void CSDKSchema::SetStateChanged(void* pEntity, uint64_t uHash)
 
     auto& fieldInfo = fieldData->second;
 
-    auto uncheckedNetworkVar = reinterpret_cast<NetworkVar*>(pEntity);
-    auto it = inlineNetworkVarVtbs.find(uncheckedNetworkVar->pVtable());
-    if (it != inlineNetworkVarVtbs.end()) {
-        auto index = it->second;
-        uncheckedNetworkVar->StateChanged(index, NetworkStateChangedData(fieldInfo.m_uOffset));
-        return;
+    if (fieldInfo.m_nStateChangedOffset != -1)
+    {
+        auto networkVar = reinterpret_cast<NetworkVar*>(pEntity);
+        networkVar->StateChanged(fieldInfo.m_nStateChangedOffset, NetworkStateChangedData(fieldInfo.m_uOffset));
     }
 
     if (fieldInfo.m_bChainer) {
@@ -194,11 +120,6 @@ void CSDKSchema::SetStateChanged(void* pEntity, uint64_t uHash)
     }
 }
 
-int32_t CSDKSchema::FindChainOffset(const char* sClassName)
-{
-    return GetOffset(sClassName, "__m_pChainEntity");
-}
-
 int32_t CSDKSchema::GetOffset(const char* sClassName, const char* sMemberName)
 {
     uint32_t class_hash = hash_32_fnv1a_const(sClassName);
@@ -211,18 +132,6 @@ int32_t CSDKSchema::GetOffset(uint64_t uHash)
     auto it = offsets.find(uHash);
     if (it == offsets.end()) return -1;
     else return it->second.m_uOffset;
-}
-
-bool CSDKSchema::IsStruct(const char* sClassName)
-{
-    auto it = classes.find(hash_32_fnv1a_const(sClassName));
-    if (it == classes.end()) return false;
-    return it->second.m_bIsStruct;
-}
-
-bool CSDKSchema::IsClassLoaded(const char* sClassName)
-{
-    return classes.contains(hash_32_fnv1a_const(sClassName));
 }
 
 void* CSDKSchema::GetPropPtr(void* pEntity, const char* sClassName, const char* sMemberName)

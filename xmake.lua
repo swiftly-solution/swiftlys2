@@ -23,7 +23,6 @@ end
 
 target("swiftlys2")
     set_kind("shared")
-    add_packages("fmt")
     add_packages("pcre2")
 
     add_files({

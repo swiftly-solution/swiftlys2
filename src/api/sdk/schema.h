@@ -27,16 +27,10 @@
 class ISDKSchema
 {
 public:
-    virtual void SetStateChanged(void* pEntity, const char* sClassName, const char* sMemberName) = 0;
     virtual void SetStateChanged(void* pEntity, uint64_t uHash) = 0;
-
-    virtual int32_t FindChainOffset(const char* sClassName) = 0;
 
     virtual int32_t GetOffset(const char* sClassName, const char* sMemberName) = 0;
     virtual int32_t GetOffset(uint64_t uHash) = 0;
-
-    virtual bool IsStruct(const char* sClassName) = 0;
-    virtual bool IsClassLoaded(const char* sClassName) = 0;
 
     virtual void* GetPropPtr(void* pEntity, const char* sClassName, const char* sMemberName) = 0;
     virtual void* GetPropPtr(void* pEntity, uint64_t uHash) = 0;
