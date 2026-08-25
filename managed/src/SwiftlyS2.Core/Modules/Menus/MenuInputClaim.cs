@@ -1,6 +1,7 @@
 namespace SwiftlyS2.Core.Menus;
 
 [Flags]
+[Obsolete("The classic menu system is deprecated and will be removed in future versions. Use Core.Menu (IMenuService) instead.")]
 internal enum MenuInputClaim
 {
     /// <summary>
@@ -19,6 +20,7 @@ internal enum MenuInputClaim
     Use = 1 << 1
 }
 
+[Obsolete("The classic menu system is deprecated and will be removed in future versions. Use Core.Menu (IMenuService) instead.")]
 internal readonly record struct MenuInputClaimInfo
 {
     /// <summary>

@@ -3,6 +3,7 @@ namespace SwiftlyS2.Core.Menus.OptionsBase;
 /// <summary>
 /// Represents a simple text-only menu option without interactive behavior.
 /// </summary>
+[Obsolete("The classic menu system is deprecated and will be removed in future versions. Use Core.Menu (IMenuService) instead.")]
 public sealed class TextMenuOption : MenuOptionBase
 {
     /// <summary>

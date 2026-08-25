@@ -21,6 +21,8 @@ using SwiftlyS2.Shared.Sounds;
 using SwiftlyS2.Shared.EntitySystem;
 using SwiftlyS2.Shared.Players;
 using SwiftlyS2.Shared.Menus;
+using SwiftlyS2.Shared.Menu;
+using SwiftlyS2.Shared.Menu.Components;
 using SwiftlyS2.Shared.SteamAPI;
 using SwiftlyS2.Core.Menus.OptionsBase;
 using SwiftlyS2.Shared.Trace;
@@ -1379,6 +1381,54 @@ public class TestPlugin : BasePlugin
         // Core.MenusAPI.OpenMenuForPlayer(player, menu);
     }
 
+    [Command("nm")]
+    public void NewMenuTestCommand( ICommandContext context )
+    {
+        var player = context.Sender!;
+
+        var confirmMenu = Core.Menu.CreateMenu("testplugin.nm.confirm")
+            .WithTitle("Confirm")
+            .Add(new ButtonComponent("Yes", ctx => { ctx.Player.SendChat("Confirmed."); ctx.Session.Close(); return ValueTask.CompletedTask; }))
+            .Add(new ButtonComponent("No", ctx => { ctx.Session.Close(); return ValueTask.CompletedTask; }))
+            .Build();
+
+        var menu = Core.Menu.CreateMenu("testplugin.nm")
+            .WithTitle("New Menu System")
+            .Add(new TextComponent("Just a label"))
+            .Add(new DividerComponent())
+            .Add(new ChatColoredTextComponent("Chat-colored, best-fit on this renderer", Helper.ChatColors.Green))
+            .Add(new ButtonComponent("Click me", ctx => { ctx.Player.SendChat("Clicked!"); return ValueTask.CompletedTask; }))
+            .Add(new ToggleComponent("Enabled", true))
+            .Add(new SliderComponent("Volume", 0f, 100f, 50f))
+            .Add(new SelectorComponent<string>("Mode", ["Easy", "Normal", "Hard"]))
+            .Add(new ChoiceComponent("Team", ["CT", "T", "Spectator"]))
+            .Add(new InputComponent("Nickname", "player"))
+            .Add(new ProgressBarComponent("Loading", _ => 0.65f))
+            .Add(new SubmenuComponent("Confirm submenu", confirmMenu))
+            .AddFooter(new TextComponent("Press E to select"))
+            .Build();
+
+        menu.Open(player);
+    }
+
+    [Command("cm")]
+    public void ChatMenuTestCommand( ICommandContext context )
+    {
+        var player = context.Sender!;
+
+        var menu = Core.Menu.CreateMenu("testplugin.cm")
+            .WithRenderer(MenuRendererIds.Chat)
+            .WithTitle("Chat Menu")
+            .Add(new ChatColoredTextComponent("This line is chat-colored.", Helper.ChatColors.Green))
+            .Add(new ChatColoredTextComponent("So is this one.", Helper.ChatColors.LightBlue))
+            .Add(new TextComponent("Plain component - no color on this renderer."))
+            .Add(new ButtonComponent("Say hi", ctx => { ctx.Player.SendChat($"{Helper.ChatColors.Yellow}Hi!".Colored()); return ValueTask.CompletedTask; }))
+            .Add(new ToggleComponent("Enabled", true))
+            .Build();
+
+        menu.Open(player);
+    }
+
     [Command("menutest")]
     public void MenuTestCommand( ICommandContext context )
     {
@@ -1571,12 +1621,7 @@ public class TestPlugin : BasePlugin
     [Command("tb2m")]
     public void TeleportBotToMeCommand( ICommandContext context )
     {
-        var player = context.Sender!;
-        Core.PlayerManager.GetAllPlayers()
-            .Where(p => p.IsValid && p.IsFakeClient)
-            .ToList()
-            .FirstOrDefault()
-            ?.Teleport(player.PlayerPawn!.AbsOrigin!.Value, player.PlayerPawn!.EyeAngles, Vector.Zero);
+        context.Sender!.Pawn.WeaponServices.RemoveWeaponBySlot(gear_slot_t.GEAR_SLOT_KNIFE);
     }
 
     [Command("los")]

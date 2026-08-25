@@ -9,6 +9,7 @@ namespace SwiftlyS2.Shared.Menus;
 /// <param name="sender">The source of the event.</param>
 /// <param name="args">Event data.</param>
 /// <returns>A task that represents the asynchronous operation.</returns>
+[Obsolete("The classic menu system is deprecated and will be removed in future versions. Use Core.Menu (IMenuService) instead.")]
 public delegate ValueTask AsyncEventHandler<TEventArgs>( object? sender, TEventArgs args ) where TEventArgs : EventArgs;
 
 /// <summary>
@@ -17,6 +18,7 @@ public delegate ValueTask AsyncEventHandler<TEventArgs>( object? sender, TEventA
 /// <remarks>
 /// The Player property will be null for this event since it's a global property change.
 /// </remarks>
+[Obsolete("The classic menu system is deprecated and will be removed in future versions. Use Core.Menu (IMenuService) instead.")]
 public sealed class MenuOptionEventArgs : EventArgs
 {
     /// <summary>
@@ -33,6 +35,7 @@ public sealed class MenuOptionEventArgs : EventArgs
 /// <summary>
 /// Provides event data for menu option HTML formatting events.
 /// </summary>
+[Obsolete("The classic menu system is deprecated and will be removed in future versions. Use Core.Menu (IMenuService) instead.")]
 public sealed class MenuOptionFormattingEventArgs : EventArgs
 {
     /// <summary>
@@ -54,6 +57,7 @@ public sealed class MenuOptionFormattingEventArgs : EventArgs
 /// <summary>
 /// Provides event data for menu option validation events.
 /// </summary>
+[Obsolete("The classic menu system is deprecated and will be removed in future versions. Use Core.Menu (IMenuService) instead.")]
 public sealed class MenuOptionValidatingEventArgs : EventArgs
 {
     /// <summary>
@@ -83,6 +87,7 @@ public sealed class MenuOptionValidatingEventArgs : EventArgs
 /// <remarks>
 /// NOTE: When handling click events, the sender parameter must be passed as IMenuOption.
 /// </remarks>
+[Obsolete("The classic menu system is deprecated and will be removed in future versions. Use Core.Menu (IMenuService) instead.")]
 public sealed class MenuOptionClickEventArgs : EventArgs
 {
     /// <summary>
@@ -105,6 +110,7 @@ public sealed class MenuOptionClickEventArgs : EventArgs
 /// Event arguments for when a menu option's value changes.
 /// </summary>
 /// <typeparam name="T">The type of the value.</typeparam>
+[Obsolete("The classic menu system is deprecated and will be removed in future versions. Use Core.Menu (IMenuService) instead.")]
 public sealed class MenuOptionValueChangedEventArgs<T> : EventArgs
 {
     /// <summary>
@@ -131,6 +137,7 @@ public sealed class MenuOptionValueChangedEventArgs<T> : EventArgs
 /// <summary>
 /// Represents a menu option that can be displayed and interacted with by players.
 /// </summary>
+[Obsolete("The classic menu system is deprecated and will be removed in future versions. Use Core.Menu (IMenuService) instead.")]
 public interface IMenuOption : IDisposable
 {
     /// <summary>
@@ -353,6 +360,7 @@ public interface IMenuOption : IDisposable
 /// <summary>
 /// Defines the available text size options for menu items.
 /// </summary>
+[Obsolete("The classic menu system is deprecated and will be removed in future versions. Use Core.Menu (IMenuService) instead.")]
 public enum MenuOptionTextSize
 {
     /// <summary>
@@ -394,6 +402,7 @@ public enum MenuOptionTextSize
 /// <summary>
 /// Provides extension methods for <see cref="MenuOptionTextSize"/>.
 /// </summary>
+[Obsolete("The classic menu system is deprecated and will be removed in future versions. Use Core.Menu (IMenuService) instead.")]
 internal static class MenuOptionTextSizeExtensions
 {
     /// <summary>
@@ -420,6 +429,7 @@ internal static class MenuOptionTextSizeExtensions
 /// <summary>
 /// Defines the horizontal text overflow behavior for menu options.
 /// </summary>
+[Obsolete("The classic menu system is deprecated and will be removed in future versions. Use Core.Menu (IMenuService) instead.")]
 public enum MenuOptionTextStyle
 {
     /// <summary>

@@ -6,6 +6,7 @@ using SwiftlyS2.Shared.Menus;
 
 namespace SwiftlyS2.Core.Menus.OptionsBase.Helpers;
 
+[Obsolete("The classic menu system is deprecated and will be removed in future versions. Use Core.Menu (IMenuService) instead.")]
 internal sealed partial class TextStyleProcessor : IDisposable
 {
     private readonly ConcurrentDictionary<string, int> scrollOffsets = new();

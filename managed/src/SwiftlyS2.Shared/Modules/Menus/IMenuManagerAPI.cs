@@ -5,6 +5,7 @@ namespace SwiftlyS2.Shared.Menus;
 /// <summary>
 /// Configuration settings that control menu behavior, appearance, and player interaction.
 /// </summary>
+[Obsolete("The classic menu system is deprecated and will be removed in future versions. Use Core.Menu (IMenuService) instead.")]
 public readonly record struct MenuManagerConfiguration
 {
     /// <summary>
@@ -76,6 +77,7 @@ public readonly record struct MenuManagerConfiguration
 /// <summary>
 /// Provides event data for menu manager events.
 /// </summary>
+[Obsolete("The classic menu system is deprecated and will be removed in future versions. Use Core.Menu (IMenuService) instead.")]
 public sealed class MenuManagerEventArgs : EventArgs
 {
     /// <summary>
@@ -92,6 +94,7 @@ public sealed class MenuManagerEventArgs : EventArgs
 /// <summary>
 /// Central manager for creating and controlling all player menus.
 /// </summary>
+[Obsolete("The classic menu system is deprecated and will be removed in future versions. Use Core.Menu (IMenuService) instead.")]
 public interface IMenuManagerAPI
 {
     /// <summary>

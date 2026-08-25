@@ -1,0 +1,53 @@
+{
+    // Keybinds for the menu framework.
+    //
+    // Every section is one menu id. The reserved "core.menu" section holds the traversal binds that
+    // every menu inherits; a menu only needs its own section when it adds or overrides something.
+    //
+    // A value is either a single key name or an array of key names.
+    // Valid names: mouse1, mouse2, space, ctrl, w, a, s, d, e, esc, r, alt, shift,
+    //              weapon1, weapon2, grenade1, grenade2, tab, f
+    //
+    // NavigateLeft and NavigateRight do nothing on their own: only components that take them over,
+    // such as sliders and selectors, react to them.
+    "Menus": {
+        "core.menu": {
+            "NavigateUp": "shift",
+            "NavigateDown": "f",
+            "NavigateLeft": "a",
+            "NavigateRight": "d",
+            "Select": "e",
+            "Close": "tab"
+        }
+    },
+
+    // Layout limits shared by every menu.
+    //
+    // MaxVisibleLines caps how many lines the scrolling body of a menu may draw at once. It counts
+    // rendered lines rather than entries: a spacer costs one line per blank line it reserves, and a
+    // multi-line component such as a progress bar costs two. Titles, hints and the keybind footer are
+    // drawn on top of this budget. A menu asking for a larger page than this gets a smaller one.
+    "MenuLayout": {
+        "MaxVisibleLines": 5
+    },
+
+    // Sounds played on menu input. An empty name silences that sound.
+    "MenuSounds": {
+        "Scroll": {
+            "Name": "UI.ContractType",
+            "Volume": 0.75
+        },
+        "Select": {
+            "Name": "Vote.Cast.Yes",
+            "Volume": 0.75
+        },
+        "Exit": {
+            "Name": "Vote.Failed",
+            "Volume": 0.75
+        },
+        "Fail": {
+            "Name": "Vote.Cast.No",
+            "Volume": 0.75
+        }
+    }
+}

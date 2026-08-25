@@ -9,6 +9,7 @@ namespace SwiftlyS2.Shared.Menus;
 /// Configuration settings that control menu behavior, appearance, and player interaction.
 /// Defines various aspects of menu functionality including navigation, input handling, audio feedback, and display options.
 /// </summary>
+[Obsolete("The classic menu system is deprecated and will be removed in future versions. Use Core.Menu (IMenuService) instead.")]
 public record class MenuConfiguration
 {
     /// <summary>
@@ -189,6 +190,7 @@ public record class MenuConfiguration
 /// <summary>
 /// Represents an extra button in the menu that executes a custom action when pressed.
 /// </summary>
+[Obsolete("The classic menu system is deprecated and will be removed in future versions. Use Core.Menu (IMenuService) instead.")]
 public sealed class MenuExtraButton
 {
     /// <summary>
@@ -214,6 +216,7 @@ public sealed class MenuExtraButton
 /// <remarks>
 /// NOTE: For WASD input mode, any key binding overrides will not take effect.
 /// </remarks>
+[Obsolete("The classic menu system is deprecated and will be removed in future versions. Use Core.Menu (IMenuService) instead.")]
 public readonly record struct MenuKeybindOverrides
 {
     /// <summary>
@@ -240,6 +243,7 @@ public readonly record struct MenuKeybindOverrides
 /// <summary>
 /// Provides event data for menu-related events.
 /// </summary>
+[Obsolete("The classic menu system is deprecated and will be removed in future versions. Use Core.Menu (IMenuService) instead.")]
 public sealed class MenuEventArgs : EventArgs
 {
     /// <summary>
@@ -256,6 +260,7 @@ public sealed class MenuEventArgs : EventArgs
 /// <summary>
 /// Represents an interactive menu that can be displayed to players.
 /// </summary>
+[Obsolete("The classic menu system is deprecated and will be removed in future versions. Use Core.Menu (IMenuService) instead.")]
 public interface IMenuAPI : IDisposable
 {
     /// <summary>
@@ -422,6 +427,7 @@ public interface IMenuAPI : IDisposable
 /// <summary>
 /// Defines how the menu scrolls when navigating between options.
 /// </summary>
+[Obsolete("The classic menu system is deprecated and will be removed in future versions. Use Core.Menu (IMenuService) instead.")]
 public enum MenuOptionScrollStyle
 {
     /// <summary>

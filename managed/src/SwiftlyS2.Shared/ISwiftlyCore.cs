@@ -12,6 +12,7 @@ using SwiftlyS2.Shared.GameHooks;
 using SwiftlyS2.Shared.Helpers;
 using SwiftlyS2.Shared.Memory;
 using SwiftlyS2.Shared.Menus;
+using SwiftlyS2.Shared.Menu;
 using SwiftlyS2.Shared.NetMessages;
 using SwiftlyS2.Shared.Permissions;
 using SwiftlyS2.Shared.Players;
@@ -157,7 +158,13 @@ public interface ISwiftlyCore
     /// <summary>
     /// Menu manager API.
     /// </summary>
+    [Obsolete("The classic menu system is deprecated and will be removed in future versions. Use Menu instead.")]
     public IMenuManagerAPI MenusAPI { get; }
+
+    /// <summary>
+    /// The component-based menu framework.
+    /// </summary>
+    public IMenuService Menu { get; }
 
     /// <summary>
     /// Command line.

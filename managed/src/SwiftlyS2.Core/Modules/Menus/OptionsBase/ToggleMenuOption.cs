@@ -8,6 +8,7 @@ namespace SwiftlyS2.Core.Menus.OptionsBase;
 /// <summary>
 /// Represents a toggleable menu option that displays an on/off state.
 /// </summary>
+[Obsolete("The classic menu system is deprecated and will be removed in future versions. Use Core.Menu (IMenuService) instead.")]
 public sealed class ToggleMenuOption : MenuOptionBase
 {
     private readonly ConcurrentDictionary<int, bool> toggled = new();

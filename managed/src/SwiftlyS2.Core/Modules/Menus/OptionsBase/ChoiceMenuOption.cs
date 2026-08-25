@@ -9,6 +9,7 @@ namespace SwiftlyS2.Core.Menus.OptionsBase;
 /// <summary>
 /// Represents a menu option that cycles through a list of choices.
 /// </summary>
+[Obsolete("The classic menu system is deprecated and will be removed in future versions. Use Core.Menu (IMenuService) instead.")]
 public sealed class ChoiceMenuOption : MenuOptionBase
 {
     private readonly ConcurrentDictionary<int, int> selectedIndices = new();

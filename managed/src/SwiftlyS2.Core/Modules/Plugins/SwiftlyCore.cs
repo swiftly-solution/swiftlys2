@@ -33,6 +33,7 @@ using SwiftlyS2.Core.Permissions;
 using SwiftlyS2.Shared.Permissions;
 using SwiftlyS2.Core.Menus;
 using SwiftlyS2.Shared.Menus;
+using SwiftlyS2.Shared.Menu;
 using SwiftlyS2.Shared.Players;
 using SwiftlyS2.Shared.Translation;
 using SwiftlyS2.Core.Players;
@@ -79,6 +80,7 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
     public PermissionManager PermissionManager { get; init; }
     public RegistratorService RegistratorService { get; init; }
     public MenuManagerAPI MenuManagerAPI { get; init; }
+    public SwiftlyS2.Core.Menu.MenuService MenuService { get; init; }
     public CommandLineService CommandLineService { get; init; }
     public HelpersService Helpers { get; init; }
     public GameService GameService { get; init; }
@@ -107,6 +109,10 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
             .AddSingleton(coreProvider.GetRequiredService<TraceManager>())
             .AddSingleton(coreProvider.GetRequiredService<PermissionManager>())
             .AddSingleton(coreProvider.GetRequiredService<MenuManagerAPI>())
+            .AddSingleton(coreProvider.GetRequiredService<SwiftlyS2.Core.Menu.MenuRuntime>())
+            .AddSingleton(coreProvider.GetRequiredService<SwiftlyS2.Core.Menu.MenuActionRegistry>())
+            .AddSingleton(coreProvider.GetRequiredService<SwiftlyS2.Core.Menu.MenuRendererRegistry>())
+            .AddSingleton(coreProvider.GetRequiredService<SwiftlyS2.Core.Menu.MenuKeybindResolver>())
 
             .AddSingleton<EventSubscriber>()
             .AddSingleton<EngineService>()
@@ -127,6 +133,8 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
             .AddSingleton<PlayerManagerService>()
             .AddSingleton(provider => provider.GetRequiredService<TranslationService>().GetLocalizer())
             .AddSingleton<RegistratorService>()
+            .AddSingleton<SwiftlyS2.Core.Menu.MenuService>()
+            .AddSingleton<IMenuService>(provider => provider.GetRequiredService<SwiftlyS2.Core.Menu.MenuService>())
             // .AddSingleton<MenuManager>()
             .AddSingleton<CommandLineService>()
             .AddSingleton<HelpersService>()
@@ -189,6 +197,7 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
         RegistratorService = serviceProvider.GetRequiredService<RegistratorService>();
         // MenuManager = serviceProvider.GetRequiredService<MenuManager>();
         MenuManagerAPI = serviceProvider.GetRequiredService<MenuManagerAPI>();
+        MenuService = serviceProvider.GetRequiredService<SwiftlyS2.Core.Menu.MenuService>();
         CommandLineService = serviceProvider.GetRequiredService<CommandLineService>();
         Helpers = serviceProvider.GetRequiredService<HelpersService>();
         GameService = serviceProvider.GetRequiredService<GameService>();
@@ -244,6 +253,7 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
     IPermissionManager ISwiftlyCore.Permission => PermissionManager;
     IRegistratorService ISwiftlyCore.Registrator => RegistratorService;
     IMenuManagerAPI ISwiftlyCore.MenusAPI => MenuManagerAPI;
+    IMenuService ISwiftlyCore.Menu => MenuService;
     ICommandLine ISwiftlyCore.CommandLine => CommandLineService;
     IHelpers ISwiftlyCore.Helpers => Helpers;
     IGameService ISwiftlyCore.Game => GameService;

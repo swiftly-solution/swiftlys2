@@ -10,6 +10,7 @@ namespace SwiftlyS2.Core.Menus.OptionsBase;
 /// <summary>
 /// Provides a base implementation for menu options with event-driven behavior.
 /// </summary>
+[Obsolete("The classic menu system is deprecated and will be removed in future versions. Use Core.Menu (IMenuService) instead.")]
 public abstract partial class MenuOptionBase : IMenuOption, IDisposable
 {
     private string? dynamicText = null;

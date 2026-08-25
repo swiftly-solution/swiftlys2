@@ -7,6 +7,7 @@ namespace SwiftlyS2.Core.Menus.OptionsBase;
 /// <summary>
 /// Represents a progress bar menu option that displays progress visually.
 /// </summary>
+[Obsolete("The classic menu system is deprecated and will be removed in future versions. Use Core.Menu (IMenuService) instead.")]
 public sealed class ProgressBarMenuOption : MenuOptionBase
 {
     private readonly ConcurrentDictionary<int, Func<float>> progressProviders = new();

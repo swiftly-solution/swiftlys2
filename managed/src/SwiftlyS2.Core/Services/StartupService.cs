@@ -19,6 +19,7 @@ internal class StartupService : IHostedService
         provider.UseCoreHookService();
         provider.UsePermissionManager();
         provider.UseMenuManagerAPIService();
+        provider.UseMenuRuntimeService();
         // UseCoreCommandService must be the second to last one
         provider.UseCoreCommandService();
         // Initialize PluginManager after everything is ready

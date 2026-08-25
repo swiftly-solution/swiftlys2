@@ -10,6 +10,7 @@ using Spectre.Console;
 
 namespace SwiftlyS2.Core.Menus;
 
+[Obsolete("The classic menu system is deprecated and will be removed in future versions. Use Core.Menu (IMenuService) instead.")]
 internal sealed class MenuAPI : IMenuAPI, IDisposable
 {
     private (IMenuAPI? ParentMenu, IMenuOption? TriggerOption) parent;

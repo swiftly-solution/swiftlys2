@@ -71,9 +71,13 @@ internal partial class CPlayer_WeaponServicesImpl
         NativeBinding.ThrowIfNonMainThread();
         MyWeapons.ToList().ForEach(weapon =>
         {
-            if (weapon.Value?.As<CCSWeaponBase>().WeaponBaseVData.GearSlot == slot)
+            var basePlayerWeapon = weapon.Value;
+            if (basePlayerWeapon == null || !basePlayerWeapon.IsValid) return;
+
+            var weaponBase = basePlayerWeapon.As<CCSWeaponBase>();
+            if (weaponBase.WeaponBaseVData.GearSlot == slot)
             {
-                RemoveWeapon(weapon.Value);
+                RemoveWeapon(basePlayerWeapon);
             }
         });
     }

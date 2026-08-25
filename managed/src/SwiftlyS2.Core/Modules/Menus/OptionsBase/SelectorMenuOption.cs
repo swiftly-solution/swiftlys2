@@ -14,6 +14,7 @@ namespace SwiftlyS2.Core.Menus.OptionsBase;
 /// This option claims the Exit and Use keys for previous and next selection respectively.
 /// </summary>
 /// <typeparam name="T">The type of the choices.</typeparam>
+[Obsolete("The classic menu system is deprecated and will be removed in future versions. Use Core.Menu (IMenuService) instead.")]
 public sealed class SelectorMenuOption<T> : MenuOptionBase
 {
     private readonly ConcurrentDictionary<int, int> selectedIndices = new();

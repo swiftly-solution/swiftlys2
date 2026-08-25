@@ -10,6 +10,7 @@ namespace SwiftlyS2.Core.Menus.OptionsBase;
 /// <summary>
 /// Represents a menu option that allows text input from players.
 /// </summary>
+[Obsolete("The classic menu system is deprecated and will be removed in future versions. Use Core.Menu (IMenuService) instead.")]
 public sealed class InputMenuOption : MenuOptionBase
 {
     private readonly ConcurrentDictionary<int, string> values = new();

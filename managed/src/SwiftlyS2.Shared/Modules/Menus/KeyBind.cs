@@ -1,6 +1,7 @@
 namespace SwiftlyS2.Shared.Menus;
 
 [Flags]
+[Obsolete("The classic menu system is deprecated and will be removed in future versions. Use Core.Menu (IMenuService) instead.")]
 public enum KeyBind : uint
 {
     Mouse1 = 1 << 0,

@@ -1,5 +1,6 @@
 namespace SwiftlyS2.Shared.Menus;
 
+[Obsolete("The classic menu system is deprecated and will be removed in future versions. Use Core.Menu (IMenuService) instead.")]
 public interface IMenuDesignAPI
 {
     /// <summary>

@@ -3,6 +3,7 @@ using SwiftlyS2.Core.Translations;
 
 namespace SwiftlyS2.Core.Menus;
 
+[Obsolete("The classic menu system is deprecated and will be removed in future versions. Use Core.Menu (IMenuService) instead.")]
 internal sealed class MenuDesignAPI : IMenuDesignAPI
 {
     private readonly MenuConfiguration configuration;
