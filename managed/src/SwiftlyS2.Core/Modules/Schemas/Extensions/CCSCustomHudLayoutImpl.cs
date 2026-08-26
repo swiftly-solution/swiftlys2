@@ -132,6 +132,22 @@ internal partial class CCSCustomHudLayoutImpl : CCSCustomHudLayout
         );
     }
 
+    public EHudPanelClassStatus_t GetHasClassForPlayer( int playerId, string panelId, string className )
+    {
+        if (!TryFindPanelId(panelId, out var panelIndex))
+            return EHudPanelClassStatus_t.k_eHudPanelClassStatus_Undefined;
+
+        if (!TryFindClassName(className, out var classIndex))
+            return EHudPanelClassStatus_t.k_eHudPanelClassStatus_Undefined;
+
+        foreach (var cls in PlayerLayoutStates[playerId].HasClasses)
+        {
+            if (cls.PanelIdIndex == panelIndex && cls.ClassNameIndex == classIndex)
+                return cls.ClassStatus;
+        }
+        return EHudPanelClassStatus_t.k_eHudPanelClassStatus_Undefined;
+    }
+
     public void SetHasClass( string panelId, string className, EHudPanelClassStatus_t classStatus )
     {
         NativeBinding.ThrowIfNonMainThread();
