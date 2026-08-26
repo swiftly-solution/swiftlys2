@@ -416,6 +416,12 @@
         "lib": "server",
         "windows": "48 89 5C 24 ? 48 89 6C 24 ? 48 89 74 24 ? 57 48 83 EC ? 49 8B F0 33 ED 4C 8D 44 24 ? 66 89 6C 24 ? 41 8B F9",
         "linux": "55 48 89 E5 41 57 49 89 D7 41 56 48 8D 55 ? 41 55"
+    },
+    // Via cs_script binding "SetInputCaptureEnabled"
+    "CCSCustomHudLayout::SetInputCaptureEnabled": {
+        "lib": "server",
+        "windows": "40 57 48 83 EC ? 41 0F B6 F8",
+        "linux": "3B B7 ? ? ? ? 0F 8D ? ? ? ? 55"
     }
 
 }

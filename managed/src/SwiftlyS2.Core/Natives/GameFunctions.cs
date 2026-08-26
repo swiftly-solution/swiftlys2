@@ -37,6 +37,7 @@ internal static class GameFunctions
     public static unsafe delegate* unmanaged< nint, nint*, nint*, nint*, void > pCCSCustomHudLayoutSetDialogVariableString;
     public static unsafe delegate* unmanaged< nint, int, nint*, nint*, uint, void > pCCSCustomHudLayoutSetHasClassForPlayer;
     public static unsafe delegate* unmanaged< nint, nint*, nint*, uint, void > pCCSCustomHudLayoutSetHasClass;
+    public static unsafe delegate* unmanaged< nint, int, byte, void > pCCSCustomHudLayoutSetInputCaptureEnabled;
     private static Lazy<int> CreateOffset( string name ) => new(() => NativeOffsets.Fetch(name));
     private static readonly Lazy<int> _teleportOffset = CreateOffset("CBaseEntity::Teleport");
     private static readonly Lazy<int> _commitSuicideOffset = CreateOffset("CBasePlayerPawn::CommitSuicide");
@@ -111,6 +112,7 @@ internal static class GameFunctions
             pCCSCustomHudLayoutSetDialogVariableString = (delegate* unmanaged< nint, nint*, nint*, nint*, void >)NativeSignatures.Fetch("CCSCustomHudLayout::SetDialogVariableString");
             pCCSCustomHudLayoutSetHasClassForPlayer = (delegate* unmanaged< nint, int, nint*, nint*, uint, void >)NativeSignatures.Fetch("CCSCustomHudLayout::SetHasClassForPlayer");
             pCCSCustomHudLayoutSetHasClass = (delegate* unmanaged< nint, nint*, nint*, uint, void >)NativeSignatures.Fetch("CCSCustomHudLayout::SetHasClass");
+            pCCSCustomHudLayoutSetInputCaptureEnabled = (delegate* unmanaged< nint, int, byte, void >)NativeSignatures.Fetch("CCSCustomHudLayout::SetInputCaptureEnabled");
 
             if (IsWindows)
             {
@@ -916,6 +918,21 @@ internal static class GameFunctions
                         (uint)classStatus
                     );
                 }
+            }
+        }
+        catch (Exception e)
+        {
+            AnsiConsole.WriteException(e);
+        }
+    }
+    public static void CCSCustomHudLayout_SetInputCaptureEnabled( nint pThis, int playerId, bool enabled )
+    {
+        try
+        {
+            unsafe
+            {
+                CheckPtr(pThis, nameof(pThis));
+                pCCSCustomHudLayoutSetInputCaptureEnabled(pThis, playerId, enabled ? (byte)1 : (byte)0);
             }
         }
         catch (Exception e)
