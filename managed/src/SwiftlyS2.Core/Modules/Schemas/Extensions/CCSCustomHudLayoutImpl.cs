@@ -167,7 +167,7 @@ internal partial class CCSCustomHudLayoutImpl : CCSCustomHudLayout
         if (!TryFindClassName(className, out var classIndex))
             return EHudPanelClassStatus_t.k_eHudPanelClassStatus_Undefined;
 
-        foreach (var cls in PlayerLayoutStates[0].HasClasses)
+        foreach (var cls in GlobalLayoutState.HasClasses)
         {
             if (cls.PanelIdIndex == panelIndex && cls.ClassNameIndex == classIndex)
                 return cls.ClassStatus;
