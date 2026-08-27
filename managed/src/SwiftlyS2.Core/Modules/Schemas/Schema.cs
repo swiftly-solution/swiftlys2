@@ -110,17 +110,13 @@ internal static class Schema
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static string GetString( nint handle )
     {
-        if (handle == 0) throw new InvalidOperationException("Schema instance cannot be null.");
-
-        return Marshal.PtrToStringUTF8(handle) ?? string.Empty;
+        return handle == 0 ? string.Empty : Marshal.PtrToStringUTF8(handle) ?? string.Empty;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static string GetCUtlString( nint handle )
     {
-        if (handle == 0) throw new InvalidOperationException("Schema instance cannot be null.");
-
-        return Marshal.PtrToStringUTF8(handle) ?? string.Empty;
+        return handle == 0 ? string.Empty : Marshal.PtrToStringUTF8(handle) ?? string.Empty;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
