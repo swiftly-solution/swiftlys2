@@ -6,6 +6,8 @@ public partial interface CCSCustomHudLayout
 {
     /// <summary>
     /// Set the value of a dialog variable string override for a player.
+    ///
+    /// Thread unsafe, use async variant instead for non-main thread context.
     /// </summary>
     /// <param name="playerId">Player id.</param>
     /// <param name="panelId">The id attribute of the target hud element.</param>
@@ -15,13 +17,32 @@ public partial interface CCSCustomHudLayout
     public void SetDialogVariableStringForPlayer( int playerId, string panelId, string variableName, string value );
 
     /// <summary>
+    /// Set the value of a dialog variable string override for a player asynchronously.
+    /// </summary>
+    /// <param name="playerId">Player id.</param>
+    /// <param name="panelId">The id attribute of the target hud element.</param>
+    /// <param name="variableName">The dialog variable string name. Example: the variable name of "{s:dynamic}" is "dynamic".</param>
+    /// <param name="value">The value to set.</param>
+    public Task SetDialogVariableStringForPlayerAsync( int playerId, string panelId, string variableName, string value );
+
+    /// <summary>
     /// Remove the value of a dialog variable string override for a player. The dialog variable string will follow global settings.
+    ///
+    /// Thread unsafe, use async variant instead for non-main thread context.
     /// </summary>
     /// <param name="playerId">Player id.</param>
     /// <param name="panelId">The id attribute of the target hud element.</param>
     /// <param name="variableName">The dialog variable string name. Example: the variable name of "{s:dynamic}" is "dynamic".</param>
     [ThreadUnsafe]
     public void RemoveDialogVariableStringForPlayer( int playerId, string panelId, string variableName );
+
+    /// <summary>
+    /// Remove the value of a dialog variable string override for a player asynchronously. The dialog variable string will follow global settings.
+    /// </summary>
+    /// <param name="playerId">Player id.</param>
+    /// <param name="panelId">The id attribute of the target hud element.</param>
+    /// <param name="variableName">The dialog variable string name. Example: the variable name of "{s:dynamic}" is "dynamic".</param>
+    public Task RemoveDialogVariableStringForPlayerAsync( int playerId, string panelId, string variableName );
 
     /// <summary>
     /// Get the value of a dialog variable string override for a player.
@@ -35,12 +56,22 @@ public partial interface CCSCustomHudLayout
 
     /// <summary>
     /// Set the value of a dialog variable string globally.
+    ///
+    /// Thread unsafe, use async variant instead for non-main thread context.
     /// </summary>
     /// <param name="panelId">The id attribute of the target hud element.</param>
     /// <param name="variableName">The dialog variable string name. Example: the variable name of "{s:dynamic}" is "dynamic".</param>
     /// <param name="value">The value to set.</param>
     [ThreadUnsafe]
     public void SetDialogVariableString( string panelId, string variableName, string value );
+
+    /// <summary>
+    /// Set the value of a dialog variable string globally asynchronously.
+    /// </summary>
+    /// <param name="panelId">The id attribute of the target hud element.</param>
+    /// <param name="variableName">The dialog variable string name. Example: the variable name of "{s:dynamic}" is "dynamic".</param>
+    /// <param name="value">The value to set.</param>
+    public Task SetDialogVariableStringAsync( string panelId, string variableName, string value );
 
     /// <summary>
     /// Get the value of a dialog variable string globally.
@@ -52,7 +83,8 @@ public partial interface CCSCustomHudLayout
 
     /// <summary>
     /// Set whether the hud element has a class or not for a player.
-    /// 
+    ///
+    /// Thread unsafe, use async variant instead for non-main thread context.
     /// </summary>
     /// <param name="playerId">Player id.</param>
     /// <param name="panelId">The id attribute of the target hud element.</param>
@@ -81,6 +113,15 @@ public partial interface CCSCustomHudLayout
     public void SetHasClassForPlayer( int playerId, string panelId, string className, EHudPanelClassStatus_t classStatus );
 
     /// <summary>
+    /// Set whether the hud element has a class or not for a player asynchronously.
+    /// </summary>
+    /// <param name="playerId">Player id.</param>
+    /// <param name="panelId">The id attribute of the target hud element.</param>
+    /// <param name="className">The class name.</param>
+    /// <param name="classStatus">The class status.</param>
+    public Task SetHasClassForPlayerAsync( int playerId, string panelId, string className, EHudPanelClassStatus_t classStatus );
+
+    /// <summary>
     /// Get the class status of a hud element for a player.
     /// </summary>
     /// <param name="playerId">Player id.</param>
@@ -91,7 +132,8 @@ public partial interface CCSCustomHudLayout
 
     /// <summary>
     /// Set whether the hud element has a class or not globally.
-    /// 
+    ///
+    /// Thread unsafe, use async variant instead for non-main thread context.
     /// </summary>
     /// <param name="panelId">The id attribute of the target hud element.</param>
     /// <param name="className">The class name.</param>
@@ -119,6 +161,14 @@ public partial interface CCSCustomHudLayout
     public void SetHasClass( string panelId, string className, EHudPanelClassStatus_t classStatus );
 
     /// <summary>
+    /// Set whether the hud element has a class or not globally asynchronously.
+    /// </summary>
+    /// <param name="panelId">The id attribute of the target hud element.</param>
+    /// <param name="className">The class name.</param>
+    /// <param name="classStatus">The class status.</param>
+    public Task SetHasClassAsync( string panelId, string className, EHudPanelClassStatus_t classStatus );
+
+    /// <summary>
     /// Get the class status of a hud element globally.
     /// </summary>
     /// <param name="panelId">The id attribute of the target hud element.</param>
@@ -128,6 +178,8 @@ public partial interface CCSCustomHudLayout
 
     /// <summary>
     /// Set the input capture state of a hud element for a player.
+    ///
+    /// Thread unsafe, use async variant instead for non-main thread context.
     /// </summary>
     /// <param name="playerId">Player id.</param>
     /// <param name="enabled">Whether the input capture is enabled or not.</param>
@@ -135,11 +187,26 @@ public partial interface CCSCustomHudLayout
     public void SetInputCaptureEnabledForPlayer( int playerId, bool enabled );
 
     /// <summary>
+    /// Set the input capture state of a hud element for a player asynchronously.
+    /// </summary>
+    /// <param name="playerId">Player id.</param>
+    /// <param name="enabled">Whether the input capture is enabled or not.</param>
+    public Task SetInputCaptureEnabledForPlayerAsync( int playerId, bool enabled );
+
+    /// <summary>
     /// Set the input capture state of a hud element globally.
+    ///
+    /// Thread unsafe, use async variant instead for non-main thread context.
     /// </summary>
     /// <param name="enabled">Whether the input capture is enabled or not.</param>
     [ThreadUnsafe]
     public void SetInputCaptureEnabled( bool enabled );
+
+    /// <summary>
+    /// Set the input capture state of a hud element globally asynchronously.
+    /// </summary>
+    /// <param name="enabled">Whether the input capture is enabled or not.</param>
+    public Task SetInputCaptureEnabledAsync( bool enabled );
 
     /// <summary>
     /// Get the input capture state of a hud element for a player.

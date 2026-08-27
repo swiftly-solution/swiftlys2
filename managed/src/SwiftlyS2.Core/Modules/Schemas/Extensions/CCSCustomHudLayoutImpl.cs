@@ -1,4 +1,5 @@
 using SwiftlyS2.Core.Natives;
+using SwiftlyS2.Core.Scheduler;
 using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
@@ -61,6 +62,11 @@ internal partial class CCSCustomHudLayoutImpl : CCSCustomHudLayout
         );
     }
 
+    public Task SetDialogVariableStringForPlayerAsync( int playerId, string panelId, string variableName, string value )
+    {
+        return SchedulerManager.QueueOrNow(() => SetDialogVariableStringForPlayer(playerId, panelId, variableName, value));
+    }
+
     public void RemoveDialogVariableStringForPlayer( int playerId, string panelId, string variableName )
     {
         NativeBinding.ThrowIfNonMainThread();
@@ -70,6 +76,11 @@ internal partial class CCSCustomHudLayoutImpl : CCSCustomHudLayout
             panelId,
             variableName
         );
+    }
+
+    public Task RemoveDialogVariableStringForPlayerAsync( int playerId, string panelId, string variableName )
+    {
+        return SchedulerManager.QueueOrNow(() => RemoveDialogVariableStringForPlayer(playerId, panelId, variableName));
     }
 
     public string? GetDialogVariableStringForPlayer( int playerId, string panelId, string variableName )
@@ -97,6 +108,11 @@ internal partial class CCSCustomHudLayoutImpl : CCSCustomHudLayout
             variableName,
             value
         );
+    }
+
+    public Task SetDialogVariableStringAsync( string panelId, string variableName, string value )
+    {
+        return SchedulerManager.QueueOrNow(() => SetDialogVariableString(panelId, variableName, value));
     }
 
     public string? GetDialogVariableString( string panelId, string variableName )
@@ -132,6 +148,16 @@ internal partial class CCSCustomHudLayoutImpl : CCSCustomHudLayout
         );
     }
 
+    public Task SetHasClassForPlayerAsync(
+        int playerId,
+        string panelId,
+        string className,
+        EHudPanelClassStatus_t classStatus
+    )
+    {
+        return SchedulerManager.QueueOrNow(() => SetHasClassForPlayer(playerId, panelId, className, classStatus));
+    }
+
     public EHudPanelClassStatus_t GetHasClassForPlayer( int playerId, string panelId, string className )
     {
         if (!TryFindPanelId(panelId, out var panelIndex))
@@ -157,6 +183,11 @@ internal partial class CCSCustomHudLayoutImpl : CCSCustomHudLayout
             className,
             classStatus
         );
+    }
+
+    public Task SetHasClassAsync( string panelId, string className, EHudPanelClassStatus_t classStatus )
+    {
+        return SchedulerManager.QueueOrNow(() => SetHasClass(panelId, className, classStatus));
     }
 
     public EHudPanelClassStatus_t GetHasClass( string panelId, string className )
@@ -185,11 +216,21 @@ internal partial class CCSCustomHudLayoutImpl : CCSCustomHudLayout
         );
     }
 
+    public Task SetInputCaptureEnabledForPlayerAsync( int playerId, bool enabled )
+    {
+        return SchedulerManager.QueueOrNow(() => SetInputCaptureEnabledForPlayer(playerId, enabled));
+    }
+
     public void SetInputCaptureEnabled( bool enabled )
     {
         NativeBinding.ThrowIfNonMainThread();
         GlobalLayoutState.InputCaptureEnabled = enabled;
         GlobalLayoutState.InputCaptureEnabledUpdated();
+    }
+
+    public Task SetInputCaptureEnabledAsync( bool enabled )
+    {
+        return SchedulerManager.QueueOrNow(() => SetInputCaptureEnabled(enabled));
     }
 
     public bool IsInputCaptureEnabledForPlayer( int playerId )
