@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CCSCustomHudLayout : CBaseEntity, ISchemaClass<CCSCustomHudLayout>
 {
     static CCSCustomHudLayout ISchemaClass<CCSCustomHudLayout>.From(nint handle) => new CCSCustomHudLayoutImpl(handle);
-    static int ISchemaClass<CCSCustomHudLayout>.Size => 2032;
+    static int ISchemaClass<CCSCustomHudLayout>.Size => 2024;
     static string? ISchemaClass<CCSCustomHudLayout>.ClassName => "custom_hud_layout";
 
 

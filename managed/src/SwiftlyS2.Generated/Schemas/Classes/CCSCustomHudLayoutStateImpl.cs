@@ -16,6 +16,16 @@ internal partial class CCSCustomHudLayoutStateImpl : SchemaClass, CCSCustomHudLa
 {
     public CCSCustomHudLayoutStateImpl(nint handle) : base(handle) { }
 
+    private static nint? _PlayerSlotOffset;
+
+    public ref uint PlayerSlot
+    {
+        get
+        {
+            _PlayerSlotOffset = _PlayerSlotOffset ?? Schema.GetOffset(0xC8CB4BDBD54E4C0C);
+            return ref _Handle.AsRef<uint>(_PlayerSlotOffset!.Value);
+        }
+    }
     private static nint? _InputCaptureEnabledOffset;
 
     public ref bool InputCaptureEnabled
@@ -44,16 +54,6 @@ internal partial class CCSCustomHudLayoutStateImpl : SchemaClass, CCSCustomHudLa
         {
             _DialogVariableStringsOffset = _DialogVariableStringsOffset ?? Schema.GetOffset(0xC8CB4BDB3A14E7FD);
             return ref _Handle.AsRef<CUtlVector<HUDPanelDialogVariableString_t>>(_DialogVariableStringsOffset!.Value);
-        }
-    }
-    private static nint? _PlayerSlotOffset;
-
-    public ref uint PlayerSlot
-    {
-        get
-        {
-            _PlayerSlotOffset = _PlayerSlotOffset ?? Schema.GetOffset(0xC8CB4BDBD54E4C0C);
-            return ref _Handle.AsRef<uint>(_PlayerSlotOffset!.Value);
         }
     }
 

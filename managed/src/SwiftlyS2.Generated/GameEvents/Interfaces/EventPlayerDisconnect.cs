@@ -75,4 +75,11 @@ public interface EventPlayerDisconnect : IGameEvent<EventPlayerDisconnect>
     /// type: short
     /// </summary>
     short PlayerID { get; set; }
+
+    /// <summary>
+    /// Was the player ever fully connected?
+    /// <br/>
+    /// type: bool
+    /// </summary>
+    bool EverFullyConnected { get; set; }
 }

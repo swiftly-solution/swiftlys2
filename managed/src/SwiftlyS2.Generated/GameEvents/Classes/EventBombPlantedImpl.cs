@@ -36,4 +36,7 @@ internal class EventBombPlantedImpl : GameEvent<EventBombPlanted>, EventBombPlan
     // bombsite index
     public short Site
     { get => (short)Accessor.GetInt32("site"); set => Accessor.SetInt32("site", value); }
+
+    public short C4
+    { get => (short)Accessor.GetInt32("c4"); set => Accessor.SetInt32("c4", value); }
 }
