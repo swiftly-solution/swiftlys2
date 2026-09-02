@@ -71,9 +71,9 @@ internal class ProfileService
         Disable();
         _level = level;
 
-        if (level == ProfilerLevel.Heavy)
+        if (level == ProfilerLevel.Light)
             StartSession();
-        else if (level == ProfilerLevel.Light)
+        else if (level == ProfilerLevel.Heavy)
             _lightweight.Enable();
     }
 
@@ -81,9 +81,9 @@ internal class ProfileService
     {
         if (_level == ProfilerLevel.Disabled) return;
 
-        if (_level == ProfilerLevel.Heavy)
+        if (_level == ProfilerLevel.Light)
             StopSession();
-        else if (_level == ProfilerLevel.Light)
+        else if (_level == ProfilerLevel.Heavy)
             _lightweight.Disable();
 
         _level = ProfilerLevel.Disabled;
@@ -98,7 +98,7 @@ internal class ProfileService
         if (_level == ProfilerLevel.Disabled) return;
         var key = $"[{identifier}] {name}";
         _activeRecordings[key] = Stopwatch.GetTimestamp();
-        if (_level == ProfilerLevel.Heavy)
+        if (_level == ProfilerLevel.Light)
             ProfilerEventSource.Log.RecordingStart(key);
     }
 
@@ -109,21 +109,21 @@ internal class ProfileService
         if (!_activeRecordings.TryRemove(key, out var startTs)) return;
 
         var durationMs = Stopwatch.GetElapsedTime(startTs).TotalMilliseconds;
-        if (_level == ProfilerLevel.Heavy)
+        if (_level == ProfilerLevel.Light)
             ProfilerEventSource.Log.RecordingStop(key, durationMs);
-        else if (_level == ProfilerLevel.Light)
+        else if (_level == ProfilerLevel.Heavy)
             _lightweight.RecordManual(identifier, name, durationMs);
     }
 
     public void RecordTimeWithIdentifier( string identifier, string name, double duration )
     {
         if (_level == ProfilerLevel.Disabled) return;
-        if (_level == ProfilerLevel.Heavy)
+        if (_level == ProfilerLevel.Light)
         {
             var key = $"[{identifier}] {name}";
             ProfilerEventSource.Log.RecordTime(key, duration);
         }
-        else if (_level == ProfilerLevel.Light)
+        else if (_level == ProfilerLevel.Heavy)
         {
             _lightweight.RecordManual(identifier, name, duration);
         }
@@ -131,7 +131,7 @@ internal class ProfileService
 
     public async Task SaveAsync( string rootDir, ILogger logger )
     {
-        if (_level == ProfilerLevel.Light)
+        if (_level == ProfilerLevel.Heavy)
         {
             SaveLightweightSummary(rootDir, logger);
             return;
@@ -178,7 +178,7 @@ internal class ProfileService
 
         logger.LogInformation("Profiler data saved to {FilePath}.", savedPath);
 
-        if (_level == ProfilerLevel.Heavy)
+        if (_level == ProfilerLevel.Light)
             StartSession();
     }
 
