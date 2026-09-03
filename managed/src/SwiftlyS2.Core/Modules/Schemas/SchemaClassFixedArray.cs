@@ -1,3 +1,4 @@
+using SwiftlyS2.Shared;
 using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Core.Schemas;
@@ -18,5 +19,5 @@ internal class SchemaClassFixedArray<T> : SchemaField, ISchemaClassFixedArray<T>
         ElementSize = elementSize;
     }
 
-    public T this[int index] => T.From(_Handle + index * ElementSize);
+    public T this[int index] => Helper.AsSchema<T>(_Handle + index * ElementSize);
 }

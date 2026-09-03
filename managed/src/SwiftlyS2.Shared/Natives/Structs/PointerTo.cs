@@ -11,5 +11,5 @@ public struct PointerTo<T> where T : INativeHandle, ISchemaClass<T>
 {
   private nint _pointer;
 
-  public readonly T Value => T.From(_pointer);
+  public readonly T Value => Helper.AsSchema<T>(_pointer);
 }

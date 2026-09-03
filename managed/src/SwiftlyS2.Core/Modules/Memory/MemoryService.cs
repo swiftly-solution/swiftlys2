@@ -5,8 +5,8 @@ using SwiftlyS2.Core.Extensions;
 using SwiftlyS2.Shared.Memory;
 using SwiftlyS2.Shared.Schemas;
 using SwiftlyS2.Shared.Engine;
-using SwiftlyS2.Core.EntitySystem;
 using SwiftlyS2.Core.Engine;
+using SwiftlyS2.Shared;
 
 namespace SwiftlyS2.Core.Memory;
 
@@ -152,7 +152,7 @@ internal class MemoryService : IMemoryService, IDisposable
 
     public T ToSchemaClass<T>( nint address ) where T : class, ISchemaClass<T>
     {
-        return T.From(address);
+        return Helper.AsSchema<T>(address);
     }
 
     public nint Alloc( ulong size )

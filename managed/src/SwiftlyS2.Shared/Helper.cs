@@ -1,6 +1,7 @@
 using System.Globalization;
 using SwiftlyS2.Shared.Schemas;
 using SwiftlyS2.Shared.NetMessages;
+using SwiftlyS2.Core.EntitySystem;
 
 namespace SwiftlyS2.Shared;
 
@@ -85,7 +86,8 @@ public static class Helper
     /// <returns>The schema class.</returns>
     public static T AsSchema<T>( nint ptr ) where T : ISchemaClass<T>
     {
-        return T.From(ptr);
+        if(EntityManager.GetEntityByAddress(ptr) is T ent) return ent;
+        return SchemaWrapperCache<T>.Get(ptr);
     }
 
     /// <summary>

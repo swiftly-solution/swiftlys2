@@ -6,6 +6,7 @@ using SwiftlyS2.Core.Commands;
 using SwiftlyS2.Core.GameEvents;
 using SwiftlyS2.Core.NetMessages;
 using SwiftlyS2.Shared.Events;
+using SwiftlyS2.Shared.Schemas;
 using SwiftlyS2.Core.Scheduler;
 using SwiftlyS2.Core.SchemaDefinitions;
 using SwiftlyS2.Shared.ProtobufDefinitions;
@@ -866,12 +867,13 @@ internal static class EventPublisher
     [UnmanagedCallersOnly]
     public static void OnMapLoad( nint mapNamePtr )
     {
+        SchemaWrapperCache.ClearAll();
+        HelpersService.RenewVDataCache();
+
         if (subscribers.Count == 0)
         {
             return;
         }
-
-        HelpersService.RenewVDataCache();
 
         if (!ListensToMapLoad) return;
 

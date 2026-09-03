@@ -70,7 +70,7 @@ public unsafe struct CGameTrace
 
     public readonly bool HitEntityByDesignerName<T>( string designerName, out T outEntity, NameMatchType matchType = NameMatchType.StartsWith ) where T : class, ISchemaClass<T>
     {
-        outEntity = T.From(IntPtr.Zero);
+        outEntity = Helper.AsSchema<T>(IntPtr.Zero);
 
         if (!DidHit)
         {
@@ -146,7 +146,7 @@ public unsafe struct CGameTrace
 
     public readonly bool HitEntity<T>( out T entity ) where T : class, ISchemaClass<T>
     {
-        entity = T.From(IntPtr.Zero);
+        entity = Helper.AsSchema<T>(IntPtr.Zero);
         return T.ClassName != null && HitEntityByDesignerName(T.ClassName, out entity, NameMatchType.Exact);
     }
 
