@@ -31,4 +31,9 @@ public abstract class AllocableNativeHandle : SafeHandleZeroOrMinusOneIsInvalid,
 
         return result;
     }
+
+    public void DangerouslySetAddress( nint address )
+    {
+        SetHandle(address);
+    }
 }
