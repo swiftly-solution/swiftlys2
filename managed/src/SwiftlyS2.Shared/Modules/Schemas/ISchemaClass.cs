@@ -11,7 +11,7 @@ public interface ISchemaClass : INativeHandle
     /// <returns>The converted handle.</returns>
     public K As<K>() where K : class, ISchemaClass<K>
     {
-        return this is K k ? k : Helper.AsSchema<K>(Address);
+        return (this is K ? this as K : K.From(Address))!;
     }
 }
 

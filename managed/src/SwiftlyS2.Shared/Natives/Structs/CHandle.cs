@@ -33,7 +33,7 @@ public struct CHandle<T>( uint raw ) : ICHandle where T : class, ISchemaClass<T>
                 if (ent == null || ent.Entity == null) return null;
                 if (ent.Entity.EntityHandle.Raw != Raw) return null;
 
-                return ent is T entity ? entity : Helper.AsSchema<T>(ent.Address);
+                return ent is T entity ? entity : T.From(ent.Address);
             }
         }
         set {

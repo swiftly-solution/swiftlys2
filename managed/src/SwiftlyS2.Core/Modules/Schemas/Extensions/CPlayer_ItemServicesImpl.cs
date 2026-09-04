@@ -1,6 +1,5 @@
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.Scheduler;
-using SwiftlyS2.Shared;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Shared.Schemas;
 
@@ -14,7 +13,7 @@ internal partial class CPlayer_ItemServicesImpl
         var name = T.ClassName;
         return name == null
             ? throw new ArgumentException($"Can't give item with class {typeof(T).Name}, which doesn't have a designer name.")
-            : Helper.AsSchema<T>(GameFunctions.CCSPlayer_ItemServices_GiveNamedItem(Address, name));
+            : T.From(GameFunctions.CCSPlayer_ItemServices_GiveNamedItem(Address, name));
     }
 
     public Task<T> GiveItemAsync<T>() where T : ISchemaClass<T>
@@ -25,7 +24,7 @@ internal partial class CPlayer_ItemServicesImpl
     public T GiveItem<T>( string itemDesignerName ) where T : ISchemaClass<T>
     {
         NativeBinding.ThrowIfNonMainThread();
-        return Helper.AsSchema<T>(GameFunctions.CCSPlayer_ItemServices_GiveNamedItem(Address, itemDesignerName));
+        return T.From(GameFunctions.CCSPlayer_ItemServices_GiveNamedItem(Address, itemDesignerName));
     }
 
     public Task<T> GiveItemAsync<T>( string itemDesignerName ) where T : ISchemaClass<T>

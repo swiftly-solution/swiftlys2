@@ -24,7 +24,7 @@ public struct CStrongHandle<T> where T : INativeHandle, ISchemaClass<T>
             }
             var handle = _pBinding.Read<nint>();
 
-            return EntityManager.GetEntityByAddress(handle) is T entity ? entity : Helper.AsSchema<T>(handle);
+            return EntityManager.GetEntityByAddress(handle) is T entity ? entity : T.From(handle);
         }
     }
 }
