@@ -8,6 +8,7 @@ using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.GameHooks;
 using SwiftlyS2.Core.Events;
 using SwiftlyS2.Shared.Misc;
+using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.EntitySystem;
 
@@ -44,7 +45,7 @@ internal class EntitySystemService : IEntitySystemService, IDisposable
         ThrowIfEntitySystemInvalid();
         return string.IsNullOrWhiteSpace(T.ClassName)
             ? throw new ArgumentException($"Can't create entity with class {typeof(T).Name}, which doesn't have a designer name.")
-            : CreateEntityByDesignerName<T>(T.ClassName, forcedIndex);
+            : (CreateEntityByDesignerName(T.ClassName, forcedIndex) as T)!;
     }
 
     public T CreateEntityByDesignerName<T>( string designerName ) where T : class, ISchemaClass<T>
@@ -54,6 +55,7 @@ internal class EntitySystemService : IEntitySystemService, IDisposable
 
     public T CreateEntityByDesignerName<T>( string designerName, int forcedIndex ) where T : class, ISchemaClass<T>
     {
+        if (!ClassConvertor.DesignerNames.Contains(designerName)) throw new ArgumentException($"Invalid designer name: {designerName}.");
         return (CreateEntityByDesignerName(designerName, forcedIndex) as T)!;
     }
 
