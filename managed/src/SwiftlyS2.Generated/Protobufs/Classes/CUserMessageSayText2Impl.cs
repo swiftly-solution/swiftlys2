@@ -26,4 +26,6 @@ internal class CUserMessageSayText2Impl : NetMessage<CUserMessageSayText2>, CUse
     { get => Accessor.GetString("param3"); set => Accessor.SetString("param3", value); }
     public string Param4
     { get => Accessor.GetString("param4"); set => Accessor.SetString("param4", value); }
+    public bool Textallchat
+    { get => Accessor.GetBool("textallchat"); set => Accessor.SetBool("textallchat", value); }
 }

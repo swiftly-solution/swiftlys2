@@ -8,20 +8,10 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCSPlayerCamera : CBaseEntity, ISchemaClass<CCSPlayerCamera>
+public partial interface CCSPlayerCamera : CCSCustomPlayerCamera, ISchemaClass<CCSPlayerCamera>
 {
     static CCSPlayerCamera ISchemaClass<CCSPlayerCamera>.From(nint handle) => new CCSPlayerCameraImpl(handle);
-    static int ISchemaClass<CCSPlayerCamera>.Size => 1200;
+    static int ISchemaClass<CCSPlayerCamera>.Size => 1256;
     static string? ISchemaClass<CCSPlayerCamera>.ClassName => "cs_player_camera";
 
-
-    public ref CHandle<CCSPlayerPawnBase> Pawn { get; }
-
-    public ref bool Enabled { get; }
-
-    public ref bool IsControllingAngles { get; }
-
-    public void PawnUpdated();
-    public void EnabledUpdated();
-    public void IsControllingAnglesUpdated();
 }

@@ -20,4 +20,5 @@ public interface CSVCMsg_VoiceData : ITypedProtobuf<CSVCMsg_VoiceData>, INetMess
     public uint Tick { get; set; }
     public int Passthrough { get; set; }
     public int Entity { get; set; }
+    public bool Caster { get; set; }
 }

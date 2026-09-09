@@ -12,42 +12,8 @@ using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CCSPlayerCameraImpl : CBaseEntityImpl, CCSPlayerCamera
+internal partial class CCSPlayerCameraImpl : CCSCustomPlayerCameraImpl, CCSPlayerCamera
 {
     public CCSPlayerCameraImpl(nint handle) : base(handle) { }
 
-    private static nint? _PawnOffset;
-
-    public ref CHandle<CCSPlayerPawnBase> Pawn
-    {
-        get
-        {
-            _PawnOffset = _PawnOffset ?? Schema.GetOffset(0xBB98346E7C628C1D);
-            return ref _Handle.AsRef<CHandle<CCSPlayerPawnBase>>(_PawnOffset!.Value);
-        }
-    }
-    private static nint? _EnabledOffset;
-
-    public ref bool Enabled
-    {
-        get
-        {
-            _EnabledOffset = _EnabledOffset ?? Schema.GetOffset(0xBB98346E6154EB7E);
-            return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
-        }
-    }
-    private static nint? _IsControllingAnglesOffset;
-
-    public ref bool IsControllingAngles
-    {
-        get
-        {
-            _IsControllingAnglesOffset = _IsControllingAnglesOffset ?? Schema.GetOffset(0xBB98346E9981578E);
-            return ref _Handle.AsRef<bool>(_IsControllingAnglesOffset!.Value);
-        }
-    }
-
-    public void PawnUpdated() => Schema.Update(_Handle, 0xBB98346E7C628C1D);
-    public void EnabledUpdated() => Schema.Update(_Handle, 0xBB98346E6154EB7E);
-    public void IsControllingAnglesUpdated() => Schema.Update(_Handle, 0xBB98346E9981578E);
 }

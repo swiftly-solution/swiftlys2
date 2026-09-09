@@ -19,4 +19,5 @@ public interface CUserMessageSayText2 : ITypedProtobuf<CUserMessageSayText2>, IN
     public string Param2 { get; set; }
     public string Param3 { get; set; }
     public string Param4 { get; set; }
+    public bool Textallchat { get; set; }
 }
