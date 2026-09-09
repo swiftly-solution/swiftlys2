@@ -28,4 +28,6 @@ internal class CSVCMsg_VoiceDataImpl : NetMessage<CSVCMsg_VoiceData>, CSVCMsg_Vo
     { get => Accessor.GetInt32("passthrough"); set => Accessor.SetInt32("passthrough", value); }
     public int Entity
     { get => Accessor.GetInt32("entity"); set => Accessor.SetInt32("entity", value); }
+    public bool Caster
+    { get => Accessor.GetBool("caster"); set => Accessor.SetBool("caster", value); }
 }

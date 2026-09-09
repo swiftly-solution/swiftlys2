@@ -11,11 +11,13 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CCSCustomHudLayout : CBaseEntity, ISchemaClass<CCSCustomHudLayout>
 {
     static CCSCustomHudLayout ISchemaClass<CCSCustomHudLayout>.From(nint handle) => new CCSCustomHudLayoutImpl(handle);
-    static int ISchemaClass<CCSCustomHudLayout>.Size => 2024;
+    static int ISchemaClass<CCSCustomHudLayout>.Size => 2032;
     static string? ISchemaClass<CCSCustomHudLayout>.ClassName => "custom_hud_layout";
 
 
     public string StrLayout { get; set; }
+
+    public ref bool Observable { get; }
 
     public ref CUtlVector<CCSCustomHudLayoutState> PlayerLayoutStates { get; }
 
@@ -28,6 +30,7 @@ public partial interface CCSCustomHudLayout : CBaseEntity, ISchemaClass<CCSCusto
     public ref CUtlVector<CUtlString> DialogVariableNames { get; }
 
     public void StrLayoutUpdated();
+    public void ObservableUpdated();
     public void PlayerLayoutStatesUpdated();
     public void GlobalLayoutStateUpdated();
     public void PanelIdsUpdated();
