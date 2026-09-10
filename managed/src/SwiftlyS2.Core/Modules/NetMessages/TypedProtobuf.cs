@@ -16,4 +16,9 @@ internal class TypedProtobuf<T> : INativeHandle where T : ITypedProtobuf<T>
     public nint Address => Accessor.Address;
 
     public bool IsValid => Accessor.IsValid;
+
+    public void DangerouslySetAddress( nint address )
+    {
+        Accessor.DangerouslySetAddress(address);
+    }
 }

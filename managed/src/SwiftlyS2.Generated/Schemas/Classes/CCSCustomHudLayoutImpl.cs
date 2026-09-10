@@ -31,6 +31,16 @@ internal partial class CCSCustomHudLayoutImpl : CBaseEntityImpl, CCSCustomHudLay
             Schema.SetString(_Handle, _StrLayoutOffset!.Value, value);
         }
     }
+    private static nint? _ObservableOffset;
+
+    public ref bool Observable
+    {
+        get
+        {
+            _ObservableOffset = _ObservableOffset ?? Schema.GetOffset(0x8D6B5DA6B19746C8);
+            return ref _Handle.AsRef<bool>(_ObservableOffset!.Value);
+        }
+    }
     private static nint? _PlayerLayoutStatesOffset;
 
     public ref CUtlVector<CCSCustomHudLayoutState> PlayerLayoutStates
@@ -86,6 +96,7 @@ internal partial class CCSCustomHudLayoutImpl : CBaseEntityImpl, CCSCustomHudLay
     }
 
     public void StrLayoutUpdated() => Schema.Update(_Handle, 0x8D6B5DA6F7FB9036);
+    public void ObservableUpdated() => Schema.Update(_Handle, 0x8D6B5DA6B19746C8);
     public void PlayerLayoutStatesUpdated() => Schema.Update(_Handle, 0x8D6B5DA6A9304E98);
     public void GlobalLayoutStateUpdated() => Schema.Update(_Handle, 0x8D6B5DA66973065D);
     public void PanelIdsUpdated() => Schema.Update(_Handle, 0x8D6B5DA6E1F230A9);

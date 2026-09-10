@@ -65,7 +65,7 @@ jobs:
     steps:
     - name: Install dependencies
       run: |
-        apt-get update
+        apt-get -o Acquire::Check-Valid-Until=false update
         apt install -y libreadline-dev
     - name: Checkout repository and submodules
       uses: actions/checkout@v4
@@ -139,7 +139,7 @@ jobs:
     steps:
     - name: Install dependencies
       run: |
-        apt-get update
+        apt-get -o Acquire::Check-Valid-Until=false update
         apt install libreadline-dev
     - name: Checkout repository and submodules
       uses: actions/checkout@v4

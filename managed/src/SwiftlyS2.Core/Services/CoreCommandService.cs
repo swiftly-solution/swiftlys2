@@ -313,7 +313,7 @@ internal class CoreCommandService
         if (args.Length == 1)
         {
             var table = new Table().AddColumn("Command").AddColumn("Description")
-                .AddRow("enable <1|2>", "Enable the profiler (1 = light/Harmony, 2 = heavy/EventPipe)")
+                .AddRow("enable <1|2>", "Enable the profiler (1 = light/EventPipe, 2 = heavy/Harmony)")
                 .AddRow("disable", "Disable the profiler")
                 .AddRow("status", "Show the status of the profiler")
                 .AddRow("save", "Save the profiler data to a file");
@@ -324,15 +324,15 @@ internal class CoreCommandService
         switch (args[1].Trim().ToLower())
         {
             case "enable":
-                var levelArg = args.Length > 2 ? args[2].Trim() : "2";
+                var levelArg = args.Length > 2 ? args[2].Trim() : "1";
                 if (!int.TryParse(levelArg, out var levelValue) || levelValue is not (1 or 2))
                 {
                     logger.LogWarning("Usage: profiler enable <1|2> (1 = light, 2 = heavy)");
                     break;
                 }
                 var level = (ProfilerLevel)levelValue;
-                if (level == ProfilerLevel.Light)
-                    logger.LogWarning("Light mode patches the core SwiftlyS2 assembly, SwiftlyS2.Profiler, and every loaded plugin with Harmony - this will add per-call overhead while active.");
+                if (level == ProfilerLevel.Heavy)
+                    logger.LogWarning("Heavy mode patches the core SwiftlyS2 assembly, SwiftlyS2.Profiler, and every loaded plugin with Harmony - this will add per-call overhead while active.");
                 profileService.Enable(level);
                 logger.LogInformation("The profiler has been enabled ({Level}).", level);
                 break;
