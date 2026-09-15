@@ -84,4 +84,12 @@ public interface IConVarService
     /// <param name="name">The name of the convar.</param>
     /// <param name="value">The value to replicate.</param>
     public void ReplicateToAll(string name, string value);
+
+    /// <summary>
+    /// Query the value of a convar from a specific client.
+    /// </summary>
+    /// <param name="clientId">The client id to query.</param>
+    /// <param name="name">The name of the convar.</param>
+    /// <param name="callback">The callback to invoke with the result.</param>
+    public void QueryClient(int clientId, string name, Action<string> callback);
 }
