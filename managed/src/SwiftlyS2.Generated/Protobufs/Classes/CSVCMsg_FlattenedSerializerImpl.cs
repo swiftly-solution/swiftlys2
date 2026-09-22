@@ -18,4 +18,6 @@ internal class CSVCMsg_FlattenedSerializerImpl : NetMessage<CSVCMsg_FlattenedSer
     { get => new ProtobufRepeatedFieldValueType<string>(Accessor, "symbols"); }
     public IProtobufRepeatedFieldSubMessageType<ProtoFlattenedSerializerField_t> Fields
     { get => new ProtobufRepeatedFieldSubMessageType<ProtoFlattenedSerializerField_t>(Accessor, "fields"); }
+    public ProtoCoordSizeParams_t CoordSizeParams
+    { get => new ProtoCoordSizeParams_tImpl(NativeNetMessages.GetNestedMessage(Address, "coord_size_params"), false); }
 }

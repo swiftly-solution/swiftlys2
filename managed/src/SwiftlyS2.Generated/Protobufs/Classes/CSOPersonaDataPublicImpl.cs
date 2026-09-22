@@ -24,4 +24,6 @@ internal class CSOPersonaDataPublicImpl : TypedProtobuf<CSOPersonaDataPublic>, C
     { get => Accessor.GetUInt32("xp_trail_level"); set => Accessor.SetUInt32("xp_trail_level", value); }
     public uint ClanId
     { get => Accessor.GetUInt32("clan_id"); set => Accessor.SetUInt32("clan_id", value); }
+    public string ClanTag
+    { get => Accessor.GetString("clan_tag"); set => Accessor.SetString("clan_tag", value); }
 }
