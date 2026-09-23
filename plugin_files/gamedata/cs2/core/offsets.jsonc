@@ -4,12 +4,12 @@
         "linux": 80
     },
     "CBasePlayerPawn::CommitSuicide": {
-        "windows": 384,
-        "linux": 384
+        "windows": 387,
+        "linux": 387
     },
     "CCSPlayerController::ChangeTeam": {
-        "windows": 103,
-        "linux": 102
+        "windows": 105,
+        "linux": 104
     },
     /*
     Called in CBaseEntityAPI::TeleportToPoint
@@ -19,8 +19,8 @@
         "linux": 164
     },
     "CCSPlayerController::Respawn": {
-        "windows": 270,
-        "linux": 272
+        "windows": 274,
+        "linux": 276
     },
     "CBaseEntity::CollisionRulesChanged": {
         "windows": 188,
@@ -50,16 +50,16 @@
     inside it there should be a virtual call on CSoundSystem.
     */
     "CSoundSystem::TakeGuid": {
-        "windows": 76,
-        "linux": 75
+        "windows": 78,
+        "linux": 77
     },
     "CGameRules::FindPickerEntity": {
-        "windows": 26,
-        "linux": 27
+        "windows": 25,
+        "linux": 26
     },
     "CGameRules::GoToIntermission": {
-        "windows": 130,
-        "linux": 131
+        "windows": 129,
+        "linux": 130
     },
     "CCSPlayer_ItemServices::DropActiveItem": {
         "windows": 26,
@@ -176,16 +176,16 @@
         "linux": 40
     },
     "CBaseEntity::StartTouch": {
-        "windows": 148,
-        "linux": 147
-    },
-    "CBaseEntity::Touch": {
-        "windows": 149,
-        "linux": 148
-    },
-    "CBaseEntity::EndTouch": {
         "windows": 150,
         "linux": 149
+    },
+    "CBaseEntity::Touch": {
+        "windows": 151,
+        "linux": 150
+    },
+    "CBaseEntity::EndTouch": {
+        "windows": 152,
+        "linux": 151
     },
     /*
     By tracing the calls in cstrike15_src
@@ -419,8 +419,8 @@
         "linux": 272
     },
     "CServerSideClientBase::m_bConVarsChanged": {
-        "windows": 321,
-        "linux": 321
+        "windows": 320,
+        "linux": 320
     },
     "CServerSideClientBase::m_bIsHLTV": {
         "windows": 322,
@@ -491,27 +491,27 @@
         "linux": 2564
     },
     "CServerSideClientBase::m_fSnapshotInterval": {
-        "windows": 2568,
-        "linux": 2568
+        "windows": 2564,
+        "linux": 2564
     },
     "CServerSideClientBase::m_Trace": {
-        "windows": 2928,
-        "linux": 2936
+        "windows": 2944,
+        "linux": 2944
     },
     "CServerSideClientBase::m_spamCommandsCount": {
-        "windows": 2976,
+        "windows": 2984,
         "linux": 2984
     },
     "CServerSideClientBase::m_lastExecutedCommand": {
-        "windows": 2984,
+        "windows": 2992,
         "linux": 2992
     },
     "CServerSideClientBase::ShouldSendMessages": {
         "windows": 52,
-        "linux": 53
+        "linux": 54
     },
     "CServerSideClientBase::FreeBaselines": {
-        "windows": 64,
+        "windows": 63,
         "linux": 65
     },
     "CServerSideClientBase::GetRate": {
@@ -519,7 +519,7 @@
         "linux": 13
     },
     "CServerSideClientBase::MarkToKick": {
-        "windows": 76,
+        "windows": 75,
         "linux": 77
     },
     "CServerSideClientBase::Reconnect": {
@@ -528,7 +528,7 @@
     },
     "CServerSideClientBase::ResetUserSettings": {
         "windows": 56,
-        "linux": 57
+        "linux": 58
     },
     "CServerSideClientBase::SetRate": {
         "windows": 10,
@@ -539,15 +539,15 @@
         "linux": 12
     },
     "CServerSideClientBase::UnmarkToKick": {
-        "windows": 77,
+        "windows": 76,
         "linux": 78
     },
     "CServerSideClientBase::UpdateSendState": {
         "windows": 53,
-        "linux": 54
+        "linux": 55
     },
     "CServerSideClientBase::UpdateUserSettings": {
         "windows": 55,
-        "linux": 56
+        "linux": 57
     }
 }
