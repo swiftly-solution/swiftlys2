@@ -23,8 +23,8 @@
         "linux": 272
     },
     "CBaseEntity::CollisionRulesChanged": {
-        "windows": 186,
-        "linux": 185
+        "windows": 188,
+        "linux": 187
     },
     "CGameSceneNode::GetSkeletonInstance": {
         "windows": 12,
