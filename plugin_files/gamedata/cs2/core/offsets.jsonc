@@ -486,9 +486,10 @@
         "windows": 2560,
         "linux": 2560
     },
+    // Historical name: AuthTicketCanceled pending-disconnect timestamp, not authentication success time.
     "CServerSideClientBase::m_fAuthenticatedTime": {
-        "windows": 2564,
-        "linux": 2564
+        "windows": 2568,
+        "linux": 2568
     },
     "CServerSideClientBase::m_fSnapshotInterval": {
         "windows": 2564,
