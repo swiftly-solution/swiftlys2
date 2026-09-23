@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_RandomNamedModelElement : CParticleFunctionInitializer, ISchemaClass<C_INIT_RandomNamedModelElement>
 {
     static C_INIT_RandomNamedModelElement ISchemaClass<C_INIT_RandomNamedModelElement>.From(nint handle) => new C_INIT_RandomNamedModelElementImpl(handle);
-    static int ISchemaClass<C_INIT_RandomNamedModelElement>.Size => 520;
+    static int ISchemaClass<C_INIT_RandomNamedModelElement>.Size => 528;
     static string? ISchemaClass<C_INIT_RandomNamedModelElement>.ClassName => null;
 
 

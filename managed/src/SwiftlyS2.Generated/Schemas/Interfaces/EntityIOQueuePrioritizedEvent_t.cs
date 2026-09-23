@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface EntityIOQueuePrioritizedEvent_t : ISchemaClass<EntityIOQueuePrioritizedEvent_t>
 {
     static EntityIOQueuePrioritizedEvent_t ISchemaClass<EntityIOQueuePrioritizedEvent_t>.From(nint handle) => new EntityIOQueuePrioritizedEvent_tImpl(handle);
-    static int ISchemaClass<EntityIOQueuePrioritizedEvent_t>.Size => 112;
+    static int ISchemaClass<EntityIOQueuePrioritizedEvent_t>.Size => 248;
     static string? ISchemaClass<EntityIOQueuePrioritizedEvent_t>.ClassName => null;
 
 
@@ -30,6 +30,12 @@ public partial interface EntityIOQueuePrioritizedEvent_t : ISchemaClass<EntityIO
     public ref CHandle<CEntityInstance> EntTarget { get; }
 
     public ref CVariant<CVariantDefaultAllocator> VariantValue { get; }
+
+    // CPulseArgumentPack
+    public SchemaUntypedField PulseArguments { get; }
+
+    // CPulseInputParamMap
+    public SchemaUntypedField ParamMap { get; }
 
 
 }

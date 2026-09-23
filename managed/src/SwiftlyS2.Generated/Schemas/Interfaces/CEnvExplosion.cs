@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CEnvExplosion : CModelPointEntity, ISchemaClass<CEnvExplosion>
 {
     static CEnvExplosion ISchemaClass<CEnvExplosion>.From(nint handle) => new CEnvExplosionImpl(handle);
-    static int ISchemaClass<CEnvExplosion>.Size => 1992;
+    static int ISchemaClass<CEnvExplosion>.Size => 2216;
     static string? ISchemaClass<CEnvExplosion>.ClassName => "env_explosion";
 
 
@@ -28,6 +28,8 @@ public partial interface CEnvExplosion : CModelPointEntity, ISchemaClass<CEnvExp
     public ref CHandle<CBaseEntity> Inflictor { get; }
 
     public ref DamageTypes_t CustomDamageType { get; }
+
+    public ref bool HasCustomDamageType { get; }
 
     public ref bool CreateDebris { get; }
 

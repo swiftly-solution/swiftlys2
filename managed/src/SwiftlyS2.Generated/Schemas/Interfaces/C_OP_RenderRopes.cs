@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RenderRopes : CBaseRendererSource2, ISchemaClass<C_OP_RenderRopes>
 {
     static C_OP_RenderRopes ISchemaClass<C_OP_RenderRopes>.From(nint handle) => new C_OP_RenderRopesImpl(handle);
-    static int ISchemaClass<C_OP_RenderRopes>.Size => 13344;
+    static int ISchemaClass<C_OP_RenderRopes>.Size => 13608;
     static string? ISchemaClass<C_OP_RenderRopes>.ClassName => null;
 
 

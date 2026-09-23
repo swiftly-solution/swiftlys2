@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface PulseGraphExecutionHistoryEntry_t : ISchemaClass<PulseGraphExecutionHistoryEntry_t>
 {
     static PulseGraphExecutionHistoryEntry_t ISchemaClass<PulseGraphExecutionHistoryEntry_t>.From(nint handle) => new PulseGraphExecutionHistoryEntry_tImpl(handle);
-    static int ISchemaClass<PulseGraphExecutionHistoryEntry_t>.Size => 32;
+    static int ISchemaClass<PulseGraphExecutionHistoryEntry_t>.Size => 56;
     static string? ISchemaClass<PulseGraphExecutionHistoryEntry_t>.ClassName => null;
 
 
@@ -19,12 +19,17 @@ public partial interface PulseGraphExecutionHistoryEntry_t : ISchemaClass<PulseG
 
     public PulseDocNodeID_t EditorID { get; }
 
+    // PulseSymbol_t
+    public SchemaUntypedField SeqPoint { get; }
+
     public ref float ExecTime { get; }
 
     public ref uint Flags { get; }
 
     // PulseSymbol_t
     public SchemaUntypedField TagName { get; }
+
+    public PulseCursorID_t ChildID { get; }
 
 
 }

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_InheritFromParentParticles : CParticleFunctionOperator, ISchemaClass<C_OP_InheritFromParentParticles>
 {
     static C_OP_InheritFromParentParticles ISchemaClass<C_OP_InheritFromParentParticles>.From(nint handle) => new C_OP_InheritFromParentParticlesImpl(handle);
-    static int ISchemaClass<C_OP_InheritFromParentParticles>.Size => 488;
+    static int ISchemaClass<C_OP_InheritFromParentParticles>.Size => 496;
     static string? ISchemaClass<C_OP_InheritFromParentParticles>.ClassName => null;
 
 

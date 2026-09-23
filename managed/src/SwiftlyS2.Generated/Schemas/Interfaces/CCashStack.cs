@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CCashStack : CBaseModelEntity, ISchemaClass<CCashStack>
 {
     static CCashStack ISchemaClass<CCashStack>.From(nint handle) => new CCashStackImpl(handle);
-    static int ISchemaClass<CCashStack>.Size => 1912;
+    static int ISchemaClass<CCashStack>.Size => 2136;
     static string? ISchemaClass<CCashStack>.ClassName => "cash_stack";
 
 

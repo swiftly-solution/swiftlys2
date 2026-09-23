@@ -317,6 +317,36 @@ internal partial class C_EconItemViewImpl : IEconItemInterfaceImpl, C_EconItemVi
             Schema.SetFixedString(_Handle, _CustomNameOverrideOffset!.Value, value, 161);
         }
     }
+    private static nint? _CustomNameOverride2Offset;
+
+    public string CustomNameOverride2
+    {
+        get
+        {
+            _CustomNameOverride2Offset = _CustomNameOverride2Offset ?? Schema.GetOffset(0x3753663C442C9A5E);
+            return Schema.GetString(_Handle + _CustomNameOverride2Offset!.Value);
+        }
+        set
+        {
+            _CustomNameOverride2Offset = _CustomNameOverride2Offset ?? Schema.GetOffset(0x3753663C442C9A5E);
+            Schema.SetFixedString(_Handle, _CustomNameOverride2Offset!.Value, value, 161);
+        }
+    }
+    private static nint? _CustomNameOverride3Offset;
+
+    public string CustomNameOverride3
+    {
+        get
+        {
+            _CustomNameOverride3Offset = _CustomNameOverride3Offset ?? Schema.GetOffset(0x3753663C452C9BF1);
+            return Schema.GetString(_Handle + _CustomNameOverride3Offset!.Value);
+        }
+        set
+        {
+            _CustomNameOverride3Offset = _CustomNameOverride3Offset ?? Schema.GetOffset(0x3753663C452C9BF1);
+            Schema.SetFixedString(_Handle, _CustomNameOverride3Offset!.Value, value, 161);
+        }
+    }
     private static nint? _InitializedTagsOffset;
 
     public ref bool InitializedTags

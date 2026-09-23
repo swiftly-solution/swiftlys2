@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_CSGO_PreviewModel : CBaseAnimGraph, ISchemaClass<C_CSGO_PreviewModel>
 {
     static C_CSGO_PreviewModel ISchemaClass<C_CSGO_PreviewModel>.From(nint handle) => new C_CSGO_PreviewModelImpl(handle);
-    static int ISchemaClass<C_CSGO_PreviewModel>.Size => 5776;
+    static int ISchemaClass<C_CSGO_PreviewModel>.Size => 6328;
     static string? ISchemaClass<C_CSGO_PreviewModel>.ClassName => null;
 
 

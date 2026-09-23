@@ -52,4 +52,16 @@ public interface CMsgSource2NetworkFlowQuality : ITypedProtobuf<CMsgSource2Netwo
     public uint NetPingP5 { get; set; }
     public uint NetPingP50 { get; set; }
     public uint NetPingP95 { get; set; }
+    public uint MsgprocUsecP50 { get; set; }
+    public uint MsgprocUsecP95 { get; set; }
+    public uint MsgprocUsecP99 { get; set; }
+    public uint MsgprocUsecMax { get; set; }
+    public uint MsgprocUsecAvgP50 { get; set; }
+    public uint MsgprocUsecAvgP95 { get; set; }
+    public uint MsgprocUsecAvgP99 { get; set; }
+    public uint MsgprocUsecAvgMax { get; set; }
+    public uint QueuedmsgsP50 { get; set; }
+    public uint QueuedmsgsP95 { get; set; }
+    public uint QueuedmsgsP99 { get; set; }
+    public uint QueuedmsgsMax { get; set; }
 }

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPAssignment_t : ISchemaClass<CPAssignment_t>
 {
     static CPAssignment_t ISchemaClass<CPAssignment_t>.From(nint handle) => new CPAssignment_tImpl(handle);
-    static int ISchemaClass<CPAssignment_t>.Size => 1736;
+    static int ISchemaClass<CPAssignment_t>.Size => 1768;
     static string? ISchemaClass<CPAssignment_t>.ClassName => null;
 
 

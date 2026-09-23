@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmGraphDocTransitionEventConditionNode : CNmGraphDocFlowNode, ISchemaClass<CNmGraphDocTransitionEventConditionNode>
 {
     static CNmGraphDocTransitionEventConditionNode ISchemaClass<CNmGraphDocTransitionEventConditionNode>.From(nint handle) => new CNmGraphDocTransitionEventConditionNodeImpl(handle);
-    static int ISchemaClass<CNmGraphDocTransitionEventConditionNode>.Size => 280;
+    static int ISchemaClass<CNmGraphDocTransitionEventConditionNode>.Size => 288;
     static string? ISchemaClass<CNmGraphDocTransitionEventConditionNode>.ClassName => null;
 
 

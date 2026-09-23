@@ -11,8 +11,8 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CBasePlatTrain : CBaseToggle, ISchemaClass<CBasePlatTrain>
 {
     static CBasePlatTrain ISchemaClass<CBasePlatTrain>.From(nint handle) => new CBasePlatTrainImpl(handle);
-    static int ISchemaClass<CBasePlatTrain>.Size => 2072;
-    static string? ISchemaClass<CBasePlatTrain>.ClassName => null;
+    static int ISchemaClass<CBasePlatTrain>.Size => 2296;
+    static string? ISchemaClass<CBasePlatTrain>.ClassName => "base_plat_train";
 
 
     public ref CGameSoundEventName NoiseMoving { get; }

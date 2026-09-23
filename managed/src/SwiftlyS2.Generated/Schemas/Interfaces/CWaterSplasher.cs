@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CWaterSplasher : C_BaseModelEntity, ISchemaClass<CWaterSplasher>
 {
     static CWaterSplasher ISchemaClass<CWaterSplasher>.From(nint handle) => new CWaterSplasherImpl(handle);
-    static int ISchemaClass<CWaterSplasher>.Size => 4016;
+    static int ISchemaClass<CWaterSplasher>.Size => 4248;
     static string? ISchemaClass<CWaterSplasher>.ClassName => null;
 
 }

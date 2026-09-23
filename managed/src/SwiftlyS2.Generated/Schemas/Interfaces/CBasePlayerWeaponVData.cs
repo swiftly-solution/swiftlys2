@@ -47,6 +47,8 @@ public partial interface CBasePlayerWeaponVData : CEntitySubclassVDataBase, ISch
 
     public ref bool GenerateMuzzleLight { get; }
 
+    public ref bool ShouldAnimateInWorld { get; }
+
     public ref bool LinkedCooldowns { get; }
 
     public ref ItemFlagTypes_t Flags { get; }

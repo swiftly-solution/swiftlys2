@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmGraphDocGlobalTransitionNode : CNmGraphDocTransitionNode, ISchemaClass<CNmGraphDocGlobalTransitionNode>
 {
     static CNmGraphDocGlobalTransitionNode ISchemaClass<CNmGraphDocGlobalTransitionNode>.From(nint handle) => new CNmGraphDocGlobalTransitionNodeImpl(handle);
-    static int ISchemaClass<CNmGraphDocGlobalTransitionNode>.Size => 304;
+    static int ISchemaClass<CNmGraphDocGlobalTransitionNode>.Size => 312;
     static string? ISchemaClass<CNmGraphDocGlobalTransitionNode>.ClassName => null;
 
 

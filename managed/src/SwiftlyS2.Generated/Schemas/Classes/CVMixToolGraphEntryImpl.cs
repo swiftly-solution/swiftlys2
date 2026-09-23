@@ -12,20 +12,20 @@ using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CVMixToolGraphEntryImpl : SchemaClass, CVMixToolGraphEntry
+internal partial class CVMixToolGraphEntryImpl : CVMixToolGraphImpl, CVMixToolGraphEntry
 {
     public CVMixToolGraphEntryImpl(nint handle) : base(handle) { }
 
-    private static nint? _GraphOffset;
-    private CVMixToolGraphImpl? _GraphInstance;
+    private static nint? _GraphPreviewOffset;
+    private CGraphPreviewListImpl? _GraphPreviewInstance;
 
-    public CVMixToolGraph Graph
+    public CGraphPreviewList GraphPreview
     {
         get
         {
-            _GraphOffset = _GraphOffset ?? Schema.GetOffset(0x255D8294F9852D67);
-            var instance = _GraphInstance ??= new CVMixToolGraphImpl(0);
-            instance.DangerousSetHandle(_Handle + _GraphOffset!.Value);
+            _GraphPreviewOffset = _GraphPreviewOffset ?? Schema.GetOffset(0x255D829463420151);
+            var instance = _GraphPreviewInstance ??= new CGraphPreviewListImpl(0);
+            instance.DangerousSetHandle(_Handle + _GraphPreviewOffset!.Value);
             return instance;
         }
     }
@@ -39,19 +39,6 @@ internal partial class CVMixToolGraphEntryImpl : SchemaClass, CVMixToolGraphEntr
             _EditorStateOffset = _EditorStateOffset ?? Schema.GetOffset(0x255D829420CC95FD);
             var instance = _EditorStateInstance ??= new CGraphEditorStateImpl(0);
             instance.DangerousSetHandle(_Handle + _EditorStateOffset!.Value);
-            return instance;
-        }
-    }
-    private static nint? _GraphPreviewOffset;
-    private CGraphPreviewListImpl? _GraphPreviewInstance;
-
-    public CGraphPreviewList GraphPreview
-    {
-        get
-        {
-            _GraphPreviewOffset = _GraphPreviewOffset ?? Schema.GetOffset(0x255D829463420151);
-            var instance = _GraphPreviewInstance ??= new CGraphPreviewListImpl(0);
-            instance.DangerousSetHandle(_Handle + _GraphPreviewOffset!.Value);
             return instance;
         }
     }

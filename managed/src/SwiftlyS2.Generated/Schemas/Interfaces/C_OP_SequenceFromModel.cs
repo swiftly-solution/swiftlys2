@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_SequenceFromModel : CParticleFunctionOperator, ISchemaClass<C_OP_SequenceFromModel>
 {
     static C_OP_SequenceFromModel ISchemaClass<C_OP_SequenceFromModel>.From(nint handle) => new C_OP_SequenceFromModelImpl(handle);
-    static int ISchemaClass<C_OP_SequenceFromModel>.Size => 504;
+    static int ISchemaClass<C_OP_SequenceFromModel>.Size => 512;
     static string? ISchemaClass<C_OP_SequenceFromModel>.ClassName => null;
 
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_SetFromCPSnapshot : CParticleFunctionOperator, ISchemaClass<C_OP_SetFromCPSnapshot>
 {
     static C_OP_SetFromCPSnapshot ISchemaClass<C_OP_SetFromCPSnapshot>.From(nint handle) => new C_OP_SetFromCPSnapshotImpl(handle);
-    static int ISchemaClass<C_OP_SetFromCPSnapshot>.Size => 1624;
+    static int ISchemaClass<C_OP_SetFromCPSnapshot>.Size => 1656;
     static string? ISchemaClass<C_OP_SetFromCPSnapshot>.ClassName => null;
 
 

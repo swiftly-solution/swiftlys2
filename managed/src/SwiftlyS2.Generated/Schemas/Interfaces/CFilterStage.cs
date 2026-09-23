@@ -25,6 +25,8 @@ public partial interface CFilterStage : ISchemaClass<CFilterStage>
 
     public ref VMixFilterSlope_t FilterSlope { get; }
 
+    public ref VMixFilterChannelSet_t ChannelSet { get; }
+
     public ref bool Enable { get; }
 
 

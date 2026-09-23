@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_TimeVaryingForce : CParticleFunctionForce, ISchemaClass<C_OP_TimeVaryingForce>
 {
     static C_OP_TimeVaryingForce ISchemaClass<C_OP_TimeVaryingForce>.From(nint handle) => new C_OP_TimeVaryingForceImpl(handle);
-    static int ISchemaClass<C_OP_TimeVaryingForce>.Size => 520;
+    static int ISchemaClass<C_OP_TimeVaryingForce>.Size => 528;
     static string? ISchemaClass<C_OP_TimeVaryingForce>.ClassName => null;
 
 

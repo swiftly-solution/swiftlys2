@@ -336,6 +336,16 @@ internal partial class CSceneEntityImpl : CPointEntityImpl, CSceneEntity
             return ref _Handle.AsRef<bool>(_CancelAtNextInterruptOffset!.Value);
         }
     }
+    private static nint? _RemoveOnCompletionOffset;
+
+    public ref bool RemoveOnCompletion
+    {
+        get
+        {
+            _RemoveOnCompletionOffset = _RemoveOnCompletionOffset ?? Schema.GetOffset(0x1099B70106E2CBD6);
+            return ref _Handle.AsRef<bool>(_RemoveOnCompletionOffset!.Value);
+        }
+    }
     private static nint? _PitchOffset;
 
     public ref float Pitch
@@ -556,6 +566,58 @@ internal partial class CSceneEntityImpl : CPointEntityImpl, CSceneEntity
             return ref _Handle.AsRef<CEntityIOOutput>(_OnPulseRequirementOffset!.Value);
         }
     }
+    private static nint? _TargetNameMapOffset;
+    private SchemaUntypedField? _TargetNameMapInstance;
+
+    public SchemaUntypedField TargetNameMap
+    {
+        get
+        {
+            _TargetNameMapOffset = _TargetNameMapOffset ?? Schema.GetOffset(0x1099B7010F72DC1B);
+            var instance = _TargetNameMapInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _TargetNameMapOffset!.Value);
+            return instance;
+        }
+    }
+    private static nint? _AnchorNameMapOffset;
+    private SchemaUntypedField? _AnchorNameMapInstance;
+
+    public SchemaUntypedField AnchorNameMap
+    {
+        get
+        {
+            _AnchorNameMapOffset = _AnchorNameMapOffset ?? Schema.GetOffset(0x1099B701F5CA99AF);
+            var instance = _AnchorNameMapInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _AnchorNameMapOffset!.Value);
+            return instance;
+        }
+    }
+    private static nint? _ActorGraphMapOffset;
+    private SchemaUntypedField? _ActorGraphMapInstance;
+
+    public SchemaUntypedField ActorGraphMap
+    {
+        get
+        {
+            _ActorGraphMapOffset = _ActorGraphMapOffset ?? Schema.GetOffset(0x1099B70104B03F1C);
+            var instance = _ActorGraphMapInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ActorGraphMapOffset!.Value);
+            return instance;
+        }
+    }
+    private static nint? _ActorClipMapOffset;
+    private SchemaUntypedField? _ActorClipMapInstance;
+
+    public SchemaUntypedField ActorClipMap
+    {
+        get
+        {
+            _ActorClipMapOffset = _ActorClipMapOffset ?? Schema.GetOffset(0x1099B70133E4DF12);
+            var instance = _ActorClipMapInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ActorClipMapOffset!.Value);
+            return instance;
+        }
+    }
     private static nint? _ActorMapOffset;
 
     public ref CUtlVector<ActorMapping_t> ActorMap
@@ -584,6 +646,36 @@ internal partial class CSceneEntityImpl : CPointEntityImpl, CSceneEntity
         {
             _InterruptCountOffset = _InterruptCountOffset ?? Schema.GetOffset(0x1099B70114AAD933);
             return ref _Handle.AsRef<int>(_InterruptCountOffset!.Value);
+        }
+    }
+    private static nint? _ResponseConceptOffset;
+
+    public string ResponseConcept
+    {
+        get
+        {
+            _ResponseConceptOffset = _ResponseConceptOffset ?? Schema.GetOffset(0x1099B701285877E6);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ResponseConceptOffset!.Value));
+        }
+        set
+        {
+            _ResponseConceptOffset = _ResponseConceptOffset ?? Schema.GetOffset(0x1099B701285877E6);
+            Schema.SetCUtlString(_Handle, _ResponseConceptOffset!.Value, value);
+        }
+    }
+    private static nint? _ResponseCriteriaOffset;
+
+    public string ResponseCriteria
+    {
+        get
+        {
+            _ResponseCriteriaOffset = _ResponseCriteriaOffset ?? Schema.GetOffset(0x1099B701D6297C7F);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ResponseCriteriaOffset!.Value));
+        }
+        set
+        {
+            _ResponseCriteriaOffset = _ResponseCriteriaOffset ?? Schema.GetOffset(0x1099B701D6297C7F);
+            Schema.SetCUtlString(_Handle, _ResponseCriteriaOffset!.Value, value);
         }
     }
     private static nint? _SceneMissingOffset;

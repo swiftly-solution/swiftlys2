@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_RandomLifeTime : CParticleFunctionInitializer, ISchemaClass<C_INIT_RandomLifeTime>
 {
     static C_INIT_RandomLifeTime ISchemaClass<C_INIT_RandomLifeTime>.From(nint handle) => new C_INIT_RandomLifeTimeImpl(handle);
-    static int ISchemaClass<C_INIT_RandomLifeTime>.Size => 496;
+    static int ISchemaClass<C_INIT_RandomLifeTime>.Size => 504;
     static string? ISchemaClass<C_INIT_RandomLifeTime>.ClassName => null;
 
 

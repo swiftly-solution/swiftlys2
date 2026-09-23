@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_PositionWarp : CParticleFunctionInitializer, ISchemaClass<C_INIT_PositionWarp>
 {
     static C_INIT_PositionWarp ISchemaClass<C_INIT_PositionWarp>.From(nint handle) => new C_INIT_PositionWarpImpl(handle);
-    static int ISchemaClass<C_INIT_PositionWarp>.Size => 3952;
+    static int ISchemaClass<C_INIT_PositionWarp>.Size => 4024;
     static string? ISchemaClass<C_INIT_PositionWarp>.ClassName => null;
 
 

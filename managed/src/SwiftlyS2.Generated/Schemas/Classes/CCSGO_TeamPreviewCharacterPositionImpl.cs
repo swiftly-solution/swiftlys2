@@ -110,6 +110,19 @@ internal partial class CCSGO_TeamPreviewCharacterPositionImpl : CBaseEntityImpl,
             return instance;
         }
     }
+    private static nint? _PetItemOffset;
+    private CEconItemViewImpl? _PetItemInstance;
+
+    public CEconItemView PetItem
+    {
+        get
+        {
+            _PetItemOffset = _PetItemOffset ?? Schema.GetOffset(0x58B5CA366F0615FD);
+            var instance = _PetItemInstance ??= new CEconItemViewImpl(0);
+            instance.DangerousSetHandle(_Handle + _PetItemOffset!.Value);
+            return instance;
+        }
+    }
 
     public void VariantUpdated() => Schema.Update(_Handle, 0x58B5CA36B2DB2B42);
     public void RandomUpdated() => Schema.Update(_Handle, 0x58B5CA36850EF8CE);
@@ -119,4 +132,5 @@ internal partial class CCSGO_TeamPreviewCharacterPositionImpl : CBaseEntityImpl,
     public void AgentItemUpdated() => Schema.Update(_Handle, 0x58B5CA366B625605);
     public void GlovesItemUpdated() => Schema.Update(_Handle, 0x58B5CA3692931DD0);
     public void WeaponItemUpdated() => Schema.Update(_Handle, 0x58B5CA3689437C5A);
+    public void PetItemUpdated() => Schema.Update(_Handle, 0x58B5CA366F0615FD);
 }

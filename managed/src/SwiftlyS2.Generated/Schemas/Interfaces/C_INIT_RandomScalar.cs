@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_RandomScalar : CParticleFunctionInitializer, ISchemaClass<C_INIT_RandomScalar>
 {
     static C_INIT_RandomScalar ISchemaClass<C_INIT_RandomScalar>.From(nint handle) => new C_INIT_RandomScalarImpl(handle);
-    static int ISchemaClass<C_INIT_RandomScalar>.Size => 496;
+    static int ISchemaClass<C_INIT_RandomScalar>.Size => 504;
     static string? ISchemaClass<C_INIT_RandomScalar>.ClassName => null;
 
 

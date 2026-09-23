@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CParticleFunctionInitializer : CParticleFunction, ISchemaClass<CParticleFunctionInitializer>
 {
     static CParticleFunctionInitializer ISchemaClass<CParticleFunctionInitializer>.From(nint handle) => new CParticleFunctionInitializerImpl(handle);
-    static int ISchemaClass<CParticleFunctionInitializer>.Size => 480;
+    static int ISchemaClass<CParticleFunctionInitializer>.Size => 488;
     static string? ISchemaClass<CParticleFunctionInitializer>.ClassName => null;
 
 

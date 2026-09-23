@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_AttractToControlPoint : CParticleFunctionForce, ISchemaClass<C_OP_AttractToControlPoint>
 {
     static C_OP_AttractToControlPoint ISchemaClass<C_OP_AttractToControlPoint>.From(nint handle) => new C_OP_AttractToControlPointImpl(handle);
-    static int ISchemaClass<C_OP_AttractToControlPoint>.Size => 1728;
+    static int ISchemaClass<C_OP_AttractToControlPoint>.Size => 1760;
     static string? ISchemaClass<C_OP_AttractToControlPoint>.ClassName => null;
 
 

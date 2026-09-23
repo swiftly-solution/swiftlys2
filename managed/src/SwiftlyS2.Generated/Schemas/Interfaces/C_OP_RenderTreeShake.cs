@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RenderTreeShake : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderTreeShake>
 {
     static C_OP_RenderTreeShake ISchemaClass<C_OP_RenderTreeShake>.From(nint handle) => new C_OP_RenderTreeShakeImpl(handle);
-    static int ISchemaClass<C_OP_RenderTreeShake>.Size => 592;
+    static int ISchemaClass<C_OP_RenderTreeShake>.Size => 600;
     static string? ISchemaClass<C_OP_RenderTreeShake>.ClassName => null;
 
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CBaseModelEntity : CBaseEntity, ISchemaClass<CBaseModelEntity>
 {
     static CBaseModelEntity ISchemaClass<CBaseModelEntity>.From(nint handle) => new CBaseModelEntityImpl(handle);
-    static int ISchemaClass<CBaseModelEntity>.Size => 1904;
+    static int ISchemaClass<CBaseModelEntity>.Size => 2128;
     static string? ISchemaClass<CBaseModelEntity>.ClassName => "basemodelentity";
 
 
@@ -72,6 +72,8 @@ public partial interface CBaseModelEntity : CBaseEntity, ISchemaClass<CBaseModel
 
     public ref bool RenderToCubemaps { get; }
 
+    public ref bool ExpandRenderBoundsToIncludeCloth { get; }
+
     public ref bool NoInterpolate { get; }
 
     public CCollisionProperty Collision { get; }
@@ -90,6 +92,11 @@ public partial interface CBaseModelEntity : CBaseEntity, ISchemaClass<CBaseModel
 
     public ref byte ObjectCulling { get; }
 
+    public ref uint BodyGroupTotalRequestCount { get; }
+
+    // CUtlVectorFixedGrowable< CBaseModelEntity::BodyGroupRequest_t, 8 >
+    public SchemaUntypedField BodyGroupRequests { get; }
+
     // CUtlOrderedMap< CGlobalSymbol, int32 >
     public SchemaUntypedField BodyGroupChoices { get; }
 
@@ -105,6 +112,7 @@ public partial interface CBaseModelEntity : CBaseEntity, ISchemaClass<CBaseModel
     public void RenderUpdated();
     public void RenderAttributesUpdated();
     public void RenderToCubemapsUpdated();
+    public void ExpandRenderBoundsToIncludeClothUpdated();
     public void NoInterpolateUpdated();
     public void CollisionUpdated();
     public void GlowUpdated();

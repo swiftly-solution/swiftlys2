@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_OffsetVectorToVector : CParticleFunctionInitializer, ISchemaClass<C_INIT_OffsetVectorToVector>
 {
     static C_INIT_OffsetVectorToVector ISchemaClass<C_INIT_OffsetVectorToVector>.From(nint handle) => new C_INIT_OffsetVectorToVectorImpl(handle);
-    static int ISchemaClass<C_INIT_OffsetVectorToVector>.Size => 520;
+    static int ISchemaClass<C_INIT_OffsetVectorToVector>.Size => 528;
     static string? ISchemaClass<C_INIT_OffsetVectorToVector>.ClassName => null;
 
 

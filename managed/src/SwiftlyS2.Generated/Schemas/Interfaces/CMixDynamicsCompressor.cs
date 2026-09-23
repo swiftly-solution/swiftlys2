@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CMixDynamicsCompressor : CMixPropertyBase, ISchemaClass<CMixDynamicsCompressor>
 {
     static CMixDynamicsCompressor ISchemaClass<CMixDynamicsCompressor>.From(nint handle) => new CMixDynamicsCompressorImpl(handle);
-    static int ISchemaClass<CMixDynamicsCompressor>.Size => 80;
+    static int ISchemaClass<CMixDynamicsCompressor>.Size => 88;
     static string? ISchemaClass<CMixDynamicsCompressor>.ClassName => null;
 
 

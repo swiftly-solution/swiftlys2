@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_FuncElectrifiedVolume : C_FuncBrush, ISchemaClass<C_FuncElectrifiedVolume>
 {
     static C_FuncElectrifiedVolume ISchemaClass<C_FuncElectrifiedVolume>.From(nint handle) => new C_FuncElectrifiedVolumeImpl(handle);
-    static int ISchemaClass<C_FuncElectrifiedVolume>.Size => 4040;
+    static int ISchemaClass<C_FuncElectrifiedVolume>.Size => 4272;
     static string? ISchemaClass<C_FuncElectrifiedVolume>.ClassName => null;
 
 

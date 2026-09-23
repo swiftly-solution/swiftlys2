@@ -109,5 +109,31 @@ internal partial class EntityIOQueuePrioritizedEvent_tImpl : SchemaClass, Entity
             return ref _Handle.AsRef<CVariant<CVariantDefaultAllocator>>(_VariantValueOffset!.Value);
         }
     }
+    private static nint? _PulseArgumentsOffset;
+    private SchemaUntypedField? _PulseArgumentsInstance;
+
+    public SchemaUntypedField PulseArguments
+    {
+        get
+        {
+            _PulseArgumentsOffset = _PulseArgumentsOffset ?? Schema.GetOffset(0xE77B3E3361D8E31E);
+            var instance = _PulseArgumentsInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _PulseArgumentsOffset!.Value);
+            return instance;
+        }
+    }
+    private static nint? _ParamMapOffset;
+    private SchemaUntypedField? _ParamMapInstance;
+
+    public SchemaUntypedField ParamMap
+    {
+        get
+        {
+            _ParamMapOffset = _ParamMapOffset ?? Schema.GetOffset(0xE77B3E33F64DD25C);
+            var instance = _ParamMapInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _ParamMapOffset!.Value);
+            return instance;
+        }
+    }
 
 }

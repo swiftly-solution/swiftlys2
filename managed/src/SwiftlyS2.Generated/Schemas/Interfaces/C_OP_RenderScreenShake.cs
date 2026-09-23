@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RenderScreenShake : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderScreenShake>
 {
     static C_OP_RenderScreenShake ISchemaClass<C_OP_RenderScreenShake>.From(nint handle) => new C_OP_RenderScreenShakeImpl(handle);
-    static int ISchemaClass<C_OP_RenderScreenShake>.Size => 592;
+    static int ISchemaClass<C_OP_RenderScreenShake>.Size => 600;
     static string? ISchemaClass<C_OP_RenderScreenShake>.ClassName => null;
 
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPhysicsPropOverride : CPhysicsProp, ISchemaClass<CPhysicsPropOverride>
 {
     static CPhysicsPropOverride ISchemaClass<CPhysicsPropOverride>.From(nint handle) => new CPhysicsPropOverrideImpl(handle);
-    static int ISchemaClass<CPhysicsPropOverride>.Size => 3120;
+    static int ISchemaClass<CPhysicsPropOverride>.Size => 3344;
     static string? ISchemaClass<CPhysicsPropOverride>.ClassName => "prop_physics_override";
 
 }

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_BaseModelEntity : C_BaseEntity, ISchemaClass<C_BaseModelEntity>
 {
     static C_BaseModelEntity ISchemaClass<C_BaseModelEntity>.From(nint handle) => new C_BaseModelEntityImpl(handle);
-    static int ISchemaClass<C_BaseModelEntity>.Size => 4016;
+    static int ISchemaClass<C_BaseModelEntity>.Size => 4248;
     static string? ISchemaClass<C_BaseModelEntity>.ClassName => null;
 
 
@@ -72,6 +72,8 @@ public partial interface C_BaseModelEntity : C_BaseEntity, ISchemaClass<C_BaseMo
 
     public ref bool RenderToCubemaps { get; }
 
+    public ref bool ExpandRenderBoundsToIncludeCloth { get; }
+
     public ref bool NoInterpolate { get; }
 
     public CCollisionProperty Collision { get; }
@@ -91,6 +93,11 @@ public partial interface C_BaseModelEntity : C_BaseEntity, ISchemaClass<C_BaseMo
     public ref byte ObjectCulling { get; }
 
     public ref DecalRtEncoding_t RequiredDecalRtEncoding { get; }
+
+    public ref uint BodyGroupTotalRequestCount { get; }
+
+    // CUtlVectorFixedGrowable< C_BaseModelEntity::BodyGroupRequest_t, 8 >
+    public SchemaUntypedField BodyGroupRequests { get; }
 
     // CUtlOrderedMap< CGlobalSymbol, int32 >
     public SchemaUntypedField BodyGroupChoices { get; }

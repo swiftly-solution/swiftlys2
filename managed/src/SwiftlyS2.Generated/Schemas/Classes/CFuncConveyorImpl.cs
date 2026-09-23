@@ -114,6 +114,16 @@ internal partial class CFuncConveyorImpl : CBaseModelEntityImpl, CFuncConveyor
             return ref _Handle.AsRef<float>(_TransitionStartSpeedOffset!.Value);
         }
     }
+    private static nint? _FrictionScaleOffset;
+
+    public ref float FrictionScale
+    {
+        get
+        {
+            _FrictionScaleOffset = _FrictionScaleOffset ?? Schema.GetOffset(0x6E29EBA9CB7D1875);
+            return ref _Handle.AsRef<float>(_FrictionScaleOffset!.Value);
+        }
+    }
     private static nint? _ConveyorModels1Offset;
 
     public ref CUtlVector<CHandle<CBaseEntity>> ConveyorModels1
@@ -130,5 +140,6 @@ internal partial class CFuncConveyorImpl : CBaseModelEntityImpl, CFuncConveyor
     public void TransitionStartTickUpdated() => Schema.Update(_Handle, 0x6E29EBA9FB464AF3);
     public void TransitionDurationTicksUpdated() => Schema.Update(_Handle, 0x6E29EBA9B99437D4);
     public void TransitionStartSpeedUpdated() => Schema.Update(_Handle, 0x6E29EBA97456F6D7);
+    public void FrictionScaleUpdated() => Schema.Update(_Handle, 0x6E29EBA9CB7D1875);
     public void ConveyorModels1Updated() => Schema.Update(_Handle, 0x6E29EBA9BAB755A8);
 }

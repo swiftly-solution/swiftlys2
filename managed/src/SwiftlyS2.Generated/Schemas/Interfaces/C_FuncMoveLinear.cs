@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_FuncMoveLinear : C_BaseToggle, ISchemaClass<C_FuncMoveLinear>
 {
     static C_FuncMoveLinear ISchemaClass<C_FuncMoveLinear>.From(nint handle) => new C_FuncMoveLinearImpl(handle);
-    static int ISchemaClass<C_FuncMoveLinear>.Size => 4016;
+    static int ISchemaClass<C_FuncMoveLinear>.Size => 4248;
     static string? ISchemaClass<C_FuncMoveLinear>.ClassName => null;
 
 }

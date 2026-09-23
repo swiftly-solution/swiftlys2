@@ -151,6 +151,16 @@ internal partial class CTriggerPhysicsImpl : CBaseTriggerImpl, CTriggerPhysics
             return ref _Handle.AsRef<Vector>(_LinearForceDirectionOffset!.Value);
         }
     }
+    private static nint? _ForceDirectionIsInLocalSpaceOffset;
+
+    public ref bool ForceDirectionIsInLocalSpace
+    {
+        get
+        {
+            _ForceDirectionIsInLocalSpaceOffset = _ForceDirectionIsInLocalSpaceOffset ?? Schema.GetOffset(0xD6C7C8D3C74995B5);
+            return ref _Handle.AsRef<bool>(_ForceDirectionIsInLocalSpaceOffset!.Value);
+        }
+    }
     private static nint? _ConvertToDebrisWhenPossibleOffset;
 
     public ref bool ConvertToDebrisWhenPossible
@@ -174,5 +184,6 @@ internal partial class CTriggerPhysicsImpl : CBaseTriggerImpl, CTriggerPhysics
     public void CollapseToForcePointUpdated() => Schema.Update(_Handle, 0xD6C7C8D3EB895D00);
     public void LinearForcePointAtWorldUpdated() => Schema.Update(_Handle, 0xD6C7C8D3C80D3782);
     public void LinearForceDirectionUpdated() => Schema.Update(_Handle, 0xD6C7C8D36076B2FC);
+    public void ForceDirectionIsInLocalSpaceUpdated() => Schema.Update(_Handle, 0xD6C7C8D3C74995B5);
     public void ConvertToDebrisWhenPossibleUpdated() => Schema.Update(_Handle, 0xD6C7C8D36AD4D155);
 }

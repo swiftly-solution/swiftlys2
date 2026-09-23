@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_CreateParticleSystemRenderer : CParticleFunctionRenderer, ISchemaClass<C_OP_CreateParticleSystemRenderer>
 {
     static C_OP_CreateParticleSystemRenderer ISchemaClass<C_OP_CreateParticleSystemRenderer>.From(nint handle) => new C_OP_CreateParticleSystemRendererImpl(handle);
-    static int ISchemaClass<C_OP_CreateParticleSystemRenderer>.Size => 2312;
+    static int ISchemaClass<C_OP_CreateParticleSystemRenderer>.Size => 2352;
     static string? ISchemaClass<C_OP_CreateParticleSystemRenderer>.ClassName => null;
 
 

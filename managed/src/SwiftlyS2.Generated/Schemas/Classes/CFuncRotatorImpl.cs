@@ -56,6 +56,16 @@ internal partial class CFuncRotatorImpl : CBaseModelEntityImpl, CFuncRotator
             return ref _Handle.AsRef<float>(_SpeedOffset!.Value);
         }
     }
+    private static nint? _RotationDistanceDegreesOffset;
+
+    public ref float RotationDistanceDegrees
+    {
+        get
+        {
+            _RotationDistanceDegreesOffset = _RotationDistanceDegreesOffset ?? Schema.GetOffset(0x73DA1BB9B94004A7);
+            return ref _Handle.AsRef<float>(_RotationDistanceDegreesOffset!.Value);
+        }
+    }
     private static nint? _TimeToCompleteRotationOffset;
 
     public ref float TimeToCompleteRotation
@@ -89,16 +99,6 @@ internal partial class CFuncRotatorImpl : CBaseModelEntityImpl, CFuncRotator
         {
             _StrRotatorTargetOffset = _StrRotatorTargetOffset ?? Schema.GetOffset(0x73DA1BB95D9EF510);
             Schema.SetString(_Handle, _StrRotatorTargetOffset!.Value, value);
-        }
-    }
-    private static nint? _LocalRotationHistoryOffset;
-
-    public ref CUtlVector<Quaternion> LocalRotationHistory
-    {
-        get
-        {
-            _LocalRotationHistoryOffset = _LocalRotationHistoryOffset ?? Schema.GetOffset(0x73DA1BB9B6DBBD46);
-            return ref _Handle.AsRef<CUtlVector<Quaternion>>(_LocalRotationHistoryOffset!.Value);
         }
     }
     private static nint? _OnRotationStartedOffset;
@@ -273,26 +273,6 @@ internal partial class CFuncRotatorImpl : CBaseModelEntityImpl, CFuncRotator
             return ref _Handle.AsRef<Quaternion>(_SpawnOrientationOffset!.Value);
         }
     }
-    private static nint? _RecordHistoryOffset;
-
-    public ref bool RecordHistory
-    {
-        get
-        {
-            _RecordHistoryOffset = _RecordHistoryOffset ?? Schema.GetOffset(0x73DA1BB9A1A2B6DC);
-            return ref _Handle.AsRef<bool>(_RecordHistoryOffset!.Value);
-        }
-    }
-    private static nint? _ReturningToPreviousRotationOffset;
-
-    public ref bool ReturningToPreviousRotation
-    {
-        get
-        {
-            _ReturningToPreviousRotationOffset = _ReturningToPreviousRotationOffset ?? Schema.GetOffset(0x73DA1BB96096B147);
-            return ref _Handle.AsRef<bool>(_ReturningToPreviousRotationOffset!.Value);
-        }
-    }
     private static nint? _ReturningToInitialRotationOffset;
 
     public ref bool ReturningToInitialRotation
@@ -321,16 +301,6 @@ internal partial class CFuncRotatorImpl : CBaseModelEntityImpl, CFuncRotator
         {
             _MaxYawRotationOffset = _MaxYawRotationOffset ?? Schema.GetOffset(0x73DA1BB991340C90);
             return ref _Handle.AsRef<float>(_MaxYawRotationOffset!.Value);
-        }
-    }
-    private static nint? _OscillationCountOffset;
-
-    public ref int OscillationCount
-    {
-        get
-        {
-            _OscillationCountOffset = _OscillationCountOffset ?? Schema.GetOffset(0x73DA1BB9B322D857);
-            return ref _Handle.AsRef<int>(_OscillationCountOffset!.Value);
         }
     }
     private static nint? _OscillationFromStartOffset;
@@ -411,6 +381,16 @@ internal partial class CFuncRotatorImpl : CBaseModelEntityImpl, CFuncRotator
         {
             _SpeedDriftFromOverRotateOffset = _SpeedDriftFromOverRotateOffset ?? Schema.GetOffset(0x73DA1BB9CB6D05A8);
             return ref _Handle.AsRef<float>(_SpeedDriftFromOverRotateOffset!.Value);
+        }
+    }
+    private static nint? _QueueStopOffset;
+
+    public ref bool QueueStop
+    {
+        get
+        {
+            _QueueStopOffset = _QueueStopOffset ?? Schema.GetOffset(0x73DA1BB9109D47C0);
+            return ref _Handle.AsRef<bool>(_QueueStopOffset!.Value);
         }
     }
 

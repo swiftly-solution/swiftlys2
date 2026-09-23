@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CEnvSky : CBaseModelEntity, ISchemaClass<CEnvSky>
 {
     static CEnvSky ISchemaClass<CEnvSky>.From(nint handle) => new CEnvSkyImpl(handle);
-    static int ISchemaClass<CEnvSky>.Size => 2000;
+    static int ISchemaClass<CEnvSky>.Size => 2224;
     static string? ISchemaClass<CEnvSky>.ClassName => "env_sky";
 
 

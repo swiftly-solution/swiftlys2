@@ -41,14 +41,19 @@ internal partial class CNmBodyGroupEventImpl : CNmEventImpl, CNmBodyGroupEvent
             Schema.SetCUtlString(_Handle, _GroupNameOffset!.Value, value);
         }
     }
-    private static nint? _GroupValueOffset;
+    private static nint? _ChoiceNameOffset;
 
-    public ref int GroupValue
+    public string ChoiceName
     {
         get
         {
-            _GroupValueOffset = _GroupValueOffset ?? Schema.GetOffset(0xBC3A00162501A499);
-            return ref _Handle.AsRef<int>(_GroupValueOffset!.Value);
+            _ChoiceNameOffset = _ChoiceNameOffset ?? Schema.GetOffset(0xBC3A001606409935);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ChoiceNameOffset!.Value));
+        }
+        set
+        {
+            _ChoiceNameOffset = _ChoiceNameOffset ?? Schema.GetOffset(0xBC3A001606409935);
+            Schema.SetCUtlString(_Handle, _ChoiceNameOffset!.Value, value);
         }
     }
 

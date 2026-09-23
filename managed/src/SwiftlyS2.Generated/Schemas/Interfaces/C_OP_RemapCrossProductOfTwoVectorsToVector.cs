@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RemapCrossProductOfTwoVectorsToVector : CParticleFunctionOperator, ISchemaClass<C_OP_RemapCrossProductOfTwoVectorsToVector>
 {
     static C_OP_RemapCrossProductOfTwoVectorsToVector ISchemaClass<C_OP_RemapCrossProductOfTwoVectorsToVector>.From(nint handle) => new C_OP_RemapCrossProductOfTwoVectorsToVectorImpl(handle);
-    static int ISchemaClass<C_OP_RemapCrossProductOfTwoVectorsToVector>.Size => 3920;
+    static int ISchemaClass<C_OP_RemapCrossProductOfTwoVectorsToVector>.Size => 3992;
     static string? ISchemaClass<C_OP_RemapCrossProductOfTwoVectorsToVector>.ClassName => null;
 
 

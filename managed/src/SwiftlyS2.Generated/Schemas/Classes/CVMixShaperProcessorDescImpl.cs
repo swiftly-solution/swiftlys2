@@ -29,5 +29,18 @@ internal partial class CVMixShaperProcessorDescImpl : CVMixBaseProcessorDescImpl
             return instance;
         }
     }
+    private static nint? _ParamDriveOffset;
+    private CVMixParameterFloatImpl? _ParamDriveInstance;
+
+    public CVMixParameterFloat ParamDrive
+    {
+        get
+        {
+            _ParamDriveOffset = _ParamDriveOffset ?? Schema.GetOffset(0xDB60C0A43F3B1D36);
+            var instance = _ParamDriveInstance ??= new CVMixParameterFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamDriveOffset!.Value);
+            return instance;
+        }
+    }
 
 }

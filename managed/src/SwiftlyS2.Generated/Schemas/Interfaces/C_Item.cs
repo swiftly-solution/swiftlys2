@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_Item : C_EconEntity, ISchemaClass<C_Item>
 {
     static C_Item ISchemaClass<C_Item>.From(nint handle) => new C_ItemImpl(handle);
-    static int ISchemaClass<C_Item>.Size => 6128;
+    static int ISchemaClass<C_Item>.Size => 6680;
     static string? ISchemaClass<C_Item>.ClassName => null;
 
 

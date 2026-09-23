@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RenderFlattenGrass : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderFlattenGrass>
 {
     static C_OP_RenderFlattenGrass ISchemaClass<C_OP_RenderFlattenGrass>.From(nint handle) => new C_OP_RenderFlattenGrassImpl(handle);
-    static int ISchemaClass<C_OP_RenderFlattenGrass>.Size => 568;
+    static int ISchemaClass<C_OP_RenderFlattenGrass>.Size => 576;
     static string? ISchemaClass<C_OP_RenderFlattenGrass>.ClassName => null;
 
 

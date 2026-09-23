@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPathMover : CPathWithDynamicNodes, ISchemaClass<CPathMover>
 {
     static CPathMover ISchemaClass<CPathMover>.From(nint handle) => new CPathMoverImpl(handle);
-    static int ISchemaClass<CPathMover>.Size => 1600;
+    static int ISchemaClass<CPathMover>.Size => 1616;
     static string? ISchemaClass<CPathMover>.ClassName => "path_mover";
 
 

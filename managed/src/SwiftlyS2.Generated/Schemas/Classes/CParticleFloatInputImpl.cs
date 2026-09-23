@@ -526,5 +526,15 @@ internal partial class CParticleFloatInputImpl : CParticleInputImpl, CParticleFl
             return instance;
         }
     }
+    private static nint? _CompareValueOffset;
+
+    public ref float CompareValue
+    {
+        get
+        {
+            _CompareValueOffset = _CompareValueOffset ?? Schema.GetOffset(0x4330CD3242C0882F);
+            return ref _Handle.AsRef<float>(_CompareValueOffset!.Value);
+        }
+    }
 
 }

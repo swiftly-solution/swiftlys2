@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RemapDotProductToScalar : CParticleFunctionOperator, ISchemaClass<C_OP_RemapDotProductToScalar>
 {
     static C_OP_RemapDotProductToScalar ISchemaClass<C_OP_RemapDotProductToScalar>.From(nint handle) => new C_OP_RemapDotProductToScalarImpl(handle);
-    static int ISchemaClass<C_OP_RemapDotProductToScalar>.Size => 512;
+    static int ISchemaClass<C_OP_RemapDotProductToScalar>.Size => 520;
     static string? ISchemaClass<C_OP_RemapDotProductToScalar>.ClassName => null;
 
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_AK47 : C_CSWeaponBaseGun, ISchemaClass<C_AK47>
 {
     static C_AK47 ISchemaClass<C_AK47>.From(nint handle) => new C_AK47Impl(handle);
-    static int ISchemaClass<C_AK47>.Size => 7440;
+    static int ISchemaClass<C_AK47>.Size => 8000;
     static string? ISchemaClass<C_AK47>.ClassName => null;
 
 }

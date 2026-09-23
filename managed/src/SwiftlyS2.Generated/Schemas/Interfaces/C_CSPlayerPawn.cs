@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_CSPlayerPawn : C_CSPlayerPawnBase, ISchemaClass<C_CSPlayerPawn>
 {
     static C_CSPlayerPawn ISchemaClass<C_CSPlayerPawn>.From(nint handle) => new C_CSPlayerPawnImpl(handle);
-    static int ISchemaClass<C_CSPlayerPawn>.Size => 13424;
+    static int ISchemaClass<C_CSPlayerPawn>.Size => 14096;
     static string? ISchemaClass<C_CSPlayerPawn>.ClassName => null;
 
 
@@ -105,6 +105,8 @@ public partial interface C_CSPlayerPawn : C_CSPlayerPawnBase, ISchemaClass<C_CSP
 
     public ref bool OnGroundLastTick { get; }
 
+    public ref CHandle<CCSMinimapVolume> ActiveMinimapVolume { get; }
+
     public ref CHandle<C_CS2HudModelArms> HudModelArms { get; }
 
     public ref QAngle DeathEyeAngles { get; }
@@ -188,6 +190,8 @@ public partial interface C_CSPlayerPawn : C_CSPlayerPawnBase, ISchemaClass<C_CSP
     public ref Vector StashedGrenadeThrowPawnCenter { get; }
 
     public ref Vector StashedVelocity { get; }
+
+    public ref float InterpolatedInaccuracy { get; }
 
     public ref bool ShouldAutobuyDMWeapons { get; }
 

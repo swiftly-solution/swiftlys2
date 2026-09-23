@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_CS2HudModelArms : C_CS2HudModelBase, ISchemaClass<C_CS2HudModelArms>
 {
     static C_CS2HudModelArms ISchemaClass<C_CS2HudModelArms>.From(nint handle) => new C_CS2HudModelArmsImpl(handle);
-    static int ISchemaClass<C_CS2HudModelArms>.Size => 4992;
+    static int ISchemaClass<C_CS2HudModelArms>.Size => 5216;
     static string? ISchemaClass<C_CS2HudModelArms>.ClassName => null;
 
 }

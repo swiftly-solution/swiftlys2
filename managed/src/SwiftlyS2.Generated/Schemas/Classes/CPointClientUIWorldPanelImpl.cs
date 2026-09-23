@@ -76,6 +76,16 @@ internal partial class CPointClientUIWorldPanelImpl : CBaseClientUIEntityImpl, C
             return ref _Handle.AsRef<float>(_DPIOffset!.Value);
         }
     }
+    private static nint? _WindowUIScaleOffset;
+
+    public ref float WindowUIScale
+    {
+        get
+        {
+            _WindowUIScaleOffset = _WindowUIScaleOffset ?? Schema.GetOffset(0xA4834E6FF34FBDF1);
+            return ref _Handle.AsRef<float>(_WindowUIScaleOffset!.Value);
+        }
+    }
     private static nint? _InteractDistanceOffset;
 
     public ref float InteractDistance
@@ -273,6 +283,7 @@ internal partial class CPointClientUIWorldPanelImpl : CBaseClientUIEntityImpl, C
     public void WidthUpdated() => Schema.Update(_Handle, 0xA4834E6FB91935E1);
     public void HeightUpdated() => Schema.Update(_Handle, 0xA4834E6FEADD7FB0);
     public void DPIUpdated() => Schema.Update(_Handle, 0xA4834E6FEB0B7A2E);
+    public void WindowUIScaleUpdated() => Schema.Update(_Handle, 0xA4834E6FF34FBDF1);
     public void InteractDistanceUpdated() => Schema.Update(_Handle, 0xA4834E6F47FBB4C2);
     public void DepthOffsetUpdated() => Schema.Update(_Handle, 0xA4834E6F67D1DB9B);
     public void OwnerContextUpdated() => Schema.Update(_Handle, 0xA4834E6FB5F5A8BC);

@@ -14,4 +14,6 @@ public interface CMsgPlayerInfo : ITypedProtobuf<CMsgPlayerInfo>
     public ulong Steamid { get; set; }
     public bool Fakeplayer { get; set; }
     public bool Ishltv { get; set; }
+    public bool ClanMember { get; set; }
+    public bool ClanOfficer { get; set; }
 }

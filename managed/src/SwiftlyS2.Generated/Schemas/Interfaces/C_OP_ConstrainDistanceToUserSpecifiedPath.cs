@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_ConstrainDistanceToUserSpecifiedPath : CParticleFunctionConstraint, ISchemaClass<C_OP_ConstrainDistanceToUserSpecifiedPath>
 {
     static C_OP_ConstrainDistanceToUserSpecifiedPath ISchemaClass<C_OP_ConstrainDistanceToUserSpecifiedPath>.From(nint handle) => new C_OP_ConstrainDistanceToUserSpecifiedPathImpl(handle);
-    static int ISchemaClass<C_OP_ConstrainDistanceToUserSpecifiedPath>.Size => 512;
+    static int ISchemaClass<C_OP_ConstrainDistanceToUserSpecifiedPath>.Size => 520;
     static string? ISchemaClass<C_OP_ConstrainDistanceToUserSpecifiedPath>.ClassName => null;
 
 

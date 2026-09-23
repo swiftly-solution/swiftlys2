@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_CollideWithParentParticles : CParticleFunctionConstraint, ISchemaClass<C_OP_CollideWithParentParticles>
 {
     static C_OP_CollideWithParentParticles ISchemaClass<C_OP_CollideWithParentParticles>.From(nint handle) => new C_OP_CollideWithParentParticlesImpl(handle);
-    static int ISchemaClass<C_OP_CollideWithParentParticles>.Size => 1208;
+    static int ISchemaClass<C_OP_CollideWithParentParticles>.Size => 1232;
     static string? ISchemaClass<C_OP_CollideWithParentParticles>.ClassName => null;
 
 

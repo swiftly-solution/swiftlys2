@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmGraphDocEntryStateOverrideConditionsNode : CNmGraphDocResultNode, ISchemaClass<CNmGraphDocEntryStateOverrideConditionsNode>
 {
     static CNmGraphDocEntryStateOverrideConditionsNode ISchemaClass<CNmGraphDocEntryStateOverrideConditionsNode>.From(nint handle) => new CNmGraphDocEntryStateOverrideConditionsNodeImpl(handle);
-    static int ISchemaClass<CNmGraphDocEntryStateOverrideConditionsNode>.Size => 288;
+    static int ISchemaClass<CNmGraphDocEntryStateOverrideConditionsNode>.Size => 296;
     static string? ISchemaClass<CNmGraphDocEntryStateOverrideConditionsNode>.ClassName => null;
 
 

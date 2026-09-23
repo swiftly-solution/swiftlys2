@@ -110,5 +110,18 @@ internal partial class C_CSGO_TeamPreviewCharacterPositionImpl : C_BaseEntityImp
             return instance;
         }
     }
+    private static nint? _PetItemOffset;
+    private C_EconItemViewImpl? _PetItemInstance;
+
+    public C_EconItemView PetItem
+    {
+        get
+        {
+            _PetItemOffset = _PetItemOffset ?? Schema.GetOffset(0xE9AE6B396F0615FD);
+            var instance = _PetItemInstance ??= new C_EconItemViewImpl(0);
+            instance.DangerousSetHandle(_Handle + _PetItemOffset!.Value);
+            return instance;
+        }
+    }
 
 }

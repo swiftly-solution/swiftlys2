@@ -29,5 +29,44 @@ internal partial class CVMixDualCompressorProcessorDescImpl : CVMixBaseProcessor
             return instance;
         }
     }
+    private static nint? _OutParamLevelOffset;
+    private CVMixParameterFloatImpl? _OutParamLevelInstance;
+
+    public CVMixParameterFloat OutParamLevel
+    {
+        get
+        {
+            _OutParamLevelOffset = _OutParamLevelOffset ?? Schema.GetOffset(0x23F8AA2E4EE63A32);
+            var instance = _OutParamLevelInstance ??= new CVMixParameterFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _OutParamLevelOffset!.Value);
+            return instance;
+        }
+    }
+    private static nint? _OutParamdBLevelOffset;
+    private CVMixParameterFloatImpl? _OutParamdBLevelInstance;
+
+    public CVMixParameterFloat OutParamdBLevel
+    {
+        get
+        {
+            _OutParamdBLevelOffset = _OutParamdBLevelOffset ?? Schema.GetOffset(0x23F8AA2EB5E8DB6C);
+            var instance = _OutParamdBLevelInstance ??= new CVMixParameterFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _OutParamdBLevelOffset!.Value);
+            return instance;
+        }
+    }
+    private static nint? _OutParamReductionOffset;
+    private CVMixParameterFloatImpl? _OutParamReductionInstance;
+
+    public CVMixParameterFloat OutParamReduction
+    {
+        get
+        {
+            _OutParamReductionOffset = _OutParamReductionOffset ?? Schema.GetOffset(0x23F8AA2EB15FB285);
+            var instance = _OutParamReductionInstance ??= new CVMixParameterFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _OutParamReductionOffset!.Value);
+            return instance;
+        }
+    }
 
 }

@@ -17,13 +17,16 @@ internal partial class CVMixNameInputMeterImpl : CVMixInputBaseImpl, CVMixNameIn
     public CVMixNameInputMeterImpl(nint handle) : base(handle) { }
 
     private static nint? _ValueIndexOffset;
+    private CVMixDataOffsetImpl? _ValueIndexInstance;
 
-    public ref int ValueIndex
+    public CVMixDataOffset ValueIndex
     {
         get
         {
             _ValueIndexOffset = _ValueIndexOffset ?? Schema.GetOffset(0xFFF92B4C9567C242);
-            return ref _Handle.AsRef<int>(_ValueIndexOffset!.Value);
+            var instance = _ValueIndexInstance ??= new CVMixDataOffsetImpl(0);
+            instance.DangerousSetHandle(_Handle + _ValueIndexOffset!.Value);
+            return instance;
         }
     }
 

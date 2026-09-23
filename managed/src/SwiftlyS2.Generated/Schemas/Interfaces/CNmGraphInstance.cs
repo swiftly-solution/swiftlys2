@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmGraphInstance : ISchemaClass<CNmGraphInstance>
 {
     static CNmGraphInstance ISchemaClass<CNmGraphInstance>.From(nint handle) => new CNmGraphInstanceImpl(handle);
-    static int ISchemaClass<CNmGraphInstance>.Size => 976;
+    static int ISchemaClass<CNmGraphInstance>.Size => 944;
     static string? ISchemaClass<CNmGraphInstance>.ClassName => null;
 
 }

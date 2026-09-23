@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_ScaleVelocity : CParticleFunctionInitializer, ISchemaClass<C_INIT_ScaleVelocity>
 {
     static C_INIT_ScaleVelocity ISchemaClass<C_INIT_ScaleVelocity>.From(nint handle) => new C_INIT_ScaleVelocityImpl(handle);
-    static int ISchemaClass<C_INIT_ScaleVelocity>.Size => 2200;
+    static int ISchemaClass<C_INIT_ScaleVelocity>.Size => 2240;
     static string? ISchemaClass<C_INIT_ScaleVelocity>.ClassName => null;
 
 

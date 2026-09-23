@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmClipDocEvent_Sound : CNmClipDocEvent, ISchemaClass<CNmClipDocEvent_Sound>
 {
     static CNmClipDocEvent_Sound ISchemaClass<CNmClipDocEvent_Sound>.From(nint handle) => new CNmClipDocEvent_SoundImpl(handle);
-    static int ISchemaClass<CNmClipDocEvent_Sound>.Size => 64;
+    static int ISchemaClass<CNmClipDocEvent_Sound>.Size => 72;
     static string? ISchemaClass<CNmClipDocEvent_Sound>.ClassName => null;
 
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CLightRigBackground : ISchemaClass<CLightRigBackground>
 {
     static CLightRigBackground ISchemaClass<CLightRigBackground>.From(nint handle) => new CLightRigBackgroundImpl(handle);
-    static int ISchemaClass<CLightRigBackground>.Size => 5;
+    static int ISchemaClass<CLightRigBackground>.Size => 8;
     static string? ISchemaClass<CLightRigBackground>.ClassName => null;
 
 

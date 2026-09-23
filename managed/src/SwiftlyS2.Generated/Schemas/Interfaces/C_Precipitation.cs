@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_Precipitation : C_BaseTrigger, ISchemaClass<C_Precipitation>
 {
     static C_Precipitation ISchemaClass<C_Precipitation>.From(nint handle) => new C_PrecipitationImpl(handle);
-    static int ISchemaClass<C_Precipitation>.Size => 4312;
+    static int ISchemaClass<C_Precipitation>.Size => 4544;
     static string? ISchemaClass<C_Precipitation>.ClassName => null;
 
 

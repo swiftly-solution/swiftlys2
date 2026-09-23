@@ -37,33 +37,42 @@ internal partial class CVMixCommandImpl : SchemaClass, CVMixCommand
         }
     }
     private static nint? _OutputSubmixOffset;
+    private CVMixDataOffsetImpl? _OutputSubmixInstance;
 
-    public ref int OutputSubmix
+    public CVMixDataOffset OutputSubmix
     {
         get
         {
             _OutputSubmixOffset = _OutputSubmixOffset ?? Schema.GetOffset(0x649AD283822DD794);
-            return ref _Handle.AsRef<int>(_OutputSubmixOffset!.Value);
+            var instance = _OutputSubmixInstance ??= new CVMixDataOffsetImpl(0);
+            instance.DangerousSetHandle(_Handle + _OutputSubmixOffset!.Value);
+            return instance;
         }
     }
     private static nint? _InputSubmix0Offset;
+    private CVMixDataOffsetImpl? _InputSubmix0Instance;
 
-    public ref int InputSubmix0
+    public CVMixDataOffset InputSubmix0
     {
         get
         {
             _InputSubmix0Offset = _InputSubmix0Offset ?? Schema.GetOffset(0x649AD2831FEEE711);
-            return ref _Handle.AsRef<int>(_InputSubmix0Offset!.Value);
+            var instance = _InputSubmix0Instance ??= new CVMixDataOffsetImpl(0);
+            instance.DangerousSetHandle(_Handle + _InputSubmix0Offset!.Value);
+            return instance;
         }
     }
     private static nint? _InputSubmix1Offset;
+    private CVMixDataOffsetImpl? _InputSubmix1Instance;
 
-    public ref int InputSubmix1
+    public CVMixDataOffset InputSubmix1
     {
         get
         {
             _InputSubmix1Offset = _InputSubmix1Offset ?? Schema.GetOffset(0x649AD2831EEEE57E);
-            return ref _Handle.AsRef<int>(_InputSubmix1Offset!.Value);
+            var instance = _InputSubmix1Instance ??= new CVMixDataOffsetImpl(0);
+            instance.DangerousSetHandle(_Handle + _InputSubmix1Offset!.Value);
+            return instance;
         }
     }
     private static nint? _ProcessorOffset;
@@ -77,23 +86,29 @@ internal partial class CVMixCommandImpl : SchemaClass, CVMixCommand
         }
     }
     private static nint? _InputValue0Offset;
+    private CVMixDataOffsetImpl? _InputValue0Instance;
 
-    public ref int InputValue0
+    public CVMixDataOffset InputValue0
     {
         get
         {
             _InputValue0Offset = _InputValue0Offset ?? Schema.GetOffset(0x649AD283754B10E4);
-            return ref _Handle.AsRef<int>(_InputValue0Offset!.Value);
+            var instance = _InputValue0Instance ??= new CVMixDataOffsetImpl(0);
+            instance.DangerousSetHandle(_Handle + _InputValue0Offset!.Value);
+            return instance;
         }
     }
     private static nint? _InputValue1Offset;
+    private CVMixDataOffsetImpl? _InputValue1Instance;
 
-    public ref int InputValue1
+    public CVMixDataOffset InputValue1
     {
         get
         {
             _InputValue1Offset = _InputValue1Offset ?? Schema.GetOffset(0x649AD283764B1277);
-            return ref _Handle.AsRef<int>(_InputValue1Offset!.Value);
+            var instance = _InputValue1Instance ??= new CVMixDataOffsetImpl(0);
+            instance.DangerousSetHandle(_Handle + _InputValue1Offset!.Value);
+            return instance;
         }
     }
 

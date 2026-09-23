@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_EconWearable : C_EconEntity, ISchemaClass<C_EconWearable>
 {
     static C_EconWearable ISchemaClass<C_EconWearable>.From(nint handle) => new C_EconWearableImpl(handle);
-    static int ISchemaClass<C_EconWearable>.Size => 5880;
+    static int ISchemaClass<C_EconWearable>.Size => 6432;
     static string? ISchemaClass<C_EconWearable>.ClassName => null;
 
 

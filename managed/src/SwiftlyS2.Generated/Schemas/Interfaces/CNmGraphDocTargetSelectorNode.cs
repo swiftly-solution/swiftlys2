@@ -8,10 +8,10 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmGraphDocTargetSelectorNode : CNmGraphDocFlowNode, ISchemaClass<CNmGraphDocTargetSelectorNode>
+public partial interface CNmGraphDocTargetSelectorNode : CNmGraphDocVariationDataNode, ISchemaClass<CNmGraphDocTargetSelectorNode>
 {
     static CNmGraphDocTargetSelectorNode ISchemaClass<CNmGraphDocTargetSelectorNode>.From(nint handle) => new CNmGraphDocTargetSelectorNodeImpl(handle);
-    static int ISchemaClass<CNmGraphDocTargetSelectorNode>.Size => 296;
+    static int ISchemaClass<CNmGraphDocTargetSelectorNode>.Size => 560;
     static string? ISchemaClass<CNmGraphDocTargetSelectorNode>.ClassName => null;
 
 

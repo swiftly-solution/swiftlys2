@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CCSPlayerController_InventoryServices : CPlayerControllerComponent, ISchemaClass<CCSPlayerController_InventoryServices>
 {
     static CCSPlayerController_InventoryServices ISchemaClass<CCSPlayerController_InventoryServices>.From(nint handle) => new CCSPlayerController_InventoryServicesImpl(handle);
-    static int ISchemaClass<CCSPlayerController_InventoryServices>.Size => 4064;
+    static int ISchemaClass<CCSPlayerController_InventoryServices>.Size => 4128;
     static string? ISchemaClass<CCSPlayerController_InventoryServices>.ClassName => null;
 
 

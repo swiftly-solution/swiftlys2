@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RemapScalarOnceTimed : CParticleFunctionOperator, ISchemaClass<C_OP_RemapScalarOnceTimed>
 {
     static C_OP_RemapScalarOnceTimed ISchemaClass<C_OP_RemapScalarOnceTimed>.From(nint handle) => new C_OP_RemapScalarOnceTimedImpl(handle);
-    static int ISchemaClass<C_OP_RemapScalarOnceTimed>.Size => 504;
+    static int ISchemaClass<C_OP_RemapScalarOnceTimed>.Size => 512;
     static string? ISchemaClass<C_OP_RemapScalarOnceTimed>.ClassName => null;
 
 

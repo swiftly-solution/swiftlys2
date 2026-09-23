@@ -36,5 +36,15 @@ internal partial class PathMoverEntitySpawnImpl : SchemaClass, PathMoverEntitySp
             return ref _Handle.AsRef<CUtlVector<CHandle<CBaseEntity>>>(_OtherEntitiesOffset!.Value);
         }
     }
+    private static nint? _SpawnNumberOffset;
+
+    public ref int SpawnNumber
+    {
+        get
+        {
+            _SpawnNumberOffset = _SpawnNumberOffset ?? Schema.GetOffset(0x5D73FCD36C730DFD);
+            return ref _Handle.AsRef<int>(_SpawnNumberOffset!.Value);
+        }
+    }
 
 }

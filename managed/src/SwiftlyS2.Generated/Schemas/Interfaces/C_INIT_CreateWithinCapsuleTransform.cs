@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_CreateWithinCapsuleTransform : CParticleFunctionInitializer, ISchemaClass<C_INIT_CreateWithinCapsuleTransform>
 {
     static C_INIT_CreateWithinCapsuleTransform ISchemaClass<C_INIT_CreateWithinCapsuleTransform>.From(nint handle) => new C_INIT_CreateWithinCapsuleTransformImpl(handle);
-    static int ISchemaClass<C_INIT_CreateWithinCapsuleTransform>.Size => 5880;
+    static int ISchemaClass<C_INIT_CreateWithinCapsuleTransform>.Size => 5992;
     static string? ISchemaClass<C_INIT_CreateWithinCapsuleTransform>.ClassName => null;
 
 

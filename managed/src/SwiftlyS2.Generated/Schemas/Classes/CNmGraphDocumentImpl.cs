@@ -54,6 +54,16 @@ internal partial class CNmGraphDocumentImpl : CNmAnimDocumentImpl, CNmGraphDocum
             return ref _Handle.AsRef<CUtlLeanVector<CNmGraphDocument__DebugParameterSet_t, int>>(_DebugParameterSetsOffset!.Value);
         }
     }
+    private static nint? _DebugBoneFilterSetsOffset;
+
+    public ref CUtlLeanVector<CNmGraphDocument__DebugBoneFilterSet_t, int> DebugBoneFilterSets
+    {
+        get
+        {
+            _DebugBoneFilterSetsOffset = _DebugBoneFilterSetsOffset ?? Schema.GetOffset(0xCBDD5090F9904B39);
+            return ref _Handle.AsRef<CUtlLeanVector<CNmGraphDocument__DebugBoneFilterSet_t, int>>(_DebugBoneFilterSetsOffset!.Value);
+        }
+    }
     private static nint? _DictionaryIDSetIDsOffset;
 
     public ref CUtlVector<SchemaUntypedField> DictionaryIDSetIDs

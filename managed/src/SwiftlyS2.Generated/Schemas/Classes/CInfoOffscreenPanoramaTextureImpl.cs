@@ -26,6 +26,16 @@ internal partial class CInfoOffscreenPanoramaTextureImpl : CPointEntityImpl, CIn
             return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
         }
     }
+    private static nint? _EnableMipGenOffset;
+
+    public ref bool EnableMipGen
+    {
+        get
+        {
+            _EnableMipGenOffset = _EnableMipGenOffset ?? Schema.GetOffset(0x584660AF87DE47EA);
+            return ref _Handle.AsRef<bool>(_EnableMipGenOffset!.Value);
+        }
+    }
     private static nint? _ResolutionXOffset;
 
     public ref int ResolutionX
@@ -148,6 +158,7 @@ internal partial class CInfoOffscreenPanoramaTextureImpl : CPointEntityImpl, CIn
     }
 
     public void DisabledUpdated() => Schema.Update(_Handle, 0x584660AF3A7C5965);
+    public void EnableMipGenUpdated() => Schema.Update(_Handle, 0x584660AF87DE47EA);
     public void ResolutionXUpdated() => Schema.Update(_Handle, 0x584660AF6C22DC51);
     public void ResolutionYUpdated() => Schema.Update(_Handle, 0x584660AF6B22DABE);
     public void PanelTypeUpdated() => Schema.Update(_Handle, 0x584660AFE57D8536);

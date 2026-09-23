@@ -27,4 +27,6 @@ public interface CSVCMsg_GameSessionConfiguration : ITypedProtobuf<CSVCMsg_GameS
     public bool IsTransition { get; set; }
     public string Previouslevel { get; set; }
     public string Landmarkname { get; set; }
+    public IProtobufRepeatedFieldSubMessageType<QuantizedFloatEncoderAlias_t> QuantizedFloatEncoderAliases { get; }
+    public float MaxCoord { get; set; }
 }

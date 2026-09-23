@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_TurbulenceForce : CParticleFunctionForce, ISchemaClass<C_OP_TurbulenceForce>
 {
     static C_OP_TurbulenceForce ISchemaClass<C_OP_TurbulenceForce>.From(nint handle) => new C_OP_TurbulenceForceImpl(handle);
-    static int ISchemaClass<C_OP_TurbulenceForce>.Size => 552;
+    static int ISchemaClass<C_OP_TurbulenceForce>.Size => 560;
     static string? ISchemaClass<C_OP_TurbulenceForce>.ClassName => null;
 
 

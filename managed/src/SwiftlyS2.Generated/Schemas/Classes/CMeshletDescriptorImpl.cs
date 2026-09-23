@@ -82,5 +82,15 @@ internal partial class CMeshletDescriptorImpl : SchemaClass, CMeshletDescriptor
             return ref _Handle.AsRef<byte>(_TriangleCountOffset!.Value);
         }
     }
+    private static nint? _BoneIndexOffset;
+
+    public ref ushort BoneIndex
+    {
+        get
+        {
+            _BoneIndexOffset = _BoneIndexOffset ?? Schema.GetOffset(0xAF93495D9F407B79);
+            return ref _Handle.AsRef<ushort>(_BoneIndexOffset!.Value);
+        }
+    }
 
 }
