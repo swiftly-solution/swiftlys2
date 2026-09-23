@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_SetVec : CParticleFunctionOperator, ISchemaClass<C_OP_SetVec>
 {
     static C_OP_SetVec ISchemaClass<C_OP_SetVec>.From(nint handle) => new C_OP_SetVecImpl(handle);
-    static int ISchemaClass<C_OP_SetVec>.Size => 2576;
+    static int ISchemaClass<C_OP_SetVec>.Size => 2624;
     static string? ISchemaClass<C_OP_SetVec>.ClassName => null;
 
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_MovementLoopInsideSphere : CParticleFunctionOperator, ISchemaClass<C_OP_MovementLoopInsideSphere>
 {
     static C_OP_MovementLoopInsideSphere ISchemaClass<C_OP_MovementLoopInsideSphere>.From(nint handle) => new C_OP_MovementLoopInsideSphereImpl(handle);
-    static int ISchemaClass<C_OP_MovementLoopInsideSphere>.Size => 2576;
+    static int ISchemaClass<C_OP_MovementLoopInsideSphere>.Size => 2624;
     static string? ISchemaClass<C_OP_MovementLoopInsideSphere>.ClassName => null;
 
 

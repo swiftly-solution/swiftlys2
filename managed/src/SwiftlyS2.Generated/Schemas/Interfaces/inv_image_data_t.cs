@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface inv_image_data_t : ISchemaClass<inv_image_data_t>
 {
     static inv_image_data_t ISchemaClass<inv_image_data_t>.From(nint handle) => new inv_image_data_tImpl(handle);
-    static int ISchemaClass<inv_image_data_t>.Size => 232;
+    static int ISchemaClass<inv_image_data_t>.Size => 240;
     static string? ISchemaClass<inv_image_data_t>.ClassName => null;
 
 

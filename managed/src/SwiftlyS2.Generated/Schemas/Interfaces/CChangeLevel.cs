@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CChangeLevel : CBaseTrigger, ISchemaClass<CChangeLevel>
 {
     static CChangeLevel ISchemaClass<CChangeLevel>.From(nint handle) => new CChangeLevelImpl(handle);
-    static int ISchemaClass<CChangeLevel>.Size => 2328;
+    static int ISchemaClass<CChangeLevel>.Size => 2552;
     static string? ISchemaClass<CChangeLevel>.ClassName => "trigger_changelevel";
 
 

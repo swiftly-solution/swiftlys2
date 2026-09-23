@@ -15,8 +15,6 @@ public partial interface CResponseCriteriaSet : ISchemaClass<CResponseCriteriaSe
     static string? ISchemaClass<CResponseCriteriaSet>.ClassName => null;
 
 
-    public ref int NumPrefixedContexts { get; }
-
     public ref bool OverrideOnAppend { get; }
 
 

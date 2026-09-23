@@ -11,9 +11,11 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface AI_BaseNPCAnimGraph_DebugSnapshotData_t : ISchemaClass<AI_BaseNPCAnimGraph_DebugSnapshotData_t>
 {
     static AI_BaseNPCAnimGraph_DebugSnapshotData_t ISchemaClass<AI_BaseNPCAnimGraph_DebugSnapshotData_t>.From(nint handle) => new AI_BaseNPCAnimGraph_DebugSnapshotData_tImpl(handle);
-    static int ISchemaClass<AI_BaseNPCAnimGraph_DebugSnapshotData_t>.Size => 64;
+    static int ISchemaClass<AI_BaseNPCAnimGraph_DebugSnapshotData_t>.Size => 72;
     static string? ISchemaClass<AI_BaseNPCAnimGraph_DebugSnapshotData_t>.ClassName => null;
 
+
+    public ref int Ag2_update_id { get; }
 
     public ref CGlobalSymbol E_action_desired { get; }
 

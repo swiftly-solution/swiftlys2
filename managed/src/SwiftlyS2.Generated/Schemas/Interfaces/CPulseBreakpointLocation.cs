@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPulseBreakpointLocation : ISchemaClass<CPulseBreakpointLocation>
 {
     static CPulseBreakpointLocation ISchemaClass<CPulseBreakpointLocation>.From(nint handle) => new CPulseBreakpointLocationImpl(handle);
-    static int ISchemaClass<CPulseBreakpointLocation>.Size => 40;
+    static int ISchemaClass<CPulseBreakpointLocation>.Size => 48;
     static string? ISchemaClass<CPulseBreakpointLocation>.ClassName => null;
 
 
@@ -22,6 +22,8 @@ public partial interface CPulseBreakpointLocation : ISchemaClass<CPulseBreakpoin
 
     // PulseSymbol_t
     public SchemaUntypedField PortName { get; }
+
+    public ref bool DeferBreak { get; }
 
 
 }

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RenderText : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderText>
 {
     static C_OP_RenderText ISchemaClass<C_OP_RenderText>.From(nint handle) => new C_OP_RenderTextImpl(handle);
-    static int ISchemaClass<C_OP_RenderText>.Size => 568;
+    static int ISchemaClass<C_OP_RenderText>.Size => 576;
     static string? ISchemaClass<C_OP_RenderText>.ClassName => null;
 
 

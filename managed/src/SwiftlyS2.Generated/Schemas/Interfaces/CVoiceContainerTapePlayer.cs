@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVoiceContainerTapePlayer : CVoiceContainerAsyncGenerator, ISchemaClass<CVoiceContainerTapePlayer>
 {
     static CVoiceContainerTapePlayer ISchemaClass<CVoiceContainerTapePlayer>.From(nint handle) => new CVoiceContainerTapePlayerImpl(handle);
-    static int ISchemaClass<CVoiceContainerTapePlayer>.Size => 192;
+    static int ISchemaClass<CVoiceContainerTapePlayer>.Size => 208;
     static string? ISchemaClass<CVoiceContainerTapePlayer>.ClassName => null;
 
 

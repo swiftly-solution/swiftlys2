@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RenderTrails : CBaseTrailRenderer, ISchemaClass<C_OP_RenderTrails>
 {
     static C_OP_RenderTrails ISchemaClass<C_OP_RenderTrails>.From(nint handle) => new C_OP_RenderTrailsImpl(handle);
-    static int ISchemaClass<C_OP_RenderTrails>.Size => 17856;
+    static int ISchemaClass<C_OP_RenderTrails>.Size => 18208;
     static string? ISchemaClass<C_OP_RenderTrails>.ClassName => null;
 
 

@@ -26,89 +26,37 @@ internal partial class CMixTrackImpl : CMixPropertyBaseImpl, CMixTrack
             return ref _Handle.AsRef<int>(_ChannelsOffset!.Value);
         }
     }
-    private static nint? _MixDownRuleOffset;
+    private static nint? _MixDownOffset;
 
-    public ref int MixDownRule
+    public ref VMixMixDownRule_t MixDown
     {
         get
         {
-            _MixDownRuleOffset = _MixDownRuleOffset ?? Schema.GetOffset(0x27C363384D7067B);
-            return ref _Handle.AsRef<int>(_MixDownRuleOffset!.Value);
+            _MixDownOffset = _MixDownOffset ?? Schema.GetOffset(0x27C36336EB49BFD);
+            return ref _Handle.AsRef<VMixMixDownRule_t>(_MixDownOffset!.Value);
         }
     }
     private static nint? _SendOperatorOffset;
 
-    public string SendOperator
+    public ref VMixSendOperator_t SendOperator
     {
         get
         {
-            _SendOperatorOffset = _SendOperatorOffset ?? Schema.GetOffset(0x27C363387C1568F);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_SendOperatorOffset!.Value));
-        }
-        set
-        {
-            _SendOperatorOffset = _SendOperatorOffset ?? Schema.GetOffset(0x27C363387C1568F);
-            Schema.SetCUtlString(_Handle, _SendOperatorOffset!.Value, value);
+            _SendOperatorOffset = _SendOperatorOffset ?? Schema.GetOffset(0x27C3633D94DFB03);
+            return ref _Handle.AsRef<VMixSendOperator_t>(_SendOperatorOffset!.Value);
         }
     }
-    private static nint? _Send1Offset;
+    private static nint? _SendNamesOffset;
+    private SchemaUtlStringFixedArray? _SendNamesInstance;
 
-    public string Send1
+    public ISchemaUtlStringFixedArray SendNames
     {
         get
         {
-            _Send1Offset = _Send1Offset ?? Schema.GetOffset(0x27C36334840863A);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_Send1Offset!.Value));
-        }
-        set
-        {
-            _Send1Offset = _Send1Offset ?? Schema.GetOffset(0x27C36334840863A);
-            Schema.SetCUtlString(_Handle, _Send1Offset!.Value, value);
-        }
-    }
-    private static nint? _Send2Offset;
-
-    public string Send2
-    {
-        get
-        {
-            _Send2Offset = _Send2Offset ?? Schema.GetOffset(0x27C3633474084A7);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_Send2Offset!.Value));
-        }
-        set
-        {
-            _Send2Offset = _Send2Offset ?? Schema.GetOffset(0x27C3633474084A7);
-            Schema.SetCUtlString(_Handle, _Send2Offset!.Value, value);
-        }
-    }
-    private static nint? _Send3Offset;
-
-    public string Send3
-    {
-        get
-        {
-            _Send3Offset = _Send3Offset ?? Schema.GetOffset(0x27C363346408314);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_Send3Offset!.Value));
-        }
-        set
-        {
-            _Send3Offset = _Send3Offset ?? Schema.GetOffset(0x27C363346408314);
-            Schema.SetCUtlString(_Handle, _Send3Offset!.Value, value);
-        }
-    }
-    private static nint? _Send4Offset;
-
-    public string Send4
-    {
-        get
-        {
-            _Send4Offset = _Send4Offset ?? Schema.GetOffset(0x27C363345408181);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_Send4Offset!.Value));
-        }
-        set
-        {
-            _Send4Offset = _Send4Offset ?? Schema.GetOffset(0x27C363345408181);
-            Schema.SetCUtlString(_Handle, _Send4Offset!.Value, value);
+            _SendNamesOffset = _SendNamesOffset ?? Schema.GetOffset(0x27C363388C8C8ED);
+            var instance = _SendNamesInstance ??= new SchemaUtlStringFixedArray(0, 0x27C363388C8C8ED, 4, 8, 8);
+            instance.DangerousSetHandle(_Handle + _SendNamesOffset!.Value);
+            return instance;
         }
     }
 

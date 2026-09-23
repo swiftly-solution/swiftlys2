@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVMMDAssetTypeInfo : CSimpleAssetTypeInfo, ISchemaClass<CVMMDAssetTypeInfo>
 {
     static CVMMDAssetTypeInfo ISchemaClass<CVMMDAssetTypeInfo>.From(nint handle) => new CVMMDAssetTypeInfoImpl(handle);
-    static int ISchemaClass<CVMMDAssetTypeInfo>.Size => 256;
+    static int ISchemaClass<CVMMDAssetTypeInfo>.Size => 264;
     static string? ISchemaClass<CVMMDAssetTypeInfo>.ClassName => null;
 
 }

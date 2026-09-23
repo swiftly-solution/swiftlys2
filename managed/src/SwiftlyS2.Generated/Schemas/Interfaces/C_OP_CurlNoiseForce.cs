@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_CurlNoiseForce : CParticleFunctionForce, ISchemaClass<C_OP_CurlNoiseForce>
 {
     static C_OP_CurlNoiseForce ISchemaClass<C_OP_CurlNoiseForce>.From(nint handle) => new C_OP_CurlNoiseForceImpl(handle);
-    static int ISchemaClass<C_OP_CurlNoiseForce>.Size => 8112;
+    static int ISchemaClass<C_OP_CurlNoiseForce>.Size => 8264;
     static string? ISchemaClass<C_OP_CurlNoiseForce>.ClassName => null;
 
 

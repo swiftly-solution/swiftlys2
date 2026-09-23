@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPropDoorRotating : CBasePropDoor, ISchemaClass<CPropDoorRotating>
 {
     static CPropDoorRotating ISchemaClass<CPropDoorRotating>.From(nint handle) => new CPropDoorRotatingImpl(handle);
-    static int ISchemaClass<CPropDoorRotating>.Size => 3648;
+    static int ISchemaClass<CPropDoorRotating>.Size => 3888;
     static string? ISchemaClass<CPropDoorRotating>.ClassName => "prop_door_rotating";
 
 

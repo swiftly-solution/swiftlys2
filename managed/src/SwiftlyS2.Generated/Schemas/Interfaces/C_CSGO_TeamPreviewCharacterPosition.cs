@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_CSGO_TeamPreviewCharacterPosition : C_BaseEntity, ISchemaClass<C_CSGO_TeamPreviewCharacterPosition>
 {
     static C_CSGO_TeamPreviewCharacterPosition ISchemaClass<C_CSGO_TeamPreviewCharacterPosition>.From(nint handle) => new C_CSGO_TeamPreviewCharacterPositionImpl(handle);
-    static int ISchemaClass<C_CSGO_TeamPreviewCharacterPosition>.Size => 5024;
+    static int ISchemaClass<C_CSGO_TeamPreviewCharacterPosition>.Size => 7448;
     static string? ISchemaClass<C_CSGO_TeamPreviewCharacterPosition>.ClassName => null;
 
 
@@ -30,6 +30,8 @@ public partial interface C_CSGO_TeamPreviewCharacterPosition : C_BaseEntity, ISc
     public C_EconItemView GlovesItem { get; }
 
     public C_EconItemView WeaponItem { get; }
+
+    public C_EconItemView PetItem { get; }
 
 
 }

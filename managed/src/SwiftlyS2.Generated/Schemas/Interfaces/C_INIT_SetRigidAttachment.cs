@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_SetRigidAttachment : CParticleFunctionInitializer, ISchemaClass<C_INIT_SetRigidAttachment>
 {
     static C_INIT_SetRigidAttachment ISchemaClass<C_INIT_SetRigidAttachment>.From(nint handle) => new C_INIT_SetRigidAttachmentImpl(handle);
-    static int ISchemaClass<C_INIT_SetRigidAttachment>.Size => 496;
+    static int ISchemaClass<C_INIT_SetRigidAttachment>.Size => 504;
     static string? ISchemaClass<C_INIT_SetRigidAttachment>.ClassName => null;
 
 

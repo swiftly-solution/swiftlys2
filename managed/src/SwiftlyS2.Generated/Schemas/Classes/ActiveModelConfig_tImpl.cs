@@ -64,6 +64,26 @@ internal partial class ActiveModelConfig_tImpl : SchemaClass, ActiveModelConfig_
             return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_AssociatedEntityNamesOffset!.Value);
         }
     }
+    private static nint? _AssociatedEntityCollidesWithHierarchyOffset;
+
+    public ref CUtlLeanVector<bool, int> AssociatedEntityCollidesWithHierarchy
+    {
+        get
+        {
+            _AssociatedEntityCollidesWithHierarchyOffset = _AssociatedEntityCollidesWithHierarchyOffset ?? Schema.GetOffset(0x554D81914D723506);
+            return ref _Handle.AsRef<CUtlLeanVector<bool, int>>(_AssociatedEntityCollidesWithHierarchyOffset!.Value);
+        }
+    }
+    private static nint? _AssociatedEntityCollidesOutsideHierarchyOffset;
+
+    public ref CUtlLeanVector<bool, int> AssociatedEntityCollidesOutsideHierarchy
+    {
+        get
+        {
+            _AssociatedEntityCollidesOutsideHierarchyOffset = _AssociatedEntityCollidesOutsideHierarchyOffset ?? Schema.GetOffset(0x554D81917BBE47A9);
+            return ref _Handle.AsRef<CUtlLeanVector<bool, int>>(_AssociatedEntityCollidesOutsideHierarchyOffset!.Value);
+        }
+    }
 
     public void HandleUpdated() => Schema.Update(_Handle, 0x554D81919D208453);
     public void NameUpdated() => Schema.Update(_Handle, 0x554D8191CAE8A266);

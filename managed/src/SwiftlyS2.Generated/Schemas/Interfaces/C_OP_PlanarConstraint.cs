@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_PlanarConstraint : CParticleFunctionConstraint, ISchemaClass<C_OP_PlanarConstraint>
 {
     static C_OP_PlanarConstraint ISchemaClass<C_OP_PlanarConstraint>.From(nint handle) => new C_OP_PlanarConstraintImpl(handle);
-    static int ISchemaClass<C_OP_PlanarConstraint>.Size => 1248;
+    static int ISchemaClass<C_OP_PlanarConstraint>.Size => 1272;
     static string? ISchemaClass<C_OP_PlanarConstraint>.ClassName => null;
 
 

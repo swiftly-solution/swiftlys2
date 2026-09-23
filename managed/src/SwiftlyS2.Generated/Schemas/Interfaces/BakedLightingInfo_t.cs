@@ -27,7 +27,9 @@ public partial interface BakedLightingInfo_t : ISchemaClass<BakedLightingInfo_t>
 
     public ref bool CompressionEnabled { get; }
 
-    public ref bool SHLightmaps { get; }
+    public ref byte LPVEncoding { get; }
+
+    public ref byte LightmapEncoding { get; }
 
     public ref byte ChartPackIterations { get; }
 

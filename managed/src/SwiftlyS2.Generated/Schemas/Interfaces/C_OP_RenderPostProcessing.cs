@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RenderPostProcessing : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderPostProcessing>
 {
     static C_OP_RenderPostProcessing ISchemaClass<C_OP_RenderPostProcessing>.From(nint handle) => new C_OP_RenderPostProcessingImpl(handle);
-    static int ISchemaClass<C_OP_RenderPostProcessing>.Size => 936;
+    static int ISchemaClass<C_OP_RenderPostProcessing>.Size => 952;
     static string? ISchemaClass<C_OP_RenderPostProcessing>.ClassName => null;
 
 

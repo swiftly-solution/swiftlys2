@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_ColorInterpolateRandom : CParticleFunctionOperator, ISchemaClass<C_OP_ColorInterpolateRandom>
 {
     static C_OP_ColorInterpolateRandom ISchemaClass<C_OP_ColorInterpolateRandom>.From(nint handle) => new C_OP_ColorInterpolateRandomImpl(handle);
-    static int ISchemaClass<C_OP_ColorInterpolateRandom>.Size => 536;
+    static int ISchemaClass<C_OP_ColorInterpolateRandom>.Size => 544;
     static string? ISchemaClass<C_OP_ColorInterpolateRandom>.ClassName => null;
 
 

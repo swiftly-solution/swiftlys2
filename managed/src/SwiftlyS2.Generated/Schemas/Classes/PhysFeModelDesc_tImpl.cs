@@ -266,6 +266,26 @@ internal partial class PhysFeModelDesc_tImpl : SchemaClass, PhysFeModelDesc_t
             return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_SimdTrisOffset!.Value);
         }
     }
+    private static nint? _PrismsOffset;
+
+    public ref CUtlVector<FePrism_t> Prisms
+    {
+        get
+        {
+            _PrismsOffset = _PrismsOffset ?? Schema.GetOffset(0x1BA4392741D1E143);
+            return ref _Handle.AsRef<CUtlVector<FePrism_t>>(_PrismsOffset!.Value);
+        }
+    }
+    private static nint? _SimdPrismsOffset;
+
+    public ref CUtlVector<FeSimdPrism_t> SimdPrisms
+    {
+        get
+        {
+            _SimdPrismsOffset = _SimdPrismsOffset ?? Schema.GetOffset(0x1BA439276D93E7D2);
+            return ref _Handle.AsRef<CUtlVector<FeSimdPrism_t>>(_SimdPrismsOffset!.Value);
+        }
+    }
     private static nint? _SimdRodsOffset;
 
     public ref CUtlVector<FeSimdRodConstraint_t> SimdRods

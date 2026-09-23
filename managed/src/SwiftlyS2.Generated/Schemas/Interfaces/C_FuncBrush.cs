@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_FuncBrush : C_BaseModelEntity, ISchemaClass<C_FuncBrush>
 {
     static C_FuncBrush ISchemaClass<C_FuncBrush>.From(nint handle) => new C_FuncBrushImpl(handle);
-    static int ISchemaClass<C_FuncBrush>.Size => 4016;
+    static int ISchemaClass<C_FuncBrush>.Size => 4248;
     static string? ISchemaClass<C_FuncBrush>.ClassName => null;
 
 }

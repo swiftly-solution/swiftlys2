@@ -16,6 +16,16 @@ internal partial class CPathMoverEntitySpawnerImpl : CLogicalEntityImpl, CPathMo
 {
     public CPathMoverEntitySpawnerImpl(nint handle) : base(handle) { }
 
+    private static nint? _TemplateChoiceStrategyOffset;
+
+    public ref CPathMoverEntitySpawner__TemplateChoiceStrategy_t TemplateChoiceStrategy
+    {
+        get
+        {
+            _TemplateChoiceStrategyOffset = _TemplateChoiceStrategyOffset ?? Schema.GetOffset(0x384C46FFB04862F8);
+            return ref _Handle.AsRef<CPathMoverEntitySpawner__TemplateChoiceStrategy_t>(_TemplateChoiceStrategyOffset!.Value);
+        }
+    }
     private static nint? _SpawnTemplatesOffset;
     private SchemaStringFixedArray? _SpawnTemplatesInstance;
 
@@ -26,6 +36,32 @@ internal partial class CPathMoverEntitySpawnerImpl : CLogicalEntityImpl, CPathMo
             _SpawnTemplatesOffset = _SpawnTemplatesOffset ?? Schema.GetOffset(0x384C46FF10ABEA92);
             var instance = _SpawnTemplatesInstance ??= new SchemaStringFixedArray(0, 0x384C46FF10ABEA92, 4, 8, 8);
             instance.DangerousSetHandle(_Handle + _SpawnTemplatesOffset!.Value);
+            return instance;
+        }
+    }
+    private static nint? _SpawnTemplateParamsOffset;
+    private SchemaFixedArray<int>? _SpawnTemplateParamsInstance;
+
+    public ISchemaFixedArray<int> SpawnTemplateParams
+    {
+        get
+        {
+            _SpawnTemplateParamsOffset = _SpawnTemplateParamsOffset ?? Schema.GetOffset(0x384C46FFF3A2F8E3);
+            var instance = _SpawnTemplateParamsInstance ??= new SchemaFixedArray<int>(0, 0x384C46FFF3A2F8E3, 4, 4, 4);
+            instance.DangerousSetHandle(_Handle + _SpawnTemplateParamsOffset!.Value);
+            return instance;
+        }
+    }
+    private static nint? _SpawnTemplateCountOffset;
+    private SchemaFixedArray<int>? _SpawnTemplateCountInstance;
+
+    public ISchemaFixedArray<int> SpawnTemplateCount
+    {
+        get
+        {
+            _SpawnTemplateCountOffset = _SpawnTemplateCountOffset ?? Schema.GetOffset(0x384C46FF72FB2044);
+            var instance = _SpawnTemplateCountInstance ??= new SchemaFixedArray<int>(0, 0x384C46FF72FB2044, 4, 4, 4);
+            instance.DangerousSetHandle(_Handle + _SpawnTemplateCountOffset!.Value);
             return instance;
         }
     }
@@ -188,6 +224,41 @@ internal partial class CPathMoverEntitySpawnerImpl : CLogicalEntityImpl, CPathMo
         {
             _PrepopulateOnSpawnOffset = _PrepopulateOnSpawnOffset ?? Schema.GetOffset(0x384C46FF09787B48);
             return ref _Handle.AsRef<bool>(_PrepopulateOnSpawnOffset!.Value);
+        }
+    }
+    private static nint? _PathNodeStartNameOffset;
+
+    public string PathNodeStartName
+    {
+        get
+        {
+            _PathNodeStartNameOffset = _PathNodeStartNameOffset ?? Schema.GetOffset(0x384C46FF67888139);
+            return Schema.GetString(_Handle.Read<nint>(_PathNodeStartNameOffset!.Value));
+        }
+        set
+        {
+            _PathNodeStartNameOffset = _PathNodeStartNameOffset ?? Schema.GetOffset(0x384C46FF67888139);
+            Schema.SetString(_Handle, _PathNodeStartNameOffset!.Value, value);
+        }
+    }
+    private static nint? _MoverSpawnPosOffset;
+
+    public ref Vector MoverSpawnPos
+    {
+        get
+        {
+            _MoverSpawnPosOffset = _MoverSpawnPosOffset ?? Schema.GetOffset(0x384C46FF76FD76F1);
+            return ref _Handle.AsRef<Vector>(_MoverSpawnPosOffset!.Value);
+        }
+    }
+    private static nint? _RunningDebugThinkOffset;
+
+    public ref bool RunningDebugThink
+    {
+        get
+        {
+            _RunningDebugThinkOffset = _RunningDebugThinkOffset ?? Schema.GetOffset(0x384C46FF0C788A8D);
+            return ref _Handle.AsRef<bool>(_RunningDebugThinkOffset!.Value);
         }
     }
 

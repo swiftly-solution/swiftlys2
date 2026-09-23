@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_RemapNamedModelElementToScalar : CParticleFunctionInitializer, ISchemaClass<C_INIT_RemapNamedModelElementToScalar>
 {
     static C_INIT_RemapNamedModelElementToScalar ISchemaClass<C_INIT_RemapNamedModelElementToScalar>.From(nint handle) => new C_INIT_RemapNamedModelElementToScalarImpl(handle);
-    static int ISchemaClass<C_INIT_RemapNamedModelElementToScalar>.Size => 552;
+    static int ISchemaClass<C_INIT_RemapNamedModelElementToScalar>.Size => 560;
     static string? ISchemaClass<C_INIT_RemapNamedModelElementToScalar>.ClassName => null;
 
 

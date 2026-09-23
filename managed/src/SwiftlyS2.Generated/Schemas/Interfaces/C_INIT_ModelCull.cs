@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_ModelCull : CParticleFunctionInitializer, ISchemaClass<C_INIT_ModelCull>
 {
     static C_INIT_ModelCull ISchemaClass<C_INIT_ModelCull>.From(nint handle) => new C_INIT_ModelCullImpl(handle);
-    static int ISchemaClass<C_INIT_ModelCull>.Size => 616;
+    static int ISchemaClass<C_INIT_ModelCull>.Size => 624;
     static string? ISchemaClass<C_INIT_ModelCull>.ClassName => null;
 
 

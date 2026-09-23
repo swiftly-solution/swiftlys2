@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmGraphDocBoneMaskNode : CNmGraphDocVariationDataNode, ISchemaClass<CNmGraphDocBoneMaskNode>
 {
     static CNmGraphDocBoneMaskNode ISchemaClass<CNmGraphDocBoneMaskNode>.From(nint handle) => new CNmGraphDocBoneMaskNodeImpl(handle);
-    static int ISchemaClass<CNmGraphDocBoneMaskNode>.Size => 528;
+    static int ISchemaClass<CNmGraphDocBoneMaskNode>.Size => 536;
     static string? ISchemaClass<CNmGraphDocBoneMaskNode>.ClassName => null;
 
 

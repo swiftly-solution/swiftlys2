@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CTriggerCallback : CBaseTrigger, ISchemaClass<CTriggerCallback>
 {
     static CTriggerCallback ISchemaClass<CTriggerCallback>.From(nint handle) => new CTriggerCallbackImpl(handle);
-    static int ISchemaClass<CTriggerCallback>.Size => 2288;
+    static int ISchemaClass<CTriggerCallback>.Size => 2512;
     static string? ISchemaClass<CTriggerCallback>.ClassName => "trigger_callback";
 
 }

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_SetRandomControlPointPosition : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetRandomControlPointPosition>
 {
     static C_OP_SetRandomControlPointPosition ISchemaClass<C_OP_SetRandomControlPointPosition>.From(nint handle) => new C_OP_SetRandomControlPointPositionImpl(handle);
-    static int ISchemaClass<C_OP_SetRandomControlPointPosition>.Size => 1256;
+    static int ISchemaClass<C_OP_SetRandomControlPointPosition>.Size => 1280;
     static string? ISchemaClass<C_OP_SetRandomControlPointPosition>.ClassName => null;
 
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_ModelSurfaceSnapshotGenerator : CParticleFunctionPreEmission, ISchemaClass<C_OP_ModelSurfaceSnapshotGenerator>
 {
     static C_OP_ModelSurfaceSnapshotGenerator ISchemaClass<C_OP_ModelSurfaceSnapshotGenerator>.From(nint handle) => new C_OP_ModelSurfaceSnapshotGeneratorImpl(handle);
-    static int ISchemaClass<C_OP_ModelSurfaceSnapshotGenerator>.Size => 2064;
+    static int ISchemaClass<C_OP_ModelSurfaceSnapshotGenerator>.Size => 2104;
     static string? ISchemaClass<C_OP_ModelSurfaceSnapshotGenerator>.ClassName => null;
 
 

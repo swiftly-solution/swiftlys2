@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CChoreo_GraphController : CAnimGraphControllerBase, ISchemaClass<CChoreo_GraphController>
 {
     static CChoreo_GraphController ISchemaClass<CChoreo_GraphController>.From(nint handle) => new CChoreo_GraphControllerImpl(handle);
-    static int ISchemaClass<CChoreo_GraphController>.Size => 272;
+    static int ISchemaClass<CChoreo_GraphController>.Size => 264;
     static string? ISchemaClass<CChoreo_GraphController>.ClassName => null;
 
 

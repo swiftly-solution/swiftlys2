@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CFuncMover : CBaseModelEntity, ISchemaClass<CFuncMover>
 {
     static CFuncMover ISchemaClass<CFuncMover>.From(nint handle) => new CFuncMoverImpl(handle);
-    static int ISchemaClass<CFuncMover>.Size => 2608;
+    static int ISchemaClass<CFuncMover>.Size => 2880;
     static string? ISchemaClass<CFuncMover>.ClassName => "func_mover";
 
 
@@ -95,6 +95,10 @@ public partial interface CFuncMover : CBaseModelEntity, ISchemaClass<CFuncMover>
 
     public ref bool StartFollowingClosestMover { get; }
 
+    public ref float StartFollowingClosestMoverWhenWithinDistance { get; }
+
+    public ref float StartFollowingClosestMoverWhenOutsideDistance { get; }
+
     public ref CFuncMover__OrientationUpdate_t OrientationUpdate { get; }
 
     public GameTime_t TimeStartOrientationChange { get; }
@@ -116,15 +120,23 @@ public partial interface CFuncMover : CBaseModelEntity, ISchemaClass<CFuncMover>
 
     public ref CHandle<CBaseEntity> OrientationMatchEntity { get; }
 
-    public ref float TimeToTraverseToNextNode { get; }
+    public ref Vector LerpToNewPosStartWS { get; }
 
-    public ref Vector LerpToNewPosStartInPathEntitySpace { get; }
-
-    public ref Vector LerpToNewPosEndInPathEntitySpace { get; }
+    public ref float LerpToPositionTargetT { get; }
 
     public ref float LerpToPositionT { get; }
 
     public ref float LerpToPositionDeltaT { get; }
+
+    public ref CHandle<CPathMover> TransitionSourcePath { get; }
+
+    public ref float TransitionSourceT { get; }
+
+    public ref float TransitionSourcePathLocation { get; }
+
+    public string TransitionSourcePathNodeStart { get; set; }
+
+    public ref bool StoppedDuringTransition { get; }
 
     public ref CEntityIOOutput OnLerpToPositionComplete { get; }
 
@@ -211,6 +223,12 @@ public partial interface CFuncMover : CBaseModelEntity, ISchemaClass<CFuncMover>
     public ref bool QueueSetupPathMover { get; }
 
     public ref CFuncMover__PathRebuildStrategy_t PathRebuildStrategy { get; }
+
+    public ref CFuncMover__FindFollowMoverStrategy_t FindFollowMoverStrategy { get; }
+
+    public ref bool DisableDecelerationToStop { get; }
+
+    public ref Vector OffsetFromPath { get; }
 
 
 }

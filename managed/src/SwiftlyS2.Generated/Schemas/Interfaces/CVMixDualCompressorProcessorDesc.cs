@@ -11,11 +11,17 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVMixDualCompressorProcessorDesc : CVMixBaseProcessorDesc, ISchemaClass<CVMixDualCompressorProcessorDesc>
 {
     static CVMixDualCompressorProcessorDesc ISchemaClass<CVMixDualCompressorProcessorDesc>.From(nint handle) => new CVMixDualCompressorProcessorDescImpl(handle);
-    static int ISchemaClass<CVMixDualCompressorProcessorDesc>.Size => 88;
+    static int ISchemaClass<CVMixDualCompressorProcessorDesc>.Size => 104;
     static string? ISchemaClass<CVMixDualCompressorProcessorDesc>.ClassName => null;
 
 
     public VMixDualCompressorDesc_t Desc { get; }
+
+    public CVMixParameterFloat OutParamLevel { get; }
+
+    public CVMixParameterFloat OutParamdBLevel { get; }
+
+    public CVMixParameterFloat OutParamReduction { get; }
 
 
 }

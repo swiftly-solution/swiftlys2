@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RemapDensityToVector : CParticleFunctionOperator, ISchemaClass<C_OP_RemapDensityToVector>
 {
     static C_OP_RemapDensityToVector ISchemaClass<C_OP_RemapDensityToVector>.From(nint handle) => new C_OP_RemapDensityToVectorImpl(handle);
-    static int ISchemaClass<C_OP_RemapDensityToVector>.Size => 520;
+    static int ISchemaClass<C_OP_RemapDensityToVector>.Size => 528;
     static string? ISchemaClass<C_OP_RemapDensityToVector>.ClassName => null;
 
 

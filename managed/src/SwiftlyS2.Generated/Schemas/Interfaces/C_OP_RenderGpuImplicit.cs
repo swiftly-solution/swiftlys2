@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RenderGpuImplicit : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderGpuImplicit>
 {
     static C_OP_RenderGpuImplicit ISchemaClass<C_OP_RenderGpuImplicit>.From(nint handle) => new C_OP_RenderGpuImplicitImpl(handle);
-    static int ISchemaClass<C_OP_RenderGpuImplicit>.Size => 1688;
+    static int ISchemaClass<C_OP_RenderGpuImplicit>.Size => 1720;
     static string? ISchemaClass<C_OP_RenderGpuImplicit>.ClassName => null;
 
 

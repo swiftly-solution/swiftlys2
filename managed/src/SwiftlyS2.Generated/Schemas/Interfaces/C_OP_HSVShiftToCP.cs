@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_HSVShiftToCP : CParticleFunctionPreEmission, ISchemaClass<C_OP_HSVShiftToCP>
 {
     static C_OP_HSVShiftToCP ISchemaClass<C_OP_HSVShiftToCP>.From(nint handle) => new C_OP_HSVShiftToCPImpl(handle);
-    static int ISchemaClass<C_OP_HSVShiftToCP>.Size => 512;
+    static int ISchemaClass<C_OP_HSVShiftToCP>.Size => 520;
     static string? ISchemaClass<C_OP_HSVShiftToCP>.ClassName => null;
 
 

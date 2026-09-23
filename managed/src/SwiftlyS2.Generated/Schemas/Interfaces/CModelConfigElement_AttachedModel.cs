@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CModelConfigElement_AttachedModel : CModelConfigElement, ISchemaClass<CModelConfigElement_AttachedModel>
 {
     static CModelConfigElement_AttachedModel ISchemaClass<CModelConfigElement_AttachedModel>.From(nint handle) => new CModelConfigElement_AttachedModelImpl(handle);
-    static int ISchemaClass<CModelConfigElement_AttachedModel>.Size => 232;
+    static int ISchemaClass<CModelConfigElement_AttachedModel>.Size => 240;
     static string? ISchemaClass<CModelConfigElement_AttachedModel>.ClassName => null;
 
 
@@ -40,6 +40,10 @@ public partial interface CModelConfigElement_AttachedModel : CModelConfigElement
     public string BodygroupOnOtherModels { get; set; }
 
     public string MaterialGroupOnOtherModels { get; set; }
+
+    public ref bool CollideWithHierarchy { get; }
+
+    public ref bool CollideOutsideHierarchy { get; }
 
 
 }

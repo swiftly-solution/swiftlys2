@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_InitFromCPSnapshot : CParticleFunctionInitializer, ISchemaClass<C_INIT_InitFromCPSnapshot>
 {
     static C_INIT_InitFromCPSnapshot ISchemaClass<C_INIT_InitFromCPSnapshot>.From(nint handle) => new C_INIT_InitFromCPSnapshotImpl(handle);
-    static int ISchemaClass<C_INIT_InitFromCPSnapshot>.Size => 1256;
+    static int ISchemaClass<C_INIT_InitFromCPSnapshot>.Size => 1280;
     static string? ISchemaClass<C_INIT_InitFromCPSnapshot>.ClassName => null;
 
 

@@ -11,17 +11,19 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface VPhysics2ShapeDef_t : ISchemaClass<VPhysics2ShapeDef_t>
 {
     static VPhysics2ShapeDef_t ISchemaClass<VPhysics2ShapeDef_t>.From(nint handle) => new VPhysics2ShapeDef_tImpl(handle);
-    static int ISchemaClass<VPhysics2ShapeDef_t>.Size => 120;
+    static int ISchemaClass<VPhysics2ShapeDef_t>.Size => 104;
     static string? ISchemaClass<VPhysics2ShapeDef_t>.ClassName => null;
 
 
-    public ref CUtlVector<RnSphereDesc_t> Spheres { get; }
+    public ref CUtlLeanVector<RnSphereDesc_t, int> Spheres { get; }
 
-    public ref CUtlVector<RnCapsuleDesc_t> Capsules { get; }
+    public ref CUtlLeanVector<RnCapsuleDesc_t, int> Capsules { get; }
 
-    public ref CUtlVector<RnHullDesc_t> Hulls { get; }
+    public ref CUtlLeanVector<RnHullDesc_t, int> Hulls { get; }
 
-    public ref CUtlVector<RnMeshDesc_t> Meshes { get; }
+    public ref CUtlLeanVector<RnMeshDesc_t, int> Meshes { get; }
+
+    public ref CUtlLeanVector<RnCompoundDesc_t, int> Compounds { get; }
 
     public ref CUtlVector<ushort> CollisionAttributeIndices { get; }
 

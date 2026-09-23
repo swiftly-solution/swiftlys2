@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_RadiusFromCPObject : CParticleFunctionInitializer, ISchemaClass<C_INIT_RadiusFromCPObject>
 {
     static C_INIT_RadiusFromCPObject ISchemaClass<C_INIT_RadiusFromCPObject>.From(nint handle) => new C_INIT_RadiusFromCPObjectImpl(handle);
-    static int ISchemaClass<C_INIT_RadiusFromCPObject>.Size => 488;
+    static int ISchemaClass<C_INIT_RadiusFromCPObject>.Size => 496;
     static string? ISchemaClass<C_INIT_RadiusFromCPObject>.ClassName => null;
 
 

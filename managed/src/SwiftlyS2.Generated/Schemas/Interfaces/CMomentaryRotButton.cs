@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CMomentaryRotButton : CRotButton, ISchemaClass<CMomentaryRotButton>
 {
     static CMomentaryRotButton ISchemaClass<CMomentaryRotButton>.From(nint handle) => new CMomentaryRotButtonImpl(handle);
-    static int ISchemaClass<CMomentaryRotButton>.Size => 2472;
+    static int ISchemaClass<CMomentaryRotButton>.Size => 2696;
     static string? ISchemaClass<CMomentaryRotButton>.ClassName => "momentary_rot_button";
 
 

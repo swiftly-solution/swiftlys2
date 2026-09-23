@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_ChaoticAttractor : CParticleFunctionInitializer, ISchemaClass<C_INIT_ChaoticAttractor>
 {
     static C_INIT_ChaoticAttractor ISchemaClass<C_INIT_ChaoticAttractor>.From(nint handle) => new C_INIT_ChaoticAttractorImpl(handle);
-    static int ISchemaClass<C_INIT_ChaoticAttractor>.Size => 520;
+    static int ISchemaClass<C_INIT_ChaoticAttractor>.Size => 528;
     static string? ISchemaClass<C_INIT_ChaoticAttractor>.ClassName => null;
 
 

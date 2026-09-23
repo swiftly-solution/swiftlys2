@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CEnvLightProbeVolume : CBaseEntity, ISchemaClass<CEnvLightProbeVolume>
 {
     static CEnvLightProbeVolume ISchemaClass<CEnvLightProbeVolume>.From(nint handle) => new CEnvLightProbeVolumeImpl(handle);
-    static int ISchemaClass<CEnvLightProbeVolume>.Size => 5432;
+    static int ISchemaClass<CEnvLightProbeVolume>.Size => 1480;
     static string? ISchemaClass<CEnvLightProbeVolume>.ClassName => "env_light_probe_volume";
 
 
@@ -21,11 +21,7 @@ public partial interface CEnvLightProbeVolume : CBaseEntity, ISchemaClass<CEnvLi
 
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_DC { get; }
 
-    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_R { get; }
-
-    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_G { get; }
-
-    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_B { get; }
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_L1 { get; }
 
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeDirectLightIndicesTexture { get; }
 
@@ -62,9 +58,7 @@ public partial interface CEnvLightProbeVolume : CBaseEntity, ISchemaClass<CEnvLi
     public void Entity_hLightProbeTexture_AmbientCubeUpdated();
     public void Entity_hLightProbeTexture_SDFUpdated();
     public void Entity_hLightProbeTexture_SH2_DCUpdated();
-    public void Entity_hLightProbeTexture_SH2_RUpdated();
-    public void Entity_hLightProbeTexture_SH2_GUpdated();
-    public void Entity_hLightProbeTexture_SH2_BUpdated();
+    public void Entity_hLightProbeTexture_SH2_L1Updated();
     public void Entity_hLightProbeDirectLightIndicesTextureUpdated();
     public void Entity_hLightProbeDirectLightScalarsTextureUpdated();
     public void Entity_hLightProbeDirectLightShadowsTextureUpdated();

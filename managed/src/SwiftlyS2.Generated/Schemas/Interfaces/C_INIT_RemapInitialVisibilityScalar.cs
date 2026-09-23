@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_RemapInitialVisibilityScalar : CParticleFunctionInitializer, ISchemaClass<C_INIT_RemapInitialVisibilityScalar>
 {
     static C_INIT_RemapInitialVisibilityScalar ISchemaClass<C_INIT_RemapInitialVisibilityScalar>.From(nint handle) => new C_INIT_RemapInitialVisibilityScalarImpl(handle);
-    static int ISchemaClass<C_INIT_RemapInitialVisibilityScalar>.Size => 504;
+    static int ISchemaClass<C_INIT_RemapInitialVisibilityScalar>.Size => 512;
     static string? ISchemaClass<C_INIT_RemapInitialVisibilityScalar>.ClassName => null;
 
 

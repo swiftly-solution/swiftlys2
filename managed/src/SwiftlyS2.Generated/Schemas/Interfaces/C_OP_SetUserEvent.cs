@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_SetUserEvent : CParticleFunctionOperator, ISchemaClass<C_OP_SetUserEvent>
 {
     static C_OP_SetUserEvent ISchemaClass<C_OP_SetUserEvent>.From(nint handle) => new C_OP_SetUserEventImpl(handle);
-    static int ISchemaClass<C_OP_SetUserEvent>.Size => 1592;
+    static int ISchemaClass<C_OP_SetUserEvent>.Size => 1624;
     static string? ISchemaClass<C_OP_SetUserEvent>.ClassName => null;
 
 

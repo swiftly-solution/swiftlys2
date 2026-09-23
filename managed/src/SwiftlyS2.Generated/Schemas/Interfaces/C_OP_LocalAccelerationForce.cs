@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_LocalAccelerationForce : CParticleFunctionForce, ISchemaClass<C_OP_LocalAccelerationForce>
 {
     static C_OP_LocalAccelerationForce ISchemaClass<C_OP_LocalAccelerationForce>.From(nint handle) => new C_OP_LocalAccelerationForceImpl(handle);
-    static int ISchemaClass<C_OP_LocalAccelerationForce>.Size => 2216;
+    static int ISchemaClass<C_OP_LocalAccelerationForce>.Size => 2256;
     static string? ISchemaClass<C_OP_LocalAccelerationForce>.ClassName => null;
 
 

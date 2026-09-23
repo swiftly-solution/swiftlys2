@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_PointClientUIHUD : C_BaseClientUIEntity, ISchemaClass<C_PointClientUIHUD>
 {
     static C_PointClientUIHUD ISchemaClass<C_PointClientUIHUD>.From(nint handle) => new C_PointClientUIHUDImpl(handle);
-    static int ISchemaClass<C_PointClientUIHUD>.Size => 4520;
+    static int ISchemaClass<C_PointClientUIHUD>.Size => 4752;
     static string? ISchemaClass<C_PointClientUIHUD>.ClassName => null;
 
 

@@ -11,9 +11,11 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_DynamicProp : C_BreakableProp, ISchemaClass<C_DynamicProp>
 {
     static C_DynamicProp ISchemaClass<C_DynamicProp>.From(nint handle) => new C_DynamicPropImpl(handle);
-    static int ISchemaClass<C_DynamicProp>.Size => 5056;
+    static int ISchemaClass<C_DynamicProp>.Size => 5296;
     static string? ISchemaClass<C_DynamicProp>.ClassName => null;
 
+
+    public ref bool GraphControllerEnabled { get; }
 
     public ref bool UseHitboxesForRenderBox { get; }
 

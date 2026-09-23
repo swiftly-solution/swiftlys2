@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmGraphDocBoneMaskSwitchNode : CNmGraphDocFlowNode, ISchemaClass<CNmGraphDocBoneMaskSwitchNode>
 {
     static CNmGraphDocBoneMaskSwitchNode ISchemaClass<CNmGraphDocBoneMaskSwitchNode>.From(nint handle) => new CNmGraphDocBoneMaskSwitchNodeImpl(handle);
-    static int ISchemaClass<CNmGraphDocBoneMaskSwitchNode>.Size => 264;
+    static int ISchemaClass<CNmGraphDocBoneMaskSwitchNode>.Size => 272;
     static string? ISchemaClass<CNmGraphDocBoneMaskSwitchNode>.ClassName => null;
 
 

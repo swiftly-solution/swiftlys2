@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CCSGO_TeamSelectTerroristPosition : CCSGO_TeamSelectCharacterPosition, ISchemaClass<CCSGO_TeamSelectTerroristPosition>
 {
     static CCSGO_TeamSelectTerroristPosition ISchemaClass<CCSGO_TeamSelectTerroristPosition>.From(nint handle) => new CCSGO_TeamSelectTerroristPositionImpl(handle);
-    static int ISchemaClass<CCSGO_TeamSelectTerroristPosition>.Size => 3264;
+    static int ISchemaClass<CCSGO_TeamSelectTerroristPosition>.Size => 5224;
     static string? ISchemaClass<CCSGO_TeamSelectTerroristPosition>.ClassName => "team_select_terrorist";
 
 }

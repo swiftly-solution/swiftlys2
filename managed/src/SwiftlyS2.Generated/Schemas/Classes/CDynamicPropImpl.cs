@@ -16,6 +16,16 @@ internal partial class CDynamicPropImpl : CBreakablePropImpl, CDynamicProp
 {
     public CDynamicPropImpl(nint handle) : base(handle) { }
 
+    private static nint? _GraphControllerEnabledOffset;
+
+    public ref bool GraphControllerEnabled
+    {
+        get
+        {
+            _GraphControllerEnabledOffset = _GraphControllerEnabledOffset ?? Schema.GetOffset(0x6A5171A2D755FF00);
+            return ref _Handle.AsRef<bool>(_GraphControllerEnabledOffset!.Value);
+        }
+    }
     private static nint? _CreateNavObstacleOffset;
 
     public ref bool CreateNavObstacle

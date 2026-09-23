@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CItemDogtags : CItem, ISchemaClass<CItemDogtags>
 {
     static CItemDogtags ISchemaClass<CItemDogtags>.From(nint handle) => new CItemDogtagsImpl(handle);
-    static int ISchemaClass<CItemDogtags>.Size => 2576;
+    static int ISchemaClass<CItemDogtags>.Size => 2800;
     static string? ISchemaClass<CItemDogtags>.ClassName => null;
 
 

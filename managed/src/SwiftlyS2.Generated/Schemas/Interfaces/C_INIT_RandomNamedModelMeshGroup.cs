@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_RandomNamedModelMeshGroup : C_INIT_RandomNamedModelElement, ISchemaClass<C_INIT_RandomNamedModelMeshGroup>
 {
     static C_INIT_RandomNamedModelMeshGroup ISchemaClass<C_INIT_RandomNamedModelMeshGroup>.From(nint handle) => new C_INIT_RandomNamedModelMeshGroupImpl(handle);
-    static int ISchemaClass<C_INIT_RandomNamedModelMeshGroup>.Size => 520;
+    static int ISchemaClass<C_INIT_RandomNamedModelMeshGroup>.Size => 528;
     static string? ISchemaClass<C_INIT_RandomNamedModelMeshGroup>.ClassName => null;
 
 }

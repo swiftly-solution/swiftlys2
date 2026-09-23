@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_MaxVelocity : CParticleFunctionOperator, ISchemaClass<C_OP_MaxVelocity>
 {
     static C_OP_MaxVelocity ISchemaClass<C_OP_MaxVelocity>.From(nint handle) => new C_OP_MaxVelocityImpl(handle);
-    static int ISchemaClass<C_OP_MaxVelocity>.Size => 1208;
+    static int ISchemaClass<C_OP_MaxVelocity>.Size => 1232;
     static string? ISchemaClass<C_OP_MaxVelocity>.ClassName => null;
 
 

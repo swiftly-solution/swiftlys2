@@ -129,5 +129,15 @@ internal partial class RnMesh_tImpl : SchemaClass, RnMesh_t
             return ref _Handle.AsRef<uint>(_DebugFlagsOffset!.Value);
         }
     }
+    private static nint? _SurfaceAreaOffset;
+
+    public ref float SurfaceArea
+    {
+        get
+        {
+            _SurfaceAreaOffset = _SurfaceAreaOffset ?? Schema.GetOffset(0x5F23FA63E4AE7C2F);
+            return ref _Handle.AsRef<float>(_SurfaceAreaOffset!.Value);
+        }
+    }
 
 }

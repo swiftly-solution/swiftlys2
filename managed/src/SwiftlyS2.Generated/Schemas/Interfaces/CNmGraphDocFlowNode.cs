@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmGraphDocFlowNode : CNmGraphDocNode, ISchemaClass<CNmGraphDocFlowNode>
 {
     static CNmGraphDocFlowNode ISchemaClass<CNmGraphDocFlowNode>.From(nint handle) => new CNmGraphDocFlowNodeImpl(handle);
-    static int ISchemaClass<CNmGraphDocFlowNode>.Size => 256;
+    static int ISchemaClass<CNmGraphDocFlowNode>.Size => 264;
     static string? ISchemaClass<CNmGraphDocFlowNode>.ClassName => null;
 
 

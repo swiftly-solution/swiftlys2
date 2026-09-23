@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_PointList : CParticleFunctionInitializer, ISchemaClass<C_INIT_PointList>
 {
     static C_INIT_PointList ISchemaClass<C_INIT_PointList>.From(nint handle) => new C_INIT_PointListImpl(handle);
-    static int ISchemaClass<C_INIT_PointList>.Size => 520;
+    static int ISchemaClass<C_INIT_PointList>.Size => 528;
     static string? ISchemaClass<C_INIT_PointList>.ClassName => null;
 
 

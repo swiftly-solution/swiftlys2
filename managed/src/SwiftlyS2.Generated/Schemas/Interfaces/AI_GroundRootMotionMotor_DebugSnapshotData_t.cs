@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface AI_GroundRootMotionMotor_DebugSnapshotData_t : DebugSnapshotBaseStructuredData_t, ISchemaClass<AI_GroundRootMotionMotor_DebugSnapshotData_t>
 {
     static AI_GroundRootMotionMotor_DebugSnapshotData_t ISchemaClass<AI_GroundRootMotionMotor_DebugSnapshotData_t>.From(nint handle) => new AI_GroundRootMotionMotor_DebugSnapshotData_tImpl(handle);
-    static int ISchemaClass<AI_GroundRootMotionMotor_DebugSnapshotData_t>.Size => 136;
+    static int ISchemaClass<AI_GroundRootMotionMotor_DebugSnapshotData_t>.Size => 144;
     static string? ISchemaClass<AI_GroundRootMotionMotor_DebugSnapshotData_t>.ClassName => null;
 
 
@@ -44,6 +44,8 @@ public partial interface AI_GroundRootMotionMotor_DebugSnapshotData_t : DebugSna
     public ref float F_forward_strafing_angle_actual { get; }
 
     public ref float F_forward_strafing_angle_desired { get; }
+
+    public ref float F_forward_strafing_angle_committed { get; }
 
     public ref float F_current_lean { get; }
 

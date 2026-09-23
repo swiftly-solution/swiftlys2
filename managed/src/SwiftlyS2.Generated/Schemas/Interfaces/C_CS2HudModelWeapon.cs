@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_CS2HudModelWeapon : C_CS2HudModelBase, ISchemaClass<C_CS2HudModelWeapon>
 {
     static C_CS2HudModelWeapon ISchemaClass<C_CS2HudModelWeapon>.From(nint handle) => new C_CS2HudModelWeaponImpl(handle);
-    static int ISchemaClass<C_CS2HudModelWeapon>.Size => 4784;
+    static int ISchemaClass<C_CS2HudModelWeapon>.Size => 5008;
     static string? ISchemaClass<C_CS2HudModelWeapon>.ClassName => null;
 
 }

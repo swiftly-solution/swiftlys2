@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CToolSceneLightRig : ISchemaClass<CToolSceneLightRig>
 {
     static CToolSceneLightRig ISchemaClass<CToolSceneLightRig>.From(nint handle) => new CToolSceneLightRigImpl(handle);
-    static int ISchemaClass<CToolSceneLightRig>.Size => 360;
+    static int ISchemaClass<CToolSceneLightRig>.Size => 368;
     static string? ISchemaClass<CToolSceneLightRig>.ClassName => null;
 
 

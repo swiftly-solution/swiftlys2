@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CInstancedSceneEntity : CSceneEntity, ISchemaClass<CInstancedSceneEntity>
 {
     static CInstancedSceneEntity ISchemaClass<CInstancedSceneEntity>.From(nint handle) => new CInstancedSceneEntityImpl(handle);
-    static int ISchemaClass<CInstancedSceneEntity>.Size => 2056;
+    static int ISchemaClass<CInstancedSceneEntity>.Size => 2072;
     static string? ISchemaClass<CInstancedSceneEntity>.ClassName => "instanced_scripted_scene";
 
 
@@ -24,8 +24,6 @@ public partial interface CInstancedSceneEntity : CSceneEntity, ISchemaClass<CIns
     public ref float PreDelay { get; }
 
     public ref bool IsBackground { get; }
-
-    public ref bool RemoveOnCompletion { get; }
 
     public ref CHandle<CBaseEntity> Target { get; }
 

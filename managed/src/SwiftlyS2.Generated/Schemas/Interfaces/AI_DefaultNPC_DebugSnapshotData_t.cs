@@ -11,11 +11,13 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface AI_DefaultNPC_DebugSnapshotData_t : DebugSnapshotBaseStructuredData_t, ISchemaClass<AI_DefaultNPC_DebugSnapshotData_t>
 {
     static AI_DefaultNPC_DebugSnapshotData_t ISchemaClass<AI_DefaultNPC_DebugSnapshotData_t>.From(nint handle) => new AI_DefaultNPC_DebugSnapshotData_tImpl(handle);
-    static int ISchemaClass<AI_DefaultNPC_DebugSnapshotData_t>.Size => 120;
+    static int ISchemaClass<AI_DefaultNPC_DebugSnapshotData_t>.Size => 128;
     static string? ISchemaClass<AI_DefaultNPC_DebugSnapshotData_t>.ClassName => null;
 
 
     public ref CGlobalSymbol S_npc_current_ability { get; }
+
+    public ref CGlobalSymbol S_npc_current_held_ability { get; }
 
     public ref CGlobalSymbol S_npc_tactic_current { get; }
 

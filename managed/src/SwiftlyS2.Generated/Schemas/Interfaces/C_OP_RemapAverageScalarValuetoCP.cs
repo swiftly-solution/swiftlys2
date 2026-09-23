@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RemapAverageScalarValuetoCP : CParticleFunctionPreEmission, ISchemaClass<C_OP_RemapAverageScalarValuetoCP>
 {
     static C_OP_RemapAverageScalarValuetoCP ISchemaClass<C_OP_RemapAverageScalarValuetoCP>.From(nint handle) => new C_OP_RemapAverageScalarValuetoCPImpl(handle);
-    static int ISchemaClass<C_OP_RemapAverageScalarValuetoCP>.Size => 1240;
+    static int ISchemaClass<C_OP_RemapAverageScalarValuetoCP>.Size => 1264;
     static string? ISchemaClass<C_OP_RemapAverageScalarValuetoCP>.ClassName => null;
 
 

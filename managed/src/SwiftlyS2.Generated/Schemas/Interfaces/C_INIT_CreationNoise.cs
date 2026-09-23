@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_CreationNoise : CParticleFunctionInitializer, ISchemaClass<C_INIT_CreationNoise>
 {
     static C_INIT_CreationNoise ISchemaClass<C_INIT_CreationNoise>.From(nint handle) => new C_INIT_CreationNoiseImpl(handle);
-    static int ISchemaClass<C_INIT_CreationNoise>.Size => 528;
+    static int ISchemaClass<C_INIT_CreationNoise>.Size => 536;
     static string? ISchemaClass<C_INIT_CreationNoise>.ClassName => null;
 
 

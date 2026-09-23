@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_SetVectorAttributeToVectorExpression : CParticleFunctionOperator, ISchemaClass<C_OP_SetVectorAttributeToVectorExpression>
 {
     static C_OP_SetVectorAttributeToVectorExpression ISchemaClass<C_OP_SetVectorAttributeToVectorExpression>.From(nint handle) => new C_OP_SetVectorAttributeToVectorExpressionImpl(handle);
-    static int ISchemaClass<C_OP_SetVectorAttributeToVectorExpression>.Size => 4400;
+    static int ISchemaClass<C_OP_SetVectorAttributeToVectorExpression>.Size => 4480;
     static string? ISchemaClass<C_OP_SetVectorAttributeToVectorExpression>.ClassName => null;
 
 

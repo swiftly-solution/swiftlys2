@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmGraphDocTargetControlParameterNode : CNmGraphDocControlParameterNode, ISchemaClass<CNmGraphDocTargetControlParameterNode>
 {
     static CNmGraphDocTargetControlParameterNode ISchemaClass<CNmGraphDocTargetControlParameterNode>.From(nint handle) => new CNmGraphDocTargetControlParameterNodeImpl(handle);
-    static int ISchemaClass<CNmGraphDocTargetControlParameterNode>.Size => 320;
+    static int ISchemaClass<CNmGraphDocTargetControlParameterNode>.Size => 328;
     static string? ISchemaClass<CNmGraphDocTargetControlParameterNode>.ClassName => null;
 
 

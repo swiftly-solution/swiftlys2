@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmGraphDocFixedWeightBoneMaskNode : CNmGraphDocFlowNode, ISchemaClass<CNmGraphDocFixedWeightBoneMaskNode>
 {
     static CNmGraphDocFixedWeightBoneMaskNode ISchemaClass<CNmGraphDocFixedWeightBoneMaskNode>.From(nint handle) => new CNmGraphDocFixedWeightBoneMaskNodeImpl(handle);
-    static int ISchemaClass<CNmGraphDocFixedWeightBoneMaskNode>.Size => 264;
+    static int ISchemaClass<CNmGraphDocFixedWeightBoneMaskNode>.Size => 272;
     static string? ISchemaClass<CNmGraphDocFixedWeightBoneMaskNode>.ClassName => null;
 
 
