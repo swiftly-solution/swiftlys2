@@ -188,7 +188,7 @@
     "DispatchParticleEffect": {
         "lib": "server",
         "windows": "48 89 5C 24 ? 48 89 74 24 ? 48 89 7C 24 ? 4C 89 74 24 ? 55 48 8D 6C 24 ? 48 81 EC ? ? ? ? 48 8B D9 41 0F B6 F9",
-        "linux": "55 48 89 E5 41 57 41 56 41 55 41 89 CD 41 54 53 48 89 D3"
+        "linux": "55 48 89 E5 41 57 41 56 41 55 41 89 CD 41 54 53 48 81 EC E8 00 00 00"
     },
     // Search for "smokegrenade_projectile" and it should be at the top of the function used
     "CSmokeGrenadeProjectile::EmitGrenade": {
