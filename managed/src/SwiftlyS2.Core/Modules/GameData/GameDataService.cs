@@ -53,7 +53,10 @@ internal class GameDataService : IGameDataService
                 var signatures = JsonSerializer.Deserialize<Dictionary<string, Signature>>(File.ReadAllText(signaturePath), options)!;
                 foreach (var signature in signatures)
                 {
-                    var value = memoryService.GetAddressBySignature(signature.Value.lib, _Platform == OSPlatform.Windows ? signature.Value.windows : signature.Value.linux);
+                    var sig = _Platform == OSPlatform.Windows ? signature.Value.windows : signature.Value.linux;
+                    if(sig.Trim() == "") continue;
+                    
+                    var value = memoryService.GetAddressBySignature(signature.Value.lib, sig);
                     if (value == null)
                     {
                         logger.LogError("Failed to load signature {Signature}!", signature.Key);
