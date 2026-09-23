@@ -77,7 +77,7 @@ void CEventManager::Initialize()
 
     uintptr_t rawGameEventManager = (uintptr_t)(g_pGameDataManager->GetSignatures()->Fetch("CSource2Server::g_GameEventManager"));
 
-    rawGameEventManager += WIN_LINUX(95, 103) + 3;
+    rawGameEventManager += 3;
     rawGameEventManager += 4 + *(int*)(rawGameEventManager);
 
     g_gameEventManager = *(IGameEventManager2**)(rawGameEventManager);
