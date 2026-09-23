@@ -11,13 +11,17 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPathWithDynamicNodes : CPathSimple, ISchemaClass<CPathWithDynamicNodes>
 {
     static CPathWithDynamicNodes ISchemaClass<CPathWithDynamicNodes>.From(nint handle) => new CPathWithDynamicNodesImpl(handle);
-    static int ISchemaClass<CPathWithDynamicNodes>.Size => 1520;
+    static int ISchemaClass<CPathWithDynamicNodes>.Size => 1536;
     static string? ISchemaClass<CPathWithDynamicNodes>.ClassName => "path_with_dynamic_nodes";
 
 
     public ref CUtlVector<CHandle<CPathNode>> PathNodes { get; }
 
     public ref CTransform XInitialPathWorldToLocal { get; }
+
+    public ref DirectionAlongSimplePath_t DesiredDirection { get; }
+
+    public ref bool IgnoreParentRotation { get; }
 
     public void PathNodesUpdated();
     public void XInitialPathWorldToLocalUpdated();

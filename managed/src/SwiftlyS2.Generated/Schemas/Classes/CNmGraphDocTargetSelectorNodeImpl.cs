@@ -12,7 +12,7 @@ using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmGraphDocTargetSelectorNodeImpl : CNmGraphDocFlowNodeImpl, CNmGraphDocTargetSelectorNode
+internal partial class CNmGraphDocTargetSelectorNodeImpl : CNmGraphDocVariationDataNodeImpl, CNmGraphDocTargetSelectorNode
 {
     public CNmGraphDocTargetSelectorNodeImpl(nint handle) : base(handle) { }
 

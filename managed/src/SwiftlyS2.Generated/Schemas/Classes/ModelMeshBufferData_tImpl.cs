@@ -128,12 +128,12 @@ internal partial class ModelMeshBufferData_tImpl : SchemaClass, ModelMeshBufferD
     }
     private static nint? _BufferUsageOffset;
 
-    public ref byte BufferUsage
+    public ref ushort BufferUsage
     {
         get
         {
             _BufferUsageOffset = _BufferUsageOffset ?? Schema.GetOffset(0xA75611C2A25EB2A6);
-            return ref _Handle.AsRef<byte>(_BufferUsageOffset!.Value);
+            return ref _Handle.AsRef<ushort>(_BufferUsageOffset!.Value);
         }
     }
     private static nint? _InputLayoutFieldsOffset;

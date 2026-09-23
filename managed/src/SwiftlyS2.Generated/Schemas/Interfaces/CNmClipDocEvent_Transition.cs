@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmClipDocEvent_Transition : CNmClipDocEvent, ISchemaClass<CNmClipDocEvent_Transition>
 {
     static CNmClipDocEvent_Transition ISchemaClass<CNmClipDocEvent_Transition>.From(nint handle) => new CNmClipDocEvent_TransitionImpl(handle);
-    static int ISchemaClass<CNmClipDocEvent_Transition>.Size => 32;
+    static int ISchemaClass<CNmClipDocEvent_Transition>.Size => 40;
     static string? ISchemaClass<CNmClipDocEvent_Transition>.ClassName => null;
 
 

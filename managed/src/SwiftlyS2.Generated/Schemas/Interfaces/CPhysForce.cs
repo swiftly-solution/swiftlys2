@@ -12,7 +12,7 @@ public partial interface CPhysForce : CPointEntity, ISchemaClass<CPhysForce>
 {
     static CPhysForce ISchemaClass<CPhysForce>.From(nint handle) => new CPhysForceImpl(handle);
     static int ISchemaClass<CPhysForce>.Size => 1288;
-    static string? ISchemaClass<CPhysForce>.ClassName => null;
+    static string? ISchemaClass<CPhysForce>.ClassName => "phys_force";
 
 
     public IPhysicsMotionController? Controller { get; }

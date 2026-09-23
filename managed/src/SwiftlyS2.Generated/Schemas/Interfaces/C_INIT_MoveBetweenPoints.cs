@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_MoveBetweenPoints : CParticleFunctionInitializer, ISchemaClass<C_INIT_MoveBetweenPoints>
 {
     static C_INIT_MoveBetweenPoints ISchemaClass<C_INIT_MoveBetweenPoints>.From(nint handle) => new C_INIT_MoveBetweenPointsImpl(handle);
-    static int ISchemaClass<C_INIT_MoveBetweenPoints>.Size => 2328;
+    static int ISchemaClass<C_INIT_MoveBetweenPoints>.Size => 2376;
     static string? ISchemaClass<C_INIT_MoveBetweenPoints>.ClassName => null;
 
 

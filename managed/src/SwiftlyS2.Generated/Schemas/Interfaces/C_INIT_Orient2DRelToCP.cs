@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_Orient2DRelToCP : CParticleFunctionInitializer, ISchemaClass<C_INIT_Orient2DRelToCP>
 {
     static C_INIT_Orient2DRelToCP ISchemaClass<C_INIT_Orient2DRelToCP>.From(nint handle) => new C_INIT_Orient2DRelToCPImpl(handle);
-    static int ISchemaClass<C_INIT_Orient2DRelToCP>.Size => 496;
+    static int ISchemaClass<C_INIT_Orient2DRelToCP>.Size => 504;
     static string? ISchemaClass<C_INIT_Orient2DRelToCP>.ClassName => null;
 
 

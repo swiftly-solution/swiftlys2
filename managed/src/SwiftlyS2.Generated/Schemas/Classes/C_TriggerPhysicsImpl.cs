@@ -136,6 +136,16 @@ internal partial class C_TriggerPhysicsImpl : C_BaseTriggerImpl, C_TriggerPhysic
             return ref _Handle.AsRef<Vector>(_LinearForceDirectionOffset!.Value);
         }
     }
+    private static nint? _ForceDirectionIsInLocalSpaceOffset;
+
+    public ref bool ForceDirectionIsInLocalSpace
+    {
+        get
+        {
+            _ForceDirectionIsInLocalSpaceOffset = _ForceDirectionIsInLocalSpaceOffset ?? Schema.GetOffset(0x3041ADDEC74995B5);
+            return ref _Handle.AsRef<bool>(_ForceDirectionIsInLocalSpaceOffset!.Value);
+        }
+    }
     private static nint? _ConvertToDebrisWhenPossibleOffset;
 
     public ref bool ConvertToDebrisWhenPossible

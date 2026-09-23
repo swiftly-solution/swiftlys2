@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CTriggerPhysics : CBaseTrigger, ISchemaClass<CTriggerPhysics>
 {
     static CTriggerPhysics ISchemaClass<CTriggerPhysics>.From(nint handle) => new CTriggerPhysicsImpl(handle);
-    static int ISchemaClass<CTriggerPhysics>.Size => 2376;
+    static int ISchemaClass<CTriggerPhysics>.Size => 2600;
     static string? ISchemaClass<CTriggerPhysics>.ClassName => "trigger_physics";
 
 
@@ -41,6 +41,8 @@ public partial interface CTriggerPhysics : CBaseTrigger, ISchemaClass<CTriggerPh
 
     public ref Vector LinearForceDirection { get; }
 
+    public ref bool ForceDirectionIsInLocalSpace { get; }
+
     public ref bool ConvertToDebrisWhenPossible { get; }
 
     public void GravityScaleUpdated();
@@ -55,5 +57,6 @@ public partial interface CTriggerPhysics : CBaseTrigger, ISchemaClass<CTriggerPh
     public void CollapseToForcePointUpdated();
     public void LinearForcePointAtWorldUpdated();
     public void LinearForceDirectionUpdated();
+    public void ForceDirectionIsInLocalSpaceUpdated();
     public void ConvertToDebrisWhenPossibleUpdated();
 }

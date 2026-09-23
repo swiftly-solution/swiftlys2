@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_PointClientUIDialog : C_BaseClientUIEntity, ISchemaClass<C_PointClientUIDialog>
 {
     static C_PointClientUIDialog ISchemaClass<C_PointClientUIDialog>.From(nint handle) => new C_PointClientUIDialogImpl(handle);
-    static int ISchemaClass<C_PointClientUIDialog>.Size => 4072;
+    static int ISchemaClass<C_PointClientUIDialog>.Size => 4304;
     static string? ISchemaClass<C_PointClientUIDialog>.ClassName => null;
 
 

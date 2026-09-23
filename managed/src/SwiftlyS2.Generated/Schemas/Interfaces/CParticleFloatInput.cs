@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CParticleFloatInput : CParticleInput, ISchemaClass<CParticleFloatInput>
 {
     static CParticleFloatInput ISchemaClass<CParticleFloatInput>.From(nint handle) => new CParticleFloatInputImpl(handle);
-    static int ISchemaClass<CParticleFloatInput>.Size => 368;
+    static int ISchemaClass<CParticleFloatInput>.Size => 376;
     static string? ISchemaClass<CParticleFloatInput>.ClassName => null;
 
 
@@ -114,6 +114,8 @@ public partial interface CParticleFloatInput : CParticleInput, ISchemaClass<CPar
 
     // CPiecewiseCurve
     public SchemaUntypedField Curve { get; }
+
+    public ref float CompareValue { get; }
 
 
 }

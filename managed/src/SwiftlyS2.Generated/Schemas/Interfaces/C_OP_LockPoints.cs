@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_LockPoints : CParticleFunctionOperator, ISchemaClass<C_OP_LockPoints>
 {
     static C_OP_LockPoints ISchemaClass<C_OP_LockPoints>.From(nint handle) => new C_OP_LockPointsImpl(handle);
-    static int ISchemaClass<C_OP_LockPoints>.Size => 496;
+    static int ISchemaClass<C_OP_LockPoints>.Size => 504;
     static string? ISchemaClass<C_OP_LockPoints>.ClassName => null;
 
 

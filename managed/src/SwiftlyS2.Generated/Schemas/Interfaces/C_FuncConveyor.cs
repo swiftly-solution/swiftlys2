@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_FuncConveyor : C_BaseModelEntity, ISchemaClass<C_FuncConveyor>
 {
     static C_FuncConveyor ISchemaClass<C_FuncConveyor>.From(nint handle) => new C_FuncConveyorImpl(handle);
-    static int ISchemaClass<C_FuncConveyor>.Size => 4088;
+    static int ISchemaClass<C_FuncConveyor>.Size => 4320;
     static string? ISchemaClass<C_FuncConveyor>.ClassName => null;
 
 
@@ -24,6 +24,8 @@ public partial interface C_FuncConveyor : C_BaseModelEntity, ISchemaClass<C_Func
     public ref int TransitionDurationTicks { get; }
 
     public ref float TransitionStartSpeed { get; }
+
+    public ref float FrictionScale { get; }
 
     // C_NetworkUtlVectorBase< CHandle< C_BaseEntity > >
     public SchemaUntypedField ConveyorModels { get; }

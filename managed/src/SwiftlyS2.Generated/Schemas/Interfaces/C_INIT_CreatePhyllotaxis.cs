@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_CreatePhyllotaxis : CParticleFunctionInitializer, ISchemaClass<C_INIT_CreatePhyllotaxis>
 {
     static C_INIT_CreatePhyllotaxis ISchemaClass<C_INIT_CreatePhyllotaxis>.From(nint handle) => new C_INIT_CreatePhyllotaxisImpl(handle);
-    static int ISchemaClass<C_INIT_CreatePhyllotaxis>.Size => 528;
+    static int ISchemaClass<C_INIT_CreatePhyllotaxis>.Size => 536;
     static string? ISchemaClass<C_INIT_CreatePhyllotaxis>.ClassName => null;
 
 

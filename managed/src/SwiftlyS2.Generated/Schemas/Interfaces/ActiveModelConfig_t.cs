@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface ActiveModelConfig_t : ISchemaClass<ActiveModelConfig_t>
 {
     static ActiveModelConfig_t ISchemaClass<ActiveModelConfig_t>.From(nint handle) => new ActiveModelConfig_tImpl(handle);
-    static int ISchemaClass<ActiveModelConfig_t>.Size => 112;
+    static int ISchemaClass<ActiveModelConfig_t>.Size => 160;
     static string? ISchemaClass<ActiveModelConfig_t>.ClassName => null;
 
 
@@ -22,6 +22,10 @@ public partial interface ActiveModelConfig_t : ISchemaClass<ActiveModelConfig_t>
     public ref CUtlVector<CHandle<CBaseModelEntity>> AssociatedEntities { get; }
 
     public ref CUtlVector<SchemaUntypedField> AssociatedEntityNames { get; }
+
+    public ref CUtlLeanVector<bool, int> AssociatedEntityCollidesWithHierarchy { get; }
+
+    public ref CUtlLeanVector<bool, int> AssociatedEntityCollidesOutsideHierarchy { get; }
 
     public void HandleUpdated();
     public void NameUpdated();

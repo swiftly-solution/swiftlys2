@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CCS2UIPawnGraphController : CAnimGraphControllerBase, ISchemaClass<CCS2UIPawnGraphController>
 {
     static CCS2UIPawnGraphController ISchemaClass<CCS2UIPawnGraphController>.From(nint handle) => new CCS2UIPawnGraphControllerImpl(handle);
-    static int ISchemaClass<CCS2UIPawnGraphController>.Size => 472;
+    static int ISchemaClass<CCS2UIPawnGraphController>.Size => 576;
     static string? ISchemaClass<CCS2UIPawnGraphController>.ClassName => null;
 
 
@@ -40,6 +40,10 @@ public partial interface CCS2UIPawnGraphController : CAnimGraphControllerBase, I
     public ref CAnimGraph2ParamOptionalRefCGlobalSymbol WeaponState { get; }
 
     public ref CAnimGraph2ParamOptionalRefFloat InspectTurnAngle { get; }
+
+    public ref CAnimGraph2ParamOptionalRefFloat ChickSnapshotVariant { get; }
+
+    public ref CAnimGraph2ParamOptionalRefFloat ChickLifeStage { get; }
 
     public ref CAnimGraph2ParamOptionalRefBool CT { get; }
 

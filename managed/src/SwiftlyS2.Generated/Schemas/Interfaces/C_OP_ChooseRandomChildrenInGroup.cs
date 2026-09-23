@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_ChooseRandomChildrenInGroup : CParticleFunctionPreEmission, ISchemaClass<C_OP_ChooseRandomChildrenInGroup>
 {
     static C_OP_ChooseRandomChildrenInGroup ISchemaClass<C_OP_ChooseRandomChildrenInGroup>.From(nint handle) => new C_OP_ChooseRandomChildrenInGroupImpl(handle);
-    static int ISchemaClass<C_OP_ChooseRandomChildrenInGroup>.Size => 856;
+    static int ISchemaClass<C_OP_ChooseRandomChildrenInGroup>.Size => 872;
     static string? ISchemaClass<C_OP_ChooseRandomChildrenInGroup>.ClassName => null;
 
 

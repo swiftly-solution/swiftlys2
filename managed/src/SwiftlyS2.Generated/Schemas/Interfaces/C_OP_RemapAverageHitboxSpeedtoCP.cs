@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RemapAverageHitboxSpeedtoCP : CParticleFunctionPreEmission, ISchemaClass<C_OP_RemapAverageHitboxSpeedtoCP>
 {
     static C_OP_RemapAverageHitboxSpeedtoCP ISchemaClass<C_OP_RemapAverageHitboxSpeedtoCP>.From(nint handle) => new C_OP_RemapAverageHitboxSpeedtoCPImpl(handle);
-    static int ISchemaClass<C_OP_RemapAverageHitboxSpeedtoCP>.Size => 3824;
+    static int ISchemaClass<C_OP_RemapAverageHitboxSpeedtoCP>.Size => 3896;
     static string? ISchemaClass<C_OP_RemapAverageHitboxSpeedtoCP>.ClassName => null;
 
 

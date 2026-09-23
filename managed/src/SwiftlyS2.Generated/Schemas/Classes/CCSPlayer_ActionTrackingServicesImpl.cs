@@ -62,8 +62,22 @@ internal partial class CCSPlayer_ActionTrackingServicesImpl : CPlayerPawnCompone
             return instance;
         }
     }
+    private static nint? _WeaponCarryOverIntoThisRoundOffset;
+    private WeaponPurchaseTracker_tImpl? _WeaponCarryOverIntoThisRoundInstance;
+
+    public WeaponPurchaseTracker_t WeaponCarryOverIntoThisRound
+    {
+        get
+        {
+            _WeaponCarryOverIntoThisRoundOffset = _WeaponCarryOverIntoThisRoundOffset ?? Schema.GetOffset(0xC890019D18B5B34C);
+            var instance = _WeaponCarryOverIntoThisRoundInstance ??= new WeaponPurchaseTracker_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _WeaponCarryOverIntoThisRoundOffset!.Value);
+            return instance;
+        }
+    }
 
     public void IsRescuingUpdated() => Schema.Update(_Handle, 0xC890019D225BDB2F);
     public void WeaponPurchasesThisMatchUpdated() => Schema.Update(_Handle, 0xC890019D43F68EE0);
     public void WeaponPurchasesThisRoundUpdated() => Schema.Update(_Handle, 0xC890019D7C64F835);
+    public void WeaponCarryOverIntoThisRoundUpdated() => Schema.Update(_Handle, 0xC890019D18B5B34C);
 }

@@ -71,55 +71,5 @@ internal partial class ResponseFollowupImpl : SchemaClass, ResponseFollowup
             Schema.SetString(_Handle, _Followup_targetOffset!.Value, value);
         }
     }
-    private static nint? _Followup_entityiotargetOffset;
-
-    public string Followup_entityiotarget
-    {
-        get
-        {
-            _Followup_entityiotargetOffset = _Followup_entityiotargetOffset ?? Schema.GetOffset(0x6C93EDBEFF990A74);
-            return Schema.GetString(_Handle.Read<nint>(_Followup_entityiotargetOffset!.Value));
-        }
-        set
-        {
-            _Followup_entityiotargetOffset = _Followup_entityiotargetOffset ?? Schema.GetOffset(0x6C93EDBEFF990A74);
-            Schema.SetString(_Handle, _Followup_entityiotargetOffset!.Value, value);
-        }
-    }
-    private static nint? _Followup_entityioinputOffset;
-
-    public string Followup_entityioinput
-    {
-        get
-        {
-            _Followup_entityioinputOffset = _Followup_entityioinputOffset ?? Schema.GetOffset(0x6C93EDBEAB6AD4B7);
-            return Schema.GetString(_Handle.Read<nint>(_Followup_entityioinputOffset!.Value));
-        }
-        set
-        {
-            _Followup_entityioinputOffset = _Followup_entityioinputOffset ?? Schema.GetOffset(0x6C93EDBEAB6AD4B7);
-            Schema.SetString(_Handle, _Followup_entityioinputOffset!.Value, value);
-        }
-    }
-    private static nint? _Followup_entityiodelayOffset;
-
-    public ref float Followup_entityiodelay
-    {
-        get
-        {
-            _Followup_entityiodelayOffset = _Followup_entityiodelayOffset ?? Schema.GetOffset(0x6C93EDBE37A3C494);
-            return ref _Handle.AsRef<float>(_Followup_entityiodelayOffset!.Value);
-        }
-    }
-    private static nint? _FiredOffset;
-
-    public ref bool Fired
-    {
-        get
-        {
-            _FiredOffset = _FiredOffset ?? Schema.GetOffset(0x6C93EDBE5ABF7B87);
-            return ref _Handle.AsRef<bool>(_FiredOffset!.Value);
-        }
-    }
 
 }

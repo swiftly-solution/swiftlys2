@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPulseGraphInstance_TestDomain_FakeEntityOwner : CBasePulseGraphInstance, ISchemaClass<CPulseGraphInstance_TestDomain_FakeEntityOwner>
 {
     static CPulseGraphInstance_TestDomain_FakeEntityOwner ISchemaClass<CPulseGraphInstance_TestDomain_FakeEntityOwner>.From(nint handle) => new CPulseGraphInstance_TestDomain_FakeEntityOwnerImpl(handle);
-    static int ISchemaClass<CPulseGraphInstance_TestDomain_FakeEntityOwner>.Size => 272;
+    static int ISchemaClass<CPulseGraphInstance_TestDomain_FakeEntityOwner>.Size => 136;
     static string? ISchemaClass<CPulseGraphInstance_TestDomain_FakeEntityOwner>.ClassName => null;
 
 }

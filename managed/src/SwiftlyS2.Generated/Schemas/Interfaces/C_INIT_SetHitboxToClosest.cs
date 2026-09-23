@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_SetHitboxToClosest : CParticleFunctionInitializer, ISchemaClass<C_INIT_SetHitboxToClosest>
 {
     static C_INIT_SetHitboxToClosest ISchemaClass<C_INIT_SetHitboxToClosest>.From(nint handle) => new C_INIT_SetHitboxToClosestImpl(handle);
-    static int ISchemaClass<C_INIT_SetHitboxToClosest>.Size => 2720;
+    static int ISchemaClass<C_INIT_SetHitboxToClosest>.Size => 2768;
     static string? ISchemaClass<C_INIT_SetHitboxToClosest>.ClassName => null;
 
 

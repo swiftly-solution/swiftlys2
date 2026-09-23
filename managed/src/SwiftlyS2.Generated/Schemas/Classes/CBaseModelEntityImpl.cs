@@ -320,6 +320,16 @@ internal partial class CBaseModelEntityImpl : CBaseEntityImpl, CBaseModelEntity
             return ref _Handle.AsRef<bool>(_RenderToCubemapsOffset!.Value);
         }
     }
+    private static nint? _ExpandRenderBoundsToIncludeClothOffset;
+
+    public ref bool ExpandRenderBoundsToIncludeCloth
+    {
+        get
+        {
+            _ExpandRenderBoundsToIncludeClothOffset = _ExpandRenderBoundsToIncludeClothOffset ?? Schema.GetOffset(0x517849F7DF5A3EE9);
+            return ref _Handle.AsRef<bool>(_ExpandRenderBoundsToIncludeClothOffset!.Value);
+        }
+    }
     private static nint? _NoInterpolateOffset;
 
     public ref bool NoInterpolate
@@ -416,6 +426,29 @@ internal partial class CBaseModelEntityImpl : CBaseEntityImpl, CBaseModelEntity
             return ref _Handle.AsRef<byte>(_ObjectCullingOffset!.Value);
         }
     }
+    private static nint? _BodyGroupTotalRequestCountOffset;
+
+    public ref uint BodyGroupTotalRequestCount
+    {
+        get
+        {
+            _BodyGroupTotalRequestCountOffset = _BodyGroupTotalRequestCountOffset ?? Schema.GetOffset(0x517849F774E80E82);
+            return ref _Handle.AsRef<uint>(_BodyGroupTotalRequestCountOffset!.Value);
+        }
+    }
+    private static nint? _BodyGroupRequestsOffset;
+    private SchemaUntypedField? _BodyGroupRequestsInstance;
+
+    public SchemaUntypedField BodyGroupRequests
+    {
+        get
+        {
+            _BodyGroupRequestsOffset = _BodyGroupRequestsOffset ?? Schema.GetOffset(0x517849F7F5330AA2);
+            var instance = _BodyGroupRequestsInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _BodyGroupRequestsOffset!.Value);
+            return instance;
+        }
+    }
     private static nint? _BodyGroupChoicesOffset;
     private SchemaUntypedField? _BodyGroupChoicesInstance;
 
@@ -464,6 +497,7 @@ internal partial class CBaseModelEntityImpl : CBaseEntityImpl, CBaseModelEntity
     public void RenderUpdated() => Schema.Update(_Handle, 0x517849F7470D2A38);
     public void RenderAttributesUpdated() => Schema.Update(_Handle, 0x517849F7BF74B4AC);
     public void RenderToCubemapsUpdated() => Schema.Update(_Handle, 0x517849F78A23364A);
+    public void ExpandRenderBoundsToIncludeClothUpdated() => Schema.Update(_Handle, 0x517849F7DF5A3EE9);
     public void NoInterpolateUpdated() => Schema.Update(_Handle, 0x517849F76E001CB9);
     public void CollisionUpdated() => Schema.Update(_Handle, 0x517849F7AE8E690F);
     public void GlowUpdated() => Schema.Update(_Handle, 0x517849F7A7E70C3C);

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_DifferencePreviousParticle : CParticleFunctionOperator, ISchemaClass<C_OP_DifferencePreviousParticle>
 {
     static C_OP_DifferencePreviousParticle ISchemaClass<C_OP_DifferencePreviousParticle>.From(nint handle) => new C_OP_DifferencePreviousParticleImpl(handle);
-    static int ISchemaClass<C_OP_DifferencePreviousParticle>.Size => 504;
+    static int ISchemaClass<C_OP_DifferencePreviousParticle>.Size => 512;
     static string? ISchemaClass<C_OP_DifferencePreviousParticle>.ClassName => null;
 
 

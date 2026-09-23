@@ -76,6 +76,16 @@ internal partial class CNmSkeletonDocumentImpl : CNmAnimDocumentImpl, CNmSkeleto
             return ref _Handle.AsRef<bool>(_IsCS_HACKOffset!.Value);
         }
     }
+    private static nint? _ContactConfigsOffset;
+
+    public ref CUtlVector<CNmSkeletonDocument__ContactConfig_t> ContactConfigs
+    {
+        get
+        {
+            _ContactConfigsOffset = _ContactConfigsOffset ?? Schema.GetOffset(0x470887F527B5F356);
+            return ref _Handle.AsRef<CUtlVector<CNmSkeletonDocument__ContactConfig_t>>(_ContactConfigsOffset!.Value);
+        }
+    }
     private static nint? _SecondarySkeletonsOffset;
 
     public ref CUtlVector<CNmSkeletonDocument__SecondarySkeleton_t> SecondarySkeletons

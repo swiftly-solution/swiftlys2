@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmClipDocEvent_FloatCurve : CNmClipDocEvent, ISchemaClass<CNmClipDocEvent_FloatCurve>
 {
     static CNmClipDocEvent_FloatCurve ISchemaClass<CNmClipDocEvent_FloatCurve>.From(nint handle) => new CNmClipDocEvent_FloatCurveImpl(handle);
-    static int ISchemaClass<CNmClipDocEvent_FloatCurve>.Size => 88;
+    static int ISchemaClass<CNmClipDocEvent_FloatCurve>.Size => 96;
     static string? ISchemaClass<CNmClipDocEvent_FloatCurve>.ClassName => null;
 
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CnmGraphDocFootIKNode : CNmGraphDocVariationDataNode, ISchemaClass<CnmGraphDocFootIKNode>
 {
     static CnmGraphDocFootIKNode ISchemaClass<CnmGraphDocFootIKNode>.From(nint handle) => new CnmGraphDocFootIKNodeImpl(handle);
-    static int ISchemaClass<CnmGraphDocFootIKNode>.Size => 520;
+    static int ISchemaClass<CnmGraphDocFootIKNode>.Size => 528;
     static string? ISchemaClass<CnmGraphDocFootIKNode>.ClassName => null;
 
 

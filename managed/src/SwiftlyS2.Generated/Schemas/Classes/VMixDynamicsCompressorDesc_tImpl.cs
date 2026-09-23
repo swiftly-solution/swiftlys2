@@ -96,6 +96,16 @@ internal partial class VMixDynamicsCompressorDesc_tImpl : SchemaClass, VMixDynam
             return ref _Handle.AsRef<float>(_WetMixOffset!.Value);
         }
     }
+    private static nint? _SCHighPassFreqOffset;
+
+    public ref float SCHighPassFreq
+    {
+        get
+        {
+            _SCHighPassFreqOffset = _SCHighPassFreqOffset ?? Schema.GetOffset(0x4AC2D5006B75D8AA);
+            return ref _Handle.AsRef<float>(_SCHighPassFreqOffset!.Value);
+        }
+    }
     private static nint? _PeakModeOffset;
 
     public ref bool PeakMode
@@ -104,6 +114,16 @@ internal partial class VMixDynamicsCompressorDesc_tImpl : SchemaClass, VMixDynam
         {
             _PeakModeOffset = _PeakModeOffset ?? Schema.GetOffset(0x4AC2D50087DF35F9);
             return ref _Handle.AsRef<bool>(_PeakModeOffset!.Value);
+        }
+    }
+    private static nint? _AutoMakeupGainOffset;
+
+    public ref bool AutoMakeupGain
+    {
+        get
+        {
+            _AutoMakeupGainOffset = _AutoMakeupGainOffset ?? Schema.GetOffset(0x4AC2D500F8A2ECAA);
+            return ref _Handle.AsRef<bool>(_AutoMakeupGainOffset!.Value);
         }
     }
 

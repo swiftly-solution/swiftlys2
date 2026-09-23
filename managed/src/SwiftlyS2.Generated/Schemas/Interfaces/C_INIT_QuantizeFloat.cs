@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_QuantizeFloat : CParticleFunctionInitializer, ISchemaClass<C_INIT_QuantizeFloat>
 {
     static C_INIT_QuantizeFloat ISchemaClass<C_INIT_QuantizeFloat>.From(nint handle) => new C_INIT_QuantizeFloatImpl(handle);
-    static int ISchemaClass<C_INIT_QuantizeFloat>.Size => 856;
+    static int ISchemaClass<C_INIT_QuantizeFloat>.Size => 872;
     static string? ISchemaClass<C_INIT_QuantizeFloat>.ClassName => null;
 
 

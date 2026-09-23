@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmGraphDocument : CNmAnimDocument, ISchemaClass<CNmGraphDocument>
 {
     static CNmGraphDocument ISchemaClass<CNmGraphDocument>.From(nint handle) => new CNmGraphDocumentImpl(handle);
-    static int ISchemaClass<CNmGraphDocument>.Size => 184;
+    static int ISchemaClass<CNmGraphDocument>.Size => 200;
     static string? ISchemaClass<CNmGraphDocument>.ClassName => null;
 
 
@@ -20,6 +20,8 @@ public partial interface CNmGraphDocument : CNmAnimDocument, ISchemaClass<CNmGra
     public CNmVariationHierarchy VariationHierarchy { get; }
 
     public ref CUtlLeanVector<CNmGraphDocument__DebugParameterSet_t, int> DebugParameterSets { get; }
+
+    public ref CUtlLeanVector<CNmGraphDocument__DebugBoneFilterSet_t, int> DebugBoneFilterSets { get; }
 
     public ref CUtlVector<SchemaUntypedField> DictionaryIDSetIDs { get; }
 

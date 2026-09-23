@@ -166,5 +166,18 @@ internal partial class PGDInstruction_tImpl : SchemaClass, PGDInstruction_t
             return instance;
         }
     }
+    private static nint? _TempVarIdxOffset;
+    private PulseRuntimeTempVarIndex_tImpl? _TempVarIdxInstance;
+
+    public PulseRuntimeTempVarIndex_t TempVarIdx
+    {
+        get
+        {
+            _TempVarIdxOffset = _TempVarIdxOffset ?? Schema.GetOffset(0xE64AC7075C99AEBF);
+            var instance = _TempVarIdxInstance ??= new PulseRuntimeTempVarIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _TempVarIdxOffset!.Value);
+            return instance;
+        }
+    }
 
 }

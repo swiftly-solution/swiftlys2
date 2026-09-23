@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_ModelPointEntity : C_BaseModelEntity, ISchemaClass<C_ModelPointEntity>
 {
     static C_ModelPointEntity ISchemaClass<C_ModelPointEntity>.From(nint handle) => new C_ModelPointEntityImpl(handle);
-    static int ISchemaClass<C_ModelPointEntity>.Size => 4016;
+    static int ISchemaClass<C_ModelPointEntity>.Size => 4248;
     static string? ISchemaClass<C_ModelPointEntity>.ClassName => null;
 
 }

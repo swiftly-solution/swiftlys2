@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_GlobalScale : CParticleFunctionInitializer, ISchemaClass<C_INIT_GlobalScale>
 {
     static C_INIT_GlobalScale ISchemaClass<C_INIT_GlobalScale>.From(nint handle) => new C_INIT_GlobalScaleImpl(handle);
-    static int ISchemaClass<C_INIT_GlobalScale>.Size => 496;
+    static int ISchemaClass<C_INIT_GlobalScale>.Size => 504;
     static string? ISchemaClass<C_INIT_GlobalScale>.ClassName => null;
 
 

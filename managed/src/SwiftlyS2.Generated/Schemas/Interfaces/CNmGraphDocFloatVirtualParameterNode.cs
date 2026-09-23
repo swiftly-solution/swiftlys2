@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmGraphDocFloatVirtualParameterNode : CNmGraphDocVirtualParameterNode, ISchemaClass<CNmGraphDocFloatVirtualParameterNode>
 {
     static CNmGraphDocFloatVirtualParameterNode ISchemaClass<CNmGraphDocFloatVirtualParameterNode>.From(nint handle) => new CNmGraphDocFloatVirtualParameterNodeImpl(handle);
-    static int ISchemaClass<CNmGraphDocFloatVirtualParameterNode>.Size => 264;
+    static int ISchemaClass<CNmGraphDocFloatVirtualParameterNode>.Size => 272;
     static string? ISchemaClass<CNmGraphDocFloatVirtualParameterNode>.ClassName => null;
 
 }

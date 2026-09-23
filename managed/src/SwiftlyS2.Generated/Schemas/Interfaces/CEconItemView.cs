@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CEconItemView : IEconItemInterface, ISchemaClass<CEconItemView>
 {
     static CEconItemView ISchemaClass<CEconItemView>.From(nint handle) => new CEconItemViewImpl(handle);
-    static int ISchemaClass<CEconItemView>.Size => 680;
+    static int ISchemaClass<CEconItemView>.Size => 1000;
     static string? ISchemaClass<CEconItemView>.ClassName => null;
 
 
@@ -40,6 +40,10 @@ public partial interface CEconItemView : IEconItemInterface, ISchemaClass<CEconI
     public string CustomName { get; set; }
 
     public string CustomNameOverride { get; set; }
+
+    public string CustomNameOverride2 { get; set; }
+
+    public string CustomNameOverride3 { get; set; }
 
     public void ItemDefinitionIndexUpdated();
     public void EntityQualityUpdated();

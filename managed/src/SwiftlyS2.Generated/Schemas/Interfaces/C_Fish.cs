@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_Fish : CBaseAnimGraph, ISchemaClass<C_Fish>
 {
     static C_Fish ISchemaClass<C_Fish>.From(nint handle) => new C_FishImpl(handle);
-    static int ISchemaClass<C_Fish>.Size => 4720;
+    static int ISchemaClass<C_Fish>.Size => 4952;
     static string? ISchemaClass<C_Fish>.ClassName => null;
 
 

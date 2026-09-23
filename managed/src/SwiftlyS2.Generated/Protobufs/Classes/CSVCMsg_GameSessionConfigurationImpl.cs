@@ -50,4 +50,8 @@ internal class CSVCMsg_GameSessionConfigurationImpl : TypedProtobuf<CSVCMsg_Game
     { get => Accessor.GetString("previouslevel"); set => Accessor.SetString("previouslevel", value); }
     public string Landmarkname
     { get => Accessor.GetString("landmarkname"); set => Accessor.SetString("landmarkname", value); }
+    public IProtobufRepeatedFieldSubMessageType<QuantizedFloatEncoderAlias_t> QuantizedFloatEncoderAliases
+    { get => new ProtobufRepeatedFieldSubMessageType<QuantizedFloatEncoderAlias_t>(Accessor, "quantized_float_encoder_aliases"); }
+    public float MaxCoord
+    { get => Accessor.GetFloat("max_coord"); set => Accessor.SetFloat("max_coord", value); }
 }

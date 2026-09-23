@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_SetControlPointPositions : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointPositions>
 {
     static C_OP_SetControlPointPositions ISchemaClass<C_OP_SetControlPointPositions>.From(nint handle) => new C_OP_SetControlPointPositionsImpl(handle);
-    static int ISchemaClass<C_OP_SetControlPointPositions>.Size => 552;
+    static int ISchemaClass<C_OP_SetControlPointPositions>.Size => 560;
     static string? ISchemaClass<C_OP_SetControlPointPositions>.ClassName => null;
 
 

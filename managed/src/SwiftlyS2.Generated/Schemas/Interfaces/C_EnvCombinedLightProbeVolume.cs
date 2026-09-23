@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_EnvCombinedLightProbeVolume : C_BaseEntity, ISchemaClass<C_EnvCombinedLightProbeVolume>
 {
     static C_EnvCombinedLightProbeVolume ISchemaClass<C_EnvCombinedLightProbeVolume>.From(nint handle) => new C_EnvCombinedLightProbeVolumeImpl(handle);
-    static int ISchemaClass<C_EnvCombinedLightProbeVolume>.Size => 5960;
+    static int ISchemaClass<C_EnvCombinedLightProbeVolume>.Size => 2008;
     static string? ISchemaClass<C_EnvCombinedLightProbeVolume>.ClassName => null;
 
 
@@ -29,11 +29,7 @@ public partial interface C_EnvCombinedLightProbeVolume : C_BaseEntity, ISchemaCl
 
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_DC { get; }
 
-    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_R { get; }
-
-    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_G { get; }
-
-    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_B { get; }
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_L1 { get; }
 
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeDirectLightIndicesTexture { get; }
 

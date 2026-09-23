@@ -11,13 +11,15 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface PathMoverEntitySpawn : ISchemaClass<PathMoverEntitySpawn>
 {
     static PathMoverEntitySpawn ISchemaClass<PathMoverEntitySpawn>.From(nint handle) => new PathMoverEntitySpawnImpl(handle);
-    static int ISchemaClass<PathMoverEntitySpawn>.Size => 32;
+    static int ISchemaClass<PathMoverEntitySpawn>.Size => 40;
     static string? ISchemaClass<PathMoverEntitySpawn>.ClassName => null;
 
 
     public ref CHandle<CFuncMover> Mover { get; }
 
     public ref CUtlVector<CHandle<CBaseEntity>> OtherEntities { get; }
+
+    public ref int SpawnNumber { get; }
 
 
 }

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CParticleCollectionRendererFloatInput : CParticleCollectionFloatInput, ISchemaClass<CParticleCollectionRendererFloatInput>
 {
     static CParticleCollectionRendererFloatInput ISchemaClass<CParticleCollectionRendererFloatInput>.From(nint handle) => new CParticleCollectionRendererFloatInputImpl(handle);
-    static int ISchemaClass<CParticleCollectionRendererFloatInput>.Size => 368;
+    static int ISchemaClass<CParticleCollectionRendererFloatInput>.Size => 376;
     static string? ISchemaClass<CParticleCollectionRendererFloatInput>.ClassName => null;
 
 }

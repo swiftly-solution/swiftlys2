@@ -17,33 +17,42 @@ internal partial class C_OP_MaintainSequentialPathImpl : CParticleFunctionOperat
     public C_OP_MaintainSequentialPathImpl(nint handle) : base(handle) { }
 
     private static nint? _MaxDistanceOffset;
+    private CParticleCollectionFloatInputImpl? _MaxDistanceInstance;
 
-    public ref float MaxDistance
+    public CParticleCollectionFloatInput MaxDistance
     {
         get
         {
             _MaxDistanceOffset = _MaxDistanceOffset ?? Schema.GetOffset(0x3F7004B8844E396A);
-            return ref _Handle.AsRef<float>(_MaxDistanceOffset!.Value);
+            var instance = _MaxDistanceInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _MaxDistanceOffset!.Value);
+            return instance;
         }
     }
     private static nint? _NumToAssignOffset;
+    private CParticleCollectionFloatInputImpl? _NumToAssignInstance;
 
-    public ref float NumToAssign
+    public CParticleCollectionFloatInput NumToAssign
     {
         get
         {
             _NumToAssignOffset = _NumToAssignOffset ?? Schema.GetOffset(0x3F7004B8F73366BD);
-            return ref _Handle.AsRef<float>(_NumToAssignOffset!.Value);
+            var instance = _NumToAssignInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _NumToAssignOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CohesionStrengthOffset;
+    private CParticleCollectionFloatInputImpl? _CohesionStrengthInstance;
 
-    public ref float CohesionStrength
+    public CParticleCollectionFloatInput CohesionStrength
     {
         get
         {
             _CohesionStrengthOffset = _CohesionStrengthOffset ?? Schema.GetOffset(0x3F7004B8A5A506EA);
-            return ref _Handle.AsRef<float>(_CohesionStrengthOffset!.Value);
+            var instance = _CohesionStrengthInstance ??= new CParticleCollectionFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _CohesionStrengthOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ToleranceOffset;

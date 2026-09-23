@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_Beam : C_BaseModelEntity, ISchemaClass<C_Beam>
 {
     static C_Beam ISchemaClass<C_Beam>.From(nint handle) => new C_BeamImpl(handle);
-    static int ISchemaClass<C_Beam>.Size => 4200;
+    static int ISchemaClass<C_Beam>.Size => 4432;
     static string? ISchemaClass<C_Beam>.ClassName => null;
 
 

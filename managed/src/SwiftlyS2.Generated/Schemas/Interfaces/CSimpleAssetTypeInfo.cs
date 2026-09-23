@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CSimpleAssetTypeInfo : ISchemaClass<CSimpleAssetTypeInfo>
 {
     static CSimpleAssetTypeInfo ISchemaClass<CSimpleAssetTypeInfo>.From(nint handle) => new CSimpleAssetTypeInfoImpl(handle);
-    static int ISchemaClass<CSimpleAssetTypeInfo>.Size => 256;
+    static int ISchemaClass<CSimpleAssetTypeInfo>.Size => 264;
     static string? ISchemaClass<CSimpleAssetTypeInfo>.ClassName => null;
 
 
@@ -60,6 +60,8 @@ public partial interface CSimpleAssetTypeInfo : ISchemaClass<CSimpleAssetTypeInf
     public ref bool ShouldCompileErrorFallbackToDisk { get; }
 
     public ref int AssetTypeVersion { get; }
+
+    public ref int AssetThumbnailVersion { get; }
 
     public string Test_InjectSearchable { get; set; }
 

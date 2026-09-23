@@ -176,5 +176,25 @@ internal partial class CModelConfigElement_AttachedModelImpl : CModelConfigEleme
             Schema.SetCUtlString(_Handle, _MaterialGroupOnOtherModelsOffset!.Value, value);
         }
     }
+    private static nint? _CollideWithHierarchyOffset;
+
+    public ref bool CollideWithHierarchy
+    {
+        get
+        {
+            _CollideWithHierarchyOffset = _CollideWithHierarchyOffset ?? Schema.GetOffset(0x82D04A99A4354364);
+            return ref _Handle.AsRef<bool>(_CollideWithHierarchyOffset!.Value);
+        }
+    }
+    private static nint? _CollideOutsideHierarchyOffset;
+
+    public ref bool CollideOutsideHierarchy
+    {
+        get
+        {
+            _CollideOutsideHierarchyOffset = _CollideOutsideHierarchyOffset ?? Schema.GetOffset(0x82D04A9951A70BAF);
+            return ref _Handle.AsRef<bool>(_CollideOutsideHierarchyOffset!.Value);
+        }
+    }
 
 }

@@ -19,6 +19,8 @@ public partial interface RnHull_t : ISchemaClass<RnHull_t>
 
     public ref float MaxAngularRadius { get; }
 
+    public ref float MinCentroidRadius { get; }
+
     public AABB_t Bounds { get; }
 
     public ref Vector OrthographicAreas { get; }

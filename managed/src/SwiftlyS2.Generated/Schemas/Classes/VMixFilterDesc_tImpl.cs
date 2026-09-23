@@ -16,36 +16,6 @@ internal partial class VMixFilterDesc_tImpl : SchemaClass, VMixFilterDesc_t
 {
     public VMixFilterDesc_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _FilterTypeOffset;
-
-    public ref VMixFilterType_t FilterType
-    {
-        get
-        {
-            _FilterTypeOffset = _FilterTypeOffset ?? Schema.GetOffset(0x39A87B6971861EDB);
-            return ref _Handle.AsRef<VMixFilterType_t>(_FilterTypeOffset!.Value);
-        }
-    }
-    private static nint? _FilterSlopeOffset;
-
-    public ref VMixFilterSlope_t FilterSlope
-    {
-        get
-        {
-            _FilterSlopeOffset = _FilterSlopeOffset ?? Schema.GetOffset(0x39A87B696387D992);
-            return ref _Handle.AsRef<VMixFilterSlope_t>(_FilterSlopeOffset!.Value);
-        }
-    }
-    private static nint? _EnabledOffset;
-
-    public ref bool Enabled
-    {
-        get
-        {
-            _EnabledOffset = _EnabledOffset ?? Schema.GetOffset(0x39A87B696154EB7E);
-            return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
-        }
-    }
     private static nint? _FldbGainOffset;
 
     public ref float FldbGain
@@ -74,6 +44,36 @@ internal partial class VMixFilterDesc_tImpl : SchemaClass, VMixFilterDesc_t
         {
             _QOffset = _QOffset ?? Schema.GetOffset(0x39A87B6996122E3A);
             return ref _Handle.AsRef<float>(_QOffset!.Value);
+        }
+    }
+    private static nint? _FilterTypeOffset;
+
+    public ref VMixFilterType_t FilterType
+    {
+        get
+        {
+            _FilterTypeOffset = _FilterTypeOffset ?? Schema.GetOffset(0x39A87B6971861EDB);
+            return ref _Handle.AsRef<VMixFilterType_t>(_FilterTypeOffset!.Value);
+        }
+    }
+    private static nint? _FilterSlopeOffset;
+
+    public ref VMixFilterSlope_t FilterSlope
+    {
+        get
+        {
+            _FilterSlopeOffset = _FilterSlopeOffset ?? Schema.GetOffset(0x39A87B696387D992);
+            return ref _Handle.AsRef<VMixFilterSlope_t>(_FilterSlopeOffset!.Value);
+        }
+    }
+    private static nint? _EnabledOffset;
+
+    public ref bool Enabled
+    {
+        get
+        {
+            _EnabledOffset = _EnabledOffset ?? Schema.GetOffset(0x39A87B696154EB7E);
+            return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
         }
     }
 

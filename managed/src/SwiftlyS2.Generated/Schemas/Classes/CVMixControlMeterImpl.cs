@@ -17,13 +17,16 @@ internal partial class CVMixControlMeterImpl : CVMixInputBaseImpl, CVMixControlM
     public CVMixControlMeterImpl(nint handle) : base(handle) { }
 
     private static nint? _ValueIndexOffset;
+    private CVMixDataOffsetImpl? _ValueIndexInstance;
 
-    public ref int ValueIndex
+    public CVMixDataOffset ValueIndex
     {
         get
         {
             _ValueIndexOffset = _ValueIndexOffset ?? Schema.GetOffset(0x8E30B7D49567C242);
-            return ref _Handle.AsRef<int>(_ValueIndexOffset!.Value);
+            var instance = _ValueIndexInstance ??= new CVMixDataOffsetImpl(0);
+            instance.DangerousSetHandle(_Handle + _ValueIndexOffset!.Value);
+            return instance;
         }
     }
 

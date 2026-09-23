@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_ColorLitPerParticle : CParticleFunctionInitializer, ISchemaClass<C_INIT_ColorLitPerParticle>
 {
     static C_INIT_ColorLitPerParticle ISchemaClass<C_INIT_ColorLitPerParticle>.From(nint handle) => new C_INIT_ColorLitPerParticleImpl(handle);
-    static int ISchemaClass<C_INIT_ColorLitPerParticle>.Size => 536;
+    static int ISchemaClass<C_INIT_ColorLitPerParticle>.Size => 544;
     static string? ISchemaClass<C_INIT_ColorLitPerParticle>.ClassName => null;
 
 

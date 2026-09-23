@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CBitmapAssetTypeInfo : CSimpleAssetTypeInfo, ISchemaClass<CBitmapAssetTypeInfo>
 {
     static CBitmapAssetTypeInfo ISchemaClass<CBitmapAssetTypeInfo>.From(nint handle) => new CBitmapAssetTypeInfoImpl(handle);
-    static int ISchemaClass<CBitmapAssetTypeInfo>.Size => 256;
+    static int ISchemaClass<CBitmapAssetTypeInfo>.Size => 264;
     static string? ISchemaClass<CBitmapAssetTypeInfo>.ClassName => null;
 
 }

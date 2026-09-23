@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmGraphDocFootstepEventPercentageThroughNode : CNmGraphDocFlowNode, ISchemaClass<CNmGraphDocFootstepEventPercentageThroughNode>
 {
     static CNmGraphDocFootstepEventPercentageThroughNode ISchemaClass<CNmGraphDocFootstepEventPercentageThroughNode>.From(nint handle) => new CNmGraphDocFootstepEventPercentageThroughNodeImpl(handle);
-    static int ISchemaClass<CNmGraphDocFootstepEventPercentageThroughNode>.Size => 264;
+    static int ISchemaClass<CNmGraphDocFootstepEventPercentageThroughNode>.Size => 272;
     static string? ISchemaClass<CNmGraphDocFootstepEventPercentageThroughNode>.ClassName => null;
 
 

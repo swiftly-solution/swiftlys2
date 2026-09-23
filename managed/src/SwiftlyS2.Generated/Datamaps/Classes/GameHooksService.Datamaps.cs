@@ -499,46 +499,6 @@ internal sealed partial class GameHooksService
         }
     }
 
-    internal void InvokeCBaseCSGrenadeProjectileDangerSoundThinkPre(ref CBaseCSGrenadeProjectileDangerSoundThinkPreContext ctx)
-    {
-        if (!DatamapsHook.CBaseCSGrenadeProjectileHook.CBaseCSGrenadeProjectileDangerSoundThinkHook.HasPreListeners)
-        {
-            return;
-        }
-
-        try
-        {
-            DatamapsHook.CBaseCSGrenadeProjectileHook.CBaseCSGrenadeProjectileDangerSoundThinkHook.InvokePre(ref ctx);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseCSGrenadeProjectile::DangerSoundThink::Pre.");
-            }
-        }
-    }
-
-    internal void InvokeCBaseCSGrenadeProjectileDangerSoundThinkPost(ref CBaseCSGrenadeProjectileDangerSoundThinkPostContext ctx)
-    {
-        if (!DatamapsHook.CBaseCSGrenadeProjectileHook.CBaseCSGrenadeProjectileDangerSoundThinkHook.HasPostListeners)
-        {
-            return;
-        }
-
-        try
-        {
-            DatamapsHook.CBaseCSGrenadeProjectileHook.CBaseCSGrenadeProjectileDangerSoundThinkHook.InvokePost(ref ctx);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseCSGrenadeProjectile::DangerSoundThink::Post.");
-            }
-        }
-    }
-
     internal void InvokeCBaseDoorCloseAreaPortalsThinkPre(ref CBaseDoorCloseAreaPortalsThinkPreContext ctx)
     {
         if (!DatamapsHook.CBaseDoorHook.CBaseDoorCloseAreaPortalsThinkHook.HasPreListeners)
@@ -2419,46 +2379,6 @@ internal sealed partial class GameHooksService
         }
     }
 
-    internal void InvokeCCSPlayerResourceResourceThinkPre(ref CCSPlayerResourceResourceThinkPreContext ctx)
-    {
-        if (!DatamapsHook.CCSPlayerResourceHook.CCSPlayerResourceResourceThinkHook.HasPreListeners)
-        {
-            return;
-        }
-
-        try
-        {
-            DatamapsHook.CCSPlayerResourceHook.CCSPlayerResourceResourceThinkHook.InvokePre(ref ctx);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSPlayerResource::ResourceThink::Pre.");
-            }
-        }
-    }
-
-    internal void InvokeCCSPlayerResourceResourceThinkPost(ref CCSPlayerResourceResourceThinkPostContext ctx)
-    {
-        if (!DatamapsHook.CCSPlayerResourceHook.CCSPlayerResourceResourceThinkHook.HasPostListeners)
-        {
-            return;
-        }
-
-        try
-        {
-            DatamapsHook.CCSPlayerResourceHook.CCSPlayerResourceResourceThinkHook.InvokePost(ref ctx);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSPlayerResource::ResourceThink::Post.");
-            }
-        }
-    }
-
     internal void InvokeCCSWeaponBaseDefaultTouchPre(ref CCSWeaponBaseDefaultTouchPreContext ctx)
     {
         if (!DatamapsHook.CCSWeaponBaseHook.CCSWeaponBaseDefaultTouchHook.HasPreListeners)
@@ -2775,86 +2695,6 @@ internal sealed partial class GameHooksService
             if (GlobalExceptionHandler.Handle(ref e))
             {
                 logger.LogError(e, "Error invoking GameHooks::Datamaps::CColorCorrectionVolume::ThinkFunc::Post.");
-            }
-        }
-    }
-
-    internal void InvokeCDecoyProjectileGunfireThinkPre(ref CDecoyProjectileGunfireThinkPreContext ctx)
-    {
-        if (!DatamapsHook.CDecoyProjectileHook.CDecoyProjectileGunfireThinkHook.HasPreListeners)
-        {
-            return;
-        }
-
-        try
-        {
-            DatamapsHook.CDecoyProjectileHook.CDecoyProjectileGunfireThinkHook.InvokePre(ref ctx);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CDecoyProjectile::GunfireThink::Pre.");
-            }
-        }
-    }
-
-    internal void InvokeCDecoyProjectileGunfireThinkPost(ref CDecoyProjectileGunfireThinkPostContext ctx)
-    {
-        if (!DatamapsHook.CDecoyProjectileHook.CDecoyProjectileGunfireThinkHook.HasPostListeners)
-        {
-            return;
-        }
-
-        try
-        {
-            DatamapsHook.CDecoyProjectileHook.CDecoyProjectileGunfireThinkHook.InvokePost(ref ctx);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CDecoyProjectile::GunfireThink::Post.");
-            }
-        }
-    }
-
-    internal void InvokeCDecoyProjectileThink_DetonatePre(ref CDecoyProjectileThink_DetonatePreContext ctx)
-    {
-        if (!DatamapsHook.CDecoyProjectileHook.CDecoyProjectileThink_DetonateHook.HasPreListeners)
-        {
-            return;
-        }
-
-        try
-        {
-            DatamapsHook.CDecoyProjectileHook.CDecoyProjectileThink_DetonateHook.InvokePre(ref ctx);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CDecoyProjectile::Think_Detonate::Pre.");
-            }
-        }
-    }
-
-    internal void InvokeCDecoyProjectileThink_DetonatePost(ref CDecoyProjectileThink_DetonatePostContext ctx)
-    {
-        if (!DatamapsHook.CDecoyProjectileHook.CDecoyProjectileThink_DetonateHook.HasPostListeners)
-        {
-            return;
-        }
-
-        try
-        {
-            DatamapsHook.CDecoyProjectileHook.CDecoyProjectileThink_DetonateHook.InvokePost(ref ctx);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CDecoyProjectile::Think_Detonate::Post.");
             }
         }
     }
@@ -3255,46 +3095,6 @@ internal sealed partial class GameHooksService
             if (GlobalExceptionHandler.Handle(ref e))
             {
                 logger.LogError(e, "Error invoking GameHooks::Datamaps::CEnvWind::WindThink::Post.");
-            }
-        }
-    }
-
-    internal void InvokeCEnvWindControllerWindThinkPre(ref CEnvWindControllerWindThinkPreContext ctx)
-    {
-        if (!DatamapsHook.CEnvWindControllerHook.CEnvWindControllerWindThinkHook.HasPreListeners)
-        {
-            return;
-        }
-
-        try
-        {
-            DatamapsHook.CEnvWindControllerHook.CEnvWindControllerWindThinkHook.InvokePre(ref ctx);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CEnvWindController::WindThink::Pre.");
-            }
-        }
-    }
-
-    internal void InvokeCEnvWindControllerWindThinkPost(ref CEnvWindControllerWindThinkPostContext ctx)
-    {
-        if (!DatamapsHook.CEnvWindControllerHook.CEnvWindControllerWindThinkHook.HasPostListeners)
-        {
-            return;
-        }
-
-        try
-        {
-            DatamapsHook.CEnvWindControllerHook.CEnvWindControllerWindThinkHook.InvokePost(ref ctx);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CEnvWindController::WindThink::Post.");
             }
         }
     }
@@ -4459,86 +4259,6 @@ internal sealed partial class GameHooksService
         }
     }
 
-    internal void InvokeCHostageRescueZoneHostageRescueTouchPre(ref CHostageRescueZoneHostageRescueTouchPreContext ctx)
-    {
-        if (!DatamapsHook.CHostageRescueZoneHook.CHostageRescueZoneHostageRescueTouchHook.HasPreListeners)
-        {
-            return;
-        }
-
-        try
-        {
-            DatamapsHook.CHostageRescueZoneHook.CHostageRescueZoneHostageRescueTouchHook.InvokePre(ref ctx);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CHostageRescueZone::HostageRescueTouch::Pre.");
-            }
-        }
-    }
-
-    internal void InvokeCHostageRescueZoneHostageRescueTouchPost(ref CHostageRescueZoneHostageRescueTouchPostContext ctx)
-    {
-        if (!DatamapsHook.CHostageRescueZoneHook.CHostageRescueZoneHostageRescueTouchHook.HasPostListeners)
-        {
-            return;
-        }
-
-        try
-        {
-            DatamapsHook.CHostageRescueZoneHook.CHostageRescueZoneHostageRescueTouchHook.InvokePost(ref ctx);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CHostageRescueZone::HostageRescueTouch::Post.");
-            }
-        }
-    }
-
-    internal void InvokeCInfernoInfernoThinkPre(ref CInfernoInfernoThinkPreContext ctx)
-    {
-        if (!DatamapsHook.CInfernoHook.CInfernoInfernoThinkHook.HasPreListeners)
-        {
-            return;
-        }
-
-        try
-        {
-            DatamapsHook.CInfernoHook.CInfernoInfernoThinkHook.InvokePre(ref ctx);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CInferno::InfernoThink::Pre.");
-            }
-        }
-    }
-
-    internal void InvokeCInfernoInfernoThinkPost(ref CInfernoInfernoThinkPostContext ctx)
-    {
-        if (!DatamapsHook.CInfernoHook.CInfernoInfernoThinkHook.HasPostListeners)
-        {
-            return;
-        }
-
-        try
-        {
-            DatamapsHook.CInfernoHook.CInfernoInfernoThinkHook.InvokePost(ref ctx);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CInferno::InfernoThink::Post.");
-            }
-        }
-    }
-
     internal void InvokeCInfoSpawnGroupLoadUnloadSpawnGroupLoadingThinkPre(ref CInfoSpawnGroupLoadUnloadSpawnGroupLoadingThinkPreContext ctx)
     {
         if (!DatamapsHook.CInfoSpawnGroupLoadUnloadHook.CInfoSpawnGroupLoadUnloadSpawnGroupLoadingThinkHook.HasPreListeners)
@@ -4735,86 +4455,6 @@ internal sealed partial class GameHooksService
             if (GlobalExceptionHandler.Handle(ref e))
             {
                 logger.LogError(e, "Error invoking GameHooks::Datamaps::CItem::Materialize::Post.");
-            }
-        }
-    }
-
-    internal void InvokeCItemDefuserActivateThinkPre(ref CItemDefuserActivateThinkPreContext ctx)
-    {
-        if (!DatamapsHook.CItemDefuserHook.CItemDefuserActivateThinkHook.HasPreListeners)
-        {
-            return;
-        }
-
-        try
-        {
-            DatamapsHook.CItemDefuserHook.CItemDefuserActivateThinkHook.InvokePre(ref ctx);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CItemDefuser::ActivateThink::Pre.");
-            }
-        }
-    }
-
-    internal void InvokeCItemDefuserActivateThinkPost(ref CItemDefuserActivateThinkPostContext ctx)
-    {
-        if (!DatamapsHook.CItemDefuserHook.CItemDefuserActivateThinkHook.HasPostListeners)
-        {
-            return;
-        }
-
-        try
-        {
-            DatamapsHook.CItemDefuserHook.CItemDefuserActivateThinkHook.InvokePost(ref ctx);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CItemDefuser::ActivateThink::Post.");
-            }
-        }
-    }
-
-    internal void InvokeCItemDefuserDefuserTouchPre(ref CItemDefuserDefuserTouchPreContext ctx)
-    {
-        if (!DatamapsHook.CItemDefuserHook.CItemDefuserDefuserTouchHook.HasPreListeners)
-        {
-            return;
-        }
-
-        try
-        {
-            DatamapsHook.CItemDefuserHook.CItemDefuserDefuserTouchHook.InvokePre(ref ctx);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CItemDefuser::DefuserTouch::Pre.");
-            }
-        }
-    }
-
-    internal void InvokeCItemDefuserDefuserTouchPost(ref CItemDefuserDefuserTouchPostContext ctx)
-    {
-        if (!DatamapsHook.CItemDefuserHook.CItemDefuserDefuserTouchHook.HasPostListeners)
-        {
-            return;
-        }
-
-        try
-        {
-            DatamapsHook.CItemDefuserHook.CItemDefuserDefuserTouchHook.InvokePost(ref ctx);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CItemDefuser::DefuserTouch::Post.");
             }
         }
     }
@@ -5415,6 +5055,46 @@ internal sealed partial class GameHooksService
             if (GlobalExceptionHandler.Handle(ref e))
             {
                 logger.LogError(e, "Error invoking GameHooks::Datamaps::CParticleSystem::StartParticleSystemThink::Post.");
+            }
+        }
+    }
+
+    internal void InvokeCPathMoverEntitySpawnerDebugThinkPre(ref CPathMoverEntitySpawnerDebugThinkPreContext ctx)
+    {
+        if (!DatamapsHook.CPathMoverEntitySpawnerHook.CPathMoverEntitySpawnerDebugThinkHook.HasPreListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CPathMoverEntitySpawnerHook.CPathMoverEntitySpawnerDebugThinkHook.InvokePre(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPathMoverEntitySpawner::DebugThink::Pre.");
+            }
+        }
+    }
+
+    internal void InvokeCPathMoverEntitySpawnerDebugThinkPost(ref CPathMoverEntitySpawnerDebugThinkPostContext ctx)
+    {
+        if (!DatamapsHook.CPathMoverEntitySpawnerHook.CPathMoverEntitySpawnerDebugThinkHook.HasPostListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CPathMoverEntitySpawnerHook.CPathMoverEntitySpawnerDebugThinkHook.InvokePost(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPathMoverEntitySpawner::DebugThink::Post.");
             }
         }
     }
@@ -6539,166 +6219,6 @@ internal sealed partial class GameHooksService
         }
     }
 
-    internal void InvokeCSmokeGrenadeProjectileThink_BuildingSmokeVolumePre(ref CSmokeGrenadeProjectileThink_BuildingSmokeVolumePreContext ctx)
-    {
-        if (!DatamapsHook.CSmokeGrenadeProjectileHook.CSmokeGrenadeProjectileThink_BuildingSmokeVolumeHook.HasPreListeners)
-        {
-            return;
-        }
-
-        try
-        {
-            DatamapsHook.CSmokeGrenadeProjectileHook.CSmokeGrenadeProjectileThink_BuildingSmokeVolumeHook.InvokePre(ref ctx);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSmokeGrenadeProjectile::Think_BuildingSmokeVolume::Pre.");
-            }
-        }
-    }
-
-    internal void InvokeCSmokeGrenadeProjectileThink_BuildingSmokeVolumePost(ref CSmokeGrenadeProjectileThink_BuildingSmokeVolumePostContext ctx)
-    {
-        if (!DatamapsHook.CSmokeGrenadeProjectileHook.CSmokeGrenadeProjectileThink_BuildingSmokeVolumeHook.HasPostListeners)
-        {
-            return;
-        }
-
-        try
-        {
-            DatamapsHook.CSmokeGrenadeProjectileHook.CSmokeGrenadeProjectileThink_BuildingSmokeVolumeHook.InvokePost(ref ctx);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSmokeGrenadeProjectile::Think_BuildingSmokeVolume::Post.");
-            }
-        }
-    }
-
-    internal void InvokeCSmokeGrenadeProjectileThink_DetonatePre(ref CSmokeGrenadeProjectileThink_DetonatePreContext ctx)
-    {
-        if (!DatamapsHook.CSmokeGrenadeProjectileHook.CSmokeGrenadeProjectileThink_DetonateHook.HasPreListeners)
-        {
-            return;
-        }
-
-        try
-        {
-            DatamapsHook.CSmokeGrenadeProjectileHook.CSmokeGrenadeProjectileThink_DetonateHook.InvokePre(ref ctx);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSmokeGrenadeProjectile::Think_Detonate::Pre.");
-            }
-        }
-    }
-
-    internal void InvokeCSmokeGrenadeProjectileThink_DetonatePost(ref CSmokeGrenadeProjectileThink_DetonatePostContext ctx)
-    {
-        if (!DatamapsHook.CSmokeGrenadeProjectileHook.CSmokeGrenadeProjectileThink_DetonateHook.HasPostListeners)
-        {
-            return;
-        }
-
-        try
-        {
-            DatamapsHook.CSmokeGrenadeProjectileHook.CSmokeGrenadeProjectileThink_DetonateHook.InvokePost(ref ctx);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSmokeGrenadeProjectile::Think_Detonate::Post.");
-            }
-        }
-    }
-
-    internal void InvokeCSmokeGrenadeProjectileThink_RemovePre(ref CSmokeGrenadeProjectileThink_RemovePreContext ctx)
-    {
-        if (!DatamapsHook.CSmokeGrenadeProjectileHook.CSmokeGrenadeProjectileThink_RemoveHook.HasPreListeners)
-        {
-            return;
-        }
-
-        try
-        {
-            DatamapsHook.CSmokeGrenadeProjectileHook.CSmokeGrenadeProjectileThink_RemoveHook.InvokePre(ref ctx);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSmokeGrenadeProjectile::Think_Remove::Pre.");
-            }
-        }
-    }
-
-    internal void InvokeCSmokeGrenadeProjectileThink_RemovePost(ref CSmokeGrenadeProjectileThink_RemovePostContext ctx)
-    {
-        if (!DatamapsHook.CSmokeGrenadeProjectileHook.CSmokeGrenadeProjectileThink_RemoveHook.HasPostListeners)
-        {
-            return;
-        }
-
-        try
-        {
-            DatamapsHook.CSmokeGrenadeProjectileHook.CSmokeGrenadeProjectileThink_RemoveHook.InvokePost(ref ctx);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSmokeGrenadeProjectile::Think_Remove::Post.");
-            }
-        }
-    }
-
-    internal void InvokeCSmokeGrenadeProjectileThink_UpdatePre(ref CSmokeGrenadeProjectileThink_UpdatePreContext ctx)
-    {
-        if (!DatamapsHook.CSmokeGrenadeProjectileHook.CSmokeGrenadeProjectileThink_UpdateHook.HasPreListeners)
-        {
-            return;
-        }
-
-        try
-        {
-            DatamapsHook.CSmokeGrenadeProjectileHook.CSmokeGrenadeProjectileThink_UpdateHook.InvokePre(ref ctx);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSmokeGrenadeProjectile::Think_Update::Pre.");
-            }
-        }
-    }
-
-    internal void InvokeCSmokeGrenadeProjectileThink_UpdatePost(ref CSmokeGrenadeProjectileThink_UpdatePostContext ctx)
-    {
-        if (!DatamapsHook.CSmokeGrenadeProjectileHook.CSmokeGrenadeProjectileThink_UpdateHook.HasPostListeners)
-        {
-            return;
-        }
-
-        try
-        {
-            DatamapsHook.CSmokeGrenadeProjectileHook.CSmokeGrenadeProjectileThink_UpdateHook.InvokePost(ref ctx);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSmokeGrenadeProjectile::Think_Update::Post.");
-            }
-        }
-    }
-
     internal void InvokeCSoundEventConeEntitySoundEventConeThinkPre(ref CSoundEventConeEntitySoundEventConeThinkPreContext ctx)
     {
         if (!DatamapsHook.CSoundEventConeEntityHook.CSoundEventConeEntitySoundEventConeThinkHook.HasPreListeners)
@@ -6779,6 +6299,46 @@ internal sealed partial class GameHooksService
         }
     }
 
+    internal void InvokeCSoundEventMultiPointEntityMultiPointThinkPre(ref CSoundEventMultiPointEntityMultiPointThinkPreContext ctx)
+    {
+        if (!DatamapsHook.CSoundEventMultiPointEntityHook.CSoundEventMultiPointEntityMultiPointThinkHook.HasPreListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CSoundEventMultiPointEntityHook.CSoundEventMultiPointEntityMultiPointThinkHook.InvokePre(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundEventMultiPointEntity::MultiPointThink::Pre.");
+            }
+        }
+    }
+
+    internal void InvokeCSoundEventMultiPointEntityMultiPointThinkPost(ref CSoundEventMultiPointEntityMultiPointThinkPostContext ctx)
+    {
+        if (!DatamapsHook.CSoundEventMultiPointEntityHook.CSoundEventMultiPointEntityMultiPointThinkHook.HasPostListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CSoundEventMultiPointEntityHook.CSoundEventMultiPointEntityMultiPointThinkHook.InvokePost(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundEventMultiPointEntity::MultiPointThink::Post.");
+            }
+        }
+    }
+
     internal void InvokeCSoundEventOBBEntitySoundEventOBBThinkPre(ref CSoundEventOBBEntitySoundEventOBBThinkPreContext ctx)
     {
         if (!DatamapsHook.CSoundEventOBBEntityHook.CSoundEventOBBEntitySoundEventOBBThinkHook.HasPreListeners)
@@ -6815,46 +6375,6 @@ internal sealed partial class GameHooksService
             if (GlobalExceptionHandler.Handle(ref e))
             {
                 logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundEventOBBEntity::SoundEventOBBThink::Post.");
-            }
-        }
-    }
-
-    internal void InvokeCSoundEventPathCornerEntitySoundEventPathCornerThinkPre(ref CSoundEventPathCornerEntitySoundEventPathCornerThinkPreContext ctx)
-    {
-        if (!DatamapsHook.CSoundEventPathCornerEntityHook.CSoundEventPathCornerEntitySoundEventPathCornerThinkHook.HasPreListeners)
-        {
-            return;
-        }
-
-        try
-        {
-            DatamapsHook.CSoundEventPathCornerEntityHook.CSoundEventPathCornerEntitySoundEventPathCornerThinkHook.InvokePre(ref ctx);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundEventPathCornerEntity::SoundEventPathCornerThink::Pre.");
-            }
-        }
-    }
-
-    internal void InvokeCSoundEventPathCornerEntitySoundEventPathCornerThinkPost(ref CSoundEventPathCornerEntitySoundEventPathCornerThinkPostContext ctx)
-    {
-        if (!DatamapsHook.CSoundEventPathCornerEntityHook.CSoundEventPathCornerEntitySoundEventPathCornerThinkHook.HasPostListeners)
-        {
-            return;
-        }
-
-        try
-        {
-            DatamapsHook.CSoundEventPathCornerEntityHook.CSoundEventPathCornerEntitySoundEventPathCornerThinkHook.InvokePost(ref ctx);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundEventPathCornerEntity::SoundEventPathCornerThink::Post.");
             }
         }
     }
@@ -6975,6 +6495,46 @@ internal sealed partial class GameHooksService
             if (GlobalExceptionHandler.Handle(ref e))
             {
                 logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundOpvarSetBoxEntity::SetOpvarThink::Post.");
+            }
+        }
+    }
+
+    internal void InvokeCSoundOpvarSetDomeEntitySetOpvarThinkPre(ref CSoundOpvarSetDomeEntitySetOpvarThinkPreContext ctx)
+    {
+        if (!DatamapsHook.CSoundOpvarSetDomeEntityHook.CSoundOpvarSetDomeEntitySetOpvarThinkHook.HasPreListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CSoundOpvarSetDomeEntityHook.CSoundOpvarSetDomeEntitySetOpvarThinkHook.InvokePre(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundOpvarSetDomeEntity::SetOpvarThink::Pre.");
+            }
+        }
+    }
+
+    internal void InvokeCSoundOpvarSetDomeEntitySetOpvarThinkPost(ref CSoundOpvarSetDomeEntitySetOpvarThinkPostContext ctx)
+    {
+        if (!DatamapsHook.CSoundOpvarSetDomeEntityHook.CSoundOpvarSetDomeEntitySetOpvarThinkHook.HasPostListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CSoundOpvarSetDomeEntityHook.CSoundOpvarSetDomeEntitySetOpvarThinkHook.InvokePost(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundOpvarSetDomeEntity::SetOpvarThink::Post.");
             }
         }
     }
@@ -7975,46 +7535,6 @@ internal sealed partial class GameHooksService
             if (GlobalExceptionHandler.Handle(ref e))
             {
                 logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerSoundscape::PlayerUpdateThink::Post.");
-            }
-        }
-    }
-
-    internal void InvokeCVoteControllerVoteControllerThinkPre(ref CVoteControllerVoteControllerThinkPreContext ctx)
-    {
-        if (!DatamapsHook.CVoteControllerHook.CVoteControllerVoteControllerThinkHook.HasPreListeners)
-        {
-            return;
-        }
-
-        try
-        {
-            DatamapsHook.CVoteControllerHook.CVoteControllerVoteControllerThinkHook.InvokePre(ref ctx);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CVoteController::VoteControllerThink::Pre.");
-            }
-        }
-    }
-
-    internal void InvokeCVoteControllerVoteControllerThinkPost(ref CVoteControllerVoteControllerThinkPostContext ctx)
-    {
-        if (!DatamapsHook.CVoteControllerHook.CVoteControllerVoteControllerThinkHook.HasPostListeners)
-        {
-            return;
-        }
-
-        try
-        {
-            DatamapsHook.CVoteControllerHook.CVoteControllerVoteControllerThinkHook.InvokePost(ref ctx);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CVoteController::VoteControllerThink::Post.");
             }
         }
     }

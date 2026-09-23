@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_Breakable : C_BaseModelEntity, ISchemaClass<C_Breakable>
 {
     static C_Breakable ISchemaClass<C_Breakable>.From(nint handle) => new C_BreakableImpl(handle);
-    static int ISchemaClass<C_Breakable>.Size => 4016;
+    static int ISchemaClass<C_Breakable>.Size => 4248;
     static string? ISchemaClass<C_Breakable>.ClassName => null;
 
 }

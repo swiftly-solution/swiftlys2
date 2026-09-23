@@ -42,6 +42,19 @@ internal partial class PulseGraphExecutionHistoryEntry_tImpl : SchemaClass, Puls
             return instance;
         }
     }
+    private static nint? _SeqPointOffset;
+    private SchemaUntypedField? _SeqPointInstance;
+
+    public SchemaUntypedField SeqPoint
+    {
+        get
+        {
+            _SeqPointOffset = _SeqPointOffset ?? Schema.GetOffset(0x9346B0AB87450C52);
+            var instance = _SeqPointInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _SeqPointOffset!.Value);
+            return instance;
+        }
+    }
     private static nint? _ExecTimeOffset;
 
     public ref float ExecTime
@@ -72,6 +85,19 @@ internal partial class PulseGraphExecutionHistoryEntry_tImpl : SchemaClass, Puls
             _TagNameOffset = _TagNameOffset ?? Schema.GetOffset(0x9346B0ABBD7B50F8);
             var instance = _TagNameInstance ??= new SchemaUntypedField(0);
             instance.DangerousSetHandle(_Handle + _TagNameOffset!.Value);
+            return instance;
+        }
+    }
+    private static nint? _ChildIDOffset;
+    private PulseCursorID_tImpl? _ChildIDInstance;
+
+    public PulseCursorID_t ChildID
+    {
+        get
+        {
+            _ChildIDOffset = _ChildIDOffset ?? Schema.GetOffset(0x9346B0AB721E4528);
+            var instance = _ChildIDInstance ??= new PulseCursorID_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _ChildIDOffset!.Value);
             return instance;
         }
     }

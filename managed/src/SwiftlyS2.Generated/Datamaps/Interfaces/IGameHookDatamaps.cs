@@ -6,7 +6,6 @@ public interface IGameHookDatamaps
     public IGameHookDatamapCBarnLight CBarnLight { get; }
     public IGameHookDatamapCBaseAnimGraph CBaseAnimGraph { get; }
     public IGameHookDatamapCBaseButton CBaseButton { get; }
-    public IGameHookDatamapCBaseCSGrenadeProjectile CBaseCSGrenadeProjectile { get; }
     public IGameHookDatamapCBaseDoor CBaseDoor { get; }
     public IGameHookDatamapCBaseEntity CBaseEntity { get; }
     public IGameHookDatamapCBaseGrenade CBaseGrenade { get; }
@@ -17,12 +16,10 @@ public interface IGameHookDatamaps
     public IGameHookDatamapCBreakableProp CBreakableProp { get; }
     public IGameHookDatamapCCSPlayerController CCSPlayerController { get; }
     public IGameHookDatamapCCSPlayerPawn CCSPlayerPawn { get; }
-    public IGameHookDatamapCCSPlayerResource CCSPlayerResource { get; }
     public IGameHookDatamapCCSWeaponBase CCSWeaponBase { get; }
     public IGameHookDatamapCChicken CChicken { get; }
     public IGameHookDatamapCColorCorrection CColorCorrection { get; }
     public IGameHookDatamapCColorCorrectionVolume CColorCorrectionVolume { get; }
-    public IGameHookDatamapCDecoyProjectile CDecoyProjectile { get; }
     public IGameHookDatamapCDynamicLight CDynamicLight { get; }
     public IGameHookDatamapCDynamicProp CDynamicProp { get; }
     public IGameHookDatamapCEntityDissolve CEntityDissolve { get; }
@@ -31,7 +28,6 @@ public interface IGameHookDatamaps
     public IGameHookDatamapCEnvLaser CEnvLaser { get; }
     public IGameHookDatamapCEnvSpark CEnvSpark { get; }
     public IGameHookDatamapCEnvWind CEnvWind { get; }
-    public IGameHookDatamapCEnvWindController CEnvWindController { get; }
     public IGameHookDatamapCFishPool CFishPool { get; }
     public IGameHookDatamapCFogController CFogController { get; }
     public IGameHookDatamapCFuncMoveLinear CFuncMoveLinear { get; }
@@ -44,11 +40,8 @@ public interface IGameHookDatamaps
     public IGameHookDatamapCGenericConstraint CGenericConstraint { get; }
     public IGameHookDatamapCGunTarget CGunTarget { get; }
     public IGameHookDatamapCHostage CHostage { get; }
-    public IGameHookDatamapCHostageRescueZone CHostageRescueZone { get; }
-    public IGameHookDatamapCInferno CInferno { get; }
     public IGameHookDatamapCInfoSpawnGroupLoadUnload CInfoSpawnGroupLoadUnload { get; }
     public IGameHookDatamapCItem CItem { get; }
-    public IGameHookDatamapCItemDefuser CItemDefuser { get; }
     public IGameHookDatamapCItemGeneric CItemGeneric { get; }
     public IGameHookDatamapCLogicActiveAutosave CLogicActiveAutosave { get; }
     public IGameHookDatamapCLogicDistanceAutosave CLogicDistanceAutosave { get; }
@@ -77,14 +70,14 @@ public interface IGameHookDatamaps
     public IGameHookDatamapCRagdollProp CRagdollProp { get; }
     public IGameHookDatamapCRevertSaved CRevertSaved { get; }
     public IGameHookDatamapCScriptedSequence CScriptedSequence { get; }
-    public IGameHookDatamapCSmokeGrenadeProjectile CSmokeGrenadeProjectile { get; }
     public IGameHookDatamapCSoundEventConeEntity CSoundEventConeEntity { get; }
     public IGameHookDatamapCSoundEventEntity CSoundEventEntity { get; }
+    public IGameHookDatamapCSoundEventMultiPointEntity CSoundEventMultiPointEntity { get; }
     public IGameHookDatamapCSoundEventOBBEntity CSoundEventOBBEntity { get; }
-    public IGameHookDatamapCSoundEventPathCornerEntity CSoundEventPathCornerEntity { get; }
     public IGameHookDatamapCSoundEventSphereEntity CSoundEventSphereEntity { get; }
     public IGameHookDatamapCSoundOpvarSetAutoRoomEntity CSoundOpvarSetAutoRoomEntity { get; }
     public IGameHookDatamapCSoundOpvarSetBoxEntity CSoundOpvarSetBoxEntity { get; }
+    public IGameHookDatamapCSoundOpvarSetDomeEntity CSoundOpvarSetDomeEntity { get; }
     public IGameHookDatamapCSoundOpvarSetOBBWindEntity CSoundOpvarSetOBBWindEntity { get; }
     public IGameHookDatamapCSoundOpvarSetPathCornerEntity CSoundOpvarSetPathCornerEntity { get; }
     public IGameHookDatamapCSoundOpvarSetPointBase CSoundOpvarSetPointBase { get; }
@@ -102,6 +95,5 @@ public interface IGameHookDatamaps
     public IGameHookDatamapCTriggerSave CTriggerSave { get; }
     public IGameHookDatamapCTriggerSndSosOpvar CTriggerSndSosOpvar { get; }
     public IGameHookDatamapCTriggerSoundscape CTriggerSoundscape { get; }
-    public IGameHookDatamapCVoteController CVoteController { get; }
     public IGameHookDatamapCWaterBullet CWaterBullet { get; }
 }

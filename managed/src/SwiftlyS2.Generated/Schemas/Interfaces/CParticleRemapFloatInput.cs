@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CParticleRemapFloatInput : CParticleFloatInput, ISchemaClass<CParticleRemapFloatInput>
 {
     static CParticleRemapFloatInput ISchemaClass<CParticleRemapFloatInput>.From(nint handle) => new CParticleRemapFloatInputImpl(handle);
-    static int ISchemaClass<CParticleRemapFloatInput>.Size => 368;
+    static int ISchemaClass<CParticleRemapFloatInput>.Size => 376;
     static string? ISchemaClass<CParticleRemapFloatInput>.ClassName => null;
 
 }

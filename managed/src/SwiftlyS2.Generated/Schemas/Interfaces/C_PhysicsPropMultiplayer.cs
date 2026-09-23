@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_PhysicsPropMultiplayer : C_PhysicsProp, ISchemaClass<C_PhysicsPropMultiplayer>
 {
     static C_PhysicsPropMultiplayer ISchemaClass<C_PhysicsPropMultiplayer>.From(nint handle) => new C_PhysicsPropMultiplayerImpl(handle);
-    static int ISchemaClass<C_PhysicsPropMultiplayer>.Size => 4864;
+    static int ISchemaClass<C_PhysicsPropMultiplayer>.Size => 5104;
     static string? ISchemaClass<C_PhysicsPropMultiplayer>.ClassName => null;
 
 }

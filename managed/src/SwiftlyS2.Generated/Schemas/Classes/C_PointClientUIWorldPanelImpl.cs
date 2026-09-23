@@ -131,6 +131,16 @@ internal partial class C_PointClientUIWorldPanelImpl : C_BaseClientUIEntityImpl,
             return ref _Handle.AsRef<float>(_DPIOffset!.Value);
         }
     }
+    private static nint? _WindowUIScaleOffset;
+
+    public ref float WindowUIScale
+    {
+        get
+        {
+            _WindowUIScaleOffset = _WindowUIScaleOffset ?? Schema.GetOffset(0xBD02AD2CF34FBDF1);
+            return ref _Handle.AsRef<float>(_WindowUIScaleOffset!.Value);
+        }
+    }
     private static nint? _InteractDistanceOffset;
 
     public ref float InteractDistance

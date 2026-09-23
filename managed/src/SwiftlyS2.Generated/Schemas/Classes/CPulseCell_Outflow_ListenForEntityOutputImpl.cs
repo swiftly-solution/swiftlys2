@@ -39,21 +39,6 @@ internal partial class CPulseCell_Outflow_ListenForEntityOutputImpl : CPulseCell
             return ref _Handle.AsRef<CGlobalSymbol>(_StrEntityOutputOffset!.Value);
         }
     }
-    private static nint? _StrEntityOutputParamOffset;
-
-    public string StrEntityOutputParam
-    {
-        get
-        {
-            _StrEntityOutputParamOffset = _StrEntityOutputParamOffset ?? Schema.GetOffset(0xCB351637BB356637);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrEntityOutputParamOffset!.Value));
-        }
-        set
-        {
-            _StrEntityOutputParamOffset = _StrEntityOutputParamOffset ?? Schema.GetOffset(0xCB351637BB356637);
-            Schema.SetCUtlString(_Handle, _StrEntityOutputParamOffset!.Value, value);
-        }
-    }
     private static nint? _ListenUntilCanceledOffset;
 
     public ref bool ListenUntilCanceled

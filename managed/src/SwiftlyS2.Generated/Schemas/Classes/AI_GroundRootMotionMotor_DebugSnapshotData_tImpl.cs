@@ -166,6 +166,16 @@ internal partial class AI_GroundRootMotionMotor_DebugSnapshotData_tImpl : DebugS
             return ref _Handle.AsRef<float>(_F_forward_strafing_angle_desiredOffset!.Value);
         }
     }
+    private static nint? _F_forward_strafing_angle_committedOffset;
+
+    public ref float F_forward_strafing_angle_committed
+    {
+        get
+        {
+            _F_forward_strafing_angle_committedOffset = _F_forward_strafing_angle_committedOffset ?? Schema.GetOffset(0xE3E5EB79A42C1A3D);
+            return ref _Handle.AsRef<float>(_F_forward_strafing_angle_committedOffset!.Value);
+        }
+    }
     private static nint? _F_current_leanOffset;
 
     public ref float F_current_lean

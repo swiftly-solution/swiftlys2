@@ -212,24 +212,14 @@ internal partial class CCSWeaponBaseVDataImpl : CBasePlayerWeaponVDataImpl, CCSW
             return ref _Handle.AsRef<CSWeaponSilencerType>(_SilencerTypeOffset!.Value);
         }
     }
-    private static nint? _CrosshairMinDistanceOffset;
+    private static nint? _ShowCrosshairOffset;
 
-    public ref int CrosshairMinDistance
+    public ref bool ShowCrosshair
     {
         get
         {
-            _CrosshairMinDistanceOffset = _CrosshairMinDistanceOffset ?? Schema.GetOffset(0x62FB7705643AF856);
-            return ref _Handle.AsRef<int>(_CrosshairMinDistanceOffset!.Value);
-        }
-    }
-    private static nint? _CrosshairDeltaDistanceOffset;
-
-    public ref int CrosshairDeltaDistance
-    {
-        get
-        {
-            _CrosshairDeltaDistanceOffset = _CrosshairDeltaDistanceOffset ?? Schema.GetOffset(0x62FB77056185F940);
-            return ref _Handle.AsRef<int>(_CrosshairDeltaDistanceOffset!.Value);
+            _ShowCrosshairOffset = _ShowCrosshairOffset ?? Schema.GetOffset(0x62FB770540C7F7C0);
+            return ref _Handle.AsRef<bool>(_ShowCrosshairOffset!.Value);
         }
     }
     private static nint? _IsFullAutoOffset;

@@ -11,11 +11,13 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVMixConvolutionProcessorDesc : CVMixBaseProcessorDesc, ISchemaClass<CVMixConvolutionProcessorDesc>
 {
     static CVMixConvolutionProcessorDesc ISchemaClass<CVMixConvolutionProcessorDesc>.From(nint handle) => new CVMixConvolutionProcessorDescImpl(handle);
-    static int ISchemaClass<CVMixConvolutionProcessorDesc>.Size => 64;
+    static int ISchemaClass<CVMixConvolutionProcessorDesc>.Size => 80;
     static string? ISchemaClass<CVMixConvolutionProcessorDesc>.ClassName => null;
 
 
     public VMixConvolutionDesc_t Desc { get; }
+
+    public CVMixDataOffset ParamImpulseResponse { get; }
 
 
 }

@@ -11,13 +11,9 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RenderDeferredLight : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderDeferredLight>
 {
     static C_OP_RenderDeferredLight ISchemaClass<C_OP_RenderDeferredLight>.From(nint handle) => new C_OP_RenderDeferredLightImpl(handle);
-    static int ISchemaClass<C_OP_RenderDeferredLight>.Size => 2336;
+    static int ISchemaClass<C_OP_RenderDeferredLight>.Size => 2376;
     static string? ISchemaClass<C_OP_RenderDeferredLight>.ClassName => null;
 
-
-    public ref bool UseAlphaTestWindow { get; }
-
-    public ref bool UseTexture { get; }
 
     public ref float RadiusScale { get; }
 
@@ -29,13 +25,11 @@ public partial interface C_OP_RenderDeferredLight : CParticleFunctionRenderer, I
 
     public ref ParticleColorBlendType_t ColorBlendType { get; }
 
-    public ref float LightDistance { get; }
+    public ref bool UseTexture { get; }
 
-    public ref float StartFalloff { get; }
+    public ref bool UseAlphaTestWindow { get; }
 
-    public ref float DistanceFalloff { get; }
-
-    public ref float SpotFoV { get; }
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Texture { get; }
 
     public ParticleAttributeIndex_t AlphaTestPointField { get; }
 
@@ -43,7 +37,13 @@ public partial interface C_OP_RenderDeferredLight : CParticleFunctionRenderer, I
 
     public ParticleAttributeIndex_t AlphaTestSharpnessField { get; }
 
-    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Texture { get; }
+    public ref float LightDistance { get; }
+
+    public ref float StartFalloff { get; }
+
+    public ref float DistanceFalloff { get; }
+
+    public ref float SpotFoV { get; }
 
     public ref int HSVShiftControlPoint { get; }
 

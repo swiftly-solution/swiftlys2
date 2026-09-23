@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_RemapParticleCountToScalar : CParticleFunctionInitializer, ISchemaClass<C_INIT_RemapParticleCountToScalar>
 {
     static C_INIT_RemapParticleCountToScalar ISchemaClass<C_INIT_RemapParticleCountToScalar>.From(nint handle) => new C_INIT_RemapParticleCountToScalarImpl(handle);
-    static int ISchemaClass<C_INIT_RemapParticleCountToScalar>.Size => 528;
+    static int ISchemaClass<C_INIT_RemapParticleCountToScalar>.Size => 536;
     static string? ISchemaClass<C_INIT_RemapParticleCountToScalar>.ClassName => null;
 
 

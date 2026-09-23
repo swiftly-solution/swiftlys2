@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CCSPlayerController : CBasePlayerController, ISchemaClass<CCSPlayerController>
 {
     static CCSPlayerController ISchemaClass<CCSPlayerController>.From(nint handle) => new CCSPlayerControllerImpl(handle);
-    static int ISchemaClass<CCSPlayerController>.Size => 2728;
+    static int ISchemaClass<CCSPlayerController>.Size => 2744;
     static string? ISchemaClass<CCSPlayerController>.ClassName => "cs_player_controller";
 
 
@@ -58,6 +58,8 @@ public partial interface CCSPlayerController : CBasePlayerController, ISchemaCla
     public GameTime_t LastJoinTeamTime { get; }
 
     public string Clan { get; set; }
+
+    public ref uint ClanId32bit { get; }
 
     public ref int CoachingTeam { get; }
 
@@ -212,6 +214,7 @@ public partial interface CCSPlayerController : CBasePlayerController, ISchemaCla
     public void CompTeammateColorUpdated();
     public void EverPlayedOnTeamUpdated();
     public void ClanUpdated();
+    public void ClanId32bitUpdated();
     public void CoachingTeamUpdated();
     public void PlayerDominatedUpdated();
     public void PlayerDominatingMeUpdated();

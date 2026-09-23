@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPointOffScreenIndicatorUi : C_PointClientUIWorldPanel, ISchemaClass<CPointOffScreenIndicatorUi>
 {
     static CPointOffScreenIndicatorUi ISchemaClass<CPointOffScreenIndicatorUi>.From(nint handle) => new CPointOffScreenIndicatorUiImpl(handle);
-    static int ISchemaClass<CPointOffScreenIndicatorUi>.Size => 4640;
+    static int ISchemaClass<CPointOffScreenIndicatorUi>.Size => 4880;
     static string? ISchemaClass<CPointOffScreenIndicatorUi>.ClassName => null;
 
 

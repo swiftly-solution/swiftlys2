@@ -12,7 +12,7 @@ using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSoundEventPathCornerEntityImpl : CSoundEventEntityImpl, CSoundEventPathCornerEntity
+internal partial class CSoundEventPathCornerEntityImpl : CSoundEventMultiPointEntityImpl, CSoundEventPathCornerEntity
 {
     public CSoundEventPathCornerEntityImpl(nint handle) : base(handle) { }
 
@@ -29,56 +29,6 @@ internal partial class CSoundEventPathCornerEntityImpl : CSoundEventEntityImpl, 
         {
             _PathCornerOffset = _PathCornerOffset ?? Schema.GetOffset(0x9EED262E0243CF47);
             Schema.SetString(_Handle, _PathCornerOffset!.Value, value);
-        }
-    }
-    private static nint? _CountMaxOffset;
-
-    public ref int CountMax
-    {
-        get
-        {
-            _CountMaxOffset = _CountMaxOffset ?? Schema.GetOffset(0x9EED262E6A1AD493);
-            return ref _Handle.AsRef<int>(_CountMaxOffset!.Value);
-        }
-    }
-    private static nint? _DistanceMaxOffset;
-
-    public ref float DistanceMax
-    {
-        get
-        {
-            _DistanceMaxOffset = _DistanceMaxOffset ?? Schema.GetOffset(0x9EED262EFDEBADA6);
-            return ref _Handle.AsRef<float>(_DistanceMaxOffset!.Value);
-        }
-    }
-    private static nint? _DistMaxSqrOffset;
-
-    public ref float DistMaxSqr
-    {
-        get
-        {
-            _DistMaxSqrOffset = _DistMaxSqrOffset ?? Schema.GetOffset(0x9EED262E993EE3BF);
-            return ref _Handle.AsRef<float>(_DistMaxSqrOffset!.Value);
-        }
-    }
-    private static nint? _DotProductMaxOffset;
-
-    public ref float DotProductMax
-    {
-        get
-        {
-            _DotProductMaxOffset = _DotProductMaxOffset ?? Schema.GetOffset(0x9EED262EF9DEDD1D);
-            return ref _Handle.AsRef<float>(_DotProductMaxOffset!.Value);
-        }
-    }
-    private static nint? _PlayingOffset;
-
-    public ref bool Playing
-    {
-        get
-        {
-            _PlayingOffset = _PlayingOffset ?? Schema.GetOffset(0x9EED262E4B594215);
-            return ref _Handle.AsRef<bool>(_PlayingOffset!.Value);
         }
     }
     private static nint? _CornerPairsNetworkedOffset;

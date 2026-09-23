@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RemapDotProductToCP : CParticleFunctionPreEmission, ISchemaClass<C_OP_RemapDotProductToCP>
 {
     static C_OP_RemapDotProductToCP ISchemaClass<C_OP_RemapDotProductToCP>.From(nint handle) => new C_OP_RemapDotProductToCPImpl(handle);
-    static int ISchemaClass<C_OP_RemapDotProductToCP>.Size => 1968;
+    static int ISchemaClass<C_OP_RemapDotProductToCP>.Size => 2008;
     static string? ISchemaClass<C_OP_RemapDotProductToCP>.ClassName => null;
 
 

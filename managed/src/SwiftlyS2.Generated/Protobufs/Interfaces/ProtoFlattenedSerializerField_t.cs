@@ -20,4 +20,5 @@ public interface ProtoFlattenedSerializerField_t : ITypedProtobuf<ProtoFlattened
     public int VarEncoderSym { get; set; }
     public IProtobufRepeatedFieldSubMessageType<ProtoFlattenedSerializerField_t_polymorphic_field_t> PolymorphicTypes { get; }
     public int VarSerializerSym { get; set; }
+    public ProtoFlattenedSerializerField_t_proto_enum_info_t VarEnumInfo { get; }
 }

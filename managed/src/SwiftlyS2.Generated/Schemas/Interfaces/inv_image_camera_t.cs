@@ -11,13 +11,15 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface inv_image_camera_t : ISchemaClass<inv_image_camera_t>
 {
     static inv_image_camera_t ISchemaClass<inv_image_camera_t>.From(nint handle) => new inv_image_camera_tImpl(handle);
-    static int ISchemaClass<inv_image_camera_t>.Size => 52;
+    static int ISchemaClass<inv_image_camera_t>.Size => 56;
     static string? ISchemaClass<inv_image_camera_t>.ClassName => null;
 
 
     public ref QAngle Angle { get; }
 
-    public ref float Fov { get; }
+    public ref float Fov_h { get; }
+
+    public ref float Fov_v { get; }
 
     public ref float Znear { get; }
 

@@ -162,6 +162,36 @@ internal partial class CEconItemViewImpl : IEconItemInterfaceImpl, CEconItemView
             Schema.SetFixedString(_Handle, _CustomNameOverrideOffset!.Value, value, 161);
         }
     }
+    private static nint? _CustomNameOverride2Offset;
+
+    public string CustomNameOverride2
+    {
+        get
+        {
+            _CustomNameOverride2Offset = _CustomNameOverride2Offset ?? Schema.GetOffset(0xE1A93F25442C9A5E);
+            return Schema.GetString(_Handle + _CustomNameOverride2Offset!.Value);
+        }
+        set
+        {
+            _CustomNameOverride2Offset = _CustomNameOverride2Offset ?? Schema.GetOffset(0xE1A93F25442C9A5E);
+            Schema.SetFixedString(_Handle, _CustomNameOverride2Offset!.Value, value, 161);
+        }
+    }
+    private static nint? _CustomNameOverride3Offset;
+
+    public string CustomNameOverride3
+    {
+        get
+        {
+            _CustomNameOverride3Offset = _CustomNameOverride3Offset ?? Schema.GetOffset(0xE1A93F25452C9BF1);
+            return Schema.GetString(_Handle + _CustomNameOverride3Offset!.Value);
+        }
+        set
+        {
+            _CustomNameOverride3Offset = _CustomNameOverride3Offset ?? Schema.GetOffset(0xE1A93F25452C9BF1);
+            Schema.SetFixedString(_Handle, _CustomNameOverride3Offset!.Value, value, 161);
+        }
+    }
 
     public void ItemDefinitionIndexUpdated() => Schema.Update(_Handle, 0xE1A93F25A2CCB41A);
     public void EntityQualityUpdated() => Schema.Update(_Handle, 0xE1A93F256A67D4C4);

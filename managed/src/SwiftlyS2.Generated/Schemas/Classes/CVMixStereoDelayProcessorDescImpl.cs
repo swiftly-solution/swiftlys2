@@ -16,4 +16,31 @@ internal partial class CVMixStereoDelayProcessorDescImpl : CVMixBaseProcessorDes
 {
     public CVMixStereoDelayProcessorDescImpl(nint handle) : base(handle) { }
 
+    private static nint? _ParamDelayLeftOffset;
+    private CVMixParameterFloatImpl? _ParamDelayLeftInstance;
+
+    public CVMixParameterFloat ParamDelayLeft
+    {
+        get
+        {
+            _ParamDelayLeftOffset = _ParamDelayLeftOffset ?? Schema.GetOffset(0x3CD586E23068EDF0);
+            var instance = _ParamDelayLeftInstance ??= new CVMixParameterFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamDelayLeftOffset!.Value);
+            return instance;
+        }
+    }
+    private static nint? _ParamDelayRightOffset;
+    private CVMixParameterFloatImpl? _ParamDelayRightInstance;
+
+    public CVMixParameterFloat ParamDelayRight
+    {
+        get
+        {
+            _ParamDelayRightOffset = _ParamDelayRightOffset ?? Schema.GetOffset(0x3CD586E2621F8A65);
+            var instance = _ParamDelayRightInstance ??= new CVMixParameterFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamDelayRightOffset!.Value);
+            return instance;
+        }
+    }
+
 }

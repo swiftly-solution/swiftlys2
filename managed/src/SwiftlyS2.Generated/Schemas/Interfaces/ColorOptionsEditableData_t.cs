@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface ColorOptionsEditableData_t : ISchemaClass<ColorOptionsEditableData_t>
 {
     static ColorOptionsEditableData_t ISchemaClass<ColorOptionsEditableData_t>.From(nint handle) => new ColorOptionsEditableData_tImpl(handle);
-    static int ISchemaClass<ColorOptionsEditableData_t>.Size => 30;
+    static int ISchemaClass<ColorOptionsEditableData_t>.Size => 32;
     static string? ISchemaClass<ColorOptionsEditableData_t>.ClassName => null;
 
 

@@ -25,5 +25,7 @@ public partial interface CMixPropertyBase : ISchemaClass<CMixPropertyBase>
 
     public ref bool EditProperties { get; }
 
+    public ref int GenerationId { get; }
+
 
 }

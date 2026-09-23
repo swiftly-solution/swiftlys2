@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_SelectivelyEnableChildren : CParticleFunctionPreEmission, ISchemaClass<C_OP_SelectivelyEnableChildren>
 {
     static C_OP_SelectivelyEnableChildren ISchemaClass<C_OP_SelectivelyEnableChildren>.From(nint handle) => new C_OP_SelectivelyEnableChildrenImpl(handle);
-    static int ISchemaClass<C_OP_SelectivelyEnableChildren>.Size => 1592;
+    static int ISchemaClass<C_OP_SelectivelyEnableChildren>.Size => 1624;
     static string? ISchemaClass<C_OP_SelectivelyEnableChildren>.ClassName => null;
 
 

@@ -76,5 +76,15 @@ internal partial class CMixPropertyBaseImpl : SchemaClass, CMixPropertyBase
             return ref _Handle.AsRef<bool>(_EditPropertiesOffset!.Value);
         }
     }
+    private static nint? _GenerationIdOffset;
+
+    public ref int GenerationId
+    {
+        get
+        {
+            _GenerationIdOffset = _GenerationIdOffset ?? Schema.GetOffset(0xF774B580C91578D6);
+            return ref _Handle.AsRef<int>(_GenerationIdOffset!.Value);
+        }
+    }
 
 }

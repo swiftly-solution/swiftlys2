@@ -15,7 +15,7 @@ public partial interface CNmGraphDocTargetWarpNode__CData : CNmGraphDocVariation
     static string? ISchemaClass<CNmGraphDocTargetWarpNode__CData>.ClassName => null;
 
 
-    public string StrAlignmentBoneName { get; set; }
+    public ref CGlobalSymbol StrAlignmentBoneName { get; }
 
 
 }

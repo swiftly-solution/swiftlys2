@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_ParentVortices : CParticleFunctionForce, ISchemaClass<C_OP_ParentVortices>
 {
     static C_OP_ParentVortices ISchemaClass<C_OP_ParentVortices>.From(nint handle) => new C_OP_ParentVorticesImpl(handle);
-    static int ISchemaClass<C_OP_ParentVortices>.Size => 512;
+    static int ISchemaClass<C_OP_ParentVortices>.Size => 520;
     static string? ISchemaClass<C_OP_ParentVortices>.ClassName => null;
 
 

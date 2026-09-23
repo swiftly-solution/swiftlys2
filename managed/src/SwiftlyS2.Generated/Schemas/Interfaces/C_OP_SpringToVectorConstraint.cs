@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_SpringToVectorConstraint : CParticleFunctionConstraint, ISchemaClass<C_OP_SpringToVectorConstraint>
 {
     static C_OP_SpringToVectorConstraint ISchemaClass<C_OP_SpringToVectorConstraint>.From(nint handle) => new C_OP_SpringToVectorConstraintImpl(handle);
-    static int ISchemaClass<C_OP_SpringToVectorConstraint>.Size => 3664;
+    static int ISchemaClass<C_OP_SpringToVectorConstraint>.Size => 3736;
     static string? ISchemaClass<C_OP_SpringToVectorConstraint>.ClassName => null;
 
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface VMixDynamicsCompressorDesc_t : ISchemaClass<VMixDynamicsCompressorDesc_t>
 {
     static VMixDynamicsCompressorDesc_t ISchemaClass<VMixDynamicsCompressorDesc_t>.From(nint handle) => new VMixDynamicsCompressorDesc_tImpl(handle);
-    static int ISchemaClass<VMixDynamicsCompressorDesc_t>.Size => 36;
+    static int ISchemaClass<VMixDynamicsCompressorDesc_t>.Size => 40;
     static string? ISchemaClass<VMixDynamicsCompressorDesc_t>.ClassName => null;
 
 
@@ -31,7 +31,11 @@ public partial interface VMixDynamicsCompressorDesc_t : ISchemaClass<VMixDynamic
 
     public ref float WetMix { get; }
 
+    public ref float SCHighPassFreq { get; }
+
     public ref bool PeakMode { get; }
+
+    public ref bool AutoMakeupGain { get; }
 
 
 }

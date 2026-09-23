@@ -21,19 +21,5 @@ public partial interface CNmTwoBoneIKTask : CNmPoseTask, ISchemaClass<CNmTwoBone
 
     public ref CTransform TargetTransform { get; }
 
-    public CNmTarget EffectorTarget { get; }
-
-    public ref NmIKBlendMode_t BlendMode { get; }
-
-    public ref float BlendWeight { get; }
-
-    public ref bool IsTargetInWorldSpace { get; }
-
-    public ref bool IsRunningFromDeserializedData { get; }
-
-    public ref float ChainRotationWeight { get; }
-
-    public ref CGlobalSymbol DebugEffectorBoneID { get; }
-
 
 }

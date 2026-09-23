@@ -11,11 +11,15 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVMixSubgraphSwitchProcessorDesc : CVMixBaseProcessorDesc, ISchemaClass<CVMixSubgraphSwitchProcessorDesc>
 {
     static CVMixSubgraphSwitchProcessorDesc ISchemaClass<CVMixSubgraphSwitchProcessorDesc>.From(nint handle) => new CVMixSubgraphSwitchProcessorDescImpl(handle);
-    static int ISchemaClass<CVMixSubgraphSwitchProcessorDesc>.Size => 88;
+    static int ISchemaClass<CVMixSubgraphSwitchProcessorDesc>.Size => 104;
     static string? ISchemaClass<CVMixSubgraphSwitchProcessorDesc>.ClassName => null;
 
 
     public VMixSubgraphSwitchDesc_t Desc { get; }
+
+    public CVMixParameterEffectName ParamEffectName { get; }
+
+    public CVMixParameterFloat ParamSelectionIndex { get; }
 
 
 }

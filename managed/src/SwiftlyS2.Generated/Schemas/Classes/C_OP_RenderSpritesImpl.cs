@@ -333,18 +333,5 @@ internal partial class C_OP_RenderSpritesImpl : CBaseRendererSource2Impl, C_OP_R
             return ref _Handle.AsRef<float>(_ShadowDensityOffset!.Value);
         }
     }
-    private static nint? _ReplicationParametersOffset;
-    private CReplicationParametersImpl? _ReplicationParametersInstance;
-
-    public CReplicationParameters ReplicationParameters
-    {
-        get
-        {
-            _ReplicationParametersOffset = _ReplicationParametersOffset ?? Schema.GetOffset(0x35C79135C63216ED);
-            var instance = _ReplicationParametersInstance ??= new CReplicationParametersImpl(0);
-            instance.DangerousSetHandle(_Handle + _ReplicationParametersOffset!.Value);
-            return instance;
-        }
-    }
 
 }

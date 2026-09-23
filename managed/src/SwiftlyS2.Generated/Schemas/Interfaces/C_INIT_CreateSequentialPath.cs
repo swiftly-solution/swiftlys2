@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_CreateSequentialPath : CParticleFunctionInitializer, ISchemaClass<C_INIT_CreateSequentialPath>
 {
     static C_INIT_CreateSequentialPath ISchemaClass<C_INIT_CreateSequentialPath>.From(nint handle) => new C_INIT_CreateSequentialPathImpl(handle);
-    static int ISchemaClass<C_INIT_CreateSequentialPath>.Size => 560;
+    static int ISchemaClass<C_INIT_CreateSequentialPath>.Size => 576;
     static string? ISchemaClass<C_INIT_CreateSequentialPath>.ClassName => null;
 
 

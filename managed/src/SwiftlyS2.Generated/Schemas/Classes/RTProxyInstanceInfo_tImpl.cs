@@ -106,5 +106,15 @@ internal partial class RTProxyInstanceInfo_tImpl : SchemaClass, RTProxyInstanceI
             return ref _Handle.AsRef<matrix3x4_t>(_MWorldFromLocalOffset!.Value);
         }
     }
+    private static nint? _TintColorSRGBOffset;
+
+    public ref Color TintColorSRGB
+    {
+        get
+        {
+            _TintColorSRGBOffset = _TintColorSRGBOffset ?? Schema.GetOffset(0x41A18F79E2ADA627);
+            return ref _Handle.AsRef<Color>(_TintColorSRGBOffset!.Value);
+        }
+    }
 
 }

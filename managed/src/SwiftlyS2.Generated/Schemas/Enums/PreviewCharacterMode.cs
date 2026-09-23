@@ -16,5 +16,8 @@ public enum PreviewCharacterMode : uint
     WALKING = 6,
     TEAM_INTRO = 7,
     WINGMAN_INTRO = 8,
-    BANNER = 9,
+    RUSH_INTRO = 9,
+    BANNER = 10,
+    CHICK_SNAPSHOT = 11,
+    CHICK_VIEWMODEL = 12,
 }
