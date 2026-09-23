@@ -195,8 +195,8 @@
         "linux": 33
     },
     "CNetworkGameServer::m_Clients": {
-        "windows": 584,
-        "linux": 584
+        "windows": 616,
+        "linux": 616
     },
     "INetChannelInfo::GetName": {
         "windows": 0,
