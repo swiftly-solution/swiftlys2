@@ -272,6 +272,16 @@ internal partial class CCSPlayerControllerImpl : CBasePlayerControllerImpl, CCSP
             Schema.SetString(_Handle, _ClanOffset!.Value, value);
         }
     }
+    private static nint? _ClanId32bitOffset;
+
+    public ref uint ClanId32bit
+    {
+        get
+        {
+            _ClanId32bitOffset = _ClanId32bitOffset ?? Schema.GetOffset(0x28ECD7A1A2D84239);
+            return ref _Handle.AsRef<uint>(_ClanId32bitOffset!.Value);
+        }
+    }
     private static nint? _CoachingTeamOffset;
 
     public ref int CoachingTeam
@@ -998,6 +1008,7 @@ internal partial class CCSPlayerControllerImpl : CBasePlayerControllerImpl, CCSP
     public void CompTeammateColorUpdated() => Schema.Update(_Handle, 0x28ECD7A1F22ED09E);
     public void EverPlayedOnTeamUpdated() => Schema.Update(_Handle, 0x28ECD7A16A63A242);
     public void ClanUpdated() => Schema.Update(_Handle, 0x28ECD7A10A2F1774);
+    public void ClanId32bitUpdated() => Schema.Update(_Handle, 0x28ECD7A1A2D84239);
     public void CoachingTeamUpdated() => Schema.Update(_Handle, 0x28ECD7A1B80B18EB);
     public void PlayerDominatedUpdated() => Schema.Update(_Handle, 0x28ECD7A1B882C893);
     public void PlayerDominatingMeUpdated() => Schema.Update(_Handle, 0x28ECD7A17C8F55E4);

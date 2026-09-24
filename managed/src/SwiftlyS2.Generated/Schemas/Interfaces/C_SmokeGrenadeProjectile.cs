@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_SmokeGrenadeProjectile : C_BaseCSGrenadeProjectile, ISchemaClass<C_SmokeGrenadeProjectile>
 {
     static C_SmokeGrenadeProjectile ISchemaClass<C_SmokeGrenadeProjectile>.From(nint handle) => new C_SmokeGrenadeProjectileImpl(handle);
-    static int ISchemaClass<C_SmokeGrenadeProjectile>.Size => 5144;
+    static int ISchemaClass<C_SmokeGrenadeProjectile>.Size => 5376;
     static string? ISchemaClass<C_SmokeGrenadeProjectile>.ClassName => null;
 
 

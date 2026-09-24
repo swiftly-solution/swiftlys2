@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_InitialRepulsionVelocity : CParticleFunctionInitializer, ISchemaClass<C_INIT_InitialRepulsionVelocity>
 {
     static C_INIT_InitialRepulsionVelocity ISchemaClass<C_INIT_InitialRepulsionVelocity>.From(nint handle) => new C_INIT_InitialRepulsionVelocityImpl(handle);
-    static int ISchemaClass<C_INIT_InitialRepulsionVelocity>.Size => 664;
+    static int ISchemaClass<C_INIT_InitialRepulsionVelocity>.Size => 672;
     static string? ISchemaClass<C_INIT_InitialRepulsionVelocity>.ClassName => null;
 
 

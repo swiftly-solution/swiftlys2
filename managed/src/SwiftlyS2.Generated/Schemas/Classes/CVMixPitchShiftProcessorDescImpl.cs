@@ -29,5 +29,18 @@ internal partial class CVMixPitchShiftProcessorDescImpl : CVMixBaseProcessorDesc
             return instance;
         }
     }
+    private static nint? _ParamPitchScaleOffset;
+    private CVMixParameterFloatImpl? _ParamPitchScaleInstance;
+
+    public CVMixParameterFloat ParamPitchScale
+    {
+        get
+        {
+            _ParamPitchScaleOffset = _ParamPitchScaleOffset ?? Schema.GetOffset(0x56460FA170899212);
+            var instance = _ParamPitchScaleInstance ??= new CVMixParameterFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamPitchScaleOffset!.Value);
+            return instance;
+        }
+    }
 
 }

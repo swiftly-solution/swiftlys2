@@ -66,6 +66,16 @@ internal partial class CNmOrientationWarpNode__CDefinitionImpl : CNmPoseNode__CD
             return ref _Handle.AsRef<bool>(_WarpTranslationOffset!.Value);
         }
     }
+    private static nint? _AlignmentModeOffset;
+
+    public ref CNmOrientationWarpNode__AlignmentMode_t AlignmentMode
+    {
+        get
+        {
+            _AlignmentModeOffset = _AlignmentModeOffset ?? Schema.GetOffset(0x12655257A76010A5);
+            return ref _Handle.AsRef<CNmOrientationWarpNode__AlignmentMode_t>(_AlignmentModeOffset!.Value);
+        }
+    }
     private static nint? _SamplingModeOffset;
 
     public ref CNmRootMotionData__SamplingMode_t SamplingMode

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RemapTransformOrientationToYaw : CParticleFunctionOperator, ISchemaClass<C_OP_RemapTransformOrientationToYaw>
 {
     static C_OP_RemapTransformOrientationToYaw ISchemaClass<C_OP_RemapTransformOrientationToYaw>.From(nint handle) => new C_OP_RemapTransformOrientationToYawImpl(handle);
-    static int ISchemaClass<C_OP_RemapTransformOrientationToYaw>.Size => 592;
+    static int ISchemaClass<C_OP_RemapTransformOrientationToYaw>.Size => 600;
     static string? ISchemaClass<C_OP_RemapTransformOrientationToYaw>.ClassName => null;
 
 

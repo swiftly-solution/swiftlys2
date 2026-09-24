@@ -12,7 +12,7 @@ using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CVMixVsndInputImpl : CVMixInputBaseImpl, CVMixVsndInput
+internal partial class CVMixVsndInputImpl : SchemaClass, CVMixVsndInput
 {
     public CVMixVsndInputImpl(nint handle) : base(handle) { }
 
@@ -29,16 +29,6 @@ internal partial class CVMixVsndInputImpl : CVMixInputBaseImpl, CVMixVsndInput
         {
             _DefaultValueOffset = _DefaultValueOffset ?? Schema.GetOffset(0x2ED16435BBE0341F);
             Schema.SetCUtlString(_Handle, _DefaultValueOffset!.Value, value);
-        }
-    }
-    private static nint? _ProcessorOffset;
-
-    public ref int Processor
-    {
-        get
-        {
-            _ProcessorOffset = _ProcessorOffset ?? Schema.GetOffset(0x2ED1643512BAA203);
-            return ref _Handle.AsRef<int>(_ProcessorOffset!.Value);
         }
     }
 

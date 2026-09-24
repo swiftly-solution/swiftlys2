@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmGraphDocBoolParameterReferenceNode : CNmGraphDocParameterReferenceNode, ISchemaClass<CNmGraphDocBoolParameterReferenceNode>
 {
     static CNmGraphDocBoolParameterReferenceNode ISchemaClass<CNmGraphDocBoolParameterReferenceNode>.From(nint handle) => new CNmGraphDocBoolParameterReferenceNodeImpl(handle);
-    static int ISchemaClass<CNmGraphDocBoolParameterReferenceNode>.Size => 304;
+    static int ISchemaClass<CNmGraphDocBoolParameterReferenceNode>.Size => 312;
     static string? ISchemaClass<CNmGraphDocBoolParameterReferenceNode>.ClassName => null;
 
 }

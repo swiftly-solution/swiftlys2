@@ -16,14 +16,34 @@ internal partial class CPathCornerImpl : CPointEntityImpl, CPathCorner
 {
     public CPathCornerImpl(nint handle) : base(handle) { }
 
-    private static nint? _SpeedOffset;
+    private static nint? _TriggerLocomotionStopOffset;
 
-    public ref float Speed
+    public ref bool TriggerLocomotionStop
     {
         get
         {
-            _SpeedOffset = _SpeedOffset ?? Schema.GetOffset(0xF74EA454C631B7EA);
-            return ref _Handle.AsRef<float>(_SpeedOffset!.Value);
+            _TriggerLocomotionStopOffset = _TriggerLocomotionStopOffset ?? Schema.GetOffset(0xF74EA4544F62817A);
+            return ref _Handle.AsRef<bool>(_TriggerLocomotionStopOffset!.Value);
+        }
+    }
+    private static nint? _SmoothArrivalOffset;
+
+    public ref bool SmoothArrival
+    {
+        get
+        {
+            _SmoothArrivalOffset = _SmoothArrivalOffset ?? Schema.GetOffset(0xF74EA454C4BE6A7C);
+            return ref _Handle.AsRef<bool>(_SmoothArrivalOffset!.Value);
+        }
+    }
+    private static nint? _ExactPositioningOffset;
+
+    public ref bool ExactPositioning
+    {
+        get
+        {
+            _ExactPositioningOffset = _ExactPositioningOffset ?? Schema.GetOffset(0xF74EA454F8EBCDA1);
+            return ref _Handle.AsRef<bool>(_ExactPositioningOffset!.Value);
         }
     }
     private static nint? _WaitOffset;
@@ -44,6 +64,46 @@ internal partial class CPathCornerImpl : CPointEntityImpl, CPathCorner
         {
             _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0xF74EA4545ACFC08D);
             return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+        }
+    }
+    private static nint? _WaypointSuccessRadiusWhenBlockedOffset;
+
+    public ref float WaypointSuccessRadiusWhenBlocked
+    {
+        get
+        {
+            _WaypointSuccessRadiusWhenBlockedOffset = _WaypointSuccessRadiusWhenBlockedOffset ?? Schema.GetOffset(0xF74EA4547B6A8423);
+            return ref _Handle.AsRef<float>(_WaypointSuccessRadiusWhenBlockedOffset!.Value);
+        }
+    }
+    private static nint? _WaypointSuccessRadiusOffset;
+
+    public ref float WaypointSuccessRadius
+    {
+        get
+        {
+            _WaypointSuccessRadiusOffset = _WaypointSuccessRadiusOffset ?? Schema.GetOffset(0xF74EA45411CF02F9);
+            return ref _Handle.AsRef<float>(_WaypointSuccessRadiusOffset!.Value);
+        }
+    }
+    private static nint? _PathEndDistanceFromGoalOffset;
+
+    public ref float PathEndDistanceFromGoal
+    {
+        get
+        {
+            _PathEndDistanceFromGoalOffset = _PathEndDistanceFromGoalOffset ?? Schema.GetOffset(0xF74EA4547B5B4901);
+            return ref _Handle.AsRef<float>(_PathEndDistanceFromGoalOffset!.Value);
+        }
+    }
+    private static nint? _SpeedOffset;
+
+    public ref float Speed
+    {
+        get
+        {
+            _SpeedOffset = _SpeedOffset ?? Schema.GetOffset(0xF74EA454C631B7EA);
+            return ref _Handle.AsRef<float>(_SpeedOffset!.Value);
         }
     }
     private static nint? _OnPassOffset;

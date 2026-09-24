@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CFuncInteractionLayerClip : CBaseModelEntity, ISchemaClass<CFuncInteractionLayerClip>
 {
     static CFuncInteractionLayerClip ISchemaClass<CFuncInteractionLayerClip>.From(nint handle) => new CFuncInteractionLayerClipImpl(handle);
-    static int ISchemaClass<CFuncInteractionLayerClip>.Size => 1928;
+    static int ISchemaClass<CFuncInteractionLayerClip>.Size => 2152;
     static string? ISchemaClass<CFuncInteractionLayerClip>.ClassName => "func_clip_interaction_layer";
 
 

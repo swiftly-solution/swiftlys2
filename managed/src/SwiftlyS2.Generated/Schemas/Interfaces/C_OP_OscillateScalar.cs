@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_OscillateScalar : CParticleFunctionOperator, ISchemaClass<C_OP_OscillateScalar>
 {
     static C_OP_OscillateScalar ISchemaClass<C_OP_OscillateScalar>.From(nint handle) => new C_OP_OscillateScalarImpl(handle);
-    static int ISchemaClass<C_OP_OscillateScalar>.Size => 520;
+    static int ISchemaClass<C_OP_OscillateScalar>.Size => 528;
     static string? ISchemaClass<C_OP_OscillateScalar>.ClassName => null;
 
 

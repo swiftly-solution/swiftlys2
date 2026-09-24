@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_SetControlPointToVectorExpression : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointToVectorExpression>
 {
     static C_OP_SetControlPointToVectorExpression ISchemaClass<C_OP_SetControlPointToVectorExpression>.From(nint handle) => new C_OP_SetControlPointToVectorExpressionImpl(handle);
-    static int ISchemaClass<C_OP_SetControlPointToVectorExpression>.Size => 4304;
+    static int ISchemaClass<C_OP_SetControlPointToVectorExpression>.Size => 4384;
     static string? ISchemaClass<C_OP_SetControlPointToVectorExpression>.ClassName => null;
 
 

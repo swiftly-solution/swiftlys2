@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RenderMaterialProxy : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderMaterialProxy>
 {
     static C_OP_RenderMaterialProxy ISchemaClass<C_OP_RenderMaterialProxy>.From(nint handle) => new C_OP_RenderMaterialProxyImpl(handle);
-    static int ISchemaClass<C_OP_RenderMaterialProxy>.Size => 3080;
+    static int ISchemaClass<C_OP_RenderMaterialProxy>.Size => 3136;
     static string? ISchemaClass<C_OP_RenderMaterialProxy>.ClassName => null;
 
 

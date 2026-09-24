@@ -1,4 +1,7 @@
+using System.Collections.Concurrent;
+using System.Runtime.InteropServices;
 using SwiftlyS2.Core.Natives;
+using SwiftlyS2.Core.Scheduler;
 using SwiftlyS2.Shared.Convars;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Shared.NetMessages;
@@ -30,7 +33,7 @@ internal enum EConVarType : int
 
 internal class ConVarService : IConVarService
 {
-
+    private static readonly ConcurrentDictionary<int, ConVarCallbackDelegate> callbacks = new();
     private INetMessageService _netMessageService;
 
     public ConVarService( INetMessageService netMessageService )
@@ -300,5 +303,40 @@ internal class ConVarService : IConVarService
             cvar.Value = value;
             msg.Recipients.AddAllPlayers();
         });
+    }
+
+    public void QueryClient( int clientId, string name, Action<string> callback )
+    {
+        var convarName = name;
+        Action? removeSelf = null;
+        ConVarCallbackDelegate nativeCallback = ( playerId, namePtr, valuePtr ) =>
+        {
+            if (clientId != playerId)
+            {
+                return;
+            }
+            var name = StringAlloc.CreateCSharpString(namePtr);
+
+            if (name != convarName)
+            {
+                return;
+            }
+            var value = StringAlloc.CreateCSharpString(valuePtr)!;
+
+            callback(value);
+            removeSelf?.Invoke();
+        };
+
+        var callbackPtr = Marshal.GetFunctionPointerForDelegate(nativeCallback);
+        var listenerId = NativeConvars.AddQueryClientCvarCallback(callbackPtr);
+        callbacks[listenerId] = nativeCallback;
+
+        removeSelf = () =>
+        {
+            _ = callbacks.TryRemove(listenerId, out _);
+            NativeConvars.RemoveQueryClientCvarCallback(listenerId);
+        };
+
+        _ = SchedulerManager.QueueOrNow(() => NativeConvars.QueryClientConvar(clientId, convarName));
     }
 }

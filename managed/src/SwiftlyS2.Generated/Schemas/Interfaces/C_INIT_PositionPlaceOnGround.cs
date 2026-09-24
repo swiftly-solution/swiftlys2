@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_PositionPlaceOnGround : CParticleFunctionInitializer, ISchemaClass<C_INIT_PositionPlaceOnGround>
 {
     static C_INIT_PositionPlaceOnGround ISchemaClass<C_INIT_PositionPlaceOnGround>.From(nint handle) => new C_INIT_PositionPlaceOnGroundImpl(handle);
-    static int ISchemaClass<C_INIT_PositionPlaceOnGround>.Size => 3120;
+    static int ISchemaClass<C_INIT_PositionPlaceOnGround>.Size => 3176;
     static string? ISchemaClass<C_INIT_PositionPlaceOnGround>.ClassName => null;
 
 

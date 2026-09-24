@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_CreateWithinSphereTransform : CParticleFunctionInitializer, ISchemaClass<C_INIT_CreateWithinSphereTransform>
 {
     static C_INIT_CreateWithinSphereTransform ISchemaClass<C_INIT_CreateWithinSphereTransform>.From(nint handle) => new C_INIT_CreateWithinSphereTransformImpl(handle);
-    static int ISchemaClass<C_INIT_CreateWithinSphereTransform>.Size => 7248;
+    static int ISchemaClass<C_INIT_CreateWithinSphereTransform>.Size => 7384;
     static string? ISchemaClass<C_INIT_CreateWithinSphereTransform>.ClassName => null;
 
 

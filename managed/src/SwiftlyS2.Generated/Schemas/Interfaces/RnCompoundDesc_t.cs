@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface RnCompoundDesc_t : RnShapeDesc_t, ISchemaClass<RnCompoundDesc_t>
 {
     static RnCompoundDesc_t ISchemaClass<RnCompoundDesc_t>.From(nint handle) => new RnCompoundDesc_tImpl(handle);
-    static int ISchemaClass<RnCompoundDesc_t>.Size => 168;
+    static int ISchemaClass<RnCompoundDesc_t>.Size => 376;
     static string? ISchemaClass<RnCompoundDesc_t>.ClassName => null;
 
 

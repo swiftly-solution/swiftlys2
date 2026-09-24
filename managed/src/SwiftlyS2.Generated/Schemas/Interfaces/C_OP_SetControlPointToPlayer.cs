@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_SetControlPointToPlayer : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointToPlayer>
 {
     static C_OP_SetControlPointToPlayer ISchemaClass<C_OP_SetControlPointToPlayer>.From(nint handle) => new C_OP_SetControlPointToPlayerImpl(handle);
-    static int ISchemaClass<C_OP_SetControlPointToPlayer>.Size => 512;
+    static int ISchemaClass<C_OP_SetControlPointToPlayer>.Size => 520;
     static string? ISchemaClass<C_OP_SetControlPointToPlayer>.ClassName => null;
 
 

@@ -13,4 +13,10 @@ public enum EChickenActivity : uint
     Glide = 4,
     Land = 5,
     Panic = 6,
+    Trick = 7,
+    TurnInPlace = 8,
+    Feed = 9,
+    Sleep = 10,
+    Shoulder = 11,
+    LowOnFood = 12,
 }

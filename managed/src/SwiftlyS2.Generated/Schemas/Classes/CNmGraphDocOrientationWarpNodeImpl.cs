@@ -36,6 +36,16 @@ internal partial class CNmGraphDocOrientationWarpNodeImpl : CNmGraphDocFlowNodeI
             return ref _Handle.AsRef<CNmRootMotionData__SamplingMode_t>(_SamplingModeOffset!.Value);
         }
     }
+    private static nint? _AlignmentModeOffset;
+
+    public ref CNmOrientationWarpNode__AlignmentMode_t AlignmentMode
+    {
+        get
+        {
+            _AlignmentModeOffset = _AlignmentModeOffset ?? Schema.GetOffset(0x57FC67B7A76010A5);
+            return ref _Handle.AsRef<CNmOrientationWarpNode__AlignmentMode_t>(_AlignmentModeOffset!.Value);
+        }
+    }
     private static nint? _WarpTranslationOffset;
 
     public ref bool WarpTranslation

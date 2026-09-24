@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_ColorInterpolate : CParticleFunctionOperator, ISchemaClass<C_OP_ColorInterpolate>
 {
     static C_OP_ColorInterpolate ISchemaClass<C_OP_ColorInterpolate>.From(nint handle) => new C_OP_ColorInterpolateImpl(handle);
-    static int ISchemaClass<C_OP_ColorInterpolate>.Size => 504;
+    static int ISchemaClass<C_OP_ColorInterpolate>.Size => 512;
     static string? ISchemaClass<C_OP_ColorInterpolate>.ClassName => null;
 
 

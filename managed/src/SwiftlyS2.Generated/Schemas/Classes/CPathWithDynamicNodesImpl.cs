@@ -36,6 +36,26 @@ internal partial class CPathWithDynamicNodesImpl : CPathSimpleImpl, CPathWithDyn
             return ref _Handle.AsRef<CTransform>(_XInitialPathWorldToLocalOffset!.Value);
         }
     }
+    private static nint? _DesiredDirectionOffset;
+
+    public ref DirectionAlongSimplePath_t DesiredDirection
+    {
+        get
+        {
+            _DesiredDirectionOffset = _DesiredDirectionOffset ?? Schema.GetOffset(0x53A12A6BBBB84547);
+            return ref _Handle.AsRef<DirectionAlongSimplePath_t>(_DesiredDirectionOffset!.Value);
+        }
+    }
+    private static nint? _IgnoreParentRotationOffset;
+
+    public ref bool IgnoreParentRotation
+    {
+        get
+        {
+            _IgnoreParentRotationOffset = _IgnoreParentRotationOffset ?? Schema.GetOffset(0x53A12A6B49795B65);
+            return ref _Handle.AsRef<bool>(_IgnoreParentRotationOffset!.Value);
+        }
+    }
 
     public void PathNodesUpdated() => Schema.Update(_Handle, 0x53A12A6BFD746CE3);
     public void XInitialPathWorldToLocalUpdated() => Schema.Update(_Handle, 0x53A12A6BFE5D385E);

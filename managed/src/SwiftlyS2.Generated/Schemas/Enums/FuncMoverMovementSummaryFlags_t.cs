@@ -15,4 +15,5 @@ public enum FuncMoverMovementSummaryFlags_t : uint
     eLoopToStart = 32,
     eLoopToEnd = 64,
     eTransitionComplete = 128,
+    eStoppedDuringTransition = 256,
 }

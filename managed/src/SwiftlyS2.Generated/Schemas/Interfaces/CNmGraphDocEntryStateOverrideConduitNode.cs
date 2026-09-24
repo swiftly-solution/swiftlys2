@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmGraphDocEntryStateOverrideConduitNode : CNmGraphDocStateMachineGraphNode, ISchemaClass<CNmGraphDocEntryStateOverrideConduitNode>
 {
     static CNmGraphDocEntryStateOverrideConduitNode ISchemaClass<CNmGraphDocEntryStateOverrideConduitNode>.From(nint handle) => new CNmGraphDocEntryStateOverrideConduitNodeImpl(handle);
-    static int ISchemaClass<CNmGraphDocEntryStateOverrideConduitNode>.Size => 80;
+    static int ISchemaClass<CNmGraphDocEntryStateOverrideConduitNode>.Size => 88;
     static string? ISchemaClass<CNmGraphDocEntryStateOverrideConduitNode>.ClassName => null;
 
 }

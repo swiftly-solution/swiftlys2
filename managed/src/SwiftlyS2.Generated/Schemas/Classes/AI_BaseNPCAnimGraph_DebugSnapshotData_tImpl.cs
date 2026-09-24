@@ -16,6 +16,16 @@ internal partial class AI_BaseNPCAnimGraph_DebugSnapshotData_tImpl : SchemaClass
 {
     public AI_BaseNPCAnimGraph_DebugSnapshotData_tImpl(nint handle) : base(handle) { }
 
+    private static nint? _Ag2_update_idOffset;
+
+    public ref int Ag2_update_id
+    {
+        get
+        {
+            _Ag2_update_idOffset = _Ag2_update_idOffset ?? Schema.GetOffset(0xC191B83C8397CF91);
+            return ref _Handle.AsRef<int>(_Ag2_update_idOffset!.Value);
+        }
+    }
     private static nint? _E_action_desiredOffset;
 
     public ref CGlobalSymbol E_action_desired

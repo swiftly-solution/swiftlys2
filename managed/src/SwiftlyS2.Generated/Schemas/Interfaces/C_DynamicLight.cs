@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_DynamicLight : C_BaseModelEntity, ISchemaClass<C_DynamicLight>
 {
     static C_DynamicLight ISchemaClass<C_DynamicLight>.From(nint handle) => new C_DynamicLightImpl(handle);
-    static int ISchemaClass<C_DynamicLight>.Size => 4056;
+    static int ISchemaClass<C_DynamicLight>.Size => 4288;
     static string? ISchemaClass<C_DynamicLight>.ClassName => null;
 
 

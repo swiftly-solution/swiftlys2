@@ -11,8 +11,8 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CBaseClientUIEntity : CBaseModelEntity, ISchemaClass<CBaseClientUIEntity>
 {
     static CBaseClientUIEntity ISchemaClass<CBaseClientUIEntity>.From(nint handle) => new CBaseClientUIEntityImpl(handle);
-    static int ISchemaClass<CBaseClientUIEntity>.Size => 2256;
-    static string? ISchemaClass<CBaseClientUIEntity>.ClassName => null;
+    static int ISchemaClass<CBaseClientUIEntity>.Size => 2480;
+    static string? ISchemaClass<CBaseClientUIEntity>.ClassName => "base_clientui_entity";
 
 
     public ref bool Enabled { get; }

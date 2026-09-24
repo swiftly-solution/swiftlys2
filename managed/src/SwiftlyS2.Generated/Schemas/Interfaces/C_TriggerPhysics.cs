@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_TriggerPhysics : C_BaseTrigger, ISchemaClass<C_TriggerPhysics>
 {
     static C_TriggerPhysics ISchemaClass<C_TriggerPhysics>.From(nint handle) => new C_TriggerPhysicsImpl(handle);
-    static int ISchemaClass<C_TriggerPhysics>.Size => 4328;
+    static int ISchemaClass<C_TriggerPhysics>.Size => 4560;
     static string? ISchemaClass<C_TriggerPhysics>.ClassName => null;
 
 
@@ -38,6 +38,8 @@ public partial interface C_TriggerPhysics : C_BaseTrigger, ISchemaClass<C_Trigge
     public ref Vector LinearForcePointAtWorld { get; }
 
     public ref Vector LinearForceDirection { get; }
+
+    public ref bool ForceDirectionIsInLocalSpace { get; }
 
     public ref bool ConvertToDebrisWhenPossible { get; }
 

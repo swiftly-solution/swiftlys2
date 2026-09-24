@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_MovementMaintainOffset : CParticleFunctionOperator, ISchemaClass<C_OP_MovementMaintainOffset>
 {
     static C_OP_MovementMaintainOffset ISchemaClass<C_OP_MovementMaintainOffset>.From(nint handle) => new C_OP_MovementMaintainOffsetImpl(handle);
-    static int ISchemaClass<C_OP_MovementMaintainOffset>.Size => 496;
+    static int ISchemaClass<C_OP_MovementMaintainOffset>.Size => 504;
     static string? ISchemaClass<C_OP_MovementMaintainOffset>.ClassName => null;
 
 

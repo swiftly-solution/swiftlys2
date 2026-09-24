@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_WorldModelGloves : CBaseAnimGraph, ISchemaClass<C_WorldModelGloves>
 {
     static C_WorldModelGloves ISchemaClass<C_WorldModelGloves>.From(nint handle) => new C_WorldModelGlovesImpl(handle);
-    static int ISchemaClass<C_WorldModelGloves>.Size => 4488;
+    static int ISchemaClass<C_WorldModelGloves>.Size => 4720;
     static string? ISchemaClass<C_WorldModelGloves>.ClassName => null;
 
 }

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_SetHitboxToModel : CParticleFunctionInitializer, ISchemaClass<C_INIT_SetHitboxToModel>
 {
     static C_INIT_SetHitboxToModel ISchemaClass<C_INIT_SetHitboxToModel>.From(nint handle) => new C_INIT_SetHitboxToModelImpl(handle);
-    static int ISchemaClass<C_INIT_SetHitboxToModel>.Size => 2728;
+    static int ISchemaClass<C_INIT_SetHitboxToModel>.Size => 2776;
     static string? ISchemaClass<C_INIT_SetHitboxToModel>.ClassName => null;
 
 

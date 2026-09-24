@@ -39,5 +39,7 @@ public partial interface PGDInstruction_t : ISchemaClass<PGDInstruction_t>
 
     public PulseRuntimeBlackboardReferenceIndex_t BlackboardReferenceIdx { get; }
 
+    public PulseRuntimeTempVarIndex_t TempVarIdx { get; }
+
 
 }

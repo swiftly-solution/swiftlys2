@@ -11,8 +11,8 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CBaseToggle : CBaseModelEntity, ISchemaClass<CBaseToggle>
 {
     static CBaseToggle ISchemaClass<CBaseToggle>.From(nint handle) => new CBaseToggleImpl(handle);
-    static int ISchemaClass<CBaseToggle>.Size => 2032;
-    static string? ISchemaClass<CBaseToggle>.ClassName => null;
+    static int ISchemaClass<CBaseToggle>.Size => 2256;
+    static string? ISchemaClass<CBaseToggle>.ClassName => "base_toggle";
 
 
     public ref TOGGLE_STATE Toggle_state { get; }

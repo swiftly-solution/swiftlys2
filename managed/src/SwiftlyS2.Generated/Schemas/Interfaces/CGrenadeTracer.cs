@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CGrenadeTracer : C_BaseModelEntity, ISchemaClass<CGrenadeTracer>
 {
     static CGrenadeTracer ISchemaClass<CGrenadeTracer>.From(nint handle) => new CGrenadeTracerImpl(handle);
-    static int ISchemaClass<CGrenadeTracer>.Size => 5200;
+    static int ISchemaClass<CGrenadeTracer>.Size => 5424;
     static string? ISchemaClass<CGrenadeTracer>.ClassName => null;
 
 

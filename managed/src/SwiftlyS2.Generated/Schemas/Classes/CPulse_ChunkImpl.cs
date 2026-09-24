@@ -46,5 +46,18 @@ internal partial class CPulse_ChunkImpl : SchemaClass, CPulse_Chunk
             return ref _Handle.AsRef<CUtlLeanVector<CPulse_InstructionDebug, int>>(_InstructionDebugInfosOffset!.Value);
         }
     }
+    private static nint? _TempVarBankOffset;
+    private PulseRuntimeTempVarBankIndex_tImpl? _TempVarBankInstance;
+
+    public PulseRuntimeTempVarBankIndex_t TempVarBank
+    {
+        get
+        {
+            _TempVarBankOffset = _TempVarBankOffset ?? Schema.GetOffset(0x81693209344EDC2E);
+            var instance = _TempVarBankInstance ??= new PulseRuntimeTempVarBankIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _TempVarBankOffset!.Value);
+            return instance;
+        }
+    }
 
 }

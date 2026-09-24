@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmGraphDocStateNode : CNmGraphDocStateMachineGraphNode, ISchemaClass<CNmGraphDocStateNode>
 {
     static CNmGraphDocStateNode ISchemaClass<CNmGraphDocStateNode>.From(nint handle) => new CNmGraphDocStateNodeImpl(handle);
-    static int ISchemaClass<CNmGraphDocStateNode>.Size => 304;
+    static int ISchemaClass<CNmGraphDocStateNode>.Size => 328;
     static string? ISchemaClass<CNmGraphDocStateNode>.ClassName => null;
 
 
@@ -19,6 +19,9 @@ public partial interface CNmGraphDocStateNode : CNmGraphDocStateMachineGraphNode
 
     // V_uuid_t
     public SchemaUntypedField CloneSourceStateID { get; }
+
+    // V_uuid_t
+    public SchemaUntypedField CloneStateVersion { get; }
 
     public ref CUtlVector<CNmGraphDocStateNode__StateEvent_t> StateEvents { get; }
 

@@ -327,6 +327,49 @@ internal partial class CCSWeaponBaseImpl : CBasePlayerWeaponImpl, CCSWeaponBase
             return instance;
         }
     }
+    private static nint? _StealthyOffset;
+
+    public ref bool Stealthy
+    {
+        get
+        {
+            _StealthyOffset = _StealthyOffset ?? Schema.GetOffset(0x8102BA51CEF3793F);
+            return ref _Handle.AsRef<bool>(_StealthyOffset!.Value);
+        }
+    }
+    private static nint? _InSilentReloadSectionOffset;
+
+    public ref bool InSilentReloadSection
+    {
+        get
+        {
+            _InSilentReloadSectionOffset = _InSilentReloadSectionOffset ?? Schema.GetOffset(0x8102BA511E973BF9);
+            return ref _Handle.AsRef<bool>(_InSilentReloadSectionOffset!.Value);
+        }
+    }
+    private static nint? _SilentReloadStatCountedOffset;
+
+    public ref bool SilentReloadStatCounted
+    {
+        get
+        {
+            _SilentReloadStatCountedOffset = _SilentReloadStatCountedOffset ?? Schema.GetOffset(0x8102BA513FE8EAEB);
+            return ref _Handle.AsRef<bool>(_SilentReloadStatCountedOffset!.Value);
+        }
+    }
+    private static nint? _StealthHoldStartTimeOffset;
+    private GameTime_tImpl? _StealthHoldStartTimeInstance;
+
+    public GameTime_t StealthHoldStartTime
+    {
+        get
+        {
+            _StealthHoldStartTimeOffset = _StealthHoldStartTimeOffset ?? Schema.GetOffset(0x8102BA5190F04734);
+            var instance = _StealthHoldStartTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _StealthHoldStartTimeOffset!.Value);
+            return instance;
+        }
+    }
     private static nint? _WeaponActionPlaybackRateOffset;
 
     public ref float WeaponActionPlaybackRate
@@ -600,6 +643,8 @@ internal partial class CCSWeaponBaseImpl : CBasePlayerWeaponImpl, CCSWeaponBase
     public void IsHauledBackUpdated() => Schema.Update(_Handle, 0x8102BA51D8C240B9);
     public void SilencerOnUpdated() => Schema.Update(_Handle, 0x8102BA5168D3A353);
     public void TimeSilencerSwitchCompleteUpdated() => Schema.Update(_Handle, 0x8102BA51DCB190FA);
+    public void StealthyUpdated() => Schema.Update(_Handle, 0x8102BA51CEF3793F);
+    public void StealthHoldStartTimeUpdated() => Schema.Update(_Handle, 0x8102BA5190F04734);
     public void WeaponActionPlaybackRateUpdated() => Schema.Update(_Handle, 0x8102BA5114C24AAE);
     public void OriginalTeamNumberUpdated() => Schema.Update(_Handle, 0x8102BA515DB51597);
     public void MostRecentTeamNumberUpdated() => Schema.Update(_Handle, 0x8102BA51D818821C);

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_NormalLock : CParticleFunctionOperator, ISchemaClass<C_OP_NormalLock>
 {
     static C_OP_NormalLock ISchemaClass<C_OP_NormalLock>.From(nint handle) => new C_OP_NormalLockImpl(handle);
-    static int ISchemaClass<C_OP_NormalLock>.Size => 480;
+    static int ISchemaClass<C_OP_NormalLock>.Size => 488;
     static string? ISchemaClass<C_OP_NormalLock>.ClassName => null;
 
 

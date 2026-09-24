@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CFuncMonitor : CFuncBrush, ISchemaClass<CFuncMonitor>
 {
     static CFuncMonitor ISchemaClass<CFuncMonitor>.From(nint handle) => new CFuncMonitorImpl(handle);
-    static int ISchemaClass<CFuncMonitor>.Size => 1968;
+    static int ISchemaClass<CFuncMonitor>.Size => 2192;
     static string? ISchemaClass<CFuncMonitor>.ClassName => "func_monitor";
 
 

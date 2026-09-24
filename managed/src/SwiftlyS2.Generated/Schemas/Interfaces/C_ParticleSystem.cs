@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_ParticleSystem : C_BaseModelEntity, ISchemaClass<C_ParticleSystem>
 {
     static C_ParticleSystem ISchemaClass<C_ParticleSystem>.From(nint handle) => new C_ParticleSystemImpl(handle);
-    static int ISchemaClass<C_ParticleSystem>.Size => 5504;
+    static int ISchemaClass<C_ParticleSystem>.Size => 5736;
     static string? ISchemaClass<C_ParticleSystem>.ClassName => null;
 
 

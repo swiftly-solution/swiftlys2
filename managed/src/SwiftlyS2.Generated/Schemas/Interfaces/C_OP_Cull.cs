@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_Cull : CParticleFunctionOperator, ISchemaClass<C_OP_Cull>
 {
     static C_OP_Cull ISchemaClass<C_OP_Cull>.From(nint handle) => new C_OP_CullImpl(handle);
-    static int ISchemaClass<C_OP_Cull>.Size => 488;
+    static int ISchemaClass<C_OP_Cull>.Size => 496;
     static string? ISchemaClass<C_OP_Cull>.ClassName => null;
 
 

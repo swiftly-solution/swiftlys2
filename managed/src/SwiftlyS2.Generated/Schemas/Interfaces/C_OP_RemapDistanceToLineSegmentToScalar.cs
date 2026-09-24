@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RemapDistanceToLineSegmentToScalar : C_OP_RemapDistanceToLineSegmentBase, ISchemaClass<C_OP_RemapDistanceToLineSegmentToScalar>
 {
     static C_OP_RemapDistanceToLineSegmentToScalar ISchemaClass<C_OP_RemapDistanceToLineSegmentToScalar>.From(nint handle) => new C_OP_RemapDistanceToLineSegmentToScalarImpl(handle);
-    static int ISchemaClass<C_OP_RemapDistanceToLineSegmentToScalar>.Size => 512;
+    static int ISchemaClass<C_OP_RemapDistanceToLineSegmentToScalar>.Size => 520;
     static string? ISchemaClass<C_OP_RemapDistanceToLineSegmentToScalar>.ClassName => null;
 
 

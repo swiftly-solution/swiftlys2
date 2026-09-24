@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_VelocityRadialRandom : CParticleFunctionInitializer, ISchemaClass<C_INIT_VelocityRadialRandom>
 {
     static C_INIT_VelocityRadialRandom ISchemaClass<C_INIT_VelocityRadialRandom>.From(nint handle) => new C_INIT_VelocityRadialRandomImpl(handle);
-    static int ISchemaClass<C_INIT_VelocityRadialRandom>.Size => 4680;
+    static int ISchemaClass<C_INIT_VelocityRadialRandom>.Size => 4768;
     static string? ISchemaClass<C_INIT_VelocityRadialRandom>.ClassName => null;
 
 

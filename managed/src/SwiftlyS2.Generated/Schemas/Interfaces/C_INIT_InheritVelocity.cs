@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_InheritVelocity : CParticleFunctionInitializer, ISchemaClass<C_INIT_InheritVelocity>
 {
     static C_INIT_InheritVelocity ISchemaClass<C_INIT_InheritVelocity>.From(nint handle) => new C_INIT_InheritVelocityImpl(handle);
-    static int ISchemaClass<C_INIT_InheritVelocity>.Size => 488;
+    static int ISchemaClass<C_INIT_InheritVelocity>.Size => 496;
     static string? ISchemaClass<C_INIT_InheritVelocity>.ClassName => null;
 
 

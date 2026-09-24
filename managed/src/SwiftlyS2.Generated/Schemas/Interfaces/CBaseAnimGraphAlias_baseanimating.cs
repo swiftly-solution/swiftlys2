@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CBaseAnimGraphAlias_baseanimating : CBaseAnimGraph, ISchemaClass<CBaseAnimGraphAlias_baseanimating>
 {
     static CBaseAnimGraphAlias_baseanimating ISchemaClass<CBaseAnimGraphAlias_baseanimating>.From(nint handle) => new CBaseAnimGraphAlias_baseanimatingImpl(handle);
-    static int ISchemaClass<CBaseAnimGraphAlias_baseanimating>.Size => 2400;
+    static int ISchemaClass<CBaseAnimGraphAlias_baseanimating>.Size => 2624;
     static string? ISchemaClass<CBaseAnimGraphAlias_baseanimating>.ClassName => null;
 
 }

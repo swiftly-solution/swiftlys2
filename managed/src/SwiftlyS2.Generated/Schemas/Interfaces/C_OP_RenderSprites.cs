@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RenderSprites : CBaseRendererSource2, ISchemaClass<C_OP_RenderSprites>
 {
     static C_OP_RenderSprites ISchemaClass<C_OP_RenderSprites>.From(nint handle) => new C_OP_RenderSpritesImpl(handle);
-    static int ISchemaClass<C_OP_RenderSprites>.Size => 21064;
+    static int ISchemaClass<C_OP_RenderSprites>.Size => 16840;
     static string? ISchemaClass<C_OP_RenderSprites>.ClassName => null;
 
 
@@ -72,8 +72,6 @@ public partial interface C_OP_RenderSprites : CBaseRendererSource2, ISchemaClass
     public ref bool ParticleShadows { get; }
 
     public ref float ShadowDensity { get; }
-
-    public CReplicationParameters ReplicationParameters { get; }
 
 
 }

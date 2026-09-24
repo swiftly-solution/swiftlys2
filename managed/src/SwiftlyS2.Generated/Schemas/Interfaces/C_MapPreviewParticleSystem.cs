@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_MapPreviewParticleSystem : C_ParticleSystem, ISchemaClass<C_MapPreviewParticleSystem>
 {
     static C_MapPreviewParticleSystem ISchemaClass<C_MapPreviewParticleSystem>.From(nint handle) => new C_MapPreviewParticleSystemImpl(handle);
-    static int ISchemaClass<C_MapPreviewParticleSystem>.Size => 5504;
+    static int ISchemaClass<C_MapPreviewParticleSystem>.Size => 5736;
     static string? ISchemaClass<C_MapPreviewParticleSystem>.ClassName => null;
 
 }

@@ -481,6 +481,26 @@ internal partial class CCSPlayerPawnImpl : CCSPlayerPawnBaseImpl, CCSPlayerPawn
             return ref _Handle.AsRef<byte>(_EconGlovesChangedOffset!.Value);
         }
     }
+    private static nint? _CurrentMinimapVolumesOffset;
+
+    public ref CUtlVector<CHandle<CCSMinimapVolume>> CurrentMinimapVolumes
+    {
+        get
+        {
+            _CurrentMinimapVolumesOffset = _CurrentMinimapVolumesOffset ?? Schema.GetOffset(0xC7614AAB0FA7AED8);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CCSMinimapVolume>>>(_CurrentMinimapVolumesOffset!.Value);
+        }
+    }
+    private static nint? _ActiveMinimapVolumeOffset;
+
+    public ref CHandle<CCSMinimapVolume> ActiveMinimapVolume
+    {
+        get
+        {
+            _ActiveMinimapVolumeOffset = _ActiveMinimapVolumeOffset ?? Schema.GetOffset(0xC7614AAB6F673BDA);
+            return ref _Handle.AsRef<CHandle<CCSMinimapVolume>>(_ActiveMinimapVolumeOffset!.Value);
+        }
+    }
     private static nint? _DeathEyeAnglesOffset;
 
     public ref QAngle DeathEyeAngles
@@ -1185,6 +1205,7 @@ internal partial class CCSPlayerPawnImpl : CCSPlayerPawnBaseImpl, CCSPlayerPawn
     public void RagdollServerOriginUpdated() => Schema.Update(_Handle, 0xC7614AAB24991D61);
     public void EconGlovesUpdated() => Schema.Update(_Handle, 0xC7614AAB58DEE8E2);
     public void EconGlovesChangedUpdated() => Schema.Update(_Handle, 0xC7614AAB617F6ACA);
+    public void ActiveMinimapVolumeUpdated() => Schema.Update(_Handle, 0xC7614AAB6F673BDA);
     public void DeathEyeAnglesUpdated() => Schema.Update(_Handle, 0xC7614AAB6F21BE57);
     public void LeftHandedUpdated() => Schema.Update(_Handle, 0xC7614AAB63906F18);
     public void SwitchedHandednessTimeUpdated() => Schema.Update(_Handle, 0xC7614AAB40B8D9FE);

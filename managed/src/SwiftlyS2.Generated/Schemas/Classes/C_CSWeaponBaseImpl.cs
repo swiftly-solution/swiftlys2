@@ -72,26 +72,6 @@ internal partial class C_CSWeaponBaseImpl : C_BasePlayerWeaponImpl, C_CSWeaponBa
             return ref _Handle.AsRef<bool>(_InspectShouldLoopOffset!.Value);
         }
     }
-    private static nint? _CrosshairDistanceOffset;
-
-    public ref float CrosshairDistance
-    {
-        get
-        {
-            _CrosshairDistanceOffset = _CrosshairDistanceOffset ?? Schema.GetOffset(0x2A6697449E42441E);
-            return ref _Handle.AsRef<float>(_CrosshairDistanceOffset!.Value);
-        }
-    }
-    private static nint? _AmmoLastCheckOffset;
-
-    public ref int AmmoLastCheck
-    {
-        get
-        {
-            _AmmoLastCheckOffset = _AmmoLastCheckOffset ?? Schema.GetOffset(0x2A66974423A854BE);
-            return ref _Handle.AsRef<int>(_AmmoLastCheckOffset!.Value);
-        }
-    }
     private static nint? _LastEmptySoundCmdNumOffset;
 
     public ref int LastEmptySoundCmdNum
@@ -327,6 +307,39 @@ internal partial class C_CSWeaponBaseImpl : C_BasePlayerWeaponImpl, C_CSWeaponBa
             _TimeSilencerSwitchCompleteOffset = _TimeSilencerSwitchCompleteOffset ?? Schema.GetOffset(0x2A669744DCB190FA);
             var instance = _TimeSilencerSwitchCompleteInstance ??= new GameTime_tImpl(0);
             instance.DangerousSetHandle(_Handle + _TimeSilencerSwitchCompleteOffset!.Value);
+            return instance;
+        }
+    }
+    private static nint? _StealthyOffset;
+
+    public ref bool Stealthy
+    {
+        get
+        {
+            _StealthyOffset = _StealthyOffset ?? Schema.GetOffset(0x2A669744CEF3793F);
+            return ref _Handle.AsRef<bool>(_StealthyOffset!.Value);
+        }
+    }
+    private static nint? _InSilentReloadSectionOffset;
+
+    public ref bool InSilentReloadSection
+    {
+        get
+        {
+            _InSilentReloadSectionOffset = _InSilentReloadSectionOffset ?? Schema.GetOffset(0x2A6697441E973BF9);
+            return ref _Handle.AsRef<bool>(_InSilentReloadSectionOffset!.Value);
+        }
+    }
+    private static nint? _StealthHoldStartTimeOffset;
+    private GameTime_tImpl? _StealthHoldStartTimeInstance;
+
+    public GameTime_t StealthHoldStartTime
+    {
+        get
+        {
+            _StealthHoldStartTimeOffset = _StealthHoldStartTimeOffset ?? Schema.GetOffset(0x2A66974490F04734);
+            var instance = _StealthHoldStartTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _StealthHoldStartTimeOffset!.Value);
             return instance;
         }
     }

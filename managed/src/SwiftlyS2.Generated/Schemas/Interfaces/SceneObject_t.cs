@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface SceneObject_t : ISchemaClass<SceneObject_t>
 {
     static SceneObject_t ISchemaClass<SceneObject_t>.From(nint handle) => new SceneObject_tImpl(handle);
-    static int ISchemaClass<SceneObject_t>.Size => 136;
+    static int ISchemaClass<SceneObject_t>.Size => 144;
     static string? ISchemaClass<SceneObject_t>.ClassName => null;
 
 
@@ -38,6 +38,8 @@ public partial interface SceneObject_t : ISchemaClass<SceneObject_t>
     public ref int CubeMapPrecomputedHandshake { get; }
 
     public ref int LightProbeVolumePrecomputedHandshake { get; }
+
+    public ref float EmissiveLightingBoost { get; }
 
     public ref CStrongHandle<InfoForResourceTypeCModel> RenderableModel { get; }
 

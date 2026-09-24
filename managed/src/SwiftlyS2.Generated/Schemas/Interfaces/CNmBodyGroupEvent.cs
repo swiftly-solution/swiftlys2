@@ -19,7 +19,7 @@ public partial interface CNmBodyGroupEvent : CNmEvent, ISchemaClass<CNmBodyGroup
 
     public string GroupName { get; set; }
 
-    public ref int GroupValue { get; }
+    public string ChoiceName { get; set; }
 
 
 }

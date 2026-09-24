@@ -11,15 +11,17 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CSndBeatPattern : ISchemaClass<CSndBeatPattern>
 {
     static CSndBeatPattern ISchemaClass<CSndBeatPattern>.From(nint handle) => new CSndBeatPatternImpl(handle);
-    static int ISchemaClass<CSndBeatPattern>.Size => 152;
+    static int ISchemaClass<CSndBeatPattern>.Size => 184;
     static string? ISchemaClass<CSndBeatPattern>.ClassName => null;
 
 
     public string Name { get; set; }
 
-    public ref SndBeatLaunchSyncType_t LaunchSyncType { get; }
-
     public ref float SyncPriority { get; }
+
+    public ref SndBeatSyncStartType_t SyncStartType { get; }
+
+    public ref SndBeatSyncType_t SyncType { get; }
 
     public SndBeatTimeSignature_t TimeSignature { get; }
 
@@ -27,15 +29,11 @@ public partial interface CSndBeatPattern : ISchemaClass<CSndBeatPattern>
 
     public ref bool Looping { get; }
 
-    public ref SndBeatEventType_t LaunchSyncEventType { get; }
-
-    public ref float SyncBeatMult { get; }
-
     public ref SndBeatEventType_t PlayEventType { get; }
 
     public ref float PlayBeatMult { get; }
 
-    public ref SndBeatKeyType_t KeyType { get; }
+    public ref SndBeatKeyType_t PlayKeyType { get; }
 
     public ref CUtlVector<SndBeatEventKeys_t> PatternKeys { get; }
 
@@ -44,6 +42,12 @@ public partial interface CSndBeatPattern : ISchemaClass<CSndBeatPattern>
     public ref CUtlVector<SndBeatEventKeyedSndEvts_t> PatternSndEvts { get; }
 
     public ref CUtlVector<SndBeatEventKeyedMidiNotes_t> PatternMidi { get; }
+
+    public ref SndBeatEventType_t SyncEventType { get; }
+
+    public ref float SyncBeatMult { get; }
+
+    public ref CUtlVector<SndBeatEventKeys_t> SyncPatternKeys { get; }
 
 
 }

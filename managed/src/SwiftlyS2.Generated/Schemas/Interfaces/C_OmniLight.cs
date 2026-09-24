@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OmniLight : C_BarnLight, ISchemaClass<C_OmniLight>
 {
     static C_OmniLight ISchemaClass<C_OmniLight>.From(nint handle) => new C_OmniLightImpl(handle);
-    static int ISchemaClass<C_OmniLight>.Size => 4816;
+    static int ISchemaClass<C_OmniLight>.Size => 5048;
     static string? ISchemaClass<C_OmniLight>.ClassName => null;
 
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_GameLiquidSpill : CParticleFunctionRenderer, ISchemaClass<C_OP_GameLiquidSpill>
 {
     static C_OP_GameLiquidSpill ISchemaClass<C_OP_GameLiquidSpill>.From(nint handle) => new C_OP_GameLiquidSpillImpl(handle);
-    static int ISchemaClass<C_OP_GameLiquidSpill>.Size => 1664;
+    static int ISchemaClass<C_OP_GameLiquidSpill>.Size => 1696;
     static string? ISchemaClass<C_OP_GameLiquidSpill>.ClassName => null;
 
 

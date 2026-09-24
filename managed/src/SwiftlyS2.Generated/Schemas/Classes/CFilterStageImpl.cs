@@ -71,6 +71,16 @@ internal partial class CFilterStageImpl : SchemaClass, CFilterStage
             return ref _Handle.AsRef<VMixFilterSlope_t>(_FilterSlopeOffset!.Value);
         }
     }
+    private static nint? _ChannelSetOffset;
+
+    public ref VMixFilterChannelSet_t ChannelSet
+    {
+        get
+        {
+            _ChannelSetOffset = _ChannelSetOffset ?? Schema.GetOffset(0x38F1B4EA9B251258);
+            return ref _Handle.AsRef<VMixFilterChannelSet_t>(_ChannelSetOffset!.Value);
+        }
+    }
     private static nint? _EnableOffset;
 
     public ref bool Enable

@@ -11,23 +11,17 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CMixTrack : CMixPropertyBase, ISchemaClass<CMixTrack>
 {
     static CMixTrack ISchemaClass<CMixTrack>.From(nint handle) => new CMixTrackImpl(handle);
-    static int ISchemaClass<CMixTrack>.Size => 80;
+    static int ISchemaClass<CMixTrack>.Size => 72;
     static string? ISchemaClass<CMixTrack>.ClassName => null;
 
 
     public ref int Channels { get; }
 
-    public ref int MixDownRule { get; }
+    public ref VMixMixDownRule_t MixDown { get; }
 
-    public string SendOperator { get; set; }
+    public ref VMixSendOperator_t SendOperator { get; }
 
-    public string Send1 { get; set; }
-
-    public string Send2 { get; set; }
-
-    public string Send3 { get; set; }
-
-    public string Send4 { get; set; }
+    public ISchemaUtlStringFixedArray SendNames { get; }
 
 
 }

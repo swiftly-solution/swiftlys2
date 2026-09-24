@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CGeneralSpin : CParticleFunctionOperator, ISchemaClass<CGeneralSpin>
 {
     static CGeneralSpin ISchemaClass<CGeneralSpin>.From(nint handle) => new CGeneralSpinImpl(handle);
-    static int ISchemaClass<CGeneralSpin>.Size => 496;
+    static int ISchemaClass<CGeneralSpin>.Size => 504;
     static string? ISchemaClass<CGeneralSpin>.ClassName => null;
 
 

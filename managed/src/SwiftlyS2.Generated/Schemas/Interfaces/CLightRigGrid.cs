@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CLightRigGrid : ISchemaClass<CLightRigGrid>
 {
     static CLightRigGrid ISchemaClass<CLightRigGrid>.From(nint handle) => new CLightRigGridImpl(handle);
-    static int ISchemaClass<CLightRigGrid>.Size => 5;
+    static int ISchemaClass<CLightRigGrid>.Size => 8;
     static string? ISchemaClass<CLightRigGrid>.ClassName => null;
 
 

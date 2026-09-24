@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_VelocityMatchingForce : CParticleFunctionOperator, ISchemaClass<C_OP_VelocityMatchingForce>
 {
     static C_OP_VelocityMatchingForce ISchemaClass<C_OP_VelocityMatchingForce>.From(nint handle) => new C_OP_VelocityMatchingForceImpl(handle);
-    static int ISchemaClass<C_OP_VelocityMatchingForce>.Size => 496;
+    static int ISchemaClass<C_OP_VelocityMatchingForce>.Size => 504;
     static string? ISchemaClass<C_OP_VelocityMatchingForce>.ClassName => null;
 
 

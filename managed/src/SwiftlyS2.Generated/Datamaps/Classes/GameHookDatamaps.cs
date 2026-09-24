@@ -8,7 +8,6 @@ internal sealed class GameHookDatamaps : IGameHookDatamaps
     internal readonly GameHookDatamapCBarnLight CBarnLightHook = new();
     internal readonly GameHookDatamapCBaseAnimGraph CBaseAnimGraphHook = new();
     internal readonly GameHookDatamapCBaseButton CBaseButtonHook = new();
-    internal readonly GameHookDatamapCBaseCSGrenadeProjectile CBaseCSGrenadeProjectileHook = new();
     internal readonly GameHookDatamapCBaseDoor CBaseDoorHook = new();
     internal readonly GameHookDatamapCBaseEntity CBaseEntityHook = new();
     internal readonly GameHookDatamapCBaseGrenade CBaseGrenadeHook = new();
@@ -19,12 +18,10 @@ internal sealed class GameHookDatamaps : IGameHookDatamaps
     internal readonly GameHookDatamapCBreakableProp CBreakablePropHook = new();
     internal readonly GameHookDatamapCCSPlayerController CCSPlayerControllerHook = new();
     internal readonly GameHookDatamapCCSPlayerPawn CCSPlayerPawnHook = new();
-    internal readonly GameHookDatamapCCSPlayerResource CCSPlayerResourceHook = new();
     internal readonly GameHookDatamapCCSWeaponBase CCSWeaponBaseHook = new();
     internal readonly GameHookDatamapCChicken CChickenHook = new();
     internal readonly GameHookDatamapCColorCorrection CColorCorrectionHook = new();
     internal readonly GameHookDatamapCColorCorrectionVolume CColorCorrectionVolumeHook = new();
-    internal readonly GameHookDatamapCDecoyProjectile CDecoyProjectileHook = new();
     internal readonly GameHookDatamapCDynamicLight CDynamicLightHook = new();
     internal readonly GameHookDatamapCDynamicProp CDynamicPropHook = new();
     internal readonly GameHookDatamapCEntityDissolve CEntityDissolveHook = new();
@@ -33,7 +30,6 @@ internal sealed class GameHookDatamaps : IGameHookDatamaps
     internal readonly GameHookDatamapCEnvLaser CEnvLaserHook = new();
     internal readonly GameHookDatamapCEnvSpark CEnvSparkHook = new();
     internal readonly GameHookDatamapCEnvWind CEnvWindHook = new();
-    internal readonly GameHookDatamapCEnvWindController CEnvWindControllerHook = new();
     internal readonly GameHookDatamapCFishPool CFishPoolHook = new();
     internal readonly GameHookDatamapCFogController CFogControllerHook = new();
     internal readonly GameHookDatamapCFuncMoveLinear CFuncMoveLinearHook = new();
@@ -46,11 +42,8 @@ internal sealed class GameHookDatamaps : IGameHookDatamaps
     internal readonly GameHookDatamapCGenericConstraint CGenericConstraintHook = new();
     internal readonly GameHookDatamapCGunTarget CGunTargetHook = new();
     internal readonly GameHookDatamapCHostage CHostageHook = new();
-    internal readonly GameHookDatamapCHostageRescueZone CHostageRescueZoneHook = new();
-    internal readonly GameHookDatamapCInferno CInfernoHook = new();
     internal readonly GameHookDatamapCInfoSpawnGroupLoadUnload CInfoSpawnGroupLoadUnloadHook = new();
     internal readonly GameHookDatamapCItem CItemHook = new();
-    internal readonly GameHookDatamapCItemDefuser CItemDefuserHook = new();
     internal readonly GameHookDatamapCItemGeneric CItemGenericHook = new();
     internal readonly GameHookDatamapCLogicActiveAutosave CLogicActiveAutosaveHook = new();
     internal readonly GameHookDatamapCLogicDistanceAutosave CLogicDistanceAutosaveHook = new();
@@ -79,14 +72,14 @@ internal sealed class GameHookDatamaps : IGameHookDatamaps
     internal readonly GameHookDatamapCRagdollProp CRagdollPropHook = new();
     internal readonly GameHookDatamapCRevertSaved CRevertSavedHook = new();
     internal readonly GameHookDatamapCScriptedSequence CScriptedSequenceHook = new();
-    internal readonly GameHookDatamapCSmokeGrenadeProjectile CSmokeGrenadeProjectileHook = new();
     internal readonly GameHookDatamapCSoundEventConeEntity CSoundEventConeEntityHook = new();
     internal readonly GameHookDatamapCSoundEventEntity CSoundEventEntityHook = new();
+    internal readonly GameHookDatamapCSoundEventMultiPointEntity CSoundEventMultiPointEntityHook = new();
     internal readonly GameHookDatamapCSoundEventOBBEntity CSoundEventOBBEntityHook = new();
-    internal readonly GameHookDatamapCSoundEventPathCornerEntity CSoundEventPathCornerEntityHook = new();
     internal readonly GameHookDatamapCSoundEventSphereEntity CSoundEventSphereEntityHook = new();
     internal readonly GameHookDatamapCSoundOpvarSetAutoRoomEntity CSoundOpvarSetAutoRoomEntityHook = new();
     internal readonly GameHookDatamapCSoundOpvarSetBoxEntity CSoundOpvarSetBoxEntityHook = new();
+    internal readonly GameHookDatamapCSoundOpvarSetDomeEntity CSoundOpvarSetDomeEntityHook = new();
     internal readonly GameHookDatamapCSoundOpvarSetOBBWindEntity CSoundOpvarSetOBBWindEntityHook = new();
     internal readonly GameHookDatamapCSoundOpvarSetPathCornerEntity CSoundOpvarSetPathCornerEntityHook = new();
     internal readonly GameHookDatamapCSoundOpvarSetPointBase CSoundOpvarSetPointBaseHook = new();
@@ -104,14 +97,12 @@ internal sealed class GameHookDatamaps : IGameHookDatamaps
     internal readonly GameHookDatamapCTriggerSave CTriggerSaveHook = new();
     internal readonly GameHookDatamapCTriggerSndSosOpvar CTriggerSndSosOpvarHook = new();
     internal readonly GameHookDatamapCTriggerSoundscape CTriggerSoundscapeHook = new();
-    internal readonly GameHookDatamapCVoteController CVoteControllerHook = new();
     internal readonly GameHookDatamapCWaterBullet CWaterBulletHook = new();
 
     public IGameHookDatamapCAmbientGeneric CAmbientGeneric => CAmbientGenericHook;
     public IGameHookDatamapCBarnLight CBarnLight => CBarnLightHook;
     public IGameHookDatamapCBaseAnimGraph CBaseAnimGraph => CBaseAnimGraphHook;
     public IGameHookDatamapCBaseButton CBaseButton => CBaseButtonHook;
-    public IGameHookDatamapCBaseCSGrenadeProjectile CBaseCSGrenadeProjectile => CBaseCSGrenadeProjectileHook;
     public IGameHookDatamapCBaseDoor CBaseDoor => CBaseDoorHook;
     public IGameHookDatamapCBaseEntity CBaseEntity => CBaseEntityHook;
     public IGameHookDatamapCBaseGrenade CBaseGrenade => CBaseGrenadeHook;
@@ -122,12 +113,10 @@ internal sealed class GameHookDatamaps : IGameHookDatamaps
     public IGameHookDatamapCBreakableProp CBreakableProp => CBreakablePropHook;
     public IGameHookDatamapCCSPlayerController CCSPlayerController => CCSPlayerControllerHook;
     public IGameHookDatamapCCSPlayerPawn CCSPlayerPawn => CCSPlayerPawnHook;
-    public IGameHookDatamapCCSPlayerResource CCSPlayerResource => CCSPlayerResourceHook;
     public IGameHookDatamapCCSWeaponBase CCSWeaponBase => CCSWeaponBaseHook;
     public IGameHookDatamapCChicken CChicken => CChickenHook;
     public IGameHookDatamapCColorCorrection CColorCorrection => CColorCorrectionHook;
     public IGameHookDatamapCColorCorrectionVolume CColorCorrectionVolume => CColorCorrectionVolumeHook;
-    public IGameHookDatamapCDecoyProjectile CDecoyProjectile => CDecoyProjectileHook;
     public IGameHookDatamapCDynamicLight CDynamicLight => CDynamicLightHook;
     public IGameHookDatamapCDynamicProp CDynamicProp => CDynamicPropHook;
     public IGameHookDatamapCEntityDissolve CEntityDissolve => CEntityDissolveHook;
@@ -136,7 +125,6 @@ internal sealed class GameHookDatamaps : IGameHookDatamaps
     public IGameHookDatamapCEnvLaser CEnvLaser => CEnvLaserHook;
     public IGameHookDatamapCEnvSpark CEnvSpark => CEnvSparkHook;
     public IGameHookDatamapCEnvWind CEnvWind => CEnvWindHook;
-    public IGameHookDatamapCEnvWindController CEnvWindController => CEnvWindControllerHook;
     public IGameHookDatamapCFishPool CFishPool => CFishPoolHook;
     public IGameHookDatamapCFogController CFogController => CFogControllerHook;
     public IGameHookDatamapCFuncMoveLinear CFuncMoveLinear => CFuncMoveLinearHook;
@@ -149,11 +137,8 @@ internal sealed class GameHookDatamaps : IGameHookDatamaps
     public IGameHookDatamapCGenericConstraint CGenericConstraint => CGenericConstraintHook;
     public IGameHookDatamapCGunTarget CGunTarget => CGunTargetHook;
     public IGameHookDatamapCHostage CHostage => CHostageHook;
-    public IGameHookDatamapCHostageRescueZone CHostageRescueZone => CHostageRescueZoneHook;
-    public IGameHookDatamapCInferno CInferno => CInfernoHook;
     public IGameHookDatamapCInfoSpawnGroupLoadUnload CInfoSpawnGroupLoadUnload => CInfoSpawnGroupLoadUnloadHook;
     public IGameHookDatamapCItem CItem => CItemHook;
-    public IGameHookDatamapCItemDefuser CItemDefuser => CItemDefuserHook;
     public IGameHookDatamapCItemGeneric CItemGeneric => CItemGenericHook;
     public IGameHookDatamapCLogicActiveAutosave CLogicActiveAutosave => CLogicActiveAutosaveHook;
     public IGameHookDatamapCLogicDistanceAutosave CLogicDistanceAutosave => CLogicDistanceAutosaveHook;
@@ -182,14 +167,14 @@ internal sealed class GameHookDatamaps : IGameHookDatamaps
     public IGameHookDatamapCRagdollProp CRagdollProp => CRagdollPropHook;
     public IGameHookDatamapCRevertSaved CRevertSaved => CRevertSavedHook;
     public IGameHookDatamapCScriptedSequence CScriptedSequence => CScriptedSequenceHook;
-    public IGameHookDatamapCSmokeGrenadeProjectile CSmokeGrenadeProjectile => CSmokeGrenadeProjectileHook;
     public IGameHookDatamapCSoundEventConeEntity CSoundEventConeEntity => CSoundEventConeEntityHook;
     public IGameHookDatamapCSoundEventEntity CSoundEventEntity => CSoundEventEntityHook;
+    public IGameHookDatamapCSoundEventMultiPointEntity CSoundEventMultiPointEntity => CSoundEventMultiPointEntityHook;
     public IGameHookDatamapCSoundEventOBBEntity CSoundEventOBBEntity => CSoundEventOBBEntityHook;
-    public IGameHookDatamapCSoundEventPathCornerEntity CSoundEventPathCornerEntity => CSoundEventPathCornerEntityHook;
     public IGameHookDatamapCSoundEventSphereEntity CSoundEventSphereEntity => CSoundEventSphereEntityHook;
     public IGameHookDatamapCSoundOpvarSetAutoRoomEntity CSoundOpvarSetAutoRoomEntity => CSoundOpvarSetAutoRoomEntityHook;
     public IGameHookDatamapCSoundOpvarSetBoxEntity CSoundOpvarSetBoxEntity => CSoundOpvarSetBoxEntityHook;
+    public IGameHookDatamapCSoundOpvarSetDomeEntity CSoundOpvarSetDomeEntity => CSoundOpvarSetDomeEntityHook;
     public IGameHookDatamapCSoundOpvarSetOBBWindEntity CSoundOpvarSetOBBWindEntity => CSoundOpvarSetOBBWindEntityHook;
     public IGameHookDatamapCSoundOpvarSetPathCornerEntity CSoundOpvarSetPathCornerEntity => CSoundOpvarSetPathCornerEntityHook;
     public IGameHookDatamapCSoundOpvarSetPointBase CSoundOpvarSetPointBase => CSoundOpvarSetPointBaseHook;
@@ -207,7 +192,6 @@ internal sealed class GameHookDatamaps : IGameHookDatamaps
     public IGameHookDatamapCTriggerSave CTriggerSave => CTriggerSaveHook;
     public IGameHookDatamapCTriggerSndSosOpvar CTriggerSndSosOpvar => CTriggerSndSosOpvarHook;
     public IGameHookDatamapCTriggerSoundscape CTriggerSoundscape => CTriggerSoundscapeHook;
-    public IGameHookDatamapCVoteController CVoteController => CVoteControllerHook;
     public IGameHookDatamapCWaterBullet CWaterBullet => CWaterBulletHook;
 
     internal void UnregisterAllListeners()
@@ -216,7 +200,6 @@ internal sealed class GameHookDatamaps : IGameHookDatamaps
         CBarnLightHook.UnregisterListeners();
         CBaseAnimGraphHook.UnregisterListeners();
         CBaseButtonHook.UnregisterListeners();
-        CBaseCSGrenadeProjectileHook.UnregisterListeners();
         CBaseDoorHook.UnregisterListeners();
         CBaseEntityHook.UnregisterListeners();
         CBaseGrenadeHook.UnregisterListeners();
@@ -227,12 +210,10 @@ internal sealed class GameHookDatamaps : IGameHookDatamaps
         CBreakablePropHook.UnregisterListeners();
         CCSPlayerControllerHook.UnregisterListeners();
         CCSPlayerPawnHook.UnregisterListeners();
-        CCSPlayerResourceHook.UnregisterListeners();
         CCSWeaponBaseHook.UnregisterListeners();
         CChickenHook.UnregisterListeners();
         CColorCorrectionHook.UnregisterListeners();
         CColorCorrectionVolumeHook.UnregisterListeners();
-        CDecoyProjectileHook.UnregisterListeners();
         CDynamicLightHook.UnregisterListeners();
         CDynamicPropHook.UnregisterListeners();
         CEntityDissolveHook.UnregisterListeners();
@@ -241,7 +222,6 @@ internal sealed class GameHookDatamaps : IGameHookDatamaps
         CEnvLaserHook.UnregisterListeners();
         CEnvSparkHook.UnregisterListeners();
         CEnvWindHook.UnregisterListeners();
-        CEnvWindControllerHook.UnregisterListeners();
         CFishPoolHook.UnregisterListeners();
         CFogControllerHook.UnregisterListeners();
         CFuncMoveLinearHook.UnregisterListeners();
@@ -254,11 +234,8 @@ internal sealed class GameHookDatamaps : IGameHookDatamaps
         CGenericConstraintHook.UnregisterListeners();
         CGunTargetHook.UnregisterListeners();
         CHostageHook.UnregisterListeners();
-        CHostageRescueZoneHook.UnregisterListeners();
-        CInfernoHook.UnregisterListeners();
         CInfoSpawnGroupLoadUnloadHook.UnregisterListeners();
         CItemHook.UnregisterListeners();
-        CItemDefuserHook.UnregisterListeners();
         CItemGenericHook.UnregisterListeners();
         CLogicActiveAutosaveHook.UnregisterListeners();
         CLogicDistanceAutosaveHook.UnregisterListeners();
@@ -287,14 +264,14 @@ internal sealed class GameHookDatamaps : IGameHookDatamaps
         CRagdollPropHook.UnregisterListeners();
         CRevertSavedHook.UnregisterListeners();
         CScriptedSequenceHook.UnregisterListeners();
-        CSmokeGrenadeProjectileHook.UnregisterListeners();
         CSoundEventConeEntityHook.UnregisterListeners();
         CSoundEventEntityHook.UnregisterListeners();
+        CSoundEventMultiPointEntityHook.UnregisterListeners();
         CSoundEventOBBEntityHook.UnregisterListeners();
-        CSoundEventPathCornerEntityHook.UnregisterListeners();
         CSoundEventSphereEntityHook.UnregisterListeners();
         CSoundOpvarSetAutoRoomEntityHook.UnregisterListeners();
         CSoundOpvarSetBoxEntityHook.UnregisterListeners();
+        CSoundOpvarSetDomeEntityHook.UnregisterListeners();
         CSoundOpvarSetOBBWindEntityHook.UnregisterListeners();
         CSoundOpvarSetPathCornerEntityHook.UnregisterListeners();
         CSoundOpvarSetPointBaseHook.UnregisterListeners();
@@ -312,7 +289,6 @@ internal sealed class GameHookDatamaps : IGameHookDatamaps
         CTriggerSaveHook.UnregisterListeners();
         CTriggerSndSosOpvarHook.UnregisterListeners();
         CTriggerSoundscapeHook.UnregisterListeners();
-        CVoteControllerHook.UnregisterListeners();
         CWaterBulletHook.UnregisterListeners();
     }
 }

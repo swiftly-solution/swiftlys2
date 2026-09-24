@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_SetPerChildControlPointFromAttribute : CParticleFunctionOperator, ISchemaClass<C_OP_SetPerChildControlPointFromAttribute>
 {
     static C_OP_SetPerChildControlPointFromAttribute ISchemaClass<C_OP_SetPerChildControlPointFromAttribute>.From(nint handle) => new C_OP_SetPerChildControlPointFromAttributeImpl(handle);
-    static int ISchemaClass<C_OP_SetPerChildControlPointFromAttribute>.Size => 504;
+    static int ISchemaClass<C_OP_SetPerChildControlPointFromAttribute>.Size => 512;
     static string? ISchemaClass<C_OP_SetPerChildControlPointFromAttribute>.ClassName => null;
 
 

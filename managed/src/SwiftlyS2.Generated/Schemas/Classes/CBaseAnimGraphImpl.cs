@@ -178,6 +178,16 @@ internal partial class CBaseAnimGraphImpl : CBaseModelEntityImpl, CBaseAnimGraph
             return ref _Handle.AsRef<bool>(_RagdollClientSideOffset!.Value);
         }
     }
+    private static nint? _ShouldUpdateTransformationsOffset;
+
+    public ref bool ShouldUpdateTransformations
+    {
+        get
+        {
+            _ShouldUpdateTransformationsOffset = _ShouldUpdateTransformationsOffset ?? Schema.GetOffset(0xE501DB1E3B811E57);
+            return ref _Handle.AsRef<bool>(_ShouldUpdateTransformationsOffset!.Value);
+        }
+    }
     private static nint? _XParentedRagdollRootInEntitySpaceOffset;
 
     public ref CTransform XParentedRagdollRootInEntitySpace
@@ -196,4 +206,5 @@ internal partial class CBaseAnimGraphImpl : CBaseModelEntityImpl, CBaseAnimGraph
     public void RagdollPoseUpdated() => Schema.Update(_Handle, 0xE501DB1E49F01F45);
     public void RagdollEnabledUpdated() => Schema.Update(_Handle, 0xE501DB1E03EA7599);
     public void RagdollClientSideUpdated() => Schema.Update(_Handle, 0xE501DB1EB6A5159C);
+    public void ShouldUpdateTransformationsUpdated() => Schema.Update(_Handle, 0xE501DB1E3B811E57);
 }

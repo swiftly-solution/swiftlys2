@@ -29,5 +29,31 @@ internal partial class CVMixSubgraphSwitchProcessorDescImpl : CVMixBaseProcessor
             return instance;
         }
     }
+    private static nint? _ParamEffectNameOffset;
+    private CVMixParameterEffectNameImpl? _ParamEffectNameInstance;
+
+    public CVMixParameterEffectName ParamEffectName
+    {
+        get
+        {
+            _ParamEffectNameOffset = _ParamEffectNameOffset ?? Schema.GetOffset(0x2DD364BDCC86B95C);
+            var instance = _ParamEffectNameInstance ??= new CVMixParameterEffectNameImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamEffectNameOffset!.Value);
+            return instance;
+        }
+    }
+    private static nint? _ParamSelectionIndexOffset;
+    private CVMixParameterFloatImpl? _ParamSelectionIndexInstance;
+
+    public CVMixParameterFloat ParamSelectionIndex
+    {
+        get
+        {
+            _ParamSelectionIndexOffset = _ParamSelectionIndexOffset ?? Schema.GetOffset(0x2DD364BD04066A40);
+            var instance = _ParamSelectionIndexInstance ??= new CVMixParameterFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamSelectionIndexOffset!.Value);
+            return instance;
+        }
+    }
 
 }

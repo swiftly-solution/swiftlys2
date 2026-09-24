@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface AI_BaseNPC_DebugSnapshotData_t : DebugSnapshotBaseStructuredData_t, ISchemaClass<AI_BaseNPC_DebugSnapshotData_t>
 {
     static AI_BaseNPC_DebugSnapshotData_t ISchemaClass<AI_BaseNPC_DebugSnapshotData_t>.From(nint handle) => new AI_BaseNPC_DebugSnapshotData_tImpl(handle);
-    static int ISchemaClass<AI_BaseNPC_DebugSnapshotData_t>.Size => 376;
+    static int ISchemaClass<AI_BaseNPC_DebugSnapshotData_t>.Size => 392;
     static string? ISchemaClass<AI_BaseNPC_DebugSnapshotData_t>.ClassName => null;
 
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_KeychainModule : C_CS2WeaponModuleBase, ISchemaClass<C_KeychainModule>
 {
     static C_KeychainModule ISchemaClass<C_KeychainModule>.From(nint handle) => new C_KeychainModuleImpl(handle);
-    static int ISchemaClass<C_KeychainModule>.Size => 4496;
+    static int ISchemaClass<C_KeychainModule>.Size => 4728;
     static string? ISchemaClass<C_KeychainModule>.ClassName => null;
 
 

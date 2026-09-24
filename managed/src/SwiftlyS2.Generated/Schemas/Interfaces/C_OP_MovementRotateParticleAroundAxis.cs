@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_MovementRotateParticleAroundAxis : CParticleFunctionOperator, ISchemaClass<C_OP_MovementRotateParticleAroundAxis>
 {
     static C_OP_MovementRotateParticleAroundAxis ISchemaClass<C_OP_MovementRotateParticleAroundAxis>.From(nint handle) => new C_OP_MovementRotateParticleAroundAxisImpl(handle);
-    static int ISchemaClass<C_OP_MovementRotateParticleAroundAxis>.Size => 2672;
+    static int ISchemaClass<C_OP_MovementRotateParticleAroundAxis>.Size => 2720;
     static string? ISchemaClass<C_OP_MovementRotateParticleAroundAxis>.ClassName => null;
 
 

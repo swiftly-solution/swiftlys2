@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmClipDocEvent_EntityAttribute : CNmClipDocEvent, ISchemaClass<CNmClipDocEvent_EntityAttribute>
 {
     static CNmClipDocEvent_EntityAttribute ISchemaClass<CNmClipDocEvent_EntityAttribute>.From(nint handle) => new CNmClipDocEvent_EntityAttributeImpl(handle);
-    static int ISchemaClass<CNmClipDocEvent_EntityAttribute>.Size => 104;
+    static int ISchemaClass<CNmClipDocEvent_EntityAttribute>.Size => 112;
     static string? ISchemaClass<CNmClipDocEvent_EntityAttribute>.ClassName => null;
 
 

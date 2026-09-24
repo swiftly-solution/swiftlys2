@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_LerpToOtherAttribute : CParticleFunctionOperator, ISchemaClass<C_OP_LerpToOtherAttribute>
 {
     static C_OP_LerpToOtherAttribute ISchemaClass<C_OP_LerpToOtherAttribute>.From(nint handle) => new C_OP_LerpToOtherAttributeImpl(handle);
-    static int ISchemaClass<C_OP_LerpToOtherAttribute>.Size => 896;
+    static int ISchemaClass<C_OP_LerpToOtherAttribute>.Size => 912;
     static string? ISchemaClass<C_OP_LerpToOtherAttribute>.ClassName => null;
 
 

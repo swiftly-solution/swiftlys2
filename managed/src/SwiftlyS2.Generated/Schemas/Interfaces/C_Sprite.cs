@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_Sprite : C_BaseModelEntity, ISchemaClass<C_Sprite>
 {
     static C_Sprite ISchemaClass<C_Sprite>.From(nint handle) => new C_SpriteImpl(handle);
-    static int ISchemaClass<C_Sprite>.Size => 4144;
+    static int ISchemaClass<C_Sprite>.Size => 4376;
     static string? ISchemaClass<C_Sprite>.ClassName => null;
 
 

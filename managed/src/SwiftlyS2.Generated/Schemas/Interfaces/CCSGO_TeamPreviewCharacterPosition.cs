@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CCSGO_TeamPreviewCharacterPosition : CBaseEntity, ISchemaClass<CCSGO_TeamPreviewCharacterPosition>
 {
     static CCSGO_TeamPreviewCharacterPosition ISchemaClass<CCSGO_TeamPreviewCharacterPosition>.From(nint handle) => new CCSGO_TeamPreviewCharacterPositionImpl(handle);
-    static int ISchemaClass<CCSGO_TeamPreviewCharacterPosition>.Size => 3264;
+    static int ISchemaClass<CCSGO_TeamPreviewCharacterPosition>.Size => 5224;
     static string? ISchemaClass<CCSGO_TeamPreviewCharacterPosition>.ClassName => "team_preview_character_position";
 
 
@@ -31,6 +31,8 @@ public partial interface CCSGO_TeamPreviewCharacterPosition : CBaseEntity, ISche
 
     public CEconItemView WeaponItem { get; }
 
+    public CEconItemView PetItem { get; }
+
     public void VariantUpdated();
     public void RandomUpdated();
     public void OrdinalUpdated();
@@ -39,4 +41,5 @@ public partial interface CCSGO_TeamPreviewCharacterPosition : CBaseEntity, ISche
     public void AgentItemUpdated();
     public void GlovesItemUpdated();
     public void WeaponItemUpdated();
+    public void PetItemUpdated();
 }

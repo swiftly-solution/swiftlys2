@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CBaseRendererSource2 : CParticleFunctionRenderer, ISchemaClass<CBaseRendererSource2>
 {
     static CBaseRendererSource2 ISchemaClass<CBaseRendererSource2>.From(nint handle) => new CBaseRendererSource2Impl(handle);
-    static int ISchemaClass<CBaseRendererSource2>.Size => 11760;
+    static int ISchemaClass<CBaseRendererSource2>.Size => 11992;
     static string? ISchemaClass<CBaseRendererSource2>.ClassName => null;
 
 

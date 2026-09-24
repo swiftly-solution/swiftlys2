@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_InterpolateRadius : CParticleFunctionOperator, ISchemaClass<C_OP_InterpolateRadius>
 {
     static C_OP_InterpolateRadius ISchemaClass<C_OP_InterpolateRadius>.From(nint handle) => new C_OP_InterpolateRadiusImpl(handle);
-    static int ISchemaClass<C_OP_InterpolateRadius>.Size => 544;
+    static int ISchemaClass<C_OP_InterpolateRadius>.Size => 560;
     static string? ISchemaClass<C_OP_InterpolateRadius>.ClassName => null;
 
 

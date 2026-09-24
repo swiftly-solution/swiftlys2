@@ -11,11 +11,13 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVMixPitchShiftProcessorDesc : CVMixBaseProcessorDesc, ISchemaClass<CVMixPitchShiftProcessorDesc>
 {
     static CVMixPitchShiftProcessorDesc ISchemaClass<CVMixPitchShiftProcessorDesc>.From(nint handle) => new CVMixPitchShiftProcessorDescImpl(handle);
-    static int ISchemaClass<CVMixPitchShiftProcessorDesc>.Size => 48;
+    static int ISchemaClass<CVMixPitchShiftProcessorDesc>.Size => 64;
     static string? ISchemaClass<CVMixPitchShiftProcessorDesc>.ClassName => null;
 
 
     public VMixPitchShiftDesc_t Desc { get; }
+
+    public CVMixParameterFloat ParamPitchScale { get; }
 
 
 }

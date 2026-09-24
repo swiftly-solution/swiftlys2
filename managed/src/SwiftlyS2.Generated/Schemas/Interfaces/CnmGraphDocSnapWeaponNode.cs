@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CnmGraphDocSnapWeaponNode : CNmGraphDocFlowNode, ISchemaClass<CnmGraphDocSnapWeaponNode>
 {
     static CnmGraphDocSnapWeaponNode ISchemaClass<CnmGraphDocSnapWeaponNode>.From(nint handle) => new CnmGraphDocSnapWeaponNodeImpl(handle);
-    static int ISchemaClass<CnmGraphDocSnapWeaponNode>.Size => 256;
+    static int ISchemaClass<CnmGraphDocSnapWeaponNode>.Size => 264;
     static string? ISchemaClass<CnmGraphDocSnapWeaponNode>.ClassName => null;
 
 }

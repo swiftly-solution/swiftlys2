@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPulseGraphInstance_TestDomain : CBasePulseGraphInstance, ISchemaClass<CPulseGraphInstance_TestDomain>
 {
     static CPulseGraphInstance_TestDomain ISchemaClass<CPulseGraphInstance_TestDomain>.From(nint handle) => new CPulseGraphInstance_TestDomainImpl(handle);
-    static int ISchemaClass<CPulseGraphInstance_TestDomain>.Size => 344;
+    static int ISchemaClass<CPulseGraphInstance_TestDomain>.Size => 208;
     static string? ISchemaClass<CPulseGraphInstance_TestDomain>.ClassName => null;
 
 

@@ -8,16 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CVMixVsndInput : CVMixInputBase, ISchemaClass<CVMixVsndInput>
+public partial interface CVMixVsndInput : ISchemaClass<CVMixVsndInput>
 {
     static CVMixVsndInput ISchemaClass<CVMixVsndInput>.From(nint handle) => new CVMixVsndInputImpl(handle);
-    static int ISchemaClass<CVMixVsndInput>.Size => 32;
+    static int ISchemaClass<CVMixVsndInput>.Size => 24;
     static string? ISchemaClass<CVMixVsndInput>.ClassName => null;
 
 
     public string DefaultValue { get; set; }
-
-    public ref int Processor { get; }
 
 
 }

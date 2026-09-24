@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_LateUpdatedAnimating : CBaseAnimGraph, ISchemaClass<C_LateUpdatedAnimating>
 {
     static C_LateUpdatedAnimating ISchemaClass<C_LateUpdatedAnimating>.From(nint handle) => new C_LateUpdatedAnimatingImpl(handle);
-    static int ISchemaClass<C_LateUpdatedAnimating>.Size => 4672;
+    static int ISchemaClass<C_LateUpdatedAnimating>.Size => 4896;
     static string? ISchemaClass<C_LateUpdatedAnimating>.ClassName => null;
 
 }
