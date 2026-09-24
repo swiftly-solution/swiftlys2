@@ -48,15 +48,24 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '10.0.x'
-    - name: Build managed
+    - name: Build managed (Linux)
       run: |
         cd managed
-        dotnet build -c Release -p:Version=${{ needs.versioning.outputs.semVer }} -p:InformationalVersion=${{ needs.versioning.outputs.informationalVersion }} -p:FileVersion=${{ needs.versioning.outputs.semVer }}
-    - name: Upload plugin as artifact
+        dotnet build -c Release -p:SW2Platform=Linux -p:BaseOutputPath=build/linux/ -p:Version=${{ needs.versioning.outputs.semVer }} -p:InformationalVersion=${{ needs.versioning.outputs.informationalVersion }} -p:FileVersion=${{ needs.versioning.outputs.semVer }}
+    - name: Build managed (Windows)
+      run: |
+        cd managed
+        dotnet build -c Release -p:SW2Platform=Windows -p:BaseOutputPath=build/windows/ -p:Version=${{ needs.versioning.outputs.semVer }} -p:InformationalVersion=${{ needs.versioning.outputs.informationalVersion }} -p:FileVersion=${{ needs.versioning.outputs.semVer }}
+    - name: Upload plugin as artifact (Linux)
       uses: actions/upload-artifact@v4
       with:
-        name: swiftlys2_managed
-        path: managed/build/Release
+        name: swiftlys2_managed_linux
+        path: managed/build/linux/Release
+    - name: Upload plugin as artifact (Windows)
+      uses: actions/upload-artifact@v4
+      with:
+        name: swiftlys2_managed_windows
+        path: managed/build/windows/Release
   linux_core:
     needs: versioning
     runs-on: ubuntu-latest
@@ -246,8 +255,13 @@ jobs:
     - name: Download artifacts
       uses: actions/download-artifact@v4
       with:
-        name: swiftlys2_managed
-        path: ./managed
+        name: swiftlys2_managed_linux
+        path: ./managed-linux
+    - name: Download artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: swiftlys2_managed_windows
+        path: ./managed-windows
     - name: Download runtimes
       run: |
         mkdir -p ./linux-runtimes
@@ -264,9 +278,9 @@ jobs:
       
     - name: Create package
       run: |
-        ls -la ./managed
-        cp -r managed/SwiftlyS2 ${{ env.LINUX_FOLDER }}/swiftlys2/bin/managed
-        cp -r managed/SwiftlyS2 ${{ env.WINDOWS_FOLDER }}/swiftlys2/bin/managed
+        ls -la ./managed-linux ./managed-windows
+        cp -r managed-linux/SwiftlyS2 ${{ env.LINUX_FOLDER }}/swiftlys2/bin/managed
+        cp -r managed-windows/SwiftlyS2 ${{ env.WINDOWS_FOLDER }}/swiftlys2/bin/managed
 
         cp -r ${{ env.LINUX_FOLDER }}-loader/* ${{ env.LINUX_FOLDER }}/
         cp -r ${{ env.WINDOWS_FOLDER }}-loader/* ${{ env.WINDOWS_FOLDER }}/

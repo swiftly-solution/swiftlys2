@@ -35,6 +35,23 @@
     <DebugType>portable</DebugType>
   </PropertyGroup>
 
+  <!-- Auto-detect host OS. Override with -p:SW2Platform=Windows or -p:SW2Platform=Linux -->
+  <PropertyGroup Condition="'$(SW2Platform)' == '' And $([MSBuild]::IsOSPlatform('Linux'))">
+    <SW2Platform>Linux</SW2Platform>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(SW2Platform)' == '' And $([MSBuild]::IsOSPlatform('Windows'))">
+    <SW2Platform>Windows</SW2Platform>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(SW2Platform)' == 'Linux'">
+    <DefineConstants>$(DefineConstants);LINUX</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(SW2Platform)' == 'Windows'">
+    <DefineConstants>$(DefineConstants);WINDOWS</DefineConstants>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Include="icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
