@@ -35,7 +35,6 @@
 #include <api/monitor/logger/logger.h>
 #include <api/monitor/crashreporter/crashreporter.h>
 
-#include <api/network/sounds/soundevents.h>
 #include <api/network/database/manager.h>
 #include <api/network/netmessages/netmessages.h>
 
@@ -77,7 +76,6 @@ extern IEventManager* g_pGameEventManager;
 extern IScriptingAPI* g_pScriptingAPI;
 extern IPlayerManager* g_pPlayerManager;
 extern IVoiceManager* g_pVoiceManager;
-extern ISoundEventManager* g_pSoundEventManager;
 extern IDatabaseManager* g_pDatabaseManager;
 extern ITranslations* g_pTranslations;
 extern IServerCommands* g_pServerCommands;
@@ -93,7 +91,6 @@ extern std::string g_sGameFolder;
 extern IFileSystem* g_pGameFileSystem;
 extern IVEngineServer2* g_pGameEngine;
 extern IGameEventSystem* g_pGameEventSystem;
-extern void* g_pGameSoundSystem;
 extern INetworkMessages* g_pGameNetworkMessages;
 extern INetworkSystem* g_pGameNetworkSystem;
 extern INetworkServerService* g_pGameNetworkServerService;

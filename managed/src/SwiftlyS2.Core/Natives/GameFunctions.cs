@@ -1,5 +1,3 @@
-using System.Text;
-using System.Buffers;
 using System.Runtime.InteropServices;
 using Spectre.Console;
 using SwiftlyS2.Shared.Natives;
@@ -11,6 +9,7 @@ namespace SwiftlyS2.Core.Natives;
 internal static class GameFunctions
 {
     private static nint entitySystemPtr = 0;
+    private static nint soundSystemPtr = 0;
     private static readonly bool IsWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 
     public static unsafe delegate* unmanaged< CTakeDamageInfo*, nint, nint, nint, Vector*, Vector*, float, int, int, void*, void > pCTakeDamageInfo_Constructor;
@@ -54,6 +53,7 @@ internal static class GameFunctions
     private static readonly Lazy<int> _getViewVectorsOffset = CreateOffset("CGameRules::GetViewVectors");
     private static readonly Lazy<int> _goToIntermissionOffset = CreateOffset("CGameRules::GoToIntermission");
     private static readonly Lazy<int> _changeTeamOffset = CreateOffset("CCSPlayerController::ChangeTeam");
+    private static readonly Lazy<int> _takeGuidOffset = CreateOffset("CSoundSystem::TakeGuid");
 
     public static int TeleportOffset => _teleportOffset.Value;
     public static int CommitSuicideOffset => _commitSuicideOffset.Value;
@@ -70,6 +70,7 @@ internal static class GameFunctions
     public static int GetViewVectorsOffset => _getViewVectorsOffset.Value;
     public static int GoToIntermissionOffset => _goToIntermissionOffset.Value;
     public static int ChangeTeamOffset => _changeTeamOffset.Value;
+    public static int TakeGuidOffset => _takeGuidOffset.Value;
 
     private static void CheckPtr( nint ptr, string name )
     {
@@ -925,6 +926,35 @@ internal static class GameFunctions
             AnsiConsole.WriteException(e);
         }
     }
+    public static unsafe uint CSoundSystem_TakeGuid()
+    {
+        try
+        {
+            if (soundSystemPtr == 0)
+                soundSystemPtr = NativeMemoryHelpers.FetchInterfaceByName("SoundSystem001");
+
+            CheckPtr(soundSystemPtr, nameof(soundSystemPtr));
+
+            uint guid;
+            if (IsWindows)
+            {
+                var pTakeGuid = (delegate* unmanaged< nint, uint*, void >)GetVirtualFunction(soundSystemPtr, TakeGuidOffset);
+                pTakeGuid(soundSystemPtr, &guid);
+            }
+            else
+            {
+                var pTakeGuid = (delegate* unmanaged< nint, uint >)GetVirtualFunction(soundSystemPtr, TakeGuidOffset);
+                guid = pTakeGuid(soundSystemPtr);
+            }
+            return guid;
+        }
+        catch (Exception e)
+        {
+            AnsiConsole.WriteException(e);
+            return 0;
+        }
+    }
+
     public static void CCSCustomHudLayout_SetInputCaptureEnabled( nint pThis, int playerId, bool enabled )
     {
         try
