@@ -32,7 +32,6 @@
 #include <monitor/logger/logger.h>
 #include <monitor/crashreporter/crashreporter.h>
 
-#include <network/sounds/soundevents.h>
 #include <network/database/manager.h>
 #include <network/netmessages/netmessages.h>
 
@@ -58,7 +57,6 @@ CEventManager g_GameEventManager;
 CScriptingAPI g_ScriptingAPI;
 CPlayerManager g_PlayerManager;
 CVoiceManager g_VoiceManager;
-CSoundEventManager g_SoundEventManager;
 CDatabaseManager g_DatabaseManager;
 CTranslations g_Translations;
 CServerCommands g_ServerCommands;
@@ -78,7 +76,6 @@ IEventManager* g_pGameEventManager = (IEventManager*)&g_GameEventManager;
 IScriptingAPI* g_pScriptingAPI = (IScriptingAPI*)&g_ScriptingAPI;
 IPlayerManager* g_pPlayerManager = (IPlayerManager*)&g_PlayerManager;
 IVoiceManager* g_pVoiceManager = (IVoiceManager*)&g_VoiceManager;
-ISoundEventManager* g_pSoundEventManager = (ISoundEventManager*)&g_SoundEventManager;
 IDatabaseManager* g_pDatabaseManager = (IDatabaseManager*)&g_DatabaseManager;
 ITranslations* g_pTranslations = (ITranslations*)&g_Translations;
 IServerCommands* g_pServerCommands = (IServerCommands*)&g_ServerCommands;
@@ -88,7 +85,6 @@ IConsoleOutput* g_pConsoleOutput = (IConsoleOutput*)&g_ConsoleOutput;
 IFileSystem* g_pGameFileSystem = nullptr;
 IVEngineServer2* g_pGameEngine = nullptr;
 IGameEventSystem* g_pGameEventSystem = nullptr;
-void* g_pGameSoundSystem = nullptr;
 INetworkMessages* g_pGameNetworkMessages = nullptr;
 INetworkSystem* g_pGameNetworkSystem = nullptr;
 INetworkServerService* g_pGameNetworkServerService = nullptr;

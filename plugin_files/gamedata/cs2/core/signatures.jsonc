@@ -68,7 +68,7 @@
     "CTakeDamageInfo::Constructor": {
         "lib": "server",
         "windows": "48 89 5C 24 ? 48 89 6C 24 ? 48 89 74 24 ? 48 89 7C 24 ? 41 56 48 83 EC 60 45 33 F6",
-        "linux": "F3 0F 12 C0 55 49 89 F2"
+        "linux": "49 BB 00 00 00 00 00 00 80 3F 55"
     },
     // Search for "No conversion from %s to float now\n", the function should be the last one being called
     "CEntityIOOutput::FireOutputInternal": {
@@ -98,7 +98,7 @@
     // Search for "CBaseEntity::TakeDamageOld"
     "CBaseEntity::TakeDamage": {
         "lib": "server",
-        "windows": "40 55 53 56 57 41 54 48 8D 6C 24 ? 48 81 EC ? ? ? ?",
+        "windows": "40 55 53 56 57 41 54 48 8D 6C 24 ? 48 81 EC 70 01 00 00",
         "linux": "55 66 0F EF C0 48 89 E5 41 57 41 56 41 55 49 89 FD 31 FF"
     },
     // "Error - cannot add bots after game is over."

@@ -99,6 +99,16 @@ internal partial class C_SmokeGrenadeProjectileImpl : C_BaseCSGrenadeProjectileI
             return ref _Handle.AsRef<int>(_VoxelUpdateOffset!.Value);
         }
     }
+    private static nint? _SmokeLightProbeRegenOffset;
+
+    public ref byte SmokeLightProbeRegen
+    {
+        get
+        {
+            _SmokeLightProbeRegenOffset = _SmokeLightProbeRegenOffset ?? Schema.GetOffset(0x4E65F325A0D17A81);
+            return ref _Handle.AsRef<byte>(_SmokeLightProbeRegenOffset!.Value);
+        }
+    }
     private static nint? _SmokeVolumeDataReceivedOffset;
 
     public ref bool SmokeVolumeDataReceived

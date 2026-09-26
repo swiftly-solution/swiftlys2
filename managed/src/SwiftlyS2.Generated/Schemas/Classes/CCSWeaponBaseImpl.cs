@@ -357,6 +357,16 @@ internal partial class CCSWeaponBaseImpl : CBasePlayerWeaponImpl, CCSWeaponBase
             return ref _Handle.AsRef<bool>(_SilentReloadStatCountedOffset!.Value);
         }
     }
+    private static nint? _SilentReloadStatPendingOffset;
+
+    public ref bool SilentReloadStatPending
+    {
+        get
+        {
+            _SilentReloadStatPendingOffset = _SilentReloadStatPendingOffset ?? Schema.GetOffset(0x8102BA5115203E2A);
+            return ref _Handle.AsRef<bool>(_SilentReloadStatPendingOffset!.Value);
+        }
+    }
     private static nint? _StealthHoldStartTimeOffset;
     private GameTime_tImpl? _StealthHoldStartTimeInstance;
 
@@ -368,6 +378,16 @@ internal partial class CCSWeaponBaseImpl : CBasePlayerWeaponImpl, CCSWeaponBase
             var instance = _StealthHoldStartTimeInstance ??= new GameTime_tImpl(0);
             instance.DangerousSetHandle(_Handle + _StealthHoldStartTimeOffset!.Value);
             return instance;
+        }
+    }
+    private static nint? _ReloadHeldSinceStartOffset;
+
+    public ref bool ReloadHeldSinceStart
+    {
+        get
+        {
+            _ReloadHeldSinceStartOffset = _ReloadHeldSinceStartOffset ?? Schema.GetOffset(0x8102BA51CBA649D1);
+            return ref _Handle.AsRef<bool>(_ReloadHeldSinceStartOffset!.Value);
         }
     }
     private static nint? _WeaponActionPlaybackRateOffset;
@@ -645,6 +665,7 @@ internal partial class CCSWeaponBaseImpl : CBasePlayerWeaponImpl, CCSWeaponBase
     public void TimeSilencerSwitchCompleteUpdated() => Schema.Update(_Handle, 0x8102BA51DCB190FA);
     public void StealthyUpdated() => Schema.Update(_Handle, 0x8102BA51CEF3793F);
     public void StealthHoldStartTimeUpdated() => Schema.Update(_Handle, 0x8102BA5190F04734);
+    public void ReloadHeldSinceStartUpdated() => Schema.Update(_Handle, 0x8102BA51CBA649D1);
     public void WeaponActionPlaybackRateUpdated() => Schema.Update(_Handle, 0x8102BA5114C24AAE);
     public void OriginalTeamNumberUpdated() => Schema.Update(_Handle, 0x8102BA515DB51597);
     public void MostRecentTeamNumberUpdated() => Schema.Update(_Handle, 0x8102BA51D818821C);
