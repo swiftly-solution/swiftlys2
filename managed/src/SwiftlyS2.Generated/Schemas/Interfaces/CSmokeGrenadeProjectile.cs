@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CSmokeGrenadeProjectile : CBaseCSGrenadeProjectile, ISchemaClass<CSmokeGrenadeProjectile>
 {
     static CSmokeGrenadeProjectile ISchemaClass<CSmokeGrenadeProjectile>.From(nint handle) => new CSmokeGrenadeProjectileImpl(handle);
-    static int ISchemaClass<CSmokeGrenadeProjectile>.Size => 11840;
+    static int ISchemaClass<CSmokeGrenadeProjectile>.Size => 11856;
     static string? ISchemaClass<CSmokeGrenadeProjectile>.ClassName => "smokegrenade_projectile";
 
 
@@ -31,6 +31,8 @@ public partial interface CSmokeGrenadeProjectile : CBaseCSGrenadeProjectile, ISc
 
     public ref int VoxelUpdate { get; }
 
+    public ref byte SmokeLightProbeRegen { get; }
+
     public GameTime_t LastBounce { get; }
 
     public GameTime_t FllastSimulationTime { get; }
@@ -47,4 +49,5 @@ public partial interface CSmokeGrenadeProjectile : CBaseCSGrenadeProjectile, ISc
     public void VoxelFrameDataUpdated();
     public void VoxelFrameDataSizeUpdated();
     public void VoxelUpdateUpdated();
+    public void SmokeLightProbeRegenUpdated();
 }

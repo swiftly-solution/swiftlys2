@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_DecoyGrenade : C_BaseCSGrenade, ISchemaClass<C_DecoyGrenade>
 {
     static C_DecoyGrenade ISchemaClass<C_DecoyGrenade>.From(nint handle) => new C_DecoyGrenadeImpl(handle);
-    static int ISchemaClass<C_DecoyGrenade>.Size => 8144;
+    static int ISchemaClass<C_DecoyGrenade>.Size => 8160;
     static string? ISchemaClass<C_DecoyGrenade>.ClassName => null;
 
 }

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_Item_Healthshot : C_WeaponBaseItem, ISchemaClass<C_Item_Healthshot>
 {
     static C_Item_Healthshot ISchemaClass<C_Item_Healthshot>.From(nint handle) => new C_Item_HealthshotImpl(handle);
-    static int ISchemaClass<C_Item_Healthshot>.Size => 7968;
+    static int ISchemaClass<C_Item_Healthshot>.Size => 7984;
     static string? ISchemaClass<C_Item_Healthshot>.ClassName => null;
 
 }

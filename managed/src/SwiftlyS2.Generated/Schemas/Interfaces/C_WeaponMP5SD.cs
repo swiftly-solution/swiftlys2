@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_WeaponMP5SD : C_CSWeaponBaseGun, ISchemaClass<C_WeaponMP5SD>
 {
     static C_WeaponMP5SD ISchemaClass<C_WeaponMP5SD>.From(nint handle) => new C_WeaponMP5SDImpl(handle);
-    static int ISchemaClass<C_WeaponMP5SD>.Size => 8000;
+    static int ISchemaClass<C_WeaponMP5SD>.Size => 8016;
     static string? ISchemaClass<C_WeaponMP5SD>.ClassName => null;
 
 }

@@ -42,6 +42,22 @@ internal class CMsgSource2NetworkFlowQualityImpl : TypedProtobuf<CMsgSource2Netw
     { get => Accessor.GetUInt32("netframes_size_p95"); set => Accessor.SetUInt32("netframes_size_p95", value); }
     public uint NetframesSizeP99
     { get => Accessor.GetUInt32("netframes_size_p99"); set => Accessor.SetUInt32("netframes_size_p99", value); }
+    public uint NetframesSizeUncompressedP50
+    { get => Accessor.GetUInt32("netframes_size_uncompressed_p50"); set => Accessor.SetUInt32("netframes_size_uncompressed_p50", value); }
+    public uint NetframesSizeUncompressedP95
+    { get => Accessor.GetUInt32("netframes_size_uncompressed_p95"); set => Accessor.SetUInt32("netframes_size_uncompressed_p95", value); }
+    public uint NetframesSizeUncompressedP99
+    { get => Accessor.GetUInt32("netframes_size_uncompressed_p99"); set => Accessor.SetUInt32("netframes_size_uncompressed_p99", value); }
+    public uint NetframesSizeUncompressedMax
+    { get => Accessor.GetUInt32("netframes_size_uncompressed_max"); set => Accessor.SetUInt32("netframes_size_uncompressed_max", value); }
+    public uint NetframesMsgsP50
+    { get => Accessor.GetUInt32("netframes_msgs_p50"); set => Accessor.SetUInt32("netframes_msgs_p50", value); }
+    public uint NetframesMsgsP95
+    { get => Accessor.GetUInt32("netframes_msgs_p95"); set => Accessor.SetUInt32("netframes_msgs_p95", value); }
+    public uint NetframesMsgsP99
+    { get => Accessor.GetUInt32("netframes_msgs_p99"); set => Accessor.SetUInt32("netframes_msgs_p99", value); }
+    public uint NetframesMsgsMax
+    { get => Accessor.GetUInt32("netframes_msgs_max"); set => Accessor.SetUInt32("netframes_msgs_max", value); }
     public uint TicksTotal
     { get => Accessor.GetUInt32("ticks_total"); set => Accessor.SetUInt32("ticks_total", value); }
     public uint TicksGood

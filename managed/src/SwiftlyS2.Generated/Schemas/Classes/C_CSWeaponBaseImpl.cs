@@ -343,6 +343,16 @@ internal partial class C_CSWeaponBaseImpl : C_BasePlayerWeaponImpl, C_CSWeaponBa
             return instance;
         }
     }
+    private static nint? _ReloadHeldSinceStartOffset;
+
+    public ref bool ReloadHeldSinceStart
+    {
+        get
+        {
+            _ReloadHeldSinceStartOffset = _ReloadHeldSinceStartOffset ?? Schema.GetOffset(0x2A669744CBA649D1);
+            return ref _Handle.AsRef<bool>(_ReloadHeldSinceStartOffset!.Value);
+        }
+    }
     private static nint? _WeaponActionPlaybackRateOffset;
 
     public ref float WeaponActionPlaybackRate

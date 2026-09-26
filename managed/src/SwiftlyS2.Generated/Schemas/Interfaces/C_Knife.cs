@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_Knife : C_CSWeaponBase, ISchemaClass<C_Knife>
 {
     static C_Knife ISchemaClass<C_Knife>.From(nint handle) => new C_KnifeImpl(handle);
-    static int ISchemaClass<C_Knife>.Size => 7968;
+    static int ISchemaClass<C_Knife>.Size => 7984;
     static string? ISchemaClass<C_Knife>.ClassName => null;
 
 

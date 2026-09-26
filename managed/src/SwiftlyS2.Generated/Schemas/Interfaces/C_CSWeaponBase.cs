@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_CSWeaponBase : C_BasePlayerWeapon, ISchemaClass<C_CSWeaponBase>
 {
     static C_CSWeaponBase ISchemaClass<C_CSWeaponBase>.From(nint handle) => new C_CSWeaponBaseImpl(handle);
-    static int ISchemaClass<C_CSWeaponBase>.Size => 7952;
+    static int ISchemaClass<C_CSWeaponBase>.Size => 7968;
     static string? ISchemaClass<C_CSWeaponBase>.ClassName => null;
 
 
@@ -74,6 +74,8 @@ public partial interface C_CSWeaponBase : C_BasePlayerWeapon, ISchemaClass<C_CSW
     public ref bool InSilentReloadSection { get; }
 
     public GameTime_t StealthHoldStartTime { get; }
+
+    public ref bool ReloadHeldSinceStart { get; }
 
     public ref float WeaponActionPlaybackRate { get; }
 

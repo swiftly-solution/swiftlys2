@@ -96,6 +96,16 @@ internal partial class CSmokeGrenadeProjectileImpl : CBaseCSGrenadeProjectileImp
             return ref _Handle.AsRef<int>(_VoxelUpdateOffset!.Value);
         }
     }
+    private static nint? _SmokeLightProbeRegenOffset;
+
+    public ref byte SmokeLightProbeRegen
+    {
+        get
+        {
+            _SmokeLightProbeRegenOffset = _SmokeLightProbeRegenOffset ?? Schema.GetOffset(0xE31DC1B8A0D17A81);
+            return ref _Handle.AsRef<byte>(_SmokeLightProbeRegenOffset!.Value);
+        }
+    }
     private static nint? _LastBounceOffset;
     private GameTime_tImpl? _LastBounceInstance;
 
@@ -151,4 +161,5 @@ internal partial class CSmokeGrenadeProjectileImpl : CBaseCSGrenadeProjectileImp
     public void VoxelFrameDataUpdated() => Schema.Update(_Handle, 0xE31DC1B8E854C6C4);
     public void VoxelFrameDataSizeUpdated() => Schema.Update(_Handle, 0xE31DC1B8369FBFD9);
     public void VoxelUpdateUpdated() => Schema.Update(_Handle, 0xE31DC1B8EE30DA3A);
+    public void SmokeLightProbeRegenUpdated() => Schema.Update(_Handle, 0xE31DC1B8A0D17A81);
 }
