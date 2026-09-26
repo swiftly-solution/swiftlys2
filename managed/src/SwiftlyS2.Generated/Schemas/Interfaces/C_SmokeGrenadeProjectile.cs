@@ -32,6 +32,8 @@ public partial interface C_SmokeGrenadeProjectile : C_BaseCSGrenadeProjectile, I
 
     public ref int VoxelUpdate { get; }
 
+    public ref byte SmokeLightProbeRegen { get; }
+
     public ref bool SmokeVolumeDataReceived { get; }
 
     public ref bool SmokeEffectSpawned { get; }

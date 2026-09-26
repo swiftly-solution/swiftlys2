@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_C4 : C_CSWeaponBase, ISchemaClass<C_C4>
 {
     static C_C4 ISchemaClass<C_C4>.From(nint handle) => new C_C4Impl(handle);
-    static int ISchemaClass<C_C4>.Size => 8016;
+    static int ISchemaClass<C_C4>.Size => 8032;
     static string? ISchemaClass<C_C4>.ClassName => null;
 
 

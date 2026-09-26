@@ -79,6 +79,14 @@ message CMsgSource2NetworkFlowQuality {
 	optional uint32 netframes_size_exceeds_mtu = 34;
 	optional uint32 netframes_size_p95 = 35;
 	optional uint32 netframes_size_p99 = 36;
+	optional uint32 netframes_size_uncompressed_p50 = 12;
+	optional uint32 netframes_size_uncompressed_p95 = 13;
+	optional uint32 netframes_size_uncompressed_p99 = 14;
+	optional uint32 netframes_size_uncompressed_max = 15;
+	optional uint32 netframes_msgs_p50 = 16;
+	optional uint32 netframes_msgs_p95 = 17;
+	optional uint32 netframes_msgs_p99 = 18;
+	optional uint32 netframes_msgs_max = 19;
 	optional uint32 ticks_total = 40;
 	optional uint32 ticks_good = 41;
 	optional uint32 ticks_good_almost_late = 42;
