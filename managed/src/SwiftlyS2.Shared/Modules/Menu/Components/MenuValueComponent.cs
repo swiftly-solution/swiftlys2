@@ -1,5 +1,3 @@
-using SwiftlyS2.Shared.Menu;
-
 using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Shared.Menu.Components;

@@ -10,10 +10,12 @@ internal sealed class MenuBuilder(
     MenuActionRegistry actions,
     MenuRendererRegistry renderers,
     MenuKeybindResolver resolver,
+    MenuRendererResolver rendererResolver,
     IMenuActionRegistry ownedActions ) : IMenuBuilder
 {
     private readonly List<MenuActionDescriptor> declaredActions = [];
     private readonly List<IMenuKeybindSource> keybindSources = [];
+    private readonly List<IMenuRendererSource> rendererSources = [];
     private readonly List<IMenuComponent> header = [];
     private readonly List<IMenuComponent> body = [];
     private readonly List<IMenuComponent> footer = [];
@@ -25,6 +27,12 @@ internal sealed class MenuBuilder(
     public IMenuBuilder WithRenderer( string rendererId )
     {
         this.rendererId = rendererId;
+        return this;
+    }
+
+    public IMenuBuilder WithRendererSource( IMenuRendererSource source )
+    {
+        rendererSources.Add(source);
         return this;
     }
 
@@ -87,10 +95,12 @@ internal sealed class MenuBuilder(
 
     public IMenu Build()
     {
-        if (!renderers.TryGet(rendererId, out var renderer))
+        var resolvedRendererId = rendererResolver.Resolve(menuId, rendererId, rendererSources);
+
+        if (!renderers.TryGet(resolvedRendererId, out var renderer))
         {
             throw new InvalidOperationException(
-                $"Menu '{menuId}' requested renderer '{rendererId}', which is not registered. Registered renderers: {string.Join(", ", renderers.RendererIds)}.");
+                $"Menu '{menuId}' requested renderer '{resolvedRendererId}', which is not registered. Registered renderers: {string.Join(", ", renderers.RendererIds)}.");
         }
 
         foreach (var descriptor in declaredActions)

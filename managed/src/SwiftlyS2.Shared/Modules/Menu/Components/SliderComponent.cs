@@ -1,5 +1,3 @@
-using SwiftlyS2.Shared.Menu;
-
 using System.Globalization;
 
 namespace SwiftlyS2.Shared.Menu.Components;

@@ -11,6 +11,7 @@ internal sealed class MenuService : IMenuService, IDisposable
     private readonly MenuActionRegistry actionRegistry;
     private readonly MenuRendererRegistry rendererRegistry;
     private readonly MenuKeybindResolver resolver;
+    private readonly MenuRendererResolver rendererResolver;
     private readonly OwnedMenuActionRegistry ownedActions;
     private readonly OwnedMenuRendererRegistry ownedRenderers;
 
@@ -21,13 +22,15 @@ internal sealed class MenuService : IMenuService, IDisposable
         MenuRuntime runtime,
         MenuActionRegistry actionRegistry,
         MenuRendererRegistry rendererRegistry,
-        MenuKeybindResolver resolver )
+        MenuKeybindResolver resolver,
+        MenuRendererResolver rendererResolver )
     {
         this.context = context;
         this.runtime = runtime;
         this.actionRegistry = actionRegistry;
         this.rendererRegistry = rendererRegistry;
         this.resolver = resolver;
+        this.rendererResolver = rendererResolver;
 
         ownedActions = new OwnedMenuActionRegistry(actionRegistry, context.Name);
         ownedRenderers = new OwnedMenuRendererRegistry(rendererRegistry, context.Name);
@@ -46,7 +49,7 @@ internal sealed class MenuService : IMenuService, IDisposable
             throw new ArgumentException("A menu id is required.", nameof(id));
         }
 
-        return new MenuBuilder(id, context.Name, runtime, actionRegistry, rendererRegistry, resolver, ownedActions);
+        return new MenuBuilder(id, context.Name, runtime, actionRegistry, rendererRegistry, resolver, rendererResolver, ownedActions);
     }
 
     public IMenuSession? GetSession( IPlayer player ) => runtime.GetSession(player.PlayerID);

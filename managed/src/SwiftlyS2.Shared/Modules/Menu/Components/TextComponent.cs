@@ -1,5 +1,3 @@
-using SwiftlyS2.Shared.Menu;
-
 namespace SwiftlyS2.Shared.Menu.Components;
 
 /// <summary>
@@ -28,7 +26,7 @@ public class TextComponent : MenuComponentBase
     /// <inheritdoc/>
     /// <remarks>
     /// A label can hold the selection like any other body entry, so a menu scrolls past it rather
-    /// than skipping over it, but it never overrides <see cref="HandleActionAsync"/> so activating it
+    /// than skipping over it, but it never overrides <see cref="MenuComponentBase.HandleActionAsync"/> so activating it
     /// is always a no-op.
     /// </remarks>
     public override bool IsFocusable => true;

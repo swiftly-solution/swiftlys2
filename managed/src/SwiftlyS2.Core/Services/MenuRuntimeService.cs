@@ -23,6 +23,8 @@ internal sealed class MenuRuntimeService : IDisposable
         MenuActionRegistry actions,
         MenuKeybindResolver resolver,
         GlobalMenuKeybindSource globalKeybinds,
+        MenuRendererResolver rendererResolver,
+        GlobalMenuRendererSource globalRendererSource,
         MenuRendererRegistry renderers,
         CenterHtmlMenuRenderer centerHtmlRenderer,
         ChatMenuRenderer chatMenuRenderer,
@@ -34,6 +36,7 @@ internal sealed class MenuRuntimeService : IDisposable
 
         RegisterCoreActions(actions);
         resolver.AddSource(globalKeybinds);
+        rendererResolver.AddSource(globalRendererSource);
         _ = renderers.Register(centerHtmlRenderer, CoreOwner);
         _ = renderers.Register(chatMenuRenderer, CoreOwner);
         _ = renderers.RegisterComponentRenderer(chatColoredTextComponentRenderer, CoreOwner);

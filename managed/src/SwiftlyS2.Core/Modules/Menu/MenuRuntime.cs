@@ -1,7 +1,6 @@
 using System.Collections.Concurrent;
 using Microsoft.Extensions.Logging;
 using SwiftlyS2.Shared.Menu;
-using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Core.Menu;
 

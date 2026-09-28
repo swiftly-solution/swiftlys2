@@ -17,6 +17,17 @@ public interface IMenuBuilder
     public IMenuBuilder WithRenderer( string rendererId );
 
     /// <summary>
+    /// Adds a source of renderer overrides for this menu.
+    /// </summary>
+    /// <param name="source">The source to consult.</param>
+    /// <returns>This builder.</returns>
+    /// <remarks>
+    /// Use this to enforce a renderer from a plugin's own configuration. The server-wide
+    /// configuration still wins, since it registers at a higher priority.
+    /// </remarks>
+    public IMenuBuilder WithRendererSource( IMenuRendererSource source );
+
+    /// <summary>
     /// Sets the menu returned to when this one closes.
     /// </summary>
     /// <param name="parent">The parent menu.</param>

@@ -1,6 +1,3 @@
-using SwiftlyS2.Shared;
-using SwiftlyS2.Shared.Menu;
-
 namespace SwiftlyS2.Shared.Menu.Components;
 
 /// <summary>

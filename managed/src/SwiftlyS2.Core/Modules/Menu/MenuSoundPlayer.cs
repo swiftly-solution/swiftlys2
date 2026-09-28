@@ -26,6 +26,7 @@ internal sealed class MenuSoundPlayer( IConfiguration configuration, ILogger<Men
             MenuSound.Scroll => ("Scroll", "UI.ContractType"),
             MenuSound.Select => ("Select", "Vote.Cast.Yes"),
             MenuSound.Fail => ("Fail", "Vote.Cast.No"),
+            MenuSound.Exit => ("Exit", "Vote.Failed"),
             _ => ("Exit", "Vote.Failed")
         };
 

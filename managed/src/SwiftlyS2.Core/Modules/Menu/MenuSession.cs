@@ -8,24 +8,49 @@ internal sealed class MenuSession( MenuInstance menu, IPlayer player, MenuChatCa
     private readonly Dictionary<(string ComponentId, Type StateType), object> componentState = [];
     private readonly Lock stateLock = new();
 
+    private bool isOpen = true;
+    private bool isDirty = true;
+    private int pageOffset;
+    private int focusedIndex;
+
     public IPlayer Player { get; } = player;
 
     public IMenu Menu => menu;
 
     public MenuInstance Instance => menu;
 
-    public bool IsOpen { get; internal set; } = true;
+    public bool IsOpen {
+        get { lock (stateLock) { return isOpen; } }
+        internal set { lock (stateLock) { isOpen = value; } }
+    }
 
-    public bool IsDirty { get; private set; } = true;
+    public bool IsDirty {
+        get { lock (stateLock) { return isDirty; } }
+    }
 
-    public int PageOffset { get; internal set; }
+    public int PageOffset {
+        get { lock (stateLock) { return pageOffset; } }
+        internal set { lock (stateLock) { pageOffset = value; } }
+    }
 
-    public int FocusedIndex { get; private set; }
+    public int FocusedIndex {
+        get { lock (stateLock) { return focusedIndex; } }
+        private set { lock (stateLock) { focusedIndex = value; } }
+    }
 
     public IMenuComponent? FocusedComponent {
         get {
             var focusables = menu.GetFocusables(this);
-            return focusables.Count == 0 ? null : focusables[ClampIndex(FocusedIndex, focusables.Count)];
+
+            if (focusables.Count == 0)
+            {
+                return null;
+            }
+
+            lock (stateLock)
+            {
+                return focusables[ClampIndex(focusedIndex, focusables.Count)];
+            }
         }
     }
 
@@ -38,15 +63,19 @@ internal sealed class MenuSession( MenuInstance menu, IPlayer player, MenuChatCa
             return false;
         }
 
-        var current = ClampIndex(FocusedIndex, focusables.Count);
-        var next = ((current + delta) % focusables.Count + focusables.Count) % focusables.Count;
-
-        if (next == current)
+        lock (stateLock)
         {
-            return false;
+            var current = ClampIndex(focusedIndex, focusables.Count);
+            var next = ((current + delta) % focusables.Count + focusables.Count) % focusables.Count;
+
+            if (next == current)
+            {
+                return false;
+            }
+
+            focusedIndex = next;
         }
 
-        FocusedIndex = next;
         Invalidate();
         menu.NotifyFocusChanged(this);
         return true;
@@ -56,12 +85,16 @@ internal sealed class MenuSession( MenuInstance menu, IPlayer player, MenuChatCa
     {
         var focusables = menu.GetFocusables(this);
 
-        if (index < 0 || index >= focusables.Count || index == FocusedIndex)
+        lock (stateLock)
         {
-            return false;
+            if (index < 0 || index >= focusables.Count || index == focusedIndex)
+            {
+                return false;
+            }
+
+            focusedIndex = index;
         }
 
-        FocusedIndex = index;
         Invalidate();
         menu.NotifyFocusChanged(this);
         return true;
@@ -99,7 +132,10 @@ internal sealed class MenuSession( MenuInstance menu, IPlayer player, MenuChatCa
 
     public void Invalidate()
     {
-        IsDirty = true;
+        lock (stateLock)
+        {
+            isDirty = true;
+        }
     }
 
     public void Close()
@@ -109,17 +145,24 @@ internal sealed class MenuSession( MenuInstance menu, IPlayer player, MenuChatCa
 
     internal void ClearDirty()
     {
-        IsDirty = false;
+        lock (stateLock)
+        {
+            isDirty = false;
+        }
     }
 
     internal void ClampFocus()
     {
         var focusables = menu.GetFocusables(this);
-        var clamped = focusables.Count == 0 ? 0 : ClampIndex(FocusedIndex, focusables.Count);
 
-        if (clamped != FocusedIndex)
+        lock (stateLock)
         {
-            FocusedIndex = clamped;
+            var clamped = focusables.Count == 0 ? 0 : ClampIndex(focusedIndex, focusables.Count);
+
+            if (clamped != focusedIndex)
+            {
+                focusedIndex = clamped;
+            }
         }
     }
 
