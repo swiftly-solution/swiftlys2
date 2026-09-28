@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_ExternalWindForce : CParticleFunctionForce, ISchemaClass<C_OP_ExternalWindForce>
 {
     static C_OP_ExternalWindForce ISchemaClass<C_OP_ExternalWindForce>.From(nint handle) => new C_OP_ExternalWindForceImpl(handle);
-    static int ISchemaClass<C_OP_ExternalWindForce>.Size => 8120;
+    static int ISchemaClass<C_OP_ExternalWindForce>.Size => 8272;
     static string? ISchemaClass<C_OP_ExternalWindForce>.ClassName => null;
 
 

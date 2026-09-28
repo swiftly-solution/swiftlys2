@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_FuncMover : C_BaseToggle, ISchemaClass<C_FuncMover>
 {
     static C_FuncMover ISchemaClass<C_FuncMover>.From(nint handle) => new C_FuncMoverImpl(handle);
-    static int ISchemaClass<C_FuncMover>.Size => 4016;
+    static int ISchemaClass<C_FuncMover>.Size => 4248;
     static string? ISchemaClass<C_FuncMover>.ClassName => null;
 
 }

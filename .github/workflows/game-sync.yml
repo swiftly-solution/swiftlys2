@@ -1,70 +1,148 @@
-name: Sync Update
+name: Game Sync
 
 on:
-  schedule:
-    - cron: "*/10 * * * *"
+  repository_dispatch:
+    types:
+      - cs2-dump-updated
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
-  check-updates:
-    permissions:
-      contents: write
-      pull-requests: write
+  game-sync:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout GameTracking-CS2
-        uses: actions/checkout@v3
+      - name: Checkout CS2-Dumps
+        uses: actions/checkout@v5
         with:
-          repository: SteamDatabase/GameTracking-CS2
-          path: GameTracking-CS2
-      - name: Checkout SwiftlyS2
-        uses: actions/checkout@v3
+          repository: Swiftly-Tracker/CS2-Dumps
+          ref: main
+          path: CS2-Dumps
+
+      - name: Checkout codegen
+        uses: actions/checkout@v5
+        with:
+          repository: swiftly-solution/codegen
+          ref: main
+          path: codegen
+
+      - name: Checkout SwiftlyS2 beta
+        uses: actions/checkout@v5
         with:
           repository: swiftly-solution/swiftlys2
+          ref: beta
           path: swiftlys2
-      - name: Install Python
-        uses: actions/setup-python@v4
+          token: ${{ secrets.SWIFTLYCHAN_PAT }}
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
         with:
-          python-version: '3.13'
-      - name: Install dependencies
-        run: pip install proto_schema_parser tqdm wordninja
-      - name: Sync Protobufs
+          dotnet-version: "10.0.x"
+
+      - name: Update existing protobufs
+        shell: bash
         run: |
           mkdir -p swiftlys2/protobufs/cs2
           for file in $(find swiftlys2/protobufs/cs2 -name "*.proto"); do
             filename=$(basename "$file")
-            found_file=$(find GameTracking-CS2/Protobufs -name "$filename" | head -n 1)
-            if [ -n "$found_file" ]; then
+            found_file=$(find CS2-Dumps/protobufs/all -name "$filename" | head -n 1)
+            if [[ -n "$found_file" ]]; then
               cp "$found_file" "swiftlys2/protobufs/cs2/$filename"
               echo "Copied $filename"
             else
-              echo "File $filename not found in GameTracking-CS2"
+              echo "File $filename not found in CS2-Dumps"
             fi
           done
-      - name: Run Protobuf Generator
-        run: cd swiftlys2/generator/protobuf_generator && python generate.py
-      # - name: Run Game Events Generator
-        # run: cd swiftlys2/generator/gameevent_generator && python generate.py
-      - name: Check for changes
-        id: git-check
-        working-directory: swiftlys2
+
+      - name: Generate CS2 code
+        working-directory: codegen
+        run: >-
+          dotnet run --configuration Release
+          --project SwiftlyS2.Codegen.csproj --
+          --game cs2
+          --gameevents
+          --protobufs-path ../swiftlys2/protobufs/cs2
+          --datamaps
+          --schemas
+
+      - name: Verify generated output
+        shell: bash
         run: |
-          if git diff --quiet; then
-            echo "changed=false" >> $GITHUB_OUTPUT
+          for component in GameEvents Datamaps Protobufs Schemas; do
+            output="codegen/output/src/SwiftlyS2.Generated/$component"
+            if [[ ! -d "$output" ]]; then
+              echo "Expected generated output was not created: $output" >&2
+              exit 1
+            fi
+          done
+
+      - name: Sync generated code
+        shell: bash
+        run: |
+          for component in GameEvents Datamaps Protobufs Schemas; do
+            source="codegen/output/src/SwiftlyS2.Generated/$component/"
+            destination="swiftlys2/managed/src/SwiftlyS2.Generated/$component/"
+            mkdir -p "$destination"
+            rsync --archive --delete "$source" "$destination"
+          done
+
+      - name: Check for changes
+        id: changes
+        working-directory: swiftlys2
+        shell: bash
+        run: |
+          if [[ -n "$(git status --porcelain --untracked-files=all)" ]]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
           else
-            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "changed=false" >> "$GITHUB_OUTPUT"
           fi
-      - name: Create Pull Request
-        if: steps.git-check.outputs.changed == 'true'
+
+      - name: Build pull request metadata
+        if: steps.changes.outputs.changed == 'true'
+        id: metadata
+        shell: bash
+        run: |
+          timestamp="$(date -u +'%Y%m%d-%H%M%S|%Y-%m-%d %H:%M:%S UTC|%Y-%m-%d')"
+          timestamp_details="${timestamp#*|}"
+          echo "branch_timestamp=${timestamp%%|*}" >> "$GITHUB_OUTPUT"
+          echo "commit_timestamp=${timestamp_details%%|*}" >> "$GITHUB_OUTPUT"
+          title_date="${timestamp##*|}"
+
+          if [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" ]]; then
+            echo "title=[CS2][Manual] Game Sync Update ($title_date)" >> "$GITHUB_OUTPUT"
+            echo "trigger=Manual workflow dispatch" >> "$GITHUB_OUTPUT"
+          else
+            echo "title=[CS2] Game Sync Update ($title_date)" >> "$GITHUB_OUTPUT"
+            echo "trigger=CS2-Dumps update workflow" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create pull request
+        if: steps.changes.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v7
         with:
-          token: ${{ secrets.GIT_PAT }}
-          commit-message: "Syncing changes automatically to SwiftlyS2 for today's CS2 Update."
-          branch: update/cs2-sync
-          delete-branch: true
-          author: ${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>
-          title: "[CS2] Sync Update"
-          body: This PR syncs the changes for the latest CS2 update. Please review the changes and merge if everything looks good.
-          labels: update, automation
-          draft: false
+          token: ${{ secrets.SWIFTLYCHAN_PAT }}
           path: swiftlys2
+          base: beta
+          branch: auto-update/${{ steps.metadata.outputs.branch_timestamp }}
+          delete-branch: true
+          commit-message: "chore(game-sync): update generated CS2 code (${{ steps.metadata.outputs.commit_timestamp }})"
+          author: swiftlychan <swiftlychan@swiftlys2.net>
+          committer: swiftlychan <swiftlychan@swiftlys2.net>
+          title: ${{ steps.metadata.outputs.title }}
+          body: |
+            This PR updates generated CS2 code using the latest CS2-Dumps data.
+
+            Trigger: ${{ steps.metadata.outputs.trigger }}
+            Workflow run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          labels: |
+            update
+            automation
+          add-paths: |
+            protobufs/cs2
+            managed/src/SwiftlyS2.Generated/GameEvents
+            managed/src/SwiftlyS2.Generated/Datamaps
+            managed/src/SwiftlyS2.Generated/Protobufs
+            managed/src/SwiftlyS2.Generated/Schemas
+          draft: false

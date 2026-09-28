@@ -37,6 +37,7 @@ public:
 
     virtual uint64_t AddConsoleListener(std::function<void(const std::string&)> callback) override;
     virtual void RemoveConsoleListener(uint64_t id) override;
+    virtual void DispatchQueuedListeners() override;
 };
 
 #endif

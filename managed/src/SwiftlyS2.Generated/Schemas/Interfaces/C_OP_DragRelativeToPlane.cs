@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_DragRelativeToPlane : CParticleFunctionOperator, ISchemaClass<C_OP_DragRelativeToPlane>
 {
     static C_OP_DragRelativeToPlane ISchemaClass<C_OP_DragRelativeToPlane>.From(nint handle) => new C_OP_DragRelativeToPlaneImpl(handle);
-    static int ISchemaClass<C_OP_DragRelativeToPlane>.Size => 2944;
+    static int ISchemaClass<C_OP_DragRelativeToPlane>.Size => 3000;
     static string? ISchemaClass<C_OP_DragRelativeToPlane>.ClassName => null;
 
 

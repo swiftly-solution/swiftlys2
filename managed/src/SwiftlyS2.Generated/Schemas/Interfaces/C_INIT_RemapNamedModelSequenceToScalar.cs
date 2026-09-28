@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_RemapNamedModelSequenceToScalar : C_INIT_RemapNamedModelElementToScalar, ISchemaClass<C_INIT_RemapNamedModelSequenceToScalar>
 {
     static C_INIT_RemapNamedModelSequenceToScalar ISchemaClass<C_INIT_RemapNamedModelSequenceToScalar>.From(nint handle) => new C_INIT_RemapNamedModelSequenceToScalarImpl(handle);
-    static int ISchemaClass<C_INIT_RemapNamedModelSequenceToScalar>.Size => 552;
+    static int ISchemaClass<C_INIT_RemapNamedModelSequenceToScalar>.Size => 560;
     static string? ISchemaClass<C_INIT_RemapNamedModelSequenceToScalar>.ClassName => null;
 
 }

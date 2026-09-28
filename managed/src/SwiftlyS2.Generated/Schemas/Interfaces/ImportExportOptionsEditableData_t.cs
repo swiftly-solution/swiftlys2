@@ -11,13 +11,17 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface ImportExportOptionsEditableData_t : ISchemaClass<ImportExportOptionsEditableData_t>
 {
     static ImportExportOptionsEditableData_t ISchemaClass<ImportExportOptionsEditableData_t>.From(nint handle) => new ImportExportOptionsEditableData_tImpl(handle);
-    static int ISchemaClass<ImportExportOptionsEditableData_t>.Size => 16;
+    static int ISchemaClass<ImportExportOptionsEditableData_t>.Size => 20;
     static string? ISchemaClass<ImportExportOptionsEditableData_t>.ClassName => null;
 
 
     public ref bool ExportProps { get; }
 
     public ref bool ExportHidden { get; }
+
+    public ref bool ExportBones { get; }
+
+    public ref bool ExportSkinning { get; }
 
     public ref bool ExportFbxEmbedTextures { get; }
 

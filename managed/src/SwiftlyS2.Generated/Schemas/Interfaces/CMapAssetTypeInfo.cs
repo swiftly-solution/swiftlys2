@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CMapAssetTypeInfo : CResourceAssetTypeInfo, ISchemaClass<CMapAssetTypeInfo>
 {
     static CMapAssetTypeInfo ISchemaClass<CMapAssetTypeInfo>.From(nint handle) => new CMapAssetTypeInfoImpl(handle);
-    static int ISchemaClass<CMapAssetTypeInfo>.Size => 328;
+    static int ISchemaClass<CMapAssetTypeInfo>.Size => 336;
     static string? ISchemaClass<CMapAssetTypeInfo>.ClassName => null;
 
 }

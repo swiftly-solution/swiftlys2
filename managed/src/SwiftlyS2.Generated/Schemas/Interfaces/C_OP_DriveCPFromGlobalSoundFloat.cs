@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_DriveCPFromGlobalSoundFloat : CParticleFunctionPreEmission, ISchemaClass<C_OP_DriveCPFromGlobalSoundFloat>
 {
     static C_OP_DriveCPFromGlobalSoundFloat ISchemaClass<C_OP_DriveCPFromGlobalSoundFloat>.From(nint handle) => new C_OP_DriveCPFromGlobalSoundFloatImpl(handle);
-    static int ISchemaClass<C_OP_DriveCPFromGlobalSoundFloat>.Size => 536;
+    static int ISchemaClass<C_OP_DriveCPFromGlobalSoundFloat>.Size => 544;
     static string? ISchemaClass<C_OP_DriveCPFromGlobalSoundFloat>.ClassName => null;
 
 

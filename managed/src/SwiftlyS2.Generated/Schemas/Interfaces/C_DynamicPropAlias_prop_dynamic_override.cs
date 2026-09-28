@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_DynamicPropAlias_prop_dynamic_override : C_DynamicProp, ISchemaClass<C_DynamicPropAlias_prop_dynamic_override>
 {
     static C_DynamicPropAlias_prop_dynamic_override ISchemaClass<C_DynamicPropAlias_prop_dynamic_override>.From(nint handle) => new C_DynamicPropAlias_prop_dynamic_overrideImpl(handle);
-    static int ISchemaClass<C_DynamicPropAlias_prop_dynamic_override>.Size => 5056;
+    static int ISchemaClass<C_DynamicPropAlias_prop_dynamic_override>.Size => 5296;
     static string? ISchemaClass<C_DynamicPropAlias_prop_dynamic_override>.ClassName => null;
 
 }

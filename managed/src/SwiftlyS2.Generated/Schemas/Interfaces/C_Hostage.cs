@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_Hostage : C_BaseCombatCharacter, ISchemaClass<C_Hostage>
 {
     static C_Hostage ISchemaClass<C_Hostage>.From(nint handle) => new C_HostageImpl(handle);
-    static int ISchemaClass<C_Hostage>.Size => 4824;
+    static int ISchemaClass<C_Hostage>.Size => 5056;
     static string? ISchemaClass<C_Hostage>.ClassName => null;
 
 

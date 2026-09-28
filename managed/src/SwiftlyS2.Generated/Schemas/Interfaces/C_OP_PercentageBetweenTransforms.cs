@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_PercentageBetweenTransforms : CParticleFunctionOperator, ISchemaClass<C_OP_PercentageBetweenTransforms>
 {
     static C_OP_PercentageBetweenTransforms ISchemaClass<C_OP_PercentageBetweenTransforms>.From(nint handle) => new C_OP_PercentageBetweenTransformsImpl(handle);
-    static int ISchemaClass<C_OP_PercentageBetweenTransforms>.Size => 712;
+    static int ISchemaClass<C_OP_PercentageBetweenTransforms>.Size => 720;
     static string? ISchemaClass<C_OP_PercentageBetweenTransforms>.ClassName => null;
 
 

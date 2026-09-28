@@ -71,6 +71,21 @@ internal partial class CPhysExplosionImpl : CPointEntityImpl, CPhysExplosion
             Schema.SetString(_Handle, _TargetEntityNameOffset!.Value, value);
         }
     }
+    private static nint? _IgnoreEntityNameOffset;
+
+    public string IgnoreEntityName
+    {
+        get
+        {
+            _IgnoreEntityNameOffset = _IgnoreEntityNameOffset ?? Schema.GetOffset(0xACEBD741573DB417);
+            return Schema.GetString(_Handle.Read<nint>(_IgnoreEntityNameOffset!.Value));
+        }
+        set
+        {
+            _IgnoreEntityNameOffset = _IgnoreEntityNameOffset ?? Schema.GetOffset(0xACEBD741573DB417);
+            Schema.SetString(_Handle, _IgnoreEntityNameOffset!.Value, value);
+        }
+    }
     private static nint? _InnerRadiusOffset;
 
     public ref float InnerRadius

@@ -27,5 +27,7 @@ public partial interface CMeshletDescriptor : ISchemaClass<CMeshletDescriptor>
 
     public ref byte TriangleCount { get; }
 
+    public ref ushort BoneIndex { get; }
+
 
 }

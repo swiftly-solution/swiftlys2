@@ -52,4 +52,8 @@ internal class EventPlayerDisconnectImpl : GameEvent<EventPlayerDisconnect>, Eve
 
     public short PlayerID
     { get => (short)Accessor.GetInt32("PlayerID"); set => Accessor.SetInt32("PlayerID", value); }
+
+    // Was the player ever fully connected?
+    public bool EverFullyConnected
+    { get => Accessor.GetBool("ever_fully_connected"); set => Accessor.SetBool("ever_fully_connected", value); }
 }

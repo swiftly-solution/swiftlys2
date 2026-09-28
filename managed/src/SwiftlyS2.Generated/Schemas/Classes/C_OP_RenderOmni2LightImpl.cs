@@ -192,6 +192,120 @@ internal partial class C_OP_RenderOmni2LightImpl : CParticleFunctionRendererImpl
             return instance;
         }
     }
+    private static nint? _OrientationTypeOffset;
+
+    public ref ParticleOmni2LighOrientationChoiceList_t OrientationType
+    {
+        get
+        {
+            _OrientationTypeOffset = _OrientationTypeOffset ?? Schema.GetOffset(0xDE9AF4EE931FA045);
+            return ref _Handle.AsRef<ParticleOmni2LighOrientationChoiceList_t>(_OrientationTypeOffset!.Value);
+        }
+    }
+    private static nint? _NormalOffset;
+    private CPerParticleVecInputImpl? _NormalInstance;
+
+    public CPerParticleVecInput Normal
+    {
+        get
+        {
+            _NormalOffset = _NormalOffset ?? Schema.GetOffset(0xDE9AF4EEAFB36E96);
+            var instance = _NormalInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _NormalOffset!.Value);
+            return instance;
+        }
+    }
+    private static nint? _TargetOffset;
+    private CPerParticleVecInputImpl? _TargetInstance;
+
+    public CPerParticleVecInput Target
+    {
+        get
+        {
+            _TargetOffset = _TargetOffset ?? Schema.GetOffset(0xDE9AF4EEC61225FC);
+            var instance = _TargetInstance ??= new CPerParticleVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _TargetOffset!.Value);
+            return instance;
+        }
+    }
+    private static nint? _FOVAngleOffset;
+    private CPerParticleFloatInputImpl? _FOVAngleInstance;
+
+    public CPerParticleFloatInput FOVAngle
+    {
+        get
+        {
+            _FOVAngleOffset = _FOVAngleOffset ?? Schema.GetOffset(0xDE9AF4EE2CE98375);
+            var instance = _FOVAngleInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _FOVAngleOffset!.Value);
+            return instance;
+        }
+    }
+    private static nint? _BarnShapeOffset;
+    private CPerParticleFloatInputImpl? _BarnShapeInstance;
+
+    public CPerParticleFloatInput BarnShape
+    {
+        get
+        {
+            _BarnShapeOffset = _BarnShapeOffset ?? Schema.GetOffset(0xDE9AF4EE772F56D7);
+            var instance = _BarnShapeInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _BarnShapeOffset!.Value);
+            return instance;
+        }
+    }
+    private static nint? _BarnNearSizeXOffset;
+    private CPerParticleFloatInputImpl? _BarnNearSizeXInstance;
+
+    public CPerParticleFloatInput BarnNearSizeX
+    {
+        get
+        {
+            _BarnNearSizeXOffset = _BarnNearSizeXOffset ?? Schema.GetOffset(0xDE9AF4EE66B42BEF);
+            var instance = _BarnNearSizeXInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _BarnNearSizeXOffset!.Value);
+            return instance;
+        }
+    }
+    private static nint? _BarnNearSizeYOffset;
+    private CPerParticleFloatInputImpl? _BarnNearSizeYInstance;
+
+    public CPerParticleFloatInput BarnNearSizeY
+    {
+        get
+        {
+            _BarnNearSizeYOffset = _BarnNearSizeYOffset ?? Schema.GetOffset(0xDE9AF4EE65B42A5C);
+            var instance = _BarnNearSizeYInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _BarnNearSizeYOffset!.Value);
+            return instance;
+        }
+    }
+    private static nint? _BarnSoftXOffset;
+    private CPerParticleFloatInputImpl? _BarnSoftXInstance;
+
+    public CPerParticleFloatInput BarnSoftX
+    {
+        get
+        {
+            _BarnSoftXOffset = _BarnSoftXOffset ?? Schema.GetOffset(0xDE9AF4EEB96F4292);
+            var instance = _BarnSoftXInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _BarnSoftXOffset!.Value);
+            return instance;
+        }
+    }
+    private static nint? _BarnSoftYOffset;
+    private CPerParticleFloatInputImpl? _BarnSoftYInstance;
+
+    public CPerParticleFloatInput BarnSoftY
+    {
+        get
+        {
+            _BarnSoftYOffset = _BarnSoftYOffset ?? Schema.GetOffset(0xDE9AF4EEBA6F4425);
+            var instance = _BarnSoftYInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _BarnSoftYOffset!.Value);
+            return instance;
+        }
+    }
     private static nint? _SkirtOffset;
     private CPerParticleFloatInputImpl? _SkirtInstance;
 

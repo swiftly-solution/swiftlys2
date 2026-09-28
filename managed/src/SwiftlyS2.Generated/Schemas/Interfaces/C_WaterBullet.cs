@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_WaterBullet : CBaseAnimGraph, ISchemaClass<C_WaterBullet>
 {
     static C_WaterBullet ISchemaClass<C_WaterBullet>.From(nint handle) => new C_WaterBulletImpl(handle);
-    static int ISchemaClass<C_WaterBullet>.Size => 4480;
+    static int ISchemaClass<C_WaterBullet>.Size => 4712;
     static string? ISchemaClass<C_WaterBullet>.ClassName => null;
 
 }

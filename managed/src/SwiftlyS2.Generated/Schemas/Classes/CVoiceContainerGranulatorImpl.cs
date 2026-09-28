@@ -76,5 +76,25 @@ internal partial class CVoiceContainerGranulatorImpl : CVoiceContainerAsyncGener
             return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCVoiceContainerBase>>(_SourceAudioOffset!.Value);
         }
     }
+    private static nint? _DoubleBufferSourceAudioOffset;
+
+    public ref bool DoubleBufferSourceAudio
+    {
+        get
+        {
+            _DoubleBufferSourceAudioOffset = _DoubleBufferSourceAudioOffset ?? Schema.GetOffset(0x30F2735898423C5B);
+            return ref _Handle.AsRef<bool>(_DoubleBufferSourceAudioOffset!.Value);
+        }
+    }
+    private static nint? _MaxSourceLengthOffset;
+
+    public ref float MaxSourceLength
+    {
+        get
+        {
+            _MaxSourceLengthOffset = _MaxSourceLengthOffset ?? Schema.GetOffset(0x30F27358ACF0A106);
+            return ref _Handle.AsRef<float>(_MaxSourceLengthOffset!.Value);
+        }
+    }
 
 }

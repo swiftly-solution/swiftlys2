@@ -11,17 +11,28 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface RnCompound_t : ISchemaClass<RnCompound_t>
 {
     static RnCompound_t ISchemaClass<RnCompound_t>.From(nint handle) => new RnCompound_tImpl(handle);
-    static int ISchemaClass<RnCompound_t>.Size => 144;
+    static int ISchemaClass<RnCompound_t>.Size => 352;
     static string? ISchemaClass<RnCompound_t>.ClassName => null;
 
 
-    public ref CUtlVector<RnSphere_t> Spheres { get; }
+    public RnCompoundTree_t Tree { get; }
 
-    public ref CUtlVector<RnCapsule_t> Capsules { get; }
+    public ref int HullBaseIndex { get; }
 
-    public ref CUtlVector<RnHull_t> Hulls { get; }
+    public ref int MeshBaseIndex { get; }
 
-    public ref CUtlVector<RnMesh_t> Meshes { get; }
+    public ref int ShapeCount { get; }
+
+    // CUtlLeanVectorFixedGrowable< RnMesh_t, 1 >
+    public SchemaUntypedField Meshes { get; }
+
+    public ref CUtlLeanVector<RnHull_t, int> Hulls { get; }
+
+    public ref CUtlLeanVector<RnCapsule_t, int> Capsules { get; }
+
+    public ref CUtlLeanVector<RnSphere_t, int> Spheres { get; }
+
+    public ref CUtlLeanVector<byte, int> CompoundMaterialIndices { get; }
 
     public AABB_t Bounds { get; }
 

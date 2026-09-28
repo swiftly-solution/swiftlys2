@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_TriggerBuoyancy : C_BaseTrigger, ISchemaClass<C_TriggerBuoyancy>
 {
     static C_TriggerBuoyancy ISchemaClass<C_TriggerBuoyancy>.From(nint handle) => new C_TriggerBuoyancyImpl(handle);
-    static int ISchemaClass<C_TriggerBuoyancy>.Size => 4536;
+    static int ISchemaClass<C_TriggerBuoyancy>.Size => 4768;
     static string? ISchemaClass<C_TriggerBuoyancy>.ClassName => null;
 
 

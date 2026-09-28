@@ -26,6 +26,4 @@ internal class CCSUsrMsg_WeaponSoundImpl : NetMessage<CCSUsrMsg_WeaponSound>, CC
     { get => Accessor.GetFloat("game_timestamp"); set => Accessor.SetFloat("game_timestamp", value); }
     public uint SourceSoundscapeid
     { get => Accessor.GetUInt32("source_soundscapeid"); set => Accessor.SetUInt32("source_soundscapeid", value); }
-    public bool Stealth
-    { get => Accessor.GetBool("stealth"); set => Accessor.SetBool("stealth", value); }
 }

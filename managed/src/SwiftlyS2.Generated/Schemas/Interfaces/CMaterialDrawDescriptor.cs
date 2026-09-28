@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CMaterialDrawDescriptor : ISchemaClass<CMaterialDrawDescriptor>
 {
     static CMaterialDrawDescriptor ISchemaClass<CMaterialDrawDescriptor>.From(nint handle) => new CMaterialDrawDescriptorImpl(handle);
-    static int ISchemaClass<CMaterialDrawDescriptor>.Size => 280;
+    static int ISchemaClass<CMaterialDrawDescriptor>.Size => 288;
     static string? ISchemaClass<CMaterialDrawDescriptor>.ClassName => null;
 
 
@@ -21,11 +21,13 @@ public partial interface CMaterialDrawDescriptor : ISchemaClass<CMaterialDrawDes
 
     public ref float Alpha { get; }
 
-    public ref ushort NumMeshlets { get; }
+    public ref uint NumMeshlets { get; }
 
     public ref uint FirstMeshlet { get; }
 
     public ref uint AppliedIndexOffset { get; }
+
+    public ref int EmissivePrimitiveCount { get; }
 
     public ref byte DepthVertexBufferIndex { get; }
 

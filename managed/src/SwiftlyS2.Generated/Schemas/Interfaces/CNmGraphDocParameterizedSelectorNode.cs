@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmGraphDocParameterizedSelectorNode : CNmGraphDocVariationDataNode, ISchemaClass<CNmGraphDocParameterizedSelectorNode>
 {
     static CNmGraphDocParameterizedSelectorNode ISchemaClass<CNmGraphDocParameterizedSelectorNode>.From(nint handle) => new CNmGraphDocParameterizedSelectorNodeImpl(handle);
-    static int ISchemaClass<CNmGraphDocParameterizedSelectorNode>.Size => 544;
+    static int ISchemaClass<CNmGraphDocParameterizedSelectorNode>.Size => 552;
     static string? ISchemaClass<CNmGraphDocParameterizedSelectorNode>.ClassName => null;
 
 

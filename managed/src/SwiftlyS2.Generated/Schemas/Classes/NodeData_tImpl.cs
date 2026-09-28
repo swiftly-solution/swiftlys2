@@ -16,16 +16,6 @@ internal partial class NodeData_tImpl : SchemaClass, NodeData_t
 {
     public NodeData_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _ParentOffset;
-
-    public ref int Parent
-    {
-        get
-        {
-            _ParentOffset = _ParentOffset ?? Schema.GetOffset(0xB09FAAA60AABB9D1);
-            return ref _Handle.AsRef<int>(_ParentOffset!.Value);
-        }
-    }
     private static nint? _OriginOffset;
 
     public ref Vector Origin
@@ -54,26 +44,6 @@ internal partial class NodeData_tImpl : SchemaClass, NodeData_t
         {
             _MaxBoundsOffset = _MaxBoundsOffset ?? Schema.GetOffset(0xB09FAAA6C0B4CE60);
             return ref _Handle.AsRef<Vector>(_MaxBoundsOffset!.Value);
-        }
-    }
-    private static nint? _MinimumDistanceOffset;
-
-    public ref float MinimumDistance
-    {
-        get
-        {
-            _MinimumDistanceOffset = _MinimumDistanceOffset ?? Schema.GetOffset(0xB09FAAA6D8B1200E);
-            return ref _Handle.AsRef<float>(_MinimumDistanceOffset!.Value);
-        }
-    }
-    private static nint? _ChildNodeIndicesOffset;
-
-    public ref CUtlVector<int> ChildNodeIndices
-    {
-        get
-        {
-            _ChildNodeIndicesOffset = _ChildNodeIndicesOffset ?? Schema.GetOffset(0xB09FAAA63648C692);
-            return ref _Handle.AsRef<CUtlVector<int>>(_ChildNodeIndicesOffset!.Value);
         }
     }
     private static nint? _WorldNodePrefixOffset;

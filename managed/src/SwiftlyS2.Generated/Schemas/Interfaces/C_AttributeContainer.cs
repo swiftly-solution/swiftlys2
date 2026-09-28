@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_AttributeContainer : CAttributeManager, ISchemaClass<C_AttributeContainer>
 {
     static C_AttributeContainer ISchemaClass<C_AttributeContainer>.From(nint handle) => new C_AttributeContainerImpl(handle);
-    static int ISchemaClass<C_AttributeContainer>.Size => 1232;
+    static int ISchemaClass<C_AttributeContainer>.Size => 1552;
     static string? ISchemaClass<C_AttributeContainer>.ClassName => null;
 
 

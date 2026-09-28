@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RenderLights : C_OP_RenderPoints, ISchemaClass<C_OP_RenderLights>
 {
     static C_OP_RenderLights ISchemaClass<C_OP_RenderLights>.From(nint handle) => new C_OP_RenderLightsImpl(handle);
-    static int ISchemaClass<C_OP_RenderLights>.Size => 592;
+    static int ISchemaClass<C_OP_RenderLights>.Size => 600;
     static string? ISchemaClass<C_OP_RenderLights>.ClassName => null;
 
 

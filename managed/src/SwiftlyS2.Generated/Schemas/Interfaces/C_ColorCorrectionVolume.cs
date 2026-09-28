@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_ColorCorrectionVolume : C_BaseTrigger, ISchemaClass<C_ColorCorrectionVolume>
 {
     static C_ColorCorrectionVolume ISchemaClass<C_ColorCorrectionVolume>.From(nint handle) => new C_ColorCorrectionVolumeImpl(handle);
-    static int ISchemaClass<C_ColorCorrectionVolume>.Size => 4800;
+    static int ISchemaClass<C_ColorCorrectionVolume>.Size => 5032;
     static string? ISchemaClass<C_ColorCorrectionVolume>.ClassName => null;
 
 

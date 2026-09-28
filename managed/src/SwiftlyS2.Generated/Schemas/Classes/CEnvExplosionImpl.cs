@@ -86,6 +86,16 @@ internal partial class CEnvExplosionImpl : CModelPointEntityImpl, CEnvExplosion
             return ref _Handle.AsRef<DamageTypes_t>(_CustomDamageTypeOffset!.Value);
         }
     }
+    private static nint? _HasCustomDamageTypeOffset;
+
+    public ref bool HasCustomDamageType
+    {
+        get
+        {
+            _HasCustomDamageTypeOffset = _HasCustomDamageTypeOffset ?? Schema.GetOffset(0x27411F0B048DF49);
+            return ref _Handle.AsRef<bool>(_HasCustomDamageTypeOffset!.Value);
+        }
+    }
     private static nint? _CreateDebrisOffset;
 
     public ref bool CreateDebris

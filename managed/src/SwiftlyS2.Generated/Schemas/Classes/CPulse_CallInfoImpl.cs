@@ -91,5 +91,28 @@ internal partial class CPulse_CallInfoImpl : SchemaClass, CPulse_CallInfo
             return ref _Handle.AsRef<int>(_SrcInstructionOffset!.Value);
         }
     }
+    private static nint? _BreakDestChunkOffset;
+    private PulseRuntimeChunkIndex_tImpl? _BreakDestChunkInstance;
+
+    public PulseRuntimeChunkIndex_t BreakDestChunk
+    {
+        get
+        {
+            _BreakDestChunkOffset = _BreakDestChunkOffset ?? Schema.GetOffset(0x6ADF88D82C5BAF7D);
+            var instance = _BreakDestChunkInstance ??= new PulseRuntimeChunkIndex_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _BreakDestChunkOffset!.Value);
+            return instance;
+        }
+    }
+    private static nint? _BreakDestInstructionOffset;
+
+    public ref int BreakDestInstruction
+    {
+        get
+        {
+            _BreakDestInstructionOffset = _BreakDestInstructionOffset ?? Schema.GetOffset(0x6ADF88D8FE7622E0);
+            return ref _Handle.AsRef<int>(_BreakDestInstructionOffset!.Value);
+        }
+    }
 
 }

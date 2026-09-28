@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface EntComponentInfo_t : ISchemaClass<EntComponentInfo_t>
 {
     static EntComponentInfo_t ISchemaClass<EntComponentInfo_t>.From(nint handle) => new EntComponentInfo_tImpl(handle);
-    static int ISchemaClass<EntComponentInfo_t>.Size => 104;
+    static int ISchemaClass<EntComponentInfo_t>.Size => 96;
     static string? ISchemaClass<EntComponentInfo_t>.ClassName => null;
 
 

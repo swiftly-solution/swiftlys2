@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_PositionLock : CParticleFunctionOperator, ISchemaClass<C_OP_PositionLock>
 {
     static C_OP_PositionLock ISchemaClass<C_OP_PositionLock>.From(nint handle) => new C_OP_PositionLockImpl(handle);
-    static int ISchemaClass<C_OP_PositionLock>.Size => 2720;
+    static int ISchemaClass<C_OP_PositionLock>.Size => 2768;
     static string? ISchemaClass<C_OP_PositionLock>.ClassName => null;
 
 

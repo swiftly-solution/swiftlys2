@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_BulletHitModel : CBaseAnimGraph, ISchemaClass<C_BulletHitModel>
 {
     static C_BulletHitModel ISchemaClass<C_BulletHitModel>.From(nint handle) => new C_BulletHitModelImpl(handle);
-    static int ISchemaClass<C_BulletHitModel>.Size => 4560;
+    static int ISchemaClass<C_BulletHitModel>.Size => 4792;
     static string? ISchemaClass<C_BulletHitModel>.ClassName => null;
 
 

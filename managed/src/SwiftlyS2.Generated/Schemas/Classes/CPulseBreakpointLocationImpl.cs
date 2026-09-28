@@ -55,5 +55,15 @@ internal partial class CPulseBreakpointLocationImpl : SchemaClass, CPulseBreakpo
             return instance;
         }
     }
+    private static nint? _DeferBreakOffset;
+
+    public ref bool DeferBreak
+    {
+        get
+        {
+            _DeferBreakOffset = _DeferBreakOffset ?? Schema.GetOffset(0x985BB7CF048AE24E);
+            return ref _Handle.AsRef<bool>(_DeferBreakOffset!.Value);
+        }
+    }
 
 }

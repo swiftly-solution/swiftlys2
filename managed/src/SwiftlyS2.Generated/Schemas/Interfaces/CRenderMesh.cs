@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CRenderMesh : ISchemaClass<CRenderMesh>
 {
     static CRenderMesh ISchemaClass<CRenderMesh>.From(nint handle) => new CRenderMeshImpl(handle);
-    static int ISchemaClass<CRenderMesh>.Size => 552;
+    static int ISchemaClass<CRenderMesh>.Size => 568;
     static string? ISchemaClass<CRenderMesh>.ClassName => null;
 
 

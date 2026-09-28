@@ -54,4 +54,6 @@ internal class CMsgGCCStrike15_v2_MatchmakingGC2ServerReserveImpl : TypedProtobu
     { get => new ProtobufRepeatedFieldValueType<int>(Accessor, "teammate_colors"); }
     public uint MatchIdAdditional
     { get => Accessor.GetUInt32("match_id_additional"); set => Accessor.SetUInt32("match_id_additional", value); }
+    public IProtobufRepeatedFieldValueType<string> ClanTags
+    { get => new ProtobufRepeatedFieldValueType<string>(Accessor, "clan_tags"); }
 }

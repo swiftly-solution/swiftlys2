@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_CreateOnModelAtHeight : CParticleFunctionInitializer, ISchemaClass<C_INIT_CreateOnModelAtHeight>
 {
     static C_INIT_CreateOnModelAtHeight ISchemaClass<C_INIT_CreateOnModelAtHeight>.From(nint handle) => new C_INIT_CreateOnModelAtHeightImpl(handle);
-    static int ISchemaClass<C_INIT_CreateOnModelAtHeight>.Size => 5176;
+    static int ISchemaClass<C_INIT_CreateOnModelAtHeight>.Size => 5272;
     static string? ISchemaClass<C_INIT_CreateOnModelAtHeight>.ClassName => null;
 
 

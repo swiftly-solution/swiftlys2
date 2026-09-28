@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_CreateWithinBox : CParticleFunctionInitializer, ISchemaClass<C_INIT_CreateWithinBox>
 {
     static C_INIT_CreateWithinBox ISchemaClass<C_INIT_CreateWithinBox>.From(nint handle) => new C_INIT_CreateWithinBoxImpl(handle);
-    static int ISchemaClass<C_INIT_CreateWithinBox>.Size => 3944;
+    static int ISchemaClass<C_INIT_CreateWithinBox>.Size => 4016;
     static string? ISchemaClass<C_INIT_CreateWithinBox>.ClassName => null;
 
 

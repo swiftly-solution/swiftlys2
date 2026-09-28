@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_BaseDoor : C_BaseToggle, ISchemaClass<C_BaseDoor>
 {
     static C_BaseDoor ISchemaClass<C_BaseDoor>.From(nint handle) => new C_BaseDoorImpl(handle);
-    static int ISchemaClass<C_BaseDoor>.Size => 4024;
+    static int ISchemaClass<C_BaseDoor>.Size => 4256;
     static string? ISchemaClass<C_BaseDoor>.ClassName => null;
 
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_QuantizeCPComponent : CParticleFunctionPreEmission, ISchemaClass<C_OP_QuantizeCPComponent>
 {
     static C_OP_QuantizeCPComponent ISchemaClass<C_OP_QuantizeCPComponent>.From(nint handle) => new C_OP_QuantizeCPComponentImpl(handle);
-    static int ISchemaClass<C_OP_QuantizeCPComponent>.Size => 1224;
+    static int ISchemaClass<C_OP_QuantizeCPComponent>.Size => 1248;
     static string? ISchemaClass<C_OP_QuantizeCPComponent>.ClassName => null;
 
 

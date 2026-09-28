@@ -29,5 +29,31 @@ internal partial class CVMixDelayProcessorDescImpl : CVMixBaseProcessorDescImpl,
             return instance;
         }
     }
+    private static nint? _ParamCutoffFrequencyOffset;
+    private CVMixParameterFloatImpl? _ParamCutoffFrequencyInstance;
+
+    public CVMixParameterFloat ParamCutoffFrequency
+    {
+        get
+        {
+            _ParamCutoffFrequencyOffset = _ParamCutoffFrequencyOffset ?? Schema.GetOffset(0xDFF6E06212AFDCC7);
+            var instance = _ParamCutoffFrequencyInstance ??= new CVMixParameterFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamCutoffFrequencyOffset!.Value);
+            return instance;
+        }
+    }
+    private static nint? _ParamDelayOffset;
+    private CVMixParameterFloatImpl? _ParamDelayInstance;
+
+    public CVMixParameterFloat ParamDelay
+    {
+        get
+        {
+            _ParamDelayOffset = _ParamDelayOffset ?? Schema.GetOffset(0xDFF6E062CA358765);
+            var instance = _ParamDelayInstance ??= new CVMixParameterFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamDelayOffset!.Value);
+            return instance;
+        }
+    }
 
 }

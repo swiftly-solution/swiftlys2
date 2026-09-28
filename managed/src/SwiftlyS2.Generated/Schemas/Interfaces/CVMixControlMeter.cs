@@ -15,7 +15,7 @@ public partial interface CVMixControlMeter : CVMixInputBase, ISchemaClass<CVMixC
     static string? ISchemaClass<CVMixControlMeter>.ClassName => null;
 
 
-    public ref int ValueIndex { get; }
+    public CVMixDataOffset ValueIndex { get; }
 
 
 }

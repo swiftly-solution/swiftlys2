@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPulse_CallInfo : ISchemaClass<CPulse_CallInfo>
 {
     static CPulse_CallInfo ISchemaClass<CPulse_CallInfo>.From(nint handle) => new CPulse_CallInfoImpl(handle);
-    static int ISchemaClass<CPulse_CallInfo>.Size => 88;
+    static int ISchemaClass<CPulse_CallInfo>.Size => 96;
     static string? ISchemaClass<CPulse_CallInfo>.ClassName => null;
 
 
@@ -27,6 +27,10 @@ public partial interface CPulse_CallInfo : ISchemaClass<CPulse_CallInfo>
     public PulseRuntimeChunkIndex_t SrcChunk { get; }
 
     public ref int SrcInstruction { get; }
+
+    public PulseRuntimeChunkIndex_t BreakDestChunk { get; }
+
+    public ref int BreakDestInstruction { get; }
 
 
 }

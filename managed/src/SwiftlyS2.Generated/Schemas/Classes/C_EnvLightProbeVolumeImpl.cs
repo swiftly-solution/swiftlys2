@@ -46,34 +46,14 @@ internal partial class C_EnvLightProbeVolumeImpl : C_BaseEntityImpl, C_EnvLightP
             return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_Entity_hLightProbeTexture_SH2_DCOffset!.Value);
         }
     }
-    private static nint? _Entity_hLightProbeTexture_SH2_ROffset;
+    private static nint? _Entity_hLightProbeTexture_SH2_L1Offset;
 
-    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_R
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_L1
     {
         get
         {
-            _Entity_hLightProbeTexture_SH2_ROffset = _Entity_hLightProbeTexture_SH2_ROffset ?? Schema.GetOffset(0x3ED606920E80FF9F);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_Entity_hLightProbeTexture_SH2_ROffset!.Value);
-        }
-    }
-    private static nint? _Entity_hLightProbeTexture_SH2_GOffset;
-
-    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_G
-    {
-        get
-        {
-            _Entity_hLightProbeTexture_SH2_GOffset = _Entity_hLightProbeTexture_SH2_GOffset ?? Schema.GetOffset(0x3ED60692198110F0);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_Entity_hLightProbeTexture_SH2_GOffset!.Value);
-        }
-    }
-    private static nint? _Entity_hLightProbeTexture_SH2_BOffset;
-
-    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_B
-    {
-        get
-        {
-            _Entity_hLightProbeTexture_SH2_BOffset = _Entity_hLightProbeTexture_SH2_BOffset ?? Schema.GetOffset(0x3ED606921E8118CF);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_Entity_hLightProbeTexture_SH2_BOffset!.Value);
+            _Entity_hLightProbeTexture_SH2_L1Offset = _Entity_hLightProbeTexture_SH2_L1Offset ?? Schema.GetOffset(0x3ED60692E7493650);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_Entity_hLightProbeTexture_SH2_L1Offset!.Value);
         }
     }
     private static nint? _Entity_hLightProbeDirectLightIndicesTextureOffset;

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CItemGenericTriggerHelper : CBaseModelEntity, ISchemaClass<CItemGenericTriggerHelper>
 {
     static CItemGenericTriggerHelper ISchemaClass<CItemGenericTriggerHelper>.From(nint handle) => new CItemGenericTriggerHelperImpl(handle);
-    static int ISchemaClass<CItemGenericTriggerHelper>.Size => 1912;
+    static int ISchemaClass<CItemGenericTriggerHelper>.Size => 2136;
     static string? ISchemaClass<CItemGenericTriggerHelper>.ClassName => "item_generic_trigger_helper";
 
 

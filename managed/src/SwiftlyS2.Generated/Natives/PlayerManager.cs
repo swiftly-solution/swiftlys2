@@ -35,10 +35,11 @@ internal static class NativePlayerManager
         {
             throw new InvalidOperationException("This method can only be called from the main thread.");
         }
-        StringAlloc.CreateCString(message, messageBufferPtr =>
+        using var messageStr = new ScopedCString(message);
+        fixed (byte* messageBufferPtr = messageStr)
         {
-            _SendMessage(kind, (byte*)messageBufferPtr, duration);
-        });
+            _SendMessage(kind, messageBufferPtr, duration);
+        }
     }
 
     private unsafe static delegate* unmanaged<int, byte, void> _ShouldBlockTransmitEntity;

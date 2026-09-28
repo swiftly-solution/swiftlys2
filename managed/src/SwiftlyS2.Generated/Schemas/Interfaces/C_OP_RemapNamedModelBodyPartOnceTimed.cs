@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RemapNamedModelBodyPartOnceTimed : C_OP_RemapNamedModelElementOnceTimed, ISchemaClass<C_OP_RemapNamedModelBodyPartOnceTimed>
 {
     static C_OP_RemapNamedModelBodyPartOnceTimed ISchemaClass<C_OP_RemapNamedModelBodyPartOnceTimed>.From(nint handle) => new C_OP_RemapNamedModelBodyPartOnceTimedImpl(handle);
-    static int ISchemaClass<C_OP_RemapNamedModelBodyPartOnceTimed>.Size => 568;
+    static int ISchemaClass<C_OP_RemapNamedModelBodyPartOnceTimed>.Size => 576;
     static string? ISchemaClass<C_OP_RemapNamedModelBodyPartOnceTimed>.ClassName => null;
 
 }

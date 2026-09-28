@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmGraphDocVariationIDComparisonNode : CNmGraphDocVariationDataNode, ISchemaClass<CNmGraphDocVariationIDComparisonNode>
 {
     static CNmGraphDocVariationIDComparisonNode ISchemaClass<CNmGraphDocVariationIDComparisonNode>.From(nint handle) => new CNmGraphDocVariationIDComparisonNodeImpl(handle);
-    static int ISchemaClass<CNmGraphDocVariationIDComparisonNode>.Size => 520;
+    static int ISchemaClass<CNmGraphDocVariationIDComparisonNode>.Size => 528;
     static string? ISchemaClass<CNmGraphDocVariationIDComparisonNode>.ClassName => null;
 
 

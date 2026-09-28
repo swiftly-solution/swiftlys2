@@ -11,7 +11,59 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVMixSteamAudioDirectProcessorDesc : CVMixBaseProcessorDesc, ISchemaClass<CVMixSteamAudioDirectProcessorDesc>
 {
     static CVMixSteamAudioDirectProcessorDesc ISchemaClass<CVMixSteamAudioDirectProcessorDesc>.From(nint handle) => new CVMixSteamAudioDirectProcessorDescImpl(handle);
-    static int ISchemaClass<CVMixSteamAudioDirectProcessorDesc>.Size => 32;
+    static int ISchemaClass<CVMixSteamAudioDirectProcessorDesc>.Size => 144;
     static string? ISchemaClass<CVMixSteamAudioDirectProcessorDesc>.ClassName => null;
+
+
+    public CVMixParameterFloat ParamPositionX { get; }
+
+    public CVMixParameterFloat ParamPositionY { get; }
+
+    public CVMixParameterFloat ParamPositionZ { get; }
+
+    public CVMixParameterFloat ParamRightX { get; }
+
+    public CVMixParameterFloat ParamRightY { get; }
+
+    public CVMixParameterFloat ParamRightZ { get; }
+
+    public CVMixParameterFloat ParamUpX { get; }
+
+    public CVMixParameterFloat ParamUpY { get; }
+
+    public CVMixParameterFloat ParamUpZ { get; }
+
+    public CVMixParameterFloat ParamAheadX { get; }
+
+    public CVMixParameterFloat ParamAheadY { get; }
+
+    public CVMixParameterFloat ParamAheadZ { get; }
+
+    public CVMixParameterFloat ParamApplyDistanceAttenuation { get; }
+
+    public CVMixParameterFloat ParamApplyAirAbsorption { get; }
+
+    public CVMixParameterFloat ParamApplyDirectivity { get; }
+
+    public CVMixParameterFloat ParamApplyOcclusion { get; }
+
+    public CVMixParameterFloat ParamApplyTransmission { get; }
+
+    public CVMixParameterFloat ParamDipoleWeight { get; }
+
+    public CVMixParameterFloat ParamDipolePower { get; }
+
+    public CVMixParameterFloat ParamOcclusion { get; }
+
+    public CVMixParameterFloat ParamTransmissionLow { get; }
+
+    public CVMixParameterFloat ParamTransmissionMid { get; }
+
+    public CVMixParameterFloat ParamTransmissionHigh { get; }
+
+    public CVMixParameterFloat ParamBand { get; }
+
+    public CVMixDataOffset ParamTransmission { get; }
+
 
 }

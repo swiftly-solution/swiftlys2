@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_CS2WeaponModuleBase : CBaseAnimGraph, ISchemaClass<C_CS2WeaponModuleBase>
 {
     static C_CS2WeaponModuleBase ISchemaClass<C_CS2WeaponModuleBase>.From(nint handle) => new C_CS2WeaponModuleBaseImpl(handle);
-    static int ISchemaClass<C_CS2WeaponModuleBase>.Size => 4488;
+    static int ISchemaClass<C_CS2WeaponModuleBase>.Size => 4720;
     static string? ISchemaClass<C_CS2WeaponModuleBase>.ClassName => null;
 
 }

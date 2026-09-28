@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_InitFromParentKilled : CParticleFunctionInitializer, ISchemaClass<C_INIT_InitFromParentKilled>
 {
     static C_INIT_InitFromParentKilled ISchemaClass<C_INIT_InitFromParentKilled>.From(nint handle) => new C_INIT_InitFromParentKilledImpl(handle);
-    static int ISchemaClass<C_INIT_InitFromParentKilled>.Size => 616;
+    static int ISchemaClass<C_INIT_InitFromParentKilled>.Size => 624;
     static string? ISchemaClass<C_INIT_InitFromParentKilled>.ClassName => null;
 
 

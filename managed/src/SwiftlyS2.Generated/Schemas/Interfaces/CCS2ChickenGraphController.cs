@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CCS2ChickenGraphController : CAnimGraphControllerBase, ISchemaClass<CCS2ChickenGraphController>
 {
     static CCS2ChickenGraphController ISchemaClass<CCS2ChickenGraphController>.From(nint handle) => new CCS2ChickenGraphControllerImpl(handle);
-    static int ISchemaClass<CCS2ChickenGraphController>.Size => 320;
+    static int ISchemaClass<CCS2ChickenGraphController>.Size => 496;
     static string? ISchemaClass<CCS2ChickenGraphController>.ClassName => null;
 
 
@@ -20,19 +20,28 @@ public partial interface CCS2ChickenGraphController : CAnimGraphControllerBase, 
     // CAnimGraph2ParamAutoResetOptionalRef
     public SchemaUntypedField ActionReset { get; }
 
-    public ref CAnimGraph2ParamOptionalRefFloat IdleVariation { get; }
-
-    public ref CAnimGraph2ParamOptionalRefFloat RunVariation { get; }
-
-    public ref CAnimGraph2ParamOptionalRefFloat PanicVariation { get; }
-
-    public ref CAnimGraph2ParamOptionalRefFloat SquatVariation { get; }
+    public ref CAnimGraph2ParamOptionalRefFloat ActionVariation { get; }
 
     public ref CAnimGraph2ParamOptionalRefBool InWater { get; }
 
-    public ref bool HasActionCompletedEvent { get; }
+    public ref CAnimGraph2ParamOptionalRefCGlobalSymbol Mode { get; }
 
-    public ref bool WaitingForCompletedEvent { get; }
+    public ref CAnimGraph2ParamOptionalRefCGlobalSymbol LifeStage { get; }
+
+    public ref CAnimGraph2ParamOptionalRefFloat IdlePhase { get; }
+
+    public ref CAnimGraph2ParamOptionalRefFloat TurnAngle { get; }
+
+    public ref CAnimGraph2ParamOptionalRefBool HasLookatTarget { get; }
+
+    // CAnimGraph2ParamOptionalRef< Vector >
+    public SchemaUntypedField LookatTarget { get; }
+
+    public ref CAnimGraph2ParamOptionalRefBool Flinch { get; }
+
+    public ref CAnimGraph2ParamOptionalRefFloat FlinchVariation { get; }
+
+    public ref bool HasActionCompletedEvent { get; }
 
 
 }

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_WorldCollideConstraint : CParticleFunctionConstraint, ISchemaClass<C_OP_WorldCollideConstraint>
 {
     static C_OP_WorldCollideConstraint ISchemaClass<C_OP_WorldCollideConstraint>.From(nint handle) => new C_OP_WorldCollideConstraintImpl(handle);
-    static int ISchemaClass<C_OP_WorldCollideConstraint>.Size => 472;
+    static int ISchemaClass<C_OP_WorldCollideConstraint>.Size => 480;
     static string? ISchemaClass<C_OP_WorldCollideConstraint>.ClassName => null;
 
 }

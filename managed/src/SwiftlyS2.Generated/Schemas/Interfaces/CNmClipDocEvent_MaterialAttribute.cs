@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmClipDocEvent_MaterialAttribute : CNmClipDocEvent, ISchemaClass<CNmClipDocEvent_MaterialAttribute>
 {
     static CNmClipDocEvent_MaterialAttribute ISchemaClass<CNmClipDocEvent_MaterialAttribute>.From(nint handle) => new CNmClipDocEvent_MaterialAttributeImpl(handle);
-    static int ISchemaClass<CNmClipDocEvent_MaterialAttribute>.Size => 288;
+    static int ISchemaClass<CNmClipDocEvent_MaterialAttribute>.Size => 296;
     static string? ISchemaClass<CNmClipDocEvent_MaterialAttribute>.ClassName => null;
 
 

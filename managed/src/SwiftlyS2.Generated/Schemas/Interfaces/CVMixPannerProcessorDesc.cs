@@ -11,11 +11,13 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVMixPannerProcessorDesc : CVMixBaseProcessorDesc, ISchemaClass<CVMixPannerProcessorDesc>
 {
     static CVMixPannerProcessorDesc ISchemaClass<CVMixPannerProcessorDesc>.From(nint handle) => new CVMixPannerProcessorDescImpl(handle);
-    static int ISchemaClass<CVMixPannerProcessorDesc>.Size => 40;
+    static int ISchemaClass<CVMixPannerProcessorDesc>.Size => 56;
     static string? ISchemaClass<CVMixPannerProcessorDesc>.ClassName => null;
 
 
     public VMixPannerDesc_t Desc { get; }
+
+    public CVMixParameterFloat ParamPan { get; }
 
 
 }

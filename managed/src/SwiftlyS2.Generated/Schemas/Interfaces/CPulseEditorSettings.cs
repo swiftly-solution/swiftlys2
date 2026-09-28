@@ -11,13 +11,19 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPulseEditorSettings : ISchemaClass<CPulseEditorSettings>
 {
     static CPulseEditorSettings ISchemaClass<CPulseEditorSettings>.From(nint handle) => new CPulseEditorSettingsImpl(handle);
-    static int ISchemaClass<CPulseEditorSettings>.Size => 488;
+    static int ISchemaClass<CPulseEditorSettings>.Size => 536;
     static string? ISchemaClass<CPulseEditorSettings>.ClassName => null;
 
 
     public ref Color ColCanvasBackground { get; }
 
     public ref Color ColCanvasBackgroundWhenDebugging { get; }
+
+    public ref Color ColCanvasBackgroundStaleCompile { get; }
+
+    public ref Color ColCanvasBorderStaleCompile { get; }
+
+    public ref Color ColCanvasBorderDebuggerDetached { get; }
 
     public ref float GridSnapV2 { get; }
 
@@ -103,6 +109,10 @@ public partial interface CPulseEditorSettings : ISchemaClass<CPulseEditorSetting
 
     public ref Color ColParentAssetsBroken { get; }
 
+    public string FontCompileStatus { get; set; }
+
+    public ref Color ColCompileStatus { get; }
+
     public ref float LiteralLabelSpacing { get; }
 
     public ref Color ColDebuggerBrokenBorder { get; }
@@ -110,6 +120,10 @@ public partial interface CPulseEditorSettings : ISchemaClass<CPulseEditorSetting
     public string DebuggerBrokenImg { get; set; }
 
     public string DebuggerBrokenOtherImg { get; set; }
+
+    public string DebuggerBrokenStackImg { get; set; }
+
+    public string DebuggerBrokenStackOtherImg { get; set; }
 
     public ref float DebuggerBrokenMarkerOffset { get; }
 
@@ -148,6 +162,10 @@ public partial interface CPulseEditorSettings : ISchemaClass<CPulseEditorSetting
     public ref bool ShowExecutionHistory { get; }
 
     public ref bool BoxSelectRequiresFullyContained { get; }
+
+    public ref bool ShowFullContextLogging { get; }
+
+    public ref bool FollowCursorDuringDebugSteps { get; }
 
     public ref float FlowMinWidth { get; }
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_ExternalGameImpulseForce : CParticleFunctionForce, ISchemaClass<C_OP_ExternalGameImpulseForce>
 {
     static C_OP_ExternalGameImpulseForce ISchemaClass<C_OP_ExternalGameImpulseForce>.From(nint handle) => new C_OP_ExternalGameImpulseForceImpl(handle);
-    static int ISchemaClass<C_OP_ExternalGameImpulseForce>.Size => 864;
+    static int ISchemaClass<C_OP_ExternalGameImpulseForce>.Size => 880;
     static string? ISchemaClass<C_OP_ExternalGameImpulseForce>.ClassName => null;
 
 

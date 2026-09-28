@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_LerpEndCapVector : CParticleFunctionOperator, ISchemaClass<C_OP_LerpEndCapVector>
 {
     static C_OP_LerpEndCapVector ISchemaClass<C_OP_LerpEndCapVector>.From(nint handle) => new C_OP_LerpEndCapVectorImpl(handle);
-    static int ISchemaClass<C_OP_LerpEndCapVector>.Size => 496;
+    static int ISchemaClass<C_OP_LerpEndCapVector>.Size => 504;
     static string? ISchemaClass<C_OP_LerpEndCapVector>.ClassName => null;
 
 

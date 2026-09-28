@@ -36,6 +36,16 @@ internal partial class VPhysXAggregateData_tImpl : SchemaClass, VPhysXAggregateD
             return ref _Handle.AsRef<ushort>(_RefCounterOffset!.Value);
         }
     }
+    private static nint? _CompoundsPackedOffset;
+
+    public ref bool CompoundsPacked
+    {
+        get
+        {
+            _CompoundsPackedOffset = _CompoundsPackedOffset ?? Schema.GetOffset(0xB689D5A1CD6B0729);
+            return ref _Handle.AsRef<bool>(_CompoundsPackedOffset!.Value);
+        }
+    }
     private static nint? _BonesHashOffset;
 
     public ref CUtlVector<uint> BonesHash

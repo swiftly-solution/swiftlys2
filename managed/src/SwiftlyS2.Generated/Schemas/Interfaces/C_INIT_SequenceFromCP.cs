@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_SequenceFromCP : CParticleFunctionInitializer, ISchemaClass<C_INIT_SequenceFromCP>
 {
     static C_INIT_SequenceFromCP ISchemaClass<C_INIT_SequenceFromCP>.From(nint handle) => new C_INIT_SequenceFromCPImpl(handle);
-    static int ISchemaClass<C_INIT_SequenceFromCP>.Size => 504;
+    static int ISchemaClass<C_INIT_SequenceFromCP>.Size => 512;
     static string? ISchemaClass<C_INIT_SequenceFromCP>.ClassName => null;
 
 

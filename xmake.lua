@@ -13,6 +13,24 @@ local SWIFTLY_VERSION = os.getenv("SWIFTLY_VERSION") or "Local"
 local sdk_path = "vendor/s2sdk"
 local breakpad_path = "vendor/breakpad/src"
 
+local protobufs = {
+    "networkbasetypes",
+    "cs_usercmd",
+    "usercmd",
+    "usermessages",
+    "gameevents",
+    "cstrike15_usermessages",
+    "valveextensions",
+    "network_connection",
+    "netmessages",
+    "networksystem_protomessages",
+    "source2_steam_stats",
+    "cstrike15_gcmessages",
+    "steammessages",
+    "engine_gcmessages",
+    "gcsdk_gcmessages"
+}
+
 function GetDistDirName()
     if is_plat("windows") then
         return "win64"
@@ -202,6 +220,8 @@ target("swiftlys2")
             breakpad_path.."/common/windows/guid_string.cc",
         }, { cxxflags = {"-g0", "/DUNICODE", "/D_UNICODE"} })
     else
+        add_shflags("-Wl,-z,noexecstack", {force = true})
+
         add_defines({
             "_LINUX",
             "LINUX",
@@ -265,6 +285,9 @@ target("swiftlys2")
             breakpad_path.."/common/linux/linux_libc_support.cc",
             breakpad_path.."/common/linux/memory_mapped_file.cc",
             breakpad_path.."/common/linux/safe_readlink.cc",
+            breakpad_path.."/common/linux/scoped_pipe.cc",
+            breakpad_path.."/common/linux/scoped_tmpfile.cc",
+            breakpad_path.."/processor/disassembler_objdump.cc",
             breakpad_path.."/common/linux/breakpad_getcontext.S",
             breakpad_path.."/client/minidump_file_writer.cc",
         }, { cxxflags = "-g0" })
@@ -405,19 +428,11 @@ target("swiftlys2")
 
         local protoc = is_plat("windows") and sdk_path.."/devtools/bin/protoc.exe" or sdk_path.."/devtools/bin/linux/protoc" 
         local args = "--proto_path="..sdk_path.."/thirdparty/protobuf-3.21.8/src --proto_path=./protobufs/cs2 --cpp_out=build/proto"
-
-        function mysplit (inputstr, sep)
-            if sep == nil then sep = "%s" end
-            local t={}
-            for str in string.gmatch(inputstr, "([^"..sep.."]+)") do table.insert(t, str) end
-            return t
-        end
     
         os.mkdir("build/proto")
 
-        for _, sourcefile in ipairs(os.files("./protobufs/cs2/*.proto")) do
-            local splitted = mysplit(sourcefile, "/")
-            local filename = splitted[#splitted]
+        for _, filename in pairs(protobufs) do
+            local sourcefile = "./protobufs/cs2/"..filename..".proto"
 
             try {
                 function()

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_LerpToInitialPosition : CParticleFunctionOperator, ISchemaClass<C_OP_LerpToInitialPosition>
 {
     static C_OP_LerpToInitialPosition ISchemaClass<C_OP_LerpToInitialPosition>.From(nint handle) => new C_OP_LerpToInitialPositionImpl(handle);
-    static int ISchemaClass<C_OP_LerpToInitialPosition>.Size => 2944;
+    static int ISchemaClass<C_OP_LerpToInitialPosition>.Size => 3000;
     static string? ISchemaClass<C_OP_LerpToInitialPosition>.ClassName => null;
 
 

@@ -79,5 +79,15 @@ internal partial class CNmTargetSelectorNode__CDefinitionImpl : CNmClipReference
             return ref _Handle.AsRef<bool>(_IsWorldSpaceTargetOffset!.Value);
         }
     }
+    private static nint? _AlignmentBoneIDOffset;
+
+    public ref CGlobalSymbol AlignmentBoneID
+    {
+        get
+        {
+            _AlignmentBoneIDOffset = _AlignmentBoneIDOffset ?? Schema.GetOffset(0xFEF535E9491318B5);
+            return ref _Handle.AsRef<CGlobalSymbol>(_AlignmentBoneIDOffset!.Value);
+        }
+    }
 
 }

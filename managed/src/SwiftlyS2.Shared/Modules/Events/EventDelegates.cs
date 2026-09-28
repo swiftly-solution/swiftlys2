@@ -157,7 +157,7 @@ public class EventDelegates
     public delegate void OnClientVoice( IOnClientVoiceEvent @event );
 
     /// <summary>
-    /// Called when a console output is received.
+    /// Called when a console output is received on the dedicated console dispatch thread.
     /// </summary>
     public delegate void OnConsoleOutput( IOnConsoleOutputEvent @event );
 
@@ -194,4 +194,9 @@ public class EventDelegates
     /// Called when the server is started.
     /// </summary>
     public delegate void OnStartupServer();
+
+    /// <summary>
+    /// Called when a custom hud element is clicked.
+    /// </summary>
+    public delegate void OnCustomHudClicked( IOnCustomHudClickedEvent @event );
 }

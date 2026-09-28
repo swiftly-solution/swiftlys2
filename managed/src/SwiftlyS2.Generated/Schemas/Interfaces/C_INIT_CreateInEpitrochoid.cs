@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_CreateInEpitrochoid : CParticleFunctionInitializer, ISchemaClass<C_INIT_CreateInEpitrochoid>
 {
     static C_INIT_CreateInEpitrochoid ISchemaClass<C_INIT_CreateInEpitrochoid>.From(nint handle) => new C_INIT_CreateInEpitrochoidImpl(handle);
-    static int ISchemaClass<C_INIT_CreateInEpitrochoid>.Size => 2072;
+    static int ISchemaClass<C_INIT_CreateInEpitrochoid>.Size => 2112;
     static string? ISchemaClass<C_INIT_CreateInEpitrochoid>.ClassName => null;
 
 

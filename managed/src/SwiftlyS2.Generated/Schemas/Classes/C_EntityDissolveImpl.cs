@@ -89,19 +89,6 @@ internal partial class C_EntityDissolveImpl : C_BaseModelEntityImpl, C_EntityDis
             return ref _Handle.AsRef<float>(_FadeOutLengthOffset!.Value);
         }
     }
-    private static nint? _NextSparkTimeOffset;
-    private GameTime_tImpl? _NextSparkTimeInstance;
-
-    public GameTime_t NextSparkTime
-    {
-        get
-        {
-            _NextSparkTimeOffset = _NextSparkTimeOffset ?? Schema.GetOffset(0xABF0F1FF19A6208A);
-            var instance = _NextSparkTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _NextSparkTimeOffset!.Value);
-            return instance;
-        }
-    }
     private static nint? _DissolveTypeOffset;
 
     public ref EntityDissolveType_t DissolveType
@@ -110,6 +97,16 @@ internal partial class C_EntityDissolveImpl : C_BaseModelEntityImpl, C_EntityDis
         {
             _DissolveTypeOffset = _DissolveTypeOffset ?? Schema.GetOffset(0xABF0F1FF79AB525E);
             return ref _Handle.AsRef<EntityDissolveType_t>(_DissolveTypeOffset!.Value);
+        }
+    }
+    private static nint? _MagnitudeOffset;
+
+    public ref uint Magnitude
+    {
+        get
+        {
+            _MagnitudeOffset = _MagnitudeOffset ?? Schema.GetOffset(0xABF0F1FF0C71BDF1);
+            return ref _Handle.AsRef<uint>(_MagnitudeOffset!.Value);
         }
     }
     private static nint? _DissolverOriginOffset;
@@ -122,14 +119,17 @@ internal partial class C_EntityDissolveImpl : C_BaseModelEntityImpl, C_EntityDis
             return ref _Handle.AsRef<Vector>(_DissolverOriginOffset!.Value);
         }
     }
-    private static nint? _MagnitudeOffset;
+    private static nint? _NextSparkTimeOffset;
+    private GameTime_tImpl? _NextSparkTimeInstance;
 
-    public ref uint Magnitude
+    public GameTime_t NextSparkTime
     {
         get
         {
-            _MagnitudeOffset = _MagnitudeOffset ?? Schema.GetOffset(0xABF0F1FF0C71BDF1);
-            return ref _Handle.AsRef<uint>(_MagnitudeOffset!.Value);
+            _NextSparkTimeOffset = _NextSparkTimeOffset ?? Schema.GetOffset(0xABF0F1FF19A6208A);
+            var instance = _NextSparkTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NextSparkTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CoreExplodeOffset;

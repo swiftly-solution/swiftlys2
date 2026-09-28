@@ -39,15 +39,5 @@ internal partial class CParticleFunctionRendererImpl : CParticleFunctionImpl, CP
             return ref _Handle.AsRef<bool>(_CannotBeRefractedOffset!.Value);
         }
     }
-    private static nint? _SkipRenderingOnMobileOffset;
-
-    public ref bool SkipRenderingOnMobile
-    {
-        get
-        {
-            _SkipRenderingOnMobileOffset = _SkipRenderingOnMobileOffset ?? Schema.GetOffset(0xAE332DA33F34EA75);
-            return ref _Handle.AsRef<bool>(_SkipRenderingOnMobileOffset!.Value);
-        }
-    }
 
 }

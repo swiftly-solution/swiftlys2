@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_InitFromVectorFieldSnapshot : CParticleFunctionInitializer, ISchemaClass<C_INIT_InitFromVectorFieldSnapshot>
 {
     static C_INIT_InitFromVectorFieldSnapshot ISchemaClass<C_INIT_InitFromVectorFieldSnapshot>.From(nint handle) => new C_INIT_InitFromVectorFieldSnapshotImpl(handle);
-    static int ISchemaClass<C_INIT_InitFromVectorFieldSnapshot>.Size => 2216;
+    static int ISchemaClass<C_INIT_InitFromVectorFieldSnapshot>.Size => 2256;
     static string? ISchemaClass<C_INIT_InitFromVectorFieldSnapshot>.ClassName => null;
 
 

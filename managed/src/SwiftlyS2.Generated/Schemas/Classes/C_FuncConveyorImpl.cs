@@ -69,6 +69,16 @@ internal partial class C_FuncConveyorImpl : C_BaseModelEntityImpl, C_FuncConveyo
             return ref _Handle.AsRef<float>(_TransitionStartSpeedOffset!.Value);
         }
     }
+    private static nint? _FrictionScaleOffset;
+
+    public ref float FrictionScale
+    {
+        get
+        {
+            _FrictionScaleOffset = _FrictionScaleOffset ?? Schema.GetOffset(0xF9A974BCCB7D1875);
+            return ref _Handle.AsRef<float>(_FrictionScaleOffset!.Value);
+        }
+    }
     private static nint? _ConveyorModelsOffset;
     private SchemaUntypedField? _ConveyorModelsInstance;
 

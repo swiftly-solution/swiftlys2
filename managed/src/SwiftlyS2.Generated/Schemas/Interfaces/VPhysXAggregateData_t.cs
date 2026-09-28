@@ -19,6 +19,8 @@ public partial interface VPhysXAggregateData_t : ISchemaClass<VPhysXAggregateDat
 
     public ref ushort RefCounter { get; }
 
+    public ref bool CompoundsPacked { get; }
+
     public ref CUtlVector<uint> BonesHash { get; }
 
     public ref CUtlVector<CUtlString> BoneNames { get; }

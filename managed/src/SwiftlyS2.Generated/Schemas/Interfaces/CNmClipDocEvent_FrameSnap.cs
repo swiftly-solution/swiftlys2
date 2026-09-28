@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmClipDocEvent_FrameSnap : CNmClipDocEvent, ISchemaClass<CNmClipDocEvent_FrameSnap>
 {
     static CNmClipDocEvent_FrameSnap ISchemaClass<CNmClipDocEvent_FrameSnap>.From(nint handle) => new CNmClipDocEvent_FrameSnapImpl(handle);
-    static int ISchemaClass<CNmClipDocEvent_FrameSnap>.Size => 24;
+    static int ISchemaClass<CNmClipDocEvent_FrameSnap>.Size => 32;
     static string? ISchemaClass<CNmClipDocEvent_FrameSnap>.ClassName => null;
 
 

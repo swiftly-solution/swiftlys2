@@ -1,6 +1,7 @@
 using System.Text;
 using System.Collections.Concurrent;
 using Spectre.Console;
+using SwiftlyS2.Core.Events;
 using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Shared.Events;
 
@@ -84,6 +85,7 @@ internal static class CommandTrackerManager
                 {
                     currentCommandId = newCommandId;
                 }
+                EventPublisher.AddConsoleOutputListener();
                 var arg0 = @event.Command[0] ?? string.Empty;
                 _ = @event.Command.Tokenize($"{arg0.Trim().Replace("ecwb", string.Empty)} {@event.Command.ArgS?.Trim()}");
             }
@@ -106,7 +108,11 @@ internal static class CommandTrackerManager
             currentCommandId = Guid.Empty;
         }
 
-        if (commandId != Guid.Empty && activeCommands.TryRemove(commandId, out var command))
+        if (commandId == Guid.Empty) return;
+
+        EventPublisher.RemoveConsoleOutputListener();
+
+        if (activeCommands.TryRemove(commandId, out var command))
         {
             var output = new StringBuilder();
             while (command.Output.TryDequeue(out var line))
@@ -130,6 +136,11 @@ internal static class CommandTrackerManager
                 }
             });
         }
+    }
+
+    public static void CancelCommand()
+    {
+        ProcessCommandEnd();
     }
 
     private static void PurgeExpired()

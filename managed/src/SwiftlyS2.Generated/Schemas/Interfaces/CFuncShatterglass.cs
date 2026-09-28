@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CFuncShatterglass : CBaseModelEntity, ISchemaClass<CFuncShatterglass>
 {
     static CFuncShatterglass ISchemaClass<CFuncShatterglass>.From(nint handle) => new CFuncShatterglassImpl(handle);
-    static int ISchemaClass<CFuncShatterglass>.Size => 2208;
+    static int ISchemaClass<CFuncShatterglass>.Size => 2432;
     static string? ISchemaClass<CFuncShatterglass>.ClassName => "func_shatterglass";
 
 

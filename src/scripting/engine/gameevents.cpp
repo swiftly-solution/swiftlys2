@@ -22,6 +22,8 @@
 
 #include <fmt/format.h>
 
+#include <game/shared/ehandle.h>
+
 #include <scripting/scripting.h>
 
 typedef IGameEventListener2* (*GetLegacyGameEventListener)(CPlayerSlot slot);

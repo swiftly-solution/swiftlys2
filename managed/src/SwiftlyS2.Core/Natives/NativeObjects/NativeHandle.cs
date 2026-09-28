@@ -18,5 +18,10 @@ internal class NativeHandle : INativeHandle
         _Handle = ptr;
     }
 
+    public void DangerouslySetAddress( nint address )
+    {
+        _Handle = address;
+    }
+
     public nint Address => _Handle;
 }

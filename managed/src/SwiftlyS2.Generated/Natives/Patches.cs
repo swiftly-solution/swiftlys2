@@ -15,30 +15,33 @@ internal static class NativePatches
 
     public unsafe static void Apply(string patchName)
     {
-        StringAlloc.CreateCString(patchName, patchNameBufferPtr =>
+        using var patchNameStr = new ScopedCString(patchName);
+        fixed (byte* patchNameBufferPtr = patchNameStr)
         {
-            _Apply((byte*)patchNameBufferPtr);
-        });
+            _Apply(patchNameBufferPtr);
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, void> _Revert;
 
     public unsafe static void Revert(string patchName)
     {
-        StringAlloc.CreateCString(patchName, patchNameBufferPtr =>
+        using var patchNameStr = new ScopedCString(patchName);
+        fixed (byte* patchNameBufferPtr = patchNameStr)
         {
-            _Revert((byte*)patchNameBufferPtr);
-        });
+            _Revert(patchNameBufferPtr);
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, byte> _Exists;
 
     public unsafe static bool Exists(string patchName)
     {
-        return StringAlloc.CreateCString(patchName, patchNameBufferPtr =>
+        using var patchNameStr = new ScopedCString(patchName);
+        fixed (byte* patchNameBufferPtr = patchNameStr)
         {
-            var ret = _Exists((byte*)patchNameBufferPtr);
+            var ret = _Exists(patchNameBufferPtr);
             return ret == 1;
-        });
+        }
     }
 }

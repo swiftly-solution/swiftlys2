@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_CreateOnGrid : CParticleFunctionInitializer, ISchemaClass<C_INIT_CreateOnGrid>
 {
     static C_INIT_CreateOnGrid ISchemaClass<C_INIT_CreateOnGrid>.From(nint handle) => new C_INIT_CreateOnGridImpl(handle);
-    static int ISchemaClass<C_INIT_CreateOnGrid>.Size => 2696;
+    static int ISchemaClass<C_INIT_CreateOnGrid>.Size => 2752;
     static string? ISchemaClass<C_INIT_CreateOnGrid>.ClassName => null;
 
 

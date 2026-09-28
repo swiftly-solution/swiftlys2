@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_DynamicPropAlias_cable_dynamic : C_DynamicProp, ISchemaClass<C_DynamicPropAlias_cable_dynamic>
 {
     static C_DynamicPropAlias_cable_dynamic ISchemaClass<C_DynamicPropAlias_cable_dynamic>.From(nint handle) => new C_DynamicPropAlias_cable_dynamicImpl(handle);
-    static int ISchemaClass<C_DynamicPropAlias_cable_dynamic>.Size => 5056;
+    static int ISchemaClass<C_DynamicPropAlias_cable_dynamic>.Size => 5296;
     static string? ISchemaClass<C_DynamicPropAlias_cable_dynamic>.ClassName => null;
 
 }

@@ -43,23 +43,29 @@ internal partial class C_OP_ConstrainDistanceImpl : CParticleFunctionConstraintI
         }
     }
     private static nint? _ControlPointNumberOffset;
+    private CParticleTransformInputImpl? _ControlPointNumberInstance;
 
-    public ref int ControlPointNumber
+    public CParticleTransformInput ControlPointNumber
     {
         get
         {
             _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0xDF3E3FA13F31A6BD);
-            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+            var instance = _ControlPointNumberInstance ??= new CParticleTransformInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _ControlPointNumberOffset!.Value);
+            return instance;
         }
     }
     private static nint? _CenterOffsetOffset;
+    private CParticleCollectionVecInputImpl? _CenterOffsetInstance;
 
-    public ref Vector CenterOffset
+    public CParticleCollectionVecInput CenterOffset
     {
         get
         {
             _CenterOffsetOffset = _CenterOffsetOffset ?? Schema.GetOffset(0xDF3E3FA108F7D41F);
-            return ref _Handle.AsRef<Vector>(_CenterOffsetOffset!.Value);
+            var instance = _CenterOffsetInstance ??= new CParticleCollectionVecInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _CenterOffsetOffset!.Value);
+            return instance;
         }
     }
     private static nint? _GlobalCenterOffset;

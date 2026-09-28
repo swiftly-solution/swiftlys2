@@ -17,13 +17,29 @@ internal partial class C_INIT_CreateAlongPathImpl : CParticleFunctionInitializer
     public C_INIT_CreateAlongPathImpl(nint handle) : base(handle) { }
 
     private static nint? _MaxDistanceOffset;
+    private CPerParticleFloatInputImpl? _MaxDistanceInstance;
 
-    public ref float MaxDistance
+    public CPerParticleFloatInput MaxDistance
     {
         get
         {
             _MaxDistanceOffset = _MaxDistanceOffset ?? Schema.GetOffset(0x655F7B0C844E396A);
-            return ref _Handle.AsRef<float>(_MaxDistanceOffset!.Value);
+            var instance = _MaxDistanceInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _MaxDistanceOffset!.Value);
+            return instance;
+        }
+    }
+    private static nint? _TOffset;
+    private CPerParticleFloatInputImpl? _TInstance;
+
+    public CPerParticleFloatInput T
+    {
+        get
+        {
+            _TOffset = _TOffset ?? Schema.GetOffset(0x655F7B0CF6A18B17);
+            var instance = _TInstance ??= new CPerParticleFloatInputImpl(0);
+            instance.DangerousSetHandle(_Handle + _TOffset!.Value);
+            return instance;
         }
     }
     private static nint? _PathParamsOffset;

@@ -9,7 +9,7 @@ namespace SwiftlyS2.Core.GameHooks;
 
 internal static partial class GameHooksPublisher
 {
-    private delegate void CEntityIOOutputFireOutputInternal( nint pEntityIO, nint pActivator, nint pCaller, nint pVariant, float flDelay, nint unk1, nint unk2 );
+    private delegate void CEntityIOOutputFireOutputInternal( nint pEntityIO, nint pActivator, nint pCaller, nint pParameterContainer, float flDelay, nint unk1, nint pVariant);
 
     internal static unsafe Guid HookFireOutput()
     {
@@ -22,7 +22,7 @@ internal static partial class GameHooksPublisher
         var fn = _core.Memory.GetUnmanagedFunctionByAddress<CEntityIOOutputFireOutputInternal>(address);
         return fn.AddHook(next =>
         {
-            return ( pEntityIO, pActivator, pCaller, pVariant, flDelay, unk1, unk2 ) =>
+            return ( pEntityIO, pActivator, pCaller, pParameterContainer, flDelay, unk1, pVariant ) =>
             {
                 var entityIO = pEntityIO.AsRef<CEntityIOOutput>();
                 var outputName = entityIO.Desc.Name.Value;
@@ -60,7 +60,7 @@ internal static partial class GameHooksPublisher
                 InvokeFireOutputPre(ref preCtx);
                 if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return;
 
-                next()(pEntityIO, pActivator, pCaller, pVariant, flDelay, unk1, unk2);
+                next()(pEntityIO, pActivator, pCaller, pParameterContainer, flDelay, unk1, pVariant);
 
                 var postCtx = new FireOutputEntityPostContext { Params = preCtx.Params };
                 InvokeFireOutputPost(ref postCtx);

@@ -15,5 +15,6 @@ public enum MovementCapability_t : uint
     ePlantedTurn = 6,
     eUseStartAsPlantedTurn = 7,
     eLean = 8,
-    eCount = 9,
+    eForwardStartOnly = 9,
+    eCount = 10,
 }

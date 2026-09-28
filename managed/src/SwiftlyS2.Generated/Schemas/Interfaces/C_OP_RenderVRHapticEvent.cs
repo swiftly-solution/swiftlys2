@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RenderVRHapticEvent : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderVRHapticEvent>
 {
     static C_OP_RenderVRHapticEvent ISchemaClass<C_OP_RenderVRHapticEvent>.From(nint handle) => new C_OP_RenderVRHapticEventImpl(handle);
-    static int ISchemaClass<C_OP_RenderVRHapticEvent>.Size => 936;
+    static int ISchemaClass<C_OP_RenderVRHapticEvent>.Size => 952;
     static string? ISchemaClass<C_OP_RenderVRHapticEvent>.ClassName => null;
 
 

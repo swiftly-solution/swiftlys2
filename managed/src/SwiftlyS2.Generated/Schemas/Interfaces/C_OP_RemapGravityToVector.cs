@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RemapGravityToVector : CParticleFunctionOperator, ISchemaClass<C_OP_RemapGravityToVector>
 {
     static C_OP_RemapGravityToVector ISchemaClass<C_OP_RemapGravityToVector>.From(nint handle) => new C_OP_RemapGravityToVectorImpl(handle);
-    static int ISchemaClass<C_OP_RemapGravityToVector>.Size => 2304;
+    static int ISchemaClass<C_OP_RemapGravityToVector>.Size => 2352;
     static string? ISchemaClass<C_OP_RemapGravityToVector>.ClassName => null;
 
 

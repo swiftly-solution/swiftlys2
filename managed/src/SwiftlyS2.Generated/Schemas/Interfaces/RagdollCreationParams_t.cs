@@ -21,8 +21,6 @@ public partial interface RagdollCreationParams_t : ISchemaClass<RagdollCreationP
 
     public ref bool ForceCurrentWorldTransform { get; }
 
-    public ref bool UseLRURetirement { get; }
-
     public ref int HealthToGrant { get; }
 
 

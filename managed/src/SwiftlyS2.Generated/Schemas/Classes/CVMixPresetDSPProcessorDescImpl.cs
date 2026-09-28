@@ -29,5 +29,18 @@ internal partial class CVMixPresetDSPProcessorDescImpl : CVMixBaseProcessorDescI
             return instance;
         }
     }
+    private static nint? _ParamEffectNameOffset;
+    private CVMixParameterEffectNameImpl? _ParamEffectNameInstance;
+
+    public CVMixParameterEffectName ParamEffectName
+    {
+        get
+        {
+            _ParamEffectNameOffset = _ParamEffectNameOffset ?? Schema.GetOffset(0x9FACEE21CC86B95C);
+            var instance = _ParamEffectNameInstance ??= new CVMixParameterEffectNameImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamEffectNameOffset!.Value);
+            return instance;
+        }
+    }
 
 }

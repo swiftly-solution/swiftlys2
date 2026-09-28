@@ -1,6 +1,12 @@
 name: Build
 
-on: [push, workflow_dispatch, pull_request]
+on:
+  push:
+    branches:
+      - master
+      - beta
+  workflow_dispatch:
+  pull_request:
 
 env:
   XMAKE_ROOT: y
@@ -21,17 +27,19 @@ jobs:
       uses: actions/checkout@v4
       with:
         fetch-depth: 0
-    - name: Fetch all tags
+    - name: Fetch version history
       run: |
+        git fetch origin master:refs/remotes/origin/master --force
         git fetch --tags --force
         git tag
-    - name: Setup GitVersion
-      uses: gittools/actions/gitversion/setup@v3.2.1
+    - name: Setup Python
+      uses: actions/setup-python@v5
       with:
-        versionSpec: '5.12.x'
+        python-version: '3.13'
     - name: Determine Version
       id: version_step
-      uses: gittools/actions/gitversion/execute@v3.2.1
+      shell: pwsh
+      run: python versioning/version.py --github-output "$env:GITHUB_OUTPUT"
   managed:
     needs: versioning
     runs-on: ubuntu-latest
@@ -46,15 +54,24 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '10.0.x'
-    - name: Build managed
+    - name: Build managed (Linux)
       run: |
         cd managed
-        dotnet build -c Release -p:Version=${{ needs.versioning.outputs.semVer }} -p:InformationalVersion=${{ needs.versioning.outputs.informationalVersion }} -p:FileVersion=${{ needs.versioning.outputs.semVer }}
-    - name: Upload plugin as artifact
+        dotnet build -c Release -p:SW2Platform=Linux -p:BaseOutputPath=build/linux/ -p:Version=${{ needs.versioning.outputs.semVer }} -p:InformationalVersion=${{ needs.versioning.outputs.informationalVersion }} -p:FileVersion=${{ needs.versioning.outputs.semVer }}
+    - name: Build managed (Windows)
+      run: |
+        cd managed
+        dotnet build -c Release -p:SW2Platform=Windows -p:BaseOutputPath=build/windows/ -p:Version=${{ needs.versioning.outputs.semVer }} -p:InformationalVersion=${{ needs.versioning.outputs.informationalVersion }} -p:FileVersion=${{ needs.versioning.outputs.semVer }}
+    - name: Upload plugin as artifact (Linux)
       uses: actions/upload-artifact@v4
       with:
-        name: swiftlys2_managed
-        path: managed/build/Release
+        name: swiftlys2_managed_linux
+        path: managed/build/linux/Release
+    - name: Upload plugin as artifact (Windows)
+      uses: actions/upload-artifact@v4
+      with:
+        name: swiftlys2_managed_windows
+        path: managed/build/windows/Release
   linux_core:
     needs: versioning
     runs-on: ubuntu-latest
@@ -63,7 +80,7 @@ jobs:
     steps:
     - name: Install dependencies
       run: |
-        apt-get update
+        apt-get -o Acquire::Check-Valid-Until=false update
         apt install -y libreadline-dev
     - name: Checkout repository and submodules
       uses: actions/checkout@v4
@@ -137,7 +154,7 @@ jobs:
     steps:
     - name: Install dependencies
       run: |
-        apt-get update
+        apt-get -o Acquire::Check-Valid-Until=false update
         apt install libreadline-dev
     - name: Checkout repository and submodules
       uses: actions/checkout@v4
@@ -244,8 +261,13 @@ jobs:
     - name: Download artifacts
       uses: actions/download-artifact@v4
       with:
-        name: swiftlys2_managed
-        path: ./managed
+        name: swiftlys2_managed_linux
+        path: ./managed-linux
+    - name: Download artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: swiftlys2_managed_windows
+        path: ./managed-windows
     - name: Download runtimes
       run: |
         mkdir -p ./linux-runtimes
@@ -262,9 +284,9 @@ jobs:
       
     - name: Create package
       run: |
-        ls -la ./managed
-        cp -r managed/SwiftlyS2 ${{ env.LINUX_FOLDER }}/swiftlys2/bin/managed
-        cp -r managed/SwiftlyS2 ${{ env.WINDOWS_FOLDER }}/swiftlys2/bin/managed
+        ls -la ./managed-linux ./managed-windows
+        cp -r managed-linux/SwiftlyS2 ${{ env.LINUX_FOLDER }}/swiftlys2/bin/managed
+        cp -r managed-windows/SwiftlyS2 ${{ env.WINDOWS_FOLDER }}/swiftlys2/bin/managed
 
         cp -r ${{ env.LINUX_FOLDER }}-loader/* ${{ env.LINUX_FOLDER }}/
         cp -r ${{ env.WINDOWS_FOLDER }}-loader/* ${{ env.WINDOWS_FOLDER }}/
@@ -328,13 +350,14 @@ jobs:
       uses: actions/checkout@v4
       with:
         fetch-depth: 0
+        token: ${{ secrets.SWIFTLYCHAN_PAT }}
     - name: Create tag
       run: |
         TAG_NAME="${{ env.TAG_NAME }}"
         MSG="Release v${{ needs.versioning.outputs.semVer }}"
 
-        git config --global user.name "github-actions[bot]"
-        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git config --global user.name "swiftlychan"
+        git config --global user.email "swiftlychan@swiftlys2.net"
 
         if git rev-parse -q --verify "refs/tags/$TAG_NAME" >/dev/null; then
           exit 0
@@ -351,6 +374,7 @@ jobs:
     - name: Create release
       uses: softprops/action-gh-release@v2
       with:
+        token: ${{ secrets.SWIFTLYCHAN_PAT }}
         generate_release_notes: true
         files: |
           release/swiftlys2-linux-v${{ needs.versioning.outputs.semVer }}.zip
@@ -362,6 +386,13 @@ jobs:
         tag_name: ${{ env.TAG_NAME }}
         name: Release v${{ needs.versioning.outputs.semVer }}
         body: ${{ needs.versioning.outputs.semVer  }}
+
+    - name: Trigger API docs build
+      uses: peter-evans/repository-dispatch@v3
+      with:
+        token: ${{ secrets.SWIFTLYCHAN_PAT }}
+        repository: swiftly-solution/swiftlys2.net-docs
+        event-type: swiftlys2-updated
 
     - name: Get commit summary for beta
       if: github.ref == 'refs/heads/beta'
@@ -450,6 +481,24 @@ jobs:
         embed-timestamp: ${{ github.event.head_commit.timestamp }}
         embed-footer-text: "Stable Release • SwiftlyS2"
         content: <@&1438068068587933706>
+
+  sync_beta:
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+    needs: releasing
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - name: Synchronize master to beta
+      run: |
+        git fetch origin master:refs/remotes/origin/master beta:refs/remotes/origin/beta
+        git checkout -B beta origin/beta
+        git reset --hard origin/master
+        git push --force-with-lease=refs/heads/beta origin beta
 
   nuget:
     if: ${{ github.event_name == 'push' && github.repository_owner == 'swiftly-solution' }}

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RemapVectorToRotations : CParticleFunctionOperator, ISchemaClass<C_OP_RemapVectorToRotations>
 {
     static C_OP_RemapVectorToRotations ISchemaClass<C_OP_RemapVectorToRotations>.From(nint handle) => new C_OP_RemapVectorToRotationsImpl(handle);
-    static int ISchemaClass<C_OP_RemapVectorToRotations>.Size => 3912;
+    static int ISchemaClass<C_OP_RemapVectorToRotations>.Size => 3984;
     static string? ISchemaClass<C_OP_RemapVectorToRotations>.ClassName => null;
 
 

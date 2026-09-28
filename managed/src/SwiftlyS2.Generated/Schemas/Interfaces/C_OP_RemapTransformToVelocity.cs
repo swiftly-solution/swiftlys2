@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RemapTransformToVelocity : CParticleFunctionOperator, ISchemaClass<C_OP_RemapTransformToVelocity>
 {
     static C_OP_RemapTransformToVelocity ISchemaClass<C_OP_RemapTransformToVelocity>.From(nint handle) => new C_OP_RemapTransformToVelocityImpl(handle);
-    static int ISchemaClass<C_OP_RemapTransformToVelocity>.Size => 576;
+    static int ISchemaClass<C_OP_RemapTransformToVelocity>.Size => 584;
     static string? ISchemaClass<C_OP_RemapTransformToVelocity>.ClassName => null;
 
 

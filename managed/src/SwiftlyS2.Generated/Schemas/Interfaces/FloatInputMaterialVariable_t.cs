@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface FloatInputMaterialVariable_t : ISchemaClass<FloatInputMaterialVariable_t>
 {
     static FloatInputMaterialVariable_t ISchemaClass<FloatInputMaterialVariable_t>.From(nint handle) => new FloatInputMaterialVariable_tImpl(handle);
-    static int ISchemaClass<FloatInputMaterialVariable_t>.Size => 376;
+    static int ISchemaClass<FloatInputMaterialVariable_t>.Size => 384;
     static string? ISchemaClass<FloatInputMaterialVariable_t>.ClassName => null;
 
 

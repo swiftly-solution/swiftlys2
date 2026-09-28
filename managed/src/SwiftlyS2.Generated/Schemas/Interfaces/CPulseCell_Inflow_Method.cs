@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPulseCell_Inflow_Method : CPulseCell_Inflow_BaseEntrypoint, ISchemaClass<CPulseCell_Inflow_Method>
 {
     static CPulseCell_Inflow_Method ISchemaClass<CPulseCell_Inflow_Method>.From(nint handle) => new CPulseCell_Inflow_MethodImpl(handle);
-    static int ISchemaClass<CPulseCell_Inflow_Method>.Size => 200;
+    static int ISchemaClass<CPulseCell_Inflow_Method>.Size => 192;
     static string? ISchemaClass<CPulseCell_Inflow_Method>.ClassName => null;
 
 
@@ -22,10 +22,9 @@ public partial interface CPulseCell_Inflow_Method : CPulseCell_Inflow_BaseEntryp
 
     public ref bool IsPublic { get; }
 
-    // CPulseValueFullType
-    public SchemaUntypedField ReturnType { get; }
-
     public ref CUtlLeanVector<CPulseRuntimeMethodArg, int> Args { get; }
+
+    public ref CUtlLeanVector<CPulseRuntimeMethodArg, int> ReturnValues { get; }
 
 
 }

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CFuncMoverRouter : CLogicalEntity, ISchemaClass<CFuncMoverRouter>
 {
     static CFuncMoverRouter ISchemaClass<CFuncMoverRouter>.From(nint handle) => new CFuncMoverRouterImpl(handle);
-    static int ISchemaClass<CFuncMoverRouter>.Size => 1256;
+    static int ISchemaClass<CFuncMoverRouter>.Size => 1216;
     static string? ISchemaClass<CFuncMoverRouter>.ClassName => "func_mover_router";
 
 

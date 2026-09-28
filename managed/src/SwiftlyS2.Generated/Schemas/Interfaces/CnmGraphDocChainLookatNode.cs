@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CnmGraphDocChainLookatNode : CNmGraphDocVariationDataNode, ISchemaClass<CnmGraphDocChainLookatNode>
 {
     static CnmGraphDocChainLookatNode ISchemaClass<CnmGraphDocChainLookatNode>.From(nint handle) => new CnmGraphDocChainLookatNodeImpl(handle);
-    static int ISchemaClass<CnmGraphDocChainLookatNode>.Size => 520;
+    static int ISchemaClass<CnmGraphDocChainLookatNode>.Size => 528;
     static string? ISchemaClass<CnmGraphDocChainLookatNode>.ClassName => null;
 
 

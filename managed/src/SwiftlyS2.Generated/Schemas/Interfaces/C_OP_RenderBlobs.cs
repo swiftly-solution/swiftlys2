@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RenderBlobs : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderBlobs>
 {
     static C_OP_RenderBlobs ISchemaClass<C_OP_RenderBlobs>.From(nint handle) => new C_OP_RenderBlobsImpl(handle);
-    static int ISchemaClass<C_OP_RenderBlobs>.Size => 1728;
+    static int ISchemaClass<C_OP_RenderBlobs>.Size => 1760;
     static string? ISchemaClass<C_OP_RenderBlobs>.ClassName => null;
 
 

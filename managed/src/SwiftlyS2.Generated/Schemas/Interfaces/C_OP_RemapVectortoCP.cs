@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RemapVectortoCP : CParticleFunctionOperator, ISchemaClass<C_OP_RemapVectortoCP>
 {
     static C_OP_RemapVectortoCP ISchemaClass<C_OP_RemapVectortoCP>.From(nint handle) => new C_OP_RemapVectortoCPImpl(handle);
-    static int ISchemaClass<C_OP_RemapVectortoCP>.Size => 488;
+    static int ISchemaClass<C_OP_RemapVectortoCP>.Size => 496;
     static string? ISchemaClass<C_OP_RemapVectortoCP>.ClassName => null;
 
 

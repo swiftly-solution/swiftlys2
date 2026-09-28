@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_SetControlPointToImpactPoint : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointToImpactPoint>
 {
     static C_OP_SetControlPointToImpactPoint ISchemaClass<C_OP_SetControlPointToImpactPoint>.From(nint handle) => new C_OP_SetControlPointToImpactPointImpl(handle);
-    static int ISchemaClass<C_OP_SetControlPointToImpactPoint>.Size => 1024;
+    static int ISchemaClass<C_OP_SetControlPointToImpactPoint>.Size => 1040;
     static string? ISchemaClass<C_OP_SetControlPointToImpactPoint>.ClassName => null;
 
 

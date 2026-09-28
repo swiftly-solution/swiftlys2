@@ -3,7 +3,6 @@ using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.GameHooks;
 using SwiftlyS2.Shared.Misc;
-using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.GameHooks;
 

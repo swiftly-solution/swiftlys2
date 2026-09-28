@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_RandomVectorComponent : CParticleFunctionInitializer, ISchemaClass<C_INIT_RandomVectorComponent>
 {
     static C_INIT_RandomVectorComponent ISchemaClass<C_INIT_RandomVectorComponent>.From(nint handle) => new C_INIT_RandomVectorComponentImpl(handle);
-    static int ISchemaClass<C_INIT_RandomVectorComponent>.Size => 496;
+    static int ISchemaClass<C_INIT_RandomVectorComponent>.Size => 504;
     static string? ISchemaClass<C_INIT_RandomVectorComponent>.ClassName => null;
 
 

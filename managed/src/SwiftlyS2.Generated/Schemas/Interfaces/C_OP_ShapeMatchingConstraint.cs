@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_ShapeMatchingConstraint : CParticleFunctionConstraint, ISchemaClass<C_OP_ShapeMatchingConstraint>
 {
     static C_OP_ShapeMatchingConstraint ISchemaClass<C_OP_ShapeMatchingConstraint>.From(nint handle) => new C_OP_ShapeMatchingConstraintImpl(handle);
-    static int ISchemaClass<C_OP_ShapeMatchingConstraint>.Size => 480;
+    static int ISchemaClass<C_OP_ShapeMatchingConstraint>.Size => 488;
     static string? ISchemaClass<C_OP_ShapeMatchingConstraint>.ClassName => null;
 
 

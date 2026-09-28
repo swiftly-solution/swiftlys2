@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_DirectionBetweenVecsToVec : CParticleFunctionOperator, ISchemaClass<C_OP_DirectionBetweenVecsToVec>
 {
     static C_OP_DirectionBetweenVecsToVec ISchemaClass<C_OP_DirectionBetweenVecsToVec>.From(nint handle) => new C_OP_DirectionBetweenVecsToVecImpl(handle);
-    static int ISchemaClass<C_OP_DirectionBetweenVecsToVec>.Size => 3920;
+    static int ISchemaClass<C_OP_DirectionBetweenVecsToVec>.Size => 3992;
     static string? ISchemaClass<C_OP_DirectionBetweenVecsToVec>.ClassName => null;
 
 

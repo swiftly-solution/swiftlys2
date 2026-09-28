@@ -27,45 +27,126 @@
 #include <api/shared/jsonc.h>
 #include <api/shared/files.h>
 
+#include <atomic>
+#include <mutex>
+#include <thread>
+#include <utility>
+#include <vector>
+
 using json = nlohmann::json;
 
 std::map<uint64_t, std::function<void(const std::string&)>> g_ConsoleListeners;
+std::mutex g_ConsoleListenersMutex;
+
+constexpr uint32_t CONSOLE_FILTER_ENABLED = 1;
+constexpr uint32_t CONSOLE_LISTENER_INCREMENT = 2;
+std::atomic<uint32_t> g_ConsoleWorkState{ 0 };
+
+std::vector<std::string> g_QueuedConsoleMessages;
+std::vector<std::string> g_DispatchedConsoleMessages;
+std::mutex g_QueuedConsoleMessagesMutex;
+std::mutex g_DispatchConsoleMessagesMutex;
+std::atomic<bool> g_HasQueuedConsoleMessages{ false };
+std::thread g_ConsoleDispatchThread;
+std::atomic<bool> g_ConsoleDispatchRunning{ false };
+
 std::map<uint64_t, pcre2_code*> g_Filters;
 std::map<uint64_t, pcre2_match_data*> g_FiltersMatchData;
 
-bool g_bEnabled = false;
 uint64_t g_filterIds = 1;
 
 std::map<uint64_t, std::string> g_FilterNames;
 std::map<uint64_t, uint64_t> g_FilteredMessages;
-bool skipNextNewlineOnlyLog = false;
+std::atomic<bool> skipNextNewlineOnlyLog{ false };
 
 IFunctionHook* g_CLoggingSystem_LogDirect_Hook = nullptr;
 
-int CLoggingSystem_LogDirectHook(void* loggingSystem, int channel, int severity, LeafCodeInfo_t* leafCode, char const* str, va_list* args)
+#if defined(_MSC_VER)
+#define SWIFTLY_CONSOLE_NOINLINE __declspec(noinline)
+#else
+#define SWIFTLY_CONSOLE_NOINLINE __attribute__((noinline))
+#endif
+
+static SWIFTLY_CONSOLE_NOINLINE bool FilterOrQueueConsoleMessage(
+    const char* str,
+    va_list* args,
+    bool filterEnabled,
+    bool hasListeners
+)
 {
-    if (!str)
-        return reinterpret_cast<decltype(&CLoggingSystem_LogDirectHook)>(g_CLoggingSystem_LogDirect_Hook->GetOriginal())(loggingSystem, channel, severity, leafCode, str, args);
-
-    if (skipNextNewlineOnlyLog && strcmp(str, "\n") == 0) {
-        skipNextNewlineOnlyLog = false;
-        return 0;
-    }
-
     char buf[MAX_LOGGING_MESSAGE_LENGTH];
+    const char* message = str;
     if (args) {
         va_list cpargs;
         va_copy(cpargs, *args);
         V_vsnprintf(buf, sizeof(buf), str, cpargs);
         va_end(cpargs);
+        message = buf;
     }
 
-    if (g_pConsoleOutput->NeedsFiltering(args ? buf : (char*)str)) return 0;
+    if (filterEnabled && g_pConsoleOutput->NeedsFiltering(const_cast<char*>(message))) return true;
 
-    for (const auto& [id, callback] : g_ConsoleListeners)
-        callback(args ? buf : str);
+    bool wakeDispatcher = false;
+    if (hasListeners)
+    {
+        std::lock_guard<std::mutex> lock(g_QueuedConsoleMessagesMutex);
 
-    return reinterpret_cast<decltype(&CLoggingSystem_LogDirectHook)>(g_CLoggingSystem_LogDirect_Hook->GetOriginal())(loggingSystem, channel, severity, leafCode, str, args);
+        // A listener may have been removed after the fast-path load.
+        if (g_ConsoleWorkState.load(std::memory_order_relaxed) >= CONSOLE_LISTENER_INCREMENT)
+        {
+            wakeDispatcher = g_QueuedConsoleMessages.empty();
+            g_QueuedConsoleMessages.emplace_back(message);
+            if (wakeDispatcher)
+                g_HasQueuedConsoleMessages.store(true, std::memory_order_release);
+        }
+    }
+
+    // One wake-up is enough for a complete batch. Avoid notifying the worker for
+    // every message while producers are already filling a non-empty queue.
+    if (wakeDispatcher)
+        g_HasQueuedConsoleMessages.notify_one();
+
+    return false;
+}
+
+static void ConsoleDispatchWorker()
+{
+    while (g_ConsoleDispatchRunning.load(std::memory_order_acquire))
+    {
+        g_HasQueuedConsoleMessages.wait(false, std::memory_order_acquire);
+
+        if (!g_ConsoleDispatchRunning.load(std::memory_order_acquire))
+            break;
+
+        g_pConsoleOutput->DispatchQueuedListeners();
+    }
+}
+
+#undef SWIFTLY_CONSOLE_NOINLINE
+
+int CLoggingSystem_LogDirectHook(void* loggingSystem, int channel, int severity, LeafCodeInfo_t* leafCode, char const* str, va_list* args)
+{
+    const auto original = reinterpret_cast<decltype(&CLoggingSystem_LogDirectHook)>(g_CLoggingSystem_LogDirect_Hook->GetOriginal());
+
+    if (!str)
+        return original(loggingSystem, channel, severity, leafCode, str, args);
+
+    if (skipNextNewlineOnlyLog.load(std::memory_order_relaxed) && strcmp(str, "\n") == 0) {
+        skipNextNewlineOnlyLog.store(false, std::memory_order_relaxed);
+        return 0;
+    }
+
+    const uint32_t workState = g_ConsoleWorkState.load(std::memory_order_relaxed);
+    const bool filterEnabled = (workState & CONSOLE_FILTER_ENABLED) != 0;
+    const bool hasListeners = workState >= CONSOLE_LISTENER_INCREMENT;
+
+    // The overwhelmingly common no-consumer path must not format, allocate, copy, or lock.
+    if (!filterEnabled && !hasListeners) [[likely]]
+        return original(loggingSystem, channel, severity, leafCode, str, args);
+
+    if (FilterOrQueueConsoleMessage(str, args, filterEnabled, hasListeners)) return 0;
+
+    return original(loggingSystem, channel, severity, leafCode, str, args);
 }
 
 void CConsoleOutput::Initialize()
@@ -78,6 +159,9 @@ void CConsoleOutput::Initialize()
     g_CLoggingSystem_LogDirect_Hook->Enable();
 
     ReloadFilterConfiguration();
+
+    g_ConsoleDispatchRunning.store(true, std::memory_order_release);
+    g_ConsoleDispatchThread = std::thread(ConsoleDispatchWorker);
 }
 
 void CConsoleOutput::Shutdown()
@@ -86,6 +170,19 @@ void CConsoleOutput::Shutdown()
         g_CLoggingSystem_LogDirect_Hook->Disable();
         g_pHooksManager->DestroyFunctionHook(g_CLoggingSystem_LogDirect_Hook);
         g_CLoggingSystem_LogDirect_Hook = nullptr;
+    }
+
+    g_ConsoleDispatchRunning.store(false, std::memory_order_release);
+    g_HasQueuedConsoleMessages.store(true, std::memory_order_release);
+    g_HasQueuedConsoleMessages.notify_one();
+    if (g_ConsoleDispatchThread.joinable())
+        g_ConsoleDispatchThread.join();
+
+    {
+        std::scoped_lock lock(g_DispatchConsoleMessagesMutex, g_QueuedConsoleMessagesMutex);
+        g_QueuedConsoleMessages.clear();
+        g_DispatchedConsoleMessages.clear();
+        g_HasQueuedConsoleMessages.store(false, std::memory_order_release);
     }
 }
 
@@ -134,12 +231,12 @@ void CConsoleOutput::ReloadFilterConfiguration()
 
 void CConsoleOutput::ToggleFilter()
 {
-    g_bEnabled = !g_bEnabled;
+    g_ConsoleWorkState.fetch_xor(CONSOLE_FILTER_ENABLED, std::memory_order_relaxed);
 }
 
 bool CConsoleOutput::IsEnabled()
 {
-    return g_bEnabled;
+    return (g_ConsoleWorkState.load(std::memory_order_relaxed) & CONSOLE_FILTER_ENABLED) != 0;
 }
 
 bool CConsoleOutput::NeedsFiltering(char* text)
@@ -159,7 +256,10 @@ bool CConsoleOutput::NeedsFiltering(char* text)
             uint64_t key = it->first;
             g_FilteredMessages[key]++;
 
-            skipNextNewlineOnlyLog = (g_FilterNames[key] == "Framerate_Values" || g_FilterNames[key] == "Framerate_Total");
+            skipNextNewlineOnlyLog.store(
+                g_FilterNames[key] == "Framerate_Values" || g_FilterNames[key] == "Framerate_Total",
+                std::memory_order_relaxed
+            );
 
             return true;
         }
@@ -180,11 +280,64 @@ std::string CConsoleOutput::GetCounterText()
 uint64_t CConsoleOutput::AddConsoleListener(std::function<void(const std::string&)> callback)
 {
     static uint64_t current_id = 0;
-    g_ConsoleListeners[current_id] = callback;
-    return current_id++;
+    std::lock_guard<std::mutex> lock(g_ConsoleListenersMutex);
+
+    const uint64_t id = current_id++;
+    g_ConsoleListeners.emplace(id, std::move(callback));
+    g_ConsoleWorkState.fetch_add(CONSOLE_LISTENER_INCREMENT, std::memory_order_relaxed);
+    return id;
 }
 
 void CConsoleOutput::RemoveConsoleListener(uint64_t id)
 {
-    if (g_ConsoleListeners.contains(id)) g_ConsoleListeners.erase(id);
+    bool removedLastListener = false;
+    {
+        std::lock_guard<std::mutex> lock(g_ConsoleListenersMutex);
+        if (g_ConsoleListeners.erase(id) == 0) return;
+
+        const uint32_t previousState = g_ConsoleWorkState.fetch_sub(CONSOLE_LISTENER_INCREMENT, std::memory_order_relaxed);
+        removedLastListener = previousState < CONSOLE_LISTENER_INCREMENT * 2;
+    }
+
+    if (removedLastListener)
+    {
+        std::lock_guard<std::mutex> lock(g_QueuedConsoleMessagesMutex);
+        g_QueuedConsoleMessages.clear();
+        g_HasQueuedConsoleMessages.store(false, std::memory_order_release);
+    }
+}
+
+void CConsoleOutput::DispatchQueuedListeners()
+{
+    // The idle dispatcher path is a single atomic load with no mutex acquisition.
+    if (!g_HasQueuedConsoleMessages.load(std::memory_order_acquire)) return;
+
+    // The worker is the normal consumer. An explicit command-output flush may race it;
+    // wait for the active batch so the capture window cannot close too early.
+    std::unique_lock<std::mutex> dispatchLock(g_DispatchConsoleMessagesMutex);
+
+    // Avoid taking the queue mutex when no console messages were produced.
+    if (!g_HasQueuedConsoleMessages.exchange(false, std::memory_order_acq_rel)) return;
+
+    {
+        std::lock_guard<std::mutex> lock(g_QueuedConsoleMessagesMutex);
+        g_QueuedConsoleMessages.swap(g_DispatchedConsoleMessages);
+    }
+
+    if (g_DispatchedConsoleMessages.empty()) return;
+
+    std::vector<std::function<void(const std::string&)>> listeners;
+    {
+        std::lock_guard<std::mutex> lock(g_ConsoleListenersMutex);
+        listeners.reserve(g_ConsoleListeners.size());
+        for (const auto& [id, callback] : g_ConsoleListeners)
+            listeners.emplace_back(callback);
+    }
+
+    for (const auto& message : g_DispatchedConsoleMessages)
+        for (const auto& callback : listeners)
+            callback(message);
+
+    // Keep the allocation for the next buffer swap while releasing message payloads now.
+    g_DispatchedConsoleMessages.clear();
 }

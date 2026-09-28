@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_CSGO_EndOfMatchCharacterPosition : C_CSGO_TeamPreviewCharacterPosition, ISchemaClass<C_CSGO_EndOfMatchCharacterPosition>
 {
     static C_CSGO_EndOfMatchCharacterPosition ISchemaClass<C_CSGO_EndOfMatchCharacterPosition>.From(nint handle) => new C_CSGO_EndOfMatchCharacterPositionImpl(handle);
-    static int ISchemaClass<C_CSGO_EndOfMatchCharacterPosition>.Size => 5024;
+    static int ISchemaClass<C_CSGO_EndOfMatchCharacterPosition>.Size => 7448;
     static string? ISchemaClass<C_CSGO_EndOfMatchCharacterPosition>.ClassName => null;
 
 }

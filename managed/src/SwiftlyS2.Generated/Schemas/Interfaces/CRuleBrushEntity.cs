@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CRuleBrushEntity : CRuleEntity, ISchemaClass<CRuleBrushEntity>
 {
     static CRuleBrushEntity ISchemaClass<CRuleBrushEntity>.From(nint handle) => new CRuleBrushEntityImpl(handle);
-    static int ISchemaClass<CRuleBrushEntity>.Size => 1912;
+    static int ISchemaClass<CRuleBrushEntity>.Size => 2136;
     static string? ISchemaClass<CRuleBrushEntity>.ClassName => null;
 
 }

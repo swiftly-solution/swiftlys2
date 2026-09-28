@@ -169,6 +169,16 @@ internal partial class CBasePlayerWeaponVDataImpl : CEntitySubclassVDataBaseImpl
             return ref _Handle.AsRef<bool>(_GenerateMuzzleLightOffset!.Value);
         }
     }
+    private static nint? _ShouldAnimateInWorldOffset;
+
+    public ref bool ShouldAnimateInWorld
+    {
+        get
+        {
+            _ShouldAnimateInWorldOffset = _ShouldAnimateInWorldOffset ?? Schema.GetOffset(0x64E418A04479CFA6);
+            return ref _Handle.AsRef<bool>(_ShouldAnimateInWorldOffset!.Value);
+        }
+    }
     private static nint? _LinkedCooldownsOffset;
 
     public ref bool LinkedCooldowns

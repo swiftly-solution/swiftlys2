@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmGraphDocLayerBlendNode : CNmGraphDocFlowNode, ISchemaClass<CNmGraphDocLayerBlendNode>
 {
     static CNmGraphDocLayerBlendNode ISchemaClass<CNmGraphDocLayerBlendNode>.From(nint handle) => new CNmGraphDocLayerBlendNodeImpl(handle);
-    static int ISchemaClass<CNmGraphDocLayerBlendNode>.Size => 264;
+    static int ISchemaClass<CNmGraphDocLayerBlendNode>.Size => 272;
     static string? ISchemaClass<CNmGraphDocLayerBlendNode>.ClassName => null;
 
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_RtEnvCull : CParticleFunctionInitializer, ISchemaClass<C_INIT_RtEnvCull>
 {
     static C_INIT_RtEnvCull ISchemaClass<C_INIT_RtEnvCull>.From(nint handle) => new C_INIT_RtEnvCullImpl(handle);
-    static int ISchemaClass<C_INIT_RtEnvCull>.Size => 648;
+    static int ISchemaClass<C_INIT_RtEnvCull>.Size => 656;
     static string? ISchemaClass<C_INIT_RtEnvCull>.ClassName => null;
 
 

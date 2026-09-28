@@ -46,5 +46,15 @@ internal partial class CVMixAudioMeterImpl : SchemaClass, CVMixAudioMeter
             Schema.SetCUtlString(_Handle, _DisplayNameOffset!.Value, value);
         }
     }
+    private static nint? _DebugIdOffset;
+
+    public ref uint DebugId
+    {
+        get
+        {
+            _DebugIdOffset = _DebugIdOffset ?? Schema.GetOffset(0xE65785750D1706B1);
+            return ref _Handle.AsRef<uint>(_DebugIdOffset!.Value);
+        }
+    }
 
 }

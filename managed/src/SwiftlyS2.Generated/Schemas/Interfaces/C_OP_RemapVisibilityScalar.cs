@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RemapVisibilityScalar : CParticleFunctionOperator, ISchemaClass<C_OP_RemapVisibilityScalar>
 {
     static C_OP_RemapVisibilityScalar ISchemaClass<C_OP_RemapVisibilityScalar>.From(nint handle) => new C_OP_RemapVisibilityScalarImpl(handle);
-    static int ISchemaClass<C_OP_RemapVisibilityScalar>.Size => 504;
+    static int ISchemaClass<C_OP_RemapVisibilityScalar>.Size => 512;
     static string? ISchemaClass<C_OP_RemapVisibilityScalar>.ClassName => null;
 
 

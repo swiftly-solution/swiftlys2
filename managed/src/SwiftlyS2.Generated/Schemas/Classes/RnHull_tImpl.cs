@@ -36,6 +36,16 @@ internal partial class RnHull_tImpl : SchemaClass, RnHull_t
             return ref _Handle.AsRef<float>(_MaxAngularRadiusOffset!.Value);
         }
     }
+    private static nint? _MinCentroidRadiusOffset;
+
+    public ref float MinCentroidRadius
+    {
+        get
+        {
+            _MinCentroidRadiusOffset = _MinCentroidRadiusOffset ?? Schema.GetOffset(0x856EB4A1B0249D2F);
+            return ref _Handle.AsRef<float>(_MinCentroidRadiusOffset!.Value);
+        }
+    }
     private static nint? _BoundsOffset;
     private AABB_tImpl? _BoundsInstance;
 

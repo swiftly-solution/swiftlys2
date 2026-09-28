@@ -11,15 +11,15 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_MaintainSequentialPath : CParticleFunctionOperator, ISchemaClass<C_OP_MaintainSequentialPath>
 {
     static C_OP_MaintainSequentialPath ISchemaClass<C_OP_MaintainSequentialPath>.From(nint handle) => new C_OP_MaintainSequentialPathImpl(handle);
-    static int ISchemaClass<C_OP_MaintainSequentialPath>.Size => 560;
+    static int ISchemaClass<C_OP_MaintainSequentialPath>.Size => 1680;
     static string? ISchemaClass<C_OP_MaintainSequentialPath>.ClassName => null;
 
 
-    public ref float MaxDistance { get; }
+    public CParticleCollectionFloatInput MaxDistance { get; }
 
-    public ref float NumToAssign { get; }
+    public CParticleCollectionFloatInput NumToAssign { get; }
 
-    public ref float CohesionStrength { get; }
+    public CParticleCollectionFloatInput CohesionStrength { get; }
 
     public ref float Tolerance { get; }
 

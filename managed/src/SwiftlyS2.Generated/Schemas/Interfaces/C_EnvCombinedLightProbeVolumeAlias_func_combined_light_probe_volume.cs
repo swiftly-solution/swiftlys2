@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_EnvCombinedLightProbeVolumeAlias_func_combined_light_probe_volume : C_EnvCombinedLightProbeVolume, ISchemaClass<C_EnvCombinedLightProbeVolumeAlias_func_combined_light_probe_volume>
 {
     static C_EnvCombinedLightProbeVolumeAlias_func_combined_light_probe_volume ISchemaClass<C_EnvCombinedLightProbeVolumeAlias_func_combined_light_probe_volume>.From(nint handle) => new C_EnvCombinedLightProbeVolumeAlias_func_combined_light_probe_volumeImpl(handle);
-    static int ISchemaClass<C_EnvCombinedLightProbeVolumeAlias_func_combined_light_probe_volume>.Size => 5960;
+    static int ISchemaClass<C_EnvCombinedLightProbeVolumeAlias_func_combined_light_probe_volume>.Size => 2008;
     static string? ISchemaClass<C_EnvCombinedLightProbeVolumeAlias_func_combined_light_probe_volume>.ClassName => null;
 
 }

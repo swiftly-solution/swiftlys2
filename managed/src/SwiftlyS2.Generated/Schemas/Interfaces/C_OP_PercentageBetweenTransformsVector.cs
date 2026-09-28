@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_PercentageBetweenTransformsVector : CParticleFunctionOperator, ISchemaClass<C_OP_PercentageBetweenTransformsVector>
 {
     static C_OP_PercentageBetweenTransformsVector ISchemaClass<C_OP_PercentageBetweenTransformsVector>.From(nint handle) => new C_OP_PercentageBetweenTransformsVectorImpl(handle);
-    static int ISchemaClass<C_OP_PercentageBetweenTransformsVector>.Size => 728;
+    static int ISchemaClass<C_OP_PercentageBetweenTransformsVector>.Size => 736;
     static string? ISchemaClass<C_OP_PercentageBetweenTransformsVector>.ClassName => null;
 
 

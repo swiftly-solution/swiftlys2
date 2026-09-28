@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_CollideWithSelf : CParticleFunctionConstraint, ISchemaClass<C_OP_CollideWithSelf>
 {
     static C_OP_CollideWithSelf ISchemaClass<C_OP_CollideWithSelf>.From(nint handle) => new C_OP_CollideWithSelfImpl(handle);
-    static int ISchemaClass<C_OP_CollideWithSelf>.Size => 1208;
+    static int ISchemaClass<C_OP_CollideWithSelf>.Size => 1232;
     static string? ISchemaClass<C_OP_CollideWithSelf>.ClassName => null;
 
 

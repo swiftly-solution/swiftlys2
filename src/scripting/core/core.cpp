@@ -56,11 +56,11 @@ char* Bridge_Core_PluginLoadOrder(int* size)
     return Bridge_Core_CopyString("", size);
 }
 
-uint8_t Bridge_Core_EnableProfilerByDefault()
+int32_t Bridge_Core_GetProfilerLevelByDefault()
 {
-    if (bool* b = std::get_if<bool>(&g_pConfiguration->GetValue("core.EnableProfiler")))
+    if (int* i = std::get_if<int>(&g_pConfiguration->GetValue("core.ProfilerLevel")))
     {
-        return *b ? 1 : 0;
+        return (int32_t)*i;
     }
     return 0;
 }
@@ -72,5 +72,5 @@ uint8_t Bridge_Core_IsMainThread()
 
 DEFINE_NATIVE("Core.PluginManualLoadState", Bridge_Core_PluginManualLoadState);
 DEFINE_NATIVE("Core.PluginLoadOrder", Bridge_Core_PluginLoadOrder);
-DEFINE_NATIVE("Core.EnableProfilerByDefault", Bridge_Core_EnableProfilerByDefault);
+DEFINE_NATIVE("Core.GetProfilerLevelByDefault", Bridge_Core_GetProfilerLevelByDefault);
 DEFINE_NATIVE("Core.IsMainThread", Bridge_Core_IsMainThread);

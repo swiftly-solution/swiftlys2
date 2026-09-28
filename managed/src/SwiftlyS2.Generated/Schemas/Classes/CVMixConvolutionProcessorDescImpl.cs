@@ -29,5 +29,18 @@ internal partial class CVMixConvolutionProcessorDescImpl : CVMixBaseProcessorDes
             return instance;
         }
     }
+    private static nint? _ParamImpulseResponseOffset;
+    private CVMixDataOffsetImpl? _ParamImpulseResponseInstance;
+
+    public CVMixDataOffset ParamImpulseResponse
+    {
+        get
+        {
+            _ParamImpulseResponseOffset = _ParamImpulseResponseOffset ?? Schema.GetOffset(0xF552D8C105F2F07E);
+            var instance = _ParamImpulseResponseInstance ??= new CVMixDataOffsetImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamImpulseResponseOffset!.Value);
+            return instance;
+        }
+    }
 
 }

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmGraphDocFloatControlParameterNode : CNmGraphDocControlParameterNode, ISchemaClass<CNmGraphDocFloatControlParameterNode>
 {
     static CNmGraphDocFloatControlParameterNode ISchemaClass<CNmGraphDocFloatControlParameterNode>.From(nint handle) => new CNmGraphDocFloatControlParameterNodeImpl(handle);
-    static int ISchemaClass<CNmGraphDocFloatControlParameterNode>.Size => 296;
+    static int ISchemaClass<CNmGraphDocFloatControlParameterNode>.Size => 304;
     static string? ISchemaClass<CNmGraphDocFloatControlParameterNode>.ClassName => null;
 
 

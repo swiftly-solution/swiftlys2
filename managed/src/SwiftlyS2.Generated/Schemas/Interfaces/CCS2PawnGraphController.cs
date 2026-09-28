@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CCS2PawnGraphController : CCS2WeaponGraphController, ISchemaClass<CCS2PawnGraphController>
 {
     static CCS2PawnGraphController ISchemaClass<CCS2PawnGraphController>.From(nint handle) => new CCS2PawnGraphControllerImpl(handle);
-    static int ISchemaClass<CCS2PawnGraphController>.Size => 2088;
+    static int ISchemaClass<CCS2PawnGraphController>.Size => 2144;
     static string? ISchemaClass<CCS2PawnGraphController>.ClassName => null;
 
 

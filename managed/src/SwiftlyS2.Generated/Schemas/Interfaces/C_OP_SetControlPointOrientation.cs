@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_SetControlPointOrientation : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointOrientation>
 {
     static C_OP_SetControlPointOrientation ISchemaClass<C_OP_SetControlPointOrientation>.From(nint handle) => new C_OP_SetControlPointOrientationImpl(handle);
-    static int ISchemaClass<C_OP_SetControlPointOrientation>.Size => 888;
+    static int ISchemaClass<C_OP_SetControlPointOrientation>.Size => 904;
     static string? ISchemaClass<C_OP_SetControlPointOrientation>.ClassName => null;
 
 

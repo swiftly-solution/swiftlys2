@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_NametagModule : C_CS2WeaponModuleBase, ISchemaClass<C_NametagModule>
 {
     static C_NametagModule ISchemaClass<C_NametagModule>.From(nint handle) => new C_NametagModuleImpl(handle);
-    static int ISchemaClass<C_NametagModule>.Size => 4496;
+    static int ISchemaClass<C_NametagModule>.Size => 4728;
     static string? ISchemaClass<C_NametagModule>.ClassName => null;
 
 

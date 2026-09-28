@@ -6,10 +6,10 @@ namespace SwiftlyS2.Shared.Natives;
 [StructLayout(LayoutKind.Sequential)]
 public struct EntityIOConnectionDesc_t
 {
-    public nint TargetDesc;
-    public nint TargetInput;
-    public nint ValueOverride;
-    public uint Target;
+    public CString TargetDesc;
+    public CString TargetInput;
+    public CString ValueOverride;
+    public CHandle<CEntityInstance> Target;
     public EntityIOTargetType_t TargetType;
     public int TimesToFire;
     public float Delay;
@@ -19,12 +19,12 @@ public struct EntityIOConnectionDesc_t
 public unsafe struct EntityIOConnection_t
 {
     public EntityIOConnectionDesc_t Desc;
-    public bool MarkedForRemoval;
+    [MarshalAs(UnmanagedType.I1)] public bool MarkedForRemoval;
     public EntityIOConnection_t* Next;
 }
 
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct EntityIOOutputDesc_t
+public struct EntityIOOutputDesc_t
 {
     public CString Name;
     public uint Flags;

@@ -15,11 +15,12 @@ internal static class NativeStringTable
 
     public unsafe static nint ContainerFindTable(string tableName)
     {
-        return StringAlloc.CreateCString(tableName, tableNameBufferPtr =>
+        using var tableNameStr = new ScopedCString(tableName);
+        fixed (byte* tableNameBufferPtr = tableNameStr)
         {
-            var ret = _ContainerFindTable((byte*)tableNameBufferPtr);
+            var ret = _ContainerFindTable(tableNameBufferPtr);
             return ret;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<int, nint> _ContainerGetTableById;
@@ -61,11 +62,12 @@ internal static class NativeStringTable
 
     public unsafe static int FindStringIndex(nint table, string str)
     {
-        return StringAlloc.CreateCString(str, strBufferPtr =>
+        using var strStr = new ScopedCString(str);
+        fixed (byte* strBufferPtr = strStr)
         {
-            var ret = _FindStringIndex(table, (byte*)strBufferPtr);
+            var ret = _FindStringIndex(table, strBufferPtr);
             return ret;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<nint, int, byte> _IsStringIndexValid;
@@ -107,30 +109,32 @@ internal static class NativeStringTable
 
     public unsafe static int AddString(nint table, string str)
     {
-        return StringAlloc.CreateCString(str, strBufferPtr =>
+        using var strStr = new ScopedCString(str);
+        fixed (byte* strBufferPtr = strStr)
         {
-            var ret = _AddString(table, (byte*)strBufferPtr);
+            var ret = _AddString(table, strBufferPtr);
             return ret;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, nint, int, byte*, byte, nint, int, int> _Serialize;
 
     public unsafe static byte[] Serialize(nint table, int index, string keyName, bool newKey, nint userData, int userDataSize)
     {
-        return StringAlloc.CreateCString(keyName, keyNameBufferPtr =>
+        using var keyNameStr = new ScopedCString(keyName);
+        fixed (byte* keyNameBufferPtr = keyNameStr)
         {
-            var ret = _Serialize(null, table, index, (byte*)keyNameBufferPtr, newKey ? (byte)1 : (byte)0, userData, userDataSize);
+            var ret = _Serialize(null, table, index, keyNameBufferPtr, newKey ? (byte)1 : (byte)0, userData, userDataSize);
             var pool = ArrayPool<byte>.Shared;
             var retBuffer = pool.Rent(ret + 1);
             fixed (byte* retBufferPtr = retBuffer)
             {
-                ret = _Serialize(retBufferPtr, table, index, (byte*)keyNameBufferPtr, newKey ? (byte)1 : (byte)0, userData, userDataSize);
+                ret = _Serialize(retBufferPtr, table, index, keyNameBufferPtr, newKey ? (byte)1 : (byte)0, userData, userDataSize);
                 var retBytes = new byte[ret];
                 for (int i = 0; i < ret; i++) retBytes[i] = retBufferPtr[i];
                 pool.Return(retBuffer);
                 return retBytes;
             }
-        });
+        }
     }
 }

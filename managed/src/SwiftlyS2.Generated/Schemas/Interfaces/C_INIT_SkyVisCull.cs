@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_SkyVisCull : CParticleFunctionInitializer, ISchemaClass<C_INIT_SkyVisCull>
 {
     static C_INIT_SkyVisCull ISchemaClass<C_INIT_SkyVisCull>.From(nint handle) => new C_INIT_SkyVisCullImpl(handle);
-    static int ISchemaClass<C_INIT_SkyVisCull>.Size => 2208;
+    static int ISchemaClass<C_INIT_SkyVisCull>.Size => 2248;
     static string? ISchemaClass<C_INIT_SkyVisCull>.ClassName => null;
 
 

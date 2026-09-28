@@ -38,13 +38,15 @@ internal static class NativeSchema
 
     public unsafe static nint GetDatamapFunction(string className, string functionName)
     {
-        return StringAlloc.CreateCString(className, classNameBufferPtr =>
+        using var classNameStr = new ScopedCString(className);
+        using var functionNameStr = new ScopedCString(functionName);
+        fixed (byte* classNameBufferPtr = classNameStr)
         {
-            return StringAlloc.CreateCString(functionName, functionNameBufferPtr =>
+            fixed (byte* functionNameBufferPtr = functionNameStr)
             {
-                var ret = _GetDatamapFunction((byte*)classNameBufferPtr, (byte*)functionNameBufferPtr);
+                var ret = _GetDatamapFunction(classNameBufferPtr, functionNameBufferPtr);
                 return ret;
-            });
-        });
+            }
+        }
     }
 }

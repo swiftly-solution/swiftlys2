@@ -29,5 +29,18 @@ internal partial class CVMixVocoderProcessorDescImpl : CVMixBaseProcessorDescImp
             return instance;
         }
     }
+    private static nint? _ParamBandwidthOffset;
+    private CVMixParameterFloatImpl? _ParamBandwidthInstance;
+
+    public CVMixParameterFloat ParamBandwidth
+    {
+        get
+        {
+            _ParamBandwidthOffset = _ParamBandwidthOffset ?? Schema.GetOffset(0x2E168DBA1994663);
+            var instance = _ParamBandwidthInstance ??= new CVMixParameterFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamBandwidthOffset!.Value);
+            return instance;
+        }
+    }
 
 }

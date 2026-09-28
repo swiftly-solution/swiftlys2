@@ -36,4 +36,6 @@ internal class ProtoFlattenedSerializerField_tImpl : TypedProtobuf<ProtoFlattene
     { get => new ProtobufRepeatedFieldSubMessageType<ProtoFlattenedSerializerField_t_polymorphic_field_t>(Accessor, "polymorphic_types"); }
     public int VarSerializerSym
     { get => Accessor.GetInt32("var_serializer_sym"); set => Accessor.SetInt32("var_serializer_sym", value); }
+    public ProtoFlattenedSerializerField_t_proto_enum_info_t VarEnumInfo
+    { get => new ProtoFlattenedSerializerField_t_proto_enum_info_tImpl(NativeNetMessages.GetNestedMessage(Address, "var_enum_info"), false); }
 }

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_FlashbangProjectile : C_BaseCSGrenadeProjectile, ISchemaClass<C_FlashbangProjectile>
 {
     static C_FlashbangProjectile ISchemaClass<C_FlashbangProjectile>.From(nint handle) => new C_FlashbangProjectileImpl(handle);
-    static int ISchemaClass<C_FlashbangProjectile>.Size => 4704;
+    static int ISchemaClass<C_FlashbangProjectile>.Size => 4936;
     static string? ISchemaClass<C_FlashbangProjectile>.ClassName => null;
 
 }

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_SetControlPointToCenter : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointToCenter>
 {
     static C_OP_SetControlPointToCenter ISchemaClass<C_OP_SetControlPointToCenter>.From(nint handle) => new C_OP_SetControlPointToCenterImpl(handle);
-    static int ISchemaClass<C_OP_SetControlPointToCenter>.Size => 504;
+    static int ISchemaClass<C_OP_SetControlPointToCenter>.Size => 512;
     static string? ISchemaClass<C_OP_SetControlPointToCenter>.ClassName => null;
 
 

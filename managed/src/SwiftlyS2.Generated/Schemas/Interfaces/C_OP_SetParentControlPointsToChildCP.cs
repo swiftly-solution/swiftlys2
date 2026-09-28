@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_SetParentControlPointsToChildCP : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetParentControlPointsToChildCP>
 {
     static C_OP_SetParentControlPointsToChildCP ISchemaClass<C_OP_SetParentControlPointsToChildCP>.From(nint handle) => new C_OP_SetParentControlPointsToChildCPImpl(handle);
-    static int ISchemaClass<C_OP_SetParentControlPointsToChildCP>.Size => 504;
+    static int ISchemaClass<C_OP_SetParentControlPointsToChildCP>.Size => 512;
     static string? ISchemaClass<C_OP_SetParentControlPointsToChildCP>.ClassName => null;
 
 

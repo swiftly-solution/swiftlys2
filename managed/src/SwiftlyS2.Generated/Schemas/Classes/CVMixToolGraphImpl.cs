@@ -16,17 +16,49 @@ internal partial class CVMixToolGraphImpl : SchemaClass, CVMixToolGraph
 {
     public CVMixToolGraphImpl(nint handle) : base(handle) { }
 
-    private static nint? _GraphDescDataOffset;
-    private CVMixGraphDescDataImpl? _GraphDescDataInstance;
+    private static nint? _NameOffset;
 
-    public CVMixGraphDescData GraphDescData
+    public string Name
     {
         get
         {
-            _GraphDescDataOffset = _GraphDescDataOffset ?? Schema.GetOffset(0x7728F860B7A29222);
-            var instance = _GraphDescDataInstance ??= new CVMixGraphDescDataImpl(0);
-            instance.DangerousSetHandle(_Handle + _GraphDescDataOffset!.Value);
-            return instance;
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x7728F8604D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set
+        {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x7728F8604D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+        }
+    }
+    private static nint? _GraphOutputChannelsOffset;
+
+    public ref int GraphOutputChannels
+    {
+        get
+        {
+            _GraphOutputChannelsOffset = _GraphOutputChannelsOffset ?? Schema.GetOffset(0x7728F8606476037E);
+            return ref _Handle.AsRef<int>(_GraphOutputChannelsOffset!.Value);
+        }
+    }
+    private static nint? _IsMainGraphOffset;
+
+    public ref bool IsMainGraph
+    {
+        get
+        {
+            _IsMainGraphOffset = _IsMainGraphOffset ?? Schema.GetOffset(0x7728F86013899EBC);
+            return ref _Handle.AsRef<bool>(_IsMainGraphOffset!.Value);
+        }
+    }
+    private static nint? _PreviewNodeOffset;
+
+    public ref int PreviewNode
+    {
+        get
+        {
+            _PreviewNodeOffset = _PreviewNodeOffset ?? Schema.GetOffset(0x7728F860A7EE24BB);
+            return ref _Handle.AsRef<int>(_PreviewNodeOffset!.Value);
         }
     }
     private static nint? _EditorNodesOffset;
@@ -47,16 +79,6 @@ internal partial class CVMixToolGraphImpl : SchemaClass, CVMixToolGraph
         {
             _EditorEdgesOffset = _EditorEdgesOffset ?? Schema.GetOffset(0x7728F860F671261A);
             return ref _Handle.AsRef<CUtlVector<CVMixEditorEdge>>(_EditorEdgesOffset!.Value);
-        }
-    }
-    private static nint? _PreviewNodeOffset;
-
-    public ref int PreviewNode
-    {
-        get
-        {
-            _PreviewNodeOffset = _PreviewNodeOffset ?? Schema.GetOffset(0x7728F860A7EE24BB);
-            return ref _Handle.AsRef<int>(_PreviewNodeOffset!.Value);
         }
     }
 

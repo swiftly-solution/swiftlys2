@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_DensityForce : CParticleFunctionForce, ISchemaClass<C_OP_DensityForce>
 {
     static C_OP_DensityForce ISchemaClass<C_OP_DensityForce>.From(nint handle) => new C_OP_DensityForceImpl(handle);
-    static int ISchemaClass<C_OP_DensityForce>.Size => 504;
+    static int ISchemaClass<C_OP_DensityForce>.Size => 512;
     static string? ISchemaClass<C_OP_DensityForce>.ClassName => null;
 
 

@@ -11,11 +11,15 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVMixEnvelopeProcessorDesc : CVMixBaseProcessorDesc, ISchemaClass<CVMixEnvelopeProcessorDesc>
 {
     static CVMixEnvelopeProcessorDesc ISchemaClass<CVMixEnvelopeProcessorDesc>.From(nint handle) => new CVMixEnvelopeProcessorDescImpl(handle);
-    static int ISchemaClass<CVMixEnvelopeProcessorDesc>.Size => 48;
+    static int ISchemaClass<CVMixEnvelopeProcessorDesc>.Size => 64;
     static string? ISchemaClass<CVMixEnvelopeProcessorDesc>.ClassName => null;
 
 
     public VMixEnvelopeDesc_t Desc { get; }
+
+    public CVMixParameterFloat OutParamLevel { get; }
+
+    public CVMixParameterFloat OutParamdBLevel { get; }
 
 
 }

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_RandomTrailLength : CParticleFunctionInitializer, ISchemaClass<C_INIT_RandomTrailLength>
 {
     static C_INIT_RandomTrailLength ISchemaClass<C_INIT_RandomTrailLength>.From(nint handle) => new C_INIT_RandomTrailLengthImpl(handle);
-    static int ISchemaClass<C_INIT_RandomTrailLength>.Size => 496;
+    static int ISchemaClass<C_INIT_RandomTrailLength>.Size => 504;
     static string? ISchemaClass<C_INIT_RandomTrailLength>.ClassName => null;
 
 

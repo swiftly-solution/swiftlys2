@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RenderSound : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderSound>
 {
     static C_OP_RenderSound ISchemaClass<C_OP_RenderSound>.From(nint handle) => new C_OP_RenderSoundImpl(handle);
-    static int ISchemaClass<C_OP_RenderSound>.Size => 856;
+    static int ISchemaClass<C_OP_RenderSound>.Size => 864;
     static string? ISchemaClass<C_OP_RenderSound>.ClassName => null;
 
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_MovementSkinnedPositionFromCPSnapshot : CParticleFunctionOperator, ISchemaClass<C_OP_MovementSkinnedPositionFromCPSnapshot>
 {
     static C_OP_MovementSkinnedPositionFromCPSnapshot ISchemaClass<C_OP_MovementSkinnedPositionFromCPSnapshot>.From(nint handle) => new C_OP_MovementSkinnedPositionFromCPSnapshotImpl(handle);
-    static int ISchemaClass<C_OP_MovementSkinnedPositionFromCPSnapshot>.Size => 2336;
+    static int ISchemaClass<C_OP_MovementSkinnedPositionFromCPSnapshot>.Size => 2384;
     static string? ISchemaClass<C_OP_MovementSkinnedPositionFromCPSnapshot>.ClassName => null;
 
 

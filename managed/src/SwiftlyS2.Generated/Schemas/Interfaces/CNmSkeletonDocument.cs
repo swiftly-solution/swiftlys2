@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmSkeletonDocument : CNmAnimDocument, ISchemaClass<CNmSkeletonDocument>
 {
     static CNmSkeletonDocument ISchemaClass<CNmSkeletonDocument>.From(nint handle) => new CNmSkeletonDocumentImpl(handle);
-    static int ISchemaClass<CNmSkeletonDocument>.Size => 288;
+    static int ISchemaClass<CNmSkeletonDocument>.Size => 312;
     static string? ISchemaClass<CNmSkeletonDocument>.ClassName => null;
 
 
@@ -24,6 +24,8 @@ public partial interface CNmSkeletonDocument : CNmAnimDocument, ISchemaClass<CNm
     public ref bool IsAttachableProp { get; }
 
     public ref bool IsCS_HACK { get; }
+
+    public ref CUtlVector<CNmSkeletonDocument__ContactConfig_t> ContactConfigs { get; }
 
     public ref CUtlVector<CNmSkeletonDocument__SecondarySkeleton_t> SecondarySkeletons { get; }
 

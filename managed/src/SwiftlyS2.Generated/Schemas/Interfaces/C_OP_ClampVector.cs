@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_ClampVector : CParticleFunctionOperator, ISchemaClass<C_OP_ClampVector>
 {
     static C_OP_ClampVector ISchemaClass<C_OP_ClampVector>.From(nint handle) => new C_OP_ClampVectorImpl(handle);
-    static int ISchemaClass<C_OP_ClampVector>.Size => 3920;
+    static int ISchemaClass<C_OP_ClampVector>.Size => 3992;
     static string? ISchemaClass<C_OP_ClampVector>.ClassName => null;
 
 

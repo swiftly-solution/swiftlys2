@@ -32,8 +32,8 @@ internal class CEconItemPreviewDataBlockImpl : TypedProtobuf<CEconItemPreviewDat
     { get => Accessor.GetUInt32("killeaterscoretype"); set => Accessor.SetUInt32("killeaterscoretype", value); }
     public uint Killeatervalue
     { get => Accessor.GetUInt32("killeatervalue"); set => Accessor.SetUInt32("killeatervalue", value); }
-    public string Customname
-    { get => Accessor.GetString("customname"); set => Accessor.SetString("customname", value); }
+    public IProtobufRepeatedFieldValueType<string> Customnames
+    { get => new ProtobufRepeatedFieldValueType<string>(Accessor, "customnames"); }
     public IProtobufRepeatedFieldSubMessageType<CEconItemPreviewDataBlock_Sticker> Stickers
     { get => new ProtobufRepeatedFieldSubMessageType<CEconItemPreviewDataBlock_Sticker>(Accessor, "stickers"); }
     public uint Inventory
@@ -58,4 +58,8 @@ internal class CEconItemPreviewDataBlockImpl : TypedProtobuf<CEconItemPreviewDat
     { get => new ProtobufRepeatedFieldSubMessageType<CEconItemPreviewDataBlock_Sticker>(Accessor, "variations"); }
     public uint UpgradeLevel
     { get => Accessor.GetUInt32("upgrade_level"); set => Accessor.SetUInt32("upgrade_level", value); }
+    public uint PetFoodExpirationDate
+    { get => Accessor.GetUInt32("pet_food_expiration_date"); set => Accessor.SetUInt32("pet_food_expiration_date", value); }
+    public byte[] Blobdata
+    { get => Accessor.GetBytes("blobdata"); set => Accessor.SetBytes("blobdata", value); }
 }

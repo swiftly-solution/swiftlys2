@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_LazyCullCompareFloat : CParticleFunctionOperator, ISchemaClass<C_OP_LazyCullCompareFloat>
 {
     static C_OP_LazyCullCompareFloat ISchemaClass<C_OP_LazyCullCompareFloat>.From(nint handle) => new C_OP_LazyCullCompareFloatImpl(handle);
-    static int ISchemaClass<C_OP_LazyCullCompareFloat>.Size => 1576;
+    static int ISchemaClass<C_OP_LazyCullCompareFloat>.Size => 1608;
     static string? ISchemaClass<C_OP_LazyCullCompareFloat>.ClassName => null;
 
 

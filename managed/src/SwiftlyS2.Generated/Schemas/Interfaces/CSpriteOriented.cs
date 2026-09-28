@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CSpriteOriented : CSprite, ISchemaClass<CSpriteOriented>
 {
     static CSpriteOriented ISchemaClass<CSpriteOriented>.From(nint handle) => new CSpriteOrientedImpl(handle);
-    static int ISchemaClass<CSpriteOriented>.Size => 2016;
+    static int ISchemaClass<CSpriteOriented>.Size => 2240;
     static string? ISchemaClass<CSpriteOriented>.ClassName => "env_sprite_oriented";
 
 }

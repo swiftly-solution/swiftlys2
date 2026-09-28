@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CSceneEntity : CPointEntity, ISchemaClass<CSceneEntity>
 {
     static CSceneEntity ISchemaClass<CSceneEntity>.From(nint handle) => new CSceneEntityImpl(handle);
-    static int ISchemaClass<CSceneEntity>.Size => 2032;
+    static int ISchemaClass<CSceneEntity>.Size => 2048;
     static string? ISchemaClass<CSceneEntity>.ClassName => "logic_choreographed_scene";
 
 
@@ -69,6 +69,8 @@ public partial interface CSceneEntity : CPointEntity, ISchemaClass<CSceneEntity>
 
     public ref bool CancelAtNextInterrupt { get; }
 
+    public ref bool RemoveOnCompletion { get; }
+
     public ref float Pitch { get; }
 
     public ref bool Automated { get; }
@@ -113,11 +115,27 @@ public partial interface CSceneEntity : CPointEntity, ISchemaClass<CSceneEntity>
 
     public ref CEntityIOOutput OnPulseRequirement { get; }
 
+    // CUtlDict< CUtlSymbolLarge >
+    public SchemaUntypedField TargetNameMap { get; }
+
+    // CUtlDict< CUtlSymbolLarge >
+    public SchemaUntypedField AnchorNameMap { get; }
+
+    // CUtlDict< CUtlSymbolLarge >
+    public SchemaUntypedField ActorGraphMap { get; }
+
+    // CUtlDict< ActorClipEntry_t >
+    public SchemaUntypedField ActorClipMap { get; }
+
     public ref CUtlVector<ActorMapping_t> ActorMap { get; }
 
     public ref CHandle<CSceneEntity> InterruptScene { get; }
 
     public ref int InterruptCount { get; }
+
+    public string ResponseConcept { get; set; }
+
+    public string ResponseCriteria { get; set; }
 
     public ref bool SceneMissing { get; }
 

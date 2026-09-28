@@ -144,6 +144,16 @@ internal partial class SceneObject_tImpl : SchemaClass, SceneObject_t
             return ref _Handle.AsRef<int>(_LightProbeVolumePrecomputedHandshakeOffset!.Value);
         }
     }
+    private static nint? _EmissiveLightingBoostOffset;
+
+    public ref float EmissiveLightingBoost
+    {
+        get
+        {
+            _EmissiveLightingBoostOffset = _EmissiveLightingBoostOffset ?? Schema.GetOffset(0xD71D9993266F487B);
+            return ref _Handle.AsRef<float>(_EmissiveLightingBoostOffset!.Value);
+        }
+    }
     private static nint? _RenderableModelOffset;
 
     public ref CStrongHandle<InfoForResourceTypeCModel> RenderableModel

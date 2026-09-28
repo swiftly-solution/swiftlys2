@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVMixBoxverbProcessorDesc : CVMixBaseProcessorDesc, ISchemaClass<CVMixBoxverbProcessorDesc>
 {
     static CVMixBoxverbProcessorDesc ISchemaClass<CVMixBoxverbProcessorDesc>.From(nint handle) => new CVMixBoxverbProcessorDescImpl(handle);
-    static int ISchemaClass<CVMixBoxverbProcessorDesc>.Size => 112;
+    static int ISchemaClass<CVMixBoxverbProcessorDesc>.Size => 120;
     static string? ISchemaClass<CVMixBoxverbProcessorDesc>.ClassName => null;
 
 

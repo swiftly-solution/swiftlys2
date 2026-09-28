@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_SetControlPointPositionToTimeOfDayValue : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointPositionToTimeOfDayValue>
 {
     static C_OP_SetControlPointPositionToTimeOfDayValue ISchemaClass<C_OP_SetControlPointPositionToTimeOfDayValue>.From(nint handle) => new C_OP_SetControlPointPositionToTimeOfDayValueImpl(handle);
-    static int ISchemaClass<C_OP_SetControlPointPositionToTimeOfDayValue>.Size => 632;
+    static int ISchemaClass<C_OP_SetControlPointPositionToTimeOfDayValue>.Size => 640;
     static string? ISchemaClass<C_OP_SetControlPointPositionToTimeOfDayValue>.ClassName => null;
 
 

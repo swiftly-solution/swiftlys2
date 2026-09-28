@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface TextureControls_t : ISchemaClass<TextureControls_t>
 {
     static TextureControls_t ISchemaClass<TextureControls_t>.From(nint handle) => new TextureControls_tImpl(handle);
-    static int ISchemaClass<TextureControls_t>.Size => 2608;
+    static int ISchemaClass<TextureControls_t>.Size => 2664;
     static string? ISchemaClass<TextureControls_t>.ClassName => null;
 
 

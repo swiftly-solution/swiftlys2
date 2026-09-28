@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPerParticleVecInput : CParticleVecInput, ISchemaClass<CPerParticleVecInput>
 {
     static CPerParticleVecInput ISchemaClass<CPerParticleVecInput>.From(nint handle) => new CPerParticleVecInputImpl(handle);
-    static int ISchemaClass<CPerParticleVecInput>.Size => 1720;
+    static int ISchemaClass<CPerParticleVecInput>.Size => 1752;
     static string? ISchemaClass<CPerParticleVecInput>.ClassName => null;
 
 }

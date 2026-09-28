@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_SpotlightEnd : C_BaseModelEntity, ISchemaClass<C_SpotlightEnd>
 {
     static C_SpotlightEnd ISchemaClass<C_SpotlightEnd>.From(nint handle) => new C_SpotlightEndImpl(handle);
-    static int ISchemaClass<C_SpotlightEnd>.Size => 4032;
+    static int ISchemaClass<C_SpotlightEnd>.Size => 4264;
     static string? ISchemaClass<C_SpotlightEnd>.ClassName => null;
 
 

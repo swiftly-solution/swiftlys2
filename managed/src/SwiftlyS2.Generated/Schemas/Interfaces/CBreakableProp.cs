@@ -11,8 +11,8 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CBreakableProp : CBaseProp, ISchemaClass<CBreakableProp>
 {
     static CBreakableProp ISchemaClass<CBreakableProp>.From(nint handle) => new CBreakablePropImpl(handle);
-    static int ISchemaClass<CBreakableProp>.Size => 2800;
-    static string? ISchemaClass<CBreakableProp>.ClassName => null;
+    static int ISchemaClass<CBreakableProp>.Size => 3024;
+    static string? ISchemaClass<CBreakableProp>.ClassName => "breakable_prop";
 
 
     public CPropDataComponent CPropDataComponent { get; }

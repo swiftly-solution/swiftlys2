@@ -187,6 +187,16 @@ internal partial class CChickenImpl : CDynamicPropImpl, CChicken
             return ref _Handle.AsRef<CHandle<CCSPlayerPawn>>(_LeaderOffset!.Value);
         }
     }
+    private static nint? _OwnerOffset;
+
+    public ref CHandle<CCSPlayerController> Owner
+    {
+        get
+        {
+            _OwnerOffset = _OwnerOffset ?? Schema.GetOffset(0x66D7920D357473F4);
+            return ref _Handle.AsRef<CHandle<CCSPlayerController>>(_OwnerOffset!.Value);
+        }
+    }
     private static nint? _ReuseTimerOffset;
     private CountdownTimerImpl? _ReuseTimerInstance;
 
@@ -285,7 +295,19 @@ internal partial class CChickenImpl : CDynamicPropImpl, CChicken
             return instance;
         }
     }
+    private static nint? _SpawnDyingParticlesOffset;
+
+    public ref bool SpawnDyingParticles
+    {
+        get
+        {
+            _SpawnDyingParticlesOffset = _SpawnDyingParticlesOffset ?? Schema.GetOffset(0x66D7920DFDEDB160);
+            return ref _Handle.AsRef<bool>(_SpawnDyingParticlesOffset!.Value);
+        }
+    }
 
     public void AttributeManagerUpdated() => Schema.Update(_Handle, 0x66D7920D537B0586);
     public void LeaderUpdated() => Schema.Update(_Handle, 0x66D7920D658B4E84);
+    public void OwnerUpdated() => Schema.Update(_Handle, 0x66D7920D357473F4);
+    public void SpawnDyingParticlesUpdated() => Schema.Update(_Handle, 0x66D7920DFDEDB160);
 }

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CFuncConveyor : CBaseModelEntity, ISchemaClass<CFuncConveyor>
 {
     static CFuncConveyor ISchemaClass<CFuncConveyor>.From(nint handle) => new CFuncConveyorImpl(handle);
-    static int ISchemaClass<CFuncConveyor>.Size => 1984;
+    static int ISchemaClass<CFuncConveyor>.Size => 2216;
     static string? ISchemaClass<CFuncConveyor>.ClassName => "func_conveyor";
 
 
@@ -33,6 +33,8 @@ public partial interface CFuncConveyor : CBaseModelEntity, ISchemaClass<CFuncCon
 
     public ref float TransitionStartSpeed { get; }
 
+    public ref float FrictionScale { get; }
+
     public ref CUtlVector<CHandle<CBaseEntity>> ConveyorModels1 { get; }
 
     public void MoveDirEntitySpaceUpdated();
@@ -40,5 +42,6 @@ public partial interface CFuncConveyor : CBaseModelEntity, ISchemaClass<CFuncCon
     public void TransitionStartTickUpdated();
     public void TransitionDurationTicksUpdated();
     public void TransitionStartSpeedUpdated();
+    public void FrictionScaleUpdated();
     public void ConveyorModels1Updated();
 }

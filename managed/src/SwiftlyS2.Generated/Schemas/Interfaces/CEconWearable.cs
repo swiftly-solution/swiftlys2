@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CEconWearable : CEconEntity, ISchemaClass<CEconWearable>
 {
     static CEconWearable ISchemaClass<CEconWearable>.From(nint handle) => new CEconWearableImpl(handle);
-    static int ISchemaClass<CEconWearable>.Size => 3232;
+    static int ISchemaClass<CEconWearable>.Size => 3776;
     static string? ISchemaClass<CEconWearable>.ClassName => "wearable_item";
 
 

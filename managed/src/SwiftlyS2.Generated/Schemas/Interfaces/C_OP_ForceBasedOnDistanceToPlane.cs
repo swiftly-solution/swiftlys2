@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_ForceBasedOnDistanceToPlane : CParticleFunctionForce, ISchemaClass<C_OP_ForceBasedOnDistanceToPlane>
 {
     static C_OP_ForceBasedOnDistanceToPlane ISchemaClass<C_OP_ForceBasedOnDistanceToPlane>.From(nint handle) => new C_OP_ForceBasedOnDistanceToPlaneImpl(handle);
-    static int ISchemaClass<C_OP_ForceBasedOnDistanceToPlane>.Size => 544;
+    static int ISchemaClass<C_OP_ForceBasedOnDistanceToPlane>.Size => 552;
     static string? ISchemaClass<C_OP_ForceBasedOnDistanceToPlane>.ClassName => null;
 
 

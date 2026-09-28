@@ -15,14 +15,15 @@ internal static class NativeFileSystem
 
     public unsafe static string GetSearchPath(string pathId, int searchPathType, int searchPathsToGet)
     {
-        return StringAlloc.CreateCString(pathId, pathIdBufferPtr =>
+        using var pathIdStr = new ScopedCString(pathId);
+        fixed (byte* pathIdBufferPtr = pathIdStr)
         {
             var length = 0;
-            var returnedPtr = _GetSearchPath(&length, (byte*)pathIdBufferPtr, searchPathType, searchPathsToGet);
+            var returnedPtr = _GetSearchPath(&length, pathIdBufferPtr, searchPathType, searchPathsToGet);
             var outString = StringAlloc.CreateCSharpString((nint)returnedPtr, length);
             NativeAllocator.Free((nint)returnedPtr);
             return outString;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, byte*, int, int, void> _AddSearchPath;
@@ -33,55 +34,63 @@ internal static class NativeFileSystem
         {
             throw new InvalidOperationException("This method can only be called from the main thread.");
         }
-        StringAlloc.CreateCString(path, pathBufferPtr =>
+        using var pathStr = new ScopedCString(path);
+        using var pathIdStr = new ScopedCString(pathId);
+        fixed (byte* pathBufferPtr = pathStr)
         {
-            StringAlloc.CreateCString(pathId, pathIdBufferPtr =>
+            fixed (byte* pathIdBufferPtr = pathIdStr)
             {
-                _AddSearchPath((byte*)pathBufferPtr, (byte*)pathIdBufferPtr, searchPathAdd, searchPathPriority);
-            });
-        });
+                _AddSearchPath(pathBufferPtr, pathIdBufferPtr, searchPathAdd, searchPathPriority);
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, byte*, byte> _RemoveSearchPath;
 
     public unsafe static bool RemoveSearchPath(string path, string pathId)
     {
-        return StringAlloc.CreateCString(path, pathBufferPtr =>
+        using var pathStr = new ScopedCString(path);
+        using var pathIdStr = new ScopedCString(pathId);
+        fixed (byte* pathBufferPtr = pathStr)
         {
-            return StringAlloc.CreateCString(pathId, pathIdBufferPtr =>
+            fixed (byte* pathIdBufferPtr = pathIdStr)
             {
-                var ret = _RemoveSearchPath((byte*)pathBufferPtr, (byte*)pathIdBufferPtr);
+                var ret = _RemoveSearchPath(pathBufferPtr, pathIdBufferPtr);
                 return ret == 1;
-            });
-        });
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, byte*, byte> _FileExists;
 
     public unsafe static bool FileExists(string fileName, string pathId)
     {
-        return StringAlloc.CreateCString(fileName, fileNameBufferPtr =>
+        using var fileNameStr = new ScopedCString(fileName);
+        using var pathIdStr = new ScopedCString(pathId);
+        fixed (byte* fileNameBufferPtr = fileNameStr)
         {
-            return StringAlloc.CreateCString(pathId, pathIdBufferPtr =>
+            fixed (byte* pathIdBufferPtr = pathIdStr)
             {
-                var ret = _FileExists((byte*)fileNameBufferPtr, (byte*)pathIdBufferPtr);
+                var ret = _FileExists(fileNameBufferPtr, pathIdBufferPtr);
                 return ret == 1;
-            });
-        });
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, byte*, byte> _IsDirectory;
 
     public unsafe static bool IsDirectory(string path, string pathId)
     {
-        return StringAlloc.CreateCString(path, pathBufferPtr =>
+        using var pathStr = new ScopedCString(path);
+        using var pathIdStr = new ScopedCString(pathId);
+        fixed (byte* pathBufferPtr = pathStr)
         {
-            return StringAlloc.CreateCString(pathId, pathIdBufferPtr =>
+            fixed (byte* pathIdBufferPtr = pathIdStr)
             {
-                var ret = _IsDirectory((byte*)pathBufferPtr, (byte*)pathIdBufferPtr);
+                var ret = _IsDirectory(pathBufferPtr, pathIdBufferPtr);
                 return ret == 1;
-            });
-        });
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<void> _PrintSearchPaths;
@@ -95,17 +104,19 @@ internal static class NativeFileSystem
 
     public unsafe static string ReadFile(string fileName, string pathId)
     {
-        return StringAlloc.CreateCString(fileName, fileNameBufferPtr =>
+        using var fileNameStr = new ScopedCString(fileName);
+        using var pathIdStr = new ScopedCString(pathId);
+        fixed (byte* fileNameBufferPtr = fileNameStr)
         {
-            return StringAlloc.CreateCString(pathId, pathIdBufferPtr =>
+            fixed (byte* pathIdBufferPtr = pathIdStr)
             {
                 var length = 0;
-                var returnedPtr = _ReadFile(&length, (byte*)fileNameBufferPtr, (byte*)pathIdBufferPtr);
+                var returnedPtr = _ReadFile(&length, fileNameBufferPtr, pathIdBufferPtr);
                 var outString = StringAlloc.CreateCSharpString((nint)returnedPtr, length);
                 NativeAllocator.Free((nint)returnedPtr);
                 return outString;
-            });
-        });
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, byte*, byte*, byte> _WriteFile;
@@ -116,59 +127,68 @@ internal static class NativeFileSystem
         {
             throw new InvalidOperationException("This method can only be called from the main thread.");
         }
-        return StringAlloc.CreateCString(fileName, fileNameBufferPtr =>
+        using var fileNameStr = new ScopedCString(fileName);
+        using var pathIdStr = new ScopedCString(pathId);
+        using var contentStr = new ScopedCString(content);
+        fixed (byte* fileNameBufferPtr = fileNameStr)
         {
-            return StringAlloc.CreateCString(pathId, pathIdBufferPtr =>
+            fixed (byte* pathIdBufferPtr = pathIdStr)
             {
-                return StringAlloc.CreateCString(content, contentBufferPtr =>
+                fixed (byte* contentBufferPtr = contentStr)
                 {
-                    var ret = _WriteFile((byte*)fileNameBufferPtr, (byte*)pathIdBufferPtr, (byte*)contentBufferPtr);
+                    var ret = _WriteFile(fileNameBufferPtr, pathIdBufferPtr, contentBufferPtr);
                     return ret == 1;
-                });
-            });
-        });
+                }
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, byte*, uint> _GetFileSize;
 
     public unsafe static uint GetFileSize(string fileName, string pathId)
     {
-        return StringAlloc.CreateCString(fileName, fileNameBufferPtr =>
+        using var fileNameStr = new ScopedCString(fileName);
+        using var pathIdStr = new ScopedCString(pathId);
+        fixed (byte* fileNameBufferPtr = fileNameStr)
         {
-            return StringAlloc.CreateCString(pathId, pathIdBufferPtr =>
+            fixed (byte* pathIdBufferPtr = pathIdStr)
             {
-                var ret = _GetFileSize((byte*)fileNameBufferPtr, (byte*)pathIdBufferPtr);
+                var ret = _GetFileSize(fileNameBufferPtr, pathIdBufferPtr);
                 return ret;
-            });
-        });
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, byte*, byte> _PrecacheFile;
 
     public unsafe static bool PrecacheFile(string fileName, string pathId)
     {
-        return StringAlloc.CreateCString(fileName, fileNameBufferPtr =>
+        using var fileNameStr = new ScopedCString(fileName);
+        using var pathIdStr = new ScopedCString(pathId);
+        fixed (byte* fileNameBufferPtr = fileNameStr)
         {
-            return StringAlloc.CreateCString(pathId, pathIdBufferPtr =>
+            fixed (byte* pathIdBufferPtr = pathIdStr)
             {
-                var ret = _PrecacheFile((byte*)fileNameBufferPtr, (byte*)pathIdBufferPtr);
+                var ret = _PrecacheFile(fileNameBufferPtr, pathIdBufferPtr);
                 return ret == 1;
-            });
-        });
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, byte*, byte> _IsFileWritable;
 
     public unsafe static bool IsFileWritable(string fileName, string pathId)
     {
-        return StringAlloc.CreateCString(fileName, fileNameBufferPtr =>
+        using var fileNameStr = new ScopedCString(fileName);
+        using var pathIdStr = new ScopedCString(pathId);
+        fixed (byte* fileNameBufferPtr = fileNameStr)
         {
-            return StringAlloc.CreateCString(pathId, pathIdBufferPtr =>
+            fixed (byte* pathIdBufferPtr = pathIdStr)
             {
-                var ret = _IsFileWritable((byte*)fileNameBufferPtr, (byte*)pathIdBufferPtr);
+                var ret = _IsFileWritable(fileNameBufferPtr, pathIdBufferPtr);
                 return ret == 1;
-            });
-        });
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, byte*, byte, byte> _SetFileWritable;
@@ -179,26 +199,30 @@ internal static class NativeFileSystem
         {
             throw new InvalidOperationException("This method can only be called from the main thread.");
         }
-        return StringAlloc.CreateCString(fileName, fileNameBufferPtr =>
+        using var fileNameStr = new ScopedCString(fileName);
+        using var pathIdStr = new ScopedCString(pathId);
+        fixed (byte* fileNameBufferPtr = fileNameStr)
         {
-            return StringAlloc.CreateCString(pathId, pathIdBufferPtr =>
+            fixed (byte* pathIdBufferPtr = pathIdStr)
             {
-                var ret = _SetFileWritable((byte*)fileNameBufferPtr, (byte*)pathIdBufferPtr, writable ? (byte)1 : (byte)0);
+                var ret = _SetFileWritable(fileNameBufferPtr, pathIdBufferPtr, writable ? (byte)1 : (byte)0);
                 return ret == 1;
-            });
-        });
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<nint, byte*, byte*, void> _FindFileAbsoluteList;
 
     public unsafe static void FindFileAbsoluteList(nint outVector, string wildcard, string pathId)
     {
-        StringAlloc.CreateCString(wildcard, wildcardBufferPtr =>
+        using var wildcardStr = new ScopedCString(wildcard);
+        using var pathIdStr = new ScopedCString(pathId);
+        fixed (byte* wildcardBufferPtr = wildcardStr)
         {
-            StringAlloc.CreateCString(pathId, pathIdBufferPtr =>
+            fixed (byte* pathIdBufferPtr = pathIdStr)
             {
-                _FindFileAbsoluteList(outVector, (byte*)wildcardBufferPtr, (byte*)pathIdBufferPtr);
-            });
-        });
+                _FindFileAbsoluteList(outVector, wildcardBufferPtr, pathIdBufferPtr);
+            }
+        }
     }
 }

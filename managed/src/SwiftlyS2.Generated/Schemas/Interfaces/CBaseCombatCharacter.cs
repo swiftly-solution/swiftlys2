@@ -11,8 +11,8 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CBaseCombatCharacter : CBaseAnimGraph, ISchemaClass<CBaseCombatCharacter>
 {
     static CBaseCombatCharacter ISchemaClass<CBaseCombatCharacter>.From(nint handle) => new CBaseCombatCharacterImpl(handle);
-    static int ISchemaClass<CBaseCombatCharacter>.Size => 2608;
-    static string? ISchemaClass<CBaseCombatCharacter>.ClassName => null;
+    static int ISchemaClass<CBaseCombatCharacter>.Size => 2832;
+    static string? ISchemaClass<CBaseCombatCharacter>.ClassName => "base_combat_character";
 
 
     public ref bool ForceServerRagdoll { get; }

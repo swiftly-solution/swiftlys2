@@ -38,5 +38,7 @@ public partial interface RnMesh_t : ISchemaClass<RnMesh_t>
 
     public ref uint DebugFlags { get; }
 
+    public ref float SurfaceArea { get; }
+
 
 }

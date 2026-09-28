@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_ShatterGlassShardPhysics : C_BaseModelEntity, ISchemaClass<C_ShatterGlassShardPhysics>
 {
     static C_ShatterGlassShardPhysics ISchemaClass<C_ShatterGlassShardPhysics>.From(nint handle) => new C_ShatterGlassShardPhysicsImpl(handle);
-    static int ISchemaClass<C_ShatterGlassShardPhysics>.Size => 4152;
+    static int ISchemaClass<C_ShatterGlassShardPhysics>.Size => 4384;
     static string? ISchemaClass<C_ShatterGlassShardPhysics>.ClassName => null;
 
 

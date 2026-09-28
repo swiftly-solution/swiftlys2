@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CRagdollPropAttached : CRagdollProp, ISchemaClass<CRagdollPropAttached>
 {
     static CRagdollPropAttached ISchemaClass<CRagdollPropAttached>.From(nint handle) => new CRagdollPropAttachedImpl(handle);
-    static int ISchemaClass<CRagdollPropAttached>.Size => 2912;
+    static int ISchemaClass<CRagdollPropAttached>.Size => 3136;
     static string? ISchemaClass<CRagdollPropAttached>.ClassName => "prop_ragdoll_attached";
 
 

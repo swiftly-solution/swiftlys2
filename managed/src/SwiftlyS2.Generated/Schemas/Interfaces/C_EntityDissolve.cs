@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_EntityDissolve : C_BaseModelEntity, ISchemaClass<C_EntityDissolve>
 {
     static C_EntityDissolve ISchemaClass<C_EntityDissolve>.From(nint handle) => new C_EntityDissolveImpl(handle);
-    static int ISchemaClass<C_EntityDissolve>.Size => 4088;
+    static int ISchemaClass<C_EntityDissolve>.Size => 4320;
     static string? ISchemaClass<C_EntityDissolve>.ClassName => null;
 
 
@@ -29,13 +29,13 @@ public partial interface C_EntityDissolve : C_BaseModelEntity, ISchemaClass<C_En
 
     public ref float FadeOutLength { get; }
 
-    public GameTime_t NextSparkTime { get; }
-
     public ref EntityDissolveType_t DissolveType { get; }
+
+    public ref uint Magnitude { get; }
 
     public ref Vector DissolverOrigin { get; }
 
-    public ref uint Magnitude { get; }
+    public GameTime_t NextSparkTime { get; }
 
     public ref bool CoreExplode { get; }
 

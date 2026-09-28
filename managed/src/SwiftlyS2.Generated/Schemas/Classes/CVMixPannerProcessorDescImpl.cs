@@ -29,5 +29,18 @@ internal partial class CVMixPannerProcessorDescImpl : CVMixBaseProcessorDescImpl
             return instance;
         }
     }
+    private static nint? _ParamPanOffset;
+    private CVMixParameterFloatImpl? _ParamPanInstance;
+
+    public CVMixParameterFloat ParamPan
+    {
+        get
+        {
+            _ParamPanOffset = _ParamPanOffset ?? Schema.GetOffset(0x4120AA4398CF0231);
+            var instance = _ParamPanInstance ??= new CVMixParameterFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamPanOffset!.Value);
+            return instance;
+        }
+    }
 
 }

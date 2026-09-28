@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_BaseGrenade : CBaseAnimGraph, ISchemaClass<C_BaseGrenade>
 {
     static C_BaseGrenade ISchemaClass<C_BaseGrenade>.From(nint handle) => new C_BaseGrenadeImpl(handle);
-    static int ISchemaClass<C_BaseGrenade>.Size => 4552;
+    static int ISchemaClass<C_BaseGrenade>.Size => 4784;
     static string? ISchemaClass<C_BaseGrenade>.ClassName => null;
 
 

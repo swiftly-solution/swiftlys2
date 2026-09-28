@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_ModelDampenMovement : CParticleFunctionOperator, ISchemaClass<C_OP_ModelDampenMovement>
 {
     static C_OP_ModelDampenMovement ISchemaClass<C_OP_ModelDampenMovement>.From(nint handle) => new C_OP_ModelDampenMovementImpl(handle);
-    static int ISchemaClass<C_OP_ModelDampenMovement>.Size => 2336;
+    static int ISchemaClass<C_OP_ModelDampenMovement>.Size => 2376;
     static string? ISchemaClass<C_OP_ModelDampenMovement>.ClassName => null;
 
 

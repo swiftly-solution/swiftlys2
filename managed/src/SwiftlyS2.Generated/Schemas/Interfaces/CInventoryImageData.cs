@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CInventoryImageData : ISchemaClass<CInventoryImageData>
 {
     static CInventoryImageData ISchemaClass<CInventoryImageData>.From(nint handle) => new CInventoryImageDataImpl(handle);
-    static int ISchemaClass<CInventoryImageData>.Size => 248;
+    static int ISchemaClass<CInventoryImageData>.Size => 256;
     static string? ISchemaClass<CInventoryImageData>.ClassName => null;
 
 

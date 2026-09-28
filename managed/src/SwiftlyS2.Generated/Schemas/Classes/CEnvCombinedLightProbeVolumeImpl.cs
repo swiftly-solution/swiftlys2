@@ -86,34 +86,14 @@ internal partial class CEnvCombinedLightProbeVolumeImpl : CBaseEntityImpl, CEnvC
             return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_Entity_hLightProbeTexture_SH2_DCOffset!.Value);
         }
     }
-    private static nint? _Entity_hLightProbeTexture_SH2_ROffset;
+    private static nint? _Entity_hLightProbeTexture_SH2_L1Offset;
 
-    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_R
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_L1
     {
         get
         {
-            _Entity_hLightProbeTexture_SH2_ROffset = _Entity_hLightProbeTexture_SH2_ROffset ?? Schema.GetOffset(0xA73B1B920E80FF9F);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_Entity_hLightProbeTexture_SH2_ROffset!.Value);
-        }
-    }
-    private static nint? _Entity_hLightProbeTexture_SH2_GOffset;
-
-    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_G
-    {
-        get
-        {
-            _Entity_hLightProbeTexture_SH2_GOffset = _Entity_hLightProbeTexture_SH2_GOffset ?? Schema.GetOffset(0xA73B1B92198110F0);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_Entity_hLightProbeTexture_SH2_GOffset!.Value);
-        }
-    }
-    private static nint? _Entity_hLightProbeTexture_SH2_BOffset;
-
-    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_B
-    {
-        get
-        {
-            _Entity_hLightProbeTexture_SH2_BOffset = _Entity_hLightProbeTexture_SH2_BOffset ?? Schema.GetOffset(0xA73B1B921E8118CF);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_Entity_hLightProbeTexture_SH2_BOffset!.Value);
+            _Entity_hLightProbeTexture_SH2_L1Offset = _Entity_hLightProbeTexture_SH2_L1Offset ?? Schema.GetOffset(0xA73B1B92E7493650);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_Entity_hLightProbeTexture_SH2_L1Offset!.Value);
         }
     }
     private static nint? _Entity_hLightProbeDirectLightIndicesTextureOffset;
@@ -314,9 +294,7 @@ internal partial class CEnvCombinedLightProbeVolumeImpl : CBaseEntityImpl, CEnvC
     public void Entity_hLightProbeTexture_AmbientCubeUpdated() => Schema.Update(_Handle, 0xA73B1B92148FA944);
     public void Entity_hLightProbeTexture_SDFUpdated() => Schema.Update(_Handle, 0xA73B1B92B0D8BE62);
     public void Entity_hLightProbeTexture_SH2_DCUpdated() => Schema.Update(_Handle, 0xA73B1B92C9357F5E);
-    public void Entity_hLightProbeTexture_SH2_RUpdated() => Schema.Update(_Handle, 0xA73B1B920E80FF9F);
-    public void Entity_hLightProbeTexture_SH2_GUpdated() => Schema.Update(_Handle, 0xA73B1B92198110F0);
-    public void Entity_hLightProbeTexture_SH2_BUpdated() => Schema.Update(_Handle, 0xA73B1B921E8118CF);
+    public void Entity_hLightProbeTexture_SH2_L1Updated() => Schema.Update(_Handle, 0xA73B1B92E7493650);
     public void Entity_hLightProbeDirectLightIndicesTextureUpdated() => Schema.Update(_Handle, 0xA73B1B922251ACF2);
     public void Entity_hLightProbeDirectLightScalarsTextureUpdated() => Schema.Update(_Handle, 0xA73B1B92A463880E);
     public void Entity_hLightProbeDirectLightShadowsTextureUpdated() => Schema.Update(_Handle, 0xA73B1B9294B00D56);

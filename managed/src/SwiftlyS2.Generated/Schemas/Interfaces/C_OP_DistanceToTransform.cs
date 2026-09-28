@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_DistanceToTransform : CParticleFunctionOperator, ISchemaClass<C_OP_DistanceToTransform>
 {
     static C_OP_DistanceToTransform ISchemaClass<C_OP_DistanceToTransform>.From(nint handle) => new C_OP_DistanceToTransformImpl(handle);
-    static int ISchemaClass<C_OP_DistanceToTransform>.Size => 3928;
+    static int ISchemaClass<C_OP_DistanceToTransform>.Size => 4000;
     static string? ISchemaClass<C_OP_DistanceToTransform>.ClassName => null;
 
 

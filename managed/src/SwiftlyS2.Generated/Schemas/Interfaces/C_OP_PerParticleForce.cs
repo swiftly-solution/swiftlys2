@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_PerParticleForce : CParticleFunctionForce, ISchemaClass<C_OP_PerParticleForce>
 {
     static C_OP_PerParticleForce ISchemaClass<C_OP_PerParticleForce>.From(nint handle) => new C_OP_PerParticleForceImpl(handle);
-    static int ISchemaClass<C_OP_PerParticleForce>.Size => 2584;
+    static int ISchemaClass<C_OP_PerParticleForce>.Size => 2632;
     static string? ISchemaClass<C_OP_PerParticleForce>.ClassName => null;
 
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_CSGO_PreviewModelAlias_csgo_item_previewmodel : C_CSGO_PreviewModel, ISchemaClass<C_CSGO_PreviewModelAlias_csgo_item_previewmodel>
 {
     static C_CSGO_PreviewModelAlias_csgo_item_previewmodel ISchemaClass<C_CSGO_PreviewModelAlias_csgo_item_previewmodel>.From(nint handle) => new C_CSGO_PreviewModelAlias_csgo_item_previewmodelImpl(handle);
-    static int ISchemaClass<C_CSGO_PreviewModelAlias_csgo_item_previewmodel>.Size => 5776;
+    static int ISchemaClass<C_CSGO_PreviewModelAlias_csgo_item_previewmodel>.Size => 6328;
     static string? ISchemaClass<C_CSGO_PreviewModelAlias_csgo_item_previewmodel>.ClassName => null;
 
 }

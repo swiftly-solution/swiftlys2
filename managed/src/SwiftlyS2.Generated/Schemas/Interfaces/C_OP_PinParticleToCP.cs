@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_PinParticleToCP : CParticleFunctionOperator, ISchemaClass<C_OP_PinParticleToCP>
 {
     static C_OP_PinParticleToCP ISchemaClass<C_OP_PinParticleToCP>.From(nint handle) => new C_OP_PinParticleToCPImpl(handle);
-    static int ISchemaClass<C_OP_PinParticleToCP>.Size => 4440;
+    static int ISchemaClass<C_OP_PinParticleToCP>.Size => 4528;
     static string? ISchemaClass<C_OP_PinParticleToCP>.ClassName => null;
 
 

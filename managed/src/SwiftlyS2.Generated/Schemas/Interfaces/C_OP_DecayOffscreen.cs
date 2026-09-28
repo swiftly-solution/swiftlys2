@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_DecayOffscreen : CParticleFunctionOperator, ISchemaClass<C_OP_DecayOffscreen>
 {
     static C_OP_DecayOffscreen ISchemaClass<C_OP_DecayOffscreen>.From(nint handle) => new C_OP_DecayOffscreenImpl(handle);
-    static int ISchemaClass<C_OP_DecayOffscreen>.Size => 840;
+    static int ISchemaClass<C_OP_DecayOffscreen>.Size => 856;
     static string? ISchemaClass<C_OP_DecayOffscreen>.ClassName => null;
 
 

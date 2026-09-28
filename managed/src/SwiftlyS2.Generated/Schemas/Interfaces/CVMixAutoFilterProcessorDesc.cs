@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVMixAutoFilterProcessorDesc : CVMixBaseProcessorDesc, ISchemaClass<CVMixAutoFilterProcessorDesc>
 {
     static CVMixAutoFilterProcessorDesc ISchemaClass<CVMixAutoFilterProcessorDesc>.From(nint handle) => new CVMixAutoFilterProcessorDescImpl(handle);
-    static int ISchemaClass<CVMixAutoFilterProcessorDesc>.Size => 80;
+    static int ISchemaClass<CVMixAutoFilterProcessorDesc>.Size => 88;
     static string? ISchemaClass<CVMixAutoFilterProcessorDesc>.ClassName => null;
 
 

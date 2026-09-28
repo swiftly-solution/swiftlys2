@@ -17,6 +17,8 @@ public partial interface CInfoOffscreenPanoramaTexture : CPointEntity, ISchemaCl
 
     public ref bool Disabled { get; }
 
+    public ref bool EnableMipGen { get; }
+
     public ref int ResolutionX { get; }
 
     public ref int ResolutionY { get; }
@@ -38,6 +40,7 @@ public partial interface CInfoOffscreenPanoramaTexture : CPointEntity, ISchemaCl
     public ref CUtlVector<CHandle<CBaseModelEntity>> AdditionalTargetEntities { get; }
 
     public void DisabledUpdated();
+    public void EnableMipGenUpdated();
     public void ResolutionXUpdated();
     public void ResolutionYUpdated();
     public void PanelTypeUpdated();

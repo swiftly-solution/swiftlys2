@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CDecalInstance : ISchemaClass<CDecalInstance>
 {
     static CDecalInstance ISchemaClass<CDecalInstance>.From(nint handle) => new CDecalInstanceImpl(handle);
-    static int ISchemaClass<CDecalInstance>.Size => 192;
+    static int ISchemaClass<CDecalInstance>.Size => 264;
     static string? ISchemaClass<CDecalInstance>.ClassName => null;
 
 
@@ -47,7 +47,9 @@ public partial interface CDecalInstance : ISchemaClass<CDecalInstance>
 
     public ref float Depth { get; }
 
-    public ref CTransform Transform { get; }
+    public ref matrix3x4_t MTransform { get; }
+
+    public ref matrix3x4_t MLocalToTriangle { get; }
 
     public ref float AnimationScale { get; }
 

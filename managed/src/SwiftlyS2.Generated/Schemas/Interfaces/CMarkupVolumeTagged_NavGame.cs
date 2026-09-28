@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CMarkupVolumeTagged_NavGame : CMarkupVolumeWithRef, ISchemaClass<CMarkupVolumeTagged_NavGame>
 {
     static CMarkupVolumeTagged_NavGame ISchemaClass<CMarkupVolumeTagged_NavGame>.From(nint handle) => new CMarkupVolumeTagged_NavGameImpl(handle);
-    static int ISchemaClass<CMarkupVolumeTagged_NavGame>.Size => 2016;
+    static int ISchemaClass<CMarkupVolumeTagged_NavGame>.Size => 2240;
     static string? ISchemaClass<CMarkupVolumeTagged_NavGame>.ClassName => "func_nav_markup_game";
 
 

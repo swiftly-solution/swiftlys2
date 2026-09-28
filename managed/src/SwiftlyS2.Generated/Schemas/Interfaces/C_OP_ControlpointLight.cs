@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_ControlpointLight : CParticleFunctionOperator, ISchemaClass<C_OP_ControlpointLight>
 {
     static C_OP_ControlpointLight ISchemaClass<C_OP_ControlpointLight>.From(nint handle) => new C_OP_ControlpointLightImpl(handle);
-    static int ISchemaClass<C_OP_ControlpointLight>.Size => 1760;
+    static int ISchemaClass<C_OP_ControlpointLight>.Size => 1776;
     static string? ISchemaClass<C_OP_ControlpointLight>.ClassName => null;
 
 

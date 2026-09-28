@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_InitVec : CParticleFunctionInitializer, ISchemaClass<C_INIT_InitVec>
 {
     static C_INIT_InitVec ISchemaClass<C_INIT_InitVec>.From(nint handle) => new C_INIT_InitVecImpl(handle);
-    static int ISchemaClass<C_INIT_InitVec>.Size => 2216;
+    static int ISchemaClass<C_INIT_InitVec>.Size => 2256;
     static string? ISchemaClass<C_INIT_InitVec>.ClassName => null;
 
 

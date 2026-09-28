@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_WorldTraceConstraint : CParticleFunctionConstraint, ISchemaClass<C_OP_WorldTraceConstraint>
 {
     static C_OP_WorldTraceConstraint ISchemaClass<C_OP_WorldTraceConstraint>.From(nint handle) => new C_OP_WorldTraceConstraintImpl(handle);
-    static int ISchemaClass<C_OP_WorldTraceConstraint>.Size => 2520;
+    static int ISchemaClass<C_OP_WorldTraceConstraint>.Size => 2568;
     static string? ISchemaClass<C_OP_WorldTraceConstraint>.ClassName => null;
 
 
@@ -58,6 +58,8 @@ public partial interface C_OP_WorldTraceConstraint : CParticleFunctionConstraint
     public ref bool KillonContact { get; }
 
     public ref float MinSpeed { get; }
+
+    public ref bool KillonContactBounce { get; }
 
     public ref bool SetNormal { get; }
 

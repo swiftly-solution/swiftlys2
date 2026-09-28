@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPulseCell_TestYieldWithObservables : CPulseCell_BaseYieldingInflow, ISchemaClass<CPulseCell_TestYieldWithObservables>
 {
     static CPulseCell_TestYieldWithObservables ISchemaClass<CPulseCell_TestYieldWithObservables>.From(nint handle) => new CPulseCell_TestYieldWithObservablesImpl(handle);
-    static int ISchemaClass<CPulseCell_TestYieldWithObservables>.Size => 544;
+    static int ISchemaClass<CPulseCell_TestYieldWithObservables>.Size => 592;
     static string? ISchemaClass<CPulseCell_TestYieldWithObservables>.ClassName => null;
 
 

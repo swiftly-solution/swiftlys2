@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_NormalAlignToCP : CParticleFunctionInitializer, ISchemaClass<C_INIT_NormalAlignToCP>
 {
     static C_INIT_NormalAlignToCP ISchemaClass<C_INIT_NormalAlignToCP>.From(nint handle) => new C_INIT_NormalAlignToCPImpl(handle);
-    static int ISchemaClass<C_INIT_NormalAlignToCP>.Size => 592;
+    static int ISchemaClass<C_INIT_NormalAlignToCP>.Size => 600;
     static string? ISchemaClass<C_INIT_NormalAlignToCP>.ClassName => null;
 
 

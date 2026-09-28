@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_MovementPlaceOnGround : CParticleFunctionOperator, ISchemaClass<C_OP_MovementPlaceOnGround>
 {
     static C_OP_MovementPlaceOnGround ISchemaClass<C_OP_MovementPlaceOnGround>.From(nint handle) => new C_OP_MovementPlaceOnGroundImpl(handle);
-    static int ISchemaClass<C_OP_MovementPlaceOnGround>.Size => 2752;
+    static int ISchemaClass<C_OP_MovementPlaceOnGround>.Size => 2800;
     static string? ISchemaClass<C_OP_MovementPlaceOnGround>.ClassName => null;
 
 

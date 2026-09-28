@@ -16,26 +16,6 @@ internal partial class C_OP_RenderDeferredLightImpl : CParticleFunctionRendererI
 {
     public C_OP_RenderDeferredLightImpl(nint handle) : base(handle) { }
 
-    private static nint? _UseAlphaTestWindowOffset;
-
-    public ref bool UseAlphaTestWindow
-    {
-        get
-        {
-            _UseAlphaTestWindowOffset = _UseAlphaTestWindowOffset ?? Schema.GetOffset(0x44291266951B0D10);
-            return ref _Handle.AsRef<bool>(_UseAlphaTestWindowOffset!.Value);
-        }
-    }
-    private static nint? _UseTextureOffset;
-
-    public ref bool UseTexture
-    {
-        get
-        {
-            _UseTextureOffset = _UseTextureOffset ?? Schema.GetOffset(0x4429126624A2D28F);
-            return ref _Handle.AsRef<bool>(_UseTextureOffset!.Value);
-        }
-    }
     private static nint? _RadiusScaleOffset;
 
     public ref float RadiusScale
@@ -92,44 +72,34 @@ internal partial class C_OP_RenderDeferredLightImpl : CParticleFunctionRendererI
             return ref _Handle.AsRef<ParticleColorBlendType_t>(_ColorBlendTypeOffset!.Value);
         }
     }
-    private static nint? _LightDistanceOffset;
+    private static nint? _UseTextureOffset;
 
-    public ref float LightDistance
+    public ref bool UseTexture
     {
         get
         {
-            _LightDistanceOffset = _LightDistanceOffset ?? Schema.GetOffset(0x44291266FAE1FD66);
-            return ref _Handle.AsRef<float>(_LightDistanceOffset!.Value);
+            _UseTextureOffset = _UseTextureOffset ?? Schema.GetOffset(0x4429126624A2D28F);
+            return ref _Handle.AsRef<bool>(_UseTextureOffset!.Value);
         }
     }
-    private static nint? _StartFalloffOffset;
+    private static nint? _UseAlphaTestWindowOffset;
 
-    public ref float StartFalloff
+    public ref bool UseAlphaTestWindow
     {
         get
         {
-            _StartFalloffOffset = _StartFalloffOffset ?? Schema.GetOffset(0x44291266A8F25925);
-            return ref _Handle.AsRef<float>(_StartFalloffOffset!.Value);
+            _UseAlphaTestWindowOffset = _UseAlphaTestWindowOffset ?? Schema.GetOffset(0x44291266951B0D10);
+            return ref _Handle.AsRef<bool>(_UseAlphaTestWindowOffset!.Value);
         }
     }
-    private static nint? _DistanceFalloffOffset;
+    private static nint? _TextureOffset;
 
-    public ref float DistanceFalloff
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Texture
     {
         get
         {
-            _DistanceFalloffOffset = _DistanceFalloffOffset ?? Schema.GetOffset(0x44291266A9C33036);
-            return ref _Handle.AsRef<float>(_DistanceFalloffOffset!.Value);
-        }
-    }
-    private static nint? _SpotFoVOffset;
-
-    public ref float SpotFoV
-    {
-        get
-        {
-            _SpotFoVOffset = _SpotFoVOffset ?? Schema.GetOffset(0x44291266D202E536);
-            return ref _Handle.AsRef<float>(_SpotFoVOffset!.Value);
+            _TextureOffset = _TextureOffset ?? Schema.GetOffset(0x442912668C0A2FB6);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureOffset!.Value);
         }
     }
     private static nint? _AlphaTestPointFieldOffset;
@@ -171,14 +141,44 @@ internal partial class C_OP_RenderDeferredLightImpl : CParticleFunctionRendererI
             return instance;
         }
     }
-    private static nint? _TextureOffset;
+    private static nint? _LightDistanceOffset;
 
-    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Texture
+    public ref float LightDistance
     {
         get
         {
-            _TextureOffset = _TextureOffset ?? Schema.GetOffset(0x442912668C0A2FB6);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureOffset!.Value);
+            _LightDistanceOffset = _LightDistanceOffset ?? Schema.GetOffset(0x44291266FAE1FD66);
+            return ref _Handle.AsRef<float>(_LightDistanceOffset!.Value);
+        }
+    }
+    private static nint? _StartFalloffOffset;
+
+    public ref float StartFalloff
+    {
+        get
+        {
+            _StartFalloffOffset = _StartFalloffOffset ?? Schema.GetOffset(0x44291266A8F25925);
+            return ref _Handle.AsRef<float>(_StartFalloffOffset!.Value);
+        }
+    }
+    private static nint? _DistanceFalloffOffset;
+
+    public ref float DistanceFalloff
+    {
+        get
+        {
+            _DistanceFalloffOffset = _DistanceFalloffOffset ?? Schema.GetOffset(0x44291266A9C33036);
+            return ref _Handle.AsRef<float>(_DistanceFalloffOffset!.Value);
+        }
+    }
+    private static nint? _SpotFoVOffset;
+
+    public ref float SpotFoV
+    {
+        get
+        {
+            _SpotFoVOffset = _SpotFoVOffset ?? Schema.GetOffset(0x44291266D202E536);
+            return ref _Handle.AsRef<float>(_SpotFoVOffset!.Value);
         }
     }
     private static nint? _HSVShiftControlPointOffset;

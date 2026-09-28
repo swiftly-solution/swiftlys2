@@ -166,16 +166,6 @@ internal partial class CPhysicsPropImpl : CBreakablePropImpl, CPhysicsProp
             return ref _Handle.AsRef<float>(_ForceToEnableMotionOffset!.Value);
         }
     }
-    private static nint? _ThrownByPlayerOffset;
-
-    public ref bool ThrownByPlayer
-    {
-        get
-        {
-            _ThrownByPlayerOffset = _ThrownByPlayerOffset ?? Schema.GetOffset(0xC3FD37FE313A0B97);
-            return ref _Handle.AsRef<bool>(_ThrownByPlayerOffset!.Value);
-        }
-    }
     private static nint? _DroppedByPlayerOffset;
 
     public ref bool DroppedByPlayer
@@ -350,16 +340,6 @@ internal partial class CPhysicsPropImpl : CBreakablePropImpl, CPhysicsProp
         {
             _ForceNavObstacleCutOffset = _ForceNavObstacleCutOffset ?? Schema.GetOffset(0xC3FD37FE56F775A0);
             return ref _Handle.AsRef<bool>(_ForceNavObstacleCutOffset!.Value);
-        }
-    }
-    private static nint? _AllowObstacleConvexHullMergingOffset;
-
-    public ref bool AllowObstacleConvexHullMerging
-    {
-        get
-        {
-            _AllowObstacleConvexHullMergingOffset = _AllowObstacleConvexHullMergingOffset ?? Schema.GetOffset(0xC3FD37FE5C40BB56);
-            return ref _Handle.AsRef<bool>(_AllowObstacleConvexHullMergingOffset!.Value);
         }
     }
     private static nint? _AcceptDamageFromHeldObjectsOffset;

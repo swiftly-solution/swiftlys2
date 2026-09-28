@@ -11,15 +11,27 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPathCorner : CPointEntity, ISchemaClass<CPathCorner>
 {
     static CPathCorner ISchemaClass<CPathCorner>.From(nint handle) => new CPathCornerImpl(handle);
-    static int ISchemaClass<CPathCorner>.Size => 1232;
+    static int ISchemaClass<CPathCorner>.Size => 1248;
     static string? ISchemaClass<CPathCorner>.ClassName => "path_corner";
 
 
-    public ref float Speed { get; }
+    public ref bool TriggerLocomotionStop { get; }
+
+    public ref bool SmoothArrival { get; }
+
+    public ref bool ExactPositioning { get; }
 
     public ref float Wait { get; }
 
     public ref float Radius { get; }
+
+    public ref float WaypointSuccessRadiusWhenBlocked { get; }
+
+    public ref float WaypointSuccessRadius { get; }
+
+    public ref float PathEndDistanceFromGoal { get; }
+
+    public ref float Speed { get; }
 
     public ref CEntityIOOutput OnPass { get; }
 

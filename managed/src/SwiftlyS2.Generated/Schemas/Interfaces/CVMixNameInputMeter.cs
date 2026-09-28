@@ -15,7 +15,7 @@ public partial interface CVMixNameInputMeter : CVMixInputBase, ISchemaClass<CVMi
     static string? ISchemaClass<CVMixNameInputMeter>.ClassName => null;
 
 
-    public ref int ValueIndex { get; }
+    public CVMixDataOffset ValueIndex { get; }
 
 
 }

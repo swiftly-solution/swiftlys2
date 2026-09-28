@@ -17,13 +17,13 @@ public partial interface CNmClipNode__CDefinition : CNmClipReferenceNode__CDefin
 
     public ref short PlayInReverseValueNodeIdx { get; }
 
-    public ref short ResetTimeValueNodeIdx { get; }
-
     public ref bool SampleRootMotion { get; }
 
     public ref bool AllowLooping { get; }
 
     public ref short DataSlotIdx { get; }
+
+    public ref short ResetTimeValueNodeIdx { get; }
 
     // CUtlVectorFixedGrowable< CGlobalSymbol, 2 >
     public SchemaUntypedField GraphEvents { get; }

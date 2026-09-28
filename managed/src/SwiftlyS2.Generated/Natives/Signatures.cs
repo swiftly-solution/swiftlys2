@@ -15,21 +15,23 @@ internal static class NativeSignatures
 
     public unsafe static bool Exists(string signatureName)
     {
-        return StringAlloc.CreateCString(signatureName, signatureNameBufferPtr =>
+        using var signatureNameStr = new ScopedCString(signatureName);
+        fixed (byte* signatureNameBufferPtr = signatureNameStr)
         {
-            var ret = _Exists((byte*)signatureNameBufferPtr);
+            var ret = _Exists(signatureNameBufferPtr);
             return ret == 1;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, nint> _Fetch;
 
     public unsafe static nint Fetch(string signatureName)
     {
-        return StringAlloc.CreateCString(signatureName, signatureNameBufferPtr =>
+        using var signatureNameStr = new ScopedCString(signatureName);
+        fixed (byte* signatureNameBufferPtr = signatureNameStr)
         {
-            var ret = _Fetch((byte*)signatureNameBufferPtr);
+            var ret = _Fetch(signatureNameBufferPtr);
             return ret;
-        });
+        }
     }
 }

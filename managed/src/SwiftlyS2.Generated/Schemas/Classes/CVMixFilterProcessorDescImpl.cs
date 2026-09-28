@@ -29,5 +29,31 @@ internal partial class CVMixFilterProcessorDescImpl : CVMixBaseProcessorDescImpl
             return instance;
         }
     }
+    private static nint? _ParamCutoffFreqOffset;
+    private CVMixParameterFloatImpl? _ParamCutoffFreqInstance;
+
+    public CVMixParameterFloat ParamCutoffFreq
+    {
+        get
+        {
+            _ParamCutoffFreqOffset = _ParamCutoffFreqOffset ?? Schema.GetOffset(0xCDEFD8494066AD81);
+            var instance = _ParamCutoffFreqInstance ??= new CVMixParameterFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamCutoffFreqOffset!.Value);
+            return instance;
+        }
+    }
+    private static nint? _ParamQOffset;
+    private CVMixParameterFloatImpl? _ParamQInstance;
+
+    public CVMixParameterFloat ParamQ
+    {
+        get
+        {
+            _ParamQOffset = _ParamQOffset ?? Schema.GetOffset(0xCDEFD849460E79B9);
+            var instance = _ParamQInstance ??= new CVMixParameterFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamQOffset!.Value);
+            return instance;
+        }
+    }
 
 }

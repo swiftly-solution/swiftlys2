@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_TriggerLerpObject : C_BaseTrigger, ISchemaClass<C_TriggerLerpObject>
 {
     static C_TriggerLerpObject ISchemaClass<C_TriggerLerpObject>.From(nint handle) => new C_TriggerLerpObjectImpl(handle);
-    static int ISchemaClass<C_TriggerLerpObject>.Size => 4248;
+    static int ISchemaClass<C_TriggerLerpObject>.Size => 4480;
     static string? ISchemaClass<C_TriggerLerpObject>.ClassName => null;
 
 }

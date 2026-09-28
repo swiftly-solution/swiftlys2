@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmGraphDocAnimationPoseNode : CNmGraphDocVariationDataNode, ISchemaClass<CNmGraphDocAnimationPoseNode>
 {
     static CNmGraphDocAnimationPoseNode ISchemaClass<CNmGraphDocAnimationPoseNode>.From(nint handle) => new CNmGraphDocAnimationPoseNodeImpl(handle);
-    static int ISchemaClass<CNmGraphDocAnimationPoseNode>.Size => 528;
+    static int ISchemaClass<CNmGraphDocAnimationPoseNode>.Size => 536;
     static string? ISchemaClass<CNmGraphDocAnimationPoseNode>.ClassName => null;
 
 

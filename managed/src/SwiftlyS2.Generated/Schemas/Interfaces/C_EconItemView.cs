@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_EconItemView : IEconItemInterface, ISchemaClass<C_EconItemView>
 {
     static C_EconItemView ISchemaClass<C_EconItemView>.From(nint handle) => new C_EconItemViewImpl(handle);
-    static int ISchemaClass<C_EconItemView>.Size => 1136;
+    static int ISchemaClass<C_EconItemView>.Size => 1456;
     static string? ISchemaClass<C_EconItemView>.ClassName => null;
 
 
@@ -70,6 +70,10 @@ public partial interface C_EconItemView : IEconItemInterface, ISchemaClass<C_Eco
     public string CustomName { get; set; }
 
     public string CustomNameOverride { get; set; }
+
+    public string CustomNameOverride2 { get; set; }
+
+    public string CustomNameOverride3 { get; set; }
 
     public ref bool InitializedTags { get; }
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_RandomRotation : CGeneralRandomRotation, ISchemaClass<C_INIT_RandomRotation>
 {
     static C_INIT_RandomRotation ISchemaClass<C_INIT_RandomRotation>.From(nint handle) => new C_INIT_RandomRotationImpl(handle);
-    static int ISchemaClass<C_INIT_RandomRotation>.Size => 512;
+    static int ISchemaClass<C_INIT_RandomRotation>.Size => 520;
     static string? ISchemaClass<C_INIT_RandomRotation>.ClassName => null;
 
 }

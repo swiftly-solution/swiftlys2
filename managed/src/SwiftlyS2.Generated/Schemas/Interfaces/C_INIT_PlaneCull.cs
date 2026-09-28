@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_PlaneCull : CParticleFunctionInitializer, ISchemaClass<C_INIT_PlaneCull>
 {
     static C_INIT_PlaneCull ISchemaClass<C_INIT_PlaneCull>.From(nint handle) => new C_INIT_PlaneCullImpl(handle);
-    static int ISchemaClass<C_INIT_PlaneCull>.Size => 864;
+    static int ISchemaClass<C_INIT_PlaneCull>.Size => 880;
     static string? ISchemaClass<C_INIT_PlaneCull>.ClassName => null;
 
 

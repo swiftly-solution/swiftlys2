@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RemapNamedModelBodyPartEndCap : C_OP_RemapNamedModelElementEndCap, ISchemaClass<C_OP_RemapNamedModelBodyPartEndCap>
 {
     static C_OP_RemapNamedModelBodyPartEndCap ISchemaClass<C_OP_RemapNamedModelBodyPartEndCap>.From(nint handle) => new C_OP_RemapNamedModelBodyPartEndCapImpl(handle);
-    static int ISchemaClass<C_OP_RemapNamedModelBodyPartEndCap>.Size => 568;
+    static int ISchemaClass<C_OP_RemapNamedModelBodyPartEndCap>.Size => 576;
     static string? ISchemaClass<C_OP_RemapNamedModelBodyPartEndCap>.ClassName => null;
 
 }

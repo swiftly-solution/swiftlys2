@@ -139,13 +139,13 @@ internal class ConVar : IConVar
             {
                 return;
             }
-            var name = Marshal.PtrToStringAnsi(namePtr);
+            var name = StringAlloc.CreateCSharpString(namePtr);
 
             if (name != convarName)
             {
                 return;
             }
-            var value = Marshal.PtrToStringAnsi(valuePtr)!;
+            var value = StringAlloc.CreateCSharpString(valuePtr)!;
 
             callback(value);
             removeSelf?.Invoke();

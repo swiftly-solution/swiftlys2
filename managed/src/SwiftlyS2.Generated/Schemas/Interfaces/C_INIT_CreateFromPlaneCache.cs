@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_CreateFromPlaneCache : CParticleFunctionInitializer, ISchemaClass<C_INIT_CreateFromPlaneCache>
 {
     static C_INIT_CreateFromPlaneCache ISchemaClass<C_INIT_CreateFromPlaneCache>.From(nint handle) => new C_INIT_CreateFromPlaneCacheImpl(handle);
-    static int ISchemaClass<C_INIT_CreateFromPlaneCache>.Size => 512;
+    static int ISchemaClass<C_INIT_CreateFromPlaneCache>.Size => 520;
     static string? ISchemaClass<C_INIT_CreateFromPlaneCache>.ClassName => null;
 
 

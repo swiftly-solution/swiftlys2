@@ -11,11 +11,13 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_CreateAlongPath : CParticleFunctionInitializer, ISchemaClass<C_INIT_CreateAlongPath>
 {
     static C_INIT_CreateAlongPath ISchemaClass<C_INIT_CreateAlongPath>.From(nint handle) => new C_INIT_CreateAlongPathImpl(handle);
-    static int ISchemaClass<C_INIT_CreateAlongPath>.Size => 592;
+    static int ISchemaClass<C_INIT_CreateAlongPath>.Size => 1344;
     static string? ISchemaClass<C_INIT_CreateAlongPath>.ClassName => null;
 
 
-    public ref float MaxDistance { get; }
+    public CPerParticleFloatInput MaxDistance { get; }
+
+    public CPerParticleFloatInput T { get; }
 
     public CPathParameters PathParams { get; }
 

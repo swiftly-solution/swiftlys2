@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_RandomAlphaWindowThreshold : CParticleFunctionInitializer, ISchemaClass<C_INIT_RandomAlphaWindowThreshold>
 {
     static C_INIT_RandomAlphaWindowThreshold ISchemaClass<C_INIT_RandomAlphaWindowThreshold>.From(nint handle) => new C_INIT_RandomAlphaWindowThresholdImpl(handle);
-    static int ISchemaClass<C_INIT_RandomAlphaWindowThreshold>.Size => 496;
+    static int ISchemaClass<C_INIT_RandomAlphaWindowThreshold>.Size => 504;
     static string? ISchemaClass<C_INIT_RandomAlphaWindowThreshold>.ClassName => null;
 
 

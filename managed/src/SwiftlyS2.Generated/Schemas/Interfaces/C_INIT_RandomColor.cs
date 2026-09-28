@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_RandomColor : CParticleFunctionInitializer, ISchemaClass<C_INIT_RandomColor>
 {
     static C_INIT_RandomColor ISchemaClass<C_INIT_RandomColor>.From(nint handle) => new C_INIT_RandomColorImpl(handle);
-    static int ISchemaClass<C_INIT_RandomColor>.Size => 552;
+    static int ISchemaClass<C_INIT_RandomColor>.Size => 560;
     static string? ISchemaClass<C_INIT_RandomColor>.ClassName => null;
 
 

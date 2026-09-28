@@ -31,14 +31,14 @@ internal partial class CVMixBaseProcessorDescImpl : SchemaClass, CVMixBaseProces
             Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint? _ChannelsOffset;
+    private static nint? _DebugIdOffset;
 
-    public ref int Channels
+    public ref uint DebugId
     {
         get
         {
-            _ChannelsOffset = _ChannelsOffset ?? Schema.GetOffset(0xFE20EC7C5A815AD1);
-            return ref _Handle.AsRef<int>(_ChannelsOffset!.Value);
+            _DebugIdOffset = _DebugIdOffset ?? Schema.GetOffset(0xFE20EC7C0D1706B1);
+            return ref _Handle.AsRef<uint>(_DebugIdOffset!.Value);
         }
     }
     private static nint? _FlxfadeOffset;
@@ -49,6 +49,52 @@ internal partial class CVMixBaseProcessorDescImpl : SchemaClass, CVMixBaseProces
         {
             _FlxfadeOffset = _FlxfadeOffset ?? Schema.GetOffset(0xFE20EC7C66180AA3);
             return ref _Handle.AsRef<float>(_FlxfadeOffset!.Value);
+        }
+    }
+    private static nint? _ChannelsOffset;
+
+    public ref int Channels
+    {
+        get
+        {
+            _ChannelsOffset = _ChannelsOffset ?? Schema.GetOffset(0xFE20EC7C5A815AD1);
+            return ref _Handle.AsRef<int>(_ChannelsOffset!.Value);
+        }
+    }
+    private static nint? _DebugBypassOffset;
+
+    public ref bool DebugBypass
+    {
+        get
+        {
+            _DebugBypassOffset = _DebugBypassOffset ?? Schema.GetOffset(0xFE20EC7CDDBB8948);
+            return ref _Handle.AsRef<bool>(_DebugBypassOffset!.Value);
+        }
+    }
+    private static nint? _ParamEnableOffset;
+    private CVMixParameterFloatImpl? _ParamEnableInstance;
+
+    public CVMixParameterFloat ParamEnable
+    {
+        get
+        {
+            _ParamEnableOffset = _ParamEnableOffset ?? Schema.GetOffset(0xFE20EC7C18F2B181);
+            var instance = _ParamEnableInstance ??= new CVMixParameterFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamEnableOffset!.Value);
+            return instance;
+        }
+    }
+    private static nint? _ParamMixOffset;
+    private CVMixParameterFloatImpl? _ParamMixInstance;
+
+    public CVMixParameterFloat ParamMix
+    {
+        get
+        {
+            _ParamMixOffset = _ParamMixOffset ?? Schema.GetOffset(0xFE20EC7CFE3A573C);
+            var instance = _ParamMixInstance ??= new CVMixParameterFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamMixOffset!.Value);
+            return instance;
         }
     }
 

@@ -8,10 +8,12 @@ public enum ChoreoExternalAnimgraphControlState_t : uint
 {
     eNone = 0,
     eExit = 1,
-    eState01 = 2,
-    eState02 = 3,
-    eState03 = 4,
-    eState04 = 5,
-    eState05 = 6,
-    eCount = 7,
+    eFallbackExit = 2,
+    eState01 = 3,
+    eState02 = 4,
+    eState03 = 5,
+    eState04 = 6,
+    eState05 = 7,
+    eLooping = 8,
+    eCount = 9,
 }

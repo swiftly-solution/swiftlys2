@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RopeSpringConstraint : CParticleFunctionConstraint, ISchemaClass<C_OP_RopeSpringConstraint>
 {
     static C_OP_RopeSpringConstraint ISchemaClass<C_OP_RopeSpringConstraint>.From(nint handle) => new C_OP_RopeSpringConstraintImpl(handle);
-    static int ISchemaClass<C_OP_RopeSpringConstraint>.Size => 1952;
+    static int ISchemaClass<C_OP_RopeSpringConstraint>.Size => 1992;
     static string? ISchemaClass<C_OP_RopeSpringConstraint>.ClassName => null;
 
 

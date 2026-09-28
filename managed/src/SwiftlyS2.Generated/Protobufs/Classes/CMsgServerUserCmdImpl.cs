@@ -24,4 +24,6 @@ internal class CMsgServerUserCmdImpl : TypedProtobuf<CMsgServerUserCmd>, CMsgSer
     { get => Accessor.GetInt32("client_tick"); set => Accessor.SetInt32("client_tick", value); }
     public byte[] DeltaData
     { get => Accessor.GetBytes("delta_data"); set => Accessor.SetBytes("delta_data", value); }
+    public bool DeltaProcessed
+    { get => Accessor.GetBool("delta_processed"); set => Accessor.SetBool("delta_processed", value); }
 }

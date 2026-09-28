@@ -11,11 +11,13 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_Chicken : C_DynamicProp, ISchemaClass<C_Chicken>
 {
     static C_Chicken ISchemaClass<C_Chicken>.From(nint handle) => new C_ChickenImpl(handle);
-    static int ISchemaClass<C_Chicken>.Size => 6320;
+    static int ISchemaClass<C_Chicken>.Size => 7072;
     static string? ISchemaClass<C_Chicken>.ClassName => null;
 
 
     public ref CHandle<C_CSPlayerPawn> Leader { get; }
+
+    public ref CHandle<CCSPlayerController> Owner { get; }
 
     public C_AttributeContainer AttributeManager { get; }
 
@@ -24,6 +26,8 @@ public partial interface C_Chicken : C_DynamicProp, ISchemaClass<C_Chicken>
     public ParticleIndex_t WaterWakeParticles { get; }
 
     public ref bool IsPreviewModel { get; }
+
+    public ref bool SpawnDyingParticles { get; }
 
 
 }

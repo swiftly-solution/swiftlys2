@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_StatusEffectCitadel : CParticleFunctionInitializer, ISchemaClass<C_INIT_StatusEffectCitadel>
 {
     static C_INIT_StatusEffectCitadel ISchemaClass<C_INIT_StatusEffectCitadel>.From(nint handle) => new C_INIT_StatusEffectCitadelImpl(handle);
-    static int ISchemaClass<C_INIT_StatusEffectCitadel>.Size => 560;
+    static int ISchemaClass<C_INIT_StatusEffectCitadel>.Size => 568;
     static string? ISchemaClass<C_INIT_StatusEffectCitadel>.ClassName => null;
 
 

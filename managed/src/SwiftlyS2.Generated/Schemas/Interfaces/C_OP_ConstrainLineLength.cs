@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_ConstrainLineLength : CParticleFunctionConstraint, ISchemaClass<C_OP_ConstrainLineLength>
 {
     static C_OP_ConstrainLineLength ISchemaClass<C_OP_ConstrainLineLength>.From(nint handle) => new C_OP_ConstrainLineLengthImpl(handle);
-    static int ISchemaClass<C_OP_ConstrainLineLength>.Size => 480;
+    static int ISchemaClass<C_OP_ConstrainLineLength>.Size => 488;
     static string? ISchemaClass<C_OP_ConstrainLineLength>.ClassName => null;
 
 

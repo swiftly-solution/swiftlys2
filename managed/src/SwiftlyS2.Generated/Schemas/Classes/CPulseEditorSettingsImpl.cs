@@ -36,6 +36,36 @@ internal partial class CPulseEditorSettingsImpl : SchemaClass, CPulseEditorSetti
             return ref _Handle.AsRef<Color>(_ColCanvasBackgroundWhenDebuggingOffset!.Value);
         }
     }
+    private static nint? _ColCanvasBackgroundStaleCompileOffset;
+
+    public ref Color ColCanvasBackgroundStaleCompile
+    {
+        get
+        {
+            _ColCanvasBackgroundStaleCompileOffset = _ColCanvasBackgroundStaleCompileOffset ?? Schema.GetOffset(0x978084034A663CBF);
+            return ref _Handle.AsRef<Color>(_ColCanvasBackgroundStaleCompileOffset!.Value);
+        }
+    }
+    private static nint? _ColCanvasBorderStaleCompileOffset;
+
+    public ref Color ColCanvasBorderStaleCompile
+    {
+        get
+        {
+            _ColCanvasBorderStaleCompileOffset = _ColCanvasBorderStaleCompileOffset ?? Schema.GetOffset(0x978084036AEFD27D);
+            return ref _Handle.AsRef<Color>(_ColCanvasBorderStaleCompileOffset!.Value);
+        }
+    }
+    private static nint? _ColCanvasBorderDebuggerDetachedOffset;
+
+    public ref Color ColCanvasBorderDebuggerDetached
+    {
+        get
+        {
+            _ColCanvasBorderDebuggerDetachedOffset = _ColCanvasBorderDebuggerDetachedOffset ?? Schema.GetOffset(0x9780840345BF141E);
+            return ref _Handle.AsRef<Color>(_ColCanvasBorderDebuggerDetachedOffset!.Value);
+        }
+    }
     private static nint? _GridSnapV2Offset;
 
     public ref float GridSnapV2
@@ -481,6 +511,31 @@ internal partial class CPulseEditorSettingsImpl : SchemaClass, CPulseEditorSetti
             return ref _Handle.AsRef<Color>(_ColParentAssetsBrokenOffset!.Value);
         }
     }
+    private static nint? _FontCompileStatusOffset;
+
+    public string FontCompileStatus
+    {
+        get
+        {
+            _FontCompileStatusOffset = _FontCompileStatusOffset ?? Schema.GetOffset(0x97808403521B691F);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_FontCompileStatusOffset!.Value));
+        }
+        set
+        {
+            _FontCompileStatusOffset = _FontCompileStatusOffset ?? Schema.GetOffset(0x97808403521B691F);
+            Schema.SetCUtlString(_Handle, _FontCompileStatusOffset!.Value, value);
+        }
+    }
+    private static nint? _ColCompileStatusOffset;
+
+    public ref Color ColCompileStatus
+    {
+        get
+        {
+            _ColCompileStatusOffset = _ColCompileStatusOffset ?? Schema.GetOffset(0x9780840359297D8C);
+            return ref _Handle.AsRef<Color>(_ColCompileStatusOffset!.Value);
+        }
+    }
     private static nint? _LiteralLabelSpacingOffset;
 
     public ref float LiteralLabelSpacing
@@ -529,6 +584,36 @@ internal partial class CPulseEditorSettingsImpl : SchemaClass, CPulseEditorSetti
         {
             _DebuggerBrokenOtherImgOffset = _DebuggerBrokenOtherImgOffset ?? Schema.GetOffset(0x97808403534CFADA);
             Schema.SetCUtlString(_Handle, _DebuggerBrokenOtherImgOffset!.Value, value);
+        }
+    }
+    private static nint? _DebuggerBrokenStackImgOffset;
+
+    public string DebuggerBrokenStackImg
+    {
+        get
+        {
+            _DebuggerBrokenStackImgOffset = _DebuggerBrokenStackImgOffset ?? Schema.GetOffset(0x97808403FA5B37A0);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_DebuggerBrokenStackImgOffset!.Value));
+        }
+        set
+        {
+            _DebuggerBrokenStackImgOffset = _DebuggerBrokenStackImgOffset ?? Schema.GetOffset(0x97808403FA5B37A0);
+            Schema.SetCUtlString(_Handle, _DebuggerBrokenStackImgOffset!.Value, value);
+        }
+    }
+    private static nint? _DebuggerBrokenStackOtherImgOffset;
+
+    public string DebuggerBrokenStackOtherImg
+    {
+        get
+        {
+            _DebuggerBrokenStackOtherImgOffset = _DebuggerBrokenStackOtherImgOffset ?? Schema.GetOffset(0x97808403B0FE92B0);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_DebuggerBrokenStackOtherImgOffset!.Value));
+        }
+        set
+        {
+            _DebuggerBrokenStackOtherImgOffset = _DebuggerBrokenStackOtherImgOffset ?? Schema.GetOffset(0x97808403B0FE92B0);
+            Schema.SetCUtlString(_Handle, _DebuggerBrokenStackOtherImgOffset!.Value, value);
         }
     }
     private static nint? _DebuggerBrokenMarkerOffsetOffset;
@@ -739,6 +824,26 @@ internal partial class CPulseEditorSettingsImpl : SchemaClass, CPulseEditorSetti
         {
             _BoxSelectRequiresFullyContainedOffset = _BoxSelectRequiresFullyContainedOffset ?? Schema.GetOffset(0x978084030F1A99E3);
             return ref _Handle.AsRef<bool>(_BoxSelectRequiresFullyContainedOffset!.Value);
+        }
+    }
+    private static nint? _ShowFullContextLoggingOffset;
+
+    public ref bool ShowFullContextLogging
+    {
+        get
+        {
+            _ShowFullContextLoggingOffset = _ShowFullContextLoggingOffset ?? Schema.GetOffset(0x978084031D189FF1);
+            return ref _Handle.AsRef<bool>(_ShowFullContextLoggingOffset!.Value);
+        }
+    }
+    private static nint? _FollowCursorDuringDebugStepsOffset;
+
+    public ref bool FollowCursorDuringDebugSteps
+    {
+        get
+        {
+            _FollowCursorDuringDebugStepsOffset = _FollowCursorDuringDebugStepsOffset ?? Schema.GetOffset(0x9780840358B95CF9);
+            return ref _Handle.AsRef<bool>(_FollowCursorDuringDebugStepsOffset!.Value);
         }
     }
     private static nint? _FlowMinWidthOffset;

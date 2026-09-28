@@ -11,7 +11,23 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVMixSteamAudioPathingProcessorDesc : CVMixBaseProcessorDesc, ISchemaClass<CVMixSteamAudioPathingProcessorDesc>
 {
     static CVMixSteamAudioPathingProcessorDesc ISchemaClass<CVMixSteamAudioPathingProcessorDesc>.From(nint handle) => new CVMixSteamAudioPathingProcessorDescImpl(handle);
-    static int ISchemaClass<CVMixSteamAudioPathingProcessorDesc>.Size => 32;
+    static int ISchemaClass<CVMixSteamAudioPathingProcessorDesc>.Size => 72;
     static string? ISchemaClass<CVMixSteamAudioPathingProcessorDesc>.ClassName => null;
+
+
+    public CVMixParameterFloat ParamPositionX { get; }
+
+    public CVMixParameterFloat ParamPositionY { get; }
+
+    public CVMixParameterFloat ParamPositionZ { get; }
+
+    public CVMixParameterFloat ParamPathingMixLevel { get; }
+
+    public CVMixParameterFloat ParamBand { get; }
+
+    public CVMixDataOffset ParamArrayPathingEQ { get; }
+
+    public CVMixDataOffset ParamArrayPathingCoefficients { get; }
+
 
 }

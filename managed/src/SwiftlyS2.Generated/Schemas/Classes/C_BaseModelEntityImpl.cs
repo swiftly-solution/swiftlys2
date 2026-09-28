@@ -317,6 +317,16 @@ internal partial class C_BaseModelEntityImpl : C_BaseEntityImpl, C_BaseModelEnti
             return ref _Handle.AsRef<bool>(_RenderToCubemapsOffset!.Value);
         }
     }
+    private static nint? _ExpandRenderBoundsToIncludeClothOffset;
+
+    public ref bool ExpandRenderBoundsToIncludeCloth
+    {
+        get
+        {
+            _ExpandRenderBoundsToIncludeClothOffset = _ExpandRenderBoundsToIncludeClothOffset ?? Schema.GetOffset(0x557D5A10DF5A3EE9);
+            return ref _Handle.AsRef<bool>(_ExpandRenderBoundsToIncludeClothOffset!.Value);
+        }
+    }
     private static nint? _NoInterpolateOffset;
 
     public ref bool NoInterpolate
@@ -421,6 +431,29 @@ internal partial class C_BaseModelEntityImpl : C_BaseEntityImpl, C_BaseModelEnti
         {
             _RequiredDecalRtEncodingOffset = _RequiredDecalRtEncodingOffset ?? Schema.GetOffset(0x557D5A10DFCED136);
             return ref _Handle.AsRef<DecalRtEncoding_t>(_RequiredDecalRtEncodingOffset!.Value);
+        }
+    }
+    private static nint? _BodyGroupTotalRequestCountOffset;
+
+    public ref uint BodyGroupTotalRequestCount
+    {
+        get
+        {
+            _BodyGroupTotalRequestCountOffset = _BodyGroupTotalRequestCountOffset ?? Schema.GetOffset(0x557D5A1074E80E82);
+            return ref _Handle.AsRef<uint>(_BodyGroupTotalRequestCountOffset!.Value);
+        }
+    }
+    private static nint? _BodyGroupRequestsOffset;
+    private SchemaUntypedField? _BodyGroupRequestsInstance;
+
+    public SchemaUntypedField BodyGroupRequests
+    {
+        get
+        {
+            _BodyGroupRequestsOffset = _BodyGroupRequestsOffset ?? Schema.GetOffset(0x557D5A10F5330AA2);
+            var instance = _BodyGroupRequestsInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _BodyGroupRequestsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _BodyGroupChoicesOffset;

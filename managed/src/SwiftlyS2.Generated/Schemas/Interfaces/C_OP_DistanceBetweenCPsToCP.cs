@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_DistanceBetweenCPsToCP : CParticleFunctionPreEmission, ISchemaClass<C_OP_DistanceBetweenCPsToCP>
 {
     static C_OP_DistanceBetweenCPsToCP ISchemaClass<C_OP_DistanceBetweenCPsToCP>.From(nint handle) => new C_OP_DistanceBetweenCPsToCPImpl(handle);
-    static int ISchemaClass<C_OP_DistanceBetweenCPsToCP>.Size => 664;
+    static int ISchemaClass<C_OP_DistanceBetweenCPsToCP>.Size => 672;
     static string? ISchemaClass<C_OP_DistanceBetweenCPsToCP>.ClassName => null;
 
 

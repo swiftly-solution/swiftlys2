@@ -44,6 +44,11 @@ void Bridge_ConsoleOutput_RemoveConsoleListener(uint64_t listenerId)
     g_pConsoleOutput->RemoveConsoleListener(listenerId);
 }
 
+void Bridge_ConsoleOutput_DispatchQueuedListeners()
+{
+    g_pConsoleOutput->DispatchQueuedListeners();
+}
+
 bool Bridge_ConsoleOutput_IsEnabled()
 {
     return g_pConsoleOutput->IsEnabled();
@@ -73,6 +78,7 @@ char* Bridge_ConsoleOutput_GetCounterText(int* size)
 
 DEFINE_NATIVE("ConsoleOutput.AddConsoleListener", Bridge_ConsoleOutput_AddConsoleListener);
 DEFINE_NATIVE("ConsoleOutput.RemoveConsoleListener", Bridge_ConsoleOutput_RemoveConsoleListener);
+DEFINE_NATIVE("ConsoleOutput.DispatchQueuedListeners", Bridge_ConsoleOutput_DispatchQueuedListeners);
 DEFINE_NATIVE("ConsoleOutput.IsEnabled", Bridge_ConsoleOutput_IsEnabled);
 DEFINE_NATIVE("ConsoleOutput.ToggleFilter", Bridge_ConsoleOutput_ToggleFilter);
 DEFINE_NATIVE("ConsoleOutput.ReloadFilterConfiguration", Bridge_ConsoleOutput_ReloadFilterConfiguration);

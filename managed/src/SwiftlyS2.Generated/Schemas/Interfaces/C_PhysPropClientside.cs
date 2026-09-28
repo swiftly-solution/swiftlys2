@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_PhysPropClientside : C_BreakableProp, ISchemaClass<C_PhysPropClientside>
 {
     static C_PhysPropClientside ISchemaClass<C_PhysPropClientside>.From(nint handle) => new C_PhysPropClientsideImpl(handle);
-    static int ISchemaClass<C_PhysPropClientside>.Size => 4896;
+    static int ISchemaClass<C_PhysPropClientside>.Size => 5136;
     static string? ISchemaClass<C_PhysPropClientside>.ClassName => null;
 
 

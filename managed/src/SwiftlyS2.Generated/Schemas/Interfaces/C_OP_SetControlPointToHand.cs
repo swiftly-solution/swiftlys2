@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_SetControlPointToHand : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointToHand>
 {
     static C_OP_SetControlPointToHand ISchemaClass<C_OP_SetControlPointToHand>.From(nint handle) => new C_OP_SetControlPointToHandImpl(handle);
-    static int ISchemaClass<C_OP_SetControlPointToHand>.Size => 504;
+    static int ISchemaClass<C_OP_SetControlPointToHand>.Size => 512;
     static string? ISchemaClass<C_OP_SetControlPointToHand>.ClassName => null;
 
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmClipDocEvent_BodyGroup : CNmClipDocEvent, ISchemaClass<CNmClipDocEvent_BodyGroup>
 {
     static CNmClipDocEvent_BodyGroup ISchemaClass<CNmClipDocEvent_BodyGroup>.From(nint handle) => new CNmClipDocEvent_BodyGroupImpl(handle);
-    static int ISchemaClass<CNmClipDocEvent_BodyGroup>.Size => 40;
+    static int ISchemaClass<CNmClipDocEvent_BodyGroup>.Size => 48;
     static string? ISchemaClass<CNmClipDocEvent_BodyGroup>.ClassName => null;
 
 
@@ -19,7 +19,7 @@ public partial interface CNmClipDocEvent_BodyGroup : CNmClipDocEvent, ISchemaCla
 
     public string Bodygroup { get; set; }
 
-    public ref int Value { get; }
+    public string Choice { get; set; }
 
 
 }

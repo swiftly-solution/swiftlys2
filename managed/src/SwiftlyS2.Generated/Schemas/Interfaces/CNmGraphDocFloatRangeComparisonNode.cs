@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmGraphDocFloatRangeComparisonNode : CNmGraphDocFlowNode, ISchemaClass<CNmGraphDocFloatRangeComparisonNode>
 {
     static CNmGraphDocFloatRangeComparisonNode ISchemaClass<CNmGraphDocFloatRangeComparisonNode>.From(nint handle) => new CNmGraphDocFloatRangeComparisonNodeImpl(handle);
-    static int ISchemaClass<CNmGraphDocFloatRangeComparisonNode>.Size => 272;
+    static int ISchemaClass<CNmGraphDocFloatRangeComparisonNode>.Size => 280;
     static string? ISchemaClass<CNmGraphDocFloatRangeComparisonNode>.ClassName => null;
 
 

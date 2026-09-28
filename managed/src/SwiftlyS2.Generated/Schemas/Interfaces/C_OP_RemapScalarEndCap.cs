@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RemapScalarEndCap : CParticleFunctionOperator, ISchemaClass<C_OP_RemapScalarEndCap>
 {
     static C_OP_RemapScalarEndCap ISchemaClass<C_OP_RemapScalarEndCap>.From(nint handle) => new C_OP_RemapScalarEndCapImpl(handle);
-    static int ISchemaClass<C_OP_RemapScalarEndCap>.Size => 496;
+    static int ISchemaClass<C_OP_RemapScalarEndCap>.Size => 504;
     static string? ISchemaClass<C_OP_RemapScalarEndCap>.ClassName => null;
 
 

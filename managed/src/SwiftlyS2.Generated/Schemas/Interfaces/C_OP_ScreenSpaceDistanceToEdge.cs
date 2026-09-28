@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_ScreenSpaceDistanceToEdge : CParticleFunctionOperator, ISchemaClass<C_OP_ScreenSpaceDistanceToEdge>
 {
     static C_OP_ScreenSpaceDistanceToEdge ISchemaClass<C_OP_ScreenSpaceDistanceToEdge>.From(nint handle) => new C_OP_ScreenSpaceDistanceToEdgeImpl(handle);
-    static int ISchemaClass<C_OP_ScreenSpaceDistanceToEdge>.Size => 1264;
+    static int ISchemaClass<C_OP_ScreenSpaceDistanceToEdge>.Size => 1280;
     static string? ISchemaClass<C_OP_ScreenSpaceDistanceToEdge>.ClassName => null;
 
 

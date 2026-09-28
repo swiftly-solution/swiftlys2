@@ -36,6 +36,26 @@ internal partial class ImportExportOptionsEditableData_tImpl : SchemaClass, Impo
             return ref _Handle.AsRef<bool>(_ExportHiddenOffset!.Value);
         }
     }
+    private static nint? _ExportBonesOffset;
+
+    public ref bool ExportBones
+    {
+        get
+        {
+            _ExportBonesOffset = _ExportBonesOffset ?? Schema.GetOffset(0xAF39C5034AA831B6);
+            return ref _Handle.AsRef<bool>(_ExportBonesOffset!.Value);
+        }
+    }
+    private static nint? _ExportSkinningOffset;
+
+    public ref bool ExportSkinning
+    {
+        get
+        {
+            _ExportSkinningOffset = _ExportSkinningOffset ?? Schema.GetOffset(0xAF39C50344525E04);
+            return ref _Handle.AsRef<bool>(_ExportSkinningOffset!.Value);
+        }
+    }
     private static nint? _ExportFbxEmbedTexturesOffset;
 
     public ref bool ExportFbxEmbedTextures

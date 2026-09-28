@@ -35,6 +35,9 @@ internal class PluginManager : IPluginManager
     private readonly ConcurrentDictionary<string, Assembly> _exportAssemblies;
     private readonly FileSystemWatcher? _fileWatcher;
 
+    internal event Action<PluginContext>? PluginLoaded;
+    internal event Action<PluginContext>? PluginUnloading;
+
     public PluginManager(
         IServiceProvider provider,
         ILogger<PluginManager> logger,
@@ -325,6 +328,8 @@ internal class PluginManager : IPluginManager
             return FailWithError(context, silent, $"Plugin entrypoint DLL not found: {entrypointDll}");
         }
 
+        LogObsoleteApiUsages(entrypointDll, Path.GetFileName(directory));
+
         var loader = CreatePluginLoader(entrypointDll);
         var pluginType = FindPluginType(loader);
         if (pluginType == null)
@@ -390,6 +395,8 @@ internal class PluginManager : IPluginManager
             var pluginName = Path.GetFileName(directory);
             _ = _pluginLoadErrors.TryRemove(pluginName, out _);
 
+            PluginLoaded?.Invoke(context);
+
             return context;
         }
         catch (Exception e)
@@ -414,6 +421,7 @@ internal class PluginManager : IPluginManager
 
         try
         {
+            PluginUnloading?.Invoke(context);
             context.Dispose();
             _ = _plugins.Remove(context);
             return true;
@@ -968,6 +976,28 @@ internal class PluginManager : IPluginManager
             context.Metadata!.Version,
             context.Metadata!.Author,
             displayPath);
+    }
+
+    private void LogObsoleteApiUsages( string entrypointDll, string pluginName )
+    {
+        List<ObsoleteApiScanner.ObsoleteApiUsage> usages;
+        try
+        {
+            usages = ObsoleteApiScanner.Scan(entrypointDll);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                _logger.LogDebug(e, "Failed to scan plugin for obsolete API usage: {Path}", entrypointDll);
+            }
+            return;
+        }
+
+        foreach (var usage in usages)
+        {
+            _logger.LogWarning("Plugin '{PluginName}' uses obsolete API: {Member}. {Reason}", pluginName, usage.Member, usage.Reason ?? "This API is obsolete.");
+        }
     }
 
     private PluginMetadata? ReadMetadataFromDll( string dllPath )

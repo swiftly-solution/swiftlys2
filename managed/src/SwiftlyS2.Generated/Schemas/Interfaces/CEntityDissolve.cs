@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CEntityDissolve : CBaseModelEntity, ISchemaClass<CEntityDissolve>
 {
     static CEntityDissolve ISchemaClass<CEntityDissolve>.From(nint handle) => new CEntityDissolveImpl(handle);
-    static int ISchemaClass<CEntityDissolve>.Size => 1952;
+    static int ISchemaClass<CEntityDissolve>.Size => 2176;
     static string? ISchemaClass<CEntityDissolve>.ClassName => "env_entity_dissolver";
 
 

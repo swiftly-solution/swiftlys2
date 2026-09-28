@@ -26,6 +26,16 @@ internal partial class C_ChickenImpl : C_DynamicPropImpl, C_Chicken
             return ref _Handle.AsRef<CHandle<C_CSPlayerPawn>>(_LeaderOffset!.Value);
         }
     }
+    private static nint? _OwnerOffset;
+
+    public ref CHandle<CCSPlayerController> Owner
+    {
+        get
+        {
+            _OwnerOffset = _OwnerOffset ?? Schema.GetOffset(0x94F0C692357473F4);
+            return ref _Handle.AsRef<CHandle<CCSPlayerController>>(_OwnerOffset!.Value);
+        }
+    }
     private static nint? _AttributeManagerOffset;
     private C_AttributeContainerImpl? _AttributeManagerInstance;
 
@@ -70,6 +80,16 @@ internal partial class C_ChickenImpl : C_DynamicPropImpl, C_Chicken
         {
             _IsPreviewModelOffset = _IsPreviewModelOffset ?? Schema.GetOffset(0x94F0C6925E7336C4);
             return ref _Handle.AsRef<bool>(_IsPreviewModelOffset!.Value);
+        }
+    }
+    private static nint? _SpawnDyingParticlesOffset;
+
+    public ref bool SpawnDyingParticles
+    {
+        get
+        {
+            _SpawnDyingParticlesOffset = _SpawnDyingParticlesOffset ?? Schema.GetOffset(0x94F0C692FDEDB160);
+            return ref _Handle.AsRef<bool>(_SpawnDyingParticlesOffset!.Value);
         }
     }
 

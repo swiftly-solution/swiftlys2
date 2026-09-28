@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_NoiseEmitter : CParticleFunctionEmitter, ISchemaClass<C_OP_NoiseEmitter>
 {
     static C_OP_NoiseEmitter ISchemaClass<C_OP_NoiseEmitter>.From(nint handle) => new C_OP_NoiseEmitterImpl(handle);
-    static int ISchemaClass<C_OP_NoiseEmitter>.Size => 544;
+    static int ISchemaClass<C_OP_NoiseEmitter>.Size => 552;
     static string? ISchemaClass<C_OP_NoiseEmitter>.ClassName => null;
 
 

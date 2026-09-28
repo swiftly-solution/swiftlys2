@@ -15,11 +15,12 @@ internal static class NativeKeyValuesSystem
 
     public unsafe static uint GetSymbolForString(string str)
     {
-        return StringAlloc.CreateCString(str, strBufferPtr =>
+        using var strStr = new ScopedCString(str);
+        fixed (byte* strBufferPtr = strStr)
         {
-            var ret = _GetSymbolForString((byte*)strBufferPtr);
+            var ret = _GetSymbolForString(strBufferPtr);
             return ret;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<int*, uint, byte*> _GetStringForSymbol;

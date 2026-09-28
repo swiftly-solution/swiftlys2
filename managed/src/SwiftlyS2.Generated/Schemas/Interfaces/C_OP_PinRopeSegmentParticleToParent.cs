@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_PinRopeSegmentParticleToParent : CParticleFunctionOperator, ISchemaClass<C_OP_PinRopeSegmentParticleToParent>
 {
     static C_OP_PinRopeSegmentParticleToParent ISchemaClass<C_OP_PinRopeSegmentParticleToParent>.From(nint handle) => new C_OP_PinRopeSegmentParticleToParentImpl(handle);
-    static int ISchemaClass<C_OP_PinRopeSegmentParticleToParent>.Size => 1216;
+    static int ISchemaClass<C_OP_PinRopeSegmentParticleToParent>.Size => 1240;
     static string? ISchemaClass<C_OP_PinRopeSegmentParticleToParent>.ClassName => null;
 
 

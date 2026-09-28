@@ -32,23 +32,28 @@ internal partial class CNmClipDocEvent_BodyGroupImpl : CNmClipDocEventImpl, CNmC
     {
         get
         {
-            _BodygroupOffset = _BodygroupOffset ?? Schema.GetOffset(0xB1AC02870033647C);
+            _BodygroupOffset = _BodygroupOffset ?? Schema.GetOffset(0xB1AC0287BCFB279C);
             return Schema.GetCUtlString(_Handle.Read<nint>(_BodygroupOffset!.Value));
         }
         set
         {
-            _BodygroupOffset = _BodygroupOffset ?? Schema.GetOffset(0xB1AC02870033647C);
+            _BodygroupOffset = _BodygroupOffset ?? Schema.GetOffset(0xB1AC0287BCFB279C);
             Schema.SetCUtlString(_Handle, _BodygroupOffset!.Value, value);
         }
     }
-    private static nint? _ValueOffset;
+    private static nint? _ChoiceOffset;
 
-    public ref int Value
+    public string Choice
     {
         get
         {
-            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0xB1AC0287425ED3CA);
-            return ref _Handle.AsRef<int>(_ValueOffset!.Value);
+            _ChoiceOffset = _ChoiceOffset ?? Schema.GetOffset(0xB1AC02872D56D3F6);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ChoiceOffset!.Value));
+        }
+        set
+        {
+            _ChoiceOffset = _ChoiceOffset ?? Schema.GetOffset(0xB1AC02872D56D3F6);
+            Schema.SetCUtlString(_Handle, _ChoiceOffset!.Value, value);
         }
     }
 

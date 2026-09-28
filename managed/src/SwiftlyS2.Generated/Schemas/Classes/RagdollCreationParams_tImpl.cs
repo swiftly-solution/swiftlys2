@@ -46,16 +46,6 @@ internal partial class RagdollCreationParams_tImpl : SchemaClass, RagdollCreatio
             return ref _Handle.AsRef<bool>(_ForceCurrentWorldTransformOffset!.Value);
         }
     }
-    private static nint? _UseLRURetirementOffset;
-
-    public ref bool UseLRURetirement
-    {
-        get
-        {
-            _UseLRURetirementOffset = _UseLRURetirementOffset ?? Schema.GetOffset(0xAF0FCC444DCF62FA);
-            return ref _Handle.AsRef<bool>(_UseLRURetirementOffset!.Value);
-        }
-    }
     private static nint? _HealthToGrantOffset;
 
     public ref int HealthToGrant

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CHostage : CHostageExpresserShim, ISchemaClass<CHostage>
 {
     static CHostage ISchemaClass<CHostage>.From(nint handle) => new CHostageImpl(handle);
-    static int ISchemaClass<CHostage>.Size => 11456;
+    static int ISchemaClass<CHostage>.Size => 11680;
     static string? ISchemaClass<CHostage>.ClassName => "hostage_entity";
 
 

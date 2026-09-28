@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_ColorAdjustHSL : CParticleFunctionOperator, ISchemaClass<C_OP_ColorAdjustHSL>
 {
     static C_OP_ColorAdjustHSL ISchemaClass<C_OP_ColorAdjustHSL>.From(nint handle) => new C_OP_ColorAdjustHSLImpl(handle);
-    static int ISchemaClass<C_OP_ColorAdjustHSL>.Size => 1576;
+    static int ISchemaClass<C_OP_ColorAdjustHSL>.Size => 1608;
     static string? ISchemaClass<C_OP_ColorAdjustHSL>.ClassName => null;
 
 

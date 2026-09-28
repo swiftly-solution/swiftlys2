@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CAnimGraphControllerBase : ISchemaClass<CAnimGraphControllerBase>
 {
     static CAnimGraphControllerBase ISchemaClass<CAnimGraphControllerBase>.From(nint handle) => new CAnimGraphControllerBaseImpl(handle);
-    static int ISchemaClass<CAnimGraphControllerBase>.Size => 136;
+    static int ISchemaClass<CAnimGraphControllerBase>.Size => 192;
     static string? ISchemaClass<CAnimGraphControllerBase>.ClassName => null;
 
 

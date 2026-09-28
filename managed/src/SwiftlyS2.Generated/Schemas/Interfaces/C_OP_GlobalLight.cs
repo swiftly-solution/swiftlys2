@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_GlobalLight : CParticleFunctionOperator, ISchemaClass<C_OP_GlobalLight>
 {
     static C_OP_GlobalLight ISchemaClass<C_OP_GlobalLight>.From(nint handle) => new C_OP_GlobalLightImpl(handle);
-    static int ISchemaClass<C_OP_GlobalLight>.Size => 480;
+    static int ISchemaClass<C_OP_GlobalLight>.Size => 488;
     static string? ISchemaClass<C_OP_GlobalLight>.ClassName => null;
 
 

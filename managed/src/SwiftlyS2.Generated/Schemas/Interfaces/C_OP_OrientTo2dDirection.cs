@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_OrientTo2dDirection : CParticleFunctionOperator, ISchemaClass<C_OP_OrientTo2dDirection>
 {
     static C_OP_OrientTo2dDirection ISchemaClass<C_OP_OrientTo2dDirection>.From(nint handle) => new C_OP_OrientTo2dDirectionImpl(handle);
-    static int ISchemaClass<C_OP_OrientTo2dDirection>.Size => 2208;
+    static int ISchemaClass<C_OP_OrientTo2dDirection>.Size => 2248;
     static string? ISchemaClass<C_OP_OrientTo2dDirection>.ClassName => null;
 
 

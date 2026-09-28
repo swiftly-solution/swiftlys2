@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CnmGraphDocDurationScaleNode : CNmGraphDocFlowNode, ISchemaClass<CnmGraphDocDurationScaleNode>
 {
     static CnmGraphDocDurationScaleNode ISchemaClass<CnmGraphDocDurationScaleNode>.From(nint handle) => new CnmGraphDocDurationScaleNodeImpl(handle);
-    static int ISchemaClass<CnmGraphDocDurationScaleNode>.Size => 264;
+    static int ISchemaClass<CnmGraphDocDurationScaleNode>.Size => 272;
     static string? ISchemaClass<CnmGraphDocDurationScaleNode>.ClassName => null;
 
 

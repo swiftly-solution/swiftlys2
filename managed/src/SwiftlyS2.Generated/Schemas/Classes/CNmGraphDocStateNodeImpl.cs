@@ -39,6 +39,19 @@ internal partial class CNmGraphDocStateNodeImpl : CNmGraphDocStateMachineGraphNo
             return instance;
         }
     }
+    private static nint? _CloneStateVersionOffset;
+    private SchemaUntypedField? _CloneStateVersionInstance;
+
+    public SchemaUntypedField CloneStateVersion
+    {
+        get
+        {
+            _CloneStateVersionOffset = _CloneStateVersionOffset ?? Schema.GetOffset(0x2A58029E1E035E69);
+            var instance = _CloneStateVersionInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _CloneStateVersionOffset!.Value);
+            return instance;
+        }
+    }
     private static nint? _StateEventsOffset;
 
     public ref CUtlVector<CNmGraphDocStateNode__StateEvent_t> StateEvents

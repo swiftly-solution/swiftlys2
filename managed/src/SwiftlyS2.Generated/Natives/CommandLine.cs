@@ -15,11 +15,12 @@ internal static class NativeCommandLine
 
     public unsafe static bool HasParameter(string parameter)
     {
-        return StringAlloc.CreateCString(parameter, parameterBufferPtr =>
+        using var parameterStr = new ScopedCString(parameter);
+        fixed (byte* parameterBufferPtr = parameterStr)
         {
-            var ret = _HasParameter((byte*)parameterBufferPtr);
+            var ret = _HasParameter(parameterBufferPtr);
             return ret == 1;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<int> _GetParameterCount;
@@ -34,39 +35,43 @@ internal static class NativeCommandLine
 
     public unsafe static string GetParameterValueString(string parameter, string defaultValue)
     {
-        return StringAlloc.CreateCString(parameter, parameterBufferPtr =>
+        using var parameterStr = new ScopedCString(parameter);
+        using var defaultValueStr = new ScopedCString(defaultValue);
+        fixed (byte* parameterBufferPtr = parameterStr)
         {
-            return StringAlloc.CreateCString(defaultValue, defaultValueBufferPtr =>
+            fixed (byte* defaultValueBufferPtr = defaultValueStr)
             {
                 var length = 0;
-                var returnedPtr = _GetParameterValueString(&length, (byte*)parameterBufferPtr, (byte*)defaultValueBufferPtr);
+                var returnedPtr = _GetParameterValueString(&length, parameterBufferPtr, defaultValueBufferPtr);
                 var outString = StringAlloc.CreateCSharpString((nint)returnedPtr, length);
                 NativeAllocator.Free((nint)returnedPtr);
                 return outString;
-            });
-        });
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, int, int> _GetParameterValueInt;
 
     public unsafe static int GetParameterValueInt(string parameter, int defaultValue)
     {
-        return StringAlloc.CreateCString(parameter, parameterBufferPtr =>
+        using var parameterStr = new ScopedCString(parameter);
+        fixed (byte* parameterBufferPtr = parameterStr)
         {
-            var ret = _GetParameterValueInt((byte*)parameterBufferPtr, defaultValue);
+            var ret = _GetParameterValueInt(parameterBufferPtr, defaultValue);
             return ret;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, float, float> _GetParameterValueFloat;
 
     public unsafe static float GetParameterValueFloat(string parameter, float defaultValue)
     {
-        return StringAlloc.CreateCString(parameter, parameterBufferPtr =>
+        using var parameterStr = new ScopedCString(parameter);
+        fixed (byte* parameterBufferPtr = parameterStr)
         {
-            var ret = _GetParameterValueFloat((byte*)parameterBufferPtr, defaultValue);
+            var ret = _GetParameterValueFloat(parameterBufferPtr, defaultValue);
             return ret;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<int*, byte*> _GetCommandLine;

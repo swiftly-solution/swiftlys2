@@ -48,4 +48,9 @@ public interface EventBombDefused : IGameEvent<EventBombDefused>
     /// type: short
     /// </summary>
     short Site { get; set; }
+
+    /// <summary>
+    /// type: short
+    /// </summary>
+    short C4 { get; set; }
 }

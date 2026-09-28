@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_InheritFromParentParticles : CParticleFunctionInitializer, ISchemaClass<C_INIT_InheritFromParentParticles>
 {
     static C_INIT_InheritFromParentParticles ISchemaClass<C_INIT_InheritFromParentParticles>.From(nint handle) => new C_INIT_InheritFromParentParticlesImpl(handle);
-    static int ISchemaClass<C_INIT_InheritFromParentParticles>.Size => 504;
+    static int ISchemaClass<C_INIT_InheritFromParentParticles>.Size => 512;
     static string? ISchemaClass<C_INIT_InheritFromParentParticles>.ClassName => null;
 
 

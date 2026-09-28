@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CCSBot : CBot, ISchemaClass<CCSBot>
 {
     static CCSBot ISchemaClass<CCSBot>.From(nint handle) => new CCSBotImpl(handle);
-    static int ISchemaClass<CCSBot>.Size => 24128;
+    static int ISchemaClass<CCSBot>.Size => 24120;
     static string? ISchemaClass<CCSBot>.ClassName => null;
 
 

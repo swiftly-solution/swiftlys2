@@ -18,14 +18,16 @@ internal static class NativeCommands
     /// </summary>
     public unsafe static ulong RegisterCommand(string commandName, bool registerRaw, string helpText)
     {
-        return StringAlloc.CreateCString(commandName, commandNameBufferPtr =>
+        using var commandNameStr = new ScopedCString(commandName);
+        using var helpTextStr = new ScopedCString(helpText);
+        fixed (byte* commandNameBufferPtr = commandNameStr)
         {
-            return StringAlloc.CreateCString(helpText, helpTextBufferPtr =>
+            fixed (byte* helpTextBufferPtr = helpTextStr)
             {
-                var ret = _RegisterCommand((byte*)commandNameBufferPtr, registerRaw ? (byte)1 : (byte)0, (byte*)helpTextBufferPtr);
+                var ret = _RegisterCommand(commandNameBufferPtr, registerRaw ? (byte)1 : (byte)0, helpTextBufferPtr);
                 return ret;
-            });
-        });
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<ulong, void> _UnregisterCommand;
@@ -49,11 +51,12 @@ internal static class NativeCommands
 
     public unsafe static bool IsCommandRegistered(string commandName)
     {
-        return StringAlloc.CreateCString(commandName, commandNameBufferPtr =>
+        using var commandNameStr = new ScopedCString(commandName);
+        fixed (byte* commandNameBufferPtr = commandNameStr)
         {
-            var ret = _IsCommandRegistered((byte*)commandNameBufferPtr);
+            var ret = _IsCommandRegistered(commandNameBufferPtr);
             return ret == 1;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, byte*, byte, ulong> _RegisterAlias;
@@ -63,14 +66,16 @@ internal static class NativeCommands
     /// </summary>
     public unsafe static ulong RegisterAlias(string aliasName, string commandName, bool registerRaw)
     {
-        return StringAlloc.CreateCString(aliasName, aliasNameBufferPtr =>
+        using var aliasNameStr = new ScopedCString(aliasName);
+        using var commandNameStr = new ScopedCString(commandName);
+        fixed (byte* aliasNameBufferPtr = aliasNameStr)
         {
-            return StringAlloc.CreateCString(commandName, commandNameBufferPtr =>
+            fixed (byte* commandNameBufferPtr = commandNameStr)
             {
-                var ret = _RegisterAlias((byte*)aliasNameBufferPtr, (byte*)commandNameBufferPtr, registerRaw ? (byte)1 : (byte)0);
+                var ret = _RegisterAlias(aliasNameBufferPtr, commandNameBufferPtr, registerRaw ? (byte)1 : (byte)0);
                 return ret;
-            });
-        });
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<ulong, void> _UnregisterAlias;

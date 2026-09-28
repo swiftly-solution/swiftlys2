@@ -76,6 +76,16 @@ internal partial class CNmSkeletonImpl : SchemaClass, CNmSkeleton
             return ref _Handle.AsRef<int>(_NumBonesToSampleAtLowLODOffset!.Value);
         }
     }
+    private static nint? _IsPropSkeletonOffset;
+
+    public ref bool IsPropSkeleton
+    {
+        get
+        {
+            _IsPropSkeletonOffset = _IsPropSkeletonOffset ?? Schema.GetOffset(0xC9232514FD7D351F);
+            return ref _Handle.AsRef<bool>(_IsPropSkeletonOffset!.Value);
+        }
+    }
     private static nint? _MaskDefinitionsOffset;
 
     public ref CUtlLeanVector<NmBoneMaskSetDefinition_t, int> MaskDefinitions
@@ -106,14 +116,34 @@ internal partial class CNmSkeletonImpl : SchemaClass, CNmSkeleton
             return ref _Handle.AsRef<CUtlLeanVector<CNmFloatChannelSet_t, int>>(_FloatChannelSetsOffset!.Value);
         }
     }
-    private static nint? _IsPropSkeletonOffset;
+    private static nint? _ContactConfigsOffset;
 
-    public ref bool IsPropSkeleton
+    public ref CUtlVector<CNmSkeleton__ContactConfig_t> ContactConfigs
     {
         get
         {
-            _IsPropSkeletonOffset = _IsPropSkeletonOffset ?? Schema.GetOffset(0xC9232514FD7D351F);
-            return ref _Handle.AsRef<bool>(_IsPropSkeletonOffset!.Value);
+            _ContactConfigsOffset = _ContactConfigsOffset ?? Schema.GetOffset(0xC923251427B5F356);
+            return ref _Handle.AsRef<CUtlVector<CNmSkeleton__ContactConfig_t>>(_ContactConfigsOffset!.Value);
+        }
+    }
+    private static nint? _GameplayRelevantBoneIndicesOffset;
+
+    public ref CUtlVector<int> GameplayRelevantBoneIndices
+    {
+        get
+        {
+            _GameplayRelevantBoneIndicesOffset = _GameplayRelevantBoneIndicesOffset ?? Schema.GetOffset(0xC9232514930C946B);
+            return ref _Handle.AsRef<CUtlVector<int>>(_GameplayRelevantBoneIndicesOffset!.Value);
+        }
+    }
+    private static nint? _SpecialDependencyHashOffset;
+
+    public ref long SpecialDependencyHash
+    {
+        get
+        {
+            _SpecialDependencyHashOffset = _SpecialDependencyHashOffset ?? Schema.GetOffset(0xC923251449DA09A9);
+            return ref _Handle.AsRef<long>(_SpecialDependencyHashOffset!.Value);
         }
     }
 

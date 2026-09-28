@@ -24,4 +24,8 @@ internal class CMsgPlayerInfoImpl : TypedProtobuf<CMsgPlayerInfo>, CMsgPlayerInf
     { get => Accessor.GetBool("fakeplayer"); set => Accessor.SetBool("fakeplayer", value); }
     public bool Ishltv
     { get => Accessor.GetBool("ishltv"); set => Accessor.SetBool("ishltv", value); }
+    public bool ClanMember
+    { get => Accessor.GetBool("clan_member"); set => Accessor.SetBool("clan_member", value); }
+    public bool ClanOfficer
+    { get => Accessor.GetBool("clan_officer"); set => Accessor.SetBool("clan_officer", value); }
 }

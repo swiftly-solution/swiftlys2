@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_HostageCarriableProp : CBaseAnimGraph, ISchemaClass<C_HostageCarriableProp>
 {
     static C_HostageCarriableProp ISchemaClass<C_HostageCarriableProp>.From(nint handle) => new C_HostageCarriablePropImpl(handle);
-    static int ISchemaClass<C_HostageCarriableProp>.Size => 4488;
+    static int ISchemaClass<C_HostageCarriableProp>.Size => 4720;
     static string? ISchemaClass<C_HostageCarriableProp>.ClassName => null;
 
 }

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_PointVectorAtNextParticle : CParticleFunctionOperator, ISchemaClass<C_OP_PointVectorAtNextParticle>
 {
     static C_OP_PointVectorAtNextParticle ISchemaClass<C_OP_PointVectorAtNextParticle>.From(nint handle) => new C_OP_PointVectorAtNextParticleImpl(handle);
-    static int ISchemaClass<C_OP_PointVectorAtNextParticle>.Size => 856;
+    static int ISchemaClass<C_OP_PointVectorAtNextParticle>.Size => 872;
     static string? ISchemaClass<C_OP_PointVectorAtNextParticle>.ClassName => null;
 
 

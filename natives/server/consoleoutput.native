@@ -2,6 +2,7 @@ class ConsoleOutput
 
 uint64 AddConsoleListener = ptr callback // callback should receive: string message
 void RemoveConsoleListener = uint64 listenerId
+void DispatchQueuedListeners = void // synchronously dispatches queued messages on the caller; normal dispatch uses the worker thread
 bool IsEnabled = void // returns whether console filtering is enabled
 void ToggleFilter = void // toggles the console filter on/off
 void ReloadFilterConfiguration = void // reloads the filter configuration from file

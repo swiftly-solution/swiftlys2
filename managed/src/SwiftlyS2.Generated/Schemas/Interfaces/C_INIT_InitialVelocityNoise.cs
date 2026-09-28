@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_InitialVelocityNoise : CParticleFunctionInitializer, ISchemaClass<C_INIT_InitialVelocityNoise>
 {
     static C_INIT_InitialVelocityNoise ISchemaClass<C_INIT_InitialVelocityNoise>.From(nint handle) => new C_INIT_InitialVelocityNoiseImpl(handle);
-    static int ISchemaClass<C_INIT_InitialVelocityNoise>.Size => 6880;
+    static int ISchemaClass<C_INIT_InitialVelocityNoise>.Size => 7008;
     static string? ISchemaClass<C_INIT_InitialVelocityNoise>.ClassName => null;
 
 

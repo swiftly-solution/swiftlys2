@@ -529,6 +529,16 @@ internal partial class C_CSPlayerPawnImpl : C_CSPlayerPawnBaseImpl, C_CSPlayerPa
             return ref _Handle.AsRef<bool>(_OnGroundLastTickOffset!.Value);
         }
     }
+    private static nint? _ActiveMinimapVolumeOffset;
+
+    public ref CHandle<CCSMinimapVolume> ActiveMinimapVolume
+    {
+        get
+        {
+            _ActiveMinimapVolumeOffset = _ActiveMinimapVolumeOffset ?? Schema.GetOffset(0x87CCE03E6F673BDA);
+            return ref _Handle.AsRef<CHandle<CCSMinimapVolume>>(_ActiveMinimapVolumeOffset!.Value);
+        }
+    }
     private static nint? _HudModelArmsOffset;
 
     public ref CHandle<C_CS2HudModelArms> HudModelArms
@@ -962,6 +972,16 @@ internal partial class C_CSPlayerPawnImpl : C_CSPlayerPawnBaseImpl, C_CSPlayerPa
         {
             _StashedVelocityOffset = _StashedVelocityOffset ?? Schema.GetOffset(0x87CCE03E577972A4);
             return ref _Handle.AsRef<Vector>(_StashedVelocityOffset!.Value);
+        }
+    }
+    private static nint? _InterpolatedInaccuracyOffset;
+
+    public ref float InterpolatedInaccuracy
+    {
+        get
+        {
+            _InterpolatedInaccuracyOffset = _InterpolatedInaccuracyOffset ?? Schema.GetOffset(0x87CCE03E6F00B46C);
+            return ref _Handle.AsRef<float>(_InterpolatedInaccuracyOffset!.Value);
         }
     }
     private static nint? _ShouldAutobuyDMWeaponsOffset;

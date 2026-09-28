@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmGraphDocIsExternalPoseSetNode : CNmGraphDocFlowNode, ISchemaClass<CNmGraphDocIsExternalPoseSetNode>
 {
     static CNmGraphDocIsExternalPoseSetNode ISchemaClass<CNmGraphDocIsExternalPoseSetNode>.From(nint handle) => new CNmGraphDocIsExternalPoseSetNodeImpl(handle);
-    static int ISchemaClass<CNmGraphDocIsExternalPoseSetNode>.Size => 264;
+    static int ISchemaClass<CNmGraphDocIsExternalPoseSetNode>.Size => 272;
     static string? ISchemaClass<CNmGraphDocIsExternalPoseSetNode>.ClassName => null;
 
 

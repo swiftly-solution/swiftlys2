@@ -135,7 +135,8 @@ public interface IEventSubscriber
     public event EventDelegates.OnWeaponServicesDropWeaponHook? OnWeaponServicesDropWeaponHook;
 
     /// <summary>
-    /// Called when the game outputs a console message.
+    /// Called when the game outputs a console message. Callbacks run on the dedicated
+    /// console dispatch thread; schedule work before using game-thread-only APIs.
     /// </summary>
     public event EventDelegates.OnConsoleOutput? OnConsoleOutput;
 
@@ -195,4 +196,9 @@ public interface IEventSubscriber
     /// Called when a client sends a voice packet.
     /// </summary>
     public event EventDelegates.OnClientVoice? OnClientVoice;
+
+    /// <summary>
+    /// Called when a custom hud element is clicked.
+    /// </summary>    
+    public event EventDelegates.OnCustomHudClicked? OnCustomHudClicked;
 }

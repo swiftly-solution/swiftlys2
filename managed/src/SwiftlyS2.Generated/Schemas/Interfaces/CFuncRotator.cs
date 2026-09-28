@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CFuncRotator : CBaseModelEntity, ISchemaClass<CFuncRotator>
 {
     static CFuncRotator ISchemaClass<CFuncRotator>.From(nint handle) => new CFuncRotatorImpl(handle);
-    static int ISchemaClass<CFuncRotator>.Size => 2288;
+    static int ISchemaClass<CFuncRotator>.Size => 2480;
     static string? ISchemaClass<CFuncRotator>.ClassName => "func_rotator";
 
 
@@ -23,13 +23,13 @@ public partial interface CFuncRotator : CBaseModelEntity, ISchemaClass<CFuncRota
 
     public ref float Speed { get; }
 
+    public ref float RotationDistanceDegrees { get; }
+
     public ref float TimeToCompleteRotation { get; }
 
     public ref CHandle<CBaseEntity> RotatorTarget { get; }
 
     public string StrRotatorTarget { get; set; }
-
-    public ref CUtlVector<Quaternion> LocalRotationHistory { get; }
 
     public ref CEntityIOOutput OnRotationStarted { get; }
 
@@ -63,17 +63,11 @@ public partial interface CFuncRotator : CBaseModelEntity, ISchemaClass<CFuncRota
 
     public ref Quaternion SpawnOrientation { get; }
 
-    public ref bool RecordHistory { get; }
-
-    public ref bool ReturningToPreviousRotation { get; }
-
     public ref bool ReturningToInitialRotation { get; }
 
     public ref float MinYawRotation { get; }
 
     public ref float MaxYawRotation { get; }
-
-    public ref int OscillationCount { get; }
 
     public ref bool OscillationFromStart { get; }
 
@@ -90,6 +84,8 @@ public partial interface CFuncRotator : CBaseModelEntity, ISchemaClass<CFuncRota
     public ref CFuncRotator__RotationAxis_t RotationAxis { get; }
 
     public ref float SpeedDriftFromOverRotate { get; }
+
+    public ref bool QueueStop { get; }
 
 
 }

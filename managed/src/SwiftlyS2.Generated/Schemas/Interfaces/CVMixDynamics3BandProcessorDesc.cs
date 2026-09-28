@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVMixDynamics3BandProcessorDesc : CVMixBaseProcessorDesc, ISchemaClass<CVMixDynamics3BandProcessorDesc>
 {
     static CVMixDynamics3BandProcessorDesc ISchemaClass<CVMixDynamics3BandProcessorDesc>.From(nint handle) => new CVMixDynamics3BandProcessorDescImpl(handle);
-    static int ISchemaClass<CVMixDynamics3BandProcessorDesc>.Size => 176;
+    static int ISchemaClass<CVMixDynamics3BandProcessorDesc>.Size => 184;
     static string? ISchemaClass<CVMixDynamics3BandProcessorDesc>.ClassName => null;
 
 

@@ -11,11 +11,19 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVMixModDelayProcessorDesc : CVMixBaseProcessorDesc, ISchemaClass<CVMixModDelayProcessorDesc>
 {
     static CVMixModDelayProcessorDesc ISchemaClass<CVMixModDelayProcessorDesc>.From(nint handle) => new CVMixModDelayProcessorDescImpl(handle);
-    static int ISchemaClass<CVMixModDelayProcessorDesc>.Size => 80;
+    static int ISchemaClass<CVMixModDelayProcessorDesc>.Size => 104;
     static string? ISchemaClass<CVMixModDelayProcessorDesc>.ClassName => null;
 
 
     public VMixModDelayDesc_t Desc { get; }
+
+    public CVMixParameterFloat ParamCutoffFrequency { get; }
+
+    public CVMixParameterFloat ParamDelay { get; }
+
+    public CVMixParameterFloat ParamModRate { get; }
+
+    public CVMixParameterFloat ParamModDepth { get; }
 
 
 }

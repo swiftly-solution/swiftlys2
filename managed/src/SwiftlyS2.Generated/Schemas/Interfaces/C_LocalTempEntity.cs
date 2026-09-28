@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_LocalTempEntity : CBaseAnimGraph, ISchemaClass<C_LocalTempEntity>
 {
     static C_LocalTempEntity ISchemaClass<C_LocalTempEntity>.From(nint handle) => new C_LocalTempEntityImpl(handle);
-    static int ISchemaClass<C_LocalTempEntity>.Size => 4648;
+    static int ISchemaClass<C_LocalTempEntity>.Size => 4880;
     static string? ISchemaClass<C_LocalTempEntity>.ClassName => null;
 
 

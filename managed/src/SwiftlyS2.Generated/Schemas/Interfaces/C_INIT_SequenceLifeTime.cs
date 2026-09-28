@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_SequenceLifeTime : CParticleFunctionInitializer, ISchemaClass<C_INIT_SequenceLifeTime>
 {
     static C_INIT_SequenceLifeTime ISchemaClass<C_INIT_SequenceLifeTime>.From(nint handle) => new C_INIT_SequenceLifeTimeImpl(handle);
-    static int ISchemaClass<C_INIT_SequenceLifeTime>.Size => 488;
+    static int ISchemaClass<C_INIT_SequenceLifeTime>.Size => 496;
     static string? ISchemaClass<C_INIT_SequenceLifeTime>.ClassName => null;
 
 

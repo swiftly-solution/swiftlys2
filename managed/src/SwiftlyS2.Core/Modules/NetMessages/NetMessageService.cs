@@ -1,8 +1,10 @@
 using Microsoft.Extensions.Logging;
+using SwiftlyS2.Core.Events;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Shared.NetMessages;
 using SwiftlyS2.Shared.Profiler;
+using SwiftlyS2.Shared.ProtobufDefinitions;
 
 namespace SwiftlyS2.Core.NetMessages;
 
@@ -40,6 +42,10 @@ internal class NetMessageService : INetMessageService, IDisposable
                 if (result == HookResult.Stop) return (int)HookResult.Stop;
                 if (result == HookResult.Handled) return (int)HookResult.Handled;
                 if (result == HookResult.CancelOriginal) stopOriginal = true;
+            }
+            if (!stopOriginal && msgId == (int)ECstrike15UserMessages.CS_UM_CustomHudClicked)
+            {
+                EventPublisher.InvokeOnCustomHudClicked(playerId, pMessage);
             }
             return stopOriginal ? (int)HookResult.CancelOriginal : (int)HookResult.Continue;
         }

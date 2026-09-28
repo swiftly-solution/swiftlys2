@@ -15,21 +15,23 @@ internal static class NativeOffsets
 
     public unsafe static bool Exists(string name)
     {
-        return StringAlloc.CreateCString(name, nameBufferPtr =>
+        using var nameStr = new ScopedCString(name);
+        fixed (byte* nameBufferPtr = nameStr)
         {
-            var ret = _Exists((byte*)nameBufferPtr);
+            var ret = _Exists(nameBufferPtr);
             return ret == 1;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, int> _Fetch;
 
     public unsafe static int Fetch(string name)
     {
-        return StringAlloc.CreateCString(name, nameBufferPtr =>
+        using var nameStr = new ScopedCString(name);
+        fixed (byte* nameBufferPtr = nameStr)
         {
-            var ret = _Fetch((byte*)nameBufferPtr);
+            var ret = _Fetch(nameBufferPtr);
             return ret;
-        });
+        }
     }
 }

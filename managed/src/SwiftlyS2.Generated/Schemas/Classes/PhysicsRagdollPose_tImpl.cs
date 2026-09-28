@@ -16,14 +16,14 @@ internal partial class PhysicsRagdollPose_tImpl : SchemaClass, PhysicsRagdollPos
 {
     public PhysicsRagdollPose_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _TransformsOffset;
+    private static nint? _RelativeTransformsOffset;
 
-    public ref CUtlVector<CTransform> Transforms
+    public ref CUtlVector<CTransform> RelativeTransforms
     {
         get
         {
-            _TransformsOffset = _TransformsOffset ?? Schema.GetOffset(0x54A98BF4852CD38);
-            return ref _Handle.AsRef<CUtlVector<CTransform>>(_TransformsOffset!.Value);
+            _RelativeTransformsOffset = _RelativeTransformsOffset ?? Schema.GetOffset(0x54A98BF925B7C80);
+            return ref _Handle.AsRef<CUtlVector<CTransform>>(_RelativeTransformsOffset!.Value);
         }
     }
     private static nint? _OwnerOffset;
@@ -47,6 +47,6 @@ internal partial class PhysicsRagdollPose_tImpl : SchemaClass, PhysicsRagdollPos
         }
     }
 
-    public void TransformsUpdated() => Schema.Update(_Handle, 0x54A98BF4852CD38);
+    public void RelativeTransformsUpdated() => Schema.Update(_Handle, 0x54A98BF925B7C80);
     public void OwnerUpdated() => Schema.Update(_Handle, 0x54A98BFF6D89572);
 }

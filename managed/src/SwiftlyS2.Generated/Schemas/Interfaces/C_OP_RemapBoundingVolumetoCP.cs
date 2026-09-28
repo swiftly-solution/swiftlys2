@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RemapBoundingVolumetoCP : CParticleFunctionPreEmission, ISchemaClass<C_OP_RemapBoundingVolumetoCP>
 {
     static C_OP_RemapBoundingVolumetoCP ISchemaClass<C_OP_RemapBoundingVolumetoCP>.From(nint handle) => new C_OP_RemapBoundingVolumetoCPImpl(handle);
-    static int ISchemaClass<C_OP_RemapBoundingVolumetoCP>.Size => 504;
+    static int ISchemaClass<C_OP_RemapBoundingVolumetoCP>.Size => 512;
     static string? ISchemaClass<C_OP_RemapBoundingVolumetoCP>.ClassName => null;
 
 

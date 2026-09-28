@@ -19,5 +19,7 @@ public partial interface CVMixAudioMeter : ISchemaClass<CVMixAudioMeter>
 
     public string DisplayName { get; set; }
 
+    public ref uint DebugId { get; }
+
 
 }

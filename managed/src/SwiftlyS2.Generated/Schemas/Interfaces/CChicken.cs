@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CChicken : CDynamicProp, ISchemaClass<CChicken>
 {
     static CChicken ISchemaClass<CChicken>.From(nint handle) => new CChickenImpl(handle);
-    static int ISchemaClass<CChicken>.Size => 12480;
+    static int ISchemaClass<CChicken>.Size => 13040;
     static string? ISchemaClass<CChicken>.ClassName => "chicken";
 
 
@@ -45,6 +45,8 @@ public partial interface CChicken : CDynamicProp, ISchemaClass<CChicken>
 
     public ref CHandle<CCSPlayerPawn> Leader { get; }
 
+    public ref CHandle<CCSPlayerController> Owner { get; }
+
     public CountdownTimer ReuseTimer { get; }
 
     public CountdownTimer JumpTimer { get; }
@@ -61,6 +63,10 @@ public partial interface CChicken : CDynamicProp, ISchemaClass<CChicken>
 
     public CountdownTimer BlockDirectionTimer { get; }
 
+    public ref bool SpawnDyingParticles { get; }
+
     public void AttributeManagerUpdated();
     public void LeaderUpdated();
+    public void OwnerUpdated();
+    public void SpawnDyingParticlesUpdated();
 }

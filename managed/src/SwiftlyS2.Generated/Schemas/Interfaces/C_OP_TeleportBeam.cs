@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_TeleportBeam : CParticleFunctionOperator, ISchemaClass<C_OP_TeleportBeam>
 {
     static C_OP_TeleportBeam ISchemaClass<C_OP_TeleportBeam>.From(nint handle) => new C_OP_TeleportBeamImpl(handle);
-    static int ISchemaClass<C_OP_TeleportBeam>.Size => 528;
+    static int ISchemaClass<C_OP_TeleportBeam>.Size => 536;
     static string? ISchemaClass<C_OP_TeleportBeam>.ClassName => null;
 
 

@@ -101,7 +101,6 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
     g_pGameFileSystem = (IFileSystem*)GetInterface(FILESYSTEM_INTERFACE_VERSION);
     g_pGameEngine = (IVEngineServer2*)GetInterface(INTERFACEVERSION_VENGINESERVER);
     g_pGameEventSystem = (IGameEventSystem*)GetInterface(GAMEEVENTSYSTEM_INTERFACE_VERSION);
-    g_pGameSoundSystem = GetInterface(SOUNDSYSTEM_INTERFACE_VERSION);
     g_pGameNetworkMessages = (INetworkMessages*)GetInterface(NETWORKMESSAGES_INTERFACE_VERSION);
     g_pGameNetworkSystem = (INetworkSystem*)GetInterface(NETWORKSYSTEM_INTERFACE_VERSION);
     g_pGameNetworkServerService = (INetworkServerService*)GetInterface(NETWORKSERVERSERVICE_INTERFACE_VERSION);
@@ -216,7 +215,6 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
     }
 
     g_pPlayerManager->Initialize();
-    g_pDatabaseManager->Initialize();
     g_pTranslations->Initialize();
     g_pNetMessages->Initialize();
     g_pVoiceManager->Initialize();
@@ -299,6 +297,7 @@ bool SwiftlyCore::Unload()
     ShutdownGameSystem();
 
     g_ConsoleLogger.Shutdown();
+    g_pConsoleOutput->Shutdown();
     g_pCrashReporter->Shutdown();
 
     return true;

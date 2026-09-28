@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_Multimeter : CBaseAnimGraph, ISchemaClass<C_Multimeter>
 {
     static C_Multimeter ISchemaClass<C_Multimeter>.From(nint handle) => new C_MultimeterImpl(handle);
-    static int ISchemaClass<C_Multimeter>.Size => 4488;
+    static int ISchemaClass<C_Multimeter>.Size => 4720;
     static string? ISchemaClass<C_Multimeter>.ClassName => null;
 
 

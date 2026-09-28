@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmClipDocEvent_OrientationWarp : CNmClipDocEvent, ISchemaClass<CNmClipDocEvent_OrientationWarp>
 {
     static CNmClipDocEvent_OrientationWarp ISchemaClass<CNmClipDocEvent_OrientationWarp>.From(nint handle) => new CNmClipDocEvent_OrientationWarpImpl(handle);
-    static int ISchemaClass<CNmClipDocEvent_OrientationWarp>.Size => 16;
+    static int ISchemaClass<CNmClipDocEvent_OrientationWarp>.Size => 24;
     static string? ISchemaClass<CNmClipDocEvent_OrientationWarp>.ClassName => null;
 
 }

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_FootstepControl : C_BaseTrigger, ISchemaClass<C_FootstepControl>
 {
     static C_FootstepControl ISchemaClass<C_FootstepControl>.From(nint handle) => new C_FootstepControlImpl(handle);
-    static int ISchemaClass<C_FootstepControl>.Size => 4264;
+    static int ISchemaClass<C_FootstepControl>.Size => 4496;
     static string? ISchemaClass<C_FootstepControl>.ClassName => null;
 
 

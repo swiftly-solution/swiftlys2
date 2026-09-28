@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface TextureGroup_t : ISchemaClass<TextureGroup_t>
 {
     static TextureGroup_t ISchemaClass<TextureGroup_t>.From(nint handle) => new TextureGroup_tImpl(handle);
-    static int ISchemaClass<TextureGroup_t>.Size => 3032;
+    static int ISchemaClass<TextureGroup_t>.Size => 3096;
     static string? ISchemaClass<TextureGroup_t>.ClassName => null;
 
 

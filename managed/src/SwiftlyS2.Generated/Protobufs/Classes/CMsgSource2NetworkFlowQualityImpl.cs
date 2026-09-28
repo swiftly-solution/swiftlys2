@@ -42,6 +42,22 @@ internal class CMsgSource2NetworkFlowQualityImpl : TypedProtobuf<CMsgSource2Netw
     { get => Accessor.GetUInt32("netframes_size_p95"); set => Accessor.SetUInt32("netframes_size_p95", value); }
     public uint NetframesSizeP99
     { get => Accessor.GetUInt32("netframes_size_p99"); set => Accessor.SetUInt32("netframes_size_p99", value); }
+    public uint NetframesSizeUncompressedP50
+    { get => Accessor.GetUInt32("netframes_size_uncompressed_p50"); set => Accessor.SetUInt32("netframes_size_uncompressed_p50", value); }
+    public uint NetframesSizeUncompressedP95
+    { get => Accessor.GetUInt32("netframes_size_uncompressed_p95"); set => Accessor.SetUInt32("netframes_size_uncompressed_p95", value); }
+    public uint NetframesSizeUncompressedP99
+    { get => Accessor.GetUInt32("netframes_size_uncompressed_p99"); set => Accessor.SetUInt32("netframes_size_uncompressed_p99", value); }
+    public uint NetframesSizeUncompressedMax
+    { get => Accessor.GetUInt32("netframes_size_uncompressed_max"); set => Accessor.SetUInt32("netframes_size_uncompressed_max", value); }
+    public uint NetframesMsgsP50
+    { get => Accessor.GetUInt32("netframes_msgs_p50"); set => Accessor.SetUInt32("netframes_msgs_p50", value); }
+    public uint NetframesMsgsP95
+    { get => Accessor.GetUInt32("netframes_msgs_p95"); set => Accessor.SetUInt32("netframes_msgs_p95", value); }
+    public uint NetframesMsgsP99
+    { get => Accessor.GetUInt32("netframes_msgs_p99"); set => Accessor.SetUInt32("netframes_msgs_p99", value); }
+    public uint NetframesMsgsMax
+    { get => Accessor.GetUInt32("netframes_msgs_max"); set => Accessor.SetUInt32("netframes_msgs_max", value); }
     public uint TicksTotal
     { get => Accessor.GetUInt32("ticks_total"); set => Accessor.SetUInt32("ticks_total", value); }
     public uint TicksGood
@@ -100,4 +116,28 @@ internal class CMsgSource2NetworkFlowQualityImpl : TypedProtobuf<CMsgSource2Netw
     { get => Accessor.GetUInt32("net_ping_p50"); set => Accessor.SetUInt32("net_ping_p50", value); }
     public uint NetPingP95
     { get => Accessor.GetUInt32("net_ping_p95"); set => Accessor.SetUInt32("net_ping_p95", value); }
+    public uint MsgprocUsecP50
+    { get => Accessor.GetUInt32("msgproc_usec_p50"); set => Accessor.SetUInt32("msgproc_usec_p50", value); }
+    public uint MsgprocUsecP95
+    { get => Accessor.GetUInt32("msgproc_usec_p95"); set => Accessor.SetUInt32("msgproc_usec_p95", value); }
+    public uint MsgprocUsecP99
+    { get => Accessor.GetUInt32("msgproc_usec_p99"); set => Accessor.SetUInt32("msgproc_usec_p99", value); }
+    public uint MsgprocUsecMax
+    { get => Accessor.GetUInt32("msgproc_usec_max"); set => Accessor.SetUInt32("msgproc_usec_max", value); }
+    public uint MsgprocUsecAvgP50
+    { get => Accessor.GetUInt32("msgproc_usec_avg_p50"); set => Accessor.SetUInt32("msgproc_usec_avg_p50", value); }
+    public uint MsgprocUsecAvgP95
+    { get => Accessor.GetUInt32("msgproc_usec_avg_p95"); set => Accessor.SetUInt32("msgproc_usec_avg_p95", value); }
+    public uint MsgprocUsecAvgP99
+    { get => Accessor.GetUInt32("msgproc_usec_avg_p99"); set => Accessor.SetUInt32("msgproc_usec_avg_p99", value); }
+    public uint MsgprocUsecAvgMax
+    { get => Accessor.GetUInt32("msgproc_usec_avg_max"); set => Accessor.SetUInt32("msgproc_usec_avg_max", value); }
+    public uint QueuedmsgsP50
+    { get => Accessor.GetUInt32("queuedmsgs_p50"); set => Accessor.SetUInt32("queuedmsgs_p50", value); }
+    public uint QueuedmsgsP95
+    { get => Accessor.GetUInt32("queuedmsgs_p95"); set => Accessor.SetUInt32("queuedmsgs_p95", value); }
+    public uint QueuedmsgsP99
+    { get => Accessor.GetUInt32("queuedmsgs_p99"); set => Accessor.SetUInt32("queuedmsgs_p99", value); }
+    public uint QueuedmsgsMax
+    { get => Accessor.GetUInt32("queuedmsgs_max"); set => Accessor.SetUInt32("queuedmsgs_max", value); }
 }

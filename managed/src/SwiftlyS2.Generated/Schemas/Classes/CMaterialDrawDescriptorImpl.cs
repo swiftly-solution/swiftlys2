@@ -48,12 +48,12 @@ internal partial class CMaterialDrawDescriptorImpl : SchemaClass, CMaterialDrawD
     }
     private static nint? _NumMeshletsOffset;
 
-    public ref ushort NumMeshlets
+    public ref uint NumMeshlets
     {
         get
         {
             _NumMeshletsOffset = _NumMeshletsOffset ?? Schema.GetOffset(0xE7C21000A56D0338);
-            return ref _Handle.AsRef<ushort>(_NumMeshletsOffset!.Value);
+            return ref _Handle.AsRef<uint>(_NumMeshletsOffset!.Value);
         }
     }
     private static nint? _FirstMeshletOffset;
@@ -74,6 +74,16 @@ internal partial class CMaterialDrawDescriptorImpl : SchemaClass, CMaterialDrawD
         {
             _AppliedIndexOffsetOffset = _AppliedIndexOffsetOffset ?? Schema.GetOffset(0xE7C21000A24FA35D);
             return ref _Handle.AsRef<uint>(_AppliedIndexOffsetOffset!.Value);
+        }
+    }
+    private static nint? _EmissivePrimitiveCountOffset;
+
+    public ref int EmissivePrimitiveCount
+    {
+        get
+        {
+            _EmissivePrimitiveCountOffset = _EmissivePrimitiveCountOffset ?? Schema.GetOffset(0xE7C210009D70E2EE);
+            return ref _Handle.AsRef<int>(_EmissivePrimitiveCountOffset!.Value);
         }
     }
     private static nint? _DepthVertexBufferIndexOffset;

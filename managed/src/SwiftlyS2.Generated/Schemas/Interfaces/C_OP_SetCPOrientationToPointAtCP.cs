@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_SetCPOrientationToPointAtCP : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetCPOrientationToPointAtCP>
 {
     static C_OP_SetCPOrientationToPointAtCP ISchemaClass<C_OP_SetCPOrientationToPointAtCP>.From(nint handle) => new C_OP_SetCPOrientationToPointAtCPImpl(handle);
-    static int ISchemaClass<C_OP_SetCPOrientationToPointAtCP>.Size => 864;
+    static int ISchemaClass<C_OP_SetCPOrientationToPointAtCP>.Size => 880;
     static string? ISchemaClass<C_OP_SetCPOrientationToPointAtCP>.ClassName => null;
 
 

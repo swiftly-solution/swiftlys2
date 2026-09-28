@@ -29,4 +29,5 @@ public interface CMsgGCCStrike15_v2_MatchmakingGC2ServerReserve : ITypedProtobuf
     public uint SocacheControl { get; set; }
     public IProtobufRepeatedFieldValueType<int> TeammateColors { get; }
     public uint MatchIdAdditional { get; set; }
+    public IProtobufRepeatedFieldValueType<string> ClanTags { get; }
 }

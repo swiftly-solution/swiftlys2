@@ -15,4 +15,5 @@ public interface CUserMessageSayText : ITypedProtobuf<CUserMessageSayText>, INet
     public int Playerindex { get; set; }
     public string Text { get; set; }
     public bool Chat { get; set; }
+    public bool Textallchat { get; set; }
 }

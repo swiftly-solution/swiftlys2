@@ -8,7 +8,7 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_SoundEventPathCornerEntity : C_SoundEventEntity, ISchemaClass<C_SoundEventPathCornerEntity>
+public partial interface C_SoundEventPathCornerEntity : C_SoundEventMultiPointEntity, ISchemaClass<C_SoundEventPathCornerEntity>
 {
     static C_SoundEventPathCornerEntity ISchemaClass<C_SoundEventPathCornerEntity>.From(nint handle) => new C_SoundEventPathCornerEntityImpl(handle);
     static int ISchemaClass<C_SoundEventPathCornerEntity>.Size => 1752;

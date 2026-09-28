@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RenderProjected : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderProjected>
 {
     static C_OP_RenderProjected ISchemaClass<C_OP_RenderProjected>.From(nint handle) => new C_OP_RenderProjectedImpl(handle);
-    static int ISchemaClass<C_OP_RenderProjected>.Size => 3856;
+    static int ISchemaClass<C_OP_RenderProjected>.Size => 3928;
     static string? ISchemaClass<C_OP_RenderProjected>.ClassName => null;
 
 

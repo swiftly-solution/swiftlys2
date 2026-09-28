@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_LifespanFromVelocity : CParticleFunctionInitializer, ISchemaClass<C_INIT_LifespanFromVelocity>
 {
     static C_INIT_LifespanFromVelocity ISchemaClass<C_INIT_LifespanFromVelocity>.From(nint handle) => new C_INIT_LifespanFromVelocityImpl(handle);
-    static int ISchemaClass<C_INIT_LifespanFromVelocity>.Size => 664;
+    static int ISchemaClass<C_INIT_LifespanFromVelocity>.Size => 672;
     static string? ISchemaClass<C_INIT_LifespanFromVelocity>.ClassName => null;
 
 

@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.Extensions.Logging;
 using SwiftlyS2.Core.Events;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared;
 using SwiftlyS2.Shared.Memory;
 using SwiftlyS2.Shared.Misc;
@@ -86,10 +87,17 @@ internal class CoreHookService : IDisposable
 
                         if (@eventPre.Result == HookResult.Stop || @eventPre.Result == HookResult.CancelOriginal)
                         {
+                            CommandTrackerManager.CancelCommand();
                             return 0;
                         }
 
                         var result = next()(a1, a2, a3, a4, a5);
+
+                        // Buffered command output must be delivered before the post hook closes
+                        // its capture window. The native call creates a real managed-to-native
+                        // transition, so queued UnmanagedCallersOnly callbacks enter safely.
+                        if (CommandTrackerManager.IsTracking)
+                            NativeConsoleOutput.DispatchQueuedListeners();
 
                         var @eventPost = new OnCommandExecuteHookEvent(ref command, HookMode.Post);
                         EventPublisher.InvokeOnCommandExecuteHook(@eventPost);

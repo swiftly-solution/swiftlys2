@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVMixPlateReverbProcessorDesc : CVMixBaseProcessorDesc, ISchemaClass<CVMixPlateReverbProcessorDesc>
 {
     static CVMixPlateReverbProcessorDesc ISchemaClass<CVMixPlateReverbProcessorDesc>.From(nint handle) => new CVMixPlateReverbProcessorDescImpl(handle);
-    static int ISchemaClass<CVMixPlateReverbProcessorDesc>.Size => 64;
+    static int ISchemaClass<CVMixPlateReverbProcessorDesc>.Size => 72;
     static string? ISchemaClass<CVMixPlateReverbProcessorDesc>.ClassName => null;
 
 

@@ -5,8 +5,17 @@ using System.Reflection;
 using Microsoft.Diagnostics.NETCore.Client;
 using Microsoft.Extensions.Logging;
 using SwiftlyS2.Core.Natives;
+using SwiftlyS2.Core.Plugins;
+using SwiftlyS2.Core.Services.Profiler;
 
 namespace SwiftlyS2.Core.Services;
+
+internal enum ProfilerLevel
+{
+    Disabled = 0,
+    Light = 1,
+    Heavy = 2
+}
 
 [EventSource(Name = "SwiftlyS2-Profiler")]
 internal sealed class ProfilerEventSource : EventSource
@@ -34,7 +43,8 @@ internal class ProfileService
     ];
 
     private readonly DiagnosticsClient _diagnosticsClient;
-    private volatile bool _enabled;
+    private readonly LightweightProfilerService _lightweight;
+    private volatile ProfilerLevel _level = ProfilerLevel.Disabled;
 
     private readonly record struct RecordedEntry( string Name, double DurationMs, long TimestampUtcMs );
 
@@ -45,56 +55,88 @@ internal class ProfileService
     private Task? _drainTask;
     private string? _tempTraceFile;
 
-    public ProfileService()
+    public ProfileService( PluginManager pluginManager, ILogger<LightweightProfilerService> lightweightLogger )
     {
         _diagnosticsClient = new DiagnosticsClient(Environment.ProcessId);
-        if (NativeCore.EnableProfilerByDefault())
-            Enable();
+        _lightweight = new LightweightProfilerService(pluginManager, lightweightLogger);
+
+        var defaultLevel = (ProfilerLevel)Math.Clamp(NativeCore.GetProfilerLevelByDefault(), 0, 2);
+        if (defaultLevel != ProfilerLevel.Disabled)
+            Enable(defaultLevel);
     }
 
-    public void Enable()
+    public void Enable( ProfilerLevel level )
     {
-        if (_enabled) return;
-        _enabled = true;
-        StartSession();
+        if (_level == level) return;
+        Disable();
+        _level = level;
+
+        if (level == ProfilerLevel.Light)
+            StartSession();
+        else if (level == ProfilerLevel.Heavy)
+            _lightweight.Enable();
     }
 
     public void Disable()
     {
-        if (!_enabled) return;
-        _enabled = false;
-        StopSession();
+        if (_level == ProfilerLevel.Disabled) return;
+
+        if (_level == ProfilerLevel.Light)
+            StopSession();
+        else if (_level == ProfilerLevel.Heavy)
+            _lightweight.Disable();
+
+        _level = ProfilerLevel.Disabled;
     }
 
-    public bool IsEnabled() => _enabled;
+    public bool IsEnabled() => _level != ProfilerLevel.Disabled;
+
+    public ProfilerLevel CurrentLevel => _level;
 
     public void StartRecordingWithIdentifier( string identifier, string name )
     {
-        if (!_enabled) return;
+        if (_level == ProfilerLevel.Disabled) return;
         var key = $"[{identifier}] {name}";
         _activeRecordings[key] = Stopwatch.GetTimestamp();
-        ProfilerEventSource.Log.RecordingStart(key);
+        if (_level == ProfilerLevel.Light)
+            ProfilerEventSource.Log.RecordingStart(key);
     }
 
     public void StopRecordingWithIdentifier( string identifier, string name )
     {
-        if (!_enabled) return;
+        if (_level == ProfilerLevel.Disabled) return;
         var key = $"[{identifier}] {name}";
         if (!_activeRecordings.TryRemove(key, out var startTs)) return;
 
         var durationMs = Stopwatch.GetElapsedTime(startTs).TotalMilliseconds;
-        ProfilerEventSource.Log.RecordingStop(key, durationMs);
+        if (_level == ProfilerLevel.Light)
+            ProfilerEventSource.Log.RecordingStop(key, durationMs);
+        else if (_level == ProfilerLevel.Heavy)
+            _lightweight.RecordManual(identifier, name, durationMs);
     }
 
     public void RecordTimeWithIdentifier( string identifier, string name, double duration )
     {
-        if (!_enabled) return;
-        var key = $"[{identifier}] {name}";
-        ProfilerEventSource.Log.RecordTime(key, duration);
+        if (_level == ProfilerLevel.Disabled) return;
+        if (_level == ProfilerLevel.Light)
+        {
+            var key = $"[{identifier}] {name}";
+            ProfilerEventSource.Log.RecordTime(key, duration);
+        }
+        else if (_level == ProfilerLevel.Heavy)
+        {
+            _lightweight.RecordManual(identifier, name, duration);
+        }
     }
 
     public async Task SaveAsync( string rootDir, ILogger logger )
     {
+        if (_level == ProfilerLevel.Heavy)
+        {
+            SaveLightweightSummary(rootDir, logger);
+            return;
+        }
+
         if (_session is null || _tempTraceFile is null)
         {
             logger.LogWarning("No active trace to save.");
@@ -136,8 +178,21 @@ internal class ProfileService
 
         logger.LogInformation("Profiler data saved to {FilePath}.", savedPath);
 
-        if (_enabled)
+        if (_level == ProfilerLevel.Light)
             StartSession();
+    }
+
+    private void SaveLightweightSummary( string rootDir, ILogger logger )
+    {
+        var summary = LightweightSummaryWriter.Write(_lightweight.Snapshot());
+
+        var dir = Path.Combine(rootDir, "profilers", Guid.NewGuid().ToString());
+        _ = Directory.CreateDirectory(dir);
+        var savedPath = Path.Combine(dir, $"{DateTime.UtcNow:yyyyMMdd_HHmmss}.summary.txt");
+        File.WriteAllText(savedPath, summary);
+
+        _lightweight.ResetWindow();
+        logger.LogInformation("Profiler data saved to {FilePath}.", savedPath);
     }
 
     private void StartSession()

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_PhysBox : C_Breakable, ISchemaClass<C_PhysBox>
 {
     static C_PhysBox ISchemaClass<C_PhysBox>.From(nint handle) => new C_PhysBoxImpl(handle);
-    static int ISchemaClass<C_PhysBox>.Size => 4016;
+    static int ISchemaClass<C_PhysBox>.Size => 4248;
     static string? ISchemaClass<C_PhysBox>.ClassName => null;
 
 }

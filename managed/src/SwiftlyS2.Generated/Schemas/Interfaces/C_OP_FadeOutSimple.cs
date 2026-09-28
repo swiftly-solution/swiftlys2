@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_FadeOutSimple : CParticleFunctionOperator, ISchemaClass<C_OP_FadeOutSimple>
 {
     static C_OP_FadeOutSimple ISchemaClass<C_OP_FadeOutSimple>.From(nint handle) => new C_OP_FadeOutSimpleImpl(handle);
-    static int ISchemaClass<C_OP_FadeOutSimple>.Size => 480;
+    static int ISchemaClass<C_OP_FadeOutSimple>.Size => 488;
     static string? ISchemaClass<C_OP_FadeOutSimple>.ClassName => null;
 
 

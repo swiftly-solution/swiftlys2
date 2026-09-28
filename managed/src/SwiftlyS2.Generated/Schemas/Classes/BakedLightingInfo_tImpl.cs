@@ -76,14 +76,24 @@ internal partial class BakedLightingInfo_tImpl : SchemaClass, BakedLightingInfo_
             return ref _Handle.AsRef<bool>(_CompressionEnabledOffset!.Value);
         }
     }
-    private static nint? _SHLightmapsOffset;
+    private static nint? _LPVEncodingOffset;
 
-    public ref bool SHLightmaps
+    public ref byte LPVEncoding
     {
         get
         {
-            _SHLightmapsOffset = _SHLightmapsOffset ?? Schema.GetOffset(0x6909F4EF04697DAD);
-            return ref _Handle.AsRef<bool>(_SHLightmapsOffset!.Value);
+            _LPVEncodingOffset = _LPVEncodingOffset ?? Schema.GetOffset(0x6909F4EF3369FF94);
+            return ref _Handle.AsRef<byte>(_LPVEncodingOffset!.Value);
+        }
+    }
+    private static nint? _LightmapEncodingOffset;
+
+    public ref byte LightmapEncoding
+    {
+        get
+        {
+            _LightmapEncodingOffset = _LightmapEncodingOffset ?? Schema.GetOffset(0x6909F4EF184FF5BA);
+            return ref _Handle.AsRef<byte>(_LightmapEncodingOffset!.Value);
         }
     }
     private static nint? _ChartPackIterationsOffset;

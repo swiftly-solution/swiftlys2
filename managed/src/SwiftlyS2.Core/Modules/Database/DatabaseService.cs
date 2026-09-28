@@ -4,7 +4,6 @@ using System.Collections.Concurrent;
 using Microsoft.Extensions.Logging;
 using Npgsql;
 using MySqlConnector;
-using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared.Database;
 
 namespace SwiftlyS2.Core.Database;
@@ -12,37 +11,32 @@ namespace SwiftlyS2.Core.Database;
 internal class DatabaseService : IDatabaseService
 {
     private readonly ILogger<DatabaseService> logger;
+    private readonly DatabaseConnectionManager connectionManager;
     private readonly ConcurrentDictionary<string, Func<IDbConnection>> connectionFactories = new();
 
     static DatabaseService()
     {
     }
 
-    public DatabaseService(ILogger<DatabaseService> logger)
+    public DatabaseService(ILogger<DatabaseService> logger, DatabaseConnectionManager connectionManager)
     {
         this.logger = logger;
+        this.connectionManager = connectionManager;
         this.connectionFactories.Clear();
     }
 
     private string ResolveConnectionName(string connectionName)
     {
-        return NativeDatabase.ConnectionExists(connectionName) ? connectionName : NativeDatabase.GetDefaultConnectionName();
+        return connectionManager.ConnectionExists(connectionName) ? connectionName : connectionManager.GetDefaultConnectionName();
     }
 
     private Func<IDbConnection> GetOrCreateConnectionFactory(string connectionName)
     {
         var resolvedName = ResolveConnectionName(connectionName);
 
-        if (connectionFactories.TryGetValue(resolvedName, out var cached))
-        {
-            return cached;
-        }
-
         try
         {
-            var factory = CreateConnectionFactory(resolvedName);
-            _ = connectionFactories.TryAdd(resolvedName, factory);
-            return factory;
+            return connectionFactories.GetOrAdd(resolvedName, name => CreateConnectionFactory(connectionManager.GetConnectionInfo(name)));
         }
         catch (Exception e)
         {
@@ -56,15 +50,9 @@ internal class DatabaseService : IDatabaseService
         }
     }
 
-    private static Func<IDbConnection> CreateConnectionFactory(string connectionName)
+    private static Func<IDbConnection> CreateConnectionFactory(DatabaseConnectionInfo info)
     {
-        var driver = NativeDatabase.GetConnectionDriver(connectionName);
-        var host = NativeDatabase.GetConnectionHost(connectionName);
-        var database = NativeDatabase.GetConnectionDatabase(connectionName);
-        var user = NativeDatabase.GetConnectionUser(connectionName);
-        var pass = NativeDatabase.GetConnectionPass(connectionName);
-        var timeout = NativeDatabase.GetConnectionTimeout(connectionName);
-        var port = NativeDatabase.GetConnectionPort(connectionName);
+        var (driver, host, database, user, pass, timeout, port, _) = info;
 
         return driver switch
         {
@@ -128,17 +116,7 @@ internal class DatabaseService : IDatabaseService
 
     public DatabaseConnectionInfo GetConnectionInfo(string connectionName)
     {
-        var resolvedName = ResolveConnectionName(connectionName);
-        return new DatabaseConnectionInfo(
-            NativeDatabase.GetConnectionDriver(resolvedName),
-            NativeDatabase.GetConnectionHost(resolvedName),
-            NativeDatabase.GetConnectionDatabase(resolvedName),
-            NativeDatabase.GetConnectionUser(resolvedName),
-            NativeDatabase.GetConnectionPass(resolvedName),
-            NativeDatabase.GetConnectionTimeout(resolvedName),
-            NativeDatabase.GetConnectionPort(resolvedName),
-            NativeDatabase.GetConnectionRawUri(resolvedName)
-        );
+        return connectionManager.GetConnectionInfo(ResolveConnectionName(connectionName));
     }
 
     public IDbConnection GetConnection(string connectionName)

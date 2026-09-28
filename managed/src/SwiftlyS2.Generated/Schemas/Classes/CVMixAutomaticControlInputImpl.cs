@@ -31,34 +31,24 @@ internal partial class CVMixAutomaticControlInputImpl : SchemaClass, CVMixAutoma
             Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint? _ControlInputIndexOffset;
+    private static nint? _GraphInputIndexOffset;
 
-    public ref int ControlInputIndex
+    public ref int GraphInputIndex
     {
         get
         {
-            _ControlInputIndexOffset = _ControlInputIndexOffset ?? Schema.GetOffset(0x4A833C222C0B74D2);
-            return ref _Handle.AsRef<int>(_ControlInputIndexOffset!.Value);
+            _GraphInputIndexOffset = _GraphInputIndexOffset ?? Schema.GetOffset(0x4A833C22DADDBB47);
+            return ref _Handle.AsRef<int>(_GraphInputIndexOffset!.Value);
         }
     }
-    private static nint? _IsTrackSendOffset;
+    private static nint? _ControlTypeOffset;
 
-    public ref bool IsTrackSend
+    public ref VMixAutoControlType_t ControlType
     {
         get
         {
-            _IsTrackSendOffset = _IsTrackSendOffset ?? Schema.GetOffset(0x4A833C22D8D20892);
-            return ref _Handle.AsRef<bool>(_IsTrackSendOffset!.Value);
-        }
-    }
-    private static nint? _IsStackVarOffset;
-
-    public ref bool IsStackVar
-    {
-        get
-        {
-            _IsStackVarOffset = _IsStackVarOffset ?? Schema.GetOffset(0x4A833C22EFDAF394);
-            return ref _Handle.AsRef<bool>(_IsStackVarOffset!.Value);
+            _ControlTypeOffset = _ControlTypeOffset ?? Schema.GetOffset(0x4A833C22556057DA);
+            return ref _Handle.AsRef<VMixAutoControlType_t>(_ControlTypeOffset!.Value);
         }
     }
 

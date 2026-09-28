@@ -63,12 +63,24 @@ internal static class ProfilerAnalyzer
         }
 
         var nodesByMethod = callTree.ByID;
-        var relevantNodes = nodesByMethod.Where(n => IsRelevant(n.Name)).ToList();
-        var pluginNodes = relevantNodes.Where(n => GetCategory(n.Name) == Category.Plugin).ToList();
-        var frameworkNodes = relevantNodes.Where(n => GetCategory(n.Name) == Category.Framework).ToList();
-        var otherNodes = relevantNodes.Where(n => GetCategory(n.Name) == Category.Other).ToList();
+        var pluginNodes = new List<CallTreeNodeBase>();
+        var frameworkNodes = new List<CallTreeNodeBase>();
+        var otherNodes = new List<CallTreeNodeBase>();
+        var activeTotal = 0f;
 
-        var activeTotal = relevantNodes.Sum(n => n.ExclusiveMetric);
+        foreach (var n in nodesByMethod)
+        {
+            if (!IsRelevant(n.Name)) continue;
+            activeTotal += n.ExclusiveMetric;
+
+            switch (GetCategory(n.Name))
+            {
+                case Category.Plugin: pluginNodes.Add(n); break;
+                case Category.Framework: frameworkNodes.Add(n); break;
+                case Category.Other: otherNodes.Add(n); break;
+                case Category.Skip: break;
+            }
+        }
         if (activeTotal <= 0) activeTotal = totalMetric;
 
         var totalTicks = (long)(duration * TickRateHz);
@@ -88,13 +100,9 @@ internal static class ProfilerAnalyzer
         WriteNodeSection(sb, "SwiftlyS2", frameworkNodes, activeTotal, totalTicks);
         WriteNodeSection(sb, "Runtime", otherNodes, activeTotal, totalTicks);
 
-        var memStats = ParseMemoryStats(traceLog);
+        var (memStats, exceptions, pluginGroups) = ParseTraceEvents(traceLog);
         WriteMemorySection(sb, memStats, traceLog.SessionEndTimeRelativeMSec);
-
-        var exceptions = ParseExceptions(traceLog);
         WriteExceptionsSection(sb, exceptions);
-
-        var pluginGroups = ParseCustomRecordings(traceLog);
         WriteCustomSection(sb, pluginGroups);
 
         File.WriteAllText(summaryPath, sb.ToString());
@@ -356,7 +364,8 @@ internal static class ProfilerAnalyzer
         AllocEntry[] TopAllocs
     );
 
-    private static MemoryStats ParseMemoryStats( TraceLog traceLog )
+    private static (MemoryStats Memory, List<ExceptionEntry> Exceptions, Dictionary<string, Dictionary<string, RecordingNode>> Recordings)
+        ParseTraceEvents( TraceLog traceLog )
     {
         var gcCountPerGen = new int[3];
         var totalPauseMs = 0.0;
@@ -369,55 +378,111 @@ internal static class ProfilerAnalyzer
         var suspendStart = double.NaN;
         var allocByType = new Dictionary<string, (double bytes, int ticks)>();
 
+        var rawExceptions = new List<(string TypeName, string Message, bool Unhandled, string[] Stack)>();
+
+        var pluginGroups = new Dictionary<string, Dictionary<string, RecordingNode>>();
+
         foreach (var evt in traceLog.Events)
         {
-            if (evt.ProviderName != "Microsoft-Windows-DotNETRuntime") continue;
-            var id = (int)evt.ID;
+            if (evt.ProviderName == "Microsoft-Windows-DotNETRuntime")
+            {
+                var id = (int)evt.ID;
 
-            if (id == 1)
-            {
-                if (evt.PayloadByName("Depth") is { } depth)
+                if (id == 1)
                 {
-                    var gen = Convert.ToInt32(depth);
-                    if ((uint)gen < 3) gcCountPerGen[gen]++;
+                    if (evt.PayloadByName("Depth") is { } depth)
+                    {
+                        var gen = Convert.ToInt32(depth);
+                        if ((uint)gen < 3) gcCountPerGen[gen]++;
+                    }
+                }
+                else if (id == 9)
+                {
+                    suspendStart = evt.TimeStampRelativeMSec;
+                }
+                else if (id == 3)
+                {
+                    if (!double.IsNaN(suspendStart))
+                    {
+                        totalPauseMs += evt.TimeStampRelativeMSec - suspendStart;
+                        suspendStart = double.NaN;
+                    }
+                }
+                else if (id == 4)
+                {
+                    var g0 = Convert.ToDouble(evt.PayloadByName("GenerationSize0")) / 1024.0 / 1024.0;
+                    var g1 = Convert.ToDouble(evt.PayloadByName("GenerationSize1")) / 1024.0 / 1024.0;
+                    var g2 = Convert.ToDouble(evt.PayloadByName("GenerationSize2")) / 1024.0 / 1024.0;
+                    var loh = Convert.ToDouble(evt.PayloadByName("GenerationSize3")) / 1024.0 / 1024.0;
+                    var total = g0 + g1 + g2 + loh;
+                    if (total > peakHeapMB) peakHeapMB = total;
+                    finalHeapMB = total;
+                    finalGen0MB = g0;
+                    finalGen1MB = g1;
+                    finalGen2MB = g2;
+                    finalLohMB = loh;
+                }
+                else if (id == 10)
+                {
+                    if (evt.PayloadByName("TypeName") is string typeName && typeName.Length > 0)
+                    {
+                        var bytes = evt.PayloadByName("AllocationAmount64") is { } raw64
+                            ? Convert.ToDouble(raw64)
+                            : Convert.ToDouble(evt.PayloadByName("AllocationAmount"));
+                        if (!allocByType.TryGetValue(typeName, out var acc))
+                            allocByType[typeName] = (bytes, 1);
+                        else
+                            allocByType[typeName] = (acc.bytes + bytes, acc.ticks + 1);
+                    }
+                }
+                else if (id == 80)
+                {
+                    var typeName = evt.PayloadByName("ExceptionType") as string;
+                    if (!string.IsNullOrEmpty(typeName))
+                    {
+                        var message = evt.PayloadByName("ExceptionMessage") as string ?? string.Empty;
+                        if (message.Length > 80) message = message[..80] + "…";
+
+                        var flags = 0;
+                        if (evt.PayloadByName("ExceptionFlags") is { } flagsObj)
+                            flags = Convert.ToInt32(flagsObj);
+                        var unhandled = (flags & 4) != 0;
+
+                        var frames = new List<string>();
+                        var stackIdx = evt.CallStackIndex();
+                        if (stackIdx != CallStackIndex.Invalid)
+                        {
+                            var frame = traceLog.CallStacks[stackIdx];
+                            while (frame != null)
+                            {
+                                var method = frame.CodeAddress.FullMethodName;
+                                if (!string.IsNullOrEmpty(method) && IsRelevant(method))
+                                    frames.Add(method);
+                                frame = frame.Caller;
+                            }
+                        }
+
+                        rawExceptions.Add((typeName, message, unhandled, frames.ToArray()));
+                    }
                 }
             }
-            else if (id == 9)
+            else if (evt.ProviderName == "SwiftlyS2-Profiler")
             {
-                suspendStart = evt.TimeStampRelativeMSec;
-            }
-            else if (id == 3)
-            {
-                if (!double.IsNaN(suspendStart))
-                {
-                    totalPauseMs += evt.TimeStampRelativeMSec - suspendStart;
-                    suspendStart = double.NaN;
-                }
-            }
-            else if (id == 4)
-            {
-                var g0 = Convert.ToDouble(evt.PayloadByName("GenerationSize0")) / 1024.0 / 1024.0;
-                var g1 = Convert.ToDouble(evt.PayloadByName("GenerationSize1")) / 1024.0 / 1024.0;
-                var g2 = Convert.ToDouble(evt.PayloadByName("GenerationSize2")) / 1024.0 / 1024.0;
-                var loh = Convert.ToDouble(evt.PayloadByName("GenerationSize3")) / 1024.0 / 1024.0;
-                var total = g0 + g1 + g2 + loh;
-                if (total > peakHeapMB) peakHeapMB = total;
-                finalHeapMB = total;
-                finalGen0MB = g0;
-                finalGen1MB = g1;
-                finalGen2MB = g2;
-                finalLohMB = loh;
-            }
-            else if (id == 10)
-            {
-                if (evt.PayloadByName("TypeName") is not string typeName || typeName.Length == 0) continue;
-                var bytes = evt.PayloadByName("AllocationAmount64") is { } raw64
-                    ? Convert.ToDouble(raw64)
-                    : Convert.ToDouble(evt.PayloadByName("AllocationAmount"));
-                if (!allocByType.TryGetValue(typeName, out var acc))
-                    allocByType[typeName] = (bytes, 1);
-                else
-                    allocByType[typeName] = (acc.bytes + bytes, acc.ticks + 1);
+                var id = (int)evt.ID;
+                if (id != 2 && id != 3) continue;
+
+                if (evt.PayloadByName("name") is not string rawName) continue;
+                var durationMs = Convert.ToDouble(evt.PayloadByName("durationMs"));
+                var timestamp = evt.TimeStampRelativeMSec;
+
+                if (!TryParseEventName(rawName, out var ident, out var op)) continue;
+
+                if (!pluginGroups.TryGetValue(ident, out var ops))
+                    pluginGroups[ident] = ops = [];
+                if (!ops.TryGetValue(op, out var node))
+                    ops[op] = node = new RecordingNode { Identifier = ident, Operation = op };
+
+                node.Samples.Add(new CustomSample(durationMs, timestamp));
             }
         }
 
@@ -427,8 +492,25 @@ internal static class ProfilerAnalyzer
             .Select(kv => new AllocEntry(kv.Key, kv.Value.bytes / 1024.0 / 1024.0, kv.Value.ticks))
             .ToArray();
 
-        return new MemoryStats(gcCountPerGen, totalPauseMs, peakHeapMB, finalHeapMB,
+        var memStats = new MemoryStats(gcCountPerGen, totalPauseMs, peakHeapMB, finalHeapMB,
             finalGen0MB, finalGen1MB, finalGen2MB, finalLohMB, topAllocs);
+
+        var exceptions = rawExceptions
+            .GroupBy(e => (e.TypeName, StackKey: string.Join("|", e.Stack)))
+            .OrderByDescending(g => g.Count())
+            .Select(g => new ExceptionEntry(
+                g.Key.TypeName,
+                g.First().Message,
+                g.Any(e => e.Unhandled),
+                g.Count(),
+                g.First().Stack))
+            .ToList();
+
+        foreach (var ops in pluginGroups.Values)
+            foreach (var node in ops.Values)
+                ComputeStats(node);
+
+        return (memStats, exceptions, pluginGroups);
     }
 
     private static void WriteMemorySection( StringBuilder sb, MemoryStats mem, double traceDurationMs )
@@ -481,55 +563,6 @@ internal static class ProfilerAnalyzer
         _ = sb.AppendLine();
     }
 
-    private static List<ExceptionEntry> ParseExceptions( TraceLog traceLog )
-    {
-        var raw = new List<(string TypeName, string Message, bool Unhandled, string[] Stack)>();
-
-        foreach (var evt in traceLog.Events)
-        {
-            if (evt.ProviderName != "Microsoft-Windows-DotNETRuntime") continue;
-            if ((int)evt.ID != 80) continue;
-
-            var typeName = evt.PayloadByName("ExceptionType") as string;
-            if (string.IsNullOrEmpty(typeName)) continue;
-
-            var message = evt.PayloadByName("ExceptionMessage") as string ?? string.Empty;
-            if (message.Length > 80) message = message[..80] + "…";
-
-            var flags = 0;
-            if (evt.PayloadByName("ExceptionFlags") is { } flagsObj)
-                flags = Convert.ToInt32(flagsObj);
-            var unhandled = (flags & 4) != 0;
-
-            var frames = new List<string>();
-            var stackIdx = evt.CallStackIndex();
-            if (stackIdx != CallStackIndex.Invalid)
-            {
-                var frame = traceLog.CallStacks[stackIdx];
-                while (frame != null)
-                {
-                    var method = frame.CodeAddress.FullMethodName;
-                    if (!string.IsNullOrEmpty(method) && IsRelevant(method))
-                        frames.Add(method);
-                    frame = frame.Caller;
-                }
-            }
-
-            raw.Add((typeName, message, unhandled, frames.ToArray()));
-        }
-
-        return raw
-            .GroupBy(e => (e.TypeName, StackKey: string.Join("|", e.Stack)))
-            .OrderByDescending(g => g.Count())
-            .Select(g => new ExceptionEntry(
-                g.Key.TypeName,
-                g.First().Message,
-                g.Any(e => e.Unhandled),
-                g.Count(),
-                g.First().Stack))
-            .ToList();
-    }
-
     private static void WriteExceptionsSection( StringBuilder sb, List<ExceptionEntry> exceptions )
     {
         const int W = 70;
@@ -562,37 +595,6 @@ internal static class ProfilerAnalyzer
             }
             _ = sb.AppendLine();
         }
-    }
-
-    private static Dictionary<string, Dictionary<string, RecordingNode>> ParseCustomRecordings( TraceLog traceLog )
-    {
-        var pluginGroups = new Dictionary<string, Dictionary<string, RecordingNode>>();
-
-        foreach (var evt in traceLog.Events)
-        {
-            if (evt.ProviderName != "SwiftlyS2-Profiler") continue;
-            var id = (int)evt.ID;
-            if (id != 2 && id != 3) continue;
-
-            if (evt.PayloadByName("name") is not string rawName) continue;
-            var durationMs = Convert.ToDouble(evt.PayloadByName("durationMs"));
-            var timestamp = evt.TimeStampRelativeMSec;
-
-            if (!TryParseEventName(rawName, out var ident, out var op)) continue;
-
-            if (!pluginGroups.TryGetValue(ident, out var ops))
-                pluginGroups[ident] = ops = [];
-            if (!ops.TryGetValue(op, out var node))
-                ops[op] = node = new RecordingNode { Identifier = ident, Operation = op };
-
-            node.Samples.Add(new CustomSample(durationMs, timestamp));
-        }
-
-        foreach (var ops in pluginGroups.Values)
-            foreach (var node in ops.Values)
-                ComputeStats(node);
-
-        return pluginGroups;
     }
 
     private static void WriteCustomSection(

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RenderClothForce : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderClothForce>
 {
     static C_OP_RenderClothForce ISchemaClass<C_OP_RenderClothForce>.From(nint handle) => new C_OP_RenderClothForceImpl(handle);
-    static int ISchemaClass<C_OP_RenderClothForce>.Size => 552;
+    static int ISchemaClass<C_OP_RenderClothForce>.Size => 560;
     static string? ISchemaClass<C_OP_RenderClothForce>.ClassName => null;
 
 }

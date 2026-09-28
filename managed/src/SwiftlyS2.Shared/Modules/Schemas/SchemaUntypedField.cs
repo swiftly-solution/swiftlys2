@@ -26,5 +26,10 @@ public class SchemaUntypedField : INativeHandle, ISchemaClass<SchemaUntypedField
         _handle = handle;
     }
 
+    public void DangerouslySetAddress( nint address )
+    {
+        _handle = address;
+    }
+
     public nint Address => _handle;
 }

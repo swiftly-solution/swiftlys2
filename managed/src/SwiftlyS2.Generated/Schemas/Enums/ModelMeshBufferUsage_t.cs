@@ -4,7 +4,7 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ModelMeshBufferUsage_t : byte
+public enum ModelMeshBufferUsage_t : ushort
 {
     MESH_BUFFER_USAGE_NONE = 0,
     MESH_BUFFER_USAGE_VB = 1,
@@ -14,4 +14,6 @@ public enum ModelMeshBufferUsage_t : byte
     MESH_BUFFER_USAGE_RT_PROXY = 16,
     MESH_BUFFER_USAGE_VERTEX_ALBEDO = 32,
     MESH_BUFFER_USAGE_VERTEX_EMISSIVE = 64,
+    MESH_BUFFER_USAGE_MESHLETS = 128,
+    MESH_BUFFER_USAGE_ALIAS_TABLE = 256,
 }

@@ -176,14 +176,24 @@ internal partial class CDecalInstanceImpl : SchemaClass, CDecalInstance
             return ref _Handle.AsRef<float>(_DepthOffset!.Value);
         }
     }
-    private static nint? _TransformOffset;
+    private static nint? _MTransformOffset;
 
-    public ref CTransform Transform
+    public ref matrix3x4_t MTransform
     {
         get
         {
-            _TransformOffset = _TransformOffset ?? Schema.GetOffset(0x88CA447C3A9A393B);
-            return ref _Handle.AsRef<CTransform>(_TransformOffset!.Value);
+            _MTransformOffset = _MTransformOffset ?? Schema.GetOffset(0x88CA447CE110DF04);
+            return ref _Handle.AsRef<matrix3x4_t>(_MTransformOffset!.Value);
+        }
+    }
+    private static nint? _MLocalToTriangleOffset;
+
+    public ref matrix3x4_t MLocalToTriangle
+    {
+        get
+        {
+            _MLocalToTriangleOffset = _MLocalToTriangleOffset ?? Schema.GetOffset(0x88CA447C259179BE);
+            return ref _Handle.AsRef<matrix3x4_t>(_MLocalToTriangleOffset!.Value);
         }
     }
     private static nint? _AnimationScaleOffset;

@@ -48,4 +48,9 @@ public interface EventBombPlanted : IGameEvent<EventBombPlanted>
     /// type: short
     /// </summary>
     short Site { get; set; }
+
+    /// <summary>
+    /// type: short
+    /// </summary>
+    short C4 { get; set; }
 }

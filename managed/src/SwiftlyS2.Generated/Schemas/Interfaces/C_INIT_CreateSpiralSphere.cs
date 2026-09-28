@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_CreateSpiralSphere : CParticleFunctionInitializer, ISchemaClass<C_INIT_CreateSpiralSphere>
 {
     static C_INIT_CreateSpiralSphere ISchemaClass<C_INIT_CreateSpiralSphere>.From(nint handle) => new C_INIT_CreateSpiralSphereImpl(handle);
-    static int ISchemaClass<C_INIT_CreateSpiralSphere>.Size => 2064;
+    static int ISchemaClass<C_INIT_CreateSpiralSphere>.Size => 2104;
     static string? ISchemaClass<C_INIT_CreateSpiralSphere>.ClassName => null;
 
 

@@ -253,6 +253,16 @@ internal partial class C_OP_WorldTraceConstraintImpl : CParticleFunctionConstrai
             return ref _Handle.AsRef<float>(_MinSpeedOffset!.Value);
         }
     }
+    private static nint? _KillonContactBounceOffset;
+
+    public ref bool KillonContactBounce
+    {
+        get
+        {
+            _KillonContactBounceOffset = _KillonContactBounceOffset ?? Schema.GetOffset(0xD88A859F8C8583D0);
+            return ref _Handle.AsRef<bool>(_KillonContactBounceOffset!.Value);
+        }
+    }
     private static nint? _SetNormalOffset;
 
     public ref bool SetNormal

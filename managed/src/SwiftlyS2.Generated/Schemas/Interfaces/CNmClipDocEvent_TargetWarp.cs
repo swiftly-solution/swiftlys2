@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmClipDocEvent_TargetWarp : CNmClipDocEvent, ISchemaClass<CNmClipDocEvent_TargetWarp>
 {
     static CNmClipDocEvent_TargetWarp ISchemaClass<CNmClipDocEvent_TargetWarp>.From(nint handle) => new CNmClipDocEvent_TargetWarpImpl(handle);
-    static int ISchemaClass<CNmClipDocEvent_TargetWarp>.Size => 24;
+    static int ISchemaClass<CNmClipDocEvent_TargetWarp>.Size => 32;
     static string? ISchemaClass<CNmClipDocEvent_TargetWarp>.ClassName => null;
 
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CSprite : CBaseModelEntity, ISchemaClass<CSprite>
 {
     static CSprite ISchemaClass<CSprite>.From(nint handle) => new CSpriteImpl(handle);
-    static int ISchemaClass<CSprite>.Size => 2016;
+    static int ISchemaClass<CSprite>.Size => 2240;
     static string? ISchemaClass<CSprite>.ClassName => "env_glow";
 
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_RemapTransformToVector : CParticleFunctionInitializer, ISchemaClass<C_INIT_RemapTransformToVector>
 {
     static C_INIT_RemapTransformToVector ISchemaClass<C_INIT_RemapTransformToVector>.From(nint handle) => new C_INIT_RemapTransformToVectorImpl(handle);
-    static int ISchemaClass<C_INIT_RemapTransformToVector>.Size => 768;
+    static int ISchemaClass<C_INIT_RemapTransformToVector>.Size => 776;
     static string? ISchemaClass<C_INIT_RemapTransformToVector>.ClassName => null;
 
 

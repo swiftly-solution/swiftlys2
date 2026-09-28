@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_RemapQAnglesToRotation : CParticleFunctionInitializer, ISchemaClass<C_INIT_RemapQAnglesToRotation>
 {
     static C_INIT_RemapQAnglesToRotation ISchemaClass<C_INIT_RemapQAnglesToRotation>.From(nint handle) => new C_INIT_RemapQAnglesToRotationImpl(handle);
-    static int ISchemaClass<C_INIT_RemapQAnglesToRotation>.Size => 584;
+    static int ISchemaClass<C_INIT_RemapQAnglesToRotation>.Size => 592;
     static string? ISchemaClass<C_INIT_RemapQAnglesToRotation>.ClassName => null;
 
 

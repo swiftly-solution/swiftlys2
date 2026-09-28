@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface PhysFeModelDesc_t : ISchemaClass<PhysFeModelDesc_t>
 {
     static PhysFeModelDesc_t ISchemaClass<PhysFeModelDesc_t>.From(nint handle) => new PhysFeModelDesc_tImpl(handle);
-    static int ISchemaClass<PhysFeModelDesc_t>.Size => 1784;
+    static int ISchemaClass<PhysFeModelDesc_t>.Size => 1832;
     static string? ISchemaClass<PhysFeModelDesc_t>.ClassName => null;
 
 
@@ -64,6 +64,10 @@ public partial interface PhysFeModelDesc_t : ISchemaClass<PhysFeModelDesc_t>
     public ref CUtlVector<FeSimdQuad_t> SimdQuads { get; }
 
     public ref CUtlVector<SchemaUntypedField> SimdTris { get; }
+
+    public ref CUtlVector<FePrism_t> Prisms { get; }
+
+    public ref CUtlVector<FeSimdPrism_t> SimdPrisms { get; }
 
     public ref CUtlVector<FeSimdRodConstraint_t> SimdRods { get; }
 

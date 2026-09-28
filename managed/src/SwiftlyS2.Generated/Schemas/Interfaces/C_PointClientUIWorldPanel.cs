@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_PointClientUIWorldPanel : C_BaseClientUIEntity, ISchemaClass<C_PointClientUIWorldPanel>
 {
     static C_PointClientUIWorldPanel ISchemaClass<C_PointClientUIWorldPanel>.From(nint handle) => new C_PointClientUIWorldPanelImpl(handle);
-    static int ISchemaClass<C_PointClientUIWorldPanel>.Size => 4624;
+    static int ISchemaClass<C_PointClientUIWorldPanel>.Size => 4864;
     static string? ISchemaClass<C_PointClientUIWorldPanel>.ClassName => null;
 
 
@@ -36,6 +36,8 @@ public partial interface C_PointClientUIWorldPanel : C_BaseClientUIEntity, ISche
     public ref float Height { get; }
 
     public ref float DPI { get; }
+
+    public ref float WindowUIScale { get; }
 
     public ref float InteractDistance { get; }
 

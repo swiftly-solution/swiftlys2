@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmGraphDocFloatAngleMathNode : CNmGraphDocFlowNode, ISchemaClass<CNmGraphDocFloatAngleMathNode>
 {
     static CNmGraphDocFloatAngleMathNode ISchemaClass<CNmGraphDocFloatAngleMathNode>.From(nint handle) => new CNmGraphDocFloatAngleMathNodeImpl(handle);
-    static int ISchemaClass<CNmGraphDocFloatAngleMathNode>.Size => 264;
+    static int ISchemaClass<CNmGraphDocFloatAngleMathNode>.Size => 272;
     static string? ISchemaClass<CNmGraphDocFloatAngleMathNode>.ClassName => null;
 
 

@@ -19,17 +19,17 @@ public partial interface CVMixCommand : ISchemaClass<CVMixCommand>
 
     public ref uint ParameterNameHash { get; }
 
-    public ref int OutputSubmix { get; }
+    public CVMixDataOffset OutputSubmix { get; }
 
-    public ref int InputSubmix0 { get; }
+    public CVMixDataOffset InputSubmix0 { get; }
 
-    public ref int InputSubmix1 { get; }
+    public CVMixDataOffset InputSubmix1 { get; }
 
     public ref int Processor { get; }
 
-    public ref int InputValue0 { get; }
+    public CVMixDataOffset InputValue0 { get; }
 
-    public ref int InputValue1 { get; }
+    public CVMixDataOffset InputValue1 { get; }
 
 
 }

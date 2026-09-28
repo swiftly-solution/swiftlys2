@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_SetSimulationRate : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetSimulationRate>
 {
     static C_OP_SetSimulationRate ISchemaClass<C_OP_SetSimulationRate>.From(nint handle) => new C_OP_SetSimulationRateImpl(handle);
-    static int ISchemaClass<C_OP_SetSimulationRate>.Size => 848;
+    static int ISchemaClass<C_OP_SetSimulationRate>.Size => 864;
     static string? ISchemaClass<C_OP_SetSimulationRate>.ClassName => null;
 
 

@@ -11,13 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CRotatorTarget : CPointEntity, ISchemaClass<CRotatorTarget>
 {
     static CRotatorTarget ISchemaClass<CRotatorTarget>.From(nint handle) => new CRotatorTargetImpl(handle);
-    static int ISchemaClass<CRotatorTarget>.Size => 1224;
+    static int ISchemaClass<CRotatorTarget>.Size => 1192;
     static string? ISchemaClass<CRotatorTarget>.ClassName => "rotator_target";
-
-
-    public ref CEntityIOOutput OnArrivedAt { get; }
-
-    public ref RotatorTargetSpace_t Space { get; }
-
 
 }

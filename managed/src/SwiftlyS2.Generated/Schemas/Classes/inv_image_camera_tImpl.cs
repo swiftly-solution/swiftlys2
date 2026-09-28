@@ -26,14 +26,24 @@ internal partial class inv_image_camera_tImpl : SchemaClass, inv_image_camera_t
             return ref _Handle.AsRef<QAngle>(_AngleOffset!.Value);
         }
     }
-    private static nint? _FovOffset;
+    private static nint? _Fov_hOffset;
 
-    public ref float Fov
+    public ref float Fov_h
     {
         get
         {
-            _FovOffset = _FovOffset ?? Schema.GetOffset(0xF6CB536BB0F389DC);
-            return ref _Handle.AsRef<float>(_FovOffset!.Value);
+            _Fov_hOffset = _Fov_hOffset ?? Schema.GetOffset(0xF6CB536B4071FA83);
+            return ref _Handle.AsRef<float>(_Fov_hOffset!.Value);
+        }
+    }
+    private static nint? _Fov_vOffset;
+
+    public ref float Fov_v
+    {
+        get
+        {
+            _Fov_vOffset = _Fov_vOffset ?? Schema.GetOffset(0xF6CB536B3E71F75D);
+            return ref _Handle.AsRef<float>(_Fov_vOffset!.Value);
         }
     }
     private static nint? _ZnearOffset;

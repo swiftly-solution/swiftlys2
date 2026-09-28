@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_BreakableProp : CBaseProp, ISchemaClass<C_BreakableProp>
 {
     static C_BreakableProp ISchemaClass<C_BreakableProp>.From(nint handle) => new C_BreakablePropImpl(handle);
-    static int ISchemaClass<C_BreakableProp>.Size => 4848;
+    static int ISchemaClass<C_BreakableProp>.Size => 5088;
     static string? ISchemaClass<C_BreakableProp>.ClassName => null;
 
 

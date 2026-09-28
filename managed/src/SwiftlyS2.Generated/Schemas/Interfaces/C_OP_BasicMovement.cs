@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_BasicMovement : CParticleFunctionOperator, ISchemaClass<C_OP_BasicMovement>
 {
     static C_OP_BasicMovement ISchemaClass<C_OP_BasicMovement>.From(nint handle) => new C_OP_BasicMovementImpl(handle);
-    static int ISchemaClass<C_OP_BasicMovement>.Size => 3680;
+    static int ISchemaClass<C_OP_BasicMovement>.Size => 3752;
     static string? ISchemaClass<C_OP_BasicMovement>.ClassName => null;
 
 

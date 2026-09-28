@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPulseGraphDef : ISchemaClass<CPulseGraphDef>
 {
     static CPulseGraphDef ISchemaClass<CPulseGraphDef>.From(nint handle) => new CPulseGraphDefImpl(handle);
-    static int ISchemaClass<CPulseGraphDef>.Size => 432;
+    static int ISchemaClass<CPulseGraphDef>.Size => 448;
     static string? ISchemaClass<CPulseGraphDef>.ClassName => null;
 
 
@@ -32,6 +32,8 @@ public partial interface CPulseGraphDef : ISchemaClass<CPulseGraphDef>
     public ref CUtlVector<PointerTo<CPulseCell_Base>> Cells { get; }
 
     public ref CUtlVector<CPulse_Variable> Vars { get; }
+
+    public ref CUtlVector<PointerTo<CPulse_TempVarBankDefinition>> TempVarBanks { get; }
 
     public ref CUtlVector<CPulse_PublicOutput> PublicOutputs { get; }
 

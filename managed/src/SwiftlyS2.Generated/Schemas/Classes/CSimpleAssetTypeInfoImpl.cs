@@ -271,6 +271,16 @@ internal partial class CSimpleAssetTypeInfoImpl : SchemaClass, CSimpleAssetTypeI
             return ref _Handle.AsRef<int>(_AssetTypeVersionOffset!.Value);
         }
     }
+    private static nint? _AssetThumbnailVersionOffset;
+
+    public ref int AssetThumbnailVersion
+    {
+        get
+        {
+            _AssetThumbnailVersionOffset = _AssetThumbnailVersionOffset ?? Schema.GetOffset(0x78399444A5369177);
+            return ref _Handle.AsRef<int>(_AssetThumbnailVersionOffset!.Value);
+        }
+    }
     private static nint? _Test_InjectSearchableOffset;
 
     public string Test_InjectSearchable

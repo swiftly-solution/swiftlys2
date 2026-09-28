@@ -19,10 +19,11 @@ internal static class NativeConvars
         {
             throw new InvalidOperationException("This method can only be called from the main thread.");
         }
-        StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
-            _QueryClientConvar(playerid, (byte*)cvarNameBufferPtr);
-        });
+            _QueryClientConvar(playerid, cvarNameBufferPtr);
+        }
     }
 
     private unsafe static delegate* unmanaged<nint, int> _AddQueryClientCvarCallback;
@@ -101,241 +102,276 @@ internal static class NativeConvars
 
     public unsafe static void CreateConvarInt16(string cvarName, int cvarType, ulong cvarFlags, string helpMessage, short defaultValue, nint minValue, nint maxValue)
     {
-        StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        using var helpMessageStr = new ScopedCString(helpMessage);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
-            StringAlloc.CreateCString(helpMessage, helpMessageBufferPtr =>
+            fixed (byte* helpMessageBufferPtr = helpMessageStr)
             {
-                _CreateConvarInt16((byte*)cvarNameBufferPtr, cvarType, cvarFlags, (byte*)helpMessageBufferPtr, defaultValue, minValue, maxValue);
-            });
-        });
+                _CreateConvarInt16(cvarNameBufferPtr, cvarType, cvarFlags, helpMessageBufferPtr, defaultValue, minValue, maxValue);
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, int, ulong, byte*, ushort, nint, nint, void> _CreateConvarUInt16;
 
     public unsafe static void CreateConvarUInt16(string cvarName, int cvarType, ulong cvarFlags, string helpMessage, ushort defaultValue, nint minValue, nint maxValue)
     {
-        StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        using var helpMessageStr = new ScopedCString(helpMessage);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
-            StringAlloc.CreateCString(helpMessage, helpMessageBufferPtr =>
+            fixed (byte* helpMessageBufferPtr = helpMessageStr)
             {
-                _CreateConvarUInt16((byte*)cvarNameBufferPtr, cvarType, cvarFlags, (byte*)helpMessageBufferPtr, defaultValue, minValue, maxValue);
-            });
-        });
+                _CreateConvarUInt16(cvarNameBufferPtr, cvarType, cvarFlags, helpMessageBufferPtr, defaultValue, minValue, maxValue);
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, int, ulong, byte*, int, nint, nint, void> _CreateConvarInt32;
 
     public unsafe static void CreateConvarInt32(string cvarName, int cvarType, ulong cvarFlags, string helpMessage, int defaultValue, nint minValue, nint maxValue)
     {
-        StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        using var helpMessageStr = new ScopedCString(helpMessage);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
-            StringAlloc.CreateCString(helpMessage, helpMessageBufferPtr =>
+            fixed (byte* helpMessageBufferPtr = helpMessageStr)
             {
-                _CreateConvarInt32((byte*)cvarNameBufferPtr, cvarType, cvarFlags, (byte*)helpMessageBufferPtr, defaultValue, minValue, maxValue);
-            });
-        });
+                _CreateConvarInt32(cvarNameBufferPtr, cvarType, cvarFlags, helpMessageBufferPtr, defaultValue, minValue, maxValue);
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, int, ulong, byte*, uint, nint, nint, void> _CreateConvarUInt32;
 
     public unsafe static void CreateConvarUInt32(string cvarName, int cvarType, ulong cvarFlags, string helpMessage, uint defaultValue, nint minValue, nint maxValue)
     {
-        StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        using var helpMessageStr = new ScopedCString(helpMessage);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
-            StringAlloc.CreateCString(helpMessage, helpMessageBufferPtr =>
+            fixed (byte* helpMessageBufferPtr = helpMessageStr)
             {
-                _CreateConvarUInt32((byte*)cvarNameBufferPtr, cvarType, cvarFlags, (byte*)helpMessageBufferPtr, defaultValue, minValue, maxValue);
-            });
-        });
+                _CreateConvarUInt32(cvarNameBufferPtr, cvarType, cvarFlags, helpMessageBufferPtr, defaultValue, minValue, maxValue);
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, int, ulong, byte*, long, nint, nint, void> _CreateConvarInt64;
 
     public unsafe static void CreateConvarInt64(string cvarName, int cvarType, ulong cvarFlags, string helpMessage, long defaultValue, nint minValue, nint maxValue)
     {
-        StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        using var helpMessageStr = new ScopedCString(helpMessage);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
-            StringAlloc.CreateCString(helpMessage, helpMessageBufferPtr =>
+            fixed (byte* helpMessageBufferPtr = helpMessageStr)
             {
-                _CreateConvarInt64((byte*)cvarNameBufferPtr, cvarType, cvarFlags, (byte*)helpMessageBufferPtr, defaultValue, minValue, maxValue);
-            });
-        });
+                _CreateConvarInt64(cvarNameBufferPtr, cvarType, cvarFlags, helpMessageBufferPtr, defaultValue, minValue, maxValue);
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, int, ulong, byte*, ulong, nint, nint, void> _CreateConvarUInt64;
 
     public unsafe static void CreateConvarUInt64(string cvarName, int cvarType, ulong cvarFlags, string helpMessage, ulong defaultValue, nint minValue, nint maxValue)
     {
-        StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        using var helpMessageStr = new ScopedCString(helpMessage);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
-            StringAlloc.CreateCString(helpMessage, helpMessageBufferPtr =>
+            fixed (byte* helpMessageBufferPtr = helpMessageStr)
             {
-                _CreateConvarUInt64((byte*)cvarNameBufferPtr, cvarType, cvarFlags, (byte*)helpMessageBufferPtr, defaultValue, minValue, maxValue);
-            });
-        });
+                _CreateConvarUInt64(cvarNameBufferPtr, cvarType, cvarFlags, helpMessageBufferPtr, defaultValue, minValue, maxValue);
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, int, ulong, byte*, byte, nint, nint, void> _CreateConvarBool;
 
     public unsafe static void CreateConvarBool(string cvarName, int cvarType, ulong cvarFlags, string helpMessage, bool defaultValue, nint minValue, nint maxValue)
     {
-        StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        using var helpMessageStr = new ScopedCString(helpMessage);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
-            StringAlloc.CreateCString(helpMessage, helpMessageBufferPtr =>
+            fixed (byte* helpMessageBufferPtr = helpMessageStr)
             {
-                _CreateConvarBool((byte*)cvarNameBufferPtr, cvarType, cvarFlags, (byte*)helpMessageBufferPtr, defaultValue ? (byte)1 : (byte)0, minValue, maxValue);
-            });
-        });
+                _CreateConvarBool(cvarNameBufferPtr, cvarType, cvarFlags, helpMessageBufferPtr, defaultValue ? (byte)1 : (byte)0, minValue, maxValue);
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, int, ulong, byte*, float, nint, nint, void> _CreateConvarFloat;
 
     public unsafe static void CreateConvarFloat(string cvarName, int cvarType, ulong cvarFlags, string helpMessage, float defaultValue, nint minValue, nint maxValue)
     {
-        StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        using var helpMessageStr = new ScopedCString(helpMessage);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
-            StringAlloc.CreateCString(helpMessage, helpMessageBufferPtr =>
+            fixed (byte* helpMessageBufferPtr = helpMessageStr)
             {
-                _CreateConvarFloat((byte*)cvarNameBufferPtr, cvarType, cvarFlags, (byte*)helpMessageBufferPtr, defaultValue, minValue, maxValue);
-            });
-        });
+                _CreateConvarFloat(cvarNameBufferPtr, cvarType, cvarFlags, helpMessageBufferPtr, defaultValue, minValue, maxValue);
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, int, ulong, byte*, double, nint, nint, void> _CreateConvarDouble;
 
     public unsafe static void CreateConvarDouble(string cvarName, int cvarType, ulong cvarFlags, string helpMessage, double defaultValue, nint minValue, nint maxValue)
     {
-        StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        using var helpMessageStr = new ScopedCString(helpMessage);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
-            StringAlloc.CreateCString(helpMessage, helpMessageBufferPtr =>
+            fixed (byte* helpMessageBufferPtr = helpMessageStr)
             {
-                _CreateConvarDouble((byte*)cvarNameBufferPtr, cvarType, cvarFlags, (byte*)helpMessageBufferPtr, defaultValue, minValue, maxValue);
-            });
-        });
+                _CreateConvarDouble(cvarNameBufferPtr, cvarType, cvarFlags, helpMessageBufferPtr, defaultValue, minValue, maxValue);
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, int, ulong, byte*, Color, nint, nint, void> _CreateConvarColor;
 
     public unsafe static void CreateConvarColor(string cvarName, int cvarType, ulong cvarFlags, string helpMessage, Color defaultValue, nint minValue, nint maxValue)
     {
-        StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        using var helpMessageStr = new ScopedCString(helpMessage);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
-            StringAlloc.CreateCString(helpMessage, helpMessageBufferPtr =>
+            fixed (byte* helpMessageBufferPtr = helpMessageStr)
             {
-                _CreateConvarColor((byte*)cvarNameBufferPtr, cvarType, cvarFlags, (byte*)helpMessageBufferPtr, defaultValue, minValue, maxValue);
-            });
-        });
+                _CreateConvarColor(cvarNameBufferPtr, cvarType, cvarFlags, helpMessageBufferPtr, defaultValue, minValue, maxValue);
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, int, ulong, byte*, Vector2D, nint, nint, void> _CreateConvarVector2D;
 
     public unsafe static void CreateConvarVector2D(string cvarName, int cvarType, ulong cvarFlags, string helpMessage, Vector2D defaultValue, nint minValue, nint maxValue)
     {
-        StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        using var helpMessageStr = new ScopedCString(helpMessage);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
-            StringAlloc.CreateCString(helpMessage, helpMessageBufferPtr =>
+            fixed (byte* helpMessageBufferPtr = helpMessageStr)
             {
-                _CreateConvarVector2D((byte*)cvarNameBufferPtr, cvarType, cvarFlags, (byte*)helpMessageBufferPtr, defaultValue, minValue, maxValue);
-            });
-        });
+                _CreateConvarVector2D(cvarNameBufferPtr, cvarType, cvarFlags, helpMessageBufferPtr, defaultValue, minValue, maxValue);
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, int, ulong, byte*, Vector, nint, nint, void> _CreateConvarVector;
 
     public unsafe static void CreateConvarVector(string cvarName, int cvarType, ulong cvarFlags, string helpMessage, Vector defaultValue, nint minValue, nint maxValue)
     {
-        StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        using var helpMessageStr = new ScopedCString(helpMessage);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
-            StringAlloc.CreateCString(helpMessage, helpMessageBufferPtr =>
+            fixed (byte* helpMessageBufferPtr = helpMessageStr)
             {
-                _CreateConvarVector((byte*)cvarNameBufferPtr, cvarType, cvarFlags, (byte*)helpMessageBufferPtr, defaultValue, minValue, maxValue);
-            });
-        });
+                _CreateConvarVector(cvarNameBufferPtr, cvarType, cvarFlags, helpMessageBufferPtr, defaultValue, minValue, maxValue);
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, int, ulong, byte*, Vector4D, nint, nint, void> _CreateConvarVector4D;
 
     public unsafe static void CreateConvarVector4D(string cvarName, int cvarType, ulong cvarFlags, string helpMessage, Vector4D defaultValue, nint minValue, nint maxValue)
     {
-        StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        using var helpMessageStr = new ScopedCString(helpMessage);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
-            StringAlloc.CreateCString(helpMessage, helpMessageBufferPtr =>
+            fixed (byte* helpMessageBufferPtr = helpMessageStr)
             {
-                _CreateConvarVector4D((byte*)cvarNameBufferPtr, cvarType, cvarFlags, (byte*)helpMessageBufferPtr, defaultValue, minValue, maxValue);
-            });
-        });
+                _CreateConvarVector4D(cvarNameBufferPtr, cvarType, cvarFlags, helpMessageBufferPtr, defaultValue, minValue, maxValue);
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, int, ulong, byte*, QAngle, nint, nint, void> _CreateConvarQAngle;
 
     public unsafe static void CreateConvarQAngle(string cvarName, int cvarType, ulong cvarFlags, string helpMessage, QAngle defaultValue, nint minValue, nint maxValue)
     {
-        StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        using var helpMessageStr = new ScopedCString(helpMessage);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
-            StringAlloc.CreateCString(helpMessage, helpMessageBufferPtr =>
+            fixed (byte* helpMessageBufferPtr = helpMessageStr)
             {
-                _CreateConvarQAngle((byte*)cvarNameBufferPtr, cvarType, cvarFlags, (byte*)helpMessageBufferPtr, defaultValue, minValue, maxValue);
-            });
-        });
+                _CreateConvarQAngle(cvarNameBufferPtr, cvarType, cvarFlags, helpMessageBufferPtr, defaultValue, minValue, maxValue);
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, int, ulong, byte*, byte*, nint, nint, void> _CreateConvarString;
 
     public unsafe static void CreateConvarString(string cvarName, int cvarType, ulong cvarFlags, string helpMessage, string defaultValue, nint minValue, nint maxValue)
     {
-        StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        using var helpMessageStr = new ScopedCString(helpMessage);
+        using var defaultValueStr = new ScopedCString(defaultValue);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
-            StringAlloc.CreateCString(helpMessage, helpMessageBufferPtr =>
+            fixed (byte* helpMessageBufferPtr = helpMessageStr)
             {
-                StringAlloc.CreateCString(defaultValue, defaultValueBufferPtr =>
+                fixed (byte* defaultValueBufferPtr = defaultValueStr)
                 {
-                    _CreateConvarString((byte*)cvarNameBufferPtr, cvarType, cvarFlags, (byte*)helpMessageBufferPtr, (byte*)defaultValueBufferPtr, minValue, maxValue);
-                });
-            });
-        });
+                    _CreateConvarString(cvarNameBufferPtr, cvarType, cvarFlags, helpMessageBufferPtr, defaultValueBufferPtr, minValue, maxValue);
+                }
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, void> _DeleteConvar;
 
     public unsafe static void DeleteConvar(string cvarName)
     {
-        StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
-            _DeleteConvar((byte*)cvarNameBufferPtr);
-        });
+            _DeleteConvar(cvarNameBufferPtr);
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, byte> _ExistsConvar;
 
     public unsafe static bool ExistsConvar(string cvarName)
     {
-        return StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
-            var ret = _ExistsConvar((byte*)cvarNameBufferPtr);
+            var ret = _ExistsConvar(cvarNameBufferPtr);
             return ret == 1;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, int> _GetConvarType;
 
     public unsafe static int GetConvarType(string cvarName)
     {
-        return StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
-            var ret = _GetConvarType((byte*)cvarNameBufferPtr);
+            var ret = _GetConvarType(cvarNameBufferPtr);
             return ret;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, ulong> _GetFlags;
 
     public unsafe static ulong GetFlags(string cvarName)
     {
-        return StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
-            var ret = _GetFlags((byte*)cvarNameBufferPtr);
+            var ret = _GetFlags(cvarNameBufferPtr);
             return ret;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, ulong, void> _SetFlags;
@@ -346,246 +382,272 @@ internal static class NativeConvars
         {
             throw new InvalidOperationException("This method can only be called from the main thread.");
         }
-        StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
-            _SetFlags((byte*)cvarNameBufferPtr, flags);
-        });
+            _SetFlags(cvarNameBufferPtr, flags);
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, nint> _GetMinValuePtrPtr;
 
     public unsafe static nint GetMinValuePtrPtr(string cvarName)
     {
-        return StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
-            var ret = _GetMinValuePtrPtr((byte*)cvarNameBufferPtr);
+            var ret = _GetMinValuePtrPtr(cvarNameBufferPtr);
             return ret;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, nint> _GetMaxValuePtrPtr;
 
     public unsafe static nint GetMaxValuePtrPtr(string cvarName)
     {
-        return StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
-            var ret = _GetMaxValuePtrPtr((byte*)cvarNameBufferPtr);
+            var ret = _GetMaxValuePtrPtr(cvarNameBufferPtr);
             return ret;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, byte> _HasDefaultValue;
 
     public unsafe static bool HasDefaultValue(string cvarName)
     {
-        return StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
-            var ret = _HasDefaultValue((byte*)cvarNameBufferPtr);
+            var ret = _HasDefaultValue(cvarNameBufferPtr);
             return ret == 1;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, nint> _GetDefaultValuePtr;
 
     public unsafe static nint GetDefaultValuePtr(string cvarName)
     {
-        return StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
-            var ret = _GetDefaultValuePtr((byte*)cvarNameBufferPtr);
+            var ret = _GetDefaultValuePtr(cvarNameBufferPtr);
             return ret;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, nint, void> _SetDefaultValue;
 
     public unsafe static void SetDefaultValue(string cvarName, nint defaultValue)
     {
-        StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
-            _SetDefaultValue((byte*)cvarNameBufferPtr, defaultValue);
-        });
+            _SetDefaultValue(cvarNameBufferPtr, defaultValue);
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, byte*, void> _SetDefaultValueString;
 
     public unsafe static void SetDefaultValueString(string cvarName, string defaultValue)
     {
-        StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        using var defaultValueStr = new ScopedCString(defaultValue);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
-            StringAlloc.CreateCString(defaultValue, defaultValueBufferPtr =>
+            fixed (byte* defaultValueBufferPtr = defaultValueStr)
             {
-                _SetDefaultValueString((byte*)cvarNameBufferPtr, (byte*)defaultValueBufferPtr);
-            });
-        });
+                _SetDefaultValueString(cvarNameBufferPtr, defaultValueBufferPtr);
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, nint> _GetValuePtr;
 
     public unsafe static nint GetValuePtr(string cvarName)
     {
-        return StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
-            var ret = _GetValuePtr((byte*)cvarNameBufferPtr);
+            var ret = _GetValuePtr(cvarNameBufferPtr);
             return ret;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, nint, void> _SetValuePtr;
 
     public unsafe static void SetValuePtr(string cvarName, nint value)
     {
-        StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
-            _SetValuePtr((byte*)cvarNameBufferPtr, value);
-        });
+            _SetValuePtr(cvarNameBufferPtr, value);
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, nint, void> _SetValueInternalPtr;
 
     public unsafe static void SetValueInternalPtr(string cvarName, nint value)
     {
-        StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
-            _SetValueInternalPtr((byte*)cvarNameBufferPtr, value);
-        });
+            _SetValueInternalPtr(cvarNameBufferPtr, value);
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, byte*, byte> _SetValueAsString;
 
     public unsafe static bool SetValueAsString(string cvarName, string value)
     {
-        return StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        using var valueStr = new ScopedCString(value);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
-            return StringAlloc.CreateCString(value, valueBufferPtr =>
+            fixed (byte* valueBufferPtr = valueStr)
             {
-                var ret = _SetValueAsString((byte*)cvarNameBufferPtr, (byte*)valueBufferPtr);
+                var ret = _SetValueAsString(cvarNameBufferPtr, valueBufferPtr);
                 return ret == 1;
-            });
-        });
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<int*, byte*, byte*> _GetValueAsString;
 
     public unsafe static string GetValueAsString(string cvarName)
     {
-        return StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
             var length = 0;
-            var returnedPtr = _GetValueAsString(&length, (byte*)cvarNameBufferPtr);
+            var returnedPtr = _GetValueAsString(&length, cvarNameBufferPtr);
             var outString = StringAlloc.CreateCSharpString((nint)returnedPtr, length);
             NativeAllocator.Free((nint)returnedPtr);
             return outString;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, byte*, byte> _SetDefaultValueAsString;
 
     public unsafe static bool SetDefaultValueAsString(string cvarName, string value)
     {
-        return StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        using var valueStr = new ScopedCString(value);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
-            return StringAlloc.CreateCString(value, valueBufferPtr =>
+            fixed (byte* valueBufferPtr = valueStr)
             {
-                var ret = _SetDefaultValueAsString((byte*)cvarNameBufferPtr, (byte*)valueBufferPtr);
+                var ret = _SetDefaultValueAsString(cvarNameBufferPtr, valueBufferPtr);
                 return ret == 1;
-            });
-        });
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<int*, byte*, byte*> _GetDefaultValueAsString;
 
     public unsafe static string GetDefaultValueAsString(string cvarName)
     {
-        return StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
             var length = 0;
-            var returnedPtr = _GetDefaultValueAsString(&length, (byte*)cvarNameBufferPtr);
+            var returnedPtr = _GetDefaultValueAsString(&length, cvarNameBufferPtr);
             var outString = StringAlloc.CreateCSharpString((nint)returnedPtr, length);
             NativeAllocator.Free((nint)returnedPtr);
             return outString;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, byte*, byte> _SetMinValueAsString;
 
     public unsafe static bool SetMinValueAsString(string cvarName, string value)
     {
-        return StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        using var valueStr = new ScopedCString(value);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
-            return StringAlloc.CreateCString(value, valueBufferPtr =>
+            fixed (byte* valueBufferPtr = valueStr)
             {
-                var ret = _SetMinValueAsString((byte*)cvarNameBufferPtr, (byte*)valueBufferPtr);
+                var ret = _SetMinValueAsString(cvarNameBufferPtr, valueBufferPtr);
                 return ret == 1;
-            });
-        });
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<int*, byte*, byte*> _GetMinValueAsString;
 
     public unsafe static string GetMinValueAsString(string cvarName)
     {
-        return StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
             var length = 0;
-            var returnedPtr = _GetMinValueAsString(&length, (byte*)cvarNameBufferPtr);
+            var returnedPtr = _GetMinValueAsString(&length, cvarNameBufferPtr);
             var outString = StringAlloc.CreateCSharpString((nint)returnedPtr, length);
             NativeAllocator.Free((nint)returnedPtr);
             return outString;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, byte*, byte> _SetMaxValueAsString;
 
     public unsafe static bool SetMaxValueAsString(string cvarName, string value)
     {
-        return StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        using var valueStr = new ScopedCString(value);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
-            return StringAlloc.CreateCString(value, valueBufferPtr =>
+            fixed (byte* valueBufferPtr = valueStr)
             {
-                var ret = _SetMaxValueAsString((byte*)cvarNameBufferPtr, (byte*)valueBufferPtr);
+                var ret = _SetMaxValueAsString(cvarNameBufferPtr, valueBufferPtr);
                 return ret == 1;
-            });
-        });
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<int*, byte*, byte*> _GetMaxValueAsString;
 
     public unsafe static string GetMaxValueAsString(string cvarName)
     {
-        return StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
             var length = 0;
-            var returnedPtr = _GetMaxValueAsString(&length, (byte*)cvarNameBufferPtr);
+            var returnedPtr = _GetMaxValueAsString(&length, cvarNameBufferPtr);
             var outString = StringAlloc.CreateCSharpString((nint)returnedPtr, length);
             NativeAllocator.Free((nint)returnedPtr);
             return outString;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, byte*, void> _SetValueInternalAsString;
 
     public unsafe static void SetValueInternalAsString(string cvarName, string value)
     {
-        StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        using var valueStr = new ScopedCString(value);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
-            StringAlloc.CreateCString(value, valueBufferPtr =>
+            fixed (byte* valueBufferPtr = valueStr)
             {
-                _SetValueInternalAsString((byte*)cvarNameBufferPtr, (byte*)valueBufferPtr);
-            });
-        });
+                _SetValueInternalAsString(cvarNameBufferPtr, valueBufferPtr);
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<int*, byte*, byte*> _GetDescription;
 
     public unsafe static string GetDescription(string cvarName)
     {
-        return StringAlloc.CreateCString(cvarName, cvarNameBufferPtr =>
+        using var cvarNameStr = new ScopedCString(cvarName);
+        fixed (byte* cvarNameBufferPtr = cvarNameStr)
         {
             var length = 0;
-            var returnedPtr = _GetDescription(&length, (byte*)cvarNameBufferPtr);
+            var returnedPtr = _GetDescription(&length, cvarNameBufferPtr);
             var outString = StringAlloc.CreateCSharpString((nint)returnedPtr, length);
             NativeAllocator.Free((nint)returnedPtr);
             return outString;
-        });
+        }
     }
 }

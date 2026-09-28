@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_SetControlPointToWaterSurface : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointToWaterSurface>
 {
     static C_OP_SetControlPointToWaterSurface ISchemaClass<C_OP_SetControlPointToWaterSurface>.From(nint handle) => new C_OP_SetControlPointToWaterSurfaceImpl(handle);
-    static int ISchemaClass<C_OP_SetControlPointToWaterSurface>.Size => 880;
+    static int ISchemaClass<C_OP_SetControlPointToWaterSurface>.Size => 896;
     static string? ISchemaClass<C_OP_SetControlPointToWaterSurface>.ClassName => null;
 
 

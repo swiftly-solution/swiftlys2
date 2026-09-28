@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_DistanceBetweenVecs : CParticleFunctionOperator, ISchemaClass<C_OP_DistanceBetweenVecs>
 {
     static C_OP_DistanceBetweenVecs ISchemaClass<C_OP_DistanceBetweenVecs>.From(nint handle) => new C_OP_DistanceBetweenVecsImpl(handle);
-    static int ISchemaClass<C_OP_DistanceBetweenVecs>.Size => 5400;
+    static int ISchemaClass<C_OP_DistanceBetweenVecs>.Size => 5504;
     static string? ISchemaClass<C_OP_DistanceBetweenVecs>.ClassName => null;
 
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface RTProxyInstanceInfo_t : ISchemaClass<RTProxyInstanceInfo_t>
 {
     static RTProxyInstanceInfo_t ISchemaClass<RTProxyInstanceInfo_t>.From(nint handle) => new RTProxyInstanceInfo_tImpl(handle);
-    static int ISchemaClass<RTProxyInstanceInfo_t>.Size => 72;
+    static int ISchemaClass<RTProxyInstanceInfo_t>.Size => 76;
     static string? ISchemaClass<RTProxyInstanceInfo_t>.ClassName => null;
 
 
@@ -32,6 +32,8 @@ public partial interface RTProxyInstanceInfo_t : ISchemaClass<RTProxyInstanceInf
     public ref float EmissiveFactor { get; }
 
     public ref matrix3x4_t MWorldFromLocal { get; }
+
+    public ref Color TintColorSRGB { get; }
 
 
 }

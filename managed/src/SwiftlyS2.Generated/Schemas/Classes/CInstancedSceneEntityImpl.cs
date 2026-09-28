@@ -66,16 +66,6 @@ internal partial class CInstancedSceneEntityImpl : CSceneEntityImpl, CInstancedS
             return ref _Handle.AsRef<bool>(_IsBackgroundOffset!.Value);
         }
     }
-    private static nint? _RemoveOnCompletionOffset;
-
-    public ref bool RemoveOnCompletion
-    {
-        get
-        {
-            _RemoveOnCompletionOffset = _RemoveOnCompletionOffset ?? Schema.GetOffset(0x2D9E341E06E2CBD6);
-            return ref _Handle.AsRef<bool>(_RemoveOnCompletionOffset!.Value);
-        }
-    }
     private static nint? _TargetOffset;
 
     public ref CHandle<CBaseEntity> Target

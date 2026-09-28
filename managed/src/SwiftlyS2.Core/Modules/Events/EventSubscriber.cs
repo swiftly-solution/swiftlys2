@@ -144,7 +144,33 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
             if (_OnWeaponServicesDropWeaponHook == null) GameHooksPublisher.RemoveHookListener(HookListener.WeaponDrop);
         }
     }
-    public event EventDelegates.OnConsoleOutput? OnConsoleOutput;
+    private readonly Lock consoleOutputLock = new();
+    private EventDelegates.OnConsoleOutput? _OnConsoleOutput;
+    public event EventDelegates.OnConsoleOutput? OnConsoleOutput {
+        add {
+            if (value == null) return;
+
+            bool addedFirstListener;
+            lock (consoleOutputLock)
+            {
+                addedFirstListener = _OnConsoleOutput == null;
+                _OnConsoleOutput += value;
+                if (addedFirstListener) EventPublisher.AddConsoleOutputListener();
+            }
+        }
+        remove {
+            if (value == null) return;
+
+            bool removedLastListener;
+            lock (consoleOutputLock)
+            {
+                var hadListeners = _OnConsoleOutput != null;
+                _OnConsoleOutput -= value;
+                removedLastListener = hadListeners && _OnConsoleOutput == null;
+                if (removedLastListener) EventPublisher.RemoveConsoleOutputListener();
+            }
+        }
+    }
     public event EventDelegates.OnCommandExecuteHook? OnCommandExecuteHook;
     public event EventDelegates.OnSteamAPIActivated? OnSteamAPIActivated;
     private EventDelegates.OnMovementServicesRunCommandHook? _OnMovementServicesRunCommandHook;
@@ -198,6 +224,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
     }
     public event EventDelegates.OnStartupServer? OnStartupServer;
     public event EventDelegates.OnClientVoice? OnClientVoice;
+    public event EventDelegates.OnCustomHudClicked? OnCustomHudClicked;
 
     public void Dispose()
     {
@@ -219,6 +246,15 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         if (_OnEntityIdentityAcceptInputHook != null) GameHooksPublisher.RemoveHookListener(HookListener.AcceptInput);
         if (_OnEntityFireOutputHook != null) GameHooksPublisher.RemoveHookListener(HookListener.FireOutput);
         if (_OnMovementServicesRunCommandHook != null) GameHooksPublisher.RemoveHookListener(HookListener.RunCommand);
+
+        lock (consoleOutputLock)
+        {
+            if (_OnConsoleOutput != null)
+            {
+                _OnConsoleOutput = null;
+                EventPublisher.RemoveConsoleOutputListener();
+            }
+        }
 
         EventPublisher.Unsubscribe(this);
         GC.SuppressFinalize(this);
@@ -776,18 +812,19 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     }
 
-    public bool ListensToConsoleOutput => OnConsoleOutput != null;
+    public bool ListensToConsoleOutput => System.Threading.Volatile.Read(ref _OnConsoleOutput) != null;
 
     public void InvokeOnConsoleOutput( ref OnConsoleOutputEvent @event )
     {
-        if (OnConsoleOutput == null)
+        var handler = System.Threading.Volatile.Read(ref _OnConsoleOutput);
+        if (handler == null)
         {
             return;
         }
         try
         {
 
-            OnConsoleOutput.Invoke(@event);
+            handler.Invoke(@event);
         }
         catch (Exception e)
         {
@@ -1023,6 +1060,29 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
             if (GlobalExceptionHandler.Handle(ref e))
             {
                 logger.LogError(e, "Error invoking OnStartupServer.");
+            }
+        }
+
+    }
+
+    public bool ListensToCustomHudClicked => OnCustomHudClicked != null;
+
+    public void InvokeOnCustomHudClicked( ref OnCustomHudClickedEvent @event )
+    {
+        if (OnCustomHudClicked == null)
+        {
+            return;
+        }
+
+        try
+        {
+            OnCustomHudClicked.Invoke(@event);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking OnCustomHudClicked.");
             }
         }
 

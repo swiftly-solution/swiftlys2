@@ -29,5 +29,18 @@ internal partial class CVMixEQ8ProcessorDescImpl : CVMixBaseProcessorDescImpl, C
             return instance;
         }
     }
+    private static nint? _ParamEQScaleOffset;
+    private CVMixParameterFloatImpl? _ParamEQScaleInstance;
+
+    public CVMixParameterFloat ParamEQScale
+    {
+        get
+        {
+            _ParamEQScaleOffset = _ParamEQScaleOffset ?? Schema.GetOffset(0x21FCDAF97C2FE726);
+            var instance = _ParamEQScaleInstance ??= new CVMixParameterFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamEQScaleOffset!.Value);
+            return instance;
+        }
+    }
 
 }

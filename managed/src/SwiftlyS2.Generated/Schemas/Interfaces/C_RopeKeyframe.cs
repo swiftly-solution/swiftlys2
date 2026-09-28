@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_RopeKeyframe : C_BaseModelEntity, ISchemaClass<C_RopeKeyframe>
 {
     static C_RopeKeyframe ISchemaClass<C_RopeKeyframe>.From(nint handle) => new C_RopeKeyframeImpl(handle);
-    static int ISchemaClass<C_RopeKeyframe>.Size => 4896;
+    static int ISchemaClass<C_RopeKeyframe>.Size => 5128;
     static string? ISchemaClass<C_RopeKeyframe>.ClassName => null;
 
 

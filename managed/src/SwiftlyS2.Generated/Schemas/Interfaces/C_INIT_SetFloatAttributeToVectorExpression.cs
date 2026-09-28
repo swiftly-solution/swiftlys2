@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_SetFloatAttributeToVectorExpression : CParticleFunctionInitializer, ISchemaClass<C_INIT_SetFloatAttributeToVectorExpression>
 {
     static C_INIT_SetFloatAttributeToVectorExpression ISchemaClass<C_INIT_SetFloatAttributeToVectorExpression>.From(nint handle) => new C_INIT_SetFloatAttributeToVectorExpressionImpl(handle);
-    static int ISchemaClass<C_INIT_SetFloatAttributeToVectorExpression>.Size => 4304;
+    static int ISchemaClass<C_INIT_SetFloatAttributeToVectorExpression>.Size => 4384;
     static string? ISchemaClass<C_INIT_SetFloatAttributeToVectorExpression>.ClassName => null;
 
 

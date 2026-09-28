@@ -30,12 +30,11 @@ internal static class NativeCore
         return outString;
     }
 
-    private unsafe static delegate* unmanaged<byte> _EnableProfilerByDefault;
+    private unsafe static delegate* unmanaged<int> _GetProfilerLevelByDefault;
 
-    public unsafe static bool EnableProfilerByDefault()
+    public unsafe static int GetProfilerLevelByDefault()
     {
-        var ret = _EnableProfilerByDefault();
-        return ret == 1;
+        return _GetProfilerLevelByDefault();
     }
 
     private unsafe static delegate* unmanaged<byte> _IsMainThread;

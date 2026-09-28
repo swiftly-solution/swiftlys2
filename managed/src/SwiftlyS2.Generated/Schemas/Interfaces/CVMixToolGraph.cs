@@ -15,13 +15,17 @@ public partial interface CVMixToolGraph : ISchemaClass<CVMixToolGraph>
     static string? ISchemaClass<CVMixToolGraph>.ClassName => null;
 
 
-    public CVMixGraphDescData GraphDescData { get; }
+    public string Name { get; set; }
+
+    public ref int GraphOutputChannels { get; }
+
+    public ref bool IsMainGraph { get; }
+
+    public ref int PreviewNode { get; }
 
     public ref CUtlVector<CVMixEditorNode> EditorNodes { get; }
 
     public ref CUtlVector<CVMixEditorEdge> EditorEdges { get; }
-
-    public ref int PreviewNode { get; }
 
 
 }

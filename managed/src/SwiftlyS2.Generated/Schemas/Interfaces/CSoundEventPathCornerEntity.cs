@@ -8,24 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSoundEventPathCornerEntity : CSoundEventEntity, ISchemaClass<CSoundEventPathCornerEntity>
+public partial interface CSoundEventPathCornerEntity : CSoundEventMultiPointEntity, ISchemaClass<CSoundEventPathCornerEntity>
 {
     static CSoundEventPathCornerEntity ISchemaClass<CSoundEventPathCornerEntity>.From(nint handle) => new CSoundEventPathCornerEntityImpl(handle);
-    static int ISchemaClass<CSoundEventPathCornerEntity>.Size => 1544;
+    static int ISchemaClass<CSoundEventPathCornerEntity>.Size => 1568;
     static string? ISchemaClass<CSoundEventPathCornerEntity>.ClassName => "snd_event_path_corner";
 
 
     public string PathCorner { get; set; }
-
-    public ref int CountMax { get; }
-
-    public ref float DistanceMax { get; }
-
-    public ref float DistMaxSqr { get; }
-
-    public ref float DotProductMax { get; }
-
-    public ref bool Playing { get; }
 
     public ref CUtlVector<SoundeventPathCornerPairNetworked_t> CornerPairsNetworked { get; }
 

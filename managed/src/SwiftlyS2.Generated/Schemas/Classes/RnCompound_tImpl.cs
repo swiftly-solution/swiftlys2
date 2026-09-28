@@ -16,44 +16,100 @@ internal partial class RnCompound_tImpl : SchemaClass, RnCompound_t
 {
     public RnCompound_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _SpheresOffset;
+    private static nint? _TreeOffset;
+    private RnCompoundTree_tImpl? _TreeInstance;
 
-    public ref CUtlVector<RnSphere_t> Spheres
+    public RnCompoundTree_t Tree
     {
         get
         {
-            _SpheresOffset = _SpheresOffset ?? Schema.GetOffset(0xAFF8C613E56F78F1);
-            return ref _Handle.AsRef<CUtlVector<RnSphere_t>>(_SpheresOffset!.Value);
+            _TreeOffset = _TreeOffset ?? Schema.GetOffset(0xAFF8C613AB3A1955);
+            var instance = _TreeInstance ??= new RnCompoundTree_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _TreeOffset!.Value);
+            return instance;
         }
     }
-    private static nint? _CapsulesOffset;
+    private static nint? _HullBaseIndexOffset;
 
-    public ref CUtlVector<RnCapsule_t> Capsules
+    public ref int HullBaseIndex
     {
         get
         {
-            _CapsulesOffset = _CapsulesOffset ?? Schema.GetOffset(0xAFF8C613FC27BB2D);
-            return ref _Handle.AsRef<CUtlVector<RnCapsule_t>>(_CapsulesOffset!.Value);
+            _HullBaseIndexOffset = _HullBaseIndexOffset ?? Schema.GetOffset(0xAFF8C61328B4E0FD);
+            return ref _Handle.AsRef<int>(_HullBaseIndexOffset!.Value);
         }
     }
-    private static nint? _HullsOffset;
+    private static nint? _MeshBaseIndexOffset;
 
-    public ref CUtlVector<RnHull_t> Hulls
+    public ref int MeshBaseIndex
     {
         get
         {
-            _HullsOffset = _HullsOffset ?? Schema.GetOffset(0xAFF8C6138C3BD39F);
-            return ref _Handle.AsRef<CUtlVector<RnHull_t>>(_HullsOffset!.Value);
+            _MeshBaseIndexOffset = _MeshBaseIndexOffset ?? Schema.GetOffset(0xAFF8C61364293A13);
+            return ref _Handle.AsRef<int>(_MeshBaseIndexOffset!.Value);
+        }
+    }
+    private static nint? _ShapeCountOffset;
+
+    public ref int ShapeCount
+    {
+        get
+        {
+            _ShapeCountOffset = _ShapeCountOffset ?? Schema.GetOffset(0xAFF8C6136BF2B149);
+            return ref _Handle.AsRef<int>(_ShapeCountOffset!.Value);
         }
     }
     private static nint? _MeshesOffset;
+    private SchemaUntypedField? _MeshesInstance;
 
-    public ref CUtlVector<RnMesh_t> Meshes
+    public SchemaUntypedField Meshes
     {
         get
         {
             _MeshesOffset = _MeshesOffset ?? Schema.GetOffset(0xAFF8C613D394E2B8);
-            return ref _Handle.AsRef<CUtlVector<RnMesh_t>>(_MeshesOffset!.Value);
+            var instance = _MeshesInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _MeshesOffset!.Value);
+            return instance;
+        }
+    }
+    private static nint? _HullsOffset;
+
+    public ref CUtlLeanVector<RnHull_t, int> Hulls
+    {
+        get
+        {
+            _HullsOffset = _HullsOffset ?? Schema.GetOffset(0xAFF8C6138C3BD39F);
+            return ref _Handle.AsRef<CUtlLeanVector<RnHull_t, int>>(_HullsOffset!.Value);
+        }
+    }
+    private static nint? _CapsulesOffset;
+
+    public ref CUtlLeanVector<RnCapsule_t, int> Capsules
+    {
+        get
+        {
+            _CapsulesOffset = _CapsulesOffset ?? Schema.GetOffset(0xAFF8C613FC27BB2D);
+            return ref _Handle.AsRef<CUtlLeanVector<RnCapsule_t, int>>(_CapsulesOffset!.Value);
+        }
+    }
+    private static nint? _SpheresOffset;
+
+    public ref CUtlLeanVector<RnSphere_t, int> Spheres
+    {
+        get
+        {
+            _SpheresOffset = _SpheresOffset ?? Schema.GetOffset(0xAFF8C613E56F78F1);
+            return ref _Handle.AsRef<CUtlLeanVector<RnSphere_t, int>>(_SpheresOffset!.Value);
+        }
+    }
+    private static nint? _CompoundMaterialIndicesOffset;
+
+    public ref CUtlLeanVector<byte, int> CompoundMaterialIndices
+    {
+        get
+        {
+            _CompoundMaterialIndicesOffset = _CompoundMaterialIndicesOffset ?? Schema.GetOffset(0xAFF8C61356D76BA2);
+            return ref _Handle.AsRef<CUtlLeanVector<byte, int>>(_CompoundMaterialIndicesOffset!.Value);
         }
     }
     private static nint? _BoundsOffset;

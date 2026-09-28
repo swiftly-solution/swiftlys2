@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVoiceContainerGranulator : CVoiceContainerAsyncGenerator, ISchemaClass<CVoiceContainerGranulator>
 {
     static CVoiceContainerGranulator ISchemaClass<CVoiceContainerGranulator>.From(nint handle) => new CVoiceContainerGranulatorImpl(handle);
-    static int ISchemaClass<CVoiceContainerGranulator>.Size => 344;
+    static int ISchemaClass<CVoiceContainerGranulator>.Size => 368;
     static string? ISchemaClass<CVoiceContainerGranulator>.ClassName => null;
 
 
@@ -26,6 +26,10 @@ public partial interface CVoiceContainerGranulator : CVoiceContainerAsyncGenerat
     public ref bool ShouldWraparound { get; }
 
     public ref CStrongHandle<InfoForResourceTypeCVoiceContainerBase> SourceAudio { get; }
+
+    public ref bool DoubleBufferSourceAudio { get; }
+
+    public ref float MaxSourceLength { get; }
 
 
 }

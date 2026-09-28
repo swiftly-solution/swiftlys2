@@ -18,7 +18,7 @@ public interface CEconItemPreviewDataBlock : ITypedProtobuf<CEconItemPreviewData
     public uint Paintseed { get; set; }
     public uint Killeaterscoretype { get; set; }
     public uint Killeatervalue { get; set; }
-    public string Customname { get; set; }
+    public IProtobufRepeatedFieldValueType<string> Customnames { get; }
     public IProtobufRepeatedFieldSubMessageType<CEconItemPreviewDataBlock_Sticker> Stickers { get; }
     public uint Inventory { get; set; }
     public uint Origin { get; set; }
@@ -31,4 +31,6 @@ public interface CEconItemPreviewDataBlock : ITypedProtobuf<CEconItemPreviewData
     public uint Style { get; set; }
     public IProtobufRepeatedFieldSubMessageType<CEconItemPreviewDataBlock_Sticker> Variations { get; }
     public uint UpgradeLevel { get; set; }
+    public uint PetFoodExpirationDate { get; set; }
+    public byte[] Blobdata { get; set; }
 }

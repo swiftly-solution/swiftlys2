@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_MaintainEmitter : CParticleFunctionEmitter, ISchemaClass<C_OP_MaintainEmitter>
 {
     static C_OP_MaintainEmitter ISchemaClass<C_OP_MaintainEmitter>.From(nint handle) => new C_OP_MaintainEmitterImpl(handle);
-    static int ISchemaClass<C_OP_MaintainEmitter>.Size => 1616;
+    static int ISchemaClass<C_OP_MaintainEmitter>.Size => 1648;
     static string? ISchemaClass<C_OP_MaintainEmitter>.ClassName => null;
 
 

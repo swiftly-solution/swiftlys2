@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_CreateOnModel : CParticleFunctionInitializer, ISchemaClass<C_INIT_CreateOnModel>
 {
     static C_INIT_CreateOnModel ISchemaClass<C_INIT_CreateOnModel>.From(nint handle) => new C_INIT_CreateOnModelImpl(handle);
-    static int ISchemaClass<C_INIT_CreateOnModel>.Size => 5016;
+    static int ISchemaClass<C_INIT_CreateOnModel>.Size => 5104;
     static string? ISchemaClass<C_INIT_CreateOnModel>.ClassName => null;
 
 

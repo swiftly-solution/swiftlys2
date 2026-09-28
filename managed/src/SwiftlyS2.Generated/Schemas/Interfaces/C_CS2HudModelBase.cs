@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_CS2HudModelBase : C_LateUpdatedAnimating, ISchemaClass<C_CS2HudModelBase>
 {
     static C_CS2HudModelBase ISchemaClass<C_CS2HudModelBase>.From(nint handle) => new C_CS2HudModelBaseImpl(handle);
-    static int ISchemaClass<C_CS2HudModelBase>.Size => 4720;
+    static int ISchemaClass<C_CS2HudModelBase>.Size => 4944;
     static string? ISchemaClass<C_CS2HudModelBase>.ClassName => null;
 
 }

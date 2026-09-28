@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmGraphDocTargetWarpNode : CNmGraphDocVariationDataNode, ISchemaClass<CNmGraphDocTargetWarpNode>
 {
     static CNmGraphDocTargetWarpNode ISchemaClass<CNmGraphDocTargetWarpNode>.From(nint handle) => new CNmGraphDocTargetWarpNodeImpl(handle);
-    static int ISchemaClass<CNmGraphDocTargetWarpNode>.Size => 536;
+    static int ISchemaClass<CNmGraphDocTargetWarpNode>.Size => 544;
     static string? ISchemaClass<CNmGraphDocTargetWarpNode>.ClassName => null;
 
 

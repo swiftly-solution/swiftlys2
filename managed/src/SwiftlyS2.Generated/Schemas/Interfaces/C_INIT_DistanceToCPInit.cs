@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_DistanceToCPInit : CParticleFunctionInitializer, ISchemaClass<C_INIT_DistanceToCPInit>
 {
     static C_INIT_DistanceToCPInit ISchemaClass<C_INIT_DistanceToCPInit>.From(nint handle) => new C_INIT_DistanceToCPInitImpl(handle);
-    static int ISchemaClass<C_INIT_DistanceToCPInit>.Size => 2504;
+    static int ISchemaClass<C_INIT_DistanceToCPInit>.Size => 2552;
     static string? ISchemaClass<C_INIT_DistanceToCPInit>.ClassName => null;
 
 

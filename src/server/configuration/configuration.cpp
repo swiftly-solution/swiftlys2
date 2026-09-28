@@ -438,7 +438,7 @@ bool Configuration::Load()
         RegisterConfigurationVector<std::string>(wasEdited, config_json, "core", "core", "CommandPrefixes", { "!" }, true, " ");
         RegisterConfigurationVector<std::string>(wasEdited, config_json, "core", "core", "CommandSilentPrefixes", { "/" }, true, " ");
         RegisterConfiguration(wasEdited, config_json, "core", "core", "AutoHotReload", true);
-        RegisterConfiguration(wasEdited, config_json, "core", "core", "EnableProfiler", false);
+        RegisterConfiguration(wasEdited, config_json, "core", "core", "ProfilerLevel", 0);
         RegisterConfiguration(wasEdited, config_json, "core", "core", "ConsoleFilter", true);
         RegisterConfigurationVector<std::string>(wasEdited, config_json, "core", "core", "PatchesToPerform", { }, true, " ");
 

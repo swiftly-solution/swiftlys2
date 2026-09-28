@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_LightOrthoEntity : C_LightEntity, ISchemaClass<C_LightOrthoEntity>
 {
     static C_LightOrthoEntity ISchemaClass<C_LightOrthoEntity>.From(nint handle) => new C_LightOrthoEntityImpl(handle);
-    static int ISchemaClass<C_LightOrthoEntity>.Size => 4024;
+    static int ISchemaClass<C_LightOrthoEntity>.Size => 4256;
     static string? ISchemaClass<C_LightOrthoEntity>.ClassName => null;
 
 }

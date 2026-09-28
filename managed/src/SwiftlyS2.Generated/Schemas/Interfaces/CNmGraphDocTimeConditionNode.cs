@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmGraphDocTimeConditionNode : CNmGraphDocFlowNode, ISchemaClass<CNmGraphDocTimeConditionNode>
 {
     static CNmGraphDocTimeConditionNode ISchemaClass<CNmGraphDocTimeConditionNode>.From(nint handle) => new CNmGraphDocTimeConditionNodeImpl(handle);
-    static int ISchemaClass<CNmGraphDocTimeConditionNode>.Size => 264;
+    static int ISchemaClass<CNmGraphDocTimeConditionNode>.Size => 272;
     static string? ISchemaClass<CNmGraphDocTimeConditionNode>.ClassName => null;
 
 

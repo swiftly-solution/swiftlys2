@@ -8,7 +8,7 @@ namespace SwiftlyS2.Core.SchemaDefinitions;
 
 internal partial class CBaseEntityImpl : CBaseEntity
 {
-    private CEntitySubclassVDataBaseImpl _vData;
+    private CEntitySubclassVDataBaseImpl _vData = new(0);
 
     public CEntitySubclassVDataBase VData {
         get {

@@ -11,13 +11,15 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmGraphDocOrientationWarpNode : CNmGraphDocFlowNode, ISchemaClass<CNmGraphDocOrientationWarpNode>
 {
     static CNmGraphDocOrientationWarpNode ISchemaClass<CNmGraphDocOrientationWarpNode>.From(nint handle) => new CNmGraphDocOrientationWarpNodeImpl(handle);
-    static int ISchemaClass<CNmGraphDocOrientationWarpNode>.Size => 264;
+    static int ISchemaClass<CNmGraphDocOrientationWarpNode>.Size => 272;
     static string? ISchemaClass<CNmGraphDocOrientationWarpNode>.ClassName => null;
 
 
     public ref CNmGraphDocOrientationWarpNode__OffsetType_t OffsetType { get; }
 
     public ref CNmRootMotionData__SamplingMode_t SamplingMode { get; }
+
+    public ref CNmOrientationWarpNode__AlignmentMode_t AlignmentMode { get; }
 
     public ref bool WarpTranslation { get; }
 

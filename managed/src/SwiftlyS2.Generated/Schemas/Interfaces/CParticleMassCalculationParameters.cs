@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CParticleMassCalculationParameters : ISchemaClass<CParticleMassCalculationParameters>
 {
     static CParticleMassCalculationParameters ISchemaClass<CParticleMassCalculationParameters>.From(nint handle) => new CParticleMassCalculationParametersImpl(handle);
-    static int ISchemaClass<CParticleMassCalculationParameters>.Size => 1112;
+    static int ISchemaClass<CParticleMassCalculationParameters>.Size => 1136;
     static string? ISchemaClass<CParticleMassCalculationParameters>.ClassName => null;
 
 

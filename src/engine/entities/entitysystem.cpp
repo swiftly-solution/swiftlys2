@@ -84,7 +84,7 @@ void TraceShapeHook(void* _this, Ray_t& ray, Vector& start, Vector& end, CTraceF
         g_pTraceManager = _this;
     }
 
-    reinterpret_cast<void(*)(void*, Ray_t&, Vector&, Vector&, CTraceFilter*, trace_t*)>(g_pTraceShapeHook->GetOriginal())(_this, ray, start, end, filter, trace);
+    reinterpret_cast<decltype(&TraceShapeHook)>(g_pTraceShapeHook->GetOriginal())(_this, ray, start, end, filter, trace);
 }
 
 void StartupServerHook(void* _this, const GameSessionConfiguration_t& config, ISource2WorldSession* a, const char* b)

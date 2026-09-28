@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPushable : CBreakable, ISchemaClass<CPushable>
 {
     static CPushable ISchemaClass<CPushable>.From(nint handle) => new CPushableImpl(handle);
-    static int ISchemaClass<CPushable>.Size => 2120;
+    static int ISchemaClass<CPushable>.Size => 2344;
     static string? ISchemaClass<CPushable>.ClassName => "func_pushable";
 
 }

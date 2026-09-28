@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmClipDocEvent_RootMotion : CNmClipDocEvent, ISchemaClass<CNmClipDocEvent_RootMotion>
 {
     static CNmClipDocEvent_RootMotion ISchemaClass<CNmClipDocEvent_RootMotion>.From(nint handle) => new CNmClipDocEvent_RootMotionImpl(handle);
-    static int ISchemaClass<CNmClipDocEvent_RootMotion>.Size => 24;
+    static int ISchemaClass<CNmClipDocEvent_RootMotion>.Size => 32;
     static string? ISchemaClass<CNmClipDocEvent_RootMotion>.ClassName => null;
 
 

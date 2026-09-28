@@ -56,6 +56,16 @@ internal partial class CEngineToolInfoImpl : CBaseToolInfoImpl, CEngineToolInfo
             return ref _Handle.AsRef<bool>(_ShowInRevisionSubMenuOffset!.Value);
         }
     }
+    private static nint? _ShowInToolsMenuOffset;
+
+    public ref bool ShowInToolsMenu
+    {
+        get
+        {
+            _ShowInToolsMenuOffset = _ShowInToolsMenuOffset ?? Schema.GetOffset(0xAC7DD6A0EA6972D);
+            return ref _Handle.AsRef<bool>(_ShowInToolsMenuOffset!.Value);
+        }
+    }
     private static nint? _IsSecondaryToolOffset;
 
     public ref bool IsSecondaryTool

@@ -11,17 +11,15 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVMixAutomaticControlInput : ISchemaClass<CVMixAutomaticControlInput>
 {
     static CVMixAutomaticControlInput ISchemaClass<CVMixAutomaticControlInput>.From(nint handle) => new CVMixAutomaticControlInputImpl(handle);
-    static int ISchemaClass<CVMixAutomaticControlInput>.Size => 16;
+    static int ISchemaClass<CVMixAutomaticControlInput>.Size => 24;
     static string? ISchemaClass<CVMixAutomaticControlInput>.ClassName => null;
 
 
     public string Name { get; set; }
 
-    public ref int ControlInputIndex { get; }
+    public ref int GraphInputIndex { get; }
 
-    public ref bool IsTrackSend { get; }
-
-    public ref bool IsStackVar { get; }
+    public ref VMixAutoControlType_t ControlType { get; }
 
 
 }

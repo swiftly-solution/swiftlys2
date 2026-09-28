@@ -18,56 +18,64 @@ internal static class NativeMemoryHelpers
     /// </summary>
     public unsafe static nint FetchInterfaceByName(string ifaceName)
     {
-        return StringAlloc.CreateCString(ifaceName, ifaceNameBufferPtr =>
+        using var ifaceNameStr = new ScopedCString(ifaceName);
+        fixed (byte* ifaceNameBufferPtr = ifaceNameStr)
         {
-            var ret = _FetchInterfaceByName((byte*)ifaceNameBufferPtr);
+            var ret = _FetchInterfaceByName(ifaceNameBufferPtr);
             return ret;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, byte*, nint> _GetVirtualTableAddress;
 
     public unsafe static nint GetVirtualTableAddress(string library, string vtableName)
     {
-        return StringAlloc.CreateCString(library, libraryBufferPtr =>
+        using var libraryStr = new ScopedCString(library);
+        using var vtableNameStr = new ScopedCString(vtableName);
+        fixed (byte* libraryBufferPtr = libraryStr)
         {
-            return StringAlloc.CreateCString(vtableName, vtableNameBufferPtr =>
+            fixed (byte* vtableNameBufferPtr = vtableNameStr)
             {
-                var ret = _GetVirtualTableAddress((byte*)libraryBufferPtr, (byte*)vtableNameBufferPtr);
+                var ret = _GetVirtualTableAddress(libraryBufferPtr, vtableNameBufferPtr);
                 return ret;
-            });
-        });
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, byte*, byte*, nint> _GetVirtualTableAddressNested2;
 
     public unsafe static nint GetVirtualTableAddressNested2(string library, string class1, string class2)
     {
-        return StringAlloc.CreateCString(library, libraryBufferPtr =>
+        using var libraryStr = new ScopedCString(library);
+        using var class1Str = new ScopedCString(class1);
+        using var class2Str = new ScopedCString(class2);
+        fixed (byte* libraryBufferPtr = libraryStr)
         {
-            return StringAlloc.CreateCString(class1, class1BufferPtr =>
+            fixed (byte* class1BufferPtr = class1Str)
             {
-                return StringAlloc.CreateCString(class2, class2BufferPtr =>
+                fixed (byte* class2BufferPtr = class2Str)
                 {
-                    var ret = _GetVirtualTableAddressNested2((byte*)libraryBufferPtr, (byte*)class1BufferPtr, (byte*)class2BufferPtr);
+                    var ret = _GetVirtualTableAddressNested2(libraryBufferPtr, class1BufferPtr, class2BufferPtr);
                     return ret;
-                });
-            });
-        });
+                }
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, byte*, int, byte, nint> _GetAddressBySignature;
 
     public unsafe static nint GetAddressBySignature(string library, string sig, int len, bool rawBytes)
     {
-        return StringAlloc.CreateCString(library, libraryBufferPtr =>
+        using var libraryStr = new ScopedCString(library);
+        using var sigStr = new ScopedCString(sig);
+        fixed (byte* libraryBufferPtr = libraryStr)
         {
-            return StringAlloc.CreateCString(sig, sigBufferPtr =>
+            fixed (byte* sigBufferPtr = sigStr)
             {
-                var ret = _GetAddressBySignature((byte*)libraryBufferPtr, (byte*)sigBufferPtr, len, rawBytes ? (byte)1 : (byte)0);
+                var ret = _GetAddressBySignature(libraryBufferPtr, sigBufferPtr, len, rawBytes ? (byte)1 : (byte)0);
                 return ret;
-            });
-        });
+            }
+        }
     }
 
     private unsafe static delegate* unmanaged<int*, nint, byte*> _GetObjectPtrVtableName;
@@ -93,10 +101,11 @@ internal static class NativeMemoryHelpers
 
     public unsafe static bool ObjectPtrHasBaseClass(nint objptr, string baseClassName)
     {
-        return StringAlloc.CreateCString(baseClassName, baseClassNameBufferPtr =>
+        using var baseClassNameStr = new ScopedCString(baseClassName);
+        fixed (byte* baseClassNameBufferPtr = baseClassNameStr)
         {
-            var ret = _ObjectPtrHasBaseClass(objptr, (byte*)baseClassNameBufferPtr);
+            var ret = _ObjectPtrHasBaseClass(objptr, baseClassNameBufferPtr);
             return ret == 1;
-        });
+        }
     }
 }

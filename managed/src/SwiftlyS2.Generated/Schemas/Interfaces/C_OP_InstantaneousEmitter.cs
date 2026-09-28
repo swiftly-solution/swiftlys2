@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_InstantaneousEmitter : CParticleFunctionEmitter, ISchemaClass<C_OP_InstantaneousEmitter>
 {
     static C_OP_InstantaneousEmitter ISchemaClass<C_OP_InstantaneousEmitter>.From(nint handle) => new C_OP_InstantaneousEmitterImpl(handle);
-    static int ISchemaClass<C_OP_InstantaneousEmitter>.Size => 1608;
+    static int ISchemaClass<C_OP_InstantaneousEmitter>.Size => 1640;
     static string? ISchemaClass<C_OP_InstantaneousEmitter>.ClassName => null;
 
 

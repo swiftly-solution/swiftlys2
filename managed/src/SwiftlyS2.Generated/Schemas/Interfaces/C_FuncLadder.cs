@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_FuncLadder : C_BaseModelEntity, ISchemaClass<C_FuncLadder>
 {
     static C_FuncLadder ISchemaClass<C_FuncLadder>.From(nint handle) => new C_FuncLadderImpl(handle);
-    static int ISchemaClass<C_FuncLadder>.Size => 4104;
+    static int ISchemaClass<C_FuncLadder>.Size => 4336;
     static string? ISchemaClass<C_FuncLadder>.ClassName => null;
 
 

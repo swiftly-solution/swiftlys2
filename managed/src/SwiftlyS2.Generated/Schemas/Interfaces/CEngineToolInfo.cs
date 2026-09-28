@@ -21,6 +21,8 @@ public partial interface CEngineToolInfo : CBaseToolInfo, ISchemaClass<CEngineTo
 
     public ref bool ShowInRevisionSubMenu { get; }
 
+    public ref bool ShowInToolsMenu { get; }
+
     public ref bool IsSecondaryTool { get; }
 
     public ref bool DoNotWarnAboutLargeAssetBatches { get; }

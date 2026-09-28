@@ -3019,6 +3019,46 @@ internal sealed partial class GameHooksService
         }
     }
 
+    internal void InvokeCEntityFlameFlameThinkPre(ref CEntityFlameFlameThinkPreContext ctx)
+    {
+        if (!DatamapsHook.CEntityFlameHook.CEntityFlameFlameThinkHook.HasPreListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CEntityFlameHook.CEntityFlameFlameThinkHook.InvokePre(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CEntityFlame::FlameThink::Pre.");
+            }
+        }
+    }
+
+    internal void InvokeCEntityFlameFlameThinkPost(ref CEntityFlameFlameThinkPostContext ctx)
+    {
+        if (!DatamapsHook.CEntityFlameHook.CEntityFlameFlameThinkHook.HasPostListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CEntityFlameHook.CEntityFlameFlameThinkHook.InvokePost(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CEntityFlame::FlameThink::Post.");
+            }
+        }
+    }
+
     internal void InvokeCEnvBeamStrikeThinkPre(ref CEnvBeamStrikeThinkPreContext ctx)
     {
         if (!DatamapsHook.CEnvBeamHook.CEnvBeamStrikeThinkHook.HasPreListeners)
@@ -3255,46 +3295,6 @@ internal sealed partial class GameHooksService
             if (GlobalExceptionHandler.Handle(ref e))
             {
                 logger.LogError(e, "Error invoking GameHooks::Datamaps::CEnvWind::WindThink::Post.");
-            }
-        }
-    }
-
-    internal void InvokeCEnvWindControllerWindThinkPre(ref CEnvWindControllerWindThinkPreContext ctx)
-    {
-        if (!DatamapsHook.CEnvWindControllerHook.CEnvWindControllerWindThinkHook.HasPreListeners)
-        {
-            return;
-        }
-
-        try
-        {
-            DatamapsHook.CEnvWindControllerHook.CEnvWindControllerWindThinkHook.InvokePre(ref ctx);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CEnvWindController::WindThink::Pre.");
-            }
-        }
-    }
-
-    internal void InvokeCEnvWindControllerWindThinkPost(ref CEnvWindControllerWindThinkPostContext ctx)
-    {
-        if (!DatamapsHook.CEnvWindControllerHook.CEnvWindControllerWindThinkHook.HasPostListeners)
-        {
-            return;
-        }
-
-        try
-        {
-            DatamapsHook.CEnvWindControllerHook.CEnvWindControllerWindThinkHook.InvokePost(ref ctx);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CEnvWindController::WindThink::Post.");
             }
         }
     }
@@ -4219,6 +4219,46 @@ internal sealed partial class GameHooksService
         }
     }
 
+    internal void InvokeCFuncTrainControlsFindPre(ref CFuncTrainControlsFindPreContext ctx)
+    {
+        if (!DatamapsHook.CFuncTrainControlsHook.CFuncTrainControlsFindHook.HasPreListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CFuncTrainControlsHook.CFuncTrainControlsFindHook.InvokePre(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncTrainControls::Find::Pre.");
+            }
+        }
+    }
+
+    internal void InvokeCFuncTrainControlsFindPost(ref CFuncTrainControlsFindPostContext ctx)
+    {
+        if (!DatamapsHook.CFuncTrainControlsHook.CFuncTrainControlsFindHook.HasPostListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CFuncTrainControlsHook.CFuncTrainControlsFindHook.InvokePost(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncTrainControls::Find::Post.");
+            }
+        }
+    }
+
     internal void InvokeCGenericConstraintUpdateThinkPre(ref CGenericConstraintUpdateThinkPreContext ctx)
     {
         if (!DatamapsHook.CGenericConstraintHook.CGenericConstraintUpdateThinkHook.HasPreListeners)
@@ -4859,6 +4899,86 @@ internal sealed partial class GameHooksService
         }
     }
 
+    internal void InvokeCItemGenericTriggerHelperItemGenericTriggerHelperTouchPre(ref CItemGenericTriggerHelperItemGenericTriggerHelperTouchPreContext ctx)
+    {
+        if (!DatamapsHook.CItemGenericTriggerHelperHook.CItemGenericTriggerHelperItemGenericTriggerHelperTouchHook.HasPreListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CItemGenericTriggerHelperHook.CItemGenericTriggerHelperItemGenericTriggerHelperTouchHook.InvokePre(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CItemGenericTriggerHelper::ItemGenericTriggerHelperTouch::Pre.");
+            }
+        }
+    }
+
+    internal void InvokeCItemGenericTriggerHelperItemGenericTriggerHelperTouchPost(ref CItemGenericTriggerHelperItemGenericTriggerHelperTouchPostContext ctx)
+    {
+        if (!DatamapsHook.CItemGenericTriggerHelperHook.CItemGenericTriggerHelperItemGenericTriggerHelperTouchHook.HasPostListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CItemGenericTriggerHelperHook.CItemGenericTriggerHelperItemGenericTriggerHelperTouchHook.InvokePost(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CItemGenericTriggerHelper::ItemGenericTriggerHelperTouch::Post.");
+            }
+        }
+    }
+
+    internal void InvokeCItemSodaCanThinkPre(ref CItemSodaCanThinkPreContext ctx)
+    {
+        if (!DatamapsHook.CItemSodaHook.CItemSodaCanThinkHook.HasPreListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CItemSodaHook.CItemSodaCanThinkHook.InvokePre(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CItemSoda::CanThink::Pre.");
+            }
+        }
+    }
+
+    internal void InvokeCItemSodaCanThinkPost(ref CItemSodaCanThinkPostContext ctx)
+    {
+        if (!DatamapsHook.CItemSodaHook.CItemSodaCanThinkHook.HasPostListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CItemSodaHook.CItemSodaCanThinkHook.InvokePost(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CItemSoda::CanThink::Post.");
+            }
+        }
+    }
+
     internal void InvokeCLogicActiveAutosaveSaveThinkPre(ref CLogicActiveAutosaveSaveThinkPreContext ctx)
     {
         if (!DatamapsHook.CLogicActiveAutosaveHook.CLogicActiveAutosaveSaveThinkHook.HasPreListeners)
@@ -5419,6 +5539,46 @@ internal sealed partial class GameHooksService
         }
     }
 
+    internal void InvokeCPathMoverEntitySpawnerDebugThinkPre(ref CPathMoverEntitySpawnerDebugThinkPreContext ctx)
+    {
+        if (!DatamapsHook.CPathMoverEntitySpawnerHook.CPathMoverEntitySpawnerDebugThinkHook.HasPreListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CPathMoverEntitySpawnerHook.CPathMoverEntitySpawnerDebugThinkHook.InvokePre(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPathMoverEntitySpawner::DebugThink::Pre.");
+            }
+        }
+    }
+
+    internal void InvokeCPathMoverEntitySpawnerDebugThinkPost(ref CPathMoverEntitySpawnerDebugThinkPostContext ctx)
+    {
+        if (!DatamapsHook.CPathMoverEntitySpawnerHook.CPathMoverEntitySpawnerDebugThinkHook.HasPostListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CPathMoverEntitySpawnerHook.CPathMoverEntitySpawnerDebugThinkHook.InvokePost(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPathMoverEntitySpawner::DebugThink::Post.");
+            }
+        }
+    }
+
     internal void InvokeCPathMoverEntitySpawnerSpawnThinkPre(ref CPathMoverEntitySpawnerSpawnThinkPreContext ctx)
     {
         if (!DatamapsHook.CPathMoverEntitySpawnerHook.CPathMoverEntitySpawnerSpawnThinkHook.HasPreListeners)
@@ -5775,6 +5935,326 @@ internal sealed partial class GameHooksService
             if (GlobalExceptionHandler.Handle(ref e))
             {
                 logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysSlideConstraint::SoundThink::Post.");
+            }
+        }
+    }
+
+    internal void InvokeCPhysicalButtonButtonActivatePre(ref CPhysicalButtonButtonActivatePreContext ctx)
+    {
+        if (!DatamapsHook.CPhysicalButtonHook.CPhysicalButtonButtonActivateHook.HasPreListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CPhysicalButtonHook.CPhysicalButtonButtonActivateHook.InvokePre(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::ButtonActivate::Pre.");
+            }
+        }
+    }
+
+    internal void InvokeCPhysicalButtonButtonActivatePost(ref CPhysicalButtonButtonActivatePostContext ctx)
+    {
+        if (!DatamapsHook.CPhysicalButtonHook.CPhysicalButtonButtonActivateHook.HasPostListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CPhysicalButtonHook.CPhysicalButtonButtonActivateHook.InvokePost(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::ButtonActivate::Post.");
+            }
+        }
+    }
+
+    internal void InvokeCPhysicalButtonButtonBackHomePre(ref CPhysicalButtonButtonBackHomePreContext ctx)
+    {
+        if (!DatamapsHook.CPhysicalButtonHook.CPhysicalButtonButtonBackHomeHook.HasPreListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CPhysicalButtonHook.CPhysicalButtonButtonBackHomeHook.InvokePre(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::ButtonBackHome::Pre.");
+            }
+        }
+    }
+
+    internal void InvokeCPhysicalButtonButtonBackHomePost(ref CPhysicalButtonButtonBackHomePostContext ctx)
+    {
+        if (!DatamapsHook.CPhysicalButtonHook.CPhysicalButtonButtonBackHomeHook.HasPostListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CPhysicalButtonHook.CPhysicalButtonButtonBackHomeHook.InvokePost(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::ButtonBackHome::Post.");
+            }
+        }
+    }
+
+    internal void InvokeCPhysicalButtonButtonReturnPre(ref CPhysicalButtonButtonReturnPreContext ctx)
+    {
+        if (!DatamapsHook.CPhysicalButtonHook.CPhysicalButtonButtonReturnHook.HasPreListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CPhysicalButtonHook.CPhysicalButtonButtonReturnHook.InvokePre(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::ButtonReturn::Pre.");
+            }
+        }
+    }
+
+    internal void InvokeCPhysicalButtonButtonReturnPost(ref CPhysicalButtonButtonReturnPostContext ctx)
+    {
+        if (!DatamapsHook.CPhysicalButtonHook.CPhysicalButtonButtonReturnHook.HasPostListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CPhysicalButtonHook.CPhysicalButtonButtonReturnHook.InvokePost(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::ButtonReturn::Post.");
+            }
+        }
+    }
+
+    internal void InvokeCPhysicalButtonButtonTouchPre(ref CPhysicalButtonButtonTouchPreContext ctx)
+    {
+        if (!DatamapsHook.CPhysicalButtonHook.CPhysicalButtonButtonTouchHook.HasPreListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CPhysicalButtonHook.CPhysicalButtonButtonTouchHook.InvokePre(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::ButtonTouch::Pre.");
+            }
+        }
+    }
+
+    internal void InvokeCPhysicalButtonButtonTouchPost(ref CPhysicalButtonButtonTouchPostContext ctx)
+    {
+        if (!DatamapsHook.CPhysicalButtonHook.CPhysicalButtonButtonTouchHook.HasPostListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CPhysicalButtonHook.CPhysicalButtonButtonTouchHook.InvokePost(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::ButtonTouch::Post.");
+            }
+        }
+    }
+
+    internal void InvokeCPhysicalButtonEndTouchPre(ref CPhysicalButtonEndTouchPreContext ctx)
+    {
+        if (!DatamapsHook.CPhysicalButtonHook.CPhysicalButtonEndTouchHook.HasPreListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CPhysicalButtonHook.CPhysicalButtonEndTouchHook.InvokePre(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::EndTouch::Pre.");
+            }
+        }
+    }
+
+    internal void InvokeCPhysicalButtonEndTouchPost(ref CPhysicalButtonEndTouchPostContext ctx)
+    {
+        if (!DatamapsHook.CPhysicalButtonHook.CPhysicalButtonEndTouchHook.HasPostListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CPhysicalButtonHook.CPhysicalButtonEndTouchHook.InvokePost(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::EndTouch::Post.");
+            }
+        }
+    }
+
+    internal void InvokeCPhysicalButtonPhysicsThinkPre(ref CPhysicalButtonPhysicsThinkPreContext ctx)
+    {
+        if (!DatamapsHook.CPhysicalButtonHook.CPhysicalButtonPhysicsThinkHook.HasPreListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CPhysicalButtonHook.CPhysicalButtonPhysicsThinkHook.InvokePre(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::PhysicsThink::Pre.");
+            }
+        }
+    }
+
+    internal void InvokeCPhysicalButtonPhysicsThinkPost(ref CPhysicalButtonPhysicsThinkPostContext ctx)
+    {
+        if (!DatamapsHook.CPhysicalButtonHook.CPhysicalButtonPhysicsThinkHook.HasPostListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CPhysicalButtonHook.CPhysicalButtonPhysicsThinkHook.InvokePost(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::PhysicsThink::Post.");
+            }
+        }
+    }
+
+    internal void InvokeCPhysicalButtonSetupButtonPre(ref CPhysicalButtonSetupButtonPreContext ctx)
+    {
+        if (!DatamapsHook.CPhysicalButtonHook.CPhysicalButtonSetupButtonHook.HasPreListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CPhysicalButtonHook.CPhysicalButtonSetupButtonHook.InvokePre(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::SetupButton::Pre.");
+            }
+        }
+    }
+
+    internal void InvokeCPhysicalButtonSetupButtonPost(ref CPhysicalButtonSetupButtonPostContext ctx)
+    {
+        if (!DatamapsHook.CPhysicalButtonHook.CPhysicalButtonSetupButtonHook.HasPostListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CPhysicalButtonHook.CPhysicalButtonSetupButtonHook.InvokePost(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::SetupButton::Post.");
+            }
+        }
+    }
+
+    internal void InvokeCPhysicalButtonTriggerAndWaitPre(ref CPhysicalButtonTriggerAndWaitPreContext ctx)
+    {
+        if (!DatamapsHook.CPhysicalButtonHook.CPhysicalButtonTriggerAndWaitHook.HasPreListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CPhysicalButtonHook.CPhysicalButtonTriggerAndWaitHook.InvokePre(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::TriggerAndWait::Pre.");
+            }
+        }
+    }
+
+    internal void InvokeCPhysicalButtonTriggerAndWaitPost(ref CPhysicalButtonTriggerAndWaitPostContext ctx)
+    {
+        if (!DatamapsHook.CPhysicalButtonHook.CPhysicalButtonTriggerAndWaitHook.HasPostListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CPhysicalButtonHook.CPhysicalButtonTriggerAndWaitHook.InvokePost(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::TriggerAndWait::Post.");
             }
         }
     }
@@ -6779,6 +7259,46 @@ internal sealed partial class GameHooksService
         }
     }
 
+    internal void InvokeCSoundEventMultiPointEntityMultiPointThinkPre(ref CSoundEventMultiPointEntityMultiPointThinkPreContext ctx)
+    {
+        if (!DatamapsHook.CSoundEventMultiPointEntityHook.CSoundEventMultiPointEntityMultiPointThinkHook.HasPreListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CSoundEventMultiPointEntityHook.CSoundEventMultiPointEntityMultiPointThinkHook.InvokePre(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundEventMultiPointEntity::MultiPointThink::Pre.");
+            }
+        }
+    }
+
+    internal void InvokeCSoundEventMultiPointEntityMultiPointThinkPost(ref CSoundEventMultiPointEntityMultiPointThinkPostContext ctx)
+    {
+        if (!DatamapsHook.CSoundEventMultiPointEntityHook.CSoundEventMultiPointEntityMultiPointThinkHook.HasPostListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CSoundEventMultiPointEntityHook.CSoundEventMultiPointEntityMultiPointThinkHook.InvokePost(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundEventMultiPointEntity::MultiPointThink::Post.");
+            }
+        }
+    }
+
     internal void InvokeCSoundEventOBBEntitySoundEventOBBThinkPre(ref CSoundEventOBBEntitySoundEventOBBThinkPreContext ctx)
     {
         if (!DatamapsHook.CSoundEventOBBEntityHook.CSoundEventOBBEntitySoundEventOBBThinkHook.HasPreListeners)
@@ -6815,46 +7335,6 @@ internal sealed partial class GameHooksService
             if (GlobalExceptionHandler.Handle(ref e))
             {
                 logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundEventOBBEntity::SoundEventOBBThink::Post.");
-            }
-        }
-    }
-
-    internal void InvokeCSoundEventPathCornerEntitySoundEventPathCornerThinkPre(ref CSoundEventPathCornerEntitySoundEventPathCornerThinkPreContext ctx)
-    {
-        if (!DatamapsHook.CSoundEventPathCornerEntityHook.CSoundEventPathCornerEntitySoundEventPathCornerThinkHook.HasPreListeners)
-        {
-            return;
-        }
-
-        try
-        {
-            DatamapsHook.CSoundEventPathCornerEntityHook.CSoundEventPathCornerEntitySoundEventPathCornerThinkHook.InvokePre(ref ctx);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundEventPathCornerEntity::SoundEventPathCornerThink::Pre.");
-            }
-        }
-    }
-
-    internal void InvokeCSoundEventPathCornerEntitySoundEventPathCornerThinkPost(ref CSoundEventPathCornerEntitySoundEventPathCornerThinkPostContext ctx)
-    {
-        if (!DatamapsHook.CSoundEventPathCornerEntityHook.CSoundEventPathCornerEntitySoundEventPathCornerThinkHook.HasPostListeners)
-        {
-            return;
-        }
-
-        try
-        {
-            DatamapsHook.CSoundEventPathCornerEntityHook.CSoundEventPathCornerEntitySoundEventPathCornerThinkHook.InvokePost(ref ctx);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundEventPathCornerEntity::SoundEventPathCornerThink::Post.");
             }
         }
     }
@@ -6975,6 +7455,46 @@ internal sealed partial class GameHooksService
             if (GlobalExceptionHandler.Handle(ref e))
             {
                 logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundOpvarSetBoxEntity::SetOpvarThink::Post.");
+            }
+        }
+    }
+
+    internal void InvokeCSoundOpvarSetDomeEntitySetOpvarThinkPre(ref CSoundOpvarSetDomeEntitySetOpvarThinkPreContext ctx)
+    {
+        if (!DatamapsHook.CSoundOpvarSetDomeEntityHook.CSoundOpvarSetDomeEntitySetOpvarThinkHook.HasPreListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CSoundOpvarSetDomeEntityHook.CSoundOpvarSetDomeEntitySetOpvarThinkHook.InvokePre(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundOpvarSetDomeEntity::SetOpvarThink::Pre.");
+            }
+        }
+    }
+
+    internal void InvokeCSoundOpvarSetDomeEntitySetOpvarThinkPost(ref CSoundOpvarSetDomeEntitySetOpvarThinkPostContext ctx)
+    {
+        if (!DatamapsHook.CSoundOpvarSetDomeEntityHook.CSoundOpvarSetDomeEntitySetOpvarThinkHook.HasPostListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CSoundOpvarSetDomeEntityHook.CSoundOpvarSetDomeEntitySetOpvarThinkHook.InvokePost(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundOpvarSetDomeEntity::SetOpvarThink::Post.");
             }
         }
     }
@@ -7415,6 +7935,46 @@ internal sealed partial class GameHooksService
             if (GlobalExceptionHandler.Handle(ref e))
             {
                 logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerFan::PushThink::Post.");
+            }
+        }
+    }
+
+    internal void InvokeCTriggerGravityGravityTouchPre(ref CTriggerGravityGravityTouchPreContext ctx)
+    {
+        if (!DatamapsHook.CTriggerGravityHook.CTriggerGravityGravityTouchHook.HasPreListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CTriggerGravityHook.CTriggerGravityGravityTouchHook.InvokePre(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerGravity::GravityTouch::Pre.");
+            }
+        }
+    }
+
+    internal void InvokeCTriggerGravityGravityTouchPost(ref CTriggerGravityGravityTouchPostContext ctx)
+    {
+        if (!DatamapsHook.CTriggerGravityHook.CTriggerGravityGravityTouchHook.HasPostListeners)
+        {
+            return;
+        }
+
+        try
+        {
+            DatamapsHook.CTriggerGravityHook.CTriggerGravityGravityTouchHook.InvokePost(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerGravity::GravityTouch::Post.");
             }
         }
     }

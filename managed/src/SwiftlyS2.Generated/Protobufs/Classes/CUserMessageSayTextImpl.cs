@@ -18,4 +18,6 @@ internal class CUserMessageSayTextImpl : NetMessage<CUserMessageSayText>, CUserM
     { get => Accessor.GetString("text"); set => Accessor.SetString("text", value); }
     public bool Chat
     { get => Accessor.GetBool("chat"); set => Accessor.SetBool("chat", value); }
+    public bool Textallchat
+    { get => Accessor.GetBool("textallchat"); set => Accessor.SetBool("textallchat", value); }
 }

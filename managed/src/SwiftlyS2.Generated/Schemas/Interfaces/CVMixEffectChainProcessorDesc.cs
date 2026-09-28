@@ -11,11 +11,13 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVMixEffectChainProcessorDesc : CVMixBaseProcessorDesc, ISchemaClass<CVMixEffectChainProcessorDesc>
 {
     static CVMixEffectChainProcessorDesc ISchemaClass<CVMixEffectChainProcessorDesc>.From(nint handle) => new CVMixEffectChainProcessorDescImpl(handle);
-    static int ISchemaClass<CVMixEffectChainProcessorDesc>.Size => 40;
+    static int ISchemaClass<CVMixEffectChainProcessorDesc>.Size => 56;
     static string? ISchemaClass<CVMixEffectChainProcessorDesc>.ClassName => null;
 
 
     public VMixEffectChainDesc_t Desc { get; }
+
+    public CVMixParameterEffectName ParamEffectName { get; }
 
 
 }

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RenderStatusEffectCitadel : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderStatusEffectCitadel>
 {
     static C_OP_RenderStatusEffectCitadel ISchemaClass<C_OP_RenderStatusEffectCitadel>.From(nint handle) => new C_OP_RenderStatusEffectCitadelImpl(handle);
-    static int ISchemaClass<C_OP_RenderStatusEffectCitadel>.Size => 600;
+    static int ISchemaClass<C_OP_RenderStatusEffectCitadel>.Size => 608;
     static string? ISchemaClass<C_OP_RenderStatusEffectCitadel>.ClassName => null;
 
 

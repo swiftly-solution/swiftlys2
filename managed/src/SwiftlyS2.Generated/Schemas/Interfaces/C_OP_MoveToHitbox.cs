@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_MoveToHitbox : CParticleFunctionOperator, ISchemaClass<C_OP_MoveToHitbox>
 {
     static C_OP_MoveToHitbox ISchemaClass<C_OP_MoveToHitbox>.From(nint handle) => new C_OP_MoveToHitboxImpl(handle);
-    static int ISchemaClass<C_OP_MoveToHitbox>.Size => 1192;
+    static int ISchemaClass<C_OP_MoveToHitbox>.Size => 1208;
     static string? ISchemaClass<C_OP_MoveToHitbox>.ClassName => null;
 
 

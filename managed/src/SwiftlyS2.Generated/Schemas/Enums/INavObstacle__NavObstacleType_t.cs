@@ -11,4 +11,5 @@ public enum INavObstacle__NavObstacleType_t : uint
     NAV_OBSTACLE_TYPE_AVOID = 1,
     NAV_OBSTACLE_TYPE_CONN = 2,
     NAV_OBSTACLE_TYPE_BLOCK = 3,
+    NAV_OBSTACLE_TYPE_PERMANENT_BLOCK = 4,
 }

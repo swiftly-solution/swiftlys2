@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RemapControlPointOrientationToRotation : CParticleFunctionOperator, ISchemaClass<C_OP_RemapControlPointOrientationToRotation>
 {
     static C_OP_RemapControlPointOrientationToRotation ISchemaClass<C_OP_RemapControlPointOrientationToRotation>.From(nint handle) => new C_OP_RemapControlPointOrientationToRotationImpl(handle);
-    static int ISchemaClass<C_OP_RemapControlPointOrientationToRotation>.Size => 488;
+    static int ISchemaClass<C_OP_RemapControlPointOrientationToRotation>.Size => 496;
     static string? ISchemaClass<C_OP_RemapControlPointOrientationToRotation>.ClassName => null;
 
 

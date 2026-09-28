@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CParticleFunctionConstraint : CParticleFunction, ISchemaClass<CParticleFunctionConstraint>
 {
     static CParticleFunctionConstraint ISchemaClass<CParticleFunctionConstraint>.From(nint handle) => new CParticleFunctionConstraintImpl(handle);
-    static int ISchemaClass<CParticleFunctionConstraint>.Size => 472;
+    static int ISchemaClass<CParticleFunctionConstraint>.Size => 480;
     static string? ISchemaClass<CParticleFunctionConstraint>.ClassName => null;
 
 }

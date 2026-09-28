@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmOrientationWarpNode__CDefinition : CNmPoseNode__CDefinition, ISchemaClass<CNmOrientationWarpNode__CDefinition>
 {
     static CNmOrientationWarpNode__CDefinition ISchemaClass<CNmOrientationWarpNode__CDefinition>.From(nint handle) => new CNmOrientationWarpNode__CDefinitionImpl(handle);
-    static int ISchemaClass<CNmOrientationWarpNode__CDefinition>.Size => 24;
+    static int ISchemaClass<CNmOrientationWarpNode__CDefinition>.Size => 32;
     static string? ISchemaClass<CNmOrientationWarpNode__CDefinition>.ClassName => null;
 
 
@@ -24,6 +24,8 @@ public partial interface CNmOrientationWarpNode__CDefinition : CNmPoseNode__CDef
     public ref bool IsOffsetRelativeToCharacter { get; }
 
     public ref bool WarpTranslation { get; }
+
+    public ref CNmOrientationWarpNode__AlignmentMode_t AlignmentMode { get; }
 
     public ref CNmRootMotionData__SamplingMode_t SamplingMode { get; }
 

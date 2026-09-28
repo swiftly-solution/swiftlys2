@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_NormalOffset : CParticleFunctionInitializer, ISchemaClass<C_INIT_NormalOffset>
 {
     static C_INIT_NormalOffset ISchemaClass<C_INIT_NormalOffset>.From(nint handle) => new C_INIT_NormalOffsetImpl(handle);
-    static int ISchemaClass<C_INIT_NormalOffset>.Size => 512;
+    static int ISchemaClass<C_INIT_NormalOffset>.Size => 520;
     static string? ISchemaClass<C_INIT_NormalOffset>.ClassName => null;
 
 

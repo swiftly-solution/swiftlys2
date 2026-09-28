@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_INIT_RemapNamedModelMeshGroupToScalar : C_INIT_RemapNamedModelElementToScalar, ISchemaClass<C_INIT_RemapNamedModelMeshGroupToScalar>
 {
     static C_INIT_RemapNamedModelMeshGroupToScalar ISchemaClass<C_INIT_RemapNamedModelMeshGroupToScalar>.From(nint handle) => new C_INIT_RemapNamedModelMeshGroupToScalarImpl(handle);
-    static int ISchemaClass<C_INIT_RemapNamedModelMeshGroupToScalar>.Size => 552;
+    static int ISchemaClass<C_INIT_RemapNamedModelMeshGroupToScalar>.Size => 560;
     static string? ISchemaClass<C_INIT_RemapNamedModelMeshGroupToScalar>.ClassName => null;
 
 }

@@ -29,5 +29,44 @@ internal partial class CVMixFlangerProcessorDescImpl : CVMixBaseProcessorDescImp
             return instance;
         }
     }
+    private static nint? _ParamDelayOffset;
+    private CVMixParameterFloatImpl? _ParamDelayInstance;
+
+    public CVMixParameterFloat ParamDelay
+    {
+        get
+        {
+            _ParamDelayOffset = _ParamDelayOffset ?? Schema.GetOffset(0x3FA67F84CA358765);
+            var instance = _ParamDelayInstance ??= new CVMixParameterFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamDelayOffset!.Value);
+            return instance;
+        }
+    }
+    private static nint? _ParamModRateOffset;
+    private CVMixParameterFloatImpl? _ParamModRateInstance;
+
+    public CVMixParameterFloat ParamModRate
+    {
+        get
+        {
+            _ParamModRateOffset = _ParamModRateOffset ?? Schema.GetOffset(0x3FA67F84082299A4);
+            var instance = _ParamModRateInstance ??= new CVMixParameterFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamModRateOffset!.Value);
+            return instance;
+        }
+    }
+    private static nint? _ParamModDepthOffset;
+    private CVMixParameterFloatImpl? _ParamModDepthInstance;
+
+    public CVMixParameterFloat ParamModDepth
+    {
+        get
+        {
+            _ParamModDepthOffset = _ParamModDepthOffset ?? Schema.GetOffset(0x3FA67F84D9B8C77F);
+            var instance = _ParamModDepthInstance ??= new CVMixParameterFloatImpl(0);
+            instance.DangerousSetHandle(_Handle + _ParamModDepthOffset!.Value);
+            return instance;
+        }
+    }
 
 }

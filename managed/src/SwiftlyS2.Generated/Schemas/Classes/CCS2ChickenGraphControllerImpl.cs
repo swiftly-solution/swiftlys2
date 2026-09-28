@@ -39,44 +39,14 @@ internal partial class CCS2ChickenGraphControllerImpl : CAnimGraphControllerBase
             return instance;
         }
     }
-    private static nint? _IdleVariationOffset;
+    private static nint? _ActionVariationOffset;
 
-    public ref CAnimGraph2ParamOptionalRefFloat IdleVariation
+    public ref CAnimGraph2ParamOptionalRefFloat ActionVariation
     {
         get
         {
-            _IdleVariationOffset = _IdleVariationOffset ?? Schema.GetOffset(0xC887F157CF0EF118);
-            return ref _Handle.AsRef<CAnimGraph2ParamOptionalRefFloat>(_IdleVariationOffset!.Value);
-        }
-    }
-    private static nint? _RunVariationOffset;
-
-    public ref CAnimGraph2ParamOptionalRefFloat RunVariation
-    {
-        get
-        {
-            _RunVariationOffset = _RunVariationOffset ?? Schema.GetOffset(0xC887F1575E32595B);
-            return ref _Handle.AsRef<CAnimGraph2ParamOptionalRefFloat>(_RunVariationOffset!.Value);
-        }
-    }
-    private static nint? _PanicVariationOffset;
-
-    public ref CAnimGraph2ParamOptionalRefFloat PanicVariation
-    {
-        get
-        {
-            _PanicVariationOffset = _PanicVariationOffset ?? Schema.GetOffset(0xC887F157802F1EA1);
-            return ref _Handle.AsRef<CAnimGraph2ParamOptionalRefFloat>(_PanicVariationOffset!.Value);
-        }
-    }
-    private static nint? _SquatVariationOffset;
-
-    public ref CAnimGraph2ParamOptionalRefFloat SquatVariation
-    {
-        get
-        {
-            _SquatVariationOffset = _SquatVariationOffset ?? Schema.GetOffset(0xC887F15791127162);
-            return ref _Handle.AsRef<CAnimGraph2ParamOptionalRefFloat>(_SquatVariationOffset!.Value);
+            _ActionVariationOffset = _ActionVariationOffset ?? Schema.GetOffset(0xC887F15766ADE45C);
+            return ref _Handle.AsRef<CAnimGraph2ParamOptionalRefFloat>(_ActionVariationOffset!.Value);
         }
     }
     private static nint? _InWaterOffset;
@@ -89,6 +59,89 @@ internal partial class CCS2ChickenGraphControllerImpl : CAnimGraphControllerBase
             return ref _Handle.AsRef<CAnimGraph2ParamOptionalRefBool>(_InWaterOffset!.Value);
         }
     }
+    private static nint? _ModeOffset;
+
+    public ref CAnimGraph2ParamOptionalRefCGlobalSymbol Mode
+    {
+        get
+        {
+            _ModeOffset = _ModeOffset ?? Schema.GetOffset(0xC887F15790FD5BB2);
+            return ref _Handle.AsRef<CAnimGraph2ParamOptionalRefCGlobalSymbol>(_ModeOffset!.Value);
+        }
+    }
+    private static nint? _LifeStageOffset;
+
+    public ref CAnimGraph2ParamOptionalRefCGlobalSymbol LifeStage
+    {
+        get
+        {
+            _LifeStageOffset = _LifeStageOffset ?? Schema.GetOffset(0xC887F1570C64458B);
+            return ref _Handle.AsRef<CAnimGraph2ParamOptionalRefCGlobalSymbol>(_LifeStageOffset!.Value);
+        }
+    }
+    private static nint? _IdlePhaseOffset;
+
+    public ref CAnimGraph2ParamOptionalRefFloat IdlePhase
+    {
+        get
+        {
+            _IdlePhaseOffset = _IdlePhaseOffset ?? Schema.GetOffset(0xC887F157DC9A63DE);
+            return ref _Handle.AsRef<CAnimGraph2ParamOptionalRefFloat>(_IdlePhaseOffset!.Value);
+        }
+    }
+    private static nint? _TurnAngleOffset;
+
+    public ref CAnimGraph2ParamOptionalRefFloat TurnAngle
+    {
+        get
+        {
+            _TurnAngleOffset = _TurnAngleOffset ?? Schema.GetOffset(0xC887F157A2008A79);
+            return ref _Handle.AsRef<CAnimGraph2ParamOptionalRefFloat>(_TurnAngleOffset!.Value);
+        }
+    }
+    private static nint? _HasLookatTargetOffset;
+
+    public ref CAnimGraph2ParamOptionalRefBool HasLookatTarget
+    {
+        get
+        {
+            _HasLookatTargetOffset = _HasLookatTargetOffset ?? Schema.GetOffset(0xC887F157636503F8);
+            return ref _Handle.AsRef<CAnimGraph2ParamOptionalRefBool>(_HasLookatTargetOffset!.Value);
+        }
+    }
+    private static nint? _LookatTargetOffset;
+    private SchemaUntypedField? _LookatTargetInstance;
+
+    public SchemaUntypedField LookatTarget
+    {
+        get
+        {
+            _LookatTargetOffset = _LookatTargetOffset ?? Schema.GetOffset(0xC887F157BD59D4D6);
+            var instance = _LookatTargetInstance ??= new SchemaUntypedField(0);
+            instance.DangerousSetHandle(_Handle + _LookatTargetOffset!.Value);
+            return instance;
+        }
+    }
+    private static nint? _FlinchOffset;
+
+    public ref CAnimGraph2ParamOptionalRefBool Flinch
+    {
+        get
+        {
+            _FlinchOffset = _FlinchOffset ?? Schema.GetOffset(0xC887F157E8E04CA7);
+            return ref _Handle.AsRef<CAnimGraph2ParamOptionalRefBool>(_FlinchOffset!.Value);
+        }
+    }
+    private static nint? _FlinchVariationOffset;
+
+    public ref CAnimGraph2ParamOptionalRefFloat FlinchVariation
+    {
+        get
+        {
+            _FlinchVariationOffset = _FlinchVariationOffset ?? Schema.GetOffset(0xC887F1577DB92C14);
+            return ref _Handle.AsRef<CAnimGraph2ParamOptionalRefFloat>(_FlinchVariationOffset!.Value);
+        }
+    }
     private static nint? _HasActionCompletedEventOffset;
 
     public ref bool HasActionCompletedEvent
@@ -97,16 +150,6 @@ internal partial class CCS2ChickenGraphControllerImpl : CAnimGraphControllerBase
         {
             _HasActionCompletedEventOffset = _HasActionCompletedEventOffset ?? Schema.GetOffset(0xC887F157CD4A37EA);
             return ref _Handle.AsRef<bool>(_HasActionCompletedEventOffset!.Value);
-        }
-    }
-    private static nint? _WaitingForCompletedEventOffset;
-
-    public ref bool WaitingForCompletedEvent
-    {
-        get
-        {
-            _WaitingForCompletedEventOffset = _WaitingForCompletedEventOffset ?? Schema.GetOffset(0xC887F15754876F98);
-            return ref _Handle.AsRef<bool>(_WaitingForCompletedEventOffset!.Value);
         }
     }
 

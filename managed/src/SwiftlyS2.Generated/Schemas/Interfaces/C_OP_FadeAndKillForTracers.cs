@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_FadeAndKillForTracers : CParticleFunctionOperator, ISchemaClass<C_OP_FadeAndKillForTracers>
 {
     static C_OP_FadeAndKillForTracers ISchemaClass<C_OP_FadeAndKillForTracers>.From(nint handle) => new C_OP_FadeAndKillForTracersImpl(handle);
-    static int ISchemaClass<C_OP_FadeAndKillForTracers>.Size => 496;
+    static int ISchemaClass<C_OP_FadeAndKillForTracers>.Size => 504;
     static string? ISchemaClass<C_OP_FadeAndKillForTracers>.ClassName => null;
 
 

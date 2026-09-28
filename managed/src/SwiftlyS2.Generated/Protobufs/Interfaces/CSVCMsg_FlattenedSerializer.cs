@@ -15,4 +15,5 @@ public interface CSVCMsg_FlattenedSerializer : ITypedProtobuf<CSVCMsg_FlattenedS
     public IProtobufRepeatedFieldSubMessageType<ProtoFlattenedSerializer_t> Serializers { get; }
     public IProtobufRepeatedFieldValueType<string> Symbols { get; }
     public IProtobufRepeatedFieldSubMessageType<ProtoFlattenedSerializerField_t> Fields { get; }
+    public ProtoCoordSizeParams_t CoordSizeParams { get; }
 }

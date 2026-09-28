@@ -23,6 +23,14 @@ public interface CMsgSource2NetworkFlowQuality : ITypedProtobuf<CMsgSource2Netwo
     public uint NetframesSizeExceedsMtu { get; set; }
     public uint NetframesSizeP95 { get; set; }
     public uint NetframesSizeP99 { get; set; }
+    public uint NetframesSizeUncompressedP50 { get; set; }
+    public uint NetframesSizeUncompressedP95 { get; set; }
+    public uint NetframesSizeUncompressedP99 { get; set; }
+    public uint NetframesSizeUncompressedMax { get; set; }
+    public uint NetframesMsgsP50 { get; set; }
+    public uint NetframesMsgsP95 { get; set; }
+    public uint NetframesMsgsP99 { get; set; }
+    public uint NetframesMsgsMax { get; set; }
     public uint TicksTotal { get; set; }
     public uint TicksGood { get; set; }
     public uint TicksGoodAlmostLate { get; set; }
@@ -52,4 +60,16 @@ public interface CMsgSource2NetworkFlowQuality : ITypedProtobuf<CMsgSource2Netwo
     public uint NetPingP5 { get; set; }
     public uint NetPingP50 { get; set; }
     public uint NetPingP95 { get; set; }
+    public uint MsgprocUsecP50 { get; set; }
+    public uint MsgprocUsecP95 { get; set; }
+    public uint MsgprocUsecP99 { get; set; }
+    public uint MsgprocUsecMax { get; set; }
+    public uint MsgprocUsecAvgP50 { get; set; }
+    public uint MsgprocUsecAvgP95 { get; set; }
+    public uint MsgprocUsecAvgP99 { get; set; }
+    public uint MsgprocUsecAvgMax { get; set; }
+    public uint QueuedmsgsP50 { get; set; }
+    public uint QueuedmsgsP95 { get; set; }
+    public uint QueuedmsgsP99 { get; set; }
+    public uint QueuedmsgsMax { get; set; }
 }

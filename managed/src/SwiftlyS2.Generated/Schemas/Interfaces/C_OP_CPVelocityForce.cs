@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_CPVelocityForce : CParticleFunctionForce, ISchemaClass<C_OP_CPVelocityForce>
 {
     static C_OP_CPVelocityForce ISchemaClass<C_OP_CPVelocityForce>.From(nint handle) => new C_OP_CPVelocityForceImpl(handle);
-    static int ISchemaClass<C_OP_CPVelocityForce>.Size => 864;
+    static int ISchemaClass<C_OP_CPVelocityForce>.Size => 880;
     static string? ISchemaClass<C_OP_CPVelocityForce>.ClassName => null;
 
 

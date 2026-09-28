@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_Callback : CParticleFunctionRenderer, ISchemaClass<C_OP_Callback>
 {
     static C_OP_Callback ISchemaClass<C_OP_Callback>.From(nint handle) => new C_OP_CallbackImpl(handle);
-    static int ISchemaClass<C_OP_Callback>.Size => 552;
+    static int ISchemaClass<C_OP_Callback>.Size => 560;
     static string? ISchemaClass<C_OP_Callback>.ClassName => null;
 
 }

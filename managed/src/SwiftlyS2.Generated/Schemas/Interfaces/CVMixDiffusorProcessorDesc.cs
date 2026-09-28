@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVMixDiffusorProcessorDesc : CVMixBaseProcessorDesc, ISchemaClass<CVMixDiffusorProcessorDesc>
 {
     static CVMixDiffusorProcessorDesc ISchemaClass<CVMixDiffusorProcessorDesc>.From(nint handle) => new CVMixDiffusorProcessorDescImpl(handle);
-    static int ISchemaClass<CVMixDiffusorProcessorDesc>.Size => 48;
+    static int ISchemaClass<CVMixDiffusorProcessorDesc>.Size => 56;
     static string? ISchemaClass<CVMixDiffusorProcessorDesc>.ClassName => null;
 
 

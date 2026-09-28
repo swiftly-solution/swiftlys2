@@ -26,16 +26,6 @@ internal partial class CNmClipNode__CDefinitionImpl : CNmClipReferenceNode__CDef
             return ref _Handle.AsRef<short>(_PlayInReverseValueNodeIdxOffset!.Value);
         }
     }
-    private static nint? _ResetTimeValueNodeIdxOffset;
-
-    public ref short ResetTimeValueNodeIdx
-    {
-        get
-        {
-            _ResetTimeValueNodeIdxOffset = _ResetTimeValueNodeIdxOffset ?? Schema.GetOffset(0x9BA44A13698930E1);
-            return ref _Handle.AsRef<short>(_ResetTimeValueNodeIdxOffset!.Value);
-        }
-    }
     private static nint? _SampleRootMotionOffset;
 
     public ref bool SampleRootMotion
@@ -64,6 +54,16 @@ internal partial class CNmClipNode__CDefinitionImpl : CNmClipReferenceNode__CDef
         {
             _DataSlotIdxOffset = _DataSlotIdxOffset ?? Schema.GetOffset(0x9BA44A13B1C15B68);
             return ref _Handle.AsRef<short>(_DataSlotIdxOffset!.Value);
+        }
+    }
+    private static nint? _ResetTimeValueNodeIdxOffset;
+
+    public ref short ResetTimeValueNodeIdx
+    {
+        get
+        {
+            _ResetTimeValueNodeIdxOffset = _ResetTimeValueNodeIdxOffset ?? Schema.GetOffset(0x9BA44A13698930E1);
+            return ref _Handle.AsRef<short>(_ResetTimeValueNodeIdxOffset!.Value);
         }
     }
     private static nint? _GraphEventsOffset;

@@ -17,6 +17,8 @@ public partial interface CPathParameters : ISchemaClass<CPathParameters>
 
     public ref int StartControlPointNumber { get; }
 
+    public ref int MidControlPointNumber { get; }
+
     public ref int EndControlPointNumber { get; }
 
     public ref int BulgeControl { get; }

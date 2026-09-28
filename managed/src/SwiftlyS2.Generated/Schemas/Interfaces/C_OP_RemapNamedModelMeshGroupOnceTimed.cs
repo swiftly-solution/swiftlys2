@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RemapNamedModelMeshGroupOnceTimed : C_OP_RemapNamedModelElementOnceTimed, ISchemaClass<C_OP_RemapNamedModelMeshGroupOnceTimed>
 {
     static C_OP_RemapNamedModelMeshGroupOnceTimed ISchemaClass<C_OP_RemapNamedModelMeshGroupOnceTimed>.From(nint handle) => new C_OP_RemapNamedModelMeshGroupOnceTimedImpl(handle);
-    static int ISchemaClass<C_OP_RemapNamedModelMeshGroupOnceTimed>.Size => 568;
+    static int ISchemaClass<C_OP_RemapNamedModelMeshGroupOnceTimed>.Size => 576;
     static string? ISchemaClass<C_OP_RemapNamedModelMeshGroupOnceTimed>.ClassName => null;
 
 }

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmGraphDocIDBasedClipSelectorNode : CNmGraphDocFlowNode, ISchemaClass<CNmGraphDocIDBasedClipSelectorNode>
 {
     static CNmGraphDocIDBasedClipSelectorNode ISchemaClass<CNmGraphDocIDBasedClipSelectorNode>.From(nint handle) => new CNmGraphDocIDBasedClipSelectorNodeImpl(handle);
-    static int ISchemaClass<CNmGraphDocIDBasedClipSelectorNode>.Size => 288;
+    static int ISchemaClass<CNmGraphDocIDBasedClipSelectorNode>.Size => 296;
     static string? ISchemaClass<CNmGraphDocIDBasedClipSelectorNode>.ClassName => null;
 
 

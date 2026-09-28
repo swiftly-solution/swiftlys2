@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CRevertSaved : CModelPointEntity, ISchemaClass<CRevertSaved>
 {
     static CRevertSaved ISchemaClass<CRevertSaved>.From(nint handle) => new CRevertSavedImpl(handle);
-    static int ISchemaClass<CRevertSaved>.Size => 1920;
+    static int ISchemaClass<CRevertSaved>.Size => 2144;
     static string? ISchemaClass<CRevertSaved>.ClassName => "player_loadsaved";
 
 

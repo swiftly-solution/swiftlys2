@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_StattrakModule : C_CS2WeaponModuleBase, ISchemaClass<C_StattrakModule>
 {
     static C_StattrakModule ISchemaClass<C_StattrakModule>.From(nint handle) => new C_StattrakModuleImpl(handle);
-    static int ISchemaClass<C_StattrakModule>.Size => 4496;
+    static int ISchemaClass<C_StattrakModule>.Size => 4728;
     static string? ISchemaClass<C_StattrakModule>.ClassName => null;
 
 

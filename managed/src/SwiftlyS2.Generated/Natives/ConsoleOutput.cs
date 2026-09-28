@@ -29,6 +29,16 @@ internal static class NativeConsoleOutput
         _RemoveConsoleListener(listenerId);
     }
 
+    private unsafe static delegate* unmanaged<void> _DispatchQueuedListeners;
+
+    /// <summary>
+    /// dispatches queued listener messages from the current safe native frame
+    /// </summary>
+    public unsafe static void DispatchQueuedListeners()
+    {
+        _DispatchQueuedListeners();
+    }
+
     private unsafe static delegate* unmanaged<byte> _IsEnabled;
 
     /// <summary>
@@ -67,11 +77,12 @@ internal static class NativeConsoleOutput
     /// </summary>
     public unsafe static bool NeedsFiltering(string text)
     {
-        return StringAlloc.CreateCString(text, textBufferPtr =>
+        using var textStr = new ScopedCString(text);
+        fixed (byte* textBufferPtr = textStr)
         {
-            var ret = _NeedsFiltering((byte*)textBufferPtr);
+            var ret = _NeedsFiltering(textBufferPtr);
             return ret == 1;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<int*, byte*> _GetCounterText;

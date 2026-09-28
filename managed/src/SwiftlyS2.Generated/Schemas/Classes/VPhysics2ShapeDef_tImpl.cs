@@ -18,42 +18,52 @@ internal partial class VPhysics2ShapeDef_tImpl : SchemaClass, VPhysics2ShapeDef_
 
     private static nint? _SpheresOffset;
 
-    public ref CUtlVector<RnSphereDesc_t> Spheres
+    public ref CUtlLeanVector<RnSphereDesc_t, int> Spheres
     {
         get
         {
             _SpheresOffset = _SpheresOffset ?? Schema.GetOffset(0xB5A68CEBBFDA8091);
-            return ref _Handle.AsRef<CUtlVector<RnSphereDesc_t>>(_SpheresOffset!.Value);
+            return ref _Handle.AsRef<CUtlLeanVector<RnSphereDesc_t, int>>(_SpheresOffset!.Value);
         }
     }
     private static nint? _CapsulesOffset;
 
-    public ref CUtlVector<RnCapsuleDesc_t> Capsules
+    public ref CUtlLeanVector<RnCapsuleDesc_t, int> Capsules
     {
         get
         {
             _CapsulesOffset = _CapsulesOffset ?? Schema.GetOffset(0xB5A68CEBF8737C4D);
-            return ref _Handle.AsRef<CUtlVector<RnCapsuleDesc_t>>(_CapsulesOffset!.Value);
+            return ref _Handle.AsRef<CUtlLeanVector<RnCapsuleDesc_t, int>>(_CapsulesOffset!.Value);
         }
     }
     private static nint? _HullsOffset;
 
-    public ref CUtlVector<RnHullDesc_t> Hulls
+    public ref CUtlLeanVector<RnHullDesc_t, int> Hulls
     {
         get
         {
             _HullsOffset = _HullsOffset ?? Schema.GetOffset(0xB5A68CEB31F7453F);
-            return ref _Handle.AsRef<CUtlVector<RnHullDesc_t>>(_HullsOffset!.Value);
+            return ref _Handle.AsRef<CUtlLeanVector<RnHullDesc_t, int>>(_HullsOffset!.Value);
         }
     }
     private static nint? _MeshesOffset;
 
-    public ref CUtlVector<RnMeshDesc_t> Meshes
+    public ref CUtlLeanVector<RnMeshDesc_t, int> Meshes
     {
         get
         {
             _MeshesOffset = _MeshesOffset ?? Schema.GetOffset(0xB5A68CEBC0F01FD8);
-            return ref _Handle.AsRef<CUtlVector<RnMeshDesc_t>>(_MeshesOffset!.Value);
+            return ref _Handle.AsRef<CUtlLeanVector<RnMeshDesc_t, int>>(_MeshesOffset!.Value);
+        }
+    }
+    private static nint? _CompoundsOffset;
+
+    public ref CUtlLeanVector<RnCompoundDesc_t, int> Compounds
+    {
+        get
+        {
+            _CompoundsOffset = _CompoundsOffset ?? Schema.GetOffset(0xB5A68CEBB561D89D);
+            return ref _Handle.AsRef<CUtlLeanVector<RnCompoundDesc_t, int>>(_CompoundsOffset!.Value);
         }
     }
     private static nint? _CollisionAttributeIndicesOffset;

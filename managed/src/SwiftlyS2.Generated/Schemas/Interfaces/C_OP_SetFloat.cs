@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_SetFloat : CParticleFunctionOperator, ISchemaClass<C_OP_SetFloat>
 {
     static C_OP_SetFloat ISchemaClass<C_OP_SetFloat>.From(nint handle) => new C_OP_SetFloatImpl(handle);
-    static int ISchemaClass<C_OP_SetFloat>.Size => 1264;
+    static int ISchemaClass<C_OP_SetFloat>.Size => 1296;
     static string? ISchemaClass<C_OP_SetFloat>.ClassName => null;
 
 

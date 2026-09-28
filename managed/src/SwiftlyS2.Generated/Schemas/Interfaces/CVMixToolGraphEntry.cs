@@ -8,18 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CVMixToolGraphEntry : ISchemaClass<CVMixToolGraphEntry>
+public partial interface CVMixToolGraphEntry : CVMixToolGraph, ISchemaClass<CVMixToolGraphEntry>
 {
     static CVMixToolGraphEntry ISchemaClass<CVMixToolGraphEntry>.From(nint handle) => new CVMixToolGraphEntryImpl(handle);
     static int ISchemaClass<CVMixToolGraphEntry>.Size => 152;
     static string? ISchemaClass<CVMixToolGraphEntry>.ClassName => null;
 
 
-    public CVMixToolGraph Graph { get; }
+    public CGraphPreviewList GraphPreview { get; }
 
     public CGraphEditorState EditorState { get; }
-
-    public CGraphPreviewList GraphPreview { get; }
 
 
 }

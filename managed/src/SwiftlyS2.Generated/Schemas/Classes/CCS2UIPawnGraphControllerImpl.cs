@@ -146,6 +146,26 @@ internal partial class CCS2UIPawnGraphControllerImpl : CAnimGraphControllerBaseI
             return ref _Handle.AsRef<CAnimGraph2ParamOptionalRefFloat>(_InspectTurnAngleOffset!.Value);
         }
     }
+    private static nint? _ChickSnapshotVariantOffset;
+
+    public ref CAnimGraph2ParamOptionalRefFloat ChickSnapshotVariant
+    {
+        get
+        {
+            _ChickSnapshotVariantOffset = _ChickSnapshotVariantOffset ?? Schema.GetOffset(0xEF95E3BE6042E158);
+            return ref _Handle.AsRef<CAnimGraph2ParamOptionalRefFloat>(_ChickSnapshotVariantOffset!.Value);
+        }
+    }
+    private static nint? _ChickLifeStageOffset;
+
+    public ref CAnimGraph2ParamOptionalRefFloat ChickLifeStage
+    {
+        get
+        {
+            _ChickLifeStageOffset = _ChickLifeStageOffset ?? Schema.GetOffset(0xEF95E3BE98370D6D);
+            return ref _Handle.AsRef<CAnimGraph2ParamOptionalRefFloat>(_ChickLifeStageOffset!.Value);
+        }
+    }
     private static nint? _CTOffset;
 
     public ref CAnimGraph2ParamOptionalRefBool CT

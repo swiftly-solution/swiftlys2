@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmGraphDocRootMotionOverrideNode : CNmGraphDocFlowNode, ISchemaClass<CNmGraphDocRootMotionOverrideNode>
 {
     static CNmGraphDocRootMotionOverrideNode ISchemaClass<CNmGraphDocRootMotionOverrideNode>.From(nint handle) => new CNmGraphDocRootMotionOverrideNodeImpl(handle);
-    static int ISchemaClass<CNmGraphDocRootMotionOverrideNode>.Size => 272;
+    static int ISchemaClass<CNmGraphDocRootMotionOverrideNode>.Size => 280;
     static string? ISchemaClass<CNmGraphDocRootMotionOverrideNode>.ClassName => null;
 
 

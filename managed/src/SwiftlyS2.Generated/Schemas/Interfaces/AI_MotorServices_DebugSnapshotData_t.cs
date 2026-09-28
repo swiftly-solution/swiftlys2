@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface AI_MotorServices_DebugSnapshotData_t : ISchemaClass<AI_MotorServices_DebugSnapshotData_t>
 {
     static AI_MotorServices_DebugSnapshotData_t ISchemaClass<AI_MotorServices_DebugSnapshotData_t>.From(nint handle) => new AI_MotorServices_DebugSnapshotData_tImpl(handle);
-    static int ISchemaClass<AI_MotorServices_DebugSnapshotData_t>.Size => 48;
+    static int ISchemaClass<AI_MotorServices_DebugSnapshotData_t>.Size => 56;
     static string? ISchemaClass<AI_MotorServices_DebugSnapshotData_t>.ClassName => null;
 
 
@@ -22,6 +22,8 @@ public partial interface AI_MotorServices_DebugSnapshotData_t : ISchemaClass<AI_
     public ref Vector Motor_velocity { get; }
 
     public ref CUtlVector<AI_MotorServices_DebugSnapshotData_t__MotorPathWaypoint_t> Motor_path { get; }
+
+    public string Ground_entity_debug_name { get; set; }
 
 
 }

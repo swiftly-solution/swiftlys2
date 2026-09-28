@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RandomForce : CParticleFunctionForce, ISchemaClass<C_OP_RandomForce>
 {
     static C_OP_RandomForce ISchemaClass<C_OP_RandomForce>.From(nint handle) => new C_OP_RandomForceImpl(handle);
-    static int ISchemaClass<C_OP_RandomForce>.Size => 512;
+    static int ISchemaClass<C_OP_RandomForce>.Size => 520;
     static string? ISchemaClass<C_OP_RandomForce>.ClassName => null;
 
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_BaseButton : C_BaseToggle, ISchemaClass<C_BaseButton>
 {
     static C_BaseButton ISchemaClass<C_BaseButton>.From(nint handle) => new C_BaseButtonImpl(handle);
-    static int ISchemaClass<C_BaseButton>.Size => 4032;
+    static int ISchemaClass<C_BaseButton>.Size => 4264;
     static string? ISchemaClass<C_BaseButton>.ClassName => null;
 
 

@@ -26,6 +26,16 @@ internal partial class CPathParametersImpl : SchemaClass, CPathParameters
             return ref _Handle.AsRef<int>(_StartControlPointNumberOffset!.Value);
         }
     }
+    private static nint? _MidControlPointNumberOffset;
+
+    public ref int MidControlPointNumber
+    {
+        get
+        {
+            _MidControlPointNumberOffset = _MidControlPointNumberOffset ?? Schema.GetOffset(0xE2D8E825E842C8D5);
+            return ref _Handle.AsRef<int>(_MidControlPointNumberOffset!.Value);
+        }
+    }
     private static nint? _EndControlPointNumberOffset;
 
     public ref int EndControlPointNumber

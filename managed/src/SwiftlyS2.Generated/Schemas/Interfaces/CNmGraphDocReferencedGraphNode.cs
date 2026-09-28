@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmGraphDocReferencedGraphNode : CNmGraphDocVariationDataNode, ISchemaClass<CNmGraphDocReferencedGraphNode>
 {
     static CNmGraphDocReferencedGraphNode ISchemaClass<CNmGraphDocReferencedGraphNode>.From(nint handle) => new CNmGraphDocReferencedGraphNodeImpl(handle);
-    static int ISchemaClass<CNmGraphDocReferencedGraphNode>.Size => 512;
+    static int ISchemaClass<CNmGraphDocReferencedGraphNode>.Size => 520;
     static string? ISchemaClass<CNmGraphDocReferencedGraphNode>.ClassName => null;
 
 }

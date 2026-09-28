@@ -11,7 +11,27 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVMixSteamAudioHRTFProcessorDesc : CVMixBaseProcessorDesc, ISchemaClass<CVMixSteamAudioHRTFProcessorDesc>
 {
     static CVMixSteamAudioHRTFProcessorDesc ISchemaClass<CVMixSteamAudioHRTFProcessorDesc>.From(nint handle) => new CVMixSteamAudioHRTFProcessorDescImpl(handle);
-    static int ISchemaClass<CVMixSteamAudioHRTFProcessorDesc>.Size => 32;
+    static int ISchemaClass<CVMixSteamAudioHRTFProcessorDesc>.Size => 80;
     static string? ISchemaClass<CVMixSteamAudioHRTFProcessorDesc>.ClassName => null;
+
+
+    public CVMixParameterFloat ParamPositionX { get; }
+
+    public CVMixParameterFloat ParamPositionY { get; }
+
+    public CVMixParameterFloat ParamPositionZ { get; }
+
+    public CVMixParameterFloat ParamInterpolation { get; }
+
+    public CVMixParameterFloat ParamDirectMixLevel { get; }
+
+    public CVMixParameterFloat ParamPerspectiveCorrection { get; }
+
+    public CVMixParameterFloat ParamRelativePosition { get; }
+
+    public CVMixParameterFloat ParamDelayLeft { get; }
+
+    public CVMixParameterFloat ParamDelayRight { get; }
+
 
 }

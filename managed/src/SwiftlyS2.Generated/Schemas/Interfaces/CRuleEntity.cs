@@ -11,8 +11,8 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CRuleEntity : CBaseModelEntity, ISchemaClass<CRuleEntity>
 {
     static CRuleEntity ISchemaClass<CRuleEntity>.From(nint handle) => new CRuleEntityImpl(handle);
-    static int ISchemaClass<CRuleEntity>.Size => 1912;
-    static string? ISchemaClass<CRuleEntity>.ClassName => null;
+    static int ISchemaClass<CRuleEntity>.Size => 2136;
+    static string? ISchemaClass<CRuleEntity>.ClassName => "rule_entity";
 
 
     public string Master { get; set; }

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RenderVolumetricEmitter : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderVolumetricEmitter>
 {
     static C_OP_RenderVolumetricEmitter ISchemaClass<C_OP_RenderVolumetricEmitter>.From(nint handle) => new C_OP_RenderVolumetricEmitterImpl(handle);
-    static int ISchemaClass<C_OP_RenderVolumetricEmitter>.Size => 8680;
+    static int ISchemaClass<C_OP_RenderVolumetricEmitter>.Size => 8848;
     static string? ISchemaClass<C_OP_RenderVolumetricEmitter>.ClassName => null;
 
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_ClientPhysics : CParticleFunctionRenderer, ISchemaClass<C_OP_ClientPhysics>
 {
     static C_OP_ClientPhysics ISchemaClass<C_OP_ClientPhysics>.From(nint handle) => new C_OP_ClientPhysicsImpl(handle);
-    static int ISchemaClass<C_OP_ClientPhysics>.Size => 1344;
+    static int ISchemaClass<C_OP_ClientPhysics>.Size => 1368;
     static string? ISchemaClass<C_OP_ClientPhysics>.ClassName => null;
 
 

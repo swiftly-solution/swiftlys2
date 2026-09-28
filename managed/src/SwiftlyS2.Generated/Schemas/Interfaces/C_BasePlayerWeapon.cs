@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_BasePlayerWeapon : C_EconEntity, ISchemaClass<C_BasePlayerWeapon>
 {
     static C_BasePlayerWeapon ISchemaClass<C_BasePlayerWeapon>.From(nint handle) => new C_BasePlayerWeaponImpl(handle);
-    static int ISchemaClass<C_BasePlayerWeapon>.Size => 5928;
+    static int ISchemaClass<C_BasePlayerWeapon>.Size => 6480;
     static string? ISchemaClass<C_BasePlayerWeapon>.ClassName => null;
 
 

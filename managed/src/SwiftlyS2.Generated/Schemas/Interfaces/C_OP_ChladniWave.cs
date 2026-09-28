@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_ChladniWave : CParticleFunctionOperator, ISchemaClass<C_OP_ChladniWave>
 {
     static C_OP_ChladniWave ISchemaClass<C_OP_ChladniWave>.From(nint handle) => new C_OP_ChladniWaveImpl(handle);
-    static int ISchemaClass<C_OP_ChladniWave>.Size => 5408;
+    static int ISchemaClass<C_OP_ChladniWave>.Size => 5512;
     static string? ISchemaClass<C_OP_ChladniWave>.ClassName => null;
 
 

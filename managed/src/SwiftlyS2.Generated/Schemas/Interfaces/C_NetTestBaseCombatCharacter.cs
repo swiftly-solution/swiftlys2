@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_NetTestBaseCombatCharacter : C_BaseCombatCharacter, ISchemaClass<C_NetTestBaseCombatCharacter>
 {
     static C_NetTestBaseCombatCharacter ISchemaClass<C_NetTestBaseCombatCharacter>.From(nint handle) => new C_NetTestBaseCombatCharacterImpl(handle);
-    static int ISchemaClass<C_NetTestBaseCombatCharacter>.Size => 4616;
+    static int ISchemaClass<C_NetTestBaseCombatCharacter>.Size => 4848;
     static string? ISchemaClass<C_NetTestBaseCombatCharacter>.ClassName => null;
 
 }

@@ -1,15 +1,15 @@
-using System.Text;
-using System.Buffers;
 using System.Runtime.InteropServices;
 using Spectre.Console;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Shared.Players;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.Natives;
 
 internal static class GameFunctions
 {
     private static nint entitySystemPtr = 0;
+    private static nint soundSystemPtr = 0;
     private static readonly bool IsWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 
     public static unsafe delegate* unmanaged< CTakeDamageInfo*, nint, nint, nint, Vector*, Vector*, float, int, int, void*, void > pCTakeDamageInfo_Constructor;
@@ -31,6 +31,12 @@ internal static class GameFunctions
     public static unsafe delegate* unmanaged< nint, int, nint > pCreateEntityByName;
     public static unsafe delegate* unmanaged< nint, nint, nint, nint, nint, void > pCEntityInstaceAcceptInput;
     public static unsafe delegate* unmanaged< nint, int, void > pSwitchTeam;
+    public static unsafe delegate* unmanaged< nint, int, nint*, nint*, nint*, void > pCCSCustomHudLayoutSetDialogVariableStringForPlayer;
+    public static unsafe delegate* unmanaged< nint, int, nint*, nint*, void > pCCSCustomHudLayoutRemoveDialogVariableStringForPlayer;
+    public static unsafe delegate* unmanaged< nint, nint*, nint*, nint*, void > pCCSCustomHudLayoutSetDialogVariableString;
+    public static unsafe delegate* unmanaged< nint, int, nint*, nint*, uint, void > pCCSCustomHudLayoutSetHasClassForPlayer;
+    public static unsafe delegate* unmanaged< nint, nint*, nint*, uint, void > pCCSCustomHudLayoutSetHasClass;
+    public static unsafe delegate* unmanaged< nint, int, byte, void > pCCSCustomHudLayoutSetInputCaptureEnabled;
     private static Lazy<int> CreateOffset( string name ) => new(() => NativeOffsets.Fetch(name));
     private static readonly Lazy<int> _teleportOffset = CreateOffset("CBaseEntity::Teleport");
     private static readonly Lazy<int> _commitSuicideOffset = CreateOffset("CBasePlayerPawn::CommitSuicide");
@@ -47,6 +53,7 @@ internal static class GameFunctions
     private static readonly Lazy<int> _getViewVectorsOffset = CreateOffset("CGameRules::GetViewVectors");
     private static readonly Lazy<int> _goToIntermissionOffset = CreateOffset("CGameRules::GoToIntermission");
     private static readonly Lazy<int> _changeTeamOffset = CreateOffset("CCSPlayerController::ChangeTeam");
+    private static readonly Lazy<int> _takeGuidOffset = CreateOffset("CSoundSystem::TakeGuid");
 
     public static int TeleportOffset => _teleportOffset.Value;
     public static int CommitSuicideOffset => _commitSuicideOffset.Value;
@@ -63,6 +70,7 @@ internal static class GameFunctions
     public static int GetViewVectorsOffset => _getViewVectorsOffset.Value;
     public static int GoToIntermissionOffset => _goToIntermissionOffset.Value;
     public static int ChangeTeamOffset => _changeTeamOffset.Value;
+    public static int TakeGuidOffset => _takeGuidOffset.Value;
 
     private static void CheckPtr( nint ptr, string name )
     {
@@ -100,6 +108,13 @@ internal static class GameFunctions
             pCEntityInstaceAcceptInput = (delegate* unmanaged< nint, nint, nint, nint, nint, void >)NativeSignatures.Fetch("CEntityInstance::AcceptInput");
             pCreateEntityByName = (delegate* unmanaged< nint, int, nint >)NativeSignatures.Fetch("UTIL::CreateEntityByName");
 
+            pCCSCustomHudLayoutSetDialogVariableStringForPlayer = (delegate* unmanaged< nint, int, nint*, nint*, nint*, void >)NativeSignatures.Fetch("CCSCustomHudLayout::SetDialogVariableStringForPlayer");
+            pCCSCustomHudLayoutRemoveDialogVariableStringForPlayer = (delegate* unmanaged< nint, int, nint*, nint*, void >)NativeSignatures.Fetch("CCSCustomHudLayout::RemoveDialogVariableStringForPlayer");
+            pCCSCustomHudLayoutSetDialogVariableString = (delegate* unmanaged< nint, nint*, nint*, nint*, void >)NativeSignatures.Fetch("CCSCustomHudLayout::SetDialogVariableString");
+            pCCSCustomHudLayoutSetHasClassForPlayer = (delegate* unmanaged< nint, int, nint*, nint*, uint, void >)NativeSignatures.Fetch("CCSCustomHudLayout::SetHasClassForPlayer");
+            pCCSCustomHudLayoutSetHasClass = (delegate* unmanaged< nint, nint*, nint*, uint, void >)NativeSignatures.Fetch("CCSCustomHudLayout::SetHasClass");
+            pCCSCustomHudLayoutSetInputCaptureEnabled = (delegate* unmanaged< nint, int, byte, void >)NativeSignatures.Fetch("CCSCustomHudLayout::SetInputCaptureEnabled");
+
             if (IsWindows)
             {
                 pTerminateRoundWindows = (delegate* unmanaged< nint, float, uint, nint, void >)NativeSignatures.Fetch("CGameRules::TerminateRound");
@@ -135,10 +150,11 @@ internal static class GameFunctions
         {
             unsafe
             {
-                return StringAlloc.CreateCString(name, pName =>
+                using var nameStr = new ScopedCString(name);
+                fixed (byte* pName = nameStr)
                 {
-                    return pCreateEntityByName(pName, forcedIndex);
-                });
+                    return pCreateEntityByName((nint)pName, forcedIndex);
+                }
             }
         }
         catch (Exception e)
@@ -194,10 +210,11 @@ internal static class GameFunctions
         {
             unsafe
             {
-                return StringAlloc.CreateCString(key, pKey =>
+                using var keyStr = new ScopedCString(key);
+                fixed (byte* pKey = keyStr)
                 {
-                    return pGetWeaponCSDataFromKey(unknown, pKey);
-                });
+                    return pGetWeaponCSDataFromKey(unknown, (nint)pKey);
+                }
             }
         }
         catch (Exception e)
@@ -283,13 +300,14 @@ internal static class GameFunctions
         {
             CheckPtr(pEntity, nameof(pEntity));
 
-            StringAlloc.CreateCString(model, pModel =>
+            unsafe
             {
-                unsafe
+                using var modelStr = new ScopedCString(model);
+                fixed (byte* pModel = modelStr)
                 {
-                    _ = pSetModel(pEntity, pModel);
+                    _ = pSetModel(pEntity, (nint)pModel);
                 }
-            });
+            }
         }
         catch (Exception e)
         {
@@ -460,10 +478,11 @@ internal static class GameFunctions
             {
                 CheckPtr(pEntity, nameof(pEntity));
 
-                StringAlloc.CreateCString(input, pInput =>
+                using var inputStr = new ScopedCString(input);
+                fixed (byte* pInput = inputStr)
                 {
-                    pCEntityInstaceAcceptInput(pEntity, pInput, pActivator, pCaller, pVariant);
-                });
+                    pCEntityInstaceAcceptInput(pEntity, (nint)pInput, pActivator, pCaller, pVariant);
+                }
             }
         }
         catch (Exception e)
@@ -483,10 +502,11 @@ internal static class GameFunctions
                 if (entitySystemPtr == 0)
                     entitySystemPtr = NativeEntitySystem.GetEntitySystem();
 
-                StringAlloc.CreateCString(input, pInput =>
+                using var inputStr = new ScopedCString(input);
+                fixed (byte* pInput = inputStr)
                 {
-                    pCEntitySystemAddEntityIOEvent(entitySystemPtr, pEntity, pInput, pActivator, pCaller, pVariant, delay, 0, 0);
-                });
+                    pCEntitySystemAddEntityIOEvent(entitySystemPtr, pEntity, (nint)pInput, pActivator, pCaller, pVariant, delay, 0, 0);
+                }
             }
         }
         catch (Exception e)
@@ -504,10 +524,11 @@ internal static class GameFunctions
                 CheckPtr(pThis, nameof(pThis));
                 var ppVTable = (void***)pThis;
                 var pGiveNamedItem = (delegate* unmanaged< nint, nint, nint >)ppVTable[0][GiveNamedItemOffset];
-                return StringAlloc.CreateCString(name, pName =>
+                using var nameStr = new ScopedCString(name);
+                fixed (byte* pName = nameStr)
                 {
-                    return pGiveNamedItem(pThis, pName);
-                });
+                    return pGiveNamedItem(pThis, (nint)pName);
+                }
             }
         }
         catch (Exception e)
@@ -578,10 +599,11 @@ internal static class GameFunctions
             {
                 CheckPtr(pThis, nameof(pThis));
                 var pAddResource = (delegate* unmanaged< nint, nint, void >)GetVirtualFunction(pThis, AddResourceOffset);
-                StringAlloc.CreateCString(path, pPath =>
+                using var pathStr = new ScopedCString(path);
+                fixed (byte* pPath = pathStr)
                 {
-                    pAddResource(pThis, pPath);
-                });
+                    pAddResource(pThis, (nint)pPath);
+                }
             }
         }
         catch (Exception e)
@@ -597,10 +619,11 @@ internal static class GameFunctions
             unsafe
             {
                 CheckPtr(handle, nameof(handle));
-                StringAlloc.CreateCString(name, pName =>
+                using var nameStr = new ScopedCString(name);
+                fixed (byte* pName = nameStr)
                 {
                     pSetOrAddAttribute(handle, (nint)pName, value);
-                });
+                }
             }
         }
         catch (Exception e)
@@ -738,6 +761,213 @@ internal static class GameFunctions
         {
             AnsiConsole.WriteException(e);
             return null;
+        }
+    }
+
+    public static void CCSCustomHudLayout_SetDialogVariableStringForPlayer( nint pThis, int player, string panelId, string variableName, string value )
+    {
+        try
+        {
+            unsafe
+            {
+                CheckPtr(pThis, nameof(pThis));
+                using var panelIdStr = new ScopedCString(panelId);
+                using var variableNameStr = new ScopedCString(variableName);
+                using var valueStr = new ScopedCString(value);
+
+                fixed (byte* pPanelId = panelIdStr)
+                fixed (byte* pVariableName = variableNameStr)
+                fixed (byte* pValue = valueStr)
+                {
+                    var panelIdUtlString = (nint)pPanelId;
+                    var variableNameUtlString = (nint)pVariableName;
+                    var valueUtlString = (nint)pValue;
+
+                    pCCSCustomHudLayoutSetDialogVariableStringForPlayer(
+                        pThis,
+                        player,
+                        &panelIdUtlString,
+                        &variableNameUtlString,
+                        &valueUtlString
+                    );
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            AnsiConsole.WriteException(e);
+        }
+    }
+
+    public static void CCSCustomHudLayout_RemoveDialogVariableStringForPlayer( nint pThis, int player, string panelId, string variableName )
+    {
+        try
+        {
+            unsafe
+            {
+                CheckPtr(pThis, nameof(pThis));
+                using var panelIdStr = new ScopedCString(panelId);
+                using var variableNameStr = new ScopedCString(variableName);
+
+                fixed (byte* pPanelId = panelIdStr)
+                fixed (byte* pVariableName = variableNameStr)
+                {
+                    var panelIdUtlString = (nint)pPanelId;
+                    var variableNameUtlString = (nint)pVariableName;
+
+                    pCCSCustomHudLayoutRemoveDialogVariableStringForPlayer(
+                        pThis,
+                        player,
+                        &panelIdUtlString,
+                        &variableNameUtlString
+                    );
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            AnsiConsole.WriteException(e);
+        }
+    }
+
+    public static void CCSCustomHudLayout_SetDialogVariableString( nint pThis, string panelId, string variableName, string value )
+    {
+        try
+        {
+            unsafe
+            {
+                CheckPtr(pThis, nameof(pThis));
+                using var panelIdStr = new ScopedCString(panelId);
+                using var variableNameStr = new ScopedCString(variableName);
+                using var valueStr = new ScopedCString(value);
+
+                fixed (byte* pPanelId = panelIdStr)
+                fixed (byte* pVariableName = variableNameStr)
+                fixed (byte* pValue = valueStr)
+                {
+                    var panelIdUtlString = (nint)pPanelId;
+                    var variableNameUtlString = (nint)pVariableName;
+                    var valueUtlString = (nint)pValue;
+
+                    pCCSCustomHudLayoutSetDialogVariableString(
+                        pThis,
+                        &panelIdUtlString,
+                        &variableNameUtlString,
+                        &valueUtlString
+                    );
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            AnsiConsole.WriteException(e);
+        }
+    }
+
+    public static void CCSCustomHudLayout_SetHasClassForPlayer( nint pThis, int player, string panelId, string className, EHudPanelClassStatus_t classStatus )
+    {
+        try
+        {
+            unsafe
+            {
+                CheckPtr(pThis, nameof(pThis));
+                using var panelIdStr = new ScopedCString(panelId);
+                using var classNameStr = new ScopedCString(className);
+
+                fixed (byte* pPanelId = panelIdStr)
+                fixed (byte* pClassName = classNameStr)
+                {
+                    var panelIdUtlString = (nint)pPanelId;
+                    var classNameUtlString = (nint)pClassName;
+
+                    pCCSCustomHudLayoutSetHasClassForPlayer(
+                        pThis,
+                        player,
+                        &panelIdUtlString,
+                        &classNameUtlString,
+                        (uint)classStatus
+                    );
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            AnsiConsole.WriteException(e);
+        }
+    }
+
+    public static void CCSCustomHudLayout_SetHasClass( nint pThis, string panelId, string className, EHudPanelClassStatus_t classStatus )
+    {
+        try
+        {
+            unsafe
+            {
+                CheckPtr(pThis, nameof(pThis));
+                using var panelIdStr = new ScopedCString(panelId);
+                using var classNameStr = new ScopedCString(className);
+
+                fixed (byte* pPanelId = panelIdStr)
+                fixed (byte* pClassName = classNameStr)
+                {
+                    var panelIdUtlString = (nint)pPanelId;
+                    var classNameUtlString = (nint)pClassName;
+
+                    pCCSCustomHudLayoutSetHasClass(
+                        pThis,
+                        &panelIdUtlString,
+                        &classNameUtlString,
+                        (uint)classStatus
+                    );
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            AnsiConsole.WriteException(e);
+        }
+    }
+    public static unsafe uint CSoundSystem_TakeGuid()
+    {
+        try
+        {
+            if (soundSystemPtr == 0)
+                soundSystemPtr = NativeMemoryHelpers.FetchInterfaceByName("SoundSystem001");
+
+            CheckPtr(soundSystemPtr, nameof(soundSystemPtr));
+
+            uint guid;
+            if (IsWindows)
+            {
+                var pTakeGuid = (delegate* unmanaged< nint, uint*, void >)GetVirtualFunction(soundSystemPtr, TakeGuidOffset);
+                pTakeGuid(soundSystemPtr, &guid);
+            }
+            else
+            {
+                var pTakeGuid = (delegate* unmanaged< nint, uint >)GetVirtualFunction(soundSystemPtr, TakeGuidOffset);
+                guid = pTakeGuid(soundSystemPtr);
+            }
+            return guid;
+        }
+        catch (Exception e)
+        {
+            AnsiConsole.WriteException(e);
+            return 0;
+        }
+    }
+
+    public static void CCSCustomHudLayout_SetInputCaptureEnabled( nint pThis, int playerId, bool enabled )
+    {
+        try
+        {
+            unsafe
+            {
+                CheckPtr(pThis, nameof(pThis));
+                pCCSCustomHudLayoutSetInputCaptureEnabled(pThis, playerId, enabled ? (byte)1 : (byte)0);
+            }
+        }
+        catch (Exception e)
+        {
+            AnsiConsole.WriteException(e);
         }
     }
 }

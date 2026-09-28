@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_SetControlPointToHMD : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointToHMD>
 {
     static C_OP_SetControlPointToHMD ISchemaClass<C_OP_SetControlPointToHMD>.From(nint handle) => new C_OP_SetControlPointToHMDImpl(handle);
-    static int ISchemaClass<C_OP_SetControlPointToHMD>.Size => 504;
+    static int ISchemaClass<C_OP_SetControlPointToHMD>.Size => 512;
     static string? ISchemaClass<C_OP_SetControlPointToHMD>.ClassName => null;
 
 

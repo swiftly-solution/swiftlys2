@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CResourceAssetTypeInfo : CSimpleAssetTypeInfo, ISchemaClass<CResourceAssetTypeInfo>
 {
     static CResourceAssetTypeInfo ISchemaClass<CResourceAssetTypeInfo>.From(nint handle) => new CResourceAssetTypeInfoImpl(handle);
-    static int ISchemaClass<CResourceAssetTypeInfo>.Size => 328;
+    static int ISchemaClass<CResourceAssetTypeInfo>.Size => 336;
     static string? ISchemaClass<CResourceAssetTypeInfo>.ClassName => null;
 
 

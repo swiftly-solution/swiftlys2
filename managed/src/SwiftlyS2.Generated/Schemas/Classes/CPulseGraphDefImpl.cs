@@ -98,6 +98,16 @@ internal partial class CPulseGraphDefImpl : SchemaClass, CPulseGraphDef
             return ref _Handle.AsRef<CUtlVector<CPulse_Variable>>(_VarsOffset!.Value);
         }
     }
+    private static nint? _TempVarBanksOffset;
+
+    public ref CUtlVector<PointerTo<CPulse_TempVarBankDefinition>> TempVarBanks
+    {
+        get
+        {
+            _TempVarBanksOffset = _TempVarBanksOffset ?? Schema.GetOffset(0x2A792CD8D2759DC3);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<CPulse_TempVarBankDefinition>>>(_TempVarBanksOffset!.Value);
+        }
+    }
     private static nint? _PublicOutputsOffset;
 
     public ref CUtlVector<CPulse_PublicOutput> PublicOutputs

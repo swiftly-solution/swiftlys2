@@ -11,11 +11,15 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVMixFilterProcessorDesc : CVMixBaseProcessorDesc, ISchemaClass<CVMixFilterProcessorDesc>
 {
     static CVMixFilterProcessorDesc ISchemaClass<CVMixFilterProcessorDesc>.From(nint handle) => new CVMixFilterProcessorDescImpl(handle);
-    static int ISchemaClass<CVMixFilterProcessorDesc>.Size => 48;
+    static int ISchemaClass<CVMixFilterProcessorDesc>.Size => 64;
     static string? ISchemaClass<CVMixFilterProcessorDesc>.ClassName => null;
 
 
     public VMixFilterDesc_t Desc { get; }
+
+    public CVMixParameterFloat ParamCutoffFreq { get; }
+
+    public CVMixParameterFloat ParamQ { get; }
 
 
 }

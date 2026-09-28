@@ -16,6 +16,16 @@ internal partial class C_DynamicPropImpl : C_BreakablePropImpl, C_DynamicProp
 {
     public C_DynamicPropImpl(nint handle) : base(handle) { }
 
+    private static nint? _GraphControllerEnabledOffset;
+
+    public ref bool GraphControllerEnabled
+    {
+        get
+        {
+            _GraphControllerEnabledOffset = _GraphControllerEnabledOffset ?? Schema.GetOffset(0xD91E9005D755FF00);
+            return ref _Handle.AsRef<bool>(_GraphControllerEnabledOffset!.Value);
+        }
+    }
     private static nint? _UseHitboxesForRenderBoxOffset;
 
     public ref bool UseHitboxesForRenderBox

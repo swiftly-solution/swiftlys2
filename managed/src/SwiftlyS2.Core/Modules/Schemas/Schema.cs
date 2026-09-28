@@ -69,10 +69,7 @@ internal static class Schema
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void Update( nint handle, ulong hash )
     {
-        if (handle == 0)
-        {
-            throw new InvalidOperationException("Schema instance cannot be null.");
-        }
+        if (handle == 0) throw new InvalidOperationException("Schema instance cannot be null.");
 
         if (isFollowingServerGuidelines && dangerousFields.Contains(hash))
         {
@@ -84,12 +81,15 @@ internal static class Schema
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void SetString( nint handle, nint offset, string value )
     {
+        if (handle == 0) throw new InvalidOperationException("Schema instance cannot be null.");
         handle.Write(offset, StringPool.Allocate(value));
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void SetFixedString( nint handle, nint offset, string value, int maxSize )
     {
+        if (handle == 0) throw new InvalidOperationException("Schema instance cannot be null.");
+
         var pool = ArrayPool<byte>.Shared;
         var size = Encoding.UTF8.GetByteCount(value);
         if (size + 1 > maxSize)
@@ -110,18 +110,20 @@ internal static class Schema
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static string GetString( nint handle )
     {
-        return Marshal.PtrToStringUTF8(handle) ?? string.Empty;
+        return handle == 0 ? string.Empty : Marshal.PtrToStringUTF8(handle) ?? string.Empty;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static string GetCUtlString( nint handle )
     {
-        return Marshal.PtrToStringUTF8(handle) ?? string.Empty;
+        return handle == 0 ? string.Empty : Marshal.PtrToStringUTF8(handle) ?? string.Empty;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void SetCUtlString( nint handle, nint offset, string value )
     {
+        if (handle == 0) throw new InvalidOperationException("Schema instance cannot be null.");
+
         handle.AsRef<CUtlString>(offset).Value = value;
     }
 

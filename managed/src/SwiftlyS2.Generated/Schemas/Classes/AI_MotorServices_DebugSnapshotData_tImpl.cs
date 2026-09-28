@@ -56,5 +56,20 @@ internal partial class AI_MotorServices_DebugSnapshotData_tImpl : SchemaClass, A
             return ref _Handle.AsRef<CUtlVector<AI_MotorServices_DebugSnapshotData_t__MotorPathWaypoint_t>>(_Motor_pathOffset!.Value);
         }
     }
+    private static nint? _Ground_entity_debug_nameOffset;
+
+    public string Ground_entity_debug_name
+    {
+        get
+        {
+            _Ground_entity_debug_nameOffset = _Ground_entity_debug_nameOffset ?? Schema.GetOffset(0x2F154F3E67B759BA);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_Ground_entity_debug_nameOffset!.Value));
+        }
+        set
+        {
+            _Ground_entity_debug_nameOffset = _Ground_entity_debug_nameOffset ?? Schema.GetOffset(0x2F154F3E67B759BA);
+            Schema.SetCUtlString(_Handle, _Ground_entity_debug_nameOffset!.Value, value);
+        }
+    }
 
 }

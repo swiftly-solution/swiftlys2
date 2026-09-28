@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RestartAfterDuration : CParticleFunctionOperator, ISchemaClass<C_OP_RestartAfterDuration>
 {
     static C_OP_RestartAfterDuration ISchemaClass<C_OP_RestartAfterDuration>.From(nint handle) => new C_OP_RestartAfterDurationImpl(handle);
-    static int ISchemaClass<C_OP_RestartAfterDuration>.Size => 496;
+    static int ISchemaClass<C_OP_RestartAfterDuration>.Size => 504;
     static string? ISchemaClass<C_OP_RestartAfterDuration>.ClassName => null;
 
 

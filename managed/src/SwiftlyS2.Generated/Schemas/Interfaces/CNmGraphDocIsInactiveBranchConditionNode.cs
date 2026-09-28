@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmGraphDocIsInactiveBranchConditionNode : CNmGraphDocFlowNode, ISchemaClass<CNmGraphDocIsInactiveBranchConditionNode>
 {
     static CNmGraphDocIsInactiveBranchConditionNode ISchemaClass<CNmGraphDocIsInactiveBranchConditionNode>.From(nint handle) => new CNmGraphDocIsInactiveBranchConditionNodeImpl(handle);
-    static int ISchemaClass<CNmGraphDocIsInactiveBranchConditionNode>.Size => 256;
+    static int ISchemaClass<CNmGraphDocIsInactiveBranchConditionNode>.Size => 264;
     static string? ISchemaClass<CNmGraphDocIsInactiveBranchConditionNode>.ClassName => null;
 
 }

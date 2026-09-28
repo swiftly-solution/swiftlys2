@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface VecInputMaterialVariable_t : ISchemaClass<VecInputMaterialVariable_t>
 {
     static VecInputMaterialVariable_t ISchemaClass<VecInputMaterialVariable_t>.From(nint handle) => new VecInputMaterialVariable_tImpl(handle);
-    static int ISchemaClass<VecInputMaterialVariable_t>.Size => 1728;
+    static int ISchemaClass<VecInputMaterialVariable_t>.Size => 1760;
     static string? ISchemaClass<VecInputMaterialVariable_t>.ClassName => null;
 
 

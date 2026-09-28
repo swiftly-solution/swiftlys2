@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_BaseTrigger : C_BaseToggle, ISchemaClass<C_BaseTrigger>
 {
     static C_BaseTrigger ISchemaClass<C_BaseTrigger>.From(nint handle) => new C_BaseTriggerImpl(handle);
-    static int ISchemaClass<C_BaseTrigger>.Size => 4248;
+    static int ISchemaClass<C_BaseTrigger>.Size => 4480;
     static string? ISchemaClass<C_BaseTrigger>.ClassName => null;
 
 

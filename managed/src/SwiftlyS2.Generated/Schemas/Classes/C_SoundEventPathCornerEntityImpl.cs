@@ -12,7 +12,7 @@ using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_SoundEventPathCornerEntityImpl : C_SoundEventEntityImpl, C_SoundEventPathCornerEntity
+internal partial class C_SoundEventPathCornerEntityImpl : C_SoundEventMultiPointEntityImpl, C_SoundEventPathCornerEntity
 {
     public C_SoundEventPathCornerEntityImpl(nint handle) : base(handle) { }
 

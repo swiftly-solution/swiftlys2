@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RemapNamedModelMeshGroupEndCap : C_OP_RemapNamedModelElementEndCap, ISchemaClass<C_OP_RemapNamedModelMeshGroupEndCap>
 {
     static C_OP_RemapNamedModelMeshGroupEndCap ISchemaClass<C_OP_RemapNamedModelMeshGroupEndCap>.From(nint handle) => new C_OP_RemapNamedModelMeshGroupEndCapImpl(handle);
-    static int ISchemaClass<C_OP_RemapNamedModelMeshGroupEndCap>.Size => 568;
+    static int ISchemaClass<C_OP_RemapNamedModelMeshGroupEndCap>.Size => 576;
     static string? ISchemaClass<C_OP_RemapNamedModelMeshGroupEndCap>.ClassName => null;
 
 }

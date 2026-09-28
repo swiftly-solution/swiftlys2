@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_UpdateLightSource : CParticleFunctionOperator, ISchemaClass<C_OP_UpdateLightSource>
 {
     static C_OP_UpdateLightSource ISchemaClass<C_OP_UpdateLightSource>.From(nint handle) => new C_OP_UpdateLightSourceImpl(handle);
-    static int ISchemaClass<C_OP_UpdateLightSource>.Size => 496;
+    static int ISchemaClass<C_OP_UpdateLightSource>.Size => 504;
     static string? ISchemaClass<C_OP_UpdateLightSource>.ClassName => null;
 
 

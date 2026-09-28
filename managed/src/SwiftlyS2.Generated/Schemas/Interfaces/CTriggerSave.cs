@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CTriggerSave : CBaseTrigger, ISchemaClass<CTriggerSave>
 {
     static CTriggerSave ISchemaClass<CTriggerSave>.From(nint handle) => new CTriggerSaveImpl(handle);
-    static int ISchemaClass<CTriggerSave>.Size => 2296;
+    static int ISchemaClass<CTriggerSave>.Size => 2520;
     static string? ISchemaClass<CTriggerSave>.ClassName => "trigger_autosave";
 
 

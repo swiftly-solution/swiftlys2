@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPointClientUIWorldPanel : CBaseClientUIEntity, ISchemaClass<CPointClientUIWorldPanel>
 {
     static CPointClientUIWorldPanel ISchemaClass<CPointClientUIWorldPanel>.From(nint handle) => new CPointClientUIWorldPanelImpl(handle);
-    static int ISchemaClass<CPointClientUIWorldPanel>.Size => 2352;
+    static int ISchemaClass<CPointClientUIWorldPanel>.Size => 2576;
     static string? ISchemaClass<CPointClientUIWorldPanel>.ClassName => "point_clientui_world_panel";
 
 
@@ -26,6 +26,8 @@ public partial interface CPointClientUIWorldPanel : CBaseClientUIEntity, ISchema
     public ref float Height { get; }
 
     public ref float DPI { get; }
+
+    public ref float WindowUIScale { get; }
 
     public ref float InteractDistance { get; }
 
@@ -71,6 +73,7 @@ public partial interface CPointClientUIWorldPanel : CBaseClientUIEntity, ISchema
     public void WidthUpdated();
     public void HeightUpdated();
     public void DPIUpdated();
+    public void WindowUIScaleUpdated();
     public void InteractDistanceUpdated();
     public void DepthOffsetUpdated();
     public void OwnerContextUpdated();

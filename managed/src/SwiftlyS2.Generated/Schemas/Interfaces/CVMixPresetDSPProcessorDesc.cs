@@ -11,11 +11,13 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVMixPresetDSPProcessorDesc : CVMixBaseProcessorDesc, ISchemaClass<CVMixPresetDSPProcessorDesc>
 {
     static CVMixPresetDSPProcessorDesc ISchemaClass<CVMixPresetDSPProcessorDesc>.From(nint handle) => new CVMixPresetDSPProcessorDescImpl(handle);
-    static int ISchemaClass<CVMixPresetDSPProcessorDesc>.Size => 48;
+    static int ISchemaClass<CVMixPresetDSPProcessorDesc>.Size => 64;
     static string? ISchemaClass<CVMixPresetDSPProcessorDesc>.ClassName => null;
 
 
     public VMixPresetDSPDesc_t Desc { get; }
+
+    public CVMixParameterEffectName ParamEffectName { get; }
 
 
 }

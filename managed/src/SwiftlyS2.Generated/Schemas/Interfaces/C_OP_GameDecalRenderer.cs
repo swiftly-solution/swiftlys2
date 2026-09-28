@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_GameDecalRenderer : CParticleFunctionRenderer, ISchemaClass<C_OP_GameDecalRenderer>
 {
     static C_OP_GameDecalRenderer ISchemaClass<C_OP_GameDecalRenderer>.From(nint handle) => new C_OP_GameDecalRendererImpl(handle);
-    static int ISchemaClass<C_OP_GameDecalRenderer>.Size => 7224;
+    static int ISchemaClass<C_OP_GameDecalRenderer>.Size => 7360;
     static string? ISchemaClass<C_OP_GameDecalRenderer>.ClassName => null;
 
 

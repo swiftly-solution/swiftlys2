@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_SetGravityToCP : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetGravityToCP>
 {
     static C_OP_SetGravityToCP ISchemaClass<C_OP_SetGravityToCP>.From(nint handle) => new C_OP_SetGravityToCPImpl(handle);
-    static int ISchemaClass<C_OP_SetGravityToCP>.Size => 864;
+    static int ISchemaClass<C_OP_SetGravityToCP>.Size => 880;
     static string? ISchemaClass<C_OP_SetGravityToCP>.ClassName => null;
 
 

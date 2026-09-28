@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_LerpScalar : CParticleFunctionOperator, ISchemaClass<C_OP_LerpScalar>
 {
     static C_OP_LerpScalar ISchemaClass<C_OP_LerpScalar>.From(nint handle) => new C_OP_LerpScalarImpl(handle);
-    static int ISchemaClass<C_OP_LerpScalar>.Size => 856;
+    static int ISchemaClass<C_OP_LerpScalar>.Size => 872;
     static string? ISchemaClass<C_OP_LerpScalar>.ClassName => null;
 
 

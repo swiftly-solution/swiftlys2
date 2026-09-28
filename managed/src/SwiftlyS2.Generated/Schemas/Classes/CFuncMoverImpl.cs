@@ -437,6 +437,26 @@ internal partial class CFuncMoverImpl : CBaseModelEntityImpl, CFuncMover
             return ref _Handle.AsRef<bool>(_StartFollowingClosestMoverOffset!.Value);
         }
     }
+    private static nint? _StartFollowingClosestMoverWhenWithinDistanceOffset;
+
+    public ref float StartFollowingClosestMoverWhenWithinDistance
+    {
+        get
+        {
+            _StartFollowingClosestMoverWhenWithinDistanceOffset = _StartFollowingClosestMoverWhenWithinDistanceOffset ?? Schema.GetOffset(0x320E8B695CAB2C78);
+            return ref _Handle.AsRef<float>(_StartFollowingClosestMoverWhenWithinDistanceOffset!.Value);
+        }
+    }
+    private static nint? _StartFollowingClosestMoverWhenOutsideDistanceOffset;
+
+    public ref float StartFollowingClosestMoverWhenOutsideDistance
+    {
+        get
+        {
+            _StartFollowingClosestMoverWhenOutsideDistanceOffset = _StartFollowingClosestMoverWhenOutsideDistanceOffset ?? Schema.GetOffset(0x320E8B6928A28160);
+            return ref _Handle.AsRef<float>(_StartFollowingClosestMoverWhenOutsideDistanceOffset!.Value);
+        }
+    }
     private static nint? _OrientationUpdateOffset;
 
     public ref CFuncMover__OrientationUpdate_t OrientationUpdate
@@ -548,34 +568,24 @@ internal partial class CFuncMoverImpl : CBaseModelEntityImpl, CFuncMover
             return ref _Handle.AsRef<CHandle<CBaseEntity>>(_OrientationMatchEntityOffset!.Value);
         }
     }
-    private static nint? _TimeToTraverseToNextNodeOffset;
+    private static nint? _LerpToNewPosStartWSOffset;
 
-    public ref float TimeToTraverseToNextNode
+    public ref Vector LerpToNewPosStartWS
     {
         get
         {
-            _TimeToTraverseToNextNodeOffset = _TimeToTraverseToNextNodeOffset ?? Schema.GetOffset(0x320E8B6942129DF9);
-            return ref _Handle.AsRef<float>(_TimeToTraverseToNextNodeOffset!.Value);
+            _LerpToNewPosStartWSOffset = _LerpToNewPosStartWSOffset ?? Schema.GetOffset(0x320E8B69CFB17DD1);
+            return ref _Handle.AsRef<Vector>(_LerpToNewPosStartWSOffset!.Value);
         }
     }
-    private static nint? _LerpToNewPosStartInPathEntitySpaceOffset;
+    private static nint? _LerpToPositionTargetTOffset;
 
-    public ref Vector LerpToNewPosStartInPathEntitySpace
+    public ref float LerpToPositionTargetT
     {
         get
         {
-            _LerpToNewPosStartInPathEntitySpaceOffset = _LerpToNewPosStartInPathEntitySpaceOffset ?? Schema.GetOffset(0x320E8B6958D80CD2);
-            return ref _Handle.AsRef<Vector>(_LerpToNewPosStartInPathEntitySpaceOffset!.Value);
-        }
-    }
-    private static nint? _LerpToNewPosEndInPathEntitySpaceOffset;
-
-    public ref Vector LerpToNewPosEndInPathEntitySpace
-    {
-        get
-        {
-            _LerpToNewPosEndInPathEntitySpaceOffset = _LerpToNewPosEndInPathEntitySpaceOffset ?? Schema.GetOffset(0x320E8B698269BEB5);
-            return ref _Handle.AsRef<Vector>(_LerpToNewPosEndInPathEntitySpaceOffset!.Value);
+            _LerpToPositionTargetTOffset = _LerpToPositionTargetTOffset ?? Schema.GetOffset(0x320E8B6958A4294F);
+            return ref _Handle.AsRef<float>(_LerpToPositionTargetTOffset!.Value);
         }
     }
     private static nint? _LerpToPositionTOffset;
@@ -596,6 +606,61 @@ internal partial class CFuncMoverImpl : CBaseModelEntityImpl, CFuncMover
         {
             _LerpToPositionDeltaTOffset = _LerpToPositionDeltaTOffset ?? Schema.GetOffset(0x320E8B69A0AFA3BE);
             return ref _Handle.AsRef<float>(_LerpToPositionDeltaTOffset!.Value);
+        }
+    }
+    private static nint? _TransitionSourcePathOffset;
+
+    public ref CHandle<CPathMover> TransitionSourcePath
+    {
+        get
+        {
+            _TransitionSourcePathOffset = _TransitionSourcePathOffset ?? Schema.GetOffset(0x320E8B694504DCCE);
+            return ref _Handle.AsRef<CHandle<CPathMover>>(_TransitionSourcePathOffset!.Value);
+        }
+    }
+    private static nint? _TransitionSourceTOffset;
+
+    public ref float TransitionSourceT
+    {
+        get
+        {
+            _TransitionSourceTOffset = _TransitionSourceTOffset ?? Schema.GetOffset(0x320E8B6980774E43);
+            return ref _Handle.AsRef<float>(_TransitionSourceTOffset!.Value);
+        }
+    }
+    private static nint? _TransitionSourcePathLocationOffset;
+
+    public ref float TransitionSourcePathLocation
+    {
+        get
+        {
+            _TransitionSourcePathLocationOffset = _TransitionSourcePathLocationOffset ?? Schema.GetOffset(0x320E8B6955E49F5D);
+            return ref _Handle.AsRef<float>(_TransitionSourcePathLocationOffset!.Value);
+        }
+    }
+    private static nint? _TransitionSourcePathNodeStartOffset;
+
+    public string TransitionSourcePathNodeStart
+    {
+        get
+        {
+            _TransitionSourcePathNodeStartOffset = _TransitionSourcePathNodeStartOffset ?? Schema.GetOffset(0x320E8B694F6413C0);
+            return Schema.GetString(_Handle.Read<nint>(_TransitionSourcePathNodeStartOffset!.Value));
+        }
+        set
+        {
+            _TransitionSourcePathNodeStartOffset = _TransitionSourcePathNodeStartOffset ?? Schema.GetOffset(0x320E8B694F6413C0);
+            Schema.SetString(_Handle, _TransitionSourcePathNodeStartOffset!.Value, value);
+        }
+    }
+    private static nint? _StoppedDuringTransitionOffset;
+
+    public ref bool StoppedDuringTransition
+    {
+        get
+        {
+            _StoppedDuringTransitionOffset = _StoppedDuringTransitionOffset ?? Schema.GetOffset(0x320E8B69D7C3F948);
+            return ref _Handle.AsRef<bool>(_StoppedDuringTransitionOffset!.Value);
         }
     }
     private static nint? _OnLerpToPositionCompleteOffset;
@@ -1047,6 +1112,36 @@ internal partial class CFuncMoverImpl : CBaseModelEntityImpl, CFuncMover
         {
             _PathRebuildStrategyOffset = _PathRebuildStrategyOffset ?? Schema.GetOffset(0x320E8B6989C0A69F);
             return ref _Handle.AsRef<CFuncMover__PathRebuildStrategy_t>(_PathRebuildStrategyOffset!.Value);
+        }
+    }
+    private static nint? _FindFollowMoverStrategyOffset;
+
+    public ref CFuncMover__FindFollowMoverStrategy_t FindFollowMoverStrategy
+    {
+        get
+        {
+            _FindFollowMoverStrategyOffset = _FindFollowMoverStrategyOffset ?? Schema.GetOffset(0x320E8B69634FF43E);
+            return ref _Handle.AsRef<CFuncMover__FindFollowMoverStrategy_t>(_FindFollowMoverStrategyOffset!.Value);
+        }
+    }
+    private static nint? _DisableDecelerationToStopOffset;
+
+    public ref bool DisableDecelerationToStop
+    {
+        get
+        {
+            _DisableDecelerationToStopOffset = _DisableDecelerationToStopOffset ?? Schema.GetOffset(0x320E8B6905F1F8FD);
+            return ref _Handle.AsRef<bool>(_DisableDecelerationToStopOffset!.Value);
+        }
+    }
+    private static nint? _OffsetFromPathOffset;
+
+    public ref Vector OffsetFromPath
+    {
+        get
+        {
+            _OffsetFromPathOffset = _OffsetFromPathOffset ?? Schema.GetOffset(0x320E8B69C2A33691);
+            return ref _Handle.AsRef<Vector>(_OffsetFromPathOffset!.Value);
         }
     }
 

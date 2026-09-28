@@ -11,17 +11,17 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CCSCustomHudLayoutState : ISchemaClass<CCSCustomHudLayoutState>
 {
     static CCSCustomHudLayoutState ISchemaClass<CCSCustomHudLayoutState>.From(nint handle) => new CCSCustomHudLayoutStateImpl(handle);
-    static int ISchemaClass<CCSCustomHudLayoutState>.Size => 416;
+    static int ISchemaClass<CCSCustomHudLayoutState>.Size => 408;
     static string? ISchemaClass<CCSCustomHudLayoutState>.ClassName => null;
 
+
+    public ref uint PlayerSlot { get; }
 
     public ref bool InputCaptureEnabled { get; }
 
     public ref CUtlVector<HUDPanelHasClass_t> HasClasses { get; }
 
     public ref CUtlVector<HUDPanelDialogVariableString_t> DialogVariableStrings { get; }
-
-    public ref uint PlayerSlot { get; }
 
     public void InputCaptureEnabledUpdated();
     public void HasClassesUpdated();

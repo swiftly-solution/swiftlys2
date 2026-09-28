@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CBaseAnimGraphDestructibleParts_GraphController : CAnimGraphControllerBase, ISchemaClass<CBaseAnimGraphDestructibleParts_GraphController>
 {
     static CBaseAnimGraphDestructibleParts_GraphController ISchemaClass<CBaseAnimGraphDestructibleParts_GraphController>.From(nint handle) => new CBaseAnimGraphDestructibleParts_GraphControllerImpl(handle);
-    static int ISchemaClass<CBaseAnimGraphDestructibleParts_GraphController>.Size => 136;
+    static int ISchemaClass<CBaseAnimGraphDestructibleParts_GraphController>.Size => 192;
     static string? ISchemaClass<CBaseAnimGraphDestructibleParts_GraphController>.ClassName => null;
 
 }

@@ -26,6 +26,16 @@ internal partial class AI_DefaultNPC_DebugSnapshotData_tImpl : DebugSnapshotBase
             return ref _Handle.AsRef<CGlobalSymbol>(_S_npc_current_abilityOffset!.Value);
         }
     }
+    private static nint? _S_npc_current_held_abilityOffset;
+
+    public ref CGlobalSymbol S_npc_current_held_ability
+    {
+        get
+        {
+            _S_npc_current_held_abilityOffset = _S_npc_current_held_abilityOffset ?? Schema.GetOffset(0xADB6DBDFA90C337B);
+            return ref _Handle.AsRef<CGlobalSymbol>(_S_npc_current_held_abilityOffset!.Value);
+        }
+    }
     private static nint? _S_npc_tactic_currentOffset;
 
     public ref CGlobalSymbol S_npc_tactic_current

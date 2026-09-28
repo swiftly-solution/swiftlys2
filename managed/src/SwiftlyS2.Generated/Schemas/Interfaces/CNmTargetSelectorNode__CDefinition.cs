@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmTargetSelectorNode__CDefinition : CNmClipReferenceNode__CDefinition, ISchemaClass<CNmTargetSelectorNode__CDefinition>
 {
     static CNmTargetSelectorNode__CDefinition ISchemaClass<CNmTargetSelectorNode__CDefinition>.From(nint handle) => new CNmTargetSelectorNode__CDefinitionImpl(handle);
-    static int ISchemaClass<CNmTargetSelectorNode__CDefinition>.Size => 56;
+    static int ISchemaClass<CNmTargetSelectorNode__CDefinition>.Size => 64;
     static string? ISchemaClass<CNmTargetSelectorNode__CDefinition>.ClassName => null;
 
 
@@ -27,6 +27,8 @@ public partial interface CNmTargetSelectorNode__CDefinition : CNmClipReferenceNo
     public ref bool IgnoreInvalidOptions { get; }
 
     public ref bool IsWorldSpaceTarget { get; }
+
+    public ref CGlobalSymbol AlignmentBoneID { get; }
 
 
 }

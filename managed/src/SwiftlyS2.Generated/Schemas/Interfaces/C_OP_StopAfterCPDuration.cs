@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_StopAfterCPDuration : CParticleFunctionPreEmission, ISchemaClass<C_OP_StopAfterCPDuration>
 {
     static C_OP_StopAfterCPDuration ISchemaClass<C_OP_StopAfterCPDuration>.From(nint handle) => new C_OP_StopAfterCPDurationImpl(handle);
-    static int ISchemaClass<C_OP_StopAfterCPDuration>.Size => 856;
+    static int ISchemaClass<C_OP_StopAfterCPDuration>.Size => 872;
     static string? ISchemaClass<C_OP_StopAfterCPDuration>.ClassName => null;
 
 

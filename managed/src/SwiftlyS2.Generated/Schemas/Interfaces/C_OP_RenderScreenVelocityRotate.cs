@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RenderScreenVelocityRotate : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderScreenVelocityRotate>
 {
     static C_OP_RenderScreenVelocityRotate ISchemaClass<C_OP_RenderScreenVelocityRotate>.From(nint handle) => new C_OP_RenderScreenVelocityRotateImpl(handle);
-    static int ISchemaClass<C_OP_RenderScreenVelocityRotate>.Size => 560;
+    static int ISchemaClass<C_OP_RenderScreenVelocityRotate>.Size => 568;
     static string? ISchemaClass<C_OP_RenderScreenVelocityRotate>.ClassName => null;
 
 

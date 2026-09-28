@@ -54,19 +54,6 @@ internal partial class CPulseCell_Inflow_MethodImpl : CPulseCell_Inflow_BaseEntr
             return ref _Handle.AsRef<bool>(_IsPublicOffset!.Value);
         }
     }
-    private static nint? _ReturnTypeOffset;
-    private SchemaUntypedField? _ReturnTypeInstance;
-
-    public SchemaUntypedField ReturnType
-    {
-        get
-        {
-            _ReturnTypeOffset = _ReturnTypeOffset ?? Schema.GetOffset(0xFB59265566333D67);
-            var instance = _ReturnTypeInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ReturnTypeOffset!.Value);
-            return instance;
-        }
-    }
     private static nint? _ArgsOffset;
 
     public ref CUtlLeanVector<CPulseRuntimeMethodArg, int> Args
@@ -75,6 +62,16 @@ internal partial class CPulseCell_Inflow_MethodImpl : CPulseCell_Inflow_BaseEntr
         {
             _ArgsOffset = _ArgsOffset ?? Schema.GetOffset(0xFB592655DAB98BBC);
             return ref _Handle.AsRef<CUtlLeanVector<CPulseRuntimeMethodArg, int>>(_ArgsOffset!.Value);
+        }
+    }
+    private static nint? _ReturnValuesOffset;
+
+    public ref CUtlLeanVector<CPulseRuntimeMethodArg, int> ReturnValues
+    {
+        get
+        {
+            _ReturnValuesOffset = _ReturnValuesOffset ?? Schema.GetOffset(0xFB592655EE828165);
+            return ref _Handle.AsRef<CUtlLeanVector<CPulseRuntimeMethodArg, int>>(_ReturnValuesOffset!.Value);
         }
     }
 

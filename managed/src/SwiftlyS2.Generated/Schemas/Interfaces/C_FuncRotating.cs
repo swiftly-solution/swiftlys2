@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_FuncRotating : C_BaseModelEntity, ISchemaClass<C_FuncRotating>
 {
     static C_FuncRotating ISchemaClass<C_FuncRotating>.From(nint handle) => new C_FuncRotatingImpl(handle);
-    static int ISchemaClass<C_FuncRotating>.Size => 4016;
+    static int ISchemaClass<C_FuncRotating>.Size => 4248;
     static string? ISchemaClass<C_FuncRotating>.ClassName => null;
 
 }
