@@ -23,6 +23,7 @@
 #include <api/memory/hooks/manager.h>
 #include <api/scripting/scripting.h>
 #include <api/shared/env.h>
+#include <api/extension/host.h>
 
 #include <core/managed/host/host.h>
 
@@ -241,6 +242,8 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
     g_pGameServerSteamAPIDeactivated->Enable();
 
     StartFixes();
+
+    g_pExtensionHost->LoadExtensions(std::string(Plat_GetGameDirectory()) + "/" + g_sGameFolder + "/" + m_sCorePath);
 
     if (!InitializeHostFXR(std::string(Plat_GetGameDirectory()) + "/" + g_sGameFolder + "/" + m_sCorePath))
     {

@@ -46,6 +46,8 @@
 #include <api/server/players/manager.h>
 #include <api/server/translations/translations.h>
 
+#include <api/extension/host.h>
+
 #include <public/filesystem.h>
 #include <public/eiface.h>
 #include <public/engine/igameeventsystem.h>
@@ -79,6 +81,7 @@ extern ITranslations* g_pTranslations;
 extern IServerCommands* g_pServerCommands;
 extern INetMessages* g_pNetMessages;
 extern IConsoleOutput* g_pConsoleOutput;
+extern IExtensionHost* g_pExtensionHost;
 extern S2BinLib004* g_pS2BinLib;
 extern std::string g_sGameFolder;
 

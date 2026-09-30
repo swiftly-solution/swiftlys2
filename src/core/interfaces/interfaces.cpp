@@ -43,6 +43,8 @@
 #include <server/players/manager.h>
 #include <server/translations/translations.h>
 
+#include <extension/host.h>
+
 Logger g_Logger;
 MemoryAllocator g_MemoryAllocator;
 CrashReporter g_CrashReporter;
@@ -60,6 +62,7 @@ CTranslations g_Translations;
 CServerCommands g_ServerCommands;
 CNetMessages g_NetMessages;
 CConsoleOutput g_ConsoleOutput;
+CExtensionHost g_ExtensionHost;
 
 ILogger* g_pLogger = (ILogger*)&g_Logger;
 IMemoryAllocator* g_pMemoryAllocator = (IMemoryAllocator*)&g_MemoryAllocator;
@@ -78,6 +81,7 @@ ITranslations* g_pTranslations = (ITranslations*)&g_Translations;
 IServerCommands* g_pServerCommands = (IServerCommands*)&g_ServerCommands;
 INetMessages* g_pNetMessages = (INetMessages*)&g_NetMessages;
 IConsoleOutput* g_pConsoleOutput = (IConsoleOutput*)&g_ConsoleOutput;
+IExtensionHost* g_pExtensionHost = (IExtensionHost*)&g_ExtensionHost;
 
 IFileSystem* g_pGameFileSystem = nullptr;
 IVEngineServer2* g_pGameEngine = nullptr;
