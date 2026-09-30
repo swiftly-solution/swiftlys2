@@ -264,6 +264,19 @@ internal partial class C_CSWeaponBaseImpl : C_BasePlayerWeaponImpl, C_CSWeaponBa
             return instance;
         }
     }
+    private static nint? _AttackHoldStartTimeOffset;
+    private GameTime_tImpl? _AttackHoldStartTimeInstance;
+
+    public GameTime_t AttackHoldStartTime
+    {
+        get
+        {
+            _AttackHoldStartTimeOffset = _AttackHoldStartTimeOffset ?? Schema.GetOffset(0x2A669744E641D7E7);
+            var instance = _AttackHoldStartTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _AttackHoldStartTimeOffset!.Value);
+            return instance;
+        }
+    }
     private static nint? _DroppedAtTimeOffset;
     private GameTime_tImpl? _DroppedAtTimeInstance;
 
