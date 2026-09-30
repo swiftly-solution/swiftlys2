@@ -61,6 +61,8 @@ public partial interface C_CSWeaponBase : C_BasePlayerWeapon, ISchemaClass<C_CSW
 
     public GameTick_t DeployTick { get; }
 
+    public GameTime_t AttackHoldStartTime { get; }
+
     public GameTime_t DroppedAtTime { get; }
 
     public ref bool IsHauledBack { get; }

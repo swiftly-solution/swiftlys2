@@ -281,6 +281,19 @@ internal partial class CCSWeaponBaseImpl : CBasePlayerWeaponImpl, CCSWeaponBase
             return instance;
         }
     }
+    private static nint? _AttackHoldStartTimeOffset;
+    private GameTime_tImpl? _AttackHoldStartTimeInstance;
+
+    public GameTime_t AttackHoldStartTime
+    {
+        get
+        {
+            _AttackHoldStartTimeOffset = _AttackHoldStartTimeOffset ?? Schema.GetOffset(0x8102BA51E641D7E7);
+            var instance = _AttackHoldStartTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _AttackHoldStartTimeOffset!.Value);
+            return instance;
+        }
+    }
     private static nint? _DroppedAtTimeOffset;
     private GameTime_tImpl? _DroppedAtTimeInstance;
 
@@ -659,6 +672,7 @@ internal partial class CCSWeaponBaseImpl : CBasePlayerWeaponImpl, CCSWeaponBase
     public void PostponeFireReadyFracUpdated() => Schema.Update(_Handle, 0x8102BA51DC2054DC);
     public void InReloadUpdated() => Schema.Update(_Handle, 0x8102BA51184F0553);
     public void DeployTickUpdated() => Schema.Update(_Handle, 0x8102BA51FB490B1F);
+    public void AttackHoldStartTimeUpdated() => Schema.Update(_Handle, 0x8102BA51E641D7E7);
     public void DroppedAtTimeUpdated() => Schema.Update(_Handle, 0x8102BA51C3A8936F);
     public void IsHauledBackUpdated() => Schema.Update(_Handle, 0x8102BA51D8C240B9);
     public void SilencerOnUpdated() => Schema.Update(_Handle, 0x8102BA5168D3A353);
