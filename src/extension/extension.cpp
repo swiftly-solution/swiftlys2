@@ -17,6 +17,9 @@
  ************************************************************************************************/
 
 #include "extension.h"
+#include <api/extension/sw_extension.h>
+
+#include <extension/impl/core/core_impl_00001.h>
 
 Extension::Extension(const std::string& path):
     initialized_(false),
@@ -24,7 +27,9 @@ Extension::Extension(const std::string& path):
     name_("<unknown>"),
     version_("<unknown>"),
     author_("Anonymous"),
-    description_("None")
+    description_("None"),
+    core_(nullptr),
+    hot_reloaded_(false)
 {
 }
 
@@ -52,4 +57,26 @@ void Extension::Init(
 bool Extension::IsInitialized()
 {
     return initialized_;
+}
+
+void* Extension::GetCore(const char* core_name)
+{
+    std::string core(core_name);
+    if (core != SW_IFACE_CORE_00001)
+        return nullptr;
+
+    if (!core_)
+        core_ = new SwCoreImpl00001(this);
+
+    return core_;
+}
+
+void Extension::SetHotReloaded(bool hotreloaded)
+{
+    hot_reloaded_ = hotreloaded;
+}
+
+bool Extension::IsHotReloaded()
+{
+    return hot_reloaded_;
 }

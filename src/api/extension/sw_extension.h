@@ -33,7 +33,7 @@ typedef void* sw_ptr_out;
 // ----- Status code -----
     /**
      * @brief Status returned by an extension API operation.
-     * @details `SW_OK` indicates success; other values indicate an error.
+     * @note `SW_OK` indicates success; other values indicate an error.
      * See each operation for its output values and status limitations.
      */
     typedef int32_t sw_status;
@@ -49,11 +49,17 @@ typedef void* sw_ptr_out;
 // -----------------------
 
 // ----- Interfaces -----
-    #define SW_IFACE_MEMORY "SwMemory00001"
+    #define SW_IFACE_CORE_00001 "SwCore00001"
+    #define SW_IFACE_CORE SW_IFACE_CORE_00001
 // ----------------------
 
 /** @brief Extension initialization context type. */
 typedef struct sw_init_context sw_init_context;
+
+/** @brief sw_core forward declaration. */
+typedef struct sw_core_00001 sw_core_00001;
+/** @brief Extension core API. */
+typedef sw_core_00001 sw_core;
 
 /**
  * @brief Host callbacks available during extension initialization.
@@ -64,51 +70,26 @@ typedef struct sw_init_context sw_init_context;
 struct sw_init_context {
 
     /**
-     * @brief Register the extension's metadata with the host.
+     * @brief Query the core by it's version.
      *
      * @param[in]   self               Initialization context, must not be NULL.
-     * @param[in]   name               Extension name, must not be NULL.
-     * @param[in]   version            Extension version, must not be NULL.
-     * @param[in]   author             Extension author, can be NULL.
-     * @param[in]   description        Extension description, can be NULL.
-     *
-     * @return Status code.
-     * @retval      `SW_OK`            Metadata was registered.
-     * @retval      `SW_EINVALID_ARG`  Name or version is NULL.
-     *
-     * @note Must be called during sw_extension_init to initialize the extension.
-     * @note Non-NULL strings must be null-terminated. They are copied by the
-     * host and may be freed after this call.
-     */
-    sw_status (*init)(
-        const sw_init_context* self,
-        const char* name,
-        const char* version,
-        const char* author,
-        const char* description
-    );
-
-    /**
-     * @brief Query a core API interface by name.
-     *
-     * @param[in]   self               Initialization context, must not be NULL.
-     * @param[in]   iface              Null-terminated interface name, must not be NULL.
-     * @param[out]  iface_out          Pointer storage, must not be NULL. Receives
-     *                                 the interface, or NULL if it is not found.
+     * @param[in]   iface              Pass in the `SW_IFACE_CORE`.
+     * @param[out]  sw_core_out        Pointer storage, must not be NULL. Receives
+     *                                 the `sw_core` interface.
      *
      * @return Status code.
      * @retval      `SW_OK`            Interface was found.
-     * @retval      `SW_EINVALID_ARG`  Interface name was not found.
+     * @retval      `SW_EFAILED`       Interface was not found. `sw_core_out` is set to NULL.
      *
-     * @note Use the SW_IFACE_* constants in this header as interface names.
+     * @note Use the SW_IFACE_CORE for the iface parameter.
      * @note The returned interface is owned by the host and must not be freed.
      */
-    sw_status (*query_interface)(
+    sw_status (*core)(
         const sw_init_context* self,
         const char* iface,
-        sw_ptr_out iface_out
+        sw_core** sw_core_out
     );
-    
+
 };
 
 /**
@@ -129,14 +110,70 @@ typedef int32_t (*sw_extension_init_fn)(const sw_init_context* ctx);
  * @return `SW_OK` on success, or a nonzero status code on failure.
  *
  * @note Must be defined and exported by the extension.
- * @note Call `ctx->init` to register the extension's metadata before returning.
+ * @note Call `core->init->set_info` to register the extension's metadata before returning.
  * @note The context must not be used after this function returns.
  */
 SW_API int32_t sw_extension_init(const sw_init_context* ctx);
 #endif
 
-/** @brief Memory API interface type queried with SW_IFACE_MEMORY. */
-typedef struct sw_memory sw_memory;
+/** @brief Initialization API interface type. */
+typedef struct sw_init_00001 sw_init_00001;
+
+/**
+ * @brief Extension metadata registration and hot reload state APIs.
+ *
+ * @note Obtain this interface from sw_core::init and pass it as self to each
+ * callback. Call these callbacks only during sw_extension_init.
+ */
+struct sw_init_00001 {
+
+    /**
+     * @brief Register the extension's metadata with the host.
+     *
+     * @param[in]   self               Initialization context, must not be NULL.
+     * @param[in]   name               Extension name, must not be NULL.
+     * @param[in]   version            Extension version, must not be NULL.
+     * @param[in]   author             Extension author, can be NULL.
+     * @param[in]   description        Extension description, can be NULL.
+     *
+     * @return Status code.
+     * @retval      `SW_OK`            Metadata was registered.
+     * @retval      `SW_EINVALID_ARG`  Name or version is NULL.
+     *
+     * @note Must be called during sw_extension_init to initialize the extension.
+     * @note Non-NULL strings must be null-terminated. They are copied by the
+     * host and may be freed after this call.
+     */
+    sw_status (*set_info)(
+        const sw_init_00001* self,
+        const char* name,
+        const char* version,
+        const char* author,
+        const char* description
+    );
+
+    /**
+     * @brief Whether this initialization is hot reloaded manually.
+     *
+     * @param[in]   self             Initialization interface, must not be NULL.
+     * @param[out]  hotreloaded_out  Result storage, must not be NULL. Receives 1
+     *                               for a manual hot reload, or 0 otherwise.
+     *
+     * @return Status code.
+     * @retval      `SW_OK`          Result was written.
+     */
+    sw_status (*is_hotreloaded)(
+        const sw_init_00001* self,
+        int32_t* hotreloaded_out
+    );
+
+};
+
+/** @brief Extension initialization API. */
+typedef sw_init_00001 sw_init;
+
+/** @brief Memory API interface type. */
+typedef struct sw_memory_00001 sw_memory_00001;
 
 /**
  * @brief Opaque handle to a function or virtual function hook.
@@ -148,13 +185,8 @@ typedef void* sw_hook_handle;
 
 /**
  * @brief Shared pointers, memory allocation, hooks, and address lookup APIs.
- *
- * @note Obtain this interface with sw_init_context::query_interface using
- * SW_IFACE_MEMORY. Pass that interface pointer as self to each callback.
- * @note Required pointers must be valid and non-NULL. The callbacks do not
- * generally validate them or return SW_EINVALID_ARG for NULL pointers.
  */
-struct sw_memory {
+struct sw_memory_00001 {
 
     /**
      * @brief Get a pointer from the host's shared pointer registry.
@@ -172,7 +204,7 @@ struct sw_memory {
      * @note The registry does not transfer ownership of the pointed-to object.
      */
     sw_status (*get_shared_pointer)(
-        const sw_memory* self,
+        const sw_memory_00001* self,
         const char* key,
         sw_ptr_out shared_pointer_out
     );
@@ -191,7 +223,7 @@ struct sw_memory {
      * the registry, and replacing an entry does not free its previous value.
      */
     sw_status (*set_shared_pointer)(
-        const sw_memory* self,
+        const sw_memory_00001* self,
         const char* key,
         void* shared_pointer
     );
@@ -210,7 +242,7 @@ struct sw_memory {
      * @note A key with a NULL value still exists.
      */
     sw_status (*has_shared_pointer)(
-        const sw_memory* self,
+        const sw_memory_00001* self,
         const char* key,
         int32_t* result_out
     );
@@ -228,7 +260,7 @@ struct sw_memory {
      * @note Removing an entry does not free the pointed-to object.
      */
     sw_status (*remove_shared_pointer)(
-        const sw_memory* self,
+        const sw_memory_00001* self,
         const char* key
     );
 
@@ -248,7 +280,7 @@ struct sw_memory {
      * callback, or resize it with resize.
      */
     sw_status (*alloc)(
-        const sw_memory* self,
+        const sw_memory_00001* self,
         uint64_t size,
         sw_ptr_out pointer_out
     );
@@ -263,7 +295,7 @@ struct sw_memory {
      * @retval      `SW_OK`  Free request was processed.
      */
     sw_status (*free)(
-        const sw_memory* self,
+        const sw_memory_00001* self,
         void* pointer
     );
 
@@ -287,7 +319,7 @@ struct sw_memory {
      * @note Zero-size behavior is determined by the game's allocator.
      */
     sw_status (*resize)(
-        const sw_memory* self,
+        const sw_memory_00001* self,
         void* pointer,
         uint64_t new_size,
         sw_ptr_out pointer_out
@@ -317,7 +349,7 @@ struct sw_memory {
      * must not be used after the hook is removed.
      */
     sw_status (*hook_address)(
-        const sw_memory* self,
+        const sw_memory_00001* self,
         void* address,
         void* hook_callback,
         sw_hook_handle* handle_out,
@@ -336,7 +368,7 @@ struct sw_memory {
      * @note The handle and its original trampoline are invalid after this call.
      */
     sw_status (*unhook_address)(
-        const sw_memory* self,
+        const sw_memory_00001* self,
         const sw_hook_handle handle
     );
 
@@ -367,7 +399,7 @@ struct sw_memory {
      * must not be used after the hook is removed.
      */
     sw_status (*hook_vtable)(
-        const sw_memory* self,
+        const sw_memory_00001* self,
         void* vtable,
         uint32_t offset,
         void* hook_callback,
@@ -387,7 +419,7 @@ struct sw_memory {
      * @note The handle and its original trampoline are invalid after this call.
      */
     sw_status (*unhook_vtable)(
-        const sw_memory* self,
+        const sw_memory_00001* self,
         const sw_hook_handle handle
     );
 
@@ -407,7 +439,7 @@ struct sw_memory {
      * @retval      `SW_EFAILED`       Stored address is NULL.
      */
     sw_status (*gamedata_resolve_signature)(
-        const sw_memory* self,
+        const sw_memory_00001* self,
         const char* name,
         sw_ptr_out address_out
     );
@@ -427,7 +459,7 @@ struct sw_memory {
      * @retval      `SW_EINVALID_ARG`  Offset name does not exist.
      */
     sw_status (*gamedata_get_offset)(
-        const sw_memory* self,
+        const sw_memory_00001* self,
         const char* name,
         uint32_t* offset_out
     );
@@ -450,7 +482,7 @@ struct sw_memory {
      * @note The output is only valid on success.
      */
     sw_status (*resolve_signature)(
-        const sw_memory* self,
+        const sw_memory_00001* self,
         const char* library,
         const char* pattern,
         sw_ptr_out address_out
@@ -476,12 +508,21 @@ struct sw_memory {
      * @see hook_vtable
      */
     sw_status (*find_vtable)(
-        const sw_memory* self,
+        const sw_memory_00001* self,
         const char* library,
         const char* vtable,
         sw_ptr_out address_out
     );
     
+};
+
+typedef sw_memory_00001 sw_memory;
+
+struct sw_core_00001 {
+    /** @brief Extension metadata registration APIs. */
+    sw_init_00001* init;
+    /** @brief Shared pointers, memory allocation, hooks, and address lookup APIs. */
+    sw_memory_00001* memory;
 };
 
 #endif

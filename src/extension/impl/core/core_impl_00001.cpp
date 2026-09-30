@@ -16,17 +16,15 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ************************************************************************************************/
 
-#ifndef src_extension_impl_memory_memory_impl_h
-#define src_extension_impl_memory_memory_impl_h
+#include "core_impl_00001.h"
+#include <extension/extension.h>
+#include <extension/impl/memory/memory_impl_00001.h>
 
-#include <api/extension/sw_extension.h>
-#include <vector>
-
-struct SwMemoryImpl
+SwCoreImpl00001::SwCoreImpl00001(Extension* extension):
+    api_{
+        .init = &init_.api_,
+        .memory = &g_SwMemoryImpl00001.api
+    },
+    init_(extension)
 {
-    sw_memory api;
-};
-
-extern SwMemoryImpl g_SwMemoryImpl;
-
-#endif
+}

@@ -16,36 +16,44 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ************************************************************************************************/
 
-#ifndef src_extension_extension_h
-#define src_extension_extension_h
+#include "init_impl_00001.h"
+#include <extension/extension.h>
 
-#include <string>
-
-enum class ExtensionLoadState
+namespace
 {
-    Loading,
-    Loaded,
-    Failed
-};
 
-class Extension
+SwInitImpl00001* from_self(const sw_init_00001* self)
 {
-public:
-    Extension(const std::string& path);
-    virtual void Init(const char* name, const char* version, const char* author, const char* description);
-    virtual bool IsInitialized();
-    virtual void* GetCore(const char* core_name);
-    virtual void SetHotReloaded(bool hotreloaded);
-    virtual bool IsHotReloaded();
-private:
-    bool initialized_;
-    std::string path_;
-    std::string name_;
-    std::string version_;
-    std::string author_;
-    std::string description_;
-    void* core_;
-    bool hot_reloaded_;
-};
+    return reinterpret_cast<SwInitImpl00001*>(const_cast<sw_init_00001*>(self));
+}
 
-#endif
+sw_status set_info(
+    const sw_init_00001* self,
+    const char* name,
+    const char* version,
+    const char* author,
+    const char* description)
+{
+    if (!name || !version)
+    {
+        return SW_EINVALID_ARG;
+    }
+    from_self(self)->extension_->Init(name, version, author, description);
+    return SW_OK;
+}
+
+sw_status is_hotreloaded(
+    const sw_init_00001* self,
+    int32_t* hotreloaded_out)
+{
+    *hotreloaded_out = from_self(self)->extension_->IsHotReloaded() ? 1 : 0;
+    return SW_OK;
+}
+
+}
+
+SwInitImpl00001::SwInitImpl00001(Extension* extension):
+    api_{set_info, is_hotreloaded},
+    extension_(extension)
+{
+}

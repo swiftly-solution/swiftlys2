@@ -16,36 +16,17 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ************************************************************************************************/
 
-#ifndef src_extension_extension_h
-#define src_extension_extension_h
+#ifndef src_extension_impl_memory_memory_impl_h
+#define src_extension_impl_memory_memory_impl_h
 
-#include <string>
+#include <api/extension/sw_extension.h>
+#include <vector>
 
-enum class ExtensionLoadState
+struct SwMemoryImpl00001
 {
-    Loading,
-    Loaded,
-    Failed
+    sw_memory_00001 api;
 };
 
-class Extension
-{
-public:
-    Extension(const std::string& path);
-    virtual void Init(const char* name, const char* version, const char* author, const char* description);
-    virtual bool IsInitialized();
-    virtual void* GetCore(const char* core_name);
-    virtual void SetHotReloaded(bool hotreloaded);
-    virtual bool IsHotReloaded();
-private:
-    bool initialized_;
-    std::string path_;
-    std::string name_;
-    std::string version_;
-    std::string author_;
-    std::string description_;
-    void* core_;
-    bool hot_reloaded_;
-};
+extern SwMemoryImpl00001 g_SwMemoryImpl00001;
 
 #endif

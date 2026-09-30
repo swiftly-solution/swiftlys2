@@ -24,11 +24,11 @@
 
 #include <stdint.h>
 
-struct HostInitContext {
+struct InitContextImpl {
     sw_init_context api;
     Extension* data;
 };
 
-HostInitContext CreateContext(Extension* data);
+InitContextImpl CreateContext(Extension* data);
 
 #endif

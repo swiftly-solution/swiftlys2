@@ -16,18 +16,18 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ************************************************************************************************/
 
-#include "memory_impl.h"
+#include "memory_impl_00001.h"
 
 #include <api/interfaces/interfaces.h>
 #include <memory/gamedata/manager.h>
 
-SwMemoryImpl* from_self(const sw_memory* self)
+SwMemoryImpl00001* from_self(const sw_memory_00001* self)
 {
-    return reinterpret_cast<SwMemoryImpl*>(const_cast<sw_memory*>(self));
+    return reinterpret_cast<SwMemoryImpl00001*>(const_cast<sw_memory_00001*>(self));
 }
 
 sw_status get_shared_pointer(
-    const sw_memory* self,
+    const sw_memory_00001* self,
     const char* key,
     sw_ptr_out shared_pointer_out
 )
@@ -40,7 +40,7 @@ sw_status get_shared_pointer(
 }
 
 sw_status set_shared_pointer(
-    const sw_memory* self,
+    const sw_memory_00001* self,
     const char* key,
     void* shared_pointer
 )
@@ -50,7 +50,7 @@ sw_status set_shared_pointer(
 }
 
 sw_status has_shared_pointer(
-    const sw_memory* self,
+    const sw_memory_00001* self,
     const char* key,
     int32_t* result_out
 )
@@ -60,7 +60,7 @@ sw_status has_shared_pointer(
 }
 
 sw_status remove_shared_pointer(
-    const sw_memory* self,
+    const sw_memory_00001* self,
     const char* key
 )
 {
@@ -71,7 +71,7 @@ sw_status remove_shared_pointer(
 }
 
 sw_status alloc(
-    const sw_memory* self,
+    const sw_memory_00001* self,
     uint64_t size,
     void** pointer_out
 )
@@ -83,7 +83,7 @@ sw_status alloc(
 
 
 sw_status free(
-    const sw_memory* self,
+    const sw_memory_00001* self,
     void* pointer
 )
 {
@@ -92,7 +92,7 @@ sw_status free(
 }
 
 sw_status resize(
-    const sw_memory* self,
+    const sw_memory_00001* self,
     void* pointer,
     uint64_t new_size,
     void** pointer_out
@@ -103,7 +103,7 @@ sw_status resize(
 }
 
 sw_status hook_address(
-    const sw_memory* self,
+    const sw_memory_00001* self,
     void* address,
     void* hook_callback,
     sw_hook_handle* handle_out,
@@ -131,7 +131,7 @@ sw_status hook_address(
 }
 
 sw_status unhook_address(
-    const sw_memory* self,
+    const sw_memory_00001* self,
     const sw_hook_handle handle
 )
 {
@@ -143,7 +143,7 @@ sw_status unhook_address(
 }
 
 sw_status hook_vtable(
-    const sw_memory* self,
+    const sw_memory_00001* self,
     void* vtable,
     uint32_t offset,
     void* hook_callback,
@@ -172,7 +172,7 @@ sw_status hook_vtable(
 }
 
 sw_status unhook_vtable(
-    const sw_memory* self,
+    const sw_memory_00001* self,
     const sw_hook_handle handle
 )
 {
@@ -184,7 +184,7 @@ sw_status unhook_vtable(
 }
 
 sw_status gamedata_resolve_signature(
-    const sw_memory* self,
+    const sw_memory_00001* self,
     const char* name,
     void** address_out
 )
@@ -201,7 +201,7 @@ sw_status gamedata_resolve_signature(
 }
 
 sw_status gamedata_get_offset(
-    const sw_memory* self,
+    const sw_memory_00001* self,
     const char* name,
     uint32_t* offset_out
 )
@@ -216,7 +216,7 @@ sw_status gamedata_get_offset(
 }
 
 sw_status resolve_signature(
-    const sw_memory* self,
+    const sw_memory_00001* self,
     const char* library,
     const char* pattern,
     void** address_out
@@ -232,7 +232,7 @@ sw_status resolve_signature(
 }
 
 sw_status find_vtable(
-    const sw_memory* self,
+    const sw_memory_00001* self,
     const char* library,
     const char* vtable,
     void** address_out
@@ -248,7 +248,7 @@ sw_status find_vtable(
     return SW_OK;
 }
 
-SwMemoryImpl g_SwMemoryImpl{
+SwMemoryImpl00001 g_SwMemoryImpl00001{
     .api = {
         .get_shared_pointer = get_shared_pointer,
         .set_shared_pointer = set_shared_pointer,

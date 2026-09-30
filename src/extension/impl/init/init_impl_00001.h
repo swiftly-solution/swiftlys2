@@ -16,36 +16,19 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ************************************************************************************************/
 
-#ifndef src_extension_extension_h
-#define src_extension_extension_h
+#ifndef src_extension_impl_init_init_impl_00001_h
+#define src_extension_impl_init_init_impl_00001_h
 
-#include <string>
+#include <api/extension/sw_extension.h>
 
-enum class ExtensionLoadState
+class Extension;
+
+struct SwInitImpl00001
 {
-    Loading,
-    Loaded,
-    Failed
-};
+    sw_init_00001 api_;
+    Extension* extension_;
 
-class Extension
-{
-public:
-    Extension(const std::string& path);
-    virtual void Init(const char* name, const char* version, const char* author, const char* description);
-    virtual bool IsInitialized();
-    virtual void* GetCore(const char* core_name);
-    virtual void SetHotReloaded(bool hotreloaded);
-    virtual bool IsHotReloaded();
-private:
-    bool initialized_;
-    std::string path_;
-    std::string name_;
-    std::string version_;
-    std::string author_;
-    std::string description_;
-    void* core_;
-    bool hot_reloaded_;
+    SwInitImpl00001(Extension* extension);
 };
 
 #endif

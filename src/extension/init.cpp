@@ -18,58 +18,31 @@
 
 #include "init.h"
 
-#include <unordered_map>
-
 #include <api/extension/sw_extension.h>
-#include "impl/memory/memory_impl.h"
 
-static const std::unordered_map<std::string, void*> ifaces = {
-    {"SwMemory00001", &g_SwMemoryImpl}
-};
-
-HostInitContext* from_self(const sw_init_context* self)
+InitContextImpl* from_self(const sw_init_context* self)
 {
-    return reinterpret_cast<HostInitContext*>(const_cast<sw_init_context*>(self));
+    return reinterpret_cast<InitContextImpl*>(const_cast<sw_init_context*>(self));
 }
 
-sw_status init(
+sw_status core(
     const sw_init_context* self,
-    const char* name,
-    const char* version,
-    const char* author,
-    const char* description)
+    const char* core,
+    sw_core** iface_out)
 {
-    if (!name || !version)
-    {
-        return SW_EINVALID_ARG;
-    }
-    from_self(self)->data->Init(name, version, author, description);
+    *iface_out = reinterpret_cast<sw_core*>(from_self(self)->data->GetCore(core));
+
+    if (!*iface_out)
+        return SW_EFAILED;
+
     return SW_OK;
 }
 
-sw_status query_interface(
-    const sw_init_context* self,
-    const char* iface, 
-    void** iface_out)
+InitContextImpl CreateContext(Extension* data)
 {
-    auto it = ifaces.find(iface);
-    if (it == ifaces.end())
-    {
-        *iface_out = 0;
-        return SW_EINVALID_ARG;
-    }
-    
-    *iface_out = it->second;
-    
-    return SW_OK;
-}
-
-HostInitContext CreateContext(Extension* data)
-{
-    HostInitContext ctx{
+    InitContextImpl ctx{
         .api = {
-            init,
-            query_interface
+            core
         },
         .data = data
     };
