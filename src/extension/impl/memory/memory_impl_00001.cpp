@@ -19,6 +19,7 @@
 #include "memory_impl_00001.h"
 
 #include <api/interfaces/interfaces.h>
+#include <core/entrypoint.h>
 #include <memory/gamedata/manager.h>
 
 SwMemoryImpl00001* from_self(const sw_memory_00001* self)
@@ -33,7 +34,7 @@ sw_status get_shared_pointer(
 )
 {
     if (!g_pExtensionHost->HasSharedPointer(key))
-        return SW_EINVALID_ARG;
+        return SW_E_INVALID_ARG;
     
     *shared_pointer_out = g_pExtensionHost->GetSharedPointer(key);
     return SW_OK;
@@ -65,7 +66,7 @@ sw_status remove_shared_pointer(
 )
 {
     if (!g_pExtensionHost->HasSharedPointer(key))
-        return SW_EINVALID_ARG;
+        return SW_E_INVALID_ARG;
     g_pExtensionHost->RemoveSharedPointer(key);
     return SW_OK;
 }
@@ -77,7 +78,7 @@ sw_status alloc(
 )
 {
     *pointer_out = g_pMemoryAllocator->Alloc(size);
-    if (*pointer_out == 0) return SW_EFAILED;
+    if (*pointer_out == 0) return SW_E_FAILED;
     return SW_OK;
 }
 
@@ -120,7 +121,7 @@ sw_status hook_address(
     if (!original)
     {
         g_pHooksManager->DestroyFunctionHook(hook);
-        return SW_EFAILED;
+        return SW_E_FAILED;
     }
 
     hook->Enable();
@@ -161,7 +162,7 @@ sw_status hook_vtable(
     if (!original)
     {
         g_pHooksManager->DestroyVFunctionHook(hook);
-        return SW_EFAILED;
+        return SW_E_FAILED;
     }
 
     hook->Enable();
@@ -190,12 +191,12 @@ sw_status gamedata_resolve_signature(
 )
 {
     if (!g_pGameDataManager->GetSignatures()->Exists(name))
-        return SW_EINVALID_ARG;
+        return SW_E_INVALID_ARG;
 
     void* result = g_pGameDataManager->GetSignatures()->Fetch(name);
     *address_out = result;
     if (!result)
-        return SW_EFAILED;
+        return SW_E_FAILED;
     
     return SW_OK;
 }
@@ -207,7 +208,7 @@ sw_status gamedata_get_offset(
 )
 {
     if (!g_pGameDataManager->GetOffsets()->Exists(name))
-        return SW_EINVALID_ARG;
+        return SW_E_INVALID_ARG;
 
     uint32_t result = g_pGameDataManager->GetOffsets()->Fetch(name);
     *offset_out = result;
@@ -224,9 +225,9 @@ sw_status resolve_signature(
 {
     auto err = g_pS2BinLib->PatternScan(library, pattern, address_out);
     if (err)
-        return SW_EFAILED;
+        return SW_E_FAILED;
     if (!*address_out)
-        return SW_EFAILED;
+        return SW_E_FAILED;
 
     return SW_OK;
 }
@@ -241,10 +242,26 @@ sw_status find_vtable(
     auto err = g_pS2BinLib->FindVtable(library, vtable, address_out);
 
     if (err)
-        return SW_EFAILED;
+        return SW_E_FAILED;
     if (!*address_out)
-        return SW_EFAILED;
+        return SW_E_FAILED;
     
+    return SW_OK;
+}
+
+sw_status get_valve_interface(
+    const sw_memory_00001* self,
+    const char* interface_name,
+    sw_ptr_out interface_out
+)
+{
+    if (!self || !interface_name || !interface_out)
+        return SW_E_INVALID_ARG;
+
+    *interface_out = g_SwiftlyCore.GetInterface(interface_name);
+    if (!*interface_out)
+        return SW_E_FAILED;
+
     return SW_OK;
 }
 
@@ -264,6 +281,7 @@ SwMemoryImpl00001 g_SwMemoryImpl00001{
         .gamedata_resolve_signature = gamedata_resolve_signature,
         .gamedata_get_offset = gamedata_get_offset,
         .resolve_signature = resolve_signature,
-        .find_vtable = find_vtable
+        .find_vtable = find_vtable,
+        .get_valve_interface = get_valve_interface
     }
 };

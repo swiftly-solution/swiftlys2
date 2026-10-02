@@ -16,17 +16,16 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ************************************************************************************************/
 
-#include "core_impl_00001.h"
-#include <extension/extension.h>
-#include <extension/impl/memory/memory_impl_00001.h>
-#include <extension/impl/schema/schema_impl_00001.h>
+#ifndef src_extension_impl_schema_schema_impl_h
+#define src_extension_impl_schema_schema_impl_h
 
-SwCoreImpl00001::SwCoreImpl00001(Extension* extension):
-    api_{
-        .init = &init_.api_,
-        .memory = &g_SwMemoryImpl00001.api,
-        .schema = &g_SwSchemaImpl00001.api
-    },
-    init_(extension)
+#include <api/extension/sw_extension.h>
+
+struct SwSchemaImpl00001
 {
-}
+    sw_schema_00001 api;
+};
+
+extern SwSchemaImpl00001 g_SwSchemaImpl00001;
+
+#endif

@@ -33,7 +33,7 @@ sw_status core(
     *iface_out = reinterpret_cast<sw_core*>(from_self(self)->data->GetCore(core));
 
     if (!*iface_out)
-        return SW_EFAILED;
+        return SW_E_FAILED;
 
     return SW_OK;
 }

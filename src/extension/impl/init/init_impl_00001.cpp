@@ -36,7 +36,7 @@ sw_status set_info(
 {
     if (!name || !version)
     {
-        return SW_EINVALID_ARG;
+        return SW_E_INVALID_ARG;
     }
     from_self(self)->extension_->Init(name, version, author, description);
     return SW_OK;

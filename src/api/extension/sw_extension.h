@@ -41,11 +41,13 @@ typedef void* sw_ptr_out;
     /** @brief The operation completed successfully. */
     #define SW_OK 0
     /** @brief The operation failed. */
-    #define SW_EFAILED -1
+    #define SW_E_FAILED -1
     /** @brief An argument is invalid or a requested key does not exist. */
-    #define SW_EINVALID_ARG -2
+    #define SW_E_INVALID_ARG -2
     /** @brief The supplied output buffer is too small. */
-    #define SW_EBUFFER_TOO_SMALL -3
+    #define SW_E_BUFFER_TOO_SMALL -3
+    /** @brief This function is not allowed to call at current state. */
+    #define SW_E_INVALID_OPERATION -4
 // -----------------------
 
 // ----- Interfaces -----
@@ -79,7 +81,7 @@ struct sw_init_context {
      *
      * @return Status code.
      * @retval      `SW_OK`            Interface was found.
-     * @retval      `SW_EFAILED`       Interface was not found. `sw_core_out` is set to NULL.
+     * @retval      `SW_E_FAILED`       Interface was not found. `sw_core_out` is set to NULL.
      *
      * @note Use the SW_IFACE_CORE for the iface parameter.
      * @note The returned interface is owned by the host and must not be freed.
@@ -138,7 +140,7 @@ struct sw_init_00001 {
      *
      * @return Status code.
      * @retval      `SW_OK`            Metadata was registered.
-     * @retval      `SW_EINVALID_ARG`  Name or version is NULL.
+     * @retval      `SW_E_INVALID_ARG`  Name or version is NULL.
      *
      * @note Must be called during sw_extension_init to initialize the extension.
      * @note Non-NULL strings must be null-terminated. They are copied by the
@@ -199,7 +201,7 @@ struct sw_memory_00001 {
      *
      * @return Status code.
      * @retval      `SW_OK`             Key exists; its value may be NULL.
-     * @retval      `SW_EINVALID_ARG`   Key does not exist.
+     * @retval      `SW_E_INVALID_ARG`   Key does not exist.
      *
      * @note The registry does not transfer ownership of the pointed-to object.
      */
@@ -255,7 +257,7 @@ struct sw_memory_00001 {
      *
      * @return Status code.
      * @retval      `SW_OK`            Entry was removed.
-     * @retval      `SW_EINVALID_ARG`  Key does not exist.
+     * @retval      `SW_E_INVALID_ARG`  Key does not exist.
      *
      * @note Removing an entry does not free the pointed-to object.
      */
@@ -274,7 +276,7 @@ struct sw_memory_00001 {
      *
      * @return Status code.
      * @retval      `SW_OK`       Allocation returned a non-NULL pointer.
-     * @retval      `SW_EFAILED`  Allocator returned NULL.
+     * @retval      `SW_E_FAILED`  Allocator returned NULL.
      *
      * @note Memory is not initialized. Release it with this interface's free
      * callback, or resize it with resize.
@@ -339,7 +341,7 @@ struct sw_memory_00001 {
      *
      * @return Status code.
      * @retval      `SW_OK`        A non-NULL original trampoline was created.
-     * @retval      `SW_EFAILED`   Original trampoline is NULL; hook was not enabled.
+     * @retval      `SW_E_FAILED`   Original trampoline is NULL; hook was not enabled.
      *
      * @note The callback and original function must use the target function's
      * signature and calling convention.
@@ -388,7 +390,7 @@ struct sw_memory_00001 {
      *
      * @return Status code.
      * @retval      `SW_OK`        A non-NULL original trampoline was created.
-     * @retval      `SW_EFAILED`   Original trampoline is NULL; hook was not enabled.
+     * @retval      `SW_E_FAILED`   Original trampoline is NULL; hook was not enabled.
      *
      * @note Pass the vtable address itself, not an object instance.
      * @note The callback and original function must use the target function's
@@ -435,8 +437,8 @@ struct sw_memory_00001 {
      *
      * @return Status code.
      * @retval      `SW_OK`            A non-NULL address was found.
-     * @retval      `SW_EINVALID_ARG`  Signature name does not exist.
-     * @retval      `SW_EFAILED`       Stored address is NULL.
+     * @retval      `SW_E_INVALID_ARG`  Signature name does not exist.
+     * @retval      `SW_E_FAILED`       Stored address is NULL.
      */
     sw_status (*gamedata_resolve_signature)(
         const sw_memory_00001* self,
@@ -456,7 +458,7 @@ struct sw_memory_00001 {
      *
      * @return Status code.
      * @retval      `SW_OK`            A nonzero offset was found.
-     * @retval      `SW_EINVALID_ARG`  Offset name does not exist.
+     * @retval      `SW_E_INVALID_ARG`  Offset name does not exist.
      */
     sw_status (*gamedata_get_offset)(
         const sw_memory_00001* self,
@@ -513,16 +515,92 @@ struct sw_memory_00001 {
         const char* vtable,
         sw_ptr_out address_out
     );
-    
+
+    /**
+     * @brief Look up a Valve interface.
+     *
+     * @param[in]   self            Memory interface, must not be NULL.
+     * @param[in]   interface_name  Null-terminated interface version name,
+     *                              must not be NULL.
+     * @param[out]  interface_out   Pointer storage, must not be NULL. Receives
+     *                              the interface, or NULL if it was not found.
+     *
+     * @retval `SW_OK`             A non-NULL interface was found.
+     * @retval `SW_E_FAILED`       Interface lookup failed.
+     * @retval `SW_E_INVALID_ARG`  An argument is NULL; the output is unchanged.
+     *
+     * @note The returned interface belongs to the game and must not be freed.
+     */
+    sw_status (*get_valve_interface)(
+        const sw_memory_00001* self,
+        const char* interface_name,
+        sw_ptr_out interface_out
+    );
+
 };
 
 typedef sw_memory_00001 sw_memory;
+
+/** @brief Schema API interface type. */
+typedef struct sw_schema_00001 sw_schema_00001;
+
+/** @brief Schema field lookup and network state change APIs. */
+struct sw_schema_00001 {
+
+    /**
+     * @brief Look up a schema field's byte offset within its declaring class.
+     *
+     * @param[in]   self        Schema interface, must not be NULL.
+     * @param[in]   class_name  Null-terminated schema class name, must not be NULL.
+     * @param[in]   field_name  Null-terminated schema field name, must not be NULL.
+     * @param[out]  offset_out  Result storage, must not be NULL. Receives the
+     *                          byte offset on success; unchanged on failure.
+     *
+     * @retval `SW_OK`             Field was found; its offset may be zero.
+     * @retval `SW_E_INVALID_ARG`  An argument is NULL or the field does not exist.
+     *
+     * @note Class and field names are case-sensitive. For inherited fields,
+     * use the class that declares the field.
+     */
+    sw_status (*get_schema_offset)(
+        const sw_schema_00001* self,
+        const char* class_name,
+        const char* field_name,
+        uint32_t* offset_out
+    );
+
+    /**
+     * @brief Notify the game that a schema field's value has changed.
+     *
+     * @param[in]  self        Schema interface, must not be NULL.
+     * @param[in]  object      Live instance of the declaring class, must not be NULL.
+     * @param[in]  class_name  Null-terminated schema class name, must not be NULL.
+     * @param[in]  field_name  Null-terminated schema field name, must not be NULL.
+     *
+     * @retval `SW_OK`             The field exists and the notification was submitted.
+     * @retval `SW_E_INVALID_ARG`  An argument is NULL or the field does not exist.
+     *
+     * @note Call after modifying the field, on the game thread. Names are
+     * case-sensitive; use the class that declares the field.
+     */
+    sw_status (*set_state_changed)(
+        const sw_schema_00001* self,
+        void* object,
+        const char* class_name,
+        const char* field_name
+    );
+};
+
+/** @brief Extension schema API. */
+typedef sw_schema_00001 sw_schema;
 
 struct sw_core_00001 {
     /** @brief Extension metadata registration APIs. */
     sw_init_00001* init;
     /** @brief Shared pointers, memory allocation, hooks, and address lookup APIs. */
     sw_memory_00001* memory;
+    /** @brief Schema field lookup and network state change APIs. */
+    sw_schema_00001* schema;
 };
 
 #endif
