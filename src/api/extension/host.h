@@ -20,11 +20,26 @@
 #define src_api_extension_host_h
 
 #include <string>
+#include <vector>
+
+struct ExtensionInfo
+{
+    std::string id;
+    std::string name;
+    std::string version;
+    std::string author;
+    std::string description;
+    std::string path;
+    bool initialized;
+};
 
 class IExtensionHost
 {
 public:
     virtual void LoadExtensions(std::string origin_path) = 0;
+    virtual bool LoadExtension(const std::string& id) = 0;
+    virtual bool UnloadExtension(const std::string& id) = 0;
+    virtual std::vector<ExtensionInfo> GetExtensions() = 0;
     virtual void* GetSharedPointer(const std::string& key) = 0;
     virtual void SetSharedPointer(const std::string& key, void* value) = 0;
     virtual bool HasSharedPointer(const std::string& key) = 0;

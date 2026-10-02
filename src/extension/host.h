@@ -23,6 +23,7 @@
 
 #include <api/extension/host.h>
 
+#include <memory>
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -31,13 +32,18 @@ class CExtensionHost : public IExtensionHost
 {
 public:
     virtual void LoadExtensions(std::string origin_path) override;
-    virtual void LoadExtension(const std::string& path);
+    virtual bool LoadExtension(const std::string& id) override;
+    virtual bool UnloadExtension(const std::string& id) override;
+    virtual std::vector<ExtensionInfo> GetExtensions() override;
     virtual void* GetSharedPointer(const std::string& key) override;
     virtual void SetSharedPointer(const std::string& key, void* value) override;
     virtual bool HasSharedPointer(const std::string& key) override;
     virtual void RemoveSharedPointer(const std::string& key) override;
 private:
-    std::vector<Extension> extensions_;
+    bool LoadExtensionFromPath(const std::string& id, const std::string& path, bool hotreloaded);
+
+    std::string extensions_folder_;
+    std::vector<std::unique_ptr<Extension>> extensions_;
     std::unordered_map<std::string, void*> shared_pointers_;
 
 };

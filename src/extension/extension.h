@@ -31,19 +31,33 @@ enum class ExtensionLoadState
 class Extension
 {
 public:
-    Extension(const std::string& path);
+    Extension(const std::string& id, const std::string& path, void* library);
+    ~Extension();
+    Extension(const Extension&) = delete;
+    Extension& operator=(const Extension&) = delete;
+
     virtual void Init(const char* name, const char* version, const char* author, const char* description);
     virtual bool IsInitialized();
     virtual void* GetCore(const char* core_name);
     virtual void SetHotReloaded(bool hotreloaded);
     virtual bool IsHotReloaded();
+
+    const std::string& GetId() const { return id_; }
+    const std::string& GetPath() const { return path_; }
+    const std::string& GetName() const { return name_; }
+    const std::string& GetVersion() const { return version_; }
+    const std::string& GetAuthor() const { return author_; }
+    const std::string& GetDescription() const { return description_; }
+    void* GetLibrary() const { return library_; }
 private:
     bool initialized_;
+    std::string id_;
     std::string path_;
     std::string name_;
     std::string version_;
     std::string author_;
     std::string description_;
+    void* library_;
     void* core_;
     bool hot_reloaded_;
 };

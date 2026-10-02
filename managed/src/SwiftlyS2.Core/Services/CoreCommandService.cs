@@ -10,6 +10,8 @@ using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared.Commands;
 using SwiftlyS2.Shared.Plugins;
 using System.Diagnostics;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace SwiftlyS2.Core.Services;
 
@@ -211,6 +213,9 @@ internal class CoreCommandService
                 case "plugins" when RequireConsoleAccess():
                     PluginCommand(context);
                     break;
+                case "ext" when RequireConsoleAccess():
+                    ExtensionCommand(context);
+                    break;
                 case "profiler" when RequireConsoleAccess():
                     ProfilerCommand(context);
                     break;
@@ -252,6 +257,7 @@ internal class CoreCommandService
                 .AddRow(Markup.Escape("cmds [page]"), "List all plugin commands (paginated, 20 per page)")
                 .AddRow("confilter", "Console Filter Menu")
                 .AddRow("plugins", "Plugin Management Menu")
+                .AddRow("ext", "Extension Management Menu")
                 .AddRow("memory", "Show managed memory usage overview and a per-plugin heap breakdown")
                 .AddRow("profiler", "Profiler Menu")
                 .AddRow("translations", "Translations Menu");
@@ -575,6 +581,107 @@ internal class CoreCommandService
                         logger.LogWarning("Failed to reload plugin: {Format}", args[2]);
                     }
                     Console.WriteLine("\n");
+                }
+                break;
+            default:
+                logger.LogWarning("Unknown command");
+                break;
+        }
+    }
+
+    private sealed record ExtensionInfo(
+        [property: JsonPropertyName("id")] string Id,
+        [property: JsonPropertyName("name")] string Name,
+        [property: JsonPropertyName("version")] string Version,
+        [property: JsonPropertyName("author")] string Author,
+        [property: JsonPropertyName("description")] string Description,
+        [property: JsonPropertyName("path")] string Path,
+        [property: JsonPropertyName("initialized")] bool Initialized );
+
+    private void ExtensionCommand( ICommandContext context )
+    {
+        void ShowExtensionList()
+        {
+            var extensions = JsonSerializer.Deserialize<List<ExtensionInfo>>(NativeExtensions.GetExtensions()) ?? [];
+
+            var table = new Table()
+                .AddColumn("Status")
+                .AddColumn("Id")
+                .AddColumn("Name (ver.)")
+                .AddColumn("Author")
+                .AddColumn("Location");
+
+            foreach (var ext in extensions)
+            {
+                _ = table.AddRow(
+                    ext.Initialized ? "Loaded" : "Uninitialized",
+                    Markup.Escape(ext.Id),
+                    Markup.Escape($"{ext.Name} {ext.Version}"),
+                    Markup.Escape(ext.Author),
+                    Markup.Escape(Path.Join("(swRoot)", Path.GetRelativePath(rootDirService.GetRoot(), ext.Path))));
+            }
+
+            logger.LogInformation("Extensions ({Count} total):", extensions.Count);
+            AnsiConsole.Write(table);
+        }
+
+        void ShowExtensionHelp()
+        {
+            var table = new Table()
+                .AddColumn("Command")
+                .AddColumn("Description")
+                .AddRow("list", "List all loaded extensions")
+                .AddRow(Markup.Escape("load <id>"), "Load an extension from extensions/<id>/")
+                .AddRow(Markup.Escape("unload <id>"), "Unload an extension");
+            AnsiConsole.Write(table);
+        }
+
+        bool ValidateExtensionId( string[] args, string command )
+        {
+            if (args.Length >= 3)
+            {
+                return true;
+            }
+            logger.LogWarning("Usage: sw ext {Command} <id>", command);
+            return false;
+        }
+
+        var args = context.Args;
+        if (args.Length == 1)
+        {
+            ShowExtensionHelp();
+            return;
+        }
+
+        switch (args[1].Trim().ToLower())
+        {
+            case "list":
+                ShowExtensionList();
+                break;
+            case "load":
+                if (ValidateExtensionId(args, "load"))
+                {
+                    if (NativeExtensions.Load(args[2]))
+                    {
+                        logger.LogInformation("Loaded extension: {Id}", args[2]);
+                    }
+                    else
+                    {
+                        logger.LogWarning("Failed to load extension: {Id}", args[2]);
+                    }
+                }
+                break;
+            case "unload":
+                if (ValidateExtensionId(args, "unload"))
+                {
+                    if (NativeExtensions.Unload(args[2]))
+                    {
+                        logger.LogInformation("Unloaded extension: {Id}", args[2]);
+                    }
+                    else
+                    {
+                        logger.LogWarning("Failed to unload extension: {Id}", args[2]);
+                    }
                 }
                 break;
             default:

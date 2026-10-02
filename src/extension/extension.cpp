@@ -21,16 +21,23 @@
 
 #include <extension/impl/core/core_impl_00001.h>
 
-Extension::Extension(const std::string& path):
+Extension::Extension(const std::string& id, const std::string& path, void* library):
     initialized_(false),
+    id_(id),
     path_(path),
     name_("<unknown>"),
     version_("<unknown>"),
     author_("Anonymous"),
     description_("None"),
+    library_(library),
     core_(nullptr),
     hot_reloaded_(false)
 {
+}
+
+Extension::~Extension()
+{
+    delete static_cast<SwCoreImpl00001*>(core_);
 }
 
 void Extension::Init(

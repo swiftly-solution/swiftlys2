@@ -1,0 +1,5 @@
+class Extensions
+
+string GetExtensions = void // returns a JSON array with the loaded extensions
+bool Load = string id // loads the extension located at extensions/{id}/{id}.(dll|so)
+bool Unload = string id // unloads the extension
