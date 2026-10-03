@@ -20,6 +20,7 @@
 #include <api/extension/sw_extension.h>
 
 #include <extension/impl/core/core_impl_00001.h>
+#include <core/managed/host/dynlib.h>
 
 Extension::Extension(const std::string& id, const std::string& path, void* library):
     initialized_(false),
@@ -31,13 +32,22 @@ Extension::Extension(const std::string& id, const std::string& path, void* libra
     description_("None"),
     library_(library),
     core_(nullptr),
-    hot_reloaded_(false)
+    hot_reloaded_(false),
+    initializing_(true),
+    unload_callback_(nullptr),
+    unload_user_data_(nullptr),
+    on_all_extensions_loaded_callback_(nullptr),
+    on_all_extensions_loaded_user_data_(nullptr)
 {
 }
 
 Extension::~Extension()
 {
+    FinishInitialization();
+    if (unload_callback_)
+        unload_callback_(unload_user_data_);
     delete static_cast<SwCoreImpl00001*>(core_);
+    unload_library(library_);
 }
 
 void Extension::Init(
@@ -86,4 +96,27 @@ void Extension::SetHotReloaded(bool hotreloaded)
 bool Extension::IsHotReloaded()
 {
     return hot_reloaded_;
+}
+
+void Extension::FinishInitialization()
+{
+    initializing_ = false;
+}
+
+void Extension::SetUnloadCallback(sw_extension_callback_fn callback, void* user_data)
+{
+    unload_callback_ = callback;
+    unload_user_data_ = user_data;
+}
+
+void Extension::SetOnAllExtensionsLoadedCallback(sw_extension_callback_fn callback, void* user_data)
+{
+    on_all_extensions_loaded_callback_ = callback;
+    on_all_extensions_loaded_user_data_ = user_data;
+}
+
+void Extension::OnAllExtensionsLoaded()
+{
+    if (on_all_extensions_loaded_callback_)
+        on_all_extensions_loaded_callback_(on_all_extensions_loaded_user_data_);
 }

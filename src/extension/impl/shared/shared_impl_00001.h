@@ -16,37 +16,16 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ************************************************************************************************/
 
-#ifndef src_api_extension_host_h
-#define src_api_extension_host_h
+#ifndef src_extension_impl_shared_shared_impl_00001_h
+#define src_extension_impl_shared_shared_impl_00001_h
 
-#include <string>
-#include <vector>
+#include <api/extension/sw_extension.h>
 
-struct ExtensionInfo
+struct SwSharedImpl00001
 {
-    std::string id;
-    std::string name;
-    std::string version;
-    std::string author;
-    std::string description;
-    std::string path;
-    bool initialized;
+    sw_shared_00001 api;
 };
 
-class IExtensionHost
-{
-public:
-    virtual void LoadExtensions(std::string origin_path) = 0;
-    virtual void UnloadExtensions() = 0;
-    virtual bool LoadExtension(const std::string& id) = 0;
-    virtual bool LoadExtensionFromPath(const std::string& path) = 0;
-    virtual bool UnloadExtension(const std::string& id) = 0;
-    virtual bool UnloadExtensionFromPath(const std::string& path) = 0;
-    virtual std::vector<ExtensionInfo> GetExtensions() = 0;
-    virtual void* GetSharedPointer(const std::string& key) = 0;
-    virtual void SetSharedPointer(const std::string& key, void* value) = 0;
-    virtual bool HasSharedPointer(const std::string& key) = 0;
-    virtual void RemoveSharedPointer(const std::string& key) = 0;
-};
+extern SwSharedImpl00001 g_SwSharedImpl00001;
 
 #endif

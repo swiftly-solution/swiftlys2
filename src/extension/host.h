@@ -31,9 +31,13 @@
 class CExtensionHost : public IExtensionHost
 {
 public:
+    ~CExtensionHost();
     virtual void LoadExtensions(std::string origin_path) override;
+    virtual void UnloadExtensions() override;
     virtual bool LoadExtension(const std::string& id) override;
+    virtual bool LoadExtensionFromPath(const std::string& path) override;
     virtual bool UnloadExtension(const std::string& id) override;
+    virtual bool UnloadExtensionFromPath(const std::string& path) override;
     virtual std::vector<ExtensionInfo> GetExtensions() override;
     virtual void* GetSharedPointer(const std::string& key) override;
     virtual void SetSharedPointer(const std::string& key, void* value) override;
@@ -41,10 +45,12 @@ public:
     virtual void RemoveSharedPointer(const std::string& key) override;
 private:
     bool LoadExtensionFromPath(const std::string& id, const std::string& path, bool hotreloaded);
+    void NotifyAllExtensionsLoaded();
 
     std::string extensions_folder_;
     std::vector<std::unique_ptr<Extension>> extensions_;
     std::unordered_map<std::string, void*> shared_pointers_;
+    bool updating_extensions_ = false;
 
 };
 

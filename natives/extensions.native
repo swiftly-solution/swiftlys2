@@ -3,3 +3,9 @@ class Extensions
 string GetExtensions = void // returns a JSON array with the loaded extensions
 bool Load = string id // loads the extension located at extensions/{id}/{id}.(dll|so)
 bool Unload = string id // unloads the extension
+bool LoadFromPath = string path // loads an extension from an absolute library path
+bool UnloadFromPath = string path // unloads an extension by its absolute library path
+ptr GetSharedPointer = string key // gets a shared pointer, or zero if the key does not exist
+void SetSharedPointer = string key, ptr pointer // stores or replaces a shared pointer, which can be zero
+bool HasSharedPointer = string key // checks whether a shared pointer key exists, including zero values
+void RemoveSharedPointer = string key // removes a shared pointer key without freeing its value

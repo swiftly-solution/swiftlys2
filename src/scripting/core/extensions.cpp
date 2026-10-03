@@ -53,14 +53,52 @@ char* Bridge_Extensions_GetExtensions(int* size)
 
 bool Bridge_Extensions_Load(const char* id)
 {
-    return g_pExtensionHost->LoadExtension(id);
+    return id && g_pExtensionHost->LoadExtension(id);
 }
 
 bool Bridge_Extensions_Unload(const char* id)
 {
-    return g_pExtensionHost->UnloadExtension(id);
+    return id && g_pExtensionHost->UnloadExtension(id);
+}
+
+bool Bridge_Extensions_LoadFromPath(const char* path)
+{
+    return path && g_pExtensionHost->LoadExtensionFromPath(path);
+}
+
+bool Bridge_Extensions_UnloadFromPath(const char* path)
+{
+    return path && g_pExtensionHost->UnloadExtensionFromPath(path);
+}
+
+void* Bridge_Extensions_GetSharedPointer(const char* key)
+{
+    return key ? g_pExtensionHost->GetSharedPointer(key) : nullptr;
+}
+
+void Bridge_Extensions_SetSharedPointer(const char* key, void* pointer)
+{
+    if (key)
+        g_pExtensionHost->SetSharedPointer(key, pointer);
+}
+
+bool Bridge_Extensions_HasSharedPointer(const char* key)
+{
+    return key && g_pExtensionHost->HasSharedPointer(key);
+}
+
+void Bridge_Extensions_RemoveSharedPointer(const char* key)
+{
+    if (key)
+        g_pExtensionHost->RemoveSharedPointer(key);
 }
 
 DEFINE_NATIVE("Extensions.GetExtensions", Bridge_Extensions_GetExtensions);
 DEFINE_NATIVE("Extensions.Load", Bridge_Extensions_Load);
 DEFINE_NATIVE("Extensions.Unload", Bridge_Extensions_Unload);
+DEFINE_NATIVE("Extensions.LoadFromPath", Bridge_Extensions_LoadFromPath);
+DEFINE_NATIVE("Extensions.UnloadFromPath", Bridge_Extensions_UnloadFromPath);
+DEFINE_NATIVE("Extensions.GetSharedPointer", Bridge_Extensions_GetSharedPointer);
+DEFINE_NATIVE("Extensions.SetSharedPointer", Bridge_Extensions_SetSharedPointer);
+DEFINE_NATIVE("Extensions.HasSharedPointer", Bridge_Extensions_HasSharedPointer);
+DEFINE_NATIVE("Extensions.RemoveSharedPointer", Bridge_Extensions_RemoveSharedPointer);

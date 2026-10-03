@@ -34,10 +34,12 @@ sw_status set_info(
     const char* author,
     const char* description)
 {
-    if (!name || !version)
-    {
+    if (!self)
         return SW_E_INVALID_ARG;
-    }
+    if (!from_self(self)->extension_->IsInitializing())
+        return SW_E_INVALID_OPERATION;
+    if (!name || !version)
+        return SW_E_INVALID_ARG;
     from_self(self)->extension_->Init(name, version, author, description);
     return SW_OK;
 }
@@ -46,14 +48,49 @@ sw_status is_hotreloaded(
     const sw_init_00001* self,
     int32_t* hotreloaded_out)
 {
+    if (!self)
+        return SW_E_INVALID_ARG;
+    if (!from_self(self)->extension_->IsInitializing())
+        return SW_E_INVALID_OPERATION;
+    if (!hotreloaded_out)
+        return SW_E_INVALID_ARG;
+
     *hotreloaded_out = from_self(self)->extension_->IsHotReloaded() ? 1 : 0;
+    return SW_OK;
+}
+
+sw_status set_unload_callback(
+    const sw_init_00001* self,
+    sw_extension_callback_fn callback,
+    void* user_data)
+{
+    if (!self)
+        return SW_E_INVALID_ARG;
+    if (!from_self(self)->extension_->IsInitializing())
+        return SW_E_INVALID_OPERATION;
+
+    from_self(self)->extension_->SetUnloadCallback(callback, user_data);
+    return SW_OK;
+}
+
+sw_status set_on_all_extensions_loaded_callback(
+    const sw_init_00001* self,
+    sw_extension_callback_fn callback,
+    void* user_data)
+{
+    if (!self)
+        return SW_E_INVALID_ARG;
+    if (!from_self(self)->extension_->IsInitializing())
+        return SW_E_INVALID_OPERATION;
+
+    from_self(self)->extension_->SetOnAllExtensionsLoadedCallback(callback, user_data);
     return SW_OK;
 }
 
 }
 
 SwInitImpl00001::SwInitImpl00001(Extension* extension):
-    api_{set_info, is_hotreloaded},
+    api_{set_info, is_hotreloaded, set_unload_callback, set_on_all_extensions_loaded_callback},
     extension_(extension)
 {
 }

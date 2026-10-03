@@ -4,6 +4,12 @@
 /**
  * @file sw_extension.h
  * @brief C API for SwiftlyS2 extensions.
+ * @note Outside core->init, status-returning operations return SW_E_INVALID_ARG when a
+ * required interface, input pointer, or output pointer is NULL. Optional
+ * pointers are identified in each operation. Invalid arguments leave outputs
+ * unchanged. All core->init operations require active initialization and
+ * return SW_E_INVALID_OPERATION afterward for a valid self, even if other
+ * arguments are invalid.
  */
 
 #ifndef SW_HOST
@@ -80,7 +86,8 @@ struct sw_init_context {
      *                                 the `sw_core` interface.
      *
      * @return Status code.
-     * @retval      `SW_OK`            Interface was found.
+     * @retval      `SW_E_INVALID_ARG`  Self, iface, or output storage is NULL.
+     * @retval      `SW_OK`             Interface was found.
      * @retval      `SW_E_FAILED`       Interface was not found. `sw_core_out` is set to NULL.
      *
      * @note Use the SW_IFACE_CORE for the iface parameter.
@@ -118,6 +125,12 @@ typedef int32_t (*sw_extension_init_fn)(const sw_init_context* ctx);
 SW_API int32_t sw_extension_init(const sw_init_context* ctx);
 #endif
 
+/**
+ * @brief Extension lifecycle callback invoked with the registered user data.
+ * @param[in] user_data User data supplied when registering the callback.
+ */
+typedef void (*sw_extension_callback_fn)(void* user_data);
+
 /** @brief Initialization API interface type. */
 typedef struct sw_init_00001 sw_init_00001;
 
@@ -125,7 +138,9 @@ typedef struct sw_init_00001 sw_init_00001;
  * @brief Extension metadata registration and hot reload state APIs.
  *
  * @note Obtain this interface from sw_core::init and pass it as self to each
- * callback. Call these callbacks only during sw_extension_init.
+ * callback. Call these callbacks only during sw_extension_init. After it returns,
+ * all operations on this interface return SW_E_INVALID_OPERATION for a valid self.
+ * The interface remains owned by the host until the extension is unloaded.
  */
 struct sw_init_00001 {
 
@@ -139,8 +154,9 @@ struct sw_init_00001 {
      * @param[in]   description        Extension description, can be NULL.
      *
      * @return Status code.
-     * @retval      `SW_OK`            Metadata was registered.
-     * @retval      `SW_E_INVALID_ARG`  Name or version is NULL.
+     * @retval      `SW_OK`                   Metadata was registered.
+     * @retval      `SW_E_INVALID_ARG`        Self, name, or version is NULL.
+     * @retval      `SW_E_INVALID_OPERATION`  Initialization has finished.
      *
      * @note Must be called during sw_extension_init to initialize the extension.
      * @note Non-NULL strings must be null-terminated. They are copied by the
@@ -162,17 +178,154 @@ struct sw_init_00001 {
      *                               for a manual hot reload, or 0 otherwise.
      *
      * @return Status code.
-     * @retval      `SW_OK`          Result was written.
+     * @retval      `SW_OK`                   Result was written.
+     * @retval      `SW_E_INVALID_ARG`        Self or output storage is NULL.
+     * @retval      `SW_E_INVALID_OPERATION`  Initialization has finished.
      */
     sw_status (*is_hotreloaded)(
         const sw_init_00001* self,
         int32_t* hotreloaded_out
     );
 
+    /**
+     * @brief Register a callback invoked before this extension is unloaded.
+     *
+     * @param[in] self       Initialization interface, must not be NULL.
+     * @param[in] callback   Callback to invoke, or NULL to clear it.
+     * @param[in] user_data  User data passed to the callback, can be NULL.
+     *
+     * @return Status code.
+     * @retval      `SW_OK`                   Callback was registered.
+     * @retval      `SW_E_INVALID_ARG`        Self is NULL.
+     * @retval      `SW_E_INVALID_OPERATION`  Initialization has finished.
+     *
+     * @note Called while the core API and extension library are still valid,
+     * including cleanup after failed initialization. Replacing the callback
+     * replaces its user data. The host does not own user_data.
+     */
+    sw_status (*set_unload_callback)(
+        const sw_init_00001* self,
+        sw_extension_callback_fn callback,
+        void* user_data
+    );
+
+    /**
+     * @brief Register a callback invoked when the loaded extension set changes.
+     *
+     * @param[in] self       Initialization interface, must not be NULL.
+     * @param[in] callback   Callback to invoke, or NULL to clear it.
+     * @param[in] user_data  User data passed to the callback, can be NULL.
+     *
+     * @return Status code.
+     * @retval      `SW_OK`                   Callback was registered.
+     * @retval      `SW_E_INVALID_ARG`        Self is NULL.
+     * @retval      `SW_E_INVALID_OPERATION`  Initialization has finished.
+     *
+     * @note Invoked once after the initial loading pass, then on all remaining
+     * extensions after each successful load or unload. New extensions are
+     * included after their initialization has returned. Failed loads and
+     * unloads do not trigger it. The host does not own user_data.
+     * @note Loading or unloading extensions during a lifecycle callback fails.
+     */
+    sw_status (*set_on_all_extensions_loaded_callback)(
+        const sw_init_00001* self,
+        sw_extension_callback_fn callback,
+        void* user_data
+    );
+
 };
 
 /** @brief Extension initialization API. */
 typedef sw_init_00001 sw_init;
+
+/** @brief Shared pointer API interface type. */
+typedef struct sw_shared_00001 sw_shared_00001;
+
+/** @brief Shared pointer registry APIs. */
+struct sw_shared_00001 {
+
+    /**
+     * @brief Get a pointer from the host's shared pointer registry.
+     *
+     * @param[in]   self                Shared pointer interface, must not be NULL.
+     * @param[in]   key                 Null-terminated key, must not be NULL.
+     * @param[out]  shared_pointer_out  Pointer storage, must not be NULL.
+     *                                  Receives the stored value on success;
+     *                                  unchanged if the key does not exist.
+     *
+     * @return Status code.
+     * @retval      `SW_OK`             Key exists; its value may be NULL.
+     * @retval      `SW_E_INVALID_ARG`  A required pointer is NULL or the key does not exist.
+     *
+     * @note The registry does not transfer ownership of the pointed-to object.
+     */
+    sw_status (*get_shared_pointer)(
+        const sw_shared_00001* self,
+        const char* key,
+        sw_ptr_out shared_pointer_out
+    );
+
+    /**
+     * @brief Insert or replace a pointer in the host's shared pointer registry.
+     *
+     * @param[in]   self            Shared pointer interface, must not be NULL.
+     * @param[in]   key             Null-terminated key, must not be NULL.
+     * @param[in]   shared_pointer  Value to store, can be NULL.
+     *
+     * @return Status code.
+     * @retval      `SW_E_INVALID_ARG`  Self or key is NULL.
+     * @retval      `SW_OK`             Value was stored.
+     *
+     * @note The key is copied. The pointed-to object is not copied or owned by
+     * the registry, and replacing an entry does not free its previous value.
+     */
+    sw_status (*set_shared_pointer)(
+        const sw_shared_00001* self,
+        const char* key,
+        void* shared_pointer
+    );
+
+    /**
+     * @brief Check whether a key exists in the shared pointer registry.
+     *
+     * @param[in]   self        Shared pointer interface, must not be NULL.
+     * @param[in]   key         Null-terminated key, must not be NULL.
+     * @param[out]  result_out  Result storage, must not be NULL. Receives 1 if
+     *                          the key exists, or 0 otherwise.
+     *
+     * @return Status code.
+     * @retval      `SW_E_INVALID_ARG`  Self, key, or output storage is NULL.
+     * @retval      `SW_OK`             Result was written.
+     *
+     * @note A key with a NULL value still exists.
+     */
+    sw_status (*has_shared_pointer)(
+        const sw_shared_00001* self,
+        const char* key,
+        int32_t* result_out
+    );
+
+    /**
+     * @brief Remove a key from the shared pointer registry.
+     *
+     * @param[in]   self               Shared pointer interface, must not be NULL.
+     * @param[in]   key                Null-terminated key, must not be NULL.
+     *
+     * @return Status code.
+     * @retval      `SW_OK`             Entry was removed.
+     * @retval      `SW_E_INVALID_ARG`  Self or key is NULL, or the key does not exist.
+     *
+     * @note Removing an entry does not free the pointed-to object.
+     */
+    sw_status (*remove_shared_pointer)(
+        const sw_shared_00001* self,
+        const char* key
+    );
+
+};
+
+/** @brief Extension shared pointer API. */
+typedef sw_shared_00001 sw_shared;
 
 /** @brief Memory API interface type. */
 typedef struct sw_memory_00001 sw_memory_00001;
@@ -186,85 +339,9 @@ typedef struct sw_memory_00001 sw_memory_00001;
 typedef void* sw_hook_handle;
 
 /**
- * @brief Shared pointers, memory allocation, hooks, and address lookup APIs.
+ * @brief Memory allocation, hooks, and address lookup APIs.
  */
 struct sw_memory_00001 {
-
-    /**
-     * @brief Get a pointer from the host's shared pointer registry.
-     *
-     * @param[in]   self                Memory interface, must not be NULL.
-     * @param[in]   key                 Null-terminated key, must not be NULL.
-     * @param[out]  shared_pointer_out  Pointer storage, must not be NULL.
-     *                                  Receives the stored value on success;
-     *                                  unchanged if the key does not exist.
-     *
-     * @return Status code.
-     * @retval      `SW_OK`             Key exists; its value may be NULL.
-     * @retval      `SW_E_INVALID_ARG`   Key does not exist.
-     *
-     * @note The registry does not transfer ownership of the pointed-to object.
-     */
-    sw_status (*get_shared_pointer)(
-        const sw_memory_00001* self,
-        const char* key,
-        sw_ptr_out shared_pointer_out
-    );
-
-    /**
-     * @brief Insert or replace a pointer in the host's shared pointer registry.
-     *
-     * @param[in]   self            Memory interface, must not be NULL.
-     * @param[in]   key             Null-terminated key, must not be NULL.
-     * @param[in]   shared_pointer  Value to store, can be NULL.
-     *
-     * @return Status code.
-     * @retval      `SW_OK`         Value was stored.
-     *
-     * @note The key is copied. The pointed-to object is not copied or owned by
-     * the registry, and replacing an entry does not free its previous value.
-     */
-    sw_status (*set_shared_pointer)(
-        const sw_memory_00001* self,
-        const char* key,
-        void* shared_pointer
-    );
-
-    /**
-     * @brief Check whether a key exists in the shared pointer registry.
-     *
-     * @param[in]   self        Memory interface, must not be NULL.
-     * @param[in]   key         Null-terminated key, must not be NULL.
-     * @param[out]  result_out  Result storage, must not be NULL. Receives 1 if
-     *                          the key exists, or 0 otherwise.
-     *
-     * @return Status code.
-     * @retval      `SW_OK`     Result was written.
-     *
-     * @note A key with a NULL value still exists.
-     */
-    sw_status (*has_shared_pointer)(
-        const sw_memory_00001* self,
-        const char* key,
-        int32_t* result_out
-    );
-
-    /**
-     * @brief Remove a key from the shared pointer registry.
-     *
-     * @param[in]   self               Memory interface, must not be NULL.
-     * @param[in]   key                Null-terminated key, must not be NULL.
-     *
-     * @return Status code.
-     * @retval      `SW_OK`            Entry was removed.
-     * @retval      `SW_E_INVALID_ARG`  Key does not exist.
-     *
-     * @note Removing an entry does not free the pointed-to object.
-     */
-    sw_status (*remove_shared_pointer)(
-        const sw_memory_00001* self,
-        const char* key
-    );
 
     /**
      * @brief Allocate memory through the game's allocator.
@@ -275,8 +352,9 @@ struct sw_memory_00001 {
      *                            the allocation, or NULL on failure.
      *
      * @return Status code.
-     * @retval      `SW_OK`       Allocation returned a non-NULL pointer.
-     * @retval      `SW_E_FAILED`  Allocator returned NULL.
+     * @retval      `SW_E_INVALID_ARG`  Self or output storage is NULL.
+     * @retval      `SW_OK`             Allocation returned a non-NULL pointer.
+     * @retval      `SW_E_FAILED`       Allocator returned NULL.
      *
      * @note Memory is not initialized. Release it with this interface's free
      * callback, or resize it with resize.
@@ -294,7 +372,8 @@ struct sw_memory_00001 {
      * @param[in]   pointer  Allocation returned by alloc or resize, or NULL.
      *
      * @return Status code.
-     * @retval      `SW_OK`  Free request was processed.
+     * @retval      `SW_E_INVALID_ARG`  Self is NULL.
+     * @retval      `SW_OK`             Free request was processed.
      */
     sw_status (*free)(
         const sw_memory_00001* self,
@@ -312,7 +391,8 @@ struct sw_memory_00001 {
      *                           the allocator's result, which may be NULL.
      *
      * @return Status code.
-     * @retval      `SW_OK`      Resize request was processed, even if the
+     * @retval      `SW_E_INVALID_ARG`  Self or output storage is NULL.
+     * @retval      `SW_OK`             Resize request was processed, even if the
      *                           allocator returned NULL.
      *
      * @note For a nonzero new_size, check pointer_out for allocation failure
@@ -340,8 +420,9 @@ struct sw_memory_00001 {
      *                             on success, or NULL on failure.
      *
      * @return Status code.
-     * @retval      `SW_OK`        A non-NULL original trampoline was created.
-     * @retval      `SW_E_FAILED`   Original trampoline is NULL; hook was not enabled.
+     * @retval      `SW_E_INVALID_ARG`  A required pointer is NULL.
+     * @retval      `SW_OK`             A non-NULL original trampoline was created.
+     * @retval      `SW_E_FAILED`       Original trampoline is NULL; hook was not enabled.
      *
      * @note The callback and original function must use the target function's
      * signature and calling convention.
@@ -365,7 +446,8 @@ struct sw_memory_00001 {
      * @param[in]   handle   Live handle returned by hook_address, must not be NULL.
      *
      * @return Status code.
-     * @retval      `SW_OK`  Hook was disabled and destroyed.
+     * @retval      `SW_E_INVALID_ARG`  Self or handle is NULL.
+     * @retval      `SW_OK`             Hook was disabled and destroyed.
      *
      * @note The handle and its original trampoline are invalid after this call.
      */
@@ -389,8 +471,9 @@ struct sw_memory_00001 {
      *                             on success, or NULL on failure.
      *
      * @return Status code.
-     * @retval      `SW_OK`        A non-NULL original trampoline was created.
-     * @retval      `SW_E_FAILED`   Original trampoline is NULL; hook was not enabled.
+     * @retval      `SW_E_INVALID_ARG`  A required pointer is NULL or the index exceeds INT_MAX.
+     * @retval      `SW_OK`             A non-NULL original trampoline was created.
+     * @retval      `SW_E_FAILED`       Original trampoline is NULL; hook was not enabled.
      *
      * @note Pass the vtable address itself, not an object instance.
      * @note The callback and original function must use the target function's
@@ -416,7 +499,8 @@ struct sw_memory_00001 {
      * @param[in]   handle   Live handle returned by hook_vtable, must not be NULL.
      *
      * @return Status code.
-     * @retval      `SW_OK`  Hook was disabled and destroyed.
+     * @retval      `SW_E_INVALID_ARG`  Self or handle is NULL.
+     * @retval      `SW_OK`             Hook was disabled and destroyed.
      *
      * @note The handle and its original trampoline are invalid after this call.
      */
@@ -436,8 +520,8 @@ struct sw_memory_00001 {
      *                                 unchanged.
      *
      * @return Status code.
-     * @retval      `SW_OK`            A non-NULL address was found.
-     * @retval      `SW_E_INVALID_ARG`  Signature name does not exist.
+     * @retval      `SW_OK`             A non-NULL address was found.
+     * @retval      `SW_E_INVALID_ARG`  A required pointer is NULL or the name does not exist.
      * @retval      `SW_E_FAILED`       Stored address is NULL.
      */
     sw_status (*gamedata_resolve_signature)(
@@ -457,8 +541,8 @@ struct sw_memory_00001 {
      *                                 unchanged.
      *
      * @return Status code.
-     * @retval      `SW_OK`            A nonzero offset was found.
-     * @retval      `SW_E_INVALID_ARG`  Offset name does not exist.
+     * @retval      `SW_OK`             An offset was found, including zero.
+     * @retval      `SW_E_INVALID_ARG`  A required pointer is NULL or the name does not exist.
      */
     sw_status (*gamedata_get_offset)(
         const sw_memory_00001* self,
@@ -478,8 +562,9 @@ struct sw_memory_00001 {
      *                            the matched address on success.
      *
      * @return Status code.
-     * @retval      `SW_OK`       A non-NULL address was resolved.
-     * @retval      `SW_EFAILED`  Scan failed or no address was resolved.
+     * @retval      `SW_E_INVALID_ARG`  A required pointer is NULL.
+     * @retval      `SW_OK`             A non-NULL address was resolved.
+     * @retval      `SW_EFAILED`        Scan failed or no address was resolved.
      *
      * @note The output is only valid on success.
      */
@@ -502,8 +587,9 @@ struct sw_memory_00001 {
      *                            the table's runtime address on success.
      *
      * @return Status code.
-     * @retval      `SW_OK`       A non-NULL table address was resolved.
-     * @retval      `SW_EFAILED`  Lookup failed or no address was resolved.
+     * @retval      `SW_E_INVALID_ARG`  A required pointer is NULL.
+     * @retval      `SW_OK`             A non-NULL table address was resolved.
+     * @retval      `SW_EFAILED`        Lookup failed or no address was resolved.
      *
      * @note The output is only valid on success. The table belongs to the
      * library and must not be freed.
@@ -525,9 +611,9 @@ struct sw_memory_00001 {
      * @param[out]  interface_out   Pointer storage, must not be NULL. Receives
      *                              the interface, or NULL if it was not found.
      *
-     * @retval `SW_OK`             A non-NULL interface was found.
-     * @retval `SW_E_FAILED`       Interface lookup failed.
-     * @retval `SW_E_INVALID_ARG`  An argument is NULL; the output is unchanged.
+     * @retval      `SW_OK`             A non-NULL interface was found.
+     * @retval      `SW_E_FAILED`       Interface lookup failed.
+     * @retval      `SW_E_INVALID_ARG`  A required pointer is NULL.
      *
      * @note The returned interface belongs to the game and must not be freed.
      */
@@ -556,8 +642,8 @@ struct sw_schema_00001 {
      * @param[out]  offset_out  Result storage, must not be NULL. Receives the
      *                          byte offset on success; unchanged on failure.
      *
-     * @retval `SW_OK`             Field was found; its offset may be zero.
-     * @retval `SW_E_INVALID_ARG`  An argument is NULL or the field does not exist.
+     * @retval      `SW_OK`             Field was found; its offset may be zero.
+     * @retval      `SW_E_INVALID_ARG`  A required pointer is NULL or the class or field does not exist.
      *
      * @note Class and field names are case-sensitive. For inherited fields,
      * use the class that declares the field.
@@ -577,8 +663,8 @@ struct sw_schema_00001 {
      * @param[in]  class_name  Null-terminated schema class name, must not be NULL.
      * @param[in]  field_name  Null-terminated schema field name, must not be NULL.
      *
-     * @retval `SW_OK`             The field exists and the notification was submitted.
-     * @retval `SW_E_INVALID_ARG`  An argument is NULL or the field does not exist.
+     * @retval      `SW_OK`             The field exists and the notification was submitted.
+     * @retval      `SW_E_INVALID_ARG`  A required pointer is NULL or the class or field does not exist.
      *
      * @note Call after modifying the field, on the game thread. Names are
      * case-sensitive; use the class that declares the field.
@@ -597,10 +683,12 @@ typedef sw_schema_00001 sw_schema;
 struct sw_core_00001 {
     /** @brief Extension metadata registration APIs. */
     sw_init_00001* init;
-    /** @brief Shared pointers, memory allocation, hooks, and address lookup APIs. */
+    /** @brief Memory allocation, hooks, and address lookup APIs. */
     sw_memory_00001* memory;
     /** @brief Schema field lookup and network state change APIs. */
     sw_schema_00001* schema;
+    /** @brief Shared pointer registry API. */
+    sw_shared_00001* shared;
 };
 
 #endif

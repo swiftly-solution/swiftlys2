@@ -661,7 +661,7 @@ internal class CoreCommandService
             case "load":
                 if (ValidateExtensionId(args, "load"))
                 {
-                    if (NativeExtensions.Load(args[2]))
+                    if (core.Extension.Load(args[2]))
                     {
                         logger.LogInformation("Loaded extension: {Id}", args[2]);
                     }
@@ -674,7 +674,7 @@ internal class CoreCommandService
             case "unload":
                 if (ValidateExtensionId(args, "unload"))
                 {
-                    if (NativeExtensions.Unload(args[2]))
+                    if (core.Extension.Unload(args[2]))
                     {
                         logger.LogInformation("Unloaded extension: {Id}", args[2]);
                     }

@@ -6,6 +6,7 @@ using SwiftlyS2.Shared.Convars;
 using SwiftlyS2.Shared.Database;
 using SwiftlyS2.Shared.EntitySystem;
 using SwiftlyS2.Shared.Events;
+using SwiftlyS2.Shared.Extensions;
 using SwiftlyS2.Shared.FileSystem;
 using SwiftlyS2.Shared.GameEvents;
 using SwiftlyS2.Shared.GameHooks;
@@ -103,6 +104,11 @@ public interface ISwiftlyCore
     /// Memory service.
     /// </summary>
     public IMemoryService Memory { get; }
+
+    /// <summary>
+    /// Native extension and shared pointer service.
+    /// </summary>
+    public IExtensionService Extension { get; }
 
     /// <summary>
     /// Logger factory.

@@ -20,6 +20,7 @@
 #define src_extension_extension_h
 
 #include <string>
+#include <api/extension/sw_extension.h>
 
 enum class ExtensionLoadState
 {
@@ -42,6 +43,12 @@ public:
     virtual void SetHotReloaded(bool hotreloaded);
     virtual bool IsHotReloaded();
 
+    bool IsInitializing() const { return initializing_; }
+    void FinishInitialization();
+    void SetUnloadCallback(sw_extension_callback_fn callback, void* user_data);
+    void SetOnAllExtensionsLoadedCallback(sw_extension_callback_fn callback, void* user_data);
+    void OnAllExtensionsLoaded();
+
     const std::string& GetId() const { return id_; }
     const std::string& GetPath() const { return path_; }
     const std::string& GetName() const { return name_; }
@@ -60,6 +67,11 @@ private:
     void* library_;
     void* core_;
     bool hot_reloaded_;
+    bool initializing_;
+    sw_extension_callback_fn unload_callback_;
+    void* unload_user_data_;
+    sw_extension_callback_fn on_all_extensions_loaded_callback_;
+    void* on_all_extensions_loaded_user_data_;
 };
 
 #endif

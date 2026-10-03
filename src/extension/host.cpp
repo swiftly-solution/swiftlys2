@@ -29,13 +29,64 @@
 #include "extension.h"
 #include "init.h"
 
+namespace
+{
+
+struct ExtensionUpdateScope
+{
+    bool& updating;
+
+    explicit ExtensionUpdateScope(bool& value): updating(value)
+    {
+        updating = true;
+    }
+
+    ~ExtensionUpdateScope()
+    {
+        updating = false;
+    }
+};
+
+bool IsSameExtensionPath(const std::string& loaded_path, const std::filesystem::path& path)
+{
+    std::error_code error;
+    return loaded_path == path.string() || std::filesystem::equivalent(loaded_path, path, error);
+}
+
+}
+
+CExtensionHost::~CExtensionHost()
+{
+    UnloadExtensions();
+}
+
+void CExtensionHost::UnloadExtensions()
+{
+    if (updating_extensions_)
+        return;
+    ExtensionUpdateScope update(updating_extensions_);
+
+    while (!extensions_.empty())
+    {
+        auto ext = std::move(extensions_.back());
+        extensions_.pop_back();
+        ext.reset();
+        NotifyAllExtensionsLoaded();
+    }
+}
+
 void CExtensionHost::LoadExtensions(std::string origin_path)
 {
+    if (updating_extensions_)
+        return;
+    ExtensionUpdateScope update(updating_extensions_);
+
     std::filesystem::path path{origin_path};
     std::filesystem::path ext_folder = path / "extensions";
     extensions_folder_ = ext_folder.string();
     if (!std::filesystem::is_directory(ext_folder))
     {
+        NotifyAllExtensionsLoaded();
         return;
     }
 
@@ -55,35 +106,64 @@ void CExtensionHost::LoadExtensions(std::string origin_path)
 
         LoadExtensionFromPath(id, module_path.string(), false);
     }
+    NotifyAllExtensionsLoaded();
 }
 
 bool CExtensionHost::LoadExtension(const std::string& id)
 {
-    if (id.empty() || extensions_folder_.empty())
+    if (updating_extensions_ || id.empty() || extensions_folder_.empty())
     {
         return false;
     }
 
-    const auto it = std::find_if(extensions_.begin(), extensions_.end(), [&](const auto& ext) { return ext->GetId() == id; });
+    ExtensionUpdateScope update(updating_extensions_);
+    const auto module_path = std::filesystem::path(extensions_folder_) / id / (id + WIN_LINUX(".dll", ".so"));
+    if (!LoadExtensionFromPath(id, module_path.string(), true))
+        return false;
+
+    NotifyAllExtensionsLoaded();
+    return true;
+}
+
+bool CExtensionHost::LoadExtensionFromPath(const std::string& path)
+{
+    const std::filesystem::path module_path{path};
+    if (updating_extensions_ || !module_path.is_absolute())
+        return false;
+
+    const auto id = module_path.stem().string();
+    if (id.empty())
+        return false;
+
+    ExtensionUpdateScope update(updating_extensions_);
+    if (!LoadExtensionFromPath(id, path, true))
+        return false;
+
+    NotifyAllExtensionsLoaded();
+    return true;
+}
+
+bool CExtensionHost::LoadExtensionFromPath(const std::string& id, const std::string& path, bool hotreloaded)
+{
+    std::error_code error;
+    const auto module_path = std::filesystem::canonical(path, error);
+    if (error || !std::filesystem::is_regular_file(module_path, error))
+    {
+        g_pLogger->Error("Extension", fmt::format("Extension path does not exist: {}\n", path));
+        return false;
+    }
+
+    const auto normalized_path = module_path.string();
+    const auto it = std::find_if(extensions_.begin(), extensions_.end(), [&](const auto& ext) {
+        return ext->GetId() == id || IsSameExtensionPath(ext->GetPath(), module_path);
+    });
     if (it != extensions_.end())
     {
         g_pLogger->Warning("Extension", fmt::format("Extension is already loaded: {}\n", id));
         return false;
     }
 
-    const auto module_path = std::filesystem::path(extensions_folder_) / id / (id + WIN_LINUX(".dll", ".so"));
-    return LoadExtensionFromPath(id, module_path.string(), true);
-}
-
-bool CExtensionHost::LoadExtensionFromPath(const std::string& id, const std::string& path, bool hotreloaded)
-{
-    if (!std::filesystem::is_regular_file(path))
-    {
-        g_pLogger->Error("Extension", fmt::format("Extension path does not exist: {}\n", path));
-        return false;
-    }
-
-    void* lib = load_library(path.c_str());
+    void* lib = load_library(module_path.c_str());
     if (!lib)
     {
         g_pLogger->Error("Extension", fmt::format("Failed to load extension: {}\n", path));
@@ -98,16 +178,16 @@ bool CExtensionHost::LoadExtensionFromPath(const std::string& id, const std::str
         return false;
     }
 
-    auto ext = std::make_unique<Extension>(id, path, lib);
+    auto ext = std::make_unique<Extension>(id, normalized_path, lib);
     ext->SetHotReloaded(hotreloaded);
 
     auto ctx = CreateContext(ext.get());
 
     int32_t status = init_fn(&ctx.api);
+    ext->FinishInitialization();
     if (status != SW_OK)
     {
         g_pLogger->Error("Extension", fmt::format("Extension initialization failed with status {}: {}\n", status, path));
-        unload_library(lib);
         return false;
     }
 
@@ -122,6 +202,9 @@ bool CExtensionHost::LoadExtensionFromPath(const std::string& id, const std::str
 
 bool CExtensionHost::UnloadExtension(const std::string& id)
 {
+    if (updating_extensions_ || id.empty())
+        return false;
+
     const auto it = std::find_if(extensions_.begin(), extensions_.end(), [&](const auto& ext) { return ext->GetId() == id; });
     if (it == extensions_.end())
     {
@@ -129,10 +212,37 @@ bool CExtensionHost::UnloadExtension(const std::string& id)
         return false;
     }
 
-    void* lib = (*it)->GetLibrary();
+    ExtensionUpdateScope update(updating_extensions_);
+    auto ext = std::move(*it);
     extensions_.erase(it);
-    unload_library(lib);
+    ext.reset();
+    NotifyAllExtensionsLoaded();
     return true;
+}
+
+bool CExtensionHost::UnloadExtensionFromPath(const std::string& path)
+{
+    const std::filesystem::path module_path{path};
+    if (updating_extensions_ || !module_path.is_absolute())
+        return false;
+
+    std::error_code error;
+    const auto normalized_path = std::filesystem::weakly_canonical(module_path, error);
+    if (error)
+        return false;
+
+    const auto it = std::find_if(extensions_.begin(), extensions_.end(), [&](const auto& ext) { return IsSameExtensionPath(ext->GetPath(), normalized_path); });
+    if (it == extensions_.end())
+        return false;
+
+    const auto id = (*it)->GetId();
+    return UnloadExtension(id);
+}
+
+void CExtensionHost::NotifyAllExtensionsLoaded()
+{
+    for (const auto& ext : extensions_)
+        ext->OnAllExtensionsLoaded();
 }
 
 std::vector<ExtensionInfo> CExtensionHost::GetExtensions()

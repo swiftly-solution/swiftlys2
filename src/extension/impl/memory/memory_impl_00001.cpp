@@ -21,55 +21,10 @@
 #include <api/interfaces/interfaces.h>
 #include <core/entrypoint.h>
 #include <memory/gamedata/manager.h>
+#include <limits>
 
-SwMemoryImpl00001* from_self(const sw_memory_00001* self)
+namespace
 {
-    return reinterpret_cast<SwMemoryImpl00001*>(const_cast<sw_memory_00001*>(self));
-}
-
-sw_status get_shared_pointer(
-    const sw_memory_00001* self,
-    const char* key,
-    sw_ptr_out shared_pointer_out
-)
-{
-    if (!g_pExtensionHost->HasSharedPointer(key))
-        return SW_E_INVALID_ARG;
-    
-    *shared_pointer_out = g_pExtensionHost->GetSharedPointer(key);
-    return SW_OK;
-}
-
-sw_status set_shared_pointer(
-    const sw_memory_00001* self,
-    const char* key,
-    void* shared_pointer
-)
-{
-    g_pExtensionHost->SetSharedPointer(key, shared_pointer);
-    return SW_OK;
-}
-
-sw_status has_shared_pointer(
-    const sw_memory_00001* self,
-    const char* key,
-    int32_t* result_out
-)
-{
-    *result_out = g_pExtensionHost->HasSharedPointer(key) ? 1 : 0;
-    return SW_OK;
-}
-
-sw_status remove_shared_pointer(
-    const sw_memory_00001* self,
-    const char* key
-)
-{
-    if (!g_pExtensionHost->HasSharedPointer(key))
-        return SW_E_INVALID_ARG;
-    g_pExtensionHost->RemoveSharedPointer(key);
-    return SW_OK;
-}
 
 sw_status alloc(
     const sw_memory_00001* self,
@@ -77,17 +32,23 @@ sw_status alloc(
     void** pointer_out
 )
 {
+    if (!self || !pointer_out)
+        return SW_E_INVALID_ARG;
+
     *pointer_out = g_pMemoryAllocator->Alloc(size);
-    if (*pointer_out == 0) return SW_E_FAILED;
+    if (!*pointer_out)
+        return SW_E_FAILED;
     return SW_OK;
 }
-
 
 sw_status free(
     const sw_memory_00001* self,
     void* pointer
 )
 {
+    if (!self)
+        return SW_E_INVALID_ARG;
+
     g_pMemoryAllocator->Free(pointer);
     return SW_OK;
 }
@@ -99,6 +60,9 @@ sw_status resize(
     void** pointer_out
 )
 {
+    if (!self || !pointer_out)
+        return SW_E_INVALID_ARG;
+
     *pointer_out = g_pMemoryAllocator->Resize(pointer, new_size);
     return SW_OK;
 }
@@ -111,10 +75,15 @@ sw_status hook_address(
     void** original_out
 )
 {
+    if (!self || !address || !hook_callback || !handle_out || !original_out)
+        return SW_E_INVALID_ARG;
+
     *handle_out = nullptr;
     *original_out = nullptr;
 
     auto hook = g_pHooksManager->CreateFunctionHook();
+    if (!hook)
+        return SW_E_FAILED;
     hook->SetHookFunction(address, hook_callback);
 
     void* original = hook->GetOriginal();
@@ -136,8 +105,11 @@ sw_status unhook_address(
     const sw_hook_handle handle
 )
 {
+    if (!self || !handle)
+        return SW_E_INVALID_ARG;
+
     IFunctionHook* hook = reinterpret_cast<IFunctionHook*>(const_cast<sw_hook_handle>(handle));
-    
+
     hook->Disable();
     g_pHooksManager->DestroyFunctionHook(hook);
     return SW_OK;
@@ -152,10 +124,15 @@ sw_status hook_vtable(
     void** original_out
 )
 {
+    if (!self || !vtable || offset > static_cast<uint32_t>(std::numeric_limits<int>::max()) || !hook_callback || !handle_out || !original_out)
+        return SW_E_INVALID_ARG;
+
     *handle_out = nullptr;
     *original_out = nullptr;
 
     IVFunctionHook* hook = g_pHooksManager->CreateVFunctionHook();
+    if (!hook)
+        return SW_E_FAILED;
     hook->SetHookFunction(vtable, offset, hook_callback, true);
 
     void* original = hook->GetOriginal();
@@ -177,8 +154,11 @@ sw_status unhook_vtable(
     const sw_hook_handle handle
 )
 {
+    if (!self || !handle)
+        return SW_E_INVALID_ARG;
+
     IVFunctionHook* hook = reinterpret_cast<IVFunctionHook*>(const_cast<sw_hook_handle>(handle));
-    
+
     hook->Disable();
     g_pHooksManager->DestroyVFunctionHook(hook);
     return SW_OK;
@@ -190,6 +170,9 @@ sw_status gamedata_resolve_signature(
     void** address_out
 )
 {
+    if (!self || !name || !address_out)
+        return SW_E_INVALID_ARG;
+
     if (!g_pGameDataManager->GetSignatures()->Exists(name))
         return SW_E_INVALID_ARG;
 
@@ -197,7 +180,7 @@ sw_status gamedata_resolve_signature(
     *address_out = result;
     if (!result)
         return SW_E_FAILED;
-    
+
     return SW_OK;
 }
 
@@ -207,12 +190,15 @@ sw_status gamedata_get_offset(
     uint32_t* offset_out
 )
 {
+    if (!self || !name || !offset_out)
+        return SW_E_INVALID_ARG;
+
     if (!g_pGameDataManager->GetOffsets()->Exists(name))
         return SW_E_INVALID_ARG;
 
     uint32_t result = g_pGameDataManager->GetOffsets()->Fetch(name);
     *offset_out = result;
-    
+
     return SW_OK;
 }
 
@@ -223,6 +209,9 @@ sw_status resolve_signature(
     void** address_out
 )
 {
+    if (!self || !library || !pattern || !address_out)
+        return SW_E_INVALID_ARG;
+
     auto err = g_pS2BinLib->PatternScan(library, pattern, address_out);
     if (err)
         return SW_E_FAILED;
@@ -239,13 +228,16 @@ sw_status find_vtable(
     void** address_out
 )
 {
+    if (!self || !library || !vtable || !address_out)
+        return SW_E_INVALID_ARG;
+
     auto err = g_pS2BinLib->FindVtable(library, vtable, address_out);
 
     if (err)
         return SW_E_FAILED;
     if (!*address_out)
         return SW_E_FAILED;
-    
+
     return SW_OK;
 }
 
@@ -265,12 +257,10 @@ sw_status get_valve_interface(
     return SW_OK;
 }
 
+}
+
 SwMemoryImpl00001 g_SwMemoryImpl00001{
     .api = {
-        .get_shared_pointer = get_shared_pointer,
-        .set_shared_pointer = set_shared_pointer,
-        .has_shared_pointer = has_shared_pointer,
-        .remove_shared_pointer = remove_shared_pointer,
         .alloc = alloc,
         .free = free,
         .resize = resize,

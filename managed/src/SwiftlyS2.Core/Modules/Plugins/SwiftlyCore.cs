@@ -49,6 +49,8 @@ using SwiftlyS2.Shared.StringTable;
 using SwiftlyS2.Core.Models;
 using SwiftlyS2.Core.GameHooks;
 using SwiftlyS2.Shared.GameHooks;
+using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.Extensions;
 
 namespace SwiftlyS2.Core.Services;
 
@@ -72,6 +74,7 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
     public TraceManager Trace { get; init; }
     public ContextedProfilerService ProfilerService { get; init; }
     public MemoryService MemoryService { get; init; }
+    public ExtensionService ExtensionService { get; init; }
     public SchedulerService SchedulerService { get; init; }
     public DatabaseService DatabaseService { get; init; }
     public TranslationService TranslationService { get; init; }
@@ -119,6 +122,7 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
             .AddSingleton<EntitySystemService>()
             .AddSingleton<ConVarService>()
             .AddSingleton<MemoryService>()
+            .AddSingleton<ExtensionService>()
             .AddSingleton<GameDataService>()
             .AddSingleton<ContextedProfilerService>()
             .AddSingleton<GameFileSystem>()
@@ -146,6 +150,7 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
             .AddSingleton<IGameDataService>(provider => provider.GetRequiredService<GameDataService>())
             .AddSingleton<IPlayerManagerService>(provider => provider.GetRequiredService<PlayerManagerService>())
             .AddSingleton<IMemoryService>(provider => provider.GetRequiredService<MemoryService>())
+            .AddSingleton<IExtensionService>(provider => provider.GetRequiredService<ExtensionService>())
             .AddSingleton<IContextedProfilerService>(provider => provider.GetRequiredService<ContextedProfilerService>())
             .AddSingleton<ISchedulerService>(provider => provider.GetRequiredService<SchedulerService>())
             .AddSingleton<IEngineService>(provider => provider.GetRequiredService<EngineService>())
@@ -179,6 +184,7 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
         PlayerManagerService = serviceProvider.GetRequiredService<PlayerManagerService>();
         ConVarService = serviceProvider.GetRequiredService<ConVarService>();
         MemoryService = serviceProvider.GetRequiredService<MemoryService>();
+        ExtensionService = serviceProvider.GetRequiredService<ExtensionService>();
         Engine = serviceProvider.GetRequiredService<EngineService>();
         Trace = serviceProvider.GetRequiredService<TraceManager>();
         ProfilerService = serviceProvider.GetRequiredService<ContextedProfilerService>();
@@ -234,6 +240,7 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
     IGameDataService ISwiftlyCore.GameData => GameDataService;
     IPlayerManagerService ISwiftlyCore.PlayerManager => PlayerManagerService;
     IMemoryService ISwiftlyCore.Memory => MemoryService;
+    IExtensionService ISwiftlyCore.Extension => ExtensionService;
     ILogger ISwiftlyCore.Logger => Logger;
     IContextedProfilerService ISwiftlyCore.Profiler => ProfilerService;
     IEngineService ISwiftlyCore.Engine => Engine;

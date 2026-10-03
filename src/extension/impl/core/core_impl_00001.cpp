@@ -20,12 +20,14 @@
 #include <extension/extension.h>
 #include <extension/impl/memory/memory_impl_00001.h>
 #include <extension/impl/schema/schema_impl_00001.h>
+#include <extension/impl/shared/shared_impl_00001.h>
 
 SwCoreImpl00001::SwCoreImpl00001(Extension* extension):
     api_{
         .init = &init_.api_,
         .memory = &g_SwMemoryImpl00001.api,
-        .schema = &g_SwSchemaImpl00001.api
+        .schema = &g_SwSchemaImpl00001.api,
+        .shared = &g_SwSharedImpl00001.api
     },
     init_(extension)
 {

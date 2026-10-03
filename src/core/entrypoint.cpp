@@ -272,6 +272,7 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
 
 bool SwiftlyCore::Unload()
 {
+    g_pExtensionHost->UnloadExtensions();
     g_pHooksManager->Shutdown();
     g_pPlayerManager->Shutdown();
     g_pEntSystem->Shutdown();

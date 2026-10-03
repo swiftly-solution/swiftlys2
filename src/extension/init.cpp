@@ -30,6 +30,9 @@ sw_status core(
     const char* core,
     sw_core** iface_out)
 {
+    if (!self || !core || !iface_out)
+        return SW_E_INVALID_ARG;
+
     *iface_out = reinterpret_cast<sw_core*>(from_self(self)->data->GetCore(core));
 
     if (!*iface_out)
