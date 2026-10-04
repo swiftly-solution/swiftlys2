@@ -428,16 +428,19 @@ void CPlayer::Think()
 
 void CPlayer::RenderMenuCenterText(const std::string& text)
 {
+    QueueLockGuard lock(centerMenuMutex);
     centerMenuText = text;
 }
 
 void CPlayer::ClearRenderMenuCenterText()
 {
+    QueueLockGuard lock(centerMenuMutex);
     centerMenuText = "";
 }
 
 bool CPlayer::HasMenuShown()
 {
+    QueueLockGuard lock(centerMenuMutex);
     return !centerMenuText.empty();
 }
 

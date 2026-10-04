@@ -22,6 +22,7 @@
 #include <api/server/players/player.h>
 
 #include <public/igameevents.h>
+#include <api/utils/mutex.h>
 
 #include <chrono>
 
@@ -98,6 +99,7 @@ private:
     std::string centerMessageText = "";
     IGameEvent* centerMessageEvent = nullptr;
 
+    QueueMutex centerMenuMutex;
     std::string centerMenuText = "";
     uint64_t m_uSessionId = 0;
 };
