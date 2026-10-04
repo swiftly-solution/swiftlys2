@@ -4,6 +4,7 @@
     "menu.footer.move": "Przesuń",
     "menu.footer.use": "Użyj",
     "menu.footer.exit": "Wyjście",
+    "menu.footer.chat_number": "numer",
     "menu.input.hint_template": "Wpisz swoją wiadomość (max {0} znaków)",
     "menu.input.empty_value": "puste",
     "menu.input.waiting": "Oczekiwanie",

@@ -4,6 +4,7 @@
     "menu.footer.move": "Mutare",
     "menu.footer.use": "Utilizare",
     "menu.footer.exit": "Ieșire",
+    "menu.footer.chat_number": "număr",
     "menu.input.hint_template": "Vă rugăm să introduceti (max {0} caractere)",
     "menu.input.empty_value": "gol",
     "menu.input.waiting": "Se așteaptă",

@@ -84,7 +84,8 @@ internal sealed class ChatMenuRenderer : IMenuRenderer
                 return text.Text;
 
             case MenuSelectionNode selection:
-                return selection.Focused ? "> " : "  ";
+                var marker = selection.Focused ? "> " : "  ";
+                return selection.Number > 0 ? $"{marker}{selection.Number}. " : marker;
 
             case MenuRawNode raw:
                 return string.Equals(raw.RendererId, Id, StringComparison.OrdinalIgnoreCase) ? raw.Payload : null;

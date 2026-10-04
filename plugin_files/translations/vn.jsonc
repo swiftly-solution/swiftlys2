@@ -4,6 +4,7 @@
     "menu.footer.move": "Di chuyển",
     "menu.footer.use": "Sử dụng",
     "menu.footer.exit": "Thoát",
+    "menu.footer.chat_number": "số",
     "menu.input.hint_template": "Vui lòng nhập thông tin (tối đa {0} ký tự)",
     "menu.input.empty_value": "trống",
     "menu.input.waiting": "Chờ đợi",

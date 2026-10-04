@@ -4,6 +4,7 @@
     "menu.footer.move": "Flytta",
     "menu.footer.use": "Använd",
     "menu.footer.exit": "Avsluta",
+    "menu.footer.chat_number": "nummer",
     "menu.input.hint_template": "Vänligen skriv din inmatning (max {0} tecken)",
     "menu.input.empty_value": "tom",
     "menu.input.waiting": "Väntar",

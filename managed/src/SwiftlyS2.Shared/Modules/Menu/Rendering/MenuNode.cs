@@ -70,12 +70,16 @@ public sealed record MenuBlankNode( int Lines = 1 ) : MenuNode;
 /// The selection marker slot for a body entry.
 /// </summary>
 /// <param name="Focused">Whether the entry this marker belongs to currently has focus.</param>
+/// <param name="Number">
+/// The number a player types to pick this entry under <see cref="MenuInputMethod.Chat"/>, or zero
+/// when the entry is not picked by number.
+/// </param>
 /// <remarks>
 /// Emitting a marker slot rather than a literal arrow keeps the choice of indicator with the
 /// renderer, so a text renderer and a graphical renderer can indicate selection differently
 /// without any component changing.
 /// </remarks>
-public sealed record MenuSelectionNode( bool Focused ) : MenuNode;
+public sealed record MenuSelectionNode( bool Focused, int Number = 0 ) : MenuNode;
 
 /// <summary>
 /// Output aimed at one specific renderer.

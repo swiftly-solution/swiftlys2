@@ -13,6 +13,7 @@ internal static class MenuInjection
         _ = self.AddSingleton<MenuRendererRegistry>();
         _ = self.AddSingleton<MenuKeybindResolver>();
         _ = self.AddSingleton<MenuRendererResolver>();
+        _ = self.AddSingleton<MenuInputMethodResolver>();
         _ = self.AddSingleton<MenuLayoutOptions>();
         _ = self.AddSingleton<MenuRenderDiagnostics>();
         _ = self.AddSingleton<MenuChatCapture>();
@@ -22,6 +23,7 @@ internal static class MenuInjection
         _ = self.AddSingleton<MenuInputRouter>();
         _ = self.AddSingleton<GlobalMenuKeybindSource>();
         _ = self.AddSingleton<GlobalMenuRendererSource>();
+        _ = self.AddSingleton<GlobalMenuInputMethodSource>();
         _ = self.AddSingleton<CenterHtmlMenuRenderer>();
         _ = self.AddSingleton<ChatMenuRenderer>();
         _ = self.AddSingleton<ChatColoredTextComponentRenderer>();

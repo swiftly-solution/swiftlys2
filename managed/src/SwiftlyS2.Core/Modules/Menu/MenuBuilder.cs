@@ -11,22 +11,37 @@ internal sealed class MenuBuilder(
     MenuRendererRegistry renderers,
     MenuKeybindResolver resolver,
     MenuRendererResolver rendererResolver,
+    MenuInputMethodResolver inputMethodResolver,
     IMenuActionRegistry ownedActions ) : IMenuBuilder
 {
     private readonly List<MenuActionDescriptor> declaredActions = [];
     private readonly List<IMenuKeybindSource> keybindSources = [];
     private readonly List<IMenuRendererSource> rendererSources = [];
+    private readonly List<IMenuInputMethodSource> inputMethodSources = [];
     private readonly List<IMenuComponent> header = [];
     private readonly List<IMenuComponent> body = [];
     private readonly List<IMenuComponent> footer = [];
 
     private string rendererId = MenuRendererIds.CenterHtml;
+    private MenuInputMethod? inputMethod;
     private IMenu? parent;
     private int itemsPerPage = 5;
 
     public IMenuBuilder WithRenderer( string rendererId )
     {
         this.rendererId = rendererId;
+        return this;
+    }
+
+    public IMenuBuilder WithInputMethod( MenuInputMethod inputMethod )
+    {
+        this.inputMethod = inputMethod;
+        return this;
+    }
+
+    public IMenuBuilder WithInputMethodSource( IMenuInputMethodSource source )
+    {
+        inputMethodSources.Add(source);
         return this;
     }
 
@@ -109,7 +124,14 @@ internal sealed class MenuBuilder(
         }
 
         var keymap = new MenuKeymap(menuId, actions, resolver, keybindSources);
-        var menu = new MenuInstance(menuId, owner, runtime, renderer, keymap, parent, itemsPerPage);
+        var codeInputMethod = inputMethod
+            ?? (string.Equals(resolvedRendererId, MenuRendererIds.Chat, StringComparison.OrdinalIgnoreCase)
+                ? MenuInputMethod.Chat
+                : MenuInputMethod.Buttons);
+
+        var resolvedInputMethod = inputMethodResolver.Resolve(menuId, codeInputMethod, inputMethodSources);
+
+        var menu = new MenuInstance(menuId, owner, runtime, renderer, keymap, resolvedInputMethod, parent, itemsPerPage);
 
         foreach (var component in header)
         {

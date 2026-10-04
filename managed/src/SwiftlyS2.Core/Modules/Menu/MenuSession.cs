@@ -12,6 +12,7 @@ internal sealed class MenuSession( MenuInstance menu, IPlayer player, MenuChatCa
     private bool isDirty = true;
     private int pageOffset;
     private int focusedIndex;
+    private IReadOnlyList<IMenuComponent> pageSelectables = [];
 
     public IPlayer Player { get; } = player;
 
@@ -36,6 +37,11 @@ internal sealed class MenuSession( MenuInstance menu, IPlayer player, MenuChatCa
     public int FocusedIndex {
         get { lock (stateLock) { return focusedIndex; } }
         private set { lock (stateLock) { focusedIndex = value; } }
+    }
+
+    public IReadOnlyList<IMenuComponent> PageSelectables {
+        get { lock (stateLock) { return pageSelectables; } }
+        internal set { lock (stateLock) { pageSelectables = value; } }
     }
 
     public IMenuComponent? FocusedComponent {

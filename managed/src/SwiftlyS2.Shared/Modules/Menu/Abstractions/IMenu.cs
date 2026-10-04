@@ -27,6 +27,11 @@ public interface IMenu : IDisposable
     public IMenuKeymap Keymap { get; }
 
     /// <summary>
+    /// How players interact with this menu.
+    /// </summary>
+    public MenuInputMethod InputMethod { get; }
+
+    /// <summary>
     /// The menu to return to when this one closes, if any.
     /// </summary>
     /// <remarks>

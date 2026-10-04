@@ -10,16 +10,20 @@ internal sealed class MenuChatCapture( ILogger<MenuChatCapture> logger ) : IDisp
     private readonly ConcurrentDictionary<int, Func<string, bool>> handlers = new();
     private readonly Lock hookLock = new();
 
+    private Func<int, string, bool>? selector;
     private ICommandService? commands;
     private Guid hook;
     private bool hooked;
 
-    public void Attach( ICommandService commandService )
+    public void Attach( ICommandService commandService, Func<int, string, bool> selector )
     {
         lock (hookLock)
         {
             commands = commandService;
+            this.selector = selector;
         }
+
+        EnsureHooked();
     }
 
     public IDisposable Capture( int playerId, Func<string, bool> handler )
@@ -45,6 +49,7 @@ internal sealed class MenuChatCapture( ILogger<MenuChatCapture> logger ) : IDisp
             hooked = false;
             hook = Guid.Empty;
             commands = null;
+            selector = null;
         }
     }
 
@@ -70,14 +75,14 @@ internal sealed class MenuChatCapture( ILogger<MenuChatCapture> logger ) : IDisp
 
     private HookResult OnClientChat( int playerId, string text, bool teamonly )
     {
-        if (!handlers.TryGetValue(playerId, out var handler))
-        {
-            return HookResult.Continue;
-        }
-
         try
         {
-            return handler(text) ? HookResult.Stop : HookResult.Continue;
+            if (handlers.TryGetValue(playerId, out var handler) && handler(text))
+            {
+                return HookResult.Stop;
+            }
+
+            return selector?.Invoke(playerId, text) == true ? HookResult.Stop : HookResult.Continue;
         }
         catch (Exception ex)
         {

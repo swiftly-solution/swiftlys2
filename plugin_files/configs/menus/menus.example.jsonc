@@ -10,7 +10,26 @@
     //
     // NavigateLeft and NavigateRight do nothing on their own: only components that take them over,
     // such as sliders and selectors, react to them.
+    //
+    // InputMethod chooses how players interact with menus. It is optional and, when set, overrides
+    // whatever a plugin requested. Put it directly under "Menus" to apply to every menu, or inside a
+    // menu's own section to apply to that menu only; the menu's own value wins.
+    //   "buttons" - keyboard buttons bound to the actions below.
+    //   "chat"    - players type !1, !2, ... in chat to pick the entry with that number on the current
+    //               page, and !0 to close. Keyboard buttons are ignored and the keybinds below have no
+    //               effect on that menu.
+    // When unset, menus drawn by the chat renderer use "chat" and every other menu uses "buttons".
+    //
+    // Renderer chooses how menus are drawn. It is optional and, when set, overrides whatever a
+    // plugin requested. It is placed exactly like InputMethod: directly under "Menus" for every menu,
+    // or inside a menu's own section for that menu only, where the menu's own value wins.
+    //   "centerhtml" - centre-screen HTML. The default.
+    //   "chat"       - a block of chat lines.
+    // A plugin may register further renderers; use the id it documents. An id that is not
+    // registered makes that menu fail to build.
     "Menus": {
+        // "Renderer": "centerhtml",
+        // "InputMethod": "buttons",
         "core.menu": {
             "NavigateUp": "shift",
             "NavigateDown": "f",
@@ -19,6 +38,20 @@
             "Select": "e",
             "Close": "tab"
         }
+
+        // A menu's own section, named by its menu id, overrides the above for that menu only. It can
+        // pick its renderer and input method and rebind any of the traversal actions; omitted ones
+        // are inherited from "core.menu". The binds only take effect while the menu uses "buttons".
+        // , "my.plugin.menu": {
+        //     "Renderer": "centerhtml",
+        //     "InputMethod": "buttons",
+        //     "NavigateUp": "w",
+        //     "NavigateDown": "s",
+        //     "NavigateLeft": "a",
+        //     "NavigateRight": "d",
+        //     "Select": ["e", "space"],
+        //     "Close": "esc"
+        // }
     },
 
     // Layout limits shared by every menu.

@@ -15,7 +15,7 @@ internal sealed class MenuInputRouter( MenuRuntime runtime, MenuSoundPlayer soun
 
         var session = runtime.GetSession(@event.PlayerId);
 
-        if (session is null || !session.IsOpen || !session.Player.IsValid)
+        if (session is null || !session.IsOpen || !session.Player.IsValid || session.Instance.InputMethod != MenuInputMethod.Buttons)
         {
             return;
         }
@@ -39,6 +39,53 @@ internal sealed class MenuInputRouter( MenuRuntime runtime, MenuSoundPlayer soun
         };
 
         Dispatch(session, context);
+    }
+
+    public bool OnClientChat( int playerId, string text )
+    {
+        var session = runtime.GetSession(playerId);
+
+        if (session is null || !session.IsOpen || !session.Player.IsValid || session.Instance.InputMethod != MenuInputMethod.Chat)
+        {
+            return false;
+        }
+
+        var command = text.Trim().Trim('"');
+
+        if (command.Length < 2 || command[0] != '!' || !int.TryParse(command.AsSpan(1), out var number) || number < 0)
+        {
+            return false;
+        }
+
+        if (number == 0)
+        {
+            Dispatch(session, new MenuActionContext {
+                Action = MenuActions.Close,
+                Key = MenuKey.None,
+                Session = session
+            });
+
+            return true;
+        }
+
+        var selectables = session.PageSelectables;
+        var index = number <= selectables.Count ? session.Instance.GetFocusables(session).IndexOf(selectables[number - 1]) : -1;
+
+        if (index < 0)
+        {
+            sounds.Play(MenuSound.Fail, playerId);
+            return true;
+        }
+
+        _ = session.SetFocus(index);
+
+        Dispatch(session, new MenuActionContext {
+            Action = MenuActions.Select,
+            Key = MenuKey.None,
+            Session = session
+        });
+
+        return true;
     }
 
     private void PlaySound( MenuSession session, MenuActionContext context )

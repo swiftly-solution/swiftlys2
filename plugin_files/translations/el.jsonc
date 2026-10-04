@@ -4,6 +4,7 @@
     "menu.footer.move": "Μετακίνηση",
     "menu.footer.use": "Χρήση",
     "menu.footer.exit": "Έξοδος",
+    "menu.footer.chat_number": "αριθμός",
     "menu.input.hint_template": "Παρακαλώ πληκτρολογήστε την είσοδό σας (μέγ. {0} χαρακτήρες)",
     "menu.input.empty_value": "κενό",
     "menu.input.waiting": "Αναμονή",

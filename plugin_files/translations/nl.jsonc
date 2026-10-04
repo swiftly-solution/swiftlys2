@@ -4,6 +4,7 @@
     "menu.footer.move": "Verplaatsen",
     "menu.footer.use": "Gebruiken",
     "menu.footer.exit": "Afsluiten",
+    "menu.footer.chat_number": "nummer",
     "menu.input.hint_template": "Voer uw invoer in (max {0} tekens)",
     "menu.input.empty_value": "leeg",
     "menu.input.waiting": "Wachten",

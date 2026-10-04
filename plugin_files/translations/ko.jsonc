@@ -4,6 +4,7 @@
     "menu.footer.move": "이동",
     "menu.footer.use": "사용",
     "menu.footer.exit": "종료",
+    "menu.footer.chat_number": "번호",
     "menu.input.hint_template": "입력해주세요 (최대 {0}자)",
     "menu.input.empty_value": "빈 상태",
     "menu.input.waiting": "대기 중",

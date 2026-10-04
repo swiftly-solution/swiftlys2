@@ -4,6 +4,7 @@
     "menu.footer.move": "Siirrä",
     "menu.footer.use": "Käytä",
     "menu.footer.exit": "Poistu",
+    "menu.footer.chat_number": "numero",
     "menu.input.hint_template": "Kirjoita syötteesi (enint. {0} merkkiä)",
     "menu.input.empty_value": "tyhjä",
     "menu.input.waiting": "Odotetaan",

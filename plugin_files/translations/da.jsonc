@@ -4,6 +4,7 @@
     "menu.footer.move": "Flyt",
     "menu.footer.use": "Brug",
     "menu.footer.exit": "Afslut",
+    "menu.footer.chat_number": "nummer",
     "menu.input.hint_template": "Skriv venligst dit input (maks {0} tegn)",
     "menu.input.empty_value": "tom",
     "menu.input.waiting": "Venter",

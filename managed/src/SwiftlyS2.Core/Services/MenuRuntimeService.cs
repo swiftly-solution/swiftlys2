@@ -25,6 +25,8 @@ internal sealed class MenuRuntimeService : IDisposable
         GlobalMenuKeybindSource globalKeybinds,
         MenuRendererResolver rendererResolver,
         GlobalMenuRendererSource globalRendererSource,
+        MenuInputMethodResolver inputMethodResolver,
+        GlobalMenuInputMethodSource globalInputMethodSource,
         MenuRendererRegistry renderers,
         CenterHtmlMenuRenderer centerHtmlRenderer,
         ChatMenuRenderer chatMenuRenderer,
@@ -37,10 +39,11 @@ internal sealed class MenuRuntimeService : IDisposable
         RegisterCoreActions(actions);
         resolver.AddSource(globalKeybinds);
         rendererResolver.AddSource(globalRendererSource);
+        inputMethodResolver.AddSource(globalInputMethodSource);
         _ = renderers.Register(centerHtmlRenderer, CoreOwner);
         _ = renderers.Register(chatMenuRenderer, CoreOwner);
         _ = renderers.RegisterComponentRenderer(chatColoredTextComponentRenderer, CoreOwner);
-        chat.Attach(core.Command);
+        chat.Attach(core.Command, router.OnClientChat);
 
         core.Event.OnClientKeyStateChanged += router.OnClientKeyStateChanged;
         core.Event.OnClientDisconnected += OnClientDisconnected;

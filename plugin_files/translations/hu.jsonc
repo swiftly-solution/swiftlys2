@@ -4,6 +4,7 @@
     "menu.footer.move": "Mozgatás",
     "menu.footer.use": "Használat",
     "menu.footer.exit": "Kilépés",
+    "menu.footer.chat_number": "szám",
     "menu.input.hint_template": "Kérjük, írja be az adatokat (max {0} karakter)",
     "menu.input.empty_value": "üres",
     "menu.input.waiting": "Várakozás",

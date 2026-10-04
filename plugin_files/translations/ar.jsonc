@@ -4,6 +4,7 @@
     "menu.footer.move": "تحريك",
     "menu.footer.use": "استخدام",
     "menu.footer.exit": "خروج",
+    "menu.footer.chat_number": "رقم",
     "menu.input.hint_template": "يرجى إدخال البيانات (الحد الأقصى {0} حرف)",
     "menu.input.empty_value": "فارغ",
     "menu.input.waiting": "انتظار",

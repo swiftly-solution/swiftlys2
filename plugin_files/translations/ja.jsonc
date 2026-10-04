@@ -4,6 +4,7 @@
     "menu.footer.move": "移動",
     "menu.footer.use": "使用",
     "menu.footer.exit": "終了",
+    "menu.footer.chat_number": "番号",
     "menu.input.hint_template": "入力してください（最大{0}文字）",
     "menu.input.empty_value": "空",
     "menu.input.waiting": "待機中",

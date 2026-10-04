@@ -4,6 +4,7 @@
     "menu.footer.move": "Перемістити",
     "menu.footer.use": "Використовувати",
     "menu.footer.exit": "Вихід",
+    "menu.footer.chat_number": "номер",
     "menu.input.hint_template": "Будь ласка, введіть ваше введення (макс {0} символів)",
     "menu.input.empty_value": "порожньо",
     "menu.input.waiting": "Очікування",

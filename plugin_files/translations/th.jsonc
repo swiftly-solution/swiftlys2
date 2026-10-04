@@ -4,6 +4,7 @@
     "menu.footer.move": "ย้าย",
     "menu.footer.use": "ใช้",
     "menu.footer.exit": "ออก",
+    "menu.footer.chat_number": "หมายเลข",
     "menu.input.hint_template": "โปรดพิมพ์อินพุต (สูงสุด {0} อักขระ)",
     "menu.input.empty_value": "ว่าง",
     "menu.input.waiting": "รอ",

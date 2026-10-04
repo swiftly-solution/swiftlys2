@@ -24,6 +24,7 @@ internal static class GlobalLocalization
     public static string MenuMoveLabel() => Get("menu.footer.move");
     public static string MenuUseLabel() => Get("menu.footer.use");
     public static string MenuExitLabel() => Get("menu.footer.exit");
+    public static string MenuChatNumberLabel() => Get("menu.footer.chat_number");
     public static string MenuInputHintTemplate() => Get("menu.input.hint_template");
     public static string MenuInputEmptyValue() => Get("menu.input.empty_value");
     public static string MenuInputWaiting() => Get("menu.input.waiting");

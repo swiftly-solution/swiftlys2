@@ -17,6 +17,29 @@ public interface IMenuBuilder
     public IMenuBuilder WithRenderer( string rendererId );
 
     /// <summary>
+    /// Chooses how players interact with this menu.
+    /// </summary>
+    /// <param name="inputMethod">The input method.</param>
+    /// <returns>This builder.</returns>
+    /// <remarks>
+    /// Defaults to <see cref="MenuInputMethod.Chat"/> for menus drawn by
+    /// <see cref="MenuRendererIds.Chat"/> and <see cref="MenuInputMethod.Buttons"/> for every other
+    /// renderer.
+    /// </remarks>
+    public IMenuBuilder WithInputMethod( MenuInputMethod inputMethod );
+
+    /// <summary>
+    /// Adds a source of input method overrides for this menu.
+    /// </summary>
+    /// <param name="source">The source to consult.</param>
+    /// <returns>This builder.</returns>
+    /// <remarks>
+    /// Use this to enforce an input method from a plugin's own configuration. The server-wide
+    /// configuration still wins, since it registers at a higher priority.
+    /// </remarks>
+    public IMenuBuilder WithInputMethodSource( IMenuInputMethodSource source );
+
+    /// <summary>
     /// Adds a source of renderer overrides for this menu.
     /// </summary>
     /// <param name="source">The source to consult.</param>

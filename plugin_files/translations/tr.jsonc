@@ -4,6 +4,7 @@
     "menu.footer.move": "Taşı",
     "menu.footer.use": "Kullan",
     "menu.footer.exit": "Çık",
+    "menu.footer.chat_number": "numara",
     "menu.input.hint_template": "Lütfen giriş yazınız (maks {0} karakter)",
     "menu.input.empty_value": "boş",
     "menu.input.waiting": "Beklemede",

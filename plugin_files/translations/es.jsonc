@@ -4,6 +4,7 @@
     "menu.footer.move": "Mover",
     "menu.footer.use": "Usar",
     "menu.footer.exit": "Salir",
+    "menu.footer.chat_number": "número",
     "menu.input.hint_template": "Por favor, escriba su entrada (máx {0} caracteres)",
     "menu.input.empty_value": "vacío",
     "menu.input.waiting": "Esperando",

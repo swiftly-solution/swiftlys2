@@ -4,6 +4,7 @@
     "menu.footer.move": "Flytt",
     "menu.footer.use": "Bruk",
     "menu.footer.exit": "Avslutt",
+    "menu.footer.chat_number": "nummer",
     "menu.input.hint_template": "Vennligst skriv inn (maks {0} tegn)",
     "menu.input.empty_value": "tom",
     "menu.input.waiting": "Venter",

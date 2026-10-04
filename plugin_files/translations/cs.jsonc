@@ -4,6 +4,7 @@
     "menu.footer.move": "Přesunout",
     "menu.footer.use": "Použít",
     "menu.footer.exit": "Ukončit",
+    "menu.footer.chat_number": "číslo",
     "menu.input.hint_template": "Zadejte svůj vstup (max {0} znaků)",
     "menu.input.empty_value": "prázdné",
     "menu.input.waiting": "Čekání",

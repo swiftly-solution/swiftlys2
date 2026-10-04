@@ -4,6 +4,7 @@
     "menu.footer.move": "Pindahkan",
     "menu.footer.use": "Gunakan",
     "menu.footer.exit": "Keluar",
+    "menu.footer.chat_number": "nomor",
     "menu.input.hint_template": "Silakan ketik masukan Anda (maks {0} karakter)",
     "menu.input.empty_value": "kosong",
     "menu.input.waiting": "Menunggu",

@@ -92,7 +92,8 @@ internal sealed class CenterHtmlMenuRenderer : IMenuRenderer
                 return Wrap(text.Text, text.Style);
 
             case MenuSelectionNode selection:
-                return selection.Focused ? SelectionMarker : SelectionPadding;
+                var marker = selection.Focused ? SelectionMarker : SelectionPadding;
+                return selection.Number > 0 ? $"{marker}{selection.Number}. " : marker;
 
             case MenuRawNode raw:
                 return string.Equals(raw.RendererId, Id, StringComparison.OrdinalIgnoreCase) ? raw.Payload : null;

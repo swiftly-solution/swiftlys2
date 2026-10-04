@@ -22,6 +22,7 @@ internal sealed class MenuInstance : IMenu
         MenuRuntime runtime,
         IMenuRenderer renderer,
         IMenuKeymap keymap,
+        MenuInputMethod inputMethod,
         IMenu? parent,
         int itemsPerPage )
     {
@@ -30,6 +31,7 @@ internal sealed class MenuInstance : IMenu
         this.runtime = runtime;
         Renderer = renderer;
         Keymap = keymap;
+        InputMethod = inputMethod;
         Parent = parent;
         ItemsPerPage = Math.Max(1, itemsPerPage);
     }
@@ -41,6 +43,8 @@ internal sealed class MenuInstance : IMenu
     public IMenuRenderer Renderer { get; }
 
     public IMenuKeymap Keymap { get; }
+
+    public MenuInputMethod InputMethod { get; }
 
     public IMenu? Parent { get; set; }
 

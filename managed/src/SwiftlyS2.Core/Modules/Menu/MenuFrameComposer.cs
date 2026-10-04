@@ -1,4 +1,5 @@
 using SwiftlyS2.Core.Menu.Config;
+using SwiftlyS2.Core.Translations;
 using SwiftlyS2.Shared.Menu;
 
 namespace SwiftlyS2.Core.Menu;
@@ -21,6 +22,8 @@ internal sealed class MenuFrameComposer( MenuRendererRegistry renderers, MenuLay
         session.PageOffset = page.Offset;
 
         var bodyNodes = new List<MenuNode>(page.Count);
+        var selectables = new List<IMenuComponent>();
+        var numbered = menu.InputMethod == MenuInputMethod.Chat;
 
         for (var index = page.Offset; index < page.Offset + page.Count; index++)
         {
@@ -28,10 +31,17 @@ internal sealed class MenuFrameComposer( MenuRendererRegistry renderers, MenuLay
             var isFocused = ReferenceEquals(component, focused);
             var node = RenderComponent(menu, session, component, isFocused, rendererId);
 
-            bodyNodes.Add(component.IsFocusable
-                ? MenuLineNode.Of(new MenuSelectionNode(isFocused), node)
-                : node);
+            if (!component.IsFocusable)
+            {
+                bodyNodes.Add(node);
+                continue;
+            }
+
+            selectables.Add(component);
+            bodyNodes.Add(MenuLineNode.Of(new MenuSelectionNode(isFocused, numbered ? selectables.Count : 0), node));
         }
+
+        session.PageSelectables = selectables;
 
         if (focused?.GetHint(session) is { Length: > 0 } hint)
         {
@@ -162,6 +172,16 @@ internal sealed class MenuFrameComposer( MenuRendererRegistry renderers, MenuLay
 
     private static MenuNode? BuildKeybindHints( MenuInstance menu )
     {
+        if (menu.InputMethod == MenuInputMethod.Chat)
+        {
+            return MenuLineNode.Of(
+                new MenuTextNode($"{GlobalLocalization.MenuUseLabel()}: ", FooterLabelStyle),
+                new MenuTextNode($"!<{GlobalLocalization.MenuChatNumberLabel()}>", FooterValueStyle),
+                new MenuTextNode(" | ", FooterValueStyle),
+                new MenuTextNode($"{GlobalLocalization.MenuExitLabel()}: ", FooterLabelStyle),
+                new MenuTextNode("!0", FooterValueStyle));
+        }
+
         var parts = new List<MenuNode>();
 
         foreach (var descriptor in menu.Keymap.Actions)
