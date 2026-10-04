@@ -13,7 +13,7 @@ internal class CUserCmd : IUserCmd, IDisposable
     private CSGOUserCmdPBImpl? _csgoUserCmd = null;
     private CInButtonStateImpl? _buttonState = null;
 
-    public required nint Address { get; init; }
+    public required nint Address { get; internal set; }
 
     public uint CommandNumber {
         get {
@@ -47,11 +47,6 @@ internal class CUserCmd : IUserCmd, IDisposable
             }
             return _buttonState;
         }
-    }
-
-    ~CUserCmd()
-    {
-        Dispose();
     }
 
     public void Dispose()

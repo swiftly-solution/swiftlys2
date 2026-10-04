@@ -75,14 +75,6 @@ internal static class NativeEngineHelpers
         }
     }
 
-    private unsafe static delegate* unmanaged<nint> _GetTraceManager;
-
-    public unsafe static nint GetTraceManager()
-    {
-        var ret = _GetTraceManager();
-        return ret;
-    }
-
     private unsafe static delegate* unmanaged<int*, byte*> _GetCurrentGame;
 
     public unsafe static string GetCurrentGame()

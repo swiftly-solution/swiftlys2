@@ -54,6 +54,7 @@ internal static class GameFunctions
     private static readonly Lazy<int> _goToIntermissionOffset = CreateOffset("CGameRules::GoToIntermission");
     private static readonly Lazy<int> _changeTeamOffset = CreateOffset("CCSPlayerController::ChangeTeam");
     private static readonly Lazy<int> _takeGuidOffset = CreateOffset("CSoundSystem::TakeGuid");
+    private static readonly Lazy<int> _traceShapeOffset = CreateOffset("CNavPhysicsInterface::TraceShape");
 
     public static int TeleportOffset => _teleportOffset.Value;
     public static int CommitSuicideOffset => _commitSuicideOffset.Value;
@@ -71,6 +72,7 @@ internal static class GameFunctions
     public static int GoToIntermissionOffset => _goToIntermissionOffset.Value;
     public static int ChangeTeamOffset => _changeTeamOffset.Value;
     public static int TakeGuidOffset => _takeGuidOffset.Value;
+    public static int TraceShapeOffset => _traceShapeOffset.Value;
 
     private static void CheckPtr( nint ptr, string name )
     {
@@ -123,6 +125,8 @@ internal static class GameFunctions
             {
                 pTerminateRoundLinux = (delegate* unmanaged< nint, uint, nint, float, void >)NativeSignatures.Fetch("CGameRules::TerminateRound");
             }
+
+            pTraceShape = (delegate* unmanaged< nint, Ray_t*, Vector*, Vector*, CTraceFilter*, CGameTrace*, void >)((void**)NativeMemoryHelpers.GetVirtualTableAddress("server", "CNavPhysicsInterface"))[TraceShapeOffset];
         }
     }
 
@@ -340,7 +344,6 @@ internal static class GameFunctions
     private static unsafe bool Is16Aligned( CGameTrace* pTrace ) => ((nuint)pTrace & 15) == 0;
 
     public static unsafe void TraceShape(
-        nint pEngineTrace,
         Ray_t* ray,
         Vector vecStart,
         Vector vecEnd,
@@ -352,12 +355,11 @@ internal static class GameFunctions
         {
             unsafe
             {
-                CheckPtr(pEngineTrace, nameof(pEngineTrace));
                 CheckPtr(pTrace, nameof(pTrace));
                 // FUCK YOU WINDOWS
                 if (IsWindows || Is16Aligned(pTrace))
                 {
-                    pTraceShape(pEngineTrace, ray, &vecStart, &vecEnd, pFilter, pTrace);
+                    pTraceShape(0, ray, &vecStart, &vecEnd, pFilter, pTrace);
                 }
                 // FUCK YOU LINUX SIMD ALIGNMENT
                 else
@@ -366,7 +368,7 @@ internal static class GameFunctions
                     var rawBuffer = stackalloc byte[(int)size + 16];
                     var pAligned = (CGameTrace*)(((nuint)rawBuffer + 15) & ~(nuint)15);
                     NativeMemory.Copy(pTrace, pAligned, size);
-                    pTraceShape(pEngineTrace, ray, &vecStart, &vecEnd, pFilter, pAligned);
+                    pTraceShape(0, ray, &vecStart, &vecEnd, pFilter, pAligned);
                     NativeMemory.Copy(pAligned, pTrace, size);
                 }
             }

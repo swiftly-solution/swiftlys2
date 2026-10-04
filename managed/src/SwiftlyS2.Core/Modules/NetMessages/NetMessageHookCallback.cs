@@ -1,6 +1,4 @@
-using System.Runtime.InteropServices;
 using Microsoft.Extensions.Logging;
-using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.Extensions;
 using SwiftlyS2.Shared.NetMessages;
 using SwiftlyS2.Shared.Profiler;
@@ -34,7 +32,6 @@ internal abstract class NetMessageHookCallback : IDisposable
 internal class NetMessageClientHookCallback<T> : NetMessageHookCallback where T : ITypedProtobuf<T>, INetMessage<T>, IDisposable
 {
 
-    private static readonly string s_category = "NetMessageClientHookCallback::" + typeof(T).Name;
     private static readonly string s_typeName = typeof(T).Name;
 
     private INetMessageService.ClientNetMessageHandler<T> _callback;
@@ -76,7 +73,6 @@ internal class NetMessageClientHookCallback<T> : NetMessageHookCallback where T 
 internal class NetMessageServerHookCallback<T> : NetMessageHookCallback where T : ITypedProtobuf<T>, INetMessage<T>, IDisposable
 {
 
-    private static readonly string s_category = "NetMessageServerHookCallback::" + typeof(T).Name;
     private static readonly string s_typeName = typeof(T).Name;
 
     private INetMessageService.ServerNetMessageHandler<T> _callback;
@@ -121,7 +117,6 @@ internal class NetMessageServerHookCallback<T> : NetMessageHookCallback where T 
 internal class NetMessageServerInternalHookCallback<T> : NetMessageHookCallback where T : ITypedProtobuf<T>, INetMessage<T>, IDisposable
 {
 
-    private static readonly string s_category = "NetMessageServerInternalHookCallback::" + typeof(T).Name;
     private static readonly string s_typeName = typeof(T).Name;
 
     private INetMessageService.ServerNetMessageInternalHandler<T> _callback;

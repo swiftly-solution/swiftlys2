@@ -38,10 +38,13 @@ internal class SwiftlyLogger( string categoryName, string contextName ) : ILogge
         var eventIdText = eventId.Id != 0 ? $"[{eventId.Id}]" : string.Empty;
         AnsiConsole.Profile.Width = 13337;
 
-        if (!HideLogInConsole || categoryName.Contains("Core") || categoryName.Contains("Shared")) AnsiConsole.MarkupLineInterpolated($"[lightsteelblue1 bold]{contextName}[/] [lightsteelblue]|[/] [grey42]{timestamp}[/] [lightsteelblue]|[/] [{color}]{levelText}[/] [lightsteelblue]|[/] [lightsteelblue]{categoryName}{eventIdText}[/]");
+        if (!HideLogInConsole || categoryName.Contains("Core") || categoryName.Contains("Shared"))
+        {
+            AnsiConsole.MarkupLineInterpolated($"[lightsteelblue1 bold]{contextName}[/] [lightsteelblue]|[/] [grey42]{timestamp}[/] [lightsteelblue]|[/] [{color}]{levelText}[/] [lightsteelblue]|[/] [lightsteelblue]{categoryName}{eventIdText}[/]");
+        }
 
         // Message output
-        var message = formatter?.Invoke(state, exception) ?? state?.ToString();
+        var message = formatter(state, exception) ?? state?.ToString();
         if (!string.IsNullOrEmpty(message))
         {
             FileLogger.Log($"{contextName} | {timestamp} | {levelText} | {categoryName}{eventIdText} | {message}");

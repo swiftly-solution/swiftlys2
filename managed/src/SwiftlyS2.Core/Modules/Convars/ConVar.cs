@@ -2,27 +2,20 @@
 #pragma warning disable CS8601 // Possible null reference assignment.
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 #pragma warning disable CS8500 // This takes the address of, gets the size of, or declares a pointer to a managed type
-using System.Collections.Concurrent;
-using System.Runtime.InteropServices;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.Scheduler;
 using SwiftlyS2.Shared.Convars;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
-using SwiftlyS2.Shared.NetMessages;
-using SwiftlyS2.Shared.ProtobufDefinitions;
 using System.Runtime.CompilerServices;
 
 namespace SwiftlyS2.Core.Convars;
 
-internal delegate void ConVarCallbackDelegate( int playerId, nint name, nint value );
-
 internal class ConVar : IConVar
 {
-    private static readonly ConcurrentDictionary<int, ConVarCallbackDelegate> callbacks = new();
     protected nint MinValuePtrPtr => NativeConvars.GetMinValuePtrPtr(Name);
     protected nint MaxValuePtrPtr => NativeConvars.GetMaxValuePtrPtr(Name);
-    private INetMessageService _netMessageService;
+    private IConVarService _conVarService;
 
     public EConVarType Type { get; } = EConVarType.EConVarType_Invalid;
     public nint ValuePtr { get; } = 0;
@@ -57,7 +50,7 @@ internal class ConVar : IConVar
         set => NativeConvars.SetFlags(Name, (ulong)value);
     }
 
-    internal ConVar( string name, INetMessageService netMessageService )
+    internal ConVar( string name, IConVarService conVarService )
     {
         Name = name;
         Type = (EConVarType)NativeConvars.GetConvarType(Name);
@@ -68,7 +61,7 @@ internal class ConVar : IConVar
         }
 
         ValuePtr = NativeConvars.GetValuePtr(Name);
-        _netMessageService = netMessageService;
+        _conVarService = conVarService;
     }
 
     public void SetInternalAsString( string value )
@@ -131,48 +124,12 @@ internal class ConVar : IConVar
 
     public void QueryClient( int clientId, Action<string> callback )
     {
-        var convarName = Name;
-        Action? removeSelf = null;
-        ConVarCallbackDelegate nativeCallback = ( playerId, namePtr, valuePtr ) =>
-        {
-            if (clientId != playerId)
-            {
-                return;
-            }
-            var name = StringAlloc.CreateCSharpString(namePtr);
-
-            if (name != convarName)
-            {
-                return;
-            }
-            var value = StringAlloc.CreateCSharpString(valuePtr)!;
-
-            callback(value);
-            removeSelf?.Invoke();
-        };
-
-        var callbackPtr = Marshal.GetFunctionPointerForDelegate(nativeCallback);
-        var listenerId = NativeConvars.AddQueryClientCvarCallback(callbackPtr);
-        callbacks[listenerId] = nativeCallback;
-
-        removeSelf = () =>
-        {
-            _ = callbacks.TryRemove(listenerId, out _);
-            NativeConvars.RemoveQueryClientCvarCallback(listenerId);
-        };
-
-        _ = SchedulerManager.QueueOrNow(() => NativeConvars.QueryClientConvar(clientId, convarName));
+        _conVarService.QueryClient(clientId, Name, callback);
     }
 
     public void ReplicateToClientAsString( int clientId, string value )
     {
-        _netMessageService.Send<CNETMsg_SetConVar>(( ev ) =>
-        {
-            var cvar = ev.Convars.Cvars.Add();
-            cvar.Name = Name;
-            cvar.Value = value;
-            ev.Recipients.AddRecipient(clientId);
-        });
+        _conVarService.ReplicateToClient(clientId, Name, value);
     }
 
     public bool TryGetDefaultValueAsString( out string defaultValue )
@@ -237,7 +194,7 @@ internal class ConVar<T> : ConVar, IConVar<T>
         set => SetDefaultValue(value);
     }
 
-    internal ConVar( string name, INetMessageService netMessageService ) : base(name, netMessageService)
+    internal ConVar( string name, IConVarService conVarService ) : base(name, conVarService)
     {
         ValidateType();
     }

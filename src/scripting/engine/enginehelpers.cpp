@@ -98,13 +98,6 @@ void Bridge_EngineHelpers_SendMessageToConsole(const char* message)
     g_SwiftlyCore.SendConsoleMessage(TerminalProcessColor(msg));
 }
 
-void* g_pTraceManager = nullptr;
-
-void* Bridge_EngineHelpers_GetTraceManager()
-{
-    return g_pTraceManager;
-}
-
 char* Bridge_EngineHelpers_GetGameDirectoryPath(int* size)
 {
     std::string s = Plat_GetGameDirectory();
@@ -195,7 +188,6 @@ DEFINE_NATIVE("EngineHelpers.IsMapValid", Bridge_EngineHelpers_IsMapValid);
 DEFINE_NATIVE("EngineHelpers.ExecuteCommand", Bridge_EngineHelpers_ExecuteCommand);
 DEFINE_NATIVE("EngineHelpers.FindGameSystemByName", Bridge_EngineHelpers_FindGameSystemByName);
 DEFINE_NATIVE("EngineHelpers.SendMessageToConsole", Bridge_EngineHelpers_SendMessageToConsole);
-DEFINE_NATIVE("EngineHelpers.GetTraceManager", Bridge_EngineHelpers_GetTraceManager);
 DEFINE_NATIVE("EngineHelpers.GetCurrentGame", Bridge_EngineHelpers_GetCurrentGame);
 DEFINE_NATIVE("EngineHelpers.GetNativeVersion", Bridge_EngineHelpers_GetNativeVersion);
 DEFINE_NATIVE("EngineHelpers.GetMenuSettings", Bridge_EngineHelpers_GetMenuSettings);

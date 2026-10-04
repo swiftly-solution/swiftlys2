@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.Reflection;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
@@ -65,7 +66,7 @@ internal static class ObsoleteApiScanner
                     continue;
 
                 var memberName = reader.GetString(memberRef.Name);
-                var reason = FindObsoleteReason(type, memberName);
+                var reason = FindObsoleteReason(type, memberName, memberRef);
                 if (reason == null)
                     continue;
 
@@ -80,7 +81,7 @@ internal static class ObsoleteApiScanner
         return results;
     }
 
-    private static string? FindObsoleteReason( Type type, string memberName )
+    private static string? FindObsoleteReason( Type type, string memberName, MemberReference memberRef )
     {
         if (memberName.StartsWith("get_", StringComparison.Ordinal) || memberName.StartsWith("set_", StringComparison.Ordinal))
         {
@@ -104,17 +105,87 @@ internal static class ObsoleteApiScanner
             return fieldReason;
         }
 
-        foreach (var method in type.GetMethods(MemberLookupFlags))
-        {
-            if (!method.Name.Equals(memberName, StringComparison.Ordinal))
-                continue;
+        var candidates = type.GetMethods(MemberLookupFlags)
+            .Where(m => m.Name.Equals(memberName, StringComparison.Ordinal))
+            .ToArray();
 
-            var reason = GetObsoleteReason(method);
-            if (reason != null)
-                return reason;
+        if (candidates.Length == 0)
+            return null;
+
+        if (candidates.Length == 1)
+            return GetObsoleteReason(candidates[0]);
+
+        var reasons = candidates.Select(GetObsoleteReason).ToArray();
+        if (reasons.All(r => r == null))
+            return null;
+        if (reasons.All(r => r != null))
+            return reasons[0];
+
+        var matched = ResolveOverloadBySignature(memberRef, candidates);
+        return matched != null ? GetObsoleteReason(matched) : null;
+    }
+
+    private static MethodInfo? ResolveOverloadBySignature( MemberReference memberRef, MethodInfo[] candidates )
+    {
+        try
+        {
+            var provider = new SimpleTypeNameProvider();
+            var signature = memberRef.DecodeMethodSignature(provider, null);
+
+            foreach (var candidate in candidates)
+            {
+                var genericArity = candidate.IsGenericMethodDefinition ? candidate.GetGenericArguments().Length : 0;
+                if (genericArity != signature.GenericParameterCount)
+                    continue;
+
+                var parameters = candidate.GetParameters();
+                if (parameters.Length != signature.ParameterTypes.Length)
+                    continue;
+
+                var isMatch = true;
+                for (var i = 0; i < parameters.Length; i++)
+                {
+                    if (!parameters[i].ParameterType.Name.Equals(signature.ParameterTypes[i], StringComparison.Ordinal))
+                    {
+                        isMatch = false;
+                        break;
+                    }
+                }
+
+                if (isMatch)
+                    return candidate;
+            }
+        }
+        catch
+        {
         }
 
         return null;
+    }
+
+    private sealed class SimpleTypeNameProvider : ISignatureTypeProvider<string, object?>
+    {
+        public string GetPrimitiveType( PrimitiveTypeCode typeCode ) => typeCode.ToString();
+
+        public string GetTypeFromDefinition( MetadataReader reader, TypeDefinitionHandle handle, byte rawTypeKind )
+            => reader.GetString(reader.GetTypeDefinition(handle).Name);
+
+        public string GetTypeFromReference( MetadataReader reader, TypeReferenceHandle handle, byte rawTypeKind )
+            => reader.GetString(reader.GetTypeReference(handle).Name);
+
+        public string GetTypeFromSpecification( MetadataReader reader, object? genericContext, TypeSpecificationHandle handle, byte rawTypeKind )
+            => "?";
+
+        public string GetSZArrayType( string elementType ) => elementType + "[]";
+        public string GetArrayType( string elementType, ArrayShape shape ) => elementType + "[]";
+        public string GetByReferenceType( string elementType ) => elementType;
+        public string GetPointerType( string elementType ) => elementType + "*";
+        public string GetPinnedType( string elementType ) => elementType;
+        public string GetFunctionPointerType( MethodSignature<string> signature ) => "*()";
+        public string GetGenericMethodParameter( object? genericContext, int index ) => "!!" + index;
+        public string GetGenericTypeParameter( object? genericContext, int index ) => "!" + index;
+        public string GetModifiedType( string modifier, string unmodifiedType, bool isRequired ) => unmodifiedType;
+        public string GetGenericInstantiation( string genericType, ImmutableArray<string> typeArguments ) => genericType;
     }
 
     private static string? GetObsoleteReason( MemberInfo? member )

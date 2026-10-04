@@ -180,7 +180,7 @@ internal class HookManager
             {
                 var node = chain.Nodes[i];
 
-                var built = node.CallbackBuilder.Invoke(() => node.OriginalFuncPtr);
+                var built = node.CallbackBuilder(() => node.OriginalFuncPtr);
                 node.BuiltDelegate = built;
                 node.BuiltPointer = Marshal.GetFunctionPointerForDelegate(node.BuiltDelegate);
                 if (i == 0)

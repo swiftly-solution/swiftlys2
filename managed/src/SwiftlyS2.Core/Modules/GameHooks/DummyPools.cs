@@ -22,6 +22,7 @@ internal sealed class DummyEntityPool<T> where T : class
 internal static partial class GameHooksPublisher
 {
     private const int DummyPoolSize = 1024;
+    private const int DummyPoolSizeLarge = 16384;
 
     private static readonly DummyEntityPool<CPlayerPawnComponentImpl> _pawnComponentPool =
         new(DummyPoolSize, static () => new CPlayerPawnComponentImpl(0));
@@ -40,4 +41,7 @@ internal static partial class GameHooksPublisher
 
     private static readonly DummyEntityPool<CEconItemViewImpl> _econItemViewPool =
         new(DummyPoolSize, static () => new CEconItemViewImpl(0));
+
+    private static readonly DummyEntityPool<CUserCmd> _userCmdPool =
+        new(DummyPoolSizeLarge, static () => new() { Address = 0 });
 }

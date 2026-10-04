@@ -187,6 +187,10 @@
         "windows": 152,
         "linux": 151
     },
+    "CNavPhysicsInterface::TraceShape": {
+        "windows": 3,
+        "linux": 5
+    },
     /*
     By tracing the calls in cstrike15_src
     */

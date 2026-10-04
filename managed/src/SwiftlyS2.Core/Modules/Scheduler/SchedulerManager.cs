@@ -27,13 +27,15 @@ internal static class SchedulerManager
     private static readonly PriorityQueue<Timer, long> _timerQueueMs = new();
 
     // Next-tick tasks keyed by guid so services can remove them before they run
-    private static readonly List<(Action action, CancellationToken ownerToken)> _nextTickTasks = [];
+    private static List<(Action action, CancellationToken ownerToken)> _nextTickTasks = [];
 
-    private static readonly List<(Action action, CancellationToken ownerToken)> _nextWorldUpdateTasks = [];
+    private static List<(Action action, CancellationToken ownerToken)> _nextWorldUpdateTasks = [];
 
     private static List<(Action action, CancellationToken ownerToken)> nextTickActions = [];
+    private static List<(Action action, CancellationToken ownerToken)> nextTickSwap = [];
     private static List<Timer> dueTimers = [];
     private static List<(Action action, CancellationToken ownerToken)> nextWorldUpdateActions = [];
+    private static List<(Action action, CancellationToken ownerToken)> nextWorldUpdateSwap = [];
 
     public static void OnWorldUpdate()
     {
@@ -56,7 +58,7 @@ internal static class SchedulerManager
             batchCount--;
             try
             {
-                task.Invoke();
+                task();
             }
             catch (Exception ex)
             {
@@ -69,8 +71,7 @@ internal static class SchedulerManager
     {
         lock (_lock)
         {
-            nextWorldUpdateActions = _nextWorldUpdateTasks.ToList();
-            _nextWorldUpdateTasks.Clear();
+            (nextWorldUpdateActions, _nextWorldUpdateTasks) = (_nextWorldUpdateTasks, nextWorldUpdateSwap);
         }
 
         if (nextWorldUpdateActions.Count > 0)
@@ -84,13 +85,13 @@ internal static class SchedulerManager
                 }
                 catch (Exception ex)
                 {
-                    if (!GlobalExceptionHandler.Handle(ref ex)) return;
-                    AnsiConsole.WriteException(ex);
+                    if (GlobalExceptionHandler.Handle(ref ex)) AnsiConsole.WriteException(ex);
                 }
             }
-
-            nextWorldUpdateActions.Clear();
         }
+
+        nextWorldUpdateActions.Clear();
+        nextWorldUpdateSwap = nextWorldUpdateActions;
     }
 
 
@@ -116,7 +117,7 @@ internal static class SchedulerManager
             batchCount--;
             try
             {
-                task.Invoke();
+                task();
             }
             catch (Exception ex)
             {
@@ -132,8 +133,7 @@ internal static class SchedulerManager
             _currentTick++;
 
             // Drain next-tick tasks
-            nextTickActions = _nextTickTasks.ToList();
-            _nextTickTasks.Clear();
+            (nextTickActions, _nextTickTasks) = (_nextTickTasks, nextTickSwap);
 
             // Pop all due timers from the heap
             while (_timerQueue.Count > 0)
@@ -182,9 +182,10 @@ internal static class SchedulerManager
                     if (GlobalExceptionHandler.Handle(ref ex)) AnsiConsole.WriteException(ex);
                 }
             }
-
-            nextTickActions.Clear();
         }
+
+        nextTickActions.Clear();
+        nextTickSwap = nextTickActions;
 
         // Execute due timers outside the lock and reschedule if repeating
         if (dueTimers.Count > 0)

@@ -29,10 +29,13 @@ internal static partial class GameHooksPublisher
                 _pawnComponentPool.Return(dummy);
                 if (player == null) return next()(pMovementServices, pUserCmd);
 
+                var userCmdImpl = _userCmdPool.Rent();
+                userCmdImpl.Address = pUserCmd;
+
                 var preCtx = new RunCommandMovementPreContext {
                     Params = new RunCommandMovementParams {
                         Player = player,
-                        UserCmd = new CUserCmd { Address = pUserCmd }
+                        UserCmd = userCmdImpl
                     }
                 };
 
@@ -47,13 +50,22 @@ internal static partial class GameHooksPublisher
                 }
 
                 InvokeRunCommandPre(ref preCtx);
-                if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return 0;
+                if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal)
+                {
+                    userCmdImpl.Address = 0;
+                    _userCmdPool.Return(userCmdImpl);
+                    return 0;
+                }
 
                 var result = next()(pMovementServices, pUserCmd);
 
                 var postCtx = new RunCommandMovementPostContext { Params = preCtx.Params };
 
                 InvokeRunCommandPost(ref postCtx);
+
+                userCmdImpl.Address = 0;
+                _userCmdPool.Return(userCmdImpl);
+
                 return result;
             };
         });

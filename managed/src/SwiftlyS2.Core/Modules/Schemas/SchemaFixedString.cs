@@ -1,5 +1,6 @@
 using System.Runtime.InteropServices;
 using System.Text;
+using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Core.Schemas;
@@ -13,7 +14,7 @@ internal class SchemaFixedString : SchemaFixedArray<byte>, ISchemaFixedString, I
 
     public string Value {
         get {
-            return Marshal.PtrToStringUTF8(_Handle)!;
+            return StringAlloc.CreateCSharpString(_Handle);
         }
         set {
             unsafe

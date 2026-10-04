@@ -40,10 +40,23 @@ internal class NativeBinding
 
                     var nativeNameSpace = "SwiftlyS2.Core.Natives.Native" + className;
 
-                    var nativeClass = Type.GetType(nativeNameSpace)!;
+                    var nativeClass = Type.GetType(nativeNameSpace);
+                    if(nativeClass == null)
+                    {
+                        Console.WriteLine($"Failed to bind native function {funcName} in class {className}. Class not found.");
+                        continue;
+                    }
+
                     var nativeStaticField = nativeClass.GetField("_" + funcName,
                         BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
-                    nativeStaticField!.SetValue(null, pNativeTables[i].Function);
+
+                    if(nativeStaticField == null)
+                    {
+                        Console.WriteLine($"Failed to bind native function {funcName} in class {className}. Field not found.");
+                        continue;
+                    }
+
+                    nativeStaticField.SetValue(null, pNativeTables[i].Function);
                 }
             }
             catch (Exception e)

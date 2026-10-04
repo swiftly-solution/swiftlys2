@@ -395,7 +395,7 @@ internal class PluginManager : IPluginManager
             var pluginName = Path.GetFileName(directory);
             _ = _pluginLoadErrors.TryRemove(pluginName, out _);
 
-            PluginLoaded?.Invoke(context);
+            if(PluginLoaded != null) PluginLoaded(context);
 
             return context;
         }
@@ -421,7 +421,7 @@ internal class PluginManager : IPluginManager
 
         try
         {
-            PluginUnloading?.Invoke(context);
+            if(PluginUnloading != null) PluginUnloading(context);
             context.Dispose();
             _ = _plugins.Remove(context);
             return true;

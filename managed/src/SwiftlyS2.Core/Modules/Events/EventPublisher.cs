@@ -13,6 +13,7 @@ using SwiftlyS2.Core.Players;
 using SwiftlyS2.Core.EntitySystem;
 using SwiftlyS2.Core.Services;
 using SwiftlyS2.Core.ProtobufDefinitions;
+using SwiftlyS2.Core.Convars;
 
 namespace SwiftlyS2.Core.Events;
 
@@ -30,7 +31,7 @@ internal static class EventPublisher
         lock (subscribersLock)
         {
             subscribers.Add(subscriber);
-            System.Threading.Volatile.Write(ref subscriberSnapshot, [.. subscribers]);
+            Volatile.Write(ref subscriberSnapshot, [.. subscribers]);
         }
     }
 
@@ -39,7 +40,7 @@ internal static class EventPublisher
         lock (subscribersLock)
         {
             _ = subscribers.Remove(subscriber);
-            System.Threading.Volatile.Write(ref subscriberSnapshot, [.. subscribers]);
+            Volatile.Write(ref subscriberSnapshot, [.. subscribers]);
         }
     }
 
@@ -67,6 +68,7 @@ internal static class EventPublisher
             _ = NativeConvars.AddConvarCreatedListener((nint)(delegate* unmanaged< nint, void >)&OnConVarCreated);
             _ = NativeConvars.AddConCommandCreatedListener((nint)(delegate* unmanaged< nint, void >)&OnConCommandCreated);
             _ = NativeConvars.AddGlobalChangeListener((nint)(delegate* unmanaged< nint, int, nint, nint, void >)&OnConVarValueChanged);
+            _ = NativeConvars.AddQueryClientCvarCallback((nint)(delegate* unmanaged< int, nint, nint, void >)&ConVarQueryCallback);
             NativeCommands.SetCommandHandler((nint)(delegate* unmanaged< nint, int, nint, nint, nint, byte, void >)&OnCommandDispatch);
             NativeCommands.SetClientCommandHandler((nint)(delegate* unmanaged< int, nint, int >)&OnClientCommandDispatch);
             NativeCommands.SetClientChatHandler((nint)(delegate* unmanaged< int, nint, byte, int >)&OnClientChatDispatch);
@@ -105,6 +107,23 @@ internal static class EventPublisher
 
             NativeConsoleOutput.RemoveConsoleListener(consoleOutputListenerId.Value);
             consoleOutputListenerId = null;
+        }
+    }
+
+    [UnmanagedCallersOnly]
+    public static void ConVarQueryCallback( int playerId, nint name, nint value )
+    {
+        try
+        {
+            var convarName = StringAlloc.CreateCSharpString(name);
+            var convarValue = StringAlloc.CreateCSharpString(value);
+
+            ConVarService.ProcessConVarQueryCallback(playerId, convarName, convarValue);
+        } 
+        catch(Exception e)
+        {
+            if (!GlobalExceptionHandler.Handle(ref e)) return;
+            AnsiConsole.WriteException(e);
         }
     }
 

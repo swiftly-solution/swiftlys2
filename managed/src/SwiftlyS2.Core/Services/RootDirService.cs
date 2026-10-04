@@ -23,4 +23,8 @@ internal class RootDirService {
   public string GetDataRoot() {
     return CombineRoot("data");
   }
+
+  public string GetTempRoot() {
+    return Path.Combine(GetDataRoot(), "temp");
+  }
 }

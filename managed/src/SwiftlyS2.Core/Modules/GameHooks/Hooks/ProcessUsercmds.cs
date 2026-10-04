@@ -1,5 +1,4 @@
 using SwiftlyS2.Core.Events;
-using SwiftlyS2.Core.SchemaDefinitions;
 using SwiftlyS2.Shared.GameHooks;
 using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Shared.ProtobufDefinitions;
@@ -33,7 +32,11 @@ internal static partial class GameHooksPublisher
                 var cmdsList = new List<IUserCmd>(numCmds);
 
                 for (var i = 0; i < numCmds; i++)
-                    cmdsList.Add(new CUserCmd { Address = userCmds + (i * (144 + CUserCmdPlatformPadding)) });
+                {
+                    var userCmdImpl = _userCmdPool.Rent();
+                    userCmdImpl.Address = userCmds + (i * (144 + CUserCmdPlatformPadding));
+                    cmdsList.Add(userCmdImpl);
+                }
 
                 var preCtx = new ProcessUsercmdsPreContext {
                     Params = new ProcessUsercmdsParams {
@@ -60,7 +63,16 @@ internal static partial class GameHooksPublisher
                 }
 
                 InvokeProcessUsercmdsPre(ref preCtx);
-                if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return 0;
+                if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal)
+                {
+                    foreach (var userCmd in preCtx.Params.Usercmds)
+                    {
+                        var userCmdImpl = (CUserCmd)userCmd;
+                        userCmdImpl.Address = 0;
+                        _userCmdPool.Return(userCmdImpl);
+                    }
+                    return 0;
+                }
 
                 var result = next()(controller, userCmds, numCmds, paused, margin);
 

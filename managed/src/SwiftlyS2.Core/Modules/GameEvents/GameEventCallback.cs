@@ -57,7 +57,6 @@ internal class GameEventCallback<T> : GameEventCallback, IDisposable where T : I
 {
     private static readonly uint s_hash = T.GetHash();
     private static readonly string s_eventName = T.GetName();
-    private static readonly string s_category = "GameEventCallback::" + s_eventName;
 
     private IGameEventService.GameEventHandler<T> _callback { get; init; }
     private ILogger<GameEventCallback<T>> _Logger { get; init; }

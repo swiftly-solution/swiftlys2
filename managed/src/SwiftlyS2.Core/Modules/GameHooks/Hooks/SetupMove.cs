@@ -27,12 +27,14 @@ internal static partial class GameHooksPublisher
                 if (player == null) { next()(movementServices, userCmd, moveData); return; }
 
                 var moveDataImpl = _moveDataPool.Rent();
+                var userCmdImpl = _userCmdPool.Rent();
+                userCmdImpl.Address = userCmd;
                 moveDataImpl.Address = moveData;
 
                 var preCtx = new SetupMoveMovementPreContext {
                     Params = new SetupMoveMovementParams {
                         Player = player,
-                        UserCmd = new CUserCmd { Address = userCmd },
+                        UserCmd = userCmdImpl,
                         MoveData = moveDataImpl
                     }
                 };
@@ -41,6 +43,8 @@ internal static partial class GameHooksPublisher
                 if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal)
                 {
                     moveDataImpl.Address = 0;
+                    userCmdImpl.Address = 0;
+                    _userCmdPool.Return(userCmdImpl);
                     _moveDataPool.Return(moveDataImpl);
                     return;
                 }
@@ -52,6 +56,8 @@ internal static partial class GameHooksPublisher
                 InvokeSetupMovePost(ref postCtx);
 
                 moveDataImpl.Address = 0;
+                userCmdImpl.Address = 0;
+                _userCmdPool.Return(userCmdImpl);
                 _moveDataPool.Return(moveDataImpl);
             };
         });

@@ -134,7 +134,7 @@ internal class TraceManager : ITraceManager
             fixed (CGameTrace* tracePtr = &trace)
             {
                 filter.EnsureValid();
-                GameFunctions.TraceShape(NativeEngineHelpers.GetTraceManager(), &ray, start, end, &filter, tracePtr);
+                GameFunctions.TraceShape(&ray, start, end, &filter, tracePtr);
             }
         }
     }
@@ -163,7 +163,7 @@ internal class TraceManager : ITraceManager
 
             try
             {
-                GameFunctions.TraceShape(NativeEngineHelpers.GetTraceManager(), &ray, start, end, &traceFilter, &traceResult);
+                GameFunctions.TraceShape(&ray, start, end, &traceFilter, &traceResult);
             }
             finally
             {
@@ -219,7 +219,7 @@ internal class TraceManager : ITraceManager
 
             fixed (CGameTrace* tracePtr = &trace)
             {
-                GameFunctions.TraceShape(NativeEngineHelpers.GetTraceManager(), &ray, start, end, &filter, tracePtr);
+                GameFunctions.TraceShape(&ray, start, end, &filter, tracePtr);
             }
         }
     }

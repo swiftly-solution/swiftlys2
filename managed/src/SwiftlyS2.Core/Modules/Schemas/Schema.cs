@@ -3,7 +3,6 @@ using SwiftlyS2.Core.Extensions;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Buffers;
-using System.Runtime.InteropServices;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Scheduler;
 
@@ -110,13 +109,13 @@ internal static class Schema
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static string GetString( nint handle )
     {
-        return handle == 0 ? string.Empty : Marshal.PtrToStringUTF8(handle) ?? string.Empty;
+        return handle == 0 ? string.Empty : StringAlloc.CreateCSharpString(handle);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static string GetCUtlString( nint handle )
     {
-        return handle == 0 ? string.Empty : Marshal.PtrToStringUTF8(handle) ?? string.Empty;
+        return handle == 0 ? string.Empty : StringAlloc.CreateCSharpString(handle);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

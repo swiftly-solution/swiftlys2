@@ -34,10 +34,8 @@ typedef void (*UTIL_Remove)(void*);
 
 CGameEntitySystem* g_pGameEntitySystem = nullptr;
 
-extern void* g_pTraceManager;
 extern void* g_pOnStartupServerCallback;
 
-IFunctionHook* g_pTraceShapeHook = nullptr;
 IVFunctionHook* g_pStartupServerHook = nullptr;
 
 bool g_bDone = false;
@@ -47,15 +45,10 @@ CGameEntitySystem* GameEntitySystem()
     return g_pGameEntitySystem;
 }
 
-void TraceShapeHook(void* _this, Ray_t& ray, Vector& start, Vector& end, CTraceFilter* filter, trace_t* trace);
 void StartupServerHook(void* _this, const GameSessionConfiguration_t& config, ISource2WorldSession* a, const char* b);
 
 void CEntSystem::Initialize()
 {
-    g_pTraceShapeHook = g_pHooksManager->CreateFunctionHook();
-    g_pTraceShapeHook->SetHookFunction(g_pGameDataManager->GetSignatures()->Fetch("TraceShape"), reinterpret_cast<void*>(TraceShapeHook));
-    g_pTraceShapeHook->Enable();
-
     void* netserverservice = nullptr;
     g_pS2BinLib->FindVtable("engine2", "CNetworkServerService", &netserverservice);
 
@@ -66,25 +59,11 @@ void CEntSystem::Initialize()
 
 void CEntSystem::Shutdown()
 {
-    g_pTraceShapeHook->Disable();
-    g_pHooksManager->DestroyFunctionHook(g_pTraceShapeHook);
-    g_pTraceShapeHook = nullptr;
-
     g_pStartupServerHook->Disable();
     g_pHooksManager->DestroyVFunctionHook(g_pStartupServerHook);
     g_pStartupServerHook = nullptr;
 
     g_pGameEntitySystem->RemoveListenerEntity(&g_entityListener);
-}
-
-void TraceShapeHook(void* _this, Ray_t& ray, Vector& start, Vector& end, CTraceFilter* filter, trace_t* trace)
-{
-    if (g_pTraceManager == nullptr)
-    {
-        g_pTraceManager = _this;
-    }
-
-    reinterpret_cast<decltype(&TraceShapeHook)>(g_pTraceShapeHook->GetOriginal())(_this, ray, start, end, filter, trace);
 }
 
 void StartupServerHook(void* _this, const GameSessionConfiguration_t& config, ISource2WorldSession* a, const char* b)

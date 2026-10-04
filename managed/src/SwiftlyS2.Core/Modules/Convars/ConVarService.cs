@@ -1,5 +1,3 @@
-using System.Collections.Concurrent;
-using System.Runtime.InteropServices;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.Scheduler;
 using SwiftlyS2.Shared.Convars;
@@ -33,7 +31,8 @@ internal enum EConVarType : int
 
 internal class ConVarService : IConVarService
 {
-    private static readonly ConcurrentDictionary<int, ConVarCallbackDelegate> callbacks = new();
+    private static readonly Dictionary<(int ClientId, string Name), Queue<Action<string>>> _pendingQueries = [];
+    private static readonly Lock _pendingQueriesLock = new();
     private INetMessageService _netMessageService;
 
     public ConVarService( INetMessageService netMessageService )
@@ -43,12 +42,12 @@ internal class ConVarService : IConVarService
 
     public IConVar<T>? Find<T>( string name )
     {
-        return !NativeConvars.ExistsConvar(name) ? null : (IConVar<T>)new ConVar<T>(name, _netMessageService);
+        return !NativeConvars.ExistsConvar(name) ? null : (IConVar<T>)new ConVar<T>(name, this);
     }
 
     public IConVar? FindAsString( string name )
     {
-        return !NativeConvars.ExistsConvar(name) ? null : (IConVar)new ConVar(name, _netMessageService);
+        return !NativeConvars.ExistsConvar(name) ? null : (IConVar)new ConVar(name, this);
     }
 
     public IConVar<T> Create<T>( string name, string helpMessage, T defaultValue, ConvarFlags flags = ConvarFlags.NONE )
@@ -123,7 +122,7 @@ internal class ConVarService : IConVarService
             throw new Exception($"Unsupported type {typeof(T)}.");
         }
 
-        return new ConVar<T>(name, _netMessageService);
+        return new ConVar<T>(name, this);
     }
 
     public IConVar<T> Create<T>( string name, string helpMessage, T defaultValue, T? minValue, T? maxValue, ConvarFlags flags = ConvarFlags.NONE ) where T : unmanaged
@@ -270,17 +269,17 @@ internal class ConVarService : IConVarService
             }
         }
 
-        return new ConVar<T>(name, _netMessageService);
+        return new ConVar<T>(name, this);
     }
 
     public IConVar<T> CreateOrFind<T>( string name, string helpMessage, T defaultValue, ConvarFlags flags = ConvarFlags.NONE )
     {
-        return NativeConvars.ExistsConvar(name) ? new ConVar<T>(name, _netMessageService) : Create(name, helpMessage, defaultValue, flags);
+        return NativeConvars.ExistsConvar(name) ? new ConVar<T>(name, this) : Create(name, helpMessage, defaultValue, flags);
     }
 
     public IConVar<T> CreateOrFind<T>( string name, string helpMessage, T defaultValue, T? minValue, T? maxValue, ConvarFlags flags = ConvarFlags.NONE ) where T : unmanaged
     {
-        return NativeConvars.ExistsConvar(name) ? new ConVar<T>(name, _netMessageService) : Create(name, helpMessage, defaultValue, minValue, maxValue, flags);
+        return NativeConvars.ExistsConvar(name) ? new ConVar<T>(name, this) : Create(name, helpMessage, defaultValue, minValue, maxValue, flags);
     }
 
     public void ReplicateToClient( int clientId, string name, string value )
@@ -307,36 +306,47 @@ internal class ConVarService : IConVarService
 
     public void QueryClient( int clientId, string name, Action<string> callback )
     {
-        var convarName = name;
-        Action? removeSelf = null;
-        ConVarCallbackDelegate nativeCallback = ( playerId, namePtr, valuePtr ) =>
+        var key = (clientId, name);
+        var shouldQuery = false;
+
+        lock (_pendingQueriesLock)
         {
-            if (clientId != playerId)
+            if (!_pendingQueries.TryGetValue(key, out var queue))
+            {
+                queue = new Queue<Action<string>>();
+                _pendingQueries[key] = queue;
+                shouldQuery = true;
+            }
+            else
+            {
+                shouldQuery = false;
+            }
+
+            queue.Enqueue(callback);
+        }
+
+        if (shouldQuery)
+        {
+            _ = SchedulerManager.QueueOrNow(() => NativeConvars.QueryClientConvar(clientId, name));
+        }
+    }
+
+    public static void ProcessConVarQueryCallback(int playerid, string convarName, string convarValue)
+    {
+        var key = (playerid, convarName);
+        Queue<Action<string>>? queue;
+
+        lock (_pendingQueriesLock)
+        {
+            if (!_pendingQueries.Remove(key, out queue))
             {
                 return;
             }
-            var name = StringAlloc.CreateCSharpString(namePtr);
+        }
 
-            if (name != convarName)
-            {
-                return;
-            }
-            var value = StringAlloc.CreateCSharpString(valuePtr)!;
-
-            callback(value);
-            removeSelf?.Invoke();
-        };
-
-        var callbackPtr = Marshal.GetFunctionPointerForDelegate(nativeCallback);
-        var listenerId = NativeConvars.AddQueryClientCvarCallback(callbackPtr);
-        callbacks[listenerId] = nativeCallback;
-
-        removeSelf = () =>
+        while (queue.Count > 0)
         {
-            _ = callbacks.TryRemove(listenerId, out _);
-            NativeConvars.RemoveQueryClientCvarCallback(listenerId);
-        };
-
-        _ = SchedulerManager.QueueOrNow(() => NativeConvars.QueryClientConvar(clientId, convarName));
+            queue.Dequeue()(convarValue);
+        }
     }
 }

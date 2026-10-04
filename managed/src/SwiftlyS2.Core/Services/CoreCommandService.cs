@@ -1,6 +1,7 @@
 using System.Runtime;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Runtime.Loader;
 using Spectre.Console;
 using Microsoft.Extensions.Logging;
 using SwiftlyS2.Shared;
@@ -8,6 +9,7 @@ using SwiftlyS2.Core.Plugins;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared.Commands;
 using SwiftlyS2.Shared.Plugins;
+using System.Diagnostics;
 
 namespace SwiftlyS2.Core.Services;
 
@@ -43,11 +45,11 @@ internal class CoreCommandService
 
         void ShowServerStatus()
         {
-            var uptime = DateTime.Now - System.Diagnostics.Process.GetCurrentProcess().StartTime;
+            var uptime = DateTime.Now - Process.GetCurrentProcess().StartTime;
             ThreadPool.GetAvailableThreads(out var availableWorkerThreads, out var availableCompletionPortThreads);
             ThreadPool.GetMaxThreads(out var maxWorkerThreads, out var maxCompletionPortThreads);
             var busyWorkerThreads = maxWorkerThreads - availableWorkerThreads;
-            var processThreadCount = System.Diagnostics.Process.GetCurrentProcess().Threads.Count;
+            var processThreadCount = Process.GetCurrentProcess().Threads.Count;
 
             var output = string.Join("\n", [
                 $"Uptime: {uptime.Days}d {uptime.Hours}h {uptime.Minutes}m {uptime.Seconds}s",
@@ -75,7 +77,7 @@ internal class CoreCommandService
             logger.LogInformation("{Output}", output);
         }
 
-        void ShowGarbageCollectionInfo()
+        void ShowMemoryInfo()
         {
             var output = string.Join("\n", [
                 $"Garbage Collection Information:",
@@ -140,8 +142,8 @@ internal class CoreCommandService
                 case "version":
                     ShowVersionInfo();
                     break;
-                case "gc" when RequireConsoleAccess():
-                    ShowGarbageCollectionInfo();
+                case "memory" when RequireConsoleAccess():
+                    ShowMemoryInfo();
                     break;
                 case "plugins" when RequireConsoleAccess():
                     PluginCommand(context);
@@ -187,7 +189,7 @@ internal class CoreCommandService
                 .AddRow(Markup.Escape("cmds [page]"), "List all plugin commands (paginated, 20 per page)")
                 .AddRow("confilter", "Console Filter Menu")
                 .AddRow("plugins", "Plugin Management Menu")
-                .AddRow("gc", "Show garbage collection information on managed")
+                .AddRow("memory", "Show managed memory usage overview and a per-plugin heap breakdown")
                 .AddRow("profiler", "Profiler Menu")
                 .AddRow("translations", "Translations Menu");
         }
@@ -313,10 +315,10 @@ internal class CoreCommandService
         if (args.Length == 1)
         {
             var table = new Table().AddColumn("Command").AddColumn("Description")
-                .AddRow("enable <1|2>", "Enable the profiler (1 = light/EventPipe, 2 = heavy/Harmony)")
+                .AddRow("enable <1>", "Enable the profiler (1 = EventPipe)")
                 .AddRow("disable", "Disable the profiler")
                 .AddRow("status", "Show the status of the profiler")
-                .AddRow("save", "Save the profiler data to a file");
+                .AddRow(Markup.Escape("save [nosummary]"), "Save the profiler data to a file (pass 'nosummary' to skip the .summary.txt report)");
             AnsiConsole.Write(table);
             return;
         }
@@ -325,14 +327,12 @@ internal class CoreCommandService
         {
             case "enable":
                 var levelArg = args.Length > 2 ? args[2].Trim() : "1";
-                if (!int.TryParse(levelArg, out var levelValue) || levelValue is not (1 or 2))
+                if (!int.TryParse(levelArg, out var levelValue) || levelValue is not 1)
                 {
-                    logger.LogWarning("Usage: profiler enable <1|2> (1 = light, 2 = heavy)");
+                    logger.LogWarning("Usage: profiler enable <1> (1 = EventPipe)");
                     break;
                 }
                 var level = (ProfilerLevel)levelValue;
-                if (level == ProfilerLevel.Heavy)
-                    logger.LogWarning("Heavy mode patches the core SwiftlyS2 assembly, SwiftlyS2.Profiler, and every loaded plugin with Harmony - this will add per-call overhead while active.");
                 profileService.Enable(level);
                 logger.LogInformation("The profiler has been enabled ({Level}).", level);
                 break;
@@ -344,7 +344,8 @@ internal class CoreCommandService
                 logger.LogInformation("Profiler is currently {Status}.", profileService.CurrentLevel);
                 break;
             case "save":
-                _ = profileService.SaveAsync(rootDirService.GetRoot(), logger);
+                var generateSummary = !(args.Length > 2 && args[2].Trim().Equals("nosummary", StringComparison.OrdinalIgnoreCase));
+                _ = profileService.SaveAsync(rootDirService.GetRoot(), logger, generateSummary);
                 break;
             default:
                 logger.LogWarning("Unknown command");

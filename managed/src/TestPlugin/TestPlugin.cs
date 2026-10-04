@@ -16,7 +16,6 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using SwiftlyS2.Shared.Events;
 using SwiftlyS2.Shared.Memory;
-using Dapper;
 using SwiftlyS2.Shared.Sounds;
 using SwiftlyS2.Shared.EntitySystem;
 using SwiftlyS2.Shared.Players;
@@ -27,6 +26,7 @@ using SwiftlyS2.Shared.SteamAPI;
 using SwiftlyS2.Core.Menus.OptionsBase;
 using SwiftlyS2.Shared.Trace;
 using System.Diagnostics;
+using System.Reflection;
 
 namespace TestPlugin;
 
@@ -136,9 +136,17 @@ public class TestPlugin : BasePlugin
     private volatile bool _simRunning;
     private static readonly char[] _simChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ".ToCharArray();
 
+    private Thread? _profilerStressThread;
+    private volatile bool _profilerStressRunning;
+
     public TestPlugin( ISwiftlyCore core ) : base(core)
     {
         Console.WriteLine("[TestPlugin] TestPlugin constructed successfully!");
+
+        core.GameHooks.Controller.ProcessUsercmds.Pre += ( ref @event ) =>
+        {
+            var usercmds = @event.Params.Usercmds;
+        };
 
         core.GameHooks.Movement.PlayerMove.Pre += ( ref @event ) =>
         {
@@ -202,6 +210,53 @@ public class TestPlugin : BasePlugin
         Core.Logger.LogInformation("[Database] Connection info: {Info}", connectionInfo);
 
         using var conn = Core.Database.GetConnection(connectionName);
+    }
+
+    [Command("analyzenettrace")]
+    public void AnalyzeNetTraceCommand( ICommandContext context )
+    {
+        if (context.Args.Length < 1)
+        {
+            context.Reply("Usage: analyzenettrace <path-to-.nettrace>");
+            return;
+        }
+
+        var path = context.Args[0];
+        if (!File.Exists(path))
+        {
+            context.Reply($"File not found: {path}");
+            return;
+        }
+
+        context.Reply($"Analyzing {path}...");
+
+        Task.Run(() =>
+        {
+            try
+            {
+                var hostDir = AppContext.BaseDirectory;
+                var profilerDll = Path.Combine(hostDir, "..", "SwiftlyS2.Profiler.dll");
+                if (!File.Exists(profilerDll))
+                {
+                    Core.Logger.LogWarning("[NetTrace] SwiftlyS2.Profiler.dll not found at {Path}", profilerDll);
+                    return;
+                }
+
+                var asm = Assembly.LoadFrom(profilerDll);
+                _ = asm.GetType("SwiftlyS2.Core.Services.ProfilerAnalyzer")!
+                    .GetMethod("Analyze")!
+                    .Invoke(null, [path, Core.Logger]);
+
+                var summaryPath = path.EndsWith(".nettrace", StringComparison.OrdinalIgnoreCase)
+                    ? path.Replace(".nettrace", ".summary.txt")
+                    : path + ".summary.txt";
+                Core.Logger.LogInformation("[NetTrace] Analysis complete → {Path}", summaryPath);
+            }
+            catch (Exception ex)
+            {
+                Core.Logger.LogError(ex, "[NetTrace] Analysis failed.");
+            }
+        });
     }
 
     [GameEventHandler(HookMode.Pre)]
@@ -328,11 +383,6 @@ public class TestPlugin : BasePlugin
         // {
         //     Console.WriteLine($"PostThink -> {@event.PlayerPawn.OriginalController.Value?.PlayerName}");
         // };
-
-        // Core.Engine.ExecuteCommandWithBuffer("@ping", ( buffer ) =>
-        // {
-        //     Console.WriteLine($"pong: {buffer}");
-        // });
 
         // _ = Core.GameEvent.HookPre<EventShowSurvivalRespawnStatus>(@event =>
         // {
@@ -530,6 +580,16 @@ public class TestPlugin : BasePlugin
         um.Send();
 
         throw new ObjectDisposedException(nameof(CUserMessageShake));
+    }
+
+    [Command("qc")]
+    public void TestCommandQC(ICommandContext context)
+    {
+        var player = context.Sender!;
+        Core.ConVar.QueryClient(player.PlayerID, context.Args[0], (value) =>
+        {
+            player.SendChat($"QueryClient result for '{context.Args[0]}': {value} - {Core.Engine.GlobalVars.TickCount}");
+        });
     }
 
     [Command("hh")]
@@ -771,15 +831,6 @@ public class TestPlugin : BasePlugin
     {
         Console.WriteLine(context.Sender!.SteamID);
         Console.WriteLine(context.Sender!.UnauthorizedSteamID);
-    }
-
-    [Command("tt7")]
-    public void TestCommand7( ICommandContext _ )
-    {
-        Core.Engine.ExecuteCommandWithBuffer("@ping", ( buffer ) => { Console.WriteLine($"pong: {buffer}"); });
-        Core.Engine.ExecuteCommandWithBuffer("@ping2", ( buffer ) => { Console.WriteLine($"pong2: {buffer}"); });
-        Core.Engine.ExecuteCommandWithBuffer("@ping3", ( buffer ) => { Console.WriteLine($"pong3: {buffer}"); });
-        Core.Engine.ExecuteCommandWithBuffer("@ping4", ( buffer ) => { Console.WriteLine($"pong4: {buffer}"); });
     }
 
     [ClientNetMessageHandler]
@@ -1630,13 +1681,6 @@ public class TestPlugin : BasePlugin
     }
 
 
-    [Command("ecwb")]
-    public void ECWBCommand( ICommandContext _ )
-    {
-        Core.Engine.ExecuteCommandWithBuffer("cs2f_use_old_push 1", ( buffer ) => Core.Logger.LogWarning($"cs2f_use_old_push:\n{buffer}"));
-        Core.Scheduler.NextTick(() => Core.Engine.ExecuteCommandWithBuffer("map_showbombradius", ( buffer ) => Core.Logger.LogWarning($"map_showbombradius:\n{buffer}")));
-    }
-
     [Command("ex1")]
     public void DeepExceptionCommand( ICommandContext _ )
     {
@@ -1918,9 +1962,69 @@ public class TestPlugin : BasePlugin
         Core.Logger.LogInformation("[SimLog] Stopped.");
     }
 
+    [Command("profilerstress")]
+    public void ProfilerStressCommand( ICommandContext context )
+    {
+        if (_profilerStressRunning)
+        {
+            Core.Logger.LogInformation("[ProfilerStress] Already running.");
+            return;
+        }
+
+        var args = context.Args;
+        var ratePerSec = args.Length > 1 && int.TryParse(args[1], out var r) && r > 0 ? r : 50000;
+        var perTick = Math.Max(1, ratePerSec / 100);
+
+        _profilerStressRunning = true;
+        _profilerStressThread = new Thread(() =>
+        {
+            long total = 0;
+            var sw = System.Diagnostics.Stopwatch.StartNew();
+            var lastReport = sw.ElapsedMilliseconds;
+
+            while (_profilerStressRunning)
+            {
+                for (var i = 0; i < perTick && _profilerStressRunning; i++)
+                {
+                    Core.Profiler.RecordTime("stress_event", 0.01);
+                    total++;
+                }
+
+                if (sw.ElapsedMilliseconds - lastReport >= 1000)
+                {
+                    lastReport = sw.ElapsedMilliseconds;
+                    Core.Logger.LogInformation("[ProfilerStress] {Total} events emitted so far (~{Rate}/sec target).", total, ratePerSec);
+                }
+
+                Thread.Sleep(10);
+            }
+
+            Core.Logger.LogInformation("[ProfilerStress] Stopped, {Total} events emitted total.", total);
+        })
+        {
+            IsBackground = true,
+            Name = "ProfilerStress"
+        };
+        _profilerStressThread.Start();
+        Core.Logger.LogInformation("[ProfilerStress] Started, targeting ~{Rate} events/sec. Make sure 'sw profiler enable 1' was run first, then use 'sw profiler save' to time the summary generation.", ratePerSec);
+    }
+
+    [Command("profilerstressstop")]
+    public void ProfilerStressStopCommand( ICommandContext context )
+    {
+        if (!_profilerStressRunning)
+        {
+            Core.Logger.LogInformation("[ProfilerStress] Not running.");
+            return;
+        }
+        _profilerStressRunning = false;
+        Core.Logger.LogInformation("[ProfilerStress] Stopping...");
+    }
+
     public override void Unload()
     {
         _simRunning = false;
+        _profilerStressRunning = false;
         Console.WriteLine("TestPlugin unloaded");
     }
 }
