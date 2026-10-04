@@ -5,11 +5,7 @@ namespace SwiftlyS2.Core.Menu;
 
 internal sealed class MenuInstance : IMenu
 {
-    private readonly Dictionary<MenuRegion, List<IMenuComponent>> regions = new() {
-        [MenuRegion.Header] = [],
-        [MenuRegion.Body] = [],
-        [MenuRegion.Footer] = []
-    };
+    private volatile IMenuComponent[][] regions = [[], [], []];
 
     private readonly Dictionary<int, MenuSession> sessions = [];
     private readonly Lock sessionLock = new();
@@ -54,6 +50,10 @@ internal sealed class MenuInstance : IMenu
 
     public bool IsDisposed { get; private set; }
 
+    internal MenuHintCache? ButtonHints { get; set; }
+
+    internal MenuNode? ChatHints { get; set; }
+
     public IReadOnlyList<IMenuSession> Sessions {
         get {
             lock (sessionLock)
@@ -69,31 +69,21 @@ internal sealed class MenuInstance : IMenu
 
     public event Action<IMenuSession>? FocusChanged;
 
-    public IReadOnlyList<IMenuComponent> GetComponents( MenuRegion region )
-    {
-        lock (componentLock)
-        {
-            return regions[region].ToList();
-        }
-    }
+    public IReadOnlyList<IMenuComponent> GetComponents( MenuRegion region ) => [.. regions[(int)region]];
 
     public void Add( MenuRegion region, IMenuComponent component )
     {
-        lock (componentLock)
-        {
-            regions[region].Add(component);
-        }
-
+        Replace(region, current => [.. current, component]);
         InvalidateAll();
     }
 
     public void Insert( MenuRegion region, int index, IMenuComponent component )
     {
-        lock (componentLock)
-        {
-            var list = regions[region];
+        Replace(region, current => {
+            var list = current.ToList();
             list.Insert(Math.Clamp(index, 0, list.Count), component);
-        }
+            return [.. list];
+        });
 
         InvalidateAll();
     }
@@ -104,9 +94,22 @@ internal sealed class MenuInstance : IMenu
 
         lock (componentLock)
         {
-            foreach (var list in regions.Values)
+            var next = regions.ToArray();
+
+            for (var region = 0; region < next.Length; region++)
             {
-                removed |= list.Remove(component);
+                var position = Array.IndexOf(next[region], component);
+
+                if (position >= 0)
+                {
+                    next[region] = [.. next[region][..position], .. next[region][(position + 1)..]];
+                    removed = true;
+                }
+            }
+
+            if (removed)
+            {
+                regions = next;
             }
         }
 
@@ -184,28 +187,101 @@ internal sealed class MenuInstance : IMenu
 
         lock (componentLock)
         {
-            foreach (var list in regions.Values)
-            {
-                list.Clear();
-            }
+            regions = [[], [], []];
         }
     }
 
+    internal IMenuComponent[] Snapshot( MenuRegion region ) => regions[(int)region];
+
     internal List<IMenuComponent> GetVisible( MenuRegion region, IMenuSession session )
     {
-        lock (componentLock)
+        var source = Snapshot(region);
+        var visible = new List<IMenuComponent>(source.Length);
+
+        foreach (var component in source)
         {
-            return regions[region].Where(component => component.IsVisible(session)).ToList();
+            if (component.IsVisible(session))
+            {
+                visible.Add(component);
+            }
         }
+
+        return visible;
     }
 
     internal List<IMenuComponent> GetFocusables( IMenuSession session )
     {
+        var source = Snapshot(MenuRegion.Body);
+        var focusables = new List<IMenuComponent>(source.Length);
+
+        foreach (var component in source)
+        {
+            if (component.IsFocusable && component.IsVisible(session))
+            {
+                focusables.Add(component);
+            }
+        }
+
+        return focusables;
+    }
+
+    internal int CountFocusables( IMenuSession session )
+    {
+        var count = 0;
+
+        foreach (var component in Snapshot(MenuRegion.Body))
+        {
+            if (component.IsFocusable && component.IsVisible(session))
+            {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    internal IMenuComponent? FocusableAt( IMenuSession session, int index )
+    {
+        var position = 0;
+
+        foreach (var component in Snapshot(MenuRegion.Body))
+        {
+            if (component.IsFocusable && component.IsVisible(session) && position++ == index)
+            {
+                return component;
+            }
+        }
+
+        return null;
+    }
+
+    internal int IndexOfFocusable( IMenuSession session, IMenuComponent target )
+    {
+        var position = 0;
+
+        foreach (var component in Snapshot(MenuRegion.Body))
+        {
+            if (component.IsFocusable && component.IsVisible(session))
+            {
+                if (ReferenceEquals(component, target))
+                {
+                    return position;
+                }
+
+                position++;
+            }
+        }
+
+        return -1;
+    }
+
+    private void Replace( MenuRegion region, Func<IMenuComponent[], IMenuComponent[]> change )
+    {
         lock (componentLock)
         {
-            return regions[MenuRegion.Body]
-                .Where(component => component.IsFocusable && component.IsVisible(session))
-                .ToList();
+            var next = regions.ToArray();
+            next[(int)region] = change(next[(int)region]);
+            regions = next;
         }
     }
 

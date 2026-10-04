@@ -114,6 +114,8 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
             .AddSingleton(coreProvider.GetRequiredService<MenuActionRegistry>())
             .AddSingleton(coreProvider.GetRequiredService<MenuRendererRegistry>())
             .AddSingleton(coreProvider.GetRequiredService<MenuKeybindResolver>())
+            .AddSingleton(coreProvider.GetRequiredService<MenuRendererResolver>())
+            .AddSingleton(coreProvider.GetRequiredService<MenuInputMethodResolver>())
             .AddSingleton(coreProvider.GetRequiredService<DatabaseConnectionManager>())
 
             .AddSingleton<EventSubscriber>()

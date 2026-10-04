@@ -6,16 +6,28 @@ namespace SwiftlyS2.Core.Menu;
 internal sealed class MenuActionRegistry
 {
     private readonly ConcurrentDictionary<MenuActionId, OwnedAction> actions = new();
+    private readonly ConcurrentDictionary<string, IReadOnlyList<MenuActionDescriptor>> scopes = new(StringComparer.OrdinalIgnoreCase);
+
+    private int version;
+    public int Version => Volatile.Read(ref version);
 
     public IDisposable Register( MenuActionDescriptor descriptor, string owner )
     {
         actions[descriptor.Id] = new OwnedAction(descriptor, owner);
+        Changed();
         return new Handle(this, descriptor.Id);
     }
 
     public bool Unregister( MenuActionId id )
     {
-        return actions.TryRemove(id, out _);
+        var removed = actions.TryRemove(id, out _);
+
+        if (removed)
+        {
+            Changed();
+        }
+
+        return removed;
     }
 
     public bool TryGet( MenuActionId id, out MenuActionDescriptor descriptor )
@@ -32,11 +44,26 @@ internal sealed class MenuActionRegistry
 
     public IReadOnlyList<MenuActionDescriptor> GetScope( string scope )
     {
-        return actions.Values
+        if (scopes.TryGetValue(scope, out var cached))
+        {
+            return cached;
+        }
+
+        var seen = Version;
+        var built = actions.Values
             .Where(owned => string.Equals(owned.Descriptor.Id.Scope, scope, StringComparison.OrdinalIgnoreCase))
             .Select(owned => owned.Descriptor)
             .OrderBy(descriptor => descriptor.Order)
             .ToList();
+
+        _ = scopes.TryAdd(scope, built);
+
+        if (seen != Version)
+        {
+            _ = scopes.TryRemove(scope, out _);
+        }
+
+        return built;
     }
 
     public void RemoveByOwner( string owner )
@@ -48,6 +75,14 @@ internal sealed class MenuActionRegistry
                 _ = actions.TryRemove(pair.Key, out _);
             }
         }
+
+        Changed();
+    }
+
+    private void Changed()
+    {
+        _ = Interlocked.Increment(ref version);
+        scopes.Clear();
     }
 
     private readonly record struct OwnedAction( MenuActionDescriptor Descriptor, string Owner );

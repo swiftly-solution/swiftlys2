@@ -172,12 +172,12 @@ public class SliderComponent : MenuValueComponent<float>
 
         if (filled > 0)
         {
-            parts.Add(RenderValue(context, string.Concat(Enumerable.Repeat(FilledChar, filled))));
+            parts.Add(RenderValue(context, MenuStrings.Repeat(FilledChar, filled)));
         }
 
         if (filled < TotalBars)
         {
-            parts.Add(RenderValue(context, string.Concat(Enumerable.Repeat(EmptyChar, TotalBars - filled)), EmptyColor));
+            parts.Add(RenderValue(context, MenuStrings.Repeat(EmptyChar, TotalBars - filled), EmptyColor));
         }
 
         parts.Add(RenderValue(context, ClosingBracket, ClosingBracketColor));

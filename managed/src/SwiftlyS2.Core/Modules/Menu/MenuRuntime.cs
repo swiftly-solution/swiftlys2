@@ -108,11 +108,11 @@ internal sealed class MenuRuntime(
     {
         foreach (var region in Regions)
         {
-            foreach (var component in session.Instance.GetVisible(region, session))
+            foreach (var component in session.Instance.Snapshot(region))
             {
                 try
                 {
-                    if (component.NeedsRedraw(session, now))
+                    if (component.IsVisible(session) && component.NeedsRedraw(session, now))
                     {
                         return true;
                     }

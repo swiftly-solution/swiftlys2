@@ -9,29 +9,16 @@ internal sealed class CenterHtmlMenuRenderer : IMenuRenderer
 {
     private const string SelectionMarker = "➤ ";
     private const string SelectionPadding = "    ";
+    private const int MaxRetainedCapacity = 64 * 1024;
+
+    [ThreadStatic]
+    private static StringBuilder? scratch;
 
     public string Id => MenuRendererIds.CenterHtml;
 
     public void Render( IMenuRenderContext context )
     {
-        var builder = new StringBuilder();
-        var lines = new List<string>();
-
-        AppendRegion(context, context.Frame.Header, lines);
-        AppendRegion(context, context.Frame.Body, lines);
-        AppendRegion(context, context.Frame.Footer, lines);
-
-        for (var index = 0; index < lines.Count; index++)
-        {
-            if (index > 0)
-            {
-                _ = builder.Append("<br>");
-            }
-
-            _ = builder.Append(lines[index]);
-        }
-
-        NativePlayer.SetCenterMenuRender(context.Player.PlayerID, builder.ToString());
+        NativePlayer.SetCenterMenuRender(context.Player.PlayerID, Build(context));
     }
 
     public void Clear( IPlayer player )
@@ -44,22 +31,43 @@ internal sealed class CenterHtmlMenuRenderer : IMenuRenderer
         NativePlayer.ClearCenterMenuRender(player.PlayerID);
     }
 
-    private void AppendRegion( IMenuRenderContext context, IReadOnlyList<MenuNode> nodes, List<string> lines )
+    internal string Build( IMenuRenderContext context )
+    {
+        var builder = scratch ??= new StringBuilder(2048);
+        _ = builder.Clear();
+
+        var lines = 0;
+
+        AppendRegion(context, context.Frame.Header, builder, ref lines);
+        AppendRegion(context, context.Frame.Body, builder, ref lines);
+        AppendRegion(context, context.Frame.Footer, builder, ref lines);
+
+        var markup = builder.ToString();
+
+        if (builder.Capacity > MaxRetainedCapacity)
+        {
+            scratch = null;
+        }
+
+        return markup;
+    }
+
+    private void AppendRegion( IMenuRenderContext context, IReadOnlyList<MenuNode> nodes, StringBuilder builder, ref int lines )
     {
         foreach (var node in nodes)
         {
-            AppendNode(context, node, lines);
+            AppendNode(context, node, builder, ref lines);
         }
     }
 
-    private void AppendNode( IMenuRenderContext context, MenuNode node, List<string> lines )
+    private void AppendNode( IMenuRenderContext context, MenuNode node, StringBuilder builder, ref int lines )
     {
         switch (node)
         {
             case MenuBlankNode blank:
                 for (var index = 0; index < blank.Lines; index++)
                 {
-                    lines.Add(string.Empty);
+                    StartLine(builder, ref lines);
                 }
 
                 break;
@@ -67,65 +75,89 @@ internal sealed class CenterHtmlMenuRenderer : IMenuRenderer
             case MenuStackNode stack:
                 foreach (var child in stack.Children)
                 {
-                    AppendNode(context, child, lines);
+                    AppendNode(context, child, builder, ref lines);
                 }
 
                 break;
 
             default:
-                var inline = RenderInline(context, node);
+                var mark = builder.Length;
 
-                if (inline is not null)
+                if (lines > 0)
                 {
-                    lines.Add(inline);
+                    _ = builder.Append("<br>");
+                }
+
+                if (AppendInline(context, node, builder))
+                {
+                    lines++;
+                }
+                else
+                {
+                    builder.Length = mark;
                 }
 
                 break;
         }
     }
 
-    private string? RenderInline( IMenuRenderContext context, MenuNode node )
+    private static void StartLine( StringBuilder builder, ref int lines )
+    {
+        if (lines > 0)
+        {
+            _ = builder.Append("<br>");
+        }
+
+        lines++;
+    }
+
+    private bool AppendInline( IMenuRenderContext context, MenuNode node, StringBuilder builder )
     {
         switch (node)
         {
             case MenuTextNode text:
-                return Wrap(text.Text, text.Style);
+                Wrap(builder, text.Text, text.Style);
+                return true;
 
             case MenuSelectionNode selection:
-                var marker = selection.Focused ? SelectionMarker : SelectionPadding;
-                return selection.Number > 0 ? $"{marker}{selection.Number}. " : marker;
-
-            case MenuRawNode raw:
-                return string.Equals(raw.RendererId, Id, StringComparison.OrdinalIgnoreCase) ? raw.Payload : null;
-
-            case MenuLineNode line:
-                var builder = new StringBuilder();
-
-                foreach (var child in line.Children)
+                if (selection.Number > 0)
                 {
-                    var rendered = RenderInline(context, child);
-
-                    if (rendered is not null)
-                    {
-                        _ = builder.Append(rendered);
-                    }
+                    _ = builder.Append(selection.Number).Append(". ");
+                    return true;
                 }
 
-                return builder.ToString();
+                _ = builder.Append(selection.Focused ? SelectionMarker : SelectionPadding);
+                return true;
+
+            case MenuRawNode raw:
+                if (!string.Equals(raw.RendererId, Id, StringComparison.OrdinalIgnoreCase))
+                {
+                    return false;
+                }
+
+                _ = builder.Append(raw.Payload);
+                return true;
+
+            case MenuLineNode line:
+                foreach (var child in line.Children)
+                {
+                    _ = AppendInline(context, child, builder);
+                }
+
+                return true;
 
             case MenuBlankNode:
             case MenuStackNode:
-                return null;
+                return false;
 
             default:
                 context.ReportUnsupported(node);
-                return null;
+                return false;
         }
     }
 
-    private static string Wrap( string text, MenuTextStyle style )
+    private static void Wrap( StringBuilder builder, string text, MenuTextStyle style )
     {
-        var builder = new StringBuilder();
         _ = builder.Append("<font class='").Append(ToCssClass(style.Size)).Append('\'');
 
         if (!string.IsNullOrWhiteSpace(style.Color))
@@ -145,7 +177,6 @@ internal sealed class CenterHtmlMenuRenderer : IMenuRenderer
         }
 
         _ = builder.Append("</font>");
-        return builder.ToString();
     }
 
     private static string ToCssClass( MenuTextSize size )

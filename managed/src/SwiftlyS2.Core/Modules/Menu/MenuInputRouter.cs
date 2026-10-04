@@ -69,7 +69,15 @@ internal sealed class MenuInputRouter( MenuRuntime runtime, MenuSoundPlayer soun
         }
 
         var selectables = session.PageSelectables;
-        var index = number <= selectables.Count ? session.Instance.GetFocusables(session).IndexOf(selectables[number - 1]) : -1;
+
+        if (number > selectables.Count)
+        {
+            sounds.Play(MenuSound.Fail, playerId);
+            return true;
+        }
+
+        var target = selectables[number - 1];
+        var index = session.Instance.IndexOfFocusable(session, target);
 
         if (index < 0)
         {
@@ -83,17 +91,16 @@ internal sealed class MenuInputRouter( MenuRuntime runtime, MenuSoundPlayer soun
             Action = MenuActions.Select,
             Key = MenuKey.None,
             Session = session
-        });
+        }, target);
 
         return true;
     }
 
-    private void PlaySound( MenuSession session, MenuActionContext context )
+    private void PlaySound( MenuSession session, MenuActionContext context, IMenuComponent? component )
     {
         var name = context.Action.Name;
         var playerId = session.Player.PlayerID;
 
-        // Moves the selection itself: never blocked by the target's enabled state.
         if (string.Equals(name, MenuActions.NavigateUp.Name, StringComparison.OrdinalIgnoreCase)
             || string.Equals(name, MenuActions.NavigateDown.Name, StringComparison.OrdinalIgnoreCase))
         {
@@ -106,10 +113,6 @@ internal sealed class MenuInputRouter( MenuRuntime runtime, MenuSoundPlayer soun
             sounds.Play(MenuSound.Exit, playerId);
             return;
         }
-
-        // Everything else - Select, NavigateLeft/Right, and any custom action - is an attempted
-        // interaction with the focused component, so a disabled component always fails audibly.
-        var component = session.FocusedComponent;
 
         if (component is null)
         {
@@ -135,15 +138,15 @@ internal sealed class MenuInputRouter( MenuRuntime runtime, MenuSoundPlayer soun
         }
     }
 
-    private void Dispatch( MenuSession session, MenuActionContext context )
+    private void Dispatch( MenuSession session, MenuActionContext context, IMenuComponent? target = null )
     {
-        var component = session.FocusedComponent;
+        var component = target ?? session.FocusedComponent;
 
         if (component is null)
         {
             if (ApplyDefault(session, context))
             {
-                PlaySound(session, context);
+                PlaySound(session, context, null);
             }
 
             return;
@@ -159,13 +162,13 @@ internal sealed class MenuInputRouter( MenuRuntime runtime, MenuSoundPlayer soun
 
                 if (handled)
                 {
-                    PlaySound(session, context);
+                    PlaySound(session, context, component);
                 }
 
                 return;
             }
 
-            _ = AwaitDispatch(pending, session, context);
+            _ = AwaitDispatch(pending, session, context, component);
         }
         catch (Exception ex)
         {
@@ -173,7 +176,7 @@ internal sealed class MenuInputRouter( MenuRuntime runtime, MenuSoundPlayer soun
         }
     }
 
-    private async Task AwaitDispatch( ValueTask<bool> pending, MenuSession session, MenuActionContext context )
+    private async Task AwaitDispatch( ValueTask<bool> pending, MenuSession session, MenuActionContext context, IMenuComponent component )
     {
         try
         {
@@ -181,7 +184,7 @@ internal sealed class MenuInputRouter( MenuRuntime runtime, MenuSoundPlayer soun
 
             if (handled)
             {
-                PlaySound(session, context);
+                PlaySound(session, context, component);
             }
         }
         catch (Exception ex)

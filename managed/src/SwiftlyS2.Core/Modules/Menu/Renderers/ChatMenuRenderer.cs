@@ -6,6 +6,11 @@ namespace SwiftlyS2.Core.Menu.Renderers;
 
 internal sealed class ChatMenuRenderer : IMenuRenderer
 {
+    private const int MaxRetainedCapacity = 16 * 1024;
+
+    [ThreadStatic]
+    private static StringBuilder? scratch;
+
     public int BlankLinesBefore { get; set; } = 3;
 
     public string Id => MenuRendererIds.Chat;
@@ -19,13 +24,7 @@ internal sealed class ChatMenuRenderer : IMenuRenderer
             player.SendChat(" ");
         }
 
-        var lines = new List<string>();
-
-        AppendRegion(context, context.Frame.Header, lines);
-        AppendRegion(context, context.Frame.Body, lines);
-        AppendRegion(context, context.Frame.Footer, lines);
-
-        foreach (var line in lines)
+        foreach (var line in BuildLines(context))
         {
             player.SendChat(line);
         }
@@ -36,15 +35,33 @@ internal sealed class ChatMenuRenderer : IMenuRenderer
         // Chat has no persistent render target to clear - the lines already sent just scroll away.
     }
 
-    private void AppendRegion( IMenuRenderContext context, IReadOnlyList<MenuNode> nodes, List<string> lines )
+    internal List<string> BuildLines( IMenuRenderContext context )
+    {
+        var frame = context.Frame;
+        var lines = new List<string>(frame.Header.Count + frame.Body.Count + frame.Footer.Count);
+        var builder = scratch ??= new StringBuilder(256);
+
+        AppendRegion(context, frame.Header, lines, builder);
+        AppendRegion(context, frame.Body, lines, builder);
+        AppendRegion(context, frame.Footer, lines, builder);
+
+        if (builder.Capacity > MaxRetainedCapacity)
+        {
+            scratch = null;
+        }
+
+        return lines;
+    }
+
+    private void AppendRegion( IMenuRenderContext context, IReadOnlyList<MenuNode> nodes, List<string> lines, StringBuilder builder )
     {
         foreach (var node in nodes)
         {
-            AppendNode(context, node, lines);
+            AppendNode(context, node, lines, builder);
         }
     }
 
-    private void AppendNode( IMenuRenderContext context, MenuNode node, List<string> lines )
+    private void AppendNode( IMenuRenderContext context, MenuNode node, List<string> lines, StringBuilder builder )
     {
         switch (node)
         {
@@ -59,59 +76,69 @@ internal sealed class ChatMenuRenderer : IMenuRenderer
             case MenuStackNode stack:
                 foreach (var child in stack.Children)
                 {
-                    AppendNode(context, child, lines);
+                    AppendNode(context, child, lines, builder);
                 }
 
                 break;
 
-            default:
-                var inline = RenderInline(context, node);
+            case MenuTextNode text:
+                lines.Add(text.Text);
+                break;
 
-                if (inline is not null)
+            default:
+                _ = builder.Clear();
+
+                if (AppendInline(context, node, builder))
                 {
-                    lines.Add(inline);
+                    lines.Add(builder.ToString());
                 }
 
                 break;
         }
     }
 
-    private string? RenderInline( IMenuRenderContext context, MenuNode node )
+    private bool AppendInline( IMenuRenderContext context, MenuNode node, StringBuilder builder )
     {
         switch (node)
         {
             case MenuTextNode text:
-                return text.Text;
+                _ = builder.Append(text.Text);
+                return true;
 
             case MenuSelectionNode selection:
-                var marker = selection.Focused ? "> " : "  ";
-                return selection.Number > 0 ? $"{marker}{selection.Number}. " : marker;
-
-            case MenuRawNode raw:
-                return string.Equals(raw.RendererId, Id, StringComparison.OrdinalIgnoreCase) ? raw.Payload : null;
-
-            case MenuLineNode line:
-                var builder = new StringBuilder();
-
-                foreach (var child in line.Children)
+                if (selection.Number > 0)
                 {
-                    var rendered = RenderInline(context, child);
-
-                    if (rendered is not null)
-                    {
-                        _ = builder.Append(rendered);
-                    }
+                    _ = builder.Append(selection.Number).Append(". ");
+                    return true;
                 }
 
-                return builder.ToString();
+                _ = builder.Append(selection.Focused ? "> " : "  ");
+                return true;
+
+            case MenuRawNode raw:
+                if (!string.Equals(raw.RendererId, Id, StringComparison.OrdinalIgnoreCase))
+                {
+                    return false;
+                }
+
+                _ = builder.Append(raw.Payload);
+                return true;
+
+            case MenuLineNode line:
+                foreach (var child in line.Children)
+                {
+                    _ = AppendInline(context, child, builder);
+                }
+
+                return true;
 
             case MenuBlankNode:
             case MenuStackNode:
-                return null;
+                return false;
 
             default:
                 context.ReportUnsupported(node);
-                return null;
+                return false;
         }
     }
 }

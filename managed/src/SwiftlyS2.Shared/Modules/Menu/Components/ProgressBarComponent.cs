@@ -148,12 +148,12 @@ public class ProgressBarComponent : TextComponent
 
         if (filled > 0)
         {
-            bar.Add(Colored(context, string.Concat(Enumerable.Repeat(FilledChar, filled)), FilledColor));
+            bar.Add(Colored(context, MenuStrings.Repeat(FilledChar, filled), FilledColor));
         }
 
         if (filled < BarWidth)
         {
-            bar.Add(Colored(context, string.Concat(Enumerable.Repeat(EmptyChar, BarWidth - filled)), EmptyColor));
+            bar.Add(Colored(context, MenuStrings.Repeat(EmptyChar, BarWidth - filled), EmptyColor));
         }
 
         bar.Add(Colored(context, ClosingBracket, ClosingBracketColor));

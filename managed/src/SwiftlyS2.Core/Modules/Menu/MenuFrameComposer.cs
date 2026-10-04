@@ -15,7 +15,16 @@ internal sealed class MenuFrameComposer( MenuRendererRegistry renderers, MenuLay
         var footer = RenderRegion(menu, session, MenuRegion.Footer, rendererId);
 
         var body = menu.GetVisible(MenuRegion.Body, session);
-        var focusables = menu.GetFocusables(session);
+        var focusables = new List<IMenuComponent>(body.Count);
+
+        foreach (var component in body)
+        {
+            if (component.IsFocusable)
+            {
+                focusables.Add(component);
+            }
+        }
+
         var focused = focusables.Count == 0 ? null : focusables[Math.Clamp(session.FocusedIndex, 0, focusables.Count - 1)];
 
         var page = ResolvePage(body, focused, menu.ItemsPerPage, layout.MaxVisibleLines, session.PageOffset);
@@ -174,7 +183,7 @@ internal sealed class MenuFrameComposer( MenuRendererRegistry renderers, MenuLay
     {
         if (menu.InputMethod == MenuInputMethod.Chat)
         {
-            return MenuLineNode.Of(
+            return menu.ChatHints ??= MenuLineNode.Of(
                 new MenuTextNode($"{GlobalLocalization.MenuUseLabel()}: ", FooterLabelStyle),
                 new MenuTextNode($"!<{GlobalLocalization.MenuChatNumberLabel()}>", FooterValueStyle),
                 new MenuTextNode(" | ", FooterValueStyle),
@@ -182,16 +191,37 @@ internal sealed class MenuFrameComposer( MenuRendererRegistry renderers, MenuLay
                 new MenuTextNode("!0", FooterValueStyle));
         }
 
+        if (menu.Keymap is not MenuKeymap keymap)
+        {
+            return BuildButtonHints(menu.Keymap);
+        }
+
+        var actions = keymap.Actions;
+        var keys = actions.Count <= 32 ? stackalloc MenuKey[actions.Count] : new MenuKey[actions.Count];
+        keymap.ResolveAll(keys);
+
+        if (menu.ButtonHints is { } cached && ReferenceEquals(cached.Actions, actions) && keys.SequenceEqual(cached.Keys))
+        {
+            return cached.Node;
+        }
+
+        var node = BuildButtonHints(keymap);
+        menu.ButtonHints = new MenuHintCache(actions, keys.ToArray(), node);
+        return node;
+    }
+
+    private static MenuNode? BuildButtonHints( IMenuKeymap menuKeymap )
+    {
         var parts = new List<MenuNode>();
 
-        foreach (var descriptor in menu.Keymap.Actions)
+        foreach (var descriptor in menuKeymap.Actions)
         {
             if (!descriptor.ShowInFooter)
             {
                 continue;
             }
 
-            var key = menu.Keymap.GetKey(descriptor.Id);
+            var key = menuKeymap.GetKey(descriptor.Id);
 
             if (key == MenuKey.None)
             {
@@ -210,3 +240,5 @@ internal sealed class MenuFrameComposer( MenuRendererRegistry renderers, MenuLay
         return parts.Count == 0 ? null : new MenuLineNode(parts);
     }
 }
+
+internal sealed record MenuHintCache( IReadOnlyList<MenuActionDescriptor> Actions, MenuKey[] Keys, MenuNode? Node );

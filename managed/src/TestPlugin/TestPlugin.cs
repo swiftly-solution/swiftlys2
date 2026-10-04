@@ -1434,6 +1434,7 @@ public class TestPlugin : BasePlugin
             .Add(new DividerComponent())
             .Add(new ChatColoredTextComponent("Chat-colored, best-fit on this renderer", Helper.ChatColors.Green))
             .Add(new ButtonComponent("Click me", ctx => { ctx.Player.SendChat("Clicked!"); return ValueTask.CompletedTask; }))
+            .Add(new ClickCounterComponent("Custom component"))
             .Add(new ToggleComponent("Enabled", true))
             .Add(new SliderComponent("Volume", 0f, 100f, 50f))
             .Add(new SelectorComponent<string>("Mode", ["Easy", "Normal", "Hard"]))

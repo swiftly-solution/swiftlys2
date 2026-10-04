@@ -46,33 +46,37 @@ internal sealed class MenuSession( MenuInstance menu, IPlayer player, MenuChatCa
 
     public IMenuComponent? FocusedComponent {
         get {
-            var focusables = menu.GetFocusables(this);
+            var count = menu.CountFocusables(this);
 
-            if (focusables.Count == 0)
+            if (count == 0)
             {
                 return null;
             }
 
+            int index;
+
             lock (stateLock)
             {
-                return focusables[ClampIndex(focusedIndex, focusables.Count)];
+                index = ClampIndex(focusedIndex, count);
             }
+
+            return menu.FocusableAt(this, index);
         }
     }
 
     public bool MoveFocus( int delta )
     {
-        var focusables = menu.GetFocusables(this);
+        var count = menu.CountFocusables(this);
 
-        if (focusables.Count == 0 || delta == 0)
+        if (count == 0 || delta == 0)
         {
             return false;
         }
 
         lock (stateLock)
         {
-            var current = ClampIndex(focusedIndex, focusables.Count);
-            var next = ((current + delta) % focusables.Count + focusables.Count) % focusables.Count;
+            var current = ClampIndex(focusedIndex, count);
+            var next = ((current + delta) % count + count) % count;
 
             if (next == current)
             {
@@ -89,11 +93,11 @@ internal sealed class MenuSession( MenuInstance menu, IPlayer player, MenuChatCa
 
     public bool SetFocus( int index )
     {
-        var focusables = menu.GetFocusables(this);
+        var count = menu.CountFocusables(this);
 
         lock (stateLock)
         {
-            if (index < 0 || index >= focusables.Count || index == focusedIndex)
+            if (index < 0 || index >= count || index == focusedIndex)
             {
                 return false;
             }
@@ -159,11 +163,11 @@ internal sealed class MenuSession( MenuInstance menu, IPlayer player, MenuChatCa
 
     internal void ClampFocus()
     {
-        var focusables = menu.GetFocusables(this);
+        var count = menu.CountFocusables(this);
 
         lock (stateLock)
         {
-            var clamped = focusables.Count == 0 ? 0 : ClampIndex(focusedIndex, focusables.Count);
+            var clamped = count == 0 ? 0 : ClampIndex(focusedIndex, count);
 
             if (clamped != focusedIndex)
             {
