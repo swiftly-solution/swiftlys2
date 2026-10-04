@@ -8,6 +8,7 @@ internal sealed class MenuRuntime(
     MenuFrameComposer composer,
     MenuRenderDiagnostics diagnostics,
     MenuChatCapture chat,
+    MenuRenderWorker renderWorker,
     ILogger<MenuRuntime> logger )
 {
     private static readonly MenuRegion[] Regions = Enum.GetValues<MenuRegion>();
@@ -150,11 +151,11 @@ internal sealed class MenuRuntime(
             var frame = composer.Compose(session);
             var renderer = session.Instance.Renderer;
             var context = new MenuRenderContext(session.Instance, session, frame, renderer.Id, diagnostics);
-            renderer.Render(context);
+            renderWorker.Enqueue(session, renderer, context);
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, "Failed to render menu '{MenuId}' for player {PlayerId}.", session.Instance.Id, session.Player.PlayerID);
+            logger.LogError(ex, "Failed to compose menu '{MenuId}' for player {PlayerId}.", session.Instance.Id, session.Player.PlayerID);
         }
     }
 

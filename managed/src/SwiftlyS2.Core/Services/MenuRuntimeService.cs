@@ -14,11 +14,13 @@ internal sealed class MenuRuntimeService : IDisposable
     private readonly ISwiftlyCore core;
     private readonly MenuRuntime runtime;
     private readonly MenuInputRouter router;
+    private readonly MenuRenderWorker renderWorker;
 
     public MenuRuntimeService(
         ISwiftlyCore core,
         MenuRuntime runtime,
         MenuInputRouter router,
+        MenuRenderWorker renderWorker,
         MenuChatCapture chat,
         MenuActionRegistry actions,
         MenuKeybindResolver resolver,
@@ -35,7 +37,9 @@ internal sealed class MenuRuntimeService : IDisposable
         this.core = core;
         this.runtime = runtime;
         this.router = router;
+        this.renderWorker = renderWorker;
 
+        renderWorker.Start();
         RegisterCoreActions(actions);
         resolver.AddSource(globalKeybinds);
         rendererResolver.AddSource(globalRendererSource);
@@ -104,5 +108,6 @@ internal sealed class MenuRuntimeService : IDisposable
         core.Event.OnClientKeyStateChanged -= router.OnClientKeyStateChanged;
         core.Event.OnClientDisconnected -= OnClientDisconnected;
         core.Event.OnTick -= runtime.OnTick;
+        renderWorker.Dispose();
     }
 }

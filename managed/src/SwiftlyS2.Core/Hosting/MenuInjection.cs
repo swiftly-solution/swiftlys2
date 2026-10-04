@@ -19,6 +19,7 @@ internal static class MenuInjection
         _ = self.AddSingleton<MenuChatCapture>();
         _ = self.AddSingleton<MenuSoundPlayer>();
         _ = self.AddSingleton<MenuFrameComposer>();
+        _ = self.AddSingleton<MenuRenderWorker>();
         _ = self.AddSingleton<MenuRuntime>();
         _ = self.AddSingleton<MenuInputRouter>();
         _ = self.AddSingleton<GlobalMenuKeybindSource>();
