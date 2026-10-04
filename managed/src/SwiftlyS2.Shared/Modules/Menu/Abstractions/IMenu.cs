@@ -46,6 +46,16 @@ public interface IMenu : IDisposable
     public int ItemsPerPage { get; }
 
     /// <summary>
+    /// How long a session may sit idle before it closes itself, or null to never auto-close.
+    /// </summary>
+    /// <remarks>
+    /// Counted from when the session opens, not from the last input. Closing acts exactly like the
+    /// player pressing the <see cref="MenuActions.Close"/> key: it returns to <see cref="Parent"/>
+    /// when there is one.
+    /// </remarks>
+    public TimeSpan? AutoCloseDelay { get; }
+
+    /// <summary>
     /// An arbitrary value carried alongside this menu.
     /// </summary>
     public object? Tag { get; set; }
@@ -90,6 +100,12 @@ public interface IMenu : IDisposable
     /// <param name="player">The player to show the menu to.</param>
     /// <returns>The new session.</returns>
     public IMenuSession Open( IPlayer player );
+
+    /// <summary>
+    /// Opens this menu for every connected, non-bot player, replacing whatever each had open.
+    /// </summary>
+    /// <returns>The new sessions, one per player it was opened for.</returns>
+    public IReadOnlyList<IMenuSession> OpenForAll();
 
     /// <summary>
     /// Closes this menu for a player.

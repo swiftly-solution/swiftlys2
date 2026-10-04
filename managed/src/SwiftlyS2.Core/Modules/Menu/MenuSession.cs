@@ -5,6 +5,8 @@ namespace SwiftlyS2.Core.Menu;
 
 internal sealed class MenuSession( MenuInstance menu, IPlayer player, MenuChatCapture chat ) : IMenuSession
 {
+    public DateTime? AutoCloseAt { get; } = menu.AutoCloseDelay is { } delay ? DateTime.UtcNow + delay : null;
+
     private readonly Dictionary<(string ComponentId, Type StateType), object> componentState = [];
     private readonly Lock stateLock = new();
 

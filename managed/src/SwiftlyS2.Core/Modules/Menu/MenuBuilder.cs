@@ -21,9 +21,11 @@ internal sealed class MenuBuilder(
     private readonly List<IMenuComponent> header = [];
     private readonly List<IMenuComponent> body = [];
     private readonly List<IMenuComponent> footer = [];
+    private readonly Dictionary<string, Func<MenuActionContext, ValueTask>> actionHandlers = [];
 
     private string rendererId = MenuRendererIds.CenterHtml;
     private MenuInputMethod? inputMethod;
+    private TimeSpan? autoCloseDelay;
     private IMenu? parent;
     private int itemsPerPage = 5;
 
@@ -63,6 +65,12 @@ internal sealed class MenuBuilder(
         return this;
     }
 
+    public IMenuBuilder WithAutoClose( TimeSpan? delay )
+    {
+        autoCloseDelay = delay is { Ticks: > 0 } ? delay : null;
+        return this;
+    }
+
     public IMenuBuilder WithAction( MenuActionDescriptor descriptor )
     {
         declaredActions.Add(descriptor);
@@ -76,6 +84,12 @@ internal sealed class MenuBuilder(
             DefaultKey = defaultKey,
             Label = label
         });
+    }
+
+    public IMenuBuilder WithAction( string name, MenuKey defaultKey, Func<MenuActionContext, ValueTask> handler, string? label = null )
+    {
+        actionHandlers[name] = handler;
+        return WithAction(name, defaultKey, label);
     }
 
     public IMenuBuilder WithKeybindSource( IMenuKeybindSource source )
@@ -131,7 +145,7 @@ internal sealed class MenuBuilder(
 
         var resolvedInputMethod = inputMethodResolver.Resolve(menuId, codeInputMethod, inputMethodSources);
 
-        var menu = new MenuInstance(menuId, owner, runtime, renderer, keymap, resolvedInputMethod, parent, itemsPerPage);
+        var menu = new MenuInstance(menuId, owner, runtime, renderer, keymap, resolvedInputMethod, autoCloseDelay, actionHandlers, parent, itemsPerPage);
 
         foreach (var component in header)
         {

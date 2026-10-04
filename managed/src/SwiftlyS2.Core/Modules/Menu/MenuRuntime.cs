@@ -94,6 +94,12 @@ internal sealed class MenuRuntime(
                 continue;
             }
 
+            if (session.AutoCloseAt is { } autoCloseAt && now >= autoCloseAt)
+            {
+                Detach(pair.Key);
+                continue;
+            }
+
             if (!session.IsDirty && !WantsRedraw(session, now))
             {
                 continue;

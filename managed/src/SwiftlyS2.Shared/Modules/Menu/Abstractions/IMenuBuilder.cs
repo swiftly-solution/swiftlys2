@@ -71,6 +71,16 @@ public interface IMenuBuilder
     public IMenuBuilder WithItemsPerPage( int itemsPerPage );
 
     /// <summary>
+    /// Closes an idle session automatically after a delay.
+    /// </summary>
+    /// <param name="delay">How long a session may sit idle before it closes, or null to disable.</param>
+    /// <returns>This builder.</returns>
+    /// <remarks>
+    /// Counted from when the session opens, not from the last input. Disabled by default.
+    /// </remarks>
+    public IMenuBuilder WithAutoClose( TimeSpan? delay );
+
+    /// <summary>
     /// Declares an action available in this menu.
     /// </summary>
     /// <param name="descriptor">The action to declare.</param>
@@ -89,6 +99,23 @@ public interface IMenuBuilder
     /// <param name="label">The footer label, or null to use the name.</param>
     /// <returns>This builder.</returns>
     public IMenuBuilder WithAction( string name, MenuKey defaultKey, string? label = null );
+
+    /// <summary>
+    /// Declares an action and gives it a menu-level handler, independent of whatever is focused.
+    /// </summary>
+    /// <param name="name">The action name.</param>
+    /// <param name="defaultKey">The key to use when nothing overrides it.</param>
+    /// <param name="handler">Runs when the key is pressed and the focused component does not take the action over.</param>
+    /// <param name="label">The footer label, or null to use the name.</param>
+    /// <returns>This builder.</returns>
+    /// <remarks>
+    /// For a key that does something regardless of which row is selected — an extra shortcut
+    /// alongside navigation and select, rather than a component's own reaction to being activated.
+    /// The focused component is still offered the action first, through
+    /// <see cref="IMenuComponent.HandleActionAsync"/>, so declaring this under an existing action's
+    /// name (such as <c>"Select"</c>) only runs the handler when nothing else claims that press.
+    /// </remarks>
+    public IMenuBuilder WithAction( string name, MenuKey defaultKey, Func<MenuActionContext, ValueTask> handler, string? label = null );
 
     /// <summary>
     /// Adds a source of key overrides for this menu.

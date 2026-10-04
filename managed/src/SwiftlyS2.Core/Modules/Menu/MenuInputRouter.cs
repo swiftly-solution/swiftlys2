@@ -144,11 +144,7 @@ internal sealed class MenuInputRouter( MenuRuntime runtime, MenuSoundPlayer soun
 
         if (component is null)
         {
-            if (ApplyDefault(session, context))
-            {
-                PlaySound(session, context, null);
-            }
-
+            _ = DispatchUnhandled(session, context, null);
             return;
         }
 
@@ -158,13 +154,13 @@ internal sealed class MenuInputRouter( MenuRuntime runtime, MenuSoundPlayer soun
 
             if (pending.IsCompletedSuccessfully)
             {
-                var handled = pending.Result || ApplyDefault(session, context);
-
-                if (handled)
+                if (pending.Result)
                 {
                     PlaySound(session, context, component);
+                    return;
                 }
 
+                _ = DispatchUnhandled(session, context, component);
                 return;
             }
 
@@ -180,16 +176,41 @@ internal sealed class MenuInputRouter( MenuRuntime runtime, MenuSoundPlayer soun
     {
         try
         {
-            var handled = await pending || ApplyDefault(session, context);
-
-            if (handled)
+            if (await pending)
             {
                 PlaySound(session, context, component);
+                return;
             }
+
+            await DispatchUnhandled(session, context, component);
         }
         catch (Exception ex)
         {
             logger.LogError(ex, "Menu component threw while handling '{Action}'.", context.Action);
+        }
+    }
+
+    private async Task DispatchUnhandled( MenuSession session, MenuActionContext context, IMenuComponent? component )
+    {
+        if (ApplyDefault(session, context))
+        {
+            PlaySound(session, context, component);
+            return;
+        }
+
+        if (!session.Instance.TryGetActionHandler(context.Action.Name, out var handler))
+        {
+            return;
+        }
+
+        try
+        {
+            await handler(context);
+            sounds.Play(MenuSound.Select, session.Player.PlayerID);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Menu '{MenuId}' threw while handling custom action '{Action}'.", session.Instance.Id, context.Action);
         }
     }
 

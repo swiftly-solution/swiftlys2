@@ -1430,6 +1430,8 @@ public class TestPlugin : BasePlugin
 
         var menu = Core.Menu.CreateMenu("testplugin.nm")
             .WithTitle("New Menu System")
+            .WithAutoClose(TimeSpan.FromSeconds(30))
+            .WithAction("Shop", MenuKey.Ctrl, ctx => { ctx.Player.SendChat("Ctrl pressed - shop opened via an extra action!"); return ValueTask.CompletedTask; }, "Shop")
             .Add(new TextComponent("Just a label"))
             .Add(new DividerComponent())
             .Add(new ChatColoredTextComponent("Chat-colored, best-fit on this renderer", Helper.ChatColors.Green))
@@ -1446,6 +1448,19 @@ public class TestPlugin : BasePlugin
             .Build();
 
         menu.Open(player);
+    }
+
+    [Command("nmall")]
+    public void NewMenuOpenForAllTestCommand( ICommandContext context )
+    {
+        var menu = Core.Menu.CreateMenu("testplugin.nmall")
+            .WithTitle("Broadcast Menu")
+            .Add(new TextComponent("Opened for everyone connected."))
+            .Add(new ButtonComponent("Close", ctx => { ctx.Session.Close(); return ValueTask.CompletedTask; }))
+            .Build();
+
+        var sessions = menu.OpenForAll();
+        context.Reply($"Opened '{menu.Id}' for {sessions.Count} player(s).");
     }
 
     [Command("cm")]

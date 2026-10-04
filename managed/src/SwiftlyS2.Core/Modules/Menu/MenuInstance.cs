@@ -1,3 +1,4 @@
+using SwiftlyS2.Core.Players;
 using SwiftlyS2.Shared.Menu;
 using SwiftlyS2.Shared.Players;
 
@@ -11,6 +12,7 @@ internal sealed class MenuInstance : IMenu
     private readonly Lock sessionLock = new();
     private readonly Lock componentLock = new();
     private readonly MenuRuntime runtime;
+    private readonly IReadOnlyDictionary<string, Func<MenuActionContext, ValueTask>> actionHandlers;
 
     public MenuInstance(
         string id,
@@ -19,6 +21,8 @@ internal sealed class MenuInstance : IMenu
         IMenuRenderer renderer,
         IMenuKeymap keymap,
         MenuInputMethod inputMethod,
+        TimeSpan? autoCloseDelay,
+        IReadOnlyDictionary<string, Func<MenuActionContext, ValueTask>> actionHandlers,
         IMenu? parent,
         int itemsPerPage )
     {
@@ -28,6 +32,8 @@ internal sealed class MenuInstance : IMenu
         Renderer = renderer;
         Keymap = keymap;
         InputMethod = inputMethod;
+        AutoCloseDelay = autoCloseDelay;
+        this.actionHandlers = actionHandlers;
         Parent = parent;
         ItemsPerPage = Math.Max(1, itemsPerPage);
     }
@@ -45,6 +51,8 @@ internal sealed class MenuInstance : IMenu
     public IMenu? Parent { get; set; }
 
     public int ItemsPerPage { get; }
+
+    public TimeSpan? AutoCloseDelay { get; }
 
     public object? Tag { get; set; }
 
@@ -135,6 +143,16 @@ internal sealed class MenuInstance : IMenu
         runtime.Attach(session);
         Opened?.Invoke(session);
         return session;
+    }
+
+    public IReadOnlyList<IMenuSession> OpenForAll()
+    {
+        ObjectDisposedException.ThrowIf(IsDisposed, this);
+
+        return PlayerManagerService.PlayerObjects.Values
+            .Where(player => player.IsValid && !player.IsFakeClient && (player.Controller?.IsValid ?? false))
+            .Select(Open)
+            .ToList();
     }
 
     public void Close( IPlayer player )
@@ -284,6 +302,9 @@ internal sealed class MenuInstance : IMenu
             regions = next;
         }
     }
+
+    internal bool TryGetActionHandler( string actionName, out Func<MenuActionContext, ValueTask> handler )
+        => actionHandlers.TryGetValue(actionName, out handler!);
 
     internal void NotifyFocusChanged( MenuSession session )
     {
