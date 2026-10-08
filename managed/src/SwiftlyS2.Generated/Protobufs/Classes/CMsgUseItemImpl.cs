@@ -18,8 +18,6 @@ internal class CMsgUseItemImpl : TypedProtobuf<CMsgUseItem>, CMsgUseItem
     { get => Accessor.GetUInt64("target_steam_id"); set => Accessor.SetUInt64("target_steam_id", value); }
     public IProtobufRepeatedFieldValueType<uint> GiftPotentialTargets
     { get => new ProtobufRepeatedFieldValueType<uint>(Accessor, "gift__potential_targets"); }
-    public uint DuelClassLock
-    { get => Accessor.GetUInt32("duel__class_lock"); set => Accessor.SetUInt32("duel__class_lock", value); }
     public ulong InitiatorSteamId
     { get => Accessor.GetUInt64("initiator_steam_id"); set => Accessor.SetUInt64("initiator_steam_id", value); }
 }

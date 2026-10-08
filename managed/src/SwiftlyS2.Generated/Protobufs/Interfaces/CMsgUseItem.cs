@@ -11,6 +11,5 @@ public interface CMsgUseItem : ITypedProtobuf<CMsgUseItem>
     public ulong ItemId { get; set; }
     public ulong TargetSteamId { get; set; }
     public IProtobufRepeatedFieldValueType<uint> GiftPotentialTargets { get; }
-    public uint DuelClassLock { get; set; }
     public ulong InitiatorSteamId { get; set; }
 }

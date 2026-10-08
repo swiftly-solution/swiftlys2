@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_CSPlayerPawn : C_CSPlayerPawnBase, ISchemaClass<C_CSPlayerPawn>
 {
     static C_CSPlayerPawn ISchemaClass<C_CSPlayerPawn>.From(nint handle) => new C_CSPlayerPawnImpl(handle);
-    static int ISchemaClass<C_CSPlayerPawn>.Size => 14096;
+    static int ISchemaClass<C_CSPlayerPawn>.Size => 14112;
     static string? ISchemaClass<C_CSPlayerPawn>.ClassName => null;
 
 
@@ -200,6 +200,8 @@ public partial interface C_CSPlayerPawn : C_CSPlayerPawnBase, ISchemaClass<C_CSP
     public ref bool GunGameImmunity { get; }
 
     public GameTime_t ImmuneToGunGameDamageTimeLast { get; }
+
+    public ref float Modifier0 { get; }
 
     public ref float MolotovDamageTime { get; }
 
