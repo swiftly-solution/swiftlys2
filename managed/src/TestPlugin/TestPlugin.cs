@@ -11,6 +11,7 @@ using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Shared.Plugins;
 using SwiftlyS2.Shared.SchemaDefinitions;
+using SwiftlyS2.Shared.Schemas;
 using SwiftlyS2.Shared.ProtobufDefinitions;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -829,12 +830,10 @@ public class TestPlugin : BasePlugin
     {
         const int count = 4;
 
-        // Elements are only wrapped here, never read.
-        var buffer = Marshal.AllocHGlobal(count * SwiftlyS2.Shared.Schemas.SchemaInfo.Get<CDamageRecord>());
+        var buffer = Marshal.AllocHGlobal(count * SchemaInfo.Get<CDamageRecord>());
         var vector = new CUtlVector<CDamageRecord>(buffer, count, count);
         var missing = 0;
 
-        // Enough rounds for the JIT to re-optimize the loop.
         for (var round = 0; round < 20000; round++)
         {
             foreach (var record in vector)
