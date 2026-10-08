@@ -824,6 +824,29 @@ public class TestPlugin : BasePlugin
         Console.WriteLine("TestPlugin TestCommand6");
     }
 
+    [Command("utlvectorschema")]
+    public void TestUtlVectorSchemaClass( ICommandContext context )
+    {
+        const int count = 4;
+
+        // Elements are only wrapped here, never read.
+        var buffer = Marshal.AllocHGlobal(count * SwiftlyS2.Shared.Schemas.SchemaInfo.Get<CDamageRecord>());
+        var vector = new CUtlVector<CDamageRecord>(buffer, count, count);
+        var missing = 0;
+
+        // Enough rounds for the JIT to re-optimize the loop.
+        for (var round = 0; round < 20000; round++)
+        {
+            foreach (var record in vector)
+            {
+                if (record == null) missing++;
+            }
+        }
+
+        Marshal.FreeHGlobal(buffer);
+        context.Reply($"CUtlVector<CDamageRecord>: {missing} null elements");
+    }
+
     [Command("tt99")]
     public void TestCommand99( ICommandContext context )
     {

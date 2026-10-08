@@ -201,8 +201,9 @@ public struct CUtlMemory<T>
                     var implType = tType.Assembly.GetType(schemaClassType);
                     if (implType == null) throw new InvalidOperationException($"Could not find implementation type {schemaClassType} for schema class {tType.FullName}");
 
-                    var obj = (T)Activator.CreateInstance(implType, [address])!;
-                    return ref obj;
+                    // Boxed on the heap: a ref to a local dangles once this returns.
+                    var obj = new[] { (T)Activator.CreateInstance(implType, [address])! };
+                    return ref obj[0];
                 }
                 else
                 {
