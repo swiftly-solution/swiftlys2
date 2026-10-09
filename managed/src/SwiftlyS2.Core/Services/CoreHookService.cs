@@ -17,6 +17,7 @@ internal class CoreHookService : IDisposable
 {
     private readonly ISwiftlyCore core;
     private readonly ILogger<CoreHookService> logger;
+    private readonly CstvBotQuotaFix cstvBotQuotaFix;
     private static readonly bool IsWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 
     public CoreHookService( ILogger<CoreHookService> logger, ISwiftlyCore core )
@@ -27,6 +28,7 @@ internal class CoreHookService : IDisposable
         HookExecuteCommand();
         HookICvarFindConCommandTemplate();
         HookSteamServerAPIActivated();
+        cstvBotQuotaFix = new CstvBotQuotaFix(core, logger);
     }
 
     /*
@@ -219,6 +221,7 @@ internal class CoreHookService : IDisposable
 
     public void Dispose()
     {
+        cstvBotQuotaFix.Dispose();
         UnhookExecuteCommand();
         UnhookICvarFindConCommandTemplate();
         UnhookSteamServerAPIActivated();

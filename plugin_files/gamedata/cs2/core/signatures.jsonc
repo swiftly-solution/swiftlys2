@@ -416,5 +416,20 @@
         "lib": "server",
         "windows": "85 D2 78 ? 48 89 5C 24 ? 56",
         "linux": "55 48 89 E5 41 55 41 54 53 48 63 DE 48 83 EC"
+    },
+    // Research label, not an exported symbol. bool(int team), called by quota
+    // management near bot_join_after_player/bot_quota_mode. Routes pawn-less
+    // fake clients directly to removal without excluding HLTV.
+    "CstvBotQuotaFix::SelectAndKickBot": {
+        "lib": "server",
+        "windows": "48 89 5C 24 18 55 56 57 41 56 41 57 48 8B EC 48 83 EC 50 8B F9 89 4D 38 48 8D 4D 38 C7 45 3C 01 00 00 00 48 8D 55 E8 E8 ? ? ? ?",
+        "linux": "55 48 89 E5 41 57 41 56 41 55 41 89 FD 41 54 53 48 83 EC 58 4C 8D 25 ? ? ? ? 89 7D A0 C7 45 90 00 00 00 00 C7 45 A4 01 00 00 00 49 8B 04 24 8B 50 10 85"
+    },
+    // Research label. bool(filter*, controller*, pawn*). Shared team predicate,
+    // including the first iterator item; only filter HLTV within SelectAndKickBot.
+    "CstvBotQuotaFix::TeamCandidate": {
+        "lib": "server",
+        "windows": "48 85 D2 74 0E 0F B6 82 ? ? ? ? 39 01 74 03 32 C0 C3 4D 85 C0 74 0E 41 0F B6 80 ? ? ? ? 39 01 0F 94 C0 C3 B0 01 C3",
+        "linux": "48 85 F6 74 13 0F B6 8E ? ? ? ? 31 C0 39 0F 74 06 C3 0F 1F 44 00 00 B8 01 00 00 00 48 85 D2 74 F0 0F B6 82 ? ? ? ? 39 07 0F 94 C0 C3"
     }
 }
