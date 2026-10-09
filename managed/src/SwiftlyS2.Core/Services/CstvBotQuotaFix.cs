@@ -21,7 +21,8 @@ internal sealed class CstvBotQuotaFix : IDisposable
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     private delegate byte TeamCandidate( nint filter, nint controller, nint pawn );
 
-    [ThreadStatic] private static int selectionDepth;
+    [ThreadStatic]
+    private static int selectionDepth;
     private readonly ISwiftlyCore core;
     private readonly ILogger logger;
     private IUnmanagedFunction<SelectAndKickBot>? selection;
@@ -39,23 +40,23 @@ internal sealed class CstvBotQuotaFix : IDisposable
         this.logger = logger;
         try
         {
-            if (!core.GameData.TryGetSignature(SelectionSignature, out var selectionAddress)
-                || !core.GameData.TryGetSignature(CandidateSignature, out var candidateAddress)
+            if (!this.core.GameData.TryGetSignature(SelectionSignature, out var selectionAddress)
+                || !this.core.GameData.TryGetSignature(CandidateSignature, out var candidateAddress)
                 || selectionAddress == 0 || candidateAddress == 0 || selectionAddress == candidateAddress)
                 throw new InvalidOperationException("CSTV quota gamedata is missing or invalid.");
 
-            candidate = core.Memory.GetUnmanagedFunctionByAddress<TeamCandidate>(candidateAddress);
-            candidateHook = candidate.AddHook(next => ( filter, controller, pawn ) =>
+            this.candidate = this.core.Memory.GetUnmanagedFunctionByAddress<TeamCandidate>(candidateAddress);
+            this.candidateHook = this.candidate.AddHook(next => ( filter, controller, pawn ) =>
             {
                 try
                 {
                     // This predicate is shared with unrelated iterators. Only alter
                     // its result inside the native bot selection call on this thread.
-                    if (active && selectionDepth > 0 && controller != 0
-                        && core.Memory.ToSchemaClass<CCSPlayerController>(controller).IsHLTV)
+                    if (this.active && selectionDepth > 0 && controller != 0
+                        && this.core.Memory.ToSchemaClass<CCSPlayerController>(controller).IsHLTV)
                     {
-                        if (Interlocked.Exchange(ref reportedSkip, 1) == 0)
-                            logger.LogInformation("CSTV quota fix skipped HLTV during native bot removal (first occurrence this map).");
+                        if (Interlocked.Exchange(ref this.reportedSkip, 1) == 0)
+                            this.logger.LogInformation("CSTV quota fix skipped HLTV during native bot removal (first occurrence this map).");
                         return 0;
                     }
                     return next()(filter, controller, pawn);
@@ -66,68 +67,74 @@ internal sealed class CstvBotQuotaFix : IDisposable
                     return 0;
                 }
             });
-            if (candidateHook == Guid.Empty)
+            if (this.candidateHook == Guid.Empty)
                 throw new InvalidOperationException("Could not hook the CSTV quota candidate predicate.");
 
-            selection = core.Memory.GetUnmanagedFunctionByAddress<SelectAndKickBot>(selectionAddress);
-            selectionHook = selection.AddHook(next => team =>
+            this.selection = this.core.Memory.GetUnmanagedFunctionByAddress<SelectAndKickBot>(selectionAddress);
+            this.selectionHook = this.selection.AddHook(next => team =>
             {
                 ++selectionDepth;
-                try { return next()(team); }
+                try
+                {
+                    return next()(team);
+                }
                 catch (Exception ex)
                 {
                     ReportError(ex);
                     return 0; // Do not claim that a bot was removed.
                 }
-                finally { --selectionDepth; }
+                finally
+                {
+                    --selectionDepth;
+                }
             });
-            if (selectionHook == Guid.Empty)
+            if (this.selectionHook == Guid.Empty)
                 throw new InvalidOperationException("Could not hook native bot selection.");
 
-            core.Event.OnMapLoad += OnMapLoad;
-            core.Event.OnMapUnload += OnMapUnload;
-            subscribed = true;
-            active = true;
-            logger.LogInformation("Built-in CSTV quota fix installed: selection={Selection:X}, candidate={Candidate:X}. Bot settings are unchanged.", selectionAddress, candidateAddress);
+            this.core.Event.OnMapLoad += OnMapLoad;
+            this.core.Event.OnMapUnload += OnMapUnload;
+            this.subscribed = true;
+            this.active = true;
+            this.logger.LogInformation("Built-in CSTV quota fix installed: selection={Selection:X}, candidate={Candidate:X}. Bot settings are unchanged.", selectionAddress, candidateAddress);
         }
         catch (Exception ex)
         {
             Dispose();
-            logger.LogError(ex, "Built-in CSTV quota fix unavailable. Update the CSTV quota gamedata; automatic bot removal may disconnect SourceTV.");
+            this.logger.LogError(ex, "Built-in CSTV quota fix unavailable. Update the CSTV quota gamedata; automatic bot removal may disconnect SourceTV.");
         }
     }
 
     private void OnMapLoad( IOnMapLoadEvent @event )
     {
-        Interlocked.Exchange(ref reportedSkip, 0);
-        active = true;
+        _ = Interlocked.Exchange(ref this.reportedSkip, 0);
+        this.active = true;
     }
 
-    private void OnMapUnload( IOnMapUnloadEvent @event ) => active = false;
+    private void OnMapUnload( IOnMapUnloadEvent @event ) => this.active = false;
 
     private void ReportError( Exception ex )
     {
         // Never propagate a managed exception through a reverse native callback.
         var now = Environment.TickCount64;
-        var next = Interlocked.Read(ref nextErrorLogAt);
-        if (now >= next && Interlocked.CompareExchange(ref nextErrorLogAt, now + 30_000, next) == next)
-            logger.LogError(ex, "CSTV quota fix callback failed; returning false (limited to once per 30 seconds).");
+        var next = Interlocked.Read(ref this.nextErrorLogAt);
+        if (now >= next && Interlocked.CompareExchange(ref this.nextErrorLogAt, now + 30_000, next) == next)
+            this.logger.LogError(ex, "CSTV quota fix callback failed; returning false (limited to once per 30 seconds).");
     }
 
     public void Dispose()
     {
-        active = false;
-        if (subscribed)
+        this.active = false;
+        if (this.subscribed)
         {
-            core.Event.OnMapLoad -= OnMapLoad;
-            core.Event.OnMapUnload -= OnMapUnload;
-            subscribed = false;
+            this.core.Event.OnMapLoad -= OnMapLoad;
+            this.core.Event.OnMapUnload -= OnMapUnload;
+            this.subscribed = false;
         }
         // Remove the scope first. Also rolls back a partially installed hook pair.
-        if (selectionHook != Guid.Empty) selection?.RemoveHook(selectionHook);
-        if (candidateHook != Guid.Empty) candidate?.RemoveHook(candidateHook);
-        selectionHook = candidateHook = Guid.Empty;
-        selection = null;
-        candidate = null;
+        if (this.selectionHook != Guid.Empty) this.selection?.RemoveHook(this.selectionHook);
+        if (this.candidateHook != Guid.Empty) this.candidate?.RemoveHook(this.candidateHook);
+        this.selectionHook = this.candidateHook = Guid.Empty;
+        this.selection = null;
+        this.candidate = null;
     }
 }

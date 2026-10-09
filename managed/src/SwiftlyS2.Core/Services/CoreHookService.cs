@@ -28,7 +28,7 @@ internal class CoreHookService : IDisposable
         HookExecuteCommand();
         HookICvarFindConCommandTemplate();
         HookSteamServerAPIActivated();
-        cstvBotQuotaFix = new CstvBotQuotaFix(core, logger);
+        this.cstvBotQuotaFix = new(core, logger);
     }
 
     /*
@@ -221,7 +221,7 @@ internal class CoreHookService : IDisposable
 
     public void Dispose()
     {
-        cstvBotQuotaFix.Dispose();
+        this.cstvBotQuotaFix.Dispose();
         UnhookExecuteCommand();
         UnhookICvarFindConCommandTemplate();
         UnhookSteamServerAPIActivated();
