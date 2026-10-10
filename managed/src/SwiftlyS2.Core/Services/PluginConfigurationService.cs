@@ -1,5 +1,6 @@
 using System.Data.Common;
 using System.Text.Json;
+using System.Text.Json.Serialization.Metadata;
 using Microsoft.Extensions.Configuration;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.Services;
@@ -71,18 +72,18 @@ internal class PluginConfigurationService : IPluginConfigurationService
 
   public IPluginConfigurationService InitializeJsonWithModel<T>( string name, string sectionName ) where T : class, new()
   {
+    return InitializeJsonWithModel<T>(name, sectionName, false);
+  }
+
+  public IPluginConfigurationService InitializeJsonWithModel<T>( string name, string sectionName, bool addMissingKeys ) where T : class, new()
+  {
 
     var configPath = GetConfigPath(name);
+    var exists = File.Exists(configPath);
 
-    if (File.Exists(configPath))
+    if (exists && !addMissingKeys)
     {
       return this;
-    }
-
-    var dir = Path.GetDirectoryName(configPath);
-    if (dir is not null)
-    {
-      Directory.CreateDirectory(dir);
     }
 
     var config = new T();
@@ -94,11 +95,33 @@ internal class PluginConfigurationService : IPluginConfigurationService
     var options = new JsonSerializerOptions {
       WriteIndented = true,
       IncludeFields = true,
-      PropertyNamingPolicy = null
+      PropertyNamingPolicy = null,
+      TypeInfoResolver = new DefaultJsonTypeInfoResolver {
+        Modifiers = { ConfigurationCommentService.ApplyConfigurationKeyNames }
+      }
     };
 
+    var writeComments = Path.GetExtension(name).Equals(".jsonc", StringComparison.OrdinalIgnoreCase) && ConfigurationCommentService.HasDescriptions(typeof(T));
+
+    if (exists)
+    {
+      var defaults = JsonSerializer.SerializeToNode(wrapped, options)!.AsObject();
+      var updated = ConfigurationMissingJsonKeyService.AddMissingKeys(File.ReadAllText(configPath), defaults, sectionName, typeof(T), options, writeComments);
+      if (updated is not null)
+      {
+        File.WriteAllText(configPath, updated);
+      }
+      return this;
+    }
+
+    var dir = Path.GetDirectoryName(configPath);
+    if (dir is not null)
+    {
+      Directory.CreateDirectory(dir);
+    }
+
     var configJson = JsonSerializer.Serialize(wrapped, options);
-    if (Path.GetExtension(name).Equals(".jsonc", StringComparison.OrdinalIgnoreCase) && ConfigurationCommentService.HasDescriptions(typeof(T)))
+    if (writeComments)
     {
       configJson = ConfigurationCommentService.WriteJson(configJson, sectionName, typeof(T), options);
     }
@@ -109,18 +132,18 @@ internal class PluginConfigurationService : IPluginConfigurationService
 
   public IPluginConfigurationService InitializeTomlWithModel<T>( string name, string sectionName ) where T : class, new()
   {
+    return InitializeTomlWithModel<T>(name, sectionName, false);
+  }
+
+  public IPluginConfigurationService InitializeTomlWithModel<T>( string name, string sectionName, bool addMissingKeys ) where T : class, new()
+  {
 
     var configPath = GetConfigPath(name);
+    var exists = File.Exists(configPath);
 
-    if (File.Exists(configPath))
+    if (exists && !addMissingKeys)
     {
       return this;
-    }
-
-    var dir = Path.GetDirectoryName(configPath);
-    if (dir is not null)
-    {
-      Directory.CreateDirectory(dir);
     }
 
     var config = new T();
@@ -133,12 +156,33 @@ internal class PluginConfigurationService : IPluginConfigurationService
       ConvertPropertyName = name => name,
       IgnoreMissingProperties = true
     };
+    var getPropertyName = tomlModelOptions.GetPropertyName;
+    var getFieldName = tomlModelOptions.GetFieldName;
+    tomlModelOptions.GetPropertyName = property => ConfigurationCommentService.GetConfigurationKeyName(property) ?? getPropertyName(property);
+    tomlModelOptions.GetFieldName = field => ConfigurationCommentService.GetConfigurationKeyName(field) ?? getFieldName(field);
 
     var tomlString = Toml.FromModel(wrapped, tomlModelOptions);
     if (ConfigurationCommentService.HasDescriptions(typeof(T)))
     {
       tomlString = ConfigurationCommentService.WriteToml(tomlString, sectionName, typeof(T));
     }
+
+    if (exists)
+    {
+      var updated = ConfigurationMissingTomlKeyService.AddMissingKeys(File.ReadAllText(configPath), tomlString);
+      if (updated is not null)
+      {
+        File.WriteAllText(configPath, updated);
+      }
+      return this;
+    }
+
+    var dir = Path.GetDirectoryName(configPath);
+    if (dir is not null)
+    {
+      Directory.CreateDirectory(dir);
+    }
+
     File.WriteAllText(configPath, tomlString);
 
     return this;

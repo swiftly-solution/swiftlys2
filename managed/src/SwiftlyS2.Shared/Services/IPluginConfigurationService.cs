@@ -39,6 +39,21 @@ public interface IPluginConfigurationService
   public IPluginConfigurationService InitializeJsonWithModel<T>(string name, string sectionName) where T : class, new();
 
   /// <summary>
+  /// Initialize the json configuration file with a class as template.
+  /// Behaves like <see cref="InitializeJsonWithModel{T}(string, string)"/> when the file does not exist yet.
+  /// When the file exists and <paramref name="addMissingKeys"/> is <c>true</c>, keys present in the model but missing from the file
+  /// are inserted with their default value, including keys of nested objects. In a <c>.jsonc</c> file each inserted key gets its
+  /// <see cref="System.ComponentModel.DescriptionAttribute"/> as <c>//</c> comment lines above it. The rest of the file, including
+  /// existing values, comments and formatting, is left untouched. Dictionary entries and list items are never added.
+  /// Keys are matched case-insensitively, the same way the configuration binder reads them. A file that is not valid JSON is not changed.
+  /// </summary>
+  /// <typeparam name="T">The type of the configuration model.</typeparam>
+  /// <param name="name">The name of the configuration file.</param>
+  /// <param name="sectionName">The name of the section in the configuration file.</param>
+  /// <param name="addMissingKeys">Whether to insert keys missing from an existing file.</param>
+  public IPluginConfigurationService InitializeJsonWithModel<T>(string name, string sectionName, bool addMissingKeys) where T : class, new();
+
+  /// <summary>
   /// Initialize the TOML configuration file with a class as template.
   /// Properties and fields marked with <see cref="System.ComponentModel.DescriptionAttribute"/> are written with their
   /// description as <c>#</c> comment lines above the key or above the table header. Members of inline tables cannot carry comments.
@@ -47,6 +62,21 @@ public interface IPluginConfigurationService
   /// <param name="name">The name of the configuration file.</param>
   /// <param name="sectionName">The name of the section in the configuration file.</param>
   public IPluginConfigurationService InitializeTomlWithModel<T>(string name, string sectionName) where T : class, new();
+
+  /// <summary>
+  /// Initialize the TOML configuration file with a class as template.
+  /// Behaves like <see cref="InitializeTomlWithModel{T}(string, string)"/> when the file does not exist yet.
+  /// When the file exists and <paramref name="addMissingKeys"/> is <c>true</c>, keys present in the model but missing from an existing table
+  /// are inserted after the table's last value, and tables missing from the file are appended at its end, each with its
+  /// <see cref="System.ComponentModel.DescriptionAttribute"/> as <c>#</c> comment lines. The rest of the file, including existing values,
+  /// comments and formatting, is left untouched. Members of inline tables and entries of table arrays are never added.
+  /// Keys are matched case-insensitively, the same way the configuration binder reads them. A file that is not valid TOML is not changed.
+  /// </summary>
+  /// <typeparam name="T">The type of the configuration model.</typeparam>
+  /// <param name="name">The name of the configuration file.</param>
+  /// <param name="sectionName">The name of the section in the configuration file.</param>
+  /// <param name="addMissingKeys">Whether to insert keys missing from an existing file.</param>
+  public IPluginConfigurationService InitializeTomlWithModel<T>(string name, string sectionName, bool addMissingKeys) where T : class, new();
 
   /// <summary>
   /// Configure the internal configuration manager.

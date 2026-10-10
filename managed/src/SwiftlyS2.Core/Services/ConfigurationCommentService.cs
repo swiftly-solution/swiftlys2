@@ -5,6 +5,8 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
+using System.Text.Json.Serialization.Metadata;
+using Microsoft.Extensions.Configuration;
 
 namespace SwiftlyS2.Core.Services;
 
@@ -21,6 +23,14 @@ internal static class ConfigurationCommentService
         var builder = new StringBuilder();
         var writer = new JsonCommentWriter(builder, options);
         writer.WriteObject(root, 0, key => key == sectionName ? (modelType, null) : (null, null));
+
+        return builder.ToString();
+    }
+
+    public static string WriteJsonMember( string key, JsonNode? value, Type? type, string? description, JsonSerializerOptions options )
+    {
+        var builder = new StringBuilder();
+        new JsonCommentWriter(builder, options).WriteMember(key, value, 0, type, description);
 
         return builder.ToString();
     }
@@ -201,18 +211,7 @@ internal static class ConfigurationCommentService
             foreach (var (key, value) in node)
             {
                 var (type, description) = resolve(key);
-                if (description is not null)
-                {
-                    foreach (var line in SplitLines(description))
-                    {
-                        Indent(depth + 1);
-                        builder.Append(line.Length == 0 ? "//" : "// " + line).Append(_newLine);
-                    }
-                }
-
-                Indent(depth + 1);
-                builder.Append(JsonSerializer.Serialize(key, options)).Append(": ");
-                WriteValue(value, depth + 1, type);
+                WriteMember(key, value, depth + 1, type, description);
                 if (++index < node.Count)
                 {
                     builder.Append(',');
@@ -223,6 +222,22 @@ internal static class ConfigurationCommentService
 
             Indent(depth);
             builder.Append('}');
+        }
+
+        public void WriteMember( string key, JsonNode? value, int depth, Type? type, string? description )
+        {
+            if (description is not null)
+            {
+                foreach (var line in SplitLines(description))
+                {
+                    Indent(depth);
+                    builder.Append(line.Length == 0 ? "//" : "// " + line).Append(_newLine);
+                }
+            }
+
+            Indent(depth);
+            builder.Append(JsonSerializer.Serialize(key, options)).Append(": ");
+            WriteValue(value, depth, type);
         }
 
         private void WriteArray( JsonArray node, int depth, Type? elementType )
@@ -279,7 +294,7 @@ internal static class ConfigurationCommentService
         }
     }
 
-    private static (Type? Type, string? Description) ResolveMember( Type? type, string key )
+    public static (Type? Type, string? Description) ResolveMember( Type? type, string key )
     {
         if (type is null || FindMember(type, key, useJsonNames: true) is not { } member)
         {
@@ -309,9 +324,30 @@ internal static class ConfigurationCommentService
         return null;
     }
 
+    public static string? GetConfigurationKeyName( MemberInfo member )
+    {
+        return member.GetCustomAttribute<ConfigurationKeyNameAttribute>()?.Name;
+    }
+
+    public static void ApplyConfigurationKeyNames( JsonTypeInfo typeInfo )
+    {
+        if (typeInfo.Kind != JsonTypeInfoKind.Object)
+        {
+            return;
+        }
+
+        foreach (var property in typeInfo.Properties)
+        {
+            if (property.AttributeProvider is MemberInfo member && GetConfigurationKeyName(member) is { } name)
+            {
+                property.Name = name;
+            }
+        }
+    }
+
     private static bool Matches( MemberInfo member, string key, bool useJsonNames )
     {
-        var jsonName = member.GetCustomAttribute<JsonPropertyNameAttribute>()?.Name;
+        var jsonName = GetConfigurationKeyName(member) ?? member.GetCustomAttribute<JsonPropertyNameAttribute>()?.Name;
         if (useJsonNames)
         {
             return (jsonName ?? member.Name) == key;
@@ -332,7 +368,7 @@ internal static class ConfigurationCommentService
         return text.Replace("\r\n", "\n").Split('\n').Select(line => line.TrimEnd());
     }
 
-    private static Type? GetDictionaryValueType( Type type )
+    public static Type? GetDictionaryValueType( Type type )
     {
         var dictionary = type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IDictionary<,>)
             ? type

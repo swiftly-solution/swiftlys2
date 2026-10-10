@@ -41,6 +41,17 @@ public sealed class ConfigurationSection( ISwiftlyCore core ) : Section(core)
         public DescribedInnerModel Inner { get; set; } = new();
     }
 
+    public sealed class KeyNamedModel
+    {
+        [Description("Player limit")]
+        [ConfigurationKeyName("max_players")]
+        public int MaxPlayers { get; set; } = 10;
+
+        [ConfigurationKeyName("server_name")]
+        [JsonPropertyName("json_server_name")]
+        public string ServerName { get; set; } = "server";
+    }
+
     public override string Name => "configuration";
 
     private IPluginConfigurationService Cfg => Core.Configuration;
@@ -226,6 +237,177 @@ public sealed class ConfigurationSection( ISwiftlyCore core ) : Section(core)
                 Equal(7, doc.RootElement.GetProperty("Main").GetProperty("Number").GetInt32(), "Number");
             }));
 
+        t.Test("InitializeJsonWithModel with addMissingKeys leaves a complete file byte for byte", () =>
+            WithFile(".jsonc", ( name, path ) =>
+            {
+                _ = cfg.InitializeJsonWithModel<DescribedModel>(name, "Main");
+                var before = File.ReadAllText(path);
+                var returned = cfg.InitializeJsonWithModel<DescribedModel>(name, "Main", addMissingKeys: true);
+                Expect(ReferenceEquals(cfg, returned), "does not return the service");
+                Equal(before, File.ReadAllText(path), "file content");
+            }));
+
+        t.Test("InitializeJsonWithModel with addMissingKeys matches keys case-insensitively", () =>
+            WithFile(".jsonc", ( name, path ) =>
+            {
+                var original = "{\n  \"main\": {\n    \"number\": 99,\n    \"text\": \"custom\",\n    \"Renamed_Key\": \"x\",\n    \"inner\": { \"enabled\": false }\n  }\n}\n";
+                File.WriteAllText(path, original);
+                _ = cfg.InitializeJsonWithModel<DescribedModel>(name, "Main", addMissingKeys: true);
+                Equal(original, File.ReadAllText(path), "file content");
+            }));
+
+        t.Test("InitializeJsonWithModel with addMissingKeys inserts only the missing key and its description", () =>
+            WithFile(".jsonc", ( name, path ) =>
+            {
+                File.WriteAllText(path, "{\n  // admin note\n  \"Main\": {\n    \"Number\": 99, // keep me\n    \"Text\": \"custom\" // last\n  }\n}\n");
+                _ = cfg.InitializeJsonWithModel<DescribedModel>(name, "Main", addMissingKeys: true);
+                var text = File.ReadAllText(path).Replace("\r\n", "\n");
+                Equal("{\n  // admin note\n  \"Main\": {\n    \"Number\": 99, // keep me\n    \"Text\": \"custom\", // last\n    // Renamed key\n    \"renamed_key\": \"value\",\n    // Nested section\n    \"Inner\": {\n      // Inner flag\n      \"Enabled\": true\n    }\n  }\n}\n", text, "file content");
+            }));
+
+        t.Test("InitializeJsonWithModel with addMissingKeys fills nested objects", () =>
+            WithFile(".jsonc", ( name, path ) =>
+            {
+                File.WriteAllText(path, "{\n  \"Main\": {\n    \"Number\": 1,\n    \"Text\": \"a\",\n    \"renamed_key\": \"b\",\n    \"Inner\": {}\n  }\n}\n");
+                _ = cfg.InitializeJsonWithModel<DescribedModel>(name, "Main", addMissingKeys: true);
+                var text = File.ReadAllText(path).Replace("\r\n", "\n");
+                Expect(text.Contains("\"Inner\": {\n      // Inner flag\n      \"Enabled\": true\n    }"), $"nested key not added:\n{text}");
+            }));
+
+        t.Test("InitializeJsonWithModel with addMissingKeys writes no comments into a .json file", () =>
+            WithFile(".json", ( name, path ) =>
+            {
+                File.WriteAllText(path, "{ \"Main\": { \"Number\": 99 } }");
+                _ = cfg.InitializeJsonWithModel<DescribedModel>(name, "Main", addMissingKeys: true);
+                var text = File.ReadAllText(path);
+                Expect(!text.Contains("//"), $"comment written into a .json file:\n{text}");
+                using var doc = JsonDocument.Parse(text);
+                var main = doc.RootElement.GetProperty("Main");
+                Equal(99, main.GetProperty("Number").GetInt32(), "Number");
+                Equal("hello", main.GetProperty("Text").GetString(), "Text");
+            }));
+
+        t.Test("InitializeJsonWithModel with addMissingKeys leaves invalid JSON alone", () =>
+            WithFile(".jsonc", ( name, path ) =>
+            {
+                File.WriteAllText(path, "{ \"Main\": ");
+                _ = cfg.InitializeJsonWithModel<DescribedModel>(name, "Main", addMissingKeys: true);
+                Equal("{ \"Main\": ", File.ReadAllText(path), "file content");
+            }));
+
+        t.Test("JSONC with inserted keys binds back to the model through the Manager", () =>
+            WithFile(".jsonc", ( name, path ) =>
+            {
+                File.WriteAllText(path, "{\n  \"Main\": {\n    \"Number\": 42\n  }\n}\n");
+                _ = cfg.InitializeJsonWithModel<DescribedModel>(name, "Main", addMissingKeys: true);
+                _ = cfg.Configure(b => b.AddJsonFile(name, optional: false, reloadOnChange: false));
+                var model = cfg.Manager.GetSection("Main").Get<DescribedModel>();
+                NotNull(model, "bound model");
+                Equal(42, model!.Number, "Number");
+                Equal("hello", model.Text, "Text");
+                Expect(model.Inner.Enabled, "Inner.Enabled");
+            }));
+
+        t.Test("InitializeTomlWithModel with addMissingKeys leaves a complete file byte for byte", () =>
+            WithFile(".toml", ( name, path ) =>
+            {
+                _ = cfg.InitializeTomlWithModel<DescribedModel>(name, "Main");
+                var before = File.ReadAllText(path);
+                var returned = cfg.InitializeTomlWithModel<DescribedModel>(name, "Main", addMissingKeys: true);
+                Expect(ReferenceEquals(cfg, returned), "does not return the service");
+                Equal(before, File.ReadAllText(path), "file content");
+            }));
+
+        t.Test("InitializeTomlWithModel with addMissingKeys inserts only the missing keys and their descriptions", () =>
+            WithFile(".toml", ( name, path ) =>
+            {
+                File.WriteAllText(path, "# admin note\n[main]\nnumber = 99 # keep me\n\n# other note\n[Other]\nx = 1\n");
+                _ = cfg.InitializeTomlWithModel<DescribedModel>(name, "Main", addMissingKeys: true);
+                var text = File.ReadAllText(path).Replace("\r\n", "\n");
+                Expect(text.StartsWith("# admin note\n[main]\nnumber = 99 # keep me\nText = \"hello\"\n# Renamed key\n"), $"missing keys not inserted after the last value:\n{text}");
+                Expect(text.Contains("# Nested section\n") && text.Contains("# Inner flag\nEnabled = true"), $"nested section not added with its descriptions:\n{text}");
+                Expect(text.Contains("\n\n# other note\n[Other]\nx = 1\n"), $"following table changed:\n{text}");
+                Expect(!text.Contains("Number = 7"), $"case-insensitive key treated as missing:\n{text}");
+            }));
+
+        t.Test("InitializeTomlWithModel with addMissingKeys appends a missing table", () =>
+            WithFile(".toml", ( name, path ) =>
+            {
+                File.WriteAllText(path, "[Other]\nx = 1\n");
+                _ = cfg.InitializeTomlWithModel<DescribedModel>(name, "Main", addMissingKeys: true);
+                var text = File.ReadAllText(path).Replace("\r\n", "\n");
+                Expect(text.StartsWith("[Other]\nx = 1\n\n[Main]\n# How many times\n# Second line\nNumber = 7\n"), $"table not appended:\n{text}");
+            }));
+
+        t.Test("InitializeTomlWithModel with addMissingKeys leaves invalid TOML alone", () =>
+            WithFile(".toml", ( name, path ) =>
+            {
+                File.WriteAllText(path, "[Main\nNumber =");
+                _ = cfg.InitializeTomlWithModel<DescribedModel>(name, "Main", addMissingKeys: true);
+                Equal("[Main\nNumber =", File.ReadAllText(path), "file content");
+            }));
+
+        t.Test("TOML with inserted keys binds back to the model through the Manager", () =>
+            WithFile(".toml", ( name, path ) =>
+            {
+                File.WriteAllText(path, "[Main]\nNumber = 42\n");
+                _ = cfg.InitializeTomlWithModel<DescribedModel>(name, "Main", addMissingKeys: true);
+                _ = cfg.Configure(b => b.AddTomlFile(name, optional: false, reloadOnChange: false));
+                var model = cfg.Manager.GetSection("Main").Get<DescribedModel>();
+                NotNull(model, "bound model");
+                Equal(42, model!.Number, "Number");
+                Equal("hello", model.Text, "Text");
+                Expect(model.Inner.Enabled, "Inner.Enabled");
+            }));
+
+        t.Test("InitializeJsonWithModel writes [ConfigurationKeyName] keys and they bind back", () =>
+            WithFile(".jsonc", ( name, path ) =>
+            {
+                _ = cfg.InitializeJsonWithModel<KeyNamedModel>(name, "Main");
+                var text = File.ReadAllText(path).Replace("\r\n", "\n");
+                Expect(text.Contains("    // Player limit\n    \"max_players\": 10"), $"no ConfigurationKeyName key with its comment:\n{text}");
+                Expect(text.Contains("\"server_name\": \"server\""), $"ConfigurationKeyName does not win over JsonPropertyName:\n{text}");
+                Expect(!text.Contains("MaxPlayers") && !text.Contains("json_server_name"), $"CLR or JsonPropertyName key written:\n{text}");
+                File.WriteAllText(path, text.Replace("\"max_players\": 10", "\"max_players\": 25"));
+                _ = cfg.Configure(b => b.AddJsonFile(name, optional: false, reloadOnChange: false));
+                var model = cfg.Manager.GetSection("Main").Get<KeyNamedModel>();
+                NotNull(model, "bound model");
+                Equal(25, model!.MaxPlayers, "MaxPlayers");
+            }));
+
+        t.Test("InitializeJsonWithModel with addMissingKeys uses [ConfigurationKeyName] keys", () =>
+            WithFile(".jsonc", ( name, path ) =>
+            {
+                File.WriteAllText(path, "{\n  \"Main\": {\n    \"max_players\": 25\n  }\n}\n");
+                _ = cfg.InitializeJsonWithModel<KeyNamedModel>(name, "Main", addMissingKeys: true);
+                var text = File.ReadAllText(path).Replace("\r\n", "\n");
+                Equal("{\n  \"Main\": {\n    \"max_players\": 25,\n    \"server_name\": \"server\"\n  }\n}\n", text, "file content");
+            }));
+
+        t.Test("InitializeTomlWithModel writes [ConfigurationKeyName] keys and they bind back", () =>
+            WithFile(".toml", ( name, path ) =>
+            {
+                _ = cfg.InitializeTomlWithModel<KeyNamedModel>(name, "Main");
+                var text = File.ReadAllText(path).Replace("\r\n", "\n");
+                Expect(text.Contains("# Player limit\nmax_players = 10"), $"no ConfigurationKeyName key with its comment:\n{text}");
+                Expect(text.Contains("server_name = \"server\""), $"ConfigurationKeyName does not win over JsonPropertyName:\n{text}");
+                Expect(!text.Contains("MaxPlayers") && !text.Contains("json_server_name"), $"CLR or JsonPropertyName key written:\n{text}");
+                File.WriteAllText(path, text.Replace("max_players = 10", "max_players = 25"));
+                _ = cfg.Configure(b => b.AddTomlFile(name, optional: false, reloadOnChange: false));
+                var model = cfg.Manager.GetSection("Main").Get<KeyNamedModel>();
+                NotNull(model, "bound model");
+                Equal(25, model!.MaxPlayers, "MaxPlayers");
+            }));
+
+        t.Test("InitializeTomlWithModel with addMissingKeys uses [ConfigurationKeyName] keys", () =>
+            WithFile(".toml", ( name, path ) =>
+            {
+                File.WriteAllText(path, "[Main]\nmax_players = 25\n");
+                _ = cfg.InitializeTomlWithModel<KeyNamedModel>(name, "Main", addMissingKeys: true);
+                var text = File.ReadAllText(path).Replace("\r\n", "\n");
+                Equal("[Main]\nmax_players = 25\nserver_name = \"server\"\n", text, "file content");
+            }));
+
         t.Test("InitializeTomlWithModel writes [Description] as # comments above the key", () =>
             WithFile(".toml", ( name, path ) =>
             {
@@ -334,6 +516,8 @@ public sealed class ConfigurationSection( ISwiftlyCore core ) : Section(core)
             p.Profile("Manager.GetSection(\"Main\").Get<TesterModel>() (bind)", () => _ = manager.GetSection("Main").Get<TesterModel>(), 20_000);
             p.Profile("Manager.GetValue<int>(\"Main:Number\")", () => _ = manager.GetValue<int>("Main:Number"), 100_000);
             p.Profile("Configuration.InitializeJsonWithModel (file exists)", () => _ = cfg.InitializeJsonWithModel<TesterModel>(name, "Main"), 50_000);
+            p.Profile("Configuration.InitializeJsonWithModel addMissingKeys (file complete)", () => _ = cfg.InitializeJsonWithModel<TesterModel>(name, "Main", addMissingKeys: true), 5_000);
+            p.Profile("Configuration.InitializeTomlWithModel addMissingKeys (file complete)", () => _ = cfg.InitializeTomlWithModel<TesterModel>(tomlName, "Main", addMissingKeys: true), 5_000);
             p.Profile("Configuration.InitializeTomlWithModel (file exists)", () => _ = cfg.InitializeTomlWithModel<TesterModel>(tomlName, "Main"), 50_000);
             p.Profile("Configuration.InitializeWithTemplate (file exists)", () => _ = cfg.InitializeWithTemplate(name, "tester.template.json"), 50_000);
             p.ProfileBudget("Configuration.InitializeJsonWithModel (create + delete file)", () =>
