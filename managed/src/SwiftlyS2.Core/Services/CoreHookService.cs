@@ -1,10 +1,6 @@
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Text;
 using Microsoft.Extensions.Logging;
 using SwiftlyS2.Core.Events;
-using SwiftlyS2.Core.Extensions;
-using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared;
 using SwiftlyS2.Shared.Memory;
 using SwiftlyS2.Shared.Misc;
@@ -17,15 +13,12 @@ internal class CoreHookService : IDisposable
 {
     private readonly ISwiftlyCore core;
     private readonly ILogger<CoreHookService> logger;
-    private static readonly bool IsWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
-
     public CoreHookService( ILogger<CoreHookService> logger, ISwiftlyCore core )
     {
         this.logger = logger;
         this.core = core;
 
         HookExecuteCommand();
-        HookICvarFindConCommandTemplate();
         HookSteamServerAPIActivated();
     }
 
@@ -54,15 +47,10 @@ internal class CoreHookService : IDisposable
         So we model it as a fixed 5-parameter function for interop purposes
     */
     private delegate nint ExecuteCommand( nint a1, int a2, uint a3, nint a4, nint a5 );
-    private delegate nint ICvarFindConCommandWindows( nint pICvar, nint pRet, nint pConCommandName, int unk1 );
-    private delegate nint ICvarFindConCommandLinux( nint pICvar, nint pConCommandName, int unk1 );
     private delegate void SteamServerAPIActivated( nint pServer );
 
     private IUnmanagedFunction<ExecuteCommand>? executeCommand;
     private Guid executeCommandGuid;
-    private IUnmanagedFunction<ICvarFindConCommandWindows>? findConCommandWindows;
-    private IUnmanagedFunction<ICvarFindConCommandLinux>? findConCommandLinux;
-    private Guid findConCommandGuid;
     private IUnmanagedFunction<SteamServerAPIActivated>? steamServerAPIActivated;
     private Guid steamServerAPIActivatedGuid;
 
@@ -87,17 +75,10 @@ internal class CoreHookService : IDisposable
 
                         if (@eventPre.Result == HookResult.Stop || @eventPre.Result == HookResult.CancelOriginal)
                         {
-                            CommandTrackerManager.CancelCommand();
                             return 0;
                         }
 
                         var result = next()(a1, a2, a3, a4, a5);
-
-                        // Buffered command output must be delivered before the post hook closes
-                        // its capture window. The native call creates a real managed-to-native
-                        // transition, so queued UnmanagedCallersOnly callbacks enter safely.
-                        if (CommandTrackerManager.IsTracking)
-                            NativeConsoleOutput.DispatchQueuedListeners();
 
                         var @eventPost = new OnCommandExecuteHookEvent(ref command, HookMode.Post);
                         EventPublisher.InvokeOnCommandExecuteHook(@eventPost);
@@ -114,79 +95,6 @@ internal class CoreHookService : IDisposable
         if (executeCommand == null) return;
         executeCommand.RemoveHook(executeCommandGuid);
         executeCommand = null;
-    }
-
-    internal void HookICvarFindConCommandTemplate()
-    {
-        var offset = core.GameData.GetOffset("ICvar::FindConCommand");
-        if (IsWindows)
-        {
-            findConCommandWindows = core.Memory.GetUnmanagedFunctionByVTable<ICvarFindConCommandWindows>(core.Memory.GetVTableAddress(Library.Tier0, "CCvar")!.Value, offset);
-            logger.LogInformation("Hooking ICvar::FindConCommand at {Address:X}", findConCommandWindows.Address);
-            findConCommandGuid = findConCommandWindows.AddHook(( next ) =>
-            {
-                return ( pICvar, pRet, pConCommandName, unk1 ) =>
-                {
-                    var commandName = Marshal.PtrToStringAnsi(pConCommandName)!;
-                    if (commandName.StartsWith("ecwb", StringComparison.OrdinalIgnoreCase))
-                    {
-                        commandName = commandName.Substring(4);
-                        var bytes = Encoding.UTF8.GetBytes(commandName);
-                        unsafe
-                        {
-                            var pStr = (nint)NativeMemory.AllocZeroed((nuint)bytes.Length);
-                            pStr.CopyFrom(bytes);
-                            var result = next()(pICvar, pRet, pStr, unk1);
-                            NativeMemory.Free((void*)pStr);
-                            return result;
-                        }
-                    }
-                    return next()(pICvar, pRet, pConCommandName, unk1);
-                };
-            });
-        }
-        else
-        {
-            findConCommandLinux = core.Memory.GetUnmanagedFunctionByVTable<ICvarFindConCommandLinux>(core.Memory.GetVTableAddress(Library.Tier0, "CCvar")!.Value, offset);
-            logger.LogInformation("Hooking ICvar::FindConCommand at {Address:X}", findConCommandLinux.Address);
-            findConCommandGuid = findConCommandLinux.AddHook(( next ) =>
-            {
-                return ( pICvar, pConCommandName, unk1 ) =>
-                {
-                    var commandName = Marshal.PtrToStringUTF8(pConCommandName)!;
-                    if (commandName.StartsWith("ecwb", StringComparison.OrdinalIgnoreCase))
-                    {
-                        commandName = commandName.Substring(4);
-                        var bytes = Encoding.UTF8.GetBytes(commandName);
-                        unsafe
-                        {
-                            var pStr = (nint)NativeMemory.AllocZeroed((nuint)bytes.Length);
-                            pStr.CopyFrom(bytes);
-                            var result = next()(pICvar, pStr, unk1);
-                            NativeMemory.Free((void*)pStr);
-                            return result;
-                        }
-                    }
-                    return next()(pICvar, pConCommandName, unk1);
-                };
-            });
-        }
-    }
-
-    internal void UnhookICvarFindConCommandTemplate()
-    {
-        if (IsWindows)
-        {
-            if (findConCommandWindows == null) return;
-            findConCommandWindows.RemoveHook(findConCommandGuid);
-            findConCommandWindows = null;
-        }
-        else
-        {
-            if (findConCommandLinux == null) return;
-            findConCommandLinux.RemoveHook(findConCommandGuid);
-            findConCommandLinux = null;
-        }
     }
 
     internal void HookSteamServerAPIActivated()
@@ -220,7 +128,6 @@ internal class CoreHookService : IDisposable
     public void Dispose()
     {
         UnhookExecuteCommand();
-        UnhookICvarFindConCommandTemplate();
         UnhookSteamServerAPIActivated();
     }
 }

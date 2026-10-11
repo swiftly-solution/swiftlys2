@@ -32,20 +32,6 @@ public struct CTraceFilter
         QueryShapeAttributes = new RnQueryShapeAttr_t();
     }
 
-    [Obsolete("To be removed when removing old methods for TracePlayerBBox and TraceShape")]
-    internal void EnsureValid()
-    {
-        if (this._pVTable == 0)
-        {
-            _pVTable = CTraceFilterVTable.pCTraceFilterShouldHitFunctionCall;
-        }
-
-        if (!IsWindows)
-        {
-            _IterateEntitiesLinux = IterateEntities;
-        }
-    }
-
     internal void EnsureValidNewFormat()
     {
         _pVTable = CTraceFilterVTable.pCTraceFilterCustomHitFunctionCall;

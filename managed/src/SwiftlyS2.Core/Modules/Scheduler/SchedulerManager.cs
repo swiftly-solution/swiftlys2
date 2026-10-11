@@ -192,6 +192,9 @@ internal static class SchedulerManager
         {
             foreach (var timer in dueTimers)
             {
+                // Next-tick actions or earlier timers in this batch may have cancelled it after it was collected.
+                if (timer.CancellationTokenSource.IsCancellationRequested || timer.OwnerToken.IsCancellationRequested) continue;
+
                 try
                 {
                     ExecuteTimer(timer);

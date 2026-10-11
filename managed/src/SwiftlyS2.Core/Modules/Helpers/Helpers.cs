@@ -100,14 +100,15 @@ internal class HelpersService : IHelpers
 
     public CCSWeaponBaseVData? GetWeaponCSDataFromKey( int unknown, string key )
     {
-        if(WeaponCSDataCache.TryGetValue(int.TryParse(key, out var itemDefIndex) ? itemDefIndex : -1, out var cachedData))
+        var isIndex = int.TryParse(key, out var itemDefIndex);
+        if (isIndex && WeaponCSDataCache.TryGetValue(itemDefIndex, out var cachedData))
         {
             return cachedData;
         }
 
         var weaponDataPtr = GameFunctions.GetWeaponCSDataFromKey(unknown, key);
         var result = weaponDataPtr == 0 ? null : new CCSWeaponBaseVDataImpl(weaponDataPtr);
-        _ = WeaponCSDataCache.TryAdd(itemDefIndex, result);
+        if (isIndex) _ = WeaponCSDataCache.TryAdd(itemDefIndex, result);
         return result;
     }
 

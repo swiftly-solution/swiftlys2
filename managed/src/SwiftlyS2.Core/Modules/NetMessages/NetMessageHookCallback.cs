@@ -6,10 +6,14 @@ using SwiftlyS2.Shared.Misc;
 
 namespace SwiftlyS2.Core.NetMessages;
 
-internal abstract class NetMessageHookCallback : IDisposable
+internal abstract class NetMessageHookCallback : IEquatable<NetMessageHookCallback>
 {
 
-    public Guid Guid { get; init; }
+    public Guid Guid { get; } = Guid.NewGuid();
+
+    public abstract NetMessageHookType HookType { get; }
+
+    public abstract int MessageId { get; }
 
     public IContextedProfilerService Profiler { get; }
 
@@ -21,136 +25,123 @@ internal abstract class NetMessageHookCallback : IDisposable
         Profiler = profiler;
     }
 
-    internal virtual HookResult InvokeAsClient( int playerId, int msgId, nint pMessage ) => HookResult.Continue;
-    internal virtual HookResult InvokeAsServer( nint pPlayerMask, int msgId, nint pMessage ) => HookResult.Continue;
-    internal virtual HookResult InvokeAsServerInternal( int playerId, int msgId, nint pMessage ) => HookResult.Continue;
+    internal virtual HookResult InvokeAsClient( int playerId, nint pMessage ) => HookResult.Continue;
+    internal virtual HookResult InvokeAsServer( nint pPlayerMask, nint pMessage ) => HookResult.Continue;
+    internal virtual HookResult InvokeAsServerInternal( int playerId, nint pMessage ) => HookResult.Continue;
 
-    public abstract void Dispose();
+    public bool Equals( NetMessageHookCallback? other ) => other is not null && Guid == other.Guid;
+
+    public override bool Equals( object? obj ) => ReferenceEquals(this, obj) || (obj is NetMessageHookCallback other && Equals(other));
+
+    public override int GetHashCode() => Guid.GetHashCode();
 
 }
 
-internal class NetMessageClientHookCallback<T> : NetMessageHookCallback where T : ITypedProtobuf<T>, INetMessage<T>, IDisposable
+internal sealed class NetMessageClientHookCallback<T> : NetMessageHookCallback where T : ITypedProtobuf<T>, INetMessage<T>, IDisposable
 {
 
-    private static readonly string s_typeName = typeof(T).Name;
+    private static readonly string typeName = typeof(T).Name;
 
-    private INetMessageService.ClientNetMessageHandler<T> _callback;
-    private ILogger<NetMessageClientHookCallback<T>> _logger;
-
+    private readonly INetMessageService.ClientNetMessageHandler<T> callback;
+    private readonly ILogger<NetMessageClientHookCallback<T>> logger;
 
     public NetMessageClientHookCallback( INetMessageService.ClientNetMessageHandler<T> callback, ILoggerFactory loggerFactory, IContextedProfilerService profiler ) : base(loggerFactory, profiler)
     {
-        Guid = Guid.NewGuid();
-        _logger = LoggerFactory.CreateLogger<NetMessageClientHookCallback<T>>();
-        _callback = callback;
-        NetMessageService.RegisterCallback(this);
+        this.callback = callback;
+        logger = loggerFactory.CreateLogger<NetMessageClientHookCallback<T>>();
     }
 
-    internal override HookResult InvokeAsClient( int playerId, int msgId, nint pMessage )
-    {
-        if (msgId != T.MessageId) return HookResult.Continue;
+    public override NetMessageHookType HookType => NetMessageHookType.Client;
 
+    public override int MessageId => T.MessageId;
+
+    internal override HookResult InvokeAsClient( int playerId, nint pMessage )
+    {
         try
         {
             var msg = T.Wrap(pMessage, false);
-            return _callback(msg, playerId);
+            return callback(msg, playerId);
         }
         catch (Exception e)
         {
             if (!GlobalExceptionHandler.Handle(ref e)) return HookResult.Continue;
-            _logger.LogError(e, "Error in net message client hook callback for {MessageType}", s_typeName);
+            logger.LogError(e, "Error in net message client hook callback for {MessageType}", typeName);
             return HookResult.Continue;
         }
     }
 
-    public override void Dispose()
-    {
-        NetMessageService.UnregisterCallback(this);
-    }
-
 }
 
-internal class NetMessageServerHookCallback<T> : NetMessageHookCallback where T : ITypedProtobuf<T>, INetMessage<T>, IDisposable
+internal sealed class NetMessageServerHookCallback<T> : NetMessageHookCallback where T : ITypedProtobuf<T>, INetMessage<T>, IDisposable
 {
 
-    private static readonly string s_typeName = typeof(T).Name;
+    private static readonly string typeName = typeof(T).Name;
 
-    private INetMessageService.ServerNetMessageHandler<T> _callback;
-    private ILogger<NetMessageServerHookCallback<T>> _logger;
+    private readonly INetMessageService.ServerNetMessageHandler<T> callback;
+    private readonly ILogger<NetMessageServerHookCallback<T>> logger;
 
     public NetMessageServerHookCallback( INetMessageService.ServerNetMessageHandler<T> callback, ILoggerFactory loggerFactory, IContextedProfilerService profiler ) : base(loggerFactory, profiler)
     {
-        Guid = Guid.NewGuid();
-        _logger = LoggerFactory.CreateLogger<NetMessageServerHookCallback<T>>();
-        _callback = callback;
-        NetMessageService.RegisterCallback(this);
+        this.callback = callback;
+        logger = loggerFactory.CreateLogger<NetMessageServerHookCallback<T>>();
     }
 
-    internal override HookResult InvokeAsServer( nint pPlayerMask, int msgId, nint pMessage )
-    {
-        if (msgId != T.MessageId) return HookResult.Continue;
+    public override NetMessageHookType HookType => NetMessageHookType.Server;
 
+    public override int MessageId => T.MessageId;
+
+    internal override HookResult InvokeAsServer( nint pPlayerMask, nint pMessage )
+    {
         try
         {
             var msg = T.Wrap(pMessage, false);
             var mask = pPlayerMask.Read<ulong>();
             msg.Recipients.RecipientsMask = mask;
-            var result = _callback(msg);
+            var result = callback(msg);
             pPlayerMask.Write(msg.Recipients.ToMask());
             return result;
         }
         catch (Exception e)
         {
             if (!GlobalExceptionHandler.Handle(ref e)) return HookResult.Continue;
-            _logger.LogError(e, "Error in net message server hook callback for {MessageType}", s_typeName);
+            logger.LogError(e, "Error in net message server hook callback for {MessageType}", typeName);
             return HookResult.Continue;
         }
-    }
-
-    public override void Dispose()
-    {
-        NetMessageService.UnregisterCallback(this);
     }
 
 }
 
-internal class NetMessageServerInternalHookCallback<T> : NetMessageHookCallback where T : ITypedProtobuf<T>, INetMessage<T>, IDisposable
+internal sealed class NetMessageServerInternalHookCallback<T> : NetMessageHookCallback where T : ITypedProtobuf<T>, INetMessage<T>, IDisposable
 {
 
-    private static readonly string s_typeName = typeof(T).Name;
+    private static readonly string typeName = typeof(T).Name;
 
-    private INetMessageService.ServerNetMessageInternalHandler<T> _callback;
-    private ILogger<NetMessageServerInternalHookCallback<T>> _logger;
-
+    private readonly INetMessageService.ServerNetMessageInternalHandler<T> callback;
+    private readonly ILogger<NetMessageServerInternalHookCallback<T>> logger;
 
     public NetMessageServerInternalHookCallback( INetMessageService.ServerNetMessageInternalHandler<T> callback, ILoggerFactory loggerFactory, IContextedProfilerService profiler ) : base(loggerFactory, profiler)
     {
-        Guid = Guid.NewGuid();
-        _logger = LoggerFactory.CreateLogger<NetMessageServerInternalHookCallback<T>>();
-        _callback = callback;
-        NetMessageService.RegisterCallback(this);
+        this.callback = callback;
+        logger = loggerFactory.CreateLogger<NetMessageServerInternalHookCallback<T>>();
     }
 
-    internal override HookResult InvokeAsServerInternal( int playerId, int msgId, nint pMessage )
-    {
-        if (msgId != T.MessageId) return HookResult.Continue;
+    public override NetMessageHookType HookType => NetMessageHookType.ServerInternal;
 
+    public override int MessageId => T.MessageId;
+
+    internal override HookResult InvokeAsServerInternal( int playerId, nint pMessage )
+    {
         try
         {
             var msg = T.Wrap(pMessage, false);
-            return _callback(msg, playerId);
+            return callback(msg, playerId);
         }
         catch (Exception e)
         {
             if (!GlobalExceptionHandler.Handle(ref e)) return HookResult.Continue;
-            _logger.LogError(e, "Error in net message server internal hook callback for {MessageType}", s_typeName);
+            logger.LogError(e, "Error in net message server internal hook callback for {MessageType}", typeName);
             return HookResult.Continue;
         }
-    }
-
-    public override void Dispose()
-    {
-        NetMessageService.UnregisterCallback(this);
     }
 
 }

@@ -1,5 +1,4 @@
 using SwiftlyS2.Shared.Misc;
-using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared.Players;
 using SwiftlyS2.Shared.Profiler;
 using SwiftlyS2.Shared.Commands;
@@ -15,9 +14,9 @@ internal delegate void GlobalCommandHandlerDelegate( nint commandName, int playe
 internal delegate HookResult ClientCommandListenerCallbackDelegate( int playerId, nint commandLine );
 internal delegate HookResult ClientChatListenerCallbackDelegate( int playerId, nint text, byte teamonly );
 
-internal abstract class CommandCallbackBase : IDisposable
+internal abstract class CommandCallbackBase
 {
-    public Guid Guid { get; protected init; }
+    public Guid Guid { get; } = Guid.NewGuid();
     public string PluginName { get; protected init; }
     public IContextedProfilerService Profiler { get; }
     public ILoggerFactory LoggerFactory { get; }
@@ -28,19 +27,17 @@ internal abstract class CommandCallbackBase : IDisposable
         Profiler = profiler;
         PluginName = pluginName;
     }
-
-    public abstract void Dispose();
 }
 
 internal class CommandCallback : CommandCallbackBase
 {
-    public string CommandName { get; protected init; }
-    public bool RegisterRaw { get; protected init; }
-    public string Permission { get; protected init; }
-    public string HelpText { get; protected init; }
+    public string CommandName { get; }
+    public bool RegisterRaw { get; }
+    public string Permission { get; }
+    public string HelpText { get; }
+    public string NormalizedName { get; }
 
     private readonly ICommandService.CommandListener commandHandle;
-    private readonly ulong nativeListenerId;
     private readonly ILogger<CommandCallback> logger;
     private readonly IPlayerManagerService playerManagerService;
     private readonly IPermissionManager permissionManager;
@@ -53,15 +50,12 @@ internal class CommandCallback : CommandCallbackBase
         this.permissionManager = permissionManager;
         this.commandOverrideOptions = commandOverrideOptions;
 
-        Guid = Guid.NewGuid();
-
         CommandName = commandName;
         RegisterRaw = registerRaw;
         Permission = permission;
         HelpText = helpText;
+        NormalizedName = CommandDispatcher.NormalizeName(commandName, registerRaw);
         commandHandle = handler;
-
-        nativeListenerId = NativeCommands.RegisterCommand(commandName, registerRaw, helpText);
     }
 
     internal void Invoke( int playerId, string[] args, string originalCommandName, string prefix, bool silent )
@@ -86,11 +80,6 @@ internal class CommandCallback : CommandCallbackBase
             logger.LogError(e, "Failed to handle command {CommandName}.", CommandName);
         }
     }
-
-    public override void Dispose()
-    {
-        NativeCommands.UnregisterCommand(nativeListenerId);
-    }
 }
 
 internal class ClientCommandListenerCallback : CommandCallbackBase
@@ -101,7 +90,6 @@ internal class ClientCommandListenerCallback : CommandCallbackBase
     public ClientCommandListenerCallback( ICommandService.ClientCommandHandler handler, ILoggerFactory loggerFactory, IContextedProfilerService profiler, string pluginName ) : base(loggerFactory, profiler, pluginName)
     {
         logger = LoggerFactory.CreateLogger<ClientCommandListenerCallback>();
-        Guid = Guid.NewGuid();
         commandHandle = handler;
     }
 
@@ -118,8 +106,6 @@ internal class ClientCommandListenerCallback : CommandCallbackBase
             return HookResult.Continue;
         }
     }
-
-    public override void Dispose() { }
 }
 
 internal class ClientChatListenerCallback : CommandCallbackBase
@@ -130,7 +116,6 @@ internal class ClientChatListenerCallback : CommandCallbackBase
     public ClientChatListenerCallback( ICommandService.ClientChatHandler handler, ILoggerFactory loggerFactory, IContextedProfilerService profiler, string pluginName ) : base(loggerFactory, profiler, pluginName)
     {
         logger = LoggerFactory.CreateLogger<ClientChatListenerCallback>();
-        Guid = Guid.NewGuid();
         commandHandle = handler;
     }
 
@@ -147,6 +132,4 @@ internal class ClientChatListenerCallback : CommandCallbackBase
             return HookResult.Continue;
         }
     }
-
-    public override void Dispose() { }
 }

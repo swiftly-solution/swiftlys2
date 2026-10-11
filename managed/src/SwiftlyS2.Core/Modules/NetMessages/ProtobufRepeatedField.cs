@@ -46,9 +46,9 @@ internal class ProtobufRepeatedFieldValueType<T>( IProtobufAccessor protobuf, st
 
     public IEnumerator<T> GetEnumerator()
     {
-        foreach (var item in this)
+        for (var i = 0; i < Count; i++)
         {
-            yield return item;
+            yield return this[i];
         }
     }
 

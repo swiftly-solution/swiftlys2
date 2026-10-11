@@ -29,9 +29,6 @@
 
 #include <api/interfaces/interfaces.h>
 
-typedef void (*CBaseEntity_DispatchSpawn)(void*, void*);
-typedef void (*UTIL_Remove)(void*);
-
 CGameEntitySystem* g_pGameEntitySystem = nullptr;
 
 extern void* g_pOnStartupServerCallback;
@@ -83,20 +80,6 @@ void StartupServerHook(void* _this, const GameSessionConfiguration_t& config, IS
     {
         reinterpret_cast<void(*)()>(g_pOnStartupServerCallback)();
     }
-}
-
-void CEntSystem::Spawn(void* pEntity, void* pKeyValues)
-{
-    static auto sig = g_pGameDataManager->GetSignatures()->Fetch("CBaseEntity::DispatchSpawn");
-
-    reinterpret_cast<CBaseEntity_DispatchSpawn>(sig)(pEntity, pKeyValues);
-}
-
-void CEntSystem::Despawn(void* pEntity)
-{
-    static auto sig = g_pGameDataManager->GetSignatures()->Fetch("UTIL::Remove");
-
-    reinterpret_cast<UTIL_Remove>(sig)(pEntity);
 }
 
 void CEntSystem::AddEntityListener(IEntityListener* listener)

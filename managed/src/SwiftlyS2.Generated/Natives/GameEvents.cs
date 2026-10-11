@@ -11,51 +11,27 @@ namespace SwiftlyS2.Core.Natives;
 internal static class NativeGameEvents
 {
 
-    private unsafe static delegate* unmanaged<nint, byte*, byte> _GetBool;
+    private unsafe static delegate* unmanaged<nint, byte*, int, nint, byte> _GetValue;
 
-    public unsafe static bool GetBool(nint _event, string key)
+    public unsafe static bool GetValue(nint _event, string key, int kind, nint value)
     {
         using var keyStr = new ScopedCString(key);
         fixed (byte* keyBufferPtr = keyStr)
         {
-            var ret = _GetBool(_event, keyBufferPtr);
+            var ret = _GetValue(_event, keyBufferPtr, kind, value);
             return ret == 1;
         }
     }
 
-    private unsafe static delegate* unmanaged<nint, byte*, int> _GetInt;
+    private unsafe static delegate* unmanaged<nint, byte*, int, nint, byte> _SetValue;
 
-    public unsafe static int GetInt(nint _event, string key)
+    public unsafe static bool SetValue(nint _event, string key, int kind, nint value)
     {
         using var keyStr = new ScopedCString(key);
         fixed (byte* keyBufferPtr = keyStr)
         {
-            var ret = _GetInt(_event, keyBufferPtr);
-            return ret;
-        }
-    }
-
-    private unsafe static delegate* unmanaged<nint, byte*, ulong> _GetUint64;
-
-    public unsafe static ulong GetUint64(nint _event, string key)
-    {
-        using var keyStr = new ScopedCString(key);
-        fixed (byte* keyBufferPtr = keyStr)
-        {
-            var ret = _GetUint64(_event, keyBufferPtr);
-            return ret;
-        }
-    }
-
-    private unsafe static delegate* unmanaged<nint, byte*, float> _GetFloat;
-
-    public unsafe static float GetFloat(nint _event, string key)
-    {
-        using var keyStr = new ScopedCString(key);
-        fixed (byte* keyBufferPtr = keyStr)
-        {
-            var ret = _GetFloat(_event, keyBufferPtr);
-            return ret;
+            var ret = _SetValue(_event, keyBufferPtr, kind, value);
+            return ret == 1;
         }
     }
 
@@ -74,164 +50,6 @@ internal static class NativeGameEvents
         }
     }
 
-    private unsafe static delegate* unmanaged<nint, byte*, nint> _GetPtr;
-
-    public unsafe static nint GetPtr(nint _event, string key)
-    {
-        using var keyStr = new ScopedCString(key);
-        fixed (byte* keyBufferPtr = keyStr)
-        {
-            var ret = _GetPtr(_event, keyBufferPtr);
-            return ret;
-        }
-    }
-
-    private unsafe static delegate* unmanaged<nint, byte*, nint> _GetEHandle;
-
-    /// <summary>
-    /// returns the pointer stored inside the handle
-    /// </summary>
-    public unsafe static nint GetEHandle(nint _event, string key)
-    {
-        using var keyStr = new ScopedCString(key);
-        fixed (byte* keyBufferPtr = keyStr)
-        {
-            var ret = _GetEHandle(_event, keyBufferPtr);
-            return ret;
-        }
-    }
-
-    private unsafe static delegate* unmanaged<nint, byte*, nint> _GetEntity;
-
-    public unsafe static nint GetEntity(nint _event, string key)
-    {
-        using var keyStr = new ScopedCString(key);
-        fixed (byte* keyBufferPtr = keyStr)
-        {
-            var ret = _GetEntity(_event, keyBufferPtr);
-            return ret;
-        }
-    }
-
-    private unsafe static delegate* unmanaged<nint, byte*, int> _GetEntityIndex;
-
-    public unsafe static int GetEntityIndex(nint _event, string key)
-    {
-        using var keyStr = new ScopedCString(key);
-        fixed (byte* keyBufferPtr = keyStr)
-        {
-            var ret = _GetEntityIndex(_event, keyBufferPtr);
-            return ret;
-        }
-    }
-
-    private unsafe static delegate* unmanaged<nint, byte*, int> _GetPlayerSlot;
-
-    public unsafe static int GetPlayerSlot(nint _event, string key)
-    {
-        using var keyStr = new ScopedCString(key);
-        fixed (byte* keyBufferPtr = keyStr)
-        {
-            var ret = _GetPlayerSlot(_event, keyBufferPtr);
-            return ret;
-        }
-    }
-
-    private unsafe static delegate* unmanaged<nint, byte*, nint> _GetPlayerController;
-
-    public unsafe static nint GetPlayerController(nint _event, string key)
-    {
-        using var keyStr = new ScopedCString(key);
-        fixed (byte* keyBufferPtr = keyStr)
-        {
-            var ret = _GetPlayerController(_event, keyBufferPtr);
-            return ret;
-        }
-    }
-
-    private unsafe static delegate* unmanaged<nint, byte*, nint> _GetPlayerPawn;
-
-    public unsafe static nint GetPlayerPawn(nint _event, string key)
-    {
-        using var keyStr = new ScopedCString(key);
-        fixed (byte* keyBufferPtr = keyStr)
-        {
-            var ret = _GetPlayerPawn(_event, keyBufferPtr);
-            return ret;
-        }
-    }
-
-    private unsafe static delegate* unmanaged<nint, byte*, nint> _GetPawnEHandle;
-
-    /// <summary>
-    /// returns the pointer stored inside the handle
-    /// </summary>
-    public unsafe static nint GetPawnEHandle(nint _event, string key)
-    {
-        using var keyStr = new ScopedCString(key);
-        fixed (byte* keyBufferPtr = keyStr)
-        {
-            var ret = _GetPawnEHandle(_event, keyBufferPtr);
-            return ret;
-        }
-    }
-
-    private unsafe static delegate* unmanaged<nint, byte*, int> _GetPawnEntityIndex;
-
-    public unsafe static int GetPawnEntityIndex(nint _event, string key)
-    {
-        using var keyStr = new ScopedCString(key);
-        fixed (byte* keyBufferPtr = keyStr)
-        {
-            var ret = _GetPawnEntityIndex(_event, keyBufferPtr);
-            return ret;
-        }
-    }
-
-    private unsafe static delegate* unmanaged<nint, byte*, byte, void> _SetBool;
-
-    public unsafe static void SetBool(nint _event, string key, bool value)
-    {
-        using var keyStr = new ScopedCString(key);
-        fixed (byte* keyBufferPtr = keyStr)
-        {
-            _SetBool(_event, keyBufferPtr, value ? (byte)1 : (byte)0);
-        }
-    }
-
-    private unsafe static delegate* unmanaged<nint, byte*, int, void> _SetInt;
-
-    public unsafe static void SetInt(nint _event, string key, int value)
-    {
-        using var keyStr = new ScopedCString(key);
-        fixed (byte* keyBufferPtr = keyStr)
-        {
-            _SetInt(_event, keyBufferPtr, value);
-        }
-    }
-
-    private unsafe static delegate* unmanaged<nint, byte*, ulong, void> _SetUint64;
-
-    public unsafe static void SetUint64(nint _event, string key, ulong value)
-    {
-        using var keyStr = new ScopedCString(key);
-        fixed (byte* keyBufferPtr = keyStr)
-        {
-            _SetUint64(_event, keyBufferPtr, value);
-        }
-    }
-
-    private unsafe static delegate* unmanaged<nint, byte*, float, void> _SetFloat;
-
-    public unsafe static void SetFloat(nint _event, string key, float value)
-    {
-        using var keyStr = new ScopedCString(key);
-        fixed (byte* keyBufferPtr = keyStr)
-        {
-            _SetFloat(_event, keyBufferPtr, value);
-        }
-    }
-
     private unsafe static delegate* unmanaged<nint, byte*, byte*, void> _SetString;
 
     public unsafe static void SetString(nint _event, string key, string value)
@@ -244,50 +62,6 @@ internal static class NativeGameEvents
             {
                 _SetString(_event, keyBufferPtr, valueBufferPtr);
             }
-        }
-    }
-
-    private unsafe static delegate* unmanaged<nint, byte*, nint, void> _SetPtr;
-
-    public unsafe static void SetPtr(nint _event, string key, nint value)
-    {
-        using var keyStr = new ScopedCString(key);
-        fixed (byte* keyBufferPtr = keyStr)
-        {
-            _SetPtr(_event, keyBufferPtr, value);
-        }
-    }
-
-    private unsafe static delegate* unmanaged<nint, byte*, nint, void> _SetEntity;
-
-    public unsafe static void SetEntity(nint _event, string key, nint value)
-    {
-        using var keyStr = new ScopedCString(key);
-        fixed (byte* keyBufferPtr = keyStr)
-        {
-            _SetEntity(_event, keyBufferPtr, value);
-        }
-    }
-
-    private unsafe static delegate* unmanaged<nint, byte*, int, void> _SetEntityIndex;
-
-    public unsafe static void SetEntityIndex(nint _event, string key, int value)
-    {
-        using var keyStr = new ScopedCString(key);
-        fixed (byte* keyBufferPtr = keyStr)
-        {
-            _SetEntityIndex(_event, keyBufferPtr, value);
-        }
-    }
-
-    private unsafe static delegate* unmanaged<nint, byte*, int, void> _SetPlayerSlot;
-
-    public unsafe static void SetPlayerSlot(nint _event, string key, int value)
-    {
-        using var keyStr = new ScopedCString(key);
-        fixed (byte* keyBufferPtr = keyStr)
-        {
-            _SetPlayerSlot(_event, keyBufferPtr, value);
         }
     }
 
@@ -327,6 +101,17 @@ internal static class NativeGameEvents
         fixed (byte* eventNameBufferPtr = eventNameStr)
         {
             _RegisterListener(eventNameBufferPtr);
+        }
+    }
+
+    private unsafe static delegate* unmanaged<byte*, void> _UnregisterListener;
+
+    public unsafe static void UnregisterListener(string eventName)
+    {
+        using var eventNameStr = new ScopedCString(eventName);
+        fixed (byte* eventNameBufferPtr = eventNameStr)
+        {
+            _UnregisterListener(eventNameBufferPtr);
         }
     }
 

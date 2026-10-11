@@ -1,9 +1,19 @@
+using System.Collections.Frozen;
 using System.Data;
 
 namespace SwiftlyS2.Shared.Database;
 
 public record struct DatabaseConnectionInfo( string Driver, string Host, string Database, string User, string Pass, uint Timeout, ushort Port, string RawUri )
 {
+    private static readonly IReadOnlyDictionary<string, string> NoOptions = FrozenDictionary<string, string>.Empty;
+
+    private IReadOnlyDictionary<string, string>? options;
+
+    public IReadOnlyDictionary<string, string> Options {
+        readonly get => options ?? NoOptions;
+        init => options = value;
+    }
+
     public override readonly string ToString()
     {
         // If we have a raw URI, return it directly
@@ -19,10 +29,26 @@ public record struct DatabaseConnectionInfo( string Driver, string Host, string 
         };
 
         return Driver switch {
-            "sqlite" => $"Data Source={Database}",
-            "mysql" or "postgresql" => $"Server={Host};Port={port};Database={Database};User ID={User};Password={Pass}" + (Timeout > 0 ? $";Timeout={Timeout}" : ""),
+            "sqlite" => AppendOptions($"Data Source={Database}"),
+            "mysql" or "postgresql" => AppendOptions($"Server={Host};Port={port};Database={Database};User ID={User};Password={Pass}" + (Timeout > 0 ? $";Timeout={Timeout}" : "")),
             _ => $"{Driver}://{User}:{Pass}@{Host}:{port}/{Database}"
         };
+    }
+
+    private readonly string AppendOptions( string connectionString )
+    {
+        foreach (var (key, value) in Options)
+        {
+            connectionString += $";{key}={QuoteValue(value)}";
+        }
+
+        return connectionString;
+    }
+
+    private static string QuoteValue( string value )
+    {
+        var needsQuotes = value.Length != value.Trim().Length || value.AsSpan().IndexOfAny(";\"'=") >= 0;
+        return needsQuotes ? $"\"{value.Replace("\"", "\"\"")}\"" : value;
     }
 }
 

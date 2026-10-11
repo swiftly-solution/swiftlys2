@@ -21,11 +21,6 @@ internal class Player : IPlayer, IDisposable
         SessionId = NativePlayer.GetSessionID(pid);
     }
 
-    ~Player()
-    {
-        Dispose();
-    }
-
     private bool _disposed = false;
     private ServerSideClient _serverSideClient = new();
 

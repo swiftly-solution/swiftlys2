@@ -39,28 +39,83 @@ static char* Bridge_GameEvents_CopyString(const std::string& value, int* size)
     return out;
 }
 
-bool Bridge_GameEvents_GetBool(void* event, const char* key)
+enum GameEventValueKind
 {
-    if (!event) return false;
-    return ((IGameEvent*)event)->GetBool(key);
+    GameEventValueKind_Bool,
+    GameEventValueKind_Int32,
+    GameEventValueKind_UInt64,
+    GameEventValueKind_Float,
+    GameEventValueKind_Ptr,
+    GameEventValueKind_Entity,
+    GameEventValueKind_EntityIndex,
+    GameEventValueKind_PlayerSlot,
+    GameEventValueKind_PlayerController,
+    GameEventValueKind_PlayerPawn,
+    GameEventValueKind_PawnEntityIndex
+};
+
+static void WriteDefaultValue(int kind, void* out)
+{
+    switch (kind)
+    {
+        case GameEventValueKind_Bool: *(bool*)out = false; break;
+        case GameEventValueKind_Int32: *(int32_t*)out = 0; break;
+        case GameEventValueKind_UInt64: *(uint64_t*)out = 0; break;
+        case GameEventValueKind_Float: *(float*)out = 0.0f; break;
+        case GameEventValueKind_Ptr:
+        case GameEventValueKind_Entity:
+        case GameEventValueKind_PlayerController:
+        case GameEventValueKind_PlayerPawn: *(void**)out = nullptr; break;
+        case GameEventValueKind_EntityIndex:
+        case GameEventValueKind_PlayerSlot:
+        case GameEventValueKind_PawnEntityIndex: *(int32_t*)out = -1; break;
+    }
 }
 
-int Bridge_GameEvents_GetInt(void* event, const char* key)
+bool Bridge_GameEvents_GetValue(void* pevent, const char* key, int kind, void* out)
 {
-    if (!event) return 0;
-    return ((IGameEvent*)event)->GetInt(key);
+    WriteDefaultValue(kind, out);
+    if (!pevent) return false;
+
+    IGameEvent* event = (IGameEvent*)pevent;
+    switch (kind)
+    {
+        case GameEventValueKind_Bool: *(bool*)out = event->GetBool(key); break;
+        case GameEventValueKind_Int32: *(int32_t*)out = event->GetInt(key); break;
+        case GameEventValueKind_UInt64: *(uint64_t*)out = event->GetUint64(key); break;
+        case GameEventValueKind_Float: *(float*)out = event->GetFloat(key); break;
+        case GameEventValueKind_Ptr: *(void**)out = event->GetPtr(key); break;
+        case GameEventValueKind_Entity: *(void**)out = event->GetEntity(key); break;
+        case GameEventValueKind_EntityIndex: *(int32_t*)out = event->GetEntityIndex(key).Get(); break;
+        case GameEventValueKind_PlayerSlot: *(int32_t*)out = event->GetPlayerSlot(key).Get(); break;
+        case GameEventValueKind_PlayerController: *(void**)out = event->GetPlayerController(key); break;
+        case GameEventValueKind_PlayerPawn: *(void**)out = event->GetPlayerPawn(key); break;
+        case GameEventValueKind_PawnEntityIndex: *(int32_t*)out = event->GetPawnEntityIndex(key).Get(); break;
+        default: return false;
+    }
+
+    return true;
 }
 
-uint64_t Bridge_GameEvents_GetUint64(void* event, const char* key)
+bool Bridge_GameEvents_SetValue(void* pevent, const char* key, int kind, const void* value)
 {
-    if (!event) return 0;
-    return ((IGameEvent*)event)->GetUint64(key);
-}
+    if (!pevent) return false;
 
-float Bridge_GameEvents_GetFloat(void* event, const char* key)
-{
-    if (!event) return 0.0f;
-    return ((IGameEvent*)event)->GetFloat(key);
+    IGameEvent* event = (IGameEvent*)pevent;
+    switch (kind)
+    {
+        case GameEventValueKind_Bool: event->SetBool(key, *(const bool*)value); break;
+        case GameEventValueKind_Int32: event->SetInt(key, *(const int32_t*)value); break;
+        case GameEventValueKind_UInt64: event->SetUint64(key, *(const uint64_t*)value); break;
+        case GameEventValueKind_Float: event->SetFloat(key, *(const float*)value); break;
+        case GameEventValueKind_Ptr: event->SetPtr(key, *(void* const*)value); break;
+        case GameEventValueKind_Entity: event->SetEntity(key, *(CEntityInstance* const*)value); break;
+        case GameEventValueKind_EntityIndex: event->SetEntity(key, CEntityIndex(*(const int32_t*)value)); break;
+        case GameEventValueKind_PlayerSlot: event->SetPlayer(key, CPlayerSlot(*(const int32_t*)value)); break;
+        default: return false;
+    }
+
+    return true;
 }
 
 char* Bridge_GameEvents_GetString(int* size, void* event, const char* key)
@@ -74,112 +129,10 @@ char* Bridge_GameEvents_GetString(int* size, void* event, const char* key)
     return Bridge_GameEvents_CopyString(s, size);
 }
 
-void* Bridge_GameEvents_GetPtr(void* event, const char* key)
-{
-    if (!event) return nullptr;
-    return ((IGameEvent*)event)->GetPtr(key);
-}
-
-void* Bridge_GameEvents_GetEHandle(void* event, const char* key)
-{
-    if (!event) return nullptr;
-    return ((IGameEvent*)event)->GetEHandle(key).Get();
-}
-
-void* Bridge_GameEvents_GetEntity(void* event, const char* key)
-{
-    if (!event) return nullptr;
-    return ((IGameEvent*)event)->GetEntity(key);
-}
-
-int Bridge_GameEvents_GetEntityIndex(void* event, const char* key)
-{
-    if (!event) return -1;
-    return ((IGameEvent*)event)->GetEntityIndex(key).Get();
-}
-
-int Bridge_GameEvents_GetPlayerSlot(void* event, const char* key)
-{
-    if (!event) return -1;
-    return ((IGameEvent*)event)->GetPlayerSlot(key).Get();
-}
-
-void* Bridge_GameEvents_GetPlayerController(void* event, const char* key)
-{
-    if (!event) return nullptr;
-    return ((IGameEvent*)event)->GetPlayerController(key);
-}
-
-void* Bridge_GameEvents_GetPlayerPawn(void* event, const char* key)
-{
-    if (!event) return nullptr;
-    return ((IGameEvent*)event)->GetPlayerPawn(key);
-}
-
-void* Bridge_GameEvents_GetPawnEHandle(void* event, const char* key)
-{
-    if (!event) return nullptr;
-    return ((IGameEvent*)event)->GetPawnEHandle(key).Get();
-}
-
-int Bridge_GameEvents_GetPawnEntityIndex(void* event, const char* key)
-{
-    if (!event) return -1;
-    return ((IGameEvent*)event)->GetPawnEntityIndex(key).Get();
-}
-
-void Bridge_GameEvents_SetBool(void* event, const char* key, bool value)
-{
-    if (!event) return;
-    ((IGameEvent*)event)->SetBool(key, value);
-}
-
-void Bridge_GameEvents_SetInt(void* event, const char* key, int value)
-{
-    if (!event) return;
-    ((IGameEvent*)event)->SetInt(key, value);
-}
-
-void Bridge_GameEvents_SetUint64(void* event, const char* key, uint64_t value)
-{
-    if (!event) return;
-    ((IGameEvent*)event)->SetUint64(key, value);
-}
-
-void Bridge_GameEvents_SetFloat(void* event, const char* key, float value)
-{
-    if (!event) return;
-    ((IGameEvent*)event)->SetFloat(key, value);
-}
-
 void Bridge_GameEvents_SetString(void* event, const char* key, const char* value)
 {
     if (!event) return;
     ((IGameEvent*)event)->SetString(key, value);
-}
-
-void Bridge_GameEvents_SetPtr(void* event, const char* key, void* value)
-{
-    if (!event) return;
-    ((IGameEvent*)event)->SetPtr(key, value);
-}
-
-void Bridge_GameEvents_SetEntity(void* event, const char* key, void* value)
-{
-    if (!event) return;
-    ((IGameEvent*)event)->SetEntity(key, (CEntityInstance*)value);
-}
-
-void Bridge_GameEvents_SetEntityIndex(void* event, const char* key, int value)
-{
-    if (!event) return;
-    ((IGameEvent*)event)->SetEntity(key, CEntityIndex(value));
-}
-
-void Bridge_GameEvents_SetPlayerSlot(void* event, const char* key, int value)
-{
-    if (!event) return;
-    ((IGameEvent*)event)->SetPlayer(key, CPlayerSlot(value));
 }
 
 bool Bridge_GameEvents_HasKey(void* event, const char* key)
@@ -205,21 +158,26 @@ void Bridge_GameEvents_RegisterListener(const char* eventName)
     g_pGameEventManager->RegisterGameEventListener(eventName);
 }
 
+typedef int (*GameEventCallbackType)(uint32_t hash, void* event, bool* dont_broadcast);
+
+void Bridge_GameEvents_UnregisterListener(const char* eventName)
+{
+    g_pGameEventManager->UnregisterGameEventListener(eventName);
+}
+
 void Bridge_GameEvents_SetListenerPreHandler(void* callback_ptr)
 {
-    g_pGameEventManager->SetGameEventFireHandler([callback_ptr](std::string& event_name, IGameEvent* event, bool& dont_broadcast, uint32_t& hash) -> int
+    g_pGameEventManager->SetGameEventFireHandler([callback_ptr](IGameEvent* event, bool& dont_broadcast, uint32_t hash) -> int
         {
-            typedef int (*CallbackType)(uint32_t hash, void* event, bool* dont_broadcast);
-            return reinterpret_cast<CallbackType>(callback_ptr)(hash, event, &dont_broadcast);
+            return reinterpret_cast<GameEventCallbackType>(callback_ptr)(hash, event, &dont_broadcast);
         });
 }
 
 void Bridge_GameEvents_SetListenerPostHandler(void* callback_ptr)
 {
-    g_pGameEventManager->SetPostGameEventFireHandler([callback_ptr](std::string& event_name, IGameEvent* event, bool& dont_broadcast, uint32_t& hash) -> int
+    g_pGameEventManager->SetPostGameEventFireHandler([callback_ptr](IGameEvent* event, bool& dont_broadcast, uint32_t hash) -> int
         {
-            typedef int (*CallbackType)(uint32_t hash, void* event, bool* dont_broadcast);
-            return reinterpret_cast<CallbackType>(callback_ptr)(hash, event, &dont_broadcast);
+            return reinterpret_cast<GameEventCallbackType>(callback_ptr)(hash, event, &dont_broadcast);
         });
 }
 
@@ -280,33 +238,15 @@ bool Bridge_GameEvents_IsPlayerListeningToEvent(int playerid, void* event)
     return g_pGameEventManager->GetGameEventManager()->FindListener(listener, ((IGameEvent*)event)->GetName());
 }
 
-DEFINE_NATIVE("GameEvents.GetBool", Bridge_GameEvents_GetBool);
-DEFINE_NATIVE("GameEvents.GetInt", Bridge_GameEvents_GetInt);
-DEFINE_NATIVE("GameEvents.GetUint64", Bridge_GameEvents_GetUint64);
-DEFINE_NATIVE("GameEvents.GetFloat", Bridge_GameEvents_GetFloat);
+DEFINE_NATIVE("GameEvents.GetValue", Bridge_GameEvents_GetValue);
+DEFINE_NATIVE("GameEvents.SetValue", Bridge_GameEvents_SetValue);
 DEFINE_NATIVE("GameEvents.GetString", Bridge_GameEvents_GetString);
-DEFINE_NATIVE("GameEvents.GetPtr", Bridge_GameEvents_GetPtr);
-DEFINE_NATIVE("GameEvents.GetEHandle", Bridge_GameEvents_GetEHandle);
-DEFINE_NATIVE("GameEvents.GetEntity", Bridge_GameEvents_GetEntity);
-DEFINE_NATIVE("GameEvents.GetEntityIndex", Bridge_GameEvents_GetEntityIndex);
-DEFINE_NATIVE("GameEvents.GetPlayerSlot", Bridge_GameEvents_GetPlayerSlot);
-DEFINE_NATIVE("GameEvents.GetPlayerController", Bridge_GameEvents_GetPlayerController);
-DEFINE_NATIVE("GameEvents.GetPlayerPawn", Bridge_GameEvents_GetPlayerPawn);
-DEFINE_NATIVE("GameEvents.GetPawnEHandle", Bridge_GameEvents_GetPawnEHandle);
-DEFINE_NATIVE("GameEvents.GetPawnEntityIndex", Bridge_GameEvents_GetPawnEntityIndex);
-DEFINE_NATIVE("GameEvents.SetBool", Bridge_GameEvents_SetBool);
-DEFINE_NATIVE("GameEvents.SetInt", Bridge_GameEvents_SetInt);
-DEFINE_NATIVE("GameEvents.SetUint64", Bridge_GameEvents_SetUint64);
-DEFINE_NATIVE("GameEvents.SetFloat", Bridge_GameEvents_SetFloat);
 DEFINE_NATIVE("GameEvents.SetString", Bridge_GameEvents_SetString);
-DEFINE_NATIVE("GameEvents.SetPtr", Bridge_GameEvents_SetPtr);
-DEFINE_NATIVE("GameEvents.SetEntity", Bridge_GameEvents_SetEntity);
-DEFINE_NATIVE("GameEvents.SetEntityIndex", Bridge_GameEvents_SetEntityIndex);
-DEFINE_NATIVE("GameEvents.SetPlayerSlot", Bridge_GameEvents_SetPlayerSlot);
 DEFINE_NATIVE("GameEvents.HasKey", Bridge_GameEvents_HasKey);
 DEFINE_NATIVE("GameEvents.IsReliable", Bridge_GameEvents_IsReliable);
 DEFINE_NATIVE("GameEvents.IsLocal", Bridge_GameEvents_IsLocal);
 DEFINE_NATIVE("GameEvents.RegisterListener", Bridge_GameEvents_RegisterListener);
+DEFINE_NATIVE("GameEvents.UnregisterListener", Bridge_GameEvents_UnregisterListener);
 DEFINE_NATIVE("GameEvents.SetListenerPreHandler", Bridge_GameEvents_SetListenerPreHandler);
 DEFINE_NATIVE("GameEvents.SetListenerPostHandler", Bridge_GameEvents_SetListenerPostHandler);
 DEFINE_NATIVE("GameEvents.CreateEvent", Bridge_GameEvents_CreateEvent);

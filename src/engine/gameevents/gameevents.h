@@ -23,6 +23,9 @@
 
 #include <api/utils/mutex.h>
 
+#include <set>
+#include <unordered_set>
+
  // WHY THE ACTUAL FUCK YOU NEED THIS TO COMPILE ?????????????
 #include <public/entity2/entitysystem.h>
 
@@ -32,17 +35,28 @@ public:
     virtual void Initialize() override;
     virtual void Shutdown() override;
 
-    virtual void RegisterGameEventsListeners(bool shouldRegister) override;
-    virtual void RegisterGameEventListener(std::string event_name) override;
+    virtual void OnServerStartup() override;
 
-    virtual void SetGameEventFireHandler(std::function<int(std::string&, IGameEvent*, bool&, uint32_t&)> handler) override;
-    virtual void SetPostGameEventFireHandler(std::function<int(std::string&, IGameEvent*, bool&, uint32_t&)> handler) override;
+    virtual void RegisterGameEventListener(std::string event_name) override;
+    virtual void UnregisterGameEventListener(std::string event_name) override;
+    virtual bool IsEventRegistered(uint32_t event_hash) override;
+
+    virtual void SetGameEventFireHandler(GameEventFireHandler handler) override;
+    virtual void SetPostGameEventFireHandler(GameEventFireHandler handler) override;
 
     virtual IGameEventManager2* GetGameEventManager() override;
 
     virtual void FireGameEvent(IGameEvent* event) override;
 private:
+    void QueueListener(const std::string& event_name);
+    void AddEngineListener(const std::string& event_name);
+
     QueueMutex m_mtxLock;
+    std::set<std::string> m_pendingListeners;
+    bool m_bListenersReady = false;
+
+    QueueMutex m_mtxRegisteredEvents;
+    std::unordered_set<uint32_t> m_registeredEvents;
 };
 
 #endif

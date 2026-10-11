@@ -3,6 +3,7 @@ using SwiftlyS2.Core.Services;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Shared.Players;
 using SwiftlyS2.Shared.SchemaDefinitions;
+using SwiftlyS2.Shared.Trace;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
@@ -42,9 +43,11 @@ internal partial class CBasePlayerPawnImpl : CBasePlayerPawn
                 fwd.Z * 8192f
             );
 
-            var trace = new CGameTrace();
-            TraceManager.SimpleTrace(start, end, RayType_t.RAY_TYPE_LINE, RnQueryObjectSet.All, MaskTrace.Sky, MaskTrace.Empty, MaskTrace.Empty, CollisionGroup.Always, ref trace, Address, nint.Zero);
-            return trace.Distance;
+            var trace = TraceParams.Builder().WithLineRay(Vector.Zero).WithObjectQuery(RnQueryObjectSet.All)
+                            .WithInteraction(MaskTrace.Sky, MaskTrace.Empty, MaskTrace.Empty).WithCollisionGroup(CollisionGroup.Always)
+                            .IgnoreEntity(this).Build();
+            var result = TraceManager.TraceShape(start, end, trace);
+            return result.Distance;
         }
     }
 
@@ -78,30 +81,25 @@ internal partial class CBasePlayerPawnImpl : CBasePlayerPawn
             return false;
         }
 
-        var playerPawn = this as CCSPlayerPawn;
-        if (playerPawn == null) return false;
+        if (this is not CCSPlayerPawn playerPawn) return false;
+        var originalControllerHandle = playerPawn.OriginalController;
+        if (!originalControllerHandle.IsValid) return false;
+        var originalController = originalControllerHandle.Value!;
+        if(!originalController.IsValid) return false;
 
-        if (!(playerPawn.OriginalController.Value?.IsValid ?? false))
-        {
-            return false;
-        }
+        var trace = TraceParams.Builder().WithHullRay(Vector.Zero, Vector.Zero).WithObjectQuery(RnQueryObjectSet.All)
+                        .WithInteraction(MaskTrace.Player, MaskTrace.Trigger, MaskTrace.Empty).WithCollisionGroup(CollisionGroup.Always)
+                        .IgnoreEntity(this).Build();
+        var result = TraceManager.TraceShape(this.EyePosition!.Value, targetPlayer.EyePosition!.Value, trace);
+        if (!result.HitPlayer(out var player) || player?.PlayerPawn?.Index != targetPlayer.Index) return false;
 
-        var trace = new CGameTrace();
-        TraceManager.SimpleTrace(this.EyePosition!.Value, targetPlayer.EyePosition!.Value, RayType_t.RAY_TYPE_HULL, RnQueryObjectSet.All, MaskTrace.Player, MaskTrace.Trigger, MaskTrace.Empty, CollisionGroup.Always, ref trace, Address, nint.Zero);
-        if (!trace.HitPlayer(out var player) || player?.PlayerPawn?.Index != targetPlayer.Index)
-        {
-            return false;
-        }
-
-        var desiredFov = playerPawn.OriginalController.Value.DesiredFOV;
+        var desiredFov = originalController.DesiredFOV;
         var halfFov = fieldOfViewDegrees ?? (desiredFov <= 0f ? 52f : desiredFov / 2f);
 
-        // Calculate the angle between the player's view direction and the direction to the target
         playerPawn.EyeAngles.ToDirectionVectors(out var playerForward, out var _, out var _);
         var directionToTarget = targetPlayer.EyePosition!.Value - this.EyePosition!.Value;
         directionToTarget.Normalize();
 
-        // Calculate the angle using the dot product to avoid coordinate system issues
         var dotProduct = Math.Clamp(playerForward.Dot(directionToTarget), -1f, 1f);
         var angleInDegrees = Math.Acos(dotProduct) * (180f / Math.PI);
 

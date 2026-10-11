@@ -22,11 +22,23 @@
 #include <cstdint>
 #include <functional>
 
+enum NetMessageHookType : int
+{
+    NetMessageHook_Server = 0,
+    NetMessageHook_Client = 1,
+    NetMessageHook_ServerInternal = 2,
+    NetMessageHook_Count
+};
+
 class INetMessages
 {
 public:
     virtual void Initialize() = 0;
     virtual void Shutdown() = 0;
+
+    virtual void RegisterMessageHook(NetMessageHookType type, int messageid) = 0;
+    virtual void UnregisterMessageHook(NetMessageHookType type, int messageid) = 0;
+    virtual bool IsMessageRegistered(NetMessageHookType type, int messageid) = 0;
 
     // playermask_ptr, netmessageid, pmsg, return HookResult int
     virtual void SetServerMessageSendHandler(std::function<int(uint64_t*, int, void*)> handler) = 0;

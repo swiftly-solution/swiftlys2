@@ -9,7 +9,10 @@
         "default": "mysql://root:@localhost:3306/swiftlys2",
         "postgres_uri": "postgresql://postgres:@localhost:5432/swiftlys2",
         "local": "sqlite://swiftlys2-local.db",
-        // Object format example (supports additional options like timeout, charset)
+        // Object format example
+        // "options" takes the connection string keywords of the driver (MySqlConnector, Npgsql and System.Data.SQLite),
+        // values can be strings, numbers or booleans. They are applied after the other fields, so they can override them.
+        // A keyword or a value that the driver doesn't know is an error when the connection is requested.
         "mysql_detailed": {
             "driver": "mysql",
             "host": "localhost",
@@ -18,7 +21,12 @@
             "pass": "",
             "port": 3306,
             "timeout": 30,
-            "charset": "utf8mb4"
+            "options": {
+                "SslMode": "Preferred",
+                "CharacterSet": "utf8mb4",
+                "MaximumPoolSize": 50,
+                "DefaultCommandTimeout": 60
+            }
         },
         "postgres_detailed": {
             "driver": "postgresql",
@@ -27,7 +35,23 @@
             "user": "postgres",
             "pass": "",
             "port": 5432,
-            "timeout": 30
+            "timeout": 30,
+            "options": {
+                "SSL Mode": "Prefer",
+                "Maximum Pool Size": 50,
+                "Command Timeout": 60,
+                "Search Path": "public"
+            }
+        },
+        "sqlite_detailed": {
+            "driver": "sqlite",
+            "database": "data/swiftlys2-detailed.db",
+            "options": {
+                "Journal Mode": "Wal",
+                "Foreign Keys": true,
+                "Cache Size": 4000,
+                "Default Timeout": 30
+            }
         }
     }
 }

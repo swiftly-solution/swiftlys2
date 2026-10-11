@@ -1,3 +1,4 @@
+using System.Collections.Frozen;
 using Microsoft.Extensions.Configuration;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.Services;
@@ -65,7 +66,16 @@ internal class DatabaseConnectionManager
         var timeout = uint.TryParse(section["timeout"], out var t) ? t : 0u;
         var port = ushort.TryParse(section["port"], out var p) ? p : (ushort)0;
 
-        return new DatabaseConnectionInfo(driver, host, database, user, pass, timeout, port, "");
+        return new DatabaseConnectionInfo(driver, host, database, user, pass, timeout, port, "") {
+            Options = ParseOptions(section.GetSection("options"))
+        };
+    }
+
+    private static FrozenDictionary<string, string> ParseOptions( IConfigurationSection section )
+    {
+        return section.GetChildren()
+            .Where(option => option.Value is not null)
+            .ToFrozenDictionary(option => option.Key, option => option.Value!, StringComparer.OrdinalIgnoreCase);
     }
 
     private static ushort GetDefaultPort( string driver ) => driver switch

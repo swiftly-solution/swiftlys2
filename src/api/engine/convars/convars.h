@@ -37,26 +37,29 @@ public:
     virtual void Initialize() = 0;
     virtual void Shutdown() = 0;
 
-    virtual void QueryClientConvar(int playerid, std::string cvar_name) = 0;
+    virtual void QueryClientConvar(int playerid, const std::string& cvar_name) = 0;
     virtual int AddQueryClientCvarCallback(std::function<void(int, std::string, std::string)> callback) = 0;
     virtual void RemoveQueryClientCvarCallback(int callback_id) = 0;
-    virtual void OnClientQueryCvar(int playerid, std::string cvar_name, std::string cvar_value) = 0;
+    virtual void OnClientQueryCvar(int playerid, const std::string& cvar_name, const std::string& cvar_value) = 0;
+    virtual void OnConvarChanged(ConVarRefAbstract* ref, CSplitScreenSlot slot, const char* new_value, const char* old_value) = 0;
 
-    virtual void CreateConvar(std::string cvar_name, EConVarType type, uint64_t flags, const char* help_message, ConvarValue defaultValue, std::optional<ConvarValue> minValue = std::nullopt, std::optional<ConvarValue> maxValue = std::nullopt) = 0;
-    virtual void DeleteConvar(std::string cvar_name) = 0;
-    virtual bool ExistsConvar(std::string cvar_name) = 0;
-    virtual EConVarType GetConvarType(std::string cvar_name) = 0;
+    virtual void CreateConvar(const std::string& cvar_name, EConVarType type, uint64_t flags, const char* help_message, const ConvarValue& defaultValue, const std::optional<ConvarValue>& minValue = std::nullopt, const std::optional<ConvarValue>& maxValue = std::nullopt) = 0;
+    virtual void DeleteConvar(const std::string& cvar_name) = 0;
+    virtual bool ExistsConvar(const std::string& cvar_name) = 0;
+    virtual EConVarType GetConvarType(const std::string& cvar_name) = 0;
 
-    virtual void* GetConvarDataAddress(std::string cvar_name) = 0;
-    virtual ConvarValue GetConvarValue(std::string cvar_name) = 0;
+    virtual ConVarRefAbstract& GetConvarRef(const char* cvar_name) = 0;
 
-    virtual void SetConvarValue(std::string cvar_name, ConvarValue value) = 0;
+    virtual void* GetConvarDataAddress(const std::string& cvar_name) = 0;
+    virtual ConvarValue GetConvarValue(const std::string& cvar_name) = 0;
+
+    virtual void SetConvarValue(const std::string& cvar_name, const ConvarValue& value) = 0;
     virtual void SetClientConvar(int playerid, const std::string& cvar_name, const std::string& value) = 0;
 
-    virtual void AddFlags(std::string cvar_name, uint64_t flags) = 0;
-    virtual void RemoveFlags(std::string cvar_name, uint64_t flags) = 0;
-    virtual void ClearFlags(std::string cvar_name) = 0;
-    virtual uint64_t GetFlags(std::string cvar_name) = 0;
+    virtual void AddFlags(const std::string& cvar_name, uint64_t flags) = 0;
+    virtual void RemoveFlags(const std::string& cvar_name, uint64_t flags) = 0;
+    virtual void ClearFlags(const std::string& cvar_name) = 0;
+    virtual uint64_t GetFlags(const std::string& cvar_name) = 0;
 
     virtual uint64_t AddGlobalChangeListener(std::function<void(const char*, int, const char*, const char*)> callback) = 0;
     virtual void RemoveGlobalChangeListener(uint64_t callback_id) = 0;

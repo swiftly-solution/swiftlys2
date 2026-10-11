@@ -1,4 +1,6 @@
+using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
 using System.Data.SQLite;
 using System.Collections.Concurrent;
 using Microsoft.Extensions.Logging;
@@ -52,62 +54,108 @@ internal class DatabaseService : IDatabaseService
 
     private static Func<IDbConnection> CreateConnectionFactory(DatabaseConnectionInfo info)
     {
-        var (driver, host, database, user, pass, timeout, port, _) = info;
-
-        return driver switch
+        return info.Driver switch
         {
-            "sqlite" => CreateSqliteFactory(database),
-            "mysql" => CreateMySqlFactory(host, port, database, user, pass, timeout),
-            "postgresql" => CreatePostgresFactory(host, port, database, user, pass, timeout),
-            _ => throw new NotSupportedException($"Unsupported database driver: {driver}")
+            "sqlite" => CreateSqliteFactory(info),
+            "mysql" => CreateMySqlFactory(info),
+            "postgresql" => CreatePostgresFactory(info),
+            _ => throw new NotSupportedException($"Unsupported database driver: {info.Driver}")
         };
     }
 
-    private static Func<IDbConnection> CreateSqliteFactory(string database)
+    private static Func<IDbConnection> CreateSqliteFactory(DatabaseConnectionInfo info)
     {
-        var connStr = $"Data Source={database}";
+        var builder = new SQLiteConnectionStringBuilder
+        {
+            DataSource = info.Database
+        };
+
+        ApplyOptions(builder, info);
+
+        var connStr = builder.ConnectionString;
         return () => new SQLiteConnection(connStr);
     }
 
-    private static Func<IDbConnection> CreateMySqlFactory(string host, ushort port, string database, string user, string pass, uint timeout)
+    private static Func<IDbConnection> CreateMySqlFactory(DatabaseConnectionInfo info)
     {
         var builder = new MySqlConnectionStringBuilder
         {
-            Server = host,
-            Port = port > 0 ? port : 3306u,
-            Database = database,
-            UserID = user,
-            Password = pass
+            Server = info.Host,
+            Port = info.Port > 0 ? info.Port : 3306u,
+            Database = info.Database,
+            UserID = info.User,
+            Password = info.Pass
         };
 
-        if (timeout > 0)
+        if (info.Timeout > 0)
         {
-            builder.ConnectionTimeout = timeout;
+            builder.ConnectionTimeout = info.Timeout;
         }
+
+        ApplyOptions(builder, info);
 
         var connStr = builder.ConnectionString;
         return () => new MySqlConnection(connStr);
     }
 
-    private static Func<IDbConnection> CreatePostgresFactory(string host, ushort port, string database, string user, string pass, uint timeout)
+    private static Func<IDbConnection> CreatePostgresFactory(DatabaseConnectionInfo info)
     {
         var builder = new NpgsqlConnectionStringBuilder
         {
-            Host = host,
-            Port = port > 0 ? port : 5432,
-            Database = database,
-            Username = user,
-            Password = pass
+            Host = info.Host,
+            Port = info.Port > 0 ? info.Port : 5432,
+            Database = info.Database,
+            Username = info.User,
+            Password = info.Pass
         };
 
-        if (timeout > 0)
+        if (info.Timeout > 0)
         {
-            builder.Timeout = (int)timeout;
+            builder.Timeout = (int)info.Timeout;
         }
+
+        ApplyOptions(builder, info);
 
         var connStr = builder.ConnectionString;
         return () => new NpgsqlConnection(connStr);
     }
+
+    private static void ApplyOptions(DbConnectionStringBuilder builder, DatabaseConnectionInfo info)
+    {
+        foreach (var (key, value) in info.Options)
+        {
+            try
+            {
+                builder[ResolveKeyword(builder, key)] = value;
+                _ = builder.ConnectionString;
+            }
+            catch (ArgumentException e)
+            {
+                throw new ArgumentException($"Invalid option '{key}' = '{value}' for the {info.Driver} driver: {e.Message}", e);
+            }
+        }
+    }
+
+    private static string ResolveKeyword(DbConnectionStringBuilder builder, string key)
+    {
+        if (builder is not SQLiteConnectionStringBuilder)
+        {
+            return key;
+        }
+
+        var wanted = NormalizeKeyword(key);
+        foreach (PropertyDescriptor property in TypeDescriptor.GetProperties(builder))
+        {
+            if (property.IsBrowsable && (NormalizeKeyword(property.DisplayName) == wanted || NormalizeKeyword(property.Name) == wanted))
+            {
+                return property.DisplayName;
+            }
+        }
+
+        throw new ArgumentException($"Option '{key}' not supported.");
+    }
+
+    private static string NormalizeKeyword(string keyword) => keyword.Replace(" ", "").Replace("_", "").ToLowerInvariant();
 
     public string GetConnectionString(string connectionName)
     {

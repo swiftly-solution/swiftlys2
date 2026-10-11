@@ -11,6 +11,7 @@ using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Shared.Plugins;
 using SwiftlyS2.Shared.SchemaDefinitions;
+using SwiftlyS2.Shared.Schemas;
 using SwiftlyS2.Shared.ProtobufDefinitions;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -824,6 +825,27 @@ public class TestPlugin : BasePlugin
     public void TestCommand6( ICommandContext _ )
     {
         Console.WriteLine("TestPlugin TestCommand6");
+    }
+
+    [Command("utlvectorschema")]
+    public void TestUtlVectorSchemaClass( ICommandContext context )
+    {
+        const int count = 4;
+
+        var buffer = Marshal.AllocHGlobal(count * SchemaInfo.Get<CDamageRecord>());
+        var vector = new CUtlVector<CDamageRecord>(buffer, count, count);
+        var missing = 0;
+
+        for (var round = 0; round < 20000; round++)
+        {
+            foreach (var record in vector)
+            {
+                if (record == null) missing++;
+            }
+        }
+
+        Marshal.FreeHGlobal(buffer);
+        context.Reply($"CUtlVector<CDamageRecord>: {missing} null elements");
     }
 
     [Command("tt99")]

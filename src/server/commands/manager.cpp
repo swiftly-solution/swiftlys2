@@ -22,19 +22,9 @@
 
 #include <api/shared/string.h>
 
+#include <algorithm>
 #include <cstdio>
 #include <public/icvar.h>
-
-std::map<std::string, ConCommand*> conCommandCreated;
-std::map<uint64_t, std::string> conCommandMapping;
-
-std::function<void(std::string, int, std::vector<std::string>, std::string, std::string, bool)> commandHandler;
-
-std::function<int(int, const std::string&)> clientCommandHandler;
-std::function<int(int, const std::string&, bool)> clientChatHandler;
-
-std::set<std::string> commandPrefixes;
-std::set<std::string> silentCommandPrefixes;
 
 void DispatchConCommand(void* thisPtr, ConCommandRef cmd, const CCommandContext& ctx, const CCommand& args);
 IVFunctionHook* dispatchConCommandHook = nullptr;
@@ -44,27 +34,7 @@ IVFunctionHook* clientCommandHook2 = nullptr;
 
 void CommandsCallback(const CCommandContext& context, const CCommand& args)
 {
-    CCommand tokenizedArgs;
-    tokenizedArgs.Tokenize(args.GetCommandString());
-
-    std::string commandName = tokenizedArgs[0];
-
-    std::transform(commandName.begin(), commandName.end(), commandName.begin(), ::tolower);
-    std::string originalCommandName = commandName;
-    if (!conCommandCreated.contains(commandName))
-    {
-        commandName = "sw_" + commandName;
-    }
-    if (!conCommandCreated.contains(commandName))
-    {
-        return;
-    }
-
-    std::vector<std::string> argsplit = TokenizeCommand(args.GetCommandString());
-    argsplit.erase(argsplit.begin());
-
-    if (commandHandler)
-        commandHandler(commandName, context.GetPlayerSlot().Get(), argsplit, originalCommandName, "sw_", true);
+    g_pServerCommands->HandleRegisteredCommand(context.GetPlayerSlot().Get(), args.GetCommandString());
 }
 
 void CServerCommands::Initialize()
@@ -101,264 +71,227 @@ void CServerCommands::Shutdown()
     }
 }
 
+static const std::string* FindPrefix(const std::set<std::string>& prefixes, const std::string& text)
+{
+    for (const auto& prefix : prefixes)
+    {
+        if (text.starts_with(prefix))
+            return &prefix;
+    }
+
+    return nullptr;
+}
+
+void CServerCommands::LoadPrefixes()
+{
+    if (m_prefixesLoaded) return;
+    m_prefixesLoaded = true;
+
+    m_commandPrefixes = explodeToSet(std::get<std::string>(g_pConfiguration->GetValue("core.CommandPrefixes")), " ");
+    m_silentCommandPrefixes = explodeToSet(std::get<std::string>(g_pConfiguration->GetValue("core.CommandSilentPrefixes")), " ");
+}
+
+bool CServerCommands::ResolveCommandName(std::string& commandName)
+{
+    if (m_commands.contains(commandName))
+        return true;
+
+    std::string prefixedName = "sw_" + commandName;
+    if (!m_commands.contains(prefixedName))
+        return false;
+
+    commandName = std::move(prefixedName);
+    return true;
+}
+
 // @returns 1 - command is not silent
 // @returns 2 - command is silent
 // @returns -1 - invalid controller
 // @returns 0 - is not command
 int CServerCommands::HandleCommand(int playerid, const std::string& text, bool dryrun)
 {
-    if (text == "" || text.size() == 0)
+    if (text.empty())
     {
         return -1;
     }
 
-    IPlayer* player = g_pPlayerManager->GetPlayer(playerid);
-    if (player == nullptr)
+    if (g_pPlayerManager->GetPlayer(playerid) == nullptr)
     {
         return -1;
     }
 
-    if (commandPrefixes.size() == 0)
-    {
-        commandPrefixes = explodeToSet(std::get<std::string>(g_pConfiguration->GetValue("core.CommandPrefixes")), " ");
-    }
+    LoadPrefixes();
 
-    if (silentCommandPrefixes.size() == 0)
-    {
-        silentCommandPrefixes = explodeToSet(std::get<std::string>(g_pConfiguration->GetValue("core.CommandSilentPrefixes")), " ");
-    }
-
-    bool isCommand = false;
     bool isSilentCommand = false;
-    std::string selectedPrefix = "";
-
-    if (commandPrefixes.size() > 0)
+    const std::string* selectedPrefix = FindPrefix(m_commandPrefixes, text);
+    if (!selectedPrefix)
     {
-        for (auto it = commandPrefixes.begin(); it != commandPrefixes.end(); ++it)
-        {
-            std::string prefix = *it;
-            auto strPrefix = text.substr(0, prefix.size());
-
-            if (prefix == strPrefix)
-            {
-                isCommand = true;
-                selectedPrefix = prefix;
-                break;
-            }
-        }
+        selectedPrefix = FindPrefix(m_silentCommandPrefixes, text);
+        isSilentCommand = selectedPrefix != nullptr;
     }
 
-    if (!isCommand && silentCommandPrefixes.size() > 0)
-    {
-        for (auto it = silentCommandPrefixes.begin(); it != silentCommandPrefixes.end(); ++it)
-        {
-            std::string prefix = *it;
-            auto strPrefix = text.substr(0, prefix.size());
-
-            if (prefix == strPrefix)
-            {
-                isSilentCommand = true;
-                selectedPrefix = prefix;
-                break;
-            }
-        }
-    }
-
-    if (isCommand || isSilentCommand)
-    {
-        CCommand tokenizedArgs;
-        tokenizedArgs.Tokenize(text.c_str());
-
-        std::vector<std::string> cmdString = TokenizeCommand(text);
-        cmdString.erase(cmdString.begin());
-
-        if (tokenizedArgs.ArgC() < 1)
-        {
-            return 0;
-        }
-
-        std::string commandName = tokenizedArgs[0];
-        if (commandName.size() < 1)
-        {
-            return 0;
-        }
-
-        commandName.erase(0, selectedPrefix.size());
-
-        std::transform(commandName.begin(), commandName.end(), commandName.begin(), ::tolower);
-        std::string originalCommandName = commandName;
-
-        if (!conCommandCreated.contains(commandName))
-        {
-            commandName = "sw_" + commandName;
-        }
-
-        if (!conCommandCreated.contains(commandName))
-        {
-            return 0;
-        }
-
-        if (!dryrun && commandHandler)
-            commandHandler(commandName, playerid, cmdString, originalCommandName, selectedPrefix, isSilentCommand);
-    }
-
-    if (isCommand)
-    {
-        return 1;
-    }
-    else if (isSilentCommand)
-    {
-        return 2;
-    }
-    else
+    if (!selectedPrefix)
     {
         return 0;
     }
-}
 
-bool CServerCommands::HandleClientCommand(int playerid, const std::string& text)
-{
-    bool stopOriginal = false;
-    if (clientCommandHandler)
+    std::vector<std::string> args = TokenizeCommand(text);
+    if (args.empty())
     {
-        auto res = clientCommandHandler(playerid, text);
-        if (res == 1)
+        return 0;
+    }
+
+    std::string originalCommandName = str_tolower(args[0].substr(
+        (((selectedPrefix->size()) < (args[0].size())) ? (selectedPrefix->size()) : (args[0].size()))
+    ));
+    std::string commandName = originalCommandName;
+    args.erase(args.begin());
+
+    {
+        QueueLockGuard lock(m_mtxCommands);
+        if (!ResolveCommandName(commandName))
         {
-            return false;
-        }
-        else if (res == 3)
-        {
-            stopOriginal = true;
+            return 0;
         }
     }
 
-    if (stopOriginal) return false;
-    return true;
+    if (!dryrun && m_commandHandler)
+        m_commandHandler(commandName, playerid, args, originalCommandName, *selectedPrefix, isSilentCommand);
+
+    return isSilentCommand ? 2 : 1;
+}
+
+void CServerCommands::HandleRegisteredCommand(int playerid, const char* commandLine)
+{
+    std::vector<std::string> args = TokenizeCommand(commandLine);
+    if (args.empty() || !m_commandHandler)
+    {
+        return;
+    }
+
+    std::string originalCommandName = str_tolower(args[0]);
+    std::string commandName = originalCommandName;
+    args.erase(args.begin());
+
+    {
+        QueueLockGuard lock(m_mtxCommands);
+        if (!ResolveCommandName(commandName))
+        {
+            return;
+        }
+    }
+
+    m_commandHandler(commandName, playerid, args, originalCommandName, "sw_", true);
+}
+
+bool CServerCommands::HandleClientCommand(int playerid, const char* text)
+{
+    if (!m_clientCommandHandler) return true;
+
+    auto res = m_clientCommandHandler(playerid, text);
+    return res != 1 && res != 3;
 }
 
 bool CServerCommands::HandleClientChat(int playerid, const std::string& text, bool teamonly)
 {
-    bool stopOriginal = false;
-    if (clientChatHandler)
-    {
-        auto res = clientChatHandler(playerid, text, teamonly);
-        if (res == 1)
-        {
-            return false;
-        }
-        else if (res == 3)
-        {
-            stopOriginal = true;
-        }
-    }
+    if (!m_clientChatHandler) return true;
 
-    if (stopOriginal) return false;
-    return true;
+    auto res = m_clientChatHandler(playerid, text, teamonly);
+    return res != 1 && res != 3;
 }
 
 uint64_t CServerCommands::RegisterCommand(std::string commandName, bool registerRaw, std::string helpText)
 {
-    std::transform(commandName.begin(), commandName.end(), commandName.begin(), ::tolower);
+    commandName = str_tolower(commandName);
 
+    QueueLockGuard lock(m_mtxCommands);
     if (!registerRaw)
     {
-        if (conCommandCreated.contains(commandName))
+        if (m_commands.contains(commandName))
         {
             return 0;
         }
-        commandName = "sw_" + commandName;
+
+        commandName.insert(0, "sw_");
     }
 
-    static uint64_t commandId = 0;
-    if (!conCommandCreated.contains(commandName))
+    if (m_commands.contains(commandName))
     {
-        conCommandCreated[commandName] = new ConCommand(commandName.c_str(), CommandsCallback, strdup(helpText.c_str()), FCVAR_CLIENT_CAN_EXECUTE | FCVAR_LINKED_CONCOMMAND);
-        conCommandMapping[++commandId] = commandName;
-        conCommandCreated[commandName]->RemoveFlags(FCVAR_SERVER_CAN_EXECUTE);
+        return 0;
     }
-    return commandId;
+
+    auto* conCommand = new ConCommand(commandName.c_str(), CommandsCallback, strdup(helpText.c_str()), FCVAR_CLIENT_CAN_EXECUTE | FCVAR_LINKED_CONCOMMAND);
+    conCommand->RemoveFlags(FCVAR_SERVER_CAN_EXECUTE);
+
+    m_commands[commandName] = conCommand;
+    m_commandNames[++m_lastCommandId] = commandName;
+    return m_lastCommandId;
 }
 
-void CServerCommands::SetCommandHandler(std::function<void(std::string, int, std::vector<std::string>, std::string, std::string, bool)> handler)
+void CServerCommands::SetCommandHandler(CommandHandler handler)
 {
-    commandHandler = handler;
+    m_commandHandler = std::move(handler);
 }
 
 void CServerCommands::UnregisterCommand(uint64_t commandId)
 {
-    if (commandId == 0)
+    QueueLockGuard lock(m_mtxCommands);
+
+    auto nameIt = m_commandNames.find(commandId);
+    if (nameIt == m_commandNames.end())
     {
         return;
     }
 
-    auto mappingIt = conCommandMapping.find(commandId);
-    if (mappingIt == conCommandMapping.end())
+    auto commandIt = m_commands.find(nameIt->second);
+    if (commandIt != m_commands.end())
     {
-        return;
+        delete commandIt->second;
+        m_commands.erase(commandIt);
     }
 
-    const std::string& commandName = mappingIt->second;
-    auto createdIt = conCommandCreated.find(commandName);
-
-    ConCommand* conCommand = nullptr;
-    if (createdIt != conCommandCreated.end())
-    {
-        conCommand = createdIt->second;
-    }
-
-    conCommandMapping.erase(mappingIt);
-    if (createdIt != conCommandCreated.end())
-    {
-        conCommandCreated.erase(createdIt);
-    }
-
-    delete conCommand;
+    m_commandNames.erase(nameIt);
 }
 
 bool CServerCommands::IsCommandRegistered(std::string commandName)
 {
-    std::transform(commandName.begin(), commandName.end(), commandName.begin(), ::tolower);
-    if (conCommandCreated.contains(commandName))
-    {
-        return true;
-    }
+    commandName = str_tolower(commandName);
 
-    commandName = "sw_" + commandName;
-    if (conCommandCreated.contains(commandName))
-    {
-        return true;
-    }
-
-    return false;
+    QueueLockGuard lock(m_mtxCommands);
+    return ResolveCommandName(commandName);
 }
 
 uint64_t CServerCommands::RegisterAlias(std::string aliasCommand, std::string commandName, bool registerRaw)
 {
-    std::transform(commandName.begin(), commandName.end(), commandName.begin(), ::tolower);
-    if (!conCommandCreated.contains(commandName))
+    std::string helpText;
     {
-        commandName = "sw_" + commandName;
-        if (!conCommandCreated.contains(commandName))
+        QueueLockGuard lock(m_mtxCommands);
+
+        commandName = str_tolower(commandName);
+        if (!ResolveCommandName(commandName))
         {
             return 0;
         }
+
+        helpText = m_commands[commandName]->GetHelpText();
     }
-    return RegisterCommand(aliasCommand, registerRaw, conCommandCreated[commandName]->GetHelpText());
+
+    return RegisterCommand(aliasCommand, registerRaw, helpText);
 }
 
 void CServerCommands::UnregisterAlias(uint64_t aliasId)
 {
-    return UnregisterCommand(aliasId);
+    UnregisterCommand(aliasId);
 }
 
-void CServerCommands::SetClientCommandHandler(std::function<int(int, const std::string&)> handler)
+void CServerCommands::SetClientCommandHandler(ClientCommandHandler handler)
 {
-    clientCommandHandler = handler;
+    m_clientCommandHandler = std::move(handler);
 }
 
-void CServerCommands::SetClientChatHandler(std::function<int(int, const std::string&, bool)> handler)
+void CServerCommands::SetClientChatHandler(ClientChatHandler handler)
 {
-    clientChatHandler = handler;
+    m_clientChatHandler = std::move(handler);
 }
 
 void ClientCommandHook2(void* thisPtr, CPlayerSlot slot, const CCommand& args)
@@ -368,6 +301,33 @@ void ClientCommandHook2(void* thisPtr, CPlayerSlot slot, const CCommand& args)
         return;
     }
     return reinterpret_cast<decltype(&ClientCommandHook2)>(clientCommandHook2->GetOriginal())(thisPtr, slot, args);
+}
+
+static std::string GetChatText(const CCommand& args)
+{
+    std::string rawCmd = args.GetCommandString();
+
+    size_t textStart;
+    if (!rawCmd.empty() && rawCmd[0] == '"')
+    {
+        size_t closeQuote = rawCmd.find('"', 1);
+        textStart = (closeQuote != std::string::npos) ? closeQuote + 1 : rawCmd.size();
+    }
+    else
+    {
+        textStart = strlen(args.Arg(0));
+    }
+
+    while (textStart < rawCmd.size() && rawCmd[textStart] == ' ')
+        textStart++;
+
+    std::string text = rawCmd.substr(textStart);
+    if (!text.empty() && text.front() == '"')
+        text.erase(0, 1);
+    if (!text.empty() && text.back() == '"')
+        text.pop_back();
+
+    return text;
 }
 
 void DispatchConCommand(void* thisPtr, ConCommandRef cmd, const CCommandContext& ctx, const CCommand& args)
@@ -384,38 +344,15 @@ void DispatchConCommand(void* thisPtr, ConCommandRef cmd, const CCommandContext&
             return;
         }
 
-        std::string command = args.Arg(0);
-        std::string command_lower = str_tolower(command);
-        if (command_lower == "say" || command_lower == "say_team")
+        std::string command = str_tolower(args.Arg(0));
+        if (command == "say" || command == "say_team")
         {
-            auto player = g_pPlayerManager->GetPlayer(slot.Get());
-            if (!player)
+            if (!g_pPlayerManager->GetPlayer(slot.Get()))
             {
                 return;
             }
 
-            void* controller = player->GetController();
-            bool teamonly = (command_lower == "say_team");
-            std::string rawCmd = args.GetCommandString();
-            int cmdEnd;
-            if (!rawCmd.empty() && rawCmd[0] == '"')
-            {
-                int closeQuote = rawCmd.find('"', 1);
-                cmdEnd = (closeQuote != std::string::npos) ? closeQuote + 1 : rawCmd.size();
-            }
-            else
-            {
-                cmdEnd = strlen(args.Arg(0));
-            }
-            while (cmdEnd < rawCmd.size() && rawCmd[cmdEnd] == ' ')
-                cmdEnd++;
-
-            std::string text = rawCmd.substr(cmdEnd);
-            if (!text.empty() && text.front() == '"')
-                text.erase(0, 1);
-            if (!text.empty() && text.back() == '"')
-                text.pop_back();
-
+            std::string text = GetChatText(args);
             if (text.empty())
             {
                 return;
@@ -424,7 +361,7 @@ void DispatchConCommand(void* thisPtr, ConCommandRef cmd, const CCommandContext&
             gameText = text;
             shouldSend = (g_pServerCommands->HandleCommand(slot.Get(), text, true) != 2);
 
-            if (shouldSend && !g_pServerCommands->HandleClientChat(slot.Get(), text, teamonly))
+            if (shouldSend && !g_pServerCommands->HandleClientChat(slot.Get(), text, command == "say_team"))
             {
                 shouldSend = false;
             }

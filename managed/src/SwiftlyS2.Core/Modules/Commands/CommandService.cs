@@ -6,7 +6,6 @@ using SwiftlyS2.Core.Models;
 using SwiftlyS2.Shared.Players;
 using SwiftlyS2.Shared.Commands;
 using SwiftlyS2.Shared.Profiler;
-using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Shared.Permissions;
 
 namespace SwiftlyS2.Core.Commands;
@@ -23,11 +22,7 @@ internal class CommandService : ICommandService, IDisposable
     private readonly List<CommandCallbackBase> commandCallbacks = [];
     private readonly List<ulong> commandAliases = [];
     private readonly List<string> commandAliasNames = [];
-    private static readonly Dictionary<string, List<CommandCallbackBase>> commandsByPlugin = [];
-    private static readonly Dictionary<string, string> aliasToOriginal = [];
     private readonly Lock commandLock = new();
-
-    private static readonly Lock dispatchLock = new();
 
     public CommandService( ILoggerFactory loggerFactory, IContextedProfilerService profiler, IPlayerManagerService playerManagerService, IPermissionManager permissionManager, IOptionsMonitor<CommandOverrideConfig> commandOverrideOptions, CoreContext coreContext )
     {
@@ -37,30 +32,6 @@ internal class CommandService : ICommandService, IDisposable
         this.permissionManager = permissionManager;
         this.commandOverrideOptions = commandOverrideOptions;
         this.coreContext = coreContext;
-
-        lock (commandLock)
-        {
-            commandCallbacks.Clear();
-            commandAliases.Clear();
-        }
-
-    }
-
-    public static void DispatchCommand( string commandName, int playerId, string[] args, string originalCommandName, string prefix, bool silent )
-    {
-        lock (dispatchLock)
-        {
-            var resolvedName = aliasToOriginal.TryGetValue(commandName, out var original) ? original : commandName;
-            var callbacks = commandsByPlugin.Values.SelectMany(x => x).OfType<CommandCallback>().ToList();
-            foreach (var cc in callbacks)
-            {
-                var normalizedName = cc.RegisterRaw ? cc.CommandName : "sw_" + cc.CommandName;
-                if (string.Equals(normalizedName, resolvedName, StringComparison.OrdinalIgnoreCase))
-                {
-                    cc.Invoke(playerId, args, originalCommandName, prefix, silent);
-                }
-            }
-        }
     }
 
     public Guid RegisterCommand( string commandName, ICommandService.CommandListener handler, bool registerRaw, string permission )
@@ -70,251 +41,90 @@ internal class CommandService : ICommandService, IDisposable
 
     public Guid RegisterCommand( string commandName, ICommandService.CommandListener handler, bool registerRaw = false, string permission = "", string helpText = "SwiftlyS2 registered command" )
     {
-        var callback = new CommandCallback(commandName, registerRaw, handler, permission, helpText, playerManagerService, permissionManager, commandOverrideOptions, loggerFactory, profiler, coreContext.Name);
-        lock (commandLock)
-        {
-            commandCallbacks.Add(callback);
-
-            if (!commandsByPlugin.TryGetValue(coreContext.Name, out var value))
-            {
-                value = [];
-                commandsByPlugin[coreContext.Name] = value;
-            }
-
-            value.Add(callback);
-        }
-        return callback.Guid;
+        return AddCallback(new CommandCallback(commandName, registerRaw, handler, permission, helpText, playerManagerService, permissionManager, commandOverrideOptions, loggerFactory, profiler, coreContext.Name));
     }
 
     public void RegisterCommandAlias( string commandName, string alias, bool registerRaw = false )
     {
         lock (commandLock)
         {
-            var commandId = NativeCommands.RegisterAlias(alias, commandName, registerRaw);
-            if (commandId != 0)
+            var commandKey = CommandDispatcher.ResolveCommandKey(commandName);
+
+            var aliasId = NativeCommands.RegisterAlias(alias, commandName, registerRaw);
+            if (aliasId == 0)
             {
-                commandAliases.Add(commandId);
-
-                var normalizedAlias = registerRaw ? alias.ToLower() : "sw_" + alias.ToLower();
-                var originalCallback = commandsByPlugin.Values
-                    .SelectMany(x => x)
-                    .OfType<CommandCallback>()
-                    .FirstOrDefault(cc =>
-                        cc.CommandName.Equals(commandName, StringComparison.OrdinalIgnoreCase) ||
-                        ("sw_" + cc.CommandName).Equals(commandName, StringComparison.OrdinalIgnoreCase));
-
-                if (originalCallback != null)
-                {
-                    var normalizedOriginal = originalCallback.RegisterRaw ? originalCallback.CommandName : "sw_" + originalCallback.CommandName;
-                    aliasToOriginal[normalizedAlias] = normalizedOriginal;
-                    commandAliasNames.Add(normalizedAlias);
-                }
+                return;
             }
-        }
-    }
 
-    public void UnregisterCommand( Guid guid )
-    {
-        lock (commandLock)
-        {
-            _ = commandCallbacks.RemoveAll(callback =>
+            commandAliases.Add(aliasId);
+
+            if (commandKey is null)
             {
-                if (callback.Guid == guid)
-                {
-                    callback.Dispose();
+                return;
+            }
 
-                    if (commandsByPlugin.TryGetValue(callback.PluginName, out var pluginCallbacks))
-                    {
-                        _ = pluginCallbacks.Remove(callback);
-                        if (pluginCallbacks.Count == 0)
-                        {
-                            _ = commandsByPlugin.Remove(callback.PluginName);
-                        }
-                    }
-
-                    return true;
-                }
-                return false;
-            });
+            var normalizedAlias = CommandDispatcher.NormalizeName(alias, registerRaw);
+            CommandDispatcher.AddAlias(normalizedAlias, commandKey);
+            commandAliasNames.Add(normalizedAlias);
         }
     }
 
-    public void UnregisterCommand( string commandName )
-    {
-        lock (commandLock)
-        {
-            _ = commandCallbacks.RemoveAll(callback =>
-            {
-                if (callback is CommandCallback commandCallback &&
-                    (commandCallback.CommandName.Equals(commandName, StringComparison.OrdinalIgnoreCase) ||
-                     ("sw_" + commandCallback.CommandName).Equals(commandName, StringComparison.OrdinalIgnoreCase)))
-                {
-                    commandCallback.Dispose();
+    public void UnregisterCommand( Guid guid ) => RemoveCallbacks(callback => callback.Guid == guid);
 
-                    if (commandsByPlugin.TryGetValue(callback.PluginName, out var pluginCallbacks))
-                    {
-                        _ = pluginCallbacks.Remove(callback);
-                        if (pluginCallbacks.Count == 0)
-                        {
-                            _ = commandsByPlugin.Remove(callback.PluginName);
-                        }
-                    }
-
-                    return true;
-                }
-                return false;
-            });
-        }
-    }
+    public void UnregisterCommand( string commandName ) =>
+        RemoveCallbacks(callback => callback is CommandCallback command
+            && (command.CommandName.Equals(commandName, StringComparison.OrdinalIgnoreCase)
+                || ("sw_" + command.CommandName).Equals(commandName, StringComparison.OrdinalIgnoreCase)));
 
     public bool IsCommandRegistered( string commandName )
     {
         return NativeCommands.IsCommandRegistered(commandName);
     }
 
-    public static int DispatchClientCommand( int playerId, string commandLine )
-    {
-        lock (dispatchLock)
-        {
-            var stopOriginal = false;
-            var callbacks = commandsByPlugin.Values.SelectMany(x => x).OfType<ClientCommandListenerCallback>().ToList();
-            foreach (var cc in callbacks)
-            {
-                var result = cc.Invoke(playerId, commandLine);
-                if (result == HookResult.Stop)
-                    return (int)HookResult.Stop;
-                if (result == HookResult.Handled)
-                    return (int)HookResult.Handled;
-                if (result == HookResult.CancelOriginal)
-                    stopOriginal = true;
-            }
-            return stopOriginal ? (int)HookResult.CancelOriginal : (int)HookResult.Continue;
-        }
-    }
-
     public Guid HookClientCommand( ICommandService.ClientCommandHandler handler )
     {
-        var callback = new ClientCommandListenerCallback(handler, loggerFactory, profiler, coreContext.Name);
-        lock (commandLock)
-        {
-            commandCallbacks.Add(callback);
-
-            if (!commandsByPlugin.TryGetValue(coreContext.Name, out var value))
-            {
-                value = [];
-                commandsByPlugin[coreContext.Name] = value;
-            }
-
-            value.Add(callback);
-        }
-        return callback.Guid;
+        return AddCallback(new ClientCommandListenerCallback(handler, loggerFactory, profiler, coreContext.Name));
     }
 
-    public void UnhookClientCommand( Guid guid )
-    {
-        lock (commandLock)
-        {
-            _ = commandCallbacks.RemoveAll(callback =>
-            {
-                if (callback is ClientCommandListenerCallback clientCommandCallback && clientCommandCallback.Guid == guid)
-                {
-                    clientCommandCallback.Dispose();
-
-                    if (commandsByPlugin.TryGetValue(callback.PluginName, out var pluginCallbacks))
-                    {
-                        _ = pluginCallbacks.Remove(callback);
-                        if (pluginCallbacks.Count == 0)
-                        {
-                            _ = commandsByPlugin.Remove(callback.PluginName);
-                        }
-                    }
-
-                    return true;
-                }
-                return false;
-            });
-        }
-    }
-
-    public static int DispatchClientChat( int playerId, string text, bool teamonly )
-    {
-        lock (dispatchLock)
-        {
-            var stopOriginal = false;
-            var callbacks = commandsByPlugin.Values.SelectMany(x => x).OfType<ClientChatListenerCallback>().ToList();
-            foreach (var cc in callbacks)
-            {
-                var result = cc.Invoke(playerId, text, teamonly);
-                if (result == HookResult.Stop)
-                    return (int)HookResult.Stop;
-                if (result == HookResult.Handled)
-                    return (int)HookResult.Handled;
-                if (result == HookResult.CancelOriginal)
-                    stopOriginal = true;
-            }
-            return stopOriginal ? (int)HookResult.CancelOriginal : (int)HookResult.Continue;
-        }
-    }
+    public void UnhookClientCommand( Guid guid ) =>
+        RemoveCallbacks(callback => callback is ClientCommandListenerCallback && callback.Guid == guid);
 
     public Guid HookClientChat( ICommandService.ClientChatHandler handler )
     {
-        var callback = new ClientChatListenerCallback(handler, loggerFactory, profiler, coreContext.Name);
-        lock (commandLock)
-        {
-            commandCallbacks.Add(callback);
-
-            if (!commandsByPlugin.TryGetValue(coreContext.Name, out var value))
-            {
-                value = [];
-                commandsByPlugin[coreContext.Name] = value;
-            }
-
-            value.Add(callback);
-        }
-        return callback.Guid;
+        return AddCallback(new ClientChatListenerCallback(handler, loggerFactory, profiler, coreContext.Name));
     }
 
-    public void UnhookClientChat( Guid guid )
-    {
-        lock (commandLock)
-        {
-            _ = commandCallbacks.RemoveAll(callback =>
-            {
-                if (callback is ClientChatListenerCallback clientChatListenerCallback && clientChatListenerCallback.Guid == guid)
-                {
-                    clientChatListenerCallback.Dispose();
-
-                    if (commandsByPlugin.TryGetValue(callback.PluginName, out var pluginCallbacks))
-                    {
-                        _ = pluginCallbacks.Remove(callback);
-                        if (pluginCallbacks.Count == 0)
-                        {
-                            _ = commandsByPlugin.Remove(callback.PluginName);
-                        }
-                    }
-
-                    return true;
-                }
-                return false;
-            });
-        }
-    }
+    public void UnhookClientChat( Guid guid ) =>
+        RemoveCallbacks(callback => callback is ClientChatListenerCallback && callback.Guid == guid);
 
     public List<string> GetAllCommands()
     {
-        var commandNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-        lock (commandLock)
-        {
-            foreach (var callbacks in commandsByPlugin.Values)
-            {
-                foreach (var callback in callbacks)
-                {
-                    if (callback is CommandCallback commandCallback)
-                        _ = commandNames.Add(commandCallback.CommandName);
-                }
-            }
-        }
-        return commandNames.ToList();
+        return CommandDispatcher.GetCommands()
+            .Select(command => command.CommandName)
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .ToList();
+    }
+
+    public List<CommandInfo> GetCommandsByPlugin( string pluginName )
+    {
+        return CommandDispatcher.GetCommands()
+            .Where(command => command.PluginName == pluginName)
+            .Select(ToCommandInfo)
+            .ToList();
+    }
+
+    public Dictionary<string, List<CommandInfo>> GetAllCommandsByPlugin()
+    {
+        return CommandDispatcher.GetCommands()
+            .GroupBy(command => command.PluginName)
+            .ToDictionary(group => group.Key, group => group.Select(ToCommandInfo).ToList());
+    }
+
+    public List<CommandInfo> GetAllCommandsInfo()
+    {
+        return CommandDispatcher.GetCommands()
+            .Select(ToCommandInfo)
+            .ToList();
     }
 
     public void Dispose()
@@ -322,72 +132,53 @@ internal class CommandService : ICommandService, IDisposable
         lock (commandLock)
         {
             foreach (var alias in commandAliases)
+            {
                 NativeCommands.UnregisterAlias(alias);
+            }
             commandAliases.Clear();
 
             foreach (var aliasName in commandAliasNames)
-                _ = aliasToOriginal.Remove(aliasName);
+            {
+                CommandDispatcher.RemoveAlias(aliasName);
+            }
             commandAliasNames.Clear();
 
             foreach (var callback in commandCallbacks)
-                callback.Dispose();
-            commandCallbacks.Clear();
-
-            if(commandsByPlugin.TryGetValue(coreContext.Name, out var pluginCallbacks))
             {
-                pluginCallbacks.Clear();
+                CommandDispatcher.Unregister(callback);
             }
+            commandCallbacks.Clear();
         }
     }
 
-    public List<CommandInfo> GetCommandsByPlugin( string pluginName )
+    private Guid AddCallback( CommandCallbackBase callback )
     {
         lock (commandLock)
         {
-            return commandsByPlugin.TryGetValue(pluginName, out var callbacks)
-                ? callbacks.OfType<CommandCallback>().Select(c => new CommandInfo {
-                    CommandName = c.CommandName,
-                    RegisterRaw = c.RegisterRaw,
-                    Permission = c.Permission,
-                    HelpText = c.HelpText
-                }).ToList()
-                : [];
+            commandCallbacks.Add(callback);
+            CommandDispatcher.Register(callback);
+        }
+
+        return callback.Guid;
+    }
+
+    private void RemoveCallbacks( Predicate<CommandCallbackBase> match )
+    {
+        lock (commandLock)
+        {
+            foreach (var callback in commandCallbacks.FindAll(match))
+            {
+                CommandDispatcher.Unregister(callback);
+            }
+
+            _ = commandCallbacks.RemoveAll(match);
         }
     }
 
-    public Dictionary<string, List<CommandInfo>> GetAllCommandsByPlugin()
-    {
-        lock (commandLock)
-        {
-            return commandsByPlugin.ToDictionary(
-                kvp => kvp.Key,
-                kvp => kvp.Value
-                    .OfType<CommandCallback>()
-                    .Select(c => new CommandInfo {
-                        CommandName = c.CommandName,
-                        RegisterRaw = c.RegisterRaw,
-                        Permission = c.Permission,
-                        HelpText = c.HelpText
-                    })
-                    .ToList()
-            );
-        }
-    }
-
-    public List<CommandInfo> GetAllCommandsInfo()
-    {
-        lock (commandLock)
-        {
-            return commandsByPlugin
-                .Values
-                .SelectMany(callbacks => callbacks.OfType<CommandCallback>())
-                .Select(c => new CommandInfo {
-                    CommandName = c.CommandName,
-                    RegisterRaw = c.RegisterRaw,
-                    Permission = c.Permission,
-                    HelpText = c.HelpText
-                })
-                .ToList();
-        }
-    }
+    private static CommandInfo ToCommandInfo( CommandCallback command ) => new() {
+        CommandName = command.CommandName,
+        RegisterRaw = command.RegisterRaw,
+        Permission = command.Permission,
+        HelpText = command.HelpText
+    };
 }

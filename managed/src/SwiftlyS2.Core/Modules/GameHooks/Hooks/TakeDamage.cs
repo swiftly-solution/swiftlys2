@@ -27,6 +27,8 @@ internal static partial class GameHooksPublisher
                 var baseEntity = EntityManager.GetEntityByAddress(entity) as CBaseEntity
                     ?? _core.Memory.ToSchemaClass<CBaseEntity>(entity);
 
+                if (baseEntity is CBasePlayerPawn pawn && !pawn.Controller.IsValid) return;
+
                 var preCtx = new TakeDamageEntityPreContext {
                     Params = new TakeDamageEntityParams {
                         Entity = baseEntity,

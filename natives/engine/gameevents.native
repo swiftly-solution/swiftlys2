@@ -1,32 +1,14 @@
 class GameEvents
 
-bool GetBool = ptr _event, string key
-int32 GetInt = ptr _event, string key
-uint64 GetUint64 = ptr _event, string key
-float GetFloat = ptr _event, string key
+bool GetValue = ptr _event, string key, int32 kind, ptr value
+bool SetValue = ptr _event, string key, int32 kind, ptr value
 string GetString = ptr _event, string key
-ptr GetPtr = ptr _event, string key
-ptr GetEHandle = ptr _event, string key // returns the pointer stored inside the handle
-ptr GetEntity = ptr _event, string key
-int32 GetEntityIndex = ptr _event, string key
-int32 GetPlayerSlot = ptr _event, string key
-ptr GetPlayerController = ptr _event, string key
-ptr GetPlayerPawn = ptr _event, string key
-ptr GetPawnEHandle = ptr _event, string key // returns the pointer stored inside the handle
-int32 GetPawnEntityIndex = ptr _event, string key
-void SetBool = ptr _event, string key, bool value
-void SetInt = ptr _event, string key, int32 value
-void SetUint64 = ptr _event, string key, uint64 value
-void SetFloat = ptr _event, string key, float value
 void SetString = ptr _event, string key, string value
-void SetPtr = ptr _event, string key, ptr value
-void SetEntity = ptr _event, string key, ptr value
-void SetEntityIndex = ptr _event, string key, int32 value
-void SetPlayerSlot = ptr _event, string key, int32 value
 bool HasKey = ptr _event, string key
 bool IsReliable = ptr _event
 bool IsLocal = ptr _event
 void RegisterListener = string eventName
+void UnregisterListener = string eventName
 void SetListenerPreHandler = ptr callback // the callback should receive the following: uint32 eventNameHash, IntPtr gameEvent, bool* dontBroadcast, return HookResult int
 void SetListenerPostHandler = ptr callback // the callback should receive the following: uint32 eventNameHash, IntPtr gameEvent, bool* dontBroadcast, return HookResult int
 ptr CreateEvent = string eventName

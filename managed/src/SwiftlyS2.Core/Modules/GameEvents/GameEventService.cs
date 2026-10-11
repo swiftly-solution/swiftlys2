@@ -4,7 +4,6 @@ using SwiftlyS2.Core.Players;
 using SwiftlyS2.Core.Scheduler;
 using SwiftlyS2.Core.Services;
 using SwiftlyS2.Shared.GameEvents;
-using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Shared.Profiler;
 
 namespace SwiftlyS2.Core.GameEvents;
@@ -22,131 +21,44 @@ internal class GameEventService : IGameEventService, IDisposable
         _Profiler = profiler;
     }
 
-    private static readonly List<GameEventCallback> s_globalCallbacks = [];
-    private static readonly Lock s_globalLock = new();
-
-    internal static void RegisterCallback( GameEventCallback callback )
-    {
-        lock (s_globalLock)
-        {
-            s_globalCallbacks.Add(callback);
-        }
-    }
-
-    internal static void UnregisterCallback( GameEventCallback callback )
-    {
-        lock (s_globalLock)
-        {
-            _ = s_globalCallbacks.Remove(callback);
-        }
-    }
-
-    public static int DispatchPreEvent( uint hash, nint pEvent, nint pDontBroadcast )
-    {
-        lock (s_globalLock)
-        {
-            var stopOriginal = false;
-            foreach (var cb in s_globalCallbacks)
-            {
-                var result = cb.InvokeAsPre(hash, pEvent, pDontBroadcast);
-                if (result == HookResult.Stop) return (int)HookResult.Stop;
-                if (result == HookResult.Handled) return (int)HookResult.Handled;
-                if (result == HookResult.CancelOriginal) stopOriginal = true;
-            }
-            return stopOriginal ? (int)HookResult.CancelOriginal : (int)HookResult.Continue;
-        }
-    }
-
-    public static int DispatchPostEvent( uint hash, nint pEvent, nint pDontBroadcast )
-    {
-        lock (s_globalLock)
-        {
-            var stopOriginal = false;
-            foreach (var cb in s_globalCallbacks)
-            {
-                var result = cb.InvokeAsPost(hash, pEvent, pDontBroadcast);
-                if (result == HookResult.Stop) return (int)HookResult.Stop;
-                if (result == HookResult.Handled) return (int)HookResult.Handled;
-                if (result == HookResult.CancelOriginal) stopOriginal = true;
-            }
-            return stopOriginal ? (int)HookResult.CancelOriginal : (int)HookResult.Continue;
-        }
-    }
-
     private readonly List<GameEventCallback> _callbacks = [];
     private readonly Lock _lock = new();
 
-    public Guid HookPre<T>( IGameEventService.GameEventHandler<T> callback ) where T : IGameEvent<T>
+    public Guid HookPre<T>( IGameEventService.GameEventHandler<T> callback ) where T : IGameEvent<T> =>
+        AddCallback(new GameEventCallback<T>(callback, true, _LoggerFactory, _Profiler, _Context));
+
+    public Guid HookPost<T>( IGameEventService.GameEventHandler<T> callback ) where T : IGameEvent<T> =>
+        AddCallback(new GameEventCallback<T>(callback, false, _LoggerFactory, _Profiler, _Context));
+
+    public void Unhook( Guid guid ) => RemoveCallbacks(callback => callback.Guid == guid);
+
+    public void UnhookPre<T>() where T : IGameEvent<T> =>
+        RemoveCallbacks(callback => callback.IsPreHook && callback is GameEventCallback<T>);
+
+    public void UnhookPost<T>() where T : IGameEvent<T> =>
+        RemoveCallbacks(callback => !callback.IsPreHook && callback is GameEventCallback<T>);
+
+    private Guid AddCallback( GameEventCallback callback )
     {
-        GameEventCallback<T> cb = new(callback, true, _LoggerFactory, _Profiler, _Context);
         lock (_lock)
         {
-            _callbacks.Add(cb);
+            _callbacks.Add(callback);
+            GameEventDispatcher.Register(callback);
         }
 
-        return cb.Guid;
+        return callback.Guid;
     }
 
-    public Guid HookPost<T>( IGameEventService.GameEventHandler<T> callback ) where T : IGameEvent<T>
-    {
-        GameEventCallback<T> cb = new(callback, false, _LoggerFactory, _Profiler, _Context);
-        lock (_lock)
-        {
-            _callbacks.Add(cb);
-        }
-
-        return cb.Guid;
-    }
-
-    public void Unhook( Guid guid )
+    private void RemoveCallbacks( Predicate<GameEventCallback> match )
     {
         lock (_lock)
         {
-            _ = _callbacks.RemoveAll(callback =>
+            foreach (var callback in _callbacks.FindAll(match))
             {
-                if (callback.Guid == guid)
-                {
-                    callback.Dispose();
-                    return true;
-                }
+                GameEventDispatcher.Unregister(callback);
+            }
 
-                return false;
-            });
-        }
-    }
-
-
-    public void UnhookPre<T>() where T : IGameEvent<T>
-    {
-        lock (_lock)
-        {
-            _ = _callbacks.RemoveAll(callback =>
-            {
-                if (callback.IsPreHook && callback is GameEventCallback<T>)
-                {
-                    callback.Dispose();
-                    return true;
-                }
-
-                return false;
-            });
-        }
-    }
-
-    public void UnhookPost<T>() where T : IGameEvent<T>
-    {
-        lock (_lock)
-        {
-            _ = _callbacks.RemoveAll(callback =>
-            {
-                if (!callback.IsPreHook && callback is GameEventCallback<T>)
-                {
-                    callback.Dispose();
-                    return true;
-                }
-
-                return false;
-            });
+            _ = _callbacks.RemoveAll(match);
         }
     }
 
@@ -258,14 +170,6 @@ internal class GameEventService : IGameEventService, IDisposable
 
     public void Dispose()
     {
-        lock (_lock)
-        {
-            foreach (var callback in _callbacks)
-            {
-                callback.Dispose();
-            }
-
-            _callbacks.Clear();
-        }
+        RemoveCallbacks(static _ => true);
     }
 }

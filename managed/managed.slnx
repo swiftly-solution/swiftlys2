@@ -2,6 +2,7 @@
   <Folder Name="/src/">
     <Project Path="src/SwiftlyS2.Profiler/SwiftlyS2.Profiler.csproj" />
     <Project Path="src/TestPlugin/TestPlugin.csproj" />
+    <Project Path="src/Tester/Tester.csproj" />
   </Folder>
   <Project Path="managed.csproj" />
 </Solution>

@@ -1,0 +1,7 @@
+{
+  "tester.hello": "Hello",
+  "tester.format": "Player {0} has {1} points",
+  "tester.english_only": "Only in English",
+  "tester.colored": "[red]Red[/] text",
+  "tester.bracket": "[Tester] prefix"
+}

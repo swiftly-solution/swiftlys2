@@ -90,10 +90,6 @@
         "linux": 26
     },
     /* From sdk */
-    "ICvar::FindConCommand": {
-        "windows": 17,
-        "linux": 17
-    },
     "ICvar::DispatchConCommand": {
         "windows": 20,
         "linux": 20

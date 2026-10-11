@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using SwiftlyS2.Core.EntitySystem;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.Natives.NativeObjects;
@@ -8,6 +9,21 @@ using SwiftlyS2.Shared.Players;
 using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.GameEvents;
+
+internal enum GameEventValueKind
+{
+    Bool,
+    Int32,
+    UInt64,
+    Float,
+    Ptr,
+    Entity,
+    EntityIndex,
+    PlayerSlot,
+    PlayerController,
+    PlayerPawn,
+    PawnEntityIndex
+}
 
 internal class GameEventAccessor : NativeHandle, IGameEventAccessor, IDisposable
 {
@@ -33,49 +49,49 @@ internal class GameEventAccessor : NativeHandle, IGameEventAccessor, IDisposable
     public void SetBool( string key, bool value )
     {
         CheckIsValid();
-        NativeGameEvents.SetBool(Address, key, value);
+        Write(key, GameEventValueKind.Bool, value);
     }
 
     public bool GetBool( string key )
     {
         CheckIsValid();
-        return NativeGameEvents.GetBool(Address, key);
+        return Read<bool>(key, GameEventValueKind.Bool);
     }
 
     public void SetInt32( string key, int value )
     {
         CheckIsValid();
-        NativeGameEvents.SetInt(Address, key, value);
+        Write(key, GameEventValueKind.Int32, value);
     }
 
     public int GetInt32( string key )
     {
         CheckIsValid();
-        return NativeGameEvents.GetInt(Address, key);
+        return Read<int>(key, GameEventValueKind.Int32);
     }
 
     public void SetUInt64( string key, ulong value )
     {
         CheckIsValid();
-        NativeGameEvents.SetUint64(Address, key, value);
+        Write(key, GameEventValueKind.UInt64, value);
     }
 
     public ulong GetUInt64( string key )
     {
         CheckIsValid();
-        return NativeGameEvents.GetUint64(Address, key);
+        return Read<ulong>(key, GameEventValueKind.UInt64);
     }
 
     public void SetFloat( string key, float value )
     {
         CheckIsValid();
-        NativeGameEvents.SetFloat(Address, key, value);
+        Write(key, GameEventValueKind.Float, value);
     }
 
     public float GetFloat( string key )
     {
         CheckIsValid();
-        return NativeGameEvents.GetFloat(Address, key);
+        return Read<float>(key, GameEventValueKind.Float);
     }
 
     public void SetString( string key, string value )
@@ -93,50 +109,50 @@ internal class GameEventAccessor : NativeHandle, IGameEventAccessor, IDisposable
     public void SetEntity<K>( string key, K value ) where K : CEntityInstance
     {
         CheckIsValid();
-        NativeGameEvents.SetEntity(Address, key, value.Address);
+        Write(key, GameEventValueKind.Entity, value.Address);
     }
 
     public K GetEntity<K>( string key ) where K : CEntityInstance
     {
         CheckIsValid();
-        return (K)K.From(NativeGameEvents.GetEntity(Address, key));
+        return (K)K.From(Read<nint>(key, GameEventValueKind.Entity));
     }
 
     public void SetEntityIndex( string key, int value )
     {
         CheckIsValid();
-        NativeGameEvents.SetEntityIndex(Address, key, value);
+        Write(key, GameEventValueKind.EntityIndex, value);
     }
 
     public int GetEntityIndex( string key )
     {
         CheckIsValid();
-        return NativeGameEvents.GetEntityIndex(Address, key);
+        return Read<int>(key, GameEventValueKind.EntityIndex);
     }
 
     public void SetPlayerSlot( string key, int value )
     {
         CheckIsValid();
-        NativeGameEvents.SetPlayerSlot(Address, key, value);
+        Write(key, GameEventValueKind.PlayerSlot, value);
     }
 
     public int GetPlayerSlot( string key )
     {
         CheckIsValid();
-        return NativeGameEvents.GetPlayerSlot(Address, key);
+        return Read<int>(key, GameEventValueKind.PlayerSlot);
     }
 
     public CCSPlayerController GetPlayerController( string key )
     {
         CheckIsValid();
-        var controllerPtr = NativeGameEvents.GetPlayerController(Address, key);
+        var controllerPtr = Read<nint>(key, GameEventValueKind.PlayerController);
         return EntityManager.GetEntityByAddress(controllerPtr) as CCSPlayerControllerImpl ?? new CCSPlayerControllerImpl(controllerPtr);
     }
 
     public CCSPlayerPawn GetPlayerPawn( string key )
     {
         CheckIsValid();
-        var pawnPtr = NativeGameEvents.GetPlayerPawn(Address, key);
+        var pawnPtr = Read<nint>(key, GameEventValueKind.PlayerPawn);
         return EntityManager.GetEntityByAddress(pawnPtr) as CCSPlayerPawnImpl ?? new CCSPlayerPawnImpl(pawnPtr);
     }
 
@@ -151,19 +167,31 @@ internal class GameEventAccessor : NativeHandle, IGameEventAccessor, IDisposable
     public void SetPtr( string key, nint value )
     {
         CheckIsValid();
-        NativeGameEvents.SetPtr(Address, key, value);
+        Write(key, GameEventValueKind.Ptr, value);
     }
 
     public nint GetPtr( string key )
     {
         CheckIsValid();
-        return NativeGameEvents.GetPtr(Address, key);
+        return Read<nint>(key, GameEventValueKind.Ptr);
     }
 
     public int GetPawnEntityIndex( string key )
     {
         CheckIsValid();
-        return NativeGameEvents.GetPawnEntityIndex(Address, key);
+        return Read<int>(key, GameEventValueKind.PawnEntityIndex);
+    }
+
+    private unsafe T Read<T>( string key, GameEventValueKind kind ) where T : unmanaged
+    {
+        T value = default;
+        _ = NativeGameEvents.GetValue(Address, key, (int)kind, (nint)(&value));
+        return value;
+    }
+
+    private unsafe void Write<T>( string key, GameEventValueKind kind, T value ) where T : unmanaged
+    {
+        _ = NativeGameEvents.SetValue(Address, key, (int)kind, (nint)(&value));
     }
 
     public bool IsReliable()

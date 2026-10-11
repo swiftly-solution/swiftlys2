@@ -261,7 +261,7 @@ std::set<std::string> explodeToSet(std::string str, std::string delimiter)
     return res;
 }
 
-std::string implode(std::vector<std::string>& elements, std::string delimiter)
+std::string implode(const std::vector<std::string>& elements, const std::string& delimiter)
 {
     if (elements.size() == 0) return "";
 

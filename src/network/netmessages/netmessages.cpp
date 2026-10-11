@@ -46,6 +46,8 @@ int DispatchClientUserMessage(int playerid, int messageid, const std::string& pa
 {
     static_assert(sizeof(CNetMessage) == 48);
 
+    if (!g_pNetMessages->IsMessageRegistered(NetMessageHook_Client, messageid)) return 0;
+
     T innerMessage;
     if (!innerMessage.ParseFromString(payload)) return 0;
 
@@ -78,6 +80,7 @@ void CNetMessages::Shutdown()
 {
     g_pFilterMessageHook->Disable();
     g_pPostEventAbstractHook->Disable();
+    g_pSendNetMessageHook->Disable();
 
     g_pHooksManager->DestroyFunctionHook(g_pFilterMessageHook);
     g_pHooksManager->DestroyVFunctionHook(g_pPostEventAbstractHook);
@@ -86,28 +89,25 @@ void CNetMessages::Shutdown()
 
 bool SendNetMessage(CServerSideClient* client, CNetMessage* pData, NetChannelBufType_t bufType)
 {
-    if (!client) return reinterpret_cast<decltype(&SendNetMessage)>(g_pSendNetMessageHook->GetOriginal())(client, pData, bufType);
-    if (!pData) return reinterpret_cast<decltype(&SendNetMessage)>(g_pSendNetMessageHook->GetOriginal())(client, pData, bufType);
+    auto originalSendNetMessage = reinterpret_cast<decltype(&SendNetMessage)>(g_pSendNetMessageHook->GetOriginal());
+    if (!client || !pData) return originalSendNetMessage(client, pData, bufType);
+
+    int msgid = pData->GetNetMessage()->GetNetMessageInfo()->m_MessageId;
+    if (!g_fnServerMessageInternalSendHandler || !g_pNetMessages->IsMessageRegistered(NetMessageHook_ServerInternal, msgid))
+        return originalSendNetMessage(client, pData, bufType);
 
     auto playerid = client->GetPlayerSlot().Get();
-    int msgid = pData->GetNetMessage()->GetNetMessageInfo()->m_MessageId;
 
-    bool stopOriginal = false;
-    if (g_fnServerMessageInternalSendHandler)
-    {
-        auto res = g_fnServerMessageInternalSendHandler(playerid, msgid, pData);
-        if (res == 1) return true;
-        else if (res == 3) stopOriginal = true;
-    }
+    auto res = g_fnServerMessageInternalSendHandler(playerid, msgid, pData);
+    if (res == 1 || res == 3) return true;
 
-    if (stopOriginal) return true;
-    return reinterpret_cast<decltype(&SendNetMessage)>(g_pSendNetMessageHook->GetOriginal())(client, pData, bufType);
+    return originalSendNetMessage(client, pData, bufType);
 }
 
 bool FilterMessage(void* client, CNetMessage* cMsg, INetChannel* netchan)
 {
-    if (!client) return reinterpret_cast<decltype(&FilterMessage)>(g_pFilterMessageHook->GetOriginal())(client, cMsg, netchan);
-    if (!cMsg) return reinterpret_cast<decltype(&FilterMessage)>(g_pFilterMessageHook->GetOriginal())(client, cMsg, netchan);
+    auto originalFilterMessage = reinterpret_cast<decltype(&FilterMessage)>(g_pFilterMessageHook->GetOriginal());
+    if (!client || !cMsg || !g_fnClientMessageSendHandler) return originalFilterMessage(client, cMsg, netchan);
 
     static auto playerIndex = g_pGameDataManager->GetOffsets()->Fetch("CServerSideClientBase::m_nClientSlot") - WIN_LINUX(8, 48);
 
@@ -115,63 +115,85 @@ bool FilterMessage(void* client, CNetMessage* cMsg, INetChannel* netchan)
     int msgid = cMsg->GetNetMessage()->GetNetMessageInfo()->m_MessageId;
 
     bool stopOriginal = false;
-    if (g_fnClientMessageSendHandler)
+
+    if (g_pNetMessages->IsMessageRegistered(NetMessageHook_Client, msgid))
     {
         auto res = g_fnClientMessageSendHandler(playerid, msgid, cMsg);
         if (res == 1) return true;
         else if (res == 3) stopOriginal = true;
+    }
 
-        if (msgid == svc_UserMessage)
+    if (msgid == svc_UserMessage)
+    {
+        auto userMessage = static_cast<CSVCMsg_UserMessage*>(cMsg->AsProto());
+        if (userMessage)
         {
-            auto userMessage = static_cast<CSVCMsg_UserMessage*>(cMsg->AsProto());
-            if (userMessage)
+            auto innerResult = 0;
+            switch (userMessage->msg_type())
             {
-                auto innerResult = 0;
-                switch (userMessage->msg_type())
-                {
-                    case 335:
-                        innerResult = DispatchClientUserMessage<CCSUsrMsg_DisconnectToLobby>(playerid, 335, userMessage->msg_data());
-                        break;
-                    case 368:
-                        innerResult = DispatchClientUserMessage<CCSUsrMsg_PlayerDecalDigitalSignature>(playerid, 368, userMessage->msg_data());
-                        break;
-                    case 385:
-                        innerResult = DispatchClientUserMessage<CCSUsrMsg_CounterStrafe>(playerid, 385, userMessage->msg_data());
-                        break;
-                    case 390:
-                        innerResult = DispatchClientUserMessage<CCSUsrMsg_CustomHudClicked>(playerid, 390, userMessage->msg_data());
-                        break;
-                }
-
-                if (innerResult == 1) return true;
-                else if (innerResult == 3) stopOriginal = true;
+                case 335:
+                    innerResult = DispatchClientUserMessage<CCSUsrMsg_DisconnectToLobby>(playerid, 335, userMessage->msg_data());
+                    break;
+                case 368:
+                    innerResult = DispatchClientUserMessage<CCSUsrMsg_PlayerDecalDigitalSignature>(playerid, 368, userMessage->msg_data());
+                    break;
+                case 385:
+                    innerResult = DispatchClientUserMessage<CCSUsrMsg_CounterStrafe>(playerid, 385, userMessage->msg_data());
+                    break;
+                case 390:
+                    innerResult = DispatchClientUserMessage<CCSUsrMsg_CustomHudClicked>(playerid, 390, userMessage->msg_data());
+                    break;
             }
+
+            if (innerResult == 1) return true;
+            else if (innerResult == 3) stopOriginal = true;
         }
     }
 
     if (stopOriginal) return true;
-    return reinterpret_cast<decltype(&FilterMessage)>(g_pFilterMessageHook->GetOriginal())(client, cMsg, netchan);
+    return originalFilterMessage(client, cMsg, netchan);
 }
 
 void PostEventAbstractHook(void* _this, CSplitScreenSlot nSlot, bool bLocalOnly, int nClientCount, const uint64* clients, INetworkMessageInternal* pEvent, const CNetMessage* pData, unsigned long nSize, NetChannelBufType_t bufType)
 {
-    if (bypassPostEventAbstractHook) return reinterpret_cast<decltype(&PostEventAbstractHook)>(g_pPostEventAbstractHook->GetOriginal())(_this, nSlot, bLocalOnly, nClientCount, clients, pEvent, pData, nSize, bufType);
+    auto originalPostEventAbstract = reinterpret_cast<decltype(&PostEventAbstractHook)>(g_pPostEventAbstractHook->GetOriginal());
+    if (bypassPostEventAbstractHook || !g_fnServerMessageSendHandler) return originalPostEventAbstract(_this, nSlot, bLocalOnly, nClientCount, clients, pEvent, pData, nSize, bufType);
 
     int msgid = pEvent->GetNetMessageInfo()->m_MessageId;
+    if (!g_pNetMessages->IsMessageRegistered(NetMessageHook_Server, msgid))
+        return originalPostEventAbstract(_this, nSlot, bLocalOnly, nClientCount, clients, pEvent, pData, nSize, bufType);
+
     CNetMessage* msg = const_cast<CNetMessage*>(pData);
     uint64_t* playermask = (uint64_t*)(clients);
 
-    bool stopOriginal = false;
-    if (g_fnServerMessageSendHandler)
-    {
-        auto res = g_fnServerMessageSendHandler(playermask, msgid, msg);
-        if (res == 1) return;
-        else if (res == 3) stopOriginal = true;
-    }
+    auto res = g_fnServerMessageSendHandler(playermask, msgid, msg);
+    if (res == 1 || res == 3) return;
 
-    if (stopOriginal) return;
+    originalPostEventAbstract(_this, nSlot, bLocalOnly, nClientCount, clients, pEvent, pData, nSize, bufType);
+}
 
-    reinterpret_cast<decltype(&PostEventAbstractHook)>(g_pPostEventAbstractHook->GetOriginal())(_this, nSlot, bLocalOnly, nClientCount, clients, pEvent, pData, nSize, bufType);
+void CNetMessages::RegisterMessageHook(NetMessageHookType type, int messageid)
+{
+    if (type < 0 || type >= NetMessageHook_Count) return;
+
+    QueueLockGuard lock(m_mtxRegisteredMessages);
+    m_registeredMessages[type].insert(messageid);
+}
+
+void CNetMessages::UnregisterMessageHook(NetMessageHookType type, int messageid)
+{
+    if (type < 0 || type >= NetMessageHook_Count) return;
+
+    QueueLockGuard lock(m_mtxRegisteredMessages);
+    m_registeredMessages[type].erase(messageid);
+}
+
+bool CNetMessages::IsMessageRegistered(NetMessageHookType type, int messageid)
+{
+    if (type < 0 || type >= NetMessageHook_Count) return false;
+
+    QueueLockGuard lock(m_mtxRegisteredMessages);
+    return m_registeredMessages[type].contains(messageid);
 }
 
 void CNetMessages::SetServerMessageSendHandler(std::function<int(uint64_t*, int, void*)> handler)

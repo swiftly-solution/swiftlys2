@@ -20,7 +20,12 @@
 #define src_server_commands_manager_h
 
 #include <api/server/commands/manager.h>
+#include <api/utils/mutex.h>
+
 #include <public/tier1/convar.h>
+
+#include <set>
+#include <unordered_map>
 
 class CServerCommands : public IServerCommands
 {
@@ -29,22 +34,36 @@ public:
     virtual void Shutdown() override;
 
     virtual int HandleCommand(int playerid, const std::string& text, bool dryrun) override;
-    virtual bool HandleClientCommand(int playerid, const std::string& text) override;
+    virtual void HandleRegisteredCommand(int playerid, const char* commandLine) override;
+    virtual bool HandleClientCommand(int playerid, const char* text) override;
     virtual bool HandleClientChat(int playerid, const std::string& text, bool teamonly) override;
 
     virtual uint64_t RegisterCommand(std::string command_name, bool registerRaw, std::string helpText) override;
-    virtual void SetCommandHandler(std::function<void(std::string, int, std::vector<std::string>, std::string, std::string, bool)> handler) override;
+    virtual void SetCommandHandler(CommandHandler handler) override;
     virtual void UnregisterCommand(uint64_t command_id) override;
     virtual bool IsCommandRegistered(std::string command_name) override;
 
     virtual uint64_t RegisterAlias(std::string alias_command, std::string command_name, bool registerRaw) override;
     virtual void UnregisterAlias(uint64_t alias_id) override;
 
-    // playerid, command
-    virtual void SetClientCommandHandler(std::function<int(int, const std::string&)> handler) override;
+    virtual void SetClientCommandHandler(ClientCommandHandler handler) override;
+    virtual void SetClientChatHandler(ClientChatHandler handler) override;
+private:
+    bool ResolveCommandName(std::string& command_name);
+    void LoadPrefixes();
 
-    // playerid, text, teamonly
-    virtual void SetClientChatHandler(std::function<int(int, const std::string&, bool)> handler) override;
+    QueueMutex m_mtxCommands;
+    std::unordered_map<std::string, ConCommand*> m_commands;
+    std::unordered_map<uint64_t, std::string> m_commandNames;
+    uint64_t m_lastCommandId = 0;
+
+    CommandHandler m_commandHandler;
+    ClientCommandHandler m_clientCommandHandler;
+    ClientChatHandler m_clientChatHandler;
+
+    bool m_prefixesLoaded = false;
+    std::set<std::string> m_commandPrefixes;
+    std::set<std::string> m_silentCommandPrefixes;
 };
 
 #endif

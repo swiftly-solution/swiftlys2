@@ -27,8 +27,6 @@ public:
     virtual void Initialize() override;
     virtual void Shutdown() override;
 
-    virtual void Spawn(void* pEntity, void* pKeyValues) override;
-    virtual void Despawn(void* pEntity) override;
 
     virtual void AddEntityListener(IEntityListener* listener) override;
     virtual void RemoveEntityListener(IEntityListener* listener) override;

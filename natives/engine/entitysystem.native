@@ -1,6 +1,4 @@
 class EntitySystem
 
-sync void Spawn = ptr entity, ptr keyvalues
-sync void Despawn = ptr entity
 ptr GetEntitySystem = void
 bool IsValid = void

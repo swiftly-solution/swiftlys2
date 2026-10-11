@@ -84,6 +84,7 @@
 
   <ItemGroup>
     <Compile Remove="src\TestPlugin\**\*.cs" />
+    <Compile Remove="src\Tester\**\*.cs" />
     <Compile Remove="src\SwiftlyS2.Core\Services\ProfilerAnalyzer.cs" />
     <Compile Remove="SwiftlyS2.Benchmarks\**\*.cs" />
     <Compile Remove="SwiftlyS2.PluginTemplate\**\*.cs" />

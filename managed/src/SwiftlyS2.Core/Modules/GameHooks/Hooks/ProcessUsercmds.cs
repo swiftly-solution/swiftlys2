@@ -79,6 +79,12 @@ internal static partial class GameHooksPublisher
                 var postCtx = new ProcessUsercmdsPostContext { Params = preCtx.Params };
 
                 InvokeProcessUsercmdsPost(ref postCtx);
+                foreach (var userCmd in preCtx.Params.Usercmds)
+                {
+                    var userCmdImpl = (CUserCmd)userCmd;
+                    userCmdImpl.Address = 0;
+                    _userCmdPool.Return(userCmdImpl);
+                }
                 return result;
             };
         });

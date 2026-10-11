@@ -98,9 +98,12 @@ internal static class NativeConvars
         _RemoveConCommandCreatedListener(callbackID);
     }
 
-    private unsafe static delegate* unmanaged<byte*, int, ulong, byte*, short, nint, nint, void> _CreateConvarInt16;
+    private unsafe static delegate* unmanaged<byte*, int, ulong, byte*, nint, nint, nint, void> _CreateConvar;
 
-    public unsafe static void CreateConvarInt16(string cvarName, int cvarType, ulong cvarFlags, string helpMessage, short defaultValue, nint minValue, nint maxValue)
+    /// <summary>
+    /// the pointers point to a value of the convar type, or to a null terminated string for string convars. minValue and maxValue are optional and only used by numeric types
+    /// </summary>
+    public unsafe static void CreateConvar(string cvarName, int cvarType, ulong cvarFlags, string helpMessage, nint defaultValue, nint minValue, nint maxValue)
     {
         using var cvarNameStr = new ScopedCString(cvarName);
         using var helpMessageStr = new ScopedCString(helpMessage);
@@ -108,221 +111,7 @@ internal static class NativeConvars
         {
             fixed (byte* helpMessageBufferPtr = helpMessageStr)
             {
-                _CreateConvarInt16(cvarNameBufferPtr, cvarType, cvarFlags, helpMessageBufferPtr, defaultValue, minValue, maxValue);
-            }
-        }
-    }
-
-    private unsafe static delegate* unmanaged<byte*, int, ulong, byte*, ushort, nint, nint, void> _CreateConvarUInt16;
-
-    public unsafe static void CreateConvarUInt16(string cvarName, int cvarType, ulong cvarFlags, string helpMessage, ushort defaultValue, nint minValue, nint maxValue)
-    {
-        using var cvarNameStr = new ScopedCString(cvarName);
-        using var helpMessageStr = new ScopedCString(helpMessage);
-        fixed (byte* cvarNameBufferPtr = cvarNameStr)
-        {
-            fixed (byte* helpMessageBufferPtr = helpMessageStr)
-            {
-                _CreateConvarUInt16(cvarNameBufferPtr, cvarType, cvarFlags, helpMessageBufferPtr, defaultValue, minValue, maxValue);
-            }
-        }
-    }
-
-    private unsafe static delegate* unmanaged<byte*, int, ulong, byte*, int, nint, nint, void> _CreateConvarInt32;
-
-    public unsafe static void CreateConvarInt32(string cvarName, int cvarType, ulong cvarFlags, string helpMessage, int defaultValue, nint minValue, nint maxValue)
-    {
-        using var cvarNameStr = new ScopedCString(cvarName);
-        using var helpMessageStr = new ScopedCString(helpMessage);
-        fixed (byte* cvarNameBufferPtr = cvarNameStr)
-        {
-            fixed (byte* helpMessageBufferPtr = helpMessageStr)
-            {
-                _CreateConvarInt32(cvarNameBufferPtr, cvarType, cvarFlags, helpMessageBufferPtr, defaultValue, minValue, maxValue);
-            }
-        }
-    }
-
-    private unsafe static delegate* unmanaged<byte*, int, ulong, byte*, uint, nint, nint, void> _CreateConvarUInt32;
-
-    public unsafe static void CreateConvarUInt32(string cvarName, int cvarType, ulong cvarFlags, string helpMessage, uint defaultValue, nint minValue, nint maxValue)
-    {
-        using var cvarNameStr = new ScopedCString(cvarName);
-        using var helpMessageStr = new ScopedCString(helpMessage);
-        fixed (byte* cvarNameBufferPtr = cvarNameStr)
-        {
-            fixed (byte* helpMessageBufferPtr = helpMessageStr)
-            {
-                _CreateConvarUInt32(cvarNameBufferPtr, cvarType, cvarFlags, helpMessageBufferPtr, defaultValue, minValue, maxValue);
-            }
-        }
-    }
-
-    private unsafe static delegate* unmanaged<byte*, int, ulong, byte*, long, nint, nint, void> _CreateConvarInt64;
-
-    public unsafe static void CreateConvarInt64(string cvarName, int cvarType, ulong cvarFlags, string helpMessage, long defaultValue, nint minValue, nint maxValue)
-    {
-        using var cvarNameStr = new ScopedCString(cvarName);
-        using var helpMessageStr = new ScopedCString(helpMessage);
-        fixed (byte* cvarNameBufferPtr = cvarNameStr)
-        {
-            fixed (byte* helpMessageBufferPtr = helpMessageStr)
-            {
-                _CreateConvarInt64(cvarNameBufferPtr, cvarType, cvarFlags, helpMessageBufferPtr, defaultValue, minValue, maxValue);
-            }
-        }
-    }
-
-    private unsafe static delegate* unmanaged<byte*, int, ulong, byte*, ulong, nint, nint, void> _CreateConvarUInt64;
-
-    public unsafe static void CreateConvarUInt64(string cvarName, int cvarType, ulong cvarFlags, string helpMessage, ulong defaultValue, nint minValue, nint maxValue)
-    {
-        using var cvarNameStr = new ScopedCString(cvarName);
-        using var helpMessageStr = new ScopedCString(helpMessage);
-        fixed (byte* cvarNameBufferPtr = cvarNameStr)
-        {
-            fixed (byte* helpMessageBufferPtr = helpMessageStr)
-            {
-                _CreateConvarUInt64(cvarNameBufferPtr, cvarType, cvarFlags, helpMessageBufferPtr, defaultValue, minValue, maxValue);
-            }
-        }
-    }
-
-    private unsafe static delegate* unmanaged<byte*, int, ulong, byte*, byte, nint, nint, void> _CreateConvarBool;
-
-    public unsafe static void CreateConvarBool(string cvarName, int cvarType, ulong cvarFlags, string helpMessage, bool defaultValue, nint minValue, nint maxValue)
-    {
-        using var cvarNameStr = new ScopedCString(cvarName);
-        using var helpMessageStr = new ScopedCString(helpMessage);
-        fixed (byte* cvarNameBufferPtr = cvarNameStr)
-        {
-            fixed (byte* helpMessageBufferPtr = helpMessageStr)
-            {
-                _CreateConvarBool(cvarNameBufferPtr, cvarType, cvarFlags, helpMessageBufferPtr, defaultValue ? (byte)1 : (byte)0, minValue, maxValue);
-            }
-        }
-    }
-
-    private unsafe static delegate* unmanaged<byte*, int, ulong, byte*, float, nint, nint, void> _CreateConvarFloat;
-
-    public unsafe static void CreateConvarFloat(string cvarName, int cvarType, ulong cvarFlags, string helpMessage, float defaultValue, nint minValue, nint maxValue)
-    {
-        using var cvarNameStr = new ScopedCString(cvarName);
-        using var helpMessageStr = new ScopedCString(helpMessage);
-        fixed (byte* cvarNameBufferPtr = cvarNameStr)
-        {
-            fixed (byte* helpMessageBufferPtr = helpMessageStr)
-            {
-                _CreateConvarFloat(cvarNameBufferPtr, cvarType, cvarFlags, helpMessageBufferPtr, defaultValue, minValue, maxValue);
-            }
-        }
-    }
-
-    private unsafe static delegate* unmanaged<byte*, int, ulong, byte*, double, nint, nint, void> _CreateConvarDouble;
-
-    public unsafe static void CreateConvarDouble(string cvarName, int cvarType, ulong cvarFlags, string helpMessage, double defaultValue, nint minValue, nint maxValue)
-    {
-        using var cvarNameStr = new ScopedCString(cvarName);
-        using var helpMessageStr = new ScopedCString(helpMessage);
-        fixed (byte* cvarNameBufferPtr = cvarNameStr)
-        {
-            fixed (byte* helpMessageBufferPtr = helpMessageStr)
-            {
-                _CreateConvarDouble(cvarNameBufferPtr, cvarType, cvarFlags, helpMessageBufferPtr, defaultValue, minValue, maxValue);
-            }
-        }
-    }
-
-    private unsafe static delegate* unmanaged<byte*, int, ulong, byte*, Color, nint, nint, void> _CreateConvarColor;
-
-    public unsafe static void CreateConvarColor(string cvarName, int cvarType, ulong cvarFlags, string helpMessage, Color defaultValue, nint minValue, nint maxValue)
-    {
-        using var cvarNameStr = new ScopedCString(cvarName);
-        using var helpMessageStr = new ScopedCString(helpMessage);
-        fixed (byte* cvarNameBufferPtr = cvarNameStr)
-        {
-            fixed (byte* helpMessageBufferPtr = helpMessageStr)
-            {
-                _CreateConvarColor(cvarNameBufferPtr, cvarType, cvarFlags, helpMessageBufferPtr, defaultValue, minValue, maxValue);
-            }
-        }
-    }
-
-    private unsafe static delegate* unmanaged<byte*, int, ulong, byte*, Vector2D, nint, nint, void> _CreateConvarVector2D;
-
-    public unsafe static void CreateConvarVector2D(string cvarName, int cvarType, ulong cvarFlags, string helpMessage, Vector2D defaultValue, nint minValue, nint maxValue)
-    {
-        using var cvarNameStr = new ScopedCString(cvarName);
-        using var helpMessageStr = new ScopedCString(helpMessage);
-        fixed (byte* cvarNameBufferPtr = cvarNameStr)
-        {
-            fixed (byte* helpMessageBufferPtr = helpMessageStr)
-            {
-                _CreateConvarVector2D(cvarNameBufferPtr, cvarType, cvarFlags, helpMessageBufferPtr, defaultValue, minValue, maxValue);
-            }
-        }
-    }
-
-    private unsafe static delegate* unmanaged<byte*, int, ulong, byte*, Vector, nint, nint, void> _CreateConvarVector;
-
-    public unsafe static void CreateConvarVector(string cvarName, int cvarType, ulong cvarFlags, string helpMessage, Vector defaultValue, nint minValue, nint maxValue)
-    {
-        using var cvarNameStr = new ScopedCString(cvarName);
-        using var helpMessageStr = new ScopedCString(helpMessage);
-        fixed (byte* cvarNameBufferPtr = cvarNameStr)
-        {
-            fixed (byte* helpMessageBufferPtr = helpMessageStr)
-            {
-                _CreateConvarVector(cvarNameBufferPtr, cvarType, cvarFlags, helpMessageBufferPtr, defaultValue, minValue, maxValue);
-            }
-        }
-    }
-
-    private unsafe static delegate* unmanaged<byte*, int, ulong, byte*, Vector4D, nint, nint, void> _CreateConvarVector4D;
-
-    public unsafe static void CreateConvarVector4D(string cvarName, int cvarType, ulong cvarFlags, string helpMessage, Vector4D defaultValue, nint minValue, nint maxValue)
-    {
-        using var cvarNameStr = new ScopedCString(cvarName);
-        using var helpMessageStr = new ScopedCString(helpMessage);
-        fixed (byte* cvarNameBufferPtr = cvarNameStr)
-        {
-            fixed (byte* helpMessageBufferPtr = helpMessageStr)
-            {
-                _CreateConvarVector4D(cvarNameBufferPtr, cvarType, cvarFlags, helpMessageBufferPtr, defaultValue, minValue, maxValue);
-            }
-        }
-    }
-
-    private unsafe static delegate* unmanaged<byte*, int, ulong, byte*, QAngle, nint, nint, void> _CreateConvarQAngle;
-
-    public unsafe static void CreateConvarQAngle(string cvarName, int cvarType, ulong cvarFlags, string helpMessage, QAngle defaultValue, nint minValue, nint maxValue)
-    {
-        using var cvarNameStr = new ScopedCString(cvarName);
-        using var helpMessageStr = new ScopedCString(helpMessage);
-        fixed (byte* cvarNameBufferPtr = cvarNameStr)
-        {
-            fixed (byte* helpMessageBufferPtr = helpMessageStr)
-            {
-                _CreateConvarQAngle(cvarNameBufferPtr, cvarType, cvarFlags, helpMessageBufferPtr, defaultValue, minValue, maxValue);
-            }
-        }
-    }
-
-    private unsafe static delegate* unmanaged<byte*, int, ulong, byte*, byte*, nint, nint, void> _CreateConvarString;
-
-    public unsafe static void CreateConvarString(string cvarName, int cvarType, ulong cvarFlags, string helpMessage, string defaultValue, nint minValue, nint maxValue)
-    {
-        using var cvarNameStr = new ScopedCString(cvarName);
-        using var helpMessageStr = new ScopedCString(helpMessage);
-        using var defaultValueStr = new ScopedCString(defaultValue);
-        fixed (byte* cvarNameBufferPtr = cvarNameStr)
-        {
-            fixed (byte* helpMessageBufferPtr = helpMessageStr)
-            {
-                fixed (byte* defaultValueBufferPtr = defaultValueStr)
-                {
-                    _CreateConvarString(cvarNameBufferPtr, cvarType, cvarFlags, helpMessageBufferPtr, defaultValueBufferPtr, minValue, maxValue);
-                }
+                _CreateConvar(cvarNameBufferPtr, cvarType, cvarFlags, helpMessageBufferPtr, defaultValue, minValue, maxValue);
             }
         }
     }
@@ -434,32 +223,6 @@ internal static class NativeConvars
         {
             var ret = _GetDefaultValuePtr(cvarNameBufferPtr);
             return ret;
-        }
-    }
-
-    private unsafe static delegate* unmanaged<byte*, nint, void> _SetDefaultValue;
-
-    public unsafe static void SetDefaultValue(string cvarName, nint defaultValue)
-    {
-        using var cvarNameStr = new ScopedCString(cvarName);
-        fixed (byte* cvarNameBufferPtr = cvarNameStr)
-        {
-            _SetDefaultValue(cvarNameBufferPtr, defaultValue);
-        }
-    }
-
-    private unsafe static delegate* unmanaged<byte*, byte*, void> _SetDefaultValueString;
-
-    public unsafe static void SetDefaultValueString(string cvarName, string defaultValue)
-    {
-        using var cvarNameStr = new ScopedCString(cvarName);
-        using var defaultValueStr = new ScopedCString(defaultValue);
-        fixed (byte* cvarNameBufferPtr = cvarNameStr)
-        {
-            fixed (byte* defaultValueBufferPtr = defaultValueStr)
-            {
-                _SetDefaultValueString(cvarNameBufferPtr, defaultValueBufferPtr);
-            }
         }
     }
 

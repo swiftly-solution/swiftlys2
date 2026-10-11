@@ -74,7 +74,6 @@ target("swiftlys2")
         sdk_path.."/public",
         sdk_path.."/public/engine",
         sdk_path.."/public/mathlib",
-        sdk_path.."/public/vstdlib",
         sdk_path.."/public/tier0",
         sdk_path.."/public/tier1",
         sdk_path.."/public/entity2",
@@ -302,6 +301,7 @@ target("swiftlys2")
         "HAVE_STRUCT_TIMESPEC",
         "BUILDING_CORE",
         "HAVE_CONFIG_H",
+        "SW_HOST"
     })
 
     --[[ -------------------------------- Libraries Section -------------------------------- ]]

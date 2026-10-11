@@ -14,6 +14,8 @@ internal class RegistratorService : IRegistratorService
 
     public void Register( object instance )
     {
+        ArgumentNullException.ThrowIfNull(instance);
+
         core.CommandService.ParseFromObject(instance);
         core.EventSubscriber.ParseFromObject(instance);
         core.GameEventService.ParseFromObject(instance);

@@ -1,0 +1,61 @@
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using SwiftlyS2.Core.Natives;
+
+namespace SwiftlyS2.Shared.SteamAPI;
+
+[Serializable]
+public struct TimelineEventHandle_t : IEquatable<TimelineEventHandle_t>, IComparable<TimelineEventHandle_t>
+{
+	public ulong m_TimelineEventHandle;
+
+	public TimelineEventHandle_t(ulong value)
+	{
+		m_TimelineEventHandle = value;
+	}
+
+	public override string ToString()
+	{
+		return m_TimelineEventHandle.ToString();
+	}
+
+	public override bool Equals(object? other)
+	{
+		return other is TimelineEventHandle_t && this == (TimelineEventHandle_t)other;
+	}
+
+	public override int GetHashCode()
+	{
+		return m_TimelineEventHandle.GetHashCode();
+	}
+
+	public static bool operator ==(TimelineEventHandle_t x, TimelineEventHandle_t y)
+	{
+		return x.m_TimelineEventHandle == y.m_TimelineEventHandle;
+	}
+
+	public static bool operator !=(TimelineEventHandle_t x, TimelineEventHandle_t y)
+	{
+		return !(x == y);
+	}
+
+	public static explicit operator TimelineEventHandle_t(ulong value)
+	{
+		return new TimelineEventHandle_t(value);
+	}
+
+	public static explicit operator ulong(TimelineEventHandle_t that)
+	{
+		return that.m_TimelineEventHandle;
+	}
+
+	public bool Equals(TimelineEventHandle_t other)
+	{
+		return m_TimelineEventHandle == other.m_TimelineEventHandle;
+	}
+
+	public int CompareTo(TimelineEventHandle_t other)
+	{
+		return m_TimelineEventHandle.CompareTo(other.m_TimelineEventHandle);
+	}
+}

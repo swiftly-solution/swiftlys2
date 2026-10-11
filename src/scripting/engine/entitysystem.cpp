@@ -22,16 +22,6 @@
 #include <entityhandle.h>
 #include "ehandle.h"
 
-void Bridge_EntitySystem_Spawn(void* pEntity, void* pKeyValues)
-{
-    g_pEntSystem->Spawn(pEntity, pKeyValues);
-}
-
-void Bridge_EntitySystem_Despawn(void* pEntity)
-{
-    g_pEntSystem->Despawn(pEntity);
-}
-
 void* Bridge_EntitySystem_GetEntitySystem()
 {
     return g_pEntSystem->GetEntitySystem();
@@ -42,7 +32,5 @@ bool Bridge_EntitySystem_IsValid()
     return Bridge_EntitySystem_GetEntitySystem() != nullptr;
 }
 
-DEFINE_NATIVE("EntitySystem.Spawn", Bridge_EntitySystem_Spawn);
-DEFINE_NATIVE("EntitySystem.Despawn", Bridge_EntitySystem_Despawn);
 DEFINE_NATIVE("EntitySystem.GetEntitySystem", Bridge_EntitySystem_GetEntitySystem);
 DEFINE_NATIVE("EntitySystem.IsValid", Bridge_EntitySystem_IsValid);

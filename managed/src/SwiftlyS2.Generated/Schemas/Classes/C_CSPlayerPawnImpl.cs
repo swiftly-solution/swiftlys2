@@ -1030,6 +1030,16 @@ internal partial class C_CSPlayerPawnImpl : C_CSPlayerPawnBaseImpl, C_CSPlayerPa
             return instance;
         }
     }
+    private static nint? _Modifier0Offset;
+
+    public ref float Modifier0
+    {
+        get
+        {
+            _Modifier0Offset = _Modifier0Offset ?? Schema.GetOffset(0x87CCE03EEF5E6FF2);
+            return ref _Handle.AsRef<float>(_Modifier0Offset!.Value);
+        }
+    }
     private static nint? _MolotovDamageTimeOffset;
 
     public ref float MolotovDamageTime

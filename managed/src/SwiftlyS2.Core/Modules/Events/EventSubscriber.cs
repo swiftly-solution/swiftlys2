@@ -10,7 +10,6 @@ namespace SwiftlyS2.Core.Events;
 /// </summary>
 internal class EventSubscriber : IEventSubscriber, IDisposable
 {
-    private readonly IContextedProfilerService profiler;
     private readonly ILogger<EventSubscriber> logger;
 
     private volatile bool disposed;
@@ -19,7 +18,6 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public EventSubscriber( IContextedProfilerService profiler, ILogger<EventSubscriber> logger )
     {
-        this.profiler = profiler;
         this.logger = logger;
         this.disposed = false;
         EventPublisher.Subscribe(this);
@@ -56,9 +54,78 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
             if (_OnClientProcessUsercmds == null) GameHooksPublisher.RemoveHookListener(HookListener.ProcessUsercmds);
         }
     }
-    public event EventDelegates.OnConVarValueChanged? OnConVarValueChanged;
-    public event EventDelegates.OnConCommandCreated? OnConCommandCreated;
-    public event EventDelegates.OnConVarCreated? OnConVarCreated;
+    private readonly Lock OnConVarValueChangedLock = new();
+    private EventDelegates.OnConVarValueChanged? _OnConVarValueChanged;
+    public event EventDelegates.OnConVarValueChanged? OnConVarValueChanged {
+        add {
+            if (value == null) return;
+
+            lock (OnConVarValueChangedLock)
+            {
+                var addedFirstListener = _OnConVarValueChanged == null;
+                _OnConVarValueChanged += value;
+                if (addedFirstListener) EventPublisher.ConVarValueChangedListener.Acquire();
+            }
+        }
+        remove {
+            if (value == null) return;
+
+            lock (OnConVarValueChangedLock)
+            {
+                var hadListeners = _OnConVarValueChanged != null;
+                _OnConVarValueChanged -= value;
+                if (hadListeners && _OnConVarValueChanged == null) EventPublisher.ConVarValueChangedListener.Release();
+            }
+        }
+    }
+    private readonly Lock OnConCommandCreatedLock = new();
+    private EventDelegates.OnConCommandCreated? _OnConCommandCreated;
+    public event EventDelegates.OnConCommandCreated? OnConCommandCreated {
+        add {
+            if (value == null) return;
+
+            lock (OnConCommandCreatedLock)
+            {
+                var addedFirstListener = _OnConCommandCreated == null;
+                _OnConCommandCreated += value;
+                if (addedFirstListener) EventPublisher.ConCommandCreatedListener.Acquire();
+            }
+        }
+        remove {
+            if (value == null) return;
+
+            lock (OnConCommandCreatedLock)
+            {
+                var hadListeners = _OnConCommandCreated != null;
+                _OnConCommandCreated -= value;
+                if (hadListeners && _OnConCommandCreated == null) EventPublisher.ConCommandCreatedListener.Release();
+            }
+        }
+    }
+    private readonly Lock OnConVarCreatedLock = new();
+    private EventDelegates.OnConVarCreated? _OnConVarCreated;
+    public event EventDelegates.OnConVarCreated? OnConVarCreated {
+        add {
+            if (value == null) return;
+
+            lock (OnConVarCreatedLock)
+            {
+                var addedFirstListener = _OnConVarCreated == null;
+                _OnConVarCreated += value;
+                if (addedFirstListener) EventPublisher.ConVarCreatedListener.Acquire();
+            }
+        }
+        remove {
+            if (value == null) return;
+
+            lock (OnConVarCreatedLock)
+            {
+                var hadListeners = _OnConVarCreated != null;
+                _OnConVarCreated -= value;
+                if (hadListeners && _OnConVarCreated == null) EventPublisher.ConVarCreatedListener.Release();
+            }
+        }
+    }
     private EventDelegates.OnEntityTakeDamage? _OnEntityTakeDamage;
     [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.TakeDamage instead.")]
     public event EventDelegates.OnEntityTakeDamage? OnEntityTakeDamage {
@@ -226,6 +293,27 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
     public event EventDelegates.OnClientVoice? OnClientVoice;
     public event EventDelegates.OnCustomHudClicked? OnCustomHudClicked;
 
+    private void ReleaseConVarListeners()
+    {
+        ReleaseListener(OnConVarValueChangedLock, ref _OnConVarValueChanged, EventPublisher.ConVarValueChangedListener);
+        ReleaseListener(OnConCommandCreatedLock, ref _OnConCommandCreated, EventPublisher.ConCommandCreatedListener);
+        ReleaseListener(OnConVarCreatedLock, ref _OnConVarCreated, EventPublisher.ConVarCreatedListener);
+    }
+
+    private static void ReleaseListener<T>( Lock sync, ref T? handlers, NativeListener listener ) where T : Delegate
+    {
+        lock (sync)
+        {
+            if (handlers == null)
+            {
+                return;
+            }
+
+            handlers = null;
+            listener.Release();
+        }
+    }
+
     public void Dispose()
     {
         if (disposed)
@@ -255,6 +343,8 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 EventPublisher.RemoveConsoleOutputListener();
             }
         }
+
+        ReleaseConVarListeners();
 
         EventPublisher.Unsubscribe(this);
         GC.SuppressFinalize(this);
@@ -836,18 +926,19 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     }
 
-    public bool ListensToConVarValueChanged => OnConVarValueChanged != null;
+    public bool ListensToConVarValueChanged => _OnConVarValueChanged != null;
 
     public void InvokeOnConVarValueChanged( ref OnConVarValueChanged @event )
     {
-        if (OnConVarValueChanged == null)
+        var handler = _OnConVarValueChanged;
+        if (handler == null)
         {
             return;
         }
         try
         {
 
-            OnConVarValueChanged.Invoke(@event);
+            handler.Invoke(@event);
         }
         catch (Exception e)
         {
@@ -859,18 +950,19 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     }
 
-    public bool ListensToConCommandCreated => OnConCommandCreated != null;
+    public bool ListensToConCommandCreated => _OnConCommandCreated != null;
 
     public void InvokeOnConCommandCreated( ref OnConCommandCreated @event )
     {
-        if (OnConCommandCreated == null)
+        var handler = _OnConCommandCreated;
+        if (handler == null)
         {
             return;
         }
         try
         {
 
-            OnConCommandCreated.Invoke(@event);
+            handler.Invoke(@event);
         }
         catch (Exception e)
         {
@@ -882,18 +974,19 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     }
 
-    public bool ListensToConVarCreated => OnConVarCreated != null;
+    public bool ListensToConVarCreated => _OnConVarCreated != null;
 
     public void InvokeOnConVarCreated( ref OnConVarCreated @event )
     {
-        if (OnConVarCreated == null)
+        var handler = _OnConVarCreated;
+        if (handler == null)
         {
             return;
         }
         try
         {
 
-            OnConVarCreated.Invoke(@event);
+            handler.Invoke(@event);
         }
         catch (Exception e)
         {

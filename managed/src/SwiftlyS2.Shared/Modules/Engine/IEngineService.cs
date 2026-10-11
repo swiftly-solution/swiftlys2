@@ -38,23 +38,7 @@ public interface IEngineService
     /// </summary>
     /// <param name="command">The command to execute. Cannot be null or empty.</param>
     public Task ExecuteCommandAsync( string command );
-
-    /// <summary>
-    /// Executes the specified command string in the current context.
-    /// </summary>
-    /// <param name="command">The command to execute. Cannot be null or empty.</param>
-    /// <param name="bufferCallback">The callback to receive the output of the command.</param>
-    [Obsolete("This method is planned to be removed.")]
-    public void ExecuteCommandWithBuffer( string command, Action<string> bufferCallback );
-
-    /// <summary>
-    /// Executes the specified command string in the current context with a buffer callback asynchronously.
-    /// </summary>
-    /// <param name="command">The command to execute. Cannot be null or empty.</param>
-    /// <param name="bufferCallback">The callback to receive the output of the command.</param>
-    [Obsolete("This method is planned to be removed.")]
-    public Task ExecuteCommandWithBufferAsync( string command, Action<string> bufferCallback );
-
+    
     /// <summary>
     /// Find a game system by name.
     /// </summary>

@@ -1,87 +1,13 @@
 using Microsoft.Extensions.Logging;
-using SwiftlyS2.Core.Events;
 using SwiftlyS2.Core.Natives;
-using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Shared.NetMessages;
 using SwiftlyS2.Shared.Profiler;
-using SwiftlyS2.Shared.ProtobufDefinitions;
 
 namespace SwiftlyS2.Core.NetMessages;
 
 
 internal class NetMessageService : INetMessageService, IDisposable
 {
-
-    private static readonly List<NetMessageHookCallback> s_globalCallbacks = [];
-    private static readonly Lock s_globalLock = new();
-
-    internal static void RegisterCallback( NetMessageHookCallback callback )
-    {
-        lock (s_globalLock)
-        {
-            s_globalCallbacks.Add(callback);
-        }
-    }
-
-    internal static void UnregisterCallback( NetMessageHookCallback callback )
-    {
-        lock (s_globalLock)
-        {
-            _ = s_globalCallbacks.Remove(callback);
-        }
-    }
-
-    public static int DispatchClientMessage( int playerId, int msgId, nint pMessage )
-    {
-        lock (s_globalLock)
-        {
-            var stopOriginal = false;
-            foreach (var cb in s_globalCallbacks)
-            {
-                var result = cb.InvokeAsClient(playerId, msgId, pMessage);
-                if (result == HookResult.Stop) return (int)HookResult.Stop;
-                if (result == HookResult.Handled) return (int)HookResult.Handled;
-                if (result == HookResult.CancelOriginal) stopOriginal = true;
-            }
-            if (!stopOriginal && msgId == (int)ECstrike15UserMessages.CS_UM_CustomHudClicked)
-            {
-                EventPublisher.InvokeOnCustomHudClicked(playerId, pMessage);
-            }
-            return stopOriginal ? (int)HookResult.CancelOriginal : (int)HookResult.Continue;
-        }
-    }
-
-    public static int DispatchServerMessage( nint pPlayerMask, int msgId, nint pMessage )
-    {
-        lock (s_globalLock)
-        {
-            var stopOriginal = false;
-            foreach (var cb in s_globalCallbacks)
-            {
-                var result = cb.InvokeAsServer(pPlayerMask, msgId, pMessage);
-                if (result == HookResult.Stop) return (int)HookResult.Stop;
-                if (result == HookResult.Handled) return (int)HookResult.Handled;
-                if (result == HookResult.CancelOriginal) stopOriginal = true;
-            }
-            return stopOriginal ? (int)HookResult.CancelOriginal : (int)HookResult.Continue;
-        }
-    }
-
-    public static int DispatchServerInternalMessage( int playerId, int msgId, nint pMessage )
-    {
-        lock (s_globalLock)
-        {
-            var stopOriginal = false;
-            foreach (var cb in s_globalCallbacks)
-            {
-                var result = cb.InvokeAsServerInternal(playerId, msgId, pMessage);
-                if (result == HookResult.Stop) return (int)HookResult.Stop;
-                if (result == HookResult.Handled) return (int)HookResult.Handled;
-                if (result == HookResult.CancelOriginal) stopOriginal = true;
-            }
-            return stopOriginal ? (int)HookResult.CancelOriginal : (int)HookResult.Continue;
-        }
-    }
 
     private List<NetMessageHookCallback> _callbacks = [];
     private ILoggerFactory _loggerFactory;
@@ -95,97 +21,47 @@ internal class NetMessageService : INetMessageService, IDisposable
         _profiler = profiler;
     }
 
-    public Guid HookClientMessage<T>( INetMessageService.ClientNetMessageHandler<T> callback ) where T : ITypedProtobuf<T>, INetMessage<T>, IDisposable
+    public Guid HookClientMessage<T>( INetMessageService.ClientNetMessageHandler<T> callback ) where T : ITypedProtobuf<T>, INetMessage<T>, IDisposable =>
+        AddCallback(new NetMessageClientHookCallback<T>(callback, _loggerFactory, _profiler));
+
+    public Guid HookServerMessage<T>( INetMessageService.ServerNetMessageHandler<T> callback ) where T : ITypedProtobuf<T>, INetMessage<T>, IDisposable =>
+        AddCallback(new NetMessageServerHookCallback<T>(callback, _loggerFactory, _profiler));
+
+    public Guid HookServerMessageInternal<T>( INetMessageService.ServerNetMessageInternalHandler<T> callback ) where T : ITypedProtobuf<T>, INetMessage<T>, IDisposable =>
+        AddCallback(new NetMessageServerInternalHookCallback<T>(callback, _loggerFactory, _profiler));
+
+    public void Unhook( Guid guid ) => RemoveCallbacks(callback => callback.Guid == guid);
+
+    public void UnhookClientMessage<T>() where T : ITypedProtobuf<T>, INetMessage<T>, IDisposable =>
+        RemoveCallbacks(callback => callback is NetMessageClientHookCallback<T>);
+
+    public void UnhookServerMessage<T>() where T : ITypedProtobuf<T>, INetMessage<T>, IDisposable =>
+        RemoveCallbacks(callback => callback is NetMessageServerHookCallback<T>);
+
+    public void UnhookServerMessageInternal<T>() where T : ITypedProtobuf<T>, INetMessage<T>, IDisposable =>
+        RemoveCallbacks(callback => callback is NetMessageServerInternalHookCallback<T>);
+
+    private Guid AddCallback( NetMessageHookCallback callback )
     {
-        var hook = new NetMessageClientHookCallback<T>(callback, _loggerFactory, _profiler);
         lock (_lock)
         {
-            _callbacks.Add(hook);
+            _callbacks.Add(callback);
+            NetMessageDispatcher.Register(callback);
         }
-        return hook.Guid;
+
+        return callback.Guid;
     }
 
-    public Guid HookServerMessage<T>( INetMessageService.ServerNetMessageHandler<T> callback ) where T : ITypedProtobuf<T>, INetMessage<T>, IDisposable
-    {
-        var hook = new NetMessageServerHookCallback<T>(callback, _loggerFactory, _profiler);
-        lock (_lock)
-        {
-            _callbacks.Add(hook);
-        }
-        return hook.Guid;
-    }
-
-    public Guid HookServerMessageInternal<T>( INetMessageService.ServerNetMessageInternalHandler<T> callback ) where T : ITypedProtobuf<T>, INetMessage<T>, IDisposable
-    {
-        var hook = new NetMessageServerInternalHookCallback<T>(callback, _loggerFactory, _profiler);
-        lock (_lock)
-        {
-            _callbacks.Add(hook);
-        }
-        return hook.Guid;
-    }
-
-    public void Unhook( Guid guid )
+    private void RemoveCallbacks( Predicate<NetMessageHookCallback> match )
     {
         lock (_lock)
         {
-            _ = _callbacks.RemoveAll(callback =>
+            foreach (var callback in _callbacks.FindAll(match))
             {
-                if (callback.Guid == guid)
-                {
-                    callback.Dispose();
-                    return true;
-                }
-                return false;
-            });
-        }
-    }
+                NetMessageDispatcher.Unregister(callback);
+            }
 
-    public void UnhookClientMessage<T>() where T : ITypedProtobuf<T>, INetMessage<T>, IDisposable
-    {
-        lock (_lock)
-        {
-            _ = _callbacks.RemoveAll(callback =>
-            {
-                if (callback is NetMessageClientHookCallback<T> clientHook)
-                {
-                    clientHook.Dispose();
-                    return true;
-                }
-                return false;
-            });
-        }
-    }
-
-    public void UnhookServerMessage<T>() where T : ITypedProtobuf<T>, INetMessage<T>, IDisposable
-    {
-        lock (_lock)
-        {
-            _ = _callbacks.RemoveAll(callback =>
-            {
-                if (callback is NetMessageServerHookCallback<T> serverHook)
-                {
-                    serverHook.Dispose();
-                    return true;
-                }
-                return false;
-            });
-        }
-    }
-
-    public void UnhookServerMessageInternal<T>() where T : ITypedProtobuf<T>, INetMessage<T>, IDisposable
-    {
-        lock (_lock)
-        {
-            _ = _callbacks.RemoveAll(callback =>
-            {
-                if (callback is NetMessageServerInternalHookCallback<T> serverInternalHook)
-                {
-                    serverInternalHook.Dispose();
-                    return true;
-                }
-                return false;
-            });
+            _ = _callbacks.RemoveAll(match);
         }
     }
 
@@ -214,13 +90,6 @@ internal class NetMessageService : INetMessageService, IDisposable
 
     public void Dispose()
     {
-        lock (_lock)
-        {
-            foreach (var callback in _callbacks)
-            {
-                callback.Dispose();
-            }
-            _callbacks.Clear();
-        }
+        RemoveCallbacks(static _ => true);
     }
 }

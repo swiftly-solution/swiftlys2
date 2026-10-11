@@ -87,12 +87,36 @@ jobs:
       with:
         submodules: recursive
         fetch-depth: 0
+    - name: Checkout sw2tracer source
+      uses: actions/checkout@v4
+      with:
+        repository: swiftly-solution/swiftlys2-tracer
+        ref: main
+        path: tracer
+    - name: Checkout CoreCLR headers
+      uses: actions/checkout@v4
+      with:
+        repository: dotnet/runtime
+        ref: v10.0.12
+        path: tracer/vendor/runtime
+        sparse-checkout: |
+          src/coreclr/pal/prebuilt/inc
+          src/coreclr/pal/inc
+          src/coreclr/inc
+          src/native
     - name: Setup xmake
       uses: xmake-io/github-action-setup-xmake@v1
       with:
         xmake-version: latest
         actions-cache-folder: '.xmake-cache'
         actions-cache-key: xmake-${{ runner.os }}
+    - name: Build sw2tracer
+      working-directory: tracer
+      run: |
+        xmake f -P . -m release --cc=gcc-14 --cxx=g++-14 -y
+        xmake build -P . -y
+      env:
+        DOTNET_PATH: ./vendor/runtime
     - name: Build
       run: |
         chmod 777 vendor/s2sdk/devtools/bin/linux/protoc
@@ -109,7 +133,8 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: swiftlys2_linux_tracer
-        path: tracer/libsw2tracer.so
+        path: tracer/build/linux/x64/release/libsw2tracer.so
+        if-no-files-found: error
 
   windows_core:
     needs: versioning
@@ -120,11 +145,39 @@ jobs:
       with:
         submodules: recursive
         fetch-depth: 0
+    - name: Checkout sw2tracer source
+      uses: actions/checkout@v4
+      with:
+        repository: swiftly-solution/swiftlys2-tracer
+        ref: main
+        path: tracer
+    - name: Checkout CoreCLR headers
+      uses: actions/checkout@v4
+      with:
+        repository: dotnet/runtime
+        ref: v10.0.12
+        path: tracer/vendor/runtime
+        sparse-checkout: |
+          src/coreclr/pal/prebuilt/inc
+          src/coreclr/pal/inc
+          src/coreclr/inc
+          src/native
     - name: Setup xmake
       uses: xmake-io/github-action-setup-xmake@v1
       with:
         xmake-version: latest
         actions-cache-key: xmake-${{ runner.os }}
+    - name: Setup MSVC
+      uses: ilammy/msvc-dev-cmd@v1
+      with:
+        arch: x64
+    - name: Build sw2tracer
+      working-directory: tracer
+      run: |
+        xmake f -P . -m release -y
+        xmake build -P . -y
+      env:
+        DOTNET_PATH: ./vendor/runtime
     - name: Build
       run: |
         xmake build -y
@@ -144,7 +197,8 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: swiftlys2_windows_tracer
-        path: tracer/sw2tracer.dll
+        path: tracer/build/windows/x64/release/sw2tracer.dll
+        if-no-files-found: error
 
   linux_loader:
     needs: versioning

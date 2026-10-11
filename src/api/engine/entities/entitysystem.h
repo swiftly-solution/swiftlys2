@@ -31,9 +31,6 @@ public:
     virtual void Initialize() = 0;
     virtual void Shutdown() = 0;
 
-    virtual void Spawn(void* pEntity, void* pKeyValues) = 0;
-    virtual void Despawn(void* pEntity) = 0;
-
     virtual void AddEntityListener(IEntityListener* listener) = 0;
     virtual void RemoveEntityListener(IEntityListener* listener) = 0;
 

@@ -28,11 +28,9 @@ internal class CUserCmd : IUserCmd, IDisposable
 
     public CSGOUserCmdPB CSGOUserCmd {
         get {
-            if (_csgoUserCmd == null)
-            {
-                ThrowIfInvalid();
-                _csgoUserCmd = new CSGOUserCmdPBImpl(Address + 0x10, false);
-            }
+            ThrowIfInvalid();
+            _csgoUserCmd ??= new CSGOUserCmdPBImpl(Address + 0x10, false);
+            _csgoUserCmd.DangerouslySetAddress(Address + 0x10);
 
             return _csgoUserCmd;
         }
@@ -40,11 +38,9 @@ internal class CUserCmd : IUserCmd, IDisposable
 
     public CInButtonState ButtonState {
         get {
-            if (_buttonState == null)
-            {
-                ThrowIfInvalid();
-                _buttonState = new CInButtonStateImpl(Address + 0x58);
-            }
+            ThrowIfInvalid();
+            _buttonState ??= new CInButtonStateImpl(Address + 0x58);
+            _buttonState.DangerouslySetAddress(Address + 0x58);
             return _buttonState;
         }
     }

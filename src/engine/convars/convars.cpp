@@ -23,6 +23,8 @@
 #include <api/sdk/serversideclient.h>
 
 #include <optional>
+#include <type_traits>
+#include <vector>
 
 #include <memory/gamedata/manager.h>
 
@@ -33,83 +35,75 @@
 
 #include "networkbasetypes.pb.h"
 
-#define NEW_CVAR(data_type, default_value) \
-    auto min = minValue.has_value(); \
-    auto minValueOrDefault = min ? std::get<data_type>(minValue.value()) : std::get<data_type>(defaultValue); \
-    auto max = maxValue.has_value(); \
-    auto maxValueOrDefault = max ? std::get<data_type>(maxValue.value()) : std::get<data_type>(defaultValue); \
-    cvarptr = (void*)(new CConVar<data_type>(cvar_name.c_str(), flags, help_message, std::get<data_type>(defaultValue), min, minValueOrDefault, max, maxValueOrDefault))
-
-#define NEW_CVAR_INT64(default_value) \
-    auto min = minValue.has_value(); \
-    auto minValueOrDefault = min ? std::get<int64_t>(minValue.value()) : std::get<int64_t>(defaultValue); \
-    auto max = maxValue.has_value(); \
-    auto maxValueOrDefault = max ? std::get<int64_t>(maxValue.value()) : std::get<int64_t>(defaultValue); \
-    cvarptr = (void*)(new CConVar<int64>(cvar_name.c_str(), flags, help_message, (int64)std::get<int64_t>(defaultValue), min, minValueOrDefault, max, maxValueOrDefault))
-
-#define NEW_CVAR_UINT64(default_value) \
-    auto min = minValue.has_value(); \
-    auto minValueOrDefault = min ? std::get<uint64_t>(minValue.value()) : std::get<uint64_t>(defaultValue); \
-    auto max = maxValue.has_value(); \
-    auto maxValueOrDefault = max ? std::get<uint64_t>(maxValue.value()) : std::get<uint64_t>(defaultValue); \
-    cvarptr = (void*)(new CConVar<uint64>(cvar_name.c_str(), flags, help_message, (uint64)std::get<uint64_t>(defaultValue), min, minValueOrDefault, max, maxValueOrDefault))
-
-
-#define FREE_CVAR(data_type) \
-    delete (CConVar<data_type>*)cvarptr;
-
 #define CONVAR_FLAGS_TO_REMOVE (FCVAR_HIDDEN | FCVAR_DEVELOPMENTONLY | FCVAR_CLIENTDLL)
-
-std::map<std::string, void*> g_mCvars;
-uint64_t g_uQueryCallbacks = 0;
-std::map<uint64_t, std::function<void(int, std::string, std::string)>> g_mQueryCallbacks;
-
-std::map<uint64_t, std::function<void(const char*, int, const char*, const char*)>> g_mChangeCallbacks;
-uint64_t g_uChangeCallbackId = 0;
-
-std::map<uint64_t, std::function<void(const char*)>> g_mCreatedConvarsCallbacks;
-uint64_t g_uCreatedConvarId = 0;
-
-std::map<uint64_t, std::function<void(const char*)>> g_mCreateConCommandCallbacks;
-uint64_t g_uCreatedConCommandId = 0;
 
 IVFunctionHook* g_pProcessRespondCvarValueHook = nullptr;
 
 extern bool bypassPostEventAbstractHook;
 
-class CConvarListener : public IConVarListener
-{
-    virtual void OnConVarCreated(ConVarRefAbstract* pNewCvar) override
-    {
-        for (const auto& [id, callback] : g_mCreatedConvarsCallbacks)
-        {
-            callback(pNewCvar->GetName());
-        }
-    }
-
-    virtual void OnConCommandCreated(ConCommand* pNewCommand) override
-    {
-        for (const auto& [id, callback] : g_mCreateConCommandCallbacks)
-        {
-            callback(pNewCommand->GetName());
-        }
-    }
-};
-
-CConvarListener g_CvarListener;
-
 void ChangedConvarCallback(ConVarRefAbstract* ref, CSplitScreenSlot nSlot, const char* pNewValue, const char* pOldValue, void* __unk01)
 {
-    for (auto it = g_mChangeCallbacks.begin(); it != g_mChangeCallbacks.end(); ++it)
-    {
-        it->second(ref->GetName(), nSlot.Get(), pNewValue, pOldValue);
-    }
+    g_pConvarManager->OnConvarChanged(ref, nSlot, pNewValue, pOldValue);
 }
 
 bool OnConvarQuery(CServerSideClientBase* client, const CNetMessagePB<CCLCMsg_RespondCvarValue>& msg)
 {
     g_pConvarManager->OnClientQueryCvar(client->GetPlayerSlot().Get(), msg.name(), msg.value());
     return reinterpret_cast<bool(*)(CServerSideClientBase*, const CNetMessagePB<CCLCMsg_RespondCvarValue>&)>(g_pProcessRespondCvarValueHook->GetOriginal())(client, msg);
+}
+
+template <typename Listeners>
+static std::vector<typename Listeners::mapped_type> CopyListeners(QueueMutex& mutex, const Listeners& listeners)
+{
+    QueueLockGuard lock(mutex);
+
+    std::vector<typename Listeners::mapped_type> copy;
+    copy.reserve(listeners.size());
+    for (const auto& [id, listener] : listeners)
+        copy.push_back(listener);
+
+    return copy;
+}
+
+template <typename T, typename V = T>
+static void* NewConVar(const std::string& cvar_name, uint64_t flags, const char* help_message, const ConvarValue& defaultValue, const std::optional<ConvarValue>& minValue, const std::optional<ConvarValue>& maxValue)
+{
+    auto defaultOrZero = (T)std::get<V>(defaultValue);
+
+    bool hasMin = minValue.has_value();
+    bool hasMax = maxValue.has_value();
+    auto min = hasMin ? (T)std::get<V>(*minValue) : defaultOrZero;
+    auto max = hasMax ? (T)std::get<V>(*maxValue) : defaultOrZero;
+
+    return new CConVar<T>(cvar_name.c_str(), flags, help_message, defaultOrZero, hasMin, min, hasMax, max);
+}
+
+template <typename T>
+static void FreeConVar(void* convar)
+{
+    delete (CConVar<T>*)convar;
+}
+
+static std::string ConvertConvarValueToString(const ConvarValue& value)
+{
+    return std::visit([](const auto& v) -> std::string {
+        using T = std::decay_t<decltype(v)>;
+
+        if constexpr (std::is_same_v<T, std::string>)
+            return v;
+        else if constexpr (std::is_same_v<T, bool>)
+            return v ? "1" : "0";
+        else if constexpr (std::is_same_v<T, Color>)
+            return fmt::format("{},{},{},{}", v.r(), v.g(), v.b(), v.a());
+        else if constexpr (std::is_same_v<T, Vector2D>)
+            return fmt::format("{},{}", v.x, v.y);
+        else if constexpr (std::is_same_v<T, Vector> || std::is_same_v<T, QAngle>)
+            return fmt::format("{},{},{}", v.x, v.y, v.z);
+        else if constexpr (std::is_same_v<T, Vector4D>)
+            return fmt::format("{},{},{},{}", v.x, v.y, v.z, v.w);
+        else
+            return fmt::format("{}", v);
+        }, value);
 }
 
 void CConvarManager::Initialize()
@@ -120,9 +114,6 @@ void CConvarManager::Initialize()
     g_pProcessRespondCvarValueHook = g_pHooksManager->CreateVFunctionHook();
     g_pProcessRespondCvarValueHook->SetHookFunction(serverSideClientVTable, g_pGameDataManager->GetOffsets()->Fetch("CServerSideClient::ProcessRespondCvarValue"), reinterpret_cast<void*>(OnConvarQuery), true);
     g_pProcessRespondCvarValueHook->Enable();
-
-    g_pGameCvar->InstallGlobalChangeCallback(ChangedConvarCallback);
-    g_pGameCvar->RegisterCreationListeners(&g_CvarListener);
 
     if (bool* unlockedCvars = std::get_if<bool>(&g_pConfiguration->GetValue("core.Unlocker.Convars")))
     {
@@ -171,11 +162,20 @@ void CConvarManager::Shutdown()
         g_pProcessRespondCvarValueHook = nullptr;
     }
 
-    g_pGameCvar->RemoveGlobalChangeCallback(ChangedConvarCallback);
-    g_pGameCvar->RemoveCreationListeners(&g_CvarListener);
+    if (m_bChangeCallbackInstalled)
+    {
+        g_pGameCvar->RemoveGlobalChangeCallback(ChangedConvarCallback);
+        m_bChangeCallbackInstalled = false;
+    }
+
+    if (m_bCreationListenerInstalled)
+    {
+        g_pGameCvar->RemoveCreationListeners(this);
+        m_bCreationListenerInstalled = false;
+    }
 }
 
-void CConvarManager::QueryClientConvar(int playerid, std::string cvar_name)
+void CConvarManager::QueryClientConvar(int playerid, const std::string& cvar_name)
 {
     auto netmsg = g_pGameNetworkMessages->FindNetworkMessagePartial("GetCvarValue");
     auto msg = netmsg->AllocateMessage()->ToPB<CSVCMsg_GetCvarValue>();
@@ -195,184 +195,132 @@ void CConvarManager::QueryClientConvar(int playerid, std::string cvar_name)
 
 int CConvarManager::AddQueryClientCvarCallback(std::function<void(int, std::string, std::string)> callback)
 {
-    g_mQueryCallbacks[g_uQueryCallbacks++] = callback;
-    return g_uQueryCallbacks - 1;
+    QueueLockGuard lock(m_mtxQueryCallbacks);
+
+    m_queryCallbacks[++m_lastQueryCallbackId] = std::move(callback);
+    return m_lastQueryCallbackId;
 }
 
 void CConvarManager::RemoveQueryClientCvarCallback(int callback_id)
 {
-    g_mQueryCallbacks.erase(callback_id);
+    QueueLockGuard lock(m_mtxQueryCallbacks);
+    m_queryCallbacks.erase(callback_id);
 }
 
-void CConvarManager::OnClientQueryCvar(int playerid, std::string cvar_name, std::string cvar_value)
+void CConvarManager::OnClientQueryCvar(int playerid, const std::string& cvar_name, const std::string& cvar_value)
 {
-    for (const auto& [id, callback] : g_mQueryCallbacks)
-    {
+    for (const auto& callback : CopyListeners(m_mtxQueryCallbacks, m_queryCallbacks))
         callback(playerid, cvar_name, cvar_value);
-    }
 }
 
-void CConvarManager::CreateConvar(std::string cvar_name, EConVarType type, uint64_t flags, const char* help_message, ConvarValue defaultValue, std::optional<ConvarValue> minValue, std::optional<ConvarValue> maxValue)
+void CConvarManager::OnConvarChanged(ConVarRefAbstract* ref, CSplitScreenSlot slot, const char* new_value, const char* old_value)
+{
+    for (const auto& listener : CopyListeners(m_mtxListeners, m_changeListeners))
+        listener(ref->GetName(), slot.Get(), new_value, old_value);
+}
+
+void CConvarManager::OnConVarCreated(ConVarRefAbstract* pNewCvar)
+{
+    for (const auto& listener : CopyListeners(m_mtxListeners, m_convarCreatedListeners))
+        listener(pNewCvar->GetName());
+}
+
+void CConvarManager::OnConCommandCreated(ConCommand* pNewCommand)
+{
+    for (const auto& listener : CopyListeners(m_mtxListeners, m_conCommandCreatedListeners))
+        listener(pNewCommand->GetName());
+}
+
+void CConvarManager::CreateConvar(const std::string& cvar_name, EConVarType type, uint64_t flags, const char* help_message, const ConvarValue& defaultValue, const std::optional<ConvarValue>& minValue, const std::optional<ConvarValue>& maxValue)
 {
     ConVarRefAbstract cvar(cvar_name.c_str());
     if (cvar.IsValidRef()) return;
 
-    void* cvarptr = nullptr;
-    if (type == EConVarType_Int16)
+    CreatedConvar created;
+
+#define CREATE_CONVAR(data_type, variant_type) \
+    created = { NewConVar<data_type, variant_type>(cvar_name, flags, help_message, defaultValue, minValue, maxValue), FreeConVar<data_type> }
+
+    switch (type)
     {
-        NEW_CVAR(int16, 0);
-    }
-    else if (type == EConVarType_UInt16)
-    {
-        NEW_CVAR(uint16, 0);
-    }
-    else if (type == EConVarType_UInt32)
-    {
-        NEW_CVAR(uint32, 0);
-    }
-    else if (type == EConVarType_Int32)
-    {
-        NEW_CVAR(int32, 0);
-    }
-    else if (type == EConVarType_UInt64)
-    {
-        NEW_CVAR_UINT64(0);
-    }
-    else if (type == EConVarType_Int64)
-    {
-        NEW_CVAR_INT64(0);
-    }
-    else if (type == EConVarType_Bool)
-    {
-        NEW_CVAR(bool, false);
-    }
-    else if (type == EConVarType_Float32)
-    {
-        NEW_CVAR(float, 0.0f);
-    }
-    else if (type == EConVarType_Float64)
-    {
-        NEW_CVAR(double, 0.0);
-    }
-    else if (type == EConVarType_Color)
-    {
-        NEW_CVAR(Color, Color(0, 0, 0, 255));
-    }
-    else if (type == EConVarType_Vector2)
-    {
-        NEW_CVAR(Vector2D, Vector2D(0, 0));
-    }
-    else if (type == EConVarType_Vector3)
-    {
-        NEW_CVAR(Vector, Vector(0, 0, 0));
-    }
-    else if (type == EConVarType_Vector4)
-    {
-        NEW_CVAR(Vector4D, Vector4D(0, 0, 0, 0));
-    }
-    else if (type == EConVarType_Qangle)
-    {
-        NEW_CVAR(QAngle, QAngle(0, 0, 0));
-    }
-    else if (type == EConVarType_String)
-    {
-        auto v = std::get<std::string>(defaultValue);
-        cvarptr = (void*)(new CConVar<CUtlString>(cvar_name.c_str(), flags, help_message, CUtlString(v.c_str())));
+        case EConVarType_Int16: CREATE_CONVAR(int16, int16); break;
+        case EConVarType_UInt16: CREATE_CONVAR(uint16, uint16); break;
+        case EConVarType_Int32: CREATE_CONVAR(int32, int32); break;
+        case EConVarType_UInt32: CREATE_CONVAR(uint32, uint32); break;
+        case EConVarType_Int64: CREATE_CONVAR(int64, int64_t); break;
+        case EConVarType_UInt64: CREATE_CONVAR(uint64, uint64_t); break;
+        case EConVarType_Bool: CREATE_CONVAR(bool, bool); break;
+        case EConVarType_Float32: CREATE_CONVAR(float, float); break;
+        case EConVarType_Float64: CREATE_CONVAR(double, double); break;
+        case EConVarType_Color: CREATE_CONVAR(Color, Color); break;
+        case EConVarType_Vector2: CREATE_CONVAR(Vector2D, Vector2D); break;
+        case EConVarType_Vector3: CREATE_CONVAR(Vector, Vector); break;
+        case EConVarType_Vector4: CREATE_CONVAR(Vector4D, Vector4D); break;
+        case EConVarType_Qangle: CREATE_CONVAR(QAngle, QAngle); break;
+        case EConVarType_String:
+            created = {
+                new CConVar<CUtlString>(cvar_name.c_str(), flags, help_message, CUtlString(std::get<std::string>(defaultValue).c_str())),
+                FreeConVar<CUtlString>
+            };
+            break;
+        default:
+            break;
     }
 
-    if (!cvarptr) return;
-    g_mCvars[cvar_name] = cvarptr;
+#undef CREATE_CONVAR
+
+    if (!created.convar) return;
+
+    QueueLockGuard lock(m_mtxConvars);
+    m_createdConvars[cvar_name] = created;
 }
 
-void CConvarManager::DeleteConvar(std::string cvar_name)
+void CConvarManager::DeleteConvar(const std::string& cvar_name)
 {
-    if (g_mCvars.find(cvar_name) == g_mCvars.end()) return;
+    CreatedConvar created;
+    {
+        QueueLockGuard lock(m_mtxConvars);
 
-    void* cvarptr = g_mCvars.at(cvar_name);
-    ConVarRefAbstract cvar(cvar_name.c_str());
+        auto it = m_createdConvars.find(cvar_name);
+        if (it == m_createdConvars.end()) return;
 
-    if (cvar.GetType() == EConVarType_Int16)
-    {
-        FREE_CVAR(int16);
-    }
-    else if (cvar.GetType() == EConVarType_UInt16)
-    {
-        FREE_CVAR(uint16);
-    }
-    else if (cvar.GetType() == EConVarType_UInt32)
-    {
-        FREE_CVAR(uint32);
-    }
-    else if (cvar.GetType() == EConVarType_Int32)
-    {
-        FREE_CVAR(int32);
-    }
-    else if (cvar.GetType() == EConVarType_UInt64)
-    {
-        FREE_CVAR(uint64);
-    }
-    else if (cvar.GetType() == EConVarType_Int64)
-    {
-        FREE_CVAR(int64);
-    }
-    else if (cvar.GetType() == EConVarType_Bool)
-    {
-        FREE_CVAR(bool);
-    }
-    else if (cvar.GetType() == EConVarType_Float32)
-    {
-        FREE_CVAR(float);
-    }
-    else if (cvar.GetType() == EConVarType_Float64)
-    {
-        FREE_CVAR(double);
-    }
-    else if (cvar.GetType() == EConVarType_String)
-    {
-        FREE_CVAR(CUtlString);
-    }
-    else if (cvar.GetType() == EConVarType_Color)
-    {
-        FREE_CVAR(Color);
-    }
-    else if (cvar.GetType() == EConVarType_Vector2)
-    {
-        FREE_CVAR(Vector2D);
-    }
-    else if (cvar.GetType() == EConVarType_Vector3)
-    {
-        FREE_CVAR(Vector);
-    }
-    else if (cvar.GetType() == EConVarType_Vector4)
-    {
-        FREE_CVAR(Vector4D);
-    }
-    else if (cvar.GetType() == EConVarType_Qangle)
-    {
-        FREE_CVAR(QAngle);
-    }
-    else
-    {
-        free(cvarptr);
+        created = it->second;
+        m_createdConvars.erase(it);
+
+        m_convarRefs.erase(cvar_name);
     }
 
-    g_mCvars.erase(cvar_name);
+    created.free(created.convar);
 }
 
-bool CConvarManager::ExistsConvar(std::string cvar_name)
+bool CConvarManager::ExistsConvar(const std::string& cvar_name)
 {
     ConVarRefAbstract cvar(cvar_name.c_str());
     return cvar.IsValidRef() && cvar.IsConVarDataValid();
 }
 
-EConVarType CConvarManager::GetConvarType(std::string cvar_name)
+EConVarType CConvarManager::GetConvarType(const std::string& cvar_name)
 {
     ConVarRefAbstract cvar(cvar_name.c_str());
     if (!cvar.IsConVarDataValid()) return EConVarType::EConVarType_Invalid;
     return cvar.GetType();
 }
 
-void* CConvarManager::GetConvarDataAddress(std::string cvar_name)
+ConVarRefAbstract& CConvarManager::GetConvarRef(const char* cvar_name)
+{
+    QueueLockGuard lock(m_mtxConvars);
+
+    auto it = m_convarRefs.find(std::string_view(cvar_name));
+    if (it == m_convarRefs.end())
+        return m_convarRefs.emplace(cvar_name, ConVarRefAbstract(cvar_name)).first->second;
+
+    if (!it->second.IsValidRef())
+        it->second = ConVarRefAbstract(cvar_name);
+
+    return it->second;
+}
+
+void* CConvarManager::GetConvarDataAddress(const std::string& cvar_name)
 {
     ConVarRefAbstract cvar(cvar_name.c_str());
     CSplitScreenSlot server(0);
@@ -382,30 +330,18 @@ void* CConvarManager::GetConvarDataAddress(std::string cvar_name)
     return cvar.GetConVarData()->ValueOrDefault(server);
 }
 
-ConvarValue CConvarManager::GetConvarValue(std::string cvar_name)
+ConvarValue CConvarManager::GetConvarValue(const std::string& cvar_name)
 {
     ConVarRefAbstract cvar(cvar_name.c_str());
     CSplitScreenSlot server(0);
     if (!cvar.IsConVarDataValid()) return 0;
 
-    if (cvar.GetType() == EConVarType_Int16)
+    switch (cvar.GetType())
     {
-        return cvar.GetAs<int16_t>(server);
-    }
-    else if (cvar.GetType() == EConVarType_UInt16)
-    {
-        return cvar.GetAs<uint16_t>(server);
-    }
-    else if (cvar.GetType() == EConVarType_UInt32)
-    {
-        return cvar.GetAs<uint32_t>(server);
-    }
-    else if (cvar.GetType() == EConVarType_Int32)
-    {
-        return cvar.GetAs<int32_t>(server);
-    }
-    else if (cvar.GetType() == EConVarType_UInt64)
-    {
+        case EConVarType_Int16: return cvar.GetAs<int16_t>(server);
+        case EConVarType_UInt16: return cvar.GetAs<uint16_t>(server);
+        case EConVarType_Int32: return cvar.GetAs<int32_t>(server);
+        case EConVarType_UInt32: return cvar.GetAs<uint32_t>(server);
         /*
 
         unsigned long long long long long long long long long long long long long long long long long long
@@ -415,109 +351,24 @@ ConvarValue CConvarManager::GetConvarValue(std::string cvar_name)
 
 
         */
-        return (uint64_t)cvar.GetAs<uint64>(server);
-    }
-    else if (cvar.GetType() == EConVarType_Int64)
-    {
-        return (int64_t)cvar.GetAs<int64>(server);
-    }
-    else if (cvar.GetType() == EConVarType_Bool)
-    {
-        return cvar.GetAs<bool>(server);
-    }
-    else if (cvar.GetType() == EConVarType_Float32)
-    {
-        return cvar.GetAs<float>(server);
-    }
-    else if (cvar.GetType() == EConVarType_Float64)
-    {
-        return cvar.GetAs<double>(server);
-    }
-    else if (cvar.GetType() == EConVarType_String)
-    {
-        return std::string(cvar.GetString(server).String());
-    }
-    else if (cvar.GetType() == EConVarType_Color)
-    {
-        return cvar.GetAs<Color>(server);
-    }
-    else if (cvar.GetType() == EConVarType_Vector2)
-    {
-        return cvar.GetAs<Vector2D>(server);
-    }
-    else if (cvar.GetType() == EConVarType_Vector3)
-    {
-        return cvar.GetAs<Vector>(server);
-    }
-    else if (cvar.GetType() == EConVarType_Vector4)
-    {
-        return cvar.GetAs<Vector4D>(server);
-    }
-    else if (cvar.GetType() == EConVarType_Qangle)
-    {
-        return cvar.GetAs<QAngle>(server);
-    }
-    else {
-        g_pLogger->Error("Convars", fmt::format("Unsupported ConVar type: {}", (int)cvar.GetType()));
-        return 0;
+        case EConVarType_UInt64: return (uint64_t)cvar.GetAs<uint64>(server);
+        case EConVarType_Int64: return (int64_t)cvar.GetAs<int64>(server);
+        case EConVarType_Bool: return cvar.GetAs<bool>(server);
+        case EConVarType_Float32: return cvar.GetAs<float>(server);
+        case EConVarType_Float64: return cvar.GetAs<double>(server);
+        case EConVarType_String: return std::string(cvar.GetString(server).String());
+        case EConVarType_Color: return cvar.GetAs<Color>(server);
+        case EConVarType_Vector2: return cvar.GetAs<Vector2D>(server);
+        case EConVarType_Vector3: return cvar.GetAs<Vector>(server);
+        case EConVarType_Vector4: return cvar.GetAs<Vector4D>(server);
+        case EConVarType_Qangle: return cvar.GetAs<QAngle>(server);
+        default:
+            g_pLogger->Error("Convars", fmt::format("Unsupported ConVar type: {}", (int)cvar.GetType()));
+            return 0;
     }
 }
 
-std::string ConvertConvarValueToString(ConvarValue& value)
-{
-    std::string value_str;
-    if (std::holds_alternative<int16_t>(value))
-        value_str = fmt::format("{}", std::get<int16_t>(value));
-    else if (std::holds_alternative<uint16_t>(value))
-        value_str = fmt::format("{}", std::get<uint16_t>(value));
-    else if (std::holds_alternative<int32_t>(value))
-        value_str = fmt::format("{}", std::get<int32_t>(value));
-    else if (std::holds_alternative<uint32_t>(value))
-        value_str = fmt::format("{}", std::get<uint32_t>(value));
-    else if (std::holds_alternative<float>(value))
-        value_str = fmt::format("{}", std::get<float>(value));
-    else if (std::holds_alternative<double>(value))
-        value_str = fmt::format("{}", std::get<double>(value));
-    else if (std::holds_alternative<int64_t>(value))
-        value_str = fmt::format("{}", std::get<int64_t>(value));
-    else if (std::holds_alternative<uint64_t>(value))
-        value_str = fmt::format("{}", std::get<uint64_t>(value));
-    else if (std::holds_alternative<std::string>(value))
-        value_str = std::get<std::string>(value);
-    else if (std::holds_alternative<bool>(value))
-        value_str = std::get<bool>(value) ? "1" : "0";
-    else if (std::holds_alternative<Color>(value))
-    {
-        Color clr = std::get<Color>(value);
-        value_str = fmt::format("{},{},{},{}", clr.r(), clr.g(), clr.b(), clr.a());
-    }
-    else if (std::holds_alternative<Vector2D>(value))
-    {
-        Vector2D vec = std::get<Vector2D>(value);
-        value_str = fmt::format("{},{}", vec.x, vec.y);
-    }
-    else if (std::holds_alternative<Vector>(value))
-    {
-        Vector vec = std::get<Vector>(value);
-        value_str = fmt::format("{},{},{}", vec.x, vec.y, vec.z);
-    }
-    else if (std::holds_alternative<Vector4D>(value))
-    {
-        Vector4D vec = std::get<Vector4D>(value);
-        value_str = fmt::format("{},{},{},{}", vec.x, vec.y, vec.z, vec.w);
-    }
-    else if (std::holds_alternative<QAngle>(value))
-    {
-        QAngle ang = std::get<QAngle>(value);
-        value_str = fmt::format("{},{},{}", ang.x, ang.y, ang.z);
-    }
-    else value_str = "";
-
-    return value_str;
-}
-
-
-void CConvarManager::SetConvarValue(std::string cvar_name, ConvarValue value)
+void CConvarManager::SetConvarValue(const std::string& cvar_name, const ConvarValue& value)
 {
     ConVarRefAbstract cvar(cvar_name.c_str());
     CSplitScreenSlot server(0);
@@ -565,7 +416,7 @@ some people don't even want to look through all the fields and just go to the sh
 
 */
 
-void CConvarManager::AddFlags(std::string cvar_name, uint64_t flags)
+void CConvarManager::AddFlags(const std::string& cvar_name, uint64_t flags)
 {
     ConVarRefAbstract cvar(cvar_name.c_str());
     if (!cvar.IsConVarDataValid()) return;
@@ -573,7 +424,7 @@ void CConvarManager::AddFlags(std::string cvar_name, uint64_t flags)
     cvar.AddFlags(flags);
 }
 
-void CConvarManager::RemoveFlags(std::string cvar_name, uint64_t flags)
+void CConvarManager::RemoveFlags(const std::string& cvar_name, uint64_t flags)
 {
     ConVarRefAbstract cvar(cvar_name.c_str());
     if (!cvar.IsConVarDataValid()) return;
@@ -581,7 +432,7 @@ void CConvarManager::RemoveFlags(std::string cvar_name, uint64_t flags)
     cvar.RemoveFlags(flags);
 }
 
-void CConvarManager::ClearFlags(std::string cvar_name)
+void CConvarManager::ClearFlags(const std::string& cvar_name)
 {
     ConVarRefAbstract cvar(cvar_name.c_str());
     if (!cvar.IsConVarDataValid()) return;
@@ -589,7 +440,7 @@ void CConvarManager::ClearFlags(std::string cvar_name)
     cvar.RemoveFlags(cvar.GetFlags());
 }
 
-uint64_t CConvarManager::GetFlags(std::string cvar_name)
+uint64_t CConvarManager::GetFlags(const std::string& cvar_name)
 {
     ConVarRefAbstract cvar(cvar_name.c_str());
     if (!cvar.IsConVarDataValid()) return 0;
@@ -599,36 +450,105 @@ uint64_t CConvarManager::GetFlags(std::string cvar_name)
 
 uint64_t CConvarManager::AddGlobalChangeListener(std::function<void(const char*, int, const char*, const char*)> callback)
 {
-    g_mChangeCallbacks[g_uChangeCallbackId++] = callback;
-    return g_uChangeCallbackId - 1;
+    uint64_t id;
+    {
+        QueueLockGuard lock(m_mtxListeners);
+        id = ++m_lastListenerId;
+        m_changeListeners[id] = std::move(callback);
+    }
+
+    UpdateChangeCallback();
+    return id;
 }
 
 void CConvarManager::RemoveGlobalChangeListener(uint64_t callback_id)
 {
-    if (g_mChangeCallbacks.find(callback_id) != g_mChangeCallbacks.end())
-        g_mChangeCallbacks.erase(callback_id);
+    {
+        QueueLockGuard lock(m_mtxListeners);
+        m_changeListeners.erase(callback_id);
+    }
+
+    UpdateChangeCallback();
 }
 
 uint64_t CConvarManager::AddConvarCreatedListener(std::function<void(const char*)> callback)
 {
-    g_mCreatedConvarsCallbacks[g_uCreatedConvarId++] = callback;
-    return g_uCreatedConvarId - 1;
+    uint64_t id;
+    {
+        QueueLockGuard lock(m_mtxListeners);
+        id = ++m_lastListenerId;
+        m_convarCreatedListeners[id] = std::move(callback);
+    }
+
+    UpdateCreationListener();
+    return id;
 }
 
 void CConvarManager::RemoveConvarCreatedListener(uint64_t callback_id)
 {
-    if (g_mCreatedConvarsCallbacks.find(callback_id) != g_mCreatedConvarsCallbacks.end())
-        g_mCreatedConvarsCallbacks.erase(callback_id);
+    {
+        QueueLockGuard lock(m_mtxListeners);
+        m_convarCreatedListeners.erase(callback_id);
+    }
+
+    UpdateCreationListener();
 }
 
 uint64_t CConvarManager::AddConCommandCreatedListener(std::function<void(const char*)> callback)
 {
-    g_mCreateConCommandCallbacks[g_uCreatedConCommandId++] = callback;
-    return g_uCreatedConCommandId - 1;
+    uint64_t id;
+    {
+        QueueLockGuard lock(m_mtxListeners);
+        id = ++m_lastListenerId;
+        m_conCommandCreatedListeners[id] = std::move(callback);
+    }
+
+    UpdateCreationListener();
+    return id;
 }
 
 void CConvarManager::RemoveConCommandCreatedListener(uint64_t callback_id)
 {
-    if (g_mCreateConCommandCallbacks.find(callback_id) != g_mCreateConCommandCallbacks.end())
-        g_mCreateConCommandCallbacks.erase(callback_id);
+    {
+        QueueLockGuard lock(m_mtxListeners);
+        m_conCommandCreatedListeners.erase(callback_id);
+    }
+
+    UpdateCreationListener();
+}
+
+void CConvarManager::UpdateChangeCallback()
+{
+    bool install;
+    {
+        QueueLockGuard lock(m_mtxListeners);
+
+        install = !m_changeListeners.empty();
+        if (install == m_bChangeCallbackInstalled) return;
+
+        m_bChangeCallbackInstalled = install;
+    }
+
+    if (install)
+        g_pGameCvar->InstallGlobalChangeCallback(ChangedConvarCallback);
+    else
+        g_pGameCvar->RemoveGlobalChangeCallback(ChangedConvarCallback);
+}
+
+void CConvarManager::UpdateCreationListener()
+{
+    bool install;
+    {
+        QueueLockGuard lock(m_mtxListeners);
+
+        install = !m_convarCreatedListeners.empty() || !m_conCommandCreatedListeners.empty();
+        if (install == m_bCreationListenerInstalled) return;
+
+        m_bCreationListenerInstalled = install;
+    }
+
+    if (install)
+        g_pGameCvar->RegisterCreationListeners(this);
+    else
+        g_pGameCvar->RemoveCreationListeners(this);
 }

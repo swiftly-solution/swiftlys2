@@ -1,4 +1,3 @@
-using SwiftlyS2.Shared;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Scheduler;
@@ -10,11 +9,8 @@ namespace SwiftlyS2.Core.Services;
 
 internal class EngineService : IEngineService
 {
-    private readonly ISwiftlyCore core;
-
-    public EngineService( ISwiftlyCore core )
+    public EngineService()
     {
-        this.core = core;
     }
 
     public string? ServerIP => NativeEngineHelpers.GetIP();
@@ -46,22 +42,6 @@ internal class EngineService : IEngineService
     public Task ExecuteCommandAsync( string command )
     {
         return SchedulerManager.QueueOrNow(() => ExecuteCommand(command));
-    }
-
-    public void ExecuteCommandWithBuffer( string command, Action<string> bufferCallback )
-    {
-        if (string.IsNullOrWhiteSpace(command) || core.ConVar.FindAsString(command.Trim().Split(" ")[0].Trim()) != null)
-        {
-            bufferCallback(string.Empty);
-            return;
-        }
-        CommandTrackerManager.EnqueueCommand(bufferCallback);
-        NativeEngineHelpers.ExecuteCommand($"ecwb{command.Trim()}");
-    }
-
-    public Task ExecuteCommandWithBufferAsync( string command, Action<string> bufferCallback )
-    {
-        return SchedulerManager.QueueOrNow(() => ExecuteCommandWithBuffer(command, bufferCallback));
     }
 
     public bool IsMapValid( string map )

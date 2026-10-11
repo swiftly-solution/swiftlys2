@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.Loader;
 using System.Collections.Concurrent;
@@ -280,10 +281,12 @@ internal class PluginManager : IPluginManager
 
             try
             {
+                var startedAt = Stopwatch.GetTimestamp();
                 var context = LoadPluginInternal(pluginDir, hotReload: false, silent: false);
+                var elapsed = Stopwatch.GetElapsedTime(startedAt);
                 if (context?.Status == PluginStatus.Loaded)
                 {
-                    LogPluginLoadSuccess(context, displayPath);
+                    LogPluginLoadSuccess(context, displayPath, elapsed);
                 }
                 else
                 {
@@ -963,19 +966,21 @@ internal class PluginManager : IPluginManager
         return Path.Combine(directory, $"{dirName}.dll");
     }
 
-    private void LogPluginLoadSuccess( PluginContext context, string displayPath )
+    private void LogPluginLoadSuccess( PluginContext context, string displayPath, TimeSpan loadTime )
     {
         _logger.LogInformation(
             string.Join("\n", [
                 "Loaded Plugin",
                 "├─  {Id} {Version}",
                 "├─  Author: {Author}",
-                "└─  Path: {RelativePath}"
+                "├─  Path: {RelativePath}",
+                "└─  Load time: {LoadTimeMs:F1} ms"
             ]),
             context.Metadata!.Id,
             context.Metadata!.Version,
             context.Metadata!.Author,
-            displayPath);
+            displayPath,
+            loadTime.TotalMilliseconds);
     }
 
     private void LogObsoleteApiUsages( string entrypointDll, string pluginName )

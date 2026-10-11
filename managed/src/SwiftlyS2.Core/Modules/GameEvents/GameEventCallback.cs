@@ -3,21 +3,19 @@ using SwiftlyS2.Shared.GameEvents;
 using SwiftlyS2.Core.Extensions;
 using SwiftlyS2.Core.Services;
 using SwiftlyS2.Shared.Misc;
-using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared.Profiler;
 
 namespace SwiftlyS2.Core.GameEvents;
 
-internal abstract class GameEventCallback : IEquatable<GameEventCallback>, IDisposable
+internal abstract class GameEventCallback : IEquatable<GameEventCallback>
 {
+    public Guid Guid { get; } = Guid.NewGuid();
 
-    public Guid Guid { get; init; }
+    public abstract uint EventHash { get; }
 
-    public string EventName { get; init; } = "";
+    public abstract string EventName { get; }
 
-    public Type EventType { get; init; } = typeof(object);
-
-    public bool IsPreHook { get; init; }
+    public bool IsPreHook { get; }
 
     public IContextedProfilerService Profiler { get; }
 
@@ -25,62 +23,48 @@ internal abstract class GameEventCallback : IEquatable<GameEventCallback>, IDisp
 
     public CoreContext Context { get; }
 
-    protected GameEventCallback( ILoggerFactory loggerFactory, IContextedProfilerService profiler, CoreContext context )
+    protected GameEventCallback( bool isPreHook, ILoggerFactory loggerFactory, IContextedProfilerService profiler, CoreContext context )
     {
+        IsPreHook = isPreHook;
         LoggerFactory = loggerFactory;
         Profiler = profiler;
         Context = context;
     }
 
-    internal virtual HookResult InvokeAsPre( uint hash, nint pEvent, nint pDontBroadcast ) => HookResult.Continue;
-    internal virtual HookResult InvokeAsPost( uint hash, nint pEvent, nint pDontBroadcast ) => HookResult.Continue;
+    internal abstract HookResult Invoke( nint pEvent, nint pDontBroadcast );
 
-    public abstract void Dispose();
+    public bool Equals( GameEventCallback? other ) => other is not null && Guid == other.Guid;
 
-    public bool Equals( GameEventCallback? other )
-    {
-        return other is not null && Guid == other.Guid;
-    }
+    public override bool Equals( object? obj ) => ReferenceEquals(this, obj) || (obj is GameEventCallback other && Equals(other));
 
-    public override bool Equals( object? obj )
-    {
-        return ReferenceEquals(this, obj) || (obj is GameEventCallback other && Equals(other));
-    }
-
-    public override int GetHashCode()
-    {
-        return Guid.GetHashCode();
-    }
+    public override int GetHashCode() => Guid.GetHashCode();
 }
 
-internal class GameEventCallback<T> : GameEventCallback, IDisposable where T : IGameEvent<T>
+internal sealed class GameEventCallback<T> : GameEventCallback where T : IGameEvent<T>
 {
-    private static readonly uint s_hash = T.GetHash();
-    private static readonly string s_eventName = T.GetName();
+    private static readonly uint hash = T.GetHash();
+    private static readonly string eventName = T.GetName();
 
-    private IGameEventService.GameEventHandler<T> _callback { get; init; }
-    private ILogger<GameEventCallback<T>> _Logger { get; init; }
+    private readonly IGameEventService.GameEventHandler<T> callback;
+    private readonly ILogger<GameEventCallback<T>> logger;
 
-    public GameEventCallback( IGameEventService.GameEventHandler<T> callback, bool pre, ILoggerFactory loggerFactory, IContextedProfilerService profiler, CoreContext context ) : base(loggerFactory, profiler, context)
+    public GameEventCallback( IGameEventService.GameEventHandler<T> callback, bool isPreHook, ILoggerFactory loggerFactory, IContextedProfilerService profiler, CoreContext context )
+        : base(isPreHook, loggerFactory, profiler, context)
     {
-        Guid = Guid.NewGuid();
-        EventType = typeof(T);
-        IsPreHook = pre;
-        EventName = s_eventName;
-        _callback = callback;
-        _Logger = LoggerFactory.CreateLogger<GameEventCallback<T>>();
-        NativeGameEvents.RegisterListener(s_eventName);
-        GameEventService.RegisterCallback(this);
+        this.callback = callback;
+        logger = loggerFactory.CreateLogger<GameEventCallback<T>>();
     }
 
-    private HookResult Invoke( uint hash, nint pEvent, nint pDontBroadcast )
-    {
-        if (hash != s_hash) return HookResult.Continue;
+    public override uint EventHash => hash;
 
+    public override string EventName => eventName;
+
+    internal override HookResult Invoke( nint pEvent, nint pDontBroadcast )
+    {
         try
         {
             var eventObj = T.Create(pEvent);
-            var result = _callback(eventObj);
+            var result = callback(eventObj);
             pDontBroadcast.Write(eventObj.DontBroadcast);
             eventObj.Dispose();
             return result;
@@ -88,19 +72,8 @@ internal class GameEventCallback<T> : GameEventCallback, IDisposable where T : I
         catch (Exception e)
         {
             if (!GlobalExceptionHandler.Handle(ref e)) return HookResult.Continue;
-            _Logger.LogError(e, "Error in event {EventName} callback from context {ContextName}", s_eventName, Context.Name);
+            logger.LogError(e, "Error in event {EventName} callback from context {ContextName}", eventName, Context.Name);
             return HookResult.Continue;
         }
-    }
-
-    internal override HookResult InvokeAsPre( uint hash, nint pEvent, nint pDontBroadcast )
-        => IsPreHook ? Invoke(hash, pEvent, pDontBroadcast) : HookResult.Continue;
-
-    internal override HookResult InvokeAsPost( uint hash, nint pEvent, nint pDontBroadcast )
-        => IsPreHook ? HookResult.Continue : Invoke(hash, pEvent, pDontBroadcast);
-
-    public override void Dispose()
-    {
-        GameEventService.UnregisterCallback(this);
     }
 }

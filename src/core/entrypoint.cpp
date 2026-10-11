@@ -23,6 +23,7 @@
 #include <api/memory/hooks/manager.h>
 #include <api/scripting/scripting.h>
 #include <api/shared/env.h>
+#include <api/extension/host.h>
 
 #include <core/managed/host/host.h>
 
@@ -242,6 +243,8 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
 
     StartFixes();
 
+    g_pExtensionHost->LoadExtensions(std::string(Plat_GetGameDirectory()) + "/" + g_sGameFolder + "/" + m_sCorePath);
+
     if (!InitializeHostFXR(std::string(Plat_GetGameDirectory()) + "/" + g_sGameFolder + "/" + m_sCorePath))
     {
         g_pCrashReporter->ReportPreventionIncident("Managed", fmt::format("Couldn't initialize the .NET runtime. Make sure you installed `swiftlys2-{}-{}-with-runtimes.zip`.", WIN_LINUX("windows", "linux"), GetVersion()));
@@ -269,6 +272,7 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
 
 bool SwiftlyCore::Unload()
 {
+    g_pExtensionHost->UnloadExtensions();
     g_pHooksManager->Shutdown();
     g_pPlayerManager->Shutdown();
     g_pEntSystem->Shutdown();

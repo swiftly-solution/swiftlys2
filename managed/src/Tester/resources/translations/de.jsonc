@@ -1,0 +1,4 @@
+{
+  "tester.hello": "Hallo",
+  "tester.format": "Spieler {0} hat {1} Punkte"
+}

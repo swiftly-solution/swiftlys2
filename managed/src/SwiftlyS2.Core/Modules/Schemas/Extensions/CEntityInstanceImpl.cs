@@ -101,7 +101,7 @@ internal partial class CEntityInstanceImpl : CEntityInstance, IEquatable<CEntity
     public void DispatchSpawn( CEntityKeyValues? entityKV = null )
     {
         ThrowIfInvalidEntity();
-        NativeEntitySystem.Spawn(Address, entityKV?.Address ?? nint.Zero);
+        GameFunctions.DispatchSpawn(Address, entityKV?.Address ?? nint.Zero);
     }
 
     public Task DispatchSpawnAsync( CEntityKeyValues? entityKV = null )
@@ -112,7 +112,7 @@ internal partial class CEntityInstanceImpl : CEntityInstance, IEquatable<CEntity
     public void Despawn()
     {
         ThrowIfInvalidEntity();
-        NativeEntitySystem.Despawn(Address);
+        GameFunctions.Despawn(Address);
     }
 
     public Task DespawnAsync()

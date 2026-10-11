@@ -136,7 +136,13 @@ internal class PermissionManager : IPermissionManager
         }
 
         var prefix = from[..^2];
-        return target.StartsWith(prefix, StringComparison.OrdinalIgnoreCase);
+        if (!from.EndsWith(".*", StringComparison.Ordinal))
+        {
+            return target.StartsWith(prefix, StringComparison.OrdinalIgnoreCase);
+        }
+
+        return target.Equals(prefix, StringComparison.OrdinalIgnoreCase)
+            || (target.Length > prefix.Length && target[prefix.Length] == '.' && target.StartsWith(prefix, StringComparison.OrdinalIgnoreCase));
     }
 
     private bool HasNestedPermission( string rootPermission, string targetPermission, HashSet<string> visitedPermissions )

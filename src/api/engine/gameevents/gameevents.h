@@ -24,21 +24,24 @@
 
 #include <public/igameevents.h>
 
+// to supercede, return 1
+// IGameEvent* event, bool& dont_broadcast, uint32_t hash
+using GameEventFireHandler = std::function<int(IGameEvent*, bool&, uint32_t)>;
+
 class IEventManager
 {
 public:
     virtual void Initialize() = 0;
     virtual void Shutdown() = 0;
 
-    virtual void RegisterGameEventsListeners(bool shouldRegister) = 0;
+    virtual void OnServerStartup() = 0;
+    // only registered events are forwarded to the fire handlers
     virtual void RegisterGameEventListener(std::string event_name) = 0;
+    virtual void UnregisterGameEventListener(std::string event_name) = 0;
+    virtual bool IsEventRegistered(uint32_t event_hash) = 0;
 
-    // to supercede, return 1
-    // std::string& event_name, IGameEvent* event, bool& dont_broadcast, uint32_t& hash
-    virtual void SetGameEventFireHandler(std::function<int(std::string&, IGameEvent*, bool&, uint32_t&)> handler) = 0;
-    // to supercede, return 1
-    // std::string& event_name, IGameEvent* event, bool& dont_broadcast, uint32_t& hash
-    virtual void SetPostGameEventFireHandler(std::function<int(std::string&, IGameEvent*, bool&, uint32_t&)> handler) = 0;
+    virtual void SetGameEventFireHandler(GameEventFireHandler handler) = 0;
+    virtual void SetPostGameEventFireHandler(GameEventFireHandler handler) = 0;
 
     virtual IGameEventManager2* GetGameEventManager() = 0;
 };

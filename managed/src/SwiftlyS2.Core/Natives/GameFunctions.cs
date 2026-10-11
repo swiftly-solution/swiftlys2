@@ -29,6 +29,8 @@ internal static class GameFunctions
     public static unsafe delegate* unmanaged< Vector*, QAngle*, Vector*, Vector*, nint, uint, nint > pCMolotovProjectileEmitGrenade;
     public static unsafe delegate* unmanaged< nint, nint, nint, nint, nint, nint, float, nint, nint, void > pCEntitySystemAddEntityIOEvent;
     public static unsafe delegate* unmanaged< nint, int, nint > pCreateEntityByName;
+    public static unsafe delegate* unmanaged< nint, nint, void > pCBaseEntityDispatchSpawn;
+    public static unsafe delegate* unmanaged< nint, void > pUtilRemove;
     public static unsafe delegate* unmanaged< nint, nint, nint, nint, nint, void > pCEntityInstaceAcceptInput;
     public static unsafe delegate* unmanaged< nint, int, void > pSwitchTeam;
     public static unsafe delegate* unmanaged< nint, int, nint*, nint*, nint*, void > pCCSCustomHudLayoutSetDialogVariableStringForPlayer;
@@ -109,6 +111,8 @@ internal static class GameFunctions
             pCEntitySystemAddEntityIOEvent = (delegate* unmanaged< nint, nint, nint, nint, nint, nint, float, nint, nint, void >)NativeSignatures.Fetch("CEntitySystem::AddEntityIOEvent");
             pCEntityInstaceAcceptInput = (delegate* unmanaged< nint, nint, nint, nint, nint, void >)NativeSignatures.Fetch("CEntityInstance::AcceptInput");
             pCreateEntityByName = (delegate* unmanaged< nint, int, nint >)NativeSignatures.Fetch("UTIL::CreateEntityByName");
+            pCBaseEntityDispatchSpawn = (delegate* unmanaged< nint, nint, void >)NativeSignatures.Fetch("CBaseEntity::DispatchSpawn");
+            pUtilRemove = (delegate* unmanaged< nint, void >)NativeSignatures.Fetch("UTIL::Remove");
 
             pCCSCustomHudLayoutSetDialogVariableStringForPlayer = (delegate* unmanaged< nint, int, nint*, nint*, nint*, void >)NativeSignatures.Fetch("CCSCustomHudLayout::SetDialogVariableStringForPlayer");
             pCCSCustomHudLayoutRemoveDialogVariableStringForPlayer = (delegate* unmanaged< nint, int, nint*, nint*, void >)NativeSignatures.Fetch("CCSCustomHudLayout::RemoveDialogVariableStringForPlayer");
@@ -165,6 +169,44 @@ internal static class GameFunctions
         {
             AnsiConsole.WriteException(e);
             return 0;
+        }
+    }
+
+    public static void DispatchSpawn( nint pEntity, nint pKeyValues )
+    {
+        NativeBinding.ThrowIfNonMainThread();
+
+        try
+        {
+            CheckPtr(pEntity, nameof(pEntity));
+
+            unsafe
+            {
+                pCBaseEntityDispatchSpawn(pEntity, pKeyValues);
+            }
+        }
+        catch (Exception e)
+        {
+            AnsiConsole.WriteException(e);
+        }
+    }
+
+    public static void Despawn( nint pEntity )
+    {
+        NativeBinding.ThrowIfNonMainThread();
+
+        try
+        {
+            CheckPtr(pEntity, nameof(pEntity));
+
+            unsafe
+            {
+                pUtilRemove(pEntity);
+            }
+        }
+        catch (Exception e)
+        {
+            AnsiConsole.WriteException(e);
         }
     }
 

@@ -45,7 +45,7 @@ inline constexpr uint64_t hash_64_fnv1a_const(const char* const str, const uint6
 std::string replace(std::string str, const std::string from, const std::string to);
 std::vector<std::string> explode(std::string str, std::string delimiter);
 std::set<std::string> explodeToSet(std::string str, std::string delimiter);
-std::string implode(std::vector<std::string>& elements, std::string delimiter);
+std::string implode(const std::vector<std::string>& elements, const std::string& delimiter);
 std::string ProcessColor(std::string str, int team);
 std::string ClearColors(std::string str);
 bool ends_with(std::string value, std::string ending);

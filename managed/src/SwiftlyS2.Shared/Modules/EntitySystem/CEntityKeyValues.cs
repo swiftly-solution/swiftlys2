@@ -1,7 +1,26 @@
+using System.Runtime.CompilerServices;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared.Natives;
 
 namespace SwiftlyS2.Shared.EntitySystem;
+
+internal enum CEntityKeyValuesValueKind
+{
+  Bool,
+  Int32,
+  UInt32,
+  Int64,
+  UInt64,
+  Float,
+  Double,
+  Ptr,
+  StringToken,
+  Color,
+  Vector,
+  Vector2D,
+  Vector4D,
+  QAngle
+}
 
 public class CEntityKeyValues : IDisposable
 {
@@ -20,39 +39,51 @@ public class CEntityKeyValues : IDisposable
 
   public nint Address => _handle.Address;
 
+  private unsafe T Read<T>( string key, CEntityKeyValuesValueKind kind ) where T : unmanaged
+  {
+    T value = default;
+    NativeCEntityKeyValues.GetValue(Address, key, (int)kind, (nint)(&value));
+    return value;
+  }
+
+  private unsafe void Write<T>( string key, CEntityKeyValuesValueKind kind, T value ) where T : unmanaged
+  {
+    NativeCEntityKeyValues.SetValue(Address, key, (int)kind, (nint)(&value));
+  }
+
   public void SetBool( string key, bool value )
   {
-    NativeCEntityKeyValues.SetBool(Address, key, value);
+    Write(key, CEntityKeyValuesValueKind.Bool, value);
   }
 
   public void SetInt32( string key, int value )
   {
-    NativeCEntityKeyValues.SetInt(Address, key, value);
+    Write(key, CEntityKeyValuesValueKind.Int32, value);
   }
 
   public void SetUInt32( string key, uint value )
   {
-    NativeCEntityKeyValues.SetUint(Address, key, value);
+    Write(key, CEntityKeyValuesValueKind.UInt32, value);
   }
 
   public void SetInt64( string key, long value )
   {
-    NativeCEntityKeyValues.SetInt64(Address, key, value);
+    Write(key, CEntityKeyValuesValueKind.Int64, value);
   }
 
   public void SetUInt64( string key, ulong value )
   {
-    NativeCEntityKeyValues.SetUint64(Address, key, value);
+    Write(key, CEntityKeyValuesValueKind.UInt64, value);
   }
 
   public void SetFloat( string key, float value )
   {
-    NativeCEntityKeyValues.SetFloat(Address, key, value);
+    Write(key, CEntityKeyValuesValueKind.Float, value);
   }
 
   public void SetDouble( string key, double value )
   {
-    NativeCEntityKeyValues.SetDouble(Address, key, value);
+    Write(key, CEntityKeyValuesValueKind.Double, value);
   }
 
   public void SetString( string key, string value )
@@ -62,72 +93,72 @@ public class CEntityKeyValues : IDisposable
 
   public void SetPtr( string key, nint value )
   {
-    NativeCEntityKeyValues.SetPtr(Address, key, value);
+    Write(key, CEntityKeyValuesValueKind.Ptr, value);
   }
 
   public void SetStringToken( string key, CUtlStringToken value )
   {
-    NativeCEntityKeyValues.SetStringToken(Address, key, value);
+    Write(key, CEntityKeyValuesValueKind.StringToken, value);
   }
 
   public void SetColor( string key, Color value )
   {
-    NativeCEntityKeyValues.SetColor(Address, key, value);
+    Write(key, CEntityKeyValuesValueKind.Color, value);
   }
 
   public void SetVector( string key, Vector value )
   {
-    NativeCEntityKeyValues.SetVector(Address, key, value);
+    Write(key, CEntityKeyValuesValueKind.Vector, value);
   }
 
   public void SetVector2D( string key, Vector2D value )
   {
-    NativeCEntityKeyValues.SetVector2D(Address, key, value);
+    Write(key, CEntityKeyValuesValueKind.Vector2D, value);
   }
 
   public void SetVector4D( string key, Vector4D value )
   {
-    NativeCEntityKeyValues.SetVector4D(Address, key, value);
+    Write(key, CEntityKeyValuesValueKind.Vector4D, value);
   }
 
   public void SetQAngle( string key, QAngle value )
   {
-    NativeCEntityKeyValues.SetQAngle(Address, key, value);
+    Write(key, CEntityKeyValuesValueKind.QAngle, value);
   }
 
   public bool GetBool( string key )
   {
-    return NativeCEntityKeyValues.GetBool(Address, key);
+    return Read<bool>(key, CEntityKeyValuesValueKind.Bool);
   }
 
   public int GetInt32( string key )
   {
-    return NativeCEntityKeyValues.GetInt(Address, key);
+    return Read<int>(key, CEntityKeyValuesValueKind.Int32);
   }
 
   public uint GetUInt32( string key )
   {
-    return NativeCEntityKeyValues.GetUint(Address, key);
+    return Read<uint>(key, CEntityKeyValuesValueKind.UInt32);
   }
 
   public long GetInt64( string key )
   {
-    return NativeCEntityKeyValues.GetInt64(Address, key);
+    return Read<long>(key, CEntityKeyValuesValueKind.Int64);
   }
 
   public ulong GetUInt64( string key )
   {
-    return NativeCEntityKeyValues.GetUint64(Address, key);
+    return Read<ulong>(key, CEntityKeyValuesValueKind.UInt64);
   }
 
   public float GetFloat( string key )
   {
-    return NativeCEntityKeyValues.GetFloat(Address, key);
+    return Read<float>(key, CEntityKeyValuesValueKind.Float);
   }
 
   public double GetDouble( string key )
   {
-    return NativeCEntityKeyValues.GetDouble(Address, key);
+    return Read<double>(key, CEntityKeyValuesValueKind.Double);
   }
 
   public string GetString( string key )
@@ -137,37 +168,37 @@ public class CEntityKeyValues : IDisposable
 
   public nint GetPtr( string key )
   {
-    return NativeCEntityKeyValues.GetPtr(Address, key);
+    return Read<nint>(key, CEntityKeyValuesValueKind.Ptr);
   }
 
   public CUtlStringToken GetStringToken( string key )
   {
-    return NativeCEntityKeyValues.GetStringToken(Address, key);
+    return Read<CUtlStringToken>(key, CEntityKeyValuesValueKind.StringToken);
   }
 
   public Color GetColor( string key )
   {
-    return NativeCEntityKeyValues.GetColor(Address, key);
+    return Read<Color>(key, CEntityKeyValuesValueKind.Color);
   }
 
   public Vector GetVector( string key )
   {
-    return NativeCEntityKeyValues.GetVector(Address, key);
+    return Read<Vector>(key, CEntityKeyValuesValueKind.Vector);
   }
 
   public Vector2D GetVector2D( string key )
   {
-    return NativeCEntityKeyValues.GetVector2D(Address, key);
+    return Read<Vector2D>(key, CEntityKeyValuesValueKind.Vector2D);
   }
 
   public Vector4D GetVector4D( string key )
   {
-    return NativeCEntityKeyValues.GetVector4D(Address, key);
+    return Read<Vector4D>(key, CEntityKeyValuesValueKind.Vector4D);
   }
 
   public QAngle GetQAngle( string key )
   {
-    return NativeCEntityKeyValues.GetQAngle(Address, key);
+    return Read<QAngle>(key, CEntityKeyValuesValueKind.QAngle);
   }
 
   public void Set<T>( string key, T value )
