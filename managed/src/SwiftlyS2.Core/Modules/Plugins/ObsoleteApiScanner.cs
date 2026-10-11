@@ -9,6 +9,7 @@ namespace SwiftlyS2.Core.Plugins;
 internal static class ObsoleteApiScanner
 {
     private const string CoreAssemblyName = "SwiftlyS2.CS2";
+    private const string ClassicMenuObsoletePrefix = "The classic menu system is deprecated";
     private const BindingFlags MemberLookupFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static;
 
     internal readonly record struct ObsoleteApiUsage( string Member, string? Reason );
@@ -190,9 +191,11 @@ internal static class ObsoleteApiScanner
 
     private static string? GetObsoleteReason( MemberInfo? member )
     {
-        return member == null || member.IsDefined(typeof(CompilerFeatureRequiredAttribute), inherit: false)
-            ? null
-            : member.GetCustomAttribute<ObsoleteAttribute>()?.Message;
+        if (member == null || member.IsDefined(typeof(CompilerFeatureRequiredAttribute), inherit: false))
+            return null;
+
+        var message = member.GetCustomAttribute<ObsoleteAttribute>()?.Message;
+        return message != null && message.StartsWith(ClassicMenuObsoletePrefix, StringComparison.Ordinal) ? null : message;
     }
 
     private static string StripAccessorPrefix( string memberName )
