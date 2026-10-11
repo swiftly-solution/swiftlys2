@@ -124,7 +124,7 @@ sw_status hook_vtable(
     void** original_out
 )
 {
-    if (!self || !vtable || offset > static_cast<uint32_t>(std::numeric_limits<int>::max()) || !hook_callback || !handle_out || !original_out)
+    if (!self || !vtable || offset > static_cast<uint32_t>((std::numeric_limits<int>::max)()) || !hook_callback || !handle_out || !original_out)
         return SW_E_INVALID_ARG;
 
     *handle_out = nullptr;
