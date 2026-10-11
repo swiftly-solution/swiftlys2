@@ -72,7 +72,7 @@ internal class PluginConfigurationService : IPluginConfigurationService
 
   public IPluginConfigurationService InitializeJsonWithModel<T>( string name, string sectionName ) where T : class, new()
   {
-    return InitializeJsonWithModel<T>(name, sectionName, false);
+    return InitializeJsonWithModel<T>(name, sectionName, true);
   }
 
   public IPluginConfigurationService InitializeJsonWithModel<T>( string name, string sectionName, bool addMissingKeys ) where T : class, new()
