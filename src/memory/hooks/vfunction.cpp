@@ -21,13 +21,74 @@
 #include <api/interfaces/interfaces.h>
 #include <core/entrypoint.h>
 
+VFunctionHook::VFunctionHook(void* callback, std::string moduleName, std::string vtableName, std::string offsetName)
+    : m_sName(offsetName), m_bManaged(true)
+{
+    m_fnResolve = [this, callback, moduleName = std::move(moduleName), vtableName = std::move(vtableName), offsetName = std::move(offsetName)]() {
+        void* vtable = nullptr;
+        g_pS2BinLib->FindVtable(moduleName.c_str(), vtableName.c_str(), &vtable);
+        if (!vtable) return;
+
+        SetHookFunction(vtable, g_pGameDataManager->GetOffsets()->Fetch(offsetName), callback, true);
+    };
+    RegisterManagedHook(this);
+}
+
+VFunctionHook::VFunctionHook(void* callback, std::string interfaceName, std::string offsetName)
+    : m_sName(offsetName), m_bManaged(true)
+{
+    m_fnResolve = [this, callback, interfaceName = std::move(interfaceName), offsetName = std::move(offsetName)]() {
+        SetHookFunction(interfaceName, g_pGameDataManager->GetOffsets()->Fetch(offsetName), callback);
+    };
+    RegisterManagedHook(this);
+}
+
+VFunctionHook::VFunctionHook(void* callback, std::function<void*()> instanceResolver, std::string offsetName)
+    : m_sName(offsetName), m_bManaged(true)
+{
+    m_fnResolve = [this, callback, instanceResolver = std::move(instanceResolver), offsetName = std::move(offsetName)]() {
+        SetHookFunction(instanceResolver(), g_pGameDataManager->GetOffsets()->Fetch(offsetName), callback, false);
+    };
+    RegisterManagedHook(this);
+}
+
+VFunctionHook::~VFunctionHook()
+{
+    if (m_bManaged)
+        UnregisterManagedHook(this);
+}
+
+bool VFunctionHook::Install()
+{
+    if (!m_bManaged) return false;
+    if (m_oHook) return true;
+
+    m_fnResolve();
+    if (!m_oHook) return false;
+
+    Enable();
+    return true;
+}
+
+void VFunctionHook::Uninstall()
+{
+    Disable();
+    m_oHook.reset();
+}
+
+const char* VFunctionHook::GetName() const
+{
+    return m_sName.c_str();
+}
+
 void VFunctionHook::SetHookFunction(const std::string& iface_name, int index, void* callback)
 {
-    static auto iface = g_SwiftlyCore.GetInterface(iface_name);
+    auto iface = g_SwiftlyCore.GetInterface(iface_name);
     if (!iface) return;
 
     void* trampoline_addr = nullptr;
     g_pS2BinLib->InstallTrampoline(((void*)((uintptr_t)(*(void**)iface) + 8 * index)), &trampoline_addr);
+    if (!trampoline_addr) return;
 
     m_oHook = safetyhook::create_inline(trampoline_addr, callback, safetyhook::InlineHook::Flags::StartDisabled);
 }
@@ -38,20 +99,21 @@ void VFunctionHook::SetHookFunction(void* instance, int index, void* callback, b
 
     void* trampoline_addr = nullptr;
     g_pS2BinLib->InstallTrampoline(is_vtable ? (void*)((uintptr_t)instance + 8 * index) : ((void*)((uintptr_t)(*(void**)instance) + 8 * index)), &trampoline_addr);
+    if (!trampoline_addr) return;
 
     m_oHook = safetyhook::create_inline(trampoline_addr, callback, safetyhook::InlineHook::Flags::StartDisabled);
 }
 
 void VFunctionHook::Enable()
 {
-    if (IsEnabled()) return;
+    if (!m_oHook || IsEnabled()) return;
 
     auto res = m_oHook.enable(); // due to nodiscard
 }
 
 void VFunctionHook::Disable()
 {
-    if (!IsEnabled()) return;
+    if (!m_oHook || !IsEnabled()) return;
 
     auto res = m_oHook.disable(); // due to nodiscard
 }

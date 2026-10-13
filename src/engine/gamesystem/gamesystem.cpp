@@ -17,17 +17,19 @@
  ************************************************************************************************/
 
 #include "gamesystem.h"
+#include <memory/hooks/vfunction.h>
 
 #include <api/interfaces/interfaces.h>
 
 CBaseGameSystemFactory** CBaseGameSystemFactory::sm_pFirst = nullptr;
 extern void* g_pOnPrecacheResourceCallback;
 
-IVFunctionHook* pOnPrecacheResourceCallbackHook = nullptr;
+void BuildGameSessionManifestHook(void* _this, EventBuildGameSessionManifest_t* msg);
+VFunctionHook g_BuildGameSessionManifestHook(reinterpret_cast<void*>(BuildGameSessionManifestHook), "server", "CGameRulesGameSystem", "IGameSystem::BuildGameSessionManifest");
 
 void BuildGameSessionManifestHook(void* _this, EventBuildGameSessionManifest_t* msg)
 {
-    reinterpret_cast<decltype(&BuildGameSessionManifestHook)>(pOnPrecacheResourceCallbackHook->GetOriginal())(_this, msg);
+    reinterpret_cast<decltype(&BuildGameSessionManifestHook)>(g_BuildGameSessionManifestHook.GetOriginal())(_this, msg);
 
     IEntityResourceManifest* pResourceManifest = msg->m_pResourceManifest;
     if (g_pOnPrecacheResourceCallback) reinterpret_cast<void(*)(void*)>(g_pOnPrecacheResourceCallback)(pResourceManifest);
@@ -35,13 +37,6 @@ void BuildGameSessionManifestHook(void* _this, EventBuildGameSessionManifest_t* 
 
 bool InitGameSystem()
 {
-    void* gameRulesGameSystemVTable = nullptr;
-    g_pS2BinLib->FindVtable("server", "CGameRulesGameSystem", &gameRulesGameSystemVTable);
-
-    pOnPrecacheResourceCallbackHook = g_pHooksManager->CreateVFunctionHook();
-    pOnPrecacheResourceCallbackHook->SetHookFunction(gameRulesGameSystemVTable, g_pGameDataManager->GetOffsets()->Fetch("IGameSystem::BuildGameSessionManifest"), (void*)BuildGameSessionManifestHook, true);
-    pOnPrecacheResourceCallbackHook->Enable();
-
     void* ptr = g_pGameDataManager->GetSignatures()->Fetch("IGameSystem::InitAllSystems->pFirst");
     if (!ptr) {
         g_pLogger->Error("Game System", "Couldn't find signature for 'IGameSystem::InitAllSystems->pFirst'!\n");
@@ -63,11 +58,5 @@ bool InitGameSystem()
 
 bool ShutdownGameSystem()
 {
-    if (pOnPrecacheResourceCallbackHook != nullptr)
-    {
-        pOnPrecacheResourceCallbackHook->Disable();
-        g_pHooksManager->DestroyVFunctionHook(pOnPrecacheResourceCallbackHook);
-        pOnPrecacheResourceCallbackHook = nullptr;
-    }
     return true;
-}
+}

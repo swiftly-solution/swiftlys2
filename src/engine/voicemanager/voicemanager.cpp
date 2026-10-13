@@ -17,68 +17,27 @@
  ************************************************************************************************/
 
 #include "voicemanager.h"
+#include <memory/hooks/vfunction.h>
 
 #include <api/interfaces/interfaces.h>
-
-IVFunctionHook* g_pSetClientListeningHook = nullptr;
-IVFunctionHook* g_pClientCommandHook = nullptr;
-IVFunctionHook* g_pClientVoiceHook = nullptr;
 
 bool SetClientListeningHook(void* _this, CPlayerSlot iReceiver, CPlayerSlot iSender, bool bListen);
 void ClientCommandHook(void* _this, CPlayerSlot slot, const CCommand& args);
 void ClientVoiceHook(void* _this, CPlayerSlot slot);
 
+VFunctionHook g_SetClientListeningHook(reinterpret_cast<void*>(SetClientListeningHook), INTERFACEVERSION_VENGINESERVER, "IVEngineServer2::SetClientListening");
+VFunctionHook g_ClientCommandHook(reinterpret_cast<void*>(ClientCommandHook), "server", "CSource2GameClients", "IServerGameClients::ClientCommand");
+VFunctionHook g_ClientVoiceHook(reinterpret_cast<void*>(ClientVoiceHook), "server", "CSource2GameClients", "IServerGameClients::ClientVoice");
+
 #define CBaseEntity_m_iTeamNum 0x9DC483B8A5BFEFB3
-
-void CVoiceManager::Initialize()
-{
-    g_pSetClientListeningHook = g_pHooksManager->CreateVFunctionHook();
-    g_pSetClientListeningHook->SetHookFunction(INTERFACEVERSION_VENGINESERVER, g_pGameDataManager->GetOffsets()->Fetch("IVEngineServer2::SetClientListening"), (void*)SetClientListeningHook);
-    g_pSetClientListeningHook->Enable();
-
-    void* gameclientsvtable = nullptr;
-    g_pS2BinLib->FindVtable("server", "CSource2GameClients", &gameclientsvtable);
-
-    g_pClientCommandHook = g_pHooksManager->CreateVFunctionHook();
-    g_pClientCommandHook->SetHookFunction(gameclientsvtable, g_pGameDataManager->GetOffsets()->Fetch("IServerGameClients::ClientCommand"), (void*)ClientCommandHook, true);
-    g_pClientCommandHook->Enable();
-
-    g_pClientVoiceHook = g_pHooksManager->CreateVFunctionHook();
-    g_pClientVoiceHook->SetHookFunction(gameclientsvtable, g_pGameDataManager->GetOffsets()->Fetch("IServerGameClients::ClientVoice"), (void*)ClientVoiceHook, true);
-    g_pClientVoiceHook->Enable();
-}
-
-void CVoiceManager::Shutdown()
-{
-    if (g_pSetClientListeningHook)
-    {
-        g_pSetClientListeningHook->Disable();
-        g_pHooksManager->DestroyVFunctionHook(g_pSetClientListeningHook);
-        g_pSetClientListeningHook = nullptr;
-    }
-
-    if (g_pClientCommandHook)
-    {
-        g_pClientCommandHook->Disable();
-        g_pHooksManager->DestroyVFunctionHook(g_pClientCommandHook);
-        g_pClientCommandHook = nullptr;
-    }
-
-    if (g_pClientVoiceHook)
-    {
-        g_pClientVoiceHook->Disable();
-        g_pHooksManager->DestroyVFunctionHook(g_pClientVoiceHook);
-        g_pClientVoiceHook = nullptr;
-    }
-}
 
 bool SetClientListeningHook(void* _this, CPlayerSlot iReceiver, CPlayerSlot iSender, bool bListen)
 {
     IPlayer* receiver = g_pPlayerManager->GetPlayer(iReceiver.Get());
-    if (!receiver) return reinterpret_cast<decltype(&SetClientListeningHook)>(g_pSetClientListeningHook->GetOriginal())(_this, iReceiver, iSender, bListen);
+    if (!receiver) return reinterpret_cast<decltype(&SetClientListeningHook)>(g_SetClientListeningHook.GetOriginal())(_this, iReceiver, iSender, bListen);
 
     IPlayer* sender = g_pPlayerManager->GetPlayer(iSender.Get());
-    if (!sender) return reinterpret_cast<decltype(&SetClientListeningHook)>(g_pSetClientListeningHook->GetOriginal())(_this, iReceiver, iSender, bListen);
+    if (!sender) return reinterpret_cast<decltype(&SetClientListeningHook)>(g_SetClientListeningHook.GetOriginal())(_this, iReceiver, iSender, bListen);
 
     auto& listenOverride = receiver->GetListenOverride(iSender.Get());
     auto& senderFlags = sender->GetVoiceFlags();
@@ -87,26 +46,26 @@ bool SetClientListeningHook(void* _this, CPlayerSlot iReceiver, CPlayerSlot iSen
 
     if (selfmutes.Get(iSender.Get()))
     {
-        return reinterpret_cast<decltype(&SetClientListeningHook)>(g_pSetClientListeningHook->GetOriginal())(_this, iReceiver, iSender, false);
+        return reinterpret_cast<decltype(&SetClientListeningHook)>(g_SetClientListeningHook.GetOriginal())(_this, iReceiver, iSender, false);
     }
 
     if (senderFlags & VoiceFlagValue::Speak_Muted)
     {
-        return reinterpret_cast<decltype(&SetClientListeningHook)>(g_pSetClientListeningHook->GetOriginal())(_this, iReceiver, iSender, false);
+        return reinterpret_cast<decltype(&SetClientListeningHook)>(g_SetClientListeningHook.GetOriginal())(_this, iReceiver, iSender, false);
     }
 
     if (listenOverride == ListenOverride::Listen_Mute)
     {
-        return reinterpret_cast<decltype(&SetClientListeningHook)>(g_pSetClientListeningHook->GetOriginal())(_this, iReceiver, iSender, false);
+        return reinterpret_cast<decltype(&SetClientListeningHook)>(g_SetClientListeningHook.GetOriginal())(_this, iReceiver, iSender, false);
     }
     else if (listenOverride == ListenOverride::Listen_Hear)
     {
-        return reinterpret_cast<decltype(&SetClientListeningHook)>(g_pSetClientListeningHook->GetOriginal())(_this, iReceiver, iSender, true);
+        return reinterpret_cast<decltype(&SetClientListeningHook)>(g_SetClientListeningHook.GetOriginal())(_this, iReceiver, iSender, true);
     }
 
     if ((senderFlags & VoiceFlagValue::Speak_All) || (receiverFlags & VoiceFlagValue::Speak_ListenAll))
     {
-        return reinterpret_cast<decltype(&SetClientListeningHook)>(g_pSetClientListeningHook->GetOriginal())(_this, iReceiver, iSender, true);
+        return reinterpret_cast<decltype(&SetClientListeningHook)>(g_SetClientListeningHook.GetOriginal())(_this, iReceiver, iSender, true);
     }
 
     if ((senderFlags & VoiceFlagValue::Speak_Team) || (receiverFlags & VoiceFlagValue::Speak_ListenTeam))
@@ -114,19 +73,19 @@ bool SetClientListeningHook(void* _this, CPlayerSlot iReceiver, CPlayerSlot iSen
         auto senderController = sender->GetController();
         auto receiverController = receiver->GetController();
         if (!senderController || !receiverController)
-            return reinterpret_cast<decltype(&SetClientListeningHook)>(g_pSetClientListeningHook->GetOriginal())(_this, iReceiver, iSender, bListen);
+            return reinterpret_cast<decltype(&SetClientListeningHook)>(g_SetClientListeningHook.GetOriginal())(_this, iReceiver, iSender, bListen);
 
         bListen = (*(int*)(g_pSDKSchema->GetPropPtr(senderController, CBaseEntity_m_iTeamNum))) == (*(int*)(g_pSDKSchema->GetPropPtr(receiverController, CBaseEntity_m_iTeamNum)));
-        return reinterpret_cast<decltype(&SetClientListeningHook)>(g_pSetClientListeningHook->GetOriginal())(_this, iReceiver, iSender, bListen);
+        return reinterpret_cast<decltype(&SetClientListeningHook)>(g_SetClientListeningHook.GetOriginal())(_this, iReceiver, iSender, bListen);
     }
 
-    return reinterpret_cast<decltype(&SetClientListeningHook)>(g_pSetClientListeningHook->GetOriginal())(_this, iReceiver, iSender, bListen);
+    return reinterpret_cast<decltype(&SetClientListeningHook)>(g_SetClientListeningHook.GetOriginal())(_this, iReceiver, iSender, bListen);
 }
 
 void ClientCommandHook(void* _this, CPlayerSlot slot, const CCommand& args)
 {
     IPlayer* receiver = g_pPlayerManager->GetPlayer(slot.Get());
-    if (!receiver) return reinterpret_cast<decltype(&ClientCommandHook)>(g_pClientCommandHook->GetOriginal())(_this, slot, args);
+    if (!receiver) return reinterpret_cast<decltype(&ClientCommandHook)>(g_ClientCommandHook.GetOriginal())(_this, slot, args);
 
     if (args.ArgC() > 1 && std::string(args.Arg(0)) == "vban")
     {
@@ -136,14 +95,14 @@ void ClientCommandHook(void* _this, CPlayerSlot slot, const CCommand& args)
         selfmutes.SetDWord(0, mask);
     }
 
-    return reinterpret_cast<decltype(&ClientCommandHook)>(g_pClientCommandHook->GetOriginal())(_this, slot, args);
+    return reinterpret_cast<decltype(&ClientCommandHook)>(g_ClientCommandHook.GetOriginal())(_this, slot, args);
 }
 
 extern void* g_pOnClientVoiceCallback;
 
 void ClientVoiceHook(void* _this, CPlayerSlot slot)
 {
-    reinterpret_cast<decltype(&ClientVoiceHook)>(g_pClientVoiceHook->GetOriginal())(_this, slot);
+    reinterpret_cast<decltype(&ClientVoiceHook)>(g_ClientVoiceHook.GetOriginal())(_this, slot);
 
     if (g_pOnClientVoiceCallback != nullptr)
         reinterpret_cast<void(*)(int)>(g_pOnClientVoiceCallback)(slot.Get());

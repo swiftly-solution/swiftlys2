@@ -17,6 +17,7 @@
  ************************************************************************************************/
 
 #include "manager.h"
+#include <memory/hooks/vfunction.h>
 
 #include <api/interfaces/interfaces.h>
 #include <api/utils/bitvec.h>
@@ -33,15 +34,6 @@
 #include <public/networksystem/netmessage.h>
 #include "usermessages.pb.h"
 
-IVFunctionHook* g_pOnGameFramePlayerHook = nullptr;
-
-IVFunctionHook* g_pClientConnectHook = nullptr;
-IVFunctionHook* g_pOnClientConnectedHook = nullptr;
-IVFunctionHook* g_pClientDisconnectHook = nullptr;
-IVFunctionHook* g_pClientPutInServerHook = nullptr;
-
-IVFunctionHook* g_pCheckTransmitHook = nullptr;
-
 void OnGameFramePlayerHook(void* _this, bool simulate, bool first, bool last);
 
 void OnClientPutInServerHook(void* _this, CPlayerSlot slot, char const* pszName, int type, uint64 xuid);
@@ -50,43 +42,18 @@ void OnClientConnectedHook(void* _this, CPlayerSlot slot, const char* pszName, u
 void ClientDisconnectHook(void* _this, CPlayerSlot slot, int reason, const char* pszName, uint64 xuid, const char* pszNetworkID);
 void CheckTransmitHook(void* _this, CCheckTransmitInfo** ppInfoList, int infoCount, CBitVec<16384>& unionTransmitEdicts, CBitVec<16384>& unk, const Entity2Networkable_t** pNetworkables, const uint16_t* pEntityIndicies, int nEntities);
 
+VFunctionHook g_ClientConnectHook(reinterpret_cast<void*>(ClientConnectHook), "server", "CSource2GameClients", "IServerGameClients::ClientConnect");
+VFunctionHook g_OnClientConnectedHook(reinterpret_cast<void*>(OnClientConnectedHook), "server", "CSource2GameClients", "IServerGameClients::OnClientConnected");
+VFunctionHook g_ClientDisconnectHook(reinterpret_cast<void*>(ClientDisconnectHook), "server", "CSource2GameClients", "IServerGameClients::ClientDisconnect");
+VFunctionHook g_ClientPutInServerHook(reinterpret_cast<void*>(OnClientPutInServerHook), "server", "CSource2GameClients", "IServerGameClients::ClientPutInServer");
+VFunctionHook g_CheckTransmitHook(reinterpret_cast<void*>(CheckTransmitHook), "server", "CSource2GameEntities", "ISource2GameEntities::CheckTransmit");
+VFunctionHook g_OnGameFramePlayerHook(reinterpret_cast<void*>(OnGameFramePlayerHook), "server", "CSource2Server", "IServerGameDLL::GameFrame");
+
 void CPlayerManager::Initialize()
 {
     for (auto& player : g_Players)
         player.reset();
 
-    void* gameclientsvtable = nullptr;
-    g_pS2BinLib->FindVtable("server", "CSource2GameClients", &gameclientsvtable);
-
-    void* gameentitiesvtable = nullptr;
-    g_pS2BinLib->FindVtable("server", "CSource2GameEntities", &gameentitiesvtable);
-
-    g_pClientConnectHook = g_pHooksManager->CreateVFunctionHook();
-    g_pClientConnectHook->SetHookFunction(gameclientsvtable, g_pGameDataManager->GetOffsets()->Fetch("IServerGameClients::ClientConnect"), reinterpret_cast<void*>(ClientConnectHook), true);
-    g_pClientConnectHook->Enable();
-
-    g_pOnClientConnectedHook = g_pHooksManager->CreateVFunctionHook();
-    g_pOnClientConnectedHook->SetHookFunction(gameclientsvtable, g_pGameDataManager->GetOffsets()->Fetch("IServerGameClients::OnClientConnected"), reinterpret_cast<void*>(OnClientConnectedHook), true);
-    g_pOnClientConnectedHook->Enable();
-
-    g_pClientDisconnectHook = g_pHooksManager->CreateVFunctionHook();
-    g_pClientDisconnectHook->SetHookFunction(gameclientsvtable, g_pGameDataManager->GetOffsets()->Fetch("IServerGameClients::ClientDisconnect"), reinterpret_cast<void*>(ClientDisconnectHook), true);
-    g_pClientDisconnectHook->Enable();
-
-    g_pClientPutInServerHook = g_pHooksManager->CreateVFunctionHook();
-    g_pClientPutInServerHook->SetHookFunction(gameclientsvtable, g_pGameDataManager->GetOffsets()->Fetch("IServerGameClients::ClientPutInServer"), reinterpret_cast<void*>(OnClientPutInServerHook), true);
-    g_pClientPutInServerHook->Enable();
-
-    g_pCheckTransmitHook = g_pHooksManager->CreateVFunctionHook();
-    g_pCheckTransmitHook->SetHookFunction(gameentitiesvtable, g_pGameDataManager->GetOffsets()->Fetch("ISource2GameEntities::CheckTransmit"), reinterpret_cast<void*>(CheckTransmitHook), true);
-    g_pCheckTransmitHook->Enable();
-
-    void* serverGameDLLVTable;
-    g_pS2BinLib->FindVtable("server", "CSource2Server", &serverGameDLLVTable);
-
-    g_pOnGameFramePlayerHook = g_pHooksManager->CreateVFunctionHook();
-    g_pOnGameFramePlayerHook->SetHookFunction(serverGameDLLVTable, g_pGameDataManager->GetOffsets()->Fetch("IServerGameDLL::GameFrame"), reinterpret_cast<void*>(OnGameFramePlayerHook), true);
-    g_pOnGameFramePlayerHook->Enable();
 }
 
 void CPlayerManager::Shutdown()
@@ -94,54 +61,13 @@ void CPlayerManager::Shutdown()
     for (auto& slot : g_Players)
         slot.reset();
 
-    if (g_pOnGameFramePlayerHook)
-    {
-        g_pOnGameFramePlayerHook->Disable();
-        g_pHooksManager->DestroyVFunctionHook(g_pOnGameFramePlayerHook);
-        g_pOnGameFramePlayerHook = nullptr;
-    }
-
-    if (g_pClientConnectHook)
-    {
-        g_pClientConnectHook->Disable();
-        g_pHooksManager->DestroyVFunctionHook(g_pClientConnectHook);
-        g_pClientConnectHook = nullptr;
-    }
-
-    if (g_pOnClientConnectedHook)
-    {
-        g_pOnClientConnectedHook->Disable();
-        g_pHooksManager->DestroyVFunctionHook(g_pOnClientConnectedHook);
-        g_pOnClientConnectedHook = nullptr;
-    }
-
-    if (g_pClientDisconnectHook)
-    {
-        g_pClientDisconnectHook->Disable();
-        g_pHooksManager->DestroyVFunctionHook(g_pClientDisconnectHook);
-        g_pClientDisconnectHook = nullptr;
-    }
-
-    if (g_pClientPutInServerHook)
-    {
-        g_pClientPutInServerHook->Disable();
-        g_pHooksManager->DestroyVFunctionHook(g_pClientPutInServerHook);
-        g_pClientPutInServerHook = nullptr;
-    }
-
-    if (g_pCheckTransmitHook)
-    {
-        g_pCheckTransmitHook->Disable();
-        g_pHooksManager->DestroyVFunctionHook(g_pCheckTransmitHook);
-        g_pCheckTransmitHook = nullptr;
-    }
 }
 
 extern void* g_pOnClientPutInServerCallback;
 
 void OnClientPutInServerHook(void* _this, CPlayerSlot slot, char const* pszName, int type, uint64 xuid)
 {
-    reinterpret_cast<decltype(&OnClientPutInServerHook)>(g_pClientPutInServerHook->GetOriginal())(_this, slot, pszName, type, xuid);
+    reinterpret_cast<decltype(&OnClientPutInServerHook)>(g_ClientPutInServerHook.GetOriginal())(_this, slot, pszName, type, xuid);
 
     if (type == 0)
     {
@@ -161,7 +87,7 @@ void OnClientPutInServerHook(void* _this, CPlayerSlot slot, char const* pszName,
 
 void CheckTransmitHook(void* _this, CCheckTransmitInfo** ppInfoList, int infoCount, CBitVec<16384>& unionTransmitEdicts, CBitVec<16384>& unk, const Entity2Networkable_t** pNetworkables, const uint16_t* pEntityIndicies, int nEntities)
 {
-    reinterpret_cast<decltype(&CheckTransmitHook)>(g_pCheckTransmitHook->GetOriginal())(_this, ppInfoList, infoCount, unionTransmitEdicts, unk, pNetworkables, pEntityIndicies, nEntities);
+    reinterpret_cast<decltype(&CheckTransmitHook)>(g_CheckTransmitHook.GetOriginal())(_this, ppInfoList, infoCount, unionTransmitEdicts, unk, pNetworkables, pEntityIndicies, nEntities);
 
     for (int i = 0; i < infoCount; i++)
     {
@@ -187,7 +113,7 @@ extern void* g_pOnGameTickCallback;
 
 void OnGameFramePlayerHook(void* _this, bool simulate, bool first, bool last)
 {
-    reinterpret_cast<decltype(&OnGameFramePlayerHook)>(g_pOnGameFramePlayerHook->GetOriginal())(_this, simulate, first, last);
+    reinterpret_cast<decltype(&OnGameFramePlayerHook)>(g_OnGameFramePlayerHook.GetOriginal())(_this, simulate, first, last);
 
     if (g_pOnGameTickCallback)
         reinterpret_cast<void (*)(bool, bool, bool)>(g_pOnGameTickCallback)(simulate, first, last);
@@ -224,7 +150,7 @@ bool ClientConnectHook(void* _this, CPlayerSlot slot, const char* pszName, uint6
         }
     }
 
-    return reinterpret_cast<decltype(&ClientConnectHook)>(g_pClientConnectHook->GetOriginal())(_this, slot, pszName, xuid, pszNetworkID, unk1, pRejectReason);
+    return reinterpret_cast<decltype(&ClientConnectHook)>(g_ClientConnectHook.GetOriginal())(_this, slot, pszName, xuid, pszNetworkID, unk1, pRejectReason);
 }
 
 void OnClientConnectedHook(void* _this, CPlayerSlot slot, const char* pszName, uint64 xuid, const char* pszNetworkID, const char* pszAddress, bool bFakePlayer)
@@ -255,14 +181,14 @@ void OnClientConnectedHook(void* _this, CPlayerSlot slot, const char* pszName, u
         }
     }
 
-    reinterpret_cast<decltype(&OnClientConnectedHook)>(g_pOnClientConnectedHook->GetOriginal())(_this, slot, pszName, xuid, pszNetworkID, pszAddress, bFakePlayer);
+    reinterpret_cast<decltype(&OnClientConnectedHook)>(g_OnClientConnectedHook.GetOriginal())(_this, slot, pszName, xuid, pszNetworkID, pszAddress, bFakePlayer);
 }
 
 extern void* g_pOnClientDisconnectCallback;
 
 void ClientDisconnectHook(void* _this, CPlayerSlot slot, int reason, const char* pszName, uint64 xuid, const char* pszNetworkID)
 {
-    reinterpret_cast<decltype(&ClientDisconnectHook)>(g_pClientDisconnectHook->GetOriginal())(_this, slot, reason, pszName, xuid, pszNetworkID);
+    reinterpret_cast<decltype(&ClientDisconnectHook)>(g_ClientDisconnectHook.GetOriginal())(_this, slot, reason, pszName, xuid, pszNetworkID);
 
     auto playerid = slot.Get();
 

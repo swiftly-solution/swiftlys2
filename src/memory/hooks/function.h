@@ -22,9 +22,23 @@
 #include <api/memory/hooks/function.h>
 #include <safetyhook/safetyhook.hpp>
 
-class FunctionHook : public IFunctionHook
+#include <functional>
+#include <string>
+
+#include "managed.h"
+
+class FunctionHook : public IFunctionHook, public IManagedHook
 {
 public:
+    FunctionHook() = default;
+    FunctionHook(void* callback, std::string signatureName);
+    FunctionHook(void* callback, std::function<void*()> addressResolver, std::string name);
+
+    ~FunctionHook();
+
+    FunctionHook(const FunctionHook&) = delete;
+    FunctionHook& operator=(const FunctionHook&) = delete;
+
     virtual void SetHookFunction(const std::string& functionSignature, void* callback) override;
     virtual void SetHookFunction(void* functionAddress, void* callback) override;
 
@@ -34,8 +48,16 @@ public:
     virtual void* GetOriginal() override;
     virtual bool IsEnabled() override;
 
+    virtual bool Install() override;
+    virtual void Uninstall() override;
+    virtual const char* GetName() const override;
+
 private:
     SafetyHookInline m_oHook;
+
+    std::function<void()> m_fnResolve;
+    std::string m_sName;
+    bool m_bManaged = false;
 };
 
 #endif

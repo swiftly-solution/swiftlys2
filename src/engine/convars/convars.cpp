@@ -17,6 +17,7 @@
  ************************************************************************************************/
 
 #include "convars.h"
+#include <memory/hooks/vfunction.h>
 
 #include <api/interfaces/interfaces.h>
 #include <api/sdk/recipientfilter.h>
@@ -37,7 +38,8 @@
 
 #define CONVAR_FLAGS_TO_REMOVE (FCVAR_HIDDEN | FCVAR_DEVELOPMENTONLY | FCVAR_CLIENTDLL)
 
-IVFunctionHook* g_pProcessRespondCvarValueHook = nullptr;
+bool OnConvarQuery(CServerSideClientBase* client, const CNetMessagePB<CCLCMsg_RespondCvarValue>& msg);
+VFunctionHook g_ProcessRespondCvarValueHook(reinterpret_cast<void*>(OnConvarQuery), "engine2", "CServerSideClient", "CServerSideClient::ProcessRespondCvarValue");
 
 extern bool bypassPostEventAbstractHook;
 
@@ -49,7 +51,7 @@ void ChangedConvarCallback(ConVarRefAbstract* ref, CSplitScreenSlot nSlot, const
 bool OnConvarQuery(CServerSideClientBase* client, const CNetMessagePB<CCLCMsg_RespondCvarValue>& msg)
 {
     g_pConvarManager->OnClientQueryCvar(client->GetPlayerSlot().Get(), msg.name(), msg.value());
-    return reinterpret_cast<bool(*)(CServerSideClientBase*, const CNetMessagePB<CCLCMsg_RespondCvarValue>&)>(g_pProcessRespondCvarValueHook->GetOriginal())(client, msg);
+    return reinterpret_cast<bool(*)(CServerSideClientBase*, const CNetMessagePB<CCLCMsg_RespondCvarValue>&)>(g_ProcessRespondCvarValueHook.GetOriginal())(client, msg);
 }
 
 template <typename Listeners>
@@ -108,13 +110,6 @@ static std::string ConvertConvarValueToString(const ConvarValue& value)
 
 void CConvarManager::Initialize()
 {
-    void* serverSideClientVTable;
-    g_pS2BinLib->FindVtable("engine2", "CServerSideClient", &serverSideClientVTable);
-
-    g_pProcessRespondCvarValueHook = g_pHooksManager->CreateVFunctionHook();
-    g_pProcessRespondCvarValueHook->SetHookFunction(serverSideClientVTable, g_pGameDataManager->GetOffsets()->Fetch("CServerSideClient::ProcessRespondCvarValue"), reinterpret_cast<void*>(OnConvarQuery), true);
-    g_pProcessRespondCvarValueHook->Enable();
-
     if (bool* unlockedCvars = std::get_if<bool>(&g_pConfiguration->GetValue("core.Unlocker.Convars")))
     {
         if (*unlockedCvars == true)
@@ -155,13 +150,6 @@ void CConvarManager::Initialize()
 
 void CConvarManager::Shutdown()
 {
-    if (g_pProcessRespondCvarValueHook)
-    {
-        g_pProcessRespondCvarValueHook->Disable();
-        g_pHooksManager->DestroyVFunctionHook(g_pProcessRespondCvarValueHook);
-        g_pProcessRespondCvarValueHook = nullptr;
-    }
-
     if (m_bChangeCallbackInstalled)
     {
         g_pGameCvar->RemoveGlobalChangeCallback(ChangedConvarCallback);

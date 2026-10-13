@@ -17,6 +17,7 @@
  ************************************************************************************************/
 
 #include "entrypoint.h"
+#include <memory/hooks/vfunction.h>
 #include "console/colors.h"
 #include <api/interfaces/interfaces.h>
 #include <api/interfaces/interfaces.h>
@@ -64,15 +65,14 @@ std::thread::id g_mainThreadId;
 CreateIFaceFn g_pServerFactory = nullptr;
 CreateIFaceFn g_pEngineFactory = nullptr;
 
-IVFunctionHook* g_pGameServerSteamAPIActivated = nullptr;
-IVFunctionHook* g_pGameServerSteamAPIDeactivated = nullptr;
-
-IVFunctionHook* g_pLoopInitHook = nullptr;
-
 void GameServerSteamAPIActivatedHook(void* _this);
 void GameServerSteamAPIDeactivatedHook(void* _this);
 
 bool LoopInitHook(void* _this, KeyValues* pKeyValues, void* pRegistry);
+
+VFunctionHook g_GameServerSteamAPIActivated(reinterpret_cast<void*>(GameServerSteamAPIActivatedHook), "server", "CSource2Server", "IServerGameDLL::GameServerSteamAPIActivated");
+VFunctionHook g_GameServerSteamAPIDeactivated(reinterpret_cast<void*>(GameServerSteamAPIDeactivatedHook), "server", "CSource2Server", "IServerGameDLL::GameServerSteamAPIDeactivated");
+VFunctionHook g_LoopInitHook(reinterpret_cast<void*>(LoopInitHook), "engine2", "CLoopModeLevelLoad", "ILoopMode::LoopInit");
 
 extern ICvar* g_pCVar;
 
@@ -192,6 +192,8 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
         }
     }
 
+    g_pHooksManager->Initialize();
+
     g_pConsoleOutput->Initialize();
     g_ConsoleLogger.Initialize();
 
@@ -202,8 +204,6 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
             g_pConsoleOutput->ToggleFilter();
         }
     }
-
-    g_pEntSystem->Initialize();
 
     g_pConvarManager->Initialize();
 
@@ -217,29 +217,6 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
 
     g_pPlayerManager->Initialize();
     g_pTranslations->Initialize();
-    g_pNetMessages->Initialize();
-    g_pVoiceManager->Initialize();
-    g_pServerCommands->Initialize();
-
-    g_pHooksManager->Initialize();
-
-    void* loopmodeLevelLoad = nullptr;
-    g_pS2BinLib->FindVtable("engine2", "CLoopModeLevelLoad", &loopmodeLevelLoad);
-
-    g_pLoopInitHook = g_pHooksManager->CreateVFunctionHook();
-    g_pLoopInitHook->SetHookFunction(loopmodeLevelLoad, g_pGameDataManager->GetOffsets()->Fetch("ILoopMode::LoopInit"), (void*)LoopInitHook, true);
-    g_pLoopInitHook->Enable();
-
-    void* servervtable = nullptr;
-    g_pS2BinLib->FindVtable("server", "CSource2Server", &servervtable);
-
-    g_pGameServerSteamAPIActivated = g_pHooksManager->CreateVFunctionHook();
-    g_pGameServerSteamAPIActivated->SetHookFunction(servervtable, g_pGameDataManager->GetOffsets()->Fetch("IServerGameDLL::GameServerSteamAPIActivated"), (void*)GameServerSteamAPIActivatedHook, true);
-    g_pGameServerSteamAPIActivated->Enable();
-
-    g_pGameServerSteamAPIDeactivated = g_pHooksManager->CreateVFunctionHook();
-    g_pGameServerSteamAPIDeactivated->SetHookFunction(servervtable, g_pGameDataManager->GetOffsets()->Fetch("IServerGameDLL::GameServerSteamAPIDeactivated"), (void*)GameServerSteamAPIDeactivatedHook, true);
-    g_pGameServerSteamAPIDeactivated->Enable();
 
     StartFixes();
 
@@ -277,27 +254,6 @@ bool SwiftlyCore::Unload()
     g_pPlayerManager->Shutdown();
     g_pEntSystem->Shutdown();
     g_pConvarManager->Shutdown();
-    g_pGameEventManager->Shutdown();
-    g_pNetMessages->Shutdown();
-    g_pServerCommands->Shutdown();
-    g_pVoiceManager->Shutdown();
-
-    if (g_pGameServerSteamAPIActivated != nullptr)
-    {
-        g_pGameServerSteamAPIActivated->Disable();
-        g_pHooksManager->DestroyVFunctionHook(g_pGameServerSteamAPIActivated);
-        g_pGameServerSteamAPIActivated = nullptr;
-    }
-
-    if (g_pGameServerSteamAPIDeactivated != nullptr)
-    {
-        g_pGameServerSteamAPIDeactivated->Disable();
-        g_pHooksManager->DestroyVFunctionHook(g_pGameServerSteamAPIDeactivated);
-        g_pGameServerSteamAPIDeactivated = nullptr;
-    }
-
-    StopFixes();
-
     ShutdownGameSystem();
 
     g_ConsoleLogger.Shutdown();
@@ -311,17 +267,17 @@ void GameServerSteamAPIActivatedHook(void* _this)
 {
     if (!g_pGameEngine->IsDedicatedServer())
     {
-        return reinterpret_cast<decltype(&GameServerSteamAPIActivatedHook)>(g_pGameServerSteamAPIActivated->GetOriginal())(_this);
+        return reinterpret_cast<decltype(&GameServerSteamAPIActivatedHook)>(g_GameServerSteamAPIActivated.GetOriginal())(_this);
     }
 
     g_pPlayerManager->SteamAPIServerActivated();
 
-    return reinterpret_cast<decltype(&GameServerSteamAPIActivatedHook)>(g_pGameServerSteamAPIActivated->GetOriginal())(_this);
+    return reinterpret_cast<decltype(&GameServerSteamAPIActivatedHook)>(g_GameServerSteamAPIActivated.GetOriginal())(_this);
 }
 
 void GameServerSteamAPIDeactivatedHook(void* _this)
 {
-    return reinterpret_cast<decltype(&GameServerSteamAPIDeactivatedHook)>(g_pGameServerSteamAPIDeactivated->GetOriginal())(_this);
+    return reinterpret_cast<decltype(&GameServerSteamAPIDeactivatedHook)>(g_GameServerSteamAPIDeactivated.GetOriginal())(_this);
 }
 
 std::string workshop_map = "";
@@ -336,7 +292,7 @@ bool LoopInitHook(void* _this, KeyValues* pKeyValues, void* pRegistry)
         g_SwiftlyCore.OnMapUnload();
     }
 
-    bool ret = reinterpret_cast<decltype(&LoopInitHook)>(g_pLoopInitHook->GetOriginal())(_this, pKeyValues, pRegistry);
+    bool ret = reinterpret_cast<decltype(&LoopInitHook)>(g_LoopInitHook.GetOriginal())(_this, pKeyValues, pRegistry);
 
     g_SwiftlyCore.OnMapLoad(pKeyValues->GetString("levelname"));
 

@@ -17,6 +17,7 @@
  ************************************************************************************************/
 
 #include "manager.h"
+#include <memory/hooks/vfunction.h>
 
 #include <api/interfaces/interfaces.h>
 
@@ -27,48 +28,15 @@
 #include <public/icvar.h>
 
 void DispatchConCommand(void* thisPtr, ConCommandRef cmd, const CCommandContext& ctx, const CCommand& args);
-IVFunctionHook* dispatchConCommandHook = nullptr;
 
 void ClientCommandHook2(void* thisPtr, CPlayerSlot slot, const CCommand& args);
-IVFunctionHook* clientCommandHook2 = nullptr;
+
+VFunctionHook dispatchConCommandHook(reinterpret_cast<void*>(DispatchConCommand), "tier0", "CCvar", "ICvar::DispatchConCommand");
+VFunctionHook clientCommandHook2(reinterpret_cast<void*>(ClientCommandHook2), "server", "CSource2GameClients", "IServerGameClients::ClientCommand");
 
 void CommandsCallback(const CCommandContext& context, const CCommand& args)
 {
     g_pServerCommands->HandleRegisteredCommand(context.GetPlayerSlot().Get(), args.GetCommandString());
-}
-
-void CServerCommands::Initialize()
-{
-    void* ccvarVTable;
-    g_pS2BinLib->FindVtable("tier0", "CCvar", &ccvarVTable);
-
-    dispatchConCommandHook = g_pHooksManager->CreateVFunctionHook();
-    dispatchConCommandHook->SetHookFunction(ccvarVTable, g_pGameDataManager->GetOffsets()->Fetch("ICvar::DispatchConCommand"), (void*)DispatchConCommand, true);
-    dispatchConCommandHook->Enable();
-
-    void* gameclientsvtable = nullptr;
-    g_pS2BinLib->FindVtable("server", "CSource2GameClients", &gameclientsvtable);
-
-    clientCommandHook2 = g_pHooksManager->CreateVFunctionHook();
-    clientCommandHook2->SetHookFunction(gameclientsvtable, g_pGameDataManager->GetOffsets()->Fetch("IServerGameClients::ClientCommand"), (void*)ClientCommandHook2, true);
-    clientCommandHook2->Enable();
-}
-
-void CServerCommands::Shutdown()
-{
-    if (dispatchConCommandHook)
-    {
-        dispatchConCommandHook->Disable();
-        g_pHooksManager->DestroyVFunctionHook(dispatchConCommandHook);
-        dispatchConCommandHook = nullptr;
-    }
-
-    if (clientCommandHook2)
-    {
-        clientCommandHook2->Disable();
-        g_pHooksManager->DestroyVFunctionHook(clientCommandHook2);
-        clientCommandHook2 = nullptr;
-    }
 }
 
 static const std::string* FindPrefix(const std::set<std::string>& prefixes, const std::string& text)
@@ -300,7 +268,7 @@ void ClientCommandHook2(void* thisPtr, CPlayerSlot slot, const CCommand& args)
     {
         return;
     }
-    return reinterpret_cast<decltype(&ClientCommandHook2)>(clientCommandHook2->GetOriginal())(thisPtr, slot, args);
+    return reinterpret_cast<decltype(&ClientCommandHook2)>(clientCommandHook2.GetOriginal())(thisPtr, slot, args);
 }
 
 static std::string GetChatText(const CCommand& args)
@@ -368,7 +336,7 @@ void DispatchConCommand(void* thisPtr, ConCommandRef cmd, const CCommandContext&
         }
     }
 
-    if (shouldSend) reinterpret_cast<decltype(&DispatchConCommand)>(dispatchConCommandHook->GetOriginal())(thisPtr, cmd, ctx, args);
+    if (shouldSend) reinterpret_cast<decltype(&DispatchConCommand)>(dispatchConCommandHook.GetOriginal())(thisPtr, cmd, ctx, args);
 
     if (gameText != "") g_pServerCommands->HandleCommand(slot.Get(), gameText, false);
 }

@@ -33,8 +33,6 @@ enum NetMessageHookType : int
 class INetMessages
 {
 public:
-    virtual void Initialize() = 0;
-    virtual void Shutdown() = 0;
 
     virtual void RegisterMessageHook(NetMessageHookType type, int messageid) = 0;
     virtual void UnregisterMessageHook(NetMessageHookType type, int messageid) = 0;

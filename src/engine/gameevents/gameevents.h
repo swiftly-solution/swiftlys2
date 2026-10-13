@@ -33,7 +33,6 @@ class CEventManager : public IEventManager, public IGameEventListener2
 {
 public:
     virtual void Initialize() override;
-    virtual void Shutdown() override;
 
     virtual void OnServerStartup() override;
 

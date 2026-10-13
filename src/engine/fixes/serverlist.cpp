@@ -17,40 +17,19 @@
  ************************************************************************************************/
 
 #include <api/interfaces/interfaces.h>
+#include <memory/hooks/vfunction.h>
 #include <core/entrypoint.h>
 
 #include <public/tier0/platform.h>
 #include <public/steam/isteamclient.h>
 #include <public/steam/isteamgameserver.h>
 
-#include "serverlist.h"
-
-IVFunctionHook* g_GameFrameHook = nullptr;
-
 void GameFrame(void* _this, bool simulate, bool first, bool last);
-
-void ServerListFix::Start()
-{
-    void* servervtable = nullptr;
-    g_pS2BinLib->FindVtable("server", "CSource2Server", &servervtable);
-
-    g_GameFrameHook = g_pHooksManager->CreateVFunctionHook();
-    g_GameFrameHook->SetHookFunction(servervtable, g_pGameDataManager->GetOffsets()->Fetch("IServerGameDLL::GameFrame"), reinterpret_cast<void*>(GameFrame), true);
-    g_GameFrameHook->Enable();
-}
-
-void ServerListFix::Stop()
-{
-    if (g_GameFrameHook)
-    {
-        g_GameFrameHook->Disable();
-        g_pHooksManager->DestroyVFunctionHook(g_GameFrameHook);
-    }
-}
+VFunctionHook g_GameFrameHook(reinterpret_cast<void*>(GameFrame), "server", "CSource2Server", "IServerGameDLL::GameFrame");
 
 void GameFrame(void* _this, bool simulate, bool first, bool last)
 {
-    reinterpret_cast<decltype(&GameFrame)>(g_GameFrameHook->GetOriginal())(_this, simulate, first, last);
+    reinterpret_cast<decltype(&GameFrame)>(g_GameFrameHook.GetOriginal())(_this, simulate, first, last);
 
     static double l_NextUpdate = 0.0;
 
@@ -75,4 +54,4 @@ void GameFrame(void* _this, bool simulate, bool first, bool last)
             steamGameServer->BUpdateUserData(*steamid, (const char*)(g_pSDKSchema->GetPropPtr(controller, 4141622183986322747)), g_pGameClientsService->GetPlayerScore(i)); // CBasePlayerController::PlayerName
         }
     }
-}
+}

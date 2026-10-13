@@ -28,7 +28,6 @@ using InputType = std::variant<int32_t, uint32_t, int64_t, uint64_t, float, doub
 class IEntitySystem
 {
 public:
-    virtual void Initialize() = 0;
     virtual void Shutdown() = 0;
 
     virtual void AddEntityListener(IEntityListener* listener) = 0;

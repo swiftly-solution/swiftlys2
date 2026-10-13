@@ -49,8 +49,6 @@ enum VoiceFlagValue
 class IVoiceManager
 {
 public:
-    virtual void Initialize() = 0;
-    virtual void Shutdown() = 0;
 
     virtual void SetClientListenOverride(int playerid, int targetid, ListenOverride override) = 0;
     virtual ListenOverride GetClientListenOverride(int playerid, int targetid) = 0;

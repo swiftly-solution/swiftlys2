@@ -17,6 +17,8 @@
  ************************************************************************************************/
 
 #include "netmessages.h"
+#include <memory/hooks/vfunction.h>
+#include <memory/hooks/function.h>
 #include "cstrike15_usermessages.pb.h"
 
 #include <api/interfaces/interfaces.h>
@@ -29,10 +31,6 @@ std::function<int(uint64_t*, int, void*)> g_fnServerMessageSendHandler;
 std::function<int(int, int, void*)> g_fnClientMessageSendHandler;
 std::function<int(int, int, void*)> g_fnServerMessageInternalSendHandler;
 
-IFunctionHook* g_pFilterMessageHook = nullptr;
-IVFunctionHook* g_pPostEventAbstractHook = nullptr;
-IVFunctionHook* g_pSendNetMessageHook = nullptr;
-
 bool bypassPostEventAbstractHook = false;
 
 bool FilterMessage(void* client, CNetMessage* cMsg, INetChannel* netchan);
@@ -40,6 +38,10 @@ void PostEventAbstractHook(void* _this, CSplitScreenSlot nSlot, bool bLocalOnly,
     INetworkMessageInternal* pEvent, const CNetMessage* pData, unsigned long nSize, NetChannelBufType_t bufType);
 
 bool SendNetMessage(CServerSideClient* client, CNetMessage* pData, NetChannelBufType_t bufType);
+
+FunctionHook g_FilterMessageHook(reinterpret_cast<void*>(FilterMessage), "INetworkMessageProcessingPreFilter::FilterMessage");
+VFunctionHook g_PostEventAbstractHook(reinterpret_cast<void*>(PostEventAbstractHook), "engine2", "CGameEventSystem", "IGameEventSystem::PostEventAbstract");
+VFunctionHook g_SendNetMessageHook(reinterpret_cast<void*>(SendNetMessage), "engine2", "CServerSideClient", "CServerSideClient::SendNetMessage");
 
 template <typename T>
 int DispatchClientUserMessage(int playerid, int messageid, const std::string& payload)
@@ -55,41 +57,9 @@ int DispatchClientUserMessage(int playerid, int messageid, const std::string& pa
     return g_fnClientMessageSendHandler(playerid, messageid, innerHandle);
 }
 
-void CNetMessages::Initialize()
-{
-    g_pFilterMessageHook = g_pHooksManager->CreateFunctionHook();
-    g_pFilterMessageHook->SetHookFunction(g_pGameDataManager->GetSignatures()->Fetch("INetworkMessageProcessingPreFilter::FilterMessage"), (void*)FilterMessage);
-    g_pFilterMessageHook->Enable();
-
-    void* gameEventSystem = nullptr;
-    g_pS2BinLib->FindVtable("engine2", "CGameEventSystem", &gameEventSystem);
-
-    g_pPostEventAbstractHook = g_pHooksManager->CreateVFunctionHook();
-    g_pPostEventAbstractHook->SetHookFunction(gameEventSystem, g_pGameDataManager->GetOffsets()->Fetch("IGameEventSystem::PostEventAbstract"), (void*)PostEventAbstractHook, true);
-    g_pPostEventAbstractHook->Enable();
-
-    void* serverSideClientVTable = nullptr;
-    g_pS2BinLib->FindVtable("engine2", "CServerSideClient", &serverSideClientVTable);
-
-    g_pSendNetMessageHook = g_pHooksManager->CreateVFunctionHook();
-    g_pSendNetMessageHook->SetHookFunction(serverSideClientVTable, g_pGameDataManager->GetOffsets()->Fetch("CServerSideClient::SendNetMessage"), (void*)SendNetMessage, true);
-    g_pSendNetMessageHook->Enable();
-}
-
-void CNetMessages::Shutdown()
-{
-    g_pFilterMessageHook->Disable();
-    g_pPostEventAbstractHook->Disable();
-    g_pSendNetMessageHook->Disable();
-
-    g_pHooksManager->DestroyFunctionHook(g_pFilterMessageHook);
-    g_pHooksManager->DestroyVFunctionHook(g_pPostEventAbstractHook);
-    g_pHooksManager->DestroyVFunctionHook(g_pSendNetMessageHook);
-}
-
 bool SendNetMessage(CServerSideClient* client, CNetMessage* pData, NetChannelBufType_t bufType)
 {
-    auto originalSendNetMessage = reinterpret_cast<decltype(&SendNetMessage)>(g_pSendNetMessageHook->GetOriginal());
+    auto originalSendNetMessage = reinterpret_cast<decltype(&SendNetMessage)>(g_SendNetMessageHook.GetOriginal());
     if (!client || !pData) return originalSendNetMessage(client, pData, bufType);
 
     int msgid = pData->GetNetMessage()->GetNetMessageInfo()->m_MessageId;
@@ -106,7 +76,7 @@ bool SendNetMessage(CServerSideClient* client, CNetMessage* pData, NetChannelBuf
 
 bool FilterMessage(void* client, CNetMessage* cMsg, INetChannel* netchan)
 {
-    auto originalFilterMessage = reinterpret_cast<decltype(&FilterMessage)>(g_pFilterMessageHook->GetOriginal());
+    auto originalFilterMessage = reinterpret_cast<decltype(&FilterMessage)>(g_FilterMessageHook.GetOriginal());
     if (!client || !cMsg || !g_fnClientMessageSendHandler) return originalFilterMessage(client, cMsg, netchan);
 
     static auto playerIndex = g_pGameDataManager->GetOffsets()->Fetch("CServerSideClientBase::m_nClientSlot") - WIN_LINUX(8, 48);
@@ -156,7 +126,7 @@ bool FilterMessage(void* client, CNetMessage* cMsg, INetChannel* netchan)
 
 void PostEventAbstractHook(void* _this, CSplitScreenSlot nSlot, bool bLocalOnly, int nClientCount, const uint64* clients, INetworkMessageInternal* pEvent, const CNetMessage* pData, unsigned long nSize, NetChannelBufType_t bufType)
 {
-    auto originalPostEventAbstract = reinterpret_cast<decltype(&PostEventAbstractHook)>(g_pPostEventAbstractHook->GetOriginal());
+    auto originalPostEventAbstract = reinterpret_cast<decltype(&PostEventAbstractHook)>(g_PostEventAbstractHook.GetOriginal());
     if (bypassPostEventAbstractHook || !g_fnServerMessageSendHandler) return originalPostEventAbstract(_this, nSlot, bLocalOnly, nClientCount, clients, pEvent, pData, nSize, bufType);
 
     int msgid = pEvent->GetNetMessageInfo()->m_MessageId;

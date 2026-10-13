@@ -16,14 +16,21 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ************************************************************************************************/
 
-#ifndef src_engine_fixes_preload_h
-#define src_engine_fixes_preload_h
+#ifndef src_memory_hooks_managed_h
+#define src_memory_hooks_managed_h
 
-class PreloadDLLFix
+class IManagedHook
 {
 public:
-    void Start();
-    void Stop();
+    virtual bool Install() = 0;
+    virtual void Uninstall() = 0;
+    virtual const char* GetName() const = 0;
+
+protected:
+    ~IManagedHook() = default;
 };
+
+void RegisterManagedHook(IManagedHook* hook);
+void UnregisterManagedHook(IManagedHook* hook);
 
 #endif

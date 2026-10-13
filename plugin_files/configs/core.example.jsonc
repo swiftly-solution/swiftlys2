@@ -9,6 +9,21 @@
     "AutoHotReload": true,
     "ProfilerLevel": 0,
     "ConsoleFilter": true,
+    "ConsoleLogger": {
+        "Enable": true,
+        "ManagedEnable": true,
+        "WriteIntervalMs": 2000,
+        "Rotation": {
+            "Enable": true,
+            "Mode": "file_count",
+            "AvailableModes": [
+                "file_count",
+                "time_interval"
+            ],
+            "MaximumFiles": 60,
+            "DeleteOlderThanHours": 168
+        }
+    },
     "FollowCS2ServerGuidelines": true,
     "Language": "en",
     "ManualLoadPlugins": false,
@@ -51,6 +66,10 @@
             "strict"
         ],
         "Mode": "flexible"
+    },
+    "Unlocker": {
+        "Convars": false,
+        "ConCommands": false
     },
     "UsePlayerLanguage": true
 }

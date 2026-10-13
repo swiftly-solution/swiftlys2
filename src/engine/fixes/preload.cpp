@@ -17,19 +17,20 @@
  ************************************************************************************************/
 
 #include <regex>
+#include <memory/hooks/function.h>
 
-#include "preload.h"
 #include <api/interfaces/interfaces.h>
 #include <fmt/format.h>
-
-IFunctionHook* g_pPreloadDLLHook = nullptr;
 
 #ifdef _WIN32
 #include <Windows.h>
 
+void __fastcall PreloadDLLHook(HMODULE hModule);
+extern FunctionHook g_PreloadDLLHook;
+
 void __fastcall PreloadDLLHook(HMODULE hModule)
 {
-    if (!g_pPreloadDLLHook || !g_pPreloadDLLHook->GetOriginal())
+    if (!g_PreloadDLLHook.GetOriginal())
     {
         return;
     }
@@ -49,30 +50,12 @@ void __fastcall PreloadDLLHook(HMODULE hModule)
         }
     }
 
-    return reinterpret_cast<decltype(&PreloadDLLHook)>(g_pPreloadDLLHook->GetOriginal())(hModule);
+    return reinterpret_cast<decltype(&PreloadDLLHook)>(g_PreloadDLLHook.GetOriginal())(hModule);
 }
-#endif
 
-void PreloadDLLFix::Start()
-{
-#ifdef _WIN32
+FunctionHook g_PreloadDLLHook(reinterpret_cast<void*>(PreloadDLLHook), []() -> void* {
     void* preloadDLLFunction = nullptr;
     g_pS2BinLib->FindFuncWithString("engine2", "Could not PreloadLibrary %s - error %d: %s", &preloadDLLFunction);
-    if (!preloadDLLFunction) return;
-
-    g_pPreloadDLLHook = g_pHooksManager->CreateFunctionHook();
-    g_pPreloadDLLHook->SetHookFunction(preloadDLLFunction, reinterpret_cast<void*>(PreloadDLLHook));
-    g_pPreloadDLLHook->Enable();
+    return preloadDLLFunction;
+}, "PreloadDLL");
 #endif
-}
-
-void PreloadDLLFix::Stop()
-{
-#ifdef _WIN32
-    if (!g_pPreloadDLLHook) return;
-
-    g_pPreloadDLLHook->Disable();
-    g_pHooksManager->DestroyFunctionHook(g_pPreloadDLLHook);
-    g_pPreloadDLLHook = nullptr;
-#endif
-}

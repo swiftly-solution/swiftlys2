@@ -16,23 +16,12 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ************************************************************************************************/
 
-#include "serverlist.h"
-#include "preload.h"
 #include "filesystem.h"
 
-ServerListFix g_ServerListFix;
-PreloadDLLFix g_PreloadDLLFix;
 FileSystemFix g_FileSystemFix;
 
 void StartFixes()
 {
     g_FileSystemFix.Start();
-    g_ServerListFix.Start();
-    g_PreloadDLLFix.Start();
 }
-
-void StopFixes()
-{
-    g_PreloadDLLFix.Stop();
-    g_ServerListFix.Stop();
-}
+

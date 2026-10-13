@@ -22,9 +22,24 @@
 #include <api/memory/hooks/vfunction.h>
 #include <safetyhook/safetyhook.hpp>
 
-class VFunctionHook : public IVFunctionHook
+#include <functional>
+#include <string>
+
+#include "managed.h"
+
+class VFunctionHook : public IVFunctionHook, public IManagedHook
 {
 public:
+    VFunctionHook() = default;
+    VFunctionHook(void* callback, std::string moduleName, std::string vtableName, std::string offsetName);
+    VFunctionHook(void* callback, std::string interfaceName, std::string offsetName);
+    VFunctionHook(void* callback, std::function<void*()> instanceResolver, std::string offsetName);
+
+    ~VFunctionHook();
+
+    VFunctionHook(const VFunctionHook&) = delete;
+    VFunctionHook& operator=(const VFunctionHook&) = delete;
+
     virtual void SetHookFunction(const std::string& iface_name, int index, void* callback) override;
     virtual void SetHookFunction(void* instance, int index, void* callback, bool is_vtable) override;
 
@@ -33,9 +48,18 @@ public:
 
     virtual void* GetOriginal() override;
     virtual bool IsEnabled() override;
+
+    virtual bool Install() override;
+    virtual void Uninstall() override;
+    virtual const char* GetName() const override;
+
 private:
     SafetyHookInline m_oHook;
     void* m_pOriginal = nullptr;
+
+    std::function<void()> m_fnResolve;
+    std::string m_sName;
+    bool m_bManaged = false;
 };
 
 #endif

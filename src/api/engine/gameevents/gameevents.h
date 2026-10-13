@@ -32,7 +32,6 @@ class IEventManager
 {
 public:
     virtual void Initialize() = 0;
-    virtual void Shutdown() = 0;
 
     virtual void OnServerStartup() = 0;
     // only registered events are forwarded to the fire handlers

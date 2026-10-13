@@ -17,6 +17,7 @@
  ************************************************************************************************/
 
 #include "gameevents.h"
+#include <memory/hooks/vfunction.h>
 
 #include <api/interfaces/interfaces.h>
 
@@ -34,67 +35,38 @@ GameEventFireHandler g_fnPostEventFireHandler;
 
 IGameEventManager2* g_gameEventManager = nullptr;
 
-IVFunctionHook* g_PreworldUpdateHook = nullptr;
-void PreworldUpdateHook(void* _this, bool simulate);
-
-IVFunctionHook* g_pStartupServerEventHook = nullptr;
-void StartupServerEventHook(void* _this, const GameSessionConfiguration_t& config, ISource2WorldSession* a, const char* b);
-
-IVFunctionHook* g_pFireEventHook = nullptr;
-bool FireEventHook(IGameEventManager2* _this, IGameEvent* event, bool bDontBroadcast);
-
-void CEventManager::Initialize()
+static IGameEventManager2* ResolveGameEventManager()
 {
-    void* netserverservice = nullptr;
-    g_pS2BinLib->FindVtable("engine2", "CNetworkServerService", &netserverservice);
-
-    g_pStartupServerEventHook = g_pHooksManager->CreateVFunctionHook();
-    g_pStartupServerEventHook->SetHookFunction(netserverservice, g_pGameDataManager->GetOffsets()->Fetch("INetworkServerService::StartupServer"), reinterpret_cast<void*>(StartupServerEventHook), true);
-    g_pStartupServerEventHook->Enable();
-
     uintptr_t rawGameEventManager = (uintptr_t)(g_pGameDataManager->GetSignatures()->Fetch("CSource2Server::g_GameEventManager"));
+    if (!rawGameEventManager) return nullptr;
 
     rawGameEventManager += 3;
     rawGameEventManager += 4 + *(int*)(rawGameEventManager);
 
-    g_gameEventManager = *(IGameEventManager2**)(rawGameEventManager);
-
-    g_pFireEventHook = g_pHooksManager->CreateVFunctionHook();
-    g_pFireEventHook->SetHookFunction(g_gameEventManager, g_pGameDataManager->GetOffsets()->Fetch("IGameEventManager2::FireEvent"), reinterpret_cast<void*>(FireEventHook), false);
-    g_pFireEventHook->Enable();
-
-    void* servervtable = nullptr;
-    g_pS2BinLib->FindVtable("server", "CSource2Server", &servervtable);
-
-    g_PreworldUpdateHook = g_pHooksManager->CreateVFunctionHook();
-    g_PreworldUpdateHook->SetHookFunction(servervtable, g_pGameDataManager->GetOffsets()->Fetch("IServerGameDLL::PreWorldUpdate"), reinterpret_cast<void*>(PreworldUpdateHook), true);
-    g_PreworldUpdateHook->Enable();
-
-    QueueListener("player_spawn");
+    return *(IGameEventManager2**)(rawGameEventManager);
 }
 
-void CEventManager::Shutdown()
-{
-    if (g_pStartupServerEventHook)
-    {
-        g_pStartupServerEventHook->Disable();
-        g_pHooksManager->DestroyVFunctionHook(g_pStartupServerEventHook);
-        g_pStartupServerEventHook = nullptr;
-    }
+void PreworldUpdateHook(void* _this, bool simulate);
+VFunctionHook g_PreworldUpdateHook(reinterpret_cast<void*>(PreworldUpdateHook), "server", "CSource2Server", "IServerGameDLL::PreWorldUpdate");
 
-    if (g_pFireEventHook)
-    {
-        g_pFireEventHook->Disable();
-        g_pHooksManager->DestroyVFunctionHook(g_pFireEventHook);
-        g_pFireEventHook = nullptr;
-    }
+void StartupServerEventHook(void* _this, const GameSessionConfiguration_t& config, ISource2WorldSession* a, const char* b);
+VFunctionHook g_StartupServerEventHook(reinterpret_cast<void*>(StartupServerEventHook), "engine2", "CNetworkServerService", "INetworkServerService::StartupServer");
+
+bool FireEventHook(IGameEventManager2* _this, IGameEvent* event, bool bDontBroadcast);
+VFunctionHook g_FireEventHook(reinterpret_cast<void*>(FireEventHook), []() -> void* { return ResolveGameEventManager(); }, "IGameEventManager2::FireEvent");
+
+void CEventManager::Initialize()
+{
+    g_gameEventManager = ResolveGameEventManager();
+
+    QueueListener("player_spawn");
 }
 
 extern void* g_pOnPreworldUpdateCallback;
 
 void PreworldUpdateHook(void* _this, bool simulate)
 {
-    reinterpret_cast<decltype(&PreworldUpdateHook)>(g_PreworldUpdateHook->GetOriginal())(_this, simulate);
+    reinterpret_cast<decltype(&PreworldUpdateHook)>(g_PreworldUpdateHook.GetOriginal())(_this, simulate);
 
     if (g_pOnPreworldUpdateCallback)
         reinterpret_cast<void(*)(bool)>(g_pOnPreworldUpdateCallback)(simulate);
@@ -102,7 +74,7 @@ void PreworldUpdateHook(void* _this, bool simulate)
 
 bool FireEventHook(IGameEventManager2* _this, IGameEvent* event, bool bDontBroadcast)
 {
-    auto originalFireEvent = reinterpret_cast<decltype(&FireEventHook)>(g_pFireEventHook->GetOriginal());
+    auto originalFireEvent = reinterpret_cast<decltype(&FireEventHook)>(g_FireEventHook.GetOriginal());
     if (!event) return originalFireEvent(_this, event, bDontBroadcast);
 
     static constexpr uint32_t k_uPlayerSpawnHash = hash_32_fnv1a_const("player_spawn");
@@ -153,7 +125,7 @@ bool FireEventHook(IGameEventManager2* _this, IGameEvent* event, bool bDontBroad
 
 void StartupServerEventHook(void* _this, const GameSessionConfiguration_t& config, ISource2WorldSession* a, const char* b)
 {
-    reinterpret_cast<decltype(&StartupServerEventHook)>(g_pStartupServerEventHook->GetOriginal())(_this, config, a, b);
+    reinterpret_cast<decltype(&StartupServerEventHook)>(g_StartupServerEventHook.GetOriginal())(_this, config, a, b);
     g_pGameEventManager->OnServerStartup();
 }
 

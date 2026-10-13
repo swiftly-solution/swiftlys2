@@ -26,8 +26,6 @@
 class CVoiceManager : public IVoiceManager
 {
 public:
-    virtual void Initialize() override;
-    virtual void Shutdown() override;
 
     virtual void SetClientListenOverride(int playerid, int targetid, ListenOverride override) override;
     virtual ListenOverride GetClientListenOverride(int playerid, int targetid) override;

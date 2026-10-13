@@ -31,8 +31,6 @@
 class CNetMessages : public INetMessages
 {
 public:
-    virtual void Initialize() override;
-    virtual void Shutdown() override;
 
     virtual void RegisterMessageHook(NetMessageHookType type, int messageid) override;
     virtual void UnregisterMessageHook(NetMessageHookType type, int messageid) override;

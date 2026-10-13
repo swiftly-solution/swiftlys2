@@ -20,6 +20,5 @@
 #define src_engine_fixes_entrypoint_h
 
 void StartFixes();
-void StopFixes();
 
 #endif

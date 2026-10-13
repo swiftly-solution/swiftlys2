@@ -21,7 +21,30 @@
 #include <map>
 #include <vector>
 
+#include <api/interfaces/interfaces.h>
 #include <api/shared/string.h>
+
+#include <algorithm>
+#include <fmt/format.h>
+
+static std::vector<IManagedHook*>* g_pManagedHooks = nullptr;
+
+static bool g_bHooksInitialized = false;
+
+void RegisterManagedHook(IManagedHook* hook)
+{
+    if (!g_pManagedHooks)
+        g_pManagedHooks = new std::vector<IManagedHook*>();
+
+    g_pManagedHooks->push_back(hook);
+}
+
+void UnregisterManagedHook(IManagedHook* hook)
+{
+    if (!g_pManagedHooks) return;
+
+    g_pManagedHooks->erase(std::remove(g_pManagedHooks->begin(), g_pManagedHooks->end(), hook), g_pManagedHooks->end());
+}
 
 IFunctionHook* HooksManager::CreateFunctionHook()
 {
@@ -55,8 +78,28 @@ void HooksManager::DestroyMFunctionHook(IMFunctionHook* hook)
 
 void HooksManager::Initialize()
 {
+    if (g_bHooksInitialized) return;
+    g_bHooksInitialized = true;
+
+    if (!g_pManagedHooks) return;
+
+    for (auto* hook : *g_pManagedHooks)
+    {
+        if (!hook->Install())
+            g_pLogger->Warning("Hooks", fmt::format("Couldn't install the hook '{}'.\n", hook->GetName()));
+    }
 }
 
 void HooksManager::Shutdown()
 {
+    if (!g_bHooksInitialized) return;
+    g_bHooksInitialized = false;
+
+    if (!g_pManagedHooks) return;
+
+    for (auto it = g_pManagedHooks->rbegin(); it != g_pManagedHooks->rend(); ++it)
+        (*it)->Uninstall();
+
+    delete g_pManagedHooks;
+    g_pManagedHooks = nullptr;
 }

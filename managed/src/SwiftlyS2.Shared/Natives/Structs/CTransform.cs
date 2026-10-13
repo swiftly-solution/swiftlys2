@@ -9,7 +9,7 @@ public struct CTransform
     public Vector Position;
 
     [FieldOffset(0xC)]
-    private int _pad001;
+    public float Scale;
 
     [FieldOffset(0x10)]
     public Quaternion Orientation;

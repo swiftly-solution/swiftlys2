@@ -20,16 +20,63 @@
 
 #include <api/interfaces/interfaces.h>
 
+FunctionHook::FunctionHook(void* callback, std::string signatureName)
+    : m_sName(signatureName), m_bManaged(true)
+{
+    m_fnResolve = [this, callback, signatureName = std::move(signatureName)]() {
+        SetHookFunction(signatureName, callback);
+    };
+    RegisterManagedHook(this);
+}
+
+FunctionHook::FunctionHook(void* callback, std::function<void*()> addressResolver, std::string name)
+    : m_sName(std::move(name)), m_bManaged(true)
+{
+    m_fnResolve = [this, callback, addressResolver = std::move(addressResolver)]() {
+        SetHookFunction(addressResolver(), callback);
+    };
+    RegisterManagedHook(this);
+}
+
+FunctionHook::~FunctionHook()
+{
+    if (m_bManaged)
+        UnregisterManagedHook(this);
+}
+
+bool FunctionHook::Install()
+{
+    if (!m_bManaged) return false;
+    if (m_oHook) return true;
+
+    m_fnResolve();
+    if (!m_oHook) return false;
+
+    Enable();
+    return true;
+}
+
+void FunctionHook::Uninstall()
+{
+    Disable();
+    m_oHook.reset();
+}
+
+const char* FunctionHook::GetName() const
+{
+    return m_sName.c_str();
+}
+
 void FunctionHook::Enable()
 {
-    if (IsEnabled()) return;
+    if (!m_oHook || IsEnabled()) return;
 
     auto result = m_oHook.enable(); // due to nodiscard
 }
 
 void FunctionHook::Disable()
 {
-    if (!IsEnabled()) return;
+    if (!m_oHook || !IsEnabled()) return;
 
     auto result = m_oHook.disable(); // due to nodiscard
 }

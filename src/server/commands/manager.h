@@ -30,8 +30,6 @@
 class CServerCommands : public IServerCommands
 {
 public:
-    virtual void Initialize() override;
-    virtual void Shutdown() override;
 
     virtual int HandleCommand(int playerid, const std::string& text, bool dryrun) override;
     virtual void HandleRegisteredCommand(int playerid, const char* commandLine) override;

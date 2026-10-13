@@ -36,8 +36,6 @@ using ClientChatHandler = std::function<int(int, const std::string&, bool)>;
 class IServerCommands
 {
 public:
-    virtual void Initialize() = 0;
-    virtual void Shutdown() = 0;
 
     virtual int HandleCommand(int playerid, const std::string& text, bool dryrun) = 0;
     // called for the console commands that were registered through RegisterCommand

@@ -17,6 +17,7 @@
  ************************************************************************************************/
 
 #include "entitysystem.h"
+#include <memory/hooks/vfunction.h>
 
 #include <cstdint>
 
@@ -33,8 +34,6 @@ CGameEntitySystem* g_pGameEntitySystem = nullptr;
 
 extern void* g_pOnStartupServerCallback;
 
-IVFunctionHook* g_pStartupServerHook = nullptr;
-
 bool g_bDone = false;
 
 CGameEntitySystem* GameEntitySystem()
@@ -44,28 +43,16 @@ CGameEntitySystem* GameEntitySystem()
 
 void StartupServerHook(void* _this, const GameSessionConfiguration_t& config, ISource2WorldSession* a, const char* b);
 
-void CEntSystem::Initialize()
-{
-    void* netserverservice = nullptr;
-    g_pS2BinLib->FindVtable("engine2", "CNetworkServerService", &netserverservice);
-
-    g_pStartupServerHook = g_pHooksManager->CreateVFunctionHook();
-    g_pStartupServerHook->SetHookFunction(netserverservice, g_pGameDataManager->GetOffsets()->Fetch("INetworkServerService::StartupServer"), reinterpret_cast<void*>(StartupServerHook), true);
-    g_pStartupServerHook->Enable();
-}
+VFunctionHook g_StartupServerHook(reinterpret_cast<void*>(StartupServerHook), "engine2", "CNetworkServerService", "INetworkServerService::StartupServer");
 
 void CEntSystem::Shutdown()
 {
-    g_pStartupServerHook->Disable();
-    g_pHooksManager->DestroyVFunctionHook(g_pStartupServerHook);
-    g_pStartupServerHook = nullptr;
-
     g_pGameEntitySystem->RemoveListenerEntity(&g_entityListener);
 }
 
 void StartupServerHook(void* _this, const GameSessionConfiguration_t& config, ISource2WorldSession* a, const char* b)
 {
-    reinterpret_cast<decltype(&StartupServerHook)>(g_pStartupServerHook->GetOriginal())(_this, config, a, b);
+    reinterpret_cast<decltype(&StartupServerHook)>(g_StartupServerHook.GetOriginal())(_this, config, a, b);
 
     if (!g_bDone)
     {

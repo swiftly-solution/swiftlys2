@@ -17,6 +17,7 @@
  ************************************************************************************************/
 
 #include "consoleoutput.h"
+#include <memory/hooks/function.h>
 
 #include <core/entrypoint.h>
 
@@ -59,7 +60,8 @@ std::map<uint64_t, std::string> g_FilterNames;
 std::map<uint64_t, uint64_t> g_FilteredMessages;
 std::atomic<bool> skipNextNewlineOnlyLog{ false };
 
-IFunctionHook* g_CLoggingSystem_LogDirect_Hook = nullptr;
+int CLoggingSystem_LogDirectHook(void* loggingSystem, int channel, int severity, LeafCodeInfo_t* leafCode, char const* str, va_list* args);
+FunctionHook g_CLoggingSystem_LogDirect_Hook(reinterpret_cast<void*>(CLoggingSystem_LogDirectHook), "CLoggingSystem::LogDirect");
 
 #if defined(_MSC_VER)
 #define SWIFTLY_CONSOLE_NOINLINE __declspec(noinline)
@@ -126,7 +128,7 @@ static void ConsoleDispatchWorker()
 
 int CLoggingSystem_LogDirectHook(void* loggingSystem, int channel, int severity, LeafCodeInfo_t* leafCode, char const* str, va_list* args)
 {
-    const auto original = reinterpret_cast<decltype(&CLoggingSystem_LogDirectHook)>(g_CLoggingSystem_LogDirect_Hook->GetOriginal());
+    const auto original = reinterpret_cast<decltype(&CLoggingSystem_LogDirectHook)>(g_CLoggingSystem_LogDirect_Hook.GetOriginal());
 
     if (!str)
         return original(loggingSystem, channel, severity, leafCode, str, args);
@@ -151,12 +153,6 @@ int CLoggingSystem_LogDirectHook(void* loggingSystem, int channel, int severity,
 
 void CConsoleOutput::Initialize()
 {
-    void* LogDirectAddr = g_pGameDataManager->GetSignatures()->Fetch("CLoggingSystem::LogDirect");
-    if (!LogDirectAddr) return;
-
-    g_CLoggingSystem_LogDirect_Hook = g_pHooksManager->CreateFunctionHook();
-    g_CLoggingSystem_LogDirect_Hook->SetHookFunction(LogDirectAddr, (void*)CLoggingSystem_LogDirectHook);
-    g_CLoggingSystem_LogDirect_Hook->Enable();
 
     ReloadFilterConfiguration();
 
@@ -166,12 +162,6 @@ void CConsoleOutput::Initialize()
 
 void CConsoleOutput::Shutdown()
 {
-    if (g_CLoggingSystem_LogDirect_Hook) {
-        g_CLoggingSystem_LogDirect_Hook->Disable();
-        g_pHooksManager->DestroyFunctionHook(g_CLoggingSystem_LogDirect_Hook);
-        g_CLoggingSystem_LogDirect_Hook = nullptr;
-    }
-
     g_ConsoleDispatchRunning.store(false, std::memory_order_release);
     g_HasQueuedConsoleMessages.store(true, std::memory_order_release);
     g_HasQueuedConsoleMessages.notify_one();

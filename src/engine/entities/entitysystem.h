@@ -24,7 +24,6 @@
 class CEntSystem : public IEntitySystem
 {
 public:
-    virtual void Initialize() override;
     virtual void Shutdown() override;
 
 
