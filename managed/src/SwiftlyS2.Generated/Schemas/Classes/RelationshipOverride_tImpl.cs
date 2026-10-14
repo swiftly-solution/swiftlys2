@@ -16,24 +16,24 @@ internal partial class RelationshipOverride_tImpl : Relationship_tImpl, Relation
 {
     public RelationshipOverride_tImpl(nint handle) : base(handle) { }
 
-    private static nint _EntityOffset = -1;
+    private static nint? _EntityOffset;
 
     public ref CHandle<CBaseEntity> Entity
     {
         get
         {
-            if (_EntityOffset == -1) _EntityOffset = Schema.GetOffset(0x2EECEBE0D33FF5DA);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityOffset);
+            _EntityOffset = _EntityOffset ?? Schema.GetOffset(0x2EECEBE0D33FF5DA);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityOffset!.Value);
         }
     }
-    private static nint _ClassTypeOffset = -1;
+    private static nint? _ClassTypeOffset;
 
     public ref Class_T ClassType
     {
         get
         {
-            if (_ClassTypeOffset == -1) _ClassTypeOffset = Schema.GetOffset(0x2EECEBE040A47427);
-            return ref _Handle.AsRef<Class_T>(_ClassTypeOffset);
+            _ClassTypeOffset = _ClassTypeOffset ?? Schema.GetOffset(0x2EECEBE040A47427);
+            return ref _Handle.AsRef<Class_T>(_ClassTypeOffset!.Value);
         }
     }
 

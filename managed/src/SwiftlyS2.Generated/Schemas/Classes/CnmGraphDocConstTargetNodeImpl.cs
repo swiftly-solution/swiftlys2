@@ -16,24 +16,24 @@ internal partial class CnmGraphDocConstTargetNodeImpl : CNmGraphDocFlowNodeImpl,
 {
     public CnmGraphDocConstTargetNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _RotationOffset = -1;
+    private static nint? _RotationOffset;
 
     public ref QAngle Rotation
     {
         get
         {
-            if (_RotationOffset == -1) _RotationOffset = Schema.GetOffset(0x695D4B316B0B23FF);
-            return ref _Handle.AsRef<QAngle>(_RotationOffset);
+            _RotationOffset = _RotationOffset ?? Schema.GetOffset(0x695D4B316B0B23FF);
+            return ref _Handle.AsRef<QAngle>(_RotationOffset!.Value);
         }
     }
-    private static nint _TranslationOffset = -1;
+    private static nint? _TranslationOffset;
 
     public ref Vector Translation
     {
         get
         {
-            if (_TranslationOffset == -1) _TranslationOffset = Schema.GetOffset(0x695D4B3157AF3A4C);
-            return ref _Handle.AsRef<Vector>(_TranslationOffset);
+            _TranslationOffset = _TranslationOffset ?? Schema.GetOffset(0x695D4B3157AF3A4C);
+            return ref _Handle.AsRef<Vector>(_TranslationOffset!.Value);
         }
     }
 

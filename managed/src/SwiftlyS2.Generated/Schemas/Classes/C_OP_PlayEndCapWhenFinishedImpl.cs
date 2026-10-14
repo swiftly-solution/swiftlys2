@@ -16,24 +16,24 @@ internal partial class C_OP_PlayEndCapWhenFinishedImpl : CParticleFunctionPreEmi
 {
     public C_OP_PlayEndCapWhenFinishedImpl(nint handle) : base(handle) { }
 
-    private static nint _FireOnEmissionEndOffset = -1;
+    private static nint? _FireOnEmissionEndOffset;
 
     public ref bool FireOnEmissionEnd
     {
         get
         {
-            if (_FireOnEmissionEndOffset == -1) _FireOnEmissionEndOffset = Schema.GetOffset(0xFC89982E01C357B0);
-            return ref _Handle.AsRef<bool>(_FireOnEmissionEndOffset);
+            _FireOnEmissionEndOffset = _FireOnEmissionEndOffset ?? Schema.GetOffset(0xFC89982E01C357B0);
+            return ref _Handle.AsRef<bool>(_FireOnEmissionEndOffset!.Value);
         }
     }
-    private static nint _IncludeChildrenOffset = -1;
+    private static nint? _IncludeChildrenOffset;
 
     public ref bool IncludeChildren
     {
         get
         {
-            if (_IncludeChildrenOffset == -1) _IncludeChildrenOffset = Schema.GetOffset(0xFC89982EA7706C80);
-            return ref _Handle.AsRef<bool>(_IncludeChildrenOffset);
+            _IncludeChildrenOffset = _IncludeChildrenOffset ?? Schema.GetOffset(0xFC89982EA7706C80);
+            return ref _Handle.AsRef<bool>(_IncludeChildrenOffset!.Value);
         }
     }
 

@@ -16,39 +16,39 @@ internal partial class CExpressionActionUpdaterImpl : CAnimActionUpdaterImpl, CE
 {
     public CExpressionActionUpdaterImpl(nint handle) : base(handle) { }
 
-    private static nint _ParamOffset = -1;
+    private static nint? _ParamOffset;
     private CAnimParamHandleImpl? _ParamInstance;
 
     public CAnimParamHandle Param
     {
         get
         {
-            if (_ParamOffset == -1) _ParamOffset = Schema.GetOffset(0x3B8502F3679286A4);
+            _ParamOffset = _ParamOffset ?? Schema.GetOffset(0x3B8502F3679286A4);
             var instance = _ParamInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamOffset);
+            instance.DangerousSetHandle(_Handle + _ParamOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamTypeOffset = -1;
+    private static nint? _ParamTypeOffset;
 
     public ref AnimParamType_t ParamType
     {
         get
         {
-            if (_ParamTypeOffset == -1) _ParamTypeOffset = Schema.GetOffset(0x3B8502F3F05DFDD9);
-            return ref _Handle.AsRef<AnimParamType_t>(_ParamTypeOffset);
+            _ParamTypeOffset = _ParamTypeOffset ?? Schema.GetOffset(0x3B8502F3F05DFDD9);
+            return ref _Handle.AsRef<AnimParamType_t>(_ParamTypeOffset!.Value);
         }
     }
-    private static nint _ScriptOffset = -1;
+    private static nint? _ScriptOffset;
     private AnimScriptHandleImpl? _ScriptInstance;
 
     public AnimScriptHandle Script
     {
         get
         {
-            if (_ScriptOffset == -1) _ScriptOffset = Schema.GetOffset(0x3B8502F329D70FB0);
+            _ScriptOffset = _ScriptOffset ?? Schema.GetOffset(0x3B8502F329D70FB0);
             var instance = _ScriptInstance ??= new AnimScriptHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _ScriptOffset);
+            instance.DangerousSetHandle(_Handle + _ScriptOffset!.Value);
             return instance;
         }
     }

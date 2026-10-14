@@ -16,14 +16,14 @@ internal partial class CAnimScriptBaseImpl : SchemaClass, CAnimScriptBase
 {
     public CAnimScriptBaseImpl(nint handle) : base(handle) { }
 
-    private static nint _IsValidOffset = -1;
+    private static nint? _IsValidOffset;
 
     public ref bool IsValid
     {
         get
         {
-            if (_IsValidOffset == -1) _IsValidOffset = Schema.GetOffset(0x621CEA890E4A2BC1);
-            return ref _Handle.AsRef<bool>(_IsValidOffset);
+            _IsValidOffset = _IsValidOffset ?? Schema.GetOffset(0x621CEA890E4A2BC1);
+            return ref _Handle.AsRef<bool>(_IsValidOffset!.Value);
         }
     }
 

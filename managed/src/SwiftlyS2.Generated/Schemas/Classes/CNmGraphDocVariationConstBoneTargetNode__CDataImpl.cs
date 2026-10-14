@@ -16,14 +16,14 @@ internal partial class CNmGraphDocVariationConstBoneTargetNode__CDataImpl : CNmG
 {
     public CNmGraphDocVariationConstBoneTargetNode__CDataImpl(nint handle) : base(handle) { }
 
-    private static nint _BoneNameOffset = -1;
+    private static nint? _BoneNameOffset;
 
     public ref CGlobalSymbol BoneName
     {
         get
         {
-            if (_BoneNameOffset == -1) _BoneNameOffset = Schema.GetOffset(0x54CC02FFFDEE0E0C);
-            return ref _Handle.AsRef<CGlobalSymbol>(_BoneNameOffset);
+            _BoneNameOffset = _BoneNameOffset ?? Schema.GetOffset(0x54CC02FFFDEE0E0C);
+            return ref _Handle.AsRef<CGlobalSymbol>(_BoneNameOffset!.Value);
         }
     }
 

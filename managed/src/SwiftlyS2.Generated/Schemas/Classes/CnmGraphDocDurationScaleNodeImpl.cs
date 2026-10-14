@@ -16,14 +16,14 @@ internal partial class CnmGraphDocDurationScaleNodeImpl : CNmGraphDocFlowNodeImp
 {
     public CnmGraphDocDurationScaleNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _DesiredDurationOffset = -1;
+    private static nint? _DesiredDurationOffset;
 
     public ref float DesiredDuration
     {
         get
         {
-            if (_DesiredDurationOffset == -1) _DesiredDurationOffset = Schema.GetOffset(0xEF4BEB3D6EBF883F);
-            return ref _Handle.AsRef<float>(_DesiredDurationOffset);
+            _DesiredDurationOffset = _DesiredDurationOffset ?? Schema.GetOffset(0xEF4BEB3D6EBF883F);
+            return ref _Handle.AsRef<float>(_DesiredDurationOffset!.Value);
         }
     }
 

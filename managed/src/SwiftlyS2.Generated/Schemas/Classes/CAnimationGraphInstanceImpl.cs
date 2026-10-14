@@ -16,14 +16,14 @@ internal partial class CAnimationGraphInstanceImpl : SchemaClass, CAnimationGrap
 {
     public CAnimationGraphInstanceImpl(nint handle) : base(handle) { }
 
-    private static nint _TagDispatchDirtyOffset = -1;
+    private static nint? _TagDispatchDirtyOffset;
 
     public ref bool TagDispatchDirty
     {
         get
         {
-            if (_TagDispatchDirtyOffset == -1) _TagDispatchDirtyOffset = Schema.GetOffset(0xA355E9FFD2F48627);
-            return ref _Handle.AsRef<bool>(_TagDispatchDirtyOffset);
+            _TagDispatchDirtyOffset = _TagDispatchDirtyOffset ?? Schema.GetOffset(0xA355E9FFD2F48627);
+            return ref _Handle.AsRef<bool>(_TagDispatchDirtyOffset!.Value);
         }
     }
 

@@ -16,106 +16,106 @@ internal partial class EntityIOConnectionData_tImpl : SchemaClass, EntityIOConne
 {
     public EntityIOConnectionData_tImpl(nint handle) : base(handle) { }
 
-    private static nint _OutputNameOffset = -1;
+    private static nint? _OutputNameOffset;
 
     public string OutputName
     {
         get
         {
-            if (_OutputNameOffset == -1) _OutputNameOffset = Schema.GetOffset(0xDEBEBB4D5BFC85BF);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_OutputNameOffset));
+            _OutputNameOffset = _OutputNameOffset ?? Schema.GetOffset(0xDEBEBB4D5BFC85BF);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_OutputNameOffset!.Value));
         }
         set
         {
-            if (_OutputNameOffset == -1) _OutputNameOffset = Schema.GetOffset(0xDEBEBB4D5BFC85BF);
-            Schema.SetCUtlString(_Handle, _OutputNameOffset, value);
+            _OutputNameOffset = _OutputNameOffset ?? Schema.GetOffset(0xDEBEBB4D5BFC85BF);
+            Schema.SetCUtlString(_Handle, _OutputNameOffset!.Value, value);
         }
     }
-    private static nint _TargetTypeOffset = -1;
+    private static nint? _TargetTypeOffset;
 
     public ref uint TargetType
     {
         get
         {
-            if (_TargetTypeOffset == -1) _TargetTypeOffset = Schema.GetOffset(0xDEBEBB4D13C167A0);
-            return ref _Handle.AsRef<uint>(_TargetTypeOffset);
+            _TargetTypeOffset = _TargetTypeOffset ?? Schema.GetOffset(0xDEBEBB4D13C167A0);
+            return ref _Handle.AsRef<uint>(_TargetTypeOffset!.Value);
         }
     }
-    private static nint _TargetNameOffset = -1;
+    private static nint? _TargetNameOffset;
 
     public string TargetName
     {
         get
         {
-            if (_TargetNameOffset == -1) _TargetNameOffset = Schema.GetOffset(0xDEBEBB4DC58FE46B);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_TargetNameOffset));
+            _TargetNameOffset = _TargetNameOffset ?? Schema.GetOffset(0xDEBEBB4DC58FE46B);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_TargetNameOffset!.Value));
         }
         set
         {
-            if (_TargetNameOffset == -1) _TargetNameOffset = Schema.GetOffset(0xDEBEBB4DC58FE46B);
-            Schema.SetCUtlString(_Handle, _TargetNameOffset, value);
+            _TargetNameOffset = _TargetNameOffset ?? Schema.GetOffset(0xDEBEBB4DC58FE46B);
+            Schema.SetCUtlString(_Handle, _TargetNameOffset!.Value, value);
         }
     }
-    private static nint _InputNameOffset = -1;
+    private static nint? _InputNameOffset;
 
     public string InputName
     {
         get
         {
-            if (_InputNameOffset == -1) _InputNameOffset = Schema.GetOffset(0xDEBEBB4D61478B20);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_InputNameOffset));
+            _InputNameOffset = _InputNameOffset ?? Schema.GetOffset(0xDEBEBB4D61478B20);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_InputNameOffset!.Value));
         }
         set
         {
-            if (_InputNameOffset == -1) _InputNameOffset = Schema.GetOffset(0xDEBEBB4D61478B20);
-            Schema.SetCUtlString(_Handle, _InputNameOffset, value);
+            _InputNameOffset = _InputNameOffset ?? Schema.GetOffset(0xDEBEBB4D61478B20);
+            Schema.SetCUtlString(_Handle, _InputNameOffset!.Value, value);
         }
     }
-    private static nint _OverrideParamOffset = -1;
+    private static nint? _OverrideParamOffset;
 
     public string OverrideParam
     {
         get
         {
-            if (_OverrideParamOffset == -1) _OverrideParamOffset = Schema.GetOffset(0xDEBEBB4DB454EE6A);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_OverrideParamOffset));
+            _OverrideParamOffset = _OverrideParamOffset ?? Schema.GetOffset(0xDEBEBB4DB454EE6A);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_OverrideParamOffset!.Value));
         }
         set
         {
-            if (_OverrideParamOffset == -1) _OverrideParamOffset = Schema.GetOffset(0xDEBEBB4DB454EE6A);
-            Schema.SetCUtlString(_Handle, _OverrideParamOffset, value);
+            _OverrideParamOffset = _OverrideParamOffset ?? Schema.GetOffset(0xDEBEBB4DB454EE6A);
+            Schema.SetCUtlString(_Handle, _OverrideParamOffset!.Value, value);
         }
     }
-    private static nint _DelayOffset = -1;
+    private static nint? _DelayOffset;
 
     public ref float Delay
     {
         get
         {
-            if (_DelayOffset == -1) _DelayOffset = Schema.GetOffset(0xDEBEBB4D7D68FD6E);
-            return ref _Handle.AsRef<float>(_DelayOffset);
+            _DelayOffset = _DelayOffset ?? Schema.GetOffset(0xDEBEBB4D7D68FD6E);
+            return ref _Handle.AsRef<float>(_DelayOffset!.Value);
         }
     }
-    private static nint _TimesToFireOffset = -1;
+    private static nint? _TimesToFireOffset;
 
     public ref int TimesToFire
     {
         get
         {
-            if (_TimesToFireOffset == -1) _TimesToFireOffset = Schema.GetOffset(0xDEBEBB4D0393A604);
-            return ref _Handle.AsRef<int>(_TimesToFireOffset);
+            _TimesToFireOffset = _TimesToFireOffset ?? Schema.GetOffset(0xDEBEBB4D0393A604);
+            return ref _Handle.AsRef<int>(_TimesToFireOffset!.Value);
         }
     }
-    private static nint _ParamMapOffset = -1;
+    private static nint? _ParamMapOffset;
     private SchemaUntypedField? _ParamMapInstance;
 
     public SchemaUntypedField ParamMap
     {
         get
         {
-            if (_ParamMapOffset == -1) _ParamMapOffset = Schema.GetOffset(0xDEBEBB4DF64DD25C);
+            _ParamMapOffset = _ParamMapOffset ?? Schema.GetOffset(0xDEBEBB4DF64DD25C);
             var instance = _ParamMapInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ParamMapOffset);
+            instance.DangerousSetHandle(_Handle + _ParamMapOffset!.Value);
             return instance;
         }
     }

@@ -16,39 +16,39 @@ internal partial class CHintMessageImpl : SchemaClass, CHintMessage
 {
     public CHintMessageImpl(nint handle) : base(handle) { }
 
-    private static nint _HintStringOffset = -1;
+    private static nint? _HintStringOffset;
 
     public string HintString
     {
         get
         {
-            if (_HintStringOffset == -1) _HintStringOffset = Schema.GetOffset(0x7663729E433E2101);
-            return Schema.GetString(_Handle.Read<nint>(_HintStringOffset));
+            _HintStringOffset = _HintStringOffset ?? Schema.GetOffset(0x7663729E433E2101);
+            return Schema.GetString(_Handle.Read<nint>(_HintStringOffset!.Value));
         }
         set
         {
-            if (_HintStringOffset == -1) _HintStringOffset = Schema.GetOffset(0x7663729E433E2101);
-            Schema.SetString(_Handle, _HintStringOffset, value);
+            _HintStringOffset = _HintStringOffset ?? Schema.GetOffset(0x7663729E433E2101);
+            Schema.SetString(_Handle, _HintStringOffset!.Value, value);
         }
     }
-    private static nint _ArgsOffset = -1;
+    private static nint? _ArgsOffset;
 
     public ref CUtlVector<CString> Args
     {
         get
         {
-            if (_ArgsOffset == -1) _ArgsOffset = Schema.GetOffset(0x7663729E5D6040DC);
-            return ref _Handle.AsRef<CUtlVector<CString>>(_ArgsOffset);
+            _ArgsOffset = _ArgsOffset ?? Schema.GetOffset(0x7663729E5D6040DC);
+            return ref _Handle.AsRef<CUtlVector<CString>>(_ArgsOffset!.Value);
         }
     }
-    private static nint _DurationOffset = -1;
+    private static nint? _DurationOffset;
 
     public ref float Duration
     {
         get
         {
-            if (_DurationOffset == -1) _DurationOffset = Schema.GetOffset(0x7663729E3D9FF5AD);
-            return ref _Handle.AsRef<float>(_DurationOffset);
+            _DurationOffset = _DurationOffset ?? Schema.GetOffset(0x7663729E3D9FF5AD);
+            return ref _Handle.AsRef<float>(_DurationOffset!.Value);
         }
     }
 

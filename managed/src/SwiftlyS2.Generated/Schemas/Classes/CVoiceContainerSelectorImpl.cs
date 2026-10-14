@@ -16,37 +16,37 @@ internal partial class CVoiceContainerSelectorImpl : CVoiceContainerBaseImpl, CV
 {
     public CVoiceContainerSelectorImpl(nint handle) : base(handle) { }
 
-    private static nint _ModeOffset = -1;
+    private static nint? _ModeOffset;
 
     public ref PlayBackMode_t Mode
     {
         get
         {
-            if (_ModeOffset == -1) _ModeOffset = Schema.GetOffset(0xF16C473A90FD5BB2);
-            return ref _Handle.AsRef<PlayBackMode_t>(_ModeOffset);
+            _ModeOffset = _ModeOffset ?? Schema.GetOffset(0xF16C473A90FD5BB2);
+            return ref _Handle.AsRef<PlayBackMode_t>(_ModeOffset!.Value);
         }
     }
-    private static nint _SoundsToPlayOffset = -1;
+    private static nint? _SoundsToPlayOffset;
     private CSoundContainerReferenceArrayImpl? _SoundsToPlayInstance;
 
     public CSoundContainerReferenceArray SoundsToPlay
     {
         get
         {
-            if (_SoundsToPlayOffset == -1) _SoundsToPlayOffset = Schema.GetOffset(0xF16C473ADCB5F70E);
+            _SoundsToPlayOffset = _SoundsToPlayOffset ?? Schema.GetOffset(0xF16C473ADCB5F70E);
             var instance = _SoundsToPlayInstance ??= new CSoundContainerReferenceArrayImpl(0);
-            instance.DangerousSetHandle(_Handle + _SoundsToPlayOffset);
+            instance.DangerousSetHandle(_Handle + _SoundsToPlayOffset!.Value);
             return instance;
         }
     }
-    private static nint _ProbabilityWeightsOffset = -1;
+    private static nint? _ProbabilityWeightsOffset;
 
     public ref CUtlVector<float> ProbabilityWeights
     {
         get
         {
-            if (_ProbabilityWeightsOffset == -1) _ProbabilityWeightsOffset = Schema.GetOffset(0xF16C473A6DABFC99);
-            return ref _Handle.AsRef<CUtlVector<float>>(_ProbabilityWeightsOffset);
+            _ProbabilityWeightsOffset = _ProbabilityWeightsOffset ?? Schema.GetOffset(0xF16C473A6DABFC99);
+            return ref _Handle.AsRef<CUtlVector<float>>(_ProbabilityWeightsOffset!.Value);
         }
     }
 

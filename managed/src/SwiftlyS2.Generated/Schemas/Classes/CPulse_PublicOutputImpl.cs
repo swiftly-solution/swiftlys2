@@ -16,42 +16,42 @@ internal partial class CPulse_PublicOutputImpl : SchemaClass, CPulse_PublicOutpu
 {
     public CPulse_PublicOutputImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
     private SchemaUntypedField? _NameInstance;
 
     public SchemaUntypedField Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x74B3BCA4CAE8A266);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x74B3BCA4CAE8A266);
             var instance = _NameInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _NameOffset);
+            instance.DangerousSetHandle(_Handle + _NameOffset!.Value);
             return instance;
         }
     }
-    private static nint _DescriptionOffset = -1;
+    private static nint? _DescriptionOffset;
 
     public string Description
     {
         get
         {
-            if (_DescriptionOffset == -1) _DescriptionOffset = Schema.GetOffset(0x74B3BCA4678744E9);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_DescriptionOffset));
+            _DescriptionOffset = _DescriptionOffset ?? Schema.GetOffset(0x74B3BCA4678744E9);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_DescriptionOffset!.Value));
         }
         set
         {
-            if (_DescriptionOffset == -1) _DescriptionOffset = Schema.GetOffset(0x74B3BCA4678744E9);
-            Schema.SetCUtlString(_Handle, _DescriptionOffset, value);
+            _DescriptionOffset = _DescriptionOffset ?? Schema.GetOffset(0x74B3BCA4678744E9);
+            Schema.SetCUtlString(_Handle, _DescriptionOffset!.Value, value);
         }
     }
-    private static nint _ArgsOffset = -1;
+    private static nint? _ArgsOffset;
 
     public ref CUtlLeanVector<CPulseRuntimeMethodArg, int> Args
     {
         get
         {
-            if (_ArgsOffset == -1) _ArgsOffset = Schema.GetOffset(0x74B3BCA4DAB98BBC);
-            return ref _Handle.AsRef<CUtlLeanVector<CPulseRuntimeMethodArg, int>>(_ArgsOffset);
+            _ArgsOffset = _ArgsOffset ?? Schema.GetOffset(0x74B3BCA4DAB98BBC);
+            return ref _Handle.AsRef<CUtlLeanVector<CPulseRuntimeMethodArg, int>>(_ArgsOffset!.Value);
         }
     }
 

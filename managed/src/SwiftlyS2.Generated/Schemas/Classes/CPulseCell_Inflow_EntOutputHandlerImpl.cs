@@ -16,42 +16,42 @@ internal partial class CPulseCell_Inflow_EntOutputHandlerImpl : CPulseCell_Inflo
 {
     public CPulseCell_Inflow_EntOutputHandlerImpl(nint handle) : base(handle) { }
 
-    private static nint _SourceEntityOffset = -1;
+    private static nint? _SourceEntityOffset;
     private SchemaUntypedField? _SourceEntityInstance;
 
     public SchemaUntypedField SourceEntity
     {
         get
         {
-            if (_SourceEntityOffset == -1) _SourceEntityOffset = Schema.GetOffset(0x8C9310C4AD2DB063);
+            _SourceEntityOffset = _SourceEntityOffset ?? Schema.GetOffset(0x8C9310C4AD2DB063);
             var instance = _SourceEntityInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _SourceEntityOffset);
+            instance.DangerousSetHandle(_Handle + _SourceEntityOffset!.Value);
             return instance;
         }
     }
-    private static nint _SourceOutputOffset = -1;
+    private static nint? _SourceOutputOffset;
     private SchemaUntypedField? _SourceOutputInstance;
 
     public SchemaUntypedField SourceOutput
     {
         get
         {
-            if (_SourceOutputOffset == -1) _SourceOutputOffset = Schema.GetOffset(0x8C9310C42D46D7F5);
+            _SourceOutputOffset = _SourceOutputOffset ?? Schema.GetOffset(0x8C9310C42D46D7F5);
             var instance = _SourceOutputInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _SourceOutputOffset);
+            instance.DangerousSetHandle(_Handle + _SourceOutputOffset!.Value);
             return instance;
         }
     }
-    private static nint _ExpectedParamTypeOffset = -1;
+    private static nint? _ExpectedParamTypeOffset;
     private SchemaUntypedField? _ExpectedParamTypeInstance;
 
     public SchemaUntypedField ExpectedParamType
     {
         get
         {
-            if (_ExpectedParamTypeOffset == -1) _ExpectedParamTypeOffset = Schema.GetOffset(0x8C9310C41C1CB8A6);
+            _ExpectedParamTypeOffset = _ExpectedParamTypeOffset ?? Schema.GetOffset(0x8C9310C41C1CB8A6);
             var instance = _ExpectedParamTypeInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ExpectedParamTypeOffset);
+            instance.DangerousSetHandle(_Handle + _ExpectedParamTypeOffset!.Value);
             return instance;
         }
     }

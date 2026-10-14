@@ -16,16 +16,16 @@ internal partial class CNmEntityAttributeFloatEventImpl : CNmEntityAttributeEven
 {
     public CNmEntityAttributeFloatEventImpl(nint handle) : base(handle) { }
 
-    private static nint _FloatValueOffset = -1;
+    private static nint? _FloatValueOffset;
     private SchemaUntypedField? _FloatValueInstance;
 
     public SchemaUntypedField FloatValue
     {
         get
         {
-            if (_FloatValueOffset == -1) _FloatValueOffset = Schema.GetOffset(0x3ADB66C2ADBE62AA);
+            _FloatValueOffset = _FloatValueOffset ?? Schema.GetOffset(0x3ADB66C2ADBE62AA);
             var instance = _FloatValueInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _FloatValueOffset);
+            instance.DangerousSetHandle(_Handle + _FloatValueOffset!.Value);
             return instance;
         }
     }

@@ -16,106 +16,106 @@ internal partial class C_OP_RenderScreenShakeImpl : CParticleFunctionRendererImp
 {
     public C_OP_RenderScreenShakeImpl(nint handle) : base(handle) { }
 
-    private static nint _DurationScaleOffset = -1;
+    private static nint? _DurationScaleOffset;
 
     public ref float DurationScale
     {
         get
         {
-            if (_DurationScaleOffset == -1) _DurationScaleOffset = Schema.GetOffset(0x37508849776D4203);
-            return ref _Handle.AsRef<float>(_DurationScaleOffset);
+            _DurationScaleOffset = _DurationScaleOffset ?? Schema.GetOffset(0x37508849776D4203);
+            return ref _Handle.AsRef<float>(_DurationScaleOffset!.Value);
         }
     }
-    private static nint _RadiusScaleOffset = -1;
+    private static nint? _RadiusScaleOffset;
 
     public ref float RadiusScale
     {
         get
         {
-            if (_RadiusScaleOffset == -1) _RadiusScaleOffset = Schema.GetOffset(0x37508849A7A20159);
-            return ref _Handle.AsRef<float>(_RadiusScaleOffset);
+            _RadiusScaleOffset = _RadiusScaleOffset ?? Schema.GetOffset(0x37508849A7A20159);
+            return ref _Handle.AsRef<float>(_RadiusScaleOffset!.Value);
         }
     }
-    private static nint _FrequencyScaleOffset = -1;
+    private static nint? _FrequencyScaleOffset;
 
     public ref float FrequencyScale
     {
         get
         {
-            if (_FrequencyScaleOffset == -1) _FrequencyScaleOffset = Schema.GetOffset(0x375088494B5C34F7);
-            return ref _Handle.AsRef<float>(_FrequencyScaleOffset);
+            _FrequencyScaleOffset = _FrequencyScaleOffset ?? Schema.GetOffset(0x375088494B5C34F7);
+            return ref _Handle.AsRef<float>(_FrequencyScaleOffset!.Value);
         }
     }
-    private static nint _AmplitudeScaleOffset = -1;
+    private static nint? _AmplitudeScaleOffset;
 
     public ref float AmplitudeScale
     {
         get
         {
-            if (_AmplitudeScaleOffset == -1) _AmplitudeScaleOffset = Schema.GetOffset(0x37508849BF90DF5A);
-            return ref _Handle.AsRef<float>(_AmplitudeScaleOffset);
+            _AmplitudeScaleOffset = _AmplitudeScaleOffset ?? Schema.GetOffset(0x37508849BF90DF5A);
+            return ref _Handle.AsRef<float>(_AmplitudeScaleOffset!.Value);
         }
     }
-    private static nint _RadiusFieldOffset = -1;
+    private static nint? _RadiusFieldOffset;
     private ParticleAttributeIndex_tImpl? _RadiusFieldInstance;
 
     public ParticleAttributeIndex_t RadiusField
     {
         get
         {
-            if (_RadiusFieldOffset == -1) _RadiusFieldOffset = Schema.GetOffset(0x375088494B15FC11);
+            _RadiusFieldOffset = _RadiusFieldOffset ?? Schema.GetOffset(0x375088494B15FC11);
             var instance = _RadiusFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _RadiusFieldOffset);
+            instance.DangerousSetHandle(_Handle + _RadiusFieldOffset!.Value);
             return instance;
         }
     }
-    private static nint _DurationFieldOffset = -1;
+    private static nint? _DurationFieldOffset;
     private ParticleAttributeIndex_tImpl? _DurationFieldInstance;
 
     public ParticleAttributeIndex_t DurationField
     {
         get
         {
-            if (_DurationFieldOffset == -1) _DurationFieldOffset = Schema.GetOffset(0x37508849B21EDAAB);
+            _DurationFieldOffset = _DurationFieldOffset ?? Schema.GetOffset(0x37508849B21EDAAB);
             var instance = _DurationFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _DurationFieldOffset);
+            instance.DangerousSetHandle(_Handle + _DurationFieldOffset!.Value);
             return instance;
         }
     }
-    private static nint _FrequencyFieldOffset = -1;
+    private static nint? _FrequencyFieldOffset;
     private ParticleAttributeIndex_tImpl? _FrequencyFieldInstance;
 
     public ParticleAttributeIndex_t FrequencyField
     {
         get
         {
-            if (_FrequencyFieldOffset == -1) _FrequencyFieldOffset = Schema.GetOffset(0x37508849DDA055AF);
+            _FrequencyFieldOffset = _FrequencyFieldOffset ?? Schema.GetOffset(0x37508849DDA055AF);
             var instance = _FrequencyFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FrequencyFieldOffset);
+            instance.DangerousSetHandle(_Handle + _FrequencyFieldOffset!.Value);
             return instance;
         }
     }
-    private static nint _AmplitudeFieldOffset = -1;
+    private static nint? _AmplitudeFieldOffset;
     private ParticleAttributeIndex_tImpl? _AmplitudeFieldInstance;
 
     public ParticleAttributeIndex_t AmplitudeField
     {
         get
         {
-            if (_AmplitudeFieldOffset == -1) _AmplitudeFieldOffset = Schema.GetOffset(0x37508849F8F54FD2);
+            _AmplitudeFieldOffset = _AmplitudeFieldOffset ?? Schema.GetOffset(0x37508849F8F54FD2);
             var instance = _AmplitudeFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _AmplitudeFieldOffset);
+            instance.DangerousSetHandle(_Handle + _AmplitudeFieldOffset!.Value);
             return instance;
         }
     }
-    private static nint _FilterCPOffset = -1;
+    private static nint? _FilterCPOffset;
 
     public ref int FilterCP
     {
         get
         {
-            if (_FilterCPOffset == -1) _FilterCPOffset = Schema.GetOffset(0x375088499304E130);
-            return ref _Handle.AsRef<int>(_FilterCPOffset);
+            _FilterCPOffset = _FilterCPOffset ?? Schema.GetOffset(0x375088499304E130);
+            return ref _Handle.AsRef<int>(_FilterCPOffset!.Value);
         }
     }
 

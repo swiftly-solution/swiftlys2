@@ -16,14 +16,14 @@ internal partial class CAnimGraphDoc_PathMotorBaseImpl : CAnimGraphDoc_MotorImpl
 {
     public CAnimGraphDoc_PathMotorBaseImpl(nint handle) : base(handle) { }
 
-    private static nint _LockToPathOffset = -1;
+    private static nint? _LockToPathOffset;
 
     public ref bool LockToPath
     {
         get
         {
-            if (_LockToPathOffset == -1) _LockToPathOffset = Schema.GetOffset(0x2B17CF31F2F0960);
-            return ref _Handle.AsRef<bool>(_LockToPathOffset);
+            _LockToPathOffset = _LockToPathOffset ?? Schema.GetOffset(0x2B17CF31F2F0960);
+            return ref _Handle.AsRef<bool>(_LockToPathOffset!.Value);
         }
     }
 

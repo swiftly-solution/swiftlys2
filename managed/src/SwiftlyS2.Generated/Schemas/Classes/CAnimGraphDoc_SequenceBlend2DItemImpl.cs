@@ -16,29 +16,29 @@ internal partial class CAnimGraphDoc_SequenceBlend2DItemImpl : CAnimGraphDoc_Ble
 {
     public CAnimGraphDoc_SequenceBlend2DItemImpl(nint handle) : base(handle) { }
 
-    private static nint _TagSpansOffset = -1;
+    private static nint? _TagSpansOffset;
 
     public ref CUtlVector<SchemaUntypedField> TagSpans
     {
         get
         {
-            if (_TagSpansOffset == -1) _TagSpansOffset = Schema.GetOffset(0x7235A713A56106AC);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_TagSpansOffset);
+            _TagSpansOffset = _TagSpansOffset ?? Schema.GetOffset(0x7235A713A56106AC);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_TagSpansOffset!.Value);
         }
     }
-    private static nint _SequenceNameOffset = -1;
+    private static nint? _SequenceNameOffset;
 
     public string SequenceName
     {
         get
         {
-            if (_SequenceNameOffset == -1) _SequenceNameOffset = Schema.GetOffset(0x7235A7132B4A24CB);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_SequenceNameOffset));
+            _SequenceNameOffset = _SequenceNameOffset ?? Schema.GetOffset(0x7235A7132B4A24CB);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_SequenceNameOffset!.Value));
         }
         set
         {
-            if (_SequenceNameOffset == -1) _SequenceNameOffset = Schema.GetOffset(0x7235A7132B4A24CB);
-            Schema.SetCUtlString(_Handle, _SequenceNameOffset, value);
+            _SequenceNameOffset = _SequenceNameOffset ?? Schema.GetOffset(0x7235A7132B4A24CB);
+            Schema.SetCUtlString(_Handle, _SequenceNameOffset!.Value, value);
         }
     }
 

@@ -16,29 +16,29 @@ internal partial class PermModelDataAnimatedMaterialAttribute_tImpl : SchemaClas
 {
     public PermModelDataAnimatedMaterialAttribute_tImpl(nint handle) : base(handle) { }
 
-    private static nint _AttributeNameOffset = -1;
+    private static nint? _AttributeNameOffset;
 
     public string AttributeName
     {
         get
         {
-            if (_AttributeNameOffset == -1) _AttributeNameOffset = Schema.GetOffset(0x6489C15F1408864C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_AttributeNameOffset));
+            _AttributeNameOffset = _AttributeNameOffset ?? Schema.GetOffset(0x6489C15F1408864C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_AttributeNameOffset!.Value));
         }
         set
         {
-            if (_AttributeNameOffset == -1) _AttributeNameOffset = Schema.GetOffset(0x6489C15F1408864C);
-            Schema.SetCUtlString(_Handle, _AttributeNameOffset, value);
+            _AttributeNameOffset = _AttributeNameOffset ?? Schema.GetOffset(0x6489C15F1408864C);
+            Schema.SetCUtlString(_Handle, _AttributeNameOffset!.Value, value);
         }
     }
-    private static nint _NumChannelsOffset = -1;
+    private static nint? _NumChannelsOffset;
 
     public ref int NumChannels
     {
         get
         {
-            if (_NumChannelsOffset == -1) _NumChannelsOffset = Schema.GetOffset(0x6489C15FEA44FE77);
-            return ref _Handle.AsRef<int>(_NumChannelsOffset);
+            _NumChannelsOffset = _NumChannelsOffset ?? Schema.GetOffset(0x6489C15FEA44FE77);
+            return ref _Handle.AsRef<int>(_NumChannelsOffset!.Value);
         }
     }
 

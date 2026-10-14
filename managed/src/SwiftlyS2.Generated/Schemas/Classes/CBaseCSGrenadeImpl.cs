@@ -16,146 +16,146 @@ internal partial class CBaseCSGrenadeImpl : CCSWeaponBaseImpl, CBaseCSGrenade
 {
     public CBaseCSGrenadeImpl(nint handle) : base(handle) { }
 
-    private static nint _RedrawOffset = -1;
+    private static nint? _RedrawOffset;
 
     public ref bool Redraw
     {
         get
         {
-            if (_RedrawOffset == -1) _RedrawOffset = Schema.GetOffset(0x8680ADED612F4EB2);
-            return ref _Handle.AsRef<bool>(_RedrawOffset);
+            _RedrawOffset = _RedrawOffset ?? Schema.GetOffset(0x8680ADED612F4EB2);
+            return ref _Handle.AsRef<bool>(_RedrawOffset!.Value);
         }
     }
-    private static nint _IsHeldByPlayerOffset = -1;
+    private static nint? _IsHeldByPlayerOffset;
 
     public ref bool IsHeldByPlayer
     {
         get
         {
-            if (_IsHeldByPlayerOffset == -1) _IsHeldByPlayerOffset = Schema.GetOffset(0x8680ADED5FB07B26);
-            return ref _Handle.AsRef<bool>(_IsHeldByPlayerOffset);
+            _IsHeldByPlayerOffset = _IsHeldByPlayerOffset ?? Schema.GetOffset(0x8680ADED5FB07B26);
+            return ref _Handle.AsRef<bool>(_IsHeldByPlayerOffset!.Value);
         }
     }
-    private static nint _PinPulledOffset = -1;
+    private static nint? _PinPulledOffset;
 
     public ref bool PinPulled
     {
         get
         {
-            if (_PinPulledOffset == -1) _PinPulledOffset = Schema.GetOffset(0x8680ADEDB3D8AABA);
-            return ref _Handle.AsRef<bool>(_PinPulledOffset);
+            _PinPulledOffset = _PinPulledOffset ?? Schema.GetOffset(0x8680ADEDB3D8AABA);
+            return ref _Handle.AsRef<bool>(_PinPulledOffset!.Value);
         }
     }
-    private static nint _JumpThrowOffset = -1;
+    private static nint? _JumpThrowOffset;
 
     public ref bool JumpThrow
     {
         get
         {
-            if (_JumpThrowOffset == -1) _JumpThrowOffset = Schema.GetOffset(0x8680ADED3202A7A7);
-            return ref _Handle.AsRef<bool>(_JumpThrowOffset);
+            _JumpThrowOffset = _JumpThrowOffset ?? Schema.GetOffset(0x8680ADED3202A7A7);
+            return ref _Handle.AsRef<bool>(_JumpThrowOffset!.Value);
         }
     }
-    private static nint _ThrowAnimatingOffset = -1;
+    private static nint? _ThrowAnimatingOffset;
 
     public ref bool ThrowAnimating
     {
         get
         {
-            if (_ThrowAnimatingOffset == -1) _ThrowAnimatingOffset = Schema.GetOffset(0x8680ADEDB2614685);
-            return ref _Handle.AsRef<bool>(_ThrowAnimatingOffset);
+            _ThrowAnimatingOffset = _ThrowAnimatingOffset ?? Schema.GetOffset(0x8680ADEDB2614685);
+            return ref _Handle.AsRef<bool>(_ThrowAnimatingOffset!.Value);
         }
     }
-    private static nint _ThrowTimeOffset = -1;
+    private static nint? _ThrowTimeOffset;
     private GameTime_tImpl? _ThrowTimeInstance;
 
     public GameTime_t ThrowTime
     {
         get
         {
-            if (_ThrowTimeOffset == -1) _ThrowTimeOffset = Schema.GetOffset(0x8680ADED57C1B8DA);
+            _ThrowTimeOffset = _ThrowTimeOffset ?? Schema.GetOffset(0x8680ADED57C1B8DA);
             var instance = _ThrowTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _ThrowTimeOffset);
+            instance.DangerousSetHandle(_Handle + _ThrowTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _ThrowStrengthOffset = -1;
+    private static nint? _ThrowStrengthOffset;
 
     public ref float ThrowStrength
     {
         get
         {
-            if (_ThrowStrengthOffset == -1) _ThrowStrengthOffset = Schema.GetOffset(0x8680ADEDF4D38CF4);
-            return ref _Handle.AsRef<float>(_ThrowStrengthOffset);
+            _ThrowStrengthOffset = _ThrowStrengthOffset ?? Schema.GetOffset(0x8680ADEDF4D38CF4);
+            return ref _Handle.AsRef<float>(_ThrowStrengthOffset!.Value);
         }
     }
-    private static nint _DropTimeOffset = -1;
+    private static nint? _DropTimeOffset;
     private GameTime_tImpl? _DropTimeInstance;
 
     public GameTime_t DropTime
     {
         get
         {
-            if (_DropTimeOffset == -1) _DropTimeOffset = Schema.GetOffset(0x8680ADED2DE88B09);
+            _DropTimeOffset = _DropTimeOffset ?? Schema.GetOffset(0x8680ADED2DE88B09);
             var instance = _DropTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _DropTimeOffset);
+            instance.DangerousSetHandle(_Handle + _DropTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _PinPullTimeOffset = -1;
+    private static nint? _PinPullTimeOffset;
     private GameTime_tImpl? _PinPullTimeInstance;
 
     public GameTime_t PinPullTime
     {
         get
         {
-            if (_PinPullTimeOffset == -1) _PinPullTimeOffset = Schema.GetOffset(0x8680ADEDFCD7B2E6);
+            _PinPullTimeOffset = _PinPullTimeOffset ?? Schema.GetOffset(0x8680ADEDFCD7B2E6);
             var instance = _PinPullTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _PinPullTimeOffset);
+            instance.DangerousSetHandle(_Handle + _PinPullTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _JustPulledPinOffset = -1;
+    private static nint? _JustPulledPinOffset;
 
     public ref bool JustPulledPin
     {
         get
         {
-            if (_JustPulledPinOffset == -1) _JustPulledPinOffset = Schema.GetOffset(0x8680ADEDDA12F260);
-            return ref _Handle.AsRef<bool>(_JustPulledPinOffset);
+            _JustPulledPinOffset = _JustPulledPinOffset ?? Schema.GetOffset(0x8680ADEDDA12F260);
+            return ref _Handle.AsRef<bool>(_JustPulledPinOffset!.Value);
         }
     }
-    private static nint _NextHoldTickOffset = -1;
+    private static nint? _NextHoldTickOffset;
     private GameTick_tImpl? _NextHoldTickInstance;
 
     public GameTick_t NextHoldTick
     {
         get
         {
-            if (_NextHoldTickOffset == -1) _NextHoldTickOffset = Schema.GetOffset(0x8680ADEDDB254738);
+            _NextHoldTickOffset = _NextHoldTickOffset ?? Schema.GetOffset(0x8680ADEDDB254738);
             var instance = _NextHoldTickInstance ??= new GameTick_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _NextHoldTickOffset);
+            instance.DangerousSetHandle(_Handle + _NextHoldTickOffset!.Value);
             return instance;
         }
     }
-    private static nint _NextHoldFracOffset = -1;
+    private static nint? _NextHoldFracOffset;
 
     public ref float NextHoldFrac
     {
         get
         {
-            if (_NextHoldFracOffset == -1) _NextHoldFracOffset = Schema.GetOffset(0x8680ADED09F02BB7);
-            return ref _Handle.AsRef<float>(_NextHoldFracOffset);
+            _NextHoldFracOffset = _NextHoldFracOffset ?? Schema.GetOffset(0x8680ADED09F02BB7);
+            return ref _Handle.AsRef<float>(_NextHoldFracOffset!.Value);
         }
     }
-    private static nint _SwitchToWeaponAfterThrowOffset = -1;
+    private static nint? _SwitchToWeaponAfterThrowOffset;
 
     public ref CHandle<CCSWeaponBase> SwitchToWeaponAfterThrow
     {
         get
         {
-            if (_SwitchToWeaponAfterThrowOffset == -1) _SwitchToWeaponAfterThrowOffset = Schema.GetOffset(0x8680ADED72CB2A60);
-            return ref _Handle.AsRef<CHandle<CCSWeaponBase>>(_SwitchToWeaponAfterThrowOffset);
+            _SwitchToWeaponAfterThrowOffset = _SwitchToWeaponAfterThrowOffset ?? Schema.GetOffset(0x8680ADED72CB2A60);
+            return ref _Handle.AsRef<CHandle<CCSWeaponBase>>(_SwitchToWeaponAfterThrowOffset!.Value);
         }
     }
 

@@ -16,32 +16,32 @@ internal partial class CSSDSMsg_ViewRenderImpl : SchemaClass, CSSDSMsg_ViewRende
 {
     public CSSDSMsg_ViewRenderImpl(nint handle) : base(handle) { }
 
-    private static nint _ViewIdOffset = -1;
+    private static nint? _ViewIdOffset;
     private SceneViewId_tImpl? _ViewIdInstance;
 
     public SceneViewId_t ViewId
     {
         get
         {
-            if (_ViewIdOffset == -1) _ViewIdOffset = Schema.GetOffset(0x2CD48EEEE976CB25);
+            _ViewIdOffset = _ViewIdOffset ?? Schema.GetOffset(0x2CD48EEEE976CB25);
             var instance = _ViewIdInstance ??= new SceneViewId_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _ViewIdOffset);
+            instance.DangerousSetHandle(_Handle + _ViewIdOffset!.Value);
             return instance;
         }
     }
-    private static nint _ViewNameOffset = -1;
+    private static nint? _ViewNameOffset;
 
     public string ViewName
     {
         get
         {
-            if (_ViewNameOffset == -1) _ViewNameOffset = Schema.GetOffset(0x2CD48EEEBA5BBDBB);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ViewNameOffset));
+            _ViewNameOffset = _ViewNameOffset ?? Schema.GetOffset(0x2CD48EEEBA5BBDBB);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ViewNameOffset!.Value));
         }
         set
         {
-            if (_ViewNameOffset == -1) _ViewNameOffset = Schema.GetOffset(0x2CD48EEEBA5BBDBB);
-            Schema.SetCUtlString(_Handle, _ViewNameOffset, value);
+            _ViewNameOffset = _ViewNameOffset ?? Schema.GetOffset(0x2CD48EEEBA5BBDBB);
+            Schema.SetCUtlString(_Handle, _ViewNameOffset!.Value, value);
         }
     }
 

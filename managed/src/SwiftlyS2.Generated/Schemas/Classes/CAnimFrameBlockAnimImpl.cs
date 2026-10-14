@@ -16,34 +16,34 @@ internal partial class CAnimFrameBlockAnimImpl : SchemaClass, CAnimFrameBlockAni
 {
     public CAnimFrameBlockAnimImpl(nint handle) : base(handle) { }
 
-    private static nint _StartFrameOffset = -1;
+    private static nint? _StartFrameOffset;
 
     public ref int StartFrame
     {
         get
         {
-            if (_StartFrameOffset == -1) _StartFrameOffset = Schema.GetOffset(0x6318445C9134F088);
-            return ref _Handle.AsRef<int>(_StartFrameOffset);
+            _StartFrameOffset = _StartFrameOffset ?? Schema.GetOffset(0x6318445C9134F088);
+            return ref _Handle.AsRef<int>(_StartFrameOffset!.Value);
         }
     }
-    private static nint _EndFrameOffset = -1;
+    private static nint? _EndFrameOffset;
 
     public ref int EndFrame
     {
         get
         {
-            if (_EndFrameOffset == -1) _EndFrameOffset = Schema.GetOffset(0x6318445CEA91BD07);
-            return ref _Handle.AsRef<int>(_EndFrameOffset);
+            _EndFrameOffset = _EndFrameOffset ?? Schema.GetOffset(0x6318445CEA91BD07);
+            return ref _Handle.AsRef<int>(_EndFrameOffset!.Value);
         }
     }
-    private static nint _SegmentIndexArrayOffset = -1;
+    private static nint? _SegmentIndexArrayOffset;
 
     public ref CUtlVector<int> SegmentIndexArray
     {
         get
         {
-            if (_SegmentIndexArrayOffset == -1) _SegmentIndexArrayOffset = Schema.GetOffset(0x6318445C1A46EA6B);
-            return ref _Handle.AsRef<CUtlVector<int>>(_SegmentIndexArrayOffset);
+            _SegmentIndexArrayOffset = _SegmentIndexArrayOffset ?? Schema.GetOffset(0x6318445C1A46EA6B);
+            return ref _Handle.AsRef<CUtlVector<int>>(_SegmentIndexArrayOffset!.Value);
         }
     }
 

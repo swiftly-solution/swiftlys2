@@ -16,16 +16,16 @@ internal partial class CNmGraphDocStateMachineGraphImpl : CNmGraphDocGraphImpl, 
 {
     public CNmGraphDocStateMachineGraphImpl(nint handle) : base(handle) { }
 
-    private static nint _EntryStateIDOffset = -1;
+    private static nint? _EntryStateIDOffset;
     private SchemaUntypedField? _EntryStateIDInstance;
 
     public SchemaUntypedField EntryStateID
     {
         get
         {
-            if (_EntryStateIDOffset == -1) _EntryStateIDOffset = Schema.GetOffset(0xE53FA279AF5D44E9);
+            _EntryStateIDOffset = _EntryStateIDOffset ?? Schema.GetOffset(0xE53FA279AF5D44E9);
             var instance = _EntryStateIDInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _EntryStateIDOffset);
+            instance.DangerousSetHandle(_Handle + _EntryStateIDOffset!.Value);
             return instance;
         }
     }

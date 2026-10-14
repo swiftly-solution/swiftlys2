@@ -16,67 +16,67 @@ internal partial class CPulseGraphExecutionHistoryImpl : SchemaClass, CPulseGrap
 {
     public CPulseGraphExecutionHistoryImpl(nint handle) : base(handle) { }
 
-    private static nint _InstanceIDOffset = -1;
+    private static nint? _InstanceIDOffset;
     private PulseGraphInstanceID_tImpl? _InstanceIDInstance;
 
     public PulseGraphInstanceID_t InstanceID
     {
         get
         {
-            if (_InstanceIDOffset == -1) _InstanceIDOffset = Schema.GetOffset(0x2DC54ABB24192813);
+            _InstanceIDOffset = _InstanceIDOffset ?? Schema.GetOffset(0x2DC54ABB24192813);
             var instance = _InstanceIDInstance ??= new PulseGraphInstanceID_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _InstanceIDOffset);
+            instance.DangerousSetHandle(_Handle + _InstanceIDOffset!.Value);
             return instance;
         }
     }
-    private static nint _StrFileNameOffset = -1;
+    private static nint? _StrFileNameOffset;
 
     public string StrFileName
     {
         get
         {
-            if (_StrFileNameOffset == -1) _StrFileNameOffset = Schema.GetOffset(0x2DC54ABB51B717E5);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrFileNameOffset));
+            _StrFileNameOffset = _StrFileNameOffset ?? Schema.GetOffset(0x2DC54ABB51B717E5);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrFileNameOffset!.Value));
         }
         set
         {
-            if (_StrFileNameOffset == -1) _StrFileNameOffset = Schema.GetOffset(0x2DC54ABB51B717E5);
-            Schema.SetCUtlString(_Handle, _StrFileNameOffset, value);
+            _StrFileNameOffset = _StrFileNameOffset ?? Schema.GetOffset(0x2DC54ABB51B717E5);
+            Schema.SetCUtlString(_Handle, _StrFileNameOffset!.Value, value);
         }
     }
-    private static nint _HistoryOffset = -1;
+    private static nint? _HistoryOffset;
 
     public ref CUtlVector<PointerTo<PulseGraphExecutionHistoryEntry_t>> History
     {
         get
         {
-            if (_HistoryOffset == -1) _HistoryOffset = Schema.GetOffset(0x2DC54ABBCFBC2CBF);
-            return ref _Handle.AsRef<CUtlVector<PointerTo<PulseGraphExecutionHistoryEntry_t>>>(_HistoryOffset);
+            _HistoryOffset = _HistoryOffset ?? Schema.GetOffset(0x2DC54ABBCFBC2CBF);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<PulseGraphExecutionHistoryEntry_t>>>(_HistoryOffset!.Value);
         }
     }
-    private static nint _MapCellDescOffset = -1;
+    private static nint? _MapCellDescOffset;
     private SchemaUntypedField? _MapCellDescInstance;
 
     public SchemaUntypedField MapCellDesc
     {
         get
         {
-            if (_MapCellDescOffset == -1) _MapCellDescOffset = Schema.GetOffset(0x2DC54ABB7E9FEC74);
+            _MapCellDescOffset = _MapCellDescOffset ?? Schema.GetOffset(0x2DC54ABB7E9FEC74);
             var instance = _MapCellDescInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _MapCellDescOffset);
+            instance.DangerousSetHandle(_Handle + _MapCellDescOffset!.Value);
             return instance;
         }
     }
-    private static nint _MapCursorDescOffset = -1;
+    private static nint? _MapCursorDescOffset;
     private SchemaUntypedField? _MapCursorDescInstance;
 
     public SchemaUntypedField MapCursorDesc
     {
         get
         {
-            if (_MapCursorDescOffset == -1) _MapCursorDescOffset = Schema.GetOffset(0x2DC54ABBED035BB6);
+            _MapCursorDescOffset = _MapCursorDescOffset ?? Schema.GetOffset(0x2DC54ABBED035BB6);
             var instance = _MapCursorDescInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _MapCursorDescOffset);
+            instance.DangerousSetHandle(_Handle + _MapCursorDescOffset!.Value);
             return instance;
         }
     }

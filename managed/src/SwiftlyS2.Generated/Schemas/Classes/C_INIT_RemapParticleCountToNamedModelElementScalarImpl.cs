@@ -16,54 +16,54 @@ internal partial class C_INIT_RemapParticleCountToNamedModelElementScalarImpl : 
 {
     public C_INIT_RemapParticleCountToNamedModelElementScalarImpl(nint handle) : base(handle) { }
 
-    private static nint _ModelOffset = -1;
+    private static nint? _ModelOffset;
 
     public ref CStrongHandle<InfoForResourceTypeCModel> Model
     {
         get
         {
-            if (_ModelOffset == -1) _ModelOffset = Schema.GetOffset(0xB011C761E100C814);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_ModelOffset);
+            _ModelOffset = _ModelOffset ?? Schema.GetOffset(0xB011C761E100C814);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_ModelOffset!.Value);
         }
     }
-    private static nint _OutputMinNameOffset = -1;
+    private static nint? _OutputMinNameOffset;
 
     public string OutputMinName
     {
         get
         {
-            if (_OutputMinNameOffset == -1) _OutputMinNameOffset = Schema.GetOffset(0xB011C761CF5C20FB);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_OutputMinNameOffset));
+            _OutputMinNameOffset = _OutputMinNameOffset ?? Schema.GetOffset(0xB011C761CF5C20FB);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_OutputMinNameOffset!.Value));
         }
         set
         {
-            if (_OutputMinNameOffset == -1) _OutputMinNameOffset = Schema.GetOffset(0xB011C761CF5C20FB);
-            Schema.SetCUtlString(_Handle, _OutputMinNameOffset, value);
+            _OutputMinNameOffset = _OutputMinNameOffset ?? Schema.GetOffset(0xB011C761CF5C20FB);
+            Schema.SetCUtlString(_Handle, _OutputMinNameOffset!.Value, value);
         }
     }
-    private static nint _OutputMaxNameOffset = -1;
+    private static nint? _OutputMaxNameOffset;
 
     public string OutputMaxName
     {
         get
         {
-            if (_OutputMaxNameOffset == -1) _OutputMaxNameOffset = Schema.GetOffset(0xB011C761553184F9);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_OutputMaxNameOffset));
+            _OutputMaxNameOffset = _OutputMaxNameOffset ?? Schema.GetOffset(0xB011C761553184F9);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_OutputMaxNameOffset!.Value));
         }
         set
         {
-            if (_OutputMaxNameOffset == -1) _OutputMaxNameOffset = Schema.GetOffset(0xB011C761553184F9);
-            Schema.SetCUtlString(_Handle, _OutputMaxNameOffset, value);
+            _OutputMaxNameOffset = _OutputMaxNameOffset ?? Schema.GetOffset(0xB011C761553184F9);
+            Schema.SetCUtlString(_Handle, _OutputMaxNameOffset!.Value, value);
         }
     }
-    private static nint _ModelFromRendererOffset = -1;
+    private static nint? _ModelFromRendererOffset;
 
     public ref bool ModelFromRenderer
     {
         get
         {
-            if (_ModelFromRendererOffset == -1) _ModelFromRendererOffset = Schema.GetOffset(0xB011C761AEBA1F25);
-            return ref _Handle.AsRef<bool>(_ModelFromRendererOffset);
+            _ModelFromRendererOffset = _ModelFromRendererOffset ?? Schema.GetOffset(0xB011C761AEBA1F25);
+            return ref _Handle.AsRef<bool>(_ModelFromRendererOffset!.Value);
         }
     }
 

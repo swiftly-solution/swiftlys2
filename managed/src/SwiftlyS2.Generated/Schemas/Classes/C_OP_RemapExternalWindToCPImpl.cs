@@ -16,57 +16,57 @@ internal partial class C_OP_RemapExternalWindToCPImpl : CParticleFunctionPreEmis
 {
     public C_OP_RemapExternalWindToCPImpl(nint handle) : base(handle) { }
 
-    private static nint _CPOffset = -1;
+    private static nint? _CPOffset;
 
     public ref int CP
     {
         get
         {
-            if (_CPOffset == -1) _CPOffset = Schema.GetOffset(0x19366DF9EB661472);
-            return ref _Handle.AsRef<int>(_CPOffset);
+            _CPOffset = _CPOffset ?? Schema.GetOffset(0x19366DF9EB661472);
+            return ref _Handle.AsRef<int>(_CPOffset!.Value);
         }
     }
-    private static nint _CPOutputOffset = -1;
+    private static nint? _CPOutputOffset;
 
     public ref int CPOutput
     {
         get
         {
-            if (_CPOutputOffset == -1) _CPOutputOffset = Schema.GetOffset(0x19366DF92077C953);
-            return ref _Handle.AsRef<int>(_CPOutputOffset);
+            _CPOutputOffset = _CPOutputOffset ?? Schema.GetOffset(0x19366DF92077C953);
+            return ref _Handle.AsRef<int>(_CPOutputOffset!.Value);
         }
     }
-    private static nint _ScaleOffset = -1;
+    private static nint? _ScaleOffset;
     private CParticleCollectionVecInputImpl? _ScaleInstance;
 
     public CParticleCollectionVecInput Scale
     {
         get
         {
-            if (_ScaleOffset == -1) _ScaleOffset = Schema.GetOffset(0x19366DF95F596B51);
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x19366DF95F596B51);
             var instance = _ScaleInstance ??= new CParticleCollectionVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _ScaleOffset);
+            instance.DangerousSetHandle(_Handle + _ScaleOffset!.Value);
             return instance;
         }
     }
-    private static nint _SetMagnitudeOffset = -1;
+    private static nint? _SetMagnitudeOffset;
 
     public ref bool SetMagnitude
     {
         get
         {
-            if (_SetMagnitudeOffset == -1) _SetMagnitudeOffset = Schema.GetOffset(0x19366DF9B87FB05F);
-            return ref _Handle.AsRef<bool>(_SetMagnitudeOffset);
+            _SetMagnitudeOffset = _SetMagnitudeOffset ?? Schema.GetOffset(0x19366DF9B87FB05F);
+            return ref _Handle.AsRef<bool>(_SetMagnitudeOffset!.Value);
         }
     }
-    private static nint _OutVectorFieldOffset = -1;
+    private static nint? _OutVectorFieldOffset;
 
     public ref int OutVectorField
     {
         get
         {
-            if (_OutVectorFieldOffset == -1) _OutVectorFieldOffset = Schema.GetOffset(0x19366DF9F9041E74);
-            return ref _Handle.AsRef<int>(_OutVectorFieldOffset);
+            _OutVectorFieldOffset = _OutVectorFieldOffset ?? Schema.GetOffset(0x19366DF9F9041E74);
+            return ref _Handle.AsRef<int>(_OutVectorFieldOffset!.Value);
         }
     }
 

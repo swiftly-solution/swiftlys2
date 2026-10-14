@@ -16,372 +16,372 @@ internal partial class CItemGenericImpl : CItemImpl, CItemGeneric
 {
     public CItemGenericImpl(nint handle) : base(handle) { }
 
-    private static nint _HasTriggerRadiusOffset = -1;
+    private static nint? _HasTriggerRadiusOffset;
 
     public ref bool HasTriggerRadius
     {
         get
         {
-            if (_HasTriggerRadiusOffset == -1) _HasTriggerRadiusOffset = Schema.GetOffset(0xE5C051B6D8BAB96B);
-            return ref _Handle.AsRef<bool>(_HasTriggerRadiusOffset);
+            _HasTriggerRadiusOffset = _HasTriggerRadiusOffset ?? Schema.GetOffset(0xE5C051B6D8BAB96B);
+            return ref _Handle.AsRef<bool>(_HasTriggerRadiusOffset!.Value);
         }
     }
-    private static nint _HasPickupRadiusOffset = -1;
+    private static nint? _HasPickupRadiusOffset;
 
     public ref bool HasPickupRadius
     {
         get
         {
-            if (_HasPickupRadiusOffset == -1) _HasPickupRadiusOffset = Schema.GetOffset(0xE5C051B6665CA089);
-            return ref _Handle.AsRef<bool>(_HasPickupRadiusOffset);
+            _HasPickupRadiusOffset = _HasPickupRadiusOffset ?? Schema.GetOffset(0xE5C051B6665CA089);
+            return ref _Handle.AsRef<bool>(_HasPickupRadiusOffset!.Value);
         }
     }
-    private static nint _PickupRadiusSqrOffset = -1;
+    private static nint? _PickupRadiusSqrOffset;
 
     public ref float PickupRadiusSqr
     {
         get
         {
-            if (_PickupRadiusSqrOffset == -1) _PickupRadiusSqrOffset = Schema.GetOffset(0xE5C051B6B3C8BD69);
-            return ref _Handle.AsRef<float>(_PickupRadiusSqrOffset);
+            _PickupRadiusSqrOffset = _PickupRadiusSqrOffset ?? Schema.GetOffset(0xE5C051B6B3C8BD69);
+            return ref _Handle.AsRef<float>(_PickupRadiusSqrOffset!.Value);
         }
     }
-    private static nint _TriggerRadiusSqrOffset = -1;
+    private static nint? _TriggerRadiusSqrOffset;
 
     public ref float TriggerRadiusSqr
     {
         get
         {
-            if (_TriggerRadiusSqrOffset == -1) _TriggerRadiusSqrOffset = Schema.GetOffset(0xE5C051B64E7B40B7);
-            return ref _Handle.AsRef<float>(_TriggerRadiusSqrOffset);
+            _TriggerRadiusSqrOffset = _TriggerRadiusSqrOffset ?? Schema.GetOffset(0xE5C051B64E7B40B7);
+            return ref _Handle.AsRef<float>(_TriggerRadiusSqrOffset!.Value);
         }
     }
-    private static nint _LastPickupCheckOffset = -1;
+    private static nint? _LastPickupCheckOffset;
     private GameTime_tImpl? _LastPickupCheckInstance;
 
     public GameTime_t LastPickupCheck
     {
         get
         {
-            if (_LastPickupCheckOffset == -1) _LastPickupCheckOffset = Schema.GetOffset(0xE5C051B6CE974DB1);
+            _LastPickupCheckOffset = _LastPickupCheckOffset ?? Schema.GetOffset(0xE5C051B6CE974DB1);
             var instance = _LastPickupCheckInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _LastPickupCheckOffset);
+            instance.DangerousSetHandle(_Handle + _LastPickupCheckOffset!.Value);
             return instance;
         }
     }
-    private static nint _PlayerCounterListenerAddedOffset = -1;
+    private static nint? _PlayerCounterListenerAddedOffset;
 
     public ref bool PlayerCounterListenerAdded
     {
         get
         {
-            if (_PlayerCounterListenerAddedOffset == -1) _PlayerCounterListenerAddedOffset = Schema.GetOffset(0xE5C051B6198E288E);
-            return ref _Handle.AsRef<bool>(_PlayerCounterListenerAddedOffset);
+            _PlayerCounterListenerAddedOffset = _PlayerCounterListenerAddedOffset ?? Schema.GetOffset(0xE5C051B6198E288E);
+            return ref _Handle.AsRef<bool>(_PlayerCounterListenerAddedOffset!.Value);
         }
     }
-    private static nint _PlayerInTriggerRadiusOffset = -1;
+    private static nint? _PlayerInTriggerRadiusOffset;
 
     public ref bool PlayerInTriggerRadius
     {
         get
         {
-            if (_PlayerInTriggerRadiusOffset == -1) _PlayerInTriggerRadiusOffset = Schema.GetOffset(0xE5C051B66DC39F9F);
-            return ref _Handle.AsRef<bool>(_PlayerInTriggerRadiusOffset);
+            _PlayerInTriggerRadiusOffset = _PlayerInTriggerRadiusOffset ?? Schema.GetOffset(0xE5C051B66DC39F9F);
+            return ref _Handle.AsRef<bool>(_PlayerInTriggerRadiusOffset!.Value);
         }
     }
-    private static nint _SpawnParticleEffectOffset = -1;
+    private static nint? _SpawnParticleEffectOffset;
 
     public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> SpawnParticleEffect
     {
         get
         {
-            if (_SpawnParticleEffectOffset == -1) _SpawnParticleEffectOffset = Schema.GetOffset(0xE5C051B6576146D5);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIParticleSystemDefinition>>(_SpawnParticleEffectOffset);
+            _SpawnParticleEffectOffset = _SpawnParticleEffectOffset ?? Schema.GetOffset(0xE5C051B6576146D5);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIParticleSystemDefinition>>(_SpawnParticleEffectOffset!.Value);
         }
     }
-    private static nint _AmbientSoundEffectOffset = -1;
+    private static nint? _AmbientSoundEffectOffset;
 
     public string AmbientSoundEffect
     {
         get
         {
-            if (_AmbientSoundEffectOffset == -1) _AmbientSoundEffectOffset = Schema.GetOffset(0xE5C051B65DD78861);
-            return Schema.GetString(_Handle.Read<nint>(_AmbientSoundEffectOffset));
+            _AmbientSoundEffectOffset = _AmbientSoundEffectOffset ?? Schema.GetOffset(0xE5C051B65DD78861);
+            return Schema.GetString(_Handle.Read<nint>(_AmbientSoundEffectOffset!.Value));
         }
         set
         {
-            if (_AmbientSoundEffectOffset == -1) _AmbientSoundEffectOffset = Schema.GetOffset(0xE5C051B65DD78861);
-            Schema.SetString(_Handle, _AmbientSoundEffectOffset, value);
+            _AmbientSoundEffectOffset = _AmbientSoundEffectOffset ?? Schema.GetOffset(0xE5C051B65DD78861);
+            Schema.SetString(_Handle, _AmbientSoundEffectOffset!.Value, value);
         }
     }
-    private static nint _AutoStartAmbientSoundOffset = -1;
+    private static nint? _AutoStartAmbientSoundOffset;
 
     public ref bool AutoStartAmbientSound
     {
         get
         {
-            if (_AutoStartAmbientSoundOffset == -1) _AutoStartAmbientSoundOffset = Schema.GetOffset(0xE5C051B678660D41);
-            return ref _Handle.AsRef<bool>(_AutoStartAmbientSoundOffset);
+            _AutoStartAmbientSoundOffset = _AutoStartAmbientSoundOffset ?? Schema.GetOffset(0xE5C051B678660D41);
+            return ref _Handle.AsRef<bool>(_AutoStartAmbientSoundOffset!.Value);
         }
     }
-    private static nint _SpawnScriptFunctionOffset = -1;
+    private static nint? _SpawnScriptFunctionOffset;
 
     public string SpawnScriptFunction
     {
         get
         {
-            if (_SpawnScriptFunctionOffset == -1) _SpawnScriptFunctionOffset = Schema.GetOffset(0xE5C051B6BC2C9805);
-            return Schema.GetString(_Handle.Read<nint>(_SpawnScriptFunctionOffset));
+            _SpawnScriptFunctionOffset = _SpawnScriptFunctionOffset ?? Schema.GetOffset(0xE5C051B6BC2C9805);
+            return Schema.GetString(_Handle.Read<nint>(_SpawnScriptFunctionOffset!.Value));
         }
         set
         {
-            if (_SpawnScriptFunctionOffset == -1) _SpawnScriptFunctionOffset = Schema.GetOffset(0xE5C051B6BC2C9805);
-            Schema.SetString(_Handle, _SpawnScriptFunctionOffset, value);
+            _SpawnScriptFunctionOffset = _SpawnScriptFunctionOffset ?? Schema.GetOffset(0xE5C051B6BC2C9805);
+            Schema.SetString(_Handle, _SpawnScriptFunctionOffset!.Value, value);
         }
     }
-    private static nint _PickupParticleEffectOffset = -1;
+    private static nint? _PickupParticleEffectOffset;
 
     public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> PickupParticleEffect
     {
         get
         {
-            if (_PickupParticleEffectOffset == -1) _PickupParticleEffectOffset = Schema.GetOffset(0xE5C051B6A61E7280);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIParticleSystemDefinition>>(_PickupParticleEffectOffset);
+            _PickupParticleEffectOffset = _PickupParticleEffectOffset ?? Schema.GetOffset(0xE5C051B6A61E7280);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIParticleSystemDefinition>>(_PickupParticleEffectOffset!.Value);
         }
     }
-    private static nint _PickupSoundEffectOffset = -1;
+    private static nint? _PickupSoundEffectOffset;
 
     public string PickupSoundEffect
     {
         get
         {
-            if (_PickupSoundEffectOffset == -1) _PickupSoundEffectOffset = Schema.GetOffset(0xE5C051B6ECB75E7B);
-            return Schema.GetString(_Handle.Read<nint>(_PickupSoundEffectOffset));
+            _PickupSoundEffectOffset = _PickupSoundEffectOffset ?? Schema.GetOffset(0xE5C051B6ECB75E7B);
+            return Schema.GetString(_Handle.Read<nint>(_PickupSoundEffectOffset!.Value));
         }
         set
         {
-            if (_PickupSoundEffectOffset == -1) _PickupSoundEffectOffset = Schema.GetOffset(0xE5C051B6ECB75E7B);
-            Schema.SetString(_Handle, _PickupSoundEffectOffset, value);
+            _PickupSoundEffectOffset = _PickupSoundEffectOffset ?? Schema.GetOffset(0xE5C051B6ECB75E7B);
+            Schema.SetString(_Handle, _PickupSoundEffectOffset!.Value, value);
         }
     }
-    private static nint _PickupScriptFunctionOffset = -1;
+    private static nint? _PickupScriptFunctionOffset;
 
     public string PickupScriptFunction
     {
         get
         {
-            if (_PickupScriptFunctionOffset == -1) _PickupScriptFunctionOffset = Schema.GetOffset(0xE5C051B64242F490);
-            return Schema.GetString(_Handle.Read<nint>(_PickupScriptFunctionOffset));
+            _PickupScriptFunctionOffset = _PickupScriptFunctionOffset ?? Schema.GetOffset(0xE5C051B64242F490);
+            return Schema.GetString(_Handle.Read<nint>(_PickupScriptFunctionOffset!.Value));
         }
         set
         {
-            if (_PickupScriptFunctionOffset == -1) _PickupScriptFunctionOffset = Schema.GetOffset(0xE5C051B64242F490);
-            Schema.SetString(_Handle, _PickupScriptFunctionOffset, value);
+            _PickupScriptFunctionOffset = _PickupScriptFunctionOffset ?? Schema.GetOffset(0xE5C051B64242F490);
+            Schema.SetString(_Handle, _PickupScriptFunctionOffset!.Value, value);
         }
     }
-    private static nint _TimeoutParticleEffectOffset = -1;
+    private static nint? _TimeoutParticleEffectOffset;
 
     public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> TimeoutParticleEffect
     {
         get
         {
-            if (_TimeoutParticleEffectOffset == -1) _TimeoutParticleEffectOffset = Schema.GetOffset(0xE5C051B6FE95C38D);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIParticleSystemDefinition>>(_TimeoutParticleEffectOffset);
+            _TimeoutParticleEffectOffset = _TimeoutParticleEffectOffset ?? Schema.GetOffset(0xE5C051B6FE95C38D);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIParticleSystemDefinition>>(_TimeoutParticleEffectOffset!.Value);
         }
     }
-    private static nint _TimeoutSoundEffectOffset = -1;
+    private static nint? _TimeoutSoundEffectOffset;
 
     public string TimeoutSoundEffect
     {
         get
         {
-            if (_TimeoutSoundEffectOffset == -1) _TimeoutSoundEffectOffset = Schema.GetOffset(0xE5C051B6F5AD0260);
-            return Schema.GetString(_Handle.Read<nint>(_TimeoutSoundEffectOffset));
+            _TimeoutSoundEffectOffset = _TimeoutSoundEffectOffset ?? Schema.GetOffset(0xE5C051B6F5AD0260);
+            return Schema.GetString(_Handle.Read<nint>(_TimeoutSoundEffectOffset!.Value));
         }
         set
         {
-            if (_TimeoutSoundEffectOffset == -1) _TimeoutSoundEffectOffset = Schema.GetOffset(0xE5C051B6F5AD0260);
-            Schema.SetString(_Handle, _TimeoutSoundEffectOffset, value);
+            _TimeoutSoundEffectOffset = _TimeoutSoundEffectOffset ?? Schema.GetOffset(0xE5C051B6F5AD0260);
+            Schema.SetString(_Handle, _TimeoutSoundEffectOffset!.Value, value);
         }
     }
-    private static nint _TimeoutScriptFunctionOffset = -1;
+    private static nint? _TimeoutScriptFunctionOffset;
 
     public string TimeoutScriptFunction
     {
         get
         {
-            if (_TimeoutScriptFunctionOffset == -1) _TimeoutScriptFunctionOffset = Schema.GetOffset(0xE5C051B6E8BF2F2D);
-            return Schema.GetString(_Handle.Read<nint>(_TimeoutScriptFunctionOffset));
+            _TimeoutScriptFunctionOffset = _TimeoutScriptFunctionOffset ?? Schema.GetOffset(0xE5C051B6E8BF2F2D);
+            return Schema.GetString(_Handle.Read<nint>(_TimeoutScriptFunctionOffset!.Value));
         }
         set
         {
-            if (_TimeoutScriptFunctionOffset == -1) _TimeoutScriptFunctionOffset = Schema.GetOffset(0xE5C051B6E8BF2F2D);
-            Schema.SetString(_Handle, _TimeoutScriptFunctionOffset, value);
+            _TimeoutScriptFunctionOffset = _TimeoutScriptFunctionOffset ?? Schema.GetOffset(0xE5C051B6E8BF2F2D);
+            Schema.SetString(_Handle, _TimeoutScriptFunctionOffset!.Value, value);
         }
     }
-    private static nint _PickupFilterNameOffset = -1;
+    private static nint? _PickupFilterNameOffset;
 
     public string PickupFilterName
     {
         get
         {
-            if (_PickupFilterNameOffset == -1) _PickupFilterNameOffset = Schema.GetOffset(0xE5C051B613C0B032);
-            return Schema.GetString(_Handle.Read<nint>(_PickupFilterNameOffset));
+            _PickupFilterNameOffset = _PickupFilterNameOffset ?? Schema.GetOffset(0xE5C051B613C0B032);
+            return Schema.GetString(_Handle.Read<nint>(_PickupFilterNameOffset!.Value));
         }
         set
         {
-            if (_PickupFilterNameOffset == -1) _PickupFilterNameOffset = Schema.GetOffset(0xE5C051B613C0B032);
-            Schema.SetString(_Handle, _PickupFilterNameOffset, value);
+            _PickupFilterNameOffset = _PickupFilterNameOffset ?? Schema.GetOffset(0xE5C051B613C0B032);
+            Schema.SetString(_Handle, _PickupFilterNameOffset!.Value, value);
         }
     }
-    private static nint _PickupFilterOffset = -1;
+    private static nint? _PickupFilterOffset;
 
     public ref CHandle<CBaseFilter> PickupFilter
     {
         get
         {
-            if (_PickupFilterOffset == -1) _PickupFilterOffset = Schema.GetOffset(0xE5C051B605240E41);
-            return ref _Handle.AsRef<CHandle<CBaseFilter>>(_PickupFilterOffset);
+            _PickupFilterOffset = _PickupFilterOffset ?? Schema.GetOffset(0xE5C051B605240E41);
+            return ref _Handle.AsRef<CHandle<CBaseFilter>>(_PickupFilterOffset!.Value);
         }
     }
-    private static nint _OnPickupOffset = -1;
+    private static nint? _OnPickupOffset;
 
     public ref CEntityIOOutput OnPickup
     {
         get
         {
-            if (_OnPickupOffset == -1) _OnPickupOffset = Schema.GetOffset(0xE5C051B628BC1F6C);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnPickupOffset);
+            _OnPickupOffset = _OnPickupOffset ?? Schema.GetOffset(0xE5C051B628BC1F6C);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnPickupOffset!.Value);
         }
     }
-    private static nint _OnTimeoutOffset = -1;
+    private static nint? _OnTimeoutOffset;
 
     public ref CEntityIOOutput OnTimeout
     {
         get
         {
-            if (_OnTimeoutOffset == -1) _OnTimeoutOffset = Schema.GetOffset(0xE5C051B6C5301603);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnTimeoutOffset);
+            _OnTimeoutOffset = _OnTimeoutOffset ?? Schema.GetOffset(0xE5C051B6C5301603);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTimeoutOffset!.Value);
         }
     }
-    private static nint _OnTriggerStartTouchOffset = -1;
+    private static nint? _OnTriggerStartTouchOffset;
 
     public ref CEntityIOOutput OnTriggerStartTouch
     {
         get
         {
-            if (_OnTriggerStartTouchOffset == -1) _OnTriggerStartTouchOffset = Schema.GetOffset(0xE5C051B66E537987);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnTriggerStartTouchOffset);
+            _OnTriggerStartTouchOffset = _OnTriggerStartTouchOffset ?? Schema.GetOffset(0xE5C051B66E537987);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTriggerStartTouchOffset!.Value);
         }
     }
-    private static nint _OnTriggerTouchOffset = -1;
+    private static nint? _OnTriggerTouchOffset;
 
     public ref CEntityIOOutput OnTriggerTouch
     {
         get
         {
-            if (_OnTriggerTouchOffset == -1) _OnTriggerTouchOffset = Schema.GetOffset(0xE5C051B63BCAE033);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnTriggerTouchOffset);
+            _OnTriggerTouchOffset = _OnTriggerTouchOffset ?? Schema.GetOffset(0xE5C051B63BCAE033);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTriggerTouchOffset!.Value);
         }
     }
-    private static nint _OnTriggerEndTouchOffset = -1;
+    private static nint? _OnTriggerEndTouchOffset;
 
     public ref CEntityIOOutput OnTriggerEndTouch
     {
         get
         {
-            if (_OnTriggerEndTouchOffset == -1) _OnTriggerEndTouchOffset = Schema.GetOffset(0xE5C051B63DA3CB84);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnTriggerEndTouchOffset);
+            _OnTriggerEndTouchOffset = _OnTriggerEndTouchOffset ?? Schema.GetOffset(0xE5C051B63DA3CB84);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTriggerEndTouchOffset!.Value);
         }
     }
-    private static nint _AllowPickupScriptFunctionOffset = -1;
+    private static nint? _AllowPickupScriptFunctionOffset;
 
     public string AllowPickupScriptFunction
     {
         get
         {
-            if (_AllowPickupScriptFunctionOffset == -1) _AllowPickupScriptFunctionOffset = Schema.GetOffset(0xE5C051B6DC2DF75F);
-            return Schema.GetString(_Handle.Read<nint>(_AllowPickupScriptFunctionOffset));
+            _AllowPickupScriptFunctionOffset = _AllowPickupScriptFunctionOffset ?? Schema.GetOffset(0xE5C051B6DC2DF75F);
+            return Schema.GetString(_Handle.Read<nint>(_AllowPickupScriptFunctionOffset!.Value));
         }
         set
         {
-            if (_AllowPickupScriptFunctionOffset == -1) _AllowPickupScriptFunctionOffset = Schema.GetOffset(0xE5C051B6DC2DF75F);
-            Schema.SetString(_Handle, _AllowPickupScriptFunctionOffset, value);
+            _AllowPickupScriptFunctionOffset = _AllowPickupScriptFunctionOffset ?? Schema.GetOffset(0xE5C051B6DC2DF75F);
+            Schema.SetString(_Handle, _AllowPickupScriptFunctionOffset!.Value, value);
         }
     }
-    private static nint _PickupRadiusOffset = -1;
+    private static nint? _PickupRadiusOffset;
 
     public ref float PickupRadius
     {
         get
         {
-            if (_PickupRadiusOffset == -1) _PickupRadiusOffset = Schema.GetOffset(0xE5C051B64EED9A9D);
-            return ref _Handle.AsRef<float>(_PickupRadiusOffset);
+            _PickupRadiusOffset = _PickupRadiusOffset ?? Schema.GetOffset(0xE5C051B64EED9A9D);
+            return ref _Handle.AsRef<float>(_PickupRadiusOffset!.Value);
         }
     }
-    private static nint _TriggerRadiusOffset = -1;
+    private static nint? _TriggerRadiusOffset;
 
     public ref float TriggerRadius
     {
         get
         {
-            if (_TriggerRadiusOffset == -1) _TriggerRadiusOffset = Schema.GetOffset(0xE5C051B6051F7F0F);
-            return ref _Handle.AsRef<float>(_TriggerRadiusOffset);
+            _TriggerRadiusOffset = _TriggerRadiusOffset ?? Schema.GetOffset(0xE5C051B6051F7F0F);
+            return ref _Handle.AsRef<float>(_TriggerRadiusOffset!.Value);
         }
     }
-    private static nint _TriggerSoundEffectOffset = -1;
+    private static nint? _TriggerSoundEffectOffset;
 
     public string TriggerSoundEffect
     {
         get
         {
-            if (_TriggerSoundEffectOffset == -1) _TriggerSoundEffectOffset = Schema.GetOffset(0xE5C051B67E4EA459);
-            return Schema.GetString(_Handle.Read<nint>(_TriggerSoundEffectOffset));
+            _TriggerSoundEffectOffset = _TriggerSoundEffectOffset ?? Schema.GetOffset(0xE5C051B67E4EA459);
+            return Schema.GetString(_Handle.Read<nint>(_TriggerSoundEffectOffset!.Value));
         }
         set
         {
-            if (_TriggerSoundEffectOffset == -1) _TriggerSoundEffectOffset = Schema.GetOffset(0xE5C051B67E4EA459);
-            Schema.SetString(_Handle, _TriggerSoundEffectOffset, value);
+            _TriggerSoundEffectOffset = _TriggerSoundEffectOffset ?? Schema.GetOffset(0xE5C051B67E4EA459);
+            Schema.SetString(_Handle, _TriggerSoundEffectOffset!.Value, value);
         }
     }
-    private static nint _GlowWhenInTriggerOffset = -1;
+    private static nint? _GlowWhenInTriggerOffset;
 
     public ref bool GlowWhenInTrigger
     {
         get
         {
-            if (_GlowWhenInTriggerOffset == -1) _GlowWhenInTriggerOffset = Schema.GetOffset(0xE5C051B6FCAD755D);
-            return ref _Handle.AsRef<bool>(_GlowWhenInTriggerOffset);
+            _GlowWhenInTriggerOffset = _GlowWhenInTriggerOffset ?? Schema.GetOffset(0xE5C051B6FCAD755D);
+            return ref _Handle.AsRef<bool>(_GlowWhenInTriggerOffset!.Value);
         }
     }
-    private static nint _GlowColorOffset = -1;
+    private static nint? _GlowColorOffset;
 
     public ref Color GlowColor
     {
         get
         {
-            if (_GlowColorOffset == -1) _GlowColorOffset = Schema.GetOffset(0xE5C051B674A5EE03);
-            return ref _Handle.AsRef<Color>(_GlowColorOffset);
+            _GlowColorOffset = _GlowColorOffset ?? Schema.GetOffset(0xE5C051B674A5EE03);
+            return ref _Handle.AsRef<Color>(_GlowColorOffset!.Value);
         }
     }
-    private static nint _UseableOffset = -1;
+    private static nint? _UseableOffset;
 
     public ref bool Useable
     {
         get
         {
-            if (_UseableOffset == -1) _UseableOffset = Schema.GetOffset(0xE5C051B6E4DBE46C);
-            return ref _Handle.AsRef<bool>(_UseableOffset);
+            _UseableOffset = _UseableOffset ?? Schema.GetOffset(0xE5C051B6E4DBE46C);
+            return ref _Handle.AsRef<bool>(_UseableOffset!.Value);
         }
     }
-    private static nint _TriggerHelperOffset = -1;
+    private static nint? _TriggerHelperOffset;
 
     public ref CHandle<CItemGenericTriggerHelper> TriggerHelper
     {
         get
         {
-            if (_TriggerHelperOffset == -1) _TriggerHelperOffset = Schema.GetOffset(0xE5C051B62DCBD7A9);
-            return ref _Handle.AsRef<CHandle<CItemGenericTriggerHelper>>(_TriggerHelperOffset);
+            _TriggerHelperOffset = _TriggerHelperOffset ?? Schema.GetOffset(0xE5C051B62DCBD7A9);
+            return ref _Handle.AsRef<CHandle<CItemGenericTriggerHelper>>(_TriggerHelperOffset!.Value);
         }
     }
 

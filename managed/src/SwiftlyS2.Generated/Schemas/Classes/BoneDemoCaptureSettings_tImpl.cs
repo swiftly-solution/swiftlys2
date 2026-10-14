@@ -16,79 +16,79 @@ internal partial class BoneDemoCaptureSettings_tImpl : SchemaClass, BoneDemoCapt
 {
     public BoneDemoCaptureSettings_tImpl(nint handle) : base(handle) { }
 
-    private static nint _BoneNameOffset = -1;
+    private static nint? _BoneNameOffset;
 
     public string BoneName
     {
         get
         {
-            if (_BoneNameOffset == -1) _BoneNameOffset = Schema.GetOffset(0x17A5730FDEE0E0C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_BoneNameOffset));
+            _BoneNameOffset = _BoneNameOffset ?? Schema.GetOffset(0x17A5730FDEE0E0C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_BoneNameOffset!.Value));
         }
         set
         {
-            if (_BoneNameOffset == -1) _BoneNameOffset = Schema.GetOffset(0x17A5730FDEE0E0C);
-            Schema.SetCUtlString(_Handle, _BoneNameOffset, value);
+            _BoneNameOffset = _BoneNameOffset ?? Schema.GetOffset(0x17A5730FDEE0E0C);
+            Schema.SetCUtlString(_Handle, _BoneNameOffset!.Value, value);
         }
     }
-    private static nint _ErrorSplineRotationMaxOffset = -1;
+    private static nint? _ErrorSplineRotationMaxOffset;
 
     public ref float ErrorSplineRotationMax
     {
         get
         {
-            if (_ErrorSplineRotationMaxOffset == -1) _ErrorSplineRotationMaxOffset = Schema.GetOffset(0x17A5730AB5B6CD2);
-            return ref _Handle.AsRef<float>(_ErrorSplineRotationMaxOffset);
+            _ErrorSplineRotationMaxOffset = _ErrorSplineRotationMaxOffset ?? Schema.GetOffset(0x17A5730AB5B6CD2);
+            return ref _Handle.AsRef<float>(_ErrorSplineRotationMaxOffset!.Value);
         }
     }
-    private static nint _ErrorSplineTranslationMaxOffset = -1;
+    private static nint? _ErrorSplineTranslationMaxOffset;
 
     public ref float ErrorSplineTranslationMax
     {
         get
         {
-            if (_ErrorSplineTranslationMaxOffset == -1) _ErrorSplineTranslationMaxOffset = Schema.GetOffset(0x17A57306248F645);
-            return ref _Handle.AsRef<float>(_ErrorSplineTranslationMaxOffset);
+            _ErrorSplineTranslationMaxOffset = _ErrorSplineTranslationMaxOffset ?? Schema.GetOffset(0x17A57306248F645);
+            return ref _Handle.AsRef<float>(_ErrorSplineTranslationMaxOffset!.Value);
         }
     }
-    private static nint _ErrorSplineScaleMaxOffset = -1;
+    private static nint? _ErrorSplineScaleMaxOffset;
 
     public ref float ErrorSplineScaleMax
     {
         get
         {
-            if (_ErrorSplineScaleMaxOffset == -1) _ErrorSplineScaleMaxOffset = Schema.GetOffset(0x17A5730A30B95BA);
-            return ref _Handle.AsRef<float>(_ErrorSplineScaleMaxOffset);
+            _ErrorSplineScaleMaxOffset = _ErrorSplineScaleMaxOffset ?? Schema.GetOffset(0x17A5730A30B95BA);
+            return ref _Handle.AsRef<float>(_ErrorSplineScaleMaxOffset!.Value);
         }
     }
-    private static nint _ErrorQuantizationRotationMaxOffset = -1;
+    private static nint? _ErrorQuantizationRotationMaxOffset;
 
     public ref float ErrorQuantizationRotationMax
     {
         get
         {
-            if (_ErrorQuantizationRotationMaxOffset == -1) _ErrorQuantizationRotationMaxOffset = Schema.GetOffset(0x17A57303509C8AA);
-            return ref _Handle.AsRef<float>(_ErrorQuantizationRotationMaxOffset);
+            _ErrorQuantizationRotationMaxOffset = _ErrorQuantizationRotationMaxOffset ?? Schema.GetOffset(0x17A57303509C8AA);
+            return ref _Handle.AsRef<float>(_ErrorQuantizationRotationMaxOffset!.Value);
         }
     }
-    private static nint _ErrorQuantizationTranslationMaxOffset = -1;
+    private static nint? _ErrorQuantizationTranslationMaxOffset;
 
     public ref float ErrorQuantizationTranslationMax
     {
         get
         {
-            if (_ErrorQuantizationTranslationMaxOffset == -1) _ErrorQuantizationTranslationMaxOffset = Schema.GetOffset(0x17A5730F1E2893D);
-            return ref _Handle.AsRef<float>(_ErrorQuantizationTranslationMaxOffset);
+            _ErrorQuantizationTranslationMaxOffset = _ErrorQuantizationTranslationMaxOffset ?? Schema.GetOffset(0x17A5730F1E2893D);
+            return ref _Handle.AsRef<float>(_ErrorQuantizationTranslationMaxOffset!.Value);
         }
     }
-    private static nint _ErrorQuantizationScaleMaxOffset = -1;
+    private static nint? _ErrorQuantizationScaleMaxOffset;
 
     public ref float ErrorQuantizationScaleMax
     {
         get
         {
-            if (_ErrorQuantizationScaleMaxOffset == -1) _ErrorQuantizationScaleMaxOffset = Schema.GetOffset(0x17A57302ACF0072);
-            return ref _Handle.AsRef<float>(_ErrorQuantizationScaleMaxOffset);
+            _ErrorQuantizationScaleMaxOffset = _ErrorQuantizationScaleMaxOffset ?? Schema.GetOffset(0x17A57302ACF0072);
+            return ref _Handle.AsRef<float>(_ErrorQuantizationScaleMaxOffset!.Value);
         }
     }
 

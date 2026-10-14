@@ -16,86 +16,86 @@ internal partial class CPhysForceImpl : CPointEntityImpl, CPhysForce
 {
     public CPhysForceImpl(nint handle) : base(handle) { }
 
-    private static nint _ControllerOffset = -1;
+    private static nint? _ControllerOffset;
     private IPhysicsMotionControllerImpl? _ControllerInstance;
 
     public IPhysicsMotionController? Controller
     {
         get
         {
-            if (_ControllerOffset == -1) _ControllerOffset = Schema.GetOffset(0x29E850D58F2DD553);
-            var ptr = _Handle.Read<nint>(_ControllerOffset);
+            _ControllerOffset = _ControllerOffset ?? Schema.GetOffset(0x29E850D58F2DD553);
+            var ptr = _Handle.Read<nint>(_ControllerOffset!.Value);
             if (!ptr.IsValidPtr()) return null;
             var instance = _ControllerInstance ??= new IPhysicsMotionControllerImpl(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint _NameAttachOffset = -1;
+    private static nint? _NameAttachOffset;
 
     public string NameAttach
     {
         get
         {
-            if (_NameAttachOffset == -1) _NameAttachOffset = Schema.GetOffset(0x29E850D5BECAEF3F);
-            return Schema.GetString(_Handle.Read<nint>(_NameAttachOffset));
+            _NameAttachOffset = _NameAttachOffset ?? Schema.GetOffset(0x29E850D5BECAEF3F);
+            return Schema.GetString(_Handle.Read<nint>(_NameAttachOffset!.Value));
         }
         set
         {
-            if (_NameAttachOffset == -1) _NameAttachOffset = Schema.GetOffset(0x29E850D5BECAEF3F);
-            Schema.SetString(_Handle, _NameAttachOffset, value);
+            _NameAttachOffset = _NameAttachOffset ?? Schema.GetOffset(0x29E850D5BECAEF3F);
+            Schema.SetString(_Handle, _NameAttachOffset!.Value, value);
         }
     }
-    private static nint _ForceOffset = -1;
+    private static nint? _ForceOffset;
 
     public ref float Force
     {
         get
         {
-            if (_ForceOffset == -1) _ForceOffset = Schema.GetOffset(0x29E850D5B9B6AFA4);
-            return ref _Handle.AsRef<float>(_ForceOffset);
+            _ForceOffset = _ForceOffset ?? Schema.GetOffset(0x29E850D5B9B6AFA4);
+            return ref _Handle.AsRef<float>(_ForceOffset!.Value);
         }
     }
-    private static nint _ForceTimeOffset = -1;
+    private static nint? _ForceTimeOffset;
 
     public ref float ForceTime
     {
         get
         {
-            if (_ForceTimeOffset == -1) _ForceTimeOffset = Schema.GetOffset(0x29E850D58835FD05);
-            return ref _Handle.AsRef<float>(_ForceTimeOffset);
+            _ForceTimeOffset = _ForceTimeOffset ?? Schema.GetOffset(0x29E850D58835FD05);
+            return ref _Handle.AsRef<float>(_ForceTimeOffset!.Value);
         }
     }
-    private static nint _AttachedObjectOffset = -1;
+    private static nint? _AttachedObjectOffset;
 
     public ref CHandle<CBaseEntity> AttachedObject
     {
         get
         {
-            if (_AttachedObjectOffset == -1) _AttachedObjectOffset = Schema.GetOffset(0x29E850D51AE8F30A);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_AttachedObjectOffset);
+            _AttachedObjectOffset = _AttachedObjectOffset ?? Schema.GetOffset(0x29E850D51AE8F30A);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_AttachedObjectOffset!.Value);
         }
     }
-    private static nint _WasRestoredOffset = -1;
+    private static nint? _WasRestoredOffset;
 
     public ref bool WasRestored
     {
         get
         {
-            if (_WasRestoredOffset == -1) _WasRestoredOffset = Schema.GetOffset(0x29E850D500C1E774);
-            return ref _Handle.AsRef<bool>(_WasRestoredOffset);
+            _WasRestoredOffset = _WasRestoredOffset ?? Schema.GetOffset(0x29E850D500C1E774);
+            return ref _Handle.AsRef<bool>(_WasRestoredOffset!.Value);
         }
     }
-    private static nint _IntegratorOffset = -1;
+    private static nint? _IntegratorOffset;
     private CConstantForceControllerImpl? _IntegratorInstance;
 
     public CConstantForceController Integrator
     {
         get
         {
-            if (_IntegratorOffset == -1) _IntegratorOffset = Schema.GetOffset(0x29E850D5BC2E3924);
+            _IntegratorOffset = _IntegratorOffset ?? Schema.GetOffset(0x29E850D5BC2E3924);
             var instance = _IntegratorInstance ??= new CConstantForceControllerImpl(0);
-            instance.DangerousSetHandle(_Handle + _IntegratorOffset);
+            instance.DangerousSetHandle(_Handle + _IntegratorOffset!.Value);
             return instance;
         }
     }

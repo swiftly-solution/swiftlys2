@@ -16,44 +16,44 @@ internal partial class CNmGraphDocFloatMathNodeImpl : CNmGraphDocFlowNodeImpl, C
 {
     public CNmGraphDocFloatMathNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _ReturnAbsoluteResultOffset = -1;
+    private static nint? _ReturnAbsoluteResultOffset;
 
     public ref bool ReturnAbsoluteResult
     {
         get
         {
-            if (_ReturnAbsoluteResultOffset == -1) _ReturnAbsoluteResultOffset = Schema.GetOffset(0x33DF0B13065EA6EB);
-            return ref _Handle.AsRef<bool>(_ReturnAbsoluteResultOffset);
+            _ReturnAbsoluteResultOffset = _ReturnAbsoluteResultOffset ?? Schema.GetOffset(0x33DF0B13065EA6EB);
+            return ref _Handle.AsRef<bool>(_ReturnAbsoluteResultOffset!.Value);
         }
     }
-    private static nint _ReturnNegatedResultOffset = -1;
+    private static nint? _ReturnNegatedResultOffset;
 
     public ref bool ReturnNegatedResult
     {
         get
         {
-            if (_ReturnNegatedResultOffset == -1) _ReturnNegatedResultOffset = Schema.GetOffset(0x33DF0B13535A6CA2);
-            return ref _Handle.AsRef<bool>(_ReturnNegatedResultOffset);
+            _ReturnNegatedResultOffset = _ReturnNegatedResultOffset ?? Schema.GetOffset(0x33DF0B13535A6CA2);
+            return ref _Handle.AsRef<bool>(_ReturnNegatedResultOffset!.Value);
         }
     }
-    private static nint _OperatorOffset = -1;
+    private static nint? _OperatorOffset;
 
     public ref CNmFloatMathNode__Operator_t Operator
     {
         get
         {
-            if (_OperatorOffset == -1) _OperatorOffset = Schema.GetOffset(0x33DF0B138ABE049D);
-            return ref _Handle.AsRef<CNmFloatMathNode__Operator_t>(_OperatorOffset);
+            _OperatorOffset = _OperatorOffset ?? Schema.GetOffset(0x33DF0B138ABE049D);
+            return ref _Handle.AsRef<CNmFloatMathNode__Operator_t>(_OperatorOffset!.Value);
         }
     }
-    private static nint _ValueBOffset = -1;
+    private static nint? _ValueBOffset;
 
     public ref float ValueB
     {
         get
         {
-            if (_ValueBOffset == -1) _ValueBOffset = Schema.GetOffset(0x33DF0B134AD872B2);
-            return ref _Handle.AsRef<float>(_ValueBOffset);
+            _ValueBOffset = _ValueBOffset ?? Schema.GetOffset(0x33DF0B134AD872B2);
+            return ref _Handle.AsRef<float>(_ValueBOffset!.Value);
         }
     }
 

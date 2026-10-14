@@ -16,14 +16,14 @@ internal partial class CPulseCell_Outflow_PlayVOLine__CursorState_tImpl : Schema
 {
     public CPulseCell_Outflow_PlayVOLine__CursorState_tImpl(nint handle) : base(handle) { }
 
-    private static nint _SceneInstanceOffset = -1;
+    private static nint? _SceneInstanceOffset;
 
     public ref CHandle<CBaseEntity> SceneInstance
     {
         get
         {
-            if (_SceneInstanceOffset == -1) _SceneInstanceOffset = Schema.GetOffset(0x9C2DCC0EC967C210);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_SceneInstanceOffset);
+            _SceneInstanceOffset = _SceneInstanceOffset ?? Schema.GetOffset(0x9C2DCC0EC967C210);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_SceneInstanceOffset!.Value);
         }
     }
 

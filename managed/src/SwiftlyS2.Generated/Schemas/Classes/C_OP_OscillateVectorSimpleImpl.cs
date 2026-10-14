@@ -16,67 +16,67 @@ internal partial class C_OP_OscillateVectorSimpleImpl : CParticleFunctionOperato
 {
     public C_OP_OscillateVectorSimpleImpl(nint handle) : base(handle) { }
 
-    private static nint _RateOffset = -1;
+    private static nint? _RateOffset;
 
     public ref Vector Rate
     {
         get
         {
-            if (_RateOffset == -1) _RateOffset = Schema.GetOffset(0xB4CA468EC3280E7);
-            return ref _Handle.AsRef<Vector>(_RateOffset);
+            _RateOffset = _RateOffset ?? Schema.GetOffset(0xB4CA468EC3280E7);
+            return ref _Handle.AsRef<Vector>(_RateOffset!.Value);
         }
     }
-    private static nint _FrequencyOffset = -1;
+    private static nint? _FrequencyOffset;
 
     public ref Vector Frequency
     {
         get
         {
-            if (_FrequencyOffset == -1) _FrequencyOffset = Schema.GetOffset(0xB4CA468BCCAA981);
-            return ref _Handle.AsRef<Vector>(_FrequencyOffset);
+            _FrequencyOffset = _FrequencyOffset ?? Schema.GetOffset(0xB4CA468BCCAA981);
+            return ref _Handle.AsRef<Vector>(_FrequencyOffset!.Value);
         }
     }
-    private static nint _FieldOffset = -1;
+    private static nint? _FieldOffset;
     private ParticleAttributeIndex_tImpl? _FieldInstance;
 
     public ParticleAttributeIndex_t Field
     {
         get
         {
-            if (_FieldOffset == -1) _FieldOffset = Schema.GetOffset(0xB4CA468C257B93B);
+            _FieldOffset = _FieldOffset ?? Schema.GetOffset(0xB4CA468C257B93B);
             var instance = _FieldInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOffset);
+            instance.DangerousSetHandle(_Handle + _FieldOffset!.Value);
             return instance;
         }
     }
-    private static nint _OscMultOffset = -1;
+    private static nint? _OscMultOffset;
 
     public ref float OscMult
     {
         get
         {
-            if (_OscMultOffset == -1) _OscMultOffset = Schema.GetOffset(0xB4CA46816278E94);
-            return ref _Handle.AsRef<float>(_OscMultOffset);
+            _OscMultOffset = _OscMultOffset ?? Schema.GetOffset(0xB4CA46816278E94);
+            return ref _Handle.AsRef<float>(_OscMultOffset!.Value);
         }
     }
-    private static nint _OscAddOffset = -1;
+    private static nint? _OscAddOffset;
 
     public ref float OscAdd
     {
         get
         {
-            if (_OscAddOffset == -1) _OscAddOffset = Schema.GetOffset(0xB4CA4687B38A63D);
-            return ref _Handle.AsRef<float>(_OscAddOffset);
+            _OscAddOffset = _OscAddOffset ?? Schema.GetOffset(0xB4CA4687B38A63D);
+            return ref _Handle.AsRef<float>(_OscAddOffset!.Value);
         }
     }
-    private static nint _OffsetOffset = -1;
+    private static nint? _OffsetOffset;
 
     public ref bool Offset
     {
         get
         {
-            if (_OffsetOffset == -1) _OffsetOffset = Schema.GetOffset(0xB4CA46817412B2A);
-            return ref _Handle.AsRef<bool>(_OffsetOffset);
+            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0xB4CA46817412B2A);
+            return ref _Handle.AsRef<bool>(_OffsetOffset!.Value);
         }
     }
 

@@ -16,37 +16,37 @@ internal partial class C_FogControllerImpl : C_BaseEntityImpl, C_FogController
 {
     public C_FogControllerImpl(nint handle) : base(handle) { }
 
-    private static nint _FogOffset = -1;
+    private static nint? _FogOffset;
     private fogparams_tImpl? _FogInstance;
 
     public fogparams_t Fog
     {
         get
         {
-            if (_FogOffset == -1) _FogOffset = Schema.GetOffset(0x5A6D6F4D9014635F);
+            _FogOffset = _FogOffset ?? Schema.GetOffset(0x5A6D6F4D9014635F);
             var instance = _FogInstance ??= new fogparams_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FogOffset);
+            instance.DangerousSetHandle(_Handle + _FogOffset!.Value);
             return instance;
         }
     }
-    private static nint _UseAnglesOffset = -1;
+    private static nint? _UseAnglesOffset;
 
     public ref bool UseAngles
     {
         get
         {
-            if (_UseAnglesOffset == -1) _UseAnglesOffset = Schema.GetOffset(0x5A6D6F4D434C3DB4);
-            return ref _Handle.AsRef<bool>(_UseAnglesOffset);
+            _UseAnglesOffset = _UseAnglesOffset ?? Schema.GetOffset(0x5A6D6F4D434C3DB4);
+            return ref _Handle.AsRef<bool>(_UseAnglesOffset!.Value);
         }
     }
-    private static nint _ChangedVariablesOffset = -1;
+    private static nint? _ChangedVariablesOffset;
 
     public ref int ChangedVariables
     {
         get
         {
-            if (_ChangedVariablesOffset == -1) _ChangedVariablesOffset = Schema.GetOffset(0x5A6D6F4DBC173F39);
-            return ref _Handle.AsRef<int>(_ChangedVariablesOffset);
+            _ChangedVariablesOffset = _ChangedVariablesOffset ?? Schema.GetOffset(0x5A6D6F4DBC173F39);
+            return ref _Handle.AsRef<int>(_ChangedVariablesOffset!.Value);
         }
     }
 

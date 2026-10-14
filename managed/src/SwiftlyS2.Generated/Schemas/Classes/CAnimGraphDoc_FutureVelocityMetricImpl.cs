@@ -16,54 +16,54 @@ internal partial class CAnimGraphDoc_FutureVelocityMetricImpl : CAnimGraphDoc_Mo
 {
     public CAnimGraphDoc_FutureVelocityMetricImpl(nint handle) : base(handle) { }
 
-    private static nint _DistanceOffset = -1;
+    private static nint? _DistanceOffset;
 
     public ref float Distance
     {
         get
         {
-            if (_DistanceOffset == -1) _DistanceOffset = Schema.GetOffset(0x25BB60CA00DC4A68);
-            return ref _Handle.AsRef<float>(_DistanceOffset);
+            _DistanceOffset = _DistanceOffset ?? Schema.GetOffset(0x25BB60CA00DC4A68);
+            return ref _Handle.AsRef<float>(_DistanceOffset!.Value);
         }
     }
-    private static nint _StoppingDistanceOffset = -1;
+    private static nint? _StoppingDistanceOffset;
 
     public ref float StoppingDistance
     {
         get
         {
-            if (_StoppingDistanceOffset == -1) _StoppingDistanceOffset = Schema.GetOffset(0x25BB60CA24979434);
-            return ref _Handle.AsRef<float>(_StoppingDistanceOffset);
+            _StoppingDistanceOffset = _StoppingDistanceOffset ?? Schema.GetOffset(0x25BB60CA24979434);
+            return ref _Handle.AsRef<float>(_StoppingDistanceOffset!.Value);
         }
     }
-    private static nint _ModeOffset = -1;
+    private static nint? _ModeOffset;
 
     public ref VelocityMetricMode Mode
     {
         get
         {
-            if (_ModeOffset == -1) _ModeOffset = Schema.GetOffset(0x25BB60CA1050A633);
-            return ref _Handle.AsRef<VelocityMetricMode>(_ModeOffset);
+            _ModeOffset = _ModeOffset ?? Schema.GetOffset(0x25BB60CA1050A633);
+            return ref _Handle.AsRef<VelocityMetricMode>(_ModeOffset!.Value);
         }
     }
-    private static nint _AutoTargetSpeedOffset = -1;
+    private static nint? _AutoTargetSpeedOffset;
 
     public ref bool AutoTargetSpeed
     {
         get
         {
-            if (_AutoTargetSpeedOffset == -1) _AutoTargetSpeedOffset = Schema.GetOffset(0x25BB60CA38949092);
-            return ref _Handle.AsRef<bool>(_AutoTargetSpeedOffset);
+            _AutoTargetSpeedOffset = _AutoTargetSpeedOffset ?? Schema.GetOffset(0x25BB60CA38949092);
+            return ref _Handle.AsRef<bool>(_AutoTargetSpeedOffset!.Value);
         }
     }
-    private static nint _ManualTargetSpeedOffset = -1;
+    private static nint? _ManualTargetSpeedOffset;
 
     public ref float ManualTargetSpeed
     {
         get
         {
-            if (_ManualTargetSpeedOffset == -1) _ManualTargetSpeedOffset = Schema.GetOffset(0x25BB60CA4A00037F);
-            return ref _Handle.AsRef<float>(_ManualTargetSpeedOffset);
+            _ManualTargetSpeedOffset = _ManualTargetSpeedOffset ?? Schema.GetOffset(0x25BB60CA4A00037F);
+            return ref _Handle.AsRef<float>(_ManualTargetSpeedOffset!.Value);
         }
     }
 

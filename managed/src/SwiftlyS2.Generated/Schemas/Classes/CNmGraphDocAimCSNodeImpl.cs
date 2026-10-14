@@ -16,34 +16,34 @@ internal partial class CNmGraphDocAimCSNodeImpl : CNmGraphDocFlowNodeImpl, CNmGr
 {
     public CNmGraphDocAimCSNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _ActionBlendTimeSecondsOffset = -1;
+    private static nint? _ActionBlendTimeSecondsOffset;
 
     public ref float ActionBlendTimeSeconds
     {
         get
         {
-            if (_ActionBlendTimeSecondsOffset == -1) _ActionBlendTimeSecondsOffset = Schema.GetOffset(0x84A1EFACE3226BAE);
-            return ref _Handle.AsRef<float>(_ActionBlendTimeSecondsOffset);
+            _ActionBlendTimeSecondsOffset = _ActionBlendTimeSecondsOffset ?? Schema.GetOffset(0x84A1EFACE3226BAE);
+            return ref _Handle.AsRef<float>(_ActionBlendTimeSecondsOffset!.Value);
         }
     }
-    private static nint _HandIKBlendInTimeSecondsOffset = -1;
+    private static nint? _HandIKBlendInTimeSecondsOffset;
 
     public ref float HandIKBlendInTimeSeconds
     {
         get
         {
-            if (_HandIKBlendInTimeSecondsOffset == -1) _HandIKBlendInTimeSecondsOffset = Schema.GetOffset(0x84A1EFACCB9B86F0);
-            return ref _Handle.AsRef<float>(_HandIKBlendInTimeSecondsOffset);
+            _HandIKBlendInTimeSecondsOffset = _HandIKBlendInTimeSecondsOffset ?? Schema.GetOffset(0x84A1EFACCB9B86F0);
+            return ref _Handle.AsRef<float>(_HandIKBlendInTimeSecondsOffset!.Value);
         }
     }
-    private static nint _PlantingBlendTimeSecondsOffset = -1;
+    private static nint? _PlantingBlendTimeSecondsOffset;
 
     public ref float PlantingBlendTimeSeconds
     {
         get
         {
-            if (_PlantingBlendTimeSecondsOffset == -1) _PlantingBlendTimeSecondsOffset = Schema.GetOffset(0x84A1EFAC7FD19463);
-            return ref _Handle.AsRef<float>(_PlantingBlendTimeSecondsOffset);
+            _PlantingBlendTimeSecondsOffset = _PlantingBlendTimeSecondsOffset ?? Schema.GetOffset(0x84A1EFAC7FD19463);
+            return ref _Handle.AsRef<float>(_PlantingBlendTimeSecondsOffset!.Value);
         }
     }
 

@@ -16,93 +16,93 @@ internal partial class CBaseTrailRendererImpl : CBaseRendererSource2Impl, CBaseT
 {
     public CBaseTrailRendererImpl(nint handle) : base(handle) { }
 
-    private static nint _OrientationTypeOffset = -1;
+    private static nint? _OrientationTypeOffset;
 
     public ref ParticleOrientationChoiceList_t OrientationType
     {
         get
         {
-            if (_OrientationTypeOffset == -1) _OrientationTypeOffset = Schema.GetOffset(0x2FCF7FA6931FA045);
-            return ref _Handle.AsRef<ParticleOrientationChoiceList_t>(_OrientationTypeOffset);
+            _OrientationTypeOffset = _OrientationTypeOffset ?? Schema.GetOffset(0x2FCF7FA6931FA045);
+            return ref _Handle.AsRef<ParticleOrientationChoiceList_t>(_OrientationTypeOffset!.Value);
         }
     }
-    private static nint _OrientationControlPointOffset = -1;
+    private static nint? _OrientationControlPointOffset;
 
     public ref int OrientationControlPoint
     {
         get
         {
-            if (_OrientationControlPointOffset == -1) _OrientationControlPointOffset = Schema.GetOffset(0x2FCF7FA655B5B328);
-            return ref _Handle.AsRef<int>(_OrientationControlPointOffset);
+            _OrientationControlPointOffset = _OrientationControlPointOffset ?? Schema.GetOffset(0x2FCF7FA655B5B328);
+            return ref _Handle.AsRef<int>(_OrientationControlPointOffset!.Value);
         }
     }
-    private static nint _MinSizeOffset = -1;
+    private static nint? _MinSizeOffset;
 
     public ref float MinSize
     {
         get
         {
-            if (_MinSizeOffset == -1) _MinSizeOffset = Schema.GetOffset(0x2FCF7FA6BDC3B198);
-            return ref _Handle.AsRef<float>(_MinSizeOffset);
+            _MinSizeOffset = _MinSizeOffset ?? Schema.GetOffset(0x2FCF7FA6BDC3B198);
+            return ref _Handle.AsRef<float>(_MinSizeOffset!.Value);
         }
     }
-    private static nint _MaxSizeOffset = -1;
+    private static nint? _MaxSizeOffset;
 
     public ref float MaxSize
     {
         get
         {
-            if (_MaxSizeOffset == -1) _MaxSizeOffset = Schema.GetOffset(0x2FCF7FA68CA4E6BE);
-            return ref _Handle.AsRef<float>(_MaxSizeOffset);
+            _MaxSizeOffset = _MaxSizeOffset ?? Schema.GetOffset(0x2FCF7FA68CA4E6BE);
+            return ref _Handle.AsRef<float>(_MaxSizeOffset!.Value);
         }
     }
-    private static nint _StartFadeSizeOffset = -1;
+    private static nint? _StartFadeSizeOffset;
     private CParticleCollectionRendererFloatInputImpl? _StartFadeSizeInstance;
 
     public CParticleCollectionRendererFloatInput StartFadeSize
     {
         get
         {
-            if (_StartFadeSizeOffset == -1) _StartFadeSizeOffset = Schema.GetOffset(0x2FCF7FA6BA251D92);
+            _StartFadeSizeOffset = _StartFadeSizeOffset ?? Schema.GetOffset(0x2FCF7FA6BA251D92);
             var instance = _StartFadeSizeInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _StartFadeSizeOffset);
+            instance.DangerousSetHandle(_Handle + _StartFadeSizeOffset!.Value);
             return instance;
         }
     }
-    private static nint _EndFadeSizeOffset = -1;
+    private static nint? _EndFadeSizeOffset;
     private CParticleCollectionRendererFloatInputImpl? _EndFadeSizeInstance;
 
     public CParticleCollectionRendererFloatInput EndFadeSize
     {
         get
         {
-            if (_EndFadeSizeOffset == -1) _EndFadeSizeOffset = Schema.GetOffset(0x2FCF7FA62D3FD423);
+            _EndFadeSizeOffset = _EndFadeSizeOffset ?? Schema.GetOffset(0x2FCF7FA62D3FD423);
             var instance = _EndFadeSizeInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _EndFadeSizeOffset);
+            instance.DangerousSetHandle(_Handle + _EndFadeSizeOffset!.Value);
             return instance;
         }
     }
-    private static nint _SubPixelAAScaleOffset = -1;
+    private static nint? _SubPixelAAScaleOffset;
     private CParticleCollectionRendererFloatInputImpl? _SubPixelAAScaleInstance;
 
     public CParticleCollectionRendererFloatInput SubPixelAAScale
     {
         get
         {
-            if (_SubPixelAAScaleOffset == -1) _SubPixelAAScaleOffset = Schema.GetOffset(0x2FCF7FA63801ACCB);
+            _SubPixelAAScaleOffset = _SubPixelAAScaleOffset ?? Schema.GetOffset(0x2FCF7FA63801ACCB);
             var instance = _SubPixelAAScaleInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _SubPixelAAScaleOffset);
+            instance.DangerousSetHandle(_Handle + _SubPixelAAScaleOffset!.Value);
             return instance;
         }
     }
-    private static nint _ClampVOffset = -1;
+    private static nint? _ClampVOffset;
 
     public ref bool ClampV
     {
         get
         {
-            if (_ClampVOffset == -1) _ClampVOffset = Schema.GetOffset(0x2FCF7FA6D02C13FE);
-            return ref _Handle.AsRef<bool>(_ClampVOffset);
+            _ClampVOffset = _ClampVOffset ?? Schema.GetOffset(0x2FCF7FA6D02C13FE);
+            return ref _Handle.AsRef<bool>(_ClampVOffset!.Value);
         }
     }
 

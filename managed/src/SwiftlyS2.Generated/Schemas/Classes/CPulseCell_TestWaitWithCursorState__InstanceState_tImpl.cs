@@ -16,14 +16,14 @@ internal partial class CPulseCell_TestWaitWithCursorState__InstanceState_tImpl :
 {
     public CPulseCell_TestWaitWithCursorState__InstanceState_tImpl(nint handle) : base(handle) { }
 
-    private static nint _DummyOffset = -1;
+    private static nint? _DummyOffset;
 
     public ref int Dummy
     {
         get
         {
-            if (_DummyOffset == -1) _DummyOffset = Schema.GetOffset(0x51C12D87E3251C3F);
-            return ref _Handle.AsRef<int>(_DummyOffset);
+            _DummyOffset = _DummyOffset ?? Schema.GetOffset(0x51C12D87E3251C3F);
+            return ref _Handle.AsRef<int>(_DummyOffset!.Value);
         }
     }
 

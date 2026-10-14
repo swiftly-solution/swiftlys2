@@ -16,27 +16,27 @@ internal partial class CSimpleSimTimerImpl : SchemaClass, CSimpleSimTimer
 {
     public CSimpleSimTimerImpl(nint handle) : base(handle) { }
 
-    private static nint _NextOffset = -1;
+    private static nint? _NextOffset;
     private GameTime_tImpl? _NextInstance;
 
     public GameTime_t Next
     {
         get
         {
-            if (_NextOffset == -1) _NextOffset = Schema.GetOffset(0x4169D31C3BE2574E);
+            _NextOffset = _NextOffset ?? Schema.GetOffset(0x4169D31C3BE2574E);
             var instance = _NextInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _NextOffset);
+            instance.DangerousSetHandle(_Handle + _NextOffset!.Value);
             return instance;
         }
     }
-    private static nint _WorldGroupIdOffset = -1;
+    private static nint? _WorldGroupIdOffset;
 
     public ref uint WorldGroupId
     {
         get
         {
-            if (_WorldGroupIdOffset == -1) _WorldGroupIdOffset = Schema.GetOffset(0x4169D31C7414B193);
-            return ref _Handle.AsRef<uint>(_WorldGroupIdOffset);
+            _WorldGroupIdOffset = _WorldGroupIdOffset ?? Schema.GetOffset(0x4169D31C7414B193);
+            return ref _Handle.AsRef<uint>(_WorldGroupIdOffset!.Value);
         }
     }
 

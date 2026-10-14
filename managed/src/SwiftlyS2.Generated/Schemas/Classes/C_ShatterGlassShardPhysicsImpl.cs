@@ -16,16 +16,16 @@ internal partial class C_ShatterGlassShardPhysicsImpl : C_BaseModelEntityImpl, C
 {
     public C_ShatterGlassShardPhysicsImpl(nint handle) : base(handle) { }
 
-    private static nint _ShardDescOffset = -1;
+    private static nint? _ShardDescOffset;
     private shard_model_desc_tImpl? _ShardDescInstance;
 
     public shard_model_desc_t ShardDesc
     {
         get
         {
-            if (_ShardDescOffset == -1) _ShardDescOffset = Schema.GetOffset(0xD88BCB992CBF17C6);
+            _ShardDescOffset = _ShardDescOffset ?? Schema.GetOffset(0xD88BCB992CBF17C6);
             var instance = _ShardDescInstance ??= new shard_model_desc_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _ShardDescOffset);
+            instance.DangerousSetHandle(_Handle + _ShardDescOffset!.Value);
             return instance;
         }
     }

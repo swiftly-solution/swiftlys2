@@ -16,82 +16,82 @@ internal partial class C_BasePlayerWeaponImpl : C_EconEntityImpl, C_BasePlayerWe
 {
     public C_BasePlayerWeaponImpl(nint handle) : base(handle) { }
 
-    private static nint _NextPrimaryAttackTickOffset = -1;
+    private static nint? _NextPrimaryAttackTickOffset;
     private GameTick_tImpl? _NextPrimaryAttackTickInstance;
 
     public GameTick_t NextPrimaryAttackTick
     {
         get
         {
-            if (_NextPrimaryAttackTickOffset == -1) _NextPrimaryAttackTickOffset = Schema.GetOffset(0x313072E311BA24E3);
+            _NextPrimaryAttackTickOffset = _NextPrimaryAttackTickOffset ?? Schema.GetOffset(0x313072E311BA24E3);
             var instance = _NextPrimaryAttackTickInstance ??= new GameTick_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _NextPrimaryAttackTickOffset);
+            instance.DangerousSetHandle(_Handle + _NextPrimaryAttackTickOffset!.Value);
             return instance;
         }
     }
-    private static nint _NextPrimaryAttackTickRatioOffset = -1;
+    private static nint? _NextPrimaryAttackTickRatioOffset;
 
     public ref float NextPrimaryAttackTickRatio
     {
         get
         {
-            if (_NextPrimaryAttackTickRatioOffset == -1) _NextPrimaryAttackTickRatioOffset = Schema.GetOffset(0x313072E30D9A9E18);
-            return ref _Handle.AsRef<float>(_NextPrimaryAttackTickRatioOffset);
+            _NextPrimaryAttackTickRatioOffset = _NextPrimaryAttackTickRatioOffset ?? Schema.GetOffset(0x313072E30D9A9E18);
+            return ref _Handle.AsRef<float>(_NextPrimaryAttackTickRatioOffset!.Value);
         }
     }
-    private static nint _NextSecondaryAttackTickOffset = -1;
+    private static nint? _NextSecondaryAttackTickOffset;
     private GameTick_tImpl? _NextSecondaryAttackTickInstance;
 
     public GameTick_t NextSecondaryAttackTick
     {
         get
         {
-            if (_NextSecondaryAttackTickOffset == -1) _NextSecondaryAttackTickOffset = Schema.GetOffset(0x313072E3DE66C257);
+            _NextSecondaryAttackTickOffset = _NextSecondaryAttackTickOffset ?? Schema.GetOffset(0x313072E3DE66C257);
             var instance = _NextSecondaryAttackTickInstance ??= new GameTick_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _NextSecondaryAttackTickOffset);
+            instance.DangerousSetHandle(_Handle + _NextSecondaryAttackTickOffset!.Value);
             return instance;
         }
     }
-    private static nint _NextSecondaryAttackTickRatioOffset = -1;
+    private static nint? _NextSecondaryAttackTickRatioOffset;
 
     public ref float NextSecondaryAttackTickRatio
     {
         get
         {
-            if (_NextSecondaryAttackTickRatioOffset == -1) _NextSecondaryAttackTickRatioOffset = Schema.GetOffset(0x313072E3F3E6AF88);
-            return ref _Handle.AsRef<float>(_NextSecondaryAttackTickRatioOffset);
+            _NextSecondaryAttackTickRatioOffset = _NextSecondaryAttackTickRatioOffset ?? Schema.GetOffset(0x313072E3F3E6AF88);
+            return ref _Handle.AsRef<float>(_NextSecondaryAttackTickRatioOffset!.Value);
         }
     }
-    private static nint _Clip1Offset = -1;
+    private static nint? _Clip1Offset;
 
     public ref int Clip1
     {
         get
         {
-            if (_Clip1Offset == -1) _Clip1Offset = Schema.GetOffset(0x313072E3D0250969);
-            return ref _Handle.AsRef<int>(_Clip1Offset);
+            _Clip1Offset = _Clip1Offset ?? Schema.GetOffset(0x313072E3D0250969);
+            return ref _Handle.AsRef<int>(_Clip1Offset!.Value);
         }
     }
-    private static nint _Clip2Offset = -1;
+    private static nint? _Clip2Offset;
 
     public ref int Clip2
     {
         get
         {
-            if (_Clip2Offset == -1) _Clip2Offset = Schema.GetOffset(0x313072E3CD2504B0);
-            return ref _Handle.AsRef<int>(_Clip2Offset);
+            _Clip2Offset = _Clip2Offset ?? Schema.GetOffset(0x313072E3CD2504B0);
+            return ref _Handle.AsRef<int>(_Clip2Offset!.Value);
         }
     }
-    private static nint _ReserveAmmoOffset = -1;
+    private static nint? _ReserveAmmoOffset;
     private SchemaFixedArray<int>? _ReserveAmmoInstance;
 
     public ISchemaFixedArray<int> ReserveAmmo
     {
         get
         {
-            if (_ReserveAmmoOffset == -1) _ReserveAmmoOffset = Schema.GetOffset(0x313072E3B3FEBB0B);
+            _ReserveAmmoOffset = _ReserveAmmoOffset ?? Schema.GetOffset(0x313072E3B3FEBB0B);
             var instance = _ReserveAmmoInstance ??= new SchemaFixedArray<int>(0, 0x313072E3B3FEBB0B, 2, 4, 4);
-            instance.DangerousSetHandle(_Handle + _ReserveAmmoOffset);
+            instance.DangerousSetHandle(_Handle + _ReserveAmmoOffset!.Value);
             return instance;
         }
     }

@@ -16,80 +16,80 @@ internal partial class CNmClipDocEvent_MaterialAttributeImpl : CNmClipDocEventIm
 {
     public CNmClipDocEvent_MaterialAttributeImpl(nint handle) : base(handle) { }
 
-    private static nint _TargetOffset = -1;
+    private static nint? _TargetOffset;
 
     public ref CNmEventTargetEntity_t Target
     {
         get
         {
-            if (_TargetOffset == -1) _TargetOffset = Schema.GetOffset(0xFA763E8BFA08A9E8);
-            return ref _Handle.AsRef<CNmEventTargetEntity_t>(_TargetOffset);
+            _TargetOffset = _TargetOffset ?? Schema.GetOffset(0xFA763E8BFA08A9E8);
+            return ref _Handle.AsRef<CNmEventTargetEntity_t>(_TargetOffset!.Value);
         }
     }
-    private static nint _AttributeNameOffset = -1;
+    private static nint? _AttributeNameOffset;
 
     public string AttributeName
     {
         get
         {
-            if (_AttributeNameOffset == -1) _AttributeNameOffset = Schema.GetOffset(0xFA763E8B9168F02C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_AttributeNameOffset));
+            _AttributeNameOffset = _AttributeNameOffset ?? Schema.GetOffset(0xFA763E8B9168F02C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_AttributeNameOffset!.Value));
         }
         set
         {
-            if (_AttributeNameOffset == -1) _AttributeNameOffset = Schema.GetOffset(0xFA763E8B9168F02C);
-            Schema.SetCUtlString(_Handle, _AttributeNameOffset, value);
+            _AttributeNameOffset = _AttributeNameOffset ?? Schema.GetOffset(0xFA763E8B9168F02C);
+            Schema.SetCUtlString(_Handle, _AttributeNameOffset!.Value, value);
         }
     }
-    private static nint _XOffset = -1;
+    private static nint? _XOffset;
     private SchemaUntypedField? _XInstance;
 
     public SchemaUntypedField X
     {
         get
         {
-            if (_XOffset == -1) _XOffset = Schema.GetOffset(0xFA763E8BDBC57BA7);
+            _XOffset = _XOffset ?? Schema.GetOffset(0xFA763E8BDBC57BA7);
             var instance = _XInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _XOffset);
+            instance.DangerousSetHandle(_Handle + _XOffset!.Value);
             return instance;
         }
     }
-    private static nint _YOffset = -1;
+    private static nint? _YOffset;
     private SchemaUntypedField? _YInstance;
 
     public SchemaUntypedField Y
     {
         get
         {
-            if (_YOffset == -1) _YOffset = Schema.GetOffset(0xFA763E8BDAC57A14);
+            _YOffset = _YOffset ?? Schema.GetOffset(0xFA763E8BDAC57A14);
             var instance = _YInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _YOffset);
+            instance.DangerousSetHandle(_Handle + _YOffset!.Value);
             return instance;
         }
     }
-    private static nint _ZOffset = -1;
+    private static nint? _ZOffset;
     private SchemaUntypedField? _ZInstance;
 
     public SchemaUntypedField Z
     {
         get
         {
-            if (_ZOffset == -1) _ZOffset = Schema.GetOffset(0xFA763E8BDDC57ECD);
+            _ZOffset = _ZOffset ?? Schema.GetOffset(0xFA763E8BDDC57ECD);
             var instance = _ZInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ZOffset);
+            instance.DangerousSetHandle(_Handle + _ZOffset!.Value);
             return instance;
         }
     }
-    private static nint _WOffset = -1;
+    private static nint? _WOffset;
     private SchemaUntypedField? _WInstance;
 
     public SchemaUntypedField W
     {
         get
         {
-            if (_WOffset == -1) _WOffset = Schema.GetOffset(0xFA763E8BD0C56A56);
+            _WOffset = _WOffset ?? Schema.GetOffset(0xFA763E8BD0C56A56);
             var instance = _WInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _WOffset);
+            instance.DangerousSetHandle(_Handle + _WOffset!.Value);
             return instance;
         }
     }

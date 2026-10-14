@@ -16,29 +16,29 @@ internal partial class CPulseCell_WaitForObservableImpl : CPulseCell_BaseYieldin
 {
     public CPulseCell_WaitForObservableImpl(nint handle) : base(handle) { }
 
-    private static nint _ConditionOffset = -1;
+    private static nint? _ConditionOffset;
     private SchemaUntypedField? _ConditionInstance;
 
     public SchemaUntypedField Condition
     {
         get
         {
-            if (_ConditionOffset == -1) _ConditionOffset = Schema.GetOffset(0xE6EB02CD5F2A883E);
+            _ConditionOffset = _ConditionOffset ?? Schema.GetOffset(0xE6EB02CD5F2A883E);
             var instance = _ConditionInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ConditionOffset);
+            instance.DangerousSetHandle(_Handle + _ConditionOffset!.Value);
             return instance;
         }
     }
-    private static nint _OnTrueOffset = -1;
+    private static nint? _OnTrueOffset;
     private CPulse_ResumePointImpl? _OnTrueInstance;
 
     public CPulse_ResumePoint OnTrue
     {
         get
         {
-            if (_OnTrueOffset == -1) _OnTrueOffset = Schema.GetOffset(0xE6EB02CD6EAE5D88);
+            _OnTrueOffset = _OnTrueOffset ?? Schema.GetOffset(0xE6EB02CD6EAE5D88);
             var instance = _OnTrueInstance ??= new CPulse_ResumePointImpl(0);
-            instance.DangerousSetHandle(_Handle + _OnTrueOffset);
+            instance.DangerousSetHandle(_Handle + _OnTrueOffset!.Value);
             return instance;
         }
     }

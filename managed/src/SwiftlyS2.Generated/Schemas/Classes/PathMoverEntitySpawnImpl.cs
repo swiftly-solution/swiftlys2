@@ -16,34 +16,34 @@ internal partial class PathMoverEntitySpawnImpl : SchemaClass, PathMoverEntitySp
 {
     public PathMoverEntitySpawnImpl(nint handle) : base(handle) { }
 
-    private static nint _MoverOffset = -1;
+    private static nint? _MoverOffset;
 
     public ref CHandle<CFuncMover> Mover
     {
         get
         {
-            if (_MoverOffset == -1) _MoverOffset = Schema.GetOffset(0x5D73FCD3B39FF614);
-            return ref _Handle.AsRef<CHandle<CFuncMover>>(_MoverOffset);
+            _MoverOffset = _MoverOffset ?? Schema.GetOffset(0x5D73FCD3B39FF614);
+            return ref _Handle.AsRef<CHandle<CFuncMover>>(_MoverOffset!.Value);
         }
     }
-    private static nint _OtherEntitiesOffset = -1;
+    private static nint? _OtherEntitiesOffset;
 
     public ref CUtlVector<CHandle<CBaseEntity>> OtherEntities
     {
         get
         {
-            if (_OtherEntitiesOffset == -1) _OtherEntitiesOffset = Schema.GetOffset(0x5D73FCD3303E251A);
-            return ref _Handle.AsRef<CUtlVector<CHandle<CBaseEntity>>>(_OtherEntitiesOffset);
+            _OtherEntitiesOffset = _OtherEntitiesOffset ?? Schema.GetOffset(0x5D73FCD3303E251A);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CBaseEntity>>>(_OtherEntitiesOffset!.Value);
         }
     }
-    private static nint _SpawnNumberOffset = -1;
+    private static nint? _SpawnNumberOffset;
 
     public ref int SpawnNumber
     {
         get
         {
-            if (_SpawnNumberOffset == -1) _SpawnNumberOffset = Schema.GetOffset(0x5D73FCD36C730DFD);
-            return ref _Handle.AsRef<int>(_SpawnNumberOffset);
+            _SpawnNumberOffset = _SpawnNumberOffset ?? Schema.GetOffset(0x5D73FCD36C730DFD);
+            return ref _Handle.AsRef<int>(_SpawnNumberOffset!.Value);
         }
     }
 

@@ -16,59 +16,59 @@ internal partial class C_OP_ConnectParentParticleToNearestImpl : CParticleFuncti
 {
     public C_OP_ConnectParentParticleToNearestImpl(nint handle) : base(handle) { }
 
-    private static nint _FirstControlPointOffset = -1;
+    private static nint? _FirstControlPointOffset;
 
     public ref int FirstControlPoint
     {
         get
         {
-            if (_FirstControlPointOffset == -1) _FirstControlPointOffset = Schema.GetOffset(0x9C608BD072117650);
-            return ref _Handle.AsRef<int>(_FirstControlPointOffset);
+            _FirstControlPointOffset = _FirstControlPointOffset ?? Schema.GetOffset(0x9C608BD072117650);
+            return ref _Handle.AsRef<int>(_FirstControlPointOffset!.Value);
         }
     }
-    private static nint _SecondControlPointOffset = -1;
+    private static nint? _SecondControlPointOffset;
 
     public ref int SecondControlPoint
     {
         get
         {
-            if (_SecondControlPointOffset == -1) _SecondControlPointOffset = Schema.GetOffset(0x9C608BD04D8D2B44);
-            return ref _Handle.AsRef<int>(_SecondControlPointOffset);
+            _SecondControlPointOffset = _SecondControlPointOffset ?? Schema.GetOffset(0x9C608BD04D8D2B44);
+            return ref _Handle.AsRef<int>(_SecondControlPointOffset!.Value);
         }
     }
-    private static nint _UseRadiusOffset = -1;
+    private static nint? _UseRadiusOffset;
 
     public ref bool UseRadius
     {
         get
         {
-            if (_UseRadiusOffset == -1) _UseRadiusOffset = Schema.GetOffset(0x9C608BD0B7D98E6A);
-            return ref _Handle.AsRef<bool>(_UseRadiusOffset);
+            _UseRadiusOffset = _UseRadiusOffset ?? Schema.GetOffset(0x9C608BD0B7D98E6A);
+            return ref _Handle.AsRef<bool>(_UseRadiusOffset!.Value);
         }
     }
-    private static nint _RadiusScaleOffset = -1;
+    private static nint? _RadiusScaleOffset;
     private CParticleCollectionFloatInputImpl? _RadiusScaleInstance;
 
     public CParticleCollectionFloatInput RadiusScale
     {
         get
         {
-            if (_RadiusScaleOffset == -1) _RadiusScaleOffset = Schema.GetOffset(0x9C608BD0A7A20159);
+            _RadiusScaleOffset = _RadiusScaleOffset ?? Schema.GetOffset(0x9C608BD0A7A20159);
             var instance = _RadiusScaleInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _RadiusScaleOffset);
+            instance.DangerousSetHandle(_Handle + _RadiusScaleOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParentRadiusScaleOffset = -1;
+    private static nint? _ParentRadiusScaleOffset;
     private CParticleCollectionFloatInputImpl? _ParentRadiusScaleInstance;
 
     public CParticleCollectionFloatInput ParentRadiusScale
     {
         get
         {
-            if (_ParentRadiusScaleOffset == -1) _ParentRadiusScaleOffset = Schema.GetOffset(0x9C608BD0CD77EF69);
+            _ParentRadiusScaleOffset = _ParentRadiusScaleOffset ?? Schema.GetOffset(0x9C608BD0CD77EF69);
             var instance = _ParentRadiusScaleInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParentRadiusScaleOffset);
+            instance.DangerousSetHandle(_Handle + _ParentRadiusScaleOffset!.Value);
             return instance;
         }
     }

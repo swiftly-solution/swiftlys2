@@ -16,69 +16,69 @@ internal partial class RnShapeDesc_tImpl : SchemaClass, RnShapeDesc_t
 {
     public RnShapeDesc_tImpl(nint handle) : base(handle) { }
 
-    private static nint _CollisionAttributeIndexOffset = -1;
+    private static nint? _CollisionAttributeIndexOffset;
 
     public ref uint CollisionAttributeIndex
     {
         get
         {
-            if (_CollisionAttributeIndexOffset == -1) _CollisionAttributeIndexOffset = Schema.GetOffset(0xA24D7D10C7B64DF7);
-            return ref _Handle.AsRef<uint>(_CollisionAttributeIndexOffset);
+            _CollisionAttributeIndexOffset = _CollisionAttributeIndexOffset ?? Schema.GetOffset(0xA24D7D10C7B64DF7);
+            return ref _Handle.AsRef<uint>(_CollisionAttributeIndexOffset!.Value);
         }
     }
-    private static nint _SurfacePropertyIndexOffset = -1;
+    private static nint? _SurfacePropertyIndexOffset;
 
     public ref uint SurfacePropertyIndex
     {
         get
         {
-            if (_SurfacePropertyIndexOffset == -1) _SurfacePropertyIndexOffset = Schema.GetOffset(0xA24D7D106DED6187);
-            return ref _Handle.AsRef<uint>(_SurfacePropertyIndexOffset);
+            _SurfacePropertyIndexOffset = _SurfacePropertyIndexOffset ?? Schema.GetOffset(0xA24D7D106DED6187);
+            return ref _Handle.AsRef<uint>(_SurfacePropertyIndexOffset!.Value);
         }
     }
-    private static nint _UserFriendlyNameOffset = -1;
+    private static nint? _UserFriendlyNameOffset;
 
     public string UserFriendlyName
     {
         get
         {
-            if (_UserFriendlyNameOffset == -1) _UserFriendlyNameOffset = Schema.GetOffset(0xA24D7D1000D4523E);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_UserFriendlyNameOffset));
+            _UserFriendlyNameOffset = _UserFriendlyNameOffset ?? Schema.GetOffset(0xA24D7D1000D4523E);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_UserFriendlyNameOffset!.Value));
         }
         set
         {
-            if (_UserFriendlyNameOffset == -1) _UserFriendlyNameOffset = Schema.GetOffset(0xA24D7D1000D4523E);
-            Schema.SetCUtlString(_Handle, _UserFriendlyNameOffset, value);
+            _UserFriendlyNameOffset = _UserFriendlyNameOffset ?? Schema.GetOffset(0xA24D7D1000D4523E);
+            Schema.SetCUtlString(_Handle, _UserFriendlyNameOffset!.Value, value);
         }
     }
-    private static nint _UserFriendlyNameSealedOffset = -1;
+    private static nint? _UserFriendlyNameSealedOffset;
 
     public ref bool UserFriendlyNameSealed
     {
         get
         {
-            if (_UserFriendlyNameSealedOffset == -1) _UserFriendlyNameSealedOffset = Schema.GetOffset(0xA24D7D1076DBAE3A);
-            return ref _Handle.AsRef<bool>(_UserFriendlyNameSealedOffset);
+            _UserFriendlyNameSealedOffset = _UserFriendlyNameSealedOffset ?? Schema.GetOffset(0xA24D7D1076DBAE3A);
+            return ref _Handle.AsRef<bool>(_UserFriendlyNameSealedOffset!.Value);
         }
     }
-    private static nint _UserFriendlyNameLongOffset = -1;
+    private static nint? _UserFriendlyNameLongOffset;
 
     public ref bool UserFriendlyNameLong
     {
         get
         {
-            if (_UserFriendlyNameLongOffset == -1) _UserFriendlyNameLongOffset = Schema.GetOffset(0xA24D7D10F02591B8);
-            return ref _Handle.AsRef<bool>(_UserFriendlyNameLongOffset);
+            _UserFriendlyNameLongOffset = _UserFriendlyNameLongOffset ?? Schema.GetOffset(0xA24D7D10F02591B8);
+            return ref _Handle.AsRef<bool>(_UserFriendlyNameLongOffset!.Value);
         }
     }
-    private static nint _ToolMaterialHashOffset = -1;
+    private static nint? _ToolMaterialHashOffset;
 
     public ref uint ToolMaterialHash
     {
         get
         {
-            if (_ToolMaterialHashOffset == -1) _ToolMaterialHashOffset = Schema.GetOffset(0xA24D7D105C3E2DDE);
-            return ref _Handle.AsRef<uint>(_ToolMaterialHashOffset);
+            _ToolMaterialHashOffset = _ToolMaterialHashOffset ?? Schema.GetOffset(0xA24D7D105C3E2DDE);
+            return ref _Handle.AsRef<uint>(_ToolMaterialHashOffset!.Value);
         }
     }
 

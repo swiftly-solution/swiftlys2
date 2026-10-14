@@ -16,14 +16,14 @@ internal partial class CLODComponentImpl : CAnimGraphDoc_ComponentImpl, CLODComp
 {
     public CLODComponentImpl(nint handle) : base(handle) { }
 
-    private static nint _ServerLODOffset = -1;
+    private static nint? _ServerLODOffset;
 
     public ref int ServerLOD
     {
         get
         {
-            if (_ServerLODOffset == -1) _ServerLODOffset = Schema.GetOffset(0xEC615EAC244E2C75);
-            return ref _Handle.AsRef<int>(_ServerLODOffset);
+            _ServerLODOffset = _ServerLODOffset ?? Schema.GetOffset(0xEC615EAC244E2C75);
+            return ref _Handle.AsRef<int>(_ServerLODOffset!.Value);
         }
     }
 

@@ -16,56 +16,56 @@ internal partial class CStopAtGoalUpdateNodeImpl : CUnaryUpdateNodeImpl, CStopAt
 {
     public CStopAtGoalUpdateNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _OuterRadiusOffset = -1;
+    private static nint? _OuterRadiusOffset;
 
     public ref float OuterRadius
     {
         get
         {
-            if (_OuterRadiusOffset == -1) _OuterRadiusOffset = Schema.GetOffset(0x4889F8297B66A818);
-            return ref _Handle.AsRef<float>(_OuterRadiusOffset);
+            _OuterRadiusOffset = _OuterRadiusOffset ?? Schema.GetOffset(0x4889F8297B66A818);
+            return ref _Handle.AsRef<float>(_OuterRadiusOffset!.Value);
         }
     }
-    private static nint _InnerRadiusOffset = -1;
+    private static nint? _InnerRadiusOffset;
 
     public ref float InnerRadius
     {
         get
         {
-            if (_InnerRadiusOffset == -1) _InnerRadiusOffset = Schema.GetOffset(0x4889F82932121407);
-            return ref _Handle.AsRef<float>(_InnerRadiusOffset);
+            _InnerRadiusOffset = _InnerRadiusOffset ?? Schema.GetOffset(0x4889F82932121407);
+            return ref _Handle.AsRef<float>(_InnerRadiusOffset!.Value);
         }
     }
-    private static nint _MaxScaleOffset = -1;
+    private static nint? _MaxScaleOffset;
 
     public ref float MaxScale
     {
         get
         {
-            if (_MaxScaleOffset == -1) _MaxScaleOffset = Schema.GetOffset(0x4889F829FF4EC8E7);
-            return ref _Handle.AsRef<float>(_MaxScaleOffset);
+            _MaxScaleOffset = _MaxScaleOffset ?? Schema.GetOffset(0x4889F829FF4EC8E7);
+            return ref _Handle.AsRef<float>(_MaxScaleOffset!.Value);
         }
     }
-    private static nint _MinScaleOffset = -1;
+    private static nint? _MinScaleOffset;
 
     public ref float MinScale
     {
         get
         {
-            if (_MinScaleOffset == -1) _MinScaleOffset = Schema.GetOffset(0x4889F829D125D67D);
-            return ref _Handle.AsRef<float>(_MinScaleOffset);
+            _MinScaleOffset = _MinScaleOffset ?? Schema.GetOffset(0x4889F829D125D67D);
+            return ref _Handle.AsRef<float>(_MinScaleOffset!.Value);
         }
     }
-    private static nint _DampingOffset = -1;
+    private static nint? _DampingOffset;
     private CAnimInputDampingImpl? _DampingInstance;
 
     public CAnimInputDamping Damping
     {
         get
         {
-            if (_DampingOffset == -1) _DampingOffset = Schema.GetOffset(0x4889F82915440FB5);
+            _DampingOffset = _DampingOffset ?? Schema.GetOffset(0x4889F82915440FB5);
             var instance = _DampingInstance ??= new CAnimInputDampingImpl(0);
-            instance.DangerousSetHandle(_Handle + _DampingOffset);
+            instance.DangerousSetHandle(_Handle + _DampingOffset!.Value);
             return instance;
         }
     }

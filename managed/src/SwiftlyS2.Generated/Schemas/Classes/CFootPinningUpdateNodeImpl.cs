@@ -16,47 +16,47 @@ internal partial class CFootPinningUpdateNodeImpl : CUnaryUpdateNodeImpl, CFootP
 {
     public CFootPinningUpdateNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _PoseOpFixedDataOffset = -1;
+    private static nint? _PoseOpFixedDataOffset;
     private FootPinningPoseOpFixedData_tImpl? _PoseOpFixedDataInstance;
 
     public FootPinningPoseOpFixedData_t PoseOpFixedData
     {
         get
         {
-            if (_PoseOpFixedDataOffset == -1) _PoseOpFixedDataOffset = Schema.GetOffset(0x9D0C68166EC45627);
+            _PoseOpFixedDataOffset = _PoseOpFixedDataOffset ?? Schema.GetOffset(0x9D0C68166EC45627);
             var instance = _PoseOpFixedDataInstance ??= new FootPinningPoseOpFixedData_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _PoseOpFixedDataOffset);
+            instance.DangerousSetHandle(_Handle + _PoseOpFixedDataOffset!.Value);
             return instance;
         }
     }
-    private static nint _TimingSourceOffset = -1;
+    private static nint? _TimingSourceOffset;
 
     public ref FootPinningTimingSource TimingSource
     {
         get
         {
-            if (_TimingSourceOffset == -1) _TimingSourceOffset = Schema.GetOffset(0x9D0C68164D5A2DD7);
-            return ref _Handle.AsRef<FootPinningTimingSource>(_TimingSourceOffset);
+            _TimingSourceOffset = _TimingSourceOffset ?? Schema.GetOffset(0x9D0C68164D5A2DD7);
+            return ref _Handle.AsRef<FootPinningTimingSource>(_TimingSourceOffset!.Value);
         }
     }
-    private static nint _ParamsOffset = -1;
+    private static nint? _ParamsOffset;
 
     public ref CUtlVector<CAnimParamHandle> Params
     {
         get
         {
-            if (_ParamsOffset == -1) _ParamsOffset = Schema.GetOffset(0x9D0C6816640EA8F3);
-            return ref _Handle.AsRef<CUtlVector<CAnimParamHandle>>(_ParamsOffset);
+            _ParamsOffset = _ParamsOffset ?? Schema.GetOffset(0x9D0C6816640EA8F3);
+            return ref _Handle.AsRef<CUtlVector<CAnimParamHandle>>(_ParamsOffset!.Value);
         }
     }
-    private static nint _ResetChildOffset = -1;
+    private static nint? _ResetChildOffset;
 
     public ref bool ResetChild
     {
         get
         {
-            if (_ResetChildOffset == -1) _ResetChildOffset = Schema.GetOffset(0x9D0C681665CC88B6);
-            return ref _Handle.AsRef<bool>(_ResetChildOffset);
+            _ResetChildOffset = _ResetChildOffset ?? Schema.GetOffset(0x9D0C681665CC88B6);
+            return ref _Handle.AsRef<bool>(_ResetChildOffset!.Value);
         }
     }
 

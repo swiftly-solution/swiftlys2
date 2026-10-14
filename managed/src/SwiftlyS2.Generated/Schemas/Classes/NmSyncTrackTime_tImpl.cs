@@ -16,26 +16,26 @@ internal partial class NmSyncTrackTime_tImpl : SchemaClass, NmSyncTrackTime_t
 {
     public NmSyncTrackTime_tImpl(nint handle) : base(handle) { }
 
-    private static nint _EventIdxOffset = -1;
+    private static nint? _EventIdxOffset;
 
     public ref int EventIdx
     {
         get
         {
-            if (_EventIdxOffset == -1) _EventIdxOffset = Schema.GetOffset(0x12BF3F3C2A6FC8DA);
-            return ref _Handle.AsRef<int>(_EventIdxOffset);
+            _EventIdxOffset = _EventIdxOffset ?? Schema.GetOffset(0x12BF3F3C2A6FC8DA);
+            return ref _Handle.AsRef<int>(_EventIdxOffset!.Value);
         }
     }
-    private static nint _PercentageThroughOffset = -1;
+    private static nint? _PercentageThroughOffset;
     private NmPercent_tImpl? _PercentageThroughInstance;
 
     public NmPercent_t PercentageThrough
     {
         get
         {
-            if (_PercentageThroughOffset == -1) _PercentageThroughOffset = Schema.GetOffset(0x12BF3F3C77B731AA);
+            _PercentageThroughOffset = _PercentageThroughOffset ?? Schema.GetOffset(0x12BF3F3C77B731AA);
             var instance = _PercentageThroughInstance ??= new NmPercent_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _PercentageThroughOffset);
+            instance.DangerousSetHandle(_Handle + _PercentageThroughOffset!.Value);
             return instance;
         }
     }

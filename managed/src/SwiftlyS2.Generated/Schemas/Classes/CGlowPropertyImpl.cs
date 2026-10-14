@@ -16,114 +16,114 @@ internal partial class CGlowPropertyImpl : SchemaClass, CGlowProperty
 {
     public CGlowPropertyImpl(nint handle) : base(handle) { }
 
-    private static nint _GlowColorOffset = -1;
+    private static nint? _GlowColorOffset;
 
     public ref Vector GlowColor
     {
         get
         {
-            if (_GlowColorOffset == -1) _GlowColorOffset = Schema.GetOffset(0x3ABE6F3E15CEA997);
-            return ref _Handle.AsRef<Vector>(_GlowColorOffset);
+            _GlowColorOffset = _GlowColorOffset ?? Schema.GetOffset(0x3ABE6F3E15CEA997);
+            return ref _Handle.AsRef<Vector>(_GlowColorOffset!.Value);
         }
     }
-    private static nint _GlowTypeOffset = -1;
+    private static nint? _GlowTypeOffset;
 
     public ref int GlowType
     {
         get
         {
-            if (_GlowTypeOffset == -1) _GlowTypeOffset = Schema.GetOffset(0x3ABE6F3E0600E8DD);
-            return ref _Handle.AsRef<int>(_GlowTypeOffset);
+            _GlowTypeOffset = _GlowTypeOffset ?? Schema.GetOffset(0x3ABE6F3E0600E8DD);
+            return ref _Handle.AsRef<int>(_GlowTypeOffset!.Value);
         }
     }
-    private static nint _GlowTeamOffset = -1;
+    private static nint? _GlowTeamOffset;
 
     public ref int GlowTeam
     {
         get
         {
-            if (_GlowTeamOffset == -1) _GlowTeamOffset = Schema.GetOffset(0x3ABE6F3E34FAFCDC);
-            return ref _Handle.AsRef<int>(_GlowTeamOffset);
+            _GlowTeamOffset = _GlowTeamOffset ?? Schema.GetOffset(0x3ABE6F3E34FAFCDC);
+            return ref _Handle.AsRef<int>(_GlowTeamOffset!.Value);
         }
     }
-    private static nint _GlowRangeOffset = -1;
+    private static nint? _GlowRangeOffset;
 
     public ref int GlowRange
     {
         get
         {
-            if (_GlowRangeOffset == -1) _GlowRangeOffset = Schema.GetOffset(0x3ABE6F3ED03F97ED);
-            return ref _Handle.AsRef<int>(_GlowRangeOffset);
+            _GlowRangeOffset = _GlowRangeOffset ?? Schema.GetOffset(0x3ABE6F3ED03F97ED);
+            return ref _Handle.AsRef<int>(_GlowRangeOffset!.Value);
         }
     }
-    private static nint _GlowRangeMinOffset = -1;
+    private static nint? _GlowRangeMinOffset;
 
     public ref int GlowRangeMin
     {
         get
         {
-            if (_GlowRangeMinOffset == -1) _GlowRangeMinOffset = Schema.GetOffset(0x3ABE6F3EA28EDB1F);
-            return ref _Handle.AsRef<int>(_GlowRangeMinOffset);
+            _GlowRangeMinOffset = _GlowRangeMinOffset ?? Schema.GetOffset(0x3ABE6F3EA28EDB1F);
+            return ref _Handle.AsRef<int>(_GlowRangeMinOffset!.Value);
         }
     }
-    private static nint _GlowColorOverrideOffset = -1;
+    private static nint? _GlowColorOverrideOffset;
 
     public ref Color GlowColorOverride
     {
         get
         {
-            if (_GlowColorOverrideOffset == -1) _GlowColorOverrideOffset = Schema.GetOffset(0x3ABE6F3E50C6E26B);
-            return ref _Handle.AsRef<Color>(_GlowColorOverrideOffset);
+            _GlowColorOverrideOffset = _GlowColorOverrideOffset ?? Schema.GetOffset(0x3ABE6F3E50C6E26B);
+            return ref _Handle.AsRef<Color>(_GlowColorOverrideOffset!.Value);
         }
     }
-    private static nint _FlashingOffset = -1;
+    private static nint? _FlashingOffset;
 
     public ref bool Flashing
     {
         get
         {
-            if (_FlashingOffset == -1) _FlashingOffset = Schema.GetOffset(0x3ABE6F3EB646AC57);
-            return ref _Handle.AsRef<bool>(_FlashingOffset);
+            _FlashingOffset = _FlashingOffset ?? Schema.GetOffset(0x3ABE6F3EB646AC57);
+            return ref _Handle.AsRef<bool>(_FlashingOffset!.Value);
         }
     }
-    private static nint _GlowTimeOffset = -1;
+    private static nint? _GlowTimeOffset;
 
     public ref float GlowTime
     {
         get
         {
-            if (_GlowTimeOffset == -1) _GlowTimeOffset = Schema.GetOffset(0x3ABE6F3E11622DBB);
-            return ref _Handle.AsRef<float>(_GlowTimeOffset);
+            _GlowTimeOffset = _GlowTimeOffset ?? Schema.GetOffset(0x3ABE6F3E11622DBB);
+            return ref _Handle.AsRef<float>(_GlowTimeOffset!.Value);
         }
     }
-    private static nint _GlowStartTimeOffset = -1;
+    private static nint? _GlowStartTimeOffset;
 
     public ref float GlowStartTime
     {
         get
         {
-            if (_GlowStartTimeOffset == -1) _GlowStartTimeOffset = Schema.GetOffset(0x3ABE6F3E411532C3);
-            return ref _Handle.AsRef<float>(_GlowStartTimeOffset);
+            _GlowStartTimeOffset = _GlowStartTimeOffset ?? Schema.GetOffset(0x3ABE6F3E411532C3);
+            return ref _Handle.AsRef<float>(_GlowStartTimeOffset!.Value);
         }
     }
-    private static nint _EligibleForScreenHighlightOffset = -1;
+    private static nint? _EligibleForScreenHighlightOffset;
 
     public ref bool EligibleForScreenHighlight
     {
         get
         {
-            if (_EligibleForScreenHighlightOffset == -1) _EligibleForScreenHighlightOffset = Schema.GetOffset(0x3ABE6F3E23B89FB9);
-            return ref _Handle.AsRef<bool>(_EligibleForScreenHighlightOffset);
+            _EligibleForScreenHighlightOffset = _EligibleForScreenHighlightOffset ?? Schema.GetOffset(0x3ABE6F3E23B89FB9);
+            return ref _Handle.AsRef<bool>(_EligibleForScreenHighlightOffset!.Value);
         }
     }
-    private static nint _GlowingOffset = -1;
+    private static nint? _GlowingOffset;
 
     public ref bool Glowing
     {
         get
         {
-            if (_GlowingOffset == -1) _GlowingOffset = Schema.GetOffset(0x3ABE6F3E3DEA07DC);
-            return ref _Handle.AsRef<bool>(_GlowingOffset);
+            _GlowingOffset = _GlowingOffset ?? Schema.GetOffset(0x3ABE6F3E3DEA07DC);
+            return ref _Handle.AsRef<bool>(_GlowingOffset!.Value);
         }
     }
 

@@ -16,24 +16,24 @@ internal partial class CPulseServerCursorImpl : CPulseExecCursorImpl, CPulseServ
 {
     public CPulseServerCursorImpl(nint handle) : base(handle) { }
 
-    private static nint _ActivatorOffset = -1;
+    private static nint? _ActivatorOffset;
 
     public ref CHandle<CBaseEntity> Activator
     {
         get
         {
-            if (_ActivatorOffset == -1) _ActivatorOffset = Schema.GetOffset(0x4FFA7BD2AB093BB2);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_ActivatorOffset);
+            _ActivatorOffset = _ActivatorOffset ?? Schema.GetOffset(0x4FFA7BD2AB093BB2);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_ActivatorOffset!.Value);
         }
     }
-    private static nint _CallerOffset = -1;
+    private static nint? _CallerOffset;
 
     public ref CHandle<CBaseEntity> Caller
     {
         get
         {
-            if (_CallerOffset == -1) _CallerOffset = Schema.GetOffset(0x4FFA7BD23F9735FC);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_CallerOffset);
+            _CallerOffset = _CallerOffset ?? Schema.GetOffset(0x4FFA7BD23F9735FC);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_CallerOffset!.Value);
         }
     }
 

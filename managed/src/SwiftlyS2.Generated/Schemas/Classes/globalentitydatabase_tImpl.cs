@@ -16,14 +16,14 @@ internal partial class globalentitydatabase_tImpl : SchemaClass, globalentitydat
 {
     public globalentitydatabase_tImpl(nint handle) : base(handle) { }
 
-    private static nint _ListOffset = -1;
+    private static nint? _ListOffset;
 
     public ref CUtlVector<globalentity_t> List
     {
         get
         {
-            if (_ListOffset == -1) _ListOffset = Schema.GetOffset(0x89D6E31BCAD81C21);
-            return ref _Handle.AsRef<CUtlVector<globalentity_t>>(_ListOffset);
+            _ListOffset = _ListOffset ?? Schema.GetOffset(0x89D6E31BCAD81C21);
+            return ref _Handle.AsRef<CUtlVector<globalentity_t>>(_ListOffset!.Value);
         }
     }
 

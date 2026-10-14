@@ -16,139 +16,139 @@ internal partial class CNmSkeletonDocumentImpl : CNmAnimDocumentImpl, CNmSkeleto
 {
     public CNmSkeletonDocumentImpl(nint handle) : base(handle) { }
 
-    private static nint _SourceFilenameOffset = -1;
+    private static nint? _SourceFilenameOffset;
 
     public string SourceFilename
     {
         get
         {
-            if (_SourceFilenameOffset == -1) _SourceFilenameOffset = Schema.GetOffset(0x470887F5840BDD4D);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_SourceFilenameOffset));
+            _SourceFilenameOffset = _SourceFilenameOffset ?? Schema.GetOffset(0x470887F5840BDD4D);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_SourceFilenameOffset!.Value));
         }
         set
         {
-            if (_SourceFilenameOffset == -1) _SourceFilenameOffset = Schema.GetOffset(0x470887F5840BDD4D);
-            Schema.SetCUtlString(_Handle, _SourceFilenameOffset, value);
+            _SourceFilenameOffset = _SourceFilenameOffset ?? Schema.GetOffset(0x470887F5840BDD4D);
+            Schema.SetCUtlString(_Handle, _SourceFilenameOffset!.Value, value);
         }
     }
-    private static nint _RootBoneNameOffset = -1;
+    private static nint? _RootBoneNameOffset;
 
     public string RootBoneName
     {
         get
         {
-            if (_RootBoneNameOffset == -1) _RootBoneNameOffset = Schema.GetOffset(0x470887F555E6A4AC);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_RootBoneNameOffset));
+            _RootBoneNameOffset = _RootBoneNameOffset ?? Schema.GetOffset(0x470887F555E6A4AC);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_RootBoneNameOffset!.Value));
         }
         set
         {
-            if (_RootBoneNameOffset == -1) _RootBoneNameOffset = Schema.GetOffset(0x470887F555E6A4AC);
-            Schema.SetCUtlString(_Handle, _RootBoneNameOffset, value);
+            _RootBoneNameOffset = _RootBoneNameOffset ?? Schema.GetOffset(0x470887F555E6A4AC);
+            Schema.SetCUtlString(_Handle, _RootBoneNameOffset!.Value, value);
         }
     }
-    private static nint _GlobalScaleOffset = -1;
+    private static nint? _GlobalScaleOffset;
 
     public ref float GlobalScale
     {
         get
         {
-            if (_GlobalScaleOffset == -1) _GlobalScaleOffset = Schema.GetOffset(0x470887F5EF627C6E);
-            return ref _Handle.AsRef<float>(_GlobalScaleOffset);
+            _GlobalScaleOffset = _GlobalScaleOffset ?? Schema.GetOffset(0x470887F5EF627C6E);
+            return ref _Handle.AsRef<float>(_GlobalScaleOffset!.Value);
         }
     }
-    private static nint _IsAttachablePropOffset = -1;
+    private static nint? _IsAttachablePropOffset;
 
     public ref bool IsAttachableProp
     {
         get
         {
-            if (_IsAttachablePropOffset == -1) _IsAttachablePropOffset = Schema.GetOffset(0x470887F55D50C7B5);
-            return ref _Handle.AsRef<bool>(_IsAttachablePropOffset);
+            _IsAttachablePropOffset = _IsAttachablePropOffset ?? Schema.GetOffset(0x470887F55D50C7B5);
+            return ref _Handle.AsRef<bool>(_IsAttachablePropOffset!.Value);
         }
     }
-    private static nint _IsCS_HACKOffset = -1;
+    private static nint? _IsCS_HACKOffset;
 
     public ref bool IsCS_HACK
     {
         get
         {
-            if (_IsCS_HACKOffset == -1) _IsCS_HACKOffset = Schema.GetOffset(0x470887F515FFAAFD);
-            return ref _Handle.AsRef<bool>(_IsCS_HACKOffset);
+            _IsCS_HACKOffset = _IsCS_HACKOffset ?? Schema.GetOffset(0x470887F515FFAAFD);
+            return ref _Handle.AsRef<bool>(_IsCS_HACKOffset!.Value);
         }
     }
-    private static nint _ContactConfigsOffset = -1;
+    private static nint? _ContactConfigsOffset;
 
     public ref CUtlVector<CNmSkeletonDocument__ContactConfig_t> ContactConfigs
     {
         get
         {
-            if (_ContactConfigsOffset == -1) _ContactConfigsOffset = Schema.GetOffset(0x470887F527B5F356);
-            return ref _Handle.AsRef<CUtlVector<CNmSkeletonDocument__ContactConfig_t>>(_ContactConfigsOffset);
+            _ContactConfigsOffset = _ContactConfigsOffset ?? Schema.GetOffset(0x470887F527B5F356);
+            return ref _Handle.AsRef<CUtlVector<CNmSkeletonDocument__ContactConfig_t>>(_ContactConfigsOffset!.Value);
         }
     }
-    private static nint _SecondarySkeletonsOffset = -1;
+    private static nint? _SecondarySkeletonsOffset;
 
     public ref CUtlVector<CNmSkeletonDocument__SecondarySkeleton_t> SecondarySkeletons
     {
         get
         {
-            if (_SecondarySkeletonsOffset == -1) _SecondarySkeletonsOffset = Schema.GetOffset(0x470887F5782F396B);
-            return ref _Handle.AsRef<CUtlVector<CNmSkeletonDocument__SecondarySkeleton_t>>(_SecondarySkeletonsOffset);
+            _SecondarySkeletonsOffset = _SecondarySkeletonsOffset ?? Schema.GetOffset(0x470887F5782F396B);
+            return ref _Handle.AsRef<CUtlVector<CNmSkeletonDocument__SecondarySkeleton_t>>(_SecondarySkeletonsOffset!.Value);
         }
     }
-    private static nint _GameplayRelevantBonesOffset = -1;
+    private static nint? _GameplayRelevantBonesOffset;
 
     public ref CUtlVector<CGlobalSymbol> GameplayRelevantBones
     {
         get
         {
-            if (_GameplayRelevantBonesOffset == -1) _GameplayRelevantBonesOffset = Schema.GetOffset(0x470887F5FCB95FAF);
-            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_GameplayRelevantBonesOffset);
+            _GameplayRelevantBonesOffset = _GameplayRelevantBonesOffset ?? Schema.GetOffset(0x470887F5FCB95FAF);
+            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_GameplayRelevantBonesOffset!.Value);
         }
     }
-    private static nint _HighLODBonesOffset = -1;
+    private static nint? _HighLODBonesOffset;
 
     public ref CUtlVector<CGlobalSymbol> HighLODBones
     {
         get
         {
-            if (_HighLODBonesOffset == -1) _HighLODBonesOffset = Schema.GetOffset(0x470887F5F7E60EA7);
-            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_HighLODBonesOffset);
+            _HighLODBonesOffset = _HighLODBonesOffset ?? Schema.GetOffset(0x470887F5F7E60EA7);
+            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_HighLODBonesOffset!.Value);
         }
     }
-    private static nint _BoneMaskSetDefinitionsOffset = -1;
+    private static nint? _BoneMaskSetDefinitionsOffset;
 
     public ref CUtlVector<NmBoneMaskSetDefinition_t> BoneMaskSetDefinitions
     {
         get
         {
-            if (_BoneMaskSetDefinitionsOffset == -1) _BoneMaskSetDefinitionsOffset = Schema.GetOffset(0x470887F5AFBD1C5D);
-            return ref _Handle.AsRef<CUtlVector<NmBoneMaskSetDefinition_t>>(_BoneMaskSetDefinitionsOffset);
+            _BoneMaskSetDefinitionsOffset = _BoneMaskSetDefinitionsOffset ?? Schema.GetOffset(0x470887F5AFBD1C5D);
+            return ref _Handle.AsRef<CUtlVector<NmBoneMaskSetDefinition_t>>(_BoneMaskSetDefinitionsOffset!.Value);
         }
     }
-    private static nint _FloatChannelSetsOffset = -1;
+    private static nint? _FloatChannelSetsOffset;
 
     public ref CUtlVector<CNmFloatChannelSet_t> FloatChannelSets
     {
         get
         {
-            if (_FloatChannelSetsOffset == -1) _FloatChannelSetsOffset = Schema.GetOffset(0x470887F5FE339B8D);
-            return ref _Handle.AsRef<CUtlVector<CNmFloatChannelSet_t>>(_FloatChannelSetsOffset);
+            _FloatChannelSetsOffset = _FloatChannelSetsOffset ?? Schema.GetOffset(0x470887F5FE339B8D);
+            return ref _Handle.AsRef<CUtlVector<CNmFloatChannelSet_t>>(_FloatChannelSetsOffset!.Value);
         }
     }
-    private static nint _PreviewModelNameOffset = -1;
+    private static nint? _PreviewModelNameOffset;
 
     public string PreviewModelName
     {
         get
         {
-            if (_PreviewModelNameOffset == -1) _PreviewModelNameOffset = Schema.GetOffset(0x470887F5FA4DFF2F);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_PreviewModelNameOffset));
+            _PreviewModelNameOffset = _PreviewModelNameOffset ?? Schema.GetOffset(0x470887F5FA4DFF2F);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_PreviewModelNameOffset!.Value));
         }
         set
         {
-            if (_PreviewModelNameOffset == -1) _PreviewModelNameOffset = Schema.GetOffset(0x470887F5FA4DFF2F);
-            Schema.SetCUtlString(_Handle, _PreviewModelNameOffset, value);
+            _PreviewModelNameOffset = _PreviewModelNameOffset ?? Schema.GetOffset(0x470887F5FA4DFF2F);
+            Schema.SetCUtlString(_Handle, _PreviewModelNameOffset!.Value, value);
         }
     }
 

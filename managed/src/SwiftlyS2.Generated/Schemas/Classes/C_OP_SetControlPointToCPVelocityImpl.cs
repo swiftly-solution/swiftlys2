@@ -16,66 +16,66 @@ internal partial class C_OP_SetControlPointToCPVelocityImpl : CParticleFunctionP
 {
     public C_OP_SetControlPointToCPVelocityImpl(nint handle) : base(handle) { }
 
-    private static nint _CPInputOffset = -1;
+    private static nint? _CPInputOffset;
 
     public ref int CPInput
     {
         get
         {
-            if (_CPInputOffset == -1) _CPInputOffset = Schema.GetOffset(0x8D70A057FB805736);
-            return ref _Handle.AsRef<int>(_CPInputOffset);
+            _CPInputOffset = _CPInputOffset ?? Schema.GetOffset(0x8D70A057FB805736);
+            return ref _Handle.AsRef<int>(_CPInputOffset!.Value);
         }
     }
-    private static nint _CPOutputVelOffset = -1;
+    private static nint? _CPOutputVelOffset;
 
     public ref int CPOutputVel
     {
         get
         {
-            if (_CPOutputVelOffset == -1) _CPOutputVelOffset = Schema.GetOffset(0x8D70A0576AC86D06);
-            return ref _Handle.AsRef<int>(_CPOutputVelOffset);
+            _CPOutputVelOffset = _CPOutputVelOffset ?? Schema.GetOffset(0x8D70A0576AC86D06);
+            return ref _Handle.AsRef<int>(_CPOutputVelOffset!.Value);
         }
     }
-    private static nint _NormalizeOffset = -1;
+    private static nint? _NormalizeOffset;
 
     public ref bool Normalize
     {
         get
         {
-            if (_NormalizeOffset == -1) _NormalizeOffset = Schema.GetOffset(0x8D70A05748BC424C);
-            return ref _Handle.AsRef<bool>(_NormalizeOffset);
+            _NormalizeOffset = _NormalizeOffset ?? Schema.GetOffset(0x8D70A05748BC424C);
+            return ref _Handle.AsRef<bool>(_NormalizeOffset!.Value);
         }
     }
-    private static nint _CPOutputMagOffset = -1;
+    private static nint? _CPOutputMagOffset;
 
     public ref int CPOutputMag
     {
         get
         {
-            if (_CPOutputMagOffset == -1) _CPOutputMagOffset = Schema.GetOffset(0x8D70A05704FD82D2);
-            return ref _Handle.AsRef<int>(_CPOutputMagOffset);
+            _CPOutputMagOffset = _CPOutputMagOffset ?? Schema.GetOffset(0x8D70A05704FD82D2);
+            return ref _Handle.AsRef<int>(_CPOutputMagOffset!.Value);
         }
     }
-    private static nint _CPFieldOffset = -1;
+    private static nint? _CPFieldOffset;
 
     public ref int CPField
     {
         get
         {
-            if (_CPFieldOffset == -1) _CPFieldOffset = Schema.GetOffset(0x8D70A05750B79876);
-            return ref _Handle.AsRef<int>(_CPFieldOffset);
+            _CPFieldOffset = _CPFieldOffset ?? Schema.GetOffset(0x8D70A05750B79876);
+            return ref _Handle.AsRef<int>(_CPFieldOffset!.Value);
         }
     }
-    private static nint _ComparisonVelocityOffset = -1;
+    private static nint? _ComparisonVelocityOffset;
     private CParticleCollectionVecInputImpl? _ComparisonVelocityInstance;
 
     public CParticleCollectionVecInput ComparisonVelocity
     {
         get
         {
-            if (_ComparisonVelocityOffset == -1) _ComparisonVelocityOffset = Schema.GetOffset(0x8D70A05723BF409F);
+            _ComparisonVelocityOffset = _ComparisonVelocityOffset ?? Schema.GetOffset(0x8D70A05723BF409F);
             var instance = _ComparisonVelocityInstance ??= new CParticleCollectionVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _ComparisonVelocityOffset);
+            instance.DangerousSetHandle(_Handle + _ComparisonVelocityOffset!.Value);
             return instance;
         }
     }

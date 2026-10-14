@@ -16,84 +16,84 @@ internal partial class CVoiceContainerGranulatorImpl : CVoiceContainerAsyncGener
 {
     public CVoiceContainerGranulatorImpl(nint handle) : base(handle) { }
 
-    private static nint _GrainLengthOffset = -1;
+    private static nint? _GrainLengthOffset;
 
     public ref float GrainLength
     {
         get
         {
-            if (_GrainLengthOffset == -1) _GrainLengthOffset = Schema.GetOffset(0x30F273589D2BE672);
-            return ref _Handle.AsRef<float>(_GrainLengthOffset);
+            _GrainLengthOffset = _GrainLengthOffset ?? Schema.GetOffset(0x30F273589D2BE672);
+            return ref _Handle.AsRef<float>(_GrainLengthOffset!.Value);
         }
     }
-    private static nint _GrainCrossfadeAmountOffset = -1;
+    private static nint? _GrainCrossfadeAmountOffset;
 
     public ref float GrainCrossfadeAmount
     {
         get
         {
-            if (_GrainCrossfadeAmountOffset == -1) _GrainCrossfadeAmountOffset = Schema.GetOffset(0x30F27358AE31A7DC);
-            return ref _Handle.AsRef<float>(_GrainCrossfadeAmountOffset);
+            _GrainCrossfadeAmountOffset = _GrainCrossfadeAmountOffset ?? Schema.GetOffset(0x30F27358AE31A7DC);
+            return ref _Handle.AsRef<float>(_GrainCrossfadeAmountOffset!.Value);
         }
     }
-    private static nint _StartJitterOffset = -1;
+    private static nint? _StartJitterOffset;
 
     public ref float StartJitter
     {
         get
         {
-            if (_StartJitterOffset == -1) _StartJitterOffset = Schema.GetOffset(0x30F27358FBAD6833);
-            return ref _Handle.AsRef<float>(_StartJitterOffset);
+            _StartJitterOffset = _StartJitterOffset ?? Schema.GetOffset(0x30F27358FBAD6833);
+            return ref _Handle.AsRef<float>(_StartJitterOffset!.Value);
         }
     }
-    private static nint _PlaybackJitterOffset = -1;
+    private static nint? _PlaybackJitterOffset;
 
     public ref float PlaybackJitter
     {
         get
         {
-            if (_PlaybackJitterOffset == -1) _PlaybackJitterOffset = Schema.GetOffset(0x30F273583904EEB8);
-            return ref _Handle.AsRef<float>(_PlaybackJitterOffset);
+            _PlaybackJitterOffset = _PlaybackJitterOffset ?? Schema.GetOffset(0x30F273583904EEB8);
+            return ref _Handle.AsRef<float>(_PlaybackJitterOffset!.Value);
         }
     }
-    private static nint _ShouldWraparoundOffset = -1;
+    private static nint? _ShouldWraparoundOffset;
 
     public ref bool ShouldWraparound
     {
         get
         {
-            if (_ShouldWraparoundOffset == -1) _ShouldWraparoundOffset = Schema.GetOffset(0x30F273585F9E45A3);
-            return ref _Handle.AsRef<bool>(_ShouldWraparoundOffset);
+            _ShouldWraparoundOffset = _ShouldWraparoundOffset ?? Schema.GetOffset(0x30F273585F9E45A3);
+            return ref _Handle.AsRef<bool>(_ShouldWraparoundOffset!.Value);
         }
     }
-    private static nint _SourceAudioOffset = -1;
+    private static nint? _SourceAudioOffset;
 
     public ref CStrongHandle<InfoForResourceTypeCVoiceContainerBase> SourceAudio
     {
         get
         {
-            if (_SourceAudioOffset == -1) _SourceAudioOffset = Schema.GetOffset(0x30F27358E5E00DE2);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCVoiceContainerBase>>(_SourceAudioOffset);
+            _SourceAudioOffset = _SourceAudioOffset ?? Schema.GetOffset(0x30F27358E5E00DE2);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCVoiceContainerBase>>(_SourceAudioOffset!.Value);
         }
     }
-    private static nint _DoubleBufferSourceAudioOffset = -1;
+    private static nint? _DoubleBufferSourceAudioOffset;
 
     public ref bool DoubleBufferSourceAudio
     {
         get
         {
-            if (_DoubleBufferSourceAudioOffset == -1) _DoubleBufferSourceAudioOffset = Schema.GetOffset(0x30F2735898423C5B);
-            return ref _Handle.AsRef<bool>(_DoubleBufferSourceAudioOffset);
+            _DoubleBufferSourceAudioOffset = _DoubleBufferSourceAudioOffset ?? Schema.GetOffset(0x30F2735898423C5B);
+            return ref _Handle.AsRef<bool>(_DoubleBufferSourceAudioOffset!.Value);
         }
     }
-    private static nint _MaxSourceLengthOffset = -1;
+    private static nint? _MaxSourceLengthOffset;
 
     public ref float MaxSourceLength
     {
         get
         {
-            if (_MaxSourceLengthOffset == -1) _MaxSourceLengthOffset = Schema.GetOffset(0x30F27358ACF0A106);
-            return ref _Handle.AsRef<float>(_MaxSourceLengthOffset);
+            _MaxSourceLengthOffset = _MaxSourceLengthOffset ?? Schema.GetOffset(0x30F27358ACF0A106);
+            return ref _Handle.AsRef<float>(_MaxSourceLengthOffset!.Value);
         }
     }
 

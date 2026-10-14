@@ -16,14 +16,14 @@ internal partial class CPulseCell_SoundEventStartImpl : CPulseCell_BaseFlowImpl,
 {
     public CPulseCell_SoundEventStartImpl(nint handle) : base(handle) { }
 
-    private static nint _TypeOffset = -1;
+    private static nint? _TypeOffset;
 
     public ref SoundEventStartType_t Type
     {
         get
         {
-            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0x9CC546478ED6D5CD);
-            return ref _Handle.AsRef<SoundEventStartType_t>(_TypeOffset);
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x9CC546478ED6D5CD);
+            return ref _Handle.AsRef<SoundEventStartType_t>(_TypeOffset!.Value);
         }
     }
 

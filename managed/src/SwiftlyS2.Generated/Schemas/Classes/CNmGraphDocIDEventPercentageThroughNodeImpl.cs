@@ -16,44 +16,44 @@ internal partial class CNmGraphDocIDEventPercentageThroughNodeImpl : CNmGraphDoc
 {
     public CNmGraphDocIDEventPercentageThroughNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _PriorityRuleOffset = -1;
+    private static nint? _PriorityRuleOffset;
 
     public ref NmEventPriorityRule_t PriorityRule
     {
         get
         {
-            if (_PriorityRuleOffset == -1) _PriorityRuleOffset = Schema.GetOffset(0x393D0E0516C8898F);
-            return ref _Handle.AsRef<NmEventPriorityRule_t>(_PriorityRuleOffset);
+            _PriorityRuleOffset = _PriorityRuleOffset ?? Schema.GetOffset(0x393D0E0516C8898F);
+            return ref _Handle.AsRef<NmEventPriorityRule_t>(_PriorityRuleOffset!.Value);
         }
     }
-    private static nint _LimitSearchToSourceStateOffset = -1;
+    private static nint? _LimitSearchToSourceStateOffset;
 
     public ref bool LimitSearchToSourceState
     {
         get
         {
-            if (_LimitSearchToSourceStateOffset == -1) _LimitSearchToSourceStateOffset = Schema.GetOffset(0x393D0E0515D4BD01);
-            return ref _Handle.AsRef<bool>(_LimitSearchToSourceStateOffset);
+            _LimitSearchToSourceStateOffset = _LimitSearchToSourceStateOffset ?? Schema.GetOffset(0x393D0E0515D4BD01);
+            return ref _Handle.AsRef<bool>(_LimitSearchToSourceStateOffset!.Value);
         }
     }
-    private static nint _IgnoreInactiveBranchEventsOffset = -1;
+    private static nint? _IgnoreInactiveBranchEventsOffset;
 
     public ref bool IgnoreInactiveBranchEvents
     {
         get
         {
-            if (_IgnoreInactiveBranchEventsOffset == -1) _IgnoreInactiveBranchEventsOffset = Schema.GetOffset(0x393D0E0540B77877);
-            return ref _Handle.AsRef<bool>(_IgnoreInactiveBranchEventsOffset);
+            _IgnoreInactiveBranchEventsOffset = _IgnoreInactiveBranchEventsOffset ?? Schema.GetOffset(0x393D0E0540B77877);
+            return ref _Handle.AsRef<bool>(_IgnoreInactiveBranchEventsOffset!.Value);
         }
     }
-    private static nint _EventIDOffset = -1;
+    private static nint? _EventIDOffset;
 
     public ref CGlobalSymbol EventID
     {
         get
         {
-            if (_EventIDOffset == -1) _EventIDOffset = Schema.GetOffset(0x393D0E059D798A72);
-            return ref _Handle.AsRef<CGlobalSymbol>(_EventIDOffset);
+            _EventIDOffset = _EventIDOffset ?? Schema.GetOffset(0x393D0E059D798A72);
+            return ref _Handle.AsRef<CGlobalSymbol>(_EventIDOffset!.Value);
         }
     }
 

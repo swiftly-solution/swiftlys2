@@ -16,37 +16,37 @@ internal partial class C_INIT_Orient2DRelToCPImpl : CParticleFunctionInitializer
 {
     public C_INIT_Orient2DRelToCPImpl(nint handle) : base(handle) { }
 
-    private static nint _CPOffset = -1;
+    private static nint? _CPOffset;
 
     public ref int CP
     {
         get
         {
-            if (_CPOffset == -1) _CPOffset = Schema.GetOffset(0x4B55AD02EB661472);
-            return ref _Handle.AsRef<int>(_CPOffset);
+            _CPOffset = _CPOffset ?? Schema.GetOffset(0x4B55AD02EB661472);
+            return ref _Handle.AsRef<int>(_CPOffset!.Value);
         }
     }
-    private static nint _FieldOutputOffset = -1;
+    private static nint? _FieldOutputOffset;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0x4B55AD02E5729606);
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x4B55AD02E5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
             return instance;
         }
     }
-    private static nint _RotOffsetOffset = -1;
+    private static nint? _RotOffsetOffset;
 
     public ref float RotOffset
     {
         get
         {
-            if (_RotOffsetOffset == -1) _RotOffsetOffset = Schema.GetOffset(0x4B55AD02D1EA9CDF);
-            return ref _Handle.AsRef<float>(_RotOffsetOffset);
+            _RotOffsetOffset = _RotOffsetOffset ?? Schema.GetOffset(0x4B55AD02D1EA9CDF);
+            return ref _Handle.AsRef<float>(_RotOffsetOffset!.Value);
         }
     }
 

@@ -16,24 +16,24 @@ internal partial class C_EconWearableImpl : C_EconEntityImpl, C_EconWearable
 {
     public C_EconWearableImpl(nint handle) : base(handle) { }
 
-    private static nint _ForceSkinOffset = -1;
+    private static nint? _ForceSkinOffset;
 
     public ref int ForceSkin
     {
         get
         {
-            if (_ForceSkinOffset == -1) _ForceSkinOffset = Schema.GetOffset(0xB4499C85E5817B39);
-            return ref _Handle.AsRef<int>(_ForceSkinOffset);
+            _ForceSkinOffset = _ForceSkinOffset ?? Schema.GetOffset(0xB4499C85E5817B39);
+            return ref _Handle.AsRef<int>(_ForceSkinOffset!.Value);
         }
     }
-    private static nint _AlwaysAllowOffset = -1;
+    private static nint? _AlwaysAllowOffset;
 
     public ref bool AlwaysAllow
     {
         get
         {
-            if (_AlwaysAllowOffset == -1) _AlwaysAllowOffset = Schema.GetOffset(0xB4499C85AD06B805);
-            return ref _Handle.AsRef<bool>(_AlwaysAllowOffset);
+            _AlwaysAllowOffset = _AlwaysAllowOffset ?? Schema.GetOffset(0xB4499C85AD06B805);
+            return ref _Handle.AsRef<bool>(_AlwaysAllowOffset!.Value);
         }
     }
 

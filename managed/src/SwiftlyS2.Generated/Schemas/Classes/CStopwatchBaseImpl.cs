@@ -16,14 +16,14 @@ internal partial class CStopwatchBaseImpl : CSimpleSimTimerImpl, CStopwatchBase
 {
     public CStopwatchBaseImpl(nint handle) : base(handle) { }
 
-    private static nint _IsRunningOffset = -1;
+    private static nint? _IsRunningOffset;
 
     public ref bool IsRunning
     {
         get
         {
-            if (_IsRunningOffset == -1) _IsRunningOffset = Schema.GetOffset(0x80DA66DC45EC173C);
-            return ref _Handle.AsRef<bool>(_IsRunningOffset);
+            _IsRunningOffset = _IsRunningOffset ?? Schema.GetOffset(0x80DA66DC45EC173C);
+            return ref _Handle.AsRef<bool>(_IsRunningOffset!.Value);
         }
     }
 

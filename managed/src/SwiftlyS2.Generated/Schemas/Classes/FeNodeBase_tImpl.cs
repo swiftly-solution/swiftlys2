@@ -16,77 +16,77 @@ internal partial class FeNodeBase_tImpl : SchemaClass, FeNodeBase_t
 {
     public FeNodeBase_tImpl(nint handle) : base(handle) { }
 
-    private static nint _NodeOffset = -1;
+    private static nint? _NodeOffset;
 
     public ref ushort Node
     {
         get
         {
-            if (_NodeOffset == -1) _NodeOffset = Schema.GetOffset(0x74CA29BECD6694B9);
-            return ref _Handle.AsRef<ushort>(_NodeOffset);
+            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0x74CA29BECD6694B9);
+            return ref _Handle.AsRef<ushort>(_NodeOffset!.Value);
         }
     }
-    private static nint _DummyOffset = -1;
+    private static nint? _DummyOffset;
     private SchemaFixedArray<ushort>? _DummyInstance;
 
     public ISchemaFixedArray<ushort> Dummy
     {
         get
         {
-            if (_DummyOffset == -1) _DummyOffset = Schema.GetOffset(0x74CA29BECD8BAE5F);
+            _DummyOffset = _DummyOffset ?? Schema.GetOffset(0x74CA29BECD8BAE5F);
             var instance = _DummyInstance ??= new SchemaFixedArray<ushort>(0, 0x74CA29BECD8BAE5F, 3, 2, 2);
-            instance.DangerousSetHandle(_Handle + _DummyOffset);
+            instance.DangerousSetHandle(_Handle + _DummyOffset!.Value);
             return instance;
         }
     }
-    private static nint _NodeX0Offset = -1;
+    private static nint? _NodeX0Offset;
 
     public ref ushort NodeX0
     {
         get
         {
-            if (_NodeX0Offset == -1) _NodeX0Offset = Schema.GetOffset(0x74CA29BE81C7FEB9);
-            return ref _Handle.AsRef<ushort>(_NodeX0Offset);
+            _NodeX0Offset = _NodeX0Offset ?? Schema.GetOffset(0x74CA29BE81C7FEB9);
+            return ref _Handle.AsRef<ushort>(_NodeX0Offset!.Value);
         }
     }
-    private static nint _NodeX1Offset = -1;
+    private static nint? _NodeX1Offset;
 
     public ref ushort NodeX1
     {
         get
         {
-            if (_NodeX1Offset == -1) _NodeX1Offset = Schema.GetOffset(0x74CA29BE80C7FD26);
-            return ref _Handle.AsRef<ushort>(_NodeX1Offset);
+            _NodeX1Offset = _NodeX1Offset ?? Schema.GetOffset(0x74CA29BE80C7FD26);
+            return ref _Handle.AsRef<ushort>(_NodeX1Offset!.Value);
         }
     }
-    private static nint _NodeY0Offset = -1;
+    private static nint? _NodeY0Offset;
 
     public ref ushort NodeY0
     {
         get
         {
-            if (_NodeY0Offset == -1) _NodeY0Offset = Schema.GetOffset(0x74CA29BE7BC5B6B0);
-            return ref _Handle.AsRef<ushort>(_NodeY0Offset);
+            _NodeY0Offset = _NodeY0Offset ?? Schema.GetOffset(0x74CA29BE7BC5B6B0);
+            return ref _Handle.AsRef<ushort>(_NodeY0Offset!.Value);
         }
     }
-    private static nint _NodeY1Offset = -1;
+    private static nint? _NodeY1Offset;
 
     public ref ushort NodeY1
     {
         get
         {
-            if (_NodeY1Offset == -1) _NodeY1Offset = Schema.GetOffset(0x74CA29BE7CC5B843);
-            return ref _Handle.AsRef<ushort>(_NodeY1Offset);
+            _NodeY1Offset = _NodeY1Offset ?? Schema.GetOffset(0x74CA29BE7CC5B843);
+            return ref _Handle.AsRef<ushort>(_NodeY1Offset!.Value);
         }
     }
-    private static nint _AdjustOffset = -1;
+    private static nint? _AdjustOffset;
 
     public ref QuaternionStorage Adjust
     {
         get
         {
-            if (_AdjustOffset == -1) _AdjustOffset = Schema.GetOffset(0x74CA29BE0F6C0983);
-            return ref _Handle.AsRef<QuaternionStorage>(_AdjustOffset);
+            _AdjustOffset = _AdjustOffset ?? Schema.GetOffset(0x74CA29BE0F6C0983);
+            return ref _Handle.AsRef<QuaternionStorage>(_AdjustOffset!.Value);
         }
     }
 

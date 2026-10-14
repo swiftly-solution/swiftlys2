@@ -16,55 +16,55 @@ internal partial class CVMixFlangerProcessorDescImpl : CVMixBaseProcessorDescImp
 {
     public CVMixFlangerProcessorDescImpl(nint handle) : base(handle) { }
 
-    private static nint _DescOffset = -1;
+    private static nint? _DescOffset;
     private VMixFlangerDesc_tImpl? _DescInstance;
 
     public VMixFlangerDesc_t Desc
     {
         get
         {
-            if (_DescOffset == -1) _DescOffset = Schema.GetOffset(0x3FA67F8427917BC0);
+            _DescOffset = _DescOffset ?? Schema.GetOffset(0x3FA67F8427917BC0);
             var instance = _DescInstance ??= new VMixFlangerDesc_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _DescOffset);
+            instance.DangerousSetHandle(_Handle + _DescOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamDelayOffset = -1;
+    private static nint? _ParamDelayOffset;
     private CVMixParameterFloatImpl? _ParamDelayInstance;
 
     public CVMixParameterFloat ParamDelay
     {
         get
         {
-            if (_ParamDelayOffset == -1) _ParamDelayOffset = Schema.GetOffset(0x3FA67F84CA358765);
+            _ParamDelayOffset = _ParamDelayOffset ?? Schema.GetOffset(0x3FA67F84CA358765);
             var instance = _ParamDelayInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamDelayOffset);
+            instance.DangerousSetHandle(_Handle + _ParamDelayOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamModRateOffset = -1;
+    private static nint? _ParamModRateOffset;
     private CVMixParameterFloatImpl? _ParamModRateInstance;
 
     public CVMixParameterFloat ParamModRate
     {
         get
         {
-            if (_ParamModRateOffset == -1) _ParamModRateOffset = Schema.GetOffset(0x3FA67F84082299A4);
+            _ParamModRateOffset = _ParamModRateOffset ?? Schema.GetOffset(0x3FA67F84082299A4);
             var instance = _ParamModRateInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamModRateOffset);
+            instance.DangerousSetHandle(_Handle + _ParamModRateOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamModDepthOffset = -1;
+    private static nint? _ParamModDepthOffset;
     private CVMixParameterFloatImpl? _ParamModDepthInstance;
 
     public CVMixParameterFloat ParamModDepth
     {
         get
         {
-            if (_ParamModDepthOffset == -1) _ParamModDepthOffset = Schema.GetOffset(0x3FA67F84D9B8C77F);
+            _ParamModDepthOffset = _ParamModDepthOffset ?? Schema.GetOffset(0x3FA67F84D9B8C77F);
             var instance = _ParamModDepthInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamModDepthOffset);
+            instance.DangerousSetHandle(_Handle + _ParamModDepthOffset!.Value);
             return instance;
         }
     }

@@ -16,44 +16,44 @@ internal partial class EventAdvanceTick_tImpl : EventSimulate_tImpl, EventAdvanc
 {
     public EventAdvanceTick_tImpl(nint handle) : base(handle) { }
 
-    private static nint _CurrentTickOffset = -1;
+    private static nint? _CurrentTickOffset;
 
     public ref int CurrentTick
     {
         get
         {
-            if (_CurrentTickOffset == -1) _CurrentTickOffset = Schema.GetOffset(0xB79597D53C23687B);
-            return ref _Handle.AsRef<int>(_CurrentTickOffset);
+            _CurrentTickOffset = _CurrentTickOffset ?? Schema.GetOffset(0xB79597D53C23687B);
+            return ref _Handle.AsRef<int>(_CurrentTickOffset!.Value);
         }
     }
-    private static nint _CurrentTickThisFrameOffset = -1;
+    private static nint? _CurrentTickThisFrameOffset;
 
     public ref int CurrentTickThisFrame
     {
         get
         {
-            if (_CurrentTickThisFrameOffset == -1) _CurrentTickThisFrameOffset = Schema.GetOffset(0xB79597D509CE99F8);
-            return ref _Handle.AsRef<int>(_CurrentTickThisFrameOffset);
+            _CurrentTickThisFrameOffset = _CurrentTickThisFrameOffset ?? Schema.GetOffset(0xB79597D509CE99F8);
+            return ref _Handle.AsRef<int>(_CurrentTickThisFrameOffset!.Value);
         }
     }
-    private static nint _TotalTicksThisFrameOffset = -1;
+    private static nint? _TotalTicksThisFrameOffset;
 
     public ref int TotalTicksThisFrame
     {
         get
         {
-            if (_TotalTicksThisFrameOffset == -1) _TotalTicksThisFrameOffset = Schema.GetOffset(0xB79597D524EA7826);
-            return ref _Handle.AsRef<int>(_TotalTicksThisFrameOffset);
+            _TotalTicksThisFrameOffset = _TotalTicksThisFrameOffset ?? Schema.GetOffset(0xB79597D524EA7826);
+            return ref _Handle.AsRef<int>(_TotalTicksThisFrameOffset!.Value);
         }
     }
-    private static nint _TotalTicksOffset = -1;
+    private static nint? _TotalTicksOffset;
 
     public ref int TotalTicks
     {
         get
         {
-            if (_TotalTicksOffset == -1) _TotalTicksOffset = Schema.GetOffset(0xB79597D545397B31);
-            return ref _Handle.AsRef<int>(_TotalTicksOffset);
+            _TotalTicksOffset = _TotalTicksOffset ?? Schema.GetOffset(0xB79597D545397B31);
+            return ref _Handle.AsRef<int>(_TotalTicksOffset!.Value);
         }
     }
 

@@ -16,107 +16,107 @@ internal partial class C_OP_MaintainEmitterImpl : CParticleFunctionEmitterImpl, 
 {
     public C_OP_MaintainEmitterImpl(nint handle) : base(handle) { }
 
-    private static nint _ParticlesToMaintainOffset = -1;
+    private static nint? _ParticlesToMaintainOffset;
     private CParticleCollectionFloatInputImpl? _ParticlesToMaintainInstance;
 
     public CParticleCollectionFloatInput ParticlesToMaintain
     {
         get
         {
-            if (_ParticlesToMaintainOffset == -1) _ParticlesToMaintainOffset = Schema.GetOffset(0xAD7D6862537AE378);
+            _ParticlesToMaintainOffset = _ParticlesToMaintainOffset ?? Schema.GetOffset(0xAD7D6862537AE378);
             var instance = _ParticlesToMaintainInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParticlesToMaintainOffset);
+            instance.DangerousSetHandle(_Handle + _ParticlesToMaintainOffset!.Value);
             return instance;
         }
     }
-    private static nint _StartTimeOffset = -1;
+    private static nint? _StartTimeOffset;
 
     public ref float StartTime
     {
         get
         {
-            if (_StartTimeOffset == -1) _StartTimeOffset = Schema.GetOffset(0xAD7D686267FE9DC4);
-            return ref _Handle.AsRef<float>(_StartTimeOffset);
+            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0xAD7D686267FE9DC4);
+            return ref _Handle.AsRef<float>(_StartTimeOffset!.Value);
         }
     }
-    private static nint _EmissionDurationOffset = -1;
+    private static nint? _EmissionDurationOffset;
     private CParticleCollectionFloatInputImpl? _EmissionDurationInstance;
 
     public CParticleCollectionFloatInput EmissionDuration
     {
         get
         {
-            if (_EmissionDurationOffset == -1) _EmissionDurationOffset = Schema.GetOffset(0xAD7D686290181C90);
+            _EmissionDurationOffset = _EmissionDurationOffset ?? Schema.GetOffset(0xAD7D686290181C90);
             var instance = _EmissionDurationInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _EmissionDurationOffset);
+            instance.DangerousSetHandle(_Handle + _EmissionDurationOffset!.Value);
             return instance;
         }
     }
-    private static nint _EmissionRateOffset = -1;
+    private static nint? _EmissionRateOffset;
 
     public ref float EmissionRate
     {
         get
         {
-            if (_EmissionRateOffset == -1) _EmissionRateOffset = Schema.GetOffset(0xAD7D68620F6F6312);
-            return ref _Handle.AsRef<float>(_EmissionRateOffset);
+            _EmissionRateOffset = _EmissionRateOffset ?? Schema.GetOffset(0xAD7D68620F6F6312);
+            return ref _Handle.AsRef<float>(_EmissionRateOffset!.Value);
         }
     }
-    private static nint _SnapshotControlPointOffset = -1;
+    private static nint? _SnapshotControlPointOffset;
 
     public ref int SnapshotControlPoint
     {
         get
         {
-            if (_SnapshotControlPointOffset == -1) _SnapshotControlPointOffset = Schema.GetOffset(0xAD7D6862192638EC);
-            return ref _Handle.AsRef<int>(_SnapshotControlPointOffset);
+            _SnapshotControlPointOffset = _SnapshotControlPointOffset ?? Schema.GetOffset(0xAD7D6862192638EC);
+            return ref _Handle.AsRef<int>(_SnapshotControlPointOffset!.Value);
         }
     }
-    private static nint _StrSnapshotSubsetOffset = -1;
+    private static nint? _StrSnapshotSubsetOffset;
 
     public string StrSnapshotSubset
     {
         get
         {
-            if (_StrSnapshotSubsetOffset == -1) _StrSnapshotSubsetOffset = Schema.GetOffset(0xAD7D6862BD8A8E5E);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrSnapshotSubsetOffset));
+            _StrSnapshotSubsetOffset = _StrSnapshotSubsetOffset ?? Schema.GetOffset(0xAD7D6862BD8A8E5E);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrSnapshotSubsetOffset!.Value));
         }
         set
         {
-            if (_StrSnapshotSubsetOffset == -1) _StrSnapshotSubsetOffset = Schema.GetOffset(0xAD7D6862BD8A8E5E);
-            Schema.SetCUtlString(_Handle, _StrSnapshotSubsetOffset, value);
+            _StrSnapshotSubsetOffset = _StrSnapshotSubsetOffset ?? Schema.GetOffset(0xAD7D6862BD8A8E5E);
+            Schema.SetCUtlString(_Handle, _StrSnapshotSubsetOffset!.Value, value);
         }
     }
-    private static nint _EmitInstantaneouslyOffset = -1;
+    private static nint? _EmitInstantaneouslyOffset;
 
     public ref bool EmitInstantaneously
     {
         get
         {
-            if (_EmitInstantaneouslyOffset == -1) _EmitInstantaneouslyOffset = Schema.GetOffset(0xAD7D686205EFA03B);
-            return ref _Handle.AsRef<bool>(_EmitInstantaneouslyOffset);
+            _EmitInstantaneouslyOffset = _EmitInstantaneouslyOffset ?? Schema.GetOffset(0xAD7D686205EFA03B);
+            return ref _Handle.AsRef<bool>(_EmitInstantaneouslyOffset!.Value);
         }
     }
-    private static nint _FinalEmitOnStopOffset = -1;
+    private static nint? _FinalEmitOnStopOffset;
 
     public ref bool FinalEmitOnStop
     {
         get
         {
-            if (_FinalEmitOnStopOffset == -1) _FinalEmitOnStopOffset = Schema.GetOffset(0xAD7D68626A482A7D);
-            return ref _Handle.AsRef<bool>(_FinalEmitOnStopOffset);
+            _FinalEmitOnStopOffset = _FinalEmitOnStopOffset ?? Schema.GetOffset(0xAD7D68626A482A7D);
+            return ref _Handle.AsRef<bool>(_FinalEmitOnStopOffset!.Value);
         }
     }
-    private static nint _ScaleOffset = -1;
+    private static nint? _ScaleOffset;
     private CParticleCollectionFloatInputImpl? _ScaleInstance;
 
     public CParticleCollectionFloatInput Scale
     {
         get
         {
-            if (_ScaleOffset == -1) _ScaleOffset = Schema.GetOffset(0xAD7D6862B731A42F);
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0xAD7D6862B731A42F);
             var instance = _ScaleInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _ScaleOffset);
+            instance.DangerousSetHandle(_Handle + _ScaleOffset!.Value);
             return instance;
         }
     }

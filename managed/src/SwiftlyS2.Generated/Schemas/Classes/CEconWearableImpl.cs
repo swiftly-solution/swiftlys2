@@ -16,24 +16,24 @@ internal partial class CEconWearableImpl : CEconEntityImpl, CEconWearable
 {
     public CEconWearableImpl(nint handle) : base(handle) { }
 
-    private static nint _ForceSkinOffset = -1;
+    private static nint? _ForceSkinOffset;
 
     public ref int ForceSkin
     {
         get
         {
-            if (_ForceSkinOffset == -1) _ForceSkinOffset = Schema.GetOffset(0x491C03F4E5817B39);
-            return ref _Handle.AsRef<int>(_ForceSkinOffset);
+            _ForceSkinOffset = _ForceSkinOffset ?? Schema.GetOffset(0x491C03F4E5817B39);
+            return ref _Handle.AsRef<int>(_ForceSkinOffset!.Value);
         }
     }
-    private static nint _AlwaysAllowOffset = -1;
+    private static nint? _AlwaysAllowOffset;
 
     public ref bool AlwaysAllow
     {
         get
         {
-            if (_AlwaysAllowOffset == -1) _AlwaysAllowOffset = Schema.GetOffset(0x491C03F4AD06B805);
-            return ref _Handle.AsRef<bool>(_AlwaysAllowOffset);
+            _AlwaysAllowOffset = _AlwaysAllowOffset ?? Schema.GetOffset(0x491C03F4AD06B805);
+            return ref _Handle.AsRef<bool>(_AlwaysAllowOffset!.Value);
         }
     }
 

@@ -16,14 +16,14 @@ internal partial class CSSDSMsg_EndFrameImpl : SchemaClass, CSSDSMsg_EndFrame
 {
     public CSSDSMsg_EndFrameImpl(nint handle) : base(handle) { }
 
-    private static nint _ViewsOffset = -1;
+    private static nint? _ViewsOffset;
 
     public ref CUtlVector<CSSDSEndFrameViewInfo> Views
     {
         get
         {
-            if (_ViewsOffset == -1) _ViewsOffset = Schema.GetOffset(0x6F265E19E9FEAC51);
-            return ref _Handle.AsRef<CUtlVector<CSSDSEndFrameViewInfo>>(_ViewsOffset);
+            _ViewsOffset = _ViewsOffset ?? Schema.GetOffset(0x6F265E19E9FEAC51);
+            return ref _Handle.AsRef<CUtlVector<CSSDSEndFrameViewInfo>>(_ViewsOffset!.Value);
         }
     }
 

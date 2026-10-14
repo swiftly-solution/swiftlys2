@@ -16,54 +16,54 @@ internal partial class CEnvParticleGlowImpl : CParticleSystemImpl, CEnvParticleG
 {
     public CEnvParticleGlowImpl(nint handle) : base(handle) { }
 
-    private static nint _AlphaScaleOffset = -1;
+    private static nint? _AlphaScaleOffset;
 
     public ref float AlphaScale
     {
         get
         {
-            if (_AlphaScaleOffset == -1) _AlphaScaleOffset = Schema.GetOffset(0x38100F3AEC6D3C25);
-            return ref _Handle.AsRef<float>(_AlphaScaleOffset);
+            _AlphaScaleOffset = _AlphaScaleOffset ?? Schema.GetOffset(0x38100F3AEC6D3C25);
+            return ref _Handle.AsRef<float>(_AlphaScaleOffset!.Value);
         }
     }
-    private static nint _RadiusScaleOffset = -1;
+    private static nint? _RadiusScaleOffset;
 
     public ref float RadiusScale
     {
         get
         {
-            if (_RadiusScaleOffset == -1) _RadiusScaleOffset = Schema.GetOffset(0x38100F3AA7A20159);
-            return ref _Handle.AsRef<float>(_RadiusScaleOffset);
+            _RadiusScaleOffset = _RadiusScaleOffset ?? Schema.GetOffset(0x38100F3AA7A20159);
+            return ref _Handle.AsRef<float>(_RadiusScaleOffset!.Value);
         }
     }
-    private static nint _SelfIllumScaleOffset = -1;
+    private static nint? _SelfIllumScaleOffset;
 
     public ref float SelfIllumScale
     {
         get
         {
-            if (_SelfIllumScaleOffset == -1) _SelfIllumScaleOffset = Schema.GetOffset(0x38100F3A0478CE14);
-            return ref _Handle.AsRef<float>(_SelfIllumScaleOffset);
+            _SelfIllumScaleOffset = _SelfIllumScaleOffset ?? Schema.GetOffset(0x38100F3A0478CE14);
+            return ref _Handle.AsRef<float>(_SelfIllumScaleOffset!.Value);
         }
     }
-    private static nint _ColorTintOffset = -1;
+    private static nint? _ColorTintOffset;
 
     public ref Color ColorTint
     {
         get
         {
-            if (_ColorTintOffset == -1) _ColorTintOffset = Schema.GetOffset(0x38100F3AD55CDDFD);
-            return ref _Handle.AsRef<Color>(_ColorTintOffset);
+            _ColorTintOffset = _ColorTintOffset ?? Schema.GetOffset(0x38100F3AD55CDDFD);
+            return ref _Handle.AsRef<Color>(_ColorTintOffset!.Value);
         }
     }
-    private static nint _TextureOverrideOffset = -1;
+    private static nint? _TextureOverrideOffset;
 
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureOverride
     {
         get
         {
-            if (_TextureOverrideOffset == -1) _TextureOverrideOffset = Schema.GetOffset(0x38100F3AEC1F5A56);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureOverrideOffset);
+            _TextureOverrideOffset = _TextureOverrideOffset ?? Schema.GetOffset(0x38100F3AEC1F5A56);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureOverrideOffset!.Value);
         }
     }
 

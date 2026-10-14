@@ -16,14 +16,14 @@ internal partial class C_INIT_SequenceLifeTimeImpl : CParticleFunctionInitialize
 {
     public C_INIT_SequenceLifeTimeImpl(nint handle) : base(handle) { }
 
-    private static nint _FramerateOffset = -1;
+    private static nint? _FramerateOffset;
 
     public ref float Framerate
     {
         get
         {
-            if (_FramerateOffset == -1) _FramerateOffset = Schema.GetOffset(0xC4BD3FF8F4EAA666);
-            return ref _Handle.AsRef<float>(_FramerateOffset);
+            _FramerateOffset = _FramerateOffset ?? Schema.GetOffset(0xC4BD3FF8F4EAA666);
+            return ref _Handle.AsRef<float>(_FramerateOffset!.Value);
         }
     }
 

@@ -16,37 +16,37 @@ internal partial class CRootMotionImpl : SchemaClass, CRootMotion
 {
     public CRootMotionImpl(nint handle) : base(handle) { }
 
-    private static nint _DeltaTransformOffset = -1;
+    private static nint? _DeltaTransformOffset;
     private SchemaUntypedField? _DeltaTransformInstance;
 
     public SchemaUntypedField DeltaTransform
     {
         get
         {
-            if (_DeltaTransformOffset == -1) _DeltaTransformOffset = Schema.GetOffset(0xC7D44244B5B7D687);
+            _DeltaTransformOffset = _DeltaTransformOffset ?? Schema.GetOffset(0xC7D44244B5B7D687);
             var instance = _DeltaTransformInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _DeltaTransformOffset);
+            instance.DangerousSetHandle(_Handle + _DeltaTransformOffset!.Value);
             return instance;
         }
     }
-    private static nint _VelocityMSOffset = -1;
+    private static nint? _VelocityMSOffset;
 
     public ref Vector VelocityMS
     {
         get
         {
-            if (_VelocityMSOffset == -1) _VelocityMSOffset = Schema.GetOffset(0xC7D442445D4CE9AE);
-            return ref _Handle.AsRef<Vector>(_VelocityMSOffset);
+            _VelocityMSOffset = _VelocityMSOffset ?? Schema.GetOffset(0xC7D442445D4CE9AE);
+            return ref _Handle.AsRef<Vector>(_VelocityMSOffset!.Value);
         }
     }
-    private static nint _UpOverrideOffset = -1;
+    private static nint? _UpOverrideOffset;
 
     public ref Vector UpOverride
     {
         get
         {
-            if (_UpOverrideOffset == -1) _UpOverrideOffset = Schema.GetOffset(0xC7D4424428D9D8F4);
-            return ref _Handle.AsRef<Vector>(_UpOverrideOffset);
+            _UpOverrideOffset = _UpOverrideOffset ?? Schema.GetOffset(0xC7D4424428D9D8F4);
+            return ref _Handle.AsRef<Vector>(_UpOverrideOffset!.Value);
         }
     }
 

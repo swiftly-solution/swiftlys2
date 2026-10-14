@@ -16,76 +16,76 @@ internal partial class CBoneMaskUpdateNodeImpl : CBinaryUpdateNodeImpl, CBoneMas
 {
     public CBoneMaskUpdateNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _WeightListIndexOffset = -1;
+    private static nint? _WeightListIndexOffset;
 
     public ref int WeightListIndex
     {
         get
         {
-            if (_WeightListIndexOffset == -1) _WeightListIndexOffset = Schema.GetOffset(0x213CBA4D30288377);
-            return ref _Handle.AsRef<int>(_WeightListIndexOffset);
+            _WeightListIndexOffset = _WeightListIndexOffset ?? Schema.GetOffset(0x213CBA4D30288377);
+            return ref _Handle.AsRef<int>(_WeightListIndexOffset!.Value);
         }
     }
-    private static nint _RootMotionBlendOffset = -1;
+    private static nint? _RootMotionBlendOffset;
 
     public ref float RootMotionBlend
     {
         get
         {
-            if (_RootMotionBlendOffset == -1) _RootMotionBlendOffset = Schema.GetOffset(0x213CBA4DAF24631C);
-            return ref _Handle.AsRef<float>(_RootMotionBlendOffset);
+            _RootMotionBlendOffset = _RootMotionBlendOffset ?? Schema.GetOffset(0x213CBA4DAF24631C);
+            return ref _Handle.AsRef<float>(_RootMotionBlendOffset!.Value);
         }
     }
-    private static nint _BlendSpaceOffset = -1;
+    private static nint? _BlendSpaceOffset;
 
     public ref BoneMaskBlendSpace BlendSpace
     {
         get
         {
-            if (_BlendSpaceOffset == -1) _BlendSpaceOffset = Schema.GetOffset(0x213CBA4D9DCBC41E);
-            return ref _Handle.AsRef<BoneMaskBlendSpace>(_BlendSpaceOffset);
+            _BlendSpaceOffset = _BlendSpaceOffset ?? Schema.GetOffset(0x213CBA4D9DCBC41E);
+            return ref _Handle.AsRef<BoneMaskBlendSpace>(_BlendSpaceOffset!.Value);
         }
     }
-    private static nint _FootMotionTimingOffset = -1;
+    private static nint? _FootMotionTimingOffset;
 
     public ref BinaryNodeChildOption FootMotionTiming
     {
         get
         {
-            if (_FootMotionTimingOffset == -1) _FootMotionTimingOffset = Schema.GetOffset(0x213CBA4DBB17F13D);
-            return ref _Handle.AsRef<BinaryNodeChildOption>(_FootMotionTimingOffset);
+            _FootMotionTimingOffset = _FootMotionTimingOffset ?? Schema.GetOffset(0x213CBA4DBB17F13D);
+            return ref _Handle.AsRef<BinaryNodeChildOption>(_FootMotionTimingOffset!.Value);
         }
     }
-    private static nint _UseBlendScaleOffset = -1;
+    private static nint? _UseBlendScaleOffset;
 
     public ref bool UseBlendScale
     {
         get
         {
-            if (_UseBlendScaleOffset == -1) _UseBlendScaleOffset = Schema.GetOffset(0x213CBA4DF5B40057);
-            return ref _Handle.AsRef<bool>(_UseBlendScaleOffset);
+            _UseBlendScaleOffset = _UseBlendScaleOffset ?? Schema.GetOffset(0x213CBA4DF5B40057);
+            return ref _Handle.AsRef<bool>(_UseBlendScaleOffset!.Value);
         }
     }
-    private static nint _BlendValueSourceOffset = -1;
+    private static nint? _BlendValueSourceOffset;
 
     public ref AnimValueSource BlendValueSource
     {
         get
         {
-            if (_BlendValueSourceOffset == -1) _BlendValueSourceOffset = Schema.GetOffset(0x213CBA4D7AB7C374);
-            return ref _Handle.AsRef<AnimValueSource>(_BlendValueSourceOffset);
+            _BlendValueSourceOffset = _BlendValueSourceOffset ?? Schema.GetOffset(0x213CBA4D7AB7C374);
+            return ref _Handle.AsRef<AnimValueSource>(_BlendValueSourceOffset!.Value);
         }
     }
-    private static nint _BlendParameterOffset = -1;
+    private static nint? _BlendParameterOffset;
     private CAnimParamHandleImpl? _BlendParameterInstance;
 
     public CAnimParamHandle BlendParameter
     {
         get
         {
-            if (_BlendParameterOffset == -1) _BlendParameterOffset = Schema.GetOffset(0x213CBA4D40990659);
+            _BlendParameterOffset = _BlendParameterOffset ?? Schema.GetOffset(0x213CBA4D40990659);
             var instance = _BlendParameterInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _BlendParameterOffset);
+            instance.DangerousSetHandle(_Handle + _BlendParameterOffset!.Value);
             return instance;
         }
     }

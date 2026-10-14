@@ -16,39 +16,39 @@ internal partial class inv_image_item_tImpl : SchemaClass, inv_image_item_t
 {
     public inv_image_item_tImpl(nint handle) : base(handle) { }
 
-    private static nint _PositionOffset = -1;
+    private static nint? _PositionOffset;
 
     public ref Vector Position
     {
         get
         {
-            if (_PositionOffset == -1) _PositionOffset = Schema.GetOffset(0xA62D7FA3934F4E0A);
-            return ref _Handle.AsRef<Vector>(_PositionOffset);
+            _PositionOffset = _PositionOffset ?? Schema.GetOffset(0xA62D7FA3934F4E0A);
+            return ref _Handle.AsRef<Vector>(_PositionOffset!.Value);
         }
     }
-    private static nint _AngleOffset = -1;
+    private static nint? _AngleOffset;
 
     public ref QAngle Angle
     {
         get
         {
-            if (_AngleOffset == -1) _AngleOffset = Schema.GetOffset(0xA62D7FA3AD544418);
-            return ref _Handle.AsRef<QAngle>(_AngleOffset);
+            _AngleOffset = _AngleOffset ?? Schema.GetOffset(0xA62D7FA3AD544418);
+            return ref _Handle.AsRef<QAngle>(_AngleOffset!.Value);
         }
     }
-    private static nint _Pose_sequenceOffset = -1;
+    private static nint? _Pose_sequenceOffset;
 
     public string Pose_sequence
     {
         get
         {
-            if (_Pose_sequenceOffset == -1) _Pose_sequenceOffset = Schema.GetOffset(0xA62D7FA3830B192C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_Pose_sequenceOffset));
+            _Pose_sequenceOffset = _Pose_sequenceOffset ?? Schema.GetOffset(0xA62D7FA3830B192C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_Pose_sequenceOffset!.Value));
         }
         set
         {
-            if (_Pose_sequenceOffset == -1) _Pose_sequenceOffset = Schema.GetOffset(0xA62D7FA3830B192C);
-            Schema.SetCUtlString(_Handle, _Pose_sequenceOffset, value);
+            _Pose_sequenceOffset = _Pose_sequenceOffset ?? Schema.GetOffset(0xA62D7FA3830B192C);
+            Schema.SetCUtlString(_Handle, _Pose_sequenceOffset!.Value, value);
         }
     }
 

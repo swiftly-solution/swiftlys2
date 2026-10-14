@@ -16,70 +16,70 @@ internal partial class CRemapValueUpdateItemImpl : SchemaClass, CRemapValueUpdat
 {
     public CRemapValueUpdateItemImpl(nint handle) : base(handle) { }
 
-    private static nint _ParamInOffset = -1;
+    private static nint? _ParamInOffset;
     private CAnimParamHandleImpl? _ParamInInstance;
 
     public CAnimParamHandle ParamIn
     {
         get
         {
-            if (_ParamInOffset == -1) _ParamInOffset = Schema.GetOffset(0x93C5E8D6ED40E37B);
+            _ParamInOffset = _ParamInOffset ?? Schema.GetOffset(0x93C5E8D6ED40E37B);
             var instance = _ParamInInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamInOffset);
+            instance.DangerousSetHandle(_Handle + _ParamInOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamOutOffset = -1;
+    private static nint? _ParamOutOffset;
     private CAnimParamHandleImpl? _ParamOutInstance;
 
     public CAnimParamHandle ParamOut
     {
         get
         {
-            if (_ParamOutOffset == -1) _ParamOutOffset = Schema.GetOffset(0x93C5E8D6AA5799A8);
+            _ParamOutOffset = _ParamOutOffset ?? Schema.GetOffset(0x93C5E8D6AA5799A8);
             var instance = _ParamOutInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamOutOffset);
+            instance.DangerousSetHandle(_Handle + _ParamOutOffset!.Value);
             return instance;
         }
     }
-    private static nint _MinInputValueOffset = -1;
+    private static nint? _MinInputValueOffset;
 
     public ref float MinInputValue
     {
         get
         {
-            if (_MinInputValueOffset == -1) _MinInputValueOffset = Schema.GetOffset(0x93C5E8D6BDB4BC64);
-            return ref _Handle.AsRef<float>(_MinInputValueOffset);
+            _MinInputValueOffset = _MinInputValueOffset ?? Schema.GetOffset(0x93C5E8D6BDB4BC64);
+            return ref _Handle.AsRef<float>(_MinInputValueOffset!.Value);
         }
     }
-    private static nint _MaxInputValueOffset = -1;
+    private static nint? _MaxInputValueOffset;
 
     public ref float MaxInputValue
     {
         get
         {
-            if (_MaxInputValueOffset == -1) _MaxInputValueOffset = Schema.GetOffset(0x93C5E8D63EF75C2A);
-            return ref _Handle.AsRef<float>(_MaxInputValueOffset);
+            _MaxInputValueOffset = _MaxInputValueOffset ?? Schema.GetOffset(0x93C5E8D63EF75C2A);
+            return ref _Handle.AsRef<float>(_MaxInputValueOffset!.Value);
         }
     }
-    private static nint _MinOutputValueOffset = -1;
+    private static nint? _MinOutputValueOffset;
 
     public ref float MinOutputValue
     {
         get
         {
-            if (_MinOutputValueOffset == -1) _MinOutputValueOffset = Schema.GetOffset(0x93C5E8D6F63C7011);
-            return ref _Handle.AsRef<float>(_MinOutputValueOffset);
+            _MinOutputValueOffset = _MinOutputValueOffset ?? Schema.GetOffset(0x93C5E8D6F63C7011);
+            return ref _Handle.AsRef<float>(_MinOutputValueOffset!.Value);
         }
     }
-    private static nint _MaxOutputValueOffset = -1;
+    private static nint? _MaxOutputValueOffset;
 
     public ref float MaxOutputValue
     {
         get
         {
-            if (_MaxOutputValueOffset == -1) _MaxOutputValueOffset = Schema.GetOffset(0x93C5E8D6A91B71B3);
-            return ref _Handle.AsRef<float>(_MaxOutputValueOffset);
+            _MaxOutputValueOffset = _MaxOutputValueOffset ?? Schema.GetOffset(0x93C5E8D6A91B71B3);
+            return ref _Handle.AsRef<float>(_MaxOutputValueOffset!.Value);
         }
     }
 

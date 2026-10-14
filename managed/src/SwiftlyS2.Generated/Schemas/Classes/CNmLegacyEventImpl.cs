@@ -16,31 +16,31 @@ internal partial class CNmLegacyEventImpl : CNmEventImpl, CNmLegacyEvent
 {
     public CNmLegacyEventImpl(nint handle) : base(handle) { }
 
-    private static nint _AnimEventClassNameOffset = -1;
+    private static nint? _AnimEventClassNameOffset;
 
     public string AnimEventClassName
     {
         get
         {
-            if (_AnimEventClassNameOffset == -1) _AnimEventClassNameOffset = Schema.GetOffset(0x78C36574C276DA33);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_AnimEventClassNameOffset));
+            _AnimEventClassNameOffset = _AnimEventClassNameOffset ?? Schema.GetOffset(0x78C36574C276DA33);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_AnimEventClassNameOffset!.Value));
         }
         set
         {
-            if (_AnimEventClassNameOffset == -1) _AnimEventClassNameOffset = Schema.GetOffset(0x78C36574C276DA33);
-            Schema.SetCUtlString(_Handle, _AnimEventClassNameOffset, value);
+            _AnimEventClassNameOffset = _AnimEventClassNameOffset ?? Schema.GetOffset(0x78C36574C276DA33);
+            Schema.SetCUtlString(_Handle, _AnimEventClassNameOffset!.Value, value);
         }
     }
-    private static nint _KVOffset = -1;
+    private static nint? _KVOffset;
     private SchemaUntypedField? _KVInstance;
 
     public SchemaUntypedField KV
     {
         get
         {
-            if (_KVOffset == -1) _KVOffset = Schema.GetOffset(0x78C36574F70B8074);
+            _KVOffset = _KVOffset ?? Schema.GetOffset(0x78C36574F70B8074);
             var instance = _KVInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _KVOffset);
+            instance.DangerousSetHandle(_Handle + _KVOffset!.Value);
             return instance;
         }
     }

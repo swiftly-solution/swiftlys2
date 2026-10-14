@@ -16,16 +16,16 @@ internal partial class PairedSequenceDataImpl : SchemaClass, PairedSequenceData
 {
     public PairedSequenceDataImpl(nint handle) : base(handle) { }
 
-    private static nint _PairedSequencesOffset = -1;
+    private static nint? _PairedSequencesOffset;
     private SchemaClassFixedArray<PairedSequence_t>? _PairedSequencesInstance;
 
     public ISchemaClassFixedArray<PairedSequence_t> PairedSequences
     {
         get
         {
-            if (_PairedSequencesOffset == -1) _PairedSequencesOffset = Schema.GetOffset(0x8EAA5275E703C552);
+            _PairedSequencesOffset = _PairedSequencesOffset ?? Schema.GetOffset(0x8EAA5275E703C552);
             var instance = _PairedSequencesInstance ??= new SchemaClassFixedArray<PairedSequence_t>(0, 0x8EAA5275E703C552, 8, 32, 8);
-            instance.DangerousSetHandle(_Handle + _PairedSequencesOffset);
+            instance.DangerousSetHandle(_Handle + _PairedSequencesOffset!.Value);
             return instance;
         }
     }

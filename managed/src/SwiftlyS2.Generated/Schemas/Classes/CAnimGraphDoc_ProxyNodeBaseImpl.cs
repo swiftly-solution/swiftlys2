@@ -16,14 +16,14 @@ internal partial class CAnimGraphDoc_ProxyNodeBaseImpl : CAnimGraphDoc_NodeImpl,
 {
     public CAnimGraphDoc_ProxyNodeBaseImpl(nint handle) : base(handle) { }
 
-    private static nint _ProxyItemsOffset = -1;
+    private static nint? _ProxyItemsOffset;
 
     public ref CUtlVector<CConnectionProxyItem> ProxyItems
     {
         get
         {
-            if (_ProxyItemsOffset == -1) _ProxyItemsOffset = Schema.GetOffset(0x50F8951F5C6DDCDD);
-            return ref _Handle.AsRef<CUtlVector<CConnectionProxyItem>>(_ProxyItemsOffset);
+            _ProxyItemsOffset = _ProxyItemsOffset ?? Schema.GetOffset(0x50F8951F5C6DDCDD);
+            return ref _Handle.AsRef<CUtlVector<CConnectionProxyItem>>(_ProxyItemsOffset!.Value);
         }
     }
 

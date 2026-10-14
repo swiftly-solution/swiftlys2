@@ -16,54 +16,54 @@ internal partial class CNmRootMotionDataImpl : SchemaClass, CNmRootMotionData
 {
     public CNmRootMotionDataImpl(nint handle) : base(handle) { }
 
-    private static nint _TransformsOffset = -1;
+    private static nint? _TransformsOffset;
 
     public ref CUtlVector<CTransform> Transforms
     {
         get
         {
-            if (_TransformsOffset == -1) _TransformsOffset = Schema.GetOffset(0x2E2BC46D88C82C58);
-            return ref _Handle.AsRef<CUtlVector<CTransform>>(_TransformsOffset);
+            _TransformsOffset = _TransformsOffset ?? Schema.GetOffset(0x2E2BC46D88C82C58);
+            return ref _Handle.AsRef<CUtlVector<CTransform>>(_TransformsOffset!.Value);
         }
     }
-    private static nint _NumFramesOffset = -1;
+    private static nint? _NumFramesOffset;
 
     public ref int NumFrames
     {
         get
         {
-            if (_NumFramesOffset == -1) _NumFramesOffset = Schema.GetOffset(0x2E2BC46DF764C355);
-            return ref _Handle.AsRef<int>(_NumFramesOffset);
+            _NumFramesOffset = _NumFramesOffset ?? Schema.GetOffset(0x2E2BC46DF764C355);
+            return ref _Handle.AsRef<int>(_NumFramesOffset!.Value);
         }
     }
-    private static nint _AverageLinearVelocityOffset = -1;
+    private static nint? _AverageLinearVelocityOffset;
 
     public ref float AverageLinearVelocity
     {
         get
         {
-            if (_AverageLinearVelocityOffset == -1) _AverageLinearVelocityOffset = Schema.GetOffset(0x2E2BC46D497EE0D4);
-            return ref _Handle.AsRef<float>(_AverageLinearVelocityOffset);
+            _AverageLinearVelocityOffset = _AverageLinearVelocityOffset ?? Schema.GetOffset(0x2E2BC46D497EE0D4);
+            return ref _Handle.AsRef<float>(_AverageLinearVelocityOffset!.Value);
         }
     }
-    private static nint _AverageAngularVelocityRadiansOffset = -1;
+    private static nint? _AverageAngularVelocityRadiansOffset;
 
     public ref float AverageAngularVelocityRadians
     {
         get
         {
-            if (_AverageAngularVelocityRadiansOffset == -1) _AverageAngularVelocityRadiansOffset = Schema.GetOffset(0x2E2BC46D11C83D0F);
-            return ref _Handle.AsRef<float>(_AverageAngularVelocityRadiansOffset);
+            _AverageAngularVelocityRadiansOffset = _AverageAngularVelocityRadiansOffset ?? Schema.GetOffset(0x2E2BC46D11C83D0F);
+            return ref _Handle.AsRef<float>(_AverageAngularVelocityRadiansOffset!.Value);
         }
     }
-    private static nint _TotalDeltaOffset = -1;
+    private static nint? _TotalDeltaOffset;
 
     public ref CTransform TotalDelta
     {
         get
         {
-            if (_TotalDeltaOffset == -1) _TotalDeltaOffset = Schema.GetOffset(0x2E2BC46D71CA0F99);
-            return ref _Handle.AsRef<CTransform>(_TotalDeltaOffset);
+            _TotalDeltaOffset = _TotalDeltaOffset ?? Schema.GetOffset(0x2E2BC46D71CA0F99);
+            return ref _Handle.AsRef<CTransform>(_TotalDeltaOffset!.Value);
         }
     }
 

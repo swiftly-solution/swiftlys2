@@ -16,132 +16,132 @@ internal partial class OldFeEdge_tImpl : SchemaClass, OldFeEdge_t
 {
     public OldFeEdge_tImpl(nint handle) : base(handle) { }
 
-    private static nint _KOffset = -1;
+    private static nint? _KOffset;
     private SchemaFixedArray<float>? _KInstance;
 
     public ISchemaFixedArray<float> K
     {
         get
         {
-            if (_KOffset == -1) _KOffset = Schema.GetOffset(0xBAF074C17C12054C);
+            _KOffset = _KOffset ?? Schema.GetOffset(0xBAF074C17C12054C);
             var instance = _KInstance ??= new SchemaFixedArray<float>(0, 0xBAF074C17C12054C, 3, 4, 4);
-            instance.DangerousSetHandle(_Handle + _KOffset);
+            instance.DangerousSetHandle(_Handle + _KOffset!.Value);
             return instance;
         }
     }
-    private static nint _InvAOffset = -1;
+    private static nint? _InvAOffset;
 
     public ref float InvA
     {
         get
         {
-            if (_InvAOffset == -1) _InvAOffset = Schema.GetOffset(0xBAF074C1518D5F7B);
-            return ref _Handle.AsRef<float>(_InvAOffset);
+            _InvAOffset = _InvAOffset ?? Schema.GetOffset(0xBAF074C1518D5F7B);
+            return ref _Handle.AsRef<float>(_InvAOffset!.Value);
         }
     }
-    private static nint _TOffset = -1;
+    private static nint? _TOffset;
 
     public ref float T
     {
         get
         {
-            if (_TOffset == -1) _TOffset = Schema.GetOffset(0xBAF074C1F10C3DA3);
-            return ref _Handle.AsRef<float>(_TOffset);
+            _TOffset = _TOffset ?? Schema.GetOffset(0xBAF074C1F10C3DA3);
+            return ref _Handle.AsRef<float>(_TOffset!.Value);
         }
     }
-    private static nint _ThetaRelaxedOffset = -1;
+    private static nint? _ThetaRelaxedOffset;
 
     public ref float ThetaRelaxed
     {
         get
         {
-            if (_ThetaRelaxedOffset == -1) _ThetaRelaxedOffset = Schema.GetOffset(0xBAF074C14C35B770);
-            return ref _Handle.AsRef<float>(_ThetaRelaxedOffset);
+            _ThetaRelaxedOffset = _ThetaRelaxedOffset ?? Schema.GetOffset(0xBAF074C14C35B770);
+            return ref _Handle.AsRef<float>(_ThetaRelaxedOffset!.Value);
         }
     }
-    private static nint _ThetaFactorOffset = -1;
+    private static nint? _ThetaFactorOffset;
 
     public ref float ThetaFactor
     {
         get
         {
-            if (_ThetaFactorOffset == -1) _ThetaFactorOffset = Schema.GetOffset(0xBAF074C165B8FFDA);
-            return ref _Handle.AsRef<float>(_ThetaFactorOffset);
+            _ThetaFactorOffset = _ThetaFactorOffset ?? Schema.GetOffset(0xBAF074C165B8FFDA);
+            return ref _Handle.AsRef<float>(_ThetaFactorOffset!.Value);
         }
     }
-    private static nint _C01Offset = -1;
+    private static nint? _C01Offset;
 
     public ref float C01
     {
         get
         {
-            if (_C01Offset == -1) _C01Offset = Schema.GetOffset(0xBAF074C13DE93555);
-            return ref _Handle.AsRef<float>(_C01Offset);
+            _C01Offset = _C01Offset ?? Schema.GetOffset(0xBAF074C13DE93555);
+            return ref _Handle.AsRef<float>(_C01Offset!.Value);
         }
     }
-    private static nint _C02Offset = -1;
+    private static nint? _C02Offset;
 
     public ref float C02
     {
         get
         {
-            if (_C02Offset == -1) _C02Offset = Schema.GetOffset(0xBAF074C13AE9309C);
-            return ref _Handle.AsRef<float>(_C02Offset);
+            _C02Offset = _C02Offset ?? Schema.GetOffset(0xBAF074C13AE9309C);
+            return ref _Handle.AsRef<float>(_C02Offset!.Value);
         }
     }
-    private static nint _C03Offset = -1;
+    private static nint? _C03Offset;
 
     public ref float C03
     {
         get
         {
-            if (_C03Offset == -1) _C03Offset = Schema.GetOffset(0xBAF074C13BE9322F);
-            return ref _Handle.AsRef<float>(_C03Offset);
+            _C03Offset = _C03Offset ?? Schema.GetOffset(0xBAF074C13BE9322F);
+            return ref _Handle.AsRef<float>(_C03Offset!.Value);
         }
     }
-    private static nint _C04Offset = -1;
+    private static nint? _C04Offset;
 
     public ref float C04
     {
         get
         {
-            if (_C04Offset == -1) _C04Offset = Schema.GetOffset(0xBAF074C138E92D76);
-            return ref _Handle.AsRef<float>(_C04Offset);
+            _C04Offset = _C04Offset ?? Schema.GetOffset(0xBAF074C138E92D76);
+            return ref _Handle.AsRef<float>(_C04Offset!.Value);
         }
     }
-    private static nint _AxialModelDistOffset = -1;
+    private static nint? _AxialModelDistOffset;
 
     public ref float AxialModelDist
     {
         get
         {
-            if (_AxialModelDistOffset == -1) _AxialModelDistOffset = Schema.GetOffset(0xBAF074C1E53980E9);
-            return ref _Handle.AsRef<float>(_AxialModelDistOffset);
+            _AxialModelDistOffset = _AxialModelDistOffset ?? Schema.GetOffset(0xBAF074C1E53980E9);
+            return ref _Handle.AsRef<float>(_AxialModelDistOffset!.Value);
         }
     }
-    private static nint _AxialModelWeightsOffset = -1;
+    private static nint? _AxialModelWeightsOffset;
     private SchemaFixedArray<float>? _AxialModelWeightsInstance;
 
     public ISchemaFixedArray<float> AxialModelWeights
     {
         get
         {
-            if (_AxialModelWeightsOffset == -1) _AxialModelWeightsOffset = Schema.GetOffset(0xBAF074C1D9CDB73E);
+            _AxialModelWeightsOffset = _AxialModelWeightsOffset ?? Schema.GetOffset(0xBAF074C1D9CDB73E);
             var instance = _AxialModelWeightsInstance ??= new SchemaFixedArray<float>(0, 0xBAF074C1D9CDB73E, 4, 4, 4);
-            instance.DangerousSetHandle(_Handle + _AxialModelWeightsOffset);
+            instance.DangerousSetHandle(_Handle + _AxialModelWeightsOffset!.Value);
             return instance;
         }
     }
-    private static nint _NodeOffset = -1;
+    private static nint? _NodeOffset;
     private SchemaFixedArray<ushort>? _NodeInstance;
 
     public ISchemaFixedArray<ushort> Node
     {
         get
         {
-            if (_NodeOffset == -1) _NodeOffset = Schema.GetOffset(0xBAF074C1F6FB9B19);
+            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0xBAF074C1F6FB9B19);
             var instance = _NodeInstance ??= new SchemaFixedArray<ushort>(0, 0xBAF074C1F6FB9B19, 4, 2, 2);
-            instance.DangerousSetHandle(_Handle + _NodeOffset);
+            instance.DangerousSetHandle(_Handle + _NodeOffset!.Value);
             return instance;
         }
     }

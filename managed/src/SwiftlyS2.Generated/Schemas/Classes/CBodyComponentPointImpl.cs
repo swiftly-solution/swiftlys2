@@ -16,16 +16,16 @@ internal partial class CBodyComponentPointImpl : CBodyComponentImpl, CBodyCompon
 {
     public CBodyComponentPointImpl(nint handle) : base(handle) { }
 
-    private static nint _SceneNodeOffset = -1;
+    private static nint? _SceneNodeOffset;
     private CGameSceneNodeImpl? _SceneNodeInstance;
 
     public CGameSceneNode SceneNode
     {
         get
         {
-            if (_SceneNodeOffset == -1) _SceneNodeOffset = Schema.GetOffset(0x21A4C11041577E3);
+            _SceneNodeOffset = _SceneNodeOffset ?? Schema.GetOffset(0x21A4C11041577E3);
             var instance = _SceneNodeInstance ??= new CGameSceneNodeImpl(0);
-            instance.DangerousSetHandle(_Handle + _SceneNodeOffset);
+            instance.DangerousSetHandle(_Handle + _SceneNodeOffset!.Value);
             return instance;
         }
     }

@@ -16,24 +16,24 @@ internal partial class C_ItemDogtagsImpl : C_ItemImpl, C_ItemDogtags
 {
     public C_ItemDogtagsImpl(nint handle) : base(handle) { }
 
-    private static nint _OwningPlayerOffset = -1;
+    private static nint? _OwningPlayerOffset;
 
     public ref CHandle<C_CSPlayerPawn> OwningPlayer
     {
         get
         {
-            if (_OwningPlayerOffset == -1) _OwningPlayerOffset = Schema.GetOffset(0x567409B3258F5D24);
-            return ref _Handle.AsRef<CHandle<C_CSPlayerPawn>>(_OwningPlayerOffset);
+            _OwningPlayerOffset = _OwningPlayerOffset ?? Schema.GetOffset(0x567409B3258F5D24);
+            return ref _Handle.AsRef<CHandle<C_CSPlayerPawn>>(_OwningPlayerOffset!.Value);
         }
     }
-    private static nint _KillingPlayerOffset = -1;
+    private static nint? _KillingPlayerOffset;
 
     public ref CHandle<C_CSPlayerPawn> KillingPlayer
     {
         get
         {
-            if (_KillingPlayerOffset == -1) _KillingPlayerOffset = Schema.GetOffset(0x567409B34617E6C6);
-            return ref _Handle.AsRef<CHandle<C_CSPlayerPawn>>(_KillingPlayerOffset);
+            _KillingPlayerOffset = _KillingPlayerOffset ?? Schema.GetOffset(0x567409B34617E6C6);
+            return ref _Handle.AsRef<CHandle<C_CSPlayerPawn>>(_KillingPlayerOffset!.Value);
         }
     }
 

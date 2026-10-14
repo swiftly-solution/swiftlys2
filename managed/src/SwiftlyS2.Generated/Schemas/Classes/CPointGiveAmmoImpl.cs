@@ -16,14 +16,14 @@ internal partial class CPointGiveAmmoImpl : CPointEntityImpl, CPointGiveAmmo
 {
     public CPointGiveAmmoImpl(nint handle) : base(handle) { }
 
-    private static nint _ActivatorOffset = -1;
+    private static nint? _ActivatorOffset;
 
     public ref CHandle<CBaseEntity> Activator
     {
         get
         {
-            if (_ActivatorOffset == -1) _ActivatorOffset = Schema.GetOffset(0x2A4FB25F9C480B5A);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_ActivatorOffset);
+            _ActivatorOffset = _ActivatorOffset ?? Schema.GetOffset(0x2A4FB25F9C480B5A);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_ActivatorOffset!.Value);
         }
     }
 

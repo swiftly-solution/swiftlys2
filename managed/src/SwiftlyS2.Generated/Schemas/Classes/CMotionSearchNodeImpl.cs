@@ -16,57 +16,57 @@ internal partial class CMotionSearchNodeImpl : SchemaClass, CMotionSearchNode
 {
     public CMotionSearchNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _ChildrenOffset = -1;
+    private static nint? _ChildrenOffset;
 
     public ref CUtlVector<PointerTo<CMotionSearchNode>> Children
     {
         get
         {
-            if (_ChildrenOffset == -1) _ChildrenOffset = Schema.GetOffset(0x7CB28AA07415FA72);
-            return ref _Handle.AsRef<CUtlVector<PointerTo<CMotionSearchNode>>>(_ChildrenOffset);
+            _ChildrenOffset = _ChildrenOffset ?? Schema.GetOffset(0x7CB28AA07415FA72);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<CMotionSearchNode>>>(_ChildrenOffset!.Value);
         }
     }
-    private static nint _QuantizerOffset = -1;
+    private static nint? _QuantizerOffset;
     private CVectorQuantizerImpl? _QuantizerInstance;
 
     public CVectorQuantizer Quantizer
     {
         get
         {
-            if (_QuantizerOffset == -1) _QuantizerOffset = Schema.GetOffset(0x7CB28AA0C7DE6374);
+            _QuantizerOffset = _QuantizerOffset ?? Schema.GetOffset(0x7CB28AA0C7DE6374);
             var instance = _QuantizerInstance ??= new CVectorQuantizerImpl(0);
-            instance.DangerousSetHandle(_Handle + _QuantizerOffset);
+            instance.DangerousSetHandle(_Handle + _QuantizerOffset!.Value);
             return instance;
         }
     }
-    private static nint _SampleCodesOffset = -1;
+    private static nint? _SampleCodesOffset;
 
     public ref CUtlVector<CUtlVector<SampleCode>> SampleCodes
     {
         get
         {
-            if (_SampleCodesOffset == -1) _SampleCodesOffset = Schema.GetOffset(0x7CB28AA0D703E42F);
-            return ref _Handle.AsRef<CUtlVector<CUtlVector<SampleCode>>>(_SampleCodesOffset);
+            _SampleCodesOffset = _SampleCodesOffset ?? Schema.GetOffset(0x7CB28AA0D703E42F);
+            return ref _Handle.AsRef<CUtlVector<CUtlVector<SampleCode>>>(_SampleCodesOffset!.Value);
         }
     }
-    private static nint _SampleIndicesOffset = -1;
+    private static nint? _SampleIndicesOffset;
 
     public ref CUtlVector<CUtlVector<int>> SampleIndices
     {
         get
         {
-            if (_SampleIndicesOffset == -1) _SampleIndicesOffset = Schema.GetOffset(0x7CB28AA02EDA0064);
-            return ref _Handle.AsRef<CUtlVector<CUtlVector<int>>>(_SampleIndicesOffset);
+            _SampleIndicesOffset = _SampleIndicesOffset ?? Schema.GetOffset(0x7CB28AA02EDA0064);
+            return ref _Handle.AsRef<CUtlVector<CUtlVector<int>>>(_SampleIndicesOffset!.Value);
         }
     }
-    private static nint _SelectableSamplesOffset = -1;
+    private static nint? _SelectableSamplesOffset;
 
     public ref CUtlVector<int> SelectableSamples
     {
         get
         {
-            if (_SelectableSamplesOffset == -1) _SelectableSamplesOffset = Schema.GetOffset(0x7CB28AA0C1D40F34);
-            return ref _Handle.AsRef<CUtlVector<int>>(_SelectableSamplesOffset);
+            _SelectableSamplesOffset = _SelectableSamplesOffset ?? Schema.GetOffset(0x7CB28AA0C1D40F34);
+            return ref _Handle.AsRef<CUtlVector<int>>(_SelectableSamplesOffset!.Value);
         }
     }
 

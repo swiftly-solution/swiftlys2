@@ -16,47 +16,47 @@ internal partial class C_INIT_RemapTransformOrientationToRotationsImpl : CPartic
 {
     public C_INIT_RemapTransformOrientationToRotationsImpl(nint handle) : base(handle) { }
 
-    private static nint _TransformInputOffset = -1;
+    private static nint? _TransformInputOffset;
     private CParticleTransformInputImpl? _TransformInputInstance;
 
     public CParticleTransformInput TransformInput
     {
         get
         {
-            if (_TransformInputOffset == -1) _TransformInputOffset = Schema.GetOffset(0x51F07293B3FDC289);
+            _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0x51F07293B3FDC289);
             var instance = _TransformInputInstance ??= new CParticleTransformInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _TransformInputOffset);
+            instance.DangerousSetHandle(_Handle + _TransformInputOffset!.Value);
             return instance;
         }
     }
-    private static nint _RotationOffset = -1;
+    private static nint? _RotationOffset;
 
     public ref Vector Rotation
     {
         get
         {
-            if (_RotationOffset == -1) _RotationOffset = Schema.GetOffset(0x51F072931992E6BF);
-            return ref _Handle.AsRef<Vector>(_RotationOffset);
+            _RotationOffset = _RotationOffset ?? Schema.GetOffset(0x51F072931992E6BF);
+            return ref _Handle.AsRef<Vector>(_RotationOffset!.Value);
         }
     }
-    private static nint _UseQuatOffset = -1;
+    private static nint? _UseQuatOffset;
 
     public ref bool UseQuat
     {
         get
         {
-            if (_UseQuatOffset == -1) _UseQuatOffset = Schema.GetOffset(0x51F0729343F0D4DB);
-            return ref _Handle.AsRef<bool>(_UseQuatOffset);
+            _UseQuatOffset = _UseQuatOffset ?? Schema.GetOffset(0x51F0729343F0D4DB);
+            return ref _Handle.AsRef<bool>(_UseQuatOffset!.Value);
         }
     }
-    private static nint _WriteNormalOffset = -1;
+    private static nint? _WriteNormalOffset;
 
     public ref bool WriteNormal
     {
         get
         {
-            if (_WriteNormalOffset == -1) _WriteNormalOffset = Schema.GetOffset(0x51F07293C2EF44FF);
-            return ref _Handle.AsRef<bool>(_WriteNormalOffset);
+            _WriteNormalOffset = _WriteNormalOffset ?? Schema.GetOffset(0x51F07293C2EF44FF);
+            return ref _Handle.AsRef<bool>(_WriteNormalOffset!.Value);
         }
     }
 

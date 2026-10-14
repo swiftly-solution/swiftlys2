@@ -16,24 +16,24 @@ internal partial class C_OP_RenderScreenVelocityRotateImpl : CParticleFunctionRe
 {
     public C_OP_RenderScreenVelocityRotateImpl(nint handle) : base(handle) { }
 
-    private static nint _RotateRateDegreesOffset = -1;
+    private static nint? _RotateRateDegreesOffset;
 
     public ref float RotateRateDegrees
     {
         get
         {
-            if (_RotateRateDegreesOffset == -1) _RotateRateDegreesOffset = Schema.GetOffset(0x6288600D11A21BC7);
-            return ref _Handle.AsRef<float>(_RotateRateDegreesOffset);
+            _RotateRateDegreesOffset = _RotateRateDegreesOffset ?? Schema.GetOffset(0x6288600D11A21BC7);
+            return ref _Handle.AsRef<float>(_RotateRateDegreesOffset!.Value);
         }
     }
-    private static nint _ForwardDegreesOffset = -1;
+    private static nint? _ForwardDegreesOffset;
 
     public ref float ForwardDegrees
     {
         get
         {
-            if (_ForwardDegreesOffset == -1) _ForwardDegreesOffset = Schema.GetOffset(0x6288600D44D44C45);
-            return ref _Handle.AsRef<float>(_ForwardDegreesOffset);
+            _ForwardDegreesOffset = _ForwardDegreesOffset ?? Schema.GetOffset(0x6288600D44D44C45);
+            return ref _Handle.AsRef<float>(_ForwardDegreesOffset!.Value);
         }
     }
 

@@ -16,118 +16,118 @@ internal partial class CLookComponentUpdaterImpl : CAnimComponentUpdaterImpl, CL
 {
     public CLookComponentUpdaterImpl(nint handle) : base(handle) { }
 
-    private static nint _LookHeadingOffset = -1;
+    private static nint? _LookHeadingOffset;
     private CAnimParamHandleImpl? _LookHeadingInstance;
 
     public CAnimParamHandle LookHeading
     {
         get
         {
-            if (_LookHeadingOffset == -1) _LookHeadingOffset = Schema.GetOffset(0xA3C6996DE7EA9C52);
+            _LookHeadingOffset = _LookHeadingOffset ?? Schema.GetOffset(0xA3C6996DE7EA9C52);
             var instance = _LookHeadingInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _LookHeadingOffset);
+            instance.DangerousSetHandle(_Handle + _LookHeadingOffset!.Value);
             return instance;
         }
     }
-    private static nint _LookHeadingNormalizedOffset = -1;
+    private static nint? _LookHeadingNormalizedOffset;
     private CAnimParamHandleImpl? _LookHeadingNormalizedInstance;
 
     public CAnimParamHandle LookHeadingNormalized
     {
         get
         {
-            if (_LookHeadingNormalizedOffset == -1) _LookHeadingNormalizedOffset = Schema.GetOffset(0xA3C6996D305E6B07);
+            _LookHeadingNormalizedOffset = _LookHeadingNormalizedOffset ?? Schema.GetOffset(0xA3C6996D305E6B07);
             var instance = _LookHeadingNormalizedInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _LookHeadingNormalizedOffset);
+            instance.DangerousSetHandle(_Handle + _LookHeadingNormalizedOffset!.Value);
             return instance;
         }
     }
-    private static nint _LookHeadingVelocityOffset = -1;
+    private static nint? _LookHeadingVelocityOffset;
     private CAnimParamHandleImpl? _LookHeadingVelocityInstance;
 
     public CAnimParamHandle LookHeadingVelocity
     {
         get
         {
-            if (_LookHeadingVelocityOffset == -1) _LookHeadingVelocityOffset = Schema.GetOffset(0xA3C6996DF9527FD9);
+            _LookHeadingVelocityOffset = _LookHeadingVelocityOffset ?? Schema.GetOffset(0xA3C6996DF9527FD9);
             var instance = _LookHeadingVelocityInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _LookHeadingVelocityOffset);
+            instance.DangerousSetHandle(_Handle + _LookHeadingVelocityOffset!.Value);
             return instance;
         }
     }
-    private static nint _LookPitchOffset = -1;
+    private static nint? _LookPitchOffset;
     private CAnimParamHandleImpl? _LookPitchInstance;
 
     public CAnimParamHandle LookPitch
     {
         get
         {
-            if (_LookPitchOffset == -1) _LookPitchOffset = Schema.GetOffset(0xA3C6996D3D4C7812);
+            _LookPitchOffset = _LookPitchOffset ?? Schema.GetOffset(0xA3C6996D3D4C7812);
             var instance = _LookPitchInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _LookPitchOffset);
+            instance.DangerousSetHandle(_Handle + _LookPitchOffset!.Value);
             return instance;
         }
     }
-    private static nint _LookDistanceOffset = -1;
+    private static nint? _LookDistanceOffset;
     private CAnimParamHandleImpl? _LookDistanceInstance;
 
     public CAnimParamHandle LookDistance
     {
         get
         {
-            if (_LookDistanceOffset == -1) _LookDistanceOffset = Schema.GetOffset(0xA3C6996DD4722447);
+            _LookDistanceOffset = _LookDistanceOffset ?? Schema.GetOffset(0xA3C6996DD4722447);
             var instance = _LookDistanceInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _LookDistanceOffset);
+            instance.DangerousSetHandle(_Handle + _LookDistanceOffset!.Value);
             return instance;
         }
     }
-    private static nint _LookDirectionOffset = -1;
+    private static nint? _LookDirectionOffset;
     private CAnimParamHandleImpl? _LookDirectionInstance;
 
     public CAnimParamHandle LookDirection
     {
         get
         {
-            if (_LookDirectionOffset == -1) _LookDirectionOffset = Schema.GetOffset(0xA3C6996DAF5526AD);
+            _LookDirectionOffset = _LookDirectionOffset ?? Schema.GetOffset(0xA3C6996DAF5526AD);
             var instance = _LookDirectionInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _LookDirectionOffset);
+            instance.DangerousSetHandle(_Handle + _LookDirectionOffset!.Value);
             return instance;
         }
     }
-    private static nint _LookTargetOffset = -1;
+    private static nint? _LookTargetOffset;
     private CAnimParamHandleImpl? _LookTargetInstance;
 
     public CAnimParamHandle LookTarget
     {
         get
         {
-            if (_LookTargetOffset == -1) _LookTargetOffset = Schema.GetOffset(0xA3C6996D3361F745);
+            _LookTargetOffset = _LookTargetOffset ?? Schema.GetOffset(0xA3C6996D3361F745);
             var instance = _LookTargetInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _LookTargetOffset);
+            instance.DangerousSetHandle(_Handle + _LookTargetOffset!.Value);
             return instance;
         }
     }
-    private static nint _LookTargetWorldSpaceOffset = -1;
+    private static nint? _LookTargetWorldSpaceOffset;
     private CAnimParamHandleImpl? _LookTargetWorldSpaceInstance;
 
     public CAnimParamHandle LookTargetWorldSpace
     {
         get
         {
-            if (_LookTargetWorldSpaceOffset == -1) _LookTargetWorldSpaceOffset = Schema.GetOffset(0xA3C6996DD1AC545F);
+            _LookTargetWorldSpaceOffset = _LookTargetWorldSpaceOffset ?? Schema.GetOffset(0xA3C6996DD1AC545F);
             var instance = _LookTargetWorldSpaceInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _LookTargetWorldSpaceOffset);
+            instance.DangerousSetHandle(_Handle + _LookTargetWorldSpaceOffset!.Value);
             return instance;
         }
     }
-    private static nint _NetworkLookTargetOffset = -1;
+    private static nint? _NetworkLookTargetOffset;
 
     public ref bool NetworkLookTarget
     {
         get
         {
-            if (_NetworkLookTargetOffset == -1) _NetworkLookTargetOffset = Schema.GetOffset(0xA3C6996D39F2F527);
-            return ref _Handle.AsRef<bool>(_NetworkLookTargetOffset);
+            _NetworkLookTargetOffset = _NetworkLookTargetOffset ?? Schema.GetOffset(0xA3C6996D39F2F527);
+            return ref _Handle.AsRef<bool>(_NetworkLookTargetOffset!.Value);
         }
     }
 

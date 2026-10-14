@@ -16,16 +16,16 @@ internal partial class C_SoundEventBoxEntityImpl : C_SoundEventMultiPointEntityI
 {
     public C_SoundEventBoxEntityImpl(nint handle) : base(handle) { }
 
-    private static nint _BoxHelpersNetworkedOffset = -1;
+    private static nint? _BoxHelpersNetworkedOffset;
     private SchemaUntypedField? _BoxHelpersNetworkedInstance;
 
     public SchemaUntypedField BoxHelpersNetworked
     {
         get
         {
-            if (_BoxHelpersNetworkedOffset == -1) _BoxHelpersNetworkedOffset = Schema.GetOffset(0xABAB6FE00010FE06);
+            _BoxHelpersNetworkedOffset = _BoxHelpersNetworkedOffset ?? Schema.GetOffset(0xABAB6FE00010FE06);
             var instance = _BoxHelpersNetworkedInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _BoxHelpersNetworkedOffset);
+            instance.DangerousSetHandle(_Handle + _BoxHelpersNetworkedOffset!.Value);
             return instance;
         }
     }

@@ -16,19 +16,19 @@ internal partial class CSoundStackSaveImpl : CLogicalEntityImpl, CSoundStackSave
 {
     public CSoundStackSaveImpl(nint handle) : base(handle) { }
 
-    private static nint _StackNameOffset = -1;
+    private static nint? _StackNameOffset;
 
     public string StackName
     {
         get
         {
-            if (_StackNameOffset == -1) _StackNameOffset = Schema.GetOffset(0xF9E7A22E3B3E9CD4);
-            return Schema.GetString(_Handle.Read<nint>(_StackNameOffset));
+            _StackNameOffset = _StackNameOffset ?? Schema.GetOffset(0xF9E7A22E3B3E9CD4);
+            return Schema.GetString(_Handle.Read<nint>(_StackNameOffset!.Value));
         }
         set
         {
-            if (_StackNameOffset == -1) _StackNameOffset = Schema.GetOffset(0xF9E7A22E3B3E9CD4);
-            Schema.SetString(_Handle, _StackNameOffset, value);
+            _StackNameOffset = _StackNameOffset ?? Schema.GetOffset(0xF9E7A22E3B3E9CD4);
+            Schema.SetString(_Handle, _StackNameOffset!.Value, value);
         }
     }
 

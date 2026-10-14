@@ -16,16 +16,16 @@ internal partial class FeTreeChildren_tImpl : SchemaClass, FeTreeChildren_t
 {
     public FeTreeChildren_tImpl(nint handle) : base(handle) { }
 
-    private static nint _ChildOffset = -1;
+    private static nint? _ChildOffset;
     private SchemaFixedArray<ushort>? _ChildInstance;
 
     public ISchemaFixedArray<ushort> Child
     {
         get
         {
-            if (_ChildOffset == -1) _ChildOffset = Schema.GetOffset(0xD4BAF4A0E8CD59A1);
+            _ChildOffset = _ChildOffset ?? Schema.GetOffset(0xD4BAF4A0E8CD59A1);
             var instance = _ChildInstance ??= new SchemaFixedArray<ushort>(0, 0xD4BAF4A0E8CD59A1, 2, 2, 2);
-            instance.DangerousSetHandle(_Handle + _ChildOffset);
+            instance.DangerousSetHandle(_Handle + _ChildOffset!.Value);
             return instance;
         }
     }

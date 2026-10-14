@@ -16,44 +16,44 @@ internal partial class C_OP_HSVShiftToCPImpl : CParticleFunctionPreEmissionImpl,
 {
     public C_OP_HSVShiftToCPImpl(nint handle) : base(handle) { }
 
-    private static nint _ColorCPOffset = -1;
+    private static nint? _ColorCPOffset;
 
     public ref int ColorCP
     {
         get
         {
-            if (_ColorCPOffset == -1) _ColorCPOffset = Schema.GetOffset(0xA6FD1F901D3D233F);
-            return ref _Handle.AsRef<int>(_ColorCPOffset);
+            _ColorCPOffset = _ColorCPOffset ?? Schema.GetOffset(0xA6FD1F901D3D233F);
+            return ref _Handle.AsRef<int>(_ColorCPOffset!.Value);
         }
     }
-    private static nint _ColorGemEnableCPOffset = -1;
+    private static nint? _ColorGemEnableCPOffset;
 
     public ref int ColorGemEnableCP
     {
         get
         {
-            if (_ColorGemEnableCPOffset == -1) _ColorGemEnableCPOffset = Schema.GetOffset(0xA6FD1F907B5C2B7F);
-            return ref _Handle.AsRef<int>(_ColorGemEnableCPOffset);
+            _ColorGemEnableCPOffset = _ColorGemEnableCPOffset ?? Schema.GetOffset(0xA6FD1F907B5C2B7F);
+            return ref _Handle.AsRef<int>(_ColorGemEnableCPOffset!.Value);
         }
     }
-    private static nint _OutputCPOffset = -1;
+    private static nint? _OutputCPOffset;
 
     public ref int OutputCP
     {
         get
         {
-            if (_OutputCPOffset == -1) _OutputCPOffset = Schema.GetOffset(0xA6FD1F9050DF5703);
-            return ref _Handle.AsRef<int>(_OutputCPOffset);
+            _OutputCPOffset = _OutputCPOffset ?? Schema.GetOffset(0xA6FD1F9050DF5703);
+            return ref _Handle.AsRef<int>(_OutputCPOffset!.Value);
         }
     }
-    private static nint _DefaultHSVColorOffset = -1;
+    private static nint? _DefaultHSVColorOffset;
 
     public ref Color DefaultHSVColor
     {
         get
         {
-            if (_DefaultHSVColorOffset == -1) _DefaultHSVColorOffset = Schema.GetOffset(0xA6FD1F90A7EFB0DE);
-            return ref _Handle.AsRef<Color>(_DefaultHSVColorOffset);
+            _DefaultHSVColorOffset = _DefaultHSVColorOffset ?? Schema.GetOffset(0xA6FD1F90A7EFB0DE);
+            return ref _Handle.AsRef<Color>(_DefaultHSVColorOffset!.Value);
         }
     }
 

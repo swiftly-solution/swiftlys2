@@ -16,29 +16,29 @@ internal partial class CAnimGraphDoc_NodeConnectionImpl : SchemaClass, CAnimGrap
 {
     public CAnimGraphDoc_NodeConnectionImpl(nint handle) : base(handle) { }
 
-    private static nint _NodeIDOffset = -1;
+    private static nint? _NodeIDOffset;
     private AnimNodeIDImpl? _NodeIDInstance;
 
     public AnimNodeID NodeID
     {
         get
         {
-            if (_NodeIDOffset == -1) _NodeIDOffset = Schema.GetOffset(0x403BD7219AF5978);
+            _NodeIDOffset = _NodeIDOffset ?? Schema.GetOffset(0x403BD7219AF5978);
             var instance = _NodeIDInstance ??= new AnimNodeIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _NodeIDOffset);
+            instance.DangerousSetHandle(_Handle + _NodeIDOffset!.Value);
             return instance;
         }
     }
-    private static nint _OutputIDOffset = -1;
+    private static nint? _OutputIDOffset;
     private AnimNodeOutputIDImpl? _OutputIDInstance;
 
     public AnimNodeOutputID OutputID
     {
         get
         {
-            if (_OutputIDOffset == -1) _OutputIDOffset = Schema.GetOffset(0x403BD728456A4A9);
+            _OutputIDOffset = _OutputIDOffset ?? Schema.GetOffset(0x403BD728456A4A9);
             var instance = _OutputIDInstance ??= new AnimNodeOutputIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _OutputIDOffset);
+            instance.DangerousSetHandle(_Handle + _OutputIDOffset!.Value);
             return instance;
         }
     }

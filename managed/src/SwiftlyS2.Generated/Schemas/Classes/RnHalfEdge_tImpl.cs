@@ -16,44 +16,44 @@ internal partial class RnHalfEdge_tImpl : SchemaClass, RnHalfEdge_t
 {
     public RnHalfEdge_tImpl(nint handle) : base(handle) { }
 
-    private static nint _NextOffset = -1;
+    private static nint? _NextOffset;
 
     public ref byte Next
     {
         get
         {
-            if (_NextOffset == -1) _NextOffset = Schema.GetOffset(0xB67DE42E8D575D9C);
-            return ref _Handle.AsRef<byte>(_NextOffset);
+            _NextOffset = _NextOffset ?? Schema.GetOffset(0xB67DE42E8D575D9C);
+            return ref _Handle.AsRef<byte>(_NextOffset!.Value);
         }
     }
-    private static nint _TwinOffset = -1;
+    private static nint? _TwinOffset;
 
     public ref byte Twin
     {
         get
         {
-            if (_TwinOffset == -1) _TwinOffset = Schema.GetOffset(0xB67DE42EF8C9A257);
-            return ref _Handle.AsRef<byte>(_TwinOffset);
+            _TwinOffset = _TwinOffset ?? Schema.GetOffset(0xB67DE42EF8C9A257);
+            return ref _Handle.AsRef<byte>(_TwinOffset!.Value);
         }
     }
-    private static nint _OriginOffset = -1;
+    private static nint? _OriginOffset;
 
     public ref byte Origin
     {
         get
         {
-            if (_OriginOffset == -1) _OriginOffset = Schema.GetOffset(0xB67DE42E57B6C543);
-            return ref _Handle.AsRef<byte>(_OriginOffset);
+            _OriginOffset = _OriginOffset ?? Schema.GetOffset(0xB67DE42E57B6C543);
+            return ref _Handle.AsRef<byte>(_OriginOffset!.Value);
         }
     }
-    private static nint _FaceOffset = -1;
+    private static nint? _FaceOffset;
 
     public ref byte Face
     {
         get
         {
-            if (_FaceOffset == -1) _FaceOffset = Schema.GetOffset(0xB67DE42EABBCFB38);
-            return ref _Handle.AsRef<byte>(_FaceOffset);
+            _FaceOffset = _FaceOffset ?? Schema.GetOffset(0xB67DE42EABBCFB38);
+            return ref _Handle.AsRef<byte>(_FaceOffset!.Value);
         }
     }
 

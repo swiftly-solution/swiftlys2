@@ -16,29 +16,29 @@ internal partial class CPulseCell_TestWaitWithCursorStateImpl : CPulseCell_BaseY
 {
     public CPulseCell_TestWaitWithCursorStateImpl(nint handle) : base(handle) { }
 
-    private static nint _WakeResumeOffset = -1;
+    private static nint? _WakeResumeOffset;
     private CPulse_ResumePointImpl? _WakeResumeInstance;
 
     public CPulse_ResumePoint WakeResume
     {
         get
         {
-            if (_WakeResumeOffset == -1) _WakeResumeOffset = Schema.GetOffset(0xB1305BB431F86DC2);
+            _WakeResumeOffset = _WakeResumeOffset ?? Schema.GetOffset(0xB1305BB431F86DC2);
             var instance = _WakeResumeInstance ??= new CPulse_ResumePointImpl(0);
-            instance.DangerousSetHandle(_Handle + _WakeResumeOffset);
+            instance.DangerousSetHandle(_Handle + _WakeResumeOffset!.Value);
             return instance;
         }
     }
-    private static nint _WakeFailOffset = -1;
+    private static nint? _WakeFailOffset;
     private CPulse_ResumePointImpl? _WakeFailInstance;
 
     public CPulse_ResumePoint WakeFail
     {
         get
         {
-            if (_WakeFailOffset == -1) _WakeFailOffset = Schema.GetOffset(0xB1305BB4BE921FF5);
+            _WakeFailOffset = _WakeFailOffset ?? Schema.GetOffset(0xB1305BB4BE921FF5);
             var instance = _WakeFailInstance ??= new CPulse_ResumePointImpl(0);
-            instance.DangerousSetHandle(_Handle + _WakeFailOffset);
+            instance.DangerousSetHandle(_Handle + _WakeFailOffset!.Value);
             return instance;
         }
     }

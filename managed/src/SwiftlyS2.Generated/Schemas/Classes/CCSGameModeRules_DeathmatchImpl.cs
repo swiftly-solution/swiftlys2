@@ -16,42 +16,42 @@ internal partial class CCSGameModeRules_DeathmatchImpl : CCSGameModeRulesImpl, C
 {
     public CCSGameModeRules_DeathmatchImpl(nint handle) : base(handle) { }
 
-    private static nint _DMBonusStartTimeOffset = -1;
+    private static nint? _DMBonusStartTimeOffset;
     private GameTime_tImpl? _DMBonusStartTimeInstance;
 
     public GameTime_t DMBonusStartTime
     {
         get
         {
-            if (_DMBonusStartTimeOffset == -1) _DMBonusStartTimeOffset = Schema.GetOffset(0x77BC0D42870B2CD0);
+            _DMBonusStartTimeOffset = _DMBonusStartTimeOffset ?? Schema.GetOffset(0x77BC0D42870B2CD0);
             var instance = _DMBonusStartTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _DMBonusStartTimeOffset);
+            instance.DangerousSetHandle(_Handle + _DMBonusStartTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _DMBonusTimeLengthOffset = -1;
+    private static nint? _DMBonusTimeLengthOffset;
 
     public ref float DMBonusTimeLength
     {
         get
         {
-            if (_DMBonusTimeLengthOffset == -1) _DMBonusTimeLengthOffset = Schema.GetOffset(0x77BC0D42C4F13CC6);
-            return ref _Handle.AsRef<float>(_DMBonusTimeLengthOffset);
+            _DMBonusTimeLengthOffset = _DMBonusTimeLengthOffset ?? Schema.GetOffset(0x77BC0D42C4F13CC6);
+            return ref _Handle.AsRef<float>(_DMBonusTimeLengthOffset!.Value);
         }
     }
-    private static nint _DMBonusWeaponOffset = -1;
+    private static nint? _DMBonusWeaponOffset;
 
     public string DMBonusWeapon
     {
         get
         {
-            if (_DMBonusWeaponOffset == -1) _DMBonusWeaponOffset = Schema.GetOffset(0x77BC0D42A33FC260);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_DMBonusWeaponOffset));
+            _DMBonusWeaponOffset = _DMBonusWeaponOffset ?? Schema.GetOffset(0x77BC0D42A33FC260);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_DMBonusWeaponOffset!.Value));
         }
         set
         {
-            if (_DMBonusWeaponOffset == -1) _DMBonusWeaponOffset = Schema.GetOffset(0x77BC0D42A33FC260);
-            Schema.SetCUtlString(_Handle, _DMBonusWeaponOffset, value);
+            _DMBonusWeaponOffset = _DMBonusWeaponOffset ?? Schema.GetOffset(0x77BC0D42A33FC260);
+            Schema.SetCUtlString(_Handle, _DMBonusWeaponOffset!.Value, value);
         }
     }
 

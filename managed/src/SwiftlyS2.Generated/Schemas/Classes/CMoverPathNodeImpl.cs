@@ -16,68 +16,68 @@ internal partial class CMoverPathNodeImpl : CPathNodeImpl, CMoverPathNode
 {
     public CMoverPathNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _OnStartFromOrInSegmentOffset = -1;
+    private static nint? _OnStartFromOrInSegmentOffset;
     private SchemaUntypedField? _OnStartFromOrInSegmentInstance;
 
     public SchemaUntypedField OnStartFromOrInSegment
     {
         get
         {
-            if (_OnStartFromOrInSegmentOffset == -1) _OnStartFromOrInSegmentOffset = Schema.GetOffset(0x5847AABC6622BECB);
+            _OnStartFromOrInSegmentOffset = _OnStartFromOrInSegmentOffset ?? Schema.GetOffset(0x5847AABC6622BECB);
             var instance = _OnStartFromOrInSegmentInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OnStartFromOrInSegmentOffset);
+            instance.DangerousSetHandle(_Handle + _OnStartFromOrInSegmentOffset!.Value);
             return instance;
         }
     }
-    private static nint _OnStoppedAtOrInSegmentOffset = -1;
+    private static nint? _OnStoppedAtOrInSegmentOffset;
     private SchemaUntypedField? _OnStoppedAtOrInSegmentInstance;
 
     public SchemaUntypedField OnStoppedAtOrInSegment
     {
         get
         {
-            if (_OnStoppedAtOrInSegmentOffset == -1) _OnStoppedAtOrInSegmentOffset = Schema.GetOffset(0x5847AABCBF4204DB);
+            _OnStoppedAtOrInSegmentOffset = _OnStoppedAtOrInSegmentOffset ?? Schema.GetOffset(0x5847AABCBF4204DB);
             var instance = _OnStoppedAtOrInSegmentInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OnStoppedAtOrInSegmentOffset);
+            instance.DangerousSetHandle(_Handle + _OnStoppedAtOrInSegmentOffset!.Value);
             return instance;
         }
     }
-    private static nint _OnPassThroughOffset = -1;
+    private static nint? _OnPassThroughOffset;
     private SchemaUntypedField? _OnPassThroughInstance;
 
     public SchemaUntypedField OnPassThrough
     {
         get
         {
-            if (_OnPassThroughOffset == -1) _OnPassThroughOffset = Schema.GetOffset(0x5847AABC3A5F20B6);
+            _OnPassThroughOffset = _OnPassThroughOffset ?? Schema.GetOffset(0x5847AABC3A5F20B6);
             var instance = _OnPassThroughInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OnPassThroughOffset);
+            instance.DangerousSetHandle(_Handle + _OnPassThroughOffset!.Value);
             return instance;
         }
     }
-    private static nint _OnPassThroughForwardOffset = -1;
+    private static nint? _OnPassThroughForwardOffset;
     private SchemaUntypedField? _OnPassThroughForwardInstance;
 
     public SchemaUntypedField OnPassThroughForward
     {
         get
         {
-            if (_OnPassThroughForwardOffset == -1) _OnPassThroughForwardOffset = Schema.GetOffset(0x5847AABCA62F443B);
+            _OnPassThroughForwardOffset = _OnPassThroughForwardOffset ?? Schema.GetOffset(0x5847AABCA62F443B);
             var instance = _OnPassThroughForwardInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OnPassThroughForwardOffset);
+            instance.DangerousSetHandle(_Handle + _OnPassThroughForwardOffset!.Value);
             return instance;
         }
     }
-    private static nint _OnPassThroughReverseOffset = -1;
+    private static nint? _OnPassThroughReverseOffset;
     private SchemaUntypedField? _OnPassThroughReverseInstance;
 
     public SchemaUntypedField OnPassThroughReverse
     {
         get
         {
-            if (_OnPassThroughReverseOffset == -1) _OnPassThroughReverseOffset = Schema.GetOffset(0x5847AABC37667FA8);
+            _OnPassThroughReverseOffset = _OnPassThroughReverseOffset ?? Schema.GetOffset(0x5847AABC37667FA8);
             var instance = _OnPassThroughReverseInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OnPassThroughReverseOffset);
+            instance.DangerousSetHandle(_Handle + _OnPassThroughReverseOffset!.Value);
             return instance;
         }
     }

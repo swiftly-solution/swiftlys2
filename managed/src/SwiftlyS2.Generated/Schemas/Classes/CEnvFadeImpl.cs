@@ -16,44 +16,44 @@ internal partial class CEnvFadeImpl : CLogicalEntityImpl, CEnvFade
 {
     public CEnvFadeImpl(nint handle) : base(handle) { }
 
-    private static nint _FadeColorOffset = -1;
+    private static nint? _FadeColorOffset;
 
     public ref Color FadeColor
     {
         get
         {
-            if (_FadeColorOffset == -1) _FadeColorOffset = Schema.GetOffset(0xEFBFC063C1517BF2);
-            return ref _Handle.AsRef<Color>(_FadeColorOffset);
+            _FadeColorOffset = _FadeColorOffset ?? Schema.GetOffset(0xEFBFC063C1517BF2);
+            return ref _Handle.AsRef<Color>(_FadeColorOffset!.Value);
         }
     }
-    private static nint _DurationOffset = -1;
+    private static nint? _DurationOffset;
 
     public ref float Duration
     {
         get
         {
-            if (_DurationOffset == -1) _DurationOffset = Schema.GetOffset(0xEFBFC0639879A98D);
-            return ref _Handle.AsRef<float>(_DurationOffset);
+            _DurationOffset = _DurationOffset ?? Schema.GetOffset(0xEFBFC0639879A98D);
+            return ref _Handle.AsRef<float>(_DurationOffset!.Value);
         }
     }
-    private static nint _HoldDurationOffset = -1;
+    private static nint? _HoldDurationOffset;
 
     public ref float HoldDuration
     {
         get
         {
-            if (_HoldDurationOffset == -1) _HoldDurationOffset = Schema.GetOffset(0xEFBFC0631D577A68);
-            return ref _Handle.AsRef<float>(_HoldDurationOffset);
+            _HoldDurationOffset = _HoldDurationOffset ?? Schema.GetOffset(0xEFBFC0631D577A68);
+            return ref _Handle.AsRef<float>(_HoldDurationOffset!.Value);
         }
     }
-    private static nint _OnBeginFadeOffset = -1;
+    private static nint? _OnBeginFadeOffset;
 
     public ref CEntityIOOutput OnBeginFade
     {
         get
         {
-            if (_OnBeginFadeOffset == -1) _OnBeginFadeOffset = Schema.GetOffset(0xEFBFC0633308BA63);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnBeginFadeOffset);
+            _OnBeginFadeOffset = _OnBeginFadeOffset ?? Schema.GetOffset(0xEFBFC0633308BA63);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnBeginFadeOffset!.Value);
         }
     }
 

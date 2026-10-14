@@ -16,37 +16,37 @@ internal partial class CLightRigVMapImpl : SchemaClass, CLightRigVMap
 {
     public CLightRigVMapImpl(nint handle) : base(handle) { }
 
-    private static nint _MapNameOffset = -1;
+    private static nint? _MapNameOffset;
     private SchemaUntypedField? _MapNameInstance;
 
     public SchemaUntypedField MapName
     {
         get
         {
-            if (_MapNameOffset == -1) _MapNameOffset = Schema.GetOffset(0x84B49E84546CE6CA);
+            _MapNameOffset = _MapNameOffset ?? Schema.GetOffset(0x84B49E84546CE6CA);
             var instance = _MapNameInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _MapNameOffset);
+            instance.DangerousSetHandle(_Handle + _MapNameOffset!.Value);
             return instance;
         }
     }
-    private static nint _Render3DSkyboxOffset = -1;
+    private static nint? _Render3DSkyboxOffset;
 
     public ref bool Render3DSkybox
     {
         get
         {
-            if (_Render3DSkyboxOffset == -1) _Render3DSkyboxOffset = Schema.GetOffset(0x84B49E842D0FCAAC);
-            return ref _Handle.AsRef<bool>(_Render3DSkyboxOffset);
+            _Render3DSkyboxOffset = _Render3DSkyboxOffset ?? Schema.GetOffset(0x84B49E842D0FCAAC);
+            return ref _Handle.AsRef<bool>(_Render3DSkyboxOffset!.Value);
         }
     }
-    private static nint _ParticlesTraceAgainstMapOffset = -1;
+    private static nint? _ParticlesTraceAgainstMapOffset;
 
     public ref bool ParticlesTraceAgainstMap
     {
         get
         {
-            if (_ParticlesTraceAgainstMapOffset == -1) _ParticlesTraceAgainstMapOffset = Schema.GetOffset(0x84B49E84BA315FE6);
-            return ref _Handle.AsRef<bool>(_ParticlesTraceAgainstMapOffset);
+            _ParticlesTraceAgainstMapOffset = _ParticlesTraceAgainstMapOffset ?? Schema.GetOffset(0x84B49E84BA315FE6);
+            return ref _Handle.AsRef<bool>(_ParticlesTraceAgainstMapOffset!.Value);
         }
     }
 

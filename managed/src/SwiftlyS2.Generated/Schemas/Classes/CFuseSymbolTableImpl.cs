@@ -16,72 +16,72 @@ internal partial class CFuseSymbolTableImpl : SchemaClass, CFuseSymbolTable
 {
     public CFuseSymbolTableImpl(nint handle) : base(handle) { }
 
-    private static nint _ConstantsOffset = -1;
+    private static nint? _ConstantsOffset;
 
     public ref CUtlVector<ConstantInfo_t> Constants
     {
         get
         {
-            if (_ConstantsOffset == -1) _ConstantsOffset = Schema.GetOffset(0xD8A03B41460C1382);
-            return ref _Handle.AsRef<CUtlVector<ConstantInfo_t>>(_ConstantsOffset);
+            _ConstantsOffset = _ConstantsOffset ?? Schema.GetOffset(0xD8A03B41460C1382);
+            return ref _Handle.AsRef<CUtlVector<ConstantInfo_t>>(_ConstantsOffset!.Value);
         }
     }
-    private static nint _VariablesOffset = -1;
+    private static nint? _VariablesOffset;
 
     public ref CUtlVector<VariableInfo_t> Variables
     {
         get
         {
-            if (_VariablesOffset == -1) _VariablesOffset = Schema.GetOffset(0xD8A03B4106AE7DE2);
-            return ref _Handle.AsRef<CUtlVector<VariableInfo_t>>(_VariablesOffset);
+            _VariablesOffset = _VariablesOffset ?? Schema.GetOffset(0xD8A03B4106AE7DE2);
+            return ref _Handle.AsRef<CUtlVector<VariableInfo_t>>(_VariablesOffset!.Value);
         }
     }
-    private static nint _FunctionsOffset = -1;
+    private static nint? _FunctionsOffset;
 
     public ref CUtlVector<FunctionInfo_t> Functions
     {
         get
         {
-            if (_FunctionsOffset == -1) _FunctionsOffset = Schema.GetOffset(0xD8A03B41F6EF246E);
-            return ref _Handle.AsRef<CUtlVector<FunctionInfo_t>>(_FunctionsOffset);
+            _FunctionsOffset = _FunctionsOffset ?? Schema.GetOffset(0xD8A03B41F6EF246E);
+            return ref _Handle.AsRef<CUtlVector<FunctionInfo_t>>(_FunctionsOffset!.Value);
         }
     }
-    private static nint _ConstantMapOffset = -1;
+    private static nint? _ConstantMapOffset;
     private SchemaUntypedField? _ConstantMapInstance;
 
     public SchemaUntypedField ConstantMap
     {
         get
         {
-            if (_ConstantMapOffset == -1) _ConstantMapOffset = Schema.GetOffset(0xD8A03B4198BF6E51);
+            _ConstantMapOffset = _ConstantMapOffset ?? Schema.GetOffset(0xD8A03B4198BF6E51);
             var instance = _ConstantMapInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ConstantMapOffset);
+            instance.DangerousSetHandle(_Handle + _ConstantMapOffset!.Value);
             return instance;
         }
     }
-    private static nint _VariableMapOffset = -1;
+    private static nint? _VariableMapOffset;
     private SchemaUntypedField? _VariableMapInstance;
 
     public SchemaUntypedField VariableMap
     {
         get
         {
-            if (_VariableMapOffset == -1) _VariableMapOffset = Schema.GetOffset(0xD8A03B410FDE3671);
+            _VariableMapOffset = _VariableMapOffset ?? Schema.GetOffset(0xD8A03B410FDE3671);
             var instance = _VariableMapInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _VariableMapOffset);
+            instance.DangerousSetHandle(_Handle + _VariableMapOffset!.Value);
             return instance;
         }
     }
-    private static nint _FunctionMapOffset = -1;
+    private static nint? _FunctionMapOffset;
     private SchemaUntypedField? _FunctionMapInstance;
 
     public SchemaUntypedField FunctionMap
     {
         get
         {
-            if (_FunctionMapOffset == -1) _FunctionMapOffset = Schema.GetOffset(0xD8A03B4147A33EC5);
+            _FunctionMapOffset = _FunctionMapOffset ?? Schema.GetOffset(0xD8A03B4147A33EC5);
             var instance = _FunctionMapInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _FunctionMapOffset);
+            instance.DangerousSetHandle(_Handle + _FunctionMapOffset!.Value);
             return instance;
         }
     }

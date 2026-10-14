@@ -16,42 +16,42 @@ internal partial class CSSDSMsg_ViewTargetListImpl : SchemaClass, CSSDSMsg_ViewT
 {
     public CSSDSMsg_ViewTargetListImpl(nint handle) : base(handle) { }
 
-    private static nint _ViewIdOffset = -1;
+    private static nint? _ViewIdOffset;
     private SceneViewId_tImpl? _ViewIdInstance;
 
     public SceneViewId_t ViewId
     {
         get
         {
-            if (_ViewIdOffset == -1) _ViewIdOffset = Schema.GetOffset(0xD53B3083E976CB25);
+            _ViewIdOffset = _ViewIdOffset ?? Schema.GetOffset(0xD53B3083E976CB25);
             var instance = _ViewIdInstance ??= new SceneViewId_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _ViewIdOffset);
+            instance.DangerousSetHandle(_Handle + _ViewIdOffset!.Value);
             return instance;
         }
     }
-    private static nint _ViewNameOffset = -1;
+    private static nint? _ViewNameOffset;
 
     public string ViewName
     {
         get
         {
-            if (_ViewNameOffset == -1) _ViewNameOffset = Schema.GetOffset(0xD53B3083BA5BBDBB);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ViewNameOffset));
+            _ViewNameOffset = _ViewNameOffset ?? Schema.GetOffset(0xD53B3083BA5BBDBB);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ViewNameOffset!.Value));
         }
         set
         {
-            if (_ViewNameOffset == -1) _ViewNameOffset = Schema.GetOffset(0xD53B3083BA5BBDBB);
-            Schema.SetCUtlString(_Handle, _ViewNameOffset, value);
+            _ViewNameOffset = _ViewNameOffset ?? Schema.GetOffset(0xD53B3083BA5BBDBB);
+            Schema.SetCUtlString(_Handle, _ViewNameOffset!.Value, value);
         }
     }
-    private static nint _TargetsOffset = -1;
+    private static nint? _TargetsOffset;
 
     public ref CUtlVector<CSSDSMsg_ViewTarget> Targets
     {
         get
         {
-            if (_TargetsOffset == -1) _TargetsOffset = Schema.GetOffset(0xD53B30832FF8E661);
-            return ref _Handle.AsRef<CUtlVector<CSSDSMsg_ViewTarget>>(_TargetsOffset);
+            _TargetsOffset = _TargetsOffset ?? Schema.GetOffset(0xD53B30832FF8E661);
+            return ref _Handle.AsRef<CUtlVector<CSSDSMsg_ViewTarget>>(_TargetsOffset!.Value);
         }
     }
 

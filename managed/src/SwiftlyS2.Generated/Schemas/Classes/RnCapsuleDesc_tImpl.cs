@@ -16,16 +16,16 @@ internal partial class RnCapsuleDesc_tImpl : RnShapeDesc_tImpl, RnCapsuleDesc_t
 {
     public RnCapsuleDesc_tImpl(nint handle) : base(handle) { }
 
-    private static nint _CapsuleOffset = -1;
+    private static nint? _CapsuleOffset;
     private RnCapsule_tImpl? _CapsuleInstance;
 
     public RnCapsule_t Capsule
     {
         get
         {
-            if (_CapsuleOffset == -1) _CapsuleOffset = Schema.GetOffset(0x842345E29A32484C);
+            _CapsuleOffset = _CapsuleOffset ?? Schema.GetOffset(0x842345E29A32484C);
             var instance = _CapsuleInstance ??= new RnCapsule_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _CapsuleOffset);
+            instance.DangerousSetHandle(_Handle + _CapsuleOffset!.Value);
             return instance;
         }
     }

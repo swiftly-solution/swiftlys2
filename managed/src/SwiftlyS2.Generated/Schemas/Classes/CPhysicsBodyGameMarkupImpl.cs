@@ -16,29 +16,29 @@ internal partial class CPhysicsBodyGameMarkupImpl : SchemaClass, CPhysicsBodyGam
 {
     public CPhysicsBodyGameMarkupImpl(nint handle) : base(handle) { }
 
-    private static nint _TargetBodyOffset = -1;
+    private static nint? _TargetBodyOffset;
 
     public string TargetBody
     {
         get
         {
-            if (_TargetBodyOffset == -1) _TargetBodyOffset = Schema.GetOffset(0xA5257571F2C6B554);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_TargetBodyOffset));
+            _TargetBodyOffset = _TargetBodyOffset ?? Schema.GetOffset(0xA5257571F2C6B554);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_TargetBodyOffset!.Value));
         }
         set
         {
-            if (_TargetBodyOffset == -1) _TargetBodyOffset = Schema.GetOffset(0xA5257571F2C6B554);
-            Schema.SetCUtlString(_Handle, _TargetBodyOffset, value);
+            _TargetBodyOffset = _TargetBodyOffset ?? Schema.GetOffset(0xA5257571F2C6B554);
+            Schema.SetCUtlString(_Handle, _TargetBodyOffset!.Value, value);
         }
     }
-    private static nint _TagOffset = -1;
+    private static nint? _TagOffset;
 
     public ref CGlobalSymbol Tag
     {
         get
         {
-            if (_TagOffset == -1) _TagOffset = Schema.GetOffset(0xA5257571218D8313);
-            return ref _Handle.AsRef<CGlobalSymbol>(_TagOffset);
+            _TagOffset = _TagOffset ?? Schema.GetOffset(0xA5257571218D8313);
+            return ref _Handle.AsRef<CGlobalSymbol>(_TagOffset!.Value);
         }
     }
 

@@ -16,34 +16,34 @@ internal partial class CAudioPhonemeTagImpl : SchemaClass, CAudioPhonemeTag
 {
     public CAudioPhonemeTagImpl(nint handle) : base(handle) { }
 
-    private static nint _StartTimeOffset = -1;
+    private static nint? _StartTimeOffset;
 
     public ref float StartTime
     {
         get
         {
-            if (_StartTimeOffset == -1) _StartTimeOffset = Schema.GetOffset(0xBE68CF3E67FE9DC4);
-            return ref _Handle.AsRef<float>(_StartTimeOffset);
+            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0xBE68CF3E67FE9DC4);
+            return ref _Handle.AsRef<float>(_StartTimeOffset!.Value);
         }
     }
-    private static nint _EndTimeOffset = -1;
+    private static nint? _EndTimeOffset;
 
     public ref float EndTime
     {
         get
         {
-            if (_EndTimeOffset == -1) _EndTimeOffset = Schema.GetOffset(0xBE68CF3E2041DF9D);
-            return ref _Handle.AsRef<float>(_EndTimeOffset);
+            _EndTimeOffset = _EndTimeOffset ?? Schema.GetOffset(0xBE68CF3E2041DF9D);
+            return ref _Handle.AsRef<float>(_EndTimeOffset!.Value);
         }
     }
-    private static nint _PhonemeCodeOffset = -1;
+    private static nint? _PhonemeCodeOffset;
 
     public ref int PhonemeCode
     {
         get
         {
-            if (_PhonemeCodeOffset == -1) _PhonemeCodeOffset = Schema.GetOffset(0xBE68CF3EBFB1B4C4);
-            return ref _Handle.AsRef<int>(_PhonemeCodeOffset);
+            _PhonemeCodeOffset = _PhonemeCodeOffset ?? Schema.GetOffset(0xBE68CF3EBFB1B4C4);
+            return ref _Handle.AsRef<int>(_PhonemeCodeOffset!.Value);
         }
     }
 

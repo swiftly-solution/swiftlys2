@@ -16,64 +16,64 @@ internal partial class C_OP_VelocityMatchingForceImpl : CParticleFunctionOperato
 {
     public C_OP_VelocityMatchingForceImpl(nint handle) : base(handle) { }
 
-    private static nint _DirScaleOffset = -1;
+    private static nint? _DirScaleOffset;
 
     public ref float DirScale
     {
         get
         {
-            if (_DirScaleOffset == -1) _DirScaleOffset = Schema.GetOffset(0x8B7E85343A95212C);
-            return ref _Handle.AsRef<float>(_DirScaleOffset);
+            _DirScaleOffset = _DirScaleOffset ?? Schema.GetOffset(0x8B7E85343A95212C);
+            return ref _Handle.AsRef<float>(_DirScaleOffset!.Value);
         }
     }
-    private static nint _SpdScaleOffset = -1;
+    private static nint? _SpdScaleOffset;
 
     public ref float SpdScale
     {
         get
         {
-            if (_SpdScaleOffset == -1) _SpdScaleOffset = Schema.GetOffset(0x8B7E8534B3DC18DA);
-            return ref _Handle.AsRef<float>(_SpdScaleOffset);
+            _SpdScaleOffset = _SpdScaleOffset ?? Schema.GetOffset(0x8B7E8534B3DC18DA);
+            return ref _Handle.AsRef<float>(_SpdScaleOffset!.Value);
         }
     }
-    private static nint _NeighborDistanceOffset = -1;
+    private static nint? _NeighborDistanceOffset;
 
     public ref float NeighborDistance
     {
         get
         {
-            if (_NeighborDistanceOffset == -1) _NeighborDistanceOffset = Schema.GetOffset(0x8B7E8534F03C7C66);
-            return ref _Handle.AsRef<float>(_NeighborDistanceOffset);
+            _NeighborDistanceOffset = _NeighborDistanceOffset ?? Schema.GetOffset(0x8B7E8534F03C7C66);
+            return ref _Handle.AsRef<float>(_NeighborDistanceOffset!.Value);
         }
     }
-    private static nint _FacingStrengthOffset = -1;
+    private static nint? _FacingStrengthOffset;
 
     public ref float FacingStrength
     {
         get
         {
-            if (_FacingStrengthOffset == -1) _FacingStrengthOffset = Schema.GetOffset(0x8B7E85340D514274);
-            return ref _Handle.AsRef<float>(_FacingStrengthOffset);
+            _FacingStrengthOffset = _FacingStrengthOffset ?? Schema.GetOffset(0x8B7E85340D514274);
+            return ref _Handle.AsRef<float>(_FacingStrengthOffset!.Value);
         }
     }
-    private static nint _UseAABBOffset = -1;
+    private static nint? _UseAABBOffset;
 
     public ref bool UseAABB
     {
         get
         {
-            if (_UseAABBOffset == -1) _UseAABBOffset = Schema.GetOffset(0x8B7E853429AAFF2E);
-            return ref _Handle.AsRef<bool>(_UseAABBOffset);
+            _UseAABBOffset = _UseAABBOffset ?? Schema.GetOffset(0x8B7E853429AAFF2E);
+            return ref _Handle.AsRef<bool>(_UseAABBOffset!.Value);
         }
     }
-    private static nint _CPBroadcastOffset = -1;
+    private static nint? _CPBroadcastOffset;
 
     public ref int CPBroadcast
     {
         get
         {
-            if (_CPBroadcastOffset == -1) _CPBroadcastOffset = Schema.GetOffset(0x8B7E85344C1065B5);
-            return ref _Handle.AsRef<int>(_CPBroadcastOffset);
+            _CPBroadcastOffset = _CPBroadcastOffset ?? Schema.GetOffset(0x8B7E85344C1065B5);
+            return ref _Handle.AsRef<int>(_CPBroadcastOffset!.Value);
         }
     }
 

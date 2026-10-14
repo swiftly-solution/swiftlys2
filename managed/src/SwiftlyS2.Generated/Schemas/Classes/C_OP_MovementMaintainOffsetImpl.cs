@@ -16,34 +16,34 @@ internal partial class C_OP_MovementMaintainOffsetImpl : CParticleFunctionOperat
 {
     public C_OP_MovementMaintainOffsetImpl(nint handle) : base(handle) { }
 
-    private static nint _OffsetOffset = -1;
+    private static nint? _OffsetOffset;
 
     public ref Vector Offset
     {
         get
         {
-            if (_OffsetOffset == -1) _OffsetOffset = Schema.GetOffset(0xD9B3E796BD25CC2A);
-            return ref _Handle.AsRef<Vector>(_OffsetOffset);
+            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0xD9B3E796BD25CC2A);
+            return ref _Handle.AsRef<Vector>(_OffsetOffset!.Value);
         }
     }
-    private static nint _CPOffset = -1;
+    private static nint? _CPOffset;
 
     public ref int CP
     {
         get
         {
-            if (_CPOffset == -1) _CPOffset = Schema.GetOffset(0xD9B3E796EB661472);
-            return ref _Handle.AsRef<int>(_CPOffset);
+            _CPOffset = _CPOffset ?? Schema.GetOffset(0xD9B3E796EB661472);
+            return ref _Handle.AsRef<int>(_CPOffset!.Value);
         }
     }
-    private static nint _RadiusScaleOffset = -1;
+    private static nint? _RadiusScaleOffset;
 
     public ref bool RadiusScale
     {
         get
         {
-            if (_RadiusScaleOffset == -1) _RadiusScaleOffset = Schema.GetOffset(0xD9B3E796BBCB728B);
-            return ref _Handle.AsRef<bool>(_RadiusScaleOffset);
+            _RadiusScaleOffset = _RadiusScaleOffset ?? Schema.GetOffset(0xD9B3E796BBCB728B);
+            return ref _Handle.AsRef<bool>(_RadiusScaleOffset!.Value);
         }
     }
 

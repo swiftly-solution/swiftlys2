@@ -16,62 +16,62 @@ internal partial class CAnimTagBaseImpl : SchemaClass, CAnimTagBase
 {
     public CAnimTagBaseImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public ref CGlobalSymbol Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x8F7709C44D8F5786);
-            return ref _Handle.AsRef<CGlobalSymbol>(_NameOffset);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x8F7709C44D8F5786);
+            return ref _Handle.AsRef<CGlobalSymbol>(_NameOffset!.Value);
         }
     }
-    private static nint _CommentOffset = -1;
+    private static nint? _CommentOffset;
 
     public string Comment
     {
         get
         {
-            if (_CommentOffset == -1) _CommentOffset = Schema.GetOffset(0x8F7709C488A0B4DF);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_CommentOffset));
+            _CommentOffset = _CommentOffset ?? Schema.GetOffset(0x8F7709C488A0B4DF);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_CommentOffset!.Value));
         }
         set
         {
-            if (_CommentOffset == -1) _CommentOffset = Schema.GetOffset(0x8F7709C488A0B4DF);
-            Schema.SetCUtlString(_Handle, _CommentOffset, value);
+            _CommentOffset = _CommentOffset ?? Schema.GetOffset(0x8F7709C488A0B4DF);
+            Schema.SetCUtlString(_Handle, _CommentOffset!.Value, value);
         }
     }
-    private static nint _GroupOffset = -1;
+    private static nint? _GroupOffset;
 
     public ref CGlobalSymbol Group
     {
         get
         {
-            if (_GroupOffset == -1) _GroupOffset = Schema.GetOffset(0x8F7709C49FC645AC);
-            return ref _Handle.AsRef<CGlobalSymbol>(_GroupOffset);
+            _GroupOffset = _GroupOffset ?? Schema.GetOffset(0x8F7709C49FC645AC);
+            return ref _Handle.AsRef<CGlobalSymbol>(_GroupOffset!.Value);
         }
     }
-    private static nint _TagIDOffset = -1;
+    private static nint? _TagIDOffset;
     private AnimTagIDImpl? _TagIDInstance;
 
     public AnimTagID TagID
     {
         get
         {
-            if (_TagIDOffset == -1) _TagIDOffset = Schema.GetOffset(0x8F7709C41F65DDFE);
+            _TagIDOffset = _TagIDOffset ?? Schema.GetOffset(0x8F7709C41F65DDFE);
             var instance = _TagIDInstance ??= new AnimTagIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _TagIDOffset);
+            instance.DangerousSetHandle(_Handle + _TagIDOffset!.Value);
             return instance;
         }
     }
-    private static nint _IsReferencedOffset = -1;
+    private static nint? _IsReferencedOffset;
 
     public ref bool IsReferenced
     {
         get
         {
-            if (_IsReferencedOffset == -1) _IsReferencedOffset = Schema.GetOffset(0x8F7709C4CEABFB2A);
-            return ref _Handle.AsRef<bool>(_IsReferencedOffset);
+            _IsReferencedOffset = _IsReferencedOffset ?? Schema.GetOffset(0x8F7709C4CEABFB2A);
+            return ref _Handle.AsRef<bool>(_IsReferencedOffset!.Value);
         }
     }
 

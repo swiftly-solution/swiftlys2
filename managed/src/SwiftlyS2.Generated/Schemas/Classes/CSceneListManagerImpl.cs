@@ -16,39 +16,39 @@ internal partial class CSceneListManagerImpl : CLogicalEntityImpl, CSceneListMan
 {
     public CSceneListManagerImpl(nint handle) : base(handle) { }
 
-    private static nint _ListManagersOffset = -1;
+    private static nint? _ListManagersOffset;
 
     public ref CUtlVector<CHandle<CSceneListManager>> ListManagers
     {
         get
         {
-            if (_ListManagersOffset == -1) _ListManagersOffset = Schema.GetOffset(0x6DF51C6DAD7882DF);
-            return ref _Handle.AsRef<CUtlVector<CHandle<CSceneListManager>>>(_ListManagersOffset);
+            _ListManagersOffset = _ListManagersOffset ?? Schema.GetOffset(0x6DF51C6DAD7882DF);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CSceneListManager>>>(_ListManagersOffset!.Value);
         }
     }
-    private static nint _ScenesOffset = -1;
+    private static nint? _ScenesOffset;
     private SchemaStringFixedArray? _ScenesInstance;
 
     public ISchemaStringFixedArray Scenes
     {
         get
         {
-            if (_ScenesOffset == -1) _ScenesOffset = Schema.GetOffset(0x6DF51C6D967363E8);
+            _ScenesOffset = _ScenesOffset ?? Schema.GetOffset(0x6DF51C6D967363E8);
             var instance = _ScenesInstance ??= new SchemaStringFixedArray(0, 0x6DF51C6D967363E8, 16, 8, 8);
-            instance.DangerousSetHandle(_Handle + _ScenesOffset);
+            instance.DangerousSetHandle(_Handle + _ScenesOffset!.Value);
             return instance;
         }
     }
-    private static nint _Scenes1Offset = -1;
+    private static nint? _Scenes1Offset;
     private SchemaFixedArray<CHandle<CBaseEntity>>? _Scenes1Instance;
 
     public ISchemaFixedArray<CHandle<CBaseEntity>> Scenes1
     {
         get
         {
-            if (_Scenes1Offset == -1) _Scenes1Offset = Schema.GetOffset(0x6DF51C6D2B7EE872);
+            _Scenes1Offset = _Scenes1Offset ?? Schema.GetOffset(0x6DF51C6D2B7EE872);
             var instance = _Scenes1Instance ??= new SchemaFixedArray<CHandle<CBaseEntity>>(0, 0x6DF51C6D2B7EE872, 16, 4, 4);
-            instance.DangerousSetHandle(_Handle + _Scenes1Offset);
+            instance.DangerousSetHandle(_Handle + _Scenes1Offset!.Value);
             return instance;
         }
     }

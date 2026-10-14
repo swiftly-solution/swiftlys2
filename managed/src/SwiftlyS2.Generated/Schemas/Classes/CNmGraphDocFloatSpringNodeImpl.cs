@@ -16,44 +16,44 @@ internal partial class CNmGraphDocFloatSpringNodeImpl : CNmGraphDocFlowNodeImpl,
 {
     public CNmGraphDocFloatSpringNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _HertzOffset = -1;
+    private static nint? _HertzOffset;
 
     public ref float Hertz
     {
         get
         {
-            if (_HertzOffset == -1) _HertzOffset = Schema.GetOffset(0x62438CDC310B9C74);
-            return ref _Handle.AsRef<float>(_HertzOffset);
+            _HertzOffset = _HertzOffset ?? Schema.GetOffset(0x62438CDC310B9C74);
+            return ref _Handle.AsRef<float>(_HertzOffset!.Value);
         }
     }
-    private static nint _DampingRatioOffset = -1;
+    private static nint? _DampingRatioOffset;
 
     public ref float DampingRatio
     {
         get
         {
-            if (_DampingRatioOffset == -1) _DampingRatioOffset = Schema.GetOffset(0x62438CDCB40C859E);
-            return ref _Handle.AsRef<float>(_DampingRatioOffset);
+            _DampingRatioOffset = _DampingRatioOffset ?? Schema.GetOffset(0x62438CDCB40C859E);
+            return ref _Handle.AsRef<float>(_DampingRatioOffset!.Value);
         }
     }
-    private static nint _UseStartValueOffset = -1;
+    private static nint? _UseStartValueOffset;
 
     public ref bool UseStartValue
     {
         get
         {
-            if (_UseStartValueOffset == -1) _UseStartValueOffset = Schema.GetOffset(0x62438CDC06DE6089);
-            return ref _Handle.AsRef<bool>(_UseStartValueOffset);
+            _UseStartValueOffset = _UseStartValueOffset ?? Schema.GetOffset(0x62438CDC06DE6089);
+            return ref _Handle.AsRef<bool>(_UseStartValueOffset!.Value);
         }
     }
-    private static nint _StartValueOffset = -1;
+    private static nint? _StartValueOffset;
 
     public ref float StartValue
     {
         get
         {
-            if (_StartValueOffset == -1) _StartValueOffset = Schema.GetOffset(0x62438CDC51C82C2A);
-            return ref _Handle.AsRef<float>(_StartValueOffset);
+            _StartValueOffset = _StartValueOffset ?? Schema.GetOffset(0x62438CDC51C82C2A);
+            return ref _Handle.AsRef<float>(_StartValueOffset!.Value);
         }
     }
 

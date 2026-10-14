@@ -16,14 +16,14 @@ internal partial class C_WeaponCZ75aImpl : C_CSWeaponBaseGunImpl, C_WeaponCZ75a
 {
     public C_WeaponCZ75aImpl(nint handle) : base(handle) { }
 
-    private static nint _MagazineRemovedOffset = -1;
+    private static nint? _MagazineRemovedOffset;
 
     public ref bool MagazineRemoved
     {
         get
         {
-            if (_MagazineRemovedOffset == -1) _MagazineRemovedOffset = Schema.GetOffset(0x114DDE4D9188A471);
-            return ref _Handle.AsRef<bool>(_MagazineRemovedOffset);
+            _MagazineRemovedOffset = _MagazineRemovedOffset ?? Schema.GetOffset(0x114DDE4D9188A471);
+            return ref _Handle.AsRef<bool>(_MagazineRemovedOffset!.Value);
         }
     }
 

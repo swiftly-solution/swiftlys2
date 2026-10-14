@@ -16,26 +16,26 @@ internal partial class CGraphPreviewListImpl : SchemaClass, CGraphPreviewList
 {
     public CGraphPreviewListImpl(nint handle) : base(handle) { }
 
-    private static nint _VolumeOffset = -1;
+    private static nint? _VolumeOffset;
 
     public ref float Volume
     {
         get
         {
-            if (_VolumeOffset == -1) _VolumeOffset = Schema.GetOffset(0x7A40C4727647E0C9);
-            return ref _Handle.AsRef<float>(_VolumeOffset);
+            _VolumeOffset = _VolumeOffset ?? Schema.GetOffset(0x7A40C4727647E0C9);
+            return ref _Handle.AsRef<float>(_VolumeOffset!.Value);
         }
     }
-    private static nint _PreviewListOffset = -1;
+    private static nint? _PreviewListOffset;
     private CPreviewListImpl? _PreviewListInstance;
 
     public CPreviewList PreviewList
     {
         get
         {
-            if (_PreviewListOffset == -1) _PreviewListOffset = Schema.GetOffset(0x7A40C4727035D7DF);
+            _PreviewListOffset = _PreviewListOffset ?? Schema.GetOffset(0x7A40C4727035D7DF);
             var instance = _PreviewListInstance ??= new CPreviewListImpl(0);
-            instance.DangerousSetHandle(_Handle + _PreviewListOffset);
+            instance.DangerousSetHandle(_Handle + _PreviewListOffset!.Value);
             return instance;
         }
     }

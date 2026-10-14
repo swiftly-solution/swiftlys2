@@ -16,79 +16,79 @@ internal partial class CollisionDetailLayerInfo_tImpl : SchemaClass, CollisionDe
 {
     public CollisionDetailLayerInfo_tImpl(nint handle) : base(handle) { }
 
-    private static nint _DescriptionOffset = -1;
+    private static nint? _DescriptionOffset;
 
     public string Description
     {
         get
         {
-            if (_DescriptionOffset == -1) _DescriptionOffset = Schema.GetOffset(0xC9EEAD04872D5AD4);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_DescriptionOffset));
+            _DescriptionOffset = _DescriptionOffset ?? Schema.GetOffset(0xC9EEAD04872D5AD4);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_DescriptionOffset!.Value));
         }
         set
         {
-            if (_DescriptionOffset == -1) _DescriptionOffset = Schema.GetOffset(0xC9EEAD04872D5AD4);
-            Schema.SetCUtlString(_Handle, _DescriptionOffset, value);
+            _DescriptionOffset = _DescriptionOffset ?? Schema.GetOffset(0xC9EEAD04872D5AD4);
+            Schema.SetCUtlString(_Handle, _DescriptionOffset!.Value, value);
         }
     }
-    private static nint _FriendlyNameOffset = -1;
+    private static nint? _FriendlyNameOffset;
 
     public string FriendlyName
     {
         get
         {
-            if (_FriendlyNameOffset == -1) _FriendlyNameOffset = Schema.GetOffset(0xC9EEAD045AD3ACAE);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_FriendlyNameOffset));
+            _FriendlyNameOffset = _FriendlyNameOffset ?? Schema.GetOffset(0xC9EEAD045AD3ACAE);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_FriendlyNameOffset!.Value));
         }
         set
         {
-            if (_FriendlyNameOffset == -1) _FriendlyNameOffset = Schema.GetOffset(0xC9EEAD045AD3ACAE);
-            Schema.SetCUtlString(_Handle, _FriendlyNameOffset, value);
+            _FriendlyNameOffset = _FriendlyNameOffset ?? Schema.GetOffset(0xC9EEAD045AD3ACAE);
+            Schema.SetCUtlString(_Handle, _FriendlyNameOffset!.Value, value);
         }
     }
-    private static nint _IsQueryOnlyOffset = -1;
+    private static nint? _IsQueryOnlyOffset;
 
     public ref bool IsQueryOnly
     {
         get
         {
-            if (_IsQueryOnlyOffset == -1) _IsQueryOnlyOffset = Schema.GetOffset(0xC9EEAD049B80786D);
-            return ref _Handle.AsRef<bool>(_IsQueryOnlyOffset);
+            _IsQueryOnlyOffset = _IsQueryOnlyOffset ?? Schema.GetOffset(0xC9EEAD049B80786D);
+            return ref _Handle.AsRef<bool>(_IsQueryOnlyOffset!.Value);
         }
     }
-    private static nint _ParentDetailLayerOffset = -1;
+    private static nint? _ParentDetailLayerOffset;
 
     public string ParentDetailLayer
     {
         get
         {
-            if (_ParentDetailLayerOffset == -1) _ParentDetailLayerOffset = Schema.GetOffset(0xC9EEAD045EA332C4);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ParentDetailLayerOffset));
+            _ParentDetailLayerOffset = _ParentDetailLayerOffset ?? Schema.GetOffset(0xC9EEAD045EA332C4);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ParentDetailLayerOffset!.Value));
         }
         set
         {
-            if (_ParentDetailLayerOffset == -1) _ParentDetailLayerOffset = Schema.GetOffset(0xC9EEAD045EA332C4);
-            Schema.SetCUtlString(_Handle, _ParentDetailLayerOffset, value);
+            _ParentDetailLayerOffset = _ParentDetailLayerOffset ?? Schema.GetOffset(0xC9EEAD045EA332C4);
+            Schema.SetCUtlString(_Handle, _ParentDetailLayerOffset!.Value, value);
         }
     }
-    private static nint _SubtreeDetailLayersOffset = -1;
+    private static nint? _SubtreeDetailLayersOffset;
 
     public ref CUtlVector<CollisionDetailLayerInfo_t__Name_t> SubtreeDetailLayers
     {
         get
         {
-            if (_SubtreeDetailLayersOffset == -1) _SubtreeDetailLayersOffset = Schema.GetOffset(0xC9EEAD04BF8E6F56);
-            return ref _Handle.AsRef<CUtlVector<CollisionDetailLayerInfo_t__Name_t>>(_SubtreeDetailLayersOffset);
+            _SubtreeDetailLayersOffset = _SubtreeDetailLayersOffset ?? Schema.GetOffset(0xC9EEAD04BF8E6F56);
+            return ref _Handle.AsRef<CUtlVector<CollisionDetailLayerInfo_t__Name_t>>(_SubtreeDetailLayersOffset!.Value);
         }
     }
-    private static nint _NotPickableOffset = -1;
+    private static nint? _NotPickableOffset;
 
     public ref bool NotPickable
     {
         get
         {
-            if (_NotPickableOffset == -1) _NotPickableOffset = Schema.GetOffset(0xC9EEAD04BFCD5A27);
-            return ref _Handle.AsRef<bool>(_NotPickableOffset);
+            _NotPickableOffset = _NotPickableOffset ?? Schema.GetOffset(0xC9EEAD04BFCD5A27);
+            return ref _Handle.AsRef<bool>(_NotPickableOffset!.Value);
         }
     }
 

@@ -16,29 +16,29 @@ internal partial class ParticlePreviewBodyGroup_tImpl : SchemaClass, ParticlePre
 {
     public ParticlePreviewBodyGroup_tImpl(nint handle) : base(handle) { }
 
-    private static nint _BodyGroupNameOffset = -1;
+    private static nint? _BodyGroupNameOffset;
 
     public string BodyGroupName
     {
         get
         {
-            if (_BodyGroupNameOffset == -1) _BodyGroupNameOffset = Schema.GetOffset(0xB53436EB1E953217);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_BodyGroupNameOffset));
+            _BodyGroupNameOffset = _BodyGroupNameOffset ?? Schema.GetOffset(0xB53436EB1E953217);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_BodyGroupNameOffset!.Value));
         }
         set
         {
-            if (_BodyGroupNameOffset == -1) _BodyGroupNameOffset = Schema.GetOffset(0xB53436EB1E953217);
-            Schema.SetCUtlString(_Handle, _BodyGroupNameOffset, value);
+            _BodyGroupNameOffset = _BodyGroupNameOffset ?? Schema.GetOffset(0xB53436EB1E953217);
+            Schema.SetCUtlString(_Handle, _BodyGroupNameOffset!.Value, value);
         }
     }
-    private static nint _ValueOffset = -1;
+    private static nint? _ValueOffset;
 
     public ref int Value
     {
         get
         {
-            if (_ValueOffset == -1) _ValueOffset = Schema.GetOffset(0xB53436EB077D337E);
-            return ref _Handle.AsRef<int>(_ValueOffset);
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0xB53436EB077D337E);
+            return ref _Handle.AsRef<int>(_ValueOffset!.Value);
         }
     }
 

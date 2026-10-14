@@ -16,24 +16,24 @@ internal partial class CTestDomainDerived_CursorImpl : CPulseExecCursorImpl, CTe
 {
     public CTestDomainDerived_CursorImpl(nint handle) : base(handle) { }
 
-    private static nint _CursorValueAOffset = -1;
+    private static nint? _CursorValueAOffset;
 
     public ref int CursorValueA
     {
         get
         {
-            if (_CursorValueAOffset == -1) _CursorValueAOffset = Schema.GetOffset(0x7D1D938EF43E6EDB);
-            return ref _Handle.AsRef<int>(_CursorValueAOffset);
+            _CursorValueAOffset = _CursorValueAOffset ?? Schema.GetOffset(0x7D1D938EF43E6EDB);
+            return ref _Handle.AsRef<int>(_CursorValueAOffset!.Value);
         }
     }
-    private static nint _CursorValueBOffset = -1;
+    private static nint? _CursorValueBOffset;
 
     public ref int CursorValueB
     {
         get
         {
-            if (_CursorValueBOffset == -1) _CursorValueBOffset = Schema.GetOffset(0x7D1D938EF53E706E);
-            return ref _Handle.AsRef<int>(_CursorValueBOffset);
+            _CursorValueBOffset = _CursorValueBOffset ?? Schema.GetOffset(0x7D1D938EF53E706E);
+            return ref _Handle.AsRef<int>(_CursorValueBOffset!.Value);
         }
     }
 

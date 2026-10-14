@@ -16,14 +16,14 @@ internal partial class CFuncWallImpl : CBaseModelEntityImpl, CFuncWall
 {
     public CFuncWallImpl(nint handle) : base(handle) { }
 
-    private static nint _StateOffset = -1;
+    private static nint? _StateOffset;
 
     public ref int State
     {
         get
         {
-            if (_StateOffset == -1) _StateOffset = Schema.GetOffset(0x8F4C70C07C824322);
-            return ref _Handle.AsRef<int>(_StateOffset);
+            _StateOffset = _StateOffset ?? Schema.GetOffset(0x8F4C70C07C824322);
+            return ref _Handle.AsRef<int>(_StateOffset!.Value);
         }
     }
 

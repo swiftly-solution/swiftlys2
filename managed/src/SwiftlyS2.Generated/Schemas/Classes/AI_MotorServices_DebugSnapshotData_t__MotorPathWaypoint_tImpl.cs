@@ -16,34 +16,34 @@ internal partial class AI_MotorServices_DebugSnapshotData_t__MotorPathWaypoint_t
 {
     public AI_MotorServices_DebugSnapshotData_t__MotorPathWaypoint_tImpl(nint handle) : base(handle) { }
 
-    private static nint _PositionOffset = -1;
+    private static nint? _PositionOffset;
 
     public ref Vector Position
     {
         get
         {
-            if (_PositionOffset == -1) _PositionOffset = Schema.GetOffset(0x38290840934F4E0A);
-            return ref _Handle.AsRef<Vector>(_PositionOffset);
+            _PositionOffset = _PositionOffset ?? Schema.GetOffset(0x38290840934F4E0A);
+            return ref _Handle.AsRef<Vector>(_PositionOffset!.Value);
         }
     }
-    private static nint _Nav_typeOffset = -1;
+    private static nint? _Nav_typeOffset;
 
     public ref uint Nav_type
     {
         get
         {
-            if (_Nav_typeOffset == -1) _Nav_typeOffset = Schema.GetOffset(0x38290840DE1A548F);
-            return ref _Handle.AsRef<uint>(_Nav_typeOffset);
+            _Nav_typeOffset = _Nav_typeOffset ?? Schema.GetOffset(0x38290840DE1A548F);
+            return ref _Handle.AsRef<uint>(_Nav_typeOffset!.Value);
         }
     }
-    private static nint _FlagsOffset = -1;
+    private static nint? _FlagsOffset;
 
     public ref uint Flags
     {
         get
         {
-            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0x382908409C677A2C);
-            return ref _Handle.AsRef<uint>(_FlagsOffset);
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x382908409C677A2C);
+            return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
         }
     }
 

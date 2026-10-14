@@ -16,19 +16,19 @@ internal partial class CFilterClassImpl : CBaseFilterImpl, CFilterClass
 {
     public CFilterClassImpl(nint handle) : base(handle) { }
 
-    private static nint _FilterClassOffset = -1;
+    private static nint? _FilterClassOffset;
 
     public string FilterClass
     {
         get
         {
-            if (_FilterClassOffset == -1) _FilterClassOffset = Schema.GetOffset(0x31025D487FECB06);
-            return Schema.GetString(_Handle.Read<nint>(_FilterClassOffset));
+            _FilterClassOffset = _FilterClassOffset ?? Schema.GetOffset(0x31025D487FECB06);
+            return Schema.GetString(_Handle.Read<nint>(_FilterClassOffset!.Value));
         }
         set
         {
-            if (_FilterClassOffset == -1) _FilterClassOffset = Schema.GetOffset(0x31025D487FECB06);
-            Schema.SetString(_Handle, _FilterClassOffset, value);
+            _FilterClassOffset = _FilterClassOffset ?? Schema.GetOffset(0x31025D487FECB06);
+            Schema.SetString(_Handle, _FilterClassOffset!.Value, value);
         }
     }
 

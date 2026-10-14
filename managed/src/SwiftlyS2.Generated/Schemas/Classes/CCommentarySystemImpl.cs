@@ -16,107 +16,107 @@ internal partial class CCommentarySystemImpl : SchemaClass, CCommentarySystem
 {
     public CCommentarySystemImpl(nint handle) : base(handle) { }
 
-    private static nint _CommentaryEnabledMidGameOffset = -1;
+    private static nint? _CommentaryEnabledMidGameOffset;
 
     public ref bool CommentaryEnabledMidGame
     {
         get
         {
-            if (_CommentaryEnabledMidGameOffset == -1) _CommentaryEnabledMidGameOffset = Schema.GetOffset(0x87CBBE6A45558B4F);
-            return ref _Handle.AsRef<bool>(_CommentaryEnabledMidGameOffset);
+            _CommentaryEnabledMidGameOffset = _CommentaryEnabledMidGameOffset ?? Schema.GetOffset(0x87CBBE6A45558B4F);
+            return ref _Handle.AsRef<bool>(_CommentaryEnabledMidGameOffset!.Value);
         }
     }
-    private static nint _NextTeleportTimeOffset = -1;
+    private static nint? _NextTeleportTimeOffset;
     private GameTime_tImpl? _NextTeleportTimeInstance;
 
     public GameTime_t NextTeleportTime
     {
         get
         {
-            if (_NextTeleportTimeOffset == -1) _NextTeleportTimeOffset = Schema.GetOffset(0x87CBBE6A92701808);
+            _NextTeleportTimeOffset = _NextTeleportTimeOffset ?? Schema.GetOffset(0x87CBBE6A92701808);
             var instance = _NextTeleportTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _NextTeleportTimeOffset);
+            instance.DangerousSetHandle(_Handle + _NextTeleportTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _TeleportStageOffset = -1;
+    private static nint? _TeleportStageOffset;
 
     public ref int TeleportStage
     {
         get
         {
-            if (_TeleportStageOffset == -1) _TeleportStageOffset = Schema.GetOffset(0x87CBBE6A75C25D8B);
-            return ref _Handle.AsRef<int>(_TeleportStageOffset);
+            _TeleportStageOffset = _TeleportStageOffset ?? Schema.GetOffset(0x87CBBE6A75C25D8B);
+            return ref _Handle.AsRef<int>(_TeleportStageOffset!.Value);
         }
     }
-    private static nint _CheatStateOffset = -1;
+    private static nint? _CheatStateOffset;
 
     public ref bool CheatState
     {
         get
         {
-            if (_CheatStateOffset == -1) _CheatStateOffset = Schema.GetOffset(0x87CBBE6AA9DE3831);
-            return ref _Handle.AsRef<bool>(_CheatStateOffset);
+            _CheatStateOffset = _CheatStateOffset ?? Schema.GetOffset(0x87CBBE6AA9DE3831);
+            return ref _Handle.AsRef<bool>(_CheatStateOffset!.Value);
         }
     }
-    private static nint _IsFirstSpawnGroupToLoadOffset = -1;
+    private static nint? _IsFirstSpawnGroupToLoadOffset;
 
     public ref bool IsFirstSpawnGroupToLoad
     {
         get
         {
-            if (_IsFirstSpawnGroupToLoadOffset == -1) _IsFirstSpawnGroupToLoadOffset = Schema.GetOffset(0x87CBBE6A1BDE1032);
-            return ref _Handle.AsRef<bool>(_IsFirstSpawnGroupToLoadOffset);
+            _IsFirstSpawnGroupToLoadOffset = _IsFirstSpawnGroupToLoadOffset ?? Schema.GetOffset(0x87CBBE6A1BDE1032);
+            return ref _Handle.AsRef<bool>(_IsFirstSpawnGroupToLoadOffset!.Value);
         }
     }
-    private static nint _ModifiedConvarsOffset = -1;
+    private static nint? _ModifiedConvarsOffset;
 
     public ref CUtlVector<modifiedconvars_t> ModifiedConvars
     {
         get
         {
-            if (_ModifiedConvarsOffset == -1) _ModifiedConvarsOffset = Schema.GetOffset(0x87CBBE6A28C8A4E8);
-            return ref _Handle.AsRef<CUtlVector<modifiedconvars_t>>(_ModifiedConvarsOffset);
+            _ModifiedConvarsOffset = _ModifiedConvarsOffset ?? Schema.GetOffset(0x87CBBE6A28C8A4E8);
+            return ref _Handle.AsRef<CUtlVector<modifiedconvars_t>>(_ModifiedConvarsOffset!.Value);
         }
     }
-    private static nint _CurrentNodeOffset = -1;
+    private static nint? _CurrentNodeOffset;
 
     public ref CHandle<CPointCommentaryNode> CurrentNode
     {
         get
         {
-            if (_CurrentNodeOffset == -1) _CurrentNodeOffset = Schema.GetOffset(0x87CBBE6A5C1029D4);
-            return ref _Handle.AsRef<CHandle<CPointCommentaryNode>>(_CurrentNodeOffset);
+            _CurrentNodeOffset = _CurrentNodeOffset ?? Schema.GetOffset(0x87CBBE6A5C1029D4);
+            return ref _Handle.AsRef<CHandle<CPointCommentaryNode>>(_CurrentNodeOffset!.Value);
         }
     }
-    private static nint _ActiveCommentaryNodeOffset = -1;
+    private static nint? _ActiveCommentaryNodeOffset;
 
     public ref CHandle<CPointCommentaryNode> ActiveCommentaryNode
     {
         get
         {
-            if (_ActiveCommentaryNodeOffset == -1) _ActiveCommentaryNodeOffset = Schema.GetOffset(0x87CBBE6AEA08BE3C);
-            return ref _Handle.AsRef<CHandle<CPointCommentaryNode>>(_ActiveCommentaryNodeOffset);
+            _ActiveCommentaryNodeOffset = _ActiveCommentaryNodeOffset ?? Schema.GetOffset(0x87CBBE6AEA08BE3C);
+            return ref _Handle.AsRef<CHandle<CPointCommentaryNode>>(_ActiveCommentaryNodeOffset!.Value);
         }
     }
-    private static nint _LastCommentaryNodeOffset = -1;
+    private static nint? _LastCommentaryNodeOffset;
 
     public ref CHandle<CPointCommentaryNode> LastCommentaryNode
     {
         get
         {
-            if (_LastCommentaryNodeOffset == -1) _LastCommentaryNodeOffset = Schema.GetOffset(0x87CBBE6A33A2318A);
-            return ref _Handle.AsRef<CHandle<CPointCommentaryNode>>(_LastCommentaryNodeOffset);
+            _LastCommentaryNodeOffset = _LastCommentaryNodeOffset ?? Schema.GetOffset(0x87CBBE6A33A2318A);
+            return ref _Handle.AsRef<CHandle<CPointCommentaryNode>>(_LastCommentaryNodeOffset!.Value);
         }
     }
-    private static nint _NodesOffset = -1;
+    private static nint? _NodesOffset;
 
     public ref CUtlVector<CHandle<CPointCommentaryNode>> Nodes
     {
         get
         {
-            if (_NodesOffset == -1) _NodesOffset = Schema.GetOffset(0x87CBBE6A5CCA593A);
-            return ref _Handle.AsRef<CUtlVector<CHandle<CPointCommentaryNode>>>(_NodesOffset);
+            _NodesOffset = _NodesOffset ?? Schema.GetOffset(0x87CBBE6A5CCA593A);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CPointCommentaryNode>>>(_NodesOffset!.Value);
         }
     }
 

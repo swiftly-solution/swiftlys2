@@ -16,15 +16,15 @@ internal partial class CLightEntityImpl : CBaseModelEntityImpl, CLightEntity
 {
     public CLightEntityImpl(nint handle) : base(handle) { }
 
-    private static nint _CLightComponentOffset = -1;
+    private static nint? _CLightComponentOffset;
     private CLightComponentImpl? _CLightComponentInstance;
 
     public CLightComponent? CLightComponent
     {
         get
         {
-            if (_CLightComponentOffset == -1) _CLightComponentOffset = Schema.GetOffset(0xA3C95F05104F0185);
-            var ptr = _Handle.Read<nint>(_CLightComponentOffset);
+            _CLightComponentOffset = _CLightComponentOffset ?? Schema.GetOffset(0xA3C95F05104F0185);
+            var ptr = _Handle.Read<nint>(_CLightComponentOffset!.Value);
             if (!ptr.IsValidPtr()) return null;
             var instance = _CLightComponentInstance ??= new CLightComponentImpl(0);
             instance.DangerousSetHandle(ptr);

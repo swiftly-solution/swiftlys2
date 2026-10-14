@@ -16,153 +16,153 @@ internal partial class CSteamAudioBakedReverbDataImpl : SchemaClass, CSteamAudio
 {
     public CSteamAudioBakedReverbDataImpl(nint handle) : base(handle) { }
 
-    private static nint _BandsOffset = -1;
+    private static nint? _BandsOffset;
 
     public ref int Bands
     {
         get
         {
-            if (_BandsOffset == -1) _BandsOffset = Schema.GetOffset(0xEC10C52F04C6EFF3);
-            return ref _Handle.AsRef<int>(_BandsOffset);
+            _BandsOffset = _BandsOffset ?? Schema.GetOffset(0xEC10C52F04C6EFF3);
+            return ref _Handle.AsRef<int>(_BandsOffset!.Value);
         }
     }
-    private static nint _SceneOffset = -1;
+    private static nint? _SceneOffset;
     private CSteamAudioSceneDataImpl? _SceneInstance;
 
     public CSteamAudioSceneData Scene
     {
         get
         {
-            if (_SceneOffset == -1) _SceneOffset = Schema.GetOffset(0xEC10C52F62ECEE33);
+            _SceneOffset = _SceneOffset ?? Schema.GetOffset(0xEC10C52F62ECEE33);
             var instance = _SceneInstance ??= new CSteamAudioSceneDataImpl(0);
-            instance.DangerousSetHandle(_Handle + _SceneOffset);
+            instance.DangerousSetHandle(_Handle + _SceneOffset!.Value);
             return instance;
         }
     }
-    private static nint _ProbesOffset = -1;
+    private static nint? _ProbesOffset;
     private CSteamAudioProbeDataImpl? _ProbesInstance;
 
     public CSteamAudioProbeData Probes
     {
         get
         {
-            if (_ProbesOffset == -1) _ProbesOffset = Schema.GetOffset(0xEC10C52F49D37E06);
+            _ProbesOffset = _ProbesOffset ?? Schema.GetOffset(0xEC10C52F49D37E06);
             var instance = _ProbesInstance ??= new CSteamAudioProbeDataImpl(0);
-            instance.DangerousSetHandle(_Handle + _ProbesOffset);
+            instance.DangerousSetHandle(_Handle + _ProbesOffset!.Value);
             return instance;
         }
     }
-    private static nint _GridOffset = -1;
+    private static nint? _GridOffset;
     private CSteamAudioProbeGridImpl? _GridInstance;
 
     public CSteamAudioProbeGrid Grid
     {
         get
         {
-            if (_GridOffset == -1) _GridOffset = Schema.GetOffset(0xEC10C52F6D624B31);
+            _GridOffset = _GridOffset ?? Schema.GetOffset(0xEC10C52F6D624B31);
             var instance = _GridInstance ??= new CSteamAudioProbeGridImpl(0);
-            instance.DangerousSetHandle(_Handle + _GridOffset);
+            instance.DangerousSetHandle(_Handle + _GridOffset!.Value);
             return instance;
         }
     }
-    private static nint _ReverbSettingsOffset = -1;
+    private static nint? _ReverbSettingsOffset;
     private SteamAudioReverbSettings_tImpl? _ReverbSettingsInstance;
 
     public SteamAudioReverbSettings_t ReverbSettings
     {
         get
         {
-            if (_ReverbSettingsOffset == -1) _ReverbSettingsOffset = Schema.GetOffset(0xEC10C52F494B4388);
+            _ReverbSettingsOffset = _ReverbSettingsOffset ?? Schema.GetOffset(0xEC10C52F494B4388);
             var instance = _ReverbSettingsInstance ??= new SteamAudioReverbSettings_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _ReverbSettingsOffset);
+            instance.DangerousSetHandle(_Handle + _ReverbSettingsOffset!.Value);
             return instance;
         }
     }
-    private static nint _ReverbClusteringSettingsOffset = -1;
+    private static nint? _ReverbClusteringSettingsOffset;
     private SteamAudioReverbClusteringSettings_tImpl? _ReverbClusteringSettingsInstance;
 
     public SteamAudioReverbClusteringSettings_t ReverbClusteringSettings
     {
         get
         {
-            if (_ReverbClusteringSettingsOffset == -1) _ReverbClusteringSettingsOffset = Schema.GetOffset(0xEC10C52F9DEFBBBE);
+            _ReverbClusteringSettingsOffset = _ReverbClusteringSettingsOffset ?? Schema.GetOffset(0xEC10C52F9DEFBBBE);
             var instance = _ReverbClusteringSettingsInstance ??= new SteamAudioReverbClusteringSettings_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _ReverbClusteringSettingsOffset);
+            instance.DangerousSetHandle(_Handle + _ReverbClusteringSettingsOffset!.Value);
             return instance;
         }
     }
-    private static nint _ReverbCompressionSettingsOffset = -1;
+    private static nint? _ReverbCompressionSettingsOffset;
     private SteamAudioReverbCompressionSettings_tImpl? _ReverbCompressionSettingsInstance;
 
     public SteamAudioReverbCompressionSettings_t ReverbCompressionSettings
     {
         get
         {
-            if (_ReverbCompressionSettingsOffset == -1) _ReverbCompressionSettingsOffset = Schema.GetOffset(0xEC10C52F2E90CE98);
+            _ReverbCompressionSettingsOffset = _ReverbCompressionSettingsOffset ?? Schema.GetOffset(0xEC10C52F2E90CE98);
             var instance = _ReverbCompressionSettingsInstance ??= new SteamAudioReverbCompressionSettings_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _ReverbCompressionSettingsOffset);
+            instance.DangerousSetHandle(_Handle + _ReverbCompressionSettingsOffset!.Value);
             return instance;
         }
     }
-    private static nint _ClusteredProbesOffset = -1;
+    private static nint? _ClusteredProbesOffset;
     private CSteamAudioProbeDataImpl? _ClusteredProbesInstance;
 
     public CSteamAudioProbeData ClusteredProbes
     {
         get
         {
-            if (_ClusteredProbesOffset == -1) _ClusteredProbesOffset = Schema.GetOffset(0xEC10C52FFCE1309F);
+            _ClusteredProbesOffset = _ClusteredProbesOffset ?? Schema.GetOffset(0xEC10C52FFCE1309F);
             var instance = _ClusteredProbesInstance ??= new CSteamAudioProbeDataImpl(0);
-            instance.DangerousSetHandle(_Handle + _ClusteredProbesOffset);
+            instance.DangerousSetHandle(_Handle + _ClusteredProbesOffset!.Value);
             return instance;
         }
     }
-    private static nint _ClusterForProbeOffset = -1;
+    private static nint? _ClusterForProbeOffset;
 
     public ref CUtlVector<short> ClusterForProbe
     {
         get
         {
-            if (_ClusterForProbeOffset == -1) _ClusterForProbeOffset = Schema.GetOffset(0xEC10C52F3EF54302);
-            return ref _Handle.AsRef<CUtlVector<short>>(_ClusterForProbeOffset);
+            _ClusterForProbeOffset = _ClusterForProbeOffset ?? Schema.GetOffset(0xEC10C52F3EF54302);
+            return ref _Handle.AsRef<CUtlVector<short>>(_ClusterForProbeOffset!.Value);
         }
     }
-    private static nint _CompressedDataOffset = -1;
+    private static nint? _CompressedDataOffset;
     private CSteamAudioCompressedReverbImpl? _CompressedDataInstance;
 
     public CSteamAudioCompressedReverb CompressedData
     {
         get
         {
-            if (_CompressedDataOffset == -1) _CompressedDataOffset = Schema.GetOffset(0xEC10C52FD28B783C);
+            _CompressedDataOffset = _CompressedDataOffset ?? Schema.GetOffset(0xEC10C52FD28B783C);
             var instance = _CompressedDataInstance ??= new CSteamAudioCompressedReverbImpl(0);
-            instance.DangerousSetHandle(_Handle + _CompressedDataOffset);
+            instance.DangerousSetHandle(_Handle + _CompressedDataOffset!.Value);
             return instance;
         }
     }
-    private static nint _CompressedClusteredDataOffset = -1;
+    private static nint? _CompressedClusteredDataOffset;
     private CSteamAudioCompressedReverbImpl? _CompressedClusteredDataInstance;
 
     public CSteamAudioCompressedReverb CompressedClusteredData
     {
         get
         {
-            if (_CompressedClusteredDataOffset == -1) _CompressedClusteredDataOffset = Schema.GetOffset(0xEC10C52FFAC398D7);
+            _CompressedClusteredDataOffset = _CompressedClusteredDataOffset ?? Schema.GetOffset(0xEC10C52FFAC398D7);
             var instance = _CompressedClusteredDataInstance ??= new CSteamAudioCompressedReverbImpl(0);
-            instance.DangerousSetHandle(_Handle + _CompressedClusteredDataOffset);
+            instance.DangerousSetHandle(_Handle + _CompressedClusteredDataOffset!.Value);
             return instance;
         }
     }
-    private static nint _MovablesOffset = -1;
+    private static nint? _MovablesOffset;
     private SchemaUntypedField? _MovablesInstance;
 
     public SchemaUntypedField Movables
     {
         get
         {
-            if (_MovablesOffset == -1) _MovablesOffset = Schema.GetOffset(0xEC10C52FD92B2A8E);
+            _MovablesOffset = _MovablesOffset ?? Schema.GetOffset(0xEC10C52FD92B2A8E);
             var instance = _MovablesInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _MovablesOffset);
+            instance.DangerousSetHandle(_Handle + _MovablesOffset!.Value);
             return instance;
         }
     }

@@ -16,44 +16,44 @@ internal partial class CPulseCell_PlaySequenceImpl : CPulseCell_BaseYieldingInfl
 {
     public CPulseCell_PlaySequenceImpl(nint handle) : base(handle) { }
 
-    private static nint _SequenceNameOffset = -1;
+    private static nint? _SequenceNameOffset;
 
     public string SequenceName
     {
         get
         {
-            if (_SequenceNameOffset == -1) _SequenceNameOffset = Schema.GetOffset(0xE313765BA270F66B);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_SequenceNameOffset));
+            _SequenceNameOffset = _SequenceNameOffset ?? Schema.GetOffset(0xE313765BA270F66B);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_SequenceNameOffset!.Value));
         }
         set
         {
-            if (_SequenceNameOffset == -1) _SequenceNameOffset = Schema.GetOffset(0xE313765BA270F66B);
-            Schema.SetCUtlString(_Handle, _SequenceNameOffset, value);
+            _SequenceNameOffset = _SequenceNameOffset ?? Schema.GetOffset(0xE313765BA270F66B);
+            Schema.SetCUtlString(_Handle, _SequenceNameOffset!.Value, value);
         }
     }
-    private static nint _PulseAnimEventsOffset = -1;
+    private static nint? _PulseAnimEventsOffset;
     private PulseNodeDynamicOutflows_tImpl? _PulseAnimEventsInstance;
 
     public PulseNodeDynamicOutflows_t PulseAnimEvents
     {
         get
         {
-            if (_PulseAnimEventsOffset == -1) _PulseAnimEventsOffset = Schema.GetOffset(0xE313765B10F0A082);
+            _PulseAnimEventsOffset = _PulseAnimEventsOffset ?? Schema.GetOffset(0xE313765B10F0A082);
             var instance = _PulseAnimEventsInstance ??= new PulseNodeDynamicOutflows_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _PulseAnimEventsOffset);
+            instance.DangerousSetHandle(_Handle + _PulseAnimEventsOffset!.Value);
             return instance;
         }
     }
-    private static nint _OnFinishedOffset = -1;
+    private static nint? _OnFinishedOffset;
     private CPulse_ResumePointImpl? _OnFinishedInstance;
 
     public CPulse_ResumePoint OnFinished
     {
         get
         {
-            if (_OnFinishedOffset == -1) _OnFinishedOffset = Schema.GetOffset(0xE313765B8D903E5E);
+            _OnFinishedOffset = _OnFinishedOffset ?? Schema.GetOffset(0xE313765B8D903E5E);
             var instance = _OnFinishedInstance ??= new CPulse_ResumePointImpl(0);
-            instance.DangerousSetHandle(_Handle + _OnFinishedOffset);
+            instance.DangerousSetHandle(_Handle + _OnFinishedOffset!.Value);
             return instance;
         }
     }

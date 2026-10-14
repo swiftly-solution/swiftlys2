@@ -16,64 +16,64 @@ internal partial class CPhysSurfacePropertiesPhysicsImpl : SchemaClass, CPhysSur
 {
     public CPhysSurfacePropertiesPhysicsImpl(nint handle) : base(handle) { }
 
-    private static nint _FrictionOffset = -1;
+    private static nint? _FrictionOffset;
 
     public ref float Friction
     {
         get
         {
-            if (_FrictionOffset == -1) _FrictionOffset = Schema.GetOffset(0xF44ED88D5DBDE05B);
-            return ref _Handle.AsRef<float>(_FrictionOffset);
+            _FrictionOffset = _FrictionOffset ?? Schema.GetOffset(0xF44ED88D5DBDE05B);
+            return ref _Handle.AsRef<float>(_FrictionOffset!.Value);
         }
     }
-    private static nint _ElasticityOffset = -1;
+    private static nint? _ElasticityOffset;
 
     public ref float Elasticity
     {
         get
         {
-            if (_ElasticityOffset == -1) _ElasticityOffset = Schema.GetOffset(0xF44ED88DEFAD1ED4);
-            return ref _Handle.AsRef<float>(_ElasticityOffset);
+            _ElasticityOffset = _ElasticityOffset ?? Schema.GetOffset(0xF44ED88DEFAD1ED4);
+            return ref _Handle.AsRef<float>(_ElasticityOffset!.Value);
         }
     }
-    private static nint _DensityOffset = -1;
+    private static nint? _DensityOffset;
 
     public ref float Density
     {
         get
         {
-            if (_DensityOffset == -1) _DensityOffset = Schema.GetOffset(0xF44ED88D870F96BB);
-            return ref _Handle.AsRef<float>(_DensityOffset);
+            _DensityOffset = _DensityOffset ?? Schema.GetOffset(0xF44ED88D870F96BB);
+            return ref _Handle.AsRef<float>(_DensityOffset!.Value);
         }
     }
-    private static nint _ThicknessOffset = -1;
+    private static nint? _ThicknessOffset;
 
     public ref float Thickness
     {
         get
         {
-            if (_ThicknessOffset == -1) _ThicknessOffset = Schema.GetOffset(0xF44ED88D5B5FCC35);
-            return ref _Handle.AsRef<float>(_ThicknessOffset);
+            _ThicknessOffset = _ThicknessOffset ?? Schema.GetOffset(0xF44ED88D5B5FCC35);
+            return ref _Handle.AsRef<float>(_ThicknessOffset!.Value);
         }
     }
-    private static nint _SoftContactFrequencyOffset = -1;
+    private static nint? _SoftContactFrequencyOffset;
 
     public ref float SoftContactFrequency
     {
         get
         {
-            if (_SoftContactFrequencyOffset == -1) _SoftContactFrequencyOffset = Schema.GetOffset(0xF44ED88D2103A65B);
-            return ref _Handle.AsRef<float>(_SoftContactFrequencyOffset);
+            _SoftContactFrequencyOffset = _SoftContactFrequencyOffset ?? Schema.GetOffset(0xF44ED88D2103A65B);
+            return ref _Handle.AsRef<float>(_SoftContactFrequencyOffset!.Value);
         }
     }
-    private static nint _SoftContactDampingRatioOffset = -1;
+    private static nint? _SoftContactDampingRatioOffset;
 
     public ref float SoftContactDampingRatio
     {
         get
         {
-            if (_SoftContactDampingRatioOffset == -1) _SoftContactDampingRatioOffset = Schema.GetOffset(0xF44ED88D1FD70102);
-            return ref _Handle.AsRef<float>(_SoftContactDampingRatioOffset);
+            _SoftContactDampingRatioOffset = _SoftContactDampingRatioOffset ?? Schema.GetOffset(0xF44ED88D1FD70102);
+            return ref _Handle.AsRef<float>(_SoftContactDampingRatioOffset!.Value);
         }
     }
 

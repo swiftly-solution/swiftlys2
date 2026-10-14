@@ -16,39 +16,39 @@ internal partial class CFootMotionImpl : SchemaClass, CFootMotion
 {
     public CFootMotionImpl(nint handle) : base(handle) { }
 
-    private static nint _StridesOffset = -1;
+    private static nint? _StridesOffset;
 
     public ref CUtlVector<CFootStride> Strides
     {
         get
         {
-            if (_StridesOffset == -1) _StridesOffset = Schema.GetOffset(0xA4A598B8AE9C97F1);
-            return ref _Handle.AsRef<CUtlVector<CFootStride>>(_StridesOffset);
+            _StridesOffset = _StridesOffset ?? Schema.GetOffset(0xA4A598B8AE9C97F1);
+            return ref _Handle.AsRef<CUtlVector<CFootStride>>(_StridesOffset!.Value);
         }
     }
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xA4A598B84D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xA4A598B84D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xA4A598B84D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xA4A598B84D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _AdditiveOffset = -1;
+    private static nint? _AdditiveOffset;
 
     public ref bool Additive
     {
         get
         {
-            if (_AdditiveOffset == -1) _AdditiveOffset = Schema.GetOffset(0xA4A598B80FA86105);
-            return ref _Handle.AsRef<bool>(_AdditiveOffset);
+            _AdditiveOffset = _AdditiveOffset ?? Schema.GetOffset(0xA4A598B80FA86105);
+            return ref _Handle.AsRef<bool>(_AdditiveOffset!.Value);
         }
     }
 

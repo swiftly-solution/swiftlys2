@@ -16,14 +16,14 @@ internal partial class C_MultimeterImpl : CBaseAnimGraphImpl, C_Multimeter
 {
     public C_MultimeterImpl(nint handle) : base(handle) { }
 
-    private static nint _TargetC4Offset = -1;
+    private static nint? _TargetC4Offset;
 
     public ref CHandle<C_PlantedC4> TargetC4
     {
         get
         {
-            if (_TargetC4Offset == -1) _TargetC4Offset = Schema.GetOffset(0x4DE5F6818574BDFD);
-            return ref _Handle.AsRef<CHandle<C_PlantedC4>>(_TargetC4Offset);
+            _TargetC4Offset = _TargetC4Offset ?? Schema.GetOffset(0x4DE5F6818574BDFD);
+            return ref _Handle.AsRef<CHandle<C_PlantedC4>>(_TargetC4Offset!.Value);
         }
     }
 

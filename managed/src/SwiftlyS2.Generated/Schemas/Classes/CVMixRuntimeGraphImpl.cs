@@ -16,60 +16,60 @@ internal partial class CVMixRuntimeGraphImpl : CVMixBaseGraphDescriptionImpl, CV
 {
     public CVMixRuntimeGraphImpl(nint handle) : base(handle) { }
 
-    private static nint _SubmixesOffset = -1;
+    private static nint? _SubmixesOffset;
 
     public ref CUtlLeanVector<CVMixSubmix, int> Submixes
     {
         get
         {
-            if (_SubmixesOffset == -1) _SubmixesOffset = Schema.GetOffset(0x15AB5F281CC3E3D);
-            return ref _Handle.AsRef<CUtlLeanVector<CVMixSubmix, int>>(_SubmixesOffset);
+            _SubmixesOffset = _SubmixesOffset ?? Schema.GetOffset(0x15AB5F281CC3E3D);
+            return ref _Handle.AsRef<CUtlLeanVector<CVMixSubmix, int>>(_SubmixesOffset!.Value);
         }
     }
-    private static nint _ImpulseResponseValuesOffset = -1;
+    private static nint? _ImpulseResponseValuesOffset;
 
     public ref CUtlLeanVector<ulong, int> ImpulseResponseValues
     {
         get
         {
-            if (_ImpulseResponseValuesOffset == -1) _ImpulseResponseValuesOffset = Schema.GetOffset(0x15AB5F2C2088359);
-            return ref _Handle.AsRef<CUtlLeanVector<ulong, int>>(_ImpulseResponseValuesOffset);
+            _ImpulseResponseValuesOffset = _ImpulseResponseValuesOffset ?? Schema.GetOffset(0x15AB5F2C2088359);
+            return ref _Handle.AsRef<CUtlLeanVector<ulong, int>>(_ImpulseResponseValuesOffset!.Value);
         }
     }
-    private static nint _InputDefaultValuesOffset = -1;
+    private static nint? _InputDefaultValuesOffset;
     private SchemaUntypedField? _InputDefaultValuesInstance;
 
     public SchemaUntypedField InputDefaultValues
     {
         get
         {
-            if (_InputDefaultValuesOffset == -1) _InputDefaultValuesOffset = Schema.GetOffset(0x15AB5F2758429A2);
+            _InputDefaultValuesOffset = _InputDefaultValuesOffset ?? Schema.GetOffset(0x15AB5F2758429A2);
             var instance = _InputDefaultValuesInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _InputDefaultValuesOffset);
+            instance.DangerousSetHandle(_Handle + _InputDefaultValuesOffset!.Value);
             return instance;
         }
     }
-    private static nint _SourcesOffset = -1;
+    private static nint? _SourcesOffset;
     private SchemaUntypedField? _SourcesInstance;
 
     public SchemaUntypedField Sources
     {
         get
         {
-            if (_SourcesOffset == -1) _SourcesOffset = Schema.GetOffset(0x15AB5F249C9E551);
+            _SourcesOffset = _SourcesOffset ?? Schema.GetOffset(0x15AB5F249C9E551);
             var instance = _SourcesInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _SourcesOffset);
+            instance.DangerousSetHandle(_Handle + _SourcesOffset!.Value);
             return instance;
         }
     }
-    private static nint _FixupsOffset = -1;
+    private static nint? _FixupsOffset;
 
     public ref CUtlVector<VMixPointerFixupEntry_t> Fixups
     {
         get
         {
-            if (_FixupsOffset == -1) _FixupsOffset = Schema.GetOffset(0x15AB5F29B5C3B62);
-            return ref _Handle.AsRef<CUtlVector<VMixPointerFixupEntry_t>>(_FixupsOffset);
+            _FixupsOffset = _FixupsOffset ?? Schema.GetOffset(0x15AB5F29B5C3B62);
+            return ref _Handle.AsRef<CUtlVector<VMixPointerFixupEntry_t>>(_FixupsOffset!.Value);
         }
     }
 

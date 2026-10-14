@@ -16,24 +16,24 @@ internal partial class FeBoneMergeLink_tImpl : SchemaClass, FeBoneMergeLink_t
 {
     public FeBoneMergeLink_tImpl(nint handle) : base(handle) { }
 
-    private static nint _ParentHashOffset = -1;
+    private static nint? _ParentHashOffset;
 
     public ref uint ParentHash
     {
         get
         {
-            if (_ParentHashOffset == -1) _ParentHashOffset = Schema.GetOffset(0x340733717479603D);
-            return ref _Handle.AsRef<uint>(_ParentHashOffset);
+            _ParentHashOffset = _ParentHashOffset ?? Schema.GetOffset(0x340733717479603D);
+            return ref _Handle.AsRef<uint>(_ParentHashOffset!.Value);
         }
     }
-    private static nint _ChildNodeOffset = -1;
+    private static nint? _ChildNodeOffset;
 
     public ref ushort ChildNode
     {
         get
         {
-            if (_ChildNodeOffset == -1) _ChildNodeOffset = Schema.GetOffset(0x3407337184D14B09);
-            return ref _Handle.AsRef<ushort>(_ChildNodeOffset);
+            _ChildNodeOffset = _ChildNodeOffset ?? Schema.GetOffset(0x3407337184D14B09);
+            return ref _Handle.AsRef<ushort>(_ChildNodeOffset!.Value);
         }
     }
 

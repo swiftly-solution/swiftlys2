@@ -16,24 +16,24 @@ internal partial class CAnimGraphControllerManagerImpl : SchemaClass, CAnimGraph
 {
     public CAnimGraphControllerManagerImpl(nint handle) : base(handle) { }
 
-    private static nint _ControllersOffset = -1;
+    private static nint? _ControllersOffset;
 
     public ref CUtlVector<PointerTo<CAnimGraphControllerBase>> Controllers
     {
         get
         {
-            if (_ControllersOffset == -1) _ControllersOffset = Schema.GetOffset(0x991B1F440CF2DE16);
-            return ref _Handle.AsRef<CUtlVector<PointerTo<CAnimGraphControllerBase>>>(_ControllersOffset);
+            _ControllersOffset = _ControllersOffset ?? Schema.GetOffset(0x991B1F440CF2DE16);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<CAnimGraphControllerBase>>>(_ControllersOffset!.Value);
         }
     }
-    private static nint _GraphBindingsCreatedOffset = -1;
+    private static nint? _GraphBindingsCreatedOffset;
 
     public ref bool GraphBindingsCreated
     {
         get
         {
-            if (_GraphBindingsCreatedOffset == -1) _GraphBindingsCreatedOffset = Schema.GetOffset(0x991B1F443C33156F);
-            return ref _Handle.AsRef<bool>(_GraphBindingsCreatedOffset);
+            _GraphBindingsCreatedOffset = _GraphBindingsCreatedOffset ?? Schema.GetOffset(0x991B1F443C33156F);
+            return ref _Handle.AsRef<bool>(_GraphBindingsCreatedOffset!.Value);
         }
     }
 

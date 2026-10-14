@@ -16,16 +16,16 @@ internal partial class CPulseCell_ApplyAnimGraphParamImpl : CPulseCell_BaseYield
 {
     public CPulseCell_ApplyAnimGraphParamImpl(nint handle) : base(handle) { }
 
-    private static nint _ValueOffset = -1;
+    private static nint? _ValueOffset;
     private SchemaUntypedField? _ValueInstance;
 
     public SchemaUntypedField Value
     {
         get
         {
-            if (_ValueOffset == -1) _ValueOffset = Schema.GetOffset(0xA96AE9286B99AEEA);
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0xA96AE9286B99AEEA);
             var instance = _ValueInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ValueOffset);
+            instance.DangerousSetHandle(_Handle + _ValueOffset!.Value);
             return instance;
         }
     }

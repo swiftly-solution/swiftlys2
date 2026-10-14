@@ -16,29 +16,29 @@ internal partial class CRigidBodyWeightImpl : SchemaClass, CRigidBodyWeight
 {
     public CRigidBodyWeightImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xEA937F0D4D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xEA937F0D4D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xEA937F0D4D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xEA937F0D4D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _WeightOffset = -1;
+    private static nint? _WeightOffset;
 
     public ref float Weight
     {
         get
         {
-            if (_WeightOffset == -1) _WeightOffset = Schema.GetOffset(0xEA937F0D7B81E7AB);
-            return ref _Handle.AsRef<float>(_WeightOffset);
+            _WeightOffset = _WeightOffset ?? Schema.GetOffset(0xEA937F0D7B81E7AB);
+            return ref _Handle.AsRef<float>(_WeightOffset!.Value);
         }
     }
 

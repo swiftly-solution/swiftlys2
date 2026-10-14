@@ -16,29 +16,29 @@ internal partial class SequenceDataImpl : SchemaClass, SequenceData
 {
     public SequenceDataImpl(nint handle) : base(handle) { }
 
-    private static nint _SequenceOffset = -1;
+    private static nint? _SequenceOffset;
     private HSequenceImpl? _SequenceInstance;
 
     public HSequence Sequence
     {
         get
         {
-            if (_SequenceOffset == -1) _SequenceOffset = Schema.GetOffset(0xA5F4EDB0E0A0598E);
+            _SequenceOffset = _SequenceOffset ?? Schema.GetOffset(0xA5F4EDB0E0A0598E);
             var instance = _SequenceInstance ??= new HSequenceImpl(0);
-            instance.DangerousSetHandle(_Handle + _SequenceOffset);
+            instance.DangerousSetHandle(_Handle + _SequenceOffset!.Value);
             return instance;
         }
     }
-    private static nint _CycleOffset = -1;
+    private static nint? _CycleOffset;
     private CNetworkedCycleImpl? _CycleInstance;
 
     public CNetworkedCycle Cycle
     {
         get
         {
-            if (_CycleOffset == -1) _CycleOffset = Schema.GetOffset(0xA5F4EDB0DED42B11);
+            _CycleOffset = _CycleOffset ?? Schema.GetOffset(0xA5F4EDB0DED42B11);
             var instance = _CycleInstance ??= new CNetworkedCycleImpl(0);
-            instance.DangerousSetHandle(_Handle + _CycleOffset);
+            instance.DangerousSetHandle(_Handle + _CycleOffset!.Value);
             return instance;
         }
     }

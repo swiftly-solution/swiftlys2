@@ -16,14 +16,14 @@ internal partial class MaterialParamVector_tImpl : MaterialParam_tImpl, Material
 {
     public MaterialParamVector_tImpl(nint handle) : base(handle) { }
 
-    private static nint _ValueOffset = -1;
+    private static nint? _ValueOffset;
 
     public ref Vector4D Value
     {
         get
         {
-            if (_ValueOffset == -1) _ValueOffset = Schema.GetOffset(0xC82210956B99AEEA);
-            return ref _Handle.AsRef<Vector4D>(_ValueOffset);
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0xC82210956B99AEEA);
+            return ref _Handle.AsRef<Vector4D>(_ValueOffset!.Value);
         }
     }
 

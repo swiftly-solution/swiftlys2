@@ -16,27 +16,27 @@ internal partial class RnSoftbodySpring_tImpl : SchemaClass, RnSoftbodySpring_t
 {
     public RnSoftbodySpring_tImpl(nint handle) : base(handle) { }
 
-    private static nint _ParticleOffset = -1;
+    private static nint? _ParticleOffset;
     private SchemaFixedArray<ushort>? _ParticleInstance;
 
     public ISchemaFixedArray<ushort> Particle
     {
         get
         {
-            if (_ParticleOffset == -1) _ParticleOffset = Schema.GetOffset(0xAB4E9C9B863A8E83);
+            _ParticleOffset = _ParticleOffset ?? Schema.GetOffset(0xAB4E9C9B863A8E83);
             var instance = _ParticleInstance ??= new SchemaFixedArray<ushort>(0, 0xAB4E9C9B863A8E83, 2, 2, 2);
-            instance.DangerousSetHandle(_Handle + _ParticleOffset);
+            instance.DangerousSetHandle(_Handle + _ParticleOffset!.Value);
             return instance;
         }
     }
-    private static nint _LengthOffset = -1;
+    private static nint? _LengthOffset;
 
     public ref float Length
     {
         get
         {
-            if (_LengthOffset == -1) _LengthOffset = Schema.GetOffset(0xAB4E9C9BFF9776DF);
-            return ref _Handle.AsRef<float>(_LengthOffset);
+            _LengthOffset = _LengthOffset ?? Schema.GetOffset(0xAB4E9C9BFF9776DF);
+            return ref _Handle.AsRef<float>(_LengthOffset!.Value);
         }
     }
 

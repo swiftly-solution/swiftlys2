@@ -16,14 +16,14 @@ internal partial class CNmCurrentSyncEventIDNode__CDefinitionImpl : CNmIDValueNo
 {
     public CNmCurrentSyncEventIDNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint _SourceStateNodeIdxOffset = -1;
+    private static nint? _SourceStateNodeIdxOffset;
 
     public ref short SourceStateNodeIdx
     {
         get
         {
-            if (_SourceStateNodeIdxOffset == -1) _SourceStateNodeIdxOffset = Schema.GetOffset(0x792E5F1463F0228C);
-            return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset);
+            _SourceStateNodeIdxOffset = _SourceStateNodeIdxOffset ?? Schema.GetOffset(0x792E5F1463F0228C);
+            return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset!.Value);
         }
     }
 

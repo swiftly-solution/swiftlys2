@@ -16,14 +16,14 @@ internal partial class CAnimGraphDoc_ConditionContainerImpl : SchemaClass, CAnim
 {
     public CAnimGraphDoc_ConditionContainerImpl(nint handle) : base(handle) { }
 
-    private static nint _ConditionsOffset = -1;
+    private static nint? _ConditionsOffset;
 
     public ref CUtlVector<SchemaUntypedField> Conditions
     {
         get
         {
-            if (_ConditionsOffset == -1) _ConditionsOffset = Schema.GetOffset(0xD2AFD1CAEDDF6757);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ConditionsOffset);
+            _ConditionsOffset = _ConditionsOffset ?? Schema.GetOffset(0xD2AFD1CAEDDF6757);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ConditionsOffset!.Value);
         }
     }
 

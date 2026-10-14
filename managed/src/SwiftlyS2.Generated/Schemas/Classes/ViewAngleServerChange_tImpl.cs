@@ -16,34 +16,34 @@ internal partial class ViewAngleServerChange_tImpl : SchemaClass, ViewAngleServe
 {
     public ViewAngleServerChange_tImpl(nint handle) : base(handle) { }
 
-    private static nint _TypeOffset = -1;
+    private static nint? _TypeOffset;
 
     public ref FixAngleSet_t Type
     {
         get
         {
-            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0x84AFC64BEEF036F9);
-            return ref _Handle.AsRef<FixAngleSet_t>(_TypeOffset);
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x84AFC64BEEF036F9);
+            return ref _Handle.AsRef<FixAngleSet_t>(_TypeOffset!.Value);
         }
     }
-    private static nint _AngleOffset = -1;
+    private static nint? _AngleOffset;
 
     public ref QAngle Angle
     {
         get
         {
-            if (_AngleOffset == -1) _AngleOffset = Schema.GetOffset(0x84AFC64B64F7DFC7);
-            return ref _Handle.AsRef<QAngle>(_AngleOffset);
+            _AngleOffset = _AngleOffset ?? Schema.GetOffset(0x84AFC64B64F7DFC7);
+            return ref _Handle.AsRef<QAngle>(_AngleOffset!.Value);
         }
     }
-    private static nint _IndexOffset = -1;
+    private static nint? _IndexOffset;
 
     public ref uint Index
     {
         get
         {
-            if (_IndexOffset == -1) _IndexOffset = Schema.GetOffset(0x84AFC64BA1A45087);
-            return ref _Handle.AsRef<uint>(_IndexOffset);
+            _IndexOffset = _IndexOffset ?? Schema.GetOffset(0x84AFC64BA1A45087);
+            return ref _Handle.AsRef<uint>(_IndexOffset!.Value);
         }
     }
 

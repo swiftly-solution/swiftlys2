@@ -16,64 +16,64 @@ internal partial class CAudioMorphDataImpl : SchemaClass, CAudioMorphData
 {
     public CAudioMorphDataImpl(nint handle) : base(handle) { }
 
-    private static nint _TimesOffset = -1;
+    private static nint? _TimesOffset;
 
     public ref CUtlVector<float> Times
     {
         get
         {
-            if (_TimesOffset == -1) _TimesOffset = Schema.GetOffset(0xA13726EA86A55CD5);
-            return ref _Handle.AsRef<CUtlVector<float>>(_TimesOffset);
+            _TimesOffset = _TimesOffset ?? Schema.GetOffset(0xA13726EA86A55CD5);
+            return ref _Handle.AsRef<CUtlVector<float>>(_TimesOffset!.Value);
         }
     }
-    private static nint _NameHashCodesOffset = -1;
+    private static nint? _NameHashCodesOffset;
 
     public ref CUtlVector<uint> NameHashCodes
     {
         get
         {
-            if (_NameHashCodesOffset == -1) _NameHashCodesOffset = Schema.GetOffset(0xA13726EAC13918BC);
-            return ref _Handle.AsRef<CUtlVector<uint>>(_NameHashCodesOffset);
+            _NameHashCodesOffset = _NameHashCodesOffset ?? Schema.GetOffset(0xA13726EAC13918BC);
+            return ref _Handle.AsRef<CUtlVector<uint>>(_NameHashCodesOffset!.Value);
         }
     }
-    private static nint _NameStringsOffset = -1;
+    private static nint? _NameStringsOffset;
 
     public ref CUtlVector<CUtlString> NameStrings
     {
         get
         {
-            if (_NameStringsOffset == -1) _NameStringsOffset = Schema.GetOffset(0xA13726EA23776A0C);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_NameStringsOffset);
+            _NameStringsOffset = _NameStringsOffset ?? Schema.GetOffset(0xA13726EA23776A0C);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_NameStringsOffset!.Value);
         }
     }
-    private static nint _SamplesOffset = -1;
+    private static nint? _SamplesOffset;
 
     public ref CUtlVector<CUtlVector<float>> Samples
     {
         get
         {
-            if (_SamplesOffset == -1) _SamplesOffset = Schema.GetOffset(0xA13726EA364CA9DC);
-            return ref _Handle.AsRef<CUtlVector<CUtlVector<float>>>(_SamplesOffset);
+            _SamplesOffset = _SamplesOffset ?? Schema.GetOffset(0xA13726EA364CA9DC);
+            return ref _Handle.AsRef<CUtlVector<CUtlVector<float>>>(_SamplesOffset!.Value);
         }
     }
-    private static nint _EaseInOffset = -1;
+    private static nint? _EaseInOffset;
 
     public ref float EaseIn
     {
         get
         {
-            if (_EaseInOffset == -1) _EaseInOffset = Schema.GetOffset(0xA13726EA4514C026);
-            return ref _Handle.AsRef<float>(_EaseInOffset);
+            _EaseInOffset = _EaseInOffset ?? Schema.GetOffset(0xA13726EA4514C026);
+            return ref _Handle.AsRef<float>(_EaseInOffset!.Value);
         }
     }
-    private static nint _EaseOutOffset = -1;
+    private static nint? _EaseOutOffset;
 
     public ref float EaseOut
     {
         get
         {
-            if (_EaseOutOffset == -1) _EaseOutOffset = Schema.GetOffset(0xA13726EA46B49C07);
-            return ref _Handle.AsRef<float>(_EaseOutOffset);
+            _EaseOutOffset = _EaseOutOffset ?? Schema.GetOffset(0xA13726EA46B49C07);
+            return ref _Handle.AsRef<float>(_EaseOutOffset!.Value);
         }
     }
 

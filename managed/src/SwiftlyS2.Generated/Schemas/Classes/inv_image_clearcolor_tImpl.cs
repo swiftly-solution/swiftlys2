@@ -16,14 +16,14 @@ internal partial class inv_image_clearcolor_tImpl : SchemaClass, inv_image_clear
 {
     public inv_image_clearcolor_tImpl(nint handle) : base(handle) { }
 
-    private static nint _ColorOffset = -1;
+    private static nint? _ColorOffset;
 
     public ref Vector Color
     {
         get
         {
-            if (_ColorOffset == -1) _ColorOffset = Schema.GetOffset(0xD5F806D43D7E6258);
-            return ref _Handle.AsRef<Vector>(_ColorOffset);
+            _ColorOffset = _ColorOffset ?? Schema.GetOffset(0xD5F806D43D7E6258);
+            return ref _Handle.AsRef<Vector>(_ColorOffset!.Value);
         }
     }
 

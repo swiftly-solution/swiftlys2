@@ -16,14 +16,14 @@ internal partial class WeaponPurchaseTracker_tImpl : SchemaClass, WeaponPurchase
 {
     public WeaponPurchaseTracker_tImpl(nint handle) : base(handle) { }
 
-    private static nint _WeaponPurchasesOffset = -1;
+    private static nint? _WeaponPurchasesOffset;
 
     public ref CUtlVector<WeaponPurchaseCount_t> WeaponPurchases
     {
         get
         {
-            if (_WeaponPurchasesOffset == -1) _WeaponPurchasesOffset = Schema.GetOffset(0xD558F475988247C7);
-            return ref _Handle.AsRef<CUtlVector<WeaponPurchaseCount_t>>(_WeaponPurchasesOffset);
+            _WeaponPurchasesOffset = _WeaponPurchasesOffset ?? Schema.GetOffset(0xD558F475988247C7);
+            return ref _Handle.AsRef<CUtlVector<WeaponPurchaseCount_t>>(_WeaponPurchasesOffset!.Value);
         }
     }
 

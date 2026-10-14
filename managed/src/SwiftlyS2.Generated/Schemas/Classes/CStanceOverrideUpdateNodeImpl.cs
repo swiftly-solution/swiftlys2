@@ -16,50 +16,50 @@ internal partial class CStanceOverrideUpdateNodeImpl : CUnaryUpdateNodeImpl, CSt
 {
     public CStanceOverrideUpdateNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _FootStanceInfoOffset = -1;
+    private static nint? _FootStanceInfoOffset;
 
     public ref CUtlVector<StanceInfo_t> FootStanceInfo
     {
         get
         {
-            if (_FootStanceInfoOffset == -1) _FootStanceInfoOffset = Schema.GetOffset(0x322EE1B7D5687289);
-            return ref _Handle.AsRef<CUtlVector<StanceInfo_t>>(_FootStanceInfoOffset);
+            _FootStanceInfoOffset = _FootStanceInfoOffset ?? Schema.GetOffset(0x322EE1B7D5687289);
+            return ref _Handle.AsRef<CUtlVector<StanceInfo_t>>(_FootStanceInfoOffset!.Value);
         }
     }
-    private static nint _StanceSourceNodeOffset = -1;
+    private static nint? _StanceSourceNodeOffset;
     private CAnimUpdateNodeRefImpl? _StanceSourceNodeInstance;
 
     public CAnimUpdateNodeRef StanceSourceNode
     {
         get
         {
-            if (_StanceSourceNodeOffset == -1) _StanceSourceNodeOffset = Schema.GetOffset(0x322EE1B7D25DA07A);
+            _StanceSourceNodeOffset = _StanceSourceNodeOffset ?? Schema.GetOffset(0x322EE1B7D25DA07A);
             var instance = _StanceSourceNodeInstance ??= new CAnimUpdateNodeRefImpl(0);
-            instance.DangerousSetHandle(_Handle + _StanceSourceNodeOffset);
+            instance.DangerousSetHandle(_Handle + _StanceSourceNodeOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParameterOffset = -1;
+    private static nint? _ParameterOffset;
     private CAnimParamHandleImpl? _ParameterInstance;
 
     public CAnimParamHandle Parameter
     {
         get
         {
-            if (_ParameterOffset == -1) _ParameterOffset = Schema.GetOffset(0x322EE1B70C7008F6);
+            _ParameterOffset = _ParameterOffset ?? Schema.GetOffset(0x322EE1B70C7008F6);
             var instance = _ParameterInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParameterOffset);
+            instance.DangerousSetHandle(_Handle + _ParameterOffset!.Value);
             return instance;
         }
     }
-    private static nint _ModeOffset = -1;
+    private static nint? _ModeOffset;
 
     public ref StanceOverrideMode Mode
     {
         get
         {
-            if (_ModeOffset == -1) _ModeOffset = Schema.GetOffset(0x322EE1B71050A633);
-            return ref _Handle.AsRef<StanceOverrideMode>(_ModeOffset);
+            _ModeOffset = _ModeOffset ?? Schema.GetOffset(0x322EE1B71050A633);
+            return ref _Handle.AsRef<StanceOverrideMode>(_ModeOffset!.Value);
         }
     }
 

@@ -16,60 +16,60 @@ internal partial class CSteamAudioBakedOcclusionDataImpl : SchemaClass, CSteamAu
 {
     public CSteamAudioBakedOcclusionDataImpl(nint handle) : base(handle) { }
 
-    private static nint _SettingsOffset = -1;
+    private static nint? _SettingsOffset;
     private SteamAudioCustomDataOcclusionSettings_tImpl? _SettingsInstance;
 
     public SteamAudioCustomDataOcclusionSettings_t Settings
     {
         get
         {
-            if (_SettingsOffset == -1) _SettingsOffset = Schema.GetOffset(0x2D94E8C0B3DE33A8);
+            _SettingsOffset = _SettingsOffset ?? Schema.GetOffset(0x2D94E8C0B3DE33A8);
             var instance = _SettingsInstance ??= new SteamAudioCustomDataOcclusionSettings_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _SettingsOffset);
+            instance.DangerousSetHandle(_Handle + _SettingsOffset!.Value);
             return instance;
         }
     }
-    private static nint _ProbesOffset = -1;
+    private static nint? _ProbesOffset;
     private CSteamAudioProbeDataImpl? _ProbesInstance;
 
     public CSteamAudioProbeData Probes
     {
         get
         {
-            if (_ProbesOffset == -1) _ProbesOffset = Schema.GetOffset(0x2D94E8C049D37E06);
+            _ProbesOffset = _ProbesOffset ?? Schema.GetOffset(0x2D94E8C049D37E06);
             var instance = _ProbesInstance ??= new CSteamAudioProbeDataImpl(0);
-            instance.DangerousSetHandle(_Handle + _ProbesOffset);
+            instance.DangerousSetHandle(_Handle + _ProbesOffset!.Value);
             return instance;
         }
     }
-    private static nint _PathingRatioOffset = -1;
+    private static nint? _PathingRatioOffset;
 
     public ref CUtlVector<float> PathingRatio
     {
         get
         {
-            if (_PathingRatioOffset == -1) _PathingRatioOffset = Schema.GetOffset(0x2D94E8C0851D8DE9);
-            return ref _Handle.AsRef<CUtlVector<float>>(_PathingRatioOffset);
+            _PathingRatioOffset = _PathingRatioOffset ?? Schema.GetOffset(0x2D94E8C0851D8DE9);
+            return ref _Handle.AsRef<CUtlVector<float>>(_PathingRatioOffset!.Value);
         }
     }
-    private static nint _PathingDeviationOffset = -1;
+    private static nint? _PathingDeviationOffset;
 
     public ref CUtlVector<float> PathingDeviation
     {
         get
         {
-            if (_PathingDeviationOffset == -1) _PathingDeviationOffset = Schema.GetOffset(0x2D94E8C0808E85C5);
-            return ref _Handle.AsRef<CUtlVector<float>>(_PathingDeviationOffset);
+            _PathingDeviationOffset = _PathingDeviationOffset ?? Schema.GetOffset(0x2D94E8C0808E85C5);
+            return ref _Handle.AsRef<CUtlVector<float>>(_PathingDeviationOffset!.Value);
         }
     }
-    private static nint _ReflectionEnergyOffset = -1;
+    private static nint? _ReflectionEnergyOffset;
 
     public ref CUtlVector<float> ReflectionEnergy
     {
         get
         {
-            if (_ReflectionEnergyOffset == -1) _ReflectionEnergyOffset = Schema.GetOffset(0x2D94E8C0E22F61C8);
-            return ref _Handle.AsRef<CUtlVector<float>>(_ReflectionEnergyOffset);
+            _ReflectionEnergyOffset = _ReflectionEnergyOffset ?? Schema.GetOffset(0x2D94E8C0E22F61C8);
+            return ref _Handle.AsRef<CUtlVector<float>>(_ReflectionEnergyOffset!.Value);
         }
     }
 

@@ -16,50 +16,50 @@ internal partial class CPulseCell_Outflow_PlayVCDImpl : CPulseCell_Outflow_PlayV
 {
     public CPulseCell_Outflow_PlayVCDImpl(nint handle) : base(handle) { }
 
-    private static nint _ChoreoSceneOffset = -1;
+    private static nint? _ChoreoSceneOffset;
 
     public ref CStrongHandle<InfoForResourceTypeCChoreoSceneResource> ChoreoScene
     {
         get
         {
-            if (_ChoreoSceneOffset == -1) _ChoreoSceneOffset = Schema.GetOffset(0xB095B414AFC19AC7);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCChoreoSceneResource>>(_ChoreoSceneOffset);
+            _ChoreoSceneOffset = _ChoreoSceneOffset ?? Schema.GetOffset(0xB095B414AFC19AC7);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCChoreoSceneResource>>(_ChoreoSceneOffset!.Value);
         }
     }
-    private static nint _OnPausedOffset = -1;
+    private static nint? _OnPausedOffset;
     private CPulse_OutflowConnectionImpl? _OnPausedInstance;
 
     public CPulse_OutflowConnection OnPaused
     {
         get
         {
-            if (_OnPausedOffset == -1) _OnPausedOffset = Schema.GetOffset(0xB095B41491D78012);
+            _OnPausedOffset = _OnPausedOffset ?? Schema.GetOffset(0xB095B41491D78012);
             var instance = _OnPausedInstance ??= new CPulse_OutflowConnectionImpl(0);
-            instance.DangerousSetHandle(_Handle + _OnPausedOffset);
+            instance.DangerousSetHandle(_Handle + _OnPausedOffset!.Value);
             return instance;
         }
     }
-    private static nint _OnResumedOffset = -1;
+    private static nint? _OnResumedOffset;
     private CPulse_OutflowConnectionImpl? _OnResumedInstance;
 
     public CPulse_OutflowConnection OnResumed
     {
         get
         {
-            if (_OnResumedOffset == -1) _OnResumedOffset = Schema.GetOffset(0xB095B414CCA87325);
+            _OnResumedOffset = _OnResumedOffset ?? Schema.GetOffset(0xB095B414CCA87325);
             var instance = _OnResumedInstance ??= new CPulse_OutflowConnectionImpl(0);
-            instance.DangerousSetHandle(_Handle + _OnResumedOffset);
+            instance.DangerousSetHandle(_Handle + _OnResumedOffset!.Value);
             return instance;
         }
     }
-    private static nint _OutRequirementsOffset = -1;
+    private static nint? _OutRequirementsOffset;
 
     public ref CUtlVector<CPulseCell_Outflow_PlayVCD__VCDRequirementInfo_t> OutRequirements
     {
         get
         {
-            if (_OutRequirementsOffset == -1) _OutRequirementsOffset = Schema.GetOffset(0xB095B4146F0FE0CB);
-            return ref _Handle.AsRef<CUtlVector<CPulseCell_Outflow_PlayVCD__VCDRequirementInfo_t>>(_OutRequirementsOffset);
+            _OutRequirementsOffset = _OutRequirementsOffset ?? Schema.GetOffset(0xB095B4146F0FE0CB);
+            return ref _Handle.AsRef<CUtlVector<CPulseCell_Outflow_PlayVCD__VCDRequirementInfo_t>>(_OutRequirementsOffset!.Value);
         }
     }
 

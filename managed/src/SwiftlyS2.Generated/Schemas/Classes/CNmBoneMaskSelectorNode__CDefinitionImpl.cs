@@ -16,70 +16,70 @@ internal partial class CNmBoneMaskSelectorNode__CDefinitionImpl : CNmBoneMaskVal
 {
     public CNmBoneMaskSelectorNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint _DefaultMaskNodeIdxOffset = -1;
+    private static nint? _DefaultMaskNodeIdxOffset;
 
     public ref short DefaultMaskNodeIdx
     {
         get
         {
-            if (_DefaultMaskNodeIdxOffset == -1) _DefaultMaskNodeIdxOffset = Schema.GetOffset(0xA90158701E92549D);
-            return ref _Handle.AsRef<short>(_DefaultMaskNodeIdxOffset);
+            _DefaultMaskNodeIdxOffset = _DefaultMaskNodeIdxOffset ?? Schema.GetOffset(0xA90158701E92549D);
+            return ref _Handle.AsRef<short>(_DefaultMaskNodeIdxOffset!.Value);
         }
     }
-    private static nint _ParameterValueNodeIdxOffset = -1;
+    private static nint? _ParameterValueNodeIdxOffset;
 
     public ref short ParameterValueNodeIdx
     {
         get
         {
-            if (_ParameterValueNodeIdxOffset == -1) _ParameterValueNodeIdxOffset = Schema.GetOffset(0xA90158702696FA7C);
-            return ref _Handle.AsRef<short>(_ParameterValueNodeIdxOffset);
+            _ParameterValueNodeIdxOffset = _ParameterValueNodeIdxOffset ?? Schema.GetOffset(0xA90158702696FA7C);
+            return ref _Handle.AsRef<short>(_ParameterValueNodeIdxOffset!.Value);
         }
     }
-    private static nint _SwitchDynamicallyOffset = -1;
+    private static nint? _SwitchDynamicallyOffset;
 
     public ref bool SwitchDynamically
     {
         get
         {
-            if (_SwitchDynamicallyOffset == -1) _SwitchDynamicallyOffset = Schema.GetOffset(0xA901587046047CB8);
-            return ref _Handle.AsRef<bool>(_SwitchDynamicallyOffset);
+            _SwitchDynamicallyOffset = _SwitchDynamicallyOffset ?? Schema.GetOffset(0xA901587046047CB8);
+            return ref _Handle.AsRef<bool>(_SwitchDynamicallyOffset!.Value);
         }
     }
-    private static nint _MaskNodeIndicesOffset = -1;
+    private static nint? _MaskNodeIndicesOffset;
     private SchemaUntypedField? _MaskNodeIndicesInstance;
 
     public SchemaUntypedField MaskNodeIndices
     {
         get
         {
-            if (_MaskNodeIndicesOffset == -1) _MaskNodeIndicesOffset = Schema.GetOffset(0xA90158703326692E);
+            _MaskNodeIndicesOffset = _MaskNodeIndicesOffset ?? Schema.GetOffset(0xA90158703326692E);
             var instance = _MaskNodeIndicesInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _MaskNodeIndicesOffset);
+            instance.DangerousSetHandle(_Handle + _MaskNodeIndicesOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParameterValuesOffset = -1;
+    private static nint? _ParameterValuesOffset;
     private SchemaUntypedField? _ParameterValuesInstance;
 
     public SchemaUntypedField ParameterValues
     {
         get
         {
-            if (_ParameterValuesOffset == -1) _ParameterValuesOffset = Schema.GetOffset(0xA90158709D777E36);
+            _ParameterValuesOffset = _ParameterValuesOffset ?? Schema.GetOffset(0xA90158709D777E36);
             var instance = _ParameterValuesInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ParameterValuesOffset);
+            instance.DangerousSetHandle(_Handle + _ParameterValuesOffset!.Value);
             return instance;
         }
     }
-    private static nint _BlendTimeSecondsOffset = -1;
+    private static nint? _BlendTimeSecondsOffset;
 
     public ref float BlendTimeSeconds
     {
         get
         {
-            if (_BlendTimeSecondsOffset == -1) _BlendTimeSecondsOffset = Schema.GetOffset(0xA90158706D3A08FC);
-            return ref _Handle.AsRef<float>(_BlendTimeSecondsOffset);
+            _BlendTimeSecondsOffset = _BlendTimeSecondsOffset ?? Schema.GetOffset(0xA90158706D3A08FC);
+            return ref _Handle.AsRef<float>(_BlendTimeSecondsOffset!.Value);
         }
     }
 

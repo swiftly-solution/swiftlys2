@@ -16,68 +16,68 @@ internal partial class CVMixSteamAudioHybridReverbProcessorDescImpl : CVMixBaseP
 {
     public CVMixSteamAudioHybridReverbProcessorDescImpl(nint handle) : base(handle) { }
 
-    private static nint _ParamReverbTimeLowOffset = -1;
+    private static nint? _ParamReverbTimeLowOffset;
     private CVMixParameterFloatImpl? _ParamReverbTimeLowInstance;
 
     public CVMixParameterFloat ParamReverbTimeLow
     {
         get
         {
-            if (_ParamReverbTimeLowOffset == -1) _ParamReverbTimeLowOffset = Schema.GetOffset(0xAA1FEEABEA372107);
+            _ParamReverbTimeLowOffset = _ParamReverbTimeLowOffset ?? Schema.GetOffset(0xAA1FEEABEA372107);
             var instance = _ParamReverbTimeLowInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamReverbTimeLowOffset);
+            instance.DangerousSetHandle(_Handle + _ParamReverbTimeLowOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamReverbTimeMidOffset = -1;
+    private static nint? _ParamReverbTimeMidOffset;
     private CVMixParameterFloatImpl? _ParamReverbTimeMidInstance;
 
     public CVMixParameterFloat ParamReverbTimeMid
     {
         get
         {
-            if (_ParamReverbTimeMidOffset == -1) _ParamReverbTimeMidOffset = Schema.GetOffset(0xAA1FEEAB5CBDB853);
+            _ParamReverbTimeMidOffset = _ParamReverbTimeMidOffset ?? Schema.GetOffset(0xAA1FEEAB5CBDB853);
             var instance = _ParamReverbTimeMidInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamReverbTimeMidOffset);
+            instance.DangerousSetHandle(_Handle + _ParamReverbTimeMidOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamReverbTimeHighOffset = -1;
+    private static nint? _ParamReverbTimeHighOffset;
     private CVMixParameterFloatImpl? _ParamReverbTimeHighInstance;
 
     public CVMixParameterFloat ParamReverbTimeHigh
     {
         get
         {
-            if (_ParamReverbTimeHighOffset == -1) _ParamReverbTimeHighOffset = Schema.GetOffset(0xAA1FEEAB511B9B1B);
+            _ParamReverbTimeHighOffset = _ParamReverbTimeHighOffset ?? Schema.GetOffset(0xAA1FEEAB511B9B1B);
             var instance = _ParamReverbTimeHighInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamReverbTimeHighOffset);
+            instance.DangerousSetHandle(_Handle + _ParamReverbTimeHighOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamBandOffset = -1;
+    private static nint? _ParamBandOffset;
     private CVMixParameterFloatImpl? _ParamBandInstance;
 
     public CVMixParameterFloat ParamBand
     {
         get
         {
-            if (_ParamBandOffset == -1) _ParamBandOffset = Schema.GetOffset(0xAA1FEEAB16939509);
+            _ParamBandOffset = _ParamBandOffset ?? Schema.GetOffset(0xAA1FEEAB16939509);
             var instance = _ParamBandInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamBandOffset);
+            instance.DangerousSetHandle(_Handle + _ParamBandOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamReverbTimeOffset = -1;
+    private static nint? _ParamReverbTimeOffset;
     private CVMixDataOffsetImpl? _ParamReverbTimeInstance;
 
     public CVMixDataOffset ParamReverbTime
     {
         get
         {
-            if (_ParamReverbTimeOffset == -1) _ParamReverbTimeOffset = Schema.GetOffset(0xAA1FEEABAF8B2437);
+            _ParamReverbTimeOffset = _ParamReverbTimeOffset ?? Schema.GetOffset(0xAA1FEEABAF8B2437);
             var instance = _ParamReverbTimeInstance ??= new CVMixDataOffsetImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamReverbTimeOffset);
+            instance.DangerousSetHandle(_Handle + _ParamReverbTimeOffset!.Value);
             return instance;
         }
     }

@@ -16,179 +16,179 @@ internal partial class CSosSoundEventGroupSchemaImpl : SchemaClass, CSosSoundEve
 {
     public CSosSoundEventGroupSchemaImpl(nint handle) : base(handle) { }
 
-    private static nint _GroupTypeOffset = -1;
+    private static nint? _GroupTypeOffset;
 
     public ref SosGroupType_t GroupType
     {
         get
         {
-            if (_GroupTypeOffset == -1) _GroupTypeOffset = Schema.GetOffset(0x25BA87001A8E5A00);
-            return ref _Handle.AsRef<SosGroupType_t>(_GroupTypeOffset);
+            _GroupTypeOffset = _GroupTypeOffset ?? Schema.GetOffset(0x25BA87001A8E5A00);
+            return ref _Handle.AsRef<SosGroupType_t>(_GroupTypeOffset!.Value);
         }
     }
-    private static nint _BlocksEventsOffset = -1;
+    private static nint? _BlocksEventsOffset;
 
     public ref bool BlocksEvents
     {
         get
         {
-            if (_BlocksEventsOffset == -1) _BlocksEventsOffset = Schema.GetOffset(0x25BA8700E3632026);
-            return ref _Handle.AsRef<bool>(_BlocksEventsOffset);
+            _BlocksEventsOffset = _BlocksEventsOffset ?? Schema.GetOffset(0x25BA8700E3632026);
+            return ref _Handle.AsRef<bool>(_BlocksEventsOffset!.Value);
         }
     }
-    private static nint _BlockMaxCountOffset = -1;
+    private static nint? _BlockMaxCountOffset;
 
     public ref int BlockMaxCount
     {
         get
         {
-            if (_BlockMaxCountOffset == -1) _BlockMaxCountOffset = Schema.GetOffset(0x25BA8700282E91F7);
-            return ref _Handle.AsRef<int>(_BlockMaxCountOffset);
+            _BlockMaxCountOffset = _BlockMaxCountOffset ?? Schema.GetOffset(0x25BA8700282E91F7);
+            return ref _Handle.AsRef<int>(_BlockMaxCountOffset!.Value);
         }
     }
-    private static nint _MemberLifespanTimeOffset = -1;
+    private static nint? _MemberLifespanTimeOffset;
 
     public ref float MemberLifespanTime
     {
         get
         {
-            if (_MemberLifespanTimeOffset == -1) _MemberLifespanTimeOffset = Schema.GetOffset(0x25BA8700C47B4DBA);
-            return ref _Handle.AsRef<float>(_MemberLifespanTimeOffset);
+            _MemberLifespanTimeOffset = _MemberLifespanTimeOffset ?? Schema.GetOffset(0x25BA8700C47B4DBA);
+            return ref _Handle.AsRef<float>(_MemberLifespanTimeOffset!.Value);
         }
     }
-    private static nint _InvertMatchOffset = -1;
+    private static nint? _InvertMatchOffset;
 
     public ref bool InvertMatch
     {
         get
         {
-            if (_InvertMatchOffset == -1) _InvertMatchOffset = Schema.GetOffset(0x25BA87003C3CF99A);
-            return ref _Handle.AsRef<bool>(_InvertMatchOffset);
+            _InvertMatchOffset = _InvertMatchOffset ?? Schema.GetOffset(0x25BA87003C3CF99A);
+            return ref _Handle.AsRef<bool>(_InvertMatchOffset!.Value);
         }
     }
-    private static nint _Behavior_EventNameOffset = -1;
+    private static nint? _Behavior_EventNameOffset;
 
     public ref SosGroupFieldBehavior_t Behavior_EventName
     {
         get
         {
-            if (_Behavior_EventNameOffset == -1) _Behavior_EventNameOffset = Schema.GetOffset(0x25BA870029F15E53);
-            return ref _Handle.AsRef<SosGroupFieldBehavior_t>(_Behavior_EventNameOffset);
+            _Behavior_EventNameOffset = _Behavior_EventNameOffset ?? Schema.GetOffset(0x25BA870029F15E53);
+            return ref _Handle.AsRef<SosGroupFieldBehavior_t>(_Behavior_EventNameOffset!.Value);
         }
     }
-    private static nint _MatchSoundEventNameOffset = -1;
+    private static nint? _MatchSoundEventNameOffset;
 
     public string MatchSoundEventName
     {
         get
         {
-            if (_MatchSoundEventNameOffset == -1) _MatchSoundEventNameOffset = Schema.GetOffset(0x25BA87005E75165C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_MatchSoundEventNameOffset));
+            _MatchSoundEventNameOffset = _MatchSoundEventNameOffset ?? Schema.GetOffset(0x25BA87005E75165C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_MatchSoundEventNameOffset!.Value));
         }
         set
         {
-            if (_MatchSoundEventNameOffset == -1) _MatchSoundEventNameOffset = Schema.GetOffset(0x25BA87005E75165C);
-            Schema.SetCUtlString(_Handle, _MatchSoundEventNameOffset, value);
+            _MatchSoundEventNameOffset = _MatchSoundEventNameOffset ?? Schema.GetOffset(0x25BA87005E75165C);
+            Schema.SetCUtlString(_Handle, _MatchSoundEventNameOffset!.Value, value);
         }
     }
-    private static nint _MatchEventSubStringOffset = -1;
+    private static nint? _MatchEventSubStringOffset;
 
     public ref bool MatchEventSubString
     {
         get
         {
-            if (_MatchEventSubStringOffset == -1) _MatchEventSubStringOffset = Schema.GetOffset(0x25BA87001C020689);
-            return ref _Handle.AsRef<bool>(_MatchEventSubStringOffset);
+            _MatchEventSubStringOffset = _MatchEventSubStringOffset ?? Schema.GetOffset(0x25BA87001C020689);
+            return ref _Handle.AsRef<bool>(_MatchEventSubStringOffset!.Value);
         }
     }
-    private static nint _MatchSoundEventSubStringOffset = -1;
+    private static nint? _MatchSoundEventSubStringOffset;
 
     public string MatchSoundEventSubString
     {
         get
         {
-            if (_MatchSoundEventSubStringOffset == -1) _MatchSoundEventSubStringOffset = Schema.GetOffset(0x25BA87002FBB6296);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_MatchSoundEventSubStringOffset));
+            _MatchSoundEventSubStringOffset = _MatchSoundEventSubStringOffset ?? Schema.GetOffset(0x25BA87002FBB6296);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_MatchSoundEventSubStringOffset!.Value));
         }
         set
         {
-            if (_MatchSoundEventSubStringOffset == -1) _MatchSoundEventSubStringOffset = Schema.GetOffset(0x25BA87002FBB6296);
-            Schema.SetCUtlString(_Handle, _MatchSoundEventSubStringOffset, value);
+            _MatchSoundEventSubStringOffset = _MatchSoundEventSubStringOffset ?? Schema.GetOffset(0x25BA87002FBB6296);
+            Schema.SetCUtlString(_Handle, _MatchSoundEventSubStringOffset!.Value, value);
         }
     }
-    private static nint _Behavior_EntIndexOffset = -1;
+    private static nint? _Behavior_EntIndexOffset;
 
     public ref SosGroupFieldBehavior_t Behavior_EntIndex
     {
         get
         {
-            if (_Behavior_EntIndexOffset == -1) _Behavior_EntIndexOffset = Schema.GetOffset(0x25BA8700139C6983);
-            return ref _Handle.AsRef<SosGroupFieldBehavior_t>(_Behavior_EntIndexOffset);
+            _Behavior_EntIndexOffset = _Behavior_EntIndexOffset ?? Schema.GetOffset(0x25BA8700139C6983);
+            return ref _Handle.AsRef<SosGroupFieldBehavior_t>(_Behavior_EntIndexOffset!.Value);
         }
     }
-    private static nint _EntIndexOffset = -1;
+    private static nint? _EntIndexOffset;
 
     public ref float EntIndex
     {
         get
         {
-            if (_EntIndexOffset == -1) _EntIndexOffset = Schema.GetOffset(0x25BA8700CD8F80C8);
-            return ref _Handle.AsRef<float>(_EntIndexOffset);
+            _EntIndexOffset = _EntIndexOffset ?? Schema.GetOffset(0x25BA8700CD8F80C8);
+            return ref _Handle.AsRef<float>(_EntIndexOffset!.Value);
         }
     }
-    private static nint _Behavior_OpvarOffset = -1;
+    private static nint? _Behavior_OpvarOffset;
 
     public ref SosGroupFieldBehavior_t Behavior_Opvar
     {
         get
         {
-            if (_Behavior_OpvarOffset == -1) _Behavior_OpvarOffset = Schema.GetOffset(0x25BA8700C2EFBF94);
-            return ref _Handle.AsRef<SosGroupFieldBehavior_t>(_Behavior_OpvarOffset);
+            _Behavior_OpvarOffset = _Behavior_OpvarOffset ?? Schema.GetOffset(0x25BA8700C2EFBF94);
+            return ref _Handle.AsRef<SosGroupFieldBehavior_t>(_Behavior_OpvarOffset!.Value);
         }
     }
-    private static nint _OpvarOffset = -1;
+    private static nint? _OpvarOffset;
 
     public ref float Opvar
     {
         get
         {
-            if (_OpvarOffset == -1) _OpvarOffset = Schema.GetOffset(0x25BA870054283361);
-            return ref _Handle.AsRef<float>(_OpvarOffset);
+            _OpvarOffset = _OpvarOffset ?? Schema.GetOffset(0x25BA870054283361);
+            return ref _Handle.AsRef<float>(_OpvarOffset!.Value);
         }
     }
-    private static nint _Behavior_StringOffset = -1;
+    private static nint? _Behavior_StringOffset;
 
     public ref SosGroupFieldBehavior_t Behavior_String
     {
         get
         {
-            if (_Behavior_StringOffset == -1) _Behavior_StringOffset = Schema.GetOffset(0x25BA87001D20B9B1);
-            return ref _Handle.AsRef<SosGroupFieldBehavior_t>(_Behavior_StringOffset);
+            _Behavior_StringOffset = _Behavior_StringOffset ?? Schema.GetOffset(0x25BA87001D20B9B1);
+            return ref _Handle.AsRef<SosGroupFieldBehavior_t>(_Behavior_StringOffset!.Value);
         }
     }
-    private static nint _OpvarStringOffset = -1;
+    private static nint? _OpvarStringOffset;
 
     public string OpvarString
     {
         get
         {
-            if (_OpvarStringOffset == -1) _OpvarStringOffset = Schema.GetOffset(0x25BA8700528828B2);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_OpvarStringOffset));
+            _OpvarStringOffset = _OpvarStringOffset ?? Schema.GetOffset(0x25BA8700528828B2);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_OpvarStringOffset!.Value));
         }
         set
         {
-            if (_OpvarStringOffset == -1) _OpvarStringOffset = Schema.GetOffset(0x25BA8700528828B2);
-            Schema.SetCUtlString(_Handle, _OpvarStringOffset, value);
+            _OpvarStringOffset = _OpvarStringOffset ?? Schema.GetOffset(0x25BA8700528828B2);
+            Schema.SetCUtlString(_Handle, _OpvarStringOffset!.Value, value);
         }
     }
-    private static nint _ActionsOffset = -1;
+    private static nint? _ActionsOffset;
 
     public ref CUtlVector<PointerTo<CSosGroupActionSchema>> Actions
     {
         get
         {
-            if (_ActionsOffset == -1) _ActionsOffset = Schema.GetOffset(0x25BA8700D36B7908);
-            return ref _Handle.AsRef<CUtlVector<PointerTo<CSosGroupActionSchema>>>(_ActionsOffset);
+            _ActionsOffset = _ActionsOffset ?? Schema.GetOffset(0x25BA8700D36B7908);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<CSosGroupActionSchema>>>(_ActionsOffset!.Value);
         }
     }
 

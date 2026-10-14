@@ -16,36 +16,36 @@ internal partial class C_DecoyProjectileImpl : C_BaseCSGrenadeProjectileImpl, C_
 {
     public C_DecoyProjectileImpl(nint handle) : base(handle) { }
 
-    private static nint _DecoyShotTickOffset = -1;
+    private static nint? _DecoyShotTickOffset;
 
     public ref int DecoyShotTick
     {
         get
         {
-            if (_DecoyShotTickOffset == -1) _DecoyShotTickOffset = Schema.GetOffset(0x40987E9AC4EFED0A);
-            return ref _Handle.AsRef<int>(_DecoyShotTickOffset);
+            _DecoyShotTickOffset = _DecoyShotTickOffset ?? Schema.GetOffset(0x40987E9AC4EFED0A);
+            return ref _Handle.AsRef<int>(_DecoyShotTickOffset!.Value);
         }
     }
-    private static nint _ClientLastKnownDecoyShotTickOffset = -1;
+    private static nint? _ClientLastKnownDecoyShotTickOffset;
 
     public ref int ClientLastKnownDecoyShotTick
     {
         get
         {
-            if (_ClientLastKnownDecoyShotTickOffset == -1) _ClientLastKnownDecoyShotTickOffset = Schema.GetOffset(0x40987E9A1A1E2076);
-            return ref _Handle.AsRef<int>(_ClientLastKnownDecoyShotTickOffset);
+            _ClientLastKnownDecoyShotTickOffset = _ClientLastKnownDecoyShotTickOffset ?? Schema.GetOffset(0x40987E9A1A1E2076);
+            return ref _Handle.AsRef<int>(_ClientLastKnownDecoyShotTickOffset!.Value);
         }
     }
-    private static nint _TimeParticleEffectSpawnOffset = -1;
+    private static nint? _TimeParticleEffectSpawnOffset;
     private GameTime_tImpl? _TimeParticleEffectSpawnInstance;
 
     public GameTime_t TimeParticleEffectSpawn
     {
         get
         {
-            if (_TimeParticleEffectSpawnOffset == -1) _TimeParticleEffectSpawnOffset = Schema.GetOffset(0x40987E9A2E545BBC);
+            _TimeParticleEffectSpawnOffset = _TimeParticleEffectSpawnOffset ?? Schema.GetOffset(0x40987E9A2E545BBC);
             var instance = _TimeParticleEffectSpawnInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _TimeParticleEffectSpawnOffset);
+            instance.DangerousSetHandle(_Handle + _TimeParticleEffectSpawnOffset!.Value);
             return instance;
         }
     }

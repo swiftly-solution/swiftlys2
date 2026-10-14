@@ -16,14 +16,14 @@ internal partial class CNmAnimDocumentImpl : SchemaClass, CNmAnimDocument
 {
     public CNmAnimDocumentImpl(nint handle) : base(handle) { }
 
-    private static nint _VersionOffset = -1;
+    private static nint? _VersionOffset;
 
     public ref int Version
     {
         get
         {
-            if (_VersionOffset == -1) _VersionOffset = Schema.GetOffset(0x501F08EFB0AB8B1B);
-            return ref _Handle.AsRef<int>(_VersionOffset);
+            _VersionOffset = _VersionOffset ?? Schema.GetOffset(0x501F08EFB0AB8B1B);
+            return ref _Handle.AsRef<int>(_VersionOffset!.Value);
         }
     }
 

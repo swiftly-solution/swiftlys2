@@ -16,19 +16,19 @@ internal partial class CRuleEntityImpl : CBaseModelEntityImpl, CRuleEntity
 {
     public CRuleEntityImpl(nint handle) : base(handle) { }
 
-    private static nint _MasterOffset = -1;
+    private static nint? _MasterOffset;
 
     public string Master
     {
         get
         {
-            if (_MasterOffset == -1) _MasterOffset = Schema.GetOffset(0x5C9BFE2FAC57FE5B);
-            return Schema.GetString(_Handle.Read<nint>(_MasterOffset));
+            _MasterOffset = _MasterOffset ?? Schema.GetOffset(0x5C9BFE2FAC57FE5B);
+            return Schema.GetString(_Handle.Read<nint>(_MasterOffset!.Value));
         }
         set
         {
-            if (_MasterOffset == -1) _MasterOffset = Schema.GetOffset(0x5C9BFE2FAC57FE5B);
-            Schema.SetString(_Handle, _MasterOffset, value);
+            _MasterOffset = _MasterOffset ?? Schema.GetOffset(0x5C9BFE2FAC57FE5B);
+            Schema.SetString(_Handle, _MasterOffset!.Value, value);
         }
     }
 

@@ -16,61 +16,61 @@ internal partial class CTriggerProximityImpl : CBaseTriggerImpl, CTriggerProximi
 {
     public CTriggerProximityImpl(nint handle) : base(handle) { }
 
-    private static nint _MeasureTargetOffset = -1;
+    private static nint? _MeasureTargetOffset;
 
     public ref CHandle<CBaseEntity> MeasureTarget
     {
         get
         {
-            if (_MeasureTargetOffset == -1) _MeasureTargetOffset = Schema.GetOffset(0x98F0621FF81BC1A8);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_MeasureTargetOffset);
+            _MeasureTargetOffset = _MeasureTargetOffset ?? Schema.GetOffset(0x98F0621FF81BC1A8);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_MeasureTargetOffset!.Value);
         }
     }
-    private static nint _MeasureTarget1Offset = -1;
+    private static nint? _MeasureTarget1Offset;
 
     public string MeasureTarget1
     {
         get
         {
-            if (_MeasureTarget1Offset == -1) _MeasureTarget1Offset = Schema.GetOffset(0x98F0621F29C47B3A);
-            return Schema.GetString(_Handle.Read<nint>(_MeasureTarget1Offset));
+            _MeasureTarget1Offset = _MeasureTarget1Offset ?? Schema.GetOffset(0x98F0621F29C47B3A);
+            return Schema.GetString(_Handle.Read<nint>(_MeasureTarget1Offset!.Value));
         }
         set
         {
-            if (_MeasureTarget1Offset == -1) _MeasureTarget1Offset = Schema.GetOffset(0x98F0621F29C47B3A);
-            Schema.SetString(_Handle, _MeasureTarget1Offset, value);
+            _MeasureTarget1Offset = _MeasureTarget1Offset ?? Schema.GetOffset(0x98F0621F29C47B3A);
+            Schema.SetString(_Handle, _MeasureTarget1Offset!.Value, value);
         }
     }
-    private static nint _RadiusOffset = -1;
+    private static nint? _RadiusOffset;
 
     public ref float Radius
     {
         get
         {
-            if (_RadiusOffset == -1) _RadiusOffset = Schema.GetOffset(0x98F0621F2E1F6E07);
-            return ref _Handle.AsRef<float>(_RadiusOffset);
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x98F0621F2E1F6E07);
+            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
         }
     }
-    private static nint _TouchersOffset = -1;
+    private static nint? _TouchersOffset;
 
     public ref int Touchers
     {
         get
         {
-            if (_TouchersOffset == -1) _TouchersOffset = Schema.GetOffset(0x98F0621FA0F3A2B0);
-            return ref _Handle.AsRef<int>(_TouchersOffset);
+            _TouchersOffset = _TouchersOffset ?? Schema.GetOffset(0x98F0621FA0F3A2B0);
+            return ref _Handle.AsRef<int>(_TouchersOffset!.Value);
         }
     }
-    private static nint _NearestEntityDistanceOffset = -1;
+    private static nint? _NearestEntityDistanceOffset;
     private SchemaUntypedField? _NearestEntityDistanceInstance;
 
     public SchemaUntypedField NearestEntityDistance
     {
         get
         {
-            if (_NearestEntityDistanceOffset == -1) _NearestEntityDistanceOffset = Schema.GetOffset(0x98F0621F28AD73D5);
+            _NearestEntityDistanceOffset = _NearestEntityDistanceOffset ?? Schema.GetOffset(0x98F0621F28AD73D5);
             var instance = _NearestEntityDistanceInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _NearestEntityDistanceOffset);
+            instance.DangerousSetHandle(_Handle + _NearestEntityDistanceOffset!.Value);
             return instance;
         }
     }

@@ -16,74 +16,74 @@ internal partial class CSceneObjectDataImpl : SchemaClass, CSceneObjectData
 {
     public CSceneObjectDataImpl(nint handle) : base(handle) { }
 
-    private static nint _MinBoundsOffset = -1;
+    private static nint? _MinBoundsOffset;
 
     public ref Vector MinBounds
     {
         get
         {
-            if (_MinBoundsOffset == -1) _MinBoundsOffset = Schema.GetOffset(0x628AC6A9114799FE);
-            return ref _Handle.AsRef<Vector>(_MinBoundsOffset);
+            _MinBoundsOffset = _MinBoundsOffset ?? Schema.GetOffset(0x628AC6A9114799FE);
+            return ref _Handle.AsRef<Vector>(_MinBoundsOffset!.Value);
         }
     }
-    private static nint _MaxBoundsOffset = -1;
+    private static nint? _MaxBoundsOffset;
 
     public ref Vector MaxBounds
     {
         get
         {
-            if (_MaxBoundsOffset == -1) _MaxBoundsOffset = Schema.GetOffset(0x628AC6A9C0B4CE60);
-            return ref _Handle.AsRef<Vector>(_MaxBoundsOffset);
+            _MaxBoundsOffset = _MaxBoundsOffset ?? Schema.GetOffset(0x628AC6A9C0B4CE60);
+            return ref _Handle.AsRef<Vector>(_MaxBoundsOffset!.Value);
         }
     }
-    private static nint _DrawCallsOffset = -1;
+    private static nint? _DrawCallsOffset;
 
     public ref CUtlLeanVector<CMaterialDrawDescriptor, int> DrawCalls
     {
         get
         {
-            if (_DrawCallsOffset == -1) _DrawCallsOffset = Schema.GetOffset(0x628AC6A9CA953770);
-            return ref _Handle.AsRef<CUtlLeanVector<CMaterialDrawDescriptor, int>>(_DrawCallsOffset);
+            _DrawCallsOffset = _DrawCallsOffset ?? Schema.GetOffset(0x628AC6A9CA953770);
+            return ref _Handle.AsRef<CUtlLeanVector<CMaterialDrawDescriptor, int>>(_DrawCallsOffset!.Value);
         }
     }
-    private static nint _DrawBoundsOffset = -1;
+    private static nint? _DrawBoundsOffset;
 
     public ref CUtlLeanVector<AABB_t, int> DrawBounds
     {
         get
         {
-            if (_DrawBoundsOffset == -1) _DrawBoundsOffset = Schema.GetOffset(0x628AC6A96CBBD6CE);
-            return ref _Handle.AsRef<CUtlLeanVector<AABB_t, int>>(_DrawBoundsOffset);
+            _DrawBoundsOffset = _DrawBoundsOffset ?? Schema.GetOffset(0x628AC6A96CBBD6CE);
+            return ref _Handle.AsRef<CUtlLeanVector<AABB_t, int>>(_DrawBoundsOffset!.Value);
         }
     }
-    private static nint _MeshletsOffset = -1;
+    private static nint? _MeshletsOffset;
 
     public ref CUtlLeanVector<CMeshletDescriptor, int> Meshlets
     {
         get
         {
-            if (_MeshletsOffset == -1) _MeshletsOffset = Schema.GetOffset(0x628AC6A928865C36);
-            return ref _Handle.AsRef<CUtlLeanVector<CMeshletDescriptor, int>>(_MeshletsOffset);
+            _MeshletsOffset = _MeshletsOffset ?? Schema.GetOffset(0x628AC6A928865C36);
+            return ref _Handle.AsRef<CUtlLeanVector<CMeshletDescriptor, int>>(_MeshletsOffset!.Value);
         }
     }
-    private static nint _RtProxyDrawCallsOffset = -1;
+    private static nint? _RtProxyDrawCallsOffset;
 
     public ref CUtlLeanVector<CSceneObjectData__RTProxyDrawDescriptor_t, int> RtProxyDrawCalls
     {
         get
         {
-            if (_RtProxyDrawCallsOffset == -1) _RtProxyDrawCallsOffset = Schema.GetOffset(0x628AC6A9A12A5FC8);
-            return ref _Handle.AsRef<CUtlLeanVector<CSceneObjectData__RTProxyDrawDescriptor_t, int>>(_RtProxyDrawCallsOffset);
+            _RtProxyDrawCallsOffset = _RtProxyDrawCallsOffset ?? Schema.GetOffset(0x628AC6A9A12A5FC8);
+            return ref _Handle.AsRef<CUtlLeanVector<CSceneObjectData__RTProxyDrawDescriptor_t, int>>(_RtProxyDrawCallsOffset!.Value);
         }
     }
-    private static nint _TintColorOffset = -1;
+    private static nint? _TintColorOffset;
 
     public ref Vector4D TintColor
     {
         get
         {
-            if (_TintColorOffset == -1) _TintColorOffset = Schema.GetOffset(0x628AC6A950AFF21F);
-            return ref _Handle.AsRef<Vector4D>(_TintColorOffset);
+            _TintColorOffset = _TintColorOffset ?? Schema.GetOffset(0x628AC6A950AFF21F);
+            return ref _Handle.AsRef<Vector4D>(_TintColorOffset!.Value);
         }
     }
 

@@ -16,89 +16,89 @@ internal partial class CSosGroupActionMemberCountEnvelopeSchemaImpl : CSosGroupA
 {
     public CSosGroupActionMemberCountEnvelopeSchemaImpl(nint handle) : base(handle) { }
 
-    private static nint _BaseCountOffset = -1;
+    private static nint? _BaseCountOffset;
 
     public ref int BaseCount
     {
         get
         {
-            if (_BaseCountOffset == -1) _BaseCountOffset = Schema.GetOffset(0x5C85206CE09342E3);
-            return ref _Handle.AsRef<int>(_BaseCountOffset);
+            _BaseCountOffset = _BaseCountOffset ?? Schema.GetOffset(0x5C85206CE09342E3);
+            return ref _Handle.AsRef<int>(_BaseCountOffset!.Value);
         }
     }
-    private static nint _TargetCountOffset = -1;
+    private static nint? _TargetCountOffset;
 
     public ref int TargetCount
     {
         get
         {
-            if (_TargetCountOffset == -1) _TargetCountOffset = Schema.GetOffset(0x5C85206CFEA8571B);
-            return ref _Handle.AsRef<int>(_TargetCountOffset);
+            _TargetCountOffset = _TargetCountOffset ?? Schema.GetOffset(0x5C85206CFEA8571B);
+            return ref _Handle.AsRef<int>(_TargetCountOffset!.Value);
         }
     }
-    private static nint _BaseValueOffset = -1;
+    private static nint? _BaseValueOffset;
 
     public ref float BaseValue
     {
         get
         {
-            if (_BaseValueOffset == -1) _BaseValueOffset = Schema.GetOffset(0x5C85206CB5B71A9B);
-            return ref _Handle.AsRef<float>(_BaseValueOffset);
+            _BaseValueOffset = _BaseValueOffset ?? Schema.GetOffset(0x5C85206CB5B71A9B);
+            return ref _Handle.AsRef<float>(_BaseValueOffset!.Value);
         }
     }
-    private static nint _TargetValueOffset = -1;
+    private static nint? _TargetValueOffset;
 
     public ref float TargetValue
     {
         get
         {
-            if (_TargetValueOffset == -1) _TargetValueOffset = Schema.GetOffset(0x5C85206C1584D0BB);
-            return ref _Handle.AsRef<float>(_TargetValueOffset);
+            _TargetValueOffset = _TargetValueOffset ?? Schema.GetOffset(0x5C85206C1584D0BB);
+            return ref _Handle.AsRef<float>(_TargetValueOffset!.Value);
         }
     }
-    private static nint _AttackOffset = -1;
+    private static nint? _AttackOffset;
 
     public ref float Attack
     {
         get
         {
-            if (_AttackOffset == -1) _AttackOffset = Schema.GetOffset(0x5C85206C0A6A5BE7);
-            return ref _Handle.AsRef<float>(_AttackOffset);
+            _AttackOffset = _AttackOffset ?? Schema.GetOffset(0x5C85206C0A6A5BE7);
+            return ref _Handle.AsRef<float>(_AttackOffset!.Value);
         }
     }
-    private static nint _DecayOffset = -1;
+    private static nint? _DecayOffset;
 
     public ref float Decay
     {
         get
         {
-            if (_DecayOffset == -1) _DecayOffset = Schema.GetOffset(0x5C85206CE24ABC67);
-            return ref _Handle.AsRef<float>(_DecayOffset);
+            _DecayOffset = _DecayOffset ?? Schema.GetOffset(0x5C85206CE24ABC67);
+            return ref _Handle.AsRef<float>(_DecayOffset!.Value);
         }
     }
-    private static nint _ResultVarNameOffset = -1;
+    private static nint? _ResultVarNameOffset;
 
     public string ResultVarName
     {
         get
         {
-            if (_ResultVarNameOffset == -1) _ResultVarNameOffset = Schema.GetOffset(0x5C85206CF566E926);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ResultVarNameOffset));
+            _ResultVarNameOffset = _ResultVarNameOffset ?? Schema.GetOffset(0x5C85206CF566E926);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ResultVarNameOffset!.Value));
         }
         set
         {
-            if (_ResultVarNameOffset == -1) _ResultVarNameOffset = Schema.GetOffset(0x5C85206CF566E926);
-            Schema.SetCUtlString(_Handle, _ResultVarNameOffset, value);
+            _ResultVarNameOffset = _ResultVarNameOffset ?? Schema.GetOffset(0x5C85206CF566E926);
+            Schema.SetCUtlString(_Handle, _ResultVarNameOffset!.Value, value);
         }
     }
-    private static nint _SaveToGroupOffset = -1;
+    private static nint? _SaveToGroupOffset;
 
     public ref bool SaveToGroup
     {
         get
         {
-            if (_SaveToGroupOffset == -1) _SaveToGroupOffset = Schema.GetOffset(0x5C85206C6ED720F8);
-            return ref _Handle.AsRef<bool>(_SaveToGroupOffset);
+            _SaveToGroupOffset = _SaveToGroupOffset ?? Schema.GetOffset(0x5C85206C6ED720F8);
+            return ref _Handle.AsRef<bool>(_SaveToGroupOffset!.Value);
         }
     }
 

@@ -16,144 +16,144 @@ internal partial class CInfoOffscreenPanoramaTextureImpl : CPointEntityImpl, CIn
 {
     public CInfoOffscreenPanoramaTextureImpl(nint handle) : base(handle) { }
 
-    private static nint _DisabledOffset = -1;
+    private static nint? _DisabledOffset;
 
     public ref bool Disabled
     {
         get
         {
-            if (_DisabledOffset == -1) _DisabledOffset = Schema.GetOffset(0x584660AF3A7C5965);
-            return ref _Handle.AsRef<bool>(_DisabledOffset);
+            _DisabledOffset = _DisabledOffset ?? Schema.GetOffset(0x584660AF3A7C5965);
+            return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
         }
     }
-    private static nint _EnableMipGenOffset = -1;
+    private static nint? _EnableMipGenOffset;
 
     public ref bool EnableMipGen
     {
         get
         {
-            if (_EnableMipGenOffset == -1) _EnableMipGenOffset = Schema.GetOffset(0x584660AF87DE47EA);
-            return ref _Handle.AsRef<bool>(_EnableMipGenOffset);
+            _EnableMipGenOffset = _EnableMipGenOffset ?? Schema.GetOffset(0x584660AF87DE47EA);
+            return ref _Handle.AsRef<bool>(_EnableMipGenOffset!.Value);
         }
     }
-    private static nint _ResolutionXOffset = -1;
+    private static nint? _ResolutionXOffset;
 
     public ref int ResolutionX
     {
         get
         {
-            if (_ResolutionXOffset == -1) _ResolutionXOffset = Schema.GetOffset(0x584660AF6C22DC51);
-            return ref _Handle.AsRef<int>(_ResolutionXOffset);
+            _ResolutionXOffset = _ResolutionXOffset ?? Schema.GetOffset(0x584660AF6C22DC51);
+            return ref _Handle.AsRef<int>(_ResolutionXOffset!.Value);
         }
     }
-    private static nint _ResolutionYOffset = -1;
+    private static nint? _ResolutionYOffset;
 
     public ref int ResolutionY
     {
         get
         {
-            if (_ResolutionYOffset == -1) _ResolutionYOffset = Schema.GetOffset(0x584660AF6B22DABE);
-            return ref _Handle.AsRef<int>(_ResolutionYOffset);
+            _ResolutionYOffset = _ResolutionYOffset ?? Schema.GetOffset(0x584660AF6B22DABE);
+            return ref _Handle.AsRef<int>(_ResolutionYOffset!.Value);
         }
     }
-    private static nint _PanelTypeOffset = -1;
+    private static nint? _PanelTypeOffset;
 
     public string PanelType
     {
         get
         {
-            if (_PanelTypeOffset == -1) _PanelTypeOffset = Schema.GetOffset(0x584660AFE57D8536);
-            return Schema.GetString(_Handle.Read<nint>(_PanelTypeOffset));
+            _PanelTypeOffset = _PanelTypeOffset ?? Schema.GetOffset(0x584660AFE57D8536);
+            return Schema.GetString(_Handle.Read<nint>(_PanelTypeOffset!.Value));
         }
         set
         {
-            if (_PanelTypeOffset == -1) _PanelTypeOffset = Schema.GetOffset(0x584660AFE57D8536);
-            Schema.SetString(_Handle, _PanelTypeOffset, value);
+            _PanelTypeOffset = _PanelTypeOffset ?? Schema.GetOffset(0x584660AFE57D8536);
+            Schema.SetString(_Handle, _PanelTypeOffset!.Value, value);
         }
     }
-    private static nint _LayoutFileNameOffset = -1;
+    private static nint? _LayoutFileNameOffset;
 
     public string LayoutFileName
     {
         get
         {
-            if (_LayoutFileNameOffset == -1) _LayoutFileNameOffset = Schema.GetOffset(0x584660AF5D1172FB);
-            return Schema.GetString(_Handle.Read<nint>(_LayoutFileNameOffset));
+            _LayoutFileNameOffset = _LayoutFileNameOffset ?? Schema.GetOffset(0x584660AF5D1172FB);
+            return Schema.GetString(_Handle.Read<nint>(_LayoutFileNameOffset!.Value));
         }
         set
         {
-            if (_LayoutFileNameOffset == -1) _LayoutFileNameOffset = Schema.GetOffset(0x584660AF5D1172FB);
-            Schema.SetString(_Handle, _LayoutFileNameOffset, value);
+            _LayoutFileNameOffset = _LayoutFileNameOffset ?? Schema.GetOffset(0x584660AF5D1172FB);
+            Schema.SetString(_Handle, _LayoutFileNameOffset!.Value, value);
         }
     }
-    private static nint _RenderAttrNameOffset = -1;
+    private static nint? _RenderAttrNameOffset;
 
     public string RenderAttrName
     {
         get
         {
-            if (_RenderAttrNameOffset == -1) _RenderAttrNameOffset = Schema.GetOffset(0x584660AFE624CDC1);
-            return Schema.GetString(_Handle.Read<nint>(_RenderAttrNameOffset));
+            _RenderAttrNameOffset = _RenderAttrNameOffset ?? Schema.GetOffset(0x584660AFE624CDC1);
+            return Schema.GetString(_Handle.Read<nint>(_RenderAttrNameOffset!.Value));
         }
         set
         {
-            if (_RenderAttrNameOffset == -1) _RenderAttrNameOffset = Schema.GetOffset(0x584660AFE624CDC1);
-            Schema.SetString(_Handle, _RenderAttrNameOffset, value);
+            _RenderAttrNameOffset = _RenderAttrNameOffset ?? Schema.GetOffset(0x584660AFE624CDC1);
+            Schema.SetString(_Handle, _RenderAttrNameOffset!.Value, value);
         }
     }
-    private static nint _TargetEntitiesOffset = -1;
+    private static nint? _TargetEntitiesOffset;
 
     public ref CUtlVector<CHandle<CBaseModelEntity>> TargetEntities
     {
         get
         {
-            if (_TargetEntitiesOffset == -1) _TargetEntitiesOffset = Schema.GetOffset(0x584660AFA0100A93);
-            return ref _Handle.AsRef<CUtlVector<CHandle<CBaseModelEntity>>>(_TargetEntitiesOffset);
+            _TargetEntitiesOffset = _TargetEntitiesOffset ?? Schema.GetOffset(0x584660AFA0100A93);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CBaseModelEntity>>>(_TargetEntitiesOffset!.Value);
         }
     }
-    private static nint _TargetChangeCountOffset = -1;
+    private static nint? _TargetChangeCountOffset;
 
     public ref int TargetChangeCount
     {
         get
         {
-            if (_TargetChangeCountOffset == -1) _TargetChangeCountOffset = Schema.GetOffset(0x584660AF309CAEAB);
-            return ref _Handle.AsRef<int>(_TargetChangeCountOffset);
+            _TargetChangeCountOffset = _TargetChangeCountOffset ?? Schema.GetOffset(0x584660AF309CAEAB);
+            return ref _Handle.AsRef<int>(_TargetChangeCountOffset!.Value);
         }
     }
-    private static nint _CSSClassesOffset = -1;
+    private static nint? _CSSClassesOffset;
 
     public ref CUtlVector<SchemaUntypedField> CSSClasses
     {
         get
         {
-            if (_CSSClassesOffset == -1) _CSSClassesOffset = Schema.GetOffset(0x584660AFCB74D1DC);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_CSSClassesOffset);
+            _CSSClassesOffset = _CSSClassesOffset ?? Schema.GetOffset(0x584660AFCB74D1DC);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_CSSClassesOffset!.Value);
         }
     }
-    private static nint _TargetsNameOffset = -1;
+    private static nint? _TargetsNameOffset;
 
     public string TargetsName
     {
         get
         {
-            if (_TargetsNameOffset == -1) _TargetsNameOffset = Schema.GetOffset(0x584660AF82C9ED45);
-            return Schema.GetString(_Handle.Read<nint>(_TargetsNameOffset));
+            _TargetsNameOffset = _TargetsNameOffset ?? Schema.GetOffset(0x584660AF82C9ED45);
+            return Schema.GetString(_Handle.Read<nint>(_TargetsNameOffset!.Value));
         }
         set
         {
-            if (_TargetsNameOffset == -1) _TargetsNameOffset = Schema.GetOffset(0x584660AF82C9ED45);
-            Schema.SetString(_Handle, _TargetsNameOffset, value);
+            _TargetsNameOffset = _TargetsNameOffset ?? Schema.GetOffset(0x584660AF82C9ED45);
+            Schema.SetString(_Handle, _TargetsNameOffset!.Value, value);
         }
     }
-    private static nint _AdditionalTargetEntitiesOffset = -1;
+    private static nint? _AdditionalTargetEntitiesOffset;
 
     public ref CUtlVector<CHandle<CBaseModelEntity>> AdditionalTargetEntities
     {
         get
         {
-            if (_AdditionalTargetEntitiesOffset == -1) _AdditionalTargetEntitiesOffset = Schema.GetOffset(0x584660AFD38E792A);
-            return ref _Handle.AsRef<CUtlVector<CHandle<CBaseModelEntity>>>(_AdditionalTargetEntitiesOffset);
+            _AdditionalTargetEntitiesOffset = _AdditionalTargetEntitiesOffset ?? Schema.GetOffset(0x584660AFD38E792A);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CBaseModelEntity>>>(_AdditionalTargetEntitiesOffset!.Value);
         }
     }
 

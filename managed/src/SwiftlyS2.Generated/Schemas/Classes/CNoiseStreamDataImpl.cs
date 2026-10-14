@@ -16,16 +16,16 @@ internal partial class CNoiseStreamDataImpl : SchemaClass, CNoiseStreamData
 {
     public CNoiseStreamDataImpl(nint handle) : base(handle) { }
 
-    private static nint _StreamOffset = -1;
+    private static nint? _StreamOffset;
     private NoiseStreamDef_tImpl? _StreamInstance;
 
     public NoiseStreamDef_t Stream
     {
         get
         {
-            if (_StreamOffset == -1) _StreamOffset = Schema.GetOffset(0x2E16C92CCE1025E5);
+            _StreamOffset = _StreamOffset ?? Schema.GetOffset(0x2E16C92CCE1025E5);
             var instance = _StreamInstance ??= new NoiseStreamDef_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _StreamOffset);
+            instance.DangerousSetHandle(_Handle + _StreamOffset!.Value);
             return instance;
         }
     }

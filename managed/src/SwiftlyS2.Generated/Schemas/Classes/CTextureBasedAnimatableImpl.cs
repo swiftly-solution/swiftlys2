@@ -16,84 +16,84 @@ internal partial class CTextureBasedAnimatableImpl : CBaseModelEntityImpl, CText
 {
     public CTextureBasedAnimatableImpl(nint handle) : base(handle) { }
 
-    private static nint _LoopOffset = -1;
+    private static nint? _LoopOffset;
 
     public ref bool Loop
     {
         get
         {
-            if (_LoopOffset == -1) _LoopOffset = Schema.GetOffset(0xDB45ABACC668A4CB);
-            return ref _Handle.AsRef<bool>(_LoopOffset);
+            _LoopOffset = _LoopOffset ?? Schema.GetOffset(0xDB45ABACC668A4CB);
+            return ref _Handle.AsRef<bool>(_LoopOffset!.Value);
         }
     }
-    private static nint _FPSOffset = -1;
+    private static nint? _FPSOffset;
 
     public ref float FPS
     {
         get
         {
-            if (_FPSOffset == -1) _FPSOffset = Schema.GetOffset(0xDB45ABAC38CAA4F6);
-            return ref _Handle.AsRef<float>(_FPSOffset);
+            _FPSOffset = _FPSOffset ?? Schema.GetOffset(0xDB45ABAC38CAA4F6);
+            return ref _Handle.AsRef<float>(_FPSOffset!.Value);
         }
     }
-    private static nint _PositionKeysOffset = -1;
+    private static nint? _PositionKeysOffset;
 
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> PositionKeys
     {
         get
         {
-            if (_PositionKeysOffset == -1) _PositionKeysOffset = Schema.GetOffset(0xDB45ABACE6515850);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_PositionKeysOffset);
+            _PositionKeysOffset = _PositionKeysOffset ?? Schema.GetOffset(0xDB45ABACE6515850);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_PositionKeysOffset!.Value);
         }
     }
-    private static nint _RotationKeysOffset = -1;
+    private static nint? _RotationKeysOffset;
 
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> RotationKeys
     {
         get
         {
-            if (_RotationKeysOffset == -1) _RotationKeysOffset = Schema.GetOffset(0xDB45ABACDAC30C39);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_RotationKeysOffset);
+            _RotationKeysOffset = _RotationKeysOffset ?? Schema.GetOffset(0xDB45ABACDAC30C39);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_RotationKeysOffset!.Value);
         }
     }
-    private static nint _AnimationBoundsMinOffset = -1;
+    private static nint? _AnimationBoundsMinOffset;
 
     public ref Vector AnimationBoundsMin
     {
         get
         {
-            if (_AnimationBoundsMinOffset == -1) _AnimationBoundsMinOffset = Schema.GetOffset(0xDB45ABAC8BDB4B58);
-            return ref _Handle.AsRef<Vector>(_AnimationBoundsMinOffset);
+            _AnimationBoundsMinOffset = _AnimationBoundsMinOffset ?? Schema.GetOffset(0xDB45ABAC8BDB4B58);
+            return ref _Handle.AsRef<Vector>(_AnimationBoundsMinOffset!.Value);
         }
     }
-    private static nint _AnimationBoundsMaxOffset = -1;
+    private static nint? _AnimationBoundsMaxOffset;
 
     public ref Vector AnimationBoundsMax
     {
         get
         {
-            if (_AnimationBoundsMaxOffset == -1) _AnimationBoundsMaxOffset = Schema.GetOffset(0xDB45ABACA1EEF5B2);
-            return ref _Handle.AsRef<Vector>(_AnimationBoundsMaxOffset);
+            _AnimationBoundsMaxOffset = _AnimationBoundsMaxOffset ?? Schema.GetOffset(0xDB45ABACA1EEF5B2);
+            return ref _Handle.AsRef<Vector>(_AnimationBoundsMaxOffset!.Value);
         }
     }
-    private static nint _StartTimeOffset = -1;
+    private static nint? _StartTimeOffset;
 
     public ref float StartTime
     {
         get
         {
-            if (_StartTimeOffset == -1) _StartTimeOffset = Schema.GetOffset(0xDB45ABAC67FE9DC4);
-            return ref _Handle.AsRef<float>(_StartTimeOffset);
+            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0xDB45ABAC67FE9DC4);
+            return ref _Handle.AsRef<float>(_StartTimeOffset!.Value);
         }
     }
-    private static nint _StartFrameOffset = -1;
+    private static nint? _StartFrameOffset;
 
     public ref float StartFrame
     {
         get
         {
-            if (_StartFrameOffset == -1) _StartFrameOffset = Schema.GetOffset(0xDB45ABACB534B906);
-            return ref _Handle.AsRef<float>(_StartFrameOffset);
+            _StartFrameOffset = _StartFrameOffset ?? Schema.GetOffset(0xDB45ABACB534B906);
+            return ref _Handle.AsRef<float>(_StartFrameOffset!.Value);
         }
     }
 

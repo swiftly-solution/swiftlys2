@@ -16,59 +16,59 @@ internal partial class CMovementComponentImpl : CAnimGraphDoc_ComponentImpl, CMo
 {
     public CMovementComponentImpl(nint handle) : base(handle) { }
 
-    private static nint _MotorsOffset = -1;
+    private static nint? _MotorsOffset;
 
     public ref CUtlVector<SchemaUntypedField> Motors
     {
         get
         {
-            if (_MotorsOffset == -1) _MotorsOffset = Schema.GetOffset(0xBDF4A14ED817BF33);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_MotorsOffset);
+            _MotorsOffset = _MotorsOffset ?? Schema.GetOffset(0xBDF4A14ED817BF33);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_MotorsOffset!.Value);
         }
     }
-    private static nint _NetworkPathOffset = -1;
+    private static nint? _NetworkPathOffset;
 
     public ref bool NetworkPath
     {
         get
         {
-            if (_NetworkPathOffset == -1) _NetworkPathOffset = Schema.GetOffset(0xBDF4A14E86C36FF6);
-            return ref _Handle.AsRef<bool>(_NetworkPathOffset);
+            _NetworkPathOffset = _NetworkPathOffset ?? Schema.GetOffset(0xBDF4A14E86C36FF6);
+            return ref _Handle.AsRef<bool>(_NetworkPathOffset!.Value);
         }
     }
-    private static nint _FacingDampingOffset = -1;
+    private static nint? _FacingDampingOffset;
     private CAnimInputDampingImpl? _FacingDampingInstance;
 
     public CAnimInputDamping FacingDamping
     {
         get
         {
-            if (_FacingDampingOffset == -1) _FacingDampingOffset = Schema.GetOffset(0xBDF4A14E9A430F4B);
+            _FacingDampingOffset = _FacingDampingOffset ?? Schema.GetOffset(0xBDF4A14E9A430F4B);
             var instance = _FacingDampingInstance ??= new CAnimInputDampingImpl(0);
-            instance.DangerousSetHandle(_Handle + _FacingDampingOffset);
+            instance.DangerousSetHandle(_Handle + _FacingDampingOffset!.Value);
             return instance;
         }
     }
-    private static nint _NetworkFacingOffset = -1;
+    private static nint? _NetworkFacingOffset;
 
     public ref bool NetworkFacing
     {
         get
         {
-            if (_NetworkFacingOffset == -1) _NetworkFacingOffset = Schema.GetOffset(0xBDF4A14EE3436E8F);
-            return ref _Handle.AsRef<bool>(_NetworkFacingOffset);
+            _NetworkFacingOffset = _NetworkFacingOffset ?? Schema.GetOffset(0xBDF4A14EE3436E8F);
+            return ref _Handle.AsRef<bool>(_NetworkFacingOffset!.Value);
         }
     }
-    private static nint _ParamIDsOffset = -1;
+    private static nint? _ParamIDsOffset;
     private SchemaClassFixedArray<AnimParamID>? _ParamIDsInstance;
 
     public ISchemaClassFixedArray<AnimParamID> ParamIDs
     {
         get
         {
-            if (_ParamIDsOffset == -1) _ParamIDsOffset = Schema.GetOffset(0xBDF4A14E56ADE304);
+            _ParamIDsOffset = _ParamIDsOffset ?? Schema.GetOffset(0xBDF4A14E56ADE304);
             var instance = _ParamIDsInstance ??= new SchemaClassFixedArray<AnimParamID>(0, 0xBDF4A14E56ADE304, 34, 4, 4);
-            instance.DangerousSetHandle(_Handle + _ParamIDsOffset);
+            instance.DangerousSetHandle(_Handle + _ParamIDsOffset!.Value);
             return instance;
         }
     }

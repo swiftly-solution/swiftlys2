@@ -16,29 +16,29 @@ internal partial class CSetParameterActionUpdaterImpl : CAnimActionUpdaterImpl, 
 {
     public CSetParameterActionUpdaterImpl(nint handle) : base(handle) { }
 
-    private static nint _ParamOffset = -1;
+    private static nint? _ParamOffset;
     private CAnimParamHandleImpl? _ParamInstance;
 
     public CAnimParamHandle Param
     {
         get
         {
-            if (_ParamOffset == -1) _ParamOffset = Schema.GetOffset(0x2CC56544679286A4);
+            _ParamOffset = _ParamOffset ?? Schema.GetOffset(0x2CC56544679286A4);
             var instance = _ParamInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamOffset);
+            instance.DangerousSetHandle(_Handle + _ParamOffset!.Value);
             return instance;
         }
     }
-    private static nint _ValueOffset = -1;
+    private static nint? _ValueOffset;
     private SchemaUntypedField? _ValueInstance;
 
     public SchemaUntypedField Value
     {
         get
         {
-            if (_ValueOffset == -1) _ValueOffset = Schema.GetOffset(0x2CC565446B99AEEA);
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0x2CC565446B99AEEA);
             var instance = _ValueInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ValueOffset);
+            instance.DangerousSetHandle(_Handle + _ValueOffset!.Value);
             return instance;
         }
     }

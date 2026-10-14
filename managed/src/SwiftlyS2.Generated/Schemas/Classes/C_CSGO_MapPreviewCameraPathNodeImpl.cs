@@ -16,109 +16,109 @@ internal partial class C_CSGO_MapPreviewCameraPathNodeImpl : C_BaseEntityImpl, C
 {
     public C_CSGO_MapPreviewCameraPathNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _ParentPathUniqueIDOffset = -1;
+    private static nint? _ParentPathUniqueIDOffset;
 
     public string ParentPathUniqueID
     {
         get
         {
-            if (_ParentPathUniqueIDOffset == -1) _ParentPathUniqueIDOffset = Schema.GetOffset(0xCDE37C02C2958DE1);
-            return Schema.GetString(_Handle.Read<nint>(_ParentPathUniqueIDOffset));
+            _ParentPathUniqueIDOffset = _ParentPathUniqueIDOffset ?? Schema.GetOffset(0xCDE37C02C2958DE1);
+            return Schema.GetString(_Handle.Read<nint>(_ParentPathUniqueIDOffset!.Value));
         }
         set
         {
-            if (_ParentPathUniqueIDOffset == -1) _ParentPathUniqueIDOffset = Schema.GetOffset(0xCDE37C02C2958DE1);
-            Schema.SetString(_Handle, _ParentPathUniqueIDOffset, value);
+            _ParentPathUniqueIDOffset = _ParentPathUniqueIDOffset ?? Schema.GetOffset(0xCDE37C02C2958DE1);
+            Schema.SetString(_Handle, _ParentPathUniqueIDOffset!.Value, value);
         }
     }
-    private static nint _PathIndexOffset = -1;
+    private static nint? _PathIndexOffset;
 
     public ref int PathIndex
     {
         get
         {
-            if (_PathIndexOffset == -1) _PathIndexOffset = Schema.GetOffset(0xCDE37C0289292F1E);
-            return ref _Handle.AsRef<int>(_PathIndexOffset);
+            _PathIndexOffset = _PathIndexOffset ?? Schema.GetOffset(0xCDE37C0289292F1E);
+            return ref _Handle.AsRef<int>(_PathIndexOffset!.Value);
         }
     }
-    private static nint _InTangentLocalOffset = -1;
+    private static nint? _InTangentLocalOffset;
 
     public ref Vector InTangentLocal
     {
         get
         {
-            if (_InTangentLocalOffset == -1) _InTangentLocalOffset = Schema.GetOffset(0xCDE37C0246C1388A);
-            return ref _Handle.AsRef<Vector>(_InTangentLocalOffset);
+            _InTangentLocalOffset = _InTangentLocalOffset ?? Schema.GetOffset(0xCDE37C0246C1388A);
+            return ref _Handle.AsRef<Vector>(_InTangentLocalOffset!.Value);
         }
     }
-    private static nint _OutTangentLocalOffset = -1;
+    private static nint? _OutTangentLocalOffset;
 
     public ref Vector OutTangentLocal
     {
         get
         {
-            if (_OutTangentLocalOffset == -1) _OutTangentLocalOffset = Schema.GetOffset(0xCDE37C02788EFFFB);
-            return ref _Handle.AsRef<Vector>(_OutTangentLocalOffset);
+            _OutTangentLocalOffset = _OutTangentLocalOffset ?? Schema.GetOffset(0xCDE37C02788EFFFB);
+            return ref _Handle.AsRef<Vector>(_OutTangentLocalOffset!.Value);
         }
     }
-    private static nint _FOVOffset = -1;
+    private static nint? _FOVOffset;
 
     public ref float FOV
     {
         get
         {
-            if (_FOVOffset == -1) _FOVOffset = Schema.GetOffset(0xCDE37C024B90D74E);
-            return ref _Handle.AsRef<float>(_FOVOffset);
+            _FOVOffset = _FOVOffset ?? Schema.GetOffset(0xCDE37C024B90D74E);
+            return ref _Handle.AsRef<float>(_FOVOffset!.Value);
         }
     }
-    private static nint _CameraSpeedOffset = -1;
+    private static nint? _CameraSpeedOffset;
 
     public ref float CameraSpeed
     {
         get
         {
-            if (_CameraSpeedOffset == -1) _CameraSpeedOffset = Schema.GetOffset(0xCDE37C02FC215D0B);
-            return ref _Handle.AsRef<float>(_CameraSpeedOffset);
+            _CameraSpeedOffset = _CameraSpeedOffset ?? Schema.GetOffset(0xCDE37C02FC215D0B);
+            return ref _Handle.AsRef<float>(_CameraSpeedOffset!.Value);
         }
     }
-    private static nint _EaseInOffset = -1;
+    private static nint? _EaseInOffset;
 
     public ref float EaseIn
     {
         get
         {
-            if (_EaseInOffset == -1) _EaseInOffset = Schema.GetOffset(0xCDE37C024514C026);
-            return ref _Handle.AsRef<float>(_EaseInOffset);
+            _EaseInOffset = _EaseInOffset ?? Schema.GetOffset(0xCDE37C024514C026);
+            return ref _Handle.AsRef<float>(_EaseInOffset!.Value);
         }
     }
-    private static nint _EaseOutOffset = -1;
+    private static nint? _EaseOutOffset;
 
     public ref float EaseOut
     {
         get
         {
-            if (_EaseOutOffset == -1) _EaseOutOffset = Schema.GetOffset(0xCDE37C0246B49C07);
-            return ref _Handle.AsRef<float>(_EaseOutOffset);
+            _EaseOutOffset = _EaseOutOffset ?? Schema.GetOffset(0xCDE37C0246B49C07);
+            return ref _Handle.AsRef<float>(_EaseOutOffset!.Value);
         }
     }
-    private static nint _InTangentWorldOffset = -1;
+    private static nint? _InTangentWorldOffset;
 
     public ref Vector InTangentWorld
     {
         get
         {
-            if (_InTangentWorldOffset == -1) _InTangentWorldOffset = Schema.GetOffset(0xCDE37C025AFE0691);
-            return ref _Handle.AsRef<Vector>(_InTangentWorldOffset);
+            _InTangentWorldOffset = _InTangentWorldOffset ?? Schema.GetOffset(0xCDE37C025AFE0691);
+            return ref _Handle.AsRef<Vector>(_InTangentWorldOffset!.Value);
         }
     }
-    private static nint _OutTangentWorldOffset = -1;
+    private static nint? _OutTangentWorldOffset;
 
     public ref Vector OutTangentWorld
     {
         get
         {
-            if (_OutTangentWorldOffset == -1) _OutTangentWorldOffset = Schema.GetOffset(0xCDE37C02281307C4);
-            return ref _Handle.AsRef<Vector>(_OutTangentWorldOffset);
+            _OutTangentWorldOffset = _OutTangentWorldOffset ?? Schema.GetOffset(0xCDE37C02281307C4);
+            return ref _Handle.AsRef<Vector>(_OutTangentWorldOffset!.Value);
         }
     }
 

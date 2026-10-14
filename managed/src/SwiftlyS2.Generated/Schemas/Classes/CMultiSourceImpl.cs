@@ -16,65 +16,65 @@ internal partial class CMultiSourceImpl : CLogicalEntityImpl, CMultiSource
 {
     public CMultiSourceImpl(nint handle) : base(handle) { }
 
-    private static nint _RgEntitiesOffset = -1;
+    private static nint? _RgEntitiesOffset;
     private SchemaFixedArray<CHandle<CBaseEntity>>? _RgEntitiesInstance;
 
     public ISchemaFixedArray<CHandle<CBaseEntity>> RgEntities
     {
         get
         {
-            if (_RgEntitiesOffset == -1) _RgEntitiesOffset = Schema.GetOffset(0x87DC5C660CB2E479);
+            _RgEntitiesOffset = _RgEntitiesOffset ?? Schema.GetOffset(0x87DC5C660CB2E479);
             var instance = _RgEntitiesInstance ??= new SchemaFixedArray<CHandle<CBaseEntity>>(0, 0x87DC5C660CB2E479, 32, 4, 4);
-            instance.DangerousSetHandle(_Handle + _RgEntitiesOffset);
+            instance.DangerousSetHandle(_Handle + _RgEntitiesOffset!.Value);
             return instance;
         }
     }
-    private static nint _RgTriggeredOffset = -1;
+    private static nint? _RgTriggeredOffset;
     private SchemaFixedArray<int>? _RgTriggeredInstance;
 
     public ISchemaFixedArray<int> RgTriggered
     {
         get
         {
-            if (_RgTriggeredOffset == -1) _RgTriggeredOffset = Schema.GetOffset(0x87DC5C664616C37F);
+            _RgTriggeredOffset = _RgTriggeredOffset ?? Schema.GetOffset(0x87DC5C664616C37F);
             var instance = _RgTriggeredInstance ??= new SchemaFixedArray<int>(0, 0x87DC5C664616C37F, 32, 4, 4);
-            instance.DangerousSetHandle(_Handle + _RgTriggeredOffset);
+            instance.DangerousSetHandle(_Handle + _RgTriggeredOffset!.Value);
             return instance;
         }
     }
-    private static nint _OnTriggerOffset = -1;
+    private static nint? _OnTriggerOffset;
 
     public ref CEntityIOOutput OnTrigger
     {
         get
         {
-            if (_OnTriggerOffset == -1) _OnTriggerOffset = Schema.GetOffset(0x87DC5C6681E0BFEC);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnTriggerOffset);
+            _OnTriggerOffset = _OnTriggerOffset ?? Schema.GetOffset(0x87DC5C6681E0BFEC);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTriggerOffset!.Value);
         }
     }
-    private static nint _TotalOffset = -1;
+    private static nint? _TotalOffset;
 
     public ref int Total
     {
         get
         {
-            if (_TotalOffset == -1) _TotalOffset = Schema.GetOffset(0x87DC5C667223ED06);
-            return ref _Handle.AsRef<int>(_TotalOffset);
+            _TotalOffset = _TotalOffset ?? Schema.GetOffset(0x87DC5C667223ED06);
+            return ref _Handle.AsRef<int>(_TotalOffset!.Value);
         }
     }
-    private static nint _GlobalstateOffset = -1;
+    private static nint? _GlobalstateOffset;
 
     public string Globalstate
     {
         get
         {
-            if (_GlobalstateOffset == -1) _GlobalstateOffset = Schema.GetOffset(0x87DC5C6677A86653);
-            return Schema.GetString(_Handle.Read<nint>(_GlobalstateOffset));
+            _GlobalstateOffset = _GlobalstateOffset ?? Schema.GetOffset(0x87DC5C6677A86653);
+            return Schema.GetString(_Handle.Read<nint>(_GlobalstateOffset!.Value));
         }
         set
         {
-            if (_GlobalstateOffset == -1) _GlobalstateOffset = Schema.GetOffset(0x87DC5C6677A86653);
-            Schema.SetString(_Handle, _GlobalstateOffset, value);
+            _GlobalstateOffset = _GlobalstateOffset ?? Schema.GetOffset(0x87DC5C6677A86653);
+            Schema.SetString(_Handle, _GlobalstateOffset!.Value, value);
         }
     }
 

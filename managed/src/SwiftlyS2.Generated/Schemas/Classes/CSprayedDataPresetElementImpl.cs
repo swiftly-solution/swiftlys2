@@ -16,51 +16,51 @@ internal partial class CSprayedDataPresetElementImpl : SchemaClass, CSprayedData
 {
     public CSprayedDataPresetElementImpl(nint handle) : base(handle) { }
 
-    private static nint _AssetNameOffset = -1;
+    private static nint? _AssetNameOffset;
 
     public string AssetName
     {
         get
         {
-            if (_AssetNameOffset == -1) _AssetNameOffset = Schema.GetOffset(0xF8BEBF1321E6ED00);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_AssetNameOffset));
+            _AssetNameOffset = _AssetNameOffset ?? Schema.GetOffset(0xF8BEBF1321E6ED00);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_AssetNameOffset!.Value));
         }
         set
         {
-            if (_AssetNameOffset == -1) _AssetNameOffset = Schema.GetOffset(0xF8BEBF1321E6ED00);
-            Schema.SetCUtlString(_Handle, _AssetNameOffset, value);
+            _AssetNameOffset = _AssetNameOffset ?? Schema.GetOffset(0xF8BEBF1321E6ED00);
+            Schema.SetCUtlString(_Handle, _AssetNameOffset!.Value, value);
         }
     }
-    private static nint _BoundsMinOffset = -1;
+    private static nint? _BoundsMinOffset;
 
     public ref Vector BoundsMin
     {
         get
         {
-            if (_BoundsMinOffset == -1) _BoundsMinOffset = Schema.GetOffset(0xF8BEBF1375C1DA80);
-            return ref _Handle.AsRef<Vector>(_BoundsMinOffset);
+            _BoundsMinOffset = _BoundsMinOffset ?? Schema.GetOffset(0xF8BEBF1375C1DA80);
+            return ref _Handle.AsRef<Vector>(_BoundsMinOffset!.Value);
         }
     }
-    private static nint _BoundsMaxOffset = -1;
+    private static nint? _BoundsMaxOffset;
 
     public ref Vector BoundsMax
     {
         get
         {
-            if (_BoundsMaxOffset == -1) _BoundsMaxOffset = Schema.GetOffset(0xF8BEBF138BAE756A);
-            return ref _Handle.AsRef<Vector>(_BoundsMaxOffset);
+            _BoundsMaxOffset = _BoundsMaxOffset ?? Schema.GetOffset(0xF8BEBF138BAE756A);
+            return ref _Handle.AsRef<Vector>(_BoundsMaxOffset!.Value);
         }
     }
-    private static nint _SettingsOffset = -1;
+    private static nint? _SettingsOffset;
     private CSprayedDataSettingsBlockImpl? _SettingsInstance;
 
     public CSprayedDataSettingsBlock Settings
     {
         get
         {
-            if (_SettingsOffset == -1) _SettingsOffset = Schema.GetOffset(0xF8BEBF13B3DE33A8);
+            _SettingsOffset = _SettingsOffset ?? Schema.GetOffset(0xF8BEBF13B3DE33A8);
             var instance = _SettingsInstance ??= new CSprayedDataSettingsBlockImpl(0);
-            instance.DangerousSetHandle(_Handle + _SettingsOffset);
+            instance.DangerousSetHandle(_Handle + _SettingsOffset!.Value);
             return instance;
         }
     }

@@ -16,377 +16,377 @@ internal partial class CompMatPropertyMutator_tImpl : SchemaClass, CompMatProper
 {
     public CompMatPropertyMutator_tImpl(nint handle) : base(handle) { }
 
-    private static nint _EnabledOffset = -1;
+    private static nint? _EnabledOffset;
 
     public ref bool Enabled
     {
         get
         {
-            if (_EnabledOffset == -1) _EnabledOffset = Schema.GetOffset(0xEB12CF7E6154EB7E);
-            return ref _Handle.AsRef<bool>(_EnabledOffset);
+            _EnabledOffset = _EnabledOffset ?? Schema.GetOffset(0xEB12CF7E6154EB7E);
+            return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
         }
     }
-    private static nint _MutatorCommandTypeOffset = -1;
+    private static nint? _MutatorCommandTypeOffset;
 
     public ref CompMatPropertyMutatorType_t MutatorCommandType
     {
         get
         {
-            if (_MutatorCommandTypeOffset == -1) _MutatorCommandTypeOffset = Schema.GetOffset(0xEB12CF7E628BEC12);
-            return ref _Handle.AsRef<CompMatPropertyMutatorType_t>(_MutatorCommandTypeOffset);
+            _MutatorCommandTypeOffset = _MutatorCommandTypeOffset ?? Schema.GetOffset(0xEB12CF7E628BEC12);
+            return ref _Handle.AsRef<CompMatPropertyMutatorType_t>(_MutatorCommandTypeOffset!.Value);
         }
     }
-    private static nint _StrInitWith_ContainerOffset = -1;
+    private static nint? _StrInitWith_ContainerOffset;
 
     public string StrInitWith_Container
     {
         get
         {
-            if (_StrInitWith_ContainerOffset == -1) _StrInitWith_ContainerOffset = Schema.GetOffset(0xEB12CF7EE0E4DD7E);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrInitWith_ContainerOffset));
+            _StrInitWith_ContainerOffset = _StrInitWith_ContainerOffset ?? Schema.GetOffset(0xEB12CF7EE0E4DD7E);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrInitWith_ContainerOffset!.Value));
         }
         set
         {
-            if (_StrInitWith_ContainerOffset == -1) _StrInitWith_ContainerOffset = Schema.GetOffset(0xEB12CF7EE0E4DD7E);
-            Schema.SetCUtlString(_Handle, _StrInitWith_ContainerOffset, value);
+            _StrInitWith_ContainerOffset = _StrInitWith_ContainerOffset ?? Schema.GetOffset(0xEB12CF7EE0E4DD7E);
+            Schema.SetCUtlString(_Handle, _StrInitWith_ContainerOffset!.Value, value);
         }
     }
-    private static nint _StrCopyProperty_InputContainerSrcOffset = -1;
+    private static nint? _StrCopyProperty_InputContainerSrcOffset;
 
     public string StrCopyProperty_InputContainerSrc
     {
         get
         {
-            if (_StrCopyProperty_InputContainerSrcOffset == -1) _StrCopyProperty_InputContainerSrcOffset = Schema.GetOffset(0xEB12CF7E97FFC2E4);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrCopyProperty_InputContainerSrcOffset));
+            _StrCopyProperty_InputContainerSrcOffset = _StrCopyProperty_InputContainerSrcOffset ?? Schema.GetOffset(0xEB12CF7E97FFC2E4);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrCopyProperty_InputContainerSrcOffset!.Value));
         }
         set
         {
-            if (_StrCopyProperty_InputContainerSrcOffset == -1) _StrCopyProperty_InputContainerSrcOffset = Schema.GetOffset(0xEB12CF7E97FFC2E4);
-            Schema.SetCUtlString(_Handle, _StrCopyProperty_InputContainerSrcOffset, value);
+            _StrCopyProperty_InputContainerSrcOffset = _StrCopyProperty_InputContainerSrcOffset ?? Schema.GetOffset(0xEB12CF7E97FFC2E4);
+            Schema.SetCUtlString(_Handle, _StrCopyProperty_InputContainerSrcOffset!.Value, value);
         }
     }
-    private static nint _StrCopyProperty_InputContainerPropertyOffset = -1;
+    private static nint? _StrCopyProperty_InputContainerPropertyOffset;
 
     public string StrCopyProperty_InputContainerProperty
     {
         get
         {
-            if (_StrCopyProperty_InputContainerPropertyOffset == -1) _StrCopyProperty_InputContainerPropertyOffset = Schema.GetOffset(0xEB12CF7EAF6A02BB);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrCopyProperty_InputContainerPropertyOffset));
+            _StrCopyProperty_InputContainerPropertyOffset = _StrCopyProperty_InputContainerPropertyOffset ?? Schema.GetOffset(0xEB12CF7EAF6A02BB);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrCopyProperty_InputContainerPropertyOffset!.Value));
         }
         set
         {
-            if (_StrCopyProperty_InputContainerPropertyOffset == -1) _StrCopyProperty_InputContainerPropertyOffset = Schema.GetOffset(0xEB12CF7EAF6A02BB);
-            Schema.SetCUtlString(_Handle, _StrCopyProperty_InputContainerPropertyOffset, value);
+            _StrCopyProperty_InputContainerPropertyOffset = _StrCopyProperty_InputContainerPropertyOffset ?? Schema.GetOffset(0xEB12CF7EAF6A02BB);
+            Schema.SetCUtlString(_Handle, _StrCopyProperty_InputContainerPropertyOffset!.Value, value);
         }
     }
-    private static nint _StrCopyProperty_TargetPropertyOffset = -1;
+    private static nint? _StrCopyProperty_TargetPropertyOffset;
 
     public string StrCopyProperty_TargetProperty
     {
         get
         {
-            if (_StrCopyProperty_TargetPropertyOffset == -1) _StrCopyProperty_TargetPropertyOffset = Schema.GetOffset(0xEB12CF7E50528D89);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrCopyProperty_TargetPropertyOffset));
+            _StrCopyProperty_TargetPropertyOffset = _StrCopyProperty_TargetPropertyOffset ?? Schema.GetOffset(0xEB12CF7E50528D89);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrCopyProperty_TargetPropertyOffset!.Value));
         }
         set
         {
-            if (_StrCopyProperty_TargetPropertyOffset == -1) _StrCopyProperty_TargetPropertyOffset = Schema.GetOffset(0xEB12CF7E50528D89);
-            Schema.SetCUtlString(_Handle, _StrCopyProperty_TargetPropertyOffset, value);
+            _StrCopyProperty_TargetPropertyOffset = _StrCopyProperty_TargetPropertyOffset ?? Schema.GetOffset(0xEB12CF7E50528D89);
+            Schema.SetCUtlString(_Handle, _StrCopyProperty_TargetPropertyOffset!.Value, value);
         }
     }
-    private static nint _StrRandomRollInputVars_SeedInputVarOffset = -1;
+    private static nint? _StrRandomRollInputVars_SeedInputVarOffset;
 
     public string StrRandomRollInputVars_SeedInputVar
     {
         get
         {
-            if (_StrRandomRollInputVars_SeedInputVarOffset == -1) _StrRandomRollInputVars_SeedInputVarOffset = Schema.GetOffset(0xEB12CF7E24701F53);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrRandomRollInputVars_SeedInputVarOffset));
+            _StrRandomRollInputVars_SeedInputVarOffset = _StrRandomRollInputVars_SeedInputVarOffset ?? Schema.GetOffset(0xEB12CF7E24701F53);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrRandomRollInputVars_SeedInputVarOffset!.Value));
         }
         set
         {
-            if (_StrRandomRollInputVars_SeedInputVarOffset == -1) _StrRandomRollInputVars_SeedInputVarOffset = Schema.GetOffset(0xEB12CF7E24701F53);
-            Schema.SetCUtlString(_Handle, _StrRandomRollInputVars_SeedInputVarOffset, value);
+            _StrRandomRollInputVars_SeedInputVarOffset = _StrRandomRollInputVars_SeedInputVarOffset ?? Schema.GetOffset(0xEB12CF7E24701F53);
+            Schema.SetCUtlString(_Handle, _StrRandomRollInputVars_SeedInputVarOffset!.Value, value);
         }
     }
-    private static nint _RandomRollInputVars_InputVarsToRollOffset = -1;
+    private static nint? _RandomRollInputVars_InputVarsToRollOffset;
 
     public ref CUtlVector<CUtlString> RandomRollInputVars_InputVarsToRoll
     {
         get
         {
-            if (_RandomRollInputVars_InputVarsToRollOffset == -1) _RandomRollInputVars_InputVarsToRollOffset = Schema.GetOffset(0xEB12CF7E8F96A462);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_RandomRollInputVars_InputVarsToRollOffset);
+            _RandomRollInputVars_InputVarsToRollOffset = _RandomRollInputVars_InputVarsToRollOffset ?? Schema.GetOffset(0xEB12CF7E8F96A462);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_RandomRollInputVars_InputVarsToRollOffset!.Value);
         }
     }
-    private static nint _StrCopyMatchingKeys_InputContainerSrcOffset = -1;
+    private static nint? _StrCopyMatchingKeys_InputContainerSrcOffset;
 
     public string StrCopyMatchingKeys_InputContainerSrc
     {
         get
         {
-            if (_StrCopyMatchingKeys_InputContainerSrcOffset == -1) _StrCopyMatchingKeys_InputContainerSrcOffset = Schema.GetOffset(0xEB12CF7E758E1692);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrCopyMatchingKeys_InputContainerSrcOffset));
+            _StrCopyMatchingKeys_InputContainerSrcOffset = _StrCopyMatchingKeys_InputContainerSrcOffset ?? Schema.GetOffset(0xEB12CF7E758E1692);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrCopyMatchingKeys_InputContainerSrcOffset!.Value));
         }
         set
         {
-            if (_StrCopyMatchingKeys_InputContainerSrcOffset == -1) _StrCopyMatchingKeys_InputContainerSrcOffset = Schema.GetOffset(0xEB12CF7E758E1692);
-            Schema.SetCUtlString(_Handle, _StrCopyMatchingKeys_InputContainerSrcOffset, value);
+            _StrCopyMatchingKeys_InputContainerSrcOffset = _StrCopyMatchingKeys_InputContainerSrcOffset ?? Schema.GetOffset(0xEB12CF7E758E1692);
+            Schema.SetCUtlString(_Handle, _StrCopyMatchingKeys_InputContainerSrcOffset!.Value, value);
         }
     }
-    private static nint _StrCopyKeysWithSuffix_InputContainerSrcOffset = -1;
+    private static nint? _StrCopyKeysWithSuffix_InputContainerSrcOffset;
 
     public string StrCopyKeysWithSuffix_InputContainerSrc
     {
         get
         {
-            if (_StrCopyKeysWithSuffix_InputContainerSrcOffset == -1) _StrCopyKeysWithSuffix_InputContainerSrcOffset = Schema.GetOffset(0xEB12CF7ED1F25E0C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrCopyKeysWithSuffix_InputContainerSrcOffset));
+            _StrCopyKeysWithSuffix_InputContainerSrcOffset = _StrCopyKeysWithSuffix_InputContainerSrcOffset ?? Schema.GetOffset(0xEB12CF7ED1F25E0C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrCopyKeysWithSuffix_InputContainerSrcOffset!.Value));
         }
         set
         {
-            if (_StrCopyKeysWithSuffix_InputContainerSrcOffset == -1) _StrCopyKeysWithSuffix_InputContainerSrcOffset = Schema.GetOffset(0xEB12CF7ED1F25E0C);
-            Schema.SetCUtlString(_Handle, _StrCopyKeysWithSuffix_InputContainerSrcOffset, value);
+            _StrCopyKeysWithSuffix_InputContainerSrcOffset = _StrCopyKeysWithSuffix_InputContainerSrcOffset ?? Schema.GetOffset(0xEB12CF7ED1F25E0C);
+            Schema.SetCUtlString(_Handle, _StrCopyKeysWithSuffix_InputContainerSrcOffset!.Value, value);
         }
     }
-    private static nint _StrCopyKeysWithSuffix_FindSuffixOffset = -1;
+    private static nint? _StrCopyKeysWithSuffix_FindSuffixOffset;
 
     public string StrCopyKeysWithSuffix_FindSuffix
     {
         get
         {
-            if (_StrCopyKeysWithSuffix_FindSuffixOffset == -1) _StrCopyKeysWithSuffix_FindSuffixOffset = Schema.GetOffset(0xEB12CF7E5C3A67DF);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrCopyKeysWithSuffix_FindSuffixOffset));
+            _StrCopyKeysWithSuffix_FindSuffixOffset = _StrCopyKeysWithSuffix_FindSuffixOffset ?? Schema.GetOffset(0xEB12CF7E5C3A67DF);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrCopyKeysWithSuffix_FindSuffixOffset!.Value));
         }
         set
         {
-            if (_StrCopyKeysWithSuffix_FindSuffixOffset == -1) _StrCopyKeysWithSuffix_FindSuffixOffset = Schema.GetOffset(0xEB12CF7E5C3A67DF);
-            Schema.SetCUtlString(_Handle, _StrCopyKeysWithSuffix_FindSuffixOffset, value);
+            _StrCopyKeysWithSuffix_FindSuffixOffset = _StrCopyKeysWithSuffix_FindSuffixOffset ?? Schema.GetOffset(0xEB12CF7E5C3A67DF);
+            Schema.SetCUtlString(_Handle, _StrCopyKeysWithSuffix_FindSuffixOffset!.Value, value);
         }
     }
-    private static nint _StrCopyKeysWithSuffix_ReplaceSuffixOffset = -1;
+    private static nint? _StrCopyKeysWithSuffix_ReplaceSuffixOffset;
 
     public string StrCopyKeysWithSuffix_ReplaceSuffix
     {
         get
         {
-            if (_StrCopyKeysWithSuffix_ReplaceSuffixOffset == -1) _StrCopyKeysWithSuffix_ReplaceSuffixOffset = Schema.GetOffset(0xEB12CF7EE5133506);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrCopyKeysWithSuffix_ReplaceSuffixOffset));
+            _StrCopyKeysWithSuffix_ReplaceSuffixOffset = _StrCopyKeysWithSuffix_ReplaceSuffixOffset ?? Schema.GetOffset(0xEB12CF7EE5133506);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrCopyKeysWithSuffix_ReplaceSuffixOffset!.Value));
         }
         set
         {
-            if (_StrCopyKeysWithSuffix_ReplaceSuffixOffset == -1) _StrCopyKeysWithSuffix_ReplaceSuffixOffset = Schema.GetOffset(0xEB12CF7EE5133506);
-            Schema.SetCUtlString(_Handle, _StrCopyKeysWithSuffix_ReplaceSuffixOffset, value);
+            _StrCopyKeysWithSuffix_ReplaceSuffixOffset = _StrCopyKeysWithSuffix_ReplaceSuffixOffset ?? Schema.GetOffset(0xEB12CF7EE5133506);
+            Schema.SetCUtlString(_Handle, _StrCopyKeysWithSuffix_ReplaceSuffixOffset!.Value, value);
         }
     }
-    private static nint _SetValue_ValueOffset = -1;
+    private static nint? _SetValue_ValueOffset;
     private CompositeMaterialInputLooseVariable_tImpl? _SetValue_ValueInstance;
 
     public CompositeMaterialInputLooseVariable_t SetValue_Value
     {
         get
         {
-            if (_SetValue_ValueOffset == -1) _SetValue_ValueOffset = Schema.GetOffset(0xEB12CF7E28DF3C36);
+            _SetValue_ValueOffset = _SetValue_ValueOffset ?? Schema.GetOffset(0xEB12CF7E28DF3C36);
             var instance = _SetValue_ValueInstance ??= new CompositeMaterialInputLooseVariable_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _SetValue_ValueOffset);
+            instance.DangerousSetHandle(_Handle + _SetValue_ValueOffset!.Value);
             return instance;
         }
     }
-    private static nint _StrGenerateTexture_TargetParamOffset = -1;
+    private static nint? _StrGenerateTexture_TargetParamOffset;
 
     public string StrGenerateTexture_TargetParam
     {
         get
         {
-            if (_StrGenerateTexture_TargetParamOffset == -1) _StrGenerateTexture_TargetParamOffset = Schema.GetOffset(0xEB12CF7E13621927);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrGenerateTexture_TargetParamOffset));
+            _StrGenerateTexture_TargetParamOffset = _StrGenerateTexture_TargetParamOffset ?? Schema.GetOffset(0xEB12CF7E13621927);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrGenerateTexture_TargetParamOffset!.Value));
         }
         set
         {
-            if (_StrGenerateTexture_TargetParamOffset == -1) _StrGenerateTexture_TargetParamOffset = Schema.GetOffset(0xEB12CF7E13621927);
-            Schema.SetCUtlString(_Handle, _StrGenerateTexture_TargetParamOffset, value);
+            _StrGenerateTexture_TargetParamOffset = _StrGenerateTexture_TargetParamOffset ?? Schema.GetOffset(0xEB12CF7E13621927);
+            Schema.SetCUtlString(_Handle, _StrGenerateTexture_TargetParamOffset!.Value, value);
         }
     }
-    private static nint _StrGenerateTexture_InitialContainerOffset = -1;
+    private static nint? _StrGenerateTexture_InitialContainerOffset;
 
     public string StrGenerateTexture_InitialContainer
     {
         get
         {
-            if (_StrGenerateTexture_InitialContainerOffset == -1) _StrGenerateTexture_InitialContainerOffset = Schema.GetOffset(0xEB12CF7EDF864C94);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrGenerateTexture_InitialContainerOffset));
+            _StrGenerateTexture_InitialContainerOffset = _StrGenerateTexture_InitialContainerOffset ?? Schema.GetOffset(0xEB12CF7EDF864C94);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrGenerateTexture_InitialContainerOffset!.Value));
         }
         set
         {
-            if (_StrGenerateTexture_InitialContainerOffset == -1) _StrGenerateTexture_InitialContainerOffset = Schema.GetOffset(0xEB12CF7EDF864C94);
-            Schema.SetCUtlString(_Handle, _StrGenerateTexture_InitialContainerOffset, value);
+            _StrGenerateTexture_InitialContainerOffset = _StrGenerateTexture_InitialContainerOffset ?? Schema.GetOffset(0xEB12CF7EDF864C94);
+            Schema.SetCUtlString(_Handle, _StrGenerateTexture_InitialContainerOffset!.Value, value);
         }
     }
-    private static nint _ResolutionOffset = -1;
+    private static nint? _ResolutionOffset;
 
     public ref int Resolution
     {
         get
         {
-            if (_ResolutionOffset == -1) _ResolutionOffset = Schema.GetOffset(0xEB12CF7EC1FCE953);
-            return ref _Handle.AsRef<int>(_ResolutionOffset);
+            _ResolutionOffset = _ResolutionOffset ?? Schema.GetOffset(0xEB12CF7EC1FCE953);
+            return ref _Handle.AsRef<int>(_ResolutionOffset!.Value);
         }
     }
-    private static nint _IsScratchTargetOffset = -1;
+    private static nint? _IsScratchTargetOffset;
 
     public ref bool IsScratchTarget
     {
         get
         {
-            if (_IsScratchTargetOffset == -1) _IsScratchTargetOffset = Schema.GetOffset(0xEB12CF7EE1E462C8);
-            return ref _Handle.AsRef<bool>(_IsScratchTargetOffset);
+            _IsScratchTargetOffset = _IsScratchTargetOffset ?? Schema.GetOffset(0xEB12CF7EE1E462C8);
+            return ref _Handle.AsRef<bool>(_IsScratchTargetOffset!.Value);
         }
     }
-    private static nint _StrCompressionFormatOffset = -1;
+    private static nint? _StrCompressionFormatOffset;
 
     public string StrCompressionFormat
     {
         get
         {
-            if (_StrCompressionFormatOffset == -1) _StrCompressionFormatOffset = Schema.GetOffset(0xEB12CF7E548D5E59);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrCompressionFormatOffset));
+            _StrCompressionFormatOffset = _StrCompressionFormatOffset ?? Schema.GetOffset(0xEB12CF7E548D5E59);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrCompressionFormatOffset!.Value));
         }
         set
         {
-            if (_StrCompressionFormatOffset == -1) _StrCompressionFormatOffset = Schema.GetOffset(0xEB12CF7E548D5E59);
-            Schema.SetCUtlString(_Handle, _StrCompressionFormatOffset, value);
+            _StrCompressionFormatOffset = _StrCompressionFormatOffset ?? Schema.GetOffset(0xEB12CF7E548D5E59);
+            Schema.SetCUtlString(_Handle, _StrCompressionFormatOffset!.Value, value);
         }
     }
-    private static nint _SplatDebugInfoOffset = -1;
+    private static nint? _SplatDebugInfoOffset;
 
     public ref bool SplatDebugInfo
     {
         get
         {
-            if (_SplatDebugInfoOffset == -1) _SplatDebugInfoOffset = Schema.GetOffset(0xEB12CF7E722647BA);
-            return ref _Handle.AsRef<bool>(_SplatDebugInfoOffset);
+            _SplatDebugInfoOffset = _SplatDebugInfoOffset ?? Schema.GetOffset(0xEB12CF7E722647BA);
+            return ref _Handle.AsRef<bool>(_SplatDebugInfoOffset!.Value);
         }
     }
-    private static nint _CaptureInRenderDocOffset = -1;
+    private static nint? _CaptureInRenderDocOffset;
 
     public ref bool CaptureInRenderDoc
     {
         get
         {
-            if (_CaptureInRenderDocOffset == -1) _CaptureInRenderDocOffset = Schema.GetOffset(0xEB12CF7E230CDE58);
-            return ref _Handle.AsRef<bool>(_CaptureInRenderDocOffset);
+            _CaptureInRenderDocOffset = _CaptureInRenderDocOffset ?? Schema.GetOffset(0xEB12CF7E230CDE58);
+            return ref _Handle.AsRef<bool>(_CaptureInRenderDocOffset!.Value);
         }
     }
-    private static nint _TexGenInstructionsOffset = -1;
+    private static nint? _TexGenInstructionsOffset;
 
     public ref CUtlVector<CompMatPropertyMutator_t> TexGenInstructions
     {
         get
         {
-            if (_TexGenInstructionsOffset == -1) _TexGenInstructionsOffset = Schema.GetOffset(0xEB12CF7E72FC83A5);
-            return ref _Handle.AsRef<CUtlVector<CompMatPropertyMutator_t>>(_TexGenInstructionsOffset);
+            _TexGenInstructionsOffset = _TexGenInstructionsOffset ?? Schema.GetOffset(0xEB12CF7E72FC83A5);
+            return ref _Handle.AsRef<CUtlVector<CompMatPropertyMutator_t>>(_TexGenInstructionsOffset!.Value);
         }
     }
-    private static nint _ConditionalMutatorsOffset = -1;
+    private static nint? _ConditionalMutatorsOffset;
 
     public ref CUtlVector<CompMatPropertyMutator_t> ConditionalMutators
     {
         get
         {
-            if (_ConditionalMutatorsOffset == -1) _ConditionalMutatorsOffset = Schema.GetOffset(0xEB12CF7E924F46D0);
-            return ref _Handle.AsRef<CUtlVector<CompMatPropertyMutator_t>>(_ConditionalMutatorsOffset);
+            _ConditionalMutatorsOffset = _ConditionalMutatorsOffset ?? Schema.GetOffset(0xEB12CF7E924F46D0);
+            return ref _Handle.AsRef<CUtlVector<CompMatPropertyMutator_t>>(_ConditionalMutatorsOffset!.Value);
         }
     }
-    private static nint _StrPopInputQueue_ContainerOffset = -1;
+    private static nint? _StrPopInputQueue_ContainerOffset;
 
     public string StrPopInputQueue_Container
     {
         get
         {
-            if (_StrPopInputQueue_ContainerOffset == -1) _StrPopInputQueue_ContainerOffset = Schema.GetOffset(0xEB12CF7E185AB388);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrPopInputQueue_ContainerOffset));
+            _StrPopInputQueue_ContainerOffset = _StrPopInputQueue_ContainerOffset ?? Schema.GetOffset(0xEB12CF7E185AB388);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrPopInputQueue_ContainerOffset!.Value));
         }
         set
         {
-            if (_StrPopInputQueue_ContainerOffset == -1) _StrPopInputQueue_ContainerOffset = Schema.GetOffset(0xEB12CF7E185AB388);
-            Schema.SetCUtlString(_Handle, _StrPopInputQueue_ContainerOffset, value);
+            _StrPopInputQueue_ContainerOffset = _StrPopInputQueue_ContainerOffset ?? Schema.GetOffset(0xEB12CF7E185AB388);
+            Schema.SetCUtlString(_Handle, _StrPopInputQueue_ContainerOffset!.Value, value);
         }
     }
-    private static nint _StrDrawText_InputContainerSrcOffset = -1;
+    private static nint? _StrDrawText_InputContainerSrcOffset;
 
     public string StrDrawText_InputContainerSrc
     {
         get
         {
-            if (_StrDrawText_InputContainerSrcOffset == -1) _StrDrawText_InputContainerSrcOffset = Schema.GetOffset(0xEB12CF7E6BDEAC79);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrDrawText_InputContainerSrcOffset));
+            _StrDrawText_InputContainerSrcOffset = _StrDrawText_InputContainerSrcOffset ?? Schema.GetOffset(0xEB12CF7E6BDEAC79);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrDrawText_InputContainerSrcOffset!.Value));
         }
         set
         {
-            if (_StrDrawText_InputContainerSrcOffset == -1) _StrDrawText_InputContainerSrcOffset = Schema.GetOffset(0xEB12CF7E6BDEAC79);
-            Schema.SetCUtlString(_Handle, _StrDrawText_InputContainerSrcOffset, value);
+            _StrDrawText_InputContainerSrcOffset = _StrDrawText_InputContainerSrcOffset ?? Schema.GetOffset(0xEB12CF7E6BDEAC79);
+            Schema.SetCUtlString(_Handle, _StrDrawText_InputContainerSrcOffset!.Value, value);
         }
     }
-    private static nint _StrDrawText_InputContainerPropertyOffset = -1;
+    private static nint? _StrDrawText_InputContainerPropertyOffset;
 
     public string StrDrawText_InputContainerProperty
     {
         get
         {
-            if (_StrDrawText_InputContainerPropertyOffset == -1) _StrDrawText_InputContainerPropertyOffset = Schema.GetOffset(0xEB12CF7E409D0898);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrDrawText_InputContainerPropertyOffset));
+            _StrDrawText_InputContainerPropertyOffset = _StrDrawText_InputContainerPropertyOffset ?? Schema.GetOffset(0xEB12CF7E409D0898);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrDrawText_InputContainerPropertyOffset!.Value));
         }
         set
         {
-            if (_StrDrawText_InputContainerPropertyOffset == -1) _StrDrawText_InputContainerPropertyOffset = Schema.GetOffset(0xEB12CF7E409D0898);
-            Schema.SetCUtlString(_Handle, _StrDrawText_InputContainerPropertyOffset, value);
+            _StrDrawText_InputContainerPropertyOffset = _StrDrawText_InputContainerPropertyOffset ?? Schema.GetOffset(0xEB12CF7E409D0898);
+            Schema.SetCUtlString(_Handle, _StrDrawText_InputContainerPropertyOffset!.Value, value);
         }
     }
-    private static nint _DrawText_PositionOffset = -1;
+    private static nint? _DrawText_PositionOffset;
 
     public ref Vector2D DrawText_Position
     {
         get
         {
-            if (_DrawText_PositionOffset == -1) _DrawText_PositionOffset = Schema.GetOffset(0xEB12CF7E81ED9616);
-            return ref _Handle.AsRef<Vector2D>(_DrawText_PositionOffset);
+            _DrawText_PositionOffset = _DrawText_PositionOffset ?? Schema.GetOffset(0xEB12CF7E81ED9616);
+            return ref _Handle.AsRef<Vector2D>(_DrawText_PositionOffset!.Value);
         }
     }
-    private static nint _ColDrawText_ColorOffset = -1;
+    private static nint? _ColDrawText_ColorOffset;
 
     public ref Color ColDrawText_Color
     {
         get
         {
-            if (_ColDrawText_ColorOffset == -1) _ColDrawText_ColorOffset = Schema.GetOffset(0xEB12CF7E685D5088);
-            return ref _Handle.AsRef<Color>(_ColDrawText_ColorOffset);
+            _ColDrawText_ColorOffset = _ColDrawText_ColorOffset ?? Schema.GetOffset(0xEB12CF7E685D5088);
+            return ref _Handle.AsRef<Color>(_ColDrawText_ColorOffset!.Value);
         }
     }
-    private static nint _StrDrawText_FontOffset = -1;
+    private static nint? _StrDrawText_FontOffset;
 
     public string StrDrawText_Font
     {
         get
         {
-            if (_StrDrawText_FontOffset == -1) _StrDrawText_FontOffset = Schema.GetOffset(0xEB12CF7E2467A823);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrDrawText_FontOffset));
+            _StrDrawText_FontOffset = _StrDrawText_FontOffset ?? Schema.GetOffset(0xEB12CF7E2467A823);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrDrawText_FontOffset!.Value));
         }
         set
         {
-            if (_StrDrawText_FontOffset == -1) _StrDrawText_FontOffset = Schema.GetOffset(0xEB12CF7E2467A823);
-            Schema.SetCUtlString(_Handle, _StrDrawText_FontOffset, value);
+            _StrDrawText_FontOffset = _StrDrawText_FontOffset ?? Schema.GetOffset(0xEB12CF7E2467A823);
+            Schema.SetCUtlString(_Handle, _StrDrawText_FontOffset!.Value, value);
         }
     }
-    private static nint _ConditionsOffset = -1;
+    private static nint? _ConditionsOffset;
 
     public ref CUtlVector<CompMatMutatorCondition_t> Conditions
     {
         get
         {
-            if (_ConditionsOffset == -1) _ConditionsOffset = Schema.GetOffset(0xEB12CF7ED6884117);
-            return ref _Handle.AsRef<CUtlVector<CompMatMutatorCondition_t>>(_ConditionsOffset);
+            _ConditionsOffset = _ConditionsOffset ?? Schema.GetOffset(0xEB12CF7ED6884117);
+            return ref _Handle.AsRef<CUtlVector<CompMatMutatorCondition_t>>(_ConditionsOffset!.Value);
         }
     }
 

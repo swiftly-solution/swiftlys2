@@ -16,47 +16,47 @@ internal partial class C_INIT_RandomVectorComponentImpl : CParticleFunctionIniti
 {
     public C_INIT_RandomVectorComponentImpl(nint handle) : base(handle) { }
 
-    private static nint _MinOffset = -1;
+    private static nint? _MinOffset;
 
     public ref float Min
     {
         get
         {
-            if (_MinOffset == -1) _MinOffset = Schema.GetOffset(0xD6D670313B1A5649);
-            return ref _Handle.AsRef<float>(_MinOffset);
+            _MinOffset = _MinOffset ?? Schema.GetOffset(0xD6D670313B1A5649);
+            return ref _Handle.AsRef<float>(_MinOffset!.Value);
         }
     }
-    private static nint _MaxOffset = -1;
+    private static nint? _MaxOffset;
 
     public ref float Max
     {
         get
         {
-            if (_MaxOffset == -1) _MaxOffset = Schema.GetOffset(0xD6D670312D06B887);
-            return ref _Handle.AsRef<float>(_MaxOffset);
+            _MaxOffset = _MaxOffset ?? Schema.GetOffset(0xD6D670312D06B887);
+            return ref _Handle.AsRef<float>(_MaxOffset!.Value);
         }
     }
-    private static nint _FieldOutputOffset = -1;
+    private static nint? _FieldOutputOffset;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0xD6D67031E5729606);
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0xD6D67031E5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
             return instance;
         }
     }
-    private static nint _ComponentOffset = -1;
+    private static nint? _ComponentOffset;
 
     public ref int Component
     {
         get
         {
-            if (_ComponentOffset == -1) _ComponentOffset = Schema.GetOffset(0xD6D67031BFD0952C);
-            return ref _Handle.AsRef<int>(_ComponentOffset);
+            _ComponentOffset = _ComponentOffset ?? Schema.GetOffset(0xD6D67031BFD0952C);
+            return ref _Handle.AsRef<int>(_ComponentOffset!.Value);
         }
     }
 

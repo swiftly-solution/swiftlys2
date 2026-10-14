@@ -16,14 +16,14 @@ internal partial class CModuleManifestsImpl : SchemaClass, CModuleManifests
 {
     public CModuleManifestsImpl(nint handle) : base(handle) { }
 
-    private static nint _ManifestsOffset = -1;
+    private static nint? _ManifestsOffset;
 
     public ref CUtlVector<CManifestInfo> Manifests
     {
         get
         {
-            if (_ManifestsOffset == -1) _ManifestsOffset = Schema.GetOffset(0x5FC7277CD523D1B5);
-            return ref _Handle.AsRef<CUtlVector<CManifestInfo>>(_ManifestsOffset);
+            _ManifestsOffset = _ManifestsOffset ?? Schema.GetOffset(0x5FC7277CD523D1B5);
+            return ref _Handle.AsRef<CUtlVector<CManifestInfo>>(_ManifestsOffset!.Value);
         }
     }
 

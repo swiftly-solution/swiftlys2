@@ -16,29 +16,29 @@ internal partial class CVMixToolGraphEntryImpl : CVMixToolGraphImpl, CVMixToolGr
 {
     public CVMixToolGraphEntryImpl(nint handle) : base(handle) { }
 
-    private static nint _GraphPreviewOffset = -1;
+    private static nint? _GraphPreviewOffset;
     private CGraphPreviewListImpl? _GraphPreviewInstance;
 
     public CGraphPreviewList GraphPreview
     {
         get
         {
-            if (_GraphPreviewOffset == -1) _GraphPreviewOffset = Schema.GetOffset(0x255D829463420151);
+            _GraphPreviewOffset = _GraphPreviewOffset ?? Schema.GetOffset(0x255D829463420151);
             var instance = _GraphPreviewInstance ??= new CGraphPreviewListImpl(0);
-            instance.DangerousSetHandle(_Handle + _GraphPreviewOffset);
+            instance.DangerousSetHandle(_Handle + _GraphPreviewOffset!.Value);
             return instance;
         }
     }
-    private static nint _EditorStateOffset = -1;
+    private static nint? _EditorStateOffset;
     private CGraphEditorStateImpl? _EditorStateInstance;
 
     public CGraphEditorState EditorState
     {
         get
         {
-            if (_EditorStateOffset == -1) _EditorStateOffset = Schema.GetOffset(0x255D829420CC95FD);
+            _EditorStateOffset = _EditorStateOffset ?? Schema.GetOffset(0x255D829420CC95FD);
             var instance = _EditorStateInstance ??= new CGraphEditorStateImpl(0);
-            instance.DangerousSetHandle(_Handle + _EditorStateOffset);
+            instance.DangerousSetHandle(_Handle + _EditorStateOffset!.Value);
             return instance;
         }
     }

@@ -16,54 +16,54 @@ internal partial class C_CSGO_PreviewModelImpl : CBaseAnimGraphImpl, C_CSGO_Prev
 {
     public C_CSGO_PreviewModelImpl(nint handle) : base(handle) { }
 
-    private static nint _DefaultAnimOffset = -1;
+    private static nint? _DefaultAnimOffset;
 
     public string DefaultAnim
     {
         get
         {
-            if (_DefaultAnimOffset == -1) _DefaultAnimOffset = Schema.GetOffset(0x5EC3E36D133A38E7);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_DefaultAnimOffset));
+            _DefaultAnimOffset = _DefaultAnimOffset ?? Schema.GetOffset(0x5EC3E36D133A38E7);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_DefaultAnimOffset!.Value));
         }
         set
         {
-            if (_DefaultAnimOffset == -1) _DefaultAnimOffset = Schema.GetOffset(0x5EC3E36D133A38E7);
-            Schema.SetCUtlString(_Handle, _DefaultAnimOffset, value);
+            _DefaultAnimOffset = _DefaultAnimOffset ?? Schema.GetOffset(0x5EC3E36D133A38E7);
+            Schema.SetCUtlString(_Handle, _DefaultAnimOffset!.Value, value);
         }
     }
-    private static nint _DefaultAnimLoopModeOffset = -1;
+    private static nint? _DefaultAnimLoopModeOffset;
 
     public ref AnimLoopMode_t DefaultAnimLoopMode
     {
         get
         {
-            if (_DefaultAnimLoopModeOffset == -1) _DefaultAnimLoopModeOffset = Schema.GetOffset(0x5EC3E36DA8B8D256);
-            return ref _Handle.AsRef<AnimLoopMode_t>(_DefaultAnimLoopModeOffset);
+            _DefaultAnimLoopModeOffset = _DefaultAnimLoopModeOffset ?? Schema.GetOffset(0x5EC3E36DA8B8D256);
+            return ref _Handle.AsRef<AnimLoopMode_t>(_DefaultAnimLoopModeOffset!.Value);
         }
     }
-    private static nint _InitialModelScaleOffset = -1;
+    private static nint? _InitialModelScaleOffset;
 
     public ref float InitialModelScale
     {
         get
         {
-            if (_InitialModelScaleOffset == -1) _InitialModelScaleOffset = Schema.GetOffset(0x5EC3E36D29183C78);
-            return ref _Handle.AsRef<float>(_InitialModelScaleOffset);
+            _InitialModelScaleOffset = _InitialModelScaleOffset ?? Schema.GetOffset(0x5EC3E36D29183C78);
+            return ref _Handle.AsRef<float>(_InitialModelScaleOffset!.Value);
         }
     }
-    private static nint _InitialWeaponStateOffset = -1;
+    private static nint? _InitialWeaponStateOffset;
 
     public string InitialWeaponState
     {
         get
         {
-            if (_InitialWeaponStateOffset == -1) _InitialWeaponStateOffset = Schema.GetOffset(0x5EC3E36DCE375EC3);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_InitialWeaponStateOffset));
+            _InitialWeaponStateOffset = _InitialWeaponStateOffset ?? Schema.GetOffset(0x5EC3E36DCE375EC3);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_InitialWeaponStateOffset!.Value));
         }
         set
         {
-            if (_InitialWeaponStateOffset == -1) _InitialWeaponStateOffset = Schema.GetOffset(0x5EC3E36DCE375EC3);
-            Schema.SetCUtlString(_Handle, _InitialWeaponStateOffset, value);
+            _InitialWeaponStateOffset = _InitialWeaponStateOffset ?? Schema.GetOffset(0x5EC3E36DCE375EC3);
+            Schema.SetCUtlString(_Handle, _InitialWeaponStateOffset!.Value, value);
         }
     }
 

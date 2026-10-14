@@ -16,156 +16,156 @@ internal partial class CAI_ExpresserImpl : SchemaClass, CAI_Expresser
 {
     public CAI_ExpresserImpl(nint handle) : base(handle) { }
 
-    private static nint _ConceptCooldownsOffset = -1;
+    private static nint? _ConceptCooldownsOffset;
     private SchemaUntypedField? _ConceptCooldownsInstance;
 
     public SchemaUntypedField ConceptCooldowns
     {
         get
         {
-            if (_ConceptCooldownsOffset == -1) _ConceptCooldownsOffset = Schema.GetOffset(0xFB9DA1AC3E92F68F);
+            _ConceptCooldownsOffset = _ConceptCooldownsOffset ?? Schema.GetOffset(0xFB9DA1AC3E92F68F);
             var instance = _ConceptCooldownsInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ConceptCooldownsOffset);
+            instance.DangerousSetHandle(_Handle + _ConceptCooldownsOffset!.Value);
             return instance;
         }
     }
-    private static nint _RuleCooldownsOffset = -1;
+    private static nint? _RuleCooldownsOffset;
     private SchemaUntypedField? _RuleCooldownsInstance;
 
     public SchemaUntypedField RuleCooldowns
     {
         get
         {
-            if (_RuleCooldownsOffset == -1) _RuleCooldownsOffset = Schema.GetOffset(0xFB9DA1AC67C524CF);
+            _RuleCooldownsOffset = _RuleCooldownsOffset ?? Schema.GetOffset(0xFB9DA1AC67C524CF);
             var instance = _RuleCooldownsInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _RuleCooldownsOffset);
+            instance.DangerousSetHandle(_Handle + _RuleCooldownsOffset!.Value);
             return instance;
         }
     }
-    private static nint _StopTalkTimeOffset = -1;
+    private static nint? _StopTalkTimeOffset;
     private GameTime_tImpl? _StopTalkTimeInstance;
 
     public GameTime_t StopTalkTime
     {
         get
         {
-            if (_StopTalkTimeOffset == -1) _StopTalkTimeOffset = Schema.GetOffset(0xFB9DA1AC36131EC4);
+            _StopTalkTimeOffset = _StopTalkTimeOffset ?? Schema.GetOffset(0xFB9DA1AC36131EC4);
             var instance = _StopTalkTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _StopTalkTimeOffset);
+            instance.DangerousSetHandle(_Handle + _StopTalkTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _StopTalkTimeWithoutDelayOffset = -1;
+    private static nint? _StopTalkTimeWithoutDelayOffset;
     private GameTime_tImpl? _StopTalkTimeWithoutDelayInstance;
 
     public GameTime_t StopTalkTimeWithoutDelay
     {
         get
         {
-            if (_StopTalkTimeWithoutDelayOffset == -1) _StopTalkTimeWithoutDelayOffset = Schema.GetOffset(0xFB9DA1ACB3CAE32F);
+            _StopTalkTimeWithoutDelayOffset = _StopTalkTimeWithoutDelayOffset ?? Schema.GetOffset(0xFB9DA1ACB3CAE32F);
             var instance = _StopTalkTimeWithoutDelayInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _StopTalkTimeWithoutDelayOffset);
+            instance.DangerousSetHandle(_Handle + _StopTalkTimeWithoutDelayOffset!.Value);
             return instance;
         }
     }
-    private static nint _QueuedSpeechTimeOffset = -1;
+    private static nint? _QueuedSpeechTimeOffset;
     private GameTime_tImpl? _QueuedSpeechTimeInstance;
 
     public GameTime_t QueuedSpeechTime
     {
         get
         {
-            if (_QueuedSpeechTimeOffset == -1) _QueuedSpeechTimeOffset = Schema.GetOffset(0xFB9DA1AC93DE376D);
+            _QueuedSpeechTimeOffset = _QueuedSpeechTimeOffset ?? Schema.GetOffset(0xFB9DA1AC93DE376D);
             var instance = _QueuedSpeechTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _QueuedSpeechTimeOffset);
+            instance.DangerousSetHandle(_Handle + _QueuedSpeechTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _BlockedTalkTimeOffset = -1;
+    private static nint? _BlockedTalkTimeOffset;
     private GameTime_tImpl? _BlockedTalkTimeInstance;
 
     public GameTime_t BlockedTalkTime
     {
         get
         {
-            if (_BlockedTalkTimeOffset == -1) _BlockedTalkTimeOffset = Schema.GetOffset(0xFB9DA1AC2A2AC272);
+            _BlockedTalkTimeOffset = _BlockedTalkTimeOffset ?? Schema.GetOffset(0xFB9DA1AC2A2AC272);
             var instance = _BlockedTalkTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _BlockedTalkTimeOffset);
+            instance.DangerousSetHandle(_Handle + _BlockedTalkTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _VoicePitchOffset = -1;
+    private static nint? _VoicePitchOffset;
 
     public ref int VoicePitch
     {
         get
         {
-            if (_VoicePitchOffset == -1) _VoicePitchOffset = Schema.GetOffset(0xFB9DA1ACAB038A45);
-            return ref _Handle.AsRef<int>(_VoicePitchOffset);
+            _VoicePitchOffset = _VoicePitchOffset ?? Schema.GetOffset(0xFB9DA1ACAB038A45);
+            return ref _Handle.AsRef<int>(_VoicePitchOffset!.Value);
         }
     }
-    private static nint _LastTimeAcceptedSpeakOffset = -1;
+    private static nint? _LastTimeAcceptedSpeakOffset;
     private GameTime_tImpl? _LastTimeAcceptedSpeakInstance;
 
     public GameTime_t LastTimeAcceptedSpeak
     {
         get
         {
-            if (_LastTimeAcceptedSpeakOffset == -1) _LastTimeAcceptedSpeakOffset = Schema.GetOffset(0xFB9DA1AC8D9FF64F);
+            _LastTimeAcceptedSpeakOffset = _LastTimeAcceptedSpeakOffset ?? Schema.GetOffset(0xFB9DA1AC8D9FF64F);
             var instance = _LastTimeAcceptedSpeakInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _LastTimeAcceptedSpeakOffset);
+            instance.DangerousSetHandle(_Handle + _LastTimeAcceptedSpeakOffset!.Value);
             return instance;
         }
     }
-    private static nint _AllowSpeakingInterruptsOffset = -1;
+    private static nint? _AllowSpeakingInterruptsOffset;
 
     public ref bool AllowSpeakingInterrupts
     {
         get
         {
-            if (_AllowSpeakingInterruptsOffset == -1) _AllowSpeakingInterruptsOffset = Schema.GetOffset(0xFB9DA1ACC77E4694);
-            return ref _Handle.AsRef<bool>(_AllowSpeakingInterruptsOffset);
+            _AllowSpeakingInterruptsOffset = _AllowSpeakingInterruptsOffset ?? Schema.GetOffset(0xFB9DA1ACC77E4694);
+            return ref _Handle.AsRef<bool>(_AllowSpeakingInterruptsOffset!.Value);
         }
     }
-    private static nint _ConsiderSceneInvolvementAsSpeechOffset = -1;
+    private static nint? _ConsiderSceneInvolvementAsSpeechOffset;
 
     public ref bool ConsiderSceneInvolvementAsSpeech
     {
         get
         {
-            if (_ConsiderSceneInvolvementAsSpeechOffset == -1) _ConsiderSceneInvolvementAsSpeechOffset = Schema.GetOffset(0xFB9DA1ACB1C249B1);
-            return ref _Handle.AsRef<bool>(_ConsiderSceneInvolvementAsSpeechOffset);
+            _ConsiderSceneInvolvementAsSpeechOffset = _ConsiderSceneInvolvementAsSpeechOffset ?? Schema.GetOffset(0xFB9DA1ACB1C249B1);
+            return ref _Handle.AsRef<bool>(_ConsiderSceneInvolvementAsSpeechOffset!.Value);
         }
     }
-    private static nint _SceneEntityDisabledOffset = -1;
+    private static nint? _SceneEntityDisabledOffset;
 
     public ref bool SceneEntityDisabled
     {
         get
         {
-            if (_SceneEntityDisabledOffset == -1) _SceneEntityDisabledOffset = Schema.GetOffset(0xFB9DA1AC6AC7EEF4);
-            return ref _Handle.AsRef<bool>(_SceneEntityDisabledOffset);
+            _SceneEntityDisabledOffset = _SceneEntityDisabledOffset ?? Schema.GetOffset(0xFB9DA1AC6AC7EEF4);
+            return ref _Handle.AsRef<bool>(_SceneEntityDisabledOffset!.Value);
         }
     }
-    private static nint _LastSpokenPriorityOffset = -1;
+    private static nint? _LastSpokenPriorityOffset;
 
     public ref int LastSpokenPriority
     {
         get
         {
-            if (_LastSpokenPriorityOffset == -1) _LastSpokenPriorityOffset = Schema.GetOffset(0xFB9DA1AC9722D67B);
-            return ref _Handle.AsRef<int>(_LastSpokenPriorityOffset);
+            _LastSpokenPriorityOffset = _LastSpokenPriorityOffset ?? Schema.GetOffset(0xFB9DA1AC9722D67B);
+            return ref _Handle.AsRef<int>(_LastSpokenPriorityOffset!.Value);
         }
     }
-    private static nint _OuterOffset = -1;
+    private static nint? _OuterOffset;
     private CBaseModelEntityImpl? _OuterInstance;
 
     public CBaseModelEntity? Outer
     {
         get
         {
-            if (_OuterOffset == -1) _OuterOffset = Schema.GetOffset(0xFB9DA1AC7359CF3A);
-            var ptr = _Handle.Read<nint>(_OuterOffset);
+            _OuterOffset = _OuterOffset ?? Schema.GetOffset(0xFB9DA1AC7359CF3A);
+            var ptr = _Handle.Read<nint>(_OuterOffset!.Value);
             if (!ptr.IsValidPtr()) return null;
             var instance = _OuterInstance ??= new CBaseModelEntityImpl(0);
             instance.DangerousSetHandle(ptr);

@@ -16,81 +16,81 @@ internal partial class CPointOrientImpl : CBaseEntityImpl, CPointOrient
 {
     public CPointOrientImpl(nint handle) : base(handle) { }
 
-    private static nint _SpawnTargetNameOffset = -1;
+    private static nint? _SpawnTargetNameOffset;
 
     public string SpawnTargetName
     {
         get
         {
-            if (_SpawnTargetNameOffset == -1) _SpawnTargetNameOffset = Schema.GetOffset(0x31E4EBC561780472);
-            return Schema.GetString(_Handle.Read<nint>(_SpawnTargetNameOffset));
+            _SpawnTargetNameOffset = _SpawnTargetNameOffset ?? Schema.GetOffset(0x31E4EBC561780472);
+            return Schema.GetString(_Handle.Read<nint>(_SpawnTargetNameOffset!.Value));
         }
         set
         {
-            if (_SpawnTargetNameOffset == -1) _SpawnTargetNameOffset = Schema.GetOffset(0x31E4EBC561780472);
-            Schema.SetString(_Handle, _SpawnTargetNameOffset, value);
+            _SpawnTargetNameOffset = _SpawnTargetNameOffset ?? Schema.GetOffset(0x31E4EBC561780472);
+            Schema.SetString(_Handle, _SpawnTargetNameOffset!.Value, value);
         }
     }
-    private static nint _TargetOffset = -1;
+    private static nint? _TargetOffset;
 
     public ref CHandle<CBaseEntity> Target
     {
         get
         {
-            if (_TargetOffset == -1) _TargetOffset = Schema.GetOffset(0x31E4EBC5CE35901A);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetOffset);
+            _TargetOffset = _TargetOffset ?? Schema.GetOffset(0x31E4EBC5CE35901A);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetOffset!.Value);
         }
     }
-    private static nint _ActiveOffset = -1;
+    private static nint? _ActiveOffset;
 
     public ref bool Active
     {
         get
         {
-            if (_ActiveOffset == -1) _ActiveOffset = Schema.GetOffset(0x31E4EBC58334208F);
-            return ref _Handle.AsRef<bool>(_ActiveOffset);
+            _ActiveOffset = _ActiveOffset ?? Schema.GetOffset(0x31E4EBC58334208F);
+            return ref _Handle.AsRef<bool>(_ActiveOffset!.Value);
         }
     }
-    private static nint _GoalDirectionOffset = -1;
+    private static nint? _GoalDirectionOffset;
 
     public ref PointOrientGoalDirectionType_t GoalDirection
     {
         get
         {
-            if (_GoalDirectionOffset == -1) _GoalDirectionOffset = Schema.GetOffset(0x31E4EBC5EF8D5D0F);
-            return ref _Handle.AsRef<PointOrientGoalDirectionType_t>(_GoalDirectionOffset);
+            _GoalDirectionOffset = _GoalDirectionOffset ?? Schema.GetOffset(0x31E4EBC5EF8D5D0F);
+            return ref _Handle.AsRef<PointOrientGoalDirectionType_t>(_GoalDirectionOffset!.Value);
         }
     }
-    private static nint _ConstraintOffset = -1;
+    private static nint? _ConstraintOffset;
 
     public ref PointOrientConstraint_t Constraint
     {
         get
         {
-            if (_ConstraintOffset == -1) _ConstraintOffset = Schema.GetOffset(0x31E4EBC5A20016CE);
-            return ref _Handle.AsRef<PointOrientConstraint_t>(_ConstraintOffset);
+            _ConstraintOffset = _ConstraintOffset ?? Schema.GetOffset(0x31E4EBC5A20016CE);
+            return ref _Handle.AsRef<PointOrientConstraint_t>(_ConstraintOffset!.Value);
         }
     }
-    private static nint _MaxTurnRateOffset = -1;
+    private static nint? _MaxTurnRateOffset;
 
     public ref float MaxTurnRate
     {
         get
         {
-            if (_MaxTurnRateOffset == -1) _MaxTurnRateOffset = Schema.GetOffset(0x31E4EBC5860DD1C6);
-            return ref _Handle.AsRef<float>(_MaxTurnRateOffset);
+            _MaxTurnRateOffset = _MaxTurnRateOffset ?? Schema.GetOffset(0x31E4EBC5860DD1C6);
+            return ref _Handle.AsRef<float>(_MaxTurnRateOffset!.Value);
         }
     }
-    private static nint _LastGameTimeOffset = -1;
+    private static nint? _LastGameTimeOffset;
     private GameTime_tImpl? _LastGameTimeInstance;
 
     public GameTime_t LastGameTime
     {
         get
         {
-            if (_LastGameTimeOffset == -1) _LastGameTimeOffset = Schema.GetOffset(0x31E4EBC591D10404);
+            _LastGameTimeOffset = _LastGameTimeOffset ?? Schema.GetOffset(0x31E4EBC591D10404);
             var instance = _LastGameTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _LastGameTimeOffset);
+            instance.DangerousSetHandle(_Handle + _LastGameTimeOffset!.Value);
             return instance;
         }
     }

@@ -16,44 +16,44 @@ internal partial class CFloatAnimParameterImpl : CConcreteAnimParameterImpl, CFl
 {
     public CFloatAnimParameterImpl(nint handle) : base(handle) { }
 
-    private static nint _DefaultValueOffset = -1;
+    private static nint? _DefaultValueOffset;
 
     public ref float DefaultValue
     {
         get
         {
-            if (_DefaultValueOffset == -1) _DefaultValueOffset = Schema.GetOffset(0x6CE7934089D370B3);
-            return ref _Handle.AsRef<float>(_DefaultValueOffset);
+            _DefaultValueOffset = _DefaultValueOffset ?? Schema.GetOffset(0x6CE7934089D370B3);
+            return ref _Handle.AsRef<float>(_DefaultValueOffset!.Value);
         }
     }
-    private static nint _MinValueOffset = -1;
+    private static nint? _MinValueOffset;
 
     public ref float MinValue
     {
         get
         {
-            if (_MinValueOffset == -1) _MinValueOffset = Schema.GetOffset(0x6CE79340AD86BD50);
-            return ref _Handle.AsRef<float>(_MinValueOffset);
+            _MinValueOffset = _MinValueOffset ?? Schema.GetOffset(0x6CE79340AD86BD50);
+            return ref _Handle.AsRef<float>(_MinValueOffset!.Value);
         }
     }
-    private static nint _MaxValueOffset = -1;
+    private static nint? _MaxValueOffset;
 
     public ref float MaxValue
     {
         get
         {
-            if (_MaxValueOffset == -1) _MaxValueOffset = Schema.GetOffset(0x6CE79340DB7358B2);
-            return ref _Handle.AsRef<float>(_MaxValueOffset);
+            _MaxValueOffset = _MaxValueOffset ?? Schema.GetOffset(0x6CE79340DB7358B2);
+            return ref _Handle.AsRef<float>(_MaxValueOffset!.Value);
         }
     }
-    private static nint _InterpolateOffset = -1;
+    private static nint? _InterpolateOffset;
 
     public ref bool Interpolate
     {
         get
         {
-            if (_InterpolateOffset == -1) _InterpolateOffset = Schema.GetOffset(0x6CE79340F6607650);
-            return ref _Handle.AsRef<bool>(_InterpolateOffset);
+            _InterpolateOffset = _InterpolateOffset ?? Schema.GetOffset(0x6CE79340F6607650);
+            return ref _Handle.AsRef<bool>(_InterpolateOffset!.Value);
         }
     }
 

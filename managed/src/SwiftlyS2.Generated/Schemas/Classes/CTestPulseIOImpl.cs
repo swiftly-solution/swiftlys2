@@ -16,293 +16,293 @@ internal partial class CTestPulseIOImpl : CLogicalEntityImpl, CTestPulseIO
 {
     public CTestPulseIOImpl(nint handle) : base(handle) { }
 
-    private static nint _OnVariantVoidOffset = -1;
+    private static nint? _OnVariantVoidOffset;
 
     public ref CEntityIOOutput OnVariantVoid
     {
         get
         {
-            if (_OnVariantVoidOffset == -1) _OnVariantVoidOffset = Schema.GetOffset(0x3CAD66134B0C5D73);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnVariantVoidOffset);
+            _OnVariantVoidOffset = _OnVariantVoidOffset ?? Schema.GetOffset(0x3CAD66134B0C5D73);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnVariantVoidOffset!.Value);
         }
     }
-    private static nint _OnVariantBoolOffset = -1;
+    private static nint? _OnVariantBoolOffset;
     private SchemaUntypedField? _OnVariantBoolInstance;
 
     public SchemaUntypedField OnVariantBool
     {
         get
         {
-            if (_OnVariantBoolOffset == -1) _OnVariantBoolOffset = Schema.GetOffset(0x3CAD66138350E481);
+            _OnVariantBoolOffset = _OnVariantBoolOffset ?? Schema.GetOffset(0x3CAD66138350E481);
             var instance = _OnVariantBoolInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OnVariantBoolOffset);
+            instance.DangerousSetHandle(_Handle + _OnVariantBoolOffset!.Value);
             return instance;
         }
     }
-    private static nint _OnVariantIntOffset = -1;
+    private static nint? _OnVariantIntOffset;
     private SchemaUntypedField? _OnVariantIntInstance;
 
     public SchemaUntypedField OnVariantInt
     {
         get
         {
-            if (_OnVariantIntOffset == -1) _OnVariantIntOffset = Schema.GetOffset(0x3CAD66131C6BA682);
+            _OnVariantIntOffset = _OnVariantIntOffset ?? Schema.GetOffset(0x3CAD66131C6BA682);
             var instance = _OnVariantIntInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OnVariantIntOffset);
+            instance.DangerousSetHandle(_Handle + _OnVariantIntOffset!.Value);
             return instance;
         }
     }
-    private static nint _OnVariantFloatOffset = -1;
+    private static nint? _OnVariantFloatOffset;
     private SchemaUntypedField? _OnVariantFloatInstance;
 
     public SchemaUntypedField OnVariantFloat
     {
         get
         {
-            if (_OnVariantFloatOffset == -1) _OnVariantFloatOffset = Schema.GetOffset(0x3CAD661378E46379);
+            _OnVariantFloatOffset = _OnVariantFloatOffset ?? Schema.GetOffset(0x3CAD661378E46379);
             var instance = _OnVariantFloatInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OnVariantFloatOffset);
+            instance.DangerousSetHandle(_Handle + _OnVariantFloatOffset!.Value);
             return instance;
         }
     }
-    private static nint _OnVariantStringOffset = -1;
+    private static nint? _OnVariantStringOffset;
     private SchemaUntypedField? _OnVariantStringInstance;
 
     public SchemaUntypedField OnVariantString
     {
         get
         {
-            if (_OnVariantStringOffset == -1) _OnVariantStringOffset = Schema.GetOffset(0x3CAD6613DE2E3E5C);
+            _OnVariantStringOffset = _OnVariantStringOffset ?? Schema.GetOffset(0x3CAD6613DE2E3E5C);
             var instance = _OnVariantStringInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OnVariantStringOffset);
+            instance.DangerousSetHandle(_Handle + _OnVariantStringOffset!.Value);
             return instance;
         }
     }
-    private static nint _OnVariantColorOffset = -1;
+    private static nint? _OnVariantColorOffset;
     private SchemaUntypedField? _OnVariantColorInstance;
 
     public SchemaUntypedField OnVariantColor
     {
         get
         {
-            if (_OnVariantColorOffset == -1) _OnVariantColorOffset = Schema.GetOffset(0x3CAD66139A1362C4);
+            _OnVariantColorOffset = _OnVariantColorOffset ?? Schema.GetOffset(0x3CAD66139A1362C4);
             var instance = _OnVariantColorInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OnVariantColorOffset);
+            instance.DangerousSetHandle(_Handle + _OnVariantColorOffset!.Value);
             return instance;
         }
     }
-    private static nint _OnVariantVectorOffset = -1;
+    private static nint? _OnVariantVectorOffset;
     private SchemaUntypedField? _OnVariantVectorInstance;
 
     public SchemaUntypedField OnVariantVector
     {
         get
         {
-            if (_OnVariantVectorOffset == -1) _OnVariantVectorOffset = Schema.GetOffset(0x3CAD6613A6D8BE1E);
+            _OnVariantVectorOffset = _OnVariantVectorOffset ?? Schema.GetOffset(0x3CAD6613A6D8BE1E);
             var instance = _OnVariantVectorInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OnVariantVectorOffset);
+            instance.DangerousSetHandle(_Handle + _OnVariantVectorOffset!.Value);
             return instance;
         }
     }
-    private static nint _AllowEmptyInputsOffset = -1;
+    private static nint? _AllowEmptyInputsOffset;
 
     public ref bool AllowEmptyInputs
     {
         get
         {
-            if (_AllowEmptyInputsOffset == -1) _AllowEmptyInputsOffset = Schema.GetOffset(0x3CAD661342A93BD2);
-            return ref _Handle.AsRef<bool>(_AllowEmptyInputsOffset);
+            _AllowEmptyInputsOffset = _AllowEmptyInputsOffset ?? Schema.GetOffset(0x3CAD661342A93BD2);
+            return ref _Handle.AsRef<bool>(_AllowEmptyInputsOffset!.Value);
         }
     }
-    private static nint _TestComponentOffset = -1;
+    private static nint? _TestComponentOffset;
     private CTestPulseIOComponent_DerivedImpl? _TestComponentInstance;
 
     public CTestPulseIOComponent_Derived TestComponent
     {
         get
         {
-            if (_TestComponentOffset == -1) _TestComponentOffset = Schema.GetOffset(0x3CAD6613AF129060);
+            _TestComponentOffset = _TestComponentOffset ?? Schema.GetOffset(0x3CAD6613AF129060);
             var instance = _TestComponentInstance ??= new CTestPulseIOComponent_DerivedImpl(0);
-            instance.DangerousSetHandle(_Handle + _TestComponentOffset);
+            instance.DangerousSetHandle(_Handle + _TestComponentOffset!.Value);
             return instance;
         }
     }
-    private static nint _OnInternalTestVoidOffset = -1;
+    private static nint? _OnInternalTestVoidOffset;
 
     public ref CEntityIOOutput OnInternalTestVoid
     {
         get
         {
-            if (_OnInternalTestVoidOffset == -1) _OnInternalTestVoidOffset = Schema.GetOffset(0x3CAD6613B078D95B);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnInternalTestVoidOffset);
+            _OnInternalTestVoidOffset = _OnInternalTestVoidOffset ?? Schema.GetOffset(0x3CAD6613B078D95B);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnInternalTestVoidOffset!.Value);
         }
     }
-    private static nint _OnInternalTestBoolOffset = -1;
+    private static nint? _OnInternalTestBoolOffset;
     private SchemaUntypedField? _OnInternalTestBoolInstance;
 
     public SchemaUntypedField OnInternalTestBool
     {
         get
         {
-            if (_OnInternalTestBoolOffset == -1) _OnInternalTestBoolOffset = Schema.GetOffset(0x3CAD66133681FCB9);
+            _OnInternalTestBoolOffset = _OnInternalTestBoolOffset ?? Schema.GetOffset(0x3CAD66133681FCB9);
             var instance = _OnInternalTestBoolInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OnInternalTestBoolOffset);
+            instance.DangerousSetHandle(_Handle + _OnInternalTestBoolOffset!.Value);
             return instance;
         }
     }
-    private static nint _OnInternalTestIntOffset = -1;
+    private static nint? _OnInternalTestIntOffset;
     private SchemaUntypedField? _OnInternalTestIntInstance;
 
     public SchemaUntypedField OnInternalTestInt
     {
         get
         {
-            if (_OnInternalTestIntOffset == -1) _OnInternalTestIntOffset = Schema.GetOffset(0x3CAD66131F6C7CBA);
+            _OnInternalTestIntOffset = _OnInternalTestIntOffset ?? Schema.GetOffset(0x3CAD66131F6C7CBA);
             var instance = _OnInternalTestIntInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OnInternalTestIntOffset);
+            instance.DangerousSetHandle(_Handle + _OnInternalTestIntOffset!.Value);
             return instance;
         }
     }
-    private static nint _OnInternalTestFloatOffset = -1;
+    private static nint? _OnInternalTestFloatOffset;
     private SchemaUntypedField? _OnInternalTestFloatInstance;
 
     public SchemaUntypedField OnInternalTestFloat
     {
         get
         {
-            if (_OnInternalTestFloatOffset == -1) _OnInternalTestFloatOffset = Schema.GetOffset(0x3CAD66131D74C971);
+            _OnInternalTestFloatOffset = _OnInternalTestFloatOffset ?? Schema.GetOffset(0x3CAD66131D74C971);
             var instance = _OnInternalTestFloatInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OnInternalTestFloatOffset);
+            instance.DangerousSetHandle(_Handle + _OnInternalTestFloatOffset!.Value);
             return instance;
         }
     }
-    private static nint _OnInternalTestStringOffset = -1;
+    private static nint? _OnInternalTestStringOffset;
     private SchemaUntypedField? _OnInternalTestStringInstance;
 
     public SchemaUntypedField OnInternalTestString
     {
         get
         {
-            if (_OnInternalTestStringOffset == -1) _OnInternalTestStringOffset = Schema.GetOffset(0x3CAD6613E4A7C6C4);
+            _OnInternalTestStringOffset = _OnInternalTestStringOffset ?? Schema.GetOffset(0x3CAD6613E4A7C6C4);
             var instance = _OnInternalTestStringInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OnInternalTestStringOffset);
+            instance.DangerousSetHandle(_Handle + _OnInternalTestStringOffset!.Value);
             return instance;
         }
     }
-    private static nint _OnInternalTestColorOffset = -1;
+    private static nint? _OnInternalTestColorOffset;
     private SchemaUntypedField? _OnInternalTestColorInstance;
 
     public SchemaUntypedField OnInternalTestColor
     {
         get
         {
-            if (_OnInternalTestColorOffset == -1) _OnInternalTestColorOffset = Schema.GetOffset(0x3CAD66131C9FEEAC);
+            _OnInternalTestColorOffset = _OnInternalTestColorOffset ?? Schema.GetOffset(0x3CAD66131C9FEEAC);
             var instance = _OnInternalTestColorInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OnInternalTestColorOffset);
+            instance.DangerousSetHandle(_Handle + _OnInternalTestColorOffset!.Value);
             return instance;
         }
     }
-    private static nint _OnInternalTestVectorOffset = -1;
+    private static nint? _OnInternalTestVectorOffset;
     private SchemaUntypedField? _OnInternalTestVectorInstance;
 
     public SchemaUntypedField OnInternalTestVector
     {
         get
         {
-            if (_OnInternalTestVectorOffset == -1) _OnInternalTestVectorOffset = Schema.GetOffset(0x3CAD66139609BE76);
+            _OnInternalTestVectorOffset = _OnInternalTestVectorOffset ?? Schema.GetOffset(0x3CAD66139609BE76);
             var instance = _OnInternalTestVectorInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OnInternalTestVectorOffset);
+            instance.DangerousSetHandle(_Handle + _OnInternalTestVectorOffset!.Value);
             return instance;
         }
     }
-    private static nint _OnInternalTestEntityNameOffset = -1;
+    private static nint? _OnInternalTestEntityNameOffset;
     private SchemaUntypedField? _OnInternalTestEntityNameInstance;
 
     public SchemaUntypedField OnInternalTestEntityName
     {
         get
         {
-            if (_OnInternalTestEntityNameOffset == -1) _OnInternalTestEntityNameOffset = Schema.GetOffset(0x3CAD66135389CD5D);
+            _OnInternalTestEntityNameOffset = _OnInternalTestEntityNameOffset ?? Schema.GetOffset(0x3CAD66135389CD5D);
             var instance = _OnInternalTestEntityNameInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OnInternalTestEntityNameOffset);
+            instance.DangerousSetHandle(_Handle + _OnInternalTestEntityNameOffset!.Value);
             return instance;
         }
     }
-    private static nint _OnInternalTestEntityHandleOffset = -1;
+    private static nint? _OnInternalTestEntityHandleOffset;
     private SchemaUntypedField? _OnInternalTestEntityHandleInstance;
 
     public SchemaUntypedField OnInternalTestEntityHandle
     {
         get
         {
-            if (_OnInternalTestEntityHandleOffset == -1) _OnInternalTestEntityHandleOffset = Schema.GetOffset(0x3CAD6613FCA25D88);
+            _OnInternalTestEntityHandleOffset = _OnInternalTestEntityHandleOffset ?? Schema.GetOffset(0x3CAD6613FCA25D88);
             var instance = _OnInternalTestEntityHandleInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OnInternalTestEntityHandleOffset);
+            instance.DangerousSetHandle(_Handle + _OnInternalTestEntityHandleOffset!.Value);
             return instance;
         }
     }
-    private static nint _OnInternalTestSchemaEnumOffset = -1;
+    private static nint? _OnInternalTestSchemaEnumOffset;
     private SchemaUntypedField? _OnInternalTestSchemaEnumInstance;
 
     public SchemaUntypedField OnInternalTestSchemaEnum
     {
         get
         {
-            if (_OnInternalTestSchemaEnumOffset == -1) _OnInternalTestSchemaEnumOffset = Schema.GetOffset(0x3CAD66132FD6717B);
+            _OnInternalTestSchemaEnumOffset = _OnInternalTestSchemaEnumOffset ?? Schema.GetOffset(0x3CAD66132FD6717B);
             var instance = _OnInternalTestSchemaEnumInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OnInternalTestSchemaEnumOffset);
+            instance.DangerousSetHandle(_Handle + _OnInternalTestSchemaEnumOffset!.Value);
             return instance;
         }
     }
-    private static nint _OnInternalTestFloatStringOffset = -1;
+    private static nint? _OnInternalTestFloatStringOffset;
     private SchemaUntypedField? _OnInternalTestFloatStringInstance;
 
     public SchemaUntypedField OnInternalTestFloatString
     {
         get
         {
-            if (_OnInternalTestFloatStringOffset == -1) _OnInternalTestFloatStringOffset = Schema.GetOffset(0x3CAD661327D7846C);
+            _OnInternalTestFloatStringOffset = _OnInternalTestFloatStringOffset ?? Schema.GetOffset(0x3CAD661327D7846C);
             var instance = _OnInternalTestFloatStringInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OnInternalTestFloatStringOffset);
+            instance.DangerousSetHandle(_Handle + _OnInternalTestFloatStringOffset!.Value);
             return instance;
         }
     }
-    private static nint _OnInternalTestEntityNameStringOffset = -1;
+    private static nint? _OnInternalTestEntityNameStringOffset;
     private SchemaUntypedField? _OnInternalTestEntityNameStringInstance;
 
     public SchemaUntypedField OnInternalTestEntityNameString
     {
         get
         {
-            if (_OnInternalTestEntityNameStringOffset == -1) _OnInternalTestEntityNameStringOffset = Schema.GetOffset(0x3CAD6613B4A64210);
+            _OnInternalTestEntityNameStringOffset = _OnInternalTestEntityNameStringOffset ?? Schema.GetOffset(0x3CAD6613B4A64210);
             var instance = _OnInternalTestEntityNameStringInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OnInternalTestEntityNameStringOffset);
+            instance.DangerousSetHandle(_Handle + _OnInternalTestEntityNameStringOffset!.Value);
             return instance;
         }
     }
-    private static nint _OnInternalTestEntityHandleIntOffset = -1;
+    private static nint? _OnInternalTestEntityHandleIntOffset;
     private SchemaUntypedField? _OnInternalTestEntityHandleIntInstance;
 
     public SchemaUntypedField OnInternalTestEntityHandleInt
     {
         get
         {
-            if (_OnInternalTestEntityHandleIntOffset == -1) _OnInternalTestEntityHandleIntOffset = Schema.GetOffset(0x3CAD6613AC4F8F89);
+            _OnInternalTestEntityHandleIntOffset = _OnInternalTestEntityHandleIntOffset ?? Schema.GetOffset(0x3CAD6613AC4F8F89);
             var instance = _OnInternalTestEntityHandleIntInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OnInternalTestEntityHandleIntOffset);
+            instance.DangerousSetHandle(_Handle + _OnInternalTestEntityHandleIntOffset!.Value);
             return instance;
         }
     }
-    private static nint _OnInternalTestStringStringStringOffset = -1;
+    private static nint? _OnInternalTestStringStringStringOffset;
     private SchemaUntypedField? _OnInternalTestStringStringStringInstance;
 
     public SchemaUntypedField OnInternalTestStringStringString
     {
         get
         {
-            if (_OnInternalTestStringStringStringOffset == -1) _OnInternalTestStringStringStringOffset = Schema.GetOffset(0x3CAD66132576EBF8);
+            _OnInternalTestStringStringStringOffset = _OnInternalTestStringStringStringOffset ?? Schema.GetOffset(0x3CAD66132576EBF8);
             var instance = _OnInternalTestStringStringStringInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OnInternalTestStringStringStringOffset);
+            instance.DangerousSetHandle(_Handle + _OnInternalTestStringStringStringOffset!.Value);
             return instance;
         }
     }

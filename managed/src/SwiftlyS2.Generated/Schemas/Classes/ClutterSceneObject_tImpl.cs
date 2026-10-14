@@ -16,117 +16,117 @@ internal partial class ClutterSceneObject_tImpl : SchemaClass, ClutterSceneObjec
 {
     public ClutterSceneObject_tImpl(nint handle) : base(handle) { }
 
-    private static nint _BoundsOffset = -1;
+    private static nint? _BoundsOffset;
     private AABB_tImpl? _BoundsInstance;
 
     public AABB_t Bounds
     {
         get
         {
-            if (_BoundsOffset == -1) _BoundsOffset = Schema.GetOffset(0xAE8D1536ABF76288);
+            _BoundsOffset = _BoundsOffset ?? Schema.GetOffset(0xAE8D1536ABF76288);
             var instance = _BoundsInstance ??= new AABB_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _BoundsOffset);
+            instance.DangerousSetHandle(_Handle + _BoundsOffset!.Value);
             return instance;
         }
     }
-    private static nint _FlagsOffset = -1;
+    private static nint? _FlagsOffset;
 
     public ref ObjectTypeFlags_t Flags
     {
         get
         {
-            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0xAE8D1536DC74A14C);
-            return ref _Handle.AsRef<ObjectTypeFlags_t>(_FlagsOffset);
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0xAE8D1536DC74A14C);
+            return ref _Handle.AsRef<ObjectTypeFlags_t>(_FlagsOffset!.Value);
         }
     }
-    private static nint _LayerOffset = -1;
+    private static nint? _LayerOffset;
 
     public ref short Layer
     {
         get
         {
-            if (_LayerOffset == -1) _LayerOffset = Schema.GetOffset(0xAE8D1536477C7B2A);
-            return ref _Handle.AsRef<short>(_LayerOffset);
+            _LayerOffset = _LayerOffset ?? Schema.GetOffset(0xAE8D1536477C7B2A);
+            return ref _Handle.AsRef<short>(_LayerOffset!.Value);
         }
     }
-    private static nint _InstancePositionsOffset = -1;
+    private static nint? _InstancePositionsOffset;
 
     public ref CUtlVector<Vector> InstancePositions
     {
         get
         {
-            if (_InstancePositionsOffset == -1) _InstancePositionsOffset = Schema.GetOffset(0xAE8D15369B4D36BA);
-            return ref _Handle.AsRef<CUtlVector<Vector>>(_InstancePositionsOffset);
+            _InstancePositionsOffset = _InstancePositionsOffset ?? Schema.GetOffset(0xAE8D15369B4D36BA);
+            return ref _Handle.AsRef<CUtlVector<Vector>>(_InstancePositionsOffset!.Value);
         }
     }
-    private static nint _InstanceScalesOffset = -1;
+    private static nint? _InstanceScalesOffset;
 
     public ref CUtlVector<float> InstanceScales
     {
         get
         {
-            if (_InstanceScalesOffset == -1) _InstanceScalesOffset = Schema.GetOffset(0xAE8D1536F0D43B61);
-            return ref _Handle.AsRef<CUtlVector<float>>(_InstanceScalesOffset);
+            _InstanceScalesOffset = _InstanceScalesOffset ?? Schema.GetOffset(0xAE8D1536F0D43B61);
+            return ref _Handle.AsRef<CUtlVector<float>>(_InstanceScalesOffset!.Value);
         }
     }
-    private static nint _InstanceTintSrgbOffset = -1;
+    private static nint? _InstanceTintSrgbOffset;
 
     public ref CUtlVector<Color> InstanceTintSrgb
     {
         get
         {
-            if (_InstanceTintSrgbOffset == -1) _InstanceTintSrgbOffset = Schema.GetOffset(0xAE8D15369EE1C08B);
-            return ref _Handle.AsRef<CUtlVector<Color>>(_InstanceTintSrgbOffset);
+            _InstanceTintSrgbOffset = _InstanceTintSrgbOffset ?? Schema.GetOffset(0xAE8D15369EE1C08B);
+            return ref _Handle.AsRef<CUtlVector<Color>>(_InstanceTintSrgbOffset!.Value);
         }
     }
-    private static nint _TilesOffset = -1;
+    private static nint? _TilesOffset;
 
     public ref CUtlVector<ClutterTile_t> Tiles
     {
         get
         {
-            if (_TilesOffset == -1) _TilesOffset = Schema.GetOffset(0xAE8D15361FD2CAEE);
-            return ref _Handle.AsRef<CUtlVector<ClutterTile_t>>(_TilesOffset);
+            _TilesOffset = _TilesOffset ?? Schema.GetOffset(0xAE8D15361FD2CAEE);
+            return ref _Handle.AsRef<CUtlVector<ClutterTile_t>>(_TilesOffset!.Value);
         }
     }
-    private static nint _RenderableModelOffset = -1;
+    private static nint? _RenderableModelOffset;
 
     public ref CStrongHandle<InfoForResourceTypeCModel> RenderableModel
     {
         get
         {
-            if (_RenderableModelOffset == -1) _RenderableModelOffset = Schema.GetOffset(0xAE8D15362AEEFA82);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_RenderableModelOffset);
+            _RenderableModelOffset = _RenderableModelOffset ?? Schema.GetOffset(0xAE8D15362AEEFA82);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_RenderableModelOffset!.Value);
         }
     }
-    private static nint _MaterialGroupOffset = -1;
+    private static nint? _MaterialGroupOffset;
 
     public ref CUtlStringToken MaterialGroup
     {
         get
         {
-            if (_MaterialGroupOffset == -1) _MaterialGroupOffset = Schema.GetOffset(0xAE8D15362B778F03);
-            return ref _Handle.AsRef<CUtlStringToken>(_MaterialGroupOffset);
+            _MaterialGroupOffset = _MaterialGroupOffset ?? Schema.GetOffset(0xAE8D15362B778F03);
+            return ref _Handle.AsRef<CUtlStringToken>(_MaterialGroupOffset!.Value);
         }
     }
-    private static nint _BeginCullSizeOffset = -1;
+    private static nint? _BeginCullSizeOffset;
 
     public ref float BeginCullSize
     {
         get
         {
-            if (_BeginCullSizeOffset == -1) _BeginCullSizeOffset = Schema.GetOffset(0xAE8D153680809565);
-            return ref _Handle.AsRef<float>(_BeginCullSizeOffset);
+            _BeginCullSizeOffset = _BeginCullSizeOffset ?? Schema.GetOffset(0xAE8D153680809565);
+            return ref _Handle.AsRef<float>(_BeginCullSizeOffset!.Value);
         }
     }
-    private static nint _EndCullSizeOffset = -1;
+    private static nint? _EndCullSizeOffset;
 
     public ref float EndCullSize
     {
         get
         {
-            if (_EndCullSizeOffset == -1) _EndCullSizeOffset = Schema.GetOffset(0xAE8D153664AC3931);
-            return ref _Handle.AsRef<float>(_EndCullSizeOffset);
+            _EndCullSizeOffset = _EndCullSizeOffset ?? Schema.GetOffset(0xAE8D153664AC3931);
+            return ref _Handle.AsRef<float>(_EndCullSizeOffset!.Value);
         }
     }
 

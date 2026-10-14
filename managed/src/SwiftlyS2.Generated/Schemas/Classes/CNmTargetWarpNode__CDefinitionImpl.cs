@@ -16,114 +16,114 @@ internal partial class CNmTargetWarpNode__CDefinitionImpl : CNmPoseNode__CDefini
 {
     public CNmTargetWarpNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint _ClipReferenceNodeIdxOffset = -1;
+    private static nint? _ClipReferenceNodeIdxOffset;
 
     public ref short ClipReferenceNodeIdx
     {
         get
         {
-            if (_ClipReferenceNodeIdxOffset == -1) _ClipReferenceNodeIdxOffset = Schema.GetOffset(0xEA16BCF061EC8947);
-            return ref _Handle.AsRef<short>(_ClipReferenceNodeIdxOffset);
+            _ClipReferenceNodeIdxOffset = _ClipReferenceNodeIdxOffset ?? Schema.GetOffset(0xEA16BCF061EC8947);
+            return ref _Handle.AsRef<short>(_ClipReferenceNodeIdxOffset!.Value);
         }
     }
-    private static nint _TargetValueNodeIdxOffset = -1;
+    private static nint? _TargetValueNodeIdxOffset;
 
     public ref short TargetValueNodeIdx
     {
         get
         {
-            if (_TargetValueNodeIdxOffset == -1) _TargetValueNodeIdxOffset = Schema.GetOffset(0xEA16BCF0A040C7E8);
-            return ref _Handle.AsRef<short>(_TargetValueNodeIdxOffset);
+            _TargetValueNodeIdxOffset = _TargetValueNodeIdxOffset ?? Schema.GetOffset(0xEA16BCF0A040C7E8);
+            return ref _Handle.AsRef<short>(_TargetValueNodeIdxOffset!.Value);
         }
     }
-    private static nint _SamplingModeOffset = -1;
+    private static nint? _SamplingModeOffset;
 
     public ref CNmRootMotionData__SamplingMode_t SamplingMode
     {
         get
         {
-            if (_SamplingModeOffset == -1) _SamplingModeOffset = Schema.GetOffset(0xEA16BCF0DDB31BE3);
-            return ref _Handle.AsRef<CNmRootMotionData__SamplingMode_t>(_SamplingModeOffset);
+            _SamplingModeOffset = _SamplingModeOffset ?? Schema.GetOffset(0xEA16BCF0DDB31BE3);
+            return ref _Handle.AsRef<CNmRootMotionData__SamplingMode_t>(_SamplingModeOffset!.Value);
         }
     }
-    private static nint _TargetUpdateRuleOffset = -1;
+    private static nint? _TargetUpdateRuleOffset;
 
     public ref CNmTargetWarpNode__TargetUpdateRule_t TargetUpdateRule
     {
         get
         {
-            if (_TargetUpdateRuleOffset == -1) _TargetUpdateRuleOffset = Schema.GetOffset(0xEA16BCF03E2C706F);
-            return ref _Handle.AsRef<CNmTargetWarpNode__TargetUpdateRule_t>(_TargetUpdateRuleOffset);
+            _TargetUpdateRuleOffset = _TargetUpdateRuleOffset ?? Schema.GetOffset(0xEA16BCF03E2C706F);
+            return ref _Handle.AsRef<CNmTargetWarpNode__TargetUpdateRule_t>(_TargetUpdateRuleOffset!.Value);
         }
     }
-    private static nint _AlignWithTargetAtLastWarpEventOffset = -1;
+    private static nint? _AlignWithTargetAtLastWarpEventOffset;
 
     public ref bool AlignWithTargetAtLastWarpEvent
     {
         get
         {
-            if (_AlignWithTargetAtLastWarpEventOffset == -1) _AlignWithTargetAtLastWarpEventOffset = Schema.GetOffset(0xEA16BCF06D2BBBD0);
-            return ref _Handle.AsRef<bool>(_AlignWithTargetAtLastWarpEventOffset);
+            _AlignWithTargetAtLastWarpEventOffset = _AlignWithTargetAtLastWarpEventOffset ?? Schema.GetOffset(0xEA16BCF06D2BBBD0);
+            return ref _Handle.AsRef<bool>(_AlignWithTargetAtLastWarpEventOffset!.Value);
         }
     }
-    private static nint _SamplingPositionErrorThresholdSqOffset = -1;
+    private static nint? _SamplingPositionErrorThresholdSqOffset;
 
     public ref float SamplingPositionErrorThresholdSq
     {
         get
         {
-            if (_SamplingPositionErrorThresholdSqOffset == -1) _SamplingPositionErrorThresholdSqOffset = Schema.GetOffset(0xEA16BCF0C538C7A0);
-            return ref _Handle.AsRef<float>(_SamplingPositionErrorThresholdSqOffset);
+            _SamplingPositionErrorThresholdSqOffset = _SamplingPositionErrorThresholdSqOffset ?? Schema.GetOffset(0xEA16BCF0C538C7A0);
+            return ref _Handle.AsRef<float>(_SamplingPositionErrorThresholdSqOffset!.Value);
         }
     }
-    private static nint _MaxTangentLengthOffset = -1;
+    private static nint? _MaxTangentLengthOffset;
 
     public ref float MaxTangentLength
     {
         get
         {
-            if (_MaxTangentLengthOffset == -1) _MaxTangentLengthOffset = Schema.GetOffset(0xEA16BCF046EAA410);
-            return ref _Handle.AsRef<float>(_MaxTangentLengthOffset);
+            _MaxTangentLengthOffset = _MaxTangentLengthOffset ?? Schema.GetOffset(0xEA16BCF046EAA410);
+            return ref _Handle.AsRef<float>(_MaxTangentLengthOffset!.Value);
         }
     }
-    private static nint _LerpFallbackDistanceThresholdOffset = -1;
+    private static nint? _LerpFallbackDistanceThresholdOffset;
 
     public ref float LerpFallbackDistanceThreshold
     {
         get
         {
-            if (_LerpFallbackDistanceThresholdOffset == -1) _LerpFallbackDistanceThresholdOffset = Schema.GetOffset(0xEA16BCF0BBC41F32);
-            return ref _Handle.AsRef<float>(_LerpFallbackDistanceThresholdOffset);
+            _LerpFallbackDistanceThresholdOffset = _LerpFallbackDistanceThresholdOffset ?? Schema.GetOffset(0xEA16BCF0BBC41F32);
+            return ref _Handle.AsRef<float>(_LerpFallbackDistanceThresholdOffset!.Value);
         }
     }
-    private static nint _TargetUpdateDistanceThresholdOffset = -1;
+    private static nint? _TargetUpdateDistanceThresholdOffset;
 
     public ref float TargetUpdateDistanceThreshold
     {
         get
         {
-            if (_TargetUpdateDistanceThresholdOffset == -1) _TargetUpdateDistanceThresholdOffset = Schema.GetOffset(0xEA16BCF074F10F17);
-            return ref _Handle.AsRef<float>(_TargetUpdateDistanceThresholdOffset);
+            _TargetUpdateDistanceThresholdOffset = _TargetUpdateDistanceThresholdOffset ?? Schema.GetOffset(0xEA16BCF074F10F17);
+            return ref _Handle.AsRef<float>(_TargetUpdateDistanceThresholdOffset!.Value);
         }
     }
-    private static nint _TargetUpdateAngleThresholdRadiansOffset = -1;
+    private static nint? _TargetUpdateAngleThresholdRadiansOffset;
 
     public ref float TargetUpdateAngleThresholdRadians
     {
         get
         {
-            if (_TargetUpdateAngleThresholdRadiansOffset == -1) _TargetUpdateAngleThresholdRadiansOffset = Schema.GetOffset(0xEA16BCF09A1C1D31);
-            return ref _Handle.AsRef<float>(_TargetUpdateAngleThresholdRadiansOffset);
+            _TargetUpdateAngleThresholdRadiansOffset = _TargetUpdateAngleThresholdRadiansOffset ?? Schema.GetOffset(0xEA16BCF09A1C1D31);
+            return ref _Handle.AsRef<float>(_TargetUpdateAngleThresholdRadiansOffset!.Value);
         }
     }
-    private static nint _AlignmentBoneIDOffset = -1;
+    private static nint? _AlignmentBoneIDOffset;
 
     public ref CGlobalSymbol AlignmentBoneID
     {
         get
         {
-            if (_AlignmentBoneIDOffset == -1) _AlignmentBoneIDOffset = Schema.GetOffset(0xEA16BCF0491318B5);
-            return ref _Handle.AsRef<CGlobalSymbol>(_AlignmentBoneIDOffset);
+            _AlignmentBoneIDOffset = _AlignmentBoneIDOffset ?? Schema.GetOffset(0xEA16BCF0491318B5);
+            return ref _Handle.AsRef<CGlobalSymbol>(_AlignmentBoneIDOffset!.Value);
         }
     }
 

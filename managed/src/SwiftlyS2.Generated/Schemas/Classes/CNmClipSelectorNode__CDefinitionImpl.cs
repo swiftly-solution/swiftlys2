@@ -16,29 +16,29 @@ internal partial class CNmClipSelectorNode__CDefinitionImpl : CNmClipReferenceNo
 {
     public CNmClipSelectorNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint _OptionNodeIndicesOffset = -1;
+    private static nint? _OptionNodeIndicesOffset;
     private SchemaUntypedField? _OptionNodeIndicesInstance;
 
     public SchemaUntypedField OptionNodeIndices
     {
         get
         {
-            if (_OptionNodeIndicesOffset == -1) _OptionNodeIndicesOffset = Schema.GetOffset(0xCF32AC18DA97B15D);
+            _OptionNodeIndicesOffset = _OptionNodeIndicesOffset ?? Schema.GetOffset(0xCF32AC18DA97B15D);
             var instance = _OptionNodeIndicesInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OptionNodeIndicesOffset);
+            instance.DangerousSetHandle(_Handle + _OptionNodeIndicesOffset!.Value);
             return instance;
         }
     }
-    private static nint _ConditionNodeIndicesOffset = -1;
+    private static nint? _ConditionNodeIndicesOffset;
     private SchemaUntypedField? _ConditionNodeIndicesInstance;
 
     public SchemaUntypedField ConditionNodeIndices
     {
         get
         {
-            if (_ConditionNodeIndicesOffset == -1) _ConditionNodeIndicesOffset = Schema.GetOffset(0xCF32AC184A144D0F);
+            _ConditionNodeIndicesOffset = _ConditionNodeIndicesOffset ?? Schema.GetOffset(0xCF32AC184A144D0F);
             var instance = _ConditionNodeIndicesInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ConditionNodeIndicesOffset);
+            instance.DangerousSetHandle(_Handle + _ConditionNodeIndicesOffset!.Value);
             return instance;
         }
     }

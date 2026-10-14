@@ -16,79 +16,79 @@ internal partial class CFeMorphLayerImpl : SchemaClass, CFeMorphLayer
 {
     public CFeMorphLayerImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xB30F1160CAE8A266);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xB30F1160CAE8A266);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xB30F1160CAE8A266);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xB30F1160CAE8A266);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _NameHashOffset = -1;
+    private static nint? _NameHashOffset;
 
     public ref uint NameHash
     {
         get
         {
-            if (_NameHashOffset == -1) _NameHashOffset = Schema.GetOffset(0xB30F1160DE15EEFE);
-            return ref _Handle.AsRef<uint>(_NameHashOffset);
+            _NameHashOffset = _NameHashOffset ?? Schema.GetOffset(0xB30F1160DE15EEFE);
+            return ref _Handle.AsRef<uint>(_NameHashOffset!.Value);
         }
     }
-    private static nint _NodesOffset = -1;
+    private static nint? _NodesOffset;
 
     public ref CUtlVector<ushort> Nodes
     {
         get
         {
-            if (_NodesOffset == -1) _NodesOffset = Schema.GetOffset(0xB30F1160EBA045DA);
-            return ref _Handle.AsRef<CUtlVector<ushort>>(_NodesOffset);
+            _NodesOffset = _NodesOffset ?? Schema.GetOffset(0xB30F1160EBA045DA);
+            return ref _Handle.AsRef<CUtlVector<ushort>>(_NodesOffset!.Value);
         }
     }
-    private static nint _InitPosOffset = -1;
+    private static nint? _InitPosOffset;
 
     public ref CUtlVector<Vector> InitPos
     {
         get
         {
-            if (_InitPosOffset == -1) _InitPosOffset = Schema.GetOffset(0xB30F11608D152323);
-            return ref _Handle.AsRef<CUtlVector<Vector>>(_InitPosOffset);
+            _InitPosOffset = _InitPosOffset ?? Schema.GetOffset(0xB30F11608D152323);
+            return ref _Handle.AsRef<CUtlVector<Vector>>(_InitPosOffset!.Value);
         }
     }
-    private static nint _GravityOffset = -1;
+    private static nint? _GravityOffset;
 
     public ref CUtlVector<float> Gravity
     {
         get
         {
-            if (_GravityOffset == -1) _GravityOffset = Schema.GetOffset(0xB30F1160790C70C5);
-            return ref _Handle.AsRef<CUtlVector<float>>(_GravityOffset);
+            _GravityOffset = _GravityOffset ?? Schema.GetOffset(0xB30F1160790C70C5);
+            return ref _Handle.AsRef<CUtlVector<float>>(_GravityOffset!.Value);
         }
     }
-    private static nint _GoalStrengthOffset = -1;
+    private static nint? _GoalStrengthOffset;
 
     public ref CUtlVector<float> GoalStrength
     {
         get
         {
-            if (_GoalStrengthOffset == -1) _GoalStrengthOffset = Schema.GetOffset(0xB30F1160686343FF);
-            return ref _Handle.AsRef<CUtlVector<float>>(_GoalStrengthOffset);
+            _GoalStrengthOffset = _GoalStrengthOffset ?? Schema.GetOffset(0xB30F1160686343FF);
+            return ref _Handle.AsRef<CUtlVector<float>>(_GoalStrengthOffset!.Value);
         }
     }
-    private static nint _GoalDampingOffset = -1;
+    private static nint? _GoalDampingOffset;
 
     public ref CUtlVector<float> GoalDamping
     {
         get
         {
-            if (_GoalDampingOffset == -1) _GoalDampingOffset = Schema.GetOffset(0xB30F11600F3CA820);
-            return ref _Handle.AsRef<CUtlVector<float>>(_GoalDampingOffset);
+            _GoalDampingOffset = _GoalDampingOffset ?? Schema.GetOffset(0xB30F11600F3CA820);
+            return ref _Handle.AsRef<CUtlVector<float>>(_GoalDampingOffset!.Value);
         }
     }
 

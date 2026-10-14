@@ -16,73 +16,73 @@ internal partial class C_OP_SetControlPointToVectorExpressionImpl : CParticleFun
 {
     public C_OP_SetControlPointToVectorExpressionImpl(nint handle) : base(handle) { }
 
-    private static nint _ExpressionOffset = -1;
+    private static nint? _ExpressionOffset;
 
     public ref VectorExpressionType_t Expression
     {
         get
         {
-            if (_ExpressionOffset == -1) _ExpressionOffset = Schema.GetOffset(0x67E9EFDE160B2427);
-            return ref _Handle.AsRef<VectorExpressionType_t>(_ExpressionOffset);
+            _ExpressionOffset = _ExpressionOffset ?? Schema.GetOffset(0x67E9EFDE160B2427);
+            return ref _Handle.AsRef<VectorExpressionType_t>(_ExpressionOffset!.Value);
         }
     }
-    private static nint _OutputCPOffset = -1;
+    private static nint? _OutputCPOffset;
 
     public ref int OutputCP
     {
         get
         {
-            if (_OutputCPOffset == -1) _OutputCPOffset = Schema.GetOffset(0x67E9EFDE50DF5703);
-            return ref _Handle.AsRef<int>(_OutputCPOffset);
+            _OutputCPOffset = _OutputCPOffset ?? Schema.GetOffset(0x67E9EFDE50DF5703);
+            return ref _Handle.AsRef<int>(_OutputCPOffset!.Value);
         }
     }
-    private static nint _Input1Offset = -1;
+    private static nint? _Input1Offset;
     private CParticleCollectionVecInputImpl? _Input1Instance;
 
     public CParticleCollectionVecInput Input1
     {
         get
         {
-            if (_Input1Offset == -1) _Input1Offset = Schema.GetOffset(0x67E9EFDEE17F27DA);
+            _Input1Offset = _Input1Offset ?? Schema.GetOffset(0x67E9EFDEE17F27DA);
             var instance = _Input1Instance ??= new CParticleCollectionVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _Input1Offset);
+            instance.DangerousSetHandle(_Handle + _Input1Offset!.Value);
             return instance;
         }
     }
-    private static nint _Input2Offset = -1;
+    private static nint? _Input2Offset;
     private CParticleCollectionVecInputImpl? _Input2Instance;
 
     public CParticleCollectionVecInput Input2
     {
         get
         {
-            if (_Input2Offset == -1) _Input2Offset = Schema.GetOffset(0x67E9EFDEE07F2647);
+            _Input2Offset = _Input2Offset ?? Schema.GetOffset(0x67E9EFDEE07F2647);
             var instance = _Input2Instance ??= new CParticleCollectionVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _Input2Offset);
+            instance.DangerousSetHandle(_Handle + _Input2Offset!.Value);
             return instance;
         }
     }
-    private static nint _LerpOffset = -1;
+    private static nint? _LerpOffset;
     private CPerParticleFloatInputImpl? _LerpInstance;
 
     public CPerParticleFloatInput Lerp
     {
         get
         {
-            if (_LerpOffset == -1) _LerpOffset = Schema.GetOffset(0x67E9EFDE622FAB06);
+            _LerpOffset = _LerpOffset ?? Schema.GetOffset(0x67E9EFDE622FAB06);
             var instance = _LerpInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _LerpOffset);
+            instance.DangerousSetHandle(_Handle + _LerpOffset!.Value);
             return instance;
         }
     }
-    private static nint _NormalizedOutputOffset = -1;
+    private static nint? _NormalizedOutputOffset;
 
     public ref bool NormalizedOutput
     {
         get
         {
-            if (_NormalizedOutputOffset == -1) _NormalizedOutputOffset = Schema.GetOffset(0x67E9EFDE0AA98C55);
-            return ref _Handle.AsRef<bool>(_NormalizedOutputOffset);
+            _NormalizedOutputOffset = _NormalizedOutputOffset ?? Schema.GetOffset(0x67E9EFDE0AA98C55);
+            return ref _Handle.AsRef<bool>(_NormalizedOutputOffset!.Value);
         }
     }
 

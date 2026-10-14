@@ -16,60 +16,60 @@ internal partial class C_INIT_InitVecImpl : CParticleFunctionInitializerImpl, C_
 {
     public C_INIT_InitVecImpl(nint handle) : base(handle) { }
 
-    private static nint _InputValueOffset = -1;
+    private static nint? _InputValueOffset;
     private CPerParticleVecInputImpl? _InputValueInstance;
 
     public CPerParticleVecInput InputValue
     {
         get
         {
-            if (_InputValueOffset == -1) _InputValueOffset = Schema.GetOffset(0x60C95B0234445438);
+            _InputValueOffset = _InputValueOffset ?? Schema.GetOffset(0x60C95B0234445438);
             var instance = _InputValueInstance ??= new CPerParticleVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _InputValueOffset);
+            instance.DangerousSetHandle(_Handle + _InputValueOffset!.Value);
             return instance;
         }
     }
-    private static nint _OutputFieldOffset = -1;
+    private static nint? _OutputFieldOffset;
     private ParticleAttributeIndex_tImpl? _OutputFieldInstance;
 
     public ParticleAttributeIndex_t OutputField
     {
         get
         {
-            if (_OutputFieldOffset == -1) _OutputFieldOffset = Schema.GetOffset(0x60C95B02324F6F74);
+            _OutputFieldOffset = _OutputFieldOffset ?? Schema.GetOffset(0x60C95B02324F6F74);
             var instance = _OutputFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _OutputFieldOffset);
+            instance.DangerousSetHandle(_Handle + _OutputFieldOffset!.Value);
             return instance;
         }
     }
-    private static nint _SetMethodOffset = -1;
+    private static nint? _SetMethodOffset;
 
     public ref ParticleSetMethod_t SetMethod
     {
         get
         {
-            if (_SetMethodOffset == -1) _SetMethodOffset = Schema.GetOffset(0x60C95B02FB53C31E);
-            return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset);
+            _SetMethodOffset = _SetMethodOffset ?? Schema.GetOffset(0x60C95B02FB53C31E);
+            return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset!.Value);
         }
     }
-    private static nint _NormalizedOutputOffset = -1;
+    private static nint? _NormalizedOutputOffset;
 
     public ref bool NormalizedOutput
     {
         get
         {
-            if (_NormalizedOutputOffset == -1) _NormalizedOutputOffset = Schema.GetOffset(0x60C95B020AA98C55);
-            return ref _Handle.AsRef<bool>(_NormalizedOutputOffset);
+            _NormalizedOutputOffset = _NormalizedOutputOffset ?? Schema.GetOffset(0x60C95B020AA98C55);
+            return ref _Handle.AsRef<bool>(_NormalizedOutputOffset!.Value);
         }
     }
-    private static nint _WritePreviousPositionOffset = -1;
+    private static nint? _WritePreviousPositionOffset;
 
     public ref bool WritePreviousPosition
     {
         get
         {
-            if (_WritePreviousPositionOffset == -1) _WritePreviousPositionOffset = Schema.GetOffset(0x60C95B02EA635776);
-            return ref _Handle.AsRef<bool>(_WritePreviousPositionOffset);
+            _WritePreviousPositionOffset = _WritePreviousPositionOffset ?? Schema.GetOffset(0x60C95B02EA635776);
+            return ref _Handle.AsRef<bool>(_WritePreviousPositionOffset!.Value);
         }
     }
 

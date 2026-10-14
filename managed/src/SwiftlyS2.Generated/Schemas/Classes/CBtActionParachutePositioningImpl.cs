@@ -16,16 +16,16 @@ internal partial class CBtActionParachutePositioningImpl : CBtNodeImpl, CBtActio
 {
     public CBtActionParachutePositioningImpl(nint handle) : base(handle) { }
 
-    private static nint _ActionTimerOffset = -1;
+    private static nint? _ActionTimerOffset;
     private CountdownTimerImpl? _ActionTimerInstance;
 
     public CountdownTimer ActionTimer
     {
         get
         {
-            if (_ActionTimerOffset == -1) _ActionTimerOffset = Schema.GetOffset(0x132D0F5E8777F414);
+            _ActionTimerOffset = _ActionTimerOffset ?? Schema.GetOffset(0x132D0F5E8777F414);
             var instance = _ActionTimerInstance ??= new CountdownTimerImpl(0);
-            instance.DangerousSetHandle(_Handle + _ActionTimerOffset);
+            instance.DangerousSetHandle(_Handle + _ActionTimerOffset!.Value);
             return instance;
         }
     }

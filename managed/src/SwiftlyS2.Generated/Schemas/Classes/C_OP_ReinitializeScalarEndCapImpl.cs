@@ -16,37 +16,37 @@ internal partial class C_OP_ReinitializeScalarEndCapImpl : CParticleFunctionOper
 {
     public C_OP_ReinitializeScalarEndCapImpl(nint handle) : base(handle) { }
 
-    private static nint _FieldOutputOffset = -1;
+    private static nint? _FieldOutputOffset;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0xC52E8D41E5729606);
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0xC52E8D41E5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
             return instance;
         }
     }
-    private static nint _OutputMinOffset = -1;
+    private static nint? _OutputMinOffset;
 
     public ref float OutputMin
     {
         get
         {
-            if (_OutputMinOffset == -1) _OutputMinOffset = Schema.GetOffset(0xC52E8D415F8D7716);
-            return ref _Handle.AsRef<float>(_OutputMinOffset);
+            _OutputMinOffset = _OutputMinOffset ?? Schema.GetOffset(0xC52E8D415F8D7716);
+            return ref _Handle.AsRef<float>(_OutputMinOffset!.Value);
         }
     }
-    private static nint _OutputMaxOffset = -1;
+    private static nint? _OutputMaxOffset;
 
     public ref float OutputMax
     {
         get
         {
-            if (_OutputMaxOffset == -1) _OutputMaxOffset = Schema.GetOffset(0xC52E8D4151A0E8C4);
-            return ref _Handle.AsRef<float>(_OutputMaxOffset);
+            _OutputMaxOffset = _OutputMaxOffset ?? Schema.GetOffset(0xC52E8D4151A0E8C4);
+            return ref _Handle.AsRef<float>(_OutputMaxOffset!.Value);
         }
     }
 

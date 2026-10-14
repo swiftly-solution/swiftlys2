@@ -16,34 +16,34 @@ internal partial class inv_image_light_sun_tImpl : SchemaClass, inv_image_light_
 {
     public inv_image_light_sun_tImpl(nint handle) : base(handle) { }
 
-    private static nint _ColorOffset = -1;
+    private static nint? _ColorOffset;
 
     public ref Vector Color
     {
         get
         {
-            if (_ColorOffset == -1) _ColorOffset = Schema.GetOffset(0x42735FDF3D7E6258);
-            return ref _Handle.AsRef<Vector>(_ColorOffset);
+            _ColorOffset = _ColorOffset ?? Schema.GetOffset(0x42735FDF3D7E6258);
+            return ref _Handle.AsRef<Vector>(_ColorOffset!.Value);
         }
     }
-    private static nint _AngleOffset = -1;
+    private static nint? _AngleOffset;
 
     public ref QAngle Angle
     {
         get
         {
-            if (_AngleOffset == -1) _AngleOffset = Schema.GetOffset(0x42735FDFAD544418);
-            return ref _Handle.AsRef<QAngle>(_AngleOffset);
+            _AngleOffset = _AngleOffset ?? Schema.GetOffset(0x42735FDFAD544418);
+            return ref _Handle.AsRef<QAngle>(_AngleOffset!.Value);
         }
     }
-    private static nint _BrightnessOffset = -1;
+    private static nint? _BrightnessOffset;
 
     public ref float Brightness
     {
         get
         {
-            if (_BrightnessOffset == -1) _BrightnessOffset = Schema.GetOffset(0x42735FDF34D0622A);
-            return ref _Handle.AsRef<float>(_BrightnessOffset);
+            _BrightnessOffset = _BrightnessOffset ?? Schema.GetOffset(0x42735FDF34D0622A);
+            return ref _Handle.AsRef<float>(_BrightnessOffset!.Value);
         }
     }
 

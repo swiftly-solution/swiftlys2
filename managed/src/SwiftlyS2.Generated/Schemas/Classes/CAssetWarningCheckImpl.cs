@@ -16,104 +16,104 @@ internal partial class CAssetWarningCheckImpl : SchemaClass, CAssetWarningCheck
 {
     public CAssetWarningCheckImpl(nint handle) : base(handle) { }
 
-    private static nint _AssetTypeOffset = -1;
+    private static nint? _AssetTypeOffset;
 
     public string AssetType
     {
         get
         {
-            if (_AssetTypeOffset == -1) _AssetTypeOffset = Schema.GetOffset(0xF974B37A8C74FD23);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_AssetTypeOffset));
+            _AssetTypeOffset = _AssetTypeOffset ?? Schema.GetOffset(0xF974B37A8C74FD23);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_AssetTypeOffset!.Value));
         }
         set
         {
-            if (_AssetTypeOffset == -1) _AssetTypeOffset = Schema.GetOffset(0xF974B37A8C74FD23);
-            Schema.SetCUtlString(_Handle, _AssetTypeOffset, value);
+            _AssetTypeOffset = _AssetTypeOffset ?? Schema.GetOffset(0xF974B37A8C74FD23);
+            Schema.SetCUtlString(_Handle, _AssetTypeOffset!.Value, value);
         }
     }
-    private static nint _RequireSearchableIntKeyOffset = -1;
+    private static nint? _RequireSearchableIntKeyOffset;
 
     public ref CBufferString RequireSearchableIntKey
     {
         get
         {
-            if (_RequireSearchableIntKeyOffset == -1) _RequireSearchableIntKeyOffset = Schema.GetOffset(0xF974B37A144BC088);
-            return ref _Handle.AsRef<CBufferString>(_RequireSearchableIntKeyOffset);
+            _RequireSearchableIntKeyOffset = _RequireSearchableIntKeyOffset ?? Schema.GetOffset(0xF974B37A144BC088);
+            return ref _Handle.AsRef<CBufferString>(_RequireSearchableIntKeyOffset!.Value);
         }
     }
-    private static nint _RequireSearchableIntValueOffset = -1;
+    private static nint? _RequireSearchableIntValueOffset;
 
     public ref int RequireSearchableIntValue
     {
         get
         {
-            if (_RequireSearchableIntValueOffset == -1) _RequireSearchableIntValueOffset = Schema.GetOffset(0xF974B37A2D71D52E);
-            return ref _Handle.AsRef<int>(_RequireSearchableIntValueOffset);
+            _RequireSearchableIntValueOffset = _RequireSearchableIntValueOffset ?? Schema.GetOffset(0xF974B37A2D71D52E);
+            return ref _Handle.AsRef<int>(_RequireSearchableIntValueOffset!.Value);
         }
     }
-    private static nint _OnlyWarnIfGameFilePresentOffset = -1;
+    private static nint? _OnlyWarnIfGameFilePresentOffset;
 
     public ref bool OnlyWarnIfGameFilePresent
     {
         get
         {
-            if (_OnlyWarnIfGameFilePresentOffset == -1) _OnlyWarnIfGameFilePresentOffset = Schema.GetOffset(0xF974B37A73754713);
-            return ref _Handle.AsRef<bool>(_OnlyWarnIfGameFilePresentOffset);
+            _OnlyWarnIfGameFilePresentOffset = _OnlyWarnIfGameFilePresentOffset ?? Schema.GetOffset(0xF974B37A73754713);
+            return ref _Handle.AsRef<bool>(_OnlyWarnIfGameFilePresentOffset!.Value);
         }
     }
-    private static nint _OnlyWarnIfContentFilePresentOffset = -1;
+    private static nint? _OnlyWarnIfContentFilePresentOffset;
 
     public ref bool OnlyWarnIfContentFilePresent
     {
         get
         {
-            if (_OnlyWarnIfContentFilePresentOffset == -1) _OnlyWarnIfContentFilePresentOffset = Schema.GetOffset(0xF974B37A3E99382E);
-            return ref _Handle.AsRef<bool>(_OnlyWarnIfContentFilePresentOffset);
+            _OnlyWarnIfContentFilePresentOffset = _OnlyWarnIfContentFilePresentOffset ?? Schema.GetOffset(0xF974B37A3E99382E);
+            return ref _Handle.AsRef<bool>(_OnlyWarnIfContentFilePresentOffset!.Value);
         }
     }
-    private static nint _OnlyWarnAddonsOffset = -1;
+    private static nint? _OnlyWarnAddonsOffset;
 
     public ref bool OnlyWarnAddons
     {
         get
         {
-            if (_OnlyWarnAddonsOffset == -1) _OnlyWarnAddonsOffset = Schema.GetOffset(0xF974B37A118E1348);
-            return ref _Handle.AsRef<bool>(_OnlyWarnAddonsOffset);
+            _OnlyWarnAddonsOffset = _OnlyWarnAddonsOffset ?? Schema.GetOffset(0xF974B37A118E1348);
+            return ref _Handle.AsRef<bool>(_OnlyWarnAddonsOffset!.Value);
         }
     }
-    private static nint _ExcludeAddonNamesOffset = -1;
+    private static nint? _ExcludeAddonNamesOffset;
 
     public ref CUtlVector<CUtlString> ExcludeAddonNames
     {
         get
         {
-            if (_ExcludeAddonNamesOffset == -1) _ExcludeAddonNamesOffset = Schema.GetOffset(0xF974B37A42F6C753);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_ExcludeAddonNamesOffset);
+            _ExcludeAddonNamesOffset = _ExcludeAddonNamesOffset ?? Schema.GetOffset(0xF974B37A42F6C753);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_ExcludeAddonNamesOffset!.Value);
         }
     }
-    private static nint _FixDescriptionOffset = -1;
+    private static nint? _FixDescriptionOffset;
 
     public string FixDescription
     {
         get
         {
-            if (_FixDescriptionOffset == -1) _FixDescriptionOffset = Schema.GetOffset(0xF974B37AD5B11952);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_FixDescriptionOffset));
+            _FixDescriptionOffset = _FixDescriptionOffset ?? Schema.GetOffset(0xF974B37AD5B11952);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_FixDescriptionOffset!.Value));
         }
         set
         {
-            if (_FixDescriptionOffset == -1) _FixDescriptionOffset = Schema.GetOffset(0xF974B37AD5B11952);
-            Schema.SetCUtlString(_Handle, _FixDescriptionOffset, value);
+            _FixDescriptionOffset = _FixDescriptionOffset ?? Schema.GetOffset(0xF974B37AD5B11952);
+            Schema.SetCUtlString(_Handle, _FixDescriptionOffset!.Value, value);
         }
     }
-    private static nint _FixTypeOffset = -1;
+    private static nint? _FixTypeOffset;
 
     public ref AssetWarningFixType_t FixType
     {
         get
         {
-            if (_FixTypeOffset == -1) _FixTypeOffset = Schema.GetOffset(0xF974B37AA78E5710);
-            return ref _Handle.AsRef<AssetWarningFixType_t>(_FixTypeOffset);
+            _FixTypeOffset = _FixTypeOffset ?? Schema.GetOffset(0xF974B37AA78E5710);
+            return ref _Handle.AsRef<AssetWarningFixType_t>(_FixTypeOffset!.Value);
         }
     }
 

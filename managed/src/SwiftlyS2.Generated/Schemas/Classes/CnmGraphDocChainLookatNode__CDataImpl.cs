@@ -16,69 +16,69 @@ internal partial class CnmGraphDocChainLookatNode__CDataImpl : CNmGraphDocVariat
 {
     public CnmGraphDocChainLookatNode__CDataImpl(nint handle) : base(handle) { }
 
-    private static nint _EndEffectorBoneNameOffset = -1;
+    private static nint? _EndEffectorBoneNameOffset;
 
     public string EndEffectorBoneName
     {
         get
         {
-            if (_EndEffectorBoneNameOffset == -1) _EndEffectorBoneNameOffset = Schema.GetOffset(0xE2360255EB49B31B);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_EndEffectorBoneNameOffset));
+            _EndEffectorBoneNameOffset = _EndEffectorBoneNameOffset ?? Schema.GetOffset(0xE2360255EB49B31B);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_EndEffectorBoneNameOffset!.Value));
         }
         set
         {
-            if (_EndEffectorBoneNameOffset == -1) _EndEffectorBoneNameOffset = Schema.GetOffset(0xE2360255EB49B31B);
-            Schema.SetCUtlString(_Handle, _EndEffectorBoneNameOffset, value);
+            _EndEffectorBoneNameOffset = _EndEffectorBoneNameOffset ?? Schema.GetOffset(0xE2360255EB49B31B);
+            Schema.SetCUtlString(_Handle, _EndEffectorBoneNameOffset!.Value, value);
         }
     }
-    private static nint _EndEffectorForwardAxisOffset = -1;
+    private static nint? _EndEffectorForwardAxisOffset;
 
     public ref Vector EndEffectorForwardAxis
     {
         get
         {
-            if (_EndEffectorForwardAxisOffset == -1) _EndEffectorForwardAxisOffset = Schema.GetOffset(0xE2360255FB45FDBE);
-            return ref _Handle.AsRef<Vector>(_EndEffectorForwardAxisOffset);
+            _EndEffectorForwardAxisOffset = _EndEffectorForwardAxisOffset ?? Schema.GetOffset(0xE2360255FB45FDBE);
+            return ref _Handle.AsRef<Vector>(_EndEffectorForwardAxisOffset!.Value);
         }
     }
-    private static nint _EndEffectorOffsetOffset = -1;
+    private static nint? _EndEffectorOffsetOffset;
 
     public ref Vector EndEffectorOffset
     {
         get
         {
-            if (_EndEffectorOffsetOffset == -1) _EndEffectorOffsetOffset = Schema.GetOffset(0xE23602559CBCDDD9);
-            return ref _Handle.AsRef<Vector>(_EndEffectorOffsetOffset);
+            _EndEffectorOffsetOffset = _EndEffectorOffsetOffset ?? Schema.GetOffset(0xE23602559CBCDDD9);
+            return ref _Handle.AsRef<Vector>(_EndEffectorOffsetOffset!.Value);
         }
     }
-    private static nint _ChainLengthOffset = -1;
+    private static nint? _ChainLengthOffset;
 
     public ref byte ChainLength
     {
         get
         {
-            if (_ChainLengthOffset == -1) _ChainLengthOffset = Schema.GetOffset(0xE2360255ACB94336);
-            return ref _Handle.AsRef<byte>(_ChainLengthOffset);
+            _ChainLengthOffset = _ChainLengthOffset ?? Schema.GetOffset(0xE2360255ACB94336);
+            return ref _Handle.AsRef<byte>(_ChainLengthOffset!.Value);
         }
     }
-    private static nint _BlendTimeSecondsOffset = -1;
+    private static nint? _BlendTimeSecondsOffset;
 
     public ref float BlendTimeSeconds
     {
         get
         {
-            if (_BlendTimeSecondsOffset == -1) _BlendTimeSecondsOffset = Schema.GetOffset(0xE23602556D3A08FC);
-            return ref _Handle.AsRef<float>(_BlendTimeSecondsOffset);
+            _BlendTimeSecondsOffset = _BlendTimeSecondsOffset ?? Schema.GetOffset(0xE23602556D3A08FC);
+            return ref _Handle.AsRef<float>(_BlendTimeSecondsOffset!.Value);
         }
     }
-    private static nint _ChainWeightsOffset = -1;
+    private static nint? _ChainWeightsOffset;
 
     public ref CUtlVector<float> ChainWeights
     {
         get
         {
-            if (_ChainWeightsOffset == -1) _ChainWeightsOffset = Schema.GetOffset(0xE236025561882157);
-            return ref _Handle.AsRef<CUtlVector<float>>(_ChainWeightsOffset);
+            _ChainWeightsOffset = _ChainWeightsOffset ?? Schema.GetOffset(0xE236025561882157);
+            return ref _Handle.AsRef<CUtlVector<float>>(_ChainWeightsOffset!.Value);
         }
     }
 

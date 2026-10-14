@@ -16,44 +16,44 @@ internal partial class CPathWithDynamicNodesImpl : CPathSimpleImpl, CPathWithDyn
 {
     public CPathWithDynamicNodesImpl(nint handle) : base(handle) { }
 
-    private static nint _PathNodesOffset = -1;
+    private static nint? _PathNodesOffset;
 
     public ref CUtlVector<CHandle<CPathNode>> PathNodes
     {
         get
         {
-            if (_PathNodesOffset == -1) _PathNodesOffset = Schema.GetOffset(0x53A12A6BFD746CE3);
-            return ref _Handle.AsRef<CUtlVector<CHandle<CPathNode>>>(_PathNodesOffset);
+            _PathNodesOffset = _PathNodesOffset ?? Schema.GetOffset(0x53A12A6BFD746CE3);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CPathNode>>>(_PathNodesOffset!.Value);
         }
     }
-    private static nint _XInitialPathWorldToLocalOffset = -1;
+    private static nint? _XInitialPathWorldToLocalOffset;
 
     public ref CTransform XInitialPathWorldToLocal
     {
         get
         {
-            if (_XInitialPathWorldToLocalOffset == -1) _XInitialPathWorldToLocalOffset = Schema.GetOffset(0x53A12A6BFE5D385E);
-            return ref _Handle.AsRef<CTransform>(_XInitialPathWorldToLocalOffset);
+            _XInitialPathWorldToLocalOffset = _XInitialPathWorldToLocalOffset ?? Schema.GetOffset(0x53A12A6BFE5D385E);
+            return ref _Handle.AsRef<CTransform>(_XInitialPathWorldToLocalOffset!.Value);
         }
     }
-    private static nint _DesiredDirectionOffset = -1;
+    private static nint? _DesiredDirectionOffset;
 
     public ref DirectionAlongSimplePath_t DesiredDirection
     {
         get
         {
-            if (_DesiredDirectionOffset == -1) _DesiredDirectionOffset = Schema.GetOffset(0x53A12A6BBBB84547);
-            return ref _Handle.AsRef<DirectionAlongSimplePath_t>(_DesiredDirectionOffset);
+            _DesiredDirectionOffset = _DesiredDirectionOffset ?? Schema.GetOffset(0x53A12A6BBBB84547);
+            return ref _Handle.AsRef<DirectionAlongSimplePath_t>(_DesiredDirectionOffset!.Value);
         }
     }
-    private static nint _IgnoreParentRotationOffset = -1;
+    private static nint? _IgnoreParentRotationOffset;
 
     public ref bool IgnoreParentRotation
     {
         get
         {
-            if (_IgnoreParentRotationOffset == -1) _IgnoreParentRotationOffset = Schema.GetOffset(0x53A12A6B49795B65);
-            return ref _Handle.AsRef<bool>(_IgnoreParentRotationOffset);
+            _IgnoreParentRotationOffset = _IgnoreParentRotationOffset ?? Schema.GetOffset(0x53A12A6B49795B65);
+            return ref _Handle.AsRef<bool>(_IgnoreParentRotationOffset!.Value);
         }
     }
 

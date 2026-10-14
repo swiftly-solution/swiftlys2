@@ -16,34 +16,34 @@ internal partial class CWorldCompositionChunkReferenceElement_tImpl : SchemaClas
 {
     public CWorldCompositionChunkReferenceElement_tImpl(nint handle) : base(handle) { }
 
-    private static nint _StrMapToLoadOffset = -1;
+    private static nint? _StrMapToLoadOffset;
 
     public string StrMapToLoad
     {
         get
         {
-            if (_StrMapToLoadOffset == -1) _StrMapToLoadOffset = Schema.GetOffset(0x9B80004DE87F0C1B);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrMapToLoadOffset));
+            _StrMapToLoadOffset = _StrMapToLoadOffset ?? Schema.GetOffset(0x9B80004DE87F0C1B);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrMapToLoadOffset!.Value));
         }
         set
         {
-            if (_StrMapToLoadOffset == -1) _StrMapToLoadOffset = Schema.GetOffset(0x9B80004DE87F0C1B);
-            Schema.SetCUtlString(_Handle, _StrMapToLoadOffset, value);
+            _StrMapToLoadOffset = _StrMapToLoadOffset ?? Schema.GetOffset(0x9B80004DE87F0C1B);
+            Schema.SetCUtlString(_Handle, _StrMapToLoadOffset!.Value, value);
         }
     }
-    private static nint _StrLandmarkNameOffset = -1;
+    private static nint? _StrLandmarkNameOffset;
 
     public string StrLandmarkName
     {
         get
         {
-            if (_StrLandmarkNameOffset == -1) _StrLandmarkNameOffset = Schema.GetOffset(0x9B80004DE0BB30D3);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrLandmarkNameOffset));
+            _StrLandmarkNameOffset = _StrLandmarkNameOffset ?? Schema.GetOffset(0x9B80004DE0BB30D3);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrLandmarkNameOffset!.Value));
         }
         set
         {
-            if (_StrLandmarkNameOffset == -1) _StrLandmarkNameOffset = Schema.GetOffset(0x9B80004DE0BB30D3);
-            Schema.SetCUtlString(_Handle, _StrLandmarkNameOffset, value);
+            _StrLandmarkNameOffset = _StrLandmarkNameOffset ?? Schema.GetOffset(0x9B80004DE0BB30D3);
+            Schema.SetCUtlString(_Handle, _StrLandmarkNameOffset!.Value, value);
         }
     }
 

@@ -16,42 +16,42 @@ internal partial class CPulse_InstructionDebugImpl : SchemaClass, CPulse_Instruc
 {
     public CPulse_InstructionDebugImpl(nint handle) : base(handle) { }
 
-    private static nint _FlowNodeIDOffset = -1;
+    private static nint? _FlowNodeIDOffset;
     private PulseDocNodeID_tImpl? _FlowNodeIDInstance;
 
     public PulseDocNodeID_t FlowNodeID
     {
         get
         {
-            if (_FlowNodeIDOffset == -1) _FlowNodeIDOffset = Schema.GetOffset(0xD615D74B8ED47FBC);
+            _FlowNodeIDOffset = _FlowNodeIDOffset ?? Schema.GetOffset(0xD615D74B8ED47FBC);
             var instance = _FlowNodeIDInstance ??= new PulseDocNodeID_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FlowNodeIDOffset);
+            instance.DangerousSetHandle(_Handle + _FlowNodeIDOffset!.Value);
             return instance;
         }
     }
-    private static nint _ValueNodeIDOffset = -1;
+    private static nint? _ValueNodeIDOffset;
     private PulseDocNodeID_tImpl? _ValueNodeIDInstance;
 
     public PulseDocNodeID_t ValueNodeID
     {
         get
         {
-            if (_ValueNodeIDOffset == -1) _ValueNodeIDOffset = Schema.GetOffset(0xD615D74BF8348FC7);
+            _ValueNodeIDOffset = _ValueNodeIDOffset ?? Schema.GetOffset(0xD615D74BF8348FC7);
             var instance = _ValueNodeIDInstance ??= new PulseDocNodeID_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _ValueNodeIDOffset);
+            instance.DangerousSetHandle(_Handle + _ValueNodeIDOffset!.Value);
             return instance;
         }
     }
-    private static nint _SequencePointNameOffset = -1;
+    private static nint? _SequencePointNameOffset;
     private SchemaUntypedField? _SequencePointNameInstance;
 
     public SchemaUntypedField SequencePointName
     {
         get
         {
-            if (_SequencePointNameOffset == -1) _SequencePointNameOffset = Schema.GetOffset(0xD615D74BF45FA85D);
+            _SequencePointNameOffset = _SequencePointNameOffset ?? Schema.GetOffset(0xD615D74BF45FA85D);
             var instance = _SequencePointNameInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _SequencePointNameOffset);
+            instance.DangerousSetHandle(_Handle + _SequencePointNameOffset!.Value);
             return instance;
         }
     }

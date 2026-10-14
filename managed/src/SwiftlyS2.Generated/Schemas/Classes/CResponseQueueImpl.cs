@@ -16,14 +16,14 @@ internal partial class CResponseQueueImpl : SchemaClass, CResponseQueue
 {
     public CResponseQueueImpl(nint handle) : base(handle) { }
 
-    private static nint _ExpresserTargetsOffset = -1;
+    private static nint? _ExpresserTargetsOffset;
 
     public ref CUtlVector<PointerTo<CAI_Expresser>> ExpresserTargets
     {
         get
         {
-            if (_ExpresserTargetsOffset == -1) _ExpresserTargetsOffset = Schema.GetOffset(0xBA9C485870CCA05A);
-            return ref _Handle.AsRef<CUtlVector<PointerTo<CAI_Expresser>>>(_ExpresserTargetsOffset);
+            _ExpresserTargetsOffset = _ExpresserTargetsOffset ?? Schema.GetOffset(0xBA9C485870CCA05A);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<CAI_Expresser>>>(_ExpresserTargetsOffset!.Value);
         }
     }
 

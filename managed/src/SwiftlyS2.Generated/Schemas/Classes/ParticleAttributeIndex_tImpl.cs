@@ -16,14 +16,14 @@ internal partial class ParticleAttributeIndex_tImpl : SchemaClass, ParticleAttri
 {
     public ParticleAttributeIndex_tImpl(nint handle) : base(handle) { }
 
-    private static nint _ValueOffset = -1;
+    private static nint? _ValueOffset;
 
     public ref int Value
     {
         get
         {
-            if (_ValueOffset == -1) _ValueOffset = Schema.GetOffset(0xB44A6FC8DCB0894A);
-            return ref _Handle.AsRef<int>(_ValueOffset);
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0xB44A6FC8DCB0894A);
+            return ref _Handle.AsRef<int>(_ValueOffset!.Value);
         }
     }
 

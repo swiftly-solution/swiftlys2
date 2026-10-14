@@ -16,15 +16,15 @@ internal partial class CCSGameRulesProxyImpl : CGameRulesProxyImpl, CCSGameRules
 {
     public CCSGameRulesProxyImpl(nint handle) : base(handle) { }
 
-    private static nint _GameRulesOffset = -1;
+    private static nint? _GameRulesOffset;
     private CCSGameRulesImpl? _GameRulesInstance;
 
     public CCSGameRules? GameRules
     {
         get
         {
-            if (_GameRulesOffset == -1) _GameRulesOffset = Schema.GetOffset(0x242D3ADB925C1F40);
-            var ptr = _Handle.Read<nint>(_GameRulesOffset);
+            _GameRulesOffset = _GameRulesOffset ?? Schema.GetOffset(0x242D3ADB925C1F40);
+            var ptr = _Handle.Read<nint>(_GameRulesOffset!.Value);
             if (!ptr.IsValidPtr()) return null;
             var instance = _GameRulesInstance ??= new CCSGameRulesImpl(0);
             instance.DangerousSetHandle(ptr);

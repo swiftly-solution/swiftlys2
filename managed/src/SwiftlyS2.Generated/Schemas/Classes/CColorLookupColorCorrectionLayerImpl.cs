@@ -16,39 +16,39 @@ internal partial class CColorLookupColorCorrectionLayerImpl : CColorCorrectionLa
 {
     public CColorLookupColorCorrectionLayerImpl(nint handle) : base(handle) { }
 
-    private static nint _FileNameOffset = -1;
+    private static nint? _FileNameOffset;
 
     public string FileName
     {
         get
         {
-            if (_FileNameOffset == -1) _FileNameOffset = Schema.GetOffset(0xC72ADB43C8D68508);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_FileNameOffset));
+            _FileNameOffset = _FileNameOffset ?? Schema.GetOffset(0xC72ADB43C8D68508);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_FileNameOffset!.Value));
         }
         set
         {
-            if (_FileNameOffset == -1) _FileNameOffset = Schema.GetOffset(0xC72ADB43C8D68508);
-            Schema.SetCUtlString(_Handle, _FileNameOffset, value);
+            _FileNameOffset = _FileNameOffset ?? Schema.GetOffset(0xC72ADB43C8D68508);
+            Schema.SetCUtlString(_Handle, _FileNameOffset!.Value, value);
         }
     }
-    private static nint _LutOffset = -1;
+    private static nint? _LutOffset;
 
     public ref CUtlVector<float> Lut
     {
         get
         {
-            if (_LutOffset == -1) _LutOffset = Schema.GetOffset(0xC72ADB433EB3048A);
-            return ref _Handle.AsRef<CUtlVector<float>>(_LutOffset);
+            _LutOffset = _LutOffset ?? Schema.GetOffset(0xC72ADB433EB3048A);
+            return ref _Handle.AsRef<CUtlVector<float>>(_LutOffset!.Value);
         }
     }
-    private static nint _DimOffset = -1;
+    private static nint? _DimOffset;
 
     public ref int Dim
     {
         get
         {
-            if (_DimOffset == -1) _DimOffset = Schema.GetOffset(0xC72ADB43F904CF6D);
-            return ref _Handle.AsRef<int>(_DimOffset);
+            _DimOffset = _DimOffset ?? Schema.GetOffset(0xC72ADB43F904CF6D);
+            return ref _Handle.AsRef<int>(_DimOffset!.Value);
         }
     }
 

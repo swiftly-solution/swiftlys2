@@ -16,59 +16,59 @@ internal partial class CAnimGraphDoc_SequenceNodeImpl : CAnimGraphDoc_NodeImpl, 
 {
     public CAnimGraphDoc_SequenceNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _TagSpansOffset = -1;
+    private static nint? _TagSpansOffset;
 
     public ref CUtlVector<SchemaUntypedField> TagSpans
     {
         get
         {
-            if (_TagSpansOffset == -1) _TagSpansOffset = Schema.GetOffset(0x3AA3D983A56106AC);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_TagSpansOffset);
+            _TagSpansOffset = _TagSpansOffset ?? Schema.GetOffset(0x3AA3D983A56106AC);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_TagSpansOffset!.Value);
         }
     }
-    private static nint _ParamSpansOffset = -1;
+    private static nint? _ParamSpansOffset;
 
     public ref CUtlVector<SchemaUntypedField> ParamSpans
     {
         get
         {
-            if (_ParamSpansOffset == -1) _ParamSpansOffset = Schema.GetOffset(0x3AA3D983DAC91553);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ParamSpansOffset);
+            _ParamSpansOffset = _ParamSpansOffset ?? Schema.GetOffset(0x3AA3D983DAC91553);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ParamSpansOffset!.Value);
         }
     }
-    private static nint _SequenceNameOffset = -1;
+    private static nint? _SequenceNameOffset;
 
     public string SequenceName
     {
         get
         {
-            if (_SequenceNameOffset == -1) _SequenceNameOffset = Schema.GetOffset(0x3AA3D9832B4A24CB);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_SequenceNameOffset));
+            _SequenceNameOffset = _SequenceNameOffset ?? Schema.GetOffset(0x3AA3D9832B4A24CB);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_SequenceNameOffset!.Value));
         }
         set
         {
-            if (_SequenceNameOffset == -1) _SequenceNameOffset = Schema.GetOffset(0x3AA3D9832B4A24CB);
-            Schema.SetCUtlString(_Handle, _SequenceNameOffset, value);
+            _SequenceNameOffset = _SequenceNameOffset ?? Schema.GetOffset(0x3AA3D9832B4A24CB);
+            Schema.SetCUtlString(_Handle, _SequenceNameOffset!.Value, value);
         }
     }
-    private static nint _PlaybackSpeedOffset = -1;
+    private static nint? _PlaybackSpeedOffset;
 
     public ref float PlaybackSpeed
     {
         get
         {
-            if (_PlaybackSpeedOffset == -1) _PlaybackSpeedOffset = Schema.GetOffset(0x3AA3D9831AFA7387);
-            return ref _Handle.AsRef<float>(_PlaybackSpeedOffset);
+            _PlaybackSpeedOffset = _PlaybackSpeedOffset ?? Schema.GetOffset(0x3AA3D9831AFA7387);
+            return ref _Handle.AsRef<float>(_PlaybackSpeedOffset!.Value);
         }
     }
-    private static nint _LoopOffset = -1;
+    private static nint? _LoopOffset;
 
     public ref bool Loop
     {
         get
         {
-            if (_LoopOffset == -1) _LoopOffset = Schema.GetOffset(0x3AA3D983C668A4CB);
-            return ref _Handle.AsRef<bool>(_LoopOffset);
+            _LoopOffset = _LoopOffset ?? Schema.GetOffset(0x3AA3D983C668A4CB);
+            return ref _Handle.AsRef<bool>(_LoopOffset!.Value);
         }
     }
 

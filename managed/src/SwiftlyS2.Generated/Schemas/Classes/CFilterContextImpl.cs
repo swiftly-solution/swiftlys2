@@ -16,19 +16,19 @@ internal partial class CFilterContextImpl : CBaseFilterImpl, CFilterContext
 {
     public CFilterContextImpl(nint handle) : base(handle) { }
 
-    private static nint _FilterContextOffset = -1;
+    private static nint? _FilterContextOffset;
 
     public string FilterContext
     {
         get
         {
-            if (_FilterContextOffset == -1) _FilterContextOffset = Schema.GetOffset(0xA9DA7EEFF90438D1);
-            return Schema.GetString(_Handle.Read<nint>(_FilterContextOffset));
+            _FilterContextOffset = _FilterContextOffset ?? Schema.GetOffset(0xA9DA7EEFF90438D1);
+            return Schema.GetString(_Handle.Read<nint>(_FilterContextOffset!.Value));
         }
         set
         {
-            if (_FilterContextOffset == -1) _FilterContextOffset = Schema.GetOffset(0xA9DA7EEFF90438D1);
-            Schema.SetString(_Handle, _FilterContextOffset, value);
+            _FilterContextOffset = _FilterContextOffset ?? Schema.GetOffset(0xA9DA7EEFF90438D1);
+            Schema.SetString(_Handle, _FilterContextOffset!.Value, value);
         }
     }
 

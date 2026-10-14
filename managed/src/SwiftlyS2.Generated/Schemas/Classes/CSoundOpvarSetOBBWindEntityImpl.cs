@@ -16,84 +16,84 @@ internal partial class CSoundOpvarSetOBBWindEntityImpl : CSoundOpvarSetPointBase
 {
     public CSoundOpvarSetOBBWindEntityImpl(nint handle) : base(handle) { }
 
-    private static nint _MinsOffset = -1;
+    private static nint? _MinsOffset;
 
     public ref Vector Mins
     {
         get
         {
-            if (_MinsOffset == -1) _MinsOffset = Schema.GetOffset(0xEC8310EF421BB730);
-            return ref _Handle.AsRef<Vector>(_MinsOffset);
+            _MinsOffset = _MinsOffset ?? Schema.GetOffset(0xEC8310EF421BB730);
+            return ref _Handle.AsRef<Vector>(_MinsOffset!.Value);
         }
     }
-    private static nint _MaxsOffset = -1;
+    private static nint? _MaxsOffset;
 
     public ref Vector Maxs
     {
         get
         {
-            if (_MaxsOffset == -1) _MaxsOffset = Schema.GetOffset(0xEC8310EFC0C1CE6A);
-            return ref _Handle.AsRef<Vector>(_MaxsOffset);
+            _MaxsOffset = _MaxsOffset ?? Schema.GetOffset(0xEC8310EFC0C1CE6A);
+            return ref _Handle.AsRef<Vector>(_MaxsOffset!.Value);
         }
     }
-    private static nint _DistanceMinsOffset = -1;
+    private static nint? _DistanceMinsOffset;
 
     public ref Vector DistanceMins
     {
         get
         {
-            if (_DistanceMinsOffset == -1) _DistanceMinsOffset = Schema.GetOffset(0xEC8310EF84189833);
-            return ref _Handle.AsRef<Vector>(_DistanceMinsOffset);
+            _DistanceMinsOffset = _DistanceMinsOffset ?? Schema.GetOffset(0xEC8310EF84189833);
+            return ref _Handle.AsRef<Vector>(_DistanceMinsOffset!.Value);
         }
     }
-    private static nint _DistanceMaxsOffset = -1;
+    private static nint? _DistanceMaxsOffset;
 
     public ref Vector DistanceMaxs
     {
         get
         {
-            if (_DistanceMaxsOffset == -1) _DistanceMaxsOffset = Schema.GetOffset(0xEC8310EF2AF856F1);
-            return ref _Handle.AsRef<Vector>(_DistanceMaxsOffset);
+            _DistanceMaxsOffset = _DistanceMaxsOffset ?? Schema.GetOffset(0xEC8310EF2AF856F1);
+            return ref _Handle.AsRef<Vector>(_DistanceMaxsOffset!.Value);
         }
     }
-    private static nint _WindMinOffset = -1;
+    private static nint? _WindMinOffset;
 
     public ref float WindMin
     {
         get
         {
-            if (_WindMinOffset == -1) _WindMinOffset = Schema.GetOffset(0xEC8310EF24871B93);
-            return ref _Handle.AsRef<float>(_WindMinOffset);
+            _WindMinOffset = _WindMinOffset ?? Schema.GetOffset(0xEC8310EF24871B93);
+            return ref _Handle.AsRef<float>(_WindMinOffset!.Value);
         }
     }
-    private static nint _WindMaxOffset = -1;
+    private static nint? _WindMaxOffset;
 
     public ref float WindMax
     {
         get
         {
-            if (_WindMaxOffset == -1) _WindMaxOffset = Schema.GetOffset(0xEC8310EF3A9C58ED);
-            return ref _Handle.AsRef<float>(_WindMaxOffset);
+            _WindMaxOffset = _WindMaxOffset ?? Schema.GetOffset(0xEC8310EF3A9C58ED);
+            return ref _Handle.AsRef<float>(_WindMaxOffset!.Value);
         }
     }
-    private static nint _WindMapMinOffset = -1;
+    private static nint? _WindMapMinOffset;
 
     public ref float WindMapMin
     {
         get
         {
-            if (_WindMapMinOffset == -1) _WindMapMinOffset = Schema.GetOffset(0xEC8310EF2A2DE5A7);
-            return ref _Handle.AsRef<float>(_WindMapMinOffset);
+            _WindMapMinOffset = _WindMapMinOffset ?? Schema.GetOffset(0xEC8310EF2A2DE5A7);
+            return ref _Handle.AsRef<float>(_WindMapMinOffset!.Value);
         }
     }
-    private static nint _WindMapMaxOffset = -1;
+    private static nint? _WindMapMaxOffset;
 
     public ref float WindMapMax
     {
         get
         {
-            if (_WindMapMaxOffset == -1) _WindMapMaxOffset = Schema.GetOffset(0xEC8310EF1842E409);
-            return ref _Handle.AsRef<float>(_WindMapMaxOffset);
+            _WindMapMaxOffset = _WindMapMaxOffset ?? Schema.GetOffset(0xEC8310EF1842E409);
+            return ref _Handle.AsRef<float>(_WindMapMaxOffset!.Value);
         }
     }
 

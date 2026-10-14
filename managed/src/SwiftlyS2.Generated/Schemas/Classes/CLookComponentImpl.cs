@@ -16,117 +16,117 @@ internal partial class CLookComponentImpl : CAnimGraphDoc_ComponentImpl, CLookCo
 {
     public CLookComponentImpl(nint handle) : base(handle) { }
 
-    private static nint _NetworkLookTargetOffset = -1;
+    private static nint? _NetworkLookTargetOffset;
 
     public ref bool NetworkLookTarget
     {
         get
         {
-            if (_NetworkLookTargetOffset == -1) _NetworkLookTargetOffset = Schema.GetOffset(0x3C5E394C39F2F527);
-            return ref _Handle.AsRef<bool>(_NetworkLookTargetOffset);
+            _NetworkLookTargetOffset = _NetworkLookTargetOffset ?? Schema.GetOffset(0x3C5E394C39F2F527);
+            return ref _Handle.AsRef<bool>(_NetworkLookTargetOffset!.Value);
         }
     }
-    private static nint _LookHeadingIDOffset = -1;
+    private static nint? _LookHeadingIDOffset;
     private AnimParamIDImpl? _LookHeadingIDInstance;
 
     public AnimParamID LookHeadingID
     {
         get
         {
-            if (_LookHeadingIDOffset == -1) _LookHeadingIDOffset = Schema.GetOffset(0x3C5E394CB3BC2EF5);
+            _LookHeadingIDOffset = _LookHeadingIDOffset ?? Schema.GetOffset(0x3C5E394CB3BC2EF5);
             var instance = _LookHeadingIDInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _LookHeadingIDOffset);
+            instance.DangerousSetHandle(_Handle + _LookHeadingIDOffset!.Value);
             return instance;
         }
     }
-    private static nint _LookHeadingNormalizedIDOffset = -1;
+    private static nint? _LookHeadingNormalizedIDOffset;
     private AnimParamIDImpl? _LookHeadingNormalizedIDInstance;
 
     public AnimParamID LookHeadingNormalizedID
     {
         get
         {
-            if (_LookHeadingNormalizedIDOffset == -1) _LookHeadingNormalizedIDOffset = Schema.GetOffset(0x3C5E394C741D8260);
+            _LookHeadingNormalizedIDOffset = _LookHeadingNormalizedIDOffset ?? Schema.GetOffset(0x3C5E394C741D8260);
             var instance = _LookHeadingNormalizedIDInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _LookHeadingNormalizedIDOffset);
+            instance.DangerousSetHandle(_Handle + _LookHeadingNormalizedIDOffset!.Value);
             return instance;
         }
     }
-    private static nint _LookHeadingVelocityIDOffset = -1;
+    private static nint? _LookHeadingVelocityIDOffset;
     private AnimParamIDImpl? _LookHeadingVelocityIDInstance;
 
     public AnimParamID LookHeadingVelocityID
     {
         get
         {
-            if (_LookHeadingVelocityIDOffset == -1) _LookHeadingVelocityIDOffset = Schema.GetOffset(0x3C5E394C99910336);
+            _LookHeadingVelocityIDOffset = _LookHeadingVelocityIDOffset ?? Schema.GetOffset(0x3C5E394C99910336);
             var instance = _LookHeadingVelocityIDInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _LookHeadingVelocityIDOffset);
+            instance.DangerousSetHandle(_Handle + _LookHeadingVelocityIDOffset!.Value);
             return instance;
         }
     }
-    private static nint _LookPitchIDOffset = -1;
+    private static nint? _LookPitchIDOffset;
     private AnimParamIDImpl? _LookPitchIDInstance;
 
     public AnimParamID LookPitchID
     {
         get
         {
-            if (_LookPitchIDOffset == -1) _LookPitchIDOffset = Schema.GetOffset(0x3C5E394CDFE17EC9);
+            _LookPitchIDOffset = _LookPitchIDOffset ?? Schema.GetOffset(0x3C5E394CDFE17EC9);
             var instance = _LookPitchIDInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _LookPitchIDOffset);
+            instance.DangerousSetHandle(_Handle + _LookPitchIDOffset!.Value);
             return instance;
         }
     }
-    private static nint _LookDistanceIDOffset = -1;
+    private static nint? _LookDistanceIDOffset;
     private AnimParamIDImpl? _LookDistanceIDInstance;
 
     public AnimParamID LookDistanceID
     {
         get
         {
-            if (_LookDistanceIDOffset == -1) _LookDistanceIDOffset = Schema.GetOffset(0x3C5E394C68237308);
+            _LookDistanceIDOffset = _LookDistanceIDOffset ?? Schema.GetOffset(0x3C5E394C68237308);
             var instance = _LookDistanceIDInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _LookDistanceIDOffset);
+            instance.DangerousSetHandle(_Handle + _LookDistanceIDOffset!.Value);
             return instance;
         }
     }
-    private static nint _LookDirectionIDOffset = -1;
+    private static nint? _LookDirectionIDOffset;
     private AnimParamIDImpl? _LookDirectionIDInstance;
 
     public AnimParamID LookDirectionID
     {
         get
         {
-            if (_LookDirectionIDOffset == -1) _LookDirectionIDOffset = Schema.GetOffset(0x3C5E394C82962086);
+            _LookDirectionIDOffset = _LookDirectionIDOffset ?? Schema.GetOffset(0x3C5E394C82962086);
             var instance = _LookDirectionIDInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _LookDirectionIDOffset);
+            instance.DangerousSetHandle(_Handle + _LookDirectionIDOffset!.Value);
             return instance;
         }
     }
-    private static nint _LookTargetIDOffset = -1;
+    private static nint? _LookTargetIDOffset;
     private AnimParamIDImpl? _LookTargetIDInstance;
 
     public AnimParamID LookTargetID
     {
         get
         {
-            if (_LookTargetIDOffset == -1) _LookTargetIDOffset = Schema.GetOffset(0x3C5E394C0AB3FC4A);
+            _LookTargetIDOffset = _LookTargetIDOffset ?? Schema.GetOffset(0x3C5E394C0AB3FC4A);
             var instance = _LookTargetIDInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _LookTargetIDOffset);
+            instance.DangerousSetHandle(_Handle + _LookTargetIDOffset!.Value);
             return instance;
         }
     }
-    private static nint _LookTargetWorldSpaceIDOffset = -1;
+    private static nint? _LookTargetWorldSpaceIDOffset;
     private AnimParamIDImpl? _LookTargetWorldSpaceIDInstance;
 
     public AnimParamID LookTargetWorldSpaceID
     {
         get
         {
-            if (_LookTargetWorldSpaceIDOffset == -1) _LookTargetWorldSpaceIDOffset = Schema.GetOffset(0x3C5E394CDF91A630);
+            _LookTargetWorldSpaceIDOffset = _LookTargetWorldSpaceIDOffset ?? Schema.GetOffset(0x3C5E394CDF91A630);
             var instance = _LookTargetWorldSpaceIDInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _LookTargetWorldSpaceIDOffset);
+            instance.DangerousSetHandle(_Handle + _LookTargetWorldSpaceIDOffset!.Value);
             return instance;
         }
     }

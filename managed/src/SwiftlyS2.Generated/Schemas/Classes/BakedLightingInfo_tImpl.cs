@@ -16,124 +16,124 @@ internal partial class BakedLightingInfo_tImpl : SchemaClass, BakedLightingInfo_
 {
     public BakedLightingInfo_tImpl(nint handle) : base(handle) { }
 
-    private static nint _LightmapVersionNumberOffset = -1;
+    private static nint? _LightmapVersionNumberOffset;
 
     public ref uint LightmapVersionNumber
     {
         get
         {
-            if (_LightmapVersionNumberOffset == -1) _LightmapVersionNumberOffset = Schema.GetOffset(0x6909F4EF909450E0);
-            return ref _Handle.AsRef<uint>(_LightmapVersionNumberOffset);
+            _LightmapVersionNumberOffset = _LightmapVersionNumberOffset ?? Schema.GetOffset(0x6909F4EF909450E0);
+            return ref _Handle.AsRef<uint>(_LightmapVersionNumberOffset!.Value);
         }
     }
-    private static nint _LightmapGameVersionNumberOffset = -1;
+    private static nint? _LightmapGameVersionNumberOffset;
 
     public ref uint LightmapGameVersionNumber
     {
         get
         {
-            if (_LightmapGameVersionNumberOffset == -1) _LightmapGameVersionNumberOffset = Schema.GetOffset(0x6909F4EFC1181112);
-            return ref _Handle.AsRef<uint>(_LightmapGameVersionNumberOffset);
+            _LightmapGameVersionNumberOffset = _LightmapGameVersionNumberOffset ?? Schema.GetOffset(0x6909F4EFC1181112);
+            return ref _Handle.AsRef<uint>(_LightmapGameVersionNumberOffset!.Value);
         }
     }
-    private static nint _LightmapUvScaleOffset = -1;
+    private static nint? _LightmapUvScaleOffset;
 
     public ref Vector2D LightmapUvScale
     {
         get
         {
-            if (_LightmapUvScaleOffset == -1) _LightmapUvScaleOffset = Schema.GetOffset(0x6909F4EF36320516);
-            return ref _Handle.AsRef<Vector2D>(_LightmapUvScaleOffset);
+            _LightmapUvScaleOffset = _LightmapUvScaleOffset ?? Schema.GetOffset(0x6909F4EF36320516);
+            return ref _Handle.AsRef<Vector2D>(_LightmapUvScaleOffset!.Value);
         }
     }
-    private static nint _HasLightmapsOffset = -1;
+    private static nint? _HasLightmapsOffset;
 
     public ref bool HasLightmaps
     {
         get
         {
-            if (_HasLightmapsOffset == -1) _HasLightmapsOffset = Schema.GetOffset(0x6909F4EF86932F1E);
-            return ref _Handle.AsRef<bool>(_HasLightmapsOffset);
+            _HasLightmapsOffset = _HasLightmapsOffset ?? Schema.GetOffset(0x6909F4EF86932F1E);
+            return ref _Handle.AsRef<bool>(_HasLightmapsOffset!.Value);
         }
     }
-    private static nint _BakedShadowsGamma20Offset = -1;
+    private static nint? _BakedShadowsGamma20Offset;
 
     public ref bool BakedShadowsGamma20
     {
         get
         {
-            if (_BakedShadowsGamma20Offset == -1) _BakedShadowsGamma20Offset = Schema.GetOffset(0x6909F4EF2FA903D4);
-            return ref _Handle.AsRef<bool>(_BakedShadowsGamma20Offset);
+            _BakedShadowsGamma20Offset = _BakedShadowsGamma20Offset ?? Schema.GetOffset(0x6909F4EF2FA903D4);
+            return ref _Handle.AsRef<bool>(_BakedShadowsGamma20Offset!.Value);
         }
     }
-    private static nint _CompressionEnabledOffset = -1;
+    private static nint? _CompressionEnabledOffset;
 
     public ref bool CompressionEnabled
     {
         get
         {
-            if (_CompressionEnabledOffset == -1) _CompressionEnabledOffset = Schema.GetOffset(0x6909F4EF0082912E);
-            return ref _Handle.AsRef<bool>(_CompressionEnabledOffset);
+            _CompressionEnabledOffset = _CompressionEnabledOffset ?? Schema.GetOffset(0x6909F4EF0082912E);
+            return ref _Handle.AsRef<bool>(_CompressionEnabledOffset!.Value);
         }
     }
-    private static nint _LPVEncodingOffset = -1;
+    private static nint? _LPVEncodingOffset;
 
     public ref byte LPVEncoding
     {
         get
         {
-            if (_LPVEncodingOffset == -1) _LPVEncodingOffset = Schema.GetOffset(0x6909F4EF3369FF94);
-            return ref _Handle.AsRef<byte>(_LPVEncodingOffset);
+            _LPVEncodingOffset = _LPVEncodingOffset ?? Schema.GetOffset(0x6909F4EF3369FF94);
+            return ref _Handle.AsRef<byte>(_LPVEncodingOffset!.Value);
         }
     }
-    private static nint _LightmapEncodingOffset = -1;
+    private static nint? _LightmapEncodingOffset;
 
     public ref byte LightmapEncoding
     {
         get
         {
-            if (_LightmapEncodingOffset == -1) _LightmapEncodingOffset = Schema.GetOffset(0x6909F4EF184FF5BA);
-            return ref _Handle.AsRef<byte>(_LightmapEncodingOffset);
+            _LightmapEncodingOffset = _LightmapEncodingOffset ?? Schema.GetOffset(0x6909F4EF184FF5BA);
+            return ref _Handle.AsRef<byte>(_LightmapEncodingOffset!.Value);
         }
     }
-    private static nint _ChartPackIterationsOffset = -1;
+    private static nint? _ChartPackIterationsOffset;
 
     public ref byte ChartPackIterations
     {
         get
         {
-            if (_ChartPackIterationsOffset == -1) _ChartPackIterationsOffset = Schema.GetOffset(0x6909F4EF7CF370A6);
-            return ref _Handle.AsRef<byte>(_ChartPackIterationsOffset);
+            _ChartPackIterationsOffset = _ChartPackIterationsOffset ?? Schema.GetOffset(0x6909F4EF7CF370A6);
+            return ref _Handle.AsRef<byte>(_ChartPackIterationsOffset!.Value);
         }
     }
-    private static nint _VradQualityOffset = -1;
+    private static nint? _VradQualityOffset;
 
     public ref byte VradQuality
     {
         get
         {
-            if (_VradQualityOffset == -1) _VradQualityOffset = Schema.GetOffset(0x6909F4EFDFCA05D9);
-            return ref _Handle.AsRef<byte>(_VradQualityOffset);
+            _VradQualityOffset = _VradQualityOffset ?? Schema.GetOffset(0x6909F4EFDFCA05D9);
+            return ref _Handle.AsRef<byte>(_VradQualityOffset!.Value);
         }
     }
-    private static nint _LightMapsOffset = -1;
+    private static nint? _LightMapsOffset;
 
     public ref CUtlVector<CStrongHandle<InfoForResourceTypeCTextureBase>> LightMaps
     {
         get
         {
-            if (_LightMapsOffset == -1) _LightMapsOffset = Schema.GetOffset(0x6909F4EF6F2EFF94);
-            return ref _Handle.AsRef<CUtlVector<CStrongHandle<InfoForResourceTypeCTextureBase>>>(_LightMapsOffset);
+            _LightMapsOffset = _LightMapsOffset ?? Schema.GetOffset(0x6909F4EF6F2EFF94);
+            return ref _Handle.AsRef<CUtlVector<CStrongHandle<InfoForResourceTypeCTextureBase>>>(_LightMapsOffset!.Value);
         }
     }
-    private static nint _BakedShadowsOffset = -1;
+    private static nint? _BakedShadowsOffset;
 
     public ref CUtlVector<BakedLightingInfo_t__BakedShadowAssignment_t> BakedShadows
     {
         get
         {
-            if (_BakedShadowsOffset == -1) _BakedShadowsOffset = Schema.GetOffset(0x6909F4EFE8C9B481);
-            return ref _Handle.AsRef<CUtlVector<BakedLightingInfo_t__BakedShadowAssignment_t>>(_BakedShadowsOffset);
+            _BakedShadowsOffset = _BakedShadowsOffset ?? Schema.GetOffset(0x6909F4EFE8C9B481);
+            return ref _Handle.AsRef<CUtlVector<BakedLightingInfo_t__BakedShadowAssignment_t>>(_BakedShadowsOffset!.Value);
         }
     }
 

@@ -16,34 +16,34 @@ internal partial class CAnimationGraphVisualizerLineImpl : CAnimationGraphVisual
 {
     public CAnimationGraphVisualizerLineImpl(nint handle) : base(handle) { }
 
-    private static nint _WsPositionStartOffset = -1;
+    private static nint? _WsPositionStartOffset;
 
     public ref Vector WsPositionStart
     {
         get
         {
-            if (_WsPositionStartOffset == -1) _WsPositionStartOffset = Schema.GetOffset(0x688831B2D941E214);
-            return ref _Handle.AsRef<Vector>(_WsPositionStartOffset);
+            _WsPositionStartOffset = _WsPositionStartOffset ?? Schema.GetOffset(0x688831B2D941E214);
+            return ref _Handle.AsRef<Vector>(_WsPositionStartOffset!.Value);
         }
     }
-    private static nint _WsPositionEndOffset = -1;
+    private static nint? _WsPositionEndOffset;
 
     public ref Vector WsPositionEnd
     {
         get
         {
-            if (_WsPositionEndOffset == -1) _WsPositionEndOffset = Schema.GetOffset(0x688831B26EB28B6D);
-            return ref _Handle.AsRef<Vector>(_WsPositionEndOffset);
+            _WsPositionEndOffset = _WsPositionEndOffset ?? Schema.GetOffset(0x688831B26EB28B6D);
+            return ref _Handle.AsRef<Vector>(_WsPositionEndOffset!.Value);
         }
     }
-    private static nint _ColorOffset = -1;
+    private static nint? _ColorOffset;
 
     public ref Color Color
     {
         get
         {
-            if (_ColorOffset == -1) _ColorOffset = Schema.GetOffset(0x688831B2D7D017D8);
-            return ref _Handle.AsRef<Color>(_ColorOffset);
+            _ColorOffset = _ColorOffset ?? Schema.GetOffset(0x688831B2D7D017D8);
+            return ref _Handle.AsRef<Color>(_ColorOffset!.Value);
         }
     }
 

@@ -16,57 +16,57 @@ internal partial class C_OP_LerpVectorImpl : CParticleFunctionOperatorImpl, C_OP
 {
     public C_OP_LerpVectorImpl(nint handle) : base(handle) { }
 
-    private static nint _FieldOutputOffset = -1;
+    private static nint? _FieldOutputOffset;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0x870E8457E5729606);
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x870E8457E5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
             return instance;
         }
     }
-    private static nint _OutputOffset = -1;
+    private static nint? _OutputOffset;
 
     public ref Vector Output
     {
         get
         {
-            if (_OutputOffset == -1) _OutputOffset = Schema.GetOffset(0x870E845708B7FF64);
-            return ref _Handle.AsRef<Vector>(_OutputOffset);
+            _OutputOffset = _OutputOffset ?? Schema.GetOffset(0x870E845708B7FF64);
+            return ref _Handle.AsRef<Vector>(_OutputOffset!.Value);
         }
     }
-    private static nint _StartTimeOffset = -1;
+    private static nint? _StartTimeOffset;
 
     public ref float StartTime
     {
         get
         {
-            if (_StartTimeOffset == -1) _StartTimeOffset = Schema.GetOffset(0x870E845767FE9DC4);
-            return ref _Handle.AsRef<float>(_StartTimeOffset);
+            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0x870E845767FE9DC4);
+            return ref _Handle.AsRef<float>(_StartTimeOffset!.Value);
         }
     }
-    private static nint _EndTimeOffset = -1;
+    private static nint? _EndTimeOffset;
 
     public ref float EndTime
     {
         get
         {
-            if (_EndTimeOffset == -1) _EndTimeOffset = Schema.GetOffset(0x870E84572041DF9D);
-            return ref _Handle.AsRef<float>(_EndTimeOffset);
+            _EndTimeOffset = _EndTimeOffset ?? Schema.GetOffset(0x870E84572041DF9D);
+            return ref _Handle.AsRef<float>(_EndTimeOffset!.Value);
         }
     }
-    private static nint _SetMethodOffset = -1;
+    private static nint? _SetMethodOffset;
 
     public ref ParticleSetMethod_t SetMethod
     {
         get
         {
-            if (_SetMethodOffset == -1) _SetMethodOffset = Schema.GetOffset(0x870E8457FB53C31E);
-            return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset);
+            _SetMethodOffset = _SetMethodOffset ?? Schema.GetOffset(0x870E8457FB53C31E);
+            return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset!.Value);
         }
     }
 

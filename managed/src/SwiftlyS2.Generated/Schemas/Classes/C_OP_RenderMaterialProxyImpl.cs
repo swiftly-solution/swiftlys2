@@ -16,93 +16,93 @@ internal partial class C_OP_RenderMaterialProxyImpl : CParticleFunctionRendererI
 {
     public C_OP_RenderMaterialProxyImpl(nint handle) : base(handle) { }
 
-    private static nint _MaterialControlPointOffset = -1;
+    private static nint? _MaterialControlPointOffset;
 
     public ref int MaterialControlPoint
     {
         get
         {
-            if (_MaterialControlPointOffset == -1) _MaterialControlPointOffset = Schema.GetOffset(0xA7258058EACD475D);
-            return ref _Handle.AsRef<int>(_MaterialControlPointOffset);
+            _MaterialControlPointOffset = _MaterialControlPointOffset ?? Schema.GetOffset(0xA7258058EACD475D);
+            return ref _Handle.AsRef<int>(_MaterialControlPointOffset!.Value);
         }
     }
-    private static nint _ProxyTypeOffset = -1;
+    private static nint? _ProxyTypeOffset;
 
     public ref MaterialProxyType_t ProxyType
     {
         get
         {
-            if (_ProxyTypeOffset == -1) _ProxyTypeOffset = Schema.GetOffset(0xA7258058066A337F);
-            return ref _Handle.AsRef<MaterialProxyType_t>(_ProxyTypeOffset);
+            _ProxyTypeOffset = _ProxyTypeOffset ?? Schema.GetOffset(0xA7258058066A337F);
+            return ref _Handle.AsRef<MaterialProxyType_t>(_ProxyTypeOffset!.Value);
         }
     }
-    private static nint _MaterialVarsOffset = -1;
+    private static nint? _MaterialVarsOffset;
 
     public ref CUtlVector<MaterialVariable_t> MaterialVars
     {
         get
         {
-            if (_MaterialVarsOffset == -1) _MaterialVarsOffset = Schema.GetOffset(0xA7258058FA861D66);
-            return ref _Handle.AsRef<CUtlVector<MaterialVariable_t>>(_MaterialVarsOffset);
+            _MaterialVarsOffset = _MaterialVarsOffset ?? Schema.GetOffset(0xA7258058FA861D66);
+            return ref _Handle.AsRef<CUtlVector<MaterialVariable_t>>(_MaterialVarsOffset!.Value);
         }
     }
-    private static nint _OverrideMaterialOffset = -1;
+    private static nint? _OverrideMaterialOffset;
 
     public ref CStrongHandle<InfoForResourceTypeIMaterial2> OverrideMaterial
     {
         get
         {
-            if (_OverrideMaterialOffset == -1) _OverrideMaterialOffset = Schema.GetOffset(0xA72580582C055CBE);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_OverrideMaterialOffset);
+            _OverrideMaterialOffset = _OverrideMaterialOffset ?? Schema.GetOffset(0xA72580582C055CBE);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_OverrideMaterialOffset!.Value);
         }
     }
-    private static nint _MaterialOverrideEnabledOffset = -1;
+    private static nint? _MaterialOverrideEnabledOffset;
     private CParticleCollectionFloatInputImpl? _MaterialOverrideEnabledInstance;
 
     public CParticleCollectionFloatInput MaterialOverrideEnabled
     {
         get
         {
-            if (_MaterialOverrideEnabledOffset == -1) _MaterialOverrideEnabledOffset = Schema.GetOffset(0xA725805832275723);
+            _MaterialOverrideEnabledOffset = _MaterialOverrideEnabledOffset ?? Schema.GetOffset(0xA725805832275723);
             var instance = _MaterialOverrideEnabledInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _MaterialOverrideEnabledOffset);
+            instance.DangerousSetHandle(_Handle + _MaterialOverrideEnabledOffset!.Value);
             return instance;
         }
     }
-    private static nint _ColorScaleOffset = -1;
+    private static nint? _ColorScaleOffset;
     private CParticleCollectionVecInputImpl? _ColorScaleInstance;
 
     public CParticleCollectionVecInput ColorScale
     {
         get
         {
-            if (_ColorScaleOffset == -1) _ColorScaleOffset = Schema.GetOffset(0xA72580589F9BB8BA);
+            _ColorScaleOffset = _ColorScaleOffset ?? Schema.GetOffset(0xA72580589F9BB8BA);
             var instance = _ColorScaleInstance ??= new CParticleCollectionVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _ColorScaleOffset);
+            instance.DangerousSetHandle(_Handle + _ColorScaleOffset!.Value);
             return instance;
         }
     }
-    private static nint _AlphaOffset = -1;
+    private static nint? _AlphaOffset;
     private CPerParticleFloatInputImpl? _AlphaInstance;
 
     public CPerParticleFloatInput Alpha
     {
         get
         {
-            if (_AlphaOffset == -1) _AlphaOffset = Schema.GetOffset(0xA7258058A0DB7DD1);
+            _AlphaOffset = _AlphaOffset ?? Schema.GetOffset(0xA7258058A0DB7DD1);
             var instance = _AlphaInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _AlphaOffset);
+            instance.DangerousSetHandle(_Handle + _AlphaOffset!.Value);
             return instance;
         }
     }
-    private static nint _ColorBlendTypeOffset = -1;
+    private static nint? _ColorBlendTypeOffset;
 
     public ref ParticleColorBlendType_t ColorBlendType
     {
         get
         {
-            if (_ColorBlendTypeOffset == -1) _ColorBlendTypeOffset = Schema.GetOffset(0xA7258058DBC6EFCF);
-            return ref _Handle.AsRef<ParticleColorBlendType_t>(_ColorBlendTypeOffset);
+            _ColorBlendTypeOffset = _ColorBlendTypeOffset ?? Schema.GetOffset(0xA7258058DBC6EFCF);
+            return ref _Handle.AsRef<ParticleColorBlendType_t>(_ColorBlendTypeOffset!.Value);
         }
     }
 

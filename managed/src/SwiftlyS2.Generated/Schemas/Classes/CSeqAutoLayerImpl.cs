@@ -16,77 +16,77 @@ internal partial class CSeqAutoLayerImpl : SchemaClass, CSeqAutoLayer
 {
     public CSeqAutoLayerImpl(nint handle) : base(handle) { }
 
-    private static nint _LocalReferenceOffset = -1;
+    private static nint? _LocalReferenceOffset;
 
     public ref short LocalReference
     {
         get
         {
-            if (_LocalReferenceOffset == -1) _LocalReferenceOffset = Schema.GetOffset(0x1506328FC8D571D9);
-            return ref _Handle.AsRef<short>(_LocalReferenceOffset);
+            _LocalReferenceOffset = _LocalReferenceOffset ?? Schema.GetOffset(0x1506328FC8D571D9);
+            return ref _Handle.AsRef<short>(_LocalReferenceOffset!.Value);
         }
     }
-    private static nint _LocalPoseOffset = -1;
+    private static nint? _LocalPoseOffset;
 
     public ref short LocalPose
     {
         get
         {
-            if (_LocalPoseOffset == -1) _LocalPoseOffset = Schema.GetOffset(0x1506328F70BF8111);
-            return ref _Handle.AsRef<short>(_LocalPoseOffset);
+            _LocalPoseOffset = _LocalPoseOffset ?? Schema.GetOffset(0x1506328F70BF8111);
+            return ref _Handle.AsRef<short>(_LocalPoseOffset!.Value);
         }
     }
-    private static nint _FlagsOffset = -1;
+    private static nint? _FlagsOffset;
     private CSeqAutoLayerFlagImpl? _FlagsInstance;
 
     public CSeqAutoLayerFlag Flags
     {
         get
         {
-            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0x1506328FDC74A14C);
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x1506328FDC74A14C);
             var instance = _FlagsInstance ??= new CSeqAutoLayerFlagImpl(0);
-            instance.DangerousSetHandle(_Handle + _FlagsOffset);
+            instance.DangerousSetHandle(_Handle + _FlagsOffset!.Value);
             return instance;
         }
     }
-    private static nint _StartOffset = -1;
+    private static nint? _StartOffset;
 
     public ref float Start
     {
         get
         {
-            if (_StartOffset == -1) _StartOffset = Schema.GetOffset(0x1506328FA539BEFF);
-            return ref _Handle.AsRef<float>(_StartOffset);
+            _StartOffset = _StartOffset ?? Schema.GetOffset(0x1506328FA539BEFF);
+            return ref _Handle.AsRef<float>(_StartOffset!.Value);
         }
     }
-    private static nint _PeakOffset = -1;
+    private static nint? _PeakOffset;
 
     public ref float Peak
     {
         get
         {
-            if (_PeakOffset == -1) _PeakOffset = Schema.GetOffset(0x1506328F5BAE16B2);
-            return ref _Handle.AsRef<float>(_PeakOffset);
+            _PeakOffset = _PeakOffset ?? Schema.GetOffset(0x1506328F5BAE16B2);
+            return ref _Handle.AsRef<float>(_PeakOffset!.Value);
         }
     }
-    private static nint _TailOffset = -1;
+    private static nint? _TailOffset;
 
     public ref float Tail
     {
         get
         {
-            if (_TailOffset == -1) _TailOffset = Schema.GetOffset(0x1506328FCF8F4203);
-            return ref _Handle.AsRef<float>(_TailOffset);
+            _TailOffset = _TailOffset ?? Schema.GetOffset(0x1506328FCF8F4203);
+            return ref _Handle.AsRef<float>(_TailOffset!.Value);
         }
     }
-    private static nint _EndOffset = -1;
+    private static nint? _EndOffset;
 
     public ref float End
     {
         get
         {
-            if (_EndOffset == -1) _EndOffset = Schema.GetOffset(0x1506328F5B29CFCA);
-            return ref _Handle.AsRef<float>(_EndOffset);
+            _EndOffset = _EndOffset ?? Schema.GetOffset(0x1506328F5B29CFCA);
+            return ref _Handle.AsRef<float>(_EndOffset!.Value);
         }
     }
 

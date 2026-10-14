@@ -16,206 +16,206 @@ internal partial class C_ColorCorrectionImpl : C_BaseEntityImpl, C_ColorCorrecti
 {
     public C_ColorCorrectionImpl(nint handle) : base(handle) { }
 
-    private static nint _OriginOffset = -1;
+    private static nint? _OriginOffset;
 
     public ref Vector Origin
     {
         get
         {
-            if (_OriginOffset == -1) _OriginOffset = Schema.GetOffset(0xA95D2742559D81AF);
-            return ref _Handle.AsRef<Vector>(_OriginOffset);
+            _OriginOffset = _OriginOffset ?? Schema.GetOffset(0xA95D2742559D81AF);
+            return ref _Handle.AsRef<Vector>(_OriginOffset!.Value);
         }
     }
-    private static nint _MinFalloffOffset = -1;
+    private static nint? _MinFalloffOffset;
 
     public ref float MinFalloff
     {
         get
         {
-            if (_MinFalloffOffset == -1) _MinFalloffOffset = Schema.GetOffset(0xA95D27426628F1F3);
-            return ref _Handle.AsRef<float>(_MinFalloffOffset);
+            _MinFalloffOffset = _MinFalloffOffset ?? Schema.GetOffset(0xA95D27426628F1F3);
+            return ref _Handle.AsRef<float>(_MinFalloffOffset!.Value);
         }
     }
-    private static nint _MaxFalloffOffset = -1;
+    private static nint? _MaxFalloffOffset;
 
     public ref float MaxFalloff
     {
         get
         {
-            if (_MaxFalloffOffset == -1) _MaxFalloffOffset = Schema.GetOffset(0xA95D27428837D7E1);
-            return ref _Handle.AsRef<float>(_MaxFalloffOffset);
+            _MaxFalloffOffset = _MaxFalloffOffset ?? Schema.GetOffset(0xA95D27428837D7E1);
+            return ref _Handle.AsRef<float>(_MaxFalloffOffset!.Value);
         }
     }
-    private static nint _FadeInDurationOffset = -1;
+    private static nint? _FadeInDurationOffset;
 
     public ref float FadeInDuration
     {
         get
         {
-            if (_FadeInDurationOffset == -1) _FadeInDurationOffset = Schema.GetOffset(0xA95D274201B5EB8E);
-            return ref _Handle.AsRef<float>(_FadeInDurationOffset);
+            _FadeInDurationOffset = _FadeInDurationOffset ?? Schema.GetOffset(0xA95D274201B5EB8E);
+            return ref _Handle.AsRef<float>(_FadeInDurationOffset!.Value);
         }
     }
-    private static nint _FadeOutDurationOffset = -1;
+    private static nint? _FadeOutDurationOffset;
 
     public ref float FadeOutDuration
     {
         get
         {
-            if (_FadeOutDurationOffset == -1) _FadeOutDurationOffset = Schema.GetOffset(0xA95D2742543512CF);
-            return ref _Handle.AsRef<float>(_FadeOutDurationOffset);
+            _FadeOutDurationOffset = _FadeOutDurationOffset ?? Schema.GetOffset(0xA95D2742543512CF);
+            return ref _Handle.AsRef<float>(_FadeOutDurationOffset!.Value);
         }
     }
-    private static nint _MaxWeightOffset = -1;
+    private static nint? _MaxWeightOffset;
 
     public ref float MaxWeight
     {
         get
         {
-            if (_MaxWeightOffset == -1) _MaxWeightOffset = Schema.GetOffset(0xA95D274255F00F23);
-            return ref _Handle.AsRef<float>(_MaxWeightOffset);
+            _MaxWeightOffset = _MaxWeightOffset ?? Schema.GetOffset(0xA95D274255F00F23);
+            return ref _Handle.AsRef<float>(_MaxWeightOffset!.Value);
         }
     }
-    private static nint _CurWeightOffset = -1;
+    private static nint? _CurWeightOffset;
 
     public ref float CurWeight
     {
         get
         {
-            if (_CurWeightOffset == -1) _CurWeightOffset = Schema.GetOffset(0xA95D27422EA7ED7F);
-            return ref _Handle.AsRef<float>(_CurWeightOffset);
+            _CurWeightOffset = _CurWeightOffset ?? Schema.GetOffset(0xA95D27422EA7ED7F);
+            return ref _Handle.AsRef<float>(_CurWeightOffset!.Value);
         }
     }
-    private static nint _NetlookupFilenameOffset = -1;
+    private static nint? _NetlookupFilenameOffset;
 
     public string NetlookupFilename
     {
         get
         {
-            if (_NetlookupFilenameOffset == -1) _NetlookupFilenameOffset = Schema.GetOffset(0xA95D2742543AB1EB);
-            return Schema.GetString(_Handle + _NetlookupFilenameOffset);
+            _NetlookupFilenameOffset = _NetlookupFilenameOffset ?? Schema.GetOffset(0xA95D2742543AB1EB);
+            return Schema.GetString(_Handle + _NetlookupFilenameOffset!.Value);
         }
         set
         {
-            if (_NetlookupFilenameOffset == -1) _NetlookupFilenameOffset = Schema.GetOffset(0xA95D2742543AB1EB);
-            Schema.SetFixedString(_Handle, _NetlookupFilenameOffset, value, 512);
+            _NetlookupFilenameOffset = _NetlookupFilenameOffset ?? Schema.GetOffset(0xA95D2742543AB1EB);
+            Schema.SetFixedString(_Handle, _NetlookupFilenameOffset!.Value, value, 512);
         }
     }
-    private static nint _EnabledOffset = -1;
+    private static nint? _EnabledOffset;
 
     public ref bool Enabled
     {
         get
         {
-            if (_EnabledOffset == -1) _EnabledOffset = Schema.GetOffset(0xA95D27426154EB7E);
-            return ref _Handle.AsRef<bool>(_EnabledOffset);
+            _EnabledOffset = _EnabledOffset ?? Schema.GetOffset(0xA95D27426154EB7E);
+            return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
         }
     }
-    private static nint _MasterOffset = -1;
+    private static nint? _MasterOffset;
 
     public ref bool Master
     {
         get
         {
-            if (_MasterOffset == -1) _MasterOffset = Schema.GetOffset(0xA95D27425AFF9193);
-            return ref _Handle.AsRef<bool>(_MasterOffset);
+            _MasterOffset = _MasterOffset ?? Schema.GetOffset(0xA95D27425AFF9193);
+            return ref _Handle.AsRef<bool>(_MasterOffset!.Value);
         }
     }
-    private static nint _ClientSideOffset = -1;
+    private static nint? _ClientSideOffset;
 
     public ref bool ClientSide
     {
         get
         {
-            if (_ClientSideOffset == -1) _ClientSideOffset = Schema.GetOffset(0xA95D27426B28362D);
-            return ref _Handle.AsRef<bool>(_ClientSideOffset);
+            _ClientSideOffset = _ClientSideOffset ?? Schema.GetOffset(0xA95D27426B28362D);
+            return ref _Handle.AsRef<bool>(_ClientSideOffset!.Value);
         }
     }
-    private static nint _ExclusiveOffset = -1;
+    private static nint? _ExclusiveOffset;
 
     public ref bool Exclusive
     {
         get
         {
-            if (_ExclusiveOffset == -1) _ExclusiveOffset = Schema.GetOffset(0xA95D2742D84BE6BB);
-            return ref _Handle.AsRef<bool>(_ExclusiveOffset);
+            _ExclusiveOffset = _ExclusiveOffset ?? Schema.GetOffset(0xA95D2742D84BE6BB);
+            return ref _Handle.AsRef<bool>(_ExclusiveOffset!.Value);
         }
     }
-    private static nint _EnabledOnClientOffset = -1;
+    private static nint? _EnabledOnClientOffset;
     private SchemaFixedArray<bool>? _EnabledOnClientInstance;
 
     public ISchemaFixedArray<bool> EnabledOnClient
     {
         get
         {
-            if (_EnabledOnClientOffset == -1) _EnabledOnClientOffset = Schema.GetOffset(0xA95D2742ABBEC018);
+            _EnabledOnClientOffset = _EnabledOnClientOffset ?? Schema.GetOffset(0xA95D2742ABBEC018);
             var instance = _EnabledOnClientInstance ??= new SchemaFixedArray<bool>(0, 0xA95D2742ABBEC018, 1, 1, 1);
-            instance.DangerousSetHandle(_Handle + _EnabledOnClientOffset);
+            instance.DangerousSetHandle(_Handle + _EnabledOnClientOffset!.Value);
             return instance;
         }
     }
-    private static nint _CurWeightOnClientOffset = -1;
+    private static nint? _CurWeightOnClientOffset;
     private SchemaFixedArray<float>? _CurWeightOnClientInstance;
 
     public ISchemaFixedArray<float> CurWeightOnClient
     {
         get
         {
-            if (_CurWeightOnClientOffset == -1) _CurWeightOnClientOffset = Schema.GetOffset(0xA95D27428A251FD9);
+            _CurWeightOnClientOffset = _CurWeightOnClientOffset ?? Schema.GetOffset(0xA95D27428A251FD9);
             var instance = _CurWeightOnClientInstance ??= new SchemaFixedArray<float>(0, 0xA95D27428A251FD9, 1, 4, 4);
-            instance.DangerousSetHandle(_Handle + _CurWeightOnClientOffset);
+            instance.DangerousSetHandle(_Handle + _CurWeightOnClientOffset!.Value);
             return instance;
         }
     }
-    private static nint _FadingInOffset = -1;
+    private static nint? _FadingInOffset;
     private SchemaFixedArray<bool>? _FadingInInstance;
 
     public ISchemaFixedArray<bool> FadingIn
     {
         get
         {
-            if (_FadingInOffset == -1) _FadingInOffset = Schema.GetOffset(0xA95D2742CB32336B);
+            _FadingInOffset = _FadingInOffset ?? Schema.GetOffset(0xA95D2742CB32336B);
             var instance = _FadingInInstance ??= new SchemaFixedArray<bool>(0, 0xA95D2742CB32336B, 1, 1, 1);
-            instance.DangerousSetHandle(_Handle + _FadingInOffset);
+            instance.DangerousSetHandle(_Handle + _FadingInOffset!.Value);
             return instance;
         }
     }
-    private static nint _FadeStartWeightOffset = -1;
+    private static nint? _FadeStartWeightOffset;
     private SchemaFixedArray<float>? _FadeStartWeightInstance;
 
     public ISchemaFixedArray<float> FadeStartWeight
     {
         get
         {
-            if (_FadeStartWeightOffset == -1) _FadeStartWeightOffset = Schema.GetOffset(0xA95D27422A15F9DF);
+            _FadeStartWeightOffset = _FadeStartWeightOffset ?? Schema.GetOffset(0xA95D27422A15F9DF);
             var instance = _FadeStartWeightInstance ??= new SchemaFixedArray<float>(0, 0xA95D27422A15F9DF, 1, 4, 4);
-            instance.DangerousSetHandle(_Handle + _FadeStartWeightOffset);
+            instance.DangerousSetHandle(_Handle + _FadeStartWeightOffset!.Value);
             return instance;
         }
     }
-    private static nint _FadeStartTimeOffset = -1;
+    private static nint? _FadeStartTimeOffset;
     private SchemaFixedArray<float>? _FadeStartTimeInstance;
 
     public ISchemaFixedArray<float> FadeStartTime
     {
         get
         {
-            if (_FadeStartTimeOffset == -1) _FadeStartTimeOffset = Schema.GetOffset(0xA95D274286B28BFA);
+            _FadeStartTimeOffset = _FadeStartTimeOffset ?? Schema.GetOffset(0xA95D274286B28BFA);
             var instance = _FadeStartTimeInstance ??= new SchemaFixedArray<float>(0, 0xA95D274286B28BFA, 1, 4, 4);
-            instance.DangerousSetHandle(_Handle + _FadeStartTimeOffset);
+            instance.DangerousSetHandle(_Handle + _FadeStartTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _FadeDurationOffset = -1;
+    private static nint? _FadeDurationOffset;
     private SchemaFixedArray<float>? _FadeDurationInstance;
 
     public ISchemaFixedArray<float> FadeDuration
     {
         get
         {
-            if (_FadeDurationOffset == -1) _FadeDurationOffset = Schema.GetOffset(0xA95D2742C4E6DEE1);
+            _FadeDurationOffset = _FadeDurationOffset ?? Schema.GetOffset(0xA95D2742C4E6DEE1);
             var instance = _FadeDurationInstance ??= new SchemaFixedArray<float>(0, 0xA95D2742C4E6DEE1, 1, 4, 4);
-            instance.DangerousSetHandle(_Handle + _FadeDurationOffset);
+            instance.DangerousSetHandle(_Handle + _FadeDurationOffset!.Value);
             return instance;
         }
     }

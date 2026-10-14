@@ -16,104 +16,104 @@ internal partial class RTProxyInstanceInfo_tImpl : SchemaClass, RTProxyInstanceI
 {
     public RTProxyInstanceInfo_tImpl(nint handle) : base(handle) { }
 
-    private static nint _FlagsOffset = -1;
+    private static nint? _FlagsOffset;
 
     public ref RTProxyInstanceFlags_t Flags
     {
         get
         {
-            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0x41A18F79CE6E9C28);
-            return ref _Handle.AsRef<RTProxyInstanceFlags_t>(_FlagsOffset);
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x41A18F79CE6E9C28);
+            return ref _Handle.AsRef<RTProxyInstanceFlags_t>(_FlagsOffset!.Value);
         }
     }
-    private static nint _AlbedoFormatOffset = -1;
+    private static nint? _AlbedoFormatOffset;
 
     public ref VertexAlbedoFormat_t AlbedoFormat
     {
         get
         {
-            if (_AlbedoFormatOffset == -1) _AlbedoFormatOffset = Schema.GetOffset(0x41A18F797162BF9B);
-            return ref _Handle.AsRef<VertexAlbedoFormat_t>(_AlbedoFormatOffset);
+            _AlbedoFormatOffset = _AlbedoFormatOffset ?? Schema.GetOffset(0x41A18F797162BF9B);
+            return ref _Handle.AsRef<VertexAlbedoFormat_t>(_AlbedoFormatOffset!.Value);
         }
     }
-    private static nint _EmissiveFormatOffset = -1;
+    private static nint? _EmissiveFormatOffset;
 
     public ref VertexAlbedoFormat_t EmissiveFormat
     {
         get
         {
-            if (_EmissiveFormatOffset == -1) _EmissiveFormatOffset = Schema.GetOffset(0x41A18F799F6D2A7D);
-            return ref _Handle.AsRef<VertexAlbedoFormat_t>(_EmissiveFormatOffset);
+            _EmissiveFormatOffset = _EmissiveFormatOffset ?? Schema.GetOffset(0x41A18F799F6D2A7D);
+            return ref _Handle.AsRef<VertexAlbedoFormat_t>(_EmissiveFormatOffset!.Value);
         }
     }
-    private static nint _BLASCountOffset = -1;
+    private static nint? _BLASCountOffset;
 
     public ref ushort BLASCount
     {
         get
         {
-            if (_BLASCountOffset == -1) _BLASCountOffset = Schema.GetOffset(0x41A18F794EC95C7A);
-            return ref _Handle.AsRef<ushort>(_BLASCountOffset);
+            _BLASCountOffset = _BLASCountOffset ?? Schema.GetOffset(0x41A18F794EC95C7A);
+            return ref _Handle.AsRef<ushort>(_BLASCountOffset!.Value);
         }
     }
-    private static nint _BLASIndexOffset = -1;
+    private static nint? _BLASIndexOffset;
 
     public ref uint BLASIndex
     {
         get
         {
-            if (_BLASIndexOffset == -1) _BLASIndexOffset = Schema.GetOffset(0x41A18F79AEAF4501);
-            return ref _Handle.AsRef<uint>(_BLASIndexOffset);
+            _BLASIndexOffset = _BLASIndexOffset ?? Schema.GetOffset(0x41A18F79AEAF4501);
+            return ref _Handle.AsRef<uint>(_BLASIndexOffset!.Value);
         }
     }
-    private static nint _VertexAlbedoByteOffsetOffset = -1;
+    private static nint? _VertexAlbedoByteOffsetOffset;
 
     public ref uint VertexAlbedoByteOffset
     {
         get
         {
-            if (_VertexAlbedoByteOffsetOffset == -1) _VertexAlbedoByteOffsetOffset = Schema.GetOffset(0x41A18F79F818F1FF);
-            return ref _Handle.AsRef<uint>(_VertexAlbedoByteOffsetOffset);
+            _VertexAlbedoByteOffsetOffset = _VertexAlbedoByteOffsetOffset ?? Schema.GetOffset(0x41A18F79F818F1FF);
+            return ref _Handle.AsRef<uint>(_VertexAlbedoByteOffsetOffset!.Value);
         }
     }
-    private static nint _VertexEmissiveByteOffsetOffset = -1;
+    private static nint? _VertexEmissiveByteOffsetOffset;
 
     public ref uint VertexEmissiveByteOffset
     {
         get
         {
-            if (_VertexEmissiveByteOffsetOffset == -1) _VertexEmissiveByteOffsetOffset = Schema.GetOffset(0x41A18F79C34241F5);
-            return ref _Handle.AsRef<uint>(_VertexEmissiveByteOffsetOffset);
+            _VertexEmissiveByteOffsetOffset = _VertexEmissiveByteOffsetOffset ?? Schema.GetOffset(0x41A18F79C34241F5);
+            return ref _Handle.AsRef<uint>(_VertexEmissiveByteOffsetOffset!.Value);
         }
     }
-    private static nint _EmissiveFactorOffset = -1;
+    private static nint? _EmissiveFactorOffset;
 
     public ref float EmissiveFactor
     {
         get
         {
-            if (_EmissiveFactorOffset == -1) _EmissiveFactorOffset = Schema.GetOffset(0x41A18F7939C67965);
-            return ref _Handle.AsRef<float>(_EmissiveFactorOffset);
+            _EmissiveFactorOffset = _EmissiveFactorOffset ?? Schema.GetOffset(0x41A18F7939C67965);
+            return ref _Handle.AsRef<float>(_EmissiveFactorOffset!.Value);
         }
     }
-    private static nint _MWorldFromLocalOffset = -1;
+    private static nint? _MWorldFromLocalOffset;
 
     public ref matrix3x4_t MWorldFromLocal
     {
         get
         {
-            if (_MWorldFromLocalOffset == -1) _MWorldFromLocalOffset = Schema.GetOffset(0x41A18F79296A78BF);
-            return ref _Handle.AsRef<matrix3x4_t>(_MWorldFromLocalOffset);
+            _MWorldFromLocalOffset = _MWorldFromLocalOffset ?? Schema.GetOffset(0x41A18F79296A78BF);
+            return ref _Handle.AsRef<matrix3x4_t>(_MWorldFromLocalOffset!.Value);
         }
     }
-    private static nint _TintColorSRGBOffset = -1;
+    private static nint? _TintColorSRGBOffset;
 
     public ref Color TintColorSRGB
     {
         get
         {
-            if (_TintColorSRGBOffset == -1) _TintColorSRGBOffset = Schema.GetOffset(0x41A18F79E2ADA627);
-            return ref _Handle.AsRef<Color>(_TintColorSRGBOffset);
+            _TintColorSRGBOffset = _TintColorSRGBOffset ?? Schema.GetOffset(0x41A18F79E2ADA627);
+            return ref _Handle.AsRef<Color>(_TintColorSRGBOffset!.Value);
         }
     }
 

@@ -16,44 +16,44 @@ internal partial class CPathMetricEvaluatorImpl : CMotionMetricEvaluatorImpl, CP
 {
     public CPathMetricEvaluatorImpl(nint handle) : base(handle) { }
 
-    private static nint _PathTimeSamplesOffset = -1;
+    private static nint? _PathTimeSamplesOffset;
 
     public ref CUtlVector<float> PathTimeSamples
     {
         get
         {
-            if (_PathTimeSamplesOffset == -1) _PathTimeSamplesOffset = Schema.GetOffset(0x6BF20F3A94DC552A);
-            return ref _Handle.AsRef<CUtlVector<float>>(_PathTimeSamplesOffset);
+            _PathTimeSamplesOffset = _PathTimeSamplesOffset ?? Schema.GetOffset(0x6BF20F3A94DC552A);
+            return ref _Handle.AsRef<CUtlVector<float>>(_PathTimeSamplesOffset!.Value);
         }
     }
-    private static nint _DistanceOffset = -1;
+    private static nint? _DistanceOffset;
 
     public ref float Distance
     {
         get
         {
-            if (_DistanceOffset == -1) _DistanceOffset = Schema.GetOffset(0x6BF20F3A00DC4A68);
-            return ref _Handle.AsRef<float>(_DistanceOffset);
+            _DistanceOffset = _DistanceOffset ?? Schema.GetOffset(0x6BF20F3A00DC4A68);
+            return ref _Handle.AsRef<float>(_DistanceOffset!.Value);
         }
     }
-    private static nint _ExtrapolateMovementOffset = -1;
+    private static nint? _ExtrapolateMovementOffset;
 
     public ref bool ExtrapolateMovement
     {
         get
         {
-            if (_ExtrapolateMovementOffset == -1) _ExtrapolateMovementOffset = Schema.GetOffset(0x6BF20F3ACBEE3025);
-            return ref _Handle.AsRef<bool>(_ExtrapolateMovementOffset);
+            _ExtrapolateMovementOffset = _ExtrapolateMovementOffset ?? Schema.GetOffset(0x6BF20F3ACBEE3025);
+            return ref _Handle.AsRef<bool>(_ExtrapolateMovementOffset!.Value);
         }
     }
-    private static nint _MinExtrapolationSpeedOffset = -1;
+    private static nint? _MinExtrapolationSpeedOffset;
 
     public ref float MinExtrapolationSpeed
     {
         get
         {
-            if (_MinExtrapolationSpeedOffset == -1) _MinExtrapolationSpeedOffset = Schema.GetOffset(0x6BF20F3A9F6FB95C);
-            return ref _Handle.AsRef<float>(_MinExtrapolationSpeedOffset);
+            _MinExtrapolationSpeedOffset = _MinExtrapolationSpeedOffset ?? Schema.GetOffset(0x6BF20F3A9F6FB95C);
+            return ref _Handle.AsRef<float>(_MinExtrapolationSpeedOffset!.Value);
         }
     }
 

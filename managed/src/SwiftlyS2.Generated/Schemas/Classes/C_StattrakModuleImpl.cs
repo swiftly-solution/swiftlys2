@@ -16,14 +16,14 @@ internal partial class C_StattrakModuleImpl : C_CS2WeaponModuleBaseImpl, C_Statt
 {
     public C_StattrakModuleImpl(nint handle) : base(handle) { }
 
-    private static nint _KnifeOffset = -1;
+    private static nint? _KnifeOffset;
 
     public ref bool Knife
     {
         get
         {
-            if (_KnifeOffset == -1) _KnifeOffset = Schema.GetOffset(0xDB379D9B34CE44BA);
-            return ref _Handle.AsRef<bool>(_KnifeOffset);
+            _KnifeOffset = _KnifeOffset ?? Schema.GetOffset(0xDB379D9B34CE44BA);
+            return ref _Handle.AsRef<bool>(_KnifeOffset!.Value);
         }
     }
 

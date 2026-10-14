@@ -16,54 +16,54 @@ internal partial class CNmGraphDocTargetControlParameterNodeImpl : CNmGraphDocCo
 {
     public CNmGraphDocTargetControlParameterNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _IsSetOffset = -1;
+    private static nint? _IsSetOffset;
 
     public ref bool IsSet
     {
         get
         {
-            if (_IsSetOffset == -1) _IsSetOffset = Schema.GetOffset(0x942A86F84307E3B3);
-            return ref _Handle.AsRef<bool>(_IsSetOffset);
+            _IsSetOffset = _IsSetOffset ?? Schema.GetOffset(0x942A86F84307E3B3);
+            return ref _Handle.AsRef<bool>(_IsSetOffset!.Value);
         }
     }
-    private static nint _IsBoneIDOffset = -1;
+    private static nint? _IsBoneIDOffset;
 
     public ref bool IsBoneID
     {
         get
         {
-            if (_IsBoneIDOffset == -1) _IsBoneIDOffset = Schema.GetOffset(0x942A86F8109A89D2);
-            return ref _Handle.AsRef<bool>(_IsBoneIDOffset);
+            _IsBoneIDOffset = _IsBoneIDOffset ?? Schema.GetOffset(0x942A86F8109A89D2);
+            return ref _Handle.AsRef<bool>(_IsBoneIDOffset!.Value);
         }
     }
-    private static nint _TargetOrientationOffset = -1;
+    private static nint? _TargetOrientationOffset;
 
     public ref QAngle TargetOrientation
     {
         get
         {
-            if (_TargetOrientationOffset == -1) _TargetOrientationOffset = Schema.GetOffset(0x942A86F873373E02);
-            return ref _Handle.AsRef<QAngle>(_TargetOrientationOffset);
+            _TargetOrientationOffset = _TargetOrientationOffset ?? Schema.GetOffset(0x942A86F873373E02);
+            return ref _Handle.AsRef<QAngle>(_TargetOrientationOffset!.Value);
         }
     }
-    private static nint _TargetPositionOffset = -1;
+    private static nint? _TargetPositionOffset;
 
     public ref Vector TargetPosition
     {
         get
         {
-            if (_TargetPositionOffset == -1) _TargetPositionOffset = Schema.GetOffset(0x942A86F88026C47B);
-            return ref _Handle.AsRef<Vector>(_TargetPositionOffset);
+            _TargetPositionOffset = _TargetPositionOffset ?? Schema.GetOffset(0x942A86F88026C47B);
+            return ref _Handle.AsRef<Vector>(_TargetPositionOffset!.Value);
         }
     }
-    private static nint _PreviewStartBoneIDOffset = -1;
+    private static nint? _PreviewStartBoneIDOffset;
 
     public ref CGlobalSymbol PreviewStartBoneID
     {
         get
         {
-            if (_PreviewStartBoneIDOffset == -1) _PreviewStartBoneIDOffset = Schema.GetOffset(0x942A86F873BAA76A);
-            return ref _Handle.AsRef<CGlobalSymbol>(_PreviewStartBoneIDOffset);
+            _PreviewStartBoneIDOffset = _PreviewStartBoneIDOffset ?? Schema.GetOffset(0x942A86F873BAA76A);
+            return ref _Handle.AsRef<CGlobalSymbol>(_PreviewStartBoneIDOffset!.Value);
         }
     }
 

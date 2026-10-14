@@ -16,29 +16,29 @@ internal partial class CBodyComponentImpl : CEntityComponentImpl, CBodyComponent
 {
     public CBodyComponentImpl(nint handle) : base(handle) { }
 
-    private static nint _SceneNodeOffset = -1;
+    private static nint? _SceneNodeOffset;
     private CGameSceneNodeImpl? _SceneNodeInstance;
 
     public CGameSceneNode? SceneNode
     {
         get
         {
-            if (_SceneNodeOffset == -1) _SceneNodeOffset = Schema.GetOffset(0x4EF2C865D7D13495);
-            var ptr = _Handle.Read<nint>(_SceneNodeOffset);
+            _SceneNodeOffset = _SceneNodeOffset ?? Schema.GetOffset(0x4EF2C865D7D13495);
+            var ptr = _Handle.Read<nint>(_SceneNodeOffset!.Value);
             if (!ptr.IsValidPtr()) return null;
             var instance = _SceneNodeInstance ??= new CGameSceneNodeImpl(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint ___m_pChainEntityOffset = -1;
+    private static nint? ___m_pChainEntityOffset;
 
     public ref CNetworkVarChainer __m_pChainEntity
     {
         get
         {
-            if (___m_pChainEntityOffset == -1) ___m_pChainEntityOffset = Schema.GetOffset(0x4EF2C865F63F0E7D);
-            return ref _Handle.AsRef<CNetworkVarChainer>(___m_pChainEntityOffset);
+            ___m_pChainEntityOffset = ___m_pChainEntityOffset ?? Schema.GetOffset(0x4EF2C865F63F0E7D);
+            return ref _Handle.AsRef<CNetworkVarChainer>(___m_pChainEntityOffset!.Value);
         }
     }
 

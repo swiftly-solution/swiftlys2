@@ -16,24 +16,24 @@ internal partial class ConfigIndexImpl : SchemaClass, ConfigIndex
 {
     public ConfigIndexImpl(nint handle) : base(handle) { }
 
-    private static nint _GroupOffset = -1;
+    private static nint? _GroupOffset;
 
     public ref ushort Group
     {
         get
         {
-            if (_GroupOffset == -1) _GroupOffset = Schema.GetOffset(0x193FE40D0CD16308);
-            return ref _Handle.AsRef<ushort>(_GroupOffset);
+            _GroupOffset = _GroupOffset ?? Schema.GetOffset(0x193FE40D0CD16308);
+            return ref _Handle.AsRef<ushort>(_GroupOffset!.Value);
         }
     }
-    private static nint _ConfigOffset = -1;
+    private static nint? _ConfigOffset;
 
     public ref ushort Config
     {
         get
         {
-            if (_ConfigOffset == -1) _ConfigOffset = Schema.GetOffset(0x193FE40D8BD1DF73);
-            return ref _Handle.AsRef<ushort>(_ConfigOffset);
+            _ConfigOffset = _ConfigOffset ?? Schema.GetOffset(0x193FE40D8BD1DF73);
+            return ref _Handle.AsRef<ushort>(_ConfigOffset!.Value);
         }
     }
 

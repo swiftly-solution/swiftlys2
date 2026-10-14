@@ -16,69 +16,69 @@ internal partial class CPointHurtImpl : CPointEntityImpl, CPointHurt
 {
     public CPointHurtImpl(nint handle) : base(handle) { }
 
-    private static nint _DamageOffset = -1;
+    private static nint? _DamageOffset;
 
     public ref int Damage
     {
         get
         {
-            if (_DamageOffset == -1) _DamageOffset = Schema.GetOffset(0x4FEAE151C56D69C);
-            return ref _Handle.AsRef<int>(_DamageOffset);
+            _DamageOffset = _DamageOffset ?? Schema.GetOffset(0x4FEAE151C56D69C);
+            return ref _Handle.AsRef<int>(_DamageOffset!.Value);
         }
     }
-    private static nint _BitsDamageTypeOffset = -1;
+    private static nint? _BitsDamageTypeOffset;
 
     public ref DamageTypes_t BitsDamageType
     {
         get
         {
-            if (_BitsDamageTypeOffset == -1) _BitsDamageTypeOffset = Schema.GetOffset(0x4FEAE15EEAC35FC);
-            return ref _Handle.AsRef<DamageTypes_t>(_BitsDamageTypeOffset);
+            _BitsDamageTypeOffset = _BitsDamageTypeOffset ?? Schema.GetOffset(0x4FEAE15EEAC35FC);
+            return ref _Handle.AsRef<DamageTypes_t>(_BitsDamageTypeOffset!.Value);
         }
     }
-    private static nint _RadiusOffset = -1;
+    private static nint? _RadiusOffset;
 
     public ref float Radius
     {
         get
         {
-            if (_RadiusOffset == -1) _RadiusOffset = Schema.GetOffset(0x4FEAE155ACFC08D);
-            return ref _Handle.AsRef<float>(_RadiusOffset);
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x4FEAE155ACFC08D);
+            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
         }
     }
-    private static nint _DelayOffset = -1;
+    private static nint? _DelayOffset;
 
     public ref float Delay
     {
         get
         {
-            if (_DelayOffset == -1) _DelayOffset = Schema.GetOffset(0x4FEAE157D68FD6E);
-            return ref _Handle.AsRef<float>(_DelayOffset);
+            _DelayOffset = _DelayOffset ?? Schema.GetOffset(0x4FEAE157D68FD6E);
+            return ref _Handle.AsRef<float>(_DelayOffset!.Value);
         }
     }
-    private static nint _StrTargetOffset = -1;
+    private static nint? _StrTargetOffset;
 
     public string StrTarget
     {
         get
         {
-            if (_StrTargetOffset == -1) _StrTargetOffset = Schema.GetOffset(0x4FEAE15B8F64879);
-            return Schema.GetString(_Handle.Read<nint>(_StrTargetOffset));
+            _StrTargetOffset = _StrTargetOffset ?? Schema.GetOffset(0x4FEAE15B8F64879);
+            return Schema.GetString(_Handle.Read<nint>(_StrTargetOffset!.Value));
         }
         set
         {
-            if (_StrTargetOffset == -1) _StrTargetOffset = Schema.GetOffset(0x4FEAE15B8F64879);
-            Schema.SetString(_Handle, _StrTargetOffset, value);
+            _StrTargetOffset = _StrTargetOffset ?? Schema.GetOffset(0x4FEAE15B8F64879);
+            Schema.SetString(_Handle, _StrTargetOffset!.Value, value);
         }
     }
-    private static nint _ActivatorOffset = -1;
+    private static nint? _ActivatorOffset;
 
     public ref CHandle<CBaseEntity> Activator
     {
         get
         {
-            if (_ActivatorOffset == -1) _ActivatorOffset = Schema.GetOffset(0x4FEAE159C480B5A);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_ActivatorOffset);
+            _ActivatorOffset = _ActivatorOffset ?? Schema.GetOffset(0x4FEAE159C480B5A);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_ActivatorOffset!.Value);
         }
     }
 

@@ -16,219 +16,219 @@ internal partial class View3DOptionsEditableData_tImpl : SchemaClass, View3DOpti
 {
     public View3DOptionsEditableData_tImpl(nint handle) : base(handle) { }
 
-    private static nint _ReverseYOffset = -1;
+    private static nint? _ReverseYOffset;
 
     public ref bool ReverseY
     {
         get
         {
-            if (_ReverseYOffset == -1) _ReverseYOffset = Schema.GetOffset(0x30BD08C867EC24D4);
-            return ref _Handle.AsRef<bool>(_ReverseYOffset);
+            _ReverseYOffset = _ReverseYOffset ?? Schema.GetOffset(0x30BD08C867EC24D4);
+            return ref _Handle.AsRef<bool>(_ReverseYOffset!.Value);
         }
     }
-    private static nint _PanSpeedOffset = -1;
+    private static nint? _PanSpeedOffset;
 
     public ref float PanSpeed
     {
         get
         {
-            if (_PanSpeedOffset == -1) _PanSpeedOffset = Schema.GetOffset(0x30BD08C8DAE20D41);
-            return ref _Handle.AsRef<float>(_PanSpeedOffset);
+            _PanSpeedOffset = _PanSpeedOffset ?? Schema.GetOffset(0x30BD08C8DAE20D41);
+            return ref _Handle.AsRef<float>(_PanSpeedOffset!.Value);
         }
     }
-    private static nint _RotationScaleOffset = -1;
+    private static nint? _RotationScaleOffset;
 
     public ref float RotationScale
     {
         get
         {
-            if (_RotationScaleOffset == -1) _RotationScaleOffset = Schema.GetOffset(0x30BD08C83A11A8E5);
-            return ref _Handle.AsRef<float>(_RotationScaleOffset);
+            _RotationScaleOffset = _RotationScaleOffset ?? Schema.GetOffset(0x30BD08C83A11A8E5);
+            return ref _Handle.AsRef<float>(_RotationScaleOffset!.Value);
         }
     }
-    private static nint _ForwardSpeedMaxOffset = -1;
+    private static nint? _ForwardSpeedMaxOffset;
 
     public ref int ForwardSpeedMax
     {
         get
         {
-            if (_ForwardSpeedMaxOffset == -1) _ForwardSpeedMaxOffset = Schema.GetOffset(0x30BD08C8A8808605);
-            return ref _Handle.AsRef<int>(_ForwardSpeedMaxOffset);
+            _ForwardSpeedMaxOffset = _ForwardSpeedMaxOffset ?? Schema.GetOffset(0x30BD08C8A8808605);
+            return ref _Handle.AsRef<int>(_ForwardSpeedMaxOffset!.Value);
         }
     }
-    private static nint _TimeToMaxSpeedOffset = -1;
+    private static nint? _TimeToMaxSpeedOffset;
 
     public ref int TimeToMaxSpeed
     {
         get
         {
-            if (_TimeToMaxSpeedOffset == -1) _TimeToMaxSpeedOffset = Schema.GetOffset(0x30BD08C830F80300);
-            return ref _Handle.AsRef<int>(_TimeToMaxSpeedOffset);
+            _TimeToMaxSpeedOffset = _TimeToMaxSpeedOffset ?? Schema.GetOffset(0x30BD08C830F80300);
+            return ref _Handle.AsRef<int>(_TimeToMaxSpeedOffset!.Value);
         }
     }
-    private static nint _FOVOffset = -1;
+    private static nint? _FOVOffset;
 
     public ref int FOV
     {
         get
         {
-            if (_FOVOffset == -1) _FOVOffset = Schema.GetOffset(0x30BD08C803544F6E);
-            return ref _Handle.AsRef<int>(_FOVOffset);
+            _FOVOffset = _FOVOffset ?? Schema.GetOffset(0x30BD08C803544F6E);
+            return ref _Handle.AsRef<int>(_FOVOffset!.Value);
         }
     }
-    private static nint _ResolutionGateOffset = -1;
+    private static nint? _ResolutionGateOffset;
 
     public string ResolutionGate
     {
         get
         {
-            if (_ResolutionGateOffset == -1) _ResolutionGateOffset = Schema.GetOffset(0x30BD08C84823B475);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ResolutionGateOffset));
+            _ResolutionGateOffset = _ResolutionGateOffset ?? Schema.GetOffset(0x30BD08C84823B475);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ResolutionGateOffset!.Value));
         }
         set
         {
-            if (_ResolutionGateOffset == -1) _ResolutionGateOffset = Schema.GetOffset(0x30BD08C84823B475);
-            Schema.SetCUtlString(_Handle, _ResolutionGateOffset, value);
+            _ResolutionGateOffset = _ResolutionGateOffset ?? Schema.GetOffset(0x30BD08C84823B475);
+            Schema.SetCUtlString(_Handle, _ResolutionGateOffset!.Value, value);
         }
     }
-    private static nint _BackPlaneOffset = -1;
+    private static nint? _BackPlaneOffset;
 
     public ref int BackPlane
     {
         get
         {
-            if (_BackPlaneOffset == -1) _BackPlaneOffset = Schema.GetOffset(0x30BD08C8F8A86E37);
-            return ref _Handle.AsRef<int>(_BackPlaneOffset);
+            _BackPlaneOffset = _BackPlaneOffset ?? Schema.GetOffset(0x30BD08C8F8A86E37);
+            return ref _Handle.AsRef<int>(_BackPlaneOffset!.Value);
         }
     }
-    private static nint _NearPlaneOffset = -1;
+    private static nint? _NearPlaneOffset;
 
     public ref float NearPlane
     {
         get
         {
-            if (_NearPlaneOffset == -1) _NearPlaneOffset = Schema.GetOffset(0x30BD08C84375A481);
-            return ref _Handle.AsRef<float>(_NearPlaneOffset);
+            _NearPlaneOffset = _NearPlaneOffset ?? Schema.GetOffset(0x30BD08C84375A481);
+            return ref _Handle.AsRef<float>(_NearPlaneOffset!.Value);
         }
     }
-    private static nint _ShadowFarPlaneOffset = -1;
+    private static nint? _ShadowFarPlaneOffset;
 
     public ref float ShadowFarPlane
     {
         get
         {
-            if (_ShadowFarPlaneOffset == -1) _ShadowFarPlaneOffset = Schema.GetOffset(0x30BD08C8C5FB52DE);
-            return ref _Handle.AsRef<float>(_ShadowFarPlaneOffset);
+            _ShadowFarPlaneOffset = _ShadowFarPlaneOffset ?? Schema.GetOffset(0x30BD08C8C5FB52DE);
+            return ref _Handle.AsRef<float>(_ShadowFarPlaneOffset!.Value);
         }
     }
-    private static nint _MouseWheelControlsFarPlaneOffset = -1;
+    private static nint? _MouseWheelControlsFarPlaneOffset;
 
     public ref bool MouseWheelControlsFarPlane
     {
         get
         {
-            if (_MouseWheelControlsFarPlaneOffset == -1) _MouseWheelControlsFarPlaneOffset = Schema.GetOffset(0x30BD08C846794FE8);
-            return ref _Handle.AsRef<bool>(_MouseWheelControlsFarPlaneOffset);
+            _MouseWheelControlsFarPlaneOffset = _MouseWheelControlsFarPlaneOffset ?? Schema.GetOffset(0x30BD08C846794FE8);
+            return ref _Handle.AsRef<bool>(_MouseWheelControlsFarPlaneOffset!.Value);
         }
     }
-    private static nint _MouseMoveZoomSensitivityOffset = -1;
+    private static nint? _MouseMoveZoomSensitivityOffset;
 
     public ref int MouseMoveZoomSensitivity
     {
         get
         {
-            if (_MouseMoveZoomSensitivityOffset == -1) _MouseMoveZoomSensitivityOffset = Schema.GetOffset(0x30BD08C8F147CB49);
-            return ref _Handle.AsRef<int>(_MouseMoveZoomSensitivityOffset);
+            _MouseMoveZoomSensitivityOffset = _MouseMoveZoomSensitivityOffset ?? Schema.GetOffset(0x30BD08C8F147CB49);
+            return ref _Handle.AsRef<int>(_MouseMoveZoomSensitivityOffset!.Value);
         }
     }
-    private static nint _MouseWheelZoomSensitivityOffset = -1;
+    private static nint? _MouseWheelZoomSensitivityOffset;
 
     public ref int MouseWheelZoomSensitivity
     {
         get
         {
-            if (_MouseWheelZoomSensitivityOffset == -1) _MouseWheelZoomSensitivityOffset = Schema.GetOffset(0x30BD08C8D982E83B);
-            return ref _Handle.AsRef<int>(_MouseWheelZoomSensitivityOffset);
+            _MouseWheelZoomSensitivityOffset = _MouseWheelZoomSensitivityOffset ?? Schema.GetOffset(0x30BD08C8D982E83B);
+            return ref _Handle.AsRef<int>(_MouseWheelZoomSensitivityOffset!.Value);
         }
     }
-    private static nint _CameraTargetDistOffset = -1;
+    private static nint? _CameraTargetDistOffset;
 
     public ref int CameraTargetDist
     {
         get
         {
-            if (_CameraTargetDistOffset == -1) _CameraTargetDistOffset = Schema.GetOffset(0x30BD08C891F061FB);
-            return ref _Handle.AsRef<int>(_CameraTargetDistOffset);
+            _CameraTargetDistOffset = _CameraTargetDistOffset ?? Schema.GetOffset(0x30BD08C891F061FB);
+            return ref _Handle.AsRef<int>(_CameraTargetDistOffset!.Value);
         }
     }
-    private static nint _GridIntensityOffset = -1;
+    private static nint? _GridIntensityOffset;
 
     public ref int GridIntensity
     {
         get
         {
-            if (_GridIntensityOffset == -1) _GridIntensityOffset = Schema.GetOffset(0x30BD08C842AE0495);
-            return ref _Handle.AsRef<int>(_GridIntensityOffset);
+            _GridIntensityOffset = _GridIntensityOffset ?? Schema.GetOffset(0x30BD08C842AE0495);
+            return ref _Handle.AsRef<int>(_GridIntensityOffset!.Value);
         }
     }
-    private static nint _SelectionOverlayAlphaOffset = -1;
+    private static nint? _SelectionOverlayAlphaOffset;
 
     public ref float SelectionOverlayAlpha
     {
         get
         {
-            if (_SelectionOverlayAlphaOffset == -1) _SelectionOverlayAlphaOffset = Schema.GetOffset(0x30BD08C834FCCB49);
-            return ref _Handle.AsRef<float>(_SelectionOverlayAlphaOffset);
+            _SelectionOverlayAlphaOffset = _SelectionOverlayAlphaOffset ?? Schema.GetOffset(0x30BD08C834FCCB49);
+            return ref _Handle.AsRef<float>(_SelectionOverlayAlphaOffset!.Value);
         }
     }
-    private static nint _ShowSelectionOutlineOffset = -1;
+    private static nint? _ShowSelectionOutlineOffset;
 
     public ref bool ShowSelectionOutline
     {
         get
         {
-            if (_ShowSelectionOutlineOffset == -1) _ShowSelectionOutlineOffset = Schema.GetOffset(0x30BD08C82FD381EC);
-            return ref _Handle.AsRef<bool>(_ShowSelectionOutlineOffset);
+            _ShowSelectionOutlineOffset = _ShowSelectionOutlineOffset ?? Schema.GetOffset(0x30BD08C82FD381EC);
+            return ref _Handle.AsRef<bool>(_ShowSelectionOutlineOffset!.Value);
         }
     }
-    private static nint _SelectionOutlineDepthOffset = -1;
+    private static nint? _SelectionOutlineDepthOffset;
 
     public ref bool SelectionOutlineDepth
     {
         get
         {
-            if (_SelectionOutlineDepthOffset == -1) _SelectionOutlineDepthOffset = Schema.GetOffset(0x30BD08C85AC37012);
-            return ref _Handle.AsRef<bool>(_SelectionOutlineDepthOffset);
+            _SelectionOutlineDepthOffset = _SelectionOutlineDepthOffset ?? Schema.GetOffset(0x30BD08C85AC37012);
+            return ref _Handle.AsRef<bool>(_SelectionOutlineDepthOffset!.Value);
         }
     }
-    private static nint _ToolsVisSSAORadiusScaleOffset = -1;
+    private static nint? _ToolsVisSSAORadiusScaleOffset;
 
     public ref float ToolsVisSSAORadiusScale
     {
         get
         {
-            if (_ToolsVisSSAORadiusScaleOffset == -1) _ToolsVisSSAORadiusScaleOffset = Schema.GetOffset(0x30BD08C8DDAECB4C);
-            return ref _Handle.AsRef<float>(_ToolsVisSSAORadiusScaleOffset);
+            _ToolsVisSSAORadiusScaleOffset = _ToolsVisSSAORadiusScaleOffset ?? Schema.GetOffset(0x30BD08C8DDAECB4C);
+            return ref _Handle.AsRef<float>(_ToolsVisSSAORadiusScaleOffset!.Value);
         }
     }
-    private static nint _ToolsVisSSAOPowerScaleOffset = -1;
+    private static nint? _ToolsVisSSAOPowerScaleOffset;
 
     public ref float ToolsVisSSAOPowerScale
     {
         get
         {
-            if (_ToolsVisSSAOPowerScaleOffset == -1) _ToolsVisSSAOPowerScaleOffset = Schema.GetOffset(0x30BD08C84D40D545);
-            return ref _Handle.AsRef<float>(_ToolsVisSSAOPowerScaleOffset);
+            _ToolsVisSSAOPowerScaleOffset = _ToolsVisSSAOPowerScaleOffset ?? Schema.GetOffset(0x30BD08C84D40D545);
+            return ref _Handle.AsRef<float>(_ToolsVisSSAOPowerScaleOffset!.Value);
         }
     }
-    private static nint _PostProcessingEnabledOffset = -1;
+    private static nint? _PostProcessingEnabledOffset;
 
     public ref bool PostProcessingEnabled
     {
         get
         {
-            if (_PostProcessingEnabledOffset == -1) _PostProcessingEnabledOffset = Schema.GetOffset(0x30BD08C89AA2E2A5);
-            return ref _Handle.AsRef<bool>(_PostProcessingEnabledOffset);
+            _PostProcessingEnabledOffset = _PostProcessingEnabledOffset ?? Schema.GetOffset(0x30BD08C89AA2E2A5);
+            return ref _Handle.AsRef<bool>(_PostProcessingEnabledOffset!.Value);
         }
     }
 

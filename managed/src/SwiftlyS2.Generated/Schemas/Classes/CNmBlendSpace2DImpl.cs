@@ -16,44 +16,44 @@ internal partial class CNmBlendSpace2DImpl : SchemaClass, CNmBlendSpace2D
 {
     public CNmBlendSpace2DImpl(nint handle) : base(handle) { }
 
-    private static nint _PointNamesOffset = -1;
+    private static nint? _PointNamesOffset;
 
     public ref CUtlVector<CUtlString> PointNames
     {
         get
         {
-            if (_PointNamesOffset == -1) _PointNamesOffset = Schema.GetOffset(0xA7446D628F9867BB);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_PointNamesOffset);
+            _PointNamesOffset = _PointNamesOffset ?? Schema.GetOffset(0xA7446D628F9867BB);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_PointNamesOffset!.Value);
         }
     }
-    private static nint _PointsOffset = -1;
+    private static nint? _PointsOffset;
 
     public ref CUtlVector<Vector2D> Points
     {
         get
         {
-            if (_PointsOffset == -1) _PointsOffset = Schema.GetOffset(0xA7446D6218915D66);
-            return ref _Handle.AsRef<CUtlVector<Vector2D>>(_PointsOffset);
+            _PointsOffset = _PointsOffset ?? Schema.GetOffset(0xA7446D6218915D66);
+            return ref _Handle.AsRef<CUtlVector<Vector2D>>(_PointsOffset!.Value);
         }
     }
-    private static nint _IndicesOffset = -1;
+    private static nint? _IndicesOffset;
 
     public ref CUtlVector<byte> Indices
     {
         get
         {
-            if (_IndicesOffset == -1) _IndicesOffset = Schema.GetOffset(0xA7446D62CF5DEE92);
-            return ref _Handle.AsRef<CUtlVector<byte>>(_IndicesOffset);
+            _IndicesOffset = _IndicesOffset ?? Schema.GetOffset(0xA7446D62CF5DEE92);
+            return ref _Handle.AsRef<CUtlVector<byte>>(_IndicesOffset!.Value);
         }
     }
-    private static nint _HullIndicesOffset = -1;
+    private static nint? _HullIndicesOffset;
 
     public ref CUtlVector<byte> HullIndices
     {
         get
         {
-            if (_HullIndicesOffset == -1) _HullIndicesOffset = Schema.GetOffset(0xA7446D62A014D83B);
-            return ref _Handle.AsRef<CUtlVector<byte>>(_HullIndicesOffset);
+            _HullIndicesOffset = _HullIndicesOffset ?? Schema.GetOffset(0xA7446D62A014D83B);
+            return ref _Handle.AsRef<CUtlVector<byte>>(_HullIndicesOffset!.Value);
         }
     }
 

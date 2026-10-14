@@ -16,44 +16,44 @@ internal partial class VMixPitchShiftDesc_tImpl : SchemaClass, VMixPitchShiftDes
 {
     public VMixPitchShiftDesc_tImpl(nint handle) : base(handle) { }
 
-    private static nint _GrainSampleCountOffset = -1;
+    private static nint? _GrainSampleCountOffset;
 
     public ref int GrainSampleCount
     {
         get
         {
-            if (_GrainSampleCountOffset == -1) _GrainSampleCountOffset = Schema.GetOffset(0xE7EEA08D6AA1D059);
-            return ref _Handle.AsRef<int>(_GrainSampleCountOffset);
+            _GrainSampleCountOffset = _GrainSampleCountOffset ?? Schema.GetOffset(0xE7EEA08D6AA1D059);
+            return ref _Handle.AsRef<int>(_GrainSampleCountOffset!.Value);
         }
     }
-    private static nint _PitchShiftOffset = -1;
+    private static nint? _PitchShiftOffset;
 
     public ref float PitchShift
     {
         get
         {
-            if (_PitchShiftOffset == -1) _PitchShiftOffset = Schema.GetOffset(0xE7EEA08DD8E35569);
-            return ref _Handle.AsRef<float>(_PitchShiftOffset);
+            _PitchShiftOffset = _PitchShiftOffset ?? Schema.GetOffset(0xE7EEA08DD8E35569);
+            return ref _Handle.AsRef<float>(_PitchShiftOffset!.Value);
         }
     }
-    private static nint _QualityOffset = -1;
+    private static nint? _QualityOffset;
 
     public ref int Quality
     {
         get
         {
-            if (_QualityOffset == -1) _QualityOffset = Schema.GetOffset(0xE7EEA08D60857B42);
-            return ref _Handle.AsRef<int>(_QualityOffset);
+            _QualityOffset = _QualityOffset ?? Schema.GetOffset(0xE7EEA08D60857B42);
+            return ref _Handle.AsRef<int>(_QualityOffset!.Value);
         }
     }
-    private static nint _ProcTypeOffset = -1;
+    private static nint? _ProcTypeOffset;
 
     public ref int ProcType
     {
         get
         {
-            if (_ProcTypeOffset == -1) _ProcTypeOffset = Schema.GetOffset(0xE7EEA08DB256235D);
-            return ref _Handle.AsRef<int>(_ProcTypeOffset);
+            _ProcTypeOffset = _ProcTypeOffset ?? Schema.GetOffset(0xE7EEA08DB256235D);
+            return ref _Handle.AsRef<int>(_ProcTypeOffset!.Value);
         }
     }
 

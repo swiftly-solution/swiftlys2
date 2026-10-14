@@ -16,62 +16,62 @@ internal partial class CEnvGlobalImpl : CLogicalEntityImpl, CEnvGlobal
 {
     public CEnvGlobalImpl(nint handle) : base(handle) { }
 
-    private static nint _OutCounterOffset = -1;
+    private static nint? _OutCounterOffset;
     private SchemaUntypedField? _OutCounterInstance;
 
     public SchemaUntypedField OutCounter
     {
         get
         {
-            if (_OutCounterOffset == -1) _OutCounterOffset = Schema.GetOffset(0xC5E41E3E69415251);
+            _OutCounterOffset = _OutCounterOffset ?? Schema.GetOffset(0xC5E41E3E69415251);
             var instance = _OutCounterInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OutCounterOffset);
+            instance.DangerousSetHandle(_Handle + _OutCounterOffset!.Value);
             return instance;
         }
     }
-    private static nint _GlobalstateOffset = -1;
+    private static nint? _GlobalstateOffset;
 
     public string Globalstate
     {
         get
         {
-            if (_GlobalstateOffset == -1) _GlobalstateOffset = Schema.GetOffset(0xC5E41E3E77A86653);
-            return Schema.GetString(_Handle.Read<nint>(_GlobalstateOffset));
+            _GlobalstateOffset = _GlobalstateOffset ?? Schema.GetOffset(0xC5E41E3E77A86653);
+            return Schema.GetString(_Handle.Read<nint>(_GlobalstateOffset!.Value));
         }
         set
         {
-            if (_GlobalstateOffset == -1) _GlobalstateOffset = Schema.GetOffset(0xC5E41E3E77A86653);
-            Schema.SetString(_Handle, _GlobalstateOffset, value);
+            _GlobalstateOffset = _GlobalstateOffset ?? Schema.GetOffset(0xC5E41E3E77A86653);
+            Schema.SetString(_Handle, _GlobalstateOffset!.Value, value);
         }
     }
-    private static nint _TriggermodeOffset = -1;
+    private static nint? _TriggermodeOffset;
 
     public ref int Triggermode
     {
         get
         {
-            if (_TriggermodeOffset == -1) _TriggermodeOffset = Schema.GetOffset(0xC5E41E3E845DF22C);
-            return ref _Handle.AsRef<int>(_TriggermodeOffset);
+            _TriggermodeOffset = _TriggermodeOffset ?? Schema.GetOffset(0xC5E41E3E845DF22C);
+            return ref _Handle.AsRef<int>(_TriggermodeOffset!.Value);
         }
     }
-    private static nint _InitialstateOffset = -1;
+    private static nint? _InitialstateOffset;
 
     public ref int Initialstate
     {
         get
         {
-            if (_InitialstateOffset == -1) _InitialstateOffset = Schema.GetOffset(0xC5E41E3E1E997294);
-            return ref _Handle.AsRef<int>(_InitialstateOffset);
+            _InitialstateOffset = _InitialstateOffset ?? Schema.GetOffset(0xC5E41E3E1E997294);
+            return ref _Handle.AsRef<int>(_InitialstateOffset!.Value);
         }
     }
-    private static nint _CounterOffset = -1;
+    private static nint? _CounterOffset;
 
     public ref int Counter
     {
         get
         {
-            if (_CounterOffset == -1) _CounterOffset = Schema.GetOffset(0xC5E41E3EA311A543);
-            return ref _Handle.AsRef<int>(_CounterOffset);
+            _CounterOffset = _CounterOffset ?? Schema.GetOffset(0xC5E41E3EA311A543);
+            return ref _Handle.AsRef<int>(_CounterOffset!.Value);
         }
     }
 

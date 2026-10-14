@@ -16,28 +16,28 @@ internal partial class CVoiceContainerBaseImpl : SchemaClass, CVoiceContainerBas
 {
     public CVoiceContainerBaseImpl(nint handle) : base(handle) { }
 
-    private static nint _SoundOffset = -1;
+    private static nint? _SoundOffset;
     private CVSoundImpl? _SoundInstance;
 
     public CVSound Sound
     {
         get
         {
-            if (_SoundOffset == -1) _SoundOffset = Schema.GetOffset(0x9D65DC3663C1A950);
+            _SoundOffset = _SoundOffset ?? Schema.GetOffset(0x9D65DC3663C1A950);
             var instance = _SoundInstance ??= new CVSoundImpl(0);
-            instance.DangerousSetHandle(_Handle + _SoundOffset);
+            instance.DangerousSetHandle(_Handle + _SoundOffset!.Value);
             return instance;
         }
     }
-    private static nint _EnvelopeAnalyzerOffset = -1;
+    private static nint? _EnvelopeAnalyzerOffset;
     private CVoiceContainerAnalysisBaseImpl? _EnvelopeAnalyzerInstance;
 
     public CVoiceContainerAnalysisBase? EnvelopeAnalyzer
     {
         get
         {
-            if (_EnvelopeAnalyzerOffset == -1) _EnvelopeAnalyzerOffset = Schema.GetOffset(0x9D65DC362102947D);
-            var ptr = _Handle.Read<nint>(_EnvelopeAnalyzerOffset);
+            _EnvelopeAnalyzerOffset = _EnvelopeAnalyzerOffset ?? Schema.GetOffset(0x9D65DC362102947D);
+            var ptr = _Handle.Read<nint>(_EnvelopeAnalyzerOffset!.Value);
             if (!ptr.IsValidPtr()) return null;
             var instance = _EnvelopeAnalyzerInstance ??= new CVoiceContainerAnalysisBaseImpl(0);
             instance.DangerousSetHandle(ptr);

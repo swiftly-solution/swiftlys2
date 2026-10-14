@@ -16,64 +16,64 @@ internal partial class SPAWNGROUP_HEADERImpl : SchemaClass, SPAWNGROUP_HEADER
 {
     public SPAWNGROUP_HEADERImpl(nint handle) : base(handle) { }
 
-    private static nint _GroupNameOffset = -1;
+    private static nint? _GroupNameOffset;
 
     public string GroupName
     {
         get
         {
-            if (_GroupNameOffset == -1) _GroupNameOffset = Schema.GetOffset(0x2E01B7B958F7B716);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_GroupNameOffset));
+            _GroupNameOffset = _GroupNameOffset ?? Schema.GetOffset(0x2E01B7B958F7B716);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_GroupNameOffset!.Value));
         }
         set
         {
-            if (_GroupNameOffset == -1) _GroupNameOffset = Schema.GetOffset(0x2E01B7B958F7B716);
-            Schema.SetCUtlString(_Handle, _GroupNameOffset, value);
+            _GroupNameOffset = _GroupNameOffset ?? Schema.GetOffset(0x2E01B7B958F7B716);
+            Schema.SetCUtlString(_Handle, _GroupNameOffset!.Value, value);
         }
     }
-    private static nint _EntityLumpNameOffset = -1;
+    private static nint? _EntityLumpNameOffset;
 
     public string EntityLumpName
     {
         get
         {
-            if (_EntityLumpNameOffset == -1) _EntityLumpNameOffset = Schema.GetOffset(0x2E01B7B9DE736A98);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_EntityLumpNameOffset));
+            _EntityLumpNameOffset = _EntityLumpNameOffset ?? Schema.GetOffset(0x2E01B7B9DE736A98);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_EntityLumpNameOffset!.Value));
         }
         set
         {
-            if (_EntityLumpNameOffset == -1) _EntityLumpNameOffset = Schema.GetOffset(0x2E01B7B9DE736A98);
-            Schema.SetCUtlString(_Handle, _EntityLumpNameOffset, value);
+            _EntityLumpNameOffset = _EntityLumpNameOffset ?? Schema.GetOffset(0x2E01B7B9DE736A98);
+            Schema.SetCUtlString(_Handle, _EntityLumpNameOffset!.Value, value);
         }
     }
-    private static nint _WorldOffsetOffset = -1;
+    private static nint? _WorldOffsetOffset;
 
     public ref matrix3x4_t WorldOffset
     {
         get
         {
-            if (_WorldOffsetOffset == -1) _WorldOffsetOffset = Schema.GetOffset(0x2E01B7B983450700);
-            return ref _Handle.AsRef<matrix3x4_t>(_WorldOffsetOffset);
+            _WorldOffsetOffset = _WorldOffsetOffset ?? Schema.GetOffset(0x2E01B7B983450700);
+            return ref _Handle.AsRef<matrix3x4_t>(_WorldOffsetOffset!.Value);
         }
     }
-    private static nint _ClientSpawnGroupOffset = -1;
+    private static nint? _ClientSpawnGroupOffset;
 
     public ref bool ClientSpawnGroup
     {
         get
         {
-            if (_ClientSpawnGroupOffset == -1) _ClientSpawnGroupOffset = Schema.GetOffset(0x2E01B7B9E83030E4);
-            return ref _Handle.AsRef<bool>(_ClientSpawnGroupOffset);
+            _ClientSpawnGroupOffset = _ClientSpawnGroupOffset ?? Schema.GetOffset(0x2E01B7B9E83030E4);
+            return ref _Handle.AsRef<bool>(_ClientSpawnGroupOffset!.Value);
         }
     }
-    private static nint _SuppressAllEntitiesOffset = -1;
+    private static nint? _SuppressAllEntitiesOffset;
 
     public ref bool SuppressAllEntities
     {
         get
         {
-            if (_SuppressAllEntitiesOffset == -1) _SuppressAllEntitiesOffset = Schema.GetOffset(0x2E01B7B93755331A);
-            return ref _Handle.AsRef<bool>(_SuppressAllEntitiesOffset);
+            _SuppressAllEntitiesOffset = _SuppressAllEntitiesOffset ?? Schema.GetOffset(0x2E01B7B93755331A);
+            return ref _Handle.AsRef<bool>(_SuppressAllEntitiesOffset!.Value);
         }
     }
 

@@ -16,46 +16,46 @@ internal partial class C_INIT_CreateFromCPsImpl : CParticleFunctionInitializerIm
 {
     public C_INIT_CreateFromCPsImpl(nint handle) : base(handle) { }
 
-    private static nint _IncrementOffset = -1;
+    private static nint? _IncrementOffset;
 
     public ref int Increment
     {
         get
         {
-            if (_IncrementOffset == -1) _IncrementOffset = Schema.GetOffset(0x2593FF962359F182);
-            return ref _Handle.AsRef<int>(_IncrementOffset);
+            _IncrementOffset = _IncrementOffset ?? Schema.GetOffset(0x2593FF962359F182);
+            return ref _Handle.AsRef<int>(_IncrementOffset!.Value);
         }
     }
-    private static nint _MinCPOffset = -1;
+    private static nint? _MinCPOffset;
 
     public ref int MinCP
     {
         get
         {
-            if (_MinCPOffset == -1) _MinCPOffset = Schema.GetOffset(0x2593FF9663AFBE98);
-            return ref _Handle.AsRef<int>(_MinCPOffset);
+            _MinCPOffset = _MinCPOffset ?? Schema.GetOffset(0x2593FF9663AFBE98);
+            return ref _Handle.AsRef<int>(_MinCPOffset!.Value);
         }
     }
-    private static nint _MaxCPOffset = -1;
+    private static nint? _MaxCPOffset;
 
     public ref int MaxCP
     {
         get
         {
-            if (_MaxCPOffset == -1) _MaxCPOffset = Schema.GetOffset(0x2593FF964C307D96);
-            return ref _Handle.AsRef<int>(_MaxCPOffset);
+            _MaxCPOffset = _MaxCPOffset ?? Schema.GetOffset(0x2593FF964C307D96);
+            return ref _Handle.AsRef<int>(_MaxCPOffset!.Value);
         }
     }
-    private static nint _DynamicCPCountOffset = -1;
+    private static nint? _DynamicCPCountOffset;
     private CParticleCollectionFloatInputImpl? _DynamicCPCountInstance;
 
     public CParticleCollectionFloatInput DynamicCPCount
     {
         get
         {
-            if (_DynamicCPCountOffset == -1) _DynamicCPCountOffset = Schema.GetOffset(0x2593FF96DF30CE38);
+            _DynamicCPCountOffset = _DynamicCPCountOffset ?? Schema.GetOffset(0x2593FF96DF30CE38);
             var instance = _DynamicCPCountInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _DynamicCPCountOffset);
+            instance.DangerousSetHandle(_Handle + _DynamicCPCountOffset!.Value);
             return instance;
         }
     }

@@ -16,37 +16,37 @@ internal partial class C_OP_RemapVelocityToVectorImpl : CParticleFunctionOperato
 {
     public C_OP_RemapVelocityToVectorImpl(nint handle) : base(handle) { }
 
-    private static nint _FieldOutputOffset = -1;
+    private static nint? _FieldOutputOffset;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0x3985F683E5729606);
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x3985F683E5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
             return instance;
         }
     }
-    private static nint _ScaleOffset = -1;
+    private static nint? _ScaleOffset;
 
     public ref float Scale
     {
         get
         {
-            if (_ScaleOffset == -1) _ScaleOffset = Schema.GetOffset(0x3985F683B731A42F);
-            return ref _Handle.AsRef<float>(_ScaleOffset);
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x3985F683B731A42F);
+            return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
         }
     }
-    private static nint _NormalizeOffset = -1;
+    private static nint? _NormalizeOffset;
 
     public ref bool Normalize
     {
         get
         {
-            if (_NormalizeOffset == -1) _NormalizeOffset = Schema.GetOffset(0x3985F68348BC424C);
-            return ref _Handle.AsRef<bool>(_NormalizeOffset);
+            _NormalizeOffset = _NormalizeOffset ?? Schema.GetOffset(0x3985F68348BC424C);
+            return ref _Handle.AsRef<bool>(_NormalizeOffset!.Value);
         }
     }
 

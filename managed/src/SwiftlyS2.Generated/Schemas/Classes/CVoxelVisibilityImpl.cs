@@ -16,151 +16,151 @@ internal partial class CVoxelVisibilityImpl : SchemaClass, CVoxelVisibility
 {
     public CVoxelVisibilityImpl(nint handle) : base(handle) { }
 
-    private static nint _BaseClusterCountOffset = -1;
+    private static nint? _BaseClusterCountOffset;
 
     public ref uint BaseClusterCount
     {
         get
         {
-            if (_BaseClusterCountOffset == -1) _BaseClusterCountOffset = Schema.GetOffset(0xDA27CA12A16788C5);
-            return ref _Handle.AsRef<uint>(_BaseClusterCountOffset);
+            _BaseClusterCountOffset = _BaseClusterCountOffset ?? Schema.GetOffset(0xDA27CA12A16788C5);
+            return ref _Handle.AsRef<uint>(_BaseClusterCountOffset!.Value);
         }
     }
-    private static nint _PVSBytesPerClusterOffset = -1;
+    private static nint? _PVSBytesPerClusterOffset;
 
     public ref uint PVSBytesPerCluster
     {
         get
         {
-            if (_PVSBytesPerClusterOffset == -1) _PVSBytesPerClusterOffset = Schema.GetOffset(0xDA27CA122C2340E0);
-            return ref _Handle.AsRef<uint>(_PVSBytesPerClusterOffset);
+            _PVSBytesPerClusterOffset = _PVSBytesPerClusterOffset ?? Schema.GetOffset(0xDA27CA122C2340E0);
+            return ref _Handle.AsRef<uint>(_PVSBytesPerClusterOffset!.Value);
         }
     }
-    private static nint _MinBoundsOffset = -1;
+    private static nint? _MinBoundsOffset;
 
     public ref Vector MinBounds
     {
         get
         {
-            if (_MinBoundsOffset == -1) _MinBoundsOffset = Schema.GetOffset(0xDA27CA12114799FE);
-            return ref _Handle.AsRef<Vector>(_MinBoundsOffset);
+            _MinBoundsOffset = _MinBoundsOffset ?? Schema.GetOffset(0xDA27CA12114799FE);
+            return ref _Handle.AsRef<Vector>(_MinBoundsOffset!.Value);
         }
     }
-    private static nint _MaxBoundsOffset = -1;
+    private static nint? _MaxBoundsOffset;
 
     public ref Vector MaxBounds
     {
         get
         {
-            if (_MaxBoundsOffset == -1) _MaxBoundsOffset = Schema.GetOffset(0xDA27CA12C0B4CE60);
-            return ref _Handle.AsRef<Vector>(_MaxBoundsOffset);
+            _MaxBoundsOffset = _MaxBoundsOffset ?? Schema.GetOffset(0xDA27CA12C0B4CE60);
+            return ref _Handle.AsRef<Vector>(_MaxBoundsOffset!.Value);
         }
     }
-    private static nint _GridSizeOffset = -1;
+    private static nint? _GridSizeOffset;
 
     public ref float GridSize
     {
         get
         {
-            if (_GridSizeOffset == -1) _GridSizeOffset = Schema.GetOffset(0xDA27CA12975208C2);
-            return ref _Handle.AsRef<float>(_GridSizeOffset);
+            _GridSizeOffset = _GridSizeOffset ?? Schema.GetOffset(0xDA27CA12975208C2);
+            return ref _Handle.AsRef<float>(_GridSizeOffset!.Value);
         }
     }
-    private static nint _SkyVisibilityClusterOffset = -1;
+    private static nint? _SkyVisibilityClusterOffset;
 
     public ref uint SkyVisibilityCluster
     {
         get
         {
-            if (_SkyVisibilityClusterOffset == -1) _SkyVisibilityClusterOffset = Schema.GetOffset(0xDA27CA12B43BF514);
-            return ref _Handle.AsRef<uint>(_SkyVisibilityClusterOffset);
+            _SkyVisibilityClusterOffset = _SkyVisibilityClusterOffset ?? Schema.GetOffset(0xDA27CA12B43BF514);
+            return ref _Handle.AsRef<uint>(_SkyVisibilityClusterOffset!.Value);
         }
     }
-    private static nint _SunVisibilityClusterOffset = -1;
+    private static nint? _SunVisibilityClusterOffset;
 
     public ref uint SunVisibilityCluster
     {
         get
         {
-            if (_SunVisibilityClusterOffset == -1) _SunVisibilityClusterOffset = Schema.GetOffset(0xDA27CA12848C92AD);
-            return ref _Handle.AsRef<uint>(_SunVisibilityClusterOffset);
+            _SunVisibilityClusterOffset = _SunVisibilityClusterOffset ?? Schema.GetOffset(0xDA27CA12848C92AD);
+            return ref _Handle.AsRef<uint>(_SunVisibilityClusterOffset!.Value);
         }
     }
-    private static nint _NodeBlockOffset = -1;
+    private static nint? _NodeBlockOffset;
     private VoxelVisBlockOffset_tImpl? _NodeBlockInstance;
 
     public VoxelVisBlockOffset_t NodeBlock
     {
         get
         {
-            if (_NodeBlockOffset == -1) _NodeBlockOffset = Schema.GetOffset(0xDA27CA12A64594EA);
+            _NodeBlockOffset = _NodeBlockOffset ?? Schema.GetOffset(0xDA27CA12A64594EA);
             var instance = _NodeBlockInstance ??= new VoxelVisBlockOffset_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _NodeBlockOffset);
+            instance.DangerousSetHandle(_Handle + _NodeBlockOffset!.Value);
             return instance;
         }
     }
-    private static nint _RegionBlockOffset = -1;
+    private static nint? _RegionBlockOffset;
     private VoxelVisBlockOffset_tImpl? _RegionBlockInstance;
 
     public VoxelVisBlockOffset_t RegionBlock
     {
         get
         {
-            if (_RegionBlockOffset == -1) _RegionBlockOffset = Schema.GetOffset(0xDA27CA121918C67A);
+            _RegionBlockOffset = _RegionBlockOffset ?? Schema.GetOffset(0xDA27CA121918C67A);
             var instance = _RegionBlockInstance ??= new VoxelVisBlockOffset_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _RegionBlockOffset);
+            instance.DangerousSetHandle(_Handle + _RegionBlockOffset!.Value);
             return instance;
         }
     }
-    private static nint _EnclosedClusterListBlockOffset = -1;
+    private static nint? _EnclosedClusterListBlockOffset;
     private VoxelVisBlockOffset_tImpl? _EnclosedClusterListBlockInstance;
 
     public VoxelVisBlockOffset_t EnclosedClusterListBlock
     {
         get
         {
-            if (_EnclosedClusterListBlockOffset == -1) _EnclosedClusterListBlockOffset = Schema.GetOffset(0xDA27CA121F5DD1A9);
+            _EnclosedClusterListBlockOffset = _EnclosedClusterListBlockOffset ?? Schema.GetOffset(0xDA27CA121F5DD1A9);
             var instance = _EnclosedClusterListBlockInstance ??= new VoxelVisBlockOffset_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _EnclosedClusterListBlockOffset);
+            instance.DangerousSetHandle(_Handle + _EnclosedClusterListBlockOffset!.Value);
             return instance;
         }
     }
-    private static nint _EnclosedClustersBlockOffset = -1;
+    private static nint? _EnclosedClustersBlockOffset;
     private VoxelVisBlockOffset_tImpl? _EnclosedClustersBlockInstance;
 
     public VoxelVisBlockOffset_t EnclosedClustersBlock
     {
         get
         {
-            if (_EnclosedClustersBlockOffset == -1) _EnclosedClustersBlockOffset = Schema.GetOffset(0xDA27CA12F75E07CE);
+            _EnclosedClustersBlockOffset = _EnclosedClustersBlockOffset ?? Schema.GetOffset(0xDA27CA12F75E07CE);
             var instance = _EnclosedClustersBlockInstance ??= new VoxelVisBlockOffset_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _EnclosedClustersBlockOffset);
+            instance.DangerousSetHandle(_Handle + _EnclosedClustersBlockOffset!.Value);
             return instance;
         }
     }
-    private static nint _MasksBlockOffset = -1;
+    private static nint? _MasksBlockOffset;
     private VoxelVisBlockOffset_tImpl? _MasksBlockInstance;
 
     public VoxelVisBlockOffset_t MasksBlock
     {
         get
         {
-            if (_MasksBlockOffset == -1) _MasksBlockOffset = Schema.GetOffset(0xDA27CA121853F2AB);
+            _MasksBlockOffset = _MasksBlockOffset ?? Schema.GetOffset(0xDA27CA121853F2AB);
             var instance = _MasksBlockInstance ??= new VoxelVisBlockOffset_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _MasksBlockOffset);
+            instance.DangerousSetHandle(_Handle + _MasksBlockOffset!.Value);
             return instance;
         }
     }
-    private static nint _VisBlocksOffset = -1;
+    private static nint? _VisBlocksOffset;
     private VoxelVisBlockOffset_tImpl? _VisBlocksInstance;
 
     public VoxelVisBlockOffset_t VisBlocks
     {
         get
         {
-            if (_VisBlocksOffset == -1) _VisBlocksOffset = Schema.GetOffset(0xDA27CA128C69D893);
+            _VisBlocksOffset = _VisBlocksOffset ?? Schema.GetOffset(0xDA27CA128C69D893);
             var instance = _VisBlocksInstance ??= new VoxelVisBlockOffset_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _VisBlocksOffset);
+            instance.DangerousSetHandle(_Handle + _VisBlocksOffset!.Value);
             return instance;
         }
     }

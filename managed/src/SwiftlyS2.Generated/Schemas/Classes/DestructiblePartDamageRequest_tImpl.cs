@@ -16,104 +16,104 @@ internal partial class DestructiblePartDamageRequest_tImpl : SchemaClass, Destru
 {
     public DestructiblePartDamageRequest_tImpl(nint handle) : base(handle) { }
 
-    private static nint _HitGroupOffset = -1;
+    private static nint? _HitGroupOffset;
 
     public ref HitGroup_t HitGroup
     {
         get
         {
-            if (_HitGroupOffset == -1) _HitGroupOffset = Schema.GetOffset(0x5336DA079C854D19);
-            return ref _Handle.AsRef<HitGroup_t>(_HitGroupOffset);
+            _HitGroupOffset = _HitGroupOffset ?? Schema.GetOffset(0x5336DA079C854D19);
+            return ref _Handle.AsRef<HitGroup_t>(_HitGroupOffset!.Value);
         }
     }
-    private static nint _DamageLevelOffset = -1;
+    private static nint? _DamageLevelOffset;
 
     public ref int DamageLevel
     {
         get
         {
-            if (_DamageLevelOffset == -1) _DamageLevelOffset = Schema.GetOffset(0x5336DA07864ED662);
-            return ref _Handle.AsRef<int>(_DamageLevelOffset);
+            _DamageLevelOffset = _DamageLevelOffset ?? Schema.GetOffset(0x5336DA07864ED662);
+            return ref _Handle.AsRef<int>(_DamageLevelOffset!.Value);
         }
     }
-    private static nint _DesiredHealthOffset = -1;
+    private static nint? _DesiredHealthOffset;
 
     public ref ushort DesiredHealth
     {
         get
         {
-            if (_DesiredHealthOffset == -1) _DesiredHealthOffset = Schema.GetOffset(0x5336DA07CEA03A9B);
-            return ref _Handle.AsRef<ushort>(_DesiredHealthOffset);
+            _DesiredHealthOffset = _DesiredHealthOffset ?? Schema.GetOffset(0x5336DA07CEA03A9B);
+            return ref _Handle.AsRef<ushort>(_DesiredHealthOffset!.Value);
         }
     }
-    private static nint _DestroyFlagsOffset = -1;
+    private static nint? _DestroyFlagsOffset;
 
     public ref EDestructibleParts_DestroyParameterFlags DestroyFlags
     {
         get
         {
-            if (_DestroyFlagsOffset == -1) _DestroyFlagsOffset = Schema.GetOffset(0x5336DA07F89DCF50);
-            return ref _Handle.AsRef<EDestructibleParts_DestroyParameterFlags>(_DestroyFlagsOffset);
+            _DestroyFlagsOffset = _DestroyFlagsOffset ?? Schema.GetOffset(0x5336DA07F89DCF50);
+            return ref _Handle.AsRef<EDestructibleParts_DestroyParameterFlags>(_DestroyFlagsOffset!.Value);
         }
     }
-    private static nint _DamageTypeOffset = -1;
+    private static nint? _DamageTypeOffset;
 
     public ref DamageTypes_t DamageType
     {
         get
         {
-            if (_DamageTypeOffset == -1) _DamageTypeOffset = Schema.GetOffset(0x5336DA07A9599F54);
-            return ref _Handle.AsRef<DamageTypes_t>(_DamageTypeOffset);
+            _DamageTypeOffset = _DamageTypeOffset ?? Schema.GetOffset(0x5336DA07A9599F54);
+            return ref _Handle.AsRef<DamageTypes_t>(_DamageTypeOffset!.Value);
         }
     }
-    private static nint _BreakDamageOffset = -1;
+    private static nint? _BreakDamageOffset;
 
     public ref float BreakDamage
     {
         get
         {
-            if (_BreakDamageOffset == -1) _BreakDamageOffset = Schema.GetOffset(0x5336DA07021CFDCF);
-            return ref _Handle.AsRef<float>(_BreakDamageOffset);
+            _BreakDamageOffset = _BreakDamageOffset ?? Schema.GetOffset(0x5336DA07021CFDCF);
+            return ref _Handle.AsRef<float>(_BreakDamageOffset!.Value);
         }
     }
-    private static nint _BreakDamageRadiusOffset = -1;
+    private static nint? _BreakDamageRadiusOffset;
 
     public ref float BreakDamageRadius
     {
         get
         {
-            if (_BreakDamageRadiusOffset == -1) _BreakDamageRadiusOffset = Schema.GetOffset(0x5336DA07C0AA950D);
-            return ref _Handle.AsRef<float>(_BreakDamageRadiusOffset);
+            _BreakDamageRadiusOffset = _BreakDamageRadiusOffset ?? Schema.GetOffset(0x5336DA07C0AA950D);
+            return ref _Handle.AsRef<float>(_BreakDamageRadiusOffset!.Value);
         }
     }
-    private static nint _AttackerOffset = -1;
+    private static nint? _AttackerOffset;
 
     public ref CHandle<C_BaseEntity> Attacker
     {
         get
         {
-            if (_AttackerOffset == -1) _AttackerOffset = Schema.GetOffset(0x5336DA0768573D54);
-            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_AttackerOffset);
+            _AttackerOffset = _AttackerOffset ?? Schema.GetOffset(0x5336DA0768573D54);
+            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_AttackerOffset!.Value);
         }
     }
-    private static nint _WsBreakDamageOriginOffset = -1;
+    private static nint? _WsBreakDamageOriginOffset;
 
     public ref Vector WsBreakDamageOrigin
     {
         get
         {
-            if (_WsBreakDamageOriginOffset == -1) _WsBreakDamageOriginOffset = Schema.GetOffset(0x5336DA07F20E5215);
-            return ref _Handle.AsRef<Vector>(_WsBreakDamageOriginOffset);
+            _WsBreakDamageOriginOffset = _WsBreakDamageOriginOffset ?? Schema.GetOffset(0x5336DA07F20E5215);
+            return ref _Handle.AsRef<Vector>(_WsBreakDamageOriginOffset!.Value);
         }
     }
-    private static nint _WsBreakDamageForceOffset = -1;
+    private static nint? _WsBreakDamageForceOffset;
 
     public ref Vector WsBreakDamageForce
     {
         get
         {
-            if (_WsBreakDamageForceOffset == -1) _WsBreakDamageForceOffset = Schema.GetOffset(0x5336DA074F35F496);
-            return ref _Handle.AsRef<Vector>(_WsBreakDamageForceOffset);
+            _WsBreakDamageForceOffset = _WsBreakDamageForceOffset ?? Schema.GetOffset(0x5336DA074F35F496);
+            return ref _Handle.AsRef<Vector>(_WsBreakDamageForceOffset!.Value);
         }
     }
 

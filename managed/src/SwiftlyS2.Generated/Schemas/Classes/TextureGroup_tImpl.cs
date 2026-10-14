@@ -16,102 +16,102 @@ internal partial class TextureGroup_tImpl : SchemaClass, TextureGroup_t
 {
     public TextureGroup_tImpl(nint handle) : base(handle) { }
 
-    private static nint _EnabledOffset = -1;
+    private static nint? _EnabledOffset;
 
     public ref bool Enabled
     {
         get
         {
-            if (_EnabledOffset == -1) _EnabledOffset = Schema.GetOffset(0x3186D8346154EB7E);
-            return ref _Handle.AsRef<bool>(_EnabledOffset);
+            _EnabledOffset = _EnabledOffset ?? Schema.GetOffset(0x3186D8346154EB7E);
+            return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
         }
     }
-    private static nint _ReplaceTextureWithGradientOffset = -1;
+    private static nint? _ReplaceTextureWithGradientOffset;
 
     public ref bool ReplaceTextureWithGradient
     {
         get
         {
-            if (_ReplaceTextureWithGradientOffset == -1) _ReplaceTextureWithGradientOffset = Schema.GetOffset(0x3186D8344E3CBC5A);
-            return ref _Handle.AsRef<bool>(_ReplaceTextureWithGradientOffset);
+            _ReplaceTextureWithGradientOffset = _ReplaceTextureWithGradientOffset ?? Schema.GetOffset(0x3186D8344E3CBC5A);
+            return ref _Handle.AsRef<bool>(_ReplaceTextureWithGradientOffset!.Value);
         }
     }
-    private static nint _TextureOffset = -1;
+    private static nint? _TextureOffset;
 
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> Texture
     {
         get
         {
-            if (_TextureOffset == -1) _TextureOffset = Schema.GetOffset(0x3186D8348C0A2FB6);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureOffset);
+            _TextureOffset = _TextureOffset ?? Schema.GetOffset(0x3186D8348C0A2FB6);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureOffset!.Value);
         }
     }
-    private static nint _GradientOffset = -1;
+    private static nint? _GradientOffset;
     private SchemaUntypedField? _GradientInstance;
 
     public SchemaUntypedField Gradient
     {
         get
         {
-            if (_GradientOffset == -1) _GradientOffset = Schema.GetOffset(0x3186D83405C95F25);
+            _GradientOffset = _GradientOffset ?? Schema.GetOffset(0x3186D83405C95F25);
             var instance = _GradientInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _GradientOffset);
+            instance.DangerousSetHandle(_Handle + _GradientOffset!.Value);
             return instance;
         }
     }
-    private static nint _TextureTypeOffset = -1;
+    private static nint? _TextureTypeOffset;
 
     public ref SpriteCardTextureType_t TextureType
     {
         get
         {
-            if (_TextureTypeOffset == -1) _TextureTypeOffset = Schema.GetOffset(0x3186D834499BE6C8);
-            return ref _Handle.AsRef<SpriteCardTextureType_t>(_TextureTypeOffset);
+            _TextureTypeOffset = _TextureTypeOffset ?? Schema.GetOffset(0x3186D834499BE6C8);
+            return ref _Handle.AsRef<SpriteCardTextureType_t>(_TextureTypeOffset!.Value);
         }
     }
-    private static nint _TextureChannelsOffset = -1;
+    private static nint? _TextureChannelsOffset;
 
     public ref SpriteCardTextureChannel_t TextureChannels
     {
         get
         {
-            if (_TextureChannelsOffset == -1) _TextureChannelsOffset = Schema.GetOffset(0x3186D834AB4AA2E8);
-            return ref _Handle.AsRef<SpriteCardTextureChannel_t>(_TextureChannelsOffset);
+            _TextureChannelsOffset = _TextureChannelsOffset ?? Schema.GetOffset(0x3186D834AB4AA2E8);
+            return ref _Handle.AsRef<SpriteCardTextureChannel_t>(_TextureChannelsOffset!.Value);
         }
     }
-    private static nint _TextureBlendModeOffset = -1;
+    private static nint? _TextureBlendModeOffset;
 
     public ref ParticleTextureLayerBlendType_t TextureBlendMode
     {
         get
         {
-            if (_TextureBlendModeOffset == -1) _TextureBlendModeOffset = Schema.GetOffset(0x3186D83467D79D64);
-            return ref _Handle.AsRef<ParticleTextureLayerBlendType_t>(_TextureBlendModeOffset);
+            _TextureBlendModeOffset = _TextureBlendModeOffset ?? Schema.GetOffset(0x3186D83467D79D64);
+            return ref _Handle.AsRef<ParticleTextureLayerBlendType_t>(_TextureBlendModeOffset!.Value);
         }
     }
-    private static nint _TextureBlendOffset = -1;
+    private static nint? _TextureBlendOffset;
     private CParticleCollectionRendererFloatInputImpl? _TextureBlendInstance;
 
     public CParticleCollectionRendererFloatInput TextureBlend
     {
         get
         {
-            if (_TextureBlendOffset == -1) _TextureBlendOffset = Schema.GetOffset(0x3186D8343577569D);
+            _TextureBlendOffset = _TextureBlendOffset ?? Schema.GetOffset(0x3186D8343577569D);
             var instance = _TextureBlendInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _TextureBlendOffset);
+            instance.DangerousSetHandle(_Handle + _TextureBlendOffset!.Value);
             return instance;
         }
     }
-    private static nint _TextureControlsOffset = -1;
+    private static nint? _TextureControlsOffset;
     private TextureControls_tImpl? _TextureControlsInstance;
 
     public TextureControls_t TextureControls
     {
         get
         {
-            if (_TextureControlsOffset == -1) _TextureControlsOffset = Schema.GetOffset(0x3186D834AD3B9D2E);
+            _TextureControlsOffset = _TextureControlsOffset ?? Schema.GetOffset(0x3186D834AD3B9D2E);
             var instance = _TextureControlsInstance ??= new TextureControls_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _TextureControlsOffset);
+            instance.DangerousSetHandle(_Handle + _TextureControlsOffset!.Value);
             return instance;
         }
     }

@@ -16,24 +16,24 @@ internal partial class CNmGraphDocBoneMaskNodeImpl : CNmGraphDocVariationDataNod
 {
     public CNmGraphDocBoneMaskNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _MaskIDOffset = -1;
+    private static nint? _MaskIDOffset;
 
     public ref CGlobalSymbol MaskID
     {
         get
         {
-            if (_MaskIDOffset == -1) _MaskIDOffset = Schema.GetOffset(0xA94E9E37D9A7AFCC);
-            return ref _Handle.AsRef<CGlobalSymbol>(_MaskIDOffset);
+            _MaskIDOffset = _MaskIDOffset ?? Schema.GetOffset(0xA94E9E37D9A7AFCC);
+            return ref _Handle.AsRef<CGlobalSymbol>(_MaskIDOffset!.Value);
         }
     }
-    private static nint _IsOptionalMaskOffset = -1;
+    private static nint? _IsOptionalMaskOffset;
 
     public ref bool IsOptionalMask
     {
         get
         {
-            if (_IsOptionalMaskOffset == -1) _IsOptionalMaskOffset = Schema.GetOffset(0xA94E9E37A633FA85);
-            return ref _Handle.AsRef<bool>(_IsOptionalMaskOffset);
+            _IsOptionalMaskOffset = _IsOptionalMaskOffset ?? Schema.GetOffset(0xA94E9E37A633FA85);
+            return ref _Handle.AsRef<bool>(_IsOptionalMaskOffset!.Value);
         }
     }
 

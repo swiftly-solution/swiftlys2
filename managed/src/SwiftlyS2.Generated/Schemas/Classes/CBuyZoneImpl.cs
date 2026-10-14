@@ -16,14 +16,14 @@ internal partial class CBuyZoneImpl : CBaseTriggerImpl, CBuyZone
 {
     public CBuyZoneImpl(nint handle) : base(handle) { }
 
-    private static nint _LegacyTeamNumOffset = -1;
+    private static nint? _LegacyTeamNumOffset;
 
     public ref int LegacyTeamNum
     {
         get
         {
-            if (_LegacyTeamNumOffset == -1) _LegacyTeamNumOffset = Schema.GetOffset(0xB8D4DAC44C92565);
-            return ref _Handle.AsRef<int>(_LegacyTeamNumOffset);
+            _LegacyTeamNumOffset = _LegacyTeamNumOffset ?? Schema.GetOffset(0xB8D4DAC44C92565);
+            return ref _Handle.AsRef<int>(_LegacyTeamNumOffset!.Value);
         }
     }
 

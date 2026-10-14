@@ -16,14 +16,14 @@ internal partial class CLightRigPostProcessingImpl : SchemaClass, CLightRigPostP
 {
     public CLightRigPostProcessingImpl(nint handle) : base(handle) { }
 
-    private static nint _PostProcessingOffset = -1;
+    private static nint? _PostProcessingOffset;
 
     public ref CStrongHandle<InfoForResourceTypeCPostProcessingResource> PostProcessing
     {
         get
         {
-            if (_PostProcessingOffset == -1) _PostProcessingOffset = Schema.GetOffset(0xFBA0EFE9FEBF934A);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCPostProcessingResource>>(_PostProcessingOffset);
+            _PostProcessingOffset = _PostProcessingOffset ?? Schema.GetOffset(0xFBA0EFE9FEBF934A);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCPostProcessingResource>>(_PostProcessingOffset!.Value);
         }
     }
 

@@ -16,16 +16,16 @@ internal partial class CToneMappingLayerImpl : CColorCorrectionLayerImpl, CToneM
 {
     public CToneMappingLayerImpl(nint handle) : base(handle) { }
 
-    private static nint _ParamsOffset = -1;
+    private static nint? _ParamsOffset;
     private PostProcessingTonemapParameters_tImpl? _ParamsInstance;
 
     public PostProcessingTonemapParameters_t Params
     {
         get
         {
-            if (_ParamsOffset == -1) _ParamsOffset = Schema.GetOffset(0x2F5EECE9640EA8F3);
+            _ParamsOffset = _ParamsOffset ?? Schema.GetOffset(0x2F5EECE9640EA8F3);
             var instance = _ParamsInstance ??= new PostProcessingTonemapParameters_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamsOffset);
+            instance.DangerousSetHandle(_Handle + _ParamsOffset!.Value);
             return instance;
         }
     }

@@ -16,200 +16,200 @@ internal partial class CMaterialDrawDescriptorImpl : SchemaClass, CMaterialDrawD
 {
     public CMaterialDrawDescriptorImpl(nint handle) : base(handle) { }
 
-    private static nint _UvDensityOffset = -1;
+    private static nint? _UvDensityOffset;
 
     public ref float UvDensity
     {
         get
         {
-            if (_UvDensityOffset == -1) _UvDensityOffset = Schema.GetOffset(0xE7C21000A7661B68);
-            return ref _Handle.AsRef<float>(_UvDensityOffset);
+            _UvDensityOffset = _UvDensityOffset ?? Schema.GetOffset(0xE7C21000A7661B68);
+            return ref _Handle.AsRef<float>(_UvDensityOffset!.Value);
         }
     }
-    private static nint _TintColorOffset = -1;
+    private static nint? _TintColorOffset;
 
     public ref Vector TintColor
     {
         get
         {
-            if (_TintColorOffset == -1) _TintColorOffset = Schema.GetOffset(0xE7C2100050AFF21F);
-            return ref _Handle.AsRef<Vector>(_TintColorOffset);
+            _TintColorOffset = _TintColorOffset ?? Schema.GetOffset(0xE7C2100050AFF21F);
+            return ref _Handle.AsRef<Vector>(_TintColorOffset!.Value);
         }
     }
-    private static nint _AlphaOffset = -1;
+    private static nint? _AlphaOffset;
 
     public ref float Alpha
     {
         get
         {
-            if (_AlphaOffset == -1) _AlphaOffset = Schema.GetOffset(0xE7C21000A0DB7DD1);
-            return ref _Handle.AsRef<float>(_AlphaOffset);
+            _AlphaOffset = _AlphaOffset ?? Schema.GetOffset(0xE7C21000A0DB7DD1);
+            return ref _Handle.AsRef<float>(_AlphaOffset!.Value);
         }
     }
-    private static nint _NumMeshletsOffset = -1;
+    private static nint? _NumMeshletsOffset;
 
     public ref uint NumMeshlets
     {
         get
         {
-            if (_NumMeshletsOffset == -1) _NumMeshletsOffset = Schema.GetOffset(0xE7C21000A56D0338);
-            return ref _Handle.AsRef<uint>(_NumMeshletsOffset);
+            _NumMeshletsOffset = _NumMeshletsOffset ?? Schema.GetOffset(0xE7C21000A56D0338);
+            return ref _Handle.AsRef<uint>(_NumMeshletsOffset!.Value);
         }
     }
-    private static nint _FirstMeshletOffset = -1;
+    private static nint? _FirstMeshletOffset;
 
     public ref uint FirstMeshlet
     {
         get
         {
-            if (_FirstMeshletOffset == -1) _FirstMeshletOffset = Schema.GetOffset(0xE7C210006DA99901);
-            return ref _Handle.AsRef<uint>(_FirstMeshletOffset);
+            _FirstMeshletOffset = _FirstMeshletOffset ?? Schema.GetOffset(0xE7C210006DA99901);
+            return ref _Handle.AsRef<uint>(_FirstMeshletOffset!.Value);
         }
     }
-    private static nint _AppliedIndexOffsetOffset = -1;
+    private static nint? _AppliedIndexOffsetOffset;
 
     public ref uint AppliedIndexOffset
     {
         get
         {
-            if (_AppliedIndexOffsetOffset == -1) _AppliedIndexOffsetOffset = Schema.GetOffset(0xE7C21000A24FA35D);
-            return ref _Handle.AsRef<uint>(_AppliedIndexOffsetOffset);
+            _AppliedIndexOffsetOffset = _AppliedIndexOffsetOffset ?? Schema.GetOffset(0xE7C21000A24FA35D);
+            return ref _Handle.AsRef<uint>(_AppliedIndexOffsetOffset!.Value);
         }
     }
-    private static nint _EmissivePrimitiveCountOffset = -1;
+    private static nint? _EmissivePrimitiveCountOffset;
 
     public ref int EmissivePrimitiveCount
     {
         get
         {
-            if (_EmissivePrimitiveCountOffset == -1) _EmissivePrimitiveCountOffset = Schema.GetOffset(0xE7C210009D70E2EE);
-            return ref _Handle.AsRef<int>(_EmissivePrimitiveCountOffset);
+            _EmissivePrimitiveCountOffset = _EmissivePrimitiveCountOffset ?? Schema.GetOffset(0xE7C210009D70E2EE);
+            return ref _Handle.AsRef<int>(_EmissivePrimitiveCountOffset!.Value);
         }
     }
-    private static nint _DepthVertexBufferIndexOffset = -1;
+    private static nint? _DepthVertexBufferIndexOffset;
 
     public ref byte DepthVertexBufferIndex
     {
         get
         {
-            if (_DepthVertexBufferIndexOffset == -1) _DepthVertexBufferIndexOffset = Schema.GetOffset(0xE7C2100049292FE2);
-            return ref _Handle.AsRef<byte>(_DepthVertexBufferIndexOffset);
+            _DepthVertexBufferIndexOffset = _DepthVertexBufferIndexOffset ?? Schema.GetOffset(0xE7C2100049292FE2);
+            return ref _Handle.AsRef<byte>(_DepthVertexBufferIndexOffset!.Value);
         }
     }
-    private static nint _MeshletPackedIVBIndexOffset = -1;
+    private static nint? _MeshletPackedIVBIndexOffset;
 
     public ref byte MeshletPackedIVBIndex
     {
         get
         {
-            if (_MeshletPackedIVBIndexOffset == -1) _MeshletPackedIVBIndexOffset = Schema.GetOffset(0xE7C21000A98C8BAC);
-            return ref _Handle.AsRef<byte>(_MeshletPackedIVBIndexOffset);
+            _MeshletPackedIVBIndexOffset = _MeshletPackedIVBIndexOffset ?? Schema.GetOffset(0xE7C21000A98C8BAC);
+            return ref _Handle.AsRef<byte>(_MeshletPackedIVBIndexOffset!.Value);
         }
     }
-    private static nint _RigidMeshPartsOffset = -1;
+    private static nint? _RigidMeshPartsOffset;
 
     public ref CUtlLeanVector<CMaterialDrawDescriptor__RigidMeshPart_t, int> RigidMeshParts
     {
         get
         {
-            if (_RigidMeshPartsOffset == -1) _RigidMeshPartsOffset = Schema.GetOffset(0xE7C2100062848C01);
-            return ref _Handle.AsRef<CUtlLeanVector<CMaterialDrawDescriptor__RigidMeshPart_t, int>>(_RigidMeshPartsOffset);
+            _RigidMeshPartsOffset = _RigidMeshPartsOffset ?? Schema.GetOffset(0xE7C2100062848C01);
+            return ref _Handle.AsRef<CUtlLeanVector<CMaterialDrawDescriptor__RigidMeshPart_t, int>>(_RigidMeshPartsOffset!.Value);
         }
     }
-    private static nint _RootBvhNodesOffset = -1;
+    private static nint? _RootBvhNodesOffset;
 
     public ref CUtlLeanVector<ushort, int> RootBvhNodes
     {
         get
         {
-            if (_RootBvhNodesOffset == -1) _RootBvhNodesOffset = Schema.GetOffset(0xE7C21000147870D0);
-            return ref _Handle.AsRef<CUtlLeanVector<ushort, int>>(_RootBvhNodesOffset);
+            _RootBvhNodesOffset = _RootBvhNodesOffset ?? Schema.GetOffset(0xE7C21000147870D0);
+            return ref _Handle.AsRef<CUtlLeanVector<ushort, int>>(_RootBvhNodesOffset!.Value);
         }
     }
-    private static nint _PrimitiveTypeOffset = -1;
+    private static nint? _PrimitiveTypeOffset;
 
     public ref RenderPrimitiveType_t PrimitiveType
     {
         get
         {
-            if (_PrimitiveTypeOffset == -1) _PrimitiveTypeOffset = Schema.GetOffset(0xE7C2100041517C4A);
-            return ref _Handle.AsRef<RenderPrimitiveType_t>(_PrimitiveTypeOffset);
+            _PrimitiveTypeOffset = _PrimitiveTypeOffset ?? Schema.GetOffset(0xE7C2100041517C4A);
+            return ref _Handle.AsRef<RenderPrimitiveType_t>(_PrimitiveTypeOffset!.Value);
         }
     }
-    private static nint _BaseVertexOffset = -1;
+    private static nint? _BaseVertexOffset;
 
     public ref int BaseVertex
     {
         get
         {
-            if (_BaseVertexOffset == -1) _BaseVertexOffset = Schema.GetOffset(0xE7C2100048F55CFA);
-            return ref _Handle.AsRef<int>(_BaseVertexOffset);
+            _BaseVertexOffset = _BaseVertexOffset ?? Schema.GetOffset(0xE7C2100048F55CFA);
+            return ref _Handle.AsRef<int>(_BaseVertexOffset!.Value);
         }
     }
-    private static nint _VertexCountOffset = -1;
+    private static nint? _VertexCountOffset;
 
     public ref int VertexCount
     {
         get
         {
-            if (_VertexCountOffset == -1) _VertexCountOffset = Schema.GetOffset(0xE7C2100012923E12);
-            return ref _Handle.AsRef<int>(_VertexCountOffset);
+            _VertexCountOffset = _VertexCountOffset ?? Schema.GetOffset(0xE7C2100012923E12);
+            return ref _Handle.AsRef<int>(_VertexCountOffset!.Value);
         }
     }
-    private static nint _StartIndexOffset = -1;
+    private static nint? _StartIndexOffset;
 
     public ref int StartIndex
     {
         get
         {
-            if (_StartIndexOffset == -1) _StartIndexOffset = Schema.GetOffset(0xE7C210008A0ACD99);
-            return ref _Handle.AsRef<int>(_StartIndexOffset);
+            _StartIndexOffset = _StartIndexOffset ?? Schema.GetOffset(0xE7C210008A0ACD99);
+            return ref _Handle.AsRef<int>(_StartIndexOffset!.Value);
         }
     }
-    private static nint _IndexCountOffset = -1;
+    private static nint? _IndexCountOffset;
 
     public ref int IndexCount
     {
         get
         {
-            if (_IndexCountOffset == -1) _IndexCountOffset = Schema.GetOffset(0xE7C21000B0202EFE);
-            return ref _Handle.AsRef<int>(_IndexCountOffset);
+            _IndexCountOffset = _IndexCountOffset ?? Schema.GetOffset(0xE7C21000B0202EFE);
+            return ref _Handle.AsRef<int>(_IndexCountOffset!.Value);
         }
     }
-    private static nint _IndexBufferOffset = -1;
+    private static nint? _IndexBufferOffset;
     private CRenderBufferBindingImpl? _IndexBufferInstance;
 
     public CRenderBufferBinding IndexBuffer
     {
         get
         {
-            if (_IndexBufferOffset == -1) _IndexBufferOffset = Schema.GetOffset(0xE7C210003C0C2701);
+            _IndexBufferOffset = _IndexBufferOffset ?? Schema.GetOffset(0xE7C210003C0C2701);
             var instance = _IndexBufferInstance ??= new CRenderBufferBindingImpl(0);
-            instance.DangerousSetHandle(_Handle + _IndexBufferOffset);
+            instance.DangerousSetHandle(_Handle + _IndexBufferOffset!.Value);
             return instance;
         }
     }
-    private static nint _MeshletPackedIVBOffset = -1;
+    private static nint? _MeshletPackedIVBOffset;
     private CRenderBufferBindingImpl? _MeshletPackedIVBInstance;
 
     public CRenderBufferBinding MeshletPackedIVB
     {
         get
         {
-            if (_MeshletPackedIVBOffset == -1) _MeshletPackedIVBOffset = Schema.GetOffset(0xE7C21000015D34E4);
+            _MeshletPackedIVBOffset = _MeshletPackedIVBOffset ?? Schema.GetOffset(0xE7C21000015D34E4);
             var instance = _MeshletPackedIVBInstance ??= new CRenderBufferBindingImpl(0);
-            instance.DangerousSetHandle(_Handle + _MeshletPackedIVBOffset);
+            instance.DangerousSetHandle(_Handle + _MeshletPackedIVBOffset!.Value);
             return instance;
         }
     }
-    private static nint _MaterialOffset = -1;
+    private static nint? _MaterialOffset;
 
     public ref CStrongHandle<InfoForResourceTypeIMaterial2> Material
     {
         get
         {
-            if (_MaterialOffset == -1) _MaterialOffset = Schema.GetOffset(0xE7C2100034ADFC00);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_MaterialOffset);
+            _MaterialOffset = _MaterialOffset ?? Schema.GetOffset(0xE7C2100034ADFC00);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_MaterialOffset!.Value);
         }
     }
 

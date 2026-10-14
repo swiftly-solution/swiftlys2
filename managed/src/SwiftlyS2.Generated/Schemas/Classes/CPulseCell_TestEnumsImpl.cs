@@ -16,24 +16,24 @@ internal partial class CPulseCell_TestEnumsImpl : CPulseCell_BaseValueImpl, CPul
 {
     public CPulseCell_TestEnumsImpl(nint handle) : base(handle) { }
 
-    private static nint _ReferenceColorOffset = -1;
+    private static nint? _ReferenceColorOffset;
 
     public ref PulseTestEnumColor_t ReferenceColor
     {
         get
         {
-            if (_ReferenceColorOffset == -1) _ReferenceColorOffset = Schema.GetOffset(0x71C13026A67948D1);
-            return ref _Handle.AsRef<PulseTestEnumColor_t>(_ReferenceColorOffset);
+            _ReferenceColorOffset = _ReferenceColorOffset ?? Schema.GetOffset(0x71C13026A67948D1);
+            return ref _Handle.AsRef<PulseTestEnumColor_t>(_ReferenceColorOffset!.Value);
         }
     }
-    private static nint _ReferenceFlagsOffset = -1;
+    private static nint? _ReferenceFlagsOffset;
 
     public ref PulseTestEnumFlags_t ReferenceFlags
     {
         get
         {
-            if (_ReferenceFlagsOffset == -1) _ReferenceFlagsOffset = Schema.GetOffset(0x71C130266FC8A7E9);
-            return ref _Handle.AsRef<PulseTestEnumFlags_t>(_ReferenceFlagsOffset);
+            _ReferenceFlagsOffset = _ReferenceFlagsOffset ?? Schema.GetOffset(0x71C130266FC8A7E9);
+            return ref _Handle.AsRef<PulseTestEnumFlags_t>(_ReferenceFlagsOffset!.Value);
         }
     }
 

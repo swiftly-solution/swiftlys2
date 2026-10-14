@@ -16,19 +16,19 @@ internal partial class MaterialParamString_tImpl : MaterialParam_tImpl, Material
 {
     public MaterialParamString_tImpl(nint handle) : base(handle) { }
 
-    private static nint _ValueOffset = -1;
+    private static nint? _ValueOffset;
 
     public string Value
     {
         get
         {
-            if (_ValueOffset == -1) _ValueOffset = Schema.GetOffset(0xDB5EB0676B99AEEA);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ValueOffset));
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0xDB5EB0676B99AEEA);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ValueOffset!.Value));
         }
         set
         {
-            if (_ValueOffset == -1) _ValueOffset = Schema.GetOffset(0xDB5EB0676B99AEEA);
-            Schema.SetCUtlString(_Handle, _ValueOffset, value);
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0xDB5EB0676B99AEEA);
+            Schema.SetCUtlString(_Handle, _ValueOffset!.Value, value);
         }
     }
 

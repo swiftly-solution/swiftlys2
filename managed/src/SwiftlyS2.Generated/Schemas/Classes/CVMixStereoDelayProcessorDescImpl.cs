@@ -16,29 +16,29 @@ internal partial class CVMixStereoDelayProcessorDescImpl : CVMixBaseProcessorDes
 {
     public CVMixStereoDelayProcessorDescImpl(nint handle) : base(handle) { }
 
-    private static nint _ParamDelayLeftOffset = -1;
+    private static nint? _ParamDelayLeftOffset;
     private CVMixParameterFloatImpl? _ParamDelayLeftInstance;
 
     public CVMixParameterFloat ParamDelayLeft
     {
         get
         {
-            if (_ParamDelayLeftOffset == -1) _ParamDelayLeftOffset = Schema.GetOffset(0x3CD586E23068EDF0);
+            _ParamDelayLeftOffset = _ParamDelayLeftOffset ?? Schema.GetOffset(0x3CD586E23068EDF0);
             var instance = _ParamDelayLeftInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamDelayLeftOffset);
+            instance.DangerousSetHandle(_Handle + _ParamDelayLeftOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamDelayRightOffset = -1;
+    private static nint? _ParamDelayRightOffset;
     private CVMixParameterFloatImpl? _ParamDelayRightInstance;
 
     public CVMixParameterFloat ParamDelayRight
     {
         get
         {
-            if (_ParamDelayRightOffset == -1) _ParamDelayRightOffset = Schema.GetOffset(0x3CD586E2621F8A65);
+            _ParamDelayRightOffset = _ParamDelayRightOffset ?? Schema.GetOffset(0x3CD586E2621F8A65);
             var instance = _ParamDelayRightInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamDelayRightOffset);
+            instance.DangerousSetHandle(_Handle + _ParamDelayRightOffset!.Value);
             return instance;
         }
     }

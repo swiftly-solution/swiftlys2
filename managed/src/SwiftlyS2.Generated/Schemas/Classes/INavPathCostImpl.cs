@@ -16,16 +16,16 @@ internal partial class INavPathCostImpl : SchemaClass, INavPathCost
 {
     public INavPathCostImpl(nint handle) : base(handle) { }
 
-    private static nint _NavHullOffset = -1;
+    private static nint? _NavHullOffset;
     private NavHull_tImpl? _NavHullInstance;
 
     public NavHull_t NavHull
     {
         get
         {
-            if (_NavHullOffset == -1) _NavHullOffset = Schema.GetOffset(0xBB03608BCDC085E1);
+            _NavHullOffset = _NavHullOffset ?? Schema.GetOffset(0xBB03608BCDC085E1);
             var instance = _NavHullInstance ??= new NavHull_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _NavHullOffset);
+            instance.DangerousSetHandle(_Handle + _NavHullOffset!.Value);
             return instance;
         }
     }

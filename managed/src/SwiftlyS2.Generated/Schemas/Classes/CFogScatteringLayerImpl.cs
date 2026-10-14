@@ -16,16 +16,16 @@ internal partial class CFogScatteringLayerImpl : CColorCorrectionLayerImpl, CFog
 {
     public CFogScatteringLayerImpl(nint handle) : base(handle) { }
 
-    private static nint _ParamsOffset = -1;
+    private static nint? _ParamsOffset;
     private PostProcessingFogScatteringParameters_tImpl? _ParamsInstance;
 
     public PostProcessingFogScatteringParameters_t Params
     {
         get
         {
-            if (_ParamsOffset == -1) _ParamsOffset = Schema.GetOffset(0xABA6D715640EA8F3);
+            _ParamsOffset = _ParamsOffset ?? Schema.GetOffset(0xABA6D715640EA8F3);
             var instance = _ParamsInstance ??= new PostProcessingFogScatteringParameters_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamsOffset);
+            instance.DangerousSetHandle(_Handle + _ParamsOffset!.Value);
             return instance;
         }
     }

@@ -16,16 +16,16 @@ internal partial class CPulseCell_BaseImpl : SchemaClass, CPulseCell_Base
 {
     public CPulseCell_BaseImpl(nint handle) : base(handle) { }
 
-    private static nint _EditorNodeIDOffset = -1;
+    private static nint? _EditorNodeIDOffset;
     private PulseDocNodeID_tImpl? _EditorNodeIDInstance;
 
     public PulseDocNodeID_t EditorNodeID
     {
         get
         {
-            if (_EditorNodeIDOffset == -1) _EditorNodeIDOffset = Schema.GetOffset(0xA1B689158D964CBD);
+            _EditorNodeIDOffset = _EditorNodeIDOffset ?? Schema.GetOffset(0xA1B689158D964CBD);
             var instance = _EditorNodeIDInstance ??= new PulseDocNodeID_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _EditorNodeIDOffset);
+            instance.DangerousSetHandle(_Handle + _EditorNodeIDOffset!.Value);
             return instance;
         }
     }

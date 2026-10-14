@@ -16,259 +16,259 @@ internal partial class CEnvCubemapFogImpl : CBaseEntityImpl, CEnvCubemapFog
 {
     public CEnvCubemapFogImpl(nint handle) : base(handle) { }
 
-    private static nint _EndDistanceOffset = -1;
+    private static nint? _EndDistanceOffset;
 
     public ref float EndDistance
     {
         get
         {
-            if (_EndDistanceOffset == -1) _EndDistanceOffset = Schema.GetOffset(0x38A7692EB825C247);
-            return ref _Handle.AsRef<float>(_EndDistanceOffset);
+            _EndDistanceOffset = _EndDistanceOffset ?? Schema.GetOffset(0x38A7692EB825C247);
+            return ref _Handle.AsRef<float>(_EndDistanceOffset!.Value);
         }
     }
-    private static nint _StartDistanceOffset = -1;
+    private static nint? _StartDistanceOffset;
 
     public ref float StartDistance
     {
         get
         {
-            if (_StartDistanceOffset == -1) _StartDistanceOffset = Schema.GetOffset(0x38A7692E796C8142);
-            return ref _Handle.AsRef<float>(_StartDistanceOffset);
+            _StartDistanceOffset = _StartDistanceOffset ?? Schema.GetOffset(0x38A7692E796C8142);
+            return ref _Handle.AsRef<float>(_StartDistanceOffset!.Value);
         }
     }
-    private static nint _FogFalloffExponentOffset = -1;
+    private static nint? _FogFalloffExponentOffset;
 
     public ref float FogFalloffExponent
     {
         get
         {
-            if (_FogFalloffExponentOffset == -1) _FogFalloffExponentOffset = Schema.GetOffset(0x38A7692E2068A39A);
-            return ref _Handle.AsRef<float>(_FogFalloffExponentOffset);
+            _FogFalloffExponentOffset = _FogFalloffExponentOffset ?? Schema.GetOffset(0x38A7692E2068A39A);
+            return ref _Handle.AsRef<float>(_FogFalloffExponentOffset!.Value);
         }
     }
-    private static nint _HeightFogEnabledOffset = -1;
+    private static nint? _HeightFogEnabledOffset;
 
     public ref bool HeightFogEnabled
     {
         get
         {
-            if (_HeightFogEnabledOffset == -1) _HeightFogEnabledOffset = Schema.GetOffset(0x38A7692EFB7ED9F7);
-            return ref _Handle.AsRef<bool>(_HeightFogEnabledOffset);
+            _HeightFogEnabledOffset = _HeightFogEnabledOffset ?? Schema.GetOffset(0x38A7692EFB7ED9F7);
+            return ref _Handle.AsRef<bool>(_HeightFogEnabledOffset!.Value);
         }
     }
-    private static nint _FogHeightWidthOffset = -1;
+    private static nint? _FogHeightWidthOffset;
 
     public ref float FogHeightWidth
     {
         get
         {
-            if (_FogHeightWidthOffset == -1) _FogHeightWidthOffset = Schema.GetOffset(0x38A7692E07936DE2);
-            return ref _Handle.AsRef<float>(_FogHeightWidthOffset);
+            _FogHeightWidthOffset = _FogHeightWidthOffset ?? Schema.GetOffset(0x38A7692E07936DE2);
+            return ref _Handle.AsRef<float>(_FogHeightWidthOffset!.Value);
         }
     }
-    private static nint _FogHeightEndOffset = -1;
+    private static nint? _FogHeightEndOffset;
 
     public ref float FogHeightEnd
     {
         get
         {
-            if (_FogHeightEndOffset == -1) _FogHeightEndOffset = Schema.GetOffset(0x38A7692E16176853);
-            return ref _Handle.AsRef<float>(_FogHeightEndOffset);
+            _FogHeightEndOffset = _FogHeightEndOffset ?? Schema.GetOffset(0x38A7692E16176853);
+            return ref _Handle.AsRef<float>(_FogHeightEndOffset!.Value);
         }
     }
-    private static nint _FogHeightStartOffset = -1;
+    private static nint? _FogHeightStartOffset;
 
     public ref float FogHeightStart
     {
         get
         {
-            if (_FogHeightStartOffset == -1) _FogHeightStartOffset = Schema.GetOffset(0x38A7692ED4580CB6);
-            return ref _Handle.AsRef<float>(_FogHeightStartOffset);
+            _FogHeightStartOffset = _FogHeightStartOffset ?? Schema.GetOffset(0x38A7692ED4580CB6);
+            return ref _Handle.AsRef<float>(_FogHeightStartOffset!.Value);
         }
     }
-    private static nint _FogHeightExponentOffset = -1;
+    private static nint? _FogHeightExponentOffset;
 
     public ref float FogHeightExponent
     {
         get
         {
-            if (_FogHeightExponentOffset == -1) _FogHeightExponentOffset = Schema.GetOffset(0x38A7692E0864DD39);
-            return ref _Handle.AsRef<float>(_FogHeightExponentOffset);
+            _FogHeightExponentOffset = _FogHeightExponentOffset ?? Schema.GetOffset(0x38A7692E0864DD39);
+            return ref _Handle.AsRef<float>(_FogHeightExponentOffset!.Value);
         }
     }
-    private static nint _LODBiasOffset = -1;
+    private static nint? _LODBiasOffset;
 
     public ref float LODBias
     {
         get
         {
-            if (_LODBiasOffset == -1) _LODBiasOffset = Schema.GetOffset(0x38A7692E6917C8A7);
-            return ref _Handle.AsRef<float>(_LODBiasOffset);
+            _LODBiasOffset = _LODBiasOffset ?? Schema.GetOffset(0x38A7692E6917C8A7);
+            return ref _Handle.AsRef<float>(_LODBiasOffset!.Value);
         }
     }
-    private static nint _ActiveOffset = -1;
+    private static nint? _ActiveOffset;
 
     public ref bool Active
     {
         get
         {
-            if (_ActiveOffset == -1) _ActiveOffset = Schema.GetOffset(0x38A7692E8334208F);
-            return ref _Handle.AsRef<bool>(_ActiveOffset);
+            _ActiveOffset = _ActiveOffset ?? Schema.GetOffset(0x38A7692E8334208F);
+            return ref _Handle.AsRef<bool>(_ActiveOffset!.Value);
         }
     }
-    private static nint _StartDisabledOffset = -1;
+    private static nint? _StartDisabledOffset;
 
     public ref bool StartDisabled
     {
         get
         {
-            if (_StartDisabledOffset == -1) _StartDisabledOffset = Schema.GetOffset(0x38A7692E61ED0C4F);
-            return ref _Handle.AsRef<bool>(_StartDisabledOffset);
+            _StartDisabledOffset = _StartDisabledOffset ?? Schema.GetOffset(0x38A7692E61ED0C4F);
+            return ref _Handle.AsRef<bool>(_StartDisabledOffset!.Value);
         }
     }
-    private static nint _FogMaxOpacityOffset = -1;
+    private static nint? _FogMaxOpacityOffset;
 
     public ref float FogMaxOpacity
     {
         get
         {
-            if (_FogMaxOpacityOffset == -1) _FogMaxOpacityOffset = Schema.GetOffset(0x38A7692E7BF7FD56);
-            return ref _Handle.AsRef<float>(_FogMaxOpacityOffset);
+            _FogMaxOpacityOffset = _FogMaxOpacityOffset ?? Schema.GetOffset(0x38A7692E7BF7FD56);
+            return ref _Handle.AsRef<float>(_FogMaxOpacityOffset!.Value);
         }
     }
-    private static nint _CubemapSourceTypeOffset = -1;
+    private static nint? _CubemapSourceTypeOffset;
 
     public ref int CubemapSourceType
     {
         get
         {
-            if (_CubemapSourceTypeOffset == -1) _CubemapSourceTypeOffset = Schema.GetOffset(0x38A7692E30B17317);
-            return ref _Handle.AsRef<int>(_CubemapSourceTypeOffset);
+            _CubemapSourceTypeOffset = _CubemapSourceTypeOffset ?? Schema.GetOffset(0x38A7692E30B17317);
+            return ref _Handle.AsRef<int>(_CubemapSourceTypeOffset!.Value);
         }
     }
-    private static nint _SkyMaterialOffset = -1;
+    private static nint? _SkyMaterialOffset;
 
     public ref CStrongHandle<InfoForResourceTypeIMaterial2> SkyMaterial
     {
         get
         {
-            if (_SkyMaterialOffset == -1) _SkyMaterialOffset = Schema.GetOffset(0x38A7692EC887319D);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_SkyMaterialOffset);
+            _SkyMaterialOffset = _SkyMaterialOffset ?? Schema.GetOffset(0x38A7692EC887319D);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_SkyMaterialOffset!.Value);
         }
     }
-    private static nint _SkyEntityOffset = -1;
+    private static nint? _SkyEntityOffset;
 
     public string SkyEntity
     {
         get
         {
-            if (_SkyEntityOffset == -1) _SkyEntityOffset = Schema.GetOffset(0x38A7692E2BD44B1D);
-            return Schema.GetString(_Handle.Read<nint>(_SkyEntityOffset));
+            _SkyEntityOffset = _SkyEntityOffset ?? Schema.GetOffset(0x38A7692E2BD44B1D);
+            return Schema.GetString(_Handle.Read<nint>(_SkyEntityOffset!.Value));
         }
         set
         {
-            if (_SkyEntityOffset == -1) _SkyEntityOffset = Schema.GetOffset(0x38A7692E2BD44B1D);
-            Schema.SetString(_Handle, _SkyEntityOffset, value);
+            _SkyEntityOffset = _SkyEntityOffset ?? Schema.GetOffset(0x38A7692E2BD44B1D);
+            Schema.SetString(_Handle, _SkyEntityOffset!.Value, value);
         }
     }
-    private static nint _HeightFogTypeOffset = -1;
+    private static nint? _HeightFogTypeOffset;
 
     public ref int HeightFogType
     {
         get
         {
-            if (_HeightFogTypeOffset == -1) _HeightFogTypeOffset = Schema.GetOffset(0x38A7692EE4F032BE);
-            return ref _Handle.AsRef<int>(_HeightFogTypeOffset);
+            _HeightFogTypeOffset = _HeightFogTypeOffset ?? Schema.GetOffset(0x38A7692EE4F032BE);
+            return ref _Handle.AsRef<int>(_HeightFogTypeOffset!.Value);
         }
     }
-    private static nint _FogHeightBlendModeOffset = -1;
+    private static nint? _FogHeightBlendModeOffset;
 
     public ref int FogHeightBlendMode
     {
         get
         {
-            if (_FogHeightBlendModeOffset == -1) _FogHeightBlendModeOffset = Schema.GetOffset(0x38A7692EF5A81F60);
-            return ref _Handle.AsRef<int>(_FogHeightBlendModeOffset);
+            _FogHeightBlendModeOffset = _FogHeightBlendModeOffset ?? Schema.GetOffset(0x38A7692EF5A81F60);
+            return ref _Handle.AsRef<int>(_FogHeightBlendModeOffset!.Value);
         }
     }
-    private static nint _FogHeightCoordinateSpaceOffset = -1;
+    private static nint? _FogHeightCoordinateSpaceOffset;
 
     public ref int FogHeightCoordinateSpace
     {
         get
         {
-            if (_FogHeightCoordinateSpaceOffset == -1) _FogHeightCoordinateSpaceOffset = Schema.GetOffset(0x38A7692E5474AA14);
-            return ref _Handle.AsRef<int>(_FogHeightCoordinateSpaceOffset);
+            _FogHeightCoordinateSpaceOffset = _FogHeightCoordinateSpaceOffset ?? Schema.GetOffset(0x38A7692E5474AA14);
+            return ref _Handle.AsRef<int>(_FogHeightCoordinateSpaceOffset!.Value);
         }
     }
-    private static nint _DistanceFogTypeOffset = -1;
+    private static nint? _DistanceFogTypeOffset;
 
     public ref int DistanceFogType
     {
         get
         {
-            if (_DistanceFogTypeOffset == -1) _DistanceFogTypeOffset = Schema.GetOffset(0x38A7692E57802826);
-            return ref _Handle.AsRef<int>(_DistanceFogTypeOffset);
+            _DistanceFogTypeOffset = _DistanceFogTypeOffset ?? Schema.GetOffset(0x38A7692E57802826);
+            return ref _Handle.AsRef<int>(_DistanceFogTypeOffset!.Value);
         }
     }
-    private static nint _DistanceFogCurveStringOffset = -1;
+    private static nint? _DistanceFogCurveStringOffset;
 
     public string DistanceFogCurveString
     {
         get
         {
-            if (_DistanceFogCurveStringOffset == -1) _DistanceFogCurveStringOffset = Schema.GetOffset(0x38A7692E7D080E60);
-            return Schema.GetString(_Handle.Read<nint>(_DistanceFogCurveStringOffset));
+            _DistanceFogCurveStringOffset = _DistanceFogCurveStringOffset ?? Schema.GetOffset(0x38A7692E7D080E60);
+            return Schema.GetString(_Handle.Read<nint>(_DistanceFogCurveStringOffset!.Value));
         }
         set
         {
-            if (_DistanceFogCurveStringOffset == -1) _DistanceFogCurveStringOffset = Schema.GetOffset(0x38A7692E7D080E60);
-            Schema.SetString(_Handle, _DistanceFogCurveStringOffset, value);
+            _DistanceFogCurveStringOffset = _DistanceFogCurveStringOffset ?? Schema.GetOffset(0x38A7692E7D080E60);
+            Schema.SetString(_Handle, _DistanceFogCurveStringOffset!.Value, value);
         }
     }
-    private static nint _HeightFogCurveStringOffset = -1;
+    private static nint? _HeightFogCurveStringOffset;
 
     public string HeightFogCurveString
     {
         get
         {
-            if (_HeightFogCurveStringOffset == -1) _HeightFogCurveStringOffset = Schema.GetOffset(0x38A7692E6E7D4A80);
-            return Schema.GetString(_Handle.Read<nint>(_HeightFogCurveStringOffset));
+            _HeightFogCurveStringOffset = _HeightFogCurveStringOffset ?? Schema.GetOffset(0x38A7692E6E7D4A80);
+            return Schema.GetString(_Handle.Read<nint>(_HeightFogCurveStringOffset!.Value));
         }
         set
         {
-            if (_HeightFogCurveStringOffset == -1) _HeightFogCurveStringOffset = Schema.GetOffset(0x38A7692E6E7D4A80);
-            Schema.SetString(_Handle, _HeightFogCurveStringOffset, value);
+            _HeightFogCurveStringOffset = _HeightFogCurveStringOffset ?? Schema.GetOffset(0x38A7692E6E7D4A80);
+            Schema.SetString(_Handle, _HeightFogCurveStringOffset!.Value, value);
         }
     }
-    private static nint _FogCubemapTextureOffset = -1;
+    private static nint? _FogCubemapTextureOffset;
 
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> FogCubemapTexture
     {
         get
         {
-            if (_FogCubemapTextureOffset == -1) _FogCubemapTextureOffset = Schema.GetOffset(0x38A7692E3470DA4D);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_FogCubemapTextureOffset);
+            _FogCubemapTextureOffset = _FogCubemapTextureOffset ?? Schema.GetOffset(0x38A7692E3470DA4D);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_FogCubemapTextureOffset!.Value);
         }
     }
-    private static nint _HasHeightFogEndOffset = -1;
+    private static nint? _HasHeightFogEndOffset;
 
     public ref bool HasHeightFogEnd
     {
         get
         {
-            if (_HasHeightFogEndOffset == -1) _HasHeightFogEndOffset = Schema.GetOffset(0x38A7692E3484C961);
-            return ref _Handle.AsRef<bool>(_HasHeightFogEndOffset);
+            _HasHeightFogEndOffset = _HasHeightFogEndOffset ?? Schema.GetOffset(0x38A7692E3484C961);
+            return ref _Handle.AsRef<bool>(_HasHeightFogEndOffset!.Value);
         }
     }
-    private static nint _FirstTimeOffset = -1;
+    private static nint? _FirstTimeOffset;
 
     public ref bool FirstTime
     {
         get
         {
-            if (_FirstTimeOffset == -1) _FirstTimeOffset = Schema.GetOffset(0x38A7692ED23C3138);
-            return ref _Handle.AsRef<bool>(_FirstTimeOffset);
+            _FirstTimeOffset = _FirstTimeOffset ?? Schema.GetOffset(0x38A7692ED23C3138);
+            return ref _Handle.AsRef<bool>(_FirstTimeOffset!.Value);
         }
     }
 

@@ -16,49 +16,49 @@ internal partial class CAnimGraphDoc_SingleFrameNodeImpl : CAnimGraphDoc_NodeImp
 {
     public CAnimGraphDoc_SingleFrameNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _SequenceNameOffset = -1;
+    private static nint? _SequenceNameOffset;
 
     public string SequenceName
     {
         get
         {
-            if (_SequenceNameOffset == -1) _SequenceNameOffset = Schema.GetOffset(0x47C509C32B4A24CB);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_SequenceNameOffset));
+            _SequenceNameOffset = _SequenceNameOffset ?? Schema.GetOffset(0x47C509C32B4A24CB);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_SequenceNameOffset!.Value));
         }
         set
         {
-            if (_SequenceNameOffset == -1) _SequenceNameOffset = Schema.GetOffset(0x47C509C32B4A24CB);
-            Schema.SetCUtlString(_Handle, _SequenceNameOffset, value);
+            _SequenceNameOffset = _SequenceNameOffset ?? Schema.GetOffset(0x47C509C32B4A24CB);
+            Schema.SetCUtlString(_Handle, _SequenceNameOffset!.Value, value);
         }
     }
-    private static nint _FrameSelectionOffset = -1;
+    private static nint? _FrameSelectionOffset;
 
     public ref SingleFrameSelection FrameSelection
     {
         get
         {
-            if (_FrameSelectionOffset == -1) _FrameSelectionOffset = Schema.GetOffset(0x47C509C33188AC2D);
-            return ref _Handle.AsRef<SingleFrameSelection>(_FrameSelectionOffset);
+            _FrameSelectionOffset = _FrameSelectionOffset ?? Schema.GetOffset(0x47C509C33188AC2D);
+            return ref _Handle.AsRef<SingleFrameSelection>(_FrameSelectionOffset!.Value);
         }
     }
-    private static nint _FrameIndexOffset = -1;
+    private static nint? _FrameIndexOffset;
 
     public ref int FrameIndex
     {
         get
         {
-            if (_FrameIndexOffset == -1) _FrameIndexOffset = Schema.GetOffset(0x47C509C3A816E9B6);
-            return ref _Handle.AsRef<int>(_FrameIndexOffset);
+            _FrameIndexOffset = _FrameIndexOffset ?? Schema.GetOffset(0x47C509C3A816E9B6);
+            return ref _Handle.AsRef<int>(_FrameIndexOffset!.Value);
         }
     }
-    private static nint _ActionsOffset = -1;
+    private static nint? _ActionsOffset;
 
     public ref CUtlVector<SchemaUntypedField> Actions
     {
         get
         {
-            if (_ActionsOffset == -1) _ActionsOffset = Schema.GetOffset(0x47C509C38D622684);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ActionsOffset);
+            _ActionsOffset = _ActionsOffset ?? Schema.GetOffset(0x47C509C38D622684);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ActionsOffset!.Value);
         }
     }
 

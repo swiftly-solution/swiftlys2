@@ -16,50 +16,50 @@ internal partial class C_INIT_VelocityFromCPImpl : CParticleFunctionInitializerI
 {
     public C_INIT_VelocityFromCPImpl(nint handle) : base(handle) { }
 
-    private static nint _VelocityInputOffset = -1;
+    private static nint? _VelocityInputOffset;
     private CParticleCollectionVecInputImpl? _VelocityInputInstance;
 
     public CParticleCollectionVecInput VelocityInput
     {
         get
         {
-            if (_VelocityInputOffset == -1) _VelocityInputOffset = Schema.GetOffset(0x1788D69A30C18956);
+            _VelocityInputOffset = _VelocityInputOffset ?? Schema.GetOffset(0x1788D69A30C18956);
             var instance = _VelocityInputInstance ??= new CParticleCollectionVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _VelocityInputOffset);
+            instance.DangerousSetHandle(_Handle + _VelocityInputOffset!.Value);
             return instance;
         }
     }
-    private static nint _TransformInputOffset = -1;
+    private static nint? _TransformInputOffset;
     private CParticleTransformInputImpl? _TransformInputInstance;
 
     public CParticleTransformInput TransformInput
     {
         get
         {
-            if (_TransformInputOffset == -1) _TransformInputOffset = Schema.GetOffset(0x1788D69A3A9ED669);
+            _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0x1788D69A3A9ED669);
             var instance = _TransformInputInstance ??= new CParticleTransformInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _TransformInputOffset);
+            instance.DangerousSetHandle(_Handle + _TransformInputOffset!.Value);
             return instance;
         }
     }
-    private static nint _VelocityScaleOffset = -1;
+    private static nint? _VelocityScaleOffset;
 
     public ref float VelocityScale
     {
         get
         {
-            if (_VelocityScaleOffset == -1) _VelocityScaleOffset = Schema.GetOffset(0x1788D69AE161DDAA);
-            return ref _Handle.AsRef<float>(_VelocityScaleOffset);
+            _VelocityScaleOffset = _VelocityScaleOffset ?? Schema.GetOffset(0x1788D69AE161DDAA);
+            return ref _Handle.AsRef<float>(_VelocityScaleOffset!.Value);
         }
     }
-    private static nint _DirectionOnlyOffset = -1;
+    private static nint? _DirectionOnlyOffset;
 
     public ref bool DirectionOnly
     {
         get
         {
-            if (_DirectionOnlyOffset == -1) _DirectionOnlyOffset = Schema.GetOffset(0x1788D69A7F403B2C);
-            return ref _Handle.AsRef<bool>(_DirectionOnlyOffset);
+            _DirectionOnlyOffset = _DirectionOnlyOffset ?? Schema.GetOffset(0x1788D69A7F403B2C);
+            return ref _Handle.AsRef<bool>(_DirectionOnlyOffset!.Value);
         }
     }
 

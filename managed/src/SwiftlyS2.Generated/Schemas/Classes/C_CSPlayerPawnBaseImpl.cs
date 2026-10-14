@@ -16,278 +16,278 @@ internal partial class C_CSPlayerPawnBaseImpl : C_BasePlayerPawnImpl, C_CSPlayer
 {
     public C_CSPlayerPawnBaseImpl(nint handle) : base(handle) { }
 
-    private static nint _PingServicesOffset = -1;
+    private static nint? _PingServicesOffset;
     private CCSPlayer_PingServicesImpl? _PingServicesInstance;
 
     public CCSPlayer_PingServices? PingServices
     {
         get
         {
-            if (_PingServicesOffset == -1) _PingServicesOffset = Schema.GetOffset(0xABB6D7437A1487DF);
-            var ptr = _Handle.Read<nint>(_PingServicesOffset);
+            _PingServicesOffset = _PingServicesOffset ?? Schema.GetOffset(0xABB6D7437A1487DF);
+            var ptr = _Handle.Read<nint>(_PingServicesOffset!.Value);
             if (!ptr.IsValidPtr()) return null;
             var instance = _PingServicesInstance ??= new CCSPlayer_PingServicesImpl(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint _PreviousPlayerStateOffset = -1;
+    private static nint? _PreviousPlayerStateOffset;
 
     public ref CSPlayerState PreviousPlayerState
     {
         get
         {
-            if (_PreviousPlayerStateOffset == -1) _PreviousPlayerStateOffset = Schema.GetOffset(0xABB6D743C938A91E);
-            return ref _Handle.AsRef<CSPlayerState>(_PreviousPlayerStateOffset);
+            _PreviousPlayerStateOffset = _PreviousPlayerStateOffset ?? Schema.GetOffset(0xABB6D743C938A91E);
+            return ref _Handle.AsRef<CSPlayerState>(_PreviousPlayerStateOffset!.Value);
         }
     }
-    private static nint _PlayerStateOffset = -1;
+    private static nint? _PlayerStateOffset;
 
     public ref CSPlayerState PlayerState
     {
         get
         {
-            if (_PlayerStateOffset == -1) _PlayerStateOffset = Schema.GetOffset(0xABB6D7439F641BBA);
-            return ref _Handle.AsRef<CSPlayerState>(_PlayerStateOffset);
+            _PlayerStateOffset = _PlayerStateOffset ?? Schema.GetOffset(0xABB6D7439F641BBA);
+            return ref _Handle.AsRef<CSPlayerState>(_PlayerStateOffset!.Value);
         }
     }
-    private static nint _HasMovedSinceSpawnOffset = -1;
+    private static nint? _HasMovedSinceSpawnOffset;
 
     public ref bool HasMovedSinceSpawn
     {
         get
         {
-            if (_HasMovedSinceSpawnOffset == -1) _HasMovedSinceSpawnOffset = Schema.GetOffset(0xABB6D7433D3B1C13);
-            return ref _Handle.AsRef<bool>(_HasMovedSinceSpawnOffset);
+            _HasMovedSinceSpawnOffset = _HasMovedSinceSpawnOffset ?? Schema.GetOffset(0xABB6D7433D3B1C13);
+            return ref _Handle.AsRef<bool>(_HasMovedSinceSpawnOffset!.Value);
         }
     }
-    private static nint _LastSpawnTimeIndexOffset = -1;
+    private static nint? _LastSpawnTimeIndexOffset;
     private GameTime_tImpl? _LastSpawnTimeIndexInstance;
 
     public GameTime_t LastSpawnTimeIndex
     {
         get
         {
-            if (_LastSpawnTimeIndexOffset == -1) _LastSpawnTimeIndexOffset = Schema.GetOffset(0xABB6D7438F0EE3C1);
+            _LastSpawnTimeIndexOffset = _LastSpawnTimeIndexOffset ?? Schema.GetOffset(0xABB6D7438F0EE3C1);
             var instance = _LastSpawnTimeIndexInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _LastSpawnTimeIndexOffset);
+            instance.DangerousSetHandle(_Handle + _LastSpawnTimeIndexOffset!.Value);
             return instance;
         }
     }
-    private static nint _ProgressBarDurationOffset = -1;
+    private static nint? _ProgressBarDurationOffset;
 
     public ref int ProgressBarDuration
     {
         get
         {
-            if (_ProgressBarDurationOffset == -1) _ProgressBarDurationOffset = Schema.GetOffset(0xABB6D743BCF340B0);
-            return ref _Handle.AsRef<int>(_ProgressBarDurationOffset);
+            _ProgressBarDurationOffset = _ProgressBarDurationOffset ?? Schema.GetOffset(0xABB6D743BCF340B0);
+            return ref _Handle.AsRef<int>(_ProgressBarDurationOffset!.Value);
         }
     }
-    private static nint _ProgressBarStartTimeOffset = -1;
+    private static nint? _ProgressBarStartTimeOffset;
 
     public ref float ProgressBarStartTime
     {
         get
         {
-            if (_ProgressBarStartTimeOffset == -1) _ProgressBarStartTimeOffset = Schema.GetOffset(0xABB6D7438148DE8E);
-            return ref _Handle.AsRef<float>(_ProgressBarStartTimeOffset);
+            _ProgressBarStartTimeOffset = _ProgressBarStartTimeOffset ?? Schema.GetOffset(0xABB6D7438148DE8E);
+            return ref _Handle.AsRef<float>(_ProgressBarStartTimeOffset!.Value);
         }
     }
-    private static nint _ClientDeathTimeOffset = -1;
+    private static nint? _ClientDeathTimeOffset;
     private GameTime_tImpl? _ClientDeathTimeInstance;
 
     public GameTime_t ClientDeathTime
     {
         get
         {
-            if (_ClientDeathTimeOffset == -1) _ClientDeathTimeOffset = Schema.GetOffset(0xABB6D7435A3B9DE3);
+            _ClientDeathTimeOffset = _ClientDeathTimeOffset ?? Schema.GetOffset(0xABB6D7435A3B9DE3);
             var instance = _ClientDeathTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _ClientDeathTimeOffset);
+            instance.DangerousSetHandle(_Handle + _ClientDeathTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _FlashBangTimeOffset = -1;
+    private static nint? _FlashBangTimeOffset;
 
     public ref float FlashBangTime
     {
         get
         {
-            if (_FlashBangTimeOffset == -1) _FlashBangTimeOffset = Schema.GetOffset(0xABB6D743EDCB7CA0);
-            return ref _Handle.AsRef<float>(_FlashBangTimeOffset);
+            _FlashBangTimeOffset = _FlashBangTimeOffset ?? Schema.GetOffset(0xABB6D743EDCB7CA0);
+            return ref _Handle.AsRef<float>(_FlashBangTimeOffset!.Value);
         }
     }
-    private static nint _FlashScreenshotAlphaOffset = -1;
+    private static nint? _FlashScreenshotAlphaOffset;
 
     public ref float FlashScreenshotAlpha
     {
         get
         {
-            if (_FlashScreenshotAlphaOffset == -1) _FlashScreenshotAlphaOffset = Schema.GetOffset(0xABB6D74323C4E1B5);
-            return ref _Handle.AsRef<float>(_FlashScreenshotAlphaOffset);
+            _FlashScreenshotAlphaOffset = _FlashScreenshotAlphaOffset ?? Schema.GetOffset(0xABB6D74323C4E1B5);
+            return ref _Handle.AsRef<float>(_FlashScreenshotAlphaOffset!.Value);
         }
     }
-    private static nint _FlashOverlayAlphaOffset = -1;
+    private static nint? _FlashOverlayAlphaOffset;
 
     public ref float FlashOverlayAlpha
     {
         get
         {
-            if (_FlashOverlayAlphaOffset == -1) _FlashOverlayAlphaOffset = Schema.GetOffset(0xABB6D7436A6F758B);
-            return ref _Handle.AsRef<float>(_FlashOverlayAlphaOffset);
+            _FlashOverlayAlphaOffset = _FlashOverlayAlphaOffset ?? Schema.GetOffset(0xABB6D7436A6F758B);
+            return ref _Handle.AsRef<float>(_FlashOverlayAlphaOffset!.Value);
         }
     }
-    private static nint _FlashBuildUpOffset = -1;
+    private static nint? _FlashBuildUpOffset;
 
     public ref bool FlashBuildUp
     {
         get
         {
-            if (_FlashBuildUpOffset == -1) _FlashBuildUpOffset = Schema.GetOffset(0xABB6D743F7778662);
-            return ref _Handle.AsRef<bool>(_FlashBuildUpOffset);
+            _FlashBuildUpOffset = _FlashBuildUpOffset ?? Schema.GetOffset(0xABB6D743F7778662);
+            return ref _Handle.AsRef<bool>(_FlashBuildUpOffset!.Value);
         }
     }
-    private static nint _FlashDspHasBeenClearedOffset = -1;
+    private static nint? _FlashDspHasBeenClearedOffset;
 
     public ref bool FlashDspHasBeenCleared
     {
         get
         {
-            if (_FlashDspHasBeenClearedOffset == -1) _FlashDspHasBeenClearedOffset = Schema.GetOffset(0xABB6D7432EE8E752);
-            return ref _Handle.AsRef<bool>(_FlashDspHasBeenClearedOffset);
+            _FlashDspHasBeenClearedOffset = _FlashDspHasBeenClearedOffset ?? Schema.GetOffset(0xABB6D7432EE8E752);
+            return ref _Handle.AsRef<bool>(_FlashDspHasBeenClearedOffset!.Value);
         }
     }
-    private static nint _FlashScreenshotHasBeenGrabbedOffset = -1;
+    private static nint? _FlashScreenshotHasBeenGrabbedOffset;
 
     public ref bool FlashScreenshotHasBeenGrabbed
     {
         get
         {
-            if (_FlashScreenshotHasBeenGrabbedOffset == -1) _FlashScreenshotHasBeenGrabbedOffset = Schema.GetOffset(0xABB6D7438279F43A);
-            return ref _Handle.AsRef<bool>(_FlashScreenshotHasBeenGrabbedOffset);
+            _FlashScreenshotHasBeenGrabbedOffset = _FlashScreenshotHasBeenGrabbedOffset ?? Schema.GetOffset(0xABB6D7438279F43A);
+            return ref _Handle.AsRef<bool>(_FlashScreenshotHasBeenGrabbedOffset!.Value);
         }
     }
-    private static nint _FlashMaxAlphaOffset = -1;
+    private static nint? _FlashMaxAlphaOffset;
 
     public ref float FlashMaxAlpha
     {
         get
         {
-            if (_FlashMaxAlphaOffset == -1) _FlashMaxAlphaOffset = Schema.GetOffset(0xABB6D7433DCF0D29);
-            return ref _Handle.AsRef<float>(_FlashMaxAlphaOffset);
+            _FlashMaxAlphaOffset = _FlashMaxAlphaOffset ?? Schema.GetOffset(0xABB6D7433DCF0D29);
+            return ref _Handle.AsRef<float>(_FlashMaxAlphaOffset!.Value);
         }
     }
-    private static nint _FlashDurationOffset = -1;
+    private static nint? _FlashDurationOffset;
 
     public ref float FlashDuration
     {
         get
         {
-            if (_FlashDurationOffset == -1) _FlashDurationOffset = Schema.GetOffset(0xABB6D743E5A995FB);
-            return ref _Handle.AsRef<float>(_FlashDurationOffset);
+            _FlashDurationOffset = _FlashDurationOffset ?? Schema.GetOffset(0xABB6D743E5A995FB);
+            return ref _Handle.AsRef<float>(_FlashDurationOffset!.Value);
         }
     }
-    private static nint _ClientHealthFadeChangeTimestampOffset = -1;
+    private static nint? _ClientHealthFadeChangeTimestampOffset;
     private GameTime_tImpl? _ClientHealthFadeChangeTimestampInstance;
 
     public GameTime_t ClientHealthFadeChangeTimestamp
     {
         get
         {
-            if (_ClientHealthFadeChangeTimestampOffset == -1) _ClientHealthFadeChangeTimestampOffset = Schema.GetOffset(0xABB6D7439DD9F658);
+            _ClientHealthFadeChangeTimestampOffset = _ClientHealthFadeChangeTimestampOffset ?? Schema.GetOffset(0xABB6D7439DD9F658);
             var instance = _ClientHealthFadeChangeTimestampInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _ClientHealthFadeChangeTimestampOffset);
+            instance.DangerousSetHandle(_Handle + _ClientHealthFadeChangeTimestampOffset!.Value);
             return instance;
         }
     }
-    private static nint _ClientHealthFadeParityValueOffset = -1;
+    private static nint? _ClientHealthFadeParityValueOffset;
 
     public ref int ClientHealthFadeParityValue
     {
         get
         {
-            if (_ClientHealthFadeParityValueOffset == -1) _ClientHealthFadeParityValueOffset = Schema.GetOffset(0xABB6D743AAB9C22C);
-            return ref _Handle.AsRef<int>(_ClientHealthFadeParityValueOffset);
+            _ClientHealthFadeParityValueOffset = _ClientHealthFadeParityValueOffset ?? Schema.GetOffset(0xABB6D743AAB9C22C);
+            return ref _Handle.AsRef<int>(_ClientHealthFadeParityValueOffset!.Value);
         }
     }
-    private static nint _NextThinkPushAwayOffset = -1;
+    private static nint? _NextThinkPushAwayOffset;
 
     public ref float NextThinkPushAway
     {
         get
         {
-            if (_NextThinkPushAwayOffset == -1) _NextThinkPushAwayOffset = Schema.GetOffset(0xABB6D7436FFA746A);
-            return ref _Handle.AsRef<float>(_NextThinkPushAwayOffset);
+            _NextThinkPushAwayOffset = _NextThinkPushAwayOffset ?? Schema.GetOffset(0xABB6D7436FFA746A);
+            return ref _Handle.AsRef<float>(_NextThinkPushAwayOffset!.Value);
         }
     }
-    private static nint _CurrentMusicStartTimeOffset = -1;
+    private static nint? _CurrentMusicStartTimeOffset;
 
     public ref float CurrentMusicStartTime
     {
         get
         {
-            if (_CurrentMusicStartTimeOffset == -1) _CurrentMusicStartTimeOffset = Schema.GetOffset(0xABB6D743A25D50E8);
-            return ref _Handle.AsRef<float>(_CurrentMusicStartTimeOffset);
+            _CurrentMusicStartTimeOffset = _CurrentMusicStartTimeOffset ?? Schema.GetOffset(0xABB6D743A25D50E8);
+            return ref _Handle.AsRef<float>(_CurrentMusicStartTimeOffset!.Value);
         }
     }
-    private static nint _MusicRoundStartTimeOffset = -1;
+    private static nint? _MusicRoundStartTimeOffset;
 
     public ref float MusicRoundStartTime
     {
         get
         {
-            if (_MusicRoundStartTimeOffset == -1) _MusicRoundStartTimeOffset = Schema.GetOffset(0xABB6D74310D67BEB);
-            return ref _Handle.AsRef<float>(_MusicRoundStartTimeOffset);
+            _MusicRoundStartTimeOffset = _MusicRoundStartTimeOffset ?? Schema.GetOffset(0xABB6D74310D67BEB);
+            return ref _Handle.AsRef<float>(_MusicRoundStartTimeOffset!.Value);
         }
     }
-    private static nint _DeferStartMusicOnWarmupOffset = -1;
+    private static nint? _DeferStartMusicOnWarmupOffset;
 
     public ref bool DeferStartMusicOnWarmup
     {
         get
         {
-            if (_DeferStartMusicOnWarmupOffset == -1) _DeferStartMusicOnWarmupOffset = Schema.GetOffset(0xABB6D7436EAEF3C1);
-            return ref _Handle.AsRef<bool>(_DeferStartMusicOnWarmupOffset);
+            _DeferStartMusicOnWarmupOffset = _DeferStartMusicOnWarmupOffset ?? Schema.GetOffset(0xABB6D7436EAEF3C1);
+            return ref _Handle.AsRef<bool>(_DeferStartMusicOnWarmupOffset!.Value);
         }
     }
-    private static nint _LastSmokeOverlayAlphaOffset = -1;
+    private static nint? _LastSmokeOverlayAlphaOffset;
 
     public ref float LastSmokeOverlayAlpha
     {
         get
         {
-            if (_LastSmokeOverlayAlphaOffset == -1) _LastSmokeOverlayAlphaOffset = Schema.GetOffset(0xABB6D743D4FB6FB4);
-            return ref _Handle.AsRef<float>(_LastSmokeOverlayAlphaOffset);
+            _LastSmokeOverlayAlphaOffset = _LastSmokeOverlayAlphaOffset ?? Schema.GetOffset(0xABB6D743D4FB6FB4);
+            return ref _Handle.AsRef<float>(_LastSmokeOverlayAlphaOffset!.Value);
         }
     }
-    private static nint _LastSmokeAgeOffset = -1;
+    private static nint? _LastSmokeAgeOffset;
 
     public ref float LastSmokeAge
     {
         get
         {
-            if (_LastSmokeAgeOffset == -1) _LastSmokeAgeOffset = Schema.GetOffset(0xABB6D74348D139CB);
-            return ref _Handle.AsRef<float>(_LastSmokeAgeOffset);
+            _LastSmokeAgeOffset = _LastSmokeAgeOffset ?? Schema.GetOffset(0xABB6D74348D139CB);
+            return ref _Handle.AsRef<float>(_LastSmokeAgeOffset!.Value);
         }
     }
-    private static nint _LastSmokeOverlayColorOffset = -1;
+    private static nint? _LastSmokeOverlayColorOffset;
 
     public ref Vector LastSmokeOverlayColor
     {
         get
         {
-            if (_LastSmokeOverlayColorOffset == -1) _LastSmokeOverlayColorOffset = Schema.GetOffset(0xABB6D743AA8076D9);
-            return ref _Handle.AsRef<Vector>(_LastSmokeOverlayColorOffset);
+            _LastSmokeOverlayColorOffset = _LastSmokeOverlayColorOffset ?? Schema.GetOffset(0xABB6D743AA8076D9);
+            return ref _Handle.AsRef<Vector>(_LastSmokeOverlayColorOffset!.Value);
         }
     }
-    private static nint _OriginalControllerOffset = -1;
+    private static nint? _OriginalControllerOffset;
 
     public ref CHandle<CCSPlayerController> OriginalController
     {
         get
         {
-            if (_OriginalControllerOffset == -1) _OriginalControllerOffset = Schema.GetOffset(0xABB6D743511FAE4C);
-            return ref _Handle.AsRef<CHandle<CCSPlayerController>>(_OriginalControllerOffset);
+            _OriginalControllerOffset = _OriginalControllerOffset ?? Schema.GetOffset(0xABB6D743511FAE4C);
+            return ref _Handle.AsRef<CHandle<CCSPlayerController>>(_OriginalControllerOffset!.Value);
         }
     }
 

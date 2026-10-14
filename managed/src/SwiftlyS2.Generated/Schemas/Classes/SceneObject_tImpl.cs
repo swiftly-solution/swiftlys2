@@ -16,162 +16,162 @@ internal partial class SceneObject_tImpl : SchemaClass, SceneObject_t
 {
     public SceneObject_tImpl(nint handle) : base(handle) { }
 
-    private static nint _ObjectIDOffset = -1;
+    private static nint? _ObjectIDOffset;
 
     public ref uint ObjectID
     {
         get
         {
-            if (_ObjectIDOffset == -1) _ObjectIDOffset = Schema.GetOffset(0xD71D99937D1B0793);
-            return ref _Handle.AsRef<uint>(_ObjectIDOffset);
+            _ObjectIDOffset = _ObjectIDOffset ?? Schema.GetOffset(0xD71D99937D1B0793);
+            return ref _Handle.AsRef<uint>(_ObjectIDOffset!.Value);
         }
     }
-    private static nint _TransformOffset = -1;
+    private static nint? _TransformOffset;
     private SchemaFixedArray<Vector4D>? _TransformInstance;
 
     public ISchemaFixedArray<Vector4D> Transform
     {
         get
         {
-            if (_TransformOffset == -1) _TransformOffset = Schema.GetOffset(0xD71D9993EAAE256F);
+            _TransformOffset = _TransformOffset ?? Schema.GetOffset(0xD71D9993EAAE256F);
             var instance = _TransformInstance ??= new SchemaFixedArray<Vector4D>(0, 0xD71D9993EAAE256F, 3, 16, 4);
-            instance.DangerousSetHandle(_Handle + _TransformOffset);
+            instance.DangerousSetHandle(_Handle + _TransformOffset!.Value);
             return instance;
         }
     }
-    private static nint _FadeStartDistanceOffset = -1;
+    private static nint? _FadeStartDistanceOffset;
 
     public ref float FadeStartDistance
     {
         get
         {
-            if (_FadeStartDistanceOffset == -1) _FadeStartDistanceOffset = Schema.GetOffset(0xD71D99931AE7B71C);
-            return ref _Handle.AsRef<float>(_FadeStartDistanceOffset);
+            _FadeStartDistanceOffset = _FadeStartDistanceOffset ?? Schema.GetOffset(0xD71D99931AE7B71C);
+            return ref _Handle.AsRef<float>(_FadeStartDistanceOffset!.Value);
         }
     }
-    private static nint _FadeEndDistanceOffset = -1;
+    private static nint? _FadeEndDistanceOffset;
 
     public ref float FadeEndDistance
     {
         get
         {
-            if (_FadeEndDistanceOffset == -1) _FadeEndDistanceOffset = Schema.GetOffset(0xD71D999328802B3D);
-            return ref _Handle.AsRef<float>(_FadeEndDistanceOffset);
+            _FadeEndDistanceOffset = _FadeEndDistanceOffset ?? Schema.GetOffset(0xD71D999328802B3D);
+            return ref _Handle.AsRef<float>(_FadeEndDistanceOffset!.Value);
         }
     }
-    private static nint _TintColorOffset = -1;
+    private static nint? _TintColorOffset;
 
     public ref Vector4D TintColor
     {
         get
         {
-            if (_TintColorOffset == -1) _TintColorOffset = Schema.GetOffset(0xD71D999350AFF21F);
-            return ref _Handle.AsRef<Vector4D>(_TintColorOffset);
+            _TintColorOffset = _TintColorOffset ?? Schema.GetOffset(0xD71D999350AFF21F);
+            return ref _Handle.AsRef<Vector4D>(_TintColorOffset!.Value);
         }
     }
-    private static nint _SkinOffset = -1;
+    private static nint? _SkinOffset;
 
     public string Skin
     {
         get
         {
-            if (_SkinOffset == -1) _SkinOffset = Schema.GetOffset(0xD71D9993F1469658);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_SkinOffset));
+            _SkinOffset = _SkinOffset ?? Schema.GetOffset(0xD71D9993F1469658);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_SkinOffset!.Value));
         }
         set
         {
-            if (_SkinOffset == -1) _SkinOffset = Schema.GetOffset(0xD71D9993F1469658);
-            Schema.SetCUtlString(_Handle, _SkinOffset, value);
+            _SkinOffset = _SkinOffset ?? Schema.GetOffset(0xD71D9993F1469658);
+            Schema.SetCUtlString(_Handle, _SkinOffset!.Value, value);
         }
     }
-    private static nint _ObjectTypeFlagsOffset = -1;
+    private static nint? _ObjectTypeFlagsOffset;
 
     public ref ObjectTypeFlags_t ObjectTypeFlags
     {
         get
         {
-            if (_ObjectTypeFlagsOffset == -1) _ObjectTypeFlagsOffset = Schema.GetOffset(0xD71D9993D9506A69);
-            return ref _Handle.AsRef<ObjectTypeFlags_t>(_ObjectTypeFlagsOffset);
+            _ObjectTypeFlagsOffset = _ObjectTypeFlagsOffset ?? Schema.GetOffset(0xD71D9993D9506A69);
+            return ref _Handle.AsRef<ObjectTypeFlags_t>(_ObjectTypeFlagsOffset!.Value);
         }
     }
-    private static nint _LightingOriginOffset = -1;
+    private static nint? _LightingOriginOffset;
 
     public ref Vector LightingOrigin
     {
         get
         {
-            if (_LightingOriginOffset == -1) _LightingOriginOffset = Schema.GetOffset(0xD71D9993384A57CF);
-            return ref _Handle.AsRef<Vector>(_LightingOriginOffset);
+            _LightingOriginOffset = _LightingOriginOffset ?? Schema.GetOffset(0xD71D9993384A57CF);
+            return ref _Handle.AsRef<Vector>(_LightingOriginOffset!.Value);
         }
     }
-    private static nint _OverlayRenderOrderOffset = -1;
+    private static nint? _OverlayRenderOrderOffset;
 
     public ref short OverlayRenderOrder
     {
         get
         {
-            if (_OverlayRenderOrderOffset == -1) _OverlayRenderOrderOffset = Schema.GetOffset(0xD71D99935F955EED);
-            return ref _Handle.AsRef<short>(_OverlayRenderOrderOffset);
+            _OverlayRenderOrderOffset = _OverlayRenderOrderOffset ?? Schema.GetOffset(0xD71D99935F955EED);
+            return ref _Handle.AsRef<short>(_OverlayRenderOrderOffset!.Value);
         }
     }
-    private static nint _LODOverrideOffset = -1;
+    private static nint? _LODOverrideOffset;
 
     public ref short LODOverride
     {
         get
         {
-            if (_LODOverrideOffset == -1) _LODOverrideOffset = Schema.GetOffset(0xD71D999301DBC0FC);
-            return ref _Handle.AsRef<short>(_LODOverrideOffset);
+            _LODOverrideOffset = _LODOverrideOffset ?? Schema.GetOffset(0xD71D999301DBC0FC);
+            return ref _Handle.AsRef<short>(_LODOverrideOffset!.Value);
         }
     }
-    private static nint _CubeMapPrecomputedHandshakeOffset = -1;
+    private static nint? _CubeMapPrecomputedHandshakeOffset;
 
     public ref int CubeMapPrecomputedHandshake
     {
         get
         {
-            if (_CubeMapPrecomputedHandshakeOffset == -1) _CubeMapPrecomputedHandshakeOffset = Schema.GetOffset(0xD71D99939B8535E1);
-            return ref _Handle.AsRef<int>(_CubeMapPrecomputedHandshakeOffset);
+            _CubeMapPrecomputedHandshakeOffset = _CubeMapPrecomputedHandshakeOffset ?? Schema.GetOffset(0xD71D99939B8535E1);
+            return ref _Handle.AsRef<int>(_CubeMapPrecomputedHandshakeOffset!.Value);
         }
     }
-    private static nint _LightProbeVolumePrecomputedHandshakeOffset = -1;
+    private static nint? _LightProbeVolumePrecomputedHandshakeOffset;
 
     public ref int LightProbeVolumePrecomputedHandshake
     {
         get
         {
-            if (_LightProbeVolumePrecomputedHandshakeOffset == -1) _LightProbeVolumePrecomputedHandshakeOffset = Schema.GetOffset(0xD71D9993C6233022);
-            return ref _Handle.AsRef<int>(_LightProbeVolumePrecomputedHandshakeOffset);
+            _LightProbeVolumePrecomputedHandshakeOffset = _LightProbeVolumePrecomputedHandshakeOffset ?? Schema.GetOffset(0xD71D9993C6233022);
+            return ref _Handle.AsRef<int>(_LightProbeVolumePrecomputedHandshakeOffset!.Value);
         }
     }
-    private static nint _EmissiveLightingBoostOffset = -1;
+    private static nint? _EmissiveLightingBoostOffset;
 
     public ref float EmissiveLightingBoost
     {
         get
         {
-            if (_EmissiveLightingBoostOffset == -1) _EmissiveLightingBoostOffset = Schema.GetOffset(0xD71D9993266F487B);
-            return ref _Handle.AsRef<float>(_EmissiveLightingBoostOffset);
+            _EmissiveLightingBoostOffset = _EmissiveLightingBoostOffset ?? Schema.GetOffset(0xD71D9993266F487B);
+            return ref _Handle.AsRef<float>(_EmissiveLightingBoostOffset!.Value);
         }
     }
-    private static nint _RenderableModelOffset = -1;
+    private static nint? _RenderableModelOffset;
 
     public ref CStrongHandle<InfoForResourceTypeCModel> RenderableModel
     {
         get
         {
-            if (_RenderableModelOffset == -1) _RenderableModelOffset = Schema.GetOffset(0xD71D99932AEEFA82);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_RenderableModelOffset);
+            _RenderableModelOffset = _RenderableModelOffset ?? Schema.GetOffset(0xD71D99932AEEFA82);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_RenderableModelOffset!.Value);
         }
     }
-    private static nint _RenderableOffset = -1;
+    private static nint? _RenderableOffset;
 
     public ref CStrongHandle<InfoForResourceTypeCRenderMesh> Renderable
     {
         get
         {
-            if (_RenderableOffset == -1) _RenderableOffset = Schema.GetOffset(0xD71D9993972EF84D);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCRenderMesh>>(_RenderableOffset);
+            _RenderableOffset = _RenderableOffset ?? Schema.GetOffset(0xD71D9993972EF84D);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCRenderMesh>>(_RenderableOffset!.Value);
         }
     }
 

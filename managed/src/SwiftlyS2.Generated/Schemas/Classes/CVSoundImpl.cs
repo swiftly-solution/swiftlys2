@@ -16,94 +16,94 @@ internal partial class CVSoundImpl : SchemaClass, CVSound
 {
     public CVSoundImpl(nint handle) : base(handle) { }
 
-    private static nint _SentencesOffset = -1;
+    private static nint? _SentencesOffset;
 
     public ref CUtlLeanVector<CAudioSentence, int> Sentences
     {
         get
         {
-            if (_SentencesOffset == -1) _SentencesOffset = Schema.GetOffset(0x478C98730FF1D785);
-            return ref _Handle.AsRef<CUtlLeanVector<CAudioSentence, int>>(_SentencesOffset);
+            _SentencesOffset = _SentencesOffset ?? Schema.GetOffset(0x478C98730FF1D785);
+            return ref _Handle.AsRef<CUtlLeanVector<CAudioSentence, int>>(_SentencesOffset!.Value);
         }
     }
-    private static nint _RateOffset = -1;
+    private static nint? _RateOffset;
 
     public ref int Rate
     {
         get
         {
-            if (_RateOffset == -1) _RateOffset = Schema.GetOffset(0x478C987331106783);
-            return ref _Handle.AsRef<int>(_RateOffset);
+            _RateOffset = _RateOffset ?? Schema.GetOffset(0x478C987331106783);
+            return ref _Handle.AsRef<int>(_RateOffset!.Value);
         }
     }
-    private static nint _FormatOffset = -1;
+    private static nint? _FormatOffset;
 
     public ref CVSoundFormat_t Format
     {
         get
         {
-            if (_FormatOffset == -1) _FormatOffset = Schema.GetOffset(0x478C9873A87491AE);
-            return ref _Handle.AsRef<CVSoundFormat_t>(_FormatOffset);
+            _FormatOffset = _FormatOffset ?? Schema.GetOffset(0x478C9873A87491AE);
+            return ref _Handle.AsRef<CVSoundFormat_t>(_FormatOffset!.Value);
         }
     }
-    private static nint _ChannelsOffset = -1;
+    private static nint? _ChannelsOffset;
 
     public ref uint Channels
     {
         get
         {
-            if (_ChannelsOffset == -1) _ChannelsOffset = Schema.GetOffset(0x478C98735A815AD1);
-            return ref _Handle.AsRef<uint>(_ChannelsOffset);
+            _ChannelsOffset = _ChannelsOffset ?? Schema.GetOffset(0x478C98735A815AD1);
+            return ref _Handle.AsRef<uint>(_ChannelsOffset!.Value);
         }
     }
-    private static nint _LoopStartOffset = -1;
+    private static nint? _LoopStartOffset;
 
     public ref int LoopStart
     {
         get
         {
-            if (_LoopStartOffset == -1) _LoopStartOffset = Schema.GetOffset(0x478C9873A12E4295);
-            return ref _Handle.AsRef<int>(_LoopStartOffset);
+            _LoopStartOffset = _LoopStartOffset ?? Schema.GetOffset(0x478C9873A12E4295);
+            return ref _Handle.AsRef<int>(_LoopStartOffset!.Value);
         }
     }
-    private static nint _SampleCountOffset = -1;
+    private static nint? _SampleCountOffset;
 
     public ref uint SampleCount
     {
         get
         {
-            if (_SampleCountOffset == -1) _SampleCountOffset = Schema.GetOffset(0x478C98732DEF676A);
-            return ref _Handle.AsRef<uint>(_SampleCountOffset);
+            _SampleCountOffset = _SampleCountOffset ?? Schema.GetOffset(0x478C98732DEF676A);
+            return ref _Handle.AsRef<uint>(_SampleCountOffset!.Value);
         }
     }
-    private static nint _DurationOffset = -1;
+    private static nint? _DurationOffset;
 
     public ref float Duration
     {
         get
         {
-            if (_DurationOffset == -1) _DurationOffset = Schema.GetOffset(0x478C9873BC5E3BAB);
-            return ref _Handle.AsRef<float>(_DurationOffset);
+            _DurationOffset = _DurationOffset ?? Schema.GetOffset(0x478C9873BC5E3BAB);
+            return ref _Handle.AsRef<float>(_DurationOffset!.Value);
         }
     }
-    private static nint _StreamingSizeOffset = -1;
+    private static nint? _StreamingSizeOffset;
 
     public ref uint StreamingSize
     {
         get
         {
-            if (_StreamingSizeOffset == -1) _StreamingSizeOffset = Schema.GetOffset(0x478C9873CB44A8AE);
-            return ref _Handle.AsRef<uint>(_StreamingSizeOffset);
+            _StreamingSizeOffset = _StreamingSizeOffset ?? Schema.GetOffset(0x478C9873CB44A8AE);
+            return ref _Handle.AsRef<uint>(_StreamingSizeOffset!.Value);
         }
     }
-    private static nint _LoopEndOffset = -1;
+    private static nint? _LoopEndOffset;
 
     public ref int LoopEnd
     {
         get
         {
-            if (_LoopEndOffset == -1) _LoopEndOffset = Schema.GetOffset(0x478C9873900B36CC);
-            return ref _Handle.AsRef<int>(_LoopEndOffset);
+            _LoopEndOffset = _LoopEndOffset ?? Schema.GetOffset(0x478C9873900B36CC);
+            return ref _Handle.AsRef<int>(_LoopEndOffset!.Value);
         }
     }
 

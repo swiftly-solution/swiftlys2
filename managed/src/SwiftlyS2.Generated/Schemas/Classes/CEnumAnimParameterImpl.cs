@@ -16,34 +16,34 @@ internal partial class CEnumAnimParameterImpl : CConcreteAnimParameterImpl, CEnu
 {
     public CEnumAnimParameterImpl(nint handle) : base(handle) { }
 
-    private static nint _DefaultValueOffset = -1;
+    private static nint? _DefaultValueOffset;
 
     public ref byte DefaultValue
     {
         get
         {
-            if (_DefaultValueOffset == -1) _DefaultValueOffset = Schema.GetOffset(0xCCD4BF1DBBE0341F);
-            return ref _Handle.AsRef<byte>(_DefaultValueOffset);
+            _DefaultValueOffset = _DefaultValueOffset ?? Schema.GetOffset(0xCCD4BF1DBBE0341F);
+            return ref _Handle.AsRef<byte>(_DefaultValueOffset!.Value);
         }
     }
-    private static nint _EnumOptionsOffset = -1;
+    private static nint? _EnumOptionsOffset;
 
     public ref CUtlVector<CUtlString> EnumOptions
     {
         get
         {
-            if (_EnumOptionsOffset == -1) _EnumOptionsOffset = Schema.GetOffset(0xCCD4BF1D5A08D71E);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_EnumOptionsOffset);
+            _EnumOptionsOffset = _EnumOptionsOffset ?? Schema.GetOffset(0xCCD4BF1D5A08D71E);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_EnumOptionsOffset!.Value);
         }
     }
-    private static nint _EnumReferencedOffset = -1;
+    private static nint? _EnumReferencedOffset;
 
     public ref CUtlVector<ulong> EnumReferenced
     {
         get
         {
-            if (_EnumReferencedOffset == -1) _EnumReferencedOffset = Schema.GetOffset(0xCCD4BF1D5C66779B);
-            return ref _Handle.AsRef<CUtlVector<ulong>>(_EnumReferencedOffset);
+            _EnumReferencedOffset = _EnumReferencedOffset ?? Schema.GetOffset(0xCCD4BF1D5C66779B);
+            return ref _Handle.AsRef<CUtlVector<ulong>>(_EnumReferencedOffset!.Value);
         }
     }
 

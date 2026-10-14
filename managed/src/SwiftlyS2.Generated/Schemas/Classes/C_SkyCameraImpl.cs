@@ -16,48 +16,48 @@ internal partial class C_SkyCameraImpl : C_BaseEntityImpl, C_SkyCamera
 {
     public C_SkyCameraImpl(nint handle) : base(handle) { }
 
-    private static nint _SkyboxDataOffset = -1;
+    private static nint? _SkyboxDataOffset;
     private sky3dparams_tImpl? _SkyboxDataInstance;
 
     public sky3dparams_t SkyboxData
     {
         get
         {
-            if (_SkyboxDataOffset == -1) _SkyboxDataOffset = Schema.GetOffset(0xA2F1BD13CDA0772B);
+            _SkyboxDataOffset = _SkyboxDataOffset ?? Schema.GetOffset(0xA2F1BD13CDA0772B);
             var instance = _SkyboxDataInstance ??= new sky3dparams_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _SkyboxDataOffset);
+            instance.DangerousSetHandle(_Handle + _SkyboxDataOffset!.Value);
             return instance;
         }
     }
-    private static nint _SkyboxSlotTokenOffset = -1;
+    private static nint? _SkyboxSlotTokenOffset;
 
     public ref CUtlStringToken SkyboxSlotToken
     {
         get
         {
-            if (_SkyboxSlotTokenOffset == -1) _SkyboxSlotTokenOffset = Schema.GetOffset(0xA2F1BD13413FD3A4);
-            return ref _Handle.AsRef<CUtlStringToken>(_SkyboxSlotTokenOffset);
+            _SkyboxSlotTokenOffset = _SkyboxSlotTokenOffset ?? Schema.GetOffset(0xA2F1BD13413FD3A4);
+            return ref _Handle.AsRef<CUtlStringToken>(_SkyboxSlotTokenOffset!.Value);
         }
     }
-    private static nint _UseAnglesOffset = -1;
+    private static nint? _UseAnglesOffset;
 
     public ref bool UseAngles
     {
         get
         {
-            if (_UseAnglesOffset == -1) _UseAnglesOffset = Schema.GetOffset(0xA2F1BD13434C3DB4);
-            return ref _Handle.AsRef<bool>(_UseAnglesOffset);
+            _UseAnglesOffset = _UseAnglesOffset ?? Schema.GetOffset(0xA2F1BD13434C3DB4);
+            return ref _Handle.AsRef<bool>(_UseAnglesOffset!.Value);
         }
     }
-    private static nint _NextOffset = -1;
+    private static nint? _NextOffset;
     private C_SkyCameraImpl? _NextInstance;
 
     public C_SkyCamera? Next
     {
         get
         {
-            if (_NextOffset == -1) _NextOffset = Schema.GetOffset(0xA2F1BD1332B11E0E);
-            var ptr = _Handle.Read<nint>(_NextOffset);
+            _NextOffset = _NextOffset ?? Schema.GetOffset(0xA2F1BD1332B11E0E);
+            var ptr = _Handle.Read<nint>(_NextOffset!.Value);
             if (!ptr.IsValidPtr()) return null;
             var instance = _NextInstance ??= new C_SkyCameraImpl(0);
             instance.DangerousSetHandle(ptr);

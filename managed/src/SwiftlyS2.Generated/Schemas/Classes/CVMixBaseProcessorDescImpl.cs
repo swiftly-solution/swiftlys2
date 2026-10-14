@@ -16,84 +16,84 @@ internal partial class CVMixBaseProcessorDescImpl : SchemaClass, CVMixBaseProces
 {
     public CVMixBaseProcessorDescImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xFE20EC7C4D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xFE20EC7C4D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xFE20EC7C4D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xFE20EC7C4D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _DebugIdOffset = -1;
+    private static nint? _DebugIdOffset;
 
     public ref uint DebugId
     {
         get
         {
-            if (_DebugIdOffset == -1) _DebugIdOffset = Schema.GetOffset(0xFE20EC7C0D1706B1);
-            return ref _Handle.AsRef<uint>(_DebugIdOffset);
+            _DebugIdOffset = _DebugIdOffset ?? Schema.GetOffset(0xFE20EC7C0D1706B1);
+            return ref _Handle.AsRef<uint>(_DebugIdOffset!.Value);
         }
     }
-    private static nint _FlxfadeOffset = -1;
+    private static nint? _FlxfadeOffset;
 
     public ref float Flxfade
     {
         get
         {
-            if (_FlxfadeOffset == -1) _FlxfadeOffset = Schema.GetOffset(0xFE20EC7C66180AA3);
-            return ref _Handle.AsRef<float>(_FlxfadeOffset);
+            _FlxfadeOffset = _FlxfadeOffset ?? Schema.GetOffset(0xFE20EC7C66180AA3);
+            return ref _Handle.AsRef<float>(_FlxfadeOffset!.Value);
         }
     }
-    private static nint _ChannelsOffset = -1;
+    private static nint? _ChannelsOffset;
 
     public ref int Channels
     {
         get
         {
-            if (_ChannelsOffset == -1) _ChannelsOffset = Schema.GetOffset(0xFE20EC7C5A815AD1);
-            return ref _Handle.AsRef<int>(_ChannelsOffset);
+            _ChannelsOffset = _ChannelsOffset ?? Schema.GetOffset(0xFE20EC7C5A815AD1);
+            return ref _Handle.AsRef<int>(_ChannelsOffset!.Value);
         }
     }
-    private static nint _DebugBypassOffset = -1;
+    private static nint? _DebugBypassOffset;
 
     public ref bool DebugBypass
     {
         get
         {
-            if (_DebugBypassOffset == -1) _DebugBypassOffset = Schema.GetOffset(0xFE20EC7CDDBB8948);
-            return ref _Handle.AsRef<bool>(_DebugBypassOffset);
+            _DebugBypassOffset = _DebugBypassOffset ?? Schema.GetOffset(0xFE20EC7CDDBB8948);
+            return ref _Handle.AsRef<bool>(_DebugBypassOffset!.Value);
         }
     }
-    private static nint _ParamEnableOffset = -1;
+    private static nint? _ParamEnableOffset;
     private CVMixParameterFloatImpl? _ParamEnableInstance;
 
     public CVMixParameterFloat ParamEnable
     {
         get
         {
-            if (_ParamEnableOffset == -1) _ParamEnableOffset = Schema.GetOffset(0xFE20EC7C18F2B181);
+            _ParamEnableOffset = _ParamEnableOffset ?? Schema.GetOffset(0xFE20EC7C18F2B181);
             var instance = _ParamEnableInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamEnableOffset);
+            instance.DangerousSetHandle(_Handle + _ParamEnableOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamMixOffset = -1;
+    private static nint? _ParamMixOffset;
     private CVMixParameterFloatImpl? _ParamMixInstance;
 
     public CVMixParameterFloat ParamMix
     {
         get
         {
-            if (_ParamMixOffset == -1) _ParamMixOffset = Schema.GetOffset(0xFE20EC7CFE3A573C);
+            _ParamMixOffset = _ParamMixOffset ?? Schema.GetOffset(0xFE20EC7CFE3A573C);
             var instance = _ParamMixInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamMixOffset);
+            instance.DangerousSetHandle(_Handle + _ParamMixOffset!.Value);
             return instance;
         }
     }

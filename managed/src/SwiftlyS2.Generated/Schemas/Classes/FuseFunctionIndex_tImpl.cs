@@ -16,14 +16,14 @@ internal partial class FuseFunctionIndex_tImpl : SchemaClass, FuseFunctionIndex_
 {
     public FuseFunctionIndex_tImpl(nint handle) : base(handle) { }
 
-    private static nint _ValueOffset = -1;
+    private static nint? _ValueOffset;
 
     public ref ushort Value
     {
         get
         {
-            if (_ValueOffset == -1) _ValueOffset = Schema.GetOffset(0x48B825DFDCB0894A);
-            return ref _Handle.AsRef<ushort>(_ValueOffset);
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0x48B825DFDCB0894A);
+            return ref _Handle.AsRef<ushort>(_ValueOffset!.Value);
         }
     }
 

@@ -16,34 +16,34 @@ internal partial class CCSRadarElementImpl : CBaseEntityImpl, CCSRadarElement
 {
     public CCSRadarElementImpl(nint handle) : base(handle) { }
 
-    private static nint _ElementTypeOffset = -1;
+    private static nint? _ElementTypeOffset;
 
     public ref uint ElementType
     {
         get
         {
-            if (_ElementTypeOffset == -1) _ElementTypeOffset = Schema.GetOffset(0x6619A9743991D36B);
-            return ref _Handle.AsRef<uint>(_ElementTypeOffset);
+            _ElementTypeOffset = _ElementTypeOffset ?? Schema.GetOffset(0x6619A9743991D36B);
+            return ref _Handle.AsRef<uint>(_ElementTypeOffset!.Value);
         }
     }
-    private static nint _ElementColorOffset = -1;
+    private static nint? _ElementColorOffset;
 
     public ref uint ElementColor
     {
         get
         {
-            if (_ElementColorOffset == -1) _ElementColorOffset = Schema.GetOffset(0x6619A97489C5AFF2);
-            return ref _Handle.AsRef<uint>(_ElementColorOffset);
+            _ElementColorOffset = _ElementColorOffset ?? Schema.GetOffset(0x6619A97489C5AFF2);
+            return ref _Handle.AsRef<uint>(_ElementColorOffset!.Value);
         }
     }
-    private static nint _TeamFilterOffset = -1;
+    private static nint? _TeamFilterOffset;
 
     public ref uint TeamFilter
     {
         get
         {
-            if (_TeamFilterOffset == -1) _TeamFilterOffset = Schema.GetOffset(0x6619A974919CFBA2);
-            return ref _Handle.AsRef<uint>(_TeamFilterOffset);
+            _TeamFilterOffset = _TeamFilterOffset ?? Schema.GetOffset(0x6619A974919CFBA2);
+            return ref _Handle.AsRef<uint>(_TeamFilterOffset!.Value);
         }
     }
 

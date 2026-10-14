@@ -16,16 +16,16 @@ internal partial class CBodyComponentBaseAnimGraphImpl : CBodyComponentSkeletonI
 {
     public CBodyComponentBaseAnimGraphImpl(nint handle) : base(handle) { }
 
-    private static nint _AnimationControllerOffset = -1;
+    private static nint? _AnimationControllerOffset;
     private CBaseAnimGraphControllerImpl? _AnimationControllerInstance;
 
     public CBaseAnimGraphController AnimationController
     {
         get
         {
-            if (_AnimationControllerOffset == -1) _AnimationControllerOffset = Schema.GetOffset(0xD004A34F552AD749);
+            _AnimationControllerOffset = _AnimationControllerOffset ?? Schema.GetOffset(0xD004A34F552AD749);
             var instance = _AnimationControllerInstance ??= new CBaseAnimGraphControllerImpl(0);
-            instance.DangerousSetHandle(_Handle + _AnimationControllerOffset);
+            instance.DangerousSetHandle(_Handle + _AnimationControllerOffset!.Value);
             return instance;
         }
     }

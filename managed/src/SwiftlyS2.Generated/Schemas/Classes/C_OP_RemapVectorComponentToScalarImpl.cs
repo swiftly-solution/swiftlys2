@@ -16,40 +16,40 @@ internal partial class C_OP_RemapVectorComponentToScalarImpl : CParticleFunction
 {
     public C_OP_RemapVectorComponentToScalarImpl(nint handle) : base(handle) { }
 
-    private static nint _FieldInputOffset = -1;
+    private static nint? _FieldInputOffset;
     private ParticleAttributeIndex_tImpl? _FieldInputInstance;
 
     public ParticleAttributeIndex_t FieldInput
     {
         get
         {
-            if (_FieldInputOffset == -1) _FieldInputOffset = Schema.GetOffset(0x39413771AE775669);
+            _FieldInputOffset = _FieldInputOffset ?? Schema.GetOffset(0x39413771AE775669);
             var instance = _FieldInputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldInputOffset);
+            instance.DangerousSetHandle(_Handle + _FieldInputOffset!.Value);
             return instance;
         }
     }
-    private static nint _FieldOutputOffset = -1;
+    private static nint? _FieldOutputOffset;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0x39413771E5729606);
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x39413771E5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
             return instance;
         }
     }
-    private static nint _ComponentOffset = -1;
+    private static nint? _ComponentOffset;
 
     public ref int Component
     {
         get
         {
-            if (_ComponentOffset == -1) _ComponentOffset = Schema.GetOffset(0x39413771BFD0952C);
-            return ref _Handle.AsRef<int>(_ComponentOffset);
+            _ComponentOffset = _ComponentOffset ?? Schema.GetOffset(0x39413771BFD0952C);
+            return ref _Handle.AsRef<int>(_ComponentOffset!.Value);
         }
     }
 

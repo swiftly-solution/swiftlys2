@@ -16,94 +16,94 @@ internal partial class FeSimdNodeBase_tImpl : SchemaClass, FeSimdNodeBase_t
 {
     public FeSimdNodeBase_tImpl(nint handle) : base(handle) { }
 
-    private static nint _NodeOffset = -1;
+    private static nint? _NodeOffset;
     private SchemaFixedArray<ushort>? _NodeInstance;
 
     public ISchemaFixedArray<ushort> Node
     {
         get
         {
-            if (_NodeOffset == -1) _NodeOffset = Schema.GetOffset(0x8B863723CD6694B9);
+            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0x8B863723CD6694B9);
             var instance = _NodeInstance ??= new SchemaFixedArray<ushort>(0, 0x8B863723CD6694B9, 4, 2, 2);
-            instance.DangerousSetHandle(_Handle + _NodeOffset);
+            instance.DangerousSetHandle(_Handle + _NodeOffset!.Value);
             return instance;
         }
     }
-    private static nint _NodeX0Offset = -1;
+    private static nint? _NodeX0Offset;
     private SchemaFixedArray<ushort>? _NodeX0Instance;
 
     public ISchemaFixedArray<ushort> NodeX0
     {
         get
         {
-            if (_NodeX0Offset == -1) _NodeX0Offset = Schema.GetOffset(0x8B86372381C7FEB9);
+            _NodeX0Offset = _NodeX0Offset ?? Schema.GetOffset(0x8B86372381C7FEB9);
             var instance = _NodeX0Instance ??= new SchemaFixedArray<ushort>(0, 0x8B86372381C7FEB9, 4, 2, 2);
-            instance.DangerousSetHandle(_Handle + _NodeX0Offset);
+            instance.DangerousSetHandle(_Handle + _NodeX0Offset!.Value);
             return instance;
         }
     }
-    private static nint _NodeX1Offset = -1;
+    private static nint? _NodeX1Offset;
     private SchemaFixedArray<ushort>? _NodeX1Instance;
 
     public ISchemaFixedArray<ushort> NodeX1
     {
         get
         {
-            if (_NodeX1Offset == -1) _NodeX1Offset = Schema.GetOffset(0x8B86372380C7FD26);
+            _NodeX1Offset = _NodeX1Offset ?? Schema.GetOffset(0x8B86372380C7FD26);
             var instance = _NodeX1Instance ??= new SchemaFixedArray<ushort>(0, 0x8B86372380C7FD26, 4, 2, 2);
-            instance.DangerousSetHandle(_Handle + _NodeX1Offset);
+            instance.DangerousSetHandle(_Handle + _NodeX1Offset!.Value);
             return instance;
         }
     }
-    private static nint _NodeY0Offset = -1;
+    private static nint? _NodeY0Offset;
     private SchemaFixedArray<ushort>? _NodeY0Instance;
 
     public ISchemaFixedArray<ushort> NodeY0
     {
         get
         {
-            if (_NodeY0Offset == -1) _NodeY0Offset = Schema.GetOffset(0x8B8637237BC5B6B0);
+            _NodeY0Offset = _NodeY0Offset ?? Schema.GetOffset(0x8B8637237BC5B6B0);
             var instance = _NodeY0Instance ??= new SchemaFixedArray<ushort>(0, 0x8B8637237BC5B6B0, 4, 2, 2);
-            instance.DangerousSetHandle(_Handle + _NodeY0Offset);
+            instance.DangerousSetHandle(_Handle + _NodeY0Offset!.Value);
             return instance;
         }
     }
-    private static nint _NodeY1Offset = -1;
+    private static nint? _NodeY1Offset;
     private SchemaFixedArray<ushort>? _NodeY1Instance;
 
     public ISchemaFixedArray<ushort> NodeY1
     {
         get
         {
-            if (_NodeY1Offset == -1) _NodeY1Offset = Schema.GetOffset(0x8B8637237CC5B843);
+            _NodeY1Offset = _NodeY1Offset ?? Schema.GetOffset(0x8B8637237CC5B843);
             var instance = _NodeY1Instance ??= new SchemaFixedArray<ushort>(0, 0x8B8637237CC5B843, 4, 2, 2);
-            instance.DangerousSetHandle(_Handle + _NodeY1Offset);
+            instance.DangerousSetHandle(_Handle + _NodeY1Offset!.Value);
             return instance;
         }
     }
-    private static nint _DummyOffset = -1;
+    private static nint? _DummyOffset;
     private SchemaFixedArray<ushort>? _DummyInstance;
 
     public ISchemaFixedArray<ushort> Dummy
     {
         get
         {
-            if (_DummyOffset == -1) _DummyOffset = Schema.GetOffset(0x8B863723CD8BAE5F);
+            _DummyOffset = _DummyOffset ?? Schema.GetOffset(0x8B863723CD8BAE5F);
             var instance = _DummyInstance ??= new SchemaFixedArray<ushort>(0, 0x8B863723CD8BAE5F, 4, 2, 2);
-            instance.DangerousSetHandle(_Handle + _DummyOffset);
+            instance.DangerousSetHandle(_Handle + _DummyOffset!.Value);
             return instance;
         }
     }
-    private static nint _AdjustOffset = -1;
+    private static nint? _AdjustOffset;
     private FourQuaternionsImpl? _AdjustInstance;
 
     public FourQuaternions Adjust
     {
         get
         {
-            if (_AdjustOffset == -1) _AdjustOffset = Schema.GetOffset(0x8B8637230F6C0983);
+            _AdjustOffset = _AdjustOffset ?? Schema.GetOffset(0x8B8637230F6C0983);
             var instance = _AdjustInstance ??= new FourQuaternionsImpl(0);
-            instance.DangerousSetHandle(_Handle + _AdjustOffset);
+            instance.DangerousSetHandle(_Handle + _AdjustOffset!.Value);
             return instance;
         }
     }

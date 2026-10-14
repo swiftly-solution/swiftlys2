@@ -16,116 +16,116 @@ internal partial class C_C4Impl : C_CSWeaponBaseImpl, C_C4
 {
     public C_C4Impl(nint handle) : base(handle) { }
 
-    private static nint _ActiveLightParticleIndexOffset = -1;
+    private static nint? _ActiveLightParticleIndexOffset;
     private ParticleIndex_tImpl? _ActiveLightParticleIndexInstance;
 
     public ParticleIndex_t ActiveLightParticleIndex
     {
         get
         {
-            if (_ActiveLightParticleIndexOffset == -1) _ActiveLightParticleIndexOffset = Schema.GetOffset(0x75DDC15816B10CD1);
+            _ActiveLightParticleIndexOffset = _ActiveLightParticleIndexOffset ?? Schema.GetOffset(0x75DDC15816B10CD1);
             var instance = _ActiveLightParticleIndexInstance ??= new ParticleIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _ActiveLightParticleIndexOffset);
+            instance.DangerousSetHandle(_Handle + _ActiveLightParticleIndexOffset!.Value);
             return instance;
         }
     }
-    private static nint _ActiveLightEffectOffset = -1;
+    private static nint? _ActiveLightEffectOffset;
 
     public ref C4LightEffect_t ActiveLightEffect
     {
         get
         {
-            if (_ActiveLightEffectOffset == -1) _ActiveLightEffectOffset = Schema.GetOffset(0x75DDC158D912D523);
-            return ref _Handle.AsRef<C4LightEffect_t>(_ActiveLightEffectOffset);
+            _ActiveLightEffectOffset = _ActiveLightEffectOffset ?? Schema.GetOffset(0x75DDC158D912D523);
+            return ref _Handle.AsRef<C4LightEffect_t>(_ActiveLightEffectOffset!.Value);
         }
     }
-    private static nint _StartedArmingOffset = -1;
+    private static nint? _StartedArmingOffset;
 
     public ref bool StartedArming
     {
         get
         {
-            if (_StartedArmingOffset == -1) _StartedArmingOffset = Schema.GetOffset(0x75DDC158BE331CA8);
-            return ref _Handle.AsRef<bool>(_StartedArmingOffset);
+            _StartedArmingOffset = _StartedArmingOffset ?? Schema.GetOffset(0x75DDC158BE331CA8);
+            return ref _Handle.AsRef<bool>(_StartedArmingOffset!.Value);
         }
     }
-    private static nint _ArmedTimeOffset = -1;
+    private static nint? _ArmedTimeOffset;
     private GameTime_tImpl? _ArmedTimeInstance;
 
     public GameTime_t ArmedTime
     {
         get
         {
-            if (_ArmedTimeOffset == -1) _ArmedTimeOffset = Schema.GetOffset(0x75DDC1584C4C86C9);
+            _ArmedTimeOffset = _ArmedTimeOffset ?? Schema.GetOffset(0x75DDC1584C4C86C9);
             var instance = _ArmedTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _ArmedTimeOffset);
+            instance.DangerousSetHandle(_Handle + _ArmedTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _BombPlacedAnimationOffset = -1;
+    private static nint? _BombPlacedAnimationOffset;
 
     public ref bool BombPlacedAnimation
     {
         get
         {
-            if (_BombPlacedAnimationOffset == -1) _BombPlacedAnimationOffset = Schema.GetOffset(0x75DDC1582F5F9F2A);
-            return ref _Handle.AsRef<bool>(_BombPlacedAnimationOffset);
+            _BombPlacedAnimationOffset = _BombPlacedAnimationOffset ?? Schema.GetOffset(0x75DDC1582F5F9F2A);
+            return ref _Handle.AsRef<bool>(_BombPlacedAnimationOffset!.Value);
         }
     }
-    private static nint _IsPlantingViaUseOffset = -1;
+    private static nint? _IsPlantingViaUseOffset;
 
     public ref bool IsPlantingViaUse
     {
         get
         {
-            if (_IsPlantingViaUseOffset == -1) _IsPlantingViaUseOffset = Schema.GetOffset(0x75DDC15866506CF1);
-            return ref _Handle.AsRef<bool>(_IsPlantingViaUseOffset);
+            _IsPlantingViaUseOffset = _IsPlantingViaUseOffset ?? Schema.GetOffset(0x75DDC15866506CF1);
+            return ref _Handle.AsRef<bool>(_IsPlantingViaUseOffset!.Value);
         }
     }
-    private static nint _EntitySpottedStateOffset = -1;
+    private static nint? _EntitySpottedStateOffset;
     private EntitySpottedState_tImpl? _EntitySpottedStateInstance;
 
     public EntitySpottedState_t EntitySpottedState
     {
         get
         {
-            if (_EntitySpottedStateOffset == -1) _EntitySpottedStateOffset = Schema.GetOffset(0x75DDC158032B547C);
+            _EntitySpottedStateOffset = _EntitySpottedStateOffset ?? Schema.GetOffset(0x75DDC158032B547C);
             var instance = _EntitySpottedStateInstance ??= new EntitySpottedState_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _EntitySpottedStateOffset);
+            instance.DangerousSetHandle(_Handle + _EntitySpottedStateOffset!.Value);
             return instance;
         }
     }
-    private static nint _SpotRulesOffset = -1;
+    private static nint? _SpotRulesOffset;
 
     public ref int SpotRules
     {
         get
         {
-            if (_SpotRulesOffset == -1) _SpotRulesOffset = Schema.GetOffset(0x75DDC158776CCE44);
-            return ref _Handle.AsRef<int>(_SpotRulesOffset);
+            _SpotRulesOffset = _SpotRulesOffset ?? Schema.GetOffset(0x75DDC158776CCE44);
+            return ref _Handle.AsRef<int>(_SpotRulesOffset!.Value);
         }
     }
-    private static nint _PlayedArmingBeepsOffset = -1;
+    private static nint? _PlayedArmingBeepsOffset;
     private SchemaFixedArray<bool>? _PlayedArmingBeepsInstance;
 
     public ISchemaFixedArray<bool> PlayedArmingBeeps
     {
         get
         {
-            if (_PlayedArmingBeepsOffset == -1) _PlayedArmingBeepsOffset = Schema.GetOffset(0x75DDC15825D5D369);
+            _PlayedArmingBeepsOffset = _PlayedArmingBeepsOffset ?? Schema.GetOffset(0x75DDC15825D5D369);
             var instance = _PlayedArmingBeepsInstance ??= new SchemaFixedArray<bool>(0, 0x75DDC15825D5D369, 7, 1, 1);
-            instance.DangerousSetHandle(_Handle + _PlayedArmingBeepsOffset);
+            instance.DangerousSetHandle(_Handle + _PlayedArmingBeepsOffset!.Value);
             return instance;
         }
     }
-    private static nint _BombPlantedOffset = -1;
+    private static nint? _BombPlantedOffset;
 
     public ref bool BombPlanted
     {
         get
         {
-            if (_BombPlantedOffset == -1) _BombPlantedOffset = Schema.GetOffset(0x75DDC1583C00B55F);
-            return ref _Handle.AsRef<bool>(_BombPlantedOffset);
+            _BombPlantedOffset = _BombPlantedOffset ?? Schema.GetOffset(0x75DDC1583C00B55F);
+            return ref _Handle.AsRef<bool>(_BombPlantedOffset!.Value);
         }
     }
 

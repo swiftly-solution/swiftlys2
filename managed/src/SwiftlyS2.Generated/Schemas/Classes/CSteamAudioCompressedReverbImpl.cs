@@ -16,86 +16,86 @@ internal partial class CSteamAudioCompressedReverbImpl : SchemaClass, CSteamAudi
 {
     public CSteamAudioCompressedReverbImpl(nint handle) : base(handle) { }
 
-    private static nint _ChannelsOffset = -1;
+    private static nint? _ChannelsOffset;
 
     public ref int Channels
     {
         get
         {
-            if (_ChannelsOffset == -1) _ChannelsOffset = Schema.GetOffset(0x24585BA15A815AD1);
-            return ref _Handle.AsRef<int>(_ChannelsOffset);
+            _ChannelsOffset = _ChannelsOffset ?? Schema.GetOffset(0x24585BA15A815AD1);
+            return ref _Handle.AsRef<int>(_ChannelsOffset!.Value);
         }
     }
-    private static nint _BandsOffset = -1;
+    private static nint? _BandsOffset;
 
     public ref int Bands
     {
         get
         {
-            if (_BandsOffset == -1) _BandsOffset = Schema.GetOffset(0x24585BA104C6EFF3);
-            return ref _Handle.AsRef<int>(_BandsOffset);
+            _BandsOffset = _BandsOffset ?? Schema.GetOffset(0x24585BA104C6EFF3);
+            return ref _Handle.AsRef<int>(_BandsOffset!.Value);
         }
     }
-    private static nint _BinsOffset = -1;
+    private static nint? _BinsOffset;
 
     public ref int Bins
     {
         get
         {
-            if (_BinsOffset == -1) _BinsOffset = Schema.GetOffset(0x24585BA1F736569B);
-            return ref _Handle.AsRef<int>(_BinsOffset);
+            _BinsOffset = _BinsOffset ?? Schema.GetOffset(0x24585BA1F736569B);
+            return ref _Handle.AsRef<int>(_BinsOffset!.Value);
         }
     }
-    private static nint _ProbesOffset = -1;
+    private static nint? _ProbesOffset;
 
     public ref int Probes
     {
         get
         {
-            if (_ProbesOffset == -1) _ProbesOffset = Schema.GetOffset(0x24585BA165F7EBE2);
-            return ref _Handle.AsRef<int>(_ProbesOffset);
+            _ProbesOffset = _ProbesOffset ?? Schema.GetOffset(0x24585BA165F7EBE2);
+            return ref _Handle.AsRef<int>(_ProbesOffset!.Value);
         }
     }
-    private static nint _NumSingularValuesOffset = -1;
+    private static nint? _NumSingularValuesOffset;
 
     public ref CUtlVector<int> NumSingularValues
     {
         get
         {
-            if (_NumSingularValuesOffset == -1) _NumSingularValuesOffset = Schema.GetOffset(0x24585BA1ED86817C);
-            return ref _Handle.AsRef<CUtlVector<int>>(_NumSingularValuesOffset);
+            _NumSingularValuesOffset = _NumSingularValuesOffset ?? Schema.GetOffset(0x24585BA1ED86817C);
+            return ref _Handle.AsRef<CUtlVector<int>>(_NumSingularValuesOffset!.Value);
         }
     }
-    private static nint _DictionaryOffset = -1;
+    private static nint? _DictionaryOffset;
 
     public ref CUtlVector<float> Dictionary
     {
         get
         {
-            if (_DictionaryOffset == -1) _DictionaryOffset = Schema.GetOffset(0x24585BA1B44CDC95);
-            return ref _Handle.AsRef<CUtlVector<float>>(_DictionaryOffset);
+            _DictionaryOffset = _DictionaryOffset ?? Schema.GetOffset(0x24585BA1B44CDC95);
+            return ref _Handle.AsRef<CUtlVector<float>>(_DictionaryOffset!.Value);
         }
     }
-    private static nint _CompressedDataOffset = -1;
+    private static nint? _CompressedDataOffset;
 
     public ref CUtlVector<float> CompressedData
     {
         get
         {
-            if (_CompressedDataOffset == -1) _CompressedDataOffset = Schema.GetOffset(0x24585BA163D78AFC);
-            return ref _Handle.AsRef<CUtlVector<float>>(_CompressedDataOffset);
+            _CompressedDataOffset = _CompressedDataOffset ?? Schema.GetOffset(0x24585BA163D78AFC);
+            return ref _Handle.AsRef<CUtlVector<float>>(_CompressedDataOffset!.Value);
         }
     }
-    private static nint _CompressedData1Offset = -1;
+    private static nint? _CompressedData1Offset;
     private SchemaUntypedField? _CompressedData1Instance;
 
     public SchemaUntypedField CompressedData1
     {
         get
         {
-            if (_CompressedData1Offset == -1) _CompressedData1Offset = Schema.GetOffset(0x24585BA170F8437A);
+            _CompressedData1Offset = _CompressedData1Offset ?? Schema.GetOffset(0x24585BA170F8437A);
             var instance = _CompressedData1Instance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _CompressedData1Offset);
+            instance.DangerousSetHandle(_Handle + _CompressedData1Offset!.Value);
             return instance;
         }
     }

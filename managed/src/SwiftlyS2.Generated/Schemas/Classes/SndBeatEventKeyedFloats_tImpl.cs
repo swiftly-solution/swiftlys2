@@ -16,14 +16,14 @@ internal partial class SndBeatEventKeyedFloats_tImpl : SndBeatEventKeys_tImpl, S
 {
     public SndBeatEventKeyedFloats_tImpl(nint handle) : base(handle) { }
 
-    private static nint _FloatOffset = -1;
+    private static nint? _FloatOffset;
 
     public ref float Float
     {
         get
         {
-            if (_FloatOffset == -1) _FloatOffset = Schema.GetOffset(0x6E607A0AEC464F5B);
-            return ref _Handle.AsRef<float>(_FloatOffset);
+            _FloatOffset = _FloatOffset ?? Schema.GetOffset(0x6E607A0AEC464F5B);
+            return ref _Handle.AsRef<float>(_FloatOffset!.Value);
         }
     }
 

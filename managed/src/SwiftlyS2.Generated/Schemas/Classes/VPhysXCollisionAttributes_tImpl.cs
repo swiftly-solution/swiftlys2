@@ -16,119 +16,119 @@ internal partial class VPhysXCollisionAttributes_tImpl : SchemaClass, VPhysXColl
 {
     public VPhysXCollisionAttributes_tImpl(nint handle) : base(handle) { }
 
-    private static nint _IncludeDetailLayerCountOffset = -1;
+    private static nint? _IncludeDetailLayerCountOffset;
 
     public ref int IncludeDetailLayerCount
     {
         get
         {
-            if (_IncludeDetailLayerCountOffset == -1) _IncludeDetailLayerCountOffset = Schema.GetOffset(0xBD3263AF3D5E4EA6);
-            return ref _Handle.AsRef<int>(_IncludeDetailLayerCountOffset);
+            _IncludeDetailLayerCountOffset = _IncludeDetailLayerCountOffset ?? Schema.GetOffset(0xBD3263AF3D5E4EA6);
+            return ref _Handle.AsRef<int>(_IncludeDetailLayerCountOffset!.Value);
         }
     }
-    private static nint _CollisionGroupOffset = -1;
+    private static nint? _CollisionGroupOffset;
 
     public ref uint CollisionGroup
     {
         get
         {
-            if (_CollisionGroupOffset == -1) _CollisionGroupOffset = Schema.GetOffset(0xBD3263AF91BF7016);
-            return ref _Handle.AsRef<uint>(_CollisionGroupOffset);
+            _CollisionGroupOffset = _CollisionGroupOffset ?? Schema.GetOffset(0xBD3263AF91BF7016);
+            return ref _Handle.AsRef<uint>(_CollisionGroupOffset!.Value);
         }
     }
-    private static nint _InteractAsOffset = -1;
+    private static nint? _InteractAsOffset;
 
     public ref CUtlVector<uint> InteractAs
     {
         get
         {
-            if (_InteractAsOffset == -1) _InteractAsOffset = Schema.GetOffset(0xBD3263AF4FBB627B);
-            return ref _Handle.AsRef<CUtlVector<uint>>(_InteractAsOffset);
+            _InteractAsOffset = _InteractAsOffset ?? Schema.GetOffset(0xBD3263AF4FBB627B);
+            return ref _Handle.AsRef<CUtlVector<uint>>(_InteractAsOffset!.Value);
         }
     }
-    private static nint _InteractWithOffset = -1;
+    private static nint? _InteractWithOffset;
 
     public ref CUtlVector<uint> InteractWith
     {
         get
         {
-            if (_InteractWithOffset == -1) _InteractWithOffset = Schema.GetOffset(0xBD3263AFAD426A97);
-            return ref _Handle.AsRef<CUtlVector<uint>>(_InteractWithOffset);
+            _InteractWithOffset = _InteractWithOffset ?? Schema.GetOffset(0xBD3263AFAD426A97);
+            return ref _Handle.AsRef<CUtlVector<uint>>(_InteractWithOffset!.Value);
         }
     }
-    private static nint _InteractExcludeOffset = -1;
+    private static nint? _InteractExcludeOffset;
 
     public ref CUtlVector<uint> InteractExclude
     {
         get
         {
-            if (_InteractExcludeOffset == -1) _InteractExcludeOffset = Schema.GetOffset(0xBD3263AFC5ECE843);
-            return ref _Handle.AsRef<CUtlVector<uint>>(_InteractExcludeOffset);
+            _InteractExcludeOffset = _InteractExcludeOffset ?? Schema.GetOffset(0xBD3263AFC5ECE843);
+            return ref _Handle.AsRef<CUtlVector<uint>>(_InteractExcludeOffset!.Value);
         }
     }
-    private static nint _DetailLayersOffset = -1;
+    private static nint? _DetailLayersOffset;
 
     public ref CUtlVector<uint> DetailLayers
     {
         get
         {
-            if (_DetailLayersOffset == -1) _DetailLayersOffset = Schema.GetOffset(0xBD3263AF91DFEF36);
-            return ref _Handle.AsRef<CUtlVector<uint>>(_DetailLayersOffset);
+            _DetailLayersOffset = _DetailLayersOffset ?? Schema.GetOffset(0xBD3263AF91DFEF36);
+            return ref _Handle.AsRef<CUtlVector<uint>>(_DetailLayersOffset!.Value);
         }
     }
-    private static nint _CollisionGroupStringOffset = -1;
+    private static nint? _CollisionGroupStringOffset;
 
     public string CollisionGroupString
     {
         get
         {
-            if (_CollisionGroupStringOffset == -1) _CollisionGroupStringOffset = Schema.GetOffset(0xBD3263AFCF0517E7);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_CollisionGroupStringOffset));
+            _CollisionGroupStringOffset = _CollisionGroupStringOffset ?? Schema.GetOffset(0xBD3263AFCF0517E7);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_CollisionGroupStringOffset!.Value));
         }
         set
         {
-            if (_CollisionGroupStringOffset == -1) _CollisionGroupStringOffset = Schema.GetOffset(0xBD3263AFCF0517E7);
-            Schema.SetCUtlString(_Handle, _CollisionGroupStringOffset, value);
+            _CollisionGroupStringOffset = _CollisionGroupStringOffset ?? Schema.GetOffset(0xBD3263AFCF0517E7);
+            Schema.SetCUtlString(_Handle, _CollisionGroupStringOffset!.Value, value);
         }
     }
-    private static nint _InteractAsStringsOffset = -1;
+    private static nint? _InteractAsStringsOffset;
 
     public ref CUtlVector<CUtlString> InteractAsStrings
     {
         get
         {
-            if (_InteractAsStringsOffset == -1) _InteractAsStringsOffset = Schema.GetOffset(0xBD3263AF7A4D07B7);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_InteractAsStringsOffset);
+            _InteractAsStringsOffset = _InteractAsStringsOffset ?? Schema.GetOffset(0xBD3263AF7A4D07B7);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_InteractAsStringsOffset!.Value);
         }
     }
-    private static nint _InteractWithStringsOffset = -1;
+    private static nint? _InteractWithStringsOffset;
 
     public ref CUtlVector<CUtlString> InteractWithStrings
     {
         get
         {
-            if (_InteractWithStringsOffset == -1) _InteractWithStringsOffset = Schema.GetOffset(0xBD3263AF691AB483);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_InteractWithStringsOffset);
+            _InteractWithStringsOffset = _InteractWithStringsOffset ?? Schema.GetOffset(0xBD3263AF691AB483);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_InteractWithStringsOffset!.Value);
         }
     }
-    private static nint _InteractExcludeStringsOffset = -1;
+    private static nint? _InteractExcludeStringsOffset;
 
     public ref CUtlVector<CUtlString> InteractExcludeStrings
     {
         get
         {
-            if (_InteractExcludeStringsOffset == -1) _InteractExcludeStringsOffset = Schema.GetOffset(0xBD3263AF97DC23CF);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_InteractExcludeStringsOffset);
+            _InteractExcludeStringsOffset = _InteractExcludeStringsOffset ?? Schema.GetOffset(0xBD3263AF97DC23CF);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_InteractExcludeStringsOffset!.Value);
         }
     }
-    private static nint _DetailLayerStringsOffset = -1;
+    private static nint? _DetailLayerStringsOffset;
 
     public ref CUtlVector<CUtlString> DetailLayerStrings
     {
         get
         {
-            if (_DetailLayerStringsOffset == -1) _DetailLayerStringsOffset = Schema.GetOffset(0xBD3263AF9B970BFD);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_DetailLayerStringsOffset);
+            _DetailLayerStringsOffset = _DetailLayerStringsOffset ?? Schema.GetOffset(0xBD3263AF9B970BFD);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_DetailLayerStringsOffset!.Value);
         }
     }
 

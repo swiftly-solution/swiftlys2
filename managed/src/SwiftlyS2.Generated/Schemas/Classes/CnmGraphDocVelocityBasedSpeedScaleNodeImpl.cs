@@ -16,14 +16,14 @@ internal partial class CnmGraphDocVelocityBasedSpeedScaleNodeImpl : CNmGraphDocF
 {
     public CnmGraphDocVelocityBasedSpeedScaleNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _DesiredVelocityOffset = -1;
+    private static nint? _DesiredVelocityOffset;
 
     public ref float DesiredVelocity
     {
         get
         {
-            if (_DesiredVelocityOffset == -1) _DesiredVelocityOffset = Schema.GetOffset(0xBB46140683596B4C);
-            return ref _Handle.AsRef<float>(_DesiredVelocityOffset);
+            _DesiredVelocityOffset = _DesiredVelocityOffset ?? Schema.GetOffset(0xBB46140683596B4C);
+            return ref _Handle.AsRef<float>(_DesiredVelocityOffset!.Value);
         }
     }
 

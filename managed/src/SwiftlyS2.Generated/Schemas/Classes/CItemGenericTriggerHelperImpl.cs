@@ -16,14 +16,14 @@ internal partial class CItemGenericTriggerHelperImpl : CBaseModelEntityImpl, CIt
 {
     public CItemGenericTriggerHelperImpl(nint handle) : base(handle) { }
 
-    private static nint _ParentItemOffset = -1;
+    private static nint? _ParentItemOffset;
 
     public ref CHandle<CItemGeneric> ParentItem
     {
         get
         {
-            if (_ParentItemOffset == -1) _ParentItemOffset = Schema.GetOffset(0x9E59EC5AEA0B7250);
-            return ref _Handle.AsRef<CHandle<CItemGeneric>>(_ParentItemOffset);
+            _ParentItemOffset = _ParentItemOffset ?? Schema.GetOffset(0x9E59EC5AEA0B7250);
+            return ref _Handle.AsRef<CHandle<CItemGeneric>>(_ParentItemOffset!.Value);
         }
     }
 

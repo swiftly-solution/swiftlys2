@@ -16,29 +16,29 @@ internal partial class CNmClipDocEvent_TransitionImpl : CNmClipDocEventImpl, CNm
 {
     public CNmClipDocEvent_TransitionImpl(nint handle) : base(handle) { }
 
-    private static nint _RuleOffset = -1;
+    private static nint? _RuleOffset;
 
     public ref NmTransitionRule_t Rule
     {
         get
         {
-            if (_RuleOffset == -1) _RuleOffset = Schema.GetOffset(0xD7DD9F9BBA097173);
-            return ref _Handle.AsRef<NmTransitionRule_t>(_RuleOffset);
+            _RuleOffset = _RuleOffset ?? Schema.GetOffset(0xD7DD9F9BBA097173);
+            return ref _Handle.AsRef<NmTransitionRule_t>(_RuleOffset!.Value);
         }
     }
-    private static nint _OptionalIDOffset = -1;
+    private static nint? _OptionalIDOffset;
 
     public string OptionalID
     {
         get
         {
-            if (_OptionalIDOffset == -1) _OptionalIDOffset = Schema.GetOffset(0xD7DD9F9BBBD372DC);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_OptionalIDOffset));
+            _OptionalIDOffset = _OptionalIDOffset ?? Schema.GetOffset(0xD7DD9F9BBBD372DC);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_OptionalIDOffset!.Value));
         }
         set
         {
-            if (_OptionalIDOffset == -1) _OptionalIDOffset = Schema.GetOffset(0xD7DD9F9BBBD372DC);
-            Schema.SetCUtlString(_Handle, _OptionalIDOffset, value);
+            _OptionalIDOffset = _OptionalIDOffset ?? Schema.GetOffset(0xD7DD9F9BBBD372DC);
+            Schema.SetCUtlString(_Handle, _OptionalIDOffset!.Value, value);
         }
     }
 

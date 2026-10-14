@@ -16,110 +16,110 @@ internal partial class C_OP_RenderTreeShakeImpl : CParticleFunctionRendererImpl,
 {
     public C_OP_RenderTreeShakeImpl(nint handle) : base(handle) { }
 
-    private static nint _PeakStrengthOffset = -1;
+    private static nint? _PeakStrengthOffset;
 
     public ref float PeakStrength
     {
         get
         {
-            if (_PeakStrengthOffset == -1) _PeakStrengthOffset = Schema.GetOffset(0x8EB4A28DA6BB3CD1);
-            return ref _Handle.AsRef<float>(_PeakStrengthOffset);
+            _PeakStrengthOffset = _PeakStrengthOffset ?? Schema.GetOffset(0x8EB4A28DA6BB3CD1);
+            return ref _Handle.AsRef<float>(_PeakStrengthOffset!.Value);
         }
     }
-    private static nint _PeakStrengthFieldOverrideOffset = -1;
+    private static nint? _PeakStrengthFieldOverrideOffset;
     private ParticleAttributeIndex_tImpl? _PeakStrengthFieldOverrideInstance;
 
     public ParticleAttributeIndex_t PeakStrengthFieldOverride
     {
         get
         {
-            if (_PeakStrengthFieldOverrideOffset == -1) _PeakStrengthFieldOverrideOffset = Schema.GetOffset(0x8EB4A28D78E18331);
+            _PeakStrengthFieldOverrideOffset = _PeakStrengthFieldOverrideOffset ?? Schema.GetOffset(0x8EB4A28D78E18331);
             var instance = _PeakStrengthFieldOverrideInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _PeakStrengthFieldOverrideOffset);
+            instance.DangerousSetHandle(_Handle + _PeakStrengthFieldOverrideOffset!.Value);
             return instance;
         }
     }
-    private static nint _RadiusOffset = -1;
+    private static nint? _RadiusOffset;
 
     public ref float Radius
     {
         get
         {
-            if (_RadiusOffset == -1) _RadiusOffset = Schema.GetOffset(0x8EB4A28D5ACFC08D);
-            return ref _Handle.AsRef<float>(_RadiusOffset);
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x8EB4A28D5ACFC08D);
+            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
         }
     }
-    private static nint _RadiusFieldOverrideOffset = -1;
+    private static nint? _RadiusFieldOverrideOffset;
     private ParticleAttributeIndex_tImpl? _RadiusFieldOverrideInstance;
 
     public ParticleAttributeIndex_t RadiusFieldOverride
     {
         get
         {
-            if (_RadiusFieldOverrideOffset == -1) _RadiusFieldOverrideOffset = Schema.GetOffset(0x8EB4A28D53B0BAA1);
+            _RadiusFieldOverrideOffset = _RadiusFieldOverrideOffset ?? Schema.GetOffset(0x8EB4A28D53B0BAA1);
             var instance = _RadiusFieldOverrideInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _RadiusFieldOverrideOffset);
+            instance.DangerousSetHandle(_Handle + _RadiusFieldOverrideOffset!.Value);
             return instance;
         }
     }
-    private static nint _ShakeDurationOffset = -1;
+    private static nint? _ShakeDurationOffset;
 
     public ref float ShakeDuration
     {
         get
         {
-            if (_ShakeDurationOffset == -1) _ShakeDurationOffset = Schema.GetOffset(0x8EB4A28D941D986F);
-            return ref _Handle.AsRef<float>(_ShakeDurationOffset);
+            _ShakeDurationOffset = _ShakeDurationOffset ?? Schema.GetOffset(0x8EB4A28D941D986F);
+            return ref _Handle.AsRef<float>(_ShakeDurationOffset!.Value);
         }
     }
-    private static nint _TransitionTimeOffset = -1;
+    private static nint? _TransitionTimeOffset;
 
     public ref float TransitionTime
     {
         get
         {
-            if (_TransitionTimeOffset == -1) _TransitionTimeOffset = Schema.GetOffset(0x8EB4A28D8D4BFC39);
-            return ref _Handle.AsRef<float>(_TransitionTimeOffset);
+            _TransitionTimeOffset = _TransitionTimeOffset ?? Schema.GetOffset(0x8EB4A28D8D4BFC39);
+            return ref _Handle.AsRef<float>(_TransitionTimeOffset!.Value);
         }
     }
-    private static nint _TwistAmountOffset = -1;
+    private static nint? _TwistAmountOffset;
 
     public ref float TwistAmount
     {
         get
         {
-            if (_TwistAmountOffset == -1) _TwistAmountOffset = Schema.GetOffset(0x8EB4A28DB299B9CA);
-            return ref _Handle.AsRef<float>(_TwistAmountOffset);
+            _TwistAmountOffset = _TwistAmountOffset ?? Schema.GetOffset(0x8EB4A28DB299B9CA);
+            return ref _Handle.AsRef<float>(_TwistAmountOffset!.Value);
         }
     }
-    private static nint _RadialAmountOffset = -1;
+    private static nint? _RadialAmountOffset;
 
     public ref float RadialAmount
     {
         get
         {
-            if (_RadialAmountOffset == -1) _RadialAmountOffset = Schema.GetOffset(0x8EB4A28DA8611998);
-            return ref _Handle.AsRef<float>(_RadialAmountOffset);
+            _RadialAmountOffset = _RadialAmountOffset ?? Schema.GetOffset(0x8EB4A28DA8611998);
+            return ref _Handle.AsRef<float>(_RadialAmountOffset!.Value);
         }
     }
-    private static nint _ControlPointOrientationAmountOffset = -1;
+    private static nint? _ControlPointOrientationAmountOffset;
 
     public ref float ControlPointOrientationAmount
     {
         get
         {
-            if (_ControlPointOrientationAmountOffset == -1) _ControlPointOrientationAmountOffset = Schema.GetOffset(0x8EB4A28D3D28AFF4);
-            return ref _Handle.AsRef<float>(_ControlPointOrientationAmountOffset);
+            _ControlPointOrientationAmountOffset = _ControlPointOrientationAmountOffset ?? Schema.GetOffset(0x8EB4A28D3D28AFF4);
+            return ref _Handle.AsRef<float>(_ControlPointOrientationAmountOffset!.Value);
         }
     }
-    private static nint _ControlPointForLinearDirectionOffset = -1;
+    private static nint? _ControlPointForLinearDirectionOffset;
 
     public ref int ControlPointForLinearDirection
     {
         get
         {
-            if (_ControlPointForLinearDirectionOffset == -1) _ControlPointForLinearDirectionOffset = Schema.GetOffset(0x8EB4A28D80958783);
-            return ref _Handle.AsRef<int>(_ControlPointForLinearDirectionOffset);
+            _ControlPointForLinearDirectionOffset = _ControlPointForLinearDirectionOffset ?? Schema.GetOffset(0x8EB4A28D80958783);
+            return ref _Handle.AsRef<int>(_ControlPointForLinearDirectionOffset!.Value);
         }
     }
 

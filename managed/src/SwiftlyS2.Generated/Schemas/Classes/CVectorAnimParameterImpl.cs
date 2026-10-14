@@ -16,34 +16,34 @@ internal partial class CVectorAnimParameterImpl : CConcreteAnimParameterImpl, CV
 {
     public CVectorAnimParameterImpl(nint handle) : base(handle) { }
 
-    private static nint _DefaultValueOffset = -1;
+    private static nint? _DefaultValueOffset;
 
     public ref Vector DefaultValue
     {
         get
         {
-            if (_DefaultValueOffset == -1) _DefaultValueOffset = Schema.GetOffset(0x74346C8BBBE0341F);
-            return ref _Handle.AsRef<Vector>(_DefaultValueOffset);
+            _DefaultValueOffset = _DefaultValueOffset ?? Schema.GetOffset(0x74346C8BBBE0341F);
+            return ref _Handle.AsRef<Vector>(_DefaultValueOffset!.Value);
         }
     }
-    private static nint _InterpolateOffset = -1;
+    private static nint? _InterpolateOffset;
 
     public ref bool Interpolate
     {
         get
         {
-            if (_InterpolateOffset == -1) _InterpolateOffset = Schema.GetOffset(0x74346C8BF6607650);
-            return ref _Handle.AsRef<bool>(_InterpolateOffset);
+            _InterpolateOffset = _InterpolateOffset ?? Schema.GetOffset(0x74346C8BF6607650);
+            return ref _Handle.AsRef<bool>(_InterpolateOffset!.Value);
         }
     }
-    private static nint _VectorTypeOffset = -1;
+    private static nint? _VectorTypeOffset;
 
     public ref AnimParamVectorType_t VectorType
     {
         get
         {
-            if (_VectorTypeOffset == -1) _VectorTypeOffset = Schema.GetOffset(0x74346C8BF251F9D2);
-            return ref _Handle.AsRef<AnimParamVectorType_t>(_VectorTypeOffset);
+            _VectorTypeOffset = _VectorTypeOffset ?? Schema.GetOffset(0x74346C8BF251F9D2);
+            return ref _Handle.AsRef<AnimParamVectorType_t>(_VectorTypeOffset!.Value);
         }
     }
 

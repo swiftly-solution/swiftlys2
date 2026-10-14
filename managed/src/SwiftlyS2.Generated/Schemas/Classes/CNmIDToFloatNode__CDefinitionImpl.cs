@@ -16,49 +16,49 @@ internal partial class CNmIDToFloatNode__CDefinitionImpl : CNmFloatValueNode__CD
 {
     public CNmIDToFloatNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint _InputValueNodeIdxOffset = -1;
+    private static nint? _InputValueNodeIdxOffset;
 
     public ref short InputValueNodeIdx
     {
         get
         {
-            if (_InputValueNodeIdxOffset == -1) _InputValueNodeIdxOffset = Schema.GetOffset(0x9F6F687D95E89F27);
-            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset);
+            _InputValueNodeIdxOffset = _InputValueNodeIdxOffset ?? Schema.GetOffset(0x9F6F687D95E89F27);
+            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
         }
     }
-    private static nint _DefaultValueOffset = -1;
+    private static nint? _DefaultValueOffset;
 
     public ref float DefaultValue
     {
         get
         {
-            if (_DefaultValueOffset == -1) _DefaultValueOffset = Schema.GetOffset(0x9F6F687DBBE0341F);
-            return ref _Handle.AsRef<float>(_DefaultValueOffset);
+            _DefaultValueOffset = _DefaultValueOffset ?? Schema.GetOffset(0x9F6F687DBBE0341F);
+            return ref _Handle.AsRef<float>(_DefaultValueOffset!.Value);
         }
     }
-    private static nint _IDsOffset = -1;
+    private static nint? _IDsOffset;
     private SchemaUntypedField? _IDsInstance;
 
     public SchemaUntypedField IDs
     {
         get
         {
-            if (_IDsOffset == -1) _IDsOffset = Schema.GetOffset(0x9F6F687D0C180009);
+            _IDsOffset = _IDsOffset ?? Schema.GetOffset(0x9F6F687D0C180009);
             var instance = _IDsInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _IDsOffset);
+            instance.DangerousSetHandle(_Handle + _IDsOffset!.Value);
             return instance;
         }
     }
-    private static nint _ValuesOffset = -1;
+    private static nint? _ValuesOffset;
     private SchemaUntypedField? _ValuesInstance;
 
     public SchemaUntypedField Values
     {
         get
         {
-            if (_ValuesOffset == -1) _ValuesOffset = Schema.GetOffset(0x9F6F687DFBEDDADB);
+            _ValuesOffset = _ValuesOffset ?? Schema.GetOffset(0x9F6F687DFBEDDADB);
             var instance = _ValuesInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ValuesOffset);
+            instance.DangerousSetHandle(_Handle + _ValuesOffset!.Value);
             return instance;
         }
     }

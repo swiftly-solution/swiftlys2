@@ -16,84 +16,84 @@ internal partial class C_OP_SetControlPointsToModelParticlesImpl : CParticleFunc
 {
     public C_OP_SetControlPointsToModelParticlesImpl(nint handle) : base(handle) { }
 
-    private static nint _HitboxSetNameOffset = -1;
+    private static nint? _HitboxSetNameOffset;
 
     public string HitboxSetName
     {
         get
         {
-            if (_HitboxSetNameOffset == -1) _HitboxSetNameOffset = Schema.GetOffset(0x8850EF6A6A21BB0E);
-            return Schema.GetString(_Handle + _HitboxSetNameOffset);
+            _HitboxSetNameOffset = _HitboxSetNameOffset ?? Schema.GetOffset(0x8850EF6A6A21BB0E);
+            return Schema.GetString(_Handle + _HitboxSetNameOffset!.Value);
         }
         set
         {
-            if (_HitboxSetNameOffset == -1) _HitboxSetNameOffset = Schema.GetOffset(0x8850EF6A6A21BB0E);
-            Schema.SetFixedString(_Handle, _HitboxSetNameOffset, value, 128);
+            _HitboxSetNameOffset = _HitboxSetNameOffset ?? Schema.GetOffset(0x8850EF6A6A21BB0E);
+            Schema.SetFixedString(_Handle, _HitboxSetNameOffset!.Value, value, 128);
         }
     }
-    private static nint _AttachmentNameOffset = -1;
+    private static nint? _AttachmentNameOffset;
 
     public string AttachmentName
     {
         get
         {
-            if (_AttachmentNameOffset == -1) _AttachmentNameOffset = Schema.GetOffset(0x8850EF6A9CFCA76B);
-            return Schema.GetString(_Handle + _AttachmentNameOffset);
+            _AttachmentNameOffset = _AttachmentNameOffset ?? Schema.GetOffset(0x8850EF6A9CFCA76B);
+            return Schema.GetString(_Handle + _AttachmentNameOffset!.Value);
         }
         set
         {
-            if (_AttachmentNameOffset == -1) _AttachmentNameOffset = Schema.GetOffset(0x8850EF6A9CFCA76B);
-            Schema.SetFixedString(_Handle, _AttachmentNameOffset, value, 128);
+            _AttachmentNameOffset = _AttachmentNameOffset ?? Schema.GetOffset(0x8850EF6A9CFCA76B);
+            Schema.SetFixedString(_Handle, _AttachmentNameOffset!.Value, value, 128);
         }
     }
-    private static nint _FirstControlPointOffset = -1;
+    private static nint? _FirstControlPointOffset;
 
     public ref int FirstControlPoint
     {
         get
         {
-            if (_FirstControlPointOffset == -1) _FirstControlPointOffset = Schema.GetOffset(0x8850EF6A72117650);
-            return ref _Handle.AsRef<int>(_FirstControlPointOffset);
+            _FirstControlPointOffset = _FirstControlPointOffset ?? Schema.GetOffset(0x8850EF6A72117650);
+            return ref _Handle.AsRef<int>(_FirstControlPointOffset!.Value);
         }
     }
-    private static nint _NumControlPointsOffset = -1;
+    private static nint? _NumControlPointsOffset;
 
     public ref int NumControlPoints
     {
         get
         {
-            if (_NumControlPointsOffset == -1) _NumControlPointsOffset = Schema.GetOffset(0x8850EF6A551EBC4F);
-            return ref _Handle.AsRef<int>(_NumControlPointsOffset);
+            _NumControlPointsOffset = _NumControlPointsOffset ?? Schema.GetOffset(0x8850EF6A551EBC4F);
+            return ref _Handle.AsRef<int>(_NumControlPointsOffset!.Value);
         }
     }
-    private static nint _FirstSourcePointOffset = -1;
+    private static nint? _FirstSourcePointOffset;
 
     public ref int FirstSourcePoint
     {
         get
         {
-            if (_FirstSourcePointOffset == -1) _FirstSourcePointOffset = Schema.GetOffset(0x8850EF6A9D7DC18E);
-            return ref _Handle.AsRef<int>(_FirstSourcePointOffset);
+            _FirstSourcePointOffset = _FirstSourcePointOffset ?? Schema.GetOffset(0x8850EF6A9D7DC18E);
+            return ref _Handle.AsRef<int>(_FirstSourcePointOffset!.Value);
         }
     }
-    private static nint _SkinOffset = -1;
+    private static nint? _SkinOffset;
 
     public ref bool Skin
     {
         get
         {
-            if (_SkinOffset == -1) _SkinOffset = Schema.GetOffset(0x8850EF6A1BE32F18);
-            return ref _Handle.AsRef<bool>(_SkinOffset);
+            _SkinOffset = _SkinOffset ?? Schema.GetOffset(0x8850EF6A1BE32F18);
+            return ref _Handle.AsRef<bool>(_SkinOffset!.Value);
         }
     }
-    private static nint _AttachmentOffset = -1;
+    private static nint? _AttachmentOffset;
 
     public ref bool Attachment
     {
         get
         {
-            if (_AttachmentOffset == -1) _AttachmentOffset = Schema.GetOffset(0x8850EF6A4D2F6EC8);
-            return ref _Handle.AsRef<bool>(_AttachmentOffset);
+            _AttachmentOffset = _AttachmentOffset ?? Schema.GetOffset(0x8850EF6A4D2F6EC8);
+            return ref _Handle.AsRef<bool>(_AttachmentOffset!.Value);
         }
     }
 

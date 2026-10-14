@@ -16,16 +16,16 @@ internal partial class RnMeshDesc_tImpl : RnShapeDesc_tImpl, RnMeshDesc_t
 {
     public RnMeshDesc_tImpl(nint handle) : base(handle) { }
 
-    private static nint _MeshOffset = -1;
+    private static nint? _MeshOffset;
     private RnMesh_tImpl? _MeshInstance;
 
     public RnMesh_t Mesh
     {
         get
         {
-            if (_MeshOffset == -1) _MeshOffset = Schema.GetOffset(0xB236F002DEAFA33C);
+            _MeshOffset = _MeshOffset ?? Schema.GetOffset(0xB236F002DEAFA33C);
             var instance = _MeshInstance ??= new RnMesh_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _MeshOffset);
+            instance.DangerousSetHandle(_Handle + _MeshOffset!.Value);
             return instance;
         }
     }

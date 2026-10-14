@@ -16,46 +16,46 @@ internal partial class C_OP_LockToSavedSequentialPathImpl : CParticleFunctionOpe
 {
     public C_OP_LockToSavedSequentialPathImpl(nint handle) : base(handle) { }
 
-    private static nint _FadeStartOffset = -1;
+    private static nint? _FadeStartOffset;
 
     public ref float FadeStart
     {
         get
         {
-            if (_FadeStartOffset == -1) _FadeStartOffset = Schema.GetOffset(0x69BF8E0EE1A81343);
-            return ref _Handle.AsRef<float>(_FadeStartOffset);
+            _FadeStartOffset = _FadeStartOffset ?? Schema.GetOffset(0x69BF8E0EE1A81343);
+            return ref _Handle.AsRef<float>(_FadeStartOffset!.Value);
         }
     }
-    private static nint _FadeEndOffset = -1;
+    private static nint? _FadeEndOffset;
 
     public ref float FadeEnd
     {
         get
         {
-            if (_FadeEndOffset == -1) _FadeEndOffset = Schema.GetOffset(0x69BF8E0EBE7F4636);
-            return ref _Handle.AsRef<float>(_FadeEndOffset);
+            _FadeEndOffset = _FadeEndOffset ?? Schema.GetOffset(0x69BF8E0EBE7F4636);
+            return ref _Handle.AsRef<float>(_FadeEndOffset!.Value);
         }
     }
-    private static nint _CPPairsOffset = -1;
+    private static nint? _CPPairsOffset;
 
     public ref bool CPPairs
     {
         get
         {
-            if (_CPPairsOffset == -1) _CPPairsOffset = Schema.GetOffset(0x69BF8E0EA5D36D0F);
-            return ref _Handle.AsRef<bool>(_CPPairsOffset);
+            _CPPairsOffset = _CPPairsOffset ?? Schema.GetOffset(0x69BF8E0EA5D36D0F);
+            return ref _Handle.AsRef<bool>(_CPPairsOffset!.Value);
         }
     }
-    private static nint _PathParamsOffset = -1;
+    private static nint? _PathParamsOffset;
     private CPathParametersImpl? _PathParamsInstance;
 
     public CPathParameters PathParams
     {
         get
         {
-            if (_PathParamsOffset == -1) _PathParamsOffset = Schema.GetOffset(0x69BF8E0E3C10092C);
+            _PathParamsOffset = _PathParamsOffset ?? Schema.GetOffset(0x69BF8E0E3C10092C);
             var instance = _PathParamsInstance ??= new CPathParametersImpl(0);
-            instance.DangerousSetHandle(_Handle + _PathParamsOffset);
+            instance.DangerousSetHandle(_Handle + _PathParamsOffset!.Value);
             return instance;
         }
     }

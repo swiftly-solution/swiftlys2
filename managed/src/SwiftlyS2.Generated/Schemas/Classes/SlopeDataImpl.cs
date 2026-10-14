@@ -16,14 +16,14 @@ internal partial class SlopeDataImpl : SchemaClass, SlopeData
 {
     public SlopeDataImpl(nint handle) : base(handle) { }
 
-    private static nint _SlopeNormalOffset = -1;
+    private static nint? _SlopeNormalOffset;
 
     public ref Vector SlopeNormal
     {
         get
         {
-            if (_SlopeNormalOffset == -1) _SlopeNormalOffset = Schema.GetOffset(0x7F2D2390294F61EF);
-            return ref _Handle.AsRef<Vector>(_SlopeNormalOffset);
+            _SlopeNormalOffset = _SlopeNormalOffset ?? Schema.GetOffset(0x7F2D2390294F61EF);
+            return ref _Handle.AsRef<Vector>(_SlopeNormalOffset!.Value);
         }
     }
 

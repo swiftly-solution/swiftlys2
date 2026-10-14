@@ -16,137 +16,137 @@ internal partial class CSceneObjectData__RTProxyDrawDescriptor_tImpl : SchemaCla
 {
     public CSceneObjectData__RTProxyDrawDescriptor_tImpl(nint handle) : base(handle) { }
 
-    private static nint _MaterialGroupTokenOffset = -1;
+    private static nint? _MaterialGroupTokenOffset;
 
     public ref uint MaterialGroupToken
     {
         get
         {
-            if (_MaterialGroupTokenOffset == -1) _MaterialGroupTokenOffset = Schema.GetOffset(0x2393DBED97DE61E0);
-            return ref _Handle.AsRef<uint>(_MaterialGroupTokenOffset);
+            _MaterialGroupTokenOffset = _MaterialGroupTokenOffset ?? Schema.GetOffset(0x2393DBED97DE61E0);
+            return ref _Handle.AsRef<uint>(_MaterialGroupTokenOffset!.Value);
         }
     }
-    private static nint _SrcDrawIndexOffset = -1;
+    private static nint? _SrcDrawIndexOffset;
 
     public ref int SrcDrawIndex
     {
         get
         {
-            if (_SrcDrawIndexOffset == -1) _SrcDrawIndexOffset = Schema.GetOffset(0x2393DBEDD5B73BD1);
-            return ref _Handle.AsRef<int>(_SrcDrawIndexOffset);
+            _SrcDrawIndexOffset = _SrcDrawIndexOffset ?? Schema.GetOffset(0x2393DBEDD5B73BD1);
+            return ref _Handle.AsRef<int>(_SrcDrawIndexOffset!.Value);
         }
     }
-    private static nint _DrawDescOffset = -1;
+    private static nint? _DrawDescOffset;
     private CMaterialDrawDescriptorImpl? _DrawDescInstance;
 
     public CMaterialDrawDescriptor DrawDesc
     {
         get
         {
-            if (_DrawDescOffset == -1) _DrawDescOffset = Schema.GetOffset(0x2393DBEDD28090CE);
+            _DrawDescOffset = _DrawDescOffset ?? Schema.GetOffset(0x2393DBEDD28090CE);
             var instance = _DrawDescInstance ??= new CMaterialDrawDescriptorImpl(0);
-            instance.DangerousSetHandle(_Handle + _DrawDescOffset);
+            instance.DangerousSetHandle(_Handle + _DrawDescOffset!.Value);
             return instance;
         }
     }
-    private static nint _MWorldFromLocalOffset = -1;
+    private static nint? _MWorldFromLocalOffset;
 
     public ref matrix3x4_t MWorldFromLocal
     {
         get
         {
-            if (_MWorldFromLocalOffset == -1) _MWorldFromLocalOffset = Schema.GetOffset(0x2393DBED296A78BF);
-            return ref _Handle.AsRef<matrix3x4_t>(_MWorldFromLocalOffset);
+            _MWorldFromLocalOffset = _MWorldFromLocalOffset ?? Schema.GetOffset(0x2393DBED296A78BF);
+            return ref _Handle.AsRef<matrix3x4_t>(_MWorldFromLocalOffset!.Value);
         }
     }
-    private static nint _VertexAlbedoFormatOffset = -1;
+    private static nint? _VertexAlbedoFormatOffset;
 
     public ref VertexAlbedoFormat_t VertexAlbedoFormat
     {
         get
         {
-            if (_VertexAlbedoFormatOffset == -1) _VertexAlbedoFormatOffset = Schema.GetOffset(0x2393DBED8124359D);
-            return ref _Handle.AsRef<VertexAlbedoFormat_t>(_VertexAlbedoFormatOffset);
+            _VertexAlbedoFormatOffset = _VertexAlbedoFormatOffset ?? Schema.GetOffset(0x2393DBED8124359D);
+            return ref _Handle.AsRef<VertexAlbedoFormat_t>(_VertexAlbedoFormatOffset!.Value);
         }
     }
-    private static nint _VertexAlbedoVBOffset = -1;
+    private static nint? _VertexAlbedoVBOffset;
 
     public ref byte VertexAlbedoVB
     {
         get
         {
-            if (_VertexAlbedoVBOffset == -1) _VertexAlbedoVBOffset = Schema.GetOffset(0x2393DBED169D6C3E);
-            return ref _Handle.AsRef<byte>(_VertexAlbedoVBOffset);
+            _VertexAlbedoVBOffset = _VertexAlbedoVBOffset ?? Schema.GetOffset(0x2393DBED169D6C3E);
+            return ref _Handle.AsRef<byte>(_VertexAlbedoVBOffset!.Value);
         }
     }
-    private static nint _VertexAlbedoOffsetOffset = -1;
+    private static nint? _VertexAlbedoOffsetOffset;
 
     public ref ushort VertexAlbedoOffset
     {
         get
         {
-            if (_VertexAlbedoOffsetOffset == -1) _VertexAlbedoOffsetOffset = Schema.GetOffset(0x2393DBED3F021019);
-            return ref _Handle.AsRef<ushort>(_VertexAlbedoOffsetOffset);
+            _VertexAlbedoOffsetOffset = _VertexAlbedoOffsetOffset ?? Schema.GetOffset(0x2393DBED3F021019);
+            return ref _Handle.AsRef<ushort>(_VertexAlbedoOffsetOffset!.Value);
         }
     }
-    private static nint _VertexAlbedoStrideOffset = -1;
+    private static nint? _VertexAlbedoStrideOffset;
 
     public ref ushort VertexAlbedoStride
     {
         get
         {
-            if (_VertexAlbedoStrideOffset == -1) _VertexAlbedoStrideOffset = Schema.GetOffset(0x2393DBED9FEA6463);
-            return ref _Handle.AsRef<ushort>(_VertexAlbedoStrideOffset);
+            _VertexAlbedoStrideOffset = _VertexAlbedoStrideOffset ?? Schema.GetOffset(0x2393DBED9FEA6463);
+            return ref _Handle.AsRef<ushort>(_VertexAlbedoStrideOffset!.Value);
         }
     }
-    private static nint _VertexEmissiveFormatOffset = -1;
+    private static nint? _VertexEmissiveFormatOffset;
 
     public ref VertexAlbedoFormat_t VertexEmissiveFormat
     {
         get
         {
-            if (_VertexEmissiveFormatOffset == -1) _VertexEmissiveFormatOffset = Schema.GetOffset(0x2393DBEDC37583AB);
-            return ref _Handle.AsRef<VertexAlbedoFormat_t>(_VertexEmissiveFormatOffset);
+            _VertexEmissiveFormatOffset = _VertexEmissiveFormatOffset ?? Schema.GetOffset(0x2393DBEDC37583AB);
+            return ref _Handle.AsRef<VertexAlbedoFormat_t>(_VertexEmissiveFormatOffset!.Value);
         }
     }
-    private static nint _VertexEmissiveVBOffset = -1;
+    private static nint? _VertexEmissiveVBOffset;
 
     public ref byte VertexEmissiveVB
     {
         get
         {
-            if (_VertexEmissiveVBOffset == -1) _VertexEmissiveVBOffset = Schema.GetOffset(0x2393DBED8F978608);
-            return ref _Handle.AsRef<byte>(_VertexEmissiveVBOffset);
+            _VertexEmissiveVBOffset = _VertexEmissiveVBOffset ?? Schema.GetOffset(0x2393DBED8F978608);
+            return ref _Handle.AsRef<byte>(_VertexEmissiveVBOffset!.Value);
         }
     }
-    private static nint _VertexEmissiveOffsetOffset = -1;
+    private static nint? _VertexEmissiveOffsetOffset;
 
     public ref ushort VertexEmissiveOffset
     {
         get
         {
-            if (_VertexEmissiveOffsetOffset == -1) _VertexEmissiveOffsetOffset = Schema.GetOffset(0x2393DBED5C499A1B);
-            return ref _Handle.AsRef<ushort>(_VertexEmissiveOffsetOffset);
+            _VertexEmissiveOffsetOffset = _VertexEmissiveOffsetOffset ?? Schema.GetOffset(0x2393DBED5C499A1B);
+            return ref _Handle.AsRef<ushort>(_VertexEmissiveOffsetOffset!.Value);
         }
     }
-    private static nint _VertexEmissiveStrideOffset = -1;
+    private static nint? _VertexEmissiveStrideOffset;
 
     public ref ushort VertexEmissiveStride
     {
         get
         {
-            if (_VertexEmissiveStrideOffset == -1) _VertexEmissiveStrideOffset = Schema.GetOffset(0x2393DBED5BD57FBD);
-            return ref _Handle.AsRef<ushort>(_VertexEmissiveStrideOffset);
+            _VertexEmissiveStrideOffset = _VertexEmissiveStrideOffset ?? Schema.GetOffset(0x2393DBED5BD57FBD);
+            return ref _Handle.AsRef<ushort>(_VertexEmissiveStrideOffset!.Value);
         }
     }
-    private static nint _EmissiveFactorOffset = -1;
+    private static nint? _EmissiveFactorOffset;
 
     public ref float EmissiveFactor
     {
         get
         {
-            if (_EmissiveFactorOffset == -1) _EmissiveFactorOffset = Schema.GetOffset(0x2393DBED39C67965);
-            return ref _Handle.AsRef<float>(_EmissiveFactorOffset);
+            _EmissiveFactorOffset = _EmissiveFactorOffset ?? Schema.GetOffset(0x2393DBED39C67965);
+            return ref _Handle.AsRef<float>(_EmissiveFactorOffset!.Value);
         }
     }
 

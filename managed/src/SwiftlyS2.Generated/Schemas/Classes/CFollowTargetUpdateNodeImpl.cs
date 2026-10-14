@@ -16,42 +16,42 @@ internal partial class CFollowTargetUpdateNodeImpl : CUnaryUpdateNodeImpl, CFoll
 {
     public CFollowTargetUpdateNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _OpFixedDataOffset = -1;
+    private static nint? _OpFixedDataOffset;
     private FollowTargetOpFixedSettings_tImpl? _OpFixedDataInstance;
 
     public FollowTargetOpFixedSettings_t OpFixedData
     {
         get
         {
-            if (_OpFixedDataOffset == -1) _OpFixedDataOffset = Schema.GetOffset(0x2A45E9CB6960AF8C);
+            _OpFixedDataOffset = _OpFixedDataOffset ?? Schema.GetOffset(0x2A45E9CB6960AF8C);
             var instance = _OpFixedDataInstance ??= new FollowTargetOpFixedSettings_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _OpFixedDataOffset);
+            instance.DangerousSetHandle(_Handle + _OpFixedDataOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParameterPositionOffset = -1;
+    private static nint? _ParameterPositionOffset;
     private CAnimParamHandleImpl? _ParameterPositionInstance;
 
     public CAnimParamHandle ParameterPosition
     {
         get
         {
-            if (_ParameterPositionOffset == -1) _ParameterPositionOffset = Schema.GetOffset(0x2A45E9CBDA71CD41);
+            _ParameterPositionOffset = _ParameterPositionOffset ?? Schema.GetOffset(0x2A45E9CBDA71CD41);
             var instance = _ParameterPositionInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParameterPositionOffset);
+            instance.DangerousSetHandle(_Handle + _ParameterPositionOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParameterOrientationOffset = -1;
+    private static nint? _ParameterOrientationOffset;
     private CAnimParamHandleImpl? _ParameterOrientationInstance;
 
     public CAnimParamHandle ParameterOrientation
     {
         get
         {
-            if (_ParameterOrientationOffset == -1) _ParameterOrientationOffset = Schema.GetOffset(0x2A45E9CB1320E9C8);
+            _ParameterOrientationOffset = _ParameterOrientationOffset ?? Schema.GetOffset(0x2A45E9CB1320E9C8);
             var instance = _ParameterOrientationInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParameterOrientationOffset);
+            instance.DangerousSetHandle(_Handle + _ParameterOrientationOffset!.Value);
             return instance;
         }
     }

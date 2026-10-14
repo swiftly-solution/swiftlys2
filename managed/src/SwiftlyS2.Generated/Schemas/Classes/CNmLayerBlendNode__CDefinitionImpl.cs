@@ -16,36 +16,36 @@ internal partial class CNmLayerBlendNode__CDefinitionImpl : CNmPoseNode__CDefini
 {
     public CNmLayerBlendNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint _BaseNodeIdxOffset = -1;
+    private static nint? _BaseNodeIdxOffset;
 
     public ref short BaseNodeIdx
     {
         get
         {
-            if (_BaseNodeIdxOffset == -1) _BaseNodeIdxOffset = Schema.GetOffset(0xF9CDDBC5C07C7467);
-            return ref _Handle.AsRef<short>(_BaseNodeIdxOffset);
+            _BaseNodeIdxOffset = _BaseNodeIdxOffset ?? Schema.GetOffset(0xF9CDDBC5C07C7467);
+            return ref _Handle.AsRef<short>(_BaseNodeIdxOffset!.Value);
         }
     }
-    private static nint _OnlySampleBaseRootMotionOffset = -1;
+    private static nint? _OnlySampleBaseRootMotionOffset;
 
     public ref bool OnlySampleBaseRootMotion
     {
         get
         {
-            if (_OnlySampleBaseRootMotionOffset == -1) _OnlySampleBaseRootMotionOffset = Schema.GetOffset(0xF9CDDBC5ABE796B2);
-            return ref _Handle.AsRef<bool>(_OnlySampleBaseRootMotionOffset);
+            _OnlySampleBaseRootMotionOffset = _OnlySampleBaseRootMotionOffset ?? Schema.GetOffset(0xF9CDDBC5ABE796B2);
+            return ref _Handle.AsRef<bool>(_OnlySampleBaseRootMotionOffset!.Value);
         }
     }
-    private static nint _LayerDefinitionOffset = -1;
+    private static nint? _LayerDefinitionOffset;
     private SchemaUntypedField? _LayerDefinitionInstance;
 
     public SchemaUntypedField LayerDefinition
     {
         get
         {
-            if (_LayerDefinitionOffset == -1) _LayerDefinitionOffset = Schema.GetOffset(0xF9CDDBC51AE2DAAF);
+            _LayerDefinitionOffset = _LayerDefinitionOffset ?? Schema.GetOffset(0xF9CDDBC51AE2DAAF);
             var instance = _LayerDefinitionInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _LayerDefinitionOffset);
+            instance.DangerousSetHandle(_Handle + _LayerDefinitionOffset!.Value);
             return instance;
         }
     }

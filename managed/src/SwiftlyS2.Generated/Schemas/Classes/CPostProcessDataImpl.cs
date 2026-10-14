@@ -16,14 +16,14 @@ internal partial class CPostProcessDataImpl : SchemaClass, CPostProcessData
 {
     public CPostProcessDataImpl(nint handle) : base(handle) { }
 
-    private static nint _LayersOffset = -1;
+    private static nint? _LayersOffset;
 
     public ref CUtlVector<PointerTo<CColorCorrectionLayer>> Layers
     {
         get
         {
-            if (_LayersOffset == -1) _LayersOffset = Schema.GetOffset(0x22D07D192B20A1FF);
-            return ref _Handle.AsRef<CUtlVector<PointerTo<CColorCorrectionLayer>>>(_LayersOffset);
+            _LayersOffset = _LayersOffset ?? Schema.GetOffset(0x22D07D192B20A1FF);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<CColorCorrectionLayer>>>(_LayersOffset!.Value);
         }
     }
 

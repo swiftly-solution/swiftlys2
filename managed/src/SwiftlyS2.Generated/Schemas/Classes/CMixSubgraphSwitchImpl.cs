@@ -16,77 +16,77 @@ internal partial class CMixSubgraphSwitchImpl : CMixPropertyBaseImpl, CMixSubgra
 {
     public CMixSubgraphSwitchImpl(nint handle) : base(handle) { }
 
-    private static nint _UseDetailedPlugNamesOffset = -1;
+    private static nint? _UseDetailedPlugNamesOffset;
 
     public ref bool UseDetailedPlugNames
     {
         get
         {
-            if (_UseDetailedPlugNamesOffset == -1) _UseDetailedPlugNamesOffset = Schema.GetOffset(0x9850E2BE84204EB0);
-            return ref _Handle.AsRef<bool>(_UseDetailedPlugNamesOffset);
+            _UseDetailedPlugNamesOffset = _UseDetailedPlugNamesOffset ?? Schema.GetOffset(0x9850E2BE84204EB0);
+            return ref _Handle.AsRef<bool>(_UseDetailedPlugNamesOffset!.Value);
         }
     }
-    private static nint _DefaultSubgraphOffset = -1;
+    private static nint? _DefaultSubgraphOffset;
     private CSelectableSubgraphImpl? _DefaultSubgraphInstance;
 
     public CSelectableSubgraph DefaultSubgraph
     {
         get
         {
-            if (_DefaultSubgraphOffset == -1) _DefaultSubgraphOffset = Schema.GetOffset(0x9850E2BE2E31D900);
+            _DefaultSubgraphOffset = _DefaultSubgraphOffset ?? Schema.GetOffset(0x9850E2BE2E31D900);
             var instance = _DefaultSubgraphInstance ??= new CSelectableSubgraphImpl(0);
-            instance.DangerousSetHandle(_Handle + _DefaultSubgraphOffset);
+            instance.DangerousSetHandle(_Handle + _DefaultSubgraphOffset!.Value);
             return instance;
         }
     }
-    private static nint _InterpolationModeOffset = -1;
+    private static nint? _InterpolationModeOffset;
 
     public ref VMixSubgraphSwitchInterpolationType_t InterpolationMode
     {
         get
         {
-            if (_InterpolationModeOffset == -1) _InterpolationModeOffset = Schema.GetOffset(0x9850E2BE4F5C8CAA);
-            return ref _Handle.AsRef<VMixSubgraphSwitchInterpolationType_t>(_InterpolationModeOffset);
+            _InterpolationModeOffset = _InterpolationModeOffset ?? Schema.GetOffset(0x9850E2BE4F5C8CAA);
+            return ref _Handle.AsRef<VMixSubgraphSwitchInterpolationType_t>(_InterpolationModeOffset!.Value);
         }
     }
-    private static nint _OnlyTailsOnFadeOutOffset = -1;
+    private static nint? _OnlyTailsOnFadeOutOffset;
 
     public ref bool OnlyTailsOnFadeOut
     {
         get
         {
-            if (_OnlyTailsOnFadeOutOffset == -1) _OnlyTailsOnFadeOutOffset = Schema.GetOffset(0x9850E2BE1CE7CEF7);
-            return ref _Handle.AsRef<bool>(_OnlyTailsOnFadeOutOffset);
+            _OnlyTailsOnFadeOutOffset = _OnlyTailsOnFadeOutOffset ?? Schema.GetOffset(0x9850E2BE1CE7CEF7);
+            return ref _Handle.AsRef<bool>(_OnlyTailsOnFadeOutOffset!.Value);
         }
     }
-    private static nint _TransitionTimeOffset = -1;
+    private static nint? _TransitionTimeOffset;
 
     public ref float TransitionTime
     {
         get
         {
-            if (_TransitionTimeOffset == -1) _TransitionTimeOffset = Schema.GetOffset(0x9850E2BE40DADD99);
-            return ref _Handle.AsRef<float>(_TransitionTimeOffset);
+            _TransitionTimeOffset = _TransitionTimeOffset ?? Schema.GetOffset(0x9850E2BE40DADD99);
+            return ref _Handle.AsRef<float>(_TransitionTimeOffset!.Value);
         }
     }
-    private static nint _ChannelsOffset = -1;
+    private static nint? _ChannelsOffset;
 
     public ref int Channels
     {
         get
         {
-            if (_ChannelsOffset == -1) _ChannelsOffset = Schema.GetOffset(0x9850E2BE4D304B71);
-            return ref _Handle.AsRef<int>(_ChannelsOffset);
+            _ChannelsOffset = _ChannelsOffset ?? Schema.GetOffset(0x9850E2BE4D304B71);
+            return ref _Handle.AsRef<int>(_ChannelsOffset!.Value);
         }
     }
-    private static nint _SubgraphsOffset = -1;
+    private static nint? _SubgraphsOffset;
 
     public ref CUtlVector<CSelectableSubgraph> Subgraphs
     {
         get
         {
-            if (_SubgraphsOffset == -1) _SubgraphsOffset = Schema.GetOffset(0x9850E2BE9166DECC);
-            return ref _Handle.AsRef<CUtlVector<CSelectableSubgraph>>(_SubgraphsOffset);
+            _SubgraphsOffset = _SubgraphsOffset ?? Schema.GetOffset(0x9850E2BE9166DECC);
+            return ref _Handle.AsRef<CUtlVector<CSelectableSubgraph>>(_SubgraphsOffset!.Value);
         }
     }
 

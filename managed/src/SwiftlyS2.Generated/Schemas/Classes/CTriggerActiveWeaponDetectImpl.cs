@@ -16,29 +16,29 @@ internal partial class CTriggerActiveWeaponDetectImpl : CBaseTriggerImpl, CTrigg
 {
     public CTriggerActiveWeaponDetectImpl(nint handle) : base(handle) { }
 
-    private static nint _OnTouchedActiveWeaponOffset = -1;
+    private static nint? _OnTouchedActiveWeaponOffset;
 
     public ref CEntityIOOutput OnTouchedActiveWeapon
     {
         get
         {
-            if (_OnTouchedActiveWeaponOffset == -1) _OnTouchedActiveWeaponOffset = Schema.GetOffset(0x68F50CC727D5D394);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnTouchedActiveWeaponOffset);
+            _OnTouchedActiveWeaponOffset = _OnTouchedActiveWeaponOffset ?? Schema.GetOffset(0x68F50CC727D5D394);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTouchedActiveWeaponOffset!.Value);
         }
     }
-    private static nint _WeaponClassNameOffset = -1;
+    private static nint? _WeaponClassNameOffset;
 
     public string WeaponClassName
     {
         get
         {
-            if (_WeaponClassNameOffset == -1) _WeaponClassNameOffset = Schema.GetOffset(0x68F50CC7BD3D5B08);
-            return Schema.GetString(_Handle.Read<nint>(_WeaponClassNameOffset));
+            _WeaponClassNameOffset = _WeaponClassNameOffset ?? Schema.GetOffset(0x68F50CC7BD3D5B08);
+            return Schema.GetString(_Handle.Read<nint>(_WeaponClassNameOffset!.Value));
         }
         set
         {
-            if (_WeaponClassNameOffset == -1) _WeaponClassNameOffset = Schema.GetOffset(0x68F50CC7BD3D5B08);
-            Schema.SetString(_Handle, _WeaponClassNameOffset, value);
+            _WeaponClassNameOffset = _WeaponClassNameOffset ?? Schema.GetOffset(0x68F50CC7BD3D5B08);
+            Schema.SetString(_Handle, _WeaponClassNameOffset!.Value, value);
         }
     }
 

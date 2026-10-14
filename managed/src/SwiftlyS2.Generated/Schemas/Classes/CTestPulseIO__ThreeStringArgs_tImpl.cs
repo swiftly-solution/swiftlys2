@@ -16,49 +16,49 @@ internal partial class CTestPulseIO__ThreeStringArgs_tImpl : SchemaClass, CTestP
 {
     public CTestPulseIO__ThreeStringArgs_tImpl(nint handle) : base(handle) { }
 
-    private static nint _StrArg1Offset = -1;
+    private static nint? _StrArg1Offset;
 
     public string StrArg1
     {
         get
         {
-            if (_StrArg1Offset == -1) _StrArg1Offset = Schema.GetOffset(0xA5870B1A0CCD4847);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrArg1Offset));
+            _StrArg1Offset = _StrArg1Offset ?? Schema.GetOffset(0xA5870B1A0CCD4847);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrArg1Offset!.Value));
         }
         set
         {
-            if (_StrArg1Offset == -1) _StrArg1Offset = Schema.GetOffset(0xA5870B1A0CCD4847);
-            Schema.SetCUtlString(_Handle, _StrArg1Offset, value);
+            _StrArg1Offset = _StrArg1Offset ?? Schema.GetOffset(0xA5870B1A0CCD4847);
+            Schema.SetCUtlString(_Handle, _StrArg1Offset!.Value, value);
         }
     }
-    private static nint _StrArg2Offset = -1;
+    private static nint? _StrArg2Offset;
 
     public string StrArg2
     {
         get
         {
-            if (_StrArg2Offset == -1) _StrArg2Offset = Schema.GetOffset(0xA5870B1A0DCD49DA);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrArg2Offset));
+            _StrArg2Offset = _StrArg2Offset ?? Schema.GetOffset(0xA5870B1A0DCD49DA);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrArg2Offset!.Value));
         }
         set
         {
-            if (_StrArg2Offset == -1) _StrArg2Offset = Schema.GetOffset(0xA5870B1A0DCD49DA);
-            Schema.SetCUtlString(_Handle, _StrArg2Offset, value);
+            _StrArg2Offset = _StrArg2Offset ?? Schema.GetOffset(0xA5870B1A0DCD49DA);
+            Schema.SetCUtlString(_Handle, _StrArg2Offset!.Value, value);
         }
     }
-    private static nint _StrArg3Offset = -1;
+    private static nint? _StrArg3Offset;
 
     public string StrArg3
     {
         get
         {
-            if (_StrArg3Offset == -1) _StrArg3Offset = Schema.GetOffset(0xA5870B1A0ECD4B6D);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrArg3Offset));
+            _StrArg3Offset = _StrArg3Offset ?? Schema.GetOffset(0xA5870B1A0ECD4B6D);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrArg3Offset!.Value));
         }
         set
         {
-            if (_StrArg3Offset == -1) _StrArg3Offset = Schema.GetOffset(0xA5870B1A0ECD4B6D);
-            Schema.SetCUtlString(_Handle, _StrArg3Offset, value);
+            _StrArg3Offset = _StrArg3Offset ?? Schema.GetOffset(0xA5870B1A0ECD4B6D);
+            Schema.SetCUtlString(_Handle, _StrArg3Offset!.Value, value);
         }
     }
 

@@ -16,14 +16,14 @@ internal partial class C_EconEntity__AttachedModelData_tImpl : SchemaClass, C_Ec
 {
     public C_EconEntity__AttachedModelData_tImpl(nint handle) : base(handle) { }
 
-    private static nint _ModelDisplayFlagsOffset = -1;
+    private static nint? _ModelDisplayFlagsOffset;
 
     public ref int ModelDisplayFlags
     {
         get
         {
-            if (_ModelDisplayFlagsOffset == -1) _ModelDisplayFlagsOffset = Schema.GetOffset(0x95212825980C3760);
-            return ref _Handle.AsRef<int>(_ModelDisplayFlagsOffset);
+            _ModelDisplayFlagsOffset = _ModelDisplayFlagsOffset ?? Schema.GetOffset(0x95212825980C3760);
+            return ref _Handle.AsRef<int>(_ModelDisplayFlagsOffset!.Value);
         }
     }
 

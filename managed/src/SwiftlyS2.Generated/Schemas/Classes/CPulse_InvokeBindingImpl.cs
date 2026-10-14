@@ -16,66 +16,66 @@ internal partial class CPulse_InvokeBindingImpl : SchemaClass, CPulse_InvokeBind
 {
     public CPulse_InvokeBindingImpl(nint handle) : base(handle) { }
 
-    private static nint _RegisterMapOffset = -1;
+    private static nint? _RegisterMapOffset;
     private PulseRegisterMap_tImpl? _RegisterMapInstance;
 
     public PulseRegisterMap_t RegisterMap
     {
         get
         {
-            if (_RegisterMapOffset == -1) _RegisterMapOffset = Schema.GetOffset(0x3632DF0D7BD4CE96);
+            _RegisterMapOffset = _RegisterMapOffset ?? Schema.GetOffset(0x3632DF0D7BD4CE96);
             var instance = _RegisterMapInstance ??= new PulseRegisterMap_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _RegisterMapOffset);
+            instance.DangerousSetHandle(_Handle + _RegisterMapOffset!.Value);
             return instance;
         }
     }
-    private static nint _FuncNameOffset = -1;
+    private static nint? _FuncNameOffset;
     private SchemaUntypedField? _FuncNameInstance;
 
     public SchemaUntypedField FuncName
     {
         get
         {
-            if (_FuncNameOffset == -1) _FuncNameOffset = Schema.GetOffset(0x3632DF0D1B5BC2A4);
+            _FuncNameOffset = _FuncNameOffset ?? Schema.GetOffset(0x3632DF0D1B5BC2A4);
             var instance = _FuncNameInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _FuncNameOffset);
+            instance.DangerousSetHandle(_Handle + _FuncNameOffset!.Value);
             return instance;
         }
     }
-    private static nint _CellIndexOffset = -1;
+    private static nint? _CellIndexOffset;
     private PulseRuntimeCellIndex_tImpl? _CellIndexInstance;
 
     public PulseRuntimeCellIndex_t CellIndex
     {
         get
         {
-            if (_CellIndexOffset == -1) _CellIndexOffset = Schema.GetOffset(0x3632DF0DACE41A7F);
+            _CellIndexOffset = _CellIndexOffset ?? Schema.GetOffset(0x3632DF0DACE41A7F);
             var instance = _CellIndexInstance ??= new PulseRuntimeCellIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _CellIndexOffset);
+            instance.DangerousSetHandle(_Handle + _CellIndexOffset!.Value);
             return instance;
         }
     }
-    private static nint _SrcChunkOffset = -1;
+    private static nint? _SrcChunkOffset;
     private PulseRuntimeChunkIndex_tImpl? _SrcChunkInstance;
 
     public PulseRuntimeChunkIndex_t SrcChunk
     {
         get
         {
-            if (_SrcChunkOffset == -1) _SrcChunkOffset = Schema.GetOffset(0x3632DF0D313F814A);
+            _SrcChunkOffset = _SrcChunkOffset ?? Schema.GetOffset(0x3632DF0D313F814A);
             var instance = _SrcChunkInstance ??= new PulseRuntimeChunkIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _SrcChunkOffset);
+            instance.DangerousSetHandle(_Handle + _SrcChunkOffset!.Value);
             return instance;
         }
     }
-    private static nint _SrcInstructionOffset = -1;
+    private static nint? _SrcInstructionOffset;
 
     public ref int SrcInstruction
     {
         get
         {
-            if (_SrcInstructionOffset == -1) _SrcInstructionOffset = Schema.GetOffset(0x3632DF0D99E09AE7);
-            return ref _Handle.AsRef<int>(_SrcInstructionOffset);
+            _SrcInstructionOffset = _SrcInstructionOffset ?? Schema.GetOffset(0x3632DF0D99E09AE7);
+            return ref _Handle.AsRef<int>(_SrcInstructionOffset!.Value);
         }
     }
 

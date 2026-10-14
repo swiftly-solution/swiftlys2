@@ -16,94 +16,94 @@ internal partial class CAnimGraphDoc_ChoiceNodeImpl : CAnimGraphDoc_NodeImpl, CA
 {
     public CAnimGraphDoc_ChoiceNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _ChildrenOffset = -1;
+    private static nint? _ChildrenOffset;
 
     public ref CUtlVector<CChoiceNodeChild> Children
     {
         get
         {
-            if (_ChildrenOffset == -1) _ChildrenOffset = Schema.GetOffset(0xC9A59E617415FA72);
-            return ref _Handle.AsRef<CUtlVector<CChoiceNodeChild>>(_ChildrenOffset);
+            _ChildrenOffset = _ChildrenOffset ?? Schema.GetOffset(0xC9A59E617415FA72);
+            return ref _Handle.AsRef<CUtlVector<CChoiceNodeChild>>(_ChildrenOffset!.Value);
         }
     }
-    private static nint _SeedOffset = -1;
+    private static nint? _SeedOffset;
 
     public ref int Seed
     {
         get
         {
-            if (_SeedOffset == -1) _SeedOffset = Schema.GetOffset(0xC9A59E610E20ED4C);
-            return ref _Handle.AsRef<int>(_SeedOffset);
+            _SeedOffset = _SeedOffset ?? Schema.GetOffset(0xC9A59E610E20ED4C);
+            return ref _Handle.AsRef<int>(_SeedOffset!.Value);
         }
     }
-    private static nint _ChoiceMethodOffset = -1;
+    private static nint? _ChoiceMethodOffset;
 
     public ref ChoiceMethod ChoiceMethod
     {
         get
         {
-            if (_ChoiceMethodOffset == -1) _ChoiceMethodOffset = Schema.GetOffset(0xC9A59E614E106F5B);
-            return ref _Handle.AsRef<ChoiceMethod>(_ChoiceMethodOffset);
+            _ChoiceMethodOffset = _ChoiceMethodOffset ?? Schema.GetOffset(0xC9A59E614E106F5B);
+            return ref _Handle.AsRef<ChoiceMethod>(_ChoiceMethodOffset!.Value);
         }
     }
-    private static nint _ChoiceChangeMethodOffset = -1;
+    private static nint? _ChoiceChangeMethodOffset;
 
     public ref ChoiceChangeMethod ChoiceChangeMethod
     {
         get
         {
-            if (_ChoiceChangeMethodOffset == -1) _ChoiceChangeMethodOffset = Schema.GetOffset(0xC9A59E61265F1E7F);
-            return ref _Handle.AsRef<ChoiceChangeMethod>(_ChoiceChangeMethodOffset);
+            _ChoiceChangeMethodOffset = _ChoiceChangeMethodOffset ?? Schema.GetOffset(0xC9A59E61265F1E7F);
+            return ref _Handle.AsRef<ChoiceChangeMethod>(_ChoiceChangeMethodOffset!.Value);
         }
     }
-    private static nint _BlendMethodOffset = -1;
+    private static nint? _BlendMethodOffset;
 
     public ref ChoiceBlendMethod BlendMethod
     {
         get
         {
-            if (_BlendMethodOffset == -1) _BlendMethodOffset = Schema.GetOffset(0xC9A59E61FF929529);
-            return ref _Handle.AsRef<ChoiceBlendMethod>(_BlendMethodOffset);
+            _BlendMethodOffset = _BlendMethodOffset ?? Schema.GetOffset(0xC9A59E61FF929529);
+            return ref _Handle.AsRef<ChoiceBlendMethod>(_BlendMethodOffset!.Value);
         }
     }
-    private static nint _BlendTimeOffset = -1;
+    private static nint? _BlendTimeOffset;
 
     public ref float BlendTime
     {
         get
         {
-            if (_BlendTimeOffset == -1) _BlendTimeOffset = Schema.GetOffset(0xC9A59E6173D026B1);
-            return ref _Handle.AsRef<float>(_BlendTimeOffset);
+            _BlendTimeOffset = _BlendTimeOffset ?? Schema.GetOffset(0xC9A59E6173D026B1);
+            return ref _Handle.AsRef<float>(_BlendTimeOffset!.Value);
         }
     }
-    private static nint _CrossFadeOffset = -1;
+    private static nint? _CrossFadeOffset;
 
     public ref bool CrossFade
     {
         get
         {
-            if (_CrossFadeOffset == -1) _CrossFadeOffset = Schema.GetOffset(0xC9A59E6164BEC665);
-            return ref _Handle.AsRef<bool>(_CrossFadeOffset);
+            _CrossFadeOffset = _CrossFadeOffset ?? Schema.GetOffset(0xC9A59E6164BEC665);
+            return ref _Handle.AsRef<bool>(_CrossFadeOffset!.Value);
         }
     }
-    private static nint _ResetChosenOffset = -1;
+    private static nint? _ResetChosenOffset;
 
     public ref bool ResetChosen
     {
         get
         {
-            if (_ResetChosenOffset == -1) _ResetChosenOffset = Schema.GetOffset(0xC9A59E612FFC43FA);
-            return ref _Handle.AsRef<bool>(_ResetChosenOffset);
+            _ResetChosenOffset = _ResetChosenOffset ?? Schema.GetOffset(0xC9A59E612FFC43FA);
+            return ref _Handle.AsRef<bool>(_ResetChosenOffset!.Value);
         }
     }
-    private static nint _DontResetSameSelectionOffset = -1;
+    private static nint? _DontResetSameSelectionOffset;
 
     public ref bool DontResetSameSelection
     {
         get
         {
-            if (_DontResetSameSelectionOffset == -1) _DontResetSameSelectionOffset = Schema.GetOffset(0xC9A59E61B9EC0773);
-            return ref _Handle.AsRef<bool>(_DontResetSameSelectionOffset);
+            _DontResetSameSelectionOffset = _DontResetSameSelectionOffset ?? Schema.GetOffset(0xC9A59E61B9EC0773);
+            return ref _Handle.AsRef<bool>(_DontResetSameSelectionOffset!.Value);
         }
     }
 

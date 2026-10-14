@@ -16,41 +16,41 @@ internal partial class CEffectsPreviewListImpl : SchemaClass, CEffectsPreviewLis
 {
     public CEffectsPreviewListImpl(nint handle) : base(handle) { }
 
-    private static nint _PreviewGraphInputOffset = -1;
+    private static nint? _PreviewGraphInputOffset;
 
     public string PreviewGraphInput
     {
         get
         {
-            if (_PreviewGraphInputOffset == -1) _PreviewGraphInputOffset = Schema.GetOffset(0x1A06D1E820074D3B);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_PreviewGraphInputOffset));
+            _PreviewGraphInputOffset = _PreviewGraphInputOffset ?? Schema.GetOffset(0x1A06D1E820074D3B);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_PreviewGraphInputOffset!.Value));
         }
         set
         {
-            if (_PreviewGraphInputOffset == -1) _PreviewGraphInputOffset = Schema.GetOffset(0x1A06D1E820074D3B);
-            Schema.SetCUtlString(_Handle, _PreviewGraphInputOffset, value);
+            _PreviewGraphInputOffset = _PreviewGraphInputOffset ?? Schema.GetOffset(0x1A06D1E820074D3B);
+            Schema.SetCUtlString(_Handle, _PreviewGraphInputOffset!.Value, value);
         }
     }
-    private static nint _MixOffset = -1;
+    private static nint? _MixOffset;
 
     public ref float Mix
     {
         get
         {
-            if (_MixOffset == -1) _MixOffset = Schema.GetOffset(0x1A06D1E82D1A403F);
-            return ref _Handle.AsRef<float>(_MixOffset);
+            _MixOffset = _MixOffset ?? Schema.GetOffset(0x1A06D1E82D1A403F);
+            return ref _Handle.AsRef<float>(_MixOffset!.Value);
         }
     }
-    private static nint _PreviewListOffset = -1;
+    private static nint? _PreviewListOffset;
     private CPreviewListImpl? _PreviewListInstance;
 
     public CPreviewList PreviewList
     {
         get
         {
-            if (_PreviewListOffset == -1) _PreviewListOffset = Schema.GetOffset(0x1A06D1E87035D7DF);
+            _PreviewListOffset = _PreviewListOffset ?? Schema.GetOffset(0x1A06D1E87035D7DF);
             var instance = _PreviewListInstance ??= new CPreviewListImpl(0);
-            instance.DangerousSetHandle(_Handle + _PreviewListOffset);
+            instance.DangerousSetHandle(_Handle + _PreviewListOffset!.Value);
             return instance;
         }
     }

@@ -16,69 +16,69 @@ internal partial class FeVertexMapBuild_tImpl : SchemaClass, FeVertexMapBuild_t
 {
     public FeVertexMapBuild_tImpl(nint handle) : base(handle) { }
 
-    private static nint _VertexMapNameOffset = -1;
+    private static nint? _VertexMapNameOffset;
 
     public string VertexMapName
     {
         get
         {
-            if (_VertexMapNameOffset == -1) _VertexMapNameOffset = Schema.GetOffset(0x35530D470AA2D2C4);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_VertexMapNameOffset));
+            _VertexMapNameOffset = _VertexMapNameOffset ?? Schema.GetOffset(0x35530D470AA2D2C4);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_VertexMapNameOffset!.Value));
         }
         set
         {
-            if (_VertexMapNameOffset == -1) _VertexMapNameOffset = Schema.GetOffset(0x35530D470AA2D2C4);
-            Schema.SetCUtlString(_Handle, _VertexMapNameOffset, value);
+            _VertexMapNameOffset = _VertexMapNameOffset ?? Schema.GetOffset(0x35530D470AA2D2C4);
+            Schema.SetCUtlString(_Handle, _VertexMapNameOffset!.Value, value);
         }
     }
-    private static nint _NameHashOffset = -1;
+    private static nint? _NameHashOffset;
 
     public ref uint NameHash
     {
         get
         {
-            if (_NameHashOffset == -1) _NameHashOffset = Schema.GetOffset(0x35530D47DE15EEFE);
-            return ref _Handle.AsRef<uint>(_NameHashOffset);
+            _NameHashOffset = _NameHashOffset ?? Schema.GetOffset(0x35530D47DE15EEFE);
+            return ref _Handle.AsRef<uint>(_NameHashOffset!.Value);
         }
     }
-    private static nint _ColorOffset = -1;
+    private static nint? _ColorOffset;
 
     public ref Color Color
     {
         get
         {
-            if (_ColorOffset == -1) _ColorOffset = Schema.GetOffset(0x35530D47D7D017D8);
-            return ref _Handle.AsRef<Color>(_ColorOffset);
+            _ColorOffset = _ColorOffset ?? Schema.GetOffset(0x35530D47D7D017D8);
+            return ref _Handle.AsRef<Color>(_ColorOffset!.Value);
         }
     }
-    private static nint _VolumetricSolveStrengthOffset = -1;
+    private static nint? _VolumetricSolveStrengthOffset;
 
     public ref float VolumetricSolveStrength
     {
         get
         {
-            if (_VolumetricSolveStrengthOffset == -1) _VolumetricSolveStrengthOffset = Schema.GetOffset(0x35530D47F490B9B7);
-            return ref _Handle.AsRef<float>(_VolumetricSolveStrengthOffset);
+            _VolumetricSolveStrengthOffset = _VolumetricSolveStrengthOffset ?? Schema.GetOffset(0x35530D47F490B9B7);
+            return ref _Handle.AsRef<float>(_VolumetricSolveStrengthOffset!.Value);
         }
     }
-    private static nint _ScaleSourceNodeOffset = -1;
+    private static nint? _ScaleSourceNodeOffset;
 
     public ref int ScaleSourceNode
     {
         get
         {
-            if (_ScaleSourceNodeOffset == -1) _ScaleSourceNodeOffset = Schema.GetOffset(0x35530D477C35F5E4);
-            return ref _Handle.AsRef<int>(_ScaleSourceNodeOffset);
+            _ScaleSourceNodeOffset = _ScaleSourceNodeOffset ?? Schema.GetOffset(0x35530D477C35F5E4);
+            return ref _Handle.AsRef<int>(_ScaleSourceNodeOffset!.Value);
         }
     }
-    private static nint _WeightsOffset = -1;
+    private static nint? _WeightsOffset;
 
     public ref CUtlVector<float> Weights
     {
         get
         {
-            if (_WeightsOffset == -1) _WeightsOffset = Schema.GetOffset(0x35530D475DDC697E);
-            return ref _Handle.AsRef<CUtlVector<float>>(_WeightsOffset);
+            _WeightsOffset = _WeightsOffset ?? Schema.GetOffset(0x35530D475DDC697E);
+            return ref _Handle.AsRef<CUtlVector<float>>(_WeightsOffset!.Value);
         }
     }
 

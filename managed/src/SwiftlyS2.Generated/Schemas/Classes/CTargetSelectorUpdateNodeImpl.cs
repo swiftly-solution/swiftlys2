@@ -16,116 +16,116 @@ internal partial class CTargetSelectorUpdateNodeImpl : CAnimUpdateNodeBaseImpl, 
 {
     public CTargetSelectorUpdateNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _AngleModeOffset = -1;
+    private static nint? _AngleModeOffset;
 
     public ref TargetSelectorAngleMode_t AngleMode
     {
         get
         {
-            if (_AngleModeOffset == -1) _AngleModeOffset = Schema.GetOffset(0x37AB6CCBD21DC8BC);
-            return ref _Handle.AsRef<TargetSelectorAngleMode_t>(_AngleModeOffset);
+            _AngleModeOffset = _AngleModeOffset ?? Schema.GetOffset(0x37AB6CCBD21DC8BC);
+            return ref _Handle.AsRef<TargetSelectorAngleMode_t>(_AngleModeOffset!.Value);
         }
     }
-    private static nint _ChildrenOffset = -1;
+    private static nint? _ChildrenOffset;
 
     public ref CUtlVector<CAnimUpdateNodeRef> Children
     {
         get
         {
-            if (_ChildrenOffset == -1) _ChildrenOffset = Schema.GetOffset(0x37AB6CCB7415FA72);
-            return ref _Handle.AsRef<CUtlVector<CAnimUpdateNodeRef>>(_ChildrenOffset);
+            _ChildrenOffset = _ChildrenOffset ?? Schema.GetOffset(0x37AB6CCB7415FA72);
+            return ref _Handle.AsRef<CUtlVector<CAnimUpdateNodeRef>>(_ChildrenOffset!.Value);
         }
     }
-    private static nint _TargetPositionOffset = -1;
+    private static nint? _TargetPositionOffset;
     private CAnimParamHandleImpl? _TargetPositionInstance;
 
     public CAnimParamHandle TargetPosition
     {
         get
         {
-            if (_TargetPositionOffset == -1) _TargetPositionOffset = Schema.GetOffset(0x37AB6CCBD1F40125);
+            _TargetPositionOffset = _TargetPositionOffset ?? Schema.GetOffset(0x37AB6CCBD1F40125);
             var instance = _TargetPositionInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _TargetPositionOffset);
+            instance.DangerousSetHandle(_Handle + _TargetPositionOffset!.Value);
             return instance;
         }
     }
-    private static nint _TargetFacePositionParameterOffset = -1;
+    private static nint? _TargetFacePositionParameterOffset;
     private CAnimParamHandleImpl? _TargetFacePositionParameterInstance;
 
     public CAnimParamHandle TargetFacePositionParameter
     {
         get
         {
-            if (_TargetFacePositionParameterOffset == -1) _TargetFacePositionParameterOffset = Schema.GetOffset(0x37AB6CCB1102D56F);
+            _TargetFacePositionParameterOffset = _TargetFacePositionParameterOffset ?? Schema.GetOffset(0x37AB6CCB1102D56F);
             var instance = _TargetFacePositionParameterInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _TargetFacePositionParameterOffset);
+            instance.DangerousSetHandle(_Handle + _TargetFacePositionParameterOffset!.Value);
             return instance;
         }
     }
-    private static nint _MoveHeadingParameterOffset = -1;
+    private static nint? _MoveHeadingParameterOffset;
     private CAnimParamHandleImpl? _MoveHeadingParameterInstance;
 
     public CAnimParamHandle MoveHeadingParameter
     {
         get
         {
-            if (_MoveHeadingParameterOffset == -1) _MoveHeadingParameterOffset = Schema.GetOffset(0x37AB6CCB3A7267CF);
+            _MoveHeadingParameterOffset = _MoveHeadingParameterOffset ?? Schema.GetOffset(0x37AB6CCB3A7267CF);
             var instance = _MoveHeadingParameterInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _MoveHeadingParameterOffset);
+            instance.DangerousSetHandle(_Handle + _MoveHeadingParameterOffset!.Value);
             return instance;
         }
     }
-    private static nint _DesiredMoveHeadingParameterOffset = -1;
+    private static nint? _DesiredMoveHeadingParameterOffset;
     private CAnimParamHandleImpl? _DesiredMoveHeadingParameterInstance;
 
     public CAnimParamHandle DesiredMoveHeadingParameter
     {
         get
         {
-            if (_DesiredMoveHeadingParameterOffset == -1) _DesiredMoveHeadingParameterOffset = Schema.GetOffset(0x37AB6CCBC6298DFB);
+            _DesiredMoveHeadingParameterOffset = _DesiredMoveHeadingParameterOffset ?? Schema.GetOffset(0x37AB6CCBC6298DFB);
             var instance = _DesiredMoveHeadingParameterInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _DesiredMoveHeadingParameterOffset);
+            instance.DangerousSetHandle(_Handle + _DesiredMoveHeadingParameterOffset!.Value);
             return instance;
         }
     }
-    private static nint _TargetPositionIsWorldSpaceOffset = -1;
+    private static nint? _TargetPositionIsWorldSpaceOffset;
 
     public ref bool TargetPositionIsWorldSpace
     {
         get
         {
-            if (_TargetPositionIsWorldSpaceOffset == -1) _TargetPositionIsWorldSpaceOffset = Schema.GetOffset(0x37AB6CCBABCF9ECD);
-            return ref _Handle.AsRef<bool>(_TargetPositionIsWorldSpaceOffset);
+            _TargetPositionIsWorldSpaceOffset = _TargetPositionIsWorldSpaceOffset ?? Schema.GetOffset(0x37AB6CCBABCF9ECD);
+            return ref _Handle.AsRef<bool>(_TargetPositionIsWorldSpaceOffset!.Value);
         }
     }
-    private static nint _TargetFacePositionIsWorldSpaceOffset = -1;
+    private static nint? _TargetFacePositionIsWorldSpaceOffset;
 
     public ref bool TargetFacePositionIsWorldSpace
     {
         get
         {
-            if (_TargetFacePositionIsWorldSpaceOffset == -1) _TargetFacePositionIsWorldSpaceOffset = Schema.GetOffset(0x37AB6CCB504B4258);
-            return ref _Handle.AsRef<bool>(_TargetFacePositionIsWorldSpaceOffset);
+            _TargetFacePositionIsWorldSpaceOffset = _TargetFacePositionIsWorldSpaceOffset ?? Schema.GetOffset(0x37AB6CCB504B4258);
+            return ref _Handle.AsRef<bool>(_TargetFacePositionIsWorldSpaceOffset!.Value);
         }
     }
-    private static nint _EnablePhaseMatchingOffset = -1;
+    private static nint? _EnablePhaseMatchingOffset;
 
     public ref bool EnablePhaseMatching
     {
         get
         {
-            if (_EnablePhaseMatchingOffset == -1) _EnablePhaseMatchingOffset = Schema.GetOffset(0x37AB6CCB6BC1372A);
-            return ref _Handle.AsRef<bool>(_EnablePhaseMatchingOffset);
+            _EnablePhaseMatchingOffset = _EnablePhaseMatchingOffset ?? Schema.GetOffset(0x37AB6CCB6BC1372A);
+            return ref _Handle.AsRef<bool>(_EnablePhaseMatchingOffset!.Value);
         }
     }
-    private static nint _PhaseMatchingMaxRootMotionSkipOffset = -1;
+    private static nint? _PhaseMatchingMaxRootMotionSkipOffset;
 
     public ref float PhaseMatchingMaxRootMotionSkip
     {
         get
         {
-            if (_PhaseMatchingMaxRootMotionSkipOffset == -1) _PhaseMatchingMaxRootMotionSkipOffset = Schema.GetOffset(0x37AB6CCB547A4008);
-            return ref _Handle.AsRef<float>(_PhaseMatchingMaxRootMotionSkipOffset);
+            _PhaseMatchingMaxRootMotionSkipOffset = _PhaseMatchingMaxRootMotionSkipOffset ?? Schema.GetOffset(0x37AB6CCB547A4008);
+            return ref _Handle.AsRef<float>(_PhaseMatchingMaxRootMotionSkipOffset!.Value);
         }
     }
 

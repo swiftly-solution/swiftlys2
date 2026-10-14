@@ -16,89 +16,89 @@ internal partial class C_INIT_MoveBetweenPointsImpl : CParticleFunctionInitializ
 {
     public C_INIT_MoveBetweenPointsImpl(nint handle) : base(handle) { }
 
-    private static nint _SpeedMinOffset = -1;
+    private static nint? _SpeedMinOffset;
     private CPerParticleFloatInputImpl? _SpeedMinInstance;
 
     public CPerParticleFloatInput SpeedMin
     {
         get
         {
-            if (_SpeedMinOffset == -1) _SpeedMinOffset = Schema.GetOffset(0xE2F19642B52776BE);
+            _SpeedMinOffset = _SpeedMinOffset ?? Schema.GetOffset(0xE2F19642B52776BE);
             var instance = _SpeedMinInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _SpeedMinOffset);
+            instance.DangerousSetHandle(_Handle + _SpeedMinOffset!.Value);
             return instance;
         }
     }
-    private static nint _SpeedMaxOffset = -1;
+    private static nint? _SpeedMaxOffset;
     private CPerParticleFloatInputImpl? _SpeedMaxInstance;
 
     public CPerParticleFloatInput SpeedMax
     {
         get
         {
-            if (_SpeedMaxOffset == -1) _SpeedMaxOffset = Schema.GetOffset(0xE2F19642C7140B5C);
+            _SpeedMaxOffset = _SpeedMaxOffset ?? Schema.GetOffset(0xE2F19642C7140B5C);
             var instance = _SpeedMaxInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _SpeedMaxOffset);
+            instance.DangerousSetHandle(_Handle + _SpeedMaxOffset!.Value);
             return instance;
         }
     }
-    private static nint _EndSpreadOffset = -1;
+    private static nint? _EndSpreadOffset;
     private CPerParticleFloatInputImpl? _EndSpreadInstance;
 
     public CPerParticleFloatInput EndSpread
     {
         get
         {
-            if (_EndSpreadOffset == -1) _EndSpreadOffset = Schema.GetOffset(0xE2F196423D9143DB);
+            _EndSpreadOffset = _EndSpreadOffset ?? Schema.GetOffset(0xE2F196423D9143DB);
             var instance = _EndSpreadInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _EndSpreadOffset);
+            instance.DangerousSetHandle(_Handle + _EndSpreadOffset!.Value);
             return instance;
         }
     }
-    private static nint _StartOffsetOffset = -1;
+    private static nint? _StartOffsetOffset;
     private CPerParticleFloatInputImpl? _StartOffsetInstance;
 
     public CPerParticleFloatInput StartOffset
     {
         get
         {
-            if (_StartOffsetOffset == -1) _StartOffsetOffset = Schema.GetOffset(0xE2F1964269A449AA);
+            _StartOffsetOffset = _StartOffsetOffset ?? Schema.GetOffset(0xE2F1964269A449AA);
             var instance = _StartOffsetInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _StartOffsetOffset);
+            instance.DangerousSetHandle(_Handle + _StartOffsetOffset!.Value);
             return instance;
         }
     }
-    private static nint _EndOffsetOffset = -1;
+    private static nint? _EndOffsetOffset;
     private CPerParticleFloatInputImpl? _EndOffsetInstance;
 
     public CPerParticleFloatInput EndOffset
     {
         get
         {
-            if (_EndOffsetOffset == -1) _EndOffsetOffset = Schema.GetOffset(0xE2F19642C863E027);
+            _EndOffsetOffset = _EndOffsetOffset ?? Schema.GetOffset(0xE2F19642C863E027);
             var instance = _EndOffsetInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _EndOffsetOffset);
+            instance.DangerousSetHandle(_Handle + _EndOffsetOffset!.Value);
             return instance;
         }
     }
-    private static nint _EndControlPointNumberOffset = -1;
+    private static nint? _EndControlPointNumberOffset;
 
     public ref int EndControlPointNumber
     {
         get
         {
-            if (_EndControlPointNumberOffset == -1) _EndControlPointNumberOffset = Schema.GetOffset(0xE2F19642A9FAEC22);
-            return ref _Handle.AsRef<int>(_EndControlPointNumberOffset);
+            _EndControlPointNumberOffset = _EndControlPointNumberOffset ?? Schema.GetOffset(0xE2F19642A9FAEC22);
+            return ref _Handle.AsRef<int>(_EndControlPointNumberOffset!.Value);
         }
     }
-    private static nint _TrailBiasOffset = -1;
+    private static nint? _TrailBiasOffset;
 
     public ref bool TrailBias
     {
         get
         {
-            if (_TrailBiasOffset == -1) _TrailBiasOffset = Schema.GetOffset(0xE2F1964294C9A26A);
-            return ref _Handle.AsRef<bool>(_TrailBiasOffset);
+            _TrailBiasOffset = _TrailBiasOffset ?? Schema.GetOffset(0xE2F1964294C9A26A);
+            return ref _Handle.AsRef<bool>(_TrailBiasOffset!.Value);
         }
     }
 

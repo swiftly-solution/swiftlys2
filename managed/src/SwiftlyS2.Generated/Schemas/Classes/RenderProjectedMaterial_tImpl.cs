@@ -16,14 +16,14 @@ internal partial class RenderProjectedMaterial_tImpl : SchemaClass, RenderProjec
 {
     public RenderProjectedMaterial_tImpl(nint handle) : base(handle) { }
 
-    private static nint _MaterialOffset = -1;
+    private static nint? _MaterialOffset;
 
     public ref CStrongHandle<InfoForResourceTypeIMaterial2> Material
     {
         get
         {
-            if (_MaterialOffset == -1) _MaterialOffset = Schema.GetOffset(0x62AF09D5888CE42E);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_MaterialOffset);
+            _MaterialOffset = _MaterialOffset ?? Schema.GetOffset(0x62AF09D5888CE42E);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_MaterialOffset!.Value);
         }
     }
 

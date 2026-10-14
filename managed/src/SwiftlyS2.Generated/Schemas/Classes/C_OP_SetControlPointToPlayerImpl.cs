@@ -16,64 +16,64 @@ internal partial class C_OP_SetControlPointToPlayerImpl : CParticleFunctionPreEm
 {
     public C_OP_SetControlPointToPlayerImpl(nint handle) : base(handle) { }
 
-    private static nint _CP1Offset = -1;
+    private static nint? _CP1Offset;
 
     public ref int CP1
     {
         get
         {
-            if (_CP1Offset == -1) _CP1Offset = Schema.GetOffset(0xD877DC8ED4B1E579);
-            return ref _Handle.AsRef<int>(_CP1Offset);
+            _CP1Offset = _CP1Offset ?? Schema.GetOffset(0xD877DC8ED4B1E579);
+            return ref _Handle.AsRef<int>(_CP1Offset!.Value);
         }
     }
-    private static nint _CP1PosOffset = -1;
+    private static nint? _CP1PosOffset;
 
     public ref Vector CP1Pos
     {
         get
         {
-            if (_CP1PosOffset == -1) _CP1PosOffset = Schema.GetOffset(0xD877DC8E408288D9);
-            return ref _Handle.AsRef<Vector>(_CP1PosOffset);
+            _CP1PosOffset = _CP1PosOffset ?? Schema.GetOffset(0xD877DC8E408288D9);
+            return ref _Handle.AsRef<Vector>(_CP1PosOffset!.Value);
         }
     }
-    private static nint _OrientToEyesOffset = -1;
+    private static nint? _OrientToEyesOffset;
 
     public ref bool OrientToEyes
     {
         get
         {
-            if (_OrientToEyesOffset == -1) _OrientToEyesOffset = Schema.GetOffset(0xD877DC8E3270E4F3);
-            return ref _Handle.AsRef<bool>(_OrientToEyesOffset);
+            _OrientToEyesOffset = _OrientToEyesOffset ?? Schema.GetOffset(0xD877DC8E3270E4F3);
+            return ref _Handle.AsRef<bool>(_OrientToEyesOffset!.Value);
         }
     }
-    private static nint _PositionOffset = -1;
+    private static nint? _PositionOffset;
 
     public ref ParticleEntityPos_t Position
     {
         get
         {
-            if (_PositionOffset == -1) _PositionOffset = Schema.GetOffset(0xD877DC8EBC4CDBD6);
-            return ref _Handle.AsRef<ParticleEntityPos_t>(_PositionOffset);
+            _PositionOffset = _PositionOffset ?? Schema.GetOffset(0xD877DC8EBC4CDBD6);
+            return ref _Handle.AsRef<ParticleEntityPos_t>(_PositionOffset!.Value);
         }
     }
-    private static nint _RadiusCPOffset = -1;
+    private static nint? _RadiusCPOffset;
 
     public ref int RadiusCP
     {
         get
         {
-            if (_RadiusCPOffset == -1) _RadiusCPOffset = Schema.GetOffset(0xD877DC8E675C27FC);
-            return ref _Handle.AsRef<int>(_RadiusCPOffset);
+            _RadiusCPOffset = _RadiusCPOffset ?? Schema.GetOffset(0xD877DC8E675C27FC);
+            return ref _Handle.AsRef<int>(_RadiusCPOffset!.Value);
         }
     }
-    private static nint _RadiusCPFieldOffset = -1;
+    private static nint? _RadiusCPFieldOffset;
 
     public ref int RadiusCPField
     {
         get
         {
-            if (_RadiusCPFieldOffset == -1) _RadiusCPFieldOffset = Schema.GetOffset(0xD877DC8E6DD6B5A0);
-            return ref _Handle.AsRef<int>(_RadiusCPFieldOffset);
+            _RadiusCPFieldOffset = _RadiusCPFieldOffset ?? Schema.GetOffset(0xD877DC8E6DD6B5A0);
+            return ref _Handle.AsRef<int>(_RadiusCPFieldOffset!.Value);
         }
     }
 

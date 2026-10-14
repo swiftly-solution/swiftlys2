@@ -16,27 +16,27 @@ internal partial class C_WeaponTaserImpl : C_CSWeaponBaseGunImpl, C_WeaponTaser
 {
     public C_WeaponTaserImpl(nint handle) : base(handle) { }
 
-    private static nint _FireTimeOffset = -1;
+    private static nint? _FireTimeOffset;
     private GameTime_tImpl? _FireTimeInstance;
 
     public GameTime_t FireTime
     {
         get
         {
-            if (_FireTimeOffset == -1) _FireTimeOffset = Schema.GetOffset(0x7CC9865A65DBC00C);
+            _FireTimeOffset = _FireTimeOffset ?? Schema.GetOffset(0x7CC9865A65DBC00C);
             var instance = _FireTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FireTimeOffset);
+            instance.DangerousSetHandle(_Handle + _FireTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _LastAttackTickOffset = -1;
+    private static nint? _LastAttackTickOffset;
 
     public ref int LastAttackTick
     {
         get
         {
-            if (_LastAttackTickOffset == -1) _LastAttackTickOffset = Schema.GetOffset(0x7CC9865A0BCAAD3C);
-            return ref _Handle.AsRef<int>(_LastAttackTickOffset);
+            _LastAttackTickOffset = _LastAttackTickOffset ?? Schema.GetOffset(0x7CC9865A0BCAAD3C);
+            return ref _Handle.AsRef<int>(_LastAttackTickOffset!.Value);
         }
     }
 

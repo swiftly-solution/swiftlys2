@@ -16,34 +16,34 @@ internal partial class CLightRigSpotLightImpl : CLightRigLightImpl, CLightRigSpo
 {
     public CLightRigSpotLightImpl(nint handle) : base(handle) { }
 
-    private static nint _OuterConeAngleOffset = -1;
+    private static nint? _OuterConeAngleOffset;
 
     public ref float OuterConeAngle
     {
         get
         {
-            if (_OuterConeAngleOffset == -1) _OuterConeAngleOffset = Schema.GetOffset(0xED61EB6490EF9464);
-            return ref _Handle.AsRef<float>(_OuterConeAngleOffset);
+            _OuterConeAngleOffset = _OuterConeAngleOffset ?? Schema.GetOffset(0xED61EB6490EF9464);
+            return ref _Handle.AsRef<float>(_OuterConeAngleOffset!.Value);
         }
     }
-    private static nint _InnerConeAngleOffset = -1;
+    private static nint? _InnerConeAngleOffset;
 
     public ref float InnerConeAngle
     {
         get
         {
-            if (_InnerConeAngleOffset == -1) _InnerConeAngleOffset = Schema.GetOffset(0xED61EB6416875B1D);
-            return ref _Handle.AsRef<float>(_InnerConeAngleOffset);
+            _InnerConeAngleOffset = _InnerConeAngleOffset ?? Schema.GetOffset(0xED61EB6416875B1D);
+            return ref _Handle.AsRef<float>(_InnerConeAngleOffset!.Value);
         }
     }
-    private static nint _CastShadowsOffset = -1;
+    private static nint? _CastShadowsOffset;
 
     public ref bool CastShadows
     {
         get
         {
-            if (_CastShadowsOffset == -1) _CastShadowsOffset = Schema.GetOffset(0xED61EB6436113167);
-            return ref _Handle.AsRef<bool>(_CastShadowsOffset);
+            _CastShadowsOffset = _CastShadowsOffset ?? Schema.GetOffset(0xED61EB6436113167);
+            return ref _Handle.AsRef<bool>(_CastShadowsOffset!.Value);
         }
     }
 

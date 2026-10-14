@@ -16,50 +16,50 @@ internal partial class C_OP_SetControlPointRotationImpl : CParticleFunctionPreEm
 {
     public C_OP_SetControlPointRotationImpl(nint handle) : base(handle) { }
 
-    private static nint _RotAxisOffset = -1;
+    private static nint? _RotAxisOffset;
     private CParticleCollectionVecInputImpl? _RotAxisInstance;
 
     public CParticleCollectionVecInput RotAxis
     {
         get
         {
-            if (_RotAxisOffset == -1) _RotAxisOffset = Schema.GetOffset(0x8F20B2F891872163);
+            _RotAxisOffset = _RotAxisOffset ?? Schema.GetOffset(0x8F20B2F891872163);
             var instance = _RotAxisInstance ??= new CParticleCollectionVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _RotAxisOffset);
+            instance.DangerousSetHandle(_Handle + _RotAxisOffset!.Value);
             return instance;
         }
     }
-    private static nint _RotRateOffset = -1;
+    private static nint? _RotRateOffset;
     private CParticleCollectionFloatInputImpl? _RotRateInstance;
 
     public CParticleCollectionFloatInput RotRate
     {
         get
         {
-            if (_RotRateOffset == -1) _RotRateOffset = Schema.GetOffset(0x8F20B2F86747B556);
+            _RotRateOffset = _RotRateOffset ?? Schema.GetOffset(0x8F20B2F86747B556);
             var instance = _RotRateInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _RotRateOffset);
+            instance.DangerousSetHandle(_Handle + _RotRateOffset!.Value);
             return instance;
         }
     }
-    private static nint _CPOffset = -1;
+    private static nint? _CPOffset;
 
     public ref int CP
     {
         get
         {
-            if (_CPOffset == -1) _CPOffset = Schema.GetOffset(0x8F20B2F8EB661472);
-            return ref _Handle.AsRef<int>(_CPOffset);
+            _CPOffset = _CPOffset ?? Schema.GetOffset(0x8F20B2F8EB661472);
+            return ref _Handle.AsRef<int>(_CPOffset!.Value);
         }
     }
-    private static nint _LocalCPOffset = -1;
+    private static nint? _LocalCPOffset;
 
     public ref int LocalCP
     {
         get
         {
-            if (_LocalCPOffset == -1) _LocalCPOffset = Schema.GetOffset(0x8F20B2F8ACAAFF8F);
-            return ref _Handle.AsRef<int>(_LocalCPOffset);
+            _LocalCPOffset = _LocalCPOffset ?? Schema.GetOffset(0x8F20B2F8ACAAFF8F);
+            return ref _Handle.AsRef<int>(_LocalCPOffset!.Value);
         }
     }
 

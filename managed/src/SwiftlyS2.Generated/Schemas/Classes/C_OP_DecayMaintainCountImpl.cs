@@ -16,82 +16,82 @@ internal partial class C_OP_DecayMaintainCountImpl : CParticleFunctionOperatorIm
 {
     public C_OP_DecayMaintainCountImpl(nint handle) : base(handle) { }
 
-    private static nint _ParticlesToMaintainOffset = -1;
+    private static nint? _ParticlesToMaintainOffset;
 
     public ref int ParticlesToMaintain
     {
         get
         {
-            if (_ParticlesToMaintainOffset == -1) _ParticlesToMaintainOffset = Schema.GetOffset(0x168E27F3537AE378);
-            return ref _Handle.AsRef<int>(_ParticlesToMaintainOffset);
+            _ParticlesToMaintainOffset = _ParticlesToMaintainOffset ?? Schema.GetOffset(0x168E27F3537AE378);
+            return ref _Handle.AsRef<int>(_ParticlesToMaintainOffset!.Value);
         }
     }
-    private static nint _DecayDelayOffset = -1;
+    private static nint? _DecayDelayOffset;
 
     public ref float DecayDelay
     {
         get
         {
-            if (_DecayDelayOffset == -1) _DecayDelayOffset = Schema.GetOffset(0x168E27F38D6DD836);
-            return ref _Handle.AsRef<float>(_DecayDelayOffset);
+            _DecayDelayOffset = _DecayDelayOffset ?? Schema.GetOffset(0x168E27F38D6DD836);
+            return ref _Handle.AsRef<float>(_DecayDelayOffset!.Value);
         }
     }
-    private static nint _SnapshotControlPointOffset = -1;
+    private static nint? _SnapshotControlPointOffset;
 
     public ref int SnapshotControlPoint
     {
         get
         {
-            if (_SnapshotControlPointOffset == -1) _SnapshotControlPointOffset = Schema.GetOffset(0x168E27F3192638EC);
-            return ref _Handle.AsRef<int>(_SnapshotControlPointOffset);
+            _SnapshotControlPointOffset = _SnapshotControlPointOffset ?? Schema.GetOffset(0x168E27F3192638EC);
+            return ref _Handle.AsRef<int>(_SnapshotControlPointOffset!.Value);
         }
     }
-    private static nint _StrSnapshotSubsetOffset = -1;
+    private static nint? _StrSnapshotSubsetOffset;
 
     public string StrSnapshotSubset
     {
         get
         {
-            if (_StrSnapshotSubsetOffset == -1) _StrSnapshotSubsetOffset = Schema.GetOffset(0x168E27F3BD8A8E5E);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrSnapshotSubsetOffset));
+            _StrSnapshotSubsetOffset = _StrSnapshotSubsetOffset ?? Schema.GetOffset(0x168E27F3BD8A8E5E);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrSnapshotSubsetOffset!.Value));
         }
         set
         {
-            if (_StrSnapshotSubsetOffset == -1) _StrSnapshotSubsetOffset = Schema.GetOffset(0x168E27F3BD8A8E5E);
-            Schema.SetCUtlString(_Handle, _StrSnapshotSubsetOffset, value);
+            _StrSnapshotSubsetOffset = _StrSnapshotSubsetOffset ?? Schema.GetOffset(0x168E27F3BD8A8E5E);
+            Schema.SetCUtlString(_Handle, _StrSnapshotSubsetOffset!.Value, value);
         }
     }
-    private static nint _LifespanDecayOffset = -1;
+    private static nint? _LifespanDecayOffset;
 
     public ref bool LifespanDecay
     {
         get
         {
-            if (_LifespanDecayOffset == -1) _LifespanDecayOffset = Schema.GetOffset(0x168E27F39642CC6B);
-            return ref _Handle.AsRef<bool>(_LifespanDecayOffset);
+            _LifespanDecayOffset = _LifespanDecayOffset ?? Schema.GetOffset(0x168E27F39642CC6B);
+            return ref _Handle.AsRef<bool>(_LifespanDecayOffset!.Value);
         }
     }
-    private static nint _ScaleOffset = -1;
+    private static nint? _ScaleOffset;
     private CParticleCollectionFloatInputImpl? _ScaleInstance;
 
     public CParticleCollectionFloatInput Scale
     {
         get
         {
-            if (_ScaleOffset == -1) _ScaleOffset = Schema.GetOffset(0x168E27F3B731A42F);
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x168E27F3B731A42F);
             var instance = _ScaleInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _ScaleOffset);
+            instance.DangerousSetHandle(_Handle + _ScaleOffset!.Value);
             return instance;
         }
     }
-    private static nint _KillNewestOffset = -1;
+    private static nint? _KillNewestOffset;
 
     public ref bool KillNewest
     {
         get
         {
-            if (_KillNewestOffset == -1) _KillNewestOffset = Schema.GetOffset(0x168E27F3B8EA2EC7);
-            return ref _Handle.AsRef<bool>(_KillNewestOffset);
+            _KillNewestOffset = _KillNewestOffset ?? Schema.GetOffset(0x168E27F3B8EA2EC7);
+            return ref _Handle.AsRef<bool>(_KillNewestOffset!.Value);
         }
     }
 

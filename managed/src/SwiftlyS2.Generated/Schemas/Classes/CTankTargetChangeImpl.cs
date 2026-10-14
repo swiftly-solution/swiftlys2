@@ -16,29 +16,29 @@ internal partial class CTankTargetChangeImpl : CPointEntityImpl, CTankTargetChan
 {
     public CTankTargetChangeImpl(nint handle) : base(handle) { }
 
-    private static nint _NewTargetOffset = -1;
+    private static nint? _NewTargetOffset;
 
     public ref CVariant<CVariantDefaultAllocator> NewTarget
     {
         get
         {
-            if (_NewTargetOffset == -1) _NewTargetOffset = Schema.GetOffset(0xC9633A4FC35D87C4);
-            return ref _Handle.AsRef<CVariant<CVariantDefaultAllocator>>(_NewTargetOffset);
+            _NewTargetOffset = _NewTargetOffset ?? Schema.GetOffset(0xC9633A4FC35D87C4);
+            return ref _Handle.AsRef<CVariant<CVariantDefaultAllocator>>(_NewTargetOffset!.Value);
         }
     }
-    private static nint _NewTargetNameOffset = -1;
+    private static nint? _NewTargetNameOffset;
 
     public string NewTargetName
     {
         get
         {
-            if (_NewTargetNameOffset == -1) _NewTargetNameOffset = Schema.GetOffset(0xC9633A4FFCD3FD1F);
-            return Schema.GetString(_Handle.Read<nint>(_NewTargetNameOffset));
+            _NewTargetNameOffset = _NewTargetNameOffset ?? Schema.GetOffset(0xC9633A4FFCD3FD1F);
+            return Schema.GetString(_Handle.Read<nint>(_NewTargetNameOffset!.Value));
         }
         set
         {
-            if (_NewTargetNameOffset == -1) _NewTargetNameOffset = Schema.GetOffset(0xC9633A4FFCD3FD1F);
-            Schema.SetString(_Handle, _NewTargetNameOffset, value);
+            _NewTargetNameOffset = _NewTargetNameOffset ?? Schema.GetOffset(0xC9633A4FFCD3FD1F);
+            Schema.SetString(_Handle, _NewTargetNameOffset!.Value, value);
         }
     }
 

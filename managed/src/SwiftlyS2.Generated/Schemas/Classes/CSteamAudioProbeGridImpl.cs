@@ -16,77 +16,77 @@ internal partial class CSteamAudioProbeGridImpl : SchemaClass, CSteamAudioProbeG
 {
     public CSteamAudioProbeGridImpl(nint handle) : base(handle) { }
 
-    private static nint _AabbOffset = -1;
+    private static nint? _AabbOffset;
     private AABB_tImpl? _AabbInstance;
 
     public AABB_t Aabb
     {
         get
         {
-            if (_AabbOffset == -1) _AabbOffset = Schema.GetOffset(0xE225FCCE21C443F7);
+            _AabbOffset = _AabbOffset ?? Schema.GetOffset(0xE225FCCE21C443F7);
             var instance = _AabbInstance ??= new AABB_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _AabbOffset);
+            instance.DangerousSetHandle(_Handle + _AabbOffset!.Value);
             return instance;
         }
     }
-    private static nint _SpacingOffset = -1;
+    private static nint? _SpacingOffset;
 
     public ref float Spacing
     {
         get
         {
-            if (_SpacingOffset == -1) _SpacingOffset = Schema.GetOffset(0xE225FCCE2B86F1BC);
-            return ref _Handle.AsRef<float>(_SpacingOffset);
+            _SpacingOffset = _SpacingOffset ?? Schema.GetOffset(0xE225FCCE2B86F1BC);
+            return ref _Handle.AsRef<float>(_SpacingOffset!.Value);
         }
     }
-    private static nint _NxOffset = -1;
+    private static nint? _NxOffset;
 
     public ref int Nx
     {
         get
         {
-            if (_NxOffset == -1) _NxOffset = Schema.GetOffset(0xE225FCCECAB4CD8B);
-            return ref _Handle.AsRef<int>(_NxOffset);
+            _NxOffset = _NxOffset ?? Schema.GetOffset(0xE225FCCECAB4CD8B);
+            return ref _Handle.AsRef<int>(_NxOffset!.Value);
         }
     }
-    private static nint _NyOffset = -1;
+    private static nint? _NyOffset;
 
     public ref int Ny
     {
         get
         {
-            if (_NyOffset == -1) _NyOffset = Schema.GetOffset(0xE225FCCEC9B4CBF8);
-            return ref _Handle.AsRef<int>(_NyOffset);
+            _NyOffset = _NyOffset ?? Schema.GetOffset(0xE225FCCEC9B4CBF8);
+            return ref _Handle.AsRef<int>(_NyOffset!.Value);
         }
     }
-    private static nint _NzOffset = -1;
+    private static nint? _NzOffset;
 
     public ref int Nz
     {
         get
         {
-            if (_NzOffset == -1) _NzOffset = Schema.GetOffset(0xE225FCCECCB4D0B1);
-            return ref _Handle.AsRef<int>(_NzOffset);
+            _NzOffset = _NzOffset ?? Schema.GetOffset(0xE225FCCECCB4D0B1);
+            return ref _Handle.AsRef<int>(_NzOffset!.Value);
         }
     }
-    private static nint _LineSegmentsOffset = -1;
+    private static nint? _LineSegmentsOffset;
 
     public ref CUtlVector<CSteamAudioProbeLineSegment> LineSegments
     {
         get
         {
-            if (_LineSegmentsOffset == -1) _LineSegmentsOffset = Schema.GetOffset(0xE225FCCE95532CD1);
-            return ref _Handle.AsRef<CUtlVector<CSteamAudioProbeLineSegment>>(_LineSegmentsOffset);
+            _LineSegmentsOffset = _LineSegmentsOffset ?? Schema.GetOffset(0xE225FCCE95532CD1);
+            return ref _Handle.AsRef<CUtlVector<CSteamAudioProbeLineSegment>>(_LineSegmentsOffset!.Value);
         }
     }
-    private static nint _ProbesOffset = -1;
+    private static nint? _ProbesOffset;
 
     public ref CUtlVector<Vector> Probes
     {
         get
         {
-            if (_ProbesOffset == -1) _ProbesOffset = Schema.GetOffset(0xE225FCCE242F8EC6);
-            return ref _Handle.AsRef<CUtlVector<Vector>>(_ProbesOffset);
+            _ProbesOffset = _ProbesOffset ?? Schema.GetOffset(0xE225FCCE242F8EC6);
+            return ref _Handle.AsRef<CUtlVector<Vector>>(_ProbesOffset!.Value);
         }
     }
 

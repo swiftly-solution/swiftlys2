@@ -16,70 +16,70 @@ internal partial class BlendItem_tImpl : SchemaClass, BlendItem_t
 {
     public BlendItem_tImpl(nint handle) : base(handle) { }
 
-    private static nint _TagsOffset = -1;
+    private static nint? _TagsOffset;
 
     public ref CUtlVector<TagSpan_t> Tags
     {
         get
         {
-            if (_TagsOffset == -1) _TagsOffset = Schema.GetOffset(0x8FC3054B46C8540);
-            return ref _Handle.AsRef<CUtlVector<TagSpan_t>>(_TagsOffset);
+            _TagsOffset = _TagsOffset ?? Schema.GetOffset(0x8FC3054B46C8540);
+            return ref _Handle.AsRef<CUtlVector<TagSpan_t>>(_TagsOffset!.Value);
         }
     }
-    private static nint _ChildOffset = -1;
+    private static nint? _ChildOffset;
     private CAnimUpdateNodeRefImpl? _ChildInstance;
 
     public CAnimUpdateNodeRef Child
     {
         get
         {
-            if (_ChildOffset == -1) _ChildOffset = Schema.GetOffset(0x8FC30544A0B773F);
+            _ChildOffset = _ChildOffset ?? Schema.GetOffset(0x8FC30544A0B773F);
             var instance = _ChildInstance ??= new CAnimUpdateNodeRefImpl(0);
-            instance.DangerousSetHandle(_Handle + _ChildOffset);
+            instance.DangerousSetHandle(_Handle + _ChildOffset!.Value);
             return instance;
         }
     }
-    private static nint _SequenceOffset = -1;
+    private static nint? _SequenceOffset;
     private HSequenceImpl? _SequenceInstance;
 
     public HSequence Sequence
     {
         get
         {
-            if (_SequenceOffset == -1) _SequenceOffset = Schema.GetOffset(0x8FC3054E0A0598E);
+            _SequenceOffset = _SequenceOffset ?? Schema.GetOffset(0x8FC3054E0A0598E);
             var instance = _SequenceInstance ??= new HSequenceImpl(0);
-            instance.DangerousSetHandle(_Handle + _SequenceOffset);
+            instance.DangerousSetHandle(_Handle + _SequenceOffset!.Value);
             return instance;
         }
     }
-    private static nint _PosOffset = -1;
+    private static nint? _PosOffset;
 
     public ref Vector2D Pos
     {
         get
         {
-            if (_PosOffset == -1) _PosOffset = Schema.GetOffset(0x8FC3054DE9CFC5D);
-            return ref _Handle.AsRef<Vector2D>(_PosOffset);
+            _PosOffset = _PosOffset ?? Schema.GetOffset(0x8FC3054DE9CFC5D);
+            return ref _Handle.AsRef<Vector2D>(_PosOffset!.Value);
         }
     }
-    private static nint _DurationOffset = -1;
+    private static nint? _DurationOffset;
 
     public ref float Duration
     {
         get
         {
-            if (_DurationOffset == -1) _DurationOffset = Schema.GetOffset(0x8FC3054BC5E3BAB);
-            return ref _Handle.AsRef<float>(_DurationOffset);
+            _DurationOffset = _DurationOffset ?? Schema.GetOffset(0x8FC3054BC5E3BAB);
+            return ref _Handle.AsRef<float>(_DurationOffset!.Value);
         }
     }
-    private static nint _UseCustomDurationOffset = -1;
+    private static nint? _UseCustomDurationOffset;
 
     public ref bool UseCustomDuration
     {
         get
         {
-            if (_UseCustomDurationOffset == -1) _UseCustomDurationOffset = Schema.GetOffset(0x8FC3054F9BF05AB);
-            return ref _Handle.AsRef<bool>(_UseCustomDurationOffset);
+            _UseCustomDurationOffset = _UseCustomDurationOffset ?? Schema.GetOffset(0x8FC3054F9BF05AB);
+            return ref _Handle.AsRef<bool>(_UseCustomDurationOffset!.Value);
         }
     }
 

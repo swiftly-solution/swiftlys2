@@ -16,14 +16,14 @@ internal partial class CAnimScriptManagerImpl : SchemaClass, CAnimScriptManager
 {
     public CAnimScriptManagerImpl(nint handle) : base(handle) { }
 
-    private static nint _ScriptInfoOffset = -1;
+    private static nint? _ScriptInfoOffset;
 
     public ref CUtlVector<ScriptInfo_t> ScriptInfo
     {
         get
         {
-            if (_ScriptInfoOffset == -1) _ScriptInfoOffset = Schema.GetOffset(0x13962EC3119509F2);
-            return ref _Handle.AsRef<CUtlVector<ScriptInfo_t>>(_ScriptInfoOffset);
+            _ScriptInfoOffset = _ScriptInfoOffset ?? Schema.GetOffset(0x13962EC3119509F2);
+            return ref _Handle.AsRef<CUtlVector<ScriptInfo_t>>(_ScriptInfoOffset!.Value);
         }
     }
 

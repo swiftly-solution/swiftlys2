@@ -16,40 +16,40 @@ internal partial class CPulseCell_Outflow_ListenForAnimgraphTagImpl : CPulseCell
 {
     public CPulseCell_Outflow_ListenForAnimgraphTagImpl(nint handle) : base(handle) { }
 
-    private static nint _OnStartOffset = -1;
+    private static nint? _OnStartOffset;
     private CPulse_ResumePointImpl? _OnStartInstance;
 
     public CPulse_ResumePoint OnStart
     {
         get
         {
-            if (_OnStartOffset == -1) _OnStartOffset = Schema.GetOffset(0xAD79BF78C3FE848C);
+            _OnStartOffset = _OnStartOffset ?? Schema.GetOffset(0xAD79BF78C3FE848C);
             var instance = _OnStartInstance ??= new CPulse_ResumePointImpl(0);
-            instance.DangerousSetHandle(_Handle + _OnStartOffset);
+            instance.DangerousSetHandle(_Handle + _OnStartOffset!.Value);
             return instance;
         }
     }
-    private static nint _OnEndOffset = -1;
+    private static nint? _OnEndOffset;
     private CPulse_ResumePointImpl? _OnEndInstance;
 
     public CPulse_ResumePoint OnEnd
     {
         get
         {
-            if (_OnEndOffset == -1) _OnEndOffset = Schema.GetOffset(0xAD79BF78B88A4375);
+            _OnEndOffset = _OnEndOffset ?? Schema.GetOffset(0xAD79BF78B88A4375);
             var instance = _OnEndInstance ??= new CPulse_ResumePointImpl(0);
-            instance.DangerousSetHandle(_Handle + _OnEndOffset);
+            instance.DangerousSetHandle(_Handle + _OnEndOffset!.Value);
             return instance;
         }
     }
-    private static nint _TagNameOffset = -1;
+    private static nint? _TagNameOffset;
 
     public ref CGlobalSymbol TagName
     {
         get
         {
-            if (_TagNameOffset == -1) _TagNameOffset = Schema.GetOffset(0xAD79BF78647DC278);
-            return ref _Handle.AsRef<CGlobalSymbol>(_TagNameOffset);
+            _TagNameOffset = _TagNameOffset ?? Schema.GetOffset(0xAD79BF78647DC278);
+            return ref _Handle.AsRef<CGlobalSymbol>(_TagNameOffset!.Value);
         }
     }
 

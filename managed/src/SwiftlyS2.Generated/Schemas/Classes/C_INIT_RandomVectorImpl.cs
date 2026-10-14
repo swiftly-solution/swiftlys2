@@ -16,49 +16,49 @@ internal partial class C_INIT_RandomVectorImpl : CParticleFunctionInitializerImp
 {
     public C_INIT_RandomVectorImpl(nint handle) : base(handle) { }
 
-    private static nint _MinOffset = -1;
+    private static nint? _MinOffset;
 
     public ref Vector Min
     {
         get
         {
-            if (_MinOffset == -1) _MinOffset = Schema.GetOffset(0x9B672752B0765F37);
-            return ref _Handle.AsRef<Vector>(_MinOffset);
+            _MinOffset = _MinOffset ?? Schema.GetOffset(0x9B672752B0765F37);
+            return ref _Handle.AsRef<Vector>(_MinOffset!.Value);
         }
     }
-    private static nint _MaxOffset = -1;
+    private static nint? _MaxOffset;
 
     public ref Vector Max
     {
         get
         {
-            if (_MaxOffset == -1) _MaxOffset = Schema.GetOffset(0x9B672752BE89FCF9);
-            return ref _Handle.AsRef<Vector>(_MaxOffset);
+            _MaxOffset = _MaxOffset ?? Schema.GetOffset(0x9B672752BE89FCF9);
+            return ref _Handle.AsRef<Vector>(_MaxOffset!.Value);
         }
     }
-    private static nint _FieldOutputOffset = -1;
+    private static nint? _FieldOutputOffset;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0x9B672752E5729606);
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x9B672752E5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
             return instance;
         }
     }
-    private static nint _RandomnessParametersOffset = -1;
+    private static nint? _RandomnessParametersOffset;
     private CRandomNumberGeneratorParametersImpl? _RandomnessParametersInstance;
 
     public CRandomNumberGeneratorParameters RandomnessParameters
     {
         get
         {
-            if (_RandomnessParametersOffset == -1) _RandomnessParametersOffset = Schema.GetOffset(0x9B6727527EDF50AD);
+            _RandomnessParametersOffset = _RandomnessParametersOffset ?? Schema.GetOffset(0x9B6727527EDF50AD);
             var instance = _RandomnessParametersInstance ??= new CRandomNumberGeneratorParametersImpl(0);
-            instance.DangerousSetHandle(_Handle + _RandomnessParametersOffset);
+            instance.DangerousSetHandle(_Handle + _RandomnessParametersOffset!.Value);
             return instance;
         }
     }

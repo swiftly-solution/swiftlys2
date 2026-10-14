@@ -16,24 +16,24 @@ internal partial class CMixGroupBoxImpl : CMixPropertyBaseImpl, CMixGroupBox
 {
     public CMixGroupBoxImpl(nint handle) : base(handle) { }
 
-    private static nint _ColorOffset = -1;
+    private static nint? _ColorOffset;
 
     public ref Color Color
     {
         get
         {
-            if (_ColorOffset == -1) _ColorOffset = Schema.GetOffset(0x93FCA3508005F278);
-            return ref _Handle.AsRef<Color>(_ColorOffset);
+            _ColorOffset = _ColorOffset ?? Schema.GetOffset(0x93FCA3508005F278);
+            return ref _Handle.AsRef<Color>(_ColorOffset!.Value);
         }
     }
-    private static nint _MovesNodesOffset = -1;
+    private static nint? _MovesNodesOffset;
 
     public ref bool MovesNodes
     {
         get
         {
-            if (_MovesNodesOffset == -1) _MovesNodesOffset = Schema.GetOffset(0x93FCA350322EE33A);
-            return ref _Handle.AsRef<bool>(_MovesNodesOffset);
+            _MovesNodesOffset = _MovesNodesOffset ?? Schema.GetOffset(0x93FCA350322EE33A);
+            return ref _Handle.AsRef<bool>(_MovesNodesOffset!.Value);
         }
     }
 

@@ -16,50 +16,50 @@ internal partial class C_OP_RemapTransformOrientationToYawImpl : CParticleFuncti
 {
     public C_OP_RemapTransformOrientationToYawImpl(nint handle) : base(handle) { }
 
-    private static nint _TransformInputOffset = -1;
+    private static nint? _TransformInputOffset;
     private CParticleTransformInputImpl? _TransformInputInstance;
 
     public CParticleTransformInput TransformInput
     {
         get
         {
-            if (_TransformInputOffset == -1) _TransformInputOffset = Schema.GetOffset(0xA0DF014CB3FDC289);
+            _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0xA0DF014CB3FDC289);
             var instance = _TransformInputInstance ??= new CParticleTransformInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _TransformInputOffset);
+            instance.DangerousSetHandle(_Handle + _TransformInputOffset!.Value);
             return instance;
         }
     }
-    private static nint _FieldOutputOffset = -1;
+    private static nint? _FieldOutputOffset;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0xA0DF014CE5729606);
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0xA0DF014CE5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
             return instance;
         }
     }
-    private static nint _RotOffsetOffset = -1;
+    private static nint? _RotOffsetOffset;
 
     public ref float RotOffset
     {
         get
         {
-            if (_RotOffsetOffset == -1) _RotOffsetOffset = Schema.GetOffset(0xA0DF014CD1EA9CDF);
-            return ref _Handle.AsRef<float>(_RotOffsetOffset);
+            _RotOffsetOffset = _RotOffsetOffset ?? Schema.GetOffset(0xA0DF014CD1EA9CDF);
+            return ref _Handle.AsRef<float>(_RotOffsetOffset!.Value);
         }
     }
-    private static nint _SpinStrengthOffset = -1;
+    private static nint? _SpinStrengthOffset;
 
     public ref float SpinStrength
     {
         get
         {
-            if (_SpinStrengthOffset == -1) _SpinStrengthOffset = Schema.GetOffset(0xA0DF014C12520F26);
-            return ref _Handle.AsRef<float>(_SpinStrengthOffset);
+            _SpinStrengthOffset = _SpinStrengthOffset ?? Schema.GetOffset(0xA0DF014C12520F26);
+            return ref _Handle.AsRef<float>(_SpinStrengthOffset!.Value);
         }
     }
 

@@ -16,58 +16,58 @@ internal partial class AutoTagVDataCondition_tImpl : SchemaClass, AutoTagVDataCo
 {
     public AutoTagVDataCondition_tImpl(nint handle) : base(handle) { }
 
-    private static nint _SourceFileOffset = -1;
+    private static nint? _SourceFileOffset;
     private SchemaUntypedField? _SourceFileInstance;
 
     public SchemaUntypedField SourceFile
     {
         get
         {
-            if (_SourceFileOffset == -1) _SourceFileOffset = Schema.GetOffset(0x87D2C7B69F08DB0E);
+            _SourceFileOffset = _SourceFileOffset ?? Schema.GetOffset(0x87D2C7B69F08DB0E);
             var instance = _SourceFileInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _SourceFileOffset);
+            instance.DangerousSetHandle(_Handle + _SourceFileOffset!.Value);
             return instance;
         }
     }
-    private static nint _AssetKeyOffset = -1;
+    private static nint? _AssetKeyOffset;
     private SchemaUntypedField? _AssetKeyInstance;
 
     public SchemaUntypedField AssetKey
     {
         get
         {
-            if (_AssetKeyOffset == -1) _AssetKeyOffset = Schema.GetOffset(0x87D2C7B607F95842);
+            _AssetKeyOffset = _AssetKeyOffset ?? Schema.GetOffset(0x87D2C7B607F95842);
             var instance = _AssetKeyInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _AssetKeyOffset);
+            instance.DangerousSetHandle(_Handle + _AssetKeyOffset!.Value);
             return instance;
         }
     }
-    private static nint _AlternateAssetKeyOffset = -1;
+    private static nint? _AlternateAssetKeyOffset;
     private SchemaUntypedField? _AlternateAssetKeyInstance;
 
     public SchemaUntypedField AlternateAssetKey
     {
         get
         {
-            if (_AlternateAssetKeyOffset == -1) _AlternateAssetKeyOffset = Schema.GetOffset(0x87D2C7B672AC7CFA);
+            _AlternateAssetKeyOffset = _AlternateAssetKeyOffset ?? Schema.GetOffset(0x87D2C7B672AC7CFA);
             var instance = _AlternateAssetKeyInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _AlternateAssetKeyOffset);
+            instance.DangerousSetHandle(_Handle + _AlternateAssetKeyOffset!.Value);
             return instance;
         }
     }
-    private static nint _ExpressionOffset = -1;
+    private static nint? _ExpressionOffset;
 
     public string Expression
     {
         get
         {
-            if (_ExpressionOffset == -1) _ExpressionOffset = Schema.GetOffset(0x87D2C7B66B29706B);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ExpressionOffset));
+            _ExpressionOffset = _ExpressionOffset ?? Schema.GetOffset(0x87D2C7B66B29706B);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ExpressionOffset!.Value));
         }
         set
         {
-            if (_ExpressionOffset == -1) _ExpressionOffset = Schema.GetOffset(0x87D2C7B66B29706B);
-            Schema.SetCUtlString(_Handle, _ExpressionOffset, value);
+            _ExpressionOffset = _ExpressionOffset ?? Schema.GetOffset(0x87D2C7B66B29706B);
+            Schema.SetCUtlString(_Handle, _ExpressionOffset!.Value, value);
         }
     }
 

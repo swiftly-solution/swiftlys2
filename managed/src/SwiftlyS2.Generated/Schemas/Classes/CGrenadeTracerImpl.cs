@@ -16,24 +16,24 @@ internal partial class CGrenadeTracerImpl : C_BaseModelEntityImpl, CGrenadeTrace
 {
     public CGrenadeTracerImpl(nint handle) : base(handle) { }
 
-    private static nint _TracerDurationOffset = -1;
+    private static nint? _TracerDurationOffset;
 
     public ref float TracerDuration
     {
         get
         {
-            if (_TracerDurationOffset == -1) _TracerDurationOffset = Schema.GetOffset(0x39CF3C792388BF66);
-            return ref _Handle.AsRef<float>(_TracerDurationOffset);
+            _TracerDurationOffset = _TracerDurationOffset ?? Schema.GetOffset(0x39CF3C792388BF66);
+            return ref _Handle.AsRef<float>(_TracerDurationOffset!.Value);
         }
     }
-    private static nint _TypeOffset = -1;
+    private static nint? _TypeOffset;
 
     public ref GrenadeType_t Type
     {
         get
         {
-            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0x39CF3C7918853D59);
-            return ref _Handle.AsRef<GrenadeType_t>(_TypeOffset);
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x39CF3C7918853D59);
+            return ref _Handle.AsRef<GrenadeType_t>(_TypeOffset!.Value);
         }
     }
 

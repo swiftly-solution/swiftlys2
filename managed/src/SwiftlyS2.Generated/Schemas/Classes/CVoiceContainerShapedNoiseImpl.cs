@@ -16,102 +16,102 @@ internal partial class CVoiceContainerShapedNoiseImpl : CVoiceContainerGenerator
 {
     public CVoiceContainerShapedNoiseImpl(nint handle) : base(handle) { }
 
-    private static nint _UseCurveForFrequencyOffset = -1;
+    private static nint? _UseCurveForFrequencyOffset;
 
     public ref bool UseCurveForFrequency
     {
         get
         {
-            if (_UseCurveForFrequencyOffset == -1) _UseCurveForFrequencyOffset = Schema.GetOffset(0xC58213629099DACC);
-            return ref _Handle.AsRef<bool>(_UseCurveForFrequencyOffset);
+            _UseCurveForFrequencyOffset = _UseCurveForFrequencyOffset ?? Schema.GetOffset(0xC58213629099DACC);
+            return ref _Handle.AsRef<bool>(_UseCurveForFrequencyOffset!.Value);
         }
     }
-    private static nint _FrequencyOffset = -1;
+    private static nint? _FrequencyOffset;
 
     public ref float Frequency
     {
         get
         {
-            if (_FrequencyOffset == -1) _FrequencyOffset = Schema.GetOffset(0xC5821362D2C16DD7);
-            return ref _Handle.AsRef<float>(_FrequencyOffset);
+            _FrequencyOffset = _FrequencyOffset ?? Schema.GetOffset(0xC5821362D2C16DD7);
+            return ref _Handle.AsRef<float>(_FrequencyOffset!.Value);
         }
     }
-    private static nint _FrequencySweepOffset = -1;
+    private static nint? _FrequencySweepOffset;
     private SchemaUntypedField? _FrequencySweepInstance;
 
     public SchemaUntypedField FrequencySweep
     {
         get
         {
-            if (_FrequencySweepOffset == -1) _FrequencySweepOffset = Schema.GetOffset(0xC5821362B670CD0F);
+            _FrequencySweepOffset = _FrequencySweepOffset ?? Schema.GetOffset(0xC5821362B670CD0F);
             var instance = _FrequencySweepInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _FrequencySweepOffset);
+            instance.DangerousSetHandle(_Handle + _FrequencySweepOffset!.Value);
             return instance;
         }
     }
-    private static nint _UseCurveForResonanceOffset = -1;
+    private static nint? _UseCurveForResonanceOffset;
 
     public ref bool UseCurveForResonance
     {
         get
         {
-            if (_UseCurveForResonanceOffset == -1) _UseCurveForResonanceOffset = Schema.GetOffset(0xC582136265C91FBE);
-            return ref _Handle.AsRef<bool>(_UseCurveForResonanceOffset);
+            _UseCurveForResonanceOffset = _UseCurveForResonanceOffset ?? Schema.GetOffset(0xC582136265C91FBE);
+            return ref _Handle.AsRef<bool>(_UseCurveForResonanceOffset!.Value);
         }
     }
-    private static nint _ResonanceOffset = -1;
+    private static nint? _ResonanceOffset;
 
     public ref float Resonance
     {
         get
         {
-            if (_ResonanceOffset == -1) _ResonanceOffset = Schema.GetOffset(0xC582136283BEE2DD);
-            return ref _Handle.AsRef<float>(_ResonanceOffset);
+            _ResonanceOffset = _ResonanceOffset ?? Schema.GetOffset(0xC582136283BEE2DD);
+            return ref _Handle.AsRef<float>(_ResonanceOffset!.Value);
         }
     }
-    private static nint _ResonanceSweepOffset = -1;
+    private static nint? _ResonanceSweepOffset;
     private SchemaUntypedField? _ResonanceSweepInstance;
 
     public SchemaUntypedField ResonanceSweep
     {
         get
         {
-            if (_ResonanceSweepOffset == -1) _ResonanceSweepOffset = Schema.GetOffset(0xC582136250CFD679);
+            _ResonanceSweepOffset = _ResonanceSweepOffset ?? Schema.GetOffset(0xC582136250CFD679);
             var instance = _ResonanceSweepInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ResonanceSweepOffset);
+            instance.DangerousSetHandle(_Handle + _ResonanceSweepOffset!.Value);
             return instance;
         }
     }
-    private static nint _UseCurveForAmplitudeOffset = -1;
+    private static nint? _UseCurveForAmplitudeOffset;
 
     public ref bool UseCurveForAmplitude
     {
         get
         {
-            if (_UseCurveForAmplitudeOffset == -1) _UseCurveForAmplitudeOffset = Schema.GetOffset(0xC5821362F8970DD3);
-            return ref _Handle.AsRef<bool>(_UseCurveForAmplitudeOffset);
+            _UseCurveForAmplitudeOffset = _UseCurveForAmplitudeOffset ?? Schema.GetOffset(0xC5821362F8970DD3);
+            return ref _Handle.AsRef<bool>(_UseCurveForAmplitudeOffset!.Value);
         }
     }
-    private static nint _GainInDecibelsOffset = -1;
+    private static nint? _GainInDecibelsOffset;
 
     public ref float GainInDecibels
     {
         get
         {
-            if (_GainInDecibelsOffset == -1) _GainInDecibelsOffset = Schema.GetOffset(0xC5821362528C3F88);
-            return ref _Handle.AsRef<float>(_GainInDecibelsOffset);
+            _GainInDecibelsOffset = _GainInDecibelsOffset ?? Schema.GetOffset(0xC5821362528C3F88);
+            return ref _Handle.AsRef<float>(_GainInDecibelsOffset!.Value);
         }
     }
-    private static nint _GainSweepOffset = -1;
+    private static nint? _GainSweepOffset;
     private SchemaUntypedField? _GainSweepInstance;
 
     public SchemaUntypedField GainSweep
     {
         get
         {
-            if (_GainSweepOffset == -1) _GainSweepOffset = Schema.GetOffset(0xC582136246A13F7A);
+            _GainSweepOffset = _GainSweepOffset ?? Schema.GetOffset(0xC582136246A13F7A);
             var instance = _GainSweepInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _GainSweepOffset);
+            instance.DangerousSetHandle(_Handle + _GainSweepOffset!.Value);
             return instance;
         }
     }

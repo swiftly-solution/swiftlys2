@@ -16,42 +16,42 @@ internal partial class C_OP_DirectionBetweenVecsToVecImpl : CParticleFunctionOpe
 {
     public C_OP_DirectionBetweenVecsToVecImpl(nint handle) : base(handle) { }
 
-    private static nint _FieldOutputOffset = -1;
+    private static nint? _FieldOutputOffset;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0x6022BA82E5729606);
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x6022BA82E5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
             return instance;
         }
     }
-    private static nint _Point1Offset = -1;
+    private static nint? _Point1Offset;
     private CPerParticleVecInputImpl? _Point1Instance;
 
     public CPerParticleVecInput Point1
     {
         get
         {
-            if (_Point1Offset == -1) _Point1Offset = Schema.GetOffset(0x6022BA8204AD2BC0);
+            _Point1Offset = _Point1Offset ?? Schema.GetOffset(0x6022BA8204AD2BC0);
             var instance = _Point1Instance ??= new CPerParticleVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _Point1Offset);
+            instance.DangerousSetHandle(_Handle + _Point1Offset!.Value);
             return instance;
         }
     }
-    private static nint _Point2Offset = -1;
+    private static nint? _Point2Offset;
     private CPerParticleVecInputImpl? _Point2Instance;
 
     public CPerParticleVecInput Point2
     {
         get
         {
-            if (_Point2Offset == -1) _Point2Offset = Schema.GetOffset(0x6022BA8207AD3079);
+            _Point2Offset = _Point2Offset ?? Schema.GetOffset(0x6022BA8207AD3079);
             var instance = _Point2Instance ??= new CPerParticleVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _Point2Offset);
+            instance.DangerousSetHandle(_Handle + _Point2Offset!.Value);
             return instance;
         }
     }

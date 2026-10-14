@@ -16,24 +16,24 @@ internal partial class C_OP_ConstrainLineLengthImpl : CParticleFunctionConstrain
 {
     public C_OP_ConstrainLineLengthImpl(nint handle) : base(handle) { }
 
-    private static nint _MinDistanceOffset = -1;
+    private static nint? _MinDistanceOffset;
 
     public ref float MinDistance
     {
         get
         {
-            if (_MinDistanceOffset == -1) _MinDistanceOffset = Schema.GetOffset(0x50EFFC4492BCAD06);
-            return ref _Handle.AsRef<float>(_MinDistanceOffset);
+            _MinDistanceOffset = _MinDistanceOffset ?? Schema.GetOffset(0x50EFFC4492BCAD06);
+            return ref _Handle.AsRef<float>(_MinDistanceOffset!.Value);
         }
     }
-    private static nint _MaxDistanceOffset = -1;
+    private static nint? _MaxDistanceOffset;
 
     public ref float MaxDistance
     {
         get
         {
-            if (_MaxDistanceOffset == -1) _MaxDistanceOffset = Schema.GetOffset(0x50EFFC4498893360);
-            return ref _Handle.AsRef<float>(_MaxDistanceOffset);
+            _MaxDistanceOffset = _MaxDistanceOffset ?? Schema.GetOffset(0x50EFFC4498893360);
+            return ref _Handle.AsRef<float>(_MaxDistanceOffset!.Value);
         }
     }
 

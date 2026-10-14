@@ -16,106 +16,106 @@ internal partial class CPhysSlideConstraintImpl : CPhysConstraintImpl, CPhysSlid
 {
     public CPhysSlideConstraintImpl(nint handle) : base(handle) { }
 
-    private static nint _AxisEndOffset = -1;
+    private static nint? _AxisEndOffset;
 
     public ref Vector AxisEnd
     {
         get
         {
-            if (_AxisEndOffset == -1) _AxisEndOffset = Schema.GetOffset(0xA91FF5D04F9CAA89);
-            return ref _Handle.AsRef<Vector>(_AxisEndOffset);
+            _AxisEndOffset = _AxisEndOffset ?? Schema.GetOffset(0xA91FF5D04F9CAA89);
+            return ref _Handle.AsRef<Vector>(_AxisEndOffset!.Value);
         }
     }
-    private static nint _SlideFrictionOffset = -1;
+    private static nint? _SlideFrictionOffset;
 
     public ref float SlideFriction
     {
         get
         {
-            if (_SlideFrictionOffset == -1) _SlideFrictionOffset = Schema.GetOffset(0xA91FF5D0A21A9E94);
-            return ref _Handle.AsRef<float>(_SlideFrictionOffset);
+            _SlideFrictionOffset = _SlideFrictionOffset ?? Schema.GetOffset(0xA91FF5D0A21A9E94);
+            return ref _Handle.AsRef<float>(_SlideFrictionOffset!.Value);
         }
     }
-    private static nint _SystemLoadScaleOffset = -1;
+    private static nint? _SystemLoadScaleOffset;
 
     public ref float SystemLoadScale
     {
         get
         {
-            if (_SystemLoadScaleOffset == -1) _SystemLoadScaleOffset = Schema.GetOffset(0xA91FF5D09C24DB62);
-            return ref _Handle.AsRef<float>(_SystemLoadScaleOffset);
+            _SystemLoadScaleOffset = _SystemLoadScaleOffset ?? Schema.GetOffset(0xA91FF5D09C24DB62);
+            return ref _Handle.AsRef<float>(_SystemLoadScaleOffset!.Value);
         }
     }
-    private static nint _InitialOffsetOffset = -1;
+    private static nint? _InitialOffsetOffset;
 
     public ref float InitialOffset
     {
         get
         {
-            if (_InitialOffsetOffset == -1) _InitialOffsetOffset = Schema.GetOffset(0xA91FF5D0A52C9850);
-            return ref _Handle.AsRef<float>(_InitialOffsetOffset);
+            _InitialOffsetOffset = _InitialOffsetOffset ?? Schema.GetOffset(0xA91FF5D0A52C9850);
+            return ref _Handle.AsRef<float>(_InitialOffsetOffset!.Value);
         }
     }
-    private static nint _EnableLinearConstraintOffset = -1;
+    private static nint? _EnableLinearConstraintOffset;
 
     public ref bool EnableLinearConstraint
     {
         get
         {
-            if (_EnableLinearConstraintOffset == -1) _EnableLinearConstraintOffset = Schema.GetOffset(0xA91FF5D068F4518C);
-            return ref _Handle.AsRef<bool>(_EnableLinearConstraintOffset);
+            _EnableLinearConstraintOffset = _EnableLinearConstraintOffset ?? Schema.GetOffset(0xA91FF5D068F4518C);
+            return ref _Handle.AsRef<bool>(_EnableLinearConstraintOffset!.Value);
         }
     }
-    private static nint _EnableAngularConstraintOffset = -1;
+    private static nint? _EnableAngularConstraintOffset;
 
     public ref bool EnableAngularConstraint
     {
         get
         {
-            if (_EnableAngularConstraintOffset == -1) _EnableAngularConstraintOffset = Schema.GetOffset(0xA91FF5D0F98A5C8B);
-            return ref _Handle.AsRef<bool>(_EnableAngularConstraintOffset);
+            _EnableAngularConstraintOffset = _EnableAngularConstraintOffset ?? Schema.GetOffset(0xA91FF5D0F98A5C8B);
+            return ref _Handle.AsRef<bool>(_EnableAngularConstraintOffset!.Value);
         }
     }
-    private static nint _MotorFrequencyOffset = -1;
+    private static nint? _MotorFrequencyOffset;
 
     public ref float MotorFrequency
     {
         get
         {
-            if (_MotorFrequencyOffset == -1) _MotorFrequencyOffset = Schema.GetOffset(0xA91FF5D056F7120A);
-            return ref _Handle.AsRef<float>(_MotorFrequencyOffset);
+            _MotorFrequencyOffset = _MotorFrequencyOffset ?? Schema.GetOffset(0xA91FF5D056F7120A);
+            return ref _Handle.AsRef<float>(_MotorFrequencyOffset!.Value);
         }
     }
-    private static nint _MotorDampingRatioOffset = -1;
+    private static nint? _MotorDampingRatioOffset;
 
     public ref float MotorDampingRatio
     {
         get
         {
-            if (_MotorDampingRatioOffset == -1) _MotorDampingRatioOffset = Schema.GetOffset(0xA91FF5D0D8669699);
-            return ref _Handle.AsRef<float>(_MotorDampingRatioOffset);
+            _MotorDampingRatioOffset = _MotorDampingRatioOffset ?? Schema.GetOffset(0xA91FF5D0D8669699);
+            return ref _Handle.AsRef<float>(_MotorDampingRatioOffset!.Value);
         }
     }
-    private static nint _UseEntityPivotOffset = -1;
+    private static nint? _UseEntityPivotOffset;
 
     public ref bool UseEntityPivot
     {
         get
         {
-            if (_UseEntityPivotOffset == -1) _UseEntityPivotOffset = Schema.GetOffset(0xA91FF5D0240C4065);
-            return ref _Handle.AsRef<bool>(_UseEntityPivotOffset);
+            _UseEntityPivotOffset = _UseEntityPivotOffset ?? Schema.GetOffset(0xA91FF5D0240C4065);
+            return ref _Handle.AsRef<bool>(_UseEntityPivotOffset!.Value);
         }
     }
-    private static nint _SoundInfoOffset = -1;
+    private static nint? _SoundInfoOffset;
     private ConstraintSoundInfoImpl? _SoundInfoInstance;
 
     public ConstraintSoundInfo SoundInfo
     {
         get
         {
-            if (_SoundInfoOffset == -1) _SoundInfoOffset = Schema.GetOffset(0xA91FF5D085F704E8);
+            _SoundInfoOffset = _SoundInfoOffset ?? Schema.GetOffset(0xA91FF5D085F704E8);
             var instance = _SoundInfoInstance ??= new ConstraintSoundInfoImpl(0);
-            instance.DangerousSetHandle(_Handle + _SoundInfoOffset);
+            instance.DangerousSetHandle(_Handle + _SoundInfoOffset!.Value);
             return instance;
         }
     }

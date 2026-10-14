@@ -16,164 +16,164 @@ internal partial class CMixBlendVsndsToImpulseResponseImpl : CMixPropertyBaseImp
 {
     public CMixBlendVsndsToImpulseResponseImpl(nint handle) : base(handle) { }
 
-    private static nint _Weight0Offset = -1;
+    private static nint? _Weight0Offset;
 
     public ref float Weight0
     {
         get
         {
-            if (_Weight0Offset == -1) _Weight0Offset = Schema.GetOffset(0x1826A262087F9901);
-            return ref _Handle.AsRef<float>(_Weight0Offset);
+            _Weight0Offset = _Weight0Offset ?? Schema.GetOffset(0x1826A262087F9901);
+            return ref _Handle.AsRef<float>(_Weight0Offset!.Value);
         }
     }
-    private static nint _Weight1Offset = -1;
+    private static nint? _Weight1Offset;
 
     public ref float Weight1
     {
         get
         {
-            if (_Weight1Offset == -1) _Weight1Offset = Schema.GetOffset(0x1826A262077F976E);
-            return ref _Handle.AsRef<float>(_Weight1Offset);
+            _Weight1Offset = _Weight1Offset ?? Schema.GetOffset(0x1826A262077F976E);
+            return ref _Handle.AsRef<float>(_Weight1Offset!.Value);
         }
     }
-    private static nint _Weight2Offset = -1;
+    private static nint? _Weight2Offset;
 
     public ref float Weight2
     {
         get
         {
-            if (_Weight2Offset == -1) _Weight2Offset = Schema.GetOffset(0x1826A262067F95DB);
-            return ref _Handle.AsRef<float>(_Weight2Offset);
+            _Weight2Offset = _Weight2Offset ?? Schema.GetOffset(0x1826A262067F95DB);
+            return ref _Handle.AsRef<float>(_Weight2Offset!.Value);
         }
     }
-    private static nint _Weight3Offset = -1;
+    private static nint? _Weight3Offset;
 
     public ref float Weight3
     {
         get
         {
-            if (_Weight3Offset == -1) _Weight3Offset = Schema.GetOffset(0x1826A262057F9448);
-            return ref _Handle.AsRef<float>(_Weight3Offset);
+            _Weight3Offset = _Weight3Offset ?? Schema.GetOffset(0x1826A262057F9448);
+            return ref _Handle.AsRef<float>(_Weight3Offset!.Value);
         }
     }
-    private static nint _Weight4Offset = -1;
+    private static nint? _Weight4Offset;
 
     public ref float Weight4
     {
         get
         {
-            if (_Weight4Offset == -1) _Weight4Offset = Schema.GetOffset(0x1826A2620C7F9F4D);
-            return ref _Handle.AsRef<float>(_Weight4Offset);
+            _Weight4Offset = _Weight4Offset ?? Schema.GetOffset(0x1826A2620C7F9F4D);
+            return ref _Handle.AsRef<float>(_Weight4Offset!.Value);
         }
     }
-    private static nint _Weight5Offset = -1;
+    private static nint? _Weight5Offset;
 
     public ref float Weight5
     {
         get
         {
-            if (_Weight5Offset == -1) _Weight5Offset = Schema.GetOffset(0x1826A2620B7F9DBA);
-            return ref _Handle.AsRef<float>(_Weight5Offset);
+            _Weight5Offset = _Weight5Offset ?? Schema.GetOffset(0x1826A2620B7F9DBA);
+            return ref _Handle.AsRef<float>(_Weight5Offset!.Value);
         }
     }
-    private static nint _Weight6Offset = -1;
+    private static nint? _Weight6Offset;
 
     public ref float Weight6
     {
         get
         {
-            if (_Weight6Offset == -1) _Weight6Offset = Schema.GetOffset(0x1826A2620A7F9C27);
-            return ref _Handle.AsRef<float>(_Weight6Offset);
+            _Weight6Offset = _Weight6Offset ?? Schema.GetOffset(0x1826A2620A7F9C27);
+            return ref _Handle.AsRef<float>(_Weight6Offset!.Value);
         }
     }
-    private static nint _Weight7Offset = -1;
+    private static nint? _Weight7Offset;
 
     public ref float Weight7
     {
         get
         {
-            if (_Weight7Offset == -1) _Weight7Offset = Schema.GetOffset(0x1826A262097F9A94);
-            return ref _Handle.AsRef<float>(_Weight7Offset);
+            _Weight7Offset = _Weight7Offset ?? Schema.GetOffset(0x1826A262097F9A94);
+            return ref _Handle.AsRef<float>(_Weight7Offset!.Value);
         }
     }
-    private static nint _PreDelayMS0Offset = -1;
+    private static nint? _PreDelayMS0Offset;
 
     public ref float PreDelayMS0
     {
         get
         {
-            if (_PreDelayMS0Offset == -1) _PreDelayMS0Offset = Schema.GetOffset(0x1826A26232162A75);
-            return ref _Handle.AsRef<float>(_PreDelayMS0Offset);
+            _PreDelayMS0Offset = _PreDelayMS0Offset ?? Schema.GetOffset(0x1826A26232162A75);
+            return ref _Handle.AsRef<float>(_PreDelayMS0Offset!.Value);
         }
     }
-    private static nint _PreDelayMS1Offset = -1;
+    private static nint? _PreDelayMS1Offset;
 
     public ref float PreDelayMS1
     {
         get
         {
-            if (_PreDelayMS1Offset == -1) _PreDelayMS1Offset = Schema.GetOffset(0x1826A262311628E2);
-            return ref _Handle.AsRef<float>(_PreDelayMS1Offset);
+            _PreDelayMS1Offset = _PreDelayMS1Offset ?? Schema.GetOffset(0x1826A262311628E2);
+            return ref _Handle.AsRef<float>(_PreDelayMS1Offset!.Value);
         }
     }
-    private static nint _PreDelayMS2Offset = -1;
+    private static nint? _PreDelayMS2Offset;
 
     public ref float PreDelayMS2
     {
         get
         {
-            if (_PreDelayMS2Offset == -1) _PreDelayMS2Offset = Schema.GetOffset(0x1826A2623016274F);
-            return ref _Handle.AsRef<float>(_PreDelayMS2Offset);
+            _PreDelayMS2Offset = _PreDelayMS2Offset ?? Schema.GetOffset(0x1826A2623016274F);
+            return ref _Handle.AsRef<float>(_PreDelayMS2Offset!.Value);
         }
     }
-    private static nint _PreDelayMS3Offset = -1;
+    private static nint? _PreDelayMS3Offset;
 
     public ref float PreDelayMS3
     {
         get
         {
-            if (_PreDelayMS3Offset == -1) _PreDelayMS3Offset = Schema.GetOffset(0x1826A2622F1625BC);
-            return ref _Handle.AsRef<float>(_PreDelayMS3Offset);
+            _PreDelayMS3Offset = _PreDelayMS3Offset ?? Schema.GetOffset(0x1826A2622F1625BC);
+            return ref _Handle.AsRef<float>(_PreDelayMS3Offset!.Value);
         }
     }
-    private static nint _PreDelayMS4Offset = -1;
+    private static nint? _PreDelayMS4Offset;
 
     public ref float PreDelayMS4
     {
         get
         {
-            if (_PreDelayMS4Offset == -1) _PreDelayMS4Offset = Schema.GetOffset(0x1826A2622E162429);
-            return ref _Handle.AsRef<float>(_PreDelayMS4Offset);
+            _PreDelayMS4Offset = _PreDelayMS4Offset ?? Schema.GetOffset(0x1826A2622E162429);
+            return ref _Handle.AsRef<float>(_PreDelayMS4Offset!.Value);
         }
     }
-    private static nint _PreDelayMS5Offset = -1;
+    private static nint? _PreDelayMS5Offset;
 
     public ref float PreDelayMS5
     {
         get
         {
-            if (_PreDelayMS5Offset == -1) _PreDelayMS5Offset = Schema.GetOffset(0x1826A2622D162296);
-            return ref _Handle.AsRef<float>(_PreDelayMS5Offset);
+            _PreDelayMS5Offset = _PreDelayMS5Offset ?? Schema.GetOffset(0x1826A2622D162296);
+            return ref _Handle.AsRef<float>(_PreDelayMS5Offset!.Value);
         }
     }
-    private static nint _PreDelayMS6Offset = -1;
+    private static nint? _PreDelayMS6Offset;
 
     public ref float PreDelayMS6
     {
         get
         {
-            if (_PreDelayMS6Offset == -1) _PreDelayMS6Offset = Schema.GetOffset(0x1826A2622C162103);
-            return ref _Handle.AsRef<float>(_PreDelayMS6Offset);
+            _PreDelayMS6Offset = _PreDelayMS6Offset ?? Schema.GetOffset(0x1826A2622C162103);
+            return ref _Handle.AsRef<float>(_PreDelayMS6Offset!.Value);
         }
     }
-    private static nint _PreDelayMS7Offset = -1;
+    private static nint? _PreDelayMS7Offset;
 
     public ref float PreDelayMS7
     {
         get
         {
-            if (_PreDelayMS7Offset == -1) _PreDelayMS7Offset = Schema.GetOffset(0x1826A2622B161F70);
-            return ref _Handle.AsRef<float>(_PreDelayMS7Offset);
+            _PreDelayMS7Offset = _PreDelayMS7Offset ?? Schema.GetOffset(0x1826A2622B161F70);
+            return ref _Handle.AsRef<float>(_PreDelayMS7Offset!.Value);
         }
     }
 

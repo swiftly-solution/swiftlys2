@@ -16,14 +16,14 @@ internal partial class CCSGameModeRules_ArmsRaceImpl : CCSGameModeRulesImpl, CCS
 {
     public CCSGameModeRules_ArmsRaceImpl(nint handle) : base(handle) { }
 
-    private static nint _WeaponSequenceOffset = -1;
+    private static nint? _WeaponSequenceOffset;
 
     public ref CUtlVector<CUtlString> WeaponSequence
     {
         get
         {
-            if (_WeaponSequenceOffset == -1) _WeaponSequenceOffset = Schema.GetOffset(0xDFFFC2FB1426444C);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_WeaponSequenceOffset);
+            _WeaponSequenceOffset = _WeaponSequenceOffset ?? Schema.GetOffset(0xDFFFC2FB1426444C);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_WeaponSequenceOffset!.Value);
         }
     }
 

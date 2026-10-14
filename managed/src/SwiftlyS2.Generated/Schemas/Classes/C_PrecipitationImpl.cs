@@ -16,95 +16,95 @@ internal partial class C_PrecipitationImpl : C_BaseTriggerImpl, C_Precipitation
 {
     public C_PrecipitationImpl(nint handle) : base(handle) { }
 
-    private static nint _DensityOffset = -1;
+    private static nint? _DensityOffset;
 
     public ref float Density
     {
         get
         {
-            if (_DensityOffset == -1) _DensityOffset = Schema.GetOffset(0x107A7186A7E7CAA1);
-            return ref _Handle.AsRef<float>(_DensityOffset);
+            _DensityOffset = _DensityOffset ?? Schema.GetOffset(0x107A7186A7E7CAA1);
+            return ref _Handle.AsRef<float>(_DensityOffset!.Value);
         }
     }
-    private static nint _ParticleInnerDistOffset = -1;
+    private static nint? _ParticleInnerDistOffset;
 
     public ref float ParticleInnerDist
     {
         get
         {
-            if (_ParticleInnerDistOffset == -1) _ParticleInnerDistOffset = Schema.GetOffset(0x107A71863FF42733);
-            return ref _Handle.AsRef<float>(_ParticleInnerDistOffset);
+            _ParticleInnerDistOffset = _ParticleInnerDistOffset ?? Schema.GetOffset(0x107A71863FF42733);
+            return ref _Handle.AsRef<float>(_ParticleInnerDistOffset!.Value);
         }
     }
-    private static nint _ParticleDefOffset = -1;
+    private static nint? _ParticleDefOffset;
 
     public string ParticleDef
     {
         get
         {
-            if (_ParticleDefOffset == -1) _ParticleDefOffset = Schema.GetOffset(0x107A7186FE8C8C48);
-            return Schema.GetString(_Handle.Read<nint>(_ParticleDefOffset));
+            _ParticleDefOffset = _ParticleDefOffset ?? Schema.GetOffset(0x107A7186FE8C8C48);
+            return Schema.GetString(_Handle.Read<nint>(_ParticleDefOffset!.Value));
         }
         set
         {
-            if (_ParticleDefOffset == -1) _ParticleDefOffset = Schema.GetOffset(0x107A7186FE8C8C48);
-            Schema.SetString(_Handle, _ParticleDefOffset, value);
+            _ParticleDefOffset = _ParticleDefOffset ?? Schema.GetOffset(0x107A7186FE8C8C48);
+            Schema.SetString(_Handle, _ParticleDefOffset!.Value, value);
         }
     }
-    private static nint _TParticlePrecipTraceTimerOffset = -1;
+    private static nint? _TParticlePrecipTraceTimerOffset;
     private SchemaClassFixedArray<TimedEvent>? _TParticlePrecipTraceTimerInstance;
 
     public ISchemaClassFixedArray<TimedEvent> TParticlePrecipTraceTimer
     {
         get
         {
-            if (_TParticlePrecipTraceTimerOffset == -1) _TParticlePrecipTraceTimerOffset = Schema.GetOffset(0x107A7186FD9957D8);
+            _TParticlePrecipTraceTimerOffset = _TParticlePrecipTraceTimerOffset ?? Schema.GetOffset(0x107A7186FD9957D8);
             var instance = _TParticlePrecipTraceTimerInstance ??= new SchemaClassFixedArray<TimedEvent>(0, 0x107A7186FD9957D8, 1, 8, 4);
-            instance.DangerousSetHandle(_Handle + _TParticlePrecipTraceTimerOffset);
+            instance.DangerousSetHandle(_Handle + _TParticlePrecipTraceTimerOffset!.Value);
             return instance;
         }
     }
-    private static nint _ActiveParticlePrecipEmitterOffset = -1;
+    private static nint? _ActiveParticlePrecipEmitterOffset;
     private SchemaFixedArray<bool>? _ActiveParticlePrecipEmitterInstance;
 
     public ISchemaFixedArray<bool> ActiveParticlePrecipEmitter
     {
         get
         {
-            if (_ActiveParticlePrecipEmitterOffset == -1) _ActiveParticlePrecipEmitterOffset = Schema.GetOffset(0x107A71866D9C1AB8);
+            _ActiveParticlePrecipEmitterOffset = _ActiveParticlePrecipEmitterOffset ?? Schema.GetOffset(0x107A71866D9C1AB8);
             var instance = _ActiveParticlePrecipEmitterInstance ??= new SchemaFixedArray<bool>(0, 0x107A71866D9C1AB8, 1, 1, 1);
-            instance.DangerousSetHandle(_Handle + _ActiveParticlePrecipEmitterOffset);
+            instance.DangerousSetHandle(_Handle + _ActiveParticlePrecipEmitterOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParticlePrecipInitializedOffset = -1;
+    private static nint? _ParticlePrecipInitializedOffset;
 
     public ref bool ParticlePrecipInitialized
     {
         get
         {
-            if (_ParticlePrecipInitializedOffset == -1) _ParticlePrecipInitializedOffset = Schema.GetOffset(0x107A718614BE3DAE);
-            return ref _Handle.AsRef<bool>(_ParticlePrecipInitializedOffset);
+            _ParticlePrecipInitializedOffset = _ParticlePrecipInitializedOffset ?? Schema.GetOffset(0x107A718614BE3DAE);
+            return ref _Handle.AsRef<bool>(_ParticlePrecipInitializedOffset!.Value);
         }
     }
-    private static nint _HasSimulatedSinceLastSceneObjectUpdateOffset = -1;
+    private static nint? _HasSimulatedSinceLastSceneObjectUpdateOffset;
 
     public ref bool HasSimulatedSinceLastSceneObjectUpdate
     {
         get
         {
-            if (_HasSimulatedSinceLastSceneObjectUpdateOffset == -1) _HasSimulatedSinceLastSceneObjectUpdateOffset = Schema.GetOffset(0x107A7186A17D5A23);
-            return ref _Handle.AsRef<bool>(_HasSimulatedSinceLastSceneObjectUpdateOffset);
+            _HasSimulatedSinceLastSceneObjectUpdateOffset = _HasSimulatedSinceLastSceneObjectUpdateOffset ?? Schema.GetOffset(0x107A7186A17D5A23);
+            return ref _Handle.AsRef<bool>(_HasSimulatedSinceLastSceneObjectUpdateOffset!.Value);
         }
     }
-    private static nint _AvailableSheetSequencesMaxIndexOffset = -1;
+    private static nint? _AvailableSheetSequencesMaxIndexOffset;
 
     public ref int AvailableSheetSequencesMaxIndex
     {
         get
         {
-            if (_AvailableSheetSequencesMaxIndexOffset == -1) _AvailableSheetSequencesMaxIndexOffset = Schema.GetOffset(0x107A71869B2658BD);
-            return ref _Handle.AsRef<int>(_AvailableSheetSequencesMaxIndexOffset);
+            _AvailableSheetSequencesMaxIndexOffset = _AvailableSheetSequencesMaxIndexOffset ?? Schema.GetOffset(0x107A71869B2658BD);
+            return ref _Handle.AsRef<int>(_AvailableSheetSequencesMaxIndexOffset!.Value);
         }
     }
 

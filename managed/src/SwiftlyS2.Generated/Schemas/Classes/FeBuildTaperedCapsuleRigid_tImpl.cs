@@ -16,34 +16,34 @@ internal partial class FeBuildTaperedCapsuleRigid_tImpl : FeTaperedCapsuleRigid_
 {
     public FeBuildTaperedCapsuleRigid_tImpl(nint handle) : base(handle) { }
 
-    private static nint _PriorityOffset = -1;
+    private static nint? _PriorityOffset;
 
     public ref int Priority
     {
         get
         {
-            if (_PriorityOffset == -1) _PriorityOffset = Schema.GetOffset(0x444BEEFEE7EFB335);
-            return ref _Handle.AsRef<int>(_PriorityOffset);
+            _PriorityOffset = _PriorityOffset ?? Schema.GetOffset(0x444BEEFEE7EFB335);
+            return ref _Handle.AsRef<int>(_PriorityOffset!.Value);
         }
     }
-    private static nint _VertexMapHashOffset = -1;
+    private static nint? _VertexMapHashOffset;
 
     public ref uint VertexMapHash
     {
         get
         {
-            if (_VertexMapHashOffset == -1) _VertexMapHashOffset = Schema.GetOffset(0x444BEEFE06BCA0A3);
-            return ref _Handle.AsRef<uint>(_VertexMapHashOffset);
+            _VertexMapHashOffset = _VertexMapHashOffset ?? Schema.GetOffset(0x444BEEFE06BCA0A3);
+            return ref _Handle.AsRef<uint>(_VertexMapHashOffset!.Value);
         }
     }
-    private static nint _AntitunnelGroupBitsOffset = -1;
+    private static nint? _AntitunnelGroupBitsOffset;
 
     public ref uint AntitunnelGroupBits
     {
         get
         {
-            if (_AntitunnelGroupBitsOffset == -1) _AntitunnelGroupBitsOffset = Schema.GetOffset(0x444BEEFEA5C6E91A);
-            return ref _Handle.AsRef<uint>(_AntitunnelGroupBitsOffset);
+            _AntitunnelGroupBitsOffset = _AntitunnelGroupBitsOffset ?? Schema.GetOffset(0x444BEEFEA5C6E91A);
+            return ref _Handle.AsRef<uint>(_AntitunnelGroupBitsOffset!.Value);
         }
     }
 

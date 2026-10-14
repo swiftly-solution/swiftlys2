@@ -16,204 +16,204 @@ internal partial class ParticlePreviewState_tImpl : SchemaClass, ParticlePreview
 {
     public ParticlePreviewState_tImpl(nint handle) : base(handle) { }
 
-    private static nint _PreviewModelOffset = -1;
+    private static nint? _PreviewModelOffset;
 
     public string PreviewModel
     {
         get
         {
-            if (_PreviewModelOffset == -1) _PreviewModelOffset = Schema.GetOffset(0x31FB1901BC4FDC14);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_PreviewModelOffset));
+            _PreviewModelOffset = _PreviewModelOffset ?? Schema.GetOffset(0x31FB1901BC4FDC14);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_PreviewModelOffset!.Value));
         }
         set
         {
-            if (_PreviewModelOffset == -1) _PreviewModelOffset = Schema.GetOffset(0x31FB1901BC4FDC14);
-            Schema.SetCUtlString(_Handle, _PreviewModelOffset, value);
+            _PreviewModelOffset = _PreviewModelOffset ?? Schema.GetOffset(0x31FB1901BC4FDC14);
+            Schema.SetCUtlString(_Handle, _PreviewModelOffset!.Value, value);
         }
     }
-    private static nint _ModSpecificDataOffset = -1;
+    private static nint? _ModSpecificDataOffset;
 
     public ref uint ModSpecificData
     {
         get
         {
-            if (_ModSpecificDataOffset == -1) _ModSpecificDataOffset = Schema.GetOffset(0x31FB19011580A6CB);
-            return ref _Handle.AsRef<uint>(_ModSpecificDataOffset);
+            _ModSpecificDataOffset = _ModSpecificDataOffset ?? Schema.GetOffset(0x31FB19011580A6CB);
+            return ref _Handle.AsRef<uint>(_ModSpecificDataOffset!.Value);
         }
     }
-    private static nint _GroundTypeOffset = -1;
+    private static nint? _GroundTypeOffset;
 
     public ref PetGroundType_t GroundType
     {
         get
         {
-            if (_GroundTypeOffset == -1) _GroundTypeOffset = Schema.GetOffset(0x31FB190132DE357E);
-            return ref _Handle.AsRef<PetGroundType_t>(_GroundTypeOffset);
+            _GroundTypeOffset = _GroundTypeOffset ?? Schema.GetOffset(0x31FB190132DE357E);
+            return ref _Handle.AsRef<PetGroundType_t>(_GroundTypeOffset!.Value);
         }
     }
-    private static nint _SequenceNameOffset = -1;
+    private static nint? _SequenceNameOffset;
 
     public string SequenceName
     {
         get
         {
-            if (_SequenceNameOffset == -1) _SequenceNameOffset = Schema.GetOffset(0x31FB19012B4A24CB);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_SequenceNameOffset));
+            _SequenceNameOffset = _SequenceNameOffset ?? Schema.GetOffset(0x31FB19012B4A24CB);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_SequenceNameOffset!.Value));
         }
         set
         {
-            if (_SequenceNameOffset == -1) _SequenceNameOffset = Schema.GetOffset(0x31FB19012B4A24CB);
-            Schema.SetCUtlString(_Handle, _SequenceNameOffset, value);
+            _SequenceNameOffset = _SequenceNameOffset ?? Schema.GetOffset(0x31FB19012B4A24CB);
+            Schema.SetCUtlString(_Handle, _SequenceNameOffset!.Value, value);
         }
     }
-    private static nint _FireParticleOnSequenceFrameOffset = -1;
+    private static nint? _FireParticleOnSequenceFrameOffset;
 
     public ref int FireParticleOnSequenceFrame
     {
         get
         {
-            if (_FireParticleOnSequenceFrameOffset == -1) _FireParticleOnSequenceFrameOffset = Schema.GetOffset(0x31FB19014432CB48);
-            return ref _Handle.AsRef<int>(_FireParticleOnSequenceFrameOffset);
+            _FireParticleOnSequenceFrameOffset = _FireParticleOnSequenceFrameOffset ?? Schema.GetOffset(0x31FB19014432CB48);
+            return ref _Handle.AsRef<int>(_FireParticleOnSequenceFrameOffset!.Value);
         }
     }
-    private static nint _HitboxSetNameOffset = -1;
+    private static nint? _HitboxSetNameOffset;
 
     public string HitboxSetName
     {
         get
         {
-            if (_HitboxSetNameOffset == -1) _HitboxSetNameOffset = Schema.GetOffset(0x31FB19011ACA1CAE);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_HitboxSetNameOffset));
+            _HitboxSetNameOffset = _HitboxSetNameOffset ?? Schema.GetOffset(0x31FB19011ACA1CAE);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_HitboxSetNameOffset!.Value));
         }
         set
         {
-            if (_HitboxSetNameOffset == -1) _HitboxSetNameOffset = Schema.GetOffset(0x31FB19011ACA1CAE);
-            Schema.SetCUtlString(_Handle, _HitboxSetNameOffset, value);
+            _HitboxSetNameOffset = _HitboxSetNameOffset ?? Schema.GetOffset(0x31FB19011ACA1CAE);
+            Schema.SetCUtlString(_Handle, _HitboxSetNameOffset!.Value, value);
         }
     }
-    private static nint _MaterialGroupNameOffset = -1;
+    private static nint? _MaterialGroupNameOffset;
 
     public string MaterialGroupName
     {
         get
         {
-            if (_MaterialGroupNameOffset == -1) _MaterialGroupNameOffset = Schema.GetOffset(0x31FB1901A6930C68);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_MaterialGroupNameOffset));
+            _MaterialGroupNameOffset = _MaterialGroupNameOffset ?? Schema.GetOffset(0x31FB1901A6930C68);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_MaterialGroupNameOffset!.Value));
         }
         set
         {
-            if (_MaterialGroupNameOffset == -1) _MaterialGroupNameOffset = Schema.GetOffset(0x31FB1901A6930C68);
-            Schema.SetCUtlString(_Handle, _MaterialGroupNameOffset, value);
+            _MaterialGroupNameOffset = _MaterialGroupNameOffset ?? Schema.GetOffset(0x31FB1901A6930C68);
+            Schema.SetCUtlString(_Handle, _MaterialGroupNameOffset!.Value, value);
         }
     }
-    private static nint _BodyGroupsOffset = -1;
+    private static nint? _BodyGroupsOffset;
 
     public ref CUtlVector<ParticlePreviewBodyGroup_t> BodyGroups
     {
         get
         {
-            if (_BodyGroupsOffset == -1) _BodyGroupsOffset = Schema.GetOffset(0x31FB1901893FA01D);
-            return ref _Handle.AsRef<CUtlVector<ParticlePreviewBodyGroup_t>>(_BodyGroupsOffset);
+            _BodyGroupsOffset = _BodyGroupsOffset ?? Schema.GetOffset(0x31FB1901893FA01D);
+            return ref _Handle.AsRef<CUtlVector<ParticlePreviewBodyGroup_t>>(_BodyGroupsOffset!.Value);
         }
     }
-    private static nint _PlaybackSpeedOffset = -1;
+    private static nint? _PlaybackSpeedOffset;
 
     public ref float PlaybackSpeed
     {
         get
         {
-            if (_PlaybackSpeedOffset == -1) _PlaybackSpeedOffset = Schema.GetOffset(0x31FB1901FA2B402D);
-            return ref _Handle.AsRef<float>(_PlaybackSpeedOffset);
+            _PlaybackSpeedOffset = _PlaybackSpeedOffset ?? Schema.GetOffset(0x31FB1901FA2B402D);
+            return ref _Handle.AsRef<float>(_PlaybackSpeedOffset!.Value);
         }
     }
-    private static nint _ParticleSimulationRateOffset = -1;
+    private static nint? _ParticleSimulationRateOffset;
 
     public ref float ParticleSimulationRate
     {
         get
         {
-            if (_ParticleSimulationRateOffset == -1) _ParticleSimulationRateOffset = Schema.GetOffset(0x31FB1901F9FAF9E0);
-            return ref _Handle.AsRef<float>(_ParticleSimulationRateOffset);
+            _ParticleSimulationRateOffset = _ParticleSimulationRateOffset ?? Schema.GetOffset(0x31FB1901F9FAF9E0);
+            return ref _Handle.AsRef<float>(_ParticleSimulationRateOffset!.Value);
         }
     }
-    private static nint _ShouldDrawHitboxesOffset = -1;
+    private static nint? _ShouldDrawHitboxesOffset;
 
     public ref bool ShouldDrawHitboxes
     {
         get
         {
-            if (_ShouldDrawHitboxesOffset == -1) _ShouldDrawHitboxesOffset = Schema.GetOffset(0x31FB19016D95117E);
-            return ref _Handle.AsRef<bool>(_ShouldDrawHitboxesOffset);
+            _ShouldDrawHitboxesOffset = _ShouldDrawHitboxesOffset ?? Schema.GetOffset(0x31FB19016D95117E);
+            return ref _Handle.AsRef<bool>(_ShouldDrawHitboxesOffset!.Value);
         }
     }
-    private static nint _ShouldDrawAttachmentsOffset = -1;
+    private static nint? _ShouldDrawAttachmentsOffset;
 
     public ref bool ShouldDrawAttachments
     {
         get
         {
-            if (_ShouldDrawAttachmentsOffset == -1) _ShouldDrawAttachmentsOffset = Schema.GetOffset(0x31FB19014EC43A36);
-            return ref _Handle.AsRef<bool>(_ShouldDrawAttachmentsOffset);
+            _ShouldDrawAttachmentsOffset = _ShouldDrawAttachmentsOffset ?? Schema.GetOffset(0x31FB19014EC43A36);
+            return ref _Handle.AsRef<bool>(_ShouldDrawAttachmentsOffset!.Value);
         }
     }
-    private static nint _ShouldDrawAttachmentNamesOffset = -1;
+    private static nint? _ShouldDrawAttachmentNamesOffset;
 
     public ref bool ShouldDrawAttachmentNames
     {
         get
         {
-            if (_ShouldDrawAttachmentNamesOffset == -1) _ShouldDrawAttachmentNamesOffset = Schema.GetOffset(0x31FB1901177CB28B);
-            return ref _Handle.AsRef<bool>(_ShouldDrawAttachmentNamesOffset);
+            _ShouldDrawAttachmentNamesOffset = _ShouldDrawAttachmentNamesOffset ?? Schema.GetOffset(0x31FB1901177CB28B);
+            return ref _Handle.AsRef<bool>(_ShouldDrawAttachmentNamesOffset!.Value);
         }
     }
-    private static nint _ShouldDrawControlPointAxesOffset = -1;
+    private static nint? _ShouldDrawControlPointAxesOffset;
 
     public ref bool ShouldDrawControlPointAxes
     {
         get
         {
-            if (_ShouldDrawControlPointAxesOffset == -1) _ShouldDrawControlPointAxesOffset = Schema.GetOffset(0x31FB1901A6A34D38);
-            return ref _Handle.AsRef<bool>(_ShouldDrawControlPointAxesOffset);
+            _ShouldDrawControlPointAxesOffset = _ShouldDrawControlPointAxesOffset ?? Schema.GetOffset(0x31FB1901A6A34D38);
+            return ref _Handle.AsRef<bool>(_ShouldDrawControlPointAxesOffset!.Value);
         }
     }
-    private static nint _AnimationNonLoopingOffset = -1;
+    private static nint? _AnimationNonLoopingOffset;
 
     public ref bool AnimationNonLooping
     {
         get
         {
-            if (_AnimationNonLoopingOffset == -1) _AnimationNonLoopingOffset = Schema.GetOffset(0x31FB1901F0071FD6);
-            return ref _Handle.AsRef<bool>(_AnimationNonLoopingOffset);
+            _AnimationNonLoopingOffset = _AnimationNonLoopingOffset ?? Schema.GetOffset(0x31FB1901F0071FD6);
+            return ref _Handle.AsRef<bool>(_AnimationNonLoopingOffset!.Value);
         }
     }
-    private static nint _SequenceNameIsAnimClipPathOffset = -1;
+    private static nint? _SequenceNameIsAnimClipPathOffset;
 
     public ref bool SequenceNameIsAnimClipPath
     {
         get
         {
-            if (_SequenceNameIsAnimClipPathOffset == -1) _SequenceNameIsAnimClipPathOffset = Schema.GetOffset(0x31FB19013BFE81C7);
-            return ref _Handle.AsRef<bool>(_SequenceNameIsAnimClipPathOffset);
+            _SequenceNameIsAnimClipPathOffset = _SequenceNameIsAnimClipPathOffset ?? Schema.GetOffset(0x31FB19013BFE81C7);
+            return ref _Handle.AsRef<bool>(_SequenceNameIsAnimClipPathOffset!.Value);
         }
     }
-    private static nint _PreviewGravityOffset = -1;
+    private static nint? _PreviewGravityOffset;
 
     public ref Vector PreviewGravity
     {
         get
         {
-            if (_PreviewGravityOffset == -1) _PreviewGravityOffset = Schema.GetOffset(0x31FB1901A6B7913F);
-            return ref _Handle.AsRef<Vector>(_PreviewGravityOffset);
+            _PreviewGravityOffset = _PreviewGravityOffset ?? Schema.GetOffset(0x31FB1901A6B7913F);
+            return ref _Handle.AsRef<Vector>(_PreviewGravityOffset!.Value);
         }
     }
-    private static nint _PreviewWindOffset = -1;
+    private static nint? _PreviewWindOffset;
 
     public ref Vector PreviewWind
     {
         get
         {
-            if (_PreviewWindOffset == -1) _PreviewWindOffset = Schema.GetOffset(0x31FB1901B95A8AE1);
-            return ref _Handle.AsRef<Vector>(_PreviewWindOffset);
+            _PreviewWindOffset = _PreviewWindOffset ?? Schema.GetOffset(0x31FB1901B95A8AE1);
+            return ref _Handle.AsRef<Vector>(_PreviewWindOffset!.Value);
         }
     }
 

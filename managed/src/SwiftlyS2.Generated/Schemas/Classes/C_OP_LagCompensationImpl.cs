@@ -16,44 +16,44 @@ internal partial class C_OP_LagCompensationImpl : CParticleFunctionOperatorImpl,
 {
     public C_OP_LagCompensationImpl(nint handle) : base(handle) { }
 
-    private static nint _DesiredVelocityCPOffset = -1;
+    private static nint? _DesiredVelocityCPOffset;
 
     public ref int DesiredVelocityCP
     {
         get
         {
-            if (_DesiredVelocityCPOffset == -1) _DesiredVelocityCPOffset = Schema.GetOffset(0x21277E4532AACEC5);
-            return ref _Handle.AsRef<int>(_DesiredVelocityCPOffset);
+            _DesiredVelocityCPOffset = _DesiredVelocityCPOffset ?? Schema.GetOffset(0x21277E4532AACEC5);
+            return ref _Handle.AsRef<int>(_DesiredVelocityCPOffset!.Value);
         }
     }
-    private static nint _LatencyCPOffset = -1;
+    private static nint? _LatencyCPOffset;
 
     public ref int LatencyCP
     {
         get
         {
-            if (_LatencyCPOffset == -1) _LatencyCPOffset = Schema.GetOffset(0x21277E45B100FE8E);
-            return ref _Handle.AsRef<int>(_LatencyCPOffset);
+            _LatencyCPOffset = _LatencyCPOffset ?? Schema.GetOffset(0x21277E45B100FE8E);
+            return ref _Handle.AsRef<int>(_LatencyCPOffset!.Value);
         }
     }
-    private static nint _LatencyCPFieldOffset = -1;
+    private static nint? _LatencyCPFieldOffset;
 
     public ref int LatencyCPField
     {
         get
         {
-            if (_LatencyCPFieldOffset == -1) _LatencyCPFieldOffset = Schema.GetOffset(0x21277E458E1CEB3A);
-            return ref _Handle.AsRef<int>(_LatencyCPFieldOffset);
+            _LatencyCPFieldOffset = _LatencyCPFieldOffset ?? Schema.GetOffset(0x21277E458E1CEB3A);
+            return ref _Handle.AsRef<int>(_LatencyCPFieldOffset!.Value);
         }
     }
-    private static nint _DesiredVelocityCPFieldOffset = -1;
+    private static nint? _DesiredVelocityCPFieldOffset;
 
     public ref int DesiredVelocityCPField
     {
         get
         {
-            if (_DesiredVelocityCPFieldOffset == -1) _DesiredVelocityCPFieldOffset = Schema.GetOffset(0x21277E45B59E9007);
-            return ref _Handle.AsRef<int>(_DesiredVelocityCPFieldOffset);
+            _DesiredVelocityCPFieldOffset = _DesiredVelocityCPFieldOffset ?? Schema.GetOffset(0x21277E45B59E9007);
+            return ref _Handle.AsRef<int>(_DesiredVelocityCPFieldOffset!.Value);
         }
     }
 

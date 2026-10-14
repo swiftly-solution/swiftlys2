@@ -16,179 +16,179 @@ internal partial class CEnvExplosionImpl : CModelPointEntityImpl, CEnvExplosion
 {
     public CEnvExplosionImpl(nint handle) : base(handle) { }
 
-    private static nint _MagnitudeOffset = -1;
+    private static nint? _MagnitudeOffset;
 
     public ref int Magnitude
     {
         get
         {
-            if (_MagnitudeOffset == -1) _MagnitudeOffset = Schema.GetOffset(0x27411F012CBE4C2);
-            return ref _Handle.AsRef<int>(_MagnitudeOffset);
+            _MagnitudeOffset = _MagnitudeOffset ?? Schema.GetOffset(0x27411F012CBE4C2);
+            return ref _Handle.AsRef<int>(_MagnitudeOffset!.Value);
         }
     }
-    private static nint _PlayerDamageOffset = -1;
+    private static nint? _PlayerDamageOffset;
 
     public ref float PlayerDamage
     {
         get
         {
-            if (_PlayerDamageOffset == -1) _PlayerDamageOffset = Schema.GetOffset(0x27411F08C95143B);
-            return ref _Handle.AsRef<float>(_PlayerDamageOffset);
+            _PlayerDamageOffset = _PlayerDamageOffset ?? Schema.GetOffset(0x27411F08C95143B);
+            return ref _Handle.AsRef<float>(_PlayerDamageOffset!.Value);
         }
     }
-    private static nint _RadiusOverrideOffset = -1;
+    private static nint? _RadiusOverrideOffset;
 
     public ref int RadiusOverride
     {
         get
         {
-            if (_RadiusOverrideOffset == -1) _RadiusOverrideOffset = Schema.GetOffset(0x27411F0CD5417B2);
-            return ref _Handle.AsRef<int>(_RadiusOverrideOffset);
+            _RadiusOverrideOffset = _RadiusOverrideOffset ?? Schema.GetOffset(0x27411F0CD5417B2);
+            return ref _Handle.AsRef<int>(_RadiusOverrideOffset!.Value);
         }
     }
-    private static nint _InnerRadiusOffset = -1;
+    private static nint? _InnerRadiusOffset;
 
     public ref float InnerRadius
     {
         get
         {
-            if (_InnerRadiusOffset == -1) _InnerRadiusOffset = Schema.GetOffset(0x27411F032121407);
-            return ref _Handle.AsRef<float>(_InnerRadiusOffset);
+            _InnerRadiusOffset = _InnerRadiusOffset ?? Schema.GetOffset(0x27411F032121407);
+            return ref _Handle.AsRef<float>(_InnerRadiusOffset!.Value);
         }
     }
-    private static nint _DamageForceOffset = -1;
+    private static nint? _DamageForceOffset;
 
     public ref float DamageForce
     {
         get
         {
-            if (_DamageForceOffset == -1) _DamageForceOffset = Schema.GetOffset(0x27411F0AB66D0A5);
-            return ref _Handle.AsRef<float>(_DamageForceOffset);
+            _DamageForceOffset = _DamageForceOffset ?? Schema.GetOffset(0x27411F0AB66D0A5);
+            return ref _Handle.AsRef<float>(_DamageForceOffset!.Value);
         }
     }
-    private static nint _InflictorOffset = -1;
+    private static nint? _InflictorOffset;
 
     public ref CHandle<CBaseEntity> Inflictor
     {
         get
         {
-            if (_InflictorOffset == -1) _InflictorOffset = Schema.GetOffset(0x27411F04D7B4137);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_InflictorOffset);
+            _InflictorOffset = _InflictorOffset ?? Schema.GetOffset(0x27411F04D7B4137);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_InflictorOffset!.Value);
         }
     }
-    private static nint _CustomDamageTypeOffset = -1;
+    private static nint? _CustomDamageTypeOffset;
 
     public ref DamageTypes_t CustomDamageType
     {
         get
         {
-            if (_CustomDamageTypeOffset == -1) _CustomDamageTypeOffset = Schema.GetOffset(0x27411F0E0A58F6E);
-            return ref _Handle.AsRef<DamageTypes_t>(_CustomDamageTypeOffset);
+            _CustomDamageTypeOffset = _CustomDamageTypeOffset ?? Schema.GetOffset(0x27411F0E0A58F6E);
+            return ref _Handle.AsRef<DamageTypes_t>(_CustomDamageTypeOffset!.Value);
         }
     }
-    private static nint _HasCustomDamageTypeOffset = -1;
+    private static nint? _HasCustomDamageTypeOffset;
 
     public ref bool HasCustomDamageType
     {
         get
         {
-            if (_HasCustomDamageTypeOffset == -1) _HasCustomDamageTypeOffset = Schema.GetOffset(0x27411F0B048DF49);
-            return ref _Handle.AsRef<bool>(_HasCustomDamageTypeOffset);
+            _HasCustomDamageTypeOffset = _HasCustomDamageTypeOffset ?? Schema.GetOffset(0x27411F0B048DF49);
+            return ref _Handle.AsRef<bool>(_HasCustomDamageTypeOffset!.Value);
         }
     }
-    private static nint _CreateDebrisOffset = -1;
+    private static nint? _CreateDebrisOffset;
 
     public ref bool CreateDebris
     {
         get
         {
-            if (_CreateDebrisOffset == -1) _CreateDebrisOffset = Schema.GetOffset(0x27411F08F0AE362);
-            return ref _Handle.AsRef<bool>(_CreateDebrisOffset);
+            _CreateDebrisOffset = _CreateDebrisOffset ?? Schema.GetOffset(0x27411F08F0AE362);
+            return ref _Handle.AsRef<bool>(_CreateDebrisOffset!.Value);
         }
     }
-    private static nint _CustomEffectNameOffset = -1;
+    private static nint? _CustomEffectNameOffset;
 
     public string CustomEffectName
     {
         get
         {
-            if (_CustomEffectNameOffset == -1) _CustomEffectNameOffset = Schema.GetOffset(0x27411F0455090C0);
-            return Schema.GetString(_Handle.Read<nint>(_CustomEffectNameOffset));
+            _CustomEffectNameOffset = _CustomEffectNameOffset ?? Schema.GetOffset(0x27411F0455090C0);
+            return Schema.GetString(_Handle.Read<nint>(_CustomEffectNameOffset!.Value));
         }
         set
         {
-            if (_CustomEffectNameOffset == -1) _CustomEffectNameOffset = Schema.GetOffset(0x27411F0455090C0);
-            Schema.SetString(_Handle, _CustomEffectNameOffset, value);
+            _CustomEffectNameOffset = _CustomEffectNameOffset ?? Schema.GetOffset(0x27411F0455090C0);
+            Schema.SetString(_Handle, _CustomEffectNameOffset!.Value, value);
         }
     }
-    private static nint _CustomSoundNameOffset = -1;
+    private static nint? _CustomSoundNameOffset;
 
     public string CustomSoundName
     {
         get
         {
-            if (_CustomSoundNameOffset == -1) _CustomSoundNameOffset = Schema.GetOffset(0x27411F0876FC976);
-            return Schema.GetString(_Handle.Read<nint>(_CustomSoundNameOffset));
+            _CustomSoundNameOffset = _CustomSoundNameOffset ?? Schema.GetOffset(0x27411F0876FC976);
+            return Schema.GetString(_Handle.Read<nint>(_CustomSoundNameOffset!.Value));
         }
         set
         {
-            if (_CustomSoundNameOffset == -1) _CustomSoundNameOffset = Schema.GetOffset(0x27411F0876FC976);
-            Schema.SetString(_Handle, _CustomSoundNameOffset, value);
+            _CustomSoundNameOffset = _CustomSoundNameOffset ?? Schema.GetOffset(0x27411F0876FC976);
+            Schema.SetString(_Handle, _CustomSoundNameOffset!.Value, value);
         }
     }
-    private static nint _SuppressParticleImpulseOffset = -1;
+    private static nint? _SuppressParticleImpulseOffset;
 
     public ref bool SuppressParticleImpulse
     {
         get
         {
-            if (_SuppressParticleImpulseOffset == -1) _SuppressParticleImpulseOffset = Schema.GetOffset(0x27411F02C7847BB);
-            return ref _Handle.AsRef<bool>(_SuppressParticleImpulseOffset);
+            _SuppressParticleImpulseOffset = _SuppressParticleImpulseOffset ?? Schema.GetOffset(0x27411F02C7847BB);
+            return ref _Handle.AsRef<bool>(_SuppressParticleImpulseOffset!.Value);
         }
     }
-    private static nint _ClassIgnoreOffset = -1;
+    private static nint? _ClassIgnoreOffset;
 
     public ref Class_T ClassIgnore
     {
         get
         {
-            if (_ClassIgnoreOffset == -1) _ClassIgnoreOffset = Schema.GetOffset(0x27411F0A0290EDE);
-            return ref _Handle.AsRef<Class_T>(_ClassIgnoreOffset);
+            _ClassIgnoreOffset = _ClassIgnoreOffset ?? Schema.GetOffset(0x27411F0A0290EDE);
+            return ref _Handle.AsRef<Class_T>(_ClassIgnoreOffset!.Value);
         }
     }
-    private static nint _ClassIgnore2Offset = -1;
+    private static nint? _ClassIgnore2Offset;
 
     public ref Class_T ClassIgnore2
     {
         get
         {
-            if (_ClassIgnore2Offset == -1) _ClassIgnore2Offset = Schema.GetOffset(0x27411F00CA27D84);
-            return ref _Handle.AsRef<Class_T>(_ClassIgnore2Offset);
+            _ClassIgnore2Offset = _ClassIgnore2Offset ?? Schema.GetOffset(0x27411F00CA27D84);
+            return ref _Handle.AsRef<Class_T>(_ClassIgnore2Offset!.Value);
         }
     }
-    private static nint _EntityIgnoreNameOffset = -1;
+    private static nint? _EntityIgnoreNameOffset;
 
     public string EntityIgnoreName
     {
         get
         {
-            if (_EntityIgnoreNameOffset == -1) _EntityIgnoreNameOffset = Schema.GetOffset(0x27411F0A786C06F);
-            return Schema.GetString(_Handle.Read<nint>(_EntityIgnoreNameOffset));
+            _EntityIgnoreNameOffset = _EntityIgnoreNameOffset ?? Schema.GetOffset(0x27411F0A786C06F);
+            return Schema.GetString(_Handle.Read<nint>(_EntityIgnoreNameOffset!.Value));
         }
         set
         {
-            if (_EntityIgnoreNameOffset == -1) _EntityIgnoreNameOffset = Schema.GetOffset(0x27411F0A786C06F);
-            Schema.SetString(_Handle, _EntityIgnoreNameOffset, value);
+            _EntityIgnoreNameOffset = _EntityIgnoreNameOffset ?? Schema.GetOffset(0x27411F0A786C06F);
+            Schema.SetString(_Handle, _EntityIgnoreNameOffset!.Value, value);
         }
     }
-    private static nint _EntityIgnoreOffset = -1;
+    private static nint? _EntityIgnoreOffset;
 
     public ref CHandle<CBaseEntity> EntityIgnore
     {
         get
         {
-            if (_EntityIgnoreOffset == -1) _EntityIgnoreOffset = Schema.GetOffset(0x27411F08F1E5202);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityIgnoreOffset);
+            _EntityIgnoreOffset = _EntityIgnoreOffset ?? Schema.GetOffset(0x27411F08F1E5202);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityIgnoreOffset!.Value);
         }
     }
 

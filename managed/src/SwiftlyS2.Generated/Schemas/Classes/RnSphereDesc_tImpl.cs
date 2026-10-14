@@ -16,14 +16,14 @@ internal partial class RnSphereDesc_tImpl : RnShapeDesc_tImpl, RnSphereDesc_t
 {
     public RnSphereDesc_tImpl(nint handle) : base(handle) { }
 
-    private static nint _SphereOffset = -1;
+    private static nint? _SphereOffset;
 
     public ref RnSphere_t Sphere
     {
         get
         {
-            if (_SphereOffset == -1) _SphereOffset = Schema.GetOffset(0x6187F5E1E7A3D98);
-            return ref _Handle.AsRef<RnSphere_t>(_SphereOffset);
+            _SphereOffset = _SphereOffset ?? Schema.GetOffset(0x6187F5E1E7A3D98);
+            return ref _Handle.AsRef<RnSphere_t>(_SphereOffset!.Value);
         }
     }
 

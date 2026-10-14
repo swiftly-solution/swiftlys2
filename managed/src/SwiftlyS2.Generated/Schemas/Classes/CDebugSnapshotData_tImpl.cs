@@ -16,162 +16,162 @@ internal partial class CDebugSnapshotData_tImpl : SchemaClass, CDebugSnapshotDat
 {
     public CDebugSnapshotData_tImpl(nint handle) : base(handle) { }
 
-    private static nint _TextOffset = -1;
+    private static nint? _TextOffset;
 
     public string Text
     {
         get
         {
-            if (_TextOffset == -1) _TextOffset = Schema.GetOffset(0x9C6DA567BC311DE);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_TextOffset));
+            _TextOffset = _TextOffset ?? Schema.GetOffset(0x9C6DA567BC311DE);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_TextOffset!.Value));
         }
         set
         {
-            if (_TextOffset == -1) _TextOffset = Schema.GetOffset(0x9C6DA567BC311DE);
-            Schema.SetCUtlString(_Handle, _TextOffset, value);
+            _TextOffset = _TextOffset ?? Schema.GetOffset(0x9C6DA567BC311DE);
+            Schema.SetCUtlString(_Handle, _TextOffset!.Value, value);
         }
     }
-    private static nint _DataTypeOffset = -1;
+    private static nint? _DataTypeOffset;
 
     public ref uint DataType
     {
         get
         {
-            if (_DataTypeOffset == -1) _DataTypeOffset = Schema.GetOffset(0x9C6DA56ECE618ED);
-            return ref _Handle.AsRef<uint>(_DataTypeOffset);
+            _DataTypeOffset = _DataTypeOffset ?? Schema.GetOffset(0x9C6DA56ECE618ED);
+            return ref _Handle.AsRef<uint>(_DataTypeOffset!.Value);
         }
     }
-    private static nint _UserFlagsOffset = -1;
+    private static nint? _UserFlagsOffset;
 
     public ref uint UserFlags
     {
         get
         {
-            if (_UserFlagsOffset == -1) _UserFlagsOffset = Schema.GetOffset(0x9C6DA56EC5A358D);
-            return ref _Handle.AsRef<uint>(_UserFlagsOffset);
+            _UserFlagsOffset = _UserFlagsOffset ?? Schema.GetOffset(0x9C6DA56EC5A358D);
+            return ref _Handle.AsRef<uint>(_UserFlagsOffset!.Value);
         }
     }
-    private static nint _UserDataOffset = -1;
+    private static nint? _UserDataOffset;
 
     public ref uint UserData
     {
         get
         {
-            if (_UserDataOffset == -1) _UserDataOffset = Schema.GetOffset(0x9C6DA5693973262);
-            return ref _Handle.AsRef<uint>(_UserDataOffset);
+            _UserDataOffset = _UserDataOffset ?? Schema.GetOffset(0x9C6DA5693973262);
+            return ref _Handle.AsRef<uint>(_UserDataOffset!.Value);
         }
     }
-    private static nint _UserVectorOffset = -1;
+    private static nint? _UserVectorOffset;
 
     public ref Vector UserVector
     {
         get
         {
-            if (_UserVectorOffset == -1) _UserVectorOffset = Schema.GetOffset(0x9C6DA56E6F5E499);
-            return ref _Handle.AsRef<Vector>(_UserVectorOffset);
+            _UserVectorOffset = _UserVectorOffset ?? Schema.GetOffset(0x9C6DA56E6F5E499);
+            return ref _Handle.AsRef<Vector>(_UserVectorOffset!.Value);
         }
     }
-    private static nint _UserTransformOffset = -1;
+    private static nint? _UserTransformOffset;
 
     public ref CTransform UserTransform
     {
         get
         {
-            if (_UserTransformOffset == -1) _UserTransformOffset = Schema.GetOffset(0x9C6DA56ACEA073A);
-            return ref _Handle.AsRef<CTransform>(_UserTransformOffset);
+            _UserTransformOffset = _UserTransformOffset ?? Schema.GetOffset(0x9C6DA56ACEA073A);
+            return ref _Handle.AsRef<CTransform>(_UserTransformOffset!.Value);
         }
     }
-    private static nint _UserShapeOffset = -1;
+    private static nint? _UserShapeOffset;
     private CGenericShapeProxyImpl? _UserShapeInstance;
 
     public CGenericShapeProxy UserShape
     {
         get
         {
-            if (_UserShapeOffset == -1) _UserShapeOffset = Schema.GetOffset(0x9C6DA5655E98A6F);
+            _UserShapeOffset = _UserShapeOffset ?? Schema.GetOffset(0x9C6DA5655E98A6F);
             var instance = _UserShapeInstance ??= new CGenericShapeProxyImpl(0);
-            instance.DangerousSetHandle(_Handle + _UserShapeOffset);
+            instance.DangerousSetHandle(_Handle + _UserShapeOffset!.Value);
             return instance;
         }
     }
-    private static nint _DrawColorOffset = -1;
+    private static nint? _DrawColorOffset;
 
     public ref Color DrawColor
     {
         get
         {
-            if (_DrawColorOffset == -1) _DrawColorOffset = Schema.GetOffset(0x9C6DA56CA92F1F2);
-            return ref _Handle.AsRef<Color>(_DrawColorOffset);
+            _DrawColorOffset = _DrawColorOffset ?? Schema.GetOffset(0x9C6DA56CA92F1F2);
+            return ref _Handle.AsRef<Color>(_DrawColorOffset!.Value);
         }
     }
-    private static nint _DebugOverlayDataOffset = -1;
+    private static nint? _DebugOverlayDataOffset;
 
     public ref CUtlVector<PointerTo<CDebugDrawHistoryData>> DebugOverlayData
     {
         get
         {
-            if (_DebugOverlayDataOffset == -1) _DebugOverlayDataOffset = Schema.GetOffset(0x9C6DA563966F410);
-            return ref _Handle.AsRef<CUtlVector<PointerTo<CDebugDrawHistoryData>>>(_DebugOverlayDataOffset);
+            _DebugOverlayDataOffset = _DebugOverlayDataOffset ?? Schema.GetOffset(0x9C6DA563966F410);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<CDebugDrawHistoryData>>>(_DebugOverlayDataOffset!.Value);
         }
     }
-    private static nint _StructuredDataOffset = -1;
+    private static nint? _StructuredDataOffset;
     private DebugSnapshotBaseStructuredData_tImpl? _StructuredDataInstance;
 
     public DebugSnapshotBaseStructuredData_t? StructuredData
     {
         get
         {
-            if (_StructuredDataOffset == -1) _StructuredDataOffset = Schema.GetOffset(0x9C6DA5642C5A5E8);
-            var ptr = _Handle.Read<nint>(_StructuredDataOffset);
+            _StructuredDataOffset = _StructuredDataOffset ?? Schema.GetOffset(0x9C6DA5642C5A5E8);
+            var ptr = _Handle.Read<nint>(_StructuredDataOffset!.Value);
             if (!ptr.IsValidPtr()) return null;
             var instance = _StructuredDataInstance ??= new DebugSnapshotBaseStructuredData_tImpl(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint _EntityOffset = -1;
+    private static nint? _EntityOffset;
 
     public ref CHandle<C_BaseEntity> Entity
     {
         get
         {
-            if (_EntityOffset == -1) _EntityOffset = Schema.GetOffset(0x9C6DA566EBADCB0);
-            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_EntityOffset);
+            _EntityOffset = _EntityOffset ?? Schema.GetOffset(0x9C6DA566EBADCB0);
+            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_EntityOffset!.Value);
         }
     }
-    private static nint _EntityNameOffset = -1;
+    private static nint? _EntityNameOffset;
 
     public string EntityName
     {
         get
         {
-            if (_EntityNameOffset == -1) _EntityNameOffset = Schema.GetOffset(0x9C6DA56D1F0769A);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_EntityNameOffset));
+            _EntityNameOffset = _EntityNameOffset ?? Schema.GetOffset(0x9C6DA56D1F0769A);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_EntityNameOffset!.Value));
         }
         set
         {
-            if (_EntityNameOffset == -1) _EntityNameOffset = Schema.GetOffset(0x9C6DA56D1F0769A);
-            Schema.SetCUtlString(_Handle, _EntityNameOffset, value);
+            _EntityNameOffset = _EntityNameOffset ?? Schema.GetOffset(0x9C6DA56D1F0769A);
+            Schema.SetCUtlString(_Handle, _EntityNameOffset!.Value, value);
         }
     }
-    private static nint _EntityIndexOffset = -1;
+    private static nint? _EntityIndexOffset;
 
     public ref uint EntityIndex
     {
         get
         {
-            if (_EntityIndexOffset == -1) _EntityIndexOffset = Schema.GetOffset(0x9C6DA56BDB9BC5A);
-            return ref _Handle.AsRef<uint>(_EntityIndexOffset);
+            _EntityIndexOffset = _EntityIndexOffset ?? Schema.GetOffset(0x9C6DA56BDB9BC5A);
+            return ref _Handle.AsRef<uint>(_EntityIndexOffset!.Value);
         }
     }
-    private static nint _ChildrenOffset = -1;
+    private static nint? _ChildrenOffset;
 
     public ref CUtlLeanVector<CDebugSnapshotData_t, int> Children
     {
         get
         {
-            if (_ChildrenOffset == -1) _ChildrenOffset = Schema.GetOffset(0x9C6DA567415FA72);
-            return ref _Handle.AsRef<CUtlLeanVector<CDebugSnapshotData_t, int>>(_ChildrenOffset);
+            _ChildrenOffset = _ChildrenOffset ?? Schema.GetOffset(0x9C6DA567415FA72);
+            return ref _Handle.AsRef<CUtlLeanVector<CDebugSnapshotData_t, int>>(_ChildrenOffset!.Value);
         }
     }
 

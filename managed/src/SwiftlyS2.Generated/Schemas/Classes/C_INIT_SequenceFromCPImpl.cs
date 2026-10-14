@@ -16,44 +16,44 @@ internal partial class C_INIT_SequenceFromCPImpl : CParticleFunctionInitializerI
 {
     public C_INIT_SequenceFromCPImpl(nint handle) : base(handle) { }
 
-    private static nint _KillUnusedOffset = -1;
+    private static nint? _KillUnusedOffset;
 
     public ref bool KillUnused
     {
         get
         {
-            if (_KillUnusedOffset == -1) _KillUnusedOffset = Schema.GetOffset(0xC62FB07C81506527);
-            return ref _Handle.AsRef<bool>(_KillUnusedOffset);
+            _KillUnusedOffset = _KillUnusedOffset ?? Schema.GetOffset(0xC62FB07C81506527);
+            return ref _Handle.AsRef<bool>(_KillUnusedOffset!.Value);
         }
     }
-    private static nint _RadiusScaleOffset = -1;
+    private static nint? _RadiusScaleOffset;
 
     public ref bool RadiusScale
     {
         get
         {
-            if (_RadiusScaleOffset == -1) _RadiusScaleOffset = Schema.GetOffset(0xC62FB07CBBCB728B);
-            return ref _Handle.AsRef<bool>(_RadiusScaleOffset);
+            _RadiusScaleOffset = _RadiusScaleOffset ?? Schema.GetOffset(0xC62FB07CBBCB728B);
+            return ref _Handle.AsRef<bool>(_RadiusScaleOffset!.Value);
         }
     }
-    private static nint _CPOffset = -1;
+    private static nint? _CPOffset;
 
     public ref int CP
     {
         get
         {
-            if (_CPOffset == -1) _CPOffset = Schema.GetOffset(0xC62FB07CEB661472);
-            return ref _Handle.AsRef<int>(_CPOffset);
+            _CPOffset = _CPOffset ?? Schema.GetOffset(0xC62FB07CEB661472);
+            return ref _Handle.AsRef<int>(_CPOffset!.Value);
         }
     }
-    private static nint _OffsetOffset = -1;
+    private static nint? _OffsetOffset;
 
     public ref Vector Offset
     {
         get
         {
-            if (_OffsetOffset == -1) _OffsetOffset = Schema.GetOffset(0xC62FB07CBD25CC2A);
-            return ref _Handle.AsRef<Vector>(_OffsetOffset);
+            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0xC62FB07CBD25CC2A);
+            return ref _Handle.AsRef<Vector>(_OffsetOffset!.Value);
         }
     }
 

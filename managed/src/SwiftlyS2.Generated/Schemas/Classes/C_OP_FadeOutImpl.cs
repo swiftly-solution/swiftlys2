@@ -16,64 +16,64 @@ internal partial class C_OP_FadeOutImpl : CParticleFunctionOperatorImpl, C_OP_Fa
 {
     public C_OP_FadeOutImpl(nint handle) : base(handle) { }
 
-    private static nint _FadeOutTimeMinOffset = -1;
+    private static nint? _FadeOutTimeMinOffset;
 
     public ref float FadeOutTimeMin
     {
         get
         {
-            if (_FadeOutTimeMinOffset == -1) _FadeOutTimeMinOffset = Schema.GetOffset(0xDB3026B50D900CF6);
-            return ref _Handle.AsRef<float>(_FadeOutTimeMinOffset);
+            _FadeOutTimeMinOffset = _FadeOutTimeMinOffset ?? Schema.GetOffset(0xDB3026B50D900CF6);
+            return ref _Handle.AsRef<float>(_FadeOutTimeMinOffset!.Value);
         }
     }
-    private static nint _FadeOutTimeMaxOffset = -1;
+    private static nint? _FadeOutTimeMaxOffset;
 
     public ref float FadeOutTimeMax
     {
         get
         {
-            if (_FadeOutTimeMaxOffset == -1) _FadeOutTimeMaxOffset = Schema.GetOffset(0xDB3026B5FFA37EA4);
-            return ref _Handle.AsRef<float>(_FadeOutTimeMaxOffset);
+            _FadeOutTimeMaxOffset = _FadeOutTimeMaxOffset ?? Schema.GetOffset(0xDB3026B5FFA37EA4);
+            return ref _Handle.AsRef<float>(_FadeOutTimeMaxOffset!.Value);
         }
     }
-    private static nint _FadeOutTimeExpOffset = -1;
+    private static nint? _FadeOutTimeExpOffset;
 
     public ref float FadeOutTimeExp
     {
         get
         {
-            if (_FadeOutTimeExpOffset == -1) _FadeOutTimeExpOffset = Schema.GetOffset(0xDB3026B596AB9995);
-            return ref _Handle.AsRef<float>(_FadeOutTimeExpOffset);
+            _FadeOutTimeExpOffset = _FadeOutTimeExpOffset ?? Schema.GetOffset(0xDB3026B596AB9995);
+            return ref _Handle.AsRef<float>(_FadeOutTimeExpOffset!.Value);
         }
     }
-    private static nint _FadeBiasOffset = -1;
+    private static nint? _FadeBiasOffset;
 
     public ref float FadeBias
     {
         get
         {
-            if (_FadeBiasOffset == -1) _FadeBiasOffset = Schema.GetOffset(0xDB3026B5D35FA840);
-            return ref _Handle.AsRef<float>(_FadeBiasOffset);
+            _FadeBiasOffset = _FadeBiasOffset ?? Schema.GetOffset(0xDB3026B5D35FA840);
+            return ref _Handle.AsRef<float>(_FadeBiasOffset!.Value);
         }
     }
-    private static nint _ProportionalOffset = -1;
+    private static nint? _ProportionalOffset;
 
     public ref bool Proportional
     {
         get
         {
-            if (_ProportionalOffset == -1) _ProportionalOffset = Schema.GetOffset(0xDB3026B5891F328A);
-            return ref _Handle.AsRef<bool>(_ProportionalOffset);
+            _ProportionalOffset = _ProportionalOffset ?? Schema.GetOffset(0xDB3026B5891F328A);
+            return ref _Handle.AsRef<bool>(_ProportionalOffset!.Value);
         }
     }
-    private static nint _EaseInAndOutOffset = -1;
+    private static nint? _EaseInAndOutOffset;
 
     public ref bool EaseInAndOut
     {
         get
         {
-            if (_EaseInAndOutOffset == -1) _EaseInAndOutOffset = Schema.GetOffset(0xDB3026B5D14612BF);
-            return ref _Handle.AsRef<bool>(_EaseInAndOutOffset);
+            _EaseInAndOutOffset = _EaseInAndOutOffset ?? Schema.GetOffset(0xDB3026B5D14612BF);
+            return ref _Handle.AsRef<bool>(_EaseInAndOutOffset!.Value);
         }
     }
 

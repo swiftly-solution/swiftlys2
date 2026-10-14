@@ -16,132 +16,132 @@ internal partial class CClientAlphaPropertyImpl : IClientAlphaPropertyImpl, CCli
 {
     public CClientAlphaPropertyImpl(nint handle) : base(handle) { }
 
-    private static nint _DistFadeStartOffset = -1;
+    private static nint? _DistFadeStartOffset;
 
     public ref ushort DistFadeStart
     {
         get
         {
-            if (_DistFadeStartOffset == -1) _DistFadeStartOffset = Schema.GetOffset(0x5BDC1A3677D2A3A1);
-            return ref _Handle.AsRef<ushort>(_DistFadeStartOffset);
+            _DistFadeStartOffset = _DistFadeStartOffset ?? Schema.GetOffset(0x5BDC1A3677D2A3A1);
+            return ref _Handle.AsRef<ushort>(_DistFadeStartOffset!.Value);
         }
     }
-    private static nint _DistFadeEndOffset = -1;
+    private static nint? _DistFadeEndOffset;
 
     public ref ushort DistFadeEnd
     {
         get
         {
-            if (_DistFadeEndOffset == -1) _DistFadeEndOffset = Schema.GetOffset(0x5BDC1A3650F630E0);
-            return ref _Handle.AsRef<ushort>(_DistFadeEndOffset);
+            _DistFadeEndOffset = _DistFadeEndOffset ?? Schema.GetOffset(0x5BDC1A3650F630E0);
+            return ref _Handle.AsRef<ushort>(_DistFadeEndOffset!.Value);
         }
     }
-    private static nint _DesyncOffsetOffset = -1;
+    private static nint? _DesyncOffsetOffset;
     private SchemaUntypedField? _DesyncOffsetInstance;
 
     public SchemaUntypedField DesyncOffset
     {
         get
         {
-            if (_DesyncOffsetOffset == -1) _DesyncOffsetOffset = Schema.GetOffset(0x5BDC1A368238B992);
+            _DesyncOffsetOffset = _DesyncOffsetOffset ?? Schema.GetOffset(0x5BDC1A368238B992);
             var instance = _DesyncOffsetInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _DesyncOffsetOffset);
+            instance.DangerousSetHandle(_Handle + _DesyncOffsetOffset!.Value);
             return instance;
         }
     }
-    private static nint _AlphaOverrideOffset = -1;
+    private static nint? _AlphaOverrideOffset;
     private SchemaUntypedField? _AlphaOverrideInstance;
 
     public SchemaUntypedField AlphaOverride
     {
         get
         {
-            if (_AlphaOverrideOffset == -1) _AlphaOverrideOffset = Schema.GetOffset(0x5BDC1A3658938693);
+            _AlphaOverrideOffset = _AlphaOverrideOffset ?? Schema.GetOffset(0x5BDC1A3658938693);
             var instance = _AlphaOverrideInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _AlphaOverrideOffset);
+            instance.DangerousSetHandle(_Handle + _AlphaOverrideOffset!.Value);
             return instance;
         }
     }
-    private static nint _ShadowAlphaOverrideOffset = -1;
+    private static nint? _ShadowAlphaOverrideOffset;
     private SchemaUntypedField? _ShadowAlphaOverrideInstance;
 
     public SchemaUntypedField ShadowAlphaOverride
     {
         get
         {
-            if (_ShadowAlphaOverrideOffset == -1) _ShadowAlphaOverrideOffset = Schema.GetOffset(0x5BDC1A3693F459F7);
+            _ShadowAlphaOverrideOffset = _ShadowAlphaOverrideOffset ?? Schema.GetOffset(0x5BDC1A3693F459F7);
             var instance = _ShadowAlphaOverrideInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ShadowAlphaOverrideOffset);
+            instance.DangerousSetHandle(_Handle + _ShadowAlphaOverrideOffset!.Value);
             return instance;
         }
     }
-    private static nint _RenderModeOffset = -1;
+    private static nint? _RenderModeOffset;
     private SchemaUntypedField? _RenderModeInstance;
 
     public SchemaUntypedField RenderMode
     {
         get
         {
-            if (_RenderModeOffset == -1) _RenderModeOffset = Schema.GetOffset(0x5BDC1A36679967A6);
+            _RenderModeOffset = _RenderModeOffset ?? Schema.GetOffset(0x5BDC1A36679967A6);
             var instance = _RenderModeInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _RenderModeOffset);
+            instance.DangerousSetHandle(_Handle + _RenderModeOffset!.Value);
             return instance;
         }
     }
-    private static nint _RenderFXOffset = -1;
+    private static nint? _RenderFXOffset;
     private SchemaUntypedField? _RenderFXInstance;
 
     public SchemaUntypedField RenderFX
     {
         get
         {
-            if (_RenderFXOffset == -1) _RenderFXOffset = Schema.GetOffset(0x5BDC1A36E510717F);
+            _RenderFXOffset = _RenderFXOffset ?? Schema.GetOffset(0x5BDC1A36E510717F);
             var instance = _RenderFXInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _RenderFXOffset);
+            instance.DangerousSetHandle(_Handle + _RenderFXOffset!.Value);
             return instance;
         }
     }
-    private static nint _AlphaOffset = -1;
+    private static nint? _AlphaOffset;
 
     public ref byte Alpha
     {
         get
         {
-            if (_AlphaOffset == -1) _AlphaOffset = Schema.GetOffset(0x5BDC1A36BFBA2497);
-            return ref _Handle.AsRef<byte>(_AlphaOffset);
+            _AlphaOffset = _AlphaOffset ?? Schema.GetOffset(0x5BDC1A36BFBA2497);
+            return ref _Handle.AsRef<byte>(_AlphaOffset!.Value);
         }
     }
-    private static nint _FadeScaleOffset = -1;
+    private static nint? _FadeScaleOffset;
 
     public ref float FadeScale
     {
         get
         {
-            if (_FadeScaleOffset == -1) _FadeScaleOffset = Schema.GetOffset(0x5BDC1A3686B56425);
-            return ref _Handle.AsRef<float>(_FadeScaleOffset);
+            _FadeScaleOffset = _FadeScaleOffset ?? Schema.GetOffset(0x5BDC1A3686B56425);
+            return ref _Handle.AsRef<float>(_FadeScaleOffset!.Value);
         }
     }
-    private static nint _RenderFxStartTimeOffset = -1;
+    private static nint? _RenderFxStartTimeOffset;
     private GameTime_tImpl? _RenderFxStartTimeInstance;
 
     public GameTime_t RenderFxStartTime
     {
         get
         {
-            if (_RenderFxStartTimeOffset == -1) _RenderFxStartTimeOffset = Schema.GetOffset(0x5BDC1A363AF1AAEE);
+            _RenderFxStartTimeOffset = _RenderFxStartTimeOffset ?? Schema.GetOffset(0x5BDC1A363AF1AAEE);
             var instance = _RenderFxStartTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _RenderFxStartTimeOffset);
+            instance.DangerousSetHandle(_Handle + _RenderFxStartTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _RenderFxDurationOffset = -1;
+    private static nint? _RenderFxDurationOffset;
 
     public ref float RenderFxDuration
     {
         get
         {
-            if (_RenderFxDurationOffset == -1) _RenderFxDurationOffset = Schema.GetOffset(0x5BDC1A36E72206AD);
-            return ref _Handle.AsRef<float>(_RenderFxDurationOffset);
+            _RenderFxDurationOffset = _RenderFxDurationOffset ?? Schema.GetOffset(0x5BDC1A36E72206AD);
+            return ref _Handle.AsRef<float>(_RenderFxDurationOffset!.Value);
         }
     }
 

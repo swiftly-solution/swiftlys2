@@ -16,46 +16,46 @@ internal partial class ExtraVertexStreamOverride_tImpl : BaseSceneObjectOverride
 {
     public ExtraVertexStreamOverride_tImpl(nint handle) : base(handle) { }
 
-    private static nint _SubSceneObjectOffset = -1;
+    private static nint? _SubSceneObjectOffset;
 
     public ref uint SubSceneObject
     {
         get
         {
-            if (_SubSceneObjectOffset == -1) _SubSceneObjectOffset = Schema.GetOffset(0x38857FE855C3CCBC);
-            return ref _Handle.AsRef<uint>(_SubSceneObjectOffset);
+            _SubSceneObjectOffset = _SubSceneObjectOffset ?? Schema.GetOffset(0x38857FE855C3CCBC);
+            return ref _Handle.AsRef<uint>(_SubSceneObjectOffset!.Value);
         }
     }
-    private static nint _DrawCallIndexOffset = -1;
+    private static nint? _DrawCallIndexOffset;
 
     public ref uint DrawCallIndex
     {
         get
         {
-            if (_DrawCallIndexOffset == -1) _DrawCallIndexOffset = Schema.GetOffset(0x38857FE8FA5614D5);
-            return ref _Handle.AsRef<uint>(_DrawCallIndexOffset);
+            _DrawCallIndexOffset = _DrawCallIndexOffset ?? Schema.GetOffset(0x38857FE8FA5614D5);
+            return ref _Handle.AsRef<uint>(_DrawCallIndexOffset!.Value);
         }
     }
-    private static nint _AdditionalMeshDrawPrimitiveFlagsOffset = -1;
+    private static nint? _AdditionalMeshDrawPrimitiveFlagsOffset;
 
     public ref MeshDrawPrimitiveFlags_t AdditionalMeshDrawPrimitiveFlags
     {
         get
         {
-            if (_AdditionalMeshDrawPrimitiveFlagsOffset == -1) _AdditionalMeshDrawPrimitiveFlagsOffset = Schema.GetOffset(0x38857FE8F0E57F2B);
-            return ref _Handle.AsRef<MeshDrawPrimitiveFlags_t>(_AdditionalMeshDrawPrimitiveFlagsOffset);
+            _AdditionalMeshDrawPrimitiveFlagsOffset = _AdditionalMeshDrawPrimitiveFlagsOffset ?? Schema.GetOffset(0x38857FE8F0E57F2B);
+            return ref _Handle.AsRef<MeshDrawPrimitiveFlags_t>(_AdditionalMeshDrawPrimitiveFlagsOffset!.Value);
         }
     }
-    private static nint _ExtraBufferBindingOffset = -1;
+    private static nint? _ExtraBufferBindingOffset;
     private CRenderBufferBindingImpl? _ExtraBufferBindingInstance;
 
     public CRenderBufferBinding ExtraBufferBinding
     {
         get
         {
-            if (_ExtraBufferBindingOffset == -1) _ExtraBufferBindingOffset = Schema.GetOffset(0x38857FE800630FD0);
+            _ExtraBufferBindingOffset = _ExtraBufferBindingOffset ?? Schema.GetOffset(0x38857FE800630FD0);
             var instance = _ExtraBufferBindingInstance ??= new CRenderBufferBindingImpl(0);
-            instance.DangerousSetHandle(_Handle + _ExtraBufferBindingOffset);
+            instance.DangerousSetHandle(_Handle + _ExtraBufferBindingOffset!.Value);
             return instance;
         }
     }

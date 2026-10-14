@@ -16,24 +16,24 @@ internal partial class CNmGraphDocIDToFloatNode__Mapping_tImpl : SchemaClass, CN
 {
     public CNmGraphDocIDToFloatNode__Mapping_tImpl(nint handle) : base(handle) { }
 
-    private static nint _IDOffset = -1;
+    private static nint? _IDOffset;
 
     public ref CGlobalSymbol ID
     {
         get
         {
-            if (_IDOffset == -1) _IDOffset = Schema.GetOffset(0x88E9E79E95066900);
-            return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset);
+            _IDOffset = _IDOffset ?? Schema.GetOffset(0x88E9E79E95066900);
+            return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset!.Value);
         }
     }
-    private static nint _ValueOffset = -1;
+    private static nint? _ValueOffset;
 
     public ref float Value
     {
         get
         {
-            if (_ValueOffset == -1) _ValueOffset = Schema.GetOffset(0x88E9E79E6B99AEEA);
-            return ref _Handle.AsRef<float>(_ValueOffset);
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0x88E9E79E6B99AEEA);
+            return ref _Handle.AsRef<float>(_ValueOffset!.Value);
         }
     }
 

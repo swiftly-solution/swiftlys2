@@ -16,27 +16,27 @@ internal partial class CPulseCell_Outflow_PlaySceneBaseImpl : CPulseCell_BaseYie
 {
     public CPulseCell_Outflow_PlaySceneBaseImpl(nint handle) : base(handle) { }
 
-    private static nint _OnFinishedOffset = -1;
+    private static nint? _OnFinishedOffset;
     private CPulse_ResumePointImpl? _OnFinishedInstance;
 
     public CPulse_ResumePoint OnFinished
     {
         get
         {
-            if (_OnFinishedOffset == -1) _OnFinishedOffset = Schema.GetOffset(0x647C41D08D903E5E);
+            _OnFinishedOffset = _OnFinishedOffset ?? Schema.GetOffset(0x647C41D08D903E5E);
             var instance = _OnFinishedInstance ??= new CPulse_ResumePointImpl(0);
-            instance.DangerousSetHandle(_Handle + _OnFinishedOffset);
+            instance.DangerousSetHandle(_Handle + _OnFinishedOffset!.Value);
             return instance;
         }
     }
-    private static nint _TriggersOffset = -1;
+    private static nint? _TriggersOffset;
 
     public ref CUtlVector<CPulse_OutflowConnection> Triggers
     {
         get
         {
-            if (_TriggersOffset == -1) _TriggersOffset = Schema.GetOffset(0x647C41D06E7B12D0);
-            return ref _Handle.AsRef<CUtlVector<CPulse_OutflowConnection>>(_TriggersOffset);
+            _TriggersOffset = _TriggersOffset ?? Schema.GetOffset(0x647C41D06E7B12D0);
+            return ref _Handle.AsRef<CUtlVector<CPulse_OutflowConnection>>(_TriggersOffset!.Value);
         }
     }
 

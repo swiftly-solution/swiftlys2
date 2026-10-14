@@ -16,34 +16,34 @@ internal partial class CAssetTypeConfigImpl : SchemaClass, CAssetTypeConfig
 {
     public CAssetTypeConfigImpl(nint handle) : base(handle) { }
 
-    private static nint _AssetTypesOffset = -1;
+    private static nint? _AssetTypesOffset;
 
     public ref CUtlVector<PointerTo<CSimpleAssetTypeInfo>> AssetTypes
     {
         get
         {
-            if (_AssetTypesOffset == -1) _AssetTypesOffset = Schema.GetOffset(0xECFDE2E06C2AC4F0);
-            return ref _Handle.AsRef<CUtlVector<PointerTo<CSimpleAssetTypeInfo>>>(_AssetTypesOffset);
+            _AssetTypesOffset = _AssetTypesOffset ?? Schema.GetOffset(0xECFDE2E06C2AC4F0);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<CSimpleAssetTypeInfo>>>(_AssetTypesOffset!.Value);
         }
     }
-    private static nint _SubassetTypesOffset = -1;
+    private static nint? _SubassetTypesOffset;
 
     public ref CUtlVector<PointerTo<CSubassetTypeInfo>> SubassetTypes
     {
         get
         {
-            if (_SubassetTypesOffset == -1) _SubassetTypesOffset = Schema.GetOffset(0xECFDE2E023C6C220);
-            return ref _Handle.AsRef<CUtlVector<PointerTo<CSubassetTypeInfo>>>(_SubassetTypesOffset);
+            _SubassetTypesOffset = _SubassetTypesOffset ?? Schema.GetOffset(0xECFDE2E023C6C220);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<CSubassetTypeInfo>>>(_SubassetTypesOffset!.Value);
         }
     }
-    private static nint _AssetWarningsOffset = -1;
+    private static nint? _AssetWarningsOffset;
 
     public ref CUtlVector<PointerTo<CAssetWarning>> AssetWarnings
     {
         get
         {
-            if (_AssetWarningsOffset == -1) _AssetWarningsOffset = Schema.GetOffset(0xECFDE2E07F1FD1EA);
-            return ref _Handle.AsRef<CUtlVector<PointerTo<CAssetWarning>>>(_AssetWarningsOffset);
+            _AssetWarningsOffset = _AssetWarningsOffset ?? Schema.GetOffset(0xECFDE2E07F1FD1EA);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<CAssetWarning>>>(_AssetWarningsOffset!.Value);
         }
     }
 

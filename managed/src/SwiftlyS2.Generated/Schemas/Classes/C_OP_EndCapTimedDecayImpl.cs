@@ -16,16 +16,16 @@ internal partial class C_OP_EndCapTimedDecayImpl : CParticleFunctionOperatorImpl
 {
     public C_OP_EndCapTimedDecayImpl(nint handle) : base(handle) { }
 
-    private static nint _DecayTimeOffset = -1;
+    private static nint? _DecayTimeOffset;
     private CParticleCollectionFloatInputImpl? _DecayTimeInstance;
 
     public CParticleCollectionFloatInput DecayTime
     {
         get
         {
-            if (_DecayTimeOffset == -1) _DecayTimeOffset = Schema.GetOffset(0x2866C865E94A0656);
+            _DecayTimeOffset = _DecayTimeOffset ?? Schema.GetOffset(0x2866C865E94A0656);
             var instance = _DecayTimeInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _DecayTimeOffset);
+            instance.DangerousSetHandle(_Handle + _DecayTimeOffset!.Value);
             return instance;
         }
     }

@@ -16,29 +16,29 @@ internal partial class CVMixPitchShiftProcessorDescImpl : CVMixBaseProcessorDesc
 {
     public CVMixPitchShiftProcessorDescImpl(nint handle) : base(handle) { }
 
-    private static nint _DescOffset = -1;
+    private static nint? _DescOffset;
     private VMixPitchShiftDesc_tImpl? _DescInstance;
 
     public VMixPitchShiftDesc_t Desc
     {
         get
         {
-            if (_DescOffset == -1) _DescOffset = Schema.GetOffset(0x56460FA127917BC0);
+            _DescOffset = _DescOffset ?? Schema.GetOffset(0x56460FA127917BC0);
             var instance = _DescInstance ??= new VMixPitchShiftDesc_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _DescOffset);
+            instance.DangerousSetHandle(_Handle + _DescOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamPitchScaleOffset = -1;
+    private static nint? _ParamPitchScaleOffset;
     private CVMixParameterFloatImpl? _ParamPitchScaleInstance;
 
     public CVMixParameterFloat ParamPitchScale
     {
         get
         {
-            if (_ParamPitchScaleOffset == -1) _ParamPitchScaleOffset = Schema.GetOffset(0x56460FA170899212);
+            _ParamPitchScaleOffset = _ParamPitchScaleOffset ?? Schema.GetOffset(0x56460FA170899212);
             var instance = _ParamPitchScaleInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamPitchScaleOffset);
+            instance.DangerousSetHandle(_Handle + _ParamPitchScaleOffset!.Value);
             return instance;
         }
     }

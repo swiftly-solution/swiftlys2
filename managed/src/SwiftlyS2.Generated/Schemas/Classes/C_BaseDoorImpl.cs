@@ -16,14 +16,14 @@ internal partial class C_BaseDoorImpl : C_BaseToggleImpl, C_BaseDoor
 {
     public C_BaseDoorImpl(nint handle) : base(handle) { }
 
-    private static nint _IsUsableOffset = -1;
+    private static nint? _IsUsableOffset;
 
     public ref bool IsUsable
     {
         get
         {
-            if (_IsUsableOffset == -1) _IsUsableOffset = Schema.GetOffset(0xCD52DD699E20219);
-            return ref _Handle.AsRef<bool>(_IsUsableOffset);
+            _IsUsableOffset = _IsUsableOffset ?? Schema.GetOffset(0xCD52DD699E20219);
+            return ref _Handle.AsRef<bool>(_IsUsableOffset!.Value);
         }
     }
 

@@ -16,162 +16,162 @@ internal partial class RnHull_tImpl : SchemaClass, RnHull_t
 {
     public RnHull_tImpl(nint handle) : base(handle) { }
 
-    private static nint _CentroidOffset = -1;
+    private static nint? _CentroidOffset;
 
     public ref Vector Centroid
     {
         get
         {
-            if (_CentroidOffset == -1) _CentroidOffset = Schema.GetOffset(0x856EB4A1107DFFF1);
-            return ref _Handle.AsRef<Vector>(_CentroidOffset);
+            _CentroidOffset = _CentroidOffset ?? Schema.GetOffset(0x856EB4A1107DFFF1);
+            return ref _Handle.AsRef<Vector>(_CentroidOffset!.Value);
         }
     }
-    private static nint _MaxAngularRadiusOffset = -1;
+    private static nint? _MaxAngularRadiusOffset;
 
     public ref float MaxAngularRadius
     {
         get
         {
-            if (_MaxAngularRadiusOffset == -1) _MaxAngularRadiusOffset = Schema.GetOffset(0x856EB4A1EF22DA79);
-            return ref _Handle.AsRef<float>(_MaxAngularRadiusOffset);
+            _MaxAngularRadiusOffset = _MaxAngularRadiusOffset ?? Schema.GetOffset(0x856EB4A1EF22DA79);
+            return ref _Handle.AsRef<float>(_MaxAngularRadiusOffset!.Value);
         }
     }
-    private static nint _MinCentroidRadiusOffset = -1;
+    private static nint? _MinCentroidRadiusOffset;
 
     public ref float MinCentroidRadius
     {
         get
         {
-            if (_MinCentroidRadiusOffset == -1) _MinCentroidRadiusOffset = Schema.GetOffset(0x856EB4A1B0249D2F);
-            return ref _Handle.AsRef<float>(_MinCentroidRadiusOffset);
+            _MinCentroidRadiusOffset = _MinCentroidRadiusOffset ?? Schema.GetOffset(0x856EB4A1B0249D2F);
+            return ref _Handle.AsRef<float>(_MinCentroidRadiusOffset!.Value);
         }
     }
-    private static nint _BoundsOffset = -1;
+    private static nint? _BoundsOffset;
     private AABB_tImpl? _BoundsInstance;
 
     public AABB_t Bounds
     {
         get
         {
-            if (_BoundsOffset == -1) _BoundsOffset = Schema.GetOffset(0x856EB4A1ABF76288);
+            _BoundsOffset = _BoundsOffset ?? Schema.GetOffset(0x856EB4A1ABF76288);
             var instance = _BoundsInstance ??= new AABB_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _BoundsOffset);
+            instance.DangerousSetHandle(_Handle + _BoundsOffset!.Value);
             return instance;
         }
     }
-    private static nint _OrthographicAreasOffset = -1;
+    private static nint? _OrthographicAreasOffset;
 
     public ref Vector OrthographicAreas
     {
         get
         {
-            if (_OrthographicAreasOffset == -1) _OrthographicAreasOffset = Schema.GetOffset(0x856EB4A1B74855D3);
-            return ref _Handle.AsRef<Vector>(_OrthographicAreasOffset);
+            _OrthographicAreasOffset = _OrthographicAreasOffset ?? Schema.GetOffset(0x856EB4A1B74855D3);
+            return ref _Handle.AsRef<Vector>(_OrthographicAreasOffset!.Value);
         }
     }
-    private static nint _MassPropertiesOffset = -1;
+    private static nint? _MassPropertiesOffset;
 
     public ref matrix3x4_t MassProperties
     {
         get
         {
-            if (_MassPropertiesOffset == -1) _MassPropertiesOffset = Schema.GetOffset(0x856EB4A1492CEDF8);
-            return ref _Handle.AsRef<matrix3x4_t>(_MassPropertiesOffset);
+            _MassPropertiesOffset = _MassPropertiesOffset ?? Schema.GetOffset(0x856EB4A1492CEDF8);
+            return ref _Handle.AsRef<matrix3x4_t>(_MassPropertiesOffset!.Value);
         }
     }
-    private static nint _VolumeOffset = -1;
+    private static nint? _VolumeOffset;
 
     public ref float Volume
     {
         get
         {
-            if (_VolumeOffset == -1) _VolumeOffset = Schema.GetOffset(0x856EB4A17647E0C9);
-            return ref _Handle.AsRef<float>(_VolumeOffset);
+            _VolumeOffset = _VolumeOffset ?? Schema.GetOffset(0x856EB4A17647E0C9);
+            return ref _Handle.AsRef<float>(_VolumeOffset!.Value);
         }
     }
-    private static nint _SurfaceAreaOffset = -1;
+    private static nint? _SurfaceAreaOffset;
 
     public ref float SurfaceArea
     {
         get
         {
-            if (_SurfaceAreaOffset == -1) _SurfaceAreaOffset = Schema.GetOffset(0x856EB4A1E4AE7C2F);
-            return ref _Handle.AsRef<float>(_SurfaceAreaOffset);
+            _SurfaceAreaOffset = _SurfaceAreaOffset ?? Schema.GetOffset(0x856EB4A1E4AE7C2F);
+            return ref _Handle.AsRef<float>(_SurfaceAreaOffset!.Value);
         }
     }
-    private static nint _VertexPositionsOffset = -1;
+    private static nint? _VertexPositionsOffset;
 
     public ref CUtlVector<Vector> VertexPositions
     {
         get
         {
-            if (_VertexPositionsOffset == -1) _VertexPositionsOffset = Schema.GetOffset(0x856EB4A1E553E225);
-            return ref _Handle.AsRef<CUtlVector<Vector>>(_VertexPositionsOffset);
+            _VertexPositionsOffset = _VertexPositionsOffset ?? Schema.GetOffset(0x856EB4A1E553E225);
+            return ref _Handle.AsRef<CUtlVector<Vector>>(_VertexPositionsOffset!.Value);
         }
     }
-    private static nint _FacePlanesOffset = -1;
+    private static nint? _FacePlanesOffset;
 
     public ref CUtlVector<RnPlane_t> FacePlanes
     {
         get
         {
-            if (_FacePlanesOffset == -1) _FacePlanesOffset = Schema.GetOffset(0x856EB4A1FE0AFD57);
-            return ref _Handle.AsRef<CUtlVector<RnPlane_t>>(_FacePlanesOffset);
+            _FacePlanesOffset = _FacePlanesOffset ?? Schema.GetOffset(0x856EB4A1FE0AFD57);
+            return ref _Handle.AsRef<CUtlVector<RnPlane_t>>(_FacePlanesOffset!.Value);
         }
     }
-    private static nint _FlagsOffset = -1;
+    private static nint? _FlagsOffset;
 
     public ref uint Flags
     {
         get
         {
-            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0x856EB4A1CE6E9C28);
-            return ref _Handle.AsRef<uint>(_FlagsOffset);
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x856EB4A1CE6E9C28);
+            return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
         }
     }
-    private static nint _RegionSVMOffset = -1;
+    private static nint? _RegionSVMOffset;
     private CRegionSVMImpl? _RegionSVMInstance;
 
     public CRegionSVM? RegionSVM
     {
         get
         {
-            if (_RegionSVMOffset == -1) _RegionSVMOffset = Schema.GetOffset(0x856EB4A18AD82DC9);
-            var ptr = _Handle.Read<nint>(_RegionSVMOffset);
+            _RegionSVMOffset = _RegionSVMOffset ?? Schema.GetOffset(0x856EB4A18AD82DC9);
+            var ptr = _Handle.Read<nint>(_RegionSVMOffset!.Value);
             if (!ptr.IsValidPtr()) return null;
             var instance = _RegionSVMInstance ??= new CRegionSVMImpl(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint _VerticesOffset = -1;
+    private static nint? _VerticesOffset;
 
     public ref CUtlVector<RnVertex_t> Vertices
     {
         get
         {
-            if (_VerticesOffset == -1) _VerticesOffset = Schema.GetOffset(0x856EB4A1E4F9760E);
-            return ref _Handle.AsRef<CUtlVector<RnVertex_t>>(_VerticesOffset);
+            _VerticesOffset = _VerticesOffset ?? Schema.GetOffset(0x856EB4A1E4F9760E);
+            return ref _Handle.AsRef<CUtlVector<RnVertex_t>>(_VerticesOffset!.Value);
         }
     }
-    private static nint _EdgesOffset = -1;
+    private static nint? _EdgesOffset;
 
     public ref CUtlVector<RnHalfEdge_t> Edges
     {
         get
         {
-            if (_EdgesOffset == -1) _EdgesOffset = Schema.GetOffset(0x856EB4A1CFE839DD);
-            return ref _Handle.AsRef<CUtlVector<RnHalfEdge_t>>(_EdgesOffset);
+            _EdgesOffset = _EdgesOffset ?? Schema.GetOffset(0x856EB4A1CFE839DD);
+            return ref _Handle.AsRef<CUtlVector<RnHalfEdge_t>>(_EdgesOffset!.Value);
         }
     }
-    private static nint _FacesOffset = -1;
+    private static nint? _FacesOffset;
 
     public ref CUtlVector<RnFace_t> Faces
     {
         get
         {
-            if (_FacesOffset == -1) _FacesOffset = Schema.GetOffset(0x856EB4A1B57F1DFD);
-            return ref _Handle.AsRef<CUtlVector<RnFace_t>>(_FacesOffset);
+            _FacesOffset = _FacesOffset ?? Schema.GetOffset(0x856EB4A1B57F1DFD);
+            return ref _Handle.AsRef<CUtlVector<RnFace_t>>(_FacesOffset!.Value);
         }
     }
 

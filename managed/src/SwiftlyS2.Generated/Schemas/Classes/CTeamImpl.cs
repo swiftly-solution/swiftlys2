@@ -16,49 +16,49 @@ internal partial class CTeamImpl : CBaseEntityImpl, CTeam
 {
     public CTeamImpl(nint handle) : base(handle) { }
 
-    private static nint _PlayerControllersOffset = -1;
+    private static nint? _PlayerControllersOffset;
 
     public ref CUtlVector<CHandle<CBasePlayerController>> PlayerControllers
     {
         get
         {
-            if (_PlayerControllersOffset == -1) _PlayerControllersOffset = Schema.GetOffset(0xAF5A77E38933E302);
-            return ref _Handle.AsRef<CUtlVector<CHandle<CBasePlayerController>>>(_PlayerControllersOffset);
+            _PlayerControllersOffset = _PlayerControllersOffset ?? Schema.GetOffset(0xAF5A77E38933E302);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CBasePlayerController>>>(_PlayerControllersOffset!.Value);
         }
     }
-    private static nint _PlayersOffset = -1;
+    private static nint? _PlayersOffset;
 
     public ref CUtlVector<CHandle<CBasePlayerPawn>> Players
     {
         get
         {
-            if (_PlayersOffset == -1) _PlayersOffset = Schema.GetOffset(0xAF5A77E307285116);
-            return ref _Handle.AsRef<CUtlVector<CHandle<CBasePlayerPawn>>>(_PlayersOffset);
+            _PlayersOffset = _PlayersOffset ?? Schema.GetOffset(0xAF5A77E307285116);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CBasePlayerPawn>>>(_PlayersOffset!.Value);
         }
     }
-    private static nint _ScoreOffset = -1;
+    private static nint? _ScoreOffset;
 
     public ref int Score
     {
         get
         {
-            if (_ScoreOffset == -1) _ScoreOffset = Schema.GetOffset(0xAF5A77E339E7DEAE);
-            return ref _Handle.AsRef<int>(_ScoreOffset);
+            _ScoreOffset = _ScoreOffset ?? Schema.GetOffset(0xAF5A77E339E7DEAE);
+            return ref _Handle.AsRef<int>(_ScoreOffset!.Value);
         }
     }
-    private static nint _TeamnameOffset = -1;
+    private static nint? _TeamnameOffset;
 
     public string Teamname
     {
         get
         {
-            if (_TeamnameOffset == -1) _TeamnameOffset = Schema.GetOffset(0xAF5A77E3AA34880A);
-            return Schema.GetString(_Handle + _TeamnameOffset);
+            _TeamnameOffset = _TeamnameOffset ?? Schema.GetOffset(0xAF5A77E3AA34880A);
+            return Schema.GetString(_Handle + _TeamnameOffset!.Value);
         }
         set
         {
-            if (_TeamnameOffset == -1) _TeamnameOffset = Schema.GetOffset(0xAF5A77E3AA34880A);
-            Schema.SetFixedString(_Handle, _TeamnameOffset, value, 129);
+            _TeamnameOffset = _TeamnameOffset ?? Schema.GetOffset(0xAF5A77E3AA34880A);
+            Schema.SetFixedString(_Handle, _TeamnameOffset!.Value, value, 129);
         }
     }
 

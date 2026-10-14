@@ -16,14 +16,14 @@ internal partial class CNmGraphDocCurrentSyncEventNodeImpl : CNmGraphDocFlowNode
 {
     public CNmGraphDocCurrentSyncEventNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _InfoTypeOffset = -1;
+    private static nint? _InfoTypeOffset;
 
     public ref CNmCurrentSyncEventNode__InfoType_t InfoType
     {
         get
         {
-            if (_InfoTypeOffset == -1) _InfoTypeOffset = Schema.GetOffset(0x5D7F8867CE6BA20D);
-            return ref _Handle.AsRef<CNmCurrentSyncEventNode__InfoType_t>(_InfoTypeOffset);
+            _InfoTypeOffset = _InfoTypeOffset ?? Schema.GetOffset(0x5D7F8867CE6BA20D);
+            return ref _Handle.AsRef<CNmCurrentSyncEventNode__InfoType_t>(_InfoTypeOffset!.Value);
         }
     }
 

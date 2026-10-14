@@ -16,24 +16,24 @@ internal partial class TimedEventImpl : SchemaClass, TimedEvent
 {
     public TimedEventImpl(nint handle) : base(handle) { }
 
-    private static nint _TimeBetweenEventsOffset = -1;
+    private static nint? _TimeBetweenEventsOffset;
 
     public ref float TimeBetweenEvents
     {
         get
         {
-            if (_TimeBetweenEventsOffset == -1) _TimeBetweenEventsOffset = Schema.GetOffset(0x29B8A40865CE9715);
-            return ref _Handle.AsRef<float>(_TimeBetweenEventsOffset);
+            _TimeBetweenEventsOffset = _TimeBetweenEventsOffset ?? Schema.GetOffset(0x29B8A40865CE9715);
+            return ref _Handle.AsRef<float>(_TimeBetweenEventsOffset!.Value);
         }
     }
-    private static nint _NextEventOffset = -1;
+    private static nint? _NextEventOffset;
 
     public ref float NextEvent
     {
         get
         {
-            if (_NextEventOffset == -1) _NextEventOffset = Schema.GetOffset(0x29B8A40883C1623C);
-            return ref _Handle.AsRef<float>(_NextEventOffset);
+            _NextEventOffset = _NextEventOffset ?? Schema.GetOffset(0x29B8A40883C1623C);
+            return ref _Handle.AsRef<float>(_NextEventOffset!.Value);
         }
     }
 

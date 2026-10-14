@@ -16,16 +16,16 @@ internal partial class CNmCameraDOFEventImpl : CNmEventImpl, CNmCameraDOFEvent
 {
     public CNmCameraDOFEventImpl(nint handle) : base(handle) { }
 
-    private static nint _CurveOffset = -1;
+    private static nint? _CurveOffset;
     private SchemaUntypedField? _CurveInstance;
 
     public SchemaUntypedField Curve
     {
         get
         {
-            if (_CurveOffset == -1) _CurveOffset = Schema.GetOffset(0xF0FD5743BFFA0B34);
+            _CurveOffset = _CurveOffset ?? Schema.GetOffset(0xF0FD5743BFFA0B34);
             var instance = _CurveInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _CurveOffset);
+            instance.DangerousSetHandle(_Handle + _CurveOffset!.Value);
             return instance;
         }
     }

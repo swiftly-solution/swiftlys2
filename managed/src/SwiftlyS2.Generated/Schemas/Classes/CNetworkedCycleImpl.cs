@@ -16,62 +16,62 @@ internal partial class CNetworkedCycleImpl : SchemaClass, CNetworkedCycle
 {
     public CNetworkedCycleImpl(nint handle) : base(handle) { }
 
-    private static nint _CycleUnclampedOffset = -1;
+    private static nint? _CycleUnclampedOffset;
 
     public ref float CycleUnclamped
     {
         get
         {
-            if (_CycleUnclampedOffset == -1) _CycleUnclampedOffset = Schema.GetOffset(0x9B2966A572B8BBBE);
-            return ref _Handle.AsRef<float>(_CycleUnclampedOffset);
+            _CycleUnclampedOffset = _CycleUnclampedOffset ?? Schema.GetOffset(0x9B2966A572B8BBBE);
+            return ref _Handle.AsRef<float>(_CycleUnclampedOffset!.Value);
         }
     }
-    private static nint _PrevCycleUnclampedOffset = -1;
+    private static nint? _PrevCycleUnclampedOffset;
 
     public ref float PrevCycleUnclamped
     {
         get
         {
-            if (_PrevCycleUnclampedOffset == -1) _PrevCycleUnclampedOffset = Schema.GetOffset(0x9B2966A5BD306BDF);
-            return ref _Handle.AsRef<float>(_PrevCycleUnclampedOffset);
+            _PrevCycleUnclampedOffset = _PrevCycleUnclampedOffset ?? Schema.GetOffset(0x9B2966A5BD306BDF);
+            return ref _Handle.AsRef<float>(_PrevCycleUnclampedOffset!.Value);
         }
     }
-    private static nint _CyclesPerSecondOffset = -1;
+    private static nint? _CyclesPerSecondOffset;
     private SchemaUntypedField? _CyclesPerSecondInstance;
 
     public SchemaUntypedField CyclesPerSecond
     {
         get
         {
-            if (_CyclesPerSecondOffset == -1) _CyclesPerSecondOffset = Schema.GetOffset(0x9B2966A544417193);
+            _CyclesPerSecondOffset = _CyclesPerSecondOffset ?? Schema.GetOffset(0x9B2966A544417193);
             var instance = _CyclesPerSecondInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _CyclesPerSecondOffset);
+            instance.DangerousSetHandle(_Handle + _CyclesPerSecondOffset!.Value);
             return instance;
         }
     }
-    private static nint _CycleZeroTimeOffset = -1;
+    private static nint? _CycleZeroTimeOffset;
     private SchemaUntypedField? _CycleZeroTimeInstance;
 
     public SchemaUntypedField CycleZeroTime
     {
         get
         {
-            if (_CycleZeroTimeOffset == -1) _CycleZeroTimeOffset = Schema.GetOffset(0x9B2966A540321698);
+            _CycleZeroTimeOffset = _CycleZeroTimeOffset ?? Schema.GetOffset(0x9B2966A540321698);
             var instance = _CycleZeroTimeInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _CycleZeroTimeOffset);
+            instance.DangerousSetHandle(_Handle + _CycleZeroTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _ResetCountOffset = -1;
+    private static nint? _ResetCountOffset;
     private SchemaUntypedField? _ResetCountInstance;
 
     public SchemaUntypedField ResetCount
     {
         get
         {
-            if (_ResetCountOffset == -1) _ResetCountOffset = Schema.GetOffset(0x9B2966A589B18BCF);
+            _ResetCountOffset = _ResetCountOffset ?? Schema.GetOffset(0x9B2966A589B18BCF);
             var instance = _ResetCountInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ResetCountOffset);
+            instance.DangerousSetHandle(_Handle + _ResetCountOffset!.Value);
             return instance;
         }
     }

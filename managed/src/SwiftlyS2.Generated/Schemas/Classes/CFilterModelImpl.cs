@@ -16,19 +16,19 @@ internal partial class CFilterModelImpl : CBaseFilterImpl, CFilterModel
 {
     public CFilterModelImpl(nint handle) : base(handle) { }
 
-    private static nint _FilterModelOffset = -1;
+    private static nint? _FilterModelOffset;
 
     public string FilterModel
     {
         get
         {
-            if (_FilterModelOffset == -1) _FilterModelOffset = Schema.GetOffset(0x59DA03B921E36753);
-            return Schema.GetString(_Handle.Read<nint>(_FilterModelOffset));
+            _FilterModelOffset = _FilterModelOffset ?? Schema.GetOffset(0x59DA03B921E36753);
+            return Schema.GetString(_Handle.Read<nint>(_FilterModelOffset!.Value));
         }
         set
         {
-            if (_FilterModelOffset == -1) _FilterModelOffset = Schema.GetOffset(0x59DA03B921E36753);
-            Schema.SetString(_Handle, _FilterModelOffset, value);
+            _FilterModelOffset = _FilterModelOffset ?? Schema.GetOffset(0x59DA03B921E36753);
+            Schema.SetString(_Handle, _FilterModelOffset!.Value, value);
         }
     }
 

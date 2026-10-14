@@ -16,24 +16,24 @@ internal partial class CNmCachedFloatNode__CDefinitionImpl : CNmFloatValueNode__
 {
     public CNmCachedFloatNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint _InputValueNodeIdxOffset = -1;
+    private static nint? _InputValueNodeIdxOffset;
 
     public ref short InputValueNodeIdx
     {
         get
         {
-            if (_InputValueNodeIdxOffset == -1) _InputValueNodeIdxOffset = Schema.GetOffset(0x3390BC2F95E89F27);
-            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset);
+            _InputValueNodeIdxOffset = _InputValueNodeIdxOffset ?? Schema.GetOffset(0x3390BC2F95E89F27);
+            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
         }
     }
-    private static nint _ModeOffset = -1;
+    private static nint? _ModeOffset;
 
     public ref NmCachedValueMode_t Mode
     {
         get
         {
-            if (_ModeOffset == -1) _ModeOffset = Schema.GetOffset(0x3390BC2F90FD5BB2);
-            return ref _Handle.AsRef<NmCachedValueMode_t>(_ModeOffset);
+            _ModeOffset = _ModeOffset ?? Schema.GetOffset(0x3390BC2F90FD5BB2);
+            return ref _Handle.AsRef<NmCachedValueMode_t>(_ModeOffset!.Value);
         }
     }
 

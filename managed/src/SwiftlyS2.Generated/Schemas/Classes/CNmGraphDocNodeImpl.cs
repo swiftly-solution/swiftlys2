@@ -16,83 +16,83 @@ internal partial class CNmGraphDocNodeImpl : SchemaClass, CNmGraphDocNode
 {
     public CNmGraphDocNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _IDOffset = -1;
+    private static nint? _IDOffset;
     private SchemaUntypedField? _IDInstance;
 
     public SchemaUntypedField ID
     {
         get
         {
-            if (_IDOffset == -1) _IDOffset = Schema.GetOffset(0x24016BD995066900);
+            _IDOffset = _IDOffset ?? Schema.GetOffset(0x24016BD995066900);
             var instance = _IDInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _IDOffset);
+            instance.DangerousSetHandle(_Handle + _IDOffset!.Value);
             return instance;
         }
     }
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x24016BD94D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x24016BD94D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x24016BD94D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x24016BD94D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _FloatingCommentOffset = -1;
+    private static nint? _FloatingCommentOffset;
 
     public string FloatingComment
     {
         get
         {
-            if (_FloatingCommentOffset == -1) _FloatingCommentOffset = Schema.GetOffset(0x24016BD995BD3A0C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_FloatingCommentOffset));
+            _FloatingCommentOffset = _FloatingCommentOffset ?? Schema.GetOffset(0x24016BD995BD3A0C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_FloatingCommentOffset!.Value));
         }
         set
         {
-            if (_FloatingCommentOffset == -1) _FloatingCommentOffset = Schema.GetOffset(0x24016BD995BD3A0C);
-            Schema.SetCUtlString(_Handle, _FloatingCommentOffset, value);
+            _FloatingCommentOffset = _FloatingCommentOffset ?? Schema.GetOffset(0x24016BD995BD3A0C);
+            Schema.SetCUtlString(_Handle, _FloatingCommentOffset!.Value, value);
         }
     }
-    private static nint _PositionOffset = -1;
+    private static nint? _PositionOffset;
 
     public ref Vector2D Position
     {
         get
         {
-            if (_PositionOffset == -1) _PositionOffset = Schema.GetOffset(0x24016BD94B57E0AA);
-            return ref _Handle.AsRef<Vector2D>(_PositionOffset);
+            _PositionOffset = _PositionOffset ?? Schema.GetOffset(0x24016BD94B57E0AA);
+            return ref _Handle.AsRef<Vector2D>(_PositionOffset!.Value);
         }
     }
-    private static nint _ChildGraphOffset = -1;
+    private static nint? _ChildGraphOffset;
     private CNmGraphDocGraphImpl? _ChildGraphInstance;
 
     public CNmGraphDocGraph? ChildGraph
     {
         get
         {
-            if (_ChildGraphOffset == -1) _ChildGraphOffset = Schema.GetOffset(0x24016BD9D7D56CED);
-            var ptr = _Handle.Read<nint>(_ChildGraphOffset);
+            _ChildGraphOffset = _ChildGraphOffset ?? Schema.GetOffset(0x24016BD9D7D56CED);
+            var ptr = _Handle.Read<nint>(_ChildGraphOffset!.Value);
             if (!ptr.IsValidPtr()) return null;
             var instance = _ChildGraphInstance ??= new CNmGraphDocGraphImpl(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint _SecondaryGraphOffset = -1;
+    private static nint? _SecondaryGraphOffset;
     private CNmGraphDocGraphImpl? _SecondaryGraphInstance;
 
     public CNmGraphDocGraph? SecondaryGraph
     {
         get
         {
-            if (_SecondaryGraphOffset == -1) _SecondaryGraphOffset = Schema.GetOffset(0x24016BD9905B1799);
-            var ptr = _Handle.Read<nint>(_SecondaryGraphOffset);
+            _SecondaryGraphOffset = _SecondaryGraphOffset ?? Schema.GetOffset(0x24016BD9905B1799);
+            var ptr = _Handle.Read<nint>(_SecondaryGraphOffset!.Value);
             if (!ptr.IsValidPtr()) return null;
             var instance = _SecondaryGraphInstance ??= new CNmGraphDocGraphImpl(0);
             instance.DangerousSetHandle(ptr);

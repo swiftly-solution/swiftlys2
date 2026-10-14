@@ -16,74 +16,74 @@ internal partial class C_RagdollPropAttachedImpl : C_RagdollPropImpl, C_RagdollP
 {
     public C_RagdollPropAttachedImpl(nint handle) : base(handle) { }
 
-    private static nint _BoneIndexAttachedOffset = -1;
+    private static nint? _BoneIndexAttachedOffset;
 
     public ref uint BoneIndexAttached
     {
         get
         {
-            if (_BoneIndexAttachedOffset == -1) _BoneIndexAttachedOffset = Schema.GetOffset(0x96221417AECB2AA5);
-            return ref _Handle.AsRef<uint>(_BoneIndexAttachedOffset);
+            _BoneIndexAttachedOffset = _BoneIndexAttachedOffset ?? Schema.GetOffset(0x96221417AECB2AA5);
+            return ref _Handle.AsRef<uint>(_BoneIndexAttachedOffset!.Value);
         }
     }
-    private static nint _RagdollAttachedObjectIndexOffset = -1;
+    private static nint? _RagdollAttachedObjectIndexOffset;
 
     public ref uint RagdollAttachedObjectIndex
     {
         get
         {
-            if (_RagdollAttachedObjectIndexOffset == -1) _RagdollAttachedObjectIndexOffset = Schema.GetOffset(0x96221417D09DB439);
-            return ref _Handle.AsRef<uint>(_RagdollAttachedObjectIndexOffset);
+            _RagdollAttachedObjectIndexOffset = _RagdollAttachedObjectIndexOffset ?? Schema.GetOffset(0x96221417D09DB439);
+            return ref _Handle.AsRef<uint>(_RagdollAttachedObjectIndexOffset!.Value);
         }
     }
-    private static nint _AttachmentPointBoneSpaceOffset = -1;
+    private static nint? _AttachmentPointBoneSpaceOffset;
 
     public ref Vector AttachmentPointBoneSpace
     {
         get
         {
-            if (_AttachmentPointBoneSpaceOffset == -1) _AttachmentPointBoneSpaceOffset = Schema.GetOffset(0x962214179ABB7B0E);
-            return ref _Handle.AsRef<Vector>(_AttachmentPointBoneSpaceOffset);
+            _AttachmentPointBoneSpaceOffset = _AttachmentPointBoneSpaceOffset ?? Schema.GetOffset(0x962214179ABB7B0E);
+            return ref _Handle.AsRef<Vector>(_AttachmentPointBoneSpaceOffset!.Value);
         }
     }
-    private static nint _AttachmentPointRagdollSpaceOffset = -1;
+    private static nint? _AttachmentPointRagdollSpaceOffset;
 
     public ref Vector AttachmentPointRagdollSpace
     {
         get
         {
-            if (_AttachmentPointRagdollSpaceOffset == -1) _AttachmentPointRagdollSpaceOffset = Schema.GetOffset(0x96221417AD8AE911);
-            return ref _Handle.AsRef<Vector>(_AttachmentPointRagdollSpaceOffset);
+            _AttachmentPointRagdollSpaceOffset = _AttachmentPointRagdollSpaceOffset ?? Schema.GetOffset(0x96221417AD8AE911);
+            return ref _Handle.AsRef<Vector>(_AttachmentPointRagdollSpaceOffset!.Value);
         }
     }
-    private static nint _OffsetOffset = -1;
+    private static nint? _OffsetOffset;
 
     public ref Vector Offset
     {
         get
         {
-            if (_OffsetOffset == -1) _OffsetOffset = Schema.GetOffset(0x96221417BD25CC2A);
-            return ref _Handle.AsRef<Vector>(_OffsetOffset);
+            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0x96221417BD25CC2A);
+            return ref _Handle.AsRef<Vector>(_OffsetOffset!.Value);
         }
     }
-    private static nint _ParentTimeOffset = -1;
+    private static nint? _ParentTimeOffset;
 
     public ref float ParentTime
     {
         get
         {
-            if (_ParentTimeOffset == -1) _ParentTimeOffset = Schema.GetOffset(0x96221417B0C64D9C);
-            return ref _Handle.AsRef<float>(_ParentTimeOffset);
+            _ParentTimeOffset = _ParentTimeOffset ?? Schema.GetOffset(0x96221417B0C64D9C);
+            return ref _Handle.AsRef<float>(_ParentTimeOffset!.Value);
         }
     }
-    private static nint _HasParentOffset = -1;
+    private static nint? _HasParentOffset;
 
     public ref bool HasParent
     {
         get
         {
-            if (_HasParentOffset == -1) _HasParentOffset = Schema.GetOffset(0x96221417A613E04B);
-            return ref _Handle.AsRef<bool>(_HasParentOffset);
+            _HasParentOffset = _HasParentOffset ?? Schema.GetOffset(0x96221417A613E04B);
+            return ref _Handle.AsRef<bool>(_HasParentOffset!.Value);
         }
     }
 

@@ -16,34 +16,34 @@ internal partial class CNetworkOriginQuantizedVectorImpl : SchemaClass, CNetwork
 {
     public CNetworkOriginQuantizedVectorImpl(nint handle) : base(handle) { }
 
-    private static nint _XOffset = -1;
+    private static nint? _XOffset;
 
     public ref CNetworkedQuantizedFloat X
     {
         get
         {
-            if (_XOffset == -1) _XOffset = Schema.GetOffset(0xB34626888FEB7867);
-            return ref _Handle.AsRef<CNetworkedQuantizedFloat>(_XOffset);
+            _XOffset = _XOffset ?? Schema.GetOffset(0xB34626888FEB7867);
+            return ref _Handle.AsRef<CNetworkedQuantizedFloat>(_XOffset!.Value);
         }
     }
-    private static nint _YOffset = -1;
+    private static nint? _YOffset;
 
     public ref CNetworkedQuantizedFloat Y
     {
         get
         {
-            if (_YOffset == -1) _YOffset = Schema.GetOffset(0xB34626888EEB76D4);
-            return ref _Handle.AsRef<CNetworkedQuantizedFloat>(_YOffset);
+            _YOffset = _YOffset ?? Schema.GetOffset(0xB34626888EEB76D4);
+            return ref _Handle.AsRef<CNetworkedQuantizedFloat>(_YOffset!.Value);
         }
     }
-    private static nint _ZOffset = -1;
+    private static nint? _ZOffset;
 
     public ref CNetworkedQuantizedFloat Z
     {
         get
         {
-            if (_ZOffset == -1) _ZOffset = Schema.GetOffset(0xB346268891EB7B8D);
-            return ref _Handle.AsRef<CNetworkedQuantizedFloat>(_ZOffset);
+            _ZOffset = _ZOffset ?? Schema.GetOffset(0xB346268891EB7B8D);
+            return ref _Handle.AsRef<CNetworkedQuantizedFloat>(_ZOffset!.Value);
         }
     }
 

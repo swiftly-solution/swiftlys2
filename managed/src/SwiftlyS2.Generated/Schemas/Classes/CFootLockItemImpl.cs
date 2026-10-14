@@ -16,114 +16,114 @@ internal partial class CFootLockItemImpl : SchemaClass, CFootLockItem
 {
     public CFootLockItemImpl(nint handle) : base(handle) { }
 
-    private static nint _FootNameOffset = -1;
+    private static nint? _FootNameOffset;
 
     public string FootName
     {
         get
         {
-            if (_FootNameOffset == -1) _FootNameOffset = Schema.GetOffset(0x88F69EFE228316B2);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_FootNameOffset));
+            _FootNameOffset = _FootNameOffset ?? Schema.GetOffset(0x88F69EFE228316B2);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_FootNameOffset!.Value));
         }
         set
         {
-            if (_FootNameOffset == -1) _FootNameOffset = Schema.GetOffset(0x88F69EFE228316B2);
-            Schema.SetCUtlString(_Handle, _FootNameOffset, value);
+            _FootNameOffset = _FootNameOffset ?? Schema.GetOffset(0x88F69EFE228316B2);
+            Schema.SetCUtlString(_Handle, _FootNameOffset!.Value, value);
         }
     }
-    private static nint _TargetBoneNameOffset = -1;
+    private static nint? _TargetBoneNameOffset;
 
     public string TargetBoneName
     {
         get
         {
-            if (_TargetBoneNameOffset == -1) _TargetBoneNameOffset = Schema.GetOffset(0x88F69EFEAF85A2D5);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_TargetBoneNameOffset));
+            _TargetBoneNameOffset = _TargetBoneNameOffset ?? Schema.GetOffset(0x88F69EFEAF85A2D5);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_TargetBoneNameOffset!.Value));
         }
         set
         {
-            if (_TargetBoneNameOffset == -1) _TargetBoneNameOffset = Schema.GetOffset(0x88F69EFEAF85A2D5);
-            Schema.SetCUtlString(_Handle, _TargetBoneNameOffset, value);
+            _TargetBoneNameOffset = _TargetBoneNameOffset ?? Schema.GetOffset(0x88F69EFEAF85A2D5);
+            Schema.SetCUtlString(_Handle, _TargetBoneNameOffset!.Value, value);
         }
     }
-    private static nint _IkChainNameOffset = -1;
+    private static nint? _IkChainNameOffset;
 
     public string IkChainName
     {
         get
         {
-            if (_IkChainNameOffset == -1) _IkChainNameOffset = Schema.GetOffset(0x88F69EFE50E152ED);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_IkChainNameOffset));
+            _IkChainNameOffset = _IkChainNameOffset ?? Schema.GetOffset(0x88F69EFE50E152ED);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_IkChainNameOffset!.Value));
         }
         set
         {
-            if (_IkChainNameOffset == -1) _IkChainNameOffset = Schema.GetOffset(0x88F69EFE50E152ED);
-            Schema.SetCUtlString(_Handle, _IkChainNameOffset, value);
+            _IkChainNameOffset = _IkChainNameOffset ?? Schema.GetOffset(0x88F69EFE50E152ED);
+            Schema.SetCUtlString(_Handle, _IkChainNameOffset!.Value, value);
         }
     }
-    private static nint _DisableTagNameOffset = -1;
+    private static nint? _DisableTagNameOffset;
 
     public ref CGlobalSymbol DisableTagName
     {
         get
         {
-            if (_DisableTagNameOffset == -1) _DisableTagNameOffset = Schema.GetOffset(0x88F69EFE853F641A);
-            return ref _Handle.AsRef<CGlobalSymbol>(_DisableTagNameOffset);
+            _DisableTagNameOffset = _DisableTagNameOffset ?? Schema.GetOffset(0x88F69EFE853F641A);
+            return ref _Handle.AsRef<CGlobalSymbol>(_DisableTagNameOffset!.Value);
         }
     }
-    private static nint _DisableTagIDOffset = -1;
+    private static nint? _DisableTagIDOffset;
     private AnimTagIDImpl? _DisableTagIDInstance;
 
     public AnimTagID DisableTagID
     {
         get
         {
-            if (_DisableTagIDOffset == -1) _DisableTagIDOffset = Schema.GetOffset(0x88F69EFE13A87E94);
+            _DisableTagIDOffset = _DisableTagIDOffset ?? Schema.GetOffset(0x88F69EFE13A87E94);
             var instance = _DisableTagIDInstance ??= new AnimTagIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _DisableTagIDOffset);
+            instance.DangerousSetHandle(_Handle + _DisableTagIDOffset!.Value);
             return instance;
         }
     }
-    private static nint _MaxRotationLeftOffset = -1;
+    private static nint? _MaxRotationLeftOffset;
 
     public ref float MaxRotationLeft
     {
         get
         {
-            if (_MaxRotationLeftOffset == -1) _MaxRotationLeftOffset = Schema.GetOffset(0x88F69EFEFA1CDF44);
-            return ref _Handle.AsRef<float>(_MaxRotationLeftOffset);
+            _MaxRotationLeftOffset = _MaxRotationLeftOffset ?? Schema.GetOffset(0x88F69EFEFA1CDF44);
+            return ref _Handle.AsRef<float>(_MaxRotationLeftOffset!.Value);
         }
     }
-    private static nint _MaxRotationRightOffset = -1;
+    private static nint? _MaxRotationRightOffset;
 
     public ref float MaxRotationRight
     {
         get
         {
-            if (_MaxRotationRightOffset == -1) _MaxRotationRightOffset = Schema.GetOffset(0x88F69EFE8C95FA31);
-            return ref _Handle.AsRef<float>(_MaxRotationRightOffset);
+            _MaxRotationRightOffset = _MaxRotationRightOffset ?? Schema.GetOffset(0x88F69EFE8C95FA31);
+            return ref _Handle.AsRef<float>(_MaxRotationRightOffset!.Value);
         }
     }
-    private static nint _FootstepLandedTagNameOffset = -1;
+    private static nint? _FootstepLandedTagNameOffset;
 
     public ref CGlobalSymbol FootstepLandedTagName
     {
         get
         {
-            if (_FootstepLandedTagNameOffset == -1) _FootstepLandedTagNameOffset = Schema.GetOffset(0x88F69EFE1DCCB156);
-            return ref _Handle.AsRef<CGlobalSymbol>(_FootstepLandedTagNameOffset);
+            _FootstepLandedTagNameOffset = _FootstepLandedTagNameOffset ?? Schema.GetOffset(0x88F69EFE1DCCB156);
+            return ref _Handle.AsRef<CGlobalSymbol>(_FootstepLandedTagNameOffset!.Value);
         }
     }
-    private static nint _FootstepLandedTagOffset = -1;
+    private static nint? _FootstepLandedTagOffset;
     private AnimTagIDImpl? _FootstepLandedTagInstance;
 
     public AnimTagID FootstepLandedTag
     {
         get
         {
-            if (_FootstepLandedTagOffset == -1) _FootstepLandedTagOffset = Schema.GetOffset(0x88F69EFE87469215);
+            _FootstepLandedTagOffset = _FootstepLandedTagOffset ?? Schema.GetOffset(0x88F69EFE87469215);
             var instance = _FootstepLandedTagInstance ??= new AnimTagIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _FootstepLandedTagOffset);
+            instance.DangerousSetHandle(_Handle + _FootstepLandedTagOffset!.Value);
             return instance;
         }
     }

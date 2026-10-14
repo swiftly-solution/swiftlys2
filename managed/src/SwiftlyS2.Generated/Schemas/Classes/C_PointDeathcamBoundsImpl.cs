@@ -16,34 +16,34 @@ internal partial class C_PointDeathcamBoundsImpl : C_BaseEntityImpl, C_PointDeat
 {
     public C_PointDeathcamBoundsImpl(nint handle) : base(handle) { }
 
-    private static nint _BoxMinsOffset = -1;
+    private static nint? _BoxMinsOffset;
 
     public ref Vector BoxMins
     {
         get
         {
-            if (_BoxMinsOffset == -1) _BoxMinsOffset = Schema.GetOffset(0x9391B57BD8201373);
-            return ref _Handle.AsRef<Vector>(_BoxMinsOffset);
+            _BoxMinsOffset = _BoxMinsOffset ?? Schema.GetOffset(0x9391B57BD8201373);
+            return ref _Handle.AsRef<Vector>(_BoxMinsOffset!.Value);
         }
     }
-    private static nint _BoxMaxsOffset = -1;
+    private static nint? _BoxMaxsOffset;
 
     public ref Vector BoxMaxs
     {
         get
         {
-            if (_BoxMaxsOffset == -1) _BoxMaxsOffset = Schema.GetOffset(0x9391B57B817A3B31);
-            return ref _Handle.AsRef<Vector>(_BoxMaxsOffset);
+            _BoxMaxsOffset = _BoxMaxsOffset ?? Schema.GetOffset(0x9391B57B817A3B31);
+            return ref _Handle.AsRef<Vector>(_BoxMaxsOffset!.Value);
         }
     }
-    private static nint _LerpDistanceOffset = -1;
+    private static nint? _LerpDistanceOffset;
 
     public ref float LerpDistance
     {
         get
         {
-            if (_LerpDistanceOffset == -1) _LerpDistanceOffset = Schema.GetOffset(0x9391B57B70E6DCCD);
-            return ref _Handle.AsRef<float>(_LerpDistanceOffset);
+            _LerpDistanceOffset = _LerpDistanceOffset ?? Schema.GetOffset(0x9391B57B70E6DCCD);
+            return ref _Handle.AsRef<float>(_LerpDistanceOffset!.Value);
         }
     }
 

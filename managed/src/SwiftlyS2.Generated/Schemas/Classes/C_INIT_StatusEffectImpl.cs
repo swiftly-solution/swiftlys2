@@ -16,184 +16,184 @@ internal partial class C_INIT_StatusEffectImpl : CParticleFunctionInitializerImp
 {
     public C_INIT_StatusEffectImpl(nint handle) : base(handle) { }
 
-    private static nint _Detail2ComboOffset = -1;
+    private static nint? _Detail2ComboOffset;
 
     public ref Detail2Combo_t Detail2Combo
     {
         get
         {
-            if (_Detail2ComboOffset == -1) _Detail2ComboOffset = Schema.GetOffset(0x4B342FEDDABDBAA0);
-            return ref _Handle.AsRef<Detail2Combo_t>(_Detail2ComboOffset);
+            _Detail2ComboOffset = _Detail2ComboOffset ?? Schema.GetOffset(0x4B342FEDDABDBAA0);
+            return ref _Handle.AsRef<Detail2Combo_t>(_Detail2ComboOffset!.Value);
         }
     }
-    private static nint _Detail2RotationOffset = -1;
+    private static nint? _Detail2RotationOffset;
 
     public ref float Detail2Rotation
     {
         get
         {
-            if (_Detail2RotationOffset == -1) _Detail2RotationOffset = Schema.GetOffset(0x4B342FEDA43F4C72);
-            return ref _Handle.AsRef<float>(_Detail2RotationOffset);
+            _Detail2RotationOffset = _Detail2RotationOffset ?? Schema.GetOffset(0x4B342FEDA43F4C72);
+            return ref _Handle.AsRef<float>(_Detail2RotationOffset!.Value);
         }
     }
-    private static nint _Detail2ScaleOffset = -1;
+    private static nint? _Detail2ScaleOffset;
 
     public ref float Detail2Scale
     {
         get
         {
-            if (_Detail2ScaleOffset == -1) _Detail2ScaleOffset = Schema.GetOffset(0x4B342FED408BC6AE);
-            return ref _Handle.AsRef<float>(_Detail2ScaleOffset);
+            _Detail2ScaleOffset = _Detail2ScaleOffset ?? Schema.GetOffset(0x4B342FED408BC6AE);
+            return ref _Handle.AsRef<float>(_Detail2ScaleOffset!.Value);
         }
     }
-    private static nint _Detail2BlendFactorOffset = -1;
+    private static nint? _Detail2BlendFactorOffset;
 
     public ref float Detail2BlendFactor
     {
         get
         {
-            if (_Detail2BlendFactorOffset == -1) _Detail2BlendFactorOffset = Schema.GetOffset(0x4B342FEDC0666858);
-            return ref _Handle.AsRef<float>(_Detail2BlendFactorOffset);
+            _Detail2BlendFactorOffset = _Detail2BlendFactorOffset ?? Schema.GetOffset(0x4B342FEDC0666858);
+            return ref _Handle.AsRef<float>(_Detail2BlendFactorOffset!.Value);
         }
     }
-    private static nint _ColorWarpIntensityOffset = -1;
+    private static nint? _ColorWarpIntensityOffset;
 
     public ref float ColorWarpIntensity
     {
         get
         {
-            if (_ColorWarpIntensityOffset == -1) _ColorWarpIntensityOffset = Schema.GetOffset(0x4B342FED03BEB6ED);
-            return ref _Handle.AsRef<float>(_ColorWarpIntensityOffset);
+            _ColorWarpIntensityOffset = _ColorWarpIntensityOffset ?? Schema.GetOffset(0x4B342FED03BEB6ED);
+            return ref _Handle.AsRef<float>(_ColorWarpIntensityOffset!.Value);
         }
     }
-    private static nint _DiffuseWarpBlendToFullOffset = -1;
+    private static nint? _DiffuseWarpBlendToFullOffset;
 
     public ref float DiffuseWarpBlendToFull
     {
         get
         {
-            if (_DiffuseWarpBlendToFullOffset == -1) _DiffuseWarpBlendToFullOffset = Schema.GetOffset(0x4B342FED74B5C4FC);
-            return ref _Handle.AsRef<float>(_DiffuseWarpBlendToFullOffset);
+            _DiffuseWarpBlendToFullOffset = _DiffuseWarpBlendToFullOffset ?? Schema.GetOffset(0x4B342FED74B5C4FC);
+            return ref _Handle.AsRef<float>(_DiffuseWarpBlendToFullOffset!.Value);
         }
     }
-    private static nint _EnvMapIntensityOffset = -1;
+    private static nint? _EnvMapIntensityOffset;
 
     public ref float EnvMapIntensity
     {
         get
         {
-            if (_EnvMapIntensityOffset == -1) _EnvMapIntensityOffset = Schema.GetOffset(0x4B342FEDF3BE760D);
-            return ref _Handle.AsRef<float>(_EnvMapIntensityOffset);
+            _EnvMapIntensityOffset = _EnvMapIntensityOffset ?? Schema.GetOffset(0x4B342FEDF3BE760D);
+            return ref _Handle.AsRef<float>(_EnvMapIntensityOffset!.Value);
         }
     }
-    private static nint _AmbientScaleOffset = -1;
+    private static nint? _AmbientScaleOffset;
 
     public ref float AmbientScale
     {
         get
         {
-            if (_AmbientScaleOffset == -1) _AmbientScaleOffset = Schema.GetOffset(0x4B342FED7C839F9D);
-            return ref _Handle.AsRef<float>(_AmbientScaleOffset);
+            _AmbientScaleOffset = _AmbientScaleOffset ?? Schema.GetOffset(0x4B342FED7C839F9D);
+            return ref _Handle.AsRef<float>(_AmbientScaleOffset!.Value);
         }
     }
-    private static nint _SpecularColorOffset = -1;
+    private static nint? _SpecularColorOffset;
 
     public ref Color SpecularColor
     {
         get
         {
-            if (_SpecularColorOffset == -1) _SpecularColorOffset = Schema.GetOffset(0x4B342FED524950B7);
-            return ref _Handle.AsRef<Color>(_SpecularColorOffset);
+            _SpecularColorOffset = _SpecularColorOffset ?? Schema.GetOffset(0x4B342FED524950B7);
+            return ref _Handle.AsRef<Color>(_SpecularColorOffset!.Value);
         }
     }
-    private static nint _SpecularScaleOffset = -1;
+    private static nint? _SpecularScaleOffset;
 
     public ref float SpecularScale
     {
         get
         {
-            if (_SpecularScaleOffset == -1) _SpecularScaleOffset = Schema.GetOffset(0x4B342FED3444DCD4);
-            return ref _Handle.AsRef<float>(_SpecularScaleOffset);
+            _SpecularScaleOffset = _SpecularScaleOffset ?? Schema.GetOffset(0x4B342FED3444DCD4);
+            return ref _Handle.AsRef<float>(_SpecularScaleOffset!.Value);
         }
     }
-    private static nint _SpecularExponentOffset = -1;
+    private static nint? _SpecularExponentOffset;
 
     public ref float SpecularExponent
     {
         get
         {
-            if (_SpecularExponentOffset == -1) _SpecularExponentOffset = Schema.GetOffset(0x4B342FED08D42D79);
-            return ref _Handle.AsRef<float>(_SpecularExponentOffset);
+            _SpecularExponentOffset = _SpecularExponentOffset ?? Schema.GetOffset(0x4B342FED08D42D79);
+            return ref _Handle.AsRef<float>(_SpecularExponentOffset!.Value);
         }
     }
-    private static nint _SpecularExponentBlendToFullOffset = -1;
+    private static nint? _SpecularExponentBlendToFullOffset;
 
     public ref float SpecularExponentBlendToFull
     {
         get
         {
-            if (_SpecularExponentBlendToFullOffset == -1) _SpecularExponentBlendToFullOffset = Schema.GetOffset(0x4B342FEDF9B144E4);
-            return ref _Handle.AsRef<float>(_SpecularExponentBlendToFullOffset);
+            _SpecularExponentBlendToFullOffset = _SpecularExponentBlendToFullOffset ?? Schema.GetOffset(0x4B342FEDF9B144E4);
+            return ref _Handle.AsRef<float>(_SpecularExponentBlendToFullOffset!.Value);
         }
     }
-    private static nint _SpecularBlendToFullOffset = -1;
+    private static nint? _SpecularBlendToFullOffset;
 
     public ref float SpecularBlendToFull
     {
         get
         {
-            if (_SpecularBlendToFullOffset == -1) _SpecularBlendToFullOffset = Schema.GetOffset(0x4B342FEDD59D4FD9);
-            return ref _Handle.AsRef<float>(_SpecularBlendToFullOffset);
+            _SpecularBlendToFullOffset = _SpecularBlendToFullOffset ?? Schema.GetOffset(0x4B342FEDD59D4FD9);
+            return ref _Handle.AsRef<float>(_SpecularBlendToFullOffset!.Value);
         }
     }
-    private static nint _RimLightColorOffset = -1;
+    private static nint? _RimLightColorOffset;
 
     public ref Color RimLightColor
     {
         get
         {
-            if (_RimLightColorOffset == -1) _RimLightColorOffset = Schema.GetOffset(0x4B342FEDCBFCCC98);
-            return ref _Handle.AsRef<Color>(_RimLightColorOffset);
+            _RimLightColorOffset = _RimLightColorOffset ?? Schema.GetOffset(0x4B342FEDCBFCCC98);
+            return ref _Handle.AsRef<Color>(_RimLightColorOffset!.Value);
         }
     }
-    private static nint _RimLightScaleOffset = -1;
+    private static nint? _RimLightScaleOffset;
 
     public ref float RimLightScale
     {
         get
         {
-            if (_RimLightScaleOffset == -1) _RimLightScaleOffset = Schema.GetOffset(0x4B342FED23E615CF);
-            return ref _Handle.AsRef<float>(_RimLightScaleOffset);
+            _RimLightScaleOffset = _RimLightScaleOffset ?? Schema.GetOffset(0x4B342FED23E615CF);
+            return ref _Handle.AsRef<float>(_RimLightScaleOffset!.Value);
         }
     }
-    private static nint _ReflectionsTintByBaseBlendToNoneOffset = -1;
+    private static nint? _ReflectionsTintByBaseBlendToNoneOffset;
 
     public ref float ReflectionsTintByBaseBlendToNone
     {
         get
         {
-            if (_ReflectionsTintByBaseBlendToNoneOffset == -1) _ReflectionsTintByBaseBlendToNoneOffset = Schema.GetOffset(0x4B342FEDC354754A);
-            return ref _Handle.AsRef<float>(_ReflectionsTintByBaseBlendToNoneOffset);
+            _ReflectionsTintByBaseBlendToNoneOffset = _ReflectionsTintByBaseBlendToNoneOffset ?? Schema.GetOffset(0x4B342FEDC354754A);
+            return ref _Handle.AsRef<float>(_ReflectionsTintByBaseBlendToNoneOffset!.Value);
         }
     }
-    private static nint _MetalnessBlendToFullOffset = -1;
+    private static nint? _MetalnessBlendToFullOffset;
 
     public ref float MetalnessBlendToFull
     {
         get
         {
-            if (_MetalnessBlendToFullOffset == -1) _MetalnessBlendToFullOffset = Schema.GetOffset(0x4B342FED44B6A02C);
-            return ref _Handle.AsRef<float>(_MetalnessBlendToFullOffset);
+            _MetalnessBlendToFullOffset = _MetalnessBlendToFullOffset ?? Schema.GetOffset(0x4B342FED44B6A02C);
+            return ref _Handle.AsRef<float>(_MetalnessBlendToFullOffset!.Value);
         }
     }
-    private static nint _SelfIllumBlendToFullOffset = -1;
+    private static nint? _SelfIllumBlendToFullOffset;
 
     public ref float SelfIllumBlendToFull
     {
         get
         {
-            if (_SelfIllumBlendToFullOffset == -1) _SelfIllumBlendToFullOffset = Schema.GetOffset(0x4B342FED0FCD5A19);
-            return ref _Handle.AsRef<float>(_SelfIllumBlendToFullOffset);
+            _SelfIllumBlendToFullOffset = _SelfIllumBlendToFullOffset ?? Schema.GetOffset(0x4B342FED0FCD5A19);
+            return ref _Handle.AsRef<float>(_SelfIllumBlendToFullOffset!.Value);
         }
     }
 

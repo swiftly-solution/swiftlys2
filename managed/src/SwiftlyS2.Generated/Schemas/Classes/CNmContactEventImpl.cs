@@ -16,56 +16,56 @@ internal partial class CNmContactEventImpl : CNmEventImpl, CNmContactEvent
 {
     public CNmContactEventImpl(nint handle) : base(handle) { }
 
-    private static nint _ConfigIDOffset = -1;
+    private static nint? _ConfigIDOffset;
 
     public ref CGlobalSymbol ConfigID
     {
         get
         {
-            if (_ConfigIDOffset == -1) _ConfigIDOffset = Schema.GetOffset(0xBAB53A974305616A);
-            return ref _Handle.AsRef<CGlobalSymbol>(_ConfigIDOffset);
+            _ConfigIDOffset = _ConfigIDOffset ?? Schema.GetOffset(0xBAB53A974305616A);
+            return ref _Handle.AsRef<CGlobalSymbol>(_ConfigIDOffset!.Value);
         }
     }
-    private static nint _ProbeBoneIDOffset = -1;
+    private static nint? _ProbeBoneIDOffset;
 
     public ref CGlobalSymbol ProbeBoneID
     {
         get
         {
-            if (_ProbeBoneIDOffset == -1) _ProbeBoneIDOffset = Schema.GetOffset(0xBAB53A9752A1702E);
-            return ref _Handle.AsRef<CGlobalSymbol>(_ProbeBoneIDOffset);
+            _ProbeBoneIDOffset = _ProbeBoneIDOffset ?? Schema.GetOffset(0xBAB53A9752A1702E);
+            return ref _Handle.AsRef<CGlobalSymbol>(_ProbeBoneIDOffset!.Value);
         }
     }
-    private static nint _BoneLocalProbeDirOffset = -1;
+    private static nint? _BoneLocalProbeDirOffset;
 
     public ref Vector BoneLocalProbeDir
     {
         get
         {
-            if (_BoneLocalProbeDirOffset == -1) _BoneLocalProbeDirOffset = Schema.GetOffset(0xBAB53A97063397CB);
-            return ref _Handle.AsRef<Vector>(_BoneLocalProbeDirOffset);
+            _BoneLocalProbeDirOffset = _BoneLocalProbeDirOffset ?? Schema.GetOffset(0xBAB53A97063397CB);
+            return ref _Handle.AsRef<Vector>(_BoneLocalProbeDirOffset!.Value);
         }
     }
-    private static nint _ProbeMaxDistOffset = -1;
+    private static nint? _ProbeMaxDistOffset;
 
     public ref float ProbeMaxDist
     {
         get
         {
-            if (_ProbeMaxDistOffset == -1) _ProbeMaxDistOffset = Schema.GetOffset(0xBAB53A975C5F9033);
-            return ref _Handle.AsRef<float>(_ProbeMaxDistOffset);
+            _ProbeMaxDistOffset = _ProbeMaxDistOffset ?? Schema.GetOffset(0xBAB53A975C5F9033);
+            return ref _Handle.AsRef<float>(_ProbeMaxDistOffset!.Value);
         }
     }
-    private static nint _AudioInfoOffset = -1;
+    private static nint? _AudioInfoOffset;
     private NmContactAudioInfo_tImpl? _AudioInfoInstance;
 
     public NmContactAudioInfo_t AudioInfo
     {
         get
         {
-            if (_AudioInfoOffset == -1) _AudioInfoOffset = Schema.GetOffset(0xBAB53A979821F741);
+            _AudioInfoOffset = _AudioInfoOffset ?? Schema.GetOffset(0xBAB53A979821F741);
             var instance = _AudioInfoInstance ??= new NmContactAudioInfo_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _AudioInfoOffset);
+            instance.DangerousSetHandle(_Handle + _AudioInfoOffset!.Value);
             return instance;
         }
     }

@@ -16,19 +16,19 @@ internal partial class CBaseDMStartImpl : CPointEntityImpl, CBaseDMStart
 {
     public CBaseDMStartImpl(nint handle) : base(handle) { }
 
-    private static nint _MasterOffset = -1;
+    private static nint? _MasterOffset;
 
     public string Master
     {
         get
         {
-            if (_MasterOffset == -1) _MasterOffset = Schema.GetOffset(0x4182FA98392E77B3);
-            return Schema.GetString(_Handle.Read<nint>(_MasterOffset));
+            _MasterOffset = _MasterOffset ?? Schema.GetOffset(0x4182FA98392E77B3);
+            return Schema.GetString(_Handle.Read<nint>(_MasterOffset!.Value));
         }
         set
         {
-            if (_MasterOffset == -1) _MasterOffset = Schema.GetOffset(0x4182FA98392E77B3);
-            Schema.SetString(_Handle, _MasterOffset, value);
+            _MasterOffset = _MasterOffset ?? Schema.GetOffset(0x4182FA98392E77B3);
+            Schema.SetString(_Handle, _MasterOffset!.Value, value);
         }
     }
 

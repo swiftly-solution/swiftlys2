@@ -16,138 +16,138 @@ internal partial class CDampedValueItemImpl : SchemaClass, CDampedValueItem
 {
     public CDampedValueItemImpl(nint handle) : base(handle) { }
 
-    private static nint _ValueTypeOffset = -1;
+    private static nint? _ValueTypeOffset;
 
     public ref DampedValueType ValueType
     {
         get
         {
-            if (_ValueTypeOffset == -1) _ValueTypeOffset = Schema.GetOffset(0xF436EBF19230252A);
-            return ref _Handle.AsRef<DampedValueType>(_ValueTypeOffset);
+            _ValueTypeOffset = _ValueTypeOffset ?? Schema.GetOffset(0xF436EBF19230252A);
+            return ref _Handle.AsRef<DampedValueType>(_ValueTypeOffset!.Value);
         }
     }
-    private static nint _FloatParamNameInOffset = -1;
+    private static nint? _FloatParamNameInOffset;
 
     public string FloatParamNameIn
     {
         get
         {
-            if (_FloatParamNameInOffset == -1) _FloatParamNameInOffset = Schema.GetOffset(0xF436EBF10F50863A);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_FloatParamNameInOffset));
+            _FloatParamNameInOffset = _FloatParamNameInOffset ?? Schema.GetOffset(0xF436EBF10F50863A);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_FloatParamNameInOffset!.Value));
         }
         set
         {
-            if (_FloatParamNameInOffset == -1) _FloatParamNameInOffset = Schema.GetOffset(0xF436EBF10F50863A);
-            Schema.SetCUtlString(_Handle, _FloatParamNameInOffset, value);
+            _FloatParamNameInOffset = _FloatParamNameInOffset ?? Schema.GetOffset(0xF436EBF10F50863A);
+            Schema.SetCUtlString(_Handle, _FloatParamNameInOffset!.Value, value);
         }
     }
-    private static nint _FloatParamNameOutOffset = -1;
+    private static nint? _FloatParamNameOutOffset;
 
     public string FloatParamNameOut
     {
         get
         {
-            if (_FloatParamNameOutOffset == -1) _FloatParamNameOutOffset = Schema.GetOffset(0xF436EBF1E53CECD3);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_FloatParamNameOutOffset));
+            _FloatParamNameOutOffset = _FloatParamNameOutOffset ?? Schema.GetOffset(0xF436EBF1E53CECD3);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_FloatParamNameOutOffset!.Value));
         }
         set
         {
-            if (_FloatParamNameOutOffset == -1) _FloatParamNameOutOffset = Schema.GetOffset(0xF436EBF1E53CECD3);
-            Schema.SetCUtlString(_Handle, _FloatParamNameOutOffset, value);
+            _FloatParamNameOutOffset = _FloatParamNameOutOffset ?? Schema.GetOffset(0xF436EBF1E53CECD3);
+            Schema.SetCUtlString(_Handle, _FloatParamNameOutOffset!.Value, value);
         }
     }
-    private static nint _VectorParamNameInOffset = -1;
+    private static nint? _VectorParamNameInOffset;
 
     public string VectorParamNameIn
     {
         get
         {
-            if (_VectorParamNameInOffset == -1) _VectorParamNameInOffset = Schema.GetOffset(0xF436EBF1193E11F7);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_VectorParamNameInOffset));
+            _VectorParamNameInOffset = _VectorParamNameInOffset ?? Schema.GetOffset(0xF436EBF1193E11F7);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_VectorParamNameInOffset!.Value));
         }
         set
         {
-            if (_VectorParamNameInOffset == -1) _VectorParamNameInOffset = Schema.GetOffset(0xF436EBF1193E11F7);
-            Schema.SetCUtlString(_Handle, _VectorParamNameInOffset, value);
+            _VectorParamNameInOffset = _VectorParamNameInOffset ?? Schema.GetOffset(0xF436EBF1193E11F7);
+            Schema.SetCUtlString(_Handle, _VectorParamNameInOffset!.Value, value);
         }
     }
-    private static nint _VectorParamNameOutOffset = -1;
+    private static nint? _VectorParamNameOutOffset;
 
     public string VectorParamNameOut
     {
         get
         {
-            if (_VectorParamNameOutOffset == -1) _VectorParamNameOutOffset = Schema.GetOffset(0xF436EBF1C76FCB7C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_VectorParamNameOutOffset));
+            _VectorParamNameOutOffset = _VectorParamNameOutOffset ?? Schema.GetOffset(0xF436EBF1C76FCB7C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_VectorParamNameOutOffset!.Value));
         }
         set
         {
-            if (_VectorParamNameOutOffset == -1) _VectorParamNameOutOffset = Schema.GetOffset(0xF436EBF1C76FCB7C);
-            Schema.SetCUtlString(_Handle, _VectorParamNameOutOffset, value);
+            _VectorParamNameOutOffset = _VectorParamNameOutOffset ?? Schema.GetOffset(0xF436EBF1C76FCB7C);
+            Schema.SetCUtlString(_Handle, _VectorParamNameOutOffset!.Value, value);
         }
     }
-    private static nint _FloatParamInOffset = -1;
+    private static nint? _FloatParamInOffset;
     private AnimParamIDImpl? _FloatParamInInstance;
 
     public AnimParamID FloatParamIn
     {
         get
         {
-            if (_FloatParamInOffset == -1) _FloatParamInOffset = Schema.GetOffset(0xF436EBF184BA1B9D);
+            _FloatParamInOffset = _FloatParamInOffset ?? Schema.GetOffset(0xF436EBF184BA1B9D);
             var instance = _FloatParamInInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _FloatParamInOffset);
+            instance.DangerousSetHandle(_Handle + _FloatParamInOffset!.Value);
             return instance;
         }
     }
-    private static nint _FloatParamOutOffset = -1;
+    private static nint? _FloatParamOutOffset;
     private AnimParamIDImpl? _FloatParamOutInstance;
 
     public AnimParamID FloatParamOut
     {
         get
         {
-            if (_FloatParamOutOffset == -1) _FloatParamOutOffset = Schema.GetOffset(0xF436EBF1A79A87A6);
+            _FloatParamOutOffset = _FloatParamOutOffset ?? Schema.GetOffset(0xF436EBF1A79A87A6);
             var instance = _FloatParamOutInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _FloatParamOutOffset);
+            instance.DangerousSetHandle(_Handle + _FloatParamOutOffset!.Value);
             return instance;
         }
     }
-    private static nint _VectorParamInOffset = -1;
+    private static nint? _VectorParamInOffset;
     private AnimParamIDImpl? _VectorParamInInstance;
 
     public AnimParamID VectorParamIn
     {
         get
         {
-            if (_VectorParamInOffset == -1) _VectorParamInOffset = Schema.GetOffset(0xF436EBF11F329800);
+            _VectorParamInOffset = _VectorParamInOffset ?? Schema.GetOffset(0xF436EBF11F329800);
             var instance = _VectorParamInInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _VectorParamInOffset);
+            instance.DangerousSetHandle(_Handle + _VectorParamInOffset!.Value);
             return instance;
         }
     }
-    private static nint _VectorParamOutOffset = -1;
+    private static nint? _VectorParamOutOffset;
     private AnimParamIDImpl? _VectorParamOutInstance;
 
     public AnimParamID VectorParamOut
     {
         get
         {
-            if (_VectorParamOutOffset == -1) _VectorParamOutOffset = Schema.GetOffset(0xF436EBF1724238C5);
+            _VectorParamOutOffset = _VectorParamOutOffset ?? Schema.GetOffset(0xF436EBF1724238C5);
             var instance = _VectorParamOutInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _VectorParamOutOffset);
+            instance.DangerousSetHandle(_Handle + _VectorParamOutOffset!.Value);
             return instance;
         }
     }
-    private static nint _DampingOffset = -1;
+    private static nint? _DampingOffset;
     private CAnimInputDampingImpl? _DampingInstance;
 
     public CAnimInputDamping Damping
     {
         get
         {
-            if (_DampingOffset == -1) _DampingOffset = Schema.GetOffset(0xF436EBF115440FB5);
+            _DampingOffset = _DampingOffset ?? Schema.GetOffset(0xF436EBF115440FB5);
             var instance = _DampingInstance ??= new CAnimInputDampingImpl(0);
-            instance.DangerousSetHandle(_Handle + _DampingOffset);
+            instance.DangerousSetHandle(_Handle + _DampingOffset!.Value);
             return instance;
         }
     }

@@ -16,44 +16,44 @@ internal partial class AssetEngineCommand_tImpl : SchemaClass, AssetEngineComman
 {
     public AssetEngineCommand_tImpl(nint handle) : base(handle) { }
 
-    private static nint _CommandOffset = -1;
+    private static nint? _CommandOffset;
 
     public ref CBufferString Command
     {
         get
         {
-            if (_CommandOffset == -1) _CommandOffset = Schema.GetOffset(0x4E71BF593A5BBC32);
-            return ref _Handle.AsRef<CBufferString>(_CommandOffset);
+            _CommandOffset = _CommandOffset ?? Schema.GetOffset(0x4E71BF593A5BBC32);
+            return ref _Handle.AsRef<CBufferString>(_CommandOffset!.Value);
         }
     }
-    private static nint _IconOffset = -1;
+    private static nint? _IconOffset;
 
     public ref CBufferString Icon
     {
         get
         {
-            if (_IconOffset == -1) _IconOffset = Schema.GetOffset(0x4E71BF5923EEFA70);
-            return ref _Handle.AsRef<CBufferString>(_IconOffset);
+            _IconOffset = _IconOffset ?? Schema.GetOffset(0x4E71BF5923EEFA70);
+            return ref _Handle.AsRef<CBufferString>(_IconOffset!.Value);
         }
     }
-    private static nint _DescriptionOffset = -1;
+    private static nint? _DescriptionOffset;
 
     public ref CBufferString Description
     {
         get
         {
-            if (_DescriptionOffset == -1) _DescriptionOffset = Schema.GetOffset(0x4E71BF59678744E9);
-            return ref _Handle.AsRef<CBufferString>(_DescriptionOffset);
+            _DescriptionOffset = _DescriptionOffset ?? Schema.GetOffset(0x4E71BF59678744E9);
+            return ref _Handle.AsRef<CBufferString>(_DescriptionOffset!.Value);
         }
     }
-    private static nint _BringEngineToFrontOffset = -1;
+    private static nint? _BringEngineToFrontOffset;
 
     public ref bool BringEngineToFront
     {
         get
         {
-            if (_BringEngineToFrontOffset == -1) _BringEngineToFrontOffset = Schema.GetOffset(0x4E71BF59A79759F3);
-            return ref _Handle.AsRef<bool>(_BringEngineToFrontOffset);
+            _BringEngineToFrontOffset = _BringEngineToFrontOffset ?? Schema.GetOffset(0x4E71BF59A79759F3);
+            return ref _Handle.AsRef<bool>(_BringEngineToFrontOffset!.Value);
         }
     }
 

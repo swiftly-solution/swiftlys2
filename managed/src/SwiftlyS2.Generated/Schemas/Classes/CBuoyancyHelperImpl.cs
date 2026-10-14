@@ -16,119 +16,119 @@ internal partial class CBuoyancyHelperImpl : SchemaClass, CBuoyancyHelper
 {
     public CBuoyancyHelperImpl(nint handle) : base(handle) { }
 
-    private static nint _ControllerOffset = -1;
+    private static nint? _ControllerOffset;
     private IPhysicsMotionControllerImpl? _ControllerInstance;
 
     public IPhysicsMotionController? Controller
     {
         get
         {
-            if (_ControllerOffset == -1) _ControllerOffset = Schema.GetOffset(0x7A9E77008F2DD553);
-            var ptr = _Handle.Read<nint>(_ControllerOffset);
+            _ControllerOffset = _ControllerOffset ?? Schema.GetOffset(0x7A9E77008F2DD553);
+            var ptr = _Handle.Read<nint>(_ControllerOffset!.Value);
             if (!ptr.IsValidPtr()) return null;
             var instance = _ControllerInstance ??= new IPhysicsMotionControllerImpl(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint _FluidTypeOffset = -1;
+    private static nint? _FluidTypeOffset;
 
     public ref CUtlStringToken FluidType
     {
         get
         {
-            if (_FluidTypeOffset == -1) _FluidTypeOffset = Schema.GetOffset(0x7A9E77003D45CF5F);
-            return ref _Handle.AsRef<CUtlStringToken>(_FluidTypeOffset);
+            _FluidTypeOffset = _FluidTypeOffset ?? Schema.GetOffset(0x7A9E77003D45CF5F);
+            return ref _Handle.AsRef<CUtlStringToken>(_FluidTypeOffset!.Value);
         }
     }
-    private static nint _FluidDensityOffset = -1;
+    private static nint? _FluidDensityOffset;
 
     public ref float FluidDensity
     {
         get
         {
-            if (_FluidDensityOffset == -1) _FluidDensityOffset = Schema.GetOffset(0x7A9E7700DABBC5A3);
-            return ref _Handle.AsRef<float>(_FluidDensityOffset);
+            _FluidDensityOffset = _FluidDensityOffset ?? Schema.GetOffset(0x7A9E7700DABBC5A3);
+            return ref _Handle.AsRef<float>(_FluidDensityOffset!.Value);
         }
     }
-    private static nint _NeutrallyBuoyantGravityOffset = -1;
+    private static nint? _NeutrallyBuoyantGravityOffset;
 
     public ref float NeutrallyBuoyantGravity
     {
         get
         {
-            if (_NeutrallyBuoyantGravityOffset == -1) _NeutrallyBuoyantGravityOffset = Schema.GetOffset(0x7A9E77007EFB6975);
-            return ref _Handle.AsRef<float>(_NeutrallyBuoyantGravityOffset);
+            _NeutrallyBuoyantGravityOffset = _NeutrallyBuoyantGravityOffset ?? Schema.GetOffset(0x7A9E77007EFB6975);
+            return ref _Handle.AsRef<float>(_NeutrallyBuoyantGravityOffset!.Value);
         }
     }
-    private static nint _NeutrallyBuoyantLinearDampingOffset = -1;
+    private static nint? _NeutrallyBuoyantLinearDampingOffset;
 
     public ref float NeutrallyBuoyantLinearDamping
     {
         get
         {
-            if (_NeutrallyBuoyantLinearDampingOffset == -1) _NeutrallyBuoyantLinearDampingOffset = Schema.GetOffset(0x7A9E7700F2B7E456);
-            return ref _Handle.AsRef<float>(_NeutrallyBuoyantLinearDampingOffset);
+            _NeutrallyBuoyantLinearDampingOffset = _NeutrallyBuoyantLinearDampingOffset ?? Schema.GetOffset(0x7A9E7700F2B7E456);
+            return ref _Handle.AsRef<float>(_NeutrallyBuoyantLinearDampingOffset!.Value);
         }
     }
-    private static nint _NeutrallyBuoyantAngularDampingOffset = -1;
+    private static nint? _NeutrallyBuoyantAngularDampingOffset;
 
     public ref float NeutrallyBuoyantAngularDamping
     {
         get
         {
-            if (_NeutrallyBuoyantAngularDampingOffset == -1) _NeutrallyBuoyantAngularDampingOffset = Schema.GetOffset(0x7A9E770013DF82F1);
-            return ref _Handle.AsRef<float>(_NeutrallyBuoyantAngularDampingOffset);
+            _NeutrallyBuoyantAngularDampingOffset = _NeutrallyBuoyantAngularDampingOffset ?? Schema.GetOffset(0x7A9E770013DF82F1);
+            return ref _Handle.AsRef<float>(_NeutrallyBuoyantAngularDampingOffset!.Value);
         }
     }
-    private static nint _NeutrallyBuoyantOffset = -1;
+    private static nint? _NeutrallyBuoyantOffset;
 
     public ref bool NeutrallyBuoyant
     {
         get
         {
-            if (_NeutrallyBuoyantOffset == -1) _NeutrallyBuoyantOffset = Schema.GetOffset(0x7A9E7700D0DF6ADF);
-            return ref _Handle.AsRef<bool>(_NeutrallyBuoyantOffset);
+            _NeutrallyBuoyantOffset = _NeutrallyBuoyantOffset ?? Schema.GetOffset(0x7A9E7700D0DF6ADF);
+            return ref _Handle.AsRef<bool>(_NeutrallyBuoyantOffset!.Value);
         }
     }
-    private static nint _FractionOfWheelSubmergedForWheelFrictionOffset = -1;
+    private static nint? _FractionOfWheelSubmergedForWheelFrictionOffset;
 
     public ref CUtlVector<float> FractionOfWheelSubmergedForWheelFriction
     {
         get
         {
-            if (_FractionOfWheelSubmergedForWheelFrictionOffset == -1) _FractionOfWheelSubmergedForWheelFrictionOffset = Schema.GetOffset(0x7A9E77009D5C3295);
-            return ref _Handle.AsRef<CUtlVector<float>>(_FractionOfWheelSubmergedForWheelFrictionOffset);
+            _FractionOfWheelSubmergedForWheelFrictionOffset = _FractionOfWheelSubmergedForWheelFrictionOffset ?? Schema.GetOffset(0x7A9E77009D5C3295);
+            return ref _Handle.AsRef<CUtlVector<float>>(_FractionOfWheelSubmergedForWheelFrictionOffset!.Value);
         }
     }
-    private static nint _WheelFrictionScalesOffset = -1;
+    private static nint? _WheelFrictionScalesOffset;
 
     public ref CUtlVector<float> WheelFrictionScales
     {
         get
         {
-            if (_WheelFrictionScalesOffset == -1) _WheelFrictionScalesOffset = Schema.GetOffset(0x7A9E77005D5150ED);
-            return ref _Handle.AsRef<CUtlVector<float>>(_WheelFrictionScalesOffset);
+            _WheelFrictionScalesOffset = _WheelFrictionScalesOffset ?? Schema.GetOffset(0x7A9E77005D5150ED);
+            return ref _Handle.AsRef<CUtlVector<float>>(_WheelFrictionScalesOffset!.Value);
         }
     }
-    private static nint _FractionOfWheelSubmergedForWheelDragOffset = -1;
+    private static nint? _FractionOfWheelSubmergedForWheelDragOffset;
 
     public ref CUtlVector<float> FractionOfWheelSubmergedForWheelDrag
     {
         get
         {
-            if (_FractionOfWheelSubmergedForWheelDragOffset == -1) _FractionOfWheelSubmergedForWheelDragOffset = Schema.GetOffset(0x7A9E7700E1C2C831);
-            return ref _Handle.AsRef<CUtlVector<float>>(_FractionOfWheelSubmergedForWheelDragOffset);
+            _FractionOfWheelSubmergedForWheelDragOffset = _FractionOfWheelSubmergedForWheelDragOffset ?? Schema.GetOffset(0x7A9E7700E1C2C831);
+            return ref _Handle.AsRef<CUtlVector<float>>(_FractionOfWheelSubmergedForWheelDragOffset!.Value);
         }
     }
-    private static nint _WheelDragOffset = -1;
+    private static nint? _WheelDragOffset;
 
     public ref CUtlVector<float> WheelDrag
     {
         get
         {
-            if (_WheelDragOffset == -1) _WheelDragOffset = Schema.GetOffset(0x7A9E7700E95C5D6E);
-            return ref _Handle.AsRef<CUtlVector<float>>(_WheelDragOffset);
+            _WheelDragOffset = _WheelDragOffset ?? Schema.GetOffset(0x7A9E7700E95C5D6E);
+            return ref _Handle.AsRef<CUtlVector<float>>(_WheelDragOffset!.Value);
         }
     }
 

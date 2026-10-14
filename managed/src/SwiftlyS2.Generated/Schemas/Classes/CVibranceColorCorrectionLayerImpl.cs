@@ -16,24 +16,24 @@ internal partial class CVibranceColorCorrectionLayerImpl : CColorCorrectionLayer
 {
     public CVibranceColorCorrectionLayerImpl(nint handle) : base(handle) { }
 
-    private static nint _VibranceOffset = -1;
+    private static nint? _VibranceOffset;
 
     public ref int Vibrance
     {
         get
         {
-            if (_VibranceOffset == -1) _VibranceOffset = Schema.GetOffset(0xB8E9FDD0555BA1AB);
-            return ref _Handle.AsRef<int>(_VibranceOffset);
+            _VibranceOffset = _VibranceOffset ?? Schema.GetOffset(0xB8E9FDD0555BA1AB);
+            return ref _Handle.AsRef<int>(_VibranceOffset!.Value);
         }
     }
-    private static nint _SaturationOffset = -1;
+    private static nint? _SaturationOffset;
 
     public ref int Saturation
     {
         get
         {
-            if (_SaturationOffset == -1) _SaturationOffset = Schema.GetOffset(0xB8E9FDD05BA84D3D);
-            return ref _Handle.AsRef<int>(_SaturationOffset);
+            _SaturationOffset = _SaturationOffset ?? Schema.GetOffset(0xB8E9FDD05BA84D3D);
+            return ref _Handle.AsRef<int>(_SaturationOffset!.Value);
         }
     }
 

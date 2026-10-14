@@ -16,59 +16,59 @@ internal partial class C_SoundEventConeEntityImpl : C_SoundEventEntityImpl, C_So
 {
     public C_SoundEventConeEntityImpl(nint handle) : base(handle) { }
 
-    private static nint _EmitterAngleOffset = -1;
+    private static nint? _EmitterAngleOffset;
 
     public ref float EmitterAngle
     {
         get
         {
-            if (_EmitterAngleOffset == -1) _EmitterAngleOffset = Schema.GetOffset(0x6ABC0D5E9BAACEC6);
-            return ref _Handle.AsRef<float>(_EmitterAngleOffset);
+            _EmitterAngleOffset = _EmitterAngleOffset ?? Schema.GetOffset(0x6ABC0D5E9BAACEC6);
+            return ref _Handle.AsRef<float>(_EmitterAngleOffset!.Value);
         }
     }
-    private static nint _SweetSpotAngleOffset = -1;
+    private static nint? _SweetSpotAngleOffset;
 
     public ref float SweetSpotAngle
     {
         get
         {
-            if (_SweetSpotAngleOffset == -1) _SweetSpotAngleOffset = Schema.GetOffset(0x6ABC0D5EA6F5A5D0);
-            return ref _Handle.AsRef<float>(_SweetSpotAngleOffset);
+            _SweetSpotAngleOffset = _SweetSpotAngleOffset ?? Schema.GetOffset(0x6ABC0D5EA6F5A5D0);
+            return ref _Handle.AsRef<float>(_SweetSpotAngleOffset!.Value);
         }
     }
-    private static nint _AttenMinOffset = -1;
+    private static nint? _AttenMinOffset;
 
     public ref float AttenMin
     {
         get
         {
-            if (_AttenMinOffset == -1) _AttenMinOffset = Schema.GetOffset(0x6ABC0D5E68F19CC3);
-            return ref _Handle.AsRef<float>(_AttenMinOffset);
+            _AttenMinOffset = _AttenMinOffset ?? Schema.GetOffset(0x6ABC0D5E68F19CC3);
+            return ref _Handle.AsRef<float>(_AttenMinOffset!.Value);
         }
     }
-    private static nint _AttenMaxOffset = -1;
+    private static nint? _AttenMaxOffset;
 
     public ref float AttenMax
     {
         get
         {
-            if (_AttenMaxOffset == -1) _AttenMaxOffset = Schema.GetOffset(0x6ABC0D5E5F06A7BD);
-            return ref _Handle.AsRef<float>(_AttenMaxOffset);
+            _AttenMaxOffset = _AttenMaxOffset ?? Schema.GetOffset(0x6ABC0D5E5F06A7BD);
+            return ref _Handle.AsRef<float>(_AttenMaxOffset!.Value);
         }
     }
-    private static nint _ParameterNameOffset = -1;
+    private static nint? _ParameterNameOffset;
 
     public string ParameterName
     {
         get
         {
-            if (_ParameterNameOffset == -1) _ParameterNameOffset = Schema.GetOffset(0x6ABC0D5E73250A0B);
-            return Schema.GetString(_Handle.Read<nint>(_ParameterNameOffset));
+            _ParameterNameOffset = _ParameterNameOffset ?? Schema.GetOffset(0x6ABC0D5E73250A0B);
+            return Schema.GetString(_Handle.Read<nint>(_ParameterNameOffset!.Value));
         }
         set
         {
-            if (_ParameterNameOffset == -1) _ParameterNameOffset = Schema.GetOffset(0x6ABC0D5E73250A0B);
-            Schema.SetString(_Handle, _ParameterNameOffset, value);
+            _ParameterNameOffset = _ParameterNameOffset ?? Schema.GetOffset(0x6ABC0D5E73250A0B);
+            Schema.SetString(_Handle, _ParameterNameOffset!.Value, value);
         }
     }
 

@@ -16,84 +16,84 @@ internal partial class CInfoWorldLayerImpl : CBaseEntityImpl, CInfoWorldLayer
 {
     public CInfoWorldLayerImpl(nint handle) : base(handle) { }
 
-    private static nint _OutputOnEntitiesSpawnedOffset = -1;
+    private static nint? _OutputOnEntitiesSpawnedOffset;
 
     public ref CEntityIOOutput OutputOnEntitiesSpawned
     {
         get
         {
-            if (_OutputOnEntitiesSpawnedOffset == -1) _OutputOnEntitiesSpawnedOffset = Schema.GetOffset(0x74C9C61B31420D1E);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OutputOnEntitiesSpawnedOffset);
+            _OutputOnEntitiesSpawnedOffset = _OutputOnEntitiesSpawnedOffset ?? Schema.GetOffset(0x74C9C61B31420D1E);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OutputOnEntitiesSpawnedOffset!.Value);
         }
     }
-    private static nint _WorldNameOffset = -1;
+    private static nint? _WorldNameOffset;
 
     public string WorldName
     {
         get
         {
-            if (_WorldNameOffset == -1) _WorldNameOffset = Schema.GetOffset(0x74C9C61B29890DD8);
-            return Schema.GetString(_Handle.Read<nint>(_WorldNameOffset));
+            _WorldNameOffset = _WorldNameOffset ?? Schema.GetOffset(0x74C9C61B29890DD8);
+            return Schema.GetString(_Handle.Read<nint>(_WorldNameOffset!.Value));
         }
         set
         {
-            if (_WorldNameOffset == -1) _WorldNameOffset = Schema.GetOffset(0x74C9C61B29890DD8);
-            Schema.SetString(_Handle, _WorldNameOffset, value);
+            _WorldNameOffset = _WorldNameOffset ?? Schema.GetOffset(0x74C9C61B29890DD8);
+            Schema.SetString(_Handle, _WorldNameOffset!.Value, value);
         }
     }
-    private static nint _LayerNameOffset = -1;
+    private static nint? _LayerNameOffset;
 
     public string LayerName
     {
         get
         {
-            if (_LayerNameOffset == -1) _LayerNameOffset = Schema.GetOffset(0x74C9C61BEABDA295);
-            return Schema.GetString(_Handle.Read<nint>(_LayerNameOffset));
+            _LayerNameOffset = _LayerNameOffset ?? Schema.GetOffset(0x74C9C61BEABDA295);
+            return Schema.GetString(_Handle.Read<nint>(_LayerNameOffset!.Value));
         }
         set
         {
-            if (_LayerNameOffset == -1) _LayerNameOffset = Schema.GetOffset(0x74C9C61BEABDA295);
-            Schema.SetString(_Handle, _LayerNameOffset, value);
+            _LayerNameOffset = _LayerNameOffset ?? Schema.GetOffset(0x74C9C61BEABDA295);
+            Schema.SetString(_Handle, _LayerNameOffset!.Value, value);
         }
     }
-    private static nint _WorldLayerVisibleOffset = -1;
+    private static nint? _WorldLayerVisibleOffset;
 
     public ref bool WorldLayerVisible
     {
         get
         {
-            if (_WorldLayerVisibleOffset == -1) _WorldLayerVisibleOffset = Schema.GetOffset(0x74C9C61BA9B3715E);
-            return ref _Handle.AsRef<bool>(_WorldLayerVisibleOffset);
+            _WorldLayerVisibleOffset = _WorldLayerVisibleOffset ?? Schema.GetOffset(0x74C9C61BA9B3715E);
+            return ref _Handle.AsRef<bool>(_WorldLayerVisibleOffset!.Value);
         }
     }
-    private static nint _EntitiesSpawnedOffset = -1;
+    private static nint? _EntitiesSpawnedOffset;
 
     public ref bool EntitiesSpawned
     {
         get
         {
-            if (_EntitiesSpawnedOffset == -1) _EntitiesSpawnedOffset = Schema.GetOffset(0x74C9C61BAEF9D6C8);
-            return ref _Handle.AsRef<bool>(_EntitiesSpawnedOffset);
+            _EntitiesSpawnedOffset = _EntitiesSpawnedOffset ?? Schema.GetOffset(0x74C9C61BAEF9D6C8);
+            return ref _Handle.AsRef<bool>(_EntitiesSpawnedOffset!.Value);
         }
     }
-    private static nint _CreateAsChildSpawnGroupOffset = -1;
+    private static nint? _CreateAsChildSpawnGroupOffset;
 
     public ref bool CreateAsChildSpawnGroup
     {
         get
         {
-            if (_CreateAsChildSpawnGroupOffset == -1) _CreateAsChildSpawnGroupOffset = Schema.GetOffset(0x74C9C61B6D553CD3);
-            return ref _Handle.AsRef<bool>(_CreateAsChildSpawnGroupOffset);
+            _CreateAsChildSpawnGroupOffset = _CreateAsChildSpawnGroupOffset ?? Schema.GetOffset(0x74C9C61B6D553CD3);
+            return ref _Handle.AsRef<bool>(_CreateAsChildSpawnGroupOffset!.Value);
         }
     }
-    private static nint _LayerSpawnGroupOffset = -1;
+    private static nint? _LayerSpawnGroupOffset;
 
     public ref uint LayerSpawnGroup
     {
         get
         {
-            if (_LayerSpawnGroupOffset == -1) _LayerSpawnGroupOffset = Schema.GetOffset(0x74C9C61B56D4B70E);
-            return ref _Handle.AsRef<uint>(_LayerSpawnGroupOffset);
+            _LayerSpawnGroupOffset = _LayerSpawnGroupOffset ?? Schema.GetOffset(0x74C9C61B56D4B70E);
+            return ref _Handle.AsRef<uint>(_LayerSpawnGroupOffset!.Value);
         }
     }
 

@@ -16,14 +16,14 @@ internal partial class CNmGraphDocParameterizedClipSelectorNode__CDataImpl : CNm
 {
     public CNmGraphDocParameterizedClipSelectorNode__CDataImpl(nint handle) : base(handle) { }
 
-    private static nint _OptionWeightsOffset = -1;
+    private static nint? _OptionWeightsOffset;
 
     public ref CUtlVector<byte> OptionWeights
     {
         get
         {
-            if (_OptionWeightsOffset == -1) _OptionWeightsOffset = Schema.GetOffset(0xEAE658CA31D94DB5);
-            return ref _Handle.AsRef<CUtlVector<byte>>(_OptionWeightsOffset);
+            _OptionWeightsOffset = _OptionWeightsOffset ?? Schema.GetOffset(0xEAE658CA31D94DB5);
+            return ref _Handle.AsRef<CUtlVector<byte>>(_OptionWeightsOffset!.Value);
         }
     }
 

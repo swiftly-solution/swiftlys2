@@ -16,24 +16,24 @@ internal partial class CNavVolumeBreadthFirstSearchImpl : CNavVolumeCalculatedVe
 {
     public CNavVolumeBreadthFirstSearchImpl(nint handle) : base(handle) { }
 
-    private static nint _StartPosOffset = -1;
+    private static nint? _StartPosOffset;
 
     public ref Vector StartPos
     {
         get
         {
-            if (_StartPosOffset == -1) _StartPosOffset = Schema.GetOffset(0x7C16FC090FE14C1B);
-            return ref _Handle.AsRef<Vector>(_StartPosOffset);
+            _StartPosOffset = _StartPosOffset ?? Schema.GetOffset(0x7C16FC090FE14C1B);
+            return ref _Handle.AsRef<Vector>(_StartPosOffset!.Value);
         }
     }
-    private static nint _SearchDistOffset = -1;
+    private static nint? _SearchDistOffset;
 
     public ref float SearchDist
     {
         get
         {
-            if (_SearchDistOffset == -1) _SearchDistOffset = Schema.GetOffset(0x7C16FC098227285F);
-            return ref _Handle.AsRef<float>(_SearchDistOffset);
+            _SearchDistOffset = _SearchDistOffset ?? Schema.GetOffset(0x7C16FC098227285F);
+            return ref _Handle.AsRef<float>(_SearchDistOffset!.Value);
         }
     }
 

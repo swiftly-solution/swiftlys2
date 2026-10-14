@@ -16,14 +16,14 @@ internal partial class CNmGraphDocTargetPointNodeImpl : CNmGraphDocFlowNodeImpl,
 {
     public CNmGraphDocTargetPointNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _IsWorldSpaceTargetOffset = -1;
+    private static nint? _IsWorldSpaceTargetOffset;
 
     public ref bool IsWorldSpaceTarget
     {
         get
         {
-            if (_IsWorldSpaceTargetOffset == -1) _IsWorldSpaceTargetOffset = Schema.GetOffset(0xE32455D6B81D53F2);
-            return ref _Handle.AsRef<bool>(_IsWorldSpaceTargetOffset);
+            _IsWorldSpaceTargetOffset = _IsWorldSpaceTargetOffset ?? Schema.GetOffset(0xE32455D6B81D53F2);
+            return ref _Handle.AsRef<bool>(_IsWorldSpaceTargetOffset!.Value);
         }
     }
 

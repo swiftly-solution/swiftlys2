@@ -16,36 +16,36 @@ internal partial class CPulseCell_TimelineImpl : CPulseCell_BaseYieldingInflowIm
 {
     public CPulseCell_TimelineImpl(nint handle) : base(handle) { }
 
-    private static nint _TimelineEventsOffset = -1;
+    private static nint? _TimelineEventsOffset;
 
     public ref CUtlVector<CPulseCell_Timeline__TimelineEvent_t> TimelineEvents
     {
         get
         {
-            if (_TimelineEventsOffset == -1) _TimelineEventsOffset = Schema.GetOffset(0xF1185F93C91CDDC3);
-            return ref _Handle.AsRef<CUtlVector<CPulseCell_Timeline__TimelineEvent_t>>(_TimelineEventsOffset);
+            _TimelineEventsOffset = _TimelineEventsOffset ?? Schema.GetOffset(0xF1185F93C91CDDC3);
+            return ref _Handle.AsRef<CUtlVector<CPulseCell_Timeline__TimelineEvent_t>>(_TimelineEventsOffset!.Value);
         }
     }
-    private static nint _WaitForChildOutflowsOffset = -1;
+    private static nint? _WaitForChildOutflowsOffset;
 
     public ref bool WaitForChildOutflows
     {
         get
         {
-            if (_WaitForChildOutflowsOffset == -1) _WaitForChildOutflowsOffset = Schema.GetOffset(0xF1185F933F8E29C6);
-            return ref _Handle.AsRef<bool>(_WaitForChildOutflowsOffset);
+            _WaitForChildOutflowsOffset = _WaitForChildOutflowsOffset ?? Schema.GetOffset(0xF1185F933F8E29C6);
+            return ref _Handle.AsRef<bool>(_WaitForChildOutflowsOffset!.Value);
         }
     }
-    private static nint _OnFinishedOffset = -1;
+    private static nint? _OnFinishedOffset;
     private CPulse_ResumePointImpl? _OnFinishedInstance;
 
     public CPulse_ResumePoint OnFinished
     {
         get
         {
-            if (_OnFinishedOffset == -1) _OnFinishedOffset = Schema.GetOffset(0xF1185F938D903E5E);
+            _OnFinishedOffset = _OnFinishedOffset ?? Schema.GetOffset(0xF1185F938D903E5E);
             var instance = _OnFinishedInstance ??= new CPulse_ResumePointImpl(0);
-            instance.DangerousSetHandle(_Handle + _OnFinishedOffset);
+            instance.DangerousSetHandle(_Handle + _OnFinishedOffset!.Value);
             return instance;
         }
     }

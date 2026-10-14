@@ -16,39 +16,39 @@ internal partial class CFilterMultipleImpl : CBaseFilterImpl, CFilterMultiple
 {
     public CFilterMultipleImpl(nint handle) : base(handle) { }
 
-    private static nint _FilterTypeOffset = -1;
+    private static nint? _FilterTypeOffset;
 
     public ref filter_t FilterType
     {
         get
         {
-            if (_FilterTypeOffset == -1) _FilterTypeOffset = Schema.GetOffset(0x6EA0578071861EDB);
-            return ref _Handle.AsRef<filter_t>(_FilterTypeOffset);
+            _FilterTypeOffset = _FilterTypeOffset ?? Schema.GetOffset(0x6EA0578071861EDB);
+            return ref _Handle.AsRef<filter_t>(_FilterTypeOffset!.Value);
         }
     }
-    private static nint _FilterNameOffset = -1;
+    private static nint? _FilterNameOffset;
     private SchemaStringFixedArray? _FilterNameInstance;
 
     public ISchemaStringFixedArray FilterName
     {
         get
         {
-            if (_FilterNameOffset == -1) _FilterNameOffset = Schema.GetOffset(0x6EA0578009C86445);
+            _FilterNameOffset = _FilterNameOffset ?? Schema.GetOffset(0x6EA0578009C86445);
             var instance = _FilterNameInstance ??= new SchemaStringFixedArray(0, 0x6EA0578009C86445, 10, 8, 8);
-            instance.DangerousSetHandle(_Handle + _FilterNameOffset);
+            instance.DangerousSetHandle(_Handle + _FilterNameOffset!.Value);
             return instance;
         }
     }
-    private static nint _FilterOffset = -1;
+    private static nint? _FilterOffset;
     private SchemaFixedArray<CHandle<CBaseEntity>>? _FilterInstance;
 
     public ISchemaFixedArray<CHandle<CBaseEntity>> Filter
     {
         get
         {
-            if (_FilterOffset == -1) _FilterOffset = Schema.GetOffset(0x6EA0578045D9E0B1);
+            _FilterOffset = _FilterOffset ?? Schema.GetOffset(0x6EA0578045D9E0B1);
             var instance = _FilterInstance ??= new SchemaFixedArray<CHandle<CBaseEntity>>(0, 0x6EA0578045D9E0B1, 10, 4, 4);
-            instance.DangerousSetHandle(_Handle + _FilterOffset);
+            instance.DangerousSetHandle(_Handle + _FilterOffset!.Value);
             return instance;
         }
     }

@@ -16,29 +16,29 @@ internal partial class CTriggerVolumeImpl : CBaseModelEntityImpl, CTriggerVolume
 {
     public CTriggerVolumeImpl(nint handle) : base(handle) { }
 
-    private static nint _FilterNameOffset = -1;
+    private static nint? _FilterNameOffset;
 
     public string FilterName
     {
         get
         {
-            if (_FilterNameOffset == -1) _FilterNameOffset = Schema.GetOffset(0x8A35845409C86445);
-            return Schema.GetString(_Handle.Read<nint>(_FilterNameOffset));
+            _FilterNameOffset = _FilterNameOffset ?? Schema.GetOffset(0x8A35845409C86445);
+            return Schema.GetString(_Handle.Read<nint>(_FilterNameOffset!.Value));
         }
         set
         {
-            if (_FilterNameOffset == -1) _FilterNameOffset = Schema.GetOffset(0x8A35845409C86445);
-            Schema.SetString(_Handle, _FilterNameOffset, value);
+            _FilterNameOffset = _FilterNameOffset ?? Schema.GetOffset(0x8A35845409C86445);
+            Schema.SetString(_Handle, _FilterNameOffset!.Value, value);
         }
     }
-    private static nint _FilterOffset = -1;
+    private static nint? _FilterOffset;
 
     public ref CHandle<CBaseFilter> Filter
     {
         get
         {
-            if (_FilterOffset == -1) _FilterOffset = Schema.GetOffset(0x8A35845445D9E0B1);
-            return ref _Handle.AsRef<CHandle<CBaseFilter>>(_FilterOffset);
+            _FilterOffset = _FilterOffset ?? Schema.GetOffset(0x8A35845445D9E0B1);
+            return ref _Handle.AsRef<CHandle<CBaseFilter>>(_FilterOffset!.Value);
         }
     }
 

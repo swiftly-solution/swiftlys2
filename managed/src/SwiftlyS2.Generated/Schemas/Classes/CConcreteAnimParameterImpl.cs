@@ -16,64 +16,64 @@ internal partial class CConcreteAnimParameterImpl : CAnimParameterBaseImpl, CCon
 {
     public CConcreteAnimParameterImpl(nint handle) : base(handle) { }
 
-    private static nint _PreviewButtonOffset = -1;
+    private static nint? _PreviewButtonOffset;
 
     public ref AnimParamButton_t PreviewButton
     {
         get
         {
-            if (_PreviewButtonOffset == -1) _PreviewButtonOffset = Schema.GetOffset(0xFB67B7E37D0352C7);
-            return ref _Handle.AsRef<AnimParamButton_t>(_PreviewButtonOffset);
+            _PreviewButtonOffset = _PreviewButtonOffset ?? Schema.GetOffset(0xFB67B7E37D0352C7);
+            return ref _Handle.AsRef<AnimParamButton_t>(_PreviewButtonOffset!.Value);
         }
     }
-    private static nint _NetworkSettingOffset = -1;
+    private static nint? _NetworkSettingOffset;
 
     public ref AnimParamNetworkSetting NetworkSetting
     {
         get
         {
-            if (_NetworkSettingOffset == -1) _NetworkSettingOffset = Schema.GetOffset(0xFB67B7E3EEBF9DD2);
-            return ref _Handle.AsRef<AnimParamNetworkSetting>(_NetworkSettingOffset);
+            _NetworkSettingOffset = _NetworkSettingOffset ?? Schema.GetOffset(0xFB67B7E3EEBF9DD2);
+            return ref _Handle.AsRef<AnimParamNetworkSetting>(_NetworkSettingOffset!.Value);
         }
     }
-    private static nint _UseMostRecentValueOffset = -1;
+    private static nint? _UseMostRecentValueOffset;
 
     public ref bool UseMostRecentValue
     {
         get
         {
-            if (_UseMostRecentValueOffset == -1) _UseMostRecentValueOffset = Schema.GetOffset(0xFB67B7E37693B669);
-            return ref _Handle.AsRef<bool>(_UseMostRecentValueOffset);
+            _UseMostRecentValueOffset = _UseMostRecentValueOffset ?? Schema.GetOffset(0xFB67B7E37693B669);
+            return ref _Handle.AsRef<bool>(_UseMostRecentValueOffset!.Value);
         }
     }
-    private static nint _AutoResetOffset = -1;
+    private static nint? _AutoResetOffset;
 
     public ref bool AutoReset
     {
         get
         {
-            if (_AutoResetOffset == -1) _AutoResetOffset = Schema.GetOffset(0xFB67B7E3EBC32499);
-            return ref _Handle.AsRef<bool>(_AutoResetOffset);
+            _AutoResetOffset = _AutoResetOffset ?? Schema.GetOffset(0xFB67B7E3EBC32499);
+            return ref _Handle.AsRef<bool>(_AutoResetOffset!.Value);
         }
     }
-    private static nint _GameWritableOffset = -1;
+    private static nint? _GameWritableOffset;
 
     public ref bool GameWritable
     {
         get
         {
-            if (_GameWritableOffset == -1) _GameWritableOffset = Schema.GetOffset(0xFB67B7E3FB2CA7F7);
-            return ref _Handle.AsRef<bool>(_GameWritableOffset);
+            _GameWritableOffset = _GameWritableOffset ?? Schema.GetOffset(0xFB67B7E3FB2CA7F7);
+            return ref _Handle.AsRef<bool>(_GameWritableOffset!.Value);
         }
     }
-    private static nint _GraphWritableOffset = -1;
+    private static nint? _GraphWritableOffset;
 
     public ref bool GraphWritable
     {
         get
         {
-            if (_GraphWritableOffset == -1) _GraphWritableOffset = Schema.GetOffset(0xFB67B7E30633E7B7);
-            return ref _Handle.AsRef<bool>(_GraphWritableOffset);
+            _GraphWritableOffset = _GraphWritableOffset ?? Schema.GetOffset(0xFB67B7E30633E7B7);
+            return ref _Handle.AsRef<bool>(_GraphWritableOffset!.Value);
         }
     }
 

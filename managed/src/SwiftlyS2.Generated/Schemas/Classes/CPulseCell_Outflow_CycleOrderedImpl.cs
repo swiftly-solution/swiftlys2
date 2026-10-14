@@ -16,14 +16,14 @@ internal partial class CPulseCell_Outflow_CycleOrderedImpl : CPulseCell_BaseFlow
 {
     public CPulseCell_Outflow_CycleOrderedImpl(nint handle) : base(handle) { }
 
-    private static nint _OutputsOffset = -1;
+    private static nint? _OutputsOffset;
 
     public ref CUtlVector<CPulse_OutflowConnection> Outputs
     {
         get
         {
-            if (_OutputsOffset == -1) _OutputsOffset = Schema.GetOffset(0xAED1209EA38A89D5);
-            return ref _Handle.AsRef<CUtlVector<CPulse_OutflowConnection>>(_OutputsOffset);
+            _OutputsOffset = _OutputsOffset ?? Schema.GetOffset(0xAED1209EA38A89D5);
+            return ref _Handle.AsRef<CUtlVector<CPulse_OutflowConnection>>(_OutputsOffset!.Value);
         }
     }
 

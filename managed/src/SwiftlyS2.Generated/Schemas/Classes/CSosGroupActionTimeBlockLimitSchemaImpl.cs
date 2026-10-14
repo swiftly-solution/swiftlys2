@@ -16,24 +16,24 @@ internal partial class CSosGroupActionTimeBlockLimitSchemaImpl : CSosGroupAction
 {
     public CSosGroupActionTimeBlockLimitSchemaImpl(nint handle) : base(handle) { }
 
-    private static nint _MaxCountOffset = -1;
+    private static nint? _MaxCountOffset;
 
     public ref int MaxCount
     {
         get
         {
-            if (_MaxCountOffset == -1) _MaxCountOffset = Schema.GetOffset(0x79E8A1AC64BED864);
-            return ref _Handle.AsRef<int>(_MaxCountOffset);
+            _MaxCountOffset = _MaxCountOffset ?? Schema.GetOffset(0x79E8A1AC64BED864);
+            return ref _Handle.AsRef<int>(_MaxCountOffset!.Value);
         }
     }
-    private static nint _MaxDurationOffset = -1;
+    private static nint? _MaxDurationOffset;
 
     public ref float MaxDuration
     {
         get
         {
-            if (_MaxDurationOffset == -1) _MaxDurationOffset = Schema.GetOffset(0x79E8A1AC39BAF9F3);
-            return ref _Handle.AsRef<float>(_MaxDurationOffset);
+            _MaxDurationOffset = _MaxDurationOffset ?? Schema.GetOffset(0x79E8A1AC39BAF9F3);
+            return ref _Handle.AsRef<float>(_MaxDurationOffset!.Value);
         }
     }
 

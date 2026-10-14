@@ -16,34 +16,34 @@ internal partial class TagSpan_tImpl : SchemaClass, TagSpan_t
 {
     public TagSpan_tImpl(nint handle) : base(handle) { }
 
-    private static nint _TagIndexOffset = -1;
+    private static nint? _TagIndexOffset;
 
     public ref int TagIndex
     {
         get
         {
-            if (_TagIndexOffset == -1) _TagIndexOffset = Schema.GetOffset(0xA2611404D66997C9);
-            return ref _Handle.AsRef<int>(_TagIndexOffset);
+            _TagIndexOffset = _TagIndexOffset ?? Schema.GetOffset(0xA2611404D66997C9);
+            return ref _Handle.AsRef<int>(_TagIndexOffset!.Value);
         }
     }
-    private static nint _StartCycleOffset = -1;
+    private static nint? _StartCycleOffset;
 
     public ref float StartCycle
     {
         get
         {
-            if (_StartCycleOffset == -1) _StartCycleOffset = Schema.GetOffset(0xA26114043A764D4F);
-            return ref _Handle.AsRef<float>(_StartCycleOffset);
+            _StartCycleOffset = _StartCycleOffset ?? Schema.GetOffset(0xA26114043A764D4F);
+            return ref _Handle.AsRef<float>(_StartCycleOffset!.Value);
         }
     }
-    private static nint _EndCycleOffset = -1;
+    private static nint? _EndCycleOffset;
 
     public ref float EndCycle
     {
         get
         {
-            if (_EndCycleOffset == -1) _EndCycleOffset = Schema.GetOffset(0xA26114040B523694);
-            return ref _Handle.AsRef<float>(_EndCycleOffset);
+            _EndCycleOffset = _EndCycleOffset ?? Schema.GetOffset(0xA26114040B523694);
+            return ref _Handle.AsRef<float>(_EndCycleOffset!.Value);
         }
     }
 

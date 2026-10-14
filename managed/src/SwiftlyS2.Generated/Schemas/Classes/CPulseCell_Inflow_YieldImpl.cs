@@ -16,16 +16,16 @@ internal partial class CPulseCell_Inflow_YieldImpl : CPulseCell_BaseYieldingInfl
 {
     public CPulseCell_Inflow_YieldImpl(nint handle) : base(handle) { }
 
-    private static nint _UnyieldResumeOffset = -1;
+    private static nint? _UnyieldResumeOffset;
     private CPulse_ResumePointImpl? _UnyieldResumeInstance;
 
     public CPulse_ResumePoint UnyieldResume
     {
         get
         {
-            if (_UnyieldResumeOffset == -1) _UnyieldResumeOffset = Schema.GetOffset(0x1A4BFE3D504DFCDC);
+            _UnyieldResumeOffset = _UnyieldResumeOffset ?? Schema.GetOffset(0x1A4BFE3D504DFCDC);
             var instance = _UnyieldResumeInstance ??= new CPulse_ResumePointImpl(0);
-            instance.DangerousSetHandle(_Handle + _UnyieldResumeOffset);
+            instance.DangerousSetHandle(_Handle + _UnyieldResumeOffset!.Value);
             return instance;
         }
     }

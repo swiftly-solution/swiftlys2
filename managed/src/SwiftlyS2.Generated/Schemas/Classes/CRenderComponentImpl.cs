@@ -16,54 +16,54 @@ internal partial class CRenderComponentImpl : CEntityComponentImpl, CRenderCompo
 {
     public CRenderComponentImpl(nint handle) : base(handle) { }
 
-    private static nint ___m_pChainEntityOffset = -1;
+    private static nint? ___m_pChainEntityOffset;
 
     public ref CNetworkVarChainer __m_pChainEntity
     {
         get
         {
-            if (___m_pChainEntityOffset == -1) ___m_pChainEntityOffset = Schema.GetOffset(0x8830FA5F63F0E7D);
-            return ref _Handle.AsRef<CNetworkVarChainer>(___m_pChainEntityOffset);
+            ___m_pChainEntityOffset = ___m_pChainEntityOffset ?? Schema.GetOffset(0x8830FA5F63F0E7D);
+            return ref _Handle.AsRef<CNetworkVarChainer>(___m_pChainEntityOffset!.Value);
         }
     }
-    private static nint _IsRenderingWithViewModelsOffset = -1;
+    private static nint? _IsRenderingWithViewModelsOffset;
 
     public ref bool IsRenderingWithViewModels
     {
         get
         {
-            if (_IsRenderingWithViewModelsOffset == -1) _IsRenderingWithViewModelsOffset = Schema.GetOffset(0x8830FA5700AA428);
-            return ref _Handle.AsRef<bool>(_IsRenderingWithViewModelsOffset);
+            _IsRenderingWithViewModelsOffset = _IsRenderingWithViewModelsOffset ?? Schema.GetOffset(0x8830FA5700AA428);
+            return ref _Handle.AsRef<bool>(_IsRenderingWithViewModelsOffset!.Value);
         }
     }
-    private static nint _SplitscreenFlagsOffset = -1;
+    private static nint? _SplitscreenFlagsOffset;
 
     public ref uint SplitscreenFlags
     {
         get
         {
-            if (_SplitscreenFlagsOffset == -1) _SplitscreenFlagsOffset = Schema.GetOffset(0x8830FA5CACF9032);
-            return ref _Handle.AsRef<uint>(_SplitscreenFlagsOffset);
+            _SplitscreenFlagsOffset = _SplitscreenFlagsOffset ?? Schema.GetOffset(0x8830FA5CACF9032);
+            return ref _Handle.AsRef<uint>(_SplitscreenFlagsOffset!.Value);
         }
     }
-    private static nint _EnableRenderingOffset = -1;
+    private static nint? _EnableRenderingOffset;
 
     public ref bool EnableRendering
     {
         get
         {
-            if (_EnableRenderingOffset == -1) _EnableRenderingOffset = Schema.GetOffset(0x8830FA50FAC7C5E);
-            return ref _Handle.AsRef<bool>(_EnableRenderingOffset);
+            _EnableRenderingOffset = _EnableRenderingOffset ?? Schema.GetOffset(0x8830FA50FAC7C5E);
+            return ref _Handle.AsRef<bool>(_EnableRenderingOffset!.Value);
         }
     }
-    private static nint _InterpolationReadyToDrawOffset = -1;
+    private static nint? _InterpolationReadyToDrawOffset;
 
     public ref bool InterpolationReadyToDraw
     {
         get
         {
-            if (_InterpolationReadyToDrawOffset == -1) _InterpolationReadyToDrawOffset = Schema.GetOffset(0x8830FA51A075A53);
-            return ref _Handle.AsRef<bool>(_InterpolationReadyToDrawOffset);
+            _InterpolationReadyToDrawOffset = _InterpolationReadyToDrawOffset ?? Schema.GetOffset(0x8830FA51A075A53);
+            return ref _Handle.AsRef<bool>(_InterpolationReadyToDrawOffset!.Value);
         }
     }
 

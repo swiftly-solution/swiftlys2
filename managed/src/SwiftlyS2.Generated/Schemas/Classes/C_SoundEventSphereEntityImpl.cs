@@ -16,14 +16,14 @@ internal partial class C_SoundEventSphereEntityImpl : C_SoundEventEntityImpl, C_
 {
     public C_SoundEventSphereEntityImpl(nint handle) : base(handle) { }
 
-    private static nint _RadiusOffset = -1;
+    private static nint? _RadiusOffset;
 
     public ref float Radius
     {
         get
         {
-            if (_RadiusOffset == -1) _RadiusOffset = Schema.GetOffset(0x551C00B05ACFC08D);
-            return ref _Handle.AsRef<float>(_RadiusOffset);
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x551C00B05ACFC08D);
+            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
         }
     }
 

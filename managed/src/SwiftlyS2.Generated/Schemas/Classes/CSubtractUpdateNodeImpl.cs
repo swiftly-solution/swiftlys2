@@ -16,44 +16,44 @@ internal partial class CSubtractUpdateNodeImpl : CBinaryUpdateNodeImpl, CSubtrac
 {
     public CSubtractUpdateNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _FootMotionTimingOffset = -1;
+    private static nint? _FootMotionTimingOffset;
 
     public ref BinaryNodeChildOption FootMotionTiming
     {
         get
         {
-            if (_FootMotionTimingOffset == -1) _FootMotionTimingOffset = Schema.GetOffset(0x108B5B3FBB17F13D);
-            return ref _Handle.AsRef<BinaryNodeChildOption>(_FootMotionTimingOffset);
+            _FootMotionTimingOffset = _FootMotionTimingOffset ?? Schema.GetOffset(0x108B5B3FBB17F13D);
+            return ref _Handle.AsRef<BinaryNodeChildOption>(_FootMotionTimingOffset!.Value);
         }
     }
-    private static nint _ApplyToFootMotionOffset = -1;
+    private static nint? _ApplyToFootMotionOffset;
 
     public ref bool ApplyToFootMotion
     {
         get
         {
-            if (_ApplyToFootMotionOffset == -1) _ApplyToFootMotionOffset = Schema.GetOffset(0x108B5B3F3D831E94);
-            return ref _Handle.AsRef<bool>(_ApplyToFootMotionOffset);
+            _ApplyToFootMotionOffset = _ApplyToFootMotionOffset ?? Schema.GetOffset(0x108B5B3F3D831E94);
+            return ref _Handle.AsRef<bool>(_ApplyToFootMotionOffset!.Value);
         }
     }
-    private static nint _ApplyChannelsSeparatelyOffset = -1;
+    private static nint? _ApplyChannelsSeparatelyOffset;
 
     public ref bool ApplyChannelsSeparately
     {
         get
         {
-            if (_ApplyChannelsSeparatelyOffset == -1) _ApplyChannelsSeparatelyOffset = Schema.GetOffset(0x108B5B3FFF2DBB45);
-            return ref _Handle.AsRef<bool>(_ApplyChannelsSeparatelyOffset);
+            _ApplyChannelsSeparatelyOffset = _ApplyChannelsSeparatelyOffset ?? Schema.GetOffset(0x108B5B3FFF2DBB45);
+            return ref _Handle.AsRef<bool>(_ApplyChannelsSeparatelyOffset!.Value);
         }
     }
-    private static nint _UseModelSpaceOffset = -1;
+    private static nint? _UseModelSpaceOffset;
 
     public ref bool UseModelSpace
     {
         get
         {
-            if (_UseModelSpaceOffset == -1) _UseModelSpaceOffset = Schema.GetOffset(0x108B5B3F48863521);
-            return ref _Handle.AsRef<bool>(_UseModelSpaceOffset);
+            _UseModelSpaceOffset = _UseModelSpaceOffset ?? Schema.GetOffset(0x108B5B3F48863521);
+            return ref _Handle.AsRef<bool>(_UseModelSpaceOffset!.Value);
         }
     }
 

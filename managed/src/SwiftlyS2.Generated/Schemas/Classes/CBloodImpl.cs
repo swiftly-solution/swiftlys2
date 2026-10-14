@@ -16,44 +16,44 @@ internal partial class CBloodImpl : CPointEntityImpl, CBlood
 {
     public CBloodImpl(nint handle) : base(handle) { }
 
-    private static nint _SprayAnglesOffset = -1;
+    private static nint? _SprayAnglesOffset;
 
     public ref QAngle SprayAngles
     {
         get
         {
-            if (_SprayAnglesOffset == -1) _SprayAnglesOffset = Schema.GetOffset(0x68CF460A2BDF444E);
-            return ref _Handle.AsRef<QAngle>(_SprayAnglesOffset);
+            _SprayAnglesOffset = _SprayAnglesOffset ?? Schema.GetOffset(0x68CF460A2BDF444E);
+            return ref _Handle.AsRef<QAngle>(_SprayAnglesOffset!.Value);
         }
     }
-    private static nint _SprayDirOffset = -1;
+    private static nint? _SprayDirOffset;
 
     public ref Vector SprayDir
     {
         get
         {
-            if (_SprayDirOffset == -1) _SprayDirOffset = Schema.GetOffset(0x68CF460A0A8A2531);
-            return ref _Handle.AsRef<Vector>(_SprayDirOffset);
+            _SprayDirOffset = _SprayDirOffset ?? Schema.GetOffset(0x68CF460A0A8A2531);
+            return ref _Handle.AsRef<Vector>(_SprayDirOffset!.Value);
         }
     }
-    private static nint _AmountOffset = -1;
+    private static nint? _AmountOffset;
 
     public ref float Amount
     {
         get
         {
-            if (_AmountOffset == -1) _AmountOffset = Schema.GetOffset(0x68CF460A187D1B1B);
-            return ref _Handle.AsRef<float>(_AmountOffset);
+            _AmountOffset = _AmountOffset ?? Schema.GetOffset(0x68CF460A187D1B1B);
+            return ref _Handle.AsRef<float>(_AmountOffset!.Value);
         }
     }
-    private static nint _ColorOffset = -1;
+    private static nint? _ColorOffset;
 
     public ref BloodType Color
     {
         get
         {
-            if (_ColorOffset == -1) _ColorOffset = Schema.GetOffset(0x68CF460AD7D017D8);
-            return ref _Handle.AsRef<BloodType>(_ColorOffset);
+            _ColorOffset = _ColorOffset ?? Schema.GetOffset(0x68CF460AD7D017D8);
+            return ref _Handle.AsRef<BloodType>(_ColorOffset!.Value);
         }
     }
 

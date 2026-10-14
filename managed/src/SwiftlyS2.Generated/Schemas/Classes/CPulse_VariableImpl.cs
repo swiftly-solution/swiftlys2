@@ -16,113 +16,113 @@ internal partial class CPulse_VariableImpl : SchemaClass, CPulse_Variable
 {
     public CPulse_VariableImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
     private SchemaUntypedField? _NameInstance;
 
     public SchemaUntypedField Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x598DEA5CCAE8A266);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x598DEA5CCAE8A266);
             var instance = _NameInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _NameOffset);
+            instance.DangerousSetHandle(_Handle + _NameOffset!.Value);
             return instance;
         }
     }
-    private static nint _DescriptionOffset = -1;
+    private static nint? _DescriptionOffset;
 
     public string Description
     {
         get
         {
-            if (_DescriptionOffset == -1) _DescriptionOffset = Schema.GetOffset(0x598DEA5C678744E9);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_DescriptionOffset));
+            _DescriptionOffset = _DescriptionOffset ?? Schema.GetOffset(0x598DEA5C678744E9);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_DescriptionOffset!.Value));
         }
         set
         {
-            if (_DescriptionOffset == -1) _DescriptionOffset = Schema.GetOffset(0x598DEA5C678744E9);
-            Schema.SetCUtlString(_Handle, _DescriptionOffset, value);
+            _DescriptionOffset = _DescriptionOffset ?? Schema.GetOffset(0x598DEA5C678744E9);
+            Schema.SetCUtlString(_Handle, _DescriptionOffset!.Value, value);
         }
     }
-    private static nint _TypeOffset = -1;
+    private static nint? _TypeOffset;
     private SchemaUntypedField? _TypeInstance;
 
     public SchemaUntypedField Type
     {
         get
         {
-            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0x598DEA5C8ED6D5CD);
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x598DEA5C8ED6D5CD);
             var instance = _TypeInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _TypeOffset);
+            instance.DangerousSetHandle(_Handle + _TypeOffset!.Value);
             return instance;
         }
     }
-    private static nint _DefaultValueOffset = -1;
+    private static nint? _DefaultValueOffset;
     private SchemaUntypedField? _DefaultValueInstance;
 
     public SchemaUntypedField DefaultValue
     {
         get
         {
-            if (_DefaultValueOffset == -1) _DefaultValueOffset = Schema.GetOffset(0x598DEA5CC6E9593F);
+            _DefaultValueOffset = _DefaultValueOffset ?? Schema.GetOffset(0x598DEA5CC6E9593F);
             var instance = _DefaultValueInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _DefaultValueOffset);
+            instance.DangerousSetHandle(_Handle + _DefaultValueOffset!.Value);
             return instance;
         }
     }
-    private static nint _KeysSourceOffset = -1;
+    private static nint? _KeysSourceOffset;
 
     public ref PulseVariableKeysSource_t KeysSource
     {
         get
         {
-            if (_KeysSourceOffset == -1) _KeysSourceOffset = Schema.GetOffset(0x598DEA5CE4356F4C);
-            return ref _Handle.AsRef<PulseVariableKeysSource_t>(_KeysSourceOffset);
+            _KeysSourceOffset = _KeysSourceOffset ?? Schema.GetOffset(0x598DEA5CE4356F4C);
+            return ref _Handle.AsRef<PulseVariableKeysSource_t>(_KeysSourceOffset!.Value);
         }
     }
-    private static nint _IsPublicBlackboardVariableOffset = -1;
+    private static nint? _IsPublicBlackboardVariableOffset;
 
     public ref bool IsPublicBlackboardVariable
     {
         get
         {
-            if (_IsPublicBlackboardVariableOffset == -1) _IsPublicBlackboardVariableOffset = Schema.GetOffset(0x598DEA5C9CD44561);
-            return ref _Handle.AsRef<bool>(_IsPublicBlackboardVariableOffset);
+            _IsPublicBlackboardVariableOffset = _IsPublicBlackboardVariableOffset ?? Schema.GetOffset(0x598DEA5C9CD44561);
+            return ref _Handle.AsRef<bool>(_IsPublicBlackboardVariableOffset!.Value);
         }
     }
-    private static nint _IsObservableOffset = -1;
+    private static nint? _IsObservableOffset;
 
     public ref bool IsObservable
     {
         get
         {
-            if (_IsObservableOffset == -1) _IsObservableOffset = Schema.GetOffset(0x598DEA5C60684D58);
-            return ref _Handle.AsRef<bool>(_IsObservableOffset);
+            _IsObservableOffset = _IsObservableOffset ?? Schema.GetOffset(0x598DEA5C60684D58);
+            return ref _Handle.AsRef<bool>(_IsObservableOffset!.Value);
         }
     }
-    private static nint _EditorNodeIDOffset = -1;
+    private static nint? _EditorNodeIDOffset;
     private PulseDocNodeID_tImpl? _EditorNodeIDInstance;
 
     public PulseDocNodeID_t EditorNodeID
     {
         get
         {
-            if (_EditorNodeIDOffset == -1) _EditorNodeIDOffset = Schema.GetOffset(0x598DEA5C8D964CBD);
+            _EditorNodeIDOffset = _EditorNodeIDOffset ?? Schema.GetOffset(0x598DEA5C8D964CBD);
             var instance = _EditorNodeIDInstance ??= new PulseDocNodeID_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _EditorNodeIDOffset);
+            instance.DangerousSetHandle(_Handle + _EditorNodeIDOffset!.Value);
             return instance;
         }
     }
-    private static nint _MetadataOffset = -1;
+    private static nint? _MetadataOffset;
     private SchemaUntypedField? _MetadataInstance;
 
     public SchemaUntypedField Metadata
     {
         get
         {
-            if (_MetadataOffset == -1) _MetadataOffset = Schema.GetOffset(0x598DEA5CCEFAFFC0);
+            _MetadataOffset = _MetadataOffset ?? Schema.GetOffset(0x598DEA5CCEFAFFC0);
             var instance = _MetadataInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _MetadataOffset);
+            instance.DangerousSetHandle(_Handle + _MetadataOffset!.Value);
             return instance;
         }
     }

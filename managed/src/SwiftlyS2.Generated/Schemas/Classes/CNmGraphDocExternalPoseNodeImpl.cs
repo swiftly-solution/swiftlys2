@@ -16,14 +16,14 @@ internal partial class CNmGraphDocExternalPoseNodeImpl : CNmGraphDocFlowNodeImpl
 {
     public CNmGraphDocExternalPoseNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _ShouldSampleRootMotionOffset = -1;
+    private static nint? _ShouldSampleRootMotionOffset;
 
     public ref bool ShouldSampleRootMotion
     {
         get
         {
-            if (_ShouldSampleRootMotionOffset == -1) _ShouldSampleRootMotionOffset = Schema.GetOffset(0xAAD2AEE352E61F0A);
-            return ref _Handle.AsRef<bool>(_ShouldSampleRootMotionOffset);
+            _ShouldSampleRootMotionOffset = _ShouldSampleRootMotionOffset ?? Schema.GetOffset(0xAAD2AEE352E61F0A);
+            return ref _Handle.AsRef<bool>(_ShouldSampleRootMotionOffset!.Value);
         }
     }
 

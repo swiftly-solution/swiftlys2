@@ -16,14 +16,14 @@ internal partial class CMixSplitterBlendImpl : CMixPropertyBaseImpl, CMixSplitte
 {
     public CMixSplitterBlendImpl(nint handle) : base(handle) { }
 
-    private static nint _LockAmountOffset = -1;
+    private static nint? _LockAmountOffset;
 
     public ref float LockAmount
     {
         get
         {
-            if (_LockAmountOffset == -1) _LockAmountOffset = Schema.GetOffset(0x9B8D35AE2127E334);
-            return ref _Handle.AsRef<float>(_LockAmountOffset);
+            _LockAmountOffset = _LockAmountOffset ?? Schema.GetOffset(0x9B8D35AE2127E334);
+            return ref _Handle.AsRef<float>(_LockAmountOffset!.Value);
         }
     }
 

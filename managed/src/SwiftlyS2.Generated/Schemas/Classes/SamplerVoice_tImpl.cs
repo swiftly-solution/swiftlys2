@@ -16,14 +16,14 @@ internal partial class SamplerVoice_tImpl : SchemaClass, SamplerVoice_t
 {
     public SamplerVoice_tImpl(nint handle) : base(handle) { }
 
-    private static nint _NoteNumOffset = -1;
+    private static nint? _NoteNumOffset;
 
     public ref byte NoteNum
     {
         get
         {
-            if (_NoteNumOffset == -1) _NoteNumOffset = Schema.GetOffset(0x406618906990C347);
-            return ref _Handle.AsRef<byte>(_NoteNumOffset);
+            _NoteNumOffset = _NoteNumOffset ?? Schema.GetOffset(0x406618906990C347);
+            return ref _Handle.AsRef<byte>(_NoteNumOffset!.Value);
         }
     }
 

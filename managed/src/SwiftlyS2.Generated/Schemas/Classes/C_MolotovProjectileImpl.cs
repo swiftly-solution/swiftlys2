@@ -16,14 +16,14 @@ internal partial class C_MolotovProjectileImpl : C_BaseCSGrenadeProjectileImpl, 
 {
     public C_MolotovProjectileImpl(nint handle) : base(handle) { }
 
-    private static nint _IsIncGrenadeOffset = -1;
+    private static nint? _IsIncGrenadeOffset;
 
     public ref bool IsIncGrenade
     {
         get
         {
-            if (_IsIncGrenadeOffset == -1) _IsIncGrenadeOffset = Schema.GetOffset(0xF6CA69EC9D1C12B7);
-            return ref _Handle.AsRef<bool>(_IsIncGrenadeOffset);
+            _IsIncGrenadeOffset = _IsIncGrenadeOffset ?? Schema.GetOffset(0xF6CA69EC9D1C12B7);
+            return ref _Handle.AsRef<bool>(_IsIncGrenadeOffset!.Value);
         }
     }
 

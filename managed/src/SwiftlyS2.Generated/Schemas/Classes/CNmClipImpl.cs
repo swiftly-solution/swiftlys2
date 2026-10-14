@@ -16,146 +16,146 @@ internal partial class CNmClipImpl : SchemaClass, CNmClip
 {
     public CNmClipImpl(nint handle) : base(handle) { }
 
-    private static nint _SkeletonOffset = -1;
+    private static nint? _SkeletonOffset;
 
     public ref CStrongHandle<InfoForResourceTypeCNmSkeleton> Skeleton
     {
         get
         {
-            if (_SkeletonOffset == -1) _SkeletonOffset = Schema.GetOffset(0x3FC883BDE77F030E);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCNmSkeleton>>(_SkeletonOffset);
+            _SkeletonOffset = _SkeletonOffset ?? Schema.GetOffset(0x3FC883BDE77F030E);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCNmSkeleton>>(_SkeletonOffset!.Value);
         }
     }
-    private static nint _NumFramesOffset = -1;
+    private static nint? _NumFramesOffset;
 
     public ref uint NumFrames
     {
         get
         {
-            if (_NumFramesOffset == -1) _NumFramesOffset = Schema.GetOffset(0x3FC883BDF764C355);
-            return ref _Handle.AsRef<uint>(_NumFramesOffset);
+            _NumFramesOffset = _NumFramesOffset ?? Schema.GetOffset(0x3FC883BDF764C355);
+            return ref _Handle.AsRef<uint>(_NumFramesOffset!.Value);
         }
     }
-    private static nint _DurationOffset = -1;
+    private static nint? _DurationOffset;
 
     public ref float Duration
     {
         get
         {
-            if (_DurationOffset == -1) _DurationOffset = Schema.GetOffset(0x3FC883BDBC5E3BAB);
-            return ref _Handle.AsRef<float>(_DurationOffset);
+            _DurationOffset = _DurationOffset ?? Schema.GetOffset(0x3FC883BDBC5E3BAB);
+            return ref _Handle.AsRef<float>(_DurationOffset!.Value);
         }
     }
-    private static nint _CompressedPoseDataOffset = -1;
+    private static nint? _CompressedPoseDataOffset;
 
     public ref CUtlBinaryBlock CompressedPoseData
     {
         get
         {
-            if (_CompressedPoseDataOffset == -1) _CompressedPoseDataOffset = Schema.GetOffset(0x3FC883BDDD916D11);
-            return ref _Handle.AsRef<CUtlBinaryBlock>(_CompressedPoseDataOffset);
+            _CompressedPoseDataOffset = _CompressedPoseDataOffset ?? Schema.GetOffset(0x3FC883BDDD916D11);
+            return ref _Handle.AsRef<CUtlBinaryBlock>(_CompressedPoseDataOffset!.Value);
         }
     }
-    private static nint _TrackCompressionSettingsOffset = -1;
+    private static nint? _TrackCompressionSettingsOffset;
 
     public ref CUtlVector<NmCompressionSettings_t> TrackCompressionSettings
     {
         get
         {
-            if (_TrackCompressionSettingsOffset == -1) _TrackCompressionSettingsOffset = Schema.GetOffset(0x3FC883BD94A50263);
-            return ref _Handle.AsRef<CUtlVector<NmCompressionSettings_t>>(_TrackCompressionSettingsOffset);
+            _TrackCompressionSettingsOffset = _TrackCompressionSettingsOffset ?? Schema.GetOffset(0x3FC883BD94A50263);
+            return ref _Handle.AsRef<CUtlVector<NmCompressionSettings_t>>(_TrackCompressionSettingsOffset!.Value);
         }
     }
-    private static nint _CompressedPoseOffsetsOffset = -1;
+    private static nint? _CompressedPoseOffsetsOffset;
 
     public ref CUtlVector<uint> CompressedPoseOffsets
     {
         get
         {
-            if (_CompressedPoseOffsetsOffset == -1) _CompressedPoseOffsetsOffset = Schema.GetOffset(0x3FC883BD4B1ECAF7);
-            return ref _Handle.AsRef<CUtlVector<uint>>(_CompressedPoseOffsetsOffset);
+            _CompressedPoseOffsetsOffset = _CompressedPoseOffsetsOffset ?? Schema.GetOffset(0x3FC883BD4B1ECAF7);
+            return ref _Handle.AsRef<CUtlVector<uint>>(_CompressedPoseOffsetsOffset!.Value);
         }
     }
-    private static nint _SecondaryAnimationsOffset = -1;
+    private static nint? _SecondaryAnimationsOffset;
     private SchemaUntypedField? _SecondaryAnimationsInstance;
 
     public SchemaUntypedField SecondaryAnimations
     {
         get
         {
-            if (_SecondaryAnimationsOffset == -1) _SecondaryAnimationsOffset = Schema.GetOffset(0x3FC883BD9A6B439E);
+            _SecondaryAnimationsOffset = _SecondaryAnimationsOffset ?? Schema.GetOffset(0x3FC883BD9A6B439E);
             var instance = _SecondaryAnimationsInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _SecondaryAnimationsOffset);
+            instance.DangerousSetHandle(_Handle + _SecondaryAnimationsOffset!.Value);
             return instance;
         }
     }
-    private static nint _FloatChannelDataOffset = -1;
+    private static nint? _FloatChannelDataOffset;
     private SchemaUntypedField? _FloatChannelDataInstance;
 
     public SchemaUntypedField FloatChannelData
     {
         get
         {
-            if (_FloatChannelDataOffset == -1) _FloatChannelDataOffset = Schema.GetOffset(0x3FC883BD03D8C18C);
+            _FloatChannelDataOffset = _FloatChannelDataOffset ?? Schema.GetOffset(0x3FC883BD03D8C18C);
             var instance = _FloatChannelDataInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _FloatChannelDataOffset);
+            instance.DangerousSetHandle(_Handle + _FloatChannelDataOffset!.Value);
             return instance;
         }
     }
-    private static nint _SyncTrackOffset = -1;
+    private static nint? _SyncTrackOffset;
     private CNmSyncTrackImpl? _SyncTrackInstance;
 
     public CNmSyncTrack SyncTrack
     {
         get
         {
-            if (_SyncTrackOffset == -1) _SyncTrackOffset = Schema.GetOffset(0x3FC883BDB268BEE9);
+            _SyncTrackOffset = _SyncTrackOffset ?? Schema.GetOffset(0x3FC883BDB268BEE9);
             var instance = _SyncTrackInstance ??= new CNmSyncTrackImpl(0);
-            instance.DangerousSetHandle(_Handle + _SyncTrackOffset);
+            instance.DangerousSetHandle(_Handle + _SyncTrackOffset!.Value);
             return instance;
         }
     }
-    private static nint _RootMotionOffset = -1;
+    private static nint? _RootMotionOffset;
     private CNmRootMotionDataImpl? _RootMotionInstance;
 
     public CNmRootMotionData RootMotion
     {
         get
         {
-            if (_RootMotionOffset == -1) _RootMotionOffset = Schema.GetOffset(0x3FC883BD664A3F27);
+            _RootMotionOffset = _RootMotionOffset ?? Schema.GetOffset(0x3FC883BD664A3F27);
             var instance = _RootMotionInstance ??= new CNmRootMotionDataImpl(0);
-            instance.DangerousSetHandle(_Handle + _RootMotionOffset);
+            instance.DangerousSetHandle(_Handle + _RootMotionOffset!.Value);
             return instance;
         }
     }
-    private static nint _IsAdditiveOffset = -1;
+    private static nint? _IsAdditiveOffset;
 
     public ref bool IsAdditive
     {
         get
         {
-            if (_IsAdditiveOffset == -1) _IsAdditiveOffset = Schema.GetOffset(0x3FC883BD4146EEF5);
-            return ref _Handle.AsRef<bool>(_IsAdditiveOffset);
+            _IsAdditiveOffset = _IsAdditiveOffset ?? Schema.GetOffset(0x3FC883BD4146EEF5);
+            return ref _Handle.AsRef<bool>(_IsAdditiveOffset!.Value);
         }
     }
-    private static nint _ModelSpaceSamplingChainOffset = -1;
+    private static nint? _ModelSpaceSamplingChainOffset;
 
     public ref CUtlVector<CNmClip__ModelSpaceSamplingChainLink_t> ModelSpaceSamplingChain
     {
         get
         {
-            if (_ModelSpaceSamplingChainOffset == -1) _ModelSpaceSamplingChainOffset = Schema.GetOffset(0x3FC883BD54666BDA);
-            return ref _Handle.AsRef<CUtlVector<CNmClip__ModelSpaceSamplingChainLink_t>>(_ModelSpaceSamplingChainOffset);
+            _ModelSpaceSamplingChainOffset = _ModelSpaceSamplingChainOffset ?? Schema.GetOffset(0x3FC883BD54666BDA);
+            return ref _Handle.AsRef<CUtlVector<CNmClip__ModelSpaceSamplingChainLink_t>>(_ModelSpaceSamplingChainOffset!.Value);
         }
     }
-    private static nint _ModelSpaceBoneSamplingIndicesOffset = -1;
+    private static nint? _ModelSpaceBoneSamplingIndicesOffset;
 
     public ref CUtlVector<int> ModelSpaceBoneSamplingIndices
     {
         get
         {
-            if (_ModelSpaceBoneSamplingIndicesOffset == -1) _ModelSpaceBoneSamplingIndicesOffset = Schema.GetOffset(0x3FC883BD197B4A28);
-            return ref _Handle.AsRef<CUtlVector<int>>(_ModelSpaceBoneSamplingIndicesOffset);
+            _ModelSpaceBoneSamplingIndicesOffset = _ModelSpaceBoneSamplingIndicesOffset ?? Schema.GetOffset(0x3FC883BD197B4A28);
+            return ref _Handle.AsRef<CUtlVector<int>>(_ModelSpaceBoneSamplingIndicesOffset!.Value);
         }
     }
 

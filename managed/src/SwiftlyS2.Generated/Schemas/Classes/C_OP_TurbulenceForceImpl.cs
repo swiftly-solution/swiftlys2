@@ -16,84 +16,84 @@ internal partial class C_OP_TurbulenceForceImpl : CParticleFunctionForceImpl, C_
 {
     public C_OP_TurbulenceForceImpl(nint handle) : base(handle) { }
 
-    private static nint _NoiseCoordScale0Offset = -1;
+    private static nint? _NoiseCoordScale0Offset;
 
     public ref float NoiseCoordScale0
     {
         get
         {
-            if (_NoiseCoordScale0Offset == -1) _NoiseCoordScale0Offset = Schema.GetOffset(0xCAE57FA75C19EC96);
-            return ref _Handle.AsRef<float>(_NoiseCoordScale0Offset);
+            _NoiseCoordScale0Offset = _NoiseCoordScale0Offset ?? Schema.GetOffset(0xCAE57FA75C19EC96);
+            return ref _Handle.AsRef<float>(_NoiseCoordScale0Offset!.Value);
         }
     }
-    private static nint _NoiseCoordScale1Offset = -1;
+    private static nint? _NoiseCoordScale1Offset;
 
     public ref float NoiseCoordScale1
     {
         get
         {
-            if (_NoiseCoordScale1Offset == -1) _NoiseCoordScale1Offset = Schema.GetOffset(0xCAE57FA75D19EE29);
-            return ref _Handle.AsRef<float>(_NoiseCoordScale1Offset);
+            _NoiseCoordScale1Offset = _NoiseCoordScale1Offset ?? Schema.GetOffset(0xCAE57FA75D19EE29);
+            return ref _Handle.AsRef<float>(_NoiseCoordScale1Offset!.Value);
         }
     }
-    private static nint _NoiseCoordScale2Offset = -1;
+    private static nint? _NoiseCoordScale2Offset;
 
     public ref float NoiseCoordScale2
     {
         get
         {
-            if (_NoiseCoordScale2Offset == -1) _NoiseCoordScale2Offset = Schema.GetOffset(0xCAE57FA75A19E970);
-            return ref _Handle.AsRef<float>(_NoiseCoordScale2Offset);
+            _NoiseCoordScale2Offset = _NoiseCoordScale2Offset ?? Schema.GetOffset(0xCAE57FA75A19E970);
+            return ref _Handle.AsRef<float>(_NoiseCoordScale2Offset!.Value);
         }
     }
-    private static nint _NoiseCoordScale3Offset = -1;
+    private static nint? _NoiseCoordScale3Offset;
 
     public ref float NoiseCoordScale3
     {
         get
         {
-            if (_NoiseCoordScale3Offset == -1) _NoiseCoordScale3Offset = Schema.GetOffset(0xCAE57FA75B19EB03);
-            return ref _Handle.AsRef<float>(_NoiseCoordScale3Offset);
+            _NoiseCoordScale3Offset = _NoiseCoordScale3Offset ?? Schema.GetOffset(0xCAE57FA75B19EB03);
+            return ref _Handle.AsRef<float>(_NoiseCoordScale3Offset!.Value);
         }
     }
-    private static nint _NoiseAmount0Offset = -1;
+    private static nint? _NoiseAmount0Offset;
 
     public ref Vector NoiseAmount0
     {
         get
         {
-            if (_NoiseAmount0Offset == -1) _NoiseAmount0Offset = Schema.GetOffset(0xCAE57FA767BF95F7);
-            return ref _Handle.AsRef<Vector>(_NoiseAmount0Offset);
+            _NoiseAmount0Offset = _NoiseAmount0Offset ?? Schema.GetOffset(0xCAE57FA767BF95F7);
+            return ref _Handle.AsRef<Vector>(_NoiseAmount0Offset!.Value);
         }
     }
-    private static nint _NoiseAmount1Offset = -1;
+    private static nint? _NoiseAmount1Offset;
 
     public ref Vector NoiseAmount1
     {
         get
         {
-            if (_NoiseAmount1Offset == -1) _NoiseAmount1Offset = Schema.GetOffset(0xCAE57FA766BF9464);
-            return ref _Handle.AsRef<Vector>(_NoiseAmount1Offset);
+            _NoiseAmount1Offset = _NoiseAmount1Offset ?? Schema.GetOffset(0xCAE57FA766BF9464);
+            return ref _Handle.AsRef<Vector>(_NoiseAmount1Offset!.Value);
         }
     }
-    private static nint _NoiseAmount2Offset = -1;
+    private static nint? _NoiseAmount2Offset;
 
     public ref Vector NoiseAmount2
     {
         get
         {
-            if (_NoiseAmount2Offset == -1) _NoiseAmount2Offset = Schema.GetOffset(0xCAE57FA769BF991D);
-            return ref _Handle.AsRef<Vector>(_NoiseAmount2Offset);
+            _NoiseAmount2Offset = _NoiseAmount2Offset ?? Schema.GetOffset(0xCAE57FA769BF991D);
+            return ref _Handle.AsRef<Vector>(_NoiseAmount2Offset!.Value);
         }
     }
-    private static nint _NoiseAmount3Offset = -1;
+    private static nint? _NoiseAmount3Offset;
 
     public ref Vector NoiseAmount3
     {
         get
         {
-            if (_NoiseAmount3Offset == -1) _NoiseAmount3Offset = Schema.GetOffset(0xCAE57FA768BF978A);
-            return ref _Handle.AsRef<Vector>(_NoiseAmount3Offset);
+            _NoiseAmount3Offset = _NoiseAmount3Offset ?? Schema.GetOffset(0xCAE57FA768BF978A);
+            return ref _Handle.AsRef<Vector>(_NoiseAmount3Offset!.Value);
         }
     }
 

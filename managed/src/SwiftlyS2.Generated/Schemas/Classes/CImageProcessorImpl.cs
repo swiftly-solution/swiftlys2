@@ -16,44 +16,44 @@ internal partial class CImageProcessorImpl : SchemaClass, CImageProcessor
 {
     public CImageProcessorImpl(nint handle) : base(handle) { }
 
-    private static nint _AlgorithmOffset = -1;
+    private static nint? _AlgorithmOffset;
 
     public string Algorithm
     {
         get
         {
-            if (_AlgorithmOffset == -1) _AlgorithmOffset = Schema.GetOffset(0xE8F19659265CAE8A);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_AlgorithmOffset));
+            _AlgorithmOffset = _AlgorithmOffset ?? Schema.GetOffset(0xE8F19659265CAE8A);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_AlgorithmOffset!.Value));
         }
         set
         {
-            if (_AlgorithmOffset == -1) _AlgorithmOffset = Schema.GetOffset(0xE8F19659265CAE8A);
-            Schema.SetCUtlString(_Handle, _AlgorithmOffset, value);
+            _AlgorithmOffset = _AlgorithmOffset ?? Schema.GetOffset(0xE8F19659265CAE8A);
+            Schema.SetCUtlString(_Handle, _AlgorithmOffset!.Value, value);
         }
     }
-    private static nint _StringArgOffset = -1;
+    private static nint? _StringArgOffset;
 
     public string StringArg
     {
         get
         {
-            if (_StringArgOffset == -1) _StringArgOffset = Schema.GetOffset(0xE8F19659FCB5D804);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StringArgOffset));
+            _StringArgOffset = _StringArgOffset ?? Schema.GetOffset(0xE8F19659FCB5D804);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StringArgOffset!.Value));
         }
         set
         {
-            if (_StringArgOffset == -1) _StringArgOffset = Schema.GetOffset(0xE8F19659FCB5D804);
-            Schema.SetCUtlString(_Handle, _StringArgOffset, value);
+            _StringArgOffset = _StringArgOffset ?? Schema.GetOffset(0xE8F19659FCB5D804);
+            Schema.SetCUtlString(_Handle, _StringArgOffset!.Value, value);
         }
     }
-    private static nint _Float4ArgOffset = -1;
+    private static nint? _Float4ArgOffset;
 
     public ref Vector4D Float4Arg
     {
         get
         {
-            if (_Float4ArgOffset == -1) _Float4ArgOffset = Schema.GetOffset(0xE8F19659A8CDE8CD);
-            return ref _Handle.AsRef<Vector4D>(_Float4ArgOffset);
+            _Float4ArgOffset = _Float4ArgOffset ?? Schema.GetOffset(0xE8F19659A8CDE8CD);
+            return ref _Handle.AsRef<Vector4D>(_Float4ArgOffset!.Value);
         }
     }
 

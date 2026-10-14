@@ -16,54 +16,54 @@ internal partial class CNmGraphDocTransitionEventConditionNodeImpl : CNmGraphDoc
 {
     public CNmGraphDocTransitionEventConditionNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _RuleConditionOffset = -1;
+    private static nint? _RuleConditionOffset;
 
     public ref NmTransitionRuleCondition_t RuleCondition
     {
         get
         {
-            if (_RuleConditionOffset == -1) _RuleConditionOffset = Schema.GetOffset(0xCC79D357E5B98074);
-            return ref _Handle.AsRef<NmTransitionRuleCondition_t>(_RuleConditionOffset);
+            _RuleConditionOffset = _RuleConditionOffset ?? Schema.GetOffset(0xCC79D357E5B98074);
+            return ref _Handle.AsRef<NmTransitionRuleCondition_t>(_RuleConditionOffset!.Value);
         }
     }
-    private static nint _MatchOnlySpecificMarkerIDOffset = -1;
+    private static nint? _MatchOnlySpecificMarkerIDOffset;
 
     public ref bool MatchOnlySpecificMarkerID
     {
         get
         {
-            if (_MatchOnlySpecificMarkerIDOffset == -1) _MatchOnlySpecificMarkerIDOffset = Schema.GetOffset(0xCC79D3579DBF9E0F);
-            return ref _Handle.AsRef<bool>(_MatchOnlySpecificMarkerIDOffset);
+            _MatchOnlySpecificMarkerIDOffset = _MatchOnlySpecificMarkerIDOffset ?? Schema.GetOffset(0xCC79D3579DBF9E0F);
+            return ref _Handle.AsRef<bool>(_MatchOnlySpecificMarkerIDOffset!.Value);
         }
     }
-    private static nint _MarkerIDToMatchOffset = -1;
+    private static nint? _MarkerIDToMatchOffset;
 
     public ref CGlobalSymbol MarkerIDToMatch
     {
         get
         {
-            if (_MarkerIDToMatchOffset == -1) _MarkerIDToMatchOffset = Schema.GetOffset(0xCC79D357E5AB6988);
-            return ref _Handle.AsRef<CGlobalSymbol>(_MarkerIDToMatchOffset);
+            _MarkerIDToMatchOffset = _MarkerIDToMatchOffset ?? Schema.GetOffset(0xCC79D357E5AB6988);
+            return ref _Handle.AsRef<CGlobalSymbol>(_MarkerIDToMatchOffset!.Value);
         }
     }
-    private static nint _LimitSearchToSourceStateOffset = -1;
+    private static nint? _LimitSearchToSourceStateOffset;
 
     public ref bool LimitSearchToSourceState
     {
         get
         {
-            if (_LimitSearchToSourceStateOffset == -1) _LimitSearchToSourceStateOffset = Schema.GetOffset(0xCC79D35715D4BD01);
-            return ref _Handle.AsRef<bool>(_LimitSearchToSourceStateOffset);
+            _LimitSearchToSourceStateOffset = _LimitSearchToSourceStateOffset ?? Schema.GetOffset(0xCC79D35715D4BD01);
+            return ref _Handle.AsRef<bool>(_LimitSearchToSourceStateOffset!.Value);
         }
     }
-    private static nint _IgnoreInactiveBranchEventsOffset = -1;
+    private static nint? _IgnoreInactiveBranchEventsOffset;
 
     public ref bool IgnoreInactiveBranchEvents
     {
         get
         {
-            if (_IgnoreInactiveBranchEventsOffset == -1) _IgnoreInactiveBranchEventsOffset = Schema.GetOffset(0xCC79D35740B77877);
-            return ref _Handle.AsRef<bool>(_IgnoreInactiveBranchEventsOffset);
+            _IgnoreInactiveBranchEventsOffset = _IgnoreInactiveBranchEventsOffset ?? Schema.GetOffset(0xCC79D35740B77877);
+            return ref _Handle.AsRef<bool>(_IgnoreInactiveBranchEventsOffset!.Value);
         }
     }
 

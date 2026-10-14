@@ -16,94 +16,94 @@ internal partial class CDebugDrawHistoryDataImpl : SchemaClass, CDebugDrawHistor
 {
     public CDebugDrawHistoryDataImpl(nint handle) : base(handle) { }
 
-    private static nint _EntityOffset = -1;
+    private static nint? _EntityOffset;
 
     public ref CHandle<C_BaseEntity> Entity
     {
         get
         {
-            if (_EntityOffset == -1) _EntityOffset = Schema.GetOffset(0xC0AC823D6EBADCB0);
-            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_EntityOffset);
+            _EntityOffset = _EntityOffset ?? Schema.GetOffset(0xC0AC823D6EBADCB0);
+            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_EntityOffset!.Value);
         }
     }
-    private static nint _EtypeOffset = -1;
+    private static nint? _EtypeOffset;
 
     public ref ESceneViewDebugOverlaysListenerDataType_t Etype
     {
         get
         {
-            if (_EtypeOffset == -1) _EtypeOffset = Schema.GetOffset(0xC0AC823D9F0CE368);
-            return ref _Handle.AsRef<ESceneViewDebugOverlaysListenerDataType_t>(_EtypeOffset);
+            _EtypeOffset = _EtypeOffset ?? Schema.GetOffset(0xC0AC823D9F0CE368);
+            return ref _Handle.AsRef<ESceneViewDebugOverlaysListenerDataType_t>(_EtypeOffset!.Value);
         }
     }
-    private static nint _VectorsOffset = -1;
+    private static nint? _VectorsOffset;
 
     public ref CUtlLeanVector<Vector4D, int> Vectors
     {
         get
         {
-            if (_VectorsOffset == -1) _VectorsOffset = Schema.GetOffset(0xC0AC823D6B034803);
-            return ref _Handle.AsRef<CUtlLeanVector<Vector4D, int>>(_VectorsOffset);
+            _VectorsOffset = _VectorsOffset ?? Schema.GetOffset(0xC0AC823D6B034803);
+            return ref _Handle.AsRef<CUtlLeanVector<Vector4D, int>>(_VectorsOffset!.Value);
         }
     }
-    private static nint _ColorsOffset = -1;
+    private static nint? _ColorsOffset;
 
     public ref CUtlLeanVector<Color, int> Colors
     {
         get
         {
-            if (_ColorsOffset == -1) _ColorsOffset = Schema.GetOffset(0xC0AC823D945C0751);
-            return ref _Handle.AsRef<CUtlLeanVector<Color, int>>(_ColorsOffset);
+            _ColorsOffset = _ColorsOffset ?? Schema.GetOffset(0xC0AC823D945C0751);
+            return ref _Handle.AsRef<CUtlLeanVector<Color, int>>(_ColorsOffset!.Value);
         }
     }
-    private static nint _DimensionsOffset = -1;
+    private static nint? _DimensionsOffset;
 
     public ref CUtlLeanVector<float, int> Dimensions
     {
         get
         {
-            if (_DimensionsOffset == -1) _DimensionsOffset = Schema.GetOffset(0xC0AC823DF7AB8E50);
-            return ref _Handle.AsRef<CUtlLeanVector<float, int>>(_DimensionsOffset);
+            _DimensionsOffset = _DimensionsOffset ?? Schema.GetOffset(0xC0AC823DF7AB8E50);
+            return ref _Handle.AsRef<CUtlLeanVector<float, int>>(_DimensionsOffset!.Value);
         }
     }
-    private static nint _TimesOffset = -1;
+    private static nint? _TimesOffset;
 
     public ref CUtlLeanVector<double, int> Times
     {
         get
         {
-            if (_TimesOffset == -1) _TimesOffset = Schema.GetOffset(0xC0AC823D86A55CD5);
-            return ref _Handle.AsRef<CUtlLeanVector<double, int>>(_TimesOffset);
+            _TimesOffset = _TimesOffset ?? Schema.GetOffset(0xC0AC823D86A55CD5);
+            return ref _Handle.AsRef<CUtlLeanVector<double, int>>(_TimesOffset!.Value);
         }
     }
-    private static nint _Uint64sOffset = -1;
+    private static nint? _Uint64sOffset;
 
     public ref CUtlLeanVector<ulong, int> Uint64s
     {
         get
         {
-            if (_Uint64sOffset == -1) _Uint64sOffset = Schema.GetOffset(0xC0AC823D39771940);
-            return ref _Handle.AsRef<CUtlLeanVector<ulong, int>>(_Uint64sOffset);
+            _Uint64sOffset = _Uint64sOffset ?? Schema.GetOffset(0xC0AC823D39771940);
+            return ref _Handle.AsRef<CUtlLeanVector<ulong, int>>(_Uint64sOffset!.Value);
         }
     }
-    private static nint _BoolsOffset = -1;
+    private static nint? _BoolsOffset;
 
     public ref CUtlLeanVector<bool, int> Bools
     {
         get
         {
-            if (_BoolsOffset == -1) _BoolsOffset = Schema.GetOffset(0xC0AC823D7C3341EA);
-            return ref _Handle.AsRef<CUtlLeanVector<bool, int>>(_BoolsOffset);
+            _BoolsOffset = _BoolsOffset ?? Schema.GetOffset(0xC0AC823D7C3341EA);
+            return ref _Handle.AsRef<CUtlLeanVector<bool, int>>(_BoolsOffset!.Value);
         }
     }
-    private static nint _StringsOffset = -1;
+    private static nint? _StringsOffset;
 
     public ref CUtlLeanVector<CUtlString, int> Strings
     {
         get
         {
-            if (_StringsOffset == -1) _StringsOffset = Schema.GetOffset(0xC0AC823D6ED10D31);
-            return ref _Handle.AsRef<CUtlLeanVector<CUtlString, int>>(_StringsOffset);
+            _StringsOffset = _StringsOffset ?? Schema.GetOffset(0xC0AC823D6ED10D31);
+            return ref _Handle.AsRef<CUtlLeanVector<CUtlString, int>>(_StringsOffset!.Value);
         }
     }
 

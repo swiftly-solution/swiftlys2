@@ -16,34 +16,34 @@ internal partial class CNmStateCompletedConditionNode__CDefinitionImpl : CNmBool
 {
     public CNmStateCompletedConditionNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint _SourceStateNodeIdxOffset = -1;
+    private static nint? _SourceStateNodeIdxOffset;
 
     public ref short SourceStateNodeIdx
     {
         get
         {
-            if (_SourceStateNodeIdxOffset == -1) _SourceStateNodeIdxOffset = Schema.GetOffset(0x4C5A15CA63F0228C);
-            return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset);
+            _SourceStateNodeIdxOffset = _SourceStateNodeIdxOffset ?? Schema.GetOffset(0x4C5A15CA63F0228C);
+            return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset!.Value);
         }
     }
-    private static nint _TransitionDurationOverrideNodeIdxOffset = -1;
+    private static nint? _TransitionDurationOverrideNodeIdxOffset;
 
     public ref short TransitionDurationOverrideNodeIdx
     {
         get
         {
-            if (_TransitionDurationOverrideNodeIdxOffset == -1) _TransitionDurationOverrideNodeIdxOffset = Schema.GetOffset(0x4C5A15CACD97BBA1);
-            return ref _Handle.AsRef<short>(_TransitionDurationOverrideNodeIdxOffset);
+            _TransitionDurationOverrideNodeIdxOffset = _TransitionDurationOverrideNodeIdxOffset ?? Schema.GetOffset(0x4C5A15CACD97BBA1);
+            return ref _Handle.AsRef<short>(_TransitionDurationOverrideNodeIdxOffset!.Value);
         }
     }
-    private static nint _TransitionDurationSecondsOffset = -1;
+    private static nint? _TransitionDurationSecondsOffset;
 
     public ref float TransitionDurationSeconds
     {
         get
         {
-            if (_TransitionDurationSecondsOffset == -1) _TransitionDurationSecondsOffset = Schema.GetOffset(0x4C5A15CAD5E92B1D);
-            return ref _Handle.AsRef<float>(_TransitionDurationSecondsOffset);
+            _TransitionDurationSecondsOffset = _TransitionDurationSecondsOffset ?? Schema.GetOffset(0x4C5A15CAD5E92B1D);
+            return ref _Handle.AsRef<float>(_TransitionDurationSecondsOffset!.Value);
         }
     }
 

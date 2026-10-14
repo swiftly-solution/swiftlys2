@@ -16,24 +16,24 @@ internal partial class CAnimParamHandleImpl : SchemaClass, CAnimParamHandle
 {
     public CAnimParamHandleImpl(nint handle) : base(handle) { }
 
-    private static nint _TypeOffset = -1;
+    private static nint? _TypeOffset;
 
     public ref AnimParamType_t Type
     {
         get
         {
-            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0x7B9461E0F04B4ED);
-            return ref _Handle.AsRef<AnimParamType_t>(_TypeOffset);
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x7B9461E0F04B4ED);
+            return ref _Handle.AsRef<AnimParamType_t>(_TypeOffset!.Value);
         }
     }
-    private static nint _IndexOffset = -1;
+    private static nint? _IndexOffset;
 
     public ref byte Index
     {
         get
         {
-            if (_IndexOffset == -1) _IndexOffset = Schema.GetOffset(0x7B9461E491963CB);
-            return ref _Handle.AsRef<byte>(_IndexOffset);
+            _IndexOffset = _IndexOffset ?? Schema.GetOffset(0x7B9461E491963CB);
+            return ref _Handle.AsRef<byte>(_IndexOffset!.Value);
         }
     }
 

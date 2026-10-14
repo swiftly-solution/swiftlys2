@@ -16,16 +16,16 @@ internal partial class CGraphEditorStateImpl : SchemaClass, CGraphEditorState
 {
     public CGraphEditorStateImpl(nint handle) : base(handle) { }
 
-    private static nint _ViewConfigOffset = -1;
+    private static nint? _ViewConfigOffset;
     private SchemaUntypedField? _ViewConfigInstance;
 
     public SchemaUntypedField ViewConfig
     {
         get
         {
-            if (_ViewConfigOffset == -1) _ViewConfigOffset = Schema.GetOffset(0x5E2329BC026E5336);
+            _ViewConfigOffset = _ViewConfigOffset ?? Schema.GetOffset(0x5E2329BC026E5336);
             var instance = _ViewConfigInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ViewConfigOffset);
+            instance.DangerousSetHandle(_Handle + _ViewConfigOffset!.Value);
             return instance;
         }
     }

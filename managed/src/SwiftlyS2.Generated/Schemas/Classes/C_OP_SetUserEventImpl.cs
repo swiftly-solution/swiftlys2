@@ -16,63 +16,63 @@ internal partial class C_OP_SetUserEventImpl : CParticleFunctionOperatorImpl, C_
 {
     public C_OP_SetUserEventImpl(nint handle) : base(handle) { }
 
-    private static nint _InputOffset = -1;
+    private static nint? _InputOffset;
     private CPerParticleFloatInputImpl? _InputInstance;
 
     public CPerParticleFloatInput Input
     {
         get
         {
-            if (_InputOffset == -1) _InputOffset = Schema.GetOffset(0x9A6F6FB81D4B7FFD);
+            _InputOffset = _InputOffset ?? Schema.GetOffset(0x9A6F6FB81D4B7FFD);
             var instance = _InputInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _InputOffset);
+            instance.DangerousSetHandle(_Handle + _InputOffset!.Value);
             return instance;
         }
     }
-    private static nint _RisingEdgeOffset = -1;
+    private static nint? _RisingEdgeOffset;
     private CPerParticleFloatInputImpl? _RisingEdgeInstance;
 
     public CPerParticleFloatInput RisingEdge
     {
         get
         {
-            if (_RisingEdgeOffset == -1) _RisingEdgeOffset = Schema.GetOffset(0x9A6F6FB8DCFBDCF4);
+            _RisingEdgeOffset = _RisingEdgeOffset ?? Schema.GetOffset(0x9A6F6FB8DCFBDCF4);
             var instance = _RisingEdgeInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _RisingEdgeOffset);
+            instance.DangerousSetHandle(_Handle + _RisingEdgeOffset!.Value);
             return instance;
         }
     }
-    private static nint _RisingEventTypeOffset = -1;
+    private static nint? _RisingEventTypeOffset;
 
     public ref EventTypeSelection_t RisingEventType
     {
         get
         {
-            if (_RisingEventTypeOffset == -1) _RisingEventTypeOffset = Schema.GetOffset(0x9A6F6FB83790928D);
-            return ref _Handle.AsRef<EventTypeSelection_t>(_RisingEventTypeOffset);
+            _RisingEventTypeOffset = _RisingEventTypeOffset ?? Schema.GetOffset(0x9A6F6FB83790928D);
+            return ref _Handle.AsRef<EventTypeSelection_t>(_RisingEventTypeOffset!.Value);
         }
     }
-    private static nint _FallingEdgeOffset = -1;
+    private static nint? _FallingEdgeOffset;
     private CPerParticleFloatInputImpl? _FallingEdgeInstance;
 
     public CPerParticleFloatInput FallingEdge
     {
         get
         {
-            if (_FallingEdgeOffset == -1) _FallingEdgeOffset = Schema.GetOffset(0x9A6F6FB8CBE5115B);
+            _FallingEdgeOffset = _FallingEdgeOffset ?? Schema.GetOffset(0x9A6F6FB8CBE5115B);
             var instance = _FallingEdgeInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _FallingEdgeOffset);
+            instance.DangerousSetHandle(_Handle + _FallingEdgeOffset!.Value);
             return instance;
         }
     }
-    private static nint _FallingEventTypeOffset = -1;
+    private static nint? _FallingEventTypeOffset;
 
     public ref EventTypeSelection_t FallingEventType
     {
         get
         {
-            if (_FallingEventTypeOffset == -1) _FallingEventTypeOffset = Schema.GetOffset(0x9A6F6FB8C79ED114);
-            return ref _Handle.AsRef<EventTypeSelection_t>(_FallingEventTypeOffset);
+            _FallingEventTypeOffset = _FallingEventTypeOffset ?? Schema.GetOffset(0x9A6F6FB8C79ED114);
+            return ref _Handle.AsRef<EventTypeSelection_t>(_FallingEventTypeOffset!.Value);
         }
     }
 

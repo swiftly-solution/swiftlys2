@@ -16,37 +16,37 @@ internal partial class CAnimGraphDoc_DirectPlaybackNodeImpl : CAnimGraphDoc_Node
 {
     public CAnimGraphDoc_DirectPlaybackNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _InputConnectionOffset = -1;
+    private static nint? _InputConnectionOffset;
     private CAnimGraphDoc_NodeConnectionImpl? _InputConnectionInstance;
 
     public CAnimGraphDoc_NodeConnection InputConnection
     {
         get
         {
-            if (_InputConnectionOffset == -1) _InputConnectionOffset = Schema.GetOffset(0x34956BFA1F7849CB);
+            _InputConnectionOffset = _InputConnectionOffset ?? Schema.GetOffset(0x34956BFA1F7849CB);
             var instance = _InputConnectionInstance ??= new CAnimGraphDoc_NodeConnectionImpl(0);
-            instance.DangerousSetHandle(_Handle + _InputConnectionOffset);
+            instance.DangerousSetHandle(_Handle + _InputConnectionOffset!.Value);
             return instance;
         }
     }
-    private static nint _FinishEarlyOffset = -1;
+    private static nint? _FinishEarlyOffset;
 
     public ref bool FinishEarly
     {
         get
         {
-            if (_FinishEarlyOffset == -1) _FinishEarlyOffset = Schema.GetOffset(0x34956BFAC2E75991);
-            return ref _Handle.AsRef<bool>(_FinishEarlyOffset);
+            _FinishEarlyOffset = _FinishEarlyOffset ?? Schema.GetOffset(0x34956BFAC2E75991);
+            return ref _Handle.AsRef<bool>(_FinishEarlyOffset!.Value);
         }
     }
-    private static nint _ResetOnFinishOffset = -1;
+    private static nint? _ResetOnFinishOffset;
 
     public ref bool ResetOnFinish
     {
         get
         {
-            if (_ResetOnFinishOffset == -1) _ResetOnFinishOffset = Schema.GetOffset(0x34956BFAD5293C96);
-            return ref _Handle.AsRef<bool>(_ResetOnFinishOffset);
+            _ResetOnFinishOffset = _ResetOnFinishOffset ?? Schema.GetOffset(0x34956BFAD5293C96);
+            return ref _Handle.AsRef<bool>(_ResetOnFinishOffset!.Value);
         }
     }
 

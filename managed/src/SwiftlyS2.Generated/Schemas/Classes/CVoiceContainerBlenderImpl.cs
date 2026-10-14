@@ -16,40 +16,40 @@ internal partial class CVoiceContainerBlenderImpl : CVoiceContainerBaseImpl, CVo
 {
     public CVoiceContainerBlenderImpl(nint handle) : base(handle) { }
 
-    private static nint _FirstSoundOffset = -1;
+    private static nint? _FirstSoundOffset;
     private CSoundContainerReferenceImpl? _FirstSoundInstance;
 
     public CSoundContainerReference FirstSound
     {
         get
         {
-            if (_FirstSoundOffset == -1) _FirstSoundOffset = Schema.GetOffset(0xB05752DD666B0138);
+            _FirstSoundOffset = _FirstSoundOffset ?? Schema.GetOffset(0xB05752DD666B0138);
             var instance = _FirstSoundInstance ??= new CSoundContainerReferenceImpl(0);
-            instance.DangerousSetHandle(_Handle + _FirstSoundOffset);
+            instance.DangerousSetHandle(_Handle + _FirstSoundOffset!.Value);
             return instance;
         }
     }
-    private static nint _SecondSoundOffset = -1;
+    private static nint? _SecondSoundOffset;
     private CSoundContainerReferenceImpl? _SecondSoundInstance;
 
     public CSoundContainerReference SecondSound
     {
         get
         {
-            if (_SecondSoundOffset == -1) _SecondSoundOffset = Schema.GetOffset(0xB05752DDA2BC3E5C);
+            _SecondSoundOffset = _SecondSoundOffset ?? Schema.GetOffset(0xB05752DDA2BC3E5C);
             var instance = _SecondSoundInstance ??= new CSoundContainerReferenceImpl(0);
-            instance.DangerousSetHandle(_Handle + _SecondSoundOffset);
+            instance.DangerousSetHandle(_Handle + _SecondSoundOffset!.Value);
             return instance;
         }
     }
-    private static nint _BlendFactorOffset = -1;
+    private static nint? _BlendFactorOffset;
 
     public ref float BlendFactor
     {
         get
         {
-            if (_BlendFactorOffset == -1) _BlendFactorOffset = Schema.GetOffset(0xB05752DDFF4DA451);
-            return ref _Handle.AsRef<float>(_BlendFactorOffset);
+            _BlendFactorOffset = _BlendFactorOffset ?? Schema.GetOffset(0xB05752DDFF4DA451);
+            return ref _Handle.AsRef<float>(_BlendFactorOffset!.Value);
         }
     }
 

@@ -16,14 +16,14 @@ internal partial class CTakeDamageSummaryScopeGuardImpl : SchemaClass, CTakeDama
 {
     public CTakeDamageSummaryScopeGuardImpl(nint handle) : base(handle) { }
 
-    private static nint _SummariesOffset = -1;
+    private static nint? _SummariesOffset;
 
     public ref CUtlVector<PointerTo<SummaryTakeDamageInfo_t>> Summaries
     {
         get
         {
-            if (_SummariesOffset == -1) _SummariesOffset = Schema.GetOffset(0x1CAF012DD0AD2A53);
-            return ref _Handle.AsRef<CUtlVector<PointerTo<SummaryTakeDamageInfo_t>>>(_SummariesOffset);
+            _SummariesOffset = _SummariesOffset ?? Schema.GetOffset(0x1CAF012DD0AD2A53);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<SummaryTakeDamageInfo_t>>>(_SummariesOffset!.Value);
         }
     }
 

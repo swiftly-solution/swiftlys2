@@ -16,80 +16,80 @@ internal partial class CDampedPathAnimMotorUpdaterImpl : CPathAnimMotorUpdaterBa
 {
     public CDampedPathAnimMotorUpdaterImpl(nint handle) : base(handle) { }
 
-    private static nint _AnticipationTimeOffset = -1;
+    private static nint? _AnticipationTimeOffset;
 
     public ref float AnticipationTime
     {
         get
         {
-            if (_AnticipationTimeOffset == -1) _AnticipationTimeOffset = Schema.GetOffset(0x1519DE4D43C5CA9B);
-            return ref _Handle.AsRef<float>(_AnticipationTimeOffset);
+            _AnticipationTimeOffset = _AnticipationTimeOffset ?? Schema.GetOffset(0x1519DE4D43C5CA9B);
+            return ref _Handle.AsRef<float>(_AnticipationTimeOffset!.Value);
         }
     }
-    private static nint _MinSpeedScaleOffset = -1;
+    private static nint? _MinSpeedScaleOffset;
 
     public ref float MinSpeedScale
     {
         get
         {
-            if (_MinSpeedScaleOffset == -1) _MinSpeedScaleOffset = Schema.GetOffset(0x1519DE4DED3B5DEE);
-            return ref _Handle.AsRef<float>(_MinSpeedScaleOffset);
+            _MinSpeedScaleOffset = _MinSpeedScaleOffset ?? Schema.GetOffset(0x1519DE4DED3B5DEE);
+            return ref _Handle.AsRef<float>(_MinSpeedScaleOffset!.Value);
         }
     }
-    private static nint _AnticipationPosParamOffset = -1;
+    private static nint? _AnticipationPosParamOffset;
     private CAnimParamHandleImpl? _AnticipationPosParamInstance;
 
     public CAnimParamHandle AnticipationPosParam
     {
         get
         {
-            if (_AnticipationPosParamOffset == -1) _AnticipationPosParamOffset = Schema.GetOffset(0x1519DE4D86389829);
+            _AnticipationPosParamOffset = _AnticipationPosParamOffset ?? Schema.GetOffset(0x1519DE4D86389829);
             var instance = _AnticipationPosParamInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _AnticipationPosParamOffset);
+            instance.DangerousSetHandle(_Handle + _AnticipationPosParamOffset!.Value);
             return instance;
         }
     }
-    private static nint _AnticipationHeadingParamOffset = -1;
+    private static nint? _AnticipationHeadingParamOffset;
     private CAnimParamHandleImpl? _AnticipationHeadingParamInstance;
 
     public CAnimParamHandle AnticipationHeadingParam
     {
         get
         {
-            if (_AnticipationHeadingParamOffset == -1) _AnticipationHeadingParamOffset = Schema.GetOffset(0x1519DE4D095DAB6D);
+            _AnticipationHeadingParamOffset = _AnticipationHeadingParamOffset ?? Schema.GetOffset(0x1519DE4D095DAB6D);
             var instance = _AnticipationHeadingParamInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _AnticipationHeadingParamOffset);
+            instance.DangerousSetHandle(_Handle + _AnticipationHeadingParamOffset!.Value);
             return instance;
         }
     }
-    private static nint _SpringConstantOffset = -1;
+    private static nint? _SpringConstantOffset;
 
     public ref float SpringConstant
     {
         get
         {
-            if (_SpringConstantOffset == -1) _SpringConstantOffset = Schema.GetOffset(0x1519DE4DCE2260BE);
-            return ref _Handle.AsRef<float>(_SpringConstantOffset);
+            _SpringConstantOffset = _SpringConstantOffset ?? Schema.GetOffset(0x1519DE4DCE2260BE);
+            return ref _Handle.AsRef<float>(_SpringConstantOffset!.Value);
         }
     }
-    private static nint _MinSpringTensionOffset = -1;
+    private static nint? _MinSpringTensionOffset;
 
     public ref float MinSpringTension
     {
         get
         {
-            if (_MinSpringTensionOffset == -1) _MinSpringTensionOffset = Schema.GetOffset(0x1519DE4DEEE56032);
-            return ref _Handle.AsRef<float>(_MinSpringTensionOffset);
+            _MinSpringTensionOffset = _MinSpringTensionOffset ?? Schema.GetOffset(0x1519DE4DEEE56032);
+            return ref _Handle.AsRef<float>(_MinSpringTensionOffset!.Value);
         }
     }
-    private static nint _MaxSpringTensionOffset = -1;
+    private static nint? _MaxSpringTensionOffset;
 
     public ref float MaxSpringTension
     {
         get
         {
-            if (_MaxSpringTensionOffset == -1) _MaxSpringTensionOffset = Schema.GetOffset(0x1519DE4DD4910BE4);
-            return ref _Handle.AsRef<float>(_MaxSpringTensionOffset);
+            _MaxSpringTensionOffset = _MaxSpringTensionOffset ?? Schema.GetOffset(0x1519DE4DD4910BE4);
+            return ref _Handle.AsRef<float>(_MaxSpringTensionOffset!.Value);
         }
     }
 

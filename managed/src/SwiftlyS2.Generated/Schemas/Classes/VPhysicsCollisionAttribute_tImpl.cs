@@ -16,114 +16,114 @@ internal partial class VPhysicsCollisionAttribute_tImpl : SchemaClass, VPhysicsC
 {
     public VPhysicsCollisionAttribute_tImpl(nint handle) : base(handle) { }
 
-    private static nint _InteractsAsOffset = -1;
+    private static nint? _InteractsAsOffset;
 
     public ref ulong InteractsAs
     {
         get
         {
-            if (_InteractsAsOffset == -1) _InteractsAsOffset = Schema.GetOffset(0x7E9FC931062B2708);
-            return ref _Handle.AsRef<ulong>(_InteractsAsOffset);
+            _InteractsAsOffset = _InteractsAsOffset ?? Schema.GetOffset(0x7E9FC931062B2708);
+            return ref _Handle.AsRef<ulong>(_InteractsAsOffset!.Value);
         }
     }
-    private static nint _InteractsWithOffset = -1;
+    private static nint? _InteractsWithOffset;
 
     public ref ulong InteractsWith
     {
         get
         {
-            if (_InteractsWithOffset == -1) _InteractsWithOffset = Schema.GetOffset(0x7E9FC93139179720);
-            return ref _Handle.AsRef<ulong>(_InteractsWithOffset);
+            _InteractsWithOffset = _InteractsWithOffset ?? Schema.GetOffset(0x7E9FC93139179720);
+            return ref _Handle.AsRef<ulong>(_InteractsWithOffset!.Value);
         }
     }
-    private static nint _InteractsExcludeOffset = -1;
+    private static nint? _InteractsExcludeOffset;
 
     public ref ulong InteractsExclude
     {
         get
         {
-            if (_InteractsExcludeOffset == -1) _InteractsExcludeOffset = Schema.GetOffset(0x7E9FC9314D765732);
-            return ref _Handle.AsRef<ulong>(_InteractsExcludeOffset);
+            _InteractsExcludeOffset = _InteractsExcludeOffset ?? Schema.GetOffset(0x7E9FC9314D765732);
+            return ref _Handle.AsRef<ulong>(_InteractsExcludeOffset!.Value);
         }
     }
-    private static nint _EntityIdOffset = -1;
+    private static nint? _EntityIdOffset;
 
     public ref uint EntityId
     {
         get
         {
-            if (_EntityIdOffset == -1) _EntityIdOffset = Schema.GetOffset(0x7E9FC9312E71588B);
-            return ref _Handle.AsRef<uint>(_EntityIdOffset);
+            _EntityIdOffset = _EntityIdOffset ?? Schema.GetOffset(0x7E9FC9312E71588B);
+            return ref _Handle.AsRef<uint>(_EntityIdOffset!.Value);
         }
     }
-    private static nint _OwnerIdOffset = -1;
+    private static nint? _OwnerIdOffset;
 
     public ref uint OwnerId
     {
         get
         {
-            if (_OwnerIdOffset == -1) _OwnerIdOffset = Schema.GetOffset(0x7E9FC931DD9F9E45);
-            return ref _Handle.AsRef<uint>(_OwnerIdOffset);
+            _OwnerIdOffset = _OwnerIdOffset ?? Schema.GetOffset(0x7E9FC931DD9F9E45);
+            return ref _Handle.AsRef<uint>(_OwnerIdOffset!.Value);
         }
     }
-    private static nint _HierarchyIdOffset = -1;
+    private static nint? _HierarchyIdOffset;
 
     public ref ushort HierarchyId
     {
         get
         {
-            if (_HierarchyIdOffset == -1) _HierarchyIdOffset = Schema.GetOffset(0x7E9FC931E2479899);
-            return ref _Handle.AsRef<ushort>(_HierarchyIdOffset);
+            _HierarchyIdOffset = _HierarchyIdOffset ?? Schema.GetOffset(0x7E9FC931E2479899);
+            return ref _Handle.AsRef<ushort>(_HierarchyIdOffset!.Value);
         }
     }
-    private static nint _DetailLayerMaskOffset = -1;
+    private static nint? _DetailLayerMaskOffset;
 
     public ref ushort DetailLayerMask
     {
         get
         {
-            if (_DetailLayerMaskOffset == -1) _DetailLayerMaskOffset = Schema.GetOffset(0x7E9FC931BB814B49);
-            return ref _Handle.AsRef<ushort>(_DetailLayerMaskOffset);
+            _DetailLayerMaskOffset = _DetailLayerMaskOffset ?? Schema.GetOffset(0x7E9FC931BB814B49);
+            return ref _Handle.AsRef<ushort>(_DetailLayerMaskOffset!.Value);
         }
     }
-    private static nint _DetailLayerMaskTypeOffset = -1;
+    private static nint? _DetailLayerMaskTypeOffset;
 
     public ref byte DetailLayerMaskType
     {
         get
         {
-            if (_DetailLayerMaskTypeOffset == -1) _DetailLayerMaskTypeOffset = Schema.GetOffset(0x7E9FC9313D8944C1);
-            return ref _Handle.AsRef<byte>(_DetailLayerMaskTypeOffset);
+            _DetailLayerMaskTypeOffset = _DetailLayerMaskTypeOffset ?? Schema.GetOffset(0x7E9FC9313D8944C1);
+            return ref _Handle.AsRef<byte>(_DetailLayerMaskTypeOffset!.Value);
         }
     }
-    private static nint _TargetDetailLayerOffset = -1;
+    private static nint? _TargetDetailLayerOffset;
 
     public ref byte TargetDetailLayer
     {
         get
         {
-            if (_TargetDetailLayerOffset == -1) _TargetDetailLayerOffset = Schema.GetOffset(0x7E9FC9312E46F786);
-            return ref _Handle.AsRef<byte>(_TargetDetailLayerOffset);
+            _TargetDetailLayerOffset = _TargetDetailLayerOffset ?? Schema.GetOffset(0x7E9FC9312E46F786);
+            return ref _Handle.AsRef<byte>(_TargetDetailLayerOffset!.Value);
         }
     }
-    private static nint _CollisionGroupOffset = -1;
+    private static nint? _CollisionGroupOffset;
 
     public ref byte CollisionGroup
     {
         get
         {
-            if (_CollisionGroupOffset == -1) _CollisionGroupOffset = Schema.GetOffset(0x7E9FC9310AC0C752);
-            return ref _Handle.AsRef<byte>(_CollisionGroupOffset);
+            _CollisionGroupOffset = _CollisionGroupOffset ?? Schema.GetOffset(0x7E9FC9310AC0C752);
+            return ref _Handle.AsRef<byte>(_CollisionGroupOffset!.Value);
         }
     }
-    private static nint _CollisionFunctionMaskOffset = -1;
+    private static nint? _CollisionFunctionMaskOffset;
 
     public ref byte CollisionFunctionMask
     {
         get
         {
-            if (_CollisionFunctionMaskOffset == -1) _CollisionFunctionMaskOffset = Schema.GetOffset(0x7E9FC931FC7E6DAF);
-            return ref _Handle.AsRef<byte>(_CollisionFunctionMaskOffset);
+            _CollisionFunctionMaskOffset = _CollisionFunctionMaskOffset ?? Schema.GetOffset(0x7E9FC931FC7E6DAF);
+            return ref _Handle.AsRef<byte>(_CollisionFunctionMaskOffset!.Value);
         }
     }
 

@@ -16,69 +16,69 @@ internal partial class sndopvarlatchdata_tImpl : SchemaClass, sndopvarlatchdata_
 {
     public sndopvarlatchdata_tImpl(nint handle) : base(handle) { }
 
-    private static nint _StackOffset = -1;
+    private static nint? _StackOffset;
 
     public string Stack
     {
         get
         {
-            if (_StackOffset == -1) _StackOffset = Schema.GetOffset(0x8347C0D511ACB037);
-            return Schema.GetString(_Handle.Read<nint>(_StackOffset));
+            _StackOffset = _StackOffset ?? Schema.GetOffset(0x8347C0D511ACB037);
+            return Schema.GetString(_Handle.Read<nint>(_StackOffset!.Value));
         }
         set
         {
-            if (_StackOffset == -1) _StackOffset = Schema.GetOffset(0x8347C0D511ACB037);
-            Schema.SetString(_Handle, _StackOffset, value);
+            _StackOffset = _StackOffset ?? Schema.GetOffset(0x8347C0D511ACB037);
+            Schema.SetString(_Handle, _StackOffset!.Value, value);
         }
     }
-    private static nint _OperatorOffset = -1;
+    private static nint? _OperatorOffset;
 
     public string Operator
     {
         get
         {
-            if (_OperatorOffset == -1) _OperatorOffset = Schema.GetOffset(0x8347C0D55D107B55);
-            return Schema.GetString(_Handle.Read<nint>(_OperatorOffset));
+            _OperatorOffset = _OperatorOffset ?? Schema.GetOffset(0x8347C0D55D107B55);
+            return Schema.GetString(_Handle.Read<nint>(_OperatorOffset!.Value));
         }
         set
         {
-            if (_OperatorOffset == -1) _OperatorOffset = Schema.GetOffset(0x8347C0D55D107B55);
-            Schema.SetString(_Handle, _OperatorOffset, value);
+            _OperatorOffset = _OperatorOffset ?? Schema.GetOffset(0x8347C0D55D107B55);
+            Schema.SetString(_Handle, _OperatorOffset!.Value, value);
         }
     }
-    private static nint _OpvarOffset = -1;
+    private static nint? _OpvarOffset;
 
     public string Opvar
     {
         get
         {
-            if (_OpvarOffset == -1) _OpvarOffset = Schema.GetOffset(0x8347C0D508A9F41F);
-            return Schema.GetString(_Handle.Read<nint>(_OpvarOffset));
+            _OpvarOffset = _OpvarOffset ?? Schema.GetOffset(0x8347C0D508A9F41F);
+            return Schema.GetString(_Handle.Read<nint>(_OpvarOffset!.Value));
         }
         set
         {
-            if (_OpvarOffset == -1) _OpvarOffset = Schema.GetOffset(0x8347C0D508A9F41F);
-            Schema.SetString(_Handle, _OpvarOffset, value);
+            _OpvarOffset = _OpvarOffset ?? Schema.GetOffset(0x8347C0D508A9F41F);
+            Schema.SetString(_Handle, _OpvarOffset!.Value, value);
         }
     }
-    private static nint _ValOffset = -1;
+    private static nint? _ValOffset;
 
     public ref float Val
     {
         get
         {
-            if (_ValOffset == -1) _ValOffset = Schema.GetOffset(0x8347C0D5E31D0C86);
-            return ref _Handle.AsRef<float>(_ValOffset);
+            _ValOffset = _ValOffset ?? Schema.GetOffset(0x8347C0D5E31D0C86);
+            return ref _Handle.AsRef<float>(_ValOffset!.Value);
         }
     }
-    private static nint _PosOffset = -1;
+    private static nint? _PosOffset;
 
     public ref Vector Pos
     {
         get
         {
-            if (_PosOffset == -1) _PosOffset = Schema.GetOffset(0x8347C0D5DE9CFC5D);
-            return ref _Handle.AsRef<Vector>(_PosOffset);
+            _PosOffset = _PosOffset ?? Schema.GetOffset(0x8347C0D5DE9CFC5D);
+            return ref _Handle.AsRef<Vector>(_PosOffset!.Value);
         }
     }
 

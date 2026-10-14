@@ -16,26 +16,26 @@ internal partial class C_OP_SetCPtoVectorImpl : CParticleFunctionOperatorImpl, C
 {
     public C_OP_SetCPtoVectorImpl(nint handle) : base(handle) { }
 
-    private static nint _CPInputOffset = -1;
+    private static nint? _CPInputOffset;
 
     public ref int CPInput
     {
         get
         {
-            if (_CPInputOffset == -1) _CPInputOffset = Schema.GetOffset(0x799E4536FB805736);
-            return ref _Handle.AsRef<int>(_CPInputOffset);
+            _CPInputOffset = _CPInputOffset ?? Schema.GetOffset(0x799E4536FB805736);
+            return ref _Handle.AsRef<int>(_CPInputOffset!.Value);
         }
     }
-    private static nint _FieldOutputOffset = -1;
+    private static nint? _FieldOutputOffset;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0x799E4536E5729606);
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x799E4536E5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
             return instance;
         }
     }

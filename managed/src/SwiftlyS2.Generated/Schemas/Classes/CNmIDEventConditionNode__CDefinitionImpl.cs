@@ -16,39 +16,39 @@ internal partial class CNmIDEventConditionNode__CDefinitionImpl : CNmBoolValueNo
 {
     public CNmIDEventConditionNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint _SourceStateNodeIdxOffset = -1;
+    private static nint? _SourceStateNodeIdxOffset;
 
     public ref short SourceStateNodeIdx
     {
         get
         {
-            if (_SourceStateNodeIdxOffset == -1) _SourceStateNodeIdxOffset = Schema.GetOffset(0xBD2C5F7563F0228C);
-            return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset);
+            _SourceStateNodeIdxOffset = _SourceStateNodeIdxOffset ?? Schema.GetOffset(0xBD2C5F7563F0228C);
+            return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset!.Value);
         }
     }
-    private static nint _EventConditionRulesOffset = -1;
+    private static nint? _EventConditionRulesOffset;
     private CNmBitFlagsImpl? _EventConditionRulesInstance;
 
     public CNmBitFlags EventConditionRules
     {
         get
         {
-            if (_EventConditionRulesOffset == -1) _EventConditionRulesOffset = Schema.GetOffset(0xBD2C5F75A904315F);
+            _EventConditionRulesOffset = _EventConditionRulesOffset ?? Schema.GetOffset(0xBD2C5F75A904315F);
             var instance = _EventConditionRulesInstance ??= new CNmBitFlagsImpl(0);
-            instance.DangerousSetHandle(_Handle + _EventConditionRulesOffset);
+            instance.DangerousSetHandle(_Handle + _EventConditionRulesOffset!.Value);
             return instance;
         }
     }
-    private static nint _EventIDsOffset = -1;
+    private static nint? _EventIDsOffset;
     private SchemaUntypedField? _EventIDsInstance;
 
     public SchemaUntypedField EventIDs
     {
         get
         {
-            if (_EventIDsOffset == -1) _EventIDsOffset = Schema.GetOffset(0xBD2C5F75E7543F93);
+            _EventIDsOffset = _EventIDsOffset ?? Schema.GetOffset(0xBD2C5F75E7543F93);
             var instance = _EventIDsInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _EventIDsOffset);
+            instance.DangerousSetHandle(_Handle + _EventIDsOffset!.Value);
             return instance;
         }
     }

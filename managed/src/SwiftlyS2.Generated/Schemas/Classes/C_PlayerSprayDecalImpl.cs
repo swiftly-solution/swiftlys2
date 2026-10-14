@@ -16,169 +16,169 @@ internal partial class C_PlayerSprayDecalImpl : C_ModelPointEntityImpl, C_Player
 {
     public C_PlayerSprayDecalImpl(nint handle) : base(handle) { }
 
-    private static nint _UniqueIDOffset = -1;
+    private static nint? _UniqueIDOffset;
 
     public ref int UniqueID
     {
         get
         {
-            if (_UniqueIDOffset == -1) _UniqueIDOffset = Schema.GetOffset(0xBF17DA80C7F9595F);
-            return ref _Handle.AsRef<int>(_UniqueIDOffset);
+            _UniqueIDOffset = _UniqueIDOffset ?? Schema.GetOffset(0xBF17DA80C7F9595F);
+            return ref _Handle.AsRef<int>(_UniqueIDOffset!.Value);
         }
     }
-    private static nint _AccountIDOffset = -1;
+    private static nint? _AccountIDOffset;
 
     public ref uint AccountID
     {
         get
         {
-            if (_AccountIDOffset == -1) _AccountIDOffset = Schema.GetOffset(0xBF17DA805D6DC0F0);
-            return ref _Handle.AsRef<uint>(_AccountIDOffset);
+            _AccountIDOffset = _AccountIDOffset ?? Schema.GetOffset(0xBF17DA805D6DC0F0);
+            return ref _Handle.AsRef<uint>(_AccountIDOffset!.Value);
         }
     }
-    private static nint _TraceIDOffset = -1;
+    private static nint? _TraceIDOffset;
 
     public ref uint TraceID
     {
         get
         {
-            if (_TraceIDOffset == -1) _TraceIDOffset = Schema.GetOffset(0xBF17DA80D326AF6A);
-            return ref _Handle.AsRef<uint>(_TraceIDOffset);
+            _TraceIDOffset = _TraceIDOffset ?? Schema.GetOffset(0xBF17DA80D326AF6A);
+            return ref _Handle.AsRef<uint>(_TraceIDOffset!.Value);
         }
     }
-    private static nint _RtGcTimeOffset = -1;
+    private static nint? _RtGcTimeOffset;
 
     public ref uint RtGcTime
     {
         get
         {
-            if (_RtGcTimeOffset == -1) _RtGcTimeOffset = Schema.GetOffset(0xBF17DA80F2BA46AC);
-            return ref _Handle.AsRef<uint>(_RtGcTimeOffset);
+            _RtGcTimeOffset = _RtGcTimeOffset ?? Schema.GetOffset(0xBF17DA80F2BA46AC);
+            return ref _Handle.AsRef<uint>(_RtGcTimeOffset!.Value);
         }
     }
-    private static nint _EndPosOffset = -1;
+    private static nint? _EndPosOffset;
 
     public ref Vector EndPos
     {
         get
         {
-            if (_EndPosOffset == -1) _EndPosOffset = Schema.GetOffset(0xBF17DA808DD24760);
-            return ref _Handle.AsRef<Vector>(_EndPosOffset);
+            _EndPosOffset = _EndPosOffset ?? Schema.GetOffset(0xBF17DA808DD24760);
+            return ref _Handle.AsRef<Vector>(_EndPosOffset!.Value);
         }
     }
-    private static nint _StartOffset = -1;
+    private static nint? _StartOffset;
 
     public ref Vector Start
     {
         get
         {
-            if (_StartOffset == -1) _StartOffset = Schema.GetOffset(0xBF17DA8041EEE6BF);
-            return ref _Handle.AsRef<Vector>(_StartOffset);
+            _StartOffset = _StartOffset ?? Schema.GetOffset(0xBF17DA8041EEE6BF);
+            return ref _Handle.AsRef<Vector>(_StartOffset!.Value);
         }
     }
-    private static nint _LeftOffset = -1;
+    private static nint? _LeftOffset;
 
     public ref Vector Left
     {
         get
         {
-            if (_LeftOffset == -1) _LeftOffset = Schema.GetOffset(0xBF17DA80C965C1D0);
-            return ref _Handle.AsRef<Vector>(_LeftOffset);
+            _LeftOffset = _LeftOffset ?? Schema.GetOffset(0xBF17DA80C965C1D0);
+            return ref _Handle.AsRef<Vector>(_LeftOffset!.Value);
         }
     }
-    private static nint _NormalOffset = -1;
+    private static nint? _NormalOffset;
 
     public ref Vector Normal
     {
         get
         {
-            if (_NormalOffset == -1) _NormalOffset = Schema.GetOffset(0xBF17DA80363057B2);
-            return ref _Handle.AsRef<Vector>(_NormalOffset);
+            _NormalOffset = _NormalOffset ?? Schema.GetOffset(0xBF17DA80363057B2);
+            return ref _Handle.AsRef<Vector>(_NormalOffset!.Value);
         }
     }
-    private static nint _PlayerOffset = -1;
+    private static nint? _PlayerOffset;
 
     public ref int Player
     {
         get
         {
-            if (_PlayerOffset == -1) _PlayerOffset = Schema.GetOffset(0xBF17DA80E30D6DFC);
-            return ref _Handle.AsRef<int>(_PlayerOffset);
+            _PlayerOffset = _PlayerOffset ?? Schema.GetOffset(0xBF17DA80E30D6DFC);
+            return ref _Handle.AsRef<int>(_PlayerOffset!.Value);
         }
     }
-    private static nint _EntityOffset = -1;
+    private static nint? _EntityOffset;
 
     public ref int Entity
     {
         get
         {
-            if (_EntityOffset == -1) _EntityOffset = Schema.GetOffset(0xBF17DA80A2D5FAD6);
-            return ref _Handle.AsRef<int>(_EntityOffset);
+            _EntityOffset = _EntityOffset ?? Schema.GetOffset(0xBF17DA80A2D5FAD6);
+            return ref _Handle.AsRef<int>(_EntityOffset!.Value);
         }
     }
-    private static nint _HitboxOffset = -1;
+    private static nint? _HitboxOffset;
 
     public ref int Hitbox
     {
         get
         {
-            if (_HitboxOffset == -1) _HitboxOffset = Schema.GetOffset(0xBF17DA806D9A48B3);
-            return ref _Handle.AsRef<int>(_HitboxOffset);
+            _HitboxOffset = _HitboxOffset ?? Schema.GetOffset(0xBF17DA806D9A48B3);
+            return ref _Handle.AsRef<int>(_HitboxOffset!.Value);
         }
     }
-    private static nint _CreationTimeOffset = -1;
+    private static nint? _CreationTimeOffset;
 
     public ref float CreationTime
     {
         get
         {
-            if (_CreationTimeOffset == -1) _CreationTimeOffset = Schema.GetOffset(0xBF17DA80525557E7);
-            return ref _Handle.AsRef<float>(_CreationTimeOffset);
+            _CreationTimeOffset = _CreationTimeOffset ?? Schema.GetOffset(0xBF17DA80525557E7);
+            return ref _Handle.AsRef<float>(_CreationTimeOffset!.Value);
         }
     }
-    private static nint _TintIDOffset = -1;
+    private static nint? _TintIDOffset;
 
     public ref int TintID
     {
         get
         {
-            if (_TintIDOffset == -1) _TintIDOffset = Schema.GetOffset(0xBF17DA802CA2D64D);
-            return ref _Handle.AsRef<int>(_TintIDOffset);
+            _TintIDOffset = _TintIDOffset ?? Schema.GetOffset(0xBF17DA802CA2D64D);
+            return ref _Handle.AsRef<int>(_TintIDOffset!.Value);
         }
     }
-    private static nint _VersionOffset = -1;
+    private static nint? _VersionOffset;
 
     public ref byte Version
     {
         get
         {
-            if (_VersionOffset == -1) _VersionOffset = Schema.GetOffset(0xBF17DA80B0AB8B1B);
-            return ref _Handle.AsRef<byte>(_VersionOffset);
+            _VersionOffset = _VersionOffset ?? Schema.GetOffset(0xBF17DA80B0AB8B1B);
+            return ref _Handle.AsRef<byte>(_VersionOffset!.Value);
         }
     }
-    private static nint _SignatureOffset = -1;
+    private static nint? _SignatureOffset;
     private SchemaFixedArray<byte>? _SignatureInstance;
 
     public ISchemaFixedArray<byte> Signature
     {
         get
         {
-            if (_SignatureOffset == -1) _SignatureOffset = Schema.GetOffset(0xBF17DA8033A8D6DC);
+            _SignatureOffset = _SignatureOffset ?? Schema.GetOffset(0xBF17DA8033A8D6DC);
             var instance = _SignatureInstance ??= new SchemaFixedArray<byte>(0, 0xBF17DA8033A8D6DC, 128, 1, 1);
-            instance.DangerousSetHandle(_Handle + _SignatureOffset);
+            instance.DangerousSetHandle(_Handle + _SignatureOffset!.Value);
             return instance;
         }
     }
-    private static nint _SprayRenderHelperOffset = -1;
+    private static nint? _SprayRenderHelperOffset;
     private CPlayerSprayDecalRenderHelperImpl? _SprayRenderHelperInstance;
 
     public CPlayerSprayDecalRenderHelper SprayRenderHelper
     {
         get
         {
-            if (_SprayRenderHelperOffset == -1) _SprayRenderHelperOffset = Schema.GetOffset(0xBF17DA808169875A);
+            _SprayRenderHelperOffset = _SprayRenderHelperOffset ?? Schema.GetOffset(0xBF17DA808169875A);
             var instance = _SprayRenderHelperInstance ??= new CPlayerSprayDecalRenderHelperImpl(0);
-            instance.DangerousSetHandle(_Handle + _SprayRenderHelperOffset);
+            instance.DangerousSetHandle(_Handle + _SprayRenderHelperOffset!.Value);
             return instance;
         }
     }

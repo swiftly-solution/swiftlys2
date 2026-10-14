@@ -16,16 +16,16 @@ internal partial class CMarkupSearch_PathCostAreaFilterImpl : INavPathCostAreaFi
 {
     public CMarkupSearch_PathCostAreaFilterImpl(nint handle) : base(handle) { }
 
-    private static nint _SearchHelperOffset = -1;
+    private static nint? _SearchHelperOffset;
     private CMarkupSearchHelperImpl? _SearchHelperInstance;
 
     public CMarkupSearchHelper SearchHelper
     {
         get
         {
-            if (_SearchHelperOffset == -1) _SearchHelperOffset = Schema.GetOffset(0x522539E26758A799);
+            _SearchHelperOffset = _SearchHelperOffset ?? Schema.GetOffset(0x522539E26758A799);
             var instance = _SearchHelperInstance ??= new CMarkupSearchHelperImpl(0);
-            instance.DangerousSetHandle(_Handle + _SearchHelperOffset);
+            instance.DangerousSetHandle(_Handle + _SearchHelperOffset!.Value);
             return instance;
         }
     }

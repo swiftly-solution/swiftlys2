@@ -16,50 +16,50 @@ internal partial class OutflowWithRequirements_tImpl : SchemaClass, OutflowWithR
 {
     public OutflowWithRequirements_tImpl(nint handle) : base(handle) { }
 
-    private static nint _ConnectionOffset = -1;
+    private static nint? _ConnectionOffset;
     private CPulse_OutflowConnectionImpl? _ConnectionInstance;
 
     public CPulse_OutflowConnection Connection
     {
         get
         {
-            if (_ConnectionOffset == -1) _ConnectionOffset = Schema.GetOffset(0x5BFC4DD4D4CD5F59);
+            _ConnectionOffset = _ConnectionOffset ?? Schema.GetOffset(0x5BFC4DD4D4CD5F59);
             var instance = _ConnectionInstance ??= new CPulse_OutflowConnectionImpl(0);
-            instance.DangerousSetHandle(_Handle + _ConnectionOffset);
+            instance.DangerousSetHandle(_Handle + _ConnectionOffset!.Value);
             return instance;
         }
     }
-    private static nint _DestinationFlowNodeIDOffset = -1;
+    private static nint? _DestinationFlowNodeIDOffset;
     private PulseDocNodeID_tImpl? _DestinationFlowNodeIDInstance;
 
     public PulseDocNodeID_t DestinationFlowNodeID
     {
         get
         {
-            if (_DestinationFlowNodeIDOffset == -1) _DestinationFlowNodeIDOffset = Schema.GetOffset(0x5BFC4DD4C986A186);
+            _DestinationFlowNodeIDOffset = _DestinationFlowNodeIDOffset ?? Schema.GetOffset(0x5BFC4DD4C986A186);
             var instance = _DestinationFlowNodeIDInstance ??= new PulseDocNodeID_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _DestinationFlowNodeIDOffset);
+            instance.DangerousSetHandle(_Handle + _DestinationFlowNodeIDOffset!.Value);
             return instance;
         }
     }
-    private static nint _RequirementNodeIDsOffset = -1;
+    private static nint? _RequirementNodeIDsOffset;
 
     public ref CUtlVector<PulseDocNodeID_t> RequirementNodeIDs
     {
         get
         {
-            if (_RequirementNodeIDsOffset == -1) _RequirementNodeIDsOffset = Schema.GetOffset(0x5BFC4DD47DAC9EFE);
-            return ref _Handle.AsRef<CUtlVector<PulseDocNodeID_t>>(_RequirementNodeIDsOffset);
+            _RequirementNodeIDsOffset = _RequirementNodeIDsOffset ?? Schema.GetOffset(0x5BFC4DD47DAC9EFE);
+            return ref _Handle.AsRef<CUtlVector<PulseDocNodeID_t>>(_RequirementNodeIDsOffset!.Value);
         }
     }
-    private static nint _CursorStateBlockIndexOffset = -1;
+    private static nint? _CursorStateBlockIndexOffset;
 
     public ref CUtlVector<int> CursorStateBlockIndex
     {
         get
         {
-            if (_CursorStateBlockIndexOffset == -1) _CursorStateBlockIndexOffset = Schema.GetOffset(0x5BFC4DD46CECC07B);
-            return ref _Handle.AsRef<CUtlVector<int>>(_CursorStateBlockIndexOffset);
+            _CursorStateBlockIndexOffset = _CursorStateBlockIndexOffset ?? Schema.GetOffset(0x5BFC4DD46CECC07B);
+            return ref _Handle.AsRef<CUtlVector<int>>(_CursorStateBlockIndexOffset!.Value);
         }
     }
 

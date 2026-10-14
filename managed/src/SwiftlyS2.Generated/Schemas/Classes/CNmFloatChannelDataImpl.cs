@@ -16,54 +16,54 @@ internal partial class CNmFloatChannelDataImpl : SchemaClass, CNmFloatChannelDat
 {
     public CNmFloatChannelDataImpl(nint handle) : base(handle) { }
 
-    private static nint _SkeletonOffset = -1;
+    private static nint? _SkeletonOffset;
 
     public ref CStrongHandle<InfoForResourceTypeCNmSkeleton> Skeleton
     {
         get
         {
-            if (_SkeletonOffset == -1) _SkeletonOffset = Schema.GetOffset(0x15A8736EE77F030E);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCNmSkeleton>>(_SkeletonOffset);
+            _SkeletonOffset = _SkeletonOffset ?? Schema.GetOffset(0x15A8736EE77F030E);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCNmSkeleton>>(_SkeletonOffset!.Value);
         }
     }
-    private static nint _SetIDOffset = -1;
+    private static nint? _SetIDOffset;
 
     public ref CGlobalSymbol SetID
     {
         get
         {
-            if (_SetIDOffset == -1) _SetIDOffset = Schema.GetOffset(0x15A8736EA6BAFC6E);
-            return ref _Handle.AsRef<CGlobalSymbol>(_SetIDOffset);
+            _SetIDOffset = _SetIDOffset ?? Schema.GetOffset(0x15A8736EA6BAFC6E);
+            return ref _Handle.AsRef<CGlobalSymbol>(_SetIDOffset!.Value);
         }
     }
-    private static nint _ChannelSettingsOffset = -1;
+    private static nint? _ChannelSettingsOffset;
 
     public ref CUtlVector<CNmFloatChannelData__ChannelSettings_t> ChannelSettings
     {
         get
         {
-            if (_ChannelSettingsOffset == -1) _ChannelSettingsOffset = Schema.GetOffset(0x15A8736EC7F9ACA9);
-            return ref _Handle.AsRef<CUtlVector<CNmFloatChannelData__ChannelSettings_t>>(_ChannelSettingsOffset);
+            _ChannelSettingsOffset = _ChannelSettingsOffset ?? Schema.GetOffset(0x15A8736EC7F9ACA9);
+            return ref _Handle.AsRef<CUtlVector<CNmFloatChannelData__ChannelSettings_t>>(_ChannelSettingsOffset!.Value);
         }
     }
-    private static nint _CompressedDataOffset = -1;
+    private static nint? _CompressedDataOffset;
 
     public ref CUtlVector<ushort> CompressedData
     {
         get
         {
-            if (_CompressedDataOffset == -1) _CompressedDataOffset = Schema.GetOffset(0x15A8736ED28B783C);
-            return ref _Handle.AsRef<CUtlVector<ushort>>(_CompressedDataOffset);
+            _CompressedDataOffset = _CompressedDataOffset ?? Schema.GetOffset(0x15A8736ED28B783C);
+            return ref _Handle.AsRef<CUtlVector<ushort>>(_CompressedDataOffset!.Value);
         }
     }
-    private static nint _CompressedOffsetsOffset = -1;
+    private static nint? _CompressedOffsetsOffset;
 
     public ref CUtlVector<uint> CompressedOffsets
     {
         get
         {
-            if (_CompressedOffsetsOffset == -1) _CompressedOffsetsOffset = Schema.GetOffset(0x15A8736EAB9F5B74);
-            return ref _Handle.AsRef<CUtlVector<uint>>(_CompressedOffsetsOffset);
+            _CompressedOffsetsOffset = _CompressedOffsetsOffset ?? Schema.GetOffset(0x15A8736EAB9F5B74);
+            return ref _Handle.AsRef<CUtlVector<uint>>(_CompressedOffsetsOffset!.Value);
         }
     }
 

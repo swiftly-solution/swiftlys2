@@ -16,62 +16,62 @@ internal partial class thinkfunc_tImpl : SchemaClass, thinkfunc_t
 {
     public thinkfunc_tImpl(nint handle) : base(handle) { }
 
-    private static nint _ThinkOffset = -1;
+    private static nint? _ThinkOffset;
     private SchemaUntypedField? _ThinkInstance;
 
     public SchemaUntypedField Think
     {
         get
         {
-            if (_ThinkOffset == -1) _ThinkOffset = Schema.GetOffset(0x8ED693FABF50ED7B);
+            _ThinkOffset = _ThinkOffset ?? Schema.GetOffset(0x8ED693FABF50ED7B);
             var instance = _ThinkInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ThinkOffset);
+            instance.DangerousSetHandle(_Handle + _ThinkOffset!.Value);
             return instance;
         }
     }
-    private static nint _FnOffset = -1;
+    private static nint? _FnOffset;
 
     public ref HSCRIPTHandler Fn
     {
         get
         {
-            if (_FnOffset == -1) _FnOffset = Schema.GetOffset(0x8ED693FAD922E237);
-            return ref _Handle.AsRef<HSCRIPTHandler>(_FnOffset);
+            _FnOffset = _FnOffset ?? Schema.GetOffset(0x8ED693FAD922E237);
+            return ref _Handle.AsRef<HSCRIPTHandler>(_FnOffset!.Value);
         }
     }
-    private static nint _ContextOffset = -1;
+    private static nint? _ContextOffset;
 
     public ref CUtlStringToken Context
     {
         get
         {
-            if (_ContextOffset == -1) _ContextOffset = Schema.GetOffset(0x8ED693FAB16905F8);
-            return ref _Handle.AsRef<CUtlStringToken>(_ContextOffset);
+            _ContextOffset = _ContextOffset ?? Schema.GetOffset(0x8ED693FAB16905F8);
+            return ref _Handle.AsRef<CUtlStringToken>(_ContextOffset!.Value);
         }
     }
-    private static nint _NextThinkTickOffset = -1;
+    private static nint? _NextThinkTickOffset;
     private GameTick_tImpl? _NextThinkTickInstance;
 
     public GameTick_t NextThinkTick
     {
         get
         {
-            if (_NextThinkTickOffset == -1) _NextThinkTickOffset = Schema.GetOffset(0x8ED693FAB7CEF021);
+            _NextThinkTickOffset = _NextThinkTickOffset ?? Schema.GetOffset(0x8ED693FAB7CEF021);
             var instance = _NextThinkTickInstance ??= new GameTick_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _NextThinkTickOffset);
+            instance.DangerousSetHandle(_Handle + _NextThinkTickOffset!.Value);
             return instance;
         }
     }
-    private static nint _LastThinkTickOffset = -1;
+    private static nint? _LastThinkTickOffset;
     private GameTick_tImpl? _LastThinkTickInstance;
 
     public GameTick_t LastThinkTick
     {
         get
         {
-            if (_LastThinkTickOffset == -1) _LastThinkTickOffset = Schema.GetOffset(0x8ED693FACE8FE7F2);
+            _LastThinkTickOffset = _LastThinkTickOffset ?? Schema.GetOffset(0x8ED693FACE8FE7F2);
             var instance = _LastThinkTickInstance ??= new GameTick_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _LastThinkTickOffset);
+            instance.DangerousSetHandle(_Handle + _LastThinkTickOffset!.Value);
             return instance;
         }
     }

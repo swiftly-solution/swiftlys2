@@ -16,37 +16,37 @@ internal partial class FeAnimStrayRadius_tImpl : SchemaClass, FeAnimStrayRadius_
 {
     public FeAnimStrayRadius_tImpl(nint handle) : base(handle) { }
 
-    private static nint _NodeOffset = -1;
+    private static nint? _NodeOffset;
     private SchemaFixedArray<ushort>? _NodeInstance;
 
     public ISchemaFixedArray<ushort> Node
     {
         get
         {
-            if (_NodeOffset == -1) _NodeOffset = Schema.GetOffset(0xF06BE9BCD6694B9);
+            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0xF06BE9BCD6694B9);
             var instance = _NodeInstance ??= new SchemaFixedArray<ushort>(0, 0xF06BE9BCD6694B9, 2, 2, 2);
-            instance.DangerousSetHandle(_Handle + _NodeOffset);
+            instance.DangerousSetHandle(_Handle + _NodeOffset!.Value);
             return instance;
         }
     }
-    private static nint _MaxDistOffset = -1;
+    private static nint? _MaxDistOffset;
 
     public ref float MaxDist
     {
         get
         {
-            if (_MaxDistOffset == -1) _MaxDistOffset = Schema.GetOffset(0xF06BE9BC9FFDD57);
-            return ref _Handle.AsRef<float>(_MaxDistOffset);
+            _MaxDistOffset = _MaxDistOffset ?? Schema.GetOffset(0xF06BE9BC9FFDD57);
+            return ref _Handle.AsRef<float>(_MaxDistOffset!.Value);
         }
     }
-    private static nint _RelaxationFactorOffset = -1;
+    private static nint? _RelaxationFactorOffset;
 
     public ref float RelaxationFactor
     {
         get
         {
-            if (_RelaxationFactorOffset == -1) _RelaxationFactorOffset = Schema.GetOffset(0xF06BE9B357F3BFF);
-            return ref _Handle.AsRef<float>(_RelaxationFactorOffset);
+            _RelaxationFactorOffset = _RelaxationFactorOffset ?? Schema.GetOffset(0xF06BE9B357F3BFF);
+            return ref _Handle.AsRef<float>(_RelaxationFactorOffset!.Value);
         }
     }
 

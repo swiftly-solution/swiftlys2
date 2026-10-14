@@ -16,47 +16,47 @@ internal partial class C_OP_InheritFromParentParticlesImpl : CParticleFunctionOp
 {
     public C_OP_InheritFromParentParticlesImpl(nint handle) : base(handle) { }
 
-    private static nint _ScaleOffset = -1;
+    private static nint? _ScaleOffset;
 
     public ref float Scale
     {
         get
         {
-            if (_ScaleOffset == -1) _ScaleOffset = Schema.GetOffset(0x4310722BB731A42F);
-            return ref _Handle.AsRef<float>(_ScaleOffset);
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x4310722BB731A42F);
+            return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
         }
     }
-    private static nint _FieldOutputOffset = -1;
+    private static nint? _FieldOutputOffset;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0x4310722BE5729606);
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x4310722BE5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
             return instance;
         }
     }
-    private static nint _IncrementOffset = -1;
+    private static nint? _IncrementOffset;
 
     public ref int Increment
     {
         get
         {
-            if (_IncrementOffset == -1) _IncrementOffset = Schema.GetOffset(0x4310722B2359F182);
-            return ref _Handle.AsRef<int>(_IncrementOffset);
+            _IncrementOffset = _IncrementOffset ?? Schema.GetOffset(0x4310722B2359F182);
+            return ref _Handle.AsRef<int>(_IncrementOffset!.Value);
         }
     }
-    private static nint _RandomDistributionOffset = -1;
+    private static nint? _RandomDistributionOffset;
 
     public ref bool RandomDistribution
     {
         get
         {
-            if (_RandomDistributionOffset == -1) _RandomDistributionOffset = Schema.GetOffset(0x4310722B830F6B38);
-            return ref _Handle.AsRef<bool>(_RandomDistributionOffset);
+            _RandomDistributionOffset = _RandomDistributionOffset ?? Schema.GetOffset(0x4310722B830F6B38);
+            return ref _Handle.AsRef<bool>(_RandomDistributionOffset!.Value);
         }
     }
 

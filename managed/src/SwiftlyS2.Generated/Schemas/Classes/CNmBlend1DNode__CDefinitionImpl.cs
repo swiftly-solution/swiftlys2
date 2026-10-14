@@ -16,16 +16,16 @@ internal partial class CNmBlend1DNode__CDefinitionImpl : CNmParameterizedBlendNo
 {
     public CNmBlend1DNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint _ParameterizationOffset = -1;
+    private static nint? _ParameterizationOffset;
     private CNmParameterizedBlendNode__Parameterization_tImpl? _ParameterizationInstance;
 
     public CNmParameterizedBlendNode__Parameterization_t Parameterization
     {
         get
         {
-            if (_ParameterizationOffset == -1) _ParameterizationOffset = Schema.GetOffset(0xA5E668CDE173A928);
+            _ParameterizationOffset = _ParameterizationOffset ?? Schema.GetOffset(0xA5E668CDE173A928);
             var instance = _ParameterizationInstance ??= new CNmParameterizedBlendNode__Parameterization_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParameterizationOffset);
+            instance.DangerousSetHandle(_Handle + _ParameterizationOffset!.Value);
             return instance;
         }
     }

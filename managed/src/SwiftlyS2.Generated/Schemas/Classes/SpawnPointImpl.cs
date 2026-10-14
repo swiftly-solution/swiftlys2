@@ -16,34 +16,34 @@ internal partial class SpawnPointImpl : CServerOnlyPointEntityImpl, SpawnPoint
 {
     public SpawnPointImpl(nint handle) : base(handle) { }
 
-    private static nint _PriorityOffset = -1;
+    private static nint? _PriorityOffset;
 
     public ref int Priority
     {
         get
         {
-            if (_PriorityOffset == -1) _PriorityOffset = Schema.GetOffset(0x72527C0E6224A30C);
-            return ref _Handle.AsRef<int>(_PriorityOffset);
+            _PriorityOffset = _PriorityOffset ?? Schema.GetOffset(0x72527C0E6224A30C);
+            return ref _Handle.AsRef<int>(_PriorityOffset!.Value);
         }
     }
-    private static nint _EnabledOffset = -1;
+    private static nint? _EnabledOffset;
 
     public ref bool Enabled
     {
         get
         {
-            if (_EnabledOffset == -1) _EnabledOffset = Schema.GetOffset(0x72527C0E6154EB7E);
-            return ref _Handle.AsRef<bool>(_EnabledOffset);
+            _EnabledOffset = _EnabledOffset ?? Schema.GetOffset(0x72527C0E6154EB7E);
+            return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
         }
     }
-    private static nint _TypeOffset = -1;
+    private static nint? _TypeOffset;
 
     public ref int Type
     {
         get
         {
-            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0x72527C0E18853D59);
-            return ref _Handle.AsRef<int>(_TypeOffset);
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x72527C0E18853D59);
+            return ref _Handle.AsRef<int>(_TypeOffset!.Value);
         }
     }
 

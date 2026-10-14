@@ -16,24 +16,24 @@ internal partial class C_SpotlightEndImpl : C_BaseModelEntityImpl, C_SpotlightEn
 {
     public C_SpotlightEndImpl(nint handle) : base(handle) { }
 
-    private static nint _LightScaleOffset = -1;
+    private static nint? _LightScaleOffset;
 
     public ref float LightScale
     {
         get
         {
-            if (_LightScaleOffset == -1) _LightScaleOffset = Schema.GetOffset(0x9F9DA9CEE5A1295D);
-            return ref _Handle.AsRef<float>(_LightScaleOffset);
+            _LightScaleOffset = _LightScaleOffset ?? Schema.GetOffset(0x9F9DA9CEE5A1295D);
+            return ref _Handle.AsRef<float>(_LightScaleOffset!.Value);
         }
     }
-    private static nint _RadiusOffset = -1;
+    private static nint? _RadiusOffset;
 
     public ref float Radius
     {
         get
         {
-            if (_RadiusOffset == -1) _RadiusOffset = Schema.GetOffset(0x9F9DA9CE7C5B0533);
-            return ref _Handle.AsRef<float>(_RadiusOffset);
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x9F9DA9CE7C5B0533);
+            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
         }
     }
 

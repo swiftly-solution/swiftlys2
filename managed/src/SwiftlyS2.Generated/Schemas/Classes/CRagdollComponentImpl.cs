@@ -16,54 +16,54 @@ internal partial class CRagdollComponentImpl : CAnimGraphDoc_ComponentImpl, CRag
 {
     public CRagdollComponentImpl(nint handle) : base(handle) { }
 
-    private static nint _WeightListsOffset = -1;
+    private static nint? _WeightListsOffset;
 
     public ref CUtlVector<CAnimGraphDoc_RigidBodyWeightList> WeightLists
     {
         get
         {
-            if (_WeightListsOffset == -1) _WeightListsOffset = Schema.GetOffset(0xB34E4860F50C4582);
-            return ref _Handle.AsRef<CUtlVector<CAnimGraphDoc_RigidBodyWeightList>>(_WeightListsOffset);
+            _WeightListsOffset = _WeightListsOffset ?? Schema.GetOffset(0xB34E4860F50C4582);
+            return ref _Handle.AsRef<CUtlVector<CAnimGraphDoc_RigidBodyWeightList>>(_WeightListsOffset!.Value);
         }
     }
-    private static nint _SpringFrequencyMinOffset = -1;
+    private static nint? _SpringFrequencyMinOffset;
 
     public ref float SpringFrequencyMin
     {
         get
         {
-            if (_SpringFrequencyMinOffset == -1) _SpringFrequencyMinOffset = Schema.GetOffset(0xB34E486037C769A4);
-            return ref _Handle.AsRef<float>(_SpringFrequencyMinOffset);
+            _SpringFrequencyMinOffset = _SpringFrequencyMinOffset ?? Schema.GetOffset(0xB34E486037C769A4);
+            return ref _Handle.AsRef<float>(_SpringFrequencyMinOffset!.Value);
         }
     }
-    private static nint _SpringFrequencyMaxOffset = -1;
+    private static nint? _SpringFrequencyMaxOffset;
 
     public ref float SpringFrequencyMax
     {
         get
         {
-            if (_SpringFrequencyMaxOffset == -1) _SpringFrequencyMaxOffset = Schema.GetOffset(0xB34E486045DB0766);
-            return ref _Handle.AsRef<float>(_SpringFrequencyMaxOffset);
+            _SpringFrequencyMaxOffset = _SpringFrequencyMaxOffset ?? Schema.GetOffset(0xB34E486045DB0766);
+            return ref _Handle.AsRef<float>(_SpringFrequencyMaxOffset!.Value);
         }
     }
-    private static nint _MaxStretchOffset = -1;
+    private static nint? _MaxStretchOffset;
 
     public ref float MaxStretch
     {
         get
         {
-            if (_MaxStretchOffset == -1) _MaxStretchOffset = Schema.GetOffset(0xB34E4860BCF894C4);
-            return ref _Handle.AsRef<float>(_MaxStretchOffset);
+            _MaxStretchOffset = _MaxStretchOffset ?? Schema.GetOffset(0xB34E4860BCF894C4);
+            return ref _Handle.AsRef<float>(_MaxStretchOffset!.Value);
         }
     }
-    private static nint _SolidCollisionAtZeroWeightOffset = -1;
+    private static nint? _SolidCollisionAtZeroWeightOffset;
 
     public ref bool SolidCollisionAtZeroWeight
     {
         get
         {
-            if (_SolidCollisionAtZeroWeightOffset == -1) _SolidCollisionAtZeroWeightOffset = Schema.GetOffset(0xB34E486083AB44C3);
-            return ref _Handle.AsRef<bool>(_SolidCollisionAtZeroWeightOffset);
+            _SolidCollisionAtZeroWeightOffset = _SolidCollisionAtZeroWeightOffset ?? Schema.GetOffset(0xB34E486083AB44C3);
+            return ref _Handle.AsRef<bool>(_SolidCollisionAtZeroWeightOffset!.Value);
         }
     }
 

@@ -16,49 +16,49 @@ internal partial class CBaseConstraintImpl : CBoneConstraintBaseImpl, CBaseConst
 {
     public CBaseConstraintImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xE972C2844D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xE972C2844D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xE972C2844D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xE972C2844D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _UpVectorOffset = -1;
+    private static nint? _UpVectorOffset;
 
     public ref Vector UpVector
     {
         get
         {
-            if (_UpVectorOffset == -1) _UpVectorOffset = Schema.GetOffset(0xE972C28487645F1B);
-            return ref _Handle.AsRef<Vector>(_UpVectorOffset);
+            _UpVectorOffset = _UpVectorOffset ?? Schema.GetOffset(0xE972C28487645F1B);
+            return ref _Handle.AsRef<Vector>(_UpVectorOffset!.Value);
         }
     }
-    private static nint _SlavesOffset = -1;
+    private static nint? _SlavesOffset;
 
     public ref CUtlLeanVector<CConstraintSlave, int> Slaves
     {
         get
         {
-            if (_SlavesOffset == -1) _SlavesOffset = Schema.GetOffset(0xE972C284A62BA9E9);
-            return ref _Handle.AsRef<CUtlLeanVector<CConstraintSlave, int>>(_SlavesOffset);
+            _SlavesOffset = _SlavesOffset ?? Schema.GetOffset(0xE972C284A62BA9E9);
+            return ref _Handle.AsRef<CUtlLeanVector<CConstraintSlave, int>>(_SlavesOffset!.Value);
         }
     }
-    private static nint _TargetsOffset = -1;
+    private static nint? _TargetsOffset;
 
     public ref CUtlVector<CConstraintTarget> Targets
     {
         get
         {
-            if (_TargetsOffset == -1) _TargetsOffset = Schema.GetOffset(0xE972C28436A2FF01);
-            return ref _Handle.AsRef<CUtlVector<CConstraintTarget>>(_TargetsOffset);
+            _TargetsOffset = _TargetsOffset ?? Schema.GetOffset(0xE972C28436A2FF01);
+            return ref _Handle.AsRef<CUtlVector<CConstraintTarget>>(_TargetsOffset!.Value);
         }
     }
 

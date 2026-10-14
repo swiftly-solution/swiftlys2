@@ -16,44 +16,44 @@ internal partial class CompositeMaterialAssemblyProcedure_tImpl : SchemaClass, C
 {
     public CompositeMaterialAssemblyProcedure_tImpl(nint handle) : base(handle) { }
 
-    private static nint _CompMatIncludesOffset = -1;
+    private static nint? _CompMatIncludesOffset;
 
     public ref CUtlVector<SchemaUntypedField> CompMatIncludes
     {
         get
         {
-            if (_CompMatIncludesOffset == -1) _CompMatIncludesOffset = Schema.GetOffset(0x3EAE73ADA59263FD);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_CompMatIncludesOffset);
+            _CompMatIncludesOffset = _CompMatIncludesOffset ?? Schema.GetOffset(0x3EAE73ADA59263FD);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_CompMatIncludesOffset!.Value);
         }
     }
-    private static nint _MatchFiltersOffset = -1;
+    private static nint? _MatchFiltersOffset;
 
     public ref CUtlVector<CompositeMaterialMatchFilter_t> MatchFilters
     {
         get
         {
-            if (_MatchFiltersOffset == -1) _MatchFiltersOffset = Schema.GetOffset(0x3EAE73AD32585C99);
-            return ref _Handle.AsRef<CUtlVector<CompositeMaterialMatchFilter_t>>(_MatchFiltersOffset);
+            _MatchFiltersOffset = _MatchFiltersOffset ?? Schema.GetOffset(0x3EAE73AD32585C99);
+            return ref _Handle.AsRef<CUtlVector<CompositeMaterialMatchFilter_t>>(_MatchFiltersOffset!.Value);
         }
     }
-    private static nint _CompositeInputContainersOffset = -1;
+    private static nint? _CompositeInputContainersOffset;
 
     public ref CUtlVector<CompositeMaterialInputContainer_t> CompositeInputContainers
     {
         get
         {
-            if (_CompositeInputContainersOffset == -1) _CompositeInputContainersOffset = Schema.GetOffset(0x3EAE73AD250F4DF4);
-            return ref _Handle.AsRef<CUtlVector<CompositeMaterialInputContainer_t>>(_CompositeInputContainersOffset);
+            _CompositeInputContainersOffset = _CompositeInputContainersOffset ?? Schema.GetOffset(0x3EAE73AD250F4DF4);
+            return ref _Handle.AsRef<CUtlVector<CompositeMaterialInputContainer_t>>(_CompositeInputContainersOffset!.Value);
         }
     }
-    private static nint _PropertyMutatorsOffset = -1;
+    private static nint? _PropertyMutatorsOffset;
 
     public ref CUtlVector<CompMatPropertyMutator_t> PropertyMutators
     {
         get
         {
-            if (_PropertyMutatorsOffset == -1) _PropertyMutatorsOffset = Schema.GetOffset(0x3EAE73AD78DD5C3B);
-            return ref _Handle.AsRef<CUtlVector<CompMatPropertyMutator_t>>(_PropertyMutatorsOffset);
+            _PropertyMutatorsOffset = _PropertyMutatorsOffset ?? Schema.GetOffset(0x3EAE73AD78DD5C3B);
+            return ref _Handle.AsRef<CUtlVector<CompMatPropertyMutator_t>>(_PropertyMutatorsOffset!.Value);
         }
     }
 

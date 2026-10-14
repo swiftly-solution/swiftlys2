@@ -16,29 +16,29 @@ internal partial class CActionComponentImpl : CAnimGraphDoc_ComponentImpl, CActi
 {
     public CActionComponentImpl(nint handle) : base(handle) { }
 
-    private static nint _ActionsOffset = -1;
+    private static nint? _ActionsOffset;
 
     public ref CUtlVector<SchemaUntypedField> Actions
     {
         get
         {
-            if (_ActionsOffset == -1) _ActionsOffset = Schema.GetOffset(0x334A330F8D622684);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ActionsOffset);
+            _ActionsOffset = _ActionsOffset ?? Schema.GetOffset(0x334A330F8D622684);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ActionsOffset!.Value);
         }
     }
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x334A330F63D22D49);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x334A330F63D22D49);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x334A330F63D22D49);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x334A330F63D22D49);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
 

@@ -16,68 +16,68 @@ internal partial class CPulseCell_Test_MultiOutflow_WithParams_YieldingImpl : CP
 {
     public CPulseCell_Test_MultiOutflow_WithParams_YieldingImpl(nint handle) : base(handle) { }
 
-    private static nint _Out1Offset = -1;
+    private static nint? _Out1Offset;
     private SignatureOutflow_ContinueImpl? _Out1Instance;
 
     public SignatureOutflow_Continue Out1
     {
         get
         {
-            if (_Out1Offset == -1) _Out1Offset = Schema.GetOffset(0xB412A25905F293AA);
+            _Out1Offset = _Out1Offset ?? Schema.GetOffset(0xB412A25905F293AA);
             var instance = _Out1Instance ??= new SignatureOutflow_ContinueImpl(0);
-            instance.DangerousSetHandle(_Handle + _Out1Offset);
+            instance.DangerousSetHandle(_Handle + _Out1Offset!.Value);
             return instance;
         }
     }
-    private static nint _AsyncChild1Offset = -1;
+    private static nint? _AsyncChild1Offset;
     private SignatureOutflow_ContinueImpl? _AsyncChild1Instance;
 
     public SignatureOutflow_Continue AsyncChild1
     {
         get
         {
-            if (_AsyncChild1Offset == -1) _AsyncChild1Offset = Schema.GetOffset(0xB412A2592CEBF78A);
+            _AsyncChild1Offset = _AsyncChild1Offset ?? Schema.GetOffset(0xB412A2592CEBF78A);
             var instance = _AsyncChild1Instance ??= new SignatureOutflow_ContinueImpl(0);
-            instance.DangerousSetHandle(_Handle + _AsyncChild1Offset);
+            instance.DangerousSetHandle(_Handle + _AsyncChild1Offset!.Value);
             return instance;
         }
     }
-    private static nint _AsyncChild2Offset = -1;
+    private static nint? _AsyncChild2Offset;
     private SignatureOutflow_ContinueImpl? _AsyncChild2Instance;
 
     public SignatureOutflow_Continue AsyncChild2
     {
         get
         {
-            if (_AsyncChild2Offset == -1) _AsyncChild2Offset = Schema.GetOffset(0xB412A2592BEBF5F7);
+            _AsyncChild2Offset = _AsyncChild2Offset ?? Schema.GetOffset(0xB412A2592BEBF5F7);
             var instance = _AsyncChild2Instance ??= new SignatureOutflow_ContinueImpl(0);
-            instance.DangerousSetHandle(_Handle + _AsyncChild2Offset);
+            instance.DangerousSetHandle(_Handle + _AsyncChild2Offset!.Value);
             return instance;
         }
     }
-    private static nint _YieldResume1Offset = -1;
+    private static nint? _YieldResume1Offset;
     private SignatureOutflow_ResumeImpl? _YieldResume1Instance;
 
     public SignatureOutflow_Resume YieldResume1
     {
         get
         {
-            if (_YieldResume1Offset == -1) _YieldResume1Offset = Schema.GetOffset(0xB412A2596063DFA8);
+            _YieldResume1Offset = _YieldResume1Offset ?? Schema.GetOffset(0xB412A2596063DFA8);
             var instance = _YieldResume1Instance ??= new SignatureOutflow_ResumeImpl(0);
-            instance.DangerousSetHandle(_Handle + _YieldResume1Offset);
+            instance.DangerousSetHandle(_Handle + _YieldResume1Offset!.Value);
             return instance;
         }
     }
-    private static nint _YieldResume2Offset = -1;
+    private static nint? _YieldResume2Offset;
     private SignatureOutflow_ResumeImpl? _YieldResume2Instance;
 
     public SignatureOutflow_Resume YieldResume2
     {
         get
         {
-            if (_YieldResume2Offset == -1) _YieldResume2Offset = Schema.GetOffset(0xB412A2596363E461);
+            _YieldResume2Offset = _YieldResume2Offset ?? Schema.GetOffset(0xB412A2596363E461);
             var instance = _YieldResume2Instance ??= new SignatureOutflow_ResumeImpl(0);
-            instance.DangerousSetHandle(_Handle + _YieldResume2Offset);
+            instance.DangerousSetHandle(_Handle + _YieldResume2Offset!.Value);
             return instance;
         }
     }

@@ -16,104 +16,104 @@ internal partial class CAttachmentImpl : SchemaClass, CAttachment
 {
     public CAttachmentImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x5F09808F4D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x5F09808F4D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x5F09808F4D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x5F09808F4D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _InfluenceNamesOffset = -1;
+    private static nint? _InfluenceNamesOffset;
     private SchemaUtlStringFixedArray? _InfluenceNamesInstance;
 
     public ISchemaUtlStringFixedArray InfluenceNames
     {
         get
         {
-            if (_InfluenceNamesOffset == -1) _InfluenceNamesOffset = Schema.GetOffset(0x5F09808FFD9B3CB8);
+            _InfluenceNamesOffset = _InfluenceNamesOffset ?? Schema.GetOffset(0x5F09808FFD9B3CB8);
             var instance = _InfluenceNamesInstance ??= new SchemaUtlStringFixedArray(0, 0x5F09808FFD9B3CB8, 3, 8, 8);
-            instance.DangerousSetHandle(_Handle + _InfluenceNamesOffset);
+            instance.DangerousSetHandle(_Handle + _InfluenceNamesOffset!.Value);
             return instance;
         }
     }
-    private static nint _InfluenceRotationsOffset = -1;
+    private static nint? _InfluenceRotationsOffset;
     private SchemaFixedArray<Quaternion>? _InfluenceRotationsInstance;
 
     public ISchemaFixedArray<Quaternion> InfluenceRotations
     {
         get
         {
-            if (_InfluenceRotationsOffset == -1) _InfluenceRotationsOffset = Schema.GetOffset(0x5F09808FD277168B);
+            _InfluenceRotationsOffset = _InfluenceRotationsOffset ?? Schema.GetOffset(0x5F09808FD277168B);
             var instance = _InfluenceRotationsInstance ??= new SchemaFixedArray<Quaternion>(0, 0x5F09808FD277168B, 3, 16, 16);
-            instance.DangerousSetHandle(_Handle + _InfluenceRotationsOffset);
+            instance.DangerousSetHandle(_Handle + _InfluenceRotationsOffset!.Value);
             return instance;
         }
     }
-    private static nint _InfluenceOffsetsOffset = -1;
+    private static nint? _InfluenceOffsetsOffset;
     private SchemaFixedArray<Vector>? _InfluenceOffsetsInstance;
 
     public ISchemaFixedArray<Vector> InfluenceOffsets
     {
         get
         {
-            if (_InfluenceOffsetsOffset == -1) _InfluenceOffsetsOffset = Schema.GetOffset(0x5F09808F767C44DC);
+            _InfluenceOffsetsOffset = _InfluenceOffsetsOffset ?? Schema.GetOffset(0x5F09808F767C44DC);
             var instance = _InfluenceOffsetsInstance ??= new SchemaFixedArray<Vector>(0, 0x5F09808F767C44DC, 3, 12, 4);
-            instance.DangerousSetHandle(_Handle + _InfluenceOffsetsOffset);
+            instance.DangerousSetHandle(_Handle + _InfluenceOffsetsOffset!.Value);
             return instance;
         }
     }
-    private static nint _InfluenceWeightsOffset = -1;
+    private static nint? _InfluenceWeightsOffset;
     private SchemaFixedArray<float>? _InfluenceWeightsInstance;
 
     public ISchemaFixedArray<float> InfluenceWeights
     {
         get
         {
-            if (_InfluenceWeightsOffset == -1) _InfluenceWeightsOffset = Schema.GetOffset(0x5F09808F49916951);
+            _InfluenceWeightsOffset = _InfluenceWeightsOffset ?? Schema.GetOffset(0x5F09808F49916951);
             var instance = _InfluenceWeightsInstance ??= new SchemaFixedArray<float>(0, 0x5F09808F49916951, 3, 4, 4);
-            instance.DangerousSetHandle(_Handle + _InfluenceWeightsOffset);
+            instance.DangerousSetHandle(_Handle + _InfluenceWeightsOffset!.Value);
             return instance;
         }
     }
-    private static nint _InfluenceRootTransformOffset = -1;
+    private static nint? _InfluenceRootTransformOffset;
     private SchemaFixedArray<bool>? _InfluenceRootTransformInstance;
 
     public ISchemaFixedArray<bool> InfluenceRootTransform
     {
         get
         {
-            if (_InfluenceRootTransformOffset == -1) _InfluenceRootTransformOffset = Schema.GetOffset(0x5F09808F5763011C);
+            _InfluenceRootTransformOffset = _InfluenceRootTransformOffset ?? Schema.GetOffset(0x5F09808F5763011C);
             var instance = _InfluenceRootTransformInstance ??= new SchemaFixedArray<bool>(0, 0x5F09808F5763011C, 3, 1, 1);
-            instance.DangerousSetHandle(_Handle + _InfluenceRootTransformOffset);
+            instance.DangerousSetHandle(_Handle + _InfluenceRootTransformOffset!.Value);
             return instance;
         }
     }
-    private static nint _InfluencesOffset = -1;
+    private static nint? _InfluencesOffset;
 
     public ref byte Influences
     {
         get
         {
-            if (_InfluencesOffset == -1) _InfluencesOffset = Schema.GetOffset(0x5F09808F8E94AB85);
-            return ref _Handle.AsRef<byte>(_InfluencesOffset);
+            _InfluencesOffset = _InfluencesOffset ?? Schema.GetOffset(0x5F09808F8E94AB85);
+            return ref _Handle.AsRef<byte>(_InfluencesOffset!.Value);
         }
     }
-    private static nint _IgnoreRotationOffset = -1;
+    private static nint? _IgnoreRotationOffset;
 
     public ref bool IgnoreRotation
     {
         get
         {
-            if (_IgnoreRotationOffset == -1) _IgnoreRotationOffset = Schema.GetOffset(0x5F09808FC7A0F33D);
-            return ref _Handle.AsRef<bool>(_IgnoreRotationOffset);
+            _IgnoreRotationOffset = _IgnoreRotationOffset ?? Schema.GetOffset(0x5F09808FC7A0F33D);
+            return ref _Handle.AsRef<bool>(_IgnoreRotationOffset!.Value);
         }
     }
 

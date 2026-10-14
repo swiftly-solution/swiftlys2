@@ -16,51 +16,51 @@ internal partial class FeEffectDesc_tImpl : SchemaClass, FeEffectDesc_t
 {
     public FeEffectDesc_tImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x3462F54326980769);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x3462F54326980769);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x3462F54326980769);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x3462F54326980769);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _NameHashOffset = -1;
+    private static nint? _NameHashOffset;
 
     public ref uint NameHash
     {
         get
         {
-            if (_NameHashOffset == -1) _NameHashOffset = Schema.GetOffset(0x3462F543BA4B2BDE);
-            return ref _Handle.AsRef<uint>(_NameHashOffset);
+            _NameHashOffset = _NameHashOffset ?? Schema.GetOffset(0x3462F543BA4B2BDE);
+            return ref _Handle.AsRef<uint>(_NameHashOffset!.Value);
         }
     }
-    private static nint _TypeOffset = -1;
+    private static nint? _TypeOffset;
 
     public ref int Type
     {
         get
         {
-            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0x3462F543EEF036F9);
-            return ref _Handle.AsRef<int>(_TypeOffset);
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x3462F543EEF036F9);
+            return ref _Handle.AsRef<int>(_TypeOffset!.Value);
         }
     }
-    private static nint _ParamsOffset = -1;
+    private static nint? _ParamsOffset;
     private SchemaUntypedField? _ParamsInstance;
 
     public SchemaUntypedField Params
     {
         get
         {
-            if (_ParamsOffset == -1) _ParamsOffset = Schema.GetOffset(0x3462F543900020D3);
+            _ParamsOffset = _ParamsOffset ?? Schema.GetOffset(0x3462F543900020D3);
             var instance = _ParamsInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ParamsOffset);
+            instance.DangerousSetHandle(_Handle + _ParamsOffset!.Value);
             return instance;
         }
     }

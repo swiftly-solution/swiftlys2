@@ -16,19 +16,19 @@ internal partial class CEnvHudHintImpl : CPointEntityImpl, CEnvHudHint
 {
     public CEnvHudHintImpl(nint handle) : base(handle) { }
 
-    private static nint _MessageOffset = -1;
+    private static nint? _MessageOffset;
 
     public string Message
     {
         get
         {
-            if (_MessageOffset == -1) _MessageOffset = Schema.GetOffset(0xD3D49C23CC5243DC);
-            return Schema.GetString(_Handle.Read<nint>(_MessageOffset));
+            _MessageOffset = _MessageOffset ?? Schema.GetOffset(0xD3D49C23CC5243DC);
+            return Schema.GetString(_Handle.Read<nint>(_MessageOffset!.Value));
         }
         set
         {
-            if (_MessageOffset == -1) _MessageOffset = Schema.GetOffset(0xD3D49C23CC5243DC);
-            Schema.SetString(_Handle, _MessageOffset, value);
+            _MessageOffset = _MessageOffset ?? Schema.GetOffset(0xD3D49C23CC5243DC);
+            Schema.SetString(_Handle, _MessageOffset!.Value, value);
         }
     }
 

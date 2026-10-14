@@ -16,14 +16,14 @@ internal partial class CTriggerDetectExplosionImpl : CBaseTriggerImpl, CTriggerD
 {
     public CTriggerDetectExplosionImpl(nint handle) : base(handle) { }
 
-    private static nint _OnDetectedExplosionOffset = -1;
+    private static nint? _OnDetectedExplosionOffset;
 
     public ref CEntityIOOutput OnDetectedExplosion
     {
         get
         {
-            if (_OnDetectedExplosionOffset == -1) _OnDetectedExplosionOffset = Schema.GetOffset(0xEDC17DD03CDD7F71);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnDetectedExplosionOffset);
+            _OnDetectedExplosionOffset = _OnDetectedExplosionOffset ?? Schema.GetOffset(0xEDC17DD03CDD7F71);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnDetectedExplosionOffset!.Value);
         }
     }
 

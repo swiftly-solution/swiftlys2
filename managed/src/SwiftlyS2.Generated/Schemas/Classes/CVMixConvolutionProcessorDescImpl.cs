@@ -16,29 +16,29 @@ internal partial class CVMixConvolutionProcessorDescImpl : CVMixBaseProcessorDes
 {
     public CVMixConvolutionProcessorDescImpl(nint handle) : base(handle) { }
 
-    private static nint _DescOffset = -1;
+    private static nint? _DescOffset;
     private VMixConvolutionDesc_tImpl? _DescInstance;
 
     public VMixConvolutionDesc_t Desc
     {
         get
         {
-            if (_DescOffset == -1) _DescOffset = Schema.GetOffset(0xF552D8C127917BC0);
+            _DescOffset = _DescOffset ?? Schema.GetOffset(0xF552D8C127917BC0);
             var instance = _DescInstance ??= new VMixConvolutionDesc_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _DescOffset);
+            instance.DangerousSetHandle(_Handle + _DescOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamImpulseResponseOffset = -1;
+    private static nint? _ParamImpulseResponseOffset;
     private CVMixDataOffsetImpl? _ParamImpulseResponseInstance;
 
     public CVMixDataOffset ParamImpulseResponse
     {
         get
         {
-            if (_ParamImpulseResponseOffset == -1) _ParamImpulseResponseOffset = Schema.GetOffset(0xF552D8C105F2F07E);
+            _ParamImpulseResponseOffset = _ParamImpulseResponseOffset ?? Schema.GetOffset(0xF552D8C105F2F07E);
             var instance = _ParamImpulseResponseInstance ??= new CVMixDataOffsetImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamImpulseResponseOffset);
+            instance.DangerousSetHandle(_Handle + _ParamImpulseResponseOffset!.Value);
             return instance;
         }
     }

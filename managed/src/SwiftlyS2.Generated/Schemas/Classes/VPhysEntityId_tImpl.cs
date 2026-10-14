@@ -16,14 +16,14 @@ internal partial class VPhysEntityId_tImpl : SchemaClass, VPhysEntityId_t
 {
     public VPhysEntityId_tImpl(nint handle) : base(handle) { }
 
-    private static nint _IdOffset = -1;
+    private static nint? _IdOffset;
 
     public ref uint Id
     {
         get
         {
-            if (_IdOffset == -1) _IdOffset = Schema.GetOffset(0x490269B0B5069B60);
-            return ref _Handle.AsRef<uint>(_IdOffset);
+            _IdOffset = _IdOffset ?? Schema.GetOffset(0x490269B0B5069B60);
+            return ref _Handle.AsRef<uint>(_IdOffset!.Value);
         }
     }
 

@@ -16,14 +16,14 @@ internal partial class CModelConfigElement_UserPickImpl : CModelConfigElementImp
 {
     public CModelConfigElement_UserPickImpl(nint handle) : base(handle) { }
 
-    private static nint _ChoicesOffset = -1;
+    private static nint? _ChoicesOffset;
 
     public ref CUtlVector<CUtlString> Choices
     {
         get
         {
-            if (_ChoicesOffset == -1) _ChoicesOffset = Schema.GetOffset(0x9AB617A69E9959BF);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_ChoicesOffset);
+            _ChoicesOffset = _ChoicesOffset ?? Schema.GetOffset(0x9AB617A69E9959BF);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_ChoicesOffset!.Value);
         }
     }
 

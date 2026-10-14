@@ -16,24 +16,24 @@ internal partial class CBlendCurveImpl : SchemaClass, CBlendCurve
 {
     public CBlendCurveImpl(nint handle) : base(handle) { }
 
-    private static nint _ControlPoint1Offset = -1;
+    private static nint? _ControlPoint1Offset;
 
     public ref float ControlPoint1
     {
         get
         {
-            if (_ControlPoint1Offset == -1) _ControlPoint1Offset = Schema.GetOffset(0x837A0008CD928165);
-            return ref _Handle.AsRef<float>(_ControlPoint1Offset);
+            _ControlPoint1Offset = _ControlPoint1Offset ?? Schema.GetOffset(0x837A0008CD928165);
+            return ref _Handle.AsRef<float>(_ControlPoint1Offset!.Value);
         }
     }
-    private static nint _ControlPoint2Offset = -1;
+    private static nint? _ControlPoint2Offset;
 
     public ref float ControlPoint2
     {
         get
         {
-            if (_ControlPoint2Offset == -1) _ControlPoint2Offset = Schema.GetOffset(0x837A0008CA927CAC);
-            return ref _Handle.AsRef<float>(_ControlPoint2Offset);
+            _ControlPoint2Offset = _ControlPoint2Offset ?? Schema.GetOffset(0x837A0008CA927CAC);
+            return ref _Handle.AsRef<float>(_ControlPoint2Offset!.Value);
         }
     }
 

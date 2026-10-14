@@ -16,34 +16,34 @@ internal partial class C_INIT_VelocityFromNormalImpl : CParticleFunctionInitiali
 {
     public C_INIT_VelocityFromNormalImpl(nint handle) : base(handle) { }
 
-    private static nint _SpeedMinOffset = -1;
+    private static nint? _SpeedMinOffset;
 
     public ref float SpeedMin
     {
         get
         {
-            if (_SpeedMinOffset == -1) _SpeedMinOffset = Schema.GetOffset(0x33D27066B989E1F8);
-            return ref _Handle.AsRef<float>(_SpeedMinOffset);
+            _SpeedMinOffset = _SpeedMinOffset ?? Schema.GetOffset(0x33D27066B989E1F8);
+            return ref _Handle.AsRef<float>(_SpeedMinOffset!.Value);
         }
     }
-    private static nint _SpeedMaxOffset = -1;
+    private static nint? _SpeedMaxOffset;
 
     public ref float SpeedMax
     {
         get
         {
-            if (_SpeedMaxOffset == -1) _SpeedMaxOffset = Schema.GetOffset(0x33D27066CF9D8C52);
-            return ref _Handle.AsRef<float>(_SpeedMaxOffset);
+            _SpeedMaxOffset = _SpeedMaxOffset ?? Schema.GetOffset(0x33D27066CF9D8C52);
+            return ref _Handle.AsRef<float>(_SpeedMaxOffset!.Value);
         }
     }
-    private static nint _IgnoreDtOffset = -1;
+    private static nint? _IgnoreDtOffset;
 
     public ref bool IgnoreDt
     {
         get
         {
-            if (_IgnoreDtOffset == -1) _IgnoreDtOffset = Schema.GetOffset(0x33D27066330C0603);
-            return ref _Handle.AsRef<bool>(_IgnoreDtOffset);
+            _IgnoreDtOffset = _IgnoreDtOffset ?? Schema.GetOffset(0x33D27066330C0603);
+            return ref _Handle.AsRef<bool>(_IgnoreDtOffset!.Value);
         }
     }
 

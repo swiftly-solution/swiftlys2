@@ -16,34 +16,34 @@ internal partial class FootStepTriggerImpl : SchemaClass, FootStepTrigger
 {
     public FootStepTriggerImpl(nint handle) : base(handle) { }
 
-    private static nint _TagsOffset = -1;
+    private static nint? _TagsOffset;
 
     public ref CUtlVector<int> Tags
     {
         get
         {
-            if (_TagsOffset == -1) _TagsOffset = Schema.GetOffset(0xD1D326CDB46C8540);
-            return ref _Handle.AsRef<CUtlVector<int>>(_TagsOffset);
+            _TagsOffset = _TagsOffset ?? Schema.GetOffset(0xD1D326CDB46C8540);
+            return ref _Handle.AsRef<CUtlVector<int>>(_TagsOffset!.Value);
         }
     }
-    private static nint _FootIndexOffset = -1;
+    private static nint? _FootIndexOffset;
 
     public ref int FootIndex
     {
         get
         {
-            if (_FootIndexOffset == -1) _FootIndexOffset = Schema.GetOffset(0xD1D326CD67D56BAB);
-            return ref _Handle.AsRef<int>(_FootIndexOffset);
+            _FootIndexOffset = _FootIndexOffset ?? Schema.GetOffset(0xD1D326CD67D56BAB);
+            return ref _Handle.AsRef<int>(_FootIndexOffset!.Value);
         }
     }
-    private static nint _TriggerPhaseOffset = -1;
+    private static nint? _TriggerPhaseOffset;
 
     public ref StepPhase TriggerPhase
     {
         get
         {
-            if (_TriggerPhaseOffset == -1) _TriggerPhaseOffset = Schema.GetOffset(0xD1D326CD486B84EE);
-            return ref _Handle.AsRef<StepPhase>(_TriggerPhaseOffset);
+            _TriggerPhaseOffset = _TriggerPhaseOffset ?? Schema.GetOffset(0xD1D326CD486B84EE);
+            return ref _Handle.AsRef<StepPhase>(_TriggerPhaseOffset!.Value);
         }
     }
 

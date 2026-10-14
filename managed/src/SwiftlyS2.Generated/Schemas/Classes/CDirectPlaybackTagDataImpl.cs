@@ -16,29 +16,29 @@ internal partial class CDirectPlaybackTagDataImpl : SchemaClass, CDirectPlayback
 {
     public CDirectPlaybackTagDataImpl(nint handle) : base(handle) { }
 
-    private static nint _SequenceNameOffset = -1;
+    private static nint? _SequenceNameOffset;
 
     public string SequenceName
     {
         get
         {
-            if (_SequenceNameOffset == -1) _SequenceNameOffset = Schema.GetOffset(0xAADCE162B4A24CB);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_SequenceNameOffset));
+            _SequenceNameOffset = _SequenceNameOffset ?? Schema.GetOffset(0xAADCE162B4A24CB);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_SequenceNameOffset!.Value));
         }
         set
         {
-            if (_SequenceNameOffset == -1) _SequenceNameOffset = Schema.GetOffset(0xAADCE162B4A24CB);
-            Schema.SetCUtlString(_Handle, _SequenceNameOffset, value);
+            _SequenceNameOffset = _SequenceNameOffset ?? Schema.GetOffset(0xAADCE162B4A24CB);
+            Schema.SetCUtlString(_Handle, _SequenceNameOffset!.Value, value);
         }
     }
-    private static nint _TagsOffset = -1;
+    private static nint? _TagsOffset;
 
     public ref CUtlVector<TagSpan_t> Tags
     {
         get
         {
-            if (_TagsOffset == -1) _TagsOffset = Schema.GetOffset(0xAADCE16B46C8540);
-            return ref _Handle.AsRef<CUtlVector<TagSpan_t>>(_TagsOffset);
+            _TagsOffset = _TagsOffset ?? Schema.GetOffset(0xAADCE16B46C8540);
+            return ref _Handle.AsRef<CUtlVector<TagSpan_t>>(_TagsOffset!.Value);
         }
     }
 

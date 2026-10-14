@@ -16,24 +16,24 @@ internal partial class CNmClipDocEvent_IDImpl : CNmClipDocEventImpl, CNmClipDocE
 {
     public CNmClipDocEvent_IDImpl(nint handle) : base(handle) { }
 
-    private static nint _IDOffset = -1;
+    private static nint? _IDOffset;
 
     public ref CGlobalSymbol ID
     {
         get
         {
-            if (_IDOffset == -1) _IDOffset = Schema.GetOffset(0xC434213595066900);
-            return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset);
+            _IDOffset = _IDOffset ?? Schema.GetOffset(0xC434213595066900);
+            return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset!.Value);
         }
     }
-    private static nint _SecondaryIDOffset = -1;
+    private static nint? _SecondaryIDOffset;
 
     public ref CGlobalSymbol SecondaryID
     {
         get
         {
-            if (_SecondaryIDOffset == -1) _SecondaryIDOffset = Schema.GetOffset(0xC43421359B39DB84);
-            return ref _Handle.AsRef<CGlobalSymbol>(_SecondaryIDOffset);
+            _SecondaryIDOffset = _SecondaryIDOffset ?? Schema.GetOffset(0xC43421359B39DB84);
+            return ref _Handle.AsRef<CGlobalSymbol>(_SecondaryIDOffset!.Value);
         }
     }
 

@@ -16,69 +16,69 @@ internal partial class lerpdata_tImpl : SchemaClass, lerpdata_t
 {
     public lerpdata_tImpl(nint handle) : base(handle) { }
 
-    private static nint _EntOffset = -1;
+    private static nint? _EntOffset;
 
     public ref CHandle<CBaseEntity> Ent
     {
         get
         {
-            if (_EntOffset == -1) _EntOffset = Schema.GetOffset(0x70C58DAB8BBDB334);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntOffset);
+            _EntOffset = _EntOffset ?? Schema.GetOffset(0x70C58DAB8BBDB334);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntOffset!.Value);
         }
     }
-    private static nint _MoveTypeOffset = -1;
+    private static nint? _MoveTypeOffset;
 
     public ref MoveType_t MoveType
     {
         get
         {
-            if (_MoveTypeOffset == -1) _MoveTypeOffset = Schema.GetOffset(0x70C58DAB90BCCC1C);
-            return ref _Handle.AsRef<MoveType_t>(_MoveTypeOffset);
+            _MoveTypeOffset = _MoveTypeOffset ?? Schema.GetOffset(0x70C58DAB90BCCC1C);
+            return ref _Handle.AsRef<MoveType_t>(_MoveTypeOffset!.Value);
         }
     }
-    private static nint _StartTimeOffset = -1;
+    private static nint? _StartTimeOffset;
     private GameTime_tImpl? _StartTimeInstance;
 
     public GameTime_t StartTime
     {
         get
         {
-            if (_StartTimeOffset == -1) _StartTimeOffset = Schema.GetOffset(0x70C58DAB67FE9DC4);
+            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0x70C58DAB67FE9DC4);
             var instance = _StartTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _StartTimeOffset);
+            instance.DangerousSetHandle(_Handle + _StartTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _StartOriginOffset = -1;
+    private static nint? _StartOriginOffset;
 
     public ref Vector StartOrigin
     {
         get
         {
-            if (_StartOriginOffset == -1) _StartOriginOffset = Schema.GetOffset(0x70C58DAB7C574331);
-            return ref _Handle.AsRef<Vector>(_StartOriginOffset);
+            _StartOriginOffset = _StartOriginOffset ?? Schema.GetOffset(0x70C58DAB7C574331);
+            return ref _Handle.AsRef<Vector>(_StartOriginOffset!.Value);
         }
     }
-    private static nint _StartRotOffset = -1;
+    private static nint? _StartRotOffset;
 
     public ref Quaternion StartRot
     {
         get
         {
-            if (_StartRotOffset == -1) _StartRotOffset = Schema.GetOffset(0x70C58DAB6246A06D);
-            return ref _Handle.AsRef<Quaternion>(_StartRotOffset);
+            _StartRotOffset = _StartRotOffset ?? Schema.GetOffset(0x70C58DAB6246A06D);
+            return ref _Handle.AsRef<Quaternion>(_StartRotOffset!.Value);
         }
     }
-    private static nint _FXIndexOffset = -1;
+    private static nint? _FXIndexOffset;
     private ParticleIndex_tImpl? _FXIndexInstance;
 
     public ParticleIndex_t FXIndex
     {
         get
         {
-            if (_FXIndexOffset == -1) _FXIndexOffset = Schema.GetOffset(0x70C58DAB1E8452FD);
+            _FXIndexOffset = _FXIndexOffset ?? Schema.GetOffset(0x70C58DAB1E8452FD);
             var instance = _FXIndexInstance ??= new ParticleIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FXIndexOffset);
+            instance.DangerousSetHandle(_Handle + _FXIndexOffset!.Value);
             return instance;
         }
     }

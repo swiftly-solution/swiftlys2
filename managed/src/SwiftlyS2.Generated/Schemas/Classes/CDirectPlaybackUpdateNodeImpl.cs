@@ -16,34 +16,34 @@ internal partial class CDirectPlaybackUpdateNodeImpl : CUnaryUpdateNodeImpl, CDi
 {
     public CDirectPlaybackUpdateNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _FinishEarlyOffset = -1;
+    private static nint? _FinishEarlyOffset;
 
     public ref bool FinishEarly
     {
         get
         {
-            if (_FinishEarlyOffset == -1) _FinishEarlyOffset = Schema.GetOffset(0x4E1CBFEFC2E75991);
-            return ref _Handle.AsRef<bool>(_FinishEarlyOffset);
+            _FinishEarlyOffset = _FinishEarlyOffset ?? Schema.GetOffset(0x4E1CBFEFC2E75991);
+            return ref _Handle.AsRef<bool>(_FinishEarlyOffset!.Value);
         }
     }
-    private static nint _ResetOnFinishOffset = -1;
+    private static nint? _ResetOnFinishOffset;
 
     public ref bool ResetOnFinish
     {
         get
         {
-            if (_ResetOnFinishOffset == -1) _ResetOnFinishOffset = Schema.GetOffset(0x4E1CBFEFD5293C96);
-            return ref _Handle.AsRef<bool>(_ResetOnFinishOffset);
+            _ResetOnFinishOffset = _ResetOnFinishOffset ?? Schema.GetOffset(0x4E1CBFEFD5293C96);
+            return ref _Handle.AsRef<bool>(_ResetOnFinishOffset!.Value);
         }
     }
-    private static nint _AllTagsOffset = -1;
+    private static nint? _AllTagsOffset;
 
     public ref CUtlVector<CDirectPlaybackTagData> AllTags
     {
         get
         {
-            if (_AllTagsOffset == -1) _AllTagsOffset = Schema.GetOffset(0x4E1CBFEF7A57C5AD);
-            return ref _Handle.AsRef<CUtlVector<CDirectPlaybackTagData>>(_AllTagsOffset);
+            _AllTagsOffset = _AllTagsOffset ?? Schema.GetOffset(0x4E1CBFEF7A57C5AD);
+            return ref _Handle.AsRef<CUtlVector<CDirectPlaybackTagData>>(_AllTagsOffset!.Value);
         }
     }
 

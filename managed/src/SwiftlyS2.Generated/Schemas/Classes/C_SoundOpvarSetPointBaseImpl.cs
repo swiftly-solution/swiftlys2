@@ -16,79 +16,79 @@ internal partial class C_SoundOpvarSetPointBaseImpl : C_BaseEntityImpl, C_SoundO
 {
     public C_SoundOpvarSetPointBaseImpl(nint handle) : base(handle) { }
 
-    private static nint _StackNameOffset = -1;
+    private static nint? _StackNameOffset;
 
     public string StackName
     {
         get
         {
-            if (_StackNameOffset == -1) _StackNameOffset = Schema.GetOffset(0x7C6E013B3E9CD4);
-            return Schema.GetString(_Handle.Read<nint>(_StackNameOffset));
+            _StackNameOffset = _StackNameOffset ?? Schema.GetOffset(0x7C6E013B3E9CD4);
+            return Schema.GetString(_Handle.Read<nint>(_StackNameOffset!.Value));
         }
         set
         {
-            if (_StackNameOffset == -1) _StackNameOffset = Schema.GetOffset(0x7C6E013B3E9CD4);
-            Schema.SetString(_Handle, _StackNameOffset, value);
+            _StackNameOffset = _StackNameOffset ?? Schema.GetOffset(0x7C6E013B3E9CD4);
+            Schema.SetString(_Handle, _StackNameOffset!.Value, value);
         }
     }
-    private static nint _OperatorNameOffset = -1;
+    private static nint? _OperatorNameOffset;
 
     public string OperatorName
     {
         get
         {
-            if (_OperatorNameOffset == -1) _OperatorNameOffset = Schema.GetOffset(0x7C6E01F6140996);
-            return Schema.GetString(_Handle.Read<nint>(_OperatorNameOffset));
+            _OperatorNameOffset = _OperatorNameOffset ?? Schema.GetOffset(0x7C6E01F6140996);
+            return Schema.GetString(_Handle.Read<nint>(_OperatorNameOffset!.Value));
         }
         set
         {
-            if (_OperatorNameOffset == -1) _OperatorNameOffset = Schema.GetOffset(0x7C6E01F6140996);
-            Schema.SetString(_Handle, _OperatorNameOffset, value);
+            _OperatorNameOffset = _OperatorNameOffset ?? Schema.GetOffset(0x7C6E01F6140996);
+            Schema.SetString(_Handle, _OperatorNameOffset!.Value, value);
         }
     }
-    private static nint _OpvarNameOffset = -1;
+    private static nint? _OpvarNameOffset;
 
     public string OpvarName
     {
         get
         {
-            if (_OpvarNameOffset == -1) _OpvarNameOffset = Schema.GetOffset(0x7C6E012CAEFF3C);
-            return Schema.GetString(_Handle.Read<nint>(_OpvarNameOffset));
+            _OpvarNameOffset = _OpvarNameOffset ?? Schema.GetOffset(0x7C6E012CAEFF3C);
+            return Schema.GetString(_Handle.Read<nint>(_OpvarNameOffset!.Value));
         }
         set
         {
-            if (_OpvarNameOffset == -1) _OpvarNameOffset = Schema.GetOffset(0x7C6E012CAEFF3C);
-            Schema.SetString(_Handle, _OpvarNameOffset, value);
+            _OpvarNameOffset = _OpvarNameOffset ?? Schema.GetOffset(0x7C6E012CAEFF3C);
+            Schema.SetString(_Handle, _OpvarNameOffset!.Value, value);
         }
     }
-    private static nint _OpvarIndexOffset = -1;
+    private static nint? _OpvarIndexOffset;
 
     public ref int OpvarIndex
     {
         get
         {
-            if (_OpvarIndexOffset == -1) _OpvarIndexOffset = Schema.GetOffset(0x7C6E01BC170C34);
-            return ref _Handle.AsRef<int>(_OpvarIndexOffset);
+            _OpvarIndexOffset = _OpvarIndexOffset ?? Schema.GetOffset(0x7C6E01BC170C34);
+            return ref _Handle.AsRef<int>(_OpvarIndexOffset!.Value);
         }
     }
-    private static nint _UseAutoCompareOffset = -1;
+    private static nint? _UseAutoCompareOffset;
 
     public ref bool UseAutoCompare
     {
         get
         {
-            if (_UseAutoCompareOffset == -1) _UseAutoCompareOffset = Schema.GetOffset(0x7C6E01E8C88ED2);
-            return ref _Handle.AsRef<bool>(_UseAutoCompareOffset);
+            _UseAutoCompareOffset = _UseAutoCompareOffset ?? Schema.GetOffset(0x7C6E01E8C88ED2);
+            return ref _Handle.AsRef<bool>(_UseAutoCompareOffset!.Value);
         }
     }
-    private static nint _FastRefreshOffset = -1;
+    private static nint? _FastRefreshOffset;
 
     public ref bool FastRefresh
     {
         get
         {
-            if (_FastRefreshOffset == -1) _FastRefreshOffset = Schema.GetOffset(0x7C6E012C26B032);
-            return ref _Handle.AsRef<bool>(_FastRefreshOffset);
+            _FastRefreshOffset = _FastRefreshOffset ?? Schema.GetOffset(0x7C6E012C26B032);
+            return ref _Handle.AsRef<bool>(_FastRefreshOffset!.Value);
         }
     }
 

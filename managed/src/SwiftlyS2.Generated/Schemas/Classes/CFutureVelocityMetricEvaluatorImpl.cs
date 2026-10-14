@@ -16,44 +16,44 @@ internal partial class CFutureVelocityMetricEvaluatorImpl : CMotionMetricEvaluat
 {
     public CFutureVelocityMetricEvaluatorImpl(nint handle) : base(handle) { }
 
-    private static nint _DistanceOffset = -1;
+    private static nint? _DistanceOffset;
 
     public ref float Distance
     {
         get
         {
-            if (_DistanceOffset == -1) _DistanceOffset = Schema.GetOffset(0xF0A3A8300DC4A68);
-            return ref _Handle.AsRef<float>(_DistanceOffset);
+            _DistanceOffset = _DistanceOffset ?? Schema.GetOffset(0xF0A3A8300DC4A68);
+            return ref _Handle.AsRef<float>(_DistanceOffset!.Value);
         }
     }
-    private static nint _StoppingDistanceOffset = -1;
+    private static nint? _StoppingDistanceOffset;
 
     public ref float StoppingDistance
     {
         get
         {
-            if (_StoppingDistanceOffset == -1) _StoppingDistanceOffset = Schema.GetOffset(0xF0A3A8324979434);
-            return ref _Handle.AsRef<float>(_StoppingDistanceOffset);
+            _StoppingDistanceOffset = _StoppingDistanceOffset ?? Schema.GetOffset(0xF0A3A8324979434);
+            return ref _Handle.AsRef<float>(_StoppingDistanceOffset!.Value);
         }
     }
-    private static nint _TargetSpeedOffset = -1;
+    private static nint? _TargetSpeedOffset;
 
     public ref float TargetSpeed
     {
         get
         {
-            if (_TargetSpeedOffset == -1) _TargetSpeedOffset = Schema.GetOffset(0xF0A3A839C627845);
-            return ref _Handle.AsRef<float>(_TargetSpeedOffset);
+            _TargetSpeedOffset = _TargetSpeedOffset ?? Schema.GetOffset(0xF0A3A839C627845);
+            return ref _Handle.AsRef<float>(_TargetSpeedOffset!.Value);
         }
     }
-    private static nint _ModeOffset = -1;
+    private static nint? _ModeOffset;
 
     public ref VelocityMetricMode Mode
     {
         get
         {
-            if (_ModeOffset == -1) _ModeOffset = Schema.GetOffset(0xF0A3A831050A633);
-            return ref _Handle.AsRef<VelocityMetricMode>(_ModeOffset);
+            _ModeOffset = _ModeOffset ?? Schema.GetOffset(0xF0A3A831050A633);
+            return ref _Handle.AsRef<VelocityMetricMode>(_ModeOffset!.Value);
         }
     }
 

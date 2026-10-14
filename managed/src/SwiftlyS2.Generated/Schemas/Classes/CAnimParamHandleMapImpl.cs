@@ -16,16 +16,16 @@ internal partial class CAnimParamHandleMapImpl : SchemaClass, CAnimParamHandleMa
 {
     public CAnimParamHandleMapImpl(nint handle) : base(handle) { }
 
-    private static nint _ListOffset = -1;
+    private static nint? _ListOffset;
     private SchemaUntypedField? _ListInstance;
 
     public SchemaUntypedField List
     {
         get
         {
-            if (_ListOffset == -1) _ListOffset = Schema.GetOffset(0x82522A78CAD81C21);
+            _ListOffset = _ListOffset ?? Schema.GetOffset(0x82522A78CAD81C21);
             var instance = _ListInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ListOffset);
+            instance.DangerousSetHandle(_Handle + _ListOffset!.Value);
             return instance;
         }
     }

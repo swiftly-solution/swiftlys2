@@ -16,36 +16,36 @@ internal partial class CNmIDComparisonNode__CDefinitionImpl : CNmBoolValueNode__
 {
     public CNmIDComparisonNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint _InputValueNodeIdxOffset = -1;
+    private static nint? _InputValueNodeIdxOffset;
 
     public ref short InputValueNodeIdx
     {
         get
         {
-            if (_InputValueNodeIdxOffset == -1) _InputValueNodeIdxOffset = Schema.GetOffset(0xE0D928B595E89F27);
-            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset);
+            _InputValueNodeIdxOffset = _InputValueNodeIdxOffset ?? Schema.GetOffset(0xE0D928B595E89F27);
+            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
         }
     }
-    private static nint _ComparisonOffset = -1;
+    private static nint? _ComparisonOffset;
 
     public ref CNmIDComparisonNode__Comparison_t Comparison
     {
         get
         {
-            if (_ComparisonOffset == -1) _ComparisonOffset = Schema.GetOffset(0xE0D928B5897F8DE4);
-            return ref _Handle.AsRef<CNmIDComparisonNode__Comparison_t>(_ComparisonOffset);
+            _ComparisonOffset = _ComparisonOffset ?? Schema.GetOffset(0xE0D928B5897F8DE4);
+            return ref _Handle.AsRef<CNmIDComparisonNode__Comparison_t>(_ComparisonOffset!.Value);
         }
     }
-    private static nint _ComparisionIDsOffset = -1;
+    private static nint? _ComparisionIDsOffset;
     private SchemaUntypedField? _ComparisionIDsInstance;
 
     public SchemaUntypedField ComparisionIDs
     {
         get
         {
-            if (_ComparisionIDsOffset == -1) _ComparisionIDsOffset = Schema.GetOffset(0xE0D928B5E68D53FD);
+            _ComparisionIDsOffset = _ComparisionIDsOffset ?? Schema.GetOffset(0xE0D928B5E68D53FD);
             var instance = _ComparisionIDsInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ComparisionIDsOffset);
+            instance.DangerousSetHandle(_Handle + _ComparisionIDsOffset!.Value);
             return instance;
         }
     }

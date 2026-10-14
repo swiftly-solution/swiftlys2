@@ -16,24 +16,24 @@ internal partial class C_PointClientUIDialogImpl : C_BaseClientUIEntityImpl, C_P
 {
     public C_PointClientUIDialogImpl(nint handle) : base(handle) { }
 
-    private static nint _ActivatorOffset = -1;
+    private static nint? _ActivatorOffset;
 
     public ref CHandle<C_BaseEntity> Activator
     {
         get
         {
-            if (_ActivatorOffset == -1) _ActivatorOffset = Schema.GetOffset(0xF77D7552AB093BB2);
-            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_ActivatorOffset);
+            _ActivatorOffset = _ActivatorOffset ?? Schema.GetOffset(0xF77D7552AB093BB2);
+            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_ActivatorOffset!.Value);
         }
     }
-    private static nint _StartEnabledOffset = -1;
+    private static nint? _StartEnabledOffset;
 
     public ref bool StartEnabled
     {
         get
         {
-            if (_StartEnabledOffset == -1) _StartEnabledOffset = Schema.GetOffset(0xF77D7552500D5C24);
-            return ref _Handle.AsRef<bool>(_StartEnabledOffset);
+            _StartEnabledOffset = _StartEnabledOffset ?? Schema.GetOffset(0xF77D7552500D5C24);
+            return ref _Handle.AsRef<bool>(_StartEnabledOffset!.Value);
         }
     }
 

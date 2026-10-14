@@ -16,207 +16,207 @@ internal partial class C_EconEntityImpl : CBaseAnimGraphImpl, C_EconEntity
 {
     public C_EconEntityImpl(nint handle) : base(handle) { }
 
-    private static nint _FlexDelayTimeOffset = -1;
+    private static nint? _FlexDelayTimeOffset;
 
     public ref float FlexDelayTime
     {
         get
         {
-            if (_FlexDelayTimeOffset == -1) _FlexDelayTimeOffset = Schema.GetOffset(0xFFEDBA1910A6C796);
-            return ref _Handle.AsRef<float>(_FlexDelayTimeOffset);
+            _FlexDelayTimeOffset = _FlexDelayTimeOffset ?? Schema.GetOffset(0xFFEDBA1910A6C796);
+            return ref _Handle.AsRef<float>(_FlexDelayTimeOffset!.Value);
         }
     }
-    private static nint _FlexDelayedWeightOffset = -1;
+    private static nint? _FlexDelayedWeightOffset;
 
     public ref float FlexDelayedWeight
     {
         get
         {
-            if (_FlexDelayedWeightOffset == -1) _FlexDelayedWeightOffset = Schema.GetOffset(0xFFEDBA191CA2288E);
-            return ref _Handle.Deref<float>(_FlexDelayedWeightOffset);
+            _FlexDelayedWeightOffset = _FlexDelayedWeightOffset ?? Schema.GetOffset(0xFFEDBA191CA2288E);
+            return ref _Handle.Deref<float>(_FlexDelayedWeightOffset!.Value);
         }
     }
-    private static nint _AttributesInitializedOffset = -1;
+    private static nint? _AttributesInitializedOffset;
 
     public ref bool AttributesInitialized
     {
         get
         {
-            if (_AttributesInitializedOffset == -1) _AttributesInitializedOffset = Schema.GetOffset(0xFFEDBA19F31EBCBA);
-            return ref _Handle.AsRef<bool>(_AttributesInitializedOffset);
+            _AttributesInitializedOffset = _AttributesInitializedOffset ?? Schema.GetOffset(0xFFEDBA19F31EBCBA);
+            return ref _Handle.AsRef<bool>(_AttributesInitializedOffset!.Value);
         }
     }
-    private static nint _AttributeManagerOffset = -1;
+    private static nint? _AttributeManagerOffset;
     private C_AttributeContainerImpl? _AttributeManagerInstance;
 
     public C_AttributeContainer AttributeManager
     {
         get
         {
-            if (_AttributeManagerOffset == -1) _AttributeManagerOffset = Schema.GetOffset(0xFFEDBA19537B0586);
+            _AttributeManagerOffset = _AttributeManagerOffset ?? Schema.GetOffset(0xFFEDBA19537B0586);
             var instance = _AttributeManagerInstance ??= new C_AttributeContainerImpl(0);
-            instance.DangerousSetHandle(_Handle + _AttributeManagerOffset);
+            instance.DangerousSetHandle(_Handle + _AttributeManagerOffset!.Value);
             return instance;
         }
     }
-    private static nint _OriginalOwnerXuidLowOffset = -1;
+    private static nint? _OriginalOwnerXuidLowOffset;
 
     public ref uint OriginalOwnerXuidLow
     {
         get
         {
-            if (_OriginalOwnerXuidLowOffset == -1) _OriginalOwnerXuidLowOffset = Schema.GetOffset(0xFFEDBA193C990CE3);
-            return ref _Handle.AsRef<uint>(_OriginalOwnerXuidLowOffset);
+            _OriginalOwnerXuidLowOffset = _OriginalOwnerXuidLowOffset ?? Schema.GetOffset(0xFFEDBA193C990CE3);
+            return ref _Handle.AsRef<uint>(_OriginalOwnerXuidLowOffset!.Value);
         }
     }
-    private static nint _OriginalOwnerXuidHighOffset = -1;
+    private static nint? _OriginalOwnerXuidHighOffset;
 
     public ref uint OriginalOwnerXuidHigh
     {
         get
         {
-            if (_OriginalOwnerXuidHighOffset == -1) _OriginalOwnerXuidHighOffset = Schema.GetOffset(0xFFEDBA192628947F);
-            return ref _Handle.AsRef<uint>(_OriginalOwnerXuidHighOffset);
+            _OriginalOwnerXuidHighOffset = _OriginalOwnerXuidHighOffset ?? Schema.GetOffset(0xFFEDBA192628947F);
+            return ref _Handle.AsRef<uint>(_OriginalOwnerXuidHighOffset!.Value);
         }
     }
-    private static nint _FallbackPaintKitOffset = -1;
+    private static nint? _FallbackPaintKitOffset;
 
     public ref int FallbackPaintKit
     {
         get
         {
-            if (_FallbackPaintKitOffset == -1) _FallbackPaintKitOffset = Schema.GetOffset(0xFFEDBA190A12D48F);
-            return ref _Handle.AsRef<int>(_FallbackPaintKitOffset);
+            _FallbackPaintKitOffset = _FallbackPaintKitOffset ?? Schema.GetOffset(0xFFEDBA190A12D48F);
+            return ref _Handle.AsRef<int>(_FallbackPaintKitOffset!.Value);
         }
     }
-    private static nint _FallbackSeedOffset = -1;
+    private static nint? _FallbackSeedOffset;
 
     public ref int FallbackSeed
     {
         get
         {
-            if (_FallbackSeedOffset == -1) _FallbackSeedOffset = Schema.GetOffset(0xFFEDBA19A1B165B2);
-            return ref _Handle.AsRef<int>(_FallbackSeedOffset);
+            _FallbackSeedOffset = _FallbackSeedOffset ?? Schema.GetOffset(0xFFEDBA19A1B165B2);
+            return ref _Handle.AsRef<int>(_FallbackSeedOffset!.Value);
         }
     }
-    private static nint _FallbackWearOffset = -1;
+    private static nint? _FallbackWearOffset;
 
     public ref float FallbackWear
     {
         get
         {
-            if (_FallbackWearOffset == -1) _FallbackWearOffset = Schema.GetOffset(0xFFEDBA1986253266);
-            return ref _Handle.AsRef<float>(_FallbackWearOffset);
+            _FallbackWearOffset = _FallbackWearOffset ?? Schema.GetOffset(0xFFEDBA1986253266);
+            return ref _Handle.AsRef<float>(_FallbackWearOffset!.Value);
         }
     }
-    private static nint _FallbackStatTrakOffset = -1;
+    private static nint? _FallbackStatTrakOffset;
 
     public ref int FallbackStatTrak
     {
         get
         {
-            if (_FallbackStatTrakOffset == -1) _FallbackStatTrakOffset = Schema.GetOffset(0xFFEDBA1967ECC1E7);
-            return ref _Handle.AsRef<int>(_FallbackStatTrakOffset);
+            _FallbackStatTrakOffset = _FallbackStatTrakOffset ?? Schema.GetOffset(0xFFEDBA1967ECC1E7);
+            return ref _Handle.AsRef<int>(_FallbackStatTrakOffset!.Value);
         }
     }
-    private static nint _ClientsideOffset = -1;
+    private static nint? _ClientsideOffset;
 
     public ref bool Clientside
     {
         get
         {
-            if (_ClientsideOffset == -1) _ClientsideOffset = Schema.GetOffset(0xFFEDBA19EB54824D);
-            return ref _Handle.AsRef<bool>(_ClientsideOffset);
+            _ClientsideOffset = _ClientsideOffset ?? Schema.GetOffset(0xFFEDBA19EB54824D);
+            return ref _Handle.AsRef<bool>(_ClientsideOffset!.Value);
         }
     }
-    private static nint _ParticleSystemsCreatedOffset = -1;
+    private static nint? _ParticleSystemsCreatedOffset;
 
     public ref bool ParticleSystemsCreated
     {
         get
         {
-            if (_ParticleSystemsCreatedOffset == -1) _ParticleSystemsCreatedOffset = Schema.GetOffset(0xFFEDBA19FF401821);
-            return ref _Handle.AsRef<bool>(_ParticleSystemsCreatedOffset);
+            _ParticleSystemsCreatedOffset = _ParticleSystemsCreatedOffset ?? Schema.GetOffset(0xFFEDBA19FF401821);
+            return ref _Handle.AsRef<bool>(_ParticleSystemsCreatedOffset!.Value);
         }
     }
-    private static nint _AttachedParticlesOffset = -1;
+    private static nint? _AttachedParticlesOffset;
 
     public ref CUtlVector<int> AttachedParticles
     {
         get
         {
-            if (_AttachedParticlesOffset == -1) _AttachedParticlesOffset = Schema.GetOffset(0xFFEDBA1928391B74);
-            return ref _Handle.AsRef<CUtlVector<int>>(_AttachedParticlesOffset);
+            _AttachedParticlesOffset = _AttachedParticlesOffset ?? Schema.GetOffset(0xFFEDBA1928391B74);
+            return ref _Handle.AsRef<CUtlVector<int>>(_AttachedParticlesOffset!.Value);
         }
     }
-    private static nint _ViewmodelAttachmentOffset = -1;
+    private static nint? _ViewmodelAttachmentOffset;
 
     public ref CHandle<CBaseAnimGraph> ViewmodelAttachment
     {
         get
         {
-            if (_ViewmodelAttachmentOffset == -1) _ViewmodelAttachmentOffset = Schema.GetOffset(0xFFEDBA19DD883C0A);
-            return ref _Handle.AsRef<CHandle<CBaseAnimGraph>>(_ViewmodelAttachmentOffset);
+            _ViewmodelAttachmentOffset = _ViewmodelAttachmentOffset ?? Schema.GetOffset(0xFFEDBA19DD883C0A);
+            return ref _Handle.AsRef<CHandle<CBaseAnimGraph>>(_ViewmodelAttachmentOffset!.Value);
         }
     }
-    private static nint _OldTeamOffset = -1;
+    private static nint? _OldTeamOffset;
 
     public ref int OldTeam
     {
         get
         {
-            if (_OldTeamOffset == -1) _OldTeamOffset = Schema.GetOffset(0xFFEDBA19058C2788);
-            return ref _Handle.AsRef<int>(_OldTeamOffset);
+            _OldTeamOffset = _OldTeamOffset ?? Schema.GetOffset(0xFFEDBA19058C2788);
+            return ref _Handle.AsRef<int>(_OldTeamOffset!.Value);
         }
     }
-    private static nint _AttachmentDirtyOffset = -1;
+    private static nint? _AttachmentDirtyOffset;
 
     public ref bool AttachmentDirty
     {
         get
         {
-            if (_AttachmentDirtyOffset == -1) _AttachmentDirtyOffset = Schema.GetOffset(0xFFEDBA1974D80958);
-            return ref _Handle.AsRef<bool>(_AttachmentDirtyOffset);
+            _AttachmentDirtyOffset = _AttachmentDirtyOffset ?? Schema.GetOffset(0xFFEDBA1974D80958);
+            return ref _Handle.AsRef<bool>(_AttachmentDirtyOffset!.Value);
         }
     }
-    private static nint _UnloadedModelIndexOffset = -1;
+    private static nint? _UnloadedModelIndexOffset;
 
     public ref int UnloadedModelIndex
     {
         get
         {
-            if (_UnloadedModelIndexOffset == -1) _UnloadedModelIndexOffset = Schema.GetOffset(0xFFEDBA1998BFAD40);
-            return ref _Handle.AsRef<int>(_UnloadedModelIndexOffset);
+            _UnloadedModelIndexOffset = _UnloadedModelIndexOffset ?? Schema.GetOffset(0xFFEDBA1998BFAD40);
+            return ref _Handle.AsRef<int>(_UnloadedModelIndexOffset!.Value);
         }
     }
-    private static nint _NumOwnerValidationRetriesOffset = -1;
+    private static nint? _NumOwnerValidationRetriesOffset;
 
     public ref int NumOwnerValidationRetries
     {
         get
         {
-            if (_NumOwnerValidationRetriesOffset == -1) _NumOwnerValidationRetriesOffset = Schema.GetOffset(0xFFEDBA1906542C06);
-            return ref _Handle.AsRef<int>(_NumOwnerValidationRetriesOffset);
+            _NumOwnerValidationRetriesOffset = _NumOwnerValidationRetriesOffset ?? Schema.GetOffset(0xFFEDBA1906542C06);
+            return ref _Handle.AsRef<int>(_NumOwnerValidationRetriesOffset!.Value);
         }
     }
-    private static nint _OldProvideeOffset = -1;
+    private static nint? _OldProvideeOffset;
 
     public ref CHandle<C_BaseEntity> OldProvidee
     {
         get
         {
-            if (_OldProvideeOffset == -1) _OldProvideeOffset = Schema.GetOffset(0xFFEDBA19289C89E0);
-            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_OldProvideeOffset);
+            _OldProvideeOffset = _OldProvideeOffset ?? Schema.GetOffset(0xFFEDBA19289C89E0);
+            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_OldProvideeOffset!.Value);
         }
     }
-    private static nint _AttachedModelsOffset = -1;
+    private static nint? _AttachedModelsOffset;
 
     public ref CUtlVector<C_EconEntity__AttachedModelData_t> AttachedModels
     {
         get
         {
-            if (_AttachedModelsOffset == -1) _AttachedModelsOffset = Schema.GetOffset(0xFFEDBA1988A1619B);
-            return ref _Handle.AsRef<CUtlVector<C_EconEntity__AttachedModelData_t>>(_AttachedModelsOffset);
+            _AttachedModelsOffset = _AttachedModelsOffset ?? Schema.GetOffset(0xFFEDBA1988A1619B);
+            return ref _Handle.AsRef<CUtlVector<C_EconEntity__AttachedModelData_t>>(_AttachedModelsOffset!.Value);
         }
     }
 

@@ -16,55 +16,55 @@ internal partial class RsDepthStencilStateDesc_tImpl : SchemaClass, RsDepthStenc
 {
     public RsDepthStencilStateDesc_tImpl(nint handle) : base(handle) { }
 
-    private static nint _DepthTestEnableOffset = -1;
+    private static nint? _DepthTestEnableOffset;
     private SchemaUntypedField? _DepthTestEnableInstance;
 
     public SchemaUntypedField DepthTestEnable
     {
         get
         {
-            if (_DepthTestEnableOffset == -1) _DepthTestEnableOffset = Schema.GetOffset(0x9026AFA806421799);
+            _DepthTestEnableOffset = _DepthTestEnableOffset ?? Schema.GetOffset(0x9026AFA806421799);
             var instance = _DepthTestEnableInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _DepthTestEnableOffset);
+            instance.DangerousSetHandle(_Handle + _DepthTestEnableOffset!.Value);
             return instance;
         }
     }
-    private static nint _DepthWriteEnableOffset = -1;
+    private static nint? _DepthWriteEnableOffset;
     private SchemaUntypedField? _DepthWriteEnableInstance;
 
     public SchemaUntypedField DepthWriteEnable
     {
         get
         {
-            if (_DepthWriteEnableOffset == -1) _DepthWriteEnableOffset = Schema.GetOffset(0x9026AFA88D8085FE);
+            _DepthWriteEnableOffset = _DepthWriteEnableOffset ?? Schema.GetOffset(0x9026AFA88D8085FE);
             var instance = _DepthWriteEnableInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _DepthWriteEnableOffset);
+            instance.DangerousSetHandle(_Handle + _DepthWriteEnableOffset!.Value);
             return instance;
         }
     }
-    private static nint _DepthFuncOffset = -1;
+    private static nint? _DepthFuncOffset;
     private SchemaUntypedField? _DepthFuncInstance;
 
     public SchemaUntypedField DepthFunc
     {
         get
         {
-            if (_DepthFuncOffset == -1) _DepthFuncOffset = Schema.GetOffset(0x9026AFA8B47FC61C);
+            _DepthFuncOffset = _DepthFuncOffset ?? Schema.GetOffset(0x9026AFA8B47FC61C);
             var instance = _DepthFuncInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _DepthFuncOffset);
+            instance.DangerousSetHandle(_Handle + _DepthFuncOffset!.Value);
             return instance;
         }
     }
-    private static nint _StencilStateOffset = -1;
+    private static nint? _StencilStateOffset;
     private RsStencilStateDesc_tImpl? _StencilStateInstance;
 
     public RsStencilStateDesc_t StencilState
     {
         get
         {
-            if (_StencilStateOffset == -1) _StencilStateOffset = Schema.GetOffset(0x9026AFA828EA33C4);
+            _StencilStateOffset = _StencilStateOffset ?? Schema.GetOffset(0x9026AFA828EA33C4);
             var instance = _StencilStateInstance ??= new RsStencilStateDesc_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _StencilStateOffset);
+            instance.DangerousSetHandle(_Handle + _StencilStateOffset!.Value);
             return instance;
         }
     }

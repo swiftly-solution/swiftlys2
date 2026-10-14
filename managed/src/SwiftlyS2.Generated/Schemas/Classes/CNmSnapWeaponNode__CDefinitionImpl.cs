@@ -16,34 +16,34 @@ internal partial class CNmSnapWeaponNode__CDefinitionImpl : CNmPassthroughNode__
 {
     public CNmSnapWeaponNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint _FlashedAmountNodeIdxOffset = -1;
+    private static nint? _FlashedAmountNodeIdxOffset;
 
     public ref short FlashedAmountNodeIdx
     {
         get
         {
-            if (_FlashedAmountNodeIdxOffset == -1) _FlashedAmountNodeIdxOffset = Schema.GetOffset(0x60733C8950F53E73);
-            return ref _Handle.AsRef<short>(_FlashedAmountNodeIdxOffset);
+            _FlashedAmountNodeIdxOffset = _FlashedAmountNodeIdxOffset ?? Schema.GetOffset(0x60733C8950F53E73);
+            return ref _Handle.AsRef<short>(_FlashedAmountNodeIdxOffset!.Value);
         }
     }
-    private static nint _WeaponCategoryNodeIdxOffset = -1;
+    private static nint? _WeaponCategoryNodeIdxOffset;
 
     public ref short WeaponCategoryNodeIdx
     {
         get
         {
-            if (_WeaponCategoryNodeIdxOffset == -1) _WeaponCategoryNodeIdxOffset = Schema.GetOffset(0x60733C8916D198E4);
-            return ref _Handle.AsRef<short>(_WeaponCategoryNodeIdxOffset);
+            _WeaponCategoryNodeIdxOffset = _WeaponCategoryNodeIdxOffset ?? Schema.GetOffset(0x60733C8916D198E4);
+            return ref _Handle.AsRef<short>(_WeaponCategoryNodeIdxOffset!.Value);
         }
     }
-    private static nint _WeaponTypeNodeIdxOffset = -1;
+    private static nint? _WeaponTypeNodeIdxOffset;
 
     public ref short WeaponTypeNodeIdx
     {
         get
         {
-            if (_WeaponTypeNodeIdxOffset == -1) _WeaponTypeNodeIdxOffset = Schema.GetOffset(0x60733C8947A17C20);
-            return ref _Handle.AsRef<short>(_WeaponTypeNodeIdxOffset);
+            _WeaponTypeNodeIdxOffset = _WeaponTypeNodeIdxOffset ?? Schema.GetOffset(0x60733C8947A17C20);
+            return ref _Handle.AsRef<short>(_WeaponTypeNodeIdxOffset!.Value);
         }
     }
 

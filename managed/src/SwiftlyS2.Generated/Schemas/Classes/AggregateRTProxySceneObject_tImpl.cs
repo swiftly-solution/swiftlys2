@@ -16,74 +16,74 @@ internal partial class AggregateRTProxySceneObject_tImpl : SchemaClass, Aggregat
 {
     public AggregateRTProxySceneObject_tImpl(nint handle) : base(handle) { }
 
-    private static nint _LayerOffset = -1;
+    private static nint? _LayerOffset;
 
     public ref short Layer
     {
         get
         {
-            if (_LayerOffset == -1) _LayerOffset = Schema.GetOffset(0x5CA2907A477C7B2A);
-            return ref _Handle.AsRef<short>(_LayerOffset);
+            _LayerOffset = _LayerOffset ?? Schema.GetOffset(0x5CA2907A477C7B2A);
+            return ref _Handle.AsRef<short>(_LayerOffset!.Value);
         }
     }
-    private static nint _BLASesOffset = -1;
+    private static nint? _BLASesOffset;
 
     public ref CUtlVector<RTProxyBLAS_t> BLASes
     {
         get
         {
-            if (_BLASesOffset == -1) _BLASesOffset = Schema.GetOffset(0x5CA2907A3159901F);
-            return ref _Handle.AsRef<CUtlVector<RTProxyBLAS_t>>(_BLASesOffset);
+            _BLASesOffset = _BLASesOffset ?? Schema.GetOffset(0x5CA2907A3159901F);
+            return ref _Handle.AsRef<CUtlVector<RTProxyBLAS_t>>(_BLASesOffset!.Value);
         }
     }
-    private static nint _InstancesOffset = -1;
+    private static nint? _InstancesOffset;
 
     public ref CUtlVector<RTProxyInstanceInfo_t> Instances
     {
         get
         {
-            if (_InstancesOffset == -1) _InstancesOffset = Schema.GetOffset(0x5CA2907A93608AB3);
-            return ref _Handle.AsRef<CUtlVector<RTProxyInstanceInfo_t>>(_InstancesOffset);
+            _InstancesOffset = _InstancesOffset ?? Schema.GetOffset(0x5CA2907A93608AB3);
+            return ref _Handle.AsRef<CUtlVector<RTProxyInstanceInfo_t>>(_InstancesOffset!.Value);
         }
     }
-    private static nint _VBDataOffset = -1;
+    private static nint? _VBDataOffset;
 
     public ref CUtlBinaryBlock VBData
     {
         get
         {
-            if (_VBDataOffset == -1) _VBDataOffset = Schema.GetOffset(0x5CA2907AFA477801);
-            return ref _Handle.AsRef<CUtlBinaryBlock>(_VBDataOffset);
+            _VBDataOffset = _VBDataOffset ?? Schema.GetOffset(0x5CA2907AFA477801);
+            return ref _Handle.AsRef<CUtlBinaryBlock>(_VBDataOffset!.Value);
         }
     }
-    private static nint _IBDataOffset = -1;
+    private static nint? _IBDataOffset;
 
     public ref CUtlBinaryBlock IBData
     {
         get
         {
-            if (_IBDataOffset == -1) _IBDataOffset = Schema.GetOffset(0x5CA2907A8ECD9102);
-            return ref _Handle.AsRef<CUtlBinaryBlock>(_IBDataOffset);
+            _IBDataOffset = _IBDataOffset ?? Schema.GetOffset(0x5CA2907A8ECD9102);
+            return ref _Handle.AsRef<CUtlBinaryBlock>(_IBDataOffset!.Value);
         }
     }
-    private static nint _InstanceAlbedoDataOffset = -1;
+    private static nint? _InstanceAlbedoDataOffset;
 
     public ref CUtlBinaryBlock InstanceAlbedoData
     {
         get
         {
-            if (_InstanceAlbedoDataOffset == -1) _InstanceAlbedoDataOffset = Schema.GetOffset(0x5CA2907AEDCBD633);
-            return ref _Handle.AsRef<CUtlBinaryBlock>(_InstanceAlbedoDataOffset);
+            _InstanceAlbedoDataOffset = _InstanceAlbedoDataOffset ?? Schema.GetOffset(0x5CA2907AEDCBD633);
+            return ref _Handle.AsRef<CUtlBinaryBlock>(_InstanceAlbedoDataOffset!.Value);
         }
     }
-    private static nint _InstanceEmissiveDataOffset = -1;
+    private static nint? _InstanceEmissiveDataOffset;
 
     public ref CUtlBinaryBlock InstanceEmissiveData
     {
         get
         {
-            if (_InstanceEmissiveDataOffset == -1) _InstanceEmissiveDataOffset = Schema.GetOffset(0x5CA2907AEF293B85);
-            return ref _Handle.AsRef<CUtlBinaryBlock>(_InstanceEmissiveDataOffset);
+            _InstanceEmissiveDataOffset = _InstanceEmissiveDataOffset ?? Schema.GetOffset(0x5CA2907AEF293B85);
+            return ref _Handle.AsRef<CUtlBinaryBlock>(_InstanceEmissiveDataOffset!.Value);
         }
     }
 

@@ -16,121 +16,121 @@ internal partial class CToolSceneLightRigImpl : SchemaClass, CToolSceneLightRig
 {
     public CToolSceneLightRigImpl(nint handle) : base(handle) { }
 
-    private static nint _RigTypeOffset = -1;
+    private static nint? _RigTypeOffset;
 
     public ref LightRigType_t RigType
     {
         get
         {
-            if (_RigTypeOffset == -1) _RigTypeOffset = Schema.GetOffset(0x31E755F63879943D);
-            return ref _Handle.AsRef<LightRigType_t>(_RigTypeOffset);
+            _RigTypeOffset = _RigTypeOffset ?? Schema.GetOffset(0x31E755F63879943D);
+            return ref _Handle.AsRef<LightRigType_t>(_RigTypeOffset!.Value);
         }
     }
-    private static nint _SunsOffset = -1;
+    private static nint? _SunsOffset;
 
     public ref CUtlVector<CLightRigSunLight> Suns
     {
         get
         {
-            if (_SunsOffset == -1) _SunsOffset = Schema.GetOffset(0x31E755F66ADC2DD6);
-            return ref _Handle.AsRef<CUtlVector<CLightRigSunLight>>(_SunsOffset);
+            _SunsOffset = _SunsOffset ?? Schema.GetOffset(0x31E755F66ADC2DD6);
+            return ref _Handle.AsRef<CUtlVector<CLightRigSunLight>>(_SunsOffset!.Value);
         }
     }
-    private static nint _PointLightsOffset = -1;
+    private static nint? _PointLightsOffset;
 
     public ref CUtlVector<CLightRigPointLight> PointLights
     {
         get
         {
-            if (_PointLightsOffset == -1) _PointLightsOffset = Schema.GetOffset(0x31E755F68406F3F8);
-            return ref _Handle.AsRef<CUtlVector<CLightRigPointLight>>(_PointLightsOffset);
+            _PointLightsOffset = _PointLightsOffset ?? Schema.GetOffset(0x31E755F68406F3F8);
+            return ref _Handle.AsRef<CUtlVector<CLightRigPointLight>>(_PointLightsOffset!.Value);
         }
     }
-    private static nint _SpotLightsOffset = -1;
+    private static nint? _SpotLightsOffset;
 
     public ref CUtlVector<CLightRigSpotLight> SpotLights
     {
         get
         {
-            if (_SpotLightsOffset == -1) _SpotLightsOffset = Schema.GetOffset(0x31E755F65A8C751C);
-            return ref _Handle.AsRef<CUtlVector<CLightRigSpotLight>>(_SpotLightsOffset);
+            _SpotLightsOffset = _SpotLightsOffset ?? Schema.GetOffset(0x31E755F65A8C751C);
+            return ref _Handle.AsRef<CUtlVector<CLightRigSpotLight>>(_SpotLightsOffset!.Value);
         }
     }
-    private static nint _BackgroundOffset = -1;
+    private static nint? _BackgroundOffset;
     private CLightRigBackgroundImpl? _BackgroundInstance;
 
     public CLightRigBackground Background
     {
         get
         {
-            if (_BackgroundOffset == -1) _BackgroundOffset = Schema.GetOffset(0x31E755F6E7BF991D);
+            _BackgroundOffset = _BackgroundOffset ?? Schema.GetOffset(0x31E755F6E7BF991D);
             var instance = _BackgroundInstance ??= new CLightRigBackgroundImpl(0);
-            instance.DangerousSetHandle(_Handle + _BackgroundOffset);
+            instance.DangerousSetHandle(_Handle + _BackgroundOffset!.Value);
             return instance;
         }
     }
-    private static nint _GridOffset = -1;
+    private static nint? _GridOffset;
     private CLightRigGridImpl? _GridInstance;
 
     public CLightRigGrid Grid
     {
         get
         {
-            if (_GridOffset == -1) _GridOffset = Schema.GetOffset(0x31E755F6ED35FF11);
+            _GridOffset = _GridOffset ?? Schema.GetOffset(0x31E755F6ED35FF11);
             var instance = _GridInstance ??= new CLightRigGridImpl(0);
-            instance.DangerousSetHandle(_Handle + _GridOffset);
+            instance.DangerousSetHandle(_Handle + _GridOffset!.Value);
             return instance;
         }
     }
-    private static nint _ExposureOffset = -1;
+    private static nint? _ExposureOffset;
     private CLightRigExposureImpl? _ExposureInstance;
 
     public CLightRigExposure Exposure
     {
         get
         {
-            if (_ExposureOffset == -1) _ExposureOffset = Schema.GetOffset(0x31E755F669ED0A00);
+            _ExposureOffset = _ExposureOffset ?? Schema.GetOffset(0x31E755F669ED0A00);
             var instance = _ExposureInstance ??= new CLightRigExposureImpl(0);
-            instance.DangerousSetHandle(_Handle + _ExposureOffset);
+            instance.DangerousSetHandle(_Handle + _ExposureOffset!.Value);
             return instance;
         }
     }
-    private static nint _PostProcessingOffset = -1;
+    private static nint? _PostProcessingOffset;
     private CLightRigPostProcessingImpl? _PostProcessingInstance;
 
     public CLightRigPostProcessing PostProcessing
     {
         get
         {
-            if (_PostProcessingOffset == -1) _PostProcessingOffset = Schema.GetOffset(0x31E755F6053326C4);
+            _PostProcessingOffset = _PostProcessingOffset ?? Schema.GetOffset(0x31E755F6053326C4);
             var instance = _PostProcessingInstance ??= new CLightRigPostProcessingImpl(0);
-            instance.DangerousSetHandle(_Handle + _PostProcessingOffset);
+            instance.DangerousSetHandle(_Handle + _PostProcessingOffset!.Value);
             return instance;
         }
     }
-    private static nint _SkyOffset = -1;
+    private static nint? _SkyOffset;
     private CLightRigSkyImpl? _SkyInstance;
 
     public CLightRigSky Sky
     {
         get
         {
-            if (_SkyOffset == -1) _SkyOffset = Schema.GetOffset(0x31E755F658C1E8B6);
+            _SkyOffset = _SkyOffset ?? Schema.GetOffset(0x31E755F658C1E8B6);
             var instance = _SkyInstance ??= new CLightRigSkyImpl(0);
-            instance.DangerousSetHandle(_Handle + _SkyOffset);
+            instance.DangerousSetHandle(_Handle + _SkyOffset!.Value);
             return instance;
         }
     }
-    private static nint _BackgroundMapOffset = -1;
+    private static nint? _BackgroundMapOffset;
     private CLightRigVMapImpl? _BackgroundMapInstance;
 
     public CLightRigVMap BackgroundMap
     {
         get
         {
-            if (_BackgroundMapOffset == -1) _BackgroundMapOffset = Schema.GetOffset(0x31E755F6D0495449);
+            _BackgroundMapOffset = _BackgroundMapOffset ?? Schema.GetOffset(0x31E755F6D0495449);
             var instance = _BackgroundMapInstance ??= new CLightRigVMapImpl(0);
-            instance.DangerousSetHandle(_Handle + _BackgroundMapOffset);
+            instance.DangerousSetHandle(_Handle + _BackgroundMapOffset!.Value);
             return instance;
         }
     }

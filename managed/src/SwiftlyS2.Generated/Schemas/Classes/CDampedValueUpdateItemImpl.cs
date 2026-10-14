@@ -16,42 +16,42 @@ internal partial class CDampedValueUpdateItemImpl : SchemaClass, CDampedValueUpd
 {
     public CDampedValueUpdateItemImpl(nint handle) : base(handle) { }
 
-    private static nint _DampingOffset = -1;
+    private static nint? _DampingOffset;
     private CAnimInputDampingImpl? _DampingInstance;
 
     public CAnimInputDamping Damping
     {
         get
         {
-            if (_DampingOffset == -1) _DampingOffset = Schema.GetOffset(0x4B11725415440FB5);
+            _DampingOffset = _DampingOffset ?? Schema.GetOffset(0x4B11725415440FB5);
             var instance = _DampingInstance ??= new CAnimInputDampingImpl(0);
-            instance.DangerousSetHandle(_Handle + _DampingOffset);
+            instance.DangerousSetHandle(_Handle + _DampingOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamInOffset = -1;
+    private static nint? _ParamInOffset;
     private CAnimParamHandleImpl? _ParamInInstance;
 
     public CAnimParamHandle ParamIn
     {
         get
         {
-            if (_ParamInOffset == -1) _ParamInOffset = Schema.GetOffset(0x4B117254ED40E37B);
+            _ParamInOffset = _ParamInOffset ?? Schema.GetOffset(0x4B117254ED40E37B);
             var instance = _ParamInInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamInOffset);
+            instance.DangerousSetHandle(_Handle + _ParamInOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamOutOffset = -1;
+    private static nint? _ParamOutOffset;
     private CAnimParamHandleImpl? _ParamOutInstance;
 
     public CAnimParamHandle ParamOut
     {
         get
         {
-            if (_ParamOutOffset == -1) _ParamOutOffset = Schema.GetOffset(0x4B117254AA5799A8);
+            _ParamOutOffset = _ParamOutOffset ?? Schema.GetOffset(0x4B117254AA5799A8);
             var instance = _ParamOutInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamOutOffset);
+            instance.DangerousSetHandle(_Handle + _ParamOutOffset!.Value);
             return instance;
         }
     }

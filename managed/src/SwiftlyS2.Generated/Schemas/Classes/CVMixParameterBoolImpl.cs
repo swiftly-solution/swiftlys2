@@ -16,16 +16,16 @@ internal partial class CVMixParameterBoolImpl : SchemaClass, CVMixParameterBool
 {
     public CVMixParameterBoolImpl(nint handle) : base(handle) { }
 
-    private static nint _OffsetOffset = -1;
+    private static nint? _OffsetOffset;
     private CVMixDataOffsetImpl? _OffsetInstance;
 
     public CVMixDataOffset Offset
     {
         get
         {
-            if (_OffsetOffset == -1) _OffsetOffset = Schema.GetOffset(0x45FC4B0DF836806A);
+            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0x45FC4B0DF836806A);
             var instance = _OffsetInstance ??= new CVMixDataOffsetImpl(0);
-            instance.DangerousSetHandle(_Handle + _OffsetOffset);
+            instance.DangerousSetHandle(_Handle + _OffsetOffset!.Value);
             return instance;
         }
     }

@@ -16,49 +16,49 @@ internal partial class RnCompoundTreeNode_tImpl : SchemaClass, RnCompoundTreeNod
 {
     public RnCompoundTreeNode_tImpl(nint handle) : base(handle) { }
 
-    private static nint _MinOffset = -1;
+    private static nint? _MinOffset;
 
     public ref Vector Min
     {
         get
         {
-            if (_MinOffset == -1) _MinOffset = Schema.GetOffset(0xA6F03DD7F4B0AA63);
-            return ref _Handle.AsRef<Vector>(_MinOffset);
+            _MinOffset = _MinOffset ?? Schema.GetOffset(0xA6F03DD7F4B0AA63);
+            return ref _Handle.AsRef<Vector>(_MinOffset!.Value);
         }
     }
-    private static nint _MaxOffset = -1;
+    private static nint? _MaxOffset;
 
     public ref Vector Max
     {
         get
         {
-            if (_MaxOffset == -1) _MaxOffset = Schema.GetOffset(0xA6F03DD7EAC4225D);
-            return ref _Handle.AsRef<Vector>(_MaxOffset);
+            _MaxOffset = _MaxOffset ?? Schema.GetOffset(0xA6F03DD7EAC4225D);
+            return ref _Handle.AsRef<Vector>(_MaxOffset!.Value);
         }
     }
-    private static nint _TypeOffset = -1;
+    private static nint? _TypeOffset;
     private SchemaUntypedField? _TypeInstance;
 
     public SchemaUntypedField Type
     {
         get
         {
-            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0xA6F03DD718853D59);
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0xA6F03DD718853D59);
             var instance = _TypeInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _TypeOffset);
+            instance.DangerousSetHandle(_Handle + _TypeOffset!.Value);
             return instance;
         }
     }
-    private static nint _SubtreeEndOrCompoundIdOffset = -1;
+    private static nint? _SubtreeEndOrCompoundIdOffset;
     private SchemaUntypedField? _SubtreeEndOrCompoundIdInstance;
 
     public SchemaUntypedField SubtreeEndOrCompoundId
     {
         get
         {
-            if (_SubtreeEndOrCompoundIdOffset == -1) _SubtreeEndOrCompoundIdOffset = Schema.GetOffset(0xA6F03DD794F576CF);
+            _SubtreeEndOrCompoundIdOffset = _SubtreeEndOrCompoundIdOffset ?? Schema.GetOffset(0xA6F03DD794F576CF);
             var instance = _SubtreeEndOrCompoundIdInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _SubtreeEndOrCompoundIdOffset);
+            instance.DangerousSetHandle(_Handle + _SubtreeEndOrCompoundIdOffset!.Value);
             return instance;
         }
     }

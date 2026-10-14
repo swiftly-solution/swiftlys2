@@ -16,72 +16,72 @@ internal partial class ActiveModelConfig_tImpl : SchemaClass, ActiveModelConfig_
 {
     public ActiveModelConfig_tImpl(nint handle) : base(handle) { }
 
-    private static nint _HandleOffset = -1;
+    private static nint? _HandleOffset;
     private ModelConfigHandle_tImpl? _HandleInstance;
 
     public ModelConfigHandle_t Handle
     {
         get
         {
-            if (_HandleOffset == -1) _HandleOffset = Schema.GetOffset(0x554D81919D208453);
+            _HandleOffset = _HandleOffset ?? Schema.GetOffset(0x554D81919D208453);
             var instance = _HandleInstance ??= new ModelConfigHandle_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _HandleOffset);
+            instance.DangerousSetHandle(_Handle + _HandleOffset!.Value);
             return instance;
         }
     }
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x554D8191CAE8A266);
-            return Schema.GetString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x554D8191CAE8A266);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x554D8191CAE8A266);
-            Schema.SetString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x554D8191CAE8A266);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _AssociatedEntitiesOffset = -1;
+    private static nint? _AssociatedEntitiesOffset;
 
     public ref CUtlVector<CHandle<CBaseModelEntity>> AssociatedEntities
     {
         get
         {
-            if (_AssociatedEntitiesOffset == -1) _AssociatedEntitiesOffset = Schema.GetOffset(0x554D8191D6EB4F18);
-            return ref _Handle.AsRef<CUtlVector<CHandle<CBaseModelEntity>>>(_AssociatedEntitiesOffset);
+            _AssociatedEntitiesOffset = _AssociatedEntitiesOffset ?? Schema.GetOffset(0x554D8191D6EB4F18);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CBaseModelEntity>>>(_AssociatedEntitiesOffset!.Value);
         }
     }
-    private static nint _AssociatedEntityNamesOffset = -1;
+    private static nint? _AssociatedEntityNamesOffset;
 
     public ref CUtlVector<SchemaUntypedField> AssociatedEntityNames
     {
         get
         {
-            if (_AssociatedEntityNamesOffset == -1) _AssociatedEntityNamesOffset = Schema.GetOffset(0x554D8191EB3B241C);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_AssociatedEntityNamesOffset);
+            _AssociatedEntityNamesOffset = _AssociatedEntityNamesOffset ?? Schema.GetOffset(0x554D8191EB3B241C);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_AssociatedEntityNamesOffset!.Value);
         }
     }
-    private static nint _AssociatedEntityCollidesWithHierarchyOffset = -1;
+    private static nint? _AssociatedEntityCollidesWithHierarchyOffset;
 
     public ref CUtlLeanVector<bool, int> AssociatedEntityCollidesWithHierarchy
     {
         get
         {
-            if (_AssociatedEntityCollidesWithHierarchyOffset == -1) _AssociatedEntityCollidesWithHierarchyOffset = Schema.GetOffset(0x554D81914D723506);
-            return ref _Handle.AsRef<CUtlLeanVector<bool, int>>(_AssociatedEntityCollidesWithHierarchyOffset);
+            _AssociatedEntityCollidesWithHierarchyOffset = _AssociatedEntityCollidesWithHierarchyOffset ?? Schema.GetOffset(0x554D81914D723506);
+            return ref _Handle.AsRef<CUtlLeanVector<bool, int>>(_AssociatedEntityCollidesWithHierarchyOffset!.Value);
         }
     }
-    private static nint _AssociatedEntityCollidesOutsideHierarchyOffset = -1;
+    private static nint? _AssociatedEntityCollidesOutsideHierarchyOffset;
 
     public ref CUtlLeanVector<bool, int> AssociatedEntityCollidesOutsideHierarchy
     {
         get
         {
-            if (_AssociatedEntityCollidesOutsideHierarchyOffset == -1) _AssociatedEntityCollidesOutsideHierarchyOffset = Schema.GetOffset(0x554D81917BBE47A9);
-            return ref _Handle.AsRef<CUtlLeanVector<bool, int>>(_AssociatedEntityCollidesOutsideHierarchyOffset);
+            _AssociatedEntityCollidesOutsideHierarchyOffset = _AssociatedEntityCollidesOutsideHierarchyOffset ?? Schema.GetOffset(0x554D81917BBE47A9);
+            return ref _Handle.AsRef<CUtlLeanVector<bool, int>>(_AssociatedEntityCollidesOutsideHierarchyOffset!.Value);
         }
     }
 

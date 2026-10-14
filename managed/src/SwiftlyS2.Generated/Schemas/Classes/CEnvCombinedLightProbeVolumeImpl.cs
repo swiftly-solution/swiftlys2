@@ -16,274 +16,274 @@ internal partial class CEnvCombinedLightProbeVolumeImpl : CBaseEntityImpl, CEnvC
 {
     public CEnvCombinedLightProbeVolumeImpl(nint handle) : base(handle) { }
 
-    private static nint _Entity_ColorOffset = -1;
+    private static nint? _Entity_ColorOffset;
 
     public ref Color Entity_Color
     {
         get
         {
-            if (_Entity_ColorOffset == -1) _Entity_ColorOffset = Schema.GetOffset(0xA73B1B927B17F98E);
-            return ref _Handle.AsRef<Color>(_Entity_ColorOffset);
+            _Entity_ColorOffset = _Entity_ColorOffset ?? Schema.GetOffset(0xA73B1B927B17F98E);
+            return ref _Handle.AsRef<Color>(_Entity_ColorOffset!.Value);
         }
     }
-    private static nint _Entity_flBrightnessOffset = -1;
+    private static nint? _Entity_flBrightnessOffset;
 
     public ref float Entity_flBrightness
     {
         get
         {
-            if (_Entity_flBrightnessOffset == -1) _Entity_flBrightnessOffset = Schema.GetOffset(0xA73B1B92917416BA);
-            return ref _Handle.AsRef<float>(_Entity_flBrightnessOffset);
+            _Entity_flBrightnessOffset = _Entity_flBrightnessOffset ?? Schema.GetOffset(0xA73B1B92917416BA);
+            return ref _Handle.AsRef<float>(_Entity_flBrightnessOffset!.Value);
         }
     }
-    private static nint _Entity_hCubemapTextureOffset = -1;
+    private static nint? _Entity_hCubemapTextureOffset;
 
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hCubemapTexture
     {
         get
         {
-            if (_Entity_hCubemapTextureOffset == -1) _Entity_hCubemapTextureOffset = Schema.GetOffset(0xA73B1B924906C709);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_Entity_hCubemapTextureOffset);
+            _Entity_hCubemapTextureOffset = _Entity_hCubemapTextureOffset ?? Schema.GetOffset(0xA73B1B924906C709);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_Entity_hCubemapTextureOffset!.Value);
         }
     }
-    private static nint _Entity_bCustomCubemapTextureOffset = -1;
+    private static nint? _Entity_bCustomCubemapTextureOffset;
 
     public ref bool Entity_bCustomCubemapTexture
     {
         get
         {
-            if (_Entity_bCustomCubemapTextureOffset == -1) _Entity_bCustomCubemapTextureOffset = Schema.GetOffset(0xA73B1B921E6DC6A4);
-            return ref _Handle.AsRef<bool>(_Entity_bCustomCubemapTextureOffset);
+            _Entity_bCustomCubemapTextureOffset = _Entity_bCustomCubemapTextureOffset ?? Schema.GetOffset(0xA73B1B921E6DC6A4);
+            return ref _Handle.AsRef<bool>(_Entity_bCustomCubemapTextureOffset!.Value);
         }
     }
-    private static nint _Entity_hLightProbeTexture_AmbientCubeOffset = -1;
+    private static nint? _Entity_hLightProbeTexture_AmbientCubeOffset;
 
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_AmbientCube
     {
         get
         {
-            if (_Entity_hLightProbeTexture_AmbientCubeOffset == -1) _Entity_hLightProbeTexture_AmbientCubeOffset = Schema.GetOffset(0xA73B1B92148FA944);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_Entity_hLightProbeTexture_AmbientCubeOffset);
+            _Entity_hLightProbeTexture_AmbientCubeOffset = _Entity_hLightProbeTexture_AmbientCubeOffset ?? Schema.GetOffset(0xA73B1B92148FA944);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_Entity_hLightProbeTexture_AmbientCubeOffset!.Value);
         }
     }
-    private static nint _Entity_hLightProbeTexture_SDFOffset = -1;
+    private static nint? _Entity_hLightProbeTexture_SDFOffset;
 
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SDF
     {
         get
         {
-            if (_Entity_hLightProbeTexture_SDFOffset == -1) _Entity_hLightProbeTexture_SDFOffset = Schema.GetOffset(0xA73B1B92B0D8BE62);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_Entity_hLightProbeTexture_SDFOffset);
+            _Entity_hLightProbeTexture_SDFOffset = _Entity_hLightProbeTexture_SDFOffset ?? Schema.GetOffset(0xA73B1B92B0D8BE62);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_Entity_hLightProbeTexture_SDFOffset!.Value);
         }
     }
-    private static nint _Entity_hLightProbeTexture_SH2_DCOffset = -1;
+    private static nint? _Entity_hLightProbeTexture_SH2_DCOffset;
 
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_DC
     {
         get
         {
-            if (_Entity_hLightProbeTexture_SH2_DCOffset == -1) _Entity_hLightProbeTexture_SH2_DCOffset = Schema.GetOffset(0xA73B1B92C9357F5E);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_Entity_hLightProbeTexture_SH2_DCOffset);
+            _Entity_hLightProbeTexture_SH2_DCOffset = _Entity_hLightProbeTexture_SH2_DCOffset ?? Schema.GetOffset(0xA73B1B92C9357F5E);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_Entity_hLightProbeTexture_SH2_DCOffset!.Value);
         }
     }
-    private static nint _Entity_hLightProbeTexture_SH2_L1Offset = -1;
+    private static nint? _Entity_hLightProbeTexture_SH2_L1Offset;
 
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_L1
     {
         get
         {
-            if (_Entity_hLightProbeTexture_SH2_L1Offset == -1) _Entity_hLightProbeTexture_SH2_L1Offset = Schema.GetOffset(0xA73B1B92E7493650);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_Entity_hLightProbeTexture_SH2_L1Offset);
+            _Entity_hLightProbeTexture_SH2_L1Offset = _Entity_hLightProbeTexture_SH2_L1Offset ?? Schema.GetOffset(0xA73B1B92E7493650);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_Entity_hLightProbeTexture_SH2_L1Offset!.Value);
         }
     }
-    private static nint _Entity_hLightProbeDirectLightIndicesTextureOffset = -1;
+    private static nint? _Entity_hLightProbeDirectLightIndicesTextureOffset;
 
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeDirectLightIndicesTexture
     {
         get
         {
-            if (_Entity_hLightProbeDirectLightIndicesTextureOffset == -1) _Entity_hLightProbeDirectLightIndicesTextureOffset = Schema.GetOffset(0xA73B1B922251ACF2);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_Entity_hLightProbeDirectLightIndicesTextureOffset);
+            _Entity_hLightProbeDirectLightIndicesTextureOffset = _Entity_hLightProbeDirectLightIndicesTextureOffset ?? Schema.GetOffset(0xA73B1B922251ACF2);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_Entity_hLightProbeDirectLightIndicesTextureOffset!.Value);
         }
     }
-    private static nint _Entity_hLightProbeDirectLightScalarsTextureOffset = -1;
+    private static nint? _Entity_hLightProbeDirectLightScalarsTextureOffset;
 
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeDirectLightScalarsTexture
     {
         get
         {
-            if (_Entity_hLightProbeDirectLightScalarsTextureOffset == -1) _Entity_hLightProbeDirectLightScalarsTextureOffset = Schema.GetOffset(0xA73B1B92A463880E);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_Entity_hLightProbeDirectLightScalarsTextureOffset);
+            _Entity_hLightProbeDirectLightScalarsTextureOffset = _Entity_hLightProbeDirectLightScalarsTextureOffset ?? Schema.GetOffset(0xA73B1B92A463880E);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_Entity_hLightProbeDirectLightScalarsTextureOffset!.Value);
         }
     }
-    private static nint _Entity_hLightProbeDirectLightShadowsTextureOffset = -1;
+    private static nint? _Entity_hLightProbeDirectLightShadowsTextureOffset;
 
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeDirectLightShadowsTexture
     {
         get
         {
-            if (_Entity_hLightProbeDirectLightShadowsTextureOffset == -1) _Entity_hLightProbeDirectLightShadowsTextureOffset = Schema.GetOffset(0xA73B1B9294B00D56);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_Entity_hLightProbeDirectLightShadowsTextureOffset);
+            _Entity_hLightProbeDirectLightShadowsTextureOffset = _Entity_hLightProbeDirectLightShadowsTextureOffset ?? Schema.GetOffset(0xA73B1B9294B00D56);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_Entity_hLightProbeDirectLightShadowsTextureOffset!.Value);
         }
     }
-    private static nint _Entity_vBoxMinsOffset = -1;
+    private static nint? _Entity_vBoxMinsOffset;
 
     public ref Vector Entity_vBoxMins
     {
         get
         {
-            if (_Entity_vBoxMinsOffset == -1) _Entity_vBoxMinsOffset = Schema.GetOffset(0xA73B1B92D35AD599);
-            return ref _Handle.AsRef<Vector>(_Entity_vBoxMinsOffset);
+            _Entity_vBoxMinsOffset = _Entity_vBoxMinsOffset ?? Schema.GetOffset(0xA73B1B92D35AD599);
+            return ref _Handle.AsRef<Vector>(_Entity_vBoxMinsOffset!.Value);
         }
     }
-    private static nint _Entity_vBoxMaxsOffset = -1;
+    private static nint? _Entity_vBoxMaxsOffset;
 
     public ref Vector Entity_vBoxMaxs
     {
         get
         {
-            if (_Entity_vBoxMaxsOffset == -1) _Entity_vBoxMaxsOffset = Schema.GetOffset(0xA73B1B927C83608B);
-            return ref _Handle.AsRef<Vector>(_Entity_vBoxMaxsOffset);
+            _Entity_vBoxMaxsOffset = _Entity_vBoxMaxsOffset ?? Schema.GetOffset(0xA73B1B927C83608B);
+            return ref _Handle.AsRef<Vector>(_Entity_vBoxMaxsOffset!.Value);
         }
     }
-    private static nint _Entity_bMoveableOffset = -1;
+    private static nint? _Entity_bMoveableOffset;
 
     public ref bool Entity_bMoveable
     {
         get
         {
-            if (_Entity_bMoveableOffset == -1) _Entity_bMoveableOffset = Schema.GetOffset(0xA73B1B9254059592);
-            return ref _Handle.AsRef<bool>(_Entity_bMoveableOffset);
+            _Entity_bMoveableOffset = _Entity_bMoveableOffset ?? Schema.GetOffset(0xA73B1B9254059592);
+            return ref _Handle.AsRef<bool>(_Entity_bMoveableOffset!.Value);
         }
     }
-    private static nint _Entity_nHandshakeOffset = -1;
+    private static nint? _Entity_nHandshakeOffset;
 
     public ref int Entity_nHandshake
     {
         get
         {
-            if (_Entity_nHandshakeOffset == -1) _Entity_nHandshakeOffset = Schema.GetOffset(0xA73B1B92069A2774);
-            return ref _Handle.AsRef<int>(_Entity_nHandshakeOffset);
+            _Entity_nHandshakeOffset = _Entity_nHandshakeOffset ?? Schema.GetOffset(0xA73B1B92069A2774);
+            return ref _Handle.AsRef<int>(_Entity_nHandshakeOffset!.Value);
         }
     }
-    private static nint _Entity_nEnvCubeMapArrayIndexOffset = -1;
+    private static nint? _Entity_nEnvCubeMapArrayIndexOffset;
 
     public ref int Entity_nEnvCubeMapArrayIndex
     {
         get
         {
-            if (_Entity_nEnvCubeMapArrayIndexOffset == -1) _Entity_nEnvCubeMapArrayIndexOffset = Schema.GetOffset(0xA73B1B9221687DA4);
-            return ref _Handle.AsRef<int>(_Entity_nEnvCubeMapArrayIndexOffset);
+            _Entity_nEnvCubeMapArrayIndexOffset = _Entity_nEnvCubeMapArrayIndexOffset ?? Schema.GetOffset(0xA73B1B9221687DA4);
+            return ref _Handle.AsRef<int>(_Entity_nEnvCubeMapArrayIndexOffset!.Value);
         }
     }
-    private static nint _Entity_nPriorityOffset = -1;
+    private static nint? _Entity_nPriorityOffset;
 
     public ref int Entity_nPriority
     {
         get
         {
-            if (_Entity_nPriorityOffset == -1) _Entity_nPriorityOffset = Schema.GetOffset(0xA73B1B92BAACBFAB);
-            return ref _Handle.AsRef<int>(_Entity_nPriorityOffset);
+            _Entity_nPriorityOffset = _Entity_nPriorityOffset ?? Schema.GetOffset(0xA73B1B92BAACBFAB);
+            return ref _Handle.AsRef<int>(_Entity_nPriorityOffset!.Value);
         }
     }
-    private static nint _Entity_bStartDisabledOffset = -1;
+    private static nint? _Entity_bStartDisabledOffset;
 
     public ref bool Entity_bStartDisabled
     {
         get
         {
-            if (_Entity_bStartDisabledOffset == -1) _Entity_bStartDisabledOffset = Schema.GetOffset(0xA73B1B92D04F520D);
-            return ref _Handle.AsRef<bool>(_Entity_bStartDisabledOffset);
+            _Entity_bStartDisabledOffset = _Entity_bStartDisabledOffset ?? Schema.GetOffset(0xA73B1B92D04F520D);
+            return ref _Handle.AsRef<bool>(_Entity_bStartDisabledOffset!.Value);
         }
     }
-    private static nint _Entity_flEdgeFadeDistOffset = -1;
+    private static nint? _Entity_flEdgeFadeDistOffset;
 
     public ref float Entity_flEdgeFadeDist
     {
         get
         {
-            if (_Entity_flEdgeFadeDistOffset == -1) _Entity_flEdgeFadeDistOffset = Schema.GetOffset(0xA73B1B92B6CBA4FE);
-            return ref _Handle.AsRef<float>(_Entity_flEdgeFadeDistOffset);
+            _Entity_flEdgeFadeDistOffset = _Entity_flEdgeFadeDistOffset ?? Schema.GetOffset(0xA73B1B92B6CBA4FE);
+            return ref _Handle.AsRef<float>(_Entity_flEdgeFadeDistOffset!.Value);
         }
     }
-    private static nint _Entity_vEdgeFadeDistsOffset = -1;
+    private static nint? _Entity_vEdgeFadeDistsOffset;
 
     public ref Vector Entity_vEdgeFadeDists
     {
         get
         {
-            if (_Entity_vEdgeFadeDistsOffset == -1) _Entity_vEdgeFadeDistsOffset = Schema.GetOffset(0xA73B1B92B07D9139);
-            return ref _Handle.AsRef<Vector>(_Entity_vEdgeFadeDistsOffset);
+            _Entity_vEdgeFadeDistsOffset = _Entity_vEdgeFadeDistsOffset ?? Schema.GetOffset(0xA73B1B92B07D9139);
+            return ref _Handle.AsRef<Vector>(_Entity_vEdgeFadeDistsOffset!.Value);
         }
     }
-    private static nint _Entity_nLightProbeSizeXOffset = -1;
+    private static nint? _Entity_nLightProbeSizeXOffset;
 
     public ref int Entity_nLightProbeSizeX
     {
         get
         {
-            if (_Entity_nLightProbeSizeXOffset == -1) _Entity_nLightProbeSizeXOffset = Schema.GetOffset(0xA73B1B929A840E10);
-            return ref _Handle.AsRef<int>(_Entity_nLightProbeSizeXOffset);
+            _Entity_nLightProbeSizeXOffset = _Entity_nLightProbeSizeXOffset ?? Schema.GetOffset(0xA73B1B929A840E10);
+            return ref _Handle.AsRef<int>(_Entity_nLightProbeSizeXOffset!.Value);
         }
     }
-    private static nint _Entity_nLightProbeSizeYOffset = -1;
+    private static nint? _Entity_nLightProbeSizeYOffset;
 
     public ref int Entity_nLightProbeSizeY
     {
         get
         {
-            if (_Entity_nLightProbeSizeYOffset == -1) _Entity_nLightProbeSizeYOffset = Schema.GetOffset(0xA73B1B929B840FA3);
-            return ref _Handle.AsRef<int>(_Entity_nLightProbeSizeYOffset);
+            _Entity_nLightProbeSizeYOffset = _Entity_nLightProbeSizeYOffset ?? Schema.GetOffset(0xA73B1B929B840FA3);
+            return ref _Handle.AsRef<int>(_Entity_nLightProbeSizeYOffset!.Value);
         }
     }
-    private static nint _Entity_nLightProbeSizeZOffset = -1;
+    private static nint? _Entity_nLightProbeSizeZOffset;
 
     public ref int Entity_nLightProbeSizeZ
     {
         get
         {
-            if (_Entity_nLightProbeSizeZOffset == -1) _Entity_nLightProbeSizeZOffset = Schema.GetOffset(0xA73B1B929C841136);
-            return ref _Handle.AsRef<int>(_Entity_nLightProbeSizeZOffset);
+            _Entity_nLightProbeSizeZOffset = _Entity_nLightProbeSizeZOffset ?? Schema.GetOffset(0xA73B1B929C841136);
+            return ref _Handle.AsRef<int>(_Entity_nLightProbeSizeZOffset!.Value);
         }
     }
-    private static nint _Entity_nLightProbeAtlasXOffset = -1;
+    private static nint? _Entity_nLightProbeAtlasXOffset;
 
     public ref int Entity_nLightProbeAtlasX
     {
         get
         {
-            if (_Entity_nLightProbeAtlasXOffset == -1) _Entity_nLightProbeAtlasXOffset = Schema.GetOffset(0xA73B1B9253C9E610);
-            return ref _Handle.AsRef<int>(_Entity_nLightProbeAtlasXOffset);
+            _Entity_nLightProbeAtlasXOffset = _Entity_nLightProbeAtlasXOffset ?? Schema.GetOffset(0xA73B1B9253C9E610);
+            return ref _Handle.AsRef<int>(_Entity_nLightProbeAtlasXOffset!.Value);
         }
     }
-    private static nint _Entity_nLightProbeAtlasYOffset = -1;
+    private static nint? _Entity_nLightProbeAtlasYOffset;
 
     public ref int Entity_nLightProbeAtlasY
     {
         get
         {
-            if (_Entity_nLightProbeAtlasYOffset == -1) _Entity_nLightProbeAtlasYOffset = Schema.GetOffset(0xA73B1B9254C9E7A3);
-            return ref _Handle.AsRef<int>(_Entity_nLightProbeAtlasYOffset);
+            _Entity_nLightProbeAtlasYOffset = _Entity_nLightProbeAtlasYOffset ?? Schema.GetOffset(0xA73B1B9254C9E7A3);
+            return ref _Handle.AsRef<int>(_Entity_nLightProbeAtlasYOffset!.Value);
         }
     }
-    private static nint _Entity_nLightProbeAtlasZOffset = -1;
+    private static nint? _Entity_nLightProbeAtlasZOffset;
 
     public ref int Entity_nLightProbeAtlasZ
     {
         get
         {
-            if (_Entity_nLightProbeAtlasZOffset == -1) _Entity_nLightProbeAtlasZOffset = Schema.GetOffset(0xA73B1B9255C9E936);
-            return ref _Handle.AsRef<int>(_Entity_nLightProbeAtlasZOffset);
+            _Entity_nLightProbeAtlasZOffset = _Entity_nLightProbeAtlasZOffset ?? Schema.GetOffset(0xA73B1B9255C9E936);
+            return ref _Handle.AsRef<int>(_Entity_nLightProbeAtlasZOffset!.Value);
         }
     }
-    private static nint _Entity_bEnabledOffset = -1;
+    private static nint? _Entity_bEnabledOffset;
 
     public ref bool Entity_bEnabled
     {
         get
         {
-            if (_Entity_bEnabledOffset == -1) _Entity_bEnabledOffset = Schema.GetOffset(0xA73B1B92453FD9DC);
-            return ref _Handle.AsRef<bool>(_Entity_bEnabledOffset);
+            _Entity_bEnabledOffset = _Entity_bEnabledOffset ?? Schema.GetOffset(0xA73B1B92453FD9DC);
+            return ref _Handle.AsRef<bool>(_Entity_bEnabledOffset!.Value);
         }
     }
 

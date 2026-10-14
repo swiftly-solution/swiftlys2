@@ -16,44 +16,44 @@ internal partial class CRagdollManagerImpl : CBaseEntityImpl, CRagdollManager
 {
     public CRagdollManagerImpl(nint handle) : base(handle) { }
 
-    private static nint _CurrentMaxRagdollCountOffset = -1;
+    private static nint? _CurrentMaxRagdollCountOffset;
 
     public ref byte CurrentMaxRagdollCount
     {
         get
         {
-            if (_CurrentMaxRagdollCountOffset == -1) _CurrentMaxRagdollCountOffset = Schema.GetOffset(0x3C67654C8544F4A7);
-            return ref _Handle.AsRef<byte>(_CurrentMaxRagdollCountOffset);
+            _CurrentMaxRagdollCountOffset = _CurrentMaxRagdollCountOffset ?? Schema.GetOffset(0x3C67654C8544F4A7);
+            return ref _Handle.AsRef<byte>(_CurrentMaxRagdollCountOffset!.Value);
         }
     }
-    private static nint _MaxRagdollCountOffset = -1;
+    private static nint? _MaxRagdollCountOffset;
 
     public ref int MaxRagdollCount
     {
         get
         {
-            if (_MaxRagdollCountOffset == -1) _MaxRagdollCountOffset = Schema.GetOffset(0x3C67654CC3A8C254);
-            return ref _Handle.AsRef<int>(_MaxRagdollCountOffset);
+            _MaxRagdollCountOffset = _MaxRagdollCountOffset ?? Schema.GetOffset(0x3C67654CC3A8C254);
+            return ref _Handle.AsRef<int>(_MaxRagdollCountOffset!.Value);
         }
     }
-    private static nint _SaveImportantOffset = -1;
+    private static nint? _SaveImportantOffset;
 
     public ref bool SaveImportant
     {
         get
         {
-            if (_SaveImportantOffset == -1) _SaveImportantOffset = Schema.GetOffset(0x3C67654CB7710746);
-            return ref _Handle.AsRef<bool>(_SaveImportantOffset);
+            _SaveImportantOffset = _SaveImportantOffset ?? Schema.GetOffset(0x3C67654CB7710746);
+            return ref _Handle.AsRef<bool>(_SaveImportantOffset!.Value);
         }
     }
-    private static nint _CanTakeDamageOffset = -1;
+    private static nint? _CanTakeDamageOffset;
 
     public ref bool CanTakeDamage
     {
         get
         {
-            if (_CanTakeDamageOffset == -1) _CanTakeDamageOffset = Schema.GetOffset(0x3C67654C64446233);
-            return ref _Handle.AsRef<bool>(_CanTakeDamageOffset);
+            _CanTakeDamageOffset = _CanTakeDamageOffset ?? Schema.GetOffset(0x3C67654C64446233);
+            return ref _Handle.AsRef<bool>(_CanTakeDamageOffset!.Value);
         }
     }
 

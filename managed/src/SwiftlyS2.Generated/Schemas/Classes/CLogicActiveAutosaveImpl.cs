@@ -16,47 +16,47 @@ internal partial class CLogicActiveAutosaveImpl : CLogicAutosaveImpl, CLogicActi
 {
     public CLogicActiveAutosaveImpl(nint handle) : base(handle) { }
 
-    private static nint _TriggerHitPointsOffset = -1;
+    private static nint? _TriggerHitPointsOffset;
 
     public ref int TriggerHitPoints
     {
         get
         {
-            if (_TriggerHitPointsOffset == -1) _TriggerHitPointsOffset = Schema.GetOffset(0x9BBDEF887D8FAE5B);
-            return ref _Handle.AsRef<int>(_TriggerHitPointsOffset);
+            _TriggerHitPointsOffset = _TriggerHitPointsOffset ?? Schema.GetOffset(0x9BBDEF887D8FAE5B);
+            return ref _Handle.AsRef<int>(_TriggerHitPointsOffset!.Value);
         }
     }
-    private static nint _TimeToTriggerOffset = -1;
+    private static nint? _TimeToTriggerOffset;
 
     public ref float TimeToTrigger
     {
         get
         {
-            if (_TimeToTriggerOffset == -1) _TimeToTriggerOffset = Schema.GetOffset(0x9BBDEF880C3F780D);
-            return ref _Handle.AsRef<float>(_TimeToTriggerOffset);
+            _TimeToTriggerOffset = _TimeToTriggerOffset ?? Schema.GetOffset(0x9BBDEF880C3F780D);
+            return ref _Handle.AsRef<float>(_TimeToTriggerOffset!.Value);
         }
     }
-    private static nint _StartTimeOffset = -1;
+    private static nint? _StartTimeOffset;
     private GameTime_tImpl? _StartTimeInstance;
 
     public GameTime_t StartTime
     {
         get
         {
-            if (_StartTimeOffset == -1) _StartTimeOffset = Schema.GetOffset(0x9BBDEF8867FE9DC4);
+            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0x9BBDEF8867FE9DC4);
             var instance = _StartTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _StartTimeOffset);
+            instance.DangerousSetHandle(_Handle + _StartTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _DangerousTimeOffset = -1;
+    private static nint? _DangerousTimeOffset;
 
     public ref float DangerousTime
     {
         get
         {
-            if (_DangerousTimeOffset == -1) _DangerousTimeOffset = Schema.GetOffset(0x9BBDEF8819BC5644);
-            return ref _Handle.AsRef<float>(_DangerousTimeOffset);
+            _DangerousTimeOffset = _DangerousTimeOffset ?? Schema.GetOffset(0x9BBDEF8819BC5644);
+            return ref _Handle.AsRef<float>(_DangerousTimeOffset!.Value);
         }
     }
 

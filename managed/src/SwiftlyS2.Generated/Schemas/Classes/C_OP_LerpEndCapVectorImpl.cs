@@ -16,37 +16,37 @@ internal partial class C_OP_LerpEndCapVectorImpl : CParticleFunctionOperatorImpl
 {
     public C_OP_LerpEndCapVectorImpl(nint handle) : base(handle) { }
 
-    private static nint _FieldOutputOffset = -1;
+    private static nint? _FieldOutputOffset;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0x4847E160E5729606);
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x4847E160E5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
             return instance;
         }
     }
-    private static nint _OutputOffset = -1;
+    private static nint? _OutputOffset;
 
     public ref Vector Output
     {
         get
         {
-            if (_OutputOffset == -1) _OutputOffset = Schema.GetOffset(0x4847E16008B7FF64);
-            return ref _Handle.AsRef<Vector>(_OutputOffset);
+            _OutputOffset = _OutputOffset ?? Schema.GetOffset(0x4847E16008B7FF64);
+            return ref _Handle.AsRef<Vector>(_OutputOffset!.Value);
         }
     }
-    private static nint _LerpTimeOffset = -1;
+    private static nint? _LerpTimeOffset;
 
     public ref float LerpTime
     {
         get
         {
-            if (_LerpTimeOffset == -1) _LerpTimeOffset = Schema.GetOffset(0x4847E16054FD987F);
-            return ref _Handle.AsRef<float>(_LerpTimeOffset);
+            _LerpTimeOffset = _LerpTimeOffset ?? Schema.GetOffset(0x4847E16054FD987F);
+            return ref _Handle.AsRef<float>(_LerpTimeOffset!.Value);
         }
     }
 

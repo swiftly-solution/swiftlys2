@@ -16,14 +16,14 @@ internal partial class CPairedSequenceUpdateNodeImpl : CSequenceUpdateNodeBaseIm
 {
     public CPairedSequenceUpdateNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _PairedSequenceRoleOffset = -1;
+    private static nint? _PairedSequenceRoleOffset;
 
     public ref CGlobalSymbol PairedSequenceRole
     {
         get
         {
-            if (_PairedSequenceRoleOffset == -1) _PairedSequenceRoleOffset = Schema.GetOffset(0xB2B6F0EB4A4CFB12);
-            return ref _Handle.AsRef<CGlobalSymbol>(_PairedSequenceRoleOffset);
+            _PairedSequenceRoleOffset = _PairedSequenceRoleOffset ?? Schema.GetOffset(0xB2B6F0EB4A4CFB12);
+            return ref _Handle.AsRef<CGlobalSymbol>(_PairedSequenceRoleOffset!.Value);
         }
     }
 

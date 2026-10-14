@@ -16,14 +16,14 @@ internal partial class CParticleFunctionEmitterImpl : CParticleFunctionImpl, CPa
 {
     public CParticleFunctionEmitterImpl(nint handle) : base(handle) { }
 
-    private static nint _EmitterIndexOffset = -1;
+    private static nint? _EmitterIndexOffset;
 
     public ref int EmitterIndex
     {
         get
         {
-            if (_EmitterIndexOffset == -1) _EmitterIndexOffset = Schema.GetOffset(0x72B3FA32117F91FF);
-            return ref _Handle.AsRef<int>(_EmitterIndexOffset);
+            _EmitterIndexOffset = _EmitterIndexOffset ?? Schema.GetOffset(0x72B3FA32117F91FF);
+            return ref _Handle.AsRef<int>(_EmitterIndexOffset!.Value);
         }
     }
 

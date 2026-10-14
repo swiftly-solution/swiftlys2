@@ -16,64 +16,64 @@ internal partial class C_OP_InterpolateRadiusImpl : CParticleFunctionOperatorImp
 {
     public C_OP_InterpolateRadiusImpl(nint handle) : base(handle) { }
 
-    private static nint _StartTimeOffset = -1;
+    private static nint? _StartTimeOffset;
 
     public ref float StartTime
     {
         get
         {
-            if (_StartTimeOffset == -1) _StartTimeOffset = Schema.GetOffset(0x1912EFA667FE9DC4);
-            return ref _Handle.AsRef<float>(_StartTimeOffset);
+            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0x1912EFA667FE9DC4);
+            return ref _Handle.AsRef<float>(_StartTimeOffset!.Value);
         }
     }
-    private static nint _EndTimeOffset = -1;
+    private static nint? _EndTimeOffset;
 
     public ref float EndTime
     {
         get
         {
-            if (_EndTimeOffset == -1) _EndTimeOffset = Schema.GetOffset(0x1912EFA62041DF9D);
-            return ref _Handle.AsRef<float>(_EndTimeOffset);
+            _EndTimeOffset = _EndTimeOffset ?? Schema.GetOffset(0x1912EFA62041DF9D);
+            return ref _Handle.AsRef<float>(_EndTimeOffset!.Value);
         }
     }
-    private static nint _StartScaleOffset = -1;
+    private static nint? _StartScaleOffset;
 
     public ref float StartScale
     {
         get
         {
-            if (_StartScaleOffset == -1) _StartScaleOffset = Schema.GetOffset(0x1912EFA6634567D1);
-            return ref _Handle.AsRef<float>(_StartScaleOffset);
+            _StartScaleOffset = _StartScaleOffset ?? Schema.GetOffset(0x1912EFA6634567D1);
+            return ref _Handle.AsRef<float>(_StartScaleOffset!.Value);
         }
     }
-    private static nint _EndScaleOffset = -1;
+    private static nint? _EndScaleOffset;
 
     public ref float EndScale
     {
         get
         {
-            if (_EndScaleOffset == -1) _EndScaleOffset = Schema.GetOffset(0x1912EFA67F017DB6);
-            return ref _Handle.AsRef<float>(_EndScaleOffset);
+            _EndScaleOffset = _EndScaleOffset ?? Schema.GetOffset(0x1912EFA67F017DB6);
+            return ref _Handle.AsRef<float>(_EndScaleOffset!.Value);
         }
     }
-    private static nint _EaseInAndOutOffset = -1;
+    private static nint? _EaseInAndOutOffset;
 
     public ref bool EaseInAndOut
     {
         get
         {
-            if (_EaseInAndOutOffset == -1) _EaseInAndOutOffset = Schema.GetOffset(0x1912EFA6D14612BF);
-            return ref _Handle.AsRef<bool>(_EaseInAndOutOffset);
+            _EaseInAndOutOffset = _EaseInAndOutOffset ?? Schema.GetOffset(0x1912EFA6D14612BF);
+            return ref _Handle.AsRef<bool>(_EaseInAndOutOffset!.Value);
         }
     }
-    private static nint _BiasOffset = -1;
+    private static nint? _BiasOffset;
 
     public ref float Bias
     {
         get
         {
-            if (_BiasOffset == -1) _BiasOffset = Schema.GetOffset(0x1912EFA6E7EF43B6);
-            return ref _Handle.AsRef<float>(_BiasOffset);
+            _BiasOffset = _BiasOffset ?? Schema.GetOffset(0x1912EFA6E7EF43B6);
+            return ref _Handle.AsRef<float>(_BiasOffset!.Value);
         }
     }
 

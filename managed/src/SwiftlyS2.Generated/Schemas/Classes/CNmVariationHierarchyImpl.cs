@@ -16,14 +16,14 @@ internal partial class CNmVariationHierarchyImpl : SchemaClass, CNmVariationHier
 {
     public CNmVariationHierarchyImpl(nint handle) : base(handle) { }
 
-    private static nint _VariationsOffset = -1;
+    private static nint? _VariationsOffset;
 
     public ref CUtlVector<NmVariation_t> Variations
     {
         get
         {
-            if (_VariationsOffset == -1) _VariationsOffset = Schema.GetOffset(0xDAC57FF317F8DED7);
-            return ref _Handle.AsRef<CUtlVector<NmVariation_t>>(_VariationsOffset);
+            _VariationsOffset = _VariationsOffset ?? Schema.GetOffset(0xDAC57FF317F8DED7);
+            return ref _Handle.AsRef<CUtlVector<NmVariation_t>>(_VariationsOffset!.Value);
         }
     }
 

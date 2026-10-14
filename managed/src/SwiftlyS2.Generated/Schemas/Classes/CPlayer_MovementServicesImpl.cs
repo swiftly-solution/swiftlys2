@@ -16,193 +16,193 @@ internal partial class CPlayer_MovementServicesImpl : CPlayerPawnComponentImpl, 
 {
     public CPlayer_MovementServicesImpl(nint handle) : base(handle) { }
 
-    private static nint _ImpulseOffset = -1;
+    private static nint? _ImpulseOffset;
 
     public ref int Impulse
     {
         get
         {
-            if (_ImpulseOffset == -1) _ImpulseOffset = Schema.GetOffset(0xD5BDF2892107CA68);
-            return ref _Handle.AsRef<int>(_ImpulseOffset);
+            _ImpulseOffset = _ImpulseOffset ?? Schema.GetOffset(0xD5BDF2892107CA68);
+            return ref _Handle.AsRef<int>(_ImpulseOffset!.Value);
         }
     }
-    private static nint _ButtonsOffset = -1;
+    private static nint? _ButtonsOffset;
     private CInButtonStateImpl? _ButtonsInstance;
 
     public CInButtonState Buttons
     {
         get
         {
-            if (_ButtonsOffset == -1) _ButtonsOffset = Schema.GetOffset(0xD5BDF28998CCEF82);
+            _ButtonsOffset = _ButtonsOffset ?? Schema.GetOffset(0xD5BDF28998CCEF82);
             var instance = _ButtonsInstance ??= new CInButtonStateImpl(0);
-            instance.DangerousSetHandle(_Handle + _ButtonsOffset);
+            instance.DangerousSetHandle(_Handle + _ButtonsOffset!.Value);
             return instance;
         }
     }
-    private static nint _QueuedButtonDownMaskOffset = -1;
+    private static nint? _QueuedButtonDownMaskOffset;
 
     public ref ulong QueuedButtonDownMask
     {
         get
         {
-            if (_QueuedButtonDownMaskOffset == -1) _QueuedButtonDownMaskOffset = Schema.GetOffset(0xD5BDF28939CFB260);
-            return ref _Handle.AsRef<ulong>(_QueuedButtonDownMaskOffset);
+            _QueuedButtonDownMaskOffset = _QueuedButtonDownMaskOffset ?? Schema.GetOffset(0xD5BDF28939CFB260);
+            return ref _Handle.AsRef<ulong>(_QueuedButtonDownMaskOffset!.Value);
         }
     }
-    private static nint _QueuedButtonChangeMaskOffset = -1;
+    private static nint? _QueuedButtonChangeMaskOffset;
 
     public ref ulong QueuedButtonChangeMask
     {
         get
         {
-            if (_QueuedButtonChangeMaskOffset == -1) _QueuedButtonChangeMaskOffset = Schema.GetOffset(0xD5BDF289FC832F1C);
-            return ref _Handle.AsRef<ulong>(_QueuedButtonChangeMaskOffset);
+            _QueuedButtonChangeMaskOffset = _QueuedButtonChangeMaskOffset ?? Schema.GetOffset(0xD5BDF289FC832F1C);
+            return ref _Handle.AsRef<ulong>(_QueuedButtonChangeMaskOffset!.Value);
         }
     }
-    private static nint _ButtonDoublePressedOffset = -1;
+    private static nint? _ButtonDoublePressedOffset;
 
     public ref ulong ButtonDoublePressed
     {
         get
         {
-            if (_ButtonDoublePressedOffset == -1) _ButtonDoublePressedOffset = Schema.GetOffset(0xD5BDF289E6C8CA6E);
-            return ref _Handle.AsRef<ulong>(_ButtonDoublePressedOffset);
+            _ButtonDoublePressedOffset = _ButtonDoublePressedOffset ?? Schema.GetOffset(0xD5BDF289E6C8CA6E);
+            return ref _Handle.AsRef<ulong>(_ButtonDoublePressedOffset!.Value);
         }
     }
-    private static nint _ButtonPressedCmdNumberOffset = -1;
+    private static nint? _ButtonPressedCmdNumberOffset;
     private SchemaFixedArray<uint>? _ButtonPressedCmdNumberInstance;
 
     public ISchemaFixedArray<uint> ButtonPressedCmdNumber
     {
         get
         {
-            if (_ButtonPressedCmdNumberOffset == -1) _ButtonPressedCmdNumberOffset = Schema.GetOffset(0xD5BDF289A7854580);
+            _ButtonPressedCmdNumberOffset = _ButtonPressedCmdNumberOffset ?? Schema.GetOffset(0xD5BDF289A7854580);
             var instance = _ButtonPressedCmdNumberInstance ??= new SchemaFixedArray<uint>(0, 0xD5BDF289A7854580, 64, 4, 4);
-            instance.DangerousSetHandle(_Handle + _ButtonPressedCmdNumberOffset);
+            instance.DangerousSetHandle(_Handle + _ButtonPressedCmdNumberOffset!.Value);
             return instance;
         }
     }
-    private static nint _LastCommandNumberProcessedOffset = -1;
+    private static nint? _LastCommandNumberProcessedOffset;
 
     public ref uint LastCommandNumberProcessed
     {
         get
         {
-            if (_LastCommandNumberProcessedOffset == -1) _LastCommandNumberProcessedOffset = Schema.GetOffset(0xD5BDF2899927F73D);
-            return ref _Handle.AsRef<uint>(_LastCommandNumberProcessedOffset);
+            _LastCommandNumberProcessedOffset = _LastCommandNumberProcessedOffset ?? Schema.GetOffset(0xD5BDF2899927F73D);
+            return ref _Handle.AsRef<uint>(_LastCommandNumberProcessedOffset!.Value);
         }
     }
-    private static nint _ToggleButtonDownMaskOffset = -1;
+    private static nint? _ToggleButtonDownMaskOffset;
 
     public ref ulong ToggleButtonDownMask
     {
         get
         {
-            if (_ToggleButtonDownMaskOffset == -1) _ToggleButtonDownMaskOffset = Schema.GetOffset(0xD5BDF28907E86F99);
-            return ref _Handle.AsRef<ulong>(_ToggleButtonDownMaskOffset);
+            _ToggleButtonDownMaskOffset = _ToggleButtonDownMaskOffset ?? Schema.GetOffset(0xD5BDF28907E86F99);
+            return ref _Handle.AsRef<ulong>(_ToggleButtonDownMaskOffset!.Value);
         }
     }
-    private static nint _CmdForwardMoveOffset = -1;
+    private static nint? _CmdForwardMoveOffset;
 
     public ref float CmdForwardMove
     {
         get
         {
-            if (_CmdForwardMoveOffset == -1) _CmdForwardMoveOffset = Schema.GetOffset(0xD5BDF2893976C40F);
-            return ref _Handle.AsRef<float>(_CmdForwardMoveOffset);
+            _CmdForwardMoveOffset = _CmdForwardMoveOffset ?? Schema.GetOffset(0xD5BDF2893976C40F);
+            return ref _Handle.AsRef<float>(_CmdForwardMoveOffset!.Value);
         }
     }
-    private static nint _CmdLeftMoveOffset = -1;
+    private static nint? _CmdLeftMoveOffset;
 
     public ref float CmdLeftMove
     {
         get
         {
-            if (_CmdLeftMoveOffset == -1) _CmdLeftMoveOffset = Schema.GetOffset(0xD5BDF289B20FCC65);
-            return ref _Handle.AsRef<float>(_CmdLeftMoveOffset);
+            _CmdLeftMoveOffset = _CmdLeftMoveOffset ?? Schema.GetOffset(0xD5BDF289B20FCC65);
+            return ref _Handle.AsRef<float>(_CmdLeftMoveOffset!.Value);
         }
     }
-    private static nint _CmdUpMoveOffset = -1;
+    private static nint? _CmdUpMoveOffset;
 
     public ref float CmdUpMove
     {
         get
         {
-            if (_CmdUpMoveOffset == -1) _CmdUpMoveOffset = Schema.GetOffset(0xD5BDF289FD400A25);
-            return ref _Handle.AsRef<float>(_CmdUpMoveOffset);
+            _CmdUpMoveOffset = _CmdUpMoveOffset ?? Schema.GetOffset(0xD5BDF289FD400A25);
+            return ref _Handle.AsRef<float>(_CmdUpMoveOffset!.Value);
         }
     }
-    private static nint _MaxspeedOffset = -1;
+    private static nint? _MaxspeedOffset;
 
     public ref float Maxspeed
     {
         get
         {
-            if (_MaxspeedOffset == -1) _MaxspeedOffset = Schema.GetOffset(0xD5BDF289468F90F2);
-            return ref _Handle.AsRef<float>(_MaxspeedOffset);
+            _MaxspeedOffset = _MaxspeedOffset ?? Schema.GetOffset(0xD5BDF289468F90F2);
+            return ref _Handle.AsRef<float>(_MaxspeedOffset!.Value);
         }
     }
-    private static nint _ForceSubtickMoveWhenOffset = -1;
+    private static nint? _ForceSubtickMoveWhenOffset;
     private SchemaFixedArray<float>? _ForceSubtickMoveWhenInstance;
 
     public ISchemaFixedArray<float> ForceSubtickMoveWhen
     {
         get
         {
-            if (_ForceSubtickMoveWhenOffset == -1) _ForceSubtickMoveWhenOffset = Schema.GetOffset(0xD5BDF28999115A07);
+            _ForceSubtickMoveWhenOffset = _ForceSubtickMoveWhenOffset ?? Schema.GetOffset(0xD5BDF28999115A07);
             var instance = _ForceSubtickMoveWhenInstance ??= new SchemaFixedArray<float>(0, 0xD5BDF28999115A07, 4, 4, 4);
-            instance.DangerousSetHandle(_Handle + _ForceSubtickMoveWhenOffset);
+            instance.DangerousSetHandle(_Handle + _ForceSubtickMoveWhenOffset!.Value);
             return instance;
         }
     }
-    private static nint _ForwardMoveOffset = -1;
+    private static nint? _ForwardMoveOffset;
 
     public ref float ForwardMove
     {
         get
         {
-            if (_ForwardMoveOffset == -1) _ForwardMoveOffset = Schema.GetOffset(0xD5BDF289806C78A9);
-            return ref _Handle.AsRef<float>(_ForwardMoveOffset);
+            _ForwardMoveOffset = _ForwardMoveOffset ?? Schema.GetOffset(0xD5BDF289806C78A9);
+            return ref _Handle.AsRef<float>(_ForwardMoveOffset!.Value);
         }
     }
-    private static nint _LeftMoveOffset = -1;
+    private static nint? _LeftMoveOffset;
 
     public ref float LeftMove
     {
         get
         {
-            if (_LeftMoveOffset == -1) _LeftMoveOffset = Schema.GetOffset(0xD5BDF289C4CF0D13);
-            return ref _Handle.AsRef<float>(_LeftMoveOffset);
+            _LeftMoveOffset = _LeftMoveOffset ?? Schema.GetOffset(0xD5BDF289C4CF0D13);
+            return ref _Handle.AsRef<float>(_LeftMoveOffset!.Value);
         }
     }
-    private static nint _UpMoveOffset = -1;
+    private static nint? _UpMoveOffset;
 
     public ref float UpMove
     {
         get
         {
-            if (_UpMoveOffset == -1) _UpMoveOffset = Schema.GetOffset(0xD5BDF289B1E2D2B7);
-            return ref _Handle.AsRef<float>(_UpMoveOffset);
+            _UpMoveOffset = _UpMoveOffset ?? Schema.GetOffset(0xD5BDF289B1E2D2B7);
+            return ref _Handle.AsRef<float>(_UpMoveOffset!.Value);
         }
     }
-    private static nint _LastMovementImpulsesOffset = -1;
+    private static nint? _LastMovementImpulsesOffset;
 
     public ref Vector LastMovementImpulses
     {
         get
         {
-            if (_LastMovementImpulsesOffset == -1) _LastMovementImpulsesOffset = Schema.GetOffset(0xD5BDF2890B87214C);
-            return ref _Handle.AsRef<Vector>(_LastMovementImpulsesOffset);
+            _LastMovementImpulsesOffset = _LastMovementImpulsesOffset ?? Schema.GetOffset(0xD5BDF2890B87214C);
+            return ref _Handle.AsRef<Vector>(_LastMovementImpulsesOffset!.Value);
         }
     }
-    private static nint _OldViewAnglesOffset = -1;
+    private static nint? _OldViewAnglesOffset;
 
     public ref QAngle OldViewAngles
     {
         get
         {
-            if (_OldViewAnglesOffset == -1) _OldViewAnglesOffset = Schema.GetOffset(0xD5BDF28935A27A27);
-            return ref _Handle.AsRef<QAngle>(_OldViewAnglesOffset);
+            _OldViewAnglesOffset = _OldViewAnglesOffset ?? Schema.GetOffset(0xD5BDF28935A27A27);
+            return ref _Handle.AsRef<QAngle>(_OldViewAnglesOffset!.Value);
         }
     }
 

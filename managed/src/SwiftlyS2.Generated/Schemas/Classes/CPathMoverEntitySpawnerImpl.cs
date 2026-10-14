@@ -16,249 +16,249 @@ internal partial class CPathMoverEntitySpawnerImpl : CLogicalEntityImpl, CPathMo
 {
     public CPathMoverEntitySpawnerImpl(nint handle) : base(handle) { }
 
-    private static nint _TemplateChoiceStrategyOffset = -1;
+    private static nint? _TemplateChoiceStrategyOffset;
 
     public ref CPathMoverEntitySpawner__TemplateChoiceStrategy_t TemplateChoiceStrategy
     {
         get
         {
-            if (_TemplateChoiceStrategyOffset == -1) _TemplateChoiceStrategyOffset = Schema.GetOffset(0x384C46FFB04862F8);
-            return ref _Handle.AsRef<CPathMoverEntitySpawner__TemplateChoiceStrategy_t>(_TemplateChoiceStrategyOffset);
+            _TemplateChoiceStrategyOffset = _TemplateChoiceStrategyOffset ?? Schema.GetOffset(0x384C46FFB04862F8);
+            return ref _Handle.AsRef<CPathMoverEntitySpawner__TemplateChoiceStrategy_t>(_TemplateChoiceStrategyOffset!.Value);
         }
     }
-    private static nint _SpawnTemplatesOffset = -1;
+    private static nint? _SpawnTemplatesOffset;
     private SchemaStringFixedArray? _SpawnTemplatesInstance;
 
     public ISchemaStringFixedArray SpawnTemplates
     {
         get
         {
-            if (_SpawnTemplatesOffset == -1) _SpawnTemplatesOffset = Schema.GetOffset(0x384C46FF10ABEA92);
+            _SpawnTemplatesOffset = _SpawnTemplatesOffset ?? Schema.GetOffset(0x384C46FF10ABEA92);
             var instance = _SpawnTemplatesInstance ??= new SchemaStringFixedArray(0, 0x384C46FF10ABEA92, 4, 8, 8);
-            instance.DangerousSetHandle(_Handle + _SpawnTemplatesOffset);
+            instance.DangerousSetHandle(_Handle + _SpawnTemplatesOffset!.Value);
             return instance;
         }
     }
-    private static nint _SpawnTemplateParamsOffset = -1;
+    private static nint? _SpawnTemplateParamsOffset;
     private SchemaFixedArray<int>? _SpawnTemplateParamsInstance;
 
     public ISchemaFixedArray<int> SpawnTemplateParams
     {
         get
         {
-            if (_SpawnTemplateParamsOffset == -1) _SpawnTemplateParamsOffset = Schema.GetOffset(0x384C46FFF3A2F8E3);
+            _SpawnTemplateParamsOffset = _SpawnTemplateParamsOffset ?? Schema.GetOffset(0x384C46FFF3A2F8E3);
             var instance = _SpawnTemplateParamsInstance ??= new SchemaFixedArray<int>(0, 0x384C46FFF3A2F8E3, 4, 4, 4);
-            instance.DangerousSetHandle(_Handle + _SpawnTemplateParamsOffset);
+            instance.DangerousSetHandle(_Handle + _SpawnTemplateParamsOffset!.Value);
             return instance;
         }
     }
-    private static nint _SpawnTemplateCountOffset = -1;
+    private static nint? _SpawnTemplateCountOffset;
     private SchemaFixedArray<int>? _SpawnTemplateCountInstance;
 
     public ISchemaFixedArray<int> SpawnTemplateCount
     {
         get
         {
-            if (_SpawnTemplateCountOffset == -1) _SpawnTemplateCountOffset = Schema.GetOffset(0x384C46FF72FB2044);
+            _SpawnTemplateCountOffset = _SpawnTemplateCountOffset ?? Schema.GetOffset(0x384C46FF72FB2044);
             var instance = _SpawnTemplateCountInstance ??= new SchemaFixedArray<int>(0, 0x384C46FF72FB2044, 4, 4, 4);
-            instance.DangerousSetHandle(_Handle + _SpawnTemplateCountOffset);
+            instance.DangerousSetHandle(_Handle + _SpawnTemplateCountOffset!.Value);
             return instance;
         }
     }
-    private static nint _SpawnIndexOffset = -1;
+    private static nint? _SpawnIndexOffset;
 
     public ref int SpawnIndex
     {
         get
         {
-            if (_SpawnIndexOffset == -1) _SpawnIndexOffset = Schema.GetOffset(0x384C46FF8DF7BC68);
-            return ref _Handle.AsRef<int>(_SpawnIndexOffset);
+            _SpawnIndexOffset = _SpawnIndexOffset ?? Schema.GetOffset(0x384C46FF8DF7BC68);
+            return ref _Handle.AsRef<int>(_SpawnIndexOffset!.Value);
         }
     }
-    private static nint _PathMoverOffset = -1;
+    private static nint? _PathMoverOffset;
 
     public ref CHandle<CPathMover> PathMover
     {
         get
         {
-            if (_PathMoverOffset == -1) _PathMoverOffset = Schema.GetOffset(0x384C46FFAFA877CD);
-            return ref _Handle.AsRef<CHandle<CPathMover>>(_PathMoverOffset);
+            _PathMoverOffset = _PathMoverOffset ?? Schema.GetOffset(0x384C46FFAFA877CD);
+            return ref _Handle.AsRef<CHandle<CPathMover>>(_PathMoverOffset!.Value);
         }
     }
-    private static nint _SpawnFrequencySecondsOffset = -1;
+    private static nint? _SpawnFrequencySecondsOffset;
 
     public ref float SpawnFrequencySeconds
     {
         get
         {
-            if (_SpawnFrequencySecondsOffset == -1) _SpawnFrequencySecondsOffset = Schema.GetOffset(0x384C46FFF890D931);
-            return ref _Handle.AsRef<float>(_SpawnFrequencySecondsOffset);
+            _SpawnFrequencySecondsOffset = _SpawnFrequencySecondsOffset ?? Schema.GetOffset(0x384C46FFF890D931);
+            return ref _Handle.AsRef<float>(_SpawnFrequencySecondsOffset!.Value);
         }
     }
-    private static nint _SpawnFrequencyDistToNearestMoverOffset = -1;
+    private static nint? _SpawnFrequencyDistToNearestMoverOffset;
 
     public ref float SpawnFrequencyDistToNearestMover
     {
         get
         {
-            if (_SpawnFrequencyDistToNearestMoverOffset == -1) _SpawnFrequencyDistToNearestMoverOffset = Schema.GetOffset(0x384C46FF91F5EC1E);
-            return ref _Handle.AsRef<float>(_SpawnFrequencyDistToNearestMoverOffset);
+            _SpawnFrequencyDistToNearestMoverOffset = _SpawnFrequencyDistToNearestMoverOffset ?? Schema.GetOffset(0x384C46FF91F5EC1E);
+            return ref _Handle.AsRef<float>(_SpawnFrequencyDistToNearestMoverOffset!.Value);
         }
     }
-    private static nint _MapSpawnedMoverTemplatesOffset = -1;
+    private static nint? _MapSpawnedMoverTemplatesOffset;
     private SchemaUntypedField? _MapSpawnedMoverTemplatesInstance;
 
     public SchemaUntypedField MapSpawnedMoverTemplates
     {
         get
         {
-            if (_MapSpawnedMoverTemplatesOffset == -1) _MapSpawnedMoverTemplatesOffset = Schema.GetOffset(0x384C46FF143D8DBD);
+            _MapSpawnedMoverTemplatesOffset = _MapSpawnedMoverTemplatesOffset ?? Schema.GetOffset(0x384C46FF143D8DBD);
             var instance = _MapSpawnedMoverTemplatesInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _MapSpawnedMoverTemplatesOffset);
+            instance.DangerousSetHandle(_Handle + _MapSpawnedMoverTemplatesOffset!.Value);
             return instance;
         }
     }
-    private static nint _MaxActiveOffset = -1;
+    private static nint? _MaxActiveOffset;
 
     public ref int MaxActive
     {
         get
         {
-            if (_MaxActiveOffset == -1) _MaxActiveOffset = Schema.GetOffset(0x384C46FF6DE0BAFF);
-            return ref _Handle.AsRef<int>(_MaxActiveOffset);
+            _MaxActiveOffset = _MaxActiveOffset ?? Schema.GetOffset(0x384C46FF6DE0BAFF);
+            return ref _Handle.AsRef<int>(_MaxActiveOffset!.Value);
         }
     }
-    private static nint _SpawnNumOffset = -1;
+    private static nint? _SpawnNumOffset;
 
     public ref int SpawnNum
     {
         get
         {
-            if (_SpawnNumOffset == -1) _SpawnNumOffset = Schema.GetOffset(0x384C46FF59316F2C);
-            return ref _Handle.AsRef<int>(_SpawnNumOffset);
+            _SpawnNumOffset = _SpawnNumOffset ?? Schema.GetOffset(0x384C46FF59316F2C);
+            return ref _Handle.AsRef<int>(_SpawnNumOffset!.Value);
         }
     }
-    private static nint _LastSpawnTimeOffset = -1;
+    private static nint? _LastSpawnTimeOffset;
     private GameTime_tImpl? _LastSpawnTimeInstance;
 
     public GameTime_t LastSpawnTime
     {
         get
         {
-            if (_LastSpawnTimeOffset == -1) _LastSpawnTimeOffset = Schema.GetOffset(0x384C46FFB880B76B);
+            _LastSpawnTimeOffset = _LastSpawnTimeOffset ?? Schema.GetOffset(0x384C46FFB880B76B);
             var instance = _LastSpawnTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _LastSpawnTimeOffset);
+            instance.DangerousSetHandle(_Handle + _LastSpawnTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _EnabledOffset = -1;
+    private static nint? _EnabledOffset;
 
     public ref bool Enabled
     {
         get
         {
-            if (_EnabledOffset == -1) _EnabledOffset = Schema.GetOffset(0x384C46FF6154EB7E);
-            return ref _Handle.AsRef<bool>(_EnabledOffset);
+            _EnabledOffset = _EnabledOffset ?? Schema.GetOffset(0x384C46FF6154EB7E);
+            return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
         }
     }
-    private static nint _DestroyMoverOnArrivedAtEndOffset = -1;
+    private static nint? _DestroyMoverOnArrivedAtEndOffset;
 
     public ref bool DestroyMoverOnArrivedAtEnd
     {
         get
         {
-            if (_DestroyMoverOnArrivedAtEndOffset == -1) _DestroyMoverOnArrivedAtEndOffset = Schema.GetOffset(0x384C46FFD79A547E);
-            return ref _Handle.AsRef<bool>(_DestroyMoverOnArrivedAtEndOffset);
+            _DestroyMoverOnArrivedAtEndOffset = _DestroyMoverOnArrivedAtEndOffset ?? Schema.GetOffset(0x384C46FFD79A547E);
+            return ref _Handle.AsRef<bool>(_DestroyMoverOnArrivedAtEndOffset!.Value);
         }
     }
-    private static nint _QueuedRemovalsOffset = -1;
+    private static nint? _QueuedRemovalsOffset;
 
     public ref CUtlVector<CHandle<CFuncMover>> QueuedRemovals
     {
         get
         {
-            if (_QueuedRemovalsOffset == -1) _QueuedRemovalsOffset = Schema.GetOffset(0x384C46FF4D2E059D);
-            return ref _Handle.AsRef<CUtlVector<CHandle<CFuncMover>>>(_QueuedRemovalsOffset);
+            _QueuedRemovalsOffset = _QueuedRemovalsOffset ?? Schema.GetOffset(0x384C46FF4D2E059D);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CFuncMover>>>(_QueuedRemovalsOffset!.Value);
         }
     }
-    private static nint _OnTemplateSpawnedOffset = -1;
+    private static nint? _OnTemplateSpawnedOffset;
 
     public ref CEntityIOOutput OnTemplateSpawned
     {
         get
         {
-            if (_OnTemplateSpawnedOffset == -1) _OnTemplateSpawnedOffset = Schema.GetOffset(0x384C46FF1B88D298);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnTemplateSpawnedOffset);
+            _OnTemplateSpawnedOffset = _OnTemplateSpawnedOffset ?? Schema.GetOffset(0x384C46FF1B88D298);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTemplateSpawnedOffset!.Value);
         }
     }
-    private static nint _OnTemplateGroupSpawnedOffset = -1;
+    private static nint? _OnTemplateGroupSpawnedOffset;
 
     public ref CEntityIOOutput OnTemplateGroupSpawned
     {
         get
         {
-            if (_OnTemplateGroupSpawnedOffset == -1) _OnTemplateGroupSpawnedOffset = Schema.GetOffset(0x384C46FF68DF3B81);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnTemplateGroupSpawnedOffset);
+            _OnTemplateGroupSpawnedOffset = _OnTemplateGroupSpawnedOffset ?? Schema.GetOffset(0x384C46FF68DF3B81);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTemplateGroupSpawnedOffset!.Value);
         }
     }
-    private static nint _PathMoverNameOffset = -1;
+    private static nint? _PathMoverNameOffset;
 
     public string PathMoverName
     {
         get
         {
-            if (_PathMoverNameOffset == -1) _PathMoverNameOffset = Schema.GetOffset(0x384C46FF6D7B04A0);
-            return Schema.GetString(_Handle.Read<nint>(_PathMoverNameOffset));
+            _PathMoverNameOffset = _PathMoverNameOffset ?? Schema.GetOffset(0x384C46FF6D7B04A0);
+            return Schema.GetString(_Handle.Read<nint>(_PathMoverNameOffset!.Value));
         }
         set
         {
-            if (_PathMoverNameOffset == -1) _PathMoverNameOffset = Schema.GetOffset(0x384C46FF6D7B04A0);
-            Schema.SetString(_Handle, _PathMoverNameOffset, value);
+            _PathMoverNameOffset = _PathMoverNameOffset ?? Schema.GetOffset(0x384C46FF6D7B04A0);
+            Schema.SetString(_Handle, _PathMoverNameOffset!.Value, value);
         }
     }
-    private static nint _PrepopulateOnSpawnOffset = -1;
+    private static nint? _PrepopulateOnSpawnOffset;
 
     public ref bool PrepopulateOnSpawn
     {
         get
         {
-            if (_PrepopulateOnSpawnOffset == -1) _PrepopulateOnSpawnOffset = Schema.GetOffset(0x384C46FF09787B48);
-            return ref _Handle.AsRef<bool>(_PrepopulateOnSpawnOffset);
+            _PrepopulateOnSpawnOffset = _PrepopulateOnSpawnOffset ?? Schema.GetOffset(0x384C46FF09787B48);
+            return ref _Handle.AsRef<bool>(_PrepopulateOnSpawnOffset!.Value);
         }
     }
-    private static nint _PathNodeStartNameOffset = -1;
+    private static nint? _PathNodeStartNameOffset;
 
     public string PathNodeStartName
     {
         get
         {
-            if (_PathNodeStartNameOffset == -1) _PathNodeStartNameOffset = Schema.GetOffset(0x384C46FF67888139);
-            return Schema.GetString(_Handle.Read<nint>(_PathNodeStartNameOffset));
+            _PathNodeStartNameOffset = _PathNodeStartNameOffset ?? Schema.GetOffset(0x384C46FF67888139);
+            return Schema.GetString(_Handle.Read<nint>(_PathNodeStartNameOffset!.Value));
         }
         set
         {
-            if (_PathNodeStartNameOffset == -1) _PathNodeStartNameOffset = Schema.GetOffset(0x384C46FF67888139);
-            Schema.SetString(_Handle, _PathNodeStartNameOffset, value);
+            _PathNodeStartNameOffset = _PathNodeStartNameOffset ?? Schema.GetOffset(0x384C46FF67888139);
+            Schema.SetString(_Handle, _PathNodeStartNameOffset!.Value, value);
         }
     }
-    private static nint _MoverSpawnPosOffset = -1;
+    private static nint? _MoverSpawnPosOffset;
 
     public ref Vector MoverSpawnPos
     {
         get
         {
-            if (_MoverSpawnPosOffset == -1) _MoverSpawnPosOffset = Schema.GetOffset(0x384C46FF76FD76F1);
-            return ref _Handle.AsRef<Vector>(_MoverSpawnPosOffset);
+            _MoverSpawnPosOffset = _MoverSpawnPosOffset ?? Schema.GetOffset(0x384C46FF76FD76F1);
+            return ref _Handle.AsRef<Vector>(_MoverSpawnPosOffset!.Value);
         }
     }
-    private static nint _RunningDebugThinkOffset = -1;
+    private static nint? _RunningDebugThinkOffset;
 
     public ref bool RunningDebugThink
     {
         get
         {
-            if (_RunningDebugThinkOffset == -1) _RunningDebugThinkOffset = Schema.GetOffset(0x384C46FF0C788A8D);
-            return ref _Handle.AsRef<bool>(_RunningDebugThinkOffset);
+            _RunningDebugThinkOffset = _RunningDebugThinkOffset ?? Schema.GetOffset(0x384C46FF0C788A8D);
+            return ref _Handle.AsRef<bool>(_RunningDebugThinkOffset!.Value);
         }
     }
 

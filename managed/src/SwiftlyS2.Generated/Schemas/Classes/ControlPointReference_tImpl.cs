@@ -16,34 +16,34 @@ internal partial class ControlPointReference_tImpl : SchemaClass, ControlPointRe
 {
     public ControlPointReference_tImpl(nint handle) : base(handle) { }
 
-    private static nint _ControlPointNameStringOffset = -1;
+    private static nint? _ControlPointNameStringOffset;
 
     public ref int ControlPointNameString
     {
         get
         {
-            if (_ControlPointNameStringOffset == -1) _ControlPointNameStringOffset = Schema.GetOffset(0x83CD020625F4E2B6);
-            return ref _Handle.AsRef<int>(_ControlPointNameStringOffset);
+            _ControlPointNameStringOffset = _ControlPointNameStringOffset ?? Schema.GetOffset(0x83CD020625F4E2B6);
+            return ref _Handle.AsRef<int>(_ControlPointNameStringOffset!.Value);
         }
     }
-    private static nint _OffsetFromControlPointOffset = -1;
+    private static nint? _OffsetFromControlPointOffset;
 
     public ref Vector OffsetFromControlPoint
     {
         get
         {
-            if (_OffsetFromControlPointOffset == -1) _OffsetFromControlPointOffset = Schema.GetOffset(0x83CD0206C9E39FFF);
-            return ref _Handle.AsRef<Vector>(_OffsetFromControlPointOffset);
+            _OffsetFromControlPointOffset = _OffsetFromControlPointOffset ?? Schema.GetOffset(0x83CD0206C9E39FFF);
+            return ref _Handle.AsRef<Vector>(_OffsetFromControlPointOffset!.Value);
         }
     }
-    private static nint _OffsetInLocalSpaceOffset = -1;
+    private static nint? _OffsetInLocalSpaceOffset;
 
     public ref bool OffsetInLocalSpace
     {
         get
         {
-            if (_OffsetInLocalSpaceOffset == -1) _OffsetInLocalSpaceOffset = Schema.GetOffset(0x83CD02064ADEF5FE);
-            return ref _Handle.AsRef<bool>(_OffsetInLocalSpaceOffset);
+            _OffsetInLocalSpaceOffset = _OffsetInLocalSpaceOffset ?? Schema.GetOffset(0x83CD02064ADEF5FE);
+            return ref _Handle.AsRef<bool>(_OffsetInLocalSpaceOffset!.Value);
         }
     }
 

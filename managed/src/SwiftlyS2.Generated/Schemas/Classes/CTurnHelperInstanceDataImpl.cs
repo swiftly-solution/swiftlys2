@@ -16,34 +16,34 @@ internal partial class CTurnHelperInstanceDataImpl : SchemaClass, CTurnHelperIns
 {
     public CTurnHelperInstanceDataImpl(nint handle) : base(handle) { }
 
-    private static nint _TurnAmountOffset = -1;
+    private static nint? _TurnAmountOffset;
 
     public ref float TurnAmount
     {
         get
         {
-            if (_TurnAmountOffset == -1) _TurnAmountOffset = Schema.GetOffset(0xA71FC88E6FAE7436);
-            return ref _Handle.AsRef<float>(_TurnAmountOffset);
+            _TurnAmountOffset = _TurnAmountOffset ?? Schema.GetOffset(0xA71FC88E6FAE7436);
+            return ref _Handle.AsRef<float>(_TurnAmountOffset!.Value);
         }
     }
-    private static nint _TurnStartTimeOffset = -1;
+    private static nint? _TurnStartTimeOffset;
 
     public ref float TurnStartTime
     {
         get
         {
-            if (_TurnStartTimeOffset == -1) _TurnStartTimeOffset = Schema.GetOffset(0xA71FC88E75897B83);
-            return ref _Handle.AsRef<float>(_TurnStartTimeOffset);
+            _TurnStartTimeOffset = _TurnStartTimeOffset ?? Schema.GetOffset(0xA71FC88E75897B83);
+            return ref _Handle.AsRef<float>(_TurnStartTimeOffset!.Value);
         }
     }
-    private static nint _DurationOffset = -1;
+    private static nint? _DurationOffset;
 
     public ref float Duration
     {
         get
         {
-            if (_DurationOffset == -1) _DurationOffset = Schema.GetOffset(0xA71FC88E3D9FF5AD);
-            return ref _Handle.AsRef<float>(_DurationOffset);
+            _DurationOffset = _DurationOffset ?? Schema.GetOffset(0xA71FC88E3D9FF5AD);
+            return ref _Handle.AsRef<float>(_DurationOffset!.Value);
         }
     }
 

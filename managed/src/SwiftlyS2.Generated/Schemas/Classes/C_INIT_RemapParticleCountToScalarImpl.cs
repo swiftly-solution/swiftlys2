@@ -16,127 +16,127 @@ internal partial class C_INIT_RemapParticleCountToScalarImpl : CParticleFunction
 {
     public C_INIT_RemapParticleCountToScalarImpl(nint handle) : base(handle) { }
 
-    private static nint _FieldOutputOffset = -1;
+    private static nint? _FieldOutputOffset;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0xC0411DA9E5729606);
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0xC0411DA9E5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
             return instance;
         }
     }
-    private static nint _InputMinOffset = -1;
+    private static nint? _InputMinOffset;
 
     public ref int InputMin
     {
         get
         {
-            if (_InputMinOffset == -1) _InputMinOffset = Schema.GetOffset(0xC0411DA985E92181);
-            return ref _Handle.AsRef<int>(_InputMinOffset);
+            _InputMinOffset = _InputMinOffset ?? Schema.GetOffset(0xC0411DA985E92181);
+            return ref _Handle.AsRef<int>(_InputMinOffset!.Value);
         }
     }
-    private static nint _InputMaxOffset = -1;
+    private static nint? _InputMaxOffset;
 
     public ref int InputMax
     {
         get
         {
-            if (_InputMaxOffset == -1) _InputMaxOffset = Schema.GetOffset(0xC0411DA977FE262F);
-            return ref _Handle.AsRef<int>(_InputMaxOffset);
+            _InputMaxOffset = _InputMaxOffset ?? Schema.GetOffset(0xC0411DA977FE262F);
+            return ref _Handle.AsRef<int>(_InputMaxOffset!.Value);
         }
     }
-    private static nint _ScaleControlPointOffset = -1;
+    private static nint? _ScaleControlPointOffset;
 
     public ref int ScaleControlPoint
     {
         get
         {
-            if (_ScaleControlPointOffset == -1) _ScaleControlPointOffset = Schema.GetOffset(0xC0411DA9B0577A70);
-            return ref _Handle.AsRef<int>(_ScaleControlPointOffset);
+            _ScaleControlPointOffset = _ScaleControlPointOffset ?? Schema.GetOffset(0xC0411DA9B0577A70);
+            return ref _Handle.AsRef<int>(_ScaleControlPointOffset!.Value);
         }
     }
-    private static nint _ScaleControlPointFieldOffset = -1;
+    private static nint? _ScaleControlPointFieldOffset;
 
     public ref int ScaleControlPointField
     {
         get
         {
-            if (_ScaleControlPointFieldOffset == -1) _ScaleControlPointFieldOffset = Schema.GetOffset(0xC0411DA9360C613C);
-            return ref _Handle.AsRef<int>(_ScaleControlPointFieldOffset);
+            _ScaleControlPointFieldOffset = _ScaleControlPointFieldOffset ?? Schema.GetOffset(0xC0411DA9360C613C);
+            return ref _Handle.AsRef<int>(_ScaleControlPointFieldOffset!.Value);
         }
     }
-    private static nint _OutputMinOffset = -1;
+    private static nint? _OutputMinOffset;
 
     public ref float OutputMin
     {
         get
         {
-            if (_OutputMinOffset == -1) _OutputMinOffset = Schema.GetOffset(0xC0411DA95F8D7716);
-            return ref _Handle.AsRef<float>(_OutputMinOffset);
+            _OutputMinOffset = _OutputMinOffset ?? Schema.GetOffset(0xC0411DA95F8D7716);
+            return ref _Handle.AsRef<float>(_OutputMinOffset!.Value);
         }
     }
-    private static nint _OutputMaxOffset = -1;
+    private static nint? _OutputMaxOffset;
 
     public ref float OutputMax
     {
         get
         {
-            if (_OutputMaxOffset == -1) _OutputMaxOffset = Schema.GetOffset(0xC0411DA951A0E8C4);
-            return ref _Handle.AsRef<float>(_OutputMaxOffset);
+            _OutputMaxOffset = _OutputMaxOffset ?? Schema.GetOffset(0xC0411DA951A0E8C4);
+            return ref _Handle.AsRef<float>(_OutputMaxOffset!.Value);
         }
     }
-    private static nint _SetMethodOffset = -1;
+    private static nint? _SetMethodOffset;
 
     public ref ParticleSetMethod_t SetMethod
     {
         get
         {
-            if (_SetMethodOffset == -1) _SetMethodOffset = Schema.GetOffset(0xC0411DA9FB53C31E);
-            return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset);
+            _SetMethodOffset = _SetMethodOffset ?? Schema.GetOffset(0xC0411DA9FB53C31E);
+            return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset!.Value);
         }
     }
-    private static nint _ActiveRangeOffset = -1;
+    private static nint? _ActiveRangeOffset;
 
     public ref bool ActiveRange
     {
         get
         {
-            if (_ActiveRangeOffset == -1) _ActiveRangeOffset = Schema.GetOffset(0xC0411DA93FA53B84);
-            return ref _Handle.AsRef<bool>(_ActiveRangeOffset);
+            _ActiveRangeOffset = _ActiveRangeOffset ?? Schema.GetOffset(0xC0411DA93FA53B84);
+            return ref _Handle.AsRef<bool>(_ActiveRangeOffset!.Value);
         }
     }
-    private static nint _InvertOffset = -1;
+    private static nint? _InvertOffset;
 
     public ref bool Invert
     {
         get
         {
-            if (_InvertOffset == -1) _InvertOffset = Schema.GetOffset(0xC0411DA9959F6101);
-            return ref _Handle.AsRef<bool>(_InvertOffset);
+            _InvertOffset = _InvertOffset ?? Schema.GetOffset(0xC0411DA9959F6101);
+            return ref _Handle.AsRef<bool>(_InvertOffset!.Value);
         }
     }
-    private static nint _WrapOffset = -1;
+    private static nint? _WrapOffset;
 
     public ref bool Wrap
     {
         get
         {
-            if (_WrapOffset == -1) _WrapOffset = Schema.GetOffset(0xC0411DA94C8CA005);
-            return ref _Handle.AsRef<bool>(_WrapOffset);
+            _WrapOffset = _WrapOffset ?? Schema.GetOffset(0xC0411DA94C8CA005);
+            return ref _Handle.AsRef<bool>(_WrapOffset!.Value);
         }
     }
-    private static nint _RemapBiasOffset = -1;
+    private static nint? _RemapBiasOffset;
 
     public ref float RemapBias
     {
         get
         {
-            if (_RemapBiasOffset == -1) _RemapBiasOffset = Schema.GetOffset(0xC0411DA9490D7325);
-            return ref _Handle.AsRef<float>(_RemapBiasOffset);
+            _RemapBiasOffset = _RemapBiasOffset ?? Schema.GetOffset(0xC0411DA9490D7325);
+            return ref _Handle.AsRef<float>(_RemapBiasOffset!.Value);
         }
     }
 

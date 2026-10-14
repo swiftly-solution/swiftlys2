@@ -16,29 +16,29 @@ internal partial class ActorClipEntry_tImpl : SchemaClass, ActorClipEntry_t
 {
     public ActorClipEntry_tImpl(nint handle) : base(handle) { }
 
-    private static nint _ClipNameOffset = -1;
+    private static nint? _ClipNameOffset;
 
     public string ClipName
     {
         get
         {
-            if (_ClipNameOffset == -1) _ClipNameOffset = Schema.GetOffset(0x8717E4FB9E9C55AF);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ClipNameOffset));
+            _ClipNameOffset = _ClipNameOffset ?? Schema.GetOffset(0x8717E4FB9E9C55AF);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ClipNameOffset!.Value));
         }
         set
         {
-            if (_ClipNameOffset == -1) _ClipNameOffset = Schema.GetOffset(0x8717E4FB9E9C55AF);
-            Schema.SetCUtlString(_Handle, _ClipNameOffset, value);
+            _ClipNameOffset = _ClipNameOffset ?? Schema.GetOffset(0x8717E4FB9E9C55AF);
+            Schema.SetCUtlString(_Handle, _ClipNameOffset!.Value, value);
         }
     }
-    private static nint _LoopingOffset = -1;
+    private static nint? _LoopingOffset;
 
     public ref bool Looping
     {
         get
         {
-            if (_LoopingOffset == -1) _LoopingOffset = Schema.GetOffset(0x8717E4FB25449B0D);
-            return ref _Handle.AsRef<bool>(_LoopingOffset);
+            _LoopingOffset = _LoopingOffset ?? Schema.GetOffset(0x8717E4FB25449B0D);
+            return ref _Handle.AsRef<bool>(_LoopingOffset!.Value);
         }
     }
 

@@ -16,50 +16,50 @@ internal partial class C_INIT_SetRigidAttachmentImpl : CParticleFunctionInitiali
 {
     public C_INIT_SetRigidAttachmentImpl(nint handle) : base(handle) { }
 
-    private static nint _ControlPointNumberOffset = -1;
+    private static nint? _ControlPointNumberOffset;
 
     public ref int ControlPointNumber
     {
         get
         {
-            if (_ControlPointNumberOffset == -1) _ControlPointNumberOffset = Schema.GetOffset(0xF6F728143F31A6BD);
-            return ref _Handle.AsRef<int>(_ControlPointNumberOffset);
+            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0xF6F728143F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
         }
     }
-    private static nint _FieldInputOffset = -1;
+    private static nint? _FieldInputOffset;
     private ParticleAttributeIndex_tImpl? _FieldInputInstance;
 
     public ParticleAttributeIndex_t FieldInput
     {
         get
         {
-            if (_FieldInputOffset == -1) _FieldInputOffset = Schema.GetOffset(0xF6F72814AE775669);
+            _FieldInputOffset = _FieldInputOffset ?? Schema.GetOffset(0xF6F72814AE775669);
             var instance = _FieldInputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldInputOffset);
+            instance.DangerousSetHandle(_Handle + _FieldInputOffset!.Value);
             return instance;
         }
     }
-    private static nint _FieldOutputOffset = -1;
+    private static nint? _FieldOutputOffset;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0xF6F72814E5729606);
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0xF6F72814E5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
             return instance;
         }
     }
-    private static nint _LocalSpaceOffset = -1;
+    private static nint? _LocalSpaceOffset;
 
     public ref bool LocalSpace
     {
         get
         {
-            if (_LocalSpaceOffset == -1) _LocalSpaceOffset = Schema.GetOffset(0xF6F7281462418E6E);
-            return ref _Handle.AsRef<bool>(_LocalSpaceOffset);
+            _LocalSpaceOffset = _LocalSpaceOffset ?? Schema.GetOffset(0xF6F7281462418E6E);
+            return ref _Handle.AsRef<bool>(_LocalSpaceOffset!.Value);
         }
     }
 

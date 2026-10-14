@@ -16,34 +16,34 @@ internal partial class CStaticPoseCacheImpl : SchemaClass, CStaticPoseCache
 {
     public CStaticPoseCacheImpl(nint handle) : base(handle) { }
 
-    private static nint _PosesOffset = -1;
+    private static nint? _PosesOffset;
 
     public ref CUtlVector<CCachedPose> Poses
     {
         get
         {
-            if (_PosesOffset == -1) _PosesOffset = Schema.GetOffset(0x2223EF1DB851C9F5);
-            return ref _Handle.AsRef<CUtlVector<CCachedPose>>(_PosesOffset);
+            _PosesOffset = _PosesOffset ?? Schema.GetOffset(0x2223EF1DB851C9F5);
+            return ref _Handle.AsRef<CUtlVector<CCachedPose>>(_PosesOffset!.Value);
         }
     }
-    private static nint _BoneCountOffset = -1;
+    private static nint? _BoneCountOffset;
 
     public ref int BoneCount
     {
         get
         {
-            if (_BoneCountOffset == -1) _BoneCountOffset = Schema.GetOffset(0x2223EF1D71FE39A2);
-            return ref _Handle.AsRef<int>(_BoneCountOffset);
+            _BoneCountOffset = _BoneCountOffset ?? Schema.GetOffset(0x2223EF1D71FE39A2);
+            return ref _Handle.AsRef<int>(_BoneCountOffset!.Value);
         }
     }
-    private static nint _MorphCountOffset = -1;
+    private static nint? _MorphCountOffset;
 
     public ref int MorphCount
     {
         get
         {
-            if (_MorphCountOffset == -1) _MorphCountOffset = Schema.GetOffset(0x2223EF1D32C62DD0);
-            return ref _Handle.AsRef<int>(_MorphCountOffset);
+            _MorphCountOffset = _MorphCountOffset ?? Schema.GetOffset(0x2223EF1D32C62DD0);
+            return ref _Handle.AsRef<int>(_MorphCountOffset!.Value);
         }
     }
 

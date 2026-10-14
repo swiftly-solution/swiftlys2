@@ -16,129 +16,129 @@ internal partial class CNmStateNode__CDefinitionImpl : CNmPoseNode__CDefinitionI
 {
     public CNmStateNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint _ChildNodeIdxOffset = -1;
+    private static nint? _ChildNodeIdxOffset;
 
     public ref short ChildNodeIdx
     {
         get
         {
-            if (_ChildNodeIdxOffset == -1) _ChildNodeIdxOffset = Schema.GetOffset(0x1C1728105C29A73C);
-            return ref _Handle.AsRef<short>(_ChildNodeIdxOffset);
+            _ChildNodeIdxOffset = _ChildNodeIdxOffset ?? Schema.GetOffset(0x1C1728105C29A73C);
+            return ref _Handle.AsRef<short>(_ChildNodeIdxOffset!.Value);
         }
     }
-    private static nint _EntryEventsOffset = -1;
+    private static nint? _EntryEventsOffset;
     private SchemaUntypedField? _EntryEventsInstance;
 
     public SchemaUntypedField EntryEvents
     {
         get
         {
-            if (_EntryEventsOffset == -1) _EntryEventsOffset = Schema.GetOffset(0x1C172810211A7856);
+            _EntryEventsOffset = _EntryEventsOffset ?? Schema.GetOffset(0x1C172810211A7856);
             var instance = _EntryEventsInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _EntryEventsOffset);
+            instance.DangerousSetHandle(_Handle + _EntryEventsOffset!.Value);
             return instance;
         }
     }
-    private static nint _ExecuteEventsOffset = -1;
+    private static nint? _ExecuteEventsOffset;
     private SchemaUntypedField? _ExecuteEventsInstance;
 
     public SchemaUntypedField ExecuteEvents
     {
         get
         {
-            if (_ExecuteEventsOffset == -1) _ExecuteEventsOffset = Schema.GetOffset(0x1C1728103BF4FF69);
+            _ExecuteEventsOffset = _ExecuteEventsOffset ?? Schema.GetOffset(0x1C1728103BF4FF69);
             var instance = _ExecuteEventsInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ExecuteEventsOffset);
+            instance.DangerousSetHandle(_Handle + _ExecuteEventsOffset!.Value);
             return instance;
         }
     }
-    private static nint _ExitEventsOffset = -1;
+    private static nint? _ExitEventsOffset;
     private SchemaUntypedField? _ExitEventsInstance;
 
     public SchemaUntypedField ExitEvents
     {
         get
         {
-            if (_ExitEventsOffset == -1) _ExitEventsOffset = Schema.GetOffset(0x1C17281096F711C4);
+            _ExitEventsOffset = _ExitEventsOffset ?? Schema.GetOffset(0x1C17281096F711C4);
             var instance = _ExitEventsInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ExitEventsOffset);
+            instance.DangerousSetHandle(_Handle + _ExitEventsOffset!.Value);
             return instance;
         }
     }
-    private static nint _TimedRemainingEventsOffset = -1;
+    private static nint? _TimedRemainingEventsOffset;
     private SchemaUntypedField? _TimedRemainingEventsInstance;
 
     public SchemaUntypedField TimedRemainingEvents
     {
         get
         {
-            if (_TimedRemainingEventsOffset == -1) _TimedRemainingEventsOffset = Schema.GetOffset(0x1C172810DFC9D945);
+            _TimedRemainingEventsOffset = _TimedRemainingEventsOffset ?? Schema.GetOffset(0x1C172810DFC9D945);
             var instance = _TimedRemainingEventsInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _TimedRemainingEventsOffset);
+            instance.DangerousSetHandle(_Handle + _TimedRemainingEventsOffset!.Value);
             return instance;
         }
     }
-    private static nint _TimedElapsedEventsOffset = -1;
+    private static nint? _TimedElapsedEventsOffset;
     private SchemaUntypedField? _TimedElapsedEventsInstance;
 
     public SchemaUntypedField TimedElapsedEvents
     {
         get
         {
-            if (_TimedElapsedEventsOffset == -1) _TimedElapsedEventsOffset = Schema.GetOffset(0x1C172810E054F8B9);
+            _TimedElapsedEventsOffset = _TimedElapsedEventsOffset ?? Schema.GetOffset(0x1C172810E054F8B9);
             var instance = _TimedElapsedEventsInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _TimedElapsedEventsOffset);
+            instance.DangerousSetHandle(_Handle + _TimedElapsedEventsOffset!.Value);
             return instance;
         }
     }
-    private static nint _LayerWeightNodeIdxOffset = -1;
+    private static nint? _LayerWeightNodeIdxOffset;
 
     public ref short LayerWeightNodeIdx
     {
         get
         {
-            if (_LayerWeightNodeIdxOffset == -1) _LayerWeightNodeIdxOffset = Schema.GetOffset(0x1C17281069611331);
-            return ref _Handle.AsRef<short>(_LayerWeightNodeIdxOffset);
+            _LayerWeightNodeIdxOffset = _LayerWeightNodeIdxOffset ?? Schema.GetOffset(0x1C17281069611331);
+            return ref _Handle.AsRef<short>(_LayerWeightNodeIdxOffset!.Value);
         }
     }
-    private static nint _LayerRootMotionWeightNodeIdxOffset = -1;
+    private static nint? _LayerRootMotionWeightNodeIdxOffset;
 
     public ref short LayerRootMotionWeightNodeIdx
     {
         get
         {
-            if (_LayerRootMotionWeightNodeIdxOffset == -1) _LayerRootMotionWeightNodeIdxOffset = Schema.GetOffset(0x1C17281040566E47);
-            return ref _Handle.AsRef<short>(_LayerRootMotionWeightNodeIdxOffset);
+            _LayerRootMotionWeightNodeIdxOffset = _LayerRootMotionWeightNodeIdxOffset ?? Schema.GetOffset(0x1C17281040566E47);
+            return ref _Handle.AsRef<short>(_LayerRootMotionWeightNodeIdxOffset!.Value);
         }
     }
-    private static nint _LayerBoneMaskNodeIdxOffset = -1;
+    private static nint? _LayerBoneMaskNodeIdxOffset;
 
     public ref short LayerBoneMaskNodeIdx
     {
         get
         {
-            if (_LayerBoneMaskNodeIdxOffset == -1) _LayerBoneMaskNodeIdxOffset = Schema.GetOffset(0x1C1728101BA67627);
-            return ref _Handle.AsRef<short>(_LayerBoneMaskNodeIdxOffset);
+            _LayerBoneMaskNodeIdxOffset = _LayerBoneMaskNodeIdxOffset ?? Schema.GetOffset(0x1C1728101BA67627);
+            return ref _Handle.AsRef<short>(_LayerBoneMaskNodeIdxOffset!.Value);
         }
     }
-    private static nint _IsOffStateOffset = -1;
+    private static nint? _IsOffStateOffset;
 
     public ref bool IsOffState
     {
         get
         {
-            if (_IsOffStateOffset == -1) _IsOffStateOffset = Schema.GetOffset(0x1C172810291F238F);
-            return ref _Handle.AsRef<bool>(_IsOffStateOffset);
+            _IsOffStateOffset = _IsOffStateOffset ?? Schema.GetOffset(0x1C172810291F238F);
+            return ref _Handle.AsRef<bool>(_IsOffStateOffset!.Value);
         }
     }
-    private static nint _UseActualElapsedTimeInStateForTimedEventsOffset = -1;
+    private static nint? _UseActualElapsedTimeInStateForTimedEventsOffset;
 
     public ref bool UseActualElapsedTimeInStateForTimedEvents
     {
         get
         {
-            if (_UseActualElapsedTimeInStateForTimedEventsOffset == -1) _UseActualElapsedTimeInStateForTimedEventsOffset = Schema.GetOffset(0x1C1728106B790DFA);
-            return ref _Handle.AsRef<bool>(_UseActualElapsedTimeInStateForTimedEventsOffset);
+            _UseActualElapsedTimeInStateForTimedEventsOffset = _UseActualElapsedTimeInStateForTimedEventsOffset ?? Schema.GetOffset(0x1C1728106B790DFA);
+            return ref _Handle.AsRef<bool>(_UseActualElapsedTimeInStateForTimedEventsOffset!.Value);
         }
     }
 

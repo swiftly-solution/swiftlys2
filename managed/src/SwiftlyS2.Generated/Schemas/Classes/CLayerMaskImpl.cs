@@ -16,44 +16,44 @@ internal partial class CLayerMaskImpl : SchemaClass, CLayerMask
 {
     public CLayerMaskImpl(nint handle) : base(handle) { }
 
-    private static nint _LumMaskCenterOffset = -1;
+    private static nint? _LumMaskCenterOffset;
 
     public ref int LumMaskCenter
     {
         get
         {
-            if (_LumMaskCenterOffset == -1) _LumMaskCenterOffset = Schema.GetOffset(0x9395CC5B91EA0D4C);
-            return ref _Handle.AsRef<int>(_LumMaskCenterOffset);
+            _LumMaskCenterOffset = _LumMaskCenterOffset ?? Schema.GetOffset(0x9395CC5B91EA0D4C);
+            return ref _Handle.AsRef<int>(_LumMaskCenterOffset!.Value);
         }
     }
-    private static nint _LumMaskWidthOffset = -1;
+    private static nint? _LumMaskWidthOffset;
 
     public ref int LumMaskWidth
     {
         get
         {
-            if (_LumMaskWidthOffset == -1) _LumMaskWidthOffset = Schema.GetOffset(0x9395CC5B93CD4C07);
-            return ref _Handle.AsRef<int>(_LumMaskWidthOffset);
+            _LumMaskWidthOffset = _LumMaskWidthOffset ?? Schema.GetOffset(0x9395CC5B93CD4C07);
+            return ref _Handle.AsRef<int>(_LumMaskWidthOffset!.Value);
         }
     }
-    private static nint _LumMaskShapeOffset = -1;
+    private static nint? _LumMaskShapeOffset;
 
     public ref int LumMaskShape
     {
         get
         {
-            if (_LumMaskShapeOffset == -1) _LumMaskShapeOffset = Schema.GetOffset(0x9395CC5B37D3AB1E);
-            return ref _Handle.AsRef<int>(_LumMaskShapeOffset);
+            _LumMaskShapeOffset = _LumMaskShapeOffset ?? Schema.GetOffset(0x9395CC5B37D3AB1E);
+            return ref _Handle.AsRef<int>(_LumMaskShapeOffset!.Value);
         }
     }
-    private static nint _InvertedOffset = -1;
+    private static nint? _InvertedOffset;
 
     public ref bool Inverted
     {
         get
         {
-            if (_InvertedOffset == -1) _InvertedOffset = Schema.GetOffset(0x9395CC5B898FFC98);
-            return ref _Handle.AsRef<bool>(_InvertedOffset);
+            _InvertedOffset = _InvertedOffset ?? Schema.GetOffset(0x9395CC5B898FFC98);
+            return ref _Handle.AsRef<bool>(_InvertedOffset!.Value);
         }
     }
 

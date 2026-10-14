@@ -16,103 +16,103 @@ internal partial class C_OP_VectorFieldSnapshotImpl : CParticleFunctionOperatorI
 {
     public C_OP_VectorFieldSnapshotImpl(nint handle) : base(handle) { }
 
-    private static nint _ControlPointNumberOffset = -1;
+    private static nint? _ControlPointNumberOffset;
 
     public ref int ControlPointNumber
     {
         get
         {
-            if (_ControlPointNumberOffset == -1) _ControlPointNumberOffset = Schema.GetOffset(0x4679512A3F31A6BD);
-            return ref _Handle.AsRef<int>(_ControlPointNumberOffset);
+            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0x4679512A3F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
         }
     }
-    private static nint _AttributeToWriteOffset = -1;
+    private static nint? _AttributeToWriteOffset;
     private ParticleAttributeIndex_tImpl? _AttributeToWriteInstance;
 
     public ParticleAttributeIndex_t AttributeToWrite
     {
         get
         {
-            if (_AttributeToWriteOffset == -1) _AttributeToWriteOffset = Schema.GetOffset(0x4679512A389A3CC1);
+            _AttributeToWriteOffset = _AttributeToWriteOffset ?? Schema.GetOffset(0x4679512A389A3CC1);
             var instance = _AttributeToWriteInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _AttributeToWriteOffset);
+            instance.DangerousSetHandle(_Handle + _AttributeToWriteOffset!.Value);
             return instance;
         }
     }
-    private static nint _LocalSpaceCPOffset = -1;
+    private static nint? _LocalSpaceCPOffset;
 
     public ref int LocalSpaceCP
     {
         get
         {
-            if (_LocalSpaceCPOffset == -1) _LocalSpaceCPOffset = Schema.GetOffset(0x4679512AC8E9CB31);
-            return ref _Handle.AsRef<int>(_LocalSpaceCPOffset);
+            _LocalSpaceCPOffset = _LocalSpaceCPOffset ?? Schema.GetOffset(0x4679512AC8E9CB31);
+            return ref _Handle.AsRef<int>(_LocalSpaceCPOffset!.Value);
         }
     }
-    private static nint _InterpolationOffset = -1;
+    private static nint? _InterpolationOffset;
     private CPerParticleFloatInputImpl? _InterpolationInstance;
 
     public CPerParticleFloatInput Interpolation
     {
         get
         {
-            if (_InterpolationOffset == -1) _InterpolationOffset = Schema.GetOffset(0x4679512ACF55B987);
+            _InterpolationOffset = _InterpolationOffset ?? Schema.GetOffset(0x4679512ACF55B987);
             var instance = _InterpolationInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _InterpolationOffset);
+            instance.DangerousSetHandle(_Handle + _InterpolationOffset!.Value);
             return instance;
         }
     }
-    private static nint _ScaleOffset = -1;
+    private static nint? _ScaleOffset;
     private CPerParticleVecInputImpl? _ScaleInstance;
 
     public CPerParticleVecInput Scale
     {
         get
         {
-            if (_ScaleOffset == -1) _ScaleOffset = Schema.GetOffset(0x4679512A5F596B51);
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x4679512A5F596B51);
             var instance = _ScaleInstance ??= new CPerParticleVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _ScaleOffset);
+            instance.DangerousSetHandle(_Handle + _ScaleOffset!.Value);
             return instance;
         }
     }
-    private static nint _BoundaryDampeningOffset = -1;
+    private static nint? _BoundaryDampeningOffset;
 
     public ref float BoundaryDampening
     {
         get
         {
-            if (_BoundaryDampeningOffset == -1) _BoundaryDampeningOffset = Schema.GetOffset(0x4679512A6C557EF8);
-            return ref _Handle.AsRef<float>(_BoundaryDampeningOffset);
+            _BoundaryDampeningOffset = _BoundaryDampeningOffset ?? Schema.GetOffset(0x4679512A6C557EF8);
+            return ref _Handle.AsRef<float>(_BoundaryDampeningOffset!.Value);
         }
     }
-    private static nint _SetVelocityOffset = -1;
+    private static nint? _SetVelocityOffset;
 
     public ref bool SetVelocity
     {
         get
         {
-            if (_SetVelocityOffset == -1) _SetVelocityOffset = Schema.GetOffset(0x4679512A996C0A34);
-            return ref _Handle.AsRef<bool>(_SetVelocityOffset);
+            _SetVelocityOffset = _SetVelocityOffset ?? Schema.GetOffset(0x4679512A996C0A34);
+            return ref _Handle.AsRef<bool>(_SetVelocityOffset!.Value);
         }
     }
-    private static nint _LockToSurfaceOffset = -1;
+    private static nint? _LockToSurfaceOffset;
 
     public ref bool LockToSurface
     {
         get
         {
-            if (_LockToSurfaceOffset == -1) _LockToSurfaceOffset = Schema.GetOffset(0x4679512A81E43C02);
-            return ref _Handle.AsRef<bool>(_LockToSurfaceOffset);
+            _LockToSurfaceOffset = _LockToSurfaceOffset ?? Schema.GetOffset(0x4679512A81E43C02);
+            return ref _Handle.AsRef<bool>(_LockToSurfaceOffset!.Value);
         }
     }
-    private static nint _GridSpacingOffset = -1;
+    private static nint? _GridSpacingOffset;
 
     public ref float GridSpacing
     {
         get
         {
-            if (_GridSpacingOffset == -1) _GridSpacingOffset = Schema.GetOffset(0x4679512AB7D1BFB8);
-            return ref _Handle.AsRef<float>(_GridSpacingOffset);
+            _GridSpacingOffset = _GridSpacingOffset ?? Schema.GetOffset(0x4679512AB7D1BFB8);
+            return ref _Handle.AsRef<float>(_GridSpacingOffset!.Value);
         }
     }
 

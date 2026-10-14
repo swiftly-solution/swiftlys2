@@ -16,95 +16,95 @@ internal partial class C_OP_InheritFromParentParticlesV2Impl : CParticleFunction
 {
     public C_OP_InheritFromParentParticlesV2Impl(nint handle) : base(handle) { }
 
-    private static nint _ScaleOffset = -1;
+    private static nint? _ScaleOffset;
     private CPerParticleFloatInputImpl? _ScaleInstance;
 
     public CPerParticleFloatInput Scale
     {
         get
         {
-            if (_ScaleOffset == -1) _ScaleOffset = Schema.GetOffset(0xF948CFAFB731A42F);
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0xF948CFAFB731A42F);
             var instance = _ScaleInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _ScaleOffset);
+            instance.DangerousSetHandle(_Handle + _ScaleOffset!.Value);
             return instance;
         }
     }
-    private static nint _FieldOutputOffset = -1;
+    private static nint? _FieldOutputOffset;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0xF948CFAFE5729606);
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0xF948CFAFE5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
             return instance;
         }
     }
-    private static nint _IncrementOffset = -1;
+    private static nint? _IncrementOffset;
     private CPerParticleFloatInputImpl? _IncrementInstance;
 
     public CPerParticleFloatInput Increment
     {
         get
         {
-            if (_IncrementOffset == -1) _IncrementOffset = Schema.GetOffset(0xF948CFAF2359F182);
+            _IncrementOffset = _IncrementOffset ?? Schema.GetOffset(0xF948CFAF2359F182);
             var instance = _IncrementInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _IncrementOffset);
+            instance.DangerousSetHandle(_Handle + _IncrementOffset!.Value);
             return instance;
         }
     }
-    private static nint _SubSampleOffset = -1;
+    private static nint? _SubSampleOffset;
 
     public ref bool SubSample
     {
         get
         {
-            if (_SubSampleOffset == -1) _SubSampleOffset = Schema.GetOffset(0xF948CFAF5021E837);
-            return ref _Handle.AsRef<bool>(_SubSampleOffset);
+            _SubSampleOffset = _SubSampleOffset ?? Schema.GetOffset(0xF948CFAF5021E837);
+            return ref _Handle.AsRef<bool>(_SubSampleOffset!.Value);
         }
     }
-    private static nint _RandomDistributionOffset = -1;
+    private static nint? _RandomDistributionOffset;
 
     public ref bool RandomDistribution
     {
         get
         {
-            if (_RandomDistributionOffset == -1) _RandomDistributionOffset = Schema.GetOffset(0xF948CFAF830F6B38);
-            return ref _Handle.AsRef<bool>(_RandomDistributionOffset);
+            _RandomDistributionOffset = _RandomDistributionOffset ?? Schema.GetOffset(0xF948CFAF830F6B38);
+            return ref _Handle.AsRef<bool>(_RandomDistributionOffset!.Value);
         }
     }
-    private static nint _ReverseOffset = -1;
+    private static nint? _ReverseOffset;
 
     public ref bool Reverse
     {
         get
         {
-            if (_ReverseOffset == -1) _ReverseOffset = Schema.GetOffset(0xF948CFAFEA4E22E5);
-            return ref _Handle.AsRef<bool>(_ReverseOffset);
+            _ReverseOffset = _ReverseOffset ?? Schema.GetOffset(0xF948CFAFEA4E22E5);
+            return ref _Handle.AsRef<bool>(_ReverseOffset!.Value);
         }
     }
-    private static nint _MissingParentBehaviorOffset = -1;
+    private static nint? _MissingParentBehaviorOffset;
 
     public ref MissingParentInheritBehavior_t MissingParentBehavior
     {
         get
         {
-            if (_MissingParentBehaviorOffset == -1) _MissingParentBehaviorOffset = Schema.GetOffset(0xF948CFAF9B0F277D);
-            return ref _Handle.AsRef<MissingParentInheritBehavior_t>(_MissingParentBehaviorOffset);
+            _MissingParentBehaviorOffset = _MissingParentBehaviorOffset ?? Schema.GetOffset(0xF948CFAF9B0F277D);
+            return ref _Handle.AsRef<MissingParentInheritBehavior_t>(_MissingParentBehaviorOffset!.Value);
         }
     }
-    private static nint _InterpolationOffset = -1;
+    private static nint? _InterpolationOffset;
     private CPerParticleFloatInputImpl? _InterpolationInstance;
 
     public CPerParticleFloatInput Interpolation
     {
         get
         {
-            if (_InterpolationOffset == -1) _InterpolationOffset = Schema.GetOffset(0xF948CFAFCF55B987);
+            _InterpolationOffset = _InterpolationOffset ?? Schema.GetOffset(0xF948CFAFCF55B987);
             var instance = _InterpolationInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _InterpolationOffset);
+            instance.DangerousSetHandle(_Handle + _InterpolationOffset!.Value);
             return instance;
         }
     }

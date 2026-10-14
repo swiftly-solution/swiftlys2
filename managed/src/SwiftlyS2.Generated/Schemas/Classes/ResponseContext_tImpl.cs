@@ -16,46 +16,46 @@ internal partial class ResponseContext_tImpl : SchemaClass, ResponseContext_t
 {
     public ResponseContext_tImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x8F5A90A274FF65FE);
-            return Schema.GetString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x8F5A90A274FF65FE);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x8F5A90A274FF65FE);
-            Schema.SetString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x8F5A90A274FF65FE);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _ValueOffset = -1;
+    private static nint? _ValueOffset;
 
     public string Value
     {
         get
         {
-            if (_ValueOffset == -1) _ValueOffset = Schema.GetOffset(0x8F5A90A28044B702);
-            return Schema.GetString(_Handle.Read<nint>(_ValueOffset));
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0x8F5A90A28044B702);
+            return Schema.GetString(_Handle.Read<nint>(_ValueOffset!.Value));
         }
         set
         {
-            if (_ValueOffset == -1) _ValueOffset = Schema.GetOffset(0x8F5A90A28044B702);
-            Schema.SetString(_Handle, _ValueOffset, value);
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0x8F5A90A28044B702);
+            Schema.SetString(_Handle, _ValueOffset!.Value, value);
         }
     }
-    private static nint _ExpirationTimeOffset = -1;
+    private static nint? _ExpirationTimeOffset;
     private GameTime_tImpl? _ExpirationTimeInstance;
 
     public GameTime_t ExpirationTime
     {
         get
         {
-            if (_ExpirationTimeOffset == -1) _ExpirationTimeOffset = Schema.GetOffset(0x8F5A90A20389142D);
+            _ExpirationTimeOffset = _ExpirationTimeOffset ?? Schema.GetOffset(0x8F5A90A20389142D);
             var instance = _ExpirationTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _ExpirationTimeOffset);
+            instance.DangerousSetHandle(_Handle + _ExpirationTimeOffset!.Value);
             return instance;
         }
     }

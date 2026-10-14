@@ -16,14 +16,14 @@ internal partial class CnmGraphDocFollowBoneNodeImpl : CNmGraphDocVariationDataN
 {
     public CnmGraphDocFollowBoneNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _ModeOffset = -1;
+    private static nint? _ModeOffset;
 
     public ref NmFollowBoneMode_t Mode
     {
         get
         {
-            if (_ModeOffset == -1) _ModeOffset = Schema.GetOffset(0x2C56403E90FD5BB2);
-            return ref _Handle.AsRef<NmFollowBoneMode_t>(_ModeOffset);
+            _ModeOffset = _ModeOffset ?? Schema.GetOffset(0x2C56403E90FD5BB2);
+            return ref _Handle.AsRef<NmFollowBoneMode_t>(_ModeOffset!.Value);
         }
     }
 

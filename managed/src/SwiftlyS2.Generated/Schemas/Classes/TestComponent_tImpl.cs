@@ -16,19 +16,19 @@ internal partial class TestComponent_tImpl : SchemaClass, TestComponent_t
 {
     public TestComponent_tImpl(nint handle) : base(handle) { }
 
-    private static nint _ComponentDataOffset = -1;
+    private static nint? _ComponentDataOffset;
 
     public string ComponentData
     {
         get
         {
-            if (_ComponentDataOffset == -1) _ComponentDataOffset = Schema.GetOffset(0xF9BE36BBF07BDB48);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ComponentDataOffset));
+            _ComponentDataOffset = _ComponentDataOffset ?? Schema.GetOffset(0xF9BE36BBF07BDB48);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ComponentDataOffset!.Value));
         }
         set
         {
-            if (_ComponentDataOffset == -1) _ComponentDataOffset = Schema.GetOffset(0xF9BE36BBF07BDB48);
-            Schema.SetCUtlString(_Handle, _ComponentDataOffset, value);
+            _ComponentDataOffset = _ComponentDataOffset ?? Schema.GetOffset(0xF9BE36BBF07BDB48);
+            Schema.SetCUtlString(_Handle, _ComponentDataOffset!.Value, value);
         }
     }
 

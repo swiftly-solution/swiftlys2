@@ -16,79 +16,79 @@ internal partial class CVoiceContainerStaticAdditiveSynth__CHarmonicImpl : Schem
 {
     public CVoiceContainerStaticAdditiveSynth__CHarmonicImpl(nint handle) : base(handle) { }
 
-    private static nint _WaveformOffset = -1;
+    private static nint? _WaveformOffset;
 
     public ref EWaveform Waveform
     {
         get
         {
-            if (_WaveformOffset == -1) _WaveformOffset = Schema.GetOffset(0xC47956E906E0A8DE);
-            return ref _Handle.AsRef<EWaveform>(_WaveformOffset);
+            _WaveformOffset = _WaveformOffset ?? Schema.GetOffset(0xC47956E906E0A8DE);
+            return ref _Handle.AsRef<EWaveform>(_WaveformOffset!.Value);
         }
     }
-    private static nint _FundamentalOffset = -1;
+    private static nint? _FundamentalOffset;
 
     public ref EMidiNote Fundamental
     {
         get
         {
-            if (_FundamentalOffset == -1) _FundamentalOffset = Schema.GetOffset(0xC47956E9C45D876C);
-            return ref _Handle.AsRef<EMidiNote>(_FundamentalOffset);
+            _FundamentalOffset = _FundamentalOffset ?? Schema.GetOffset(0xC47956E9C45D876C);
+            return ref _Handle.AsRef<EMidiNote>(_FundamentalOffset!.Value);
         }
     }
-    private static nint _OctaveOffset = -1;
+    private static nint? _OctaveOffset;
 
     public ref int Octave
     {
         get
         {
-            if (_OctaveOffset == -1) _OctaveOffset = Schema.GetOffset(0xC47956E937F03859);
-            return ref _Handle.AsRef<int>(_OctaveOffset);
+            _OctaveOffset = _OctaveOffset ?? Schema.GetOffset(0xC47956E937F03859);
+            return ref _Handle.AsRef<int>(_OctaveOffset!.Value);
         }
     }
-    private static nint _CentsOffset = -1;
+    private static nint? _CentsOffset;
 
     public ref float Cents
     {
         get
         {
-            if (_CentsOffset == -1) _CentsOffset = Schema.GetOffset(0xC47956E98E027DCE);
-            return ref _Handle.AsRef<float>(_CentsOffset);
+            _CentsOffset = _CentsOffset ?? Schema.GetOffset(0xC47956E98E027DCE);
+            return ref _Handle.AsRef<float>(_CentsOffset!.Value);
         }
     }
-    private static nint _PhaseOffset = -1;
+    private static nint? _PhaseOffset;
 
     public ref float Phase
     {
         get
         {
-            if (_PhaseOffset == -1) _PhaseOffset = Schema.GetOffset(0xC47956E93C22A9CA);
-            return ref _Handle.AsRef<float>(_PhaseOffset);
+            _PhaseOffset = _PhaseOffset ?? Schema.GetOffset(0xC47956E93C22A9CA);
+            return ref _Handle.AsRef<float>(_PhaseOffset!.Value);
         }
     }
-    private static nint _CurveOffset = -1;
+    private static nint? _CurveOffset;
     private SchemaUntypedField? _CurveInstance;
 
     public SchemaUntypedField Curve
     {
         get
         {
-            if (_CurveOffset == -1) _CurveOffset = Schema.GetOffset(0xC47956E9BFFA0B34);
+            _CurveOffset = _CurveOffset ?? Schema.GetOffset(0xC47956E9BFFA0B34);
             var instance = _CurveInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _CurveOffset);
+            instance.DangerousSetHandle(_Handle + _CurveOffset!.Value);
             return instance;
         }
     }
-    private static nint _VolumeScalingOffset = -1;
+    private static nint? _VolumeScalingOffset;
     private CVoiceContainerStaticAdditiveSynth__CGainScalePerInstanceImpl? _VolumeScalingInstance;
 
     public CVoiceContainerStaticAdditiveSynth__CGainScalePerInstance VolumeScaling
     {
         get
         {
-            if (_VolumeScalingOffset == -1) _VolumeScalingOffset = Schema.GetOffset(0xC47956E9820320D8);
+            _VolumeScalingOffset = _VolumeScalingOffset ?? Schema.GetOffset(0xC47956E9820320D8);
             var instance = _VolumeScalingInstance ??= new CVoiceContainerStaticAdditiveSynth__CGainScalePerInstanceImpl(0);
-            instance.DangerousSetHandle(_Handle + _VolumeScalingOffset);
+            instance.DangerousSetHandle(_Handle + _VolumeScalingOffset!.Value);
             return instance;
         }
     }

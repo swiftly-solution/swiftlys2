@@ -16,54 +16,54 @@ internal partial class CSoundOpvarSetAutoRoomEntityImpl : CSoundOpvarSetPointEnt
 {
     public CSoundOpvarSetAutoRoomEntityImpl(nint handle) : base(handle) { }
 
-    private static nint _TraceResultsOffset = -1;
+    private static nint? _TraceResultsOffset;
 
     public ref CUtlVector<SoundOpvarTraceResult_t> TraceResults
     {
         get
         {
-            if (_TraceResultsOffset == -1) _TraceResultsOffset = Schema.GetOffset(0x13ABD76E24ADC8DC);
-            return ref _Handle.AsRef<CUtlVector<SoundOpvarTraceResult_t>>(_TraceResultsOffset);
+            _TraceResultsOffset = _TraceResultsOffset ?? Schema.GetOffset(0x13ABD76E24ADC8DC);
+            return ref _Handle.AsRef<CUtlVector<SoundOpvarTraceResult_t>>(_TraceResultsOffset!.Value);
         }
     }
-    private static nint _DoorwayPairsOffset = -1;
+    private static nint? _DoorwayPairsOffset;
 
     public ref CUtlVector<AutoRoomDoorwayPairs_t> DoorwayPairs
     {
         get
         {
-            if (_DoorwayPairsOffset == -1) _DoorwayPairsOffset = Schema.GetOffset(0x13ABD76EFAD6453D);
-            return ref _Handle.AsRef<CUtlVector<AutoRoomDoorwayPairs_t>>(_DoorwayPairsOffset);
+            _DoorwayPairsOffset = _DoorwayPairsOffset ?? Schema.GetOffset(0x13ABD76EFAD6453D);
+            return ref _Handle.AsRef<CUtlVector<AutoRoomDoorwayPairs_t>>(_DoorwayPairsOffset!.Value);
         }
     }
-    private static nint _SizeOffset = -1;
+    private static nint? _SizeOffset;
 
     public ref float Size
     {
         get
         {
-            if (_SizeOffset == -1) _SizeOffset = Schema.GetOffset(0x13ABD76E4CF0EBC6);
-            return ref _Handle.AsRef<float>(_SizeOffset);
+            _SizeOffset = _SizeOffset ?? Schema.GetOffset(0x13ABD76E4CF0EBC6);
+            return ref _Handle.AsRef<float>(_SizeOffset!.Value);
         }
     }
-    private static nint _HeightToleranceOffset = -1;
+    private static nint? _HeightToleranceOffset;
 
     public ref float HeightTolerance
     {
         get
         {
-            if (_HeightToleranceOffset == -1) _HeightToleranceOffset = Schema.GetOffset(0x13ABD76EB388225F);
-            return ref _Handle.AsRef<float>(_HeightToleranceOffset);
+            _HeightToleranceOffset = _HeightToleranceOffset ?? Schema.GetOffset(0x13ABD76EB388225F);
+            return ref _Handle.AsRef<float>(_HeightToleranceOffset!.Value);
         }
     }
-    private static nint _SizeSqrOffset = -1;
+    private static nint? _SizeSqrOffset;
 
     public ref float SizeSqr
     {
         get
         {
-            if (_SizeSqrOffset == -1) _SizeSqrOffset = Schema.GetOffset(0x13ABD76E063EF878);
-            return ref _Handle.AsRef<float>(_SizeSqrOffset);
+            _SizeSqrOffset = _SizeSqrOffset ?? Schema.GetOffset(0x13ABD76E063EF878);
+            return ref _Handle.AsRef<float>(_SizeSqrOffset!.Value);
         }
     }
 

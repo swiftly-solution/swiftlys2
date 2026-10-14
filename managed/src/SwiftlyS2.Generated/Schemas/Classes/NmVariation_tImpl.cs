@@ -16,48 +16,48 @@ internal partial class NmVariation_tImpl : SchemaClass, NmVariation_t
 {
     public NmVariation_tImpl(nint handle) : base(handle) { }
 
-    private static nint _IDOffset = -1;
+    private static nint? _IDOffset;
 
     public ref CGlobalSymbol ID
     {
         get
         {
-            if (_IDOffset == -1) _IDOffset = Schema.GetOffset(0xD8E8EDCA95066900);
-            return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset);
+            _IDOffset = _IDOffset ?? Schema.GetOffset(0xD8E8EDCA95066900);
+            return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset!.Value);
         }
     }
-    private static nint _ParentIDOffset = -1;
+    private static nint? _ParentIDOffset;
 
     public ref CGlobalSymbol ParentID
     {
         get
         {
-            if (_ParentIDOffset == -1) _ParentIDOffset = Schema.GetOffset(0xD8E8EDCAB3BCD368);
-            return ref _Handle.AsRef<CGlobalSymbol>(_ParentIDOffset);
+            _ParentIDOffset = _ParentIDOffset ?? Schema.GetOffset(0xD8E8EDCAB3BCD368);
+            return ref _Handle.AsRef<CGlobalSymbol>(_ParentIDOffset!.Value);
         }
     }
-    private static nint _SkeletonOffset = -1;
+    private static nint? _SkeletonOffset;
     private SchemaUntypedField? _SkeletonInstance;
 
     public SchemaUntypedField Skeleton
     {
         get
         {
-            if (_SkeletonOffset == -1) _SkeletonOffset = Schema.GetOffset(0xD8E8EDCAE77F030E);
+            _SkeletonOffset = _SkeletonOffset ?? Schema.GetOffset(0xD8E8EDCAE77F030E);
             var instance = _SkeletonInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _SkeletonOffset);
+            instance.DangerousSetHandle(_Handle + _SkeletonOffset!.Value);
             return instance;
         }
     }
-    private static nint _UserDataOffset = -1;
+    private static nint? _UserDataOffset;
     private CNmGraphVariationUserDataImpl? _UserDataInstance;
 
     public CNmGraphVariationUserData? UserData
     {
         get
         {
-            if (_UserDataOffset == -1) _UserDataOffset = Schema.GetOffset(0xD8E8EDCABDF39484);
-            var ptr = _Handle.Read<nint>(_UserDataOffset);
+            _UserDataOffset = _UserDataOffset ?? Schema.GetOffset(0xD8E8EDCABDF39484);
+            var ptr = _Handle.Read<nint>(_UserDataOffset!.Value);
             if (!ptr.IsValidPtr()) return null;
             var instance = _UserDataInstance ??= new CNmGraphVariationUserDataImpl(0);
             instance.DangerousSetHandle(ptr);

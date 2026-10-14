@@ -16,64 +16,64 @@ internal partial class C_PlayerVisibilityImpl : C_BaseEntityImpl, C_PlayerVisibi
 {
     public C_PlayerVisibilityImpl(nint handle) : base(handle) { }
 
-    private static nint _VisibilityStrengthOffset = -1;
+    private static nint? _VisibilityStrengthOffset;
 
     public ref float VisibilityStrength
     {
         get
         {
-            if (_VisibilityStrengthOffset == -1) _VisibilityStrengthOffset = Schema.GetOffset(0x67FF23E69B9E8E4E);
-            return ref _Handle.AsRef<float>(_VisibilityStrengthOffset);
+            _VisibilityStrengthOffset = _VisibilityStrengthOffset ?? Schema.GetOffset(0x67FF23E69B9E8E4E);
+            return ref _Handle.AsRef<float>(_VisibilityStrengthOffset!.Value);
         }
     }
-    private static nint _FogDistanceMultiplierOffset = -1;
+    private static nint? _FogDistanceMultiplierOffset;
 
     public ref float FogDistanceMultiplier
     {
         get
         {
-            if (_FogDistanceMultiplierOffset == -1) _FogDistanceMultiplierOffset = Schema.GetOffset(0x67FF23E6DB1CD031);
-            return ref _Handle.AsRef<float>(_FogDistanceMultiplierOffset);
+            _FogDistanceMultiplierOffset = _FogDistanceMultiplierOffset ?? Schema.GetOffset(0x67FF23E6DB1CD031);
+            return ref _Handle.AsRef<float>(_FogDistanceMultiplierOffset!.Value);
         }
     }
-    private static nint _FogMaxDensityMultiplierOffset = -1;
+    private static nint? _FogMaxDensityMultiplierOffset;
 
     public ref float FogMaxDensityMultiplier
     {
         get
         {
-            if (_FogMaxDensityMultiplierOffset == -1) _FogMaxDensityMultiplierOffset = Schema.GetOffset(0x67FF23E67F993C70);
-            return ref _Handle.AsRef<float>(_FogMaxDensityMultiplierOffset);
+            _FogMaxDensityMultiplierOffset = _FogMaxDensityMultiplierOffset ?? Schema.GetOffset(0x67FF23E67F993C70);
+            return ref _Handle.AsRef<float>(_FogMaxDensityMultiplierOffset!.Value);
         }
     }
-    private static nint _FadeTimeOffset = -1;
+    private static nint? _FadeTimeOffset;
 
     public ref float FadeTime
     {
         get
         {
-            if (_FadeTimeOffset == -1) _FadeTimeOffset = Schema.GetOffset(0x67FF23E600BEDB08);
-            return ref _Handle.AsRef<float>(_FadeTimeOffset);
+            _FadeTimeOffset = _FadeTimeOffset ?? Schema.GetOffset(0x67FF23E600BEDB08);
+            return ref _Handle.AsRef<float>(_FadeTimeOffset!.Value);
         }
     }
-    private static nint _StartDisabledOffset = -1;
+    private static nint? _StartDisabledOffset;
 
     public ref bool StartDisabled
     {
         get
         {
-            if (_StartDisabledOffset == -1) _StartDisabledOffset = Schema.GetOffset(0x67FF23E661ED0C4F);
-            return ref _Handle.AsRef<bool>(_StartDisabledOffset);
+            _StartDisabledOffset = _StartDisabledOffset ?? Schema.GetOffset(0x67FF23E661ED0C4F);
+            return ref _Handle.AsRef<bool>(_StartDisabledOffset!.Value);
         }
     }
-    private static nint _IsEnabledOffset = -1;
+    private static nint? _IsEnabledOffset;
 
     public ref bool IsEnabled
     {
         get
         {
-            if (_IsEnabledOffset == -1) _IsEnabledOffset = Schema.GetOffset(0x67FF23E65360D70E);
-            return ref _Handle.AsRef<bool>(_IsEnabledOffset);
+            _IsEnabledOffset = _IsEnabledOffset ?? Schema.GetOffset(0x67FF23E65360D70E);
+            return ref _Handle.AsRef<bool>(_IsEnabledOffset!.Value);
         }
     }
 

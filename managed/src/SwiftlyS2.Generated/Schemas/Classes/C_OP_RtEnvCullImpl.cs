@@ -16,79 +16,79 @@ internal partial class C_OP_RtEnvCullImpl : CParticleFunctionOperatorImpl, C_OP_
 {
     public C_OP_RtEnvCullImpl(nint handle) : base(handle) { }
 
-    private static nint _TestDirOffset = -1;
+    private static nint? _TestDirOffset;
 
     public ref Vector TestDir
     {
         get
         {
-            if (_TestDirOffset == -1) _TestDirOffset = Schema.GetOffset(0x72531BAEC17166B4);
-            return ref _Handle.AsRef<Vector>(_TestDirOffset);
+            _TestDirOffset = _TestDirOffset ?? Schema.GetOffset(0x72531BAEC17166B4);
+            return ref _Handle.AsRef<Vector>(_TestDirOffset!.Value);
         }
     }
-    private static nint _TestNormalOffset = -1;
+    private static nint? _TestNormalOffset;
 
     public ref Vector TestNormal
     {
         get
         {
-            if (_TestNormalOffset == -1) _TestNormalOffset = Schema.GetOffset(0x72531BAED4AC77F2);
-            return ref _Handle.AsRef<Vector>(_TestNormalOffset);
+            _TestNormalOffset = _TestNormalOffset ?? Schema.GetOffset(0x72531BAED4AC77F2);
+            return ref _Handle.AsRef<Vector>(_TestNormalOffset!.Value);
         }
     }
-    private static nint _CullOnMissOffset = -1;
+    private static nint? _CullOnMissOffset;
 
     public ref bool CullOnMiss
     {
         get
         {
-            if (_CullOnMissOffset == -1) _CullOnMissOffset = Schema.GetOffset(0x72531BAE5E118398);
-            return ref _Handle.AsRef<bool>(_CullOnMissOffset);
+            _CullOnMissOffset = _CullOnMissOffset ?? Schema.GetOffset(0x72531BAE5E118398);
+            return ref _Handle.AsRef<bool>(_CullOnMissOffset!.Value);
         }
     }
-    private static nint _StickInsteadOfCullOffset = -1;
+    private static nint? _StickInsteadOfCullOffset;
 
     public ref bool StickInsteadOfCull
     {
         get
         {
-            if (_StickInsteadOfCullOffset == -1) _StickInsteadOfCullOffset = Schema.GetOffset(0x72531BAE343222A2);
-            return ref _Handle.AsRef<bool>(_StickInsteadOfCullOffset);
+            _StickInsteadOfCullOffset = _StickInsteadOfCullOffset ?? Schema.GetOffset(0x72531BAE343222A2);
+            return ref _Handle.AsRef<bool>(_StickInsteadOfCullOffset!.Value);
         }
     }
-    private static nint _RtEnvNameOffset = -1;
+    private static nint? _RtEnvNameOffset;
 
     public string RtEnvName
     {
         get
         {
-            if (_RtEnvNameOffset == -1) _RtEnvNameOffset = Schema.GetOffset(0x72531BAEC32A9775);
-            return Schema.GetString(_Handle + _RtEnvNameOffset);
+            _RtEnvNameOffset = _RtEnvNameOffset ?? Schema.GetOffset(0x72531BAEC32A9775);
+            return Schema.GetString(_Handle + _RtEnvNameOffset!.Value);
         }
         set
         {
-            if (_RtEnvNameOffset == -1) _RtEnvNameOffset = Schema.GetOffset(0x72531BAEC32A9775);
-            Schema.SetFixedString(_Handle, _RtEnvNameOffset, value, 128);
+            _RtEnvNameOffset = _RtEnvNameOffset ?? Schema.GetOffset(0x72531BAEC32A9775);
+            Schema.SetFixedString(_Handle, _RtEnvNameOffset!.Value, value, 128);
         }
     }
-    private static nint _RTEnvCPOffset = -1;
+    private static nint? _RTEnvCPOffset;
 
     public ref int RTEnvCP
     {
         get
         {
-            if (_RTEnvCPOffset == -1) _RTEnvCPOffset = Schema.GetOffset(0x72531BAE01881731);
-            return ref _Handle.AsRef<int>(_RTEnvCPOffset);
+            _RTEnvCPOffset = _RTEnvCPOffset ?? Schema.GetOffset(0x72531BAE01881731);
+            return ref _Handle.AsRef<int>(_RTEnvCPOffset!.Value);
         }
     }
-    private static nint _ComponentOffset = -1;
+    private static nint? _ComponentOffset;
 
     public ref int Component
     {
         get
         {
-            if (_ComponentOffset == -1) _ComponentOffset = Schema.GetOffset(0x72531BAEBFD0952C);
-            return ref _Handle.AsRef<int>(_ComponentOffset);
+            _ComponentOffset = _ComponentOffset ?? Schema.GetOffset(0x72531BAEBFD0952C);
+            return ref _Handle.AsRef<int>(_ComponentOffset!.Value);
         }
     }
 

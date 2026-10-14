@@ -16,29 +16,29 @@ internal partial class CTestPulseIO__FloatStringArgs_tImpl : SchemaClass, CTestP
 {
     public CTestPulseIO__FloatStringArgs_tImpl(nint handle) : base(handle) { }
 
-    private static nint _OutFloatOffset = -1;
+    private static nint? _OutFloatOffset;
 
     public ref float OutFloat
     {
         get
         {
-            if (_OutFloatOffset == -1) _OutFloatOffset = Schema.GetOffset(0xA77E2E5078AD32D9);
-            return ref _Handle.AsRef<float>(_OutFloatOffset);
+            _OutFloatOffset = _OutFloatOffset ?? Schema.GetOffset(0xA77E2E5078AD32D9);
+            return ref _Handle.AsRef<float>(_OutFloatOffset!.Value);
         }
     }
-    private static nint _StrOutStringOffset = -1;
+    private static nint? _StrOutStringOffset;
 
     public string StrOutString
     {
         get
         {
-            if (_StrOutStringOffset == -1) _StrOutStringOffset = Schema.GetOffset(0xA77E2E5098D585D5);
-            return Schema.GetString(_Handle.Read<nint>(_StrOutStringOffset));
+            _StrOutStringOffset = _StrOutStringOffset ?? Schema.GetOffset(0xA77E2E5098D585D5);
+            return Schema.GetString(_Handle.Read<nint>(_StrOutStringOffset!.Value));
         }
         set
         {
-            if (_StrOutStringOffset == -1) _StrOutStringOffset = Schema.GetOffset(0xA77E2E5098D585D5);
-            Schema.SetString(_Handle, _StrOutStringOffset, value);
+            _StrOutStringOffset = _StrOutStringOffset ?? Schema.GetOffset(0xA77E2E5098D585D5);
+            Schema.SetString(_Handle, _StrOutStringOffset!.Value, value);
         }
     }
 

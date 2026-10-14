@@ -16,59 +16,59 @@ internal partial class AI_MotorServices_DebugSnapshotData_tImpl : SchemaClass, A
 {
     public AI_MotorServices_DebugSnapshotData_tImpl(nint handle) : base(handle) { }
 
-    private static nint _Active_motorOffset = -1;
+    private static nint? _Active_motorOffset;
 
     public ref CGlobalSymbol Active_motor
     {
         get
         {
-            if (_Active_motorOffset == -1) _Active_motorOffset = Schema.GetOffset(0x2F154F3E555E08D9);
-            return ref _Handle.AsRef<CGlobalSymbol>(_Active_motorOffset);
+            _Active_motorOffset = _Active_motorOffset ?? Schema.GetOffset(0x2F154F3E555E08D9);
+            return ref _Handle.AsRef<CGlobalSymbol>(_Active_motorOffset!.Value);
         }
     }
-    private static nint _Desired_speedOffset = -1;
+    private static nint? _Desired_speedOffset;
 
     public ref float Desired_speed
     {
         get
         {
-            if (_Desired_speedOffset == -1) _Desired_speedOffset = Schema.GetOffset(0x2F154F3EA07C2D01);
-            return ref _Handle.AsRef<float>(_Desired_speedOffset);
+            _Desired_speedOffset = _Desired_speedOffset ?? Schema.GetOffset(0x2F154F3EA07C2D01);
+            return ref _Handle.AsRef<float>(_Desired_speedOffset!.Value);
         }
     }
-    private static nint _Motor_velocityOffset = -1;
+    private static nint? _Motor_velocityOffset;
 
     public ref Vector Motor_velocity
     {
         get
         {
-            if (_Motor_velocityOffset == -1) _Motor_velocityOffset = Schema.GetOffset(0x2F154F3E5078EDD0);
-            return ref _Handle.AsRef<Vector>(_Motor_velocityOffset);
+            _Motor_velocityOffset = _Motor_velocityOffset ?? Schema.GetOffset(0x2F154F3E5078EDD0);
+            return ref _Handle.AsRef<Vector>(_Motor_velocityOffset!.Value);
         }
     }
-    private static nint _Motor_pathOffset = -1;
+    private static nint? _Motor_pathOffset;
 
     public ref CUtlVector<AI_MotorServices_DebugSnapshotData_t__MotorPathWaypoint_t> Motor_path
     {
         get
         {
-            if (_Motor_pathOffset == -1) _Motor_pathOffset = Schema.GetOffset(0x2F154F3E1350FC40);
-            return ref _Handle.AsRef<CUtlVector<AI_MotorServices_DebugSnapshotData_t__MotorPathWaypoint_t>>(_Motor_pathOffset);
+            _Motor_pathOffset = _Motor_pathOffset ?? Schema.GetOffset(0x2F154F3E1350FC40);
+            return ref _Handle.AsRef<CUtlVector<AI_MotorServices_DebugSnapshotData_t__MotorPathWaypoint_t>>(_Motor_pathOffset!.Value);
         }
     }
-    private static nint _Ground_entity_debug_nameOffset = -1;
+    private static nint? _Ground_entity_debug_nameOffset;
 
     public string Ground_entity_debug_name
     {
         get
         {
-            if (_Ground_entity_debug_nameOffset == -1) _Ground_entity_debug_nameOffset = Schema.GetOffset(0x2F154F3E67B759BA);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_Ground_entity_debug_nameOffset));
+            _Ground_entity_debug_nameOffset = _Ground_entity_debug_nameOffset ?? Schema.GetOffset(0x2F154F3E67B759BA);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_Ground_entity_debug_nameOffset!.Value));
         }
         set
         {
-            if (_Ground_entity_debug_nameOffset == -1) _Ground_entity_debug_nameOffset = Schema.GetOffset(0x2F154F3E67B759BA);
-            Schema.SetCUtlString(_Handle, _Ground_entity_debug_nameOffset, value);
+            _Ground_entity_debug_nameOffset = _Ground_entity_debug_nameOffset ?? Schema.GetOffset(0x2F154F3E67B759BA);
+            Schema.SetCUtlString(_Handle, _Ground_entity_debug_nameOffset!.Value, value);
         }
     }
 

@@ -16,24 +16,24 @@ internal partial class LookAtBone_tImpl : SchemaClass, LookAtBone_t
 {
     public LookAtBone_tImpl(nint handle) : base(handle) { }
 
-    private static nint _IndexOffset = -1;
+    private static nint? _IndexOffset;
 
     public ref int Index
     {
         get
         {
-            if (_IndexOffset == -1) _IndexOffset = Schema.GetOffset(0x25E8B58A491963CB);
-            return ref _Handle.AsRef<int>(_IndexOffset);
+            _IndexOffset = _IndexOffset ?? Schema.GetOffset(0x25E8B58A491963CB);
+            return ref _Handle.AsRef<int>(_IndexOffset!.Value);
         }
     }
-    private static nint _WeightOffset = -1;
+    private static nint? _WeightOffset;
 
     public ref float Weight
     {
         get
         {
-            if (_WeightOffset == -1) _WeightOffset = Schema.GetOffset(0x25E8B58A07D0CD59);
-            return ref _Handle.AsRef<float>(_WeightOffset);
+            _WeightOffset = _WeightOffset ?? Schema.GetOffset(0x25E8B58A07D0CD59);
+            return ref _Handle.AsRef<float>(_WeightOffset!.Value);
         }
     }
 

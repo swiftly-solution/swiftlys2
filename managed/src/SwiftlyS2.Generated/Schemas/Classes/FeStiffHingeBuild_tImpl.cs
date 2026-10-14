@@ -16,49 +16,49 @@ internal partial class FeStiffHingeBuild_tImpl : SchemaClass, FeStiffHingeBuild_
 {
     public FeStiffHingeBuild_tImpl(nint handle) : base(handle) { }
 
-    private static nint _MaxAngleOffset = -1;
+    private static nint? _MaxAngleOffset;
 
     public ref float MaxAngle
     {
         get
         {
-            if (_MaxAngleOffset == -1) _MaxAngleOffset = Schema.GetOffset(0x41A81A5876FE0F8E);
-            return ref _Handle.AsRef<float>(_MaxAngleOffset);
+            _MaxAngleOffset = _MaxAngleOffset ?? Schema.GetOffset(0x41A81A5876FE0F8E);
+            return ref _Handle.AsRef<float>(_MaxAngleOffset!.Value);
         }
     }
-    private static nint _StrengthOffset = -1;
+    private static nint? _StrengthOffset;
 
     public ref float Strength
     {
         get
         {
-            if (_StrengthOffset == -1) _StrengthOffset = Schema.GetOffset(0x41A81A58AFA3323A);
-            return ref _Handle.AsRef<float>(_StrengthOffset);
+            _StrengthOffset = _StrengthOffset ?? Schema.GetOffset(0x41A81A58AFA3323A);
+            return ref _Handle.AsRef<float>(_StrengthOffset!.Value);
         }
     }
-    private static nint _MotionBiasOffset = -1;
+    private static nint? _MotionBiasOffset;
     private SchemaFixedArray<float>? _MotionBiasInstance;
 
     public ISchemaFixedArray<float> MotionBias
     {
         get
         {
-            if (_MotionBiasOffset == -1) _MotionBiasOffset = Schema.GetOffset(0x41A81A582CDDBF14);
+            _MotionBiasOffset = _MotionBiasOffset ?? Schema.GetOffset(0x41A81A582CDDBF14);
             var instance = _MotionBiasInstance ??= new SchemaFixedArray<float>(0, 0x41A81A582CDDBF14, 3, 4, 4);
-            instance.DangerousSetHandle(_Handle + _MotionBiasOffset);
+            instance.DangerousSetHandle(_Handle + _MotionBiasOffset!.Value);
             return instance;
         }
     }
-    private static nint _NodeOffset = -1;
+    private static nint? _NodeOffset;
     private SchemaFixedArray<ushort>? _NodeInstance;
 
     public ISchemaFixedArray<ushort> Node
     {
         get
         {
-            if (_NodeOffset == -1) _NodeOffset = Schema.GetOffset(0x41A81A58CD6694B9);
+            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0x41A81A58CD6694B9);
             var instance = _NodeInstance ??= new SchemaFixedArray<ushort>(0, 0x41A81A58CD6694B9, 3, 2, 2);
-            instance.DangerousSetHandle(_Handle + _NodeOffset);
+            instance.DangerousSetHandle(_Handle + _NodeOffset!.Value);
             return instance;
         }
     }

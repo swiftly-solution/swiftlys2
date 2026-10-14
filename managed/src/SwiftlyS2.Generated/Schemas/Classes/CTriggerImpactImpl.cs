@@ -16,46 +16,46 @@ internal partial class CTriggerImpactImpl : CTriggerMultipleImpl, CTriggerImpact
 {
     public CTriggerImpactImpl(nint handle) : base(handle) { }
 
-    private static nint _MagnitudeOffset = -1;
+    private static nint? _MagnitudeOffset;
 
     public ref float Magnitude
     {
         get
         {
-            if (_MagnitudeOffset == -1) _MagnitudeOffset = Schema.GetOffset(0x2A6A2B48ED0A1D8B);
-            return ref _Handle.AsRef<float>(_MagnitudeOffset);
+            _MagnitudeOffset = _MagnitudeOffset ?? Schema.GetOffset(0x2A6A2B48ED0A1D8B);
+            return ref _Handle.AsRef<float>(_MagnitudeOffset!.Value);
         }
     }
-    private static nint _NoiseOffset = -1;
+    private static nint? _NoiseOffset;
 
     public ref float Noise
     {
         get
         {
-            if (_NoiseOffset == -1) _NoiseOffset = Schema.GetOffset(0x2A6A2B48C0E47FDB);
-            return ref _Handle.AsRef<float>(_NoiseOffset);
+            _NoiseOffset = _NoiseOffset ?? Schema.GetOffset(0x2A6A2B48C0E47FDB);
+            return ref _Handle.AsRef<float>(_NoiseOffset!.Value);
         }
     }
-    private static nint _ViewkickOffset = -1;
+    private static nint? _ViewkickOffset;
 
     public ref float Viewkick
     {
         get
         {
-            if (_ViewkickOffset == -1) _ViewkickOffset = Schema.GetOffset(0x2A6A2B48C8BC3FC4);
-            return ref _Handle.AsRef<float>(_ViewkickOffset);
+            _ViewkickOffset = _ViewkickOffset ?? Schema.GetOffset(0x2A6A2B48C8BC3FC4);
+            return ref _Handle.AsRef<float>(_ViewkickOffset!.Value);
         }
     }
-    private static nint _OutputForceOffset = -1;
+    private static nint? _OutputForceOffset;
     private SchemaUntypedField? _OutputForceInstance;
 
     public SchemaUntypedField OutputForce
     {
         get
         {
-            if (_OutputForceOffset == -1) _OutputForceOffset = Schema.GetOffset(0x2A6A2B488653AFA9);
+            _OutputForceOffset = _OutputForceOffset ?? Schema.GetOffset(0x2A6A2B488653AFA9);
             var instance = _OutputForceInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OutputForceOffset);
+            instance.DangerousSetHandle(_Handle + _OutputForceOffset!.Value);
             return instance;
         }
     }

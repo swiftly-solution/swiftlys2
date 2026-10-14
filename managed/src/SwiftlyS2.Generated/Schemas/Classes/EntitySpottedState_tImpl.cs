@@ -16,26 +16,26 @@ internal partial class EntitySpottedState_tImpl : SchemaClass, EntitySpottedStat
 {
     public EntitySpottedState_tImpl(nint handle) : base(handle) { }
 
-    private static nint _SpottedOffset = -1;
+    private static nint? _SpottedOffset;
 
     public ref bool Spotted
     {
         get
         {
-            if (_SpottedOffset == -1) _SpottedOffset = Schema.GetOffset(0x6E33B0176DE4F1CA);
-            return ref _Handle.AsRef<bool>(_SpottedOffset);
+            _SpottedOffset = _SpottedOffset ?? Schema.GetOffset(0x6E33B0176DE4F1CA);
+            return ref _Handle.AsRef<bool>(_SpottedOffset!.Value);
         }
     }
-    private static nint _SpottedByMaskOffset = -1;
+    private static nint? _SpottedByMaskOffset;
     private SchemaFixedArray<uint>? _SpottedByMaskInstance;
 
     public ISchemaFixedArray<uint> SpottedByMask
     {
         get
         {
-            if (_SpottedByMaskOffset == -1) _SpottedByMaskOffset = Schema.GetOffset(0x6E33B0170BD77207);
+            _SpottedByMaskOffset = _SpottedByMaskOffset ?? Schema.GetOffset(0x6E33B0170BD77207);
             var instance = _SpottedByMaskInstance ??= new SchemaFixedArray<uint>(0, 0x6E33B0170BD77207, 2, 4, 4);
-            instance.DangerousSetHandle(_Handle + _SpottedByMaskOffset);
+            instance.DangerousSetHandle(_Handle + _SpottedByMaskOffset!.Value);
             return instance;
         }
     }

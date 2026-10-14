@@ -16,144 +16,144 @@ internal partial class C_fogplayerparams_tImpl : SchemaClass, C_fogplayerparams_
 {
     public C_fogplayerparams_tImpl(nint handle) : base(handle) { }
 
-    private static nint _CtrlOffset = -1;
+    private static nint? _CtrlOffset;
 
     public ref CHandle<C_FogController> Ctrl
     {
         get
         {
-            if (_CtrlOffset == -1) _CtrlOffset = Schema.GetOffset(0xD889C30934496C96);
-            return ref _Handle.AsRef<CHandle<C_FogController>>(_CtrlOffset);
+            _CtrlOffset = _CtrlOffset ?? Schema.GetOffset(0xD889C30934496C96);
+            return ref _Handle.AsRef<CHandle<C_FogController>>(_CtrlOffset!.Value);
         }
     }
-    private static nint _TransitionTimeOffset = -1;
+    private static nint? _TransitionTimeOffset;
 
     public ref float TransitionTime
     {
         get
         {
-            if (_TransitionTimeOffset == -1) _TransitionTimeOffset = Schema.GetOffset(0xD889C3098D4BFC39);
-            return ref _Handle.AsRef<float>(_TransitionTimeOffset);
+            _TransitionTimeOffset = _TransitionTimeOffset ?? Schema.GetOffset(0xD889C3098D4BFC39);
+            return ref _Handle.AsRef<float>(_TransitionTimeOffset!.Value);
         }
     }
-    private static nint _OldColorOffset = -1;
+    private static nint? _OldColorOffset;
 
     public ref Color OldColor
     {
         get
         {
-            if (_OldColorOffset == -1) _OldColorOffset = Schema.GetOffset(0xD889C3091F716E59);
-            return ref _Handle.AsRef<Color>(_OldColorOffset);
+            _OldColorOffset = _OldColorOffset ?? Schema.GetOffset(0xD889C3091F716E59);
+            return ref _Handle.AsRef<Color>(_OldColorOffset!.Value);
         }
     }
-    private static nint _OldStartOffset = -1;
+    private static nint? _OldStartOffset;
 
     public ref float OldStart
     {
         get
         {
-            if (_OldStartOffset == -1) _OldStartOffset = Schema.GetOffset(0xD889C3090740B77C);
-            return ref _Handle.AsRef<float>(_OldStartOffset);
+            _OldStartOffset = _OldStartOffset ?? Schema.GetOffset(0xD889C3090740B77C);
+            return ref _Handle.AsRef<float>(_OldStartOffset!.Value);
         }
     }
-    private static nint _OldEndOffset = -1;
+    private static nint? _OldEndOffset;
 
     public ref float OldEnd
     {
         get
         {
-            if (_OldEndOffset == -1) _OldEndOffset = Schema.GetOffset(0xD889C309EE04BB65);
-            return ref _Handle.AsRef<float>(_OldEndOffset);
+            _OldEndOffset = _OldEndOffset ?? Schema.GetOffset(0xD889C309EE04BB65);
+            return ref _Handle.AsRef<float>(_OldEndOffset!.Value);
         }
     }
-    private static nint _OldMaxDensityOffset = -1;
+    private static nint? _OldMaxDensityOffset;
 
     public ref float OldMaxDensity
     {
         get
         {
-            if (_OldMaxDensityOffset == -1) _OldMaxDensityOffset = Schema.GetOffset(0xD889C309A685F86A);
-            return ref _Handle.AsRef<float>(_OldMaxDensityOffset);
+            _OldMaxDensityOffset = _OldMaxDensityOffset ?? Schema.GetOffset(0xD889C309A685F86A);
+            return ref _Handle.AsRef<float>(_OldMaxDensityOffset!.Value);
         }
     }
-    private static nint _OldHDRColorScaleOffset = -1;
+    private static nint? _OldHDRColorScaleOffset;
 
     public ref float OldHDRColorScale
     {
         get
         {
-            if (_OldHDRColorScaleOffset == -1) _OldHDRColorScaleOffset = Schema.GetOffset(0xD889C3098E3D5ED1);
-            return ref _Handle.AsRef<float>(_OldHDRColorScaleOffset);
+            _OldHDRColorScaleOffset = _OldHDRColorScaleOffset ?? Schema.GetOffset(0xD889C3098E3D5ED1);
+            return ref _Handle.AsRef<float>(_OldHDRColorScaleOffset!.Value);
         }
     }
-    private static nint _OldFarZOffset = -1;
+    private static nint? _OldFarZOffset;
 
     public ref float OldFarZ
     {
         get
         {
-            if (_OldFarZOffset == -1) _OldFarZOffset = Schema.GetOffset(0xD889C309B28AACA1);
-            return ref _Handle.AsRef<float>(_OldFarZOffset);
+            _OldFarZOffset = _OldFarZOffset ?? Schema.GetOffset(0xD889C309B28AACA1);
+            return ref _Handle.AsRef<float>(_OldFarZOffset!.Value);
         }
     }
-    private static nint _NewColorOffset = -1;
+    private static nint? _NewColorOffset;
 
     public ref Color NewColor
     {
         get
         {
-            if (_NewColorOffset == -1) _NewColorOffset = Schema.GetOffset(0xD889C309855F3ED4);
-            return ref _Handle.AsRef<Color>(_NewColorOffset);
+            _NewColorOffset = _NewColorOffset ?? Schema.GetOffset(0xD889C309855F3ED4);
+            return ref _Handle.AsRef<Color>(_NewColorOffset!.Value);
         }
     }
-    private static nint _NewStartOffset = -1;
+    private static nint? _NewStartOffset;
 
     public ref float NewStart
     {
         get
         {
-            if (_NewStartOffset == -1) _NewStartOffset = Schema.GetOffset(0xD889C309FC7C3DE5);
-            return ref _Handle.AsRef<float>(_NewStartOffset);
+            _NewStartOffset = _NewStartOffset ?? Schema.GetOffset(0xD889C309FC7C3DE5);
+            return ref _Handle.AsRef<float>(_NewStartOffset!.Value);
         }
     }
-    private static nint _NewEndOffset = -1;
+    private static nint? _NewEndOffset;
 
     public ref float NewEnd
     {
         get
         {
-            if (_NewEndOffset == -1) _NewEndOffset = Schema.GetOffset(0xD889C30925D277DC);
-            return ref _Handle.AsRef<float>(_NewEndOffset);
+            _NewEndOffset = _NewEndOffset ?? Schema.GetOffset(0xD889C30925D277DC);
+            return ref _Handle.AsRef<float>(_NewEndOffset!.Value);
         }
     }
-    private static nint _NewMaxDensityOffset = -1;
+    private static nint? _NewMaxDensityOffset;
 
     public ref float NewMaxDensity
     {
         get
         {
-            if (_NewMaxDensityOffset == -1) _NewMaxDensityOffset = Schema.GetOffset(0xD889C3090EE45F19);
-            return ref _Handle.AsRef<float>(_NewMaxDensityOffset);
+            _NewMaxDensityOffset = _NewMaxDensityOffset ?? Schema.GetOffset(0xD889C3090EE45F19);
+            return ref _Handle.AsRef<float>(_NewMaxDensityOffset!.Value);
         }
     }
-    private static nint _NewHDRColorScaleOffset = -1;
+    private static nint? _NewHDRColorScaleOffset;
 
     public ref float NewHDRColorScale
     {
         get
         {
-            if (_NewHDRColorScaleOffset == -1) _NewHDRColorScaleOffset = Schema.GetOffset(0xD889C30970AAB448);
-            return ref _Handle.AsRef<float>(_NewHDRColorScaleOffset);
+            _NewHDRColorScaleOffset = _NewHDRColorScaleOffset ?? Schema.GetOffset(0xD889C30970AAB448);
+            return ref _Handle.AsRef<float>(_NewHDRColorScaleOffset!.Value);
         }
     }
-    private static nint _NewFarZOffset = -1;
+    private static nint? _NewFarZOffset;
 
     public ref float NewFarZ
     {
         get
         {
-            if (_NewFarZOffset == -1) _NewFarZOffset = Schema.GetOffset(0xD889C309DDA6CA3A);
-            return ref _Handle.AsRef<float>(_NewFarZOffset);
+            _NewFarZOffset = _NewFarZOffset ?? Schema.GetOffset(0xD889C309DDA6CA3A);
+            return ref _Handle.AsRef<float>(_NewFarZOffset!.Value);
         }
     }
 

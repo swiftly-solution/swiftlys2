@@ -16,16 +16,16 @@ internal partial class CAnimGraphDoc_GroupNodeImpl : CAnimGraphDoc_ContainerNode
 {
     public CAnimGraphDoc_GroupNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _NodeMgrOffset = -1;
+    private static nint? _NodeMgrOffset;
     private CAnimGraphDoc_NodeManagerImpl? _NodeMgrInstance;
 
     public CAnimGraphDoc_NodeManager NodeMgr
     {
         get
         {
-            if (_NodeMgrOffset == -1) _NodeMgrOffset = Schema.GetOffset(0x2E557F95C0781E95);
+            _NodeMgrOffset = _NodeMgrOffset ?? Schema.GetOffset(0x2E557F95C0781E95);
             var instance = _NodeMgrInstance ??= new CAnimGraphDoc_NodeManagerImpl(0);
-            instance.DangerousSetHandle(_Handle + _NodeMgrOffset);
+            instance.DangerousSetHandle(_Handle + _NodeMgrOffset!.Value);
             return instance;
         }
     }

@@ -16,57 +16,57 @@ internal partial class EventClientOutput_tImpl : SchemaClass, EventClientOutput_
 {
     public EventClientOutput_tImpl(nint handle) : base(handle) { }
 
-    private static nint _LoopStateOffset = -1;
+    private static nint? _LoopStateOffset;
     private EngineLoopState_tImpl? _LoopStateInstance;
 
     public EngineLoopState_t LoopState
     {
         get
         {
-            if (_LoopStateOffset == -1) _LoopStateOffset = Schema.GetOffset(0xDC610E16F928A2EC);
+            _LoopStateOffset = _LoopStateOffset ?? Schema.GetOffset(0xDC610E16F928A2EC);
             var instance = _LoopStateInstance ??= new EngineLoopState_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _LoopStateOffset);
+            instance.DangerousSetHandle(_Handle + _LoopStateOffset!.Value);
             return instance;
         }
     }
-    private static nint _RenderTimeOffset = -1;
+    private static nint? _RenderTimeOffset;
 
     public ref float RenderTime
     {
         get
         {
-            if (_RenderTimeOffset == -1) _RenderTimeOffset = Schema.GetOffset(0xDC610E163C2AE65A);
-            return ref _Handle.AsRef<float>(_RenderTimeOffset);
+            _RenderTimeOffset = _RenderTimeOffset ?? Schema.GetOffset(0xDC610E163C2AE65A);
+            return ref _Handle.AsRef<float>(_RenderTimeOffset!.Value);
         }
     }
-    private static nint _RealTimeOffset = -1;
+    private static nint? _RealTimeOffset;
 
     public ref float RealTime
     {
         get
         {
-            if (_RealTimeOffset == -1) _RealTimeOffset = Schema.GetOffset(0xDC610E161168EC02);
-            return ref _Handle.AsRef<float>(_RealTimeOffset);
+            _RealTimeOffset = _RealTimeOffset ?? Schema.GetOffset(0xDC610E161168EC02);
+            return ref _Handle.AsRef<float>(_RealTimeOffset!.Value);
         }
     }
-    private static nint _RenderFrameTimeUnboundedOffset = -1;
+    private static nint? _RenderFrameTimeUnboundedOffset;
 
     public ref float RenderFrameTimeUnbounded
     {
         get
         {
-            if (_RenderFrameTimeUnboundedOffset == -1) _RenderFrameTimeUnboundedOffset = Schema.GetOffset(0xDC610E16735692FF);
-            return ref _Handle.AsRef<float>(_RenderFrameTimeUnboundedOffset);
+            _RenderFrameTimeUnboundedOffset = _RenderFrameTimeUnboundedOffset ?? Schema.GetOffset(0xDC610E16735692FF);
+            return ref _Handle.AsRef<float>(_RenderFrameTimeUnboundedOffset!.Value);
         }
     }
-    private static nint _RenderOnlyOffset = -1;
+    private static nint? _RenderOnlyOffset;
 
     public ref bool RenderOnly
     {
         get
         {
-            if (_RenderOnlyOffset == -1) _RenderOnlyOffset = Schema.GetOffset(0xDC610E16E274559F);
-            return ref _Handle.AsRef<bool>(_RenderOnlyOffset);
+            _RenderOnlyOffset = _RenderOnlyOffset ?? Schema.GetOffset(0xDC610E16E274559F);
+            return ref _Handle.AsRef<bool>(_RenderOnlyOffset!.Value);
         }
     }
 

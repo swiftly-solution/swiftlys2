@@ -16,174 +16,174 @@ internal partial class CVtexImpl : SchemaClass, CVtex
 {
     public CVtexImpl(nint handle) : base(handle) { }
 
-    private static nint _InputTextureArrayOffset = -1;
+    private static nint? _InputTextureArrayOffset;
 
     public ref CUtlVector<CInputTexture> InputTextureArray
     {
         get
         {
-            if (_InputTextureArrayOffset == -1) _InputTextureArrayOffset = Schema.GetOffset(0x680C96BDD7C534AB);
-            return ref _Handle.AsRef<CUtlVector<CInputTexture>>(_InputTextureArrayOffset);
+            _InputTextureArrayOffset = _InputTextureArrayOffset ?? Schema.GetOffset(0x680C96BDD7C534AB);
+            return ref _Handle.AsRef<CUtlVector<CInputTexture>>(_InputTextureArrayOffset!.Value);
         }
     }
-    private static nint _OutputTypeStringOffset = -1;
+    private static nint? _OutputTypeStringOffset;
 
     public string OutputTypeString
     {
         get
         {
-            if (_OutputTypeStringOffset == -1) _OutputTypeStringOffset = Schema.GetOffset(0x680C96BD2F9844ED);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_OutputTypeStringOffset));
+            _OutputTypeStringOffset = _OutputTypeStringOffset ?? Schema.GetOffset(0x680C96BD2F9844ED);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_OutputTypeStringOffset!.Value));
         }
         set
         {
-            if (_OutputTypeStringOffset == -1) _OutputTypeStringOffset = Schema.GetOffset(0x680C96BD2F9844ED);
-            Schema.SetCUtlString(_Handle, _OutputTypeStringOffset, value);
+            _OutputTypeStringOffset = _OutputTypeStringOffset ?? Schema.GetOffset(0x680C96BD2F9844ED);
+            Schema.SetCUtlString(_Handle, _OutputTypeStringOffset!.Value, value);
         }
     }
-    private static nint _OutputFormatOffset = -1;
+    private static nint? _OutputFormatOffset;
 
     public string OutputFormat
     {
         get
         {
-            if (_OutputFormatOffset == -1) _OutputFormatOffset = Schema.GetOffset(0x680C96BDEDC865F7);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_OutputFormatOffset));
+            _OutputFormatOffset = _OutputFormatOffset ?? Schema.GetOffset(0x680C96BDEDC865F7);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_OutputFormatOffset!.Value));
         }
         set
         {
-            if (_OutputFormatOffset == -1) _OutputFormatOffset = Schema.GetOffset(0x680C96BDEDC865F7);
-            Schema.SetCUtlString(_Handle, _OutputFormatOffset, value);
+            _OutputFormatOffset = _OutputFormatOffset ?? Schema.GetOffset(0x680C96BDEDC865F7);
+            Schema.SetCUtlString(_Handle, _OutputFormatOffset!.Value, value);
         }
     }
-    private static nint _OutputClearColorOffset = -1;
+    private static nint? _OutputClearColorOffset;
 
     public ref Vector4D OutputClearColor
     {
         get
         {
-            if (_OutputClearColorOffset == -1) _OutputClearColorOffset = Schema.GetOffset(0x680C96BD93A1865C);
-            return ref _Handle.AsRef<Vector4D>(_OutputClearColorOffset);
+            _OutputClearColorOffset = _OutputClearColorOffset ?? Schema.GetOffset(0x680C96BD93A1865C);
+            return ref _Handle.AsRef<Vector4D>(_OutputClearColorOffset!.Value);
         }
     }
-    private static nint _OutputMinDimensionOffset = -1;
+    private static nint? _OutputMinDimensionOffset;
 
     public ref int OutputMinDimension
     {
         get
         {
-            if (_OutputMinDimensionOffset == -1) _OutputMinDimensionOffset = Schema.GetOffset(0x680C96BD682E9C08);
-            return ref _Handle.AsRef<int>(_OutputMinDimensionOffset);
+            _OutputMinDimensionOffset = _OutputMinDimensionOffset ?? Schema.GetOffset(0x680C96BD682E9C08);
+            return ref _Handle.AsRef<int>(_OutputMinDimensionOffset!.Value);
         }
     }
-    private static nint _OutputMaxDimensionOffset = -1;
+    private static nint? _OutputMaxDimensionOffset;
 
     public ref int OutputMaxDimension
     {
         get
         {
-            if (_OutputMaxDimensionOffset == -1) _OutputMaxDimensionOffset = Schema.GetOffset(0x680C96BD80FDB256);
-            return ref _Handle.AsRef<int>(_OutputMaxDimensionOffset);
+            _OutputMaxDimensionOffset = _OutputMaxDimensionOffset ?? Schema.GetOffset(0x680C96BD80FDB256);
+            return ref _Handle.AsRef<int>(_OutputMaxDimensionOffset!.Value);
         }
     }
-    private static nint _OutputDimensionReduceOffset = -1;
+    private static nint? _OutputDimensionReduceOffset;
 
     public ref int OutputDimensionReduce
     {
         get
         {
-            if (_OutputDimensionReduceOffset == -1) _OutputDimensionReduceOffset = Schema.GetOffset(0x680C96BD582AEFB2);
-            return ref _Handle.AsRef<int>(_OutputDimensionReduceOffset);
+            _OutputDimensionReduceOffset = _OutputDimensionReduceOffset ?? Schema.GetOffset(0x680C96BD582AEFB2);
+            return ref _Handle.AsRef<int>(_OutputDimensionReduceOffset!.Value);
         }
     }
-    private static nint _TextureOutputChannelArrayOffset = -1;
+    private static nint? _TextureOutputChannelArrayOffset;
 
     public ref CUtlVector<CTextureOutputChannel> TextureOutputChannelArray
     {
         get
         {
-            if (_TextureOutputChannelArrayOffset == -1) _TextureOutputChannelArrayOffset = Schema.GetOffset(0x680C96BD1B5A08CD);
-            return ref _Handle.AsRef<CUtlVector<CTextureOutputChannel>>(_TextureOutputChannelArrayOffset);
+            _TextureOutputChannelArrayOffset = _TextureOutputChannelArrayOffset ?? Schema.GetOffset(0x680C96BD1B5A08CD);
+            return ref _Handle.AsRef<CUtlVector<CTextureOutputChannel>>(_TextureOutputChannelArrayOffset!.Value);
         }
     }
-    private static nint _ClampOffset = -1;
+    private static nint? _ClampOffset;
 
     public ref Vector Clamp
     {
         get
         {
-            if (_ClampOffset == -1) _ClampOffset = Schema.GetOffset(0x680C96BDDB62BDE8);
-            return ref _Handle.AsRef<Vector>(_ClampOffset);
+            _ClampOffset = _ClampOffset ?? Schema.GetOffset(0x680C96BDDB62BDE8);
+            return ref _Handle.AsRef<Vector>(_ClampOffset!.Value);
         }
     }
-    private static nint _NoLodOffset = -1;
+    private static nint? _NoLodOffset;
 
     public ref bool NoLod
     {
         get
         {
-            if (_NoLodOffset == -1) _NoLodOffset = Schema.GetOffset(0x680C96BD0EFDC729);
-            return ref _Handle.AsRef<bool>(_NoLodOffset);
+            _NoLodOffset = _NoLodOffset ?? Schema.GetOffset(0x680C96BD0EFDC729);
+            return ref _Handle.AsRef<bool>(_NoLodOffset!.Value);
         }
     }
-    private static nint _HiddenAssetFlagOffset = -1;
+    private static nint? _HiddenAssetFlagOffset;
 
     public ref bool HiddenAssetFlag
     {
         get
         {
-            if (_HiddenAssetFlagOffset == -1) _HiddenAssetFlagOffset = Schema.GetOffset(0x680C96BDF2EF2D39);
-            return ref _Handle.AsRef<bool>(_HiddenAssetFlagOffset);
+            _HiddenAssetFlagOffset = _HiddenAssetFlagOffset ?? Schema.GetOffset(0x680C96BDF2EF2D39);
+            return ref _Handle.AsRef<bool>(_HiddenAssetFlagOffset!.Value);
         }
     }
-    private static nint _NormalizeRangeOffset = -1;
+    private static nint? _NormalizeRangeOffset;
 
     public ref bool NormalizeRange
     {
         get
         {
-            if (_NormalizeRangeOffset == -1) _NormalizeRangeOffset = Schema.GetOffset(0x680C96BDC6D44251);
-            return ref _Handle.AsRef<bool>(_NormalizeRangeOffset);
+            _NormalizeRangeOffset = _NormalizeRangeOffset ?? Schema.GetOffset(0x680C96BDC6D44251);
+            return ref _Handle.AsRef<bool>(_NormalizeRangeOffset!.Value);
         }
     }
-    private static nint _VirtualTextureOffset = -1;
+    private static nint? _VirtualTextureOffset;
 
     public ref bool VirtualTexture
     {
         get
         {
-            if (_VirtualTextureOffset == -1) _VirtualTextureOffset = Schema.GetOffset(0x680C96BD3A63B157);
-            return ref _Handle.AsRef<bool>(_VirtualTextureOffset);
+            _VirtualTextureOffset = _VirtualTextureOffset ?? Schema.GetOffset(0x680C96BD3A63B157);
+            return ref _Handle.AsRef<bool>(_VirtualTextureOffset!.Value);
         }
     }
-    private static nint _DisplayRectWidthOffset = -1;
+    private static nint? _DisplayRectWidthOffset;
 
     public ref int DisplayRectWidth
     {
         get
         {
-            if (_DisplayRectWidthOffset == -1) _DisplayRectWidthOffset = Schema.GetOffset(0x680C96BD9FCA954D);
-            return ref _Handle.AsRef<int>(_DisplayRectWidthOffset);
+            _DisplayRectWidthOffset = _DisplayRectWidthOffset ?? Schema.GetOffset(0x680C96BD9FCA954D);
+            return ref _Handle.AsRef<int>(_DisplayRectWidthOffset!.Value);
         }
     }
-    private static nint _DisplayRectHeightOffset = -1;
+    private static nint? _DisplayRectHeightOffset;
 
     public ref int DisplayRectHeight
     {
         get
         {
-            if (_DisplayRectHeightOffset == -1) _DisplayRectHeightOffset = Schema.GetOffset(0x680C96BD6CAA9724);
-            return ref _Handle.AsRef<int>(_DisplayRectHeightOffset);
+            _DisplayRectHeightOffset = _DisplayRectHeightOffset ?? Schema.GetOffset(0x680C96BD6CAA9724);
+            return ref _Handle.AsRef<int>(_DisplayRectHeightOffset!.Value);
         }
     }
-    private static nint _MotionVectorsMaxDistanceInPixelsOffset = -1;
+    private static nint? _MotionVectorsMaxDistanceInPixelsOffset;
 
     public ref int MotionVectorsMaxDistanceInPixels
     {
         get
         {
-            if (_MotionVectorsMaxDistanceInPixelsOffset == -1) _MotionVectorsMaxDistanceInPixelsOffset = Schema.GetOffset(0x680C96BDA5EF3C54);
-            return ref _Handle.AsRef<int>(_MotionVectorsMaxDistanceInPixelsOffset);
+            _MotionVectorsMaxDistanceInPixelsOffset = _MotionVectorsMaxDistanceInPixelsOffset ?? Schema.GetOffset(0x680C96BDA5EF3C54);
+            return ref _Handle.AsRef<int>(_MotionVectorsMaxDistanceInPixelsOffset!.Value);
         }
     }
 

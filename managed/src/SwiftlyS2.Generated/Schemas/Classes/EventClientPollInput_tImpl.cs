@@ -16,27 +16,27 @@ internal partial class EventClientPollInput_tImpl : SchemaClass, EventClientPoll
 {
     public EventClientPollInput_tImpl(nint handle) : base(handle) { }
 
-    private static nint _LoopStateOffset = -1;
+    private static nint? _LoopStateOffset;
     private EngineLoopState_tImpl? _LoopStateInstance;
 
     public EngineLoopState_t LoopState
     {
         get
         {
-            if (_LoopStateOffset == -1) _LoopStateOffset = Schema.GetOffset(0x1E8649A0F928A2EC);
+            _LoopStateOffset = _LoopStateOffset ?? Schema.GetOffset(0x1E8649A0F928A2EC);
             var instance = _LoopStateInstance ??= new EngineLoopState_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _LoopStateOffset);
+            instance.DangerousSetHandle(_Handle + _LoopStateOffset!.Value);
             return instance;
         }
     }
-    private static nint _RealTimeOffset = -1;
+    private static nint? _RealTimeOffset;
 
     public ref float RealTime
     {
         get
         {
-            if (_RealTimeOffset == -1) _RealTimeOffset = Schema.GetOffset(0x1E8649A01168EC02);
-            return ref _Handle.AsRef<float>(_RealTimeOffset);
+            _RealTimeOffset = _RealTimeOffset ?? Schema.GetOffset(0x1E8649A01168EC02);
+            return ref _Handle.AsRef<float>(_RealTimeOffset!.Value);
         }
     }
 

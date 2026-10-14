@@ -16,54 +16,54 @@ internal partial class CBasePlatTrainImpl : CBaseToggleImpl, CBasePlatTrain
 {
     public CBasePlatTrainImpl(nint handle) : base(handle) { }
 
-    private static nint _NoiseMovingOffset = -1;
+    private static nint? _NoiseMovingOffset;
 
     public ref CGameSoundEventName NoiseMoving
     {
         get
         {
-            if (_NoiseMovingOffset == -1) _NoiseMovingOffset = Schema.GetOffset(0x78773ABC415AB84B);
-            return ref _Handle.AsRef<CGameSoundEventName>(_NoiseMovingOffset);
+            _NoiseMovingOffset = _NoiseMovingOffset ?? Schema.GetOffset(0x78773ABC415AB84B);
+            return ref _Handle.AsRef<CGameSoundEventName>(_NoiseMovingOffset!.Value);
         }
     }
-    private static nint _NoiseArrivedOffset = -1;
+    private static nint? _NoiseArrivedOffset;
 
     public ref CGameSoundEventName NoiseArrived
     {
         get
         {
-            if (_NoiseArrivedOffset == -1) _NoiseArrivedOffset = Schema.GetOffset(0x78773ABCD2CDE47A);
-            return ref _Handle.AsRef<CGameSoundEventName>(_NoiseArrivedOffset);
+            _NoiseArrivedOffset = _NoiseArrivedOffset ?? Schema.GetOffset(0x78773ABCD2CDE47A);
+            return ref _Handle.AsRef<CGameSoundEventName>(_NoiseArrivedOffset!.Value);
         }
     }
-    private static nint _VolumeOffset = -1;
+    private static nint? _VolumeOffset;
 
     public ref float Volume
     {
         get
         {
-            if (_VolumeOffset == -1) _VolumeOffset = Schema.GetOffset(0x78773ABCE3962F2F);
-            return ref _Handle.AsRef<float>(_VolumeOffset);
+            _VolumeOffset = _VolumeOffset ?? Schema.GetOffset(0x78773ABCE3962F2F);
+            return ref _Handle.AsRef<float>(_VolumeOffset!.Value);
         }
     }
-    private static nint _TWidthOffset = -1;
+    private static nint? _TWidthOffset;
 
     public ref float TWidth
     {
         get
         {
-            if (_TWidthOffset == -1) _TWidthOffset = Schema.GetOffset(0x78773ABCADF5A64B);
-            return ref _Handle.AsRef<float>(_TWidthOffset);
+            _TWidthOffset = _TWidthOffset ?? Schema.GetOffset(0x78773ABCADF5A64B);
+            return ref _Handle.AsRef<float>(_TWidthOffset!.Value);
         }
     }
-    private static nint _TLengthOffset = -1;
+    private static nint? _TLengthOffset;
 
     public ref float TLength
     {
         get
         {
-            if (_TLengthOffset == -1) _TLengthOffset = Schema.GetOffset(0x78773ABCA72CEC99);
-            return ref _Handle.AsRef<float>(_TLengthOffset);
+            _TLengthOffset = _TLengthOffset ?? Schema.GetOffset(0x78773ABCA72CEC99);
+            return ref _Handle.AsRef<float>(_TLengthOffset!.Value);
         }
     }
 

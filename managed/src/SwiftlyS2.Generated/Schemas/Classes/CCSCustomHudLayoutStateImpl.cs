@@ -16,44 +16,44 @@ internal partial class CCSCustomHudLayoutStateImpl : SchemaClass, CCSCustomHudLa
 {
     public CCSCustomHudLayoutStateImpl(nint handle) : base(handle) { }
 
-    private static nint _PlayerSlotOffset = -1;
+    private static nint? _PlayerSlotOffset;
 
     public ref uint PlayerSlot
     {
         get
         {
-            if (_PlayerSlotOffset == -1) _PlayerSlotOffset = Schema.GetOffset(0xC8CB4BDBD54E4C0C);
-            return ref _Handle.AsRef<uint>(_PlayerSlotOffset);
+            _PlayerSlotOffset = _PlayerSlotOffset ?? Schema.GetOffset(0xC8CB4BDBD54E4C0C);
+            return ref _Handle.AsRef<uint>(_PlayerSlotOffset!.Value);
         }
     }
-    private static nint _InputCaptureEnabledOffset = -1;
+    private static nint? _InputCaptureEnabledOffset;
 
     public ref bool InputCaptureEnabled
     {
         get
         {
-            if (_InputCaptureEnabledOffset == -1) _InputCaptureEnabledOffset = Schema.GetOffset(0xC8CB4BDBF80CC158);
-            return ref _Handle.AsRef<bool>(_InputCaptureEnabledOffset);
+            _InputCaptureEnabledOffset = _InputCaptureEnabledOffset ?? Schema.GetOffset(0xC8CB4BDBF80CC158);
+            return ref _Handle.AsRef<bool>(_InputCaptureEnabledOffset!.Value);
         }
     }
-    private static nint _HasClassesOffset = -1;
+    private static nint? _HasClassesOffset;
 
     public ref CUtlVector<HUDPanelHasClass_t> HasClasses
     {
         get
         {
-            if (_HasClassesOffset == -1) _HasClassesOffset = Schema.GetOffset(0xC8CB4BDB7B9A58B9);
-            return ref _Handle.AsRef<CUtlVector<HUDPanelHasClass_t>>(_HasClassesOffset);
+            _HasClassesOffset = _HasClassesOffset ?? Schema.GetOffset(0xC8CB4BDB7B9A58B9);
+            return ref _Handle.AsRef<CUtlVector<HUDPanelHasClass_t>>(_HasClassesOffset!.Value);
         }
     }
-    private static nint _DialogVariableStringsOffset = -1;
+    private static nint? _DialogVariableStringsOffset;
 
     public ref CUtlVector<HUDPanelDialogVariableString_t> DialogVariableStrings
     {
         get
         {
-            if (_DialogVariableStringsOffset == -1) _DialogVariableStringsOffset = Schema.GetOffset(0xC8CB4BDB3A14E7FD);
-            return ref _Handle.AsRef<CUtlVector<HUDPanelDialogVariableString_t>>(_DialogVariableStringsOffset);
+            _DialogVariableStringsOffset = _DialogVariableStringsOffset ?? Schema.GetOffset(0xC8CB4BDB3A14E7FD);
+            return ref _Handle.AsRef<CUtlVector<HUDPanelDialogVariableString_t>>(_DialogVariableStringsOffset!.Value);
         }
     }
 

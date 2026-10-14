@@ -16,67 +16,67 @@ internal partial class CNmGraphDocDataDictionary__Parameter_tImpl : SchemaClass,
 {
     public CNmGraphDocDataDictionary__Parameter_tImpl(nint handle) : base(handle) { }
 
-    private static nint _IDOffset = -1;
+    private static nint? _IDOffset;
     private SchemaUntypedField? _IDInstance;
 
     public SchemaUntypedField ID
     {
         get
         {
-            if (_IDOffset == -1) _IDOffset = Schema.GetOffset(0x5C25A7CF95066900);
+            _IDOffset = _IDOffset ?? Schema.GetOffset(0x5C25A7CF95066900);
             var instance = _IDInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _IDOffset);
+            instance.DangerousSetHandle(_Handle + _IDOffset!.Value);
             return instance;
         }
     }
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x5C25A7CF4D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x5C25A7CF4D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x5C25A7CF4D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x5C25A7CF4D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _GroupNameOffset = -1;
+    private static nint? _GroupNameOffset;
 
     public string GroupName
     {
         get
         {
-            if (_GroupNameOffset == -1) _GroupNameOffset = Schema.GetOffset(0x5C25A7CF025FB2C7);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_GroupNameOffset));
+            _GroupNameOffset = _GroupNameOffset ?? Schema.GetOffset(0x5C25A7CF025FB2C7);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_GroupNameOffset!.Value));
         }
         set
         {
-            if (_GroupNameOffset == -1) _GroupNameOffset = Schema.GetOffset(0x5C25A7CF025FB2C7);
-            Schema.SetCUtlString(_Handle, _GroupNameOffset, value);
+            _GroupNameOffset = _GroupNameOffset ?? Schema.GetOffset(0x5C25A7CF025FB2C7);
+            Schema.SetCUtlString(_Handle, _GroupNameOffset!.Value, value);
         }
     }
-    private static nint _ValueTypeOffset = -1;
+    private static nint? _ValueTypeOffset;
 
     public ref NmGraphValueType_t ValueType
     {
         get
         {
-            if (_ValueTypeOffset == -1) _ValueTypeOffset = Schema.GetOffset(0x5C25A7CF9230252A);
-            return ref _Handle.AsRef<NmGraphValueType_t>(_ValueTypeOffset);
+            _ValueTypeOffset = _ValueTypeOffset ?? Schema.GetOffset(0x5C25A7CF9230252A);
+            return ref _Handle.AsRef<NmGraphValueType_t>(_ValueTypeOffset!.Value);
         }
     }
-    private static nint _ExpectedValuesOffset = -1;
+    private static nint? _ExpectedValuesOffset;
 
     public ref CUtlVector<CGlobalSymbol> ExpectedValues
     {
         get
         {
-            if (_ExpectedValuesOffset == -1) _ExpectedValuesOffset = Schema.GetOffset(0x5C25A7CF1808890F);
-            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_ExpectedValuesOffset);
+            _ExpectedValuesOffset = _ExpectedValuesOffset ?? Schema.GetOffset(0x5C25A7CF1808890F);
+            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_ExpectedValuesOffset!.Value);
         }
     }
 

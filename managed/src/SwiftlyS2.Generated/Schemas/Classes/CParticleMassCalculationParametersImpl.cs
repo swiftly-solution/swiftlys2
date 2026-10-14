@@ -16,52 +16,52 @@ internal partial class CParticleMassCalculationParametersImpl : SchemaClass, CPa
 {
     public CParticleMassCalculationParametersImpl(nint handle) : base(handle) { }
 
-    private static nint _MassModeOffset = -1;
+    private static nint? _MassModeOffset;
 
     public ref ParticleMassMode_t MassMode
     {
         get
         {
-            if (_MassModeOffset == -1) _MassModeOffset = Schema.GetOffset(0xAA3341F9D5B6E412);
-            return ref _Handle.AsRef<ParticleMassMode_t>(_MassModeOffset);
+            _MassModeOffset = _MassModeOffset ?? Schema.GetOffset(0xAA3341F9D5B6E412);
+            return ref _Handle.AsRef<ParticleMassMode_t>(_MassModeOffset!.Value);
         }
     }
-    private static nint _RadiusOffset = -1;
+    private static nint? _RadiusOffset;
     private CPerParticleFloatInputImpl? _RadiusInstance;
 
     public CPerParticleFloatInput Radius
     {
         get
         {
-            if (_RadiusOffset == -1) _RadiusOffset = Schema.GetOffset(0xAA3341F95ACFC08D);
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0xAA3341F95ACFC08D);
             var instance = _RadiusInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _RadiusOffset);
+            instance.DangerousSetHandle(_Handle + _RadiusOffset!.Value);
             return instance;
         }
     }
-    private static nint _NominalRadiusOffset = -1;
+    private static nint? _NominalRadiusOffset;
     private CPerParticleFloatInputImpl? _NominalRadiusInstance;
 
     public CPerParticleFloatInput NominalRadius
     {
         get
         {
-            if (_NominalRadiusOffset == -1) _NominalRadiusOffset = Schema.GetOffset(0xAA3341F9B6692A73);
+            _NominalRadiusOffset = _NominalRadiusOffset ?? Schema.GetOffset(0xAA3341F9B6692A73);
             var instance = _NominalRadiusInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _NominalRadiusOffset);
+            instance.DangerousSetHandle(_Handle + _NominalRadiusOffset!.Value);
             return instance;
         }
     }
-    private static nint _ScaleOffset = -1;
+    private static nint? _ScaleOffset;
     private CPerParticleFloatInputImpl? _ScaleInstance;
 
     public CPerParticleFloatInput Scale
     {
         get
         {
-            if (_ScaleOffset == -1) _ScaleOffset = Schema.GetOffset(0xAA3341F9B731A42F);
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0xAA3341F9B731A42F);
             var instance = _ScaleInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _ScaleOffset);
+            instance.DangerousSetHandle(_Handle + _ScaleOffset!.Value);
             return instance;
         }
     }

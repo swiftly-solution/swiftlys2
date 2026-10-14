@@ -16,64 +16,64 @@ internal partial class C_INIT_CreateFromParentParticlesImpl : CParticleFunctionI
 {
     public C_INIT_CreateFromParentParticlesImpl(nint handle) : base(handle) { }
 
-    private static nint _VelocityScaleOffset = -1;
+    private static nint? _VelocityScaleOffset;
 
     public ref float VelocityScale
     {
         get
         {
-            if (_VelocityScaleOffset == -1) _VelocityScaleOffset = Schema.GetOffset(0x4AEA47CDE161DDAA);
-            return ref _Handle.AsRef<float>(_VelocityScaleOffset);
+            _VelocityScaleOffset = _VelocityScaleOffset ?? Schema.GetOffset(0x4AEA47CDE161DDAA);
+            return ref _Handle.AsRef<float>(_VelocityScaleOffset!.Value);
         }
     }
-    private static nint _IncrementOffset = -1;
+    private static nint? _IncrementOffset;
 
     public ref float Increment
     {
         get
         {
-            if (_IncrementOffset == -1) _IncrementOffset = Schema.GetOffset(0x4AEA47CDB3721674);
-            return ref _Handle.AsRef<float>(_IncrementOffset);
+            _IncrementOffset = _IncrementOffset ?? Schema.GetOffset(0x4AEA47CDB3721674);
+            return ref _Handle.AsRef<float>(_IncrementOffset!.Value);
         }
     }
-    private static nint _RandomDistributionOffset = -1;
+    private static nint? _RandomDistributionOffset;
 
     public ref bool RandomDistribution
     {
         get
         {
-            if (_RandomDistributionOffset == -1) _RandomDistributionOffset = Schema.GetOffset(0x4AEA47CD830F6B38);
-            return ref _Handle.AsRef<bool>(_RandomDistributionOffset);
+            _RandomDistributionOffset = _RandomDistributionOffset ?? Schema.GetOffset(0x4AEA47CD830F6B38);
+            return ref _Handle.AsRef<bool>(_RandomDistributionOffset!.Value);
         }
     }
-    private static nint _RandomSeedOffset = -1;
+    private static nint? _RandomSeedOffset;
 
     public ref int RandomSeed
     {
         get
         {
-            if (_RandomSeedOffset == -1) _RandomSeedOffset = Schema.GetOffset(0x4AEA47CD6388F067);
-            return ref _Handle.AsRef<int>(_RandomSeedOffset);
+            _RandomSeedOffset = _RandomSeedOffset ?? Schema.GetOffset(0x4AEA47CD6388F067);
+            return ref _Handle.AsRef<int>(_RandomSeedOffset!.Value);
         }
     }
-    private static nint _SubFrameOffset = -1;
+    private static nint? _SubFrameOffset;
 
     public ref bool SubFrame
     {
         get
         {
-            if (_SubFrameOffset == -1) _SubFrameOffset = Schema.GetOffset(0x4AEA47CD1BAEEAF6);
-            return ref _Handle.AsRef<bool>(_SubFrameOffset);
+            _SubFrameOffset = _SubFrameOffset ?? Schema.GetOffset(0x4AEA47CD1BAEEAF6);
+            return ref _Handle.AsRef<bool>(_SubFrameOffset!.Value);
         }
     }
-    private static nint _SetRopeSegmentIDOffset = -1;
+    private static nint? _SetRopeSegmentIDOffset;
 
     public ref bool SetRopeSegmentID
     {
         get
         {
-            if (_SetRopeSegmentIDOffset == -1) _SetRopeSegmentIDOffset = Schema.GetOffset(0x4AEA47CDAEFC2399);
-            return ref _Handle.AsRef<bool>(_SetRopeSegmentIDOffset);
+            _SetRopeSegmentIDOffset = _SetRopeSegmentIDOffset ?? Schema.GetOffset(0x4AEA47CDAEFC2399);
+            return ref _Handle.AsRef<bool>(_SetRopeSegmentIDOffset!.Value);
         }
     }
 

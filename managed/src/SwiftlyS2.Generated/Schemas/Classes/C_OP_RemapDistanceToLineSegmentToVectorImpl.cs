@@ -16,37 +16,37 @@ internal partial class C_OP_RemapDistanceToLineSegmentToVectorImpl : C_OP_RemapD
 {
     public C_OP_RemapDistanceToLineSegmentToVectorImpl(nint handle) : base(handle) { }
 
-    private static nint _FieldOutputOffset = -1;
+    private static nint? _FieldOutputOffset;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0xF88068A9E5729606);
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0xF88068A9E5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
             return instance;
         }
     }
-    private static nint _MinOutputValueOffset = -1;
+    private static nint? _MinOutputValueOffset;
 
     public ref Vector MinOutputValue
     {
         get
         {
-            if (_MinOutputValueOffset == -1) _MinOutputValueOffset = Schema.GetOffset(0xF88068A94BF7BCBF);
-            return ref _Handle.AsRef<Vector>(_MinOutputValueOffset);
+            _MinOutputValueOffset = _MinOutputValueOffset ?? Schema.GetOffset(0xF88068A94BF7BCBF);
+            return ref _Handle.AsRef<Vector>(_MinOutputValueOffset!.Value);
         }
     }
-    private static nint _MaxOutputValueOffset = -1;
+    private static nint? _MaxOutputValueOffset;
 
     public ref Vector MaxOutputValue
     {
         get
         {
-            if (_MaxOutputValueOffset == -1) _MaxOutputValueOffset = Schema.GetOffset(0xF88068A9A7A69BC5);
-            return ref _Handle.AsRef<Vector>(_MaxOutputValueOffset);
+            _MaxOutputValueOffset = _MaxOutputValueOffset ?? Schema.GetOffset(0xF88068A9A7A69BC5);
+            return ref _Handle.AsRef<Vector>(_MaxOutputValueOffset!.Value);
         }
     }
 

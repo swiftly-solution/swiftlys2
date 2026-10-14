@@ -16,24 +16,24 @@ internal partial class CNmGraphDocIDBasedSelectorNodeImpl : CNmGraphDocFlowNodeI
 {
     public CNmGraphDocIDBasedSelectorNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _OptionLabelsOffset = -1;
+    private static nint? _OptionLabelsOffset;
 
     public ref CUtlVector<CUtlString> OptionLabels
     {
         get
         {
-            if (_OptionLabelsOffset == -1) _OptionLabelsOffset = Schema.GetOffset(0xC0420092D071C433);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_OptionLabelsOffset);
+            _OptionLabelsOffset = _OptionLabelsOffset ?? Schema.GetOffset(0xC0420092D071C433);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_OptionLabelsOffset!.Value);
         }
     }
-    private static nint _IgnoreInvalidOptionsOffset = -1;
+    private static nint? _IgnoreInvalidOptionsOffset;
 
     public ref bool IgnoreInvalidOptions
     {
         get
         {
-            if (_IgnoreInvalidOptionsOffset == -1) _IgnoreInvalidOptionsOffset = Schema.GetOffset(0xC0420092507C679C);
-            return ref _Handle.AsRef<bool>(_IgnoreInvalidOptionsOffset);
+            _IgnoreInvalidOptionsOffset = _IgnoreInvalidOptionsOffset ?? Schema.GetOffset(0xC0420092507C679C);
+            return ref _Handle.AsRef<bool>(_IgnoreInvalidOptionsOffset!.Value);
         }
     }
 

@@ -16,77 +16,77 @@ internal partial class ParticleControlPointDriver_tImpl : SchemaClass, ParticleC
 {
     public ParticleControlPointDriver_tImpl(nint handle) : base(handle) { }
 
-    private static nint _ControlPointOffset = -1;
+    private static nint? _ControlPointOffset;
     private SchemaUntypedField? _ControlPointInstance;
 
     public SchemaUntypedField ControlPoint
     {
         get
         {
-            if (_ControlPointOffset == -1) _ControlPointOffset = Schema.GetOffset(0xB7C66843E9EC8FF5);
+            _ControlPointOffset = _ControlPointOffset ?? Schema.GetOffset(0xB7C66843E9EC8FF5);
             var instance = _ControlPointInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ControlPointOffset);
+            instance.DangerousSetHandle(_Handle + _ControlPointOffset!.Value);
             return instance;
         }
     }
-    private static nint _AttachTypeOffset = -1;
+    private static nint? _AttachTypeOffset;
 
     public ref ParticleAttachment_t AttachType
     {
         get
         {
-            if (_AttachTypeOffset == -1) _AttachTypeOffset = Schema.GetOffset(0xB7C66843432E8381);
-            return ref _Handle.AsRef<ParticleAttachment_t>(_AttachTypeOffset);
+            _AttachTypeOffset = _AttachTypeOffset ?? Schema.GetOffset(0xB7C66843432E8381);
+            return ref _Handle.AsRef<ParticleAttachment_t>(_AttachTypeOffset!.Value);
         }
     }
-    private static nint _AttachmentNameOffset = -1;
+    private static nint? _AttachmentNameOffset;
 
     public string AttachmentName
     {
         get
         {
-            if (_AttachmentNameOffset == -1) _AttachmentNameOffset = Schema.GetOffset(0xB7C66843295DA9CB);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_AttachmentNameOffset));
+            _AttachmentNameOffset = _AttachmentNameOffset ?? Schema.GetOffset(0xB7C66843295DA9CB);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_AttachmentNameOffset!.Value));
         }
         set
         {
-            if (_AttachmentNameOffset == -1) _AttachmentNameOffset = Schema.GetOffset(0xB7C66843295DA9CB);
-            Schema.SetCUtlString(_Handle, _AttachmentNameOffset, value);
+            _AttachmentNameOffset = _AttachmentNameOffset ?? Schema.GetOffset(0xB7C66843295DA9CB);
+            Schema.SetCUtlString(_Handle, _AttachmentNameOffset!.Value, value);
         }
     }
-    private static nint _OffsetOffset = -1;
+    private static nint? _OffsetOffset;
 
     public ref Vector Offset
     {
         get
         {
-            if (_OffsetOffset == -1) _OffsetOffset = Schema.GetOffset(0xB7C66843BD25CC2A);
-            return ref _Handle.AsRef<Vector>(_OffsetOffset);
+            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0xB7C66843BD25CC2A);
+            return ref _Handle.AsRef<Vector>(_OffsetOffset!.Value);
         }
     }
-    private static nint _Offset1Offset = -1;
+    private static nint? _Offset1Offset;
 
     public ref QAngle Offset1
     {
         get
         {
-            if (_Offset1Offset == -1) _Offset1Offset = Schema.GetOffset(0xB7C6684346F6B3C0);
-            return ref _Handle.AsRef<QAngle>(_Offset1Offset);
+            _Offset1Offset = _Offset1Offset ?? Schema.GetOffset(0xB7C6684346F6B3C0);
+            return ref _Handle.AsRef<QAngle>(_Offset1Offset!.Value);
         }
     }
-    private static nint _EntityNameOffset = -1;
+    private static nint? _EntityNameOffset;
 
     public string EntityName
     {
         get
         {
-            if (_EntityNameOffset == -1) _EntityNameOffset = Schema.GetOffset(0xB7C6684380D1D3E1);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_EntityNameOffset));
+            _EntityNameOffset = _EntityNameOffset ?? Schema.GetOffset(0xB7C6684380D1D3E1);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_EntityNameOffset!.Value));
         }
         set
         {
-            if (_EntityNameOffset == -1) _EntityNameOffset = Schema.GetOffset(0xB7C6684380D1D3E1);
-            Schema.SetCUtlString(_Handle, _EntityNameOffset, value);
+            _EntityNameOffset = _EntityNameOffset ?? Schema.GetOffset(0xB7C6684380D1D3E1);
+            Schema.SetCUtlString(_Handle, _EntityNameOffset!.Value, value);
         }
     }
 

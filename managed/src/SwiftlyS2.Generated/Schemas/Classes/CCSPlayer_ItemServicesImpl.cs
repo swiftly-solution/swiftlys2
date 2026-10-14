@@ -16,24 +16,24 @@ internal partial class CCSPlayer_ItemServicesImpl : CPlayer_ItemServicesImpl, CC
 {
     public CCSPlayer_ItemServicesImpl(nint handle) : base(handle) { }
 
-    private static nint _HasDefuserOffset = -1;
+    private static nint? _HasDefuserOffset;
 
     public ref bool HasDefuser
     {
         get
         {
-            if (_HasDefuserOffset == -1) _HasDefuserOffset = Schema.GetOffset(0x6BB85EAD5AF87AF5);
-            return ref _Handle.AsRef<bool>(_HasDefuserOffset);
+            _HasDefuserOffset = _HasDefuserOffset ?? Schema.GetOffset(0x6BB85EAD5AF87AF5);
+            return ref _Handle.AsRef<bool>(_HasDefuserOffset!.Value);
         }
     }
-    private static nint _HasHelmetOffset = -1;
+    private static nint? _HasHelmetOffset;
 
     public ref bool HasHelmet
     {
         get
         {
-            if (_HasHelmetOffset == -1) _HasHelmetOffset = Schema.GetOffset(0x6BB85EAD4240B6F6);
-            return ref _Handle.AsRef<bool>(_HasHelmetOffset);
+            _HasHelmetOffset = _HasHelmetOffset ?? Schema.GetOffset(0x6BB85EAD4240B6F6);
+            return ref _Handle.AsRef<bool>(_HasHelmetOffset!.Value);
         }
     }
 

@@ -16,94 +16,94 @@ internal partial class ColorOptionsEditableData_tImpl : SchemaClass, ColorOption
 {
     public ColorOptionsEditableData_tImpl(nint handle) : base(handle) { }
 
-    private static nint _UseCustomOffset = -1;
+    private static nint? _UseCustomOffset;
 
     public ref bool UseCustom
     {
         get
         {
-            if (_UseCustomOffset == -1) _UseCustomOffset = Schema.GetOffset(0xFCEB3C85E981BE2F);
-            return ref _Handle.AsRef<bool>(_UseCustomOffset);
+            _UseCustomOffset = _UseCustomOffset ?? Schema.GetOffset(0xFCEB3C85E981BE2F);
+            return ref _Handle.AsRef<bool>(_UseCustomOffset!.Value);
         }
     }
-    private static nint _WhiteOnBlackOffset = -1;
+    private static nint? _WhiteOnBlackOffset;
 
     public ref bool WhiteOnBlack
     {
         get
         {
-            if (_WhiteOnBlackOffset == -1) _WhiteOnBlackOffset = Schema.GetOffset(0xFCEB3C8573559566);
-            return ref _Handle.AsRef<bool>(_WhiteOnBlackOffset);
+            _WhiteOnBlackOffset = _WhiteOnBlackOffset ?? Schema.GetOffset(0xFCEB3C8573559566);
+            return ref _Handle.AsRef<bool>(_WhiteOnBlackOffset!.Value);
         }
     }
-    private static nint _GridOffset = -1;
+    private static nint? _GridOffset;
 
     public ref Color Grid
     {
         get
         {
-            if (_GridOffset == -1) _GridOffset = Schema.GetOffset(0xFCEB3C85D7AA25D8);
-            return ref _Handle.AsRef<Color>(_GridOffset);
+            _GridOffset = _GridOffset ?? Schema.GetOffset(0xFCEB3C85D7AA25D8);
+            return ref _Handle.AsRef<Color>(_GridOffset!.Value);
         }
     }
-    private static nint _GridFractionalOffset = -1;
+    private static nint? _GridFractionalOffset;
 
     public ref Color GridFractional
     {
         get
         {
-            if (_GridFractionalOffset == -1) _GridFractionalOffset = Schema.GetOffset(0xFCEB3C850AE3FDAF);
-            return ref _Handle.AsRef<Color>(_GridFractionalOffset);
+            _GridFractionalOffset = _GridFractionalOffset ?? Schema.GetOffset(0xFCEB3C850AE3FDAF);
+            return ref _Handle.AsRef<Color>(_GridFractionalOffset!.Value);
         }
     }
-    private static nint _Grid10Offset = -1;
+    private static nint? _Grid10Offset;
 
     public ref Color Grid10
     {
         get
         {
-            if (_Grid10Offset == -1) _Grid10Offset = Schema.GetOffset(0xFCEB3C859CACE221);
-            return ref _Handle.AsRef<Color>(_Grid10Offset);
+            _Grid10Offset = _Grid10Offset ?? Schema.GetOffset(0xFCEB3C859CACE221);
+            return ref _Handle.AsRef<Color>(_Grid10Offset!.Value);
         }
     }
-    private static nint _Grid1024Offset = -1;
+    private static nint? _Grid1024Offset;
 
     public ref Color Grid1024
     {
         get
         {
-            if (_Grid1024Offset == -1) _Grid1024Offset = Schema.GetOffset(0xFCEB3C8530CBB4E7);
-            return ref _Handle.AsRef<Color>(_Grid1024Offset);
+            _Grid1024Offset = _Grid1024Offset ?? Schema.GetOffset(0xFCEB3C8530CBB4E7);
+            return ref _Handle.AsRef<Color>(_Grid1024Offset!.Value);
         }
     }
-    private static nint _BrushOffset = -1;
+    private static nint? _BrushOffset;
 
     public ref Color Brush
     {
         get
         {
-            if (_BrushOffset == -1) _BrushOffset = Schema.GetOffset(0xFCEB3C8509F8FD98);
-            return ref _Handle.AsRef<Color>(_BrushOffset);
+            _BrushOffset = _BrushOffset ?? Schema.GetOffset(0xFCEB3C8509F8FD98);
+            return ref _Handle.AsRef<Color>(_BrushOffset!.Value);
         }
     }
-    private static nint _SelectionOffset = -1;
+    private static nint? _SelectionOffset;
 
     public ref Color Selection
     {
         get
         {
-            if (_SelectionOffset == -1) _SelectionOffset = Schema.GetOffset(0xFCEB3C857C985D56);
-            return ref _Handle.AsRef<Color>(_SelectionOffset);
+            _SelectionOffset = _SelectionOffset ?? Schema.GetOffset(0xFCEB3C857C985D56);
+            return ref _Handle.AsRef<Color>(_SelectionOffset!.Value);
         }
     }
-    private static nint _ToolSelectionOffset = -1;
+    private static nint? _ToolSelectionOffset;
 
     public ref Color ToolSelection
     {
         get
         {
-            if (_ToolSelectionOffset == -1) _ToolSelectionOffset = Schema.GetOffset(0xFCEB3C85654B1054);
-            return ref _Handle.AsRef<Color>(_ToolSelectionOffset);
+            _ToolSelectionOffset = _ToolSelectionOffset ?? Schema.GetOffset(0xFCEB3C85654B1054);
+            return ref _Handle.AsRef<Color>(_ToolSelectionOffset!.Value);
         }
     }
 

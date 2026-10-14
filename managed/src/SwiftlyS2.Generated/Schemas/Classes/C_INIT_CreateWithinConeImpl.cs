@@ -16,91 +16,91 @@ internal partial class C_INIT_CreateWithinConeImpl : CParticleFunctionInitialize
 {
     public C_INIT_CreateWithinConeImpl(nint handle) : base(handle) { }
 
-    private static nint _TransformInputOffset = -1;
+    private static nint? _TransformInputOffset;
     private CParticleTransformInputImpl? _TransformInputInstance;
 
     public CParticleTransformInput TransformInput
     {
         get
         {
-            if (_TransformInputOffset == -1) _TransformInputOffset = Schema.GetOffset(0xBC5ECF1AB3FDC289);
+            _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0xBC5ECF1AB3FDC289);
             var instance = _TransformInputInstance ??= new CParticleTransformInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _TransformInputOffset);
+            instance.DangerousSetHandle(_Handle + _TransformInputOffset!.Value);
             return instance;
         }
     }
-    private static nint _InnerAngleOffset = -1;
+    private static nint? _InnerAngleOffset;
     private CPerParticleFloatInputImpl? _InnerAngleInstance;
 
     public CPerParticleFloatInput InnerAngle
     {
         get
         {
-            if (_InnerAngleOffset == -1) _InnerAngleOffset = Schema.GetOffset(0xBC5ECF1A142C32F4);
+            _InnerAngleOffset = _InnerAngleOffset ?? Schema.GetOffset(0xBC5ECF1A142C32F4);
             var instance = _InnerAngleInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _InnerAngleOffset);
+            instance.DangerousSetHandle(_Handle + _InnerAngleOffset!.Value);
             return instance;
         }
     }
-    private static nint _OuterAngleOffset = -1;
+    private static nint? _OuterAngleOffset;
     private CPerParticleFloatInputImpl? _OuterAngleInstance;
 
     public CPerParticleFloatInput OuterAngle
     {
         get
         {
-            if (_OuterAngleOffset == -1) _OuterAngleOffset = Schema.GetOffset(0xBC5ECF1AECB8B519);
+            _OuterAngleOffset = _OuterAngleOffset ?? Schema.GetOffset(0xBC5ECF1AECB8B519);
             var instance = _OuterAngleInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _OuterAngleOffset);
+            instance.DangerousSetHandle(_Handle + _OuterAngleOffset!.Value);
             return instance;
         }
     }
-    private static nint _SpeedOffset = -1;
+    private static nint? _SpeedOffset;
     private CPerParticleFloatInputImpl? _SpeedInstance;
 
     public CPerParticleFloatInput Speed
     {
         get
         {
-            if (_SpeedOffset == -1) _SpeedOffset = Schema.GetOffset(0xBC5ECF1AC631B7EA);
+            _SpeedOffset = _SpeedOffset ?? Schema.GetOffset(0xBC5ECF1AC631B7EA);
             var instance = _SpeedInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _SpeedOffset);
+            instance.DangerousSetHandle(_Handle + _SpeedOffset!.Value);
             return instance;
         }
     }
-    private static nint _OffsetOffset = -1;
+    private static nint? _OffsetOffset;
     private CPerParticleFloatInputImpl? _OffsetInstance;
 
     public CPerParticleFloatInput Offset
     {
         get
         {
-            if (_OffsetOffset == -1) _OffsetOffset = Schema.GetOffset(0xBC5ECF1A7F14BA34);
+            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0xBC5ECF1A7F14BA34);
             var instance = _OffsetInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _OffsetOffset);
+            instance.DangerousSetHandle(_Handle + _OffsetOffset!.Value);
             return instance;
         }
     }
-    private static nint _CollapseOffsetOffset = -1;
+    private static nint? _CollapseOffsetOffset;
 
     public ref bool CollapseOffset
     {
         get
         {
-            if (_CollapseOffsetOffset == -1) _CollapseOffsetOffset = Schema.GetOffset(0xBC5ECF1A96392A89);
-            return ref _Handle.AsRef<bool>(_CollapseOffsetOffset);
+            _CollapseOffsetOffset = _CollapseOffsetOffset ?? Schema.GetOffset(0xBC5ECF1A96392A89);
+            return ref _Handle.AsRef<bool>(_CollapseOffsetOffset!.Value);
         }
     }
-    private static nint _RandomnessParametersOffset = -1;
+    private static nint? _RandomnessParametersOffset;
     private CRandomNumberGeneratorParametersImpl? _RandomnessParametersInstance;
 
     public CRandomNumberGeneratorParameters RandomnessParameters
     {
         get
         {
-            if (_RandomnessParametersOffset == -1) _RandomnessParametersOffset = Schema.GetOffset(0xBC5ECF1A7EDF50AD);
+            _RandomnessParametersOffset = _RandomnessParametersOffset ?? Schema.GetOffset(0xBC5ECF1A7EDF50AD);
             var instance = _RandomnessParametersInstance ??= new CRandomNumberGeneratorParametersImpl(0);
-            instance.DangerousSetHandle(_Handle + _RandomnessParametersOffset);
+            instance.DangerousSetHandle(_Handle + _RandomnessParametersOffset!.Value);
             return instance;
         }
     }

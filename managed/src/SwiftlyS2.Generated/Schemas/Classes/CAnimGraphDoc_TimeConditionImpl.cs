@@ -16,29 +16,29 @@ internal partial class CAnimGraphDoc_TimeConditionImpl : CAnimGraphDoc_Condition
 {
     public CAnimGraphDoc_TimeConditionImpl(nint handle) : base(handle) { }
 
-    private static nint _ComparisonOpOffset = -1;
+    private static nint? _ComparisonOpOffset;
 
     public ref Comparison_t ComparisonOp
     {
         get
         {
-            if (_ComparisonOpOffset == -1) _ComparisonOpOffset = Schema.GetOffset(0x9885C02CBC2AB253);
-            return ref _Handle.AsRef<Comparison_t>(_ComparisonOpOffset);
+            _ComparisonOpOffset = _ComparisonOpOffset ?? Schema.GetOffset(0x9885C02CBC2AB253);
+            return ref _Handle.AsRef<Comparison_t>(_ComparisonOpOffset!.Value);
         }
     }
-    private static nint _ComparisonStringOffset = -1;
+    private static nint? _ComparisonStringOffset;
 
     public string ComparisonString
     {
         get
         {
-            if (_ComparisonStringOffset == -1) _ComparisonStringOffset = Schema.GetOffset(0x9885C02C0AAA1B85);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ComparisonStringOffset));
+            _ComparisonStringOffset = _ComparisonStringOffset ?? Schema.GetOffset(0x9885C02C0AAA1B85);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ComparisonStringOffset!.Value));
         }
         set
         {
-            if (_ComparisonStringOffset == -1) _ComparisonStringOffset = Schema.GetOffset(0x9885C02C0AAA1B85);
-            Schema.SetCUtlString(_Handle, _ComparisonStringOffset, value);
+            _ComparisonStringOffset = _ComparisonStringOffset ?? Schema.GetOffset(0x9885C02C0AAA1B85);
+            Schema.SetCUtlString(_Handle, _ComparisonStringOffset!.Value, value);
         }
     }
 

@@ -16,63 +16,63 @@ internal partial class CPulse_RegisterInfoImpl : SchemaClass, CPulse_RegisterInf
 {
     public CPulse_RegisterInfoImpl(nint handle) : base(handle) { }
 
-    private static nint _RegOffset = -1;
+    private static nint? _RegOffset;
     private PulseRuntimeRegisterIndex_tImpl? _RegInstance;
 
     public PulseRuntimeRegisterIndex_t Reg
     {
         get
         {
-            if (_RegOffset == -1) _RegOffset = Schema.GetOffset(0x8D60BE3D464A7749);
+            _RegOffset = _RegOffset ?? Schema.GetOffset(0x8D60BE3D464A7749);
             var instance = _RegInstance ??= new PulseRuntimeRegisterIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _RegOffset);
+            instance.DangerousSetHandle(_Handle + _RegOffset!.Value);
             return instance;
         }
     }
-    private static nint _TypeOffset = -1;
+    private static nint? _TypeOffset;
     private SchemaUntypedField? _TypeInstance;
 
     public SchemaUntypedField Type
     {
         get
         {
-            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0x8D60BE3D8ED6D5CD);
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x8D60BE3D8ED6D5CD);
             var instance = _TypeInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _TypeOffset);
+            instance.DangerousSetHandle(_Handle + _TypeOffset!.Value);
             return instance;
         }
     }
-    private static nint _OriginNameOffset = -1;
+    private static nint? _OriginNameOffset;
     private SchemaUntypedField? _OriginNameInstance;
 
     public SchemaUntypedField OriginName
     {
         get
         {
-            if (_OriginNameOffset == -1) _OriginNameOffset = Schema.GetOffset(0x8D60BE3D745ADAEC);
+            _OriginNameOffset = _OriginNameOffset ?? Schema.GetOffset(0x8D60BE3D745ADAEC);
             var instance = _OriginNameInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OriginNameOffset);
+            instance.DangerousSetHandle(_Handle + _OriginNameOffset!.Value);
             return instance;
         }
     }
-    private static nint _WrittenByInstructionOffset = -1;
+    private static nint? _WrittenByInstructionOffset;
 
     public ref int WrittenByInstruction
     {
         get
         {
-            if (_WrittenByInstructionOffset == -1) _WrittenByInstructionOffset = Schema.GetOffset(0x8D60BE3D5311609B);
-            return ref _Handle.AsRef<int>(_WrittenByInstructionOffset);
+            _WrittenByInstructionOffset = _WrittenByInstructionOffset ?? Schema.GetOffset(0x8D60BE3D5311609B);
+            return ref _Handle.AsRef<int>(_WrittenByInstructionOffset!.Value);
         }
     }
-    private static nint _LastReadByInstructionOffset = -1;
+    private static nint? _LastReadByInstructionOffset;
 
     public ref int LastReadByInstruction
     {
         get
         {
-            if (_LastReadByInstructionOffset == -1) _LastReadByInstructionOffset = Schema.GetOffset(0x8D60BE3D9D1961CC);
-            return ref _Handle.AsRef<int>(_LastReadByInstructionOffset);
+            _LastReadByInstructionOffset = _LastReadByInstructionOffset ?? Schema.GetOffset(0x8D60BE3D9D1961CC);
+            return ref _Handle.AsRef<int>(_LastReadByInstructionOffset!.Value);
         }
     }
 

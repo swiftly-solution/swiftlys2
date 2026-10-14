@@ -16,27 +16,27 @@ internal partial class CAnimGraphDoc_ParamSpanSampleImpl : SchemaClass, CAnimGra
 {
     public CAnimGraphDoc_ParamSpanSampleImpl(nint handle) : base(handle) { }
 
-    private static nint _ValueOffset = -1;
+    private static nint? _ValueOffset;
     private SchemaUntypedField? _ValueInstance;
 
     public SchemaUntypedField Value
     {
         get
         {
-            if (_ValueOffset == -1) _ValueOffset = Schema.GetOffset(0xEBDC9F2D6B99AEEA);
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0xEBDC9F2D6B99AEEA);
             var instance = _ValueInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ValueOffset);
+            instance.DangerousSetHandle(_Handle + _ValueOffset!.Value);
             return instance;
         }
     }
-    private static nint _CycleOffset = -1;
+    private static nint? _CycleOffset;
 
     public ref float Cycle
     {
         get
         {
-            if (_CycleOffset == -1) _CycleOffset = Schema.GetOffset(0xEBDC9F2D0C77829F);
-            return ref _Handle.AsRef<float>(_CycleOffset);
+            _CycleOffset = _CycleOffset ?? Schema.GetOffset(0xEBDC9F2D0C77829F);
+            return ref _Handle.AsRef<float>(_CycleOffset!.Value);
         }
     }
 

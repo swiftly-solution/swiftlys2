@@ -16,24 +16,24 @@ internal partial class CRagdollUpdateNodeImpl : CUnaryUpdateNodeImpl, CRagdollUp
 {
     public CRagdollUpdateNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _WeightListIndexOffset = -1;
+    private static nint? _WeightListIndexOffset;
 
     public ref int WeightListIndex
     {
         get
         {
-            if (_WeightListIndexOffset == -1) _WeightListIndexOffset = Schema.GetOffset(0xB7502AF030288377);
-            return ref _Handle.AsRef<int>(_WeightListIndexOffset);
+            _WeightListIndexOffset = _WeightListIndexOffset ?? Schema.GetOffset(0xB7502AF030288377);
+            return ref _Handle.AsRef<int>(_WeightListIndexOffset!.Value);
         }
     }
-    private static nint _PoseControlMethodOffset = -1;
+    private static nint? _PoseControlMethodOffset;
 
     public ref RagdollPoseControl PoseControlMethod
     {
         get
         {
-            if (_PoseControlMethodOffset == -1) _PoseControlMethodOffset = Schema.GetOffset(0xB7502AF088DA12AC);
-            return ref _Handle.AsRef<RagdollPoseControl>(_PoseControlMethodOffset);
+            _PoseControlMethodOffset = _PoseControlMethodOffset ?? Schema.GetOffset(0xB7502AF088DA12AC);
+            return ref _Handle.AsRef<RagdollPoseControl>(_PoseControlMethodOffset!.Value);
         }
     }
 

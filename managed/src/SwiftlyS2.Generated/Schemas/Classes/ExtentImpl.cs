@@ -16,24 +16,24 @@ internal partial class ExtentImpl : SchemaClass, Extent
 {
     public ExtentImpl(nint handle) : base(handle) { }
 
-    private static nint _LoOffset = -1;
+    private static nint? _LoOffset;
 
     public ref Vector Lo
     {
         get
         {
-            if (_LoOffset == -1) _LoOffset = Schema.GetOffset(0x6E8BE8394231C06C);
-            return ref _Handle.AsRef<Vector>(_LoOffset);
+            _LoOffset = _LoOffset ?? Schema.GetOffset(0x6E8BE8394231C06C);
+            return ref _Handle.AsRef<Vector>(_LoOffset!.Value);
         }
     }
-    private static nint _HiOffset = -1;
+    private static nint? _HiOffset;
 
     public ref Vector Hi
     {
         get
         {
-            if (_HiOffset == -1) _HiOffset = Schema.GetOffset(0x6E8BE839683AF69A);
-            return ref _Handle.AsRef<Vector>(_HiOffset);
+            _HiOffset = _HiOffset ?? Schema.GetOffset(0x6E8BE839683AF69A);
+            return ref _Handle.AsRef<Vector>(_HiOffset!.Value);
         }
     }
 

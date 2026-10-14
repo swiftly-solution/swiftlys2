@@ -16,34 +16,34 @@ internal partial class EngineCountdownTimerImpl : SchemaClass, EngineCountdownTi
 {
     public EngineCountdownTimerImpl(nint handle) : base(handle) { }
 
-    private static nint _DurationOffset = -1;
+    private static nint? _DurationOffset;
 
     public ref float Duration
     {
         get
         {
-            if (_DurationOffset == -1) _DurationOffset = Schema.GetOffset(0x3F0C5A433D9FF5AD);
-            return ref _Handle.AsRef<float>(_DurationOffset);
+            _DurationOffset = _DurationOffset ?? Schema.GetOffset(0x3F0C5A433D9FF5AD);
+            return ref _Handle.AsRef<float>(_DurationOffset!.Value);
         }
     }
-    private static nint _TimestampOffset = -1;
+    private static nint? _TimestampOffset;
 
     public ref float Timestamp
     {
         get
         {
-            if (_TimestampOffset == -1) _TimestampOffset = Schema.GetOffset(0x3F0C5A43B6C56F43);
-            return ref _Handle.AsRef<float>(_TimestampOffset);
+            _TimestampOffset = _TimestampOffset ?? Schema.GetOffset(0x3F0C5A43B6C56F43);
+            return ref _Handle.AsRef<float>(_TimestampOffset!.Value);
         }
     }
-    private static nint _TimescaleOffset = -1;
+    private static nint? _TimescaleOffset;
 
     public ref float Timescale
     {
         get
         {
-            if (_TimescaleOffset == -1) _TimescaleOffset = Schema.GetOffset(0x3F0C5A438A240BBE);
-            return ref _Handle.AsRef<float>(_TimescaleOffset);
+            _TimescaleOffset = _TimescaleOffset ?? Schema.GetOffset(0x3F0C5A438A240BBE);
+            return ref _Handle.AsRef<float>(_TimescaleOffset!.Value);
         }
     }
 

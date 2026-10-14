@@ -16,122 +16,122 @@ internal partial class EntityIOQueuePrioritizedEvent_tImpl : SchemaClass, Entity
 {
     public EntityIOQueuePrioritizedEvent_tImpl(nint handle) : base(handle) { }
 
-    private static nint _FireTimeOffset = -1;
+    private static nint? _FireTimeOffset;
     private GameTime_tImpl? _FireTimeInstance;
 
     public GameTime_t FireTime
     {
         get
         {
-            if (_FireTimeOffset == -1) _FireTimeOffset = Schema.GetOffset(0xE77B3E33873CD172);
+            _FireTimeOffset = _FireTimeOffset ?? Schema.GetOffset(0xE77B3E33873CD172);
             var instance = _FireTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FireTimeOffset);
+            instance.DangerousSetHandle(_Handle + _FireTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _TargetTypeOffset = -1;
+    private static nint? _TargetTypeOffset;
 
     public ref EntityIOTargetType_t TargetType
     {
         get
         {
-            if (_TargetTypeOffset == -1) _TargetTypeOffset = Schema.GetOffset(0xE77B3E3313C167A0);
-            return ref _Handle.AsRef<EntityIOTargetType_t>(_TargetTypeOffset);
+            _TargetTypeOffset = _TargetTypeOffset ?? Schema.GetOffset(0xE77B3E3313C167A0);
+            return ref _Handle.AsRef<EntityIOTargetType_t>(_TargetTypeOffset!.Value);
         }
     }
-    private static nint _TargetOffset = -1;
+    private static nint? _TargetOffset;
 
     public string Target
     {
         get
         {
-            if (_TargetOffset == -1) _TargetOffset = Schema.GetOffset(0xE77B3E33ACA49732);
-            return Schema.GetString(_Handle.Read<nint>(_TargetOffset));
+            _TargetOffset = _TargetOffset ?? Schema.GetOffset(0xE77B3E33ACA49732);
+            return Schema.GetString(_Handle.Read<nint>(_TargetOffset!.Value));
         }
         set
         {
-            if (_TargetOffset == -1) _TargetOffset = Schema.GetOffset(0xE77B3E33ACA49732);
-            Schema.SetString(_Handle, _TargetOffset, value);
+            _TargetOffset = _TargetOffset ?? Schema.GetOffset(0xE77B3E33ACA49732);
+            Schema.SetString(_Handle, _TargetOffset!.Value, value);
         }
     }
-    private static nint _TargetInputOffset = -1;
+    private static nint? _TargetInputOffset;
 
     public string TargetInput
     {
         get
         {
-            if (_TargetInputOffset == -1) _TargetInputOffset = Schema.GetOffset(0xE77B3E33C4CE88F6);
-            return Schema.GetString(_Handle.Read<nint>(_TargetInputOffset));
+            _TargetInputOffset = _TargetInputOffset ?? Schema.GetOffset(0xE77B3E33C4CE88F6);
+            return Schema.GetString(_Handle.Read<nint>(_TargetInputOffset!.Value));
         }
         set
         {
-            if (_TargetInputOffset == -1) _TargetInputOffset = Schema.GetOffset(0xE77B3E33C4CE88F6);
-            Schema.SetString(_Handle, _TargetInputOffset, value);
+            _TargetInputOffset = _TargetInputOffset ?? Schema.GetOffset(0xE77B3E33C4CE88F6);
+            Schema.SetString(_Handle, _TargetInputOffset!.Value, value);
         }
     }
-    private static nint _ActivatorOffset = -1;
+    private static nint? _ActivatorOffset;
 
     public ref CHandle<CEntityInstance> Activator
     {
         get
         {
-            if (_ActivatorOffset == -1) _ActivatorOffset = Schema.GetOffset(0xE77B3E33AB093BB2);
-            return ref _Handle.AsRef<CHandle<CEntityInstance>>(_ActivatorOffset);
+            _ActivatorOffset = _ActivatorOffset ?? Schema.GetOffset(0xE77B3E33AB093BB2);
+            return ref _Handle.AsRef<CHandle<CEntityInstance>>(_ActivatorOffset!.Value);
         }
     }
-    private static nint _CallerOffset = -1;
+    private static nint? _CallerOffset;
 
     public ref CHandle<CEntityInstance> Caller
     {
         get
         {
-            if (_CallerOffset == -1) _CallerOffset = Schema.GetOffset(0xE77B3E333F9735FC);
-            return ref _Handle.AsRef<CHandle<CEntityInstance>>(_CallerOffset);
+            _CallerOffset = _CallerOffset ?? Schema.GetOffset(0xE77B3E333F9735FC);
+            return ref _Handle.AsRef<CHandle<CEntityInstance>>(_CallerOffset!.Value);
         }
     }
-    private static nint _EntTargetOffset = -1;
+    private static nint? _EntTargetOffset;
 
     public ref CHandle<CEntityInstance> EntTarget
     {
         get
         {
-            if (_EntTargetOffset == -1) _EntTargetOffset = Schema.GetOffset(0xE77B3E333ECEE27D);
-            return ref _Handle.AsRef<CHandle<CEntityInstance>>(_EntTargetOffset);
+            _EntTargetOffset = _EntTargetOffset ?? Schema.GetOffset(0xE77B3E333ECEE27D);
+            return ref _Handle.AsRef<CHandle<CEntityInstance>>(_EntTargetOffset!.Value);
         }
     }
-    private static nint _VariantValueOffset = -1;
+    private static nint? _VariantValueOffset;
 
     public ref CVariant<CVariantDefaultAllocator> VariantValue
     {
         get
         {
-            if (_VariantValueOffset == -1) _VariantValueOffset = Schema.GetOffset(0xE77B3E3391FCB0A7);
-            return ref _Handle.AsRef<CVariant<CVariantDefaultAllocator>>(_VariantValueOffset);
+            _VariantValueOffset = _VariantValueOffset ?? Schema.GetOffset(0xE77B3E3391FCB0A7);
+            return ref _Handle.AsRef<CVariant<CVariantDefaultAllocator>>(_VariantValueOffset!.Value);
         }
     }
-    private static nint _PulseArgumentsOffset = -1;
+    private static nint? _PulseArgumentsOffset;
     private SchemaUntypedField? _PulseArgumentsInstance;
 
     public SchemaUntypedField PulseArguments
     {
         get
         {
-            if (_PulseArgumentsOffset == -1) _PulseArgumentsOffset = Schema.GetOffset(0xE77B3E3361D8E31E);
+            _PulseArgumentsOffset = _PulseArgumentsOffset ?? Schema.GetOffset(0xE77B3E3361D8E31E);
             var instance = _PulseArgumentsInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _PulseArgumentsOffset);
+            instance.DangerousSetHandle(_Handle + _PulseArgumentsOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamMapOffset = -1;
+    private static nint? _ParamMapOffset;
     private SchemaUntypedField? _ParamMapInstance;
 
     public SchemaUntypedField ParamMap
     {
         get
         {
-            if (_ParamMapOffset == -1) _ParamMapOffset = Schema.GetOffset(0xE77B3E33F64DD25C);
+            _ParamMapOffset = _ParamMapOffset ?? Schema.GetOffset(0xE77B3E33F64DD25C);
             var instance = _ParamMapInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ParamMapOffset);
+            instance.DangerousSetHandle(_Handle + _ParamMapOffset!.Value);
             return instance;
         }
     }

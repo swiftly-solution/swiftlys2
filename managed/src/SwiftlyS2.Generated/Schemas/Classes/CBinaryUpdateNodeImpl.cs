@@ -16,70 +16,70 @@ internal partial class CBinaryUpdateNodeImpl : CAnimUpdateNodeBaseImpl, CBinaryU
 {
     public CBinaryUpdateNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _Child1Offset = -1;
+    private static nint? _Child1Offset;
     private CAnimUpdateNodeRefImpl? _Child1Instance;
 
     public CAnimUpdateNodeRef Child1
     {
         get
         {
-            if (_Child1Offset == -1) _Child1Offset = Schema.GetOffset(0xA1CFA91E9E0C6B0A);
+            _Child1Offset = _Child1Offset ?? Schema.GetOffset(0xA1CFA91E9E0C6B0A);
             var instance = _Child1Instance ??= new CAnimUpdateNodeRefImpl(0);
-            instance.DangerousSetHandle(_Handle + _Child1Offset);
+            instance.DangerousSetHandle(_Handle + _Child1Offset!.Value);
             return instance;
         }
     }
-    private static nint _Child2Offset = -1;
+    private static nint? _Child2Offset;
     private CAnimUpdateNodeRefImpl? _Child2Instance;
 
     public CAnimUpdateNodeRef Child2
     {
         get
         {
-            if (_Child2Offset == -1) _Child2Offset = Schema.GetOffset(0xA1CFA91E9D0C6977);
+            _Child2Offset = _Child2Offset ?? Schema.GetOffset(0xA1CFA91E9D0C6977);
             var instance = _Child2Instance ??= new CAnimUpdateNodeRefImpl(0);
-            instance.DangerousSetHandle(_Handle + _Child2Offset);
+            instance.DangerousSetHandle(_Handle + _Child2Offset!.Value);
             return instance;
         }
     }
-    private static nint _TimingBehaviorOffset = -1;
+    private static nint? _TimingBehaviorOffset;
 
     public ref BinaryNodeTiming TimingBehavior
     {
         get
         {
-            if (_TimingBehaviorOffset == -1) _TimingBehaviorOffset = Schema.GetOffset(0xA1CFA91EF9A9BA01);
-            return ref _Handle.AsRef<BinaryNodeTiming>(_TimingBehaviorOffset);
+            _TimingBehaviorOffset = _TimingBehaviorOffset ?? Schema.GetOffset(0xA1CFA91EF9A9BA01);
+            return ref _Handle.AsRef<BinaryNodeTiming>(_TimingBehaviorOffset!.Value);
         }
     }
-    private static nint _TimingBlendOffset = -1;
+    private static nint? _TimingBlendOffset;
 
     public ref float TimingBlend
     {
         get
         {
-            if (_TimingBlendOffset == -1) _TimingBlendOffset = Schema.GetOffset(0xA1CFA91E884E1874);
-            return ref _Handle.AsRef<float>(_TimingBlendOffset);
+            _TimingBlendOffset = _TimingBlendOffset ?? Schema.GetOffset(0xA1CFA91E884E1874);
+            return ref _Handle.AsRef<float>(_TimingBlendOffset!.Value);
         }
     }
-    private static nint _ResetChild1Offset = -1;
+    private static nint? _ResetChild1Offset;
 
     public ref bool ResetChild1
     {
         get
         {
-            if (_ResetChild1Offset == -1) _ResetChild1Offset = Schema.GetOffset(0xA1CFA91EC7FAEC85);
-            return ref _Handle.AsRef<bool>(_ResetChild1Offset);
+            _ResetChild1Offset = _ResetChild1Offset ?? Schema.GetOffset(0xA1CFA91EC7FAEC85);
+            return ref _Handle.AsRef<bool>(_ResetChild1Offset!.Value);
         }
     }
-    private static nint _ResetChild2Offset = -1;
+    private static nint? _ResetChild2Offset;
 
     public ref bool ResetChild2
     {
         get
         {
-            if (_ResetChild2Offset == -1) _ResetChild2Offset = Schema.GetOffset(0xA1CFA91EC4FAE7CC);
-            return ref _Handle.AsRef<bool>(_ResetChild2Offset);
+            _ResetChild2Offset = _ResetChild2Offset ?? Schema.GetOffset(0xA1CFA91EC4FAE7CC);
+            return ref _Handle.AsRef<bool>(_ResetChild2Offset!.Value);
         }
     }
 

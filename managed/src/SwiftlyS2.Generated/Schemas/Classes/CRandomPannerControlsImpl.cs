@@ -16,69 +16,69 @@ internal partial class CRandomPannerControlsImpl : SchemaClass, CRandomPannerCon
 {
     public CRandomPannerControlsImpl(nint handle) : base(handle) { }
 
-    private static nint _PanningControlInputNameOffset = -1;
+    private static nint? _PanningControlInputNameOffset;
 
     public string PanningControlInputName
     {
         get
         {
-            if (_PanningControlInputNameOffset == -1) _PanningControlInputNameOffset = Schema.GetOffset(0x9CE2386363A5643E);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_PanningControlInputNameOffset));
+            _PanningControlInputNameOffset = _PanningControlInputNameOffset ?? Schema.GetOffset(0x9CE2386363A5643E);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_PanningControlInputNameOffset!.Value));
         }
         set
         {
-            if (_PanningControlInputNameOffset == -1) _PanningControlInputNameOffset = Schema.GetOffset(0x9CE2386363A5643E);
-            Schema.SetCUtlString(_Handle, _PanningControlInputNameOffset, value);
+            _PanningControlInputNameOffset = _PanningControlInputNameOffset ?? Schema.GetOffset(0x9CE2386363A5643E);
+            Schema.SetCUtlString(_Handle, _PanningControlInputNameOffset!.Value, value);
         }
     }
-    private static nint _VolumeControlInputNameOffset = -1;
+    private static nint? _VolumeControlInputNameOffset;
 
     public string VolumeControlInputName
     {
         get
         {
-            if (_VolumeControlInputNameOffset == -1) _VolumeControlInputNameOffset = Schema.GetOffset(0x9CE2386358460F3F);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_VolumeControlInputNameOffset));
+            _VolumeControlInputNameOffset = _VolumeControlInputNameOffset ?? Schema.GetOffset(0x9CE2386358460F3F);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_VolumeControlInputNameOffset!.Value));
         }
         set
         {
-            if (_VolumeControlInputNameOffset == -1) _VolumeControlInputNameOffset = Schema.GetOffset(0x9CE2386358460F3F);
-            Schema.SetCUtlString(_Handle, _VolumeControlInputNameOffset, value);
+            _VolumeControlInputNameOffset = _VolumeControlInputNameOffset ?? Schema.GetOffset(0x9CE2386358460F3F);
+            Schema.SetCUtlString(_Handle, _VolumeControlInputNameOffset!.Value, value);
         }
     }
-    private static nint _MinVolumeOffset = -1;
+    private static nint? _MinVolumeOffset;
 
     public ref float MinVolume
     {
         get
         {
-            if (_MinVolumeOffset == -1) _MinVolumeOffset = Schema.GetOffset(0x9CE238632CA4E2A3);
-            return ref _Handle.AsRef<float>(_MinVolumeOffset);
+            _MinVolumeOffset = _MinVolumeOffset ?? Schema.GetOffset(0x9CE238632CA4E2A3);
+            return ref _Handle.AsRef<float>(_MinVolumeOffset!.Value);
         }
     }
-    private static nint _MaxVolumeOffset = -1;
+    private static nint? _MaxVolumeOffset;
 
     public ref float MaxVolume
     {
         get
         {
-            if (_MaxVolumeOffset == -1) _MaxVolumeOffset = Schema.GetOffset(0x9CE2386325691B11);
-            return ref _Handle.AsRef<float>(_MaxVolumeOffset);
+            _MaxVolumeOffset = _MaxVolumeOffset ?? Schema.GetOffset(0x9CE2386325691B11);
+            return ref _Handle.AsRef<float>(_MaxVolumeOffset!.Value);
         }
     }
-    private static nint _StrVectorStackParamOffset = -1;
+    private static nint? _StrVectorStackParamOffset;
 
     public string StrVectorStackParam
     {
         get
         {
-            if (_StrVectorStackParamOffset == -1) _StrVectorStackParamOffset = Schema.GetOffset(0x9CE23863361A226E);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrVectorStackParamOffset));
+            _StrVectorStackParamOffset = _StrVectorStackParamOffset ?? Schema.GetOffset(0x9CE23863361A226E);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrVectorStackParamOffset!.Value));
         }
         set
         {
-            if (_StrVectorStackParamOffset == -1) _StrVectorStackParamOffset = Schema.GetOffset(0x9CE23863361A226E);
-            Schema.SetCUtlString(_Handle, _StrVectorStackParamOffset, value);
+            _StrVectorStackParamOffset = _StrVectorStackParamOffset ?? Schema.GetOffset(0x9CE23863361A226E);
+            Schema.SetCUtlString(_Handle, _StrVectorStackParamOffset!.Value, value);
         }
     }
 

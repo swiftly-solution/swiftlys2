@@ -16,34 +16,34 @@ internal partial class CnmGraphDocFollowBoneNode__CDataImpl : CNmGraphDocVariati
 {
     public CnmGraphDocFollowBoneNode__CDataImpl(nint handle) : base(handle) { }
 
-    private static nint _BoneNameOffset = -1;
+    private static nint? _BoneNameOffset;
 
     public string BoneName
     {
         get
         {
-            if (_BoneNameOffset == -1) _BoneNameOffset = Schema.GetOffset(0x9CBF9C7BFDEE0E0C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_BoneNameOffset));
+            _BoneNameOffset = _BoneNameOffset ?? Schema.GetOffset(0x9CBF9C7BFDEE0E0C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_BoneNameOffset!.Value));
         }
         set
         {
-            if (_BoneNameOffset == -1) _BoneNameOffset = Schema.GetOffset(0x9CBF9C7BFDEE0E0C);
-            Schema.SetCUtlString(_Handle, _BoneNameOffset, value);
+            _BoneNameOffset = _BoneNameOffset ?? Schema.GetOffset(0x9CBF9C7BFDEE0E0C);
+            Schema.SetCUtlString(_Handle, _BoneNameOffset!.Value, value);
         }
     }
-    private static nint _FollowTargetBoneNameOffset = -1;
+    private static nint? _FollowTargetBoneNameOffset;
 
     public string FollowTargetBoneName
     {
         get
         {
-            if (_FollowTargetBoneNameOffset == -1) _FollowTargetBoneNameOffset = Schema.GetOffset(0x9CBF9C7BE25E20D0);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_FollowTargetBoneNameOffset));
+            _FollowTargetBoneNameOffset = _FollowTargetBoneNameOffset ?? Schema.GetOffset(0x9CBF9C7BE25E20D0);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_FollowTargetBoneNameOffset!.Value));
         }
         set
         {
-            if (_FollowTargetBoneNameOffset == -1) _FollowTargetBoneNameOffset = Schema.GetOffset(0x9CBF9C7BE25E20D0);
-            Schema.SetCUtlString(_Handle, _FollowTargetBoneNameOffset, value);
+            _FollowTargetBoneNameOffset = _FollowTargetBoneNameOffset ?? Schema.GetOffset(0x9CBF9C7BE25E20D0);
+            Schema.SetCUtlString(_Handle, _FollowTargetBoneNameOffset!.Value, value);
         }
     }
 

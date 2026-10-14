@@ -16,54 +16,54 @@ internal partial class CAnimBoneDifferenceImpl : SchemaClass, CAnimBoneDifferenc
 {
     public CAnimBoneDifferenceImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public ref CBufferString Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xCC65F41E4D8F5786);
-            return ref _Handle.AsRef<CBufferString>(_NameOffset);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xCC65F41E4D8F5786);
+            return ref _Handle.AsRef<CBufferString>(_NameOffset!.Value);
         }
     }
-    private static nint _ParentOffset = -1;
+    private static nint? _ParentOffset;
 
     public ref CBufferString Parent
     {
         get
         {
-            if (_ParentOffset == -1) _ParentOffset = Schema.GetOffset(0xCC65F41E2FF7A69D);
-            return ref _Handle.AsRef<CBufferString>(_ParentOffset);
+            _ParentOffset = _ParentOffset ?? Schema.GetOffset(0xCC65F41E2FF7A69D);
+            return ref _Handle.AsRef<CBufferString>(_ParentOffset!.Value);
         }
     }
-    private static nint _PosErrorOffset = -1;
+    private static nint? _PosErrorOffset;
 
     public ref Vector PosError
     {
         get
         {
-            if (_PosErrorOffset == -1) _PosErrorOffset = Schema.GetOffset(0xCC65F41E48F0F4CD);
-            return ref _Handle.AsRef<Vector>(_PosErrorOffset);
+            _PosErrorOffset = _PosErrorOffset ?? Schema.GetOffset(0xCC65F41E48F0F4CD);
+            return ref _Handle.AsRef<Vector>(_PosErrorOffset!.Value);
         }
     }
-    private static nint _HasRotationOffset = -1;
+    private static nint? _HasRotationOffset;
 
     public ref bool HasRotation
     {
         get
         {
-            if (_HasRotationOffset == -1) _HasRotationOffset = Schema.GetOffset(0xCC65F41E84FE2D9D);
-            return ref _Handle.AsRef<bool>(_HasRotationOffset);
+            _HasRotationOffset = _HasRotationOffset ?? Schema.GetOffset(0xCC65F41E84FE2D9D);
+            return ref _Handle.AsRef<bool>(_HasRotationOffset!.Value);
         }
     }
-    private static nint _HasMovementOffset = -1;
+    private static nint? _HasMovementOffset;
 
     public ref bool HasMovement
     {
         get
         {
-            if (_HasMovementOffset == -1) _HasMovementOffset = Schema.GetOffset(0xCC65F41E07AC967A);
-            return ref _Handle.AsRef<bool>(_HasMovementOffset);
+            _HasMovementOffset = _HasMovementOffset ?? Schema.GetOffset(0xCC65F41E07AC967A);
+            return ref _Handle.AsRef<bool>(_HasMovementOffset!.Value);
         }
     }
 

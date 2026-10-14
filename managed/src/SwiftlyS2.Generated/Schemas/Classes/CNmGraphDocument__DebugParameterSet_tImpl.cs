@@ -16,64 +16,64 @@ internal partial class CNmGraphDocument__DebugParameterSet_tImpl : SchemaClass, 
 {
     public CNmGraphDocument__DebugParameterSet_tImpl(nint handle) : base(handle) { }
 
-    private static nint _IDOffset = -1;
+    private static nint? _IDOffset;
 
     public ref CGlobalSymbol ID
     {
         get
         {
-            if (_IDOffset == -1) _IDOffset = Schema.GetOffset(0xAF145ED995066900);
-            return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset);
+            _IDOffset = _IDOffset ?? Schema.GetOffset(0xAF145ED995066900);
+            return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset!.Value);
         }
     }
-    private static nint _BoolValuesOffset = -1;
+    private static nint? _BoolValuesOffset;
 
     public ref CUtlLeanVector<SchemaUntypedField, int> BoolValues
     {
         get
         {
-            if (_BoolValuesOffset == -1) _BoolValuesOffset = Schema.GetOffset(0xAF145ED957C27AE3);
-            return ref _Handle.AsRef<CUtlLeanVector<SchemaUntypedField, int>>(_BoolValuesOffset);
+            _BoolValuesOffset = _BoolValuesOffset ?? Schema.GetOffset(0xAF145ED957C27AE3);
+            return ref _Handle.AsRef<CUtlLeanVector<SchemaUntypedField, int>>(_BoolValuesOffset!.Value);
         }
     }
-    private static nint _FloatValuesOffset = -1;
+    private static nint? _FloatValuesOffset;
 
     public ref CUtlLeanVector<SchemaUntypedField, int> FloatValues
     {
         get
         {
-            if (_FloatValuesOffset == -1) _FloatValuesOffset = Schema.GetOffset(0xAF145ED925D898FB);
-            return ref _Handle.AsRef<CUtlLeanVector<SchemaUntypedField, int>>(_FloatValuesOffset);
+            _FloatValuesOffset = _FloatValuesOffset ?? Schema.GetOffset(0xAF145ED925D898FB);
+            return ref _Handle.AsRef<CUtlLeanVector<SchemaUntypedField, int>>(_FloatValuesOffset!.Value);
         }
     }
-    private static nint _IDValuesOffset = -1;
+    private static nint? _IDValuesOffset;
 
     public ref CUtlLeanVector<SchemaUntypedField, int> IDValues
     {
         get
         {
-            if (_IDValuesOffset == -1) _IDValuesOffset = Schema.GetOffset(0xAF145ED906EC5C66);
-            return ref _Handle.AsRef<CUtlLeanVector<SchemaUntypedField, int>>(_IDValuesOffset);
+            _IDValuesOffset = _IDValuesOffset ?? Schema.GetOffset(0xAF145ED906EC5C66);
+            return ref _Handle.AsRef<CUtlLeanVector<SchemaUntypedField, int>>(_IDValuesOffset!.Value);
         }
     }
-    private static nint _VectorValuesOffset = -1;
+    private static nint? _VectorValuesOffset;
 
     public ref CUtlLeanVector<SchemaUntypedField, int> VectorValues
     {
         get
         {
-            if (_VectorValuesOffset == -1) _VectorValuesOffset = Schema.GetOffset(0xAF145ED91FBF8A28);
-            return ref _Handle.AsRef<CUtlLeanVector<SchemaUntypedField, int>>(_VectorValuesOffset);
+            _VectorValuesOffset = _VectorValuesOffset ?? Schema.GetOffset(0xAF145ED91FBF8A28);
+            return ref _Handle.AsRef<CUtlLeanVector<SchemaUntypedField, int>>(_VectorValuesOffset!.Value);
         }
     }
-    private static nint _TargetValuesOffset = -1;
+    private static nint? _TargetValuesOffset;
 
     public ref CUtlLeanVector<SchemaUntypedField, int> TargetValues
     {
         get
         {
-            if (_TargetValuesOffset == -1) _TargetValuesOffset = Schema.GetOffset(0xAF145ED9913AEBFE);
-            return ref _Handle.AsRef<CUtlLeanVector<SchemaUntypedField, int>>(_TargetValuesOffset);
+            _TargetValuesOffset = _TargetValuesOffset ?? Schema.GetOffset(0xAF145ED9913AEBFE);
+            return ref _Handle.AsRef<CUtlLeanVector<SchemaUntypedField, int>>(_TargetValuesOffset!.Value);
         }
     }
 

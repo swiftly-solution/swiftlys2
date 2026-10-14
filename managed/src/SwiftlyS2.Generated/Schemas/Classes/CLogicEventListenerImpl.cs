@@ -16,51 +16,51 @@ internal partial class CLogicEventListenerImpl : CLogicalEntityImpl, CLogicEvent
 {
     public CLogicEventListenerImpl(nint handle) : base(handle) { }
 
-    private static nint _StrEventNameOffset = -1;
+    private static nint? _StrEventNameOffset;
 
     public string StrEventName
     {
         get
         {
-            if (_StrEventNameOffset == -1) _StrEventNameOffset = Schema.GetOffset(0xD797C990BC41C13B);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrEventNameOffset));
+            _StrEventNameOffset = _StrEventNameOffset ?? Schema.GetOffset(0xD797C990BC41C13B);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrEventNameOffset!.Value));
         }
         set
         {
-            if (_StrEventNameOffset == -1) _StrEventNameOffset = Schema.GetOffset(0xD797C990BC41C13B);
-            Schema.SetCUtlString(_Handle, _StrEventNameOffset, value);
+            _StrEventNameOffset = _StrEventNameOffset ?? Schema.GetOffset(0xD797C990BC41C13B);
+            Schema.SetCUtlString(_Handle, _StrEventNameOffset!.Value, value);
         }
     }
-    private static nint _IsEnabledOffset = -1;
+    private static nint? _IsEnabledOffset;
 
     public ref bool IsEnabled
     {
         get
         {
-            if (_IsEnabledOffset == -1) _IsEnabledOffset = Schema.GetOffset(0xD797C9905360D70E);
-            return ref _Handle.AsRef<bool>(_IsEnabledOffset);
+            _IsEnabledOffset = _IsEnabledOffset ?? Schema.GetOffset(0xD797C9905360D70E);
+            return ref _Handle.AsRef<bool>(_IsEnabledOffset!.Value);
         }
     }
-    private static nint _TeamOffset = -1;
+    private static nint? _TeamOffset;
 
     public ref int Team
     {
         get
         {
-            if (_TeamOffset == -1) _TeamOffset = Schema.GetOffset(0xD797C990BEB42230);
-            return ref _Handle.AsRef<int>(_TeamOffset);
+            _TeamOffset = _TeamOffset ?? Schema.GetOffset(0xD797C990BEB42230);
+            return ref _Handle.AsRef<int>(_TeamOffset!.Value);
         }
     }
-    private static nint _OnEventFiredOffset = -1;
+    private static nint? _OnEventFiredOffset;
     private SchemaUntypedField? _OnEventFiredInstance;
 
     public SchemaUntypedField OnEventFired
     {
         get
         {
-            if (_OnEventFiredOffset == -1) _OnEventFiredOffset = Schema.GetOffset(0xD797C990E84EA158);
+            _OnEventFiredOffset = _OnEventFiredOffset ?? Schema.GetOffset(0xD797C990E84EA158);
             var instance = _OnEventFiredInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OnEventFiredOffset);
+            instance.DangerousSetHandle(_Handle + _OnEventFiredOffset!.Value);
             return instance;
         }
     }

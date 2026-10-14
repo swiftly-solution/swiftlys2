@@ -16,60 +16,60 @@ internal partial class CAnimGraphDoc_GraphImpl : CAnimGraphDoc_SubGraphImpl, CAn
 {
     public CAnimGraphDoc_GraphImpl(nint handle) : base(handle) { }
 
-    private static nint _SettingsManagerOffset = -1;
+    private static nint? _SettingsManagerOffset;
     private SchemaUntypedField? _SettingsManagerInstance;
 
     public SchemaUntypedField SettingsManager
     {
         get
         {
-            if (_SettingsManagerOffset == -1) _SettingsManagerOffset = Schema.GetOffset(0xF9B2A2724ADC0AB9);
+            _SettingsManagerOffset = _SettingsManagerOffset ?? Schema.GetOffset(0xF9B2A2724ADC0AB9);
             var instance = _SettingsManagerInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _SettingsManagerOffset);
+            instance.DangerousSetHandle(_Handle + _SettingsManagerOffset!.Value);
             return instance;
         }
     }
-    private static nint _ClipDataManagerOffset = -1;
+    private static nint? _ClipDataManagerOffset;
     private CAnimGraphDoc_ClipDataManagerImpl? _ClipDataManagerInstance;
 
     public CAnimGraphDoc_ClipDataManager ClipDataManager
     {
         get
         {
-            if (_ClipDataManagerOffset == -1) _ClipDataManagerOffset = Schema.GetOffset(0xF9B2A2720E7C58D2);
+            _ClipDataManagerOffset = _ClipDataManagerOffset ?? Schema.GetOffset(0xF9B2A2720E7C58D2);
             var instance = _ClipDataManagerInstance ??= new CAnimGraphDoc_ClipDataManagerImpl(0);
-            instance.DangerousSetHandle(_Handle + _ClipDataManagerOffset);
+            instance.DangerousSetHandle(_Handle + _ClipDataManagerOffset!.Value);
             return instance;
         }
     }
-    private static nint _ModelNameOffset = -1;
+    private static nint? _ModelNameOffset;
 
     public string ModelName
     {
         get
         {
-            if (_ModelNameOffset == -1) _ModelNameOffset = Schema.GetOffset(0xF9B2A2725D35B6E1);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ModelNameOffset));
+            _ModelNameOffset = _ModelNameOffset ?? Schema.GetOffset(0xF9B2A2725D35B6E1);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ModelNameOffset!.Value));
         }
         set
         {
-            if (_ModelNameOffset == -1) _ModelNameOffset = Schema.GetOffset(0xF9B2A2725D35B6E1);
-            Schema.SetCUtlString(_Handle, _ModelNameOffset, value);
+            _ModelNameOffset = _ModelNameOffset ?? Schema.GetOffset(0xF9B2A2725D35B6E1);
+            Schema.SetCUtlString(_Handle, _ModelNameOffset!.Value, value);
         }
     }
-    private static nint _PreviewModelNameOffset = -1;
+    private static nint? _PreviewModelNameOffset;
 
     public string PreviewModelName
     {
         get
         {
-            if (_PreviewModelNameOffset == -1) _PreviewModelNameOffset = Schema.GetOffset(0xF9B2A272FA4DFF2F);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_PreviewModelNameOffset));
+            _PreviewModelNameOffset = _PreviewModelNameOffset ?? Schema.GetOffset(0xF9B2A272FA4DFF2F);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_PreviewModelNameOffset!.Value));
         }
         set
         {
-            if (_PreviewModelNameOffset == -1) _PreviewModelNameOffset = Schema.GetOffset(0xF9B2A272FA4DFF2F);
-            Schema.SetCUtlString(_Handle, _PreviewModelNameOffset, value);
+            _PreviewModelNameOffset = _PreviewModelNameOffset ?? Schema.GetOffset(0xF9B2A272FA4DFF2F);
+            Schema.SetCUtlString(_Handle, _PreviewModelNameOffset!.Value, value);
         }
     }
 

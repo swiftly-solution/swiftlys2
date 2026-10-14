@@ -16,14 +16,14 @@ internal partial class C_OP_VelocityDecayImpl : CParticleFunctionOperatorImpl, C
 {
     public C_OP_VelocityDecayImpl(nint handle) : base(handle) { }
 
-    private static nint _MinVelocityOffset = -1;
+    private static nint? _MinVelocityOffset;
 
     public ref float MinVelocity
     {
         get
         {
-            if (_MinVelocityOffset == -1) _MinVelocityOffset = Schema.GetOffset(0xF59EE920AE8F0ADE);
-            return ref _Handle.AsRef<float>(_MinVelocityOffset);
+            _MinVelocityOffset = _MinVelocityOffset ?? Schema.GetOffset(0xF59EE920AE8F0ADE);
+            return ref _Handle.AsRef<float>(_MinVelocityOffset!.Value);
         }
     }
 

@@ -16,24 +16,24 @@ internal partial class FeSoftParent_tImpl : SchemaClass, FeSoftParent_t
 {
     public FeSoftParent_tImpl(nint handle) : base(handle) { }
 
-    private static nint _ParentOffset = -1;
+    private static nint? _ParentOffset;
 
     public ref int Parent
     {
         get
         {
-            if (_ParentOffset == -1) _ParentOffset = Schema.GetOffset(0x2404393716640171);
-            return ref _Handle.AsRef<int>(_ParentOffset);
+            _ParentOffset = _ParentOffset ?? Schema.GetOffset(0x2404393716640171);
+            return ref _Handle.AsRef<int>(_ParentOffset!.Value);
         }
     }
-    private static nint _AlphaOffset = -1;
+    private static nint? _AlphaOffset;
 
     public ref float Alpha
     {
         get
         {
-            if (_AlphaOffset == -1) _AlphaOffset = Schema.GetOffset(0x24043937684C8871);
-            return ref _Handle.AsRef<float>(_AlphaOffset);
+            _AlphaOffset = _AlphaOffset ?? Schema.GetOffset(0x24043937684C8871);
+            return ref _Handle.AsRef<float>(_AlphaOffset!.Value);
         }
     }
 

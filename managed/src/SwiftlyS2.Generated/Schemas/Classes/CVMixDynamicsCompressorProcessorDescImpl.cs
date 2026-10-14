@@ -16,55 +16,55 @@ internal partial class CVMixDynamicsCompressorProcessorDescImpl : CVMixBaseProce
 {
     public CVMixDynamicsCompressorProcessorDescImpl(nint handle) : base(handle) { }
 
-    private static nint _DescOffset = -1;
+    private static nint? _DescOffset;
     private VMixDynamicsCompressorDesc_tImpl? _DescInstance;
 
     public VMixDynamicsCompressorDesc_t Desc
     {
         get
         {
-            if (_DescOffset == -1) _DescOffset = Schema.GetOffset(0x58A8E6D227917BC0);
+            _DescOffset = _DescOffset ?? Schema.GetOffset(0x58A8E6D227917BC0);
             var instance = _DescInstance ??= new VMixDynamicsCompressorDesc_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _DescOffset);
+            instance.DangerousSetHandle(_Handle + _DescOffset!.Value);
             return instance;
         }
     }
-    private static nint _OutParamLevelOffset = -1;
+    private static nint? _OutParamLevelOffset;
     private CVMixParameterFloatImpl? _OutParamLevelInstance;
 
     public CVMixParameterFloat OutParamLevel
     {
         get
         {
-            if (_OutParamLevelOffset == -1) _OutParamLevelOffset = Schema.GetOffset(0x58A8E6D24EE63A32);
+            _OutParamLevelOffset = _OutParamLevelOffset ?? Schema.GetOffset(0x58A8E6D24EE63A32);
             var instance = _OutParamLevelInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _OutParamLevelOffset);
+            instance.DangerousSetHandle(_Handle + _OutParamLevelOffset!.Value);
             return instance;
         }
     }
-    private static nint _OutParamdBLevelOffset = -1;
+    private static nint? _OutParamdBLevelOffset;
     private CVMixParameterFloatImpl? _OutParamdBLevelInstance;
 
     public CVMixParameterFloat OutParamdBLevel
     {
         get
         {
-            if (_OutParamdBLevelOffset == -1) _OutParamdBLevelOffset = Schema.GetOffset(0x58A8E6D2B5E8DB6C);
+            _OutParamdBLevelOffset = _OutParamdBLevelOffset ?? Schema.GetOffset(0x58A8E6D2B5E8DB6C);
             var instance = _OutParamdBLevelInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _OutParamdBLevelOffset);
+            instance.DangerousSetHandle(_Handle + _OutParamdBLevelOffset!.Value);
             return instance;
         }
     }
-    private static nint _OutParamReductionOffset = -1;
+    private static nint? _OutParamReductionOffset;
     private CVMixParameterFloatImpl? _OutParamReductionInstance;
 
     public CVMixParameterFloat OutParamReduction
     {
         get
         {
-            if (_OutParamReductionOffset == -1) _OutParamReductionOffset = Schema.GetOffset(0x58A8E6D2B15FB285);
+            _OutParamReductionOffset = _OutParamReductionOffset ?? Schema.GetOffset(0x58A8E6D2B15FB285);
             var instance = _OutParamReductionInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _OutParamReductionOffset);
+            instance.DangerousSetHandle(_Handle + _OutParamReductionOffset!.Value);
             return instance;
         }
     }
