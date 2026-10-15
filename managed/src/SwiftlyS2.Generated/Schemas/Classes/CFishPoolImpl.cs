@@ -16,76 +16,76 @@ internal partial class CFishPoolImpl : CBaseEntityImpl, CFishPool
 {
     public CFishPoolImpl(nint handle) : base(handle) { }
 
-    private static nint _FishCountOffset = -1;
+    private static nint? _FishCountOffset;
 
     public ref int FishCount
     {
         get
         {
-            if (_FishCountOffset == -1) _FishCountOffset = Schema.GetOffset(0x1B71368A31165D02);
-            return ref _Handle.AsRef<int>(_FishCountOffset);
+            _FishCountOffset = _FishCountOffset ?? Schema.GetOffset(0x1B71368A31165D02);
+            return ref _Handle.AsRef<int>(_FishCountOffset!.Value);
         }
     }
-    private static nint _MaxRangeOffset = -1;
+    private static nint? _MaxRangeOffset;
 
     public ref float MaxRange
     {
         get
         {
-            if (_MaxRangeOffset == -1) _MaxRangeOffset = Schema.GetOffset(0x1B71368A560879E6);
-            return ref _Handle.AsRef<float>(_MaxRangeOffset);
+            _MaxRangeOffset = _MaxRangeOffset ?? Schema.GetOffset(0x1B71368A560879E6);
+            return ref _Handle.AsRef<float>(_MaxRangeOffset!.Value);
         }
     }
-    private static nint _SwimDepthOffset = -1;
+    private static nint? _SwimDepthOffset;
 
     public ref float SwimDepth
     {
         get
         {
-            if (_SwimDepthOffset == -1) _SwimDepthOffset = Schema.GetOffset(0x1B71368AA94321F2);
-            return ref _Handle.AsRef<float>(_SwimDepthOffset);
+            _SwimDepthOffset = _SwimDepthOffset ?? Schema.GetOffset(0x1B71368AA94321F2);
+            return ref _Handle.AsRef<float>(_SwimDepthOffset!.Value);
         }
     }
-    private static nint _WaterLevelOffset = -1;
+    private static nint? _WaterLevelOffset;
 
     public ref float WaterLevel
     {
         get
         {
-            if (_WaterLevelOffset == -1) _WaterLevelOffset = Schema.GetOffset(0x1B71368AE63A21D6);
-            return ref _Handle.AsRef<float>(_WaterLevelOffset);
+            _WaterLevelOffset = _WaterLevelOffset ?? Schema.GetOffset(0x1B71368AE63A21D6);
+            return ref _Handle.AsRef<float>(_WaterLevelOffset!.Value);
         }
     }
-    private static nint _IsDormantOffset = -1;
+    private static nint? _IsDormantOffset;
 
     public ref bool IsDormant
     {
         get
         {
-            if (_IsDormantOffset == -1) _IsDormantOffset = Schema.GetOffset(0x1B71368A1D7D906E);
-            return ref _Handle.AsRef<bool>(_IsDormantOffset);
+            _IsDormantOffset = _IsDormantOffset ?? Schema.GetOffset(0x1B71368A1D7D906E);
+            return ref _Handle.AsRef<bool>(_IsDormantOffset!.Value);
         }
     }
-    private static nint _FishesOffset = -1;
+    private static nint? _FishesOffset;
 
     public ref CUtlVector<CHandle<CFish>> Fishes
     {
         get
         {
-            if (_FishesOffset == -1) _FishesOffset = Schema.GetOffset(0x1B71368AFDB58C33);
-            return ref _Handle.AsRef<CUtlVector<CHandle<CFish>>>(_FishesOffset);
+            _FishesOffset = _FishesOffset ?? Schema.GetOffset(0x1B71368AFDB58C33);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CFish>>>(_FishesOffset!.Value);
         }
     }
-    private static nint _VisTimerOffset = -1;
+    private static nint? _VisTimerOffset;
     private CountdownTimerImpl? _VisTimerInstance;
 
     public CountdownTimer VisTimer
     {
         get
         {
-            if (_VisTimerOffset == -1) _VisTimerOffset = Schema.GetOffset(0x1B71368AC8E45FB6);
+            _VisTimerOffset = _VisTimerOffset ?? Schema.GetOffset(0x1B71368AC8E45FB6);
             var instance = _VisTimerInstance ??= new CountdownTimerImpl(0);
-            instance.DangerousSetHandle(_Handle + _VisTimerOffset);
+            instance.DangerousSetHandle(_Handle + _VisTimerOffset!.Value);
             return instance;
         }
     }

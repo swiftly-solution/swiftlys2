@@ -16,14 +16,14 @@ internal partial class CPhysThrusterImpl : CPhysForceImpl, CPhysThruster
 {
     public CPhysThrusterImpl(nint handle) : base(handle) { }
 
-    private static nint _LocalOriginOffset = -1;
+    private static nint? _LocalOriginOffset;
 
     public ref Vector LocalOrigin
     {
         get
         {
-            if (_LocalOriginOffset == -1) _LocalOriginOffset = Schema.GetOffset(0xC6E190F75672584A);
-            return ref _Handle.AsRef<Vector>(_LocalOriginOffset);
+            _LocalOriginOffset = _LocalOriginOffset ?? Schema.GetOffset(0xC6E190F75672584A);
+            return ref _Handle.AsRef<Vector>(_LocalOriginOffset!.Value);
         }
     }
 

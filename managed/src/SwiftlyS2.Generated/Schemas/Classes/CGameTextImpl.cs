@@ -16,31 +16,31 @@ internal partial class CGameTextImpl : CRulePointEntityImpl, CGameText
 {
     public CGameTextImpl(nint handle) : base(handle) { }
 
-    private static nint _MessageOffset = -1;
+    private static nint? _MessageOffset;
 
     public string Message
     {
         get
         {
-            if (_MessageOffset == -1) _MessageOffset = Schema.GetOffset(0x8AF55797CC5243DC);
-            return Schema.GetString(_Handle.Read<nint>(_MessageOffset));
+            _MessageOffset = _MessageOffset ?? Schema.GetOffset(0x8AF55797CC5243DC);
+            return Schema.GetString(_Handle.Read<nint>(_MessageOffset!.Value));
         }
         set
         {
-            if (_MessageOffset == -1) _MessageOffset = Schema.GetOffset(0x8AF55797CC5243DC);
-            Schema.SetString(_Handle, _MessageOffset, value);
+            _MessageOffset = _MessageOffset ?? Schema.GetOffset(0x8AF55797CC5243DC);
+            Schema.SetString(_Handle, _MessageOffset!.Value, value);
         }
     }
-    private static nint _TextParmsOffset = -1;
+    private static nint? _TextParmsOffset;
     private hudtextparms_tImpl? _TextParmsInstance;
 
     public hudtextparms_t TextParms
     {
         get
         {
-            if (_TextParmsOffset == -1) _TextParmsOffset = Schema.GetOffset(0x8AF5579715FCA35D);
+            _TextParmsOffset = _TextParmsOffset ?? Schema.GetOffset(0x8AF5579715FCA35D);
             var instance = _TextParmsInstance ??= new hudtextparms_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _TextParmsOffset);
+            instance.DangerousSetHandle(_Handle + _TextParmsOffset!.Value);
             return instance;
         }
     }

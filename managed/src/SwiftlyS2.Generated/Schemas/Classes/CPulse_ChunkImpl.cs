@@ -16,46 +16,46 @@ internal partial class CPulse_ChunkImpl : SchemaClass, CPulse_Chunk
 {
     public CPulse_ChunkImpl(nint handle) : base(handle) { }
 
-    private static nint _InstructionsOffset = -1;
+    private static nint? _InstructionsOffset;
 
     public ref CUtlLeanVector<PGDInstruction_t, int> Instructions
     {
         get
         {
-            if (_InstructionsOffset == -1) _InstructionsOffset = Schema.GetOffset(0x816932094D358BC4);
-            return ref _Handle.AsRef<CUtlLeanVector<PGDInstruction_t, int>>(_InstructionsOffset);
+            _InstructionsOffset = _InstructionsOffset ?? Schema.GetOffset(0x816932094D358BC4);
+            return ref _Handle.AsRef<CUtlLeanVector<PGDInstruction_t, int>>(_InstructionsOffset!.Value);
         }
     }
-    private static nint _RegistersOffset = -1;
+    private static nint? _RegistersOffset;
 
     public ref CUtlLeanVector<CPulse_RegisterInfo, int> Registers
     {
         get
         {
-            if (_RegistersOffset == -1) _RegistersOffset = Schema.GetOffset(0x81693209BB828A49);
-            return ref _Handle.AsRef<CUtlLeanVector<CPulse_RegisterInfo, int>>(_RegistersOffset);
+            _RegistersOffset = _RegistersOffset ?? Schema.GetOffset(0x81693209BB828A49);
+            return ref _Handle.AsRef<CUtlLeanVector<CPulse_RegisterInfo, int>>(_RegistersOffset!.Value);
         }
     }
-    private static nint _InstructionDebugInfosOffset = -1;
+    private static nint? _InstructionDebugInfosOffset;
 
     public ref CUtlLeanVector<CPulse_InstructionDebug, int> InstructionDebugInfos
     {
         get
         {
-            if (_InstructionDebugInfosOffset == -1) _InstructionDebugInfosOffset = Schema.GetOffset(0x816932095788D5D7);
-            return ref _Handle.AsRef<CUtlLeanVector<CPulse_InstructionDebug, int>>(_InstructionDebugInfosOffset);
+            _InstructionDebugInfosOffset = _InstructionDebugInfosOffset ?? Schema.GetOffset(0x816932095788D5D7);
+            return ref _Handle.AsRef<CUtlLeanVector<CPulse_InstructionDebug, int>>(_InstructionDebugInfosOffset!.Value);
         }
     }
-    private static nint _TempVarBankOffset = -1;
+    private static nint? _TempVarBankOffset;
     private PulseRuntimeTempVarBankIndex_tImpl? _TempVarBankInstance;
 
     public PulseRuntimeTempVarBankIndex_t TempVarBank
     {
         get
         {
-            if (_TempVarBankOffset == -1) _TempVarBankOffset = Schema.GetOffset(0x81693209344EDC2E);
+            _TempVarBankOffset = _TempVarBankOffset ?? Schema.GetOffset(0x81693209344EDC2E);
             var instance = _TempVarBankInstance ??= new PulseRuntimeTempVarBankIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _TempVarBankOffset);
+            instance.DangerousSetHandle(_Handle + _TempVarBankOffset!.Value);
             return instance;
         }
     }

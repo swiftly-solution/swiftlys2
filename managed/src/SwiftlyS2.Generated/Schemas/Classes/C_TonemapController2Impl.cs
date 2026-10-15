@@ -16,54 +16,54 @@ internal partial class C_TonemapController2Impl : C_BaseEntityImpl, C_TonemapCon
 {
     public C_TonemapController2Impl(nint handle) : base(handle) { }
 
-    private static nint _AutoExposureMinOffset = -1;
+    private static nint? _AutoExposureMinOffset;
 
     public ref float AutoExposureMin
     {
         get
         {
-            if (_AutoExposureMinOffset == -1) _AutoExposureMinOffset = Schema.GetOffset(0x34BC2CA77D8FC60B);
-            return ref _Handle.AsRef<float>(_AutoExposureMinOffset);
+            _AutoExposureMinOffset = _AutoExposureMinOffset ?? Schema.GetOffset(0x34BC2CA77D8FC60B);
+            return ref _Handle.AsRef<float>(_AutoExposureMinOffset!.Value);
         }
     }
-    private static nint _AutoExposureMaxOffset = -1;
+    private static nint? _AutoExposureMaxOffset;
 
     public ref float AutoExposureMax
     {
         get
         {
-            if (_AutoExposureMaxOffset == -1) _AutoExposureMaxOffset = Schema.GetOffset(0x34BC2CA7937C60F5);
-            return ref _Handle.AsRef<float>(_AutoExposureMaxOffset);
+            _AutoExposureMaxOffset = _AutoExposureMaxOffset ?? Schema.GetOffset(0x34BC2CA7937C60F5);
+            return ref _Handle.AsRef<float>(_AutoExposureMaxOffset!.Value);
         }
     }
-    private static nint _ExposureAdaptationSpeedUpOffset = -1;
+    private static nint? _ExposureAdaptationSpeedUpOffset;
 
     public ref float ExposureAdaptationSpeedUp
     {
         get
         {
-            if (_ExposureAdaptationSpeedUpOffset == -1) _ExposureAdaptationSpeedUpOffset = Schema.GetOffset(0x34BC2CA7D587708B);
-            return ref _Handle.AsRef<float>(_ExposureAdaptationSpeedUpOffset);
+            _ExposureAdaptationSpeedUpOffset = _ExposureAdaptationSpeedUpOffset ?? Schema.GetOffset(0x34BC2CA7D587708B);
+            return ref _Handle.AsRef<float>(_ExposureAdaptationSpeedUpOffset!.Value);
         }
     }
-    private static nint _ExposureAdaptationSpeedDownOffset = -1;
+    private static nint? _ExposureAdaptationSpeedDownOffset;
 
     public ref float ExposureAdaptationSpeedDown
     {
         get
         {
-            if (_ExposureAdaptationSpeedDownOffset == -1) _ExposureAdaptationSpeedDownOffset = Schema.GetOffset(0x34BC2CA732DAF29E);
-            return ref _Handle.AsRef<float>(_ExposureAdaptationSpeedDownOffset);
+            _ExposureAdaptationSpeedDownOffset = _ExposureAdaptationSpeedDownOffset ?? Schema.GetOffset(0x34BC2CA732DAF29E);
+            return ref _Handle.AsRef<float>(_ExposureAdaptationSpeedDownOffset!.Value);
         }
     }
-    private static nint _TonemapEVSmoothingRangeOffset = -1;
+    private static nint? _TonemapEVSmoothingRangeOffset;
 
     public ref float TonemapEVSmoothingRange
     {
         get
         {
-            if (_TonemapEVSmoothingRangeOffset == -1) _TonemapEVSmoothingRangeOffset = Schema.GetOffset(0x34BC2CA79C2546CB);
-            return ref _Handle.AsRef<float>(_TonemapEVSmoothingRangeOffset);
+            _TonemapEVSmoothingRangeOffset = _TonemapEVSmoothingRangeOffset ?? Schema.GetOffset(0x34BC2CA79C2546CB);
+            return ref _Handle.AsRef<float>(_TonemapEVSmoothingRangeOffset!.Value);
         }
     }
 

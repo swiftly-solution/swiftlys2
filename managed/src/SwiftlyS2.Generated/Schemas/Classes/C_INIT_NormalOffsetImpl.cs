@@ -16,54 +16,54 @@ internal partial class C_INIT_NormalOffsetImpl : CParticleFunctionInitializerImp
 {
     public C_INIT_NormalOffsetImpl(nint handle) : base(handle) { }
 
-    private static nint _OffsetMinOffset = -1;
+    private static nint? _OffsetMinOffset;
 
     public ref Vector OffsetMin
     {
         get
         {
-            if (_OffsetMinOffset == -1) _OffsetMinOffset = Schema.GetOffset(0x79E80AD67E1ECBDE);
-            return ref _Handle.AsRef<Vector>(_OffsetMinOffset);
+            _OffsetMinOffset = _OffsetMinOffset ?? Schema.GetOffset(0x79E80AD67E1ECBDE);
+            return ref _Handle.AsRef<Vector>(_OffsetMinOffset!.Value);
         }
     }
-    private static nint _OffsetMaxOffset = -1;
+    private static nint? _OffsetMaxOffset;
 
     public ref Vector OffsetMax
     {
         get
         {
-            if (_OffsetMaxOffset == -1) _OffsetMaxOffset = Schema.GetOffset(0x79E80AD69009CD7C);
-            return ref _Handle.AsRef<Vector>(_OffsetMaxOffset);
+            _OffsetMaxOffset = _OffsetMaxOffset ?? Schema.GetOffset(0x79E80AD69009CD7C);
+            return ref _Handle.AsRef<Vector>(_OffsetMaxOffset!.Value);
         }
     }
-    private static nint _ControlPointNumberOffset = -1;
+    private static nint? _ControlPointNumberOffset;
 
     public ref int ControlPointNumber
     {
         get
         {
-            if (_ControlPointNumberOffset == -1) _ControlPointNumberOffset = Schema.GetOffset(0x79E80AD63F31A6BD);
-            return ref _Handle.AsRef<int>(_ControlPointNumberOffset);
+            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0x79E80AD63F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
         }
     }
-    private static nint _LocalCoordsOffset = -1;
+    private static nint? _LocalCoordsOffset;
 
     public ref bool LocalCoords
     {
         get
         {
-            if (_LocalCoordsOffset == -1) _LocalCoordsOffset = Schema.GetOffset(0x79E80AD630E716DE);
-            return ref _Handle.AsRef<bool>(_LocalCoordsOffset);
+            _LocalCoordsOffset = _LocalCoordsOffset ?? Schema.GetOffset(0x79E80AD630E716DE);
+            return ref _Handle.AsRef<bool>(_LocalCoordsOffset!.Value);
         }
     }
-    private static nint _NormalizeOffset = -1;
+    private static nint? _NormalizeOffset;
 
     public ref bool Normalize
     {
         get
         {
-            if (_NormalizeOffset == -1) _NormalizeOffset = Schema.GetOffset(0x79E80AD648BC424C);
-            return ref _Handle.AsRef<bool>(_NormalizeOffset);
+            _NormalizeOffset = _NormalizeOffset ?? Schema.GetOffset(0x79E80AD648BC424C);
+            return ref _Handle.AsRef<bool>(_NormalizeOffset!.Value);
         }
     }
 

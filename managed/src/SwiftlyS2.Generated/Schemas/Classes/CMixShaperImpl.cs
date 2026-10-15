@@ -16,16 +16,16 @@ internal partial class CMixShaperImpl : CMixPropertyBaseImpl, CMixShaper
 {
     public CMixShaperImpl(nint handle) : base(handle) { }
 
-    private static nint _DescOffset = -1;
+    private static nint? _DescOffset;
     private VMixShaperDesc_tImpl? _DescInstance;
 
     public VMixShaperDesc_t Desc
     {
         get
         {
-            if (_DescOffset == -1) _DescOffset = Schema.GetOffset(0x3BE028B927917BC0);
+            _DescOffset = _DescOffset ?? Schema.GetOffset(0x3BE028B927917BC0);
             var instance = _DescInstance ??= new VMixShaperDesc_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _DescOffset);
+            instance.DangerousSetHandle(_Handle + _DescOffset!.Value);
             return instance;
         }
     }

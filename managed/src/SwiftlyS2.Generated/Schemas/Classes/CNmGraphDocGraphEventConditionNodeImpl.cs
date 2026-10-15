@@ -16,44 +16,44 @@ internal partial class CNmGraphDocGraphEventConditionNodeImpl : CNmGraphDocFlowN
 {
     public CNmGraphDocGraphEventConditionNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _OperatorOffset = -1;
+    private static nint? _OperatorOffset;
 
     public ref NmEventConditionOperator_t Operator
     {
         get
         {
-            if (_OperatorOffset == -1) _OperatorOffset = Schema.GetOffset(0x73369A0E8ABE049D);
-            return ref _Handle.AsRef<NmEventConditionOperator_t>(_OperatorOffset);
+            _OperatorOffset = _OperatorOffset ?? Schema.GetOffset(0x73369A0E8ABE049D);
+            return ref _Handle.AsRef<NmEventConditionOperator_t>(_OperatorOffset!.Value);
         }
     }
-    private static nint _LimitSearchToSourceStateOffset = -1;
+    private static nint? _LimitSearchToSourceStateOffset;
 
     public ref bool LimitSearchToSourceState
     {
         get
         {
-            if (_LimitSearchToSourceStateOffset == -1) _LimitSearchToSourceStateOffset = Schema.GetOffset(0x73369A0E15D4BD01);
-            return ref _Handle.AsRef<bool>(_LimitSearchToSourceStateOffset);
+            _LimitSearchToSourceStateOffset = _LimitSearchToSourceStateOffset ?? Schema.GetOffset(0x73369A0E15D4BD01);
+            return ref _Handle.AsRef<bool>(_LimitSearchToSourceStateOffset!.Value);
         }
     }
-    private static nint _IgnoreInactiveBranchEventsOffset = -1;
+    private static nint? _IgnoreInactiveBranchEventsOffset;
 
     public ref bool IgnoreInactiveBranchEvents
     {
         get
         {
-            if (_IgnoreInactiveBranchEventsOffset == -1) _IgnoreInactiveBranchEventsOffset = Schema.GetOffset(0x73369A0E40B77877);
-            return ref _Handle.AsRef<bool>(_IgnoreInactiveBranchEventsOffset);
+            _IgnoreInactiveBranchEventsOffset = _IgnoreInactiveBranchEventsOffset ?? Schema.GetOffset(0x73369A0E40B77877);
+            return ref _Handle.AsRef<bool>(_IgnoreInactiveBranchEventsOffset!.Value);
         }
     }
-    private static nint _ConditionsOffset = -1;
+    private static nint? _ConditionsOffset;
 
     public ref CUtlVector<CNmGraphDocGraphEventConditionNode__Condition_t> Conditions
     {
         get
         {
-            if (_ConditionsOffset == -1) _ConditionsOffset = Schema.GetOffset(0x73369A0EEDDF6757);
-            return ref _Handle.AsRef<CUtlVector<CNmGraphDocGraphEventConditionNode__Condition_t>>(_ConditionsOffset);
+            _ConditionsOffset = _ConditionsOffset ?? Schema.GetOffset(0x73369A0EEDDF6757);
+            return ref _Handle.AsRef<CUtlVector<CNmGraphDocGraphEventConditionNode__Condition_t>>(_ConditionsOffset!.Value);
         }
     }
 

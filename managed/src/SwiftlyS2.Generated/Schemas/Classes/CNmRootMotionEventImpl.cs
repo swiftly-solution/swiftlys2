@@ -16,14 +16,14 @@ internal partial class CNmRootMotionEventImpl : CNmEventImpl, CNmRootMotionEvent
 {
     public CNmRootMotionEventImpl(nint handle) : base(handle) { }
 
-    private static nint _BlendTimeSecondsOffset = -1;
+    private static nint? _BlendTimeSecondsOffset;
 
     public ref float BlendTimeSeconds
     {
         get
         {
-            if (_BlendTimeSecondsOffset == -1) _BlendTimeSecondsOffset = Schema.GetOffset(0x8BA908676D3A08FC);
-            return ref _Handle.AsRef<float>(_BlendTimeSecondsOffset);
+            _BlendTimeSecondsOffset = _BlendTimeSecondsOffset ?? Schema.GetOffset(0x8BA908676D3A08FC);
+            return ref _Handle.AsRef<float>(_BlendTimeSecondsOffset!.Value);
         }
     }
 

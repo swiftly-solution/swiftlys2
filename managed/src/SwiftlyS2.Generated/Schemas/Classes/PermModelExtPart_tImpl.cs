@@ -16,49 +16,49 @@ internal partial class PermModelExtPart_tImpl : SchemaClass, PermModelExtPart_t
 {
     public PermModelExtPart_tImpl(nint handle) : base(handle) { }
 
-    private static nint _TransformOffset = -1;
+    private static nint? _TransformOffset;
 
     public ref CTransform Transform
     {
         get
         {
-            if (_TransformOffset == -1) _TransformOffset = Schema.GetOffset(0xCA30851D6EC5209B);
-            return ref _Handle.AsRef<CTransform>(_TransformOffset);
+            _TransformOffset = _TransformOffset ?? Schema.GetOffset(0xCA30851D6EC5209B);
+            return ref _Handle.AsRef<CTransform>(_TransformOffset!.Value);
         }
     }
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xCA30851DCAE8A266);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xCA30851DCAE8A266);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xCA30851DCAE8A266);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xCA30851DCAE8A266);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _ParentOffset = -1;
+    private static nint? _ParentOffset;
 
     public ref int Parent
     {
         get
         {
-            if (_ParentOffset == -1) _ParentOffset = Schema.GetOffset(0xCA30851D0AABB9D1);
-            return ref _Handle.AsRef<int>(_ParentOffset);
+            _ParentOffset = _ParentOffset ?? Schema.GetOffset(0xCA30851D0AABB9D1);
+            return ref _Handle.AsRef<int>(_ParentOffset!.Value);
         }
     }
-    private static nint _RefModelOffset = -1;
+    private static nint? _RefModelOffset;
 
     public ref CStrongHandle<InfoForResourceTypeCModel> RefModel
     {
         get
         {
-            if (_RefModelOffset == -1) _RefModelOffset = Schema.GetOffset(0xCA30851D63E6E3DF);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_RefModelOffset);
+            _RefModelOffset = _RefModelOffset ?? Schema.GetOffset(0xCA30851D63E6E3DF);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_RefModelOffset!.Value);
         }
     }
 

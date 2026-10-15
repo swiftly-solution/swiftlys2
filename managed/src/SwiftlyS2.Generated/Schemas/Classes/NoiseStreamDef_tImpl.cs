@@ -16,124 +16,124 @@ internal partial class NoiseStreamDef_tImpl : SchemaClass, NoiseStreamDef_t
 {
     public NoiseStreamDef_tImpl(nint handle) : base(handle) { }
 
-    private static nint _TypeOffset = -1;
+    private static nint? _TypeOffset;
 
     public ref NoiseStreamType_t Type
     {
         get
         {
-            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0x4422298B18853D59);
-            return ref _Handle.AsRef<NoiseStreamType_t>(_TypeOffset);
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x4422298B18853D59);
+            return ref _Handle.AsRef<NoiseStreamType_t>(_TypeOffset!.Value);
         }
     }
-    private static nint _ModifierOffset = -1;
+    private static nint? _ModifierOffset;
 
     public ref NoiseStreamModifier_t Modifier
     {
         get
         {
-            if (_ModifierOffset == -1) _ModifierOffset = Schema.GetOffset(0x4422298BB3DBA0B4);
-            return ref _Handle.AsRef<NoiseStreamModifier_t>(_ModifierOffset);
+            _ModifierOffset = _ModifierOffset ?? Schema.GetOffset(0x4422298BB3DBA0B4);
+            return ref _Handle.AsRef<NoiseStreamModifier_t>(_ModifierOffset!.Value);
         }
     }
-    private static nint _TurbulenceOffset = -1;
+    private static nint? _TurbulenceOffset;
 
     public ref NoiseStreamTurbulence_t Turbulence
     {
         get
         {
-            if (_TurbulenceOffset == -1) _TurbulenceOffset = Schema.GetOffset(0x4422298B2444D4E8);
-            return ref _Handle.AsRef<NoiseStreamTurbulence_t>(_TurbulenceOffset);
+            _TurbulenceOffset = _TurbulenceOffset ?? Schema.GetOffset(0x4422298B2444D4E8);
+            return ref _Handle.AsRef<NoiseStreamTurbulence_t>(_TurbulenceOffset!.Value);
         }
     }
-    private static nint _OutputMinOffset = -1;
+    private static nint? _OutputMinOffset;
 
     public ref float OutputMin
     {
         get
         {
-            if (_OutputMinOffset == -1) _OutputMinOffset = Schema.GetOffset(0x4422298B5F8D7716);
-            return ref _Handle.AsRef<float>(_OutputMinOffset);
+            _OutputMinOffset = _OutputMinOffset ?? Schema.GetOffset(0x4422298B5F8D7716);
+            return ref _Handle.AsRef<float>(_OutputMinOffset!.Value);
         }
     }
-    private static nint _OutputMaxOffset = -1;
+    private static nint? _OutputMaxOffset;
 
     public ref float OutputMax
     {
         get
         {
-            if (_OutputMaxOffset == -1) _OutputMaxOffset = Schema.GetOffset(0x4422298B51A0E8C4);
-            return ref _Handle.AsRef<float>(_OutputMaxOffset);
+            _OutputMaxOffset = _OutputMaxOffset ?? Schema.GetOffset(0x4422298B51A0E8C4);
+            return ref _Handle.AsRef<float>(_OutputMaxOffset!.Value);
         }
     }
-    private static nint _ScaleOffset = -1;
+    private static nint? _ScaleOffset;
 
     public ref float Scale
     {
         get
         {
-            if (_ScaleOffset == -1) _ScaleOffset = Schema.GetOffset(0x4422298BB731A42F);
-            return ref _Handle.AsRef<float>(_ScaleOffset);
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x4422298BB731A42F);
+            return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
         }
     }
-    private static nint _OffsetRateOffset = -1;
+    private static nint? _OffsetRateOffset;
 
     public ref Vector OffsetRate
     {
         get
         {
-            if (_OffsetRateOffset == -1) _OffsetRateOffset = Schema.GetOffset(0x4422298BFDAA7A54);
-            return ref _Handle.AsRef<Vector>(_OffsetRateOffset);
+            _OffsetRateOffset = _OffsetRateOffset ?? Schema.GetOffset(0x4422298BFDAA7A54);
+            return ref _Handle.AsRef<Vector>(_OffsetRateOffset!.Value);
         }
     }
-    private static nint _OffsetOffset = -1;
+    private static nint? _OffsetOffset;
 
     public ref float Offset
     {
         get
         {
-            if (_OffsetOffset == -1) _OffsetOffset = Schema.GetOffset(0x4422298B7F14BA34);
-            return ref _Handle.AsRef<float>(_OffsetOffset);
+            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0x4422298B7F14BA34);
+            return ref _Handle.AsRef<float>(_OffsetOffset!.Value);
         }
     }
-    private static nint _OctavesOffset = -1;
+    private static nint? _OctavesOffset;
 
     public ref int Octaves
     {
         get
         {
-            if (_OctavesOffset == -1) _OctavesOffset = Schema.GetOffset(0x4422298B39286A1E);
-            return ref _Handle.AsRef<int>(_OctavesOffset);
+            _OctavesOffset = _OctavesOffset ?? Schema.GetOffset(0x4422298B39286A1E);
+            return ref _Handle.AsRef<int>(_OctavesOffset!.Value);
         }
     }
-    private static nint _TurbulenceScaleOffset = -1;
+    private static nint? _TurbulenceScaleOffset;
 
     public ref float TurbulenceScale
     {
         get
         {
-            if (_TurbulenceScaleOffset == -1) _TurbulenceScaleOffset = Schema.GetOffset(0x4422298B3230F76C);
-            return ref _Handle.AsRef<float>(_TurbulenceScaleOffset);
+            _TurbulenceScaleOffset = _TurbulenceScaleOffset ?? Schema.GetOffset(0x4422298B3230F76C);
+            return ref _Handle.AsRef<float>(_TurbulenceScaleOffset!.Value);
         }
     }
-    private static nint _TurbulenceMixOffset = -1;
+    private static nint? _TurbulenceMixOffset;
 
     public ref float TurbulenceMix
     {
         get
         {
-            if (_TurbulenceMixOffset == -1) _TurbulenceMixOffset = Schema.GetOffset(0x4422298B1FBDD178);
-            return ref _Handle.AsRef<float>(_TurbulenceMixOffset);
+            _TurbulenceMixOffset = _TurbulenceMixOffset ?? Schema.GetOffset(0x4422298B1FBDD178);
+            return ref _Handle.AsRef<float>(_TurbulenceMixOffset!.Value);
         }
     }
-    private static nint _OscillatorsOffset = -1;
+    private static nint? _OscillatorsOffset;
 
     public ref CUtlVector<NoiseOscillatorDef_t> Oscillators
     {
         get
         {
-            if (_OscillatorsOffset == -1) _OscillatorsOffset = Schema.GetOffset(0x4422298BD9E0F0DC);
-            return ref _Handle.AsRef<CUtlVector<NoiseOscillatorDef_t>>(_OscillatorsOffset);
+            _OscillatorsOffset = _OscillatorsOffset ?? Schema.GetOffset(0x4422298BD9E0F0DC);
+            return ref _Handle.AsRef<CUtlVector<NoiseOscillatorDef_t>>(_OscillatorsOffset!.Value);
         }
     }
 

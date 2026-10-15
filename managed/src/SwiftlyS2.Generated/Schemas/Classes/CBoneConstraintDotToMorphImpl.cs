@@ -16,61 +16,61 @@ internal partial class CBoneConstraintDotToMorphImpl : CBoneConstraintBaseImpl, 
 {
     public CBoneConstraintDotToMorphImpl(nint handle) : base(handle) { }
 
-    private static nint _BoneNameOffset = -1;
+    private static nint? _BoneNameOffset;
 
     public string BoneName
     {
         get
         {
-            if (_BoneNameOffset == -1) _BoneNameOffset = Schema.GetOffset(0x75939F077559AC1F);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_BoneNameOffset));
+            _BoneNameOffset = _BoneNameOffset ?? Schema.GetOffset(0x75939F077559AC1F);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_BoneNameOffset!.Value));
         }
         set
         {
-            if (_BoneNameOffset == -1) _BoneNameOffset = Schema.GetOffset(0x75939F077559AC1F);
-            Schema.SetCUtlString(_Handle, _BoneNameOffset, value);
+            _BoneNameOffset = _BoneNameOffset ?? Schema.GetOffset(0x75939F077559AC1F);
+            Schema.SetCUtlString(_Handle, _BoneNameOffset!.Value, value);
         }
     }
-    private static nint _TargetBoneNameOffset = -1;
+    private static nint? _TargetBoneNameOffset;
 
     public string TargetBoneName
     {
         get
         {
-            if (_TargetBoneNameOffset == -1) _TargetBoneNameOffset = Schema.GetOffset(0x75939F07CBA1BE4A);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_TargetBoneNameOffset));
+            _TargetBoneNameOffset = _TargetBoneNameOffset ?? Schema.GetOffset(0x75939F07CBA1BE4A);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_TargetBoneNameOffset!.Value));
         }
         set
         {
-            if (_TargetBoneNameOffset == -1) _TargetBoneNameOffset = Schema.GetOffset(0x75939F07CBA1BE4A);
-            Schema.SetCUtlString(_Handle, _TargetBoneNameOffset, value);
+            _TargetBoneNameOffset = _TargetBoneNameOffset ?? Schema.GetOffset(0x75939F07CBA1BE4A);
+            Schema.SetCUtlString(_Handle, _TargetBoneNameOffset!.Value, value);
         }
     }
-    private static nint _MorphChannelNameOffset = -1;
+    private static nint? _MorphChannelNameOffset;
 
     public string MorphChannelName
     {
         get
         {
-            if (_MorphChannelNameOffset == -1) _MorphChannelNameOffset = Schema.GetOffset(0x75939F0777272AE4);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_MorphChannelNameOffset));
+            _MorphChannelNameOffset = _MorphChannelNameOffset ?? Schema.GetOffset(0x75939F0777272AE4);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_MorphChannelNameOffset!.Value));
         }
         set
         {
-            if (_MorphChannelNameOffset == -1) _MorphChannelNameOffset = Schema.GetOffset(0x75939F0777272AE4);
-            Schema.SetCUtlString(_Handle, _MorphChannelNameOffset, value);
+            _MorphChannelNameOffset = _MorphChannelNameOffset ?? Schema.GetOffset(0x75939F0777272AE4);
+            Schema.SetCUtlString(_Handle, _MorphChannelNameOffset!.Value, value);
         }
     }
-    private static nint _RemapOffset = -1;
+    private static nint? _RemapOffset;
     private SchemaFixedArray<float>? _RemapInstance;
 
     public ISchemaFixedArray<float> Remap
     {
         get
         {
-            if (_RemapOffset == -1) _RemapOffset = Schema.GetOffset(0x75939F07BE3DB1A0);
+            _RemapOffset = _RemapOffset ?? Schema.GetOffset(0x75939F07BE3DB1A0);
             var instance = _RemapInstance ??= new SchemaFixedArray<float>(0, 0x75939F07BE3DB1A0, 4, 4, 4);
-            instance.DangerousSetHandle(_Handle + _RemapOffset);
+            instance.DangerousSetHandle(_Handle + _RemapOffset!.Value);
             return instance;
         }
     }

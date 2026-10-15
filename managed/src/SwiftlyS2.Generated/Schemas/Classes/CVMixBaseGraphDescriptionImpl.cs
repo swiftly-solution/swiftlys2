@@ -16,162 +16,162 @@ internal partial class CVMixBaseGraphDescriptionImpl : SchemaClass, CVMixBaseGra
 {
     public CVMixBaseGraphDescriptionImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x5E47F1214D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x5E47F1214D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x5E47F1214D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x5E47F1214D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _GraphOutputChannelsOffset = -1;
+    private static nint? _GraphOutputChannelsOffset;
 
     public ref int GraphOutputChannels
     {
         get
         {
-            if (_GraphOutputChannelsOffset == -1) _GraphOutputChannelsOffset = Schema.GetOffset(0x5E47F1216476037E);
-            return ref _Handle.AsRef<int>(_GraphOutputChannelsOffset);
+            _GraphOutputChannelsOffset = _GraphOutputChannelsOffset ?? Schema.GetOffset(0x5E47F1216476037E);
+            return ref _Handle.AsRef<int>(_GraphOutputChannelsOffset!.Value);
         }
     }
-    private static nint _IsMainGraphOffset = -1;
+    private static nint? _IsMainGraphOffset;
 
     public ref bool IsMainGraph
     {
         get
         {
-            if (_IsMainGraphOffset == -1) _IsMainGraphOffset = Schema.GetOffset(0x5E47F12113899EBC);
-            return ref _Handle.AsRef<bool>(_IsMainGraphOffset);
+            _IsMainGraphOffset = _IsMainGraphOffset ?? Schema.GetOffset(0x5E47F12113899EBC);
+            return ref _Handle.AsRef<bool>(_IsMainGraphOffset!.Value);
         }
     }
-    private static nint _ProcessorNodesOffset = -1;
+    private static nint? _ProcessorNodesOffset;
 
     public ref CUtlLeanVector<SchemaUntypedField, int> ProcessorNodes
     {
         get
         {
-            if (_ProcessorNodesOffset == -1) _ProcessorNodesOffset = Schema.GetOffset(0x5E47F121FD45E4DC);
-            return ref _Handle.AsRef<CUtlLeanVector<SchemaUntypedField, int>>(_ProcessorNodesOffset);
+            _ProcessorNodesOffset = _ProcessorNodesOffset ?? Schema.GetOffset(0x5E47F121FD45E4DC);
+            return ref _Handle.AsRef<CUtlLeanVector<SchemaUntypedField, int>>(_ProcessorNodesOffset!.Value);
         }
     }
-    private static nint _GraphInputsOffset = -1;
+    private static nint? _GraphInputsOffset;
 
     public ref CUtlLeanVector<CVMixGraphInput, int> GraphInputs
     {
         get
         {
-            if (_GraphInputsOffset == -1) _GraphInputsOffset = Schema.GetOffset(0x5E47F121B829B7E2);
-            return ref _Handle.AsRef<CUtlLeanVector<CVMixGraphInput, int>>(_GraphInputsOffset);
+            _GraphInputsOffset = _GraphInputsOffset ?? Schema.GetOffset(0x5E47F121B829B7E2);
+            return ref _Handle.AsRef<CUtlLeanVector<CVMixGraphInput, int>>(_GraphInputsOffset!.Value);
         }
     }
-    private static nint _ControlTransientInputsOffset = -1;
+    private static nint? _ControlTransientInputsOffset;
 
     public ref CUtlLeanVector<CVMixControlInput, int> ControlTransientInputs
     {
         get
         {
-            if (_ControlTransientInputsOffset == -1) _ControlTransientInputsOffset = Schema.GetOffset(0x5E47F12101952FAD);
-            return ref _Handle.AsRef<CUtlLeanVector<CVMixControlInput, int>>(_ControlTransientInputsOffset);
+            _ControlTransientInputsOffset = _ControlTransientInputsOffset ?? Schema.GetOffset(0x5E47F12101952FAD);
+            return ref _Handle.AsRef<CUtlLeanVector<CVMixControlInput, int>>(_ControlTransientInputsOffset!.Value);
         }
     }
-    private static nint _ControlOutputsOffset = -1;
+    private static nint? _ControlOutputsOffset;
 
     public ref CUtlLeanVector<CVMixControlOutput, int> ControlOutputs
     {
         get
         {
-            if (_ControlOutputsOffset == -1) _ControlOutputsOffset = Schema.GetOffset(0x5E47F121F87FCC6C);
-            return ref _Handle.AsRef<CUtlLeanVector<CVMixControlOutput, int>>(_ControlOutputsOffset);
+            _ControlOutputsOffset = _ControlOutputsOffset ?? Schema.GetOffset(0x5E47F121F87FCC6C);
+            return ref _Handle.AsRef<CUtlLeanVector<CVMixControlOutput, int>>(_ControlOutputsOffset!.Value);
         }
     }
-    private static nint _ImpulseResponseInputsOffset = -1;
+    private static nint? _ImpulseResponseInputsOffset;
 
     public ref CUtlLeanVector<CVMixImpulseResponseInput, int> ImpulseResponseInputs
     {
         get
         {
-            if (_ImpulseResponseInputsOffset == -1) _ImpulseResponseInputsOffset = Schema.GetOffset(0x5E47F1215E9F3606);
-            return ref _Handle.AsRef<CUtlLeanVector<CVMixImpulseResponseInput, int>>(_ImpulseResponseInputsOffset);
+            _ImpulseResponseInputsOffset = _ImpulseResponseInputsOffset ?? Schema.GetOffset(0x5E47F1215E9F3606);
+            return ref _Handle.AsRef<CUtlLeanVector<CVMixImpulseResponseInput, int>>(_ImpulseResponseInputsOffset!.Value);
         }
     }
-    private static nint _MixCommandsOffset = -1;
+    private static nint? _MixCommandsOffset;
 
     public ref CUtlLeanVector<CVMixCommand, int> MixCommands
     {
         get
         {
-            if (_MixCommandsOffset == -1) _MixCommandsOffset = Schema.GetOffset(0x5E47F1216BE9EF07);
-            return ref _Handle.AsRef<CUtlLeanVector<CVMixCommand, int>>(_MixCommandsOffset);
+            _MixCommandsOffset = _MixCommandsOffset ?? Schema.GetOffset(0x5E47F1216BE9EF07);
+            return ref _Handle.AsRef<CUtlLeanVector<CVMixCommand, int>>(_MixCommandsOffset!.Value);
         }
     }
-    private static nint _HeapOffset = -1;
+    private static nint? _HeapOffset;
     private CVMixHeapImpl? _HeapInstance;
 
     public CVMixHeap Heap
     {
         get
         {
-            if (_HeapOffset == -1) _HeapOffset = Schema.GetOffset(0x5E47F121E445FC7F);
+            _HeapOffset = _HeapOffset ?? Schema.GetOffset(0x5E47F121E445FC7F);
             var instance = _HeapInstance ??= new CVMixHeapImpl(0);
-            instance.DangerousSetHandle(_Handle + _HeapOffset);
+            instance.DangerousSetHandle(_Handle + _HeapOffset!.Value);
             return instance;
         }
     }
-    private static nint _AudioMetersOffset = -1;
+    private static nint? _AudioMetersOffset;
 
     public ref CUtlLeanVector<CVMixAudioMeter, int> AudioMeters
     {
         get
         {
-            if (_AudioMetersOffset == -1) _AudioMetersOffset = Schema.GetOffset(0x5E47F1211BA54127);
-            return ref _Handle.AsRef<CUtlLeanVector<CVMixAudioMeter, int>>(_AudioMetersOffset);
+            _AudioMetersOffset = _AudioMetersOffset ?? Schema.GetOffset(0x5E47F1211BA54127);
+            return ref _Handle.AsRef<CUtlLeanVector<CVMixAudioMeter, int>>(_AudioMetersOffset!.Value);
         }
     }
-    private static nint _ControlMetersOffset = -1;
+    private static nint? _ControlMetersOffset;
 
     public ref CUtlLeanVector<CVMixControlMeter, int> ControlMeters
     {
         get
         {
-            if (_ControlMetersOffset == -1) _ControlMetersOffset = Schema.GetOffset(0x5E47F121AF4E953C);
-            return ref _Handle.AsRef<CUtlLeanVector<CVMixControlMeter, int>>(_ControlMetersOffset);
+            _ControlMetersOffset = _ControlMetersOffset ?? Schema.GetOffset(0x5E47F121AF4E953C);
+            return ref _Handle.AsRef<CUtlLeanVector<CVMixControlMeter, int>>(_ControlMetersOffset!.Value);
         }
     }
-    private static nint _NameInputMetersOffset = -1;
+    private static nint? _NameInputMetersOffset;
 
     public ref CUtlLeanVector<CVMixNameInputMeter, int> NameInputMeters
     {
         get
         {
-            if (_NameInputMetersOffset == -1) _NameInputMetersOffset = Schema.GetOffset(0x5E47F121B6B63758);
-            return ref _Handle.AsRef<CUtlLeanVector<CVMixNameInputMeter, int>>(_NameInputMetersOffset);
+            _NameInputMetersOffset = _NameInputMetersOffset ?? Schema.GetOffset(0x5E47F121B6B63758);
+            return ref _Handle.AsRef<CUtlLeanVector<CVMixNameInputMeter, int>>(_NameInputMetersOffset!.Value);
         }
     }
-    private static nint _AdditionalOutputsOffset = -1;
+    private static nint? _AdditionalOutputsOffset;
 
     public ref CUtlLeanVector<CVMixAdditionalOutput, int> AdditionalOutputs
     {
         get
         {
-            if (_AdditionalOutputsOffset == -1) _AdditionalOutputsOffset = Schema.GetOffset(0x5E47F121DB942906);
-            return ref _Handle.AsRef<CUtlLeanVector<CVMixAdditionalOutput, int>>(_AdditionalOutputsOffset);
+            _AdditionalOutputsOffset = _AdditionalOutputsOffset ?? Schema.GetOffset(0x5E47F121DB942906);
+            return ref _Handle.AsRef<CUtlLeanVector<CVMixAdditionalOutput, int>>(_AdditionalOutputsOffset!.Value);
         }
     }
-    private static nint _AutomaticControlInputsOffset = -1;
+    private static nint? _AutomaticControlInputsOffset;
 
     public ref CUtlLeanVector<CVMixAutomaticControlInput, int> AutomaticControlInputs
     {
         get
         {
-            if (_AutomaticControlInputsOffset == -1) _AutomaticControlInputsOffset = Schema.GetOffset(0x5E47F121CDC9B964);
-            return ref _Handle.AsRef<CUtlLeanVector<CVMixAutomaticControlInput, int>>(_AutomaticControlInputsOffset);
+            _AutomaticControlInputsOffset = _AutomaticControlInputsOffset ?? Schema.GetOffset(0x5E47F121CDC9B964);
+            return ref _Handle.AsRef<CUtlLeanVector<CVMixAutomaticControlInput, int>>(_AutomaticControlInputsOffset!.Value);
         }
     }
 

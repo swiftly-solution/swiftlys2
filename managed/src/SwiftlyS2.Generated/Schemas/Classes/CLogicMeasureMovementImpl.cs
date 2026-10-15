@@ -16,109 +16,109 @@ internal partial class CLogicMeasureMovementImpl : CLogicalEntityImpl, CLogicMea
 {
     public CLogicMeasureMovementImpl(nint handle) : base(handle) { }
 
-    private static nint _StrMeasureTargetOffset = -1;
+    private static nint? _StrMeasureTargetOffset;
 
     public string StrMeasureTarget
     {
         get
         {
-            if (_StrMeasureTargetOffset == -1) _StrMeasureTargetOffset = Schema.GetOffset(0x11EA274585646A89);
-            return Schema.GetString(_Handle.Read<nint>(_StrMeasureTargetOffset));
+            _StrMeasureTargetOffset = _StrMeasureTargetOffset ?? Schema.GetOffset(0x11EA274585646A89);
+            return Schema.GetString(_Handle.Read<nint>(_StrMeasureTargetOffset!.Value));
         }
         set
         {
-            if (_StrMeasureTargetOffset == -1) _StrMeasureTargetOffset = Schema.GetOffset(0x11EA274585646A89);
-            Schema.SetString(_Handle, _StrMeasureTargetOffset, value);
+            _StrMeasureTargetOffset = _StrMeasureTargetOffset ?? Schema.GetOffset(0x11EA274585646A89);
+            Schema.SetString(_Handle, _StrMeasureTargetOffset!.Value, value);
         }
     }
-    private static nint _StrMeasureReferenceOffset = -1;
+    private static nint? _StrMeasureReferenceOffset;
 
     public string StrMeasureReference
     {
         get
         {
-            if (_StrMeasureReferenceOffset == -1) _StrMeasureReferenceOffset = Schema.GetOffset(0x11EA2745CF4AF1BD);
-            return Schema.GetString(_Handle.Read<nint>(_StrMeasureReferenceOffset));
+            _StrMeasureReferenceOffset = _StrMeasureReferenceOffset ?? Schema.GetOffset(0x11EA2745CF4AF1BD);
+            return Schema.GetString(_Handle.Read<nint>(_StrMeasureReferenceOffset!.Value));
         }
         set
         {
-            if (_StrMeasureReferenceOffset == -1) _StrMeasureReferenceOffset = Schema.GetOffset(0x11EA2745CF4AF1BD);
-            Schema.SetString(_Handle, _StrMeasureReferenceOffset, value);
+            _StrMeasureReferenceOffset = _StrMeasureReferenceOffset ?? Schema.GetOffset(0x11EA2745CF4AF1BD);
+            Schema.SetString(_Handle, _StrMeasureReferenceOffset!.Value, value);
         }
     }
-    private static nint _StrTargetReferenceOffset = -1;
+    private static nint? _StrTargetReferenceOffset;
 
     public string StrTargetReference
     {
         get
         {
-            if (_StrTargetReferenceOffset == -1) _StrTargetReferenceOffset = Schema.GetOffset(0x11EA27453E928D56);
-            return Schema.GetString(_Handle.Read<nint>(_StrTargetReferenceOffset));
+            _StrTargetReferenceOffset = _StrTargetReferenceOffset ?? Schema.GetOffset(0x11EA27453E928D56);
+            return Schema.GetString(_Handle.Read<nint>(_StrTargetReferenceOffset!.Value));
         }
         set
         {
-            if (_StrTargetReferenceOffset == -1) _StrTargetReferenceOffset = Schema.GetOffset(0x11EA27453E928D56);
-            Schema.SetString(_Handle, _StrTargetReferenceOffset, value);
+            _StrTargetReferenceOffset = _StrTargetReferenceOffset ?? Schema.GetOffset(0x11EA27453E928D56);
+            Schema.SetString(_Handle, _StrTargetReferenceOffset!.Value, value);
         }
     }
-    private static nint _MeasureTargetOffset = -1;
+    private static nint? _MeasureTargetOffset;
 
     public ref CHandle<CBaseEntity> MeasureTarget
     {
         get
         {
-            if (_MeasureTargetOffset == -1) _MeasureTargetOffset = Schema.GetOffset(0x11EA2745F81BC1A8);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_MeasureTargetOffset);
+            _MeasureTargetOffset = _MeasureTargetOffset ?? Schema.GetOffset(0x11EA2745F81BC1A8);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_MeasureTargetOffset!.Value);
         }
     }
-    private static nint _MeasureReferenceOffset = -1;
+    private static nint? _MeasureReferenceOffset;
 
     public ref CHandle<CBaseEntity> MeasureReference
     {
         get
         {
-            if (_MeasureReferenceOffset == -1) _MeasureReferenceOffset = Schema.GetOffset(0x11EA274567F65D7A);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_MeasureReferenceOffset);
+            _MeasureReferenceOffset = _MeasureReferenceOffset ?? Schema.GetOffset(0x11EA274567F65D7A);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_MeasureReferenceOffset!.Value);
         }
     }
-    private static nint _TargetOffset = -1;
+    private static nint? _TargetOffset;
 
     public ref CHandle<CBaseEntity> Target
     {
         get
         {
-            if (_TargetOffset == -1) _TargetOffset = Schema.GetOffset(0x11EA2745CE35901A);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetOffset);
+            _TargetOffset = _TargetOffset ?? Schema.GetOffset(0x11EA2745CE35901A);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetOffset!.Value);
         }
     }
-    private static nint _TargetReferenceOffset = -1;
+    private static nint? _TargetReferenceOffset;
 
     public ref CHandle<CBaseEntity> TargetReference
     {
         get
         {
-            if (_TargetReferenceOffset == -1) _TargetReferenceOffset = Schema.GetOffset(0x11EA2745EB33504F);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetReferenceOffset);
+            _TargetReferenceOffset = _TargetReferenceOffset ?? Schema.GetOffset(0x11EA2745EB33504F);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetReferenceOffset!.Value);
         }
     }
-    private static nint _ScaleOffset = -1;
+    private static nint? _ScaleOffset;
 
     public ref float Scale
     {
         get
         {
-            if (_ScaleOffset == -1) _ScaleOffset = Schema.GetOffset(0x11EA2745B731A42F);
-            return ref _Handle.AsRef<float>(_ScaleOffset);
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x11EA2745B731A42F);
+            return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
         }
     }
-    private static nint _MeasureTypeOffset = -1;
+    private static nint? _MeasureTypeOffset;
 
     public ref int MeasureType
     {
         get
         {
-            if (_MeasureTypeOffset == -1) _MeasureTypeOffset = Schema.GetOffset(0x11EA274593190C1B);
-            return ref _Handle.AsRef<int>(_MeasureTypeOffset);
+            _MeasureTypeOffset = _MeasureTypeOffset ?? Schema.GetOffset(0x11EA274593190C1B);
+            return ref _Handle.AsRef<int>(_MeasureTypeOffset!.Value);
         }
     }
 

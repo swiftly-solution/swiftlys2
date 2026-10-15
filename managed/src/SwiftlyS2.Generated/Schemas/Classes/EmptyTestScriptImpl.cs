@@ -16,16 +16,16 @@ internal partial class EmptyTestScriptImpl : CAnimScriptBaseImpl, EmptyTestScrip
 {
     public EmptyTestScriptImpl(nint handle) : base(handle) { }
 
-    private static nint _TestOffset = -1;
+    private static nint? _TestOffset;
     private SchemaUntypedField? _TestInstance;
 
     public SchemaUntypedField Test
     {
         get
         {
-            if (_TestOffset == -1) _TestOffset = Schema.GetOffset(0xB7F6B6D5FAAC6DA3);
+            _TestOffset = _TestOffset ?? Schema.GetOffset(0xB7F6B6D5FAAC6DA3);
             var instance = _TestInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _TestOffset);
+            instance.DangerousSetHandle(_Handle + _TestOffset!.Value);
             return instance;
         }
     }

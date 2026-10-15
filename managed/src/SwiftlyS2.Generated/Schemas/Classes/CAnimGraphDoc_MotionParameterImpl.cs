@@ -16,62 +16,62 @@ internal partial class CAnimGraphDoc_MotionParameterImpl : SchemaClass, CAnimGra
 {
     public CAnimGraphDoc_MotionParameterImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xE96237F4D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xE96237F4D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xE96237F4D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xE96237F4D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _IdOffset = -1;
+    private static nint? _IdOffset;
     private AnimParamIDImpl? _IdInstance;
 
     public AnimParamID Id
     {
         get
         {
-            if (_IdOffset == -1) _IdOffset = Schema.GetOffset(0xE96237FB4B6E980);
+            _IdOffset = _IdOffset ?? Schema.GetOffset(0xE96237FB4B6E980);
             var instance = _IdInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _IdOffset);
+            instance.DangerousSetHandle(_Handle + _IdOffset!.Value);
             return instance;
         }
     }
-    private static nint _MinValueOffset = -1;
+    private static nint? _MinValueOffset;
 
     public ref float MinValue
     {
         get
         {
-            if (_MinValueOffset == -1) _MinValueOffset = Schema.GetOffset(0xE96237F7C31AC56);
-            return ref _Handle.AsRef<float>(_MinValueOffset);
+            _MinValueOffset = _MinValueOffset ?? Schema.GetOffset(0xE96237F7C31AC56);
+            return ref _Handle.AsRef<float>(_MinValueOffset!.Value);
         }
     }
-    private static nint _MaxValueOffset = -1;
+    private static nint? _MaxValueOffset;
 
     public ref float MaxValue
     {
         get
         {
-            if (_MaxValueOffset == -1) _MaxValueOffset = Schema.GetOffset(0xE96237FD0A5C87C);
-            return ref _Handle.AsRef<float>(_MaxValueOffset);
+            _MaxValueOffset = _MaxValueOffset ?? Schema.GetOffset(0xE96237FD0A5C87C);
+            return ref _Handle.AsRef<float>(_MaxValueOffset!.Value);
         }
     }
-    private static nint _SamplesOffset = -1;
+    private static nint? _SamplesOffset;
 
     public ref int Samples
     {
         get
         {
-            if (_SamplesOffset == -1) _SamplesOffset = Schema.GetOffset(0xE96237F1FE74F98);
-            return ref _Handle.AsRef<int>(_SamplesOffset);
+            _SamplesOffset = _SamplesOffset ?? Schema.GetOffset(0xE96237F1FE74F98);
+            return ref _Handle.AsRef<int>(_SamplesOffset!.Value);
         }
     }
 

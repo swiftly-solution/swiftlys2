@@ -16,64 +16,64 @@ internal partial class DynamicMeshDeformParams_tImpl : SchemaClass, DynamicMeshD
 {
     public DynamicMeshDeformParams_tImpl(nint handle) : base(handle) { }
 
-    private static nint _TensionCompressScaleOffset = -1;
+    private static nint? _TensionCompressScaleOffset;
 
     public ref float TensionCompressScale
     {
         get
         {
-            if (_TensionCompressScaleOffset == -1) _TensionCompressScaleOffset = Schema.GetOffset(0xBC2B1F5B5DC0072F);
-            return ref _Handle.AsRef<float>(_TensionCompressScaleOffset);
+            _TensionCompressScaleOffset = _TensionCompressScaleOffset ?? Schema.GetOffset(0xBC2B1F5B5DC0072F);
+            return ref _Handle.AsRef<float>(_TensionCompressScaleOffset!.Value);
         }
     }
-    private static nint _TensionStretchScaleOffset = -1;
+    private static nint? _TensionStretchScaleOffset;
 
     public ref float TensionStretchScale
     {
         get
         {
-            if (_TensionStretchScaleOffset == -1) _TensionStretchScaleOffset = Schema.GetOffset(0xBC2B1F5B0EC210AA);
-            return ref _Handle.AsRef<float>(_TensionStretchScaleOffset);
+            _TensionStretchScaleOffset = _TensionStretchScaleOffset ?? Schema.GetOffset(0xBC2B1F5B0EC210AA);
+            return ref _Handle.AsRef<float>(_TensionStretchScaleOffset!.Value);
         }
     }
-    private static nint _RecomputeSmoothNormalsAfterAnimationOffset = -1;
+    private static nint? _RecomputeSmoothNormalsAfterAnimationOffset;
 
     public ref bool RecomputeSmoothNormalsAfterAnimation
     {
         get
         {
-            if (_RecomputeSmoothNormalsAfterAnimationOffset == -1) _RecomputeSmoothNormalsAfterAnimationOffset = Schema.GetOffset(0xBC2B1F5BAAFD0999);
-            return ref _Handle.AsRef<bool>(_RecomputeSmoothNormalsAfterAnimationOffset);
+            _RecomputeSmoothNormalsAfterAnimationOffset = _RecomputeSmoothNormalsAfterAnimationOffset ?? Schema.GetOffset(0xBC2B1F5BAAFD0999);
+            return ref _Handle.AsRef<bool>(_RecomputeSmoothNormalsAfterAnimationOffset!.Value);
         }
     }
-    private static nint _ComputeDynamicMeshTensionAfterAnimationOffset = -1;
+    private static nint? _ComputeDynamicMeshTensionAfterAnimationOffset;
 
     public ref bool ComputeDynamicMeshTensionAfterAnimation
     {
         get
         {
-            if (_ComputeDynamicMeshTensionAfterAnimationOffset == -1) _ComputeDynamicMeshTensionAfterAnimationOffset = Schema.GetOffset(0xBC2B1F5BDC02C4E8);
-            return ref _Handle.AsRef<bool>(_ComputeDynamicMeshTensionAfterAnimationOffset);
+            _ComputeDynamicMeshTensionAfterAnimationOffset = _ComputeDynamicMeshTensionAfterAnimationOffset ?? Schema.GetOffset(0xBC2B1F5BDC02C4E8);
+            return ref _Handle.AsRef<bool>(_ComputeDynamicMeshTensionAfterAnimationOffset!.Value);
         }
     }
-    private static nint _SmoothNormalsAcrossUvSeamsOffset = -1;
+    private static nint? _SmoothNormalsAcrossUvSeamsOffset;
 
     public ref bool SmoothNormalsAcrossUvSeams
     {
         get
         {
-            if (_SmoothNormalsAcrossUvSeamsOffset == -1) _SmoothNormalsAcrossUvSeamsOffset = Schema.GetOffset(0xBC2B1F5B6719D8D2);
-            return ref _Handle.AsRef<bool>(_SmoothNormalsAcrossUvSeamsOffset);
+            _SmoothNormalsAcrossUvSeamsOffset = _SmoothNormalsAcrossUvSeamsOffset ?? Schema.GetOffset(0xBC2B1F5B6719D8D2);
+            return ref _Handle.AsRef<bool>(_SmoothNormalsAcrossUvSeamsOffset!.Value);
         }
     }
-    private static nint _EnableEyeBulgeDeformationOffset = -1;
+    private static nint? _EnableEyeBulgeDeformationOffset;
 
     public ref bool EnableEyeBulgeDeformation
     {
         get
         {
-            if (_EnableEyeBulgeDeformationOffset == -1) _EnableEyeBulgeDeformationOffset = Schema.GetOffset(0xBC2B1F5B9F75C2EC);
-            return ref _Handle.AsRef<bool>(_EnableEyeBulgeDeformationOffset);
+            _EnableEyeBulgeDeformationOffset = _EnableEyeBulgeDeformationOffset ?? Schema.GetOffset(0xBC2B1F5B9F75C2EC);
+            return ref _Handle.AsRef<bool>(_EnableEyeBulgeDeformationOffset!.Value);
         }
     }
 

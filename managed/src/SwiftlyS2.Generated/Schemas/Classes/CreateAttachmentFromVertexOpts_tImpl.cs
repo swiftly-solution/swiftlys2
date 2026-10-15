@@ -16,74 +16,74 @@ internal partial class CreateAttachmentFromVertexOpts_tImpl : SchemaClass, Creat
 {
     public CreateAttachmentFromVertexOpts_tImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x8C22EA27CAE8A266);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x8C22EA27CAE8A266);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x8C22EA27CAE8A266);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x8C22EA27CAE8A266);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _AttachmentNameOffset = -1;
+    private static nint? _AttachmentNameOffset;
 
     public string AttachmentName
     {
         get
         {
-            if (_AttachmentNameOffset == -1) _AttachmentNameOffset = Schema.GetOffset(0x8C22EA279CFCA76B);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_AttachmentNameOffset));
+            _AttachmentNameOffset = _AttachmentNameOffset ?? Schema.GetOffset(0x8C22EA279CFCA76B);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_AttachmentNameOffset!.Value));
         }
         set
         {
-            if (_AttachmentNameOffset == -1) _AttachmentNameOffset = Schema.GetOffset(0x8C22EA279CFCA76B);
-            Schema.SetCUtlString(_Handle, _AttachmentNameOffset, value);
+            _AttachmentNameOffset = _AttachmentNameOffset ?? Schema.GetOffset(0x8C22EA279CFCA76B);
+            Schema.SetCUtlString(_Handle, _AttachmentNameOffset!.Value, value);
         }
     }
-    private static nint _AlignModeOffset = -1;
+    private static nint? _AlignModeOffset;
 
     public ref VertexAttachmentAlignModeSchema_t AlignMode
     {
         get
         {
-            if (_AlignModeOffset == -1) _AlignModeOffset = Schema.GetOffset(0x8C22EA2791A2C15A);
-            return ref _Handle.AsRef<VertexAttachmentAlignModeSchema_t>(_AlignModeOffset);
+            _AlignModeOffset = _AlignModeOffset ?? Schema.GetOffset(0x8C22EA2791A2C15A);
+            return ref _Handle.AsRef<VertexAttachmentAlignModeSchema_t>(_AlignModeOffset!.Value);
         }
     }
-    private static nint _MaxInfluencesOffset = -1;
+    private static nint? _MaxInfluencesOffset;
 
     public ref int MaxInfluences
     {
         get
         {
-            if (_MaxInfluencesOffset == -1) _MaxInfluencesOffset = Schema.GetOffset(0x8C22EA273E9B57E1);
-            return ref _Handle.AsRef<int>(_MaxInfluencesOffset);
+            _MaxInfluencesOffset = _MaxInfluencesOffset ?? Schema.GetOffset(0x8C22EA273E9B57E1);
+            return ref _Handle.AsRef<int>(_MaxInfluencesOffset!.Value);
         }
     }
-    private static nint _ShowPreviewOffset = -1;
+    private static nint? _ShowPreviewOffset;
 
     public ref bool ShowPreview
     {
         get
         {
-            if (_ShowPreviewOffset == -1) _ShowPreviewOffset = Schema.GetOffset(0x8C22EA276ADFFA38);
-            return ref _Handle.AsRef<bool>(_ShowPreviewOffset);
+            _ShowPreviewOffset = _ShowPreviewOffset ?? Schema.GetOffset(0x8C22EA276ADFFA38);
+            return ref _Handle.AsRef<bool>(_ShowPreviewOffset!.Value);
         }
     }
-    private static nint _HideConfigModelsOffset = -1;
+    private static nint? _HideConfigModelsOffset;
 
     public ref bool HideConfigModels
     {
         get
         {
-            if (_HideConfigModelsOffset == -1) _HideConfigModelsOffset = Schema.GetOffset(0x8C22EA274B195A1D);
-            return ref _Handle.AsRef<bool>(_HideConfigModelsOffset);
+            _HideConfigModelsOffset = _HideConfigModelsOffset ?? Schema.GetOffset(0x8C22EA274B195A1D);
+            return ref _Handle.AsRef<bool>(_HideConfigModelsOffset!.Value);
         }
     }
 

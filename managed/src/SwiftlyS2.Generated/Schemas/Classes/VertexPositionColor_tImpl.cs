@@ -16,14 +16,14 @@ internal partial class VertexPositionColor_tImpl : SchemaClass, VertexPositionCo
 {
     public VertexPositionColor_tImpl(nint handle) : base(handle) { }
 
-    private static nint _PositionOffset = -1;
+    private static nint? _PositionOffset;
 
     public ref Vector Position
     {
         get
         {
-            if (_PositionOffset == -1) _PositionOffset = Schema.GetOffset(0x9E531188BD6A6C9E);
-            return ref _Handle.AsRef<Vector>(_PositionOffset);
+            _PositionOffset = _PositionOffset ?? Schema.GetOffset(0x9E531188BD6A6C9E);
+            return ref _Handle.AsRef<Vector>(_PositionOffset!.Value);
         }
     }
 

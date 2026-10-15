@@ -16,84 +16,84 @@ internal partial class SkeletonAnimCapture_t__FrameStamp_tImpl : SchemaClass, Sk
 {
     public SkeletonAnimCapture_t__FrameStamp_tImpl(nint handle) : base(handle) { }
 
-    private static nint _TimeOffset = -1;
+    private static nint? _TimeOffset;
 
     public ref float Time
     {
         get
         {
-            if (_TimeOffset == -1) _TimeOffset = Schema.GetOffset(0x4ECAEB4FC957229E);
-            return ref _Handle.AsRef<float>(_TimeOffset);
+            _TimeOffset = _TimeOffset ?? Schema.GetOffset(0x4ECAEB4FC957229E);
+            return ref _Handle.AsRef<float>(_TimeOffset!.Value);
         }
     }
-    private static nint _EntitySimTimeOffset = -1;
+    private static nint? _EntitySimTimeOffset;
 
     public ref float EntitySimTime
     {
         get
         {
-            if (_EntitySimTimeOffset == -1) _EntitySimTimeOffset = Schema.GetOffset(0x4ECAEB4FAE2BAB2E);
-            return ref _Handle.AsRef<float>(_EntitySimTimeOffset);
+            _EntitySimTimeOffset = _EntitySimTimeOffset ?? Schema.GetOffset(0x4ECAEB4FAE2BAB2E);
+            return ref _Handle.AsRef<float>(_EntitySimTimeOffset!.Value);
         }
     }
-    private static nint _TeleportTickOffset = -1;
+    private static nint? _TeleportTickOffset;
 
     public ref bool TeleportTick
     {
         get
         {
-            if (_TeleportTickOffset == -1) _TeleportTickOffset = Schema.GetOffset(0x4ECAEB4F7068242B);
-            return ref _Handle.AsRef<bool>(_TeleportTickOffset);
+            _TeleportTickOffset = _TeleportTickOffset ?? Schema.GetOffset(0x4ECAEB4F7068242B);
+            return ref _Handle.AsRef<bool>(_TeleportTickOffset!.Value);
         }
     }
-    private static nint _PredictedOffset = -1;
+    private static nint? _PredictedOffset;
 
     public ref bool Predicted
     {
         get
         {
-            if (_PredictedOffset == -1) _PredictedOffset = Schema.GetOffset(0x4ECAEB4F419B6D9B);
-            return ref _Handle.AsRef<bool>(_PredictedOffset);
+            _PredictedOffset = _PredictedOffset ?? Schema.GetOffset(0x4ECAEB4F419B6D9B);
+            return ref _Handle.AsRef<bool>(_PredictedOffset!.Value);
         }
     }
-    private static nint _CurTimeOffset = -1;
+    private static nint? _CurTimeOffset;
 
     public ref float CurTime
     {
         get
         {
-            if (_CurTimeOffset == -1) _CurTimeOffset = Schema.GetOffset(0x4ECAEB4F08036F9A);
-            return ref _Handle.AsRef<float>(_CurTimeOffset);
+            _CurTimeOffset = _CurTimeOffset ?? Schema.GetOffset(0x4ECAEB4F08036F9A);
+            return ref _Handle.AsRef<float>(_CurTimeOffset!.Value);
         }
     }
-    private static nint _RealTimeOffset = -1;
+    private static nint? _RealTimeOffset;
 
     public ref float RealTime
     {
         get
         {
-            if (_RealTimeOffset == -1) _RealTimeOffset = Schema.GetOffset(0x4ECAEB4F1168EC02);
-            return ref _Handle.AsRef<float>(_RealTimeOffset);
+            _RealTimeOffset = _RealTimeOffset ?? Schema.GetOffset(0x4ECAEB4F1168EC02);
+            return ref _Handle.AsRef<float>(_RealTimeOffset!.Value);
         }
     }
-    private static nint _FrameCountOffset = -1;
+    private static nint? _FrameCountOffset;
 
     public ref int FrameCount
     {
         get
         {
-            if (_FrameCountOffset == -1) _FrameCountOffset = Schema.GetOffset(0x4ECAEB4F1DBCD049);
-            return ref _Handle.AsRef<int>(_FrameCountOffset);
+            _FrameCountOffset = _FrameCountOffset ?? Schema.GetOffset(0x4ECAEB4F1DBCD049);
+            return ref _Handle.AsRef<int>(_FrameCountOffset!.Value);
         }
     }
-    private static nint _TickCountOffset = -1;
+    private static nint? _TickCountOffset;
 
     public ref int TickCount
     {
         get
         {
-            if (_TickCountOffset == -1) _TickCountOffset = Schema.GetOffset(0x4ECAEB4FE25E6B27);
-            return ref _Handle.AsRef<int>(_TickCountOffset);
+            _TickCountOffset = _TickCountOffset ?? Schema.GetOffset(0x4ECAEB4FE25E6B27);
+            return ref _Handle.AsRef<int>(_TickCountOffset!.Value);
         }
     }
 

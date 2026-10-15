@@ -16,169 +16,169 @@ internal partial class CVNodeTypeDescImpl : SchemaClass, CVNodeTypeDesc
 {
     public CVNodeTypeDescImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xAF0908914D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xAF0908914D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xAF0908914D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xAF0908914D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _IconNameOffset = -1;
+    private static nint? _IconNameOffset;
 
     public string IconName
     {
         get
         {
-            if (_IconNameOffset == -1) _IconNameOffset = Schema.GetOffset(0xAF09089168CD8333);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_IconNameOffset));
+            _IconNameOffset = _IconNameOffset ?? Schema.GetOffset(0xAF09089168CD8333);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_IconNameOffset!.Value));
         }
         set
         {
-            if (_IconNameOffset == -1) _IconNameOffset = Schema.GetOffset(0xAF09089168CD8333);
-            Schema.SetCUtlString(_Handle, _IconNameOffset, value);
+            _IconNameOffset = _IconNameOffset ?? Schema.GetOffset(0xAF09089168CD8333);
+            Schema.SetCUtlString(_Handle, _IconNameOffset!.Value, value);
         }
     }
-    private static nint _PrefixOffset = -1;
+    private static nint? _PrefixOffset;
 
     public string Prefix
     {
         get
         {
-            if (_PrefixOffset == -1) _PrefixOffset = Schema.GetOffset(0xAF0908913EF59269);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_PrefixOffset));
+            _PrefixOffset = _PrefixOffset ?? Schema.GetOffset(0xAF0908913EF59269);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_PrefixOffset!.Value));
         }
         set
         {
-            if (_PrefixOffset == -1) _PrefixOffset = Schema.GetOffset(0xAF0908913EF59269);
-            Schema.SetCUtlString(_Handle, _PrefixOffset, value);
+            _PrefixOffset = _PrefixOffset ?? Schema.GetOffset(0xAF0908913EF59269);
+            Schema.SetCUtlString(_Handle, _PrefixOffset!.Value, value);
         }
     }
-    private static nint _InputNamesOffset = -1;
+    private static nint? _InputNamesOffset;
 
     public ref CUtlVector<CUtlString> InputNames
     {
         get
         {
-            if (_InputNamesOffset == -1) _InputNamesOffset = Schema.GetOffset(0xAF09089176A053A9);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_InputNamesOffset);
+            _InputNamesOffset = _InputNamesOffset ?? Schema.GetOffset(0xAF09089176A053A9);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_InputNamesOffset!.Value);
         }
     }
-    private static nint _OutputNamesOffset = -1;
+    private static nint? _OutputNamesOffset;
 
     public ref CUtlVector<CUtlString> OutputNames
     {
         get
         {
-            if (_OutputNamesOffset == -1) _OutputNamesOffset = Schema.GetOffset(0xAF0908919A86A024);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_OutputNamesOffset);
+            _OutputNamesOffset = _OutputNamesOffset ?? Schema.GetOffset(0xAF0908919A86A024);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_OutputNamesOffset!.Value);
         }
     }
-    private static nint _InputTypeIdsOffset = -1;
+    private static nint? _InputTypeIdsOffset;
 
     public ref CUtlVector<int> InputTypeIds
     {
         get
         {
-            if (_InputTypeIdsOffset == -1) _InputTypeIdsOffset = Schema.GetOffset(0xAF09089187D74807);
-            return ref _Handle.AsRef<CUtlVector<int>>(_InputTypeIdsOffset);
+            _InputTypeIdsOffset = _InputTypeIdsOffset ?? Schema.GetOffset(0xAF09089187D74807);
+            return ref _Handle.AsRef<CUtlVector<int>>(_InputTypeIdsOffset!.Value);
         }
     }
-    private static nint _OutputTypeIdsOffset = -1;
+    private static nint? _OutputTypeIdsOffset;
 
     public ref CUtlVector<int> OutputTypeIds
     {
         get
         {
-            if (_OutputTypeIdsOffset == -1) _OutputTypeIdsOffset = Schema.GetOffset(0xAF0908913828B896);
-            return ref _Handle.AsRef<CUtlVector<int>>(_OutputTypeIdsOffset);
+            _OutputTypeIdsOffset = _OutputTypeIdsOffset ?? Schema.GetOffset(0xAF0908913828B896);
+            return ref _Handle.AsRef<CUtlVector<int>>(_OutputTypeIdsOffset!.Value);
         }
     }
-    private static nint _IsGroupOffset = -1;
+    private static nint? _IsGroupOffset;
 
     public ref bool IsGroup
     {
         get
         {
-            if (_IsGroupOffset == -1) _IsGroupOffset = Schema.GetOffset(0xAF090891B68D3FDC);
-            return ref _Handle.AsRef<bool>(_IsGroupOffset);
+            _IsGroupOffset = _IsGroupOffset ?? Schema.GetOffset(0xAF090891B68D3FDC);
+            return ref _Handle.AsRef<bool>(_IsGroupOffset!.Value);
         }
     }
-    private static nint _AppliesToMainGraphOffset = -1;
+    private static nint? _AppliesToMainGraphOffset;
 
     public ref bool AppliesToMainGraph
     {
         get
         {
-            if (_AppliesToMainGraphOffset == -1) _AppliesToMainGraphOffset = Schema.GetOffset(0xAF090891DA89834D);
-            return ref _Handle.AsRef<bool>(_AppliesToMainGraphOffset);
+            _AppliesToMainGraphOffset = _AppliesToMainGraphOffset ?? Schema.GetOffset(0xAF090891DA89834D);
+            return ref _Handle.AsRef<bool>(_AppliesToMainGraphOffset!.Value);
         }
     }
-    private static nint _AppliesToVoiceGraphOffset = -1;
+    private static nint? _AppliesToVoiceGraphOffset;
 
     public ref bool AppliesToVoiceGraph
     {
         get
         {
-            if (_AppliesToVoiceGraphOffset == -1) _AppliesToVoiceGraphOffset = Schema.GetOffset(0xAF090891E04068DC);
-            return ref _Handle.AsRef<bool>(_AppliesToVoiceGraphOffset);
+            _AppliesToVoiceGraphOffset = _AppliesToVoiceGraphOffset ?? Schema.GetOffset(0xAF090891E04068DC);
+            return ref _Handle.AsRef<bool>(_AppliesToVoiceGraphOffset!.Value);
         }
     }
-    private static nint _IsAudioTrackOffset = -1;
+    private static nint? _IsAudioTrackOffset;
 
     public ref bool IsAudioTrack
     {
         get
         {
-            if (_IsAudioTrackOffset == -1) _IsAudioTrackOffset = Schema.GetOffset(0xAF0908910467CCE0);
-            return ref _Handle.AsRef<bool>(_IsAudioTrackOffset);
+            _IsAudioTrackOffset = _IsAudioTrackOffset ?? Schema.GetOffset(0xAF0908910467CCE0);
+            return ref _Handle.AsRef<bool>(_IsAudioTrackOffset!.Value);
         }
     }
-    private static nint _IsAudioOutputOffset = -1;
+    private static nint? _IsAudioOutputOffset;
 
     public ref bool IsAudioOutput
     {
         get
         {
-            if (_IsAudioOutputOffset == -1) _IsAudioOutputOffset = Schema.GetOffset(0xAF090891683460C0);
-            return ref _Handle.AsRef<bool>(_IsAudioOutputOffset);
+            _IsAudioOutputOffset = _IsAudioOutputOffset ?? Schema.GetOffset(0xAF090891683460C0);
+            return ref _Handle.AsRef<bool>(_IsAudioOutputOffset!.Value);
         }
     }
-    private static nint _IsControlInputOffset = -1;
+    private static nint? _IsControlInputOffset;
 
     public ref bool IsControlInput
     {
         get
         {
-            if (_IsControlInputOffset == -1) _IsControlInputOffset = Schema.GetOffset(0xAF090891A37BD2D2);
-            return ref _Handle.AsRef<bool>(_IsControlInputOffset);
+            _IsControlInputOffset = _IsControlInputOffset ?? Schema.GetOffset(0xAF090891A37BD2D2);
+            return ref _Handle.AsRef<bool>(_IsControlInputOffset!.Value);
         }
     }
-    private static nint _IsControlOutputOffset = -1;
+    private static nint? _IsControlOutputOffset;
 
     public ref bool IsControlOutput
     {
         get
         {
-            if (_IsControlOutputOffset == -1) _IsControlOutputOffset = Schema.GetOffset(0xAF090891A9E7BAC7);
-            return ref _Handle.AsRef<bool>(_IsControlOutputOffset);
+            _IsControlOutputOffset = _IsControlOutputOffset ?? Schema.GetOffset(0xAF090891A9E7BAC7);
+            return ref _Handle.AsRef<bool>(_IsControlOutputOffset!.Value);
         }
     }
-    private static nint _IsSubgraphNodeOffset = -1;
+    private static nint? _IsSubgraphNodeOffset;
 
     public ref bool IsSubgraphNode
     {
         get
         {
-            if (_IsSubgraphNodeOffset == -1) _IsSubgraphNodeOffset = Schema.GetOffset(0xAF09089112D102A7);
-            return ref _Handle.AsRef<bool>(_IsSubgraphNodeOffset);
+            _IsSubgraphNodeOffset = _IsSubgraphNodeOffset ?? Schema.GetOffset(0xAF09089112D102A7);
+            return ref _Handle.AsRef<bool>(_IsSubgraphNodeOffset!.Value);
         }
     }
 

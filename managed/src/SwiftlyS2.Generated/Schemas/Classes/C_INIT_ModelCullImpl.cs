@@ -16,59 +16,59 @@ internal partial class C_INIT_ModelCullImpl : CParticleFunctionInitializerImpl, 
 {
     public C_INIT_ModelCullImpl(nint handle) : base(handle) { }
 
-    private static nint _ControlPointNumberOffset = -1;
+    private static nint? _ControlPointNumberOffset;
 
     public ref int ControlPointNumber
     {
         get
         {
-            if (_ControlPointNumberOffset == -1) _ControlPointNumberOffset = Schema.GetOffset(0xE9ECCC6B3F31A6BD);
-            return ref _Handle.AsRef<int>(_ControlPointNumberOffset);
+            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0xE9ECCC6B3F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
         }
     }
-    private static nint _BoundBoxOffset = -1;
+    private static nint? _BoundBoxOffset;
 
     public ref bool BoundBox
     {
         get
         {
-            if (_BoundBoxOffset == -1) _BoundBoxOffset = Schema.GetOffset(0xE9ECCC6BAB65CDDC);
-            return ref _Handle.AsRef<bool>(_BoundBoxOffset);
+            _BoundBoxOffset = _BoundBoxOffset ?? Schema.GetOffset(0xE9ECCC6BAB65CDDC);
+            return ref _Handle.AsRef<bool>(_BoundBoxOffset!.Value);
         }
     }
-    private static nint _CullOutsideOffset = -1;
+    private static nint? _CullOutsideOffset;
 
     public ref bool CullOutside
     {
         get
         {
-            if (_CullOutsideOffset == -1) _CullOutsideOffset = Schema.GetOffset(0xE9ECCC6BA6EF9E04);
-            return ref _Handle.AsRef<bool>(_CullOutsideOffset);
+            _CullOutsideOffset = _CullOutsideOffset ?? Schema.GetOffset(0xE9ECCC6BA6EF9E04);
+            return ref _Handle.AsRef<bool>(_CullOutsideOffset!.Value);
         }
     }
-    private static nint _UseBonesOffset = -1;
+    private static nint? _UseBonesOffset;
 
     public ref bool UseBones
     {
         get
         {
-            if (_UseBonesOffset == -1) _UseBonesOffset = Schema.GetOffset(0xE9ECCC6B10D1938B);
-            return ref _Handle.AsRef<bool>(_UseBonesOffset);
+            _UseBonesOffset = _UseBonesOffset ?? Schema.GetOffset(0xE9ECCC6B10D1938B);
+            return ref _Handle.AsRef<bool>(_UseBonesOffset!.Value);
         }
     }
-    private static nint _HitboxSetNameOffset = -1;
+    private static nint? _HitboxSetNameOffset;
 
     public string HitboxSetName
     {
         get
         {
-            if (_HitboxSetNameOffset == -1) _HitboxSetNameOffset = Schema.GetOffset(0xE9ECCC6B6A21BB0E);
-            return Schema.GetString(_Handle + _HitboxSetNameOffset);
+            _HitboxSetNameOffset = _HitboxSetNameOffset ?? Schema.GetOffset(0xE9ECCC6B6A21BB0E);
+            return Schema.GetString(_Handle + _HitboxSetNameOffset!.Value);
         }
         set
         {
-            if (_HitboxSetNameOffset == -1) _HitboxSetNameOffset = Schema.GetOffset(0xE9ECCC6B6A21BB0E);
-            Schema.SetFixedString(_Handle, _HitboxSetNameOffset, value, 128);
+            _HitboxSetNameOffset = _HitboxSetNameOffset ?? Schema.GetOffset(0xE9ECCC6B6A21BB0E);
+            Schema.SetFixedString(_Handle, _HitboxSetNameOffset!.Value, value, 128);
         }
     }
 

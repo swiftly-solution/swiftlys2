@@ -16,14 +16,14 @@ internal partial class CSteamAudioAmbisonicsFieldImpl : SchemaClass, CSteamAudio
 {
     public CSteamAudioAmbisonicsFieldImpl(nint handle) : base(handle) { }
 
-    private static nint _FieldOffset = -1;
+    private static nint? _FieldOffset;
 
     public ref CUtlVector<float> Field
     {
         get
         {
-            if (_FieldOffset == -1) _FieldOffset = Schema.GetOffset(0x920A99EAA09F287);
-            return ref _Handle.AsRef<CUtlVector<float>>(_FieldOffset);
+            _FieldOffset = _FieldOffset ?? Schema.GetOffset(0x920A99EAA09F287);
+            return ref _Handle.AsRef<CUtlVector<float>>(_FieldOffset!.Value);
         }
     }
 

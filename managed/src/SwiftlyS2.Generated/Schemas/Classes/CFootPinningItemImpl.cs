@@ -16,110 +16,110 @@ internal partial class CFootPinningItemImpl : SchemaClass, CFootPinningItem
 {
     public CFootPinningItemImpl(nint handle) : base(handle) { }
 
-    private static nint _FootNameOffset = -1;
+    private static nint? _FootNameOffset;
 
     public string FootName
     {
         get
         {
-            if (_FootNameOffset == -1) _FootNameOffset = Schema.GetOffset(0xD2617F9C228316B2);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_FootNameOffset));
+            _FootNameOffset = _FootNameOffset ?? Schema.GetOffset(0xD2617F9C228316B2);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_FootNameOffset!.Value));
         }
         set
         {
-            if (_FootNameOffset == -1) _FootNameOffset = Schema.GetOffset(0xD2617F9C228316B2);
-            Schema.SetCUtlString(_Handle, _FootNameOffset, value);
+            _FootNameOffset = _FootNameOffset ?? Schema.GetOffset(0xD2617F9C228316B2);
+            Schema.SetCUtlString(_Handle, _FootNameOffset!.Value, value);
         }
     }
-    private static nint _TargetBoneNameOffset = -1;
+    private static nint? _TargetBoneNameOffset;
 
     public string TargetBoneName
     {
         get
         {
-            if (_TargetBoneNameOffset == -1) _TargetBoneNameOffset = Schema.GetOffset(0xD2617F9CAF85A2D5);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_TargetBoneNameOffset));
+            _TargetBoneNameOffset = _TargetBoneNameOffset ?? Schema.GetOffset(0xD2617F9CAF85A2D5);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_TargetBoneNameOffset!.Value));
         }
         set
         {
-            if (_TargetBoneNameOffset == -1) _TargetBoneNameOffset = Schema.GetOffset(0xD2617F9CAF85A2D5);
-            Schema.SetCUtlString(_Handle, _TargetBoneNameOffset, value);
+            _TargetBoneNameOffset = _TargetBoneNameOffset ?? Schema.GetOffset(0xD2617F9CAF85A2D5);
+            Schema.SetCUtlString(_Handle, _TargetBoneNameOffset!.Value, value);
         }
     }
-    private static nint _IkChainNameOffset = -1;
+    private static nint? _IkChainNameOffset;
 
     public string IkChainName
     {
         get
         {
-            if (_IkChainNameOffset == -1) _IkChainNameOffset = Schema.GetOffset(0xD2617F9C50E152ED);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_IkChainNameOffset));
+            _IkChainNameOffset = _IkChainNameOffset ?? Schema.GetOffset(0xD2617F9C50E152ED);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_IkChainNameOffset!.Value));
         }
         set
         {
-            if (_IkChainNameOffset == -1) _IkChainNameOffset = Schema.GetOffset(0xD2617F9C50E152ED);
-            Schema.SetCUtlString(_Handle, _IkChainNameOffset, value);
+            _IkChainNameOffset = _IkChainNameOffset ?? Schema.GetOffset(0xD2617F9C50E152ED);
+            Schema.SetCUtlString(_Handle, _IkChainNameOffset!.Value, value);
         }
     }
-    private static nint _TagOffset = -1;
+    private static nint? _TagOffset;
     private AnimTagIDImpl? _TagInstance;
 
     public AnimTagID Tag
     {
         get
         {
-            if (_TagOffset == -1) _TagOffset = Schema.GetOffset(0xD2617F9C8419ADB3);
+            _TagOffset = _TagOffset ?? Schema.GetOffset(0xD2617F9C8419ADB3);
             var instance = _TagInstance ??= new AnimTagIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _TagOffset);
+            instance.DangerousSetHandle(_Handle + _TagOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamNameOffset = -1;
+    private static nint? _ParamNameOffset;
 
     public string ParamName
     {
         get
         {
-            if (_ParamNameOffset == -1) _ParamNameOffset = Schema.GetOffset(0xD2617F9CE87A9639);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ParamNameOffset));
+            _ParamNameOffset = _ParamNameOffset ?? Schema.GetOffset(0xD2617F9CE87A9639);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ParamNameOffset!.Value));
         }
         set
         {
-            if (_ParamNameOffset == -1) _ParamNameOffset = Schema.GetOffset(0xD2617F9CE87A9639);
-            Schema.SetCUtlString(_Handle, _ParamNameOffset, value);
+            _ParamNameOffset = _ParamNameOffset ?? Schema.GetOffset(0xD2617F9CE87A9639);
+            Schema.SetCUtlString(_Handle, _ParamNameOffset!.Value, value);
         }
     }
-    private static nint _ParamOffset = -1;
+    private static nint? _ParamOffset;
     private AnimParamIDImpl? _ParamInstance;
 
     public AnimParamID Param
     {
         get
         {
-            if (_ParamOffset == -1) _ParamOffset = Schema.GetOffset(0xD2617F9CBCD4D752);
+            _ParamOffset = _ParamOffset ?? Schema.GetOffset(0xD2617F9CBCD4D752);
             var instance = _ParamInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamOffset);
+            instance.DangerousSetHandle(_Handle + _ParamOffset!.Value);
             return instance;
         }
     }
-    private static nint _MaxRotationLeftOffset = -1;
+    private static nint? _MaxRotationLeftOffset;
 
     public ref float MaxRotationLeft
     {
         get
         {
-            if (_MaxRotationLeftOffset == -1) _MaxRotationLeftOffset = Schema.GetOffset(0xD2617F9CFA1CDF44);
-            return ref _Handle.AsRef<float>(_MaxRotationLeftOffset);
+            _MaxRotationLeftOffset = _MaxRotationLeftOffset ?? Schema.GetOffset(0xD2617F9CFA1CDF44);
+            return ref _Handle.AsRef<float>(_MaxRotationLeftOffset!.Value);
         }
     }
-    private static nint _MaxRotationRightOffset = -1;
+    private static nint? _MaxRotationRightOffset;
 
     public ref float MaxRotationRight
     {
         get
         {
-            if (_MaxRotationRightOffset == -1) _MaxRotationRightOffset = Schema.GetOffset(0xD2617F9C8C95FA31);
-            return ref _Handle.AsRef<float>(_MaxRotationRightOffset);
+            _MaxRotationRightOffset = _MaxRotationRightOffset ?? Schema.GetOffset(0xD2617F9C8C95FA31);
+            return ref _Handle.AsRef<float>(_MaxRotationRightOffset!.Value);
         }
     }
 

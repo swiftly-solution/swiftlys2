@@ -16,14 +16,14 @@ internal partial class CAnimGraphDoc_ParameterManagerImpl : SchemaClass, CAnimGr
 {
     public CAnimGraphDoc_ParameterManagerImpl(nint handle) : base(handle) { }
 
-    private static nint _ParametersOffset = -1;
+    private static nint? _ParametersOffset;
 
     public ref CUtlVector<SchemaUntypedField> Parameters
     {
         get
         {
-            if (_ParametersOffset == -1) _ParametersOffset = Schema.GetOffset(0x455FF3C4E4B8EF59);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ParametersOffset);
+            _ParametersOffset = _ParametersOffset ?? Schema.GetOffset(0x455FF3C4E4B8EF59);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ParametersOffset!.Value);
         }
     }
 

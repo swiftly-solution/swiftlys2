@@ -16,14 +16,14 @@ internal partial class CVoiceContainerSwitchImpl : CVoiceContainerBaseImpl, CVoi
 {
     public CVoiceContainerSwitchImpl(nint handle) : base(handle) { }
 
-    private static nint _SoundsToPlayOffset = -1;
+    private static nint? _SoundsToPlayOffset;
 
     public ref CUtlVector<CSoundContainerReference> SoundsToPlay
     {
         get
         {
-            if (_SoundsToPlayOffset == -1) _SoundsToPlayOffset = Schema.GetOffset(0x79EA569BDCB5F70E);
-            return ref _Handle.AsRef<CUtlVector<CSoundContainerReference>>(_SoundsToPlayOffset);
+            _SoundsToPlayOffset = _SoundsToPlayOffset ?? Schema.GetOffset(0x79EA569BDCB5F70E);
+            return ref _Handle.AsRef<CUtlVector<CSoundContainerReference>>(_SoundsToPlayOffset!.Value);
         }
     }
 

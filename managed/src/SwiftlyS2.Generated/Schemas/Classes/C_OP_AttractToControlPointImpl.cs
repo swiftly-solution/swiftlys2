@@ -16,86 +16,86 @@ internal partial class C_OP_AttractToControlPointImpl : CParticleFunctionForceIm
 {
     public C_OP_AttractToControlPointImpl(nint handle) : base(handle) { }
 
-    private static nint _ComponentScaleOffset = -1;
+    private static nint? _ComponentScaleOffset;
 
     public ref Vector ComponentScale
     {
         get
         {
-            if (_ComponentScaleOffset == -1) _ComponentScaleOffset = Schema.GetOffset(0xBD30C24AB17954E2);
-            return ref _Handle.AsRef<Vector>(_ComponentScaleOffset);
+            _ComponentScaleOffset = _ComponentScaleOffset ?? Schema.GetOffset(0xBD30C24AB17954E2);
+            return ref _Handle.AsRef<Vector>(_ComponentScaleOffset!.Value);
         }
     }
-    private static nint _ForceAmountOffset = -1;
+    private static nint? _ForceAmountOffset;
     private CPerParticleFloatInputImpl? _ForceAmountInstance;
 
     public CPerParticleFloatInput ForceAmount
     {
         get
         {
-            if (_ForceAmountOffset == -1) _ForceAmountOffset = Schema.GetOffset(0xBD30C24A70831A84);
+            _ForceAmountOffset = _ForceAmountOffset ?? Schema.GetOffset(0xBD30C24A70831A84);
             var instance = _ForceAmountInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _ForceAmountOffset);
+            instance.DangerousSetHandle(_Handle + _ForceAmountOffset!.Value);
             return instance;
         }
     }
-    private static nint _MinimumDistanceOffset = -1;
+    private static nint? _MinimumDistanceOffset;
     private CPerParticleFloatInputImpl? _MinimumDistanceInstance;
 
     public CPerParticleFloatInput MinimumDistance
     {
         get
         {
-            if (_MinimumDistanceOffset == -1) _MinimumDistanceOffset = Schema.GetOffset(0xBD30C24A9AC4C964);
+            _MinimumDistanceOffset = _MinimumDistanceOffset ?? Schema.GetOffset(0xBD30C24A9AC4C964);
             var instance = _MinimumDistanceInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _MinimumDistanceOffset);
+            instance.DangerousSetHandle(_Handle + _MinimumDistanceOffset!.Value);
             return instance;
         }
     }
-    private static nint _FalloffPowerOffset = -1;
+    private static nint? _FalloffPowerOffset;
 
     public ref float FalloffPower
     {
         get
         {
-            if (_FalloffPowerOffset == -1) _FalloffPowerOffset = Schema.GetOffset(0xBD30C24AE3163382);
-            return ref _Handle.AsRef<float>(_FalloffPowerOffset);
+            _FalloffPowerOffset = _FalloffPowerOffset ?? Schema.GetOffset(0xBD30C24AE3163382);
+            return ref _Handle.AsRef<float>(_FalloffPowerOffset!.Value);
         }
     }
-    private static nint _TransformInputOffset = -1;
+    private static nint? _TransformInputOffset;
     private CParticleTransformInputImpl? _TransformInputInstance;
 
     public CParticleTransformInput TransformInput
     {
         get
         {
-            if (_TransformInputOffset == -1) _TransformInputOffset = Schema.GetOffset(0xBD30C24AB3FDC289);
+            _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0xBD30C24AB3FDC289);
             var instance = _TransformInputInstance ??= new CParticleTransformInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _TransformInputOffset);
+            instance.DangerousSetHandle(_Handle + _TransformInputOffset!.Value);
             return instance;
         }
     }
-    private static nint _ForceAmountMinOffset = -1;
+    private static nint? _ForceAmountMinOffset;
     private CPerParticleFloatInputImpl? _ForceAmountMinInstance;
 
     public CPerParticleFloatInput ForceAmountMin
     {
         get
         {
-            if (_ForceAmountMinOffset == -1) _ForceAmountMinOffset = Schema.GetOffset(0xBD30C24AEBB56458);
+            _ForceAmountMinOffset = _ForceAmountMinOffset ?? Schema.GetOffset(0xBD30C24AEBB56458);
             var instance = _ForceAmountMinInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _ForceAmountMinOffset);
+            instance.DangerousSetHandle(_Handle + _ForceAmountMinOffset!.Value);
             return instance;
         }
     }
-    private static nint _ApplyMinForceOffset = -1;
+    private static nint? _ApplyMinForceOffset;
 
     public ref bool ApplyMinForce
     {
         get
         {
-            if (_ApplyMinForceOffset == -1) _ApplyMinForceOffset = Schema.GetOffset(0xBD30C24AF72AC3CC);
-            return ref _Handle.AsRef<bool>(_ApplyMinForceOffset);
+            _ApplyMinForceOffset = _ApplyMinForceOffset ?? Schema.GetOffset(0xBD30C24AF72AC3CC);
+            return ref _Handle.AsRef<bool>(_ApplyMinForceOffset!.Value);
         }
     }
 

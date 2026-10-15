@@ -16,102 +16,102 @@ internal partial class CompositeMaterialInputContainer_tImpl : SchemaClass, Comp
 {
     public CompositeMaterialInputContainer_tImpl(nint handle) : base(handle) { }
 
-    private static nint _EnabledOffset = -1;
+    private static nint? _EnabledOffset;
 
     public ref bool Enabled
     {
         get
         {
-            if (_EnabledOffset == -1) _EnabledOffset = Schema.GetOffset(0x6B247F56154EB7E);
-            return ref _Handle.AsRef<bool>(_EnabledOffset);
+            _EnabledOffset = _EnabledOffset ?? Schema.GetOffset(0x6B247F56154EB7E);
+            return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
         }
     }
-    private static nint _CompositeMaterialInputContainerSourceTypeOffset = -1;
+    private static nint? _CompositeMaterialInputContainerSourceTypeOffset;
 
     public ref CompositeMaterialInputContainerSourceType_t CompositeMaterialInputContainerSourceType
     {
         get
         {
-            if (_CompositeMaterialInputContainerSourceTypeOffset == -1) _CompositeMaterialInputContainerSourceTypeOffset = Schema.GetOffset(0x6B247F5999ADAAF);
-            return ref _Handle.AsRef<CompositeMaterialInputContainerSourceType_t>(_CompositeMaterialInputContainerSourceTypeOffset);
+            _CompositeMaterialInputContainerSourceTypeOffset = _CompositeMaterialInputContainerSourceTypeOffset ?? Schema.GetOffset(0x6B247F5999ADAAF);
+            return ref _Handle.AsRef<CompositeMaterialInputContainerSourceType_t>(_CompositeMaterialInputContainerSourceTypeOffset!.Value);
         }
     }
-    private static nint _StrSpecificContainerMaterialOffset = -1;
+    private static nint? _StrSpecificContainerMaterialOffset;
     private SchemaUntypedField? _StrSpecificContainerMaterialInstance;
 
     public SchemaUntypedField StrSpecificContainerMaterial
     {
         get
         {
-            if (_StrSpecificContainerMaterialOffset == -1) _StrSpecificContainerMaterialOffset = Schema.GetOffset(0x6B247F5EA588AF6);
+            _StrSpecificContainerMaterialOffset = _StrSpecificContainerMaterialOffset ?? Schema.GetOffset(0x6B247F5EA588AF6);
             var instance = _StrSpecificContainerMaterialInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _StrSpecificContainerMaterialOffset);
+            instance.DangerousSetHandle(_Handle + _StrSpecificContainerMaterialOffset!.Value);
             return instance;
         }
     }
-    private static nint _StrAttrNameOffset = -1;
+    private static nint? _StrAttrNameOffset;
 
     public string StrAttrName
     {
         get
         {
-            if (_StrAttrNameOffset == -1) _StrAttrNameOffset = Schema.GetOffset(0x6B247F53B064C18);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrAttrNameOffset));
+            _StrAttrNameOffset = _StrAttrNameOffset ?? Schema.GetOffset(0x6B247F53B064C18);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrAttrNameOffset!.Value));
         }
         set
         {
-            if (_StrAttrNameOffset == -1) _StrAttrNameOffset = Schema.GetOffset(0x6B247F53B064C18);
-            Schema.SetCUtlString(_Handle, _StrAttrNameOffset, value);
+            _StrAttrNameOffset = _StrAttrNameOffset ?? Schema.GetOffset(0x6B247F53B064C18);
+            Schema.SetCUtlString(_Handle, _StrAttrNameOffset!.Value, value);
         }
     }
-    private static nint _StrAliasOffset = -1;
+    private static nint? _StrAliasOffset;
 
     public string StrAlias
     {
         get
         {
-            if (_StrAliasOffset == -1) _StrAliasOffset = Schema.GetOffset(0x6B247F503F2D55C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrAliasOffset));
+            _StrAliasOffset = _StrAliasOffset ?? Schema.GetOffset(0x6B247F503F2D55C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrAliasOffset!.Value));
         }
         set
         {
-            if (_StrAliasOffset == -1) _StrAliasOffset = Schema.GetOffset(0x6B247F503F2D55C);
-            Schema.SetCUtlString(_Handle, _StrAliasOffset, value);
+            _StrAliasOffset = _StrAliasOffset ?? Schema.GetOffset(0x6B247F503F2D55C);
+            Schema.SetCUtlString(_Handle, _StrAliasOffset!.Value, value);
         }
     }
-    private static nint _LooseVariablesOffset = -1;
+    private static nint? _LooseVariablesOffset;
 
     public ref CUtlVector<CompositeMaterialInputLooseVariable_t> LooseVariables
     {
         get
         {
-            if (_LooseVariablesOffset == -1) _LooseVariablesOffset = Schema.GetOffset(0x6B247F59ED0926E);
-            return ref _Handle.AsRef<CUtlVector<CompositeMaterialInputLooseVariable_t>>(_LooseVariablesOffset);
+            _LooseVariablesOffset = _LooseVariablesOffset ?? Schema.GetOffset(0x6B247F59ED0926E);
+            return ref _Handle.AsRef<CUtlVector<CompositeMaterialInputLooseVariable_t>>(_LooseVariablesOffset!.Value);
         }
     }
-    private static nint _StrAttrNameForVarOffset = -1;
+    private static nint? _StrAttrNameForVarOffset;
 
     public string StrAttrNameForVar
     {
         get
         {
-            if (_StrAttrNameForVarOffset == -1) _StrAttrNameForVarOffset = Schema.GetOffset(0x6B247F5360DD69C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrAttrNameForVarOffset));
+            _StrAttrNameForVarOffset = _StrAttrNameForVarOffset ?? Schema.GetOffset(0x6B247F5360DD69C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrAttrNameForVarOffset!.Value));
         }
         set
         {
-            if (_StrAttrNameForVarOffset == -1) _StrAttrNameForVarOffset = Schema.GetOffset(0x6B247F5360DD69C);
-            Schema.SetCUtlString(_Handle, _StrAttrNameForVarOffset, value);
+            _StrAttrNameForVarOffset = _StrAttrNameForVarOffset ?? Schema.GetOffset(0x6B247F5360DD69C);
+            Schema.SetCUtlString(_Handle, _StrAttrNameForVarOffset!.Value, value);
         }
     }
-    private static nint _ExposeExternallyOffset = -1;
+    private static nint? _ExposeExternallyOffset;
 
     public ref bool ExposeExternally
     {
         get
         {
-            if (_ExposeExternallyOffset == -1) _ExposeExternallyOffset = Schema.GetOffset(0x6B247F552CA5AD1);
-            return ref _Handle.AsRef<bool>(_ExposeExternallyOffset);
+            _ExposeExternallyOffset = _ExposeExternallyOffset ?? Schema.GetOffset(0x6B247F552CA5AD1);
+            return ref _Handle.AsRef<bool>(_ExposeExternallyOffset!.Value);
         }
     }
 

@@ -16,84 +16,84 @@ internal partial class CNmClothEventImpl : CNmEventImpl, CNmClothEvent
 {
     public CNmClothEventImpl(nint handle) : base(handle) { }
 
-    private static nint _TypeOffset = -1;
+    private static nint? _TypeOffset;
 
     public ref CNmClothEvent__Type_t Type
     {
         get
         {
-            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0x169AD3870F04B4ED);
-            return ref _Handle.AsRef<CNmClothEvent__Type_t>(_TypeOffset);
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x169AD3870F04B4ED);
+            return ref _Handle.AsRef<CNmClothEvent__Type_t>(_TypeOffset!.Value);
         }
     }
-    private static nint _StiffnessOffset = -1;
+    private static nint? _StiffnessOffset;
 
     public ref float Stiffness
     {
         get
         {
-            if (_StiffnessOffset == -1) _StiffnessOffset = Schema.GetOffset(0x169AD3874344C684);
-            return ref _Handle.AsRef<float>(_StiffnessOffset);
+            _StiffnessOffset = _StiffnessOffset ?? Schema.GetOffset(0x169AD3874344C684);
+            return ref _Handle.AsRef<float>(_StiffnessOffset!.Value);
         }
     }
-    private static nint _SpeedInOffset = -1;
+    private static nint? _SpeedInOffset;
 
     public ref float SpeedIn
     {
         get
         {
-            if (_SpeedInOffset == -1) _SpeedInOffset = Schema.GetOffset(0x169AD387FB2E93D5);
-            return ref _Handle.AsRef<float>(_SpeedInOffset);
+            _SpeedInOffset = _SpeedInOffset ?? Schema.GetOffset(0x169AD387FB2E93D5);
+            return ref _Handle.AsRef<float>(_SpeedInOffset!.Value);
         }
     }
-    private static nint _SpeedOutOffset = -1;
+    private static nint? _SpeedOutOffset;
 
     public ref float SpeedOut
     {
         get
         {
-            if (_SpeedOutOffset == -1) _SpeedOutOffset = Schema.GetOffset(0x169AD387F651B83E);
-            return ref _Handle.AsRef<float>(_SpeedOutOffset);
+            _SpeedOutOffset = _SpeedOutOffset ?? Schema.GetOffset(0x169AD387F651B83E);
+            return ref _Handle.AsRef<float>(_SpeedOutOffset!.Value);
         }
     }
-    private static nint _LengthSecondsOffset = -1;
+    private static nint? _LengthSecondsOffset;
 
     public ref float LengthSeconds
     {
         get
         {
-            if (_LengthSecondsOffset == -1) _LengthSecondsOffset = Schema.GetOffset(0x169AD387831D393C);
-            return ref _Handle.AsRef<float>(_LengthSecondsOffset);
+            _LengthSecondsOffset = _LengthSecondsOffset ?? Schema.GetOffset(0x169AD387831D393C);
+            return ref _Handle.AsRef<float>(_LengthSecondsOffset!.Value);
         }
     }
-    private static nint _VertexSetNameOffset = -1;
+    private static nint? _VertexSetNameOffset;
 
     public string VertexSetName
     {
         get
         {
-            if (_VertexSetNameOffset == -1) _VertexSetNameOffset = Schema.GetOffset(0x169AD387955B08DE);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_VertexSetNameOffset));
+            _VertexSetNameOffset = _VertexSetNameOffset ?? Schema.GetOffset(0x169AD387955B08DE);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_VertexSetNameOffset!.Value));
         }
         set
         {
-            if (_VertexSetNameOffset == -1) _VertexSetNameOffset = Schema.GetOffset(0x169AD387955B08DE);
-            Schema.SetCUtlString(_Handle, _VertexSetNameOffset, value);
+            _VertexSetNameOffset = _VertexSetNameOffset ?? Schema.GetOffset(0x169AD387955B08DE);
+            Schema.SetCUtlString(_Handle, _VertexSetNameOffset!.Value, value);
         }
     }
-    private static nint _EffectNameOffset = -1;
+    private static nint? _EffectNameOffset;
 
     public string EffectName
     {
         get
         {
-            if (_EffectNameOffset == -1) _EffectNameOffset = Schema.GetOffset(0x169AD3874DF4F5CF);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_EffectNameOffset));
+            _EffectNameOffset = _EffectNameOffset ?? Schema.GetOffset(0x169AD3874DF4F5CF);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_EffectNameOffset!.Value));
         }
         set
         {
-            if (_EffectNameOffset == -1) _EffectNameOffset = Schema.GetOffset(0x169AD3874DF4F5CF);
-            Schema.SetCUtlString(_Handle, _EffectNameOffset, value);
+            _EffectNameOffset = _EffectNameOffset ?? Schema.GetOffset(0x169AD3874DF4F5CF);
+            Schema.SetCUtlString(_Handle, _EffectNameOffset!.Value, value);
         }
     }
 

@@ -16,49 +16,49 @@ internal partial class CFuncMoverRouterImpl : CLogicalEntityImpl, CFuncMoverRout
 {
     public CFuncMoverRouterImpl(nint handle) : base(handle) { }
 
-    private static nint _MoverIndexOffset = -1;
+    private static nint? _MoverIndexOffset;
 
     public ref int MoverIndex
     {
         get
         {
-            if (_MoverIndexOffset == -1) _MoverIndexOffset = Schema.GetOffset(0x1F14B0384C029FEA);
-            return ref _Handle.AsRef<int>(_MoverIndexOffset);
+            _MoverIndexOffset = _MoverIndexOffset ?? Schema.GetOffset(0x1F14B0384C029FEA);
+            return ref _Handle.AsRef<int>(_MoverIndexOffset!.Value);
         }
     }
-    private static nint _RouteToAllMoversOffset = -1;
+    private static nint? _RouteToAllMoversOffset;
 
     public ref bool RouteToAllMovers
     {
         get
         {
-            if (_RouteToAllMoversOffset == -1) _RouteToAllMoversOffset = Schema.GetOffset(0x1F14B038EDE788F0);
-            return ref _Handle.AsRef<bool>(_RouteToAllMoversOffset);
+            _RouteToAllMoversOffset = _RouteToAllMoversOffset ?? Schema.GetOffset(0x1F14B038EDE788F0);
+            return ref _Handle.AsRef<bool>(_RouteToAllMoversOffset!.Value);
         }
     }
-    private static nint _PathMoverOffset = -1;
+    private static nint? _PathMoverOffset;
 
     public ref CHandle<CPathMover> PathMover
     {
         get
         {
-            if (_PathMoverOffset == -1) _PathMoverOffset = Schema.GetOffset(0x1F14B038AFA877CD);
-            return ref _Handle.AsRef<CHandle<CPathMover>>(_PathMoverOffset);
+            _PathMoverOffset = _PathMoverOffset ?? Schema.GetOffset(0x1F14B038AFA877CD);
+            return ref _Handle.AsRef<CHandle<CPathMover>>(_PathMoverOffset!.Value);
         }
     }
-    private static nint _PathMoverNameOffset = -1;
+    private static nint? _PathMoverNameOffset;
 
     public string PathMoverName
     {
         get
         {
-            if (_PathMoverNameOffset == -1) _PathMoverNameOffset = Schema.GetOffset(0x1F14B0386D7B04A0);
-            return Schema.GetString(_Handle.Read<nint>(_PathMoverNameOffset));
+            _PathMoverNameOffset = _PathMoverNameOffset ?? Schema.GetOffset(0x1F14B0386D7B04A0);
+            return Schema.GetString(_Handle.Read<nint>(_PathMoverNameOffset!.Value));
         }
         set
         {
-            if (_PathMoverNameOffset == -1) _PathMoverNameOffset = Schema.GetOffset(0x1F14B0386D7B04A0);
-            Schema.SetString(_Handle, _PathMoverNameOffset, value);
+            _PathMoverNameOffset = _PathMoverNameOffset ?? Schema.GetOffset(0x1F14B0386D7B04A0);
+            Schema.SetString(_Handle, _PathMoverNameOffset!.Value, value);
         }
     }
 

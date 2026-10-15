@@ -16,14 +16,14 @@ internal partial class CMixControlOutputImpl : CMixPropertyBaseImpl, CMixControl
 {
     public CMixControlOutputImpl(nint handle) : base(handle) { }
 
-    private static nint _DefaultValueOffset = -1;
+    private static nint? _DefaultValueOffset;
 
     public ref float DefaultValue
     {
         get
         {
-            if (_DefaultValueOffset == -1) _DefaultValueOffset = Schema.GetOffset(0x7EB266E8700AB429);
-            return ref _Handle.AsRef<float>(_DefaultValueOffset);
+            _DefaultValueOffset = _DefaultValueOffset ?? Schema.GetOffset(0x7EB266E8700AB429);
+            return ref _Handle.AsRef<float>(_DefaultValueOffset!.Value);
         }
     }
 

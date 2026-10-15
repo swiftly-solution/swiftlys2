@@ -16,74 +16,74 @@ internal partial class CNmGraphDocRootMotionOverrideNodeImpl : CNmGraphDocFlowNo
 {
     public CNmGraphDocRootMotionOverrideNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _MaxLinearVelocityOffset = -1;
+    private static nint? _MaxLinearVelocityOffset;
 
     public ref float MaxLinearVelocity
     {
         get
         {
-            if (_MaxLinearVelocityOffset == -1) _MaxLinearVelocityOffset = Schema.GetOffset(0x2302773B1B307CF1);
-            return ref _Handle.AsRef<float>(_MaxLinearVelocityOffset);
+            _MaxLinearVelocityOffset = _MaxLinearVelocityOffset ?? Schema.GetOffset(0x2302773B1B307CF1);
+            return ref _Handle.AsRef<float>(_MaxLinearVelocityOffset!.Value);
         }
     }
-    private static nint _MaxAngularVelocityDegreesOffset = -1;
+    private static nint? _MaxAngularVelocityDegreesOffset;
 
     public ref float MaxAngularVelocityDegrees
     {
         get
         {
-            if (_MaxAngularVelocityDegreesOffset == -1) _MaxAngularVelocityDegreesOffset = Schema.GetOffset(0x2302773B6F2F0275);
-            return ref _Handle.AsRef<float>(_MaxAngularVelocityDegreesOffset);
+            _MaxAngularVelocityDegreesOffset = _MaxAngularVelocityDegreesOffset ?? Schema.GetOffset(0x2302773B6F2F0275);
+            return ref _Handle.AsRef<float>(_MaxAngularVelocityDegreesOffset!.Value);
         }
     }
-    private static nint _OverrideMoveDirXOffset = -1;
+    private static nint? _OverrideMoveDirXOffset;
 
     public ref bool OverrideMoveDirX
     {
         get
         {
-            if (_OverrideMoveDirXOffset == -1) _OverrideMoveDirXOffset = Schema.GetOffset(0x2302773B8BE38E01);
-            return ref _Handle.AsRef<bool>(_OverrideMoveDirXOffset);
+            _OverrideMoveDirXOffset = _OverrideMoveDirXOffset ?? Schema.GetOffset(0x2302773B8BE38E01);
+            return ref _Handle.AsRef<bool>(_OverrideMoveDirXOffset!.Value);
         }
     }
-    private static nint _OverrideMoveDirYOffset = -1;
+    private static nint? _OverrideMoveDirYOffset;
 
     public ref bool OverrideMoveDirY
     {
         get
         {
-            if (_OverrideMoveDirYOffset == -1) _OverrideMoveDirYOffset = Schema.GetOffset(0x2302773B8AE38C6E);
-            return ref _Handle.AsRef<bool>(_OverrideMoveDirYOffset);
+            _OverrideMoveDirYOffset = _OverrideMoveDirYOffset ?? Schema.GetOffset(0x2302773B8AE38C6E);
+            return ref _Handle.AsRef<bool>(_OverrideMoveDirYOffset!.Value);
         }
     }
-    private static nint _OverrideMoveDirZOffset = -1;
+    private static nint? _OverrideMoveDirZOffset;
 
     public ref bool OverrideMoveDirZ
     {
         get
         {
-            if (_OverrideMoveDirZOffset == -1) _OverrideMoveDirZOffset = Schema.GetOffset(0x2302773B89E38ADB);
-            return ref _Handle.AsRef<bool>(_OverrideMoveDirZOffset);
+            _OverrideMoveDirZOffset = _OverrideMoveDirZOffset ?? Schema.GetOffset(0x2302773B89E38ADB);
+            return ref _Handle.AsRef<bool>(_OverrideMoveDirZOffset!.Value);
         }
     }
-    private static nint _AllowPitchForFacingOffset = -1;
+    private static nint? _AllowPitchForFacingOffset;
 
     public ref bool AllowPitchForFacing
     {
         get
         {
-            if (_AllowPitchForFacingOffset == -1) _AllowPitchForFacingOffset = Schema.GetOffset(0x2302773B81C44741);
-            return ref _Handle.AsRef<bool>(_AllowPitchForFacingOffset);
+            _AllowPitchForFacingOffset = _AllowPitchForFacingOffset ?? Schema.GetOffset(0x2302773B81C44741);
+            return ref _Handle.AsRef<bool>(_AllowPitchForFacingOffset!.Value);
         }
     }
-    private static nint _ListenForRootMotionEventsOffset = -1;
+    private static nint? _ListenForRootMotionEventsOffset;
 
     public ref bool ListenForRootMotionEvents
     {
         get
         {
-            if (_ListenForRootMotionEventsOffset == -1) _ListenForRootMotionEventsOffset = Schema.GetOffset(0x2302773B7636BBDA);
-            return ref _Handle.AsRef<bool>(_ListenForRootMotionEventsOffset);
+            _ListenForRootMotionEventsOffset = _ListenForRootMotionEventsOffset ?? Schema.GetOffset(0x2302773B7636BBDA);
+            return ref _Handle.AsRef<bool>(_ListenForRootMotionEventsOffset!.Value);
         }
     }
 

@@ -16,284 +16,284 @@ internal partial class CSimpleAssetTypeInfoImpl : SchemaClass, CSimpleAssetTypeI
 {
     public CSimpleAssetTypeInfoImpl(nint handle) : base(handle) { }
 
-    private static nint _FriendlyNameOffset = -1;
+    private static nint? _FriendlyNameOffset;
 
     public string FriendlyName
     {
         get
         {
-            if (_FriendlyNameOffset == -1) _FriendlyNameOffset = Schema.GetOffset(0x78399444112DB23D);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_FriendlyNameOffset));
+            _FriendlyNameOffset = _FriendlyNameOffset ?? Schema.GetOffset(0x78399444112DB23D);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_FriendlyNameOffset!.Value));
         }
         set
         {
-            if (_FriendlyNameOffset == -1) _FriendlyNameOffset = Schema.GetOffset(0x78399444112DB23D);
-            Schema.SetCUtlString(_Handle, _FriendlyNameOffset, value);
+            _FriendlyNameOffset = _FriendlyNameOffset ?? Schema.GetOffset(0x78399444112DB23D);
+            Schema.SetCUtlString(_Handle, _FriendlyNameOffset!.Value, value);
         }
     }
-    private static nint _ExtOffset = -1;
+    private static nint? _ExtOffset;
 
     public string Ext
     {
         get
         {
-            if (_ExtOffset == -1) _ExtOffset = Schema.GetOffset(0x78399444023CE6F4);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ExtOffset));
+            _ExtOffset = _ExtOffset ?? Schema.GetOffset(0x78399444023CE6F4);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ExtOffset!.Value));
         }
         set
         {
-            if (_ExtOffset == -1) _ExtOffset = Schema.GetOffset(0x78399444023CE6F4);
-            Schema.SetCUtlString(_Handle, _ExtOffset, value);
+            _ExtOffset = _ExtOffset ?? Schema.GetOffset(0x78399444023CE6F4);
+            Schema.SetCUtlString(_Handle, _ExtOffset!.Value, value);
         }
     }
-    private static nint _IconLgOffset = -1;
+    private static nint? _IconLgOffset;
 
     public string IconLg
     {
         get
         {
-            if (_IconLgOffset == -1) _IconLgOffset = Schema.GetOffset(0x783994441BBCA1E9);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_IconLgOffset));
+            _IconLgOffset = _IconLgOffset ?? Schema.GetOffset(0x783994441BBCA1E9);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_IconLgOffset!.Value));
         }
         set
         {
-            if (_IconLgOffset == -1) _IconLgOffset = Schema.GetOffset(0x783994441BBCA1E9);
-            Schema.SetCUtlString(_Handle, _IconLgOffset, value);
+            _IconLgOffset = _IconLgOffset ?? Schema.GetOffset(0x783994441BBCA1E9);
+            Schema.SetCUtlString(_Handle, _IconLgOffset!.Value, value);
         }
     }
-    private static nint _IconSmOffset = -1;
+    private static nint? _IconSmOffset;
 
     public string IconSm
     {
         get
         {
-            if (_IconSmOffset == -1) _IconSmOffset = Schema.GetOffset(0x78399444217FD59C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_IconSmOffset));
+            _IconSmOffset = _IconSmOffset ?? Schema.GetOffset(0x78399444217FD59C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_IconSmOffset!.Value));
         }
         set
         {
-            if (_IconSmOffset == -1) _IconSmOffset = Schema.GetOffset(0x78399444217FD59C);
-            Schema.SetCUtlString(_Handle, _IconSmOffset, value);
+            _IconSmOffset = _IconSmOffset ?? Schema.GetOffset(0x78399444217FD59C);
+            Schema.SetCUtlString(_Handle, _IconSmOffset!.Value, value);
         }
     }
-    private static nint _SuppressSubstringsOffset = -1;
+    private static nint? _SuppressSubstringsOffset;
 
     public ref CUtlVector<CUtlString> SuppressSubstrings
     {
         get
         {
-            if (_SuppressSubstringsOffset == -1) _SuppressSubstringsOffset = Schema.GetOffset(0x7839944456134CD2);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_SuppressSubstringsOffset);
+            _SuppressSubstringsOffset = _SuppressSubstringsOffset ?? Schema.GetOffset(0x7839944456134CD2);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_SuppressSubstringsOffset!.Value);
         }
     }
-    private static nint _AdditionalExtensionsOffset = -1;
+    private static nint? _AdditionalExtensionsOffset;
 
     public ref CUtlVector<CUtlString> AdditionalExtensions
     {
         get
         {
-            if (_AdditionalExtensionsOffset == -1) _AdditionalExtensionsOffset = Schema.GetOffset(0x783994448C314796);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_AdditionalExtensionsOffset);
+            _AdditionalExtensionsOffset = _AdditionalExtensionsOffset ?? Schema.GetOffset(0x783994448C314796);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_AdditionalExtensionsOffset!.Value);
         }
     }
-    private static nint _EngineCommandsOffset = -1;
+    private static nint? _EngineCommandsOffset;
 
     public ref CUtlVector<AssetEngineCommand_t> EngineCommands
     {
         get
         {
-            if (_EngineCommandsOffset == -1) _EngineCommandsOffset = Schema.GetOffset(0x783994445E1D0FD1);
-            return ref _Handle.AsRef<CUtlVector<AssetEngineCommand_t>>(_EngineCommandsOffset);
+            _EngineCommandsOffset = _EngineCommandsOffset ?? Schema.GetOffset(0x783994445E1D0FD1);
+            return ref _Handle.AsRef<CUtlVector<AssetEngineCommand_t>>(_EngineCommandsOffset!.Value);
         }
     }
-    private static nint _LimitToModsOffset = -1;
+    private static nint? _LimitToModsOffset;
 
     public ref CUtlVector<CUtlString> LimitToMods
     {
         get
         {
-            if (_LimitToModsOffset == -1) _LimitToModsOffset = Schema.GetOffset(0x783994447C371728);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_LimitToModsOffset);
+            _LimitToModsOffset = _LimitToModsOffset ?? Schema.GetOffset(0x783994447C371728);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_LimitToModsOffset!.Value);
         }
     }
-    private static nint _ExcludeFromModsOffset = -1;
+    private static nint? _ExcludeFromModsOffset;
 
     public ref CUtlVector<CUtlString> ExcludeFromMods
     {
         get
         {
-            if (_ExcludeFromModsOffset == -1) _ExcludeFromModsOffset = Schema.GetOffset(0x7839944401089B94);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_ExcludeFromModsOffset);
+            _ExcludeFromModsOffset = _ExcludeFromModsOffset ?? Schema.GetOffset(0x7839944401089B94);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_ExcludeFromModsOffset!.Value);
         }
     }
-    private static nint _HideForRetailModsOffset = -1;
+    private static nint? _HideForRetailModsOffset;
 
     public ref CUtlVector<CUtlString> HideForRetailMods
     {
         get
         {
-            if (_HideForRetailModsOffset == -1) _HideForRetailModsOffset = Schema.GetOffset(0x78399444098EC80A);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_HideForRetailModsOffset);
+            _HideForRetailModsOffset = _HideForRetailModsOffset ?? Schema.GetOffset(0x78399444098EC80A);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_HideForRetailModsOffset!.Value);
         }
     }
-    private static nint _PreviewThumbnailOverlayIconOffset = -1;
+    private static nint? _PreviewThumbnailOverlayIconOffset;
 
     public string PreviewThumbnailOverlayIcon
     {
         get
         {
-            if (_PreviewThumbnailOverlayIconOffset == -1) _PreviewThumbnailOverlayIconOffset = Schema.GetOffset(0x7839944415E0BFDA);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_PreviewThumbnailOverlayIconOffset));
+            _PreviewThumbnailOverlayIconOffset = _PreviewThumbnailOverlayIconOffset ?? Schema.GetOffset(0x7839944415E0BFDA);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_PreviewThumbnailOverlayIconOffset!.Value));
         }
         set
         {
-            if (_PreviewThumbnailOverlayIconOffset == -1) _PreviewThumbnailOverlayIconOffset = Schema.GetOffset(0x7839944415E0BFDA);
-            Schema.SetCUtlString(_Handle, _PreviewThumbnailOverlayIconOffset, value);
+            _PreviewThumbnailOverlayIconOffset = _PreviewThumbnailOverlayIconOffset ?? Schema.GetOffset(0x7839944415E0BFDA);
+            Schema.SetCUtlString(_Handle, _PreviewThumbnailOverlayIconOffset!.Value, value);
         }
     }
-    private static nint _ErrorOnUnrecognizedOutboundRefsOffset = -1;
+    private static nint? _ErrorOnUnrecognizedOutboundRefsOffset;
 
     public ref bool ErrorOnUnrecognizedOutboundRefs
     {
         get
         {
-            if (_ErrorOnUnrecognizedOutboundRefsOffset == -1) _ErrorOnUnrecognizedOutboundRefsOffset = Schema.GetOffset(0x783994449356FB71);
-            return ref _Handle.AsRef<bool>(_ErrorOnUnrecognizedOutboundRefsOffset);
+            _ErrorOnUnrecognizedOutboundRefsOffset = _ErrorOnUnrecognizedOutboundRefsOffset ?? Schema.GetOffset(0x783994449356FB71);
+            return ref _Handle.AsRef<bool>(_ErrorOnUnrecognizedOutboundRefsOffset!.Value);
         }
     }
-    private static nint _UnrecognizedOutboundRefsErrorTypeExceptionsOffset = -1;
+    private static nint? _UnrecognizedOutboundRefsErrorTypeExceptionsOffset;
 
     public ref CUtlVector<CUtlString> UnrecognizedOutboundRefsErrorTypeExceptions
     {
         get
         {
-            if (_UnrecognizedOutboundRefsErrorTypeExceptionsOffset == -1) _UnrecognizedOutboundRefsErrorTypeExceptionsOffset = Schema.GetOffset(0x78399444D297287C);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_UnrecognizedOutboundRefsErrorTypeExceptionsOffset);
+            _UnrecognizedOutboundRefsErrorTypeExceptionsOffset = _UnrecognizedOutboundRefsErrorTypeExceptionsOffset ?? Schema.GetOffset(0x78399444D297287C);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_UnrecognizedOutboundRefsErrorTypeExceptionsOffset!.Value);
         }
     }
-    private static nint _HideTypeByDefaultOffset = -1;
+    private static nint? _HideTypeByDefaultOffset;
 
     public ref bool HideTypeByDefault
     {
         get
         {
-            if (_HideTypeByDefaultOffset == -1) _HideTypeByDefaultOffset = Schema.GetOffset(0x783994441B92BB69);
-            return ref _Handle.AsRef<bool>(_HideTypeByDefaultOffset);
+            _HideTypeByDefaultOffset = _HideTypeByDefaultOffset ?? Schema.GetOffset(0x783994441B92BB69);
+            return ref _Handle.AsRef<bool>(_HideTypeByDefaultOffset!.Value);
         }
     }
-    private static nint _CannotBeShownOffset = -1;
+    private static nint? _CannotBeShownOffset;
 
     public ref bool CannotBeShown
     {
         get
         {
-            if (_CannotBeShownOffset == -1) _CannotBeShownOffset = Schema.GetOffset(0x78399444CD45097C);
-            return ref _Handle.AsRef<bool>(_CannotBeShownOffset);
+            _CannotBeShownOffset = _CannotBeShownOffset ?? Schema.GetOffset(0x78399444CD45097C);
+            return ref _Handle.AsRef<bool>(_CannotBeShownOffset!.Value);
         }
     }
-    private static nint _IsNontrivialChildAssetTypeOffset = -1;
+    private static nint? _IsNontrivialChildAssetTypeOffset;
 
     public ref bool IsNontrivialChildAssetType
     {
         get
         {
-            if (_IsNontrivialChildAssetTypeOffset == -1) _IsNontrivialChildAssetTypeOffset = Schema.GetOffset(0x78399444FBBF5A63);
-            return ref _Handle.AsRef<bool>(_IsNontrivialChildAssetTypeOffset);
+            _IsNontrivialChildAssetTypeOffset = _IsNontrivialChildAssetTypeOffset ?? Schema.GetOffset(0x78399444FBBF5A63);
+            return ref _Handle.AsRef<bool>(_IsNontrivialChildAssetTypeOffset!.Value);
         }
     }
-    private static nint _SuppressFullFingerprintCalculationOffset = -1;
+    private static nint? _SuppressFullFingerprintCalculationOffset;
 
     public ref bool SuppressFullFingerprintCalculation
     {
         get
         {
-            if (_SuppressFullFingerprintCalculationOffset == -1) _SuppressFullFingerprintCalculationOffset = Schema.GetOffset(0x783994449C062502);
-            return ref _Handle.AsRef<bool>(_SuppressFullFingerprintCalculationOffset);
+            _SuppressFullFingerprintCalculationOffset = _SuppressFullFingerprintCalculationOffset ?? Schema.GetOffset(0x783994449C062502);
+            return ref _Handle.AsRef<bool>(_SuppressFullFingerprintCalculationOffset!.Value);
         }
     }
-    private static nint _IgnoreCompiledStateOffset = -1;
+    private static nint? _IgnoreCompiledStateOffset;
 
     public ref bool IgnoreCompiledState
     {
         get
         {
-            if (_IgnoreCompiledStateOffset == -1) _IgnoreCompiledStateOffset = Schema.GetOffset(0x783994444FDFBF51);
-            return ref _Handle.AsRef<bool>(_IgnoreCompiledStateOffset);
+            _IgnoreCompiledStateOffset = _IgnoreCompiledStateOffset ?? Schema.GetOffset(0x783994444FDFBF51);
+            return ref _Handle.AsRef<bool>(_IgnoreCompiledStateOffset!.Value);
         }
     }
-    private static nint _ContentFileIsTextOffset = -1;
+    private static nint? _ContentFileIsTextOffset;
 
     public ref bool ContentFileIsText
     {
         get
         {
-            if (_ContentFileIsTextOffset == -1) _ContentFileIsTextOffset = Schema.GetOffset(0x78399444975AC3AB);
-            return ref _Handle.AsRef<bool>(_ContentFileIsTextOffset);
+            _ContentFileIsTextOffset = _ContentFileIsTextOffset ?? Schema.GetOffset(0x78399444975AC3AB);
+            return ref _Handle.AsRef<bool>(_ContentFileIsTextOffset!.Value);
         }
     }
-    private static nint _PrefersLivePreviewOffset = -1;
+    private static nint? _PrefersLivePreviewOffset;
 
     public ref bool PrefersLivePreview
     {
         get
         {
-            if (_PrefersLivePreviewOffset == -1) _PrefersLivePreviewOffset = Schema.GetOffset(0x783994443740857A);
-            return ref _Handle.AsRef<bool>(_PrefersLivePreviewOffset);
+            _PrefersLivePreviewOffset = _PrefersLivePreviewOffset ?? Schema.GetOffset(0x783994443740857A);
+            return ref _Handle.AsRef<bool>(_PrefersLivePreviewOffset!.Value);
         }
     }
-    private static nint _PresentInGameTreeOffset = -1;
+    private static nint? _PresentInGameTreeOffset;
 
     public ref bool PresentInGameTree
     {
         get
         {
-            if (_PresentInGameTreeOffset == -1) _PresentInGameTreeOffset = Schema.GetOffset(0x783994440C8661A9);
-            return ref _Handle.AsRef<bool>(_PresentInGameTreeOffset);
+            _PresentInGameTreeOffset = _PresentInGameTreeOffset ?? Schema.GetOffset(0x783994440C8661A9);
+            return ref _Handle.AsRef<bool>(_PresentInGameTreeOffset!.Value);
         }
     }
-    private static nint _ShouldCompileErrorFallbackToDiskOffset = -1;
+    private static nint? _ShouldCompileErrorFallbackToDiskOffset;
 
     public ref bool ShouldCompileErrorFallbackToDisk
     {
         get
         {
-            if (_ShouldCompileErrorFallbackToDiskOffset == -1) _ShouldCompileErrorFallbackToDiskOffset = Schema.GetOffset(0x783994448836DB4D);
-            return ref _Handle.AsRef<bool>(_ShouldCompileErrorFallbackToDiskOffset);
+            _ShouldCompileErrorFallbackToDiskOffset = _ShouldCompileErrorFallbackToDiskOffset ?? Schema.GetOffset(0x783994448836DB4D);
+            return ref _Handle.AsRef<bool>(_ShouldCompileErrorFallbackToDiskOffset!.Value);
         }
     }
-    private static nint _AssetTypeVersionOffset = -1;
+    private static nint? _AssetTypeVersionOffset;
 
     public ref int AssetTypeVersion
     {
         get
         {
-            if (_AssetTypeVersionOffset == -1) _AssetTypeVersionOffset = Schema.GetOffset(0x7839944421A31059);
-            return ref _Handle.AsRef<int>(_AssetTypeVersionOffset);
+            _AssetTypeVersionOffset = _AssetTypeVersionOffset ?? Schema.GetOffset(0x7839944421A31059);
+            return ref _Handle.AsRef<int>(_AssetTypeVersionOffset!.Value);
         }
     }
-    private static nint _AssetThumbnailVersionOffset = -1;
+    private static nint? _AssetThumbnailVersionOffset;
 
     public ref int AssetThumbnailVersion
     {
         get
         {
-            if (_AssetThumbnailVersionOffset == -1) _AssetThumbnailVersionOffset = Schema.GetOffset(0x78399444A5369177);
-            return ref _Handle.AsRef<int>(_AssetThumbnailVersionOffset);
+            _AssetThumbnailVersionOffset = _AssetThumbnailVersionOffset ?? Schema.GetOffset(0x78399444A5369177);
+            return ref _Handle.AsRef<int>(_AssetThumbnailVersionOffset!.Value);
         }
     }
-    private static nint _Test_InjectSearchableOffset = -1;
+    private static nint? _Test_InjectSearchableOffset;
 
     public string Test_InjectSearchable
     {
         get
         {
-            if (_Test_InjectSearchableOffset == -1) _Test_InjectSearchableOffset = Schema.GetOffset(0x78399444E628EFAF);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_Test_InjectSearchableOffset));
+            _Test_InjectSearchableOffset = _Test_InjectSearchableOffset ?? Schema.GetOffset(0x78399444E628EFAF);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_Test_InjectSearchableOffset!.Value));
         }
         set
         {
-            if (_Test_InjectSearchableOffset == -1) _Test_InjectSearchableOffset = Schema.GetOffset(0x78399444E628EFAF);
-            Schema.SetCUtlString(_Handle, _Test_InjectSearchableOffset, value);
+            _Test_InjectSearchableOffset = _Test_InjectSearchableOffset ?? Schema.GetOffset(0x78399444E628EFAF);
+            Schema.SetCUtlString(_Handle, _Test_InjectSearchableOffset!.Value, value);
         }
     }
 

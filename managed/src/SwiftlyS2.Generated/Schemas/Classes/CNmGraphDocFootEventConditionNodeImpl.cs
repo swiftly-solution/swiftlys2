@@ -16,34 +16,34 @@ internal partial class CNmGraphDocFootEventConditionNodeImpl : CNmGraphDocFlowNo
 {
     public CNmGraphDocFootEventConditionNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _PhaseConditionOffset = -1;
+    private static nint? _PhaseConditionOffset;
 
     public ref NmFootPhaseCondition_t PhaseCondition
     {
         get
         {
-            if (_PhaseConditionOffset == -1) _PhaseConditionOffset = Schema.GetOffset(0x44F4C4B479D4BD7D);
-            return ref _Handle.AsRef<NmFootPhaseCondition_t>(_PhaseConditionOffset);
+            _PhaseConditionOffset = _PhaseConditionOffset ?? Schema.GetOffset(0x44F4C4B479D4BD7D);
+            return ref _Handle.AsRef<NmFootPhaseCondition_t>(_PhaseConditionOffset!.Value);
         }
     }
-    private static nint _LimitSearchToSourceStateOffset = -1;
+    private static nint? _LimitSearchToSourceStateOffset;
 
     public ref bool LimitSearchToSourceState
     {
         get
         {
-            if (_LimitSearchToSourceStateOffset == -1) _LimitSearchToSourceStateOffset = Schema.GetOffset(0x44F4C4B415D4BD01);
-            return ref _Handle.AsRef<bool>(_LimitSearchToSourceStateOffset);
+            _LimitSearchToSourceStateOffset = _LimitSearchToSourceStateOffset ?? Schema.GetOffset(0x44F4C4B415D4BD01);
+            return ref _Handle.AsRef<bool>(_LimitSearchToSourceStateOffset!.Value);
         }
     }
-    private static nint _IgnoreInactiveBranchEventsOffset = -1;
+    private static nint? _IgnoreInactiveBranchEventsOffset;
 
     public ref bool IgnoreInactiveBranchEvents
     {
         get
         {
-            if (_IgnoreInactiveBranchEventsOffset == -1) _IgnoreInactiveBranchEventsOffset = Schema.GetOffset(0x44F4C4B440B77877);
-            return ref _Handle.AsRef<bool>(_IgnoreInactiveBranchEventsOffset);
+            _IgnoreInactiveBranchEventsOffset = _IgnoreInactiveBranchEventsOffset ?? Schema.GetOffset(0x44F4C4B440B77877);
+            return ref _Handle.AsRef<bool>(_IgnoreInactiveBranchEventsOffset!.Value);
         }
     }
 

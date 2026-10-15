@@ -16,60 +16,60 @@ internal partial class CNmIDBasedSelectorNode__CDefinitionImpl : CNmPoseNode__CD
 {
     public CNmIDBasedSelectorNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint _OptionNodeIndicesOffset = -1;
+    private static nint? _OptionNodeIndicesOffset;
     private SchemaUntypedField? _OptionNodeIndicesInstance;
 
     public SchemaUntypedField OptionNodeIndices
     {
         get
         {
-            if (_OptionNodeIndicesOffset == -1) _OptionNodeIndicesOffset = Schema.GetOffset(0x28793D28DA97B15D);
+            _OptionNodeIndicesOffset = _OptionNodeIndicesOffset ?? Schema.GetOffset(0x28793D28DA97B15D);
             var instance = _OptionNodeIndicesInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OptionNodeIndicesOffset);
+            instance.DangerousSetHandle(_Handle + _OptionNodeIndicesOffset!.Value);
             return instance;
         }
     }
-    private static nint _OptionIDsOffset = -1;
+    private static nint? _OptionIDsOffset;
     private SchemaUntypedField? _OptionIDsInstance;
 
     public SchemaUntypedField OptionIDs
     {
         get
         {
-            if (_OptionIDsOffset == -1) _OptionIDsOffset = Schema.GetOffset(0x28793D288B69497E);
+            _OptionIDsOffset = _OptionIDsOffset ?? Schema.GetOffset(0x28793D288B69497E);
             var instance = _OptionIDsInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OptionIDsOffset);
+            instance.DangerousSetHandle(_Handle + _OptionIDsOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParameterNodeIdxOffset = -1;
+    private static nint? _ParameterNodeIdxOffset;
 
     public ref short ParameterNodeIdx
     {
         get
         {
-            if (_ParameterNodeIdxOffset == -1) _ParameterNodeIdxOffset = Schema.GetOffset(0x28793D28FE88B1EF);
-            return ref _Handle.AsRef<short>(_ParameterNodeIdxOffset);
+            _ParameterNodeIdxOffset = _ParameterNodeIdxOffset ?? Schema.GetOffset(0x28793D28FE88B1EF);
+            return ref _Handle.AsRef<short>(_ParameterNodeIdxOffset!.Value);
         }
     }
-    private static nint _FallbackNodeIdxOffset = -1;
+    private static nint? _FallbackNodeIdxOffset;
 
     public ref short FallbackNodeIdx
     {
         get
         {
-            if (_FallbackNodeIdxOffset == -1) _FallbackNodeIdxOffset = Schema.GetOffset(0x28793D28AFA8F89E);
-            return ref _Handle.AsRef<short>(_FallbackNodeIdxOffset);
+            _FallbackNodeIdxOffset = _FallbackNodeIdxOffset ?? Schema.GetOffset(0x28793D28AFA8F89E);
+            return ref _Handle.AsRef<short>(_FallbackNodeIdxOffset!.Value);
         }
     }
-    private static nint _IgnoreInvalidOptionsOffset = -1;
+    private static nint? _IgnoreInvalidOptionsOffset;
 
     public ref bool IgnoreInvalidOptions
     {
         get
         {
-            if (_IgnoreInvalidOptionsOffset == -1) _IgnoreInvalidOptionsOffset = Schema.GetOffset(0x28793D28507C679C);
-            return ref _Handle.AsRef<bool>(_IgnoreInvalidOptionsOffset);
+            _IgnoreInvalidOptionsOffset = _IgnoreInvalidOptionsOffset ?? Schema.GetOffset(0x28793D28507C679C);
+            return ref _Handle.AsRef<bool>(_IgnoreInvalidOptionsOffset!.Value);
         }
     }
 

@@ -16,14 +16,14 @@ internal partial class CPulse_TempVarBankDefinitionImpl : SchemaClass, CPulse_Te
 {
     public CPulse_TempVarBankDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint _TempVarsOffset = -1;
+    private static nint? _TempVarsOffset;
 
     public ref CUtlVector<CPulse_TempVarInfo> TempVars
     {
         get
         {
-            if (_TempVarsOffset == -1) _TempVarsOffset = Schema.GetOffset(0xE88327F8C815133D);
-            return ref _Handle.AsRef<CUtlVector<CPulse_TempVarInfo>>(_TempVarsOffset);
+            _TempVarsOffset = _TempVarsOffset ?? Schema.GetOffset(0xE88327F8C815133D);
+            return ref _Handle.AsRef<CUtlVector<CPulse_TempVarInfo>>(_TempVarsOffset!.Value);
         }
     }
 

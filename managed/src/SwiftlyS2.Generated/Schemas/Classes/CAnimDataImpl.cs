@@ -16,54 +16,54 @@ internal partial class CAnimDataImpl : SchemaClass, CAnimData
 {
     public CAnimDataImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public ref CBufferString Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xA4868F934D8F5786);
-            return ref _Handle.AsRef<CBufferString>(_NameOffset);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xA4868F934D8F5786);
+            return ref _Handle.AsRef<CBufferString>(_NameOffset!.Value);
         }
     }
-    private static nint _AnimArrayOffset = -1;
+    private static nint? _AnimArrayOffset;
 
     public ref CUtlVector<CAnimDesc> AnimArray
     {
         get
         {
-            if (_AnimArrayOffset == -1) _AnimArrayOffset = Schema.GetOffset(0xA4868F939FE8AF0D);
-            return ref _Handle.AsRef<CUtlVector<CAnimDesc>>(_AnimArrayOffset);
+            _AnimArrayOffset = _AnimArrayOffset ?? Schema.GetOffset(0xA4868F939FE8AF0D);
+            return ref _Handle.AsRef<CUtlVector<CAnimDesc>>(_AnimArrayOffset!.Value);
         }
     }
-    private static nint _DecoderArrayOffset = -1;
+    private static nint? _DecoderArrayOffset;
 
     public ref CUtlVector<CAnimDecoder> DecoderArray
     {
         get
         {
-            if (_DecoderArrayOffset == -1) _DecoderArrayOffset = Schema.GetOffset(0xA4868F93AB12D6C4);
-            return ref _Handle.AsRef<CUtlVector<CAnimDecoder>>(_DecoderArrayOffset);
+            _DecoderArrayOffset = _DecoderArrayOffset ?? Schema.GetOffset(0xA4868F93AB12D6C4);
+            return ref _Handle.AsRef<CUtlVector<CAnimDecoder>>(_DecoderArrayOffset!.Value);
         }
     }
-    private static nint _MaxUniqueFrameIndexOffset = -1;
+    private static nint? _MaxUniqueFrameIndexOffset;
 
     public ref int MaxUniqueFrameIndex
     {
         get
         {
-            if (_MaxUniqueFrameIndexOffset == -1) _MaxUniqueFrameIndexOffset = Schema.GetOffset(0xA4868F938FB0EA0D);
-            return ref _Handle.AsRef<int>(_MaxUniqueFrameIndexOffset);
+            _MaxUniqueFrameIndexOffset = _MaxUniqueFrameIndexOffset ?? Schema.GetOffset(0xA4868F938FB0EA0D);
+            return ref _Handle.AsRef<int>(_MaxUniqueFrameIndexOffset!.Value);
         }
     }
-    private static nint _SegmentArrayOffset = -1;
+    private static nint? _SegmentArrayOffset;
 
     public ref CUtlVector<CAnimFrameSegment> SegmentArray
     {
         get
         {
-            if (_SegmentArrayOffset == -1) _SegmentArrayOffset = Schema.GetOffset(0xA4868F933714FD2F);
-            return ref _Handle.AsRef<CUtlVector<CAnimFrameSegment>>(_SegmentArrayOffset);
+            _SegmentArrayOffset = _SegmentArrayOffset ?? Schema.GetOffset(0xA4868F933714FD2F);
+            return ref _Handle.AsRef<CUtlVector<CAnimFrameSegment>>(_SegmentArrayOffset!.Value);
         }
     }
 

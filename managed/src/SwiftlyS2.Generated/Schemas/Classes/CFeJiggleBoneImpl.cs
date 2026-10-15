@@ -16,354 +16,354 @@ internal partial class CFeJiggleBoneImpl : SchemaClass, CFeJiggleBone
 {
     public CFeJiggleBoneImpl(nint handle) : base(handle) { }
 
-    private static nint _FlagsOffset = -1;
+    private static nint? _FlagsOffset;
 
     public ref uint Flags
     {
         get
         {
-            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0xC064D4BDCE6E9C28);
-            return ref _Handle.AsRef<uint>(_FlagsOffset);
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0xC064D4BDCE6E9C28);
+            return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
         }
     }
-    private static nint _LengthOffset = -1;
+    private static nint? _LengthOffset;
 
     public ref float Length
     {
         get
         {
-            if (_LengthOffset == -1) _LengthOffset = Schema.GetOffset(0xC064D4BDFF9776DF);
-            return ref _Handle.AsRef<float>(_LengthOffset);
+            _LengthOffset = _LengthOffset ?? Schema.GetOffset(0xC064D4BDFF9776DF);
+            return ref _Handle.AsRef<float>(_LengthOffset!.Value);
         }
     }
-    private static nint _TipMassOffset = -1;
+    private static nint? _TipMassOffset;
 
     public ref float TipMass
     {
         get
         {
-            if (_TipMassOffset == -1) _TipMassOffset = Schema.GetOffset(0xC064D4BDEB1310B8);
-            return ref _Handle.AsRef<float>(_TipMassOffset);
+            _TipMassOffset = _TipMassOffset ?? Schema.GetOffset(0xC064D4BDEB1310B8);
+            return ref _Handle.AsRef<float>(_TipMassOffset!.Value);
         }
     }
-    private static nint _YawStiffnessOffset = -1;
+    private static nint? _YawStiffnessOffset;
 
     public ref float YawStiffness
     {
         get
         {
-            if (_YawStiffnessOffset == -1) _YawStiffnessOffset = Schema.GetOffset(0xC064D4BDDBF83D43);
-            return ref _Handle.AsRef<float>(_YawStiffnessOffset);
+            _YawStiffnessOffset = _YawStiffnessOffset ?? Schema.GetOffset(0xC064D4BDDBF83D43);
+            return ref _Handle.AsRef<float>(_YawStiffnessOffset!.Value);
         }
     }
-    private static nint _YawDampingOffset = -1;
+    private static nint? _YawDampingOffset;
 
     public ref float YawDamping
     {
         get
         {
-            if (_YawDampingOffset == -1) _YawDampingOffset = Schema.GetOffset(0xC064D4BD2F1091CC);
-            return ref _Handle.AsRef<float>(_YawDampingOffset);
+            _YawDampingOffset = _YawDampingOffset ?? Schema.GetOffset(0xC064D4BD2F1091CC);
+            return ref _Handle.AsRef<float>(_YawDampingOffset!.Value);
         }
     }
-    private static nint _PitchStiffnessOffset = -1;
+    private static nint? _PitchStiffnessOffset;
 
     public ref float PitchStiffness
     {
         get
         {
-            if (_PitchStiffnessOffset == -1) _PitchStiffnessOffset = Schema.GetOffset(0xC064D4BD3553FEE0);
-            return ref _Handle.AsRef<float>(_PitchStiffnessOffset);
+            _PitchStiffnessOffset = _PitchStiffnessOffset ?? Schema.GetOffset(0xC064D4BD3553FEE0);
+            return ref _Handle.AsRef<float>(_PitchStiffnessOffset!.Value);
         }
     }
-    private static nint _PitchDampingOffset = -1;
+    private static nint? _PitchDampingOffset;
 
     public ref float PitchDamping
     {
         get
         {
-            if (_PitchDampingOffset == -1) _PitchDampingOffset = Schema.GetOffset(0xC064D4BDDE2FCEFF);
-            return ref _Handle.AsRef<float>(_PitchDampingOffset);
+            _PitchDampingOffset = _PitchDampingOffset ?? Schema.GetOffset(0xC064D4BDDE2FCEFF);
+            return ref _Handle.AsRef<float>(_PitchDampingOffset!.Value);
         }
     }
-    private static nint _AlongStiffnessOffset = -1;
+    private static nint? _AlongStiffnessOffset;
 
     public ref float AlongStiffness
     {
         get
         {
-            if (_AlongStiffnessOffset == -1) _AlongStiffnessOffset = Schema.GetOffset(0xC064D4BD677C6B51);
-            return ref _Handle.AsRef<float>(_AlongStiffnessOffset);
+            _AlongStiffnessOffset = _AlongStiffnessOffset ?? Schema.GetOffset(0xC064D4BD677C6B51);
+            return ref _Handle.AsRef<float>(_AlongStiffnessOffset!.Value);
         }
     }
-    private static nint _AlongDampingOffset = -1;
+    private static nint? _AlongDampingOffset;
 
     public ref float AlongDamping
     {
         get
         {
-            if (_AlongDampingOffset == -1) _AlongDampingOffset = Schema.GetOffset(0xC064D4BDE7D22252);
-            return ref _Handle.AsRef<float>(_AlongDampingOffset);
+            _AlongDampingOffset = _AlongDampingOffset ?? Schema.GetOffset(0xC064D4BDE7D22252);
+            return ref _Handle.AsRef<float>(_AlongDampingOffset!.Value);
         }
     }
-    private static nint _AngleLimitOffset = -1;
+    private static nint? _AngleLimitOffset;
 
     public ref float AngleLimit
     {
         get
         {
-            if (_AngleLimitOffset == -1) _AngleLimitOffset = Schema.GetOffset(0xC064D4BD2A410905);
-            return ref _Handle.AsRef<float>(_AngleLimitOffset);
+            _AngleLimitOffset = _AngleLimitOffset ?? Schema.GetOffset(0xC064D4BD2A410905);
+            return ref _Handle.AsRef<float>(_AngleLimitOffset!.Value);
         }
     }
-    private static nint _MinYawOffset = -1;
+    private static nint? _MinYawOffset;
 
     public ref float MinYaw
     {
         get
         {
-            if (_MinYawOffset == -1) _MinYawOffset = Schema.GetOffset(0xC064D4BD4496E01C);
-            return ref _Handle.AsRef<float>(_MinYawOffset);
+            _MinYawOffset = _MinYawOffset ?? Schema.GetOffset(0xC064D4BD4496E01C);
+            return ref _Handle.AsRef<float>(_MinYawOffset!.Value);
         }
     }
-    private static nint _MaxYawOffset = -1;
+    private static nint? _MaxYawOffset;
 
     public ref float MaxYaw
     {
         get
         {
-            if (_MaxYawOffset == -1) _MaxYawOffset = Schema.GetOffset(0xC064D4BD19C4AE42);
-            return ref _Handle.AsRef<float>(_MaxYawOffset);
+            _MaxYawOffset = _MaxYawOffset ?? Schema.GetOffset(0xC064D4BD19C4AE42);
+            return ref _Handle.AsRef<float>(_MaxYawOffset!.Value);
         }
     }
-    private static nint _YawFrictionOffset = -1;
+    private static nint? _YawFrictionOffset;
 
     public ref float YawFriction
     {
         get
         {
-            if (_YawFrictionOffset == -1) _YawFrictionOffset = Schema.GetOffset(0xC064D4BD07FAF648);
-            return ref _Handle.AsRef<float>(_YawFrictionOffset);
+            _YawFrictionOffset = _YawFrictionOffset ?? Schema.GetOffset(0xC064D4BD07FAF648);
+            return ref _Handle.AsRef<float>(_YawFrictionOffset!.Value);
         }
     }
-    private static nint _YawBounceOffset = -1;
+    private static nint? _YawBounceOffset;
 
     public ref float YawBounce
     {
         get
         {
-            if (_YawBounceOffset == -1) _YawBounceOffset = Schema.GetOffset(0xC064D4BD156E2E2A);
-            return ref _Handle.AsRef<float>(_YawBounceOffset);
+            _YawBounceOffset = _YawBounceOffset ?? Schema.GetOffset(0xC064D4BD156E2E2A);
+            return ref _Handle.AsRef<float>(_YawBounceOffset!.Value);
         }
     }
-    private static nint _MinPitchOffset = -1;
+    private static nint? _MinPitchOffset;
 
     public ref float MinPitch
     {
         get
         {
-            if (_MinPitchOffset == -1) _MinPitchOffset = Schema.GetOffset(0xC064D4BDE0093115);
-            return ref _Handle.AsRef<float>(_MinPitchOffset);
+            _MinPitchOffset = _MinPitchOffset ?? Schema.GetOffset(0xC064D4BDE0093115);
+            return ref _Handle.AsRef<float>(_MinPitchOffset!.Value);
         }
     }
-    private static nint _MaxPitchOffset = -1;
+    private static nint? _MaxPitchOffset;
 
     public ref float MaxPitch
     {
         get
         {
-            if (_MaxPitchOffset == -1) _MaxPitchOffset = Schema.GetOffset(0xC064D4BD1F14D2C3);
-            return ref _Handle.AsRef<float>(_MaxPitchOffset);
+            _MaxPitchOffset = _MaxPitchOffset ?? Schema.GetOffset(0xC064D4BD1F14D2C3);
+            return ref _Handle.AsRef<float>(_MaxPitchOffset!.Value);
         }
     }
-    private static nint _PitchFrictionOffset = -1;
+    private static nint? _PitchFrictionOffset;
 
     public ref float PitchFriction
     {
         get
         {
-            if (_PitchFrictionOffset == -1) _PitchFrictionOffset = Schema.GetOffset(0xC064D4BDB31D7A5D);
-            return ref _Handle.AsRef<float>(_PitchFrictionOffset);
+            _PitchFrictionOffset = _PitchFrictionOffset ?? Schema.GetOffset(0xC064D4BDB31D7A5D);
+            return ref _Handle.AsRef<float>(_PitchFrictionOffset!.Value);
         }
     }
-    private static nint _PitchBounceOffset = -1;
+    private static nint? _PitchBounceOffset;
 
     public ref float PitchBounce
     {
         get
         {
-            if (_PitchBounceOffset == -1) _PitchBounceOffset = Schema.GetOffset(0xC064D4BDAC140AE3);
-            return ref _Handle.AsRef<float>(_PitchBounceOffset);
+            _PitchBounceOffset = _PitchBounceOffset ?? Schema.GetOffset(0xC064D4BDAC140AE3);
+            return ref _Handle.AsRef<float>(_PitchBounceOffset!.Value);
         }
     }
-    private static nint _BaseMassOffset = -1;
+    private static nint? _BaseMassOffset;
 
     public ref float BaseMass
     {
         get
         {
-            if (_BaseMassOffset == -1) _BaseMassOffset = Schema.GetOffset(0xC064D4BDC56419D2);
-            return ref _Handle.AsRef<float>(_BaseMassOffset);
+            _BaseMassOffset = _BaseMassOffset ?? Schema.GetOffset(0xC064D4BDC56419D2);
+            return ref _Handle.AsRef<float>(_BaseMassOffset!.Value);
         }
     }
-    private static nint _BaseStiffnessOffset = -1;
+    private static nint? _BaseStiffnessOffset;
 
     public ref float BaseStiffness
     {
         get
         {
-            if (_BaseStiffnessOffset == -1) _BaseStiffnessOffset = Schema.GetOffset(0xC064D4BD32834B1B);
-            return ref _Handle.AsRef<float>(_BaseStiffnessOffset);
+            _BaseStiffnessOffset = _BaseStiffnessOffset ?? Schema.GetOffset(0xC064D4BD32834B1B);
+            return ref _Handle.AsRef<float>(_BaseStiffnessOffset!.Value);
         }
     }
-    private static nint _BaseDampingOffset = -1;
+    private static nint? _BaseDampingOffset;
 
     public ref float BaseDamping
     {
         get
         {
-            if (_BaseDampingOffset == -1) _BaseDampingOffset = Schema.GetOffset(0xC064D4BDB3E982B4);
-            return ref _Handle.AsRef<float>(_BaseDampingOffset);
+            _BaseDampingOffset = _BaseDampingOffset ?? Schema.GetOffset(0xC064D4BDB3E982B4);
+            return ref _Handle.AsRef<float>(_BaseDampingOffset!.Value);
         }
     }
-    private static nint _BaseMinLeftOffset = -1;
+    private static nint? _BaseMinLeftOffset;
 
     public ref float BaseMinLeft
     {
         get
         {
-            if (_BaseMinLeftOffset == -1) _BaseMinLeftOffset = Schema.GetOffset(0xC064D4BD796C25E3);
-            return ref _Handle.AsRef<float>(_BaseMinLeftOffset);
+            _BaseMinLeftOffset = _BaseMinLeftOffset ?? Schema.GetOffset(0xC064D4BD796C25E3);
+            return ref _Handle.AsRef<float>(_BaseMinLeftOffset!.Value);
         }
     }
-    private static nint _BaseMaxLeftOffset = -1;
+    private static nint? _BaseMaxLeftOffset;
 
     public ref float BaseMaxLeft
     {
         get
         {
-            if (_BaseMaxLeftOffset == -1) _BaseMaxLeftOffset = Schema.GetOffset(0xC064D4BDB9338D95);
-            return ref _Handle.AsRef<float>(_BaseMaxLeftOffset);
+            _BaseMaxLeftOffset = _BaseMaxLeftOffset ?? Schema.GetOffset(0xC064D4BDB9338D95);
+            return ref _Handle.AsRef<float>(_BaseMaxLeftOffset!.Value);
         }
     }
-    private static nint _BaseLeftFrictionOffset = -1;
+    private static nint? _BaseLeftFrictionOffset;
 
     public ref float BaseLeftFriction
     {
         get
         {
-            if (_BaseLeftFrictionOffset == -1) _BaseLeftFrictionOffset = Schema.GetOffset(0xC064D4BD591435B1);
-            return ref _Handle.AsRef<float>(_BaseLeftFrictionOffset);
+            _BaseLeftFrictionOffset = _BaseLeftFrictionOffset ?? Schema.GetOffset(0xC064D4BD591435B1);
+            return ref _Handle.AsRef<float>(_BaseLeftFrictionOffset!.Value);
         }
     }
-    private static nint _BaseMinUpOffset = -1;
+    private static nint? _BaseMinUpOffset;
 
     public ref float BaseMinUp
     {
         get
         {
-            if (_BaseMinUpOffset == -1) _BaseMinUpOffset = Schema.GetOffset(0xC064D4BD993DE07B);
-            return ref _Handle.AsRef<float>(_BaseMinUpOffset);
+            _BaseMinUpOffset = _BaseMinUpOffset ?? Schema.GetOffset(0xC064D4BD993DE07B);
+            return ref _Handle.AsRef<float>(_BaseMinUpOffset!.Value);
         }
     }
-    private static nint _BaseMaxUpOffset = -1;
+    private static nint? _BaseMaxUpOffset;
 
     public ref float BaseMaxUp
     {
         get
         {
-            if (_BaseMaxUpOffset == -1) _BaseMaxUpOffset = Schema.GetOffset(0xC064D4BD81FA3CF9);
-            return ref _Handle.AsRef<float>(_BaseMaxUpOffset);
+            _BaseMaxUpOffset = _BaseMaxUpOffset ?? Schema.GetOffset(0xC064D4BD81FA3CF9);
+            return ref _Handle.AsRef<float>(_BaseMaxUpOffset!.Value);
         }
     }
-    private static nint _BaseUpFrictionOffset = -1;
+    private static nint? _BaseUpFrictionOffset;
 
     public ref float BaseUpFriction
     {
         get
         {
-            if (_BaseUpFrictionOffset == -1) _BaseUpFrictionOffset = Schema.GetOffset(0xC064D4BD657E3D81);
-            return ref _Handle.AsRef<float>(_BaseUpFrictionOffset);
+            _BaseUpFrictionOffset = _BaseUpFrictionOffset ?? Schema.GetOffset(0xC064D4BD657E3D81);
+            return ref _Handle.AsRef<float>(_BaseUpFrictionOffset!.Value);
         }
     }
-    private static nint _BaseMinForwardOffset = -1;
+    private static nint? _BaseMinForwardOffset;
 
     public ref float BaseMinForward
     {
         get
         {
-            if (_BaseMinForwardOffset == -1) _BaseMinForwardOffset = Schema.GetOffset(0xC064D4BDF05F062B);
-            return ref _Handle.AsRef<float>(_BaseMinForwardOffset);
+            _BaseMinForwardOffset = _BaseMinForwardOffset ?? Schema.GetOffset(0xC064D4BDF05F062B);
+            return ref _Handle.AsRef<float>(_BaseMinForwardOffset!.Value);
         }
     }
-    private static nint _BaseMaxForwardOffset = -1;
+    private static nint? _BaseMaxForwardOffset;
 
     public ref float BaseMaxForward
     {
         get
         {
-            if (_BaseMaxForwardOffset == -1) _BaseMaxForwardOffset = Schema.GetOffset(0xC064D4BDB071FCD9);
-            return ref _Handle.AsRef<float>(_BaseMaxForwardOffset);
+            _BaseMaxForwardOffset = _BaseMaxForwardOffset ?? Schema.GetOffset(0xC064D4BDB071FCD9);
+            return ref _Handle.AsRef<float>(_BaseMaxForwardOffset!.Value);
         }
     }
-    private static nint _BaseForwardFrictionOffset = -1;
+    private static nint? _BaseForwardFrictionOffset;
 
     public ref float BaseForwardFriction
     {
         get
         {
-            if (_BaseForwardFrictionOffset == -1) _BaseForwardFrictionOffset = Schema.GetOffset(0xC064D4BD1DC9EF21);
-            return ref _Handle.AsRef<float>(_BaseForwardFrictionOffset);
+            _BaseForwardFrictionOffset = _BaseForwardFrictionOffset ?? Schema.GetOffset(0xC064D4BD1DC9EF21);
+            return ref _Handle.AsRef<float>(_BaseForwardFrictionOffset!.Value);
         }
     }
-    private static nint _Radius0Offset = -1;
+    private static nint? _Radius0Offset;
 
     public ref float Radius0
     {
         get
         {
-            if (_Radius0Offset == -1) _Radius0Offset = Schema.GetOffset(0xC064D4BDB20C6987);
-            return ref _Handle.AsRef<float>(_Radius0Offset);
+            _Radius0Offset = _Radius0Offset ?? Schema.GetOffset(0xC064D4BDB20C6987);
+            return ref _Handle.AsRef<float>(_Radius0Offset!.Value);
         }
     }
-    private static nint _Radius1Offset = -1;
+    private static nint? _Radius1Offset;
 
     public ref float Radius1
     {
         get
         {
-            if (_Radius1Offset == -1) _Radius1Offset = Schema.GetOffset(0xC064D4BDB10C67F4);
-            return ref _Handle.AsRef<float>(_Radius1Offset);
+            _Radius1Offset = _Radius1Offset ?? Schema.GetOffset(0xC064D4BDB10C67F4);
+            return ref _Handle.AsRef<float>(_Radius1Offset!.Value);
         }
     }
-    private static nint _Point0Offset = -1;
+    private static nint? _Point0Offset;
 
     public ref Vector Point0
     {
         get
         {
-            if (_Point0Offset == -1) _Point0Offset = Schema.GetOffset(0xC064D4BDF88AE06F);
-            return ref _Handle.AsRef<Vector>(_Point0Offset);
+            _Point0Offset = _Point0Offset ?? Schema.GetOffset(0xC064D4BDF88AE06F);
+            return ref _Handle.AsRef<Vector>(_Point0Offset!.Value);
         }
     }
-    private static nint _Point1Offset = -1;
+    private static nint? _Point1Offset;
 
     public ref Vector Point1
     {
         get
         {
-            if (_Point1Offset == -1) _Point1Offset = Schema.GetOffset(0xC064D4BDF78ADEDC);
-            return ref _Handle.AsRef<Vector>(_Point1Offset);
+            _Point1Offset = _Point1Offset ?? Schema.GetOffset(0xC064D4BDF78ADEDC);
+            return ref _Handle.AsRef<Vector>(_Point1Offset!.Value);
         }
     }
-    private static nint _CollisionMaskOffset = -1;
+    private static nint? _CollisionMaskOffset;
 
     public ref ushort CollisionMask
     {
         get
         {
-            if (_CollisionMaskOffset == -1) _CollisionMaskOffset = Schema.GetOffset(0xC064D4BD0CCF1BEF);
-            return ref _Handle.AsRef<ushort>(_CollisionMaskOffset);
+            _CollisionMaskOffset = _CollisionMaskOffset ?? Schema.GetOffset(0xC064D4BD0CCF1BEF);
+            return ref _Handle.AsRef<ushort>(_CollisionMaskOffset!.Value);
         }
     }
 

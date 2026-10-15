@@ -16,55 +16,55 @@ internal partial class CAnimGraphDoc_FollowTargetNodeImpl : CAnimGraphDoc_NodeIm
 {
     public CAnimGraphDoc_FollowTargetNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _InputConnectionOffset = -1;
+    private static nint? _InputConnectionOffset;
     private CAnimGraphDoc_NodeConnectionImpl? _InputConnectionInstance;
 
     public CAnimGraphDoc_NodeConnection InputConnection
     {
         get
         {
-            if (_InputConnectionOffset == -1) _InputConnectionOffset = Schema.GetOffset(0x610C9261F7849CB);
+            _InputConnectionOffset = _InputConnectionOffset ?? Schema.GetOffset(0x610C9261F7849CB);
             var instance = _InputConnectionInstance ??= new CAnimGraphDoc_NodeConnectionImpl(0);
-            instance.DangerousSetHandle(_Handle + _InputConnectionOffset);
+            instance.DangerousSetHandle(_Handle + _InputConnectionOffset!.Value);
             return instance;
         }
     }
-    private static nint _BoneNameOffset = -1;
+    private static nint? _BoneNameOffset;
 
     public string BoneName
     {
         get
         {
-            if (_BoneNameOffset == -1) _BoneNameOffset = Schema.GetOffset(0x610C926FDEE0E0C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_BoneNameOffset));
+            _BoneNameOffset = _BoneNameOffset ?? Schema.GetOffset(0x610C926FDEE0E0C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_BoneNameOffset!.Value));
         }
         set
         {
-            if (_BoneNameOffset == -1) _BoneNameOffset = Schema.GetOffset(0x610C926FDEE0E0C);
-            Schema.SetCUtlString(_Handle, _BoneNameOffset, value);
+            _BoneNameOffset = _BoneNameOffset ?? Schema.GetOffset(0x610C926FDEE0E0C);
+            Schema.SetCUtlString(_Handle, _BoneNameOffset!.Value, value);
         }
     }
-    private static nint _TargetSettingsOffset = -1;
+    private static nint? _TargetSettingsOffset;
     private IKTargetSettings_tImpl? _TargetSettingsInstance;
 
     public IKTargetSettings_t TargetSettings
     {
         get
         {
-            if (_TargetSettingsOffset == -1) _TargetSettingsOffset = Schema.GetOffset(0x610C926D6828E35);
+            _TargetSettingsOffset = _TargetSettingsOffset ?? Schema.GetOffset(0x610C926D6828E35);
             var instance = _TargetSettingsInstance ??= new IKTargetSettings_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _TargetSettingsOffset);
+            instance.DangerousSetHandle(_Handle + _TargetSettingsOffset!.Value);
             return instance;
         }
     }
-    private static nint _MatchTargetOrientationOffset = -1;
+    private static nint? _MatchTargetOrientationOffset;
 
     public ref bool MatchTargetOrientation
     {
         get
         {
-            if (_MatchTargetOrientationOffset == -1) _MatchTargetOrientationOffset = Schema.GetOffset(0x610C92642E0C3DB);
-            return ref _Handle.AsRef<bool>(_MatchTargetOrientationOffset);
+            _MatchTargetOrientationOffset = _MatchTargetOrientationOffset ?? Schema.GetOffset(0x610C92642E0C3DB);
+            return ref _Handle.AsRef<bool>(_MatchTargetOrientationOffset!.Value);
         }
     }
 

@@ -16,74 +16,74 @@ internal partial class C_OP_IntraParticleForceImpl : CParticleFunctionForceImpl,
 {
     public C_OP_IntraParticleForceImpl(nint handle) : base(handle) { }
 
-    private static nint _AttractionMinDistanceOffset = -1;
+    private static nint? _AttractionMinDistanceOffset;
 
     public ref float AttractionMinDistance
     {
         get
         {
-            if (_AttractionMinDistanceOffset == -1) _AttractionMinDistanceOffset = Schema.GetOffset(0x784412D0CEAEE62D);
-            return ref _Handle.AsRef<float>(_AttractionMinDistanceOffset);
+            _AttractionMinDistanceOffset = _AttractionMinDistanceOffset ?? Schema.GetOffset(0x784412D0CEAEE62D);
+            return ref _Handle.AsRef<float>(_AttractionMinDistanceOffset!.Value);
         }
     }
-    private static nint _AttractionMaxDistanceOffset = -1;
+    private static nint? _AttractionMaxDistanceOffset;
 
     public ref float AttractionMaxDistance
     {
         get
         {
-            if (_AttractionMaxDistanceOffset == -1) _AttractionMaxDistanceOffset = Schema.GetOffset(0x784412D04052F81F);
-            return ref _Handle.AsRef<float>(_AttractionMaxDistanceOffset);
+            _AttractionMaxDistanceOffset = _AttractionMaxDistanceOffset ?? Schema.GetOffset(0x784412D04052F81F);
+            return ref _Handle.AsRef<float>(_AttractionMaxDistanceOffset!.Value);
         }
     }
-    private static nint _AttractionMaxStrengthOffset = -1;
+    private static nint? _AttractionMaxStrengthOffset;
 
     public ref float AttractionMaxStrength
     {
         get
         {
-            if (_AttractionMaxStrengthOffset == -1) _AttractionMaxStrengthOffset = Schema.GetOffset(0x784412D09FE72EFD);
-            return ref _Handle.AsRef<float>(_AttractionMaxStrengthOffset);
+            _AttractionMaxStrengthOffset = _AttractionMaxStrengthOffset ?? Schema.GetOffset(0x784412D09FE72EFD);
+            return ref _Handle.AsRef<float>(_AttractionMaxStrengthOffset!.Value);
         }
     }
-    private static nint _RepulsionMinDistanceOffset = -1;
+    private static nint? _RepulsionMinDistanceOffset;
 
     public ref float RepulsionMinDistance
     {
         get
         {
-            if (_RepulsionMinDistanceOffset == -1) _RepulsionMinDistanceOffset = Schema.GetOffset(0x784412D018F9EFB1);
-            return ref _Handle.AsRef<float>(_RepulsionMinDistanceOffset);
+            _RepulsionMinDistanceOffset = _RepulsionMinDistanceOffset ?? Schema.GetOffset(0x784412D018F9EFB1);
+            return ref _Handle.AsRef<float>(_RepulsionMinDistanceOffset!.Value);
         }
     }
-    private static nint _RepulsionMaxDistanceOffset = -1;
+    private static nint? _RepulsionMaxDistanceOffset;
 
     public ref float RepulsionMaxDistance
     {
         get
         {
-            if (_RepulsionMaxDistanceOffset == -1) _RepulsionMaxDistanceOffset = Schema.GetOffset(0x784412D05B7D269B);
-            return ref _Handle.AsRef<float>(_RepulsionMaxDistanceOffset);
+            _RepulsionMaxDistanceOffset = _RepulsionMaxDistanceOffset ?? Schema.GetOffset(0x784412D05B7D269B);
+            return ref _Handle.AsRef<float>(_RepulsionMaxDistanceOffset!.Value);
         }
     }
-    private static nint _RepulsionMaxStrengthOffset = -1;
+    private static nint? _RepulsionMaxStrengthOffset;
 
     public ref float RepulsionMaxStrength
     {
         get
         {
-            if (_RepulsionMaxStrengthOffset == -1) _RepulsionMaxStrengthOffset = Schema.GetOffset(0x784412D0B9401C21);
-            return ref _Handle.AsRef<float>(_RepulsionMaxStrengthOffset);
+            _RepulsionMaxStrengthOffset = _RepulsionMaxStrengthOffset ?? Schema.GetOffset(0x784412D0B9401C21);
+            return ref _Handle.AsRef<float>(_RepulsionMaxStrengthOffset!.Value);
         }
     }
-    private static nint _UseAABBOffset = -1;
+    private static nint? _UseAABBOffset;
 
     public ref bool UseAABB
     {
         get
         {
-            if (_UseAABBOffset == -1) _UseAABBOffset = Schema.GetOffset(0x784412D029AAFF2E);
-            return ref _Handle.AsRef<bool>(_UseAABBOffset);
+            _UseAABBOffset = _UseAABBOffset ?? Schema.GetOffset(0x784412D029AAFF2E);
+            return ref _Handle.AsRef<bool>(_UseAABBOffset!.Value);
         }
     }
 

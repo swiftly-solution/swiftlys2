@@ -16,24 +16,24 @@ internal partial class CFuncPlatRotImpl : CFuncPlatImpl, CFuncPlatRot
 {
     public CFuncPlatRotImpl(nint handle) : base(handle) { }
 
-    private static nint _EndOffset = -1;
+    private static nint? _EndOffset;
 
     public ref QAngle End
     {
         get
         {
-            if (_EndOffset == -1) _EndOffset = Schema.GetOffset(0xF566498E5B29CFCA);
-            return ref _Handle.AsRef<QAngle>(_EndOffset);
+            _EndOffset = _EndOffset ?? Schema.GetOffset(0xF566498E5B29CFCA);
+            return ref _Handle.AsRef<QAngle>(_EndOffset!.Value);
         }
     }
-    private static nint _StartOffset = -1;
+    private static nint? _StartOffset;
 
     public ref QAngle Start
     {
         get
         {
-            if (_StartOffset == -1) _StartOffset = Schema.GetOffset(0xF566498EA539BEFF);
-            return ref _Handle.AsRef<QAngle>(_StartOffset);
+            _StartOffset = _StartOffset ?? Schema.GetOffset(0xF566498EA539BEFF);
+            return ref _Handle.AsRef<QAngle>(_StartOffset!.Value);
         }
     }
 

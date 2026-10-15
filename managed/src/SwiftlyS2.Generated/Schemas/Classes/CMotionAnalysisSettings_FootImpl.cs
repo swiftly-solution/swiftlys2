@@ -16,64 +16,64 @@ internal partial class CMotionAnalysisSettings_FootImpl : SchemaClass, CMotionAn
 {
     public CMotionAnalysisSettings_FootImpl(nint handle) : base(handle) { }
 
-    private static nint _AnkleBoneNamesOffset = -1;
+    private static nint? _AnkleBoneNamesOffset;
 
     public ref CUtlVector<CGlobalSymbol> AnkleBoneNames
     {
         get
         {
-            if (_AnkleBoneNamesOffset == -1) _AnkleBoneNamesOffset = Schema.GetOffset(0x7B3A5294A7ABB39E);
-            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_AnkleBoneNamesOffset);
+            _AnkleBoneNamesOffset = _AnkleBoneNamesOffset ?? Schema.GetOffset(0x7B3A5294A7ABB39E);
+            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_AnkleBoneNamesOffset!.Value);
         }
     }
-    private static nint _AttachmentNamesOffset = -1;
+    private static nint? _AttachmentNamesOffset;
 
     public ref CUtlVector<CGlobalSymbol> AttachmentNames
     {
         get
         {
-            if (_AttachmentNamesOffset == -1) _AttachmentNamesOffset = Schema.GetOffset(0x7B3A529439BB0AC8);
-            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_AttachmentNamesOffset);
+            _AttachmentNamesOffset = _AttachmentNamesOffset ?? Schema.GetOffset(0x7B3A529439BB0AC8);
+            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_AttachmentNamesOffset!.Value);
         }
     }
-    private static nint _DebugColorOffset = -1;
+    private static nint? _DebugColorOffset;
 
     public ref Color DebugColor
     {
         get
         {
-            if (_DebugColorOffset == -1) _DebugColorOffset = Schema.GetOffset(0x7B3A52940490974F);
-            return ref _Handle.AsRef<Color>(_DebugColorOffset);
+            _DebugColorOffset = _DebugColorOffset ?? Schema.GetOffset(0x7B3A52940490974F);
+            return ref _Handle.AsRef<Color>(_DebugColorOffset!.Value);
         }
     }
-    private static nint _CreatedEventTypeOffset = -1;
+    private static nint? _CreatedEventTypeOffset;
 
     public string CreatedEventType
     {
         get
         {
-            if (_CreatedEventTypeOffset == -1) _CreatedEventTypeOffset = Schema.GetOffset(0x7B3A529430E8F0E1);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_CreatedEventTypeOffset));
+            _CreatedEventTypeOffset = _CreatedEventTypeOffset ?? Schema.GetOffset(0x7B3A529430E8F0E1);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_CreatedEventTypeOffset!.Value));
         }
         set
         {
-            if (_CreatedEventTypeOffset == -1) _CreatedEventTypeOffset = Schema.GetOffset(0x7B3A529430E8F0E1);
-            Schema.SetCUtlString(_Handle, _CreatedEventTypeOffset, value);
+            _CreatedEventTypeOffset = _CreatedEventTypeOffset ?? Schema.GetOffset(0x7B3A529430E8F0E1);
+            Schema.SetCUtlString(_Handle, _CreatedEventTypeOffset!.Value, value);
         }
     }
-    private static nint _CreatedEventFootValueOffset = -1;
+    private static nint? _CreatedEventFootValueOffset;
 
     public string CreatedEventFootValue
     {
         get
         {
-            if (_CreatedEventFootValueOffset == -1) _CreatedEventFootValueOffset = Schema.GetOffset(0x7B3A52946A9D94C2);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_CreatedEventFootValueOffset));
+            _CreatedEventFootValueOffset = _CreatedEventFootValueOffset ?? Schema.GetOffset(0x7B3A52946A9D94C2);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_CreatedEventFootValueOffset!.Value));
         }
         set
         {
-            if (_CreatedEventFootValueOffset == -1) _CreatedEventFootValueOffset = Schema.GetOffset(0x7B3A52946A9D94C2);
-            Schema.SetCUtlString(_Handle, _CreatedEventFootValueOffset, value);
+            _CreatedEventFootValueOffset = _CreatedEventFootValueOffset ?? Schema.GetOffset(0x7B3A52946A9D94C2);
+            Schema.SetCUtlString(_Handle, _CreatedEventFootValueOffset!.Value, value);
         }
     }
 

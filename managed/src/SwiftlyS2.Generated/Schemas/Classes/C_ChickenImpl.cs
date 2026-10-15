@@ -16,80 +16,80 @@ internal partial class C_ChickenImpl : C_DynamicPropImpl, C_Chicken
 {
     public C_ChickenImpl(nint handle) : base(handle) { }
 
-    private static nint _LeaderOffset = -1;
+    private static nint? _LeaderOffset;
 
     public ref CHandle<C_CSPlayerPawn> Leader
     {
         get
         {
-            if (_LeaderOffset == -1) _LeaderOffset = Schema.GetOffset(0x94F0C692658B4E84);
-            return ref _Handle.AsRef<CHandle<C_CSPlayerPawn>>(_LeaderOffset);
+            _LeaderOffset = _LeaderOffset ?? Schema.GetOffset(0x94F0C692658B4E84);
+            return ref _Handle.AsRef<CHandle<C_CSPlayerPawn>>(_LeaderOffset!.Value);
         }
     }
-    private static nint _OwnerOffset = -1;
+    private static nint? _OwnerOffset;
 
     public ref CHandle<CCSPlayerController> Owner
     {
         get
         {
-            if (_OwnerOffset == -1) _OwnerOffset = Schema.GetOffset(0x94F0C692357473F4);
-            return ref _Handle.AsRef<CHandle<CCSPlayerController>>(_OwnerOffset);
+            _OwnerOffset = _OwnerOffset ?? Schema.GetOffset(0x94F0C692357473F4);
+            return ref _Handle.AsRef<CHandle<CCSPlayerController>>(_OwnerOffset!.Value);
         }
     }
-    private static nint _AttributeManagerOffset = -1;
+    private static nint? _AttributeManagerOffset;
     private C_AttributeContainerImpl? _AttributeManagerInstance;
 
     public C_AttributeContainer AttributeManager
     {
         get
         {
-            if (_AttributeManagerOffset == -1) _AttributeManagerOffset = Schema.GetOffset(0x94F0C692537B0586);
+            _AttributeManagerOffset = _AttributeManagerOffset ?? Schema.GetOffset(0x94F0C692537B0586);
             var instance = _AttributeManagerInstance ??= new C_AttributeContainerImpl(0);
-            instance.DangerousSetHandle(_Handle + _AttributeManagerOffset);
+            instance.DangerousSetHandle(_Handle + _AttributeManagerOffset!.Value);
             return instance;
         }
     }
-    private static nint _AttributesInitializedOffset = -1;
+    private static nint? _AttributesInitializedOffset;
 
     public ref bool AttributesInitialized
     {
         get
         {
-            if (_AttributesInitializedOffset == -1) _AttributesInitializedOffset = Schema.GetOffset(0x94F0C692F31EBCBA);
-            return ref _Handle.AsRef<bool>(_AttributesInitializedOffset);
+            _AttributesInitializedOffset = _AttributesInitializedOffset ?? Schema.GetOffset(0x94F0C692F31EBCBA);
+            return ref _Handle.AsRef<bool>(_AttributesInitializedOffset!.Value);
         }
     }
-    private static nint _WaterWakeParticlesOffset = -1;
+    private static nint? _WaterWakeParticlesOffset;
     private ParticleIndex_tImpl? _WaterWakeParticlesInstance;
 
     public ParticleIndex_t WaterWakeParticles
     {
         get
         {
-            if (_WaterWakeParticlesOffset == -1) _WaterWakeParticlesOffset = Schema.GetOffset(0x94F0C692CDF07831);
+            _WaterWakeParticlesOffset = _WaterWakeParticlesOffset ?? Schema.GetOffset(0x94F0C692CDF07831);
             var instance = _WaterWakeParticlesInstance ??= new ParticleIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _WaterWakeParticlesOffset);
+            instance.DangerousSetHandle(_Handle + _WaterWakeParticlesOffset!.Value);
             return instance;
         }
     }
-    private static nint _IsPreviewModelOffset = -1;
+    private static nint? _IsPreviewModelOffset;
 
     public ref bool IsPreviewModel
     {
         get
         {
-            if (_IsPreviewModelOffset == -1) _IsPreviewModelOffset = Schema.GetOffset(0x94F0C6925E7336C4);
-            return ref _Handle.AsRef<bool>(_IsPreviewModelOffset);
+            _IsPreviewModelOffset = _IsPreviewModelOffset ?? Schema.GetOffset(0x94F0C6925E7336C4);
+            return ref _Handle.AsRef<bool>(_IsPreviewModelOffset!.Value);
         }
     }
-    private static nint _SpawnDyingParticlesOffset = -1;
+    private static nint? _SpawnDyingParticlesOffset;
 
     public ref bool SpawnDyingParticles
     {
         get
         {
-            if (_SpawnDyingParticlesOffset == -1) _SpawnDyingParticlesOffset = Schema.GetOffset(0x94F0C692FDEDB160);
-            return ref _Handle.AsRef<bool>(_SpawnDyingParticlesOffset);
+            _SpawnDyingParticlesOffset = _SpawnDyingParticlesOffset ?? Schema.GetOffset(0x94F0C692FDEDB160);
+            return ref _Handle.AsRef<bool>(_SpawnDyingParticlesOffset!.Value);
         }
     }
 

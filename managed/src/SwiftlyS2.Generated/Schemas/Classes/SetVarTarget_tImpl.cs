@@ -16,32 +16,32 @@ internal partial class SetVarTarget_tImpl : SchemaClass, SetVarTarget_t
 {
     public SetVarTarget_tImpl(nint handle) : base(handle) { }
 
-    private static nint _VarDefIDOffset = -1;
+    private static nint? _VarDefIDOffset;
     private PulseDocNodeID_tImpl? _VarDefIDInstance;
 
     public PulseDocNodeID_t VarDefID
     {
         get
         {
-            if (_VarDefIDOffset == -1) _VarDefIDOffset = Schema.GetOffset(0x6658E13ABC03F484);
+            _VarDefIDOffset = _VarDefIDOffset ?? Schema.GetOffset(0x6658E13ABC03F484);
             var instance = _VarDefIDInstance ??= new PulseDocNodeID_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _VarDefIDOffset);
+            instance.DangerousSetHandle(_Handle + _VarDefIDOffset!.Value);
             return instance;
         }
     }
-    private static nint _StrValueEncodedOffset = -1;
+    private static nint? _StrValueEncodedOffset;
 
     public string StrValueEncoded
     {
         get
         {
-            if (_StrValueEncodedOffset == -1) _StrValueEncodedOffset = Schema.GetOffset(0x6658E13A6CC89DCD);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrValueEncodedOffset));
+            _StrValueEncodedOffset = _StrValueEncodedOffset ?? Schema.GetOffset(0x6658E13A6CC89DCD);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrValueEncodedOffset!.Value));
         }
         set
         {
-            if (_StrValueEncodedOffset == -1) _StrValueEncodedOffset = Schema.GetOffset(0x6658E13A6CC89DCD);
-            Schema.SetCUtlString(_Handle, _StrValueEncodedOffset, value);
+            _StrValueEncodedOffset = _StrValueEncodedOffset ?? Schema.GetOffset(0x6658E13A6CC89DCD);
+            Schema.SetCUtlString(_Handle, _StrValueEncodedOffset!.Value, value);
         }
     }
 

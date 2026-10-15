@@ -16,44 +16,44 @@ internal partial class C_GameRulesImpl : SchemaClass, C_GameRules
 {
     public C_GameRulesImpl(nint handle) : base(handle) { }
 
-    private static nint ___m_pChainEntityOffset = -1;
+    private static nint? ___m_pChainEntityOffset;
 
     public ref CNetworkVarChainer __m_pChainEntity
     {
         get
         {
-            if (___m_pChainEntityOffset == -1) ___m_pChainEntityOffset = Schema.GetOffset(0x9AEF0738F63F0E7D);
-            return ref _Handle.AsRef<CNetworkVarChainer>(___m_pChainEntityOffset);
+            ___m_pChainEntityOffset = ___m_pChainEntityOffset ?? Schema.GetOffset(0x9AEF0738F63F0E7D);
+            return ref _Handle.AsRef<CNetworkVarChainer>(___m_pChainEntityOffset!.Value);
         }
     }
-    private static nint _TotalPausedTicksOffset = -1;
+    private static nint? _TotalPausedTicksOffset;
 
     public ref int TotalPausedTicks
     {
         get
         {
-            if (_TotalPausedTicksOffset == -1) _TotalPausedTicksOffset = Schema.GetOffset(0x9AEF073823281397);
-            return ref _Handle.AsRef<int>(_TotalPausedTicksOffset);
+            _TotalPausedTicksOffset = _TotalPausedTicksOffset ?? Schema.GetOffset(0x9AEF073823281397);
+            return ref _Handle.AsRef<int>(_TotalPausedTicksOffset!.Value);
         }
     }
-    private static nint _PauseStartTickOffset = -1;
+    private static nint? _PauseStartTickOffset;
 
     public ref int PauseStartTick
     {
         get
         {
-            if (_PauseStartTickOffset == -1) _PauseStartTickOffset = Schema.GetOffset(0x9AEF0738E64EC54A);
-            return ref _Handle.AsRef<int>(_PauseStartTickOffset);
+            _PauseStartTickOffset = _PauseStartTickOffset ?? Schema.GetOffset(0x9AEF0738E64EC54A);
+            return ref _Handle.AsRef<int>(_PauseStartTickOffset!.Value);
         }
     }
-    private static nint _GamePausedOffset = -1;
+    private static nint? _GamePausedOffset;
 
     public ref bool GamePaused
     {
         get
         {
-            if (_GamePausedOffset == -1) _GamePausedOffset = Schema.GetOffset(0x9AEF0738582909A9);
-            return ref _Handle.AsRef<bool>(_GamePausedOffset);
+            _GamePausedOffset = _GamePausedOffset ?? Schema.GetOffset(0x9AEF0738582909A9);
+            return ref _Handle.AsRef<bool>(_GamePausedOffset!.Value);
         }
     }
 

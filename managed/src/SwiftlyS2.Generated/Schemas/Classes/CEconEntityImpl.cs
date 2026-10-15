@@ -16,97 +16,97 @@ internal partial class CEconEntityImpl : CBaseAnimGraphImpl, CEconEntity
 {
     public CEconEntityImpl(nint handle) : base(handle) { }
 
-    private static nint _AttributeManagerOffset = -1;
+    private static nint? _AttributeManagerOffset;
     private CAttributeContainerImpl? _AttributeManagerInstance;
 
     public CAttributeContainer AttributeManager
     {
         get
         {
-            if (_AttributeManagerOffset == -1) _AttributeManagerOffset = Schema.GetOffset(0xCD91F684537B0586);
+            _AttributeManagerOffset = _AttributeManagerOffset ?? Schema.GetOffset(0xCD91F684537B0586);
             var instance = _AttributeManagerInstance ??= new CAttributeContainerImpl(0);
-            instance.DangerousSetHandle(_Handle + _AttributeManagerOffset);
+            instance.DangerousSetHandle(_Handle + _AttributeManagerOffset!.Value);
             return instance;
         }
     }
-    private static nint _OriginalOwnerXuidLowOffset = -1;
+    private static nint? _OriginalOwnerXuidLowOffset;
 
     public ref uint OriginalOwnerXuidLow
     {
         get
         {
-            if (_OriginalOwnerXuidLowOffset == -1) _OriginalOwnerXuidLowOffset = Schema.GetOffset(0xCD91F6843C990CE3);
-            return ref _Handle.AsRef<uint>(_OriginalOwnerXuidLowOffset);
+            _OriginalOwnerXuidLowOffset = _OriginalOwnerXuidLowOffset ?? Schema.GetOffset(0xCD91F6843C990CE3);
+            return ref _Handle.AsRef<uint>(_OriginalOwnerXuidLowOffset!.Value);
         }
     }
-    private static nint _OriginalOwnerXuidHighOffset = -1;
+    private static nint? _OriginalOwnerXuidHighOffset;
 
     public ref uint OriginalOwnerXuidHigh
     {
         get
         {
-            if (_OriginalOwnerXuidHighOffset == -1) _OriginalOwnerXuidHighOffset = Schema.GetOffset(0xCD91F6842628947F);
-            return ref _Handle.AsRef<uint>(_OriginalOwnerXuidHighOffset);
+            _OriginalOwnerXuidHighOffset = _OriginalOwnerXuidHighOffset ?? Schema.GetOffset(0xCD91F6842628947F);
+            return ref _Handle.AsRef<uint>(_OriginalOwnerXuidHighOffset!.Value);
         }
     }
-    private static nint _FallbackPaintKitOffset = -1;
+    private static nint? _FallbackPaintKitOffset;
 
     public ref int FallbackPaintKit
     {
         get
         {
-            if (_FallbackPaintKitOffset == -1) _FallbackPaintKitOffset = Schema.GetOffset(0xCD91F6840A12D48F);
-            return ref _Handle.AsRef<int>(_FallbackPaintKitOffset);
+            _FallbackPaintKitOffset = _FallbackPaintKitOffset ?? Schema.GetOffset(0xCD91F6840A12D48F);
+            return ref _Handle.AsRef<int>(_FallbackPaintKitOffset!.Value);
         }
     }
-    private static nint _FallbackSeedOffset = -1;
+    private static nint? _FallbackSeedOffset;
 
     public ref int FallbackSeed
     {
         get
         {
-            if (_FallbackSeedOffset == -1) _FallbackSeedOffset = Schema.GetOffset(0xCD91F684A1B165B2);
-            return ref _Handle.AsRef<int>(_FallbackSeedOffset);
+            _FallbackSeedOffset = _FallbackSeedOffset ?? Schema.GetOffset(0xCD91F684A1B165B2);
+            return ref _Handle.AsRef<int>(_FallbackSeedOffset!.Value);
         }
     }
-    private static nint _FallbackWearOffset = -1;
+    private static nint? _FallbackWearOffset;
 
     public ref float FallbackWear
     {
         get
         {
-            if (_FallbackWearOffset == -1) _FallbackWearOffset = Schema.GetOffset(0xCD91F68486253266);
-            return ref _Handle.AsRef<float>(_FallbackWearOffset);
+            _FallbackWearOffset = _FallbackWearOffset ?? Schema.GetOffset(0xCD91F68486253266);
+            return ref _Handle.AsRef<float>(_FallbackWearOffset!.Value);
         }
     }
-    private static nint _FallbackStatTrakOffset = -1;
+    private static nint? _FallbackStatTrakOffset;
 
     public ref int FallbackStatTrak
     {
         get
         {
-            if (_FallbackStatTrakOffset == -1) _FallbackStatTrakOffset = Schema.GetOffset(0xCD91F68467ECC1E7);
-            return ref _Handle.AsRef<int>(_FallbackStatTrakOffset);
+            _FallbackStatTrakOffset = _FallbackStatTrakOffset ?? Schema.GetOffset(0xCD91F68467ECC1E7);
+            return ref _Handle.AsRef<int>(_FallbackStatTrakOffset!.Value);
         }
     }
-    private static nint _OldProvideeOffset = -1;
+    private static nint? _OldProvideeOffset;
 
     public ref CHandle<CBaseEntity> OldProvidee
     {
         get
         {
-            if (_OldProvideeOffset == -1) _OldProvideeOffset = Schema.GetOffset(0xCD91F684289C89E0);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_OldProvideeOffset);
+            _OldProvideeOffset = _OldProvideeOffset ?? Schema.GetOffset(0xCD91F684289C89E0);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_OldProvideeOffset!.Value);
         }
     }
-    private static nint _OldOwnerClassOffset = -1;
+    private static nint? _OldOwnerClassOffset;
 
     public ref int OldOwnerClass
     {
         get
         {
-            if (_OldOwnerClassOffset == -1) _OldOwnerClassOffset = Schema.GetOffset(0xCD91F684D62FABE8);
-            return ref _Handle.AsRef<int>(_OldOwnerClassOffset);
+            _OldOwnerClassOffset = _OldOwnerClassOffset ?? Schema.GetOffset(0xCD91F684D62FABE8);
+            return ref _Handle.AsRef<int>(_OldOwnerClassOffset!.Value);
         }
     }
 

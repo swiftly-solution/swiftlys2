@@ -16,79 +16,79 @@ internal partial class CJiggleBoneItemImpl : SchemaClass, CJiggleBoneItem
 {
     public CJiggleBoneItemImpl(nint handle) : base(handle) { }
 
-    private static nint _BoneNameOffset = -1;
+    private static nint? _BoneNameOffset;
 
     public string BoneName
     {
         get
         {
-            if (_BoneNameOffset == -1) _BoneNameOffset = Schema.GetOffset(0xC5F91B6FFDEE0E0C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_BoneNameOffset));
+            _BoneNameOffset = _BoneNameOffset ?? Schema.GetOffset(0xC5F91B6FFDEE0E0C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_BoneNameOffset!.Value));
         }
         set
         {
-            if (_BoneNameOffset == -1) _BoneNameOffset = Schema.GetOffset(0xC5F91B6FFDEE0E0C);
-            Schema.SetCUtlString(_Handle, _BoneNameOffset, value);
+            _BoneNameOffset = _BoneNameOffset ?? Schema.GetOffset(0xC5F91B6FFDEE0E0C);
+            Schema.SetCUtlString(_Handle, _BoneNameOffset!.Value, value);
         }
     }
-    private static nint _SpringStrengthOffset = -1;
+    private static nint? _SpringStrengthOffset;
 
     public ref float SpringStrength
     {
         get
         {
-            if (_SpringStrengthOffset == -1) _SpringStrengthOffset = Schema.GetOffset(0xC5F91B6F595D254F);
-            return ref _Handle.AsRef<float>(_SpringStrengthOffset);
+            _SpringStrengthOffset = _SpringStrengthOffset ?? Schema.GetOffset(0xC5F91B6F595D254F);
+            return ref _Handle.AsRef<float>(_SpringStrengthOffset!.Value);
         }
     }
-    private static nint _SimRateFPSOffset = -1;
+    private static nint? _SimRateFPSOffset;
 
     public ref float SimRateFPS
     {
         get
         {
-            if (_SimRateFPSOffset == -1) _SimRateFPSOffset = Schema.GetOffset(0xC5F91B6F910E6ECB);
-            return ref _Handle.AsRef<float>(_SimRateFPSOffset);
+            _SimRateFPSOffset = _SimRateFPSOffset ?? Schema.GetOffset(0xC5F91B6F910E6ECB);
+            return ref _Handle.AsRef<float>(_SimRateFPSOffset!.Value);
         }
     }
-    private static nint _DampingOffset = -1;
+    private static nint? _DampingOffset;
 
     public ref float Damping
     {
         get
         {
-            if (_DampingOffset == -1) _DampingOffset = Schema.GetOffset(0xC5F91B6FAAC624EB);
-            return ref _Handle.AsRef<float>(_DampingOffset);
+            _DampingOffset = _DampingOffset ?? Schema.GetOffset(0xC5F91B6FAAC624EB);
+            return ref _Handle.AsRef<float>(_DampingOffset!.Value);
         }
     }
-    private static nint _SimSpaceOffset = -1;
+    private static nint? _SimSpaceOffset;
 
     public ref JiggleBoneSimSpace SimSpace
     {
         get
         {
-            if (_SimSpaceOffset == -1) _SimSpaceOffset = Schema.GetOffset(0xC5F91B6F86872533);
-            return ref _Handle.AsRef<JiggleBoneSimSpace>(_SimSpaceOffset);
+            _SimSpaceOffset = _SimSpaceOffset ?? Schema.GetOffset(0xC5F91B6F86872533);
+            return ref _Handle.AsRef<JiggleBoneSimSpace>(_SimSpaceOffset!.Value);
         }
     }
-    private static nint _BoundsMaxLSOffset = -1;
+    private static nint? _BoundsMaxLSOffset;
 
     public ref Vector BoundsMaxLS
     {
         get
         {
-            if (_BoundsMaxLSOffset == -1) _BoundsMaxLSOffset = Schema.GetOffset(0xC5F91B6FABADA913);
-            return ref _Handle.AsRef<Vector>(_BoundsMaxLSOffset);
+            _BoundsMaxLSOffset = _BoundsMaxLSOffset ?? Schema.GetOffset(0xC5F91B6FABADA913);
+            return ref _Handle.AsRef<Vector>(_BoundsMaxLSOffset!.Value);
         }
     }
-    private static nint _BoundsMinLSOffset = -1;
+    private static nint? _BoundsMinLSOffset;
 
     public ref Vector BoundsMinLS
     {
         get
         {
-            if (_BoundsMinLSOffset == -1) _BoundsMinLSOffset = Schema.GetOffset(0xC5F91B6FFF607855);
-            return ref _Handle.AsRef<Vector>(_BoundsMinLSOffset);
+            _BoundsMinLSOffset = _BoundsMinLSOffset ?? Schema.GetOffset(0xC5F91B6FFF607855);
+            return ref _Handle.AsRef<Vector>(_BoundsMinLSOffset!.Value);
         }
     }
 

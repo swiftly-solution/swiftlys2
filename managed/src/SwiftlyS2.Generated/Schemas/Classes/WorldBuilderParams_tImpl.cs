@@ -16,67 +16,67 @@ internal partial class WorldBuilderParams_tImpl : SchemaClass, WorldBuilderParam
 {
     public WorldBuilderParams_tImpl(nint handle) : base(handle) { }
 
-    private static nint _MinDrawVolumeSizeOffset = -1;
+    private static nint? _MinDrawVolumeSizeOffset;
 
     public ref float MinDrawVolumeSize
     {
         get
         {
-            if (_MinDrawVolumeSizeOffset == -1) _MinDrawVolumeSizeOffset = Schema.GetOffset(0x37270ACBA9648390);
-            return ref _Handle.AsRef<float>(_MinDrawVolumeSizeOffset);
+            _MinDrawVolumeSizeOffset = _MinDrawVolumeSizeOffset ?? Schema.GetOffset(0x37270ACBA9648390);
+            return ref _Handle.AsRef<float>(_MinDrawVolumeSizeOffset!.Value);
         }
     }
-    private static nint _BuildBakedLightingOffset = -1;
+    private static nint? _BuildBakedLightingOffset;
 
     public ref bool BuildBakedLighting
     {
         get
         {
-            if (_BuildBakedLightingOffset == -1) _BuildBakedLightingOffset = Schema.GetOffset(0x37270ACBCF369FF6);
-            return ref _Handle.AsRef<bool>(_BuildBakedLightingOffset);
+            _BuildBakedLightingOffset = _BuildBakedLightingOffset ?? Schema.GetOffset(0x37270ACBCF369FF6);
+            return ref _Handle.AsRef<bool>(_BuildBakedLightingOffset!.Value);
         }
     }
-    private static nint _AggregateInstanceStreamsOffset = -1;
+    private static nint? _AggregateInstanceStreamsOffset;
 
     public ref bool AggregateInstanceStreams
     {
         get
         {
-            if (_AggregateInstanceStreamsOffset == -1) _AggregateInstanceStreamsOffset = Schema.GetOffset(0x37270ACB36B2AE78);
-            return ref _Handle.AsRef<bool>(_AggregateInstanceStreamsOffset);
+            _AggregateInstanceStreamsOffset = _AggregateInstanceStreamsOffset ?? Schema.GetOffset(0x37270ACB36B2AE78);
+            return ref _Handle.AsRef<bool>(_AggregateInstanceStreamsOffset!.Value);
         }
     }
-    private static nint _BakedLightingInfoOffset = -1;
+    private static nint? _BakedLightingInfoOffset;
     private BakedLightingInfo_tImpl? _BakedLightingInfoInstance;
 
     public BakedLightingInfo_t BakedLightingInfo
     {
         get
         {
-            if (_BakedLightingInfoOffset == -1) _BakedLightingInfoOffset = Schema.GetOffset(0x37270ACBC2128E04);
+            _BakedLightingInfoOffset = _BakedLightingInfoOffset ?? Schema.GetOffset(0x37270ACBC2128E04);
             var instance = _BakedLightingInfoInstance ??= new BakedLightingInfo_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _BakedLightingInfoOffset);
+            instance.DangerousSetHandle(_Handle + _BakedLightingInfoOffset!.Value);
             return instance;
         }
     }
-    private static nint _CompileTimestampOffset = -1;
+    private static nint? _CompileTimestampOffset;
 
     public ref ulong CompileTimestamp
     {
         get
         {
-            if (_CompileTimestampOffset == -1) _CompileTimestampOffset = Schema.GetOffset(0x37270ACB1CAADE3A);
-            return ref _Handle.AsRef<ulong>(_CompileTimestampOffset);
+            _CompileTimestampOffset = _CompileTimestampOffset ?? Schema.GetOffset(0x37270ACB1CAADE3A);
+            return ref _Handle.AsRef<ulong>(_CompileTimestampOffset!.Value);
         }
     }
-    private static nint _CompileFingerprintOffset = -1;
+    private static nint? _CompileFingerprintOffset;
 
     public ref ulong CompileFingerprint
     {
         get
         {
-            if (_CompileFingerprintOffset == -1) _CompileFingerprintOffset = Schema.GetOffset(0x37270ACB98F6F58A);
-            return ref _Handle.AsRef<ulong>(_CompileFingerprintOffset);
+            _CompileFingerprintOffset = _CompileFingerprintOffset ?? Schema.GetOffset(0x37270ACB98F6F58A);
+            return ref _Handle.AsRef<ulong>(_CompileFingerprintOffset!.Value);
         }
     }
 

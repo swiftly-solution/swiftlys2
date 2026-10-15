@@ -16,29 +16,29 @@ internal partial class MotionMatchingInstanceDataImpl : SchemaClass, MotionMatch
 {
     public MotionMatchingInstanceDataImpl(nint handle) : base(handle) { }
 
-    private static nint _CurrentSelectionOffset = -1;
+    private static nint? _CurrentSelectionOffset;
     private MotionSelectionImpl? _CurrentSelectionInstance;
 
     public MotionSelection CurrentSelection
     {
         get
         {
-            if (_CurrentSelectionOffset == -1) _CurrentSelectionOffset = Schema.GetOffset(0xC5ACB19BBD40401C);
+            _CurrentSelectionOffset = _CurrentSelectionOffset ?? Schema.GetOffset(0xC5ACB19BBD40401C);
             var instance = _CurrentSelectionInstance ??= new MotionSelectionImpl(0);
-            instance.DangerousSetHandle(_Handle + _CurrentSelectionOffset);
+            instance.DangerousSetHandle(_Handle + _CurrentSelectionOffset!.Value);
             return instance;
         }
     }
-    private static nint _PreviousSelectionOffset = -1;
+    private static nint? _PreviousSelectionOffset;
     private MotionSelectionImpl? _PreviousSelectionInstance;
 
     public MotionSelection PreviousSelection
     {
         get
         {
-            if (_PreviousSelectionOffset == -1) _PreviousSelectionOffset = Schema.GetOffset(0xC5ACB19B363DEA86);
+            _PreviousSelectionOffset = _PreviousSelectionOffset ?? Schema.GetOffset(0xC5ACB19B363DEA86);
             var instance = _PreviousSelectionInstance ??= new MotionSelectionImpl(0);
-            instance.DangerousSetHandle(_Handle + _PreviousSelectionOffset);
+            instance.DangerousSetHandle(_Handle + _PreviousSelectionOffset!.Value);
             return instance;
         }
     }

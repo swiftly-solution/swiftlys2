@@ -16,63 +16,63 @@ internal partial class C_OP_RepeatedTriggerChildGroupImpl : CParticleFunctionPre
 {
     public C_OP_RepeatedTriggerChildGroupImpl(nint handle) : base(handle) { }
 
-    private static nint _ChildGroupIDOffset = -1;
+    private static nint? _ChildGroupIDOffset;
 
     public ref int ChildGroupID
     {
         get
         {
-            if (_ChildGroupIDOffset == -1) _ChildGroupIDOffset = Schema.GetOffset(0x3D9A0D4E3F3C965);
-            return ref _Handle.AsRef<int>(_ChildGroupIDOffset);
+            _ChildGroupIDOffset = _ChildGroupIDOffset ?? Schema.GetOffset(0x3D9A0D4E3F3C965);
+            return ref _Handle.AsRef<int>(_ChildGroupIDOffset!.Value);
         }
     }
-    private static nint _ClusterRefireTimeOffset = -1;
+    private static nint? _ClusterRefireTimeOffset;
     private CParticleCollectionFloatInputImpl? _ClusterRefireTimeInstance;
 
     public CParticleCollectionFloatInput ClusterRefireTime
     {
         get
         {
-            if (_ClusterRefireTimeOffset == -1) _ClusterRefireTimeOffset = Schema.GetOffset(0x3D9A0D47E6BEEAB);
+            _ClusterRefireTimeOffset = _ClusterRefireTimeOffset ?? Schema.GetOffset(0x3D9A0D47E6BEEAB);
             var instance = _ClusterRefireTimeInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _ClusterRefireTimeOffset);
+            instance.DangerousSetHandle(_Handle + _ClusterRefireTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _ClusterSizeOffset = -1;
+    private static nint? _ClusterSizeOffset;
     private CParticleCollectionFloatInputImpl? _ClusterSizeInstance;
 
     public CParticleCollectionFloatInput ClusterSize
     {
         get
         {
-            if (_ClusterSizeOffset == -1) _ClusterSizeOffset = Schema.GetOffset(0x3D9A0D4A7549FF6);
+            _ClusterSizeOffset = _ClusterSizeOffset ?? Schema.GetOffset(0x3D9A0D4A7549FF6);
             var instance = _ClusterSizeInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _ClusterSizeOffset);
+            instance.DangerousSetHandle(_Handle + _ClusterSizeOffset!.Value);
             return instance;
         }
     }
-    private static nint _ClusterCooldownOffset = -1;
+    private static nint? _ClusterCooldownOffset;
     private CParticleCollectionFloatInputImpl? _ClusterCooldownInstance;
 
     public CParticleCollectionFloatInput ClusterCooldown
     {
         get
         {
-            if (_ClusterCooldownOffset == -1) _ClusterCooldownOffset = Schema.GetOffset(0x3D9A0D4753687EA);
+            _ClusterCooldownOffset = _ClusterCooldownOffset ?? Schema.GetOffset(0x3D9A0D4753687EA);
             var instance = _ClusterCooldownInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _ClusterCooldownOffset);
+            instance.DangerousSetHandle(_Handle + _ClusterCooldownOffset!.Value);
             return instance;
         }
     }
-    private static nint _LimitChildCountOffset = -1;
+    private static nint? _LimitChildCountOffset;
 
     public ref bool LimitChildCount
     {
         get
         {
-            if (_LimitChildCountOffset == -1) _LimitChildCountOffset = Schema.GetOffset(0x3D9A0D4EA978249);
-            return ref _Handle.AsRef<bool>(_LimitChildCountOffset);
+            _LimitChildCountOffset = _LimitChildCountOffset ?? Schema.GetOffset(0x3D9A0D4EA978249);
+            return ref _Handle.AsRef<bool>(_LimitChildCountOffset!.Value);
         }
     }
 

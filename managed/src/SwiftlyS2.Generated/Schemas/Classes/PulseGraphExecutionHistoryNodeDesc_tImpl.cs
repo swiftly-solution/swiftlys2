@@ -16,26 +16,26 @@ internal partial class PulseGraphExecutionHistoryNodeDesc_tImpl : SchemaClass, P
 {
     public PulseGraphExecutionHistoryNodeDesc_tImpl(nint handle) : base(handle) { }
 
-    private static nint _StrCellDescOffset = -1;
+    private static nint? _StrCellDescOffset;
 
     public ref CBufferString StrCellDesc
     {
         get
         {
-            if (_StrCellDescOffset == -1) _StrCellDescOffset = Schema.GetOffset(0x7F4ECA02AD3F01DD);
-            return ref _Handle.AsRef<CBufferString>(_StrCellDescOffset);
+            _StrCellDescOffset = _StrCellDescOffset ?? Schema.GetOffset(0x7F4ECA02AD3F01DD);
+            return ref _Handle.AsRef<CBufferString>(_StrCellDescOffset!.Value);
         }
     }
-    private static nint _StrBindingNameOffset = -1;
+    private static nint? _StrBindingNameOffset;
     private SchemaUntypedField? _StrBindingNameInstance;
 
     public SchemaUntypedField StrBindingName
     {
         get
         {
-            if (_StrBindingNameOffset == -1) _StrBindingNameOffset = Schema.GetOffset(0x7F4ECA021A5069AA);
+            _StrBindingNameOffset = _StrBindingNameOffset ?? Schema.GetOffset(0x7F4ECA021A5069AA);
             var instance = _StrBindingNameInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _StrBindingNameOffset);
+            instance.DangerousSetHandle(_Handle + _StrBindingNameOffset!.Value);
             return instance;
         }
     }

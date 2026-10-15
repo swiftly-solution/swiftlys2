@@ -16,74 +16,74 @@ internal partial class C_OP_SnapshotSkinToBonesImpl : CParticleFunctionOperatorI
 {
     public C_OP_SnapshotSkinToBonesImpl(nint handle) : base(handle) { }
 
-    private static nint _TransformNormalsOffset = -1;
+    private static nint? _TransformNormalsOffset;
 
     public ref bool TransformNormals
     {
         get
         {
-            if (_TransformNormalsOffset == -1) _TransformNormalsOffset = Schema.GetOffset(0xCA48FCF83C6BFD75);
-            return ref _Handle.AsRef<bool>(_TransformNormalsOffset);
+            _TransformNormalsOffset = _TransformNormalsOffset ?? Schema.GetOffset(0xCA48FCF83C6BFD75);
+            return ref _Handle.AsRef<bool>(_TransformNormalsOffset!.Value);
         }
     }
-    private static nint _TransformRadiiOffset = -1;
+    private static nint? _TransformRadiiOffset;
 
     public ref bool TransformRadii
     {
         get
         {
-            if (_TransformRadiiOffset == -1) _TransformRadiiOffset = Schema.GetOffset(0xCA48FCF88183F664);
-            return ref _Handle.AsRef<bool>(_TransformRadiiOffset);
+            _TransformRadiiOffset = _TransformRadiiOffset ?? Schema.GetOffset(0xCA48FCF88183F664);
+            return ref _Handle.AsRef<bool>(_TransformRadiiOffset!.Value);
         }
     }
-    private static nint _ControlPointNumberOffset = -1;
+    private static nint? _ControlPointNumberOffset;
 
     public ref int ControlPointNumber
     {
         get
         {
-            if (_ControlPointNumberOffset == -1) _ControlPointNumberOffset = Schema.GetOffset(0xCA48FCF83F31A6BD);
-            return ref _Handle.AsRef<int>(_ControlPointNumberOffset);
+            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0xCA48FCF83F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
         }
     }
-    private static nint _LifeTimeFadeStartOffset = -1;
+    private static nint? _LifeTimeFadeStartOffset;
 
     public ref float LifeTimeFadeStart
     {
         get
         {
-            if (_LifeTimeFadeStartOffset == -1) _LifeTimeFadeStartOffset = Schema.GetOffset(0xCA48FCF895A2845A);
-            return ref _Handle.AsRef<float>(_LifeTimeFadeStartOffset);
+            _LifeTimeFadeStartOffset = _LifeTimeFadeStartOffset ?? Schema.GetOffset(0xCA48FCF895A2845A);
+            return ref _Handle.AsRef<float>(_LifeTimeFadeStartOffset!.Value);
         }
     }
-    private static nint _LifeTimeFadeEndOffset = -1;
+    private static nint? _LifeTimeFadeEndOffset;
 
     public ref float LifeTimeFadeEnd
     {
         get
         {
-            if (_LifeTimeFadeEndOffset == -1) _LifeTimeFadeEndOffset = Schema.GetOffset(0xCA48FCF8222841EF);
-            return ref _Handle.AsRef<float>(_LifeTimeFadeEndOffset);
+            _LifeTimeFadeEndOffset = _LifeTimeFadeEndOffset ?? Schema.GetOffset(0xCA48FCF8222841EF);
+            return ref _Handle.AsRef<float>(_LifeTimeFadeEndOffset!.Value);
         }
     }
-    private static nint _JumpThresholdOffset = -1;
+    private static nint? _JumpThresholdOffset;
 
     public ref float JumpThreshold
     {
         get
         {
-            if (_JumpThresholdOffset == -1) _JumpThresholdOffset = Schema.GetOffset(0xCA48FCF8B6BB1AD6);
-            return ref _Handle.AsRef<float>(_JumpThresholdOffset);
+            _JumpThresholdOffset = _JumpThresholdOffset ?? Schema.GetOffset(0xCA48FCF8B6BB1AD6);
+            return ref _Handle.AsRef<float>(_JumpThresholdOffset!.Value);
         }
     }
-    private static nint _PrevPosScaleOffset = -1;
+    private static nint? _PrevPosScaleOffset;
 
     public ref float PrevPosScale
     {
         get
         {
-            if (_PrevPosScaleOffset == -1) _PrevPosScaleOffset = Schema.GetOffset(0xCA48FCF846CED122);
-            return ref _Handle.AsRef<float>(_PrevPosScaleOffset);
+            _PrevPosScaleOffset = _PrevPosScaleOffset ?? Schema.GetOffset(0xCA48FCF846CED122);
+            return ref _Handle.AsRef<float>(_PrevPosScaleOffset!.Value);
         }
     }
 

@@ -16,29 +16,29 @@ internal partial class MaterialGroup_tImpl : SchemaClass, MaterialGroup_t
 {
     public MaterialGroup_tImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x702431604D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x702431604D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x702431604D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x702431604D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _MaterialsOffset = -1;
+    private static nint? _MaterialsOffset;
 
     public ref CUtlVector<CStrongHandle<InfoForResourceTypeIMaterial2>> Materials
     {
         get
         {
-            if (_MaterialsOffset == -1) _MaterialsOffset = Schema.GetOffset(0x7024316060E46909);
-            return ref _Handle.AsRef<CUtlVector<CStrongHandle<InfoForResourceTypeIMaterial2>>>(_MaterialsOffset);
+            _MaterialsOffset = _MaterialsOffset ?? Schema.GetOffset(0x7024316060E46909);
+            return ref _Handle.AsRef<CUtlVector<CStrongHandle<InfoForResourceTypeIMaterial2>>>(_MaterialsOffset!.Value);
         }
     }
 

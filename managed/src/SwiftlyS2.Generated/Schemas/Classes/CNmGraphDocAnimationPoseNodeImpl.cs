@@ -16,37 +16,37 @@ internal partial class CNmGraphDocAnimationPoseNodeImpl : CNmGraphDocVariationDa
 {
     public CNmGraphDocAnimationPoseNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _InputTimeRemapRangeOffset = -1;
+    private static nint? _InputTimeRemapRangeOffset;
     private SchemaUntypedField? _InputTimeRemapRangeInstance;
 
     public SchemaUntypedField InputTimeRemapRange
     {
         get
         {
-            if (_InputTimeRemapRangeOffset == -1) _InputTimeRemapRangeOffset = Schema.GetOffset(0xEEA67144E53BDBD4);
+            _InputTimeRemapRangeOffset = _InputTimeRemapRangeOffset ?? Schema.GetOffset(0xEEA67144E53BDBD4);
             var instance = _InputTimeRemapRangeInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _InputTimeRemapRangeOffset);
+            instance.DangerousSetHandle(_Handle + _InputTimeRemapRangeOffset!.Value);
             return instance;
         }
     }
-    private static nint _FixedTimeValueOffset = -1;
+    private static nint? _FixedTimeValueOffset;
 
     public ref float FixedTimeValue
     {
         get
         {
-            if (_FixedTimeValueOffset == -1) _FixedTimeValueOffset = Schema.GetOffset(0xEEA67144EB4CCC01);
-            return ref _Handle.AsRef<float>(_FixedTimeValueOffset);
+            _FixedTimeValueOffset = _FixedTimeValueOffset ?? Schema.GetOffset(0xEEA67144EB4CCC01);
+            return ref _Handle.AsRef<float>(_FixedTimeValueOffset!.Value);
         }
     }
-    private static nint _UseFramesAsInputOffset = -1;
+    private static nint? _UseFramesAsInputOffset;
 
     public ref bool UseFramesAsInput
     {
         get
         {
-            if (_UseFramesAsInputOffset == -1) _UseFramesAsInputOffset = Schema.GetOffset(0xEEA67144C9210EC6);
-            return ref _Handle.AsRef<bool>(_UseFramesAsInputOffset);
+            _UseFramesAsInputOffset = _UseFramesAsInputOffset ?? Schema.GetOffset(0xEEA67144C9210EC6);
+            return ref _Handle.AsRef<bool>(_UseFramesAsInputOffset!.Value);
         }
     }
 

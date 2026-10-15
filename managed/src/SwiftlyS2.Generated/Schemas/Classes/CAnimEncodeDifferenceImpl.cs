@@ -16,74 +16,74 @@ internal partial class CAnimEncodeDifferenceImpl : SchemaClass, CAnimEncodeDiffe
 {
     public CAnimEncodeDifferenceImpl(nint handle) : base(handle) { }
 
-    private static nint _BoneArrayOffset = -1;
+    private static nint? _BoneArrayOffset;
 
     public ref CUtlVector<CAnimBoneDifference> BoneArray
     {
         get
         {
-            if (_BoneArrayOffset == -1) _BoneArrayOffset = Schema.GetOffset(0x65474B2E80273F0C);
-            return ref _Handle.AsRef<CUtlVector<CAnimBoneDifference>>(_BoneArrayOffset);
+            _BoneArrayOffset = _BoneArrayOffset ?? Schema.GetOffset(0x65474B2E80273F0C);
+            return ref _Handle.AsRef<CUtlVector<CAnimBoneDifference>>(_BoneArrayOffset!.Value);
         }
     }
-    private static nint _MorphArrayOffset = -1;
+    private static nint? _MorphArrayOffset;
 
     public ref CUtlVector<CAnimMorphDifference> MorphArray
     {
         get
         {
-            if (_MorphArrayOffset == -1) _MorphArrayOffset = Schema.GetOffset(0x65474B2E8C6827E6);
-            return ref _Handle.AsRef<CUtlVector<CAnimMorphDifference>>(_MorphArrayOffset);
+            _MorphArrayOffset = _MorphArrayOffset ?? Schema.GetOffset(0x65474B2E8C6827E6);
+            return ref _Handle.AsRef<CUtlVector<CAnimMorphDifference>>(_MorphArrayOffset!.Value);
         }
     }
-    private static nint _UserArrayOffset = -1;
+    private static nint? _UserArrayOffset;
 
     public ref CUtlVector<CAnimUserDifference> UserArray
     {
         get
         {
-            if (_UserArrayOffset == -1) _UserArrayOffset = Schema.GetOffset(0x65474B2EFBDB0C13);
-            return ref _Handle.AsRef<CUtlVector<CAnimUserDifference>>(_UserArrayOffset);
+            _UserArrayOffset = _UserArrayOffset ?? Schema.GetOffset(0x65474B2EFBDB0C13);
+            return ref _Handle.AsRef<CUtlVector<CAnimUserDifference>>(_UserArrayOffset!.Value);
         }
     }
-    private static nint _HasRotationBitArrayOffset = -1;
+    private static nint? _HasRotationBitArrayOffset;
 
     public ref CUtlVector<byte> HasRotationBitArray
     {
         get
         {
-            if (_HasRotationBitArrayOffset == -1) _HasRotationBitArrayOffset = Schema.GetOffset(0x65474B2E6AD7DEA5);
-            return ref _Handle.AsRef<CUtlVector<byte>>(_HasRotationBitArrayOffset);
+            _HasRotationBitArrayOffset = _HasRotationBitArrayOffset ?? Schema.GetOffset(0x65474B2E6AD7DEA5);
+            return ref _Handle.AsRef<CUtlVector<byte>>(_HasRotationBitArrayOffset!.Value);
         }
     }
-    private static nint _HasMovementBitArrayOffset = -1;
+    private static nint? _HasMovementBitArrayOffset;
 
     public ref CUtlVector<byte> HasMovementBitArray
     {
         get
         {
-            if (_HasMovementBitArrayOffset == -1) _HasMovementBitArrayOffset = Schema.GetOffset(0x65474B2EAD247FA6);
-            return ref _Handle.AsRef<CUtlVector<byte>>(_HasMovementBitArrayOffset);
+            _HasMovementBitArrayOffset = _HasMovementBitArrayOffset ?? Schema.GetOffset(0x65474B2EAD247FA6);
+            return ref _Handle.AsRef<CUtlVector<byte>>(_HasMovementBitArrayOffset!.Value);
         }
     }
-    private static nint _HasMorphBitArrayOffset = -1;
+    private static nint? _HasMorphBitArrayOffset;
 
     public ref CUtlVector<byte> HasMorphBitArray
     {
         get
         {
-            if (_HasMorphBitArrayOffset == -1) _HasMorphBitArrayOffset = Schema.GetOffset(0x65474B2E5F84C5D3);
-            return ref _Handle.AsRef<CUtlVector<byte>>(_HasMorphBitArrayOffset);
+            _HasMorphBitArrayOffset = _HasMorphBitArrayOffset ?? Schema.GetOffset(0x65474B2E5F84C5D3);
+            return ref _Handle.AsRef<CUtlVector<byte>>(_HasMorphBitArrayOffset!.Value);
         }
     }
-    private static nint _HasUserBitArrayOffset = -1;
+    private static nint? _HasUserBitArrayOffset;
 
     public ref CUtlVector<byte> HasUserBitArray
     {
         get
         {
-            if (_HasUserBitArrayOffset == -1) _HasUserBitArrayOffset = Schema.GetOffset(0x65474B2EB41ED7E0);
-            return ref _Handle.AsRef<CUtlVector<byte>>(_HasUserBitArrayOffset);
+            _HasUserBitArrayOffset = _HasUserBitArrayOffset ?? Schema.GetOffset(0x65474B2EB41ED7E0);
+            return ref _Handle.AsRef<CUtlVector<byte>>(_HasUserBitArrayOffset!.Value);
         }
     }
 

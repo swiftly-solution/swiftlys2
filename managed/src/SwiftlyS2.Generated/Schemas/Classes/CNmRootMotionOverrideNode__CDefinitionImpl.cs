@@ -16,86 +16,86 @@ internal partial class CNmRootMotionOverrideNode__CDefinitionImpl : CNmPassthrou
 {
     public CNmRootMotionOverrideNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint _DesiredMovingVelocityNodeIdxOffset = -1;
+    private static nint? _DesiredMovingVelocityNodeIdxOffset;
 
     public ref short DesiredMovingVelocityNodeIdx
     {
         get
         {
-            if (_DesiredMovingVelocityNodeIdxOffset == -1) _DesiredMovingVelocityNodeIdxOffset = Schema.GetOffset(0x63AAD28BA5EFD80B);
-            return ref _Handle.AsRef<short>(_DesiredMovingVelocityNodeIdxOffset);
+            _DesiredMovingVelocityNodeIdxOffset = _DesiredMovingVelocityNodeIdxOffset ?? Schema.GetOffset(0x63AAD28BA5EFD80B);
+            return ref _Handle.AsRef<short>(_DesiredMovingVelocityNodeIdxOffset!.Value);
         }
     }
-    private static nint _DesiredFacingDirectionNodeIdxOffset = -1;
+    private static nint? _DesiredFacingDirectionNodeIdxOffset;
 
     public ref short DesiredFacingDirectionNodeIdx
     {
         get
         {
-            if (_DesiredFacingDirectionNodeIdxOffset == -1) _DesiredFacingDirectionNodeIdxOffset = Schema.GetOffset(0x63AAD28BAC723A63);
-            return ref _Handle.AsRef<short>(_DesiredFacingDirectionNodeIdxOffset);
+            _DesiredFacingDirectionNodeIdxOffset = _DesiredFacingDirectionNodeIdxOffset ?? Schema.GetOffset(0x63AAD28BAC723A63);
+            return ref _Handle.AsRef<short>(_DesiredFacingDirectionNodeIdxOffset!.Value);
         }
     }
-    private static nint _LinearVelocityLimitNodeIdxOffset = -1;
+    private static nint? _LinearVelocityLimitNodeIdxOffset;
 
     public ref short LinearVelocityLimitNodeIdx
     {
         get
         {
-            if (_LinearVelocityLimitNodeIdxOffset == -1) _LinearVelocityLimitNodeIdxOffset = Schema.GetOffset(0x63AAD28B56A698BD);
-            return ref _Handle.AsRef<short>(_LinearVelocityLimitNodeIdxOffset);
+            _LinearVelocityLimitNodeIdxOffset = _LinearVelocityLimitNodeIdxOffset ?? Schema.GetOffset(0x63AAD28B56A698BD);
+            return ref _Handle.AsRef<short>(_LinearVelocityLimitNodeIdxOffset!.Value);
         }
     }
-    private static nint _AngularVelocityLimitNodeIdxOffset = -1;
+    private static nint? _AngularVelocityLimitNodeIdxOffset;
 
     public ref short AngularVelocityLimitNodeIdx
     {
         get
         {
-            if (_AngularVelocityLimitNodeIdxOffset == -1) _AngularVelocityLimitNodeIdxOffset = Schema.GetOffset(0x63AAD28BCC9208F8);
-            return ref _Handle.AsRef<short>(_AngularVelocityLimitNodeIdxOffset);
+            _AngularVelocityLimitNodeIdxOffset = _AngularVelocityLimitNodeIdxOffset ?? Schema.GetOffset(0x63AAD28BCC9208F8);
+            return ref _Handle.AsRef<short>(_AngularVelocityLimitNodeIdxOffset!.Value);
         }
     }
-    private static nint _EnabledNodeIdxOffset = -1;
+    private static nint? _EnabledNodeIdxOffset;
 
     public ref short EnabledNodeIdx
     {
         get
         {
-            if (_EnabledNodeIdxOffset == -1) _EnabledNodeIdxOffset = Schema.GetOffset(0x63AAD28B4437410D);
-            return ref _Handle.AsRef<short>(_EnabledNodeIdxOffset);
+            _EnabledNodeIdxOffset = _EnabledNodeIdxOffset ?? Schema.GetOffset(0x63AAD28B4437410D);
+            return ref _Handle.AsRef<short>(_EnabledNodeIdxOffset!.Value);
         }
     }
-    private static nint _MaxLinearVelocityOffset = -1;
+    private static nint? _MaxLinearVelocityOffset;
 
     public ref float MaxLinearVelocity
     {
         get
         {
-            if (_MaxLinearVelocityOffset == -1) _MaxLinearVelocityOffset = Schema.GetOffset(0x63AAD28B70FC93F7);
-            return ref _Handle.AsRef<float>(_MaxLinearVelocityOffset);
+            _MaxLinearVelocityOffset = _MaxLinearVelocityOffset ?? Schema.GetOffset(0x63AAD28B70FC93F7);
+            return ref _Handle.AsRef<float>(_MaxLinearVelocityOffset!.Value);
         }
     }
-    private static nint _MaxAngularVelocityRadiansOffset = -1;
+    private static nint? _MaxAngularVelocityRadiansOffset;
 
     public ref float MaxAngularVelocityRadians
     {
         get
         {
-            if (_MaxAngularVelocityRadiansOffset == -1) _MaxAngularVelocityRadiansOffset = Schema.GetOffset(0x63AAD28BC15BAB90);
-            return ref _Handle.AsRef<float>(_MaxAngularVelocityRadiansOffset);
+            _MaxAngularVelocityRadiansOffset = _MaxAngularVelocityRadiansOffset ?? Schema.GetOffset(0x63AAD28BC15BAB90);
+            return ref _Handle.AsRef<float>(_MaxAngularVelocityRadiansOffset!.Value);
         }
     }
-    private static nint _OverrideFlagsOffset = -1;
+    private static nint? _OverrideFlagsOffset;
     private CNmBitFlagsImpl? _OverrideFlagsInstance;
 
     public CNmBitFlags OverrideFlags
     {
         get
         {
-            if (_OverrideFlagsOffset == -1) _OverrideFlagsOffset = Schema.GetOffset(0x63AAD28BBDB571A4);
+            _OverrideFlagsOffset = _OverrideFlagsOffset ?? Schema.GetOffset(0x63AAD28BBDB571A4);
             var instance = _OverrideFlagsInstance ??= new CNmBitFlagsImpl(0);
-            instance.DangerousSetHandle(_Handle + _OverrideFlagsOffset);
+            instance.DangerousSetHandle(_Handle + _OverrideFlagsOffset!.Value);
             return instance;
         }
     }

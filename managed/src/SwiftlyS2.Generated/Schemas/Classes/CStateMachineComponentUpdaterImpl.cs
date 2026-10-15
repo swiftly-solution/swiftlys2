@@ -16,16 +16,16 @@ internal partial class CStateMachineComponentUpdaterImpl : CAnimComponentUpdater
 {
     public CStateMachineComponentUpdaterImpl(nint handle) : base(handle) { }
 
-    private static nint _StateMachineOffset = -1;
+    private static nint? _StateMachineOffset;
     private CAnimStateMachineUpdaterImpl? _StateMachineInstance;
 
     public CAnimStateMachineUpdater StateMachine
     {
         get
         {
-            if (_StateMachineOffset == -1) _StateMachineOffset = Schema.GetOffset(0x25255200BB7EEF2F);
+            _StateMachineOffset = _StateMachineOffset ?? Schema.GetOffset(0x25255200BB7EEF2F);
             var instance = _StateMachineInstance ??= new CAnimStateMachineUpdaterImpl(0);
-            instance.DangerousSetHandle(_Handle + _StateMachineOffset);
+            instance.DangerousSetHandle(_Handle + _StateMachineOffset!.Value);
             return instance;
         }
     }

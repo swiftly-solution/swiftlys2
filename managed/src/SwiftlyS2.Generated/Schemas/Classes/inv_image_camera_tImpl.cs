@@ -16,84 +16,84 @@ internal partial class inv_image_camera_tImpl : SchemaClass, inv_image_camera_t
 {
     public inv_image_camera_tImpl(nint handle) : base(handle) { }
 
-    private static nint _AngleOffset = -1;
+    private static nint? _AngleOffset;
 
     public ref QAngle Angle
     {
         get
         {
-            if (_AngleOffset == -1) _AngleOffset = Schema.GetOffset(0xF6CB536BAD544418);
-            return ref _Handle.AsRef<QAngle>(_AngleOffset);
+            _AngleOffset = _AngleOffset ?? Schema.GetOffset(0xF6CB536BAD544418);
+            return ref _Handle.AsRef<QAngle>(_AngleOffset!.Value);
         }
     }
-    private static nint _Fov_hOffset = -1;
+    private static nint? _Fov_hOffset;
 
     public ref float Fov_h
     {
         get
         {
-            if (_Fov_hOffset == -1) _Fov_hOffset = Schema.GetOffset(0xF6CB536B4071FA83);
-            return ref _Handle.AsRef<float>(_Fov_hOffset);
+            _Fov_hOffset = _Fov_hOffset ?? Schema.GetOffset(0xF6CB536B4071FA83);
+            return ref _Handle.AsRef<float>(_Fov_hOffset!.Value);
         }
     }
-    private static nint _Fov_vOffset = -1;
+    private static nint? _Fov_vOffset;
 
     public ref float Fov_v
     {
         get
         {
-            if (_Fov_vOffset == -1) _Fov_vOffset = Schema.GetOffset(0xF6CB536B3E71F75D);
-            return ref _Handle.AsRef<float>(_Fov_vOffset);
+            _Fov_vOffset = _Fov_vOffset ?? Schema.GetOffset(0xF6CB536B3E71F75D);
+            return ref _Handle.AsRef<float>(_Fov_vOffset!.Value);
         }
     }
-    private static nint _ZnearOffset = -1;
+    private static nint? _ZnearOffset;
 
     public ref float Znear
     {
         get
         {
-            if (_ZnearOffset == -1) _ZnearOffset = Schema.GetOffset(0xF6CB536B091414E7);
-            return ref _Handle.AsRef<float>(_ZnearOffset);
+            _ZnearOffset = _ZnearOffset ?? Schema.GetOffset(0xF6CB536B091414E7);
+            return ref _Handle.AsRef<float>(_ZnearOffset!.Value);
         }
     }
-    private static nint _ZfarOffset = -1;
+    private static nint? _ZfarOffset;
 
     public ref float Zfar
     {
         get
         {
-            if (_ZfarOffset == -1) _ZfarOffset = Schema.GetOffset(0xF6CB536BB680A206);
-            return ref _Handle.AsRef<float>(_ZfarOffset);
+            _ZfarOffset = _ZfarOffset ?? Schema.GetOffset(0xF6CB536BB680A206);
+            return ref _Handle.AsRef<float>(_ZfarOffset!.Value);
         }
     }
-    private static nint _TargetOffset = -1;
+    private static nint? _TargetOffset;
 
     public ref Vector Target
     {
         get
         {
-            if (_TargetOffset == -1) _TargetOffset = Schema.GetOffset(0xF6CB536B32608848);
-            return ref _Handle.AsRef<Vector>(_TargetOffset);
+            _TargetOffset = _TargetOffset ?? Schema.GetOffset(0xF6CB536B32608848);
+            return ref _Handle.AsRef<Vector>(_TargetOffset!.Value);
         }
     }
-    private static nint _Target_nudgeOffset = -1;
+    private static nint? _Target_nudgeOffset;
 
     public ref Vector Target_nudge
     {
         get
         {
-            if (_Target_nudgeOffset == -1) _Target_nudgeOffset = Schema.GetOffset(0xF6CB536B2E5A37A8);
-            return ref _Handle.AsRef<Vector>(_Target_nudgeOffset);
+            _Target_nudgeOffset = _Target_nudgeOffset ?? Schema.GetOffset(0xF6CB536B2E5A37A8);
+            return ref _Handle.AsRef<Vector>(_Target_nudgeOffset!.Value);
         }
     }
-    private static nint _Orbit_distanceOffset = -1;
+    private static nint? _Orbit_distanceOffset;
 
     public ref float Orbit_distance
     {
         get
         {
-            if (_Orbit_distanceOffset == -1) _Orbit_distanceOffset = Schema.GetOffset(0xF6CB536BEAD8478B);
-            return ref _Handle.AsRef<float>(_Orbit_distanceOffset);
+            _Orbit_distanceOffset = _Orbit_distanceOffset ?? Schema.GetOffset(0xF6CB536BEAD8478B);
+            return ref _Handle.AsRef<float>(_Orbit_distanceOffset!.Value);
         }
     }
 

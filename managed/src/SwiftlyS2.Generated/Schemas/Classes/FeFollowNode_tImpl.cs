@@ -16,34 +16,34 @@ internal partial class FeFollowNode_tImpl : SchemaClass, FeFollowNode_t
 {
     public FeFollowNode_tImpl(nint handle) : base(handle) { }
 
-    private static nint _ParentNodeOffset = -1;
+    private static nint? _ParentNodeOffset;
 
     public ref ushort ParentNode
     {
         get
         {
-            if (_ParentNodeOffset == -1) _ParentNodeOffset = Schema.GetOffset(0x8BE908126CBBA7F9);
-            return ref _Handle.AsRef<ushort>(_ParentNodeOffset);
+            _ParentNodeOffset = _ParentNodeOffset ?? Schema.GetOffset(0x8BE908126CBBA7F9);
+            return ref _Handle.AsRef<ushort>(_ParentNodeOffset!.Value);
         }
     }
-    private static nint _ChildNodeOffset = -1;
+    private static nint? _ChildNodeOffset;
 
     public ref ushort ChildNode
     {
         get
         {
-            if (_ChildNodeOffset == -1) _ChildNodeOffset = Schema.GetOffset(0x8BE9081292A8E0E9);
-            return ref _Handle.AsRef<ushort>(_ChildNodeOffset);
+            _ChildNodeOffset = _ChildNodeOffset ?? Schema.GetOffset(0x8BE9081292A8E0E9);
+            return ref _Handle.AsRef<ushort>(_ChildNodeOffset!.Value);
         }
     }
-    private static nint _WeightOffset = -1;
+    private static nint? _WeightOffset;
 
     public ref float Weight
     {
         get
         {
-            if (_WeightOffset == -1) _WeightOffset = Schema.GetOffset(0x8BE90812CFFC66CB);
-            return ref _Handle.AsRef<float>(_WeightOffset);
+            _WeightOffset = _WeightOffset ?? Schema.GetOffset(0x8BE90812CFFC66CB);
+            return ref _Handle.AsRef<float>(_WeightOffset!.Value);
         }
     }
 

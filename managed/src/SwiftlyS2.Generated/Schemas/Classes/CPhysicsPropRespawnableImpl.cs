@@ -16,54 +16,54 @@ internal partial class CPhysicsPropRespawnableImpl : CPhysicsPropImpl, CPhysicsP
 {
     public CPhysicsPropRespawnableImpl(nint handle) : base(handle) { }
 
-    private static nint _OriginalSpawnOriginOffset = -1;
+    private static nint? _OriginalSpawnOriginOffset;
 
     public ref Vector OriginalSpawnOrigin
     {
         get
         {
-            if (_OriginalSpawnOriginOffset == -1) _OriginalSpawnOriginOffset = Schema.GetOffset(0x6C5980BAB6F410AF);
-            return ref _Handle.AsRef<Vector>(_OriginalSpawnOriginOffset);
+            _OriginalSpawnOriginOffset = _OriginalSpawnOriginOffset ?? Schema.GetOffset(0x6C5980BAB6F410AF);
+            return ref _Handle.AsRef<Vector>(_OriginalSpawnOriginOffset!.Value);
         }
     }
-    private static nint _OriginalSpawnAnglesOffset = -1;
+    private static nint? _OriginalSpawnAnglesOffset;
 
     public ref QAngle OriginalSpawnAngles
     {
         get
         {
-            if (_OriginalSpawnAnglesOffset == -1) _OriginalSpawnAnglesOffset = Schema.GetOffset(0x6C5980BAF7A16BD1);
-            return ref _Handle.AsRef<QAngle>(_OriginalSpawnAnglesOffset);
+            _OriginalSpawnAnglesOffset = _OriginalSpawnAnglesOffset ?? Schema.GetOffset(0x6C5980BAF7A16BD1);
+            return ref _Handle.AsRef<QAngle>(_OriginalSpawnAnglesOffset!.Value);
         }
     }
-    private static nint _OriginalMinsOffset = -1;
+    private static nint? _OriginalMinsOffset;
 
     public ref Vector OriginalMins
     {
         get
         {
-            if (_OriginalMinsOffset == -1) _OriginalMinsOffset = Schema.GetOffset(0x6C5980BAFBA3B1D3);
-            return ref _Handle.AsRef<Vector>(_OriginalMinsOffset);
+            _OriginalMinsOffset = _OriginalMinsOffset ?? Schema.GetOffset(0x6C5980BAFBA3B1D3);
+            return ref _Handle.AsRef<Vector>(_OriginalMinsOffset!.Value);
         }
     }
-    private static nint _OriginalMaxsOffset = -1;
+    private static nint? _OriginalMaxsOffset;
 
     public ref Vector OriginalMaxs
     {
         get
         {
-            if (_OriginalMaxsOffset == -1) _OriginalMaxsOffset = Schema.GetOffset(0x6C5980BAA4FDD991);
-            return ref _Handle.AsRef<Vector>(_OriginalMaxsOffset);
+            _OriginalMaxsOffset = _OriginalMaxsOffset ?? Schema.GetOffset(0x6C5980BAA4FDD991);
+            return ref _Handle.AsRef<Vector>(_OriginalMaxsOffset!.Value);
         }
     }
-    private static nint _RespawnDurationOffset = -1;
+    private static nint? _RespawnDurationOffset;
 
     public ref float RespawnDuration
     {
         get
         {
-            if (_RespawnDurationOffset == -1) _RespawnDurationOffset = Schema.GetOffset(0x6C5980BA476C78ED);
-            return ref _Handle.AsRef<float>(_RespawnDurationOffset);
+            _RespawnDurationOffset = _RespawnDurationOffset ?? Schema.GetOffset(0x6C5980BA476C78ED);
+            return ref _Handle.AsRef<float>(_RespawnDurationOffset!.Value);
         }
     }
 

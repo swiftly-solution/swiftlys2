@@ -16,57 +16,57 @@ internal partial class FeSimdSpringIntegrator_tImpl : SchemaClass, FeSimdSpringI
 {
     public FeSimdSpringIntegrator_tImpl(nint handle) : base(handle) { }
 
-    private static nint _NodeOffset = -1;
+    private static nint? _NodeOffset;
     private SchemaUntypedField? _NodeInstance;
 
     public SchemaUntypedField Node
     {
         get
         {
-            if (_NodeOffset == -1) _NodeOffset = Schema.GetOffset(0xF9413B96CD6694B9);
+            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0xF9413B96CD6694B9);
             var instance = _NodeInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _NodeOffset);
+            instance.DangerousSetHandle(_Handle + _NodeOffset!.Value);
             return instance;
         }
     }
-    private static nint _SpringRestLengthOffset = -1;
+    private static nint? _SpringRestLengthOffset;
 
     public ref fltx4 SpringRestLength
     {
         get
         {
-            if (_SpringRestLengthOffset == -1) _SpringRestLengthOffset = Schema.GetOffset(0xF9413B9628C609E8);
-            return ref _Handle.AsRef<fltx4>(_SpringRestLengthOffset);
+            _SpringRestLengthOffset = _SpringRestLengthOffset ?? Schema.GetOffset(0xF9413B9628C609E8);
+            return ref _Handle.AsRef<fltx4>(_SpringRestLengthOffset!.Value);
         }
     }
-    private static nint _SpringConstantOffset = -1;
+    private static nint? _SpringConstantOffset;
 
     public ref fltx4 SpringConstant
     {
         get
         {
-            if (_SpringConstantOffset == -1) _SpringConstantOffset = Schema.GetOffset(0xF9413B969346E79E);
-            return ref _Handle.AsRef<fltx4>(_SpringConstantOffset);
+            _SpringConstantOffset = _SpringConstantOffset ?? Schema.GetOffset(0xF9413B969346E79E);
+            return ref _Handle.AsRef<fltx4>(_SpringConstantOffset!.Value);
         }
     }
-    private static nint _SpringDampingOffset = -1;
+    private static nint? _SpringDampingOffset;
 
     public ref fltx4 SpringDamping
     {
         get
         {
-            if (_SpringDampingOffset == -1) _SpringDampingOffset = Schema.GetOffset(0xF9413B9620E775D0);
-            return ref _Handle.AsRef<fltx4>(_SpringDampingOffset);
+            _SpringDampingOffset = _SpringDampingOffset ?? Schema.GetOffset(0xF9413B9620E775D0);
+            return ref _Handle.AsRef<fltx4>(_SpringDampingOffset!.Value);
         }
     }
-    private static nint _NodeWeight0Offset = -1;
+    private static nint? _NodeWeight0Offset;
 
     public ref fltx4 NodeWeight0
     {
         get
         {
-            if (_NodeWeight0Offset == -1) _NodeWeight0Offset = Schema.GetOffset(0xF9413B966E62FEA1);
-            return ref _Handle.AsRef<fltx4>(_NodeWeight0Offset);
+            _NodeWeight0Offset = _NodeWeight0Offset ?? Schema.GetOffset(0xF9413B966E62FEA1);
+            return ref _Handle.AsRef<fltx4>(_NodeWeight0Offset!.Value);
         }
     }
 

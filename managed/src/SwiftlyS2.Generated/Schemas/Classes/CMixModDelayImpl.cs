@@ -16,124 +16,124 @@ internal partial class CMixModDelayImpl : CMixPropertyBaseImpl, CMixModDelay
 {
     public CMixModDelayImpl(nint handle) : base(handle) { }
 
-    private static nint _PhaseInvertOffset = -1;
+    private static nint? _PhaseInvertOffset;
 
     public ref bool PhaseInvert
     {
         get
         {
-            if (_PhaseInvertOffset == -1) _PhaseInvertOffset = Schema.GetOffset(0xB97AD64F98B8BD4C);
-            return ref _Handle.AsRef<bool>(_PhaseInvertOffset);
+            _PhaseInvertOffset = _PhaseInvertOffset ?? Schema.GetOffset(0xB97AD64F98B8BD4C);
+            return ref _Handle.AsRef<bool>(_PhaseInvertOffset!.Value);
         }
     }
-    private static nint _GlideTimeOffset = -1;
+    private static nint? _GlideTimeOffset;
 
     public ref float GlideTime
     {
         get
         {
-            if (_GlideTimeOffset == -1) _GlideTimeOffset = Schema.GetOffset(0xB97AD64FF7DC34FD);
-            return ref _Handle.AsRef<float>(_GlideTimeOffset);
+            _GlideTimeOffset = _GlideTimeOffset ?? Schema.GetOffset(0xB97AD64FF7DC34FD);
+            return ref _Handle.AsRef<float>(_GlideTimeOffset!.Value);
         }
     }
-    private static nint _DelayOffset = -1;
+    private static nint? _DelayOffset;
 
     public ref float Delay
     {
         get
         {
-            if (_DelayOffset == -1) _DelayOffset = Schema.GetOffset(0xB97AD64F7D68FD6E);
-            return ref _Handle.AsRef<float>(_DelayOffset);
+            _DelayOffset = _DelayOffset ?? Schema.GetOffset(0xB97AD64F7D68FD6E);
+            return ref _Handle.AsRef<float>(_DelayOffset!.Value);
         }
     }
-    private static nint _FeedbackOffset = -1;
+    private static nint? _FeedbackOffset;
 
     public ref float Feedback
     {
         get
         {
-            if (_FeedbackOffset == -1) _FeedbackOffset = Schema.GetOffset(0xB97AD64FCD5446D4);
-            return ref _Handle.AsRef<float>(_FeedbackOffset);
+            _FeedbackOffset = _FeedbackOffset ?? Schema.GetOffset(0xB97AD64FCD5446D4);
+            return ref _Handle.AsRef<float>(_FeedbackOffset!.Value);
         }
     }
-    private static nint _GainOffset = -1;
+    private static nint? _GainOffset;
 
     public ref float Gain
     {
         get
         {
-            if (_GainOffset == -1) _GainOffset = Schema.GetOffset(0xB97AD64F7E5A38A8);
-            return ref _Handle.AsRef<float>(_GainOffset);
+            _GainOffset = _GainOffset ?? Schema.GetOffset(0xB97AD64F7E5A38A8);
+            return ref _Handle.AsRef<float>(_GainOffset!.Value);
         }
     }
-    private static nint _ModRateOffset = -1;
+    private static nint? _ModRateOffset;
 
     public ref float ModRate
     {
         get
         {
-            if (_ModRateOffset == -1) _ModRateOffset = Schema.GetOffset(0xB97AD64F0EA039FF);
-            return ref _Handle.AsRef<float>(_ModRateOffset);
+            _ModRateOffset = _ModRateOffset ?? Schema.GetOffset(0xB97AD64F0EA039FF);
+            return ref _Handle.AsRef<float>(_ModRateOffset!.Value);
         }
     }
-    private static nint _ModDepthOffset = -1;
+    private static nint? _ModDepthOffset;
 
     public ref float ModDepth
     {
         get
         {
-            if (_ModDepthOffset == -1) _ModDepthOffset = Schema.GetOffset(0xB97AD64FF59E0B82);
-            return ref _Handle.AsRef<float>(_ModDepthOffset);
+            _ModDepthOffset = _ModDepthOffset ?? Schema.GetOffset(0xB97AD64FF59E0B82);
+            return ref _Handle.AsRef<float>(_ModDepthOffset!.Value);
         }
     }
-    private static nint _FilterTypeOffset = -1;
+    private static nint? _FilterTypeOffset;
 
     public ref VMixFilterType_t FilterType
     {
         get
         {
-            if (_FilterTypeOffset == -1) _FilterTypeOffset = Schema.GetOffset(0xB97AD64F7E582F6F);
-            return ref _Handle.AsRef<VMixFilterType_t>(_FilterTypeOffset);
+            _FilterTypeOffset = _FilterTypeOffset ?? Schema.GetOffset(0xB97AD64F7E582F6F);
+            return ref _Handle.AsRef<VMixFilterType_t>(_FilterTypeOffset!.Value);
         }
     }
-    private static nint _FrequencyOffset = -1;
+    private static nint? _FrequencyOffset;
 
     public ref float Frequency
     {
         get
         {
-            if (_FrequencyOffset == -1) _FrequencyOffset = Schema.GetOffset(0xB97AD64FD2C16DD7);
-            return ref _Handle.AsRef<float>(_FrequencyOffset);
+            _FrequencyOffset = _FrequencyOffset ?? Schema.GetOffset(0xB97AD64FD2C16DD7);
+            return ref _Handle.AsRef<float>(_FrequencyOffset!.Value);
         }
     }
-    private static nint _QOffset = -1;
+    private static nint? _QOffset;
 
     public ref float Q
     {
         get
         {
-            if (_QOffset == -1) _QOffset = Schema.GetOffset(0xB97AD64F96122E3A);
-            return ref _Handle.AsRef<float>(_QOffset);
+            _QOffset = _QOffset ?? Schema.GetOffset(0xB97AD64F96122E3A);
+            return ref _Handle.AsRef<float>(_QOffset!.Value);
         }
     }
-    private static nint _FilterGainOffset = -1;
+    private static nint? _FilterGainOffset;
 
     public ref float FilterGain
     {
         get
         {
-            if (_FilterGainOffset == -1) _FilterGainOffset = Schema.GetOffset(0xB97AD64F3743D492);
-            return ref _Handle.AsRef<float>(_FilterGainOffset);
+            _FilterGainOffset = _FilterGainOffset ?? Schema.GetOffset(0xB97AD64F3743D492);
+            return ref _Handle.AsRef<float>(_FilterGainOffset!.Value);
         }
     }
-    private static nint _AntialiasingOffset = -1;
+    private static nint? _AntialiasingOffset;
 
     public ref bool Antialiasing
     {
         get
         {
-            if (_AntialiasingOffset == -1) _AntialiasingOffset = Schema.GetOffset(0xB97AD64F68103E09);
-            return ref _Handle.AsRef<bool>(_AntialiasingOffset);
+            _AntialiasingOffset = _AntialiasingOffset ?? Schema.GetOffset(0xB97AD64F68103E09);
+            return ref _Handle.AsRef<bool>(_AntialiasingOffset!.Value);
         }
     }
 

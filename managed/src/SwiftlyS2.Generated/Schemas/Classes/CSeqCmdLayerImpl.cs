@@ -16,94 +16,94 @@ internal partial class CSeqCmdLayerImpl : SchemaClass, CSeqCmdLayer
 {
     public CSeqCmdLayerImpl(nint handle) : base(handle) { }
 
-    private static nint _CmdOffset = -1;
+    private static nint? _CmdOffset;
 
     public ref short Cmd
     {
         get
         {
-            if (_CmdOffset == -1) _CmdOffset = Schema.GetOffset(0xFD1F978E4B3490B);
-            return ref _Handle.AsRef<short>(_CmdOffset);
+            _CmdOffset = _CmdOffset ?? Schema.GetOffset(0xFD1F978E4B3490B);
+            return ref _Handle.AsRef<short>(_CmdOffset!.Value);
         }
     }
-    private static nint _LocalReferenceOffset = -1;
+    private static nint? _LocalReferenceOffset;
 
     public ref short LocalReference
     {
         get
         {
-            if (_LocalReferenceOffset == -1) _LocalReferenceOffset = Schema.GetOffset(0xFD1F978C8D571D9);
-            return ref _Handle.AsRef<short>(_LocalReferenceOffset);
+            _LocalReferenceOffset = _LocalReferenceOffset ?? Schema.GetOffset(0xFD1F978C8D571D9);
+            return ref _Handle.AsRef<short>(_LocalReferenceOffset!.Value);
         }
     }
-    private static nint _LocalBonemaskOffset = -1;
+    private static nint? _LocalBonemaskOffset;
 
     public ref short LocalBonemask
     {
         get
         {
-            if (_LocalBonemaskOffset == -1) _LocalBonemaskOffset = Schema.GetOffset(0xFD1F9782B0E5CB2);
-            return ref _Handle.AsRef<short>(_LocalBonemaskOffset);
+            _LocalBonemaskOffset = _LocalBonemaskOffset ?? Schema.GetOffset(0xFD1F9782B0E5CB2);
+            return ref _Handle.AsRef<short>(_LocalBonemaskOffset!.Value);
         }
     }
-    private static nint _DstResultOffset = -1;
+    private static nint? _DstResultOffset;
 
     public ref short DstResult
     {
         get
         {
-            if (_DstResultOffset == -1) _DstResultOffset = Schema.GetOffset(0xFD1F978EC2D9DB9);
-            return ref _Handle.AsRef<short>(_DstResultOffset);
+            _DstResultOffset = _DstResultOffset ?? Schema.GetOffset(0xFD1F978EC2D9DB9);
+            return ref _Handle.AsRef<short>(_DstResultOffset!.Value);
         }
     }
-    private static nint _SrcResultOffset = -1;
+    private static nint? _SrcResultOffset;
 
     public ref short SrcResult
     {
         get
         {
-            if (_SrcResultOffset == -1) _SrcResultOffset = Schema.GetOffset(0xFD1F9782B5F4F1C);
-            return ref _Handle.AsRef<short>(_SrcResultOffset);
+            _SrcResultOffset = _SrcResultOffset ?? Schema.GetOffset(0xFD1F9782B5F4F1C);
+            return ref _Handle.AsRef<short>(_SrcResultOffset!.Value);
         }
     }
-    private static nint _SplineOffset = -1;
+    private static nint? _SplineOffset;
 
     public ref bool Spline
     {
         get
         {
-            if (_SplineOffset == -1) _SplineOffset = Schema.GetOffset(0xFD1F9782F9204DC);
-            return ref _Handle.AsRef<bool>(_SplineOffset);
+            _SplineOffset = _SplineOffset ?? Schema.GetOffset(0xFD1F9782F9204DC);
+            return ref _Handle.AsRef<bool>(_SplineOffset!.Value);
         }
     }
-    private static nint _Var1Offset = -1;
+    private static nint? _Var1Offset;
 
     public ref float Var1
     {
         get
         {
-            if (_Var1Offset == -1) _Var1Offset = Schema.GetOffset(0xFD1F978B9FADB9F);
-            return ref _Handle.AsRef<float>(_Var1Offset);
+            _Var1Offset = _Var1Offset ?? Schema.GetOffset(0xFD1F978B9FADB9F);
+            return ref _Handle.AsRef<float>(_Var1Offset!.Value);
         }
     }
-    private static nint _Var2Offset = -1;
+    private static nint? _Var2Offset;
 
     public ref float Var2
     {
         get
         {
-            if (_Var2Offset == -1) _Var2Offset = Schema.GetOffset(0xFD1F978BAFADD32);
-            return ref _Handle.AsRef<float>(_Var2Offset);
+            _Var2Offset = _Var2Offset ?? Schema.GetOffset(0xFD1F978BAFADD32);
+            return ref _Handle.AsRef<float>(_Var2Offset!.Value);
         }
     }
-    private static nint _LineNumberOffset = -1;
+    private static nint? _LineNumberOffset;
 
     public ref short LineNumber
     {
         get
         {
-            if (_LineNumberOffset == -1) _LineNumberOffset = Schema.GetOffset(0xFD1F978AD012A6A);
-            return ref _Handle.AsRef<short>(_LineNumberOffset);
+            _LineNumberOffset = _LineNumberOffset ?? Schema.GetOffset(0xFD1F978AD012A6A);
+            return ref _Handle.AsRef<short>(_LineNumberOffset!.Value);
         }
     }
 

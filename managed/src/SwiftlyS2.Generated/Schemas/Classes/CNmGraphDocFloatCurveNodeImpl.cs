@@ -16,16 +16,16 @@ internal partial class CNmGraphDocFloatCurveNodeImpl : CNmGraphDocFlowNodeImpl, 
 {
     public CNmGraphDocFloatCurveNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _CurveOffset = -1;
+    private static nint? _CurveOffset;
     private SchemaUntypedField? _CurveInstance;
 
     public SchemaUntypedField Curve
     {
         get
         {
-            if (_CurveOffset == -1) _CurveOffset = Schema.GetOffset(0xA9B56754BFFA0B34);
+            _CurveOffset = _CurveOffset ?? Schema.GetOffset(0xA9B56754BFFA0B34);
             var instance = _CurveInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _CurveOffset);
+            instance.DangerousSetHandle(_Handle + _CurveOffset!.Value);
             return instance;
         }
     }

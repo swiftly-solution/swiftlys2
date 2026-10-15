@@ -16,14 +16,14 @@ internal partial class CDebugHistoryImpl : CBaseEntityImpl, CDebugHistory
 {
     public CDebugHistoryImpl(nint handle) : base(handle) { }
 
-    private static nint _NpcEventsOffset = -1;
+    private static nint? _NpcEventsOffset;
 
     public ref int NpcEvents
     {
         get
         {
-            if (_NpcEventsOffset == -1) _NpcEventsOffset = Schema.GetOffset(0xD14757AF8F70D3F5);
-            return ref _Handle.AsRef<int>(_NpcEventsOffset);
+            _NpcEventsOffset = _NpcEventsOffset ?? Schema.GetOffset(0xD14757AF8F70D3F5);
+            return ref _Handle.AsRef<int>(_NpcEventsOffset!.Value);
         }
     }
 

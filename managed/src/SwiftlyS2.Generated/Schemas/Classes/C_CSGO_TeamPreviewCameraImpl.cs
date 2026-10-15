@@ -16,14 +16,14 @@ internal partial class C_CSGO_TeamPreviewCameraImpl : C_CSGO_MapPreviewCameraPat
 {
     public C_CSGO_TeamPreviewCameraImpl(nint handle) : base(handle) { }
 
-    private static nint _VariantOffset = -1;
+    private static nint? _VariantOffset;
 
     public ref int Variant
     {
         get
         {
-            if (_VariantOffset == -1) _VariantOffset = Schema.GetOffset(0x8EC5BA78B2DB2B42);
-            return ref _Handle.AsRef<int>(_VariantOffset);
+            _VariantOffset = _VariantOffset ?? Schema.GetOffset(0x8EC5BA78B2DB2B42);
+            return ref _Handle.AsRef<int>(_VariantOffset!.Value);
         }
     }
 

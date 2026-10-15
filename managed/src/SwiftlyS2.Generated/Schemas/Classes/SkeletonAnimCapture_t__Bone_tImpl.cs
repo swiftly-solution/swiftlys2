@@ -16,39 +16,39 @@ internal partial class SkeletonAnimCapture_t__Bone_tImpl : SchemaClass, Skeleton
 {
     public SkeletonAnimCapture_t__Bone_tImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x30D396FDCAE8A266);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x30D396FDCAE8A266);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x30D396FDCAE8A266);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x30D396FDCAE8A266);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _BindPoseOffset = -1;
+    private static nint? _BindPoseOffset;
 
     public ref CTransform BindPose
     {
         get
         {
-            if (_BindPoseOffset == -1) _BindPoseOffset = Schema.GetOffset(0x30D396FDE664FE63);
-            return ref _Handle.AsRef<CTransform>(_BindPoseOffset);
+            _BindPoseOffset = _BindPoseOffset ?? Schema.GetOffset(0x30D396FDE664FE63);
+            return ref _Handle.AsRef<CTransform>(_BindPoseOffset!.Value);
         }
     }
-    private static nint _ParentOffset = -1;
+    private static nint? _ParentOffset;
 
     public ref int Parent
     {
         get
         {
-            if (_ParentOffset == -1) _ParentOffset = Schema.GetOffset(0x30D396FD0AABB9D1);
-            return ref _Handle.AsRef<int>(_ParentOffset);
+            _ParentOffset = _ParentOffset ?? Schema.GetOffset(0x30D396FD0AABB9D1);
+            return ref _Handle.AsRef<int>(_ParentOffset!.Value);
         }
     }
 

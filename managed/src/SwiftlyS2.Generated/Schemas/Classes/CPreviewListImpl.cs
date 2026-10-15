@@ -16,24 +16,24 @@ internal partial class CPreviewListImpl : SchemaClass, CPreviewList
 {
     public CPreviewListImpl(nint handle) : base(handle) { }
 
-    private static nint _SoundsOffset = -1;
+    private static nint? _SoundsOffset;
 
     public ref CUtlVector<CPreviewEntry> Sounds
     {
         get
         {
-            if (_SoundsOffset == -1) _SoundsOffset = Schema.GetOffset(0x3CA457FABD919645);
-            return ref _Handle.AsRef<CUtlVector<CPreviewEntry>>(_SoundsOffset);
+            _SoundsOffset = _SoundsOffset ?? Schema.GetOffset(0x3CA457FABD919645);
+            return ref _Handle.AsRef<CUtlVector<CPreviewEntry>>(_SoundsOffset!.Value);
         }
     }
-    private static nint _PreviewInGameOffset = -1;
+    private static nint? _PreviewInGameOffset;
 
     public ref bool PreviewInGame
     {
         get
         {
-            if (_PreviewInGameOffset == -1) _PreviewInGameOffset = Schema.GetOffset(0x3CA457FAB664CB16);
-            return ref _Handle.AsRef<bool>(_PreviewInGameOffset);
+            _PreviewInGameOffset = _PreviewInGameOffset ?? Schema.GetOffset(0x3CA457FAB664CB16);
+            return ref _Handle.AsRef<bool>(_PreviewInGameOffset!.Value);
         }
     }
 

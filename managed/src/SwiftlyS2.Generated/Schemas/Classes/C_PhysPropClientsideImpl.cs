@@ -16,60 +16,60 @@ internal partial class C_PhysPropClientsideImpl : C_BreakablePropImpl, C_PhysPro
 {
     public C_PhysPropClientsideImpl(nint handle) : base(handle) { }
 
-    private static nint _TouchDeltaOffset = -1;
+    private static nint? _TouchDeltaOffset;
     private GameTime_tImpl? _TouchDeltaInstance;
 
     public GameTime_t TouchDelta
     {
         get
         {
-            if (_TouchDeltaOffset == -1) _TouchDeltaOffset = Schema.GetOffset(0xAD38FEDEED938720);
+            _TouchDeltaOffset = _TouchDeltaOffset ?? Schema.GetOffset(0xAD38FEDEED938720);
             var instance = _TouchDeltaInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _TouchDeltaOffset);
+            instance.DangerousSetHandle(_Handle + _TouchDeltaOffset!.Value);
             return instance;
         }
     }
-    private static nint _DeathTimeOffset = -1;
+    private static nint? _DeathTimeOffset;
     private GameTime_tImpl? _DeathTimeInstance;
 
     public GameTime_t DeathTime
     {
         get
         {
-            if (_DeathTimeOffset == -1) _DeathTimeOffset = Schema.GetOffset(0xAD38FEDE2A7F0968);
+            _DeathTimeOffset = _DeathTimeOffset ?? Schema.GetOffset(0xAD38FEDE2A7F0968);
             var instance = _DeathTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _DeathTimeOffset);
+            instance.DangerousSetHandle(_Handle + _DeathTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _DamagePositionOffset = -1;
+    private static nint? _DamagePositionOffset;
 
     public ref Vector DamagePosition
     {
         get
         {
-            if (_DamagePositionOffset == -1) _DamagePositionOffset = Schema.GetOffset(0xAD38FEDEAC86A503);
-            return ref _Handle.AsRef<Vector>(_DamagePositionOffset);
+            _DamagePositionOffset = _DamagePositionOffset ?? Schema.GetOffset(0xAD38FEDEAC86A503);
+            return ref _Handle.AsRef<Vector>(_DamagePositionOffset!.Value);
         }
     }
-    private static nint _DamageDirectionOffset = -1;
+    private static nint? _DamageDirectionOffset;
 
     public ref Vector DamageDirection
     {
         get
         {
-            if (_DamageDirectionOffset == -1) _DamageDirectionOffset = Schema.GetOffset(0xAD38FEDE19986F61);
-            return ref _Handle.AsRef<Vector>(_DamageDirectionOffset);
+            _DamageDirectionOffset = _DamageDirectionOffset ?? Schema.GetOffset(0xAD38FEDE19986F61);
+            return ref _Handle.AsRef<Vector>(_DamageDirectionOffset!.Value);
         }
     }
-    private static nint _DamageTypeOffset = -1;
+    private static nint? _DamageTypeOffset;
 
     public ref DamageTypes_t DamageType
     {
         get
         {
-            if (_DamageTypeOffset == -1) _DamageTypeOffset = Schema.GetOffset(0xAD38FEDEA9599F54);
-            return ref _Handle.AsRef<DamageTypes_t>(_DamageTypeOffset);
+            _DamageTypeOffset = _DamageTypeOffset ?? Schema.GetOffset(0xAD38FEDEA9599F54);
+            return ref _Handle.AsRef<DamageTypes_t>(_DamageTypeOffset!.Value);
         }
     }
 

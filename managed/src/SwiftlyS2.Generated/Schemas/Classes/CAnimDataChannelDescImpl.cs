@@ -16,94 +16,94 @@ internal partial class CAnimDataChannelDescImpl : SchemaClass, CAnimDataChannelD
 {
     public CAnimDataChannelDescImpl(nint handle) : base(handle) { }
 
-    private static nint _ChannelClassOffset = -1;
+    private static nint? _ChannelClassOffset;
 
     public ref CBufferString ChannelClass
     {
         get
         {
-            if (_ChannelClassOffset == -1) _ChannelClassOffset = Schema.GetOffset(0x2D253CFB8F5E9AD5);
-            return ref _Handle.AsRef<CBufferString>(_ChannelClassOffset);
+            _ChannelClassOffset = _ChannelClassOffset ?? Schema.GetOffset(0x2D253CFB8F5E9AD5);
+            return ref _Handle.AsRef<CBufferString>(_ChannelClassOffset!.Value);
         }
     }
-    private static nint _VariableNameOffset = -1;
+    private static nint? _VariableNameOffset;
 
     public ref CBufferString VariableName
     {
         get
         {
-            if (_VariableNameOffset == -1) _VariableNameOffset = Schema.GetOffset(0x2D253CFB369599AB);
-            return ref _Handle.AsRef<CBufferString>(_VariableNameOffset);
+            _VariableNameOffset = _VariableNameOffset ?? Schema.GetOffset(0x2D253CFB369599AB);
+            return ref _Handle.AsRef<CBufferString>(_VariableNameOffset!.Value);
         }
     }
-    private static nint _FlagsOffset = -1;
+    private static nint? _FlagsOffset;
 
     public ref int Flags
     {
         get
         {
-            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0x2D253CFBCE6E9C28);
-            return ref _Handle.AsRef<int>(_FlagsOffset);
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x2D253CFBCE6E9C28);
+            return ref _Handle.AsRef<int>(_FlagsOffset!.Value);
         }
     }
-    private static nint _TypeOffset = -1;
+    private static nint? _TypeOffset;
 
     public ref int Type
     {
         get
         {
-            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0x2D253CFB18853D59);
-            return ref _Handle.AsRef<int>(_TypeOffset);
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x2D253CFB18853D59);
+            return ref _Handle.AsRef<int>(_TypeOffset!.Value);
         }
     }
-    private static nint _GroupingOffset = -1;
+    private static nint? _GroupingOffset;
 
     public ref CBufferString Grouping
     {
         get
         {
-            if (_GroupingOffset == -1) _GroupingOffset = Schema.GetOffset(0x2D253CFB4308F10D);
-            return ref _Handle.AsRef<CBufferString>(_GroupingOffset);
+            _GroupingOffset = _GroupingOffset ?? Schema.GetOffset(0x2D253CFB4308F10D);
+            return ref _Handle.AsRef<CBufferString>(_GroupingOffset!.Value);
         }
     }
-    private static nint _DescriptionOffset = -1;
+    private static nint? _DescriptionOffset;
 
     public ref CBufferString Description
     {
         get
         {
-            if (_DescriptionOffset == -1) _DescriptionOffset = Schema.GetOffset(0x2D253CFB5BF47182);
-            return ref _Handle.AsRef<CBufferString>(_DescriptionOffset);
+            _DescriptionOffset = _DescriptionOffset ?? Schema.GetOffset(0x2D253CFB5BF47182);
+            return ref _Handle.AsRef<CBufferString>(_DescriptionOffset!.Value);
         }
     }
-    private static nint _ElementNameArrayOffset = -1;
+    private static nint? _ElementNameArrayOffset;
 
     public ref CUtlVector<CBufferString> ElementNameArray
     {
         get
         {
-            if (_ElementNameArrayOffset == -1) _ElementNameArrayOffset = Schema.GetOffset(0x2D253CFBE31652C8);
-            return ref _Handle.AsRef<CUtlVector<CBufferString>>(_ElementNameArrayOffset);
+            _ElementNameArrayOffset = _ElementNameArrayOffset ?? Schema.GetOffset(0x2D253CFBE31652C8);
+            return ref _Handle.AsRef<CUtlVector<CBufferString>>(_ElementNameArrayOffset!.Value);
         }
     }
-    private static nint _ElementIndexArrayOffset = -1;
+    private static nint? _ElementIndexArrayOffset;
 
     public ref CUtlVector<int> ElementIndexArray
     {
         get
         {
-            if (_ElementIndexArrayOffset == -1) _ElementIndexArrayOffset = Schema.GetOffset(0x2D253CFB3FABC2B2);
-            return ref _Handle.AsRef<CUtlVector<int>>(_ElementIndexArrayOffset);
+            _ElementIndexArrayOffset = _ElementIndexArrayOffset ?? Schema.GetOffset(0x2D253CFB3FABC2B2);
+            return ref _Handle.AsRef<CUtlVector<int>>(_ElementIndexArrayOffset!.Value);
         }
     }
-    private static nint _ElementMaskArrayOffset = -1;
+    private static nint? _ElementMaskArrayOffset;
 
     public ref CUtlVector<uint> ElementMaskArray
     {
         get
         {
-            if (_ElementMaskArrayOffset == -1) _ElementMaskArrayOffset = Schema.GetOffset(0x2D253CFB5927F764);
-            return ref _Handle.AsRef<CUtlVector<uint>>(_ElementMaskArrayOffset);
+            _ElementMaskArrayOffset = _ElementMaskArrayOffset ?? Schema.GetOffset(0x2D253CFB5927F764);
+            return ref _Handle.AsRef<CUtlVector<uint>>(_ElementMaskArrayOffset!.Value);
         }
     }
 

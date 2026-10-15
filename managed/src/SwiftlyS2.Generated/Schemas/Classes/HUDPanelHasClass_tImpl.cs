@@ -16,34 +16,34 @@ internal partial class HUDPanelHasClass_tImpl : SchemaClass, HUDPanelHasClass_t
 {
     public HUDPanelHasClass_tImpl(nint handle) : base(handle) { }
 
-    private static nint _PanelIdIndexOffset = -1;
+    private static nint? _PanelIdIndexOffset;
 
     public ref ushort PanelIdIndex
     {
         get
         {
-            if (_PanelIdIndexOffset == -1) _PanelIdIndexOffset = Schema.GetOffset(0xD075B0170205D770);
-            return ref _Handle.AsRef<ushort>(_PanelIdIndexOffset);
+            _PanelIdIndexOffset = _PanelIdIndexOffset ?? Schema.GetOffset(0xD075B0170205D770);
+            return ref _Handle.AsRef<ushort>(_PanelIdIndexOffset!.Value);
         }
     }
-    private static nint _ClassNameIndexOffset = -1;
+    private static nint? _ClassNameIndexOffset;
 
     public ref ushort ClassNameIndex
     {
         get
         {
-            if (_ClassNameIndexOffset == -1) _ClassNameIndexOffset = Schema.GetOffset(0xD075B0171A3CDF9C);
-            return ref _Handle.AsRef<ushort>(_ClassNameIndexOffset);
+            _ClassNameIndexOffset = _ClassNameIndexOffset ?? Schema.GetOffset(0xD075B0171A3CDF9C);
+            return ref _Handle.AsRef<ushort>(_ClassNameIndexOffset!.Value);
         }
     }
-    private static nint _ClassStatusOffset = -1;
+    private static nint? _ClassStatusOffset;
 
     public ref EHudPanelClassStatus_t ClassStatus
     {
         get
         {
-            if (_ClassStatusOffset == -1) _ClassStatusOffset = Schema.GetOffset(0xD075B017E81FD25A);
-            return ref _Handle.AsRef<EHudPanelClassStatus_t>(_ClassStatusOffset);
+            _ClassStatusOffset = _ClassStatusOffset ?? Schema.GetOffset(0xD075B017E81FD25A);
+            return ref _Handle.AsRef<EHudPanelClassStatus_t>(_ClassStatusOffset!.Value);
         }
     }
 

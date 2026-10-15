@@ -16,69 +16,69 @@ internal partial class C_OP_MovementMoveAlongSkinnedCPSnapshotImpl : CParticleFu
 {
     public C_OP_MovementMoveAlongSkinnedCPSnapshotImpl(nint handle) : base(handle) { }
 
-    private static nint _ControlPointNumberOffset = -1;
+    private static nint? _ControlPointNumberOffset;
 
     public ref int ControlPointNumber
     {
         get
         {
-            if (_ControlPointNumberOffset == -1) _ControlPointNumberOffset = Schema.GetOffset(0xBF34A6C93F31A6BD);
-            return ref _Handle.AsRef<int>(_ControlPointNumberOffset);
+            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0xBF34A6C93F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
         }
     }
-    private static nint _SnapshotControlPointNumberOffset = -1;
+    private static nint? _SnapshotControlPointNumberOffset;
 
     public ref int SnapshotControlPointNumber
     {
         get
         {
-            if (_SnapshotControlPointNumberOffset == -1) _SnapshotControlPointNumberOffset = Schema.GetOffset(0xBF34A6C929D3EEDD);
-            return ref _Handle.AsRef<int>(_SnapshotControlPointNumberOffset);
+            _SnapshotControlPointNumberOffset = _SnapshotControlPointNumberOffset ?? Schema.GetOffset(0xBF34A6C929D3EEDD);
+            return ref _Handle.AsRef<int>(_SnapshotControlPointNumberOffset!.Value);
         }
     }
-    private static nint _SetNormalOffset = -1;
+    private static nint? _SetNormalOffset;
 
     public ref bool SetNormal
     {
         get
         {
-            if (_SetNormalOffset == -1) _SetNormalOffset = Schema.GetOffset(0xBF34A6C9542722AC);
-            return ref _Handle.AsRef<bool>(_SetNormalOffset);
+            _SetNormalOffset = _SetNormalOffset ?? Schema.GetOffset(0xBF34A6C9542722AC);
+            return ref _Handle.AsRef<bool>(_SetNormalOffset!.Value);
         }
     }
-    private static nint _SetRadiusOffset = -1;
+    private static nint? _SetRadiusOffset;
 
     public ref bool SetRadius
     {
         get
         {
-            if (_SetRadiusOffset == -1) _SetRadiusOffset = Schema.GetOffset(0xBF34A6C9918808D1);
-            return ref _Handle.AsRef<bool>(_SetRadiusOffset);
+            _SetRadiusOffset = _SetRadiusOffset ?? Schema.GetOffset(0xBF34A6C9918808D1);
+            return ref _Handle.AsRef<bool>(_SetRadiusOffset!.Value);
         }
     }
-    private static nint _InterpolationOffset = -1;
+    private static nint? _InterpolationOffset;
     private CPerParticleFloatInputImpl? _InterpolationInstance;
 
     public CPerParticleFloatInput Interpolation
     {
         get
         {
-            if (_InterpolationOffset == -1) _InterpolationOffset = Schema.GetOffset(0xBF34A6C9CF55B987);
+            _InterpolationOffset = _InterpolationOffset ?? Schema.GetOffset(0xBF34A6C9CF55B987);
             var instance = _InterpolationInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _InterpolationOffset);
+            instance.DangerousSetHandle(_Handle + _InterpolationOffset!.Value);
             return instance;
         }
     }
-    private static nint _TValueOffset = -1;
+    private static nint? _TValueOffset;
     private CPerParticleFloatInputImpl? _TValueInstance;
 
     public CPerParticleFloatInput TValue
     {
         get
         {
-            if (_TValueOffset == -1) _TValueOffset = Schema.GetOffset(0xBF34A6C9B4CE908E);
+            _TValueOffset = _TValueOffset ?? Schema.GetOffset(0xBF34A6C9B4CE908E);
             var instance = _TValueInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _TValueOffset);
+            instance.DangerousSetHandle(_Handle + _TValueOffset!.Value);
             return instance;
         }
     }

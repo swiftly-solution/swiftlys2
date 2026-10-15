@@ -16,184 +16,184 @@ internal partial class CPropDoorRotatingImpl : CBasePropDoorImpl, CPropDoorRotat
 {
     public CPropDoorRotatingImpl(nint handle) : base(handle) { }
 
-    private static nint _AxisOffset = -1;
+    private static nint? _AxisOffset;
 
     public ref Vector Axis
     {
         get
         {
-            if (_AxisOffset == -1) _AxisOffset = Schema.GetOffset(0x289EB6130AF9CE54);
-            return ref _Handle.AsRef<Vector>(_AxisOffset);
+            _AxisOffset = _AxisOffset ?? Schema.GetOffset(0x289EB6130AF9CE54);
+            return ref _Handle.AsRef<Vector>(_AxisOffset!.Value);
         }
     }
-    private static nint _DistanceOffset = -1;
+    private static nint? _DistanceOffset;
 
     public ref float Distance
     {
         get
         {
-            if (_DistanceOffset == -1) _DistanceOffset = Schema.GetOffset(0x289EB61300DC4A68);
-            return ref _Handle.AsRef<float>(_DistanceOffset);
+            _DistanceOffset = _DistanceOffset ?? Schema.GetOffset(0x289EB61300DC4A68);
+            return ref _Handle.AsRef<float>(_DistanceOffset!.Value);
         }
     }
-    private static nint _SpawnPositionOffset = -1;
+    private static nint? _SpawnPositionOffset;
 
     public ref PropDoorRotatingSpawnPos_t SpawnPosition
     {
         get
         {
-            if (_SpawnPositionOffset == -1) _SpawnPositionOffset = Schema.GetOffset(0x289EB613F5AD878C);
-            return ref _Handle.AsRef<PropDoorRotatingSpawnPos_t>(_SpawnPositionOffset);
+            _SpawnPositionOffset = _SpawnPositionOffset ?? Schema.GetOffset(0x289EB613F5AD878C);
+            return ref _Handle.AsRef<PropDoorRotatingSpawnPos_t>(_SpawnPositionOffset!.Value);
         }
     }
-    private static nint _OpenDirectionOffset = -1;
+    private static nint? _OpenDirectionOffset;
 
     public ref PropDoorRotatingOpenDirection_e OpenDirection
     {
         get
         {
-            if (_OpenDirectionOffset == -1) _OpenDirectionOffset = Schema.GetOffset(0x289EB6134BC74739);
-            return ref _Handle.AsRef<PropDoorRotatingOpenDirection_e>(_OpenDirectionOffset);
+            _OpenDirectionOffset = _OpenDirectionOffset ?? Schema.GetOffset(0x289EB6134BC74739);
+            return ref _Handle.AsRef<PropDoorRotatingOpenDirection_e>(_OpenDirectionOffset!.Value);
         }
     }
-    private static nint _CurrentOpenDirectionOffset = -1;
+    private static nint? _CurrentOpenDirectionOffset;
 
     public ref PropDoorRotatingOpenDirection_e CurrentOpenDirection
     {
         get
         {
-            if (_CurrentOpenDirectionOffset == -1) _CurrentOpenDirectionOffset = Schema.GetOffset(0x289EB6132BAD86EE);
-            return ref _Handle.AsRef<PropDoorRotatingOpenDirection_e>(_CurrentOpenDirectionOffset);
+            _CurrentOpenDirectionOffset = _CurrentOpenDirectionOffset ?? Schema.GetOffset(0x289EB6132BAD86EE);
+            return ref _Handle.AsRef<PropDoorRotatingOpenDirection_e>(_CurrentOpenDirectionOffset!.Value);
         }
     }
-    private static nint _DefaultCheckDirectionOffset = -1;
+    private static nint? _DefaultCheckDirectionOffset;
 
     public ref doorCheck_e DefaultCheckDirection
     {
         get
         {
-            if (_DefaultCheckDirectionOffset == -1) _DefaultCheckDirectionOffset = Schema.GetOffset(0x289EB6134191E768);
-            return ref _Handle.AsRef<doorCheck_e>(_DefaultCheckDirectionOffset);
+            _DefaultCheckDirectionOffset = _DefaultCheckDirectionOffset ?? Schema.GetOffset(0x289EB6134191E768);
+            return ref _Handle.AsRef<doorCheck_e>(_DefaultCheckDirectionOffset!.Value);
         }
     }
-    private static nint _AjarAngleOffset = -1;
+    private static nint? _AjarAngleOffset;
 
     public ref float AjarAngle
     {
         get
         {
-            if (_AjarAngleOffset == -1) _AjarAngleOffset = Schema.GetOffset(0x289EB613CD456612);
-            return ref _Handle.AsRef<float>(_AjarAngleOffset);
+            _AjarAngleOffset = _AjarAngleOffset ?? Schema.GetOffset(0x289EB613CD456612);
+            return ref _Handle.AsRef<float>(_AjarAngleOffset!.Value);
         }
     }
-    private static nint _RotationAjarDeprecatedOffset = -1;
+    private static nint? _RotationAjarDeprecatedOffset;
 
     public ref QAngle RotationAjarDeprecated
     {
         get
         {
-            if (_RotationAjarDeprecatedOffset == -1) _RotationAjarDeprecatedOffset = Schema.GetOffset(0x289EB6136AD5E768);
-            return ref _Handle.AsRef<QAngle>(_RotationAjarDeprecatedOffset);
+            _RotationAjarDeprecatedOffset = _RotationAjarDeprecatedOffset ?? Schema.GetOffset(0x289EB6136AD5E768);
+            return ref _Handle.AsRef<QAngle>(_RotationAjarDeprecatedOffset!.Value);
         }
     }
-    private static nint _RotationClosedOffset = -1;
+    private static nint? _RotationClosedOffset;
 
     public ref QAngle RotationClosed
     {
         get
         {
-            if (_RotationClosedOffset == -1) _RotationClosedOffset = Schema.GetOffset(0x289EB6132A6472ED);
-            return ref _Handle.AsRef<QAngle>(_RotationClosedOffset);
+            _RotationClosedOffset = _RotationClosedOffset ?? Schema.GetOffset(0x289EB6132A6472ED);
+            return ref _Handle.AsRef<QAngle>(_RotationClosedOffset!.Value);
         }
     }
-    private static nint _RotationOpenForwardOffset = -1;
+    private static nint? _RotationOpenForwardOffset;
 
     public ref QAngle RotationOpenForward
     {
         get
         {
-            if (_RotationOpenForwardOffset == -1) _RotationOpenForwardOffset = Schema.GetOffset(0x289EB6138F861A3E);
-            return ref _Handle.AsRef<QAngle>(_RotationOpenForwardOffset);
+            _RotationOpenForwardOffset = _RotationOpenForwardOffset ?? Schema.GetOffset(0x289EB6138F861A3E);
+            return ref _Handle.AsRef<QAngle>(_RotationOpenForwardOffset!.Value);
         }
     }
-    private static nint _RotationOpenBackOffset = -1;
+    private static nint? _RotationOpenBackOffset;
 
     public ref QAngle RotationOpenBack
     {
         get
         {
-            if (_RotationOpenBackOffset == -1) _RotationOpenBackOffset = Schema.GetOffset(0x289EB61329E9297E);
-            return ref _Handle.AsRef<QAngle>(_RotationOpenBackOffset);
+            _RotationOpenBackOffset = _RotationOpenBackOffset ?? Schema.GetOffset(0x289EB61329E9297E);
+            return ref _Handle.AsRef<QAngle>(_RotationOpenBackOffset!.Value);
         }
     }
-    private static nint _GoalOffset = -1;
+    private static nint? _GoalOffset;
 
     public ref QAngle Goal
     {
         get
         {
-            if (_GoalOffset == -1) _GoalOffset = Schema.GetOffset(0x289EB6134D6AB03C);
-            return ref _Handle.AsRef<QAngle>(_GoalOffset);
+            _GoalOffset = _GoalOffset ?? Schema.GetOffset(0x289EB6134D6AB03C);
+            return ref _Handle.AsRef<QAngle>(_GoalOffset!.Value);
         }
     }
-    private static nint _ForwardBoundsMinOffset = -1;
+    private static nint? _ForwardBoundsMinOffset;
 
     public ref Vector ForwardBoundsMin
     {
         get
         {
-            if (_ForwardBoundsMinOffset == -1) _ForwardBoundsMinOffset = Schema.GetOffset(0x289EB6138A35433D);
-            return ref _Handle.AsRef<Vector>(_ForwardBoundsMinOffset);
+            _ForwardBoundsMinOffset = _ForwardBoundsMinOffset ?? Schema.GetOffset(0x289EB6138A35433D);
+            return ref _Handle.AsRef<Vector>(_ForwardBoundsMinOffset!.Value);
         }
     }
-    private static nint _ForwardBoundsMaxOffset = -1;
+    private static nint? _ForwardBoundsMaxOffset;
 
     public ref Vector ForwardBoundsMax
     {
         get
         {
-            if (_ForwardBoundsMaxOffset == -1) _ForwardBoundsMaxOffset = Schema.GetOffset(0x289EB61394203843);
-            return ref _Handle.AsRef<Vector>(_ForwardBoundsMaxOffset);
+            _ForwardBoundsMaxOffset = _ForwardBoundsMaxOffset ?? Schema.GetOffset(0x289EB61394203843);
+            return ref _Handle.AsRef<Vector>(_ForwardBoundsMaxOffset!.Value);
         }
     }
-    private static nint _BackBoundsMinOffset = -1;
+    private static nint? _BackBoundsMinOffset;
 
     public ref Vector BackBoundsMin
     {
         get
         {
-            if (_BackBoundsMinOffset == -1) _BackBoundsMinOffset = Schema.GetOffset(0x289EB6136FC138A5);
-            return ref _Handle.AsRef<Vector>(_BackBoundsMinOffset);
+            _BackBoundsMinOffset = _BackBoundsMinOffset ?? Schema.GetOffset(0x289EB6136FC138A5);
+            return ref _Handle.AsRef<Vector>(_BackBoundsMinOffset!.Value);
         }
     }
-    private static nint _BackBoundsMaxOffset = -1;
+    private static nint? _BackBoundsMaxOffset;
 
     public ref Vector BackBoundsMax
     {
         get
         {
-            if (_BackBoundsMaxOffset == -1) _BackBoundsMaxOffset = Schema.GetOffset(0x289EB61379D4D01B);
-            return ref _Handle.AsRef<Vector>(_BackBoundsMaxOffset);
+            _BackBoundsMaxOffset = _BackBoundsMaxOffset ?? Schema.GetOffset(0x289EB61379D4D01B);
+            return ref _Handle.AsRef<Vector>(_BackBoundsMaxOffset!.Value);
         }
     }
-    private static nint _AjarDoorShouldntAlwaysOpenOffset = -1;
+    private static nint? _AjarDoorShouldntAlwaysOpenOffset;
 
     public ref bool AjarDoorShouldntAlwaysOpen
     {
         get
         {
-            if (_AjarDoorShouldntAlwaysOpenOffset == -1) _AjarDoorShouldntAlwaysOpenOffset = Schema.GetOffset(0x289EB6138B1717E1);
-            return ref _Handle.AsRef<bool>(_AjarDoorShouldntAlwaysOpenOffset);
+            _AjarDoorShouldntAlwaysOpenOffset = _AjarDoorShouldntAlwaysOpenOffset ?? Schema.GetOffset(0x289EB6138B1717E1);
+            return ref _Handle.AsRef<bool>(_AjarDoorShouldntAlwaysOpenOffset!.Value);
         }
     }
-    private static nint _EntityBlockerOffset = -1;
+    private static nint? _EntityBlockerOffset;
 
     public ref CHandle<CEntityBlocker> EntityBlocker
     {
         get
         {
-            if (_EntityBlockerOffset == -1) _EntityBlockerOffset = Schema.GetOffset(0x289EB6139318939A);
-            return ref _Handle.AsRef<CHandle<CEntityBlocker>>(_EntityBlockerOffset);
+            _EntityBlockerOffset = _EntityBlockerOffset ?? Schema.GetOffset(0x289EB6139318939A);
+            return ref _Handle.AsRef<CHandle<CEntityBlocker>>(_EntityBlockerOffset!.Value);
         }
     }
 

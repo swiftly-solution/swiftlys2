@@ -16,29 +16,29 @@ internal partial class CSteamAudioSceneDataImpl : SchemaClass, CSteamAudioSceneD
 {
     public CSteamAudioSceneDataImpl(nint handle) : base(handle) { }
 
-    private static nint _SceneOffset = -1;
+    private static nint? _SceneOffset;
     private SchemaUntypedField? _SceneInstance;
 
     public SchemaUntypedField Scene
     {
         get
         {
-            if (_SceneOffset == -1) _SceneOffset = Schema.GetOffset(0xC15D1E54DE1CF16D);
+            _SceneOffset = _SceneOffset ?? Schema.GetOffset(0xC15D1E54DE1CF16D);
             var instance = _SceneInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _SceneOffset);
+            instance.DangerousSetHandle(_Handle + _SceneOffset!.Value);
             return instance;
         }
     }
-    private static nint _StaticMeshOffset = -1;
+    private static nint? _StaticMeshOffset;
     private SchemaUntypedField? _StaticMeshInstance;
 
     public SchemaUntypedField StaticMesh
     {
         get
         {
-            if (_StaticMeshOffset == -1) _StaticMeshOffset = Schema.GetOffset(0xC15D1E54CF2DDB5C);
+            _StaticMeshOffset = _StaticMeshOffset ?? Schema.GetOffset(0xC15D1E54CF2DDB5C);
             var instance = _StaticMeshInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _StaticMeshOffset);
+            instance.DangerousSetHandle(_Handle + _StaticMeshOffset!.Value);
             return instance;
         }
     }

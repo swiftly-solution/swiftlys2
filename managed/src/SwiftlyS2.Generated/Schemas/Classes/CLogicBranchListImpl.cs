@@ -16,67 +16,67 @@ internal partial class CLogicBranchListImpl : CLogicalEntityImpl, CLogicBranchLi
 {
     public CLogicBranchListImpl(nint handle) : base(handle) { }
 
-    private static nint _LogicBranchNamesOffset = -1;
+    private static nint? _LogicBranchNamesOffset;
     private SchemaStringFixedArray? _LogicBranchNamesInstance;
 
     public ISchemaStringFixedArray LogicBranchNames
     {
         get
         {
-            if (_LogicBranchNamesOffset == -1) _LogicBranchNamesOffset = Schema.GetOffset(0xB21E12B82C1677D7);
+            _LogicBranchNamesOffset = _LogicBranchNamesOffset ?? Schema.GetOffset(0xB21E12B82C1677D7);
             var instance = _LogicBranchNamesInstance ??= new SchemaStringFixedArray(0, 0xB21E12B82C1677D7, 16, 8, 8);
-            instance.DangerousSetHandle(_Handle + _LogicBranchNamesOffset);
+            instance.DangerousSetHandle(_Handle + _LogicBranchNamesOffset!.Value);
             return instance;
         }
     }
-    private static nint _LogicBranchListOffset = -1;
+    private static nint? _LogicBranchListOffset;
 
     public ref CUtlVector<CHandle<CBaseEntity>> LogicBranchList
     {
         get
         {
-            if (_LogicBranchListOffset == -1) _LogicBranchListOffset = Schema.GetOffset(0xB21E12B8E4DEC285);
-            return ref _Handle.AsRef<CUtlVector<CHandle<CBaseEntity>>>(_LogicBranchListOffset);
+            _LogicBranchListOffset = _LogicBranchListOffset ?? Schema.GetOffset(0xB21E12B8E4DEC285);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CBaseEntity>>>(_LogicBranchListOffset!.Value);
         }
     }
-    private static nint _LastStateOffset = -1;
+    private static nint? _LastStateOffset;
 
     public ref CLogicBranchList__LogicBranchListenerLastState_t LastState
     {
         get
         {
-            if (_LastStateOffset == -1) _LastStateOffset = Schema.GetOffset(0xB21E12B89A391AC5);
-            return ref _Handle.AsRef<CLogicBranchList__LogicBranchListenerLastState_t>(_LastStateOffset);
+            _LastStateOffset = _LastStateOffset ?? Schema.GetOffset(0xB21E12B89A391AC5);
+            return ref _Handle.AsRef<CLogicBranchList__LogicBranchListenerLastState_t>(_LastStateOffset!.Value);
         }
     }
-    private static nint _OnAllTrueOffset = -1;
+    private static nint? _OnAllTrueOffset;
 
     public ref CEntityIOOutput OnAllTrue
     {
         get
         {
-            if (_OnAllTrueOffset == -1) _OnAllTrueOffset = Schema.GetOffset(0xB21E12B8419FFFAF);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnAllTrueOffset);
+            _OnAllTrueOffset = _OnAllTrueOffset ?? Schema.GetOffset(0xB21E12B8419FFFAF);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnAllTrueOffset!.Value);
         }
     }
-    private static nint _OnAllFalseOffset = -1;
+    private static nint? _OnAllFalseOffset;
 
     public ref CEntityIOOutput OnAllFalse
     {
         get
         {
-            if (_OnAllFalseOffset == -1) _OnAllFalseOffset = Schema.GetOffset(0xB21E12B86EFCD332);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnAllFalseOffset);
+            _OnAllFalseOffset = _OnAllFalseOffset ?? Schema.GetOffset(0xB21E12B86EFCD332);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnAllFalseOffset!.Value);
         }
     }
-    private static nint _OnMixedOffset = -1;
+    private static nint? _OnMixedOffset;
 
     public ref CEntityIOOutput OnMixed
     {
         get
         {
-            if (_OnMixedOffset == -1) _OnMixedOffset = Schema.GetOffset(0xB21E12B8EBC72437);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnMixedOffset);
+            _OnMixedOffset = _OnMixedOffset ?? Schema.GetOffset(0xB21E12B8EBC72437);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnMixedOffset!.Value);
         }
     }
 

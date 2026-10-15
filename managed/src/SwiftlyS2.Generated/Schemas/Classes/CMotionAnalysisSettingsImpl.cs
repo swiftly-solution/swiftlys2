@@ -16,71 +16,71 @@ internal partial class CMotionAnalysisSettingsImpl : SchemaClass, CMotionAnalysi
 {
     public CMotionAnalysisSettingsImpl(nint handle) : base(handle) { }
 
-    private static nint _DescriptionOffset = -1;
+    private static nint? _DescriptionOffset;
 
     public string Description
     {
         get
         {
-            if (_DescriptionOffset == -1) _DescriptionOffset = Schema.GetOffset(0xC14D070F678744E9);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_DescriptionOffset));
+            _DescriptionOffset = _DescriptionOffset ?? Schema.GetOffset(0xC14D070F678744E9);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_DescriptionOffset!.Value));
         }
         set
         {
-            if (_DescriptionOffset == -1) _DescriptionOffset = Schema.GetOffset(0xC14D070F678744E9);
-            Schema.SetCUtlString(_Handle, _DescriptionOffset, value);
+            _DescriptionOffset = _DescriptionOffset ?? Schema.GetOffset(0xC14D070F678744E9);
+            Schema.SetCUtlString(_Handle, _DescriptionOffset!.Value, value);
         }
     }
-    private static nint _LinearThresholdSlowOffset = -1;
+    private static nint? _LinearThresholdSlowOffset;
 
     public ref float LinearThresholdSlow
     {
         get
         {
-            if (_LinearThresholdSlowOffset == -1) _LinearThresholdSlowOffset = Schema.GetOffset(0xC14D070FC0566A80);
-            return ref _Handle.AsRef<float>(_LinearThresholdSlowOffset);
+            _LinearThresholdSlowOffset = _LinearThresholdSlowOffset ?? Schema.GetOffset(0xC14D070FC0566A80);
+            return ref _Handle.AsRef<float>(_LinearThresholdSlowOffset!.Value);
         }
     }
-    private static nint _LinearThresholdStoppedOffset = -1;
+    private static nint? _LinearThresholdStoppedOffset;
 
     public ref float LinearThresholdStopped
     {
         get
         {
-            if (_LinearThresholdStoppedOffset == -1) _LinearThresholdStoppedOffset = Schema.GetOffset(0xC14D070FEB2E8716);
-            return ref _Handle.AsRef<float>(_LinearThresholdStoppedOffset);
+            _LinearThresholdStoppedOffset = _LinearThresholdStoppedOffset ?? Schema.GetOffset(0xC14D070FEB2E8716);
+            return ref _Handle.AsRef<float>(_LinearThresholdStoppedOffset!.Value);
         }
     }
-    private static nint _AngularThresholdSlowOffset = -1;
+    private static nint? _AngularThresholdSlowOffset;
 
     public ref float AngularThresholdSlow
     {
         get
         {
-            if (_AngularThresholdSlowOffset == -1) _AngularThresholdSlowOffset = Schema.GetOffset(0xC14D070FF184D287);
-            return ref _Handle.AsRef<float>(_AngularThresholdSlowOffset);
+            _AngularThresholdSlowOffset = _AngularThresholdSlowOffset ?? Schema.GetOffset(0xC14D070FF184D287);
+            return ref _Handle.AsRef<float>(_AngularThresholdSlowOffset!.Value);
         }
     }
-    private static nint _AngularThresholdStoppedOffset = -1;
+    private static nint? _AngularThresholdStoppedOffset;
 
     public ref float AngularThresholdStopped
     {
         get
         {
-            if (_AngularThresholdStoppedOffset == -1) _AngularThresholdStoppedOffset = Schema.GetOffset(0xC14D070FF5DD6983);
-            return ref _Handle.AsRef<float>(_AngularThresholdStoppedOffset);
+            _AngularThresholdStoppedOffset = _AngularThresholdStoppedOffset ?? Schema.GetOffset(0xC14D070FF5DD6983);
+            return ref _Handle.AsRef<float>(_AngularThresholdStoppedOffset!.Value);
         }
     }
-    private static nint _FeetOffset = -1;
+    private static nint? _FeetOffset;
     private SchemaUntypedField? _FeetInstance;
 
     public SchemaUntypedField Feet
     {
         get
         {
-            if (_FeetOffset == -1) _FeetOffset = Schema.GetOffset(0xC14D070FF8E463D5);
+            _FeetOffset = _FeetOffset ?? Schema.GetOffset(0xC14D070FF8E463D5);
             var instance = _FeetInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _FeetOffset);
+            instance.DangerousSetHandle(_Handle + _FeetOffset!.Value);
             return instance;
         }
     }

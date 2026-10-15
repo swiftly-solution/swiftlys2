@@ -16,79 +16,79 @@ internal partial class CTextureSheetDoc_FrameImpl : SchemaClass, CTextureSheetDo
 {
     public CTextureSheetDoc_FrameImpl(nint handle) : base(handle) { }
 
-    private static nint _ImageNameOffset = -1;
+    private static nint? _ImageNameOffset;
 
     public string ImageName
     {
         get
         {
-            if (_ImageNameOffset == -1) _ImageNameOffset = Schema.GetOffset(0x764E70F034294EA4);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ImageNameOffset));
+            _ImageNameOffset = _ImageNameOffset ?? Schema.GetOffset(0x764E70F034294EA4);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ImageNameOffset!.Value));
         }
         set
         {
-            if (_ImageNameOffset == -1) _ImageNameOffset = Schema.GetOffset(0x764E70F034294EA4);
-            Schema.SetCUtlString(_Handle, _ImageNameOffset, value);
+            _ImageNameOffset = _ImageNameOffset ?? Schema.GetOffset(0x764E70F034294EA4);
+            Schema.SetCUtlString(_Handle, _ImageNameOffset!.Value, value);
         }
     }
-    private static nint _DisplayTimeOffset = -1;
+    private static nint? _DisplayTimeOffset;
 
     public ref float DisplayTime
     {
         get
         {
-            if (_DisplayTimeOffset == -1) _DisplayTimeOffset = Schema.GetOffset(0x764E70F03D1A1D08);
-            return ref _Handle.AsRef<float>(_DisplayTimeOffset);
+            _DisplayTimeOffset = _DisplayTimeOffset ?? Schema.GetOffset(0x764E70F03D1A1D08);
+            return ref _Handle.AsRef<float>(_DisplayTimeOffset!.Value);
         }
     }
-    private static nint _CropEnabledOffset = -1;
+    private static nint? _CropEnabledOffset;
 
     public ref bool CropEnabled
     {
         get
         {
-            if (_CropEnabledOffset == -1) _CropEnabledOffset = Schema.GetOffset(0x764E70F0F81160AC);
-            return ref _Handle.AsRef<bool>(_CropEnabledOffset);
+            _CropEnabledOffset = _CropEnabledOffset ?? Schema.GetOffset(0x764E70F0F81160AC);
+            return ref _Handle.AsRef<bool>(_CropEnabledOffset!.Value);
         }
     }
-    private static nint _SrcCropXStartOffset = -1;
+    private static nint? _SrcCropXStartOffset;
 
     public ref int SrcCropXStart
     {
         get
         {
-            if (_SrcCropXStartOffset == -1) _SrcCropXStartOffset = Schema.GetOffset(0x764E70F09B5F5983);
-            return ref _Handle.AsRef<int>(_SrcCropXStartOffset);
+            _SrcCropXStartOffset = _SrcCropXStartOffset ?? Schema.GetOffset(0x764E70F09B5F5983);
+            return ref _Handle.AsRef<int>(_SrcCropXStartOffset!.Value);
         }
     }
-    private static nint _SrcCropYStartOffset = -1;
+    private static nint? _SrcCropYStartOffset;
 
     public ref int SrcCropYStart
     {
         get
         {
-            if (_SrcCropYStartOffset == -1) _SrcCropYStartOffset = Schema.GetOffset(0x764E70F0779DC66E);
-            return ref _Handle.AsRef<int>(_SrcCropYStartOffset);
+            _SrcCropYStartOffset = _SrcCropYStartOffset ?? Schema.GetOffset(0x764E70F0779DC66E);
+            return ref _Handle.AsRef<int>(_SrcCropYStartOffset!.Value);
         }
     }
-    private static nint _SrcCropXEndOffset = -1;
+    private static nint? _SrcCropXEndOffset;
 
     public ref int SrcCropXEnd
     {
         get
         {
-            if (_SrcCropXEndOffset == -1) _SrcCropXEndOffset = Schema.GetOffset(0x764E70F0825EC076);
-            return ref _Handle.AsRef<int>(_SrcCropXEndOffset);
+            _SrcCropXEndOffset = _SrcCropXEndOffset ?? Schema.GetOffset(0x764E70F0825EC076);
+            return ref _Handle.AsRef<int>(_SrcCropXEndOffset!.Value);
         }
     }
-    private static nint _SrcCropYEndOffset = -1;
+    private static nint? _SrcCropYEndOffset;
 
     public ref int SrcCropYEnd
     {
         get
         {
-            if (_SrcCropYEndOffset == -1) _SrcCropYEndOffset = Schema.GetOffset(0x764E70F0D46EED7B);
-            return ref _Handle.AsRef<int>(_SrcCropYEndOffset);
+            _SrcCropYEndOffset = _SrcCropYEndOffset ?? Schema.GetOffset(0x764E70F0D46EED7B);
+            return ref _Handle.AsRef<int>(_SrcCropYEndOffset!.Value);
         }
     }
 

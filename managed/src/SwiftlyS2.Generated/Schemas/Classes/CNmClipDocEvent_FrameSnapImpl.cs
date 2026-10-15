@@ -16,14 +16,14 @@ internal partial class CNmClipDocEvent_FrameSnapImpl : CNmClipDocEventImpl, CNmC
 {
     public CNmClipDocEvent_FrameSnapImpl(nint handle) : base(handle) { }
 
-    private static nint _FrameSnapModeOffset = -1;
+    private static nint? _FrameSnapModeOffset;
 
     public ref NmFrameSnapEventMode_t FrameSnapMode
     {
         get
         {
-            if (_FrameSnapModeOffset == -1) _FrameSnapModeOffset = Schema.GetOffset(0x363FA52D6C68AC59);
-            return ref _Handle.AsRef<NmFrameSnapEventMode_t>(_FrameSnapModeOffset);
+            _FrameSnapModeOffset = _FrameSnapModeOffset ?? Schema.GetOffset(0x363FA52D6C68AC59);
+            return ref _Handle.AsRef<NmFrameSnapEventMode_t>(_FrameSnapModeOffset!.Value);
         }
     }
 

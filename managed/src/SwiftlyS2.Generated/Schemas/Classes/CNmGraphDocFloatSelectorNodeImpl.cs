@@ -16,44 +16,44 @@ internal partial class CNmGraphDocFloatSelectorNodeImpl : CNmGraphDocFlowNodeImp
 {
     public CNmGraphDocFloatSelectorNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _OptionsOffset = -1;
+    private static nint? _OptionsOffset;
 
     public ref CUtlVector<CNmGraphDocFloatSelectorNode__Option_t> Options
     {
         get
         {
-            if (_OptionsOffset == -1) _OptionsOffset = Schema.GetOffset(0x4144E144DC407EC5);
-            return ref _Handle.AsRef<CUtlVector<CNmGraphDocFloatSelectorNode__Option_t>>(_OptionsOffset);
+            _OptionsOffset = _OptionsOffset ?? Schema.GetOffset(0x4144E144DC407EC5);
+            return ref _Handle.AsRef<CUtlVector<CNmGraphDocFloatSelectorNode__Option_t>>(_OptionsOffset!.Value);
         }
     }
-    private static nint _DefaultValueOffset = -1;
+    private static nint? _DefaultValueOffset;
 
     public ref float DefaultValue
     {
         get
         {
-            if (_DefaultValueOffset == -1) _DefaultValueOffset = Schema.GetOffset(0x4144E144700AB429);
-            return ref _Handle.AsRef<float>(_DefaultValueOffset);
+            _DefaultValueOffset = _DefaultValueOffset ?? Schema.GetOffset(0x4144E144700AB429);
+            return ref _Handle.AsRef<float>(_DefaultValueOffset!.Value);
         }
     }
-    private static nint _EasingOffset = -1;
+    private static nint? _EasingOffset;
 
     public ref NmEasingOperation_t Easing
     {
         get
         {
-            if (_EasingOffset == -1) _EasingOffset = Schema.GetOffset(0x4144E14411B219C8);
-            return ref _Handle.AsRef<NmEasingOperation_t>(_EasingOffset);
+            _EasingOffset = _EasingOffset ?? Schema.GetOffset(0x4144E14411B219C8);
+            return ref _Handle.AsRef<NmEasingOperation_t>(_EasingOffset!.Value);
         }
     }
-    private static nint _EaseTimeOffset = -1;
+    private static nint? _EaseTimeOffset;
 
     public ref float EaseTime
     {
         get
         {
-            if (_EaseTimeOffset == -1) _EaseTimeOffset = Schema.GetOffset(0x4144E144DC9CAB2E);
-            return ref _Handle.AsRef<float>(_EaseTimeOffset);
+            _EaseTimeOffset = _EaseTimeOffset ?? Schema.GetOffset(0x4144E144DC9CAB2E);
+            return ref _Handle.AsRef<float>(_EaseTimeOffset!.Value);
         }
     }
 

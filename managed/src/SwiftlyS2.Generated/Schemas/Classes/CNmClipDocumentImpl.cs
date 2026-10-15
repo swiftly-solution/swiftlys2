@@ -16,149 +16,149 @@ internal partial class CNmClipDocumentImpl : CNmAnimDocumentImpl, CNmClipDocumen
 {
     public CNmClipDocumentImpl(nint handle) : base(handle) { }
 
-    private static nint _SourceFilenameOffset = -1;
+    private static nint? _SourceFilenameOffset;
 
     public string SourceFilename
     {
         get
         {
-            if (_SourceFilenameOffset == -1) _SourceFilenameOffset = Schema.GetOffset(0x64AF70BC840BDD4D);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_SourceFilenameOffset));
+            _SourceFilenameOffset = _SourceFilenameOffset ?? Schema.GetOffset(0x64AF70BC840BDD4D);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_SourceFilenameOffset!.Value));
         }
         set
         {
-            if (_SourceFilenameOffset == -1) _SourceFilenameOffset = Schema.GetOffset(0x64AF70BC840BDD4D);
-            Schema.SetCUtlString(_Handle, _SourceFilenameOffset, value);
+            _SourceFilenameOffset = _SourceFilenameOffset ?? Schema.GetOffset(0x64AF70BC840BDD4D);
+            Schema.SetCUtlString(_Handle, _SourceFilenameOffset!.Value, value);
         }
     }
-    private static nint _AnimationSkeletonNameOffset = -1;
+    private static nint? _AnimationSkeletonNameOffset;
 
     public string AnimationSkeletonName
     {
         get
         {
-            if (_AnimationSkeletonNameOffset == -1) _AnimationSkeletonNameOffset = Schema.GetOffset(0x64AF70BC30EB5925);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_AnimationSkeletonNameOffset));
+            _AnimationSkeletonNameOffset = _AnimationSkeletonNameOffset ?? Schema.GetOffset(0x64AF70BC30EB5925);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_AnimationSkeletonNameOffset!.Value));
         }
         set
         {
-            if (_AnimationSkeletonNameOffset == -1) _AnimationSkeletonNameOffset = Schema.GetOffset(0x64AF70BC30EB5925);
-            Schema.SetCUtlString(_Handle, _AnimationSkeletonNameOffset, value);
+            _AnimationSkeletonNameOffset = _AnimationSkeletonNameOffset ?? Schema.GetOffset(0x64AF70BC30EB5925);
+            Schema.SetCUtlString(_Handle, _AnimationSkeletonNameOffset!.Value, value);
         }
     }
-    private static nint _SecondaryAnimationSkeletonNamesOffset = -1;
+    private static nint? _SecondaryAnimationSkeletonNamesOffset;
 
     public ref CUtlVector<CUtlString> SecondaryAnimationSkeletonNames
     {
         get
         {
-            if (_SecondaryAnimationSkeletonNamesOffset == -1) _SecondaryAnimationSkeletonNamesOffset = Schema.GetOffset(0x64AF70BC4CF777EE);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_SecondaryAnimationSkeletonNamesOffset);
+            _SecondaryAnimationSkeletonNamesOffset = _SecondaryAnimationSkeletonNamesOffset ?? Schema.GetOffset(0x64AF70BC4CF777EE);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_SecondaryAnimationSkeletonNamesOffset!.Value);
         }
     }
-    private static nint _EventTracksOffset = -1;
+    private static nint? _EventTracksOffset;
 
     public ref CUtlLeanVector<CNmClipDocEventTrack, int> EventTracks
     {
         get
         {
-            if (_EventTracksOffset == -1) _EventTracksOffset = Schema.GetOffset(0x64AF70BCF21973A7);
-            return ref _Handle.AsRef<CUtlLeanVector<CNmClipDocEventTrack, int>>(_EventTracksOffset);
+            _EventTracksOffset = _EventTracksOffset ?? Schema.GetOffset(0x64AF70BCF21973A7);
+            return ref _Handle.AsRef<CUtlLeanVector<CNmClipDocEventTrack, int>>(_EventTracksOffset!.Value);
         }
     }
-    private static nint _StartFrameOffset = -1;
+    private static nint? _StartFrameOffset;
 
     public ref int StartFrame
     {
         get
         {
-            if (_StartFrameOffset == -1) _StartFrameOffset = Schema.GetOffset(0x64AF70BC9134F088);
-            return ref _Handle.AsRef<int>(_StartFrameOffset);
+            _StartFrameOffset = _StartFrameOffset ?? Schema.GetOffset(0x64AF70BC9134F088);
+            return ref _Handle.AsRef<int>(_StartFrameOffset!.Value);
         }
     }
-    private static nint _EndFrameOffset = -1;
+    private static nint? _EndFrameOffset;
 
     public ref int EndFrame
     {
         get
         {
-            if (_EndFrameOffset == -1) _EndFrameOffset = Schema.GetOffset(0x64AF70BCEA91BD07);
-            return ref _Handle.AsRef<int>(_EndFrameOffset);
+            _EndFrameOffset = _EndFrameOffset ?? Schema.GetOffset(0x64AF70BCEA91BD07);
+            return ref _Handle.AsRef<int>(_EndFrameOffset!.Value);
         }
     }
-    private static nint _DurationOverrideSecondsOffset = -1;
+    private static nint? _DurationOverrideSecondsOffset;
 
     public ref float DurationOverrideSeconds
     {
         get
         {
-            if (_DurationOverrideSecondsOffset == -1) _DurationOverrideSecondsOffset = Schema.GetOffset(0x64AF70BCC8038B38);
-            return ref _Handle.AsRef<float>(_DurationOverrideSecondsOffset);
+            _DurationOverrideSecondsOffset = _DurationOverrideSecondsOffset ?? Schema.GetOffset(0x64AF70BCC8038B38);
+            return ref _Handle.AsRef<float>(_DurationOverrideSecondsOffset!.Value);
         }
     }
-    private static nint _AdditiveTypeOffset = -1;
+    private static nint? _AdditiveTypeOffset;
 
     public ref CNmClipDocument__AdditiveType_t AdditiveType
     {
         get
         {
-            if (_AdditiveTypeOffset == -1) _AdditiveTypeOffset = Schema.GetOffset(0x64AF70BC9D63C2ED);
-            return ref _Handle.AsRef<CNmClipDocument__AdditiveType_t>(_AdditiveTypeOffset);
+            _AdditiveTypeOffset = _AdditiveTypeOffset ?? Schema.GetOffset(0x64AF70BC9D63C2ED);
+            return ref _Handle.AsRef<CNmClipDocument__AdditiveType_t>(_AdditiveTypeOffset!.Value);
         }
     }
-    private static nint _AdditiveBaseFilenameOffset = -1;
+    private static nint? _AdditiveBaseFilenameOffset;
 
     public string AdditiveBaseFilename
     {
         get
         {
-            if (_AdditiveBaseFilenameOffset == -1) _AdditiveBaseFilenameOffset = Schema.GetOffset(0x64AF70BCF128DF4D);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_AdditiveBaseFilenameOffset));
+            _AdditiveBaseFilenameOffset = _AdditiveBaseFilenameOffset ?? Schema.GetOffset(0x64AF70BCF128DF4D);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_AdditiveBaseFilenameOffset!.Value));
         }
         set
         {
-            if (_AdditiveBaseFilenameOffset == -1) _AdditiveBaseFilenameOffset = Schema.GetOffset(0x64AF70BCF128DF4D);
-            Schema.SetCUtlString(_Handle, _AdditiveBaseFilenameOffset, value);
+            _AdditiveBaseFilenameOffset = _AdditiveBaseFilenameOffset ?? Schema.GetOffset(0x64AF70BCF128DF4D);
+            Schema.SetCUtlString(_Handle, _AdditiveBaseFilenameOffset!.Value, value);
         }
     }
-    private static nint _AdditiveBaseFrameOffset = -1;
+    private static nint? _AdditiveBaseFrameOffset;
 
     public ref CNmClipDocument__AdditiveBaseFrame_t AdditiveBaseFrame
     {
         get
         {
-            if (_AdditiveBaseFrameOffset == -1) _AdditiveBaseFrameOffset = Schema.GetOffset(0x64AF70BC97E3E7E5);
-            return ref _Handle.AsRef<CNmClipDocument__AdditiveBaseFrame_t>(_AdditiveBaseFrameOffset);
+            _AdditiveBaseFrameOffset = _AdditiveBaseFrameOffset ?? Schema.GetOffset(0x64AF70BC97E3E7E5);
+            return ref _Handle.AsRef<CNmClipDocument__AdditiveBaseFrame_t>(_AdditiveBaseFrameOffset!.Value);
         }
     }
-    private static nint _AdditiveBaseFrameIdxOffset = -1;
+    private static nint? _AdditiveBaseFrameIdxOffset;
 
     public ref int AdditiveBaseFrameIdx
     {
         get
         {
-            if (_AdditiveBaseFrameIdxOffset == -1) _AdditiveBaseFrameIdxOffset = Schema.GetOffset(0x64AF70BC09D8E1F4);
-            return ref _Handle.AsRef<int>(_AdditiveBaseFrameIdxOffset);
+            _AdditiveBaseFrameIdxOffset = _AdditiveBaseFrameIdxOffset ?? Schema.GetOffset(0x64AF70BC09D8E1F4);
+            return ref _Handle.AsRef<int>(_AdditiveBaseFrameIdxOffset!.Value);
         }
     }
-    private static nint _UseReferencePoseForSecondaryAnimAdditivesOffset = -1;
+    private static nint? _UseReferencePoseForSecondaryAnimAdditivesOffset;
 
     public ref bool UseReferencePoseForSecondaryAnimAdditives
     {
         get
         {
-            if (_UseReferencePoseForSecondaryAnimAdditivesOffset == -1) _UseReferencePoseForSecondaryAnimAdditivesOffset = Schema.GetOffset(0x64AF70BCC26A7AA3);
-            return ref _Handle.AsRef<bool>(_UseReferencePoseForSecondaryAnimAdditivesOffset);
+            _UseReferencePoseForSecondaryAnimAdditivesOffset = _UseReferencePoseForSecondaryAnimAdditivesOffset ?? Schema.GetOffset(0x64AF70BCC26A7AA3);
+            return ref _Handle.AsRef<bool>(_UseReferencePoseForSecondaryAnimAdditivesOffset!.Value);
         }
     }
-    private static nint _BonesToSampleInModelSpaceOffset = -1;
+    private static nint? _BonesToSampleInModelSpaceOffset;
 
     public ref CUtlVector<CUtlString> BonesToSampleInModelSpace
     {
         get
         {
-            if (_BonesToSampleInModelSpaceOffset == -1) _BonesToSampleInModelSpaceOffset = Schema.GetOffset(0x64AF70BC8BF63931);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_BonesToSampleInModelSpaceOffset);
+            _BonesToSampleInModelSpaceOffset = _BonesToSampleInModelSpaceOffset ?? Schema.GetOffset(0x64AF70BC8BF63931);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_BonesToSampleInModelSpaceOffset!.Value);
         }
     }
 

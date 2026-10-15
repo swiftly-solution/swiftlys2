@@ -16,293 +16,293 @@ internal partial class CFuncShatterglassImpl : CBaseModelEntityImpl, CFuncShatte
 {
     public CFuncShatterglassImpl(nint handle) : base(handle) { }
 
-    private static nint _MatPanelTransformOffset = -1;
+    private static nint? _MatPanelTransformOffset;
 
     public ref matrix3x4_t MatPanelTransform
     {
         get
         {
-            if (_MatPanelTransformOffset == -1) _MatPanelTransformOffset = Schema.GetOffset(0xB755F0FB82550F23);
-            return ref _Handle.AsRef<matrix3x4_t>(_MatPanelTransformOffset);
+            _MatPanelTransformOffset = _MatPanelTransformOffset ?? Schema.GetOffset(0xB755F0FB82550F23);
+            return ref _Handle.AsRef<matrix3x4_t>(_MatPanelTransformOffset!.Value);
         }
     }
-    private static nint _MatPanelTransformWsTempOffset = -1;
+    private static nint? _MatPanelTransformWsTempOffset;
 
     public ref matrix3x4_t MatPanelTransformWsTemp
     {
         get
         {
-            if (_MatPanelTransformWsTempOffset == -1) _MatPanelTransformWsTempOffset = Schema.GetOffset(0xB755F0FB74E9192F);
-            return ref _Handle.AsRef<matrix3x4_t>(_MatPanelTransformWsTempOffset);
+            _MatPanelTransformWsTempOffset = _MatPanelTransformWsTempOffset ?? Schema.GetOffset(0xB755F0FB74E9192F);
+            return ref _Handle.AsRef<matrix3x4_t>(_MatPanelTransformWsTempOffset!.Value);
         }
     }
-    private static nint _ShatterGlassShardsOffset = -1;
+    private static nint? _ShatterGlassShardsOffset;
 
     public ref CUtlVector<uint> ShatterGlassShards
     {
         get
         {
-            if (_ShatterGlassShardsOffset == -1) _ShatterGlassShardsOffset = Schema.GetOffset(0xB755F0FBCC0BC437);
-            return ref _Handle.AsRef<CUtlVector<uint>>(_ShatterGlassShardsOffset);
+            _ShatterGlassShardsOffset = _ShatterGlassShardsOffset ?? Schema.GetOffset(0xB755F0FBCC0BC437);
+            return ref _Handle.AsRef<CUtlVector<uint>>(_ShatterGlassShardsOffset!.Value);
         }
     }
-    private static nint _PanelSizeOffset = -1;
+    private static nint? _PanelSizeOffset;
 
     public ref Vector2D PanelSize
     {
         get
         {
-            if (_PanelSizeOffset == -1) _PanelSizeOffset = Schema.GetOffset(0xB755F0FBC54D327C);
-            return ref _Handle.AsRef<Vector2D>(_PanelSizeOffset);
+            _PanelSizeOffset = _PanelSizeOffset ?? Schema.GetOffset(0xB755F0FBC54D327C);
+            return ref _Handle.AsRef<Vector2D>(_PanelSizeOffset!.Value);
         }
     }
-    private static nint _LastShatterSoundEmitTimeOffset = -1;
+    private static nint? _LastShatterSoundEmitTimeOffset;
     private GameTime_tImpl? _LastShatterSoundEmitTimeInstance;
 
     public GameTime_t LastShatterSoundEmitTime
     {
         get
         {
-            if (_LastShatterSoundEmitTimeOffset == -1) _LastShatterSoundEmitTimeOffset = Schema.GetOffset(0xB755F0FB1708F9B9);
+            _LastShatterSoundEmitTimeOffset = _LastShatterSoundEmitTimeOffset ?? Schema.GetOffset(0xB755F0FB1708F9B9);
             var instance = _LastShatterSoundEmitTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _LastShatterSoundEmitTimeOffset);
+            instance.DangerousSetHandle(_Handle + _LastShatterSoundEmitTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _LastCleanupTimeOffset = -1;
+    private static nint? _LastCleanupTimeOffset;
     private GameTime_tImpl? _LastCleanupTimeInstance;
 
     public GameTime_t LastCleanupTime
     {
         get
         {
-            if (_LastCleanupTimeOffset == -1) _LastCleanupTimeOffset = Schema.GetOffset(0xB755F0FBB24E6FB0);
+            _LastCleanupTimeOffset = _LastCleanupTimeOffset ?? Schema.GetOffset(0xB755F0FBB24E6FB0);
             var instance = _LastCleanupTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _LastCleanupTimeOffset);
+            instance.DangerousSetHandle(_Handle + _LastCleanupTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _InitAtTimeOffset = -1;
+    private static nint? _InitAtTimeOffset;
     private GameTime_tImpl? _InitAtTimeInstance;
 
     public GameTime_t InitAtTime
     {
         get
         {
-            if (_InitAtTimeOffset == -1) _InitAtTimeOffset = Schema.GetOffset(0xB755F0FBBBC7C1A5);
+            _InitAtTimeOffset = _InitAtTimeOffset ?? Schema.GetOffset(0xB755F0FBBBC7C1A5);
             var instance = _InitAtTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _InitAtTimeOffset);
+            instance.DangerousSetHandle(_Handle + _InitAtTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _GlassThicknessOffset = -1;
+    private static nint? _GlassThicknessOffset;
 
     public ref float GlassThickness
     {
         get
         {
-            if (_GlassThicknessOffset == -1) _GlassThicknessOffset = Schema.GetOffset(0xB755F0FB59A7355D);
-            return ref _Handle.AsRef<float>(_GlassThicknessOffset);
+            _GlassThicknessOffset = _GlassThicknessOffset ?? Schema.GetOffset(0xB755F0FB59A7355D);
+            return ref _Handle.AsRef<float>(_GlassThicknessOffset!.Value);
         }
     }
-    private static nint _SpawnInvulnerabilityOffset = -1;
+    private static nint? _SpawnInvulnerabilityOffset;
 
     public ref float SpawnInvulnerability
     {
         get
         {
-            if (_SpawnInvulnerabilityOffset == -1) _SpawnInvulnerabilityOffset = Schema.GetOffset(0xB755F0FB2B3B17C1);
-            return ref _Handle.AsRef<float>(_SpawnInvulnerabilityOffset);
+            _SpawnInvulnerabilityOffset = _SpawnInvulnerabilityOffset ?? Schema.GetOffset(0xB755F0FB2B3B17C1);
+            return ref _Handle.AsRef<float>(_SpawnInvulnerabilityOffset!.Value);
         }
     }
-    private static nint _BreakSilentOffset = -1;
+    private static nint? _BreakSilentOffset;
 
     public ref bool BreakSilent
     {
         get
         {
-            if (_BreakSilentOffset == -1) _BreakSilentOffset = Schema.GetOffset(0xB755F0FB87C0E711);
-            return ref _Handle.AsRef<bool>(_BreakSilentOffset);
+            _BreakSilentOffset = _BreakSilentOffset ?? Schema.GetOffset(0xB755F0FB87C0E711);
+            return ref _Handle.AsRef<bool>(_BreakSilentOffset!.Value);
         }
     }
-    private static nint _BreakShardlessOffset = -1;
+    private static nint? _BreakShardlessOffset;
 
     public ref bool BreakShardless
     {
         get
         {
-            if (_BreakShardlessOffset == -1) _BreakShardlessOffset = Schema.GetOffset(0xB755F0FBC509E199);
-            return ref _Handle.AsRef<bool>(_BreakShardlessOffset);
+            _BreakShardlessOffset = _BreakShardlessOffset ?? Schema.GetOffset(0xB755F0FBC509E199);
+            return ref _Handle.AsRef<bool>(_BreakShardlessOffset!.Value);
         }
     }
-    private static nint _BrokenOffset = -1;
+    private static nint? _BrokenOffset;
 
     public ref bool Broken
     {
         get
         {
-            if (_BrokenOffset == -1) _BrokenOffset = Schema.GetOffset(0xB755F0FB06654200);
-            return ref _Handle.AsRef<bool>(_BrokenOffset);
+            _BrokenOffset = _BrokenOffset ?? Schema.GetOffset(0xB755F0FB06654200);
+            return ref _Handle.AsRef<bool>(_BrokenOffset!.Value);
         }
     }
-    private static nint _GlassNavIgnoreOffset = -1;
+    private static nint? _GlassNavIgnoreOffset;
 
     public ref bool GlassNavIgnore
     {
         get
         {
-            if (_GlassNavIgnoreOffset == -1) _GlassNavIgnoreOffset = Schema.GetOffset(0xB755F0FBD9034606);
-            return ref _Handle.AsRef<bool>(_GlassNavIgnoreOffset);
+            _GlassNavIgnoreOffset = _GlassNavIgnoreOffset ?? Schema.GetOffset(0xB755F0FBD9034606);
+            return ref _Handle.AsRef<bool>(_GlassNavIgnoreOffset!.Value);
         }
     }
-    private static nint _GlassInFrameOffset = -1;
+    private static nint? _GlassInFrameOffset;
 
     public ref bool GlassInFrame
     {
         get
         {
-            if (_GlassInFrameOffset == -1) _GlassInFrameOffset = Schema.GetOffset(0xB755F0FBEB8CF645);
-            return ref _Handle.AsRef<bool>(_GlassInFrameOffset);
+            _GlassInFrameOffset = _GlassInFrameOffset ?? Schema.GetOffset(0xB755F0FBEB8CF645);
+            return ref _Handle.AsRef<bool>(_GlassInFrameOffset!.Value);
         }
     }
-    private static nint _StartBrokenOffset = -1;
+    private static nint? _StartBrokenOffset;
 
     public ref bool StartBroken
     {
         get
         {
-            if (_StartBrokenOffset == -1) _StartBrokenOffset = Schema.GetOffset(0xB755F0FBEA039156);
-            return ref _Handle.AsRef<bool>(_StartBrokenOffset);
+            _StartBrokenOffset = _StartBrokenOffset ?? Schema.GetOffset(0xB755F0FBEA039156);
+            return ref _Handle.AsRef<bool>(_StartBrokenOffset!.Value);
         }
     }
-    private static nint _InitialDamageTypeOffset = -1;
+    private static nint? _InitialDamageTypeOffset;
 
     public ref byte InitialDamageType
     {
         get
         {
-            if (_InitialDamageTypeOffset == -1) _InitialDamageTypeOffset = Schema.GetOffset(0xB755F0FBED01D1E1);
-            return ref _Handle.AsRef<byte>(_InitialDamageTypeOffset);
+            _InitialDamageTypeOffset = _InitialDamageTypeOffset ?? Schema.GetOffset(0xB755F0FBED01D1E1);
+            return ref _Handle.AsRef<byte>(_InitialDamageTypeOffset!.Value);
         }
     }
-    private static nint _DamagePositioningEntityName01Offset = -1;
+    private static nint? _DamagePositioningEntityName01Offset;
 
     public string DamagePositioningEntityName01
     {
         get
         {
-            if (_DamagePositioningEntityName01Offset == -1) _DamagePositioningEntityName01Offset = Schema.GetOffset(0xB755F0FBADF2770D);
-            return Schema.GetString(_Handle.Read<nint>(_DamagePositioningEntityName01Offset));
+            _DamagePositioningEntityName01Offset = _DamagePositioningEntityName01Offset ?? Schema.GetOffset(0xB755F0FBADF2770D);
+            return Schema.GetString(_Handle.Read<nint>(_DamagePositioningEntityName01Offset!.Value));
         }
         set
         {
-            if (_DamagePositioningEntityName01Offset == -1) _DamagePositioningEntityName01Offset = Schema.GetOffset(0xB755F0FBADF2770D);
-            Schema.SetString(_Handle, _DamagePositioningEntityName01Offset, value);
+            _DamagePositioningEntityName01Offset = _DamagePositioningEntityName01Offset ?? Schema.GetOffset(0xB755F0FBADF2770D);
+            Schema.SetString(_Handle, _DamagePositioningEntityName01Offset!.Value, value);
         }
     }
-    private static nint _DamagePositioningEntityName02Offset = -1;
+    private static nint? _DamagePositioningEntityName02Offset;
 
     public string DamagePositioningEntityName02
     {
         get
         {
-            if (_DamagePositioningEntityName02Offset == -1) _DamagePositioningEntityName02Offset = Schema.GetOffset(0xB755F0FBAAF27254);
-            return Schema.GetString(_Handle.Read<nint>(_DamagePositioningEntityName02Offset));
+            _DamagePositioningEntityName02Offset = _DamagePositioningEntityName02Offset ?? Schema.GetOffset(0xB755F0FBAAF27254);
+            return Schema.GetString(_Handle.Read<nint>(_DamagePositioningEntityName02Offset!.Value));
         }
         set
         {
-            if (_DamagePositioningEntityName02Offset == -1) _DamagePositioningEntityName02Offset = Schema.GetOffset(0xB755F0FBAAF27254);
-            Schema.SetString(_Handle, _DamagePositioningEntityName02Offset, value);
+            _DamagePositioningEntityName02Offset = _DamagePositioningEntityName02Offset ?? Schema.GetOffset(0xB755F0FBAAF27254);
+            Schema.SetString(_Handle, _DamagePositioningEntityName02Offset!.Value, value);
         }
     }
-    private static nint _DamagePositioningEntityName03Offset = -1;
+    private static nint? _DamagePositioningEntityName03Offset;
 
     public string DamagePositioningEntityName03
     {
         get
         {
-            if (_DamagePositioningEntityName03Offset == -1) _DamagePositioningEntityName03Offset = Schema.GetOffset(0xB755F0FBABF273E7);
-            return Schema.GetString(_Handle.Read<nint>(_DamagePositioningEntityName03Offset));
+            _DamagePositioningEntityName03Offset = _DamagePositioningEntityName03Offset ?? Schema.GetOffset(0xB755F0FBABF273E7);
+            return Schema.GetString(_Handle.Read<nint>(_DamagePositioningEntityName03Offset!.Value));
         }
         set
         {
-            if (_DamagePositioningEntityName03Offset == -1) _DamagePositioningEntityName03Offset = Schema.GetOffset(0xB755F0FBABF273E7);
-            Schema.SetString(_Handle, _DamagePositioningEntityName03Offset, value);
+            _DamagePositioningEntityName03Offset = _DamagePositioningEntityName03Offset ?? Schema.GetOffset(0xB755F0FBABF273E7);
+            Schema.SetString(_Handle, _DamagePositioningEntityName03Offset!.Value, value);
         }
     }
-    private static nint _DamagePositioningEntityName04Offset = -1;
+    private static nint? _DamagePositioningEntityName04Offset;
 
     public string DamagePositioningEntityName04
     {
         get
         {
-            if (_DamagePositioningEntityName04Offset == -1) _DamagePositioningEntityName04Offset = Schema.GetOffset(0xB755F0FBA8F26F2E);
-            return Schema.GetString(_Handle.Read<nint>(_DamagePositioningEntityName04Offset));
+            _DamagePositioningEntityName04Offset = _DamagePositioningEntityName04Offset ?? Schema.GetOffset(0xB755F0FBA8F26F2E);
+            return Schema.GetString(_Handle.Read<nint>(_DamagePositioningEntityName04Offset!.Value));
         }
         set
         {
-            if (_DamagePositioningEntityName04Offset == -1) _DamagePositioningEntityName04Offset = Schema.GetOffset(0xB755F0FBA8F26F2E);
-            Schema.SetString(_Handle, _DamagePositioningEntityName04Offset, value);
+            _DamagePositioningEntityName04Offset = _DamagePositioningEntityName04Offset ?? Schema.GetOffset(0xB755F0FBA8F26F2E);
+            Schema.SetString(_Handle, _DamagePositioningEntityName04Offset!.Value, value);
         }
     }
-    private static nint _InitialDamagePositionsOffset = -1;
+    private static nint? _InitialDamagePositionsOffset;
 
     public ref CUtlVector<Vector> InitialDamagePositions
     {
         get
         {
-            if (_InitialDamagePositionsOffset == -1) _InitialDamagePositionsOffset = Schema.GetOffset(0xB755F0FB6D8C7F56);
-            return ref _Handle.AsRef<CUtlVector<Vector>>(_InitialDamagePositionsOffset);
+            _InitialDamagePositionsOffset = _InitialDamagePositionsOffset ?? Schema.GetOffset(0xB755F0FB6D8C7F56);
+            return ref _Handle.AsRef<CUtlVector<Vector>>(_InitialDamagePositionsOffset!.Value);
         }
     }
-    private static nint _ExtraDamagePositionsOffset = -1;
+    private static nint? _ExtraDamagePositionsOffset;
 
     public ref CUtlVector<Vector> ExtraDamagePositions
     {
         get
         {
-            if (_ExtraDamagePositionsOffset == -1) _ExtraDamagePositionsOffset = Schema.GetOffset(0xB755F0FB94D38DA0);
-            return ref _Handle.AsRef<CUtlVector<Vector>>(_ExtraDamagePositionsOffset);
+            _ExtraDamagePositionsOffset = _ExtraDamagePositionsOffset ?? Schema.GetOffset(0xB755F0FB94D38DA0);
+            return ref _Handle.AsRef<CUtlVector<Vector>>(_ExtraDamagePositionsOffset!.Value);
         }
     }
-    private static nint _InitialPanelVerticesOffset = -1;
+    private static nint? _InitialPanelVerticesOffset;
 
     public ref CUtlVector<Vector4D> InitialPanelVertices
     {
         get
         {
-            if (_InitialPanelVerticesOffset == -1) _InitialPanelVerticesOffset = Schema.GetOffset(0xB755F0FB39117F58);
-            return ref _Handle.AsRef<CUtlVector<Vector4D>>(_InitialPanelVerticesOffset);
+            _InitialPanelVerticesOffset = _InitialPanelVerticesOffset ?? Schema.GetOffset(0xB755F0FB39117F58);
+            return ref _Handle.AsRef<CUtlVector<Vector4D>>(_InitialPanelVerticesOffset!.Value);
         }
     }
-    private static nint _OnBrokenOffset = -1;
+    private static nint? _OnBrokenOffset;
 
     public ref CEntityIOOutput OnBroken
     {
         get
         {
-            if (_OnBrokenOffset == -1) _OnBrokenOffset = Schema.GetOffset(0xB755F0FB961F60E5);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnBrokenOffset);
+            _OnBrokenOffset = _OnBrokenOffset ?? Schema.GetOffset(0xB755F0FB961F60E5);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnBrokenOffset!.Value);
         }
     }
-    private static nint _SurfaceTypeOffset = -1;
+    private static nint? _SurfaceTypeOffset;
 
     public ref byte SurfaceType
     {
         get
         {
-            if (_SurfaceTypeOffset == -1) _SurfaceTypeOffset = Schema.GetOffset(0xB755F0FB3A6DDFE7);
-            return ref _Handle.AsRef<byte>(_SurfaceTypeOffset);
+            _SurfaceTypeOffset = _SurfaceTypeOffset ?? Schema.GetOffset(0xB755F0FB3A6DDFE7);
+            return ref _Handle.AsRef<byte>(_SurfaceTypeOffset!.Value);
         }
     }
-    private static nint _MaterialDamageBaseOffset = -1;
+    private static nint? _MaterialDamageBaseOffset;
 
     public ref CStrongHandle<InfoForResourceTypeIMaterial2> MaterialDamageBase
     {
         get
         {
-            if (_MaterialDamageBaseOffset == -1) _MaterialDamageBaseOffset = Schema.GetOffset(0xB755F0FB3000A1C6);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_MaterialDamageBaseOffset);
+            _MaterialDamageBaseOffset = _MaterialDamageBaseOffset ?? Schema.GetOffset(0xB755F0FB3000A1C6);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_MaterialDamageBaseOffset!.Value);
         }
     }
 

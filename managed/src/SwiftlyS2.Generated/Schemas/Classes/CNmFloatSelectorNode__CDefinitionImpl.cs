@@ -16,60 +16,60 @@ internal partial class CNmFloatSelectorNode__CDefinitionImpl : CNmFloatValueNode
 {
     public CNmFloatSelectorNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint _ConditionNodeIndicesOffset = -1;
+    private static nint? _ConditionNodeIndicesOffset;
     private SchemaUntypedField? _ConditionNodeIndicesInstance;
 
     public SchemaUntypedField ConditionNodeIndices
     {
         get
         {
-            if (_ConditionNodeIndicesOffset == -1) _ConditionNodeIndicesOffset = Schema.GetOffset(0xA387F8324A144D0F);
+            _ConditionNodeIndicesOffset = _ConditionNodeIndicesOffset ?? Schema.GetOffset(0xA387F8324A144D0F);
             var instance = _ConditionNodeIndicesInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ConditionNodeIndicesOffset);
+            instance.DangerousSetHandle(_Handle + _ConditionNodeIndicesOffset!.Value);
             return instance;
         }
     }
-    private static nint _ValuesOffset = -1;
+    private static nint? _ValuesOffset;
     private SchemaUntypedField? _ValuesInstance;
 
     public SchemaUntypedField Values
     {
         get
         {
-            if (_ValuesOffset == -1) _ValuesOffset = Schema.GetOffset(0xA387F832FBEDDADB);
+            _ValuesOffset = _ValuesOffset ?? Schema.GetOffset(0xA387F832FBEDDADB);
             var instance = _ValuesInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ValuesOffset);
+            instance.DangerousSetHandle(_Handle + _ValuesOffset!.Value);
             return instance;
         }
     }
-    private static nint _DefaultValueOffset = -1;
+    private static nint? _DefaultValueOffset;
 
     public ref float DefaultValue
     {
         get
         {
-            if (_DefaultValueOffset == -1) _DefaultValueOffset = Schema.GetOffset(0xA387F832700AB429);
-            return ref _Handle.AsRef<float>(_DefaultValueOffset);
+            _DefaultValueOffset = _DefaultValueOffset ?? Schema.GetOffset(0xA387F832700AB429);
+            return ref _Handle.AsRef<float>(_DefaultValueOffset!.Value);
         }
     }
-    private static nint _EaseTimeOffset = -1;
+    private static nint? _EaseTimeOffset;
 
     public ref float EaseTime
     {
         get
         {
-            if (_EaseTimeOffset == -1) _EaseTimeOffset = Schema.GetOffset(0xA387F832D0A54FCC);
-            return ref _Handle.AsRef<float>(_EaseTimeOffset);
+            _EaseTimeOffset = _EaseTimeOffset ?? Schema.GetOffset(0xA387F832D0A54FCC);
+            return ref _Handle.AsRef<float>(_EaseTimeOffset!.Value);
         }
     }
-    private static nint _EasingOpOffset = -1;
+    private static nint? _EasingOpOffset;
 
     public ref NmEasingOperation_t EasingOp
     {
         get
         {
-            if (_EasingOpOffset == -1) _EasingOpOffset = Schema.GetOffset(0xA387F832CF457EAF);
-            return ref _Handle.AsRef<NmEasingOperation_t>(_EasingOpOffset);
+            _EasingOpOffset = _EasingOpOffset ?? Schema.GetOffset(0xA387F832CF457EAF);
+            return ref _Handle.AsRef<NmEasingOperation_t>(_EasingOpOffset!.Value);
         }
     }
 

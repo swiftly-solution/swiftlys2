@@ -16,14 +16,14 @@ internal partial class C_RectLightImpl : C_BarnLightImpl, C_RectLight
 {
     public C_RectLightImpl(nint handle) : base(handle) { }
 
-    private static nint _ShowLightOffset = -1;
+    private static nint? _ShowLightOffset;
 
     public ref bool ShowLight
     {
         get
         {
-            if (_ShowLightOffset == -1) _ShowLightOffset = Schema.GetOffset(0x6C1572E3D67BC720);
-            return ref _Handle.AsRef<bool>(_ShowLightOffset);
+            _ShowLightOffset = _ShowLightOffset ?? Schema.GetOffset(0x6C1572E3D67BC720);
+            return ref _Handle.AsRef<bool>(_ShowLightOffset!.Value);
         }
     }
 

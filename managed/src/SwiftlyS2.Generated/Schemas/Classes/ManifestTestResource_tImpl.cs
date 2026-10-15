@@ -16,29 +16,29 @@ internal partial class ManifestTestResource_tImpl : SchemaClass, ManifestTestRes
 {
     public ManifestTestResource_tImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xFF18C79F4D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xFF18C79F4D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xFF18C79F4D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xFF18C79F4D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _ChildOffset = -1;
+    private static nint? _ChildOffset;
 
     public ref CStrongHandle<InfoForResourceTypeManifestTestResource_t> Child
     {
         get
         {
-            if (_ChildOffset == -1) _ChildOffset = Schema.GetOffset(0xFF18C79F2827B07D);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeManifestTestResource_t>>(_ChildOffset);
+            _ChildOffset = _ChildOffset ?? Schema.GetOffset(0xFF18C79F2827B07D);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeManifestTestResource_t>>(_ChildOffset!.Value);
         }
     }
 

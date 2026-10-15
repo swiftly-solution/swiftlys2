@@ -16,57 +16,57 @@ internal partial class CBtActionCombatPositioningImpl : CBtNodeImpl, CBtActionCo
 {
     public CBtActionCombatPositioningImpl(nint handle) : base(handle) { }
 
-    private static nint _SensorInputKeyOffset = -1;
+    private static nint? _SensorInputKeyOffset;
 
     public string SensorInputKey
     {
         get
         {
-            if (_SensorInputKeyOffset == -1) _SensorInputKeyOffset = Schema.GetOffset(0x3FB29123D2B0D4C1);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_SensorInputKeyOffset));
+            _SensorInputKeyOffset = _SensorInputKeyOffset ?? Schema.GetOffset(0x3FB29123D2B0D4C1);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_SensorInputKeyOffset!.Value));
         }
         set
         {
-            if (_SensorInputKeyOffset == -1) _SensorInputKeyOffset = Schema.GetOffset(0x3FB29123D2B0D4C1);
-            Schema.SetCUtlString(_Handle, _SensorInputKeyOffset, value);
+            _SensorInputKeyOffset = _SensorInputKeyOffset ?? Schema.GetOffset(0x3FB29123D2B0D4C1);
+            Schema.SetCUtlString(_Handle, _SensorInputKeyOffset!.Value, value);
         }
     }
-    private static nint _IsAttackingKeyOffset = -1;
+    private static nint? _IsAttackingKeyOffset;
 
     public string IsAttackingKey
     {
         get
         {
-            if (_IsAttackingKeyOffset == -1) _IsAttackingKeyOffset = Schema.GetOffset(0x3FB29123BFC6462B);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_IsAttackingKeyOffset));
+            _IsAttackingKeyOffset = _IsAttackingKeyOffset ?? Schema.GetOffset(0x3FB29123BFC6462B);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_IsAttackingKeyOffset!.Value));
         }
         set
         {
-            if (_IsAttackingKeyOffset == -1) _IsAttackingKeyOffset = Schema.GetOffset(0x3FB29123BFC6462B);
-            Schema.SetCUtlString(_Handle, _IsAttackingKeyOffset, value);
+            _IsAttackingKeyOffset = _IsAttackingKeyOffset ?? Schema.GetOffset(0x3FB29123BFC6462B);
+            Schema.SetCUtlString(_Handle, _IsAttackingKeyOffset!.Value, value);
         }
     }
-    private static nint _ActionTimerOffset = -1;
+    private static nint? _ActionTimerOffset;
     private CountdownTimerImpl? _ActionTimerInstance;
 
     public CountdownTimer ActionTimer
     {
         get
         {
-            if (_ActionTimerOffset == -1) _ActionTimerOffset = Schema.GetOffset(0x3FB291238777F414);
+            _ActionTimerOffset = _ActionTimerOffset ?? Schema.GetOffset(0x3FB291238777F414);
             var instance = _ActionTimerInstance ??= new CountdownTimerImpl(0);
-            instance.DangerousSetHandle(_Handle + _ActionTimerOffset);
+            instance.DangerousSetHandle(_Handle + _ActionTimerOffset!.Value);
             return instance;
         }
     }
-    private static nint _CrouchingOffset = -1;
+    private static nint? _CrouchingOffset;
 
     public ref bool Crouching
     {
         get
         {
-            if (_CrouchingOffset == -1) _CrouchingOffset = Schema.GetOffset(0x3FB291232DA51BAD);
-            return ref _Handle.AsRef<bool>(_CrouchingOffset);
+            _CrouchingOffset = _CrouchingOffset ?? Schema.GetOffset(0x3FB291232DA51BAD);
+            return ref _Handle.AsRef<bool>(_CrouchingOffset!.Value);
         }
     }
 

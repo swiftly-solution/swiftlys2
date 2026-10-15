@@ -16,14 +16,14 @@ internal partial class CCPPScriptComponentImpl : CAnimGraphDoc_ComponentImpl, CC
 {
     public CCPPScriptComponentImpl(nint handle) : base(handle) { }
 
-    private static nint _ScriptsToRunOffset = -1;
+    private static nint? _ScriptsToRunOffset;
 
     public ref CUtlVector<CUtlString> ScriptsToRun
     {
         get
         {
-            if (_ScriptsToRunOffset == -1) _ScriptsToRunOffset = Schema.GetOffset(0x21E9FE4B378F3E0F);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_ScriptsToRunOffset);
+            _ScriptsToRunOffset = _ScriptsToRunOffset ?? Schema.GetOffset(0x21E9FE4B378F3E0F);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_ScriptsToRunOffset!.Value);
         }
     }
 

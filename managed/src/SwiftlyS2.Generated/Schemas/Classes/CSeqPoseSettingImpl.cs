@@ -16,84 +16,84 @@ internal partial class CSeqPoseSettingImpl : SchemaClass, CSeqPoseSetting
 {
     public CSeqPoseSettingImpl(nint handle) : base(handle) { }
 
-    private static nint _PoseParameterOffset = -1;
+    private static nint? _PoseParameterOffset;
 
     public ref CBufferString PoseParameter
     {
         get
         {
-            if (_PoseParameterOffset == -1) _PoseParameterOffset = Schema.GetOffset(0x5EC3BE449DD21486);
-            return ref _Handle.AsRef<CBufferString>(_PoseParameterOffset);
+            _PoseParameterOffset = _PoseParameterOffset ?? Schema.GetOffset(0x5EC3BE449DD21486);
+            return ref _Handle.AsRef<CBufferString>(_PoseParameterOffset!.Value);
         }
     }
-    private static nint _AttachmentOffset = -1;
+    private static nint? _AttachmentOffset;
 
     public ref CBufferString Attachment
     {
         get
         {
-            if (_AttachmentOffset == -1) _AttachmentOffset = Schema.GetOffset(0x5EC3BE4439471F5F);
-            return ref _Handle.AsRef<CBufferString>(_AttachmentOffset);
+            _AttachmentOffset = _AttachmentOffset ?? Schema.GetOffset(0x5EC3BE4439471F5F);
+            return ref _Handle.AsRef<CBufferString>(_AttachmentOffset!.Value);
         }
     }
-    private static nint _ReferenceSequenceOffset = -1;
+    private static nint? _ReferenceSequenceOffset;
 
     public ref CBufferString ReferenceSequence
     {
         get
         {
-            if (_ReferenceSequenceOffset == -1) _ReferenceSequenceOffset = Schema.GetOffset(0x5EC3BE44A84D180E);
-            return ref _Handle.AsRef<CBufferString>(_ReferenceSequenceOffset);
+            _ReferenceSequenceOffset = _ReferenceSequenceOffset ?? Schema.GetOffset(0x5EC3BE44A84D180E);
+            return ref _Handle.AsRef<CBufferString>(_ReferenceSequenceOffset!.Value);
         }
     }
-    private static nint _ValueOffset = -1;
+    private static nint? _ValueOffset;
 
     public ref float Value
     {
         get
         {
-            if (_ValueOffset == -1) _ValueOffset = Schema.GetOffset(0x5EC3BE448DFCB984);
-            return ref _Handle.AsRef<float>(_ValueOffset);
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0x5EC3BE448DFCB984);
+            return ref _Handle.AsRef<float>(_ValueOffset!.Value);
         }
     }
-    private static nint _XOffset = -1;
+    private static nint? _XOffset;
 
     public ref bool X
     {
         get
         {
-            if (_XOffset == -1) _XOffset = Schema.GetOffset(0x5EC3BE44B2ABAD67);
-            return ref _Handle.AsRef<bool>(_XOffset);
+            _XOffset = _XOffset ?? Schema.GetOffset(0x5EC3BE44B2ABAD67);
+            return ref _Handle.AsRef<bool>(_XOffset!.Value);
         }
     }
-    private static nint _YOffset = -1;
+    private static nint? _YOffset;
 
     public ref bool Y
     {
         get
         {
-            if (_YOffset == -1) _YOffset = Schema.GetOffset(0x5EC3BE44B1ABABD4);
-            return ref _Handle.AsRef<bool>(_YOffset);
+            _YOffset = _YOffset ?? Schema.GetOffset(0x5EC3BE44B1ABABD4);
+            return ref _Handle.AsRef<bool>(_YOffset!.Value);
         }
     }
-    private static nint _ZOffset = -1;
+    private static nint? _ZOffset;
 
     public ref bool Z
     {
         get
         {
-            if (_ZOffset == -1) _ZOffset = Schema.GetOffset(0x5EC3BE44B4ABB08D);
-            return ref _Handle.AsRef<bool>(_ZOffset);
+            _ZOffset = _ZOffset ?? Schema.GetOffset(0x5EC3BE44B4ABB08D);
+            return ref _Handle.AsRef<bool>(_ZOffset!.Value);
         }
     }
-    private static nint _TypeOffset = -1;
+    private static nint? _TypeOffset;
 
     public ref int Type
     {
         get
         {
-            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0x5EC3BE4421B39888);
-            return ref _Handle.AsRef<int>(_TypeOffset);
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x5EC3BE4421B39888);
+            return ref _Handle.AsRef<int>(_TypeOffset!.Value);
         }
     }
 

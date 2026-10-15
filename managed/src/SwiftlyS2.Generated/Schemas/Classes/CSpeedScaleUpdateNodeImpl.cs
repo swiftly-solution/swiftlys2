@@ -16,16 +16,16 @@ internal partial class CSpeedScaleUpdateNodeImpl : CUnaryUpdateNodeImpl, CSpeedS
 {
     public CSpeedScaleUpdateNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _ParamIndexOffset = -1;
+    private static nint? _ParamIndexOffset;
     private CAnimParamHandleImpl? _ParamIndexInstance;
 
     public CAnimParamHandle ParamIndex
     {
         get
         {
-            if (_ParamIndexOffset == -1) _ParamIndexOffset = Schema.GetOffset(0xD43012BC61990A86);
+            _ParamIndexOffset = _ParamIndexOffset ?? Schema.GetOffset(0xD43012BC61990A86);
             var instance = _ParamIndexInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamIndexOffset);
+            instance.DangerousSetHandle(_Handle + _ParamIndexOffset!.Value);
             return instance;
         }
     }

@@ -16,130 +16,130 @@ internal partial class CNmFootIKTaskImpl : CNmPoseTaskImpl, CNmFootIKTask
 {
     public CNmFootIKTaskImpl(nint handle) : base(handle) { }
 
-    private static nint _LeftEffectorBoneIdxOffset = -1;
+    private static nint? _LeftEffectorBoneIdxOffset;
 
     public ref int LeftEffectorBoneIdx
     {
         get
         {
-            if (_LeftEffectorBoneIdxOffset == -1) _LeftEffectorBoneIdxOffset = Schema.GetOffset(0xF852CEF64D3294ED);
-            return ref _Handle.AsRef<int>(_LeftEffectorBoneIdxOffset);
+            _LeftEffectorBoneIdxOffset = _LeftEffectorBoneIdxOffset ?? Schema.GetOffset(0xF852CEF64D3294ED);
+            return ref _Handle.AsRef<int>(_LeftEffectorBoneIdxOffset!.Value);
         }
     }
-    private static nint _RightEffectorBoneIdxOffset = -1;
+    private static nint? _RightEffectorBoneIdxOffset;
 
     public ref int RightEffectorBoneIdx
     {
         get
         {
-            if (_RightEffectorBoneIdxOffset == -1) _RightEffectorBoneIdxOffset = Schema.GetOffset(0xF852CEF6BF5DD4B6);
-            return ref _Handle.AsRef<int>(_RightEffectorBoneIdxOffset);
+            _RightEffectorBoneIdxOffset = _RightEffectorBoneIdxOffset ?? Schema.GetOffset(0xF852CEF6BF5DD4B6);
+            return ref _Handle.AsRef<int>(_RightEffectorBoneIdxOffset!.Value);
         }
     }
-    private static nint _LeftTargetTransformOffset = -1;
+    private static nint? _LeftTargetTransformOffset;
 
     public ref CTransform LeftTargetTransform
     {
         get
         {
-            if (_LeftTargetTransformOffset == -1) _LeftTargetTransformOffset = Schema.GetOffset(0xF852CEF6C2A19C7F);
-            return ref _Handle.AsRef<CTransform>(_LeftTargetTransformOffset);
+            _LeftTargetTransformOffset = _LeftTargetTransformOffset ?? Schema.GetOffset(0xF852CEF6C2A19C7F);
+            return ref _Handle.AsRef<CTransform>(_LeftTargetTransformOffset!.Value);
         }
     }
-    private static nint _RightTargetTransformOffset = -1;
+    private static nint? _RightTargetTransformOffset;
 
     public ref CTransform RightTargetTransform
     {
         get
         {
-            if (_RightTargetTransformOffset == -1) _RightTargetTransformOffset = Schema.GetOffset(0xF852CEF6DBF73534);
-            return ref _Handle.AsRef<CTransform>(_RightTargetTransformOffset);
+            _RightTargetTransformOffset = _RightTargetTransformOffset ?? Schema.GetOffset(0xF852CEF6DBF73534);
+            return ref _Handle.AsRef<CTransform>(_RightTargetTransformOffset!.Value);
         }
     }
-    private static nint _LeftTargetBoneIdxOffset = -1;
+    private static nint? _LeftTargetBoneIdxOffset;
 
     public ref int LeftTargetBoneIdx
     {
         get
         {
-            if (_LeftTargetBoneIdxOffset == -1) _LeftTargetBoneIdxOffset = Schema.GetOffset(0xF852CEF6C149212E);
-            return ref _Handle.AsRef<int>(_LeftTargetBoneIdxOffset);
+            _LeftTargetBoneIdxOffset = _LeftTargetBoneIdxOffset ?? Schema.GetOffset(0xF852CEF6C149212E);
+            return ref _Handle.AsRef<int>(_LeftTargetBoneIdxOffset!.Value);
         }
     }
-    private static nint _RightTargetBoneIdxOffset = -1;
+    private static nint? _RightTargetBoneIdxOffset;
 
     public ref int RightTargetBoneIdx
     {
         get
         {
-            if (_RightTargetBoneIdxOffset == -1) _RightTargetBoneIdxOffset = Schema.GetOffset(0xF852CEF6D6C4F3F5);
-            return ref _Handle.AsRef<int>(_RightTargetBoneIdxOffset);
+            _RightTargetBoneIdxOffset = _RightTargetBoneIdxOffset ?? Schema.GetOffset(0xF852CEF6D6C4F3F5);
+            return ref _Handle.AsRef<int>(_RightTargetBoneIdxOffset!.Value);
         }
     }
-    private static nint _LeftTargetOffset = -1;
+    private static nint? _LeftTargetOffset;
     private CNmTargetImpl? _LeftTargetInstance;
 
     public CNmTarget LeftTarget
     {
         get
         {
-            if (_LeftTargetOffset == -1) _LeftTargetOffset = Schema.GetOffset(0xF852CEF690AB1D19);
+            _LeftTargetOffset = _LeftTargetOffset ?? Schema.GetOffset(0xF852CEF690AB1D19);
             var instance = _LeftTargetInstance ??= new CNmTargetImpl(0);
-            instance.DangerousSetHandle(_Handle + _LeftTargetOffset);
+            instance.DangerousSetHandle(_Handle + _LeftTargetOffset!.Value);
             return instance;
         }
     }
-    private static nint _RightTargetOffset = -1;
+    private static nint? _RightTargetOffset;
     private CNmTargetImpl? _RightTargetInstance;
 
     public CNmTarget RightTarget
     {
         get
         {
-            if (_RightTargetOffset == -1) _RightTargetOffset = Schema.GetOffset(0xF852CEF66A4CA0A8);
+            _RightTargetOffset = _RightTargetOffset ?? Schema.GetOffset(0xF852CEF66A4CA0A8);
             var instance = _RightTargetInstance ??= new CNmTargetImpl(0);
-            instance.DangerousSetHandle(_Handle + _RightTargetOffset);
+            instance.DangerousSetHandle(_Handle + _RightTargetOffset!.Value);
             return instance;
         }
     }
-    private static nint _BlendModeOffset = -1;
+    private static nint? _BlendModeOffset;
 
     public ref NmIKBlendMode_t BlendMode
     {
         get
         {
-            if (_BlendModeOffset == -1) _BlendModeOffset = Schema.GetOffset(0xF852CEF68D5006AB);
-            return ref _Handle.AsRef<NmIKBlendMode_t>(_BlendModeOffset);
+            _BlendModeOffset = _BlendModeOffset ?? Schema.GetOffset(0xF852CEF68D5006AB);
+            return ref _Handle.AsRef<NmIKBlendMode_t>(_BlendModeOffset!.Value);
         }
     }
-    private static nint _BlendWeightOffset = -1;
+    private static nint? _BlendWeightOffset;
 
     public ref float BlendWeight
     {
         get
         {
-            if (_BlendWeightOffset == -1) _BlendWeightOffset = Schema.GetOffset(0xF852CEF6E5D6B9CE);
-            return ref _Handle.AsRef<float>(_BlendWeightOffset);
+            _BlendWeightOffset = _BlendWeightOffset ?? Schema.GetOffset(0xF852CEF6E5D6B9CE);
+            return ref _Handle.AsRef<float>(_BlendWeightOffset!.Value);
         }
     }
-    private static nint _IsTargetInWorldSpaceOffset = -1;
+    private static nint? _IsTargetInWorldSpaceOffset;
 
     public ref bool IsTargetInWorldSpace
     {
         get
         {
-            if (_IsTargetInWorldSpaceOffset == -1) _IsTargetInWorldSpaceOffset = Schema.GetOffset(0xF852CEF65F56E0C5);
-            return ref _Handle.AsRef<bool>(_IsTargetInWorldSpaceOffset);
+            _IsTargetInWorldSpaceOffset = _IsTargetInWorldSpaceOffset ?? Schema.GetOffset(0xF852CEF65F56E0C5);
+            return ref _Handle.AsRef<bool>(_IsTargetInWorldSpaceOffset!.Value);
         }
     }
-    private static nint _IsRunningFromDeserializedDataOffset = -1;
+    private static nint? _IsRunningFromDeserializedDataOffset;
 
     public ref bool IsRunningFromDeserializedData
     {
         get
         {
-            if (_IsRunningFromDeserializedDataOffset == -1) _IsRunningFromDeserializedDataOffset = Schema.GetOffset(0xF852CEF64791111D);
-            return ref _Handle.AsRef<bool>(_IsRunningFromDeserializedDataOffset);
+            _IsRunningFromDeserializedDataOffset = _IsRunningFromDeserializedDataOffset ?? Schema.GetOffset(0xF852CEF64791111D);
+            return ref _Handle.AsRef<bool>(_IsRunningFromDeserializedDataOffset!.Value);
         }
     }
 

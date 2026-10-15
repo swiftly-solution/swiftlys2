@@ -16,35 +16,35 @@ internal partial class CHintMessageQueueImpl : SchemaClass, CHintMessageQueue
 {
     public CHintMessageQueueImpl(nint handle) : base(handle) { }
 
-    private static nint _TmMessageEndOffset = -1;
+    private static nint? _TmMessageEndOffset;
 
     public ref float TmMessageEnd
     {
         get
         {
-            if (_TmMessageEndOffset == -1) _TmMessageEndOffset = Schema.GetOffset(0xBE13489745AC0F6);
-            return ref _Handle.AsRef<float>(_TmMessageEndOffset);
+            _TmMessageEndOffset = _TmMessageEndOffset ?? Schema.GetOffset(0xBE13489745AC0F6);
+            return ref _Handle.AsRef<float>(_TmMessageEndOffset!.Value);
         }
     }
-    private static nint _MessagesOffset = -1;
+    private static nint? _MessagesOffset;
 
     public ref CUtlVector<PointerTo<CHintMessage>> Messages
     {
         get
         {
-            if (_MessagesOffset == -1) _MessagesOffset = Schema.GetOffset(0xBE134896139CC55);
-            return ref _Handle.AsRef<CUtlVector<PointerTo<CHintMessage>>>(_MessagesOffset);
+            _MessagesOffset = _MessagesOffset ?? Schema.GetOffset(0xBE134896139CC55);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<CHintMessage>>>(_MessagesOffset!.Value);
         }
     }
-    private static nint _PlayerControllerOffset = -1;
+    private static nint? _PlayerControllerOffset;
     private CBasePlayerControllerImpl? _PlayerControllerInstance;
 
     public CBasePlayerController? PlayerController
     {
         get
         {
-            if (_PlayerControllerOffset == -1) _PlayerControllerOffset = Schema.GetOffset(0xBE13489DCE6762E);
-            var ptr = _Handle.Read<nint>(_PlayerControllerOffset);
+            _PlayerControllerOffset = _PlayerControllerOffset ?? Schema.GetOffset(0xBE13489DCE6762E);
+            var ptr = _Handle.Read<nint>(_PlayerControllerOffset!.Value);
             if (!ptr.IsValidPtr()) return null;
             var instance = _PlayerControllerInstance ??= new CBasePlayerControllerImpl(0);
             instance.DangerousSetHandle(ptr);

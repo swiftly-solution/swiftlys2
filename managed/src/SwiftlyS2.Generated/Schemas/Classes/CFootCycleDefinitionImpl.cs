@@ -16,108 +16,108 @@ internal partial class CFootCycleDefinitionImpl : SchemaClass, CFootCycleDefinit
 {
     public CFootCycleDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint _StancePositionMSOffset = -1;
+    private static nint? _StancePositionMSOffset;
 
     public ref Vector StancePositionMS
     {
         get
         {
-            if (_StancePositionMSOffset == -1) _StancePositionMSOffset = Schema.GetOffset(0x6D604C9567085F86);
-            return ref _Handle.AsRef<Vector>(_StancePositionMSOffset);
+            _StancePositionMSOffset = _StancePositionMSOffset ?? Schema.GetOffset(0x6D604C9567085F86);
+            return ref _Handle.AsRef<Vector>(_StancePositionMSOffset!.Value);
         }
     }
-    private static nint _MidpointPositionMSOffset = -1;
+    private static nint? _MidpointPositionMSOffset;
 
     public ref Vector MidpointPositionMS
     {
         get
         {
-            if (_MidpointPositionMSOffset == -1) _MidpointPositionMSOffset = Schema.GetOffset(0x6D604C9553980B1A);
-            return ref _Handle.AsRef<Vector>(_MidpointPositionMSOffset);
+            _MidpointPositionMSOffset = _MidpointPositionMSOffset ?? Schema.GetOffset(0x6D604C9553980B1A);
+            return ref _Handle.AsRef<Vector>(_MidpointPositionMSOffset!.Value);
         }
     }
-    private static nint _StanceDirectionMSOffset = -1;
+    private static nint? _StanceDirectionMSOffset;
 
     public ref float StanceDirectionMS
     {
         get
         {
-            if (_StanceDirectionMSOffset == -1) _StanceDirectionMSOffset = Schema.GetOffset(0x6D604C95848F3868);
-            return ref _Handle.AsRef<float>(_StanceDirectionMSOffset);
+            _StanceDirectionMSOffset = _StanceDirectionMSOffset ?? Schema.GetOffset(0x6D604C95848F3868);
+            return ref _Handle.AsRef<float>(_StanceDirectionMSOffset!.Value);
         }
     }
-    private static nint _ToStrideStartPosOffset = -1;
+    private static nint? _ToStrideStartPosOffset;
 
     public ref Vector ToStrideStartPos
     {
         get
         {
-            if (_ToStrideStartPosOffset == -1) _ToStrideStartPosOffset = Schema.GetOffset(0x6D604C953F2E1417);
-            return ref _Handle.AsRef<Vector>(_ToStrideStartPosOffset);
+            _ToStrideStartPosOffset = _ToStrideStartPosOffset ?? Schema.GetOffset(0x6D604C953F2E1417);
+            return ref _Handle.AsRef<Vector>(_ToStrideStartPosOffset!.Value);
         }
     }
-    private static nint _StanceCycleOffset = -1;
+    private static nint? _StanceCycleOffset;
     private CAnimCycleImpl? _StanceCycleInstance;
 
     public CAnimCycle StanceCycle
     {
         get
         {
-            if (_StanceCycleOffset == -1) _StanceCycleOffset = Schema.GetOffset(0x6D604C954EDCBD91);
+            _StanceCycleOffset = _StanceCycleOffset ?? Schema.GetOffset(0x6D604C954EDCBD91);
             var instance = _StanceCycleInstance ??= new CAnimCycleImpl(0);
-            instance.DangerousSetHandle(_Handle + _StanceCycleOffset);
+            instance.DangerousSetHandle(_Handle + _StanceCycleOffset!.Value);
             return instance;
         }
     }
-    private static nint _FootLiftCycleOffset = -1;
+    private static nint? _FootLiftCycleOffset;
     private CFootCycleImpl? _FootLiftCycleInstance;
 
     public CFootCycle FootLiftCycle
     {
         get
         {
-            if (_FootLiftCycleOffset == -1) _FootLiftCycleOffset = Schema.GetOffset(0x6D604C9553A7B946);
+            _FootLiftCycleOffset = _FootLiftCycleOffset ?? Schema.GetOffset(0x6D604C9553A7B946);
             var instance = _FootLiftCycleInstance ??= new CFootCycleImpl(0);
-            instance.DangerousSetHandle(_Handle + _FootLiftCycleOffset);
+            instance.DangerousSetHandle(_Handle + _FootLiftCycleOffset!.Value);
             return instance;
         }
     }
-    private static nint _FootOffCycleOffset = -1;
+    private static nint? _FootOffCycleOffset;
     private CFootCycleImpl? _FootOffCycleInstance;
 
     public CFootCycle FootOffCycle
     {
         get
         {
-            if (_FootOffCycleOffset == -1) _FootOffCycleOffset = Schema.GetOffset(0x6D604C959AC5AE30);
+            _FootOffCycleOffset = _FootOffCycleOffset ?? Schema.GetOffset(0x6D604C959AC5AE30);
             var instance = _FootOffCycleInstance ??= new CFootCycleImpl(0);
-            instance.DangerousSetHandle(_Handle + _FootOffCycleOffset);
+            instance.DangerousSetHandle(_Handle + _FootOffCycleOffset!.Value);
             return instance;
         }
     }
-    private static nint _FootStrikeCycleOffset = -1;
+    private static nint? _FootStrikeCycleOffset;
     private CFootCycleImpl? _FootStrikeCycleInstance;
 
     public CFootCycle FootStrikeCycle
     {
         get
         {
-            if (_FootStrikeCycleOffset == -1) _FootStrikeCycleOffset = Schema.GetOffset(0x6D604C95E4D3DC2B);
+            _FootStrikeCycleOffset = _FootStrikeCycleOffset ?? Schema.GetOffset(0x6D604C95E4D3DC2B);
             var instance = _FootStrikeCycleInstance ??= new CFootCycleImpl(0);
-            instance.DangerousSetHandle(_Handle + _FootStrikeCycleOffset);
+            instance.DangerousSetHandle(_Handle + _FootStrikeCycleOffset!.Value);
             return instance;
         }
     }
-    private static nint _FootLandCycleOffset = -1;
+    private static nint? _FootLandCycleOffset;
     private CFootCycleImpl? _FootLandCycleInstance;
 
     public CFootCycle FootLandCycle
     {
         get
         {
-            if (_FootLandCycleOffset == -1) _FootLandCycleOffset = Schema.GetOffset(0x6D604C954C100B46);
+            _FootLandCycleOffset = _FootLandCycleOffset ?? Schema.GetOffset(0x6D604C954C100B46);
             var instance = _FootLandCycleInstance ??= new CFootCycleImpl(0);
-            instance.DangerousSetHandle(_Handle + _FootLandCycleOffset);
+            instance.DangerousSetHandle(_Handle + _FootLandCycleOffset!.Value);
             return instance;
         }
     }

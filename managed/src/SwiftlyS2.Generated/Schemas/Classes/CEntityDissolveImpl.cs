@@ -16,107 +16,107 @@ internal partial class CEntityDissolveImpl : CBaseModelEntityImpl, CEntityDissol
 {
     public CEntityDissolveImpl(nint handle) : base(handle) { }
 
-    private static nint _FadeInStartOffset = -1;
+    private static nint? _FadeInStartOffset;
 
     public ref float FadeInStart
     {
         get
         {
-            if (_FadeInStartOffset == -1) _FadeInStartOffset = Schema.GetOffset(0x443F205EF5AD2D6A);
-            return ref _Handle.AsRef<float>(_FadeInStartOffset);
+            _FadeInStartOffset = _FadeInStartOffset ?? Schema.GetOffset(0x443F205EF5AD2D6A);
+            return ref _Handle.AsRef<float>(_FadeInStartOffset!.Value);
         }
     }
-    private static nint _FadeInLengthOffset = -1;
+    private static nint? _FadeInLengthOffset;
 
     public ref float FadeInLength
     {
         get
         {
-            if (_FadeInLengthOffset == -1) _FadeInLengthOffset = Schema.GetOffset(0x443F205E74538EE6);
-            return ref _Handle.AsRef<float>(_FadeInLengthOffset);
+            _FadeInLengthOffset = _FadeInLengthOffset ?? Schema.GetOffset(0x443F205E74538EE6);
+            return ref _Handle.AsRef<float>(_FadeInLengthOffset!.Value);
         }
     }
-    private static nint _FadeOutModelStartOffset = -1;
+    private static nint? _FadeOutModelStartOffset;
 
     public ref float FadeOutModelStart
     {
         get
         {
-            if (_FadeOutModelStartOffset == -1) _FadeOutModelStartOffset = Schema.GetOffset(0x443F205E9C8AC6F4);
-            return ref _Handle.AsRef<float>(_FadeOutModelStartOffset);
+            _FadeOutModelStartOffset = _FadeOutModelStartOffset ?? Schema.GetOffset(0x443F205E9C8AC6F4);
+            return ref _Handle.AsRef<float>(_FadeOutModelStartOffset!.Value);
         }
     }
-    private static nint _FadeOutModelLengthOffset = -1;
+    private static nint? _FadeOutModelLengthOffset;
 
     public ref float FadeOutModelLength
     {
         get
         {
-            if (_FadeOutModelLengthOffset == -1) _FadeOutModelLengthOffset = Schema.GetOffset(0x443F205E6FC0EC34);
-            return ref _Handle.AsRef<float>(_FadeOutModelLengthOffset);
+            _FadeOutModelLengthOffset = _FadeOutModelLengthOffset ?? Schema.GetOffset(0x443F205E6FC0EC34);
+            return ref _Handle.AsRef<float>(_FadeOutModelLengthOffset!.Value);
         }
     }
-    private static nint _FadeOutStartOffset = -1;
+    private static nint? _FadeOutStartOffset;
 
     public ref float FadeOutStart
     {
         get
         {
-            if (_FadeOutStartOffset == -1) _FadeOutStartOffset = Schema.GetOffset(0x443F205E3F5B2209);
-            return ref _Handle.AsRef<float>(_FadeOutStartOffset);
+            _FadeOutStartOffset = _FadeOutStartOffset ?? Schema.GetOffset(0x443F205E3F5B2209);
+            return ref _Handle.AsRef<float>(_FadeOutStartOffset!.Value);
         }
     }
-    private static nint _FadeOutLengthOffset = -1;
+    private static nint? _FadeOutLengthOffset;
 
     public ref float FadeOutLength
     {
         get
         {
-            if (_FadeOutLengthOffset == -1) _FadeOutLengthOffset = Schema.GetOffset(0x443F205E9D0749A3);
-            return ref _Handle.AsRef<float>(_FadeOutLengthOffset);
+            _FadeOutLengthOffset = _FadeOutLengthOffset ?? Schema.GetOffset(0x443F205E9D0749A3);
+            return ref _Handle.AsRef<float>(_FadeOutLengthOffset!.Value);
         }
     }
-    private static nint _StartTimeOffset = -1;
+    private static nint? _StartTimeOffset;
     private GameTime_tImpl? _StartTimeInstance;
 
     public GameTime_t StartTime
     {
         get
         {
-            if (_StartTimeOffset == -1) _StartTimeOffset = Schema.GetOffset(0x443F205E67FE9DC4);
+            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0x443F205E67FE9DC4);
             var instance = _StartTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _StartTimeOffset);
+            instance.DangerousSetHandle(_Handle + _StartTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _DissolveTypeOffset = -1;
+    private static nint? _DissolveTypeOffset;
 
     public ref EntityDissolveType_t DissolveType
     {
         get
         {
-            if (_DissolveTypeOffset == -1) _DissolveTypeOffset = Schema.GetOffset(0x443F205E79AB525E);
-            return ref _Handle.AsRef<EntityDissolveType_t>(_DissolveTypeOffset);
+            _DissolveTypeOffset = _DissolveTypeOffset ?? Schema.GetOffset(0x443F205E79AB525E);
+            return ref _Handle.AsRef<EntityDissolveType_t>(_DissolveTypeOffset!.Value);
         }
     }
-    private static nint _DissolverOriginOffset = -1;
+    private static nint? _DissolverOriginOffset;
 
     public ref Vector DissolverOrigin
     {
         get
         {
-            if (_DissolverOriginOffset == -1) _DissolverOriginOffset = Schema.GetOffset(0x443F205E34A16EE6);
-            return ref _Handle.AsRef<Vector>(_DissolverOriginOffset);
+            _DissolverOriginOffset = _DissolverOriginOffset ?? Schema.GetOffset(0x443F205E34A16EE6);
+            return ref _Handle.AsRef<Vector>(_DissolverOriginOffset!.Value);
         }
     }
-    private static nint _MagnitudeOffset = -1;
+    private static nint? _MagnitudeOffset;
 
     public ref uint Magnitude
     {
         get
         {
-            if (_MagnitudeOffset == -1) _MagnitudeOffset = Schema.GetOffset(0x443F205E0C71BDF1);
-            return ref _Handle.AsRef<uint>(_MagnitudeOffset);
+            _MagnitudeOffset = _MagnitudeOffset ?? Schema.GetOffset(0x443F205E0C71BDF1);
+            return ref _Handle.AsRef<uint>(_MagnitudeOffset!.Value);
         }
     }
 

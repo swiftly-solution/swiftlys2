@@ -16,16 +16,16 @@ internal partial class CDemoSettingsComponentUpdaterImpl : CAnimComponentUpdater
 {
     public CDemoSettingsComponentUpdaterImpl(nint handle) : base(handle) { }
 
-    private static nint _SettingsOffset = -1;
+    private static nint? _SettingsOffset;
     private CAnimDemoCaptureSettingsImpl? _SettingsInstance;
 
     public CAnimDemoCaptureSettings Settings
     {
         get
         {
-            if (_SettingsOffset == -1) _SettingsOffset = Schema.GetOffset(0xD4FC646CB3DE33A8);
+            _SettingsOffset = _SettingsOffset ?? Schema.GetOffset(0xD4FC646CB3DE33A8);
             var instance = _SettingsInstance ??= new CAnimDemoCaptureSettingsImpl(0);
-            instance.DangerousSetHandle(_Handle + _SettingsOffset);
+            instance.DangerousSetHandle(_Handle + _SettingsOffset!.Value);
             return instance;
         }
     }

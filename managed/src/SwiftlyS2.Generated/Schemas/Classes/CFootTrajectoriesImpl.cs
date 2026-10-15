@@ -16,14 +16,14 @@ internal partial class CFootTrajectoriesImpl : SchemaClass, CFootTrajectories
 {
     public CFootTrajectoriesImpl(nint handle) : base(handle) { }
 
-    private static nint _TrajectoriesOffset = -1;
+    private static nint? _TrajectoriesOffset;
 
     public ref CUtlVector<CFootTrajectory> Trajectories
     {
         get
         {
-            if (_TrajectoriesOffset == -1) _TrajectoriesOffset = Schema.GetOffset(0x5D019D277964C78C);
-            return ref _Handle.AsRef<CUtlVector<CFootTrajectory>>(_TrajectoriesOffset);
+            _TrajectoriesOffset = _TrajectoriesOffset ?? Schema.GetOffset(0x5D019D277964C78C);
+            return ref _Handle.AsRef<CUtlVector<CFootTrajectory>>(_TrajectoriesOffset!.Value);
         }
     }
 

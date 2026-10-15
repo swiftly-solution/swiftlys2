@@ -16,44 +16,44 @@ internal partial class SoundCommand_tImpl : SchemaClass, SoundCommand_t
 {
     public SoundCommand_tImpl(nint handle) : base(handle) { }
 
-    private static nint _TimeOffset = -1;
+    private static nint? _TimeOffset;
 
     public ref float Time
     {
         get
         {
-            if (_TimeOffset == -1) _TimeOffset = Schema.GetOffset(0xD141C5B61D93C884);
-            return ref _Handle.AsRef<float>(_TimeOffset);
+            _TimeOffset = _TimeOffset ?? Schema.GetOffset(0xD141C5B61D93C884);
+            return ref _Handle.AsRef<float>(_TimeOffset!.Value);
         }
     }
-    private static nint _DeltaTimeOffset = -1;
+    private static nint? _DeltaTimeOffset;
 
     public ref float DeltaTime
     {
         get
         {
-            if (_DeltaTimeOffset == -1) _DeltaTimeOffset = Schema.GetOffset(0xD141C5B6198A8E98);
-            return ref _Handle.AsRef<float>(_DeltaTimeOffset);
+            _DeltaTimeOffset = _DeltaTimeOffset ?? Schema.GetOffset(0xD141C5B6198A8E98);
+            return ref _Handle.AsRef<float>(_DeltaTimeOffset!.Value);
         }
     }
-    private static nint _CommandOffset = -1;
+    private static nint? _CommandOffset;
 
     public ref soundcommands_t Command
     {
         get
         {
-            if (_CommandOffset == -1) _CommandOffset = Schema.GetOffset(0xD141C5B66D7F00D2);
-            return ref _Handle.AsRef<soundcommands_t>(_CommandOffset);
+            _CommandOffset = _CommandOffset ?? Schema.GetOffset(0xD141C5B66D7F00D2);
+            return ref _Handle.AsRef<soundcommands_t>(_CommandOffset!.Value);
         }
     }
-    private static nint _ValueOffset = -1;
+    private static nint? _ValueOffset;
 
     public ref float Value
     {
         get
         {
-            if (_ValueOffset == -1) _ValueOffset = Schema.GetOffset(0xD141C5B66B99AEEA);
-            return ref _Handle.AsRef<float>(_ValueOffset);
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0xD141C5B66B99AEEA);
+            return ref _Handle.AsRef<float>(_ValueOffset!.Value);
         }
     }
 

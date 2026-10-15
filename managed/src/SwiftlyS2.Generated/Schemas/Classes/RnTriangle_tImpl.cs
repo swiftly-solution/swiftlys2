@@ -16,16 +16,16 @@ internal partial class RnTriangle_tImpl : SchemaClass, RnTriangle_t
 {
     public RnTriangle_tImpl(nint handle) : base(handle) { }
 
-    private static nint _IndexOffset = -1;
+    private static nint? _IndexOffset;
     private SchemaFixedArray<int>? _IndexInstance;
 
     public ISchemaFixedArray<int> Index
     {
         get
         {
-            if (_IndexOffset == -1) _IndexOffset = Schema.GetOffset(0x2136F8E2B73DBE67);
+            _IndexOffset = _IndexOffset ?? Schema.GetOffset(0x2136F8E2B73DBE67);
             var instance = _IndexInstance ??= new SchemaFixedArray<int>(0, 0x2136F8E2B73DBE67, 3, 4, 4);
-            instance.DangerousSetHandle(_Handle + _IndexOffset);
+            instance.DangerousSetHandle(_Handle + _IndexOffset!.Value);
             return instance;
         }
     }

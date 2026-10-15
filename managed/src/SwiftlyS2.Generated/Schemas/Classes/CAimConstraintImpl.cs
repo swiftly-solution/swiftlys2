@@ -16,24 +16,24 @@ internal partial class CAimConstraintImpl : CBaseConstraintImpl, CAimConstraint
 {
     public CAimConstraintImpl(nint handle) : base(handle) { }
 
-    private static nint _AimOffsetOffset = -1;
+    private static nint? _AimOffsetOffset;
 
     public ref Quaternion AimOffset
     {
         get
         {
-            if (_AimOffsetOffset == -1) _AimOffsetOffset = Schema.GetOffset(0x6C67AB6C43737FEA);
-            return ref _Handle.AsRef<Quaternion>(_AimOffsetOffset);
+            _AimOffsetOffset = _AimOffsetOffset ?? Schema.GetOffset(0x6C67AB6C43737FEA);
+            return ref _Handle.AsRef<Quaternion>(_AimOffsetOffset!.Value);
         }
     }
-    private static nint _UpTypeOffset = -1;
+    private static nint? _UpTypeOffset;
 
     public ref uint UpType
     {
         get
         {
-            if (_UpTypeOffset == -1) _UpTypeOffset = Schema.GetOffset(0x6C67AB6C038EA2BC);
-            return ref _Handle.AsRef<uint>(_UpTypeOffset);
+            _UpTypeOffset = _UpTypeOffset ?? Schema.GetOffset(0x6C67AB6C038EA2BC);
+            return ref _Handle.AsRef<uint>(_UpTypeOffset!.Value);
         }
     }
 

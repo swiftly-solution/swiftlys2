@@ -16,44 +16,44 @@ internal partial class CNmClipDocEvent_BodyGroupImpl : CNmClipDocEventImpl, CNmC
 {
     public CNmClipDocEvent_BodyGroupImpl(nint handle) : base(handle) { }
 
-    private static nint _TargetOffset = -1;
+    private static nint? _TargetOffset;
 
     public ref CNmEventTargetEntity_t Target
     {
         get
         {
-            if (_TargetOffset == -1) _TargetOffset = Schema.GetOffset(0xB1AC0287FA08A9E8);
-            return ref _Handle.AsRef<CNmEventTargetEntity_t>(_TargetOffset);
+            _TargetOffset = _TargetOffset ?? Schema.GetOffset(0xB1AC0287FA08A9E8);
+            return ref _Handle.AsRef<CNmEventTargetEntity_t>(_TargetOffset!.Value);
         }
     }
-    private static nint _BodygroupOffset = -1;
+    private static nint? _BodygroupOffset;
 
     public string Bodygroup
     {
         get
         {
-            if (_BodygroupOffset == -1) _BodygroupOffset = Schema.GetOffset(0xB1AC0287BCFB279C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_BodygroupOffset));
+            _BodygroupOffset = _BodygroupOffset ?? Schema.GetOffset(0xB1AC0287BCFB279C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_BodygroupOffset!.Value));
         }
         set
         {
-            if (_BodygroupOffset == -1) _BodygroupOffset = Schema.GetOffset(0xB1AC0287BCFB279C);
-            Schema.SetCUtlString(_Handle, _BodygroupOffset, value);
+            _BodygroupOffset = _BodygroupOffset ?? Schema.GetOffset(0xB1AC0287BCFB279C);
+            Schema.SetCUtlString(_Handle, _BodygroupOffset!.Value, value);
         }
     }
-    private static nint _ChoiceOffset = -1;
+    private static nint? _ChoiceOffset;
 
     public string Choice
     {
         get
         {
-            if (_ChoiceOffset == -1) _ChoiceOffset = Schema.GetOffset(0xB1AC02872D56D3F6);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ChoiceOffset));
+            _ChoiceOffset = _ChoiceOffset ?? Schema.GetOffset(0xB1AC02872D56D3F6);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ChoiceOffset!.Value));
         }
         set
         {
-            if (_ChoiceOffset == -1) _ChoiceOffset = Schema.GetOffset(0xB1AC02872D56D3F6);
-            Schema.SetCUtlString(_Handle, _ChoiceOffset, value);
+            _ChoiceOffset = _ChoiceOffset ?? Schema.GetOffset(0xB1AC02872D56D3F6);
+            Schema.SetCUtlString(_Handle, _ChoiceOffset!.Value, value);
         }
     }
 

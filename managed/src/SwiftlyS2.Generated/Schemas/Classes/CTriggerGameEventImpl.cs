@@ -16,49 +16,49 @@ internal partial class CTriggerGameEventImpl : CBaseTriggerImpl, CTriggerGameEve
 {
     public CTriggerGameEventImpl(nint handle) : base(handle) { }
 
-    private static nint _StrStartTouchEventNameOffset = -1;
+    private static nint? _StrStartTouchEventNameOffset;
 
     public string StrStartTouchEventName
     {
         get
         {
-            if (_StrStartTouchEventNameOffset == -1) _StrStartTouchEventNameOffset = Schema.GetOffset(0xF8B194884B1EB67A);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrStartTouchEventNameOffset));
+            _StrStartTouchEventNameOffset = _StrStartTouchEventNameOffset ?? Schema.GetOffset(0xF8B194884B1EB67A);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrStartTouchEventNameOffset!.Value));
         }
         set
         {
-            if (_StrStartTouchEventNameOffset == -1) _StrStartTouchEventNameOffset = Schema.GetOffset(0xF8B194884B1EB67A);
-            Schema.SetCUtlString(_Handle, _StrStartTouchEventNameOffset, value);
+            _StrStartTouchEventNameOffset = _StrStartTouchEventNameOffset ?? Schema.GetOffset(0xF8B194884B1EB67A);
+            Schema.SetCUtlString(_Handle, _StrStartTouchEventNameOffset!.Value, value);
         }
     }
-    private static nint _StrEndTouchEventNameOffset = -1;
+    private static nint? _StrEndTouchEventNameOffset;
 
     public string StrEndTouchEventName
     {
         get
         {
-            if (_StrEndTouchEventNameOffset == -1) _StrEndTouchEventNameOffset = Schema.GetOffset(0xF8B194886EDE6893);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrEndTouchEventNameOffset));
+            _StrEndTouchEventNameOffset = _StrEndTouchEventNameOffset ?? Schema.GetOffset(0xF8B194886EDE6893);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrEndTouchEventNameOffset!.Value));
         }
         set
         {
-            if (_StrEndTouchEventNameOffset == -1) _StrEndTouchEventNameOffset = Schema.GetOffset(0xF8B194886EDE6893);
-            Schema.SetCUtlString(_Handle, _StrEndTouchEventNameOffset, value);
+            _StrEndTouchEventNameOffset = _StrEndTouchEventNameOffset ?? Schema.GetOffset(0xF8B194886EDE6893);
+            Schema.SetCUtlString(_Handle, _StrEndTouchEventNameOffset!.Value, value);
         }
     }
-    private static nint _StrTriggerIDOffset = -1;
+    private static nint? _StrTriggerIDOffset;
 
     public string StrTriggerID
     {
         get
         {
-            if (_StrTriggerIDOffset == -1) _StrTriggerIDOffset = Schema.GetOffset(0xF8B19488EA731D41);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrTriggerIDOffset));
+            _StrTriggerIDOffset = _StrTriggerIDOffset ?? Schema.GetOffset(0xF8B19488EA731D41);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrTriggerIDOffset!.Value));
         }
         set
         {
-            if (_StrTriggerIDOffset == -1) _StrTriggerIDOffset = Schema.GetOffset(0xF8B19488EA731D41);
-            Schema.SetCUtlString(_Handle, _StrTriggerIDOffset, value);
+            _StrTriggerIDOffset = _StrTriggerIDOffset ?? Schema.GetOffset(0xF8B19488EA731D41);
+            Schema.SetCUtlString(_Handle, _StrTriggerIDOffset!.Value, value);
         }
     }
 

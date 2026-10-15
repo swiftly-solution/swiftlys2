@@ -16,75 +16,75 @@ internal partial class CLogicCaseImpl : CLogicalEntityImpl, CLogicCase
 {
     public CLogicCaseImpl(nint handle) : base(handle) { }
 
-    private static nint _CaseOffset = -1;
+    private static nint? _CaseOffset;
     private SchemaStringFixedArray? _CaseInstance;
 
     public ISchemaStringFixedArray Case
     {
         get
         {
-            if (_CaseOffset == -1) _CaseOffset = Schema.GetOffset(0x4B6BB20CBD726255);
+            _CaseOffset = _CaseOffset ?? Schema.GetOffset(0x4B6BB20CBD726255);
             var instance = _CaseInstance ??= new SchemaStringFixedArray(0, 0x4B6BB20CBD726255, 32, 8, 8);
-            instance.DangerousSetHandle(_Handle + _CaseOffset);
+            instance.DangerousSetHandle(_Handle + _CaseOffset!.Value);
             return instance;
         }
     }
-    private static nint _ShuffleCasesOffset = -1;
+    private static nint? _ShuffleCasesOffset;
 
     public ref int ShuffleCases
     {
         get
         {
-            if (_ShuffleCasesOffset == -1) _ShuffleCasesOffset = Schema.GetOffset(0x4B6BB20C3441354F);
-            return ref _Handle.AsRef<int>(_ShuffleCasesOffset);
+            _ShuffleCasesOffset = _ShuffleCasesOffset ?? Schema.GetOffset(0x4B6BB20C3441354F);
+            return ref _Handle.AsRef<int>(_ShuffleCasesOffset!.Value);
         }
     }
-    private static nint _LastShuffleCaseOffset = -1;
+    private static nint? _LastShuffleCaseOffset;
 
     public ref int LastShuffleCase
     {
         get
         {
-            if (_LastShuffleCaseOffset == -1) _LastShuffleCaseOffset = Schema.GetOffset(0x4B6BB20C053CE392);
-            return ref _Handle.AsRef<int>(_LastShuffleCaseOffset);
+            _LastShuffleCaseOffset = _LastShuffleCaseOffset ?? Schema.GetOffset(0x4B6BB20C053CE392);
+            return ref _Handle.AsRef<int>(_LastShuffleCaseOffset!.Value);
         }
     }
-    private static nint _UchShuffleCaseMapOffset = -1;
+    private static nint? _UchShuffleCaseMapOffset;
     private SchemaFixedArray<byte>? _UchShuffleCaseMapInstance;
 
     public ISchemaFixedArray<byte> UchShuffleCaseMap
     {
         get
         {
-            if (_UchShuffleCaseMapOffset == -1) _UchShuffleCaseMapOffset = Schema.GetOffset(0x4B6BB20CF9FC41AE);
+            _UchShuffleCaseMapOffset = _UchShuffleCaseMapOffset ?? Schema.GetOffset(0x4B6BB20CF9FC41AE);
             var instance = _UchShuffleCaseMapInstance ??= new SchemaFixedArray<byte>(0, 0x4B6BB20CF9FC41AE, 32, 1, 1);
-            instance.DangerousSetHandle(_Handle + _UchShuffleCaseMapOffset);
+            instance.DangerousSetHandle(_Handle + _UchShuffleCaseMapOffset!.Value);
             return instance;
         }
     }
-    private static nint _OnCaseOffset = -1;
+    private static nint? _OnCaseOffset;
     private SchemaFixedArray<CEntityIOOutput>? _OnCaseInstance;
 
     public ISchemaFixedArray<CEntityIOOutput> OnCase
     {
         get
         {
-            if (_OnCaseOffset == -1) _OnCaseOffset = Schema.GetOffset(0x4B6BB20CF8743C7C);
+            _OnCaseOffset = _OnCaseOffset ?? Schema.GetOffset(0x4B6BB20CF8743C7C);
             var instance = _OnCaseInstance ??= new SchemaFixedArray<CEntityIOOutput>(0, 0x4B6BB20CF8743C7C, 32, 24, 8);
-            instance.DangerousSetHandle(_Handle + _OnCaseOffset);
+            instance.DangerousSetHandle(_Handle + _OnCaseOffset!.Value);
             return instance;
         }
     }
-    private static nint _OnDefaultOffset = -1;
+    private static nint? _OnDefaultOffset;
     private SchemaUntypedField? _OnDefaultInstance;
 
     public SchemaUntypedField OnDefault
     {
         get
         {
-            if (_OnDefaultOffset == -1) _OnDefaultOffset = Schema.GetOffset(0x4B6BB20C4B03C3CD);
+            _OnDefaultOffset = _OnDefaultOffset ?? Schema.GetOffset(0x4B6BB20C4B03C3CD);
             var instance = _OnDefaultInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OnDefaultOffset);
+            instance.DangerousSetHandle(_Handle + _OnDefaultOffset!.Value);
             return instance;
         }
     }

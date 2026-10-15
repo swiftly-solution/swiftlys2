@@ -16,79 +16,79 @@ internal partial class SAVE_HEADERImpl : SchemaClass, SAVE_HEADER
 {
     public SAVE_HEADERImpl(nint handle) : base(handle) { }
 
-    private static nint _SaveIdOffset = -1;
+    private static nint? _SaveIdOffset;
 
     public ref int SaveId
     {
         get
         {
-            if (_SaveIdOffset == -1) _SaveIdOffset = Schema.GetOffset(0xB5CD27F0F8DF1435);
-            return ref _Handle.AsRef<int>(_SaveIdOffset);
+            _SaveIdOffset = _SaveIdOffset ?? Schema.GetOffset(0xB5CD27F0F8DF1435);
+            return ref _Handle.AsRef<int>(_SaveIdOffset!.Value);
         }
     }
-    private static nint _VersionOffset = -1;
+    private static nint? _VersionOffset;
 
     public ref int Version
     {
         get
         {
-            if (_VersionOffset == -1) _VersionOffset = Schema.GetOffset(0xB5CD27F004D046B7);
-            return ref _Handle.AsRef<int>(_VersionOffset);
+            _VersionOffset = _VersionOffset ?? Schema.GetOffset(0xB5CD27F004D046B7);
+            return ref _Handle.AsRef<int>(_VersionOffset!.Value);
         }
     }
-    private static nint _ConnectionCountOffset = -1;
+    private static nint? _ConnectionCountOffset;
 
     public ref int ConnectionCount
     {
         get
         {
-            if (_ConnectionCountOffset == -1) _ConnectionCountOffset = Schema.GetOffset(0xB5CD27F0B19B756C);
-            return ref _Handle.AsRef<int>(_ConnectionCountOffset);
+            _ConnectionCountOffset = _ConnectionCountOffset ?? Schema.GetOffset(0xB5CD27F0B19B756C);
+            return ref _Handle.AsRef<int>(_ConnectionCountOffset!.Value);
         }
     }
-    private static nint _MapVersionOffset = -1;
+    private static nint? _MapVersionOffset;
 
     public ref int MapVersion
     {
         get
         {
-            if (_MapVersionOffset == -1) _MapVersionOffset = Schema.GetOffset(0xB5CD27F0150AD79F);
-            return ref _Handle.AsRef<int>(_MapVersionOffset);
+            _MapVersionOffset = _MapVersionOffset ?? Schema.GetOffset(0xB5CD27F0150AD79F);
+            return ref _Handle.AsRef<int>(_MapVersionOffset!.Value);
         }
     }
-    private static nint _SpawnGroupNameOffset = -1;
+    private static nint? _SpawnGroupNameOffset;
 
     public string SpawnGroupName
     {
         get
         {
-            if (_SpawnGroupNameOffset == -1) _SpawnGroupNameOffset = Schema.GetOffset(0xB5CD27F0B2281EA3);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_SpawnGroupNameOffset));
+            _SpawnGroupNameOffset = _SpawnGroupNameOffset ?? Schema.GetOffset(0xB5CD27F0B2281EA3);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_SpawnGroupNameOffset!.Value));
         }
         set
         {
-            if (_SpawnGroupNameOffset == -1) _SpawnGroupNameOffset = Schema.GetOffset(0xB5CD27F0B2281EA3);
-            Schema.SetCUtlString(_Handle, _SpawnGroupNameOffset, value);
+            _SpawnGroupNameOffset = _SpawnGroupNameOffset ?? Schema.GetOffset(0xB5CD27F0B2281EA3);
+            Schema.SetCUtlString(_Handle, _SpawnGroupNameOffset!.Value, value);
         }
     }
-    private static nint _WorldOffsetOffset = -1;
+    private static nint? _WorldOffsetOffset;
 
     public ref matrix3x4_t WorldOffset
     {
         get
         {
-            if (_WorldOffsetOffset == -1) _WorldOffsetOffset = Schema.GetOffset(0xB5CD27F083450700);
-            return ref _Handle.AsRef<matrix3x4_t>(_WorldOffsetOffset);
+            _WorldOffsetOffset = _WorldOffsetOffset ?? Schema.GetOffset(0xB5CD27F083450700);
+            return ref _Handle.AsRef<matrix3x4_t>(_WorldOffsetOffset!.Value);
         }
     }
-    private static nint _SaveTimeOffset = -1;
+    private static nint? _SaveTimeOffset;
 
     public ref float SaveTime
     {
         get
         {
-            if (_SaveTimeOffset == -1) _SaveTimeOffset = Schema.GetOffset(0xB5CD27F00FC8CABB);
-            return ref _Handle.AsRef<float>(_SaveTimeOffset);
+            _SaveTimeOffset = _SaveTimeOffset ?? Schema.GetOffset(0xB5CD27F00FC8CABB);
+            return ref _Handle.AsRef<float>(_SaveTimeOffset!.Value);
         }
     }
 

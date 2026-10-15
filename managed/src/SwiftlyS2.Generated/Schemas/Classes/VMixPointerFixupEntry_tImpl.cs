@@ -16,26 +16,26 @@ internal partial class VMixPointerFixupEntry_tImpl : SchemaClass, VMixPointerFix
 {
     public VMixPointerFixupEntry_tImpl(nint handle) : base(handle) { }
 
-    private static nint _IndexOffset = -1;
+    private static nint? _IndexOffset;
 
     public ref uint Index
     {
         get
         {
-            if (_IndexOffset == -1) _IndexOffset = Schema.GetOffset(0x46F8E137B73DBE67);
-            return ref _Handle.AsRef<uint>(_IndexOffset);
+            _IndexOffset = _IndexOffset ?? Schema.GetOffset(0x46F8E137B73DBE67);
+            return ref _Handle.AsRef<uint>(_IndexOffset!.Value);
         }
     }
-    private static nint _OffsetOffset = -1;
+    private static nint? _OffsetOffset;
     private CVMixDataOffsetImpl? _OffsetInstance;
 
     public CVMixDataOffset Offset
     {
         get
         {
-            if (_OffsetOffset == -1) _OffsetOffset = Schema.GetOffset(0x46F8E137F836806A);
+            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0x46F8E137F836806A);
             var instance = _OffsetInstance ??= new CVMixDataOffsetImpl(0);
-            instance.DangerousSetHandle(_Handle + _OffsetOffset);
+            instance.DangerousSetHandle(_Handle + _OffsetOffset!.Value);
             return instance;
         }
     }

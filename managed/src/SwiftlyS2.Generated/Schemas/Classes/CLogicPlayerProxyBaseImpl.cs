@@ -16,57 +16,57 @@ internal partial class CLogicPlayerProxyBaseImpl : CLogicalEntityImpl, CLogicPla
 {
     public CLogicPlayerProxyBaseImpl(nint handle) : base(handle) { }
 
-    private static nint _PlayerHasAmmoOffset = -1;
+    private static nint? _PlayerHasAmmoOffset;
 
     public ref CEntityIOOutput PlayerHasAmmo
     {
         get
         {
-            if (_PlayerHasAmmoOffset == -1) _PlayerHasAmmoOffset = Schema.GetOffset(0x652D06B66A23AB96);
-            return ref _Handle.AsRef<CEntityIOOutput>(_PlayerHasAmmoOffset);
+            _PlayerHasAmmoOffset = _PlayerHasAmmoOffset ?? Schema.GetOffset(0x652D06B66A23AB96);
+            return ref _Handle.AsRef<CEntityIOOutput>(_PlayerHasAmmoOffset!.Value);
         }
     }
-    private static nint _PlayerHasNoAmmoOffset = -1;
+    private static nint? _PlayerHasNoAmmoOffset;
 
     public ref CEntityIOOutput PlayerHasNoAmmo
     {
         get
         {
-            if (_PlayerHasNoAmmoOffset == -1) _PlayerHasNoAmmoOffset = Schema.GetOffset(0x652D06B606CA340D);
-            return ref _Handle.AsRef<CEntityIOOutput>(_PlayerHasNoAmmoOffset);
+            _PlayerHasNoAmmoOffset = _PlayerHasNoAmmoOffset ?? Schema.GetOffset(0x652D06B606CA340D);
+            return ref _Handle.AsRef<CEntityIOOutput>(_PlayerHasNoAmmoOffset!.Value);
         }
     }
-    private static nint _PlayerDiedOffset = -1;
+    private static nint? _PlayerDiedOffset;
 
     public ref CEntityIOOutput PlayerDied
     {
         get
         {
-            if (_PlayerDiedOffset == -1) _PlayerDiedOffset = Schema.GetOffset(0x652D06B6B440E03E);
-            return ref _Handle.AsRef<CEntityIOOutput>(_PlayerDiedOffset);
+            _PlayerDiedOffset = _PlayerDiedOffset ?? Schema.GetOffset(0x652D06B6B440E03E);
+            return ref _Handle.AsRef<CEntityIOOutput>(_PlayerDiedOffset!.Value);
         }
     }
-    private static nint _RequestedPlayerHealthOffset = -1;
+    private static nint? _RequestedPlayerHealthOffset;
     private SchemaUntypedField? _RequestedPlayerHealthInstance;
 
     public SchemaUntypedField RequestedPlayerHealth
     {
         get
         {
-            if (_RequestedPlayerHealthOffset == -1) _RequestedPlayerHealthOffset = Schema.GetOffset(0x652D06B6F1F83D58);
+            _RequestedPlayerHealthOffset = _RequestedPlayerHealthOffset ?? Schema.GetOffset(0x652D06B6F1F83D58);
             var instance = _RequestedPlayerHealthInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _RequestedPlayerHealthOffset);
+            instance.DangerousSetHandle(_Handle + _RequestedPlayerHealthOffset!.Value);
             return instance;
         }
     }
-    private static nint _PlayerOffset = -1;
+    private static nint? _PlayerOffset;
 
     public ref CHandle<CBaseEntity> Player
     {
         get
         {
-            if (_PlayerOffset == -1) _PlayerOffset = Schema.GetOffset(0x652D06B668856C16);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_PlayerOffset);
+            _PlayerOffset = _PlayerOffset ?? Schema.GetOffset(0x652D06B668856C16);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_PlayerOffset!.Value);
         }
     }
 

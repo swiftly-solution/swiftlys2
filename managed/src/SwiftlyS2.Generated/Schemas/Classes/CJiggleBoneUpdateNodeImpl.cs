@@ -16,16 +16,16 @@ internal partial class CJiggleBoneUpdateNodeImpl : CUnaryUpdateNodeImpl, CJiggle
 {
     public CJiggleBoneUpdateNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _OpFixedDataOffset = -1;
+    private static nint? _OpFixedDataOffset;
     private JiggleBoneSettingsList_tImpl? _OpFixedDataInstance;
 
     public JiggleBoneSettingsList_t OpFixedData
     {
         get
         {
-            if (_OpFixedDataOffset == -1) _OpFixedDataOffset = Schema.GetOffset(0x6CA954296960AF8C);
+            _OpFixedDataOffset = _OpFixedDataOffset ?? Schema.GetOffset(0x6CA954296960AF8C);
             var instance = _OpFixedDataInstance ??= new JiggleBoneSettingsList_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _OpFixedDataOffset);
+            instance.DangerousSetHandle(_Handle + _OpFixedDataOffset!.Value);
             return instance;
         }
     }

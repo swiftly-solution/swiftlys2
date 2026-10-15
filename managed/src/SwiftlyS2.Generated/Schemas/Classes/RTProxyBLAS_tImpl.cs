@@ -16,97 +16,97 @@ internal partial class RTProxyBLAS_tImpl : SchemaClass, RTProxyBLAS_t
 {
     public RTProxyBLAS_tImpl(nint handle) : base(handle) { }
 
-    private static nint _FirstIndexOffset = -1;
+    private static nint? _FirstIndexOffset;
 
     public ref uint FirstIndex
     {
         get
         {
-            if (_FirstIndexOffset == -1) _FirstIndexOffset = Schema.GetOffset(0x1854A2C68317E0B);
-            return ref _Handle.AsRef<uint>(_FirstIndexOffset);
+            _FirstIndexOffset = _FirstIndexOffset ?? Schema.GetOffset(0x1854A2C68317E0B);
+            return ref _Handle.AsRef<uint>(_FirstIndexOffset!.Value);
         }
     }
-    private static nint _IndexCountOffset = -1;
+    private static nint? _IndexCountOffset;
 
     public ref uint IndexCount
     {
         get
         {
-            if (_IndexCountOffset == -1) _IndexCountOffset = Schema.GetOffset(0x1854A2CB0202EFE);
-            return ref _Handle.AsRef<uint>(_IndexCountOffset);
+            _IndexCountOffset = _IndexCountOffset ?? Schema.GetOffset(0x1854A2CB0202EFE);
+            return ref _Handle.AsRef<uint>(_IndexCountOffset!.Value);
         }
     }
-    private static nint _VBByteOffsetOffset = -1;
+    private static nint? _VBByteOffsetOffset;
 
     public ref uint VBByteOffset
     {
         get
         {
-            if (_VBByteOffsetOffset == -1) _VBByteOffsetOffset = Schema.GetOffset(0x1854A2C0CF4C9E4);
-            return ref _Handle.AsRef<uint>(_VBByteOffsetOffset);
+            _VBByteOffsetOffset = _VBByteOffsetOffset ?? Schema.GetOffset(0x1854A2C0CF4C9E4);
+            return ref _Handle.AsRef<uint>(_VBByteOffsetOffset!.Value);
         }
     }
-    private static nint _BaseVertexOffset = -1;
+    private static nint? _BaseVertexOffset;
 
     public ref uint BaseVertex
     {
         get
         {
-            if (_BaseVertexOffset == -1) _BaseVertexOffset = Schema.GetOffset(0x1854A2C48F55CFA);
-            return ref _Handle.AsRef<uint>(_BaseVertexOffset);
+            _BaseVertexOffset = _BaseVertexOffset ?? Schema.GetOffset(0x1854A2C48F55CFA);
+            return ref _Handle.AsRef<uint>(_BaseVertexOffset!.Value);
         }
     }
-    private static nint _VertexCountOffset = -1;
+    private static nint? _VertexCountOffset;
 
     public ref ushort VertexCount
     {
         get
         {
-            if (_VertexCountOffset == -1) _VertexCountOffset = Schema.GetOffset(0x1854A2C12923E12);
-            return ref _Handle.AsRef<ushort>(_VertexCountOffset);
+            _VertexCountOffset = _VertexCountOffset ?? Schema.GetOffset(0x1854A2C12923E12);
+            return ref _Handle.AsRef<ushort>(_VertexCountOffset!.Value);
         }
     }
-    private static nint _AlbedoFormatOffset = -1;
+    private static nint? _AlbedoFormatOffset;
 
     public ref VertexAlbedoFormat_t AlbedoFormat
     {
         get
         {
-            if (_AlbedoFormatOffset == -1) _AlbedoFormatOffset = Schema.GetOffset(0x1854A2C7162BF9B);
-            return ref _Handle.AsRef<VertexAlbedoFormat_t>(_AlbedoFormatOffset);
+            _AlbedoFormatOffset = _AlbedoFormatOffset ?? Schema.GetOffset(0x1854A2C7162BF9B);
+            return ref _Handle.AsRef<VertexAlbedoFormat_t>(_AlbedoFormatOffset!.Value);
         }
     }
-    private static nint _BoundLsOffset = -1;
+    private static nint? _BoundLsOffset;
     private AABB_tImpl? _BoundLsInstance;
 
     public AABB_t BoundLs
     {
         get
         {
-            if (_BoundLsOffset == -1) _BoundLsOffset = Schema.GetOffset(0x1854A2C164BE442);
+            _BoundLsOffset = _BoundLsOffset ?? Schema.GetOffset(0x1854A2C164BE442);
             var instance = _BoundLsInstance ??= new AABB_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _BoundLsOffset);
+            instance.DangerousSetHandle(_Handle + _BoundLsOffset!.Value);
             return instance;
         }
     }
-    private static nint _VertexOriginLsOffset = -1;
+    private static nint? _VertexOriginLsOffset;
 
     public ref Vector VertexOriginLs
     {
         get
         {
-            if (_VertexOriginLsOffset == -1) _VertexOriginLsOffset = Schema.GetOffset(0x1854A2C3B66F5A8);
-            return ref _Handle.AsRef<Vector>(_VertexOriginLsOffset);
+            _VertexOriginLsOffset = _VertexOriginLsOffset ?? Schema.GetOffset(0x1854A2C3B66F5A8);
+            return ref _Handle.AsRef<Vector>(_VertexOriginLsOffset!.Value);
         }
     }
-    private static nint _VertexExtentLsOffset = -1;
+    private static nint? _VertexExtentLsOffset;
 
     public ref Vector VertexExtentLs
     {
         get
         {
-            if (_VertexExtentLsOffset == -1) _VertexExtentLsOffset = Schema.GetOffset(0x1854A2C9666FC2A);
-            return ref _Handle.AsRef<Vector>(_VertexExtentLsOffset);
+            _VertexExtentLsOffset = _VertexExtentLsOffset ?? Schema.GetOffset(0x1854A2C9666FC2A);
+            return ref _Handle.AsRef<Vector>(_VertexExtentLsOffset!.Value);
         }
     }
 

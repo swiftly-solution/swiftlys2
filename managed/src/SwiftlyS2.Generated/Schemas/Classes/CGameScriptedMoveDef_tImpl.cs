@@ -16,94 +16,94 @@ internal partial class CGameScriptedMoveDef_tImpl : SchemaClass, CGameScriptedMo
 {
     public CGameScriptedMoveDef_tImpl(nint handle) : base(handle) { }
 
-    private static nint _DestOffsetOffset = -1;
+    private static nint? _DestOffsetOffset;
 
     public ref Vector DestOffset
     {
         get
         {
-            if (_DestOffsetOffset == -1) _DestOffsetOffset = Schema.GetOffset(0x278F5D457DA34A6E);
-            return ref _Handle.AsRef<Vector>(_DestOffsetOffset);
+            _DestOffsetOffset = _DestOffsetOffset ?? Schema.GetOffset(0x278F5D457DA34A6E);
+            return ref _Handle.AsRef<Vector>(_DestOffsetOffset!.Value);
         }
     }
-    private static nint _DestEntityOffset = -1;
+    private static nint? _DestEntityOffset;
 
     public ref CHandle<CBaseEntity> DestEntity
     {
         get
         {
-            if (_DestEntityOffset == -1) _DestEntityOffset = Schema.GetOffset(0x278F5D45A1CF74EC);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_DestEntityOffset);
+            _DestEntityOffset = _DestEntityOffset ?? Schema.GetOffset(0x278F5D45A1CF74EC);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_DestEntityOffset!.Value);
         }
     }
-    private static nint _DestOffset = -1;
+    private static nint? _DestOffset;
 
     public ref QAngle Dest
     {
         get
         {
-            if (_DestOffset == -1) _DestOffset = Schema.GetOffset(0x278F5D45B61266D7);
-            return ref _Handle.AsRef<QAngle>(_DestOffset);
+            _DestOffset = _DestOffset ?? Schema.GetOffset(0x278F5D45B61266D7);
+            return ref _Handle.AsRef<QAngle>(_DestOffset!.Value);
         }
     }
-    private static nint _DurationOffset = -1;
+    private static nint? _DurationOffset;
 
     public ref float Duration
     {
         get
         {
-            if (_DurationOffset == -1) _DurationOffset = Schema.GetOffset(0x278F5D45BC5E3BAB);
-            return ref _Handle.AsRef<float>(_DurationOffset);
+            _DurationOffset = _DurationOffset ?? Schema.GetOffset(0x278F5D45BC5E3BAB);
+            return ref _Handle.AsRef<float>(_DurationOffset!.Value);
         }
     }
-    private static nint _AngRateOffset = -1;
+    private static nint? _AngRateOffset;
 
     public ref float AngRate
     {
         get
         {
-            if (_AngRateOffset == -1) _AngRateOffset = Schema.GetOffset(0x278F5D4525A03D83);
-            return ref _Handle.AsRef<float>(_AngRateOffset);
+            _AngRateOffset = _AngRateOffset ?? Schema.GetOffset(0x278F5D4525A03D83);
+            return ref _Handle.AsRef<float>(_AngRateOffset!.Value);
         }
     }
-    private static nint _MoveSpeedOffset = -1;
+    private static nint? _MoveSpeedOffset;
 
     public ref float MoveSpeed
     {
         get
         {
-            if (_MoveSpeedOffset == -1) _MoveSpeedOffset = Schema.GetOffset(0x278F5D4566D18279);
-            return ref _Handle.AsRef<float>(_MoveSpeedOffset);
+            _MoveSpeedOffset = _MoveSpeedOffset ?? Schema.GetOffset(0x278F5D4566D18279);
+            return ref _Handle.AsRef<float>(_MoveSpeedOffset!.Value);
         }
     }
-    private static nint _AimDisabledOffset = -1;
+    private static nint? _AimDisabledOffset;
 
     public ref bool AimDisabled
     {
         get
         {
-            if (_AimDisabledOffset == -1) _AimDisabledOffset = Schema.GetOffset(0x278F5D457E2FBF2E);
-            return ref _Handle.AsRef<bool>(_AimDisabledOffset);
+            _AimDisabledOffset = _AimDisabledOffset ?? Schema.GetOffset(0x278F5D457E2FBF2E);
+            return ref _Handle.AsRef<bool>(_AimDisabledOffset!.Value);
         }
     }
-    private static nint _IgnoreRotationOffset = -1;
+    private static nint? _IgnoreRotationOffset;
 
     public ref bool IgnoreRotation
     {
         get
         {
-            if (_IgnoreRotationOffset == -1) _IgnoreRotationOffset = Schema.GetOffset(0x278F5D45C7A0F33D);
-            return ref _Handle.AsRef<bool>(_IgnoreRotationOffset);
+            _IgnoreRotationOffset = _IgnoreRotationOffset ?? Schema.GetOffset(0x278F5D45C7A0F33D);
+            return ref _Handle.AsRef<bool>(_IgnoreRotationOffset!.Value);
         }
     }
-    private static nint _ForcedCrouchStateOffset = -1;
+    private static nint? _ForcedCrouchStateOffset;
 
     public ref ForcedCrouchState_t ForcedCrouchState
     {
         get
         {
-            if (_ForcedCrouchStateOffset == -1) _ForcedCrouchStateOffset = Schema.GetOffset(0x278F5D4571B1ABC7);
-            return ref _Handle.AsRef<ForcedCrouchState_t>(_ForcedCrouchStateOffset);
+            _ForcedCrouchStateOffset = _ForcedCrouchStateOffset ?? Schema.GetOffset(0x278F5D4571B1ABC7);
+            return ref _Handle.AsRef<ForcedCrouchState_t>(_ForcedCrouchStateOffset!.Value);
         }
     }
 

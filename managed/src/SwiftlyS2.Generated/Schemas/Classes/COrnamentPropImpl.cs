@@ -16,19 +16,19 @@ internal partial class COrnamentPropImpl : CDynamicPropImpl, COrnamentProp
 {
     public COrnamentPropImpl(nint handle) : base(handle) { }
 
-    private static nint _InitialOwnerOffset = -1;
+    private static nint? _InitialOwnerOffset;
 
     public string InitialOwner
     {
         get
         {
-            if (_InitialOwnerOffset == -1) _InitialOwnerOffset = Schema.GetOffset(0x1B8675B7BAA055D6);
-            return Schema.GetString(_Handle.Read<nint>(_InitialOwnerOffset));
+            _InitialOwnerOffset = _InitialOwnerOffset ?? Schema.GetOffset(0x1B8675B7BAA055D6);
+            return Schema.GetString(_Handle.Read<nint>(_InitialOwnerOffset!.Value));
         }
         set
         {
-            if (_InitialOwnerOffset == -1) _InitialOwnerOffset = Schema.GetOffset(0x1B8675B7BAA055D6);
-            Schema.SetString(_Handle, _InitialOwnerOffset, value);
+            _InitialOwnerOffset = _InitialOwnerOffset ?? Schema.GetOffset(0x1B8675B7BAA055D6);
+            Schema.SetString(_Handle, _InitialOwnerOffset!.Value, value);
         }
     }
 

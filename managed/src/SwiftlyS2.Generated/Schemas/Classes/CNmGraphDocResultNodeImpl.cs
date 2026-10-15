@@ -16,14 +16,14 @@ internal partial class CNmGraphDocResultNodeImpl : CNmGraphDocFlowNodeImpl, CNmG
 {
     public CNmGraphDocResultNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _ResultTypeOffset = -1;
+    private static nint? _ResultTypeOffset;
 
     public ref NmGraphValueType_t ResultType
     {
         get
         {
-            if (_ResultTypeOffset == -1) _ResultTypeOffset = Schema.GetOffset(0x34CD998C4BA37EEC);
-            return ref _Handle.AsRef<NmGraphValueType_t>(_ResultTypeOffset);
+            _ResultTypeOffset = _ResultTypeOffset ?? Schema.GetOffset(0x34CD998C4BA37EEC);
+            return ref _Handle.AsRef<NmGraphValueType_t>(_ResultTypeOffset!.Value);
         }
     }
 

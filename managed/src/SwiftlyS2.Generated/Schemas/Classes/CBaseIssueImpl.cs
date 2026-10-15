@@ -16,75 +16,75 @@ internal partial class CBaseIssueImpl : SchemaClass, CBaseIssue
 {
     public CBaseIssueImpl(nint handle) : base(handle) { }
 
-    private static nint _TypeStringOffset = -1;
+    private static nint? _TypeStringOffset;
 
     public string TypeString
     {
         get
         {
-            if (_TypeStringOffset == -1) _TypeStringOffset = Schema.GetOffset(0xE0727D1E2E3EE7A9);
-            return Schema.GetString(_Handle + _TypeStringOffset);
+            _TypeStringOffset = _TypeStringOffset ?? Schema.GetOffset(0xE0727D1E2E3EE7A9);
+            return Schema.GetString(_Handle + _TypeStringOffset!.Value);
         }
         set
         {
-            if (_TypeStringOffset == -1) _TypeStringOffset = Schema.GetOffset(0xE0727D1E2E3EE7A9);
-            Schema.SetFixedString(_Handle, _TypeStringOffset, value, 64);
+            _TypeStringOffset = _TypeStringOffset ?? Schema.GetOffset(0xE0727D1E2E3EE7A9);
+            Schema.SetFixedString(_Handle, _TypeStringOffset!.Value, value, 64);
         }
     }
-    private static nint _DetailsStringOffset = -1;
+    private static nint? _DetailsStringOffset;
 
     public string DetailsString
     {
         get
         {
-            if (_DetailsStringOffset == -1) _DetailsStringOffset = Schema.GetOffset(0xE0727D1ECCE4C9BF);
-            return Schema.GetString(_Handle + _DetailsStringOffset);
+            _DetailsStringOffset = _DetailsStringOffset ?? Schema.GetOffset(0xE0727D1ECCE4C9BF);
+            return Schema.GetString(_Handle + _DetailsStringOffset!.Value);
         }
         set
         {
-            if (_DetailsStringOffset == -1) _DetailsStringOffset = Schema.GetOffset(0xE0727D1ECCE4C9BF);
-            Schema.SetFixedString(_Handle, _DetailsStringOffset, value, 260);
+            _DetailsStringOffset = _DetailsStringOffset ?? Schema.GetOffset(0xE0727D1ECCE4C9BF);
+            Schema.SetFixedString(_Handle, _DetailsStringOffset!.Value, value, 260);
         }
     }
-    private static nint _NumYesVotesOffset = -1;
+    private static nint? _NumYesVotesOffset;
 
     public ref int NumYesVotes
     {
         get
         {
-            if (_NumYesVotesOffset == -1) _NumYesVotesOffset = Schema.GetOffset(0xE0727D1E7ED4202C);
-            return ref _Handle.AsRef<int>(_NumYesVotesOffset);
+            _NumYesVotesOffset = _NumYesVotesOffset ?? Schema.GetOffset(0xE0727D1E7ED4202C);
+            return ref _Handle.AsRef<int>(_NumYesVotesOffset!.Value);
         }
     }
-    private static nint _NumNoVotesOffset = -1;
+    private static nint? _NumNoVotesOffset;
 
     public ref int NumNoVotes
     {
         get
         {
-            if (_NumNoVotesOffset == -1) _NumNoVotesOffset = Schema.GetOffset(0xE0727D1E54F18188);
-            return ref _Handle.AsRef<int>(_NumNoVotesOffset);
+            _NumNoVotesOffset = _NumNoVotesOffset ?? Schema.GetOffset(0xE0727D1E54F18188);
+            return ref _Handle.AsRef<int>(_NumNoVotesOffset!.Value);
         }
     }
-    private static nint _NumPotentialVotesOffset = -1;
+    private static nint? _NumPotentialVotesOffset;
 
     public ref int NumPotentialVotes
     {
         get
         {
-            if (_NumPotentialVotesOffset == -1) _NumPotentialVotesOffset = Schema.GetOffset(0xE0727D1E61EC9307);
-            return ref _Handle.AsRef<int>(_NumPotentialVotesOffset);
+            _NumPotentialVotesOffset = _NumPotentialVotesOffset ?? Schema.GetOffset(0xE0727D1E61EC9307);
+            return ref _Handle.AsRef<int>(_NumPotentialVotesOffset!.Value);
         }
     }
-    private static nint _VoteControllerOffset = -1;
+    private static nint? _VoteControllerOffset;
     private CVoteControllerImpl? _VoteControllerInstance;
 
     public CVoteController? VoteController
     {
         get
         {
-            if (_VoteControllerOffset == -1) _VoteControllerOffset = Schema.GetOffset(0xE0727D1ECB818C7B);
-            var ptr = _Handle.Read<nint>(_VoteControllerOffset);
+            _VoteControllerOffset = _VoteControllerOffset ?? Schema.GetOffset(0xE0727D1ECB818C7B);
+            var ptr = _Handle.Read<nint>(_VoteControllerOffset!.Value);
             if (!ptr.IsValidPtr()) return null;
             var instance = _VoteControllerInstance ??= new CVoteControllerImpl(0);
             instance.DangerousSetHandle(ptr);

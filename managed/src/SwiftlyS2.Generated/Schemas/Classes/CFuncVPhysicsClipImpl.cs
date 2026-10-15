@@ -16,14 +16,14 @@ internal partial class CFuncVPhysicsClipImpl : CBaseModelEntityImpl, CFuncVPhysi
 {
     public CFuncVPhysicsClipImpl(nint handle) : base(handle) { }
 
-    private static nint _DisabledOffset = -1;
+    private static nint? _DisabledOffset;
 
     public ref bool Disabled
     {
         get
         {
-            if (_DisabledOffset == -1) _DisabledOffset = Schema.GetOffset(0xE695DCD93A7C5965);
-            return ref _Handle.AsRef<bool>(_DisabledOffset);
+            _DisabledOffset = _DisabledOffset ?? Schema.GetOffset(0xE695DCD93A7C5965);
+            return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
         }
     }
 

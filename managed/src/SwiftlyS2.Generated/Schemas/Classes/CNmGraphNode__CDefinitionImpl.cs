@@ -16,14 +16,14 @@ internal partial class CNmGraphNode__CDefinitionImpl : SchemaClass, CNmGraphNode
 {
     public CNmGraphNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint _NodeIdxOffset = -1;
+    private static nint? _NodeIdxOffset;
 
     public ref short NodeIdx
     {
         get
         {
-            if (_NodeIdxOffset == -1) _NodeIdxOffset = Schema.GetOffset(0x97FBD3EF124AB5CC);
-            return ref _Handle.AsRef<short>(_NodeIdxOffset);
+            _NodeIdxOffset = _NodeIdxOffset ?? Schema.GetOffset(0x97FBD3EF124AB5CC);
+            return ref _Handle.AsRef<short>(_NodeIdxOffset!.Value);
         }
     }
 

@@ -16,16 +16,16 @@ internal partial class CEnvWindImpl : CBaseEntityImpl, CEnvWind
 {
     public CEnvWindImpl(nint handle) : base(handle) { }
 
-    private static nint _EnvWindSharedOffset = -1;
+    private static nint? _EnvWindSharedOffset;
     private CEnvWindSharedImpl? _EnvWindSharedInstance;
 
     public CEnvWindShared EnvWindShared
     {
         get
         {
-            if (_EnvWindSharedOffset == -1) _EnvWindSharedOffset = Schema.GetOffset(0x39465FB775DDCB0F);
+            _EnvWindSharedOffset = _EnvWindSharedOffset ?? Schema.GetOffset(0x39465FB775DDCB0F);
             var instance = _EnvWindSharedInstance ??= new CEnvWindSharedImpl(0);
-            instance.DangerousSetHandle(_Handle + _EnvWindSharedOffset);
+            instance.DangerousSetHandle(_Handle + _EnvWindSharedOffset!.Value);
             return instance;
         }
     }

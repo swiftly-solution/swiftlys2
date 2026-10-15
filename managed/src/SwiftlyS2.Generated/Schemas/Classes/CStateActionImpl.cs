@@ -16,27 +16,27 @@ internal partial class CStateActionImpl : SchemaClass, CStateAction
 {
     public CStateActionImpl(nint handle) : base(handle) { }
 
-    private static nint _ActionOffset = -1;
+    private static nint? _ActionOffset;
     private SchemaUntypedField? _ActionInstance;
 
     public SchemaUntypedField Action
     {
         get
         {
-            if (_ActionOffset == -1) _ActionOffset = Schema.GetOffset(0x3A39662DE9CB47D5);
+            _ActionOffset = _ActionOffset ?? Schema.GetOffset(0x3A39662DE9CB47D5);
             var instance = _ActionInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ActionOffset);
+            instance.DangerousSetHandle(_Handle + _ActionOffset!.Value);
             return instance;
         }
     }
-    private static nint _BehaviorOffset = -1;
+    private static nint? _BehaviorOffset;
 
     public ref StateActionBehavior Behavior
     {
         get
         {
-            if (_BehaviorOffset == -1) _BehaviorOffset = Schema.GetOffset(0x3A39662D436DB10A);
-            return ref _Handle.AsRef<StateActionBehavior>(_BehaviorOffset);
+            _BehaviorOffset = _BehaviorOffset ?? Schema.GetOffset(0x3A39662D436DB10A);
+            return ref _Handle.AsRef<StateActionBehavior>(_BehaviorOffset!.Value);
         }
     }
 

@@ -16,57 +16,57 @@ internal partial class C_OP_ColorInterpolateImpl : CParticleFunctionOperatorImpl
 {
     public C_OP_ColorInterpolateImpl(nint handle) : base(handle) { }
 
-    private static nint _ColorFadeOffset = -1;
+    private static nint? _ColorFadeOffset;
 
     public ref Color ColorFade
     {
         get
         {
-            if (_ColorFadeOffset == -1) _ColorFadeOffset = Schema.GetOffset(0x2F5E97470841572E);
-            return ref _Handle.AsRef<Color>(_ColorFadeOffset);
+            _ColorFadeOffset = _ColorFadeOffset ?? Schema.GetOffset(0x2F5E97470841572E);
+            return ref _Handle.AsRef<Color>(_ColorFadeOffset!.Value);
         }
     }
-    private static nint _FadeStartTimeOffset = -1;
+    private static nint? _FadeStartTimeOffset;
 
     public ref float FadeStartTime
     {
         get
         {
-            if (_FadeStartTimeOffset == -1) _FadeStartTimeOffset = Schema.GetOffset(0x2F5E974786B28BFA);
-            return ref _Handle.AsRef<float>(_FadeStartTimeOffset);
+            _FadeStartTimeOffset = _FadeStartTimeOffset ?? Schema.GetOffset(0x2F5E974786B28BFA);
+            return ref _Handle.AsRef<float>(_FadeStartTimeOffset!.Value);
         }
     }
-    private static nint _FadeEndTimeOffset = -1;
+    private static nint? _FadeEndTimeOffset;
 
     public ref float FadeEndTime
     {
         get
         {
-            if (_FadeEndTimeOffset == -1) _FadeEndTimeOffset = Schema.GetOffset(0x2F5E974700D5CA4F);
-            return ref _Handle.AsRef<float>(_FadeEndTimeOffset);
+            _FadeEndTimeOffset = _FadeEndTimeOffset ?? Schema.GetOffset(0x2F5E974700D5CA4F);
+            return ref _Handle.AsRef<float>(_FadeEndTimeOffset!.Value);
         }
     }
-    private static nint _FieldOutputOffset = -1;
+    private static nint? _FieldOutputOffset;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0x2F5E9747E5729606);
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x2F5E9747E5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
             return instance;
         }
     }
-    private static nint _EaseInOutOffset = -1;
+    private static nint? _EaseInOutOffset;
 
     public ref bool EaseInOut
     {
         get
         {
-            if (_EaseInOutOffset == -1) _EaseInOutOffset = Schema.GetOffset(0x2F5E97475172CF48);
-            return ref _Handle.AsRef<bool>(_EaseInOutOffset);
+            _EaseInOutOffset = _EaseInOutOffset ?? Schema.GetOffset(0x2F5E97475172CF48);
+            return ref _Handle.AsRef<bool>(_EaseInOutOffset!.Value);
         }
     }
 

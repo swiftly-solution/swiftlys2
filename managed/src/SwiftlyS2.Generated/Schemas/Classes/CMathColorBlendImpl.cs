@@ -16,56 +16,56 @@ internal partial class CMathColorBlendImpl : CLogicalEntityImpl, CMathColorBlend
 {
     public CMathColorBlendImpl(nint handle) : base(handle) { }
 
-    private static nint _InMinOffset = -1;
+    private static nint? _InMinOffset;
 
     public ref float InMin
     {
         get
         {
-            if (_InMinOffset == -1) _InMinOffset = Schema.GetOffset(0xCC5E3EF67506C6C8);
-            return ref _Handle.AsRef<float>(_InMinOffset);
+            _InMinOffset = _InMinOffset ?? Schema.GetOffset(0xCC5E3EF67506C6C8);
+            return ref _Handle.AsRef<float>(_InMinOffset!.Value);
         }
     }
-    private static nint _InMaxOffset = -1;
+    private static nint? _InMaxOffset;
 
     public ref float InMax
     {
         get
         {
-            if (_InMaxOffset == -1) _InMaxOffset = Schema.GetOffset(0xCC5E3EF66B1BD1C2);
-            return ref _Handle.AsRef<float>(_InMaxOffset);
+            _InMaxOffset = _InMaxOffset ?? Schema.GetOffset(0xCC5E3EF66B1BD1C2);
+            return ref _Handle.AsRef<float>(_InMaxOffset!.Value);
         }
     }
-    private static nint _OutColor1Offset = -1;
+    private static nint? _OutColor1Offset;
 
     public ref Color OutColor1
     {
         get
         {
-            if (_OutColor1Offset == -1) _OutColor1Offset = Schema.GetOffset(0xCC5E3EF639D7D5AD);
-            return ref _Handle.AsRef<Color>(_OutColor1Offset);
+            _OutColor1Offset = _OutColor1Offset ?? Schema.GetOffset(0xCC5E3EF639D7D5AD);
+            return ref _Handle.AsRef<Color>(_OutColor1Offset!.Value);
         }
     }
-    private static nint _OutColor2Offset = -1;
+    private static nint? _OutColor2Offset;
 
     public ref Color OutColor2
     {
         get
         {
-            if (_OutColor2Offset == -1) _OutColor2Offset = Schema.GetOffset(0xCC5E3EF636D7D0F4);
-            return ref _Handle.AsRef<Color>(_OutColor2Offset);
+            _OutColor2Offset = _OutColor2Offset ?? Schema.GetOffset(0xCC5E3EF636D7D0F4);
+            return ref _Handle.AsRef<Color>(_OutColor2Offset!.Value);
         }
     }
-    private static nint _OutValueOffset = -1;
+    private static nint? _OutValueOffset;
     private SchemaUntypedField? _OutValueInstance;
 
     public SchemaUntypedField OutValue
     {
         get
         {
-            if (_OutValueOffset == -1) _OutValueOffset = Schema.GetOffset(0xCC5E3EF6B5358CB4);
+            _OutValueOffset = _OutValueOffset ?? Schema.GetOffset(0xCC5E3EF6B5358CB4);
             var instance = _OutValueInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OutValueOffset);
+            instance.DangerousSetHandle(_Handle + _OutValueOffset!.Value);
             return instance;
         }
     }

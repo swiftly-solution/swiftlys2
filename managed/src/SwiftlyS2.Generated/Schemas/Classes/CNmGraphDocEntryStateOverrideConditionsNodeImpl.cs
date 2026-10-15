@@ -16,14 +16,14 @@ internal partial class CNmGraphDocEntryStateOverrideConditionsNodeImpl : CNmGrap
 {
     public CNmGraphDocEntryStateOverrideConditionsNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _PinToStateMappingOffset = -1;
+    private static nint? _PinToStateMappingOffset;
 
     public ref CUtlVector<SchemaUntypedField> PinToStateMapping
     {
         get
         {
-            if (_PinToStateMappingOffset == -1) _PinToStateMappingOffset = Schema.GetOffset(0x4DF3126E43C459F0);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_PinToStateMappingOffset);
+            _PinToStateMappingOffset = _PinToStateMappingOffset ?? Schema.GetOffset(0x4DF3126E43C459F0);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_PinToStateMappingOffset!.Value);
         }
     }
 

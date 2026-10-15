@@ -16,29 +16,29 @@ internal partial class TargetSelectorInstanceData_tImpl : SchemaClass, TargetSel
 {
     public TargetSelectorInstanceData_tImpl(nint handle) : base(handle) { }
 
-    private static nint _CurrentIndexOffset = -1;
+    private static nint? _CurrentIndexOffset;
     private SchemaUntypedField? _CurrentIndexInstance;
 
     public SchemaUntypedField CurrentIndex
     {
         get
         {
-            if (_CurrentIndexOffset == -1) _CurrentIndexOffset = Schema.GetOffset(0xE96408C1883AA9CE);
+            _CurrentIndexOffset = _CurrentIndexOffset ?? Schema.GetOffset(0xE96408C1883AA9CE);
             var instance = _CurrentIndexInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _CurrentIndexOffset);
+            instance.DangerousSetHandle(_Handle + _CurrentIndexOffset!.Value);
             return instance;
         }
     }
-    private static nint _MSRootMotionAnlyzerTargetOffset = -1;
+    private static nint? _MSRootMotionAnlyzerTargetOffset;
     private SchemaUntypedField? _MSRootMotionAnlyzerTargetInstance;
 
     public SchemaUntypedField MSRootMotionAnlyzerTarget
     {
         get
         {
-            if (_MSRootMotionAnlyzerTargetOffset == -1) _MSRootMotionAnlyzerTargetOffset = Schema.GetOffset(0xE96408C1FB915109);
+            _MSRootMotionAnlyzerTargetOffset = _MSRootMotionAnlyzerTargetOffset ?? Schema.GetOffset(0xE96408C1FB915109);
             var instance = _MSRootMotionAnlyzerTargetInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _MSRootMotionAnlyzerTargetOffset);
+            instance.DangerousSetHandle(_Handle + _MSRootMotionAnlyzerTargetOffset!.Value);
             return instance;
         }
     }

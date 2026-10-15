@@ -16,35 +16,35 @@ internal partial class ResponseParamsImpl : SchemaClass, ResponseParams
 {
     public ResponseParamsImpl(nint handle) : base(handle) { }
 
-    private static nint _OddsOffset = -1;
+    private static nint? _OddsOffset;
 
     public ref short Odds
     {
         get
         {
-            if (_OddsOffset == -1) _OddsOffset = Schema.GetOffset(0x5C5BE8C4E9B76DD7);
-            return ref _Handle.AsRef<short>(_OddsOffset);
+            _OddsOffset = _OddsOffset ?? Schema.GetOffset(0x5C5BE8C4E9B76DD7);
+            return ref _Handle.AsRef<short>(_OddsOffset!.Value);
         }
     }
-    private static nint _FlagsOffset = -1;
+    private static nint? _FlagsOffset;
 
     public ref short Flags
     {
         get
         {
-            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0x5C5BE8C49C677A2C);
-            return ref _Handle.AsRef<short>(_FlagsOffset);
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x5C5BE8C49C677A2C);
+            return ref _Handle.AsRef<short>(_FlagsOffset!.Value);
         }
     }
-    private static nint _FollowupOffset = -1;
+    private static nint? _FollowupOffset;
     private ResponseFollowupImpl? _FollowupInstance;
 
     public ResponseFollowup? Followup
     {
         get
         {
-            if (_FollowupOffset == -1) _FollowupOffset = Schema.GetOffset(0x5C5BE8C481D8C38F);
-            var ptr = _Handle.Read<nint>(_FollowupOffset);
+            _FollowupOffset = _FollowupOffset ?? Schema.GetOffset(0x5C5BE8C481D8C38F);
+            var ptr = _Handle.Read<nint>(_FollowupOffset!.Value);
             if (!ptr.IsValidPtr()) return null;
             var instance = _FollowupInstance ??= new ResponseFollowupImpl(0);
             instance.DangerousSetHandle(ptr);

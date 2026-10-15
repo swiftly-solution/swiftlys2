@@ -16,16 +16,16 @@ internal partial class CLocalExposureLayerImpl : CColorCorrectionLayerImpl, CLoc
 {
     public CLocalExposureLayerImpl(nint handle) : base(handle) { }
 
-    private static nint _ParamsOffset = -1;
+    private static nint? _ParamsOffset;
     private PostProcessingLocalExposureParameters_tImpl? _ParamsInstance;
 
     public PostProcessingLocalExposureParameters_t Params
     {
         get
         {
-            if (_ParamsOffset == -1) _ParamsOffset = Schema.GetOffset(0xF97F5FE1640EA8F3);
+            _ParamsOffset = _ParamsOffset ?? Schema.GetOffset(0xF97F5FE1640EA8F3);
             var instance = _ParamsInstance ??= new PostProcessingLocalExposureParameters_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamsOffset);
+            instance.DangerousSetHandle(_Handle + _ParamsOffset!.Value);
             return instance;
         }
     }

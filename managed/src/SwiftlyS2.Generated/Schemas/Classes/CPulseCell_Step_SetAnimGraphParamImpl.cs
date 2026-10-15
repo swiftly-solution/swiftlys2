@@ -16,19 +16,19 @@ internal partial class CPulseCell_Step_SetAnimGraphParamImpl : CPulseCell_BaseFl
 {
     public CPulseCell_Step_SetAnimGraphParamImpl(nint handle) : base(handle) { }
 
-    private static nint _ParamNameOffset = -1;
+    private static nint? _ParamNameOffset;
 
     public string ParamName
     {
         get
         {
-            if (_ParamNameOffset == -1) _ParamNameOffset = Schema.GetOffset(0x7727698D230FDA59);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ParamNameOffset));
+            _ParamNameOffset = _ParamNameOffset ?? Schema.GetOffset(0x7727698D230FDA59);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ParamNameOffset!.Value));
         }
         set
         {
-            if (_ParamNameOffset == -1) _ParamNameOffset = Schema.GetOffset(0x7727698D230FDA59);
-            Schema.SetCUtlString(_Handle, _ParamNameOffset, value);
+            _ParamNameOffset = _ParamNameOffset ?? Schema.GetOffset(0x7727698D230FDA59);
+            Schema.SetCUtlString(_Handle, _ParamNameOffset!.Value, value);
         }
     }
 

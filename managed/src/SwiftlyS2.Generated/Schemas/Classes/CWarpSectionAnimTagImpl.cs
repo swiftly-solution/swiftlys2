@@ -16,24 +16,24 @@ internal partial class CWarpSectionAnimTagImpl : CWarpSectionAnimTagBaseImpl, CW
 {
     public CWarpSectionAnimTagImpl(nint handle) : base(handle) { }
 
-    private static nint _WarpPositionOffset = -1;
+    private static nint? _WarpPositionOffset;
 
     public ref bool WarpPosition
     {
         get
         {
-            if (_WarpPositionOffset == -1) _WarpPositionOffset = Schema.GetOffset(0x4C7992E6A30D730C);
-            return ref _Handle.AsRef<bool>(_WarpPositionOffset);
+            _WarpPositionOffset = _WarpPositionOffset ?? Schema.GetOffset(0x4C7992E6A30D730C);
+            return ref _Handle.AsRef<bool>(_WarpPositionOffset!.Value);
         }
     }
-    private static nint _WarpOrientationOffset = -1;
+    private static nint? _WarpOrientationOffset;
 
     public ref bool WarpOrientation
     {
         get
         {
-            if (_WarpOrientationOffset == -1) _WarpOrientationOffset = Schema.GetOffset(0x4C7992E6613873F3);
-            return ref _Handle.AsRef<bool>(_WarpOrientationOffset);
+            _WarpOrientationOffset = _WarpOrientationOffset ?? Schema.GetOffset(0x4C7992E6613873F3);
+            return ref _Handle.AsRef<bool>(_WarpOrientationOffset!.Value);
         }
     }
 

@@ -16,24 +16,24 @@ internal partial class CSoundAreaEntityOrientedBoxImpl : CSoundAreaEntityBaseImp
 {
     public CSoundAreaEntityOrientedBoxImpl(nint handle) : base(handle) { }
 
-    private static nint _MinOffset = -1;
+    private static nint? _MinOffset;
 
     public ref Vector Min
     {
         get
         {
-            if (_MinOffset == -1) _MinOffset = Schema.GetOffset(0x5D327060F4B0AA63);
-            return ref _Handle.AsRef<Vector>(_MinOffset);
+            _MinOffset = _MinOffset ?? Schema.GetOffset(0x5D327060F4B0AA63);
+            return ref _Handle.AsRef<Vector>(_MinOffset!.Value);
         }
     }
-    private static nint _MaxOffset = -1;
+    private static nint? _MaxOffset;
 
     public ref Vector Max
     {
         get
         {
-            if (_MaxOffset == -1) _MaxOffset = Schema.GetOffset(0x5D327060EAC4225D);
-            return ref _Handle.AsRef<Vector>(_MaxOffset);
+            _MaxOffset = _MaxOffset ?? Schema.GetOffset(0x5D327060EAC4225D);
+            return ref _Handle.AsRef<Vector>(_MaxOffset!.Value);
         }
     }
 

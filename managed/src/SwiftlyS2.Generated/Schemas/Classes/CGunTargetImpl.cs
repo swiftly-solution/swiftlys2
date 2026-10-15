@@ -16,44 +16,44 @@ internal partial class CGunTargetImpl : CBaseToggleImpl, CGunTarget
 {
     public CGunTargetImpl(nint handle) : base(handle) { }
 
-    private static nint _SpeedOffset = -1;
+    private static nint? _SpeedOffset;
 
     public ref float Speed
     {
         get
         {
-            if (_SpeedOffset == -1) _SpeedOffset = Schema.GetOffset(0x4CB42969C631B7EA);
-            return ref _Handle.AsRef<float>(_SpeedOffset);
+            _SpeedOffset = _SpeedOffset ?? Schema.GetOffset(0x4CB42969C631B7EA);
+            return ref _Handle.AsRef<float>(_SpeedOffset!.Value);
         }
     }
-    private static nint _OnOffset = -1;
+    private static nint? _OnOffset;
 
     public ref bool On
     {
         get
         {
-            if (_OnOffset == -1) _OnOffset = Schema.GetOffset(0x4CB42969DEB2AE70);
-            return ref _Handle.AsRef<bool>(_OnOffset);
+            _OnOffset = _OnOffset ?? Schema.GetOffset(0x4CB42969DEB2AE70);
+            return ref _Handle.AsRef<bool>(_OnOffset!.Value);
         }
     }
-    private static nint _TargetEntOffset = -1;
+    private static nint? _TargetEntOffset;
 
     public ref CHandle<CBaseEntity> TargetEnt
     {
         get
         {
-            if (_TargetEntOffset == -1) _TargetEntOffset = Schema.GetOffset(0x4CB429692DD292D7);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetEntOffset);
+            _TargetEntOffset = _TargetEntOffset ?? Schema.GetOffset(0x4CB429692DD292D7);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetEntOffset!.Value);
         }
     }
-    private static nint _OnDeathOffset = -1;
+    private static nint? _OnDeathOffset;
 
     public ref CEntityIOOutput OnDeath
     {
         get
         {
-            if (_OnDeathOffset == -1) _OnDeathOffset = Schema.GetOffset(0x4CB429696F756BD2);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnDeathOffset);
+            _OnDeathOffset = _OnDeathOffset ?? Schema.GetOffset(0x4CB429696F756BD2);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnDeathOffset!.Value);
         }
     }
 

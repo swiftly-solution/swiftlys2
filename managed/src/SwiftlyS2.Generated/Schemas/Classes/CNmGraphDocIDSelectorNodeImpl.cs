@@ -16,24 +16,24 @@ internal partial class CNmGraphDocIDSelectorNodeImpl : CNmGraphDocFlowNodeImpl, 
 {
     public CNmGraphDocIDSelectorNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _OptionsOffset = -1;
+    private static nint? _OptionsOffset;
 
     public ref CUtlVector<CGlobalSymbol> Options
     {
         get
         {
-            if (_OptionsOffset == -1) _OptionsOffset = Schema.GetOffset(0xC9BF5A49DC407EC5);
-            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_OptionsOffset);
+            _OptionsOffset = _OptionsOffset ?? Schema.GetOffset(0xC9BF5A49DC407EC5);
+            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_OptionsOffset!.Value);
         }
     }
-    private static nint _DefaultIDOffset = -1;
+    private static nint? _DefaultIDOffset;
 
     public ref CGlobalSymbol DefaultID
     {
         get
         {
-            if (_DefaultIDOffset == -1) _DefaultIDOffset = Schema.GetOffset(0xC9BF5A49DDCFE883);
-            return ref _Handle.AsRef<CGlobalSymbol>(_DefaultIDOffset);
+            _DefaultIDOffset = _DefaultIDOffset ?? Schema.GetOffset(0xC9BF5A49DDCFE883);
+            return ref _Handle.AsRef<CGlobalSymbol>(_DefaultIDOffset!.Value);
         }
     }
 

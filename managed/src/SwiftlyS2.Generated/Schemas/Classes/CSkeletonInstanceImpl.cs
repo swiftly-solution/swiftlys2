@@ -16,87 +16,87 @@ internal partial class CSkeletonInstanceImpl : CGameSceneNodeImpl, CSkeletonInst
 {
     public CSkeletonInstanceImpl(nint handle) : base(handle) { }
 
-    private static nint _ModelStateOffset = -1;
+    private static nint? _ModelStateOffset;
     private CModelStateImpl? _ModelStateInstance;
 
     public CModelState ModelState
     {
         get
         {
-            if (_ModelStateOffset == -1) _ModelStateOffset = Schema.GetOffset(0xD6C6252E52AC8C4F);
+            _ModelStateOffset = _ModelStateOffset ?? Schema.GetOffset(0xD6C6252E52AC8C4F);
             var instance = _ModelStateInstance ??= new CModelStateImpl(0);
-            instance.DangerousSetHandle(_Handle + _ModelStateOffset);
+            instance.DangerousSetHandle(_Handle + _ModelStateOffset!.Value);
             return instance;
         }
     }
-    private static nint _UseParentRenderBoundsOffset = -1;
+    private static nint? _UseParentRenderBoundsOffset;
 
     public ref bool UseParentRenderBounds
     {
         get
         {
-            if (_UseParentRenderBoundsOffset == -1) _UseParentRenderBoundsOffset = Schema.GetOffset(0xD6C6252E15B8267D);
-            return ref _Handle.AsRef<bool>(_UseParentRenderBoundsOffset);
+            _UseParentRenderBoundsOffset = _UseParentRenderBoundsOffset ?? Schema.GetOffset(0xD6C6252E15B8267D);
+            return ref _Handle.AsRef<bool>(_UseParentRenderBoundsOffset!.Value);
         }
     }
-    private static nint _DisableSolidCollisionsForHierarchyOffset = -1;
+    private static nint? _DisableSolidCollisionsForHierarchyOffset;
 
     public ref bool DisableSolidCollisionsForHierarchy
     {
         get
         {
-            if (_DisableSolidCollisionsForHierarchyOffset == -1) _DisableSolidCollisionsForHierarchyOffset = Schema.GetOffset(0xD6C6252E50FCF465);
-            return ref _Handle.AsRef<bool>(_DisableSolidCollisionsForHierarchyOffset);
+            _DisableSolidCollisionsForHierarchyOffset = _DisableSolidCollisionsForHierarchyOffset ?? Schema.GetOffset(0xD6C6252E50FCF465);
+            return ref _Handle.AsRef<bool>(_DisableSolidCollisionsForHierarchyOffset!.Value);
         }
     }
-    private static nint _DirtyMotionTypeOffset = -1;
+    private static nint? _DirtyMotionTypeOffset;
 
     public ref bool DirtyMotionType
     {
         get
         {
-            if (_DirtyMotionTypeOffset == -1) _DirtyMotionTypeOffset = Schema.GetOffset(0xD6C6252E6EB99391);
-            return ref _Handle.AsRef<bool>(_DirtyMotionTypeOffset);
+            _DirtyMotionTypeOffset = _DirtyMotionTypeOffset ?? Schema.GetOffset(0xD6C6252E6EB99391);
+            return ref _Handle.AsRef<bool>(_DirtyMotionTypeOffset!.Value);
         }
     }
-    private static nint _IsGeneratingLatchedParentSpaceStateOffset = -1;
+    private static nint? _IsGeneratingLatchedParentSpaceStateOffset;
 
     public ref bool IsGeneratingLatchedParentSpaceState
     {
         get
         {
-            if (_IsGeneratingLatchedParentSpaceStateOffset == -1) _IsGeneratingLatchedParentSpaceStateOffset = Schema.GetOffset(0xD6C6252ED0EFEAB7);
-            return ref _Handle.AsRef<bool>(_IsGeneratingLatchedParentSpaceStateOffset);
+            _IsGeneratingLatchedParentSpaceStateOffset = _IsGeneratingLatchedParentSpaceStateOffset ?? Schema.GetOffset(0xD6C6252ED0EFEAB7);
+            return ref _Handle.AsRef<bool>(_IsGeneratingLatchedParentSpaceStateOffset!.Value);
         }
     }
-    private static nint _MaterialGroupOffset = -1;
+    private static nint? _MaterialGroupOffset;
 
     public ref CUtlStringToken MaterialGroup
     {
         get
         {
-            if (_MaterialGroupOffset == -1) _MaterialGroupOffset = Schema.GetOffset(0xD6C6252E2B778F03);
-            return ref _Handle.AsRef<CUtlStringToken>(_MaterialGroupOffset);
+            _MaterialGroupOffset = _MaterialGroupOffset ?? Schema.GetOffset(0xD6C6252E2B778F03);
+            return ref _Handle.AsRef<CUtlStringToken>(_MaterialGroupOffset!.Value);
         }
     }
-    private static nint _HitboxSetOffset = -1;
+    private static nint? _HitboxSetOffset;
 
     public ref byte HitboxSet
     {
         get
         {
-            if (_HitboxSetOffset == -1) _HitboxSetOffset = Schema.GetOffset(0xD6C6252E80C42271);
-            return ref _Handle.AsRef<byte>(_HitboxSetOffset);
+            _HitboxSetOffset = _HitboxSetOffset ?? Schema.GetOffset(0xD6C6252E80C42271);
+            return ref _Handle.AsRef<byte>(_HitboxSetOffset!.Value);
         }
     }
-    private static nint _ForceServerConstraintsEnabledOffset = -1;
+    private static nint? _ForceServerConstraintsEnabledOffset;
 
     public ref bool ForceServerConstraintsEnabled
     {
         get
         {
-            if (_ForceServerConstraintsEnabledOffset == -1) _ForceServerConstraintsEnabledOffset = Schema.GetOffset(0xD6C6252E44ADABC6);
-            return ref _Handle.AsRef<bool>(_ForceServerConstraintsEnabledOffset);
+            _ForceServerConstraintsEnabledOffset = _ForceServerConstraintsEnabledOffset ?? Schema.GetOffset(0xD6C6252E44ADABC6);
+            return ref _Handle.AsRef<bool>(_ForceServerConstraintsEnabledOffset!.Value);
         }
     }
 

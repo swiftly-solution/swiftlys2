@@ -16,14 +16,14 @@ internal partial class CnmGraphDocSpeedScaleNodeImpl : CNmGraphDocFlowNodeImpl, 
 {
     public CnmGraphDocSpeedScaleNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _MultiplierOffset = -1;
+    private static nint? _MultiplierOffset;
 
     public ref float Multiplier
     {
         get
         {
-            if (_MultiplierOffset == -1) _MultiplierOffset = Schema.GetOffset(0x2B9B7912A8E53394);
-            return ref _Handle.AsRef<float>(_MultiplierOffset);
+            _MultiplierOffset = _MultiplierOffset ?? Schema.GetOffset(0x2B9B7912A8E53394);
+            return ref _Handle.AsRef<float>(_MultiplierOffset!.Value);
         }
     }
 

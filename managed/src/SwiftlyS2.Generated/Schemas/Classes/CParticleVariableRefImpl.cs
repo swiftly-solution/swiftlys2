@@ -16,29 +16,29 @@ internal partial class CParticleVariableRefImpl : SchemaClass, CParticleVariable
 {
     public CParticleVariableRefImpl(nint handle) : base(handle) { }
 
-    private static nint _VariableNameOffset = -1;
+    private static nint? _VariableNameOffset;
     private SchemaUntypedField? _VariableNameInstance;
 
     public SchemaUntypedField VariableName
     {
         get
         {
-            if (_VariableNameOffset == -1) _VariableNameOffset = Schema.GetOffset(0x4FB747D9D3D609A6);
+            _VariableNameOffset = _VariableNameOffset ?? Schema.GetOffset(0x4FB747D9D3D609A6);
             var instance = _VariableNameInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _VariableNameOffset);
+            instance.DangerousSetHandle(_Handle + _VariableNameOffset!.Value);
             return instance;
         }
     }
-    private static nint _VariableTypeOffset = -1;
+    private static nint? _VariableTypeOffset;
     private SchemaUntypedField? _VariableTypeInstance;
 
     public SchemaUntypedField VariableType
     {
         get
         {
-            if (_VariableTypeOffset == -1) _VariableTypeOffset = Schema.GetOffset(0x4FB747D9954B670D);
+            _VariableTypeOffset = _VariableTypeOffset ?? Schema.GetOffset(0x4FB747D9954B670D);
             var instance = _VariableTypeInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _VariableTypeOffset);
+            instance.DangerousSetHandle(_Handle + _VariableTypeOffset!.Value);
             return instance;
         }
     }

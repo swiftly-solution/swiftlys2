@@ -16,36 +16,36 @@ internal partial class CMolotovProjectileImpl : CBaseCSGrenadeProjectileImpl, CM
 {
     public CMolotovProjectileImpl(nint handle) : base(handle) { }
 
-    private static nint _IsIncGrenadeOffset = -1;
+    private static nint? _IsIncGrenadeOffset;
 
     public ref bool IsIncGrenade
     {
         get
         {
-            if (_IsIncGrenadeOffset == -1) _IsIncGrenadeOffset = Schema.GetOffset(0xA239EA8F9D1C12B7);
-            return ref _Handle.AsRef<bool>(_IsIncGrenadeOffset);
+            _IsIncGrenadeOffset = _IsIncGrenadeOffset ?? Schema.GetOffset(0xA239EA8F9D1C12B7);
+            return ref _Handle.AsRef<bool>(_IsIncGrenadeOffset!.Value);
         }
     }
-    private static nint _DetonatedOffset = -1;
+    private static nint? _DetonatedOffset;
 
     public ref bool Detonated
     {
         get
         {
-            if (_DetonatedOffset == -1) _DetonatedOffset = Schema.GetOffset(0xA239EA8F97D602AF);
-            return ref _Handle.AsRef<bool>(_DetonatedOffset);
+            _DetonatedOffset = _DetonatedOffset ?? Schema.GetOffset(0xA239EA8F97D602AF);
+            return ref _Handle.AsRef<bool>(_DetonatedOffset!.Value);
         }
     }
-    private static nint _StillTimerOffset = -1;
+    private static nint? _StillTimerOffset;
     private IntervalTimerImpl? _StillTimerInstance;
 
     public IntervalTimer StillTimer
     {
         get
         {
-            if (_StillTimerOffset == -1) _StillTimerOffset = Schema.GetOffset(0xA239EA8F2772246E);
+            _StillTimerOffset = _StillTimerOffset ?? Schema.GetOffset(0xA239EA8F2772246E);
             var instance = _StillTimerInstance ??= new IntervalTimerImpl(0);
-            instance.DangerousSetHandle(_Handle + _StillTimerOffset);
+            instance.DangerousSetHandle(_Handle + _StillTimerOffset!.Value);
             return instance;
         }
     }

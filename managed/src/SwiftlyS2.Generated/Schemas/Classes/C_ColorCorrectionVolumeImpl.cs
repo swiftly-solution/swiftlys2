@@ -16,105 +16,105 @@ internal partial class C_ColorCorrectionVolumeImpl : C_BaseTriggerImpl, C_ColorC
 {
     public C_ColorCorrectionVolumeImpl(nint handle) : base(handle) { }
 
-    private static nint _LastEnterWeightOffset = -1;
+    private static nint? _LastEnterWeightOffset;
 
     public ref float LastEnterWeight
     {
         get
         {
-            if (_LastEnterWeightOffset == -1) _LastEnterWeightOffset = Schema.GetOffset(0xF61E5F042F53D64D);
-            return ref _Handle.AsRef<float>(_LastEnterWeightOffset);
+            _LastEnterWeightOffset = _LastEnterWeightOffset ?? Schema.GetOffset(0xF61E5F042F53D64D);
+            return ref _Handle.AsRef<float>(_LastEnterWeightOffset!.Value);
         }
     }
-    private static nint _LastEnterTimeOffset = -1;
+    private static nint? _LastEnterTimeOffset;
     private GameTime_tImpl? _LastEnterTimeInstance;
 
     public GameTime_t LastEnterTime
     {
         get
         {
-            if (_LastEnterTimeOffset == -1) _LastEnterTimeOffset = Schema.GetOffset(0xF61E5F0401977F10);
+            _LastEnterTimeOffset = _LastEnterTimeOffset ?? Schema.GetOffset(0xF61E5F0401977F10);
             var instance = _LastEnterTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _LastEnterTimeOffset);
+            instance.DangerousSetHandle(_Handle + _LastEnterTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _LastExitWeightOffset = -1;
+    private static nint? _LastExitWeightOffset;
 
     public ref float LastExitWeight
     {
         get
         {
-            if (_LastExitWeightOffset == -1) _LastExitWeightOffset = Schema.GetOffset(0xF61E5F0459C9642D);
-            return ref _Handle.AsRef<float>(_LastExitWeightOffset);
+            _LastExitWeightOffset = _LastExitWeightOffset ?? Schema.GetOffset(0xF61E5F0459C9642D);
+            return ref _Handle.AsRef<float>(_LastExitWeightOffset!.Value);
         }
     }
-    private static nint _LastExitTimeOffset = -1;
+    private static nint? _LastExitTimeOffset;
     private GameTime_tImpl? _LastExitTimeInstance;
 
     public GameTime_t LastExitTime
     {
         get
         {
-            if (_LastExitTimeOffset == -1) _LastExitTimeOffset = Schema.GetOffset(0xF61E5F04183C8DF0);
+            _LastExitTimeOffset = _LastExitTimeOffset ?? Schema.GetOffset(0xF61E5F04183C8DF0);
             var instance = _LastExitTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _LastExitTimeOffset);
+            instance.DangerousSetHandle(_Handle + _LastExitTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _EnabledOffset = -1;
+    private static nint? _EnabledOffset;
 
     public ref bool Enabled
     {
         get
         {
-            if (_EnabledOffset == -1) _EnabledOffset = Schema.GetOffset(0xF61E5F046154EB7E);
-            return ref _Handle.AsRef<bool>(_EnabledOffset);
+            _EnabledOffset = _EnabledOffset ?? Schema.GetOffset(0xF61E5F046154EB7E);
+            return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
         }
     }
-    private static nint _MaxWeightOffset = -1;
+    private static nint? _MaxWeightOffset;
 
     public ref float MaxWeight
     {
         get
         {
-            if (_MaxWeightOffset == -1) _MaxWeightOffset = Schema.GetOffset(0xF61E5F04EE8A2F2D);
-            return ref _Handle.AsRef<float>(_MaxWeightOffset);
+            _MaxWeightOffset = _MaxWeightOffset ?? Schema.GetOffset(0xF61E5F04EE8A2F2D);
+            return ref _Handle.AsRef<float>(_MaxWeightOffset!.Value);
         }
     }
-    private static nint _FadeDurationOffset = -1;
+    private static nint? _FadeDurationOffset;
 
     public ref float FadeDuration
     {
         get
         {
-            if (_FadeDurationOffset == -1) _FadeDurationOffset = Schema.GetOffset(0xF61E5F0446550027);
-            return ref _Handle.AsRef<float>(_FadeDurationOffset);
+            _FadeDurationOffset = _FadeDurationOffset ?? Schema.GetOffset(0xF61E5F0446550027);
+            return ref _Handle.AsRef<float>(_FadeDurationOffset!.Value);
         }
     }
-    private static nint _WeightOffset = -1;
+    private static nint? _WeightOffset;
 
     public ref float Weight
     {
         get
         {
-            if (_WeightOffset == -1) _WeightOffset = Schema.GetOffset(0xF61E5F04BF415739);
-            return ref _Handle.AsRef<float>(_WeightOffset);
+            _WeightOffset = _WeightOffset ?? Schema.GetOffset(0xF61E5F04BF415739);
+            return ref _Handle.AsRef<float>(_WeightOffset!.Value);
         }
     }
-    private static nint _LookupFilenameOffset = -1;
+    private static nint? _LookupFilenameOffset;
 
     public string LookupFilename
     {
         get
         {
-            if (_LookupFilenameOffset == -1) _LookupFilenameOffset = Schema.GetOffset(0xF61E5F042611A2C6);
-            return Schema.GetString(_Handle + _LookupFilenameOffset);
+            _LookupFilenameOffset = _LookupFilenameOffset ?? Schema.GetOffset(0xF61E5F042611A2C6);
+            return Schema.GetString(_Handle + _LookupFilenameOffset!.Value);
         }
         set
         {
-            if (_LookupFilenameOffset == -1) _LookupFilenameOffset = Schema.GetOffset(0xF61E5F042611A2C6);
-            Schema.SetFixedString(_Handle, _LookupFilenameOffset, value, 512);
+            _LookupFilenameOffset = _LookupFilenameOffset ?? Schema.GetOffset(0xF61E5F042611A2C6);
+            Schema.SetFixedString(_Handle, _LookupFilenameOffset!.Value, value, 512);
         }
     }
 

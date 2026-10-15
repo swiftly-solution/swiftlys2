@@ -16,57 +16,57 @@ internal partial class constraint_breakableparams_tImpl : SchemaClass, constrain
 {
     public constraint_breakableparams_tImpl(nint handle) : base(handle) { }
 
-    private static nint _StrengthOffset = -1;
+    private static nint? _StrengthOffset;
 
     public ref float Strength
     {
         get
         {
-            if (_StrengthOffset == -1) _StrengthOffset = Schema.GetOffset(0xEDA0F377E07A18B0);
-            return ref _Handle.AsRef<float>(_StrengthOffset);
+            _StrengthOffset = _StrengthOffset ?? Schema.GetOffset(0xEDA0F377E07A18B0);
+            return ref _Handle.AsRef<float>(_StrengthOffset!.Value);
         }
     }
-    private static nint _ForceLimitOffset = -1;
+    private static nint? _ForceLimitOffset;
 
     public ref float ForceLimit
     {
         get
         {
-            if (_ForceLimitOffset == -1) _ForceLimitOffset = Schema.GetOffset(0xEDA0F3777F2D0897);
-            return ref _Handle.AsRef<float>(_ForceLimitOffset);
+            _ForceLimitOffset = _ForceLimitOffset ?? Schema.GetOffset(0xEDA0F3777F2D0897);
+            return ref _Handle.AsRef<float>(_ForceLimitOffset!.Value);
         }
     }
-    private static nint _TorqueLimitOffset = -1;
+    private static nint? _TorqueLimitOffset;
 
     public ref float TorqueLimit
     {
         get
         {
-            if (_TorqueLimitOffset == -1) _TorqueLimitOffset = Schema.GetOffset(0xEDA0F37777EB0DDE);
-            return ref _Handle.AsRef<float>(_TorqueLimitOffset);
+            _TorqueLimitOffset = _TorqueLimitOffset ?? Schema.GetOffset(0xEDA0F37777EB0DDE);
+            return ref _Handle.AsRef<float>(_TorqueLimitOffset!.Value);
         }
     }
-    private static nint _BodyMassScaleOffset = -1;
+    private static nint? _BodyMassScaleOffset;
     private SchemaFixedArray<float>? _BodyMassScaleInstance;
 
     public ISchemaFixedArray<float> BodyMassScale
     {
         get
         {
-            if (_BodyMassScaleOffset == -1) _BodyMassScaleOffset = Schema.GetOffset(0xEDA0F3775BED8FB5);
+            _BodyMassScaleOffset = _BodyMassScaleOffset ?? Schema.GetOffset(0xEDA0F3775BED8FB5);
             var instance = _BodyMassScaleInstance ??= new SchemaFixedArray<float>(0, 0xEDA0F3775BED8FB5, 2, 4, 4);
-            instance.DangerousSetHandle(_Handle + _BodyMassScaleOffset);
+            instance.DangerousSetHandle(_Handle + _BodyMassScaleOffset!.Value);
             return instance;
         }
     }
-    private static nint _IsActiveOffset = -1;
+    private static nint? _IsActiveOffset;
 
     public ref bool IsActive
     {
         get
         {
-            if (_IsActiveOffset == -1) _IsActiveOffset = Schema.GetOffset(0xEDA0F3773D94F45F);
-            return ref _Handle.AsRef<bool>(_IsActiveOffset);
+            _IsActiveOffset = _IsActiveOffset ?? Schema.GetOffset(0xEDA0F3773D94F45F);
+            return ref _Handle.AsRef<bool>(_IsActiveOffset!.Value);
         }
     }
 

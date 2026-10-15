@@ -16,63 +16,63 @@ internal partial class C_OP_BasicMovementImpl : CParticleFunctionOperatorImpl, C
 {
     public C_OP_BasicMovementImpl(nint handle) : base(handle) { }
 
-    private static nint _GravityOffset = -1;
+    private static nint? _GravityOffset;
     private CParticleCollectionVecInputImpl? _GravityInstance;
 
     public CParticleCollectionVecInput Gravity
     {
         get
         {
-            if (_GravityOffset == -1) _GravityOffset = Schema.GetOffset(0xC8273B20790C70C5);
+            _GravityOffset = _GravityOffset ?? Schema.GetOffset(0xC8273B20790C70C5);
             var instance = _GravityInstance ??= new CParticleCollectionVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _GravityOffset);
+            instance.DangerousSetHandle(_Handle + _GravityOffset!.Value);
             return instance;
         }
     }
-    private static nint _DragOffset = -1;
+    private static nint? _DragOffset;
     private CParticleCollectionFloatInputImpl? _DragInstance;
 
     public CParticleCollectionFloatInput Drag
     {
         get
         {
-            if (_DragOffset == -1) _DragOffset = Schema.GetOffset(0xC8273B2050DA6497);
+            _DragOffset = _DragOffset ?? Schema.GetOffset(0xC8273B2050DA6497);
             var instance = _DragInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _DragOffset);
+            instance.DangerousSetHandle(_Handle + _DragOffset!.Value);
             return instance;
         }
     }
-    private static nint _MassControlsOffset = -1;
+    private static nint? _MassControlsOffset;
     private CParticleMassCalculationParametersImpl? _MassControlsInstance;
 
     public CParticleMassCalculationParameters MassControls
     {
         get
         {
-            if (_MassControlsOffset == -1) _MassControlsOffset = Schema.GetOffset(0xC8273B2039CBEACB);
+            _MassControlsOffset = _MassControlsOffset ?? Schema.GetOffset(0xC8273B2039CBEACB);
             var instance = _MassControlsInstance ??= new CParticleMassCalculationParametersImpl(0);
-            instance.DangerousSetHandle(_Handle + _MassControlsOffset);
+            instance.DangerousSetHandle(_Handle + _MassControlsOffset!.Value);
             return instance;
         }
     }
-    private static nint _MaxConstraintPassesOffset = -1;
+    private static nint? _MaxConstraintPassesOffset;
 
     public ref int MaxConstraintPasses
     {
         get
         {
-            if (_MaxConstraintPassesOffset == -1) _MaxConstraintPassesOffset = Schema.GetOffset(0xC8273B20D83D0CAB);
-            return ref _Handle.AsRef<int>(_MaxConstraintPassesOffset);
+            _MaxConstraintPassesOffset = _MaxConstraintPassesOffset ?? Schema.GetOffset(0xC8273B20D83D0CAB);
+            return ref _Handle.AsRef<int>(_MaxConstraintPassesOffset!.Value);
         }
     }
-    private static nint _UseNewCodeOffset = -1;
+    private static nint? _UseNewCodeOffset;
 
     public ref bool UseNewCode
     {
         get
         {
-            if (_UseNewCodeOffset == -1) _UseNewCodeOffset = Schema.GetOffset(0xC8273B207C6D1CDF);
-            return ref _Handle.AsRef<bool>(_UseNewCodeOffset);
+            _UseNewCodeOffset = _UseNewCodeOffset ?? Schema.GetOffset(0xC8273B207C6D1CDF);
+            return ref _Handle.AsRef<bool>(_UseNewCodeOffset!.Value);
         }
     }
 

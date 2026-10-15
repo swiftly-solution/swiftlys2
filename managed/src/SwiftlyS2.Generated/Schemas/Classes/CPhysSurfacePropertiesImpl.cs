@@ -16,115 +16,115 @@ internal partial class CPhysSurfacePropertiesImpl : SchemaClass, CPhysSurfacePro
 {
     public CPhysSurfacePropertiesImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x682A31344D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x682A31344D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x682A31344D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x682A31344D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _NameHashOffset = -1;
+    private static nint? _NameHashOffset;
 
     public ref uint NameHash
     {
         get
         {
-            if (_NameHashOffset == -1) _NameHashOffset = Schema.GetOffset(0x682A313474C2670A);
-            return ref _Handle.AsRef<uint>(_NameHashOffset);
+            _NameHashOffset = _NameHashOffset ?? Schema.GetOffset(0x682A313474C2670A);
+            return ref _Handle.AsRef<uint>(_NameHashOffset!.Value);
         }
     }
-    private static nint _BaseNameHashOffset = -1;
+    private static nint? _BaseNameHashOffset;
 
     public ref uint BaseNameHash
     {
         get
         {
-            if (_BaseNameHashOffset == -1) _BaseNameHashOffset = Schema.GetOffset(0x682A31347BCDC37B);
-            return ref _Handle.AsRef<uint>(_BaseNameHashOffset);
+            _BaseNameHashOffset = _BaseNameHashOffset ?? Schema.GetOffset(0x682A31347BCDC37B);
+            return ref _Handle.AsRef<uint>(_BaseNameHashOffset!.Value);
         }
     }
-    private static nint _HiddenOffset = -1;
+    private static nint? _HiddenOffset;
 
     public ref bool Hidden
     {
         get
         {
-            if (_HiddenOffset == -1) _HiddenOffset = Schema.GetOffset(0x682A313457D2DC99);
-            return ref _Handle.AsRef<bool>(_HiddenOffset);
+            _HiddenOffset = _HiddenOffset ?? Schema.GetOffset(0x682A313457D2DC99);
+            return ref _Handle.AsRef<bool>(_HiddenOffset!.Value);
         }
     }
-    private static nint _DescriptionOffset = -1;
+    private static nint? _DescriptionOffset;
 
     public string Description
     {
         get
         {
-            if (_DescriptionOffset == -1) _DescriptionOffset = Schema.GetOffset(0x682A313499F68389);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_DescriptionOffset));
+            _DescriptionOffset = _DescriptionOffset ?? Schema.GetOffset(0x682A313499F68389);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_DescriptionOffset!.Value));
         }
         set
         {
-            if (_DescriptionOffset == -1) _DescriptionOffset = Schema.GetOffset(0x682A313499F68389);
-            Schema.SetCUtlString(_Handle, _DescriptionOffset, value);
+            _DescriptionOffset = _DescriptionOffset ?? Schema.GetOffset(0x682A313499F68389);
+            Schema.SetCUtlString(_Handle, _DescriptionOffset!.Value, value);
         }
     }
-    private static nint _PhysicsOffset = -1;
+    private static nint? _PhysicsOffset;
     private CPhysSurfacePropertiesPhysicsImpl? _PhysicsInstance;
 
     public CPhysSurfacePropertiesPhysics Physics
     {
         get
         {
-            if (_PhysicsOffset == -1) _PhysicsOffset = Schema.GetOffset(0x682A3134B4C7F5C2);
+            _PhysicsOffset = _PhysicsOffset ?? Schema.GetOffset(0x682A3134B4C7F5C2);
             var instance = _PhysicsInstance ??= new CPhysSurfacePropertiesPhysicsImpl(0);
-            instance.DangerousSetHandle(_Handle + _PhysicsOffset);
+            instance.DangerousSetHandle(_Handle + _PhysicsOffset!.Value);
             return instance;
         }
     }
-    private static nint _VehicleParamsOffset = -1;
+    private static nint? _VehicleParamsOffset;
     private CPhysSurfacePropertiesVehicleImpl? _VehicleParamsInstance;
 
     public CPhysSurfacePropertiesVehicle VehicleParams
     {
         get
         {
-            if (_VehicleParamsOffset == -1) _VehicleParamsOffset = Schema.GetOffset(0x682A3134FF85787D);
+            _VehicleParamsOffset = _VehicleParamsOffset ?? Schema.GetOffset(0x682A3134FF85787D);
             var instance = _VehicleParamsInstance ??= new CPhysSurfacePropertiesVehicleImpl(0);
-            instance.DangerousSetHandle(_Handle + _VehicleParamsOffset);
+            instance.DangerousSetHandle(_Handle + _VehicleParamsOffset!.Value);
             return instance;
         }
     }
-    private static nint _AudioSoundsOffset = -1;
+    private static nint? _AudioSoundsOffset;
     private CPhysSurfacePropertiesSoundNamesImpl? _AudioSoundsInstance;
 
     public CPhysSurfacePropertiesSoundNames AudioSounds
     {
         get
         {
-            if (_AudioSoundsOffset == -1) _AudioSoundsOffset = Schema.GetOffset(0x682A3134F7E0C689);
+            _AudioSoundsOffset = _AudioSoundsOffset ?? Schema.GetOffset(0x682A3134F7E0C689);
             var instance = _AudioSoundsInstance ??= new CPhysSurfacePropertiesSoundNamesImpl(0);
-            instance.DangerousSetHandle(_Handle + _AudioSoundsOffset);
+            instance.DangerousSetHandle(_Handle + _AudioSoundsOffset!.Value);
             return instance;
         }
     }
-    private static nint _AudioParamsOffset = -1;
+    private static nint? _AudioParamsOffset;
     private CPhysSurfacePropertiesAudioImpl? _AudioParamsInstance;
 
     public CPhysSurfacePropertiesAudio AudioParams
     {
         get
         {
-            if (_AudioParamsOffset == -1) _AudioParamsOffset = Schema.GetOffset(0x682A3134BCDFAD3F);
+            _AudioParamsOffset = _AudioParamsOffset ?? Schema.GetOffset(0x682A3134BCDFAD3F);
             var instance = _AudioParamsInstance ??= new CPhysSurfacePropertiesAudioImpl(0);
-            instance.DangerousSetHandle(_Handle + _AudioParamsOffset);
+            instance.DangerousSetHandle(_Handle + _AudioParamsOffset!.Value);
             return instance;
         }
     }

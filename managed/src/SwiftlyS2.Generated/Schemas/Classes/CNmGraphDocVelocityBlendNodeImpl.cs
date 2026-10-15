@@ -16,14 +16,14 @@ internal partial class CNmGraphDocVelocityBlendNodeImpl : CNmGraphDocFlowNodeImp
 {
     public CNmGraphDocVelocityBlendNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _AllowLoopingOffset = -1;
+    private static nint? _AllowLoopingOffset;
 
     public ref bool AllowLooping
     {
         get
         {
-            if (_AllowLoopingOffset == -1) _AllowLoopingOffset = Schema.GetOffset(0xC4FCA08DFEB26D98);
-            return ref _Handle.AsRef<bool>(_AllowLoopingOffset);
+            _AllowLoopingOffset = _AllowLoopingOffset ?? Schema.GetOffset(0xC4FCA08DFEB26D98);
+            return ref _Handle.AsRef<bool>(_AllowLoopingOffset!.Value);
         }
     }
 

@@ -16,26 +16,26 @@ internal partial class CNmFloatClampNode__CDefinitionImpl : CNmFloatValueNode__C
 {
     public CNmFloatClampNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint _InputValueNodeIdxOffset = -1;
+    private static nint? _InputValueNodeIdxOffset;
 
     public ref short InputValueNodeIdx
     {
         get
         {
-            if (_InputValueNodeIdxOffset == -1) _InputValueNodeIdxOffset = Schema.GetOffset(0x77C3AAE295E89F27);
-            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset);
+            _InputValueNodeIdxOffset = _InputValueNodeIdxOffset ?? Schema.GetOffset(0x77C3AAE295E89F27);
+            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
         }
     }
-    private static nint _ClampRangeOffset = -1;
+    private static nint? _ClampRangeOffset;
     private SchemaUntypedField? _ClampRangeInstance;
 
     public SchemaUntypedField ClampRange
     {
         get
         {
-            if (_ClampRangeOffset == -1) _ClampRangeOffset = Schema.GetOffset(0x77C3AAE2FED5C4A1);
+            _ClampRangeOffset = _ClampRangeOffset ?? Schema.GetOffset(0x77C3AAE2FED5C4A1);
             var instance = _ClampRangeInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ClampRangeOffset);
+            instance.DangerousSetHandle(_Handle + _ClampRangeOffset!.Value);
             return instance;
         }
     }

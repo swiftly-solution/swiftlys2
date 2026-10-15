@@ -16,61 +16,61 @@ internal partial class FeModelSelfCollisionLayer_tImpl : SchemaClass, FeModelSel
 {
     public FeModelSelfCollisionLayer_tImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x49A18705CAE8A266);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x49A18705CAE8A266);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x49A18705CAE8A266);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x49A18705CAE8A266);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _NodesOffset = -1;
+    private static nint? _NodesOffset;
 
     public ref CUtlVector<ushort> Nodes
     {
         get
         {
-            if (_NodesOffset == -1) _NodesOffset = Schema.GetOffset(0x49A18705EBA045DA);
-            return ref _Handle.AsRef<CUtlVector<ushort>>(_NodesOffset);
+            _NodesOffset = _NodesOffset ?? Schema.GetOffset(0x49A18705EBA045DA);
+            return ref _Handle.AsRef<CUtlVector<ushort>>(_NodesOffset!.Value);
         }
     }
-    private static nint _ParentReactionOffset = -1;
+    private static nint? _ParentReactionOffset;
 
     public ref float ParentReaction
     {
         get
         {
-            if (_ParentReactionOffset == -1) _ParentReactionOffset = Schema.GetOffset(0x49A187054431941C);
-            return ref _Handle.AsRef<float>(_ParentReactionOffset);
+            _ParentReactionOffset = _ParentReactionOffset ?? Schema.GetOffset(0x49A187054431941C);
+            return ref _Handle.AsRef<float>(_ParentReactionOffset!.Value);
         }
     }
-    private static nint _FlagsOffset = -1;
+    private static nint? _FlagsOffset;
 
     public ref uint Flags
     {
         get
         {
-            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0x49A18705CE6E9C28);
-            return ref _Handle.AsRef<uint>(_FlagsOffset);
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x49A18705CE6E9C28);
+            return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
         }
     }
-    private static nint _EndIdxOffset = -1;
+    private static nint? _EndIdxOffset;
     private SchemaFixedArray<uint>? _EndIdxInstance;
 
     public ISchemaFixedArray<uint> EndIdx
     {
         get
         {
-            if (_EndIdxOffset == -1) _EndIdxOffset = Schema.GetOffset(0x49A18705A8AEBFA9);
+            _EndIdxOffset = _EndIdxOffset ?? Schema.GetOffset(0x49A18705A8AEBFA9);
             var instance = _EndIdxInstance ??= new SchemaFixedArray<uint>(0, 0x49A18705A8AEBFA9, 4, 4, 4);
-            instance.DangerousSetHandle(_Handle + _EndIdxOffset);
+            instance.DangerousSetHandle(_Handle + _EndIdxOffset!.Value);
             return instance;
         }
     }

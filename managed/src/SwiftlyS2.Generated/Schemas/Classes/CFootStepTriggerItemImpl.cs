@@ -16,49 +16,49 @@ internal partial class CFootStepTriggerItemImpl : SchemaClass, CFootStepTriggerI
 {
     public CFootStepTriggerItemImpl(nint handle) : base(handle) { }
 
-    private static nint _FootNameOffset = -1;
+    private static nint? _FootNameOffset;
 
     public string FootName
     {
         get
         {
-            if (_FootNameOffset == -1) _FootNameOffset = Schema.GetOffset(0x5BF35623228316B2);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_FootNameOffset));
+            _FootNameOffset = _FootNameOffset ?? Schema.GetOffset(0x5BF35623228316B2);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_FootNameOffset!.Value));
         }
         set
         {
-            if (_FootNameOffset == -1) _FootNameOffset = Schema.GetOffset(0x5BF35623228316B2);
-            Schema.SetCUtlString(_Handle, _FootNameOffset, value);
+            _FootNameOffset = _FootNameOffset ?? Schema.GetOffset(0x5BF35623228316B2);
+            Schema.SetCUtlString(_Handle, _FootNameOffset!.Value, value);
         }
     }
-    private static nint _TriggerPhaseOffset = -1;
+    private static nint? _TriggerPhaseOffset;
 
     public ref StepPhase TriggerPhase
     {
         get
         {
-            if (_TriggerPhaseOffset == -1) _TriggerPhaseOffset = Schema.GetOffset(0x5BF35623486B84EE);
-            return ref _Handle.AsRef<StepPhase>(_TriggerPhaseOffset);
+            _TriggerPhaseOffset = _TriggerPhaseOffset ?? Schema.GetOffset(0x5BF35623486B84EE);
+            return ref _Handle.AsRef<StepPhase>(_TriggerPhaseOffset!.Value);
         }
     }
-    private static nint _TagNamesOffset = -1;
+    private static nint? _TagNamesOffset;
 
     public ref CUtlVector<CGlobalSymbol> TagNames
     {
         get
         {
-            if (_TagNamesOffset == -1) _TagNamesOffset = Schema.GetOffset(0x5BF35623414AE531);
-            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_TagNamesOffset);
+            _TagNamesOffset = _TagNamesOffset ?? Schema.GetOffset(0x5BF35623414AE531);
+            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_TagNamesOffset!.Value);
         }
     }
-    private static nint _TagIDsOffset = -1;
+    private static nint? _TagIDsOffset;
 
     public ref CUtlVector<AnimTagID> TagIDs
     {
         get
         {
-            if (_TagIDsOffset == -1) _TagIDsOffset = Schema.GetOffset(0x5BF35623FA5BC4F7);
-            return ref _Handle.AsRef<CUtlVector<AnimTagID>>(_TagIDsOffset);
+            _TagIDsOffset = _TagIDsOffset ?? Schema.GetOffset(0x5BF35623FA5BC4F7);
+            return ref _Handle.AsRef<CUtlVector<AnimTagID>>(_TagIDsOffset!.Value);
         }
     }
 

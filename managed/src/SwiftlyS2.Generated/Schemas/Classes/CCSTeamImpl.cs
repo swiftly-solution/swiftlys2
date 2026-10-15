@@ -16,164 +16,164 @@ internal partial class CCSTeamImpl : CTeamImpl, CCSTeam
 {
     public CCSTeamImpl(nint handle) : base(handle) { }
 
-    private static nint _LastRecievedShorthandedRoundBonusOffset = -1;
+    private static nint? _LastRecievedShorthandedRoundBonusOffset;
 
     public ref int LastRecievedShorthandedRoundBonus
     {
         get
         {
-            if (_LastRecievedShorthandedRoundBonusOffset == -1) _LastRecievedShorthandedRoundBonusOffset = Schema.GetOffset(0x1CE326C97862C8DB);
-            return ref _Handle.AsRef<int>(_LastRecievedShorthandedRoundBonusOffset);
+            _LastRecievedShorthandedRoundBonusOffset = _LastRecievedShorthandedRoundBonusOffset ?? Schema.GetOffset(0x1CE326C97862C8DB);
+            return ref _Handle.AsRef<int>(_LastRecievedShorthandedRoundBonusOffset!.Value);
         }
     }
-    private static nint _ShorthandedRoundBonusStartRoundOffset = -1;
+    private static nint? _ShorthandedRoundBonusStartRoundOffset;
 
     public ref int ShorthandedRoundBonusStartRound
     {
         get
         {
-            if (_ShorthandedRoundBonusStartRoundOffset == -1) _ShorthandedRoundBonusStartRoundOffset = Schema.GetOffset(0x1CE326C99B1C0796);
-            return ref _Handle.AsRef<int>(_ShorthandedRoundBonusStartRoundOffset);
+            _ShorthandedRoundBonusStartRoundOffset = _ShorthandedRoundBonusStartRoundOffset ?? Schema.GetOffset(0x1CE326C99B1C0796);
+            return ref _Handle.AsRef<int>(_ShorthandedRoundBonusStartRoundOffset!.Value);
         }
     }
-    private static nint _SurrenderedOffset = -1;
+    private static nint? _SurrenderedOffset;
 
     public ref bool Surrendered
     {
         get
         {
-            if (_SurrenderedOffset == -1) _SurrenderedOffset = Schema.GetOffset(0x1CE326C9CFFCED54);
-            return ref _Handle.AsRef<bool>(_SurrenderedOffset);
+            _SurrenderedOffset = _SurrenderedOffset ?? Schema.GetOffset(0x1CE326C9CFFCED54);
+            return ref _Handle.AsRef<bool>(_SurrenderedOffset!.Value);
         }
     }
-    private static nint _TeamMatchStatOffset = -1;
+    private static nint? _TeamMatchStatOffset;
 
     public string TeamMatchStat
     {
         get
         {
-            if (_TeamMatchStatOffset == -1) _TeamMatchStatOffset = Schema.GetOffset(0x1CE326C9D2C89DC0);
-            return Schema.GetString(_Handle + _TeamMatchStatOffset);
+            _TeamMatchStatOffset = _TeamMatchStatOffset ?? Schema.GetOffset(0x1CE326C9D2C89DC0);
+            return Schema.GetString(_Handle + _TeamMatchStatOffset!.Value);
         }
         set
         {
-            if (_TeamMatchStatOffset == -1) _TeamMatchStatOffset = Schema.GetOffset(0x1CE326C9D2C89DC0);
-            Schema.SetFixedString(_Handle, _TeamMatchStatOffset, value, 512);
+            _TeamMatchStatOffset = _TeamMatchStatOffset ?? Schema.GetOffset(0x1CE326C9D2C89DC0);
+            Schema.SetFixedString(_Handle, _TeamMatchStatOffset!.Value, value, 512);
         }
     }
-    private static nint _NumMapVictoriesOffset = -1;
+    private static nint? _NumMapVictoriesOffset;
 
     public ref int NumMapVictories
     {
         get
         {
-            if (_NumMapVictoriesOffset == -1) _NumMapVictoriesOffset = Schema.GetOffset(0x1CE326C92BC4DE0F);
-            return ref _Handle.AsRef<int>(_NumMapVictoriesOffset);
+            _NumMapVictoriesOffset = _NumMapVictoriesOffset ?? Schema.GetOffset(0x1CE326C92BC4DE0F);
+            return ref _Handle.AsRef<int>(_NumMapVictoriesOffset!.Value);
         }
     }
-    private static nint _ScoreFirstHalfOffset = -1;
+    private static nint? _ScoreFirstHalfOffset;
 
     public ref int ScoreFirstHalf
     {
         get
         {
-            if (_ScoreFirstHalfOffset == -1) _ScoreFirstHalfOffset = Schema.GetOffset(0x1CE326C9E497F5A0);
-            return ref _Handle.AsRef<int>(_ScoreFirstHalfOffset);
+            _ScoreFirstHalfOffset = _ScoreFirstHalfOffset ?? Schema.GetOffset(0x1CE326C9E497F5A0);
+            return ref _Handle.AsRef<int>(_ScoreFirstHalfOffset!.Value);
         }
     }
-    private static nint _ScoreSecondHalfOffset = -1;
+    private static nint? _ScoreSecondHalfOffset;
 
     public ref int ScoreSecondHalf
     {
         get
         {
-            if (_ScoreSecondHalfOffset == -1) _ScoreSecondHalfOffset = Schema.GetOffset(0x1CE326C9A75CAE2C);
-            return ref _Handle.AsRef<int>(_ScoreSecondHalfOffset);
+            _ScoreSecondHalfOffset = _ScoreSecondHalfOffset ?? Schema.GetOffset(0x1CE326C9A75CAE2C);
+            return ref _Handle.AsRef<int>(_ScoreSecondHalfOffset!.Value);
         }
     }
-    private static nint _ScoreOvertimeOffset = -1;
+    private static nint? _ScoreOvertimeOffset;
 
     public ref int ScoreOvertime
     {
         get
         {
-            if (_ScoreOvertimeOffset == -1) _ScoreOvertimeOffset = Schema.GetOffset(0x1CE326C9A22D3CEE);
-            return ref _Handle.AsRef<int>(_ScoreOvertimeOffset);
+            _ScoreOvertimeOffset = _ScoreOvertimeOffset ?? Schema.GetOffset(0x1CE326C9A22D3CEE);
+            return ref _Handle.AsRef<int>(_ScoreOvertimeOffset!.Value);
         }
     }
-    private static nint _ClanTeamnameOffset = -1;
+    private static nint? _ClanTeamnameOffset;
 
     public string ClanTeamname
     {
         get
         {
-            if (_ClanTeamnameOffset == -1) _ClanTeamnameOffset = Schema.GetOffset(0x1CE326C946453F76);
-            return Schema.GetString(_Handle + _ClanTeamnameOffset);
+            _ClanTeamnameOffset = _ClanTeamnameOffset ?? Schema.GetOffset(0x1CE326C946453F76);
+            return Schema.GetString(_Handle + _ClanTeamnameOffset!.Value);
         }
         set
         {
-            if (_ClanTeamnameOffset == -1) _ClanTeamnameOffset = Schema.GetOffset(0x1CE326C946453F76);
-            Schema.SetFixedString(_Handle, _ClanTeamnameOffset, value, 129);
+            _ClanTeamnameOffset = _ClanTeamnameOffset ?? Schema.GetOffset(0x1CE326C946453F76);
+            Schema.SetFixedString(_Handle, _ClanTeamnameOffset!.Value, value, 129);
         }
     }
-    private static nint _ClanIDOffset = -1;
+    private static nint? _ClanIDOffset;
 
     public ref uint ClanID
     {
         get
         {
-            if (_ClanIDOffset == -1) _ClanIDOffset = Schema.GetOffset(0x1CE326C90A807BAD);
-            return ref _Handle.AsRef<uint>(_ClanIDOffset);
+            _ClanIDOffset = _ClanIDOffset ?? Schema.GetOffset(0x1CE326C90A807BAD);
+            return ref _Handle.AsRef<uint>(_ClanIDOffset!.Value);
         }
     }
-    private static nint _TeamFlagImageOffset = -1;
+    private static nint? _TeamFlagImageOffset;
 
     public string TeamFlagImage
     {
         get
         {
-            if (_TeamFlagImageOffset == -1) _TeamFlagImageOffset = Schema.GetOffset(0x1CE326C9F7FF31D0);
-            return Schema.GetString(_Handle + _TeamFlagImageOffset);
+            _TeamFlagImageOffset = _TeamFlagImageOffset ?? Schema.GetOffset(0x1CE326C9F7FF31D0);
+            return Schema.GetString(_Handle + _TeamFlagImageOffset!.Value);
         }
         set
         {
-            if (_TeamFlagImageOffset == -1) _TeamFlagImageOffset = Schema.GetOffset(0x1CE326C9F7FF31D0);
-            Schema.SetFixedString(_Handle, _TeamFlagImageOffset, value, 8);
+            _TeamFlagImageOffset = _TeamFlagImageOffset ?? Schema.GetOffset(0x1CE326C9F7FF31D0);
+            Schema.SetFixedString(_Handle, _TeamFlagImageOffset!.Value, value, 8);
         }
     }
-    private static nint _TeamLogoImageOffset = -1;
+    private static nint? _TeamLogoImageOffset;
 
     public string TeamLogoImage
     {
         get
         {
-            if (_TeamLogoImageOffset == -1) _TeamLogoImageOffset = Schema.GetOffset(0x1CE326C981DF092B);
-            return Schema.GetString(_Handle + _TeamLogoImageOffset);
+            _TeamLogoImageOffset = _TeamLogoImageOffset ?? Schema.GetOffset(0x1CE326C981DF092B);
+            return Schema.GetString(_Handle + _TeamLogoImageOffset!.Value);
         }
         set
         {
-            if (_TeamLogoImageOffset == -1) _TeamLogoImageOffset = Schema.GetOffset(0x1CE326C981DF092B);
-            Schema.SetFixedString(_Handle, _TeamLogoImageOffset, value, 8);
+            _TeamLogoImageOffset = _TeamLogoImageOffset ?? Schema.GetOffset(0x1CE326C981DF092B);
+            Schema.SetFixedString(_Handle, _TeamLogoImageOffset!.Value, value, 8);
         }
     }
-    private static nint _NextResourceTimeOffset = -1;
+    private static nint? _NextResourceTimeOffset;
 
     public ref float NextResourceTime
     {
         get
         {
-            if (_NextResourceTimeOffset == -1) _NextResourceTimeOffset = Schema.GetOffset(0x1CE326C97E7CA6AF);
-            return ref _Handle.AsRef<float>(_NextResourceTimeOffset);
+            _NextResourceTimeOffset = _NextResourceTimeOffset ?? Schema.GetOffset(0x1CE326C97E7CA6AF);
+            return ref _Handle.AsRef<float>(_NextResourceTimeOffset!.Value);
         }
     }
-    private static nint _LastUpdateSentAtOffset = -1;
+    private static nint? _LastUpdateSentAtOffset;
 
     public ref int LastUpdateSentAt
     {
         get
         {
-            if (_LastUpdateSentAtOffset == -1) _LastUpdateSentAtOffset = Schema.GetOffset(0x1CE326C937FCAA0A);
-            return ref _Handle.AsRef<int>(_LastUpdateSentAtOffset);
+            _LastUpdateSentAtOffset = _LastUpdateSentAtOffset ?? Schema.GetOffset(0x1CE326C937FCAA0A);
+            return ref _Handle.AsRef<int>(_LastUpdateSentAtOffset!.Value);
         }
     }
 

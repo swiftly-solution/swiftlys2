@@ -16,57 +16,57 @@ internal partial class CNmGraphDocParameterReferenceNodeImpl : CNmGraphDocFlowNo
 {
     public CNmGraphDocParameterReferenceNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _ParameterUUIDOffset = -1;
+    private static nint? _ParameterUUIDOffset;
     private SchemaUntypedField? _ParameterUUIDInstance;
 
     public SchemaUntypedField ParameterUUID
     {
         get
         {
-            if (_ParameterUUIDOffset == -1) _ParameterUUIDOffset = Schema.GetOffset(0x65BFEBD12AC40923);
+            _ParameterUUIDOffset = _ParameterUUIDOffset ?? Schema.GetOffset(0x65BFEBD12AC40923);
             var instance = _ParameterUUIDInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ParameterUUIDOffset);
+            instance.DangerousSetHandle(_Handle + _ParameterUUIDOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParameterValueTypeOffset = -1;
+    private static nint? _ParameterValueTypeOffset;
 
     public ref NmGraphValueType_t ParameterValueType
     {
         get
         {
-            if (_ParameterValueTypeOffset == -1) _ParameterValueTypeOffset = Schema.GetOffset(0x65BFEBD11E6D4129);
-            return ref _Handle.AsRef<NmGraphValueType_t>(_ParameterValueTypeOffset);
+            _ParameterValueTypeOffset = _ParameterValueTypeOffset ?? Schema.GetOffset(0x65BFEBD11E6D4129);
+            return ref _Handle.AsRef<NmGraphValueType_t>(_ParameterValueTypeOffset!.Value);
         }
     }
-    private static nint _ParameterNameOffset = -1;
+    private static nint? _ParameterNameOffset;
 
     public string ParameterName
     {
         get
         {
-            if (_ParameterNameOffset == -1) _ParameterNameOffset = Schema.GetOffset(0x65BFEBD10F5FEC93);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ParameterNameOffset));
+            _ParameterNameOffset = _ParameterNameOffset ?? Schema.GetOffset(0x65BFEBD10F5FEC93);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ParameterNameOffset!.Value));
         }
         set
         {
-            if (_ParameterNameOffset == -1) _ParameterNameOffset = Schema.GetOffset(0x65BFEBD10F5FEC93);
-            Schema.SetCUtlString(_Handle, _ParameterNameOffset, value);
+            _ParameterNameOffset = _ParameterNameOffset ?? Schema.GetOffset(0x65BFEBD10F5FEC93);
+            Schema.SetCUtlString(_Handle, _ParameterNameOffset!.Value, value);
         }
     }
-    private static nint _ParameterGroupNameOffset = -1;
+    private static nint? _ParameterGroupNameOffset;
 
     public string ParameterGroupName
     {
         get
         {
-            if (_ParameterGroupNameOffset == -1) _ParameterGroupNameOffset = Schema.GetOffset(0x65BFEBD10EA20E58);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ParameterGroupNameOffset));
+            _ParameterGroupNameOffset = _ParameterGroupNameOffset ?? Schema.GetOffset(0x65BFEBD10EA20E58);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ParameterGroupNameOffset!.Value));
         }
         set
         {
-            if (_ParameterGroupNameOffset == -1) _ParameterGroupNameOffset = Schema.GetOffset(0x65BFEBD10EA20E58);
-            Schema.SetCUtlString(_Handle, _ParameterGroupNameOffset, value);
+            _ParameterGroupNameOffset = _ParameterGroupNameOffset ?? Schema.GetOffset(0x65BFEBD10EA20E58);
+            Schema.SetCUtlString(_Handle, _ParameterGroupNameOffset!.Value, value);
         }
     }
 

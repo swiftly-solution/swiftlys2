@@ -16,109 +16,109 @@ internal partial class CSSDSMsg_ViewTargetImpl : SchemaClass, CSSDSMsg_ViewTarge
 {
     public CSSDSMsg_ViewTargetImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x4F31099BCAE8A266);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x4F31099BCAE8A266);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x4F31099BCAE8A266);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x4F31099BCAE8A266);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _TextureIdOffset = -1;
+    private static nint? _TextureIdOffset;
 
     public ref ulong TextureId
     {
         get
         {
-            if (_TextureIdOffset == -1) _TextureIdOffset = Schema.GetOffset(0x4F31099B67AB25D9);
-            return ref _Handle.AsRef<ulong>(_TextureIdOffset);
+            _TextureIdOffset = _TextureIdOffset ?? Schema.GetOffset(0x4F31099B67AB25D9);
+            return ref _Handle.AsRef<ulong>(_TextureIdOffset!.Value);
         }
     }
-    private static nint _WidthOffset = -1;
+    private static nint? _WidthOffset;
 
     public ref int Width
     {
         get
         {
-            if (_WidthOffset == -1) _WidthOffset = Schema.GetOffset(0x4F31099B119108BB);
-            return ref _Handle.AsRef<int>(_WidthOffset);
+            _WidthOffset = _WidthOffset ?? Schema.GetOffset(0x4F31099B119108BB);
+            return ref _Handle.AsRef<int>(_WidthOffset!.Value);
         }
     }
-    private static nint _HeightOffset = -1;
+    private static nint? _HeightOffset;
 
     public ref int Height
     {
         get
         {
-            if (_HeightOffset == -1) _HeightOffset = Schema.GetOffset(0x4F31099BCAB61C56);
-            return ref _Handle.AsRef<int>(_HeightOffset);
+            _HeightOffset = _HeightOffset ?? Schema.GetOffset(0x4F31099BCAB61C56);
+            return ref _Handle.AsRef<int>(_HeightOffset!.Value);
         }
     }
-    private static nint _RequestedWidthOffset = -1;
+    private static nint? _RequestedWidthOffset;
 
     public ref int RequestedWidth
     {
         get
         {
-            if (_RequestedWidthOffset == -1) _RequestedWidthOffset = Schema.GetOffset(0x4F31099BCCA175E9);
-            return ref _Handle.AsRef<int>(_RequestedWidthOffset);
+            _RequestedWidthOffset = _RequestedWidthOffset ?? Schema.GetOffset(0x4F31099BCCA175E9);
+            return ref _Handle.AsRef<int>(_RequestedWidthOffset!.Value);
         }
     }
-    private static nint _RequestedHeightOffset = -1;
+    private static nint? _RequestedHeightOffset;
 
     public ref int RequestedHeight
     {
         get
         {
-            if (_RequestedHeightOffset == -1) _RequestedHeightOffset = Schema.GetOffset(0x4F31099B145278D8);
-            return ref _Handle.AsRef<int>(_RequestedHeightOffset);
+            _RequestedHeightOffset = _RequestedHeightOffset ?? Schema.GetOffset(0x4F31099B145278D8);
+            return ref _Handle.AsRef<int>(_RequestedHeightOffset!.Value);
         }
     }
-    private static nint _NumMipLevelsOffset = -1;
+    private static nint? _NumMipLevelsOffset;
 
     public ref int NumMipLevels
     {
         get
         {
-            if (_NumMipLevelsOffset == -1) _NumMipLevelsOffset = Schema.GetOffset(0x4F31099BD64413AC);
-            return ref _Handle.AsRef<int>(_NumMipLevelsOffset);
+            _NumMipLevelsOffset = _NumMipLevelsOffset ?? Schema.GetOffset(0x4F31099BD64413AC);
+            return ref _Handle.AsRef<int>(_NumMipLevelsOffset!.Value);
         }
     }
-    private static nint _DepthOffset = -1;
+    private static nint? _DepthOffset;
 
     public ref int Depth
     {
         get
         {
-            if (_DepthOffset == -1) _DepthOffset = Schema.GetOffset(0x4F31099BB725DB96);
-            return ref _Handle.AsRef<int>(_DepthOffset);
+            _DepthOffset = _DepthOffset ?? Schema.GetOffset(0x4F31099BB725DB96);
+            return ref _Handle.AsRef<int>(_DepthOffset!.Value);
         }
     }
-    private static nint _MultisampleNumSamplesOffset = -1;
+    private static nint? _MultisampleNumSamplesOffset;
 
     public ref int MultisampleNumSamples
     {
         get
         {
-            if (_MultisampleNumSamplesOffset == -1) _MultisampleNumSamplesOffset = Schema.GetOffset(0x4F31099B1B468317);
-            return ref _Handle.AsRef<int>(_MultisampleNumSamplesOffset);
+            _MultisampleNumSamplesOffset = _MultisampleNumSamplesOffset ?? Schema.GetOffset(0x4F31099B1B468317);
+            return ref _Handle.AsRef<int>(_MultisampleNumSamplesOffset!.Value);
         }
     }
-    private static nint _FormatOffset = -1;
+    private static nint? _FormatOffset;
 
     public ref int Format
     {
         get
         {
-            if (_FormatOffset == -1) _FormatOffset = Schema.GetOffset(0x4F31099BA87491AE);
-            return ref _Handle.AsRef<int>(_FormatOffset);
+            _FormatOffset = _FormatOffset ?? Schema.GetOffset(0x4F31099BA87491AE);
+            return ref _Handle.AsRef<int>(_FormatOffset!.Value);
         }
     }
 

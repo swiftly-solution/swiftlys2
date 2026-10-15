@@ -16,42 +16,42 @@ internal partial class C_OP_ClampVectorImpl : CParticleFunctionOperatorImpl, C_O
 {
     public C_OP_ClampVectorImpl(nint handle) : base(handle) { }
 
-    private static nint _FieldOutputOffset = -1;
+    private static nint? _FieldOutputOffset;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0x5977BF1BE5729606);
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x5977BF1BE5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
             return instance;
         }
     }
-    private static nint _OutputMinOffset = -1;
+    private static nint? _OutputMinOffset;
     private CPerParticleVecInputImpl? _OutputMinInstance;
 
     public CPerParticleVecInput OutputMin
     {
         get
         {
-            if (_OutputMinOffset == -1) _OutputMinOffset = Schema.GetOffset(0x5977BF1B2EFED678);
+            _OutputMinOffset = _OutputMinOffset ?? Schema.GetOffset(0x5977BF1B2EFED678);
             var instance = _OutputMinInstance ??= new CPerParticleVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _OutputMinOffset);
+            instance.DangerousSetHandle(_Handle + _OutputMinOffset!.Value);
             return instance;
         }
     }
-    private static nint _OutputMaxOffset = -1;
+    private static nint? _OutputMaxOffset;
     private CPerParticleVecInputImpl? _OutputMaxInstance;
 
     public CPerParticleVecInput OutputMax
     {
         get
         {
-            if (_OutputMaxOffset == -1) _OutputMaxOffset = Schema.GetOffset(0x5977BF1B451280D2);
+            _OutputMaxOffset = _OutputMaxOffset ?? Schema.GetOffset(0x5977BF1B451280D2);
             var instance = _OutputMaxInstance ??= new CPerParticleVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _OutputMaxOffset);
+            instance.DangerousSetHandle(_Handle + _OutputMaxOffset!.Value);
             return instance;
         }
     }

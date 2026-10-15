@@ -16,119 +16,119 @@ internal partial class CSkyCameraVolumeImpl : CBaseEntityImpl, CSkyCameraVolume
 {
     public CSkyCameraVolumeImpl(nint handle) : base(handle) { }
 
-    private static nint _BoxMinsOffset = -1;
+    private static nint? _BoxMinsOffset;
 
     public ref Vector BoxMins
     {
         get
         {
-            if (_BoxMinsOffset == -1) _BoxMinsOffset = Schema.GetOffset(0xD23367F6D8201373);
-            return ref _Handle.AsRef<Vector>(_BoxMinsOffset);
+            _BoxMinsOffset = _BoxMinsOffset ?? Schema.GetOffset(0xD23367F6D8201373);
+            return ref _Handle.AsRef<Vector>(_BoxMinsOffset!.Value);
         }
     }
-    private static nint _BoxMaxsOffset = -1;
+    private static nint? _BoxMaxsOffset;
 
     public ref Vector BoxMaxs
     {
         get
         {
-            if (_BoxMaxsOffset == -1) _BoxMaxsOffset = Schema.GetOffset(0xD23367F6817A3B31);
-            return ref _Handle.AsRef<Vector>(_BoxMaxsOffset);
+            _BoxMaxsOffset = _BoxMaxsOffset ?? Schema.GetOffset(0xD23367F6817A3B31);
+            return ref _Handle.AsRef<Vector>(_BoxMaxsOffset!.Value);
         }
     }
-    private static nint _TargetOffset = -1;
+    private static nint? _TargetOffset;
 
     public ref CHandle<CSkyCameraVolumeTarget> Target
     {
         get
         {
-            if (_TargetOffset == -1) _TargetOffset = Schema.GetOffset(0xD23367F6CE35901A);
-            return ref _Handle.AsRef<CHandle<CSkyCameraVolumeTarget>>(_TargetOffset);
+            _TargetOffset = _TargetOffset ?? Schema.GetOffset(0xD23367F6CE35901A);
+            return ref _Handle.AsRef<CHandle<CSkyCameraVolumeTarget>>(_TargetOffset!.Value);
         }
     }
-    private static nint _PriorityOffset = -1;
+    private static nint? _PriorityOffset;
 
     public ref int Priority
     {
         get
         {
-            if (_PriorityOffset == -1) _PriorityOffset = Schema.GetOffset(0xD23367F6E7EFB335);
-            return ref _Handle.AsRef<int>(_PriorityOffset);
+            _PriorityOffset = _PriorityOffset ?? Schema.GetOffset(0xD23367F6E7EFB335);
+            return ref _Handle.AsRef<int>(_PriorityOffset!.Value);
         }
     }
-    private static nint _IsEnabledOffset = -1;
+    private static nint? _IsEnabledOffset;
 
     public ref bool IsEnabled
     {
         get
         {
-            if (_IsEnabledOffset == -1) _IsEnabledOffset = Schema.GetOffset(0xD23367F65360D70E);
-            return ref _Handle.AsRef<bool>(_IsEnabledOffset);
+            _IsEnabledOffset = _IsEnabledOffset ?? Schema.GetOffset(0xD23367F65360D70E);
+            return ref _Handle.AsRef<bool>(_IsEnabledOffset!.Value);
         }
     }
-    private static nint _SkyboxBlurEffectOffset = -1;
+    private static nint? _SkyboxBlurEffectOffset;
 
     public ref bool SkyboxBlurEffect
     {
         get
         {
-            if (_SkyboxBlurEffectOffset == -1) _SkyboxBlurEffectOffset = Schema.GetOffset(0xD23367F612BA6523);
-            return ref _Handle.AsRef<bool>(_SkyboxBlurEffectOffset);
+            _SkyboxBlurEffectOffset = _SkyboxBlurEffectOffset ?? Schema.GetOffset(0xD23367F612BA6523);
+            return ref _Handle.AsRef<bool>(_SkyboxBlurEffectOffset!.Value);
         }
     }
-    private static nint _BlurOriginOffset = -1;
+    private static nint? _BlurOriginOffset;
 
     public ref Vector BlurOrigin
     {
         get
         {
-            if (_BlurOriginOffset == -1) _BlurOriginOffset = Schema.GetOffset(0xD23367F6606F3596);
-            return ref _Handle.AsRef<Vector>(_BlurOriginOffset);
+            _BlurOriginOffset = _BlurOriginOffset ?? Schema.GetOffset(0xD23367F6606F3596);
+            return ref _Handle.AsRef<Vector>(_BlurOriginOffset!.Value);
         }
     }
-    private static nint _SkyboxReceivesWorldCsmOffset = -1;
+    private static nint? _SkyboxReceivesWorldCsmOffset;
 
     public ref bool SkyboxReceivesWorldCsm
     {
         get
         {
-            if (_SkyboxReceivesWorldCsmOffset == -1) _SkyboxReceivesWorldCsmOffset = Schema.GetOffset(0xD23367F6DDE36058);
-            return ref _Handle.AsRef<bool>(_SkyboxReceivesWorldCsmOffset);
+            _SkyboxReceivesWorldCsmOffset = _SkyboxReceivesWorldCsmOffset ?? Schema.GetOffset(0xD23367F6DDE36058);
+            return ref _Handle.AsRef<bool>(_SkyboxReceivesWorldCsmOffset!.Value);
         }
     }
-    private static nint _WorldReceivesSkyboxCsmOffset = -1;
+    private static nint? _WorldReceivesSkyboxCsmOffset;
 
     public ref bool WorldReceivesSkyboxCsm
     {
         get
         {
-            if (_WorldReceivesSkyboxCsmOffset == -1) _WorldReceivesSkyboxCsmOffset = Schema.GetOffset(0xD23367F61AEA31A8);
-            return ref _Handle.AsRef<bool>(_WorldReceivesSkyboxCsmOffset);
+            _WorldReceivesSkyboxCsmOffset = _WorldReceivesSkyboxCsmOffset ?? Schema.GetOffset(0xD23367F61AEA31A8);
+            return ref _Handle.AsRef<bool>(_WorldReceivesSkyboxCsmOffset!.Value);
         }
     }
-    private static nint _StartDisabledOffset = -1;
+    private static nint? _StartDisabledOffset;
 
     public ref bool StartDisabled
     {
         get
         {
-            if (_StartDisabledOffset == -1) _StartDisabledOffset = Schema.GetOffset(0xD23367F661ED0C4F);
-            return ref _Handle.AsRef<bool>(_StartDisabledOffset);
+            _StartDisabledOffset = _StartDisabledOffset ?? Schema.GetOffset(0xD23367F661ED0C4F);
+            return ref _Handle.AsRef<bool>(_StartDisabledOffset!.Value);
         }
     }
-    private static nint _TargetNameOffset = -1;
+    private static nint? _TargetNameOffset;
 
     public string TargetName
     {
         get
         {
-            if (_TargetNameOffset == -1) _TargetNameOffset = Schema.GetOffset(0xD23367F615772BC3);
-            return Schema.GetString(_Handle.Read<nint>(_TargetNameOffset));
+            _TargetNameOffset = _TargetNameOffset ?? Schema.GetOffset(0xD23367F615772BC3);
+            return Schema.GetString(_Handle.Read<nint>(_TargetNameOffset!.Value));
         }
         set
         {
-            if (_TargetNameOffset == -1) _TargetNameOffset = Schema.GetOffset(0xD23367F615772BC3);
-            Schema.SetString(_Handle, _TargetNameOffset, value);
+            _TargetNameOffset = _TargetNameOffset ?? Schema.GetOffset(0xD23367F615772BC3);
+            Schema.SetString(_Handle, _TargetNameOffset!.Value, value);
         }
     }
 

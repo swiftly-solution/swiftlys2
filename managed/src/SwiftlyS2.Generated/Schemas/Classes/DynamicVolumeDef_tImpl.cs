@@ -16,84 +16,84 @@ internal partial class DynamicVolumeDef_tImpl : SchemaClass, DynamicVolumeDef_t
 {
     public DynamicVolumeDef_tImpl(nint handle) : base(handle) { }
 
-    private static nint _SourceOffset = -1;
+    private static nint? _SourceOffset;
 
     public ref CHandle<CBaseEntity> Source
     {
         get
         {
-            if (_SourceOffset == -1) _SourceOffset = Schema.GetOffset(0x9D661554D0835C78);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_SourceOffset);
+            _SourceOffset = _SourceOffset ?? Schema.GetOffset(0x9D661554D0835C78);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_SourceOffset!.Value);
         }
     }
-    private static nint _TargetOffset = -1;
+    private static nint? _TargetOffset;
 
     public ref CHandle<CBaseEntity> Target
     {
         get
         {
-            if (_TargetOffset == -1) _TargetOffset = Schema.GetOffset(0x9D661554FA08A9E8);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetOffset);
+            _TargetOffset = _TargetOffset ?? Schema.GetOffset(0x9D661554FA08A9E8);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetOffset!.Value);
         }
     }
-    private static nint _HullIdxOffset = -1;
+    private static nint? _HullIdxOffset;
 
     public ref int HullIdx
     {
         get
         {
-            if (_HullIdxOffset == -1) _HullIdxOffset = Schema.GetOffset(0x9D661554595B303D);
-            return ref _Handle.AsRef<int>(_HullIdxOffset);
+            _HullIdxOffset = _HullIdxOffset ?? Schema.GetOffset(0x9D661554595B303D);
+            return ref _Handle.AsRef<int>(_HullIdxOffset!.Value);
         }
     }
-    private static nint _SourceAnchorPosOffset = -1;
+    private static nint? _SourceAnchorPosOffset;
 
     public ref Vector SourceAnchorPos
     {
         get
         {
-            if (_SourceAnchorPosOffset == -1) _SourceAnchorPosOffset = Schema.GetOffset(0x9D661554E6AC3899);
-            return ref _Handle.AsRef<Vector>(_SourceAnchorPosOffset);
+            _SourceAnchorPosOffset = _SourceAnchorPosOffset ?? Schema.GetOffset(0x9D661554E6AC3899);
+            return ref _Handle.AsRef<Vector>(_SourceAnchorPosOffset!.Value);
         }
     }
-    private static nint _TargetAnchorPosOffset = -1;
+    private static nint? _TargetAnchorPosOffset;
 
     public ref Vector TargetAnchorPos
     {
         get
         {
-            if (_TargetAnchorPosOffset == -1) _TargetAnchorPosOffset = Schema.GetOffset(0x9D6615540976AD91);
-            return ref _Handle.AsRef<Vector>(_TargetAnchorPosOffset);
+            _TargetAnchorPosOffset = _TargetAnchorPosOffset ?? Schema.GetOffset(0x9D6615540976AD91);
+            return ref _Handle.AsRef<Vector>(_TargetAnchorPosOffset!.Value);
         }
     }
-    private static nint _AreaSrcOffset = -1;
+    private static nint? _AreaSrcOffset;
 
     public ref uint AreaSrc
     {
         get
         {
-            if (_AreaSrcOffset == -1) _AreaSrcOffset = Schema.GetOffset(0x9D661554E55D859E);
-            return ref _Handle.AsRef<uint>(_AreaSrcOffset);
+            _AreaSrcOffset = _AreaSrcOffset ?? Schema.GetOffset(0x9D661554E55D859E);
+            return ref _Handle.AsRef<uint>(_AreaSrcOffset!.Value);
         }
     }
-    private static nint _AreaDstOffset = -1;
+    private static nint? _AreaDstOffset;
 
     public ref uint AreaDst
     {
         get
         {
-            if (_AreaDstOffset == -1) _AreaDstOffset = Schema.GetOffset(0x9D66155487799313);
-            return ref _Handle.AsRef<uint>(_AreaDstOffset);
+            _AreaDstOffset = _AreaDstOffset ?? Schema.GetOffset(0x9D66155487799313);
+            return ref _Handle.AsRef<uint>(_AreaDstOffset!.Value);
         }
     }
-    private static nint _AttachedOffset = -1;
+    private static nint? _AttachedOffset;
 
     public ref bool Attached
     {
         get
         {
-            if (_AttachedOffset == -1) _AttachedOffset = Schema.GetOffset(0x9D6615544C8B6515);
-            return ref _Handle.AsRef<bool>(_AttachedOffset);
+            _AttachedOffset = _AttachedOffset ?? Schema.GetOffset(0x9D6615544C8B6515);
+            return ref _Handle.AsRef<bool>(_AttachedOffset!.Value);
         }
     }
 

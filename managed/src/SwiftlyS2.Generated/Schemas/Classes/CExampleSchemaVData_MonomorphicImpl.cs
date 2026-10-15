@@ -16,24 +16,24 @@ internal partial class CExampleSchemaVData_MonomorphicImpl : SchemaClass, CExamp
 {
     public CExampleSchemaVData_MonomorphicImpl(nint handle) : base(handle) { }
 
-    private static nint _Example1Offset = -1;
+    private static nint? _Example1Offset;
 
     public ref int Example1
     {
         get
         {
-            if (_Example1Offset == -1) _Example1Offset = Schema.GetOffset(0x43DB481BF8CF69BC);
-            return ref _Handle.AsRef<int>(_Example1Offset);
+            _Example1Offset = _Example1Offset ?? Schema.GetOffset(0x43DB481BF8CF69BC);
+            return ref _Handle.AsRef<int>(_Example1Offset!.Value);
         }
     }
-    private static nint _Example2Offset = -1;
+    private static nint? _Example2Offset;
 
     public ref int Example2
     {
         get
         {
-            if (_Example2Offset == -1) _Example2Offset = Schema.GetOffset(0x43DB481BFBCF6E75);
-            return ref _Handle.AsRef<int>(_Example2Offset);
+            _Example2Offset = _Example2Offset ?? Schema.GetOffset(0x43DB481BFBCF6E75);
+            return ref _Handle.AsRef<int>(_Example2Offset!.Value);
         }
     }
 

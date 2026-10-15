@@ -16,73 +16,73 @@ internal partial class C_INIT_CreateAlongPathImpl : CParticleFunctionInitializer
 {
     public C_INIT_CreateAlongPathImpl(nint handle) : base(handle) { }
 
-    private static nint _MaxDistanceOffset = -1;
+    private static nint? _MaxDistanceOffset;
     private CPerParticleFloatInputImpl? _MaxDistanceInstance;
 
     public CPerParticleFloatInput MaxDistance
     {
         get
         {
-            if (_MaxDistanceOffset == -1) _MaxDistanceOffset = Schema.GetOffset(0x655F7B0C844E396A);
+            _MaxDistanceOffset = _MaxDistanceOffset ?? Schema.GetOffset(0x655F7B0C844E396A);
             var instance = _MaxDistanceInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _MaxDistanceOffset);
+            instance.DangerousSetHandle(_Handle + _MaxDistanceOffset!.Value);
             return instance;
         }
     }
-    private static nint _TOffset = -1;
+    private static nint? _TOffset;
     private CPerParticleFloatInputImpl? _TInstance;
 
     public CPerParticleFloatInput T
     {
         get
         {
-            if (_TOffset == -1) _TOffset = Schema.GetOffset(0x655F7B0CF6A18B17);
+            _TOffset = _TOffset ?? Schema.GetOffset(0x655F7B0CF6A18B17);
             var instance = _TInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _TOffset);
+            instance.DangerousSetHandle(_Handle + _TOffset!.Value);
             return instance;
         }
     }
-    private static nint _PathParamsOffset = -1;
+    private static nint? _PathParamsOffset;
     private CPathParametersImpl? _PathParamsInstance;
 
     public CPathParameters PathParams
     {
         get
         {
-            if (_PathParamsOffset == -1) _PathParamsOffset = Schema.GetOffset(0x655F7B0C3C10092C);
+            _PathParamsOffset = _PathParamsOffset ?? Schema.GetOffset(0x655F7B0C3C10092C);
             var instance = _PathParamsInstance ??= new CPathParametersImpl(0);
-            instance.DangerousSetHandle(_Handle + _PathParamsOffset);
+            instance.DangerousSetHandle(_Handle + _PathParamsOffset!.Value);
             return instance;
         }
     }
-    private static nint _UseRandomCPsOffset = -1;
+    private static nint? _UseRandomCPsOffset;
 
     public ref bool UseRandomCPs
     {
         get
         {
-            if (_UseRandomCPsOffset == -1) _UseRandomCPsOffset = Schema.GetOffset(0x655F7B0CA15D9A41);
-            return ref _Handle.AsRef<bool>(_UseRandomCPsOffset);
+            _UseRandomCPsOffset = _UseRandomCPsOffset ?? Schema.GetOffset(0x655F7B0CA15D9A41);
+            return ref _Handle.AsRef<bool>(_UseRandomCPsOffset!.Value);
         }
     }
-    private static nint _EndOffsetOffset = -1;
+    private static nint? _EndOffsetOffset;
 
     public ref Vector EndOffset
     {
         get
         {
-            if (_EndOffsetOffset == -1) _EndOffsetOffset = Schema.GetOffset(0x655F7B0C5BBD1959);
-            return ref _Handle.AsRef<Vector>(_EndOffsetOffset);
+            _EndOffsetOffset = _EndOffsetOffset ?? Schema.GetOffset(0x655F7B0C5BBD1959);
+            return ref _Handle.AsRef<Vector>(_EndOffsetOffset!.Value);
         }
     }
-    private static nint _SaveOffsetOffset = -1;
+    private static nint? _SaveOffsetOffset;
 
     public ref bool SaveOffset
     {
         get
         {
-            if (_SaveOffsetOffset == -1) _SaveOffsetOffset = Schema.GetOffset(0x655F7B0C43F64E5B);
-            return ref _Handle.AsRef<bool>(_SaveOffsetOffset);
+            _SaveOffsetOffset = _SaveOffsetOffset ?? Schema.GetOffset(0x655F7B0C43F64E5B);
+            return ref _Handle.AsRef<bool>(_SaveOffsetOffset!.Value);
         }
     }
 

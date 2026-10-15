@@ -16,57 +16,57 @@ internal partial class FeSpringIntegrator_tImpl : SchemaClass, FeSpringIntegrato
 {
     public FeSpringIntegrator_tImpl(nint handle) : base(handle) { }
 
-    private static nint _NodeOffset = -1;
+    private static nint? _NodeOffset;
     private SchemaFixedArray<ushort>? _NodeInstance;
 
     public ISchemaFixedArray<ushort> Node
     {
         get
         {
-            if (_NodeOffset == -1) _NodeOffset = Schema.GetOffset(0xFC6DF38BCD6694B9);
+            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0xFC6DF38BCD6694B9);
             var instance = _NodeInstance ??= new SchemaFixedArray<ushort>(0, 0xFC6DF38BCD6694B9, 2, 2, 2);
-            instance.DangerousSetHandle(_Handle + _NodeOffset);
+            instance.DangerousSetHandle(_Handle + _NodeOffset!.Value);
             return instance;
         }
     }
-    private static nint _SpringRestLengthOffset = -1;
+    private static nint? _SpringRestLengthOffset;
 
     public ref float SpringRestLength
     {
         get
         {
-            if (_SpringRestLengthOffset == -1) _SpringRestLengthOffset = Schema.GetOffset(0xFC6DF38B28C609E8);
-            return ref _Handle.AsRef<float>(_SpringRestLengthOffset);
+            _SpringRestLengthOffset = _SpringRestLengthOffset ?? Schema.GetOffset(0xFC6DF38B28C609E8);
+            return ref _Handle.AsRef<float>(_SpringRestLengthOffset!.Value);
         }
     }
-    private static nint _SpringConstantOffset = -1;
+    private static nint? _SpringConstantOffset;
 
     public ref float SpringConstant
     {
         get
         {
-            if (_SpringConstantOffset == -1) _SpringConstantOffset = Schema.GetOffset(0xFC6DF38B9346E79E);
-            return ref _Handle.AsRef<float>(_SpringConstantOffset);
+            _SpringConstantOffset = _SpringConstantOffset ?? Schema.GetOffset(0xFC6DF38B9346E79E);
+            return ref _Handle.AsRef<float>(_SpringConstantOffset!.Value);
         }
     }
-    private static nint _SpringDampingOffset = -1;
+    private static nint? _SpringDampingOffset;
 
     public ref float SpringDamping
     {
         get
         {
-            if (_SpringDampingOffset == -1) _SpringDampingOffset = Schema.GetOffset(0xFC6DF38B20E775D0);
-            return ref _Handle.AsRef<float>(_SpringDampingOffset);
+            _SpringDampingOffset = _SpringDampingOffset ?? Schema.GetOffset(0xFC6DF38B20E775D0);
+            return ref _Handle.AsRef<float>(_SpringDampingOffset!.Value);
         }
     }
-    private static nint _NodeWeight0Offset = -1;
+    private static nint? _NodeWeight0Offset;
 
     public ref float NodeWeight0
     {
         get
         {
-            if (_NodeWeight0Offset == -1) _NodeWeight0Offset = Schema.GetOffset(0xFC6DF38B6E62FEA1);
-            return ref _Handle.AsRef<float>(_NodeWeight0Offset);
+            _NodeWeight0Offset = _NodeWeight0Offset ?? Schema.GetOffset(0xFC6DF38B6E62FEA1);
+            return ref _Handle.AsRef<float>(_NodeWeight0Offset!.Value);
         }
     }
 

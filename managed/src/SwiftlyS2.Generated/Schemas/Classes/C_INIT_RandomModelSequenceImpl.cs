@@ -16,44 +16,44 @@ internal partial class C_INIT_RandomModelSequenceImpl : CParticleFunctionInitial
 {
     public C_INIT_RandomModelSequenceImpl(nint handle) : base(handle) { }
 
-    private static nint _ActivityNameOffset = -1;
+    private static nint? _ActivityNameOffset;
 
     public string ActivityName
     {
         get
         {
-            if (_ActivityNameOffset == -1) _ActivityNameOffset = Schema.GetOffset(0x2F450DC3BF0C5087);
-            return Schema.GetString(_Handle + _ActivityNameOffset);
+            _ActivityNameOffset = _ActivityNameOffset ?? Schema.GetOffset(0x2F450DC3BF0C5087);
+            return Schema.GetString(_Handle + _ActivityNameOffset!.Value);
         }
         set
         {
-            if (_ActivityNameOffset == -1) _ActivityNameOffset = Schema.GetOffset(0x2F450DC3BF0C5087);
-            Schema.SetFixedString(_Handle, _ActivityNameOffset, value, 256);
+            _ActivityNameOffset = _ActivityNameOffset ?? Schema.GetOffset(0x2F450DC3BF0C5087);
+            Schema.SetFixedString(_Handle, _ActivityNameOffset!.Value, value, 256);
         }
     }
-    private static nint _SequenceNameOffset = -1;
+    private static nint? _SequenceNameOffset;
 
     public string SequenceName
     {
         get
         {
-            if (_SequenceNameOffset == -1) _SequenceNameOffset = Schema.GetOffset(0x2F450DC3A270F66B);
-            return Schema.GetString(_Handle + _SequenceNameOffset);
+            _SequenceNameOffset = _SequenceNameOffset ?? Schema.GetOffset(0x2F450DC3A270F66B);
+            return Schema.GetString(_Handle + _SequenceNameOffset!.Value);
         }
         set
         {
-            if (_SequenceNameOffset == -1) _SequenceNameOffset = Schema.GetOffset(0x2F450DC3A270F66B);
-            Schema.SetFixedString(_Handle, _SequenceNameOffset, value, 256);
+            _SequenceNameOffset = _SequenceNameOffset ?? Schema.GetOffset(0x2F450DC3A270F66B);
+            Schema.SetFixedString(_Handle, _SequenceNameOffset!.Value, value, 256);
         }
     }
-    private static nint _ModelOffset = -1;
+    private static nint? _ModelOffset;
 
     public ref CStrongHandle<InfoForResourceTypeCModel> Model
     {
         get
         {
-            if (_ModelOffset == -1) _ModelOffset = Schema.GetOffset(0x2F450DC3E100C814);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_ModelOffset);
+            _ModelOffset = _ModelOffset ?? Schema.GetOffset(0x2F450DC3E100C814);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_ModelOffset!.Value);
         }
     }
 

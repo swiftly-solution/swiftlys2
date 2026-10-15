@@ -16,66 +16,66 @@ internal partial class CCSPlayer_RadioServicesImpl : CPlayerPawnComponentImpl, C
 {
     public CCSPlayer_RadioServicesImpl(nint handle) : base(handle) { }
 
-    private static nint _GotHostageTalkTimerOffset = -1;
+    private static nint? _GotHostageTalkTimerOffset;
     private GameTime_tImpl? _GotHostageTalkTimerInstance;
 
     public GameTime_t GotHostageTalkTimer
     {
         get
         {
-            if (_GotHostageTalkTimerOffset == -1) _GotHostageTalkTimerOffset = Schema.GetOffset(0x8E7F7B35729FE1A3);
+            _GotHostageTalkTimerOffset = _GotHostageTalkTimerOffset ?? Schema.GetOffset(0x8E7F7B35729FE1A3);
             var instance = _GotHostageTalkTimerInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _GotHostageTalkTimerOffset);
+            instance.DangerousSetHandle(_Handle + _GotHostageTalkTimerOffset!.Value);
             return instance;
         }
     }
-    private static nint _DefusingTalkTimerOffset = -1;
+    private static nint? _DefusingTalkTimerOffset;
     private GameTime_tImpl? _DefusingTalkTimerInstance;
 
     public GameTime_t DefusingTalkTimer
     {
         get
         {
-            if (_DefusingTalkTimerOffset == -1) _DefusingTalkTimerOffset = Schema.GetOffset(0x8E7F7B355AF7F835);
+            _DefusingTalkTimerOffset = _DefusingTalkTimerOffset ?? Schema.GetOffset(0x8E7F7B355AF7F835);
             var instance = _DefusingTalkTimerInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _DefusingTalkTimerOffset);
+            instance.DangerousSetHandle(_Handle + _DefusingTalkTimerOffset!.Value);
             return instance;
         }
     }
-    private static nint _C4PlantTalkTimerOffset = -1;
+    private static nint? _C4PlantTalkTimerOffset;
     private GameTime_tImpl? _C4PlantTalkTimerInstance;
 
     public GameTime_t C4PlantTalkTimer
     {
         get
         {
-            if (_C4PlantTalkTimerOffset == -1) _C4PlantTalkTimerOffset = Schema.GetOffset(0x8E7F7B35CE58ABD4);
+            _C4PlantTalkTimerOffset = _C4PlantTalkTimerOffset ?? Schema.GetOffset(0x8E7F7B35CE58ABD4);
             var instance = _C4PlantTalkTimerInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _C4PlantTalkTimerOffset);
+            instance.DangerousSetHandle(_Handle + _C4PlantTalkTimerOffset!.Value);
             return instance;
         }
     }
-    private static nint _RadioTokenSlotsOffset = -1;
+    private static nint? _RadioTokenSlotsOffset;
     private SchemaClassFixedArray<GameTime_t>? _RadioTokenSlotsInstance;
 
     public ISchemaClassFixedArray<GameTime_t> RadioTokenSlots
     {
         get
         {
-            if (_RadioTokenSlotsOffset == -1) _RadioTokenSlotsOffset = Schema.GetOffset(0x8E7F7B356FB722D0);
+            _RadioTokenSlotsOffset = _RadioTokenSlotsOffset ?? Schema.GetOffset(0x8E7F7B356FB722D0);
             var instance = _RadioTokenSlotsInstance ??= new SchemaClassFixedArray<GameTime_t>(0, 0x8E7F7B356FB722D0, 3, 4, 4);
-            instance.DangerousSetHandle(_Handle + _RadioTokenSlotsOffset);
+            instance.DangerousSetHandle(_Handle + _RadioTokenSlotsOffset!.Value);
             return instance;
         }
     }
-    private static nint _IgnoreRadioOffset = -1;
+    private static nint? _IgnoreRadioOffset;
 
     public ref bool IgnoreRadio
     {
         get
         {
-            if (_IgnoreRadioOffset == -1) _IgnoreRadioOffset = Schema.GetOffset(0x8E7F7B3562FA7576);
-            return ref _Handle.AsRef<bool>(_IgnoreRadioOffset);
+            _IgnoreRadioOffset = _IgnoreRadioOffset ?? Schema.GetOffset(0x8E7F7B3562FA7576);
+            return ref _Handle.AsRef<bool>(_IgnoreRadioOffset!.Value);
         }
     }
 

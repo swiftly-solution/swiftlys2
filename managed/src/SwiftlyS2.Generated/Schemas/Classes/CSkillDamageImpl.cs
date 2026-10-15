@@ -16,37 +16,37 @@ internal partial class CSkillDamageImpl : SchemaClass, CSkillDamage
 {
     public CSkillDamageImpl(nint handle) : base(handle) { }
 
-    private static nint _DamageOffset = -1;
+    private static nint? _DamageOffset;
     private CSkillFloatImpl? _DamageInstance;
 
     public CSkillFloat Damage
     {
         get
         {
-            if (_DamageOffset == -1) _DamageOffset = Schema.GetOffset(0x6A323D82DC60E53E);
+            _DamageOffset = _DamageOffset ?? Schema.GetOffset(0x6A323D82DC60E53E);
             var instance = _DamageInstance ??= new CSkillFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _DamageOffset);
+            instance.DangerousSetHandle(_Handle + _DamageOffset!.Value);
             return instance;
         }
     }
-    private static nint _NPCDamageScalarVsNPCOffset = -1;
+    private static nint? _NPCDamageScalarVsNPCOffset;
 
     public ref float NPCDamageScalarVsNPC
     {
         get
         {
-            if (_NPCDamageScalarVsNPCOffset == -1) _NPCDamageScalarVsNPCOffset = Schema.GetOffset(0x6A323D82FD135437);
-            return ref _Handle.AsRef<float>(_NPCDamageScalarVsNPCOffset);
+            _NPCDamageScalarVsNPCOffset = _NPCDamageScalarVsNPCOffset ?? Schema.GetOffset(0x6A323D82FD135437);
+            return ref _Handle.AsRef<float>(_NPCDamageScalarVsNPCOffset!.Value);
         }
     }
-    private static nint _PhysicsForceDamageOffset = -1;
+    private static nint? _PhysicsForceDamageOffset;
 
     public ref float PhysicsForceDamage
     {
         get
         {
-            if (_PhysicsForceDamageOffset == -1) _PhysicsForceDamageOffset = Schema.GetOffset(0x6A323D8219E7630E);
-            return ref _Handle.AsRef<float>(_PhysicsForceDamageOffset);
+            _PhysicsForceDamageOffset = _PhysicsForceDamageOffset ?? Schema.GetOffset(0x6A323D8219E7630E);
+            return ref _Handle.AsRef<float>(_PhysicsForceDamageOffset!.Value);
         }
     }
 

@@ -16,24 +16,24 @@ internal partial class SequenceWeightedList_tImpl : SchemaClass, SequenceWeighte
 {
     public SequenceWeightedList_tImpl(nint handle) : base(handle) { }
 
-    private static nint _SequenceOffset = -1;
+    private static nint? _SequenceOffset;
 
     public ref int Sequence
     {
         get
         {
-            if (_SequenceOffset == -1) _SequenceOffset = Schema.GetOffset(0x9BB15AFE3775D33C);
-            return ref _Handle.AsRef<int>(_SequenceOffset);
+            _SequenceOffset = _SequenceOffset ?? Schema.GetOffset(0x9BB15AFE3775D33C);
+            return ref _Handle.AsRef<int>(_SequenceOffset!.Value);
         }
     }
-    private static nint _RelativeWeightOffset = -1;
+    private static nint? _RelativeWeightOffset;
 
     public ref float RelativeWeight
     {
         get
         {
-            if (_RelativeWeightOffset == -1) _RelativeWeightOffset = Schema.GetOffset(0x9BB15AFE1BC599BB);
-            return ref _Handle.AsRef<float>(_RelativeWeightOffset);
+            _RelativeWeightOffset = _RelativeWeightOffset ?? Schema.GetOffset(0x9BB15AFE1BC599BB);
+            return ref _Handle.AsRef<float>(_RelativeWeightOffset!.Value);
         }
     }
 

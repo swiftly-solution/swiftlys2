@@ -16,34 +16,34 @@ internal partial class CBlend2DInstanceDataImpl : SchemaClass, CBlend2DInstanceD
 {
     public CBlend2DInstanceDataImpl(nint handle) : base(handle) { }
 
-    private static nint _DampedValueOffset = -1;
+    private static nint? _DampedValueOffset;
 
     public ref Vector2D DampedValue
     {
         get
         {
-            if (_DampedValueOffset == -1) _DampedValueOffset = Schema.GetOffset(0x479D67640EAD75CB);
-            return ref _Handle.AsRef<Vector2D>(_DampedValueOffset);
+            _DampedValueOffset = _DampedValueOffset ?? Schema.GetOffset(0x479D67640EAD75CB);
+            return ref _Handle.AsRef<Vector2D>(_DampedValueOffset!.Value);
         }
     }
-    private static nint _CycleOffset = -1;
+    private static nint? _CycleOffset;
 
     public ref float Cycle
     {
         get
         {
-            if (_CycleOffset == -1) _CycleOffset = Schema.GetOffset(0x479D67640C77829F);
-            return ref _Handle.AsRef<float>(_CycleOffset);
+            _CycleOffset = _CycleOffset ?? Schema.GetOffset(0x479D67640C77829F);
+            return ref _Handle.AsRef<float>(_CycleOffset!.Value);
         }
     }
-    private static nint _PrevCycleOffset = -1;
+    private static nint? _PrevCycleOffset;
 
     public ref float PrevCycle
     {
         get
         {
-            if (_PrevCycleOffset == -1) _PrevCycleOffset = Schema.GetOffset(0x479D6764AA0F5CF4);
-            return ref _Handle.AsRef<float>(_PrevCycleOffset);
+            _PrevCycleOffset = _PrevCycleOffset ?? Schema.GetOffset(0x479D6764AA0F5CF4);
+            return ref _Handle.AsRef<float>(_PrevCycleOffset!.Value);
         }
     }
 

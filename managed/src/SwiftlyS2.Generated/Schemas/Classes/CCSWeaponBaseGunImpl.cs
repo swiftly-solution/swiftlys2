@@ -16,104 +16,104 @@ internal partial class CCSWeaponBaseGunImpl : CCSWeaponBaseImpl, CCSWeaponBaseGu
 {
     public CCSWeaponBaseGunImpl(nint handle) : base(handle) { }
 
-    private static nint _ZoomLevelOffset = -1;
+    private static nint? _ZoomLevelOffset;
 
     public ref int ZoomLevel
     {
         get
         {
-            if (_ZoomLevelOffset == -1) _ZoomLevelOffset = Schema.GetOffset(0xBC30B081444E63A0);
-            return ref _Handle.AsRef<int>(_ZoomLevelOffset);
+            _ZoomLevelOffset = _ZoomLevelOffset ?? Schema.GetOffset(0xBC30B081444E63A0);
+            return ref _Handle.AsRef<int>(_ZoomLevelOffset!.Value);
         }
     }
-    private static nint _BurstShotsRemainingOffset = -1;
+    private static nint? _BurstShotsRemainingOffset;
 
     public ref int BurstShotsRemaining
     {
         get
         {
-            if (_BurstShotsRemainingOffset == -1) _BurstShotsRemainingOffset = Schema.GetOffset(0xBC30B081F53841A5);
-            return ref _Handle.AsRef<int>(_BurstShotsRemainingOffset);
+            _BurstShotsRemainingOffset = _BurstShotsRemainingOffset ?? Schema.GetOffset(0xBC30B081F53841A5);
+            return ref _Handle.AsRef<int>(_BurstShotsRemainingOffset!.Value);
         }
     }
-    private static nint _SilencedModelIndexOffset = -1;
+    private static nint? _SilencedModelIndexOffset;
 
     public ref int SilencedModelIndex
     {
         get
         {
-            if (_SilencedModelIndexOffset == -1) _SilencedModelIndexOffset = Schema.GetOffset(0xBC30B08178E5CAAB);
-            return ref _Handle.AsRef<int>(_SilencedModelIndexOffset);
+            _SilencedModelIndexOffset = _SilencedModelIndexOffset ?? Schema.GetOffset(0xBC30B08178E5CAAB);
+            return ref _Handle.AsRef<int>(_SilencedModelIndexOffset!.Value);
         }
     }
-    private static nint _InPrecacheOffset = -1;
+    private static nint? _InPrecacheOffset;
 
     public ref bool InPrecache
     {
         get
         {
-            if (_InPrecacheOffset == -1) _InPrecacheOffset = Schema.GetOffset(0xBC30B081495003CB);
-            return ref _Handle.AsRef<bool>(_InPrecacheOffset);
+            _InPrecacheOffset = _InPrecacheOffset ?? Schema.GetOffset(0xBC30B081495003CB);
+            return ref _Handle.AsRef<bool>(_InPrecacheOffset!.Value);
         }
     }
-    private static nint _NeedsBoltActionOffset = -1;
+    private static nint? _NeedsBoltActionOffset;
 
     public ref bool NeedsBoltAction
     {
         get
         {
-            if (_NeedsBoltActionOffset == -1) _NeedsBoltActionOffset = Schema.GetOffset(0xBC30B0813632E797);
-            return ref _Handle.AsRef<bool>(_NeedsBoltActionOffset);
+            _NeedsBoltActionOffset = _NeedsBoltActionOffset ?? Schema.GetOffset(0xBC30B0813632E797);
+            return ref _Handle.AsRef<bool>(_NeedsBoltActionOffset!.Value);
         }
     }
-    private static nint _RevolverCylinderIdxOffset = -1;
+    private static nint? _RevolverCylinderIdxOffset;
 
     public ref int RevolverCylinderIdx
     {
         get
         {
-            if (_RevolverCylinderIdxOffset == -1) _RevolverCylinderIdxOffset = Schema.GetOffset(0xBC30B08119D0E90B);
-            return ref _Handle.AsRef<int>(_RevolverCylinderIdxOffset);
+            _RevolverCylinderIdxOffset = _RevolverCylinderIdxOffset ?? Schema.GetOffset(0xBC30B08119D0E90B);
+            return ref _Handle.AsRef<int>(_RevolverCylinderIdxOffset!.Value);
         }
     }
-    private static nint _SkillReloadAvailableOffset = -1;
+    private static nint? _SkillReloadAvailableOffset;
 
     public ref bool SkillReloadAvailable
     {
         get
         {
-            if (_SkillReloadAvailableOffset == -1) _SkillReloadAvailableOffset = Schema.GetOffset(0xBC30B081C7961BE2);
-            return ref _Handle.AsRef<bool>(_SkillReloadAvailableOffset);
+            _SkillReloadAvailableOffset = _SkillReloadAvailableOffset ?? Schema.GetOffset(0xBC30B081C7961BE2);
+            return ref _Handle.AsRef<bool>(_SkillReloadAvailableOffset!.Value);
         }
     }
-    private static nint _SkillReloadLiftedReloadKeyOffset = -1;
+    private static nint? _SkillReloadLiftedReloadKeyOffset;
 
     public ref bool SkillReloadLiftedReloadKey
     {
         get
         {
-            if (_SkillReloadLiftedReloadKeyOffset == -1) _SkillReloadLiftedReloadKeyOffset = Schema.GetOffset(0xBC30B0819C3A15B5);
-            return ref _Handle.AsRef<bool>(_SkillReloadLiftedReloadKeyOffset);
+            _SkillReloadLiftedReloadKeyOffset = _SkillReloadLiftedReloadKeyOffset ?? Schema.GetOffset(0xBC30B0819C3A15B5);
+            return ref _Handle.AsRef<bool>(_SkillReloadLiftedReloadKeyOffset!.Value);
         }
     }
-    private static nint _SkillBoltInterruptAvailableOffset = -1;
+    private static nint? _SkillBoltInterruptAvailableOffset;
 
     public ref bool SkillBoltInterruptAvailable
     {
         get
         {
-            if (_SkillBoltInterruptAvailableOffset == -1) _SkillBoltInterruptAvailableOffset = Schema.GetOffset(0xBC30B0816FE62EEF);
-            return ref _Handle.AsRef<bool>(_SkillBoltInterruptAvailableOffset);
+            _SkillBoltInterruptAvailableOffset = _SkillBoltInterruptAvailableOffset ?? Schema.GetOffset(0xBC30B0816FE62EEF);
+            return ref _Handle.AsRef<bool>(_SkillBoltInterruptAvailableOffset!.Value);
         }
     }
-    private static nint _SkillBoltLiftedFireKeyOffset = -1;
+    private static nint? _SkillBoltLiftedFireKeyOffset;
 
     public ref bool SkillBoltLiftedFireKey
     {
         get
         {
-            if (_SkillBoltLiftedFireKeyOffset == -1) _SkillBoltLiftedFireKeyOffset = Schema.GetOffset(0xBC30B081AB7AEB7C);
-            return ref _Handle.AsRef<bool>(_SkillBoltLiftedFireKeyOffset);
+            _SkillBoltLiftedFireKeyOffset = _SkillBoltLiftedFireKeyOffset ?? Schema.GetOffset(0xBC30B081AB7AEB7C);
+            return ref _Handle.AsRef<bool>(_SkillBoltLiftedFireKeyOffset!.Value);
         }
     }
 

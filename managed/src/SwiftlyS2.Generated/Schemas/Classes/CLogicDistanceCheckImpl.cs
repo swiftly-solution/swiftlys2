@@ -16,84 +16,84 @@ internal partial class CLogicDistanceCheckImpl : CLogicalEntityImpl, CLogicDista
 {
     public CLogicDistanceCheckImpl(nint handle) : base(handle) { }
 
-    private static nint _EntityAOffset = -1;
+    private static nint? _EntityAOffset;
 
     public string EntityA
     {
         get
         {
-            if (_EntityAOffset == -1) _EntityAOffset = Schema.GetOffset(0x523E7E6D07823CB9);
-            return Schema.GetString(_Handle.Read<nint>(_EntityAOffset));
+            _EntityAOffset = _EntityAOffset ?? Schema.GetOffset(0x523E7E6D07823CB9);
+            return Schema.GetString(_Handle.Read<nint>(_EntityAOffset!.Value));
         }
         set
         {
-            if (_EntityAOffset == -1) _EntityAOffset = Schema.GetOffset(0x523E7E6D07823CB9);
-            Schema.SetString(_Handle, _EntityAOffset, value);
+            _EntityAOffset = _EntityAOffset ?? Schema.GetOffset(0x523E7E6D07823CB9);
+            Schema.SetString(_Handle, _EntityAOffset!.Value, value);
         }
     }
-    private static nint _EntityBOffset = -1;
+    private static nint? _EntityBOffset;
 
     public string EntityB
     {
         get
         {
-            if (_EntityBOffset == -1) _EntityBOffset = Schema.GetOffset(0x523E7E6D04823800);
-            return Schema.GetString(_Handle.Read<nint>(_EntityBOffset));
+            _EntityBOffset = _EntityBOffset ?? Schema.GetOffset(0x523E7E6D04823800);
+            return Schema.GetString(_Handle.Read<nint>(_EntityBOffset!.Value));
         }
         set
         {
-            if (_EntityBOffset == -1) _EntityBOffset = Schema.GetOffset(0x523E7E6D04823800);
-            Schema.SetString(_Handle, _EntityBOffset, value);
+            _EntityBOffset = _EntityBOffset ?? Schema.GetOffset(0x523E7E6D04823800);
+            Schema.SetString(_Handle, _EntityBOffset!.Value, value);
         }
     }
-    private static nint _Zone1DistanceOffset = -1;
+    private static nint? _Zone1DistanceOffset;
 
     public ref float Zone1Distance
     {
         get
         {
-            if (_Zone1DistanceOffset == -1) _Zone1DistanceOffset = Schema.GetOffset(0x523E7E6DFF385A8F);
-            return ref _Handle.AsRef<float>(_Zone1DistanceOffset);
+            _Zone1DistanceOffset = _Zone1DistanceOffset ?? Schema.GetOffset(0x523E7E6DFF385A8F);
+            return ref _Handle.AsRef<float>(_Zone1DistanceOffset!.Value);
         }
     }
-    private static nint _Zone2DistanceOffset = -1;
+    private static nint? _Zone2DistanceOffset;
 
     public ref float Zone2Distance
     {
         get
         {
-            if (_Zone2DistanceOffset == -1) _Zone2DistanceOffset = Schema.GetOffset(0x523E7E6DE1734A1A);
-            return ref _Handle.AsRef<float>(_Zone2DistanceOffset);
+            _Zone2DistanceOffset = _Zone2DistanceOffset ?? Schema.GetOffset(0x523E7E6DE1734A1A);
+            return ref _Handle.AsRef<float>(_Zone2DistanceOffset!.Value);
         }
     }
-    private static nint _InZone1Offset = -1;
+    private static nint? _InZone1Offset;
 
     public ref CEntityIOOutput InZone1
     {
         get
         {
-            if (_InZone1Offset == -1) _InZone1Offset = Schema.GetOffset(0x523E7E6D25378DB3);
-            return ref _Handle.AsRef<CEntityIOOutput>(_InZone1Offset);
+            _InZone1Offset = _InZone1Offset ?? Schema.GetOffset(0x523E7E6D25378DB3);
+            return ref _Handle.AsRef<CEntityIOOutput>(_InZone1Offset!.Value);
         }
     }
-    private static nint _InZone2Offset = -1;
+    private static nint? _InZone2Offset;
 
     public ref CEntityIOOutput InZone2
     {
         get
         {
-            if (_InZone2Offset == -1) _InZone2Offset = Schema.GetOffset(0x523E7E6D26378F46);
-            return ref _Handle.AsRef<CEntityIOOutput>(_InZone2Offset);
+            _InZone2Offset = _InZone2Offset ?? Schema.GetOffset(0x523E7E6D26378F46);
+            return ref _Handle.AsRef<CEntityIOOutput>(_InZone2Offset!.Value);
         }
     }
-    private static nint _InZone3Offset = -1;
+    private static nint? _InZone3Offset;
 
     public ref CEntityIOOutput InZone3
     {
         get
         {
-            if (_InZone3Offset == -1) _InZone3Offset = Schema.GetOffset(0x523E7E6D273790D9);
-            return ref _Handle.AsRef<CEntityIOOutput>(_InZone3Offset);
+            _InZone3Offset = _InZone3Offset ?? Schema.GetOffset(0x523E7E6D273790D9);
+            return ref _Handle.AsRef<CEntityIOOutput>(_InZone3Offset!.Value);
         }
     }
 

@@ -16,54 +16,54 @@ internal partial class CNmGraphDocFloatCurveEventNodeImpl : CNmGraphDocFlowNodeI
 {
     public CNmGraphDocFloatCurveEventNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _MatchIDOffset = -1;
+    private static nint? _MatchIDOffset;
 
     public ref CGlobalSymbol MatchID
     {
         get
         {
-            if (_MatchIDOffset == -1) _MatchIDOffset = Schema.GetOffset(0xE680723C6242D38B);
-            return ref _Handle.AsRef<CGlobalSymbol>(_MatchIDOffset);
+            _MatchIDOffset = _MatchIDOffset ?? Schema.GetOffset(0xE680723C6242D38B);
+            return ref _Handle.AsRef<CGlobalSymbol>(_MatchIDOffset!.Value);
         }
     }
-    private static nint _DefaultValueOffset = -1;
+    private static nint? _DefaultValueOffset;
 
     public ref float DefaultValue
     {
         get
         {
-            if (_DefaultValueOffset == -1) _DefaultValueOffset = Schema.GetOffset(0xE680723C700AB429);
-            return ref _Handle.AsRef<float>(_DefaultValueOffset);
+            _DefaultValueOffset = _DefaultValueOffset ?? Schema.GetOffset(0xE680723C700AB429);
+            return ref _Handle.AsRef<float>(_DefaultValueOffset!.Value);
         }
     }
-    private static nint _PriorityRuleOffset = -1;
+    private static nint? _PriorityRuleOffset;
 
     public ref NmEventPriorityRule_t PriorityRule
     {
         get
         {
-            if (_PriorityRuleOffset == -1) _PriorityRuleOffset = Schema.GetOffset(0xE680723C16C8898F);
-            return ref _Handle.AsRef<NmEventPriorityRule_t>(_PriorityRuleOffset);
+            _PriorityRuleOffset = _PriorityRuleOffset ?? Schema.GetOffset(0xE680723C16C8898F);
+            return ref _Handle.AsRef<NmEventPriorityRule_t>(_PriorityRuleOffset!.Value);
         }
     }
-    private static nint _LimitSearchToSourceStateOffset = -1;
+    private static nint? _LimitSearchToSourceStateOffset;
 
     public ref bool LimitSearchToSourceState
     {
         get
         {
-            if (_LimitSearchToSourceStateOffset == -1) _LimitSearchToSourceStateOffset = Schema.GetOffset(0xE680723C15D4BD01);
-            return ref _Handle.AsRef<bool>(_LimitSearchToSourceStateOffset);
+            _LimitSearchToSourceStateOffset = _LimitSearchToSourceStateOffset ?? Schema.GetOffset(0xE680723C15D4BD01);
+            return ref _Handle.AsRef<bool>(_LimitSearchToSourceStateOffset!.Value);
         }
     }
-    private static nint _IgnoreInactiveBranchEventsOffset = -1;
+    private static nint? _IgnoreInactiveBranchEventsOffset;
 
     public ref bool IgnoreInactiveBranchEvents
     {
         get
         {
-            if (_IgnoreInactiveBranchEventsOffset == -1) _IgnoreInactiveBranchEventsOffset = Schema.GetOffset(0xE680723C40B77877);
-            return ref _Handle.AsRef<bool>(_IgnoreInactiveBranchEventsOffset);
+            _IgnoreInactiveBranchEventsOffset = _IgnoreInactiveBranchEventsOffset ?? Schema.GetOffset(0xE680723C40B77877);
+            return ref _Handle.AsRef<bool>(_IgnoreInactiveBranchEventsOffset!.Value);
         }
     }
 

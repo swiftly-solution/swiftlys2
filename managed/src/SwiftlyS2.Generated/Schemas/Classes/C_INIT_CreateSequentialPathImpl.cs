@@ -16,66 +16,66 @@ internal partial class C_INIT_CreateSequentialPathImpl : CParticleFunctionInitia
 {
     public C_INIT_CreateSequentialPathImpl(nint handle) : base(handle) { }
 
-    private static nint _MaxDistanceOffset = -1;
+    private static nint? _MaxDistanceOffset;
 
     public ref float MaxDistance
     {
         get
         {
-            if (_MaxDistanceOffset == -1) _MaxDistanceOffset = Schema.GetOffset(0xBCADEDE2844E396A);
-            return ref _Handle.AsRef<float>(_MaxDistanceOffset);
+            _MaxDistanceOffset = _MaxDistanceOffset ?? Schema.GetOffset(0xBCADEDE2844E396A);
+            return ref _Handle.AsRef<float>(_MaxDistanceOffset!.Value);
         }
     }
-    private static nint _NumToAssignOffset = -1;
+    private static nint? _NumToAssignOffset;
 
     public ref float NumToAssign
     {
         get
         {
-            if (_NumToAssignOffset == -1) _NumToAssignOffset = Schema.GetOffset(0xBCADEDE2F73366BD);
-            return ref _Handle.AsRef<float>(_NumToAssignOffset);
+            _NumToAssignOffset = _NumToAssignOffset ?? Schema.GetOffset(0xBCADEDE2F73366BD);
+            return ref _Handle.AsRef<float>(_NumToAssignOffset!.Value);
         }
     }
-    private static nint _LoopOffset = -1;
+    private static nint? _LoopOffset;
 
     public ref bool Loop
     {
         get
         {
-            if (_LoopOffset == -1) _LoopOffset = Schema.GetOffset(0xBCADEDE2C668A4CB);
-            return ref _Handle.AsRef<bool>(_LoopOffset);
+            _LoopOffset = _LoopOffset ?? Schema.GetOffset(0xBCADEDE2C668A4CB);
+            return ref _Handle.AsRef<bool>(_LoopOffset!.Value);
         }
     }
-    private static nint _CPPairsOffset = -1;
+    private static nint? _CPPairsOffset;
 
     public ref bool CPPairs
     {
         get
         {
-            if (_CPPairsOffset == -1) _CPPairsOffset = Schema.GetOffset(0xBCADEDE2A5D36D0F);
-            return ref _Handle.AsRef<bool>(_CPPairsOffset);
+            _CPPairsOffset = _CPPairsOffset ?? Schema.GetOffset(0xBCADEDE2A5D36D0F);
+            return ref _Handle.AsRef<bool>(_CPPairsOffset!.Value);
         }
     }
-    private static nint _SaveOffsetOffset = -1;
+    private static nint? _SaveOffsetOffset;
 
     public ref bool SaveOffset
     {
         get
         {
-            if (_SaveOffsetOffset == -1) _SaveOffsetOffset = Schema.GetOffset(0xBCADEDE243F64E5B);
-            return ref _Handle.AsRef<bool>(_SaveOffsetOffset);
+            _SaveOffsetOffset = _SaveOffsetOffset ?? Schema.GetOffset(0xBCADEDE243F64E5B);
+            return ref _Handle.AsRef<bool>(_SaveOffsetOffset!.Value);
         }
     }
-    private static nint _PathParamsOffset = -1;
+    private static nint? _PathParamsOffset;
     private CPathParametersImpl? _PathParamsInstance;
 
     public CPathParameters PathParams
     {
         get
         {
-            if (_PathParamsOffset == -1) _PathParamsOffset = Schema.GetOffset(0xBCADEDE23C10092C);
+            _PathParamsOffset = _PathParamsOffset ?? Schema.GetOffset(0xBCADEDE23C10092C);
             var instance = _PathParamsInstance ??= new CPathParametersImpl(0);
-            instance.DangerousSetHandle(_Handle + _PathParamsOffset);
+            instance.DangerousSetHandle(_Handle + _PathParamsOffset!.Value);
             return instance;
         }
     }

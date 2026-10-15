@@ -16,47 +16,47 @@ internal partial class CStateMachineInstanceDataImpl : SchemaClass, CStateMachin
 {
     public CStateMachineInstanceDataImpl(nint handle) : base(handle) { }
 
-    private static nint _TimeInStateOffset = -1;
+    private static nint? _TimeInStateOffset;
 
     public ref float TimeInState
     {
         get
         {
-            if (_TimeInStateOffset == -1) _TimeInStateOffset = Schema.GetOffset(0x45CA3157346E9ED2);
-            return ref _Handle.AsRef<float>(_TimeInStateOffset);
+            _TimeInStateOffset = _TimeInStateOffset ?? Schema.GetOffset(0x45CA3157346E9ED2);
+            return ref _Handle.AsRef<float>(_TimeInStateOffset!.Value);
         }
     }
-    private static nint _CurrentTransitionIndexOffset = -1;
+    private static nint? _CurrentTransitionIndexOffset;
     private SchemaUntypedField? _CurrentTransitionIndexInstance;
 
     public SchemaUntypedField CurrentTransitionIndex
     {
         get
         {
-            if (_CurrentTransitionIndexOffset == -1) _CurrentTransitionIndexOffset = Schema.GetOffset(0x45CA315703E0E5EF);
+            _CurrentTransitionIndexOffset = _CurrentTransitionIndexOffset ?? Schema.GetOffset(0x45CA315703E0E5EF);
             var instance = _CurrentTransitionIndexInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _CurrentTransitionIndexOffset);
+            instance.DangerousSetHandle(_Handle + _CurrentTransitionIndexOffset!.Value);
             return instance;
         }
     }
-    private static nint _PrevStateIndexOffset = -1;
+    private static nint? _PrevStateIndexOffset;
 
     public ref int PrevStateIndex
     {
         get
         {
-            if (_PrevStateIndexOffset == -1) _PrevStateIndexOffset = Schema.GetOffset(0x45CA31575F8B244B);
-            return ref _Handle.AsRef<int>(_PrevStateIndexOffset);
+            _PrevStateIndexOffset = _PrevStateIndexOffset ?? Schema.GetOffset(0x45CA31575F8B244B);
+            return ref _Handle.AsRef<int>(_PrevStateIndexOffset!.Value);
         }
     }
-    private static nint _ScheduledTransitionIndexOffset = -1;
+    private static nint? _ScheduledTransitionIndexOffset;
 
     public ref int ScheduledTransitionIndex
     {
         get
         {
-            if (_ScheduledTransitionIndexOffset == -1) _ScheduledTransitionIndexOffset = Schema.GetOffset(0x45CA3157C538D601);
-            return ref _Handle.AsRef<int>(_ScheduledTransitionIndexOffset);
+            _ScheduledTransitionIndexOffset = _ScheduledTransitionIndexOffset ?? Schema.GetOffset(0x45CA3157C538D601);
+            return ref _Handle.AsRef<int>(_ScheduledTransitionIndexOffset!.Value);
         }
     }
 

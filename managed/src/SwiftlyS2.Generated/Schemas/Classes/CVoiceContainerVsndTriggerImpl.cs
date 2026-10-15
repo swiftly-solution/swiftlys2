@@ -16,226 +16,226 @@ internal partial class CVoiceContainerVsndTriggerImpl : CVoiceContainerBaseImpl,
 {
     public CVoiceContainerVsndTriggerImpl(nint handle) : base(handle) { }
 
-    private static nint _NamespaceOffset = -1;
+    private static nint? _NamespaceOffset;
 
     public string Namespace
     {
         get
         {
-            if (_NamespaceOffset == -1) _NamespaceOffset = Schema.GetOffset(0x840EB43E6245CFC0);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NamespaceOffset));
+            _NamespaceOffset = _NamespaceOffset ?? Schema.GetOffset(0x840EB43E6245CFC0);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NamespaceOffset!.Value));
         }
         set
         {
-            if (_NamespaceOffset == -1) _NamespaceOffset = Schema.GetOffset(0x840EB43E6245CFC0);
-            Schema.SetCUtlString(_Handle, _NamespaceOffset, value);
+            _NamespaceOffset = _NamespaceOffset ?? Schema.GetOffset(0x840EB43E6245CFC0);
+            Schema.SetCUtlString(_Handle, _NamespaceOffset!.Value, value);
         }
     }
-    private static nint _Slot1Offset = -1;
+    private static nint? _Slot1Offset;
     private CVsndTriggerSlotImpl? _Slot1Instance;
 
     public CVsndTriggerSlot Slot1
     {
         get
         {
-            if (_Slot1Offset == -1) _Slot1Offset = Schema.GetOffset(0x840EB43E3B0D1A60);
+            _Slot1Offset = _Slot1Offset ?? Schema.GetOffset(0x840EB43E3B0D1A60);
             var instance = _Slot1Instance ??= new CVsndTriggerSlotImpl(0);
-            instance.DangerousSetHandle(_Handle + _Slot1Offset);
+            instance.DangerousSetHandle(_Handle + _Slot1Offset!.Value);
             return instance;
         }
     }
-    private static nint _Slot2Offset = -1;
+    private static nint? _Slot2Offset;
     private CVsndTriggerSlotImpl? _Slot2Instance;
 
     public CVsndTriggerSlot Slot2
     {
         get
         {
-            if (_Slot2Offset == -1) _Slot2Offset = Schema.GetOffset(0x840EB43E3E0D1F19);
+            _Slot2Offset = _Slot2Offset ?? Schema.GetOffset(0x840EB43E3E0D1F19);
             var instance = _Slot2Instance ??= new CVsndTriggerSlotImpl(0);
-            instance.DangerousSetHandle(_Handle + _Slot2Offset);
+            instance.DangerousSetHandle(_Handle + _Slot2Offset!.Value);
             return instance;
         }
     }
-    private static nint _Slot3Offset = -1;
+    private static nint? _Slot3Offset;
     private CVsndTriggerSlotImpl? _Slot3Instance;
 
     public CVsndTriggerSlot Slot3
     {
         get
         {
-            if (_Slot3Offset == -1) _Slot3Offset = Schema.GetOffset(0x840EB43E3D0D1D86);
+            _Slot3Offset = _Slot3Offset ?? Schema.GetOffset(0x840EB43E3D0D1D86);
             var instance = _Slot3Instance ??= new CVsndTriggerSlotImpl(0);
-            instance.DangerousSetHandle(_Handle + _Slot3Offset);
+            instance.DangerousSetHandle(_Handle + _Slot3Offset!.Value);
             return instance;
         }
     }
-    private static nint _Slot4Offset = -1;
+    private static nint? _Slot4Offset;
     private CVsndTriggerSlotImpl? _Slot4Instance;
 
     public CVsndTriggerSlot Slot4
     {
         get
         {
-            if (_Slot4Offset == -1) _Slot4Offset = Schema.GetOffset(0x840EB43E400D223F);
+            _Slot4Offset = _Slot4Offset ?? Schema.GetOffset(0x840EB43E400D223F);
             var instance = _Slot4Instance ??= new CVsndTriggerSlotImpl(0);
-            instance.DangerousSetHandle(_Handle + _Slot4Offset);
+            instance.DangerousSetHandle(_Handle + _Slot4Offset!.Value);
             return instance;
         }
     }
-    private static nint _Slot5Offset = -1;
+    private static nint? _Slot5Offset;
     private CVsndTriggerSlotImpl? _Slot5Instance;
 
     public CVsndTriggerSlot Slot5
     {
         get
         {
-            if (_Slot5Offset == -1) _Slot5Offset = Schema.GetOffset(0x840EB43E3F0D20AC);
+            _Slot5Offset = _Slot5Offset ?? Schema.GetOffset(0x840EB43E3F0D20AC);
             var instance = _Slot5Instance ??= new CVsndTriggerSlotImpl(0);
-            instance.DangerousSetHandle(_Handle + _Slot5Offset);
+            instance.DangerousSetHandle(_Handle + _Slot5Offset!.Value);
             return instance;
         }
     }
-    private static nint _Slot6Offset = -1;
+    private static nint? _Slot6Offset;
     private CVsndTriggerSlotImpl? _Slot6Instance;
 
     public CVsndTriggerSlot Slot6
     {
         get
         {
-            if (_Slot6Offset == -1) _Slot6Offset = Schema.GetOffset(0x840EB43E420D2565);
+            _Slot6Offset = _Slot6Offset ?? Schema.GetOffset(0x840EB43E420D2565);
             var instance = _Slot6Instance ??= new CVsndTriggerSlotImpl(0);
-            instance.DangerousSetHandle(_Handle + _Slot6Offset);
+            instance.DangerousSetHandle(_Handle + _Slot6Offset!.Value);
             return instance;
         }
     }
-    private static nint _Slot7Offset = -1;
+    private static nint? _Slot7Offset;
     private CVsndTriggerSlotImpl? _Slot7Instance;
 
     public CVsndTriggerSlot Slot7
     {
         get
         {
-            if (_Slot7Offset == -1) _Slot7Offset = Schema.GetOffset(0x840EB43E410D23D2);
+            _Slot7Offset = _Slot7Offset ?? Schema.GetOffset(0x840EB43E410D23D2);
             var instance = _Slot7Instance ??= new CVsndTriggerSlotImpl(0);
-            instance.DangerousSetHandle(_Handle + _Slot7Offset);
+            instance.DangerousSetHandle(_Handle + _Slot7Offset!.Value);
             return instance;
         }
     }
-    private static nint _Slot8Offset = -1;
+    private static nint? _Slot8Offset;
     private CVsndTriggerSlotImpl? _Slot8Instance;
 
     public CVsndTriggerSlot Slot8
     {
         get
         {
-            if (_Slot8Offset == -1) _Slot8Offset = Schema.GetOffset(0x840EB43E440D288B);
+            _Slot8Offset = _Slot8Offset ?? Schema.GetOffset(0x840EB43E440D288B);
             var instance = _Slot8Instance ??= new CVsndTriggerSlotImpl(0);
-            instance.DangerousSetHandle(_Handle + _Slot8Offset);
+            instance.DangerousSetHandle(_Handle + _Slot8Offset!.Value);
             return instance;
         }
     }
-    private static nint _Slot9Offset = -1;
+    private static nint? _Slot9Offset;
     private CVsndTriggerSlotImpl? _Slot9Instance;
 
     public CVsndTriggerSlot Slot9
     {
         get
         {
-            if (_Slot9Offset == -1) _Slot9Offset = Schema.GetOffset(0x840EB43E430D26F8);
+            _Slot9Offset = _Slot9Offset ?? Schema.GetOffset(0x840EB43E430D26F8);
             var instance = _Slot9Instance ??= new CVsndTriggerSlotImpl(0);
-            instance.DangerousSetHandle(_Handle + _Slot9Offset);
+            instance.DangerousSetHandle(_Handle + _Slot9Offset!.Value);
             return instance;
         }
     }
-    private static nint _Slot10Offset = -1;
+    private static nint? _Slot10Offset;
     private CVsndTriggerSlotImpl? _Slot10Instance;
 
     public CVsndTriggerSlot Slot10
     {
         get
         {
-            if (_Slot10Offset == -1) _Slot10Offset = Schema.GetOffset(0x840EB43E45A06BF0);
+            _Slot10Offset = _Slot10Offset ?? Schema.GetOffset(0x840EB43E45A06BF0);
             var instance = _Slot10Instance ??= new CVsndTriggerSlotImpl(0);
-            instance.DangerousSetHandle(_Handle + _Slot10Offset);
+            instance.DangerousSetHandle(_Handle + _Slot10Offset!.Value);
             return instance;
         }
     }
-    private static nint _Slot11Offset = -1;
+    private static nint? _Slot11Offset;
     private CVsndTriggerSlotImpl? _Slot11Instance;
 
     public CVsndTriggerSlot Slot11
     {
         get
         {
-            if (_Slot11Offset == -1) _Slot11Offset = Schema.GetOffset(0x840EB43E46A06D83);
+            _Slot11Offset = _Slot11Offset ?? Schema.GetOffset(0x840EB43E46A06D83);
             var instance = _Slot11Instance ??= new CVsndTriggerSlotImpl(0);
-            instance.DangerousSetHandle(_Handle + _Slot11Offset);
+            instance.DangerousSetHandle(_Handle + _Slot11Offset!.Value);
             return instance;
         }
     }
-    private static nint _Slot12Offset = -1;
+    private static nint? _Slot12Offset;
     private CVsndTriggerSlotImpl? _Slot12Instance;
 
     public CVsndTriggerSlot Slot12
     {
         get
         {
-            if (_Slot12Offset == -1) _Slot12Offset = Schema.GetOffset(0x840EB43E47A06F16);
+            _Slot12Offset = _Slot12Offset ?? Schema.GetOffset(0x840EB43E47A06F16);
             var instance = _Slot12Instance ??= new CVsndTriggerSlotImpl(0);
-            instance.DangerousSetHandle(_Handle + _Slot12Offset);
+            instance.DangerousSetHandle(_Handle + _Slot12Offset!.Value);
             return instance;
         }
     }
-    private static nint _Slot13Offset = -1;
+    private static nint? _Slot13Offset;
     private CVsndTriggerSlotImpl? _Slot13Instance;
 
     public CVsndTriggerSlot Slot13
     {
         get
         {
-            if (_Slot13Offset == -1) _Slot13Offset = Schema.GetOffset(0x840EB43E48A070A9);
+            _Slot13Offset = _Slot13Offset ?? Schema.GetOffset(0x840EB43E48A070A9);
             var instance = _Slot13Instance ??= new CVsndTriggerSlotImpl(0);
-            instance.DangerousSetHandle(_Handle + _Slot13Offset);
+            instance.DangerousSetHandle(_Handle + _Slot13Offset!.Value);
             return instance;
         }
     }
-    private static nint _Slot14Offset = -1;
+    private static nint? _Slot14Offset;
     private CVsndTriggerSlotImpl? _Slot14Instance;
 
     public CVsndTriggerSlot Slot14
     {
         get
         {
-            if (_Slot14Offset == -1) _Slot14Offset = Schema.GetOffset(0x840EB43E49A0723C);
+            _Slot14Offset = _Slot14Offset ?? Schema.GetOffset(0x840EB43E49A0723C);
             var instance = _Slot14Instance ??= new CVsndTriggerSlotImpl(0);
-            instance.DangerousSetHandle(_Handle + _Slot14Offset);
+            instance.DangerousSetHandle(_Handle + _Slot14Offset!.Value);
             return instance;
         }
     }
-    private static nint _Slot15Offset = -1;
+    private static nint? _Slot15Offset;
     private CVsndTriggerSlotImpl? _Slot15Instance;
 
     public CVsndTriggerSlot Slot15
     {
         get
         {
-            if (_Slot15Offset == -1) _Slot15Offset = Schema.GetOffset(0x840EB43E4AA073CF);
+            _Slot15Offset = _Slot15Offset ?? Schema.GetOffset(0x840EB43E4AA073CF);
             var instance = _Slot15Instance ??= new CVsndTriggerSlotImpl(0);
-            instance.DangerousSetHandle(_Handle + _Slot15Offset);
+            instance.DangerousSetHandle(_Handle + _Slot15Offset!.Value);
             return instance;
         }
     }
-    private static nint _Slot16Offset = -1;
+    private static nint? _Slot16Offset;
     private CVsndTriggerSlotImpl? _Slot16Instance;
 
     public CVsndTriggerSlot Slot16
     {
         get
         {
-            if (_Slot16Offset == -1) _Slot16Offset = Schema.GetOffset(0x840EB43E4BA07562);
+            _Slot16Offset = _Slot16Offset ?? Schema.GetOffset(0x840EB43E4BA07562);
             var instance = _Slot16Instance ??= new CVsndTriggerSlotImpl(0);
-            instance.DangerousSetHandle(_Handle + _Slot16Offset);
+            instance.DangerousSetHandle(_Handle + _Slot16Offset!.Value);
             return instance;
         }
     }

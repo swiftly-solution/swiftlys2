@@ -16,14 +16,14 @@ internal partial class EventPreDataUpdate_tImpl : SchemaClass, EventPreDataUpdat
 {
     public EventPreDataUpdate_tImpl(nint handle) : base(handle) { }
 
-    private static nint _CountOffset = -1;
+    private static nint? _CountOffset;
 
     public ref int Count
     {
         get
         {
-            if (_CountOffset == -1) _CountOffset = Schema.GetOffset(0xEDF6C5BA7D31AC08);
-            return ref _Handle.AsRef<int>(_CountOffset);
+            _CountOffset = _CountOffset ?? Schema.GetOffset(0xEDF6C5BA7D31AC08);
+            return ref _Handle.AsRef<int>(_CountOffset!.Value);
         }
     }
 

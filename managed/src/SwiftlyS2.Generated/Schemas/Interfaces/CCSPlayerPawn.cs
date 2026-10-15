@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CCSPlayerPawn : CCSPlayerPawnBase, ISchemaClass<CCSPlayerPawn>
 {
     static CCSPlayerPawn ISchemaClass<CCSPlayerPawn>.From(nint handle) => new CCSPlayerPawnImpl(handle);
-    static int ISchemaClass<CCSPlayerPawn>.Size => 5600;
+    static int ISchemaClass<CCSPlayerPawn>.Size => 5568;
     static string? ISchemaClass<CCSPlayerPawn>.ClassName => "player";
 
 
@@ -94,10 +94,6 @@ public partial interface CCSPlayerPawn : CCSPlayerPawnBase, ISchemaClass<CCSPlay
     public CEconItemView EconGloves { get; }
 
     public ref byte EconGlovesChanged { get; }
-
-    public ref CUtlVector<CHandle<CCSMinimapVolume>> CurrentMinimapVolumes { get; }
-
-    public ref CHandle<CCSMinimapVolume> ActiveMinimapVolume { get; }
 
     public ref QAngle DeathEyeAngles { get; }
 
@@ -258,7 +254,6 @@ public partial interface CCSPlayerPawn : CCSPlayerPawnBase, ISchemaClass<CCSPlay
     public void RagdollServerOriginUpdated();
     public void EconGlovesUpdated();
     public void EconGlovesChangedUpdated();
-    public void ActiveMinimapVolumeUpdated();
     public void DeathEyeAnglesUpdated();
     public void LeftHandedUpdated();
     public void SwitchedHandednessTimeUpdated();

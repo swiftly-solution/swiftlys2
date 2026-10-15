@@ -16,72 +16,72 @@ internal partial class CSSDSMsg_LayerBaseImpl : SchemaClass, CSSDSMsg_LayerBase
 {
     public CSSDSMsg_LayerBaseImpl(nint handle) : base(handle) { }
 
-    private static nint _ViewIdOffset = -1;
+    private static nint? _ViewIdOffset;
     private SceneViewId_tImpl? _ViewIdInstance;
 
     public SceneViewId_t ViewId
     {
         get
         {
-            if (_ViewIdOffset == -1) _ViewIdOffset = Schema.GetOffset(0x9F18C5E5E976CB25);
+            _ViewIdOffset = _ViewIdOffset ?? Schema.GetOffset(0x9F18C5E5E976CB25);
             var instance = _ViewIdInstance ??= new SceneViewId_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _ViewIdOffset);
+            instance.DangerousSetHandle(_Handle + _ViewIdOffset!.Value);
             return instance;
         }
     }
-    private static nint _ViewNameOffset = -1;
+    private static nint? _ViewNameOffset;
 
     public string ViewName
     {
         get
         {
-            if (_ViewNameOffset == -1) _ViewNameOffset = Schema.GetOffset(0x9F18C5E5BA5BBDBB);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ViewNameOffset));
+            _ViewNameOffset = _ViewNameOffset ?? Schema.GetOffset(0x9F18C5E5BA5BBDBB);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ViewNameOffset!.Value));
         }
         set
         {
-            if (_ViewNameOffset == -1) _ViewNameOffset = Schema.GetOffset(0x9F18C5E5BA5BBDBB);
-            Schema.SetCUtlString(_Handle, _ViewNameOffset, value);
+            _ViewNameOffset = _ViewNameOffset ?? Schema.GetOffset(0x9F18C5E5BA5BBDBB);
+            Schema.SetCUtlString(_Handle, _ViewNameOffset!.Value, value);
         }
     }
-    private static nint _LayerIdOffset = -1;
+    private static nint? _LayerIdOffset;
 
     public ref ulong LayerId
     {
         get
         {
-            if (_LayerIdOffset == -1) _LayerIdOffset = Schema.GetOffset(0x9F18C5E531A19D87);
-            return ref _Handle.AsRef<ulong>(_LayerIdOffset);
+            _LayerIdOffset = _LayerIdOffset ?? Schema.GetOffset(0x9F18C5E531A19D87);
+            return ref _Handle.AsRef<ulong>(_LayerIdOffset!.Value);
         }
     }
-    private static nint _LayerNameOffset = -1;
+    private static nint? _LayerNameOffset;
 
     public string LayerName
     {
         get
         {
-            if (_LayerNameOffset == -1) _LayerNameOffset = Schema.GetOffset(0x9F18C5E55A7163B5);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_LayerNameOffset));
+            _LayerNameOffset = _LayerNameOffset ?? Schema.GetOffset(0x9F18C5E55A7163B5);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_LayerNameOffset!.Value));
         }
         set
         {
-            if (_LayerNameOffset == -1) _LayerNameOffset = Schema.GetOffset(0x9F18C5E55A7163B5);
-            Schema.SetCUtlString(_Handle, _LayerNameOffset, value);
+            _LayerNameOffset = _LayerNameOffset ?? Schema.GetOffset(0x9F18C5E55A7163B5);
+            Schema.SetCUtlString(_Handle, _LayerNameOffset!.Value, value);
         }
     }
-    private static nint _DisplayTextOffset = -1;
+    private static nint? _DisplayTextOffset;
 
     public string DisplayText
     {
         get
         {
-            if (_DisplayTextOffset == -1) _DisplayTextOffset = Schema.GetOffset(0x9F18C5E5F59D71EE);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_DisplayTextOffset));
+            _DisplayTextOffset = _DisplayTextOffset ?? Schema.GetOffset(0x9F18C5E5F59D71EE);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_DisplayTextOffset!.Value));
         }
         set
         {
-            if (_DisplayTextOffset == -1) _DisplayTextOffset = Schema.GetOffset(0x9F18C5E5F59D71EE);
-            Schema.SetCUtlString(_Handle, _DisplayTextOffset, value);
+            _DisplayTextOffset = _DisplayTextOffset ?? Schema.GetOffset(0x9F18C5E5F59D71EE);
+            Schema.SetCUtlString(_Handle, _DisplayTextOffset!.Value, value);
         }
     }
 

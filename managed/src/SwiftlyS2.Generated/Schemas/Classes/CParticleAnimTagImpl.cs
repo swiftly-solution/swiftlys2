@@ -16,134 +16,134 @@ internal partial class CParticleAnimTagImpl : CAnimTagBaseImpl, CParticleAnimTag
 {
     public CParticleAnimTagImpl(nint handle) : base(handle) { }
 
-    private static nint _ParticleSystemOffset = -1;
+    private static nint? _ParticleSystemOffset;
 
     public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> ParticleSystem
     {
         get
         {
-            if (_ParticleSystemOffset == -1) _ParticleSystemOffset = Schema.GetOffset(0x80C76F77C9C33AF8);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIParticleSystemDefinition>>(_ParticleSystemOffset);
+            _ParticleSystemOffset = _ParticleSystemOffset ?? Schema.GetOffset(0x80C76F77C9C33AF8);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIParticleSystemDefinition>>(_ParticleSystemOffset!.Value);
         }
     }
-    private static nint _ParticleSystemNameOffset = -1;
+    private static nint? _ParticleSystemNameOffset;
 
     public string ParticleSystemName
     {
         get
         {
-            if (_ParticleSystemNameOffset == -1) _ParticleSystemNameOffset = Schema.GetOffset(0x80C76F775B35985D);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ParticleSystemNameOffset));
+            _ParticleSystemNameOffset = _ParticleSystemNameOffset ?? Schema.GetOffset(0x80C76F775B35985D);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ParticleSystemNameOffset!.Value));
         }
         set
         {
-            if (_ParticleSystemNameOffset == -1) _ParticleSystemNameOffset = Schema.GetOffset(0x80C76F775B35985D);
-            Schema.SetCUtlString(_Handle, _ParticleSystemNameOffset, value);
+            _ParticleSystemNameOffset = _ParticleSystemNameOffset ?? Schema.GetOffset(0x80C76F775B35985D);
+            Schema.SetCUtlString(_Handle, _ParticleSystemNameOffset!.Value, value);
         }
     }
-    private static nint _ConfigNameOffset = -1;
+    private static nint? _ConfigNameOffset;
 
     public string ConfigName
     {
         get
         {
-            if (_ConfigNameOffset == -1) _ConfigNameOffset = Schema.GetOffset(0x80C76F7791DC0E44);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ConfigNameOffset));
+            _ConfigNameOffset = _ConfigNameOffset ?? Schema.GetOffset(0x80C76F7791DC0E44);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ConfigNameOffset!.Value));
         }
         set
         {
-            if (_ConfigNameOffset == -1) _ConfigNameOffset = Schema.GetOffset(0x80C76F7791DC0E44);
-            Schema.SetCUtlString(_Handle, _ConfigNameOffset, value);
+            _ConfigNameOffset = _ConfigNameOffset ?? Schema.GetOffset(0x80C76F7791DC0E44);
+            Schema.SetCUtlString(_Handle, _ConfigNameOffset!.Value, value);
         }
     }
-    private static nint _DetachFromOwnerOffset = -1;
+    private static nint? _DetachFromOwnerOffset;
 
     public ref bool DetachFromOwner
     {
         get
         {
-            if (_DetachFromOwnerOffset == -1) _DetachFromOwnerOffset = Schema.GetOffset(0x80C76F77357F7C69);
-            return ref _Handle.AsRef<bool>(_DetachFromOwnerOffset);
+            _DetachFromOwnerOffset = _DetachFromOwnerOffset ?? Schema.GetOffset(0x80C76F77357F7C69);
+            return ref _Handle.AsRef<bool>(_DetachFromOwnerOffset!.Value);
         }
     }
-    private static nint _AggregateOffset = -1;
+    private static nint? _AggregateOffset;
 
     public ref bool Aggregate
     {
         get
         {
-            if (_AggregateOffset == -1) _AggregateOffset = Schema.GetOffset(0x80C76F77721C6688);
-            return ref _Handle.AsRef<bool>(_AggregateOffset);
+            _AggregateOffset = _AggregateOffset ?? Schema.GetOffset(0x80C76F77721C6688);
+            return ref _Handle.AsRef<bool>(_AggregateOffset!.Value);
         }
     }
-    private static nint _StopWhenTagEndsOffset = -1;
+    private static nint? _StopWhenTagEndsOffset;
 
     public ref bool StopWhenTagEnds
     {
         get
         {
-            if (_StopWhenTagEndsOffset == -1) _StopWhenTagEndsOffset = Schema.GetOffset(0x80C76F77878BB46D);
-            return ref _Handle.AsRef<bool>(_StopWhenTagEndsOffset);
+            _StopWhenTagEndsOffset = _StopWhenTagEndsOffset ?? Schema.GetOffset(0x80C76F77878BB46D);
+            return ref _Handle.AsRef<bool>(_StopWhenTagEndsOffset!.Value);
         }
     }
-    private static nint _TagEndStopIsInstantOffset = -1;
+    private static nint? _TagEndStopIsInstantOffset;
 
     public ref bool TagEndStopIsInstant
     {
         get
         {
-            if (_TagEndStopIsInstantOffset == -1) _TagEndStopIsInstantOffset = Schema.GetOffset(0x80C76F7749C6A809);
-            return ref _Handle.AsRef<bool>(_TagEndStopIsInstantOffset);
+            _TagEndStopIsInstantOffset = _TagEndStopIsInstantOffset ?? Schema.GetOffset(0x80C76F7749C6A809);
+            return ref _Handle.AsRef<bool>(_TagEndStopIsInstantOffset!.Value);
         }
     }
-    private static nint _AttachmentNameOffset = -1;
+    private static nint? _AttachmentNameOffset;
 
     public string AttachmentName
     {
         get
         {
-            if (_AttachmentNameOffset == -1) _AttachmentNameOffset = Schema.GetOffset(0x80C76F77295DA9CB);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_AttachmentNameOffset));
+            _AttachmentNameOffset = _AttachmentNameOffset ?? Schema.GetOffset(0x80C76F77295DA9CB);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_AttachmentNameOffset!.Value));
         }
         set
         {
-            if (_AttachmentNameOffset == -1) _AttachmentNameOffset = Schema.GetOffset(0x80C76F77295DA9CB);
-            Schema.SetCUtlString(_Handle, _AttachmentNameOffset, value);
+            _AttachmentNameOffset = _AttachmentNameOffset ?? Schema.GetOffset(0x80C76F77295DA9CB);
+            Schema.SetCUtlString(_Handle, _AttachmentNameOffset!.Value, value);
         }
     }
-    private static nint _AttachmentTypeOffset = -1;
+    private static nint? _AttachmentTypeOffset;
 
     public ref ParticleAttachment_t AttachmentType
     {
         get
         {
-            if (_AttachmentTypeOffset == -1) _AttachmentTypeOffset = Schema.GetOffset(0x80C76F77778D9A00);
-            return ref _Handle.AsRef<ParticleAttachment_t>(_AttachmentTypeOffset);
+            _AttachmentTypeOffset = _AttachmentTypeOffset ?? Schema.GetOffset(0x80C76F77778D9A00);
+            return ref _Handle.AsRef<ParticleAttachment_t>(_AttachmentTypeOffset!.Value);
         }
     }
-    private static nint _AttachmentCP1NameOffset = -1;
+    private static nint? _AttachmentCP1NameOffset;
 
     public string AttachmentCP1Name
     {
         get
         {
-            if (_AttachmentCP1NameOffset == -1) _AttachmentCP1NameOffset = Schema.GetOffset(0x80C76F77420E59C5);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_AttachmentCP1NameOffset));
+            _AttachmentCP1NameOffset = _AttachmentCP1NameOffset ?? Schema.GetOffset(0x80C76F77420E59C5);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_AttachmentCP1NameOffset!.Value));
         }
         set
         {
-            if (_AttachmentCP1NameOffset == -1) _AttachmentCP1NameOffset = Schema.GetOffset(0x80C76F77420E59C5);
-            Schema.SetCUtlString(_Handle, _AttachmentCP1NameOffset, value);
+            _AttachmentCP1NameOffset = _AttachmentCP1NameOffset ?? Schema.GetOffset(0x80C76F77420E59C5);
+            Schema.SetCUtlString(_Handle, _AttachmentCP1NameOffset!.Value, value);
         }
     }
-    private static nint _AttachmentCP1TypeOffset = -1;
+    private static nint? _AttachmentCP1TypeOffset;
 
     public ref ParticleAttachment_t AttachmentCP1Type
     {
         get
         {
-            if (_AttachmentCP1TypeOffset == -1) _AttachmentCP1TypeOffset = Schema.GetOffset(0x80C76F77CD1D74D6);
-            return ref _Handle.AsRef<ParticleAttachment_t>(_AttachmentCP1TypeOffset);
+            _AttachmentCP1TypeOffset = _AttachmentCP1TypeOffset ?? Schema.GetOffset(0x80C76F77CD1D74D6);
+            return ref _Handle.AsRef<ParticleAttachment_t>(_AttachmentCP1TypeOffset!.Value);
         }
     }
 

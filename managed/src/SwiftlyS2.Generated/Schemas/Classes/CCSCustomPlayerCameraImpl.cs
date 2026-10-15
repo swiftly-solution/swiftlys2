@@ -16,84 +16,84 @@ internal partial class CCSCustomPlayerCameraImpl : CBaseEntityImpl, CCSCustomPla
 {
     public CCSCustomPlayerCameraImpl(nint handle) : base(handle) { }
 
-    private static nint _PawnOffset = -1;
+    private static nint? _PawnOffset;
 
     public ref CHandle<CCSPlayerPawnBase> Pawn
     {
         get
         {
-            if (_PawnOffset == -1) _PawnOffset = Schema.GetOffset(0x61436697C628C1D);
-            return ref _Handle.AsRef<CHandle<CCSPlayerPawnBase>>(_PawnOffset);
+            _PawnOffset = _PawnOffset ?? Schema.GetOffset(0x61436697C628C1D);
+            return ref _Handle.AsRef<CHandle<CCSPlayerPawnBase>>(_PawnOffset!.Value);
         }
     }
-    private static nint _CameraModeOffset = -1;
+    private static nint? _CameraModeOffset;
 
     public ref CustomCameraMode_t CameraMode
     {
         get
         {
-            if (_CameraModeOffset == -1) _CameraModeOffset = Schema.GetOffset(0x6143669CCE696C1);
-            return ref _Handle.AsRef<CustomCameraMode_t>(_CameraModeOffset);
+            _CameraModeOffset = _CameraModeOffset ?? Schema.GetOffset(0x6143669CCE696C1);
+            return ref _Handle.AsRef<CustomCameraMode_t>(_CameraModeOffset!.Value);
         }
     }
-    private static nint _FollowEntityOffset = -1;
+    private static nint? _FollowEntityOffset;
 
     public ref CHandle<CBaseEntity> FollowEntity
     {
         get
         {
-            if (_FollowEntityOffset == -1) _FollowEntityOffset = Schema.GetOffset(0x614366969846129);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_FollowEntityOffset);
+            _FollowEntityOffset = _FollowEntityOffset ?? Schema.GetOffset(0x614366969846129);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_FollowEntityOffset!.Value);
         }
     }
-    private static nint _FollowEyesOffset = -1;
+    private static nint? _FollowEyesOffset;
 
     public ref bool FollowEyes
     {
         get
         {
-            if (_FollowEyesOffset == -1) _FollowEyesOffset = Schema.GetOffset(0x614366905B573A2);
-            return ref _Handle.AsRef<bool>(_FollowEyesOffset);
+            _FollowEyesOffset = _FollowEyesOffset ?? Schema.GetOffset(0x614366905B573A2);
+            return ref _Handle.AsRef<bool>(_FollowEyesOffset!.Value);
         }
     }
-    private static nint _FollowOffsetOffset = -1;
+    private static nint? _FollowOffsetOffset;
 
     public ref Vector FollowOffset
     {
         get
         {
-            if (_FollowOffsetOffset == -1) _FollowOffsetOffset = Schema.GetOffset(0x61436693EDDAC53);
-            return ref _Handle.AsRef<Vector>(_FollowOffsetOffset);
+            _FollowOffsetOffset = _FollowOffsetOffset ?? Schema.GetOffset(0x61436693EDDAC53);
+            return ref _Handle.AsRef<Vector>(_FollowOffsetOffset!.Value);
         }
     }
-    private static nint _CameraOffsetOffset = -1;
+    private static nint? _CameraOffsetOffset;
 
     public ref Vector CameraOffset
     {
         get
         {
-            if (_CameraOffsetOffset == -1) _CameraOffsetOffset = Schema.GetOffset(0x61436699FFEE839);
-            return ref _Handle.AsRef<Vector>(_CameraOffsetOffset);
+            _CameraOffsetOffset = _CameraOffsetOffset ?? Schema.GetOffset(0x61436699FFEE839);
+            return ref _Handle.AsRef<Vector>(_CameraOffsetOffset!.Value);
         }
     }
-    private static nint _ClipCameraOffsetOffset = -1;
+    private static nint? _ClipCameraOffsetOffset;
 
     public ref bool ClipCameraOffset
     {
         get
         {
-            if (_ClipCameraOffsetOffset == -1) _ClipCameraOffsetOffset = Schema.GetOffset(0x61436693E3771F7);
-            return ref _Handle.AsRef<bool>(_ClipCameraOffsetOffset);
+            _ClipCameraOffsetOffset = _ClipCameraOffsetOffset ?? Schema.GetOffset(0x61436693E3771F7);
+            return ref _Handle.AsRef<bool>(_ClipCameraOffsetOffset!.Value);
         }
     }
-    private static nint _CameraOffsetReturnStrengthOffset = -1;
+    private static nint? _CameraOffsetReturnStrengthOffset;
 
     public ref float CameraOffsetReturnStrength
     {
         get
         {
-            if (_CameraOffsetReturnStrengthOffset == -1) _CameraOffsetReturnStrengthOffset = Schema.GetOffset(0x614366927A7EC44);
-            return ref _Handle.AsRef<float>(_CameraOffsetReturnStrengthOffset);
+            _CameraOffsetReturnStrengthOffset = _CameraOffsetReturnStrengthOffset ?? Schema.GetOffset(0x614366927A7EC44);
+            return ref _Handle.AsRef<float>(_CameraOffsetReturnStrengthOffset!.Value);
         }
     }
 

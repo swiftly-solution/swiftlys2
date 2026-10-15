@@ -16,54 +16,54 @@ internal partial class FeFitMatrix_tImpl : SchemaClass, FeFitMatrix_t
 {
     public FeFitMatrix_tImpl(nint handle) : base(handle) { }
 
-    private static nint _BoneOffset = -1;
+    private static nint? _BoneOffset;
 
     public ref CTransform Bone
     {
         get
         {
-            if (_BoneOffset == -1) _BoneOffset = Schema.GetOffset(0xB8804215DB90E18F);
-            return ref _Handle.AsRef<CTransform>(_BoneOffset);
+            _BoneOffset = _BoneOffset ?? Schema.GetOffset(0xB8804215DB90E18F);
+            return ref _Handle.AsRef<CTransform>(_BoneOffset!.Value);
         }
     }
-    private static nint _CenterOffset = -1;
+    private static nint? _CenterOffset;
 
     public ref Vector Center
     {
         get
         {
-            if (_CenterOffset == -1) _CenterOffset = Schema.GetOffset(0xB88042157CA60028);
-            return ref _Handle.AsRef<Vector>(_CenterOffset);
+            _CenterOffset = _CenterOffset ?? Schema.GetOffset(0xB88042157CA60028);
+            return ref _Handle.AsRef<Vector>(_CenterOffset!.Value);
         }
     }
-    private static nint _EndOffset = -1;
+    private static nint? _EndOffset;
 
     public ref ushort End
     {
         get
         {
-            if (_EndOffset == -1) _EndOffset = Schema.GetOffset(0xB8804215FE4CFBD6);
-            return ref _Handle.AsRef<ushort>(_EndOffset);
+            _EndOffset = _EndOffset ?? Schema.GetOffset(0xB8804215FE4CFBD6);
+            return ref _Handle.AsRef<ushort>(_EndOffset!.Value);
         }
     }
-    private static nint _NodeOffset = -1;
+    private static nint? _NodeOffset;
 
     public ref ushort Node
     {
         get
         {
-            if (_NodeOffset == -1) _NodeOffset = Schema.GetOffset(0xB8804215CD6694B9);
-            return ref _Handle.AsRef<ushort>(_NodeOffset);
+            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0xB8804215CD6694B9);
+            return ref _Handle.AsRef<ushort>(_NodeOffset!.Value);
         }
     }
-    private static nint _BeginDynamicOffset = -1;
+    private static nint? _BeginDynamicOffset;
 
     public ref ushort BeginDynamic
     {
         get
         {
-            if (_BeginDynamicOffset == -1) _BeginDynamicOffset = Schema.GetOffset(0xB88042153F6B5607);
-            return ref _Handle.AsRef<ushort>(_BeginDynamicOffset);
+            _BeginDynamicOffset = _BeginDynamicOffset ?? Schema.GetOffset(0xB88042153F6B5607);
+            return ref _Handle.AsRef<ushort>(_BeginDynamicOffset!.Value);
         }
     }
 

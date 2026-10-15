@@ -16,49 +16,49 @@ internal partial class constraint_hingeparams_tImpl : SchemaClass, constraint_hi
 {
     public constraint_hingeparams_tImpl(nint handle) : base(handle) { }
 
-    private static nint _WorldPositionOffset = -1;
+    private static nint? _WorldPositionOffset;
 
     public ref Vector WorldPosition
     {
         get
         {
-            if (_WorldPositionOffset == -1) _WorldPositionOffset = Schema.GetOffset(0x790804C3F16C2360);
-            return ref _Handle.AsRef<Vector>(_WorldPositionOffset);
+            _WorldPositionOffset = _WorldPositionOffset ?? Schema.GetOffset(0x790804C3F16C2360);
+            return ref _Handle.AsRef<Vector>(_WorldPositionOffset!.Value);
         }
     }
-    private static nint _WorldAxisDirectionOffset = -1;
+    private static nint? _WorldAxisDirectionOffset;
 
     public ref Vector WorldAxisDirection
     {
         get
         {
-            if (_WorldAxisDirectionOffset == -1) _WorldAxisDirectionOffset = Schema.GetOffset(0x790804C3637CEB43);
-            return ref _Handle.AsRef<Vector>(_WorldAxisDirectionOffset);
+            _WorldAxisDirectionOffset = _WorldAxisDirectionOffset ?? Schema.GetOffset(0x790804C3637CEB43);
+            return ref _Handle.AsRef<Vector>(_WorldAxisDirectionOffset!.Value);
         }
     }
-    private static nint _HingeAxisOffset = -1;
+    private static nint? _HingeAxisOffset;
     private constraint_axislimit_tImpl? _HingeAxisInstance;
 
     public constraint_axislimit_t HingeAxis
     {
         get
         {
-            if (_HingeAxisOffset == -1) _HingeAxisOffset = Schema.GetOffset(0x790804C33BD096FD);
+            _HingeAxisOffset = _HingeAxisOffset ?? Schema.GetOffset(0x790804C33BD096FD);
             var instance = _HingeAxisInstance ??= new constraint_axislimit_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _HingeAxisOffset);
+            instance.DangerousSetHandle(_Handle + _HingeAxisOffset!.Value);
             return instance;
         }
     }
-    private static nint _ConstraintOffset = -1;
+    private static nint? _ConstraintOffset;
     private constraint_breakableparams_tImpl? _ConstraintInstance;
 
     public constraint_breakableparams_t Constraint
     {
         get
         {
-            if (_ConstraintOffset == -1) _ConstraintOffset = Schema.GetOffset(0x790804C3B822E25A);
+            _ConstraintOffset = _ConstraintOffset ?? Schema.GetOffset(0x790804C3B822E25A);
             var instance = _ConstraintInstance ??= new constraint_breakableparams_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _ConstraintOffset);
+            instance.DangerousSetHandle(_Handle + _ConstraintOffset!.Value);
             return instance;
         }
     }

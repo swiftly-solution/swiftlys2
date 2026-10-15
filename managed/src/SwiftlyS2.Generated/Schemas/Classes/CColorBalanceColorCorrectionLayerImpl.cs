@@ -16,104 +16,104 @@ internal partial class CColorBalanceColorCorrectionLayerImpl : CColorCorrectionL
 {
     public CColorBalanceColorCorrectionLayerImpl(nint handle) : base(handle) { }
 
-    private static nint _RedCyanBalSOffset = -1;
+    private static nint? _RedCyanBalSOffset;
 
     public ref int RedCyanBalS
     {
         get
         {
-            if (_RedCyanBalSOffset == -1) _RedCyanBalSOffset = Schema.GetOffset(0x1652EE63BC5C0833);
-            return ref _Handle.AsRef<int>(_RedCyanBalSOffset);
+            _RedCyanBalSOffset = _RedCyanBalSOffset ?? Schema.GetOffset(0x1652EE63BC5C0833);
+            return ref _Handle.AsRef<int>(_RedCyanBalSOffset!.Value);
         }
     }
-    private static nint _RedCyanBalMOffset = -1;
+    private static nint? _RedCyanBalMOffset;
 
     public ref int RedCyanBalM
     {
         get
         {
-            if (_RedCyanBalMOffset == -1) _RedCyanBalMOffset = Schema.GetOffset(0x1652EE63DA5C376D);
-            return ref _Handle.AsRef<int>(_RedCyanBalMOffset);
+            _RedCyanBalMOffset = _RedCyanBalMOffset ?? Schema.GetOffset(0x1652EE63DA5C376D);
+            return ref _Handle.AsRef<int>(_RedCyanBalMOffset!.Value);
         }
     }
-    private static nint _RedCyanBalHOffset = -1;
+    private static nint? _RedCyanBalHOffset;
 
     public ref int RedCyanBalH
     {
         get
         {
-            if (_RedCyanBalHOffset == -1) _RedCyanBalHOffset = Schema.GetOffset(0x1652EE63D55C2F8E);
-            return ref _Handle.AsRef<int>(_RedCyanBalHOffset);
+            _RedCyanBalHOffset = _RedCyanBalHOffset ?? Schema.GetOffset(0x1652EE63D55C2F8E);
+            return ref _Handle.AsRef<int>(_RedCyanBalHOffset!.Value);
         }
     }
-    private static nint _GreenMagentaBalSOffset = -1;
+    private static nint? _GreenMagentaBalSOffset;
 
     public ref int GreenMagentaBalS
     {
         get
         {
-            if (_GreenMagentaBalSOffset == -1) _GreenMagentaBalSOffset = Schema.GetOffset(0x1652EE63605EE2D3);
-            return ref _Handle.AsRef<int>(_GreenMagentaBalSOffset);
+            _GreenMagentaBalSOffset = _GreenMagentaBalSOffset ?? Schema.GetOffset(0x1652EE63605EE2D3);
+            return ref _Handle.AsRef<int>(_GreenMagentaBalSOffset!.Value);
         }
     }
-    private static nint _GreenMagentaBalMOffset = -1;
+    private static nint? _GreenMagentaBalMOffset;
 
     public ref int GreenMagentaBalM
     {
         get
         {
-            if (_GreenMagentaBalMOffset == -1) _GreenMagentaBalMOffset = Schema.GetOffset(0x1652EE637E5F120D);
-            return ref _Handle.AsRef<int>(_GreenMagentaBalMOffset);
+            _GreenMagentaBalMOffset = _GreenMagentaBalMOffset ?? Schema.GetOffset(0x1652EE637E5F120D);
+            return ref _Handle.AsRef<int>(_GreenMagentaBalMOffset!.Value);
         }
     }
-    private static nint _GreenMagentaBalHOffset = -1;
+    private static nint? _GreenMagentaBalHOffset;
 
     public ref int GreenMagentaBalH
     {
         get
         {
-            if (_GreenMagentaBalHOffset == -1) _GreenMagentaBalHOffset = Schema.GetOffset(0x1652EE63795F0A2E);
-            return ref _Handle.AsRef<int>(_GreenMagentaBalHOffset);
+            _GreenMagentaBalHOffset = _GreenMagentaBalHOffset ?? Schema.GetOffset(0x1652EE63795F0A2E);
+            return ref _Handle.AsRef<int>(_GreenMagentaBalHOffset!.Value);
         }
     }
-    private static nint _BlueYellowBalSOffset = -1;
+    private static nint? _BlueYellowBalSOffset;
 
     public ref int BlueYellowBalS
     {
         get
         {
-            if (_BlueYellowBalSOffset == -1) _BlueYellowBalSOffset = Schema.GetOffset(0x1652EE633E482141);
-            return ref _Handle.AsRef<int>(_BlueYellowBalSOffset);
+            _BlueYellowBalSOffset = _BlueYellowBalSOffset ?? Schema.GetOffset(0x1652EE633E482141);
+            return ref _Handle.AsRef<int>(_BlueYellowBalSOffset!.Value);
         }
     }
-    private static nint _BlueYellowBalMOffset = -1;
+    private static nint? _BlueYellowBalMOffset;
 
     public ref int BlueYellowBalM
     {
         get
         {
-            if (_BlueYellowBalMOffset == -1) _BlueYellowBalMOffset = Schema.GetOffset(0x1652EE632847FE9F);
-            return ref _Handle.AsRef<int>(_BlueYellowBalMOffset);
+            _BlueYellowBalMOffset = _BlueYellowBalMOffset ?? Schema.GetOffset(0x1652EE632847FE9F);
+            return ref _Handle.AsRef<int>(_BlueYellowBalMOffset!.Value);
         }
     }
-    private static nint _BlueYellowBalHOffset = -1;
+    private static nint? _BlueYellowBalHOffset;
 
     public ref int BlueYellowBalH
     {
         get
         {
-            if (_BlueYellowBalHOffset == -1) _BlueYellowBalHOffset = Schema.GetOffset(0x1652EE632347F6C0);
-            return ref _Handle.AsRef<int>(_BlueYellowBalHOffset);
+            _BlueYellowBalHOffset = _BlueYellowBalHOffset ?? Schema.GetOffset(0x1652EE632347F6C0);
+            return ref _Handle.AsRef<int>(_BlueYellowBalHOffset!.Value);
         }
     }
-    private static nint _PreserveLuminosityOffset = -1;
+    private static nint? _PreserveLuminosityOffset;
 
     public ref bool PreserveLuminosity
     {
         get
         {
-            if (_PreserveLuminosityOffset == -1) _PreserveLuminosityOffset = Schema.GetOffset(0x1652EE63D25D30C0);
-            return ref _Handle.AsRef<bool>(_PreserveLuminosityOffset);
+            _PreserveLuminosityOffset = _PreserveLuminosityOffset ?? Schema.GetOffset(0x1652EE63D25D30C0);
+            return ref _Handle.AsRef<bool>(_PreserveLuminosityOffset!.Value);
         }
     }
 

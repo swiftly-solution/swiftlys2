@@ -16,54 +16,54 @@ internal partial class CSoundEventMultiPointEntityImpl : CSoundEventEntityImpl, 
 {
     public CSoundEventMultiPointEntityImpl(nint handle) : base(handle) { }
 
-    private static nint _CountMaxOffset = -1;
+    private static nint? _CountMaxOffset;
 
     public ref int CountMax
     {
         get
         {
-            if (_CountMaxOffset == -1) _CountMaxOffset = Schema.GetOffset(0x7F09B5996A1AD493);
-            return ref _Handle.AsRef<int>(_CountMaxOffset);
+            _CountMaxOffset = _CountMaxOffset ?? Schema.GetOffset(0x7F09B5996A1AD493);
+            return ref _Handle.AsRef<int>(_CountMaxOffset!.Value);
         }
     }
-    private static nint _DistanceMaxOffset = -1;
+    private static nint? _DistanceMaxOffset;
 
     public ref float DistanceMax
     {
         get
         {
-            if (_DistanceMaxOffset == -1) _DistanceMaxOffset = Schema.GetOffset(0x7F09B599FDEBADA6);
-            return ref _Handle.AsRef<float>(_DistanceMaxOffset);
+            _DistanceMaxOffset = _DistanceMaxOffset ?? Schema.GetOffset(0x7F09B599FDEBADA6);
+            return ref _Handle.AsRef<float>(_DistanceMaxOffset!.Value);
         }
     }
-    private static nint _DistMaxSqrOffset = -1;
+    private static nint? _DistMaxSqrOffset;
 
     public ref float DistMaxSqr
     {
         get
         {
-            if (_DistMaxSqrOffset == -1) _DistMaxSqrOffset = Schema.GetOffset(0x7F09B599993EE3BF);
-            return ref _Handle.AsRef<float>(_DistMaxSqrOffset);
+            _DistMaxSqrOffset = _DistMaxSqrOffset ?? Schema.GetOffset(0x7F09B599993EE3BF);
+            return ref _Handle.AsRef<float>(_DistMaxSqrOffset!.Value);
         }
     }
-    private static nint _DotProductMaxOffset = -1;
+    private static nint? _DotProductMaxOffset;
 
     public ref float DotProductMax
     {
         get
         {
-            if (_DotProductMaxOffset == -1) _DotProductMaxOffset = Schema.GetOffset(0x7F09B599F9DEDD1D);
-            return ref _Handle.AsRef<float>(_DotProductMaxOffset);
+            _DotProductMaxOffset = _DotProductMaxOffset ?? Schema.GetOffset(0x7F09B599F9DEDD1D);
+            return ref _Handle.AsRef<float>(_DotProductMaxOffset!.Value);
         }
     }
-    private static nint _PlayingOffset = -1;
+    private static nint? _PlayingOffset;
 
     public ref bool Playing
     {
         get
         {
-            if (_PlayingOffset == -1) _PlayingOffset = Schema.GetOffset(0x7F09B5994B594215);
-            return ref _Handle.AsRef<bool>(_PlayingOffset);
+            _PlayingOffset = _PlayingOffset ?? Schema.GetOffset(0x7F09B5994B594215);
+            return ref _Handle.AsRef<bool>(_PlayingOffset!.Value);
         }
     }
 

@@ -16,34 +16,34 @@ internal partial class CNmGraphDocClipNodeImpl : CNmGraphDocVariationDataNodeImp
 {
     public CNmGraphDocClipNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _SampleRootMotionOffset = -1;
+    private static nint? _SampleRootMotionOffset;
 
     public ref bool SampleRootMotion
     {
         get
         {
-            if (_SampleRootMotionOffset == -1) _SampleRootMotionOffset = Schema.GetOffset(0x60F8CC8F9443A5E9);
-            return ref _Handle.AsRef<bool>(_SampleRootMotionOffset);
+            _SampleRootMotionOffset = _SampleRootMotionOffset ?? Schema.GetOffset(0x60F8CC8F9443A5E9);
+            return ref _Handle.AsRef<bool>(_SampleRootMotionOffset!.Value);
         }
     }
-    private static nint _AllowLoopingOffset = -1;
+    private static nint? _AllowLoopingOffset;
 
     public ref bool AllowLooping
     {
         get
         {
-            if (_AllowLoopingOffset == -1) _AllowLoopingOffset = Schema.GetOffset(0x60F8CC8FFEB26D98);
-            return ref _Handle.AsRef<bool>(_AllowLoopingOffset);
+            _AllowLoopingOffset = _AllowLoopingOffset ?? Schema.GetOffset(0x60F8CC8FFEB26D98);
+            return ref _Handle.AsRef<bool>(_AllowLoopingOffset!.Value);
         }
     }
-    private static nint _GraphEventsOffset = -1;
+    private static nint? _GraphEventsOffset;
 
     public ref CUtlVector<CGlobalSymbol> GraphEvents
     {
         get
         {
-            if (_GraphEventsOffset == -1) _GraphEventsOffset = Schema.GetOffset(0x60F8CC8F14A73162);
-            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_GraphEventsOffset);
+            _GraphEventsOffset = _GraphEventsOffset ?? Schema.GetOffset(0x60F8CC8F14A73162);
+            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_GraphEventsOffset!.Value);
         }
     }
 

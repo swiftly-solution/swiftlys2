@@ -16,14 +16,14 @@ internal partial class CNmIsExternalGraphSlotFilledNode__CDefinitionImpl : CNmBo
 {
     public CNmIsExternalGraphSlotFilledNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint _ExternalGraphNodeIdxOffset = -1;
+    private static nint? _ExternalGraphNodeIdxOffset;
 
     public ref short ExternalGraphNodeIdx
     {
         get
         {
-            if (_ExternalGraphNodeIdxOffset == -1) _ExternalGraphNodeIdxOffset = Schema.GetOffset(0x973486C85D32D8E5);
-            return ref _Handle.AsRef<short>(_ExternalGraphNodeIdxOffset);
+            _ExternalGraphNodeIdxOffset = _ExternalGraphNodeIdxOffset ?? Schema.GetOffset(0x973486C85D32D8E5);
+            return ref _Handle.AsRef<short>(_ExternalGraphNodeIdxOffset!.Value);
         }
     }
 

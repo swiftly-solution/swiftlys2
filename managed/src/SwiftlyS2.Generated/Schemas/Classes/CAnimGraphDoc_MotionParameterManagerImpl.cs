@@ -16,14 +16,14 @@ internal partial class CAnimGraphDoc_MotionParameterManagerImpl : SchemaClass, C
 {
     public CAnimGraphDoc_MotionParameterManagerImpl(nint handle) : base(handle) { }
 
-    private static nint _ParamsOffset = -1;
+    private static nint? _ParamsOffset;
 
     public ref CUtlVector<SchemaUntypedField> Params
     {
         get
         {
-            if (_ParamsOffset == -1) _ParamsOffset = Schema.GetOffset(0x52EEC256640EA8F3);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ParamsOffset);
+            _ParamsOffset = _ParamsOffset ?? Schema.GetOffset(0x52EEC256640EA8F3);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ParamsOffset!.Value);
         }
     }
 

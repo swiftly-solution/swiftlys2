@@ -16,31 +16,31 @@ internal partial class VecInputMaterialVariable_tImpl : SchemaClass, VecInputMat
 {
     public VecInputMaterialVariable_tImpl(nint handle) : base(handle) { }
 
-    private static nint _StrVariableOffset = -1;
+    private static nint? _StrVariableOffset;
 
     public string StrVariable
     {
         get
         {
-            if (_StrVariableOffset == -1) _StrVariableOffset = Schema.GetOffset(0x3A84C75DA52C3390);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrVariableOffset));
+            _StrVariableOffset = _StrVariableOffset ?? Schema.GetOffset(0x3A84C75DA52C3390);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrVariableOffset!.Value));
         }
         set
         {
-            if (_StrVariableOffset == -1) _StrVariableOffset = Schema.GetOffset(0x3A84C75DA52C3390);
-            Schema.SetCUtlString(_Handle, _StrVariableOffset, value);
+            _StrVariableOffset = _StrVariableOffset ?? Schema.GetOffset(0x3A84C75DA52C3390);
+            Schema.SetCUtlString(_Handle, _StrVariableOffset!.Value, value);
         }
     }
-    private static nint _InputOffset = -1;
+    private static nint? _InputOffset;
     private CParticleCollectionVecInputImpl? _InputInstance;
 
     public CParticleCollectionVecInput Input
     {
         get
         {
-            if (_InputOffset == -1) _InputOffset = Schema.GetOffset(0x3A84C75D1EA0ED5B);
+            _InputOffset = _InputOffset ?? Schema.GetOffset(0x3A84C75D1EA0ED5B);
             var instance = _InputInstance ??= new CParticleCollectionVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _InputOffset);
+            instance.DangerousSetHandle(_Handle + _InputOffset!.Value);
             return instance;
         }
     }

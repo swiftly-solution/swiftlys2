@@ -16,14 +16,14 @@ internal partial class CNmGraphDocVariationIDComparisonNode__CDataImpl : CNmGrap
 {
     public CNmGraphDocVariationIDComparisonNode__CDataImpl(nint handle) : base(handle) { }
 
-    private static nint _ValuesOffset = -1;
+    private static nint? _ValuesOffset;
 
     public ref CUtlVector<CGlobalSymbol> Values
     {
         get
         {
-            if (_ValuesOffset == -1) _ValuesOffset = Schema.GetOffset(0x20ED835FFBEDDADB);
-            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_ValuesOffset);
+            _ValuesOffset = _ValuesOffset ?? Schema.GetOffset(0x20ED835FFBEDDADB);
+            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_ValuesOffset!.Value);
         }
     }
 

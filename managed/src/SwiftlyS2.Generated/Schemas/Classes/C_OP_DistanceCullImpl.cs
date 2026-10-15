@@ -16,59 +16,59 @@ internal partial class C_OP_DistanceCullImpl : CParticleFunctionOperatorImpl, C_
 {
     public C_OP_DistanceCullImpl(nint handle) : base(handle) { }
 
-    private static nint _ControlPointOffset = -1;
+    private static nint? _ControlPointOffset;
 
     public ref int ControlPoint
     {
         get
         {
-            if (_ControlPointOffset == -1) _ControlPointOffset = Schema.GetOffset(0x7252AA520D0DDF8C);
-            return ref _Handle.AsRef<int>(_ControlPointOffset);
+            _ControlPointOffset = _ControlPointOffset ?? Schema.GetOffset(0x7252AA520D0DDF8C);
+            return ref _Handle.AsRef<int>(_ControlPointOffset!.Value);
         }
     }
-    private static nint _PointOffsetOffset = -1;
+    private static nint? _PointOffsetOffset;
 
     public ref Vector PointOffset
     {
         get
         {
-            if (_PointOffsetOffset == -1) _PointOffsetOffset = Schema.GetOffset(0x7252AA52300E046E);
-            return ref _Handle.AsRef<Vector>(_PointOffsetOffset);
+            _PointOffsetOffset = _PointOffsetOffset ?? Schema.GetOffset(0x7252AA52300E046E);
+            return ref _Handle.AsRef<Vector>(_PointOffsetOffset!.Value);
         }
     }
-    private static nint _DistanceOffset = -1;
+    private static nint? _DistanceOffset;
     private CParticleCollectionFloatInputImpl? _DistanceInstance;
 
     public CParticleCollectionFloatInput Distance
     {
         get
         {
-            if (_DistanceOffset == -1) _DistanceOffset = Schema.GetOffset(0x7252AA5200DC4A68);
+            _DistanceOffset = _DistanceOffset ?? Schema.GetOffset(0x7252AA5200DC4A68);
             var instance = _DistanceInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _DistanceOffset);
+            instance.DangerousSetHandle(_Handle + _DistanceOffset!.Value);
             return instance;
         }
     }
-    private static nint _CullInsideOffset = -1;
+    private static nint? _CullInsideOffset;
 
     public ref bool CullInside
     {
         get
         {
-            if (_CullInsideOffset == -1) _CullInsideOffset = Schema.GetOffset(0x7252AA52293E00AD);
-            return ref _Handle.AsRef<bool>(_CullInsideOffset);
+            _CullInsideOffset = _CullInsideOffset ?? Schema.GetOffset(0x7252AA52293E00AD);
+            return ref _Handle.AsRef<bool>(_CullInsideOffset!.Value);
         }
     }
-    private static nint _AttributeOffset = -1;
+    private static nint? _AttributeOffset;
     private ParticleAttributeIndex_tImpl? _AttributeInstance;
 
     public ParticleAttributeIndex_t Attribute
     {
         get
         {
-            if (_AttributeOffset == -1) _AttributeOffset = Schema.GetOffset(0x7252AA527FE8DE0B);
+            _AttributeOffset = _AttributeOffset ?? Schema.GetOffset(0x7252AA527FE8DE0B);
             var instance = _AttributeInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _AttributeOffset);
+            instance.DangerousSetHandle(_Handle + _AttributeOffset!.Value);
             return instance;
         }
     }

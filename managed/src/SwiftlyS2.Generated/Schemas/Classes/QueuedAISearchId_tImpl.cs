@@ -16,14 +16,14 @@ internal partial class QueuedAISearchId_tImpl : SchemaClass, QueuedAISearchId_t
 {
     public QueuedAISearchId_tImpl(nint handle) : base(handle) { }
 
-    private static nint _ValueOffset = -1;
+    private static nint? _ValueOffset;
 
     public ref ulong Value
     {
         get
         {
-            if (_ValueOffset == -1) _ValueOffset = Schema.GetOffset(0xBEB4B3A4DCB0894A);
-            return ref _Handle.AsRef<ulong>(_ValueOffset);
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0xBEB4B3A4DCB0894A);
+            return ref _Handle.AsRef<ulong>(_ValueOffset!.Value);
         }
     }
 

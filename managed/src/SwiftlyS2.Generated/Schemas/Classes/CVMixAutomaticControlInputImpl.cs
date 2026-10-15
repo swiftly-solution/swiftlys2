@@ -16,39 +16,39 @@ internal partial class CVMixAutomaticControlInputImpl : SchemaClass, CVMixAutoma
 {
     public CVMixAutomaticControlInputImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x4A833C224D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x4A833C224D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x4A833C224D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x4A833C224D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _GraphInputIndexOffset = -1;
+    private static nint? _GraphInputIndexOffset;
 
     public ref int GraphInputIndex
     {
         get
         {
-            if (_GraphInputIndexOffset == -1) _GraphInputIndexOffset = Schema.GetOffset(0x4A833C22DADDBB47);
-            return ref _Handle.AsRef<int>(_GraphInputIndexOffset);
+            _GraphInputIndexOffset = _GraphInputIndexOffset ?? Schema.GetOffset(0x4A833C22DADDBB47);
+            return ref _Handle.AsRef<int>(_GraphInputIndexOffset!.Value);
         }
     }
-    private static nint _ControlTypeOffset = -1;
+    private static nint? _ControlTypeOffset;
 
     public ref VMixAutoControlType_t ControlType
     {
         get
         {
-            if (_ControlTypeOffset == -1) _ControlTypeOffset = Schema.GetOffset(0x4A833C22556057DA);
-            return ref _Handle.AsRef<VMixAutoControlType_t>(_ControlTypeOffset);
+            _ControlTypeOffset = _ControlTypeOffset ?? Schema.GetOffset(0x4A833C22556057DA);
+            return ref _Handle.AsRef<VMixAutoControlType_t>(_ControlTypeOffset!.Value);
         }
     }
 

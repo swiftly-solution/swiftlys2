@@ -16,89 +16,89 @@ internal partial class CPathKeyFrameImpl : CLogicalEntityImpl, CPathKeyFrame
 {
     public CPathKeyFrameImpl(nint handle) : base(handle) { }
 
-    private static nint _OriginOffset = -1;
+    private static nint? _OriginOffset;
 
     public ref Vector Origin
     {
         get
         {
-            if (_OriginOffset == -1) _OriginOffset = Schema.GetOffset(0x34025185482052CF);
-            return ref _Handle.AsRef<Vector>(_OriginOffset);
+            _OriginOffset = _OriginOffset ?? Schema.GetOffset(0x34025185482052CF);
+            return ref _Handle.AsRef<Vector>(_OriginOffset!.Value);
         }
     }
-    private static nint _AnglesOffset = -1;
+    private static nint? _AnglesOffset;
 
     public ref QAngle Angles
     {
         get
         {
-            if (_AnglesOffset == -1) _AnglesOffset = Schema.GetOffset(0x34025185B5486CF1);
-            return ref _Handle.AsRef<QAngle>(_AnglesOffset);
+            _AnglesOffset = _AnglesOffset ?? Schema.GetOffset(0x34025185B5486CF1);
+            return ref _Handle.AsRef<QAngle>(_AnglesOffset!.Value);
         }
     }
-    private static nint _AngleOffset = -1;
+    private static nint? _AngleOffset;
 
     public ref Quaternion Angle
     {
         get
         {
-            if (_AngleOffset == -1) _AngleOffset = Schema.GetOffset(0x34025185CE339C27);
-            return ref _Handle.AsRef<Quaternion>(_AngleOffset);
+            _AngleOffset = _AngleOffset ?? Schema.GetOffset(0x34025185CE339C27);
+            return ref _Handle.AsRef<Quaternion>(_AngleOffset!.Value);
         }
     }
-    private static nint _NextKeyOffset = -1;
+    private static nint? _NextKeyOffset;
 
     public string NextKey
     {
         get
         {
-            if (_NextKeyOffset == -1) _NextKeyOffset = Schema.GetOffset(0x340251858326E814);
-            return Schema.GetString(_Handle.Read<nint>(_NextKeyOffset));
+            _NextKeyOffset = _NextKeyOffset ?? Schema.GetOffset(0x340251858326E814);
+            return Schema.GetString(_Handle.Read<nint>(_NextKeyOffset!.Value));
         }
         set
         {
-            if (_NextKeyOffset == -1) _NextKeyOffset = Schema.GetOffset(0x340251858326E814);
-            Schema.SetString(_Handle, _NextKeyOffset, value);
+            _NextKeyOffset = _NextKeyOffset ?? Schema.GetOffset(0x340251858326E814);
+            Schema.SetString(_Handle, _NextKeyOffset!.Value, value);
         }
     }
-    private static nint _NextTimeOffset = -1;
+    private static nint? _NextTimeOffset;
 
     public ref float NextTime
     {
         get
         {
-            if (_NextTimeOffset == -1) _NextTimeOffset = Schema.GetOffset(0x340251854F129C67);
-            return ref _Handle.AsRef<float>(_NextTimeOffset);
+            _NextTimeOffset = _NextTimeOffset ?? Schema.GetOffset(0x340251854F129C67);
+            return ref _Handle.AsRef<float>(_NextTimeOffset!.Value);
         }
     }
-    private static nint _NextKey1Offset = -1;
+    private static nint? _NextKey1Offset;
 
     public ref CHandle<CPathKeyFrame> NextKey1
     {
         get
         {
-            if (_NextKey1Offset == -1) _NextKey1Offset = Schema.GetOffset(0x3402518585EE45D5);
-            return ref _Handle.AsRef<CHandle<CPathKeyFrame>>(_NextKey1Offset);
+            _NextKey1Offset = _NextKey1Offset ?? Schema.GetOffset(0x3402518585EE45D5);
+            return ref _Handle.AsRef<CHandle<CPathKeyFrame>>(_NextKey1Offset!.Value);
         }
     }
-    private static nint _PrevKeyOffset = -1;
+    private static nint? _PrevKeyOffset;
 
     public ref CHandle<CPathKeyFrame> PrevKey
     {
         get
         {
-            if (_PrevKeyOffset == -1) _PrevKeyOffset = Schema.GetOffset(0x34025185B9327481);
-            return ref _Handle.AsRef<CHandle<CPathKeyFrame>>(_PrevKeyOffset);
+            _PrevKeyOffset = _PrevKeyOffset ?? Schema.GetOffset(0x34025185B9327481);
+            return ref _Handle.AsRef<CHandle<CPathKeyFrame>>(_PrevKeyOffset!.Value);
         }
     }
-    private static nint _MoveSpeedOffset = -1;
+    private static nint? _MoveSpeedOffset;
 
     public ref float MoveSpeed
     {
         get
         {
-            if (_MoveSpeedOffset == -1) _MoveSpeedOffset = Schema.GetOffset(0x3402518566D18279);
-            return ref _Handle.AsRef<float>(_MoveSpeedOffset);
+            _MoveSpeedOffset = _MoveSpeedOffset ?? Schema.GetOffset(0x3402518566D18279);
+            return ref _Handle.AsRef<float>(_MoveSpeedOffset!.Value);
         }
     }
 

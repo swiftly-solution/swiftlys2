@@ -16,110 +16,110 @@ internal partial class CAnimGraphDoc_SubtractNodeImpl : CAnimGraphDoc_NodeImpl, 
 {
     public CAnimGraphDoc_SubtractNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _BaseInputConnectionOffset = -1;
+    private static nint? _BaseInputConnectionOffset;
     private CAnimGraphDoc_NodeConnectionImpl? _BaseInputConnectionInstance;
 
     public CAnimGraphDoc_NodeConnection BaseInputConnection
     {
         get
         {
-            if (_BaseInputConnectionOffset == -1) _BaseInputConnectionOffset = Schema.GetOffset(0xA6479A4A588AAE9C);
+            _BaseInputConnectionOffset = _BaseInputConnectionOffset ?? Schema.GetOffset(0xA6479A4A588AAE9C);
             var instance = _BaseInputConnectionInstance ??= new CAnimGraphDoc_NodeConnectionImpl(0);
-            instance.DangerousSetHandle(_Handle + _BaseInputConnectionOffset);
+            instance.DangerousSetHandle(_Handle + _BaseInputConnectionOffset!.Value);
             return instance;
         }
     }
-    private static nint _SubtractInputConnectionOffset = -1;
+    private static nint? _SubtractInputConnectionOffset;
     private CAnimGraphDoc_NodeConnectionImpl? _SubtractInputConnectionInstance;
 
     public CAnimGraphDoc_NodeConnection SubtractInputConnection
     {
         get
         {
-            if (_SubtractInputConnectionOffset == -1) _SubtractInputConnectionOffset = Schema.GetOffset(0xA6479A4A2D1DC6AF);
+            _SubtractInputConnectionOffset = _SubtractInputConnectionOffset ?? Schema.GetOffset(0xA6479A4A2D1DC6AF);
             var instance = _SubtractInputConnectionInstance ??= new CAnimGraphDoc_NodeConnectionImpl(0);
-            instance.DangerousSetHandle(_Handle + _SubtractInputConnectionOffset);
+            instance.DangerousSetHandle(_Handle + _SubtractInputConnectionOffset!.Value);
             return instance;
         }
     }
-    private static nint _TimingBehaviorOffset = -1;
+    private static nint? _TimingBehaviorOffset;
 
     public ref BinaryNodeTiming TimingBehavior
     {
         get
         {
-            if (_TimingBehaviorOffset == -1) _TimingBehaviorOffset = Schema.GetOffset(0xA6479A4AF9A9BA01);
-            return ref _Handle.AsRef<BinaryNodeTiming>(_TimingBehaviorOffset);
+            _TimingBehaviorOffset = _TimingBehaviorOffset ?? Schema.GetOffset(0xA6479A4AF9A9BA01);
+            return ref _Handle.AsRef<BinaryNodeTiming>(_TimingBehaviorOffset!.Value);
         }
     }
-    private static nint _TimingBlendOffset = -1;
+    private static nint? _TimingBlendOffset;
 
     public ref float TimingBlend
     {
         get
         {
-            if (_TimingBlendOffset == -1) _TimingBlendOffset = Schema.GetOffset(0xA6479A4A884E1874);
-            return ref _Handle.AsRef<float>(_TimingBlendOffset);
+            _TimingBlendOffset = _TimingBlendOffset ?? Schema.GetOffset(0xA6479A4A884E1874);
+            return ref _Handle.AsRef<float>(_TimingBlendOffset!.Value);
         }
     }
-    private static nint _FootMotionTimingOffset = -1;
+    private static nint? _FootMotionTimingOffset;
 
     public ref BinaryNodeChildOption FootMotionTiming
     {
         get
         {
-            if (_FootMotionTimingOffset == -1) _FootMotionTimingOffset = Schema.GetOffset(0xA6479A4ABB17F13D);
-            return ref _Handle.AsRef<BinaryNodeChildOption>(_FootMotionTimingOffset);
+            _FootMotionTimingOffset = _FootMotionTimingOffset ?? Schema.GetOffset(0xA6479A4ABB17F13D);
+            return ref _Handle.AsRef<BinaryNodeChildOption>(_FootMotionTimingOffset!.Value);
         }
     }
-    private static nint _ApplyToFootMotionOffset = -1;
+    private static nint? _ApplyToFootMotionOffset;
 
     public ref bool ApplyToFootMotion
     {
         get
         {
-            if (_ApplyToFootMotionOffset == -1) _ApplyToFootMotionOffset = Schema.GetOffset(0xA6479A4A3D831E94);
-            return ref _Handle.AsRef<bool>(_ApplyToFootMotionOffset);
+            _ApplyToFootMotionOffset = _ApplyToFootMotionOffset ?? Schema.GetOffset(0xA6479A4A3D831E94);
+            return ref _Handle.AsRef<bool>(_ApplyToFootMotionOffset!.Value);
         }
     }
-    private static nint _ResetBaseOffset = -1;
+    private static nint? _ResetBaseOffset;
 
     public ref bool ResetBase
     {
         get
         {
-            if (_ResetBaseOffset == -1) _ResetBaseOffset = Schema.GetOffset(0xA6479A4AE5DBA4C5);
-            return ref _Handle.AsRef<bool>(_ResetBaseOffset);
+            _ResetBaseOffset = _ResetBaseOffset ?? Schema.GetOffset(0xA6479A4AE5DBA4C5);
+            return ref _Handle.AsRef<bool>(_ResetBaseOffset!.Value);
         }
     }
-    private static nint _ResetSubtractOffset = -1;
+    private static nint? _ResetSubtractOffset;
 
     public ref bool ResetSubtract
     {
         get
         {
-            if (_ResetSubtractOffset == -1) _ResetSubtractOffset = Schema.GetOffset(0xA6479A4A0340247C);
-            return ref _Handle.AsRef<bool>(_ResetSubtractOffset);
+            _ResetSubtractOffset = _ResetSubtractOffset ?? Schema.GetOffset(0xA6479A4A0340247C);
+            return ref _Handle.AsRef<bool>(_ResetSubtractOffset!.Value);
         }
     }
-    private static nint _ApplyChannelsSeparatelyOffset = -1;
+    private static nint? _ApplyChannelsSeparatelyOffset;
 
     public ref bool ApplyChannelsSeparately
     {
         get
         {
-            if (_ApplyChannelsSeparatelyOffset == -1) _ApplyChannelsSeparatelyOffset = Schema.GetOffset(0xA6479A4AFF2DBB45);
-            return ref _Handle.AsRef<bool>(_ApplyChannelsSeparatelyOffset);
+            _ApplyChannelsSeparatelyOffset = _ApplyChannelsSeparatelyOffset ?? Schema.GetOffset(0xA6479A4AFF2DBB45);
+            return ref _Handle.AsRef<bool>(_ApplyChannelsSeparatelyOffset!.Value);
         }
     }
-    private static nint _UseModelSpaceOffset = -1;
+    private static nint? _UseModelSpaceOffset;
 
     public ref bool UseModelSpace
     {
         get
         {
-            if (_UseModelSpaceOffset == -1) _UseModelSpaceOffset = Schema.GetOffset(0xA6479A4A48863521);
-            return ref _Handle.AsRef<bool>(_UseModelSpaceOffset);
+            _UseModelSpaceOffset = _UseModelSpaceOffset ?? Schema.GetOffset(0xA6479A4A48863521);
+            return ref _Handle.AsRef<bool>(_UseModelSpaceOffset!.Value);
         }
     }
 

@@ -16,25 +16,25 @@ internal partial class CAttributeListImpl : SchemaClass, CAttributeList
 {
     public CAttributeListImpl(nint handle) : base(handle) { }
 
-    private static nint _AttributesOffset = -1;
+    private static nint? _AttributesOffset;
 
     public ref CUtlVector<CEconItemAttribute> Attributes
     {
         get
         {
-            if (_AttributesOffset == -1) _AttributesOffset = Schema.GetOffset(0x1028A18A7E139C14);
-            return ref _Handle.AsRef<CUtlVector<CEconItemAttribute>>(_AttributesOffset);
+            _AttributesOffset = _AttributesOffset ?? Schema.GetOffset(0x1028A18A7E139C14);
+            return ref _Handle.AsRef<CUtlVector<CEconItemAttribute>>(_AttributesOffset!.Value);
         }
     }
-    private static nint _ManagerOffset = -1;
+    private static nint? _ManagerOffset;
     private CAttributeManagerImpl? _ManagerInstance;
 
     public CAttributeManager? Manager
     {
         get
         {
-            if (_ManagerOffset == -1) _ManagerOffset = Schema.GetOffset(0x1028A18AB9A09BE6);
-            var ptr = _Handle.Read<nint>(_ManagerOffset);
+            _ManagerOffset = _ManagerOffset ?? Schema.GetOffset(0x1028A18AB9A09BE6);
+            var ptr = _Handle.Read<nint>(_ManagerOffset!.Value);
             if (!ptr.IsValidPtr()) return null;
             var instance = _ManagerInstance ??= new CAttributeManagerImpl(0);
             instance.DangerousSetHandle(ptr);

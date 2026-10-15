@@ -16,14 +16,14 @@ internal partial class CParamSpanUpdaterImpl : SchemaClass, CParamSpanUpdater
 {
     public CParamSpanUpdaterImpl(nint handle) : base(handle) { }
 
-    private static nint _SpansOffset = -1;
+    private static nint? _SpansOffset;
 
     public ref CUtlVector<ParamSpan_t> Spans
     {
         get
         {
-            if (_SpansOffset == -1) _SpansOffset = Schema.GetOffset(0xA35886AC66213056);
-            return ref _Handle.AsRef<CUtlVector<ParamSpan_t>>(_SpansOffset);
+            _SpansOffset = _SpansOffset ?? Schema.GetOffset(0xA35886AC66213056);
+            return ref _Handle.AsRef<CUtlVector<ParamSpan_t>>(_SpansOffset!.Value);
         }
     }
 

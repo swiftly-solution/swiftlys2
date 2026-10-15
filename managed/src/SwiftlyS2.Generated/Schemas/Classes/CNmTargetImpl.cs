@@ -16,64 +16,64 @@ internal partial class CNmTargetImpl : SchemaClass, CNmTarget
 {
     public CNmTargetImpl(nint handle) : base(handle) { }
 
-    private static nint _TransformOffset = -1;
+    private static nint? _TransformOffset;
 
     public ref CTransform Transform
     {
         get
         {
-            if (_TransformOffset == -1) _TransformOffset = Schema.GetOffset(0xA3F5A45E3A9A393B);
-            return ref _Handle.AsRef<CTransform>(_TransformOffset);
+            _TransformOffset = _TransformOffset ?? Schema.GetOffset(0xA3F5A45E3A9A393B);
+            return ref _Handle.AsRef<CTransform>(_TransformOffset!.Value);
         }
     }
-    private static nint _BoneIDOffset = -1;
+    private static nint? _BoneIDOffset;
 
     public ref CGlobalSymbol BoneID
     {
         get
         {
-            if (_BoneIDOffset == -1) _BoneIDOffset = Schema.GetOffset(0xA3F5A45E88DFA0E2);
-            return ref _Handle.AsRef<CGlobalSymbol>(_BoneIDOffset);
+            _BoneIDOffset = _BoneIDOffset ?? Schema.GetOffset(0xA3F5A45E88DFA0E2);
+            return ref _Handle.AsRef<CGlobalSymbol>(_BoneIDOffset!.Value);
         }
     }
-    private static nint _IsBoneTargetOffset = -1;
+    private static nint? _IsBoneTargetOffset;
 
     public ref bool IsBoneTarget
     {
         get
         {
-            if (_IsBoneTargetOffset == -1) _IsBoneTargetOffset = Schema.GetOffset(0xA3F5A45E3C414BA2);
-            return ref _Handle.AsRef<bool>(_IsBoneTargetOffset);
+            _IsBoneTargetOffset = _IsBoneTargetOffset ?? Schema.GetOffset(0xA3F5A45E3C414BA2);
+            return ref _Handle.AsRef<bool>(_IsBoneTargetOffset!.Value);
         }
     }
-    private static nint _IsUsingBoneSpaceOffsetsOffset = -1;
+    private static nint? _IsUsingBoneSpaceOffsetsOffset;
 
     public ref bool IsUsingBoneSpaceOffsets
     {
         get
         {
-            if (_IsUsingBoneSpaceOffsetsOffset == -1) _IsUsingBoneSpaceOffsetsOffset = Schema.GetOffset(0xA3F5A45EA6050C83);
-            return ref _Handle.AsRef<bool>(_IsUsingBoneSpaceOffsetsOffset);
+            _IsUsingBoneSpaceOffsetsOffset = _IsUsingBoneSpaceOffsetsOffset ?? Schema.GetOffset(0xA3F5A45EA6050C83);
+            return ref _Handle.AsRef<bool>(_IsUsingBoneSpaceOffsetsOffset!.Value);
         }
     }
-    private static nint _HasOffsetsOffset = -1;
+    private static nint? _HasOffsetsOffset;
 
     public ref bool HasOffsets
     {
         get
         {
-            if (_HasOffsetsOffset == -1) _HasOffsetsOffset = Schema.GetOffset(0xA3F5A45ED8AA05D9);
-            return ref _Handle.AsRef<bool>(_HasOffsetsOffset);
+            _HasOffsetsOffset = _HasOffsetsOffset ?? Schema.GetOffset(0xA3F5A45ED8AA05D9);
+            return ref _Handle.AsRef<bool>(_HasOffsetsOffset!.Value);
         }
     }
-    private static nint _IsSetOffset = -1;
+    private static nint? _IsSetOffset;
 
     public ref bool IsSet
     {
         get
         {
-            if (_IsSetOffset == -1) _IsSetOffset = Schema.GetOffset(0xA3F5A45E4307E3B3);
-            return ref _Handle.AsRef<bool>(_IsSetOffset);
+            _IsSetOffset = _IsSetOffset ?? Schema.GetOffset(0xA3F5A45E4307E3B3);
+            return ref _Handle.AsRef<bool>(_IsSetOffset!.Value);
         }
     }
 

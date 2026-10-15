@@ -16,52 +16,52 @@ internal partial class CPulseCell_InlineNodeSkipSelectorImpl : CPulseCell_BaseFl
 {
     public CPulseCell_InlineNodeSkipSelectorImpl(nint handle) : base(handle) { }
 
-    private static nint _FlowNodeIDOffset = -1;
+    private static nint? _FlowNodeIDOffset;
     private PulseDocNodeID_tImpl? _FlowNodeIDInstance;
 
     public PulseDocNodeID_t FlowNodeID
     {
         get
         {
-            if (_FlowNodeIDOffset == -1) _FlowNodeIDOffset = Schema.GetOffset(0x43AF14578ED47FBC);
+            _FlowNodeIDOffset = _FlowNodeIDOffset ?? Schema.GetOffset(0x43AF14578ED47FBC);
             var instance = _FlowNodeIDInstance ??= new PulseDocNodeID_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FlowNodeIDOffset);
+            instance.DangerousSetHandle(_Handle + _FlowNodeIDOffset!.Value);
             return instance;
         }
     }
-    private static nint _AndOffset = -1;
+    private static nint? _AndOffset;
 
     public ref bool And
     {
         get
         {
-            if (_AndOffset == -1) _AndOffset = Schema.GetOffset(0x43AF14573A289986);
-            return ref _Handle.AsRef<bool>(_AndOffset);
+            _AndOffset = _AndOffset ?? Schema.GetOffset(0x43AF14573A289986);
+            return ref _Handle.AsRef<bool>(_AndOffset!.Value);
         }
     }
-    private static nint _PassOutflowOffset = -1;
+    private static nint? _PassOutflowOffset;
     private PulseSelectorOutflowList_tImpl? _PassOutflowInstance;
 
     public PulseSelectorOutflowList_t PassOutflow
     {
         get
         {
-            if (_PassOutflowOffset == -1) _PassOutflowOffset = Schema.GetOffset(0x43AF145724AA6434);
+            _PassOutflowOffset = _PassOutflowOffset ?? Schema.GetOffset(0x43AF145724AA6434);
             var instance = _PassOutflowInstance ??= new PulseSelectorOutflowList_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _PassOutflowOffset);
+            instance.DangerousSetHandle(_Handle + _PassOutflowOffset!.Value);
             return instance;
         }
     }
-    private static nint _FailOutflowOffset = -1;
+    private static nint? _FailOutflowOffset;
     private CPulse_OutflowConnectionImpl? _FailOutflowInstance;
 
     public CPulse_OutflowConnection FailOutflow
     {
         get
         {
-            if (_FailOutflowOffset == -1) _FailOutflowOffset = Schema.GetOffset(0x43AF1457AC90C0E3);
+            _FailOutflowOffset = _FailOutflowOffset ?? Schema.GetOffset(0x43AF1457AC90C0E3);
             var instance = _FailOutflowInstance ??= new CPulse_OutflowConnectionImpl(0);
-            instance.DangerousSetHandle(_Handle + _FailOutflowOffset);
+            instance.DangerousSetHandle(_Handle + _FailOutflowOffset!.Value);
             return instance;
         }
     }

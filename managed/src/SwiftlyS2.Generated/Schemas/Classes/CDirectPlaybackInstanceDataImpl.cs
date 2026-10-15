@@ -16,138 +16,138 @@ internal partial class CDirectPlaybackInstanceDataImpl : SchemaClass, CDirectPla
 {
     public CDirectPlaybackInstanceDataImpl(nint handle) : base(handle) { }
 
-    private static nint _TargetPositionOffset = -1;
+    private static nint? _TargetPositionOffset;
 
     public ref Vector TargetPosition
     {
         get
         {
-            if (_TargetPositionOffset == -1) _TargetPositionOffset = Schema.GetOffset(0x280B3A71F028CBBF);
-            return ref _Handle.AsRef<Vector>(_TargetPositionOffset);
+            _TargetPositionOffset = _TargetPositionOffset ?? Schema.GetOffset(0x280B3A71F028CBBF);
+            return ref _Handle.AsRef<Vector>(_TargetPositionOffset!.Value);
         }
     }
-    private static nint _TargetFacingOffset = -1;
+    private static nint? _TargetFacingOffset;
 
     public ref float TargetFacing
     {
         get
         {
-            if (_TargetFacingOffset == -1) _TargetFacingOffset = Schema.GetOffset(0x280B3A71F246190C);
-            return ref _Handle.AsRef<float>(_TargetFacingOffset);
+            _TargetFacingOffset = _TargetFacingOffset ?? Schema.GetOffset(0x280B3A71F246190C);
+            return ref _Handle.AsRef<float>(_TargetFacingOffset!.Value);
         }
     }
-    private static nint _InterpEndTimeOffset = -1;
+    private static nint? _InterpEndTimeOffset;
 
     public ref float InterpEndTime
     {
         get
         {
-            if (_InterpEndTimeOffset == -1) _InterpEndTimeOffset = Schema.GetOffset(0x280B3A71065C232B);
-            return ref _Handle.AsRef<float>(_InterpEndTimeOffset);
+            _InterpEndTimeOffset = _InterpEndTimeOffset ?? Schema.GetOffset(0x280B3A71065C232B);
+            return ref _Handle.AsRef<float>(_InterpEndTimeOffset!.Value);
         }
     }
-    private static nint _WeightsOffset = -1;
+    private static nint? _WeightsOffset;
     private SchemaFixedArray<float>? _WeightsInstance;
 
     public ISchemaFixedArray<float> Weights
     {
         get
         {
-            if (_WeightsOffset == -1) _WeightsOffset = Schema.GetOffset(0x280B3A7177B2F91E);
+            _WeightsOffset = _WeightsOffset ?? Schema.GetOffset(0x280B3A7177B2F91E);
             var instance = _WeightsInstance ??= new SchemaFixedArray<float>(0, 0x280B3A7177B2F91E, 4, 4, 4);
-            instance.DangerousSetHandle(_Handle + _WeightsOffset);
+            instance.DangerousSetHandle(_Handle + _WeightsOffset!.Value);
             return instance;
         }
     }
-    private static nint _SequencesOffset = -1;
+    private static nint? _SequencesOffset;
     private SchemaClassFixedArray<SequenceData>? _SequencesInstance;
 
     public ISchemaClassFixedArray<SequenceData> Sequences
     {
         get
         {
-            if (_SequencesOffset == -1) _SequencesOffset = Schema.GetOffset(0x280B3A713992EBA1);
+            _SequencesOffset = _SequencesOffset ?? Schema.GetOffset(0x280B3A713992EBA1);
             var instance = _SequencesInstance ??= new SchemaClassFixedArray<SequenceData>(0, 0x280B3A713992EBA1, 4, 56, 4);
-            instance.DangerousSetHandle(_Handle + _SequencesOffset);
+            instance.DangerousSetHandle(_Handle + _SequencesOffset!.Value);
             return instance;
         }
     }
-    private static nint _CurrentSequenceIndexOffset = -1;
+    private static nint? _CurrentSequenceIndexOffset;
 
     public ref uint CurrentSequenceIndex
     {
         get
         {
-            if (_CurrentSequenceIndexOffset == -1) _CurrentSequenceIndexOffset = Schema.GetOffset(0x280B3A7195BCA389);
-            return ref _Handle.AsRef<uint>(_CurrentSequenceIndexOffset);
+            _CurrentSequenceIndexOffset = _CurrentSequenceIndexOffset ?? Schema.GetOffset(0x280B3A7195BCA389);
+            return ref _Handle.AsRef<uint>(_CurrentSequenceIndexOffset!.Value);
         }
     }
-    private static nint _CurrentSequenceDataOffset = -1;
+    private static nint? _CurrentSequenceDataOffset;
     private SchemaUntypedField? _CurrentSequenceDataInstance;
 
     public SchemaUntypedField CurrentSequenceData
     {
         get
         {
-            if (_CurrentSequenceDataOffset == -1) _CurrentSequenceDataOffset = Schema.GetOffset(0x280B3A71B3502A9B);
+            _CurrentSequenceDataOffset = _CurrentSequenceDataOffset ?? Schema.GetOffset(0x280B3A71B3502A9B);
             var instance = _CurrentSequenceDataInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _CurrentSequenceDataOffset);
+            instance.DangerousSetHandle(_Handle + _CurrentSequenceDataOffset!.Value);
             return instance;
         }
     }
-    private static nint _FadeInTimeOffset = -1;
+    private static nint? _FadeInTimeOffset;
 
     public ref float FadeInTime
     {
         get
         {
-            if (_FadeInTimeOffset == -1) _FadeInTimeOffset = Schema.GetOffset(0x280B3A711F0255B3);
-            return ref _Handle.AsRef<float>(_FadeInTimeOffset);
+            _FadeInTimeOffset = _FadeInTimeOffset ?? Schema.GetOffset(0x280B3A711F0255B3);
+            return ref _Handle.AsRef<float>(_FadeInTimeOffset!.Value);
         }
     }
-    private static nint _FadeOutTimeOffset = -1;
+    private static nint? _FadeOutTimeOffset;
 
     public ref float FadeOutTime
     {
         get
         {
-            if (_FadeOutTimeOffset == -1) _FadeOutTimeOffset = Schema.GetOffset(0x280B3A71E86D2FC2);
-            return ref _Handle.AsRef<float>(_FadeOutTimeOffset);
+            _FadeOutTimeOffset = _FadeOutTimeOffset ?? Schema.GetOffset(0x280B3A71E86D2FC2);
+            return ref _Handle.AsRef<float>(_FadeOutTimeOffset!.Value);
         }
     }
-    private static nint _ForcedCycleOffset = -1;
+    private static nint? _ForcedCycleOffset;
     private SchemaUntypedField? _ForcedCycleInstance;
 
     public SchemaUntypedField ForcedCycle
     {
         get
         {
-            if (_ForcedCycleOffset == -1) _ForcedCycleOffset = Schema.GetOffset(0x280B3A7110FE2984);
+            _ForcedCycleOffset = _ForcedCycleOffset ?? Schema.GetOffset(0x280B3A7110FE2984);
             var instance = _ForcedCycleInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ForcedCycleOffset);
+            instance.DangerousSetHandle(_Handle + _ForcedCycleOffset!.Value);
             return instance;
         }
     }
-    private static nint _ResetPendingOffset = -1;
+    private static nint? _ResetPendingOffset;
 
     public ref bool ResetPending
     {
         get
         {
-            if (_ResetPendingOffset == -1) _ResetPendingOffset = Schema.GetOffset(0x280B3A71BECAA4AB);
-            return ref _Handle.AsRef<bool>(_ResetPendingOffset);
+            _ResetPendingOffset = _ResetPendingOffset ?? Schema.GetOffset(0x280B3A71BECAA4AB);
+            return ref _Handle.AsRef<bool>(_ResetPendingOffset!.Value);
         }
     }
-    private static nint _SequenceCycleZeroTimeOffset = -1;
+    private static nint? _SequenceCycleZeroTimeOffset;
     private SchemaUntypedField? _SequenceCycleZeroTimeInstance;
 
     public SchemaUntypedField SequenceCycleZeroTime
     {
         get
         {
-            if (_SequenceCycleZeroTimeOffset == -1) _SequenceCycleZeroTimeOffset = Schema.GetOffset(0x280B3A7192A3CA95);
+            _SequenceCycleZeroTimeOffset = _SequenceCycleZeroTimeOffset ?? Schema.GetOffset(0x280B3A7192A3CA95);
             var instance = _SequenceCycleZeroTimeInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _SequenceCycleZeroTimeOffset);
+            instance.DangerousSetHandle(_Handle + _SequenceCycleZeroTimeOffset!.Value);
             return instance;
         }
     }

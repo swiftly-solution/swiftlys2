@@ -16,81 +16,81 @@ internal partial class CVMixEditorNodeImpl : SchemaClass, CVMixEditorNode
 {
     public CVMixEditorNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x817455434D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x817455434D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x817455434D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x817455434D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _FriendlyNameOffset = -1;
+    private static nint? _FriendlyNameOffset;
 
     public string FriendlyName
     {
         get
         {
-            if (_FriendlyNameOffset == -1) _FriendlyNameOffset = Schema.GetOffset(0x8174554383B9719D);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_FriendlyNameOffset));
+            _FriendlyNameOffset = _FriendlyNameOffset ?? Schema.GetOffset(0x8174554383B9719D);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_FriendlyNameOffset!.Value));
         }
         set
         {
-            if (_FriendlyNameOffset == -1) _FriendlyNameOffset = Schema.GetOffset(0x8174554383B9719D);
-            Schema.SetCUtlString(_Handle, _FriendlyNameOffset, value);
+            _FriendlyNameOffset = _FriendlyNameOffset ?? Schema.GetOffset(0x8174554383B9719D);
+            Schema.SetCUtlString(_Handle, _FriendlyNameOffset!.Value, value);
         }
     }
-    private static nint _TypeOffset = -1;
+    private static nint? _TypeOffset;
 
     public string Type
     {
         get
         {
-            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0x817455430F04B4ED);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_TypeOffset));
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x817455430F04B4ED);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_TypeOffset!.Value));
         }
         set
         {
-            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0x817455430F04B4ED);
-            Schema.SetCUtlString(_Handle, _TypeOffset, value);
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x817455430F04B4ED);
+            Schema.SetCUtlString(_Handle, _TypeOffset!.Value, value);
         }
     }
-    private static nint _PosOffset = -1;
+    private static nint? _PosOffset;
 
     public ref Vector2D Pos
     {
         get
         {
-            if (_PosOffset == -1) _PosOffset = Schema.GetOffset(0x81745543DE9CFC5D);
-            return ref _Handle.AsRef<Vector2D>(_PosOffset);
+            _PosOffset = _PosOffset ?? Schema.GetOffset(0x81745543DE9CFC5D);
+            return ref _Handle.AsRef<Vector2D>(_PosOffset!.Value);
         }
     }
-    private static nint _SizeOffset = -1;
+    private static nint? _SizeOffset;
 
     public ref Vector2D Size
     {
         get
         {
-            if (_SizeOffset == -1) _SizeOffset = Schema.GetOffset(0x8174554308C3E9F8);
-            return ref _Handle.AsRef<Vector2D>(_SizeOffset);
+            _SizeOffset = _SizeOffset ?? Schema.GetOffset(0x8174554308C3E9F8);
+            return ref _Handle.AsRef<Vector2D>(_SizeOffset!.Value);
         }
     }
-    private static nint _PropertiesOffset = -1;
+    private static nint? _PropertiesOffset;
     private SchemaUntypedField? _PropertiesInstance;
 
     public SchemaUntypedField Properties
     {
         get
         {
-            if (_PropertiesOffset == -1) _PropertiesOffset = Schema.GetOffset(0x817455431DDBCA7C);
+            _PropertiesOffset = _PropertiesOffset ?? Schema.GetOffset(0x817455431DDBCA7C);
             var instance = _PropertiesInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _PropertiesOffset);
+            instance.DangerousSetHandle(_Handle + _PropertiesOffset!.Value);
             return instance;
         }
     }

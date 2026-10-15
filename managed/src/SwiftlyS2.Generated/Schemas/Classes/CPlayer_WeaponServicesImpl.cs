@@ -16,57 +16,57 @@ internal partial class CPlayer_WeaponServicesImpl : CPlayerPawnComponentImpl, CP
 {
     public CPlayer_WeaponServicesImpl(nint handle) : base(handle) { }
 
-    private static nint _MyWeaponsOffset = -1;
+    private static nint? _MyWeaponsOffset;
 
     public ref CUtlVector<CHandle<CBasePlayerWeapon>> MyWeapons
     {
         get
         {
-            if (_MyWeaponsOffset == -1) _MyWeaponsOffset = Schema.GetOffset(0x634D22804C8A13A6);
-            return ref _Handle.AsRef<CUtlVector<CHandle<CBasePlayerWeapon>>>(_MyWeaponsOffset);
+            _MyWeaponsOffset = _MyWeaponsOffset ?? Schema.GetOffset(0x634D22804C8A13A6);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CBasePlayerWeapon>>>(_MyWeaponsOffset!.Value);
         }
     }
-    private static nint _ActiveWeaponOffset = -1;
+    private static nint? _ActiveWeaponOffset;
 
     public ref CHandle<CBasePlayerWeapon> ActiveWeapon
     {
         get
         {
-            if (_ActiveWeaponOffset == -1) _ActiveWeaponOffset = Schema.GetOffset(0x634D2280940131C5);
-            return ref _Handle.AsRef<CHandle<CBasePlayerWeapon>>(_ActiveWeaponOffset);
+            _ActiveWeaponOffset = _ActiveWeaponOffset ?? Schema.GetOffset(0x634D2280940131C5);
+            return ref _Handle.AsRef<CHandle<CBasePlayerWeapon>>(_ActiveWeaponOffset!.Value);
         }
     }
-    private static nint _LastWeaponOffset = -1;
+    private static nint? _LastWeaponOffset;
 
     public ref CHandle<CBasePlayerWeapon> LastWeapon
     {
         get
         {
-            if (_LastWeaponOffset == -1) _LastWeaponOffset = Schema.GetOffset(0x634D2280EA5C9547);
-            return ref _Handle.AsRef<CHandle<CBasePlayerWeapon>>(_LastWeaponOffset);
+            _LastWeaponOffset = _LastWeaponOffset ?? Schema.GetOffset(0x634D2280EA5C9547);
+            return ref _Handle.AsRef<CHandle<CBasePlayerWeapon>>(_LastWeaponOffset!.Value);
         }
     }
-    private static nint _AmmoOffset = -1;
+    private static nint? _AmmoOffset;
     private SchemaFixedArray<ushort>? _AmmoInstance;
 
     public ISchemaFixedArray<ushort> Ammo
     {
         get
         {
-            if (_AmmoOffset == -1) _AmmoOffset = Schema.GetOffset(0x634D22800D59E6CA);
+            _AmmoOffset = _AmmoOffset ?? Schema.GetOffset(0x634D22800D59E6CA);
             var instance = _AmmoInstance ??= new SchemaFixedArray<ushort>(0, 0x634D22800D59E6CA, 32, 2, 2);
-            instance.DangerousSetHandle(_Handle + _AmmoOffset);
+            instance.DangerousSetHandle(_Handle + _AmmoOffset!.Value);
             return instance;
         }
     }
-    private static nint _PreventWeaponPickupOffset = -1;
+    private static nint? _PreventWeaponPickupOffset;
 
     public ref bool PreventWeaponPickup
     {
         get
         {
-            if (_PreventWeaponPickupOffset == -1) _PreventWeaponPickupOffset = Schema.GetOffset(0x634D228093894029);
-            return ref _Handle.AsRef<bool>(_PreventWeaponPickupOffset);
+            _PreventWeaponPickupOffset = _PreventWeaponPickupOffset ?? Schema.GetOffset(0x634D228093894029);
+            return ref _Handle.AsRef<bool>(_PreventWeaponPickupOffset!.Value);
         }
     }
 

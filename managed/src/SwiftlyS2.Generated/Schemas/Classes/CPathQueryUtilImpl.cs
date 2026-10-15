@@ -16,54 +16,54 @@ internal partial class CPathQueryUtilImpl : SchemaClass, CPathQueryUtil
 {
     public CPathQueryUtilImpl(nint handle) : base(handle) { }
 
-    private static nint _PathToEntityTransformOffset = -1;
+    private static nint? _PathToEntityTransformOffset;
 
     public ref CTransform PathToEntityTransform
     {
         get
         {
-            if (_PathToEntityTransformOffset == -1) _PathToEntityTransformOffset = Schema.GetOffset(0x52D1B6431A6FA220);
-            return ref _Handle.AsRef<CTransform>(_PathToEntityTransformOffset);
+            _PathToEntityTransformOffset = _PathToEntityTransformOffset ?? Schema.GetOffset(0x52D1B6431A6FA220);
+            return ref _Handle.AsRef<CTransform>(_PathToEntityTransformOffset!.Value);
         }
     }
-    private static nint _PathSamplePositionsOffset = -1;
+    private static nint? _PathSamplePositionsOffset;
 
     public ref CUtlVector<Vector> PathSamplePositions
     {
         get
         {
-            if (_PathSamplePositionsOffset == -1) _PathSamplePositionsOffset = Schema.GetOffset(0x52D1B643099F5ECC);
-            return ref _Handle.AsRef<CUtlVector<Vector>>(_PathSamplePositionsOffset);
+            _PathSamplePositionsOffset = _PathSamplePositionsOffset ?? Schema.GetOffset(0x52D1B643099F5ECC);
+            return ref _Handle.AsRef<CUtlVector<Vector>>(_PathSamplePositionsOffset!.Value);
         }
     }
-    private static nint _PathSampleParametersOffset = -1;
+    private static nint? _PathSampleParametersOffset;
 
     public ref CUtlVector<float> PathSampleParameters
     {
         get
         {
-            if (_PathSampleParametersOffset == -1) _PathSampleParametersOffset = Schema.GetOffset(0x52D1B6431D6E0D08);
-            return ref _Handle.AsRef<CUtlVector<float>>(_PathSampleParametersOffset);
+            _PathSampleParametersOffset = _PathSampleParametersOffset ?? Schema.GetOffset(0x52D1B6431D6E0D08);
+            return ref _Handle.AsRef<CUtlVector<float>>(_PathSampleParametersOffset!.Value);
         }
     }
-    private static nint _PathSampleDistancesOffset = -1;
+    private static nint? _PathSampleDistancesOffset;
 
     public ref CUtlVector<float> PathSampleDistances
     {
         get
         {
-            if (_PathSampleDistancesOffset == -1) _PathSampleDistancesOffset = Schema.GetOffset(0x52D1B6435680B274);
-            return ref _Handle.AsRef<CUtlVector<float>>(_PathSampleDistancesOffset);
+            _PathSampleDistancesOffset = _PathSampleDistancesOffset ?? Schema.GetOffset(0x52D1B6435680B274);
+            return ref _Handle.AsRef<CUtlVector<float>>(_PathSampleDistancesOffset!.Value);
         }
     }
-    private static nint _IsClosedLoopOffset = -1;
+    private static nint? _IsClosedLoopOffset;
 
     public ref bool IsClosedLoop
     {
         get
         {
-            if (_IsClosedLoopOffset == -1) _IsClosedLoopOffset = Schema.GetOffset(0x52D1B6430806319B);
-            return ref _Handle.AsRef<bool>(_IsClosedLoopOffset);
+            _IsClosedLoopOffset = _IsClosedLoopOffset ?? Schema.GetOffset(0x52D1B6430806319B);
+            return ref _Handle.AsRef<bool>(_IsClosedLoopOffset!.Value);
         }
     }
 

@@ -16,31 +16,31 @@ internal partial class CModelConfigElement_CommandImpl : CModelConfigElementImpl
 {
     public CModelConfigElement_CommandImpl(nint handle) : base(handle) { }
 
-    private static nint _CommandOffset = -1;
+    private static nint? _CommandOffset;
 
     public string Command
     {
         get
         {
-            if (_CommandOffset == -1) _CommandOffset = Schema.GetOffset(0x89334ED93A5BBC32);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_CommandOffset));
+            _CommandOffset = _CommandOffset ?? Schema.GetOffset(0x89334ED93A5BBC32);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_CommandOffset!.Value));
         }
         set
         {
-            if (_CommandOffset == -1) _CommandOffset = Schema.GetOffset(0x89334ED93A5BBC32);
-            Schema.SetCUtlString(_Handle, _CommandOffset, value);
+            _CommandOffset = _CommandOffset ?? Schema.GetOffset(0x89334ED93A5BBC32);
+            Schema.SetCUtlString(_Handle, _CommandOffset!.Value, value);
         }
     }
-    private static nint _ArgsOffset = -1;
+    private static nint? _ArgsOffset;
     private SchemaUntypedField? _ArgsInstance;
 
     public SchemaUntypedField Args
     {
         get
         {
-            if (_ArgsOffset == -1) _ArgsOffset = Schema.GetOffset(0x89334ED9DAB98BBC);
+            _ArgsOffset = _ArgsOffset ?? Schema.GetOffset(0x89334ED9DAB98BBC);
             var instance = _ArgsInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ArgsOffset);
+            instance.DangerousSetHandle(_Handle + _ArgsOffset!.Value);
             return instance;
         }
     }

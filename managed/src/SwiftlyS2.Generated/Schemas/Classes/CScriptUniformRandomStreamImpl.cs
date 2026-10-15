@@ -16,24 +16,24 @@ internal partial class CScriptUniformRandomStreamImpl : SchemaClass, CScriptUnif
 {
     public CScriptUniformRandomStreamImpl(nint handle) : base(handle) { }
 
-    private static nint _ScriptScopeOffset = -1;
+    private static nint? _ScriptScopeOffset;
 
     public ref HSCRIPTHandler ScriptScope
     {
         get
         {
-            if (_ScriptScopeOffset == -1) _ScriptScopeOffset = Schema.GetOffset(0xF6699588B14F90D4);
-            return ref _Handle.AsRef<HSCRIPTHandler>(_ScriptScopeOffset);
+            _ScriptScopeOffset = _ScriptScopeOffset ?? Schema.GetOffset(0xF6699588B14F90D4);
+            return ref _Handle.AsRef<HSCRIPTHandler>(_ScriptScopeOffset!.Value);
         }
     }
-    private static nint _InitialSeedOffset = -1;
+    private static nint? _InitialSeedOffset;
 
     public ref int InitialSeed
     {
         get
         {
-            if (_InitialSeedOffset == -1) _InitialSeedOffset = Schema.GetOffset(0xF6699588944D5EB2);
-            return ref _Handle.AsRef<int>(_InitialSeedOffset);
+            _InitialSeedOffset = _InitialSeedOffset ?? Schema.GetOffset(0xF6699588944D5EB2);
+            return ref _Handle.AsRef<int>(_InitialSeedOffset!.Value);
         }
     }
 

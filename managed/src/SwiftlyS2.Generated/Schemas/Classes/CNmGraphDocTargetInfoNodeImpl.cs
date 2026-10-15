@@ -16,24 +16,24 @@ internal partial class CNmGraphDocTargetInfoNodeImpl : CNmGraphDocFlowNodeImpl, 
 {
     public CNmGraphDocTargetInfoNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _InfoTypeOffset = -1;
+    private static nint? _InfoTypeOffset;
 
     public ref CNmTargetInfoNode__Info_t InfoType
     {
         get
         {
-            if (_InfoTypeOffset == -1) _InfoTypeOffset = Schema.GetOffset(0xF719CA64CE6BA20D);
-            return ref _Handle.AsRef<CNmTargetInfoNode__Info_t>(_InfoTypeOffset);
+            _InfoTypeOffset = _InfoTypeOffset ?? Schema.GetOffset(0xF719CA64CE6BA20D);
+            return ref _Handle.AsRef<CNmTargetInfoNode__Info_t>(_InfoTypeOffset!.Value);
         }
     }
-    private static nint _IsWorldSpaceTargetOffset = -1;
+    private static nint? _IsWorldSpaceTargetOffset;
 
     public ref bool IsWorldSpaceTarget
     {
         get
         {
-            if (_IsWorldSpaceTargetOffset == -1) _IsWorldSpaceTargetOffset = Schema.GetOffset(0xF719CA64B81D53F2);
-            return ref _Handle.AsRef<bool>(_IsWorldSpaceTargetOffset);
+            _IsWorldSpaceTargetOffset = _IsWorldSpaceTargetOffset ?? Schema.GetOffset(0xF719CA64B81D53F2);
+            return ref _Handle.AsRef<bool>(_IsWorldSpaceTargetOffset!.Value);
         }
     }
 

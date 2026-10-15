@@ -16,72 +16,72 @@ internal partial class C_OP_RemapAverageScalarValuetoCPImpl : CParticleFunctionP
 {
     public C_OP_RemapAverageScalarValuetoCPImpl(nint handle) : base(handle) { }
 
-    private static nint _ExpressionOffset = -1;
+    private static nint? _ExpressionOffset;
 
     public ref SetStatisticExpressionType_t Expression
     {
         get
         {
-            if (_ExpressionOffset == -1) _ExpressionOffset = Schema.GetOffset(0x98EDCBBC160B2427);
-            return ref _Handle.AsRef<SetStatisticExpressionType_t>(_ExpressionOffset);
+            _ExpressionOffset = _ExpressionOffset ?? Schema.GetOffset(0x98EDCBBC160B2427);
+            return ref _Handle.AsRef<SetStatisticExpressionType_t>(_ExpressionOffset!.Value);
         }
     }
-    private static nint _DecimalPlacesOffset = -1;
+    private static nint? _DecimalPlacesOffset;
     private CParticleCollectionFloatInputImpl? _DecimalPlacesInstance;
 
     public CParticleCollectionFloatInput DecimalPlaces
     {
         get
         {
-            if (_DecimalPlacesOffset == -1) _DecimalPlacesOffset = Schema.GetOffset(0x98EDCBBCB314ED06);
+            _DecimalPlacesOffset = _DecimalPlacesOffset ?? Schema.GetOffset(0x98EDCBBCB314ED06);
             var instance = _DecimalPlacesInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _DecimalPlacesOffset);
+            instance.DangerousSetHandle(_Handle + _DecimalPlacesOffset!.Value);
             return instance;
         }
     }
-    private static nint _OutControlPointNumberOffset = -1;
+    private static nint? _OutControlPointNumberOffset;
 
     public ref int OutControlPointNumber
     {
         get
         {
-            if (_OutControlPointNumberOffset == -1) _OutControlPointNumberOffset = Schema.GetOffset(0x98EDCBBCD021D73F);
-            return ref _Handle.AsRef<int>(_OutControlPointNumberOffset);
+            _OutControlPointNumberOffset = _OutControlPointNumberOffset ?? Schema.GetOffset(0x98EDCBBCD021D73F);
+            return ref _Handle.AsRef<int>(_OutControlPointNumberOffset!.Value);
         }
     }
-    private static nint _OutVectorFieldOffset = -1;
+    private static nint? _OutVectorFieldOffset;
 
     public ref int OutVectorField
     {
         get
         {
-            if (_OutVectorFieldOffset == -1) _OutVectorFieldOffset = Schema.GetOffset(0x98EDCBBCF9041E74);
-            return ref _Handle.AsRef<int>(_OutVectorFieldOffset);
+            _OutVectorFieldOffset = _OutVectorFieldOffset ?? Schema.GetOffset(0x98EDCBBCF9041E74);
+            return ref _Handle.AsRef<int>(_OutVectorFieldOffset!.Value);
         }
     }
-    private static nint _FieldOffset = -1;
+    private static nint? _FieldOffset;
     private ParticleAttributeIndex_tImpl? _FieldInstance;
 
     public ParticleAttributeIndex_t Field
     {
         get
         {
-            if (_FieldOffset == -1) _FieldOffset = Schema.GetOffset(0x98EDCBBCC257B93B);
+            _FieldOffset = _FieldOffset ?? Schema.GetOffset(0x98EDCBBCC257B93B);
             var instance = _FieldInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOffset);
+            instance.DangerousSetHandle(_Handle + _FieldOffset!.Value);
             return instance;
         }
     }
-    private static nint _OutputRemapOffset = -1;
+    private static nint? _OutputRemapOffset;
     private CParticleRemapFloatInputImpl? _OutputRemapInstance;
 
     public CParticleRemapFloatInput OutputRemap
     {
         get
         {
-            if (_OutputRemapOffset == -1) _OutputRemapOffset = Schema.GetOffset(0x98EDCBBC1239396F);
+            _OutputRemapOffset = _OutputRemapOffset ?? Schema.GetOffset(0x98EDCBBC1239396F);
             var instance = _OutputRemapInstance ??= new CParticleRemapFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _OutputRemapOffset);
+            instance.DangerousSetHandle(_Handle + _OutputRemapOffset!.Value);
             return instance;
         }
     }

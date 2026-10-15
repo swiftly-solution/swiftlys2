@@ -16,44 +16,44 @@ internal partial class CSteamAudioProbeLineSegmentImpl : SchemaClass, CSteamAudi
 {
     public CSteamAudioProbeLineSegmentImpl(nint handle) : base(handle) { }
 
-    private static nint _StartOffset = -1;
+    private static nint? _StartOffset;
 
     public ref Vector Start
     {
         get
         {
-            if (_StartOffset == -1) _StartOffset = Schema.GetOffset(0x1722F425C222DFCB);
-            return ref _Handle.AsRef<Vector>(_StartOffset);
+            _StartOffset = _StartOffset ?? Schema.GetOffset(0x1722F425C222DFCB);
+            return ref _Handle.AsRef<Vector>(_StartOffset!.Value);
         }
     }
-    private static nint _EndOffset = -1;
+    private static nint? _EndOffset;
 
     public ref Vector End
     {
         get
         {
-            if (_EndOffset == -1) _EndOffset = Schema.GetOffset(0x1722F4256367F18E);
-            return ref _Handle.AsRef<Vector>(_EndOffset);
+            _EndOffset = _EndOffset ?? Schema.GetOffset(0x1722F4256367F18E);
+            return ref _Handle.AsRef<Vector>(_EndOffset!.Value);
         }
     }
-    private static nint _IntervalsOffset = -1;
+    private static nint? _IntervalsOffset;
 
     public ref CUtlVector<float> Intervals
     {
         get
         {
-            if (_IntervalsOffset == -1) _IntervalsOffset = Schema.GetOffset(0x1722F42549264531);
-            return ref _Handle.AsRef<CUtlVector<float>>(_IntervalsOffset);
+            _IntervalsOffset = _IntervalsOffset ?? Schema.GetOffset(0x1722F42549264531);
+            return ref _Handle.AsRef<CUtlVector<float>>(_IntervalsOffset!.Value);
         }
     }
-    private static nint _ProbeIndicesOffset = -1;
+    private static nint? _ProbeIndicesOffset;
 
     public ref CUtlVector<int> ProbeIndices
     {
         get
         {
-            if (_ProbeIndicesOffset == -1) _ProbeIndicesOffset = Schema.GetOffset(0x1722F425C1FEF88E);
-            return ref _Handle.AsRef<CUtlVector<int>>(_ProbeIndicesOffset);
+            _ProbeIndicesOffset = _ProbeIndicesOffset ?? Schema.GetOffset(0x1722F425C1FEF88E);
+            return ref _Handle.AsRef<CUtlVector<int>>(_ProbeIndicesOffset!.Value);
         }
     }
 

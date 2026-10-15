@@ -16,29 +16,29 @@ internal partial class CPulseCell_Outflow_TestRandomYesNoImpl : CPulseCell_BaseF
 {
     public CPulseCell_Outflow_TestRandomYesNoImpl(nint handle) : base(handle) { }
 
-    private static nint _YesOffset = -1;
+    private static nint? _YesOffset;
     private CPulse_OutflowConnectionImpl? _YesInstance;
 
     public CPulse_OutflowConnection Yes
     {
         get
         {
-            if (_YesOffset == -1) _YesOffset = Schema.GetOffset(0x9EA5F31EDA358F10);
+            _YesOffset = _YesOffset ?? Schema.GetOffset(0x9EA5F31EDA358F10);
             var instance = _YesInstance ??= new CPulse_OutflowConnectionImpl(0);
-            instance.DangerousSetHandle(_Handle + _YesOffset);
+            instance.DangerousSetHandle(_Handle + _YesOffset!.Value);
             return instance;
         }
     }
-    private static nint _NoOffset = -1;
+    private static nint? _NoOffset;
     private CPulse_OutflowConnectionImpl? _NoInstance;
 
     public CPulse_OutflowConnection No
     {
         get
         {
-            if (_NoOffset == -1) _NoOffset = Schema.GetOffset(0x9EA5F31EE004A07A);
+            _NoOffset = _NoOffset ?? Schema.GetOffset(0x9EA5F31EE004A07A);
             var instance = _NoInstance ??= new CPulse_OutflowConnectionImpl(0);
-            instance.DangerousSetHandle(_Handle + _NoOffset);
+            instance.DangerousSetHandle(_Handle + _NoOffset!.Value);
             return instance;
         }
     }

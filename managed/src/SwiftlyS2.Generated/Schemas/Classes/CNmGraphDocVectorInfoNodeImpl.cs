@@ -16,14 +16,14 @@ internal partial class CNmGraphDocVectorInfoNodeImpl : CNmGraphDocFlowNodeImpl, 
 {
     public CNmGraphDocVectorInfoNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _DesiredInfoOffset = -1;
+    private static nint? _DesiredInfoOffset;
 
     public ref CNmVectorInfoNode__Info_t DesiredInfo
     {
         get
         {
-            if (_DesiredInfoOffset == -1) _DesiredInfoOffset = Schema.GetOffset(0x617D2A3A38B16675);
-            return ref _Handle.AsRef<CNmVectorInfoNode__Info_t>(_DesiredInfoOffset);
+            _DesiredInfoOffset = _DesiredInfoOffset ?? Schema.GetOffset(0x617D2A3A38B16675);
+            return ref _Handle.AsRef<CNmVectorInfoNode__Info_t>(_DesiredInfoOffset!.Value);
         }
     }
 

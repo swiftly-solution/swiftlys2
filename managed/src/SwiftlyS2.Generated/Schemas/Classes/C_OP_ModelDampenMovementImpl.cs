@@ -16,82 +16,82 @@ internal partial class C_OP_ModelDampenMovementImpl : CParticleFunctionOperatorI
 {
     public C_OP_ModelDampenMovementImpl(nint handle) : base(handle) { }
 
-    private static nint _ControlPointNumberOffset = -1;
+    private static nint? _ControlPointNumberOffset;
 
     public ref int ControlPointNumber
     {
         get
         {
-            if (_ControlPointNumberOffset == -1) _ControlPointNumberOffset = Schema.GetOffset(0x74BD8BB63F31A6BD);
-            return ref _Handle.AsRef<int>(_ControlPointNumberOffset);
+            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0x74BD8BB63F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
         }
     }
-    private static nint _BoundBoxOffset = -1;
+    private static nint? _BoundBoxOffset;
 
     public ref bool BoundBox
     {
         get
         {
-            if (_BoundBoxOffset == -1) _BoundBoxOffset = Schema.GetOffset(0x74BD8BB6AB65CDDC);
-            return ref _Handle.AsRef<bool>(_BoundBoxOffset);
+            _BoundBoxOffset = _BoundBoxOffset ?? Schema.GetOffset(0x74BD8BB6AB65CDDC);
+            return ref _Handle.AsRef<bool>(_BoundBoxOffset!.Value);
         }
     }
-    private static nint _OutsideOffset = -1;
+    private static nint? _OutsideOffset;
 
     public ref bool Outside
     {
         get
         {
-            if (_OutsideOffset == -1) _OutsideOffset = Schema.GetOffset(0x74BD8BB6733FEEA4);
-            return ref _Handle.AsRef<bool>(_OutsideOffset);
+            _OutsideOffset = _OutsideOffset ?? Schema.GetOffset(0x74BD8BB6733FEEA4);
+            return ref _Handle.AsRef<bool>(_OutsideOffset!.Value);
         }
     }
-    private static nint _UseBonesOffset = -1;
+    private static nint? _UseBonesOffset;
 
     public ref bool UseBones
     {
         get
         {
-            if (_UseBonesOffset == -1) _UseBonesOffset = Schema.GetOffset(0x74BD8BB610D1938B);
-            return ref _Handle.AsRef<bool>(_UseBonesOffset);
+            _UseBonesOffset = _UseBonesOffset ?? Schema.GetOffset(0x74BD8BB610D1938B);
+            return ref _Handle.AsRef<bool>(_UseBonesOffset!.Value);
         }
     }
-    private static nint _HitboxSetNameOffset = -1;
+    private static nint? _HitboxSetNameOffset;
 
     public string HitboxSetName
     {
         get
         {
-            if (_HitboxSetNameOffset == -1) _HitboxSetNameOffset = Schema.GetOffset(0x74BD8BB66A21BB0E);
-            return Schema.GetString(_Handle + _HitboxSetNameOffset);
+            _HitboxSetNameOffset = _HitboxSetNameOffset ?? Schema.GetOffset(0x74BD8BB66A21BB0E);
+            return Schema.GetString(_Handle + _HitboxSetNameOffset!.Value);
         }
         set
         {
-            if (_HitboxSetNameOffset == -1) _HitboxSetNameOffset = Schema.GetOffset(0x74BD8BB66A21BB0E);
-            Schema.SetFixedString(_Handle, _HitboxSetNameOffset, value, 128);
+            _HitboxSetNameOffset = _HitboxSetNameOffset ?? Schema.GetOffset(0x74BD8BB66A21BB0E);
+            Schema.SetFixedString(_Handle, _HitboxSetNameOffset!.Value, value, 128);
         }
     }
-    private static nint _PosOffsetOffset = -1;
+    private static nint? _PosOffsetOffset;
     private CPerParticleVecInputImpl? _PosOffsetInstance;
 
     public CPerParticleVecInput PosOffset
     {
         get
         {
-            if (_PosOffsetOffset == -1) _PosOffsetOffset = Schema.GetOffset(0x74BD8BB655D114B6);
+            _PosOffsetOffset = _PosOffsetOffset ?? Schema.GetOffset(0x74BD8BB655D114B6);
             var instance = _PosOffsetInstance ??= new CPerParticleVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _PosOffsetOffset);
+            instance.DangerousSetHandle(_Handle + _PosOffsetOffset!.Value);
             return instance;
         }
     }
-    private static nint _DragOffset = -1;
+    private static nint? _DragOffset;
 
     public ref float Drag
     {
         get
         {
-            if (_DragOffset == -1) _DragOffset = Schema.GetOffset(0x74BD8BB650DA6497);
-            return ref _Handle.AsRef<float>(_DragOffset);
+            _DragOffset = _DragOffset ?? Schema.GetOffset(0x74BD8BB650DA6497);
+            return ref _Handle.AsRef<float>(_DragOffset!.Value);
         }
     }
 

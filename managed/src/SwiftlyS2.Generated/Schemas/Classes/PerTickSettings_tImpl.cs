@@ -16,127 +16,127 @@ internal partial class PerTickSettings_tImpl : SchemaClass, PerTickSettings_t
 {
     public PerTickSettings_tImpl(nint handle) : base(handle) { }
 
-    private static nint _StartingLocalToWorldOffset = -1;
+    private static nint? _StartingLocalToWorldOffset;
 
     public ref CTransform StartingLocalToWorld
     {
         get
         {
-            if (_StartingLocalToWorldOffset == -1) _StartingLocalToWorldOffset = Schema.GetOffset(0x11D36C0F5B919F53);
-            return ref _Handle.AsRef<CTransform>(_StartingLocalToWorldOffset);
+            _StartingLocalToWorldOffset = _StartingLocalToWorldOffset ?? Schema.GetOffset(0x11D36C0F5B919F53);
+            return ref _Handle.AsRef<CTransform>(_StartingLocalToWorldOffset!.Value);
         }
     }
-    private static nint _PrevLocalToWorldOffset = -1;
+    private static nint? _PrevLocalToWorldOffset;
 
     public ref CTransform PrevLocalToWorld
     {
         get
         {
-            if (_PrevLocalToWorldOffset == -1) _PrevLocalToWorldOffset = Schema.GetOffset(0x11D36C0F62DBBE0A);
-            return ref _Handle.AsRef<CTransform>(_PrevLocalToWorldOffset);
+            _PrevLocalToWorldOffset = _PrevLocalToWorldOffset ?? Schema.GetOffset(0x11D36C0F62DBBE0A);
+            return ref _Handle.AsRef<CTransform>(_PrevLocalToWorldOffset!.Value);
         }
     }
-    private static nint _FinalLocalToWorldOffset = -1;
+    private static nint? _FinalLocalToWorldOffset;
 
     public ref CTransform FinalLocalToWorld
     {
         get
         {
-            if (_FinalLocalToWorldOffset == -1) _FinalLocalToWorldOffset = Schema.GetOffset(0x11D36C0F36122EC1);
-            return ref _Handle.AsRef<CTransform>(_FinalLocalToWorldOffset);
+            _FinalLocalToWorldOffset = _FinalLocalToWorldOffset ?? Schema.GetOffset(0x11D36C0F36122EC1);
+            return ref _Handle.AsRef<CTransform>(_FinalLocalToWorldOffset!.Value);
         }
     }
-    private static nint _RootMotionOffset = -1;
+    private static nint? _RootMotionOffset;
     private CRootMotionImpl? _RootMotionInstance;
 
     public CRootMotion RootMotion
     {
         get
         {
-            if (_RootMotionOffset == -1) _RootMotionOffset = Schema.GetOffset(0x11D36C0F664A3F27);
+            _RootMotionOffset = _RootMotionOffset ?? Schema.GetOffset(0x11D36C0F664A3F27);
             var instance = _RootMotionInstance ??= new CRootMotionImpl(0);
-            instance.DangerousSetHandle(_Handle + _RootMotionOffset);
+            instance.DangerousSetHandle(_Handle + _RootMotionOffset!.Value);
             return instance;
         }
     }
-    private static nint _UpdateIDOffset = -1;
+    private static nint? _UpdateIDOffset;
 
     public ref int UpdateID
     {
         get
         {
-            if (_UpdateIDOffset == -1) _UpdateIDOffset = Schema.GetOffset(0x11D36C0FF208AC19);
-            return ref _Handle.AsRef<int>(_UpdateIDOffset);
+            _UpdateIDOffset = _UpdateIDOffset ?? Schema.GetOffset(0x11D36C0FF208AC19);
+            return ref _Handle.AsRef<int>(_UpdateIDOffset!.Value);
         }
     }
-    private static nint _LastTimeStepOffset = -1;
+    private static nint? _LastTimeStepOffset;
 
     public ref float LastTimeStep
     {
         get
         {
-            if (_LastTimeStepOffset == -1) _LastTimeStepOffset = Schema.GetOffset(0x11D36C0F091381EC);
-            return ref _Handle.AsRef<float>(_LastTimeStepOffset);
+            _LastTimeStepOffset = _LastTimeStepOffset ?? Schema.GetOffset(0x11D36C0F091381EC);
+            return ref _Handle.AsRef<float>(_LastTimeStepOffset!.Value);
         }
     }
-    private static nint _PrevAnimTimeOffset = -1;
+    private static nint? _PrevAnimTimeOffset;
 
     public ref float PrevAnimTime
     {
         get
         {
-            if (_PrevAnimTimeOffset == -1) _PrevAnimTimeOffset = Schema.GetOffset(0x11D36C0F80A9B72A);
-            return ref _Handle.AsRef<float>(_PrevAnimTimeOffset);
+            _PrevAnimTimeOffset = _PrevAnimTimeOffset ?? Schema.GetOffset(0x11D36C0F80A9B72A);
+            return ref _Handle.AsRef<float>(_PrevAnimTimeOffset!.Value);
         }
     }
-    private static nint _NextAnimTimeOffset = -1;
+    private static nint? _NextAnimTimeOffset;
 
     public ref float NextAnimTime
     {
         get
         {
-            if (_NextAnimTimeOffset == -1) _NextAnimTimeOffset = Schema.GetOffset(0x11D36C0FA62CED86);
-            return ref _Handle.AsRef<float>(_NextAnimTimeOffset);
+            _NextAnimTimeOffset = _NextAnimTimeOffset ?? Schema.GetOffset(0x11D36C0FA62CED86);
+            return ref _Handle.AsRef<float>(_NextAnimTimeOffset!.Value);
         }
     }
-    private static nint _AwakenOffset = -1;
+    private static nint? _AwakenOffset;
 
     public ref bool Awaken
     {
         get
         {
-            if (_AwakenOffset == -1) _AwakenOffset = Schema.GetOffset(0x11D36C0FD0F65996);
-            return ref _Handle.AsRef<bool>(_AwakenOffset);
+            _AwakenOffset = _AwakenOffset ?? Schema.GetOffset(0x11D36C0FD0F65996);
+            return ref _Handle.AsRef<bool>(_AwakenOffset!.Value);
         }
     }
-    private static nint _TeleportedOffset = -1;
+    private static nint? _TeleportedOffset;
 
     public ref bool Teleported
     {
         get
         {
-            if (_TeleportedOffset == -1) _TeleportedOffset = Schema.GetOffset(0x11D36C0FF215321F);
-            return ref _Handle.AsRef<bool>(_TeleportedOffset);
+            _TeleportedOffset = _TeleportedOffset ?? Schema.GetOffset(0x11D36C0FF215321F);
+            return ref _Handle.AsRef<bool>(_TeleportedOffset!.Value);
         }
     }
-    private static nint _IsClientOffset = -1;
+    private static nint? _IsClientOffset;
 
     public ref bool IsClient
     {
         get
         {
-            if (_IsClientOffset == -1) _IsClientOffset = Schema.GetOffset(0x11D36C0FDA4BF30E);
-            return ref _Handle.AsRef<bool>(_IsClientOffset);
+            _IsClientOffset = _IsClientOffset ?? Schema.GetOffset(0x11D36C0FDA4BF30E);
+            return ref _Handle.AsRef<bool>(_IsClientOffset!.Value);
         }
     }
-    private static nint _IsPredictedOffset = -1;
+    private static nint? _IsPredictedOffset;
 
     public ref bool IsPredicted
     {
         get
         {
-            if (_IsPredictedOffset == -1) _IsPredictedOffset = Schema.GetOffset(0x11D36C0F9154FC4B);
-            return ref _Handle.AsRef<bool>(_IsPredictedOffset);
+            _IsPredictedOffset = _IsPredictedOffset ?? Schema.GetOffset(0x11D36C0F9154FC4B);
+            return ref _Handle.AsRef<bool>(_IsPredictedOffset!.Value);
         }
     }
 

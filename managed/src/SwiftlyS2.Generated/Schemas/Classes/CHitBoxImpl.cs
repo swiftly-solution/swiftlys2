@@ -16,149 +16,149 @@ internal partial class CHitBoxImpl : SchemaClass, CHitBox
 {
     public CHitBoxImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x97E3DD244D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x97E3DD244D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x97E3DD244D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x97E3DD244D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _SurfacePropertyOffset = -1;
+    private static nint? _SurfacePropertyOffset;
 
     public string SurfaceProperty
     {
         get
         {
-            if (_SurfacePropertyOffset == -1) _SurfacePropertyOffset = Schema.GetOffset(0x97E3DD241A25534C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_SurfacePropertyOffset));
+            _SurfacePropertyOffset = _SurfacePropertyOffset ?? Schema.GetOffset(0x97E3DD241A25534C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_SurfacePropertyOffset!.Value));
         }
         set
         {
-            if (_SurfacePropertyOffset == -1) _SurfacePropertyOffset = Schema.GetOffset(0x97E3DD241A25534C);
-            Schema.SetCUtlString(_Handle, _SurfacePropertyOffset, value);
+            _SurfacePropertyOffset = _SurfacePropertyOffset ?? Schema.GetOffset(0x97E3DD241A25534C);
+            Schema.SetCUtlString(_Handle, _SurfacePropertyOffset!.Value, value);
         }
     }
-    private static nint _BoneNameOffset = -1;
+    private static nint? _BoneNameOffset;
 
     public string BoneName
     {
         get
         {
-            if (_BoneNameOffset == -1) _BoneNameOffset = Schema.GetOffset(0x97E3DD247559AC1F);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_BoneNameOffset));
+            _BoneNameOffset = _BoneNameOffset ?? Schema.GetOffset(0x97E3DD247559AC1F);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_BoneNameOffset!.Value));
         }
         set
         {
-            if (_BoneNameOffset == -1) _BoneNameOffset = Schema.GetOffset(0x97E3DD247559AC1F);
-            Schema.SetCUtlString(_Handle, _BoneNameOffset, value);
+            _BoneNameOffset = _BoneNameOffset ?? Schema.GetOffset(0x97E3DD247559AC1F);
+            Schema.SetCUtlString(_Handle, _BoneNameOffset!.Value, value);
         }
     }
-    private static nint _MinBoundsOffset = -1;
+    private static nint? _MinBoundsOffset;
 
     public ref Vector MinBounds
     {
         get
         {
-            if (_MinBoundsOffset == -1) _MinBoundsOffset = Schema.GetOffset(0x97E3DD24114799FE);
-            return ref _Handle.AsRef<Vector>(_MinBoundsOffset);
+            _MinBoundsOffset = _MinBoundsOffset ?? Schema.GetOffset(0x97E3DD24114799FE);
+            return ref _Handle.AsRef<Vector>(_MinBoundsOffset!.Value);
         }
     }
-    private static nint _MaxBoundsOffset = -1;
+    private static nint? _MaxBoundsOffset;
 
     public ref Vector MaxBounds
     {
         get
         {
-            if (_MaxBoundsOffset == -1) _MaxBoundsOffset = Schema.GetOffset(0x97E3DD24C0B4CE60);
-            return ref _Handle.AsRef<Vector>(_MaxBoundsOffset);
+            _MaxBoundsOffset = _MaxBoundsOffset ?? Schema.GetOffset(0x97E3DD24C0B4CE60);
+            return ref _Handle.AsRef<Vector>(_MaxBoundsOffset!.Value);
         }
     }
-    private static nint _ShapeRadiusOffset = -1;
+    private static nint? _ShapeRadiusOffset;
 
     public ref float ShapeRadius
     {
         get
         {
-            if (_ShapeRadiusOffset == -1) _ShapeRadiusOffset = Schema.GetOffset(0x97E3DD24D8107F0E);
-            return ref _Handle.AsRef<float>(_ShapeRadiusOffset);
+            _ShapeRadiusOffset = _ShapeRadiusOffset ?? Schema.GetOffset(0x97E3DD24D8107F0E);
+            return ref _Handle.AsRef<float>(_ShapeRadiusOffset!.Value);
         }
     }
-    private static nint _BoneNameHashOffset = -1;
+    private static nint? _BoneNameHashOffset;
 
     public ref uint BoneNameHash
     {
         get
         {
-            if (_BoneNameHashOffset == -1) _BoneNameHashOffset = Schema.GetOffset(0x97E3DD24767FF938);
-            return ref _Handle.AsRef<uint>(_BoneNameHashOffset);
+            _BoneNameHashOffset = _BoneNameHashOffset ?? Schema.GetOffset(0x97E3DD24767FF938);
+            return ref _Handle.AsRef<uint>(_BoneNameHashOffset!.Value);
         }
     }
-    private static nint _GroupIdOffset = -1;
+    private static nint? _GroupIdOffset;
 
     public ref int GroupId
     {
         get
         {
-            if (_GroupIdOffset == -1) _GroupIdOffset = Schema.GetOffset(0x97E3DD245BB08395);
-            return ref _Handle.AsRef<int>(_GroupIdOffset);
+            _GroupIdOffset = _GroupIdOffset ?? Schema.GetOffset(0x97E3DD245BB08395);
+            return ref _Handle.AsRef<int>(_GroupIdOffset!.Value);
         }
     }
-    private static nint _ShapeTypeOffset = -1;
+    private static nint? _ShapeTypeOffset;
 
     public ref byte ShapeType
     {
         get
         {
-            if (_ShapeTypeOffset == -1) _ShapeTypeOffset = Schema.GetOffset(0x97E3DD24AE159B72);
-            return ref _Handle.AsRef<byte>(_ShapeTypeOffset);
+            _ShapeTypeOffset = _ShapeTypeOffset ?? Schema.GetOffset(0x97E3DD24AE159B72);
+            return ref _Handle.AsRef<byte>(_ShapeTypeOffset!.Value);
         }
     }
-    private static nint _TranslationOnlyOffset = -1;
+    private static nint? _TranslationOnlyOffset;
 
     public ref bool TranslationOnly
     {
         get
         {
-            if (_TranslationOnlyOffset == -1) _TranslationOnlyOffset = Schema.GetOffset(0x97E3DD24B775D846);
-            return ref _Handle.AsRef<bool>(_TranslationOnlyOffset);
+            _TranslationOnlyOffset = _TranslationOnlyOffset ?? Schema.GetOffset(0x97E3DD24B775D846);
+            return ref _Handle.AsRef<bool>(_TranslationOnlyOffset!.Value);
         }
     }
-    private static nint _CRCOffset = -1;
+    private static nint? _CRCOffset;
 
     public ref uint CRC
     {
         get
         {
-            if (_CRCOffset == -1) _CRCOffset = Schema.GetOffset(0x97E3DD244E8CCEF9);
-            return ref _Handle.AsRef<uint>(_CRCOffset);
+            _CRCOffset = _CRCOffset ?? Schema.GetOffset(0x97E3DD244E8CCEF9);
+            return ref _Handle.AsRef<uint>(_CRCOffset!.Value);
         }
     }
-    private static nint _CRenderColorOffset = -1;
+    private static nint? _CRenderColorOffset;
 
     public ref Color CRenderColor
     {
         get
         {
-            if (_CRenderColorOffset == -1) _CRenderColorOffset = Schema.GetOffset(0x97E3DD24723B0259);
-            return ref _Handle.AsRef<Color>(_CRenderColorOffset);
+            _CRenderColorOffset = _CRenderColorOffset ?? Schema.GetOffset(0x97E3DD24723B0259);
+            return ref _Handle.AsRef<Color>(_CRenderColorOffset!.Value);
         }
     }
-    private static nint _HitBoxIndexOffset = -1;
+    private static nint? _HitBoxIndexOffset;
 
     public ref ushort HitBoxIndex
     {
         get
         {
-            if (_HitBoxIndexOffset == -1) _HitBoxIndexOffset = Schema.GetOffset(0x97E3DD24770A3AE9);
-            return ref _Handle.AsRef<ushort>(_HitBoxIndexOffset);
+            _HitBoxIndexOffset = _HitBoxIndexOffset ?? Schema.GetOffset(0x97E3DD24770A3AE9);
+            return ref _Handle.AsRef<ushort>(_HitBoxIndexOffset!.Value);
         }
     }
 

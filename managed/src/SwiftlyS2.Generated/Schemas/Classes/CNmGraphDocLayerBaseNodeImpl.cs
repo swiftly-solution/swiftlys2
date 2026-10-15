@@ -16,34 +16,34 @@ internal partial class CNmGraphDocLayerBaseNodeImpl : CNmGraphDocFlowNodeImpl, C
 {
     public CNmGraphDocLayerBaseNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _IsSynchronizedOffset = -1;
+    private static nint? _IsSynchronizedOffset;
 
     public ref bool IsSynchronized
     {
         get
         {
-            if (_IsSynchronizedOffset == -1) _IsSynchronizedOffset = Schema.GetOffset(0x6E59A387C87AF9AB);
-            return ref _Handle.AsRef<bool>(_IsSynchronizedOffset);
+            _IsSynchronizedOffset = _IsSynchronizedOffset ?? Schema.GetOffset(0x6E59A387C87AF9AB);
+            return ref _Handle.AsRef<bool>(_IsSynchronizedOffset!.Value);
         }
     }
-    private static nint _IgnoreEventsOffset = -1;
+    private static nint? _IgnoreEventsOffset;
 
     public ref bool IgnoreEvents
     {
         get
         {
-            if (_IgnoreEventsOffset == -1) _IgnoreEventsOffset = Schema.GetOffset(0x6E59A3877DACCDE6);
-            return ref _Handle.AsRef<bool>(_IgnoreEventsOffset);
+            _IgnoreEventsOffset = _IgnoreEventsOffset ?? Schema.GetOffset(0x6E59A3877DACCDE6);
+            return ref _Handle.AsRef<bool>(_IgnoreEventsOffset!.Value);
         }
     }
-    private static nint _BlendModeOffset = -1;
+    private static nint? _BlendModeOffset;
 
     public ref NmPoseBlendMode_t BlendMode
     {
         get
         {
-            if (_BlendModeOffset == -1) _BlendModeOffset = Schema.GetOffset(0x6E59A3878D5006AB);
-            return ref _Handle.AsRef<NmPoseBlendMode_t>(_BlendModeOffset);
+            _BlendModeOffset = _BlendModeOffset ?? Schema.GetOffset(0x6E59A3878D5006AB);
+            return ref _Handle.AsRef<NmPoseBlendMode_t>(_BlendModeOffset!.Value);
         }
     }
 

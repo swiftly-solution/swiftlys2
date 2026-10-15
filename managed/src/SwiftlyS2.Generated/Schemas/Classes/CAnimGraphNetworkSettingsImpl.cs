@@ -16,14 +16,14 @@ internal partial class CAnimGraphNetworkSettingsImpl : CAnimGraphSettingsGroupIm
 {
     public CAnimGraphNetworkSettingsImpl(nint handle) : base(handle) { }
 
-    private static nint _NetworkingEnabledOffset = -1;
+    private static nint? _NetworkingEnabledOffset;
 
     public ref bool NetworkingEnabled
     {
         get
         {
-            if (_NetworkingEnabledOffset == -1) _NetworkingEnabledOffset = Schema.GetOffset(0xAF5ADE2491EF35E0);
-            return ref _Handle.AsRef<bool>(_NetworkingEnabledOffset);
+            _NetworkingEnabledOffset = _NetworkingEnabledOffset ?? Schema.GetOffset(0xAF5ADE2491EF35E0);
+            return ref _Handle.AsRef<bool>(_NetworkingEnabledOffset!.Value);
         }
     }
 

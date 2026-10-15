@@ -16,44 +16,44 @@ internal partial class CConnectionProxyItemImpl : SchemaClass, CConnectionProxyI
 {
     public CConnectionProxyItemImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x7F472EA94D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x7F472EA94D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x7F472EA94D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x7F472EA94D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _OutputIDOffset = -1;
+    private static nint? _OutputIDOffset;
     private AnimNodeOutputIDImpl? _OutputIDInstance;
 
     public AnimNodeOutputID OutputID
     {
         get
         {
-            if (_OutputIDOffset == -1) _OutputIDOffset = Schema.GetOffset(0x7F472EA98456A4A9);
+            _OutputIDOffset = _OutputIDOffset ?? Schema.GetOffset(0x7F472EA98456A4A9);
             var instance = _OutputIDInstance ??= new AnimNodeOutputIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _OutputIDOffset);
+            instance.DangerousSetHandle(_Handle + _OutputIDOffset!.Value);
             return instance;
         }
     }
-    private static nint _InputConnectionOffset = -1;
+    private static nint? _InputConnectionOffset;
     private CAnimGraphDoc_NodeConnectionImpl? _InputConnectionInstance;
 
     public CAnimGraphDoc_NodeConnection InputConnection
     {
         get
         {
-            if (_InputConnectionOffset == -1) _InputConnectionOffset = Schema.GetOffset(0x7F472EA91F7849CB);
+            _InputConnectionOffset = _InputConnectionOffset ?? Schema.GetOffset(0x7F472EA91F7849CB);
             var instance = _InputConnectionInstance ??= new CAnimGraphDoc_NodeConnectionImpl(0);
-            instance.DangerousSetHandle(_Handle + _InputConnectionOffset);
+            instance.DangerousSetHandle(_Handle + _InputConnectionOffset!.Value);
             return instance;
         }
     }

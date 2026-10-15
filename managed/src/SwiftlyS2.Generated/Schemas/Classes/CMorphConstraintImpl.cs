@@ -16,49 +16,49 @@ internal partial class CMorphConstraintImpl : CBaseConstraintImpl, CMorphConstra
 {
     public CMorphConstraintImpl(nint handle) : base(handle) { }
 
-    private static nint _TargetMorphOffset = -1;
+    private static nint? _TargetMorphOffset;
 
     public string TargetMorph
     {
         get
         {
-            if (_TargetMorphOffset == -1) _TargetMorphOffset = Schema.GetOffset(0xC24859C39FF7D337);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_TargetMorphOffset));
+            _TargetMorphOffset = _TargetMorphOffset ?? Schema.GetOffset(0xC24859C39FF7D337);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_TargetMorphOffset!.Value));
         }
         set
         {
-            if (_TargetMorphOffset == -1) _TargetMorphOffset = Schema.GetOffset(0xC24859C39FF7D337);
-            Schema.SetCUtlString(_Handle, _TargetMorphOffset, value);
+            _TargetMorphOffset = _TargetMorphOffset ?? Schema.GetOffset(0xC24859C39FF7D337);
+            Schema.SetCUtlString(_Handle, _TargetMorphOffset!.Value, value);
         }
     }
-    private static nint _SlaveChannelOffset = -1;
+    private static nint? _SlaveChannelOffset;
 
     public ref int SlaveChannel
     {
         get
         {
-            if (_SlaveChannelOffset == -1) _SlaveChannelOffset = Schema.GetOffset(0xC24859C3A439DE4F);
-            return ref _Handle.AsRef<int>(_SlaveChannelOffset);
+            _SlaveChannelOffset = _SlaveChannelOffset ?? Schema.GetOffset(0xC24859C3A439DE4F);
+            return ref _Handle.AsRef<int>(_SlaveChannelOffset!.Value);
         }
     }
-    private static nint _MinOffset = -1;
+    private static nint? _MinOffset;
 
     public ref float Min
     {
         get
         {
-            if (_MinOffset == -1) _MinOffset = Schema.GetOffset(0xC24859C33B1A5649);
-            return ref _Handle.AsRef<float>(_MinOffset);
+            _MinOffset = _MinOffset ?? Schema.GetOffset(0xC24859C33B1A5649);
+            return ref _Handle.AsRef<float>(_MinOffset!.Value);
         }
     }
-    private static nint _MaxOffset = -1;
+    private static nint? _MaxOffset;
 
     public ref float Max
     {
         get
         {
-            if (_MaxOffset == -1) _MaxOffset = Schema.GetOffset(0xC24859C32D06B887);
-            return ref _Handle.AsRef<float>(_MaxOffset);
+            _MaxOffset = _MaxOffset ?? Schema.GetOffset(0xC24859C32D06B887);
+            return ref _Handle.AsRef<float>(_MaxOffset!.Value);
         }
     }
 

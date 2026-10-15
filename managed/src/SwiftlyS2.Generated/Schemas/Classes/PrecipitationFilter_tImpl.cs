@@ -16,14 +16,14 @@ internal partial class PrecipitationFilter_tImpl : SchemaClass, PrecipitationFil
 {
     public PrecipitationFilter_tImpl(nint handle) : base(handle) { }
 
-    private static nint _MaxRadiusOffset = -1;
+    private static nint? _MaxRadiusOffset;
 
     public ref float MaxRadius
     {
         get
         {
-            if (_MaxRadiusOffset == -1) _MaxRadiusOffset = Schema.GetOffset(0x3570A38989E61C15);
-            return ref _Handle.AsRef<float>(_MaxRadiusOffset);
+            _MaxRadiusOffset = _MaxRadiusOffset ?? Schema.GetOffset(0x3570A38989E61C15);
+            return ref _Handle.AsRef<float>(_MaxRadiusOffset!.Value);
         }
     }
 

@@ -16,107 +16,107 @@ internal partial class C_OP_RampScalarSplineImpl : CParticleFunctionOperatorImpl
 {
     public C_OP_RampScalarSplineImpl(nint handle) : base(handle) { }
 
-    private static nint _RateMinOffset = -1;
+    private static nint? _RateMinOffset;
 
     public ref float RateMin
     {
         get
         {
-            if (_RateMinOffset == -1) _RateMinOffset = Schema.GetOffset(0x4ADFC178645AF561);
-            return ref _Handle.AsRef<float>(_RateMinOffset);
+            _RateMinOffset = _RateMinOffset ?? Schema.GetOffset(0x4ADFC178645AF561);
+            return ref _Handle.AsRef<float>(_RateMinOffset!.Value);
         }
     }
-    private static nint _RateMaxOffset = -1;
+    private static nint? _RateMaxOffset;
 
     public ref float RateMax
     {
         get
         {
-            if (_RateMaxOffset == -1) _RateMaxOffset = Schema.GetOffset(0x4ADFC178566E670F);
-            return ref _Handle.AsRef<float>(_RateMaxOffset);
+            _RateMaxOffset = _RateMaxOffset ?? Schema.GetOffset(0x4ADFC178566E670F);
+            return ref _Handle.AsRef<float>(_RateMaxOffset!.Value);
         }
     }
-    private static nint _StartTime_minOffset = -1;
+    private static nint? _StartTime_minOffset;
 
     public ref float StartTime_min
     {
         get
         {
-            if (_StartTime_minOffset == -1) _StartTime_minOffset = Schema.GetOffset(0x4ADFC1785AC75BFB);
-            return ref _Handle.AsRef<float>(_StartTime_minOffset);
+            _StartTime_minOffset = _StartTime_minOffset ?? Schema.GetOffset(0x4ADFC1785AC75BFB);
+            return ref _Handle.AsRef<float>(_StartTime_minOffset!.Value);
         }
     }
-    private static nint _StartTime_maxOffset = -1;
+    private static nint? _StartTime_maxOffset;
 
     public ref float StartTime_max
     {
         get
         {
-            if (_StartTime_maxOffset == -1) _StartTime_maxOffset = Schema.GetOffset(0x4ADFC17850B23185);
-            return ref _Handle.AsRef<float>(_StartTime_maxOffset);
+            _StartTime_maxOffset = _StartTime_maxOffset ?? Schema.GetOffset(0x4ADFC17850B23185);
+            return ref _Handle.AsRef<float>(_StartTime_maxOffset!.Value);
         }
     }
-    private static nint _EndTime_minOffset = -1;
+    private static nint? _EndTime_minOffset;
 
     public ref float EndTime_min
     {
         get
         {
-            if (_EndTime_minOffset == -1) _EndTime_minOffset = Schema.GetOffset(0x4ADFC1787B891932);
-            return ref _Handle.AsRef<float>(_EndTime_minOffset);
+            _EndTime_minOffset = _EndTime_minOffset ?? Schema.GetOffset(0x4ADFC1787B891932);
+            return ref _Handle.AsRef<float>(_EndTime_minOffset!.Value);
         }
     }
-    private static nint _EndTime_maxOffset = -1;
+    private static nint? _EndTime_maxOffset;
 
     public ref float EndTime_max
     {
         get
         {
-            if (_EndTime_maxOffset == -1) _EndTime_maxOffset = Schema.GetOffset(0x4ADFC1788575A138);
-            return ref _Handle.AsRef<float>(_EndTime_maxOffset);
+            _EndTime_maxOffset = _EndTime_maxOffset ?? Schema.GetOffset(0x4ADFC1788575A138);
+            return ref _Handle.AsRef<float>(_EndTime_maxOffset!.Value);
         }
     }
-    private static nint _BiasOffset = -1;
+    private static nint? _BiasOffset;
 
     public ref float Bias
     {
         get
         {
-            if (_BiasOffset == -1) _BiasOffset = Schema.GetOffset(0x4ADFC178E7EF43B6);
-            return ref _Handle.AsRef<float>(_BiasOffset);
+            _BiasOffset = _BiasOffset ?? Schema.GetOffset(0x4ADFC178E7EF43B6);
+            return ref _Handle.AsRef<float>(_BiasOffset!.Value);
         }
     }
-    private static nint _FieldOffset = -1;
+    private static nint? _FieldOffset;
     private ParticleAttributeIndex_tImpl? _FieldInstance;
 
     public ParticleAttributeIndex_t Field
     {
         get
         {
-            if (_FieldOffset == -1) _FieldOffset = Schema.GetOffset(0x4ADFC178C257B93B);
+            _FieldOffset = _FieldOffset ?? Schema.GetOffset(0x4ADFC178C257B93B);
             var instance = _FieldInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOffset);
+            instance.DangerousSetHandle(_Handle + _FieldOffset!.Value);
             return instance;
         }
     }
-    private static nint _ProportionalOpOffset = -1;
+    private static nint? _ProportionalOpOffset;
 
     public ref bool ProportionalOp
     {
         get
         {
-            if (_ProportionalOpOffset == -1) _ProportionalOpOffset = Schema.GetOffset(0x4ADFC1780F8832BD);
-            return ref _Handle.AsRef<bool>(_ProportionalOpOffset);
+            _ProportionalOpOffset = _ProportionalOpOffset ?? Schema.GetOffset(0x4ADFC1780F8832BD);
+            return ref _Handle.AsRef<bool>(_ProportionalOpOffset!.Value);
         }
     }
-    private static nint _EaseOutOffset = -1;
+    private static nint? _EaseOutOffset;
 
     public ref bool EaseOut
     {
         get
         {
-            if (_EaseOutOffset == -1) _EaseOutOffset = Schema.GetOffset(0x4ADFC1788E58B9D1);
-            return ref _Handle.AsRef<bool>(_EaseOutOffset);
+            _EaseOutOffset = _EaseOutOffset ?? Schema.GetOffset(0x4ADFC1788E58B9D1);
+            return ref _Handle.AsRef<bool>(_EaseOutOffset!.Value);
         }
     }
 

@@ -16,84 +16,84 @@ internal partial class CPhysSurfacePropertiesAudioImpl : SchemaClass, CPhysSurfa
 {
     public CPhysSurfacePropertiesAudioImpl(nint handle) : base(handle) { }
 
-    private static nint _ReflectivityOffset = -1;
+    private static nint? _ReflectivityOffset;
 
     public ref float Reflectivity
     {
         get
         {
-            if (_ReflectivityOffset == -1) _ReflectivityOffset = Schema.GetOffset(0x7FD94D2E904671F3);
-            return ref _Handle.AsRef<float>(_ReflectivityOffset);
+            _ReflectivityOffset = _ReflectivityOffset ?? Schema.GetOffset(0x7FD94D2E904671F3);
+            return ref _Handle.AsRef<float>(_ReflectivityOffset!.Value);
         }
     }
-    private static nint _HardnessFactorOffset = -1;
+    private static nint? _HardnessFactorOffset;
 
     public ref float HardnessFactor
     {
         get
         {
-            if (_HardnessFactorOffset == -1) _HardnessFactorOffset = Schema.GetOffset(0x7FD94D2E376CBD68);
-            return ref _Handle.AsRef<float>(_HardnessFactorOffset);
+            _HardnessFactorOffset = _HardnessFactorOffset ?? Schema.GetOffset(0x7FD94D2E376CBD68);
+            return ref _Handle.AsRef<float>(_HardnessFactorOffset!.Value);
         }
     }
-    private static nint _RoughnessFactorOffset = -1;
+    private static nint? _RoughnessFactorOffset;
 
     public ref float RoughnessFactor
     {
         get
         {
-            if (_RoughnessFactorOffset == -1) _RoughnessFactorOffset = Schema.GetOffset(0x7FD94D2E8F4C4316);
-            return ref _Handle.AsRef<float>(_RoughnessFactorOffset);
+            _RoughnessFactorOffset = _RoughnessFactorOffset ?? Schema.GetOffset(0x7FD94D2E8F4C4316);
+            return ref _Handle.AsRef<float>(_RoughnessFactorOffset!.Value);
         }
     }
-    private static nint _RoughThresholdOffset = -1;
+    private static nint? _RoughThresholdOffset;
 
     public ref float RoughThreshold
     {
         get
         {
-            if (_RoughThresholdOffset == -1) _RoughThresholdOffset = Schema.GetOffset(0x7FD94D2EEB458AD9);
-            return ref _Handle.AsRef<float>(_RoughThresholdOffset);
+            _RoughThresholdOffset = _RoughThresholdOffset ?? Schema.GetOffset(0x7FD94D2EEB458AD9);
+            return ref _Handle.AsRef<float>(_RoughThresholdOffset!.Value);
         }
     }
-    private static nint _HardThresholdOffset = -1;
+    private static nint? _HardThresholdOffset;
 
     public ref float HardThreshold
     {
         get
         {
-            if (_HardThresholdOffset == -1) _HardThresholdOffset = Schema.GetOffset(0x7FD94D2EEE4B563F);
-            return ref _Handle.AsRef<float>(_HardThresholdOffset);
+            _HardThresholdOffset = _HardThresholdOffset ?? Schema.GetOffset(0x7FD94D2EEE4B563F);
+            return ref _Handle.AsRef<float>(_HardThresholdOffset!.Value);
         }
     }
-    private static nint _HardVelocityThresholdOffset = -1;
+    private static nint? _HardVelocityThresholdOffset;
 
     public ref float HardVelocityThreshold
     {
         get
         {
-            if (_HardVelocityThresholdOffset == -1) _HardVelocityThresholdOffset = Schema.GetOffset(0x7FD94D2E296B6B62);
-            return ref _Handle.AsRef<float>(_HardVelocityThresholdOffset);
+            _HardVelocityThresholdOffset = _HardVelocityThresholdOffset ?? Schema.GetOffset(0x7FD94D2E296B6B62);
+            return ref _Handle.AsRef<float>(_HardVelocityThresholdOffset!.Value);
         }
     }
-    private static nint _StaticImpactVolumeOffset = -1;
+    private static nint? _StaticImpactVolumeOffset;
 
     public ref float StaticImpactVolume
     {
         get
         {
-            if (_StaticImpactVolumeOffset == -1) _StaticImpactVolumeOffset = Schema.GetOffset(0x7FD94D2E04124001);
-            return ref _Handle.AsRef<float>(_StaticImpactVolumeOffset);
+            _StaticImpactVolumeOffset = _StaticImpactVolumeOffset ?? Schema.GetOffset(0x7FD94D2E04124001);
+            return ref _Handle.AsRef<float>(_StaticImpactVolumeOffset!.Value);
         }
     }
-    private static nint _OcclusionFactorOffset = -1;
+    private static nint? _OcclusionFactorOffset;
 
     public ref float OcclusionFactor
     {
         get
         {
-            if (_OcclusionFactorOffset == -1) _OcclusionFactorOffset = Schema.GetOffset(0x7FD94D2E2D764853);
-            return ref _Handle.AsRef<float>(_OcclusionFactorOffset);
+            _OcclusionFactorOffset = _OcclusionFactorOffset ?? Schema.GetOffset(0x7FD94D2E2D764853);
+            return ref _Handle.AsRef<float>(_OcclusionFactorOffset!.Value);
         }
     }
 

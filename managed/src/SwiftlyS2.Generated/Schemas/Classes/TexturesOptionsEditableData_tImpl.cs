@@ -16,19 +16,19 @@ internal partial class TexturesOptionsEditableData_tImpl : SchemaClass, Textures
 {
     public TexturesOptionsEditableData_tImpl(nint handle) : base(handle) { }
 
-    private static nint _DefaultMaterialNameOffset = -1;
+    private static nint? _DefaultMaterialNameOffset;
 
     public string DefaultMaterialName
     {
         get
         {
-            if (_DefaultMaterialNameOffset == -1) _DefaultMaterialNameOffset = Schema.GetOffset(0x2F343A4A268F7B28);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_DefaultMaterialNameOffset));
+            _DefaultMaterialNameOffset = _DefaultMaterialNameOffset ?? Schema.GetOffset(0x2F343A4A268F7B28);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_DefaultMaterialNameOffset!.Value));
         }
         set
         {
-            if (_DefaultMaterialNameOffset == -1) _DefaultMaterialNameOffset = Schema.GetOffset(0x2F343A4A268F7B28);
-            Schema.SetCUtlString(_Handle, _DefaultMaterialNameOffset, value);
+            _DefaultMaterialNameOffset = _DefaultMaterialNameOffset ?? Schema.GetOffset(0x2F343A4A268F7B28);
+            Schema.SetCUtlString(_Handle, _DefaultMaterialNameOffset!.Value, value);
         }
     }
 

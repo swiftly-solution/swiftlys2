@@ -16,39 +16,39 @@ internal partial class CSteamAudioBakedPathingDataImpl : SchemaClass, CSteamAudi
 {
     public CSteamAudioBakedPathingDataImpl(nint handle) : base(handle) { }
 
-    private static nint _BandsOffset = -1;
+    private static nint? _BandsOffset;
 
     public ref int Bands
     {
         get
         {
-            if (_BandsOffset == -1) _BandsOffset = Schema.GetOffset(0x8B98B2B004C6EFF3);
-            return ref _Handle.AsRef<int>(_BandsOffset);
+            _BandsOffset = _BandsOffset ?? Schema.GetOffset(0x8B98B2B004C6EFF3);
+            return ref _Handle.AsRef<int>(_BandsOffset!.Value);
         }
     }
-    private static nint _ProbesOffset = -1;
+    private static nint? _ProbesOffset;
     private CSteamAudioProbeDataImpl? _ProbesInstance;
 
     public CSteamAudioProbeData Probes
     {
         get
         {
-            if (_ProbesOffset == -1) _ProbesOffset = Schema.GetOffset(0x8B98B2B049D37E06);
+            _ProbesOffset = _ProbesOffset ?? Schema.GetOffset(0x8B98B2B049D37E06);
             var instance = _ProbesInstance ??= new CSteamAudioProbeDataImpl(0);
-            instance.DangerousSetHandle(_Handle + _ProbesOffset);
+            instance.DangerousSetHandle(_Handle + _ProbesOffset!.Value);
             return instance;
         }
     }
-    private static nint _MovablesOffset = -1;
+    private static nint? _MovablesOffset;
     private SchemaUntypedField? _MovablesInstance;
 
     public SchemaUntypedField Movables
     {
         get
         {
-            if (_MovablesOffset == -1) _MovablesOffset = Schema.GetOffset(0x8B98B2B0D92B2A8E);
+            _MovablesOffset = _MovablesOffset ?? Schema.GetOffset(0x8B98B2B0D92B2A8E);
             var instance = _MovablesInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _MovablesOffset);
+            instance.DangerousSetHandle(_Handle + _MovablesOffset!.Value);
             return instance;
         }
     }

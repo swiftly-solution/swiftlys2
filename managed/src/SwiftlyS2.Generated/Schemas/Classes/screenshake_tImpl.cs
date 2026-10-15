@@ -16,100 +16,100 @@ internal partial class screenshake_tImpl : SchemaClass, screenshake_t
 {
     public screenshake_tImpl(nint handle) : base(handle) { }
 
-    private static nint _EndtimeOffset = -1;
+    private static nint? _EndtimeOffset;
     private GameTime_tImpl? _EndtimeInstance;
 
     public GameTime_t Endtime
     {
         get
         {
-            if (_EndtimeOffset == -1) _EndtimeOffset = Schema.GetOffset(0xD95F8A7A53D2D00B);
+            _EndtimeOffset = _EndtimeOffset ?? Schema.GetOffset(0xD95F8A7A53D2D00B);
             var instance = _EndtimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _EndtimeOffset);
+            instance.DangerousSetHandle(_Handle + _EndtimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _DurationOffset = -1;
+    private static nint? _DurationOffset;
 
     public ref float Duration
     {
         get
         {
-            if (_DurationOffset == -1) _DurationOffset = Schema.GetOffset(0xD95F8A7A2FA0FD0D);
-            return ref _Handle.AsRef<float>(_DurationOffset);
+            _DurationOffset = _DurationOffset ?? Schema.GetOffset(0xD95F8A7A2FA0FD0D);
+            return ref _Handle.AsRef<float>(_DurationOffset!.Value);
         }
     }
-    private static nint _AmplitudeOffset = -1;
+    private static nint? _AmplitudeOffset;
 
     public ref float Amplitude
     {
         get
         {
-            if (_AmplitudeOffset == -1) _AmplitudeOffset = Schema.GetOffset(0xD95F8A7A16746AA2);
-            return ref _Handle.AsRef<float>(_AmplitudeOffset);
+            _AmplitudeOffset = _AmplitudeOffset ?? Schema.GetOffset(0xD95F8A7A16746AA2);
+            return ref _Handle.AsRef<float>(_AmplitudeOffset!.Value);
         }
     }
-    private static nint _FrequencyOffset = -1;
+    private static nint? _FrequencyOffset;
 
     public ref float Frequency
     {
         get
         {
-            if (_FrequencyOffset == -1) _FrequencyOffset = Schema.GetOffset(0xD95F8A7A2FB31C01);
-            return ref _Handle.AsRef<float>(_FrequencyOffset);
+            _FrequencyOffset = _FrequencyOffset ?? Schema.GetOffset(0xD95F8A7A2FB31C01);
+            return ref _Handle.AsRef<float>(_FrequencyOffset!.Value);
         }
     }
-    private static nint _NextShakeOffset = -1;
+    private static nint? _NextShakeOffset;
     private GameTime_tImpl? _NextShakeInstance;
 
     public GameTime_t NextShake
     {
         get
         {
-            if (_NextShakeOffset == -1) _NextShakeOffset = Schema.GetOffset(0xD95F8A7AAA1034DE);
+            _NextShakeOffset = _NextShakeOffset ?? Schema.GetOffset(0xD95F8A7AAA1034DE);
             var instance = _NextShakeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _NextShakeOffset);
+            instance.DangerousSetHandle(_Handle + _NextShakeOffset!.Value);
             return instance;
         }
     }
-    private static nint _OffsetOffset = -1;
+    private static nint? _OffsetOffset;
 
     public ref Vector Offset
     {
         get
         {
-            if (_OffsetOffset == -1) _OffsetOffset = Schema.GetOffset(0xD95F8A7A14C8D3CA);
-            return ref _Handle.AsRef<Vector>(_OffsetOffset);
+            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0xD95F8A7A14C8D3CA);
+            return ref _Handle.AsRef<Vector>(_OffsetOffset!.Value);
         }
     }
-    private static nint _AngleOffset = -1;
+    private static nint? _AngleOffset;
 
     public ref float Angle
     {
         get
         {
-            if (_AngleOffset == -1) _AngleOffset = Schema.GetOffset(0xD95F8A7AAD544418);
-            return ref _Handle.AsRef<float>(_AngleOffset);
+            _AngleOffset = _AngleOffset ?? Schema.GetOffset(0xD95F8A7AAD544418);
+            return ref _Handle.AsRef<float>(_AngleOffset!.Value);
         }
     }
-    private static nint _DirectionOffset = -1;
+    private static nint? _DirectionOffset;
 
     public ref Vector Direction
     {
         get
         {
-            if (_DirectionOffset == -1) _DirectionOffset = Schema.GetOffset(0xD95F8A7ADF6DC76A);
-            return ref _Handle.AsRef<Vector>(_DirectionOffset);
+            _DirectionOffset = _DirectionOffset ?? Schema.GetOffset(0xD95F8A7ADF6DC76A);
+            return ref _Handle.AsRef<Vector>(_DirectionOffset!.Value);
         }
     }
-    private static nint _ShakeTypeOffset = -1;
+    private static nint? _ShakeTypeOffset;
 
     public ref byte ShakeType
     {
         get
         {
-            if (_ShakeTypeOffset == -1) _ShakeTypeOffset = Schema.GetOffset(0xD95F8A7A29E56679);
-            return ref _Handle.AsRef<byte>(_ShakeTypeOffset);
+            _ShakeTypeOffset = _ShakeTypeOffset ?? Schema.GetOffset(0xD95F8A7A29E56679);
+            return ref _Handle.AsRef<byte>(_ShakeTypeOffset!.Value);
         }
     }
 

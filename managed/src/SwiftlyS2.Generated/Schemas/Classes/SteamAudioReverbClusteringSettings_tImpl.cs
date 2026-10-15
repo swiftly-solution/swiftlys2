@@ -16,34 +16,34 @@ internal partial class SteamAudioReverbClusteringSettings_tImpl : SchemaClass, S
 {
     public SteamAudioReverbClusteringSettings_tImpl(nint handle) : base(handle) { }
 
-    private static nint _EnableClusteringOffset = -1;
+    private static nint? _EnableClusteringOffset;
 
     public ref bool EnableClustering
     {
         get
         {
-            if (_EnableClusteringOffset == -1) _EnableClusteringOffset = Schema.GetOffset(0x8286B52F5229CD80);
-            return ref _Handle.AsRef<bool>(_EnableClusteringOffset);
+            _EnableClusteringOffset = _EnableClusteringOffset ?? Schema.GetOffset(0x8286B52F5229CD80);
+            return ref _Handle.AsRef<bool>(_EnableClusteringOffset!.Value);
         }
     }
-    private static nint _CubeMapResolutionOffset = -1;
+    private static nint? _CubeMapResolutionOffset;
 
     public ref int CubeMapResolution
     {
         get
         {
-            if (_CubeMapResolutionOffset == -1) _CubeMapResolutionOffset = Schema.GetOffset(0x8286B52FFB26A0A8);
-            return ref _Handle.AsRef<int>(_CubeMapResolutionOffset);
+            _CubeMapResolutionOffset = _CubeMapResolutionOffset ?? Schema.GetOffset(0x8286B52FFB26A0A8);
+            return ref _Handle.AsRef<int>(_CubeMapResolutionOffset!.Value);
         }
     }
-    private static nint _DepthThresholdOffset = -1;
+    private static nint? _DepthThresholdOffset;
 
     public ref float DepthThreshold
     {
         get
         {
-            if (_DepthThresholdOffset == -1) _DepthThresholdOffset = Schema.GetOffset(0x8286B52F0D845B0B);
-            return ref _Handle.AsRef<float>(_DepthThresholdOffset);
+            _DepthThresholdOffset = _DepthThresholdOffset ?? Schema.GetOffset(0x8286B52F0D845B0B);
+            return ref _Handle.AsRef<float>(_DepthThresholdOffset!.Value);
         }
     }
 

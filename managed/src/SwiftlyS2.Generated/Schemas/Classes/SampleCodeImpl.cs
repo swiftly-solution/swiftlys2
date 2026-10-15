@@ -16,16 +16,16 @@ internal partial class SampleCodeImpl : SchemaClass, SampleCode
 {
     public SampleCodeImpl(nint handle) : base(handle) { }
 
-    private static nint _SubCodeOffset = -1;
+    private static nint? _SubCodeOffset;
     private SchemaFixedArray<byte>? _SubCodeInstance;
 
     public ISchemaFixedArray<byte> SubCode
     {
         get
         {
-            if (_SubCodeOffset == -1) _SubCodeOffset = Schema.GetOffset(0x6387E3865AD6C244);
+            _SubCodeOffset = _SubCodeOffset ?? Schema.GetOffset(0x6387E3865AD6C244);
             var instance = _SubCodeInstance ??= new SchemaFixedArray<byte>(0, 0x6387E3865AD6C244, 8, 1, 1);
-            instance.DangerousSetHandle(_Handle + _SubCodeOffset);
+            instance.DangerousSetHandle(_Handle + _SubCodeOffset!.Value);
             return instance;
         }
     }

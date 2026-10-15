@@ -16,24 +16,24 @@ internal partial class CPulseCell_ApplyParent__CursorState_tImpl : SchemaClass, 
 {
     public CPulseCell_ApplyParent__CursorState_tImpl(nint handle) : base(handle) { }
 
-    private static nint _ParentEntityOffset = -1;
+    private static nint? _ParentEntityOffset;
 
     public ref CHandle<CBaseEntity> ParentEntity
     {
         get
         {
-            if (_ParentEntityOffset == -1) _ParentEntityOffset = Schema.GetOffset(0x2708EDCC3EFA0CF0);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_ParentEntityOffset);
+            _ParentEntityOffset = _ParentEntityOffset ?? Schema.GetOffset(0x2708EDCC3EFA0CF0);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_ParentEntityOffset!.Value);
         }
     }
-    private static nint _ChildEntityOffset = -1;
+    private static nint? _ChildEntityOffset;
 
     public ref CHandle<CBaseEntity> ChildEntity
     {
         get
         {
-            if (_ChildEntityOffset == -1) _ChildEntityOffset = Schema.GetOffset(0x2708EDCCE80F9900);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_ChildEntityOffset);
+            _ChildEntityOffset = _ChildEntityOffset ?? Schema.GetOffset(0x2708EDCCE80F9900);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_ChildEntityOffset!.Value);
         }
     }
 

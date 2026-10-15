@@ -16,24 +16,24 @@ internal partial class NmCompressionSettings_t__QuantizationRange_tImpl : Schema
 {
     public NmCompressionSettings_t__QuantizationRange_tImpl(nint handle) : base(handle) { }
 
-    private static nint _RangeStartOffset = -1;
+    private static nint? _RangeStartOffset;
 
     public ref float RangeStart
     {
         get
         {
-            if (_RangeStartOffset == -1) _RangeStartOffset = Schema.GetOffset(0xA662A641F7D21E68);
-            return ref _Handle.AsRef<float>(_RangeStartOffset);
+            _RangeStartOffset = _RangeStartOffset ?? Schema.GetOffset(0xA662A641F7D21E68);
+            return ref _Handle.AsRef<float>(_RangeStartOffset!.Value);
         }
     }
-    private static nint _RangeLengthOffset = -1;
+    private static nint? _RangeLengthOffset;
 
     public ref float RangeLength
     {
         get
         {
-            if (_RangeLengthOffset == -1) _RangeLengthOffset = Schema.GetOffset(0xA662A6418C3501A8);
-            return ref _Handle.AsRef<float>(_RangeLengthOffset);
+            _RangeLengthOffset = _RangeLengthOffset ?? Schema.GetOffset(0xA662A6418C3501A8);
+            return ref _Handle.AsRef<float>(_RangeLengthOffset!.Value);
         }
     }
 

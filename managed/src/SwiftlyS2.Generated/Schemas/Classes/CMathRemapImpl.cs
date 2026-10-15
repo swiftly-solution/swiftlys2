@@ -16,117 +16,117 @@ internal partial class CMathRemapImpl : CLogicalEntityImpl, CMathRemap
 {
     public CMathRemapImpl(nint handle) : base(handle) { }
 
-    private static nint _InMinOffset = -1;
+    private static nint? _InMinOffset;
 
     public ref float InMin
     {
         get
         {
-            if (_InMinOffset == -1) _InMinOffset = Schema.GetOffset(0xDE4BD86D7506C6C8);
-            return ref _Handle.AsRef<float>(_InMinOffset);
+            _InMinOffset = _InMinOffset ?? Schema.GetOffset(0xDE4BD86D7506C6C8);
+            return ref _Handle.AsRef<float>(_InMinOffset!.Value);
         }
     }
-    private static nint _InMaxOffset = -1;
+    private static nint? _InMaxOffset;
 
     public ref float InMax
     {
         get
         {
-            if (_InMaxOffset == -1) _InMaxOffset = Schema.GetOffset(0xDE4BD86D6B1BD1C2);
-            return ref _Handle.AsRef<float>(_InMaxOffset);
+            _InMaxOffset = _InMaxOffset ?? Schema.GetOffset(0xDE4BD86D6B1BD1C2);
+            return ref _Handle.AsRef<float>(_InMaxOffset!.Value);
         }
     }
-    private static nint _Out1Offset = -1;
+    private static nint? _Out1Offset;
 
     public ref float Out1
     {
         get
         {
-            if (_Out1Offset == -1) _Out1Offset = Schema.GetOffset(0xDE4BD86D536FFA50);
-            return ref _Handle.AsRef<float>(_Out1Offset);
+            _Out1Offset = _Out1Offset ?? Schema.GetOffset(0xDE4BD86D536FFA50);
+            return ref _Handle.AsRef<float>(_Out1Offset!.Value);
         }
     }
-    private static nint _Out2Offset = -1;
+    private static nint? _Out2Offset;
 
     public ref float Out2
     {
         get
         {
-            if (_Out2Offset == -1) _Out2Offset = Schema.GetOffset(0xDE4BD86D566FFF09);
-            return ref _Handle.AsRef<float>(_Out2Offset);
+            _Out2Offset = _Out2Offset ?? Schema.GetOffset(0xDE4BD86D566FFF09);
+            return ref _Handle.AsRef<float>(_Out2Offset!.Value);
         }
     }
-    private static nint _OldInValueOffset = -1;
+    private static nint? _OldInValueOffset;
 
     public ref float OldInValue
     {
         get
         {
-            if (_OldInValueOffset == -1) _OldInValueOffset = Schema.GetOffset(0xDE4BD86D36ED0B54);
-            return ref _Handle.AsRef<float>(_OldInValueOffset);
+            _OldInValueOffset = _OldInValueOffset ?? Schema.GetOffset(0xDE4BD86D36ED0B54);
+            return ref _Handle.AsRef<float>(_OldInValueOffset!.Value);
         }
     }
-    private static nint _EnabledOffset = -1;
+    private static nint? _EnabledOffset;
 
     public ref bool Enabled
     {
         get
         {
-            if (_EnabledOffset == -1) _EnabledOffset = Schema.GetOffset(0xDE4BD86D6154EB7E);
-            return ref _Handle.AsRef<bool>(_EnabledOffset);
+            _EnabledOffset = _EnabledOffset ?? Schema.GetOffset(0xDE4BD86D6154EB7E);
+            return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
         }
     }
-    private static nint _OutValueOffset = -1;
+    private static nint? _OutValueOffset;
     private SchemaUntypedField? _OutValueInstance;
 
     public SchemaUntypedField OutValue
     {
         get
         {
-            if (_OutValueOffset == -1) _OutValueOffset = Schema.GetOffset(0xDE4BD86DB5358CB4);
+            _OutValueOffset = _OutValueOffset ?? Schema.GetOffset(0xDE4BD86DB5358CB4);
             var instance = _OutValueInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OutValueOffset);
+            instance.DangerousSetHandle(_Handle + _OutValueOffset!.Value);
             return instance;
         }
     }
-    private static nint _OnRoseAboveMinOffset = -1;
+    private static nint? _OnRoseAboveMinOffset;
 
     public ref CEntityIOOutput OnRoseAboveMin
     {
         get
         {
-            if (_OnRoseAboveMinOffset == -1) _OnRoseAboveMinOffset = Schema.GetOffset(0xDE4BD86D814C5D50);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnRoseAboveMinOffset);
+            _OnRoseAboveMinOffset = _OnRoseAboveMinOffset ?? Schema.GetOffset(0xDE4BD86D814C5D50);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnRoseAboveMinOffset!.Value);
         }
     }
-    private static nint _OnRoseAboveMaxOffset = -1;
+    private static nint? _OnRoseAboveMaxOffset;
 
     public ref CEntityIOOutput OnRoseAboveMax
     {
         get
         {
-            if (_OnRoseAboveMaxOffset == -1) _OnRoseAboveMaxOffset = Schema.GetOffset(0xDE4BD86D7738C5DA);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnRoseAboveMaxOffset);
+            _OnRoseAboveMaxOffset = _OnRoseAboveMaxOffset ?? Schema.GetOffset(0xDE4BD86D7738C5DA);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnRoseAboveMaxOffset!.Value);
         }
     }
-    private static nint _OnFellBelowMinOffset = -1;
+    private static nint? _OnFellBelowMinOffset;
 
     public ref CEntityIOOutput OnFellBelowMin
     {
         get
         {
-            if (_OnFellBelowMinOffset == -1) _OnFellBelowMinOffset = Schema.GetOffset(0xDE4BD86DBF740886);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnFellBelowMinOffset);
+            _OnFellBelowMinOffset = _OnFellBelowMinOffset ?? Schema.GetOffset(0xDE4BD86DBF740886);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnFellBelowMinOffset!.Value);
         }
     }
-    private static nint _OnFellBelowMaxOffset = -1;
+    private static nint? _OnFellBelowMaxOffset;
 
     public ref CEntityIOOutput OnFellBelowMax
     {
         get
         {
-            if (_OnFellBelowMaxOffset == -1) _OnFellBelowMaxOffset = Schema.GetOffset(0xDE4BD86DD187AC94);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnFellBelowMaxOffset);
+            _OnFellBelowMaxOffset = _OnFellBelowMaxOffset ?? Schema.GetOffset(0xDE4BD86DD187AC94);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnFellBelowMaxOffset!.Value);
         }
     }
 

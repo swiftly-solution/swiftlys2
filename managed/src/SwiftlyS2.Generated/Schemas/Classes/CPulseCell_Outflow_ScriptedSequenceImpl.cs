@@ -16,105 +16,105 @@ internal partial class CPulseCell_Outflow_ScriptedSequenceImpl : CPulseCell_Base
 {
     public CPulseCell_Outflow_ScriptedSequenceImpl(nint handle) : base(handle) { }
 
-    private static nint _SyncGroupOffset = -1;
+    private static nint? _SyncGroupOffset;
 
     public string SyncGroup
     {
         get
         {
-            if (_SyncGroupOffset == -1) _SyncGroupOffset = Schema.GetOffset(0x462EA7DEF9E8183A);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_SyncGroupOffset));
+            _SyncGroupOffset = _SyncGroupOffset ?? Schema.GetOffset(0x462EA7DEF9E8183A);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_SyncGroupOffset!.Value));
         }
         set
         {
-            if (_SyncGroupOffset == -1) _SyncGroupOffset = Schema.GetOffset(0x462EA7DEF9E8183A);
-            Schema.SetCUtlString(_Handle, _SyncGroupOffset, value);
+            _SyncGroupOffset = _SyncGroupOffset ?? Schema.GetOffset(0x462EA7DEF9E8183A);
+            Schema.SetCUtlString(_Handle, _SyncGroupOffset!.Value, value);
         }
     }
-    private static nint _ExpectedNumSequencesInSyncGroupOffset = -1;
+    private static nint? _ExpectedNumSequencesInSyncGroupOffset;
 
     public ref int ExpectedNumSequencesInSyncGroup
     {
         get
         {
-            if (_ExpectedNumSequencesInSyncGroupOffset == -1) _ExpectedNumSequencesInSyncGroupOffset = Schema.GetOffset(0x462EA7DE0C6AAD7A);
-            return ref _Handle.AsRef<int>(_ExpectedNumSequencesInSyncGroupOffset);
+            _ExpectedNumSequencesInSyncGroupOffset = _ExpectedNumSequencesInSyncGroupOffset ?? Schema.GetOffset(0x462EA7DE0C6AAD7A);
+            return ref _Handle.AsRef<int>(_ExpectedNumSequencesInSyncGroupOffset!.Value);
         }
     }
-    private static nint _EnsureOnNavmeshOnFinishOffset = -1;
+    private static nint? _EnsureOnNavmeshOnFinishOffset;
 
     public ref bool EnsureOnNavmeshOnFinish
     {
         get
         {
-            if (_EnsureOnNavmeshOnFinishOffset == -1) _EnsureOnNavmeshOnFinishOffset = Schema.GetOffset(0x462EA7DE802BA0B0);
-            return ref _Handle.AsRef<bool>(_EnsureOnNavmeshOnFinishOffset);
+            _EnsureOnNavmeshOnFinishOffset = _EnsureOnNavmeshOnFinishOffset ?? Schema.GetOffset(0x462EA7DE802BA0B0);
+            return ref _Handle.AsRef<bool>(_EnsureOnNavmeshOnFinishOffset!.Value);
         }
     }
-    private static nint _DontTeleportAtEndOffset = -1;
+    private static nint? _DontTeleportAtEndOffset;
 
     public ref bool DontTeleportAtEnd
     {
         get
         {
-            if (_DontTeleportAtEndOffset == -1) _DontTeleportAtEndOffset = Schema.GetOffset(0x462EA7DE59E02641);
-            return ref _Handle.AsRef<bool>(_DontTeleportAtEndOffset);
+            _DontTeleportAtEndOffset = _DontTeleportAtEndOffset ?? Schema.GetOffset(0x462EA7DE59E02641);
+            return ref _Handle.AsRef<bool>(_DontTeleportAtEndOffset!.Value);
         }
     }
-    private static nint _DisallowInterruptsOffset = -1;
+    private static nint? _DisallowInterruptsOffset;
 
     public ref bool DisallowInterrupts
     {
         get
         {
-            if (_DisallowInterruptsOffset == -1) _DisallowInterruptsOffset = Schema.GetOffset(0x462EA7DE939D3840);
-            return ref _Handle.AsRef<bool>(_DisallowInterruptsOffset);
+            _DisallowInterruptsOffset = _DisallowInterruptsOffset ?? Schema.GetOffset(0x462EA7DE939D3840);
+            return ref _Handle.AsRef<bool>(_DisallowInterruptsOffset!.Value);
         }
     }
-    private static nint _ScriptedSequenceDataMainOffset = -1;
+    private static nint? _ScriptedSequenceDataMainOffset;
     private PulseScriptedSequenceData_tImpl? _ScriptedSequenceDataMainInstance;
 
     public PulseScriptedSequenceData_t ScriptedSequenceDataMain
     {
         get
         {
-            if (_ScriptedSequenceDataMainOffset == -1) _ScriptedSequenceDataMainOffset = Schema.GetOffset(0x462EA7DE03F2FF03);
+            _ScriptedSequenceDataMainOffset = _ScriptedSequenceDataMainOffset ?? Schema.GetOffset(0x462EA7DE03F2FF03);
             var instance = _ScriptedSequenceDataMainInstance ??= new PulseScriptedSequenceData_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _ScriptedSequenceDataMainOffset);
+            instance.DangerousSetHandle(_Handle + _ScriptedSequenceDataMainOffset!.Value);
             return instance;
         }
     }
-    private static nint _AdditionalActorsOffset = -1;
+    private static nint? _AdditionalActorsOffset;
 
     public ref CUtlVector<PulseScriptedSequenceData_t> AdditionalActors
     {
         get
         {
-            if (_AdditionalActorsOffset == -1) _AdditionalActorsOffset = Schema.GetOffset(0x462EA7DE8E5DB532);
-            return ref _Handle.AsRef<CUtlVector<PulseScriptedSequenceData_t>>(_AdditionalActorsOffset);
+            _AdditionalActorsOffset = _AdditionalActorsOffset ?? Schema.GetOffset(0x462EA7DE8E5DB532);
+            return ref _Handle.AsRef<CUtlVector<PulseScriptedSequenceData_t>>(_AdditionalActorsOffset!.Value);
         }
     }
-    private static nint _OnFinishedOffset = -1;
+    private static nint? _OnFinishedOffset;
     private CPulse_ResumePointImpl? _OnFinishedInstance;
 
     public CPulse_ResumePoint OnFinished
     {
         get
         {
-            if (_OnFinishedOffset == -1) _OnFinishedOffset = Schema.GetOffset(0x462EA7DE8D903E5E);
+            _OnFinishedOffset = _OnFinishedOffset ?? Schema.GetOffset(0x462EA7DE8D903E5E);
             var instance = _OnFinishedInstance ??= new CPulse_ResumePointImpl(0);
-            instance.DangerousSetHandle(_Handle + _OnFinishedOffset);
+            instance.DangerousSetHandle(_Handle + _OnFinishedOffset!.Value);
             return instance;
         }
     }
-    private static nint _TriggersOffset = -1;
+    private static nint? _TriggersOffset;
 
     public ref CUtlVector<CPulse_OutflowConnection> Triggers
     {
         get
         {
-            if (_TriggersOffset == -1) _TriggersOffset = Schema.GetOffset(0x462EA7DE6E7B12D0);
-            return ref _Handle.AsRef<CUtlVector<CPulse_OutflowConnection>>(_TriggersOffset);
+            _TriggersOffset = _TriggersOffset ?? Schema.GetOffset(0x462EA7DE6E7B12D0);
+            return ref _Handle.AsRef<CUtlVector<CPulse_OutflowConnection>>(_TriggersOffset!.Value);
         }
     }
 

@@ -16,16 +16,16 @@ internal partial class CAnimGraphDoc_NodeManagerImpl : SchemaClass, CAnimGraphDo
 {
     public CAnimGraphDoc_NodeManagerImpl(nint handle) : base(handle) { }
 
-    private static nint _NodesOffset = -1;
+    private static nint? _NodesOffset;
     private SchemaUntypedField? _NodesInstance;
 
     public SchemaUntypedField Nodes
     {
         get
         {
-            if (_NodesOffset == -1) _NodesOffset = Schema.GetOffset(0x925D90D5780F027A);
+            _NodesOffset = _NodesOffset ?? Schema.GetOffset(0x925D90D5780F027A);
             var instance = _NodesInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _NodesOffset);
+            instance.DangerousSetHandle(_Handle + _NodesOffset!.Value);
             return instance;
         }
     }

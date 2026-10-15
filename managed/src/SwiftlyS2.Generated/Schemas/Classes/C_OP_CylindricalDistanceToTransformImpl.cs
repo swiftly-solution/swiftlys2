@@ -16,135 +16,135 @@ internal partial class C_OP_CylindricalDistanceToTransformImpl : CParticleFuncti
 {
     public C_OP_CylindricalDistanceToTransformImpl(nint handle) : base(handle) { }
 
-    private static nint _FieldOutputOffset = -1;
+    private static nint? _FieldOutputOffset;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0x3B99017E5729606);
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x3B99017E5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
             return instance;
         }
     }
-    private static nint _InputMinOffset = -1;
+    private static nint? _InputMinOffset;
     private CPerParticleFloatInputImpl? _InputMinInstance;
 
     public CPerParticleFloatInput InputMin
     {
         get
         {
-            if (_InputMinOffset == -1) _InputMinOffset = Schema.GetOffset(0x3B99017E88A0D0F);
+            _InputMinOffset = _InputMinOffset ?? Schema.GetOffset(0x3B99017E88A0D0F);
             var instance = _InputMinInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _InputMinOffset);
+            instance.DangerousSetHandle(_Handle + _InputMinOffset!.Value);
             return instance;
         }
     }
-    private static nint _InputMaxOffset = -1;
+    private static nint? _InputMaxOffset;
     private CPerParticleFloatInputImpl? _InputMaxInstance;
 
     public CPerParticleFloatInput InputMax
     {
         get
         {
-            if (_InputMaxOffset == -1) _InputMaxOffset = Schema.GetOffset(0x3B99017D6766901);
+            _InputMaxOffset = _InputMaxOffset ?? Schema.GetOffset(0x3B99017D6766901);
             var instance = _InputMaxInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _InputMaxOffset);
+            instance.DangerousSetHandle(_Handle + _InputMaxOffset!.Value);
             return instance;
         }
     }
-    private static nint _OutputMinOffset = -1;
+    private static nint? _OutputMinOffset;
     private CPerParticleFloatInputImpl? _OutputMinInstance;
 
     public CPerParticleFloatInput OutputMin
     {
         get
         {
-            if (_OutputMinOffset == -1) _OutputMinOffset = Schema.GetOffset(0x3B990175F8D7716);
+            _OutputMinOffset = _OutputMinOffset ?? Schema.GetOffset(0x3B990175F8D7716);
             var instance = _OutputMinInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _OutputMinOffset);
+            instance.DangerousSetHandle(_Handle + _OutputMinOffset!.Value);
             return instance;
         }
     }
-    private static nint _OutputMaxOffset = -1;
+    private static nint? _OutputMaxOffset;
     private CPerParticleFloatInputImpl? _OutputMaxInstance;
 
     public CPerParticleFloatInput OutputMax
     {
         get
         {
-            if (_OutputMaxOffset == -1) _OutputMaxOffset = Schema.GetOffset(0x3B9901751A0E8C4);
+            _OutputMaxOffset = _OutputMaxOffset ?? Schema.GetOffset(0x3B9901751A0E8C4);
             var instance = _OutputMaxInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _OutputMaxOffset);
+            instance.DangerousSetHandle(_Handle + _OutputMaxOffset!.Value);
             return instance;
         }
     }
-    private static nint _TransformStartOffset = -1;
+    private static nint? _TransformStartOffset;
     private CParticleTransformInputImpl? _TransformStartInstance;
 
     public CParticleTransformInput TransformStart
     {
         get
         {
-            if (_TransformStartOffset == -1) _TransformStartOffset = Schema.GetOffset(0x3B99017D94FA7F9);
+            _TransformStartOffset = _TransformStartOffset ?? Schema.GetOffset(0x3B99017D94FA7F9);
             var instance = _TransformStartInstance ??= new CParticleTransformInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _TransformStartOffset);
+            instance.DangerousSetHandle(_Handle + _TransformStartOffset!.Value);
             return instance;
         }
     }
-    private static nint _TransformEndOffset = -1;
+    private static nint? _TransformEndOffset;
     private CParticleTransformInputImpl? _TransformEndInstance;
 
     public CParticleTransformInput TransformEnd
     {
         get
         {
-            if (_TransformEndOffset == -1) _TransformEndOffset = Schema.GetOffset(0x3B990170C3277C8);
+            _TransformEndOffset = _TransformEndOffset ?? Schema.GetOffset(0x3B990170C3277C8);
             var instance = _TransformEndInstance ??= new CParticleTransformInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _TransformEndOffset);
+            instance.DangerousSetHandle(_Handle + _TransformEndOffset!.Value);
             return instance;
         }
     }
-    private static nint _SetMethodOffset = -1;
+    private static nint? _SetMethodOffset;
 
     public ref ParticleSetMethod_t SetMethod
     {
         get
         {
-            if (_SetMethodOffset == -1) _SetMethodOffset = Schema.GetOffset(0x3B99017FB53C31E);
-            return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset);
+            _SetMethodOffset = _SetMethodOffset ?? Schema.GetOffset(0x3B99017FB53C31E);
+            return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset!.Value);
         }
     }
-    private static nint _ActiveRangeOffset = -1;
+    private static nint? _ActiveRangeOffset;
 
     public ref bool ActiveRange
     {
         get
         {
-            if (_ActiveRangeOffset == -1) _ActiveRangeOffset = Schema.GetOffset(0x3B990173FA53B84);
-            return ref _Handle.AsRef<bool>(_ActiveRangeOffset);
+            _ActiveRangeOffset = _ActiveRangeOffset ?? Schema.GetOffset(0x3B990173FA53B84);
+            return ref _Handle.AsRef<bool>(_ActiveRangeOffset!.Value);
         }
     }
-    private static nint _AdditiveOffset = -1;
+    private static nint? _AdditiveOffset;
 
     public ref bool Additive
     {
         get
         {
-            if (_AdditiveOffset == -1) _AdditiveOffset = Schema.GetOffset(0x3B990170FA86105);
-            return ref _Handle.AsRef<bool>(_AdditiveOffset);
+            _AdditiveOffset = _AdditiveOffset ?? Schema.GetOffset(0x3B990170FA86105);
+            return ref _Handle.AsRef<bool>(_AdditiveOffset!.Value);
         }
     }
-    private static nint _CapsuleOffset = -1;
+    private static nint? _CapsuleOffset;
 
     public ref bool Capsule
     {
         get
         {
-            if (_CapsuleOffset == -1) _CapsuleOffset = Schema.GetOffset(0x3B99017F8D8D1AC);
-            return ref _Handle.AsRef<bool>(_CapsuleOffset);
+            _CapsuleOffset = _CapsuleOffset ?? Schema.GetOffset(0x3B99017F8D8D1AC);
+            return ref _Handle.AsRef<bool>(_CapsuleOffset!.Value);
         }
     }
 

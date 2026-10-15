@@ -16,14 +16,14 @@ internal partial class CFootCycleMetricEvaluatorImpl : CMotionMetricEvaluatorImp
 {
     public CFootCycleMetricEvaluatorImpl(nint handle) : base(handle) { }
 
-    private static nint _FootIndicesOffset = -1;
+    private static nint? _FootIndicesOffset;
 
     public ref CUtlVector<int> FootIndices
     {
         get
         {
-            if (_FootIndicesOffset == -1) _FootIndicesOffset = Schema.GetOffset(0x1773C1814C840316);
-            return ref _Handle.AsRef<CUtlVector<int>>(_FootIndicesOffset);
+            _FootIndicesOffset = _FootIndicesOffset ?? Schema.GetOffset(0x1773C1814C840316);
+            return ref _Handle.AsRef<CUtlVector<int>>(_FootIndicesOffset!.Value);
         }
     }
 

@@ -16,193 +16,193 @@ internal partial class CAnimGraphDoc_TwoBoneIKNodeImpl : CAnimGraphDoc_NodeImpl,
 {
     public CAnimGraphDoc_TwoBoneIKNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _InputConnectionOffset = -1;
+    private static nint? _InputConnectionOffset;
     private CAnimGraphDoc_NodeConnectionImpl? _InputConnectionInstance;
 
     public CAnimGraphDoc_NodeConnection InputConnection
     {
         get
         {
-            if (_InputConnectionOffset == -1) _InputConnectionOffset = Schema.GetOffset(0xFC2D3A7E1F7849CB);
+            _InputConnectionOffset = _InputConnectionOffset ?? Schema.GetOffset(0xFC2D3A7E1F7849CB);
             var instance = _InputConnectionInstance ??= new CAnimGraphDoc_NodeConnectionImpl(0);
-            instance.DangerousSetHandle(_Handle + _InputConnectionOffset);
+            instance.DangerousSetHandle(_Handle + _InputConnectionOffset!.Value);
             return instance;
         }
     }
-    private static nint _IkChainNameOffset = -1;
+    private static nint? _IkChainNameOffset;
 
     public string IkChainName
     {
         get
         {
-            if (_IkChainNameOffset == -1) _IkChainNameOffset = Schema.GetOffset(0xFC2D3A7E50E152ED);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_IkChainNameOffset));
+            _IkChainNameOffset = _IkChainNameOffset ?? Schema.GetOffset(0xFC2D3A7E50E152ED);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_IkChainNameOffset!.Value));
         }
         set
         {
-            if (_IkChainNameOffset == -1) _IkChainNameOffset = Schema.GetOffset(0xFC2D3A7E50E152ED);
-            Schema.SetCUtlString(_Handle, _IkChainNameOffset, value);
+            _IkChainNameOffset = _IkChainNameOffset ?? Schema.GetOffset(0xFC2D3A7E50E152ED);
+            Schema.SetCUtlString(_Handle, _IkChainNameOffset!.Value, value);
         }
     }
-    private static nint _AutoDetectHingeAxisOffset = -1;
+    private static nint? _AutoDetectHingeAxisOffset;
 
     public ref bool AutoDetectHingeAxis
     {
         get
         {
-            if (_AutoDetectHingeAxisOffset == -1) _AutoDetectHingeAxisOffset = Schema.GetOffset(0xFC2D3A7E1393C829);
-            return ref _Handle.AsRef<bool>(_AutoDetectHingeAxisOffset);
+            _AutoDetectHingeAxisOffset = _AutoDetectHingeAxisOffset ?? Schema.GetOffset(0xFC2D3A7E1393C829);
+            return ref _Handle.AsRef<bool>(_AutoDetectHingeAxisOffset!.Value);
         }
     }
-    private static nint _EndEffectorTypeOffset = -1;
+    private static nint? _EndEffectorTypeOffset;
 
     public ref IkEndEffectorType EndEffectorType
     {
         get
         {
-            if (_EndEffectorTypeOffset == -1) _EndEffectorTypeOffset = Schema.GetOffset(0xFC2D3A7E687CB4CE);
-            return ref _Handle.AsRef<IkEndEffectorType>(_EndEffectorTypeOffset);
+            _EndEffectorTypeOffset = _EndEffectorTypeOffset ?? Schema.GetOffset(0xFC2D3A7E687CB4CE);
+            return ref _Handle.AsRef<IkEndEffectorType>(_EndEffectorTypeOffset!.Value);
         }
     }
-    private static nint _EndEffectorAttachmentNameOffset = -1;
+    private static nint? _EndEffectorAttachmentNameOffset;
 
     public string EndEffectorAttachmentName
     {
         get
         {
-            if (_EndEffectorAttachmentNameOffset == -1) _EndEffectorAttachmentNameOffset = Schema.GetOffset(0xFC2D3A7EFDA52480);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_EndEffectorAttachmentNameOffset));
+            _EndEffectorAttachmentNameOffset = _EndEffectorAttachmentNameOffset ?? Schema.GetOffset(0xFC2D3A7EFDA52480);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_EndEffectorAttachmentNameOffset!.Value));
         }
         set
         {
-            if (_EndEffectorAttachmentNameOffset == -1) _EndEffectorAttachmentNameOffset = Schema.GetOffset(0xFC2D3A7EFDA52480);
-            Schema.SetCUtlString(_Handle, _EndEffectorAttachmentNameOffset, value);
+            _EndEffectorAttachmentNameOffset = _EndEffectorAttachmentNameOffset ?? Schema.GetOffset(0xFC2D3A7EFDA52480);
+            Schema.SetCUtlString(_Handle, _EndEffectorAttachmentNameOffset!.Value, value);
         }
     }
-    private static nint _TargetTypeOffset = -1;
+    private static nint? _TargetTypeOffset;
 
     public ref IkTargetType TargetType
     {
         get
         {
-            if (_TargetTypeOffset == -1) _TargetTypeOffset = Schema.GetOffset(0xFC2D3A7E13C167A0);
-            return ref _Handle.AsRef<IkTargetType>(_TargetTypeOffset);
+            _TargetTypeOffset = _TargetTypeOffset ?? Schema.GetOffset(0xFC2D3A7E13C167A0);
+            return ref _Handle.AsRef<IkTargetType>(_TargetTypeOffset!.Value);
         }
     }
-    private static nint _AttachmentNameOffset = -1;
+    private static nint? _AttachmentNameOffset;
 
     public string AttachmentName
     {
         get
         {
-            if (_AttachmentNameOffset == -1) _AttachmentNameOffset = Schema.GetOffset(0xFC2D3A7E295DA9CB);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_AttachmentNameOffset));
+            _AttachmentNameOffset = _AttachmentNameOffset ?? Schema.GetOffset(0xFC2D3A7E295DA9CB);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_AttachmentNameOffset!.Value));
         }
         set
         {
-            if (_AttachmentNameOffset == -1) _AttachmentNameOffset = Schema.GetOffset(0xFC2D3A7E295DA9CB);
-            Schema.SetCUtlString(_Handle, _AttachmentNameOffset, value);
+            _AttachmentNameOffset = _AttachmentNameOffset ?? Schema.GetOffset(0xFC2D3A7E295DA9CB);
+            Schema.SetCUtlString(_Handle, _AttachmentNameOffset!.Value, value);
         }
     }
-    private static nint _TargetBoneNameOffset = -1;
+    private static nint? _TargetBoneNameOffset;
 
     public string TargetBoneName
     {
         get
         {
-            if (_TargetBoneNameOffset == -1) _TargetBoneNameOffset = Schema.GetOffset(0xFC2D3A7EAF85A2D5);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_TargetBoneNameOffset));
+            _TargetBoneNameOffset = _TargetBoneNameOffset ?? Schema.GetOffset(0xFC2D3A7EAF85A2D5);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_TargetBoneNameOffset!.Value));
         }
         set
         {
-            if (_TargetBoneNameOffset == -1) _TargetBoneNameOffset = Schema.GetOffset(0xFC2D3A7EAF85A2D5);
-            Schema.SetCUtlString(_Handle, _TargetBoneNameOffset, value);
+            _TargetBoneNameOffset = _TargetBoneNameOffset ?? Schema.GetOffset(0xFC2D3A7EAF85A2D5);
+            Schema.SetCUtlString(_Handle, _TargetBoneNameOffset!.Value, value);
         }
     }
-    private static nint _TargetParamNameOffset = -1;
+    private static nint? _TargetParamNameOffset;
 
     public string TargetParamName
     {
         get
         {
-            if (_TargetParamNameOffset == -1) _TargetParamNameOffset = Schema.GetOffset(0xFC2D3A7EBF8E8ED2);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_TargetParamNameOffset));
+            _TargetParamNameOffset = _TargetParamNameOffset ?? Schema.GetOffset(0xFC2D3A7EBF8E8ED2);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_TargetParamNameOffset!.Value));
         }
         set
         {
-            if (_TargetParamNameOffset == -1) _TargetParamNameOffset = Schema.GetOffset(0xFC2D3A7EBF8E8ED2);
-            Schema.SetCUtlString(_Handle, _TargetParamNameOffset, value);
+            _TargetParamNameOffset = _TargetParamNameOffset ?? Schema.GetOffset(0xFC2D3A7EBF8E8ED2);
+            Schema.SetCUtlString(_Handle, _TargetParamNameOffset!.Value, value);
         }
     }
-    private static nint _TargetParamOffset = -1;
+    private static nint? _TargetParamOffset;
     private AnimParamIDImpl? _TargetParamInstance;
 
     public AnimParamID TargetParam
     {
         get
         {
-            if (_TargetParamOffset == -1) _TargetParamOffset = Schema.GetOffset(0xFC2D3A7E012FF719);
+            _TargetParamOffset = _TargetParamOffset ?? Schema.GetOffset(0xFC2D3A7E012FF719);
             var instance = _TargetParamInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _TargetParamOffset);
+            instance.DangerousSetHandle(_Handle + _TargetParamOffset!.Value);
             return instance;
         }
     }
-    private static nint _MatchTargetOrientationOffset = -1;
+    private static nint? _MatchTargetOrientationOffset;
 
     public ref bool MatchTargetOrientation
     {
         get
         {
-            if (_MatchTargetOrientationOffset == -1) _MatchTargetOrientationOffset = Schema.GetOffset(0xFC2D3A7E42E0C3DB);
-            return ref _Handle.AsRef<bool>(_MatchTargetOrientationOffset);
+            _MatchTargetOrientationOffset = _MatchTargetOrientationOffset ?? Schema.GetOffset(0xFC2D3A7E42E0C3DB);
+            return ref _Handle.AsRef<bool>(_MatchTargetOrientationOffset!.Value);
         }
     }
-    private static nint _RotationParamNameOffset = -1;
+    private static nint? _RotationParamNameOffset;
 
     public string RotationParamName
     {
         get
         {
-            if (_RotationParamNameOffset == -1) _RotationParamNameOffset = Schema.GetOffset(0xFC2D3A7E6A009A07);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_RotationParamNameOffset));
+            _RotationParamNameOffset = _RotationParamNameOffset ?? Schema.GetOffset(0xFC2D3A7E6A009A07);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_RotationParamNameOffset!.Value));
         }
         set
         {
-            if (_RotationParamNameOffset == -1) _RotationParamNameOffset = Schema.GetOffset(0xFC2D3A7E6A009A07);
-            Schema.SetCUtlString(_Handle, _RotationParamNameOffset, value);
+            _RotationParamNameOffset = _RotationParamNameOffset ?? Schema.GetOffset(0xFC2D3A7E6A009A07);
+            Schema.SetCUtlString(_Handle, _RotationParamNameOffset!.Value, value);
         }
     }
-    private static nint _RotationParamOffset = -1;
+    private static nint? _RotationParamOffset;
     private AnimParamIDImpl? _RotationParamInstance;
 
     public AnimParamID RotationParam
     {
         get
         {
-            if (_RotationParamOffset == -1) _RotationParamOffset = Schema.GetOffset(0xFC2D3A7E489D30EC);
+            _RotationParamOffset = _RotationParamOffset ?? Schema.GetOffset(0xFC2D3A7E489D30EC);
             var instance = _RotationParamInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _RotationParamOffset);
+            instance.DangerousSetHandle(_Handle + _RotationParamOffset!.Value);
             return instance;
         }
     }
-    private static nint _ConstrainTwistOffset = -1;
+    private static nint? _ConstrainTwistOffset;
 
     public ref bool ConstrainTwist
     {
         get
         {
-            if (_ConstrainTwistOffset == -1) _ConstrainTwistOffset = Schema.GetOffset(0xFC2D3A7EDB3DB7ED);
-            return ref _Handle.AsRef<bool>(_ConstrainTwistOffset);
+            _ConstrainTwistOffset = _ConstrainTwistOffset ?? Schema.GetOffset(0xFC2D3A7EDB3DB7ED);
+            return ref _Handle.AsRef<bool>(_ConstrainTwistOffset!.Value);
         }
     }
-    private static nint _MaxTwistOffset = -1;
+    private static nint? _MaxTwistOffset;
 
     public ref float MaxTwist
     {
         get
         {
-            if (_MaxTwistOffset == -1) _MaxTwistOffset = Schema.GetOffset(0xFC2D3A7EA898EE6E);
-            return ref _Handle.AsRef<float>(_MaxTwistOffset);
+            _MaxTwistOffset = _MaxTwistOffset ?? Schema.GetOffset(0xFC2D3A7EA898EE6E);
+            return ref _Handle.AsRef<float>(_MaxTwistOffset!.Value);
         }
     }
 

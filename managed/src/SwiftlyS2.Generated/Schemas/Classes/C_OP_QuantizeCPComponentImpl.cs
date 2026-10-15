@@ -16,49 +16,49 @@ internal partial class C_OP_QuantizeCPComponentImpl : CParticleFunctionPreEmissi
 {
     public C_OP_QuantizeCPComponentImpl(nint handle) : base(handle) { }
 
-    private static nint _InputValueOffset = -1;
+    private static nint? _InputValueOffset;
     private CParticleCollectionFloatInputImpl? _InputValueInstance;
 
     public CParticleCollectionFloatInput InputValue
     {
         get
         {
-            if (_InputValueOffset == -1) _InputValueOffset = Schema.GetOffset(0xDE980890EEDF8362);
+            _InputValueOffset = _InputValueOffset ?? Schema.GetOffset(0xDE980890EEDF8362);
             var instance = _InputValueInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _InputValueOffset);
+            instance.DangerousSetHandle(_Handle + _InputValueOffset!.Value);
             return instance;
         }
     }
-    private static nint _CPOutputOffset = -1;
+    private static nint? _CPOutputOffset;
 
     public ref int CPOutput
     {
         get
         {
-            if (_CPOutputOffset == -1) _CPOutputOffset = Schema.GetOffset(0xDE9808902077C953);
-            return ref _Handle.AsRef<int>(_CPOutputOffset);
+            _CPOutputOffset = _CPOutputOffset ?? Schema.GetOffset(0xDE9808902077C953);
+            return ref _Handle.AsRef<int>(_CPOutputOffset!.Value);
         }
     }
-    private static nint _OutVectorFieldOffset = -1;
+    private static nint? _OutVectorFieldOffset;
 
     public ref int OutVectorField
     {
         get
         {
-            if (_OutVectorFieldOffset == -1) _OutVectorFieldOffset = Schema.GetOffset(0xDE980890F9041E74);
-            return ref _Handle.AsRef<int>(_OutVectorFieldOffset);
+            _OutVectorFieldOffset = _OutVectorFieldOffset ?? Schema.GetOffset(0xDE980890F9041E74);
+            return ref _Handle.AsRef<int>(_OutVectorFieldOffset!.Value);
         }
     }
-    private static nint _QuantizeValueOffset = -1;
+    private static nint? _QuantizeValueOffset;
     private CParticleCollectionFloatInputImpl? _QuantizeValueInstance;
 
     public CParticleCollectionFloatInput QuantizeValue
     {
         get
         {
-            if (_QuantizeValueOffset == -1) _QuantizeValueOffset = Schema.GetOffset(0xDE98089065E1A349);
+            _QuantizeValueOffset = _QuantizeValueOffset ?? Schema.GetOffset(0xDE98089065E1A349);
             var instance = _QuantizeValueInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _QuantizeValueOffset);
+            instance.DangerousSetHandle(_Handle + _QuantizeValueOffset!.Value);
             return instance;
         }
     }

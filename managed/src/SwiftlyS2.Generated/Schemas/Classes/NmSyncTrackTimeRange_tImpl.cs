@@ -16,29 +16,29 @@ internal partial class NmSyncTrackTimeRange_tImpl : SchemaClass, NmSyncTrackTime
 {
     public NmSyncTrackTimeRange_tImpl(nint handle) : base(handle) { }
 
-    private static nint _StartTimeOffset = -1;
+    private static nint? _StartTimeOffset;
     private NmSyncTrackTime_tImpl? _StartTimeInstance;
 
     public NmSyncTrackTime_t StartTime
     {
         get
         {
-            if (_StartTimeOffset == -1) _StartTimeOffset = Schema.GetOffset(0xAECBDADF6330E7EE);
+            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0xAECBDADF6330E7EE);
             var instance = _StartTimeInstance ??= new NmSyncTrackTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _StartTimeOffset);
+            instance.DangerousSetHandle(_Handle + _StartTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _EndTimeOffset = -1;
+    private static nint? _EndTimeOffset;
     private NmSyncTrackTime_tImpl? _EndTimeInstance;
 
     public NmSyncTrackTime_t EndTime
     {
         get
         {
-            if (_EndTimeOffset == -1) _EndTimeOffset = Schema.GetOffset(0xAECBDADFEAD1A94B);
+            _EndTimeOffset = _EndTimeOffset ?? Schema.GetOffset(0xAECBDADFEAD1A94B);
             var instance = _EndTimeInstance ??= new NmSyncTrackTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _EndTimeOffset);
+            instance.DangerousSetHandle(_Handle + _EndTimeOffset!.Value);
             return instance;
         }
     }

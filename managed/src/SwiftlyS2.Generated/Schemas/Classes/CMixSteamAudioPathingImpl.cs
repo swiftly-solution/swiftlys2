@@ -16,47 +16,47 @@ internal partial class CMixSteamAudioPathingImpl : CMixPropertyBaseImpl, CMixSte
 {
     public CMixSteamAudioPathingImpl(nint handle) : base(handle) { }
 
-    private static nint _PathingMixLevelOffset = -1;
+    private static nint? _PathingMixLevelOffset;
 
     public ref float PathingMixLevel
     {
         get
         {
-            if (_PathingMixLevelOffset == -1) _PathingMixLevelOffset = Schema.GetOffset(0xAA7DDBDB2209CCF4);
-            return ref _Handle.AsRef<float>(_PathingMixLevelOffset);
+            _PathingMixLevelOffset = _PathingMixLevelOffset ?? Schema.GetOffset(0xAA7DDBDB2209CCF4);
+            return ref _Handle.AsRef<float>(_PathingMixLevelOffset!.Value);
         }
     }
-    private static nint _PathingEQOffset = -1;
+    private static nint? _PathingEQOffset;
     private SchemaFixedArray<float>? _PathingEQInstance;
 
     public ISchemaFixedArray<float> PathingEQ
     {
         get
         {
-            if (_PathingEQOffset == -1) _PathingEQOffset = Schema.GetOffset(0xAA7DDBDBE08EB9A0);
+            _PathingEQOffset = _PathingEQOffset ?? Schema.GetOffset(0xAA7DDBDBE08EB9A0);
             var instance = _PathingEQInstance ??= new SchemaFixedArray<float>(0, 0xAA7DDBDBE08EB9A0, 3, 4, 4);
-            instance.DangerousSetHandle(_Handle + _PathingEQOffset);
+            instance.DangerousSetHandle(_Handle + _PathingEQOffset!.Value);
             return instance;
         }
     }
-    private static nint _PathingCoeffsOffset = -1;
+    private static nint? _PathingCoeffsOffset;
 
     public ref CUtlVector<float> PathingCoeffs
     {
         get
         {
-            if (_PathingCoeffsOffset == -1) _PathingCoeffsOffset = Schema.GetOffset(0xAA7DDBDB76224064);
-            return ref _Handle.AsRef<CUtlVector<float>>(_PathingCoeffsOffset);
+            _PathingCoeffsOffset = _PathingCoeffsOffset ?? Schema.GetOffset(0xAA7DDBDB76224064);
+            return ref _Handle.AsRef<CUtlVector<float>>(_PathingCoeffsOffset!.Value);
         }
     }
-    private static nint _PathingEQ1Offset = -1;
+    private static nint? _PathingEQ1Offset;
 
     public ref CUtlVector<float> PathingEQ1
     {
         get
         {
-            if (_PathingEQ1Offset == -1) _PathingEQ1Offset = Schema.GetOffset(0xAA7DDBDB70049A34);
-            return ref _Handle.AsRef<CUtlVector<float>>(_PathingEQ1Offset);
+            _PathingEQ1Offset = _PathingEQ1Offset ?? Schema.GetOffset(0xAA7DDBDB70049A34);
+            return ref _Handle.AsRef<CUtlVector<float>>(_PathingEQ1Offset!.Value);
         }
     }
 

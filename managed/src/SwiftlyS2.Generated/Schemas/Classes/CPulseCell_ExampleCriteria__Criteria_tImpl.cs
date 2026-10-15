@@ -16,34 +16,34 @@ internal partial class CPulseCell_ExampleCriteria__Criteria_tImpl : SchemaClass,
 {
     public CPulseCell_ExampleCriteria__Criteria_tImpl(nint handle) : base(handle) { }
 
-    private static nint _FloatValue1Offset = -1;
+    private static nint? _FloatValue1Offset;
 
     public ref float FloatValue1
     {
         get
         {
-            if (_FloatValue1Offset == -1) _FloatValue1Offset = Schema.GetOffset(0x9C86EC19138B644B);
-            return ref _Handle.AsRef<float>(_FloatValue1Offset);
+            _FloatValue1Offset = _FloatValue1Offset ?? Schema.GetOffset(0x9C86EC19138B644B);
+            return ref _Handle.AsRef<float>(_FloatValue1Offset!.Value);
         }
     }
-    private static nint _FloatValue2Offset = -1;
+    private static nint? _FloatValue2Offset;
 
     public ref float FloatValue2
     {
         get
         {
-            if (_FloatValue2Offset == -1) _FloatValue2Offset = Schema.GetOffset(0x9C86EC19148B65DE);
-            return ref _Handle.AsRef<float>(_FloatValue2Offset);
+            _FloatValue2Offset = _FloatValue2Offset ?? Schema.GetOffset(0x9C86EC19148B65DE);
+            return ref _Handle.AsRef<float>(_FloatValue2Offset!.Value);
         }
     }
-    private static nint _MyBoolOffset = -1;
+    private static nint? _MyBoolOffset;
 
     public ref bool MyBool
     {
         get
         {
-            if (_MyBoolOffset == -1) _MyBoolOffset = Schema.GetOffset(0x9C86EC19BAFBA8C7);
-            return ref _Handle.AsRef<bool>(_MyBoolOffset);
+            _MyBoolOffset = _MyBoolOffset ?? Schema.GetOffset(0x9C86EC19BAFBA8C7);
+            return ref _Handle.AsRef<bool>(_MyBoolOffset!.Value);
         }
     }
 

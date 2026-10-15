@@ -16,34 +16,34 @@ internal partial class CVectorQuantizerImpl : SchemaClass, CVectorQuantizer
 {
     public CVectorQuantizerImpl(nint handle) : base(handle) { }
 
-    private static nint _CentroidVectorsOffset = -1;
+    private static nint? _CentroidVectorsOffset;
 
     public ref CUtlVector<float> CentroidVectors
     {
         get
         {
-            if (_CentroidVectorsOffset == -1) _CentroidVectorsOffset = Schema.GetOffset(0x9E79F13089538103);
-            return ref _Handle.AsRef<CUtlVector<float>>(_CentroidVectorsOffset);
+            _CentroidVectorsOffset = _CentroidVectorsOffset ?? Schema.GetOffset(0x9E79F13089538103);
+            return ref _Handle.AsRef<CUtlVector<float>>(_CentroidVectorsOffset!.Value);
         }
     }
-    private static nint _CentroidsOffset = -1;
+    private static nint? _CentroidsOffset;
 
     public ref int Centroids
     {
         get
         {
-            if (_CentroidsOffset == -1) _CentroidsOffset = Schema.GetOffset(0x9E79F13064667B2E);
-            return ref _Handle.AsRef<int>(_CentroidsOffset);
+            _CentroidsOffset = _CentroidsOffset ?? Schema.GetOffset(0x9E79F13064667B2E);
+            return ref _Handle.AsRef<int>(_CentroidsOffset!.Value);
         }
     }
-    private static nint _DimensionsOffset = -1;
+    private static nint? _DimensionsOffset;
 
     public ref int Dimensions
     {
         get
         {
-            if (_DimensionsOffset == -1) _DimensionsOffset = Schema.GetOffset(0x9E79F1302D8795AC);
-            return ref _Handle.AsRef<int>(_DimensionsOffset);
+            _DimensionsOffset = _DimensionsOffset ?? Schema.GetOffset(0x9E79F1302D8795AC);
+            return ref _Handle.AsRef<int>(_DimensionsOffset!.Value);
         }
     }
 

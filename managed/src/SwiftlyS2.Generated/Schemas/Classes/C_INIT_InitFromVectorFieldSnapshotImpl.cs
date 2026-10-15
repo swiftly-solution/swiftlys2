@@ -16,56 +16,56 @@ internal partial class C_INIT_InitFromVectorFieldSnapshotImpl : CParticleFunctio
 {
     public C_INIT_InitFromVectorFieldSnapshotImpl(nint handle) : base(handle) { }
 
-    private static nint _ControlPointNumberOffset = -1;
+    private static nint? _ControlPointNumberOffset;
 
     public ref int ControlPointNumber
     {
         get
         {
-            if (_ControlPointNumberOffset == -1) _ControlPointNumberOffset = Schema.GetOffset(0x1F4AA8713F31A6BD);
-            return ref _Handle.AsRef<int>(_ControlPointNumberOffset);
+            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0x1F4AA8713F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
         }
     }
-    private static nint _LocalSpaceCPOffset = -1;
+    private static nint? _LocalSpaceCPOffset;
 
     public ref int LocalSpaceCP
     {
         get
         {
-            if (_LocalSpaceCPOffset == -1) _LocalSpaceCPOffset = Schema.GetOffset(0x1F4AA871C8E9CB31);
-            return ref _Handle.AsRef<int>(_LocalSpaceCPOffset);
+            _LocalSpaceCPOffset = _LocalSpaceCPOffset ?? Schema.GetOffset(0x1F4AA871C8E9CB31);
+            return ref _Handle.AsRef<int>(_LocalSpaceCPOffset!.Value);
         }
     }
-    private static nint _WeightUpdateCPOffset = -1;
+    private static nint? _WeightUpdateCPOffset;
 
     public ref int WeightUpdateCP
     {
         get
         {
-            if (_WeightUpdateCPOffset == -1) _WeightUpdateCPOffset = Schema.GetOffset(0x1F4AA8712CCDE17F);
-            return ref _Handle.AsRef<int>(_WeightUpdateCPOffset);
+            _WeightUpdateCPOffset = _WeightUpdateCPOffset ?? Schema.GetOffset(0x1F4AA8712CCDE17F);
+            return ref _Handle.AsRef<int>(_WeightUpdateCPOffset!.Value);
         }
     }
-    private static nint _UseVerticalVelocityOffset = -1;
+    private static nint? _UseVerticalVelocityOffset;
 
     public ref bool UseVerticalVelocity
     {
         get
         {
-            if (_UseVerticalVelocityOffset == -1) _UseVerticalVelocityOffset = Schema.GetOffset(0x1F4AA8713C99C6FD);
-            return ref _Handle.AsRef<bool>(_UseVerticalVelocityOffset);
+            _UseVerticalVelocityOffset = _UseVerticalVelocityOffset ?? Schema.GetOffset(0x1F4AA8713C99C6FD);
+            return ref _Handle.AsRef<bool>(_UseVerticalVelocityOffset!.Value);
         }
     }
-    private static nint _ScaleOffset = -1;
+    private static nint? _ScaleOffset;
     private CPerParticleVecInputImpl? _ScaleInstance;
 
     public CPerParticleVecInput Scale
     {
         get
         {
-            if (_ScaleOffset == -1) _ScaleOffset = Schema.GetOffset(0x1F4AA8715F596B51);
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x1F4AA8715F596B51);
             var instance = _ScaleInstance ??= new CPerParticleVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _ScaleOffset);
+            instance.DangerousSetHandle(_Handle + _ScaleOffset!.Value);
             return instance;
         }
     }

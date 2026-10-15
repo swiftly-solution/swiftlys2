@@ -16,109 +16,109 @@ internal partial class C_OP_DriveCPFromGlobalSoundFloatImpl : CParticleFunctionP
 {
     public C_OP_DriveCPFromGlobalSoundFloatImpl(nint handle) : base(handle) { }
 
-    private static nint _OutputControlPointOffset = -1;
+    private static nint? _OutputControlPointOffset;
 
     public ref int OutputControlPoint
     {
         get
         {
-            if (_OutputControlPointOffset == -1) _OutputControlPointOffset = Schema.GetOffset(0x1E3FE630266B0FD9);
-            return ref _Handle.AsRef<int>(_OutputControlPointOffset);
+            _OutputControlPointOffset = _OutputControlPointOffset ?? Schema.GetOffset(0x1E3FE630266B0FD9);
+            return ref _Handle.AsRef<int>(_OutputControlPointOffset!.Value);
         }
     }
-    private static nint _OutputFieldOffset = -1;
+    private static nint? _OutputFieldOffset;
 
     public ref int OutputField
     {
         get
         {
-            if (_OutputFieldOffset == -1) _OutputFieldOffset = Schema.GetOffset(0x1E3FE630324F6F74);
-            return ref _Handle.AsRef<int>(_OutputFieldOffset);
+            _OutputFieldOffset = _OutputFieldOffset ?? Schema.GetOffset(0x1E3FE630324F6F74);
+            return ref _Handle.AsRef<int>(_OutputFieldOffset!.Value);
         }
     }
-    private static nint _InputMinOffset = -1;
+    private static nint? _InputMinOffset;
 
     public ref float InputMin
     {
         get
         {
-            if (_InputMinOffset == -1) _InputMinOffset = Schema.GetOffset(0x1E3FE630E88A0D0F);
-            return ref _Handle.AsRef<float>(_InputMinOffset);
+            _InputMinOffset = _InputMinOffset ?? Schema.GetOffset(0x1E3FE630E88A0D0F);
+            return ref _Handle.AsRef<float>(_InputMinOffset!.Value);
         }
     }
-    private static nint _InputMaxOffset = -1;
+    private static nint? _InputMaxOffset;
 
     public ref float InputMax
     {
         get
         {
-            if (_InputMaxOffset == -1) _InputMaxOffset = Schema.GetOffset(0x1E3FE630D6766901);
-            return ref _Handle.AsRef<float>(_InputMaxOffset);
+            _InputMaxOffset = _InputMaxOffset ?? Schema.GetOffset(0x1E3FE630D6766901);
+            return ref _Handle.AsRef<float>(_InputMaxOffset!.Value);
         }
     }
-    private static nint _OutputMinOffset = -1;
+    private static nint? _OutputMinOffset;
 
     public ref float OutputMin
     {
         get
         {
-            if (_OutputMinOffset == -1) _OutputMinOffset = Schema.GetOffset(0x1E3FE6305F8D7716);
-            return ref _Handle.AsRef<float>(_OutputMinOffset);
+            _OutputMinOffset = _OutputMinOffset ?? Schema.GetOffset(0x1E3FE6305F8D7716);
+            return ref _Handle.AsRef<float>(_OutputMinOffset!.Value);
         }
     }
-    private static nint _OutputMaxOffset = -1;
+    private static nint? _OutputMaxOffset;
 
     public ref float OutputMax
     {
         get
         {
-            if (_OutputMaxOffset == -1) _OutputMaxOffset = Schema.GetOffset(0x1E3FE63051A0E8C4);
-            return ref _Handle.AsRef<float>(_OutputMaxOffset);
+            _OutputMaxOffset = _OutputMaxOffset ?? Schema.GetOffset(0x1E3FE63051A0E8C4);
+            return ref _Handle.AsRef<float>(_OutputMaxOffset!.Value);
         }
     }
-    private static nint _StackNameOffset = -1;
+    private static nint? _StackNameOffset;
 
     public string StackName
     {
         get
         {
-            if (_StackNameOffset == -1) _StackNameOffset = Schema.GetOffset(0x1E3FE6308C81C05C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StackNameOffset));
+            _StackNameOffset = _StackNameOffset ?? Schema.GetOffset(0x1E3FE6308C81C05C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StackNameOffset!.Value));
         }
         set
         {
-            if (_StackNameOffset == -1) _StackNameOffset = Schema.GetOffset(0x1E3FE6308C81C05C);
-            Schema.SetCUtlString(_Handle, _StackNameOffset, value);
+            _StackNameOffset = _StackNameOffset ?? Schema.GetOffset(0x1E3FE6308C81C05C);
+            Schema.SetCUtlString(_Handle, _StackNameOffset!.Value, value);
         }
     }
-    private static nint _OperatorNameOffset = -1;
+    private static nint? _OperatorNameOffset;
 
     public string OperatorName
     {
         get
         {
-            if (_OperatorNameOffset == -1) _OperatorNameOffset = Schema.GetOffset(0x1E3FE63091CAF75E);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_OperatorNameOffset));
+            _OperatorNameOffset = _OperatorNameOffset ?? Schema.GetOffset(0x1E3FE63091CAF75E);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_OperatorNameOffset!.Value));
         }
         set
         {
-            if (_OperatorNameOffset == -1) _OperatorNameOffset = Schema.GetOffset(0x1E3FE63091CAF75E);
-            Schema.SetCUtlString(_Handle, _OperatorNameOffset, value);
+            _OperatorNameOffset = _OperatorNameOffset ?? Schema.GetOffset(0x1E3FE63091CAF75E);
+            Schema.SetCUtlString(_Handle, _OperatorNameOffset!.Value, value);
         }
     }
-    private static nint _FieldNameOffset = -1;
+    private static nint? _FieldNameOffset;
 
     public string FieldName
     {
         get
         {
-            if (_FieldNameOffset == -1) _FieldNameOffset = Schema.GetOffset(0x1E3FE6300A25F4C4);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_FieldNameOffset));
+            _FieldNameOffset = _FieldNameOffset ?? Schema.GetOffset(0x1E3FE6300A25F4C4);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_FieldNameOffset!.Value));
         }
         set
         {
-            if (_FieldNameOffset == -1) _FieldNameOffset = Schema.GetOffset(0x1E3FE6300A25F4C4);
-            Schema.SetCUtlString(_Handle, _FieldNameOffset, value);
+            _FieldNameOffset = _FieldNameOffset ?? Schema.GetOffset(0x1E3FE6300A25F4C4);
+            Schema.SetCUtlString(_Handle, _FieldNameOffset!.Value, value);
         }
     }
 

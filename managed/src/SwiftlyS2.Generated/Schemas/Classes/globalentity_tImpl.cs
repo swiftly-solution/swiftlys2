@@ -16,50 +16,50 @@ internal partial class globalentity_tImpl : SchemaClass, globalentity_t
 {
     public globalentity_tImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
     private SchemaUntypedField? _NameInstance;
 
     public SchemaUntypedField Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x8C8300068D39BDE6);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x8C8300068D39BDE6);
             var instance = _NameInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _NameOffset);
+            instance.DangerousSetHandle(_Handle + _NameOffset!.Value);
             return instance;
         }
     }
-    private static nint _LevelNameOffset = -1;
+    private static nint? _LevelNameOffset;
     private SchemaUntypedField? _LevelNameInstance;
 
     public SchemaUntypedField LevelName
     {
         get
         {
-            if (_LevelNameOffset == -1) _LevelNameOffset = Schema.GetOffset(0x8C83000606F640FE);
+            _LevelNameOffset = _LevelNameOffset ?? Schema.GetOffset(0x8C83000606F640FE);
             var instance = _LevelNameInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _LevelNameOffset);
+            instance.DangerousSetHandle(_Handle + _LevelNameOffset!.Value);
             return instance;
         }
     }
-    private static nint _StateOffset = -1;
+    private static nint? _StateOffset;
 
     public ref GLOBALESTATE State
     {
         get
         {
-            if (_StateOffset == -1) _StateOffset = Schema.GetOffset(0x8C830006783132F6);
-            return ref _Handle.AsRef<GLOBALESTATE>(_StateOffset);
+            _StateOffset = _StateOffset ?? Schema.GetOffset(0x8C830006783132F6);
+            return ref _Handle.AsRef<GLOBALESTATE>(_StateOffset!.Value);
         }
     }
-    private static nint _CounterOffset = -1;
+    private static nint? _CounterOffset;
 
     public ref int Counter
     {
         get
         {
-            if (_CounterOffset == -1) _CounterOffset = Schema.GetOffset(0x8C8300069CACDE23);
-            return ref _Handle.AsRef<int>(_CounterOffset);
+            _CounterOffset = _CounterOffset ?? Schema.GetOffset(0x8C8300069CACDE23);
+            return ref _Handle.AsRef<int>(_CounterOffset!.Value);
         }
     }
 

@@ -16,195 +16,195 @@ internal partial class C_OP_MovementPlaceOnGroundImpl : CParticleFunctionOperato
 {
     public C_OP_MovementPlaceOnGroundImpl(nint handle) : base(handle) { }
 
-    private static nint _OffsetOffset = -1;
+    private static nint? _OffsetOffset;
     private CPerParticleFloatInputImpl? _OffsetInstance;
 
     public CPerParticleFloatInput Offset
     {
         get
         {
-            if (_OffsetOffset == -1) _OffsetOffset = Schema.GetOffset(0x53323DE97F14BA34);
+            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0x53323DE97F14BA34);
             var instance = _OffsetInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _OffsetOffset);
+            instance.DangerousSetHandle(_Handle + _OffsetOffset!.Value);
             return instance;
         }
     }
-    private static nint _MaxTraceLengthOffset = -1;
+    private static nint? _MaxTraceLengthOffset;
 
     public ref float MaxTraceLength
     {
         get
         {
-            if (_MaxTraceLengthOffset == -1) _MaxTraceLengthOffset = Schema.GetOffset(0x53323DE9543C3798);
-            return ref _Handle.AsRef<float>(_MaxTraceLengthOffset);
+            _MaxTraceLengthOffset = _MaxTraceLengthOffset ?? Schema.GetOffset(0x53323DE9543C3798);
+            return ref _Handle.AsRef<float>(_MaxTraceLengthOffset!.Value);
         }
     }
-    private static nint _ToleranceOffset = -1;
+    private static nint? _ToleranceOffset;
 
     public ref float Tolerance
     {
         get
         {
-            if (_ToleranceOffset == -1) _ToleranceOffset = Schema.GetOffset(0x53323DE98C29728E);
-            return ref _Handle.AsRef<float>(_ToleranceOffset);
+            _ToleranceOffset = _ToleranceOffset ?? Schema.GetOffset(0x53323DE98C29728E);
+            return ref _Handle.AsRef<float>(_ToleranceOffset!.Value);
         }
     }
-    private static nint _TraceDirOffset = -1;
+    private static nint? _TraceDirOffset;
     private CPerParticleVecInputImpl? _TraceDirInstance;
 
     public CPerParticleVecInput TraceDir
     {
         get
         {
-            if (_TraceDirOffset == -1) _TraceDirOffset = Schema.GetOffset(0x53323DE9B3F09745);
+            _TraceDirOffset = _TraceDirOffset ?? Schema.GetOffset(0x53323DE9B3F09745);
             var instance = _TraceDirInstance ??= new CPerParticleVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _TraceDirOffset);
+            instance.DangerousSetHandle(_Handle + _TraceDirOffset!.Value);
             return instance;
         }
     }
-    private static nint _TraceOffsetOffset = -1;
+    private static nint? _TraceOffsetOffset;
 
     public ref float TraceOffset
     {
         get
         {
-            if (_TraceOffsetOffset == -1) _TraceOffsetOffset = Schema.GetOffset(0x53323DE97EF6C397);
-            return ref _Handle.AsRef<float>(_TraceOffsetOffset);
+            _TraceOffsetOffset = _TraceOffsetOffset ?? Schema.GetOffset(0x53323DE97EF6C397);
+            return ref _Handle.AsRef<float>(_TraceOffsetOffset!.Value);
         }
     }
-    private static nint _LerpRateOffset = -1;
+    private static nint? _LerpRateOffset;
 
     public ref float LerpRate
     {
         get
         {
-            if (_LerpRateOffset == -1) _LerpRateOffset = Schema.GetOffset(0x53323DE938B06C64);
-            return ref _Handle.AsRef<float>(_LerpRateOffset);
+            _LerpRateOffset = _LerpRateOffset ?? Schema.GetOffset(0x53323DE938B06C64);
+            return ref _Handle.AsRef<float>(_LerpRateOffset!.Value);
         }
     }
-    private static nint _CollisionGroupNameOffset = -1;
+    private static nint? _CollisionGroupNameOffset;
 
     public string CollisionGroupName
     {
         get
         {
-            if (_CollisionGroupNameOffset == -1) _CollisionGroupNameOffset = Schema.GetOffset(0x53323DE9D58A3195);
-            return Schema.GetString(_Handle + _CollisionGroupNameOffset);
+            _CollisionGroupNameOffset = _CollisionGroupNameOffset ?? Schema.GetOffset(0x53323DE9D58A3195);
+            return Schema.GetString(_Handle + _CollisionGroupNameOffset!.Value);
         }
         set
         {
-            if (_CollisionGroupNameOffset == -1) _CollisionGroupNameOffset = Schema.GetOffset(0x53323DE9D58A3195);
-            Schema.SetFixedString(_Handle, _CollisionGroupNameOffset, value, 128);
+            _CollisionGroupNameOffset = _CollisionGroupNameOffset ?? Schema.GetOffset(0x53323DE9D58A3195);
+            Schema.SetFixedString(_Handle, _CollisionGroupNameOffset!.Value, value, 128);
         }
     }
-    private static nint _TraceSetOffset = -1;
+    private static nint? _TraceSetOffset;
 
     public ref ParticleTraceSet_t TraceSet
     {
         get
         {
-            if (_TraceSetOffset == -1) _TraceSetOffset = Schema.GetOffset(0x53323DE9BD26C5B2);
-            return ref _Handle.AsRef<ParticleTraceSet_t>(_TraceSetOffset);
+            _TraceSetOffset = _TraceSetOffset ?? Schema.GetOffset(0x53323DE9BD26C5B2);
+            return ref _Handle.AsRef<ParticleTraceSet_t>(_TraceSetOffset!.Value);
         }
     }
-    private static nint _RefCP1Offset = -1;
+    private static nint? _RefCP1Offset;
 
     public ref int RefCP1
     {
         get
         {
-            if (_RefCP1Offset == -1) _RefCP1Offset = Schema.GetOffset(0x53323DE97D2F03D4);
-            return ref _Handle.AsRef<int>(_RefCP1Offset);
+            _RefCP1Offset = _RefCP1Offset ?? Schema.GetOffset(0x53323DE97D2F03D4);
+            return ref _Handle.AsRef<int>(_RefCP1Offset!.Value);
         }
     }
-    private static nint _RefCP2Offset = -1;
+    private static nint? _RefCP2Offset;
 
     public ref int RefCP2
     {
         get
         {
-            if (_RefCP2Offset == -1) _RefCP2Offset = Schema.GetOffset(0x53323DE9802F088D);
-            return ref _Handle.AsRef<int>(_RefCP2Offset);
+            _RefCP2Offset = _RefCP2Offset ?? Schema.GetOffset(0x53323DE9802F088D);
+            return ref _Handle.AsRef<int>(_RefCP2Offset!.Value);
         }
     }
-    private static nint _LerpCPOffset = -1;
+    private static nint? _LerpCPOffset;
 
     public ref int LerpCP
     {
         get
         {
-            if (_LerpCPOffset == -1) _LerpCPOffset = Schema.GetOffset(0x53323DE9D251F4EF);
-            return ref _Handle.AsRef<int>(_LerpCPOffset);
+            _LerpCPOffset = _LerpCPOffset ?? Schema.GetOffset(0x53323DE9D251F4EF);
+            return ref _Handle.AsRef<int>(_LerpCPOffset!.Value);
         }
     }
-    private static nint _TraceMissBehaviorOffset = -1;
+    private static nint? _TraceMissBehaviorOffset;
 
     public ref ParticleTraceMissBehavior_t TraceMissBehavior
     {
         get
         {
-            if (_TraceMissBehaviorOffset == -1) _TraceMissBehaviorOffset = Schema.GetOffset(0x53323DE91F2C7BCC);
-            return ref _Handle.AsRef<ParticleTraceMissBehavior_t>(_TraceMissBehaviorOffset);
+            _TraceMissBehaviorOffset = _TraceMissBehaviorOffset ?? Schema.GetOffset(0x53323DE91F2C7BCC);
+            return ref _Handle.AsRef<ParticleTraceMissBehavior_t>(_TraceMissBehaviorOffset!.Value);
         }
     }
-    private static nint _IncludeShotHullOffset = -1;
+    private static nint? _IncludeShotHullOffset;
 
     public ref bool IncludeShotHull
     {
         get
         {
-            if (_IncludeShotHullOffset == -1) _IncludeShotHullOffset = Schema.GetOffset(0x53323DE9C9640390);
-            return ref _Handle.AsRef<bool>(_IncludeShotHullOffset);
+            _IncludeShotHullOffset = _IncludeShotHullOffset ?? Schema.GetOffset(0x53323DE9C9640390);
+            return ref _Handle.AsRef<bool>(_IncludeShotHullOffset!.Value);
         }
     }
-    private static nint _IncludeWaterOffset = -1;
+    private static nint? _IncludeWaterOffset;
 
     public ref bool IncludeWater
     {
         get
         {
-            if (_IncludeWaterOffset == -1) _IncludeWaterOffset = Schema.GetOffset(0x53323DE9EB8D4646);
-            return ref _Handle.AsRef<bool>(_IncludeWaterOffset);
+            _IncludeWaterOffset = _IncludeWaterOffset ?? Schema.GetOffset(0x53323DE9EB8D4646);
+            return ref _Handle.AsRef<bool>(_IncludeWaterOffset!.Value);
         }
     }
-    private static nint _SetNormalOffset = -1;
+    private static nint? _SetNormalOffset;
 
     public ref bool SetNormal
     {
         get
         {
-            if (_SetNormalOffset == -1) _SetNormalOffset = Schema.GetOffset(0x53323DE9542722AC);
-            return ref _Handle.AsRef<bool>(_SetNormalOffset);
+            _SetNormalOffset = _SetNormalOffset ?? Schema.GetOffset(0x53323DE9542722AC);
+            return ref _Handle.AsRef<bool>(_SetNormalOffset!.Value);
         }
     }
-    private static nint _ScaleOffsetOffset = -1;
+    private static nint? _ScaleOffsetOffset;
 
     public ref bool ScaleOffset
     {
         get
         {
-            if (_ScaleOffsetOffset == -1) _ScaleOffsetOffset = Schema.GetOffset(0x53323DE9AB39558E);
-            return ref _Handle.AsRef<bool>(_ScaleOffsetOffset);
+            _ScaleOffsetOffset = _ScaleOffsetOffset ?? Schema.GetOffset(0x53323DE9AB39558E);
+            return ref _Handle.AsRef<bool>(_ScaleOffsetOffset!.Value);
         }
     }
-    private static nint _PreserveOffsetCPOffset = -1;
+    private static nint? _PreserveOffsetCPOffset;
 
     public ref int PreserveOffsetCP
     {
         get
         {
-            if (_PreserveOffsetCPOffset == -1) _PreserveOffsetCPOffset = Schema.GetOffset(0x53323DE958AC51C1);
-            return ref _Handle.AsRef<int>(_PreserveOffsetCPOffset);
+            _PreserveOffsetCPOffset = _PreserveOffsetCPOffset ?? Schema.GetOffset(0x53323DE958AC51C1);
+            return ref _Handle.AsRef<int>(_PreserveOffsetCPOffset!.Value);
         }
     }
-    private static nint _IgnoreCPOffset = -1;
+    private static nint? _IgnoreCPOffset;
 
     public ref int IgnoreCP
     {
         get
         {
-            if (_IgnoreCPOffset == -1) _IgnoreCPOffset = Schema.GetOffset(0x53323DE9F0DDC7AC);
-            return ref _Handle.AsRef<int>(_IgnoreCPOffset);
+            _IgnoreCPOffset = _IgnoreCPOffset ?? Schema.GetOffset(0x53323DE9F0DDC7AC);
+            return ref _Handle.AsRef<int>(_IgnoreCPOffset!.Value);
         }
     }
 

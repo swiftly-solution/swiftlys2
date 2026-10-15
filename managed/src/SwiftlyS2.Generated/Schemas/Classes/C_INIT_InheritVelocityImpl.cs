@@ -16,24 +16,24 @@ internal partial class C_INIT_InheritVelocityImpl : CParticleFunctionInitializer
 {
     public C_INIT_InheritVelocityImpl(nint handle) : base(handle) { }
 
-    private static nint _ControlPointNumberOffset = -1;
+    private static nint? _ControlPointNumberOffset;
 
     public ref int ControlPointNumber
     {
         get
         {
-            if (_ControlPointNumberOffset == -1) _ControlPointNumberOffset = Schema.GetOffset(0x227ECF463F31A6BD);
-            return ref _Handle.AsRef<int>(_ControlPointNumberOffset);
+            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0x227ECF463F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
         }
     }
-    private static nint _VelocityScaleOffset = -1;
+    private static nint? _VelocityScaleOffset;
 
     public ref float VelocityScale
     {
         get
         {
-            if (_VelocityScaleOffset == -1) _VelocityScaleOffset = Schema.GetOffset(0x227ECF46E161DDAA);
-            return ref _Handle.AsRef<float>(_VelocityScaleOffset);
+            _VelocityScaleOffset = _VelocityScaleOffset ?? Schema.GetOffset(0x227ECF46E161DDAA);
+            return ref _Handle.AsRef<float>(_VelocityScaleOffset!.Value);
         }
     }
 

@@ -16,26 +16,26 @@ internal partial class C_OP_FadeOutSimpleImpl : CParticleFunctionOperatorImpl, C
 {
     public C_OP_FadeOutSimpleImpl(nint handle) : base(handle) { }
 
-    private static nint _FadeOutTimeOffset = -1;
+    private static nint? _FadeOutTimeOffset;
 
     public ref float FadeOutTime
     {
         get
         {
-            if (_FadeOutTimeOffset == -1) _FadeOutTimeOffset = Schema.GetOffset(0xD439658FE86D2FC2);
-            return ref _Handle.AsRef<float>(_FadeOutTimeOffset);
+            _FadeOutTimeOffset = _FadeOutTimeOffset ?? Schema.GetOffset(0xD439658FE86D2FC2);
+            return ref _Handle.AsRef<float>(_FadeOutTimeOffset!.Value);
         }
     }
-    private static nint _FieldOutputOffset = -1;
+    private static nint? _FieldOutputOffset;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0xD439658FE5729606);
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0xD439658FE5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
             return instance;
         }
     }

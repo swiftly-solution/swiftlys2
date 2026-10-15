@@ -16,44 +16,44 @@ internal partial class CNmGraphDocStateNode__TimedStateEvent_tImpl : SchemaClass
 {
     public CNmGraphDocStateNode__TimedStateEvent_tImpl(nint handle) : base(handle) { }
 
-    private static nint _IDOffset = -1;
+    private static nint? _IDOffset;
 
     public ref CGlobalSymbol ID
     {
         get
         {
-            if (_IDOffset == -1) _IDOffset = Schema.GetOffset(0x4825D24995066900);
-            return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset);
+            _IDOffset = _IDOffset ?? Schema.GetOffset(0x4825D24995066900);
+            return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset!.Value);
         }
     }
-    private static nint _TypeOffset = -1;
+    private static nint? _TypeOffset;
 
     public ref CNmGraphDocStateNode__TimedStateEventType_t Type
     {
         get
         {
-            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0x4825D2490F04B4ED);
-            return ref _Handle.AsRef<CNmGraphDocStateNode__TimedStateEventType_t>(_TypeOffset);
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x4825D2490F04B4ED);
+            return ref _Handle.AsRef<CNmGraphDocStateNode__TimedStateEventType_t>(_TypeOffset!.Value);
         }
     }
-    private static nint _ComparisonOperatorOffset = -1;
+    private static nint? _ComparisonOperatorOffset;
 
     public ref CNmStateNode__TimedEvent_t__Comparison_t ComparisonOperator
     {
         get
         {
-            if (_ComparisonOperatorOffset == -1) _ComparisonOperatorOffset = Schema.GetOffset(0x4825D24923E70A14);
-            return ref _Handle.AsRef<CNmStateNode__TimedEvent_t__Comparison_t>(_ComparisonOperatorOffset);
+            _ComparisonOperatorOffset = _ComparisonOperatorOffset ?? Schema.GetOffset(0x4825D24923E70A14);
+            return ref _Handle.AsRef<CNmStateNode__TimedEvent_t__Comparison_t>(_ComparisonOperatorOffset!.Value);
         }
     }
-    private static nint _TimeValueSecondsOffset = -1;
+    private static nint? _TimeValueSecondsOffset;
 
     public ref float TimeValueSeconds
     {
         get
         {
-            if (_TimeValueSecondsOffset == -1) _TimeValueSecondsOffset = Schema.GetOffset(0x4825D2493B175F1C);
-            return ref _Handle.AsRef<float>(_TimeValueSecondsOffset);
+            _TimeValueSecondsOffset = _TimeValueSecondsOffset ?? Schema.GetOffset(0x4825D2493B175F1C);
+            return ref _Handle.AsRef<float>(_TimeValueSecondsOffset!.Value);
         }
     }
 

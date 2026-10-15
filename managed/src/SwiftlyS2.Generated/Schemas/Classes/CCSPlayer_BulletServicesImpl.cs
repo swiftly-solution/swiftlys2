@@ -16,14 +16,14 @@ internal partial class CCSPlayer_BulletServicesImpl : CPlayerPawnComponentImpl, 
 {
     public CCSPlayer_BulletServicesImpl(nint handle) : base(handle) { }
 
-    private static nint _TotalHitsOnServerOffset = -1;
+    private static nint? _TotalHitsOnServerOffset;
 
     public ref int TotalHitsOnServer
     {
         get
         {
-            if (_TotalHitsOnServerOffset == -1) _TotalHitsOnServerOffset = Schema.GetOffset(0x39B0E99E8006CF29);
-            return ref _Handle.AsRef<int>(_TotalHitsOnServerOffset);
+            _TotalHitsOnServerOffset = _TotalHitsOnServerOffset ?? Schema.GetOffset(0x39B0E99E8006CF29);
+            return ref _Handle.AsRef<int>(_TotalHitsOnServerOffset!.Value);
         }
     }
 

@@ -16,54 +16,54 @@ internal partial class SteamAudioCustomDataDimensionsSettings_tImpl : SchemaClas
 {
     public SteamAudioCustomDataDimensionsSettings_tImpl(nint handle) : base(handle) { }
 
-    private static nint _AmbisonicsOrderOutsideFieldOffset = -1;
+    private static nint? _AmbisonicsOrderOutsideFieldOffset;
 
     public ref int AmbisonicsOrderOutsideField
     {
         get
         {
-            if (_AmbisonicsOrderOutsideFieldOffset == -1) _AmbisonicsOrderOutsideFieldOffset = Schema.GetOffset(0xC2269447AD601D18);
-            return ref _Handle.AsRef<int>(_AmbisonicsOrderOutsideFieldOffset);
+            _AmbisonicsOrderOutsideFieldOffset = _AmbisonicsOrderOutsideFieldOffset ?? Schema.GetOffset(0xC2269447AD601D18);
+            return ref _Handle.AsRef<int>(_AmbisonicsOrderOutsideFieldOffset!.Value);
         }
     }
-    private static nint _AmbisonicsOrderInsideSizeFieldOffset = -1;
+    private static nint? _AmbisonicsOrderInsideSizeFieldOffset;
 
     public ref int AmbisonicsOrderInsideSizeField
     {
         get
         {
-            if (_AmbisonicsOrderInsideSizeFieldOffset == -1) _AmbisonicsOrderInsideSizeFieldOffset = Schema.GetOffset(0xC22694471EC95F98);
-            return ref _Handle.AsRef<int>(_AmbisonicsOrderInsideSizeFieldOffset);
+            _AmbisonicsOrderInsideSizeFieldOffset = _AmbisonicsOrderInsideSizeFieldOffset ?? Schema.GetOffset(0xC22694471EC95F98);
+            return ref _Handle.AsRef<int>(_AmbisonicsOrderInsideSizeFieldOffset!.Value);
         }
     }
-    private static nint _OutsideThresholdOffset = -1;
+    private static nint? _OutsideThresholdOffset;
 
     public ref float OutsideThreshold
     {
         get
         {
-            if (_OutsideThresholdOffset == -1) _OutsideThresholdOffset = Schema.GetOffset(0xC2269447ED152BA5);
-            return ref _Handle.AsRef<float>(_OutsideThresholdOffset);
+            _OutsideThresholdOffset = _OutsideThresholdOffset ?? Schema.GetOffset(0xC2269447ED152BA5);
+            return ref _Handle.AsRef<float>(_OutsideThresholdOffset!.Value);
         }
     }
-    private static nint _SizeThresholdOffset = -1;
+    private static nint? _SizeThresholdOffset;
 
     public ref float SizeThreshold
     {
         get
         {
-            if (_SizeThresholdOffset == -1) _SizeThresholdOffset = Schema.GetOffset(0xC226944731EDE561);
-            return ref _Handle.AsRef<float>(_SizeThresholdOffset);
+            _SizeThresholdOffset = _SizeThresholdOffset ?? Schema.GetOffset(0xC226944731EDE561);
+            return ref _Handle.AsRef<float>(_SizeThresholdOffset!.Value);
         }
     }
-    private static nint _InsideThresholdOffset = -1;
+    private static nint? _InsideThresholdOffset;
 
     public ref float InsideThreshold
     {
         get
         {
-            if (_InsideThresholdOffset == -1) _InsideThresholdOffset = Schema.GetOffset(0xC226944778D01A9A);
-            return ref _Handle.AsRef<float>(_InsideThresholdOffset);
+            _InsideThresholdOffset = _InsideThresholdOffset ?? Schema.GetOffset(0xC226944778D01A9A);
+            return ref _Handle.AsRef<float>(_InsideThresholdOffset!.Value);
         }
     }
 

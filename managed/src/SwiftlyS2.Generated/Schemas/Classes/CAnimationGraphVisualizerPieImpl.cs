@@ -16,44 +16,44 @@ internal partial class CAnimationGraphVisualizerPieImpl : CAnimationGraphVisuali
 {
     public CAnimationGraphVisualizerPieImpl(nint handle) : base(handle) { }
 
-    private static nint _WsCenterOffset = -1;
+    private static nint? _WsCenterOffset;
 
     public ref Vector WsCenter
     {
         get
         {
-            if (_WsCenterOffset == -1) _WsCenterOffset = Schema.GetOffset(0x152844C290A3905E);
-            return ref _Handle.AsRef<Vector>(_WsCenterOffset);
+            _WsCenterOffset = _WsCenterOffset ?? Schema.GetOffset(0x152844C290A3905E);
+            return ref _Handle.AsRef<Vector>(_WsCenterOffset!.Value);
         }
     }
-    private static nint _WsStartOffset = -1;
+    private static nint? _WsStartOffset;
 
     public ref Vector WsStart
     {
         get
         {
-            if (_WsStartOffset == -1) _WsStartOffset = Schema.GetOffset(0x152844C2EFF42149);
-            return ref _Handle.AsRef<Vector>(_WsStartOffset);
+            _WsStartOffset = _WsStartOffset ?? Schema.GetOffset(0x152844C2EFF42149);
+            return ref _Handle.AsRef<Vector>(_WsStartOffset!.Value);
         }
     }
-    private static nint _WsEndOffset = -1;
+    private static nint? _WsEndOffset;
 
     public ref Vector WsEnd
     {
         get
         {
-            if (_WsEndOffset == -1) _WsEndOffset = Schema.GetOffset(0x152844C280C1EC98);
-            return ref _Handle.AsRef<Vector>(_WsEndOffset);
+            _WsEndOffset = _WsEndOffset ?? Schema.GetOffset(0x152844C280C1EC98);
+            return ref _Handle.AsRef<Vector>(_WsEndOffset!.Value);
         }
     }
-    private static nint _ColorOffset = -1;
+    private static nint? _ColorOffset;
 
     public ref Color Color
     {
         get
         {
-            if (_ColorOffset == -1) _ColorOffset = Schema.GetOffset(0x152844C2D7D017D8);
-            return ref _Handle.AsRef<Color>(_ColorOffset);
+            _ColorOffset = _ColorOffset ?? Schema.GetOffset(0x152844C2D7D017D8);
+            return ref _Handle.AsRef<Color>(_ColorOffset!.Value);
         }
     }
 

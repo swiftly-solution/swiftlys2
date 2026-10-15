@@ -16,50 +16,50 @@ internal partial class CPulse_BlackboardReferenceImpl : SchemaClass, CPulse_Blac
 {
     public CPulse_BlackboardReferenceImpl(nint handle) : base(handle) { }
 
-    private static nint _BlackboardResourceOffset = -1;
+    private static nint? _BlackboardResourceOffset;
 
     public ref CStrongHandle<InfoForResourceTypeIPulseGraphDef> BlackboardResource
     {
         get
         {
-            if (_BlackboardResourceOffset == -1) _BlackboardResourceOffset = Schema.GetOffset(0xEF83970A45E704DE);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIPulseGraphDef>>(_BlackboardResourceOffset);
+            _BlackboardResourceOffset = _BlackboardResourceOffset ?? Schema.GetOffset(0xEF83970A45E704DE);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIPulseGraphDef>>(_BlackboardResourceOffset!.Value);
         }
     }
-    private static nint _BlackboardResource1Offset = -1;
+    private static nint? _BlackboardResource1Offset;
     private SchemaUntypedField? _BlackboardResource1Instance;
 
     public SchemaUntypedField BlackboardResource1
     {
         get
         {
-            if (_BlackboardResource1Offset == -1) _BlackboardResource1Offset = Schema.GetOffset(0xEF83970A83127470);
+            _BlackboardResource1Offset = _BlackboardResource1Offset ?? Schema.GetOffset(0xEF83970A83127470);
             var instance = _BlackboardResource1Instance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _BlackboardResource1Offset);
+            instance.DangerousSetHandle(_Handle + _BlackboardResource1Offset!.Value);
             return instance;
         }
     }
-    private static nint _NodeIDOffset = -1;
+    private static nint? _NodeIDOffset;
     private PulseDocNodeID_tImpl? _NodeIDInstance;
 
     public PulseDocNodeID_t NodeID
     {
         get
         {
-            if (_NodeIDOffset == -1) _NodeIDOffset = Schema.GetOffset(0xEF83970A0FD6755C);
+            _NodeIDOffset = _NodeIDOffset ?? Schema.GetOffset(0xEF83970A0FD6755C);
             var instance = _NodeIDInstance ??= new PulseDocNodeID_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _NodeIDOffset);
+            instance.DangerousSetHandle(_Handle + _NodeIDOffset!.Value);
             return instance;
         }
     }
-    private static nint _NodeNameOffset = -1;
+    private static nint? _NodeNameOffset;
 
     public ref CGlobalSymbol NodeName
     {
         get
         {
-            if (_NodeNameOffset == -1) _NodeNameOffset = Schema.GetOffset(0xEF83970A3FB4DAAE);
-            return ref _Handle.AsRef<CGlobalSymbol>(_NodeNameOffset);
+            _NodeNameOffset = _NodeNameOffset ?? Schema.GetOffset(0xEF83970A3FB4DAAE);
+            return ref _Handle.AsRef<CGlobalSymbol>(_NodeNameOffset!.Value);
         }
     }
 

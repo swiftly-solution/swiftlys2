@@ -16,24 +16,24 @@ internal partial class AnimationDecodeDebugDump_tImpl : SchemaClass, AnimationDe
 {
     public AnimationDecodeDebugDump_tImpl(nint handle) : base(handle) { }
 
-    private static nint _ProcessingTypeOffset = -1;
+    private static nint? _ProcessingTypeOffset;
 
     public ref AnimationProcessingType_t ProcessingType
     {
         get
         {
-            if (_ProcessingTypeOffset == -1) _ProcessingTypeOffset = Schema.GetOffset(0xA584797F5F059FB6);
-            return ref _Handle.AsRef<AnimationProcessingType_t>(_ProcessingTypeOffset);
+            _ProcessingTypeOffset = _ProcessingTypeOffset ?? Schema.GetOffset(0xA584797F5F059FB6);
+            return ref _Handle.AsRef<AnimationProcessingType_t>(_ProcessingTypeOffset!.Value);
         }
     }
-    private static nint _ElemsOffset = -1;
+    private static nint? _ElemsOffset;
 
     public ref CUtlVector<AnimationDecodeDebugDumpElement_t> Elems
     {
         get
         {
-            if (_ElemsOffset == -1) _ElemsOffset = Schema.GetOffset(0xA584797F3F2FC92B);
-            return ref _Handle.AsRef<CUtlVector<AnimationDecodeDebugDumpElement_t>>(_ElemsOffset);
+            _ElemsOffset = _ElemsOffset ?? Schema.GetOffset(0xA584797F3F2FC92B);
+            return ref _Handle.AsRef<CUtlVector<AnimationDecodeDebugDumpElement_t>>(_ElemsOffset!.Value);
         }
     }
 

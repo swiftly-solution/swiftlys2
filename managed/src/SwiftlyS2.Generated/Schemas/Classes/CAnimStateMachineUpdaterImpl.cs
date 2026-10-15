@@ -16,34 +16,34 @@ internal partial class CAnimStateMachineUpdaterImpl : SchemaClass, CAnimStateMac
 {
     public CAnimStateMachineUpdaterImpl(nint handle) : base(handle) { }
 
-    private static nint _StatesOffset = -1;
+    private static nint? _StatesOffset;
 
     public ref CUtlVector<CStateUpdateData> States
     {
         get
         {
-            if (_StatesOffset == -1) _StatesOffset = Schema.GetOffset(0xD25DFB766F284CFF);
-            return ref _Handle.AsRef<CUtlVector<CStateUpdateData>>(_StatesOffset);
+            _StatesOffset = _StatesOffset ?? Schema.GetOffset(0xD25DFB766F284CFF);
+            return ref _Handle.AsRef<CUtlVector<CStateUpdateData>>(_StatesOffset!.Value);
         }
     }
-    private static nint _TransitionsOffset = -1;
+    private static nint? _TransitionsOffset;
 
     public ref CUtlVector<CTransitionUpdateData> Transitions
     {
         get
         {
-            if (_TransitionsOffset == -1) _TransitionsOffset = Schema.GetOffset(0xD25DFB76AD108163);
-            return ref _Handle.AsRef<CUtlVector<CTransitionUpdateData>>(_TransitionsOffset);
+            _TransitionsOffset = _TransitionsOffset ?? Schema.GetOffset(0xD25DFB76AD108163);
+            return ref _Handle.AsRef<CUtlVector<CTransitionUpdateData>>(_TransitionsOffset!.Value);
         }
     }
-    private static nint _StartStateIndexOffset = -1;
+    private static nint? _StartStateIndexOffset;
 
     public ref int StartStateIndex
     {
         get
         {
-            if (_StartStateIndexOffset == -1) _StartStateIndexOffset = Schema.GetOffset(0xD25DFB762881C68C);
-            return ref _Handle.AsRef<int>(_StartStateIndexOffset);
+            _StartStateIndexOffset = _StartStateIndexOffset ?? Schema.GetOffset(0xD25DFB762881C68C);
+            return ref _Handle.AsRef<int>(_StartStateIndexOffset!.Value);
         }
     }
 

@@ -16,73 +16,73 @@ internal partial class C_BaseCombatCharacterImpl : CBaseAnimGraphImpl, C_BaseCom
 {
     public C_BaseCombatCharacterImpl(nint handle) : base(handle) { }
 
-    private static nint _MyWearablesOffset = -1;
+    private static nint? _MyWearablesOffset;
     private SchemaUntypedField? _MyWearablesInstance;
 
     public SchemaUntypedField MyWearables
     {
         get
         {
-            if (_MyWearablesOffset == -1) _MyWearablesOffset = Schema.GetOffset(0x7B5B6EB1000B8B43);
+            _MyWearablesOffset = _MyWearablesOffset ?? Schema.GetOffset(0x7B5B6EB1000B8B43);
             var instance = _MyWearablesInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _MyWearablesOffset);
+            instance.DangerousSetHandle(_Handle + _MyWearablesOffset!.Value);
             return instance;
         }
     }
-    private static nint _LeftFootAttachmentOffset = -1;
+    private static nint? _LeftFootAttachmentOffset;
     private AttachmentHandle_tImpl? _LeftFootAttachmentInstance;
 
     public AttachmentHandle_t LeftFootAttachment
     {
         get
         {
-            if (_LeftFootAttachmentOffset == -1) _LeftFootAttachmentOffset = Schema.GetOffset(0x7B5B6EB1C0C9DAE1);
+            _LeftFootAttachmentOffset = _LeftFootAttachmentOffset ?? Schema.GetOffset(0x7B5B6EB1C0C9DAE1);
             var instance = _LeftFootAttachmentInstance ??= new AttachmentHandle_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _LeftFootAttachmentOffset);
+            instance.DangerousSetHandle(_Handle + _LeftFootAttachmentOffset!.Value);
             return instance;
         }
     }
-    private static nint _RightFootAttachmentOffset = -1;
+    private static nint? _RightFootAttachmentOffset;
     private AttachmentHandle_tImpl? _RightFootAttachmentInstance;
 
     public AttachmentHandle_t RightFootAttachment
     {
         get
         {
-            if (_RightFootAttachmentOffset == -1) _RightFootAttachmentOffset = Schema.GetOffset(0x7B5B6EB1F201153C);
+            _RightFootAttachmentOffset = _RightFootAttachmentOffset ?? Schema.GetOffset(0x7B5B6EB1F201153C);
             var instance = _RightFootAttachmentInstance ??= new AttachmentHandle_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _RightFootAttachmentOffset);
+            instance.DangerousSetHandle(_Handle + _RightFootAttachmentOffset!.Value);
             return instance;
         }
     }
-    private static nint _WaterWakeModeOffset = -1;
+    private static nint? _WaterWakeModeOffset;
 
     public ref C_BaseCombatCharacter__WaterWakeMode_t WaterWakeMode
     {
         get
         {
-            if (_WaterWakeModeOffset == -1) _WaterWakeModeOffset = Schema.GetOffset(0x7B5B6EB10C4B93EF);
-            return ref _Handle.AsRef<C_BaseCombatCharacter__WaterWakeMode_t>(_WaterWakeModeOffset);
+            _WaterWakeModeOffset = _WaterWakeModeOffset ?? Schema.GetOffset(0x7B5B6EB10C4B93EF);
+            return ref _Handle.AsRef<C_BaseCombatCharacter__WaterWakeMode_t>(_WaterWakeModeOffset!.Value);
         }
     }
-    private static nint _WaterWorldZOffset = -1;
+    private static nint? _WaterWorldZOffset;
 
     public ref float WaterWorldZ
     {
         get
         {
-            if (_WaterWorldZOffset == -1) _WaterWorldZOffset = Schema.GetOffset(0x7B5B6EB106F46C58);
-            return ref _Handle.AsRef<float>(_WaterWorldZOffset);
+            _WaterWorldZOffset = _WaterWorldZOffset ?? Schema.GetOffset(0x7B5B6EB106F46C58);
+            return ref _Handle.AsRef<float>(_WaterWorldZOffset!.Value);
         }
     }
-    private static nint _WaterNextTraceTimeOffset = -1;
+    private static nint? _WaterNextTraceTimeOffset;
 
     public ref float WaterNextTraceTime
     {
         get
         {
-            if (_WaterNextTraceTimeOffset == -1) _WaterNextTraceTimeOffset = Schema.GetOffset(0x7B5B6EB1FFE53AB1);
-            return ref _Handle.AsRef<float>(_WaterNextTraceTimeOffset);
+            _WaterNextTraceTimeOffset = _WaterNextTraceTimeOffset ?? Schema.GetOffset(0x7B5B6EB1FFE53AB1);
+            return ref _Handle.AsRef<float>(_WaterNextTraceTimeOffset!.Value);
         }
     }
 

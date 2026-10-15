@@ -16,29 +16,29 @@ internal partial class CNmGraphDocFloatRemapNodeImpl : CNmGraphDocFlowNodeImpl, 
 {
     public CNmGraphDocFloatRemapNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _InputRangeOffset = -1;
+    private static nint? _InputRangeOffset;
     private CNmGraphDocFloatRemapNode__RemapRange_tImpl? _InputRangeInstance;
 
     public CNmGraphDocFloatRemapNode__RemapRange_t InputRange
     {
         get
         {
-            if (_InputRangeOffset == -1) _InputRangeOffset = Schema.GetOffset(0xA9BB0AE096AEBF0);
+            _InputRangeOffset = _InputRangeOffset ?? Schema.GetOffset(0xA9BB0AE096AEBF0);
             var instance = _InputRangeInstance ??= new CNmGraphDocFloatRemapNode__RemapRange_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _InputRangeOffset);
+            instance.DangerousSetHandle(_Handle + _InputRangeOffset!.Value);
             return instance;
         }
     }
-    private static nint _OutputRangeOffset = -1;
+    private static nint? _OutputRangeOffset;
     private CNmGraphDocFloatRemapNode__RemapRange_tImpl? _OutputRangeInstance;
 
     public CNmGraphDocFloatRemapNode__RemapRange_t OutputRange
     {
         get
         {
-            if (_OutputRangeOffset == -1) _OutputRangeOffset = Schema.GetOffset(0xA9BB0AE37E0CA29);
+            _OutputRangeOffset = _OutputRangeOffset ?? Schema.GetOffset(0xA9BB0AE37E0CA29);
             var instance = _OutputRangeInstance ??= new CNmGraphDocFloatRemapNode__RemapRange_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _OutputRangeOffset);
+            instance.DangerousSetHandle(_Handle + _OutputRangeOffset!.Value);
             return instance;
         }
     }

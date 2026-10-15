@@ -16,37 +16,37 @@ internal partial class CAnimGraphDoc_NodeStateImpl : CAnimGraphDoc_StateImpl, CA
 {
     public CAnimGraphDoc_NodeStateImpl(nint handle) : base(handle) { }
 
-    private static nint _InputConnectionOffset = -1;
+    private static nint? _InputConnectionOffset;
     private CAnimGraphDoc_NodeConnectionImpl? _InputConnectionInstance;
 
     public CAnimGraphDoc_NodeConnection InputConnection
     {
         get
         {
-            if (_InputConnectionOffset == -1) _InputConnectionOffset = Schema.GetOffset(0x95A5AB0B1F7849CB);
+            _InputConnectionOffset = _InputConnectionOffset ?? Schema.GetOffset(0x95A5AB0B1F7849CB);
             var instance = _InputConnectionInstance ??= new CAnimGraphDoc_NodeConnectionImpl(0);
-            instance.DangerousSetHandle(_Handle + _InputConnectionOffset);
+            instance.DangerousSetHandle(_Handle + _InputConnectionOffset!.Value);
             return instance;
         }
     }
-    private static nint _IsRootMotionExclusiveOffset = -1;
+    private static nint? _IsRootMotionExclusiveOffset;
 
     public ref bool IsRootMotionExclusive
     {
         get
         {
-            if (_IsRootMotionExclusiveOffset == -1) _IsRootMotionExclusiveOffset = Schema.GetOffset(0x95A5AB0BDEDFCAB5);
-            return ref _Handle.AsRef<bool>(_IsRootMotionExclusiveOffset);
+            _IsRootMotionExclusiveOffset = _IsRootMotionExclusiveOffset ?? Schema.GetOffset(0x95A5AB0BDEDFCAB5);
+            return ref _Handle.AsRef<bool>(_IsRootMotionExclusiveOffset!.Value);
         }
     }
-    private static nint _IsRootMotionExclusiveFirstFrameOffset = -1;
+    private static nint? _IsRootMotionExclusiveFirstFrameOffset;
 
     public ref bool IsRootMotionExclusiveFirstFrame
     {
         get
         {
-            if (_IsRootMotionExclusiveFirstFrameOffset == -1) _IsRootMotionExclusiveFirstFrameOffset = Schema.GetOffset(0x95A5AB0BCF575F02);
-            return ref _Handle.AsRef<bool>(_IsRootMotionExclusiveFirstFrameOffset);
+            _IsRootMotionExclusiveFirstFrameOffset = _IsRootMotionExclusiveFirstFrameOffset ?? Schema.GetOffset(0x95A5AB0BCF575F02);
+            return ref _Handle.AsRef<bool>(_IsRootMotionExclusiveFirstFrameOffset!.Value);
         }
     }
 

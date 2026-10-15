@@ -16,204 +16,204 @@ internal partial class CLevelsColorCorrectionLayerImpl : CColorCorrectionLayerIm
 {
     public CLevelsColorCorrectionLayerImpl(nint handle) : base(handle) { }
 
-    private static nint _InputBlackPointRGBOffset = -1;
+    private static nint? _InputBlackPointRGBOffset;
 
     public ref int InputBlackPointRGB
     {
         get
         {
-            if (_InputBlackPointRGBOffset == -1) _InputBlackPointRGBOffset = Schema.GetOffset(0xCF94B741184E8043);
-            return ref _Handle.AsRef<int>(_InputBlackPointRGBOffset);
+            _InputBlackPointRGBOffset = _InputBlackPointRGBOffset ?? Schema.GetOffset(0xCF94B741184E8043);
+            return ref _Handle.AsRef<int>(_InputBlackPointRGBOffset!.Value);
         }
     }
-    private static nint _InputBlackPointROffset = -1;
+    private static nint? _InputBlackPointROffset;
 
     public ref int InputBlackPointR
     {
         get
         {
-            if (_InputBlackPointROffset == -1) _InputBlackPointROffset = Schema.GetOffset(0xCF94B741D7E1C786);
-            return ref _Handle.AsRef<int>(_InputBlackPointROffset);
+            _InputBlackPointROffset = _InputBlackPointROffset ?? Schema.GetOffset(0xCF94B741D7E1C786);
+            return ref _Handle.AsRef<int>(_InputBlackPointROffset!.Value);
         }
     }
-    private static nint _InputBlackPointGOffset = -1;
+    private static nint? _InputBlackPointGOffset;
 
     public ref int InputBlackPointG
     {
         get
         {
-            if (_InputBlackPointGOffset == -1) _InputBlackPointGOffset = Schema.GetOffset(0xCF94B741ECE1E895);
-            return ref _Handle.AsRef<int>(_InputBlackPointGOffset);
+            _InputBlackPointGOffset = _InputBlackPointGOffset ?? Schema.GetOffset(0xCF94B741ECE1E895);
+            return ref _Handle.AsRef<int>(_InputBlackPointGOffset!.Value);
         }
     }
-    private static nint _InputBlackPointBOffset = -1;
+    private static nint? _InputBlackPointBOffset;
 
     public ref int InputBlackPointB
     {
         get
         {
-            if (_InputBlackPointBOffset == -1) _InputBlackPointBOffset = Schema.GetOffset(0xCF94B741E7E1E0B6);
-            return ref _Handle.AsRef<int>(_InputBlackPointBOffset);
+            _InputBlackPointBOffset = _InputBlackPointBOffset ?? Schema.GetOffset(0xCF94B741E7E1E0B6);
+            return ref _Handle.AsRef<int>(_InputBlackPointBOffset!.Value);
         }
     }
-    private static nint _InputWhitePointRGBOffset = -1;
+    private static nint? _InputWhitePointRGBOffset;
 
     public ref int InputWhitePointRGB
     {
         get
         {
-            if (_InputWhitePointRGBOffset == -1) _InputWhitePointRGBOffset = Schema.GetOffset(0xCF94B741AD9BD2C9);
-            return ref _Handle.AsRef<int>(_InputWhitePointRGBOffset);
+            _InputWhitePointRGBOffset = _InputWhitePointRGBOffset ?? Schema.GetOffset(0xCF94B741AD9BD2C9);
+            return ref _Handle.AsRef<int>(_InputWhitePointRGBOffset!.Value);
         }
     }
-    private static nint _InputWhitePointROffset = -1;
+    private static nint? _InputWhitePointROffset;
 
     public ref int InputWhitePointR
     {
         get
         {
-            if (_InputWhitePointROffset == -1) _InputWhitePointROffset = Schema.GetOffset(0xCF94B741C41066AC);
-            return ref _Handle.AsRef<int>(_InputWhitePointROffset);
+            _InputWhitePointROffset = _InputWhitePointROffset ?? Schema.GetOffset(0xCF94B741C41066AC);
+            return ref _Handle.AsRef<int>(_InputWhitePointROffset!.Value);
         }
     }
-    private static nint _InputWhitePointGOffset = -1;
+    private static nint? _InputWhitePointGOffset;
 
     public ref int InputWhitePointG
     {
         get
         {
-            if (_InputWhitePointGOffset == -1) _InputWhitePointGOffset = Schema.GetOffset(0xCF94B741D1107B23);
-            return ref _Handle.AsRef<int>(_InputWhitePointGOffset);
+            _InputWhitePointGOffset = _InputWhitePointGOffset ?? Schema.GetOffset(0xCF94B741D1107B23);
+            return ref _Handle.AsRef<int>(_InputWhitePointGOffset!.Value);
         }
     }
-    private static nint _InputWhitePointBOffset = -1;
+    private static nint? _InputWhitePointBOffset;
 
     public ref int InputWhitePointB
     {
         get
         {
-            if (_InputWhitePointBOffset == -1) _InputWhitePointBOffset = Schema.GetOffset(0xCF94B741D4107FDC);
-            return ref _Handle.AsRef<int>(_InputWhitePointBOffset);
+            _InputWhitePointBOffset = _InputWhitePointBOffset ?? Schema.GetOffset(0xCF94B741D4107FDC);
+            return ref _Handle.AsRef<int>(_InputWhitePointBOffset!.Value);
         }
     }
-    private static nint _OutputBlackPointRGBOffset = -1;
+    private static nint? _OutputBlackPointRGBOffset;
 
     public ref int OutputBlackPointRGB
     {
         get
         {
-            if (_OutputBlackPointRGBOffset == -1) _OutputBlackPointRGBOffset = Schema.GetOffset(0xCF94B74141047A2A);
-            return ref _Handle.AsRef<int>(_OutputBlackPointRGBOffset);
+            _OutputBlackPointRGBOffset = _OutputBlackPointRGBOffset ?? Schema.GetOffset(0xCF94B74141047A2A);
+            return ref _Handle.AsRef<int>(_OutputBlackPointRGBOffset!.Value);
         }
     }
-    private static nint _OutputBlackPointROffset = -1;
+    private static nint? _OutputBlackPointROffset;
 
     public ref int OutputBlackPointR
     {
         get
         {
-            if (_OutputBlackPointROffset == -1) _OutputBlackPointROffset = Schema.GetOffset(0xCF94B74107058FE3);
-            return ref _Handle.AsRef<int>(_OutputBlackPointROffset);
+            _OutputBlackPointROffset = _OutputBlackPointROffset ?? Schema.GetOffset(0xCF94B74107058FE3);
+            return ref _Handle.AsRef<int>(_OutputBlackPointROffset!.Value);
         }
     }
-    private static nint _OutputBlackPointGOffset = -1;
+    private static nint? _OutputBlackPointGOffset;
 
     public ref int OutputBlackPointG
     {
         get
         {
-            if (_OutputBlackPointGOffset == -1) _OutputBlackPointGOffset = Schema.GetOffset(0xCF94B741FA057B6C);
-            return ref _Handle.AsRef<int>(_OutputBlackPointGOffset);
+            _OutputBlackPointGOffset = _OutputBlackPointGOffset ?? Schema.GetOffset(0xCF94B741FA057B6C);
+            return ref _Handle.AsRef<int>(_OutputBlackPointGOffset!.Value);
         }
     }
-    private static nint _OutputBlackPointBOffset = -1;
+    private static nint? _OutputBlackPointBOffset;
 
     public ref int OutputBlackPointB
     {
         get
         {
-            if (_OutputBlackPointBOffset == -1) _OutputBlackPointBOffset = Schema.GetOffset(0xCF94B741F70576B3);
-            return ref _Handle.AsRef<int>(_OutputBlackPointBOffset);
+            _OutputBlackPointBOffset = _OutputBlackPointBOffset ?? Schema.GetOffset(0xCF94B741F70576B3);
+            return ref _Handle.AsRef<int>(_OutputBlackPointBOffset!.Value);
         }
     }
-    private static nint _OutputWhitePointRGBOffset = -1;
+    private static nint? _OutputWhitePointRGBOffset;
 
     public ref int OutputWhitePointRGB
     {
         get
         {
-            if (_OutputWhitePointRGBOffset == -1) _OutputWhitePointRGBOffset = Schema.GetOffset(0xCF94B741A6D73438);
-            return ref _Handle.AsRef<int>(_OutputWhitePointRGBOffset);
+            _OutputWhitePointRGBOffset = _OutputWhitePointRGBOffset ?? Schema.GetOffset(0xCF94B741A6D73438);
+            return ref _Handle.AsRef<int>(_OutputWhitePointRGBOffset!.Value);
         }
     }
-    private static nint _OutputWhitePointROffset = -1;
+    private static nint? _OutputWhitePointROffset;
 
     public ref int OutputWhitePointR
     {
         get
         {
-            if (_OutputWhitePointROffset == -1) _OutputWhitePointROffset = Schema.GetOffset(0xCF94B74108AE3DA9);
-            return ref _Handle.AsRef<int>(_OutputWhitePointROffset);
+            _OutputWhitePointROffset = _OutputWhitePointROffset ?? Schema.GetOffset(0xCF94B74108AE3DA9);
+            return ref _Handle.AsRef<int>(_OutputWhitePointROffset!.Value);
         }
     }
-    private static nint _OutputWhitePointGOffset = -1;
+    private static nint? _OutputWhitePointGOffset;
 
     public ref int OutputWhitePointG
     {
         get
         {
-            if (_OutputWhitePointGOffset == -1) _OutputWhitePointGOffset = Schema.GetOffset(0xCF94B741FBAE2932);
-            return ref _Handle.AsRef<int>(_OutputWhitePointGOffset);
+            _OutputWhitePointGOffset = _OutputWhitePointGOffset ?? Schema.GetOffset(0xCF94B741FBAE2932);
+            return ref _Handle.AsRef<int>(_OutputWhitePointGOffset!.Value);
         }
     }
-    private static nint _OutputWhitePointBOffset = -1;
+    private static nint? _OutputWhitePointBOffset;
 
     public ref int OutputWhitePointB
     {
         get
         {
-            if (_OutputWhitePointBOffset == -1) _OutputWhitePointBOffset = Schema.GetOffset(0xCF94B741F8AE2479);
-            return ref _Handle.AsRef<int>(_OutputWhitePointBOffset);
+            _OutputWhitePointBOffset = _OutputWhitePointBOffset ?? Schema.GetOffset(0xCF94B741F8AE2479);
+            return ref _Handle.AsRef<int>(_OutputWhitePointBOffset!.Value);
         }
     }
-    private static nint _GammaRGBOffset = -1;
+    private static nint? _GammaRGBOffset;
 
     public ref float GammaRGB
     {
         get
         {
-            if (_GammaRGBOffset == -1) _GammaRGBOffset = Schema.GetOffset(0xCF94B741289375B7);
-            return ref _Handle.AsRef<float>(_GammaRGBOffset);
+            _GammaRGBOffset = _GammaRGBOffset ?? Schema.GetOffset(0xCF94B741289375B7);
+            return ref _Handle.AsRef<float>(_GammaRGBOffset!.Value);
         }
     }
-    private static nint _GammaROffset = -1;
+    private static nint? _GammaROffset;
 
     public ref float GammaR
     {
         get
         {
-            if (_GammaROffset == -1) _GammaROffset = Schema.GetOffset(0xCF94B741AD468DD2);
-            return ref _Handle.AsRef<float>(_GammaROffset);
+            _GammaROffset = _GammaROffset ?? Schema.GetOffset(0xCF94B741AD468DD2);
+            return ref _Handle.AsRef<float>(_GammaROffset!.Value);
         }
     }
-    private static nint _GammaGOffset = -1;
+    private static nint? _GammaGOffset;
 
     public ref float GammaG
     {
         get
         {
-            if (_GammaGOffset == -1) _GammaGOffset = Schema.GetOffset(0xCF94B741BA46A249);
-            return ref _Handle.AsRef<float>(_GammaGOffset);
+            _GammaGOffset = _GammaGOffset ?? Schema.GetOffset(0xCF94B741BA46A249);
+            return ref _Handle.AsRef<float>(_GammaGOffset!.Value);
         }
     }
-    private static nint _GammaBOffset = -1;
+    private static nint? _GammaBOffset;
 
     public ref float GammaB
     {
         get
         {
-            if (_GammaBOffset == -1) _GammaBOffset = Schema.GetOffset(0xCF94B741BD46A702);
-            return ref _Handle.AsRef<float>(_GammaBOffset);
+            _GammaBOffset = _GammaBOffset ?? Schema.GetOffset(0xCF94B741BD46A702);
+            return ref _Handle.AsRef<float>(_GammaBOffset!.Value);
         }
     }
 

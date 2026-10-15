@@ -16,14 +16,14 @@ internal partial class PulseRuntimeTempVarBankIndex_tImpl : SchemaClass, PulseRu
 {
     public PulseRuntimeTempVarBankIndex_tImpl(nint handle) : base(handle) { }
 
-    private static nint _ValueOffset = -1;
+    private static nint? _ValueOffset;
 
     public ref short Value
     {
         get
         {
-            if (_ValueOffset == -1) _ValueOffset = Schema.GetOffset(0xC56A2E46DCB0894A);
-            return ref _Handle.AsRef<short>(_ValueOffset);
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0xC56A2E46DCB0894A);
+            return ref _Handle.AsRef<short>(_ValueOffset!.Value);
         }
     }
 

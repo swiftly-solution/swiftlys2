@@ -16,102 +16,102 @@ internal partial class CHitReactUpdateNodeImpl : CUnaryUpdateNodeImpl, CHitReact
 {
     public CHitReactUpdateNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _OpFixedSettingsOffset = -1;
+    private static nint? _OpFixedSettingsOffset;
     private HitReactFixedSettings_tImpl? _OpFixedSettingsInstance;
 
     public HitReactFixedSettings_t OpFixedSettings
     {
         get
         {
-            if (_OpFixedSettingsOffset == -1) _OpFixedSettingsOffset = Schema.GetOffset(0x64E4D4A7E533AB09);
+            _OpFixedSettingsOffset = _OpFixedSettingsOffset ?? Schema.GetOffset(0x64E4D4A7E533AB09);
             var instance = _OpFixedSettingsInstance ??= new HitReactFixedSettings_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _OpFixedSettingsOffset);
+            instance.DangerousSetHandle(_Handle + _OpFixedSettingsOffset!.Value);
             return instance;
         }
     }
-    private static nint _TriggerParamOffset = -1;
+    private static nint? _TriggerParamOffset;
     private CAnimParamHandleImpl? _TriggerParamInstance;
 
     public CAnimParamHandle TriggerParam
     {
         get
         {
-            if (_TriggerParamOffset == -1) _TriggerParamOffset = Schema.GetOffset(0x64E4D4A7AA3B4860);
+            _TriggerParamOffset = _TriggerParamOffset ?? Schema.GetOffset(0x64E4D4A7AA3B4860);
             var instance = _TriggerParamInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _TriggerParamOffset);
+            instance.DangerousSetHandle(_Handle + _TriggerParamOffset!.Value);
             return instance;
         }
     }
-    private static nint _HitBoneParamOffset = -1;
+    private static nint? _HitBoneParamOffset;
     private CAnimParamHandleImpl? _HitBoneParamInstance;
 
     public CAnimParamHandle HitBoneParam
     {
         get
         {
-            if (_HitBoneParamOffset == -1) _HitBoneParamOffset = Schema.GetOffset(0x64E4D4A70CD5764D);
+            _HitBoneParamOffset = _HitBoneParamOffset ?? Schema.GetOffset(0x64E4D4A70CD5764D);
             var instance = _HitBoneParamInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _HitBoneParamOffset);
+            instance.DangerousSetHandle(_Handle + _HitBoneParamOffset!.Value);
             return instance;
         }
     }
-    private static nint _HitOffsetParamOffset = -1;
+    private static nint? _HitOffsetParamOffset;
     private CAnimParamHandleImpl? _HitOffsetParamInstance;
 
     public CAnimParamHandle HitOffsetParam
     {
         get
         {
-            if (_HitOffsetParamOffset == -1) _HitOffsetParamOffset = Schema.GetOffset(0x64E4D4A7F1CA4A4A);
+            _HitOffsetParamOffset = _HitOffsetParamOffset ?? Schema.GetOffset(0x64E4D4A7F1CA4A4A);
             var instance = _HitOffsetParamInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _HitOffsetParamOffset);
+            instance.DangerousSetHandle(_Handle + _HitOffsetParamOffset!.Value);
             return instance;
         }
     }
-    private static nint _HitDirectionParamOffset = -1;
+    private static nint? _HitDirectionParamOffset;
     private CAnimParamHandleImpl? _HitDirectionParamInstance;
 
     public CAnimParamHandle HitDirectionParam
     {
         get
         {
-            if (_HitDirectionParamOffset == -1) _HitDirectionParamOffset = Schema.GetOffset(0x64E4D4A76F980EDC);
+            _HitDirectionParamOffset = _HitDirectionParamOffset ?? Schema.GetOffset(0x64E4D4A76F980EDC);
             var instance = _HitDirectionParamInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _HitDirectionParamOffset);
+            instance.DangerousSetHandle(_Handle + _HitDirectionParamOffset!.Value);
             return instance;
         }
     }
-    private static nint _HitStrengthParamOffset = -1;
+    private static nint? _HitStrengthParamOffset;
     private CAnimParamHandleImpl? _HitStrengthParamInstance;
 
     public CAnimParamHandle HitStrengthParam
     {
         get
         {
-            if (_HitStrengthParamOffset == -1) _HitStrengthParamOffset = Schema.GetOffset(0x64E4D4A7BD447408);
+            _HitStrengthParamOffset = _HitStrengthParamOffset ?? Schema.GetOffset(0x64E4D4A7BD447408);
             var instance = _HitStrengthParamInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _HitStrengthParamOffset);
+            instance.DangerousSetHandle(_Handle + _HitStrengthParamOffset!.Value);
             return instance;
         }
     }
-    private static nint _MinDelayBetweenHitsOffset = -1;
+    private static nint? _MinDelayBetweenHitsOffset;
 
     public ref float MinDelayBetweenHits
     {
         get
         {
-            if (_MinDelayBetweenHitsOffset == -1) _MinDelayBetweenHitsOffset = Schema.GetOffset(0x64E4D4A762EED38E);
-            return ref _Handle.AsRef<float>(_MinDelayBetweenHitsOffset);
+            _MinDelayBetweenHitsOffset = _MinDelayBetweenHitsOffset ?? Schema.GetOffset(0x64E4D4A762EED38E);
+            return ref _Handle.AsRef<float>(_MinDelayBetweenHitsOffset!.Value);
         }
     }
-    private static nint _ResetChildOffset = -1;
+    private static nint? _ResetChildOffset;
 
     public ref bool ResetChild
     {
         get
         {
-            if (_ResetChildOffset == -1) _ResetChildOffset = Schema.GetOffset(0x64E4D4A765CC88B6);
-            return ref _Handle.AsRef<bool>(_ResetChildOffset);
+            _ResetChildOffset = _ResetChildOffset ?? Schema.GetOffset(0x64E4D4A765CC88B6);
+            return ref _Handle.AsRef<bool>(_ResetChildOffset!.Value);
         }
     }
 

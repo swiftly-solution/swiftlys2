@@ -16,34 +16,34 @@ internal partial class C_OP_SetToCPImpl : CParticleFunctionOperatorImpl, C_OP_Se
 {
     public C_OP_SetToCPImpl(nint handle) : base(handle) { }
 
-    private static nint _ControlPointNumberOffset = -1;
+    private static nint? _ControlPointNumberOffset;
 
     public ref int ControlPointNumber
     {
         get
         {
-            if (_ControlPointNumberOffset == -1) _ControlPointNumberOffset = Schema.GetOffset(0xF80ACA353F31A6BD);
-            return ref _Handle.AsRef<int>(_ControlPointNumberOffset);
+            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0xF80ACA353F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
         }
     }
-    private static nint _OffsetOffset = -1;
+    private static nint? _OffsetOffset;
 
     public ref Vector Offset
     {
         get
         {
-            if (_OffsetOffset == -1) _OffsetOffset = Schema.GetOffset(0xF80ACA35BD25CC2A);
-            return ref _Handle.AsRef<Vector>(_OffsetOffset);
+            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0xF80ACA35BD25CC2A);
+            return ref _Handle.AsRef<Vector>(_OffsetOffset!.Value);
         }
     }
-    private static nint _OffsetLocalOffset = -1;
+    private static nint? _OffsetLocalOffset;
 
     public ref bool OffsetLocal
     {
         get
         {
-            if (_OffsetLocalOffset == -1) _OffsetLocalOffset = Schema.GetOffset(0xF80ACA35F07D31C1);
-            return ref _Handle.AsRef<bool>(_OffsetLocalOffset);
+            _OffsetLocalOffset = _OffsetLocalOffset ?? Schema.GetOffset(0xF80ACA35F07D31C1);
+            return ref _Handle.AsRef<bool>(_OffsetLocalOffset!.Value);
         }
     }
 

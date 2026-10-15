@@ -16,176 +16,176 @@ internal partial class C_OP_LockToBoneImpl : CParticleFunctionOperatorImpl, C_OP
 {
     public C_OP_LockToBoneImpl(nint handle) : base(handle) { }
 
-    private static nint _ModelInputOffset = -1;
+    private static nint? _ModelInputOffset;
     private CParticleModelInputImpl? _ModelInputInstance;
 
     public CParticleModelInput ModelInput
     {
         get
         {
-            if (_ModelInputOffset == -1) _ModelInputOffset = Schema.GetOffset(0xF6C2B94DEB74120E);
+            _ModelInputOffset = _ModelInputOffset ?? Schema.GetOffset(0xF6C2B94DEB74120E);
             var instance = _ModelInputInstance ??= new CParticleModelInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _ModelInputOffset);
+            instance.DangerousSetHandle(_Handle + _ModelInputOffset!.Value);
             return instance;
         }
     }
-    private static nint _TransformInputOffset = -1;
+    private static nint? _TransformInputOffset;
     private CParticleTransformInputImpl? _TransformInputInstance;
 
     public CParticleTransformInput TransformInput
     {
         get
         {
-            if (_TransformInputOffset == -1) _TransformInputOffset = Schema.GetOffset(0xF6C2B94D3A9ED669);
+            _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0xF6C2B94D3A9ED669);
             var instance = _TransformInputInstance ??= new CParticleTransformInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _TransformInputOffset);
+            instance.DangerousSetHandle(_Handle + _TransformInputOffset!.Value);
             return instance;
         }
     }
-    private static nint _LifeTimeFadeStartOffset = -1;
+    private static nint? _LifeTimeFadeStartOffset;
 
     public ref float LifeTimeFadeStart
     {
         get
         {
-            if (_LifeTimeFadeStartOffset == -1) _LifeTimeFadeStartOffset = Schema.GetOffset(0xF6C2B94D95A2845A);
-            return ref _Handle.AsRef<float>(_LifeTimeFadeStartOffset);
+            _LifeTimeFadeStartOffset = _LifeTimeFadeStartOffset ?? Schema.GetOffset(0xF6C2B94D95A2845A);
+            return ref _Handle.AsRef<float>(_LifeTimeFadeStartOffset!.Value);
         }
     }
-    private static nint _LifeTimeFadeEndOffset = -1;
+    private static nint? _LifeTimeFadeEndOffset;
 
     public ref float LifeTimeFadeEnd
     {
         get
         {
-            if (_LifeTimeFadeEndOffset == -1) _LifeTimeFadeEndOffset = Schema.GetOffset(0xF6C2B94D222841EF);
-            return ref _Handle.AsRef<float>(_LifeTimeFadeEndOffset);
+            _LifeTimeFadeEndOffset = _LifeTimeFadeEndOffset ?? Schema.GetOffset(0xF6C2B94D222841EF);
+            return ref _Handle.AsRef<float>(_LifeTimeFadeEndOffset!.Value);
         }
     }
-    private static nint _JumpThresholdOffset = -1;
+    private static nint? _JumpThresholdOffset;
 
     public ref float JumpThreshold
     {
         get
         {
-            if (_JumpThresholdOffset == -1) _JumpThresholdOffset = Schema.GetOffset(0xF6C2B94DB6BB1AD6);
-            return ref _Handle.AsRef<float>(_JumpThresholdOffset);
+            _JumpThresholdOffset = _JumpThresholdOffset ?? Schema.GetOffset(0xF6C2B94DB6BB1AD6);
+            return ref _Handle.AsRef<float>(_JumpThresholdOffset!.Value);
         }
     }
-    private static nint _PrevPosScaleOffset = -1;
+    private static nint? _PrevPosScaleOffset;
 
     public ref float PrevPosScale
     {
         get
         {
-            if (_PrevPosScaleOffset == -1) _PrevPosScaleOffset = Schema.GetOffset(0xF6C2B94D46CED122);
-            return ref _Handle.AsRef<float>(_PrevPosScaleOffset);
+            _PrevPosScaleOffset = _PrevPosScaleOffset ?? Schema.GetOffset(0xF6C2B94D46CED122);
+            return ref _Handle.AsRef<float>(_PrevPosScaleOffset!.Value);
         }
     }
-    private static nint _HitboxSetNameOffset = -1;
+    private static nint? _HitboxSetNameOffset;
 
     public string HitboxSetName
     {
         get
         {
-            if (_HitboxSetNameOffset == -1) _HitboxSetNameOffset = Schema.GetOffset(0xF6C2B94D6A21BB0E);
-            return Schema.GetString(_Handle + _HitboxSetNameOffset);
+            _HitboxSetNameOffset = _HitboxSetNameOffset ?? Schema.GetOffset(0xF6C2B94D6A21BB0E);
+            return Schema.GetString(_Handle + _HitboxSetNameOffset!.Value);
         }
         set
         {
-            if (_HitboxSetNameOffset == -1) _HitboxSetNameOffset = Schema.GetOffset(0xF6C2B94D6A21BB0E);
-            Schema.SetFixedString(_Handle, _HitboxSetNameOffset, value, 128);
+            _HitboxSetNameOffset = _HitboxSetNameOffset ?? Schema.GetOffset(0xF6C2B94D6A21BB0E);
+            Schema.SetFixedString(_Handle, _HitboxSetNameOffset!.Value, value, 128);
         }
     }
-    private static nint _RigidOffset = -1;
+    private static nint? _RigidOffset;
 
     public ref bool Rigid
     {
         get
         {
-            if (_RigidOffset == -1) _RigidOffset = Schema.GetOffset(0xF6C2B94DF9ED9C8C);
-            return ref _Handle.AsRef<bool>(_RigidOffset);
+            _RigidOffset = _RigidOffset ?? Schema.GetOffset(0xF6C2B94DF9ED9C8C);
+            return ref _Handle.AsRef<bool>(_RigidOffset!.Value);
         }
     }
-    private static nint _UseBonesOffset = -1;
+    private static nint? _UseBonesOffset;
 
     public ref bool UseBones
     {
         get
         {
-            if (_UseBonesOffset == -1) _UseBonesOffset = Schema.GetOffset(0xF6C2B94D10D1938B);
-            return ref _Handle.AsRef<bool>(_UseBonesOffset);
+            _UseBonesOffset = _UseBonesOffset ?? Schema.GetOffset(0xF6C2B94D10D1938B);
+            return ref _Handle.AsRef<bool>(_UseBonesOffset!.Value);
         }
     }
-    private static nint _FieldOutputOffset = -1;
+    private static nint? _FieldOutputOffset;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0xF6C2B94DE5729606);
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0xF6C2B94DE5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
             return instance;
         }
     }
-    private static nint _FieldOutputPrevOffset = -1;
+    private static nint? _FieldOutputPrevOffset;
     private ParticleAttributeIndex_tImpl? _FieldOutputPrevInstance;
 
     public ParticleAttributeIndex_t FieldOutputPrev
     {
         get
         {
-            if (_FieldOutputPrevOffset == -1) _FieldOutputPrevOffset = Schema.GetOffset(0xF6C2B94D68D9463B);
+            _FieldOutputPrevOffset = _FieldOutputPrevOffset ?? Schema.GetOffset(0xF6C2B94D68D9463B);
             var instance = _FieldOutputPrevInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputPrevOffset);
+            instance.DangerousSetHandle(_Handle + _FieldOutputPrevOffset!.Value);
             return instance;
         }
     }
-    private static nint _RotationSetTypeOffset = -1;
+    private static nint? _RotationSetTypeOffset;
 
     public ref ParticleRotationLockType_t RotationSetType
     {
         get
         {
-            if (_RotationSetTypeOffset == -1) _RotationSetTypeOffset = Schema.GetOffset(0xF6C2B94D084883F9);
-            return ref _Handle.AsRef<ParticleRotationLockType_t>(_RotationSetTypeOffset);
+            _RotationSetTypeOffset = _RotationSetTypeOffset ?? Schema.GetOffset(0xF6C2B94D084883F9);
+            return ref _Handle.AsRef<ParticleRotationLockType_t>(_RotationSetTypeOffset!.Value);
         }
     }
-    private static nint _RigidRotationLockOffset = -1;
+    private static nint? _RigidRotationLockOffset;
 
     public ref bool RigidRotationLock
     {
         get
         {
-            if (_RigidRotationLockOffset == -1) _RigidRotationLockOffset = Schema.GetOffset(0xF6C2B94D824664C5);
-            return ref _Handle.AsRef<bool>(_RigidRotationLockOffset);
+            _RigidRotationLockOffset = _RigidRotationLockOffset ?? Schema.GetOffset(0xF6C2B94D824664C5);
+            return ref _Handle.AsRef<bool>(_RigidRotationLockOffset!.Value);
         }
     }
-    private static nint _RotationOffset = -1;
+    private static nint? _RotationOffset;
     private CPerParticleVecInputImpl? _RotationInstance;
 
     public CPerParticleVecInput Rotation
     {
         get
         {
-            if (_RotationOffset == -1) _RotationOffset = Schema.GetOffset(0xF6C2B94D1992E6BF);
+            _RotationOffset = _RotationOffset ?? Schema.GetOffset(0xF6C2B94D1992E6BF);
             var instance = _RotationInstance ??= new CPerParticleVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _RotationOffset);
+            instance.DangerousSetHandle(_Handle + _RotationOffset!.Value);
             return instance;
         }
     }
-    private static nint _RotLerpOffset = -1;
+    private static nint? _RotLerpOffset;
     private CPerParticleFloatInputImpl? _RotLerpInstance;
 
     public CPerParticleFloatInput RotLerp
     {
         get
         {
-            if (_RotLerpOffset == -1) _RotLerpOffset = Schema.GetOffset(0xF6C2B94D2C030C4D);
+            _RotLerpOffset = _RotLerpOffset ?? Schema.GetOffset(0xF6C2B94D2C030C4D);
             var instance = _RotLerpInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _RotLerpOffset);
+            instance.DangerousSetHandle(_Handle + _RotLerpOffset!.Value);
             return instance;
         }
     }

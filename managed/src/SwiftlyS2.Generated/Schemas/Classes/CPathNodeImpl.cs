@@ -16,74 +16,74 @@ internal partial class CPathNodeImpl : CPointEntityImpl, CPathNode
 {
     public CPathNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _InTangentLocalOffset = -1;
+    private static nint? _InTangentLocalOffset;
 
     public ref Vector InTangentLocal
     {
         get
         {
-            if (_InTangentLocalOffset == -1) _InTangentLocalOffset = Schema.GetOffset(0x14F50D7946C1388A);
-            return ref _Handle.AsRef<Vector>(_InTangentLocalOffset);
+            _InTangentLocalOffset = _InTangentLocalOffset ?? Schema.GetOffset(0x14F50D7946C1388A);
+            return ref _Handle.AsRef<Vector>(_InTangentLocalOffset!.Value);
         }
     }
-    private static nint _OutTangentLocalOffset = -1;
+    private static nint? _OutTangentLocalOffset;
 
     public ref Vector OutTangentLocal
     {
         get
         {
-            if (_OutTangentLocalOffset == -1) _OutTangentLocalOffset = Schema.GetOffset(0x14F50D79788EFFFB);
-            return ref _Handle.AsRef<Vector>(_OutTangentLocalOffset);
+            _OutTangentLocalOffset = _OutTangentLocalOffset ?? Schema.GetOffset(0x14F50D79788EFFFB);
+            return ref _Handle.AsRef<Vector>(_OutTangentLocalOffset!.Value);
         }
     }
-    private static nint _StrParentPathUniqueIDOffset = -1;
+    private static nint? _StrParentPathUniqueIDOffset;
 
     public string StrParentPathUniqueID
     {
         get
         {
-            if (_StrParentPathUniqueIDOffset == -1) _StrParentPathUniqueIDOffset = Schema.GetOffset(0x14F50D79A24D6799);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrParentPathUniqueIDOffset));
+            _StrParentPathUniqueIDOffset = _StrParentPathUniqueIDOffset ?? Schema.GetOffset(0x14F50D79A24D6799);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrParentPathUniqueIDOffset!.Value));
         }
         set
         {
-            if (_StrParentPathUniqueIDOffset == -1) _StrParentPathUniqueIDOffset = Schema.GetOffset(0x14F50D79A24D6799);
-            Schema.SetCUtlString(_Handle, _StrParentPathUniqueIDOffset, value);
+            _StrParentPathUniqueIDOffset = _StrParentPathUniqueIDOffset ?? Schema.GetOffset(0x14F50D79A24D6799);
+            Schema.SetCUtlString(_Handle, _StrParentPathUniqueIDOffset!.Value, value);
         }
     }
-    private static nint _StrPathNodeParameterOffset = -1;
+    private static nint? _StrPathNodeParameterOffset;
 
     public string StrPathNodeParameter
     {
         get
         {
-            if (_StrPathNodeParameterOffset == -1) _StrPathNodeParameterOffset = Schema.GetOffset(0x14F50D79D2ECB156);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrPathNodeParameterOffset));
+            _StrPathNodeParameterOffset = _StrPathNodeParameterOffset ?? Schema.GetOffset(0x14F50D79D2ECB156);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrPathNodeParameterOffset!.Value));
         }
         set
         {
-            if (_StrPathNodeParameterOffset == -1) _StrPathNodeParameterOffset = Schema.GetOffset(0x14F50D79D2ECB156);
-            Schema.SetCUtlString(_Handle, _StrPathNodeParameterOffset, value);
+            _StrPathNodeParameterOffset = _StrPathNodeParameterOffset ?? Schema.GetOffset(0x14F50D79D2ECB156);
+            Schema.SetCUtlString(_Handle, _StrPathNodeParameterOffset!.Value, value);
         }
     }
-    private static nint _XWSPrevParentOffset = -1;
+    private static nint? _XWSPrevParentOffset;
 
     public ref CTransform XWSPrevParent
     {
         get
         {
-            if (_XWSPrevParentOffset == -1) _XWSPrevParentOffset = Schema.GetOffset(0x14F50D792AEC980C);
-            return ref _Handle.AsRef<CTransform>(_XWSPrevParentOffset);
+            _XWSPrevParentOffset = _XWSPrevParentOffset ?? Schema.GetOffset(0x14F50D792AEC980C);
+            return ref _Handle.AsRef<CTransform>(_XWSPrevParentOffset!.Value);
         }
     }
-    private static nint _PathOffset = -1;
+    private static nint? _PathOffset;
 
     public ref CHandle<CPathWithDynamicNodes> Path
     {
         get
         {
-            if (_PathOffset == -1) _PathOffset = Schema.GetOffset(0x14F50D79745BC3C0);
-            return ref _Handle.AsRef<CHandle<CPathWithDynamicNodes>>(_PathOffset);
+            _PathOffset = _PathOffset ?? Schema.GetOffset(0x14F50D79745BC3C0);
+            return ref _Handle.AsRef<CHandle<CPathWithDynamicNodes>>(_PathOffset!.Value);
         }
     }
 

@@ -16,27 +16,27 @@ internal partial class FuncRotatorRotationSummary_tImpl : SchemaClass, FuncRotat
 {
     public FuncRotatorRotationSummary_tImpl(nint handle) : base(handle) { }
 
-    private static nint _TickOffset = -1;
+    private static nint? _TickOffset;
     private GameTick_tImpl? _TickInstance;
 
     public GameTick_t Tick
     {
         get
         {
-            if (_TickOffset == -1) _TickOffset = Schema.GetOffset(0x226C9EC9E0BD7428);
+            _TickOffset = _TickOffset ?? Schema.GetOffset(0x226C9EC9E0BD7428);
             var instance = _TickInstance ??= new GameTick_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _TickOffset);
+            instance.DangerousSetHandle(_Handle + _TickOffset!.Value);
             return instance;
         }
     }
-    private static nint _FlagsOffset = -1;
+    private static nint? _FlagsOffset;
 
     public ref FuncRotatorRotationSummaryFlags_t Flags
     {
         get
         {
-            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0x226C9EC9B8D52E48);
-            return ref _Handle.AsRef<FuncRotatorRotationSummaryFlags_t>(_FlagsOffset);
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x226C9EC9B8D52E48);
+            return ref _Handle.AsRef<FuncRotatorRotationSummaryFlags_t>(_FlagsOffset!.Value);
         }
     }
 

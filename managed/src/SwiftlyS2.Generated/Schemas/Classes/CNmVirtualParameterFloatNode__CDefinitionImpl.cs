@@ -16,14 +16,14 @@ internal partial class CNmVirtualParameterFloatNode__CDefinitionImpl : CNmFloatV
 {
     public CNmVirtualParameterFloatNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint _ChildNodeIdxOffset = -1;
+    private static nint? _ChildNodeIdxOffset;
 
     public ref short ChildNodeIdx
     {
         get
         {
-            if (_ChildNodeIdxOffset == -1) _ChildNodeIdxOffset = Schema.GetOffset(0x29E3EB575C29A73C);
-            return ref _Handle.AsRef<short>(_ChildNodeIdxOffset);
+            _ChildNodeIdxOffset = _ChildNodeIdxOffset ?? Schema.GetOffset(0x29E3EB575C29A73C);
+            return ref _Handle.AsRef<short>(_ChildNodeIdxOffset!.Value);
         }
     }
 

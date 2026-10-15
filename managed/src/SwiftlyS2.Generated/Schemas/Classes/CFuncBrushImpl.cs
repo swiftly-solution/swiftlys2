@@ -16,69 +16,69 @@ internal partial class CFuncBrushImpl : CBaseModelEntityImpl, CFuncBrush
 {
     public CFuncBrushImpl(nint handle) : base(handle) { }
 
-    private static nint _SolidityOffset = -1;
+    private static nint? _SolidityOffset;
 
     public ref BrushSolidities_e Solidity
     {
         get
         {
-            if (_SolidityOffset == -1) _SolidityOffset = Schema.GetOffset(0x26435484B869EE4D);
-            return ref _Handle.AsRef<BrushSolidities_e>(_SolidityOffset);
+            _SolidityOffset = _SolidityOffset ?? Schema.GetOffset(0x26435484B869EE4D);
+            return ref _Handle.AsRef<BrushSolidities_e>(_SolidityOffset!.Value);
         }
     }
-    private static nint _DisabledOffset = -1;
+    private static nint? _DisabledOffset;
 
     public ref int Disabled
     {
         get
         {
-            if (_DisabledOffset == -1) _DisabledOffset = Schema.GetOffset(0x2643548451B3CEAC);
-            return ref _Handle.AsRef<int>(_DisabledOffset);
+            _DisabledOffset = _DisabledOffset ?? Schema.GetOffset(0x2643548451B3CEAC);
+            return ref _Handle.AsRef<int>(_DisabledOffset!.Value);
         }
     }
-    private static nint _SolidBspOffset = -1;
+    private static nint? _SolidBspOffset;
 
     public ref bool SolidBsp
     {
         get
         {
-            if (_SolidBspOffset == -1) _SolidBspOffset = Schema.GetOffset(0x26435484A50CEC89);
-            return ref _Handle.AsRef<bool>(_SolidBspOffset);
+            _SolidBspOffset = _SolidBspOffset ?? Schema.GetOffset(0x26435484A50CEC89);
+            return ref _Handle.AsRef<bool>(_SolidBspOffset!.Value);
         }
     }
-    private static nint _ExcludedClassOffset = -1;
+    private static nint? _ExcludedClassOffset;
 
     public string ExcludedClass
     {
         get
         {
-            if (_ExcludedClassOffset == -1) _ExcludedClassOffset = Schema.GetOffset(0x2643548495B3D111);
-            return Schema.GetString(_Handle.Read<nint>(_ExcludedClassOffset));
+            _ExcludedClassOffset = _ExcludedClassOffset ?? Schema.GetOffset(0x2643548495B3D111);
+            return Schema.GetString(_Handle.Read<nint>(_ExcludedClassOffset!.Value));
         }
         set
         {
-            if (_ExcludedClassOffset == -1) _ExcludedClassOffset = Schema.GetOffset(0x2643548495B3D111);
-            Schema.SetString(_Handle, _ExcludedClassOffset, value);
+            _ExcludedClassOffset = _ExcludedClassOffset ?? Schema.GetOffset(0x2643548495B3D111);
+            Schema.SetString(_Handle, _ExcludedClassOffset!.Value, value);
         }
     }
-    private static nint _InvertExclusionOffset = -1;
+    private static nint? _InvertExclusionOffset;
 
     public ref bool InvertExclusion
     {
         get
         {
-            if (_InvertExclusionOffset == -1) _InvertExclusionOffset = Schema.GetOffset(0x264354845DE14F07);
-            return ref _Handle.AsRef<bool>(_InvertExclusionOffset);
+            _InvertExclusionOffset = _InvertExclusionOffset ?? Schema.GetOffset(0x264354845DE14F07);
+            return ref _Handle.AsRef<bool>(_InvertExclusionOffset!.Value);
         }
     }
-    private static nint _ScriptedMovementOffset = -1;
+    private static nint? _ScriptedMovementOffset;
 
     public ref bool ScriptedMovement
     {
         get
         {
-            if (_ScriptedMovementOffset == -1) _ScriptedMovementOffset = Schema.GetOffset(0x26435484C2863DD2);
-            return ref _Handle.AsRef<bool>(_ScriptedMovementOffset);
+            _ScriptedMovementOffset = _ScriptedMovementOffset ?? Schema.GetOffset(0x26435484C2863DD2);
+            return ref _Handle.AsRef<bool>(_ScriptedMovementOffset!.Value);
         }
     }
 

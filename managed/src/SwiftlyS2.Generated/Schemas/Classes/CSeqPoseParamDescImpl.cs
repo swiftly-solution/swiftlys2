@@ -16,54 +16,54 @@ internal partial class CSeqPoseParamDescImpl : SchemaClass, CSeqPoseParamDesc
 {
     public CSeqPoseParamDescImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public ref CBufferString Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x9276634463D22D49);
-            return ref _Handle.AsRef<CBufferString>(_NameOffset);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x9276634463D22D49);
+            return ref _Handle.AsRef<CBufferString>(_NameOffset!.Value);
         }
     }
-    private static nint _StartOffset = -1;
+    private static nint? _StartOffset;
 
     public ref float Start
     {
         get
         {
-            if (_StartOffset == -1) _StartOffset = Schema.GetOffset(0x9276634405A20B85);
-            return ref _Handle.AsRef<float>(_StartOffset);
+            _StartOffset = _StartOffset ?? Schema.GetOffset(0x9276634405A20B85);
+            return ref _Handle.AsRef<float>(_StartOffset!.Value);
         }
     }
-    private static nint _EndOffset = -1;
+    private static nint? _EndOffset;
 
     public ref float End
     {
         get
         {
-            if (_EndOffset == -1) _EndOffset = Schema.GetOffset(0x927663449616A27C);
-            return ref _Handle.AsRef<float>(_EndOffset);
+            _EndOffset = _EndOffset ?? Schema.GetOffset(0x927663449616A27C);
+            return ref _Handle.AsRef<float>(_EndOffset!.Value);
         }
     }
-    private static nint _LoopOffset = -1;
+    private static nint? _LoopOffset;
 
     public ref float Loop
     {
         get
         {
-            if (_LoopOffset == -1) _LoopOffset = Schema.GetOffset(0x92766344DE666C85);
-            return ref _Handle.AsRef<float>(_LoopOffset);
+            _LoopOffset = _LoopOffset ?? Schema.GetOffset(0x92766344DE666C85);
+            return ref _Handle.AsRef<float>(_LoopOffset!.Value);
         }
     }
-    private static nint _LoopingOffset = -1;
+    private static nint? _LoopingOffset;
 
     public ref bool Looping
     {
         get
         {
-            if (_LoopingOffset == -1) _LoopingOffset = Schema.GetOffset(0x9276634425449B0D);
-            return ref _Handle.AsRef<bool>(_LoopingOffset);
+            _LoopingOffset = _LoopingOffset ?? Schema.GetOffset(0x9276634425449B0D);
+            return ref _Handle.AsRef<bool>(_LoopingOffset!.Value);
         }
     }
 

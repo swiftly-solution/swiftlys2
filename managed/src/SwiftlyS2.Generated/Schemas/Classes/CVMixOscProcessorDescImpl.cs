@@ -16,42 +16,42 @@ internal partial class CVMixOscProcessorDescImpl : CVMixBaseProcessorDescImpl, C
 {
     public CVMixOscProcessorDescImpl(nint handle) : base(handle) { }
 
-    private static nint _DescOffset = -1;
+    private static nint? _DescOffset;
     private VMixOscDesc_tImpl? _DescInstance;
 
     public VMixOscDesc_t Desc
     {
         get
         {
-            if (_DescOffset == -1) _DescOffset = Schema.GetOffset(0x18D0F65A27917BC0);
+            _DescOffset = _DescOffset ?? Schema.GetOffset(0x18D0F65A27917BC0);
             var instance = _DescInstance ??= new VMixOscDesc_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _DescOffset);
+            instance.DangerousSetHandle(_Handle + _DescOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamFrequencyOffset = -1;
+    private static nint? _ParamFrequencyOffset;
     private CVMixParameterFloatImpl? _ParamFrequencyInstance;
 
     public CVMixParameterFloat ParamFrequency
     {
         get
         {
-            if (_ParamFrequencyOffset == -1) _ParamFrequencyOffset = Schema.GetOffset(0x18D0F65A8137D364);
+            _ParamFrequencyOffset = _ParamFrequencyOffset ?? Schema.GetOffset(0x18D0F65A8137D364);
             var instance = _ParamFrequencyInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamFrequencyOffset);
+            instance.DangerousSetHandle(_Handle + _ParamFrequencyOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamPhaseOffset = -1;
+    private static nint? _ParamPhaseOffset;
     private CVMixParameterFloatImpl? _ParamPhaseInstance;
 
     public CVMixParameterFloat ParamPhase
     {
         get
         {
-            if (_ParamPhaseOffset == -1) _ParamPhaseOffset = Schema.GetOffset(0x18D0F65AB832FE39);
+            _ParamPhaseOffset = _ParamPhaseOffset ?? Schema.GetOffset(0x18D0F65AB832FE39);
             var instance = _ParamPhaseInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamPhaseOffset);
+            instance.DangerousSetHandle(_Handle + _ParamPhaseOffset!.Value);
             return instance;
         }
     }

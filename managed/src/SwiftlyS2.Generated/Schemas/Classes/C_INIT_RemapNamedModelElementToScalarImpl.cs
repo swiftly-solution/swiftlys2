@@ -16,80 +16,80 @@ internal partial class C_INIT_RemapNamedModelElementToScalarImpl : CParticleFunc
 {
     public C_INIT_RemapNamedModelElementToScalarImpl(nint handle) : base(handle) { }
 
-    private static nint _ModelOffset = -1;
+    private static nint? _ModelOffset;
 
     public ref CStrongHandle<InfoForResourceTypeCModel> Model
     {
         get
         {
-            if (_ModelOffset == -1) _ModelOffset = Schema.GetOffset(0x4717248AE100C814);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_ModelOffset);
+            _ModelOffset = _ModelOffset ?? Schema.GetOffset(0x4717248AE100C814);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_ModelOffset!.Value);
         }
     }
-    private static nint _NamesOffset = -1;
+    private static nint? _NamesOffset;
 
     public ref CUtlVector<CUtlString> Names
     {
         get
         {
-            if (_NamesOffset == -1) _NamesOffset = Schema.GetOffset(0x4717248A0DA776AF);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_NamesOffset);
+            _NamesOffset = _NamesOffset ?? Schema.GetOffset(0x4717248A0DA776AF);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_NamesOffset!.Value);
         }
     }
-    private static nint _ValuesOffset = -1;
+    private static nint? _ValuesOffset;
 
     public ref CUtlVector<float> Values
     {
         get
         {
-            if (_ValuesOffset == -1) _ValuesOffset = Schema.GetOffset(0x4717248AFBEDDADB);
-            return ref _Handle.AsRef<CUtlVector<float>>(_ValuesOffset);
+            _ValuesOffset = _ValuesOffset ?? Schema.GetOffset(0x4717248AFBEDDADB);
+            return ref _Handle.AsRef<CUtlVector<float>>(_ValuesOffset!.Value);
         }
     }
-    private static nint _FieldInputOffset = -1;
+    private static nint? _FieldInputOffset;
     private ParticleAttributeIndex_tImpl? _FieldInputInstance;
 
     public ParticleAttributeIndex_t FieldInput
     {
         get
         {
-            if (_FieldInputOffset == -1) _FieldInputOffset = Schema.GetOffset(0x4717248AAE775669);
+            _FieldInputOffset = _FieldInputOffset ?? Schema.GetOffset(0x4717248AAE775669);
             var instance = _FieldInputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldInputOffset);
+            instance.DangerousSetHandle(_Handle + _FieldInputOffset!.Value);
             return instance;
         }
     }
-    private static nint _FieldOutputOffset = -1;
+    private static nint? _FieldOutputOffset;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0x4717248AE5729606);
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x4717248AE5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
             return instance;
         }
     }
-    private static nint _SetMethodOffset = -1;
+    private static nint? _SetMethodOffset;
 
     public ref ParticleSetMethod_t SetMethod
     {
         get
         {
-            if (_SetMethodOffset == -1) _SetMethodOffset = Schema.GetOffset(0x4717248AFB53C31E);
-            return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset);
+            _SetMethodOffset = _SetMethodOffset ?? Schema.GetOffset(0x4717248AFB53C31E);
+            return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset!.Value);
         }
     }
-    private static nint _ModelFromRendererOffset = -1;
+    private static nint? _ModelFromRendererOffset;
 
     public ref bool ModelFromRenderer
     {
         get
         {
-            if (_ModelFromRendererOffset == -1) _ModelFromRendererOffset = Schema.GetOffset(0x4717248AAEBA1F25);
-            return ref _Handle.AsRef<bool>(_ModelFromRendererOffset);
+            _ModelFromRendererOffset = _ModelFromRendererOffset ?? Schema.GetOffset(0x4717248AAEBA1F25);
+            return ref _Handle.AsRef<bool>(_ModelFromRendererOffset!.Value);
         }
     }
 

@@ -16,14 +16,14 @@ internal partial class C_CSObserverPawnImpl : C_CSPlayerPawnBaseImpl, C_CSObserv
 {
     public C_CSObserverPawnImpl(nint handle) : base(handle) { }
 
-    private static nint _DetectParentChangeOffset = -1;
+    private static nint? _DetectParentChangeOffset;
 
     public ref CHandle<CEntityInstance> DetectParentChange
     {
         get
         {
-            if (_DetectParentChangeOffset == -1) _DetectParentChangeOffset = Schema.GetOffset(0xE5BA529506EC7868);
-            return ref _Handle.AsRef<CHandle<CEntityInstance>>(_DetectParentChangeOffset);
+            _DetectParentChangeOffset = _DetectParentChangeOffset ?? Schema.GetOffset(0xE5BA529506EC7868);
+            return ref _Handle.AsRef<CHandle<CEntityInstance>>(_DetectParentChangeOffset!.Value);
         }
     }
 

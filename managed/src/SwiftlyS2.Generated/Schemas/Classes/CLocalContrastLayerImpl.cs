@@ -16,16 +16,16 @@ internal partial class CLocalContrastLayerImpl : CColorCorrectionLayerImpl, CLoc
 {
     public CLocalContrastLayerImpl(nint handle) : base(handle) { }
 
-    private static nint _ParamsOffset = -1;
+    private static nint? _ParamsOffset;
     private PostProcessingLocalContrastParameters_tImpl? _ParamsInstance;
 
     public PostProcessingLocalContrastParameters_t Params
     {
         get
         {
-            if (_ParamsOffset == -1) _ParamsOffset = Schema.GetOffset(0x4AB63BD8640EA8F3);
+            _ParamsOffset = _ParamsOffset ?? Schema.GetOffset(0x4AB63BD8640EA8F3);
             var instance = _ParamsInstance ??= new PostProcessingLocalContrastParameters_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamsOffset);
+            instance.DangerousSetHandle(_Handle + _ParamsOffset!.Value);
             return instance;
         }
     }

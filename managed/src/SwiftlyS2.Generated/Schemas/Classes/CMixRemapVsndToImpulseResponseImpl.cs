@@ -16,14 +16,14 @@ internal partial class CMixRemapVsndToImpulseResponseImpl : CMixPropertyBaseImpl
 {
     public CMixRemapVsndToImpulseResponseImpl(nint handle) : base(handle) { }
 
-    private static nint _PreDelayMSOffset = -1;
+    private static nint? _PreDelayMSOffset;
 
     public ref float PreDelayMS
     {
         get
         {
-            if (_PreDelayMSOffset == -1) _PreDelayMSOffset = Schema.GetOffset(0x1FA078174EFEC8E7);
-            return ref _Handle.AsRef<float>(_PreDelayMSOffset);
+            _PreDelayMSOffset = _PreDelayMSOffset ?? Schema.GetOffset(0x1FA078174EFEC8E7);
+            return ref _Handle.AsRef<float>(_PreDelayMSOffset!.Value);
         }
     }
 

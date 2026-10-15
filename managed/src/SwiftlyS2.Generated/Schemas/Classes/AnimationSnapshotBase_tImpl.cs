@@ -16,96 +16,96 @@ internal partial class AnimationSnapshotBase_tImpl : SchemaClass, AnimationSnaps
 {
     public AnimationSnapshotBase_tImpl(nint handle) : base(handle) { }
 
-    private static nint _RealTimeOffset = -1;
+    private static nint? _RealTimeOffset;
 
     public ref float RealTime
     {
         get
         {
-            if (_RealTimeOffset == -1) _RealTimeOffset = Schema.GetOffset(0x608F9331168EC02);
-            return ref _Handle.AsRef<float>(_RealTimeOffset);
+            _RealTimeOffset = _RealTimeOffset ?? Schema.GetOffset(0x608F9331168EC02);
+            return ref _Handle.AsRef<float>(_RealTimeOffset!.Value);
         }
     }
-    private static nint _RootToWorldOffset = -1;
+    private static nint? _RootToWorldOffset;
 
     public ref matrix3x4_t RootToWorld
     {
         get
         {
-            if (_RootToWorldOffset == -1) _RootToWorldOffset = Schema.GetOffset(0x608F9331F80AFC0);
-            return ref _Handle.AsRef<matrix3x4_t>(_RootToWorldOffset);
+            _RootToWorldOffset = _RootToWorldOffset ?? Schema.GetOffset(0x608F9331F80AFC0);
+            return ref _Handle.AsRef<matrix3x4_t>(_RootToWorldOffset!.Value);
         }
     }
-    private static nint _BonesInWorldSpaceOffset = -1;
+    private static nint? _BonesInWorldSpaceOffset;
 
     public ref bool BonesInWorldSpace
     {
         get
         {
-            if (_BonesInWorldSpaceOffset == -1) _BonesInWorldSpaceOffset = Schema.GetOffset(0x608F933BDD22AA1);
-            return ref _Handle.AsRef<bool>(_BonesInWorldSpaceOffset);
+            _BonesInWorldSpaceOffset = _BonesInWorldSpaceOffset ?? Schema.GetOffset(0x608F933BDD22AA1);
+            return ref _Handle.AsRef<bool>(_BonesInWorldSpaceOffset!.Value);
         }
     }
-    private static nint _BoneSetupMaskOffset = -1;
+    private static nint? _BoneSetupMaskOffset;
 
     public ref CUtlVector<uint> BoneSetupMask
     {
         get
         {
-            if (_BoneSetupMaskOffset == -1) _BoneSetupMaskOffset = Schema.GetOffset(0x608F9334B3C48C8);
-            return ref _Handle.AsRef<CUtlVector<uint>>(_BoneSetupMaskOffset);
+            _BoneSetupMaskOffset = _BoneSetupMaskOffset ?? Schema.GetOffset(0x608F9334B3C48C8);
+            return ref _Handle.AsRef<CUtlVector<uint>>(_BoneSetupMaskOffset!.Value);
         }
     }
-    private static nint _BoneTransformsOffset = -1;
+    private static nint? _BoneTransformsOffset;
 
     public ref CUtlVector<matrix3x4_t> BoneTransforms
     {
         get
         {
-            if (_BoneTransformsOffset == -1) _BoneTransformsOffset = Schema.GetOffset(0x608F933ED000DE6);
-            return ref _Handle.AsRef<CUtlVector<matrix3x4_t>>(_BoneTransformsOffset);
+            _BoneTransformsOffset = _BoneTransformsOffset ?? Schema.GetOffset(0x608F933ED000DE6);
+            return ref _Handle.AsRef<CUtlVector<matrix3x4_t>>(_BoneTransformsOffset!.Value);
         }
     }
-    private static nint _FlexControllersOffset = -1;
+    private static nint? _FlexControllersOffset;
 
     public ref CUtlVector<float> FlexControllers
     {
         get
         {
-            if (_FlexControllersOffset == -1) _FlexControllersOffset = Schema.GetOffset(0x608F9337742939B);
-            return ref _Handle.AsRef<CUtlVector<float>>(_FlexControllersOffset);
+            _FlexControllersOffset = _FlexControllersOffset ?? Schema.GetOffset(0x608F9337742939B);
+            return ref _Handle.AsRef<CUtlVector<float>>(_FlexControllersOffset!.Value);
         }
     }
-    private static nint _SnapshotTypeOffset = -1;
+    private static nint? _SnapshotTypeOffset;
 
     public ref AnimationSnapshotType_t SnapshotType
     {
         get
         {
-            if (_SnapshotTypeOffset == -1) _SnapshotTypeOffset = Schema.GetOffset(0x608F933533E5725);
-            return ref _Handle.AsRef<AnimationSnapshotType_t>(_SnapshotTypeOffset);
+            _SnapshotTypeOffset = _SnapshotTypeOffset ?? Schema.GetOffset(0x608F933533E5725);
+            return ref _Handle.AsRef<AnimationSnapshotType_t>(_SnapshotTypeOffset!.Value);
         }
     }
-    private static nint _HasDecodeDumpOffset = -1;
+    private static nint? _HasDecodeDumpOffset;
 
     public ref bool HasDecodeDump
     {
         get
         {
-            if (_HasDecodeDumpOffset == -1) _HasDecodeDumpOffset = Schema.GetOffset(0x608F933BECD8B97);
-            return ref _Handle.AsRef<bool>(_HasDecodeDumpOffset);
+            _HasDecodeDumpOffset = _HasDecodeDumpOffset ?? Schema.GetOffset(0x608F933BECD8B97);
+            return ref _Handle.AsRef<bool>(_HasDecodeDumpOffset!.Value);
         }
     }
-    private static nint _DecodeDumpOffset = -1;
+    private static nint? _DecodeDumpOffset;
     private AnimationDecodeDebugDumpElement_tImpl? _DecodeDumpInstance;
 
     public AnimationDecodeDebugDumpElement_t DecodeDump
     {
         get
         {
-            if (_DecodeDumpOffset == -1) _DecodeDumpOffset = Schema.GetOffset(0x608F9332577A819);
+            _DecodeDumpOffset = _DecodeDumpOffset ?? Schema.GetOffset(0x608F9332577A819);
             var instance = _DecodeDumpInstance ??= new AnimationDecodeDebugDumpElement_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _DecodeDumpOffset);
+            instance.DangerousSetHandle(_Handle + _DecodeDumpOffset!.Value);
             return instance;
         }
     }

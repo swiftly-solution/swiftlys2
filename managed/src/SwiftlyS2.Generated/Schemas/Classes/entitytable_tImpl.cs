@@ -16,120 +16,120 @@ internal partial class entitytable_tImpl : SchemaClass, entitytable_t
 {
     public entitytable_tImpl(nint handle) : base(handle) { }
 
-    private static nint _IdOffset = -1;
+    private static nint? _IdOffset;
 
     public ref int Id
     {
         get
         {
-            if (_IdOffset == -1) _IdOffset = Schema.GetOffset(0x1E0697B537386AE0);
-            return ref _Handle.AsRef<int>(_IdOffset);
+            _IdOffset = _IdOffset ?? Schema.GetOffset(0x1E0697B537386AE0);
+            return ref _Handle.AsRef<int>(_IdOffset!.Value);
         }
     }
-    private static nint _EdictindexOffset = -1;
+    private static nint? _EdictindexOffset;
 
     public ref uint Edictindex
     {
         get
         {
-            if (_EdictindexOffset == -1) _EdictindexOffset = Schema.GetOffset(0x1E0697B547CC429C);
-            return ref _Handle.AsRef<uint>(_EdictindexOffset);
+            _EdictindexOffset = _EdictindexOffset ?? Schema.GetOffset(0x1E0697B547CC429C);
+            return ref _Handle.AsRef<uint>(_EdictindexOffset!.Value);
         }
     }
-    private static nint _SaveentityindexOffset = -1;
+    private static nint? _SaveentityindexOffset;
 
     public ref uint Saveentityindex
     {
         get
         {
-            if (_SaveentityindexOffset == -1) _SaveentityindexOffset = Schema.GetOffset(0x1E0697B5A4149BC9);
-            return ref _Handle.AsRef<uint>(_SaveentityindexOffset);
+            _SaveentityindexOffset = _SaveentityindexOffset ?? Schema.GetOffset(0x1E0697B5A4149BC9);
+            return ref _Handle.AsRef<uint>(_SaveentityindexOffset!.Value);
         }
     }
-    private static nint _WasSavedOffset = -1;
+    private static nint? _WasSavedOffset;
 
     public ref bool WasSaved
     {
         get
         {
-            if (_WasSavedOffset == -1) _WasSavedOffset = Schema.GetOffset(0x1E0697B5F6764161);
-            return ref _Handle.AsRef<bool>(_WasSavedOffset);
+            _WasSavedOffset = _WasSavedOffset ?? Schema.GetOffset(0x1E0697B5F6764161);
+            return ref _Handle.AsRef<bool>(_WasSavedOffset!.Value);
         }
     }
-    private static nint _FlagsOffset = -1;
+    private static nint? _FlagsOffset;
 
     public ref SaveRestoreTableFlags_t Flags
     {
         get
         {
-            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0x1E0697B59C677A2C);
-            return ref _Handle.AsRef<SaveRestoreTableFlags_t>(_FlagsOffset);
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x1E0697B59C677A2C);
+            return ref _Handle.AsRef<SaveRestoreTableFlags_t>(_FlagsOffset!.Value);
         }
     }
-    private static nint _ClassnameOffset = -1;
+    private static nint? _ClassnameOffset;
 
     public string Classname
     {
         get
         {
-            if (_ClassnameOffset == -1) _ClassnameOffset = Schema.GetOffset(0x1E0697B577200FFC);
-            return Schema.GetString(_Handle.Read<nint>(_ClassnameOffset));
+            _ClassnameOffset = _ClassnameOffset ?? Schema.GetOffset(0x1E0697B577200FFC);
+            return Schema.GetString(_Handle.Read<nint>(_ClassnameOffset!.Value));
         }
         set
         {
-            if (_ClassnameOffset == -1) _ClassnameOffset = Schema.GetOffset(0x1E0697B577200FFC);
-            Schema.SetString(_Handle, _ClassnameOffset, value);
+            _ClassnameOffset = _ClassnameOffset ?? Schema.GetOffset(0x1E0697B577200FFC);
+            Schema.SetString(_Handle, _ClassnameOffset!.Value, value);
         }
     }
-    private static nint _GlobalnameOffset = -1;
+    private static nint? _GlobalnameOffset;
 
     public string Globalname
     {
         get
         {
-            if (_GlobalnameOffset == -1) _GlobalnameOffset = Schema.GetOffset(0x1E0697B5D1D6920D);
-            return Schema.GetString(_Handle.Read<nint>(_GlobalnameOffset));
+            _GlobalnameOffset = _GlobalnameOffset ?? Schema.GetOffset(0x1E0697B5D1D6920D);
+            return Schema.GetString(_Handle.Read<nint>(_GlobalnameOffset!.Value));
         }
         set
         {
-            if (_GlobalnameOffset == -1) _GlobalnameOffset = Schema.GetOffset(0x1E0697B5D1D6920D);
-            Schema.SetString(_Handle, _GlobalnameOffset, value);
+            _GlobalnameOffset = _GlobalnameOffset ?? Schema.GetOffset(0x1E0697B5D1D6920D);
+            Schema.SetString(_Handle, _GlobalnameOffset!.Value, value);
         }
     }
-    private static nint _EntitynameOffset = -1;
+    private static nint? _EntitynameOffset;
 
     public string Entityname
     {
         get
         {
-            if (_EntitynameOffset == -1) _EntitynameOffset = Schema.GetOffset(0x1E0697B531AC0661);
-            return Schema.GetString(_Handle.Read<nint>(_EntitynameOffset));
+            _EntitynameOffset = _EntitynameOffset ?? Schema.GetOffset(0x1E0697B531AC0661);
+            return Schema.GetString(_Handle.Read<nint>(_EntitynameOffset!.Value));
         }
         set
         {
-            if (_EntitynameOffset == -1) _EntitynameOffset = Schema.GetOffset(0x1E0697B531AC0661);
-            Schema.SetString(_Handle, _EntitynameOffset, value);
+            _EntitynameOffset = _EntitynameOffset ?? Schema.GetOffset(0x1E0697B531AC0661);
+            Schema.SetString(_Handle, _EntitynameOffset!.Value, value);
         }
     }
-    private static nint _LandmarkModelSpaceOffset = -1;
+    private static nint? _LandmarkModelSpaceOffset;
 
     public ref Vector LandmarkModelSpace
     {
         get
         {
-            if (_LandmarkModelSpaceOffset == -1) _LandmarkModelSpaceOffset = Schema.GetOffset(0x1E0697B548A680E4);
-            return ref _Handle.AsRef<Vector>(_LandmarkModelSpaceOffset);
+            _LandmarkModelSpaceOffset = _LandmarkModelSpaceOffset ?? Schema.GetOffset(0x1E0697B548A680E4);
+            return ref _Handle.AsRef<Vector>(_LandmarkModelSpaceOffset!.Value);
         }
     }
-    private static nint _PrecacheEntityKeysOffset = -1;
+    private static nint? _PrecacheEntityKeysOffset;
     private SchemaUntypedField? _PrecacheEntityKeysInstance;
 
     public SchemaUntypedField? PrecacheEntityKeys
     {
         get
         {
-            if (_PrecacheEntityKeysOffset == -1) _PrecacheEntityKeysOffset = Schema.GetOffset(0x1E0697B560FC00F1);
-            var ptr = _Handle.Read<nint>(_PrecacheEntityKeysOffset);
+            _PrecacheEntityKeysOffset = _PrecacheEntityKeysOffset ?? Schema.GetOffset(0x1E0697B560FC00F1);
+            var ptr = _Handle.Read<nint>(_PrecacheEntityKeysOffset!.Value);
             if (!ptr.IsValidPtr()) return null;
             var instance = _PrecacheEntityKeysInstance ??= new SchemaUntypedField(0);
             instance.DangerousSetHandle(ptr);

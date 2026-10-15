@@ -16,24 +16,24 @@ internal partial class CSkyCameraVolumeTargetImpl : CBaseEntityImpl, CSkyCameraV
 {
     public CSkyCameraVolumeTargetImpl(nint handle) : base(handle) { }
 
-    private static nint _SkyboxScaleOffset = -1;
+    private static nint? _SkyboxScaleOffset;
 
     public ref short SkyboxScale
     {
         get
         {
-            if (_SkyboxScaleOffset == -1) _SkyboxScaleOffset = Schema.GetOffset(0xCA3F7787F9F22997);
-            return ref _Handle.AsRef<short>(_SkyboxScaleOffset);
+            _SkyboxScaleOffset = _SkyboxScaleOffset ?? Schema.GetOffset(0xCA3F7787F9F22997);
+            return ref _Handle.AsRef<short>(_SkyboxScaleOffset!.Value);
         }
     }
-    private static nint _SkyMaterialOffset = -1;
+    private static nint? _SkyMaterialOffset;
 
     public ref CStrongHandle<InfoForResourceTypeIMaterial2> SkyMaterial
     {
         get
         {
-            if (_SkyMaterialOffset == -1) _SkyMaterialOffset = Schema.GetOffset(0xCA3F7787C887319D);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_SkyMaterialOffset);
+            _SkyMaterialOffset = _SkyMaterialOffset ?? Schema.GetOffset(0xCA3F7787C887319D);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_SkyMaterialOffset!.Value);
         }
     }
 

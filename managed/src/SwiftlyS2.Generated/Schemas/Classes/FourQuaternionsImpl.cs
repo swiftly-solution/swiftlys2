@@ -16,44 +16,44 @@ internal partial class FourQuaternionsImpl : SchemaClass, FourQuaternions
 {
     public FourQuaternionsImpl(nint handle) : base(handle) { }
 
-    private static nint _XOffset = -1;
+    private static nint? _XOffset;
 
     public ref fltx4 X
     {
         get
         {
-            if (_XOffset == -1) _XOffset = Schema.GetOffset(0x438DAD7AFD0C5087);
-            return ref _Handle.AsRef<fltx4>(_XOffset);
+            _XOffset = _XOffset ?? Schema.GetOffset(0x438DAD7AFD0C5087);
+            return ref _Handle.AsRef<fltx4>(_XOffset!.Value);
         }
     }
-    private static nint _YOffset = -1;
+    private static nint? _YOffset;
 
     public ref fltx4 Y
     {
         get
         {
-            if (_YOffset == -1) _YOffset = Schema.GetOffset(0x438DAD7AFC0C4EF4);
-            return ref _Handle.AsRef<fltx4>(_YOffset);
+            _YOffset = _YOffset ?? Schema.GetOffset(0x438DAD7AFC0C4EF4);
+            return ref _Handle.AsRef<fltx4>(_YOffset!.Value);
         }
     }
-    private static nint _ZOffset = -1;
+    private static nint? _ZOffset;
 
     public ref fltx4 Z
     {
         get
         {
-            if (_ZOffset == -1) _ZOffset = Schema.GetOffset(0x438DAD7AFF0C53AD);
-            return ref _Handle.AsRef<fltx4>(_ZOffset);
+            _ZOffset = _ZOffset ?? Schema.GetOffset(0x438DAD7AFF0C53AD);
+            return ref _Handle.AsRef<fltx4>(_ZOffset!.Value);
         }
     }
-    private static nint _WOffset = -1;
+    private static nint? _WOffset;
 
     public ref fltx4 W
     {
         get
         {
-            if (_WOffset == -1) _WOffset = Schema.GetOffset(0x438DAD7AF20C3F36);
-            return ref _Handle.AsRef<fltx4>(_WOffset);
+            _WOffset = _WOffset ?? Schema.GetOffset(0x438DAD7AF20C3F36);
+            return ref _Handle.AsRef<fltx4>(_WOffset!.Value);
         }
     }
 

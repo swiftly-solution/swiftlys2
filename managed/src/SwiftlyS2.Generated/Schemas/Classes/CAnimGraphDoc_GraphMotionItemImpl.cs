@@ -16,31 +16,31 @@ internal partial class CAnimGraphDoc_GraphMotionItemImpl : CAnimGraphDoc_MotionI
 {
     public CAnimGraphDoc_GraphMotionItemImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xDA3F19474D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xDA3F19474D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xDA3F19474D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xDA3F19474D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _NodeManagerOffset = -1;
+    private static nint? _NodeManagerOffset;
     private CAnimGraphDoc_MotionNodeManagerImpl? _NodeManagerInstance;
 
     public CAnimGraphDoc_MotionNodeManager NodeManager
     {
         get
         {
-            if (_NodeManagerOffset == -1) _NodeManagerOffset = Schema.GetOffset(0xDA3F1947ADC397E4);
+            _NodeManagerOffset = _NodeManagerOffset ?? Schema.GetOffset(0xDA3F1947ADC397E4);
             var instance = _NodeManagerInstance ??= new CAnimGraphDoc_MotionNodeManagerImpl(0);
-            instance.DangerousSetHandle(_Handle + _NodeManagerOffset);
+            instance.DangerousSetHandle(_Handle + _NodeManagerOffset!.Value);
             return instance;
         }
     }

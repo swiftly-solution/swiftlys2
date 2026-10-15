@@ -16,16 +16,16 @@ internal partial class CMixUtilityImpl : CMixPropertyBaseImpl, CMixUtility
 {
     public CMixUtilityImpl(nint handle) : base(handle) { }
 
-    private static nint _DescOffset = -1;
+    private static nint? _DescOffset;
     private VMixUtilityDesc_tImpl? _DescInstance;
 
     public VMixUtilityDesc_t Desc
     {
         get
         {
-            if (_DescOffset == -1) _DescOffset = Schema.GetOffset(0x9E205D7C27917BC0);
+            _DescOffset = _DescOffset ?? Schema.GetOffset(0x9E205D7C27917BC0);
             var instance = _DescInstance ??= new VMixUtilityDesc_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _DescOffset);
+            instance.DangerousSetHandle(_Handle + _DescOffset!.Value);
             return instance;
         }
     }

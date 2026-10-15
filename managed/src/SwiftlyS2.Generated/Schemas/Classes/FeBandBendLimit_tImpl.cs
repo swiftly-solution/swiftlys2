@@ -16,36 +16,36 @@ internal partial class FeBandBendLimit_tImpl : SchemaClass, FeBandBendLimit_t
 {
     public FeBandBendLimit_tImpl(nint handle) : base(handle) { }
 
-    private static nint _DistMinOffset = -1;
+    private static nint? _DistMinOffset;
 
     public ref float DistMin
     {
         get
         {
-            if (_DistMinOffset == -1) _DistMinOffset = Schema.GetOffset(0xB667406005D5EE89);
-            return ref _Handle.AsRef<float>(_DistMinOffset);
+            _DistMinOffset = _DistMinOffset ?? Schema.GetOffset(0xB667406005D5EE89);
+            return ref _Handle.AsRef<float>(_DistMinOffset!.Value);
         }
     }
-    private static nint _DistMaxOffset = -1;
+    private static nint? _DistMaxOffset;
 
     public ref float DistMax
     {
         get
         {
-            if (_DistMaxOffset == -1) _DistMaxOffset = Schema.GetOffset(0xB6674060F7C250C7);
-            return ref _Handle.AsRef<float>(_DistMaxOffset);
+            _DistMaxOffset = _DistMaxOffset ?? Schema.GetOffset(0xB6674060F7C250C7);
+            return ref _Handle.AsRef<float>(_DistMaxOffset!.Value);
         }
     }
-    private static nint _NodeOffset = -1;
+    private static nint? _NodeOffset;
     private SchemaFixedArray<ushort>? _NodeInstance;
 
     public ISchemaFixedArray<ushort> Node
     {
         get
         {
-            if (_NodeOffset == -1) _NodeOffset = Schema.GetOffset(0xB6674060CD6694B9);
+            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0xB6674060CD6694B9);
             var instance = _NodeInstance ??= new SchemaFixedArray<ushort>(0, 0xB6674060CD6694B9, 6, 2, 2);
-            instance.DangerousSetHandle(_Handle + _NodeOffset);
+            instance.DangerousSetHandle(_Handle + _NodeOffset!.Value);
             return instance;
         }
     }

@@ -16,54 +16,54 @@ internal partial class CNmGraphDocTargetSelectorNodeImpl : CNmGraphDocVariationD
 {
     public CNmGraphDocTargetSelectorNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _OptionLabelsOffset = -1;
+    private static nint? _OptionLabelsOffset;
 
     public ref CUtlVector<CUtlString> OptionLabels
     {
         get
         {
-            if (_OptionLabelsOffset == -1) _OptionLabelsOffset = Schema.GetOffset(0xF34A1909D071C433);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_OptionLabelsOffset);
+            _OptionLabelsOffset = _OptionLabelsOffset ?? Schema.GetOffset(0xF34A1909D071C433);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_OptionLabelsOffset!.Value);
         }
     }
-    private static nint _OrientationScoreWeightOffset = -1;
+    private static nint? _OrientationScoreWeightOffset;
 
     public ref float OrientationScoreWeight
     {
         get
         {
-            if (_OrientationScoreWeightOffset == -1) _OrientationScoreWeightOffset = Schema.GetOffset(0xF34A190984AD2F6B);
-            return ref _Handle.AsRef<float>(_OrientationScoreWeightOffset);
+            _OrientationScoreWeightOffset = _OrientationScoreWeightOffset ?? Schema.GetOffset(0xF34A190984AD2F6B);
+            return ref _Handle.AsRef<float>(_OrientationScoreWeightOffset!.Value);
         }
     }
-    private static nint _PositionScoreWeightOffset = -1;
+    private static nint? _PositionScoreWeightOffset;
 
     public ref float PositionScoreWeight
     {
         get
         {
-            if (_PositionScoreWeightOffset == -1) _PositionScoreWeightOffset = Schema.GetOffset(0xF34A1909DD432F1E);
-            return ref _Handle.AsRef<float>(_PositionScoreWeightOffset);
+            _PositionScoreWeightOffset = _PositionScoreWeightOffset ?? Schema.GetOffset(0xF34A1909DD432F1E);
+            return ref _Handle.AsRef<float>(_PositionScoreWeightOffset!.Value);
         }
     }
-    private static nint _IsWorldSpaceTargetOffset = -1;
+    private static nint? _IsWorldSpaceTargetOffset;
 
     public ref bool IsWorldSpaceTarget
     {
         get
         {
-            if (_IsWorldSpaceTargetOffset == -1) _IsWorldSpaceTargetOffset = Schema.GetOffset(0xF34A1909B81D53F2);
-            return ref _Handle.AsRef<bool>(_IsWorldSpaceTargetOffset);
+            _IsWorldSpaceTargetOffset = _IsWorldSpaceTargetOffset ?? Schema.GetOffset(0xF34A1909B81D53F2);
+            return ref _Handle.AsRef<bool>(_IsWorldSpaceTargetOffset!.Value);
         }
     }
-    private static nint _IgnoreInvalidOptionsOffset = -1;
+    private static nint? _IgnoreInvalidOptionsOffset;
 
     public ref bool IgnoreInvalidOptions
     {
         get
         {
-            if (_IgnoreInvalidOptionsOffset == -1) _IgnoreInvalidOptionsOffset = Schema.GetOffset(0xF34A1909507C679C);
-            return ref _Handle.AsRef<bool>(_IgnoreInvalidOptionsOffset);
+            _IgnoreInvalidOptionsOffset = _IgnoreInvalidOptionsOffset ?? Schema.GetOffset(0xF34A1909507C679C);
+            return ref _Handle.AsRef<bool>(_IgnoreInvalidOptionsOffset!.Value);
         }
     }
 

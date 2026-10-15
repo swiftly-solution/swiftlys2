@@ -16,84 +16,84 @@ internal partial class FeAntiTunnelProbe_tImpl : SchemaClass, FeAntiTunnelProbe_
 {
     public FeAntiTunnelProbe_tImpl(nint handle) : base(handle) { }
 
-    private static nint _WeightOffset = -1;
+    private static nint? _WeightOffset;
 
     public ref float Weight
     {
         get
         {
-            if (_WeightOffset == -1) _WeightOffset = Schema.GetOffset(0xBC54CE0BCFFC66CB);
-            return ref _Handle.AsRef<float>(_WeightOffset);
+            _WeightOffset = _WeightOffset ?? Schema.GetOffset(0xBC54CE0BCFFC66CB);
+            return ref _Handle.AsRef<float>(_WeightOffset!.Value);
         }
     }
-    private static nint _FlagsOffset = -1;
+    private static nint? _FlagsOffset;
 
     public ref uint Flags
     {
         get
         {
-            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0xBC54CE0BB8D52E48);
-            return ref _Handle.AsRef<uint>(_FlagsOffset);
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0xBC54CE0BB8D52E48);
+            return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
         }
     }
-    private static nint _ProbeNodeOffset = -1;
+    private static nint? _ProbeNodeOffset;
 
     public ref ushort ProbeNode
     {
         get
         {
-            if (_ProbeNodeOffset == -1) _ProbeNodeOffset = Schema.GetOffset(0xBC54CE0B5F3CB12D);
-            return ref _Handle.AsRef<ushort>(_ProbeNodeOffset);
+            _ProbeNodeOffset = _ProbeNodeOffset ?? Schema.GetOffset(0xBC54CE0B5F3CB12D);
+            return ref _Handle.AsRef<ushort>(_ProbeNodeOffset!.Value);
         }
     }
-    private static nint _CountOffset = -1;
+    private static nint? _CountOffset;
 
     public ref ushort Count
     {
         get
         {
-            if (_CountOffset == -1) _CountOffset = Schema.GetOffset(0xBC54CE0B67983E28);
-            return ref _Handle.AsRef<ushort>(_CountOffset);
+            _CountOffset = _CountOffset ?? Schema.GetOffset(0xBC54CE0B67983E28);
+            return ref _Handle.AsRef<ushort>(_CountOffset!.Value);
         }
     }
-    private static nint _BeginOffset = -1;
+    private static nint? _BeginOffset;
 
     public ref uint Begin
     {
         get
         {
-            if (_BeginOffset == -1) _BeginOffset = Schema.GetOffset(0xBC54CE0BC630D75A);
-            return ref _Handle.AsRef<uint>(_BeginOffset);
+            _BeginOffset = _BeginOffset ?? Schema.GetOffset(0xBC54CE0BC630D75A);
+            return ref _Handle.AsRef<uint>(_BeginOffset!.Value);
         }
     }
-    private static nint _ActivationDistanceOffset = -1;
+    private static nint? _ActivationDistanceOffset;
 
     public ref float ActivationDistance
     {
         get
         {
-            if (_ActivationDistanceOffset == -1) _ActivationDistanceOffset = Schema.GetOffset(0xBC54CE0BEAB1A998);
-            return ref _Handle.AsRef<float>(_ActivationDistanceOffset);
+            _ActivationDistanceOffset = _ActivationDistanceOffset ?? Schema.GetOffset(0xBC54CE0BEAB1A998);
+            return ref _Handle.AsRef<float>(_ActivationDistanceOffset!.Value);
         }
     }
-    private static nint _CurvatureRadiusOffset = -1;
+    private static nint? _CurvatureRadiusOffset;
 
     public ref float CurvatureRadius
     {
         get
         {
-            if (_CurvatureRadiusOffset == -1) _CurvatureRadiusOffset = Schema.GetOffset(0xBC54CE0BADAE92BE);
-            return ref _Handle.AsRef<float>(_CurvatureRadiusOffset);
+            _CurvatureRadiusOffset = _CurvatureRadiusOffset ?? Schema.GetOffset(0xBC54CE0BADAE92BE);
+            return ref _Handle.AsRef<float>(_CurvatureRadiusOffset!.Value);
         }
     }
-    private static nint _BiasOffset = -1;
+    private static nint? _BiasOffset;
 
     public ref float Bias
     {
         get
         {
-            if (_BiasOffset == -1) _BiasOffset = Schema.GetOffset(0xBC54CE0B30667CD6);
-            return ref _Handle.AsRef<float>(_BiasOffset);
+            _BiasOffset = _BiasOffset ?? Schema.GetOffset(0xBC54CE0B30667CD6);
+            return ref _Handle.AsRef<float>(_BiasOffset!.Value);
         }
     }
 

@@ -16,24 +16,24 @@ internal partial class CNmFloatRemapNode__RemapRange_tImpl : SchemaClass, CNmFlo
 {
     public CNmFloatRemapNode__RemapRange_tImpl(nint handle) : base(handle) { }
 
-    private static nint _BeginOffset = -1;
+    private static nint? _BeginOffset;
 
     public ref float Begin
     {
         get
         {
-            if (_BeginOffset == -1) _BeginOffset = Schema.GetOffset(0x35C6A3517504C130);
-            return ref _Handle.AsRef<float>(_BeginOffset);
+            _BeginOffset = _BeginOffset ?? Schema.GetOffset(0x35C6A3517504C130);
+            return ref _Handle.AsRef<float>(_BeginOffset!.Value);
         }
     }
-    private static nint _EndOffset = -1;
+    private static nint? _EndOffset;
 
     public ref float End
     {
         get
         {
-            if (_EndOffset == -1) _EndOffset = Schema.GetOffset(0x35C6A3519616A27C);
-            return ref _Handle.AsRef<float>(_EndOffset);
+            _EndOffset = _EndOffset ?? Schema.GetOffset(0x35C6A3519616A27C);
+            return ref _Handle.AsRef<float>(_EndOffset!.Value);
         }
     }
 

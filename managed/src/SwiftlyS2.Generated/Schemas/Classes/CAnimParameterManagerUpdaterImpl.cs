@@ -16,72 +16,72 @@ internal partial class CAnimParameterManagerUpdaterImpl : SchemaClass, CAnimPara
 {
     public CAnimParameterManagerUpdaterImpl(nint handle) : base(handle) { }
 
-    private static nint _ParametersOffset = -1;
+    private static nint? _ParametersOffset;
 
     public ref CUtlVector<SchemaUntypedField> Parameters
     {
         get
         {
-            if (_ParametersOffset == -1) _ParametersOffset = Schema.GetOffset(0x2289044E99935479);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ParametersOffset);
+            _ParametersOffset = _ParametersOffset ?? Schema.GetOffset(0x2289044E99935479);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ParametersOffset!.Value);
         }
     }
-    private static nint _IdToIndexMapOffset = -1;
+    private static nint? _IdToIndexMapOffset;
     private SchemaUntypedField? _IdToIndexMapInstance;
 
     public SchemaUntypedField IdToIndexMap
     {
         get
         {
-            if (_IdToIndexMapOffset == -1) _IdToIndexMapOffset = Schema.GetOffset(0x2289044E7B873A5F);
+            _IdToIndexMapOffset = _IdToIndexMapOffset ?? Schema.GetOffset(0x2289044E7B873A5F);
             var instance = _IdToIndexMapInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _IdToIndexMapOffset);
+            instance.DangerousSetHandle(_Handle + _IdToIndexMapOffset!.Value);
             return instance;
         }
     }
-    private static nint _NameToIndexMapOffset = -1;
+    private static nint? _NameToIndexMapOffset;
     private SchemaUntypedField? _NameToIndexMapInstance;
 
     public SchemaUntypedField NameToIndexMap
     {
         get
         {
-            if (_NameToIndexMapOffset == -1) _NameToIndexMapOffset = Schema.GetOffset(0x2289044EDA1FC14D);
+            _NameToIndexMapOffset = _NameToIndexMapOffset ?? Schema.GetOffset(0x2289044EDA1FC14D);
             var instance = _NameToIndexMapInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _NameToIndexMapOffset);
+            instance.DangerousSetHandle(_Handle + _NameToIndexMapOffset!.Value);
             return instance;
         }
     }
-    private static nint _IndexToHandleOffset = -1;
+    private static nint? _IndexToHandleOffset;
 
     public ref CUtlVector<CAnimParamHandle> IndexToHandle
     {
         get
         {
-            if (_IndexToHandleOffset == -1) _IndexToHandleOffset = Schema.GetOffset(0x2289044E3F943600);
-            return ref _Handle.AsRef<CUtlVector<CAnimParamHandle>>(_IndexToHandleOffset);
+            _IndexToHandleOffset = _IndexToHandleOffset ?? Schema.GetOffset(0x2289044E3F943600);
+            return ref _Handle.AsRef<CUtlVector<CAnimParamHandle>>(_IndexToHandleOffset!.Value);
         }
     }
-    private static nint _AutoResetParamsOffset = -1;
+    private static nint? _AutoResetParamsOffset;
 
     public ref CUtlVector<SchemaUntypedField> AutoResetParams
     {
         get
         {
-            if (_AutoResetParamsOffset == -1) _AutoResetParamsOffset = Schema.GetOffset(0x2289044EA74F889F);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_AutoResetParamsOffset);
+            _AutoResetParamsOffset = _AutoResetParamsOffset ?? Schema.GetOffset(0x2289044EA74F889F);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_AutoResetParamsOffset!.Value);
         }
     }
-    private static nint _AutoResetMapOffset = -1;
+    private static nint? _AutoResetMapOffset;
     private SchemaUntypedField? _AutoResetMapInstance;
 
     public SchemaUntypedField AutoResetMap
     {
         get
         {
-            if (_AutoResetMapOffset == -1) _AutoResetMapOffset = Schema.GetOffset(0x2289044E024CB2F5);
+            _AutoResetMapOffset = _AutoResetMapOffset ?? Schema.GetOffset(0x2289044E024CB2F5);
             var instance = _AutoResetMapInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _AutoResetMapOffset);
+            instance.DangerousSetHandle(_Handle + _AutoResetMapOffset!.Value);
             return instance;
         }
     }

@@ -16,127 +16,127 @@ internal partial class VPhysXBodyPart_tImpl : SchemaClass, VPhysXBodyPart_t
 {
     public VPhysXBodyPart_tImpl(nint handle) : base(handle) { }
 
-    private static nint _FlagsOffset = -1;
+    private static nint? _FlagsOffset;
 
     public ref uint Flags
     {
         get
         {
-            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0x53DE59CDCE6E9C28);
-            return ref _Handle.AsRef<uint>(_FlagsOffset);
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x53DE59CDCE6E9C28);
+            return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
         }
     }
-    private static nint _MassOffset = -1;
+    private static nint? _MassOffset;
 
     public ref float Mass
     {
         get
         {
-            if (_MassOffset == -1) _MassOffset = Schema.GetOffset(0x53DE59CDCD83D263);
-            return ref _Handle.AsRef<float>(_MassOffset);
+            _MassOffset = _MassOffset ?? Schema.GetOffset(0x53DE59CDCD83D263);
+            return ref _Handle.AsRef<float>(_MassOffset!.Value);
         }
     }
-    private static nint _RnShapeOffset = -1;
+    private static nint? _RnShapeOffset;
     private VPhysics2ShapeDef_tImpl? _RnShapeInstance;
 
     public VPhysics2ShapeDef_t RnShape
     {
         get
         {
-            if (_RnShapeOffset == -1) _RnShapeOffset = Schema.GetOffset(0x53DE59CDD69E7012);
+            _RnShapeOffset = _RnShapeOffset ?? Schema.GetOffset(0x53DE59CDD69E7012);
             var instance = _RnShapeInstance ??= new VPhysics2ShapeDef_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _RnShapeOffset);
+            instance.DangerousSetHandle(_Handle + _RnShapeOffset!.Value);
             return instance;
         }
     }
-    private static nint _CollisionAttributeIndexOffset = -1;
+    private static nint? _CollisionAttributeIndexOffset;
 
     public ref ushort CollisionAttributeIndex
     {
         get
         {
-            if (_CollisionAttributeIndexOffset == -1) _CollisionAttributeIndexOffset = Schema.GetOffset(0x53DE59CDC7B64DF7);
-            return ref _Handle.AsRef<ushort>(_CollisionAttributeIndexOffset);
+            _CollisionAttributeIndexOffset = _CollisionAttributeIndexOffset ?? Schema.GetOffset(0x53DE59CDC7B64DF7);
+            return ref _Handle.AsRef<ushort>(_CollisionAttributeIndexOffset!.Value);
         }
     }
-    private static nint _ReservedOffset = -1;
+    private static nint? _ReservedOffset;
 
     public ref ushort Reserved
     {
         get
         {
-            if (_ReservedOffset == -1) _ReservedOffset = Schema.GetOffset(0x53DE59CD94BD4B01);
-            return ref _Handle.AsRef<ushort>(_ReservedOffset);
+            _ReservedOffset = _ReservedOffset ?? Schema.GetOffset(0x53DE59CD94BD4B01);
+            return ref _Handle.AsRef<ushort>(_ReservedOffset!.Value);
         }
     }
-    private static nint _InertiaScaleOffset = -1;
+    private static nint? _InertiaScaleOffset;
 
     public ref float InertiaScale
     {
         get
         {
-            if (_InertiaScaleOffset == -1) _InertiaScaleOffset = Schema.GetOffset(0x53DE59CD4E6CAB2F);
-            return ref _Handle.AsRef<float>(_InertiaScaleOffset);
+            _InertiaScaleOffset = _InertiaScaleOffset ?? Schema.GetOffset(0x53DE59CD4E6CAB2F);
+            return ref _Handle.AsRef<float>(_InertiaScaleOffset!.Value);
         }
     }
-    private static nint _LinearDampingOffset = -1;
+    private static nint? _LinearDampingOffset;
 
     public ref float LinearDamping
     {
         get
         {
-            if (_LinearDampingOffset == -1) _LinearDampingOffset = Schema.GetOffset(0x53DE59CD4E6B7F64);
-            return ref _Handle.AsRef<float>(_LinearDampingOffset);
+            _LinearDampingOffset = _LinearDampingOffset ?? Schema.GetOffset(0x53DE59CD4E6B7F64);
+            return ref _Handle.AsRef<float>(_LinearDampingOffset!.Value);
         }
     }
-    private static nint _AngularDampingOffset = -1;
+    private static nint? _AngularDampingOffset;
 
     public ref float AngularDamping
     {
         get
         {
-            if (_AngularDampingOffset == -1) _AngularDampingOffset = Schema.GetOffset(0x53DE59CD0E32E897);
-            return ref _Handle.AsRef<float>(_AngularDampingOffset);
+            _AngularDampingOffset = _AngularDampingOffset ?? Schema.GetOffset(0x53DE59CD0E32E897);
+            return ref _Handle.AsRef<float>(_AngularDampingOffset!.Value);
         }
     }
-    private static nint _LinearDragOffset = -1;
+    private static nint? _LinearDragOffset;
 
     public ref float LinearDrag
     {
         get
         {
-            if (_LinearDragOffset == -1) _LinearDragOffset = Schema.GetOffset(0x53DE59CDB3D686BC);
-            return ref _Handle.AsRef<float>(_LinearDragOffset);
+            _LinearDragOffset = _LinearDragOffset ?? Schema.GetOffset(0x53DE59CDB3D686BC);
+            return ref _Handle.AsRef<float>(_LinearDragOffset!.Value);
         }
     }
-    private static nint _AngularDragOffset = -1;
+    private static nint? _AngularDragOffset;
 
     public ref float AngularDrag
     {
         get
         {
-            if (_AngularDragOffset == -1) _AngularDragOffset = Schema.GetOffset(0x53DE59CDDCE9A7D1);
-            return ref _Handle.AsRef<float>(_AngularDragOffset);
+            _AngularDragOffset = _AngularDragOffset ?? Schema.GetOffset(0x53DE59CDDCE9A7D1);
+            return ref _Handle.AsRef<float>(_AngularDragOffset!.Value);
         }
     }
-    private static nint _OverrideMassCenterOffset = -1;
+    private static nint? _OverrideMassCenterOffset;
 
     public ref bool OverrideMassCenter
     {
         get
         {
-            if (_OverrideMassCenterOffset == -1) _OverrideMassCenterOffset = Schema.GetOffset(0x53DE59CD19E47DF8);
-            return ref _Handle.AsRef<bool>(_OverrideMassCenterOffset);
+            _OverrideMassCenterOffset = _OverrideMassCenterOffset ?? Schema.GetOffset(0x53DE59CD19E47DF8);
+            return ref _Handle.AsRef<bool>(_OverrideMassCenterOffset!.Value);
         }
     }
-    private static nint _MassCenterOverrideOffset = -1;
+    private static nint? _MassCenterOverrideOffset;
 
     public ref Vector MassCenterOverride
     {
         get
         {
-            if (_MassCenterOverrideOffset == -1) _MassCenterOverrideOffset = Schema.GetOffset(0x53DE59CD7249FAE4);
-            return ref _Handle.AsRef<Vector>(_MassCenterOverrideOffset);
+            _MassCenterOverrideOffset = _MassCenterOverrideOffset ?? Schema.GetOffset(0x53DE59CD7249FAE4);
+            return ref _Handle.AsRef<Vector>(_MassCenterOverrideOffset!.Value);
         }
     }
 

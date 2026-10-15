@@ -16,126 +16,126 @@ internal partial class CSeqS1SeqDescImpl : SchemaClass, CSeqS1SeqDesc
 {
     public CSeqS1SeqDescImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public ref CBufferString Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x6EF8193563D22D49);
-            return ref _Handle.AsRef<CBufferString>(_NameOffset);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x6EF8193563D22D49);
+            return ref _Handle.AsRef<CBufferString>(_NameOffset!.Value);
         }
     }
-    private static nint _FlagsOffset = -1;
+    private static nint? _FlagsOffset;
     private CSeqSeqDescFlagImpl? _FlagsInstance;
 
     public CSeqSeqDescFlag Flags
     {
         get
         {
-            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0x6EF81935DC74A14C);
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x6EF81935DC74A14C);
             var instance = _FlagsInstance ??= new CSeqSeqDescFlagImpl(0);
-            instance.DangerousSetHandle(_Handle + _FlagsOffset);
+            instance.DangerousSetHandle(_Handle + _FlagsOffset!.Value);
             return instance;
         }
     }
-    private static nint _FetchOffset = -1;
+    private static nint? _FetchOffset;
     private CSeqMultiFetchImpl? _FetchInstance;
 
     public CSeqMultiFetch Fetch
     {
         get
         {
-            if (_FetchOffset == -1) _FetchOffset = Schema.GetOffset(0x6EF81935ED8BE703);
+            _FetchOffset = _FetchOffset ?? Schema.GetOffset(0x6EF81935ED8BE703);
             var instance = _FetchInstance ??= new CSeqMultiFetchImpl(0);
-            instance.DangerousSetHandle(_Handle + _FetchOffset);
+            instance.DangerousSetHandle(_Handle + _FetchOffset!.Value);
             return instance;
         }
     }
-    private static nint _LocalWeightlistOffset = -1;
+    private static nint? _LocalWeightlistOffset;
 
     public ref int LocalWeightlist
     {
         get
         {
-            if (_LocalWeightlistOffset == -1) _LocalWeightlistOffset = Schema.GetOffset(0x6EF819356F64F49C);
-            return ref _Handle.AsRef<int>(_LocalWeightlistOffset);
+            _LocalWeightlistOffset = _LocalWeightlistOffset ?? Schema.GetOffset(0x6EF819356F64F49C);
+            return ref _Handle.AsRef<int>(_LocalWeightlistOffset!.Value);
         }
     }
-    private static nint _AutoLayerArrayOffset = -1;
+    private static nint? _AutoLayerArrayOffset;
 
     public ref CUtlVector<CSeqAutoLayer> AutoLayerArray
     {
         get
         {
-            if (_AutoLayerArrayOffset == -1) _AutoLayerArrayOffset = Schema.GetOffset(0x6EF81935834EB170);
-            return ref _Handle.AsRef<CUtlVector<CSeqAutoLayer>>(_AutoLayerArrayOffset);
+            _AutoLayerArrayOffset = _AutoLayerArrayOffset ?? Schema.GetOffset(0x6EF81935834EB170);
+            return ref _Handle.AsRef<CUtlVector<CSeqAutoLayer>>(_AutoLayerArrayOffset!.Value);
         }
     }
-    private static nint _IKLockArrayOffset = -1;
+    private static nint? _IKLockArrayOffset;
 
     public ref CUtlVector<CSeqIKLock> IKLockArray
     {
         get
         {
-            if (_IKLockArrayOffset == -1) _IKLockArrayOffset = Schema.GetOffset(0x6EF81935BF1FEC6B);
-            return ref _Handle.AsRef<CUtlVector<CSeqIKLock>>(_IKLockArrayOffset);
+            _IKLockArrayOffset = _IKLockArrayOffset ?? Schema.GetOffset(0x6EF81935BF1FEC6B);
+            return ref _Handle.AsRef<CUtlVector<CSeqIKLock>>(_IKLockArrayOffset!.Value);
         }
     }
-    private static nint _TransitionOffset = -1;
+    private static nint? _TransitionOffset;
     private CSeqTransitionImpl? _TransitionInstance;
 
     public CSeqTransition Transition
     {
         get
         {
-            if (_TransitionOffset == -1) _TransitionOffset = Schema.GetOffset(0x6EF8193582B0A282);
+            _TransitionOffset = _TransitionOffset ?? Schema.GetOffset(0x6EF8193582B0A282);
             var instance = _TransitionInstance ??= new CSeqTransitionImpl(0);
-            instance.DangerousSetHandle(_Handle + _TransitionOffset);
+            instance.DangerousSetHandle(_Handle + _TransitionOffset!.Value);
             return instance;
         }
     }
-    private static nint _SequenceKeysOffset = -1;
+    private static nint? _SequenceKeysOffset;
     private SchemaUntypedField? _SequenceKeysInstance;
 
     public SchemaUntypedField SequenceKeys
     {
         get
         {
-            if (_SequenceKeysOffset == -1) _SequenceKeysOffset = Schema.GetOffset(0x6EF81935C7ACD18C);
+            _SequenceKeysOffset = _SequenceKeysOffset ?? Schema.GetOffset(0x6EF81935C7ACD18C);
             var instance = _SequenceKeysInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _SequenceKeysOffset);
+            instance.DangerousSetHandle(_Handle + _SequenceKeysOffset!.Value);
             return instance;
         }
     }
-    private static nint _LegacyKeyValueTextOffset = -1;
+    private static nint? _LegacyKeyValueTextOffset;
 
     public ref CBufferString LegacyKeyValueText
     {
         get
         {
-            if (_LegacyKeyValueTextOffset == -1) _LegacyKeyValueTextOffset = Schema.GetOffset(0x6EF81935D12D4AC1);
-            return ref _Handle.AsRef<CBufferString>(_LegacyKeyValueTextOffset);
+            _LegacyKeyValueTextOffset = _LegacyKeyValueTextOffset ?? Schema.GetOffset(0x6EF81935D12D4AC1);
+            return ref _Handle.AsRef<CBufferString>(_LegacyKeyValueTextOffset!.Value);
         }
     }
-    private static nint _ActivityArrayOffset = -1;
+    private static nint? _ActivityArrayOffset;
 
     public ref CUtlVector<CAnimActivity> ActivityArray
     {
         get
         {
-            if (_ActivityArrayOffset == -1) _ActivityArrayOffset = Schema.GetOffset(0x6EF8193538F0ACE1);
-            return ref _Handle.AsRef<CUtlVector<CAnimActivity>>(_ActivityArrayOffset);
+            _ActivityArrayOffset = _ActivityArrayOffset ?? Schema.GetOffset(0x6EF8193538F0ACE1);
+            return ref _Handle.AsRef<CUtlVector<CAnimActivity>>(_ActivityArrayOffset!.Value);
         }
     }
-    private static nint _FootMotionOffset = -1;
+    private static nint? _FootMotionOffset;
 
     public ref CUtlVector<CFootMotion> FootMotion
     {
         get
         {
-            if (_FootMotionOffset == -1) _FootMotionOffset = Schema.GetOffset(0x6EF8193543CF70A3);
-            return ref _Handle.AsRef<CUtlVector<CFootMotion>>(_FootMotionOffset);
+            _FootMotionOffset = _FootMotionOffset ?? Schema.GetOffset(0x6EF8193543CF70A3);
+            return ref _Handle.AsRef<CUtlVector<CFootMotion>>(_FootMotionOffset!.Value);
         }
     }
 

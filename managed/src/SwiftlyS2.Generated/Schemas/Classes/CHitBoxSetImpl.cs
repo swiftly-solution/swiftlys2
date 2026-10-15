@@ -16,54 +16,54 @@ internal partial class CHitBoxSetImpl : SchemaClass, CHitBoxSet
 {
     public CHitBoxSetImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x742AE9EC4D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x742AE9EC4D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x742AE9EC4D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x742AE9EC4D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _NameHashOffset = -1;
+    private static nint? _NameHashOffset;
 
     public ref uint NameHash
     {
         get
         {
-            if (_NameHashOffset == -1) _NameHashOffset = Schema.GetOffset(0x742AE9ECDE15EEFE);
-            return ref _Handle.AsRef<uint>(_NameHashOffset);
+            _NameHashOffset = _NameHashOffset ?? Schema.GetOffset(0x742AE9ECDE15EEFE);
+            return ref _Handle.AsRef<uint>(_NameHashOffset!.Value);
         }
     }
-    private static nint _HitBoxesOffset = -1;
+    private static nint? _HitBoxesOffset;
 
     public ref CUtlVector<CHitBox> HitBoxes
     {
         get
         {
-            if (_HitBoxesOffset == -1) _HitBoxesOffset = Schema.GetOffset(0x742AE9EC07A4113F);
-            return ref _Handle.AsRef<CUtlVector<CHitBox>>(_HitBoxesOffset);
+            _HitBoxesOffset = _HitBoxesOffset ?? Schema.GetOffset(0x742AE9EC07A4113F);
+            return ref _Handle.AsRef<CUtlVector<CHitBox>>(_HitBoxesOffset!.Value);
         }
     }
-    private static nint _SourceFilenameOffset = -1;
+    private static nint? _SourceFilenameOffset;
 
     public string SourceFilename
     {
         get
         {
-            if (_SourceFilenameOffset == -1) _SourceFilenameOffset = Schema.GetOffset(0x742AE9ECD49CE26D);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_SourceFilenameOffset));
+            _SourceFilenameOffset = _SourceFilenameOffset ?? Schema.GetOffset(0x742AE9ECD49CE26D);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_SourceFilenameOffset!.Value));
         }
         set
         {
-            if (_SourceFilenameOffset == -1) _SourceFilenameOffset = Schema.GetOffset(0x742AE9ECD49CE26D);
-            Schema.SetCUtlString(_Handle, _SourceFilenameOffset, value);
+            _SourceFilenameOffset = _SourceFilenameOffset ?? Schema.GetOffset(0x742AE9ECD49CE26D);
+            Schema.SetCUtlString(_Handle, _SourceFilenameOffset!.Value, value);
         }
     }
 

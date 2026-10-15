@@ -16,36 +16,36 @@ internal partial class C_OP_LocalAccelerationForceImpl : CParticleFunctionForceI
 {
     public C_OP_LocalAccelerationForceImpl(nint handle) : base(handle) { }
 
-    private static nint _CPOffset = -1;
+    private static nint? _CPOffset;
 
     public ref int CP
     {
         get
         {
-            if (_CPOffset == -1) _CPOffset = Schema.GetOffset(0x3A562A9FEB661472);
-            return ref _Handle.AsRef<int>(_CPOffset);
+            _CPOffset = _CPOffset ?? Schema.GetOffset(0x3A562A9FEB661472);
+            return ref _Handle.AsRef<int>(_CPOffset!.Value);
         }
     }
-    private static nint _ScaleCPOffset = -1;
+    private static nint? _ScaleCPOffset;
 
     public ref int ScaleCP
     {
         get
         {
-            if (_ScaleCPOffset == -1) _ScaleCPOffset = Schema.GetOffset(0x3A562A9FDE3CC5E6);
-            return ref _Handle.AsRef<int>(_ScaleCPOffset);
+            _ScaleCPOffset = _ScaleCPOffset ?? Schema.GetOffset(0x3A562A9FDE3CC5E6);
+            return ref _Handle.AsRef<int>(_ScaleCPOffset!.Value);
         }
     }
-    private static nint _AccelOffset = -1;
+    private static nint? _AccelOffset;
     private CParticleCollectionVecInputImpl? _AccelInstance;
 
     public CParticleCollectionVecInput Accel
     {
         get
         {
-            if (_AccelOffset == -1) _AccelOffset = Schema.GetOffset(0x3A562A9FEA9A0D73);
+            _AccelOffset = _AccelOffset ?? Schema.GetOffset(0x3A562A9FEA9A0D73);
             var instance = _AccelInstance ??= new CParticleCollectionVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _AccelOffset);
+            instance.DangerousSetHandle(_Handle + _AccelOffset!.Value);
             return instance;
         }
     }

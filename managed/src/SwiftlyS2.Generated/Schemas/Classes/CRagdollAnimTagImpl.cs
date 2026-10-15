@@ -16,14 +16,14 @@ internal partial class CRagdollAnimTagImpl : CAnimTagBaseImpl, CRagdollAnimTag
 {
     public CRagdollAnimTagImpl(nint handle) : base(handle) { }
 
-    private static nint _ProfileNameOffset = -1;
+    private static nint? _ProfileNameOffset;
 
     public ref CGlobalSymbol ProfileName
     {
         get
         {
-            if (_ProfileNameOffset == -1) _ProfileNameOffset = Schema.GetOffset(0xC5917190285D878D);
-            return ref _Handle.AsRef<CGlobalSymbol>(_ProfileNameOffset);
+            _ProfileNameOffset = _ProfileNameOffset ?? Schema.GetOffset(0xC5917190285D878D);
+            return ref _Handle.AsRef<CGlobalSymbol>(_ProfileNameOffset!.Value);
         }
     }
 

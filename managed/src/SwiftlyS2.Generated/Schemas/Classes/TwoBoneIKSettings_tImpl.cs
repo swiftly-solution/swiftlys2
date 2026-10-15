@@ -16,166 +16,166 @@ internal partial class TwoBoneIKSettings_tImpl : SchemaClass, TwoBoneIKSettings_
 {
     public TwoBoneIKSettings_tImpl(nint handle) : base(handle) { }
 
-    private static nint _EndEffectorTypeOffset = -1;
+    private static nint? _EndEffectorTypeOffset;
 
     public ref IkEndEffectorType EndEffectorType
     {
         get
         {
-            if (_EndEffectorTypeOffset == -1) _EndEffectorTypeOffset = Schema.GetOffset(0xBE091551687CB4CE);
-            return ref _Handle.AsRef<IkEndEffectorType>(_EndEffectorTypeOffset);
+            _EndEffectorTypeOffset = _EndEffectorTypeOffset ?? Schema.GetOffset(0xBE091551687CB4CE);
+            return ref _Handle.AsRef<IkEndEffectorType>(_EndEffectorTypeOffset!.Value);
         }
     }
-    private static nint _EndEffectorAttachmentOffset = -1;
+    private static nint? _EndEffectorAttachmentOffset;
     private CAnimAttachmentImpl? _EndEffectorAttachmentInstance;
 
     public CAnimAttachment EndEffectorAttachment
     {
         get
         {
-            if (_EndEffectorAttachmentOffset == -1) _EndEffectorAttachmentOffset = Schema.GetOffset(0xBE0915516872873B);
+            _EndEffectorAttachmentOffset = _EndEffectorAttachmentOffset ?? Schema.GetOffset(0xBE0915516872873B);
             var instance = _EndEffectorAttachmentInstance ??= new CAnimAttachmentImpl(0);
-            instance.DangerousSetHandle(_Handle + _EndEffectorAttachmentOffset);
+            instance.DangerousSetHandle(_Handle + _EndEffectorAttachmentOffset!.Value);
             return instance;
         }
     }
-    private static nint _TargetTypeOffset = -1;
+    private static nint? _TargetTypeOffset;
 
     public ref IkTargetType TargetType
     {
         get
         {
-            if (_TargetTypeOffset == -1) _TargetTypeOffset = Schema.GetOffset(0xBE09155113C167A0);
-            return ref _Handle.AsRef<IkTargetType>(_TargetTypeOffset);
+            _TargetTypeOffset = _TargetTypeOffset ?? Schema.GetOffset(0xBE09155113C167A0);
+            return ref _Handle.AsRef<IkTargetType>(_TargetTypeOffset!.Value);
         }
     }
-    private static nint _TargetAttachmentOffset = -1;
+    private static nint? _TargetAttachmentOffset;
     private CAnimAttachmentImpl? _TargetAttachmentInstance;
 
     public CAnimAttachment TargetAttachment
     {
         get
         {
-            if (_TargetAttachmentOffset == -1) _TargetAttachmentOffset = Schema.GetOffset(0xBE091551C90DDA55);
+            _TargetAttachmentOffset = _TargetAttachmentOffset ?? Schema.GetOffset(0xBE091551C90DDA55);
             var instance = _TargetAttachmentInstance ??= new CAnimAttachmentImpl(0);
-            instance.DangerousSetHandle(_Handle + _TargetAttachmentOffset);
+            instance.DangerousSetHandle(_Handle + _TargetAttachmentOffset!.Value);
             return instance;
         }
     }
-    private static nint _TargetBoneIndexOffset = -1;
+    private static nint? _TargetBoneIndexOffset;
 
     public ref int TargetBoneIndex
     {
         get
         {
-            if (_TargetBoneIndexOffset == -1) _TargetBoneIndexOffset = Schema.GetOffset(0xBE091551D1D2A3DA);
-            return ref _Handle.AsRef<int>(_TargetBoneIndexOffset);
+            _TargetBoneIndexOffset = _TargetBoneIndexOffset ?? Schema.GetOffset(0xBE091551D1D2A3DA);
+            return ref _Handle.AsRef<int>(_TargetBoneIndexOffset!.Value);
         }
     }
-    private static nint _PositionParamOffset = -1;
+    private static nint? _PositionParamOffset;
     private CAnimParamHandleImpl? _PositionParamInstance;
 
     public CAnimParamHandle PositionParam
     {
         get
         {
-            if (_PositionParamOffset == -1) _PositionParamOffset = Schema.GetOffset(0xBE091551FF710245);
+            _PositionParamOffset = _PositionParamOffset ?? Schema.GetOffset(0xBE091551FF710245);
             var instance = _PositionParamInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _PositionParamOffset);
+            instance.DangerousSetHandle(_Handle + _PositionParamOffset!.Value);
             return instance;
         }
     }
-    private static nint _RotationParamOffset = -1;
+    private static nint? _RotationParamOffset;
     private CAnimParamHandleImpl? _RotationParamInstance;
 
     public CAnimParamHandle RotationParam
     {
         get
         {
-            if (_RotationParamOffset == -1) _RotationParamOffset = Schema.GetOffset(0xBE09155193200F16);
+            _RotationParamOffset = _RotationParamOffset ?? Schema.GetOffset(0xBE09155193200F16);
             var instance = _RotationParamInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _RotationParamOffset);
+            instance.DangerousSetHandle(_Handle + _RotationParamOffset!.Value);
             return instance;
         }
     }
-    private static nint _AlwaysUseFallbackHingeOffset = -1;
+    private static nint? _AlwaysUseFallbackHingeOffset;
 
     public ref bool AlwaysUseFallbackHinge
     {
         get
         {
-            if (_AlwaysUseFallbackHingeOffset == -1) _AlwaysUseFallbackHingeOffset = Schema.GetOffset(0xBE09155158B8E174);
-            return ref _Handle.AsRef<bool>(_AlwaysUseFallbackHingeOffset);
+            _AlwaysUseFallbackHingeOffset = _AlwaysUseFallbackHingeOffset ?? Schema.GetOffset(0xBE09155158B8E174);
+            return ref _Handle.AsRef<bool>(_AlwaysUseFallbackHingeOffset!.Value);
         }
     }
-    private static nint _LsFallbackHingeAxisOffset = -1;
+    private static nint? _LsFallbackHingeAxisOffset;
 
     public ref Vector LsFallbackHingeAxis
     {
         get
         {
-            if (_LsFallbackHingeAxisOffset == -1) _LsFallbackHingeAxisOffset = Schema.GetOffset(0xBE0915517DF22B04);
-            return ref _Handle.AsRef<Vector>(_LsFallbackHingeAxisOffset);
+            _LsFallbackHingeAxisOffset = _LsFallbackHingeAxisOffset ?? Schema.GetOffset(0xBE0915517DF22B04);
+            return ref _Handle.AsRef<Vector>(_LsFallbackHingeAxisOffset!.Value);
         }
     }
-    private static nint _FixedBoneIndexOffset = -1;
+    private static nint? _FixedBoneIndexOffset;
 
     public ref int FixedBoneIndex
     {
         get
         {
-            if (_FixedBoneIndexOffset == -1) _FixedBoneIndexOffset = Schema.GetOffset(0xBE091551D1DD1DC5);
-            return ref _Handle.AsRef<int>(_FixedBoneIndexOffset);
+            _FixedBoneIndexOffset = _FixedBoneIndexOffset ?? Schema.GetOffset(0xBE091551D1DD1DC5);
+            return ref _Handle.AsRef<int>(_FixedBoneIndexOffset!.Value);
         }
     }
-    private static nint _MiddleBoneIndexOffset = -1;
+    private static nint? _MiddleBoneIndexOffset;
 
     public ref int MiddleBoneIndex
     {
         get
         {
-            if (_MiddleBoneIndexOffset == -1) _MiddleBoneIndexOffset = Schema.GetOffset(0xBE091551489C3976);
-            return ref _Handle.AsRef<int>(_MiddleBoneIndexOffset);
+            _MiddleBoneIndexOffset = _MiddleBoneIndexOffset ?? Schema.GetOffset(0xBE091551489C3976);
+            return ref _Handle.AsRef<int>(_MiddleBoneIndexOffset!.Value);
         }
     }
-    private static nint _EndBoneIndexOffset = -1;
+    private static nint? _EndBoneIndexOffset;
 
     public ref int EndBoneIndex
     {
         get
         {
-            if (_EndBoneIndexOffset == -1) _EndBoneIndexOffset = Schema.GetOffset(0xBE09155146E23D1C);
-            return ref _Handle.AsRef<int>(_EndBoneIndexOffset);
+            _EndBoneIndexOffset = _EndBoneIndexOffset ?? Schema.GetOffset(0xBE09155146E23D1C);
+            return ref _Handle.AsRef<int>(_EndBoneIndexOffset!.Value);
         }
     }
-    private static nint _MatchTargetOrientationOffset = -1;
+    private static nint? _MatchTargetOrientationOffset;
 
     public ref bool MatchTargetOrientation
     {
         get
         {
-            if (_MatchTargetOrientationOffset == -1) _MatchTargetOrientationOffset = Schema.GetOffset(0xBE09155142E0C3DB);
-            return ref _Handle.AsRef<bool>(_MatchTargetOrientationOffset);
+            _MatchTargetOrientationOffset = _MatchTargetOrientationOffset ?? Schema.GetOffset(0xBE09155142E0C3DB);
+            return ref _Handle.AsRef<bool>(_MatchTargetOrientationOffset!.Value);
         }
     }
-    private static nint _ConstrainTwistOffset = -1;
+    private static nint? _ConstrainTwistOffset;
 
     public ref bool ConstrainTwist
     {
         get
         {
-            if (_ConstrainTwistOffset == -1) _ConstrainTwistOffset = Schema.GetOffset(0xBE091551DB3DB7ED);
-            return ref _Handle.AsRef<bool>(_ConstrainTwistOffset);
+            _ConstrainTwistOffset = _ConstrainTwistOffset ?? Schema.GetOffset(0xBE091551DB3DB7ED);
+            return ref _Handle.AsRef<bool>(_ConstrainTwistOffset!.Value);
         }
     }
-    private static nint _MaxTwistOffset = -1;
+    private static nint? _MaxTwistOffset;
 
     public ref float MaxTwist
     {
         get
         {
-            if (_MaxTwistOffset == -1) _MaxTwistOffset = Schema.GetOffset(0xBE091551A898EE6E);
-            return ref _Handle.AsRef<float>(_MaxTwistOffset);
+            _MaxTwistOffset = _MaxTwistOffset ?? Schema.GetOffset(0xBE091551A898EE6E);
+            return ref _Handle.AsRef<float>(_MaxTwistOffset!.Value);
         }
     }
 

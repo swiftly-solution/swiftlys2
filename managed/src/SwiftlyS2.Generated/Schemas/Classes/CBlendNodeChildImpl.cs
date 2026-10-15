@@ -16,42 +16,42 @@ internal partial class CBlendNodeChildImpl : SchemaClass, CBlendNodeChild
 {
     public CBlendNodeChildImpl(nint handle) : base(handle) { }
 
-    private static nint _InputConnectionOffset = -1;
+    private static nint? _InputConnectionOffset;
     private CAnimGraphDoc_NodeConnectionImpl? _InputConnectionInstance;
 
     public CAnimGraphDoc_NodeConnection InputConnection
     {
         get
         {
-            if (_InputConnectionOffset == -1) _InputConnectionOffset = Schema.GetOffset(0x78C8C3611F7849CB);
+            _InputConnectionOffset = _InputConnectionOffset ?? Schema.GetOffset(0x78C8C3611F7849CB);
             var instance = _InputConnectionInstance ??= new CAnimGraphDoc_NodeConnectionImpl(0);
-            instance.DangerousSetHandle(_Handle + _InputConnectionOffset);
+            instance.DangerousSetHandle(_Handle + _InputConnectionOffset!.Value);
             return instance;
         }
     }
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x78C8C3614D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x78C8C3614D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x78C8C3614D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x78C8C3614D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _BlendValueOffset = -1;
+    private static nint? _BlendValueOffset;
 
     public ref float BlendValue
     {
         get
         {
-            if (_BlendValueOffset == -1) _BlendValueOffset = Schema.GetOffset(0x78C8C361EB055369);
-            return ref _Handle.AsRef<float>(_BlendValueOffset);
+            _BlendValueOffset = _BlendValueOffset ?? Schema.GetOffset(0x78C8C361EB055369);
+            return ref _Handle.AsRef<float>(_BlendValueOffset!.Value);
         }
     }
 

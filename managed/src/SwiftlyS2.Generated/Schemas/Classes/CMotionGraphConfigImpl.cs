@@ -16,60 +16,60 @@ internal partial class CMotionGraphConfigImpl : SchemaClass, CMotionGraphConfig
 {
     public CMotionGraphConfigImpl(nint handle) : base(handle) { }
 
-    private static nint _ParamValuesOffset = -1;
+    private static nint? _ParamValuesOffset;
     private SchemaFixedArray<float>? _ParamValuesInstance;
 
     public ISchemaFixedArray<float> ParamValues
     {
         get
         {
-            if (_ParamValuesOffset == -1) _ParamValuesOffset = Schema.GetOffset(0x851F6EEA365BD3F8);
+            _ParamValuesOffset = _ParamValuesOffset ?? Schema.GetOffset(0x851F6EEA365BD3F8);
             var instance = _ParamValuesInstance ??= new SchemaFixedArray<float>(0, 0x851F6EEA365BD3F8, 4, 4, 4);
-            instance.DangerousSetHandle(_Handle + _ParamValuesOffset);
+            instance.DangerousSetHandle(_Handle + _ParamValuesOffset!.Value);
             return instance;
         }
     }
-    private static nint _DurationOffset = -1;
+    private static nint? _DurationOffset;
 
     public ref float Duration
     {
         get
         {
-            if (_DurationOffset == -1) _DurationOffset = Schema.GetOffset(0x851F6EEABC5E3BAB);
-            return ref _Handle.AsRef<float>(_DurationOffset);
+            _DurationOffset = _DurationOffset ?? Schema.GetOffset(0x851F6EEABC5E3BAB);
+            return ref _Handle.AsRef<float>(_DurationOffset!.Value);
         }
     }
-    private static nint _MotionIndexOffset = -1;
+    private static nint? _MotionIndexOffset;
     private MotionIndexImpl? _MotionIndexInstance;
 
     public MotionIndex MotionIndex
     {
         get
         {
-            if (_MotionIndexOffset == -1) _MotionIndexOffset = Schema.GetOffset(0x851F6EEABF50B8E1);
+            _MotionIndexOffset = _MotionIndexOffset ?? Schema.GetOffset(0x851F6EEABF50B8E1);
             var instance = _MotionIndexInstance ??= new MotionIndexImpl(0);
-            instance.DangerousSetHandle(_Handle + _MotionIndexOffset);
+            instance.DangerousSetHandle(_Handle + _MotionIndexOffset!.Value);
             return instance;
         }
     }
-    private static nint _SampleStartOffset = -1;
+    private static nint? _SampleStartOffset;
 
     public ref int SampleStart
     {
         get
         {
-            if (_SampleStartOffset == -1) _SampleStartOffset = Schema.GetOffset(0x851F6EEA43384B19);
-            return ref _Handle.AsRef<int>(_SampleStartOffset);
+            _SampleStartOffset = _SampleStartOffset ?? Schema.GetOffset(0x851F6EEA43384B19);
+            return ref _Handle.AsRef<int>(_SampleStartOffset!.Value);
         }
     }
-    private static nint _SampleCountOffset = -1;
+    private static nint? _SampleCountOffset;
 
     public ref int SampleCount
     {
         get
         {
-            if (_SampleCountOffset == -1) _SampleCountOffset = Schema.GetOffset(0x851F6EEA2DEF676A);
-            return ref _Handle.AsRef<int>(_SampleCountOffset);
+            _SampleCountOffset = _SampleCountOffset ?? Schema.GetOffset(0x851F6EEA2DEF676A);
+            return ref _Handle.AsRef<int>(_SampleCountOffset!.Value);
         }
     }
 

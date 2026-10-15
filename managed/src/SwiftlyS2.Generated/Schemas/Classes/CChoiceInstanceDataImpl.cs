@@ -16,50 +16,50 @@ internal partial class CChoiceInstanceDataImpl : SchemaClass, CChoiceInstanceDat
 {
     public CChoiceInstanceDataImpl(nint handle) : base(handle) { }
 
-    private static nint _CurrentChoiceOffset = -1;
+    private static nint? _CurrentChoiceOffset;
     private SchemaUntypedField? _CurrentChoiceInstance;
 
     public SchemaUntypedField CurrentChoice
     {
         get
         {
-            if (_CurrentChoiceOffset == -1) _CurrentChoiceOffset = Schema.GetOffset(0x5F93659E47121CD9);
+            _CurrentChoiceOffset = _CurrentChoiceOffset ?? Schema.GetOffset(0x5F93659E47121CD9);
             var instance = _CurrentChoiceInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _CurrentChoiceOffset);
+            instance.DangerousSetHandle(_Handle + _CurrentChoiceOffset!.Value);
             return instance;
         }
     }
-    private static nint _PreviousChoiceOffset = -1;
+    private static nint? _PreviousChoiceOffset;
 
     public ref int PreviousChoice
     {
         get
         {
-            if (_PreviousChoiceOffset == -1) _PreviousChoiceOffset = Schema.GetOffset(0x5F93659E819F1073);
-            return ref _Handle.AsRef<int>(_PreviousChoiceOffset);
+            _PreviousChoiceOffset = _PreviousChoiceOffset ?? Schema.GetOffset(0x5F93659E819F1073);
+            return ref _Handle.AsRef<int>(_PreviousChoiceOffset!.Value);
         }
     }
-    private static nint _ClipStartTimeOffset = -1;
+    private static nint? _ClipStartTimeOffset;
     private SchemaUntypedField? _ClipStartTimeInstance;
 
     public SchemaUntypedField ClipStartTime
     {
         get
         {
-            if (_ClipStartTimeOffset == -1) _ClipStartTimeOffset = Schema.GetOffset(0x5F93659E5BAB4702);
+            _ClipStartTimeOffset = _ClipStartTimeOffset ?? Schema.GetOffset(0x5F93659E5BAB4702);
             var instance = _ClipStartTimeInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ClipStartTimeOffset);
+            instance.DangerousSetHandle(_Handle + _ClipStartTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _ChoicePreviousCycleOffset = -1;
+    private static nint? _ChoicePreviousCycleOffset;
 
     public ref float ChoicePreviousCycle
     {
         get
         {
-            if (_ChoicePreviousCycleOffset == -1) _ChoicePreviousCycleOffset = Schema.GetOffset(0x5F93659E46D3DF23);
-            return ref _Handle.AsRef<float>(_ChoicePreviousCycleOffset);
+            _ChoicePreviousCycleOffset = _ChoicePreviousCycleOffset ?? Schema.GetOffset(0x5F93659E46D3DF23);
+            return ref _Handle.AsRef<float>(_ChoicePreviousCycleOffset!.Value);
         }
     }
 

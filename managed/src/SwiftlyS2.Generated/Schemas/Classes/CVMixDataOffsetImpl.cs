@@ -16,14 +16,14 @@ internal partial class CVMixDataOffsetImpl : SchemaClass, CVMixDataOffset
 {
     public CVMixDataOffsetImpl(nint handle) : base(handle) { }
 
-    private static nint _OffsetOffset = -1;
+    private static nint? _OffsetOffset;
 
     public ref uint Offset
     {
         get
         {
-            if (_OffsetOffset == -1) _OffsetOffset = Schema.GetOffset(0xB9FE4DF527734C8E);
-            return ref _Handle.AsRef<uint>(_OffsetOffset);
+            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0xB9FE4DF527734C8E);
+            return ref _Handle.AsRef<uint>(_OffsetOffset!.Value);
         }
     }
 

@@ -16,114 +16,114 @@ internal partial class CSndSeqInstMidiSamplerImpl : CSndSeqInstBaseSchemaImpl, C
 {
     public CSndSeqInstMidiSamplerImpl(nint handle) : base(handle) { }
 
-    private static nint _IsSoundEventOffset = -1;
+    private static nint? _IsSoundEventOffset;
 
     public ref bool IsSoundEvent
     {
         get
         {
-            if (_IsSoundEventOffset == -1) _IsSoundEventOffset = Schema.GetOffset(0xF24DD653490F281C);
-            return ref _Handle.AsRef<bool>(_IsSoundEventOffset);
+            _IsSoundEventOffset = _IsSoundEventOffset ?? Schema.GetOffset(0xF24DD653490F281C);
+            return ref _Handle.AsRef<bool>(_IsSoundEventOffset!.Value);
         }
     }
-    private static nint _StopPreviousOffset = -1;
+    private static nint? _StopPreviousOffset;
 
     public ref bool StopPrevious
     {
         get
         {
-            if (_StopPreviousOffset == -1) _StopPreviousOffset = Schema.GetOffset(0xF24DD653B4A594C8);
-            return ref _Handle.AsRef<bool>(_StopPreviousOffset);
+            _StopPreviousOffset = _StopPreviousOffset ?? Schema.GetOffset(0xF24DD653B4A594C8);
+            return ref _Handle.AsRef<bool>(_StopPreviousOffset!.Value);
         }
     }
-    private static nint _MinNoteOffset = -1;
+    private static nint? _MinNoteOffset;
 
     public ref byte MinNote
     {
         get
         {
-            if (_MinNoteOffset == -1) _MinNoteOffset = Schema.GetOffset(0xF24DD653E43EC4EB);
-            return ref _Handle.AsRef<byte>(_MinNoteOffset);
+            _MinNoteOffset = _MinNoteOffset ?? Schema.GetOffset(0xF24DD653E43EC4EB);
+            return ref _Handle.AsRef<byte>(_MinNoteOffset!.Value);
         }
     }
-    private static nint _MaxNoteOffset = -1;
+    private static nint? _MaxNoteOffset;
 
     public ref byte MaxNote
     {
         get
         {
-            if (_MaxNoteOffset == -1) _MaxNoteOffset = Schema.GetOffset(0xF24DD6533D015E2D);
-            return ref _Handle.AsRef<byte>(_MaxNoteOffset);
+            _MaxNoteOffset = _MaxNoteOffset ?? Schema.GetOffset(0xF24DD6533D015E2D);
+            return ref _Handle.AsRef<byte>(_MaxNoteOffset!.Value);
         }
     }
-    private static nint _MinVelocityAttenOffset = -1;
+    private static nint? _MinVelocityAttenOffset;
 
     public ref float MinVelocityAtten
     {
         get
         {
-            if (_MinVelocityAttenOffset == -1) _MinVelocityAttenOffset = Schema.GetOffset(0xF24DD65350D5C2B2);
-            return ref _Handle.AsRef<float>(_MinVelocityAttenOffset);
+            _MinVelocityAttenOffset = _MinVelocityAttenOffset ?? Schema.GetOffset(0xF24DD65350D5C2B2);
+            return ref _Handle.AsRef<float>(_MinVelocityAttenOffset!.Value);
         }
     }
-    private static nint _MaxVelocityAttenOffset = -1;
+    private static nint? _MaxVelocityAttenOffset;
 
     public ref float MaxVelocityAtten
     {
         get
         {
-            if (_MaxVelocityAttenOffset == -1) _MaxVelocityAttenOffset = Schema.GetOffset(0xF24DD6536156C9B4);
-            return ref _Handle.AsRef<float>(_MaxVelocityAttenOffset);
+            _MaxVelocityAttenOffset = _MaxVelocityAttenOffset ?? Schema.GetOffset(0xF24DD6536156C9B4);
+            return ref _Handle.AsRef<float>(_MaxVelocityAttenOffset!.Value);
         }
     }
-    private static nint _AttackOffset = -1;
+    private static nint? _AttackOffset;
 
     public ref float Attack
     {
         get
         {
-            if (_AttackOffset == -1) _AttackOffset = Schema.GetOffset(0xF24DD6530A6A5BE7);
-            return ref _Handle.AsRef<float>(_AttackOffset);
+            _AttackOffset = _AttackOffset ?? Schema.GetOffset(0xF24DD6530A6A5BE7);
+            return ref _Handle.AsRef<float>(_AttackOffset!.Value);
         }
     }
-    private static nint _ReleaseOffset = -1;
+    private static nint? _ReleaseOffset;
 
     public ref float Release
     {
         get
         {
-            if (_ReleaseOffset == -1) _ReleaseOffset = Schema.GetOffset(0xF24DD65325AF90E4);
-            return ref _Handle.AsRef<float>(_ReleaseOffset);
+            _ReleaseOffset = _ReleaseOffset ?? Schema.GetOffset(0xF24DD65325AF90E4);
+            return ref _Handle.AsRef<float>(_ReleaseOffset!.Value);
         }
     }
-    private static nint _BeatEnvelopesOffset = -1;
+    private static nint? _BeatEnvelopesOffset;
 
     public ref bool BeatEnvelopes
     {
         get
         {
-            if (_BeatEnvelopesOffset == -1) _BeatEnvelopesOffset = Schema.GetOffset(0xF24DD653A721F512);
-            return ref _Handle.AsRef<bool>(_BeatEnvelopesOffset);
+            _BeatEnvelopesOffset = _BeatEnvelopesOffset ?? Schema.GetOffset(0xF24DD653A721F512);
+            return ref _Handle.AsRef<bool>(_BeatEnvelopesOffset!.Value);
         }
     }
-    private static nint _NextVoiceSlotOffset = -1;
+    private static nint? _NextVoiceSlotOffset;
 
     public ref byte NextVoiceSlot
     {
         get
         {
-            if (_NextVoiceSlotOffset == -1) _NextVoiceSlotOffset = Schema.GetOffset(0xF24DD6535AEAA202);
-            return ref _Handle.AsRef<byte>(_NextVoiceSlotOffset);
+            _NextVoiceSlotOffset = _NextVoiceSlotOffset ?? Schema.GetOffset(0xF24DD6535AEAA202);
+            return ref _Handle.AsRef<byte>(_NextVoiceSlotOffset!.Value);
         }
     }
-    private static nint _SoundEventHashOffset = -1;
+    private static nint? _SoundEventHashOffset;
 
     public ref uint SoundEventHash
     {
         get
         {
-            if (_SoundEventHashOffset == -1) _SoundEventHashOffset = Schema.GetOffset(0xF24DD6537DC8F8CE);
-            return ref _Handle.AsRef<uint>(_SoundEventHashOffset);
+            _SoundEventHashOffset = _SoundEventHashOffset ?? Schema.GetOffset(0xF24DD6537DC8F8CE);
+            return ref _Handle.AsRef<uint>(_SoundEventHashOffset!.Value);
         }
     }
 

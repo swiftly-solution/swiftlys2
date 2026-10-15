@@ -16,44 +16,44 @@ internal partial class CMorphBundleDataImpl : SchemaClass, CMorphBundleData
 {
     public CMorphBundleDataImpl(nint handle) : base(handle) { }
 
-    private static nint _ULeftSrcOffset = -1;
+    private static nint? _ULeftSrcOffset;
 
     public ref float ULeftSrc
     {
         get
         {
-            if (_ULeftSrcOffset == -1) _ULeftSrcOffset = Schema.GetOffset(0x8F3A47DCADC9D147);
-            return ref _Handle.AsRef<float>(_ULeftSrcOffset);
+            _ULeftSrcOffset = _ULeftSrcOffset ?? Schema.GetOffset(0x8F3A47DCADC9D147);
+            return ref _Handle.AsRef<float>(_ULeftSrcOffset!.Value);
         }
     }
-    private static nint _VTopSrcOffset = -1;
+    private static nint? _VTopSrcOffset;
 
     public ref float VTopSrc
     {
         get
         {
-            if (_VTopSrcOffset == -1) _VTopSrcOffset = Schema.GetOffset(0x8F3A47DCEF710ED0);
-            return ref _Handle.AsRef<float>(_VTopSrcOffset);
+            _VTopSrcOffset = _VTopSrcOffset ?? Schema.GetOffset(0x8F3A47DCEF710ED0);
+            return ref _Handle.AsRef<float>(_VTopSrcOffset!.Value);
         }
     }
-    private static nint _OffsetsOffset = -1;
+    private static nint? _OffsetsOffset;
 
     public ref CUtlVector<float> Offsets
     {
         get
         {
-            if (_OffsetsOffset == -1) _OffsetsOffset = Schema.GetOffset(0x8F3A47DCD6CBA75B);
-            return ref _Handle.AsRef<CUtlVector<float>>(_OffsetsOffset);
+            _OffsetsOffset = _OffsetsOffset ?? Schema.GetOffset(0x8F3A47DCD6CBA75B);
+            return ref _Handle.AsRef<CUtlVector<float>>(_OffsetsOffset!.Value);
         }
     }
-    private static nint _RangesOffset = -1;
+    private static nint? _RangesOffset;
 
     public ref CUtlVector<float> Ranges
     {
         get
         {
-            if (_RangesOffset == -1) _RangesOffset = Schema.GetOffset(0x8F3A47DC24CF5F13);
-            return ref _Handle.AsRef<CUtlVector<float>>(_RangesOffset);
+            _RangesOffset = _RangesOffset ?? Schema.GetOffset(0x8F3A47DC24CF5F13);
+            return ref _Handle.AsRef<CUtlVector<float>>(_RangesOffset!.Value);
         }
     }
 

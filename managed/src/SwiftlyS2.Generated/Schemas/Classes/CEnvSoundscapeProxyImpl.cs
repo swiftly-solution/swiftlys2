@@ -16,19 +16,19 @@ internal partial class CEnvSoundscapeProxyImpl : CEnvSoundscapeImpl, CEnvSoundsc
 {
     public CEnvSoundscapeProxyImpl(nint handle) : base(handle) { }
 
-    private static nint _MainSoundscapeNameOffset = -1;
+    private static nint? _MainSoundscapeNameOffset;
 
     public string MainSoundscapeName
     {
         get
         {
-            if (_MainSoundscapeNameOffset == -1) _MainSoundscapeNameOffset = Schema.GetOffset(0x58127BA672404420);
-            return Schema.GetString(_Handle.Read<nint>(_MainSoundscapeNameOffset));
+            _MainSoundscapeNameOffset = _MainSoundscapeNameOffset ?? Schema.GetOffset(0x58127BA672404420);
+            return Schema.GetString(_Handle.Read<nint>(_MainSoundscapeNameOffset!.Value));
         }
         set
         {
-            if (_MainSoundscapeNameOffset == -1) _MainSoundscapeNameOffset = Schema.GetOffset(0x58127BA672404420);
-            Schema.SetString(_Handle, _MainSoundscapeNameOffset, value);
+            _MainSoundscapeNameOffset = _MainSoundscapeNameOffset ?? Schema.GetOffset(0x58127BA672404420);
+            Schema.SetString(_Handle, _MainSoundscapeNameOffset!.Value, value);
         }
     }
 

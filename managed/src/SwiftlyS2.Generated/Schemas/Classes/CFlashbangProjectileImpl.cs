@@ -16,34 +16,34 @@ internal partial class CFlashbangProjectileImpl : CBaseCSGrenadeProjectileImpl, 
 {
     public CFlashbangProjectileImpl(nint handle) : base(handle) { }
 
-    private static nint _TimeToDetonateOffset = -1;
+    private static nint? _TimeToDetonateOffset;
 
     public ref float TimeToDetonate
     {
         get
         {
-            if (_TimeToDetonateOffset == -1) _TimeToDetonateOffset = Schema.GetOffset(0x9F4F2EA190E2E597);
-            return ref _Handle.AsRef<float>(_TimeToDetonateOffset);
+            _TimeToDetonateOffset = _TimeToDetonateOffset ?? Schema.GetOffset(0x9F4F2EA190E2E597);
+            return ref _Handle.AsRef<float>(_TimeToDetonateOffset!.Value);
         }
     }
-    private static nint _NumOpponentsHitOffset = -1;
+    private static nint? _NumOpponentsHitOffset;
 
     public ref byte NumOpponentsHit
     {
         get
         {
-            if (_NumOpponentsHitOffset == -1) _NumOpponentsHitOffset = Schema.GetOffset(0x9F4F2EA1CA7913A4);
-            return ref _Handle.AsRef<byte>(_NumOpponentsHitOffset);
+            _NumOpponentsHitOffset = _NumOpponentsHitOffset ?? Schema.GetOffset(0x9F4F2EA1CA7913A4);
+            return ref _Handle.AsRef<byte>(_NumOpponentsHitOffset!.Value);
         }
     }
-    private static nint _NumTeammatesHitOffset = -1;
+    private static nint? _NumTeammatesHitOffset;
 
     public ref byte NumTeammatesHit
     {
         get
         {
-            if (_NumTeammatesHitOffset == -1) _NumTeammatesHitOffset = Schema.GetOffset(0x9F4F2EA1BC5B8F41);
-            return ref _Handle.AsRef<byte>(_NumTeammatesHitOffset);
+            _NumTeammatesHitOffset = _NumTeammatesHitOffset ?? Schema.GetOffset(0x9F4F2EA1BC5B8F41);
+            return ref _Handle.AsRef<byte>(_NumTeammatesHitOffset!.Value);
         }
     }
 

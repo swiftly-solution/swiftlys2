@@ -16,84 +16,84 @@ internal partial class C_BasePropDoorImpl : C_DynamicPropImpl, C_BasePropDoor
 {
     public C_BasePropDoorImpl(nint handle) : base(handle) { }
 
-    private static nint _DoorStateOffset = -1;
+    private static nint? _DoorStateOffset;
 
     public ref DoorState_t DoorState
     {
         get
         {
-            if (_DoorStateOffset == -1) _DoorStateOffset = Schema.GetOffset(0x661C59355D06645);
-            return ref _Handle.AsRef<DoorState_t>(_DoorStateOffset);
+            _DoorStateOffset = _DoorStateOffset ?? Schema.GetOffset(0x661C59355D06645);
+            return ref _Handle.AsRef<DoorState_t>(_DoorStateOffset!.Value);
         }
     }
-    private static nint _ModelChangedOffset = -1;
+    private static nint? _ModelChangedOffset;
 
     public ref bool ModelChanged
     {
         get
         {
-            if (_ModelChangedOffset == -1) _ModelChangedOffset = Schema.GetOffset(0x661C59361DE9ABE);
-            return ref _Handle.AsRef<bool>(_ModelChangedOffset);
+            _ModelChangedOffset = _ModelChangedOffset ?? Schema.GetOffset(0x661C59361DE9ABE);
+            return ref _Handle.AsRef<bool>(_ModelChangedOffset!.Value);
         }
     }
-    private static nint _LockedOffset = -1;
+    private static nint? _LockedOffset;
 
     public ref bool Locked
     {
         get
         {
-            if (_LockedOffset == -1) _LockedOffset = Schema.GetOffset(0x661C593D08E97F3);
-            return ref _Handle.AsRef<bool>(_LockedOffset);
+            _LockedOffset = _LockedOffset ?? Schema.GetOffset(0x661C593D08E97F3);
+            return ref _Handle.AsRef<bool>(_LockedOffset!.Value);
         }
     }
-    private static nint _NoNPCsOffset = -1;
+    private static nint? _NoNPCsOffset;
 
     public ref bool NoNPCs
     {
         get
         {
-            if (_NoNPCsOffset == -1) _NoNPCsOffset = Schema.GetOffset(0x661C593237405C2);
-            return ref _Handle.AsRef<bool>(_NoNPCsOffset);
+            _NoNPCsOffset = _NoNPCsOffset ?? Schema.GetOffset(0x661C593237405C2);
+            return ref _Handle.AsRef<bool>(_NoNPCsOffset!.Value);
         }
     }
-    private static nint _ClosedPositionOffset = -1;
+    private static nint? _ClosedPositionOffset;
 
     public ref Vector ClosedPosition
     {
         get
         {
-            if (_ClosedPositionOffset == -1) _ClosedPositionOffset = Schema.GetOffset(0x661C593C93C638A);
-            return ref _Handle.AsRef<Vector>(_ClosedPositionOffset);
+            _ClosedPositionOffset = _ClosedPositionOffset ?? Schema.GetOffset(0x661C593C93C638A);
+            return ref _Handle.AsRef<Vector>(_ClosedPositionOffset!.Value);
         }
     }
-    private static nint _ClosedAnglesOffset = -1;
+    private static nint? _ClosedAnglesOffset;
 
     public ref QAngle ClosedAngles
     {
         get
         {
-            if (_ClosedAnglesOffset == -1) _ClosedAnglesOffset = Schema.GetOffset(0x661C59353D26DF1);
-            return ref _Handle.AsRef<QAngle>(_ClosedAnglesOffset);
+            _ClosedAnglesOffset = _ClosedAnglesOffset ?? Schema.GetOffset(0x661C59353D26DF1);
+            return ref _Handle.AsRef<QAngle>(_ClosedAnglesOffset!.Value);
         }
     }
-    private static nint _MasterOffset = -1;
+    private static nint? _MasterOffset;
 
     public ref CHandle<C_BasePropDoor> Master
     {
         get
         {
-            if (_MasterOffset == -1) _MasterOffset = Schema.GetOffset(0x661C593B8DA1B0D);
-            return ref _Handle.AsRef<CHandle<C_BasePropDoor>>(_MasterOffset);
+            _MasterOffset = _MasterOffset ?? Schema.GetOffset(0x661C593B8DA1B0D);
+            return ref _Handle.AsRef<CHandle<C_BasePropDoor>>(_MasterOffset!.Value);
         }
     }
-    private static nint _WhereToSetLightingOriginOffset = -1;
+    private static nint? _WhereToSetLightingOriginOffset;
 
     public ref Vector WhereToSetLightingOrigin
     {
         get
         {
-            if (_WhereToSetLightingOriginOffset == -1) _WhereToSetLightingOriginOffset = Schema.GetOffset(0x661C5938A4C309D);
-            return ref _Handle.AsRef<Vector>(_WhereToSetLightingOriginOffset);
+            _WhereToSetLightingOriginOffset = _WhereToSetLightingOriginOffset ?? Schema.GetOffset(0x661C5938A4C309D);
+            return ref _Handle.AsRef<Vector>(_WhereToSetLightingOriginOffset!.Value);
         }
     }
 

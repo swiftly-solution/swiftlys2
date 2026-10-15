@@ -16,86 +16,86 @@ internal partial class C_INIT_SetVectorAttributeToVectorExpressionImpl : CPartic
 {
     public C_INIT_SetVectorAttributeToVectorExpressionImpl(nint handle) : base(handle) { }
 
-    private static nint _ExpressionOffset = -1;
+    private static nint? _ExpressionOffset;
 
     public ref VectorExpressionType_t Expression
     {
         get
         {
-            if (_ExpressionOffset == -1) _ExpressionOffset = Schema.GetOffset(0x71A0FB13160B2427);
-            return ref _Handle.AsRef<VectorExpressionType_t>(_ExpressionOffset);
+            _ExpressionOffset = _ExpressionOffset ?? Schema.GetOffset(0x71A0FB13160B2427);
+            return ref _Handle.AsRef<VectorExpressionType_t>(_ExpressionOffset!.Value);
         }
     }
-    private static nint _Input1Offset = -1;
+    private static nint? _Input1Offset;
     private CPerParticleVecInputImpl? _Input1Instance;
 
     public CPerParticleVecInput Input1
     {
         get
         {
-            if (_Input1Offset == -1) _Input1Offset = Schema.GetOffset(0x71A0FB13E17F27DA);
+            _Input1Offset = _Input1Offset ?? Schema.GetOffset(0x71A0FB13E17F27DA);
             var instance = _Input1Instance ??= new CPerParticleVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _Input1Offset);
+            instance.DangerousSetHandle(_Handle + _Input1Offset!.Value);
             return instance;
         }
     }
-    private static nint _Input2Offset = -1;
+    private static nint? _Input2Offset;
     private CPerParticleVecInputImpl? _Input2Instance;
 
     public CPerParticleVecInput Input2
     {
         get
         {
-            if (_Input2Offset == -1) _Input2Offset = Schema.GetOffset(0x71A0FB13E07F2647);
+            _Input2Offset = _Input2Offset ?? Schema.GetOffset(0x71A0FB13E07F2647);
             var instance = _Input2Instance ??= new CPerParticleVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _Input2Offset);
+            instance.DangerousSetHandle(_Handle + _Input2Offset!.Value);
             return instance;
         }
     }
-    private static nint _LerpOffset = -1;
+    private static nint? _LerpOffset;
     private CPerParticleFloatInputImpl? _LerpInstance;
 
     public CPerParticleFloatInput Lerp
     {
         get
         {
-            if (_LerpOffset == -1) _LerpOffset = Schema.GetOffset(0x71A0FB13622FAB06);
+            _LerpOffset = _LerpOffset ?? Schema.GetOffset(0x71A0FB13622FAB06);
             var instance = _LerpInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _LerpOffset);
+            instance.DangerousSetHandle(_Handle + _LerpOffset!.Value);
             return instance;
         }
     }
-    private static nint _OutputFieldOffset = -1;
+    private static nint? _OutputFieldOffset;
     private ParticleAttributeIndex_tImpl? _OutputFieldInstance;
 
     public ParticleAttributeIndex_t OutputField
     {
         get
         {
-            if (_OutputFieldOffset == -1) _OutputFieldOffset = Schema.GetOffset(0x71A0FB13324F6F74);
+            _OutputFieldOffset = _OutputFieldOffset ?? Schema.GetOffset(0x71A0FB13324F6F74);
             var instance = _OutputFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _OutputFieldOffset);
+            instance.DangerousSetHandle(_Handle + _OutputFieldOffset!.Value);
             return instance;
         }
     }
-    private static nint _SetMethodOffset = -1;
+    private static nint? _SetMethodOffset;
 
     public ref ParticleSetMethod_t SetMethod
     {
         get
         {
-            if (_SetMethodOffset == -1) _SetMethodOffset = Schema.GetOffset(0x71A0FB13FB53C31E);
-            return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset);
+            _SetMethodOffset = _SetMethodOffset ?? Schema.GetOffset(0x71A0FB13FB53C31E);
+            return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset!.Value);
         }
     }
-    private static nint _NormalizedOutputOffset = -1;
+    private static nint? _NormalizedOutputOffset;
 
     public ref bool NormalizedOutput
     {
         get
         {
-            if (_NormalizedOutputOffset == -1) _NormalizedOutputOffset = Schema.GetOffset(0x71A0FB130AA98C55);
-            return ref _Handle.AsRef<bool>(_NormalizedOutputOffset);
+            _NormalizedOutputOffset = _NormalizedOutputOffset ?? Schema.GetOffset(0x71A0FB130AA98C55);
+            return ref _Handle.AsRef<bool>(_NormalizedOutputOffset!.Value);
         }
     }
 

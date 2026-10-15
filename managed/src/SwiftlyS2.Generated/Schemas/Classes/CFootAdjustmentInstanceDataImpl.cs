@@ -16,40 +16,40 @@ internal partial class CFootAdjustmentInstanceDataImpl : SchemaClass, CFootAdjus
 {
     public CFootAdjustmentInstanceDataImpl(nint handle) : base(handle) { }
 
-    private static nint _StartTimeOffset = -1;
+    private static nint? _StartTimeOffset;
     private SchemaUntypedField? _StartTimeInstance;
 
     public SchemaUntypedField StartTime
     {
         get
         {
-            if (_StartTimeOffset == -1) _StartTimeOffset = Schema.GetOffset(0xB15F962667FE9DC4);
+            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0xB15F962667FE9DC4);
             var instance = _StartTimeInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _StartTimeOffset);
+            instance.DangerousSetHandle(_Handle + _StartTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _DurationOffset = -1;
+    private static nint? _DurationOffset;
     private SchemaUntypedField? _DurationInstance;
 
     public SchemaUntypedField Duration
     {
         get
         {
-            if (_DurationOffset == -1) _DurationOffset = Schema.GetOffset(0xB15F9626BC5E3BAB);
+            _DurationOffset = _DurationOffset ?? Schema.GetOffset(0xB15F9626BC5E3BAB);
             var instance = _DurationInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _DurationOffset);
+            instance.DangerousSetHandle(_Handle + _DurationOffset!.Value);
             return instance;
         }
     }
-    private static nint _StartHeadingWSOffset = -1;
+    private static nint? _StartHeadingWSOffset;
 
     public ref float StartHeadingWS
     {
         get
         {
-            if (_StartHeadingWSOffset == -1) _StartHeadingWSOffset = Schema.GetOffset(0xB15F9626B3AA4A4F);
-            return ref _Handle.AsRef<float>(_StartHeadingWSOffset);
+            _StartHeadingWSOffset = _StartHeadingWSOffset ?? Schema.GetOffset(0xB15F9626B3AA4A4F);
+            return ref _Handle.AsRef<float>(_StartHeadingWSOffset!.Value);
         }
     }
 

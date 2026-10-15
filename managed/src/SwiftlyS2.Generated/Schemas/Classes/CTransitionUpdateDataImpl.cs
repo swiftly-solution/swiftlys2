@@ -16,49 +16,49 @@ internal partial class CTransitionUpdateDataImpl : SchemaClass, CTransitionUpdat
 {
     public CTransitionUpdateDataImpl(nint handle) : base(handle) { }
 
-    private static nint _SrcStateIndexOffset = -1;
+    private static nint? _SrcStateIndexOffset;
 
     public ref byte SrcStateIndex
     {
         get
         {
-            if (_SrcStateIndexOffset == -1) _SrcStateIndexOffset = Schema.GetOffset(0xF3F18D08D2AF559E);
-            return ref _Handle.AsRef<byte>(_SrcStateIndexOffset);
+            _SrcStateIndexOffset = _SrcStateIndexOffset ?? Schema.GetOffset(0xF3F18D08D2AF559E);
+            return ref _Handle.AsRef<byte>(_SrcStateIndexOffset!.Value);
         }
     }
-    private static nint _DestStateIndexOffset = -1;
+    private static nint? _DestStateIndexOffset;
 
     public ref byte DestStateIndex
     {
         get
         {
-            if (_DestStateIndexOffset == -1) _DestStateIndexOffset = Schema.GetOffset(0xF3F18D0876246C8A);
-            return ref _Handle.AsRef<byte>(_DestStateIndexOffset);
+            _DestStateIndexOffset = _DestStateIndexOffset ?? Schema.GetOffset(0xF3F18D0876246C8A);
+            return ref _Handle.AsRef<byte>(_DestStateIndexOffset!.Value);
         }
     }
-    private static nint _HandshakeMaskToDisableFirstOffset = -1;
+    private static nint? _HandshakeMaskToDisableFirstOffset;
     private SchemaUntypedField? _HandshakeMaskToDisableFirstInstance;
 
     public SchemaUntypedField HandshakeMaskToDisableFirst
     {
         get
         {
-            if (_HandshakeMaskToDisableFirstOffset == -1) _HandshakeMaskToDisableFirstOffset = Schema.GetOffset(0xF3F18D08E58422C5);
+            _HandshakeMaskToDisableFirstOffset = _HandshakeMaskToDisableFirstOffset ?? Schema.GetOffset(0xF3F18D08E58422C5);
             var instance = _HandshakeMaskToDisableFirstInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _HandshakeMaskToDisableFirstOffset);
+            instance.DangerousSetHandle(_Handle + _HandshakeMaskToDisableFirstOffset!.Value);
             return instance;
         }
     }
-    private static nint _DisabledOffset = -1;
+    private static nint? _DisabledOffset;
     private SchemaUntypedField? _DisabledInstance;
 
     public SchemaUntypedField Disabled
     {
         get
         {
-            if (_DisabledOffset == -1) _DisabledOffset = Schema.GetOffset(0xF3F18D083A7C5965);
+            _DisabledOffset = _DisabledOffset ?? Schema.GetOffset(0xF3F18D083A7C5965);
             var instance = _DisabledInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _DisabledOffset);
+            instance.DangerousSetHandle(_Handle + _DisabledOffset!.Value);
             return instance;
         }
     }

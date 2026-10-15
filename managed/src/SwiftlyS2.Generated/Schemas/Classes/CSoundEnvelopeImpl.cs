@@ -16,44 +16,44 @@ internal partial class CSoundEnvelopeImpl : SchemaClass, CSoundEnvelope
 {
     public CSoundEnvelopeImpl(nint handle) : base(handle) { }
 
-    private static nint _CurrentOffset = -1;
+    private static nint? _CurrentOffset;
 
     public ref float Current
     {
         get
         {
-            if (_CurrentOffset == -1) _CurrentOffset = Schema.GetOffset(0xDF974C315AD334FA);
-            return ref _Handle.AsRef<float>(_CurrentOffset);
+            _CurrentOffset = _CurrentOffset ?? Schema.GetOffset(0xDF974C315AD334FA);
+            return ref _Handle.AsRef<float>(_CurrentOffset!.Value);
         }
     }
-    private static nint _TargetOffset = -1;
+    private static nint? _TargetOffset;
 
     public ref float Target
     {
         get
         {
-            if (_TargetOffset == -1) _TargetOffset = Schema.GetOffset(0xDF974C31FA08A9E8);
-            return ref _Handle.AsRef<float>(_TargetOffset);
+            _TargetOffset = _TargetOffset ?? Schema.GetOffset(0xDF974C31FA08A9E8);
+            return ref _Handle.AsRef<float>(_TargetOffset!.Value);
         }
     }
-    private static nint _RateOffset = -1;
+    private static nint? _RateOffset;
 
     public ref float Rate
     {
         get
         {
-            if (_RateOffset == -1) _RateOffset = Schema.GetOffset(0xDF974C316C5ECD07);
-            return ref _Handle.AsRef<float>(_RateOffset);
+            _RateOffset = _RateOffset ?? Schema.GetOffset(0xDF974C316C5ECD07);
+            return ref _Handle.AsRef<float>(_RateOffset!.Value);
         }
     }
-    private static nint _ForceupdateOffset = -1;
+    private static nint? _ForceupdateOffset;
 
     public ref bool Forceupdate
     {
         get
         {
-            if (_ForceupdateOffset == -1) _ForceupdateOffset = Schema.GetOffset(0xDF974C3131B01C25);
-            return ref _Handle.AsRef<bool>(_ForceupdateOffset);
+            _ForceupdateOffset = _ForceupdateOffset ?? Schema.GetOffset(0xDF974C3131B01C25);
+            return ref _Handle.AsRef<bool>(_ForceupdateOffset!.Value);
         }
     }
 

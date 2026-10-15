@@ -16,29 +16,29 @@ internal partial class CModelConfigElement_SetBodygroupOnAttachedModelsImpl : CM
 {
     public CModelConfigElement_SetBodygroupOnAttachedModelsImpl(nint handle) : base(handle) { }
 
-    private static nint _GroupNameOffset = -1;
+    private static nint? _GroupNameOffset;
 
     public string GroupName
     {
         get
         {
-            if (_GroupNameOffset == -1) _GroupNameOffset = Schema.GetOffset(0xCC9BDB84E0A55E67);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_GroupNameOffset));
+            _GroupNameOffset = _GroupNameOffset ?? Schema.GetOffset(0xCC9BDB84E0A55E67);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_GroupNameOffset!.Value));
         }
         set
         {
-            if (_GroupNameOffset == -1) _GroupNameOffset = Schema.GetOffset(0xCC9BDB84E0A55E67);
-            Schema.SetCUtlString(_Handle, _GroupNameOffset, value);
+            _GroupNameOffset = _GroupNameOffset ?? Schema.GetOffset(0xCC9BDB84E0A55E67);
+            Schema.SetCUtlString(_Handle, _GroupNameOffset!.Value, value);
         }
     }
-    private static nint _ChoiceOffset = -1;
+    private static nint? _ChoiceOffset;
 
     public ref int Choice
     {
         get
         {
-            if (_ChoiceOffset == -1) _ChoiceOffset = Schema.GetOffset(0xCC9BDB847CC11192);
-            return ref _Handle.AsRef<int>(_ChoiceOffset);
+            _ChoiceOffset = _ChoiceOffset ?? Schema.GetOffset(0xCC9BDB847CC11192);
+            return ref _Handle.AsRef<int>(_ChoiceOffset!.Value);
         }
     }
 

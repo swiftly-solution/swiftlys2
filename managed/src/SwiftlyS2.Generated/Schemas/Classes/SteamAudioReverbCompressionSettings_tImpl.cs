@@ -16,24 +16,24 @@ internal partial class SteamAudioReverbCompressionSettings_tImpl : SchemaClass, 
 {
     public SteamAudioReverbCompressionSettings_tImpl(nint handle) : base(handle) { }
 
-    private static nint _EnableCompressionOffset = -1;
+    private static nint? _EnableCompressionOffset;
 
     public ref bool EnableCompression
     {
         get
         {
-            if (_EnableCompressionOffset == -1) _EnableCompressionOffset = Schema.GetOffset(0x2C7647D9492EE138);
-            return ref _Handle.AsRef<bool>(_EnableCompressionOffset);
+            _EnableCompressionOffset = _EnableCompressionOffset ?? Schema.GetOffset(0x2C7647D9492EE138);
+            return ref _Handle.AsRef<bool>(_EnableCompressionOffset!.Value);
         }
     }
-    private static nint _QualityOffset = -1;
+    private static nint? _QualityOffset;
 
     public ref float Quality
     {
         get
         {
-            if (_QualityOffset == -1) _QualityOffset = Schema.GetOffset(0x2C7647D993F12034);
-            return ref _Handle.AsRef<float>(_QualityOffset);
+            _QualityOffset = _QualityOffset ?? Schema.GetOffset(0x2C7647D993F12034);
+            return ref _Handle.AsRef<float>(_QualityOffset!.Value);
         }
     }
 

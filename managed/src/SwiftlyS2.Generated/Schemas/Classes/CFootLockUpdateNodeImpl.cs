@@ -16,213 +16,213 @@ internal partial class CFootLockUpdateNodeImpl : CUnaryUpdateNodeImpl, CFootLock
 {
     public CFootLockUpdateNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _OpFixedSettingsOffset = -1;
+    private static nint? _OpFixedSettingsOffset;
     private FootLockPoseOpFixedSettingsImpl? _OpFixedSettingsInstance;
 
     public FootLockPoseOpFixedSettings OpFixedSettings
     {
         get
         {
-            if (_OpFixedSettingsOffset == -1) _OpFixedSettingsOffset = Schema.GetOffset(0xA8F37E8E533AB09);
+            _OpFixedSettingsOffset = _OpFixedSettingsOffset ?? Schema.GetOffset(0xA8F37E8E533AB09);
             var instance = _OpFixedSettingsInstance ??= new FootLockPoseOpFixedSettingsImpl(0);
-            instance.DangerousSetHandle(_Handle + _OpFixedSettingsOffset);
+            instance.DangerousSetHandle(_Handle + _OpFixedSettingsOffset!.Value);
             return instance;
         }
     }
-    private static nint _FootSettingsOffset = -1;
+    private static nint? _FootSettingsOffset;
 
     public ref CUtlVector<FootFixedSettings> FootSettings
     {
         get
         {
-            if (_FootSettingsOffset == -1) _FootSettingsOffset = Schema.GetOffset(0xA8F37E8A7F2ADE4);
-            return ref _Handle.AsRef<CUtlVector<FootFixedSettings>>(_FootSettingsOffset);
+            _FootSettingsOffset = _FootSettingsOffset ?? Schema.GetOffset(0xA8F37E8A7F2ADE4);
+            return ref _Handle.AsRef<CUtlVector<FootFixedSettings>>(_FootSettingsOffset!.Value);
         }
     }
-    private static nint _HipShiftDampingOffset = -1;
+    private static nint? _HipShiftDampingOffset;
     private CAnimInputDampingImpl? _HipShiftDampingInstance;
 
     public CAnimInputDamping HipShiftDamping
     {
         get
         {
-            if (_HipShiftDampingOffset == -1) _HipShiftDampingOffset = Schema.GetOffset(0xA8F37E80EA57628);
+            _HipShiftDampingOffset = _HipShiftDampingOffset ?? Schema.GetOffset(0xA8F37E80EA57628);
             var instance = _HipShiftDampingInstance ??= new CAnimInputDampingImpl(0);
-            instance.DangerousSetHandle(_Handle + _HipShiftDampingOffset);
+            instance.DangerousSetHandle(_Handle + _HipShiftDampingOffset!.Value);
             return instance;
         }
     }
-    private static nint _RootHeightDampingOffset = -1;
+    private static nint? _RootHeightDampingOffset;
     private CAnimInputDampingImpl? _RootHeightDampingInstance;
 
     public CAnimInputDamping RootHeightDamping
     {
         get
         {
-            if (_RootHeightDampingOffset == -1) _RootHeightDampingOffset = Schema.GetOffset(0xA8F37E84DE10164);
+            _RootHeightDampingOffset = _RootHeightDampingOffset ?? Schema.GetOffset(0xA8F37E84DE10164);
             var instance = _RootHeightDampingInstance ??= new CAnimInputDampingImpl(0);
-            instance.DangerousSetHandle(_Handle + _RootHeightDampingOffset);
+            instance.DangerousSetHandle(_Handle + _RootHeightDampingOffset!.Value);
             return instance;
         }
     }
-    private static nint _StrideCurveScaleOffset = -1;
+    private static nint? _StrideCurveScaleOffset;
 
     public ref float StrideCurveScale
     {
         get
         {
-            if (_StrideCurveScaleOffset == -1) _StrideCurveScaleOffset = Schema.GetOffset(0xA8F37E824E250E9);
-            return ref _Handle.AsRef<float>(_StrideCurveScaleOffset);
+            _StrideCurveScaleOffset = _StrideCurveScaleOffset ?? Schema.GetOffset(0xA8F37E824E250E9);
+            return ref _Handle.AsRef<float>(_StrideCurveScaleOffset!.Value);
         }
     }
-    private static nint _StrideCurveLimitScaleOffset = -1;
+    private static nint? _StrideCurveLimitScaleOffset;
 
     public ref float StrideCurveLimitScale
     {
         get
         {
-            if (_StrideCurveLimitScaleOffset == -1) _StrideCurveLimitScaleOffset = Schema.GetOffset(0xA8F37E8BE5E55F6);
-            return ref _Handle.AsRef<float>(_StrideCurveLimitScaleOffset);
+            _StrideCurveLimitScaleOffset = _StrideCurveLimitScaleOffset ?? Schema.GetOffset(0xA8F37E8BE5E55F6);
+            return ref _Handle.AsRef<float>(_StrideCurveLimitScaleOffset!.Value);
         }
     }
-    private static nint _StepHeightIncreaseScaleOffset = -1;
+    private static nint? _StepHeightIncreaseScaleOffset;
 
     public ref float StepHeightIncreaseScale
     {
         get
         {
-            if (_StepHeightIncreaseScaleOffset == -1) _StepHeightIncreaseScaleOffset = Schema.GetOffset(0xA8F37E8AEFDE950);
-            return ref _Handle.AsRef<float>(_StepHeightIncreaseScaleOffset);
+            _StepHeightIncreaseScaleOffset = _StepHeightIncreaseScaleOffset ?? Schema.GetOffset(0xA8F37E8AEFDE950);
+            return ref _Handle.AsRef<float>(_StepHeightIncreaseScaleOffset!.Value);
         }
     }
-    private static nint _StepHeightDecreaseScaleOffset = -1;
+    private static nint? _StepHeightDecreaseScaleOffset;
 
     public ref float StepHeightDecreaseScale
     {
         get
         {
-            if (_StepHeightDecreaseScaleOffset == -1) _StepHeightDecreaseScaleOffset = Schema.GetOffset(0xA8F37E882893258);
-            return ref _Handle.AsRef<float>(_StepHeightDecreaseScaleOffset);
+            _StepHeightDecreaseScaleOffset = _StepHeightDecreaseScaleOffset ?? Schema.GetOffset(0xA8F37E882893258);
+            return ref _Handle.AsRef<float>(_StepHeightDecreaseScaleOffset!.Value);
         }
     }
-    private static nint _HipShiftScaleOffset = -1;
+    private static nint? _HipShiftScaleOffset;
 
     public ref float HipShiftScale
     {
         get
         {
-            if (_HipShiftScaleOffset == -1) _HipShiftScaleOffset = Schema.GetOffset(0xA8F37E847C1BE5A);
-            return ref _Handle.AsRef<float>(_HipShiftScaleOffset);
+            _HipShiftScaleOffset = _HipShiftScaleOffset ?? Schema.GetOffset(0xA8F37E847C1BE5A);
+            return ref _Handle.AsRef<float>(_HipShiftScaleOffset!.Value);
         }
     }
-    private static nint _BlendTimeOffset = -1;
+    private static nint? _BlendTimeOffset;
 
     public ref float BlendTime
     {
         get
         {
-            if (_BlendTimeOffset == -1) _BlendTimeOffset = Schema.GetOffset(0xA8F37E8A6206E9F);
-            return ref _Handle.AsRef<float>(_BlendTimeOffset);
+            _BlendTimeOffset = _BlendTimeOffset ?? Schema.GetOffset(0xA8F37E8A6206E9F);
+            return ref _Handle.AsRef<float>(_BlendTimeOffset!.Value);
         }
     }
-    private static nint _MaxRootHeightOffsetOffset = -1;
+    private static nint? _MaxRootHeightOffsetOffset;
 
     public ref float MaxRootHeightOffset
     {
         get
         {
-            if (_MaxRootHeightOffsetOffset == -1) _MaxRootHeightOffsetOffset = Schema.GetOffset(0xA8F37E8C33AC7DF);
-            return ref _Handle.AsRef<float>(_MaxRootHeightOffsetOffset);
+            _MaxRootHeightOffsetOffset = _MaxRootHeightOffsetOffset ?? Schema.GetOffset(0xA8F37E8C33AC7DF);
+            return ref _Handle.AsRef<float>(_MaxRootHeightOffsetOffset!.Value);
         }
     }
-    private static nint _MinRootHeightOffsetOffset = -1;
+    private static nint? _MinRootHeightOffsetOffset;
 
     public ref float MinRootHeightOffset
     {
         get
         {
-            if (_MinRootHeightOffsetOffset == -1) _MinRootHeightOffsetOffset = Schema.GetOffset(0xA8F37E8D9B970B1);
-            return ref _Handle.AsRef<float>(_MinRootHeightOffsetOffset);
+            _MinRootHeightOffsetOffset = _MinRootHeightOffsetOffset ?? Schema.GetOffset(0xA8F37E8D9B970B1);
+            return ref _Handle.AsRef<float>(_MinRootHeightOffsetOffset!.Value);
         }
     }
-    private static nint _TiltPlanePitchSpringStrengthOffset = -1;
+    private static nint? _TiltPlanePitchSpringStrengthOffset;
 
     public ref float TiltPlanePitchSpringStrength
     {
         get
         {
-            if (_TiltPlanePitchSpringStrengthOffset == -1) _TiltPlanePitchSpringStrengthOffset = Schema.GetOffset(0xA8F37E864893350);
-            return ref _Handle.AsRef<float>(_TiltPlanePitchSpringStrengthOffset);
+            _TiltPlanePitchSpringStrengthOffset = _TiltPlanePitchSpringStrengthOffset ?? Schema.GetOffset(0xA8F37E864893350);
+            return ref _Handle.AsRef<float>(_TiltPlanePitchSpringStrengthOffset!.Value);
         }
     }
-    private static nint _TiltPlaneRollSpringStrengthOffset = -1;
+    private static nint? _TiltPlaneRollSpringStrengthOffset;
 
     public ref float TiltPlaneRollSpringStrength
     {
         get
         {
-            if (_TiltPlaneRollSpringStrengthOffset == -1) _TiltPlaneRollSpringStrengthOffset = Schema.GetOffset(0xA8F37E8AD412E55);
-            return ref _Handle.AsRef<float>(_TiltPlaneRollSpringStrengthOffset);
+            _TiltPlaneRollSpringStrengthOffset = _TiltPlaneRollSpringStrengthOffset ?? Schema.GetOffset(0xA8F37E8AD412E55);
+            return ref _Handle.AsRef<float>(_TiltPlaneRollSpringStrengthOffset!.Value);
         }
     }
-    private static nint _ApplyFootRotationLimitsOffset = -1;
+    private static nint? _ApplyFootRotationLimitsOffset;
 
     public ref bool ApplyFootRotationLimits
     {
         get
         {
-            if (_ApplyFootRotationLimitsOffset == -1) _ApplyFootRotationLimitsOffset = Schema.GetOffset(0xA8F37E87C3F5AED);
-            return ref _Handle.AsRef<bool>(_ApplyFootRotationLimitsOffset);
+            _ApplyFootRotationLimitsOffset = _ApplyFootRotationLimitsOffset ?? Schema.GetOffset(0xA8F37E87C3F5AED);
+            return ref _Handle.AsRef<bool>(_ApplyFootRotationLimitsOffset!.Value);
         }
     }
-    private static nint _ApplyHipShiftOffset = -1;
+    private static nint? _ApplyHipShiftOffset;
 
     public ref bool ApplyHipShift
     {
         get
         {
-            if (_ApplyHipShiftOffset == -1) _ApplyHipShiftOffset = Schema.GetOffset(0xA8F37E8DE90F994);
-            return ref _Handle.AsRef<bool>(_ApplyHipShiftOffset);
+            _ApplyHipShiftOffset = _ApplyHipShiftOffset ?? Schema.GetOffset(0xA8F37E8DE90F994);
+            return ref _Handle.AsRef<bool>(_ApplyHipShiftOffset!.Value);
         }
     }
-    private static nint _ModulateStepHeightOffset = -1;
+    private static nint? _ModulateStepHeightOffset;
 
     public ref bool ModulateStepHeight
     {
         get
         {
-            if (_ModulateStepHeightOffset == -1) _ModulateStepHeightOffset = Schema.GetOffset(0xA8F37E82412FFBF);
-            return ref _Handle.AsRef<bool>(_ModulateStepHeightOffset);
+            _ModulateStepHeightOffset = _ModulateStepHeightOffset ?? Schema.GetOffset(0xA8F37E82412FFBF);
+            return ref _Handle.AsRef<bool>(_ModulateStepHeightOffset!.Value);
         }
     }
-    private static nint _ResetChildOffset = -1;
+    private static nint? _ResetChildOffset;
 
     public ref bool ResetChild
     {
         get
         {
-            if (_ResetChildOffset == -1) _ResetChildOffset = Schema.GetOffset(0xA8F37E865CC88B6);
-            return ref _Handle.AsRef<bool>(_ResetChildOffset);
+            _ResetChildOffset = _ResetChildOffset ?? Schema.GetOffset(0xA8F37E865CC88B6);
+            return ref _Handle.AsRef<bool>(_ResetChildOffset!.Value);
         }
     }
-    private static nint _EnableVerticalCurvedPathsOffset = -1;
+    private static nint? _EnableVerticalCurvedPathsOffset;
 
     public ref bool EnableVerticalCurvedPaths
     {
         get
         {
-            if (_EnableVerticalCurvedPathsOffset == -1) _EnableVerticalCurvedPathsOffset = Schema.GetOffset(0xA8F37E80A18A0EB);
-            return ref _Handle.AsRef<bool>(_EnableVerticalCurvedPathsOffset);
+            _EnableVerticalCurvedPathsOffset = _EnableVerticalCurvedPathsOffset ?? Schema.GetOffset(0xA8F37E80A18A0EB);
+            return ref _Handle.AsRef<bool>(_EnableVerticalCurvedPathsOffset!.Value);
         }
     }
-    private static nint _EnableRootHeightDampingOffset = -1;
+    private static nint? _EnableRootHeightDampingOffset;
 
     public ref bool EnableRootHeightDamping
     {
         get
         {
-            if (_EnableRootHeightDampingOffset == -1) _EnableRootHeightDampingOffset = Schema.GetOffset(0xA8F37E802F42911);
-            return ref _Handle.AsRef<bool>(_EnableRootHeightDampingOffset);
+            _EnableRootHeightDampingOffset = _EnableRootHeightDampingOffset ?? Schema.GetOffset(0xA8F37E802F42911);
+            return ref _Handle.AsRef<bool>(_EnableRootHeightDampingOffset!.Value);
         }
     }
 

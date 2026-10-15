@@ -16,14 +16,14 @@ internal partial class ExternalAnimGraphHandle_tImpl : SchemaClass, ExternalAnim
 {
     public ExternalAnimGraphHandle_tImpl(nint handle) : base(handle) { }
 
-    private static nint _ValueOffset = -1;
+    private static nint? _ValueOffset;
 
     public ref uint Value
     {
         get
         {
-            if (_ValueOffset == -1) _ValueOffset = Schema.GetOffset(0x680C252CDCB0894A);
-            return ref _Handle.AsRef<uint>(_ValueOffset);
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0x680C252CDCB0894A);
+            return ref _Handle.AsRef<uint>(_ValueOffset!.Value);
         }
     }
 

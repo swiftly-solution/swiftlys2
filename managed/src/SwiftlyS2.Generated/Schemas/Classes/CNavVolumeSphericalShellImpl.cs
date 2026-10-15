@@ -16,14 +16,14 @@ internal partial class CNavVolumeSphericalShellImpl : CNavVolumeSphereImpl, CNav
 {
     public CNavVolumeSphericalShellImpl(nint handle) : base(handle) { }
 
-    private static nint _RadiusInnerOffset = -1;
+    private static nint? _RadiusInnerOffset;
 
     public ref float RadiusInner
     {
         get
         {
-            if (_RadiusInnerOffset == -1) _RadiusInnerOffset = Schema.GetOffset(0x8AC7FC7A5D85234F);
-            return ref _Handle.AsRef<float>(_RadiusInnerOffset);
+            _RadiusInnerOffset = _RadiusInnerOffset ?? Schema.GetOffset(0x8AC7FC7A5D85234F);
+            return ref _Handle.AsRef<float>(_RadiusInnerOffset!.Value);
         }
     }
 

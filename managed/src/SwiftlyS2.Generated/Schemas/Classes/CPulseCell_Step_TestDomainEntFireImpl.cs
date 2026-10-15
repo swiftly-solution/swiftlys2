@@ -16,19 +16,19 @@ internal partial class CPulseCell_Step_TestDomainEntFireImpl : CPulseCell_BaseFl
 {
     public CPulseCell_Step_TestDomainEntFireImpl(nint handle) : base(handle) { }
 
-    private static nint _InputOffset = -1;
+    private static nint? _InputOffset;
 
     public string Input
     {
         get
         {
-            if (_InputOffset == -1) _InputOffset = Schema.GetOffset(0x22A0E258942A24FB);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_InputOffset));
+            _InputOffset = _InputOffset ?? Schema.GetOffset(0x22A0E258942A24FB);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_InputOffset!.Value));
         }
         set
         {
-            if (_InputOffset == -1) _InputOffset = Schema.GetOffset(0x22A0E258942A24FB);
-            Schema.SetCUtlString(_Handle, _InputOffset, value);
+            _InputOffset = _InputOffset ?? Schema.GetOffset(0x22A0E258942A24FB);
+            Schema.SetCUtlString(_Handle, _InputOffset!.Value, value);
         }
     }
 

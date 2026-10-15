@@ -16,84 +16,84 @@ internal partial class CAnimSkeletonImpl : SchemaClass, CAnimSkeleton
 {
     public CAnimSkeletonImpl(nint handle) : base(handle) { }
 
-    private static nint _LocalSpaceTransformsOffset = -1;
+    private static nint? _LocalSpaceTransformsOffset;
 
     public ref CUtlVector<CTransform> LocalSpaceTransforms
     {
         get
         {
-            if (_LocalSpaceTransformsOffset == -1) _LocalSpaceTransformsOffset = Schema.GetOffset(0x33309AA433B34B4F);
-            return ref _Handle.AsRef<CUtlVector<CTransform>>(_LocalSpaceTransformsOffset);
+            _LocalSpaceTransformsOffset = _LocalSpaceTransformsOffset ?? Schema.GetOffset(0x33309AA433B34B4F);
+            return ref _Handle.AsRef<CUtlVector<CTransform>>(_LocalSpaceTransformsOffset!.Value);
         }
     }
-    private static nint _ModelSpaceTransformsOffset = -1;
+    private static nint? _ModelSpaceTransformsOffset;
 
     public ref CUtlVector<CTransform> ModelSpaceTransforms
     {
         get
         {
-            if (_ModelSpaceTransformsOffset == -1) _ModelSpaceTransformsOffset = Schema.GetOffset(0x33309AA4F9870969);
-            return ref _Handle.AsRef<CUtlVector<CTransform>>(_ModelSpaceTransformsOffset);
+            _ModelSpaceTransformsOffset = _ModelSpaceTransformsOffset ?? Schema.GetOffset(0x33309AA4F9870969);
+            return ref _Handle.AsRef<CUtlVector<CTransform>>(_ModelSpaceTransformsOffset!.Value);
         }
     }
-    private static nint _BoneNamesOffset = -1;
+    private static nint? _BoneNamesOffset;
 
     public ref CUtlVector<CUtlString> BoneNames
     {
         get
         {
-            if (_BoneNamesOffset == -1) _BoneNamesOffset = Schema.GetOffset(0x33309AA43CC0D1ED);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_BoneNamesOffset);
+            _BoneNamesOffset = _BoneNamesOffset ?? Schema.GetOffset(0x33309AA43CC0D1ED);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_BoneNamesOffset!.Value);
         }
     }
-    private static nint _ChildrenOffset = -1;
+    private static nint? _ChildrenOffset;
 
     public ref CUtlVector<CUtlVector<int>> Children
     {
         get
         {
-            if (_ChildrenOffset == -1) _ChildrenOffset = Schema.GetOffset(0x33309AA47415FA72);
-            return ref _Handle.AsRef<CUtlVector<CUtlVector<int>>>(_ChildrenOffset);
+            _ChildrenOffset = _ChildrenOffset ?? Schema.GetOffset(0x33309AA47415FA72);
+            return ref _Handle.AsRef<CUtlVector<CUtlVector<int>>>(_ChildrenOffset!.Value);
         }
     }
-    private static nint _ParentsOffset = -1;
+    private static nint? _ParentsOffset;
 
     public ref CUtlVector<int> Parents
     {
         get
         {
-            if (_ParentsOffset == -1) _ParentsOffset = Schema.GetOffset(0x33309AA470DBC8AA);
-            return ref _Handle.AsRef<CUtlVector<int>>(_ParentsOffset);
+            _ParentsOffset = _ParentsOffset ?? Schema.GetOffset(0x33309AA470DBC8AA);
+            return ref _Handle.AsRef<CUtlVector<int>>(_ParentsOffset!.Value);
         }
     }
-    private static nint _FeetOffset = -1;
+    private static nint? _FeetOffset;
 
     public ref CUtlVector<CAnimFoot> Feet
     {
         get
         {
-            if (_FeetOffset == -1) _FeetOffset = Schema.GetOffset(0x33309AA47910AFF5);
-            return ref _Handle.AsRef<CUtlVector<CAnimFoot>>(_FeetOffset);
+            _FeetOffset = _FeetOffset ?? Schema.GetOffset(0x33309AA47910AFF5);
+            return ref _Handle.AsRef<CUtlVector<CAnimFoot>>(_FeetOffset!.Value);
         }
     }
-    private static nint _MorphNamesOffset = -1;
+    private static nint? _MorphNamesOffset;
 
     public ref CUtlVector<CUtlString> MorphNames
     {
         get
         {
-            if (_MorphNamesOffset == -1) _MorphNamesOffset = Schema.GetOffset(0x33309AA4E8F4EC4F);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_MorphNamesOffset);
+            _MorphNamesOffset = _MorphNamesOffset ?? Schema.GetOffset(0x33309AA4E8F4EC4F);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_MorphNamesOffset!.Value);
         }
     }
-    private static nint _LodBoneCountsOffset = -1;
+    private static nint? _LodBoneCountsOffset;
 
     public ref CUtlVector<int> LodBoneCounts
     {
         get
         {
-            if (_LodBoneCountsOffset == -1) _LodBoneCountsOffset = Schema.GetOffset(0x33309AA4403723B2);
-            return ref _Handle.AsRef<CUtlVector<int>>(_LodBoneCountsOffset);
+            _LodBoneCountsOffset = _LodBoneCountsOffset ?? Schema.GetOffset(0x33309AA4403723B2);
+            return ref _Handle.AsRef<CUtlVector<int>>(_LodBoneCountsOffset!.Value);
         }
     }
 

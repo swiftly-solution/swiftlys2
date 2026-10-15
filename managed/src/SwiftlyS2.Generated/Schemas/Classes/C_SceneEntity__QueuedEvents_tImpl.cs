@@ -16,14 +16,14 @@ internal partial class C_SceneEntity__QueuedEvents_tImpl : SchemaClass, C_SceneE
 {
     public C_SceneEntity__QueuedEvents_tImpl(nint handle) : base(handle) { }
 
-    private static nint _StarttimeOffset = -1;
+    private static nint? _StarttimeOffset;
 
     public ref float Starttime
     {
         get
         {
-            if (_StarttimeOffset == -1) _StarttimeOffset = Schema.GetOffset(0xA0CC44B98A708DEE);
-            return ref _Handle.AsRef<float>(_StarttimeOffset);
+            _StarttimeOffset = _StarttimeOffset ?? Schema.GetOffset(0xA0CC44B98A708DEE);
+            return ref _Handle.AsRef<float>(_StarttimeOffset!.Value);
         }
     }
 

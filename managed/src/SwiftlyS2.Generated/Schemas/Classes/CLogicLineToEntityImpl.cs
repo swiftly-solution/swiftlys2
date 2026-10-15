@@ -16,52 +16,52 @@ internal partial class CLogicLineToEntityImpl : CLogicalEntityImpl, CLogicLineTo
 {
     public CLogicLineToEntityImpl(nint handle) : base(handle) { }
 
-    private static nint _LineOffset = -1;
+    private static nint? _LineOffset;
     private SchemaUntypedField? _LineInstance;
 
     public SchemaUntypedField Line
     {
         get
         {
-            if (_LineOffset == -1) _LineOffset = Schema.GetOffset(0x61067DC85589FAA7);
+            _LineOffset = _LineOffset ?? Schema.GetOffset(0x61067DC85589FAA7);
             var instance = _LineInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _LineOffset);
+            instance.DangerousSetHandle(_Handle + _LineOffset!.Value);
             return instance;
         }
     }
-    private static nint _SourceNameOffset = -1;
+    private static nint? _SourceNameOffset;
 
     public string SourceName
     {
         get
         {
-            if (_SourceNameOffset == -1) _SourceNameOffset = Schema.GetOffset(0x61067DC82F9BA2DB);
-            return Schema.GetString(_Handle.Read<nint>(_SourceNameOffset));
+            _SourceNameOffset = _SourceNameOffset ?? Schema.GetOffset(0x61067DC82F9BA2DB);
+            return Schema.GetString(_Handle.Read<nint>(_SourceNameOffset!.Value));
         }
         set
         {
-            if (_SourceNameOffset == -1) _SourceNameOffset = Schema.GetOffset(0x61067DC82F9BA2DB);
-            Schema.SetString(_Handle, _SourceNameOffset, value);
+            _SourceNameOffset = _SourceNameOffset ?? Schema.GetOffset(0x61067DC82F9BA2DB);
+            Schema.SetString(_Handle, _SourceNameOffset!.Value, value);
         }
     }
-    private static nint _StartEntityOffset = -1;
+    private static nint? _StartEntityOffset;
 
     public ref CHandle<CBaseEntity> StartEntity
     {
         get
         {
-            if (_StartEntityOffset == -1) _StartEntityOffset = Schema.GetOffset(0x61067DC8904F2828);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_StartEntityOffset);
+            _StartEntityOffset = _StartEntityOffset ?? Schema.GetOffset(0x61067DC8904F2828);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_StartEntityOffset!.Value);
         }
     }
-    private static nint _EndEntityOffset = -1;
+    private static nint? _EndEntityOffset;
 
     public ref CHandle<CBaseEntity> EndEntity
     {
         get
         {
-            if (_EndEntityOffset == -1) _EndEntityOffset = Schema.GetOffset(0x61067DC89114A219);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EndEntityOffset);
+            _EndEntityOffset = _EndEntityOffset ?? Schema.GetOffset(0x61067DC89114A219);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EndEntityOffset!.Value);
         }
     }
 

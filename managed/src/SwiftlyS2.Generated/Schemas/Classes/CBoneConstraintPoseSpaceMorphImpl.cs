@@ -16,64 +16,64 @@ internal partial class CBoneConstraintPoseSpaceMorphImpl : CBoneConstraintBaseIm
 {
     public CBoneConstraintPoseSpaceMorphImpl(nint handle) : base(handle) { }
 
-    private static nint _BoneNameOffset = -1;
+    private static nint? _BoneNameOffset;
 
     public string BoneName
     {
         get
         {
-            if (_BoneNameOffset == -1) _BoneNameOffset = Schema.GetOffset(0x6ECAD65A7559AC1F);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_BoneNameOffset));
+            _BoneNameOffset = _BoneNameOffset ?? Schema.GetOffset(0x6ECAD65A7559AC1F);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_BoneNameOffset!.Value));
         }
         set
         {
-            if (_BoneNameOffset == -1) _BoneNameOffset = Schema.GetOffset(0x6ECAD65A7559AC1F);
-            Schema.SetCUtlString(_Handle, _BoneNameOffset, value);
+            _BoneNameOffset = _BoneNameOffset ?? Schema.GetOffset(0x6ECAD65A7559AC1F);
+            Schema.SetCUtlString(_Handle, _BoneNameOffset!.Value, value);
         }
     }
-    private static nint _AttachmentNameOffset = -1;
+    private static nint? _AttachmentNameOffset;
 
     public string AttachmentName
     {
         get
         {
-            if (_AttachmentNameOffset == -1) _AttachmentNameOffset = Schema.GetOffset(0x6ECAD65A7B86DB7C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_AttachmentNameOffset));
+            _AttachmentNameOffset = _AttachmentNameOffset ?? Schema.GetOffset(0x6ECAD65A7B86DB7C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_AttachmentNameOffset!.Value));
         }
         set
         {
-            if (_AttachmentNameOffset == -1) _AttachmentNameOffset = Schema.GetOffset(0x6ECAD65A7B86DB7C);
-            Schema.SetCUtlString(_Handle, _AttachmentNameOffset, value);
+            _AttachmentNameOffset = _AttachmentNameOffset ?? Schema.GetOffset(0x6ECAD65A7B86DB7C);
+            Schema.SetCUtlString(_Handle, _AttachmentNameOffset!.Value, value);
         }
     }
-    private static nint _OutputMorphOffset = -1;
+    private static nint? _OutputMorphOffset;
 
     public ref CUtlVector<CUtlString> OutputMorph
     {
         get
         {
-            if (_OutputMorphOffset == -1) _OutputMorphOffset = Schema.GetOffset(0x6ECAD65ADC9A8262);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_OutputMorphOffset);
+            _OutputMorphOffset = _OutputMorphOffset ?? Schema.GetOffset(0x6ECAD65ADC9A8262);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_OutputMorphOffset!.Value);
         }
     }
-    private static nint _InputListOffset = -1;
+    private static nint? _InputListOffset;
 
     public ref CUtlVector<CBoneConstraintPoseSpaceMorph__Input_t> InputList
     {
         get
         {
-            if (_InputListOffset == -1) _InputListOffset = Schema.GetOffset(0x6ECAD65A15EB8D83);
-            return ref _Handle.AsRef<CUtlVector<CBoneConstraintPoseSpaceMorph__Input_t>>(_InputListOffset);
+            _InputListOffset = _InputListOffset ?? Schema.GetOffset(0x6ECAD65A15EB8D83);
+            return ref _Handle.AsRef<CUtlVector<CBoneConstraintPoseSpaceMorph__Input_t>>(_InputListOffset!.Value);
         }
     }
-    private static nint _ClampOffset = -1;
+    private static nint? _ClampOffset;
 
     public ref bool Clamp
     {
         get
         {
-            if (_ClampOffset == -1) _ClampOffset = Schema.GetOffset(0x6ECAD65A84C7929C);
-            return ref _Handle.AsRef<bool>(_ClampOffset);
+            _ClampOffset = _ClampOffset ?? Schema.GetOffset(0x6ECAD65A84C7929C);
+            return ref _Handle.AsRef<bool>(_ClampOffset!.Value);
         }
     }
 

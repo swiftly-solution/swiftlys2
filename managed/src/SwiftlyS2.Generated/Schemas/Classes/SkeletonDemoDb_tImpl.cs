@@ -16,34 +16,34 @@ internal partial class SkeletonDemoDb_tImpl : SchemaClass, SkeletonDemoDb_t
 {
     public SkeletonDemoDb_tImpl(nint handle) : base(handle) { }
 
-    private static nint _AnimCapturesOffset = -1;
+    private static nint? _AnimCapturesOffset;
 
     public ref CUtlVector<PointerTo<SkeletonAnimCapture_t>> AnimCaptures
     {
         get
         {
-            if (_AnimCapturesOffset == -1) _AnimCapturesOffset = Schema.GetOffset(0xF4F5DA643E069D13);
-            return ref _Handle.AsRef<CUtlVector<PointerTo<SkeletonAnimCapture_t>>>(_AnimCapturesOffset);
+            _AnimCapturesOffset = _AnimCapturesOffset ?? Schema.GetOffset(0xF4F5DA643E069D13);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<SkeletonAnimCapture_t>>>(_AnimCapturesOffset!.Value);
         }
     }
-    private static nint _CameraTrackOffset = -1;
+    private static nint? _CameraTrackOffset;
 
     public ref CUtlVector<SkeletonAnimCapture_t__Camera_t> CameraTrack
     {
         get
         {
-            if (_CameraTrackOffset == -1) _CameraTrackOffset = Schema.GetOffset(0xF4F5DA64EFF0F8DD);
-            return ref _Handle.AsRef<CUtlVector<SkeletonAnimCapture_t__Camera_t>>(_CameraTrackOffset);
+            _CameraTrackOffset = _CameraTrackOffset ?? Schema.GetOffset(0xF4F5DA64EFF0F8DD);
+            return ref _Handle.AsRef<CUtlVector<SkeletonAnimCapture_t__Camera_t>>(_CameraTrackOffset!.Value);
         }
     }
-    private static nint _RecordingTimeOffset = -1;
+    private static nint? _RecordingTimeOffset;
 
     public ref float RecordingTime
     {
         get
         {
-            if (_RecordingTimeOffset == -1) _RecordingTimeOffset = Schema.GetOffset(0xF4F5DA64D29049CB);
-            return ref _Handle.AsRef<float>(_RecordingTimeOffset);
+            _RecordingTimeOffset = _RecordingTimeOffset ?? Schema.GetOffset(0xF4F5DA64D29049CB);
+            return ref _Handle.AsRef<float>(_RecordingTimeOffset!.Value);
         }
     }
 

@@ -16,42 +16,42 @@ internal partial class FeEdgeDesc_tImpl : SchemaClass, FeEdgeDesc_t
 {
     public FeEdgeDesc_tImpl(nint handle) : base(handle) { }
 
-    private static nint _EdgeOffset = -1;
+    private static nint? _EdgeOffset;
     private SchemaFixedArray<ushort>? _EdgeInstance;
 
     public ISchemaFixedArray<ushort> Edge
     {
         get
         {
-            if (_EdgeOffset == -1) _EdgeOffset = Schema.GetOffset(0xD483120F9FB47768);
+            _EdgeOffset = _EdgeOffset ?? Schema.GetOffset(0xD483120F9FB47768);
             var instance = _EdgeInstance ??= new SchemaFixedArray<ushort>(0, 0xD483120F9FB47768, 2, 2, 2);
-            instance.DangerousSetHandle(_Handle + _EdgeOffset);
+            instance.DangerousSetHandle(_Handle + _EdgeOffset!.Value);
             return instance;
         }
     }
-    private static nint _SideOffset = -1;
+    private static nint? _SideOffset;
     private SchemaUntypedField? _SideInstance;
 
     public SchemaUntypedField Side
     {
         get
         {
-            if (_SideOffset == -1) _SideOffset = Schema.GetOffset(0xD483120FA0D97E1A);
+            _SideOffset = _SideOffset ?? Schema.GetOffset(0xD483120FA0D97E1A);
             var instance = _SideInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _SideOffset);
+            instance.DangerousSetHandle(_Handle + _SideOffset!.Value);
             return instance;
         }
     }
-    private static nint _VirtElemOffset = -1;
+    private static nint? _VirtElemOffset;
     private SchemaFixedArray<ushort>? _VirtElemInstance;
 
     public ISchemaFixedArray<ushort> VirtElem
     {
         get
         {
-            if (_VirtElemOffset == -1) _VirtElemOffset = Schema.GetOffset(0xD483120F64A695A5);
+            _VirtElemOffset = _VirtElemOffset ?? Schema.GetOffset(0xD483120F64A695A5);
             var instance = _VirtElemInstance ??= new SchemaFixedArray<ushort>(0, 0xD483120F64A695A5, 2, 2, 2);
-            instance.DangerousSetHandle(_Handle + _VirtElemOffset);
+            instance.DangerousSetHandle(_Handle + _VirtElemOffset!.Value);
             return instance;
         }
     }

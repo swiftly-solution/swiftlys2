@@ -16,24 +16,24 @@ internal partial class MotionIndexImpl : SchemaClass, MotionIndex
 {
     public MotionIndexImpl(nint handle) : base(handle) { }
 
-    private static nint _GroupOffset = -1;
+    private static nint? _GroupOffset;
 
     public ref ushort Group
     {
         get
         {
-            if (_GroupOffset == -1) _GroupOffset = Schema.GetOffset(0x5914302D0CD16308);
-            return ref _Handle.AsRef<ushort>(_GroupOffset);
+            _GroupOffset = _GroupOffset ?? Schema.GetOffset(0x5914302D0CD16308);
+            return ref _Handle.AsRef<ushort>(_GroupOffset!.Value);
         }
     }
-    private static nint _MotionOffset = -1;
+    private static nint? _MotionOffset;
 
     public ref ushort Motion
     {
         get
         {
-            if (_MotionOffset == -1) _MotionOffset = Schema.GetOffset(0x5914302DBB2E0DCB);
-            return ref _Handle.AsRef<ushort>(_MotionOffset);
+            _MotionOffset = _MotionOffset ?? Schema.GetOffset(0x5914302DBB2E0DCB);
+            return ref _Handle.AsRef<ushort>(_MotionOffset!.Value);
         }
     }
 

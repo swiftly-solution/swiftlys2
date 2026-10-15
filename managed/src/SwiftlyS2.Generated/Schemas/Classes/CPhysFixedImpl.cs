@@ -16,94 +16,94 @@ internal partial class CPhysFixedImpl : CPhysConstraintImpl, CPhysFixed
 {
     public CPhysFixedImpl(nint handle) : base(handle) { }
 
-    private static nint _LinearFrequencyOffset = -1;
+    private static nint? _LinearFrequencyOffset;
 
     public ref float LinearFrequency
     {
         get
         {
-            if (_LinearFrequencyOffset == -1) _LinearFrequencyOffset = Schema.GetOffset(0x8E8A38382FE6B034);
-            return ref _Handle.AsRef<float>(_LinearFrequencyOffset);
+            _LinearFrequencyOffset = _LinearFrequencyOffset ?? Schema.GetOffset(0x8E8A38382FE6B034);
+            return ref _Handle.AsRef<float>(_LinearFrequencyOffset!.Value);
         }
     }
-    private static nint _LinearDampingRatioOffset = -1;
+    private static nint? _LinearDampingRatioOffset;
 
     public ref float LinearDampingRatio
     {
         get
         {
-            if (_LinearDampingRatioOffset == -1) _LinearDampingRatioOffset = Schema.GetOffset(0x8E8A383882438FAF);
-            return ref _Handle.AsRef<float>(_LinearDampingRatioOffset);
+            _LinearDampingRatioOffset = _LinearDampingRatioOffset ?? Schema.GetOffset(0x8E8A383882438FAF);
+            return ref _Handle.AsRef<float>(_LinearDampingRatioOffset!.Value);
         }
     }
-    private static nint _AngularFrequencyOffset = -1;
+    private static nint? _AngularFrequencyOffset;
 
     public ref float AngularFrequency
     {
         get
         {
-            if (_AngularFrequencyOffset == -1) _AngularFrequencyOffset = Schema.GetOffset(0x8E8A383836D56C7B);
-            return ref _Handle.AsRef<float>(_AngularFrequencyOffset);
+            _AngularFrequencyOffset = _AngularFrequencyOffset ?? Schema.GetOffset(0x8E8A383836D56C7B);
+            return ref _Handle.AsRef<float>(_AngularFrequencyOffset!.Value);
         }
     }
-    private static nint _AngularDampingRatioOffset = -1;
+    private static nint? _AngularDampingRatioOffset;
 
     public ref float AngularDampingRatio
     {
         get
         {
-            if (_AngularDampingRatioOffset == -1) _AngularDampingRatioOffset = Schema.GetOffset(0x8E8A3838689E74E2);
-            return ref _Handle.AsRef<float>(_AngularDampingRatioOffset);
+            _AngularDampingRatioOffset = _AngularDampingRatioOffset ?? Schema.GetOffset(0x8E8A3838689E74E2);
+            return ref _Handle.AsRef<float>(_AngularDampingRatioOffset!.Value);
         }
     }
-    private static nint _EnableLinearConstraintOffset = -1;
+    private static nint? _EnableLinearConstraintOffset;
 
     public ref bool EnableLinearConstraint
     {
         get
         {
-            if (_EnableLinearConstraintOffset == -1) _EnableLinearConstraintOffset = Schema.GetOffset(0x8E8A383868F4518C);
-            return ref _Handle.AsRef<bool>(_EnableLinearConstraintOffset);
+            _EnableLinearConstraintOffset = _EnableLinearConstraintOffset ?? Schema.GetOffset(0x8E8A383868F4518C);
+            return ref _Handle.AsRef<bool>(_EnableLinearConstraintOffset!.Value);
         }
     }
-    private static nint _EnableAngularConstraintOffset = -1;
+    private static nint? _EnableAngularConstraintOffset;
 
     public ref bool EnableAngularConstraint
     {
         get
         {
-            if (_EnableAngularConstraintOffset == -1) _EnableAngularConstraintOffset = Schema.GetOffset(0x8E8A3838F98A5C8B);
-            return ref _Handle.AsRef<bool>(_EnableAngularConstraintOffset);
+            _EnableAngularConstraintOffset = _EnableAngularConstraintOffset ?? Schema.GetOffset(0x8E8A3838F98A5C8B);
+            return ref _Handle.AsRef<bool>(_EnableAngularConstraintOffset!.Value);
         }
     }
-    private static nint _BoneName1Offset = -1;
+    private static nint? _BoneName1Offset;
 
     public string BoneName1
     {
         get
         {
-            if (_BoneName1Offset == -1) _BoneName1Offset = Schema.GetOffset(0x8E8A3838EA2A0C6A);
-            return Schema.GetString(_Handle.Read<nint>(_BoneName1Offset));
+            _BoneName1Offset = _BoneName1Offset ?? Schema.GetOffset(0x8E8A3838EA2A0C6A);
+            return Schema.GetString(_Handle.Read<nint>(_BoneName1Offset!.Value));
         }
         set
         {
-            if (_BoneName1Offset == -1) _BoneName1Offset = Schema.GetOffset(0x8E8A3838EA2A0C6A);
-            Schema.SetString(_Handle, _BoneName1Offset, value);
+            _BoneName1Offset = _BoneName1Offset ?? Schema.GetOffset(0x8E8A3838EA2A0C6A);
+            Schema.SetString(_Handle, _BoneName1Offset!.Value, value);
         }
     }
-    private static nint _BoneName2Offset = -1;
+    private static nint? _BoneName2Offset;
 
     public string BoneName2
     {
         get
         {
-            if (_BoneName2Offset == -1) _BoneName2Offset = Schema.GetOffset(0x8E8A3838E92A0AD7);
-            return Schema.GetString(_Handle.Read<nint>(_BoneName2Offset));
+            _BoneName2Offset = _BoneName2Offset ?? Schema.GetOffset(0x8E8A3838E92A0AD7);
+            return Schema.GetString(_Handle.Read<nint>(_BoneName2Offset!.Value));
         }
         set
         {
-            if (_BoneName2Offset == -1) _BoneName2Offset = Schema.GetOffset(0x8E8A3838E92A0AD7);
-            Schema.SetString(_Handle, _BoneName2Offset, value);
+            _BoneName2Offset = _BoneName2Offset ?? Schema.GetOffset(0x8E8A3838E92A0AD7);
+            Schema.SetString(_Handle, _BoneName2Offset!.Value, value);
         }
     }
 

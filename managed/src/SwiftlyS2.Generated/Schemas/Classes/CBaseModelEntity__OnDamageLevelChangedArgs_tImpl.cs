@@ -16,44 +16,44 @@ internal partial class CBaseModelEntity__OnDamageLevelChangedArgs_tImpl : Schema
 {
     public CBaseModelEntity__OnDamageLevelChangedArgs_tImpl(nint handle) : base(handle) { }
 
-    private static nint _HitGroupOffset = -1;
+    private static nint? _HitGroupOffset;
 
     public ref HitGroup_t HitGroup
     {
         get
         {
-            if (_HitGroupOffset == -1) _HitGroupOffset = Schema.GetOffset(0xA9864F6FB0AC5DF9);
-            return ref _Handle.AsRef<HitGroup_t>(_HitGroupOffset);
+            _HitGroupOffset = _HitGroupOffset ?? Schema.GetOffset(0xA9864F6FB0AC5DF9);
+            return ref _Handle.AsRef<HitGroup_t>(_HitGroupOffset!.Value);
         }
     }
-    private static nint _DamageLevelOffset = -1;
+    private static nint? _DamageLevelOffset;
 
     public ref int DamageLevel
     {
         get
         {
-            if (_DamageLevelOffset == -1) _DamageLevelOffset = Schema.GetOffset(0xA9864F6F08DA2442);
-            return ref _Handle.AsRef<int>(_DamageLevelOffset);
+            _DamageLevelOffset = _DamageLevelOffset ?? Schema.GetOffset(0xA9864F6F08DA2442);
+            return ref _Handle.AsRef<int>(_DamageLevelOffset!.Value);
         }
     }
-    private static nint _DamageLevelsRemainingOffset = -1;
+    private static nint? _DamageLevelsRemainingOffset;
 
     public ref int DamageLevelsRemaining
     {
         get
         {
-            if (_DamageLevelsRemainingOffset == -1) _DamageLevelsRemainingOffset = Schema.GetOffset(0xA9864F6F66EF701D);
-            return ref _Handle.AsRef<int>(_DamageLevelsRemainingOffset);
+            _DamageLevelsRemainingOffset = _DamageLevelsRemainingOffset ?? Schema.GetOffset(0xA9864F6F66EF701D);
+            return ref _Handle.AsRef<int>(_DamageLevelsRemainingOffset!.Value);
         }
     }
-    private static nint _PrevDamageLevelOffset = -1;
+    private static nint? _PrevDamageLevelOffset;
 
     public ref int PrevDamageLevel
     {
         get
         {
-            if (_PrevDamageLevelOffset == -1) _PrevDamageLevelOffset = Schema.GetOffset(0xA9864F6F54282245);
-            return ref _Handle.AsRef<int>(_PrevDamageLevelOffset);
+            _PrevDamageLevelOffset = _PrevDamageLevelOffset ?? Schema.GetOffset(0xA9864F6F54282245);
+            return ref _Handle.AsRef<int>(_PrevDamageLevelOffset!.Value);
         }
     }
 

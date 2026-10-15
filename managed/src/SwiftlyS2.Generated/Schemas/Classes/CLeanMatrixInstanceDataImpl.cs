@@ -16,24 +16,24 @@ internal partial class CLeanMatrixInstanceDataImpl : SchemaClass, CLeanMatrixIns
 {
     public CLeanMatrixInstanceDataImpl(nint handle) : base(handle) { }
 
-    private static nint _ValueYOffset = -1;
+    private static nint? _ValueYOffset;
 
     public ref float ValueY
     {
         get
         {
-            if (_ValueYOffset == -1) _ValueYOffset = Schema.GetOffset(0x4D3827A061D896E7);
-            return ref _Handle.AsRef<float>(_ValueYOffset);
+            _ValueYOffset = _ValueYOffset ?? Schema.GetOffset(0x4D3827A061D896E7);
+            return ref _Handle.AsRef<float>(_ValueYOffset!.Value);
         }
     }
-    private static nint _ValueXOffset = -1;
+    private static nint? _ValueXOffset;
 
     public ref float ValueX
     {
         get
         {
-            if (_ValueXOffset == -1) _ValueXOffset = Schema.GetOffset(0x4D3827A060D89554);
-            return ref _Handle.AsRef<float>(_ValueXOffset);
+            _ValueXOffset = _ValueXOffset ?? Schema.GetOffset(0x4D3827A060D89554);
+            return ref _Handle.AsRef<float>(_ValueXOffset!.Value);
         }
     }
 

@@ -16,24 +16,24 @@ internal partial class CAnimationGraphVisualizerAxisImpl : CAnimationGraphVisual
 {
     public CAnimationGraphVisualizerAxisImpl(nint handle) : base(handle) { }
 
-    private static nint _XWsTransformOffset = -1;
+    private static nint? _XWsTransformOffset;
 
     public ref CTransform XWsTransform
     {
         get
         {
-            if (_XWsTransformOffset == -1) _XWsTransformOffset = Schema.GetOffset(0xB0A274E9AE1478FF);
-            return ref _Handle.AsRef<CTransform>(_XWsTransformOffset);
+            _XWsTransformOffset = _XWsTransformOffset ?? Schema.GetOffset(0xB0A274E9AE1478FF);
+            return ref _Handle.AsRef<CTransform>(_XWsTransformOffset!.Value);
         }
     }
-    private static nint _AxisSizeOffset = -1;
+    private static nint? _AxisSizeOffset;
 
     public ref float AxisSize
     {
         get
         {
-            if (_AxisSizeOffset == -1) _AxisSizeOffset = Schema.GetOffset(0xB0A274E9224B2A23);
-            return ref _Handle.AsRef<float>(_AxisSizeOffset);
+            _AxisSizeOffset = _AxisSizeOffset ?? Schema.GetOffset(0xB0A274E9224B2A23);
+            return ref _Handle.AsRef<float>(_AxisSizeOffset!.Value);
         }
     }
 

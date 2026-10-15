@@ -16,16 +16,16 @@ internal partial class CPulseCell_BaseLerpImpl : CPulseCell_BaseYieldingInflowIm
 {
     public CPulseCell_BaseLerpImpl(nint handle) : base(handle) { }
 
-    private static nint _WakeResumeOffset = -1;
+    private static nint? _WakeResumeOffset;
     private CPulse_ResumePointImpl? _WakeResumeInstance;
 
     public CPulse_ResumePoint WakeResume
     {
         get
         {
-            if (_WakeResumeOffset == -1) _WakeResumeOffset = Schema.GetOffset(0x8AF2C31831F86DC2);
+            _WakeResumeOffset = _WakeResumeOffset ?? Schema.GetOffset(0x8AF2C31831F86DC2);
             var instance = _WakeResumeInstance ??= new CPulse_ResumePointImpl(0);
-            instance.DangerousSetHandle(_Handle + _WakeResumeOffset);
+            instance.DangerousSetHandle(_Handle + _WakeResumeOffset!.Value);
             return instance;
         }
     }

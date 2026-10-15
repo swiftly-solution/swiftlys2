@@ -16,64 +16,64 @@ internal partial class CRagdollPropAttachedImpl : CRagdollPropImpl, CRagdollProp
 {
     public CRagdollPropAttachedImpl(nint handle) : base(handle) { }
 
-    private static nint _BoneIndexAttachedOffset = -1;
+    private static nint? _BoneIndexAttachedOffset;
 
     public ref uint BoneIndexAttached
     {
         get
         {
-            if (_BoneIndexAttachedOffset == -1) _BoneIndexAttachedOffset = Schema.GetOffset(0x4601EA84AECB2AA5);
-            return ref _Handle.AsRef<uint>(_BoneIndexAttachedOffset);
+            _BoneIndexAttachedOffset = _BoneIndexAttachedOffset ?? Schema.GetOffset(0x4601EA84AECB2AA5);
+            return ref _Handle.AsRef<uint>(_BoneIndexAttachedOffset!.Value);
         }
     }
-    private static nint _RagdollAttachedObjectIndexOffset = -1;
+    private static nint? _RagdollAttachedObjectIndexOffset;
 
     public ref uint RagdollAttachedObjectIndex
     {
         get
         {
-            if (_RagdollAttachedObjectIndexOffset == -1) _RagdollAttachedObjectIndexOffset = Schema.GetOffset(0x4601EA84D09DB439);
-            return ref _Handle.AsRef<uint>(_RagdollAttachedObjectIndexOffset);
+            _RagdollAttachedObjectIndexOffset = _RagdollAttachedObjectIndexOffset ?? Schema.GetOffset(0x4601EA84D09DB439);
+            return ref _Handle.AsRef<uint>(_RagdollAttachedObjectIndexOffset!.Value);
         }
     }
-    private static nint _AttachmentPointBoneSpaceOffset = -1;
+    private static nint? _AttachmentPointBoneSpaceOffset;
 
     public ref Vector AttachmentPointBoneSpace
     {
         get
         {
-            if (_AttachmentPointBoneSpaceOffset == -1) _AttachmentPointBoneSpaceOffset = Schema.GetOffset(0x4601EA849ABB7B0E);
-            return ref _Handle.AsRef<Vector>(_AttachmentPointBoneSpaceOffset);
+            _AttachmentPointBoneSpaceOffset = _AttachmentPointBoneSpaceOffset ?? Schema.GetOffset(0x4601EA849ABB7B0E);
+            return ref _Handle.AsRef<Vector>(_AttachmentPointBoneSpaceOffset!.Value);
         }
     }
-    private static nint _AttachmentPointRagdollSpaceOffset = -1;
+    private static nint? _AttachmentPointRagdollSpaceOffset;
 
     public ref Vector AttachmentPointRagdollSpace
     {
         get
         {
-            if (_AttachmentPointRagdollSpaceOffset == -1) _AttachmentPointRagdollSpaceOffset = Schema.GetOffset(0x4601EA84AD8AE911);
-            return ref _Handle.AsRef<Vector>(_AttachmentPointRagdollSpaceOffset);
+            _AttachmentPointRagdollSpaceOffset = _AttachmentPointRagdollSpaceOffset ?? Schema.GetOffset(0x4601EA84AD8AE911);
+            return ref _Handle.AsRef<Vector>(_AttachmentPointRagdollSpaceOffset!.Value);
         }
     }
-    private static nint _ShouldDetachOffset = -1;
+    private static nint? _ShouldDetachOffset;
 
     public ref bool ShouldDetach
     {
         get
         {
-            if (_ShouldDetachOffset == -1) _ShouldDetachOffset = Schema.GetOffset(0x4601EA84ABADEB5D);
-            return ref _Handle.AsRef<bool>(_ShouldDetachOffset);
+            _ShouldDetachOffset = _ShouldDetachOffset ?? Schema.GetOffset(0x4601EA84ABADEB5D);
+            return ref _Handle.AsRef<bool>(_ShouldDetachOffset!.Value);
         }
     }
-    private static nint _ShouldDeleteAttachedActivationRecordOffset = -1;
+    private static nint? _ShouldDeleteAttachedActivationRecordOffset;
 
     public ref bool ShouldDeleteAttachedActivationRecord
     {
         get
         {
-            if (_ShouldDeleteAttachedActivationRecordOffset == -1) _ShouldDeleteAttachedActivationRecordOffset = Schema.GetOffset(0x4601EA84BCB3F894);
-            return ref _Handle.AsRef<bool>(_ShouldDeleteAttachedActivationRecordOffset);
+            _ShouldDeleteAttachedActivationRecordOffset = _ShouldDeleteAttachedActivationRecordOffset ?? Schema.GetOffset(0x4601EA84BCB3F894);
+            return ref _Handle.AsRef<bool>(_ShouldDeleteAttachedActivationRecordOffset!.Value);
         }
     }
 

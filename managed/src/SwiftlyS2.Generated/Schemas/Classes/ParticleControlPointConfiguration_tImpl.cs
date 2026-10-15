@@ -16,41 +16,41 @@ internal partial class ParticleControlPointConfiguration_tImpl : SchemaClass, Pa
 {
     public ParticleControlPointConfiguration_tImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xC54E49C74D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xC54E49C74D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xC54E49C74D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xC54E49C74D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _DriversOffset = -1;
+    private static nint? _DriversOffset;
 
     public ref CUtlVector<ParticleControlPointDriver_t> Drivers
     {
         get
         {
-            if (_DriversOffset == -1) _DriversOffset = Schema.GetOffset(0xC54E49C7C63563E4);
-            return ref _Handle.AsRef<CUtlVector<ParticleControlPointDriver_t>>(_DriversOffset);
+            _DriversOffset = _DriversOffset ?? Schema.GetOffset(0xC54E49C7C63563E4);
+            return ref _Handle.AsRef<CUtlVector<ParticleControlPointDriver_t>>(_DriversOffset!.Value);
         }
     }
-    private static nint _PreviewStateOffset = -1;
+    private static nint? _PreviewStateOffset;
     private ParticlePreviewState_tImpl? _PreviewStateInstance;
 
     public ParticlePreviewState_t PreviewState
     {
         get
         {
-            if (_PreviewStateOffset == -1) _PreviewStateOffset = Schema.GetOffset(0xC54E49C79E440558);
+            _PreviewStateOffset = _PreviewStateOffset ?? Schema.GetOffset(0xC54E49C79E440558);
             var instance = _PreviewStateInstance ??= new ParticlePreviewState_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _PreviewStateOffset);
+            instance.DangerousSetHandle(_Handle + _PreviewStateOffset!.Value);
             return instance;
         }
     }

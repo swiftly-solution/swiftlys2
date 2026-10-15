@@ -16,24 +16,24 @@ internal partial class CSndBeatPatternManagerImpl : SchemaClass, CSndBeatPattern
 {
     public CSndBeatPatternManagerImpl(nint handle) : base(handle) { }
 
-    private static nint _PatternsOffset = -1;
+    private static nint? _PatternsOffset;
 
     public ref CUtlVector<CSndBeatPattern> Patterns
     {
         get
         {
-            if (_PatternsOffset == -1) _PatternsOffset = Schema.GetOffset(0xB460D4C4CE1390E);
-            return ref _Handle.AsRef<CUtlVector<CSndBeatPattern>>(_PatternsOffset);
+            _PatternsOffset = _PatternsOffset ?? Schema.GetOffset(0xB460D4C4CE1390E);
+            return ref _Handle.AsRef<CUtlVector<CSndBeatPattern>>(_PatternsOffset!.Value);
         }
     }
-    private static nint _ActiveTracksOffset = -1;
+    private static nint? _ActiveTracksOffset;
 
     public ref CUtlVector<CSndBeatTrack> ActiveTracks
     {
         get
         {
-            if (_ActiveTracksOffset == -1) _ActiveTracksOffset = Schema.GetOffset(0xB460D4C273092D7);
-            return ref _Handle.AsRef<CUtlVector<CSndBeatTrack>>(_ActiveTracksOffset);
+            _ActiveTracksOffset = _ActiveTracksOffset ?? Schema.GetOffset(0xB460D4C273092D7);
+            return ref _Handle.AsRef<CUtlVector<CSndBeatTrack>>(_ActiveTracksOffset!.Value);
         }
     }
 

@@ -16,14 +16,14 @@ internal partial class EventAppShutdown_tImpl : SchemaClass, EventAppShutdown_t
 {
     public EventAppShutdown_tImpl(nint handle) : base(handle) { }
 
-    private static nint _Dummy0Offset = -1;
+    private static nint? _Dummy0Offset;
 
     public ref int Dummy0
     {
         get
         {
-            if (_Dummy0Offset == -1) _Dummy0Offset = Schema.GetOffset(0x815B1527A26B2B9D);
-            return ref _Handle.AsRef<int>(_Dummy0Offset);
+            _Dummy0Offset = _Dummy0Offset ?? Schema.GetOffset(0x815B1527A26B2B9D);
+            return ref _Handle.AsRef<int>(_Dummy0Offset!.Value);
         }
     }
 

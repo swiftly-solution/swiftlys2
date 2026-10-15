@@ -16,145 +16,145 @@ internal partial class AimMatrixOpFixedSettings_tImpl : SchemaClass, AimMatrixOp
 {
     public AimMatrixOpFixedSettings_tImpl(nint handle) : base(handle) { }
 
-    private static nint _AttachmentOffset = -1;
+    private static nint? _AttachmentOffset;
     private CAnimAttachmentImpl? _AttachmentInstance;
 
     public CAnimAttachment Attachment
     {
         get
         {
-            if (_AttachmentOffset == -1) _AttachmentOffset = Schema.GetOffset(0xE059B1E02C5CA308);
+            _AttachmentOffset = _AttachmentOffset ?? Schema.GetOffset(0xE059B1E02C5CA308);
             var instance = _AttachmentInstance ??= new CAnimAttachmentImpl(0);
-            instance.DangerousSetHandle(_Handle + _AttachmentOffset);
+            instance.DangerousSetHandle(_Handle + _AttachmentOffset!.Value);
             return instance;
         }
     }
-    private static nint _DampingOffset = -1;
+    private static nint? _DampingOffset;
     private CAnimInputDampingImpl? _DampingInstance;
 
     public CAnimInputDamping Damping
     {
         get
         {
-            if (_DampingOffset == -1) _DampingOffset = Schema.GetOffset(0xE059B1E015440FB5);
+            _DampingOffset = _DampingOffset ?? Schema.GetOffset(0xE059B1E015440FB5);
             var instance = _DampingInstance ??= new CAnimInputDampingImpl(0);
-            instance.DangerousSetHandle(_Handle + _DampingOffset);
+            instance.DangerousSetHandle(_Handle + _DampingOffset!.Value);
             return instance;
         }
     }
-    private static nint _PoseCacheHandlesOffset = -1;
+    private static nint? _PoseCacheHandlesOffset;
     private SchemaClassFixedArray<CPoseHandle>? _PoseCacheHandlesInstance;
 
     public ISchemaClassFixedArray<CPoseHandle> PoseCacheHandles
     {
         get
         {
-            if (_PoseCacheHandlesOffset == -1) _PoseCacheHandlesOffset = Schema.GetOffset(0xE059B1E0E7BA8E61);
+            _PoseCacheHandlesOffset = _PoseCacheHandlesOffset ?? Schema.GetOffset(0xE059B1E0E7BA8E61);
             var instance = _PoseCacheHandlesInstance ??= new SchemaClassFixedArray<CPoseHandle>(0, 0xE059B1E0E7BA8E61, 10, 4, 2);
-            instance.DangerousSetHandle(_Handle + _PoseCacheHandlesOffset);
+            instance.DangerousSetHandle(_Handle + _PoseCacheHandlesOffset!.Value);
             return instance;
         }
     }
-    private static nint _BlendModeOffset = -1;
+    private static nint? _BlendModeOffset;
 
     public ref AimMatrixBlendMode BlendMode
     {
         get
         {
-            if (_BlendModeOffset == -1) _BlendModeOffset = Schema.GetOffset(0xE059B1E0DBED6224);
-            return ref _Handle.AsRef<AimMatrixBlendMode>(_BlendModeOffset);
+            _BlendModeOffset = _BlendModeOffset ?? Schema.GetOffset(0xE059B1E0DBED6224);
+            return ref _Handle.AsRef<AimMatrixBlendMode>(_BlendModeOffset!.Value);
         }
     }
-    private static nint _MaxYawAngleOffset = -1;
+    private static nint? _MaxYawAngleOffset;
 
     public ref float MaxYawAngle
     {
         get
         {
-            if (_MaxYawAngleOffset == -1) _MaxYawAngleOffset = Schema.GetOffset(0xE059B1E049BAD4B1);
-            return ref _Handle.AsRef<float>(_MaxYawAngleOffset);
+            _MaxYawAngleOffset = _MaxYawAngleOffset ?? Schema.GetOffset(0xE059B1E049BAD4B1);
+            return ref _Handle.AsRef<float>(_MaxYawAngleOffset!.Value);
         }
     }
-    private static nint _MaxPitchAngleOffset = -1;
+    private static nint? _MaxPitchAngleOffset;
 
     public ref float MaxPitchAngle
     {
         get
         {
-            if (_MaxPitchAngleOffset == -1) _MaxPitchAngleOffset = Schema.GetOffset(0xE059B1E0AE96A782);
-            return ref _Handle.AsRef<float>(_MaxPitchAngleOffset);
+            _MaxPitchAngleOffset = _MaxPitchAngleOffset ?? Schema.GetOffset(0xE059B1E0AE96A782);
+            return ref _Handle.AsRef<float>(_MaxPitchAngleOffset!.Value);
         }
     }
-    private static nint _SequenceMaxFrameOffset = -1;
+    private static nint? _SequenceMaxFrameOffset;
 
     public ref int SequenceMaxFrame
     {
         get
         {
-            if (_SequenceMaxFrameOffset == -1) _SequenceMaxFrameOffset = Schema.GetOffset(0xE059B1E05FD0AE0B);
-            return ref _Handle.AsRef<int>(_SequenceMaxFrameOffset);
+            _SequenceMaxFrameOffset = _SequenceMaxFrameOffset ?? Schema.GetOffset(0xE059B1E05FD0AE0B);
+            return ref _Handle.AsRef<int>(_SequenceMaxFrameOffset!.Value);
         }
     }
-    private static nint _BoneMaskIndexOffset = -1;
+    private static nint? _BoneMaskIndexOffset;
 
     public ref int BoneMaskIndex
     {
         get
         {
-            if (_BoneMaskIndexOffset == -1) _BoneMaskIndexOffset = Schema.GetOffset(0xE059B1E04871547D);
-            return ref _Handle.AsRef<int>(_BoneMaskIndexOffset);
+            _BoneMaskIndexOffset = _BoneMaskIndexOffset ?? Schema.GetOffset(0xE059B1E04871547D);
+            return ref _Handle.AsRef<int>(_BoneMaskIndexOffset!.Value);
         }
     }
-    private static nint _TargetIsPositionOffset = -1;
+    private static nint? _TargetIsPositionOffset;
 
     public ref bool TargetIsPosition
     {
         get
         {
-            if (_TargetIsPositionOffset == -1) _TargetIsPositionOffset = Schema.GetOffset(0xE059B1E014C34163);
-            return ref _Handle.AsRef<bool>(_TargetIsPositionOffset);
+            _TargetIsPositionOffset = _TargetIsPositionOffset ?? Schema.GetOffset(0xE059B1E014C34163);
+            return ref _Handle.AsRef<bool>(_TargetIsPositionOffset!.Value);
         }
     }
-    private static nint _UseBiasAndClampOffset = -1;
+    private static nint? _UseBiasAndClampOffset;
 
     public ref bool UseBiasAndClamp
     {
         get
         {
-            if (_UseBiasAndClampOffset == -1) _UseBiasAndClampOffset = Schema.GetOffset(0xE059B1E0F71F7341);
-            return ref _Handle.AsRef<bool>(_UseBiasAndClampOffset);
+            _UseBiasAndClampOffset = _UseBiasAndClampOffset ?? Schema.GetOffset(0xE059B1E0F71F7341);
+            return ref _Handle.AsRef<bool>(_UseBiasAndClampOffset!.Value);
         }
     }
-    private static nint _BiasAndClampYawOffsetOffset = -1;
+    private static nint? _BiasAndClampYawOffsetOffset;
 
     public ref float BiasAndClampYawOffset
     {
         get
         {
-            if (_BiasAndClampYawOffsetOffset == -1) _BiasAndClampYawOffsetOffset = Schema.GetOffset(0xE059B1E07D3789F6);
-            return ref _Handle.AsRef<float>(_BiasAndClampYawOffsetOffset);
+            _BiasAndClampYawOffsetOffset = _BiasAndClampYawOffsetOffset ?? Schema.GetOffset(0xE059B1E07D3789F6);
+            return ref _Handle.AsRef<float>(_BiasAndClampYawOffsetOffset!.Value);
         }
     }
-    private static nint _BiasAndClampPitchOffsetOffset = -1;
+    private static nint? _BiasAndClampPitchOffsetOffset;
 
     public ref float BiasAndClampPitchOffset
     {
         get
         {
-            if (_BiasAndClampPitchOffsetOffset == -1) _BiasAndClampPitchOffsetOffset = Schema.GetOffset(0xE059B1E08421472F);
-            return ref _Handle.AsRef<float>(_BiasAndClampPitchOffsetOffset);
+            _BiasAndClampPitchOffsetOffset = _BiasAndClampPitchOffsetOffset ?? Schema.GetOffset(0xE059B1E08421472F);
+            return ref _Handle.AsRef<float>(_BiasAndClampPitchOffsetOffset!.Value);
         }
     }
-    private static nint _BiasAndClampBlendCurveOffset = -1;
+    private static nint? _BiasAndClampBlendCurveOffset;
     private CBlendCurveImpl? _BiasAndClampBlendCurveInstance;
 
     public CBlendCurve BiasAndClampBlendCurve
     {
         get
         {
-            if (_BiasAndClampBlendCurveOffset == -1) _BiasAndClampBlendCurveOffset = Schema.GetOffset(0xE059B1E0D81016FE);
+            _BiasAndClampBlendCurveOffset = _BiasAndClampBlendCurveOffset ?? Schema.GetOffset(0xE059B1E0D81016FE);
             var instance = _BiasAndClampBlendCurveInstance ??= new CBlendCurveImpl(0);
-            instance.DangerousSetHandle(_Handle + _BiasAndClampBlendCurveOffset);
+            instance.DangerousSetHandle(_Handle + _BiasAndClampBlendCurveOffset!.Value);
             return instance;
         }
     }

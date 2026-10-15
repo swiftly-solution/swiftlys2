@@ -16,14 +16,14 @@ internal partial class CnmGraphDocVariationConstFloatNode__CDataImpl : CNmGraphD
 {
     public CnmGraphDocVariationConstFloatNode__CDataImpl(nint handle) : base(handle) { }
 
-    private static nint _ValueOffset = -1;
+    private static nint? _ValueOffset;
 
     public ref float Value
     {
         get
         {
-            if (_ValueOffset == -1) _ValueOffset = Schema.GetOffset(0xFFD1293E8DFCB984);
-            return ref _Handle.AsRef<float>(_ValueOffset);
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0xFFD1293E8DFCB984);
+            return ref _Handle.AsRef<float>(_ValueOffset!.Value);
         }
     }
 

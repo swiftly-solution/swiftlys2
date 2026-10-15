@@ -16,19 +16,19 @@ internal partial class CMixEffectNameImpl : CMixPropertyBaseImpl, CMixEffectName
 {
     public CMixEffectNameImpl(nint handle) : base(handle) { }
 
-    private static nint _DefaultValueOffset = -1;
+    private static nint? _DefaultValueOffset;
 
     public string DefaultValue
     {
         get
         {
-            if (_DefaultValueOffset == -1) _DefaultValueOffset = Schema.GetOffset(0x4DB97FE6BBE0341F);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_DefaultValueOffset));
+            _DefaultValueOffset = _DefaultValueOffset ?? Schema.GetOffset(0x4DB97FE6BBE0341F);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_DefaultValueOffset!.Value));
         }
         set
         {
-            if (_DefaultValueOffset == -1) _DefaultValueOffset = Schema.GetOffset(0x4DB97FE6BBE0341F);
-            Schema.SetCUtlString(_Handle, _DefaultValueOffset, value);
+            _DefaultValueOffset = _DefaultValueOffset ?? Schema.GetOffset(0x4DB97FE6BBE0341F);
+            Schema.SetCUtlString(_Handle, _DefaultValueOffset!.Value, value);
         }
     }
 

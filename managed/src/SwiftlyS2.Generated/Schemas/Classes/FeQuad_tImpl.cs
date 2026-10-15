@@ -16,39 +16,39 @@ internal partial class FeQuad_tImpl : SchemaClass, FeQuad_t
 {
     public FeQuad_tImpl(nint handle) : base(handle) { }
 
-    private static nint _NodeOffset = -1;
+    private static nint? _NodeOffset;
     private SchemaFixedArray<ushort>? _NodeInstance;
 
     public ISchemaFixedArray<ushort> Node
     {
         get
         {
-            if (_NodeOffset == -1) _NodeOffset = Schema.GetOffset(0x22A47BB8CD6694B9);
+            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0x22A47BB8CD6694B9);
             var instance = _NodeInstance ??= new SchemaFixedArray<ushort>(0, 0x22A47BB8CD6694B9, 4, 2, 2);
-            instance.DangerousSetHandle(_Handle + _NodeOffset);
+            instance.DangerousSetHandle(_Handle + _NodeOffset!.Value);
             return instance;
         }
     }
-    private static nint _SlackOffset = -1;
+    private static nint? _SlackOffset;
 
     public ref float Slack
     {
         get
         {
-            if (_SlackOffset == -1) _SlackOffset = Schema.GetOffset(0x22A47BB8C6554869);
-            return ref _Handle.AsRef<float>(_SlackOffset);
+            _SlackOffset = _SlackOffset ?? Schema.GetOffset(0x22A47BB8C6554869);
+            return ref _Handle.AsRef<float>(_SlackOffset!.Value);
         }
     }
-    private static nint _ShapeOffset = -1;
+    private static nint? _ShapeOffset;
     private SchemaFixedArray<Vector4D>? _ShapeInstance;
 
     public ISchemaFixedArray<Vector4D> Shape
     {
         get
         {
-            if (_ShapeOffset == -1) _ShapeOffset = Schema.GetOffset(0x22A47BB8E159551A);
+            _ShapeOffset = _ShapeOffset ?? Schema.GetOffset(0x22A47BB8E159551A);
             var instance = _ShapeInstance ??= new SchemaFixedArray<Vector4D>(0, 0x22A47BB8E159551A, 4, 16, 4);
-            instance.DangerousSetHandle(_Handle + _ShapeOffset);
+            instance.DangerousSetHandle(_Handle + _ShapeOffset!.Value);
             return instance;
         }
     }

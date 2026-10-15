@@ -16,29 +16,29 @@ internal partial class CRemapValueComponentImpl : CAnimGraphDoc_ComponentImpl, C
 {
     public CRemapValueComponentImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x402F83134D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x402F83134D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x402F83134D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x402F83134D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _ItemsOffset = -1;
+    private static nint? _ItemsOffset;
 
     public ref CUtlVector<CRemapValueItem> Items
     {
         get
         {
-            if (_ItemsOffset == -1) _ItemsOffset = Schema.GetOffset(0x402F83137A87EDAF);
-            return ref _Handle.AsRef<CUtlVector<CRemapValueItem>>(_ItemsOffset);
+            _ItemsOffset = _ItemsOffset ?? Schema.GetOffset(0x402F83137A87EDAF);
+            return ref _Handle.AsRef<CUtlVector<CRemapValueItem>>(_ItemsOffset!.Value);
         }
     }
 

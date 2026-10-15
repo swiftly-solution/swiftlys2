@@ -16,29 +16,29 @@ internal partial class CInfoGameEventProxyImpl : CPointEntityImpl, CInfoGameEven
 {
     public CInfoGameEventProxyImpl(nint handle) : base(handle) { }
 
-    private static nint _EventNameOffset = -1;
+    private static nint? _EventNameOffset;
 
     public string EventName
     {
         get
         {
-            if (_EventNameOffset == -1) _EventNameOffset = Schema.GetOffset(0x483B3FC078114A54);
-            return Schema.GetString(_Handle.Read<nint>(_EventNameOffset));
+            _EventNameOffset = _EventNameOffset ?? Schema.GetOffset(0x483B3FC078114A54);
+            return Schema.GetString(_Handle.Read<nint>(_EventNameOffset!.Value));
         }
         set
         {
-            if (_EventNameOffset == -1) _EventNameOffset = Schema.GetOffset(0x483B3FC078114A54);
-            Schema.SetString(_Handle, _EventNameOffset, value);
+            _EventNameOffset = _EventNameOffset ?? Schema.GetOffset(0x483B3FC078114A54);
+            Schema.SetString(_Handle, _EventNameOffset!.Value, value);
         }
     }
-    private static nint _RangeOffset = -1;
+    private static nint? _RangeOffset;
 
     public ref float Range
     {
         get
         {
-            if (_RangeOffset == -1) _RangeOffset = Schema.GetOffset(0x483B3FC03FC92844);
-            return ref _Handle.AsRef<float>(_RangeOffset);
+            _RangeOffset = _RangeOffset ?? Schema.GetOffset(0x483B3FC03FC92844);
+            return ref _Handle.AsRef<float>(_RangeOffset!.Value);
         }
     }
 

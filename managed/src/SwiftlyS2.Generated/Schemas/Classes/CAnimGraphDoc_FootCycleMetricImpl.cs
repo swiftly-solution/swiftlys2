@@ -16,14 +16,14 @@ internal partial class CAnimGraphDoc_FootCycleMetricImpl : CAnimGraphDoc_MotionM
 {
     public CAnimGraphDoc_FootCycleMetricImpl(nint handle) : base(handle) { }
 
-    private static nint _FeetOffset = -1;
+    private static nint? _FeetOffset;
 
     public ref CUtlVector<CUtlString> Feet
     {
         get
         {
-            if (_FeetOffset == -1) _FeetOffset = Schema.GetOffset(0x903D20C07910AFF5);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_FeetOffset);
+            _FeetOffset = _FeetOffset ?? Schema.GetOffset(0x903D20C07910AFF5);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_FeetOffset!.Value);
         }
     }
 

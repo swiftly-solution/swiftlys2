@@ -16,74 +16,74 @@ internal partial class C_OP_RenderStatusEffectImpl : CParticleFunctionRendererIm
 {
     public C_OP_RenderStatusEffectImpl(nint handle) : base(handle) { }
 
-    private static nint _TextureColorWarpOffset = -1;
+    private static nint? _TextureColorWarpOffset;
 
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureColorWarp
     {
         get
         {
-            if (_TextureColorWarpOffset == -1) _TextureColorWarpOffset = Schema.GetOffset(0x2D120E02C99DEE43);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureColorWarpOffset);
+            _TextureColorWarpOffset = _TextureColorWarpOffset ?? Schema.GetOffset(0x2D120E02C99DEE43);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureColorWarpOffset!.Value);
         }
     }
-    private static nint _TextureDetail2Offset = -1;
+    private static nint? _TextureDetail2Offset;
 
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureDetail2
     {
         get
         {
-            if (_TextureDetail2Offset == -1) _TextureDetail2Offset = Schema.GetOffset(0x2D120E021AC8A787);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureDetail2Offset);
+            _TextureDetail2Offset = _TextureDetail2Offset ?? Schema.GetOffset(0x2D120E021AC8A787);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureDetail2Offset!.Value);
         }
     }
-    private static nint _TextureDiffuseWarpOffset = -1;
+    private static nint? _TextureDiffuseWarpOffset;
 
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureDiffuseWarp
     {
         get
         {
-            if (_TextureDiffuseWarpOffset == -1) _TextureDiffuseWarpOffset = Schema.GetOffset(0x2D120E02F91AF7A2);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureDiffuseWarpOffset);
+            _TextureDiffuseWarpOffset = _TextureDiffuseWarpOffset ?? Schema.GetOffset(0x2D120E02F91AF7A2);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureDiffuseWarpOffset!.Value);
         }
     }
-    private static nint _TextureFresnelColorWarpOffset = -1;
+    private static nint? _TextureFresnelColorWarpOffset;
 
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureFresnelColorWarp
     {
         get
         {
-            if (_TextureFresnelColorWarpOffset == -1) _TextureFresnelColorWarpOffset = Schema.GetOffset(0x2D120E02C8B05C0A);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureFresnelColorWarpOffset);
+            _TextureFresnelColorWarpOffset = _TextureFresnelColorWarpOffset ?? Schema.GetOffset(0x2D120E02C8B05C0A);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureFresnelColorWarpOffset!.Value);
         }
     }
-    private static nint _TextureFresnelWarpOffset = -1;
+    private static nint? _TextureFresnelWarpOffset;
 
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureFresnelWarp
     {
         get
         {
-            if (_TextureFresnelWarpOffset == -1) _TextureFresnelWarpOffset = Schema.GetOffset(0x2D120E020BCD7353);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureFresnelWarpOffset);
+            _TextureFresnelWarpOffset = _TextureFresnelWarpOffset ?? Schema.GetOffset(0x2D120E020BCD7353);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureFresnelWarpOffset!.Value);
         }
     }
-    private static nint _TextureSpecularWarpOffset = -1;
+    private static nint? _TextureSpecularWarpOffset;
 
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureSpecularWarp
     {
         get
         {
-            if (_TextureSpecularWarpOffset == -1) _TextureSpecularWarpOffset = Schema.GetOffset(0x2D120E02B904CD45);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureSpecularWarpOffset);
+            _TextureSpecularWarpOffset = _TextureSpecularWarpOffset ?? Schema.GetOffset(0x2D120E02B904CD45);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureSpecularWarpOffset!.Value);
         }
     }
-    private static nint _TextureEnvMapOffset = -1;
+    private static nint? _TextureEnvMapOffset;
 
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureEnvMap
     {
         get
         {
-            if (_TextureEnvMapOffset == -1) _TextureEnvMapOffset = Schema.GetOffset(0x2D120E0280FDA7DD);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureEnvMapOffset);
+            _TextureEnvMapOffset = _TextureEnvMapOffset ?? Schema.GetOffset(0x2D120E0280FDA7DD);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureEnvMapOffset!.Value);
         }
     }
 

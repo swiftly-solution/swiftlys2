@@ -16,94 +16,94 @@ internal partial class ToolsOptionsEditableData_tImpl : SchemaClass, ToolsOption
 {
     public ToolsOptionsEditableData_tImpl(nint handle) : base(handle) { }
 
-    private static nint _TranslateToolAlignToSurfaceOffset = -1;
+    private static nint? _TranslateToolAlignToSurfaceOffset;
 
     public ref bool TranslateToolAlignToSurface
     {
         get
         {
-            if (_TranslateToolAlignToSurfaceOffset == -1) _TranslateToolAlignToSurfaceOffset = Schema.GetOffset(0x128DCC39FA3B35EC);
-            return ref _Handle.AsRef<bool>(_TranslateToolAlignToSurfaceOffset);
+            _TranslateToolAlignToSurfaceOffset = _TranslateToolAlignToSurfaceOffset ?? Schema.GetOffset(0x128DCC39FA3B35EC);
+            return ref _Handle.AsRef<bool>(_TranslateToolAlignToSurfaceOffset!.Value);
         }
     }
-    private static nint _RotateToolUseRelativeModeOffset = -1;
+    private static nint? _RotateToolUseRelativeModeOffset;
 
     public ref bool RotateToolUseRelativeMode
     {
         get
         {
-            if (_RotateToolUseRelativeModeOffset == -1) _RotateToolUseRelativeModeOffset = Schema.GetOffset(0x128DCC39B02B8638);
-            return ref _Handle.AsRef<bool>(_RotateToolUseRelativeModeOffset);
+            _RotateToolUseRelativeModeOffset = _RotateToolUseRelativeModeOffset ?? Schema.GetOffset(0x128DCC39B02B8638);
+            return ref _Handle.AsRef<bool>(_RotateToolUseRelativeModeOffset!.Value);
         }
     }
-    private static nint _PivotToolSnapToBBoxOffset = -1;
+    private static nint? _PivotToolSnapToBBoxOffset;
 
     public ref bool PivotToolSnapToBBox
     {
         get
         {
-            if (_PivotToolSnapToBBoxOffset == -1) _PivotToolSnapToBBoxOffset = Schema.GetOffset(0x128DCC39175762F3);
-            return ref _Handle.AsRef<bool>(_PivotToolSnapToBBoxOffset);
+            _PivotToolSnapToBBoxOffset = _PivotToolSnapToBBoxOffset ?? Schema.GetOffset(0x128DCC39175762F3);
+            return ref _Handle.AsRef<bool>(_PivotToolSnapToBBoxOffset!.Value);
         }
     }
-    private static nint _EdgeSelectionPreviewEdgeLengthOffset = -1;
+    private static nint? _EdgeSelectionPreviewEdgeLengthOffset;
 
     public ref bool EdgeSelectionPreviewEdgeLength
     {
         get
         {
-            if (_EdgeSelectionPreviewEdgeLengthOffset == -1) _EdgeSelectionPreviewEdgeLengthOffset = Schema.GetOffset(0x128DCC39576F3407);
-            return ref _Handle.AsRef<bool>(_EdgeSelectionPreviewEdgeLengthOffset);
+            _EdgeSelectionPreviewEdgeLengthOffset = _EdgeSelectionPreviewEdgeLengthOffset ?? Schema.GetOffset(0x128DCC39576F3407);
+            return ref _Handle.AsRef<bool>(_EdgeSelectionPreviewEdgeLengthOffset!.Value);
         }
     }
-    private static nint _ShowSelectionBoundsOffset = -1;
+    private static nint? _ShowSelectionBoundsOffset;
 
     public ref bool ShowSelectionBounds
     {
         get
         {
-            if (_ShowSelectionBoundsOffset == -1) _ShowSelectionBoundsOffset = Schema.GetOffset(0x128DCC394A561823);
-            return ref _Handle.AsRef<bool>(_ShowSelectionBoundsOffset);
+            _ShowSelectionBoundsOffset = _ShowSelectionBoundsOffset ?? Schema.GetOffset(0x128DCC394A561823);
+            return ref _Handle.AsRef<bool>(_ShowSelectionBoundsOffset!.Value);
         }
     }
-    private static nint _ShowSelectionDimensionsOffset = -1;
+    private static nint? _ShowSelectionDimensionsOffset;
 
     public ref bool ShowSelectionDimensions
     {
         get
         {
-            if (_ShowSelectionDimensionsOffset == -1) _ShowSelectionDimensionsOffset = Schema.GetOffset(0x128DCC393B0E052B);
-            return ref _Handle.AsRef<bool>(_ShowSelectionDimensionsOffset);
+            _ShowSelectionDimensionsOffset = _ShowSelectionDimensionsOffset ?? Schema.GetOffset(0x128DCC393B0E052B);
+            return ref _Handle.AsRef<bool>(_ShowSelectionDimensionsOffset!.Value);
         }
     }
-    private static nint _ShowSelectedEdgeAnglesOffset = -1;
+    private static nint? _ShowSelectedEdgeAnglesOffset;
 
     public ref bool ShowSelectedEdgeAngles
     {
         get
         {
-            if (_ShowSelectedEdgeAnglesOffset == -1) _ShowSelectedEdgeAnglesOffset = Schema.GetOffset(0x128DCC3973158B2C);
-            return ref _Handle.AsRef<bool>(_ShowSelectedEdgeAnglesOffset);
+            _ShowSelectedEdgeAnglesOffset = _ShowSelectedEdgeAnglesOffset ?? Schema.GetOffset(0x128DCC3973158B2C);
+            return ref _Handle.AsRef<bool>(_ShowSelectedEdgeAnglesOffset!.Value);
         }
     }
-    private static nint _ShowTranslationDistanceOffset = -1;
+    private static nint? _ShowTranslationDistanceOffset;
 
     public ref bool ShowTranslationDistance
     {
         get
         {
-            if (_ShowTranslationDistanceOffset == -1) _ShowTranslationDistanceOffset = Schema.GetOffset(0x128DCC39DBFBD380);
-            return ref _Handle.AsRef<bool>(_ShowTranslationDistanceOffset);
+            _ShowTranslationDistanceOffset = _ShowTranslationDistanceOffset ?? Schema.GetOffset(0x128DCC39DBFBD380);
+            return ref _Handle.AsRef<bool>(_ShowTranslationDistanceOffset!.Value);
         }
     }
-    private static nint _ConvertMeshHardEdgesFromUVBoundariesOffset = -1;
+    private static nint? _ConvertMeshHardEdgesFromUVBoundariesOffset;
 
     public ref bool ConvertMeshHardEdgesFromUVBoundaries
     {
         get
         {
-            if (_ConvertMeshHardEdgesFromUVBoundariesOffset == -1) _ConvertMeshHardEdgesFromUVBoundariesOffset = Schema.GetOffset(0x128DCC39E35CACC3);
-            return ref _Handle.AsRef<bool>(_ConvertMeshHardEdgesFromUVBoundariesOffset);
+            _ConvertMeshHardEdgesFromUVBoundariesOffset = _ConvertMeshHardEdgesFromUVBoundariesOffset ?? Schema.GetOffset(0x128DCC39E35CACC3);
+            return ref _Handle.AsRef<bool>(_ConvertMeshHardEdgesFromUVBoundariesOffset!.Value);
         }
     }
 

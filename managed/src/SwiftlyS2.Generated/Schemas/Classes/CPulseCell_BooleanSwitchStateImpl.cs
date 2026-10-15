@@ -16,42 +16,42 @@ internal partial class CPulseCell_BooleanSwitchStateImpl : CPulseCell_BaseStateI
 {
     public CPulseCell_BooleanSwitchStateImpl(nint handle) : base(handle) { }
 
-    private static nint _ConditionOffset = -1;
+    private static nint? _ConditionOffset;
     private SchemaUntypedField? _ConditionInstance;
 
     public SchemaUntypedField Condition
     {
         get
         {
-            if (_ConditionOffset == -1) _ConditionOffset = Schema.GetOffset(0xB0380EFD5F2A883E);
+            _ConditionOffset = _ConditionOffset ?? Schema.GetOffset(0xB0380EFD5F2A883E);
             var instance = _ConditionInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ConditionOffset);
+            instance.DangerousSetHandle(_Handle + _ConditionOffset!.Value);
             return instance;
         }
     }
-    private static nint _WhenTrueOffset = -1;
+    private static nint? _WhenTrueOffset;
     private CPulse_OutflowConnectionImpl? _WhenTrueInstance;
 
     public CPulse_OutflowConnection WhenTrue
     {
         get
         {
-            if (_WhenTrueOffset == -1) _WhenTrueOffset = Schema.GetOffset(0xB0380EFDB329ED61);
+            _WhenTrueOffset = _WhenTrueOffset ?? Schema.GetOffset(0xB0380EFDB329ED61);
             var instance = _WhenTrueInstance ??= new CPulse_OutflowConnectionImpl(0);
-            instance.DangerousSetHandle(_Handle + _WhenTrueOffset);
+            instance.DangerousSetHandle(_Handle + _WhenTrueOffset!.Value);
             return instance;
         }
     }
-    private static nint _WhenFalseOffset = -1;
+    private static nint? _WhenFalseOffset;
     private CPulse_OutflowConnectionImpl? _WhenFalseInstance;
 
     public CPulse_OutflowConnection WhenFalse
     {
         get
         {
-            if (_WhenFalseOffset == -1) _WhenFalseOffset = Schema.GetOffset(0xB0380EFD4DD1A01C);
+            _WhenFalseOffset = _WhenFalseOffset ?? Schema.GetOffset(0xB0380EFD4DD1A01C);
             var instance = _WhenFalseInstance ??= new CPulse_OutflowConnectionImpl(0);
-            instance.DangerousSetHandle(_Handle + _WhenFalseOffset);
+            instance.DangerousSetHandle(_Handle + _WhenFalseOffset!.Value);
             return instance;
         }
     }

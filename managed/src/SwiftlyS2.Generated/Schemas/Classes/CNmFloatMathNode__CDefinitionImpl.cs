@@ -16,64 +16,64 @@ internal partial class CNmFloatMathNode__CDefinitionImpl : CNmFloatValueNode__CD
 {
     public CNmFloatMathNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint _InputValueNodeIdxAOffset = -1;
+    private static nint? _InputValueNodeIdxAOffset;
 
     public ref short InputValueNodeIdxA
     {
         get
         {
-            if (_InputValueNodeIdxAOffset == -1) _InputValueNodeIdxAOffset = Schema.GetOffset(0x8A1F4F076332ED92);
-            return ref _Handle.AsRef<short>(_InputValueNodeIdxAOffset);
+            _InputValueNodeIdxAOffset = _InputValueNodeIdxAOffset ?? Schema.GetOffset(0x8A1F4F076332ED92);
+            return ref _Handle.AsRef<short>(_InputValueNodeIdxAOffset!.Value);
         }
     }
-    private static nint _InputValueNodeIdxBOffset = -1;
+    private static nint? _InputValueNodeIdxBOffset;
 
     public ref short InputValueNodeIdxB
     {
         get
         {
-            if (_InputValueNodeIdxBOffset == -1) _InputValueNodeIdxBOffset = Schema.GetOffset(0x8A1F4F076232EBFF);
-            return ref _Handle.AsRef<short>(_InputValueNodeIdxBOffset);
+            _InputValueNodeIdxBOffset = _InputValueNodeIdxBOffset ?? Schema.GetOffset(0x8A1F4F076232EBFF);
+            return ref _Handle.AsRef<short>(_InputValueNodeIdxBOffset!.Value);
         }
     }
-    private static nint _ReturnAbsoluteResultOffset = -1;
+    private static nint? _ReturnAbsoluteResultOffset;
 
     public ref bool ReturnAbsoluteResult
     {
         get
         {
-            if (_ReturnAbsoluteResultOffset == -1) _ReturnAbsoluteResultOffset = Schema.GetOffset(0x8A1F4F07065EA6EB);
-            return ref _Handle.AsRef<bool>(_ReturnAbsoluteResultOffset);
+            _ReturnAbsoluteResultOffset = _ReturnAbsoluteResultOffset ?? Schema.GetOffset(0x8A1F4F07065EA6EB);
+            return ref _Handle.AsRef<bool>(_ReturnAbsoluteResultOffset!.Value);
         }
     }
-    private static nint _ReturnNegatedResultOffset = -1;
+    private static nint? _ReturnNegatedResultOffset;
 
     public ref bool ReturnNegatedResult
     {
         get
         {
-            if (_ReturnNegatedResultOffset == -1) _ReturnNegatedResultOffset = Schema.GetOffset(0x8A1F4F07535A6CA2);
-            return ref _Handle.AsRef<bool>(_ReturnNegatedResultOffset);
+            _ReturnNegatedResultOffset = _ReturnNegatedResultOffset ?? Schema.GetOffset(0x8A1F4F07535A6CA2);
+            return ref _Handle.AsRef<bool>(_ReturnNegatedResultOffset!.Value);
         }
     }
-    private static nint _OperatorOffset = -1;
+    private static nint? _OperatorOffset;
 
     public ref CNmFloatMathNode__Operator_t Operator
     {
         get
         {
-            if (_OperatorOffset == -1) _OperatorOffset = Schema.GetOffset(0x8A1F4F078ABE049D);
-            return ref _Handle.AsRef<CNmFloatMathNode__Operator_t>(_OperatorOffset);
+            _OperatorOffset = _OperatorOffset ?? Schema.GetOffset(0x8A1F4F078ABE049D);
+            return ref _Handle.AsRef<CNmFloatMathNode__Operator_t>(_OperatorOffset!.Value);
         }
     }
-    private static nint _ValueBOffset = -1;
+    private static nint? _ValueBOffset;
 
     public ref float ValueB
     {
         get
         {
-            if (_ValueBOffset == -1) _ValueBOffset = Schema.GetOffset(0x8A1F4F074AD872B2);
-            return ref _Handle.AsRef<float>(_ValueBOffset);
+            _ValueBOffset = _ValueBOffset ?? Schema.GetOffset(0x8A1F4F074AD872B2);
+            return ref _Handle.AsRef<float>(_ValueBOffset!.Value);
         }
     }
 

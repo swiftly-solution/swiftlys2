@@ -16,149 +16,149 @@ internal partial class COrientationWarpUpdateNodeImpl : CUnaryUpdateNodeImpl, CO
 {
     public COrientationWarpUpdateNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _ModeOffset = -1;
+    private static nint? _ModeOffset;
 
     public ref OrientationWarpMode_t Mode
     {
         get
         {
-            if (_ModeOffset == -1) _ModeOffset = Schema.GetOffset(0xD75D3B631050A633);
-            return ref _Handle.AsRef<OrientationWarpMode_t>(_ModeOffset);
+            _ModeOffset = _ModeOffset ?? Schema.GetOffset(0xD75D3B631050A633);
+            return ref _Handle.AsRef<OrientationWarpMode_t>(_ModeOffset!.Value);
         }
     }
-    private static nint _TargetParamOffset = -1;
+    private static nint? _TargetParamOffset;
     private CAnimParamHandleImpl? _TargetParamInstance;
 
     public CAnimParamHandle TargetParam
     {
         get
         {
-            if (_TargetParamOffset == -1) _TargetParamOffset = Schema.GetOffset(0xD75D3B63D85B45EB);
+            _TargetParamOffset = _TargetParamOffset ?? Schema.GetOffset(0xD75D3B63D85B45EB);
             var instance = _TargetParamInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _TargetParamOffset);
+            instance.DangerousSetHandle(_Handle + _TargetParamOffset!.Value);
             return instance;
         }
     }
-    private static nint _TargetPositionParamOffset = -1;
+    private static nint? _TargetPositionParamOffset;
     private CAnimParamHandleImpl? _TargetPositionParamInstance;
 
     public CAnimParamHandle TargetPositionParam
     {
         get
         {
-            if (_TargetPositionParamOffset == -1) _TargetPositionParamOffset = Schema.GetOffset(0xD75D3B63550BBF72);
+            _TargetPositionParamOffset = _TargetPositionParamOffset ?? Schema.GetOffset(0xD75D3B63550BBF72);
             var instance = _TargetPositionParamInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _TargetPositionParamOffset);
+            instance.DangerousSetHandle(_Handle + _TargetPositionParamOffset!.Value);
             return instance;
         }
     }
-    private static nint _FallbackTargetPositionParamOffset = -1;
+    private static nint? _FallbackTargetPositionParamOffset;
     private CAnimParamHandleImpl? _FallbackTargetPositionParamInstance;
 
     public CAnimParamHandle FallbackTargetPositionParam
     {
         get
         {
-            if (_FallbackTargetPositionParamOffset == -1) _FallbackTargetPositionParamOffset = Schema.GetOffset(0xD75D3B63E8F94D78);
+            _FallbackTargetPositionParamOffset = _FallbackTargetPositionParamOffset ?? Schema.GetOffset(0xD75D3B63E8F94D78);
             var instance = _FallbackTargetPositionParamInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _FallbackTargetPositionParamOffset);
+            instance.DangerousSetHandle(_Handle + _FallbackTargetPositionParamOffset!.Value);
             return instance;
         }
     }
-    private static nint _TargetOffsetModeOffset = -1;
+    private static nint? _TargetOffsetModeOffset;
 
     public ref OrientationWarpTargetOffsetMode_t TargetOffsetMode
     {
         get
         {
-            if (_TargetOffsetModeOffset == -1) _TargetOffsetModeOffset = Schema.GetOffset(0xD75D3B63487B121D);
-            return ref _Handle.AsRef<OrientationWarpTargetOffsetMode_t>(_TargetOffsetModeOffset);
+            _TargetOffsetModeOffset = _TargetOffsetModeOffset ?? Schema.GetOffset(0xD75D3B63487B121D);
+            return ref _Handle.AsRef<OrientationWarpTargetOffsetMode_t>(_TargetOffsetModeOffset!.Value);
         }
     }
-    private static nint _TargetOffsetOffset = -1;
+    private static nint? _TargetOffsetOffset;
 
     public ref float TargetOffset
     {
         get
         {
-            if (_TargetOffsetOffset == -1) _TargetOffsetOffset = Schema.GetOffset(0xD75D3B6354596915);
-            return ref _Handle.AsRef<float>(_TargetOffsetOffset);
+            _TargetOffsetOffset = _TargetOffsetOffset ?? Schema.GetOffset(0xD75D3B6354596915);
+            return ref _Handle.AsRef<float>(_TargetOffsetOffset!.Value);
         }
     }
-    private static nint _TargetOffsetParamOffset = -1;
+    private static nint? _TargetOffsetParamOffset;
     private CAnimParamHandleImpl? _TargetOffsetParamInstance;
 
     public CAnimParamHandle TargetOffsetParam
     {
         get
         {
-            if (_TargetOffsetParamOffset == -1) _TargetOffsetParamOffset = Schema.GetOffset(0xD75D3B63BA3F5E7A);
+            _TargetOffsetParamOffset = _TargetOffsetParamOffset ?? Schema.GetOffset(0xD75D3B63BA3F5E7A);
             var instance = _TargetOffsetParamInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _TargetOffsetParamOffset);
+            instance.DangerousSetHandle(_Handle + _TargetOffsetParamOffset!.Value);
             return instance;
         }
     }
-    private static nint _DampingOffset = -1;
+    private static nint? _DampingOffset;
     private CAnimInputDampingImpl? _DampingInstance;
 
     public CAnimInputDamping Damping
     {
         get
         {
-            if (_DampingOffset == -1) _DampingOffset = Schema.GetOffset(0xD75D3B6315440FB5);
+            _DampingOffset = _DampingOffset ?? Schema.GetOffset(0xD75D3B6315440FB5);
             var instance = _DampingInstance ??= new CAnimInputDampingImpl(0);
-            instance.DangerousSetHandle(_Handle + _DampingOffset);
+            instance.DangerousSetHandle(_Handle + _DampingOffset!.Value);
             return instance;
         }
     }
-    private static nint _RootMotionSourceOffset = -1;
+    private static nint? _RootMotionSourceOffset;
 
     public ref OrientationWarpRootMotionSource_t RootMotionSource
     {
         get
         {
-            if (_RootMotionSourceOffset == -1) _RootMotionSourceOffset = Schema.GetOffset(0xD75D3B6398FEE9D7);
-            return ref _Handle.AsRef<OrientationWarpRootMotionSource_t>(_RootMotionSourceOffset);
+            _RootMotionSourceOffset = _RootMotionSourceOffset ?? Schema.GetOffset(0xD75D3B6398FEE9D7);
+            return ref _Handle.AsRef<OrientationWarpRootMotionSource_t>(_RootMotionSourceOffset!.Value);
         }
     }
-    private static nint _MaxRootMotionScaleOffset = -1;
+    private static nint? _MaxRootMotionScaleOffset;
 
     public ref float MaxRootMotionScale
     {
         get
         {
-            if (_MaxRootMotionScaleOffset == -1) _MaxRootMotionScaleOffset = Schema.GetOffset(0xD75D3B6342F361DD);
-            return ref _Handle.AsRef<float>(_MaxRootMotionScaleOffset);
+            _MaxRootMotionScaleOffset = _MaxRootMotionScaleOffset ?? Schema.GetOffset(0xD75D3B6342F361DD);
+            return ref _Handle.AsRef<float>(_MaxRootMotionScaleOffset!.Value);
         }
     }
-    private static nint _EnablePreferredRotationDirectionOffset = -1;
+    private static nint? _EnablePreferredRotationDirectionOffset;
 
     public ref bool EnablePreferredRotationDirection
     {
         get
         {
-            if (_EnablePreferredRotationDirectionOffset == -1) _EnablePreferredRotationDirectionOffset = Schema.GetOffset(0xD75D3B63AA7BFB6E);
-            return ref _Handle.AsRef<bool>(_EnablePreferredRotationDirectionOffset);
+            _EnablePreferredRotationDirectionOffset = _EnablePreferredRotationDirectionOffset ?? Schema.GetOffset(0xD75D3B63AA7BFB6E);
+            return ref _Handle.AsRef<bool>(_EnablePreferredRotationDirectionOffset!.Value);
         }
     }
-    private static nint _PreferredRotationDirectionOffset = -1;
+    private static nint? _PreferredRotationDirectionOffset;
 
     public ref AnimValueSource PreferredRotationDirection
     {
         get
         {
-            if (_PreferredRotationDirectionOffset == -1) _PreferredRotationDirectionOffset = Schema.GetOffset(0xD75D3B633BBCBFE8);
-            return ref _Handle.AsRef<AnimValueSource>(_PreferredRotationDirectionOffset);
+            _PreferredRotationDirectionOffset = _PreferredRotationDirectionOffset ?? Schema.GetOffset(0xD75D3B633BBCBFE8);
+            return ref _Handle.AsRef<AnimValueSource>(_PreferredRotationDirectionOffset!.Value);
         }
     }
-    private static nint _PreferredRotationThresholdOffset = -1;
+    private static nint? _PreferredRotationThresholdOffset;
 
     public ref float PreferredRotationThreshold
     {
         get
         {
-            if (_PreferredRotationThresholdOffset == -1) _PreferredRotationThresholdOffset = Schema.GetOffset(0xD75D3B6397A825DD);
-            return ref _Handle.AsRef<float>(_PreferredRotationThresholdOffset);
+            _PreferredRotationThresholdOffset = _PreferredRotationThresholdOffset ?? Schema.GetOffset(0xD75D3B6397A825DD);
+            return ref _Handle.AsRef<float>(_PreferredRotationThresholdOffset!.Value);
         }
     }
 

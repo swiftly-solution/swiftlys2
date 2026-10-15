@@ -16,14 +16,14 @@ internal partial class CFootFallAnimTagImpl : CAnimTagBaseImpl, CFootFallAnimTag
 {
     public CFootFallAnimTagImpl(nint handle) : base(handle) { }
 
-    private static nint _FootOffset = -1;
+    private static nint? _FootOffset;
 
     public ref FootFallTagFoot_t Foot
     {
         get
         {
-            if (_FootOffset == -1) _FootOffset = Schema.GetOffset(0xC142B61EEB2B8B39);
-            return ref _Handle.AsRef<FootFallTagFoot_t>(_FootOffset);
+            _FootOffset = _FootOffset ?? Schema.GetOffset(0xC142B61EEB2B8B39);
+            return ref _Handle.AsRef<FootFallTagFoot_t>(_FootOffset!.Value);
         }
     }
 

@@ -16,46 +16,46 @@ internal partial class C_OP_SetControlPointPositionToRandomActiveCPImpl : CParti
 {
     public C_OP_SetControlPointPositionToRandomActiveCPImpl(nint handle) : base(handle) { }
 
-    private static nint _CP1Offset = -1;
+    private static nint? _CP1Offset;
 
     public ref int CP1
     {
         get
         {
-            if (_CP1Offset == -1) _CP1Offset = Schema.GetOffset(0x7B108D36D4B1E579);
-            return ref _Handle.AsRef<int>(_CP1Offset);
+            _CP1Offset = _CP1Offset ?? Schema.GetOffset(0x7B108D36D4B1E579);
+            return ref _Handle.AsRef<int>(_CP1Offset!.Value);
         }
     }
-    private static nint _HeadLocationMinOffset = -1;
+    private static nint? _HeadLocationMinOffset;
 
     public ref int HeadLocationMin
     {
         get
         {
-            if (_HeadLocationMinOffset == -1) _HeadLocationMinOffset = Schema.GetOffset(0x7B108D360E904014);
-            return ref _Handle.AsRef<int>(_HeadLocationMinOffset);
+            _HeadLocationMinOffset = _HeadLocationMinOffset ?? Schema.GetOffset(0x7B108D360E904014);
+            return ref _Handle.AsRef<int>(_HeadLocationMinOffset!.Value);
         }
     }
-    private static nint _HeadLocationMaxOffset = -1;
+    private static nint? _HeadLocationMaxOffset;
 
     public ref int HeadLocationMax
     {
         get
         {
-            if (_HeadLocationMaxOffset == -1) _HeadLocationMaxOffset = Schema.GetOffset(0x7B108D36FCA53E76);
-            return ref _Handle.AsRef<int>(_HeadLocationMaxOffset);
+            _HeadLocationMaxOffset = _HeadLocationMaxOffset ?? Schema.GetOffset(0x7B108D36FCA53E76);
+            return ref _Handle.AsRef<int>(_HeadLocationMaxOffset!.Value);
         }
     }
-    private static nint _ResetRateOffset = -1;
+    private static nint? _ResetRateOffset;
     private CParticleCollectionFloatInputImpl? _ResetRateInstance;
 
     public CParticleCollectionFloatInput ResetRate
     {
         get
         {
-            if (_ResetRateOffset == -1) _ResetRateOffset = Schema.GetOffset(0x7B108D369E741FFC);
+            _ResetRateOffset = _ResetRateOffset ?? Schema.GetOffset(0x7B108D369E741FFC);
             var instance = _ResetRateInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _ResetRateOffset);
+            instance.DangerousSetHandle(_Handle + _ResetRateOffset!.Value);
             return instance;
         }
     }

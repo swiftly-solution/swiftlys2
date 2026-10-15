@@ -16,64 +16,64 @@ internal partial class levellist_tImpl : SchemaClass, levellist_t
 {
     public levellist_tImpl(nint handle) : base(handle) { }
 
-    private static nint _MapNameOffset = -1;
+    private static nint? _MapNameOffset;
 
     public string MapName
     {
         get
         {
-            if (_MapNameOffset == -1) _MapNameOffset = Schema.GetOffset(0xE2DE0512CE11EF47);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_MapNameOffset));
+            _MapNameOffset = _MapNameOffset ?? Schema.GetOffset(0xE2DE0512CE11EF47);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_MapNameOffset!.Value));
         }
         set
         {
-            if (_MapNameOffset == -1) _MapNameOffset = Schema.GetOffset(0xE2DE0512CE11EF47);
-            Schema.SetCUtlString(_Handle, _MapNameOffset, value);
+            _MapNameOffset = _MapNameOffset ?? Schema.GetOffset(0xE2DE0512CE11EF47);
+            Schema.SetCUtlString(_Handle, _MapNameOffset!.Value, value);
         }
     }
-    private static nint _LandmarkNameOffset = -1;
+    private static nint? _LandmarkNameOffset;
 
     public string LandmarkName
     {
         get
         {
-            if (_LandmarkNameOffset == -1) _LandmarkNameOffset = Schema.GetOffset(0xE2DE05122DEE941D);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_LandmarkNameOffset));
+            _LandmarkNameOffset = _LandmarkNameOffset ?? Schema.GetOffset(0xE2DE05122DEE941D);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_LandmarkNameOffset!.Value));
         }
         set
         {
-            if (_LandmarkNameOffset == -1) _LandmarkNameOffset = Schema.GetOffset(0xE2DE05122DEE941D);
-            Schema.SetCUtlString(_Handle, _LandmarkNameOffset, value);
+            _LandmarkNameOffset = _LandmarkNameOffset ?? Schema.GetOffset(0xE2DE05122DEE941D);
+            Schema.SetCUtlString(_Handle, _LandmarkNameOffset!.Value, value);
         }
     }
-    private static nint _EntLandmarkOffset = -1;
+    private static nint? _EntLandmarkOffset;
 
     public ref CHandle<CEntityInstance> EntLandmark
     {
         get
         {
-            if (_EntLandmarkOffset == -1) _EntLandmarkOffset = Schema.GetOffset(0xE2DE0512279EC234);
-            return ref _Handle.AsRef<CHandle<CEntityInstance>>(_EntLandmarkOffset);
+            _EntLandmarkOffset = _EntLandmarkOffset ?? Schema.GetOffset(0xE2DE0512279EC234);
+            return ref _Handle.AsRef<CHandle<CEntityInstance>>(_EntLandmarkOffset!.Value);
         }
     }
-    private static nint _LandmarkOriginOffset = -1;
+    private static nint? _LandmarkOriginOffset;
 
     public ref Vector LandmarkOrigin
     {
         get
         {
-            if (_LandmarkOriginOffset == -1) _LandmarkOriginOffset = Schema.GetOffset(0xE2DE0512F1602B9F);
-            return ref _Handle.AsRef<Vector>(_LandmarkOriginOffset);
+            _LandmarkOriginOffset = _LandmarkOriginOffset ?? Schema.GetOffset(0xE2DE0512F1602B9F);
+            return ref _Handle.AsRef<Vector>(_LandmarkOriginOffset!.Value);
         }
     }
-    private static nint _LandmarkAnglesOffset = -1;
+    private static nint? _LandmarkAnglesOffset;
 
     public ref QAngle LandmarkAngles
     {
         get
         {
-            if (_LandmarkAnglesOffset == -1) _LandmarkAnglesOffset = Schema.GetOffset(0xE2DE0512D96AD741);
-            return ref _Handle.AsRef<QAngle>(_LandmarkAnglesOffset);
+            _LandmarkAnglesOffset = _LandmarkAnglesOffset ?? Schema.GetOffset(0xE2DE0512D96AD741);
+            return ref _Handle.AsRef<QAngle>(_LandmarkAnglesOffset!.Value);
         }
     }
 

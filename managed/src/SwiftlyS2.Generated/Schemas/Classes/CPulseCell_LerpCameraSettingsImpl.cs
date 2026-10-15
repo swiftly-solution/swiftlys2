@@ -16,39 +16,39 @@ internal partial class CPulseCell_LerpCameraSettingsImpl : CPulseCell_BaseLerpIm
 {
     public CPulseCell_LerpCameraSettingsImpl(nint handle) : base(handle) { }
 
-    private static nint _SecondsOffset = -1;
+    private static nint? _SecondsOffset;
 
     public ref float Seconds
     {
         get
         {
-            if (_SecondsOffset == -1) _SecondsOffset = Schema.GetOffset(0xA4A5850773C6938C);
-            return ref _Handle.AsRef<float>(_SecondsOffset);
+            _SecondsOffset = _SecondsOffset ?? Schema.GetOffset(0xA4A5850773C6938C);
+            return ref _Handle.AsRef<float>(_SecondsOffset!.Value);
         }
     }
-    private static nint _StartOffset = -1;
+    private static nint? _StartOffset;
     private PointCameraSettings_tImpl? _StartInstance;
 
     public PointCameraSettings_t Start
     {
         get
         {
-            if (_StartOffset == -1) _StartOffset = Schema.GetOffset(0xA4A58507FF7CBA5F);
+            _StartOffset = _StartOffset ?? Schema.GetOffset(0xA4A58507FF7CBA5F);
             var instance = _StartInstance ??= new PointCameraSettings_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _StartOffset);
+            instance.DangerousSetHandle(_Handle + _StartOffset!.Value);
             return instance;
         }
     }
-    private static nint _EndOffset = -1;
+    private static nint? _EndOffset;
     private PointCameraSettings_tImpl? _EndInstance;
 
     public PointCameraSettings_t End
     {
         get
         {
-            if (_EndOffset == -1) _EndOffset = Schema.GetOffset(0xA4A58507F624CF2A);
+            _EndOffset = _EndOffset ?? Schema.GetOffset(0xA4A58507F624CF2A);
             var instance = _EndInstance ??= new PointCameraSettings_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _EndOffset);
+            instance.DangerousSetHandle(_Handle + _EndOffset!.Value);
             return instance;
         }
     }

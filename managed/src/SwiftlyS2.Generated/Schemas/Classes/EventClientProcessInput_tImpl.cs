@@ -16,47 +16,47 @@ internal partial class EventClientProcessInput_tImpl : SchemaClass, EventClientP
 {
     public EventClientProcessInput_tImpl(nint handle) : base(handle) { }
 
-    private static nint _LoopStateOffset = -1;
+    private static nint? _LoopStateOffset;
     private EngineLoopState_tImpl? _LoopStateInstance;
 
     public EngineLoopState_t LoopState
     {
         get
         {
-            if (_LoopStateOffset == -1) _LoopStateOffset = Schema.GetOffset(0x406EC290F928A2EC);
+            _LoopStateOffset = _LoopStateOffset ?? Schema.GetOffset(0x406EC290F928A2EC);
             var instance = _LoopStateInstance ??= new EngineLoopState_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _LoopStateOffset);
+            instance.DangerousSetHandle(_Handle + _LoopStateOffset!.Value);
             return instance;
         }
     }
-    private static nint _RealTimeOffset = -1;
+    private static nint? _RealTimeOffset;
 
     public ref float RealTime
     {
         get
         {
-            if (_RealTimeOffset == -1) _RealTimeOffset = Schema.GetOffset(0x406EC2901168EC02);
-            return ref _Handle.AsRef<float>(_RealTimeOffset);
+            _RealTimeOffset = _RealTimeOffset ?? Schema.GetOffset(0x406EC2901168EC02);
+            return ref _Handle.AsRef<float>(_RealTimeOffset!.Value);
         }
     }
-    private static nint _TickIntervalOffset = -1;
+    private static nint? _TickIntervalOffset;
 
     public ref float TickInterval
     {
         get
         {
-            if (_TickIntervalOffset == -1) _TickIntervalOffset = Schema.GetOffset(0x406EC290D279D07B);
-            return ref _Handle.AsRef<float>(_TickIntervalOffset);
+            _TickIntervalOffset = _TickIntervalOffset ?? Schema.GetOffset(0x406EC290D279D07B);
+            return ref _Handle.AsRef<float>(_TickIntervalOffset!.Value);
         }
     }
-    private static nint _TickStartTimeOffset = -1;
+    private static nint? _TickStartTimeOffset;
 
     public ref double TickStartTime
     {
         get
         {
-            if (_TickStartTimeOffset == -1) _TickStartTimeOffset = Schema.GetOffset(0x406EC29068A38BE7);
-            return ref _Handle.AsRef<double>(_TickStartTimeOffset);
+            _TickStartTimeOffset = _TickStartTimeOffset ?? Schema.GetOffset(0x406EC29068A38BE7);
+            return ref _Handle.AsRef<double>(_TickStartTimeOffset!.Value);
         }
     }
 

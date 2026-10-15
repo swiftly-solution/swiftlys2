@@ -16,64 +16,64 @@ internal partial class FeBoxRigid_tImpl : SchemaClass, FeBoxRigid_t
 {
     public FeBoxRigid_tImpl(nint handle) : base(handle) { }
 
-    private static nint _TmFrame2Offset = -1;
+    private static nint? _TmFrame2Offset;
 
     public ref CTransform TmFrame2
     {
         get
         {
-            if (_TmFrame2Offset == -1) _TmFrame2Offset = Schema.GetOffset(0x63C7789F568CD94B);
-            return ref _Handle.AsRef<CTransform>(_TmFrame2Offset);
+            _TmFrame2Offset = _TmFrame2Offset ?? Schema.GetOffset(0x63C7789F568CD94B);
+            return ref _Handle.AsRef<CTransform>(_TmFrame2Offset!.Value);
         }
     }
-    private static nint _NodeOffset = -1;
+    private static nint? _NodeOffset;
 
     public ref ushort Node
     {
         get
         {
-            if (_NodeOffset == -1) _NodeOffset = Schema.GetOffset(0x63C7789FCD6694B9);
-            return ref _Handle.AsRef<ushort>(_NodeOffset);
+            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0x63C7789FCD6694B9);
+            return ref _Handle.AsRef<ushort>(_NodeOffset!.Value);
         }
     }
-    private static nint _CollisionMaskOffset = -1;
+    private static nint? _CollisionMaskOffset;
 
     public ref ushort CollisionMask
     {
         get
         {
-            if (_CollisionMaskOffset == -1) _CollisionMaskOffset = Schema.GetOffset(0x63C7789F0ED3454F);
-            return ref _Handle.AsRef<ushort>(_CollisionMaskOffset);
+            _CollisionMaskOffset = _CollisionMaskOffset ?? Schema.GetOffset(0x63C7789F0ED3454F);
+            return ref _Handle.AsRef<ushort>(_CollisionMaskOffset!.Value);
         }
     }
-    private static nint _SizeOffset = -1;
+    private static nint? _SizeOffset;
 
     public ref Vector Size
     {
         get
         {
-            if (_SizeOffset == -1) _SizeOffset = Schema.GetOffset(0x63C7789FCB89C418);
-            return ref _Handle.AsRef<Vector>(_SizeOffset);
+            _SizeOffset = _SizeOffset ?? Schema.GetOffset(0x63C7789FCB89C418);
+            return ref _Handle.AsRef<Vector>(_SizeOffset!.Value);
         }
     }
-    private static nint _VertexMapIndexOffset = -1;
+    private static nint? _VertexMapIndexOffset;
 
     public ref ushort VertexMapIndex
     {
         get
         {
-            if (_VertexMapIndexOffset == -1) _VertexMapIndexOffset = Schema.GetOffset(0x63C7789F7B332E39);
-            return ref _Handle.AsRef<ushort>(_VertexMapIndexOffset);
+            _VertexMapIndexOffset = _VertexMapIndexOffset ?? Schema.GetOffset(0x63C7789F7B332E39);
+            return ref _Handle.AsRef<ushort>(_VertexMapIndexOffset!.Value);
         }
     }
-    private static nint _FlagsOffset = -1;
+    private static nint? _FlagsOffset;
 
     public ref ushort Flags
     {
         get
         {
-            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0x63C7789FB8D52E48);
-            return ref _Handle.AsRef<ushort>(_FlagsOffset);
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x63C7789FB8D52E48);
+            return ref _Handle.AsRef<ushort>(_FlagsOffset!.Value);
         }
     }
 

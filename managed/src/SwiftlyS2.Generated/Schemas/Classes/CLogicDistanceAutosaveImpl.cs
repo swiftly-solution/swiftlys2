@@ -16,69 +16,69 @@ internal partial class CLogicDistanceAutosaveImpl : CLogicalEntityImpl, CLogicDi
 {
     public CLogicDistanceAutosaveImpl(nint handle) : base(handle) { }
 
-    private static nint _TargetEntityOffset = -1;
+    private static nint? _TargetEntityOffset;
 
     public string TargetEntity
     {
         get
         {
-            if (_TargetEntityOffset == -1) _TargetEntityOffset = Schema.GetOffset(0x8E908EDD8951B0FB);
-            return Schema.GetString(_Handle.Read<nint>(_TargetEntityOffset));
+            _TargetEntityOffset = _TargetEntityOffset ?? Schema.GetOffset(0x8E908EDD8951B0FB);
+            return Schema.GetString(_Handle.Read<nint>(_TargetEntityOffset!.Value));
         }
         set
         {
-            if (_TargetEntityOffset == -1) _TargetEntityOffset = Schema.GetOffset(0x8E908EDD8951B0FB);
-            Schema.SetString(_Handle, _TargetEntityOffset, value);
+            _TargetEntityOffset = _TargetEntityOffset ?? Schema.GetOffset(0x8E908EDD8951B0FB);
+            Schema.SetString(_Handle, _TargetEntityOffset!.Value, value);
         }
     }
-    private static nint _DistanceToPlayerOffset = -1;
+    private static nint? _DistanceToPlayerOffset;
 
     public ref float DistanceToPlayer
     {
         get
         {
-            if (_DistanceToPlayerOffset == -1) _DistanceToPlayerOffset = Schema.GetOffset(0x8E908EDDF04AFE0C);
-            return ref _Handle.AsRef<float>(_DistanceToPlayerOffset);
+            _DistanceToPlayerOffset = _DistanceToPlayerOffset ?? Schema.GetOffset(0x8E908EDDF04AFE0C);
+            return ref _Handle.AsRef<float>(_DistanceToPlayerOffset!.Value);
         }
     }
-    private static nint _ForceNewLevelUnitOffset = -1;
+    private static nint? _ForceNewLevelUnitOffset;
 
     public ref bool ForceNewLevelUnit
     {
         get
         {
-            if (_ForceNewLevelUnitOffset == -1) _ForceNewLevelUnitOffset = Schema.GetOffset(0x8E908EDD1473BFDE);
-            return ref _Handle.AsRef<bool>(_ForceNewLevelUnitOffset);
+            _ForceNewLevelUnitOffset = _ForceNewLevelUnitOffset ?? Schema.GetOffset(0x8E908EDD1473BFDE);
+            return ref _Handle.AsRef<bool>(_ForceNewLevelUnitOffset!.Value);
         }
     }
-    private static nint _CheckCoughOffset = -1;
+    private static nint? _CheckCoughOffset;
 
     public ref bool CheckCough
     {
         get
         {
-            if (_CheckCoughOffset == -1) _CheckCoughOffset = Schema.GetOffset(0x8E908EDD25C565C3);
-            return ref _Handle.AsRef<bool>(_CheckCoughOffset);
+            _CheckCoughOffset = _CheckCoughOffset ?? Schema.GetOffset(0x8E908EDD25C565C3);
+            return ref _Handle.AsRef<bool>(_CheckCoughOffset!.Value);
         }
     }
-    private static nint _ThinkDangerousOffset = -1;
+    private static nint? _ThinkDangerousOffset;
 
     public ref bool ThinkDangerous
     {
         get
         {
-            if (_ThinkDangerousOffset == -1) _ThinkDangerousOffset = Schema.GetOffset(0x8E908EDDE079F1C9);
-            return ref _Handle.AsRef<bool>(_ThinkDangerousOffset);
+            _ThinkDangerousOffset = _ThinkDangerousOffset ?? Schema.GetOffset(0x8E908EDDE079F1C9);
+            return ref _Handle.AsRef<bool>(_ThinkDangerousOffset!.Value);
         }
     }
-    private static nint _DangerousTimeOffset = -1;
+    private static nint? _DangerousTimeOffset;
 
     public ref float DangerousTime
     {
         get
         {
-            if (_DangerousTimeOffset == -1) _DangerousTimeOffset = Schema.GetOffset(0x8E908EDD19BC5644);
-            return ref _Handle.AsRef<float>(_DangerousTimeOffset);
+            _DangerousTimeOffset = _DangerousTimeOffset ?? Schema.GetOffset(0x8E908EDD19BC5644);
+            return ref _Handle.AsRef<float>(_DangerousTimeOffset!.Value);
         }
     }
 

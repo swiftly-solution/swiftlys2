@@ -16,14 +16,14 @@ internal partial class CNmGraphDocParameterizedSelectorNode__CDataImpl : CNmGrap
 {
     public CNmGraphDocParameterizedSelectorNode__CDataImpl(nint handle) : base(handle) { }
 
-    private static nint _OptionWeightsOffset = -1;
+    private static nint? _OptionWeightsOffset;
 
     public ref CUtlVector<byte> OptionWeights
     {
         get
         {
-            if (_OptionWeightsOffset == -1) _OptionWeightsOffset = Schema.GetOffset(0x7EF316831D94DB5);
-            return ref _Handle.AsRef<CUtlVector<byte>>(_OptionWeightsOffset);
+            _OptionWeightsOffset = _OptionWeightsOffset ?? Schema.GetOffset(0x7EF316831D94DB5);
+            return ref _Handle.AsRef<CUtlVector<byte>>(_OptionWeightsOffset!.Value);
         }
     }
 

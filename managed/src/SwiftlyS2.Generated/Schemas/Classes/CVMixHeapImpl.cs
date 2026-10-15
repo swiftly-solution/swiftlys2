@@ -16,14 +16,14 @@ internal partial class CVMixHeapImpl : SchemaClass, CVMixHeap
 {
     public CVMixHeapImpl(nint handle) : base(handle) { }
 
-    private static nint _StorageOffset = -1;
+    private static nint? _StorageOffset;
 
     public ref CUtlLeanVector<uint, int> Storage
     {
         get
         {
-            if (_StorageOffset == -1) _StorageOffset = Schema.GetOffset(0x4FA95790DBF05086);
-            return ref _Handle.AsRef<CUtlLeanVector<uint, int>>(_StorageOffset);
+            _StorageOffset = _StorageOffset ?? Schema.GetOffset(0x4FA95790DBF05086);
+            return ref _Handle.AsRef<CUtlLeanVector<uint, int>>(_StorageOffset!.Value);
         }
     }
 

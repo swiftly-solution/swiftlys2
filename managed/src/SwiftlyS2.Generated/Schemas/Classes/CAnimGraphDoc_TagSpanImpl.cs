@@ -16,37 +16,37 @@ internal partial class CAnimGraphDoc_TagSpanImpl : SchemaClass, CAnimGraphDoc_Ta
 {
     public CAnimGraphDoc_TagSpanImpl(nint handle) : base(handle) { }
 
-    private static nint _IdOffset = -1;
+    private static nint? _IdOffset;
     private AnimTagIDImpl? _IdInstance;
 
     public AnimTagID Id
     {
         get
         {
-            if (_IdOffset == -1) _IdOffset = Schema.GetOffset(0x96F8D342B4B6E980);
+            _IdOffset = _IdOffset ?? Schema.GetOffset(0x96F8D342B4B6E980);
             var instance = _IdInstance ??= new AnimTagIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _IdOffset);
+            instance.DangerousSetHandle(_Handle + _IdOffset!.Value);
             return instance;
         }
     }
-    private static nint _StartCycleOffset = -1;
+    private static nint? _StartCycleOffset;
 
     public ref float StartCycle
     {
         get
         {
-            if (_StartCycleOffset == -1) _StartCycleOffset = Schema.GetOffset(0x96F8D34267649293);
-            return ref _Handle.AsRef<float>(_StartCycleOffset);
+            _StartCycleOffset = _StartCycleOffset ?? Schema.GetOffset(0x96F8D34267649293);
+            return ref _Handle.AsRef<float>(_StartCycleOffset!.Value);
         }
     }
-    private static nint _DurationOffset = -1;
+    private static nint? _DurationOffset;
 
     public ref float Duration
     {
         get
         {
-            if (_DurationOffset == -1) _DurationOffset = Schema.GetOffset(0x96F8D342A1702439);
-            return ref _Handle.AsRef<float>(_DurationOffset);
+            _DurationOffset = _DurationOffset ?? Schema.GetOffset(0x96F8D342A1702439);
+            return ref _Handle.AsRef<float>(_DurationOffset!.Value);
         }
     }
 

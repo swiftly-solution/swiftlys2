@@ -16,52 +16,52 @@ internal partial class C_INIT_ScreenSpacePositionOfTargetImpl : CParticleFunctio
 {
     public C_INIT_ScreenSpacePositionOfTargetImpl(nint handle) : base(handle) { }
 
-    private static nint _TargetPositionOffset = -1;
+    private static nint? _TargetPositionOffset;
     private CPerParticleVecInputImpl? _TargetPositionInstance;
 
     public CPerParticleVecInput TargetPosition
     {
         get
         {
-            if (_TargetPositionOffset == -1) _TargetPositionOffset = Schema.GetOffset(0xBA53E3F7554C563B);
+            _TargetPositionOffset = _TargetPositionOffset ?? Schema.GetOffset(0xBA53E3F7554C563B);
             var instance = _TargetPositionInstance ??= new CPerParticleVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _TargetPositionOffset);
+            instance.DangerousSetHandle(_Handle + _TargetPositionOffset!.Value);
             return instance;
         }
     }
-    private static nint _OututBehindnessOffset = -1;
+    private static nint? _OututBehindnessOffset;
 
     public ref bool OututBehindness
     {
         get
         {
-            if (_OututBehindnessOffset == -1) _OututBehindnessOffset = Schema.GetOffset(0xBA53E3F7DB123D49);
-            return ref _Handle.AsRef<bool>(_OututBehindnessOffset);
+            _OututBehindnessOffset = _OututBehindnessOffset ?? Schema.GetOffset(0xBA53E3F7DB123D49);
+            return ref _Handle.AsRef<bool>(_OututBehindnessOffset!.Value);
         }
     }
-    private static nint _BehindFieldOutputOffset = -1;
+    private static nint? _BehindFieldOutputOffset;
     private ParticleAttributeIndex_tImpl? _BehindFieldOutputInstance;
 
     public ParticleAttributeIndex_t BehindFieldOutput
     {
         get
         {
-            if (_BehindFieldOutputOffset == -1) _BehindFieldOutputOffset = Schema.GetOffset(0xBA53E3F769F4F392);
+            _BehindFieldOutputOffset = _BehindFieldOutputOffset ?? Schema.GetOffset(0xBA53E3F769F4F392);
             var instance = _BehindFieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _BehindFieldOutputOffset);
+            instance.DangerousSetHandle(_Handle + _BehindFieldOutputOffset!.Value);
             return instance;
         }
     }
-    private static nint _BehindOutputRemapOffset = -1;
+    private static nint? _BehindOutputRemapOffset;
     private CParticleRemapFloatInputImpl? _BehindOutputRemapInstance;
 
     public CParticleRemapFloatInput BehindOutputRemap
     {
         get
         {
-            if (_BehindOutputRemapOffset == -1) _BehindOutputRemapOffset = Schema.GetOffset(0xBA53E3F74B35FBF3);
+            _BehindOutputRemapOffset = _BehindOutputRemapOffset ?? Schema.GetOffset(0xBA53E3F74B35FBF3);
             var instance = _BehindOutputRemapInstance ??= new CParticleRemapFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _BehindOutputRemapOffset);
+            instance.DangerousSetHandle(_Handle + _BehindOutputRemapOffset!.Value);
             return instance;
         }
     }

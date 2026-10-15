@@ -16,36 +16,36 @@ internal partial class ClutterTile_tImpl : SchemaClass, ClutterTile_t
 {
     public ClutterTile_tImpl(nint handle) : base(handle) { }
 
-    private static nint _FirstInstanceOffset = -1;
+    private static nint? _FirstInstanceOffset;
 
     public ref uint FirstInstance
     {
         get
         {
-            if (_FirstInstanceOffset == -1) _FirstInstanceOffset = Schema.GetOffset(0xAC4066F19AF07072);
-            return ref _Handle.AsRef<uint>(_FirstInstanceOffset);
+            _FirstInstanceOffset = _FirstInstanceOffset ?? Schema.GetOffset(0xAC4066F19AF07072);
+            return ref _Handle.AsRef<uint>(_FirstInstanceOffset!.Value);
         }
     }
-    private static nint _LastInstanceOffset = -1;
+    private static nint? _LastInstanceOffset;
 
     public ref uint LastInstance
     {
         get
         {
-            if (_LastInstanceOffset == -1) _LastInstanceOffset = Schema.GetOffset(0xAC4066F10D99AC92);
-            return ref _Handle.AsRef<uint>(_LastInstanceOffset);
+            _LastInstanceOffset = _LastInstanceOffset ?? Schema.GetOffset(0xAC4066F10D99AC92);
+            return ref _Handle.AsRef<uint>(_LastInstanceOffset!.Value);
         }
     }
-    private static nint _BoundsWsOffset = -1;
+    private static nint? _BoundsWsOffset;
     private AABB_tImpl? _BoundsWsInstance;
 
     public AABB_t BoundsWs
     {
         get
         {
-            if (_BoundsWsOffset == -1) _BoundsWsOffset = Schema.GetOffset(0xAC4066F1BE54855A);
+            _BoundsWsOffset = _BoundsWsOffset ?? Schema.GetOffset(0xAC4066F1BE54855A);
             var instance = _BoundsWsInstance ??= new AABB_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _BoundsWsOffset);
+            instance.DangerousSetHandle(_Handle + _BoundsWsOffset!.Value);
             return instance;
         }
     }

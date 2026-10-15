@@ -16,36 +16,36 @@ internal partial class CNmStateMachineNode__StateDefinition_tImpl : SchemaClass,
 {
     public CNmStateMachineNode__StateDefinition_tImpl(nint handle) : base(handle) { }
 
-    private static nint _StateNodeIdxOffset = -1;
+    private static nint? _StateNodeIdxOffset;
 
     public ref short StateNodeIdx
     {
         get
         {
-            if (_StateNodeIdxOffset == -1) _StateNodeIdxOffset = Schema.GetOffset(0x539BB818074CB7A1);
-            return ref _Handle.AsRef<short>(_StateNodeIdxOffset);
+            _StateNodeIdxOffset = _StateNodeIdxOffset ?? Schema.GetOffset(0x539BB818074CB7A1);
+            return ref _Handle.AsRef<short>(_StateNodeIdxOffset!.Value);
         }
     }
-    private static nint _EntryConditionNodeIdxOffset = -1;
+    private static nint? _EntryConditionNodeIdxOffset;
 
     public ref short EntryConditionNodeIdx
     {
         get
         {
-            if (_EntryConditionNodeIdxOffset == -1) _EntryConditionNodeIdxOffset = Schema.GetOffset(0x539BB8180B262993);
-            return ref _Handle.AsRef<short>(_EntryConditionNodeIdxOffset);
+            _EntryConditionNodeIdxOffset = _EntryConditionNodeIdxOffset ?? Schema.GetOffset(0x539BB8180B262993);
+            return ref _Handle.AsRef<short>(_EntryConditionNodeIdxOffset!.Value);
         }
     }
-    private static nint _TransitionDefinitionsOffset = -1;
+    private static nint? _TransitionDefinitionsOffset;
     private SchemaUntypedField? _TransitionDefinitionsInstance;
 
     public SchemaUntypedField TransitionDefinitions
     {
         get
         {
-            if (_TransitionDefinitionsOffset == -1) _TransitionDefinitionsOffset = Schema.GetOffset(0x539BB818F02EF580);
+            _TransitionDefinitionsOffset = _TransitionDefinitionsOffset ?? Schema.GetOffset(0x539BB818F02EF580);
             var instance = _TransitionDefinitionsInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _TransitionDefinitionsOffset);
+            instance.DangerousSetHandle(_Handle + _TransitionDefinitionsOffset!.Value);
             return instance;
         }
     }

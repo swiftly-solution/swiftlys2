@@ -16,175 +16,175 @@ internal partial class CBasePlayerVDataImpl : CEntitySubclassVDataBaseImpl, CBas
 {
     public CBasePlayerVDataImpl(nint handle) : base(handle) { }
 
-    private static nint _ModelNameOffset = -1;
+    private static nint? _ModelNameOffset;
     private SchemaUntypedField? _ModelNameInstance;
 
     public SchemaUntypedField ModelName
     {
         get
         {
-            if (_ModelNameOffset == -1) _ModelNameOffset = Schema.GetOffset(0x89A654F0002A227C);
+            _ModelNameOffset = _ModelNameOffset ?? Schema.GetOffset(0x89A654F0002A227C);
             var instance = _ModelNameInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ModelNameOffset);
+            instance.DangerousSetHandle(_Handle + _ModelNameOffset!.Value);
             return instance;
         }
     }
-    private static nint _ModelNameAg2OverrideOffset = -1;
+    private static nint? _ModelNameAg2OverrideOffset;
     private SchemaUntypedField? _ModelNameAg2OverrideInstance;
 
     public SchemaUntypedField ModelNameAg2Override
     {
         get
         {
-            if (_ModelNameAg2OverrideOffset == -1) _ModelNameAg2OverrideOffset = Schema.GetOffset(0x89A654F0A1FED936);
+            _ModelNameAg2OverrideOffset = _ModelNameAg2OverrideOffset ?? Schema.GetOffset(0x89A654F0A1FED936);
             var instance = _ModelNameAg2OverrideInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ModelNameAg2OverrideOffset);
+            instance.DangerousSetHandle(_Handle + _ModelNameAg2OverrideOffset!.Value);
             return instance;
         }
     }
-    private static nint _HeadDamageMultiplierOffset = -1;
+    private static nint? _HeadDamageMultiplierOffset;
     private CSkillFloatImpl? _HeadDamageMultiplierInstance;
 
     public CSkillFloat HeadDamageMultiplier
     {
         get
         {
-            if (_HeadDamageMultiplierOffset == -1) _HeadDamageMultiplierOffset = Schema.GetOffset(0x89A654F0306CEA07);
+            _HeadDamageMultiplierOffset = _HeadDamageMultiplierOffset ?? Schema.GetOffset(0x89A654F0306CEA07);
             var instance = _HeadDamageMultiplierInstance ??= new CSkillFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _HeadDamageMultiplierOffset);
+            instance.DangerousSetHandle(_Handle + _HeadDamageMultiplierOffset!.Value);
             return instance;
         }
     }
-    private static nint _ChestDamageMultiplierOffset = -1;
+    private static nint? _ChestDamageMultiplierOffset;
     private CSkillFloatImpl? _ChestDamageMultiplierInstance;
 
     public CSkillFloat ChestDamageMultiplier
     {
         get
         {
-            if (_ChestDamageMultiplierOffset == -1) _ChestDamageMultiplierOffset = Schema.GetOffset(0x89A654F0C82E808E);
+            _ChestDamageMultiplierOffset = _ChestDamageMultiplierOffset ?? Schema.GetOffset(0x89A654F0C82E808E);
             var instance = _ChestDamageMultiplierInstance ??= new CSkillFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ChestDamageMultiplierOffset);
+            instance.DangerousSetHandle(_Handle + _ChestDamageMultiplierOffset!.Value);
             return instance;
         }
     }
-    private static nint _StomachDamageMultiplierOffset = -1;
+    private static nint? _StomachDamageMultiplierOffset;
     private CSkillFloatImpl? _StomachDamageMultiplierInstance;
 
     public CSkillFloat StomachDamageMultiplier
     {
         get
         {
-            if (_StomachDamageMultiplierOffset == -1) _StomachDamageMultiplierOffset = Schema.GetOffset(0x89A654F0F84BFAFA);
+            _StomachDamageMultiplierOffset = _StomachDamageMultiplierOffset ?? Schema.GetOffset(0x89A654F0F84BFAFA);
             var instance = _StomachDamageMultiplierInstance ??= new CSkillFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _StomachDamageMultiplierOffset);
+            instance.DangerousSetHandle(_Handle + _StomachDamageMultiplierOffset!.Value);
             return instance;
         }
     }
-    private static nint _ArmDamageMultiplierOffset = -1;
+    private static nint? _ArmDamageMultiplierOffset;
     private CSkillFloatImpl? _ArmDamageMultiplierInstance;
 
     public CSkillFloat ArmDamageMultiplier
     {
         get
         {
-            if (_ArmDamageMultiplierOffset == -1) _ArmDamageMultiplierOffset = Schema.GetOffset(0x89A654F071454291);
+            _ArmDamageMultiplierOffset = _ArmDamageMultiplierOffset ?? Schema.GetOffset(0x89A654F071454291);
             var instance = _ArmDamageMultiplierInstance ??= new CSkillFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ArmDamageMultiplierOffset);
+            instance.DangerousSetHandle(_Handle + _ArmDamageMultiplierOffset!.Value);
             return instance;
         }
     }
-    private static nint _LegDamageMultiplierOffset = -1;
+    private static nint? _LegDamageMultiplierOffset;
     private CSkillFloatImpl? _LegDamageMultiplierInstance;
 
     public CSkillFloat LegDamageMultiplier
     {
         get
         {
-            if (_LegDamageMultiplierOffset == -1) _LegDamageMultiplierOffset = Schema.GetOffset(0x89A654F0F2F8B1BB);
+            _LegDamageMultiplierOffset = _LegDamageMultiplierOffset ?? Schema.GetOffset(0x89A654F0F2F8B1BB);
             var instance = _LegDamageMultiplierInstance ??= new CSkillFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _LegDamageMultiplierOffset);
+            instance.DangerousSetHandle(_Handle + _LegDamageMultiplierOffset!.Value);
             return instance;
         }
     }
-    private static nint _HoldBreathTimeOffset = -1;
+    private static nint? _HoldBreathTimeOffset;
 
     public ref float HoldBreathTime
     {
         get
         {
-            if (_HoldBreathTimeOffset == -1) _HoldBreathTimeOffset = Schema.GetOffset(0x89A654F093F22051);
-            return ref _Handle.AsRef<float>(_HoldBreathTimeOffset);
+            _HoldBreathTimeOffset = _HoldBreathTimeOffset ?? Schema.GetOffset(0x89A654F093F22051);
+            return ref _Handle.AsRef<float>(_HoldBreathTimeOffset!.Value);
         }
     }
-    private static nint _DrowningDamageIntervalOffset = -1;
+    private static nint? _DrowningDamageIntervalOffset;
 
     public ref float DrowningDamageInterval
     {
         get
         {
-            if (_DrowningDamageIntervalOffset == -1) _DrowningDamageIntervalOffset = Schema.GetOffset(0x89A654F05ECD13F9);
-            return ref _Handle.AsRef<float>(_DrowningDamageIntervalOffset);
+            _DrowningDamageIntervalOffset = _DrowningDamageIntervalOffset ?? Schema.GetOffset(0x89A654F05ECD13F9);
+            return ref _Handle.AsRef<float>(_DrowningDamageIntervalOffset!.Value);
         }
     }
-    private static nint _DrowningDamageInitialOffset = -1;
+    private static nint? _DrowningDamageInitialOffset;
 
     public ref int DrowningDamageInitial
     {
         get
         {
-            if (_DrowningDamageInitialOffset == -1) _DrowningDamageInitialOffset = Schema.GetOffset(0x89A654F0155618A2);
-            return ref _Handle.AsRef<int>(_DrowningDamageInitialOffset);
+            _DrowningDamageInitialOffset = _DrowningDamageInitialOffset ?? Schema.GetOffset(0x89A654F0155618A2);
+            return ref _Handle.AsRef<int>(_DrowningDamageInitialOffset!.Value);
         }
     }
-    private static nint _DrowningDamageMaxOffset = -1;
+    private static nint? _DrowningDamageMaxOffset;
 
     public ref int DrowningDamageMax
     {
         get
         {
-            if (_DrowningDamageMaxOffset == -1) _DrowningDamageMaxOffset = Schema.GetOffset(0x89A654F0E3FA4428);
-            return ref _Handle.AsRef<int>(_DrowningDamageMaxOffset);
+            _DrowningDamageMaxOffset = _DrowningDamageMaxOffset ?? Schema.GetOffset(0x89A654F0E3FA4428);
+            return ref _Handle.AsRef<int>(_DrowningDamageMaxOffset!.Value);
         }
     }
-    private static nint _WaterSpeedOffset = -1;
+    private static nint? _WaterSpeedOffset;
 
     public ref int WaterSpeed
     {
         get
         {
-            if (_WaterSpeedOffset == -1) _WaterSpeedOffset = Schema.GetOffset(0x89A654F0CED804D7);
-            return ref _Handle.AsRef<int>(_WaterSpeedOffset);
+            _WaterSpeedOffset = _WaterSpeedOffset ?? Schema.GetOffset(0x89A654F0CED804D7);
+            return ref _Handle.AsRef<int>(_WaterSpeedOffset!.Value);
         }
     }
-    private static nint _UseRangeOffset = -1;
+    private static nint? _UseRangeOffset;
 
     public ref float UseRange
     {
         get
         {
-            if (_UseRangeOffset == -1) _UseRangeOffset = Schema.GetOffset(0x89A654F03B375BF3);
-            return ref _Handle.AsRef<float>(_UseRangeOffset);
+            _UseRangeOffset = _UseRangeOffset ?? Schema.GetOffset(0x89A654F03B375BF3);
+            return ref _Handle.AsRef<float>(_UseRangeOffset!.Value);
         }
     }
-    private static nint _UseAngleToleranceOffset = -1;
+    private static nint? _UseAngleToleranceOffset;
 
     public ref float UseAngleTolerance
     {
         get
         {
-            if (_UseAngleToleranceOffset == -1) _UseAngleToleranceOffset = Schema.GetOffset(0x89A654F01A464300);
-            return ref _Handle.AsRef<float>(_UseAngleToleranceOffset);
+            _UseAngleToleranceOffset = _UseAngleToleranceOffset ?? Schema.GetOffset(0x89A654F01A464300);
+            return ref _Handle.AsRef<float>(_UseAngleToleranceOffset!.Value);
         }
     }
-    private static nint _CrouchTimeOffset = -1;
+    private static nint? _CrouchTimeOffset;
 
     public ref float CrouchTime
     {
         get
         {
-            if (_CrouchTimeOffset == -1) _CrouchTimeOffset = Schema.GetOffset(0x89A654F01E805FB4);
-            return ref _Handle.AsRef<float>(_CrouchTimeOffset);
+            _CrouchTimeOffset = _CrouchTimeOffset ?? Schema.GetOffset(0x89A654F01E805FB4);
+            return ref _Handle.AsRef<float>(_CrouchTimeOffset!.Value);
         }
     }
 

@@ -16,59 +16,59 @@ internal partial class CMessageEntityImpl : CPointEntityImpl, CMessageEntity
 {
     public CMessageEntityImpl(nint handle) : base(handle) { }
 
-    private static nint _RadiusOffset = -1;
+    private static nint? _RadiusOffset;
 
     public ref int Radius
     {
         get
         {
-            if (_RadiusOffset == -1) _RadiusOffset = Schema.GetOffset(0x893EADCEA921CA53);
-            return ref _Handle.AsRef<int>(_RadiusOffset);
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x893EADCEA921CA53);
+            return ref _Handle.AsRef<int>(_RadiusOffset!.Value);
         }
     }
-    private static nint _MessageTextOffset = -1;
+    private static nint? _MessageTextOffset;
 
     public string MessageText
     {
         get
         {
-            if (_MessageTextOffset == -1) _MessageTextOffset = Schema.GetOffset(0x893EADCEBA6E5D73);
-            return Schema.GetString(_Handle.Read<nint>(_MessageTextOffset));
+            _MessageTextOffset = _MessageTextOffset ?? Schema.GetOffset(0x893EADCEBA6E5D73);
+            return Schema.GetString(_Handle.Read<nint>(_MessageTextOffset!.Value));
         }
         set
         {
-            if (_MessageTextOffset == -1) _MessageTextOffset = Schema.GetOffset(0x893EADCEBA6E5D73);
-            Schema.SetString(_Handle, _MessageTextOffset, value);
+            _MessageTextOffset = _MessageTextOffset ?? Schema.GetOffset(0x893EADCEBA6E5D73);
+            Schema.SetString(_Handle, _MessageTextOffset!.Value, value);
         }
     }
-    private static nint _DrawTextOffset = -1;
+    private static nint? _DrawTextOffset;
 
     public ref bool DrawText
     {
         get
         {
-            if (_DrawTextOffset == -1) _DrawTextOffset = Schema.GetOffset(0x893EADCE598871D4);
-            return ref _Handle.AsRef<bool>(_DrawTextOffset);
+            _DrawTextOffset = _DrawTextOffset ?? Schema.GetOffset(0x893EADCE598871D4);
+            return ref _Handle.AsRef<bool>(_DrawTextOffset!.Value);
         }
     }
-    private static nint _DeveloperOnlyOffset = -1;
+    private static nint? _DeveloperOnlyOffset;
 
     public ref bool DeveloperOnly
     {
         get
         {
-            if (_DeveloperOnlyOffset == -1) _DeveloperOnlyOffset = Schema.GetOffset(0x893EADCE981A6E5F);
-            return ref _Handle.AsRef<bool>(_DeveloperOnlyOffset);
+            _DeveloperOnlyOffset = _DeveloperOnlyOffset ?? Schema.GetOffset(0x893EADCE981A6E5F);
+            return ref _Handle.AsRef<bool>(_DeveloperOnlyOffset!.Value);
         }
     }
-    private static nint _EnabledOffset = -1;
+    private static nint? _EnabledOffset;
 
     public ref bool Enabled
     {
         get
         {
-            if (_EnabledOffset == -1) _EnabledOffset = Schema.GetOffset(0x893EADCE6154EB7E);
-            return ref _Handle.AsRef<bool>(_EnabledOffset);
+            _EnabledOffset = _EnabledOffset ?? Schema.GetOffset(0x893EADCE6154EB7E);
+            return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
         }
     }
 

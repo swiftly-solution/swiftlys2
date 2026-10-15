@@ -16,59 +16,59 @@ internal partial class CAnimConflictInfo_tImpl : SchemaClass, CAnimConflictInfo_
 {
     public CAnimConflictInfo_tImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xC971E2824D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xC971E2824D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xC971E2824D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xC971E2824D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _GroupNameOffset = -1;
+    private static nint? _GroupNameOffset;
 
     public string GroupName
     {
         get
         {
-            if (_GroupNameOffset == -1) _GroupNameOffset = Schema.GetOffset(0xC971E282025FB2C7);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_GroupNameOffset));
+            _GroupNameOffset = _GroupNameOffset ?? Schema.GetOffset(0xC971E282025FB2C7);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_GroupNameOffset!.Value));
         }
         set
         {
-            if (_GroupNameOffset == -1) _GroupNameOffset = Schema.GetOffset(0xC971E282025FB2C7);
-            Schema.SetCUtlString(_Handle, _GroupNameOffset, value);
+            _GroupNameOffset = _GroupNameOffset ?? Schema.GetOffset(0xC971E282025FB2C7);
+            Schema.SetCUtlString(_Handle, _GroupNameOffset!.Value, value);
         }
     }
-    private static nint _SubgraphNameOffset = -1;
+    private static nint? _SubgraphNameOffset;
 
     public string SubgraphName
     {
         get
         {
-            if (_SubgraphNameOffset == -1) _SubgraphNameOffset = Schema.GetOffset(0xC971E282DB801374);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_SubgraphNameOffset));
+            _SubgraphNameOffset = _SubgraphNameOffset ?? Schema.GetOffset(0xC971E282DB801374);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_SubgraphNameOffset!.Value));
         }
         set
         {
-            if (_SubgraphNameOffset == -1) _SubgraphNameOffset = Schema.GetOffset(0xC971E282DB801374);
-            Schema.SetCUtlString(_Handle, _SubgraphNameOffset, value);
+            _SubgraphNameOffset = _SubgraphNameOffset ?? Schema.GetOffset(0xC971E282DB801374);
+            Schema.SetCUtlString(_Handle, _SubgraphNameOffset!.Value, value);
         }
     }
-    private static nint _IdOffset = -1;
+    private static nint? _IdOffset;
 
     public ref uint Id
     {
         get
         {
-            if (_IdOffset == -1) _IdOffset = Schema.GetOffset(0xC971E282B4B6E980);
-            return ref _Handle.AsRef<uint>(_IdOffset);
+            _IdOffset = _IdOffset ?? Schema.GetOffset(0xC971E282B4B6E980);
+            return ref _Handle.AsRef<uint>(_IdOffset!.Value);
         }
     }
 

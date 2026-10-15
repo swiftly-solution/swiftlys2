@@ -16,95 +16,95 @@ internal partial class EntComponentInfo_tImpl : SchemaClass, EntComponentInfo_t
 {
     public EntComponentInfo_tImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xDEAD526A5B47C92C);
-            return Schema.GetString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xDEAD526A5B47C92C);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xDEAD526A5B47C92C);
-            Schema.SetString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xDEAD526A5B47C92C);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _CPPClassnameOffset = -1;
+    private static nint? _CPPClassnameOffset;
 
     public string CPPClassname
     {
         get
         {
-            if (_CPPClassnameOffset == -1) _CPPClassnameOffset = Schema.GetOffset(0xDEAD526A65BE3EC7);
-            return Schema.GetString(_Handle.Read<nint>(_CPPClassnameOffset));
+            _CPPClassnameOffset = _CPPClassnameOffset ?? Schema.GetOffset(0xDEAD526A65BE3EC7);
+            return Schema.GetString(_Handle.Read<nint>(_CPPClassnameOffset!.Value));
         }
         set
         {
-            if (_CPPClassnameOffset == -1) _CPPClassnameOffset = Schema.GetOffset(0xDEAD526A65BE3EC7);
-            Schema.SetString(_Handle, _CPPClassnameOffset, value);
+            _CPPClassnameOffset = _CPPClassnameOffset ?? Schema.GetOffset(0xDEAD526A65BE3EC7);
+            Schema.SetString(_Handle, _CPPClassnameOffset!.Value, value);
         }
     }
-    private static nint _NetworkDataReferencedDescriptionOffset = -1;
+    private static nint? _NetworkDataReferencedDescriptionOffset;
 
     public string NetworkDataReferencedDescription
     {
         get
         {
-            if (_NetworkDataReferencedDescriptionOffset == -1) _NetworkDataReferencedDescriptionOffset = Schema.GetOffset(0xDEAD526AB84E3342);
-            return Schema.GetString(_Handle.Read<nint>(_NetworkDataReferencedDescriptionOffset));
+            _NetworkDataReferencedDescriptionOffset = _NetworkDataReferencedDescriptionOffset ?? Schema.GetOffset(0xDEAD526AB84E3342);
+            return Schema.GetString(_Handle.Read<nint>(_NetworkDataReferencedDescriptionOffset!.Value));
         }
         set
         {
-            if (_NetworkDataReferencedDescriptionOffset == -1) _NetworkDataReferencedDescriptionOffset = Schema.GetOffset(0xDEAD526AB84E3342);
-            Schema.SetString(_Handle, _NetworkDataReferencedDescriptionOffset, value);
+            _NetworkDataReferencedDescriptionOffset = _NetworkDataReferencedDescriptionOffset ?? Schema.GetOffset(0xDEAD526AB84E3342);
+            Schema.SetString(_Handle, _NetworkDataReferencedDescriptionOffset!.Value, value);
         }
     }
-    private static nint _NetworkDataReferencedPtrPropDescriptionOffset = -1;
+    private static nint? _NetworkDataReferencedPtrPropDescriptionOffset;
 
     public string NetworkDataReferencedPtrPropDescription
     {
         get
         {
-            if (_NetworkDataReferencedPtrPropDescriptionOffset == -1) _NetworkDataReferencedPtrPropDescriptionOffset = Schema.GetOffset(0xDEAD526AFDC5489F);
-            return Schema.GetString(_Handle.Read<nint>(_NetworkDataReferencedPtrPropDescriptionOffset));
+            _NetworkDataReferencedPtrPropDescriptionOffset = _NetworkDataReferencedPtrPropDescriptionOffset ?? Schema.GetOffset(0xDEAD526AFDC5489F);
+            return Schema.GetString(_Handle.Read<nint>(_NetworkDataReferencedPtrPropDescriptionOffset!.Value));
         }
         set
         {
-            if (_NetworkDataReferencedPtrPropDescriptionOffset == -1) _NetworkDataReferencedPtrPropDescriptionOffset = Schema.GetOffset(0xDEAD526AFDC5489F);
-            Schema.SetString(_Handle, _NetworkDataReferencedPtrPropDescriptionOffset, value);
+            _NetworkDataReferencedPtrPropDescriptionOffset = _NetworkDataReferencedPtrPropDescriptionOffset ?? Schema.GetOffset(0xDEAD526AFDC5489F);
+            Schema.SetString(_Handle, _NetworkDataReferencedPtrPropDescriptionOffset!.Value, value);
         }
     }
-    private static nint _RuntimeIndexOffset = -1;
+    private static nint? _RuntimeIndexOffset;
 
     public ref int RuntimeIndex
     {
         get
         {
-            if (_RuntimeIndexOffset == -1) _RuntimeIndexOffset = Schema.GetOffset(0xDEAD526AB53184BD);
-            return ref _Handle.AsRef<int>(_RuntimeIndexOffset);
+            _RuntimeIndexOffset = _RuntimeIndexOffset ?? Schema.GetOffset(0xDEAD526AB53184BD);
+            return ref _Handle.AsRef<int>(_RuntimeIndexOffset!.Value);
         }
     }
-    private static nint _FlagsOffset = -1;
+    private static nint? _FlagsOffset;
 
     public ref uint Flags
     {
         get
         {
-            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0xDEAD526ACE6E9C28);
-            return ref _Handle.AsRef<uint>(_FlagsOffset);
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0xDEAD526ACE6E9C28);
+            return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
         }
     }
-    private static nint _BaseClassComponentHelperOffset = -1;
+    private static nint? _BaseClassComponentHelperOffset;
     private CEntityComponentHelperImpl? _BaseClassComponentHelperInstance;
 
     public CEntityComponentHelper? BaseClassComponentHelper
     {
         get
         {
-            if (_BaseClassComponentHelperOffset == -1) _BaseClassComponentHelperOffset = Schema.GetOffset(0xDEAD526A9799DD51);
-            var ptr = _Handle.Read<nint>(_BaseClassComponentHelperOffset);
+            _BaseClassComponentHelperOffset = _BaseClassComponentHelperOffset ?? Schema.GetOffset(0xDEAD526A9799DD51);
+            var ptr = _Handle.Read<nint>(_BaseClassComponentHelperOffset!.Value);
             if (!ptr.IsValidPtr()) return null;
             var instance = _BaseClassComponentHelperInstance ??= new CEntityComponentHelperImpl(0);
             instance.DangerousSetHandle(ptr);

@@ -16,27 +16,27 @@ internal partial class C_INIT_NormalAlignToCPImpl : CParticleFunctionInitializer
 {
     public C_INIT_NormalAlignToCPImpl(nint handle) : base(handle) { }
 
-    private static nint _TransformInputOffset = -1;
+    private static nint? _TransformInputOffset;
     private CParticleTransformInputImpl? _TransformInputInstance;
 
     public CParticleTransformInput TransformInput
     {
         get
         {
-            if (_TransformInputOffset == -1) _TransformInputOffset = Schema.GetOffset(0xFA0441643A9ED669);
+            _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0xFA0441643A9ED669);
             var instance = _TransformInputInstance ??= new CParticleTransformInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _TransformInputOffset);
+            instance.DangerousSetHandle(_Handle + _TransformInputOffset!.Value);
             return instance;
         }
     }
-    private static nint _ControlPointAxisOffset = -1;
+    private static nint? _ControlPointAxisOffset;
 
     public ref ParticleControlPointAxis_t ControlPointAxis
     {
         get
         {
-            if (_ControlPointAxisOffset == -1) _ControlPointAxisOffset = Schema.GetOffset(0xFA04416471763CFD);
-            return ref _Handle.AsRef<ParticleControlPointAxis_t>(_ControlPointAxisOffset);
+            _ControlPointAxisOffset = _ControlPointAxisOffset ?? Schema.GetOffset(0xFA04416471763CFD);
+            return ref _Handle.AsRef<ParticleControlPointAxis_t>(_ControlPointAxisOffset!.Value);
         }
     }
 

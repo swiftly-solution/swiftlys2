@@ -16,26 +16,26 @@ internal partial class CNmBodyGroupNode__CDefinitionImpl : CNmPassthroughNode__C
 {
     public CNmBodyGroupNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint _EnabledNodeIdxOffset = -1;
+    private static nint? _EnabledNodeIdxOffset;
 
     public ref short EnabledNodeIdx
     {
         get
         {
-            if (_EnabledNodeIdxOffset == -1) _EnabledNodeIdxOffset = Schema.GetOffset(0xC3380A36F7CDF5E9);
-            return ref _Handle.AsRef<short>(_EnabledNodeIdxOffset);
+            _EnabledNodeIdxOffset = _EnabledNodeIdxOffset ?? Schema.GetOffset(0xC3380A36F7CDF5E9);
+            return ref _Handle.AsRef<short>(_EnabledNodeIdxOffset!.Value);
         }
     }
-    private static nint _EventOffset = -1;
+    private static nint? _EventOffset;
     private CNmBodyGroupEventImpl? _EventInstance;
 
     public CNmBodyGroupEvent Event
     {
         get
         {
-            if (_EventOffset == -1) _EventOffset = Schema.GetOffset(0xC3380A366A7D08BF);
+            _EventOffset = _EventOffset ?? Schema.GetOffset(0xC3380A366A7D08BF);
             var instance = _EventInstance ??= new CNmBodyGroupEventImpl(0);
-            instance.DangerousSetHandle(_Handle + _EventOffset);
+            instance.DangerousSetHandle(_Handle + _EventOffset!.Value);
             return instance;
         }
     }

@@ -16,47 +16,47 @@ internal partial class C_OP_RemapControlPointOrientationToRotationImpl : CPartic
 {
     public C_OP_RemapControlPointOrientationToRotationImpl(nint handle) : base(handle) { }
 
-    private static nint _CPOffset = -1;
+    private static nint? _CPOffset;
 
     public ref int CP
     {
         get
         {
-            if (_CPOffset == -1) _CPOffset = Schema.GetOffset(0x2CE44E90EB661472);
-            return ref _Handle.AsRef<int>(_CPOffset);
+            _CPOffset = _CPOffset ?? Schema.GetOffset(0x2CE44E90EB661472);
+            return ref _Handle.AsRef<int>(_CPOffset!.Value);
         }
     }
-    private static nint _FieldOutputOffset = -1;
+    private static nint? _FieldOutputOffset;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0x2CE44E90E5729606);
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x2CE44E90E5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
             return instance;
         }
     }
-    private static nint _OffsetRotOffset = -1;
+    private static nint? _OffsetRotOffset;
 
     public ref float OffsetRot
     {
         get
         {
-            if (_OffsetRotOffset == -1) _OffsetRotOffset = Schema.GetOffset(0x2CE44E90B414F849);
-            return ref _Handle.AsRef<float>(_OffsetRotOffset);
+            _OffsetRotOffset = _OffsetRotOffset ?? Schema.GetOffset(0x2CE44E90B414F849);
+            return ref _Handle.AsRef<float>(_OffsetRotOffset!.Value);
         }
     }
-    private static nint _ComponentOffset = -1;
+    private static nint? _ComponentOffset;
 
     public ref int Component
     {
         get
         {
-            if (_ComponentOffset == -1) _ComponentOffset = Schema.GetOffset(0x2CE44E90BFD0952C);
-            return ref _Handle.AsRef<int>(_ComponentOffset);
+            _ComponentOffset = _ComponentOffset ?? Schema.GetOffset(0x2CE44E90BFD0952C);
+            return ref _Handle.AsRef<int>(_ComponentOffset!.Value);
         }
     }
 

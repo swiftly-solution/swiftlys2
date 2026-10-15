@@ -16,24 +16,24 @@ internal partial class RnPlane_tImpl : SchemaClass, RnPlane_t
 {
     public RnPlane_tImpl(nint handle) : base(handle) { }
 
-    private static nint _NormalOffset = -1;
+    private static nint? _NormalOffset;
 
     public ref Vector Normal
     {
         get
         {
-            if (_NormalOffset == -1) _NormalOffset = Schema.GetOffset(0xEAF5B7BAAFB36E96);
-            return ref _Handle.AsRef<Vector>(_NormalOffset);
+            _NormalOffset = _NormalOffset ?? Schema.GetOffset(0xEAF5B7BAAFB36E96);
+            return ref _Handle.AsRef<Vector>(_NormalOffset!.Value);
         }
     }
-    private static nint _OffsetOffset = -1;
+    private static nint? _OffsetOffset;
 
     public ref float Offset
     {
         get
         {
-            if (_OffsetOffset == -1) _OffsetOffset = Schema.GetOffset(0xEAF5B7BA7F14BA34);
-            return ref _Handle.AsRef<float>(_OffsetOffset);
+            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0xEAF5B7BA7F14BA34);
+            return ref _Handle.AsRef<float>(_OffsetOffset!.Value);
         }
     }
 

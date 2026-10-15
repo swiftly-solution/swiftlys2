@@ -16,72 +16,72 @@ internal partial class C_INIT_AddVectorToVectorImpl : CParticleFunctionInitializ
 {
     public C_INIT_AddVectorToVectorImpl(nint handle) : base(handle) { }
 
-    private static nint _ScaleOffset = -1;
+    private static nint? _ScaleOffset;
 
     public ref Vector Scale
     {
         get
         {
-            if (_ScaleOffset == -1) _ScaleOffset = Schema.GetOffset(0xFBD8AC005F596B51);
-            return ref _Handle.AsRef<Vector>(_ScaleOffset);
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0xFBD8AC005F596B51);
+            return ref _Handle.AsRef<Vector>(_ScaleOffset!.Value);
         }
     }
-    private static nint _FieldOutputOffset = -1;
+    private static nint? _FieldOutputOffset;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0xFBD8AC00E5729606);
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0xFBD8AC00E5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
             return instance;
         }
     }
-    private static nint _FieldInputOffset = -1;
+    private static nint? _FieldInputOffset;
     private ParticleAttributeIndex_tImpl? _FieldInputInstance;
 
     public ParticleAttributeIndex_t FieldInput
     {
         get
         {
-            if (_FieldInputOffset == -1) _FieldInputOffset = Schema.GetOffset(0xFBD8AC00AE775669);
+            _FieldInputOffset = _FieldInputOffset ?? Schema.GetOffset(0xFBD8AC00AE775669);
             var instance = _FieldInputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldInputOffset);
+            instance.DangerousSetHandle(_Handle + _FieldInputOffset!.Value);
             return instance;
         }
     }
-    private static nint _OffsetMinOffset = -1;
+    private static nint? _OffsetMinOffset;
 
     public ref Vector OffsetMin
     {
         get
         {
-            if (_OffsetMinOffset == -1) _OffsetMinOffset = Schema.GetOffset(0xFBD8AC00ABED1082);
-            return ref _Handle.AsRef<Vector>(_OffsetMinOffset);
+            _OffsetMinOffset = _OffsetMinOffset ?? Schema.GetOffset(0xFBD8AC00ABED1082);
+            return ref _Handle.AsRef<Vector>(_OffsetMinOffset!.Value);
         }
     }
-    private static nint _OffsetMaxOffset = -1;
+    private static nint? _OffsetMaxOffset;
 
     public ref Vector OffsetMax
     {
         get
         {
-            if (_OffsetMaxOffset == -1) _OffsetMaxOffset = Schema.GetOffset(0xFBD8AC0095D96628);
-            return ref _Handle.AsRef<Vector>(_OffsetMaxOffset);
+            _OffsetMaxOffset = _OffsetMaxOffset ?? Schema.GetOffset(0xFBD8AC0095D96628);
+            return ref _Handle.AsRef<Vector>(_OffsetMaxOffset!.Value);
         }
     }
-    private static nint _RandomnessParametersOffset = -1;
+    private static nint? _RandomnessParametersOffset;
     private CRandomNumberGeneratorParametersImpl? _RandomnessParametersInstance;
 
     public CRandomNumberGeneratorParameters RandomnessParameters
     {
         get
         {
-            if (_RandomnessParametersOffset == -1) _RandomnessParametersOffset = Schema.GetOffset(0xFBD8AC007EDF50AD);
+            _RandomnessParametersOffset = _RandomnessParametersOffset ?? Schema.GetOffset(0xFBD8AC007EDF50AD);
             var instance = _RandomnessParametersInstance ??= new CRandomNumberGeneratorParametersImpl(0);
-            instance.DangerousSetHandle(_Handle + _RandomnessParametersOffset);
+            instance.DangerousSetHandle(_Handle + _RandomnessParametersOffset!.Value);
             return instance;
         }
     }

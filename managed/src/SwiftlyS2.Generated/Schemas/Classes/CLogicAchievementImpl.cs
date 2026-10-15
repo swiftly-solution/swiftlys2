@@ -16,39 +16,39 @@ internal partial class CLogicAchievementImpl : CLogicalEntityImpl, CLogicAchieve
 {
     public CLogicAchievementImpl(nint handle) : base(handle) { }
 
-    private static nint _DisabledOffset = -1;
+    private static nint? _DisabledOffset;
 
     public ref bool Disabled
     {
         get
         {
-            if (_DisabledOffset == -1) _DisabledOffset = Schema.GetOffset(0xE8C4579F3A7C5965);
-            return ref _Handle.AsRef<bool>(_DisabledOffset);
+            _DisabledOffset = _DisabledOffset ?? Schema.GetOffset(0xE8C4579F3A7C5965);
+            return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
         }
     }
-    private static nint _AchievementEventIDOffset = -1;
+    private static nint? _AchievementEventIDOffset;
 
     public string AchievementEventID
     {
         get
         {
-            if (_AchievementEventIDOffset == -1) _AchievementEventIDOffset = Schema.GetOffset(0xE8C4579F12AB7E15);
-            return Schema.GetString(_Handle.Read<nint>(_AchievementEventIDOffset));
+            _AchievementEventIDOffset = _AchievementEventIDOffset ?? Schema.GetOffset(0xE8C4579F12AB7E15);
+            return Schema.GetString(_Handle.Read<nint>(_AchievementEventIDOffset!.Value));
         }
         set
         {
-            if (_AchievementEventIDOffset == -1) _AchievementEventIDOffset = Schema.GetOffset(0xE8C4579F12AB7E15);
-            Schema.SetString(_Handle, _AchievementEventIDOffset, value);
+            _AchievementEventIDOffset = _AchievementEventIDOffset ?? Schema.GetOffset(0xE8C4579F12AB7E15);
+            Schema.SetString(_Handle, _AchievementEventIDOffset!.Value, value);
         }
     }
-    private static nint _OnFiredOffset = -1;
+    private static nint? _OnFiredOffset;
 
     public ref CEntityIOOutput OnFired
     {
         get
         {
-            if (_OnFiredOffset == -1) _OnFiredOffset = Schema.GetOffset(0xE8C4579F84825730);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnFiredOffset);
+            _OnFiredOffset = _OnFiredOffset ?? Schema.GetOffset(0xE8C4579F84825730);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnFiredOffset!.Value);
         }
     }
 

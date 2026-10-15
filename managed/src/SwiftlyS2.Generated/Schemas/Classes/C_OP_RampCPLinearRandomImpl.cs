@@ -16,34 +16,34 @@ internal partial class C_OP_RampCPLinearRandomImpl : CParticleFunctionPreEmissio
 {
     public C_OP_RampCPLinearRandomImpl(nint handle) : base(handle) { }
 
-    private static nint _OutControlPointNumberOffset = -1;
+    private static nint? _OutControlPointNumberOffset;
 
     public ref int OutControlPointNumber
     {
         get
         {
-            if (_OutControlPointNumberOffset == -1) _OutControlPointNumberOffset = Schema.GetOffset(0xF3F4631CD021D73F);
-            return ref _Handle.AsRef<int>(_OutControlPointNumberOffset);
+            _OutControlPointNumberOffset = _OutControlPointNumberOffset ?? Schema.GetOffset(0xF3F4631CD021D73F);
+            return ref _Handle.AsRef<int>(_OutControlPointNumberOffset!.Value);
         }
     }
-    private static nint _RateMinOffset = -1;
+    private static nint? _RateMinOffset;
 
     public ref Vector RateMin
     {
         get
         {
-            if (_RateMinOffset == -1) _RateMinOffset = Schema.GetOffset(0xF3F4631CB1C06501);
-            return ref _Handle.AsRef<Vector>(_RateMinOffset);
+            _RateMinOffset = _RateMinOffset ?? Schema.GetOffset(0xF3F4631CB1C06501);
+            return ref _Handle.AsRef<Vector>(_RateMinOffset!.Value);
         }
     }
-    private static nint _RateMaxOffset = -1;
+    private static nint? _RateMaxOffset;
 
     public ref Vector RateMax
     {
         get
         {
-            if (_RateMaxOffset == -1) _RateMaxOffset = Schema.GetOffset(0xF3F4631CA3D569AF);
-            return ref _Handle.AsRef<Vector>(_RateMaxOffset);
+            _RateMaxOffset = _RateMaxOffset ?? Schema.GetOffset(0xF3F4631CA3D569AF);
+            return ref _Handle.AsRef<Vector>(_RateMaxOffset!.Value);
         }
     }
 

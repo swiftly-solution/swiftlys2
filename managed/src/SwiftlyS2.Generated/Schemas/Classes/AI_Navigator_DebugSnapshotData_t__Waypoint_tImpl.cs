@@ -16,44 +16,44 @@ internal partial class AI_Navigator_DebugSnapshotData_t__Waypoint_tImpl : Schema
 {
     public AI_Navigator_DebugSnapshotData_t__Waypoint_tImpl(nint handle) : base(handle) { }
 
-    private static nint _PositionOffset = -1;
+    private static nint? _PositionOffset;
 
     public ref Vector Position
     {
         get
         {
-            if (_PositionOffset == -1) _PositionOffset = Schema.GetOffset(0x891DD4E6934F4E0A);
-            return ref _Handle.AsRef<Vector>(_PositionOffset);
+            _PositionOffset = _PositionOffset ?? Schema.GetOffset(0x891DD4E6934F4E0A);
+            return ref _Handle.AsRef<Vector>(_PositionOffset!.Value);
         }
     }
-    private static nint _Nav_typeOffset = -1;
+    private static nint? _Nav_typeOffset;
 
     public ref uint Nav_type
     {
         get
         {
-            if (_Nav_typeOffset == -1) _Nav_typeOffset = Schema.GetOffset(0x891DD4E6DE1A548F);
-            return ref _Handle.AsRef<uint>(_Nav_typeOffset);
+            _Nav_typeOffset = _Nav_typeOffset ?? Schema.GetOffset(0x891DD4E6DE1A548F);
+            return ref _Handle.AsRef<uint>(_Nav_typeOffset!.Value);
         }
     }
-    private static nint _FlagsOffset = -1;
+    private static nint? _FlagsOffset;
 
     public ref uint Flags
     {
         get
         {
-            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0x891DD4E69C677A2C);
-            return ref _Handle.AsRef<uint>(_FlagsOffset);
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x891DD4E69C677A2C);
+            return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
         }
     }
-    private static nint _Is_pathcornerOffset = -1;
+    private static nint? _Is_pathcornerOffset;
 
     public ref bool Is_pathcorner
     {
         get
         {
-            if (_Is_pathcornerOffset == -1) _Is_pathcornerOffset = Schema.GetOffset(0x891DD4E661B3A520);
-            return ref _Handle.AsRef<bool>(_Is_pathcornerOffset);
+            _Is_pathcornerOffset = _Is_pathcornerOffset ?? Schema.GetOffset(0x891DD4E661B3A520);
+            return ref _Handle.AsRef<bool>(_Is_pathcornerOffset!.Value);
         }
     }
 

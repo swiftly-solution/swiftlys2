@@ -16,44 +16,44 @@ internal partial class C_OP_SetControlPointToCenterImpl : CParticleFunctionPreEm
 {
     public C_OP_SetControlPointToCenterImpl(nint handle) : base(handle) { }
 
-    private static nint _CP1Offset = -1;
+    private static nint? _CP1Offset;
 
     public ref int CP1
     {
         get
         {
-            if (_CP1Offset == -1) _CP1Offset = Schema.GetOffset(0xB2CEB7C2D4B1E579);
-            return ref _Handle.AsRef<int>(_CP1Offset);
+            _CP1Offset = _CP1Offset ?? Schema.GetOffset(0xB2CEB7C2D4B1E579);
+            return ref _Handle.AsRef<int>(_CP1Offset!.Value);
         }
     }
-    private static nint _CP1PosOffset = -1;
+    private static nint? _CP1PosOffset;
 
     public ref Vector CP1Pos
     {
         get
         {
-            if (_CP1PosOffset == -1) _CP1PosOffset = Schema.GetOffset(0xB2CEB7C2408288D9);
-            return ref _Handle.AsRef<Vector>(_CP1PosOffset);
+            _CP1PosOffset = _CP1PosOffset ?? Schema.GetOffset(0xB2CEB7C2408288D9);
+            return ref _Handle.AsRef<Vector>(_CP1PosOffset!.Value);
         }
     }
-    private static nint _UseAvgParticlePosOffset = -1;
+    private static nint? _UseAvgParticlePosOffset;
 
     public ref bool UseAvgParticlePos
     {
         get
         {
-            if (_UseAvgParticlePosOffset == -1) _UseAvgParticlePosOffset = Schema.GetOffset(0xB2CEB7C2399CEECC);
-            return ref _Handle.AsRef<bool>(_UseAvgParticlePosOffset);
+            _UseAvgParticlePosOffset = _UseAvgParticlePosOffset ?? Schema.GetOffset(0xB2CEB7C2399CEECC);
+            return ref _Handle.AsRef<bool>(_UseAvgParticlePosOffset!.Value);
         }
     }
-    private static nint _SetParentOffset = -1;
+    private static nint? _SetParentOffset;
 
     public ref ParticleParentSetMode_t SetParent
     {
         get
         {
-            if (_SetParentOffset == -1) _SetParentOffset = Schema.GetOffset(0xB2CEB7C22D8246B7);
-            return ref _Handle.AsRef<ParticleParentSetMode_t>(_SetParentOffset);
+            _SetParentOffset = _SetParentOffset ?? Schema.GetOffset(0xB2CEB7C22D8246B7);
+            return ref _Handle.AsRef<ParticleParentSetMode_t>(_SetParentOffset!.Value);
         }
     }
 

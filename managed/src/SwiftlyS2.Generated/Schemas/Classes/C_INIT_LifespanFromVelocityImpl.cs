@@ -16,89 +16,89 @@ internal partial class C_INIT_LifespanFromVelocityImpl : CParticleFunctionInitia
 {
     public C_INIT_LifespanFromVelocityImpl(nint handle) : base(handle) { }
 
-    private static nint _ComponentScaleOffset = -1;
+    private static nint? _ComponentScaleOffset;
 
     public ref Vector ComponentScale
     {
         get
         {
-            if (_ComponentScaleOffset == -1) _ComponentScaleOffset = Schema.GetOffset(0x50DB3853B17954E2);
-            return ref _Handle.AsRef<Vector>(_ComponentScaleOffset);
+            _ComponentScaleOffset = _ComponentScaleOffset ?? Schema.GetOffset(0x50DB3853B17954E2);
+            return ref _Handle.AsRef<Vector>(_ComponentScaleOffset!.Value);
         }
     }
-    private static nint _TraceOffsetOffset = -1;
+    private static nint? _TraceOffsetOffset;
 
     public ref float TraceOffset
     {
         get
         {
-            if (_TraceOffsetOffset == -1) _TraceOffsetOffset = Schema.GetOffset(0x50DB38537EF6C397);
-            return ref _Handle.AsRef<float>(_TraceOffsetOffset);
+            _TraceOffsetOffset = _TraceOffsetOffset ?? Schema.GetOffset(0x50DB38537EF6C397);
+            return ref _Handle.AsRef<float>(_TraceOffsetOffset!.Value);
         }
     }
-    private static nint _MaxTraceLengthOffset = -1;
+    private static nint? _MaxTraceLengthOffset;
 
     public ref float MaxTraceLength
     {
         get
         {
-            if (_MaxTraceLengthOffset == -1) _MaxTraceLengthOffset = Schema.GetOffset(0x50DB3853543C3798);
-            return ref _Handle.AsRef<float>(_MaxTraceLengthOffset);
+            _MaxTraceLengthOffset = _MaxTraceLengthOffset ?? Schema.GetOffset(0x50DB3853543C3798);
+            return ref _Handle.AsRef<float>(_MaxTraceLengthOffset!.Value);
         }
     }
-    private static nint _TraceToleranceOffset = -1;
+    private static nint? _TraceToleranceOffset;
 
     public ref float TraceTolerance
     {
         get
         {
-            if (_TraceToleranceOffset == -1) _TraceToleranceOffset = Schema.GetOffset(0x50DB38538AA4F663);
-            return ref _Handle.AsRef<float>(_TraceToleranceOffset);
+            _TraceToleranceOffset = _TraceToleranceOffset ?? Schema.GetOffset(0x50DB38538AA4F663);
+            return ref _Handle.AsRef<float>(_TraceToleranceOffset!.Value);
         }
     }
-    private static nint _MaxPlanesOffset = -1;
+    private static nint? _MaxPlanesOffset;
 
     public ref int MaxPlanes
     {
         get
         {
-            if (_MaxPlanesOffset == -1) _MaxPlanesOffset = Schema.GetOffset(0x50DB3853ADB06362);
-            return ref _Handle.AsRef<int>(_MaxPlanesOffset);
+            _MaxPlanesOffset = _MaxPlanesOffset ?? Schema.GetOffset(0x50DB3853ADB06362);
+            return ref _Handle.AsRef<int>(_MaxPlanesOffset!.Value);
         }
     }
-    private static nint _CollisionGroupNameOffset = -1;
+    private static nint? _CollisionGroupNameOffset;
 
     public string CollisionGroupName
     {
         get
         {
-            if (_CollisionGroupNameOffset == -1) _CollisionGroupNameOffset = Schema.GetOffset(0x50DB3853D58A3195);
-            return Schema.GetString(_Handle + _CollisionGroupNameOffset);
+            _CollisionGroupNameOffset = _CollisionGroupNameOffset ?? Schema.GetOffset(0x50DB3853D58A3195);
+            return Schema.GetString(_Handle + _CollisionGroupNameOffset!.Value);
         }
         set
         {
-            if (_CollisionGroupNameOffset == -1) _CollisionGroupNameOffset = Schema.GetOffset(0x50DB3853D58A3195);
-            Schema.SetFixedString(_Handle, _CollisionGroupNameOffset, value, 128);
+            _CollisionGroupNameOffset = _CollisionGroupNameOffset ?? Schema.GetOffset(0x50DB3853D58A3195);
+            Schema.SetFixedString(_Handle, _CollisionGroupNameOffset!.Value, value, 128);
         }
     }
-    private static nint _TraceSetOffset = -1;
+    private static nint? _TraceSetOffset;
 
     public ref ParticleTraceSet_t TraceSet
     {
         get
         {
-            if (_TraceSetOffset == -1) _TraceSetOffset = Schema.GetOffset(0x50DB3853BD26C5B2);
-            return ref _Handle.AsRef<ParticleTraceSet_t>(_TraceSetOffset);
+            _TraceSetOffset = _TraceSetOffset ?? Schema.GetOffset(0x50DB3853BD26C5B2);
+            return ref _Handle.AsRef<ParticleTraceSet_t>(_TraceSetOffset!.Value);
         }
     }
-    private static nint _IncludeWaterOffset = -1;
+    private static nint? _IncludeWaterOffset;
 
     public ref bool IncludeWater
     {
         get
         {
-            if (_IncludeWaterOffset == -1) _IncludeWaterOffset = Schema.GetOffset(0x50DB3853EB8D4646);
-            return ref _Handle.AsRef<bool>(_IncludeWaterOffset);
+            _IncludeWaterOffset = _IncludeWaterOffset ?? Schema.GetOffset(0x50DB3853EB8D4646);
+            return ref _Handle.AsRef<bool>(_IncludeWaterOffset!.Value);
         }
     }
 

@@ -16,29 +16,29 @@ internal partial class CVMixVocoderProcessorDescImpl : CVMixBaseProcessorDescImp
 {
     public CVMixVocoderProcessorDescImpl(nint handle) : base(handle) { }
 
-    private static nint _DescOffset = -1;
+    private static nint? _DescOffset;
     private VMixVocoderDesc_tImpl? _DescInstance;
 
     public VMixVocoderDesc_t Desc
     {
         get
         {
-            if (_DescOffset == -1) _DescOffset = Schema.GetOffset(0x2E168DB27917BC0);
+            _DescOffset = _DescOffset ?? Schema.GetOffset(0x2E168DB27917BC0);
             var instance = _DescInstance ??= new VMixVocoderDesc_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _DescOffset);
+            instance.DangerousSetHandle(_Handle + _DescOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamBandwidthOffset = -1;
+    private static nint? _ParamBandwidthOffset;
     private CVMixParameterFloatImpl? _ParamBandwidthInstance;
 
     public CVMixParameterFloat ParamBandwidth
     {
         get
         {
-            if (_ParamBandwidthOffset == -1) _ParamBandwidthOffset = Schema.GetOffset(0x2E168DBA1994663);
+            _ParamBandwidthOffset = _ParamBandwidthOffset ?? Schema.GetOffset(0x2E168DBA1994663);
             var instance = _ParamBandwidthInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamBandwidthOffset);
+            instance.DangerousSetHandle(_Handle + _ParamBandwidthOffset!.Value);
             return instance;
         }
     }

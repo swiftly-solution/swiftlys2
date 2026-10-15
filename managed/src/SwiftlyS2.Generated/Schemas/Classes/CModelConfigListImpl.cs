@@ -16,34 +16,34 @@ internal partial class CModelConfigListImpl : SchemaClass, CModelConfigList
 {
     public CModelConfigListImpl(nint handle) : base(handle) { }
 
-    private static nint _HideMaterialGroupInToolsOffset = -1;
+    private static nint? _HideMaterialGroupInToolsOffset;
 
     public ref bool HideMaterialGroupInTools
     {
         get
         {
-            if (_HideMaterialGroupInToolsOffset == -1) _HideMaterialGroupInToolsOffset = Schema.GetOffset(0x5291D8D9214E9E53);
-            return ref _Handle.AsRef<bool>(_HideMaterialGroupInToolsOffset);
+            _HideMaterialGroupInToolsOffset = _HideMaterialGroupInToolsOffset ?? Schema.GetOffset(0x5291D8D9214E9E53);
+            return ref _Handle.AsRef<bool>(_HideMaterialGroupInToolsOffset!.Value);
         }
     }
-    private static nint _HideRenderColorInToolsOffset = -1;
+    private static nint? _HideRenderColorInToolsOffset;
 
     public ref bool HideRenderColorInTools
     {
         get
         {
-            if (_HideRenderColorInToolsOffset == -1) _HideRenderColorInToolsOffset = Schema.GetOffset(0x5291D8D9C25B2716);
-            return ref _Handle.AsRef<bool>(_HideRenderColorInToolsOffset);
+            _HideRenderColorInToolsOffset = _HideRenderColorInToolsOffset ?? Schema.GetOffset(0x5291D8D9C25B2716);
+            return ref _Handle.AsRef<bool>(_HideRenderColorInToolsOffset!.Value);
         }
     }
-    private static nint _ConfigsOffset = -1;
+    private static nint? _ConfigsOffset;
 
     public ref CUtlVector<PointerTo<CModelConfig>> Configs
     {
         get
         {
-            if (_ConfigsOffset == -1) _ConfigsOffset = Schema.GetOffset(0x5291D8D906111EDC);
-            return ref _Handle.AsRef<CUtlVector<PointerTo<CModelConfig>>>(_ConfigsOffset);
+            _ConfigsOffset = _ConfigsOffset ?? Schema.GetOffset(0x5291D8D906111EDC);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<CModelConfig>>>(_ConfigsOffset!.Value);
         }
     }
 

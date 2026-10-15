@@ -16,37 +16,37 @@ internal partial class CNmBoneWeightListImpl : SchemaClass, CNmBoneWeightList
 {
     public CNmBoneWeightListImpl(nint handle) : base(handle) { }
 
-    private static nint _SkeletonNameOffset = -1;
+    private static nint? _SkeletonNameOffset;
     private SchemaUntypedField? _SkeletonNameInstance;
 
     public SchemaUntypedField SkeletonName
     {
         get
         {
-            if (_SkeletonNameOffset == -1) _SkeletonNameOffset = Schema.GetOffset(0xA16307391879D68D);
+            _SkeletonNameOffset = _SkeletonNameOffset ?? Schema.GetOffset(0xA16307391879D68D);
             var instance = _SkeletonNameInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _SkeletonNameOffset);
+            instance.DangerousSetHandle(_Handle + _SkeletonNameOffset!.Value);
             return instance;
         }
     }
-    private static nint _BoneIDsOffset = -1;
+    private static nint? _BoneIDsOffset;
 
     public ref CUtlVector<CGlobalSymbol> BoneIDs
     {
         get
         {
-            if (_BoneIDsOffset == -1) _BoneIDsOffset = Schema.GetOffset(0xA16307390909C443);
-            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_BoneIDsOffset);
+            _BoneIDsOffset = _BoneIDsOffset ?? Schema.GetOffset(0xA16307390909C443);
+            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_BoneIDsOffset!.Value);
         }
     }
-    private static nint _WeightsOffset = -1;
+    private static nint? _WeightsOffset;
 
     public ref CUtlVector<float> Weights
     {
         get
         {
-            if (_WeightsOffset == -1) _WeightsOffset = Schema.GetOffset(0xA163073977B2F91E);
-            return ref _Handle.AsRef<CUtlVector<float>>(_WeightsOffset);
+            _WeightsOffset = _WeightsOffset ?? Schema.GetOffset(0xA163073977B2F91E);
+            return ref _Handle.AsRef<CUtlVector<float>>(_WeightsOffset!.Value);
         }
     }
 

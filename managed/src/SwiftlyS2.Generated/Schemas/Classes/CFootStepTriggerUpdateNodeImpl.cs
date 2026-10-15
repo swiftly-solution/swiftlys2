@@ -16,24 +16,24 @@ internal partial class CFootStepTriggerUpdateNodeImpl : CUnaryUpdateNodeImpl, CF
 {
     public CFootStepTriggerUpdateNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _TriggersOffset = -1;
+    private static nint? _TriggersOffset;
 
     public ref CUtlVector<FootStepTrigger> Triggers
     {
         get
         {
-            if (_TriggersOffset == -1) _TriggersOffset = Schema.GetOffset(0x799A3B55684C6AF0);
-            return ref _Handle.AsRef<CUtlVector<FootStepTrigger>>(_TriggersOffset);
+            _TriggersOffset = _TriggersOffset ?? Schema.GetOffset(0x799A3B55684C6AF0);
+            return ref _Handle.AsRef<CUtlVector<FootStepTrigger>>(_TriggersOffset!.Value);
         }
     }
-    private static nint _ToleranceOffset = -1;
+    private static nint? _ToleranceOffset;
 
     public ref float Tolerance
     {
         get
         {
-            if (_ToleranceOffset == -1) _ToleranceOffset = Schema.GetOffset(0x799A3B558C29728E);
-            return ref _Handle.AsRef<float>(_ToleranceOffset);
+            _ToleranceOffset = _ToleranceOffset ?? Schema.GetOffset(0x799A3B558C29728E);
+            return ref _Handle.AsRef<float>(_ToleranceOffset!.Value);
         }
     }
 

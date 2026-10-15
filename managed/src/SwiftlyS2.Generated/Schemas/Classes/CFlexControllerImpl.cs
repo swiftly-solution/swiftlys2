@@ -16,54 +16,54 @@ internal partial class CFlexControllerImpl : SchemaClass, CFlexController
 {
     public CFlexControllerImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x5265FDF16750BACB);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x5265FDF16750BACB);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x5265FDF16750BACB);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x5265FDF16750BACB);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _TypeOffset = -1;
+    private static nint? _TypeOffset;
 
     public string Type
     {
         get
         {
-            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0x5265FDF1B580AB00);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_TypeOffset));
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x5265FDF1B580AB00);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_TypeOffset!.Value));
         }
         set
         {
-            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0x5265FDF1B580AB00);
-            Schema.SetCUtlString(_Handle, _TypeOffset, value);
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x5265FDF1B580AB00);
+            Schema.SetCUtlString(_Handle, _TypeOffset!.Value, value);
         }
     }
-    private static nint _MinOffset = -1;
+    private static nint? _MinOffset;
 
     public ref float Min
     {
         get
         {
-            if (_MinOffset == -1) _MinOffset = Schema.GetOffset(0x5265FDF1C98F4557);
-            return ref _Handle.AsRef<float>(_MinOffset);
+            _MinOffset = _MinOffset ?? Schema.GetOffset(0x5265FDF1C98F4557);
+            return ref _Handle.AsRef<float>(_MinOffset!.Value);
         }
     }
-    private static nint _MaxOffset = -1;
+    private static nint? _MaxOffset;
 
     public ref float Max
     {
         get
         {
-            if (_MaxOffset == -1) _MaxOffset = Schema.GetOffset(0x5265FDF1D7A2E319);
-            return ref _Handle.AsRef<float>(_MaxOffset);
+            _MaxOffset = _MaxOffset ?? Schema.GetOffset(0x5265FDF1D7A2E319);
+            return ref _Handle.AsRef<float>(_MaxOffset!.Value);
         }
     }
 

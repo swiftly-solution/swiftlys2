@@ -16,194 +16,194 @@ internal partial class VPhysXAggregateData_tImpl : SchemaClass, VPhysXAggregateD
 {
     public VPhysXAggregateData_tImpl(nint handle) : base(handle) { }
 
-    private static nint _FlagsOffset = -1;
+    private static nint? _FlagsOffset;
 
     public ref ushort Flags
     {
         get
         {
-            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0xB689D5A1CE6E9C28);
-            return ref _Handle.AsRef<ushort>(_FlagsOffset);
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0xB689D5A1CE6E9C28);
+            return ref _Handle.AsRef<ushort>(_FlagsOffset!.Value);
         }
     }
-    private static nint _RefCounterOffset = -1;
+    private static nint? _RefCounterOffset;
 
     public ref ushort RefCounter
     {
         get
         {
-            if (_RefCounterOffset == -1) _RefCounterOffset = Schema.GetOffset(0xB689D5A17E36A3B6);
-            return ref _Handle.AsRef<ushort>(_RefCounterOffset);
+            _RefCounterOffset = _RefCounterOffset ?? Schema.GetOffset(0xB689D5A17E36A3B6);
+            return ref _Handle.AsRef<ushort>(_RefCounterOffset!.Value);
         }
     }
-    private static nint _CompoundsPackedOffset = -1;
+    private static nint? _CompoundsPackedOffset;
 
     public ref bool CompoundsPacked
     {
         get
         {
-            if (_CompoundsPackedOffset == -1) _CompoundsPackedOffset = Schema.GetOffset(0xB689D5A1CD6B0729);
-            return ref _Handle.AsRef<bool>(_CompoundsPackedOffset);
+            _CompoundsPackedOffset = _CompoundsPackedOffset ?? Schema.GetOffset(0xB689D5A1CD6B0729);
+            return ref _Handle.AsRef<bool>(_CompoundsPackedOffset!.Value);
         }
     }
-    private static nint _BonesHashOffset = -1;
+    private static nint? _BonesHashOffset;
 
     public ref CUtlVector<uint> BonesHash
     {
         get
         {
-            if (_BonesHashOffset == -1) _BonesHashOffset = Schema.GetOffset(0xB689D5A191F01C74);
-            return ref _Handle.AsRef<CUtlVector<uint>>(_BonesHashOffset);
+            _BonesHashOffset = _BonesHashOffset ?? Schema.GetOffset(0xB689D5A191F01C74);
+            return ref _Handle.AsRef<CUtlVector<uint>>(_BonesHashOffset!.Value);
         }
     }
-    private static nint _BoneNamesOffset = -1;
+    private static nint? _BoneNamesOffset;
 
     public ref CUtlVector<CUtlString> BoneNames
     {
         get
         {
-            if (_BoneNamesOffset == -1) _BoneNamesOffset = Schema.GetOffset(0xB689D5A13CC0D1ED);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_BoneNamesOffset);
+            _BoneNamesOffset = _BoneNamesOffset ?? Schema.GetOffset(0xB689D5A13CC0D1ED);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_BoneNamesOffset!.Value);
         }
     }
-    private static nint _IndexNamesOffset = -1;
+    private static nint? _IndexNamesOffset;
 
     public ref CUtlVector<ushort> IndexNames
     {
         get
         {
-            if (_IndexNamesOffset == -1) _IndexNamesOffset = Schema.GetOffset(0xB689D5A15B7383D9);
-            return ref _Handle.AsRef<CUtlVector<ushort>>(_IndexNamesOffset);
+            _IndexNamesOffset = _IndexNamesOffset ?? Schema.GetOffset(0xB689D5A15B7383D9);
+            return ref _Handle.AsRef<CUtlVector<ushort>>(_IndexNamesOffset!.Value);
         }
     }
-    private static nint _IndexHashOffset = -1;
+    private static nint? _IndexHashOffset;
 
     public ref CUtlVector<ushort> IndexHash
     {
         get
         {
-            if (_IndexHashOffset == -1) _IndexHashOffset = Schema.GetOffset(0xB689D5A1FDBDCAEB);
-            return ref _Handle.AsRef<CUtlVector<ushort>>(_IndexHashOffset);
+            _IndexHashOffset = _IndexHashOffset ?? Schema.GetOffset(0xB689D5A1FDBDCAEB);
+            return ref _Handle.AsRef<CUtlVector<ushort>>(_IndexHashOffset!.Value);
         }
     }
-    private static nint _BindPoseOffset = -1;
+    private static nint? _BindPoseOffset;
 
     public ref CUtlVector<matrix3x4_t> BindPose
     {
         get
         {
-            if (_BindPoseOffset == -1) _BindPoseOffset = Schema.GetOffset(0xB689D5A1751196C3);
-            return ref _Handle.AsRef<CUtlVector<matrix3x4_t>>(_BindPoseOffset);
+            _BindPoseOffset = _BindPoseOffset ?? Schema.GetOffset(0xB689D5A1751196C3);
+            return ref _Handle.AsRef<CUtlVector<matrix3x4_t>>(_BindPoseOffset!.Value);
         }
     }
-    private static nint _PartsOffset = -1;
+    private static nint? _PartsOffset;
 
     public ref CUtlVector<VPhysXBodyPart_t> Parts
     {
         get
         {
-            if (_PartsOffset == -1) _PartsOffset = Schema.GetOffset(0xB689D5A1C7044545);
-            return ref _Handle.AsRef<CUtlVector<VPhysXBodyPart_t>>(_PartsOffset);
+            _PartsOffset = _PartsOffset ?? Schema.GetOffset(0xB689D5A1C7044545);
+            return ref _Handle.AsRef<CUtlVector<VPhysXBodyPart_t>>(_PartsOffset!.Value);
         }
     }
-    private static nint _ShapeMarkupsOffset = -1;
+    private static nint? _ShapeMarkupsOffset;
 
     public ref CUtlVector<PhysShapeMarkup_t> ShapeMarkups
     {
         get
         {
-            if (_ShapeMarkupsOffset == -1) _ShapeMarkupsOffset = Schema.GetOffset(0xB689D5A109755123);
-            return ref _Handle.AsRef<CUtlVector<PhysShapeMarkup_t>>(_ShapeMarkupsOffset);
+            _ShapeMarkupsOffset = _ShapeMarkupsOffset ?? Schema.GetOffset(0xB689D5A109755123);
+            return ref _Handle.AsRef<CUtlVector<PhysShapeMarkup_t>>(_ShapeMarkupsOffset!.Value);
         }
     }
-    private static nint _Constraints2Offset = -1;
+    private static nint? _Constraints2Offset;
 
     public ref CUtlVector<VPhysXConstraint2_t> Constraints2
     {
         get
         {
-            if (_Constraints2Offset == -1) _Constraints2Offset = Schema.GetOffset(0xB689D5A10539BEDB);
-            return ref _Handle.AsRef<CUtlVector<VPhysXConstraint2_t>>(_Constraints2Offset);
+            _Constraints2Offset = _Constraints2Offset ?? Schema.GetOffset(0xB689D5A10539BEDB);
+            return ref _Handle.AsRef<CUtlVector<VPhysXConstraint2_t>>(_Constraints2Offset!.Value);
         }
     }
-    private static nint _JointsOffset = -1;
+    private static nint? _JointsOffset;
 
     public ref CUtlVector<VPhysXJoint_t> Joints
     {
         get
         {
-            if (_JointsOffset == -1) _JointsOffset = Schema.GetOffset(0xB689D5A15E6E8FEC);
-            return ref _Handle.AsRef<CUtlVector<VPhysXJoint_t>>(_JointsOffset);
+            _JointsOffset = _JointsOffset ?? Schema.GetOffset(0xB689D5A15E6E8FEC);
+            return ref _Handle.AsRef<CUtlVector<VPhysXJoint_t>>(_JointsOffset!.Value);
         }
     }
-    private static nint _FeModelOffset = -1;
+    private static nint? _FeModelOffset;
     private PhysFeModelDesc_tImpl? _FeModelInstance;
 
     public PhysFeModelDesc_t? FeModel
     {
         get
         {
-            if (_FeModelOffset == -1) _FeModelOffset = Schema.GetOffset(0xB689D5A1299418A7);
-            var ptr = _Handle.Read<nint>(_FeModelOffset);
+            _FeModelOffset = _FeModelOffset ?? Schema.GetOffset(0xB689D5A1299418A7);
+            var ptr = _Handle.Read<nint>(_FeModelOffset!.Value);
             if (!ptr.IsValidPtr()) return null;
             var instance = _FeModelInstance ??= new PhysFeModelDesc_tImpl(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint _BoneParentsOffset = -1;
+    private static nint? _BoneParentsOffset;
 
     public ref CUtlVector<ushort> BoneParents
     {
         get
         {
-            if (_BoneParentsOffset == -1) _BoneParentsOffset = Schema.GetOffset(0xB689D5A171828F04);
-            return ref _Handle.AsRef<CUtlVector<ushort>>(_BoneParentsOffset);
+            _BoneParentsOffset = _BoneParentsOffset ?? Schema.GetOffset(0xB689D5A171828F04);
+            return ref _Handle.AsRef<CUtlVector<ushort>>(_BoneParentsOffset!.Value);
         }
     }
-    private static nint _SurfacePropertyHashesOffset = -1;
+    private static nint? _SurfacePropertyHashesOffset;
 
     public ref CUtlVector<uint> SurfacePropertyHashes
     {
         get
         {
-            if (_SurfacePropertyHashesOffset == -1) _SurfacePropertyHashesOffset = Schema.GetOffset(0xB689D5A16C35E0E5);
-            return ref _Handle.AsRef<CUtlVector<uint>>(_SurfacePropertyHashesOffset);
+            _SurfacePropertyHashesOffset = _SurfacePropertyHashesOffset ?? Schema.GetOffset(0xB689D5A16C35E0E5);
+            return ref _Handle.AsRef<CUtlVector<uint>>(_SurfacePropertyHashesOffset!.Value);
         }
     }
-    private static nint _CollisionAttributesOffset = -1;
+    private static nint? _CollisionAttributesOffset;
 
     public ref CUtlVector<VPhysXCollisionAttributes_t> CollisionAttributes
     {
         get
         {
-            if (_CollisionAttributesOffset == -1) _CollisionAttributesOffset = Schema.GetOffset(0xB689D5A1FA66F6C2);
-            return ref _Handle.AsRef<CUtlVector<VPhysXCollisionAttributes_t>>(_CollisionAttributesOffset);
+            _CollisionAttributesOffset = _CollisionAttributesOffset ?? Schema.GetOffset(0xB689D5A1FA66F6C2);
+            return ref _Handle.AsRef<CUtlVector<VPhysXCollisionAttributes_t>>(_CollisionAttributesOffset!.Value);
         }
     }
-    private static nint _DebugPartNamesOffset = -1;
+    private static nint? _DebugPartNamesOffset;
 
     public ref CUtlVector<CUtlString> DebugPartNames
     {
         get
         {
-            if (_DebugPartNamesOffset == -1) _DebugPartNamesOffset = Schema.GetOffset(0xB689D5A174B4FFC7);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_DebugPartNamesOffset);
+            _DebugPartNamesOffset = _DebugPartNamesOffset ?? Schema.GetOffset(0xB689D5A174B4FFC7);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_DebugPartNamesOffset!.Value);
         }
     }
-    private static nint _EmbeddedKeyvaluesOffset = -1;
+    private static nint? _EmbeddedKeyvaluesOffset;
 
     public string EmbeddedKeyvalues
     {
         get
         {
-            if (_EmbeddedKeyvaluesOffset == -1) _EmbeddedKeyvaluesOffset = Schema.GetOffset(0xB689D5A1C004AF5C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_EmbeddedKeyvaluesOffset));
+            _EmbeddedKeyvaluesOffset = _EmbeddedKeyvaluesOffset ?? Schema.GetOffset(0xB689D5A1C004AF5C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_EmbeddedKeyvaluesOffset!.Value));
         }
         set
         {
-            if (_EmbeddedKeyvaluesOffset == -1) _EmbeddedKeyvaluesOffset = Schema.GetOffset(0xB689D5A1C004AF5C);
-            Schema.SetCUtlString(_Handle, _EmbeddedKeyvaluesOffset, value);
+            _EmbeddedKeyvaluesOffset = _EmbeddedKeyvaluesOffset ?? Schema.GetOffset(0xB689D5A1C004AF5C);
+            Schema.SetCUtlString(_Handle, _EmbeddedKeyvaluesOffset!.Value, value);
         }
     }
 

@@ -16,24 +16,24 @@ internal partial class CModelConfigElement_SetBodygroupImpl : CModelConfigElemen
 {
     public CModelConfigElement_SetBodygroupImpl(nint handle) : base(handle) { }
 
-    private static nint _GroupNameOffset = -1;
+    private static nint? _GroupNameOffset;
 
     public ref CGlobalSymbol GroupName
     {
         get
         {
-            if (_GroupNameOffset == -1) _GroupNameOffset = Schema.GetOffset(0x390A561FE0A55E67);
-            return ref _Handle.AsRef<CGlobalSymbol>(_GroupNameOffset);
+            _GroupNameOffset = _GroupNameOffset ?? Schema.GetOffset(0x390A561FE0A55E67);
+            return ref _Handle.AsRef<CGlobalSymbol>(_GroupNameOffset!.Value);
         }
     }
-    private static nint _ChoiceOffset = -1;
+    private static nint? _ChoiceOffset;
 
     public ref int Choice
     {
         get
         {
-            if (_ChoiceOffset == -1) _ChoiceOffset = Schema.GetOffset(0x390A561F7CC11192);
-            return ref _Handle.AsRef<int>(_ChoiceOffset);
+            _ChoiceOffset = _ChoiceOffset ?? Schema.GetOffset(0x390A561F7CC11192);
+            return ref _Handle.AsRef<int>(_ChoiceOffset!.Value);
         }
     }
 

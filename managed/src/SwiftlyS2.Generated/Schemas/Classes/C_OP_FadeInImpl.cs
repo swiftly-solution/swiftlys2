@@ -16,44 +16,44 @@ internal partial class C_OP_FadeInImpl : CParticleFunctionOperatorImpl, C_OP_Fad
 {
     public C_OP_FadeInImpl(nint handle) : base(handle) { }
 
-    private static nint _FadeInTimeMinOffset = -1;
+    private static nint? _FadeInTimeMinOffset;
 
     public ref float FadeInTimeMin
     {
         get
         {
-            if (_FadeInTimeMinOffset == -1) _FadeInTimeMinOffset = Schema.GetOffset(0xA8B59B1091A2EFE5);
-            return ref _Handle.AsRef<float>(_FadeInTimeMinOffset);
+            _FadeInTimeMinOffset = _FadeInTimeMinOffset ?? Schema.GetOffset(0xA8B59B1091A2EFE5);
+            return ref _Handle.AsRef<float>(_FadeInTimeMinOffset!.Value);
         }
     }
-    private static nint _FadeInTimeMaxOffset = -1;
+    private static nint? _FadeInTimeMaxOffset;
 
     public ref float FadeInTimeMax
     {
         get
         {
-            if (_FadeInTimeMaxOffset == -1) _FadeInTimeMaxOffset = Schema.GetOffset(0xA8B59B109BB6875B);
-            return ref _Handle.AsRef<float>(_FadeInTimeMaxOffset);
+            _FadeInTimeMaxOffset = _FadeInTimeMaxOffset ?? Schema.GetOffset(0xA8B59B109BB6875B);
+            return ref _Handle.AsRef<float>(_FadeInTimeMaxOffset!.Value);
         }
     }
-    private static nint _FadeInTimeExpOffset = -1;
+    private static nint? _FadeInTimeExpOffset;
 
     public ref float FadeInTimeExp
     {
         get
         {
-            if (_FadeInTimeExpOffset == -1) _FadeInTimeExpOffset = Schema.GetOffset(0xA8B59B1046BA449A);
-            return ref _Handle.AsRef<float>(_FadeInTimeExpOffset);
+            _FadeInTimeExpOffset = _FadeInTimeExpOffset ?? Schema.GetOffset(0xA8B59B1046BA449A);
+            return ref _Handle.AsRef<float>(_FadeInTimeExpOffset!.Value);
         }
     }
-    private static nint _ProportionalOffset = -1;
+    private static nint? _ProportionalOffset;
 
     public ref bool Proportional
     {
         get
         {
-            if (_ProportionalOffset == -1) _ProportionalOffset = Schema.GetOffset(0xA8B59B10891F328A);
-            return ref _Handle.AsRef<bool>(_ProportionalOffset);
+            _ProportionalOffset = _ProportionalOffset ?? Schema.GetOffset(0xA8B59B10891F328A);
+            return ref _Handle.AsRef<bool>(_ProportionalOffset!.Value);
         }
     }
 

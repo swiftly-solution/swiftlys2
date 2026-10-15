@@ -16,84 +16,84 @@ internal partial class CLogicCollisionPairImpl : CLogicalEntityImpl, CLogicColli
 {
     public CLogicCollisionPairImpl(nint handle) : base(handle) { }
 
-    private static nint _NameAttach1Offset = -1;
+    private static nint? _NameAttach1Offset;
 
     public string NameAttach1
     {
         get
         {
-            if (_NameAttach1Offset == -1) _NameAttach1Offset = Schema.GetOffset(0x9E0FC6AC6776530A);
-            return Schema.GetString(_Handle.Read<nint>(_NameAttach1Offset));
+            _NameAttach1Offset = _NameAttach1Offset ?? Schema.GetOffset(0x9E0FC6AC6776530A);
+            return Schema.GetString(_Handle.Read<nint>(_NameAttach1Offset!.Value));
         }
         set
         {
-            if (_NameAttach1Offset == -1) _NameAttach1Offset = Schema.GetOffset(0x9E0FC6AC6776530A);
-            Schema.SetString(_Handle, _NameAttach1Offset, value);
+            _NameAttach1Offset = _NameAttach1Offset ?? Schema.GetOffset(0x9E0FC6AC6776530A);
+            Schema.SetString(_Handle, _NameAttach1Offset!.Value, value);
         }
     }
-    private static nint _NameAttach2Offset = -1;
+    private static nint? _NameAttach2Offset;
 
     public string NameAttach2
     {
         get
         {
-            if (_NameAttach2Offset == -1) _NameAttach2Offset = Schema.GetOffset(0x9E0FC6AC66765177);
-            return Schema.GetString(_Handle.Read<nint>(_NameAttach2Offset));
+            _NameAttach2Offset = _NameAttach2Offset ?? Schema.GetOffset(0x9E0FC6AC66765177);
+            return Schema.GetString(_Handle.Read<nint>(_NameAttach2Offset!.Value));
         }
         set
         {
-            if (_NameAttach2Offset == -1) _NameAttach2Offset = Schema.GetOffset(0x9E0FC6AC66765177);
-            Schema.SetString(_Handle, _NameAttach2Offset, value);
+            _NameAttach2Offset = _NameAttach2Offset ?? Schema.GetOffset(0x9E0FC6AC66765177);
+            Schema.SetString(_Handle, _NameAttach2Offset!.Value, value);
         }
     }
-    private static nint _IncludeHierarchyOffset = -1;
+    private static nint? _IncludeHierarchyOffset;
 
     public ref bool IncludeHierarchy
     {
         get
         {
-            if (_IncludeHierarchyOffset == -1) _IncludeHierarchyOffset = Schema.GetOffset(0x9E0FC6ACC064916A);
-            return ref _Handle.AsRef<bool>(_IncludeHierarchyOffset);
+            _IncludeHierarchyOffset = _IncludeHierarchyOffset ?? Schema.GetOffset(0x9E0FC6ACC064916A);
+            return ref _Handle.AsRef<bool>(_IncludeHierarchyOffset!.Value);
         }
     }
-    private static nint _SupportMultipleEntitiesWithSameNameOffset = -1;
+    private static nint? _SupportMultipleEntitiesWithSameNameOffset;
 
     public ref bool SupportMultipleEntitiesWithSameName
     {
         get
         {
-            if (_SupportMultipleEntitiesWithSameNameOffset == -1) _SupportMultipleEntitiesWithSameNameOffset = Schema.GetOffset(0x9E0FC6ACD009870A);
-            return ref _Handle.AsRef<bool>(_SupportMultipleEntitiesWithSameNameOffset);
+            _SupportMultipleEntitiesWithSameNameOffset = _SupportMultipleEntitiesWithSameNameOffset ?? Schema.GetOffset(0x9E0FC6ACD009870A);
+            return ref _Handle.AsRef<bool>(_SupportMultipleEntitiesWithSameNameOffset!.Value);
         }
     }
-    private static nint _DisabledOffset = -1;
+    private static nint? _DisabledOffset;
 
     public ref bool Disabled
     {
         get
         {
-            if (_DisabledOffset == -1) _DisabledOffset = Schema.GetOffset(0x9E0FC6AC28A745A5);
-            return ref _Handle.AsRef<bool>(_DisabledOffset);
+            _DisabledOffset = _DisabledOffset ?? Schema.GetOffset(0x9E0FC6AC28A745A5);
+            return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
         }
     }
-    private static nint _SucceededOffset = -1;
+    private static nint? _SucceededOffset;
 
     public ref bool Succeeded
     {
         get
         {
-            if (_SucceededOffset == -1) _SucceededOffset = Schema.GetOffset(0x9E0FC6AC48FBF712);
-            return ref _Handle.AsRef<bool>(_SucceededOffset);
+            _SucceededOffset = _SucceededOffset ?? Schema.GetOffset(0x9E0FC6AC48FBF712);
+            return ref _Handle.AsRef<bool>(_SucceededOffset!.Value);
         }
     }
-    private static nint _AllowMissingOffset = -1;
+    private static nint? _AllowMissingOffset;
 
     public ref bool AllowMissing
     {
         get
         {
-            if (_AllowMissingOffset == -1) _AllowMissingOffset = Schema.GetOffset(0x9E0FC6ACC16B74A6);
-            return ref _Handle.AsRef<bool>(_AllowMissingOffset);
+            _AllowMissingOffset = _AllowMissingOffset ?? Schema.GetOffset(0x9E0FC6ACC16B74A6);
+            return ref _Handle.AsRef<bool>(_AllowMissingOffset!.Value);
         }
     }
 

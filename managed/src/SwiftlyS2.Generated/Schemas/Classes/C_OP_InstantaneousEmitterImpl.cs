@@ -16,98 +16,98 @@ internal partial class C_OP_InstantaneousEmitterImpl : CParticleFunctionEmitterI
 {
     public C_OP_InstantaneousEmitterImpl(nint handle) : base(handle) { }
 
-    private static nint _ParticlesToEmitOffset = -1;
+    private static nint? _ParticlesToEmitOffset;
     private CParticleCollectionFloatInputImpl? _ParticlesToEmitInstance;
 
     public CParticleCollectionFloatInput ParticlesToEmit
     {
         get
         {
-            if (_ParticlesToEmitOffset == -1) _ParticlesToEmitOffset = Schema.GetOffset(0x39132039B1A158C6);
+            _ParticlesToEmitOffset = _ParticlesToEmitOffset ?? Schema.GetOffset(0x39132039B1A158C6);
             var instance = _ParticlesToEmitInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParticlesToEmitOffset);
+            instance.DangerousSetHandle(_Handle + _ParticlesToEmitOffset!.Value);
             return instance;
         }
     }
-    private static nint _StartTimeOffset = -1;
+    private static nint? _StartTimeOffset;
     private CParticleCollectionFloatInputImpl? _StartTimeInstance;
 
     public CParticleCollectionFloatInput StartTime
     {
         get
         {
-            if (_StartTimeOffset == -1) _StartTimeOffset = Schema.GetOffset(0x3913203967FE9DC4);
+            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0x3913203967FE9DC4);
             var instance = _StartTimeInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _StartTimeOffset);
+            instance.DangerousSetHandle(_Handle + _StartTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _InitFromKilledParentParticlesOffset = -1;
+    private static nint? _InitFromKilledParentParticlesOffset;
 
     public ref float InitFromKilledParentParticles
     {
         get
         {
-            if (_InitFromKilledParentParticlesOffset == -1) _InitFromKilledParentParticlesOffset = Schema.GetOffset(0x39132039269B492F);
-            return ref _Handle.AsRef<float>(_InitFromKilledParentParticlesOffset);
+            _InitFromKilledParentParticlesOffset = _InitFromKilledParentParticlesOffset ?? Schema.GetOffset(0x39132039269B492F);
+            return ref _Handle.AsRef<float>(_InitFromKilledParentParticlesOffset!.Value);
         }
     }
-    private static nint _EventTypeOffset = -1;
+    private static nint? _EventTypeOffset;
 
     public ref EventTypeSelection_t EventType
     {
         get
         {
-            if (_EventTypeOffset == -1) _EventTypeOffset = Schema.GetOffset(0x39132039E1F9AA93);
-            return ref _Handle.AsRef<EventTypeSelection_t>(_EventTypeOffset);
+            _EventTypeOffset = _EventTypeOffset ?? Schema.GetOffset(0x39132039E1F9AA93);
+            return ref _Handle.AsRef<EventTypeSelection_t>(_EventTypeOffset!.Value);
         }
     }
-    private static nint _ParentParticleScaleOffset = -1;
+    private static nint? _ParentParticleScaleOffset;
     private CParticleCollectionFloatInputImpl? _ParentParticleScaleInstance;
 
     public CParticleCollectionFloatInput ParentParticleScale
     {
         get
         {
-            if (_ParentParticleScaleOffset == -1) _ParentParticleScaleOffset = Schema.GetOffset(0x3913203967144ED5);
+            _ParentParticleScaleOffset = _ParentParticleScaleOffset ?? Schema.GetOffset(0x3913203967144ED5);
             var instance = _ParentParticleScaleInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParentParticleScaleOffset);
+            instance.DangerousSetHandle(_Handle + _ParentParticleScaleOffset!.Value);
             return instance;
         }
     }
-    private static nint _MaxEmittedPerFrameOffset = -1;
+    private static nint? _MaxEmittedPerFrameOffset;
 
     public ref int MaxEmittedPerFrame
     {
         get
         {
-            if (_MaxEmittedPerFrameOffset == -1) _MaxEmittedPerFrameOffset = Schema.GetOffset(0x3913203970B62EBB);
-            return ref _Handle.AsRef<int>(_MaxEmittedPerFrameOffset);
+            _MaxEmittedPerFrameOffset = _MaxEmittedPerFrameOffset ?? Schema.GetOffset(0x3913203970B62EBB);
+            return ref _Handle.AsRef<int>(_MaxEmittedPerFrameOffset!.Value);
         }
     }
-    private static nint _SnapshotControlPointOffset = -1;
+    private static nint? _SnapshotControlPointOffset;
 
     public ref int SnapshotControlPoint
     {
         get
         {
-            if (_SnapshotControlPointOffset == -1) _SnapshotControlPointOffset = Schema.GetOffset(0x39132039192638EC);
-            return ref _Handle.AsRef<int>(_SnapshotControlPointOffset);
+            _SnapshotControlPointOffset = _SnapshotControlPointOffset ?? Schema.GetOffset(0x39132039192638EC);
+            return ref _Handle.AsRef<int>(_SnapshotControlPointOffset!.Value);
         }
     }
-    private static nint _StrSnapshotSubsetOffset = -1;
+    private static nint? _StrSnapshotSubsetOffset;
 
     public string StrSnapshotSubset
     {
         get
         {
-            if (_StrSnapshotSubsetOffset == -1) _StrSnapshotSubsetOffset = Schema.GetOffset(0x39132039BD8A8E5E);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrSnapshotSubsetOffset));
+            _StrSnapshotSubsetOffset = _StrSnapshotSubsetOffset ?? Schema.GetOffset(0x39132039BD8A8E5E);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrSnapshotSubsetOffset!.Value));
         }
         set
         {
-            if (_StrSnapshotSubsetOffset == -1) _StrSnapshotSubsetOffset = Schema.GetOffset(0x39132039BD8A8E5E);
-            Schema.SetCUtlString(_Handle, _StrSnapshotSubsetOffset, value);
+            _StrSnapshotSubsetOffset = _StrSnapshotSubsetOffset ?? Schema.GetOffset(0x39132039BD8A8E5E);
+            Schema.SetCUtlString(_Handle, _StrSnapshotSubsetOffset!.Value, value);
         }
     }
 

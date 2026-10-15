@@ -16,34 +16,34 @@ internal partial class CAnimInputDampingImpl : SchemaClass, CAnimInputDamping
 {
     public CAnimInputDampingImpl(nint handle) : base(handle) { }
 
-    private static nint _SpeedFunctionOffset = -1;
+    private static nint? _SpeedFunctionOffset;
 
     public ref DampingSpeedFunction SpeedFunction
     {
         get
         {
-            if (_SpeedFunctionOffset == -1) _SpeedFunctionOffset = Schema.GetOffset(0xFAECFC318682F508);
-            return ref _Handle.AsRef<DampingSpeedFunction>(_SpeedFunctionOffset);
+            _SpeedFunctionOffset = _SpeedFunctionOffset ?? Schema.GetOffset(0xFAECFC318682F508);
+            return ref _Handle.AsRef<DampingSpeedFunction>(_SpeedFunctionOffset!.Value);
         }
     }
-    private static nint _SpeedScaleOffset = -1;
+    private static nint? _SpeedScaleOffset;
 
     public ref float SpeedScale
     {
         get
         {
-            if (_SpeedScaleOffset == -1) _SpeedScaleOffset = Schema.GetOffset(0xFAECFC31E70BB6FE);
-            return ref _Handle.AsRef<float>(_SpeedScaleOffset);
+            _SpeedScaleOffset = _SpeedScaleOffset ?? Schema.GetOffset(0xFAECFC31E70BB6FE);
+            return ref _Handle.AsRef<float>(_SpeedScaleOffset!.Value);
         }
     }
-    private static nint _FallingSpeedScaleOffset = -1;
+    private static nint? _FallingSpeedScaleOffset;
 
     public ref float FallingSpeedScale
     {
         get
         {
-            if (_FallingSpeedScaleOffset == -1) _FallingSpeedScaleOffset = Schema.GetOffset(0xFAECFC31128A6857);
-            return ref _Handle.AsRef<float>(_FallingSpeedScaleOffset);
+            _FallingSpeedScaleOffset = _FallingSpeedScaleOffset ?? Schema.GetOffset(0xFAECFC31128A6857);
+            return ref _Handle.AsRef<float>(_FallingSpeedScaleOffset!.Value);
         }
     }
 

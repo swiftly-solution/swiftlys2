@@ -16,104 +16,104 @@ internal partial class CFuncMonitorImpl : CFuncBrushImpl, CFuncMonitor
 {
     public CFuncMonitorImpl(nint handle) : base(handle) { }
 
-    private static nint _TargetCameraOffset = -1;
+    private static nint? _TargetCameraOffset;
 
     public string TargetCamera
     {
         get
         {
-            if (_TargetCameraOffset == -1) _TargetCameraOffset = Schema.GetOffset(0x17F9564ADE5A6027);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_TargetCameraOffset));
+            _TargetCameraOffset = _TargetCameraOffset ?? Schema.GetOffset(0x17F9564ADE5A6027);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_TargetCameraOffset!.Value));
         }
         set
         {
-            if (_TargetCameraOffset == -1) _TargetCameraOffset = Schema.GetOffset(0x17F9564ADE5A6027);
-            Schema.SetCUtlString(_Handle, _TargetCameraOffset, value);
+            _TargetCameraOffset = _TargetCameraOffset ?? Schema.GetOffset(0x17F9564ADE5A6027);
+            Schema.SetCUtlString(_Handle, _TargetCameraOffset!.Value, value);
         }
     }
-    private static nint _ResolutionEnumOffset = -1;
+    private static nint? _ResolutionEnumOffset;
 
     public ref int ResolutionEnum
     {
         get
         {
-            if (_ResolutionEnumOffset == -1) _ResolutionEnumOffset = Schema.GetOffset(0x17F9564A7A397BAA);
-            return ref _Handle.AsRef<int>(_ResolutionEnumOffset);
+            _ResolutionEnumOffset = _ResolutionEnumOffset ?? Schema.GetOffset(0x17F9564A7A397BAA);
+            return ref _Handle.AsRef<int>(_ResolutionEnumOffset!.Value);
         }
     }
-    private static nint _RenderShadowsOffset = -1;
+    private static nint? _RenderShadowsOffset;
 
     public ref bool RenderShadows
     {
         get
         {
-            if (_RenderShadowsOffset == -1) _RenderShadowsOffset = Schema.GetOffset(0x17F9564AB664410E);
-            return ref _Handle.AsRef<bool>(_RenderShadowsOffset);
+            _RenderShadowsOffset = _RenderShadowsOffset ?? Schema.GetOffset(0x17F9564AB664410E);
+            return ref _Handle.AsRef<bool>(_RenderShadowsOffset!.Value);
         }
     }
-    private static nint _UseUniqueColorTargetOffset = -1;
+    private static nint? _UseUniqueColorTargetOffset;
 
     public ref bool UseUniqueColorTarget
     {
         get
         {
-            if (_UseUniqueColorTargetOffset == -1) _UseUniqueColorTargetOffset = Schema.GetOffset(0x17F9564A53B28E5B);
-            return ref _Handle.AsRef<bool>(_UseUniqueColorTargetOffset);
+            _UseUniqueColorTargetOffset = _UseUniqueColorTargetOffset ?? Schema.GetOffset(0x17F9564A53B28E5B);
+            return ref _Handle.AsRef<bool>(_UseUniqueColorTargetOffset!.Value);
         }
     }
-    private static nint _BrushModelNameOffset = -1;
+    private static nint? _BrushModelNameOffset;
 
     public string BrushModelName
     {
         get
         {
-            if (_BrushModelNameOffset == -1) _BrushModelNameOffset = Schema.GetOffset(0x17F9564A85323213);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_BrushModelNameOffset));
+            _BrushModelNameOffset = _BrushModelNameOffset ?? Schema.GetOffset(0x17F9564A85323213);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_BrushModelNameOffset!.Value));
         }
         set
         {
-            if (_BrushModelNameOffset == -1) _BrushModelNameOffset = Schema.GetOffset(0x17F9564A85323213);
-            Schema.SetCUtlString(_Handle, _BrushModelNameOffset, value);
+            _BrushModelNameOffset = _BrushModelNameOffset ?? Schema.GetOffset(0x17F9564A85323213);
+            Schema.SetCUtlString(_Handle, _BrushModelNameOffset!.Value, value);
         }
     }
-    private static nint _TargetCamera1Offset = -1;
+    private static nint? _TargetCamera1Offset;
 
     public ref CHandle<CBaseEntity> TargetCamera1
     {
         get
         {
-            if (_TargetCamera1Offset == -1) _TargetCamera1Offset = Schema.GetOffset(0x17F9564ACC7D5969);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetCamera1Offset);
+            _TargetCamera1Offset = _TargetCamera1Offset ?? Schema.GetOffset(0x17F9564ACC7D5969);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetCamera1Offset!.Value);
         }
     }
-    private static nint _EnabledOffset = -1;
+    private static nint? _EnabledOffset;
 
     public ref bool Enabled
     {
         get
         {
-            if (_EnabledOffset == -1) _EnabledOffset = Schema.GetOffset(0x17F9564A6154EB7E);
-            return ref _Handle.AsRef<bool>(_EnabledOffset);
+            _EnabledOffset = _EnabledOffset ?? Schema.GetOffset(0x17F9564A6154EB7E);
+            return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
         }
     }
-    private static nint _Draw3DSkyboxOffset = -1;
+    private static nint? _Draw3DSkyboxOffset;
 
     public ref bool Draw3DSkybox
     {
         get
         {
-            if (_Draw3DSkyboxOffset == -1) _Draw3DSkyboxOffset = Schema.GetOffset(0x17F9564AA37E21FE);
-            return ref _Handle.AsRef<bool>(_Draw3DSkyboxOffset);
+            _Draw3DSkyboxOffset = _Draw3DSkyboxOffset ?? Schema.GetOffset(0x17F9564AA37E21FE);
+            return ref _Handle.AsRef<bool>(_Draw3DSkyboxOffset!.Value);
         }
     }
-    private static nint _StartEnabledOffset = -1;
+    private static nint? _StartEnabledOffset;
 
     public ref bool StartEnabled
     {
         get
         {
-            if (_StartEnabledOffset == -1) _StartEnabledOffset = Schema.GetOffset(0x17F9564A500D5C24);
-            return ref _Handle.AsRef<bool>(_StartEnabledOffset);
+            _StartEnabledOffset = _StartEnabledOffset ?? Schema.GetOffset(0x17F9564A500D5C24);
+            return ref _Handle.AsRef<bool>(_StartEnabledOffset!.Value);
         }
     }
 

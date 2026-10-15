@@ -16,37 +16,37 @@ internal partial class CNmParameterizedBlendNode__CDefinitionImpl : CNmPoseNode_
 {
     public CNmParameterizedBlendNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint _SourceNodeIndicesOffset = -1;
+    private static nint? _SourceNodeIndicesOffset;
     private SchemaUntypedField? _SourceNodeIndicesInstance;
 
     public SchemaUntypedField SourceNodeIndices
     {
         get
         {
-            if (_SourceNodeIndicesOffset == -1) _SourceNodeIndicesOffset = Schema.GetOffset(0x83A56F31E90F1FE1);
+            _SourceNodeIndicesOffset = _SourceNodeIndicesOffset ?? Schema.GetOffset(0x83A56F31E90F1FE1);
             var instance = _SourceNodeIndicesInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _SourceNodeIndicesOffset);
+            instance.DangerousSetHandle(_Handle + _SourceNodeIndicesOffset!.Value);
             return instance;
         }
     }
-    private static nint _InputParameterValueNodeIdxOffset = -1;
+    private static nint? _InputParameterValueNodeIdxOffset;
 
     public ref short InputParameterValueNodeIdx
     {
         get
         {
-            if (_InputParameterValueNodeIdxOffset == -1) _InputParameterValueNodeIdxOffset = Schema.GetOffset(0x83A56F31AEA94516);
-            return ref _Handle.AsRef<short>(_InputParameterValueNodeIdxOffset);
+            _InputParameterValueNodeIdxOffset = _InputParameterValueNodeIdxOffset ?? Schema.GetOffset(0x83A56F31AEA94516);
+            return ref _Handle.AsRef<short>(_InputParameterValueNodeIdxOffset!.Value);
         }
     }
-    private static nint _AllowLoopingOffset = -1;
+    private static nint? _AllowLoopingOffset;
 
     public ref bool AllowLooping
     {
         get
         {
-            if (_AllowLoopingOffset == -1) _AllowLoopingOffset = Schema.GetOffset(0x83A56F31FEB26D98);
-            return ref _Handle.AsRef<bool>(_AllowLoopingOffset);
+            _AllowLoopingOffset = _AllowLoopingOffset ?? Schema.GetOffset(0x83A56F31FEB26D98);
+            return ref _Handle.AsRef<bool>(_AllowLoopingOffset!.Value);
         }
     }
 

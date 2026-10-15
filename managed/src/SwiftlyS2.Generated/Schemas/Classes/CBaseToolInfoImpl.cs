@@ -16,64 +16,64 @@ internal partial class CBaseToolInfoImpl : SchemaClass, CBaseToolInfo
 {
     public CBaseToolInfoImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xE239E351CAE8A266);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xE239E351CAE8A266);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xE239E351CAE8A266);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xE239E351CAE8A266);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _OverrideToolShortcutNameOffset = -1;
+    private static nint? _OverrideToolShortcutNameOffset;
 
     public string OverrideToolShortcutName
     {
         get
         {
-            if (_OverrideToolShortcutNameOffset == -1) _OverrideToolShortcutNameOffset = Schema.GetOffset(0xE239E3519E56599E);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_OverrideToolShortcutNameOffset));
+            _OverrideToolShortcutNameOffset = _OverrideToolShortcutNameOffset ?? Schema.GetOffset(0xE239E3519E56599E);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_OverrideToolShortcutNameOffset!.Value));
         }
         set
         {
-            if (_OverrideToolShortcutNameOffset == -1) _OverrideToolShortcutNameOffset = Schema.GetOffset(0xE239E3519E56599E);
-            Schema.SetCUtlString(_Handle, _OverrideToolShortcutNameOffset, value);
+            _OverrideToolShortcutNameOffset = _OverrideToolShortcutNameOffset ?? Schema.GetOffset(0xE239E3519E56599E);
+            Schema.SetCUtlString(_Handle, _OverrideToolShortcutNameOffset!.Value, value);
         }
     }
-    private static nint _FriendlyNameOffset = -1;
+    private static nint? _FriendlyNameOffset;
 
     public string FriendlyName
     {
         get
         {
-            if (_FriendlyNameOffset == -1) _FriendlyNameOffset = Schema.GetOffset(0xE239E351112DB23D);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_FriendlyNameOffset));
+            _FriendlyNameOffset = _FriendlyNameOffset ?? Schema.GetOffset(0xE239E351112DB23D);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_FriendlyNameOffset!.Value));
         }
         set
         {
-            if (_FriendlyNameOffset == -1) _FriendlyNameOffset = Schema.GetOffset(0xE239E351112DB23D);
-            Schema.SetCUtlString(_Handle, _FriendlyNameOffset, value);
+            _FriendlyNameOffset = _FriendlyNameOffset ?? Schema.GetOffset(0xE239E351112DB23D);
+            Schema.SetCUtlString(_Handle, _FriendlyNameOffset!.Value, value);
         }
     }
-    private static nint _ToolIconOffset = -1;
+    private static nint? _ToolIconOffset;
 
     public string ToolIcon
     {
         get
         {
-            if (_ToolIconOffset == -1) _ToolIconOffset = Schema.GetOffset(0xE239E35123D79B66);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ToolIconOffset));
+            _ToolIconOffset = _ToolIconOffset ?? Schema.GetOffset(0xE239E35123D79B66);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ToolIconOffset!.Value));
         }
         set
         {
-            if (_ToolIconOffset == -1) _ToolIconOffset = Schema.GetOffset(0xE239E35123D79B66);
-            Schema.SetCUtlString(_Handle, _ToolIconOffset, value);
+            _ToolIconOffset = _ToolIconOffset ?? Schema.GetOffset(0xE239E35123D79B66);
+            Schema.SetCUtlString(_Handle, _ToolIconOffset!.Value, value);
         }
     }
 

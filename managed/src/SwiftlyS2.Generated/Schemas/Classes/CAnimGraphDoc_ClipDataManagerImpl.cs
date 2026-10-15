@@ -16,16 +16,16 @@ internal partial class CAnimGraphDoc_ClipDataManagerImpl : SchemaClass, CAnimGra
 {
     public CAnimGraphDoc_ClipDataManagerImpl(nint handle) : base(handle) { }
 
-    private static nint _ItemTableOffset = -1;
+    private static nint? _ItemTableOffset;
     private SchemaUntypedField? _ItemTableInstance;
 
     public SchemaUntypedField ItemTable
     {
         get
         {
-            if (_ItemTableOffset == -1) _ItemTableOffset = Schema.GetOffset(0x1D1AD10BF56C2B3A);
+            _ItemTableOffset = _ItemTableOffset ?? Schema.GetOffset(0x1D1AD10BF56C2B3A);
             var instance = _ItemTableInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ItemTableOffset);
+            instance.DangerousSetHandle(_Handle + _ItemTableOffset!.Value);
             return instance;
         }
     }

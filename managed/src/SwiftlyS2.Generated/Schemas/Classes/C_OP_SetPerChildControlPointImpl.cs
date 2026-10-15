@@ -16,93 +16,93 @@ internal partial class C_OP_SetPerChildControlPointImpl : CParticleFunctionOpera
 {
     public C_OP_SetPerChildControlPointImpl(nint handle) : base(handle) { }
 
-    private static nint _ChildGroupIDOffset = -1;
+    private static nint? _ChildGroupIDOffset;
 
     public ref int ChildGroupID
     {
         get
         {
-            if (_ChildGroupIDOffset == -1) _ChildGroupIDOffset = Schema.GetOffset(0xC456E2B9E3F3C965);
-            return ref _Handle.AsRef<int>(_ChildGroupIDOffset);
+            _ChildGroupIDOffset = _ChildGroupIDOffset ?? Schema.GetOffset(0xC456E2B9E3F3C965);
+            return ref _Handle.AsRef<int>(_ChildGroupIDOffset!.Value);
         }
     }
-    private static nint _FirstControlPointOffset = -1;
+    private static nint? _FirstControlPointOffset;
 
     public ref int FirstControlPoint
     {
         get
         {
-            if (_FirstControlPointOffset == -1) _FirstControlPointOffset = Schema.GetOffset(0xC456E2B972117650);
-            return ref _Handle.AsRef<int>(_FirstControlPointOffset);
+            _FirstControlPointOffset = _FirstControlPointOffset ?? Schema.GetOffset(0xC456E2B972117650);
+            return ref _Handle.AsRef<int>(_FirstControlPointOffset!.Value);
         }
     }
-    private static nint _NumControlPointsOffset = -1;
+    private static nint? _NumControlPointsOffset;
 
     public ref int NumControlPoints
     {
         get
         {
-            if (_NumControlPointsOffset == -1) _NumControlPointsOffset = Schema.GetOffset(0xC456E2B9551EBC4F);
-            return ref _Handle.AsRef<int>(_NumControlPointsOffset);
+            _NumControlPointsOffset = _NumControlPointsOffset ?? Schema.GetOffset(0xC456E2B9551EBC4F);
+            return ref _Handle.AsRef<int>(_NumControlPointsOffset!.Value);
         }
     }
-    private static nint _ParticleIncrementOffset = -1;
+    private static nint? _ParticleIncrementOffset;
     private CParticleCollectionFloatInputImpl? _ParticleIncrementInstance;
 
     public CParticleCollectionFloatInput ParticleIncrement
     {
         get
         {
-            if (_ParticleIncrementOffset == -1) _ParticleIncrementOffset = Schema.GetOffset(0xC456E2B973AF63D0);
+            _ParticleIncrementOffset = _ParticleIncrementOffset ?? Schema.GetOffset(0xC456E2B973AF63D0);
             var instance = _ParticleIncrementInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParticleIncrementOffset);
+            instance.DangerousSetHandle(_Handle + _ParticleIncrementOffset!.Value);
             return instance;
         }
     }
-    private static nint _FirstSourcePointOffset = -1;
+    private static nint? _FirstSourcePointOffset;
     private CParticleCollectionFloatInputImpl? _FirstSourcePointInstance;
 
     public CParticleCollectionFloatInput FirstSourcePoint
     {
         get
         {
-            if (_FirstSourcePointOffset == -1) _FirstSourcePointOffset = Schema.GetOffset(0xC456E2B99D7DC18E);
+            _FirstSourcePointOffset = _FirstSourcePointOffset ?? Schema.GetOffset(0xC456E2B99D7DC18E);
             var instance = _FirstSourcePointInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _FirstSourcePointOffset);
+            instance.DangerousSetHandle(_Handle + _FirstSourcePointOffset!.Value);
             return instance;
         }
     }
-    private static nint _SetOrientationOffset = -1;
+    private static nint? _SetOrientationOffset;
 
     public ref bool SetOrientation
     {
         get
         {
-            if (_SetOrientationOffset == -1) _SetOrientationOffset = Schema.GetOffset(0xC456E2B9E1390E37);
-            return ref _Handle.AsRef<bool>(_SetOrientationOffset);
+            _SetOrientationOffset = _SetOrientationOffset ?? Schema.GetOffset(0xC456E2B9E1390E37);
+            return ref _Handle.AsRef<bool>(_SetOrientationOffset!.Value);
         }
     }
-    private static nint _OrientationFieldOffset = -1;
+    private static nint? _OrientationFieldOffset;
     private ParticleAttributeIndex_tImpl? _OrientationFieldInstance;
 
     public ParticleAttributeIndex_t OrientationField
     {
         get
         {
-            if (_OrientationFieldOffset == -1) _OrientationFieldOffset = Schema.GetOffset(0xC456E2B9FFE45E9F);
+            _OrientationFieldOffset = _OrientationFieldOffset ?? Schema.GetOffset(0xC456E2B9FFE45E9F);
             var instance = _OrientationFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _OrientationFieldOffset);
+            instance.DangerousSetHandle(_Handle + _OrientationFieldOffset!.Value);
             return instance;
         }
     }
-    private static nint _NumBasedOnParticleCountOffset = -1;
+    private static nint? _NumBasedOnParticleCountOffset;
 
     public ref bool NumBasedOnParticleCount
     {
         get
         {
-            if (_NumBasedOnParticleCountOffset == -1) _NumBasedOnParticleCountOffset = Schema.GetOffset(0xC456E2B9401CC5D0);
-            return ref _Handle.AsRef<bool>(_NumBasedOnParticleCountOffset);
+            _NumBasedOnParticleCountOffset = _NumBasedOnParticleCountOffset ?? Schema.GetOffset(0xC456E2B9401CC5D0);
+            return ref _Handle.AsRef<bool>(_NumBasedOnParticleCountOffset!.Value);
         }
     }
 

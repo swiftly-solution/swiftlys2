@@ -16,132 +16,132 @@ internal partial class C_OP_SetControlPointToImpactPointImpl : CParticleFunction
 {
     public C_OP_SetControlPointToImpactPointImpl(nint handle) : base(handle) { }
 
-    private static nint _CPOutOffset = -1;
+    private static nint? _CPOutOffset;
 
     public ref int CPOut
     {
         get
         {
-            if (_CPOutOffset == -1) _CPOutOffset = Schema.GetOffset(0x5ED2C481BAE50826);
-            return ref _Handle.AsRef<int>(_CPOutOffset);
+            _CPOutOffset = _CPOutOffset ?? Schema.GetOffset(0x5ED2C481BAE50826);
+            return ref _Handle.AsRef<int>(_CPOutOffset!.Value);
         }
     }
-    private static nint _CPInOffset = -1;
+    private static nint? _CPInOffset;
 
     public ref int CPIn
     {
         get
         {
-            if (_CPInOffset == -1) _CPInOffset = Schema.GetOffset(0x5ED2C481CAF7E91D);
-            return ref _Handle.AsRef<int>(_CPInOffset);
+            _CPInOffset = _CPInOffset ?? Schema.GetOffset(0x5ED2C481CAF7E91D);
+            return ref _Handle.AsRef<int>(_CPInOffset!.Value);
         }
     }
-    private static nint _UpdateRateOffset = -1;
+    private static nint? _UpdateRateOffset;
 
     public ref float UpdateRate
     {
         get
         {
-            if (_UpdateRateOffset == -1) _UpdateRateOffset = Schema.GetOffset(0x5ED2C4812701581C);
-            return ref _Handle.AsRef<float>(_UpdateRateOffset);
+            _UpdateRateOffset = _UpdateRateOffset ?? Schema.GetOffset(0x5ED2C4812701581C);
+            return ref _Handle.AsRef<float>(_UpdateRateOffset!.Value);
         }
     }
-    private static nint _TraceLengthOffset = -1;
+    private static nint? _TraceLengthOffset;
     private CParticleCollectionFloatInputImpl? _TraceLengthInstance;
 
     public CParticleCollectionFloatInput TraceLength
     {
         get
         {
-            if (_TraceLengthOffset == -1) _TraceLengthOffset = Schema.GetOffset(0x5ED2C481F5A5DE40);
+            _TraceLengthOffset = _TraceLengthOffset ?? Schema.GetOffset(0x5ED2C481F5A5DE40);
             var instance = _TraceLengthInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _TraceLengthOffset);
+            instance.DangerousSetHandle(_Handle + _TraceLengthOffset!.Value);
             return instance;
         }
     }
-    private static nint _StartOffsetOffset = -1;
+    private static nint? _StartOffsetOffset;
 
     public ref float StartOffset
     {
         get
         {
-            if (_StartOffsetOffset == -1) _StartOffsetOffset = Schema.GetOffset(0x5ED2C48169A449AA);
-            return ref _Handle.AsRef<float>(_StartOffsetOffset);
+            _StartOffsetOffset = _StartOffsetOffset ?? Schema.GetOffset(0x5ED2C48169A449AA);
+            return ref _Handle.AsRef<float>(_StartOffsetOffset!.Value);
         }
     }
-    private static nint _OffsetOffset = -1;
+    private static nint? _OffsetOffset;
 
     public ref float Offset
     {
         get
         {
-            if (_OffsetOffset == -1) _OffsetOffset = Schema.GetOffset(0x5ED2C4817F14BA34);
-            return ref _Handle.AsRef<float>(_OffsetOffset);
+            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0x5ED2C4817F14BA34);
+            return ref _Handle.AsRef<float>(_OffsetOffset!.Value);
         }
     }
-    private static nint _TraceDirOffset = -1;
+    private static nint? _TraceDirOffset;
 
     public ref Vector TraceDir
     {
         get
         {
-            if (_TraceDirOffset == -1) _TraceDirOffset = Schema.GetOffset(0x5ED2C481B3F09745);
-            return ref _Handle.AsRef<Vector>(_TraceDirOffset);
+            _TraceDirOffset = _TraceDirOffset ?? Schema.GetOffset(0x5ED2C481B3F09745);
+            return ref _Handle.AsRef<Vector>(_TraceDirOffset!.Value);
         }
     }
-    private static nint _CollisionGroupNameOffset = -1;
+    private static nint? _CollisionGroupNameOffset;
 
     public string CollisionGroupName
     {
         get
         {
-            if (_CollisionGroupNameOffset == -1) _CollisionGroupNameOffset = Schema.GetOffset(0x5ED2C481D58A3195);
-            return Schema.GetString(_Handle + _CollisionGroupNameOffset);
+            _CollisionGroupNameOffset = _CollisionGroupNameOffset ?? Schema.GetOffset(0x5ED2C481D58A3195);
+            return Schema.GetString(_Handle + _CollisionGroupNameOffset!.Value);
         }
         set
         {
-            if (_CollisionGroupNameOffset == -1) _CollisionGroupNameOffset = Schema.GetOffset(0x5ED2C481D58A3195);
-            Schema.SetFixedString(_Handle, _CollisionGroupNameOffset, value, 128);
+            _CollisionGroupNameOffset = _CollisionGroupNameOffset ?? Schema.GetOffset(0x5ED2C481D58A3195);
+            Schema.SetFixedString(_Handle, _CollisionGroupNameOffset!.Value, value, 128);
         }
     }
-    private static nint _TraceSetOffset = -1;
+    private static nint? _TraceSetOffset;
 
     public ref ParticleTraceSet_t TraceSet
     {
         get
         {
-            if (_TraceSetOffset == -1) _TraceSetOffset = Schema.GetOffset(0x5ED2C481BD26C5B2);
-            return ref _Handle.AsRef<ParticleTraceSet_t>(_TraceSetOffset);
+            _TraceSetOffset = _TraceSetOffset ?? Schema.GetOffset(0x5ED2C481BD26C5B2);
+            return ref _Handle.AsRef<ParticleTraceSet_t>(_TraceSetOffset!.Value);
         }
     }
-    private static nint _SetToEndpointOffset = -1;
+    private static nint? _SetToEndpointOffset;
 
     public ref bool SetToEndpoint
     {
         get
         {
-            if (_SetToEndpointOffset == -1) _SetToEndpointOffset = Schema.GetOffset(0x5ED2C481B96F6E13);
-            return ref _Handle.AsRef<bool>(_SetToEndpointOffset);
+            _SetToEndpointOffset = _SetToEndpointOffset ?? Schema.GetOffset(0x5ED2C481B96F6E13);
+            return ref _Handle.AsRef<bool>(_SetToEndpointOffset!.Value);
         }
     }
-    private static nint _TraceToClosestSurfaceOffset = -1;
+    private static nint? _TraceToClosestSurfaceOffset;
 
     public ref bool TraceToClosestSurface
     {
         get
         {
-            if (_TraceToClosestSurfaceOffset == -1) _TraceToClosestSurfaceOffset = Schema.GetOffset(0x5ED2C4816BEE8BDD);
-            return ref _Handle.AsRef<bool>(_TraceToClosestSurfaceOffset);
+            _TraceToClosestSurfaceOffset = _TraceToClosestSurfaceOffset ?? Schema.GetOffset(0x5ED2C4816BEE8BDD);
+            return ref _Handle.AsRef<bool>(_TraceToClosestSurfaceOffset!.Value);
         }
     }
-    private static nint _IncludeWaterOffset = -1;
+    private static nint? _IncludeWaterOffset;
 
     public ref bool IncludeWater
     {
         get
         {
-            if (_IncludeWaterOffset == -1) _IncludeWaterOffset = Schema.GetOffset(0x5ED2C481EB8D4646);
-            return ref _Handle.AsRef<bool>(_IncludeWaterOffset);
+            _IncludeWaterOffset = _IncludeWaterOffset ?? Schema.GetOffset(0x5ED2C481EB8D4646);
+            return ref _Handle.AsRef<bool>(_IncludeWaterOffset!.Value);
         }
     }
 

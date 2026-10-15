@@ -16,24 +16,24 @@ internal partial class CRegionSVMImpl : SchemaClass, CRegionSVM
 {
     public CRegionSVMImpl(nint handle) : base(handle) { }
 
-    private static nint _PlanesOffset = -1;
+    private static nint? _PlanesOffset;
 
     public ref CUtlVector<RnPlane_t> Planes
     {
         get
         {
-            if (_PlanesOffset == -1) _PlanesOffset = Schema.GetOffset(0xFC5717CAF831F452);
-            return ref _Handle.AsRef<CUtlVector<RnPlane_t>>(_PlanesOffset);
+            _PlanesOffset = _PlanesOffset ?? Schema.GetOffset(0xFC5717CAF831F452);
+            return ref _Handle.AsRef<CUtlVector<RnPlane_t>>(_PlanesOffset!.Value);
         }
     }
-    private static nint _NodesOffset = -1;
+    private static nint? _NodesOffset;
 
     public ref CUtlVector<uint> Nodes
     {
         get
         {
-            if (_NodesOffset == -1) _NodesOffset = Schema.GetOffset(0xFC5717CAEBA045DA);
-            return ref _Handle.AsRef<CUtlVector<uint>>(_NodesOffset);
+            _NodesOffset = _NodesOffset ?? Schema.GetOffset(0xFC5717CAEBA045DA);
+            return ref _Handle.AsRef<CUtlVector<uint>>(_NodesOffset!.Value);
         }
     }
 

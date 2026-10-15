@@ -16,54 +16,54 @@ internal partial class CLightRigSunLightImpl : CLightRigLightImpl, CLightRigSunL
 {
     public CLightRigSunLightImpl(nint handle) : base(handle) { }
 
-    private static nint _ShadowCascadeDistance0Offset = -1;
+    private static nint? _ShadowCascadeDistance0Offset;
 
     public ref float ShadowCascadeDistance0
     {
         get
         {
-            if (_ShadowCascadeDistance0Offset == -1) _ShadowCascadeDistance0Offset = Schema.GetOffset(0xBC604FDA9431AE78);
-            return ref _Handle.AsRef<float>(_ShadowCascadeDistance0Offset);
+            _ShadowCascadeDistance0Offset = _ShadowCascadeDistance0Offset ?? Schema.GetOffset(0xBC604FDA9431AE78);
+            return ref _Handle.AsRef<float>(_ShadowCascadeDistance0Offset!.Value);
         }
     }
-    private static nint _ShadowCascadeDistance1Offset = -1;
+    private static nint? _ShadowCascadeDistance1Offset;
 
     public ref float ShadowCascadeDistance1
     {
         get
         {
-            if (_ShadowCascadeDistance1Offset == -1) _ShadowCascadeDistance1Offset = Schema.GetOffset(0xBC604FDA9531B00B);
-            return ref _Handle.AsRef<float>(_ShadowCascadeDistance1Offset);
+            _ShadowCascadeDistance1Offset = _ShadowCascadeDistance1Offset ?? Schema.GetOffset(0xBC604FDA9531B00B);
+            return ref _Handle.AsRef<float>(_ShadowCascadeDistance1Offset!.Value);
         }
     }
-    private static nint _ShadowCascadeDistance2Offset = -1;
+    private static nint? _ShadowCascadeDistance2Offset;
 
     public ref float ShadowCascadeDistance2
     {
         get
         {
-            if (_ShadowCascadeDistance2Offset == -1) _ShadowCascadeDistance2Offset = Schema.GetOffset(0xBC604FDA9631B19E);
-            return ref _Handle.AsRef<float>(_ShadowCascadeDistance2Offset);
+            _ShadowCascadeDistance2Offset = _ShadowCascadeDistance2Offset ?? Schema.GetOffset(0xBC604FDA9631B19E);
+            return ref _Handle.AsRef<float>(_ShadowCascadeDistance2Offset!.Value);
         }
     }
-    private static nint _ShadowCascadeDistance3Offset = -1;
+    private static nint? _ShadowCascadeDistance3Offset;
 
     public ref float ShadowCascadeDistance3
     {
         get
         {
-            if (_ShadowCascadeDistance3Offset == -1) _ShadowCascadeDistance3Offset = Schema.GetOffset(0xBC604FDA9731B331);
-            return ref _Handle.AsRef<float>(_ShadowCascadeDistance3Offset);
+            _ShadowCascadeDistance3Offset = _ShadowCascadeDistance3Offset ?? Schema.GetOffset(0xBC604FDA9731B331);
+            return ref _Handle.AsRef<float>(_ShadowCascadeDistance3Offset!.Value);
         }
     }
-    private static nint _CastShadowsOffset = -1;
+    private static nint? _CastShadowsOffset;
 
     public ref bool CastShadows
     {
         get
         {
-            if (_CastShadowsOffset == -1) _CastShadowsOffset = Schema.GetOffset(0xBC604FDA36113167);
-            return ref _Handle.AsRef<bool>(_CastShadowsOffset);
+            _CastShadowsOffset = _CastShadowsOffset ?? Schema.GetOffset(0xBC604FDA36113167);
+            return ref _Handle.AsRef<bool>(_CastShadowsOffset!.Value);
         }
     }
 

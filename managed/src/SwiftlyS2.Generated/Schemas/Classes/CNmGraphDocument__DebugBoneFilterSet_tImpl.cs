@@ -16,24 +16,24 @@ internal partial class CNmGraphDocument__DebugBoneFilterSet_tImpl : SchemaClass,
 {
     public CNmGraphDocument__DebugBoneFilterSet_tImpl(nint handle) : base(handle) { }
 
-    private static nint _IDOffset = -1;
+    private static nint? _IDOffset;
 
     public ref CGlobalSymbol ID
     {
         get
         {
-            if (_IDOffset == -1) _IDOffset = Schema.GetOffset(0x27DD422295066900);
-            return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset);
+            _IDOffset = _IDOffset ?? Schema.GetOffset(0x27DD422295066900);
+            return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset!.Value);
         }
     }
-    private static nint _BoneIDsOffset = -1;
+    private static nint? _BoneIDsOffset;
 
     public ref CUtlVector<CGlobalSymbol> BoneIDs
     {
         get
         {
-            if (_BoneIDsOffset == -1) _BoneIDsOffset = Schema.GetOffset(0x27DD42220909C443);
-            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_BoneIDsOffset);
+            _BoneIDsOffset = _BoneIDsOffset ?? Schema.GetOffset(0x27DD42220909C443);
+            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_BoneIDsOffset!.Value);
         }
     }
 

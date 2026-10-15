@@ -16,42 +16,42 @@ internal partial class PulseRegisterMap_tImpl : SchemaClass, PulseRegisterMap_t
 {
     public PulseRegisterMap_tImpl(nint handle) : base(handle) { }
 
-    private static nint _InparamsOffset = -1;
+    private static nint? _InparamsOffset;
     private SchemaUntypedField? _InparamsInstance;
 
     public SchemaUntypedField Inparams
     {
         get
         {
-            if (_InparamsOffset == -1) _InparamsOffset = Schema.GetOffset(0x833FEA64B9B18E04);
+            _InparamsOffset = _InparamsOffset ?? Schema.GetOffset(0x833FEA64B9B18E04);
             var instance = _InparamsInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _InparamsOffset);
+            instance.DangerousSetHandle(_Handle + _InparamsOffset!.Value);
             return instance;
         }
     }
-    private static nint _InparamsWhichCanBeMovedOffset = -1;
+    private static nint? _InparamsWhichCanBeMovedOffset;
     private SchemaUntypedField? _InparamsWhichCanBeMovedInstance;
 
     public SchemaUntypedField InparamsWhichCanBeMoved
     {
         get
         {
-            if (_InparamsWhichCanBeMovedOffset == -1) _InparamsWhichCanBeMovedOffset = Schema.GetOffset(0x833FEA6405245E23);
+            _InparamsWhichCanBeMovedOffset = _InparamsWhichCanBeMovedOffset ?? Schema.GetOffset(0x833FEA6405245E23);
             var instance = _InparamsWhichCanBeMovedInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _InparamsWhichCanBeMovedOffset);
+            instance.DangerousSetHandle(_Handle + _InparamsWhichCanBeMovedOffset!.Value);
             return instance;
         }
     }
-    private static nint _OutparamsOffset = -1;
+    private static nint? _OutparamsOffset;
     private SchemaUntypedField? _OutparamsInstance;
 
     public SchemaUntypedField Outparams
     {
         get
         {
-            if (_OutparamsOffset == -1) _OutparamsOffset = Schema.GetOffset(0x833FEA64798D964D);
+            _OutparamsOffset = _OutparamsOffset ?? Schema.GetOffset(0x833FEA64798D964D);
             var instance = _OutparamsInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OutparamsOffset);
+            instance.DangerousSetHandle(_Handle + _OutparamsOffset!.Value);
             return instance;
         }
     }

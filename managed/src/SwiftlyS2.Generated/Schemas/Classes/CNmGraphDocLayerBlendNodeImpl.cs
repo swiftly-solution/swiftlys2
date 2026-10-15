@@ -16,14 +16,14 @@ internal partial class CNmGraphDocLayerBlendNodeImpl : CNmGraphDocFlowNodeImpl, 
 {
     public CNmGraphDocLayerBlendNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _OnlySampleBaseRootMotionOffset = -1;
+    private static nint? _OnlySampleBaseRootMotionOffset;
 
     public ref bool OnlySampleBaseRootMotion
     {
         get
         {
-            if (_OnlySampleBaseRootMotionOffset == -1) _OnlySampleBaseRootMotionOffset = Schema.GetOffset(0xACCC311929BC8CF2);
-            return ref _Handle.AsRef<bool>(_OnlySampleBaseRootMotionOffset);
+            _OnlySampleBaseRootMotionOffset = _OnlySampleBaseRootMotionOffset ?? Schema.GetOffset(0xACCC311929BC8CF2);
+            return ref _Handle.AsRef<bool>(_OnlySampleBaseRootMotionOffset!.Value);
         }
     }
 

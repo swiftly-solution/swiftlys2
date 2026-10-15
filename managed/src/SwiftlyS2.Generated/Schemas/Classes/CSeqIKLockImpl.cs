@@ -16,44 +16,44 @@ internal partial class CSeqIKLockImpl : SchemaClass, CSeqIKLock
 {
     public CSeqIKLockImpl(nint handle) : base(handle) { }
 
-    private static nint _PosWeightOffset = -1;
+    private static nint? _PosWeightOffset;
 
     public ref float PosWeight
     {
         get
         {
-            if (_PosWeightOffset == -1) _PosWeightOffset = Schema.GetOffset(0x9813F59E9CC6C04B);
-            return ref _Handle.AsRef<float>(_PosWeightOffset);
+            _PosWeightOffset = _PosWeightOffset ?? Schema.GetOffset(0x9813F59E9CC6C04B);
+            return ref _Handle.AsRef<float>(_PosWeightOffset!.Value);
         }
     }
-    private static nint _AngleWeightOffset = -1;
+    private static nint? _AngleWeightOffset;
 
     public ref float AngleWeight
     {
         get
         {
-            if (_AngleWeightOffset == -1) _AngleWeightOffset = Schema.GetOffset(0x9813F59E51DFB6EE);
-            return ref _Handle.AsRef<float>(_AngleWeightOffset);
+            _AngleWeightOffset = _AngleWeightOffset ?? Schema.GetOffset(0x9813F59E51DFB6EE);
+            return ref _Handle.AsRef<float>(_AngleWeightOffset!.Value);
         }
     }
-    private static nint _LocalBoneOffset = -1;
+    private static nint? _LocalBoneOffset;
 
     public ref short LocalBone
     {
         get
         {
-            if (_LocalBoneOffset == -1) _LocalBoneOffset = Schema.GetOffset(0x9813F59EC2F7B8CA);
-            return ref _Handle.AsRef<short>(_LocalBoneOffset);
+            _LocalBoneOffset = _LocalBoneOffset ?? Schema.GetOffset(0x9813F59EC2F7B8CA);
+            return ref _Handle.AsRef<short>(_LocalBoneOffset!.Value);
         }
     }
-    private static nint _BonesOrientedAlongPositiveXOffset = -1;
+    private static nint? _BonesOrientedAlongPositiveXOffset;
 
     public ref bool BonesOrientedAlongPositiveX
     {
         get
         {
-            if (_BonesOrientedAlongPositiveXOffset == -1) _BonesOrientedAlongPositiveXOffset = Schema.GetOffset(0x9813F59ED3FDAB3A);
-            return ref _Handle.AsRef<bool>(_BonesOrientedAlongPositiveXOffset);
+            _BonesOrientedAlongPositiveXOffset = _BonesOrientedAlongPositiveXOffset ?? Schema.GetOffset(0x9813F59ED3FDAB3A);
+            return ref _Handle.AsRef<bool>(_BonesOrientedAlongPositiveXOffset!.Value);
         }
     }
 

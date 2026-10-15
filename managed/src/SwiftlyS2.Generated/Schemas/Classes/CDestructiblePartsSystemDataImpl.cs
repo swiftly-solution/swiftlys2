@@ -16,29 +16,29 @@ internal partial class CDestructiblePartsSystemDataImpl : SchemaClass, CDestruct
 {
     public CDestructiblePartsSystemDataImpl(nint handle) : base(handle) { }
 
-    private static nint _PartsDataByHitGroupOffset = -1;
+    private static nint? _PartsDataByHitGroupOffset;
     private SchemaUntypedField? _PartsDataByHitGroupInstance;
 
     public SchemaUntypedField PartsDataByHitGroup
     {
         get
         {
-            if (_PartsDataByHitGroupOffset == -1) _PartsDataByHitGroupOffset = Schema.GetOffset(0xABDCB98361E96220);
+            _PartsDataByHitGroupOffset = _PartsDataByHitGroupOffset ?? Schema.GetOffset(0xABDCB98361E96220);
             var instance = _PartsDataByHitGroupInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _PartsDataByHitGroupOffset);
+            instance.DangerousSetHandle(_Handle + _PartsDataByHitGroupOffset!.Value);
             return instance;
         }
     }
-    private static nint _MinMaxNumberHitGroupsToDestroyWhenGibbingOffset = -1;
+    private static nint? _MinMaxNumberHitGroupsToDestroyWhenGibbingOffset;
     private CRangeIntImpl? _MinMaxNumberHitGroupsToDestroyWhenGibbingInstance;
 
     public CRangeInt MinMaxNumberHitGroupsToDestroyWhenGibbing
     {
         get
         {
-            if (_MinMaxNumberHitGroupsToDestroyWhenGibbingOffset == -1) _MinMaxNumberHitGroupsToDestroyWhenGibbingOffset = Schema.GetOffset(0xABDCB9834CA810D8);
+            _MinMaxNumberHitGroupsToDestroyWhenGibbingOffset = _MinMaxNumberHitGroupsToDestroyWhenGibbingOffset ?? Schema.GetOffset(0xABDCB9834CA810D8);
             var instance = _MinMaxNumberHitGroupsToDestroyWhenGibbingInstance ??= new CRangeIntImpl(0);
-            instance.DangerousSetHandle(_Handle + _MinMaxNumberHitGroupsToDestroyWhenGibbingOffset);
+            instance.DangerousSetHandle(_Handle + _MinMaxNumberHitGroupsToDestroyWhenGibbingOffset!.Value);
             return instance;
         }
     }

@@ -16,14 +16,14 @@ internal partial class CNmConstIDNode__CDefinitionImpl : CNmIDValueNode__CDefini
 {
     public CNmConstIDNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint _ValueOffset = -1;
+    private static nint? _ValueOffset;
 
     public ref CGlobalSymbol Value
     {
         get
         {
-            if (_ValueOffset == -1) _ValueOffset = Schema.GetOffset(0xF68AB5F96B99AEEA);
-            return ref _Handle.AsRef<CGlobalSymbol>(_ValueOffset);
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0xF68AB5F96B99AEEA);
+            return ref _Handle.AsRef<CGlobalSymbol>(_ValueOffset!.Value);
         }
     }
 

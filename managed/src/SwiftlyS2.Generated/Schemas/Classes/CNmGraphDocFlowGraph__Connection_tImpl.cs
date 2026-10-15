@@ -16,68 +16,68 @@ internal partial class CNmGraphDocFlowGraph__Connection_tImpl : SchemaClass, CNm
 {
     public CNmGraphDocFlowGraph__Connection_tImpl(nint handle) : base(handle) { }
 
-    private static nint _IDOffset = -1;
+    private static nint? _IDOffset;
     private SchemaUntypedField? _IDInstance;
 
     public SchemaUntypedField ID
     {
         get
         {
-            if (_IDOffset == -1) _IDOffset = Schema.GetOffset(0xD0AA0FB095066900);
+            _IDOffset = _IDOffset ?? Schema.GetOffset(0xD0AA0FB095066900);
             var instance = _IDInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _IDOffset);
+            instance.DangerousSetHandle(_Handle + _IDOffset!.Value);
             return instance;
         }
     }
-    private static nint _FromNodeIDOffset = -1;
+    private static nint? _FromNodeIDOffset;
     private SchemaUntypedField? _FromNodeIDInstance;
 
     public SchemaUntypedField FromNodeID
     {
         get
         {
-            if (_FromNodeIDOffset == -1) _FromNodeIDOffset = Schema.GetOffset(0xD0AA0FB02405D988);
+            _FromNodeIDOffset = _FromNodeIDOffset ?? Schema.GetOffset(0xD0AA0FB02405D988);
             var instance = _FromNodeIDInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _FromNodeIDOffset);
+            instance.DangerousSetHandle(_Handle + _FromNodeIDOffset!.Value);
             return instance;
         }
     }
-    private static nint _OutputPinIDOffset = -1;
+    private static nint? _OutputPinIDOffset;
     private SchemaUntypedField? _OutputPinIDInstance;
 
     public SchemaUntypedField OutputPinID
     {
         get
         {
-            if (_OutputPinIDOffset == -1) _OutputPinIDOffset = Schema.GetOffset(0xD0AA0FB0ED9B729E);
+            _OutputPinIDOffset = _OutputPinIDOffset ?? Schema.GetOffset(0xD0AA0FB0ED9B729E);
             var instance = _OutputPinIDInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OutputPinIDOffset);
+            instance.DangerousSetHandle(_Handle + _OutputPinIDOffset!.Value);
             return instance;
         }
     }
-    private static nint _ToNodeIDOffset = -1;
+    private static nint? _ToNodeIDOffset;
     private SchemaUntypedField? _ToNodeIDInstance;
 
     public SchemaUntypedField ToNodeID
     {
         get
         {
-            if (_ToNodeIDOffset == -1) _ToNodeIDOffset = Schema.GetOffset(0xD0AA0FB0794D3FBD);
+            _ToNodeIDOffset = _ToNodeIDOffset ?? Schema.GetOffset(0xD0AA0FB0794D3FBD);
             var instance = _ToNodeIDInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ToNodeIDOffset);
+            instance.DangerousSetHandle(_Handle + _ToNodeIDOffset!.Value);
             return instance;
         }
     }
-    private static nint _InputPinIDOffset = -1;
+    private static nint? _InputPinIDOffset;
     private SchemaUntypedField? _InputPinIDInstance;
 
     public SchemaUntypedField InputPinID
     {
         get
         {
-            if (_InputPinIDOffset == -1) _InputPinIDOffset = Schema.GetOffset(0xD0AA0FB06E153BBF);
+            _InputPinIDOffset = _InputPinIDOffset ?? Schema.GetOffset(0xD0AA0FB06E153BBF);
             var instance = _InputPinIDInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _InputPinIDOffset);
+            instance.DangerousSetHandle(_Handle + _InputPinIDOffset!.Value);
             return instance;
         }
     }

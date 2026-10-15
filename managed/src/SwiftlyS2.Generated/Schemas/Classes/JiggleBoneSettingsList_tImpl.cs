@@ -16,14 +16,14 @@ internal partial class JiggleBoneSettingsList_tImpl : SchemaClass, JiggleBoneSet
 {
     public JiggleBoneSettingsList_tImpl(nint handle) : base(handle) { }
 
-    private static nint _BoneSettingsOffset = -1;
+    private static nint? _BoneSettingsOffset;
 
     public ref CUtlVector<JiggleBoneSettings_t> BoneSettings
     {
         get
         {
-            if (_BoneSettingsOffset == -1) _BoneSettingsOffset = Schema.GetOffset(0xD234E39D689AEBE2);
-            return ref _Handle.AsRef<CUtlVector<JiggleBoneSettings_t>>(_BoneSettingsOffset);
+            _BoneSettingsOffset = _BoneSettingsOffset ?? Schema.GetOffset(0xD234E39D689AEBE2);
+            return ref _Handle.AsRef<CUtlVector<JiggleBoneSettings_t>>(_BoneSettingsOffset!.Value);
         }
     }
 

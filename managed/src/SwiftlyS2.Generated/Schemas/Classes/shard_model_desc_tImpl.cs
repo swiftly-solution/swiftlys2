@@ -16,134 +16,134 @@ internal partial class shard_model_desc_tImpl : SchemaClass, shard_model_desc_t
 {
     public shard_model_desc_tImpl(nint handle) : base(handle) { }
 
-    private static nint _ModelIDOffset = -1;
+    private static nint? _ModelIDOffset;
 
     public ref int ModelID
     {
         get
         {
-            if (_ModelIDOffset == -1) _ModelIDOffset = Schema.GetOffset(0x89B25B20B2007E9B);
-            return ref _Handle.AsRef<int>(_ModelIDOffset);
+            _ModelIDOffset = _ModelIDOffset ?? Schema.GetOffset(0x89B25B20B2007E9B);
+            return ref _Handle.AsRef<int>(_ModelIDOffset!.Value);
         }
     }
-    private static nint _MaterialBaseOffset = -1;
+    private static nint? _MaterialBaseOffset;
 
     public ref CStrongHandle<InfoForResourceTypeIMaterial2> MaterialBase
     {
         get
         {
-            if (_MaterialBaseOffset == -1) _MaterialBaseOffset = Schema.GetOffset(0x89B25B201F6E1593);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_MaterialBaseOffset);
+            _MaterialBaseOffset = _MaterialBaseOffset ?? Schema.GetOffset(0x89B25B201F6E1593);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_MaterialBaseOffset!.Value);
         }
     }
-    private static nint _MaterialDamageOverlayOffset = -1;
+    private static nint? _MaterialDamageOverlayOffset;
 
     public ref CStrongHandle<InfoForResourceTypeIMaterial2> MaterialDamageOverlay
     {
         get
         {
-            if (_MaterialDamageOverlayOffset == -1) _MaterialDamageOverlayOffset = Schema.GetOffset(0x89B25B200B167839);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_MaterialDamageOverlayOffset);
+            _MaterialDamageOverlayOffset = _MaterialDamageOverlayOffset ?? Schema.GetOffset(0x89B25B200B167839);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_MaterialDamageOverlayOffset!.Value);
         }
     }
-    private static nint _SolidOffset = -1;
+    private static nint? _SolidOffset;
 
     public ref ShardSolid_t Solid
     {
         get
         {
-            if (_SolidOffset == -1) _SolidOffset = Schema.GetOffset(0x89B25B20F14DA214);
-            return ref _Handle.AsRef<ShardSolid_t>(_SolidOffset);
+            _SolidOffset = _SolidOffset ?? Schema.GetOffset(0x89B25B20F14DA214);
+            return ref _Handle.AsRef<ShardSolid_t>(_SolidOffset!.Value);
         }
     }
-    private static nint _PanelSizeOffset = -1;
+    private static nint? _PanelSizeOffset;
 
     public ref Vector2D PanelSize
     {
         get
         {
-            if (_PanelSizeOffset == -1) _PanelSizeOffset = Schema.GetOffset(0x89B25B20E61D2D9C);
-            return ref _Handle.AsRef<Vector2D>(_PanelSizeOffset);
+            _PanelSizeOffset = _PanelSizeOffset ?? Schema.GetOffset(0x89B25B20E61D2D9C);
+            return ref _Handle.AsRef<Vector2D>(_PanelSizeOffset!.Value);
         }
     }
-    private static nint _StressPositionAOffset = -1;
+    private static nint? _StressPositionAOffset;
 
     public ref Vector2D StressPositionA
     {
         get
         {
-            if (_StressPositionAOffset == -1) _StressPositionAOffset = Schema.GetOffset(0x89B25B20107A2271);
-            return ref _Handle.AsRef<Vector2D>(_StressPositionAOffset);
+            _StressPositionAOffset = _StressPositionAOffset ?? Schema.GetOffset(0x89B25B20107A2271);
+            return ref _Handle.AsRef<Vector2D>(_StressPositionAOffset!.Value);
         }
     }
-    private static nint _StressPositionBOffset = -1;
+    private static nint? _StressPositionBOffset;
 
     public ref Vector2D StressPositionB
     {
         get
         {
-            if (_StressPositionBOffset == -1) _StressPositionBOffset = Schema.GetOffset(0x89B25B200D7A1DB8);
-            return ref _Handle.AsRef<Vector2D>(_StressPositionBOffset);
+            _StressPositionBOffset = _StressPositionBOffset ?? Schema.GetOffset(0x89B25B200D7A1DB8);
+            return ref _Handle.AsRef<Vector2D>(_StressPositionBOffset!.Value);
         }
     }
-    private static nint _PanelVerticesOffset = -1;
+    private static nint? _PanelVerticesOffset;
 
     public ref CUtlVector<Vector2D> PanelVertices
     {
         get
         {
-            if (_PanelVerticesOffset == -1) _PanelVerticesOffset = Schema.GetOffset(0x89B25B2049BB3ECE);
-            return ref _Handle.AsRef<CUtlVector<Vector2D>>(_PanelVerticesOffset);
+            _PanelVerticesOffset = _PanelVerticesOffset ?? Schema.GetOffset(0x89B25B2049BB3ECE);
+            return ref _Handle.AsRef<CUtlVector<Vector2D>>(_PanelVerticesOffset!.Value);
         }
     }
-    private static nint _InitialPanelVerticesOffset = -1;
+    private static nint? _InitialPanelVerticesOffset;
 
     public ref CUtlVector<Vector4D> InitialPanelVertices
     {
         get
         {
-            if (_InitialPanelVerticesOffset == -1) _InitialPanelVerticesOffset = Schema.GetOffset(0x89B25B2039117F58);
-            return ref _Handle.AsRef<CUtlVector<Vector4D>>(_InitialPanelVerticesOffset);
+            _InitialPanelVerticesOffset = _InitialPanelVerticesOffset ?? Schema.GetOffset(0x89B25B2039117F58);
+            return ref _Handle.AsRef<CUtlVector<Vector4D>>(_InitialPanelVerticesOffset!.Value);
         }
     }
-    private static nint _GlassHalfThicknessOffset = -1;
+    private static nint? _GlassHalfThicknessOffset;
 
     public ref float GlassHalfThickness
     {
         get
         {
-            if (_GlassHalfThicknessOffset == -1) _GlassHalfThicknessOffset = Schema.GetOffset(0x89B25B20359D8B9E);
-            return ref _Handle.AsRef<float>(_GlassHalfThicknessOffset);
+            _GlassHalfThicknessOffset = _GlassHalfThicknessOffset ?? Schema.GetOffset(0x89B25B20359D8B9E);
+            return ref _Handle.AsRef<float>(_GlassHalfThicknessOffset!.Value);
         }
     }
-    private static nint _HasParentOffset = -1;
+    private static nint? _HasParentOffset;
 
     public ref bool HasParent
     {
         get
         {
-            if (_HasParentOffset == -1) _HasParentOffset = Schema.GetOffset(0x89B25B20A613E04B);
-            return ref _Handle.AsRef<bool>(_HasParentOffset);
+            _HasParentOffset = _HasParentOffset ?? Schema.GetOffset(0x89B25B20A613E04B);
+            return ref _Handle.AsRef<bool>(_HasParentOffset!.Value);
         }
     }
-    private static nint _ParentFrozenOffset = -1;
+    private static nint? _ParentFrozenOffset;
 
     public ref bool ParentFrozen
     {
         get
         {
-            if (_ParentFrozenOffset == -1) _ParentFrozenOffset = Schema.GetOffset(0x89B25B206FE526AB);
-            return ref _Handle.AsRef<bool>(_ParentFrozenOffset);
+            _ParentFrozenOffset = _ParentFrozenOffset ?? Schema.GetOffset(0x89B25B206FE526AB);
+            return ref _Handle.AsRef<bool>(_ParentFrozenOffset!.Value);
         }
     }
-    private static nint _SurfacePropStringTokenOffset = -1;
+    private static nint? _SurfacePropStringTokenOffset;
 
     public ref CUtlStringToken SurfacePropStringToken
     {
         get
         {
-            if (_SurfacePropStringTokenOffset == -1) _SurfacePropStringTokenOffset = Schema.GetOffset(0x89B25B2055336E6D);
-            return ref _Handle.AsRef<CUtlStringToken>(_SurfacePropStringTokenOffset);
+            _SurfacePropStringTokenOffset = _SurfacePropStringTokenOffset ?? Schema.GetOffset(0x89B25B2055336E6D);
+            return ref _Handle.AsRef<CUtlStringToken>(_SurfacePropStringTokenOffset!.Value);
         }
     }
 

@@ -16,14 +16,14 @@ internal partial class AnimTagIDImpl : SchemaClass, AnimTagID
 {
     public AnimTagIDImpl(nint handle) : base(handle) { }
 
-    private static nint _IdOffset = -1;
+    private static nint? _IdOffset;
 
     public ref uint Id
     {
         get
         {
-            if (_IdOffset == -1) _IdOffset = Schema.GetOffset(0xCEE1E76DB4B6E980);
-            return ref _Handle.AsRef<uint>(_IdOffset);
+            _IdOffset = _IdOffset ?? Schema.GetOffset(0xCEE1E76DB4B6E980);
+            return ref _Handle.AsRef<uint>(_IdOffset!.Value);
         }
     }
 

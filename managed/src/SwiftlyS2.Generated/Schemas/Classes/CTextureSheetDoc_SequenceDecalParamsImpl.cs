@@ -16,94 +16,94 @@ internal partial class CTextureSheetDoc_SequenceDecalParamsImpl : SchemaClass, C
 {
     public CTextureSheetDoc_SequenceDecalParamsImpl(nint handle) : base(handle) { }
 
-    private static nint _ScaleOffset = -1;
+    private static nint? _ScaleOffset;
 
     public ref float Scale
     {
         get
         {
-            if (_ScaleOffset == -1) _ScaleOffset = Schema.GetOffset(0x18C78BF5B731A42F);
-            return ref _Handle.AsRef<float>(_ScaleOffset);
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x18C78BF5B731A42F);
+            return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
         }
     }
-    private static nint _DepthOffset = -1;
+    private static nint? _DepthOffset;
 
     public ref float Depth
     {
         get
         {
-            if (_DepthOffset == -1) _DepthOffset = Schema.GetOffset(0x18C78BF5D3AD54E8);
-            return ref _Handle.AsRef<float>(_DepthOffset);
+            _DepthOffset = _DepthOffset ?? Schema.GetOffset(0x18C78BF5D3AD54E8);
+            return ref _Handle.AsRef<float>(_DepthOffset!.Value);
         }
     }
-    private static nint _ScaleVariationOffset = -1;
+    private static nint? _ScaleVariationOffset;
 
     public ref float ScaleVariation
     {
         get
         {
-            if (_ScaleVariationOffset == -1) _ScaleVariationOffset = Schema.GetOffset(0x18C78BF5D1D56AEC);
-            return ref _Handle.AsRef<float>(_ScaleVariationOffset);
+            _ScaleVariationOffset = _ScaleVariationOffset ?? Schema.GetOffset(0x18C78BF5D1D56AEC);
+            return ref _Handle.AsRef<float>(_ScaleVariationOffset!.Value);
         }
     }
-    private static nint _StartFadeTimeOffset = -1;
+    private static nint? _StartFadeTimeOffset;
 
     public ref float StartFadeTime
     {
         get
         {
-            if (_StartFadeTimeOffset == -1) _StartFadeTimeOffset = Schema.GetOffset(0x18C78BF5064D5CCA);
-            return ref _Handle.AsRef<float>(_StartFadeTimeOffset);
+            _StartFadeTimeOffset = _StartFadeTimeOffset ?? Schema.GetOffset(0x18C78BF5064D5CCA);
+            return ref _Handle.AsRef<float>(_StartFadeTimeOffset!.Value);
         }
     }
-    private static nint _FadeDurationOffset = -1;
+    private static nint? _FadeDurationOffset;
 
     public ref float FadeDuration
     {
         get
         {
-            if (_FadeDurationOffset == -1) _FadeDurationOffset = Schema.GetOffset(0x18C78BF5C4E6DEE1);
-            return ref _Handle.AsRef<float>(_FadeDurationOffset);
+            _FadeDurationOffset = _FadeDurationOffset ?? Schema.GetOffset(0x18C78BF5C4E6DEE1);
+            return ref _Handle.AsRef<float>(_FadeDurationOffset!.Value);
         }
     }
-    private static nint _AnimationScaleOffset = -1;
+    private static nint? _AnimationScaleOffset;
 
     public ref float AnimationScale
     {
         get
         {
-            if (_AnimationScaleOffset == -1) _AnimationScaleOffset = Schema.GetOffset(0x18C78BF5E03B2F87);
-            return ref _Handle.AsRef<float>(_AnimationScaleOffset);
+            _AnimationScaleOffset = _AnimationScaleOffset ?? Schema.GetOffset(0x18C78BF5E03B2F87);
+            return ref _Handle.AsRef<float>(_AnimationScaleOffset!.Value);
         }
     }
-    private static nint _AnimationStartTimeOffset = -1;
+    private static nint? _AnimationStartTimeOffset;
 
     public ref float AnimationStartTime
     {
         get
         {
-            if (_AnimationStartTimeOffset == -1) _AnimationStartTimeOffset = Schema.GetOffset(0x18C78BF5DC58A88C);
-            return ref _Handle.AsRef<float>(_AnimationStartTimeOffset);
+            _AnimationStartTimeOffset = _AnimationStartTimeOffset ?? Schema.GetOffset(0x18C78BF5DC58A88C);
+            return ref _Handle.AsRef<float>(_AnimationStartTimeOffset!.Value);
         }
     }
-    private static nint _AlignWithGravityFactorOffset = -1;
+    private static nint? _AlignWithGravityFactorOffset;
 
     public ref float AlignWithGravityFactor
     {
         get
         {
-            if (_AlignWithGravityFactorOffset == -1) _AlignWithGravityFactorOffset = Schema.GetOffset(0x18C78BF5AAC514AD);
-            return ref _Handle.AsRef<float>(_AlignWithGravityFactorOffset);
+            _AlignWithGravityFactorOffset = _AlignWithGravityFactorOffset ?? Schema.GetOffset(0x18C78BF5AAC514AD);
+            return ref _Handle.AsRef<float>(_AlignWithGravityFactorOffset!.Value);
         }
     }
-    private static nint _DecalRtEncodingOffset = -1;
+    private static nint? _DecalRtEncodingOffset;
 
     public ref DecalRtEncoding_t DecalRtEncoding
     {
         get
         {
-            if (_DecalRtEncodingOffset == -1) _DecalRtEncodingOffset = Schema.GetOffset(0x18C78BF5192CDE51);
-            return ref _Handle.AsRef<DecalRtEncoding_t>(_DecalRtEncodingOffset);
+            _DecalRtEncodingOffset = _DecalRtEncodingOffset ?? Schema.GetOffset(0x18C78BF5192CDE51);
+            return ref _Handle.AsRef<DecalRtEncoding_t>(_DecalRtEncodingOffset!.Value);
         }
     }
 

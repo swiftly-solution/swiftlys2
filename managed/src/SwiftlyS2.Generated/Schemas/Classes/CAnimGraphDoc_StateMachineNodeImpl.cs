@@ -16,34 +16,34 @@ internal partial class CAnimGraphDoc_StateMachineNodeImpl : CAnimGraphDoc_NodeIm
 {
     public CAnimGraphDoc_StateMachineNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _BlockWaningTagsOffset = -1;
+    private static nint? _BlockWaningTagsOffset;
 
     public ref bool BlockWaningTags
     {
         get
         {
-            if (_BlockWaningTagsOffset == -1) _BlockWaningTagsOffset = Schema.GetOffset(0x7EC18558B6999F75);
-            return ref _Handle.AsRef<bool>(_BlockWaningTagsOffset);
+            _BlockWaningTagsOffset = _BlockWaningTagsOffset ?? Schema.GetOffset(0x7EC18558B6999F75);
+            return ref _Handle.AsRef<bool>(_BlockWaningTagsOffset!.Value);
         }
     }
-    private static nint _LockStateWhenWaningOffset = -1;
+    private static nint? _LockStateWhenWaningOffset;
 
     public ref bool LockStateWhenWaning
     {
         get
         {
-            if (_LockStateWhenWaningOffset == -1) _LockStateWhenWaningOffset = Schema.GetOffset(0x7EC18558105A8C95);
-            return ref _Handle.AsRef<bool>(_LockStateWhenWaningOffset);
+            _LockStateWhenWaningOffset = _LockStateWhenWaningOffset ?? Schema.GetOffset(0x7EC18558105A8C95);
+            return ref _Handle.AsRef<bool>(_LockStateWhenWaningOffset!.Value);
         }
     }
-    private static nint _ResetWhenActivatedOffset = -1;
+    private static nint? _ResetWhenActivatedOffset;
 
     public ref bool ResetWhenActivated
     {
         get
         {
-            if (_ResetWhenActivatedOffset == -1) _ResetWhenActivatedOffset = Schema.GetOffset(0x7EC18558E7055CF7);
-            return ref _Handle.AsRef<bool>(_ResetWhenActivatedOffset);
+            _ResetWhenActivatedOffset = _ResetWhenActivatedOffset ?? Schema.GetOffset(0x7EC18558E7055CF7);
+            return ref _Handle.AsRef<bool>(_ResetWhenActivatedOffset!.Value);
         }
     }
 

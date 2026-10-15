@@ -16,49 +16,49 @@ internal partial class NodeData_tImpl : SchemaClass, NodeData_t
 {
     public NodeData_tImpl(nint handle) : base(handle) { }
 
-    private static nint _OriginOffset = -1;
+    private static nint? _OriginOffset;
 
     public ref Vector Origin
     {
         get
         {
-            if (_OriginOffset == -1) _OriginOffset = Schema.GetOffset(0xB09FAAA6F26E589B);
-            return ref _Handle.AsRef<Vector>(_OriginOffset);
+            _OriginOffset = _OriginOffset ?? Schema.GetOffset(0xB09FAAA6F26E589B);
+            return ref _Handle.AsRef<Vector>(_OriginOffset!.Value);
         }
     }
-    private static nint _MinBoundsOffset = -1;
+    private static nint? _MinBoundsOffset;
 
     public ref Vector MinBounds
     {
         get
         {
-            if (_MinBoundsOffset == -1) _MinBoundsOffset = Schema.GetOffset(0xB09FAAA6114799FE);
-            return ref _Handle.AsRef<Vector>(_MinBoundsOffset);
+            _MinBoundsOffset = _MinBoundsOffset ?? Schema.GetOffset(0xB09FAAA6114799FE);
+            return ref _Handle.AsRef<Vector>(_MinBoundsOffset!.Value);
         }
     }
-    private static nint _MaxBoundsOffset = -1;
+    private static nint? _MaxBoundsOffset;
 
     public ref Vector MaxBounds
     {
         get
         {
-            if (_MaxBoundsOffset == -1) _MaxBoundsOffset = Schema.GetOffset(0xB09FAAA6C0B4CE60);
-            return ref _Handle.AsRef<Vector>(_MaxBoundsOffset);
+            _MaxBoundsOffset = _MaxBoundsOffset ?? Schema.GetOffset(0xB09FAAA6C0B4CE60);
+            return ref _Handle.AsRef<Vector>(_MaxBoundsOffset!.Value);
         }
     }
-    private static nint _WorldNodePrefixOffset = -1;
+    private static nint? _WorldNodePrefixOffset;
 
     public string WorldNodePrefix
     {
         get
         {
-            if (_WorldNodePrefixOffset == -1) _WorldNodePrefixOffset = Schema.GetOffset(0xB09FAAA662126457);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_WorldNodePrefixOffset));
+            _WorldNodePrefixOffset = _WorldNodePrefixOffset ?? Schema.GetOffset(0xB09FAAA662126457);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_WorldNodePrefixOffset!.Value));
         }
         set
         {
-            if (_WorldNodePrefixOffset == -1) _WorldNodePrefixOffset = Schema.GetOffset(0xB09FAAA662126457);
-            Schema.SetCUtlString(_Handle, _WorldNodePrefixOffset, value);
+            _WorldNodePrefixOffset = _WorldNodePrefixOffset ?? Schema.GetOffset(0xB09FAAA662126457);
+            Schema.SetCUtlString(_Handle, _WorldNodePrefixOffset!.Value, value);
         }
     }
 

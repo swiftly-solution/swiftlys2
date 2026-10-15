@@ -16,14 +16,14 @@ internal partial class CNmGraphDocSelectorBaseNodeImpl : CNmGraphDocFlowNodeImpl
 {
     public CNmGraphDocSelectorBaseNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _OptionLabelsOffset = -1;
+    private static nint? _OptionLabelsOffset;
 
     public ref CUtlVector<CUtlString> OptionLabels
     {
         get
         {
-            if (_OptionLabelsOffset == -1) _OptionLabelsOffset = Schema.GetOffset(0x85888F6DD071C433);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_OptionLabelsOffset);
+            _OptionLabelsOffset = _OptionLabelsOffset ?? Schema.GetOffset(0x85888F6DD071C433);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_OptionLabelsOffset!.Value);
         }
     }
 

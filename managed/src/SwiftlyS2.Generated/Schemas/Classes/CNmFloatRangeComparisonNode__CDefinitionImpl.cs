@@ -16,37 +16,37 @@ internal partial class CNmFloatRangeComparisonNode__CDefinitionImpl : CNmBoolVal
 {
     public CNmFloatRangeComparisonNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint _RangeOffset = -1;
+    private static nint? _RangeOffset;
     private SchemaUntypedField? _RangeInstance;
 
     public SchemaUntypedField Range
     {
         get
         {
-            if (_RangeOffset == -1) _RangeOffset = Schema.GetOffset(0x6F364CB3D639CF2);
+            _RangeOffset = _RangeOffset ?? Schema.GetOffset(0x6F364CB3D639CF2);
             var instance = _RangeInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _RangeOffset);
+            instance.DangerousSetHandle(_Handle + _RangeOffset!.Value);
             return instance;
         }
     }
-    private static nint _InputValueNodeIdxOffset = -1;
+    private static nint? _InputValueNodeIdxOffset;
 
     public ref short InputValueNodeIdx
     {
         get
         {
-            if (_InputValueNodeIdxOffset == -1) _InputValueNodeIdxOffset = Schema.GetOffset(0x6F364CB95E89F27);
-            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset);
+            _InputValueNodeIdxOffset = _InputValueNodeIdxOffset ?? Schema.GetOffset(0x6F364CB95E89F27);
+            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
         }
     }
-    private static nint _IsInclusiveCheckOffset = -1;
+    private static nint? _IsInclusiveCheckOffset;
 
     public ref bool IsInclusiveCheck
     {
         get
         {
-            if (_IsInclusiveCheckOffset == -1) _IsInclusiveCheckOffset = Schema.GetOffset(0x6F364CBA95FA7C3);
-            return ref _Handle.AsRef<bool>(_IsInclusiveCheckOffset);
+            _IsInclusiveCheckOffset = _IsInclusiveCheckOffset ?? Schema.GetOffset(0x6F364CBA95FA7C3);
+            return ref _Handle.AsRef<bool>(_IsInclusiveCheckOffset!.Value);
         }
     }
 

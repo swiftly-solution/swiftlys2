@@ -16,69 +16,69 @@ internal partial class CChoreoComponentImpl : SchemaClass, CChoreoComponent
 {
     public CChoreoComponentImpl(nint handle) : base(handle) { }
 
-    private static nint ___m_pChainEntityOffset = -1;
+    private static nint? ___m_pChainEntityOffset;
 
     public ref CNetworkVarChainer __m_pChainEntity
     {
         get
         {
-            if (___m_pChainEntityOffset == -1) ___m_pChainEntityOffset = Schema.GetOffset(0x1CE3A87F63F0E7D);
-            return ref _Handle.AsRef<CNetworkVarChainer>(___m_pChainEntityOffset);
+            ___m_pChainEntityOffset = ___m_pChainEntityOffset ?? Schema.GetOffset(0x1CE3A87F63F0E7D);
+            return ref _Handle.AsRef<CNetworkVarChainer>(___m_pChainEntityOffset!.Value);
         }
     }
-    private static nint _OwnerOffset = -1;
+    private static nint? _OwnerOffset;
 
     public ref CHandle<CBaseModelEntity> Owner
     {
         get
         {
-            if (_OwnerOffset == -1) _OwnerOffset = Schema.GetOffset(0x1CE3A87F6D89572);
-            return ref _Handle.AsRef<CHandle<CBaseModelEntity>>(_OwnerOffset);
+            _OwnerOffset = _OwnerOffset ?? Schema.GetOffset(0x1CE3A87F6D89572);
+            return ref _Handle.AsRef<CHandle<CBaseModelEntity>>(_OwnerOffset!.Value);
         }
     }
-    private static nint _ExernalChoreoGraphCountOffset = -1;
+    private static nint? _ExernalChoreoGraphCountOffset;
 
     public ref int ExernalChoreoGraphCount
     {
         get
         {
-            if (_ExernalChoreoGraphCountOffset == -1) _ExernalChoreoGraphCountOffset = Schema.GetOffset(0x1CE3A87345F5FE3);
-            return ref _Handle.AsRef<int>(_ExernalChoreoGraphCountOffset);
+            _ExernalChoreoGraphCountOffset = _ExernalChoreoGraphCountOffset ?? Schema.GetOffset(0x1CE3A87345F5FE3);
+            return ref _Handle.AsRef<int>(_ExernalChoreoGraphCountOffset!.Value);
         }
     }
-    private static nint _ActiveExternalChoreoGraphSlotIDOffset = -1;
+    private static nint? _ActiveExternalChoreoGraphSlotIDOffset;
 
     public ref CGlobalSymbol ActiveExternalChoreoGraphSlotID
     {
         get
         {
-            if (_ActiveExternalChoreoGraphSlotIDOffset == -1) _ActiveExternalChoreoGraphSlotIDOffset = Schema.GetOffset(0x1CE3A879B40121E);
-            return ref _Handle.AsRef<CGlobalSymbol>(_ActiveExternalChoreoGraphSlotIDOffset);
+            _ActiveExternalChoreoGraphSlotIDOffset = _ActiveExternalChoreoGraphSlotIDOffset ?? Schema.GetOffset(0x1CE3A879B40121E);
+            return ref _Handle.AsRef<CGlobalSymbol>(_ActiveExternalChoreoGraphSlotIDOffset!.Value);
         }
     }
-    private static nint _NextSceneEventIdOffset = -1;
+    private static nint? _NextSceneEventIdOffset;
     private SceneEventId_tImpl? _NextSceneEventIdInstance;
 
     public SceneEventId_t NextSceneEventId
     {
         get
         {
-            if (_NextSceneEventIdOffset == -1) _NextSceneEventIdOffset = Schema.GetOffset(0x1CE3A873756F461);
+            _NextSceneEventIdOffset = _NextSceneEventIdOffset ?? Schema.GetOffset(0x1CE3A873756F461);
             var instance = _NextSceneEventIdInstance ??= new SceneEventId_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _NextSceneEventIdOffset);
+            instance.DangerousSetHandle(_Handle + _NextSceneEventIdOffset!.Value);
             return instance;
         }
     }
-    private static nint _AllowResponsesEndTimeOffset = -1;
+    private static nint? _AllowResponsesEndTimeOffset;
     private GameTime_tImpl? _AllowResponsesEndTimeInstance;
 
     public GameTime_t AllowResponsesEndTime
     {
         get
         {
-            if (_AllowResponsesEndTimeOffset == -1) _AllowResponsesEndTimeOffset = Schema.GetOffset(0x1CE3A8758EB0248);
+            _AllowResponsesEndTimeOffset = _AllowResponsesEndTimeOffset ?? Schema.GetOffset(0x1CE3A8758EB0248);
             var instance = _AllowResponsesEndTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _AllowResponsesEndTimeOffset);
+            instance.DangerousSetHandle(_Handle + _AllowResponsesEndTimeOffset!.Value);
             return instance;
         }
     }

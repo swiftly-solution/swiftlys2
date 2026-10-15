@@ -16,24 +16,24 @@ internal partial class RnCompoundTree_tImpl : SchemaClass, RnCompoundTree_t
 {
     public RnCompoundTree_tImpl(nint handle) : base(handle) { }
 
-    private static nint _NodesOffset = -1;
+    private static nint? _NodesOffset;
 
     public ref CUtlLeanVector<RnCompoundTreeNode_t, int> Nodes
     {
         get
         {
-            if (_NodesOffset == -1) _NodesOffset = Schema.GetOffset(0xAFA9C34BEBA045DA);
-            return ref _Handle.AsRef<CUtlLeanVector<RnCompoundTreeNode_t, int>>(_NodesOffset);
+            _NodesOffset = _NodesOffset ?? Schema.GetOffset(0xAFA9C34BEBA045DA);
+            return ref _Handle.AsRef<CUtlLeanVector<RnCompoundTreeNode_t, int>>(_NodesOffset!.Value);
         }
     }
-    private static nint _StartIterationIndexOffset = -1;
+    private static nint? _StartIterationIndexOffset;
 
     public ref uint StartIterationIndex
     {
         get
         {
-            if (_StartIterationIndexOffset == -1) _StartIterationIndexOffset = Schema.GetOffset(0xAFA9C34BA37E88C6);
-            return ref _Handle.AsRef<uint>(_StartIterationIndexOffset);
+            _StartIterationIndexOffset = _StartIterationIndexOffset ?? Schema.GetOffset(0xAFA9C34BA37E88C6);
+            return ref _Handle.AsRef<uint>(_StartIterationIndexOffset!.Value);
         }
     }
 

@@ -16,16 +16,16 @@ internal partial class CFiringModeFloatImpl : SchemaClass, CFiringModeFloat
 {
     public CFiringModeFloatImpl(nint handle) : base(handle) { }
 
-    private static nint _ValuesOffset = -1;
+    private static nint? _ValuesOffset;
     private SchemaFixedArray<float>? _ValuesInstance;
 
     public ISchemaFixedArray<float> Values
     {
         get
         {
-            if (_ValuesOffset == -1) _ValuesOffset = Schema.GetOffset(0xB6918247BD8BFD5);
+            _ValuesOffset = _ValuesOffset ?? Schema.GetOffset(0xB6918247BD8BFD5);
             var instance = _ValuesInstance ??= new SchemaFixedArray<float>(0, 0xB6918247BD8BFD5, 2, 4, 4);
-            instance.DangerousSetHandle(_Handle + _ValuesOffset);
+            instance.DangerousSetHandle(_Handle + _ValuesOffset!.Value);
             return instance;
         }
     }

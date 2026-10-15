@@ -16,130 +16,130 @@ internal partial class CNmGraphDocStateNodeImpl : CNmGraphDocStateMachineGraphNo
 {
     public CNmGraphDocStateNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _TypeOffset = -1;
+    private static nint? _TypeOffset;
 
     public ref CNmGraphDocStateNode__StateType_t Type
     {
         get
         {
-            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0x2A58029E0F04B4ED);
-            return ref _Handle.AsRef<CNmGraphDocStateNode__StateType_t>(_TypeOffset);
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x2A58029E0F04B4ED);
+            return ref _Handle.AsRef<CNmGraphDocStateNode__StateType_t>(_TypeOffset!.Value);
         }
     }
-    private static nint _CloneSourceStateIDOffset = -1;
+    private static nint? _CloneSourceStateIDOffset;
     private SchemaUntypedField? _CloneSourceStateIDInstance;
 
     public SchemaUntypedField CloneSourceStateID
     {
         get
         {
-            if (_CloneSourceStateIDOffset == -1) _CloneSourceStateIDOffset = Schema.GetOffset(0x2A58029E9698872D);
+            _CloneSourceStateIDOffset = _CloneSourceStateIDOffset ?? Schema.GetOffset(0x2A58029E9698872D);
             var instance = _CloneSourceStateIDInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _CloneSourceStateIDOffset);
+            instance.DangerousSetHandle(_Handle + _CloneSourceStateIDOffset!.Value);
             return instance;
         }
     }
-    private static nint _CloneStateVersionOffset = -1;
+    private static nint? _CloneStateVersionOffset;
     private SchemaUntypedField? _CloneStateVersionInstance;
 
     public SchemaUntypedField CloneStateVersion
     {
         get
         {
-            if (_CloneStateVersionOffset == -1) _CloneStateVersionOffset = Schema.GetOffset(0x2A58029E1E035E69);
+            _CloneStateVersionOffset = _CloneStateVersionOffset ?? Schema.GetOffset(0x2A58029E1E035E69);
             var instance = _CloneStateVersionInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _CloneStateVersionOffset);
+            instance.DangerousSetHandle(_Handle + _CloneStateVersionOffset!.Value);
             return instance;
         }
     }
-    private static nint _StateEventsOffset = -1;
+    private static nint? _StateEventsOffset;
 
     public ref CUtlVector<CNmGraphDocStateNode__StateEvent_t> StateEvents
     {
         get
         {
-            if (_StateEventsOffset == -1) _StateEventsOffset = Schema.GetOffset(0x2A58029EBBAB7383);
-            return ref _Handle.AsRef<CUtlVector<CNmGraphDocStateNode__StateEvent_t>>(_StateEventsOffset);
+            _StateEventsOffset = _StateEventsOffset ?? Schema.GetOffset(0x2A58029EBBAB7383);
+            return ref _Handle.AsRef<CUtlVector<CNmGraphDocStateNode__StateEvent_t>>(_StateEventsOffset!.Value);
         }
     }
-    private static nint _TimedStateEventsOffset = -1;
+    private static nint? _TimedStateEventsOffset;
 
     public ref CUtlVector<CNmGraphDocStateNode__TimedStateEvent_t> TimedStateEvents
     {
         get
         {
-            if (_TimedStateEventsOffset == -1) _TimedStateEventsOffset = Schema.GetOffset(0x2A58029E7A607E14);
-            return ref _Handle.AsRef<CUtlVector<CNmGraphDocStateNode__TimedStateEvent_t>>(_TimedStateEventsOffset);
+            _TimedStateEventsOffset = _TimedStateEventsOffset ?? Schema.GetOffset(0x2A58029E7A607E14);
+            return ref _Handle.AsRef<CUtlVector<CNmGraphDocStateNode__TimedStateEvent_t>>(_TimedStateEventsOffset!.Value);
         }
     }
-    private static nint _EventsOffset = -1;
+    private static nint? _EventsOffset;
 
     public ref CUtlVector<CGlobalSymbol> Events
     {
         get
         {
-            if (_EventsOffset == -1) _EventsOffset = Schema.GetOffset(0x2A58029E6ED4D924);
-            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_EventsOffset);
+            _EventsOffset = _EventsOffset ?? Schema.GetOffset(0x2A58029E6ED4D924);
+            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_EventsOffset!.Value);
         }
     }
-    private static nint _EntryEventsOffset = -1;
+    private static nint? _EntryEventsOffset;
 
     public ref CUtlVector<CGlobalSymbol> EntryEvents
     {
         get
         {
-            if (_EntryEventsOffset == -1) _EntryEventsOffset = Schema.GetOffset(0x2A58029E211A7856);
-            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_EntryEventsOffset);
+            _EntryEventsOffset = _EntryEventsOffset ?? Schema.GetOffset(0x2A58029E211A7856);
+            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_EntryEventsOffset!.Value);
         }
     }
-    private static nint _ExecuteEventsOffset = -1;
+    private static nint? _ExecuteEventsOffset;
 
     public ref CUtlVector<CGlobalSymbol> ExecuteEvents
     {
         get
         {
-            if (_ExecuteEventsOffset == -1) _ExecuteEventsOffset = Schema.GetOffset(0x2A58029E3BF4FF69);
-            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_ExecuteEventsOffset);
+            _ExecuteEventsOffset = _ExecuteEventsOffset ?? Schema.GetOffset(0x2A58029E3BF4FF69);
+            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_ExecuteEventsOffset!.Value);
         }
     }
-    private static nint _ExitEventsOffset = -1;
+    private static nint? _ExitEventsOffset;
 
     public ref CUtlVector<CGlobalSymbol> ExitEvents
     {
         get
         {
-            if (_ExitEventsOffset == -1) _ExitEventsOffset = Schema.GetOffset(0x2A58029E96F711C4);
-            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_ExitEventsOffset);
+            _ExitEventsOffset = _ExitEventsOffset ?? Schema.GetOffset(0x2A58029E96F711C4);
+            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_ExitEventsOffset!.Value);
         }
     }
-    private static nint _TimeRemainingEventsOffset = -1;
+    private static nint? _TimeRemainingEventsOffset;
 
     public ref CUtlVector<CNmGraphDocStateNode__TimedStateEvent_t> TimeRemainingEvents
     {
         get
         {
-            if (_TimeRemainingEventsOffset == -1) _TimeRemainingEventsOffset = Schema.GetOffset(0x2A58029EE20C2201);
-            return ref _Handle.AsRef<CUtlVector<CNmGraphDocStateNode__TimedStateEvent_t>>(_TimeRemainingEventsOffset);
+            _TimeRemainingEventsOffset = _TimeRemainingEventsOffset ?? Schema.GetOffset(0x2A58029EE20C2201);
+            return ref _Handle.AsRef<CUtlVector<CNmGraphDocStateNode__TimedStateEvent_t>>(_TimeRemainingEventsOffset!.Value);
         }
     }
-    private static nint _TimeElapsedEventsOffset = -1;
+    private static nint? _TimeElapsedEventsOffset;
 
     public ref CUtlVector<CNmGraphDocStateNode__TimedStateEvent_t> TimeElapsedEvents
     {
         get
         {
-            if (_TimeElapsedEventsOffset == -1) _TimeElapsedEventsOffset = Schema.GetOffset(0x2A58029EB403A4DD);
-            return ref _Handle.AsRef<CUtlVector<CNmGraphDocStateNode__TimedStateEvent_t>>(_TimeElapsedEventsOffset);
+            _TimeElapsedEventsOffset = _TimeElapsedEventsOffset ?? Schema.GetOffset(0x2A58029EB403A4DD);
+            return ref _Handle.AsRef<CUtlVector<CNmGraphDocStateNode__TimedStateEvent_t>>(_TimeElapsedEventsOffset!.Value);
         }
     }
-    private static nint _UseActualElapsedTimeInStateForTimedEventsOffset = -1;
+    private static nint? _UseActualElapsedTimeInStateForTimedEventsOffset;
 
     public ref bool UseActualElapsedTimeInStateForTimedEvents
     {
         get
         {
-            if (_UseActualElapsedTimeInStateForTimedEventsOffset == -1) _UseActualElapsedTimeInStateForTimedEventsOffset = Schema.GetOffset(0x2A58029E6B790DFA);
-            return ref _Handle.AsRef<bool>(_UseActualElapsedTimeInStateForTimedEventsOffset);
+            _UseActualElapsedTimeInStateForTimedEventsOffset = _UseActualElapsedTimeInStateForTimedEventsOffset ?? Schema.GetOffset(0x2A58029E6B790DFA);
+            return ref _Handle.AsRef<bool>(_UseActualElapsedTimeInStateForTimedEventsOffset!.Value);
         }
     }
 

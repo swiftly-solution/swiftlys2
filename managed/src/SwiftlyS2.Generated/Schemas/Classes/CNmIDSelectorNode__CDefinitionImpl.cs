@@ -16,40 +16,40 @@ internal partial class CNmIDSelectorNode__CDefinitionImpl : CNmIDValueNode__CDef
 {
     public CNmIDSelectorNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint _ConditionNodeIndicesOffset = -1;
+    private static nint? _ConditionNodeIndicesOffset;
     private SchemaUntypedField? _ConditionNodeIndicesInstance;
 
     public SchemaUntypedField ConditionNodeIndices
     {
         get
         {
-            if (_ConditionNodeIndicesOffset == -1) _ConditionNodeIndicesOffset = Schema.GetOffset(0x23876114A144D0F);
+            _ConditionNodeIndicesOffset = _ConditionNodeIndicesOffset ?? Schema.GetOffset(0x23876114A144D0F);
             var instance = _ConditionNodeIndicesInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ConditionNodeIndicesOffset);
+            instance.DangerousSetHandle(_Handle + _ConditionNodeIndicesOffset!.Value);
             return instance;
         }
     }
-    private static nint _ValuesOffset = -1;
+    private static nint? _ValuesOffset;
     private SchemaUntypedField? _ValuesInstance;
 
     public SchemaUntypedField Values
     {
         get
         {
-            if (_ValuesOffset == -1) _ValuesOffset = Schema.GetOffset(0x2387611FBEDDADB);
+            _ValuesOffset = _ValuesOffset ?? Schema.GetOffset(0x2387611FBEDDADB);
             var instance = _ValuesInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ValuesOffset);
+            instance.DangerousSetHandle(_Handle + _ValuesOffset!.Value);
             return instance;
         }
     }
-    private static nint _DefaultValueOffset = -1;
+    private static nint? _DefaultValueOffset;
 
     public ref CGlobalSymbol DefaultValue
     {
         get
         {
-            if (_DefaultValueOffset == -1) _DefaultValueOffset = Schema.GetOffset(0x2387611BBE0341F);
-            return ref _Handle.AsRef<CGlobalSymbol>(_DefaultValueOffset);
+            _DefaultValueOffset = _DefaultValueOffset ?? Schema.GetOffset(0x2387611BBE0341F);
+            return ref _Handle.AsRef<CGlobalSymbol>(_DefaultValueOffset!.Value);
         }
     }
 

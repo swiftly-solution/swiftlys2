@@ -16,69 +16,69 @@ internal partial class CMessageImpl : CPointEntityImpl, CMessage
 {
     public CMessageImpl(nint handle) : base(handle) { }
 
-    private static nint _MessageOffset = -1;
+    private static nint? _MessageOffset;
 
     public string Message
     {
         get
         {
-            if (_MessageOffset == -1) _MessageOffset = Schema.GetOffset(0xCCCF499CC5243DC);
-            return Schema.GetString(_Handle.Read<nint>(_MessageOffset));
+            _MessageOffset = _MessageOffset ?? Schema.GetOffset(0xCCCF499CC5243DC);
+            return Schema.GetString(_Handle.Read<nint>(_MessageOffset!.Value));
         }
         set
         {
-            if (_MessageOffset == -1) _MessageOffset = Schema.GetOffset(0xCCCF499CC5243DC);
-            Schema.SetString(_Handle, _MessageOffset, value);
+            _MessageOffset = _MessageOffset ?? Schema.GetOffset(0xCCCF499CC5243DC);
+            Schema.SetString(_Handle, _MessageOffset!.Value, value);
         }
     }
-    private static nint _MessageVolumeOffset = -1;
+    private static nint? _MessageVolumeOffset;
 
     public ref float MessageVolume
     {
         get
         {
-            if (_MessageVolumeOffset == -1) _MessageVolumeOffset = Schema.GetOffset(0xCCCF499C87F24D6);
-            return ref _Handle.AsRef<float>(_MessageVolumeOffset);
+            _MessageVolumeOffset = _MessageVolumeOffset ?? Schema.GetOffset(0xCCCF499C87F24D6);
+            return ref _Handle.AsRef<float>(_MessageVolumeOffset!.Value);
         }
     }
-    private static nint _MessageAttenuationOffset = -1;
+    private static nint? _MessageAttenuationOffset;
 
     public ref int MessageAttenuation
     {
         get
         {
-            if (_MessageAttenuationOffset == -1) _MessageAttenuationOffset = Schema.GetOffset(0xCCCF4998F72B2B4);
-            return ref _Handle.AsRef<int>(_MessageAttenuationOffset);
+            _MessageAttenuationOffset = _MessageAttenuationOffset ?? Schema.GetOffset(0xCCCF4998F72B2B4);
+            return ref _Handle.AsRef<int>(_MessageAttenuationOffset!.Value);
         }
     }
-    private static nint _RadiusOffset = -1;
+    private static nint? _RadiusOffset;
 
     public ref float Radius
     {
         get
         {
-            if (_RadiusOffset == -1) _RadiusOffset = Schema.GetOffset(0xCCCF4997C5B0533);
-            return ref _Handle.AsRef<float>(_RadiusOffset);
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0xCCCF4997C5B0533);
+            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
         }
     }
-    private static nint _NoiseOffset = -1;
+    private static nint? _NoiseOffset;
 
     public ref CGameSoundEventName Noise
     {
         get
         {
-            if (_NoiseOffset == -1) _NoiseOffset = Schema.GetOffset(0xCCCF4991F22B8CC);
-            return ref _Handle.AsRef<CGameSoundEventName>(_NoiseOffset);
+            _NoiseOffset = _NoiseOffset ?? Schema.GetOffset(0xCCCF4991F22B8CC);
+            return ref _Handle.AsRef<CGameSoundEventName>(_NoiseOffset!.Value);
         }
     }
-    private static nint _OnShowMessageOffset = -1;
+    private static nint? _OnShowMessageOffset;
 
     public ref CEntityIOOutput OnShowMessage
     {
         get
         {
-            if (_OnShowMessageOffset == -1) _OnShowMessageOffset = Schema.GetOffset(0xCCCF499D586D920);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnShowMessageOffset);
+            _OnShowMessageOffset = _OnShowMessageOffset ?? Schema.GetOffset(0xCCCF499D586D920);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnShowMessageOffset!.Value);
         }
     }
 

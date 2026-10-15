@@ -16,68 +16,68 @@ internal partial class CAnimGraphDoc_StateTransitionImpl : SchemaClass, CAnimGra
 {
     public CAnimGraphDoc_StateTransitionImpl(nint handle) : base(handle) { }
 
-    private static nint _ConditionListOffset = -1;
+    private static nint? _ConditionListOffset;
     private CAnimGraphDoc_ConditionContainerImpl? _ConditionListInstance;
 
     public CAnimGraphDoc_ConditionContainer ConditionList
     {
         get
         {
-            if (_ConditionListOffset == -1) _ConditionListOffset = Schema.GetOffset(0x3D739A808EF31D0A);
+            _ConditionListOffset = _ConditionListOffset ?? Schema.GetOffset(0x3D739A808EF31D0A);
             var instance = _ConditionListInstance ??= new CAnimGraphDoc_ConditionContainerImpl(0);
-            instance.DangerousSetHandle(_Handle + _ConditionListOffset);
+            instance.DangerousSetHandle(_Handle + _ConditionListOffset!.Value);
             return instance;
         }
     }
-    private static nint _SrcStateOffset = -1;
+    private static nint? _SrcStateOffset;
     private AnimStateIDImpl? _SrcStateInstance;
 
     public AnimStateID SrcState
     {
         get
         {
-            if (_SrcStateOffset == -1) _SrcStateOffset = Schema.GetOffset(0x3D739A80ABBB35CA);
+            _SrcStateOffset = _SrcStateOffset ?? Schema.GetOffset(0x3D739A80ABBB35CA);
             var instance = _SrcStateInstance ??= new AnimStateIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _SrcStateOffset);
+            instance.DangerousSetHandle(_Handle + _SrcStateOffset!.Value);
             return instance;
         }
     }
-    private static nint _DestStateOffset = -1;
+    private static nint? _DestStateOffset;
     private AnimStateIDImpl? _DestStateInstance;
 
     public AnimStateID DestState
     {
         get
         {
-            if (_DestStateOffset == -1) _DestStateOffset = Schema.GetOffset(0x3D739A80C2D5EAC6);
+            _DestStateOffset = _DestStateOffset ?? Schema.GetOffset(0x3D739A80C2D5EAC6);
             var instance = _DestStateInstance ??= new AnimStateIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _DestStateOffset);
+            instance.DangerousSetHandle(_Handle + _DestStateOffset!.Value);
             return instance;
         }
     }
-    private static nint _CommentOffset = -1;
+    private static nint? _CommentOffset;
 
     public string Comment
     {
         get
         {
-            if (_CommentOffset == -1) _CommentOffset = Schema.GetOffset(0x3D739A8088A0B4DF);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_CommentOffset));
+            _CommentOffset = _CommentOffset ?? Schema.GetOffset(0x3D739A8088A0B4DF);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_CommentOffset!.Value));
         }
         set
         {
-            if (_CommentOffset == -1) _CommentOffset = Schema.GetOffset(0x3D739A8088A0B4DF);
-            Schema.SetCUtlString(_Handle, _CommentOffset, value);
+            _CommentOffset = _CommentOffset ?? Schema.GetOffset(0x3D739A8088A0B4DF);
+            Schema.SetCUtlString(_Handle, _CommentOffset!.Value, value);
         }
     }
-    private static nint _DisabledOffset = -1;
+    private static nint? _DisabledOffset;
 
     public ref bool Disabled
     {
         get
         {
-            if (_DisabledOffset == -1) _DisabledOffset = Schema.GetOffset(0x3D739A803A7C5965);
-            return ref _Handle.AsRef<bool>(_DisabledOffset);
+            _DisabledOffset = _DisabledOffset ?? Schema.GetOffset(0x3D739A803A7C5965);
+            return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
         }
     }
 

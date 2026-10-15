@@ -16,99 +16,99 @@ internal partial class CCitadelSoundOpvarSetOBBImpl : CBaseEntityImpl, CCitadelS
 {
     public CCitadelSoundOpvarSetOBBImpl(nint handle) : base(handle) { }
 
-    private static nint _StackNameOffset = -1;
+    private static nint? _StackNameOffset;
 
     public string StackName
     {
         get
         {
-            if (_StackNameOffset == -1) _StackNameOffset = Schema.GetOffset(0xD3F8645E3B3E9CD4);
-            return Schema.GetString(_Handle.Read<nint>(_StackNameOffset));
+            _StackNameOffset = _StackNameOffset ?? Schema.GetOffset(0xD3F8645E3B3E9CD4);
+            return Schema.GetString(_Handle.Read<nint>(_StackNameOffset!.Value));
         }
         set
         {
-            if (_StackNameOffset == -1) _StackNameOffset = Schema.GetOffset(0xD3F8645E3B3E9CD4);
-            Schema.SetString(_Handle, _StackNameOffset, value);
+            _StackNameOffset = _StackNameOffset ?? Schema.GetOffset(0xD3F8645E3B3E9CD4);
+            Schema.SetString(_Handle, _StackNameOffset!.Value, value);
         }
     }
-    private static nint _OperatorNameOffset = -1;
+    private static nint? _OperatorNameOffset;
 
     public string OperatorName
     {
         get
         {
-            if (_OperatorNameOffset == -1) _OperatorNameOffset = Schema.GetOffset(0xD3F8645EF6140996);
-            return Schema.GetString(_Handle.Read<nint>(_OperatorNameOffset));
+            _OperatorNameOffset = _OperatorNameOffset ?? Schema.GetOffset(0xD3F8645EF6140996);
+            return Schema.GetString(_Handle.Read<nint>(_OperatorNameOffset!.Value));
         }
         set
         {
-            if (_OperatorNameOffset == -1) _OperatorNameOffset = Schema.GetOffset(0xD3F8645EF6140996);
-            Schema.SetString(_Handle, _OperatorNameOffset, value);
+            _OperatorNameOffset = _OperatorNameOffset ?? Schema.GetOffset(0xD3F8645EF6140996);
+            Schema.SetString(_Handle, _OperatorNameOffset!.Value, value);
         }
     }
-    private static nint _OpvarNameOffset = -1;
+    private static nint? _OpvarNameOffset;
 
     public string OpvarName
     {
         get
         {
-            if (_OpvarNameOffset == -1) _OpvarNameOffset = Schema.GetOffset(0xD3F8645E2CAEFF3C);
-            return Schema.GetString(_Handle.Read<nint>(_OpvarNameOffset));
+            _OpvarNameOffset = _OpvarNameOffset ?? Schema.GetOffset(0xD3F8645E2CAEFF3C);
+            return Schema.GetString(_Handle.Read<nint>(_OpvarNameOffset!.Value));
         }
         set
         {
-            if (_OpvarNameOffset == -1) _OpvarNameOffset = Schema.GetOffset(0xD3F8645E2CAEFF3C);
-            Schema.SetString(_Handle, _OpvarNameOffset, value);
+            _OpvarNameOffset = _OpvarNameOffset ?? Schema.GetOffset(0xD3F8645E2CAEFF3C);
+            Schema.SetString(_Handle, _OpvarNameOffset!.Value, value);
         }
     }
-    private static nint _DistanceInnerMinsOffset = -1;
+    private static nint? _DistanceInnerMinsOffset;
 
     public ref Vector DistanceInnerMins
     {
         get
         {
-            if (_DistanceInnerMinsOffset == -1) _DistanceInnerMinsOffset = Schema.GetOffset(0xD3F8645EC7540883);
-            return ref _Handle.AsRef<Vector>(_DistanceInnerMinsOffset);
+            _DistanceInnerMinsOffset = _DistanceInnerMinsOffset ?? Schema.GetOffset(0xD3F8645EC7540883);
+            return ref _Handle.AsRef<Vector>(_DistanceInnerMinsOffset!.Value);
         }
     }
-    private static nint _DistanceInnerMaxsOffset = -1;
+    private static nint? _DistanceInnerMaxsOffset;
 
     public ref Vector DistanceInnerMaxs
     {
         get
         {
-            if (_DistanceInnerMaxsOffset == -1) _DistanceInnerMaxsOffset = Schema.GetOffset(0xD3F8645E705E7E61);
-            return ref _Handle.AsRef<Vector>(_DistanceInnerMaxsOffset);
+            _DistanceInnerMaxsOffset = _DistanceInnerMaxsOffset ?? Schema.GetOffset(0xD3F8645E705E7E61);
+            return ref _Handle.AsRef<Vector>(_DistanceInnerMaxsOffset!.Value);
         }
     }
-    private static nint _DistanceOuterMinsOffset = -1;
+    private static nint? _DistanceOuterMinsOffset;
 
     public ref Vector DistanceOuterMins
     {
         get
         {
-            if (_DistanceOuterMinsOffset == -1) _DistanceOuterMinsOffset = Schema.GetOffset(0xD3F8645E185EC6F4);
-            return ref _Handle.AsRef<Vector>(_DistanceOuterMinsOffset);
+            _DistanceOuterMinsOffset = _DistanceOuterMinsOffset ?? Schema.GetOffset(0xD3F8645E185EC6F4);
+            return ref _Handle.AsRef<Vector>(_DistanceOuterMinsOffset!.Value);
         }
     }
-    private static nint _DistanceOuterMaxsOffset = -1;
+    private static nint? _DistanceOuterMaxsOffset;
 
     public ref Vector DistanceOuterMaxs
     {
         get
         {
-            if (_DistanceOuterMaxsOffset == -1) _DistanceOuterMaxsOffset = Schema.GetOffset(0xD3F8645E99738B36);
-            return ref _Handle.AsRef<Vector>(_DistanceOuterMaxsOffset);
+            _DistanceOuterMaxsOffset = _DistanceOuterMaxsOffset ?? Schema.GetOffset(0xD3F8645E99738B36);
+            return ref _Handle.AsRef<Vector>(_DistanceOuterMaxsOffset!.Value);
         }
     }
-    private static nint _AABBDirectionOffset = -1;
+    private static nint? _AABBDirectionOffset;
 
     public ref int AABBDirection
     {
         get
         {
-            if (_AABBDirectionOffset == -1) _AABBDirectionOffset = Schema.GetOffset(0xD3F8645EE8CF552C);
-            return ref _Handle.AsRef<int>(_AABBDirectionOffset);
+            _AABBDirectionOffset = _AABBDirectionOffset ?? Schema.GetOffset(0xD3F8645EE8CF552C);
+            return ref _Handle.AsRef<int>(_AABBDirectionOffset!.Value);
         }
     }
 

@@ -16,14 +16,14 @@ internal partial class CVPhysXSurfacePropertiesListImpl : SchemaClass, CVPhysXSu
 {
     public CVPhysXSurfacePropertiesListImpl(nint handle) : base(handle) { }
 
-    private static nint _SurfacePropertiesListOffset = -1;
+    private static nint? _SurfacePropertiesListOffset;
 
     public ref CUtlVector<PointerTo<CPhysSurfaceProperties>> SurfacePropertiesList
     {
         get
         {
-            if (_SurfacePropertiesListOffset == -1) _SurfacePropertiesListOffset = Schema.GetOffset(0x46700CAAC149A2D);
-            return ref _Handle.AsRef<CUtlVector<PointerTo<CPhysSurfaceProperties>>>(_SurfacePropertiesListOffset);
+            _SurfacePropertiesListOffset = _SurfacePropertiesListOffset ?? Schema.GetOffset(0x46700CAAC149A2D);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<CPhysSurfaceProperties>>>(_SurfacePropertiesListOffset!.Value);
         }
     }
 

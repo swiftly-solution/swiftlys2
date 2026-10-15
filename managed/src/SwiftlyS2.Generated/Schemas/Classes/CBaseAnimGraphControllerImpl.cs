@@ -16,334 +16,334 @@ internal partial class CBaseAnimGraphControllerImpl : CSkeletonAnimationControll
 {
     public CBaseAnimGraphControllerImpl(nint handle) : base(handle) { }
 
-    private static nint _AnimationAlgorithmOffset = -1;
+    private static nint? _AnimationAlgorithmOffset;
 
     public ref AnimationAlgorithm_t AnimationAlgorithm
     {
         get
         {
-            if (_AnimationAlgorithmOffset == -1) _AnimationAlgorithmOffset = Schema.GetOffset(0xFA1FB81E9E954FFE);
-            return ref _Handle.AsRef<AnimationAlgorithm_t>(_AnimationAlgorithmOffset);
+            _AnimationAlgorithmOffset = _AnimationAlgorithmOffset ?? Schema.GetOffset(0xFA1FB81E9E954FFE);
+            return ref _Handle.AsRef<AnimationAlgorithm_t>(_AnimationAlgorithmOffset!.Value);
         }
     }
-    private static nint _NextExternalGraphHandleOffset = -1;
+    private static nint? _NextExternalGraphHandleOffset;
     private ExternalAnimGraphHandle_tImpl? _NextExternalGraphHandleInstance;
 
     public ExternalAnimGraphHandle_t NextExternalGraphHandle
     {
         get
         {
-            if (_NextExternalGraphHandleOffset == -1) _NextExternalGraphHandleOffset = Schema.GetOffset(0xFA1FB81E8F65A277);
+            _NextExternalGraphHandleOffset = _NextExternalGraphHandleOffset ?? Schema.GetOffset(0xFA1FB81E8F65A277);
             var instance = _NextExternalGraphHandleInstance ??= new ExternalAnimGraphHandle_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _NextExternalGraphHandleOffset);
+            instance.DangerousSetHandle(_Handle + _NextExternalGraphHandleOffset!.Value);
             return instance;
         }
     }
-    private static nint _SecondarySkeletonSlotIDsOffset = -1;
+    private static nint? _SecondarySkeletonSlotIDsOffset;
 
     public ref CUtlVector<CGlobalSymbol> SecondarySkeletonSlotIDs
     {
         get
         {
-            if (_SecondarySkeletonSlotIDsOffset == -1) _SecondarySkeletonSlotIDsOffset = Schema.GetOffset(0xFA1FB81E62810C10);
-            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_SecondarySkeletonSlotIDsOffset);
+            _SecondarySkeletonSlotIDsOffset = _SecondarySkeletonSlotIDsOffset ?? Schema.GetOffset(0xFA1FB81E62810C10);
+            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_SecondarySkeletonSlotIDsOffset!.Value);
         }
     }
-    private static nint _SecondarySkeletonsOffset = -1;
+    private static nint? _SecondarySkeletonsOffset;
 
     public ref CUtlVector<CHandle<CBaseAnimGraph>> SecondarySkeletons
     {
         get
         {
-            if (_SecondarySkeletonsOffset == -1) _SecondarySkeletonsOffset = Schema.GetOffset(0xFA1FB81E1648EB2B);
-            return ref _Handle.AsRef<CUtlVector<CHandle<CBaseAnimGraph>>>(_SecondarySkeletonsOffset);
+            _SecondarySkeletonsOffset = _SecondarySkeletonsOffset ?? Schema.GetOffset(0xFA1FB81E1648EB2B);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CBaseAnimGraph>>>(_SecondarySkeletonsOffset!.Value);
         }
     }
-    private static nint _SecondarySkeletonMasterCountOffset = -1;
+    private static nint? _SecondarySkeletonMasterCountOffset;
 
     public ref int SecondarySkeletonMasterCount
     {
         get
         {
-            if (_SecondarySkeletonMasterCountOffset == -1) _SecondarySkeletonMasterCountOffset = Schema.GetOffset(0xFA1FB81E33016DEB);
-            return ref _Handle.AsRef<int>(_SecondarySkeletonMasterCountOffset);
+            _SecondarySkeletonMasterCountOffset = _SecondarySkeletonMasterCountOffset ?? Schema.GetOffset(0xFA1FB81E33016DEB);
+            return ref _Handle.AsRef<int>(_SecondarySkeletonMasterCountOffset!.Value);
         }
     }
-    private static nint _SoundSyncTimeOffset = -1;
+    private static nint? _SoundSyncTimeOffset;
 
     public ref float SoundSyncTime
     {
         get
         {
-            if (_SoundSyncTimeOffset == -1) _SoundSyncTimeOffset = Schema.GetOffset(0xFA1FB81EE52B5EB4);
-            return ref _Handle.AsRef<float>(_SoundSyncTimeOffset);
+            _SoundSyncTimeOffset = _SoundSyncTimeOffset ?? Schema.GetOffset(0xFA1FB81EE52B5EB4);
+            return ref _Handle.AsRef<float>(_SoundSyncTimeOffset!.Value);
         }
     }
-    private static nint _ActiveIKChainMaskOffset = -1;
+    private static nint? _ActiveIKChainMaskOffset;
 
     public ref uint ActiveIKChainMask
     {
         get
         {
-            if (_ActiveIKChainMaskOffset == -1) _ActiveIKChainMaskOffset = Schema.GetOffset(0xFA1FB81E070EB774);
-            return ref _Handle.AsRef<uint>(_ActiveIKChainMaskOffset);
+            _ActiveIKChainMaskOffset = _ActiveIKChainMaskOffset ?? Schema.GetOffset(0xFA1FB81E070EB774);
+            return ref _Handle.AsRef<uint>(_ActiveIKChainMaskOffset!.Value);
         }
     }
-    private static nint _SequenceOffset = -1;
+    private static nint? _SequenceOffset;
     private HSequenceImpl? _SequenceInstance;
 
     public HSequence Sequence
     {
         get
         {
-            if (_SequenceOffset == -1) _SequenceOffset = Schema.GetOffset(0xFA1FB81EE0A0598E);
+            _SequenceOffset = _SequenceOffset ?? Schema.GetOffset(0xFA1FB81EE0A0598E);
             var instance = _SequenceInstance ??= new HSequenceImpl(0);
-            instance.DangerousSetHandle(_Handle + _SequenceOffset);
+            instance.DangerousSetHandle(_Handle + _SequenceOffset!.Value);
             return instance;
         }
     }
-    private static nint _SeqStartTimeOffset = -1;
+    private static nint? _SeqStartTimeOffset;
     private GameTime_tImpl? _SeqStartTimeInstance;
 
     public GameTime_t SeqStartTime
     {
         get
         {
-            if (_SeqStartTimeOffset == -1) _SeqStartTimeOffset = Schema.GetOffset(0xFA1FB81E9120356F);
+            _SeqStartTimeOffset = _SeqStartTimeOffset ?? Schema.GetOffset(0xFA1FB81E9120356F);
             var instance = _SeqStartTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _SeqStartTimeOffset);
+            instance.DangerousSetHandle(_Handle + _SeqStartTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _SeqFixedCycleOffset = -1;
+    private static nint? _SeqFixedCycleOffset;
 
     public ref float SeqFixedCycle
     {
         get
         {
-            if (_SeqFixedCycleOffset == -1) _SeqFixedCycleOffset = Schema.GetOffset(0xFA1FB81E77103EAE);
-            return ref _Handle.AsRef<float>(_SeqFixedCycleOffset);
+            _SeqFixedCycleOffset = _SeqFixedCycleOffset ?? Schema.GetOffset(0xFA1FB81E77103EAE);
+            return ref _Handle.AsRef<float>(_SeqFixedCycleOffset!.Value);
         }
     }
-    private static nint _AnimLoopModeOffset = -1;
+    private static nint? _AnimLoopModeOffset;
 
     public ref AnimLoopMode_t AnimLoopMode
     {
         get
         {
-            if (_AnimLoopModeOffset == -1) _AnimLoopModeOffset = Schema.GetOffset(0xFA1FB81E9C9688D9);
-            return ref _Handle.AsRef<AnimLoopMode_t>(_AnimLoopModeOffset);
+            _AnimLoopModeOffset = _AnimLoopModeOffset ?? Schema.GetOffset(0xFA1FB81E9C9688D9);
+            return ref _Handle.AsRef<AnimLoopMode_t>(_AnimLoopModeOffset!.Value);
         }
     }
-    private static nint _PlaybackRateOffset = -1;
+    private static nint? _PlaybackRateOffset;
 
     public ref CNetworkedQuantizedFloat PlaybackRate
     {
         get
         {
-            if (_PlaybackRateOffset == -1) _PlaybackRateOffset = Schema.GetOffset(0xFA1FB81EC396F9D8);
-            return ref _Handle.AsRef<CNetworkedQuantizedFloat>(_PlaybackRateOffset);
+            _PlaybackRateOffset = _PlaybackRateOffset ?? Schema.GetOffset(0xFA1FB81EC396F9D8);
+            return ref _Handle.AsRef<CNetworkedQuantizedFloat>(_PlaybackRateOffset!.Value);
         }
     }
-    private static nint _NotifyStateOffset = -1;
+    private static nint? _NotifyStateOffset;
 
     public ref SequenceFinishNotifyState_t NotifyState
     {
         get
         {
-            if (_NotifyStateOffset == -1) _NotifyStateOffset = Schema.GetOffset(0xFA1FB81EEEDBFC3D);
-            return ref _Handle.AsRef<SequenceFinishNotifyState_t>(_NotifyStateOffset);
+            _NotifyStateOffset = _NotifyStateOffset ?? Schema.GetOffset(0xFA1FB81EEEDBFC3D);
+            return ref _Handle.AsRef<SequenceFinishNotifyState_t>(_NotifyStateOffset!.Value);
         }
     }
-    private static nint _NetworkedAnimationInputsChangedOffset = -1;
+    private static nint? _NetworkedAnimationInputsChangedOffset;
 
     public ref bool NetworkedAnimationInputsChanged
     {
         get
         {
-            if (_NetworkedAnimationInputsChangedOffset == -1) _NetworkedAnimationInputsChangedOffset = Schema.GetOffset(0xFA1FB81E97092075);
-            return ref _Handle.AsRef<bool>(_NetworkedAnimationInputsChangedOffset);
+            _NetworkedAnimationInputsChangedOffset = _NetworkedAnimationInputsChangedOffset ?? Schema.GetOffset(0xFA1FB81E97092075);
+            return ref _Handle.AsRef<bool>(_NetworkedAnimationInputsChangedOffset!.Value);
         }
     }
-    private static nint _NetworkedSequenceChangedOffset = -1;
+    private static nint? _NetworkedSequenceChangedOffset;
 
     public ref bool NetworkedSequenceChanged
     {
         get
         {
-            if (_NetworkedSequenceChangedOffset == -1) _NetworkedSequenceChangedOffset = Schema.GetOffset(0xFA1FB81E9A05208F);
-            return ref _Handle.AsRef<bool>(_NetworkedSequenceChangedOffset);
+            _NetworkedSequenceChangedOffset = _NetworkedSequenceChangedOffset ?? Schema.GetOffset(0xFA1FB81E9A05208F);
+            return ref _Handle.AsRef<bool>(_NetworkedSequenceChangedOffset!.Value);
         }
     }
-    private static nint _LastUpdateSkippedOffset = -1;
+    private static nint? _LastUpdateSkippedOffset;
 
     public ref bool LastUpdateSkipped
     {
         get
         {
-            if (_LastUpdateSkippedOffset == -1) _LastUpdateSkippedOffset = Schema.GetOffset(0xFA1FB81E53472D94);
-            return ref _Handle.AsRef<bool>(_LastUpdateSkippedOffset);
+            _LastUpdateSkippedOffset = _LastUpdateSkippedOffset ?? Schema.GetOffset(0xFA1FB81E53472D94);
+            return ref _Handle.AsRef<bool>(_LastUpdateSkippedOffset!.Value);
         }
     }
-    private static nint _SequenceFinishedOffset = -1;
+    private static nint? _SequenceFinishedOffset;
 
     public ref bool SequenceFinished
     {
         get
         {
-            if (_SequenceFinishedOffset == -1) _SequenceFinishedOffset = Schema.GetOffset(0xFA1FB81E5DB8EB16);
-            return ref _Handle.AsRef<bool>(_SequenceFinishedOffset);
+            _SequenceFinishedOffset = _SequenceFinishedOffset ?? Schema.GetOffset(0xFA1FB81E5DB8EB16);
+            return ref _Handle.AsRef<bool>(_SequenceFinishedOffset!.Value);
         }
     }
-    private static nint _PrevAnimUpdateTickOffset = -1;
+    private static nint? _PrevAnimUpdateTickOffset;
     private GameTick_tImpl? _PrevAnimUpdateTickInstance;
 
     public GameTick_t PrevAnimUpdateTick
     {
         get
         {
-            if (_PrevAnimUpdateTickOffset == -1) _PrevAnimUpdateTickOffset = Schema.GetOffset(0xFA1FB81EF7E0158D);
+            _PrevAnimUpdateTickOffset = _PrevAnimUpdateTickOffset ?? Schema.GetOffset(0xFA1FB81EF7E0158D);
             var instance = _PrevAnimUpdateTickInstance ??= new GameTick_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _PrevAnimUpdateTickOffset);
+            instance.DangerousSetHandle(_Handle + _PrevAnimUpdateTickOffset!.Value);
             return instance;
         }
     }
-    private static nint _GraphDefinitionAG2Offset = -1;
+    private static nint? _GraphDefinitionAG2Offset;
 
     public ref CStrongHandle<InfoForResourceTypeCNmGraphDefinition> GraphDefinitionAG2
     {
         get
         {
-            if (_GraphDefinitionAG2Offset == -1) _GraphDefinitionAG2Offset = Schema.GetOffset(0xFA1FB81EBE14922A);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCNmGraphDefinition>>(_GraphDefinitionAG2Offset);
+            _GraphDefinitionAG2Offset = _GraphDefinitionAG2Offset ?? Schema.GetOffset(0xFA1FB81EBE14922A);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCNmGraphDefinition>>(_GraphDefinitionAG2Offset!.Value);
         }
     }
-    private static nint _SerializePoseRecipeAG2SlotsOffset = -1;
+    private static nint? _SerializePoseRecipeAG2SlotsOffset;
 
     public ref CUtlVector<AnimGraph2SerializedPoseRecipeSlot_t> SerializePoseRecipeAG2Slots
     {
         get
         {
-            if (_SerializePoseRecipeAG2SlotsOffset == -1) _SerializePoseRecipeAG2SlotsOffset = Schema.GetOffset(0xFA1FB81ED2D78F11);
-            return ref _Handle.AsRef<CUtlVector<AnimGraph2SerializedPoseRecipeSlot_t>>(_SerializePoseRecipeAG2SlotsOffset);
+            _SerializePoseRecipeAG2SlotsOffset = _SerializePoseRecipeAG2SlotsOffset ?? Schema.GetOffset(0xFA1FB81ED2D78F11);
+            return ref _Handle.AsRef<CUtlVector<AnimGraph2SerializedPoseRecipeSlot_t>>(_SerializePoseRecipeAG2SlotsOffset!.Value);
         }
     }
-    private static nint _SerializePoseRecipeAG2DynamicOffset = -1;
+    private static nint? _SerializePoseRecipeAG2DynamicOffset;
 
     public ref CUtlVector<byte> SerializePoseRecipeAG2Dynamic
     {
         get
         {
-            if (_SerializePoseRecipeAG2DynamicOffset == -1) _SerializePoseRecipeAG2DynamicOffset = Schema.GetOffset(0xFA1FB81ECBD8C5E5);
-            return ref _Handle.AsRef<CUtlVector<byte>>(_SerializePoseRecipeAG2DynamicOffset);
+            _SerializePoseRecipeAG2DynamicOffset = _SerializePoseRecipeAG2DynamicOffset ?? Schema.GetOffset(0xFA1FB81ECBD8C5E5);
+            return ref _Handle.AsRef<CUtlVector<byte>>(_SerializePoseRecipeAG2DynamicOffset!.Value);
         }
     }
-    private static nint _SerializePoseRecipeAG2ActiveSlotOffset = -1;
+    private static nint? _SerializePoseRecipeAG2ActiveSlotOffset;
 
     public ref uint SerializePoseRecipeAG2ActiveSlot
     {
         get
         {
-            if (_SerializePoseRecipeAG2ActiveSlotOffset == -1) _SerializePoseRecipeAG2ActiveSlotOffset = Schema.GetOffset(0xFA1FB81E4788E56E);
-            return ref _Handle.AsRef<uint>(_SerializePoseRecipeAG2ActiveSlotOffset);
+            _SerializePoseRecipeAG2ActiveSlotOffset = _SerializePoseRecipeAG2ActiveSlotOffset ?? Schema.GetOffset(0xFA1FB81E4788E56E);
+            return ref _Handle.AsRef<uint>(_SerializePoseRecipeAG2ActiveSlotOffset!.Value);
         }
     }
-    private static nint _SerializePoseRecipeVersionAG2Offset = -1;
+    private static nint? _SerializePoseRecipeVersionAG2Offset;
 
     public ref int SerializePoseRecipeVersionAG2
     {
         get
         {
-            if (_SerializePoseRecipeVersionAG2Offset == -1) _SerializePoseRecipeVersionAG2Offset = Schema.GetOffset(0xFA1FB81EC099725C);
-            return ref _Handle.AsRef<int>(_SerializePoseRecipeVersionAG2Offset);
+            _SerializePoseRecipeVersionAG2Offset = _SerializePoseRecipeVersionAG2Offset ?? Schema.GetOffset(0xFA1FB81EC099725C);
+            return ref _Handle.AsRef<int>(_SerializePoseRecipeVersionAG2Offset!.Value);
         }
     }
-    private static nint _ServerGraphInstanceIterationOffset = -1;
+    private static nint? _ServerGraphInstanceIterationOffset;
 
     public ref int ServerGraphInstanceIteration
     {
         get
         {
-            if (_ServerGraphInstanceIterationOffset == -1) _ServerGraphInstanceIterationOffset = Schema.GetOffset(0xFA1FB81E86F9DE00);
-            return ref _Handle.AsRef<int>(_ServerGraphInstanceIterationOffset);
+            _ServerGraphInstanceIterationOffset = _ServerGraphInstanceIterationOffset ?? Schema.GetOffset(0xFA1FB81E86F9DE00);
+            return ref _Handle.AsRef<int>(_ServerGraphInstanceIterationOffset!.Value);
         }
     }
-    private static nint _ServerSerializationContextIterationOffset = -1;
+    private static nint? _ServerSerializationContextIterationOffset;
 
     public ref int ServerSerializationContextIteration
     {
         get
         {
-            if (_ServerSerializationContextIterationOffset == -1) _ServerSerializationContextIterationOffset = Schema.GetOffset(0xFA1FB81ED9F8A6D4);
-            return ref _Handle.AsRef<int>(_ServerSerializationContextIterationOffset);
+            _ServerSerializationContextIterationOffset = _ServerSerializationContextIterationOffset ?? Schema.GetOffset(0xFA1FB81ED9F8A6D4);
+            return ref _Handle.AsRef<int>(_ServerSerializationContextIterationOffset!.Value);
         }
     }
-    private static nint _PrimaryGraphIdOffset = -1;
+    private static nint? _PrimaryGraphIdOffset;
     private ResourceId_tImpl? _PrimaryGraphIdInstance;
 
     public ResourceId_t PrimaryGraphId
     {
         get
         {
-            if (_PrimaryGraphIdOffset == -1) _PrimaryGraphIdOffset = Schema.GetOffset(0xFA1FB81E1B851336);
+            _PrimaryGraphIdOffset = _PrimaryGraphIdOffset ?? Schema.GetOffset(0xFA1FB81E1B851336);
             var instance = _PrimaryGraphIdInstance ??= new ResourceId_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _PrimaryGraphIdOffset);
+            instance.DangerousSetHandle(_Handle + _PrimaryGraphIdOffset!.Value);
             return instance;
         }
     }
-    private static nint _ExternalGraphIdsOffset = -1;
+    private static nint? _ExternalGraphIdsOffset;
 
     public ref CUtlVector<ResourceId_t> ExternalGraphIds
     {
         get
         {
-            if (_ExternalGraphIdsOffset == -1) _ExternalGraphIdsOffset = Schema.GetOffset(0xFA1FB81E7C340F74);
-            return ref _Handle.AsRef<CUtlVector<ResourceId_t>>(_ExternalGraphIdsOffset);
+            _ExternalGraphIdsOffset = _ExternalGraphIdsOffset ?? Schema.GetOffset(0xFA1FB81E7C340F74);
+            return ref _Handle.AsRef<CUtlVector<ResourceId_t>>(_ExternalGraphIdsOffset!.Value);
         }
     }
-    private static nint _ExternalClipIdsOffset = -1;
+    private static nint? _ExternalClipIdsOffset;
 
     public ref CUtlVector<ResourceId_t> ExternalClipIds
     {
         get
         {
-            if (_ExternalClipIdsOffset == -1) _ExternalClipIdsOffset = Schema.GetOffset(0xFA1FB81E8916FFC6);
-            return ref _Handle.AsRef<CUtlVector<ResourceId_t>>(_ExternalClipIdsOffset);
+            _ExternalClipIdsOffset = _ExternalClipIdsOffset ?? Schema.GetOffset(0xFA1FB81E8916FFC6);
+            return ref _Handle.AsRef<CUtlVector<ResourceId_t>>(_ExternalClipIdsOffset!.Value);
         }
     }
-    private static nint _AnimGraph2IdentifierOffset = -1;
+    private static nint? _AnimGraph2IdentifierOffset;
 
     public ref CGlobalSymbol AnimGraph2Identifier
     {
         get
         {
-            if (_AnimGraph2IdentifierOffset == -1) _AnimGraph2IdentifierOffset = Schema.GetOffset(0xFA1FB81E5B44850A);
-            return ref _Handle.AsRef<CGlobalSymbol>(_AnimGraph2IdentifierOffset);
+            _AnimGraph2IdentifierOffset = _AnimGraph2IdentifierOffset ?? Schema.GetOffset(0xFA1FB81E5B44850A);
+            return ref _Handle.AsRef<CGlobalSymbol>(_AnimGraph2IdentifierOffset!.Value);
         }
     }
-    private static nint _GraphInstanceAG2Offset = -1;
+    private static nint? _GraphInstanceAG2Offset;
     private CAnimGraph2InstancePtrImpl? _GraphInstanceAG2Instance;
 
     public CAnimGraph2InstancePtr GraphInstanceAG2
     {
         get
         {
-            if (_GraphInstanceAG2Offset == -1) _GraphInstanceAG2Offset = Schema.GetOffset(0xFA1FB81E1D1203E0);
+            _GraphInstanceAG2Offset = _GraphInstanceAG2Offset ?? Schema.GetOffset(0xFA1FB81E1D1203E0);
             var instance = _GraphInstanceAG2Instance ??= new CAnimGraph2InstancePtrImpl(0);
-            instance.DangerousSetHandle(_Handle + _GraphInstanceAG2Offset);
+            instance.DangerousSetHandle(_Handle + _GraphInstanceAG2Offset!.Value);
             return instance;
         }
     }
-    private static nint _ExternalGraphsOffset = -1;
+    private static nint? _ExternalGraphsOffset;
     private CExternalAnimGraphListImpl? _ExternalGraphsInstance;
 
     public CExternalAnimGraphList ExternalGraphs
     {
         get
         {
-            if (_ExternalGraphsOffset == -1) _ExternalGraphsOffset = Schema.GetOffset(0xFA1FB81E932F0BC3);
+            _ExternalGraphsOffset = _ExternalGraphsOffset ?? Schema.GetOffset(0xFA1FB81E932F0BC3);
             var instance = _ExternalGraphsInstance ??= new CExternalAnimGraphListImpl(0);
-            instance.DangerousSetHandle(_Handle + _ExternalGraphsOffset);
+            instance.DangerousSetHandle(_Handle + _ExternalGraphsOffset!.Value);
             return instance;
         }
     }

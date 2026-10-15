@@ -16,24 +16,24 @@ internal partial class TraceSettings_tImpl : SchemaClass, TraceSettings_t
 {
     public TraceSettings_tImpl(nint handle) : base(handle) { }
 
-    private static nint _TraceHeightOffset = -1;
+    private static nint? _TraceHeightOffset;
 
     public ref float TraceHeight
     {
         get
         {
-            if (_TraceHeightOffset == -1) _TraceHeightOffset = Schema.GetOffset(0x6983A048EFB858CF);
-            return ref _Handle.AsRef<float>(_TraceHeightOffset);
+            _TraceHeightOffset = _TraceHeightOffset ?? Schema.GetOffset(0x6983A048EFB858CF);
+            return ref _Handle.AsRef<float>(_TraceHeightOffset!.Value);
         }
     }
-    private static nint _TraceRadiusOffset = -1;
+    private static nint? _TraceRadiusOffset;
 
     public ref float TraceRadius
     {
         get
         {
-            if (_TraceRadiusOffset == -1) _TraceRadiusOffset = Schema.GetOffset(0x6983A0489A33E452);
-            return ref _Handle.AsRef<float>(_TraceRadiusOffset);
+            _TraceRadiusOffset = _TraceRadiusOffset ?? Schema.GetOffset(0x6983A0489A33E452);
+            return ref _Handle.AsRef<float>(_TraceRadiusOffset!.Value);
         }
     }
 

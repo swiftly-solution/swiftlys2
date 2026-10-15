@@ -16,16 +16,16 @@ internal partial class CVignetteLayerImpl : CColorCorrectionLayerImpl, CVignette
 {
     public CVignetteLayerImpl(nint handle) : base(handle) { }
 
-    private static nint _ParamsOffset = -1;
+    private static nint? _ParamsOffset;
     private PostProcessingVignetteParameters_tImpl? _ParamsInstance;
 
     public PostProcessingVignetteParameters_t Params
     {
         get
         {
-            if (_ParamsOffset == -1) _ParamsOffset = Schema.GetOffset(0xB240F8E5640EA8F3);
+            _ParamsOffset = _ParamsOffset ?? Schema.GetOffset(0xB240F8E5640EA8F3);
             var instance = _ParamsInstance ??= new PostProcessingVignetteParameters_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamsOffset);
+            instance.DangerousSetHandle(_Handle + _ParamsOffset!.Value);
             return instance;
         }
     }

@@ -16,27 +16,27 @@ internal partial class CPulseCell_Inflow_ObservableVariableListenerImpl : CPulse
 {
     public CPulseCell_Inflow_ObservableVariableListenerImpl(nint handle) : base(handle) { }
 
-    private static nint _BlackboardReferenceOffset = -1;
+    private static nint? _BlackboardReferenceOffset;
     private PulseRuntimeBlackboardReferenceIndex_tImpl? _BlackboardReferenceInstance;
 
     public PulseRuntimeBlackboardReferenceIndex_t BlackboardReference
     {
         get
         {
-            if (_BlackboardReferenceOffset == -1) _BlackboardReferenceOffset = Schema.GetOffset(0x6186DA17C5B268D);
+            _BlackboardReferenceOffset = _BlackboardReferenceOffset ?? Schema.GetOffset(0x6186DA17C5B268D);
             var instance = _BlackboardReferenceInstance ??= new PulseRuntimeBlackboardReferenceIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _BlackboardReferenceOffset);
+            instance.DangerousSetHandle(_Handle + _BlackboardReferenceOffset!.Value);
             return instance;
         }
     }
-    private static nint _SelfReferenceOffset = -1;
+    private static nint? _SelfReferenceOffset;
 
     public ref bool SelfReference
     {
         get
         {
-            if (_SelfReferenceOffset == -1) _SelfReferenceOffset = Schema.GetOffset(0x6186DA14772CFC4);
-            return ref _Handle.AsRef<bool>(_SelfReferenceOffset);
+            _SelfReferenceOffset = _SelfReferenceOffset ?? Schema.GetOffset(0x6186DA14772CFC4);
+            return ref _Handle.AsRef<bool>(_SelfReferenceOffset!.Value);
         }
     }
 

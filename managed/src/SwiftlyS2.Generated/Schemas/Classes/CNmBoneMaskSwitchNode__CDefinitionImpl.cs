@@ -16,54 +16,54 @@ internal partial class CNmBoneMaskSwitchNode__CDefinitionImpl : CNmBoneMaskValue
 {
     public CNmBoneMaskSwitchNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint _SwitchValueNodeIdxOffset = -1;
+    private static nint? _SwitchValueNodeIdxOffset;
 
     public ref short SwitchValueNodeIdx
     {
         get
         {
-            if (_SwitchValueNodeIdxOffset == -1) _SwitchValueNodeIdxOffset = Schema.GetOffset(0xD21604677FBD7561);
-            return ref _Handle.AsRef<short>(_SwitchValueNodeIdxOffset);
+            _SwitchValueNodeIdxOffset = _SwitchValueNodeIdxOffset ?? Schema.GetOffset(0xD21604677FBD7561);
+            return ref _Handle.AsRef<short>(_SwitchValueNodeIdxOffset!.Value);
         }
     }
-    private static nint _TrueValueNodeIdxOffset = -1;
+    private static nint? _TrueValueNodeIdxOffset;
 
     public ref short TrueValueNodeIdx
     {
         get
         {
-            if (_TrueValueNodeIdxOffset == -1) _TrueValueNodeIdxOffset = Schema.GetOffset(0xD2160467FDE74365);
-            return ref _Handle.AsRef<short>(_TrueValueNodeIdxOffset);
+            _TrueValueNodeIdxOffset = _TrueValueNodeIdxOffset ?? Schema.GetOffset(0xD2160467FDE74365);
+            return ref _Handle.AsRef<short>(_TrueValueNodeIdxOffset!.Value);
         }
     }
-    private static nint _FalseValueNodeIdxOffset = -1;
+    private static nint? _FalseValueNodeIdxOffset;
 
     public ref short FalseValueNodeIdx
     {
         get
         {
-            if (_FalseValueNodeIdxOffset == -1) _FalseValueNodeIdxOffset = Schema.GetOffset(0xD21604678DBA2C78);
-            return ref _Handle.AsRef<short>(_FalseValueNodeIdxOffset);
+            _FalseValueNodeIdxOffset = _FalseValueNodeIdxOffset ?? Schema.GetOffset(0xD21604678DBA2C78);
+            return ref _Handle.AsRef<short>(_FalseValueNodeIdxOffset!.Value);
         }
     }
-    private static nint _BlendTimeSecondsOffset = -1;
+    private static nint? _BlendTimeSecondsOffset;
 
     public ref float BlendTimeSeconds
     {
         get
         {
-            if (_BlendTimeSecondsOffset == -1) _BlendTimeSecondsOffset = Schema.GetOffset(0xD21604676D3A08FC);
-            return ref _Handle.AsRef<float>(_BlendTimeSecondsOffset);
+            _BlendTimeSecondsOffset = _BlendTimeSecondsOffset ?? Schema.GetOffset(0xD21604676D3A08FC);
+            return ref _Handle.AsRef<float>(_BlendTimeSecondsOffset!.Value);
         }
     }
-    private static nint _SwitchDynamicallyOffset = -1;
+    private static nint? _SwitchDynamicallyOffset;
 
     public ref bool SwitchDynamically
     {
         get
         {
-            if (_SwitchDynamicallyOffset == -1) _SwitchDynamicallyOffset = Schema.GetOffset(0xD216046746047CB8);
-            return ref _Handle.AsRef<bool>(_SwitchDynamicallyOffset);
+            _SwitchDynamicallyOffset = _SwitchDynamicallyOffset ?? Schema.GetOffset(0xD216046746047CB8);
+            return ref _Handle.AsRef<bool>(_SwitchDynamicallyOffset!.Value);
         }
     }
 

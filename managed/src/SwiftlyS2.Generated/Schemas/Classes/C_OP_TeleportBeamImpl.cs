@@ -16,114 +16,114 @@ internal partial class C_OP_TeleportBeamImpl : CParticleFunctionOperatorImpl, C_
 {
     public C_OP_TeleportBeamImpl(nint handle) : base(handle) { }
 
-    private static nint _CPPositionOffset = -1;
+    private static nint? _CPPositionOffset;
 
     public ref int CPPosition
     {
         get
         {
-            if (_CPPositionOffset == -1) _CPPositionOffset = Schema.GetOffset(0xD80BE8C1AECEEF2D);
-            return ref _Handle.AsRef<int>(_CPPositionOffset);
+            _CPPositionOffset = _CPPositionOffset ?? Schema.GetOffset(0xD80BE8C1AECEEF2D);
+            return ref _Handle.AsRef<int>(_CPPositionOffset!.Value);
         }
     }
-    private static nint _CPVelocityOffset = -1;
+    private static nint? _CPVelocityOffset;
 
     public ref int CPVelocity
     {
         get
         {
-            if (_CPVelocityOffset == -1) _CPVelocityOffset = Schema.GetOffset(0xD80BE8C165FA13B9);
-            return ref _Handle.AsRef<int>(_CPVelocityOffset);
+            _CPVelocityOffset = _CPVelocityOffset ?? Schema.GetOffset(0xD80BE8C165FA13B9);
+            return ref _Handle.AsRef<int>(_CPVelocityOffset!.Value);
         }
     }
-    private static nint _CPMiscOffset = -1;
+    private static nint? _CPMiscOffset;
 
     public ref int CPMisc
     {
         get
         {
-            if (_CPMiscOffset == -1) _CPMiscOffset = Schema.GetOffset(0xD80BE8C1466D5C8A);
-            return ref _Handle.AsRef<int>(_CPMiscOffset);
+            _CPMiscOffset = _CPMiscOffset ?? Schema.GetOffset(0xD80BE8C1466D5C8A);
+            return ref _Handle.AsRef<int>(_CPMiscOffset!.Value);
         }
     }
-    private static nint _CPColorOffset = -1;
+    private static nint? _CPColorOffset;
 
     public ref int CPColor
     {
         get
         {
-            if (_CPColorOffset == -1) _CPColorOffset = Schema.GetOffset(0xD80BE8C14B880225);
-            return ref _Handle.AsRef<int>(_CPColorOffset);
+            _CPColorOffset = _CPColorOffset ?? Schema.GetOffset(0xD80BE8C14B880225);
+            return ref _Handle.AsRef<int>(_CPColorOffset!.Value);
         }
     }
-    private static nint _CPInvalidColorOffset = -1;
+    private static nint? _CPInvalidColorOffset;
 
     public ref int CPInvalidColor
     {
         get
         {
-            if (_CPInvalidColorOffset == -1) _CPInvalidColorOffset = Schema.GetOffset(0xD80BE8C1370493BC);
-            return ref _Handle.AsRef<int>(_CPInvalidColorOffset);
+            _CPInvalidColorOffset = _CPInvalidColorOffset ?? Schema.GetOffset(0xD80BE8C1370493BC);
+            return ref _Handle.AsRef<int>(_CPInvalidColorOffset!.Value);
         }
     }
-    private static nint _CPExtraArcDataOffset = -1;
+    private static nint? _CPExtraArcDataOffset;
 
     public ref int CPExtraArcData
     {
         get
         {
-            if (_CPExtraArcDataOffset == -1) _CPExtraArcDataOffset = Schema.GetOffset(0xD80BE8C1FE881B08);
-            return ref _Handle.AsRef<int>(_CPExtraArcDataOffset);
+            _CPExtraArcDataOffset = _CPExtraArcDataOffset ?? Schema.GetOffset(0xD80BE8C1FE881B08);
+            return ref _Handle.AsRef<int>(_CPExtraArcDataOffset!.Value);
         }
     }
-    private static nint _GravityOffset = -1;
+    private static nint? _GravityOffset;
 
     public ref Vector Gravity
     {
         get
         {
-            if (_GravityOffset == -1) _GravityOffset = Schema.GetOffset(0xD80BE8C1A5AE4779);
-            return ref _Handle.AsRef<Vector>(_GravityOffset);
+            _GravityOffset = _GravityOffset ?? Schema.GetOffset(0xD80BE8C1A5AE4779);
+            return ref _Handle.AsRef<Vector>(_GravityOffset!.Value);
         }
     }
-    private static nint _ArcMaxDurationOffset = -1;
+    private static nint? _ArcMaxDurationOffset;
 
     public ref float ArcMaxDuration
     {
         get
         {
-            if (_ArcMaxDurationOffset == -1) _ArcMaxDurationOffset = Schema.GetOffset(0xD80BE8C150FE58BD);
-            return ref _Handle.AsRef<float>(_ArcMaxDurationOffset);
+            _ArcMaxDurationOffset = _ArcMaxDurationOffset ?? Schema.GetOffset(0xD80BE8C150FE58BD);
+            return ref _Handle.AsRef<float>(_ArcMaxDurationOffset!.Value);
         }
     }
-    private static nint _SegmentBreakOffset = -1;
+    private static nint? _SegmentBreakOffset;
 
     public ref float SegmentBreak
     {
         get
         {
-            if (_SegmentBreakOffset == -1) _SegmentBreakOffset = Schema.GetOffset(0xD80BE8C18DEE8E2F);
-            return ref _Handle.AsRef<float>(_SegmentBreakOffset);
+            _SegmentBreakOffset = _SegmentBreakOffset ?? Schema.GetOffset(0xD80BE8C18DEE8E2F);
+            return ref _Handle.AsRef<float>(_SegmentBreakOffset!.Value);
         }
     }
-    private static nint _ArcSpeedOffset = -1;
+    private static nint? _ArcSpeedOffset;
 
     public ref float ArcSpeed
     {
         get
         {
-            if (_ArcSpeedOffset == -1) _ArcSpeedOffset = Schema.GetOffset(0xD80BE8C14E9BC58C);
-            return ref _Handle.AsRef<float>(_ArcSpeedOffset);
+            _ArcSpeedOffset = _ArcSpeedOffset ?? Schema.GetOffset(0xD80BE8C14E9BC58C);
+            return ref _Handle.AsRef<float>(_ArcSpeedOffset!.Value);
         }
     }
-    private static nint _AlphaOffset = -1;
+    private static nint? _AlphaOffset;
 
     public ref float Alpha
     {
         get
         {
-            if (_AlphaOffset == -1) _AlphaOffset = Schema.GetOffset(0xD80BE8C1A0DB7DD1);
-            return ref _Handle.AsRef<float>(_AlphaOffset);
+            _AlphaOffset = _AlphaOffset ?? Schema.GetOffset(0xD80BE8C1A0DB7DD1);
+            return ref _Handle.AsRef<float>(_AlphaOffset!.Value);
         }
     }
 

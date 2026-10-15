@@ -16,24 +16,24 @@ internal partial class CNmCurrentSyncEventNode__CDefinitionImpl : CNmFloatValueN
 {
     public CNmCurrentSyncEventNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint _SourceStateNodeIdxOffset = -1;
+    private static nint? _SourceStateNodeIdxOffset;
 
     public ref short SourceStateNodeIdx
     {
         get
         {
-            if (_SourceStateNodeIdxOffset == -1) _SourceStateNodeIdxOffset = Schema.GetOffset(0x1F6A7BCB63F0228C);
-            return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset);
+            _SourceStateNodeIdxOffset = _SourceStateNodeIdxOffset ?? Schema.GetOffset(0x1F6A7BCB63F0228C);
+            return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset!.Value);
         }
     }
-    private static nint _InfoTypeOffset = -1;
+    private static nint? _InfoTypeOffset;
 
     public ref CNmCurrentSyncEventNode__InfoType_t InfoType
     {
         get
         {
-            if (_InfoTypeOffset == -1) _InfoTypeOffset = Schema.GetOffset(0x1F6A7BCBCE6BA20D);
-            return ref _Handle.AsRef<CNmCurrentSyncEventNode__InfoType_t>(_InfoTypeOffset);
+            _InfoTypeOffset = _InfoTypeOffset ?? Schema.GetOffset(0x1F6A7BCBCE6BA20D);
+            return ref _Handle.AsRef<CNmCurrentSyncEventNode__InfoType_t>(_InfoTypeOffset!.Value);
         }
     }
 

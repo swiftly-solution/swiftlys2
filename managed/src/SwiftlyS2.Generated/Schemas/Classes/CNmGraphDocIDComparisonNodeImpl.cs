@@ -16,24 +16,24 @@ internal partial class CNmGraphDocIDComparisonNodeImpl : CNmGraphDocFlowNodeImpl
 {
     public CNmGraphDocIDComparisonNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _ComparisonOffset = -1;
+    private static nint? _ComparisonOffset;
 
     public ref CNmIDComparisonNode__Comparison_t Comparison
     {
         get
         {
-            if (_ComparisonOffset == -1) _ComparisonOffset = Schema.GetOffset(0xC38D81AD897F8DE4);
-            return ref _Handle.AsRef<CNmIDComparisonNode__Comparison_t>(_ComparisonOffset);
+            _ComparisonOffset = _ComparisonOffset ?? Schema.GetOffset(0xC38D81AD897F8DE4);
+            return ref _Handle.AsRef<CNmIDComparisonNode__Comparison_t>(_ComparisonOffset!.Value);
         }
     }
-    private static nint _ValuesOffset = -1;
+    private static nint? _ValuesOffset;
 
     public ref CUtlVector<CGlobalSymbol> Values
     {
         get
         {
-            if (_ValuesOffset == -1) _ValuesOffset = Schema.GetOffset(0xC38D81ADFBEDDADB);
-            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_ValuesOffset);
+            _ValuesOffset = _ValuesOffset ?? Schema.GetOffset(0xC38D81ADFBEDDADB);
+            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_ValuesOffset!.Value);
         }
     }
 

@@ -16,84 +16,84 @@ internal partial class CMixSplitterImpl : CMixPropertyBaseImpl, CMixSplitter
 {
     public CMixSplitterImpl(nint handle) : base(handle) { }
 
-    private static nint _Volume1Offset = -1;
+    private static nint? _Volume1Offset;
 
     public ref float Volume1
     {
         get
         {
-            if (_Volume1Offset == -1) _Volume1Offset = Schema.GetOffset(0x7B9780272B272668);
-            return ref _Handle.AsRef<float>(_Volume1Offset);
+            _Volume1Offset = _Volume1Offset ?? Schema.GetOffset(0x7B9780272B272668);
+            return ref _Handle.AsRef<float>(_Volume1Offset!.Value);
         }
     }
-    private static nint _Volume2Offset = -1;
+    private static nint? _Volume2Offset;
 
     public ref float Volume2
     {
         get
         {
-            if (_Volume2Offset == -1) _Volume2Offset = Schema.GetOffset(0x7B9780272E272B21);
-            return ref _Handle.AsRef<float>(_Volume2Offset);
+            _Volume2Offset = _Volume2Offset ?? Schema.GetOffset(0x7B9780272E272B21);
+            return ref _Handle.AsRef<float>(_Volume2Offset!.Value);
         }
     }
-    private static nint _Volume3Offset = -1;
+    private static nint? _Volume3Offset;
 
     public ref float Volume3
     {
         get
         {
-            if (_Volume3Offset == -1) _Volume3Offset = Schema.GetOffset(0x7B9780272D27298E);
-            return ref _Handle.AsRef<float>(_Volume3Offset);
+            _Volume3Offset = _Volume3Offset ?? Schema.GetOffset(0x7B9780272D27298E);
+            return ref _Handle.AsRef<float>(_Volume3Offset!.Value);
         }
     }
-    private static nint _Volume4Offset = -1;
+    private static nint? _Volume4Offset;
 
     public ref float Volume4
     {
         get
         {
-            if (_Volume4Offset == -1) _Volume4Offset = Schema.GetOffset(0x7B97802730272E47);
-            return ref _Handle.AsRef<float>(_Volume4Offset);
+            _Volume4Offset = _Volume4Offset ?? Schema.GetOffset(0x7B97802730272E47);
+            return ref _Handle.AsRef<float>(_Volume4Offset!.Value);
         }
     }
-    private static nint _Volume5Offset = -1;
+    private static nint? _Volume5Offset;
 
     public ref float Volume5
     {
         get
         {
-            if (_Volume5Offset == -1) _Volume5Offset = Schema.GetOffset(0x7B9780272F272CB4);
-            return ref _Handle.AsRef<float>(_Volume5Offset);
+            _Volume5Offset = _Volume5Offset ?? Schema.GetOffset(0x7B9780272F272CB4);
+            return ref _Handle.AsRef<float>(_Volume5Offset!.Value);
         }
     }
-    private static nint _Volume6Offset = -1;
+    private static nint? _Volume6Offset;
 
     public ref float Volume6
     {
         get
         {
-            if (_Volume6Offset == -1) _Volume6Offset = Schema.GetOffset(0x7B9780273227316D);
-            return ref _Handle.AsRef<float>(_Volume6Offset);
+            _Volume6Offset = _Volume6Offset ?? Schema.GetOffset(0x7B9780273227316D);
+            return ref _Handle.AsRef<float>(_Volume6Offset!.Value);
         }
     }
-    private static nint _Volume7Offset = -1;
+    private static nint? _Volume7Offset;
 
     public ref float Volume7
     {
         get
         {
-            if (_Volume7Offset == -1) _Volume7Offset = Schema.GetOffset(0x7B97802731272FDA);
-            return ref _Handle.AsRef<float>(_Volume7Offset);
+            _Volume7Offset = _Volume7Offset ?? Schema.GetOffset(0x7B97802731272FDA);
+            return ref _Handle.AsRef<float>(_Volume7Offset!.Value);
         }
     }
-    private static nint _Volume8Offset = -1;
+    private static nint? _Volume8Offset;
 
     public ref float Volume8
     {
         get
         {
-            if (_Volume8Offset == -1) _Volume8Offset = Schema.GetOffset(0x7B97802724271B63);
-            return ref _Handle.AsRef<float>(_Volume8Offset);
+            _Volume8Offset = _Volume8Offset ?? Schema.GetOffset(0x7B97802724271B63);
+            return ref _Handle.AsRef<float>(_Volume8Offset!.Value);
         }
     }
 

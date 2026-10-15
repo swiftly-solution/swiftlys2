@@ -16,49 +16,49 @@ internal partial class C_OP_SetSingleControlPointPositionImpl : CParticleFunctio
 {
     public C_OP_SetSingleControlPointPositionImpl(nint handle) : base(handle) { }
 
-    private static nint _SetOnceOffset = -1;
+    private static nint? _SetOnceOffset;
 
     public ref bool SetOnce
     {
         get
         {
-            if (_SetOnceOffset == -1) _SetOnceOffset = Schema.GetOffset(0xFE0B7A4D6B261086);
-            return ref _Handle.AsRef<bool>(_SetOnceOffset);
+            _SetOnceOffset = _SetOnceOffset ?? Schema.GetOffset(0xFE0B7A4D6B261086);
+            return ref _Handle.AsRef<bool>(_SetOnceOffset!.Value);
         }
     }
-    private static nint _CP1Offset = -1;
+    private static nint? _CP1Offset;
 
     public ref int CP1
     {
         get
         {
-            if (_CP1Offset == -1) _CP1Offset = Schema.GetOffset(0xFE0B7A4DD4B1E579);
-            return ref _Handle.AsRef<int>(_CP1Offset);
+            _CP1Offset = _CP1Offset ?? Schema.GetOffset(0xFE0B7A4DD4B1E579);
+            return ref _Handle.AsRef<int>(_CP1Offset!.Value);
         }
     }
-    private static nint _CP1PosOffset = -1;
+    private static nint? _CP1PosOffset;
     private CParticleCollectionVecInputImpl? _CP1PosInstance;
 
     public CParticleCollectionVecInput CP1Pos
     {
         get
         {
-            if (_CP1PosOffset == -1) _CP1PosOffset = Schema.GetOffset(0xFE0B7A4D408288D9);
+            _CP1PosOffset = _CP1PosOffset ?? Schema.GetOffset(0xFE0B7A4D408288D9);
             var instance = _CP1PosInstance ??= new CParticleCollectionVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _CP1PosOffset);
+            instance.DangerousSetHandle(_Handle + _CP1PosOffset!.Value);
             return instance;
         }
     }
-    private static nint _TransformInputOffset = -1;
+    private static nint? _TransformInputOffset;
     private CParticleTransformInputImpl? _TransformInputInstance;
 
     public CParticleTransformInput TransformInput
     {
         get
         {
-            if (_TransformInputOffset == -1) _TransformInputOffset = Schema.GetOffset(0xFE0B7A4D3A9ED669);
+            _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0xFE0B7A4D3A9ED669);
             var instance = _TransformInputInstance ??= new CParticleTransformInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _TransformInputOffset);
+            instance.DangerousSetHandle(_Handle + _TransformInputOffset!.Value);
             return instance;
         }
     }

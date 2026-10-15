@@ -16,41 +16,41 @@ internal partial class CInventoryImageDataImpl : SchemaClass, CInventoryImageDat
 {
     public CInventoryImageDataImpl(nint handle) : base(handle) { }
 
-    private static nint _NodeTypeOffset = -1;
+    private static nint? _NodeTypeOffset;
 
     public ref InventoryNodeType_t NodeType
     {
         get
         {
-            if (_NodeTypeOffset == -1) _NodeTypeOffset = Schema.GetOffset(0xC07EF69336BB8131);
-            return ref _Handle.AsRef<InventoryNodeType_t>(_NodeTypeOffset);
+            _NodeTypeOffset = _NodeTypeOffset ?? Schema.GetOffset(0xC07EF69336BB8131);
+            return ref _Handle.AsRef<InventoryNodeType_t>(_NodeTypeOffset!.Value);
         }
     }
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xC07EF6938D39BDE6);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xC07EF6938D39BDE6);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xC07EF6938D39BDE6);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xC07EF6938D39BDE6);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _Inventory_image_dataOffset = -1;
+    private static nint? _Inventory_image_dataOffset;
     private inv_image_data_tImpl? _Inventory_image_dataInstance;
 
     public inv_image_data_t Inventory_image_data
     {
         get
         {
-            if (_Inventory_image_dataOffset == -1) _Inventory_image_dataOffset = Schema.GetOffset(0xC07EF6932AA67AC6);
+            _Inventory_image_dataOffset = _Inventory_image_dataOffset ?? Schema.GetOffset(0xC07EF6932AA67AC6);
             var instance = _Inventory_image_dataInstance ??= new inv_image_data_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _Inventory_image_dataOffset);
+            instance.DangerousSetHandle(_Handle + _Inventory_image_dataOffset!.Value);
             return instance;
         }
     }

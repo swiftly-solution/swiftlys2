@@ -16,24 +16,24 @@ internal partial class CVMixToolEffectsListImpl : SchemaClass, CVMixToolEffectsL
 {
     public CVMixToolEffectsListImpl(nint handle) : base(handle) { }
 
-    private static nint _IsAutomaticDSPOffset = -1;
+    private static nint? _IsAutomaticDSPOffset;
 
     public ref bool IsAutomaticDSP
     {
         get
         {
-            if (_IsAutomaticDSPOffset == -1) _IsAutomaticDSPOffset = Schema.GetOffset(0xE053AACE97360A4B);
-            return ref _Handle.AsRef<bool>(_IsAutomaticDSPOffset);
+            _IsAutomaticDSPOffset = _IsAutomaticDSPOffset ?? Schema.GetOffset(0xE053AACE97360A4B);
+            return ref _Handle.AsRef<bool>(_IsAutomaticDSPOffset!.Value);
         }
     }
-    private static nint _ListOffset = -1;
+    private static nint? _ListOffset;
 
     public ref CUtlVector<SchemaUntypedField> List
     {
         get
         {
-            if (_ListOffset == -1) _ListOffset = Schema.GetOffset(0xE053AACECAD81C21);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ListOffset);
+            _ListOffset = _ListOffset ?? Schema.GetOffset(0xE053AACECAD81C21);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ListOffset!.Value);
         }
     }
 

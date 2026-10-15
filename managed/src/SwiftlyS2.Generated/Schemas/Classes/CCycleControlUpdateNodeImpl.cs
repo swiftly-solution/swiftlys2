@@ -16,37 +16,37 @@ internal partial class CCycleControlUpdateNodeImpl : CUnaryUpdateNodeImpl, CCycl
 {
     public CCycleControlUpdateNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _ValueSourceOffset = -1;
+    private static nint? _ValueSourceOffset;
 
     public ref AnimValueSource ValueSource
     {
         get
         {
-            if (_ValueSourceOffset == -1) _ValueSourceOffset = Schema.GetOffset(0xB811C15CD4D5B6B7);
-            return ref _Handle.AsRef<AnimValueSource>(_ValueSourceOffset);
+            _ValueSourceOffset = _ValueSourceOffset ?? Schema.GetOffset(0xB811C15CD4D5B6B7);
+            return ref _Handle.AsRef<AnimValueSource>(_ValueSourceOffset!.Value);
         }
     }
-    private static nint _ParamIndexOffset = -1;
+    private static nint? _ParamIndexOffset;
     private CAnimParamHandleImpl? _ParamIndexInstance;
 
     public CAnimParamHandle ParamIndex
     {
         get
         {
-            if (_ParamIndexOffset == -1) _ParamIndexOffset = Schema.GetOffset(0xB811C15C61990A86);
+            _ParamIndexOffset = _ParamIndexOffset ?? Schema.GetOffset(0xB811C15C61990A86);
             var instance = _ParamIndexInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamIndexOffset);
+            instance.DangerousSetHandle(_Handle + _ParamIndexOffset!.Value);
             return instance;
         }
     }
-    private static nint _LockWhenWaningOffset = -1;
+    private static nint? _LockWhenWaningOffset;
 
     public ref bool LockWhenWaning
     {
         get
         {
-            if (_LockWhenWaningOffset == -1) _LockWhenWaningOffset = Schema.GetOffset(0xB811C15CEED48004);
-            return ref _Handle.AsRef<bool>(_LockWhenWaningOffset);
+            _LockWhenWaningOffset = _LockWhenWaningOffset ?? Schema.GetOffset(0xB811C15CEED48004);
+            return ref _Handle.AsRef<bool>(_LockWhenWaningOffset!.Value);
         }
     }
 

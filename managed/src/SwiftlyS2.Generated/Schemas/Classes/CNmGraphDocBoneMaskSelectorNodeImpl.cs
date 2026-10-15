@@ -16,34 +16,34 @@ internal partial class CNmGraphDocBoneMaskSelectorNodeImpl : CNmGraphDocFlowNode
 {
     public CNmGraphDocBoneMaskSelectorNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _SwitchDynamicallyOffset = -1;
+    private static nint? _SwitchDynamicallyOffset;
 
     public ref bool SwitchDynamically
     {
         get
         {
-            if (_SwitchDynamicallyOffset == -1) _SwitchDynamicallyOffset = Schema.GetOffset(0xC9F568BA461869F8);
-            return ref _Handle.AsRef<bool>(_SwitchDynamicallyOffset);
+            _SwitchDynamicallyOffset = _SwitchDynamicallyOffset ?? Schema.GetOffset(0xC9F568BA461869F8);
+            return ref _Handle.AsRef<bool>(_SwitchDynamicallyOffset!.Value);
         }
     }
-    private static nint _OptionsOffset = -1;
+    private static nint? _OptionsOffset;
 
     public ref CUtlVector<CGlobalSymbol> Options
     {
         get
         {
-            if (_OptionsOffset == -1) _OptionsOffset = Schema.GetOffset(0xC9F568BADC407EC5);
-            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_OptionsOffset);
+            _OptionsOffset = _OptionsOffset ?? Schema.GetOffset(0xC9F568BADC407EC5);
+            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_OptionsOffset!.Value);
         }
     }
-    private static nint _BlendTimeSecondsOffset = -1;
+    private static nint? _BlendTimeSecondsOffset;
 
     public ref float BlendTimeSeconds
     {
         get
         {
-            if (_BlendTimeSecondsOffset == -1) _BlendTimeSecondsOffset = Schema.GetOffset(0xC9F568BA6D3A08FC);
-            return ref _Handle.AsRef<float>(_BlendTimeSecondsOffset);
+            _BlendTimeSecondsOffset = _BlendTimeSecondsOffset ?? Schema.GetOffset(0xC9F568BA6D3A08FC);
+            return ref _Handle.AsRef<float>(_BlendTimeSecondsOffset!.Value);
         }
     }
 

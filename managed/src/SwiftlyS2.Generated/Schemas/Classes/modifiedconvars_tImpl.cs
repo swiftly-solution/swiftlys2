@@ -16,49 +16,49 @@ internal partial class modifiedconvars_tImpl : SchemaClass, modifiedconvars_t
 {
     public modifiedconvars_tImpl(nint handle) : base(handle) { }
 
-    private static nint _ConvarOffset = -1;
+    private static nint? _ConvarOffset;
 
     public string Convar
     {
         get
         {
-            if (_ConvarOffset == -1) _ConvarOffset = Schema.GetOffset(0x4A915ED3401607E3);
-            return Schema.GetString(_Handle + _ConvarOffset);
+            _ConvarOffset = _ConvarOffset ?? Schema.GetOffset(0x4A915ED3401607E3);
+            return Schema.GetString(_Handle + _ConvarOffset!.Value);
         }
         set
         {
-            if (_ConvarOffset == -1) _ConvarOffset = Schema.GetOffset(0x4A915ED3401607E3);
-            Schema.SetFixedString(_Handle, _ConvarOffset, value, 128);
+            _ConvarOffset = _ConvarOffset ?? Schema.GetOffset(0x4A915ED3401607E3);
+            Schema.SetFixedString(_Handle, _ConvarOffset!.Value, value, 128);
         }
     }
-    private static nint _CurrentValueOffset = -1;
+    private static nint? _CurrentValueOffset;
 
     public string CurrentValue
     {
         get
         {
-            if (_CurrentValueOffset == -1) _CurrentValueOffset = Schema.GetOffset(0x4A915ED378B8D6C8);
-            return Schema.GetString(_Handle + _CurrentValueOffset);
+            _CurrentValueOffset = _CurrentValueOffset ?? Schema.GetOffset(0x4A915ED378B8D6C8);
+            return Schema.GetString(_Handle + _CurrentValueOffset!.Value);
         }
         set
         {
-            if (_CurrentValueOffset == -1) _CurrentValueOffset = Schema.GetOffset(0x4A915ED378B8D6C8);
-            Schema.SetFixedString(_Handle, _CurrentValueOffset, value, 128);
+            _CurrentValueOffset = _CurrentValueOffset ?? Schema.GetOffset(0x4A915ED378B8D6C8);
+            Schema.SetFixedString(_Handle, _CurrentValueOffset!.Value, value, 128);
         }
     }
-    private static nint _OrgValueOffset = -1;
+    private static nint? _OrgValueOffset;
 
     public string OrgValue
     {
         get
         {
-            if (_OrgValueOffset == -1) _OrgValueOffset = Schema.GetOffset(0x4A915ED38A403EC1);
-            return Schema.GetString(_Handle + _OrgValueOffset);
+            _OrgValueOffset = _OrgValueOffset ?? Schema.GetOffset(0x4A915ED38A403EC1);
+            return Schema.GetString(_Handle + _OrgValueOffset!.Value);
         }
         set
         {
-            if (_OrgValueOffset == -1) _OrgValueOffset = Schema.GetOffset(0x4A915ED38A403EC1);
-            Schema.SetFixedString(_Handle, _OrgValueOffset, value, 128);
+            _OrgValueOffset = _OrgValueOffset ?? Schema.GetOffset(0x4A915ED38A403EC1);
+            Schema.SetFixedString(_Handle, _OrgValueOffset!.Value, value, 128);
         }
     }
 

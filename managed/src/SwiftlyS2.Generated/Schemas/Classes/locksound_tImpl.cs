@@ -16,36 +16,36 @@ internal partial class locksound_tImpl : SchemaClass, locksound_t
 {
     public locksound_tImpl(nint handle) : base(handle) { }
 
-    private static nint _LockedSoundOffset = -1;
+    private static nint? _LockedSoundOffset;
 
     public ref CGameSoundEventName LockedSound
     {
         get
         {
-            if (_LockedSoundOffset == -1) _LockedSoundOffset = Schema.GetOffset(0xDAD0AE229881D7AB);
-            return ref _Handle.AsRef<CGameSoundEventName>(_LockedSoundOffset);
+            _LockedSoundOffset = _LockedSoundOffset ?? Schema.GetOffset(0xDAD0AE229881D7AB);
+            return ref _Handle.AsRef<CGameSoundEventName>(_LockedSoundOffset!.Value);
         }
     }
-    private static nint _UnlockedSoundOffset = -1;
+    private static nint? _UnlockedSoundOffset;
 
     public ref CGameSoundEventName UnlockedSound
     {
         get
         {
-            if (_UnlockedSoundOffset == -1) _UnlockedSoundOffset = Schema.GetOffset(0xDAD0AE227EE88276);
-            return ref _Handle.AsRef<CGameSoundEventName>(_UnlockedSoundOffset);
+            _UnlockedSoundOffset = _UnlockedSoundOffset ?? Schema.GetOffset(0xDAD0AE227EE88276);
+            return ref _Handle.AsRef<CGameSoundEventName>(_UnlockedSoundOffset!.Value);
         }
     }
-    private static nint _FlwaitSoundOffset = -1;
+    private static nint? _FlwaitSoundOffset;
     private GameTime_tImpl? _FlwaitSoundInstance;
 
     public GameTime_t FlwaitSound
     {
         get
         {
-            if (_FlwaitSoundOffset == -1) _FlwaitSoundOffset = Schema.GetOffset(0xDAD0AE2297A4A845);
+            _FlwaitSoundOffset = _FlwaitSoundOffset ?? Schema.GetOffset(0xDAD0AE2297A4A845);
             var instance = _FlwaitSoundInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FlwaitSoundOffset);
+            instance.DangerousSetHandle(_Handle + _FlwaitSoundOffset!.Value);
             return instance;
         }
     }

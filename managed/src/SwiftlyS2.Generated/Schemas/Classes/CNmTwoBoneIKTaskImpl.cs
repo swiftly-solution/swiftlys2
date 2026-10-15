@@ -16,34 +16,34 @@ internal partial class CNmTwoBoneIKTaskImpl : CNmPoseTaskImpl, CNmTwoBoneIKTask
 {
     public CNmTwoBoneIKTaskImpl(nint handle) : base(handle) { }
 
-    private static nint _EffectorBoneIdxOffset = -1;
+    private static nint? _EffectorBoneIdxOffset;
 
     public ref int EffectorBoneIdx
     {
         get
         {
-            if (_EffectorBoneIdxOffset == -1) _EffectorBoneIdxOffset = Schema.GetOffset(0xE29DE6F8A9C233BE);
-            return ref _Handle.AsRef<int>(_EffectorBoneIdxOffset);
+            _EffectorBoneIdxOffset = _EffectorBoneIdxOffset ?? Schema.GetOffset(0xE29DE6F8A9C233BE);
+            return ref _Handle.AsRef<int>(_EffectorBoneIdxOffset!.Value);
         }
     }
-    private static nint _EffectorTargetBoneIdxOffset = -1;
+    private static nint? _EffectorTargetBoneIdxOffset;
 
     public ref int EffectorTargetBoneIdx
     {
         get
         {
-            if (_EffectorTargetBoneIdxOffset == -1) _EffectorTargetBoneIdxOffset = Schema.GetOffset(0xE29DE6F83A19E0D9);
-            return ref _Handle.AsRef<int>(_EffectorTargetBoneIdxOffset);
+            _EffectorTargetBoneIdxOffset = _EffectorTargetBoneIdxOffset ?? Schema.GetOffset(0xE29DE6F83A19E0D9);
+            return ref _Handle.AsRef<int>(_EffectorTargetBoneIdxOffset!.Value);
         }
     }
-    private static nint _TargetTransformOffset = -1;
+    private static nint? _TargetTransformOffset;
 
     public ref CTransform TargetTransform
     {
         get
         {
-            if (_TargetTransformOffset == -1) _TargetTransformOffset = Schema.GetOffset(0xE29DE6F8B1497974);
-            return ref _Handle.AsRef<CTransform>(_TargetTransformOffset);
+            _TargetTransformOffset = _TargetTransformOffset ?? Schema.GetOffset(0xE29DE6F8B1497974);
+            return ref _Handle.AsRef<CTransform>(_TargetTransformOffset!.Value);
         }
     }
 

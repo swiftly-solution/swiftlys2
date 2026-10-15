@@ -16,14 +16,14 @@ internal partial class CPulseCell_Outflow_ListenForEntityOutput__CursorState_tIm
 {
     public CPulseCell_Outflow_ListenForEntityOutput__CursorState_tImpl(nint handle) : base(handle) { }
 
-    private static nint _EntityOffset = -1;
+    private static nint? _EntityOffset;
 
     public ref CHandle<CBaseEntity> Entity
     {
         get
         {
-            if (_EntityOffset == -1) _EntityOffset = Schema.GetOffset(0xC31517AD2F3BEB7A);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityOffset);
+            _EntityOffset = _EntityOffset ?? Schema.GetOffset(0xC31517AD2F3BEB7A);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityOffset!.Value);
         }
     }
 

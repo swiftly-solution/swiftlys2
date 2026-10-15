@@ -16,77 +16,77 @@ internal partial class AI_DefaultNPC_DebugSnapshotData_tImpl : DebugSnapshotBase
 {
     public AI_DefaultNPC_DebugSnapshotData_tImpl(nint handle) : base(handle) { }
 
-    private static nint _S_npc_current_abilityOffset = -1;
+    private static nint? _S_npc_current_abilityOffset;
 
     public ref CGlobalSymbol S_npc_current_ability
     {
         get
         {
-            if (_S_npc_current_abilityOffset == -1) _S_npc_current_abilityOffset = Schema.GetOffset(0xADB6DBDFA91835E5);
-            return ref _Handle.AsRef<CGlobalSymbol>(_S_npc_current_abilityOffset);
+            _S_npc_current_abilityOffset = _S_npc_current_abilityOffset ?? Schema.GetOffset(0xADB6DBDFA91835E5);
+            return ref _Handle.AsRef<CGlobalSymbol>(_S_npc_current_abilityOffset!.Value);
         }
     }
-    private static nint _S_npc_current_held_abilityOffset = -1;
+    private static nint? _S_npc_current_held_abilityOffset;
 
     public ref CGlobalSymbol S_npc_current_held_ability
     {
         get
         {
-            if (_S_npc_current_held_abilityOffset == -1) _S_npc_current_held_abilityOffset = Schema.GetOffset(0xADB6DBDFA90C337B);
-            return ref _Handle.AsRef<CGlobalSymbol>(_S_npc_current_held_abilityOffset);
+            _S_npc_current_held_abilityOffset = _S_npc_current_held_abilityOffset ?? Schema.GetOffset(0xADB6DBDFA90C337B);
+            return ref _Handle.AsRef<CGlobalSymbol>(_S_npc_current_held_abilityOffset!.Value);
         }
     }
-    private static nint _S_npc_tactic_currentOffset = -1;
+    private static nint? _S_npc_tactic_currentOffset;
 
     public ref CGlobalSymbol S_npc_tactic_current
     {
         get
         {
-            if (_S_npc_tactic_currentOffset == -1) _S_npc_tactic_currentOffset = Schema.GetOffset(0xADB6DBDF4382C35D);
-            return ref _Handle.AsRef<CGlobalSymbol>(_S_npc_tactic_currentOffset);
+            _S_npc_tactic_currentOffset = _S_npc_tactic_currentOffset ?? Schema.GetOffset(0xADB6DBDF4382C35D);
+            return ref _Handle.AsRef<CGlobalSymbol>(_S_npc_tactic_currentOffset!.Value);
         }
     }
-    private static nint _S_npc_tactic_phaseOffset = -1;
+    private static nint? _S_npc_tactic_phaseOffset;
 
     public ref CGlobalSymbol S_npc_tactic_phase
     {
         get
         {
-            if (_S_npc_tactic_phaseOffset == -1) _S_npc_tactic_phaseOffset = Schema.GetOffset(0xADB6DBDFC96C15CF);
-            return ref _Handle.AsRef<CGlobalSymbol>(_S_npc_tactic_phaseOffset);
+            _S_npc_tactic_phaseOffset = _S_npc_tactic_phaseOffset ?? Schema.GetOffset(0xADB6DBDFC96C15CF);
+            return ref _Handle.AsRef<CGlobalSymbol>(_S_npc_tactic_phaseOffset!.Value);
         }
     }
-    private static nint _Tactic_interrupt_conditionsOffset = -1;
+    private static nint? _Tactic_interrupt_conditionsOffset;
 
     public ref CUtlVector<CGlobalSymbol> Tactic_interrupt_conditions
     {
         get
         {
-            if (_Tactic_interrupt_conditionsOffset == -1) _Tactic_interrupt_conditionsOffset = Schema.GetOffset(0xADB6DBDFDC108AB0);
-            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_Tactic_interrupt_conditionsOffset);
+            _Tactic_interrupt_conditionsOffset = _Tactic_interrupt_conditionsOffset ?? Schema.GetOffset(0xADB6DBDFDC108AB0);
+            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_Tactic_interrupt_conditionsOffset!.Value);
         }
     }
-    private static nint _Path_queryOffset = -1;
+    private static nint? _Path_queryOffset;
     private AI_DefaultNPC_DebugSnapshotData_t__PathQuery_tImpl? _Path_queryInstance;
 
     public AI_DefaultNPC_DebugSnapshotData_t__PathQuery_t Path_query
     {
         get
         {
-            if (_Path_queryOffset == -1) _Path_queryOffset = Schema.GetOffset(0xADB6DBDF39D1C6D9);
+            _Path_queryOffset = _Path_queryOffset ?? Schema.GetOffset(0xADB6DBDF39D1C6D9);
             var instance = _Path_queryInstance ??= new AI_DefaultNPC_DebugSnapshotData_t__PathQuery_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _Path_queryOffset);
+            instance.DangerousSetHandle(_Handle + _Path_queryOffset!.Value);
             return instance;
         }
     }
-    private static nint _Path_queries_speculativeOffset = -1;
+    private static nint? _Path_queries_speculativeOffset;
 
     public ref CUtlVector<AI_DefaultNPC_DebugSnapshotData_t__PathQuery_t> Path_queries_speculative
     {
         get
         {
-            if (_Path_queries_speculativeOffset == -1) _Path_queries_speculativeOffset = Schema.GetOffset(0xADB6DBDF3CB0DFA1);
-            return ref _Handle.AsRef<CUtlVector<AI_DefaultNPC_DebugSnapshotData_t__PathQuery_t>>(_Path_queries_speculativeOffset);
+            _Path_queries_speculativeOffset = _Path_queries_speculativeOffset ?? Schema.GetOffset(0xADB6DBDF3CB0DFA1);
+            return ref _Handle.AsRef<CUtlVector<AI_DefaultNPC_DebugSnapshotData_t__PathQuery_t>>(_Path_queries_speculativeOffset!.Value);
         }
     }
 

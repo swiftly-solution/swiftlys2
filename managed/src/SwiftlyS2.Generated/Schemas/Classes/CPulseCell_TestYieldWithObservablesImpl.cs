@@ -16,67 +16,67 @@ internal partial class CPulseCell_TestYieldWithObservablesImpl : CPulseCell_Base
 {
     public CPulseCell_TestYieldWithObservablesImpl(nint handle) : base(handle) { }
 
-    private static nint _WatchForFloatValueOffset = -1;
+    private static nint? _WatchForFloatValueOffset;
 
     public ref float WatchForFloatValue
     {
         get
         {
-            if (_WatchForFloatValueOffset == -1) _WatchForFloatValueOffset = Schema.GetOffset(0x918E5C15B27DB1D2);
-            return ref _Handle.AsRef<float>(_WatchForFloatValueOffset);
+            _WatchForFloatValueOffset = _WatchForFloatValueOffset ?? Schema.GetOffset(0x918E5C15B27DB1D2);
+            return ref _Handle.AsRef<float>(_WatchForFloatValueOffset!.Value);
         }
     }
-    private static nint _LiveFloatValueOffset = -1;
+    private static nint? _LiveFloatValueOffset;
     private SchemaUntypedField? _LiveFloatValueInstance;
 
     public SchemaUntypedField LiveFloatValue
     {
         get
         {
-            if (_LiveFloatValueOffset == -1) _LiveFloatValueOffset = Schema.GetOffset(0x918E5C15AE6334B8);
+            _LiveFloatValueOffset = _LiveFloatValueOffset ?? Schema.GetOffset(0x918E5C15AE6334B8);
             var instance = _LiveFloatValueInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _LiveFloatValueOffset);
+            instance.DangerousSetHandle(_Handle + _LiveFloatValueOffset!.Value);
             return instance;
         }
     }
-    private static nint _WatchForStringValueOffset = -1;
+    private static nint? _WatchForStringValueOffset;
 
     public string WatchForStringValue
     {
         get
         {
-            if (_WatchForStringValueOffset == -1) _WatchForStringValueOffset = Schema.GetOffset(0x918E5C154ABCECCB);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_WatchForStringValueOffset));
+            _WatchForStringValueOffset = _WatchForStringValueOffset ?? Schema.GetOffset(0x918E5C154ABCECCB);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_WatchForStringValueOffset!.Value));
         }
         set
         {
-            if (_WatchForStringValueOffset == -1) _WatchForStringValueOffset = Schema.GetOffset(0x918E5C154ABCECCB);
-            Schema.SetCUtlString(_Handle, _WatchForStringValueOffset, value);
+            _WatchForStringValueOffset = _WatchForStringValueOffset ?? Schema.GetOffset(0x918E5C154ABCECCB);
+            Schema.SetCUtlString(_Handle, _WatchForStringValueOffset!.Value, value);
         }
     }
-    private static nint _LiveStringValueOffset = -1;
+    private static nint? _LiveStringValueOffset;
     private SchemaUntypedField? _LiveStringValueInstance;
 
     public SchemaUntypedField LiveStringValue
     {
         get
         {
-            if (_LiveStringValueOffset == -1) _LiveStringValueOffset = Schema.GetOffset(0x918E5C1560EA3A03);
+            _LiveStringValueOffset = _LiveStringValueOffset ?? Schema.GetOffset(0x918E5C1560EA3A03);
             var instance = _LiveStringValueInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _LiveStringValueOffset);
+            instance.DangerousSetHandle(_Handle + _LiveStringValueOffset!.Value);
             return instance;
         }
     }
-    private static nint _WakeResumeOffset = -1;
+    private static nint? _WakeResumeOffset;
     private CPulse_ResumePointImpl? _WakeResumeInstance;
 
     public CPulse_ResumePoint WakeResume
     {
         get
         {
-            if (_WakeResumeOffset == -1) _WakeResumeOffset = Schema.GetOffset(0x918E5C1531F86DC2);
+            _WakeResumeOffset = _WakeResumeOffset ?? Schema.GetOffset(0x918E5C1531F86DC2);
             var instance = _WakeResumeInstance ??= new CPulse_ResumePointImpl(0);
-            instance.DangerousSetHandle(_Handle + _WakeResumeOffset);
+            instance.DangerousSetHandle(_Handle + _WakeResumeOffset!.Value);
             return instance;
         }
     }

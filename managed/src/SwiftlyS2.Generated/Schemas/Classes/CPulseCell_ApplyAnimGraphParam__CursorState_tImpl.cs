@@ -16,39 +16,39 @@ internal partial class CPulseCell_ApplyAnimGraphParam__CursorState_tImpl : Schem
 {
     public CPulseCell_ApplyAnimGraphParam__CursorState_tImpl(nint handle) : base(handle) { }
 
-    private static nint _EntityOffset = -1;
+    private static nint? _EntityOffset;
 
     public ref CHandle<CBaseEntity> Entity
     {
         get
         {
-            if (_EntityOffset == -1) _EntityOffset = Schema.GetOffset(0x4872527825B27FD0);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityOffset);
+            _EntityOffset = _EntityOffset ?? Schema.GetOffset(0x4872527825B27FD0);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityOffset!.Value);
         }
     }
-    private static nint _ParamNameOffset = -1;
+    private static nint? _ParamNameOffset;
 
     public string ParamName
     {
         get
         {
-            if (_ParamNameOffset == -1) _ParamNameOffset = Schema.GetOffset(0x487252782F4AD498);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ParamNameOffset));
+            _ParamNameOffset = _ParamNameOffset ?? Schema.GetOffset(0x487252782F4AD498);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ParamNameOffset!.Value));
         }
         set
         {
-            if (_ParamNameOffset == -1) _ParamNameOffset = Schema.GetOffset(0x487252782F4AD498);
-            Schema.SetCUtlString(_Handle, _ParamNameOffset, value);
+            _ParamNameOffset = _ParamNameOffset ?? Schema.GetOffset(0x487252782F4AD498);
+            Schema.SetCUtlString(_Handle, _ParamNameOffset!.Value, value);
         }
     }
-    private static nint _ApplyToExternalGraphsOffset = -1;
+    private static nint? _ApplyToExternalGraphsOffset;
 
     public ref bool ApplyToExternalGraphs
     {
         get
         {
-            if (_ApplyToExternalGraphsOffset == -1) _ApplyToExternalGraphsOffset = Schema.GetOffset(0x48725278311DECEC);
-            return ref _Handle.AsRef<bool>(_ApplyToExternalGraphsOffset);
+            _ApplyToExternalGraphsOffset = _ApplyToExternalGraphsOffset ?? Schema.GetOffset(0x48725278311DECEC);
+            return ref _Handle.AsRef<bool>(_ApplyToExternalGraphsOffset!.Value);
         }
     }
 

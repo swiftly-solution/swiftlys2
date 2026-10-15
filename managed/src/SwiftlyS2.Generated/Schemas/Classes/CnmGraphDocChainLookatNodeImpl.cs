@@ -16,14 +16,14 @@ internal partial class CnmGraphDocChainLookatNodeImpl : CNmGraphDocVariationData
 {
     public CnmGraphDocChainLookatNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _IsTargetInWorldSpaceOffset = -1;
+    private static nint? _IsTargetInWorldSpaceOffset;
 
     public ref bool IsTargetInWorldSpace
     {
         get
         {
-            if (_IsTargetInWorldSpaceOffset == -1) _IsTargetInWorldSpaceOffset = Schema.GetOffset(0x30856EF85F56E0C5);
-            return ref _Handle.AsRef<bool>(_IsTargetInWorldSpaceOffset);
+            _IsTargetInWorldSpaceOffset = _IsTargetInWorldSpaceOffset ?? Schema.GetOffset(0x30856EF85F56E0C5);
+            return ref _Handle.AsRef<bool>(_IsTargetInWorldSpaceOffset!.Value);
         }
     }
 

@@ -16,54 +16,54 @@ internal partial class CColorTintColorCorrectionLayerImpl : CColorCorrectionLaye
 {
     public CColorTintColorCorrectionLayerImpl(nint handle) : base(handle) { }
 
-    private static nint _TintColorROffset = -1;
+    private static nint? _TintColorROffset;
 
     public ref int TintColorR
     {
         get
         {
-            if (_TintColorROffset == -1) _TintColorROffset = Schema.GetOffset(0x27F517C436ED864F);
-            return ref _Handle.AsRef<int>(_TintColorROffset);
+            _TintColorROffset = _TintColorROffset ?? Schema.GetOffset(0x27F517C436ED864F);
+            return ref _Handle.AsRef<int>(_TintColorROffset!.Value);
         }
     }
-    private static nint _TintColorGOffset = -1;
+    private static nint? _TintColorGOffset;
 
     public ref int TintColorG
     {
         get
         {
-            if (_TintColorGOffset == -1) _TintColorGOffset = Schema.GetOffset(0x27F517C421ED6540);
-            return ref _Handle.AsRef<int>(_TintColorGOffset);
+            _TintColorGOffset = _TintColorGOffset ?? Schema.GetOffset(0x27F517C421ED6540);
+            return ref _Handle.AsRef<int>(_TintColorGOffset!.Value);
         }
     }
-    private static nint _TintColorBOffset = -1;
+    private static nint? _TintColorBOffset;
 
     public ref int TintColorB
     {
         get
         {
-            if (_TintColorBOffset == -1) _TintColorBOffset = Schema.GetOffset(0x27F517C426ED6D1F);
-            return ref _Handle.AsRef<int>(_TintColorBOffset);
+            _TintColorBOffset = _TintColorBOffset ?? Schema.GetOffset(0x27F517C426ED6D1F);
+            return ref _Handle.AsRef<int>(_TintColorBOffset!.Value);
         }
     }
-    private static nint _StrengthOffset = -1;
+    private static nint? _StrengthOffset;
 
     public ref int Strength
     {
         get
         {
-            if (_StrengthOffset == -1) _StrengthOffset = Schema.GetOffset(0x27F517C4AA98CF34);
-            return ref _Handle.AsRef<int>(_StrengthOffset);
+            _StrengthOffset = _StrengthOffset ?? Schema.GetOffset(0x27F517C4AA98CF34);
+            return ref _Handle.AsRef<int>(_StrengthOffset!.Value);
         }
     }
-    private static nint _PreserveLuminosityOffset = -1;
+    private static nint? _PreserveLuminosityOffset;
 
     public ref bool PreserveLuminosity
     {
         get
         {
-            if (_PreserveLuminosityOffset == -1) _PreserveLuminosityOffset = Schema.GetOffset(0x27F517C4D25D30C0);
-            return ref _Handle.AsRef<bool>(_PreserveLuminosityOffset);
+            _PreserveLuminosityOffset = _PreserveLuminosityOffset ?? Schema.GetOffset(0x27F517C4D25D30C0);
+            return ref _Handle.AsRef<bool>(_PreserveLuminosityOffset!.Value);
         }
     }
 

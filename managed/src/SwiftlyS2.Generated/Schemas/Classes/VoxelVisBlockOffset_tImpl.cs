@@ -16,24 +16,24 @@ internal partial class VoxelVisBlockOffset_tImpl : SchemaClass, VoxelVisBlockOff
 {
     public VoxelVisBlockOffset_tImpl(nint handle) : base(handle) { }
 
-    private static nint _OffsetOffset = -1;
+    private static nint? _OffsetOffset;
 
     public ref uint Offset
     {
         get
         {
-            if (_OffsetOffset == -1) _OffsetOffset = Schema.GetOffset(0x17D2B49827734C8E);
-            return ref _Handle.AsRef<uint>(_OffsetOffset);
+            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0x17D2B49827734C8E);
+            return ref _Handle.AsRef<uint>(_OffsetOffset!.Value);
         }
     }
-    private static nint _ElementCountOffset = -1;
+    private static nint? _ElementCountOffset;
 
     public ref uint ElementCount
     {
         get
         {
-            if (_ElementCountOffset == -1) _ElementCountOffset = Schema.GetOffset(0x17D2B49851A2EF12);
-            return ref _Handle.AsRef<uint>(_ElementCountOffset);
+            _ElementCountOffset = _ElementCountOffset ?? Schema.GetOffset(0x17D2B49851A2EF12);
+            return ref _Handle.AsRef<uint>(_ElementCountOffset!.Value);
         }
     }
 

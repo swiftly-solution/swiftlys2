@@ -16,89 +16,89 @@ internal partial class CNmClipDocEvent_SoundImpl : CNmClipDocEventImpl, CNmClipD
 {
     public CNmClipDocEvent_SoundImpl(nint handle) : base(handle) { }
 
-    private static nint _RelevanceOffset = -1;
+    private static nint? _RelevanceOffset;
 
     public ref CNmEventRelevance_t Relevance
     {
         get
         {
-            if (_RelevanceOffset == -1) _RelevanceOffset = Schema.GetOffset(0x58312E471E3F4008);
-            return ref _Handle.AsRef<CNmEventRelevance_t>(_RelevanceOffset);
+            _RelevanceOffset = _RelevanceOffset ?? Schema.GetOffset(0x58312E471E3F4008);
+            return ref _Handle.AsRef<CNmEventRelevance_t>(_RelevanceOffset!.Value);
         }
     }
-    private static nint _ContinuePlayingSoundAtDurationEndOffset = -1;
+    private static nint? _ContinuePlayingSoundAtDurationEndOffset;
 
     public ref bool ContinuePlayingSoundAtDurationEnd
     {
         get
         {
-            if (_ContinuePlayingSoundAtDurationEndOffset == -1) _ContinuePlayingSoundAtDurationEndOffset = Schema.GetOffset(0x58312E472CB53E61);
-            return ref _Handle.AsRef<bool>(_ContinuePlayingSoundAtDurationEndOffset);
+            _ContinuePlayingSoundAtDurationEndOffset = _ContinuePlayingSoundAtDurationEndOffset ?? Schema.GetOffset(0x58312E472CB53E61);
+            return ref _Handle.AsRef<bool>(_ContinuePlayingSoundAtDurationEndOffset!.Value);
         }
     }
-    private static nint _DurationInterruptionThresholdOffset = -1;
+    private static nint? _DurationInterruptionThresholdOffset;
 
     public ref float DurationInterruptionThreshold
     {
         get
         {
-            if (_DurationInterruptionThresholdOffset == -1) _DurationInterruptionThresholdOffset = Schema.GetOffset(0x58312E479F1AA35B);
-            return ref _Handle.AsRef<float>(_DurationInterruptionThresholdOffset);
+            _DurationInterruptionThresholdOffset = _DurationInterruptionThresholdOffset ?? Schema.GetOffset(0x58312E479F1AA35B);
+            return ref _Handle.AsRef<float>(_DurationInterruptionThresholdOffset!.Value);
         }
     }
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x58312E474D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x58312E474D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x58312E474D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x58312E474D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _PositionOffset = -1;
+    private static nint? _PositionOffset;
 
     public ref CNmSoundEvent__Position_t Position
     {
         get
         {
-            if (_PositionOffset == -1) _PositionOffset = Schema.GetOffset(0x58312E474B57E0AA);
-            return ref _Handle.AsRef<CNmSoundEvent__Position_t>(_PositionOffset);
+            _PositionOffset = _PositionOffset ?? Schema.GetOffset(0x58312E474B57E0AA);
+            return ref _Handle.AsRef<CNmSoundEvent__Position_t>(_PositionOffset!.Value);
         }
     }
-    private static nint _AttachmentNameOffset = -1;
+    private static nint? _AttachmentNameOffset;
 
     public string AttachmentName
     {
         get
         {
-            if (_AttachmentNameOffset == -1) _AttachmentNameOffset = Schema.GetOffset(0x58312E47295DA9CB);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_AttachmentNameOffset));
+            _AttachmentNameOffset = _AttachmentNameOffset ?? Schema.GetOffset(0x58312E47295DA9CB);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_AttachmentNameOffset!.Value));
         }
         set
         {
-            if (_AttachmentNameOffset == -1) _AttachmentNameOffset = Schema.GetOffset(0x58312E47295DA9CB);
-            Schema.SetCUtlString(_Handle, _AttachmentNameOffset, value);
+            _AttachmentNameOffset = _AttachmentNameOffset ?? Schema.GetOffset(0x58312E47295DA9CB);
+            Schema.SetCUtlString(_Handle, _AttachmentNameOffset!.Value, value);
         }
     }
-    private static nint _TagsOffset = -1;
+    private static nint? _TagsOffset;
 
     public string Tags
     {
         get
         {
-            if (_TagsOffset == -1) _TagsOffset = Schema.GetOffset(0x58312E47B46C8540);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_TagsOffset));
+            _TagsOffset = _TagsOffset ?? Schema.GetOffset(0x58312E47B46C8540);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_TagsOffset!.Value));
         }
         set
         {
-            if (_TagsOffset == -1) _TagsOffset = Schema.GetOffset(0x58312E47B46C8540);
-            Schema.SetCUtlString(_Handle, _TagsOffset, value);
+            _TagsOffset = _TagsOffset ?? Schema.GetOffset(0x58312E47B46C8540);
+            Schema.SetCUtlString(_Handle, _TagsOffset!.Value, value);
         }
     }
 

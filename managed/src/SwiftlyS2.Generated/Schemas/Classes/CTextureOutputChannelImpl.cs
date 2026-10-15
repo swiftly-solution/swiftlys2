@@ -16,72 +16,72 @@ internal partial class CTextureOutputChannelImpl : SchemaClass, CTextureOutputCh
 {
     public CTextureOutputChannelImpl(nint handle) : base(handle) { }
 
-    private static nint _SrcChannelsOffset = -1;
+    private static nint? _SrcChannelsOffset;
 
     public string SrcChannels
     {
         get
         {
-            if (_SrcChannelsOffset == -1) _SrcChannelsOffset = Schema.GetOffset(0xA9F9137DF4F7969);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_SrcChannelsOffset));
+            _SrcChannelsOffset = _SrcChannelsOffset ?? Schema.GetOffset(0xA9F9137DF4F7969);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_SrcChannelsOffset!.Value));
         }
         set
         {
-            if (_SrcChannelsOffset == -1) _SrcChannelsOffset = Schema.GetOffset(0xA9F9137DF4F7969);
-            Schema.SetCUtlString(_Handle, _SrcChannelsOffset, value);
+            _SrcChannelsOffset = _SrcChannelsOffset ?? Schema.GetOffset(0xA9F9137DF4F7969);
+            Schema.SetCUtlString(_Handle, _SrcChannelsOffset!.Value, value);
         }
     }
-    private static nint _DstChannelsOffset = -1;
+    private static nint? _DstChannelsOffset;
 
     public string DstChannels
     {
         get
         {
-            if (_DstChannelsOffset == -1) _DstChannelsOffset = Schema.GetOffset(0xA9F913700FD4BC4);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_DstChannelsOffset));
+            _DstChannelsOffset = _DstChannelsOffset ?? Schema.GetOffset(0xA9F913700FD4BC4);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_DstChannelsOffset!.Value));
         }
         set
         {
-            if (_DstChannelsOffset == -1) _DstChannelsOffset = Schema.GetOffset(0xA9F913700FD4BC4);
-            Schema.SetCUtlString(_Handle, _DstChannelsOffset, value);
+            _DstChannelsOffset = _DstChannelsOffset ?? Schema.GetOffset(0xA9F913700FD4BC4);
+            Schema.SetCUtlString(_Handle, _DstChannelsOffset!.Value, value);
         }
     }
-    private static nint _MipAlgorithmOffset = -1;
+    private static nint? _MipAlgorithmOffset;
     private CImageProcessorImpl? _MipAlgorithmInstance;
 
     public CImageProcessor MipAlgorithm
     {
         get
         {
-            if (_MipAlgorithmOffset == -1) _MipAlgorithmOffset = Schema.GetOffset(0xA9F91376EB074CE);
+            _MipAlgorithmOffset = _MipAlgorithmOffset ?? Schema.GetOffset(0xA9F91376EB074CE);
             var instance = _MipAlgorithmInstance ??= new CImageProcessorImpl(0);
-            instance.DangerousSetHandle(_Handle + _MipAlgorithmOffset);
+            instance.DangerousSetHandle(_Handle + _MipAlgorithmOffset!.Value);
             return instance;
         }
     }
-    private static nint _OutputColorSpaceOffset = -1;
+    private static nint? _OutputColorSpaceOffset;
 
     public string OutputColorSpace
     {
         get
         {
-            if (_OutputColorSpaceOffset == -1) _OutputColorSpaceOffset = Schema.GetOffset(0xA9F9137A5963427);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_OutputColorSpaceOffset));
+            _OutputColorSpaceOffset = _OutputColorSpaceOffset ?? Schema.GetOffset(0xA9F9137A5963427);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_OutputColorSpaceOffset!.Value));
         }
         set
         {
-            if (_OutputColorSpaceOffset == -1) _OutputColorSpaceOffset = Schema.GetOffset(0xA9F9137A5963427);
-            Schema.SetCUtlString(_Handle, _OutputColorSpaceOffset, value);
+            _OutputColorSpaceOffset = _OutputColorSpaceOffset ?? Schema.GetOffset(0xA9F9137A5963427);
+            Schema.SetCUtlString(_Handle, _OutputColorSpaceOffset!.Value, value);
         }
     }
-    private static nint _InputTextureArrayOffset = -1;
+    private static nint? _InputTextureArrayOffset;
 
     public ref CUtlVector<CUtlString> InputTextureArray
     {
         get
         {
-            if (_InputTextureArrayOffset == -1) _InputTextureArrayOffset = Schema.GetOffset(0xA9F9137D7C534AB);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_InputTextureArrayOffset);
+            _InputTextureArrayOffset = _InputTextureArrayOffset ?? Schema.GetOffset(0xA9F9137D7C534AB);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_InputTextureArrayOffset!.Value);
         }
     }
 

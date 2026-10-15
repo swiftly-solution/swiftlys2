@@ -16,64 +16,64 @@ internal partial class C_BaseModelEntity__BodyGroupRequest_tImpl : SchemaClass, 
 {
     public C_BaseModelEntity__BodyGroupRequest_tImpl(nint handle) : base(handle) { }
 
-    private static nint _RequestIDOffset = -1;
+    private static nint? _RequestIDOffset;
 
     public ref uint RequestID
     {
         get
         {
-            if (_RequestIDOffset == -1) _RequestIDOffset = Schema.GetOffset(0x2CC25EFF1BC4D364);
-            return ref _Handle.AsRef<uint>(_RequestIDOffset);
+            _RequestIDOffset = _RequestIDOffset ?? Schema.GetOffset(0x2CC25EFF1BC4D364);
+            return ref _Handle.AsRef<uint>(_RequestIDOffset!.Value);
         }
     }
-    private static nint _GroupNameOffset = -1;
+    private static nint? _GroupNameOffset;
 
     public ref CUtlStringToken GroupName
     {
         get
         {
-            if (_GroupNameOffset == -1) _GroupNameOffset = Schema.GetOffset(0x2CC25EFFCC5E69CB);
-            return ref _Handle.AsRef<CUtlStringToken>(_GroupNameOffset);
+            _GroupNameOffset = _GroupNameOffset ?? Schema.GetOffset(0x2CC25EFFCC5E69CB);
+            return ref _Handle.AsRef<CUtlStringToken>(_GroupNameOffset!.Value);
         }
     }
-    private static nint _ChoiceNameOffset = -1;
+    private static nint? _ChoiceNameOffset;
 
     public ref CGlobalSymbol ChoiceName
     {
         get
         {
-            if (_ChoiceNameOffset == -1) _ChoiceNameOffset = Schema.GetOffset(0x2CC25EFFABFD09EA);
-            return ref _Handle.AsRef<CGlobalSymbol>(_ChoiceNameOffset);
+            _ChoiceNameOffset = _ChoiceNameOffset ?? Schema.GetOffset(0x2CC25EFFABFD09EA);
+            return ref _Handle.AsRef<CGlobalSymbol>(_ChoiceNameOffset!.Value);
         }
     }
-    private static nint _GroupOffset = -1;
+    private static nint? _GroupOffset;
 
     public ref int Group
     {
         get
         {
-            if (_GroupOffset == -1) _GroupOffset = Schema.GetOffset(0x2CC25EFF0CD16308);
-            return ref _Handle.AsRef<int>(_GroupOffset);
+            _GroupOffset = _GroupOffset ?? Schema.GetOffset(0x2CC25EFF0CD16308);
+            return ref _Handle.AsRef<int>(_GroupOffset!.Value);
         }
     }
-    private static nint _ChoiceOffset = -1;
+    private static nint? _ChoiceOffset;
 
     public ref ushort Choice
     {
         get
         {
-            if (_ChoiceOffset == -1) _ChoiceOffset = Schema.GetOffset(0x2CC25EFF07C3192B);
-            return ref _Handle.AsRef<ushort>(_ChoiceOffset);
+            _ChoiceOffset = _ChoiceOffset ?? Schema.GetOffset(0x2CC25EFF07C3192B);
+            return ref _Handle.AsRef<ushort>(_ChoiceOffset!.Value);
         }
     }
-    private static nint _RefCountOffset = -1;
+    private static nint? _RefCountOffset;
 
     public ref ushort RefCount
     {
         get
         {
-            if (_RefCountOffset == -1) _RefCountOffset = Schema.GetOffset(0x2CC25EFF07EF0FAC);
-            return ref _Handle.AsRef<ushort>(_RefCountOffset);
+            _RefCountOffset = _RefCountOffset ?? Schema.GetOffset(0x2CC25EFF07EF0FAC);
+            return ref _Handle.AsRef<ushort>(_RefCountOffset!.Value);
         }
     }
 

@@ -16,36 +16,36 @@ internal partial class CPulseCell_Outflow_PlaySceneBase__CursorState_tImpl : Sch
 {
     public CPulseCell_Outflow_PlaySceneBase__CursorState_tImpl(nint handle) : base(handle) { }
 
-    private static nint _SceneInstanceOffset = -1;
+    private static nint? _SceneInstanceOffset;
 
     public ref CHandle<CBaseEntity> SceneInstance
     {
         get
         {
-            if (_SceneInstanceOffset == -1) _SceneInstanceOffset = Schema.GetOffset(0x16AE3F0C967C210);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_SceneInstanceOffset);
+            _SceneInstanceOffset = _SceneInstanceOffset ?? Schema.GetOffset(0x16AE3F0C967C210);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_SceneInstanceOffset!.Value);
         }
     }
-    private static nint _MainActorOffset = -1;
+    private static nint? _MainActorOffset;
 
     public ref CHandle<CBaseEntity> MainActor
     {
         get
         {
-            if (_MainActorOffset == -1) _MainActorOffset = Schema.GetOffset(0x16AE3F0CCB20D99);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_MainActorOffset);
+            _MainActorOffset = _MainActorOffset ?? Schema.GetOffset(0x16AE3F0CCB20D99);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_MainActorOffset!.Value);
         }
     }
-    private static nint _CursorIDToEventIDOffset = -1;
+    private static nint? _CursorIDToEventIDOffset;
     private SchemaUntypedField? _CursorIDToEventIDInstance;
 
     public SchemaUntypedField CursorIDToEventID
     {
         get
         {
-            if (_CursorIDToEventIDOffset == -1) _CursorIDToEventIDOffset = Schema.GetOffset(0x16AE3F0209272D0);
+            _CursorIDToEventIDOffset = _CursorIDToEventIDOffset ?? Schema.GetOffset(0x16AE3F0209272D0);
             var instance = _CursorIDToEventIDInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _CursorIDToEventIDOffset);
+            instance.DangerousSetHandle(_Handle + _CursorIDToEventIDOffset!.Value);
             return instance;
         }
     }

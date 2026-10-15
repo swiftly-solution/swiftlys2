@@ -16,44 +16,44 @@ internal partial class CMixSteamAudioSourceImpl : CMixPropertyBaseImpl, CMixStea
 {
     public CMixSteamAudioSourceImpl(nint handle) : base(handle) { }
 
-    private static nint _InterpolationOffset = -1;
+    private static nint? _InterpolationOffset;
 
     public ref SteamAudioHRTFInterpolationType_t Interpolation
     {
         get
         {
-            if (_InterpolationOffset == -1) _InterpolationOffset = Schema.GetOffset(0x1F9AFBC33A7AEC91);
-            return ref _Handle.AsRef<SteamAudioHRTFInterpolationType_t>(_InterpolationOffset);
+            _InterpolationOffset = _InterpolationOffset ?? Schema.GetOffset(0x1F9AFBC33A7AEC91);
+            return ref _Handle.AsRef<SteamAudioHRTFInterpolationType_t>(_InterpolationOffset!.Value);
         }
     }
-    private static nint _DirectMixLevelOffset = -1;
+    private static nint? _DirectMixLevelOffset;
 
     public ref float DirectMixLevel
     {
         get
         {
-            if (_DirectMixLevelOffset == -1) _DirectMixLevelOffset = Schema.GetOffset(0x1F9AFBC3A98E34F6);
-            return ref _Handle.AsRef<float>(_DirectMixLevelOffset);
+            _DirectMixLevelOffset = _DirectMixLevelOffset ?? Schema.GetOffset(0x1F9AFBC3A98E34F6);
+            return ref _Handle.AsRef<float>(_DirectMixLevelOffset!.Value);
         }
     }
-    private static nint _EnablePerspectiveCorrectionOffset = -1;
+    private static nint? _EnablePerspectiveCorrectionOffset;
 
     public ref bool EnablePerspectiveCorrection
     {
         get
         {
-            if (_EnablePerspectiveCorrectionOffset == -1) _EnablePerspectiveCorrectionOffset = Schema.GetOffset(0x1F9AFBC380120F14);
-            return ref _Handle.AsRef<bool>(_EnablePerspectiveCorrectionOffset);
+            _EnablePerspectiveCorrectionOffset = _EnablePerspectiveCorrectionOffset ?? Schema.GetOffset(0x1F9AFBC380120F14);
+            return ref _Handle.AsRef<bool>(_EnablePerspectiveCorrectionOffset!.Value);
         }
     }
-    private static nint _RelativePositionOffset = -1;
+    private static nint? _RelativePositionOffset;
 
     public ref bool RelativePosition
     {
         get
         {
-            if (_RelativePositionOffset == -1) _RelativePositionOffset = Schema.GetOffset(0x1F9AFBC3A2E186D2);
-            return ref _Handle.AsRef<bool>(_RelativePositionOffset);
+            _RelativePositionOffset = _RelativePositionOffset ?? Schema.GetOffset(0x1F9AFBC3A2E186D2);
+            return ref _Handle.AsRef<bool>(_RelativePositionOffset!.Value);
         }
     }
 

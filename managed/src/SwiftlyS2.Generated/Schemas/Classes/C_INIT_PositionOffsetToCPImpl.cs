@@ -16,34 +16,34 @@ internal partial class C_INIT_PositionOffsetToCPImpl : CParticleFunctionInitiali
 {
     public C_INIT_PositionOffsetToCPImpl(nint handle) : base(handle) { }
 
-    private static nint _ControlPointNumberStartOffset = -1;
+    private static nint? _ControlPointNumberStartOffset;
 
     public ref int ControlPointNumberStart
     {
         get
         {
-            if (_ControlPointNumberStartOffset == -1) _ControlPointNumberStartOffset = Schema.GetOffset(0x5976F1BC33DBA947);
-            return ref _Handle.AsRef<int>(_ControlPointNumberStartOffset);
+            _ControlPointNumberStartOffset = _ControlPointNumberStartOffset ?? Schema.GetOffset(0x5976F1BC33DBA947);
+            return ref _Handle.AsRef<int>(_ControlPointNumberStartOffset!.Value);
         }
     }
-    private static nint _ControlPointNumberEndOffset = -1;
+    private static nint? _ControlPointNumberEndOffset;
 
     public ref int ControlPointNumberEnd
     {
         get
         {
-            if (_ControlPointNumberEndOffset == -1) _ControlPointNumberEndOffset = Schema.GetOffset(0x5976F1BC6527E5A2);
-            return ref _Handle.AsRef<int>(_ControlPointNumberEndOffset);
+            _ControlPointNumberEndOffset = _ControlPointNumberEndOffset ?? Schema.GetOffset(0x5976F1BC6527E5A2);
+            return ref _Handle.AsRef<int>(_ControlPointNumberEndOffset!.Value);
         }
     }
-    private static nint _LocalCoordsOffset = -1;
+    private static nint? _LocalCoordsOffset;
 
     public ref bool LocalCoords
     {
         get
         {
-            if (_LocalCoordsOffset == -1) _LocalCoordsOffset = Schema.GetOffset(0x5976F1BC30E716DE);
-            return ref _Handle.AsRef<bool>(_LocalCoordsOffset);
+            _LocalCoordsOffset = _LocalCoordsOffset ?? Schema.GetOffset(0x5976F1BC30E716DE);
+            return ref _Handle.AsRef<bool>(_LocalCoordsOffset!.Value);
         }
     }
 

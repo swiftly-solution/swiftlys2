@@ -16,14 +16,14 @@ internal partial class CPointChildModifierImpl : CPointEntityImpl, CPointChildMo
 {
     public CPointChildModifierImpl(nint handle) : base(handle) { }
 
-    private static nint _OrphanInsteadOfDeletingChildrenOnRemoveOffset = -1;
+    private static nint? _OrphanInsteadOfDeletingChildrenOnRemoveOffset;
 
     public ref bool OrphanInsteadOfDeletingChildrenOnRemove
     {
         get
         {
-            if (_OrphanInsteadOfDeletingChildrenOnRemoveOffset == -1) _OrphanInsteadOfDeletingChildrenOnRemoveOffset = Schema.GetOffset(0xDA7544AF85891348);
-            return ref _Handle.AsRef<bool>(_OrphanInsteadOfDeletingChildrenOnRemoveOffset);
+            _OrphanInsteadOfDeletingChildrenOnRemoveOffset = _OrphanInsteadOfDeletingChildrenOnRemoveOffset ?? Schema.GetOffset(0xDA7544AF85891348);
+            return ref _Handle.AsRef<bool>(_OrphanInsteadOfDeletingChildrenOnRemoveOffset!.Value);
         }
     }
 

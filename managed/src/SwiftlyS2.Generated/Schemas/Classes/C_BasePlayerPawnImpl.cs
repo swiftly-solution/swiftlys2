@@ -16,344 +16,344 @@ internal partial class C_BasePlayerPawnImpl : C_BaseCombatCharacterImpl, C_BaseP
 {
     public C_BasePlayerPawnImpl(nint handle) : base(handle) { }
 
-    private static nint _WeaponServicesOffset = -1;
+    private static nint? _WeaponServicesOffset;
     private CPlayer_WeaponServicesImpl? _WeaponServicesInstance;
 
     public CPlayer_WeaponServices? WeaponServices
     {
         get
         {
-            if (_WeaponServicesOffset == -1) _WeaponServicesOffset = Schema.GetOffset(0x4AB1B57951B23A93);
-            var ptr = _Handle.Read<nint>(_WeaponServicesOffset);
+            _WeaponServicesOffset = _WeaponServicesOffset ?? Schema.GetOffset(0x4AB1B57951B23A93);
+            var ptr = _Handle.Read<nint>(_WeaponServicesOffset!.Value);
             if (!ptr.IsValidPtr()) return null;
             var instance = _WeaponServicesInstance ??= new CPlayer_WeaponServicesImpl(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint _ItemServicesOffset = -1;
+    private static nint? _ItemServicesOffset;
     private CPlayer_ItemServicesImpl? _ItemServicesInstance;
 
     public CPlayer_ItemServices? ItemServices
     {
         get
         {
-            if (_ItemServicesOffset == -1) _ItemServicesOffset = Schema.GetOffset(0x4AB1B579AABBB9B8);
-            var ptr = _Handle.Read<nint>(_ItemServicesOffset);
+            _ItemServicesOffset = _ItemServicesOffset ?? Schema.GetOffset(0x4AB1B579AABBB9B8);
+            var ptr = _Handle.Read<nint>(_ItemServicesOffset!.Value);
             if (!ptr.IsValidPtr()) return null;
             var instance = _ItemServicesInstance ??= new CPlayer_ItemServicesImpl(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint _AutoaimServicesOffset = -1;
+    private static nint? _AutoaimServicesOffset;
     private CPlayer_AutoaimServicesImpl? _AutoaimServicesInstance;
 
     public CPlayer_AutoaimServices? AutoaimServices
     {
         get
         {
-            if (_AutoaimServicesOffset == -1) _AutoaimServicesOffset = Schema.GetOffset(0x4AB1B57913209115);
-            var ptr = _Handle.Read<nint>(_AutoaimServicesOffset);
+            _AutoaimServicesOffset = _AutoaimServicesOffset ?? Schema.GetOffset(0x4AB1B57913209115);
+            var ptr = _Handle.Read<nint>(_AutoaimServicesOffset!.Value);
             if (!ptr.IsValidPtr()) return null;
             var instance = _AutoaimServicesInstance ??= new CPlayer_AutoaimServicesImpl(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint _ObserverServicesOffset = -1;
+    private static nint? _ObserverServicesOffset;
     private CPlayer_ObserverServicesImpl? _ObserverServicesInstance;
 
     public CPlayer_ObserverServices? ObserverServices
     {
         get
         {
-            if (_ObserverServicesOffset == -1) _ObserverServicesOffset = Schema.GetOffset(0x4AB1B5794ED1A579);
-            var ptr = _Handle.Read<nint>(_ObserverServicesOffset);
+            _ObserverServicesOffset = _ObserverServicesOffset ?? Schema.GetOffset(0x4AB1B5794ED1A579);
+            var ptr = _Handle.Read<nint>(_ObserverServicesOffset!.Value);
             if (!ptr.IsValidPtr()) return null;
             var instance = _ObserverServicesInstance ??= new CPlayer_ObserverServicesImpl(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint _WaterServicesOffset = -1;
+    private static nint? _WaterServicesOffset;
     private CPlayer_WaterServicesImpl? _WaterServicesInstance;
 
     public CPlayer_WaterServices? WaterServices
     {
         get
         {
-            if (_WaterServicesOffset == -1) _WaterServicesOffset = Schema.GetOffset(0x4AB1B579A5653452);
-            var ptr = _Handle.Read<nint>(_WaterServicesOffset);
+            _WaterServicesOffset = _WaterServicesOffset ?? Schema.GetOffset(0x4AB1B579A5653452);
+            var ptr = _Handle.Read<nint>(_WaterServicesOffset!.Value);
             if (!ptr.IsValidPtr()) return null;
             var instance = _WaterServicesInstance ??= new CPlayer_WaterServicesImpl(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint _UseServicesOffset = -1;
+    private static nint? _UseServicesOffset;
     private CPlayer_UseServicesImpl? _UseServicesInstance;
 
     public CPlayer_UseServices? UseServices
     {
         get
         {
-            if (_UseServicesOffset == -1) _UseServicesOffset = Schema.GetOffset(0x4AB1B579A87C910A);
-            var ptr = _Handle.Read<nint>(_UseServicesOffset);
+            _UseServicesOffset = _UseServicesOffset ?? Schema.GetOffset(0x4AB1B579A87C910A);
+            var ptr = _Handle.Read<nint>(_UseServicesOffset!.Value);
             if (!ptr.IsValidPtr()) return null;
             var instance = _UseServicesInstance ??= new CPlayer_UseServicesImpl(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint _FlashlightServicesOffset = -1;
+    private static nint? _FlashlightServicesOffset;
     private CPlayer_FlashlightServicesImpl? _FlashlightServicesInstance;
 
     public CPlayer_FlashlightServices? FlashlightServices
     {
         get
         {
-            if (_FlashlightServicesOffset == -1) _FlashlightServicesOffset = Schema.GetOffset(0x4AB1B5796CF76641);
-            var ptr = _Handle.Read<nint>(_FlashlightServicesOffset);
+            _FlashlightServicesOffset = _FlashlightServicesOffset ?? Schema.GetOffset(0x4AB1B5796CF76641);
+            var ptr = _Handle.Read<nint>(_FlashlightServicesOffset!.Value);
             if (!ptr.IsValidPtr()) return null;
             var instance = _FlashlightServicesInstance ??= new CPlayer_FlashlightServicesImpl(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint _CameraServicesOffset = -1;
+    private static nint? _CameraServicesOffset;
     private CPlayer_CameraServicesImpl? _CameraServicesInstance;
 
     public CPlayer_CameraServices? CameraServices
     {
         get
         {
-            if (_CameraServicesOffset == -1) _CameraServicesOffset = Schema.GetOffset(0x4AB1B5793B7DFD20);
-            var ptr = _Handle.Read<nint>(_CameraServicesOffset);
+            _CameraServicesOffset = _CameraServicesOffset ?? Schema.GetOffset(0x4AB1B5793B7DFD20);
+            var ptr = _Handle.Read<nint>(_CameraServicesOffset!.Value);
             if (!ptr.IsValidPtr()) return null;
             var instance = _CameraServicesInstance ??= new CPlayer_CameraServicesImpl(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint _MovementServicesOffset = -1;
+    private static nint? _MovementServicesOffset;
     private CPlayer_MovementServicesImpl? _MovementServicesInstance;
 
     public CPlayer_MovementServices? MovementServices
     {
         get
         {
-            if (_MovementServicesOffset == -1) _MovementServicesOffset = Schema.GetOffset(0x4AB1B579CF73E28A);
-            var ptr = _Handle.Read<nint>(_MovementServicesOffset);
+            _MovementServicesOffset = _MovementServicesOffset ?? Schema.GetOffset(0x4AB1B579CF73E28A);
+            var ptr = _Handle.Read<nint>(_MovementServicesOffset!.Value);
             if (!ptr.IsValidPtr()) return null;
             var instance = _MovementServicesInstance ??= new CPlayer_MovementServicesImpl(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint _ServerViewAngleChangesOffset = -1;
+    private static nint? _ServerViewAngleChangesOffset;
     private SchemaUntypedField? _ServerViewAngleChangesInstance;
 
     public SchemaUntypedField ServerViewAngleChanges
     {
         get
         {
-            if (_ServerViewAngleChangesOffset == -1) _ServerViewAngleChangesOffset = Schema.GetOffset(0x4AB1B5799182F3B7);
+            _ServerViewAngleChangesOffset = _ServerViewAngleChangesOffset ?? Schema.GetOffset(0x4AB1B5799182F3B7);
             var instance = _ServerViewAngleChangesInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ServerViewAngleChangesOffset);
+            instance.DangerousSetHandle(_Handle + _ServerViewAngleChangesOffset!.Value);
             return instance;
         }
     }
-    private static nint _V_angleOffset = -1;
+    private static nint? _V_angleOffset;
 
     public ref QAngle V_angle
     {
         get
         {
-            if (_V_angleOffset == -1) _V_angleOffset = Schema.GetOffset(0x4AB1B57913C45A71);
-            return ref _Handle.AsRef<QAngle>(_V_angleOffset);
+            _V_angleOffset = _V_angleOffset ?? Schema.GetOffset(0x4AB1B57913C45A71);
+            return ref _Handle.AsRef<QAngle>(_V_angleOffset!.Value);
         }
     }
-    private static nint _V_anglePreviousOffset = -1;
+    private static nint? _V_anglePreviousOffset;
 
     public ref QAngle V_anglePrevious
     {
         get
         {
-            if (_V_anglePreviousOffset == -1) _V_anglePreviousOffset = Schema.GetOffset(0x4AB1B57906B54DD4);
-            return ref _Handle.AsRef<QAngle>(_V_anglePreviousOffset);
+            _V_anglePreviousOffset = _V_anglePreviousOffset ?? Schema.GetOffset(0x4AB1B57906B54DD4);
+            return ref _Handle.AsRef<QAngle>(_V_anglePreviousOffset!.Value);
         }
     }
-    private static nint _HideHUDOffset = -1;
+    private static nint? _HideHUDOffset;
 
     public ref uint HideHUD
     {
         get
         {
-            if (_HideHUDOffset == -1) _HideHUDOffset = Schema.GetOffset(0x4AB1B5790627E4A5);
-            return ref _Handle.AsRef<uint>(_HideHUDOffset);
+            _HideHUDOffset = _HideHUDOffset ?? Schema.GetOffset(0x4AB1B5790627E4A5);
+            return ref _Handle.AsRef<uint>(_HideHUDOffset!.Value);
         }
     }
-    private static nint _Skybox3dOffset = -1;
+    private static nint? _Skybox3dOffset;
     private sky3dparams_tImpl? _Skybox3dInstance;
 
     public sky3dparams_t Skybox3d
     {
         get
         {
-            if (_Skybox3dOffset == -1) _Skybox3dOffset = Schema.GetOffset(0x4AB1B57951DA4DBC);
+            _Skybox3dOffset = _Skybox3dOffset ?? Schema.GetOffset(0x4AB1B57951DA4DBC);
             var instance = _Skybox3dInstance ??= new sky3dparams_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _Skybox3dOffset);
+            instance.DangerousSetHandle(_Handle + _Skybox3dOffset!.Value);
             return instance;
         }
     }
-    private static nint _DeathTimeOffset = -1;
+    private static nint? _DeathTimeOffset;
     private GameTime_tImpl? _DeathTimeInstance;
 
     public GameTime_t DeathTime
     {
         get
         {
-            if (_DeathTimeOffset == -1) _DeathTimeOffset = Schema.GetOffset(0x4AB1B57907F7A70A);
+            _DeathTimeOffset = _DeathTimeOffset ?? Schema.GetOffset(0x4AB1B57907F7A70A);
             var instance = _DeathTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _DeathTimeOffset);
+            instance.DangerousSetHandle(_Handle + _DeathTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _PredictionErrorOffset = -1;
+    private static nint? _PredictionErrorOffset;
 
     public ref Vector PredictionError
     {
         get
         {
-            if (_PredictionErrorOffset == -1) _PredictionErrorOffset = Schema.GetOffset(0x4AB1B57905B093B2);
-            return ref _Handle.AsRef<Vector>(_PredictionErrorOffset);
+            _PredictionErrorOffset = _PredictionErrorOffset ?? Schema.GetOffset(0x4AB1B57905B093B2);
+            return ref _Handle.AsRef<Vector>(_PredictionErrorOffset!.Value);
         }
     }
-    private static nint _PredictionErrorTimeOffset = -1;
+    private static nint? _PredictionErrorTimeOffset;
     private GameTime_tImpl? _PredictionErrorTimeInstance;
 
     public GameTime_t PredictionErrorTime
     {
         get
         {
-            if (_PredictionErrorTimeOffset == -1) _PredictionErrorTimeOffset = Schema.GetOffset(0x4AB1B579DC02D8B1);
+            _PredictionErrorTimeOffset = _PredictionErrorTimeOffset ?? Schema.GetOffset(0x4AB1B579DC02D8B1);
             var instance = _PredictionErrorTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _PredictionErrorTimeOffset);
+            instance.DangerousSetHandle(_Handle + _PredictionErrorTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _LastCameraSetupLocalOriginOffset = -1;
+    private static nint? _LastCameraSetupLocalOriginOffset;
 
     public ref Vector LastCameraSetupLocalOrigin
     {
         get
         {
-            if (_LastCameraSetupLocalOriginOffset == -1) _LastCameraSetupLocalOriginOffset = Schema.GetOffset(0x4AB1B579435B32A8);
-            return ref _Handle.AsRef<Vector>(_LastCameraSetupLocalOriginOffset);
+            _LastCameraSetupLocalOriginOffset = _LastCameraSetupLocalOriginOffset ?? Schema.GetOffset(0x4AB1B579435B32A8);
+            return ref _Handle.AsRef<Vector>(_LastCameraSetupLocalOriginOffset!.Value);
         }
     }
-    private static nint _LastCameraSetupTimeOffset = -1;
+    private static nint? _LastCameraSetupTimeOffset;
     private GameTime_tImpl? _LastCameraSetupTimeInstance;
 
     public GameTime_t LastCameraSetupTime
     {
         get
         {
-            if (_LastCameraSetupTimeOffset == -1) _LastCameraSetupTimeOffset = Schema.GetOffset(0x4AB1B579E26A419C);
+            _LastCameraSetupTimeOffset = _LastCameraSetupTimeOffset ?? Schema.GetOffset(0x4AB1B579E26A419C);
             var instance = _LastCameraSetupTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _LastCameraSetupTimeOffset);
+            instance.DangerousSetHandle(_Handle + _LastCameraSetupTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _FOVSensitivityAdjustOffset = -1;
+    private static nint? _FOVSensitivityAdjustOffset;
 
     public ref float FOVSensitivityAdjust
     {
         get
         {
-            if (_FOVSensitivityAdjustOffset == -1) _FOVSensitivityAdjustOffset = Schema.GetOffset(0x4AB1B579741B343E);
-            return ref _Handle.AsRef<float>(_FOVSensitivityAdjustOffset);
+            _FOVSensitivityAdjustOffset = _FOVSensitivityAdjustOffset ?? Schema.GetOffset(0x4AB1B579741B343E);
+            return ref _Handle.AsRef<float>(_FOVSensitivityAdjustOffset!.Value);
         }
     }
-    private static nint _MouseSensitivityOffset = -1;
+    private static nint? _MouseSensitivityOffset;
 
     public ref float MouseSensitivity
     {
         get
         {
-            if (_MouseSensitivityOffset == -1) _MouseSensitivityOffset = Schema.GetOffset(0x4AB1B57902102571);
-            return ref _Handle.AsRef<float>(_MouseSensitivityOffset);
+            _MouseSensitivityOffset = _MouseSensitivityOffset ?? Schema.GetOffset(0x4AB1B57902102571);
+            return ref _Handle.AsRef<float>(_MouseSensitivityOffset!.Value);
         }
     }
-    private static nint _OldOriginOffset = -1;
+    private static nint? _OldOriginOffset;
 
     public ref Vector OldOrigin
     {
         get
         {
-            if (_OldOriginOffset == -1) _OldOriginOffset = Schema.GetOffset(0x4AB1B5798F45E13C);
-            return ref _Handle.AsRef<Vector>(_OldOriginOffset);
+            _OldOriginOffset = _OldOriginOffset ?? Schema.GetOffset(0x4AB1B5798F45E13C);
+            return ref _Handle.AsRef<Vector>(_OldOriginOffset!.Value);
         }
     }
-    private static nint _OldSimulationTimeOffset = -1;
+    private static nint? _OldSimulationTimeOffset;
 
     public ref float OldSimulationTime
     {
         get
         {
-            if (_OldSimulationTimeOffset == -1) _OldSimulationTimeOffset = Schema.GetOffset(0x4AB1B579A8DC421E);
-            return ref _Handle.AsRef<float>(_OldSimulationTimeOffset);
+            _OldSimulationTimeOffset = _OldSimulationTimeOffset ?? Schema.GetOffset(0x4AB1B579A8DC421E);
+            return ref _Handle.AsRef<float>(_OldSimulationTimeOffset!.Value);
         }
     }
-    private static nint _LastExecutedCommandNumberOffset = -1;
+    private static nint? _LastExecutedCommandNumberOffset;
 
     public ref int LastExecutedCommandNumber
     {
         get
         {
-            if (_LastExecutedCommandNumberOffset == -1) _LastExecutedCommandNumberOffset = Schema.GetOffset(0x4AB1B5795AFE40D8);
-            return ref _Handle.AsRef<int>(_LastExecutedCommandNumberOffset);
+            _LastExecutedCommandNumberOffset = _LastExecutedCommandNumberOffset ?? Schema.GetOffset(0x4AB1B5795AFE40D8);
+            return ref _Handle.AsRef<int>(_LastExecutedCommandNumberOffset!.Value);
         }
     }
-    private static nint _LastExecutedCommandTickOffset = -1;
+    private static nint? _LastExecutedCommandTickOffset;
 
     public ref int LastExecutedCommandTick
     {
         get
         {
-            if (_LastExecutedCommandTickOffset == -1) _LastExecutedCommandTickOffset = Schema.GetOffset(0x4AB1B5798A80B5FC);
-            return ref _Handle.AsRef<int>(_LastExecutedCommandTickOffset);
+            _LastExecutedCommandTickOffset = _LastExecutedCommandTickOffset ?? Schema.GetOffset(0x4AB1B5798A80B5FC);
+            return ref _Handle.AsRef<int>(_LastExecutedCommandTickOffset!.Value);
         }
     }
-    private static nint _ControllerOffset = -1;
+    private static nint? _ControllerOffset;
 
     public ref CHandle<CBasePlayerController> Controller
     {
         get
         {
-            if (_ControllerOffset == -1) _ControllerOffset = Schema.GetOffset(0x4AB1B57929882A6B);
-            return ref _Handle.AsRef<CHandle<CBasePlayerController>>(_ControllerOffset);
+            _ControllerOffset = _ControllerOffset ?? Schema.GetOffset(0x4AB1B57929882A6B);
+            return ref _Handle.AsRef<CHandle<CBasePlayerController>>(_ControllerOffset!.Value);
         }
     }
-    private static nint _DefaultControllerOffset = -1;
+    private static nint? _DefaultControllerOffset;
 
     public ref CHandle<CBasePlayerController> DefaultController
     {
         get
         {
-            if (_DefaultControllerOffset == -1) _DefaultControllerOffset = Schema.GetOffset(0x4AB1B579A623A4A8);
-            return ref _Handle.AsRef<CHandle<CBasePlayerController>>(_DefaultControllerOffset);
+            _DefaultControllerOffset = _DefaultControllerOffset ?? Schema.GetOffset(0x4AB1B579A623A4A8);
+            return ref _Handle.AsRef<CHandle<CBasePlayerController>>(_DefaultControllerOffset!.Value);
         }
     }
-    private static nint _IsSwappingToPredictableControllerOffset = -1;
+    private static nint? _IsSwappingToPredictableControllerOffset;
 
     public ref bool IsSwappingToPredictableController
     {
         get
         {
-            if (_IsSwappingToPredictableControllerOffset == -1) _IsSwappingToPredictableControllerOffset = Schema.GetOffset(0x4AB1B5795CF209CC);
-            return ref _Handle.AsRef<bool>(_IsSwappingToPredictableControllerOffset);
+            _IsSwappingToPredictableControllerOffset = _IsSwappingToPredictableControllerOffset ?? Schema.GetOffset(0x4AB1B5795CF209CC);
+            return ref _Handle.AsRef<bool>(_IsSwappingToPredictableControllerOffset!.Value);
         }
     }
 

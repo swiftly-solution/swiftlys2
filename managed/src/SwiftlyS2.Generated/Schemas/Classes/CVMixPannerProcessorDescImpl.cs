@@ -16,29 +16,29 @@ internal partial class CVMixPannerProcessorDescImpl : CVMixBaseProcessorDescImpl
 {
     public CVMixPannerProcessorDescImpl(nint handle) : base(handle) { }
 
-    private static nint _DescOffset = -1;
+    private static nint? _DescOffset;
     private VMixPannerDesc_tImpl? _DescInstance;
 
     public VMixPannerDesc_t Desc
     {
         get
         {
-            if (_DescOffset == -1) _DescOffset = Schema.GetOffset(0x4120AA4327917BC0);
+            _DescOffset = _DescOffset ?? Schema.GetOffset(0x4120AA4327917BC0);
             var instance = _DescInstance ??= new VMixPannerDesc_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _DescOffset);
+            instance.DangerousSetHandle(_Handle + _DescOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamPanOffset = -1;
+    private static nint? _ParamPanOffset;
     private CVMixParameterFloatImpl? _ParamPanInstance;
 
     public CVMixParameterFloat ParamPan
     {
         get
         {
-            if (_ParamPanOffset == -1) _ParamPanOffset = Schema.GetOffset(0x4120AA4398CF0231);
+            _ParamPanOffset = _ParamPanOffset ?? Schema.GetOffset(0x4120AA4398CF0231);
             var instance = _ParamPanInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamPanOffset);
+            instance.DangerousSetHandle(_Handle + _ParamPanOffset!.Value);
             return instance;
         }
     }

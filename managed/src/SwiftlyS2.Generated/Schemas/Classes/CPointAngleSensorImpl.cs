@@ -16,137 +16,137 @@ internal partial class CPointAngleSensorImpl : CPointEntityImpl, CPointAngleSens
 {
     public CPointAngleSensorImpl(nint handle) : base(handle) { }
 
-    private static nint _DisabledOffset = -1;
+    private static nint? _DisabledOffset;
 
     public ref bool Disabled
     {
         get
         {
-            if (_DisabledOffset == -1) _DisabledOffset = Schema.GetOffset(0x1E4356013A7C5965);
-            return ref _Handle.AsRef<bool>(_DisabledOffset);
+            _DisabledOffset = _DisabledOffset ?? Schema.GetOffset(0x1E4356013A7C5965);
+            return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
         }
     }
-    private static nint _LookAtNameOffset = -1;
+    private static nint? _LookAtNameOffset;
 
     public string LookAtName
     {
         get
         {
-            if (_LookAtNameOffset == -1) _LookAtNameOffset = Schema.GetOffset(0x1E435601A28C338C);
-            return Schema.GetString(_Handle.Read<nint>(_LookAtNameOffset));
+            _LookAtNameOffset = _LookAtNameOffset ?? Schema.GetOffset(0x1E435601A28C338C);
+            return Schema.GetString(_Handle.Read<nint>(_LookAtNameOffset!.Value));
         }
         set
         {
-            if (_LookAtNameOffset == -1) _LookAtNameOffset = Schema.GetOffset(0x1E435601A28C338C);
-            Schema.SetString(_Handle, _LookAtNameOffset, value);
+            _LookAtNameOffset = _LookAtNameOffset ?? Schema.GetOffset(0x1E435601A28C338C);
+            Schema.SetString(_Handle, _LookAtNameOffset!.Value, value);
         }
     }
-    private static nint _TargetEntityOffset = -1;
+    private static nint? _TargetEntityOffset;
 
     public ref CHandle<CBaseEntity> TargetEntity
     {
         get
         {
-            if (_TargetEntityOffset == -1) _TargetEntityOffset = Schema.GetOffset(0x1E43560125D042A9);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetEntityOffset);
+            _TargetEntityOffset = _TargetEntityOffset ?? Schema.GetOffset(0x1E43560125D042A9);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetEntityOffset!.Value);
         }
     }
-    private static nint _LookAtEntityOffset = -1;
+    private static nint? _LookAtEntityOffset;
 
     public ref CHandle<CBaseEntity> LookAtEntity
     {
         get
         {
-            if (_LookAtEntityOffset == -1) _LookAtEntityOffset = Schema.GetOffset(0x1E435601073CB5DE);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_LookAtEntityOffset);
+            _LookAtEntityOffset = _LookAtEntityOffset ?? Schema.GetOffset(0x1E435601073CB5DE);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_LookAtEntityOffset!.Value);
         }
     }
-    private static nint _DurationOffset = -1;
+    private static nint? _DurationOffset;
 
     public ref float Duration
     {
         get
         {
-            if (_DurationOffset == -1) _DurationOffset = Schema.GetOffset(0x1E435601BC5E3BAB);
-            return ref _Handle.AsRef<float>(_DurationOffset);
+            _DurationOffset = _DurationOffset ?? Schema.GetOffset(0x1E435601BC5E3BAB);
+            return ref _Handle.AsRef<float>(_DurationOffset!.Value);
         }
     }
-    private static nint _DotToleranceOffset = -1;
+    private static nint? _DotToleranceOffset;
 
     public ref float DotTolerance
     {
         get
         {
-            if (_DotToleranceOffset == -1) _DotToleranceOffset = Schema.GetOffset(0x1E4356011A15A535);
-            return ref _Handle.AsRef<float>(_DotToleranceOffset);
+            _DotToleranceOffset = _DotToleranceOffset ?? Schema.GetOffset(0x1E4356011A15A535);
+            return ref _Handle.AsRef<float>(_DotToleranceOffset!.Value);
         }
     }
-    private static nint _FacingTimeOffset = -1;
+    private static nint? _FacingTimeOffset;
     private GameTime_tImpl? _FacingTimeInstance;
 
     public GameTime_t FacingTime
     {
         get
         {
-            if (_FacingTimeOffset == -1) _FacingTimeOffset = Schema.GetOffset(0x1E43560177B926C8);
+            _FacingTimeOffset = _FacingTimeOffset ?? Schema.GetOffset(0x1E43560177B926C8);
             var instance = _FacingTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FacingTimeOffset);
+            instance.DangerousSetHandle(_Handle + _FacingTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _FiredOffset = -1;
+    private static nint? _FiredOffset;
 
     public ref bool Fired
     {
         get
         {
-            if (_FiredOffset == -1) _FiredOffset = Schema.GetOffset(0x1E435601E8E73267);
-            return ref _Handle.AsRef<bool>(_FiredOffset);
+            _FiredOffset = _FiredOffset ?? Schema.GetOffset(0x1E435601E8E73267);
+            return ref _Handle.AsRef<bool>(_FiredOffset!.Value);
         }
     }
-    private static nint _OnFacingLookatOffset = -1;
+    private static nint? _OnFacingLookatOffset;
 
     public ref CEntityIOOutput OnFacingLookat
     {
         get
         {
-            if (_OnFacingLookatOffset == -1) _OnFacingLookatOffset = Schema.GetOffset(0x1E4356011F71721C);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnFacingLookatOffset);
+            _OnFacingLookatOffset = _OnFacingLookatOffset ?? Schema.GetOffset(0x1E4356011F71721C);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnFacingLookatOffset!.Value);
         }
     }
-    private static nint _OnNotFacingLookatOffset = -1;
+    private static nint? _OnNotFacingLookatOffset;
 
     public ref CEntityIOOutput OnNotFacingLookat
     {
         get
         {
-            if (_OnNotFacingLookatOffset == -1) _OnNotFacingLookatOffset = Schema.GetOffset(0x1E435601A7B496D5);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnNotFacingLookatOffset);
+            _OnNotFacingLookatOffset = _OnNotFacingLookatOffset ?? Schema.GetOffset(0x1E435601A7B496D5);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnNotFacingLookatOffset!.Value);
         }
     }
-    private static nint _TargetDirOffset = -1;
+    private static nint? _TargetDirOffset;
     private SchemaUntypedField? _TargetDirInstance;
 
     public SchemaUntypedField TargetDir
     {
         get
         {
-            if (_TargetDirOffset == -1) _TargetDirOffset = Schema.GetOffset(0x1E435601946F7FDF);
+            _TargetDirOffset = _TargetDirOffset ?? Schema.GetOffset(0x1E435601946F7FDF);
             var instance = _TargetDirInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _TargetDirOffset);
+            instance.DangerousSetHandle(_Handle + _TargetDirOffset!.Value);
             return instance;
         }
     }
-    private static nint _FacingPercentageOffset = -1;
+    private static nint? _FacingPercentageOffset;
     private SchemaUntypedField? _FacingPercentageInstance;
 
     public SchemaUntypedField FacingPercentage
     {
         get
         {
-            if (_FacingPercentageOffset == -1) _FacingPercentageOffset = Schema.GetOffset(0x1E4356018B451097);
+            _FacingPercentageOffset = _FacingPercentageOffset ?? Schema.GetOffset(0x1E4356018B451097);
             var instance = _FacingPercentageInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _FacingPercentageOffset);
+            instance.DangerousSetHandle(_Handle + _FacingPercentageOffset!.Value);
             return instance;
         }
     }

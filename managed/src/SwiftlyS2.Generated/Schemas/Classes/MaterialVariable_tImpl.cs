@@ -16,42 +16,42 @@ internal partial class MaterialVariable_tImpl : SchemaClass, MaterialVariable_t
 {
     public MaterialVariable_tImpl(nint handle) : base(handle) { }
 
-    private static nint _StrVariableOffset = -1;
+    private static nint? _StrVariableOffset;
 
     public string StrVariable
     {
         get
         {
-            if (_StrVariableOffset == -1) _StrVariableOffset = Schema.GetOffset(0xCACB71DBA52C3390);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrVariableOffset));
+            _StrVariableOffset = _StrVariableOffset ?? Schema.GetOffset(0xCACB71DBA52C3390);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrVariableOffset!.Value));
         }
         set
         {
-            if (_StrVariableOffset == -1) _StrVariableOffset = Schema.GetOffset(0xCACB71DBA52C3390);
-            Schema.SetCUtlString(_Handle, _StrVariableOffset, value);
+            _StrVariableOffset = _StrVariableOffset ?? Schema.GetOffset(0xCACB71DBA52C3390);
+            Schema.SetCUtlString(_Handle, _StrVariableOffset!.Value, value);
         }
     }
-    private static nint _VariableFieldOffset = -1;
+    private static nint? _VariableFieldOffset;
     private ParticleAttributeIndex_tImpl? _VariableFieldInstance;
 
     public ParticleAttributeIndex_t VariableField
     {
         get
         {
-            if (_VariableFieldOffset == -1) _VariableFieldOffset = Schema.GetOffset(0xCACB71DBF868E9B3);
+            _VariableFieldOffset = _VariableFieldOffset ?? Schema.GetOffset(0xCACB71DBF868E9B3);
             var instance = _VariableFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _VariableFieldOffset);
+            instance.DangerousSetHandle(_Handle + _VariableFieldOffset!.Value);
             return instance;
         }
     }
-    private static nint _ScaleOffset = -1;
+    private static nint? _ScaleOffset;
 
     public ref float Scale
     {
         get
         {
-            if (_ScaleOffset == -1) _ScaleOffset = Schema.GetOffset(0xCACB71DBB731A42F);
-            return ref _Handle.AsRef<float>(_ScaleOffset);
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0xCACB71DBB731A42F);
+            return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
         }
     }
 

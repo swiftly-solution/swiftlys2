@@ -16,114 +16,114 @@ internal partial class CDestructiblePart_DamageLevelImpl : SchemaClass, CDestruc
 {
     public CDestructiblePart_DamageLevelImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xF69D69CB63D22D49);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xF69D69CB63D22D49);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xF69D69CB63D22D49);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xF69D69CB63D22D49);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _BreakablePieceNameOffset = -1;
+    private static nint? _BreakablePieceNameOffset;
 
     public ref CGlobalSymbol BreakablePieceName
     {
         get
         {
-            if (_BreakablePieceNameOffset == -1) _BreakablePieceNameOffset = Schema.GetOffset(0xF69D69CB88329BEA);
-            return ref _Handle.AsRef<CGlobalSymbol>(_BreakablePieceNameOffset);
+            _BreakablePieceNameOffset = _BreakablePieceNameOffset ?? Schema.GetOffset(0xF69D69CB88329BEA);
+            return ref _Handle.AsRef<CGlobalSymbol>(_BreakablePieceNameOffset!.Value);
         }
     }
-    private static nint _BodyGroupValueOffset = -1;
+    private static nint? _BodyGroupValueOffset;
 
     public ref int BodyGroupValue
     {
         get
         {
-            if (_BodyGroupValueOffset == -1) _BodyGroupValueOffset = Schema.GetOffset(0xF69D69CB90FF4BE9);
-            return ref _Handle.AsRef<int>(_BodyGroupValueOffset);
+            _BodyGroupValueOffset = _BodyGroupValueOffset ?? Schema.GetOffset(0xF69D69CB90FF4BE9);
+            return ref _Handle.AsRef<int>(_BodyGroupValueOffset!.Value);
         }
     }
-    private static nint _HealthOffset = -1;
+    private static nint? _HealthOffset;
     private CSkillIntImpl? _HealthInstance;
 
     public CSkillInt Health
     {
         get
         {
-            if (_HealthOffset == -1) _HealthOffset = Schema.GetOffset(0xF69D69CB6E9C4CC3);
+            _HealthOffset = _HealthOffset ?? Schema.GetOffset(0xF69D69CB6E9C4CC3);
             var instance = _HealthInstance ??= new CSkillIntImpl(0);
-            instance.DangerousSetHandle(_Handle + _HealthOffset);
+            instance.DangerousSetHandle(_Handle + _HealthOffset!.Value);
             return instance;
         }
     }
-    private static nint _CriticalDamagePercentOffset = -1;
+    private static nint? _CriticalDamagePercentOffset;
 
     public ref float CriticalDamagePercent
     {
         get
         {
-            if (_CriticalDamagePercentOffset == -1) _CriticalDamagePercentOffset = Schema.GetOffset(0xF69D69CB4488F688);
-            return ref _Handle.AsRef<float>(_CriticalDamagePercentOffset);
+            _CriticalDamagePercentOffset = _CriticalDamagePercentOffset ?? Schema.GetOffset(0xF69D69CB4488F688);
+            return ref _Handle.AsRef<float>(_CriticalDamagePercentOffset!.Value);
         }
     }
-    private static nint _DamagePassthroughTypeOffset = -1;
+    private static nint? _DamagePassthroughTypeOffset;
 
     public ref EDestructiblePartDamagePassThroughType DamagePassthroughType
     {
         get
         {
-            if (_DamagePassthroughTypeOffset == -1) _DamagePassthroughTypeOffset = Schema.GetOffset(0xF69D69CB3D01100A);
-            return ref _Handle.AsRef<EDestructiblePartDamagePassThroughType>(_DamagePassthroughTypeOffset);
+            _DamagePassthroughTypeOffset = _DamagePassthroughTypeOffset ?? Schema.GetOffset(0xF69D69CB3D01100A);
+            return ref _Handle.AsRef<EDestructiblePartDamagePassThroughType>(_DamagePassthroughTypeOffset!.Value);
         }
     }
-    private static nint _DestructionDeathBehaviorOffset = -1;
+    private static nint? _DestructionDeathBehaviorOffset;
 
     public ref DestructiblePartDestructionDeathBehavior_t DestructionDeathBehavior
     {
         get
         {
-            if (_DestructionDeathBehaviorOffset == -1) _DestructionDeathBehaviorOffset = Schema.GetOffset(0xF69D69CB41778385);
-            return ref _Handle.AsRef<DestructiblePartDestructionDeathBehavior_t>(_DestructionDeathBehaviorOffset);
+            _DestructionDeathBehaviorOffset = _DestructionDeathBehaviorOffset ?? Schema.GetOffset(0xF69D69CB41778385);
+            return ref _Handle.AsRef<DestructiblePartDestructionDeathBehavior_t>(_DestructionDeathBehaviorOffset!.Value);
         }
     }
-    private static nint _CustomDeathHandshakeOffset = -1;
+    private static nint? _CustomDeathHandshakeOffset;
 
     public ref CGlobalSymbol CustomDeathHandshake
     {
         get
         {
-            if (_CustomDeathHandshakeOffset == -1) _CustomDeathHandshakeOffset = Schema.GetOffset(0xF69D69CBF17A0D42);
-            return ref _Handle.AsRef<CGlobalSymbol>(_CustomDeathHandshakeOffset);
+            _CustomDeathHandshakeOffset = _CustomDeathHandshakeOffset ?? Schema.GetOffset(0xF69D69CBF17A0D42);
+            return ref _Handle.AsRef<CGlobalSymbol>(_CustomDeathHandshakeOffset!.Value);
         }
     }
-    private static nint _ShouldDestroyOnDeathOffset = -1;
+    private static nint? _ShouldDestroyOnDeathOffset;
 
     public ref bool ShouldDestroyOnDeath
     {
         get
         {
-            if (_ShouldDestroyOnDeathOffset == -1) _ShouldDestroyOnDeathOffset = Schema.GetOffset(0xF69D69CBC63DDDD5);
-            return ref _Handle.AsRef<bool>(_ShouldDestroyOnDeathOffset);
+            _ShouldDestroyOnDeathOffset = _ShouldDestroyOnDeathOffset ?? Schema.GetOffset(0xF69D69CBC63DDDD5);
+            return ref _Handle.AsRef<bool>(_ShouldDestroyOnDeathOffset!.Value);
         }
     }
-    private static nint _DeathDestroyTimeOffset = -1;
+    private static nint? _DeathDestroyTimeOffset;
     private CRangeFloatImpl? _DeathDestroyTimeInstance;
 
     public CRangeFloat DeathDestroyTime
     {
         get
         {
-            if (_DeathDestroyTimeOffset == -1) _DeathDestroyTimeOffset = Schema.GetOffset(0xF69D69CB29D83EA2);
+            _DeathDestroyTimeOffset = _DeathDestroyTimeOffset ?? Schema.GetOffset(0xF69D69CB29D83EA2);
             var instance = _DeathDestroyTimeInstance ??= new CRangeFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _DeathDestroyTimeOffset);
+            instance.DangerousSetHandle(_Handle + _DeathDestroyTimeOffset!.Value);
             return instance;
         }
     }

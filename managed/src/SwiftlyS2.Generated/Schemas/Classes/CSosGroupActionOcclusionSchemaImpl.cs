@@ -16,64 +16,64 @@ internal partial class CSosGroupActionOcclusionSchemaImpl : CSosGroupActionSchem
 {
     public CSosGroupActionOcclusionSchemaImpl(nint handle) : base(handle) { }
 
-    private static nint _CalculationIntervalOffset = -1;
+    private static nint? _CalculationIntervalOffset;
 
     public ref float CalculationInterval
     {
         get
         {
-            if (_CalculationIntervalOffset == -1) _CalculationIntervalOffset = Schema.GetOffset(0x4ED94014C8AEEA3D);
-            return ref _Handle.AsRef<float>(_CalculationIntervalOffset);
+            _CalculationIntervalOffset = _CalculationIntervalOffset ?? Schema.GetOffset(0x4ED94014C8AEEA3D);
+            return ref _Handle.AsRef<float>(_CalculationIntervalOffset!.Value);
         }
     }
-    private static nint _RadiusOffset = -1;
+    private static nint? _RadiusOffset;
 
     public ref float Radius
     {
         get
         {
-            if (_RadiusOffset == -1) _RadiusOffset = Schema.GetOffset(0x4ED940145ACFC08D);
-            return ref _Handle.AsRef<float>(_RadiusOffset);
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x4ED940145ACFC08D);
+            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
         }
     }
-    private static nint _OcclusionScaleOffset = -1;
+    private static nint? _OcclusionScaleOffset;
 
     public ref float OcclusionScale
     {
         get
         {
-            if (_OcclusionScaleOffset == -1) _OcclusionScaleOffset = Schema.GetOffset(0x4ED94014FF8BE452);
-            return ref _Handle.AsRef<float>(_OcclusionScaleOffset);
+            _OcclusionScaleOffset = _OcclusionScaleOffset ?? Schema.GetOffset(0x4ED94014FF8BE452);
+            return ref _Handle.AsRef<float>(_OcclusionScaleOffset!.Value);
         }
     }
-    private static nint _OcclusionMinOffset = -1;
+    private static nint? _OcclusionMinOffset;
 
     public ref float OcclusionMin
     {
         get
         {
-            if (_OcclusionMinOffset == -1) _OcclusionMinOffset = Schema.GetOffset(0x4ED9401462E6EDCC);
-            return ref _Handle.AsRef<float>(_OcclusionMinOffset);
+            _OcclusionMinOffset = _OcclusionMinOffset ?? Schema.GetOffset(0x4ED9401462E6EDCC);
+            return ref _Handle.AsRef<float>(_OcclusionMinOffset!.Value);
         }
     }
-    private static nint _OcclusionMaxOffset = -1;
+    private static nint? _OcclusionMaxOffset;
 
     public ref float OcclusionMax
     {
         get
         {
-            if (_OcclusionMaxOffset == -1) _OcclusionMaxOffset = Schema.GetOffset(0x4ED9401470D37C1E);
-            return ref _Handle.AsRef<float>(_OcclusionMaxOffset);
+            _OcclusionMaxOffset = _OcclusionMaxOffset ?? Schema.GetOffset(0x4ED9401470D37C1E);
+            return ref _Handle.AsRef<float>(_OcclusionMaxOffset!.Value);
         }
     }
-    private static nint _TestDepthOffset = -1;
+    private static nint? _TestDepthOffset;
 
     public ref float TestDepth
     {
         get
         {
-            if (_TestDepthOffset == -1) _TestDepthOffset = Schema.GetOffset(0x4ED94014DD26B024);
-            return ref _Handle.AsRef<float>(_TestDepthOffset);
+            _TestDepthOffset = _TestDepthOffset ?? Schema.GetOffset(0x4ED94014DD26B024);
+            return ref _Handle.AsRef<float>(_TestDepthOffset!.Value);
         }
     }
 

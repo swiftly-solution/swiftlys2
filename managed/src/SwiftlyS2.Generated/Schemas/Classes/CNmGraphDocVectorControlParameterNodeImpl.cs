@@ -16,14 +16,14 @@ internal partial class CNmGraphDocVectorControlParameterNodeImpl : CNmGraphDocCo
 {
     public CNmGraphDocVectorControlParameterNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _PreviewStartValueOffset = -1;
+    private static nint? _PreviewStartValueOffset;
 
     public ref Vector PreviewStartValue
     {
         get
         {
-            if (_PreviewStartValueOffset == -1) _PreviewStartValueOffset = Schema.GetOffset(0x964E863A841402);
-            return ref _Handle.AsRef<Vector>(_PreviewStartValueOffset);
+            _PreviewStartValueOffset = _PreviewStartValueOffset ?? Schema.GetOffset(0x964E863A841402);
+            return ref _Handle.AsRef<Vector>(_PreviewStartValueOffset!.Value);
         }
     }
 

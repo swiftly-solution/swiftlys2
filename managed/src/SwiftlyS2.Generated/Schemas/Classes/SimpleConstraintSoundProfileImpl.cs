@@ -16,54 +16,54 @@ internal partial class SimpleConstraintSoundProfileImpl : SchemaClass, SimpleCon
 {
     public SimpleConstraintSoundProfileImpl(nint handle) : base(handle) { }
 
-    private static nint _KeyPointMinSoundThresholdOffset = -1;
+    private static nint? _KeyPointMinSoundThresholdOffset;
 
     public ref float KeyPointMinSoundThreshold
     {
         get
         {
-            if (_KeyPointMinSoundThresholdOffset == -1) _KeyPointMinSoundThresholdOffset = Schema.GetOffset(0xB768AA94E378B596);
-            return ref _Handle.AsRef<float>(_KeyPointMinSoundThresholdOffset);
+            _KeyPointMinSoundThresholdOffset = _KeyPointMinSoundThresholdOffset ?? Schema.GetOffset(0xB768AA94E378B596);
+            return ref _Handle.AsRef<float>(_KeyPointMinSoundThresholdOffset!.Value);
         }
     }
-    private static nint _KeyPointMaxSoundThresholdOffset = -1;
+    private static nint? _KeyPointMaxSoundThresholdOffset;
 
     public ref float KeyPointMaxSoundThreshold
     {
         get
         {
-            if (_KeyPointMaxSoundThresholdOffset == -1) _KeyPointMaxSoundThresholdOffset = Schema.GetOffset(0xB768AA944AAE38A8);
-            return ref _Handle.AsRef<float>(_KeyPointMaxSoundThresholdOffset);
+            _KeyPointMaxSoundThresholdOffset = _KeyPointMaxSoundThresholdOffset ?? Schema.GetOffset(0xB768AA944AAE38A8);
+            return ref _Handle.AsRef<float>(_KeyPointMaxSoundThresholdOffset!.Value);
         }
     }
-    private static nint _ReversalSoundThresholdSmallOffset = -1;
+    private static nint? _ReversalSoundThresholdSmallOffset;
 
     public ref float ReversalSoundThresholdSmall
     {
         get
         {
-            if (_ReversalSoundThresholdSmallOffset == -1) _ReversalSoundThresholdSmallOffset = Schema.GetOffset(0xB768AA942C3F7268);
-            return ref _Handle.AsRef<float>(_ReversalSoundThresholdSmallOffset);
+            _ReversalSoundThresholdSmallOffset = _ReversalSoundThresholdSmallOffset ?? Schema.GetOffset(0xB768AA942C3F7268);
+            return ref _Handle.AsRef<float>(_ReversalSoundThresholdSmallOffset!.Value);
         }
     }
-    private static nint _ReversalSoundThresholdMediumOffset = -1;
+    private static nint? _ReversalSoundThresholdMediumOffset;
 
     public ref float ReversalSoundThresholdMedium
     {
         get
         {
-            if (_ReversalSoundThresholdMediumOffset == -1) _ReversalSoundThresholdMediumOffset = Schema.GetOffset(0xB768AA943A717C2A);
-            return ref _Handle.AsRef<float>(_ReversalSoundThresholdMediumOffset);
+            _ReversalSoundThresholdMediumOffset = _ReversalSoundThresholdMediumOffset ?? Schema.GetOffset(0xB768AA943A717C2A);
+            return ref _Handle.AsRef<float>(_ReversalSoundThresholdMediumOffset!.Value);
         }
     }
-    private static nint _ReversalSoundThresholdLargeOffset = -1;
+    private static nint? _ReversalSoundThresholdLargeOffset;
 
     public ref float ReversalSoundThresholdLarge
     {
         get
         {
-            if (_ReversalSoundThresholdLargeOffset == -1) _ReversalSoundThresholdLargeOffset = Schema.GetOffset(0xB768AA9410CF5CA0);
-            return ref _Handle.AsRef<float>(_ReversalSoundThresholdLargeOffset);
+            _ReversalSoundThresholdLargeOffset = _ReversalSoundThresholdLargeOffset ?? Schema.GetOffset(0xB768AA9410CF5CA0);
+            return ref _Handle.AsRef<float>(_ReversalSoundThresholdLargeOffset!.Value);
         }
     }
 

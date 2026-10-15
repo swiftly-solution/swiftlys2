@@ -16,44 +16,44 @@ internal partial class CVMixAudioMeterImpl : SchemaClass, CVMixAudioMeter
 {
     public CVMixAudioMeterImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xE65785754D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xE65785754D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xE65785754D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xE65785754D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
-    private static nint _DisplayNameOffset = -1;
+    private static nint? _DisplayNameOffset;
 
     public string DisplayName
     {
         get
         {
-            if (_DisplayNameOffset == -1) _DisplayNameOffset = Schema.GetOffset(0xE65785752C04AE36);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_DisplayNameOffset));
+            _DisplayNameOffset = _DisplayNameOffset ?? Schema.GetOffset(0xE65785752C04AE36);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_DisplayNameOffset!.Value));
         }
         set
         {
-            if (_DisplayNameOffset == -1) _DisplayNameOffset = Schema.GetOffset(0xE65785752C04AE36);
-            Schema.SetCUtlString(_Handle, _DisplayNameOffset, value);
+            _DisplayNameOffset = _DisplayNameOffset ?? Schema.GetOffset(0xE65785752C04AE36);
+            Schema.SetCUtlString(_Handle, _DisplayNameOffset!.Value, value);
         }
     }
-    private static nint _DebugIdOffset = -1;
+    private static nint? _DebugIdOffset;
 
     public ref uint DebugId
     {
         get
         {
-            if (_DebugIdOffset == -1) _DebugIdOffset = Schema.GetOffset(0xE65785750D1706B1);
-            return ref _Handle.AsRef<uint>(_DebugIdOffset);
+            _DebugIdOffset = _DebugIdOffset ?? Schema.GetOffset(0xE65785750D1706B1);
+            return ref _Handle.AsRef<uint>(_DebugIdOffset!.Value);
         }
     }
 

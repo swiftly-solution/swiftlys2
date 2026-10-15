@@ -16,34 +16,34 @@ internal partial class CMixSubgraphImpl : CMixPropertyBaseImpl, CMixSubgraph
 {
     public CMixSubgraphImpl(nint handle) : base(handle) { }
 
-    private static nint _SubgraphFileOffset = -1;
+    private static nint? _SubgraphFileOffset;
 
     public string SubgraphFile
     {
         get
         {
-            if (_SubgraphFileOffset == -1) _SubgraphFileOffset = Schema.GetOffset(0xCCFBA5B69B1474C9);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_SubgraphFileOffset));
+            _SubgraphFileOffset = _SubgraphFileOffset ?? Schema.GetOffset(0xCCFBA5B69B1474C9);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_SubgraphFileOffset!.Value));
         }
         set
         {
-            if (_SubgraphFileOffset == -1) _SubgraphFileOffset = Schema.GetOffset(0xCCFBA5B69B1474C9);
-            Schema.SetCUtlString(_Handle, _SubgraphFileOffset, value);
+            _SubgraphFileOffset = _SubgraphFileOffset ?? Schema.GetOffset(0xCCFBA5B69B1474C9);
+            Schema.SetCUtlString(_Handle, _SubgraphFileOffset!.Value, value);
         }
     }
-    private static nint _SubgraphNameOffset = -1;
+    private static nint? _SubgraphNameOffset;
 
     public string SubgraphName
     {
         get
         {
-            if (_SubgraphNameOffset == -1) _SubgraphNameOffset = Schema.GetOffset(0xCCFBA5B612802694);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_SubgraphNameOffset));
+            _SubgraphNameOffset = _SubgraphNameOffset ?? Schema.GetOffset(0xCCFBA5B612802694);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_SubgraphNameOffset!.Value));
         }
         set
         {
-            if (_SubgraphNameOffset == -1) _SubgraphNameOffset = Schema.GetOffset(0xCCFBA5B612802694);
-            Schema.SetCUtlString(_Handle, _SubgraphNameOffset, value);
+            _SubgraphNameOffset = _SubgraphNameOffset ?? Schema.GetOffset(0xCCFBA5B612802694);
+            Schema.SetCUtlString(_Handle, _SubgraphNameOffset!.Value, value);
         }
     }
 

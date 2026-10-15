@@ -16,14 +16,14 @@ internal partial class CollisionGroupContext_tImpl : SchemaClass, CollisionGroup
 {
     public CollisionGroupContext_tImpl(nint handle) : base(handle) { }
 
-    private static nint _CollisionGroupNumberOffset = -1;
+    private static nint? _CollisionGroupNumberOffset;
 
     public ref int CollisionGroupNumber
     {
         get
         {
-            if (_CollisionGroupNumberOffset == -1) _CollisionGroupNumberOffset = Schema.GetOffset(0xF923B00A9115013F);
-            return ref _Handle.AsRef<int>(_CollisionGroupNumberOffset);
+            _CollisionGroupNumberOffset = _CollisionGroupNumberOffset ?? Schema.GetOffset(0xF923B00A9115013F);
+            return ref _Handle.AsRef<int>(_CollisionGroupNumberOffset!.Value);
         }
     }
 

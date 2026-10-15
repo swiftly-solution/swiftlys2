@@ -16,14 +16,14 @@ internal partial class CPhysicsShakeImpl : SchemaClass, CPhysicsShake
 {
     public CPhysicsShakeImpl(nint handle) : base(handle) { }
 
-    private static nint _ForceOffset = -1;
+    private static nint? _ForceOffset;
 
     public ref Vector Force
     {
         get
         {
-            if (_ForceOffset == -1) _ForceOffset = Schema.GetOffset(0x904CE6CFB9B6AFA4);
-            return ref _Handle.AsRef<Vector>(_ForceOffset);
+            _ForceOffset = _ForceOffset ?? Schema.GetOffset(0x904CE6CFB9B6AFA4);
+            return ref _Handle.AsRef<Vector>(_ForceOffset!.Value);
         }
     }
 

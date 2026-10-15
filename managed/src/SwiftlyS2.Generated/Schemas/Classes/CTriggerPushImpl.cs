@@ -16,89 +16,89 @@ internal partial class CTriggerPushImpl : CBaseTriggerImpl, CTriggerPush
 {
     public CTriggerPushImpl(nint handle) : base(handle) { }
 
-    private static nint _PushEntitySpaceOffset = -1;
+    private static nint? _PushEntitySpaceOffset;
 
     public ref QAngle PushEntitySpace
     {
         get
         {
-            if (_PushEntitySpaceOffset == -1) _PushEntitySpaceOffset = Schema.GetOffset(0x92E0F2F21952BFD6);
-            return ref _Handle.AsRef<QAngle>(_PushEntitySpaceOffset);
+            _PushEntitySpaceOffset = _PushEntitySpaceOffset ?? Schema.GetOffset(0x92E0F2F21952BFD6);
+            return ref _Handle.AsRef<QAngle>(_PushEntitySpaceOffset!.Value);
         }
     }
-    private static nint _PushDirEntitySpaceOffset = -1;
+    private static nint? _PushDirEntitySpaceOffset;
 
     public ref Vector PushDirEntitySpace
     {
         get
         {
-            if (_PushDirEntitySpaceOffset == -1) _PushDirEntitySpaceOffset = Schema.GetOffset(0x92E0F2F2A3C4D4F3);
-            return ref _Handle.AsRef<Vector>(_PushDirEntitySpaceOffset);
+            _PushDirEntitySpaceOffset = _PushDirEntitySpaceOffset ?? Schema.GetOffset(0x92E0F2F2A3C4D4F3);
+            return ref _Handle.AsRef<Vector>(_PushDirEntitySpaceOffset!.Value);
         }
     }
-    private static nint _TriggerOnStartTouchOffset = -1;
+    private static nint? _TriggerOnStartTouchOffset;
 
     public ref bool TriggerOnStartTouch
     {
         get
         {
-            if (_TriggerOnStartTouchOffset == -1) _TriggerOnStartTouchOffset = Schema.GetOffset(0x92E0F2F2365C0A51);
-            return ref _Handle.AsRef<bool>(_TriggerOnStartTouchOffset);
+            _TriggerOnStartTouchOffset = _TriggerOnStartTouchOffset ?? Schema.GetOffset(0x92E0F2F2365C0A51);
+            return ref _Handle.AsRef<bool>(_TriggerOnStartTouchOffset!.Value);
         }
     }
-    private static nint _UsePathSimpleOffset = -1;
+    private static nint? _UsePathSimpleOffset;
 
     public ref bool UsePathSimple
     {
         get
         {
-            if (_UsePathSimpleOffset == -1) _UsePathSimpleOffset = Schema.GetOffset(0x92E0F2F21BFD6EF1);
-            return ref _Handle.AsRef<bool>(_UsePathSimpleOffset);
+            _UsePathSimpleOffset = _UsePathSimpleOffset ?? Schema.GetOffset(0x92E0F2F21BFD6EF1);
+            return ref _Handle.AsRef<bool>(_UsePathSimpleOffset!.Value);
         }
     }
-    private static nint _PathSimpleNameOffset = -1;
+    private static nint? _PathSimpleNameOffset;
 
     public string PathSimpleName
     {
         get
         {
-            if (_PathSimpleNameOffset == -1) _PathSimpleNameOffset = Schema.GetOffset(0x92E0F2F2AB7E7D7F);
-            return Schema.GetString(_Handle.Read<nint>(_PathSimpleNameOffset));
+            _PathSimpleNameOffset = _PathSimpleNameOffset ?? Schema.GetOffset(0x92E0F2F2AB7E7D7F);
+            return Schema.GetString(_Handle.Read<nint>(_PathSimpleNameOffset!.Value));
         }
         set
         {
-            if (_PathSimpleNameOffset == -1) _PathSimpleNameOffset = Schema.GetOffset(0x92E0F2F2AB7E7D7F);
-            Schema.SetString(_Handle, _PathSimpleNameOffset, value);
+            _PathSimpleNameOffset = _PathSimpleNameOffset ?? Schema.GetOffset(0x92E0F2F2AB7E7D7F);
+            Schema.SetString(_Handle, _PathSimpleNameOffset!.Value, value);
         }
     }
-    private static nint _PathSimpleOffset = -1;
+    private static nint? _PathSimpleOffset;
 
     public ref CHandle<CPathSimple> PathSimple
     {
         get
         {
-            if (_PathSimpleOffset == -1) _PathSimpleOffset = Schema.GetOffset(0x92E0F2F2FA868DCC);
-            return ref _Handle.AsRef<CHandle<CPathSimple>>(_PathSimpleOffset);
+            _PathSimpleOffset = _PathSimpleOffset ?? Schema.GetOffset(0x92E0F2F2FA868DCC);
+            return ref _Handle.AsRef<CHandle<CPathSimple>>(_PathSimpleOffset!.Value);
         }
     }
-    private static nint _SplinePushTypeOffset = -1;
+    private static nint? _SplinePushTypeOffset;
 
     public ref uint SplinePushType
     {
         get
         {
-            if (_SplinePushTypeOffset == -1) _SplinePushTypeOffset = Schema.GetOffset(0x92E0F2F229A29DE0);
-            return ref _Handle.AsRef<uint>(_SplinePushTypeOffset);
+            _SplinePushTypeOffset = _SplinePushTypeOffset ?? Schema.GetOffset(0x92E0F2F229A29DE0);
+            return ref _Handle.AsRef<uint>(_SplinePushTypeOffset!.Value);
         }
     }
-    private static nint _SpeedOffset = -1;
+    private static nint? _SpeedOffset;
 
     public ref float Speed
     {
         get
         {
-            if (_SpeedOffset == -1) _SpeedOffset = Schema.GetOffset(0x92E0F2F2C631B7EA);
-            return ref _Handle.AsRef<float>(_SpeedOffset);
+            _SpeedOffset = _SpeedOffset ?? Schema.GetOffset(0x92E0F2F2C631B7EA);
+            return ref _Handle.AsRef<float>(_SpeedOffset!.Value);
         }
     }
 

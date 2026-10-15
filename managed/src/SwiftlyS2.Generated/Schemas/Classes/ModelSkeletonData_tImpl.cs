@@ -16,74 +16,74 @@ internal partial class ModelSkeletonData_tImpl : SchemaClass, ModelSkeletonData_
 {
     public ModelSkeletonData_tImpl(nint handle) : base(handle) { }
 
-    private static nint _BoneNameOffset = -1;
+    private static nint? _BoneNameOffset;
 
     public ref CUtlVector<CUtlString> BoneName
     {
         get
         {
-            if (_BoneNameOffset == -1) _BoneNameOffset = Schema.GetOffset(0x8349B622FDEE0E0C);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_BoneNameOffset);
+            _BoneNameOffset = _BoneNameOffset ?? Schema.GetOffset(0x8349B622FDEE0E0C);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_BoneNameOffset!.Value);
         }
     }
-    private static nint _ParentOffset = -1;
+    private static nint? _ParentOffset;
 
     public ref CUtlVector<short> Parent
     {
         get
         {
-            if (_ParentOffset == -1) _ParentOffset = Schema.GetOffset(0x8349B6220AABB9D1);
-            return ref _Handle.AsRef<CUtlVector<short>>(_ParentOffset);
+            _ParentOffset = _ParentOffset ?? Schema.GetOffset(0x8349B6220AABB9D1);
+            return ref _Handle.AsRef<CUtlVector<short>>(_ParentOffset!.Value);
         }
     }
-    private static nint _BoneSphereOffset = -1;
+    private static nint? _BoneSphereOffset;
 
     public ref CUtlVector<float> BoneSphere
     {
         get
         {
-            if (_BoneSphereOffset == -1) _BoneSphereOffset = Schema.GetOffset(0x8349B6222F22FB5A);
-            return ref _Handle.AsRef<CUtlVector<float>>(_BoneSphereOffset);
+            _BoneSphereOffset = _BoneSphereOffset ?? Schema.GetOffset(0x8349B6222F22FB5A);
+            return ref _Handle.AsRef<CUtlVector<float>>(_BoneSphereOffset!.Value);
         }
     }
-    private static nint _FlagOffset = -1;
+    private static nint? _FlagOffset;
 
     public ref CUtlVector<uint> Flag
     {
         get
         {
-            if (_FlagOffset == -1) _FlagOffset = Schema.GetOffset(0x8349B622CED32C4B);
-            return ref _Handle.AsRef<CUtlVector<uint>>(_FlagOffset);
+            _FlagOffset = _FlagOffset ?? Schema.GetOffset(0x8349B622CED32C4B);
+            return ref _Handle.AsRef<CUtlVector<uint>>(_FlagOffset!.Value);
         }
     }
-    private static nint _BonePosParentOffset = -1;
+    private static nint? _BonePosParentOffset;
 
     public ref CUtlVector<Vector> BonePosParent
     {
         get
         {
-            if (_BonePosParentOffset == -1) _BonePosParentOffset = Schema.GetOffset(0x8349B622E59E127F);
-            return ref _Handle.AsRef<CUtlVector<Vector>>(_BonePosParentOffset);
+            _BonePosParentOffset = _BonePosParentOffset ?? Schema.GetOffset(0x8349B622E59E127F);
+            return ref _Handle.AsRef<CUtlVector<Vector>>(_BonePosParentOffset!.Value);
         }
     }
-    private static nint _BoneRotParentOffset = -1;
+    private static nint? _BoneRotParentOffset;
 
     public ref CUtlVector<QuaternionStorage> BoneRotParent
     {
         get
         {
-            if (_BoneRotParentOffset == -1) _BoneRotParentOffset = Schema.GetOffset(0x8349B622A6E3A10C);
-            return ref _Handle.AsRef<CUtlVector<QuaternionStorage>>(_BoneRotParentOffset);
+            _BoneRotParentOffset = _BoneRotParentOffset ?? Schema.GetOffset(0x8349B622A6E3A10C);
+            return ref _Handle.AsRef<CUtlVector<QuaternionStorage>>(_BoneRotParentOffset!.Value);
         }
     }
-    private static nint _BoneScaleParentOffset = -1;
+    private static nint? _BoneScaleParentOffset;
 
     public ref CUtlVector<float> BoneScaleParent
     {
         get
         {
-            if (_BoneScaleParentOffset == -1) _BoneScaleParentOffset = Schema.GetOffset(0x8349B622FA2ED87F);
-            return ref _Handle.AsRef<CUtlVector<float>>(_BoneScaleParentOffset);
+            _BoneScaleParentOffset = _BoneScaleParentOffset ?? Schema.GetOffset(0x8349B622FA2ED87F);
+            return ref _Handle.AsRef<CUtlVector<float>>(_BoneScaleParentOffset!.Value);
         }
     }
 

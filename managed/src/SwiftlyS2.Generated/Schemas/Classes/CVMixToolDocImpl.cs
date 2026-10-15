@@ -16,52 +16,52 @@ internal partial class CVMixToolDocImpl : SchemaClass, CVMixToolDoc
 {
     public CVMixToolDocImpl(nint handle) : base(handle) { }
 
-    private static nint _DspPresetsOffset = -1;
+    private static nint? _DspPresetsOffset;
     private CVMixToolEffectsListImpl? _DspPresetsInstance;
 
     public CVMixToolEffectsList DspPresets
     {
         get
         {
-            if (_DspPresetsOffset == -1) _DspPresetsOffset = Schema.GetOffset(0xBA29AD82F0C71004);
+            _DspPresetsOffset = _DspPresetsOffset ?? Schema.GetOffset(0xBA29AD82F0C71004);
             var instance = _DspPresetsInstance ??= new CVMixToolEffectsListImpl(0);
-            instance.DangerousSetHandle(_Handle + _DspPresetsOffset);
+            instance.DangerousSetHandle(_Handle + _DspPresetsOffset!.Value);
             return instance;
         }
     }
-    private static nint _EffectsPreviewOffset = -1;
+    private static nint? _EffectsPreviewOffset;
     private CEffectsPreviewListImpl? _EffectsPreviewInstance;
 
     public CEffectsPreviewList EffectsPreview
     {
         get
         {
-            if (_EffectsPreviewOffset == -1) _EffectsPreviewOffset = Schema.GetOffset(0xBA29AD8242B7ADB7);
+            _EffectsPreviewOffset = _EffectsPreviewOffset ?? Schema.GetOffset(0xBA29AD8242B7ADB7);
             var instance = _EffectsPreviewInstance ??= new CEffectsPreviewListImpl(0);
-            instance.DangerousSetHandle(_Handle + _EffectsPreviewOffset);
+            instance.DangerousSetHandle(_Handle + _EffectsPreviewOffset!.Value);
             return instance;
         }
     }
-    private static nint _GraphsOffset = -1;
+    private static nint? _GraphsOffset;
 
     public ref CUtlVector<CVMixToolGraphEntry> Graphs
     {
         get
         {
-            if (_GraphsOffset == -1) _GraphsOffset = Schema.GetOffset(0xBA29AD82E0A5F67C);
-            return ref _Handle.AsRef<CUtlVector<CVMixToolGraphEntry>>(_GraphsOffset);
+            _GraphsOffset = _GraphsOffset ?? Schema.GetOffset(0xBA29AD82E0A5F67C);
+            return ref _Handle.AsRef<CUtlVector<CVMixToolGraphEntry>>(_GraphsOffset!.Value);
         }
     }
-    private static nint _EditorDataOffset = -1;
+    private static nint? _EditorDataOffset;
     private CVMixToolEditorDataImpl? _EditorDataInstance;
 
     public CVMixToolEditorData EditorData
     {
         get
         {
-            if (_EditorDataOffset == -1) _EditorDataOffset = Schema.GetOffset(0xBA29AD8245505720);
+            _EditorDataOffset = _EditorDataOffset ?? Schema.GetOffset(0xBA29AD8245505720);
             var instance = _EditorDataInstance ??= new CVMixToolEditorDataImpl(0);
-            instance.DangerousSetHandle(_Handle + _EditorDataOffset);
+            instance.DangerousSetHandle(_Handle + _EditorDataOffset!.Value);
             return instance;
         }
     }

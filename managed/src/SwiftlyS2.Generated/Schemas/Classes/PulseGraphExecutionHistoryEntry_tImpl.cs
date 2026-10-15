@@ -16,88 +16,88 @@ internal partial class PulseGraphExecutionHistoryEntry_tImpl : SchemaClass, Puls
 {
     public PulseGraphExecutionHistoryEntry_tImpl(nint handle) : base(handle) { }
 
-    private static nint _CursorIDOffset = -1;
+    private static nint? _CursorIDOffset;
     private PulseCursorID_tImpl? _CursorIDInstance;
 
     public PulseCursorID_t CursorID
     {
         get
         {
-            if (_CursorIDOffset == -1) _CursorIDOffset = Schema.GetOffset(0x9346B0AB0B44CBF6);
+            _CursorIDOffset = _CursorIDOffset ?? Schema.GetOffset(0x9346B0AB0B44CBF6);
             var instance = _CursorIDInstance ??= new PulseCursorID_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _CursorIDOffset);
+            instance.DangerousSetHandle(_Handle + _CursorIDOffset!.Value);
             return instance;
         }
     }
-    private static nint _EditorIDOffset = -1;
+    private static nint? _EditorIDOffset;
     private PulseDocNodeID_tImpl? _EditorIDInstance;
 
     public PulseDocNodeID_t EditorID
     {
         get
         {
-            if (_EditorIDOffset == -1) _EditorIDOffset = Schema.GetOffset(0x9346B0AB74188E69);
+            _EditorIDOffset = _EditorIDOffset ?? Schema.GetOffset(0x9346B0AB74188E69);
             var instance = _EditorIDInstance ??= new PulseDocNodeID_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _EditorIDOffset);
+            instance.DangerousSetHandle(_Handle + _EditorIDOffset!.Value);
             return instance;
         }
     }
-    private static nint _SeqPointOffset = -1;
+    private static nint? _SeqPointOffset;
     private SchemaUntypedField? _SeqPointInstance;
 
     public SchemaUntypedField SeqPoint
     {
         get
         {
-            if (_SeqPointOffset == -1) _SeqPointOffset = Schema.GetOffset(0x9346B0AB87450C52);
+            _SeqPointOffset = _SeqPointOffset ?? Schema.GetOffset(0x9346B0AB87450C52);
             var instance = _SeqPointInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _SeqPointOffset);
+            instance.DangerousSetHandle(_Handle + _SeqPointOffset!.Value);
             return instance;
         }
     }
-    private static nint _ExecTimeOffset = -1;
+    private static nint? _ExecTimeOffset;
 
     public ref float ExecTime
     {
         get
         {
-            if (_ExecTimeOffset == -1) _ExecTimeOffset = Schema.GetOffset(0x9346B0ABFAE08483);
-            return ref _Handle.AsRef<float>(_ExecTimeOffset);
+            _ExecTimeOffset = _ExecTimeOffset ?? Schema.GetOffset(0x9346B0ABFAE08483);
+            return ref _Handle.AsRef<float>(_ExecTimeOffset!.Value);
         }
     }
-    private static nint _FlagsOffset = -1;
+    private static nint? _FlagsOffset;
 
     public ref uint Flags
     {
         get
         {
-            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0x9346B0AB5E9538F5);
-            return ref _Handle.AsRef<uint>(_FlagsOffset);
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x9346B0AB5E9538F5);
+            return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
         }
     }
-    private static nint _TagNameOffset = -1;
+    private static nint? _TagNameOffset;
     private SchemaUntypedField? _TagNameInstance;
 
     public SchemaUntypedField TagName
     {
         get
         {
-            if (_TagNameOffset == -1) _TagNameOffset = Schema.GetOffset(0x9346B0ABBD7B50F8);
+            _TagNameOffset = _TagNameOffset ?? Schema.GetOffset(0x9346B0ABBD7B50F8);
             var instance = _TagNameInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _TagNameOffset);
+            instance.DangerousSetHandle(_Handle + _TagNameOffset!.Value);
             return instance;
         }
     }
-    private static nint _ChildIDOffset = -1;
+    private static nint? _ChildIDOffset;
     private PulseCursorID_tImpl? _ChildIDInstance;
 
     public PulseCursorID_t ChildID
     {
         get
         {
-            if (_ChildIDOffset == -1) _ChildIDOffset = Schema.GetOffset(0x9346B0AB721E4528);
+            _ChildIDOffset = _ChildIDOffset ?? Schema.GetOffset(0x9346B0AB721E4528);
             var instance = _ChildIDInstance ??= new PulseCursorID_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _ChildIDOffset);
+            instance.DangerousSetHandle(_Handle + _ChildIDOffset!.Value);
             return instance;
         }
     }

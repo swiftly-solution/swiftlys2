@@ -16,31 +16,31 @@ internal partial class CAnimGraphDoc_SubGraphNodeImpl : CAnimGraphDoc_ContainerN
 {
     public CAnimGraphDoc_SubGraphNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _SubGraphFilenameOffset = -1;
+    private static nint? _SubGraphFilenameOffset;
 
     public string SubGraphFilename
     {
         get
         {
-            if (_SubGraphFilenameOffset == -1) _SubGraphFilenameOffset = Schema.GetOffset(0x5B72EB28933DB9A2);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_SubGraphFilenameOffset));
+            _SubGraphFilenameOffset = _SubGraphFilenameOffset ?? Schema.GetOffset(0x5B72EB28933DB9A2);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_SubGraphFilenameOffset!.Value));
         }
         set
         {
-            if (_SubGraphFilenameOffset == -1) _SubGraphFilenameOffset = Schema.GetOffset(0x5B72EB28933DB9A2);
-            Schema.SetCUtlString(_Handle, _SubGraphFilenameOffset, value);
+            _SubGraphFilenameOffset = _SubGraphFilenameOffset ?? Schema.GetOffset(0x5B72EB28933DB9A2);
+            Schema.SetCUtlString(_Handle, _SubGraphFilenameOffset!.Value, value);
         }
     }
-    private static nint _AnimNameMapOffset = -1;
+    private static nint? _AnimNameMapOffset;
     private SchemaUntypedField? _AnimNameMapInstance;
 
     public SchemaUntypedField AnimNameMap
     {
         get
         {
-            if (_AnimNameMapOffset == -1) _AnimNameMapOffset = Schema.GetOffset(0x5B72EB287A9C0423);
+            _AnimNameMapOffset = _AnimNameMapOffset ?? Schema.GetOffset(0x5B72EB287A9C0423);
             var instance = _AnimNameMapInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _AnimNameMapOffset);
+            instance.DangerousSetHandle(_Handle + _AnimNameMapOffset!.Value);
             return instance;
         }
     }

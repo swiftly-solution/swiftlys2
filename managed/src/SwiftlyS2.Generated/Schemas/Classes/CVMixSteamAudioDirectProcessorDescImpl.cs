@@ -16,328 +16,328 @@ internal partial class CVMixSteamAudioDirectProcessorDescImpl : CVMixBaseProcess
 {
     public CVMixSteamAudioDirectProcessorDescImpl(nint handle) : base(handle) { }
 
-    private static nint _ParamPositionXOffset = -1;
+    private static nint? _ParamPositionXOffset;
     private CVMixParameterFloatImpl? _ParamPositionXInstance;
 
     public CVMixParameterFloat ParamPositionX
     {
         get
         {
-            if (_ParamPositionXOffset == -1) _ParamPositionXOffset = Schema.GetOffset(0xE0EE6B7A52A55B0F);
+            _ParamPositionXOffset = _ParamPositionXOffset ?? Schema.GetOffset(0xE0EE6B7A52A55B0F);
             var instance = _ParamPositionXInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamPositionXOffset);
+            instance.DangerousSetHandle(_Handle + _ParamPositionXOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamPositionYOffset = -1;
+    private static nint? _ParamPositionYOffset;
     private CVMixParameterFloatImpl? _ParamPositionYInstance;
 
     public CVMixParameterFloat ParamPositionY
     {
         get
         {
-            if (_ParamPositionYOffset == -1) _ParamPositionYOffset = Schema.GetOffset(0xE0EE6B7A51A5597C);
+            _ParamPositionYOffset = _ParamPositionYOffset ?? Schema.GetOffset(0xE0EE6B7A51A5597C);
             var instance = _ParamPositionYInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamPositionYOffset);
+            instance.DangerousSetHandle(_Handle + _ParamPositionYOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamPositionZOffset = -1;
+    private static nint? _ParamPositionZOffset;
     private CVMixParameterFloatImpl? _ParamPositionZInstance;
 
     public CVMixParameterFloat ParamPositionZ
     {
         get
         {
-            if (_ParamPositionZOffset == -1) _ParamPositionZOffset = Schema.GetOffset(0xE0EE6B7A54A55E35);
+            _ParamPositionZOffset = _ParamPositionZOffset ?? Schema.GetOffset(0xE0EE6B7A54A55E35);
             var instance = _ParamPositionZInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamPositionZOffset);
+            instance.DangerousSetHandle(_Handle + _ParamPositionZOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamRightXOffset = -1;
+    private static nint? _ParamRightXOffset;
     private CVMixParameterFloatImpl? _ParamRightXInstance;
 
     public CVMixParameterFloat ParamRightX
     {
         get
         {
-            if (_ParamRightXOffset == -1) _ParamRightXOffset = Schema.GetOffset(0xE0EE6B7A08E4E3D8);
+            _ParamRightXOffset = _ParamRightXOffset ?? Schema.GetOffset(0xE0EE6B7A08E4E3D8);
             var instance = _ParamRightXInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamRightXOffset);
+            instance.DangerousSetHandle(_Handle + _ParamRightXOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamRightYOffset = -1;
+    private static nint? _ParamRightYOffset;
     private CVMixParameterFloatImpl? _ParamRightYInstance;
 
     public CVMixParameterFloat ParamRightY
     {
         get
         {
-            if (_ParamRightYOffset == -1) _ParamRightYOffset = Schema.GetOffset(0xE0EE6B7A09E4E56B);
+            _ParamRightYOffset = _ParamRightYOffset ?? Schema.GetOffset(0xE0EE6B7A09E4E56B);
             var instance = _ParamRightYInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamRightYOffset);
+            instance.DangerousSetHandle(_Handle + _ParamRightYOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamRightZOffset = -1;
+    private static nint? _ParamRightZOffset;
     private CVMixParameterFloatImpl? _ParamRightZInstance;
 
     public CVMixParameterFloat ParamRightZ
     {
         get
         {
-            if (_ParamRightZOffset == -1) _ParamRightZOffset = Schema.GetOffset(0xE0EE6B7A0AE4E6FE);
+            _ParamRightZOffset = _ParamRightZOffset ?? Schema.GetOffset(0xE0EE6B7A0AE4E6FE);
             var instance = _ParamRightZInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamRightZOffset);
+            instance.DangerousSetHandle(_Handle + _ParamRightZOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamUpXOffset = -1;
+    private static nint? _ParamUpXOffset;
     private CVMixParameterFloatImpl? _ParamUpXInstance;
 
     public CVMixParameterFloat ParamUpX
     {
         get
         {
-            if (_ParamUpXOffset == -1) _ParamUpXOffset = Schema.GetOffset(0xE0EE6B7AF014E355);
+            _ParamUpXOffset = _ParamUpXOffset ?? Schema.GetOffset(0xE0EE6B7AF014E355);
             var instance = _ParamUpXInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamUpXOffset);
+            instance.DangerousSetHandle(_Handle + _ParamUpXOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamUpYOffset = -1;
+    private static nint? _ParamUpYOffset;
     private CVMixParameterFloatImpl? _ParamUpYInstance;
 
     public CVMixParameterFloat ParamUpY
     {
         get
         {
-            if (_ParamUpYOffset == -1) _ParamUpYOffset = Schema.GetOffset(0xE0EE6B7AEF14E1C2);
+            _ParamUpYOffset = _ParamUpYOffset ?? Schema.GetOffset(0xE0EE6B7AEF14E1C2);
             var instance = _ParamUpYInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamUpYOffset);
+            instance.DangerousSetHandle(_Handle + _ParamUpYOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamUpZOffset = -1;
+    private static nint? _ParamUpZOffset;
     private CVMixParameterFloatImpl? _ParamUpZInstance;
 
     public CVMixParameterFloat ParamUpZ
     {
         get
         {
-            if (_ParamUpZOffset == -1) _ParamUpZOffset = Schema.GetOffset(0xE0EE6B7AEE14E02F);
+            _ParamUpZOffset = _ParamUpZOffset ?? Schema.GetOffset(0xE0EE6B7AEE14E02F);
             var instance = _ParamUpZInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamUpZOffset);
+            instance.DangerousSetHandle(_Handle + _ParamUpZOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamAheadXOffset = -1;
+    private static nint? _ParamAheadXOffset;
     private CVMixParameterFloatImpl? _ParamAheadXInstance;
 
     public CVMixParameterFloat ParamAheadX
     {
         get
         {
-            if (_ParamAheadXOffset == -1) _ParamAheadXOffset = Schema.GetOffset(0xE0EE6B7A84069ECD);
+            _ParamAheadXOffset = _ParamAheadXOffset ?? Schema.GetOffset(0xE0EE6B7A84069ECD);
             var instance = _ParamAheadXInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamAheadXOffset);
+            instance.DangerousSetHandle(_Handle + _ParamAheadXOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamAheadYOffset = -1;
+    private static nint? _ParamAheadYOffset;
     private CVMixParameterFloatImpl? _ParamAheadYInstance;
 
     public CVMixParameterFloat ParamAheadY
     {
         get
         {
-            if (_ParamAheadYOffset == -1) _ParamAheadYOffset = Schema.GetOffset(0xE0EE6B7A83069D3A);
+            _ParamAheadYOffset = _ParamAheadYOffset ?? Schema.GetOffset(0xE0EE6B7A83069D3A);
             var instance = _ParamAheadYInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamAheadYOffset);
+            instance.DangerousSetHandle(_Handle + _ParamAheadYOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamAheadZOffset = -1;
+    private static nint? _ParamAheadZOffset;
     private CVMixParameterFloatImpl? _ParamAheadZInstance;
 
     public CVMixParameterFloat ParamAheadZ
     {
         get
         {
-            if (_ParamAheadZOffset == -1) _ParamAheadZOffset = Schema.GetOffset(0xE0EE6B7A82069BA7);
+            _ParamAheadZOffset = _ParamAheadZOffset ?? Schema.GetOffset(0xE0EE6B7A82069BA7);
             var instance = _ParamAheadZInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamAheadZOffset);
+            instance.DangerousSetHandle(_Handle + _ParamAheadZOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamApplyDistanceAttenuationOffset = -1;
+    private static nint? _ParamApplyDistanceAttenuationOffset;
     private CVMixParameterFloatImpl? _ParamApplyDistanceAttenuationInstance;
 
     public CVMixParameterFloat ParamApplyDistanceAttenuation
     {
         get
         {
-            if (_ParamApplyDistanceAttenuationOffset == -1) _ParamApplyDistanceAttenuationOffset = Schema.GetOffset(0xE0EE6B7A568FEAAB);
+            _ParamApplyDistanceAttenuationOffset = _ParamApplyDistanceAttenuationOffset ?? Schema.GetOffset(0xE0EE6B7A568FEAAB);
             var instance = _ParamApplyDistanceAttenuationInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamApplyDistanceAttenuationOffset);
+            instance.DangerousSetHandle(_Handle + _ParamApplyDistanceAttenuationOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamApplyAirAbsorptionOffset = -1;
+    private static nint? _ParamApplyAirAbsorptionOffset;
     private CVMixParameterFloatImpl? _ParamApplyAirAbsorptionInstance;
 
     public CVMixParameterFloat ParamApplyAirAbsorption
     {
         get
         {
-            if (_ParamApplyAirAbsorptionOffset == -1) _ParamApplyAirAbsorptionOffset = Schema.GetOffset(0xE0EE6B7A39FC0AD7);
+            _ParamApplyAirAbsorptionOffset = _ParamApplyAirAbsorptionOffset ?? Schema.GetOffset(0xE0EE6B7A39FC0AD7);
             var instance = _ParamApplyAirAbsorptionInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamApplyAirAbsorptionOffset);
+            instance.DangerousSetHandle(_Handle + _ParamApplyAirAbsorptionOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamApplyDirectivityOffset = -1;
+    private static nint? _ParamApplyDirectivityOffset;
     private CVMixParameterFloatImpl? _ParamApplyDirectivityInstance;
 
     public CVMixParameterFloat ParamApplyDirectivity
     {
         get
         {
-            if (_ParamApplyDirectivityOffset == -1) _ParamApplyDirectivityOffset = Schema.GetOffset(0xE0EE6B7A990B8D0C);
+            _ParamApplyDirectivityOffset = _ParamApplyDirectivityOffset ?? Schema.GetOffset(0xE0EE6B7A990B8D0C);
             var instance = _ParamApplyDirectivityInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamApplyDirectivityOffset);
+            instance.DangerousSetHandle(_Handle + _ParamApplyDirectivityOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamApplyOcclusionOffset = -1;
+    private static nint? _ParamApplyOcclusionOffset;
     private CVMixParameterFloatImpl? _ParamApplyOcclusionInstance;
 
     public CVMixParameterFloat ParamApplyOcclusion
     {
         get
         {
-            if (_ParamApplyOcclusionOffset == -1) _ParamApplyOcclusionOffset = Schema.GetOffset(0xE0EE6B7A6316A97F);
+            _ParamApplyOcclusionOffset = _ParamApplyOcclusionOffset ?? Schema.GetOffset(0xE0EE6B7A6316A97F);
             var instance = _ParamApplyOcclusionInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamApplyOcclusionOffset);
+            instance.DangerousSetHandle(_Handle + _ParamApplyOcclusionOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamApplyTransmissionOffset = -1;
+    private static nint? _ParamApplyTransmissionOffset;
     private CVMixParameterFloatImpl? _ParamApplyTransmissionInstance;
 
     public CVMixParameterFloat ParamApplyTransmission
     {
         get
         {
-            if (_ParamApplyTransmissionOffset == -1) _ParamApplyTransmissionOffset = Schema.GetOffset(0xE0EE6B7AF1577D82);
+            _ParamApplyTransmissionOffset = _ParamApplyTransmissionOffset ?? Schema.GetOffset(0xE0EE6B7AF1577D82);
             var instance = _ParamApplyTransmissionInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamApplyTransmissionOffset);
+            instance.DangerousSetHandle(_Handle + _ParamApplyTransmissionOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamDipoleWeightOffset = -1;
+    private static nint? _ParamDipoleWeightOffset;
     private CVMixParameterFloatImpl? _ParamDipoleWeightInstance;
 
     public CVMixParameterFloat ParamDipoleWeight
     {
         get
         {
-            if (_ParamDipoleWeightOffset == -1) _ParamDipoleWeightOffset = Schema.GetOffset(0xE0EE6B7A2B0BF293);
+            _ParamDipoleWeightOffset = _ParamDipoleWeightOffset ?? Schema.GetOffset(0xE0EE6B7A2B0BF293);
             var instance = _ParamDipoleWeightInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamDipoleWeightOffset);
+            instance.DangerousSetHandle(_Handle + _ParamDipoleWeightOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamDipolePowerOffset = -1;
+    private static nint? _ParamDipolePowerOffset;
     private CVMixParameterFloatImpl? _ParamDipolePowerInstance;
 
     public CVMixParameterFloat ParamDipolePower
     {
         get
         {
-            if (_ParamDipolePowerOffset == -1) _ParamDipolePowerOffset = Schema.GetOffset(0xE0EE6B7AA2995A28);
+            _ParamDipolePowerOffset = _ParamDipolePowerOffset ?? Schema.GetOffset(0xE0EE6B7AA2995A28);
             var instance = _ParamDipolePowerInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamDipolePowerOffset);
+            instance.DangerousSetHandle(_Handle + _ParamDipolePowerOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamOcclusionOffset = -1;
+    private static nint? _ParamOcclusionOffset;
     private CVMixParameterFloatImpl? _ParamOcclusionInstance;
 
     public CVMixParameterFloat ParamOcclusion
     {
         get
         {
-            if (_ParamOcclusionOffset == -1) _ParamOcclusionOffset = Schema.GetOffset(0xE0EE6B7A5E942757);
+            _ParamOcclusionOffset = _ParamOcclusionOffset ?? Schema.GetOffset(0xE0EE6B7A5E942757);
             var instance = _ParamOcclusionInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamOcclusionOffset);
+            instance.DangerousSetHandle(_Handle + _ParamOcclusionOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamTransmissionLowOffset = -1;
+    private static nint? _ParamTransmissionLowOffset;
     private CVMixParameterFloatImpl? _ParamTransmissionLowInstance;
 
     public CVMixParameterFloat ParamTransmissionLow
     {
         get
         {
-            if (_ParamTransmissionLowOffset == -1) _ParamTransmissionLowOffset = Schema.GetOffset(0xE0EE6B7ACEE4E2C0);
+            _ParamTransmissionLowOffset = _ParamTransmissionLowOffset ?? Schema.GetOffset(0xE0EE6B7ACEE4E2C0);
             var instance = _ParamTransmissionLowInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamTransmissionLowOffset);
+            instance.DangerousSetHandle(_Handle + _ParamTransmissionLowOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamTransmissionMidOffset = -1;
+    private static nint? _ParamTransmissionMidOffset;
     private CVMixParameterFloatImpl? _ParamTransmissionMidInstance;
 
     public CVMixParameterFloat ParamTransmissionMid
     {
         get
         {
-            if (_ParamTransmissionMidOffset == -1) _ParamTransmissionMidOffset = Schema.GetOffset(0xE0EE6B7A48C16590);
+            _ParamTransmissionMidOffset = _ParamTransmissionMidOffset ?? Schema.GetOffset(0xE0EE6B7A48C16590);
             var instance = _ParamTransmissionMidInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamTransmissionMidOffset);
+            instance.DangerousSetHandle(_Handle + _ParamTransmissionMidOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamTransmissionHighOffset = -1;
+    private static nint? _ParamTransmissionHighOffset;
     private CVMixParameterFloatImpl? _ParamTransmissionHighInstance;
 
     public CVMixParameterFloat ParamTransmissionHigh
     {
         get
         {
-            if (_ParamTransmissionHighOffset == -1) _ParamTransmissionHighOffset = Schema.GetOffset(0xE0EE6B7A8A56AB22);
+            _ParamTransmissionHighOffset = _ParamTransmissionHighOffset ?? Schema.GetOffset(0xE0EE6B7A8A56AB22);
             var instance = _ParamTransmissionHighInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamTransmissionHighOffset);
+            instance.DangerousSetHandle(_Handle + _ParamTransmissionHighOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamBandOffset = -1;
+    private static nint? _ParamBandOffset;
     private CVMixParameterFloatImpl? _ParamBandInstance;
 
     public CVMixParameterFloat ParamBand
     {
         get
         {
-            if (_ParamBandOffset == -1) _ParamBandOffset = Schema.GetOffset(0xE0EE6B7A16939509);
+            _ParamBandOffset = _ParamBandOffset ?? Schema.GetOffset(0xE0EE6B7A16939509);
             var instance = _ParamBandInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamBandOffset);
+            instance.DangerousSetHandle(_Handle + _ParamBandOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamTransmissionOffset = -1;
+    private static nint? _ParamTransmissionOffset;
     private CVMixDataOffsetImpl? _ParamTransmissionInstance;
 
     public CVMixDataOffset ParamTransmission
     {
         get
         {
-            if (_ParamTransmissionOffset == -1) _ParamTransmissionOffset = Schema.GetOffset(0xE0EE6B7A57AE45DA);
+            _ParamTransmissionOffset = _ParamTransmissionOffset ?? Schema.GetOffset(0xE0EE6B7A57AE45DA);
             var instance = _ParamTransmissionInstance ??= new CVMixDataOffsetImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamTransmissionOffset);
+            instance.DangerousSetHandle(_Handle + _ParamTransmissionOffset!.Value);
             return instance;
         }
     }

@@ -16,29 +16,29 @@ internal partial class CPulseCell_Inflow_BaseEntrypointImpl : CPulseCell_BaseFlo
 {
     public CPulseCell_Inflow_BaseEntrypointImpl(nint handle) : base(handle) { }
 
-    private static nint _EntryChunkOffset = -1;
+    private static nint? _EntryChunkOffset;
     private PulseRuntimeChunkIndex_tImpl? _EntryChunkInstance;
 
     public PulseRuntimeChunkIndex_t EntryChunk
     {
         get
         {
-            if (_EntryChunkOffset == -1) _EntryChunkOffset = Schema.GetOffset(0x1747DEDF279F0A60);
+            _EntryChunkOffset = _EntryChunkOffset ?? Schema.GetOffset(0x1747DEDF279F0A60);
             var instance = _EntryChunkInstance ??= new PulseRuntimeChunkIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _EntryChunkOffset);
+            instance.DangerousSetHandle(_Handle + _EntryChunkOffset!.Value);
             return instance;
         }
     }
-    private static nint _RegisterMapOffset = -1;
+    private static nint? _RegisterMapOffset;
     private PulseRegisterMap_tImpl? _RegisterMapInstance;
 
     public PulseRegisterMap_t RegisterMap
     {
         get
         {
-            if (_RegisterMapOffset == -1) _RegisterMapOffset = Schema.GetOffset(0x1747DEDF7BD4CE96);
+            _RegisterMapOffset = _RegisterMapOffset ?? Schema.GetOffset(0x1747DEDF7BD4CE96);
             var instance = _RegisterMapInstance ??= new PulseRegisterMap_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _RegisterMapOffset);
+            instance.DangerousSetHandle(_Handle + _RegisterMapOffset!.Value);
             return instance;
         }
     }

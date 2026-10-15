@@ -16,29 +16,29 @@ internal partial class CPulseCell_Test_MultiOutflow_WithParamsImpl : CPulseCell_
 {
     public CPulseCell_Test_MultiOutflow_WithParamsImpl(nint handle) : base(handle) { }
 
-    private static nint _Out1Offset = -1;
+    private static nint? _Out1Offset;
     private SignatureOutflow_ContinueImpl? _Out1Instance;
 
     public SignatureOutflow_Continue Out1
     {
         get
         {
-            if (_Out1Offset == -1) _Out1Offset = Schema.GetOffset(0x99BFB89905F293AA);
+            _Out1Offset = _Out1Offset ?? Schema.GetOffset(0x99BFB89905F293AA);
             var instance = _Out1Instance ??= new SignatureOutflow_ContinueImpl(0);
-            instance.DangerousSetHandle(_Handle + _Out1Offset);
+            instance.DangerousSetHandle(_Handle + _Out1Offset!.Value);
             return instance;
         }
     }
-    private static nint _Out2Offset = -1;
+    private static nint? _Out2Offset;
     private SignatureOutflow_ContinueImpl? _Out2Instance;
 
     public SignatureOutflow_Continue Out2
     {
         get
         {
-            if (_Out2Offset == -1) _Out2Offset = Schema.GetOffset(0x99BFB89904F29217);
+            _Out2Offset = _Out2Offset ?? Schema.GetOffset(0x99BFB89904F29217);
             var instance = _Out2Instance ??= new SignatureOutflow_ContinueImpl(0);
-            instance.DangerousSetHandle(_Handle + _Out2Offset);
+            instance.DangerousSetHandle(_Handle + _Out2Offset!.Value);
             return instance;
         }
     }

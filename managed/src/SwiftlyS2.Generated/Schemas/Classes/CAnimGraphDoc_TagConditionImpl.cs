@@ -16,37 +16,37 @@ internal partial class CAnimGraphDoc_TagConditionImpl : CAnimGraphDoc_ConditionI
 {
     public CAnimGraphDoc_TagConditionImpl(nint handle) : base(handle) { }
 
-    private static nint _TagIDOffset = -1;
+    private static nint? _TagIDOffset;
     private AnimTagIDImpl? _TagIDInstance;
 
     public AnimTagID TagID
     {
         get
         {
-            if (_TagIDOffset == -1) _TagIDOffset = Schema.GetOffset(0xF09654471F65DDFE);
+            _TagIDOffset = _TagIDOffset ?? Schema.GetOffset(0xF09654471F65DDFE);
             var instance = _TagIDInstance ??= new AnimTagIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _TagIDOffset);
+            instance.DangerousSetHandle(_Handle + _TagIDOffset!.Value);
             return instance;
         }
     }
-    private static nint _ComparisonValueOffset = -1;
+    private static nint? _ComparisonValueOffset;
 
     public ref bool ComparisonValue
     {
         get
         {
-            if (_ComparisonValueOffset == -1) _ComparisonValueOffset = Schema.GetOffset(0xF0965447E8EEEB1D);
-            return ref _Handle.AsRef<bool>(_ComparisonValueOffset);
+            _ComparisonValueOffset = _ComparisonValueOffset ?? Schema.GetOffset(0xF0965447E8EEEB1D);
+            return ref _Handle.AsRef<bool>(_ComparisonValueOffset!.Value);
         }
     }
-    private static nint _LatestValueOffset = -1;
+    private static nint? _LatestValueOffset;
 
     public ref bool LatestValue
     {
         get
         {
-            if (_LatestValueOffset == -1) _LatestValueOffset = Schema.GetOffset(0xF0965447DDBCD9E7);
-            return ref _Handle.AsRef<bool>(_LatestValueOffset);
+            _LatestValueOffset = _LatestValueOffset ?? Schema.GetOffset(0xF0965447DDBCD9E7);
+            return ref _Handle.AsRef<bool>(_LatestValueOffset!.Value);
         }
     }
 

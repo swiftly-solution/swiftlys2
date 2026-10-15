@@ -16,29 +16,29 @@ internal partial class C_OP_CollideWithSelfImpl : CParticleFunctionConstraintImp
 {
     public C_OP_CollideWithSelfImpl(nint handle) : base(handle) { }
 
-    private static nint _RadiusScaleOffset = -1;
+    private static nint? _RadiusScaleOffset;
     private CPerParticleFloatInputImpl? _RadiusScaleInstance;
 
     public CPerParticleFloatInput RadiusScale
     {
         get
         {
-            if (_RadiusScaleOffset == -1) _RadiusScaleOffset = Schema.GetOffset(0xEF46C0CBA7A20159);
+            _RadiusScaleOffset = _RadiusScaleOffset ?? Schema.GetOffset(0xEF46C0CBA7A20159);
             var instance = _RadiusScaleInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _RadiusScaleOffset);
+            instance.DangerousSetHandle(_Handle + _RadiusScaleOffset!.Value);
             return instance;
         }
     }
-    private static nint _MinimumSpeedOffset = -1;
+    private static nint? _MinimumSpeedOffset;
     private CPerParticleFloatInputImpl? _MinimumSpeedInstance;
 
     public CPerParticleFloatInput MinimumSpeed
     {
         get
         {
-            if (_MinimumSpeedOffset == -1) _MinimumSpeedOffset = Schema.GetOffset(0xEF46C0CB2F9BEFCC);
+            _MinimumSpeedOffset = _MinimumSpeedOffset ?? Schema.GetOffset(0xEF46C0CB2F9BEFCC);
             var instance = _MinimumSpeedInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _MinimumSpeedOffset);
+            instance.DangerousSetHandle(_Handle + _MinimumSpeedOffset!.Value);
             return instance;
         }
     }

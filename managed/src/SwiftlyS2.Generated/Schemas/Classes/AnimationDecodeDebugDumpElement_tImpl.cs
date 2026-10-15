@@ -16,69 +16,69 @@ internal partial class AnimationDecodeDebugDumpElement_tImpl : SchemaClass, Anim
 {
     public AnimationDecodeDebugDumpElement_tImpl(nint handle) : base(handle) { }
 
-    private static nint _EntityIndexOffset = -1;
+    private static nint? _EntityIndexOffset;
 
     public ref int EntityIndex
     {
         get
         {
-            if (_EntityIndexOffset == -1) _EntityIndexOffset = Schema.GetOffset(0x4CAFE8F7BDB9BC5A);
-            return ref _Handle.AsRef<int>(_EntityIndexOffset);
+            _EntityIndexOffset = _EntityIndexOffset ?? Schema.GetOffset(0x4CAFE8F7BDB9BC5A);
+            return ref _Handle.AsRef<int>(_EntityIndexOffset!.Value);
         }
     }
-    private static nint _ModelNameOffset = -1;
+    private static nint? _ModelNameOffset;
 
     public string ModelName
     {
         get
         {
-            if (_ModelNameOffset == -1) _ModelNameOffset = Schema.GetOffset(0x4CAFE8F75D35B6E1);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ModelNameOffset));
+            _ModelNameOffset = _ModelNameOffset ?? Schema.GetOffset(0x4CAFE8F75D35B6E1);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ModelNameOffset!.Value));
         }
         set
         {
-            if (_ModelNameOffset == -1) _ModelNameOffset = Schema.GetOffset(0x4CAFE8F75D35B6E1);
-            Schema.SetCUtlString(_Handle, _ModelNameOffset, value);
+            _ModelNameOffset = _ModelNameOffset ?? Schema.GetOffset(0x4CAFE8F75D35B6E1);
+            Schema.SetCUtlString(_Handle, _ModelNameOffset!.Value, value);
         }
     }
-    private static nint _PoseParamsOffset = -1;
+    private static nint? _PoseParamsOffset;
 
     public ref CUtlVector<CUtlString> PoseParams
     {
         get
         {
-            if (_PoseParamsOffset == -1) _PoseParamsOffset = Schema.GetOffset(0x4CAFE8F7B4A27762);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_PoseParamsOffset);
+            _PoseParamsOffset = _PoseParamsOffset ?? Schema.GetOffset(0x4CAFE8F7B4A27762);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_PoseParamsOffset!.Value);
         }
     }
-    private static nint _DecodeOpsOffset = -1;
+    private static nint? _DecodeOpsOffset;
 
     public ref CUtlVector<CUtlString> DecodeOps
     {
         get
         {
-            if (_DecodeOpsOffset == -1) _DecodeOpsOffset = Schema.GetOffset(0x4CAFE8F7D39502F9);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_DecodeOpsOffset);
+            _DecodeOpsOffset = _DecodeOpsOffset ?? Schema.GetOffset(0x4CAFE8F7D39502F9);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_DecodeOpsOffset!.Value);
         }
     }
-    private static nint _InternalOpsOffset = -1;
+    private static nint? _InternalOpsOffset;
 
     public ref CUtlVector<CUtlString> InternalOps
     {
         get
         {
-            if (_InternalOpsOffset == -1) _InternalOpsOffset = Schema.GetOffset(0x4CAFE8F775823E0C);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_InternalOpsOffset);
+            _InternalOpsOffset = _InternalOpsOffset ?? Schema.GetOffset(0x4CAFE8F775823E0C);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_InternalOpsOffset!.Value);
         }
     }
-    private static nint _DecodedAnimsOffset = -1;
+    private static nint? _DecodedAnimsOffset;
 
     public ref CUtlVector<CUtlString> DecodedAnims
     {
         get
         {
-            if (_DecodedAnimsOffset == -1) _DecodedAnimsOffset = Schema.GetOffset(0x4CAFE8F7B20FFAAD);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_DecodedAnimsOffset);
+            _DecodedAnimsOffset = _DecodedAnimsOffset ?? Schema.GetOffset(0x4CAFE8F7B20FFAAD);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_DecodedAnimsOffset!.Value);
         }
     }
 

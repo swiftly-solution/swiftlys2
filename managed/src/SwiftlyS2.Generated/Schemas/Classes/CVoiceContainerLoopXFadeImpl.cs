@@ -16,87 +16,87 @@ internal partial class CVoiceContainerLoopXFadeImpl : CVoiceContainerBaseImpl, C
 {
     public CVoiceContainerLoopXFadeImpl(nint handle) : base(handle) { }
 
-    private static nint _SoundOffset = -1;
+    private static nint? _SoundOffset;
     private CSoundContainerReferenceImpl? _SoundInstance;
 
     public CSoundContainerReference Sound
     {
         get
         {
-            if (_SoundOffset == -1) _SoundOffset = Schema.GetOffset(0x5815536D4E1C4FB4);
+            _SoundOffset = _SoundOffset ?? Schema.GetOffset(0x5815536D4E1C4FB4);
             var instance = _SoundInstance ??= new CSoundContainerReferenceImpl(0);
-            instance.DangerousSetHandle(_Handle + _SoundOffset);
+            instance.DangerousSetHandle(_Handle + _SoundOffset!.Value);
             return instance;
         }
     }
-    private static nint _LoopEndOffset = -1;
+    private static nint? _LoopEndOffset;
 
     public ref float LoopEnd
     {
         get
         {
-            if (_LoopEndOffset == -1) _LoopEndOffset = Schema.GetOffset(0x5815536DF25EF00A);
-            return ref _Handle.AsRef<float>(_LoopEndOffset);
+            _LoopEndOffset = _LoopEndOffset ?? Schema.GetOffset(0x5815536DF25EF00A);
+            return ref _Handle.AsRef<float>(_LoopEndOffset!.Value);
         }
     }
-    private static nint _LoopStartOffset = -1;
+    private static nint? _LoopStartOffset;
 
     public ref float LoopStart
     {
         get
         {
-            if (_LoopStartOffset == -1) _LoopStartOffset = Schema.GetOffset(0x5815536D2157C63F);
-            return ref _Handle.AsRef<float>(_LoopStartOffset);
+            _LoopStartOffset = _LoopStartOffset ?? Schema.GetOffset(0x5815536D2157C63F);
+            return ref _Handle.AsRef<float>(_LoopStartOffset!.Value);
         }
     }
-    private static nint _FadeOutOffset = -1;
+    private static nint? _FadeOutOffset;
 
     public ref float FadeOut
     {
         get
         {
-            if (_FadeOutOffset == -1) _FadeOutOffset = Schema.GetOffset(0x5815536DFEBCE80B);
-            return ref _Handle.AsRef<float>(_FadeOutOffset);
+            _FadeOutOffset = _FadeOutOffset ?? Schema.GetOffset(0x5815536DFEBCE80B);
+            return ref _Handle.AsRef<float>(_FadeOutOffset!.Value);
         }
     }
-    private static nint _FadeInOffset = -1;
+    private static nint? _FadeInOffset;
 
     public ref float FadeIn
     {
         get
         {
-            if (_FadeInOffset == -1) _FadeInOffset = Schema.GetOffset(0x5815536DFCA835D2);
-            return ref _Handle.AsRef<float>(_FadeInOffset);
+            _FadeInOffset = _FadeInOffset ?? Schema.GetOffset(0x5815536DFCA835D2);
+            return ref _Handle.AsRef<float>(_FadeInOffset!.Value);
         }
     }
-    private static nint _PlayHeadOffset = -1;
+    private static nint? _PlayHeadOffset;
 
     public ref bool PlayHead
     {
         get
         {
-            if (_PlayHeadOffset == -1) _PlayHeadOffset = Schema.GetOffset(0x5815536D2F1158D9);
-            return ref _Handle.AsRef<bool>(_PlayHeadOffset);
+            _PlayHeadOffset = _PlayHeadOffset ?? Schema.GetOffset(0x5815536D2F1158D9);
+            return ref _Handle.AsRef<bool>(_PlayHeadOffset!.Value);
         }
     }
-    private static nint _PlayTailOffset = -1;
+    private static nint? _PlayTailOffset;
 
     public ref bool PlayTail
     {
         get
         {
-            if (_PlayTailOffset == -1) _PlayTailOffset = Schema.GetOffset(0x5815536D77C04419);
-            return ref _Handle.AsRef<bool>(_PlayTailOffset);
+            _PlayTailOffset = _PlayTailOffset ?? Schema.GetOffset(0x5815536D77C04419);
+            return ref _Handle.AsRef<bool>(_PlayTailOffset!.Value);
         }
     }
-    private static nint _EqualPowOffset = -1;
+    private static nint? _EqualPowOffset;
 
     public ref bool EqualPow
     {
         get
         {
-            if (_EqualPowOffset == -1) _EqualPowOffset = Schema.GetOffset(0x5815536DCA06F463);
-            return ref _Handle.AsRef<bool>(_EqualPowOffset);
+            _EqualPowOffset = _EqualPowOffset ?? Schema.GetOffset(0x5815536DCA06F463);
+            return ref _Handle.AsRef<bool>(_EqualPowOffset!.Value);
         }
     }
 

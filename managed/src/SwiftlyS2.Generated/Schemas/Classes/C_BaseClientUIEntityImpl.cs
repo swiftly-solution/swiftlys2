@@ -16,59 +16,59 @@ internal partial class C_BaseClientUIEntityImpl : C_BaseModelEntityImpl, C_BaseC
 {
     public C_BaseClientUIEntityImpl(nint handle) : base(handle) { }
 
-    private static nint _EnabledOffset = -1;
+    private static nint? _EnabledOffset;
 
     public ref bool Enabled
     {
         get
         {
-            if (_EnabledOffset == -1) _EnabledOffset = Schema.GetOffset(0x6695E9D06154EB7E);
-            return ref _Handle.AsRef<bool>(_EnabledOffset);
+            _EnabledOffset = _EnabledOffset ?? Schema.GetOffset(0x6695E9D06154EB7E);
+            return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
         }
     }
-    private static nint _DialogXMLNameOffset = -1;
+    private static nint? _DialogXMLNameOffset;
 
     public string DialogXMLName
     {
         get
         {
-            if (_DialogXMLNameOffset == -1) _DialogXMLNameOffset = Schema.GetOffset(0x6695E9D0D13858C9);
-            return Schema.GetString(_Handle.Read<nint>(_DialogXMLNameOffset));
+            _DialogXMLNameOffset = _DialogXMLNameOffset ?? Schema.GetOffset(0x6695E9D0D13858C9);
+            return Schema.GetString(_Handle.Read<nint>(_DialogXMLNameOffset!.Value));
         }
         set
         {
-            if (_DialogXMLNameOffset == -1) _DialogXMLNameOffset = Schema.GetOffset(0x6695E9D0D13858C9);
-            Schema.SetString(_Handle, _DialogXMLNameOffset, value);
+            _DialogXMLNameOffset = _DialogXMLNameOffset ?? Schema.GetOffset(0x6695E9D0D13858C9);
+            Schema.SetString(_Handle, _DialogXMLNameOffset!.Value, value);
         }
     }
-    private static nint _PanelClassNameOffset = -1;
+    private static nint? _PanelClassNameOffset;
 
     public string PanelClassName
     {
         get
         {
-            if (_PanelClassNameOffset == -1) _PanelClassNameOffset = Schema.GetOffset(0x6695E9D05C958CBC);
-            return Schema.GetString(_Handle.Read<nint>(_PanelClassNameOffset));
+            _PanelClassNameOffset = _PanelClassNameOffset ?? Schema.GetOffset(0x6695E9D05C958CBC);
+            return Schema.GetString(_Handle.Read<nint>(_PanelClassNameOffset!.Value));
         }
         set
         {
-            if (_PanelClassNameOffset == -1) _PanelClassNameOffset = Schema.GetOffset(0x6695E9D05C958CBC);
-            Schema.SetString(_Handle, _PanelClassNameOffset, value);
+            _PanelClassNameOffset = _PanelClassNameOffset ?? Schema.GetOffset(0x6695E9D05C958CBC);
+            Schema.SetString(_Handle, _PanelClassNameOffset!.Value, value);
         }
     }
-    private static nint _PanelIDOffset = -1;
+    private static nint? _PanelIDOffset;
 
     public string PanelID
     {
         get
         {
-            if (_PanelIDOffset == -1) _PanelIDOffset = Schema.GetOffset(0x6695E9D007A4EF60);
-            return Schema.GetString(_Handle.Read<nint>(_PanelIDOffset));
+            _PanelIDOffset = _PanelIDOffset ?? Schema.GetOffset(0x6695E9D007A4EF60);
+            return Schema.GetString(_Handle.Read<nint>(_PanelIDOffset!.Value));
         }
         set
         {
-            if (_PanelIDOffset == -1) _PanelIDOffset = Schema.GetOffset(0x6695E9D007A4EF60);
-            Schema.SetString(_Handle, _PanelIDOffset, value);
+            _PanelIDOffset = _PanelIDOffset ?? Schema.GetOffset(0x6695E9D007A4EF60);
+            Schema.SetString(_Handle, _PanelIDOffset!.Value, value);
         }
     }
 

@@ -16,26 +16,26 @@ internal partial class CPulseCell_Outflow_PlayVCD__VCDRequirementInfo_tImpl : Sc
 {
     public CPulseCell_Outflow_PlayVCD__VCDRequirementInfo_tImpl(nint handle) : base(handle) { }
 
-    private static nint _EventIDOffset = -1;
+    private static nint? _EventIDOffset;
 
     public ref int EventID
     {
         get
         {
-            if (_EventIDOffset == -1) _EventIDOffset = Schema.GetOffset(0xB1E264BFC9E05126);
-            return ref _Handle.AsRef<int>(_EventIDOffset);
+            _EventIDOffset = _EventIDOffset ?? Schema.GetOffset(0xB1E264BFC9E05126);
+            return ref _Handle.AsRef<int>(_EventIDOffset!.Value);
         }
     }
-    private static nint _OutflowOffset = -1;
+    private static nint? _OutflowOffset;
     private CPulse_OutflowConnectionImpl? _OutflowInstance;
 
     public CPulse_OutflowConnection Outflow
     {
         get
         {
-            if (_OutflowOffset == -1) _OutflowOffset = Schema.GetOffset(0xB1E264BFA23DA55B);
+            _OutflowOffset = _OutflowOffset ?? Schema.GetOffset(0xB1E264BFA23DA55B);
             var instance = _OutflowInstance ??= new CPulse_OutflowConnectionImpl(0);
-            instance.DangerousSetHandle(_Handle + _OutflowOffset);
+            instance.DangerousSetHandle(_Handle + _OutflowOffset!.Value);
             return instance;
         }
     }

@@ -16,24 +16,24 @@ internal partial class CDecalGroupVDataImpl : SchemaClass, CDecalGroupVData
 {
     public CDecalGroupVDataImpl(nint handle) : base(handle) { }
 
-    private static nint _OptionsOffset = -1;
+    private static nint? _OptionsOffset;
 
     public ref CUtlVector<DecalGroupOption_t> Options
     {
         get
         {
-            if (_OptionsOffset == -1) _OptionsOffset = Schema.GetOffset(0x56FC0D98C5C14E85);
-            return ref _Handle.AsRef<CUtlVector<DecalGroupOption_t>>(_OptionsOffset);
+            _OptionsOffset = _OptionsOffset ?? Schema.GetOffset(0x56FC0D98C5C14E85);
+            return ref _Handle.AsRef<CUtlVector<DecalGroupOption_t>>(_OptionsOffset!.Value);
         }
     }
-    private static nint _TotalProbabilityOffset = -1;
+    private static nint? _TotalProbabilityOffset;
 
     public ref float TotalProbability
     {
         get
         {
-            if (_TotalProbabilityOffset == -1) _TotalProbabilityOffset = Schema.GetOffset(0x56FC0D98154D3742);
-            return ref _Handle.AsRef<float>(_TotalProbabilityOffset);
+            _TotalProbabilityOffset = _TotalProbabilityOffset ?? Schema.GetOffset(0x56FC0D98154D3742);
+            return ref _Handle.AsRef<float>(_TotalProbabilityOffset!.Value);
         }
     }
 

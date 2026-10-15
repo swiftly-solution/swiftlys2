@@ -16,74 +16,74 @@ internal partial class CAnimBoneImpl : SchemaClass, CAnimBone
 {
     public CAnimBoneImpl(nint handle) : base(handle) { }
 
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public ref CBufferString Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x891F6AB94D8F5786);
-            return ref _Handle.AsRef<CBufferString>(_NameOffset);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x891F6AB94D8F5786);
+            return ref _Handle.AsRef<CBufferString>(_NameOffset!.Value);
         }
     }
-    private static nint _ParentOffset = -1;
+    private static nint? _ParentOffset;
 
     public ref int Parent
     {
         get
         {
-            if (_ParentOffset == -1) _ParentOffset = Schema.GetOffset(0x891F6AB92FF7A69D);
-            return ref _Handle.AsRef<int>(_ParentOffset);
+            _ParentOffset = _ParentOffset ?? Schema.GetOffset(0x891F6AB92FF7A69D);
+            return ref _Handle.AsRef<int>(_ParentOffset!.Value);
         }
     }
-    private static nint _PosOffset = -1;
+    private static nint? _PosOffset;
 
     public ref Vector Pos
     {
         get
         {
-            if (_PosOffset == -1) _PosOffset = Schema.GetOffset(0x891F6AB944CEBEA9);
-            return ref _Handle.AsRef<Vector>(_PosOffset);
+            _PosOffset = _PosOffset ?? Schema.GetOffset(0x891F6AB944CEBEA9);
+            return ref _Handle.AsRef<Vector>(_PosOffset!.Value);
         }
     }
-    private static nint _QuatOffset = -1;
+    private static nint? _QuatOffset;
 
     public ref QuaternionStorage Quat
     {
         get
         {
-            if (_QuatOffset == -1) _QuatOffset = Schema.GetOffset(0x891F6AB9157658BE);
-            return ref _Handle.AsRef<QuaternionStorage>(_QuatOffset);
+            _QuatOffset = _QuatOffset ?? Schema.GetOffset(0x891F6AB9157658BE);
+            return ref _Handle.AsRef<QuaternionStorage>(_QuatOffset!.Value);
         }
     }
-    private static nint _ScaleOffset = -1;
+    private static nint? _ScaleOffset;
 
     public ref float Scale
     {
         get
         {
-            if (_ScaleOffset == -1) _ScaleOffset = Schema.GetOffset(0x891F6AB9C2A44391);
-            return ref _Handle.AsRef<float>(_ScaleOffset);
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x891F6AB9C2A44391);
+            return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
         }
     }
-    private static nint _AlignmentOffset = -1;
+    private static nint? _AlignmentOffset;
 
     public ref QuaternionStorage Alignment
     {
         get
         {
-            if (_AlignmentOffset == -1) _AlignmentOffset = Schema.GetOffset(0x891F6AB9CA0E45D1);
-            return ref _Handle.AsRef<QuaternionStorage>(_AlignmentOffset);
+            _AlignmentOffset = _AlignmentOffset ?? Schema.GetOffset(0x891F6AB9CA0E45D1);
+            return ref _Handle.AsRef<QuaternionStorage>(_AlignmentOffset!.Value);
         }
     }
-    private static nint _FlagsOffset = -1;
+    private static nint? _FlagsOffset;
 
     public ref int Flags
     {
         get
         {
-            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0x891F6AB9DC74A14C);
-            return ref _Handle.AsRef<int>(_FlagsOffset);
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x891F6AB9DC74A14C);
+            return ref _Handle.AsRef<int>(_FlagsOffset!.Value);
         }
     }
 

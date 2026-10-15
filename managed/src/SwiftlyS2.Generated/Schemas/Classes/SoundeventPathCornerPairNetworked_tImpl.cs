@@ -16,54 +16,54 @@ internal partial class SoundeventPathCornerPairNetworked_tImpl : SchemaClass, So
 {
     public SoundeventPathCornerPairNetworked_tImpl(nint handle) : base(handle) { }
 
-    private static nint _P1Offset = -1;
+    private static nint? _P1Offset;
 
     public ref Vector P1
     {
         get
         {
-            if (_P1Offset == -1) _P1Offset = Schema.GetOffset(0x138FC2E2CD01805E);
-            return ref _Handle.AsRef<Vector>(_P1Offset);
+            _P1Offset = _P1Offset ?? Schema.GetOffset(0x138FC2E2CD01805E);
+            return ref _Handle.AsRef<Vector>(_P1Offset!.Value);
         }
     }
-    private static nint _P2Offset = -1;
+    private static nint? _P2Offset;
 
     public ref Vector P2
     {
         get
         {
-            if (_P2Offset == -1) _P2Offset = Schema.GetOffset(0x138FC2E2CC017ECB);
-            return ref _Handle.AsRef<Vector>(_P2Offset);
+            _P2Offset = _P2Offset ?? Schema.GetOffset(0x138FC2E2CC017ECB);
+            return ref _Handle.AsRef<Vector>(_P2Offset!.Value);
         }
     }
-    private static nint _PathLengthSqrOffset = -1;
+    private static nint? _PathLengthSqrOffset;
 
     public ref float PathLengthSqr
     {
         get
         {
-            if (_PathLengthSqrOffset == -1) _PathLengthSqrOffset = Schema.GetOffset(0x138FC2E284D826AA);
-            return ref _Handle.AsRef<float>(_PathLengthSqrOffset);
+            _PathLengthSqrOffset = _PathLengthSqrOffset ?? Schema.GetOffset(0x138FC2E284D826AA);
+            return ref _Handle.AsRef<float>(_PathLengthSqrOffset!.Value);
         }
     }
-    private static nint _P1PctOffset = -1;
+    private static nint? _P1PctOffset;
 
     public ref float P1Pct
     {
         get
         {
-            if (_P1PctOffset == -1) _P1PctOffset = Schema.GetOffset(0x138FC2E258AEE12B);
-            return ref _Handle.AsRef<float>(_P1PctOffset);
+            _P1PctOffset = _P1PctOffset ?? Schema.GetOffset(0x138FC2E258AEE12B);
+            return ref _Handle.AsRef<float>(_P1PctOffset!.Value);
         }
     }
-    private static nint _P2PctOffset = -1;
+    private static nint? _P2PctOffset;
 
     public ref float P2Pct
     {
         get
         {
-            if (_P2PctOffset == -1) _P2PctOffset = Schema.GetOffset(0x138FC2E294B6CBA8);
-            return ref _Handle.AsRef<float>(_P2PctOffset);
+            _P2PctOffset = _P2PctOffset ?? Schema.GetOffset(0x138FC2E294B6CBA8);
+            return ref _Handle.AsRef<float>(_P2PctOffset!.Value);
         }
     }
 

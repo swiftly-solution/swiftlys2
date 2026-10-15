@@ -16,37 +16,37 @@ internal partial class EventSimulate_tImpl : SchemaClass, EventSimulate_t
 {
     public EventSimulate_tImpl(nint handle) : base(handle) { }
 
-    private static nint _LoopStateOffset = -1;
+    private static nint? _LoopStateOffset;
     private EngineLoopState_tImpl? _LoopStateInstance;
 
     public EngineLoopState_t LoopState
     {
         get
         {
-            if (_LoopStateOffset == -1) _LoopStateOffset = Schema.GetOffset(0x39B7BD6EF928A2EC);
+            _LoopStateOffset = _LoopStateOffset ?? Schema.GetOffset(0x39B7BD6EF928A2EC);
             var instance = _LoopStateInstance ??= new EngineLoopState_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _LoopStateOffset);
+            instance.DangerousSetHandle(_Handle + _LoopStateOffset!.Value);
             return instance;
         }
     }
-    private static nint _FirstTickOffset = -1;
+    private static nint? _FirstTickOffset;
 
     public ref bool FirstTick
     {
         get
         {
-            if (_FirstTickOffset == -1) _FirstTickOffset = Schema.GetOffset(0x39B7BD6EC8198F38);
-            return ref _Handle.AsRef<bool>(_FirstTickOffset);
+            _FirstTickOffset = _FirstTickOffset ?? Schema.GetOffset(0x39B7BD6EC8198F38);
+            return ref _Handle.AsRef<bool>(_FirstTickOffset!.Value);
         }
     }
-    private static nint _LastTickOffset = -1;
+    private static nint? _LastTickOffset;
 
     public ref bool LastTick
     {
         get
         {
-            if (_LastTickOffset == -1) _LastTickOffset = Schema.GetOffset(0x39B7BD6E1704CC30);
-            return ref _Handle.AsRef<bool>(_LastTickOffset);
+            _LastTickOffset = _LastTickOffset ?? Schema.GetOffset(0x39B7BD6E1704CC30);
+            return ref _Handle.AsRef<bool>(_LastTickOffset!.Value);
         }
     }
 

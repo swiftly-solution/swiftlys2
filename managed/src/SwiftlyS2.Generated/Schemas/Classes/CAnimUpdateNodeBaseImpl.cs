@@ -16,42 +16,42 @@ internal partial class CAnimUpdateNodeBaseImpl : SchemaClass, CAnimUpdateNodeBas
 {
     public CAnimUpdateNodeBaseImpl(nint handle) : base(handle) { }
 
-    private static nint _NodePathOffset = -1;
+    private static nint? _NodePathOffset;
     private CAnimNodePathImpl? _NodePathInstance;
 
     public CAnimNodePath NodePath
     {
         get
         {
-            if (_NodePathOffset == -1) _NodePathOffset = Schema.GetOffset(0xA16B836B69EE5E4E);
+            _NodePathOffset = _NodePathOffset ?? Schema.GetOffset(0xA16B836B69EE5E4E);
             var instance = _NodePathInstance ??= new CAnimNodePathImpl(0);
-            instance.DangerousSetHandle(_Handle + _NodePathOffset);
+            instance.DangerousSetHandle(_Handle + _NodePathOffset!.Value);
             return instance;
         }
     }
-    private static nint _NetworkModeOffset = -1;
+    private static nint? _NetworkModeOffset;
 
     public ref AnimNodeNetworkMode NetworkMode
     {
         get
         {
-            if (_NetworkModeOffset == -1) _NetworkModeOffset = Schema.GetOffset(0xA16B836BE3307112);
-            return ref _Handle.AsRef<AnimNodeNetworkMode>(_NetworkModeOffset);
+            _NetworkModeOffset = _NetworkModeOffset ?? Schema.GetOffset(0xA16B836BE3307112);
+            return ref _Handle.AsRef<AnimNodeNetworkMode>(_NetworkModeOffset!.Value);
         }
     }
-    private static nint _NameOffset = -1;
+    private static nint? _NameOffset;
 
     public string Name
     {
         get
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xA16B836B4D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xA16B836B4D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
         }
         set
         {
-            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xA16B836B4D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset, value);
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xA16B836B4D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     }
 

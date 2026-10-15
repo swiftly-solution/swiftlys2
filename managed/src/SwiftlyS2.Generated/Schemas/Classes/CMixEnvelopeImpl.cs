@@ -16,34 +16,34 @@ internal partial class CMixEnvelopeImpl : CMixPropertyBaseImpl, CMixEnvelope
 {
     public CMixEnvelopeImpl(nint handle) : base(handle) { }
 
-    private static nint _AttackTimeOffset = -1;
+    private static nint? _AttackTimeOffset;
 
     public ref float AttackTime
     {
         get
         {
-            if (_AttackTimeOffset == -1) _AttackTimeOffset = Schema.GetOffset(0xB6296A40C5A41DD6);
-            return ref _Handle.AsRef<float>(_AttackTimeOffset);
+            _AttackTimeOffset = _AttackTimeOffset ?? Schema.GetOffset(0xB6296A40C5A41DD6);
+            return ref _Handle.AsRef<float>(_AttackTimeOffset!.Value);
         }
     }
-    private static nint _HoldTimeOffset = -1;
+    private static nint? _HoldTimeOffset;
 
     public ref float HoldTime
     {
         get
         {
-            if (_HoldTimeOffset == -1) _HoldTimeOffset = Schema.GetOffset(0xB6296A400A26F66F);
-            return ref _Handle.AsRef<float>(_HoldTimeOffset);
+            _HoldTimeOffset = _HoldTimeOffset ?? Schema.GetOffset(0xB6296A400A26F66F);
+            return ref _Handle.AsRef<float>(_HoldTimeOffset!.Value);
         }
     }
-    private static nint _ReleaseTimeOffset = -1;
+    private static nint? _ReleaseTimeOffset;
 
     public ref float ReleaseTime
     {
         get
         {
-            if (_ReleaseTimeOffset == -1) _ReleaseTimeOffset = Schema.GetOffset(0xB6296A4086296445);
-            return ref _Handle.AsRef<float>(_ReleaseTimeOffset);
+            _ReleaseTimeOffset = _ReleaseTimeOffset ?? Schema.GetOffset(0xB6296A4086296445);
+            return ref _Handle.AsRef<float>(_ReleaseTimeOffset!.Value);
         }
     }
 

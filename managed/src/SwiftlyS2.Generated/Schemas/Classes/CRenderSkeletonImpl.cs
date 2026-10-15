@@ -16,34 +16,34 @@ internal partial class CRenderSkeletonImpl : SchemaClass, CRenderSkeleton
 {
     public CRenderSkeletonImpl(nint handle) : base(handle) { }
 
-    private static nint _BonesOffset = -1;
+    private static nint? _BonesOffset;
 
     public ref CUtlVector<RenderSkeletonBone_t> Bones
     {
         get
         {
-            if (_BonesOffset == -1) _BonesOffset = Schema.GetOffset(0xBF0A83950FDA60D4);
-            return ref _Handle.AsRef<CUtlVector<RenderSkeletonBone_t>>(_BonesOffset);
+            _BonesOffset = _BonesOffset ?? Schema.GetOffset(0xBF0A83950FDA60D4);
+            return ref _Handle.AsRef<CUtlVector<RenderSkeletonBone_t>>(_BonesOffset!.Value);
         }
     }
-    private static nint _BoneParentsOffset = -1;
+    private static nint? _BoneParentsOffset;
 
     public ref CUtlVector<int> BoneParents
     {
         get
         {
-            if (_BoneParentsOffset == -1) _BoneParentsOffset = Schema.GetOffset(0xBF0A839571828F04);
-            return ref _Handle.AsRef<CUtlVector<int>>(_BoneParentsOffset);
+            _BoneParentsOffset = _BoneParentsOffset ?? Schema.GetOffset(0xBF0A839571828F04);
+            return ref _Handle.AsRef<CUtlVector<int>>(_BoneParentsOffset!.Value);
         }
     }
-    private static nint _BoneWeightCountOffset = -1;
+    private static nint? _BoneWeightCountOffset;
 
     public ref int BoneWeightCount
     {
         get
         {
-            if (_BoneWeightCountOffset == -1) _BoneWeightCountOffset = Schema.GetOffset(0xBF0A839508029166);
-            return ref _Handle.AsRef<int>(_BoneWeightCountOffset);
+            _BoneWeightCountOffset = _BoneWeightCountOffset ?? Schema.GetOffset(0xBF0A839508029166);
+            return ref _Handle.AsRef<int>(_BoneWeightCountOffset!.Value);
         }
     }
 

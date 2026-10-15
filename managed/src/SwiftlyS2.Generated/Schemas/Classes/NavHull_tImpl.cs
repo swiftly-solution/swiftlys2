@@ -16,14 +16,14 @@ internal partial class NavHull_tImpl : SchemaClass, NavHull_t
 {
     public NavHull_tImpl(nint handle) : base(handle) { }
 
-    private static nint _HullIdxOffset = -1;
+    private static nint? _HullIdxOffset;
 
     public ref int HullIdx
     {
         get
         {
-            if (_HullIdxOffset == -1) _HullIdxOffset = Schema.GetOffset(0x2A185DAA595B303D);
-            return ref _Handle.AsRef<int>(_HullIdxOffset);
+            _HullIdxOffset = _HullIdxOffset ?? Schema.GetOffset(0x2A185DAA595B303D);
+            return ref _Handle.AsRef<int>(_HullIdxOffset!.Value);
         }
     }
 

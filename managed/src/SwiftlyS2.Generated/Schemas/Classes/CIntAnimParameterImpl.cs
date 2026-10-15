@@ -16,34 +16,34 @@ internal partial class CIntAnimParameterImpl : CConcreteAnimParameterImpl, CIntA
 {
     public CIntAnimParameterImpl(nint handle) : base(handle) { }
 
-    private static nint _DefaultValueOffset = -1;
+    private static nint? _DefaultValueOffset;
 
     public ref int DefaultValue
     {
         get
         {
-            if (_DefaultValueOffset == -1) _DefaultValueOffset = Schema.GetOffset(0xD1AA42D5BBE0341F);
-            return ref _Handle.AsRef<int>(_DefaultValueOffset);
+            _DefaultValueOffset = _DefaultValueOffset ?? Schema.GetOffset(0xD1AA42D5BBE0341F);
+            return ref _Handle.AsRef<int>(_DefaultValueOffset!.Value);
         }
     }
-    private static nint _MinValueOffset = -1;
+    private static nint? _MinValueOffset;
 
     public ref int MinValue
     {
         get
         {
-            if (_MinValueOffset == -1) _MinValueOffset = Schema.GetOffset(0xD1AA42D503F1334C);
-            return ref _Handle.AsRef<int>(_MinValueOffset);
+            _MinValueOffset = _MinValueOffset ?? Schema.GetOffset(0xD1AA42D503F1334C);
+            return ref _Handle.AsRef<int>(_MinValueOffset!.Value);
         }
     }
-    private static nint _MaxValueOffset = -1;
+    private static nint? _MaxValueOffset;
 
     public ref int MaxValue
     {
         get
         {
-            if (_MaxValueOffset == -1) _MaxValueOffset = Schema.GetOffset(0xD1AA42D5857E5426);
-            return ref _Handle.AsRef<int>(_MaxValueOffset);
+            _MaxValueOffset = _MaxValueOffset ?? Schema.GetOffset(0xD1AA42D5857E5426);
+            return ref _Handle.AsRef<int>(_MaxValueOffset!.Value);
         }
     }
 

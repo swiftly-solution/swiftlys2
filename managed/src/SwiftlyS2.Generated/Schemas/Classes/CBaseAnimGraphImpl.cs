@@ -16,186 +16,186 @@ internal partial class CBaseAnimGraphImpl : CBaseModelEntityImpl, CBaseAnimGraph
 {
     public CBaseAnimGraphImpl(nint handle) : base(handle) { }
 
-    private static nint _GraphControllerManagerOffset = -1;
+    private static nint? _GraphControllerManagerOffset;
     private CAnimGraphControllerManagerImpl? _GraphControllerManagerInstance;
 
     public CAnimGraphControllerManager GraphControllerManager
     {
         get
         {
-            if (_GraphControllerManagerOffset == -1) _GraphControllerManagerOffset = Schema.GetOffset(0xE501DB1EF1B20F5A);
+            _GraphControllerManagerOffset = _GraphControllerManagerOffset ?? Schema.GetOffset(0xE501DB1EF1B20F5A);
             var instance = _GraphControllerManagerInstance ??= new CAnimGraphControllerManagerImpl(0);
-            instance.DangerousSetHandle(_Handle + _GraphControllerManagerOffset);
+            instance.DangerousSetHandle(_Handle + _GraphControllerManagerOffset!.Value);
             return instance;
         }
     }
-    private static nint _MainGraphControllerOffset = -1;
+    private static nint? _MainGraphControllerOffset;
     private CAnimGraphControllerPtrImpl? _MainGraphControllerInstance;
 
     public CAnimGraphControllerPtr MainGraphController
     {
         get
         {
-            if (_MainGraphControllerOffset == -1) _MainGraphControllerOffset = Schema.GetOffset(0xE501DB1E655CC5F6);
+            _MainGraphControllerOffset = _MainGraphControllerOffset ?? Schema.GetOffset(0xE501DB1E655CC5F6);
             var instance = _MainGraphControllerInstance ??= new CAnimGraphControllerPtrImpl(0);
-            instance.DangerousSetHandle(_Handle + _MainGraphControllerOffset);
+            instance.DangerousSetHandle(_Handle + _MainGraphControllerOffset!.Value);
             return instance;
         }
     }
-    private static nint _InitiallyPopulateInterpHistoryOffset = -1;
+    private static nint? _InitiallyPopulateInterpHistoryOffset;
 
     public ref bool InitiallyPopulateInterpHistory
     {
         get
         {
-            if (_InitiallyPopulateInterpHistoryOffset == -1) _InitiallyPopulateInterpHistoryOffset = Schema.GetOffset(0xE501DB1E3087361C);
-            return ref _Handle.AsRef<bool>(_InitiallyPopulateInterpHistoryOffset);
+            _InitiallyPopulateInterpHistoryOffset = _InitiallyPopulateInterpHistoryOffset ?? Schema.GetOffset(0xE501DB1E3087361C);
+            return ref _Handle.AsRef<bool>(_InitiallyPopulateInterpHistoryOffset!.Value);
         }
     }
-    private static nint _OnLayerCycleUpdatedOffset = -1;
+    private static nint? _OnLayerCycleUpdatedOffset;
     private SchemaUntypedField? _OnLayerCycleUpdatedInstance;
 
     public SchemaUntypedField OnLayerCycleUpdated
     {
         get
         {
-            if (_OnLayerCycleUpdatedOffset == -1) _OnLayerCycleUpdatedOffset = Schema.GetOffset(0xE501DB1EDEFC292C);
+            _OnLayerCycleUpdatedOffset = _OnLayerCycleUpdatedOffset ?? Schema.GetOffset(0xE501DB1EDEFC292C);
             var instance = _OnLayerCycleUpdatedInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OnLayerCycleUpdatedOffset);
+            instance.DangerousSetHandle(_Handle + _OnLayerCycleUpdatedOffset!.Value);
             return instance;
         }
     }
-    private static nint _OnExternalChoreoGraphChangedOffset = -1;
+    private static nint? _OnExternalChoreoGraphChangedOffset;
 
     public ref CEntityIOOutput OnExternalChoreoGraphChanged
     {
         get
         {
-            if (_OnExternalChoreoGraphChangedOffset == -1) _OnExternalChoreoGraphChangedOffset = Schema.GetOffset(0xE501DB1EA00A1521);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnExternalChoreoGraphChangedOffset);
+            _OnExternalChoreoGraphChangedOffset = _OnExternalChoreoGraphChangedOffset ?? Schema.GetOffset(0xE501DB1EA00A1521);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnExternalChoreoGraphChangedOffset!.Value);
         }
     }
-    private static nint _ChoreoServicesOffset = -1;
+    private static nint? _ChoreoServicesOffset;
     private IChoreoServicesImpl? _ChoreoServicesInstance;
 
     public IChoreoServices? ChoreoServices
     {
         get
         {
-            if (_ChoreoServicesOffset == -1) _ChoreoServicesOffset = Schema.GetOffset(0xE501DB1E89C6D559);
-            var ptr = _Handle.Read<nint>(_ChoreoServicesOffset);
+            _ChoreoServicesOffset = _ChoreoServicesOffset ?? Schema.GetOffset(0xE501DB1E89C6D559);
+            var ptr = _Handle.Read<nint>(_ChoreoServicesOffset!.Value);
             if (!ptr.IsValidPtr()) return null;
             var instance = _ChoreoServicesInstance ??= new IChoreoServicesImpl(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint _AnimGraphUpdateEnabledOffset = -1;
+    private static nint? _AnimGraphUpdateEnabledOffset;
 
     public ref bool AnimGraphUpdateEnabled
     {
         get
         {
-            if (_AnimGraphUpdateEnabledOffset == -1) _AnimGraphUpdateEnabledOffset = Schema.GetOffset(0xE501DB1E724F7FEE);
-            return ref _Handle.AsRef<bool>(_AnimGraphUpdateEnabledOffset);
+            _AnimGraphUpdateEnabledOffset = _AnimGraphUpdateEnabledOffset ?? Schema.GetOffset(0xE501DB1E724F7FEE);
+            return ref _Handle.AsRef<bool>(_AnimGraphUpdateEnabledOffset!.Value);
         }
     }
-    private static nint _AnimationUpdateScheduledOffset = -1;
+    private static nint? _AnimationUpdateScheduledOffset;
 
     public ref bool AnimationUpdateScheduled
     {
         get
         {
-            if (_AnimationUpdateScheduledOffset == -1) _AnimationUpdateScheduledOffset = Schema.GetOffset(0xE501DB1E49747BCF);
-            return ref _Handle.AsRef<bool>(_AnimationUpdateScheduledOffset);
+            _AnimationUpdateScheduledOffset = _AnimationUpdateScheduledOffset ?? Schema.GetOffset(0xE501DB1E49747BCF);
+            return ref _Handle.AsRef<bool>(_AnimationUpdateScheduledOffset!.Value);
         }
     }
-    private static nint _ForceOffset = -1;
+    private static nint? _ForceOffset;
 
     public ref Vector Force
     {
         get
         {
-            if (_ForceOffset == -1) _ForceOffset = Schema.GetOffset(0xE501DB1E566BD764);
-            return ref _Handle.AsRef<Vector>(_ForceOffset);
+            _ForceOffset = _ForceOffset ?? Schema.GetOffset(0xE501DB1E566BD764);
+            return ref _Handle.AsRef<Vector>(_ForceOffset!.Value);
         }
     }
-    private static nint _ForceBoneOffset = -1;
+    private static nint? _ForceBoneOffset;
 
     public ref int ForceBone
     {
         get
         {
-            if (_ForceBoneOffset == -1) _ForceBoneOffset = Schema.GetOffset(0xE501DB1EDDAC019E);
-            return ref _Handle.AsRef<int>(_ForceBoneOffset);
+            _ForceBoneOffset = _ForceBoneOffset ?? Schema.GetOffset(0xE501DB1EDDAC019E);
+            return ref _Handle.AsRef<int>(_ForceBoneOffset!.Value);
         }
     }
-    private static nint _RagdollControlOffset = -1;
+    private static nint? _RagdollControlOffset;
     private IPhysicsRagdollControlImpl? _RagdollControlInstance;
 
     public IPhysicsRagdollControl? RagdollControl
     {
         get
         {
-            if (_RagdollControlOffset == -1) _RagdollControlOffset = Schema.GetOffset(0xE501DB1EFF37C12F);
-            var ptr = _Handle.Read<nint>(_RagdollControlOffset);
+            _RagdollControlOffset = _RagdollControlOffset ?? Schema.GetOffset(0xE501DB1EFF37C12F);
+            var ptr = _Handle.Read<nint>(_RagdollControlOffset!.Value);
             if (!ptr.IsValidPtr()) return null;
             var instance = _RagdollControlInstance ??= new IPhysicsRagdollControlImpl(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint _RagdollPoseOffset = -1;
+    private static nint? _RagdollPoseOffset;
     private PhysicsRagdollPose_tImpl? _RagdollPoseInstance;
 
     public PhysicsRagdollPose_t RagdollPose
     {
         get
         {
-            if (_RagdollPoseOffset == -1) _RagdollPoseOffset = Schema.GetOffset(0xE501DB1E49F01F45);
+            _RagdollPoseOffset = _RagdollPoseOffset ?? Schema.GetOffset(0xE501DB1E49F01F45);
             var instance = _RagdollPoseInstance ??= new PhysicsRagdollPose_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _RagdollPoseOffset);
+            instance.DangerousSetHandle(_Handle + _RagdollPoseOffset!.Value);
             return instance;
         }
     }
-    private static nint _RagdollEnabledOffset = -1;
+    private static nint? _RagdollEnabledOffset;
 
     public ref bool RagdollEnabled
     {
         get
         {
-            if (_RagdollEnabledOffset == -1) _RagdollEnabledOffset = Schema.GetOffset(0xE501DB1E03EA7599);
-            return ref _Handle.AsRef<bool>(_RagdollEnabledOffset);
+            _RagdollEnabledOffset = _RagdollEnabledOffset ?? Schema.GetOffset(0xE501DB1E03EA7599);
+            return ref _Handle.AsRef<bool>(_RagdollEnabledOffset!.Value);
         }
     }
-    private static nint _RagdollClientSideOffset = -1;
+    private static nint? _RagdollClientSideOffset;
 
     public ref bool RagdollClientSide
     {
         get
         {
-            if (_RagdollClientSideOffset == -1) _RagdollClientSideOffset = Schema.GetOffset(0xE501DB1EB6A5159C);
-            return ref _Handle.AsRef<bool>(_RagdollClientSideOffset);
+            _RagdollClientSideOffset = _RagdollClientSideOffset ?? Schema.GetOffset(0xE501DB1EB6A5159C);
+            return ref _Handle.AsRef<bool>(_RagdollClientSideOffset!.Value);
         }
     }
-    private static nint _ShouldUpdateTransformationsOffset = -1;
+    private static nint? _ShouldUpdateTransformationsOffset;
 
     public ref bool ShouldUpdateTransformations
     {
         get
         {
-            if (_ShouldUpdateTransformationsOffset == -1) _ShouldUpdateTransformationsOffset = Schema.GetOffset(0xE501DB1E3B811E57);
-            return ref _Handle.AsRef<bool>(_ShouldUpdateTransformationsOffset);
+            _ShouldUpdateTransformationsOffset = _ShouldUpdateTransformationsOffset ?? Schema.GetOffset(0xE501DB1E3B811E57);
+            return ref _Handle.AsRef<bool>(_ShouldUpdateTransformationsOffset!.Value);
         }
     }
-    private static nint _XParentedRagdollRootInEntitySpaceOffset = -1;
+    private static nint? _XParentedRagdollRootInEntitySpaceOffset;
 
     public ref CTransform XParentedRagdollRootInEntitySpace
     {
         get
         {
-            if (_XParentedRagdollRootInEntitySpaceOffset == -1) _XParentedRagdollRootInEntitySpaceOffset = Schema.GetOffset(0xE501DB1EFC4C1401);
-            return ref _Handle.AsRef<CTransform>(_XParentedRagdollRootInEntitySpaceOffset);
+            _XParentedRagdollRootInEntitySpaceOffset = _XParentedRagdollRootInEntitySpaceOffset ?? Schema.GetOffset(0xE501DB1EFC4C1401);
+            return ref _Handle.AsRef<CTransform>(_XParentedRagdollRootInEntitySpaceOffset!.Value);
         }
     }
 

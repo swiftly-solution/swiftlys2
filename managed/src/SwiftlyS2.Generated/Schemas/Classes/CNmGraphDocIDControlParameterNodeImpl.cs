@@ -16,24 +16,24 @@ internal partial class CNmGraphDocIDControlParameterNodeImpl : CNmGraphDocContro
 {
     public CNmGraphDocIDControlParameterNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _PreviewStartValueOffset = -1;
+    private static nint? _PreviewStartValueOffset;
 
     public ref CGlobalSymbol PreviewStartValue
     {
         get
         {
-            if (_PreviewStartValueOffset == -1) _PreviewStartValueOffset = Schema.GetOffset(0x4BF204383A841402);
-            return ref _Handle.AsRef<CGlobalSymbol>(_PreviewStartValueOffset);
+            _PreviewStartValueOffset = _PreviewStartValueOffset ?? Schema.GetOffset(0x4BF204383A841402);
+            return ref _Handle.AsRef<CGlobalSymbol>(_PreviewStartValueOffset!.Value);
         }
     }
-    private static nint _ExpectedValuesOffset = -1;
+    private static nint? _ExpectedValuesOffset;
 
     public ref CUtlVector<CGlobalSymbol> ExpectedValues
     {
         get
         {
-            if (_ExpectedValuesOffset == -1) _ExpectedValuesOffset = Schema.GetOffset(0x4BF204381808890F);
-            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_ExpectedValuesOffset);
+            _ExpectedValuesOffset = _ExpectedValuesOffset ?? Schema.GetOffset(0x4BF204381808890F);
+            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_ExpectedValuesOffset!.Value);
         }
     }
 

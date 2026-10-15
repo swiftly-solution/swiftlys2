@@ -16,44 +16,44 @@ internal partial class CnmGraphDocFootIKNode__CDataImpl : CNmGraphDocVariationDa
 {
     public CnmGraphDocFootIKNode__CDataImpl(nint handle) : base(handle) { }
 
-    private static nint _LeftEffectorBoneNameOffset = -1;
+    private static nint? _LeftEffectorBoneNameOffset;
 
     public string LeftEffectorBoneName
     {
         get
         {
-            if (_LeftEffectorBoneNameOffset == -1) _LeftEffectorBoneNameOffset = Schema.GetOffset(0xAC57B3927F71AD95);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_LeftEffectorBoneNameOffset));
+            _LeftEffectorBoneNameOffset = _LeftEffectorBoneNameOffset ?? Schema.GetOffset(0xAC57B3927F71AD95);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_LeftEffectorBoneNameOffset!.Value));
         }
         set
         {
-            if (_LeftEffectorBoneNameOffset == -1) _LeftEffectorBoneNameOffset = Schema.GetOffset(0xAC57B3927F71AD95);
-            Schema.SetCUtlString(_Handle, _LeftEffectorBoneNameOffset, value);
+            _LeftEffectorBoneNameOffset = _LeftEffectorBoneNameOffset ?? Schema.GetOffset(0xAC57B3927F71AD95);
+            Schema.SetCUtlString(_Handle, _LeftEffectorBoneNameOffset!.Value, value);
         }
     }
-    private static nint _RightEffectorBoneNameOffset = -1;
+    private static nint? _RightEffectorBoneNameOffset;
 
     public string RightEffectorBoneName
     {
         get
         {
-            if (_RightEffectorBoneNameOffset == -1) _RightEffectorBoneNameOffset = Schema.GetOffset(0xAC57B392D004B340);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_RightEffectorBoneNameOffset));
+            _RightEffectorBoneNameOffset = _RightEffectorBoneNameOffset ?? Schema.GetOffset(0xAC57B392D004B340);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_RightEffectorBoneNameOffset!.Value));
         }
         set
         {
-            if (_RightEffectorBoneNameOffset == -1) _RightEffectorBoneNameOffset = Schema.GetOffset(0xAC57B392D004B340);
-            Schema.SetCUtlString(_Handle, _RightEffectorBoneNameOffset, value);
+            _RightEffectorBoneNameOffset = _RightEffectorBoneNameOffset ?? Schema.GetOffset(0xAC57B392D004B340);
+            Schema.SetCUtlString(_Handle, _RightEffectorBoneNameOffset!.Value, value);
         }
     }
-    private static nint _BlendTimeSecondsOffset = -1;
+    private static nint? _BlendTimeSecondsOffset;
 
     public ref float BlendTimeSeconds
     {
         get
         {
-            if (_BlendTimeSecondsOffset == -1) _BlendTimeSecondsOffset = Schema.GetOffset(0xAC57B3926D3A08FC);
-            return ref _Handle.AsRef<float>(_BlendTimeSecondsOffset);
+            _BlendTimeSecondsOffset = _BlendTimeSecondsOffset ?? Schema.GetOffset(0xAC57B3926D3A08FC);
+            return ref _Handle.AsRef<float>(_BlendTimeSecondsOffset!.Value);
         }
     }
 

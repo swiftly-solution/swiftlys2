@@ -16,57 +16,57 @@ internal partial class ParamSpan_tImpl : SchemaClass, ParamSpan_t
 {
     public ParamSpan_tImpl(nint handle) : base(handle) { }
 
-    private static nint _SamplesOffset = -1;
+    private static nint? _SamplesOffset;
 
     public ref CUtlVector<ParamSpanSample_t> Samples
     {
         get
         {
-            if (_SamplesOffset == -1) _SamplesOffset = Schema.GetOffset(0x5EE209D9364CA9DC);
-            return ref _Handle.AsRef<CUtlVector<ParamSpanSample_t>>(_SamplesOffset);
+            _SamplesOffset = _SamplesOffset ?? Schema.GetOffset(0x5EE209D9364CA9DC);
+            return ref _Handle.AsRef<CUtlVector<ParamSpanSample_t>>(_SamplesOffset!.Value);
         }
     }
-    private static nint _ParamOffset = -1;
+    private static nint? _ParamOffset;
     private CAnimParamHandleImpl? _ParamInstance;
 
     public CAnimParamHandle Param
     {
         get
         {
-            if (_ParamOffset == -1) _ParamOffset = Schema.GetOffset(0x5EE209D9679286A4);
+            _ParamOffset = _ParamOffset ?? Schema.GetOffset(0x5EE209D9679286A4);
             var instance = _ParamInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamOffset);
+            instance.DangerousSetHandle(_Handle + _ParamOffset!.Value);
             return instance;
         }
     }
-    private static nint _ParamTypeOffset = -1;
+    private static nint? _ParamTypeOffset;
 
     public ref AnimParamType_t ParamType
     {
         get
         {
-            if (_ParamTypeOffset == -1) _ParamTypeOffset = Schema.GetOffset(0x5EE209D9F05DFDD9);
-            return ref _Handle.AsRef<AnimParamType_t>(_ParamTypeOffset);
+            _ParamTypeOffset = _ParamTypeOffset ?? Schema.GetOffset(0x5EE209D9F05DFDD9);
+            return ref _Handle.AsRef<AnimParamType_t>(_ParamTypeOffset!.Value);
         }
     }
-    private static nint _StartCycleOffset = -1;
+    private static nint? _StartCycleOffset;
 
     public ref float StartCycle
     {
         get
         {
-            if (_StartCycleOffset == -1) _StartCycleOffset = Schema.GetOffset(0x5EE209D9ABB46051);
-            return ref _Handle.AsRef<float>(_StartCycleOffset);
+            _StartCycleOffset = _StartCycleOffset ?? Schema.GetOffset(0x5EE209D9ABB46051);
+            return ref _Handle.AsRef<float>(_StartCycleOffset!.Value);
         }
     }
-    private static nint _EndCycleOffset = -1;
+    private static nint? _EndCycleOffset;
 
     public ref float EndCycle
     {
         get
         {
-            if (_EndCycleOffset == -1) _EndCycleOffset = Schema.GetOffset(0x5EE209D9176E8F62);
-            return ref _Handle.AsRef<float>(_EndCycleOffset);
+            _EndCycleOffset = _EndCycleOffset ?? Schema.GetOffset(0x5EE209D9176E8F62);
+            return ref _Handle.AsRef<float>(_EndCycleOffset!.Value);
         }
     }
 

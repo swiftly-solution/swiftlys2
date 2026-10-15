@@ -16,52 +16,52 @@ internal partial class CStateNodeInstanceDataImpl : SchemaClass, CStateNodeInsta
 {
     public CStateNodeInstanceDataImpl(nint handle) : base(handle) { }
 
-    private static nint _StateWeightsOffset = -1;
+    private static nint? _StateWeightsOffset;
     private SchemaUntypedField? _StateWeightsInstance;
 
     public SchemaUntypedField StateWeights
     {
         get
         {
-            if (_StateWeightsOffset == -1) _StateWeightsOffset = Schema.GetOffset(0x6EAD9ECCC8386A37);
+            _StateWeightsOffset = _StateWeightsOffset ?? Schema.GetOffset(0x6EAD9ECCC8386A37);
             var instance = _StateWeightsInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _StateWeightsOffset);
+            instance.DangerousSetHandle(_Handle + _StateWeightsOffset!.Value);
             return instance;
         }
     }
-    private static nint _TransitionVelocityDeltaWSOffset = -1;
+    private static nint? _TransitionVelocityDeltaWSOffset;
 
     public ref Vector TransitionVelocityDeltaWS
     {
         get
         {
-            if (_TransitionVelocityDeltaWSOffset == -1) _TransitionVelocityDeltaWSOffset = Schema.GetOffset(0x6EAD9ECCFFF02B9B);
-            return ref _Handle.AsRef<Vector>(_TransitionVelocityDeltaWSOffset);
+            _TransitionVelocityDeltaWSOffset = _TransitionVelocityDeltaWSOffset ?? Schema.GetOffset(0x6EAD9ECCFFF02B9B);
+            return ref _Handle.AsRef<Vector>(_TransitionVelocityDeltaWSOffset!.Value);
         }
     }
-    private static nint _CurrentStateStartTimeOffset = -1;
+    private static nint? _CurrentStateStartTimeOffset;
     private SchemaUntypedField? _CurrentStateStartTimeInstance;
 
     public SchemaUntypedField CurrentStateStartTime
     {
         get
         {
-            if (_CurrentStateStartTimeOffset == -1) _CurrentStateStartTimeOffset = Schema.GetOffset(0x6EAD9ECCEE295544);
+            _CurrentStateStartTimeOffset = _CurrentStateStartTimeOffset ?? Schema.GetOffset(0x6EAD9ECCEE295544);
             var instance = _CurrentStateStartTimeInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _CurrentStateStartTimeOffset);
+            instance.DangerousSetHandle(_Handle + _CurrentStateStartTimeOffset!.Value);
             return instance;
         }
     }
-    private static nint _ResetCountOffset = -1;
+    private static nint? _ResetCountOffset;
     private SchemaUntypedField? _ResetCountInstance;
 
     public SchemaUntypedField ResetCount
     {
         get
         {
-            if (_ResetCountOffset == -1) _ResetCountOffset = Schema.GetOffset(0x6EAD9ECC89B18BCF);
+            _ResetCountOffset = _ResetCountOffset ?? Schema.GetOffset(0x6EAD9ECC89B18BCF);
             var instance = _ResetCountInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ResetCountOffset);
+            instance.DangerousSetHandle(_Handle + _ResetCountOffset!.Value);
             return instance;
         }
     }

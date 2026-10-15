@@ -16,14 +16,14 @@ internal partial class CLightRigSkyImpl : SchemaClass, CLightRigSky
 {
     public CLightRigSkyImpl(nint handle) : base(handle) { }
 
-    private static nint _SkyMaterialOffset = -1;
+    private static nint? _SkyMaterialOffset;
 
     public ref CStrongHandle<InfoForResourceTypeIMaterial2> SkyMaterial
     {
         get
         {
-            if (_SkyMaterialOffset == -1) _SkyMaterialOffset = Schema.GetOffset(0xF59FD725C887319D);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_SkyMaterialOffset);
+            _SkyMaterialOffset = _SkyMaterialOffset ?? Schema.GetOffset(0xF59FD725C887319D);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_SkyMaterialOffset!.Value);
         }
     }
 

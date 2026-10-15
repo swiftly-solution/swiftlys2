@@ -16,14 +16,14 @@ internal partial class CNetworkTransmitComponentImpl : SchemaClass, CNetworkTran
 {
     public CNetworkTransmitComponentImpl(nint handle) : base(handle) { }
 
-    private static nint _TransmitStateOwnedCounterOffset = -1;
+    private static nint? _TransmitStateOwnedCounterOffset;
 
     public ref byte TransmitStateOwnedCounter
     {
         get
         {
-            if (_TransmitStateOwnedCounterOffset == -1) _TransmitStateOwnedCounterOffset = Schema.GetOffset(0x2D6BD23F6BC30751);
-            return ref _Handle.AsRef<byte>(_TransmitStateOwnedCounterOffset);
+            _TransmitStateOwnedCounterOffset = _TransmitStateOwnedCounterOffset ?? Schema.GetOffset(0x2D6BD23F6BC30751);
+            return ref _Handle.AsRef<byte>(_TransmitStateOwnedCounterOffset!.Value);
         }
     }
 

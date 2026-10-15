@@ -16,26 +16,26 @@ internal partial class CSolveIKChainUpdateNodeImpl : CUnaryUpdateNodeImpl, CSolv
 {
     public CSolveIKChainUpdateNodeImpl(nint handle) : base(handle) { }
 
-    private static nint _TargetHandlesOffset = -1;
+    private static nint? _TargetHandlesOffset;
 
     public ref CUtlVector<CSolveIKTargetHandle_t> TargetHandles
     {
         get
         {
-            if (_TargetHandlesOffset == -1) _TargetHandlesOffset = Schema.GetOffset(0xE78F1D1F98E248F7);
-            return ref _Handle.AsRef<CUtlVector<CSolveIKTargetHandle_t>>(_TargetHandlesOffset);
+            _TargetHandlesOffset = _TargetHandlesOffset ?? Schema.GetOffset(0xE78F1D1F98E248F7);
+            return ref _Handle.AsRef<CUtlVector<CSolveIKTargetHandle_t>>(_TargetHandlesOffset!.Value);
         }
     }
-    private static nint _OpFixedDataOffset = -1;
+    private static nint? _OpFixedDataOffset;
     private SolveIKChainPoseOpFixedSettings_tImpl? _OpFixedDataInstance;
 
     public SolveIKChainPoseOpFixedSettings_t OpFixedData
     {
         get
         {
-            if (_OpFixedDataOffset == -1) _OpFixedDataOffset = Schema.GetOffset(0xE78F1D1F6960AF8C);
+            _OpFixedDataOffset = _OpFixedDataOffset ?? Schema.GetOffset(0xE78F1D1F6960AF8C);
             var instance = _OpFixedDataInstance ??= new SolveIKChainPoseOpFixedSettings_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _OpFixedDataOffset);
+            instance.DangerousSetHandle(_Handle + _OpFixedDataOffset!.Value);
             return instance;
         }
     }

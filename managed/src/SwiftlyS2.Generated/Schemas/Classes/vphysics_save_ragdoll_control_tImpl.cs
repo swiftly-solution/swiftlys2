@@ -16,107 +16,107 @@ internal partial class vphysics_save_ragdoll_control_tImpl : SchemaClass, vphysi
 {
     public vphysics_save_ragdoll_control_tImpl(nint handle) : base(handle) { }
 
-    private static nint _MinSpringFrequencyOffset = -1;
+    private static nint? _MinSpringFrequencyOffset;
 
     public ref float MinSpringFrequency
     {
         get
         {
-            if (_MinSpringFrequencyOffset == -1) _MinSpringFrequencyOffset = Schema.GetOffset(0x72246FEF73308A8E);
-            return ref _Handle.AsRef<float>(_MinSpringFrequencyOffset);
+            _MinSpringFrequencyOffset = _MinSpringFrequencyOffset ?? Schema.GetOffset(0x72246FEF73308A8E);
+            return ref _Handle.AsRef<float>(_MinSpringFrequencyOffset!.Value);
         }
     }
-    private static nint _MaxSpringFrequencyOffset = -1;
+    private static nint? _MaxSpringFrequencyOffset;
 
     public ref float MaxSpringFrequency
     {
         get
         {
-            if (_MaxSpringFrequencyOffset == -1) _MaxSpringFrequencyOffset = Schema.GetOffset(0x72246FEF5CDA1790);
-            return ref _Handle.AsRef<float>(_MaxSpringFrequencyOffset);
+            _MaxSpringFrequencyOffset = _MaxSpringFrequencyOffset ?? Schema.GetOffset(0x72246FEF5CDA1790);
+            return ref _Handle.AsRef<float>(_MaxSpringFrequencyOffset!.Value);
         }
     }
-    private static nint _MaxStretchOffset = -1;
+    private static nint? _MaxStretchOffset;
 
     public ref float MaxStretch
     {
         get
         {
-            if (_MaxStretchOffset == -1) _MaxStretchOffset = Schema.GetOffset(0x72246FEFBCF894C4);
-            return ref _Handle.AsRef<float>(_MaxStretchOffset);
+            _MaxStretchOffset = _MaxStretchOffset ?? Schema.GetOffset(0x72246FEFBCF894C4);
+            return ref _Handle.AsRef<float>(_MaxStretchOffset!.Value);
         }
     }
-    private static nint _SolidCollisionAtZeroWeightOffset = -1;
+    private static nint? _SolidCollisionAtZeroWeightOffset;
 
     public ref bool SolidCollisionAtZeroWeight
     {
         get
         {
-            if (_SolidCollisionAtZeroWeightOffset == -1) _SolidCollisionAtZeroWeightOffset = Schema.GetOffset(0x72246FEF83AB44C3);
-            return ref _Handle.AsRef<bool>(_SolidCollisionAtZeroWeightOffset);
+            _SolidCollisionAtZeroWeightOffset = _SolidCollisionAtZeroWeightOffset ?? Schema.GetOffset(0x72246FEF83AB44C3);
+            return ref _Handle.AsRef<bool>(_SolidCollisionAtZeroWeightOffset!.Value);
         }
     }
-    private static nint _RequiresDynamicBodiesOffset = -1;
+    private static nint? _RequiresDynamicBodiesOffset;
 
     public ref bool RequiresDynamicBodies
     {
         get
         {
-            if (_RequiresDynamicBodiesOffset == -1) _RequiresDynamicBodiesOffset = Schema.GetOffset(0x72246FEF14A2DE42);
-            return ref _Handle.AsRef<bool>(_RequiresDynamicBodiesOffset);
+            _RequiresDynamicBodiesOffset = _RequiresDynamicBodiesOffset ?? Schema.GetOffset(0x72246FEF14A2DE42);
+            return ref _Handle.AsRef<bool>(_RequiresDynamicBodiesOffset!.Value);
         }
     }
-    private static nint _IgnoreTeleportOffset = -1;
+    private static nint? _IgnoreTeleportOffset;
 
     public ref bool IgnoreTeleport
     {
         get
         {
-            if (_IgnoreTeleportOffset == -1) _IgnoreTeleportOffset = Schema.GetOffset(0x72246FEFA5B55A3C);
-            return ref _Handle.AsRef<bool>(_IgnoreTeleportOffset);
+            _IgnoreTeleportOffset = _IgnoreTeleportOffset ?? Schema.GetOffset(0x72246FEFA5B55A3C);
+            return ref _Handle.AsRef<bool>(_IgnoreTeleportOffset!.Value);
         }
     }
-    private static nint _LinearVelocityAccumulatorOffset = -1;
+    private static nint? _LinearVelocityAccumulatorOffset;
 
     public ref Vector LinearVelocityAccumulator
     {
         get
         {
-            if (_LinearVelocityAccumulatorOffset == -1) _LinearVelocityAccumulatorOffset = Schema.GetOffset(0x72246FEF234C2417);
-            return ref _Handle.AsRef<Vector>(_LinearVelocityAccumulatorOffset);
+            _LinearVelocityAccumulatorOffset = _LinearVelocityAccumulatorOffset ?? Schema.GetOffset(0x72246FEF234C2417);
+            return ref _Handle.AsRef<Vector>(_LinearVelocityAccumulatorOffset!.Value);
         }
     }
-    private static nint _AngularVelocityAccumulatorOffset = -1;
+    private static nint? _AngularVelocityAccumulatorOffset;
     private SchemaUntypedField? _AngularVelocityAccumulatorInstance;
 
     public SchemaUntypedField AngularVelocityAccumulator
     {
         get
         {
-            if (_AngularVelocityAccumulatorOffset == -1) _AngularVelocityAccumulatorOffset = Schema.GetOffset(0x72246FEF6A0C2134);
+            _AngularVelocityAccumulatorOffset = _AngularVelocityAccumulatorOffset ?? Schema.GetOffset(0x72246FEF6A0C2134);
             var instance = _AngularVelocityAccumulatorInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _AngularVelocityAccumulatorOffset);
+            instance.DangerousSetHandle(_Handle + _AngularVelocityAccumulatorOffset!.Value);
             return instance;
         }
     }
-    private static nint _ForceAccumulatorOffset = -1;
+    private static nint? _ForceAccumulatorOffset;
 
     public ref Vector ForceAccumulator
     {
         get
         {
-            if (_ForceAccumulatorOffset == -1) _ForceAccumulatorOffset = Schema.GetOffset(0x72246FEF51B18C06);
-            return ref _Handle.AsRef<Vector>(_ForceAccumulatorOffset);
+            _ForceAccumulatorOffset = _ForceAccumulatorOffset ?? Schema.GetOffset(0x72246FEF51B18C06);
+            return ref _Handle.AsRef<Vector>(_ForceAccumulatorOffset!.Value);
         }
     }
-    private static nint _BodyCountOffset = -1;
+    private static nint? _BodyCountOffset;
 
     public ref int BodyCount
     {
         get
         {
-            if (_BodyCountOffset == -1) _BodyCountOffset = Schema.GetOffset(0x72246FEF918D0BD8);
-            return ref _Handle.AsRef<int>(_BodyCountOffset);
+            _BodyCountOffset = _BodyCountOffset ?? Schema.GetOffset(0x72246FEF918D0BD8);
+            return ref _Handle.AsRef<int>(_BodyCountOffset!.Value);
         }
     }
 
