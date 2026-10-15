@@ -105,8 +105,6 @@ public partial interface C_CSPlayerPawn : C_CSPlayerPawnBase, ISchemaClass<C_CSP
 
     public ref bool OnGroundLastTick { get; }
 
-    public ref CHandle<CCSMinimapVolume> ActiveMinimapVolume { get; }
-
     public ref CHandle<C_CS2HudModelArms> HudModelArms { get; }
 
     public ref QAngle DeathEyeAngles { get; }
@@ -144,6 +142,8 @@ public partial interface C_CSPlayerPawn : C_CSPlayerPawnBase, ISchemaClass<C_CSP
     public ref CSPlayerBlockingUseAction_t BlockingUseActionInProgress { get; }
 
     public GameTime_t EmitSoundTime { get; }
+
+    public GameTime_t EmitSoundTime_Client { get; }
 
     public ref bool InNoDefuseArea { get; }
 
