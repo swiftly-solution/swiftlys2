@@ -529,16 +529,6 @@ internal partial class C_CSPlayerPawnImpl : C_CSPlayerPawnBaseImpl, C_CSPlayerPa
             return ref _Handle.AsRef<bool>(_OnGroundLastTickOffset);
         }
     }
-    private static nint _ActiveMinimapVolumeOffset = -1;
-
-    public ref CHandle<CCSMinimapVolume> ActiveMinimapVolume
-    {
-        get
-        {
-            if (_ActiveMinimapVolumeOffset == -1) _ActiveMinimapVolumeOffset = Schema.GetOffset(0x87CCE03E6F673BDA);
-            return ref _Handle.AsRef<CHandle<CCSMinimapVolume>>(_ActiveMinimapVolumeOffset);
-        }
-    }
     private static nint _HudModelArmsOffset = -1;
 
     public ref CHandle<C_CS2HudModelArms> HudModelArms
@@ -738,6 +728,19 @@ internal partial class C_CSPlayerPawnImpl : C_CSPlayerPawnBaseImpl, C_CSPlayerPa
             if (_EmitSoundTimeOffset == -1) _EmitSoundTimeOffset = Schema.GetOffset(0x87CCE03EC6FA84FA);
             var instance = _EmitSoundTimeInstance ??= new GameTime_tImpl(0);
             instance.DangerousSetHandle(_Handle + _EmitSoundTimeOffset);
+            return instance;
+        }
+    }
+    private static nint _EmitSoundTime_ClientOffset = -1;
+    private GameTime_tImpl? _EmitSoundTime_ClientInstance;
+
+    public GameTime_t EmitSoundTime_Client
+    {
+        get
+        {
+            if (_EmitSoundTime_ClientOffset == -1) _EmitSoundTime_ClientOffset = Schema.GetOffset(0x87CCE03E1E2D5430);
+            var instance = _EmitSoundTime_ClientInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _EmitSoundTime_ClientOffset);
             return instance;
         }
     }

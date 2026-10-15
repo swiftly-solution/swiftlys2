@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CCSMinimapVolume : CBaseTrigger, ISchemaClass<CCSMinimapVolume>
 {
     static CCSMinimapVolume ISchemaClass<CCSMinimapVolume>.From(nint handle) => new CCSMinimapVolumeImpl(handle);
-    static int ISchemaClass<CCSMinimapVolume>.Size => 2512;
+    static int ISchemaClass<CCSMinimapVolume>.Size => 2536;
     static string? ISchemaClass<CCSMinimapVolume>.ClassName => "cs_minimap_volume";
 
 
