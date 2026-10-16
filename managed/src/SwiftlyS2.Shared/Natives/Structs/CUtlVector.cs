@@ -37,7 +37,8 @@ public struct CUtlVector<T> : IEnumerable<T>
 
     public void Purge()
     {
-        RemoveAll();
+        if (!_memory.IsReadOnly) RemoveAll();
+        _size = 0;
         _memory.Purge();
     }
 
@@ -71,16 +72,21 @@ public struct CUtlVector<T> : IEnumerable<T>
 
     public void GrowVector( int count )
     {
-        if (_size + count > _memory.Count)
+        ArgumentOutOfRangeException.ThrowIfNegative(count);
+        _memory.ThrowIfReadOnly();
+        var newSize = checked(_size + count);
+        if (newSize > _memory.Count)
         {
-            _memory.Grow(_size + count - _memory.Count);
+            _memory.Grow(newSize - _memory.Count);
         }
 
-        _size += count;
+        if (newSize > _memory.Count) throw new OutOfMemoryException();
+        _size = newSize;
     }
 
     public int InsertBeforeIdx( int elem )
     {
+        if ((uint)elem > (uint)_size) throw new IndexOutOfRangeException();
         GrowVector(1);
         MemoryHelpers.ShiftElementsRight(_memory.Base, elem, 1, _size, ElementSize);
         return elem;
@@ -93,6 +99,7 @@ public struct CUtlVector<T> : IEnumerable<T>
 
     public int InsertBefore( int idx, T value )
     {
+        if ((uint)idx > (uint)_size) throw new IndexOutOfRangeException();
         GrowVector(1);
         MemoryHelpers.ShiftElementsRight(_memory.Base, idx, 1, _size, ElementSize);
         this[idx] = value;
@@ -116,6 +123,7 @@ public struct CUtlVector<T> : IEnumerable<T>
 
     public int AddVectorToTail( CUtlVector<T> other )
     {
+        _memory.ThrowIfReadOnly();
         int baseCount = Count;
         var srcCount = other.Count;
         EnsureCapacity(baseCount + srcCount);
@@ -140,6 +148,7 @@ public struct CUtlVector<T> : IEnumerable<T>
 
     public void FillWithValue( T value )
     {
+        _memory.ThrowIfReadOnly();
         for (var i = 0; i < _size; i++)
             this[i] = value;
     }
@@ -154,6 +163,7 @@ public struct CUtlVector<T> : IEnumerable<T>
         if (!IsValidIndex(elem))
             return;
 
+        _memory.ThrowIfReadOnly();
         this[elem] = default!;
         if (_size > 0)
         {
@@ -190,6 +200,7 @@ public struct CUtlVector<T> : IEnumerable<T>
         if (count <= 0 || !IsValidIndex(idx) || idx + count > _size)
             return;
 
+        _memory.ThrowIfReadOnly();
         for (var i = idx; i < idx + count; i++)
             this[i] = default!;
 
@@ -207,6 +218,7 @@ public struct CUtlVector<T> : IEnumerable<T>
         if (count <= 0 || count > _size)
             return;
 
+        _memory.ThrowIfReadOnly();
         for (var i = _size - count; i < _size; i++)
             this[i] = default!;
 
@@ -218,6 +230,7 @@ public struct CUtlVector<T> : IEnumerable<T>
         if (!IsValidIndex(elem))
             return;
 
+        _memory.ThrowIfReadOnly();
         this[elem] = default!;
         MemoryHelpers.ShiftElementsLeft(_memory.Base, elem, 1, _size, ElementSize);
         --_size;
@@ -228,15 +241,21 @@ public struct CUtlVector<T> : IEnumerable<T>
         if (_size == 0)
             return;
 
+        _memory.ThrowIfReadOnly();
         for (var i = 0; i < _size; i++)
             this[i] = default!;
 
         _size = 0;
     }
 
-    public ref T this[int index] => ref _memory[index];
-    public ref T Head() => ref _memory[0];
-    public ref T Tail() => ref _memory[_size - 1];
+    public ref T this[int index] {
+        get {
+            if (!IsValidIndex(index)) throw new IndexOutOfRangeException();
+            return ref _memory[index];
+        }
+    }
+    public ref T Head() => ref this[0];
+    public ref T Tail() => ref this[_size - 1];
     public nint Base => _memory.Base;
     public int Count => _size;
     public int Capacity => _memory.Count;

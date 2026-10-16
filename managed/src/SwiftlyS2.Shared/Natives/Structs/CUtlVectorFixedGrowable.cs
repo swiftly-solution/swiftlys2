@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 namespace SwiftlyS2.Shared.Natives;
 
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct CUtlVectorFixedGrowable<T, TBuffer>
+public unsafe struct CUtlVectorFixedGrowable<T, TBuffer> : IDisposable
     where T : unmanaged
     where TBuffer : unmanaged
 {
@@ -19,6 +19,7 @@ public unsafe struct CUtlVectorFixedGrowable<T, TBuffer>
 
     public void SetSize( int size )
     {
+        if ((uint)size > (uint)MaxSize) throw new ArgumentOutOfRangeException(nameof(size));
         this.size = size;
     }
 
@@ -49,9 +50,14 @@ public unsafe struct CUtlVectorFixedGrowable<T, TBuffer>
         }
     }
 
-    // need revisit later
-    public readonly int MaxSize => Unsafe.SizeOf<TBuffer>() / Unsafe.SizeOf<T>();
+    public readonly int MaxSize => memory.AllocationCount;
 
     public readonly int Count => size;
     public readonly nint Base => memory.Base;
+
+    public void Dispose()
+    {
+        size = 0;
+        memory.Dispose();
+    }
 }

@@ -82,6 +82,23 @@ struct ConsoleFilter
 CConsoleOutput::CConsoleOutput() = default;
 CConsoleOutput::~CConsoleOutput() = default;
 
+static thread_local CConsoleOutput* g_ActiveConsoleDispatcher = nullptr;
+
+struct ConsoleDispatchScope
+{
+    CConsoleOutput* previous;
+
+    explicit ConsoleDispatchScope(CConsoleOutput* current) : previous(g_ActiveConsoleDispatcher)
+    {
+        g_ActiveConsoleDispatcher = current;
+    }
+
+    ~ConsoleDispatchScope()
+    {
+        g_ActiveConsoleDispatcher = previous;
+    }
+};
+
 bool CConsoleOutput::ProcessLogMessage(const char* str, va_list* args)
 {
     if (m_SkipNextNewlineOnlyLog.load(std::memory_order_relaxed) && strcmp(str, "\n") == 0) {
@@ -184,7 +201,7 @@ void CConsoleOutput::ReloadFilterConfiguration()
     json filters = parseJsonc(Files::Read(g_SwiftlyCore.GetCorePath() + "/configs/confilter.jsonc"));
 
     std::map<uint64_t, std::unique_ptr<ConsoleFilter>> compiled;
-    uint64_t nextId = m_NextFilterId;
+    uint64_t nextId = 1;
 
     for (auto& [key, value] : filters.items()) {
         PCRE2_SIZE erroffset;
@@ -211,7 +228,6 @@ void CConsoleOutput::ReloadFilterConfiguration()
 
     QueueLockGuard lock(m_FiltersMutex);
     m_Filters = std::move(compiled);
-    m_NextFilterId = nextId;
 }
 
 void CConsoleOutput::ToggleFilter()
@@ -268,18 +284,12 @@ uint64_t CConsoleOutput::AddConsoleListener(std::function<void(const std::string
 
 void CConsoleOutput::RemoveConsoleListener(uint64_t id)
 {
-    bool removedLastListener = false;
-    {
-        QueueLockGuard lock(m_ListenersMutex);
-        if (m_Listeners.erase(id) == 0) return;
+    std::scoped_lock lock(m_ListenersMutex, m_QueueMutex);
+    if (m_Listeners.erase(id) == 0) return;
 
-        const uint32_t previousState = m_WorkState.fetch_sub(LISTENER_INCREMENT, std::memory_order_relaxed);
-        removedLastListener = previousState < LISTENER_INCREMENT * 2;
-    }
-
-    if (removedLastListener)
+    const uint32_t previousState = m_WorkState.fetch_sub(LISTENER_INCREMENT, std::memory_order_relaxed);
+    if (previousState < LISTENER_INCREMENT * 2)
     {
-        QueueLockGuard lock(m_QueueMutex);
         m_QueuedMessages.clear();
         m_HasQueuedMessages.store(false, std::memory_order_release);
     }
@@ -287,12 +297,12 @@ void CConsoleOutput::RemoveConsoleListener(uint64_t id)
 
 void CConsoleOutput::DispatchQueuedListeners()
 {
-    // The idle dispatcher path is a single atomic load with no mutex acquisition.
-    if (!m_HasQueuedMessages.load(std::memory_order_acquire)) return;
+    if (g_ActiveConsoleDispatcher == this) return;
 
     // The worker is the normal consumer. An explicit command-output flush may race it;
     // wait for the active batch so the capture window cannot close too early.
     QueueLockGuard dispatchLock(m_DispatchMutex);
+    ConsoleDispatchScope dispatchScope(this);
 
     // Avoid taking the queue mutex when no console messages were produced.
     if (!m_HasQueuedMessages.exchange(false, std::memory_order_acq_rel)) return;

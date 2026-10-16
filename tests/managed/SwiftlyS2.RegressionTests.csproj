@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>preview</LangVersion>
+    <RegressionSourceRoot Condition="'$(RegressionSourceRoot)' == ''">../../managed/src</RegressionSourceRoot>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(RegressionSourceRoot)/SwiftlyS2.Shared/Natives/Structs/CUtlMemory*.cs" />
+    <Compile Include="$(RegressionSourceRoot)/SwiftlyS2.Shared/Natives/Structs/CUtlVector*.cs" />
+    <Compile Include="$(RegressionSourceRoot)/SwiftlyS2.Shared/Natives/Structs/CUtlLeanVector.cs" />
+    <Compile Include="$(RegressionSourceRoot)/SwiftlyS2.Shared/Natives/Structs/CUtlRBTree*.cs" />
+    <Compile Include="$(RegressionSourceRoot)/SwiftlyS2.Shared/Natives/Structs/CUtlMap*.cs" />
+    <Compile Include="$(RegressionSourceRoot)/SwiftlyS2.Shared/Natives/Structs/CCommand.cs" />
+    <Compile Include="$(RegressionSourceRoot)/SwiftlyS2.Shared/Natives/INativeHandle.cs" />
+    <Compile Include="$(RegressionSourceRoot)/SwiftlyS2.Shared/Modules/Schemas/ISchemaClass.cs" />
+    <Compile Include="$(RegressionSourceRoot)/SwiftlyS2.Shared/Modules/Schemas/ISchemaField.cs" />
+    <Compile Include="$(RegressionSourceRoot)/SwiftlyS2.Shared/Modules/Schemas/SchemaInfo.cs" />
+    <Compile Include="$(RegressionSourceRoot)/SwiftlyS2.Shared/Misc/MemoryHelpers.cs" />
+    <Compile Include="$(RegressionSourceRoot)/SwiftlyS2.Core/Modules/Hooks/HookManager.cs" />
+    <Compile Include="$(RegressionSourceRoot)/SwiftlyS2.Core/Modules/EntitySystem/EntityManager.cs" />
+  </ItemGroup>
+</Project>

@@ -54,10 +54,12 @@ public:
 private:
     void QueueListener(const std::string& event_name);
     void AddEngineListener(const std::string& event_name);
+    void DrainEngineListeners();
 
     QueueMutex m_mtxLock;
     std::set<std::string> m_pendingListeners;
     bool m_bListenersReady = false;
+    bool m_bDrainingListeners = false;
 
     QueueMutex m_mtxRegisteredEvents;
     std::unordered_set<uint32_t> m_registeredEvents;

@@ -19,78 +19,9 @@
 #ifndef src_api_utils_mutex_h
 #define src_api_utils_mutex_h
 
-#include <cstdint>
 #include <mutex>
-#include <queue>
-#include <condition_variable>
 
-class QueueMutex
-{
-public:
-    QueueMutex() : locked(false) {}
-
-    void lock()
-    {
-        std::unique_lock<std::mutex> lk(internal_m);
-
-        if (!locked)
-        {
-            locked = true;
-            return;
-        }
-
-        std::condition_variable cv;
-        waiters.push(&cv);
-
-        cv.wait(lk, [&]
-            { return &cv == waiters.front(); });
-
-        locked = true;
-        waiters.pop();
-    }
-
-    void unlock()
-    {
-        std::lock_guard<std::mutex> lk(internal_m);
-        locked = false;
-        if (!waiters.empty())
-        {
-            waiters.front()->notify_one();
-        }
-    }
-
-    bool try_lock()
-    {
-        std::lock_guard<std::mutex> lk(internal_m);
-        if (!locked)
-        {
-            locked = true;
-            return true;
-        }
-        return false;
-    }
-
-private:
-    std::mutex internal_m;
-    bool locked;
-    std::queue<std::condition_variable*> waiters;
-};
-
-class QueueLockGuard
-{
-public:
-    explicit QueueLockGuard(QueueMutex& m) : mtx(m), owns(true) { mtx.lock(); }
-    ~QueueLockGuard()
-    {
-        if (owns)
-            mtx.unlock();
-    }
-    QueueLockGuard(const QueueLockGuard&) = delete;
-    QueueLockGuard& operator=(const QueueLockGuard&) = delete;
-
-private:
-    QueueMutex& mtx;
-    bool owns;
-};
+using QueueMutex = std::mutex;
+using QueueLockGuard = std::lock_guard<QueueMutex>;
 
 #endif

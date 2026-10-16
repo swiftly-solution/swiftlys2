@@ -1,0 +1,262 @@
+#include <algorithm>
+#include <atomic>
+#include <chrono>
+#include <cstdarg>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <functional>
+#include <iostream>
+#include <map>
+#include <memory>
+#include <semaphore>
+#include <set>
+#include <stdexcept>
+#include <string>
+#include <thread>
+#include <unordered_map>
+#include <vector>
+
+#include <engine/consoleoutput/consoleoutput.h>
+
+static void require(bool condition)
+{
+    if (!condition) throw std::runtime_error("callback assertion failed");
+}
+
+struct ConsoleFilter {};
+CConsoleOutput::CConsoleOutput() = default;
+CConsoleOutput::~CConsoleOutput() = default;
+void CConsoleOutput::ReloadFilterConfiguration() {}
+bool CConsoleOutput::NeedsFiltering(char*) { return false; }
+std::string CConsoleOutput::GetCounterText() { return {}; }
+
+static constexpr int MAX_LOGGING_MESSAGE_LENGTH = 4096;
+static int V_vsnprintf(char* buffer, size_t size, const char* format, va_list arguments)
+{
+    return std::vsnprintf(buffer, size, format, arguments);
+}
+
+static thread_local CConsoleOutput* g_ActiveConsoleDispatcher = nullptr;
+@CONSOLE_SCOPE@
+@CONSOLE_METHODS@
+
+static std::string workshop_map = "old-workshop";
+static std::string current_map = "old-map";
+static QueueMutex g_qmMapLoadQueue;
+
+static std::string read_workshop()
+{
+    QueueLockGuard guard(g_qmMapLoadQueue);
+    return workshop_map;
+}
+
+struct KeyValues
+{
+    const char* GetString(const char* key) { return std::strcmp(key, "levelname") == 0 ? "new-map" : "new-workshop"; }
+    KeyValues* FindKey(const char*) { return this; }
+};
+
+struct Core
+{
+    void OnMapUnload() { require(read_workshop() == "old-workshop"); current_map.clear(); }
+    void OnMapLoad(const char* map) { require(read_workshop() == "new-workshop"); current_map = map; }
+};
+
+static Core g_SwiftlyCore;
+static bool original_loop(void*, KeyValues*, void*) { require(read_workshop() == "old-workshop"); return true; }
+struct LoopHook
+{
+    void* GetOriginal() { return reinterpret_cast<void*>(&original_loop); }
+};
+static LoopHook g_LoopInitHook;
+@MAP_LOAD@
+
+static std::string str_tolower(std::string text)
+{
+    std::transform(text.begin(), text.end(), text.begin(), [](unsigned char character) { return std::tolower(character); });
+    return text;
+}
+
+static void CommandsCallback() {}
+static constexpr int FCVAR_CLIENT_CAN_EXECUTE = 1;
+static constexpr int FCVAR_LINKED_CONCOMMAND = 2;
+static constexpr int FCVAR_SERVER_CAN_EXECUTE = 4;
+
+struct ConCommand
+{
+    static inline std::function<void(const std::string&)> created;
+    static inline std::function<void(const std::string&)> destroyed;
+    std::string name;
+    char* help;
+
+    ConCommand(const char* command_name, void(*)(), char* help_text, int) : name(command_name), help(help_text)
+    {
+        if (created) created(name);
+    }
+    ~ConCommand()
+    {
+        if (destroyed) destroyed(name);
+        std::free(help);
+    }
+    void RemoveFlags(int) {}
+};
+
+class CServerCommands
+{
+public:
+    QueueMutex m_mtxCommands;
+    std::unordered_map<std::string, ConCommand*> m_commands;
+    std::unordered_map<uint64_t, std::string> m_commandNames;
+    uint64_t m_lastCommandId = 0;
+
+    bool ResolveCommandName(std::string& commandName);
+    uint64_t RegisterCommand(std::string commandName, bool registerRaw, std::string helpText);
+    void UnregisterCommand(uint64_t commandId);
+    bool IsCommandRegistered(std::string commandName);
+};
+@COMMAND_METHODS@
+
+static int engine_events;
+static int* g_gameEventManager = &engine_events;
+class CEventManager
+{
+public:
+    QueueMutex m_mtxLock;
+    std::set<std::string> m_pendingListeners;
+    bool m_bListenersReady = false;
+    bool m_bDrainingListeners = false;
+    std::vector<std::string> added;
+
+    void OnServerStartup();
+    void QueueListener(const std::string& event_name);
+    void DrainEngineListeners();
+    void AddEngineListener(const std::string& event_name)
+    {
+        added.push_back(event_name);
+        if (event_name == "outer") QueueListener("inner");
+    }
+};
+@EVENT_METHODS@
+
+static void console_reentry()
+{
+    CConsoleOutput output;
+    std::binary_semaphore finished{0};
+    std::atomic<int> delivered{0};
+    output.AddConsoleListener([&](const std::string& message) {
+        ++delivered;
+        if (message == "outer")
+        {
+            output.ProcessLogMessage("inner", nullptr);
+            output.DispatchQueuedListeners();
+        }
+        else finished.release();
+    });
+    output.Initialize();
+    output.ProcessLogMessage("outer", nullptr);
+    const bool complete = finished.try_acquire_for(std::chrono::seconds(2));
+    output.Shutdown();
+    require(complete && delivered.load() == 2);
+}
+
+static void console_flush()
+{
+    CConsoleOutput output;
+    std::binary_semaphore entered{0};
+    std::binary_semaphore resume{0};
+    output.AddConsoleListener([&](const std::string&) { entered.release(); resume.acquire(); });
+    output.Initialize();
+    output.ProcessLogMessage("blocked", nullptr);
+    require(entered.try_acquire_for(std::chrono::seconds(2)));
+    std::atomic<bool> started{false};
+    std::atomic<bool> flushed{false};
+    std::thread flusher([&] {
+        started.store(true);
+        output.DispatchQueuedListeners();
+        flushed.store(true);
+    });
+    while (!started.load()) std::this_thread::yield();
+    std::this_thread::sleep_for(std::chrono::milliseconds(20));
+    const bool premature = flushed.load();
+    resume.release();
+    flusher.join();
+    output.Shutdown();
+    require(!premature && flushed.load());
+}
+
+static void command_reentry()
+{
+    CServerCommands commands;
+    uint64_t nested = 0;
+    uint64_t replacement = 0;
+    ConCommand::created = [&](const std::string& name) {
+        require(!commands.IsCommandRegistered(name));
+        if (name == "sw_outer") nested = commands.RegisterCommand("inner", false, "inner");
+    };
+    ConCommand::destroyed = [&](const std::string& name) {
+        require(!commands.IsCommandRegistered(name));
+        if (name == "sw_outer") replacement = commands.RegisterCommand("replacement", false, "replacement");
+    };
+    const auto outer = commands.RegisterCommand("outer", false, "outer");
+    require(outer != 0 && nested != 0 && commands.IsCommandRegistered("outer"));
+    commands.UnregisterCommand(outer);
+    require(replacement != 0 && commands.IsCommandRegistered("replacement"));
+    commands.UnregisterCommand(nested);
+    commands.UnregisterCommand(replacement);
+    ConCommand::created = {};
+    ConCommand::destroyed = {};
+}
+
+static void event_reentry()
+{
+    CEventManager events;
+    events.QueueListener("outer");
+    events.OnServerStartup();
+    require(events.added == std::vector<std::string>{"outer", "inner"});
+    std::vector<std::thread> workers;
+    for (int index = 0; index < 32; ++index)
+        workers.emplace_back([&, index] { events.QueueListener("event_" + std::to_string(index)); });
+    for (auto& worker : workers) worker.join();
+    require(events.added.size() == 34);
+    require(std::set<std::string>(events.added.begin(), events.added.end()).size() == 34);
+}
+
+static void command_reservations()
+{
+    CServerCommands commands;
+    std::binary_semaphore entered{0};
+    std::binary_semaphore resume{0};
+    const auto original = commands.RegisterCommand("reserved", false, "reserved");
+    ConCommand::destroyed = [&](const std::string&) {
+        entered.release();
+        resume.acquire();
+    };
+    std::thread remover([&] { commands.UnregisterCommand(original); });
+    entered.acquire();
+    const auto duplicate = commands.RegisterCommand("reserved", false, "duplicate");
+    resume.release();
+    remover.join();
+    ConCommand::destroyed = {};
+    require(duplicate == 0);
+    const auto replacement = commands.RegisterCommand("reserved", false, "replacement");
+    require(replacement != 0);
+    commands.UnregisterCommand(replacement);
+}
+
+int main()
+{
+    console_reentry();
+    std::cout << "PASS console callback reentry\n";
+    console_flush();
+    std::cout << "PASS console flush waits for active callbacks\n";
+    KeyValues map;
+    require(LoopInitHook(nullptr, &map, nullptr));
+    std::cout << "PASS map lifecycle and engine callbacks can read workshop ID\n";
+    command_reentry();
+    std::cout << "PASS command creation and destruction can reenter the registry\n";
+    command_reservations();
+    std::cout << "PASS command names remain reserved until native teardown completes\n";
+    event_reentry();
+    std::cout << "PASS event registration drains concurrent and reentrant listeners\n";
+}

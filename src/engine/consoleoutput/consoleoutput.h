@@ -64,7 +64,6 @@ private:
 
     QueueMutex m_FiltersMutex;
     std::map<uint64_t, std::unique_ptr<ConsoleFilter>> m_Filters;
-    uint64_t m_NextFilterId = 1;
 
     QueueMutex m_ListenersMutex;
     std::map<uint64_t, std::function<void(const std::string&)>> m_Listeners;

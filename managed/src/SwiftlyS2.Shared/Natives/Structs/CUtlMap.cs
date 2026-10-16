@@ -72,6 +72,6 @@ public struct CUtlMap<TKey, TValue, TIndex> : IDisposable
 
     public void Dispose()
     {
-        Purge();
+        Tree.Dispose();
     }
 }

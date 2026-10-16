@@ -286,7 +286,6 @@ std::string current_map = "";
 
 bool LoopInitHook(void* _this, KeyValues* pKeyValues, void* pRegistry)
 {
-    QueueLockGuard lock(g_qmMapLoadQueue);
     if (current_map != "")
     {
         g_SwiftlyCore.OnMapUnload();
@@ -294,16 +293,12 @@ bool LoopInitHook(void* _this, KeyValues* pKeyValues, void* pRegistry)
 
     bool ret = reinterpret_cast<decltype(&LoopInitHook)>(g_LoopInitHook.GetOriginal())(_this, pKeyValues, pRegistry);
 
-    g_SwiftlyCore.OnMapLoad(pKeyValues->GetString("levelname"));
+    {
+        QueueLockGuard lock(g_qmMapLoadQueue);
+        workshop_map = pKeyValues->FindKey("customgamemode") ? pKeyValues->GetString("customgamemode") : "";
+    }
 
-    if (pKeyValues->FindKey("customgamemode"))
-    {
-        workshop_map = pKeyValues->GetString("customgamemode");
-    }
-    else
-    {
-        workshop_map = "";
-    }
+    g_SwiftlyCore.OnMapLoad(pKeyValues->GetString("levelname"));
 
     return ret;
 }

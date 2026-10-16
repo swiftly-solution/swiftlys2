@@ -43,28 +43,38 @@ internal class HookManager
         public bool Hooked { get; set; } = false;
         public required nint Address { get; set; }
         public nint HookHandle { get; set; }
-        public List<MidHookNode> Nodes { get; } = [];
+        public MidHookNode[] Nodes = [];
         public MidHookInternalDelegate? InternalCallback { get; set; } // Keep delegate alive
     }
 
     private readonly ConcurrentDictionary<nint, HookChain> chains = new();
     private readonly ConcurrentDictionary<nint, MidHookChain> midChains = new();
+    private readonly Lock mutationLock = new();
 
     public bool IsMidHooked( nint address )
     {
-        return midChains.TryGetValue(address, out var chain) && chain.Hooked;
+        lock (mutationLock)
+        {
+            return midChains.TryGetValue(address, out var chain) && chain.Hooked;
+        }
     }
 
     public bool IsHooked( nint functionAddress )
     {
-        return chains.TryGetValue(functionAddress, out var chain) && chain.Hooked;
+        lock (mutationLock)
+        {
+            return chains.TryGetValue(functionAddress, out var chain) && chain.Hooked;
+        }
     }
 
     public nint GetOriginal( nint functionAddress )
     {
-        return chains.TryGetValue(functionAddress, out var chain)
-            ? !chain.Hooked ? functionAddress : chain.Nodes.Count == 0 ? chain.OriginalFunctionAddress : chain.Nodes[^1].OriginalFuncPtr
-            : nint.Zero;
+        lock (mutationLock)
+        {
+            return chains.TryGetValue(functionAddress, out var chain)
+                ? !chain.Hooked ? functionAddress : chain.Nodes.Count == 0 ? chain.OriginalFunctionAddress : chain.Nodes[^1].OriginalFuncPtr
+                : nint.Zero;
+        }
     }
 
     public Guid AddMidHook( nint address, MidHookDelegate callback )
@@ -74,11 +84,18 @@ internal class HookManager
             BuiltDelegate = callback,
         };
 
-        if (!midChains.TryGetValue(address, out var chain))
+        lock (mutationLock)
         {
-            chain = new MidHookChain {
+            if (midChains.TryGetValue(address, out var existing))
+            {
+                Volatile.Write(ref existing.Nodes, [.. existing.Nodes, node]);
+                return node.Id;
+            }
+
+            var chain = new MidHookChain {
                 Address = address,
-                HookHandle = NativeHooks.AllocateMHook()
+                HookHandle = NativeHooks.AllocateMHook(),
+                Nodes = [node],
             };
 
             MidHookInternalDelegate internalCallback;
@@ -90,9 +107,9 @@ internal class HookManager
                     try
                     {
                         ref var ctx = ref Unsafe.AsRef<MidHookContext>(contextPtr);
-                        foreach (var n in chain.Nodes)
+                        foreach (var subscriber in Volatile.Read(ref chain.Nodes))
                         {
-                            n.BuiltDelegate(ref ctx);
+                            subscriber.BuiltDelegate(ref ctx);
                         }
                     }
                     catch (Exception e)
@@ -106,15 +123,22 @@ internal class HookManager
             chain.InternalCallback = internalCallback;
             var callbackPtr = Marshal.GetFunctionPointerForDelegate(internalCallback);
 
-            NativeHooks.SetMHook(chain.HookHandle, address, callbackPtr);
-            NativeHooks.EnableMHook(chain.HookHandle);
-
-            chain.Hooked = true;
             midChains[address] = chain;
-        }
+            try
+            {
+                NativeHooks.SetMHook(chain.HookHandle, address, callbackPtr);
+                NativeHooks.EnableMHook(chain.HookHandle);
+                chain.Hooked = true;
+            }
+            catch
+            {
+                _ = midChains.TryRemove(address, out _);
+                NativeHooks.DeallocateMHook(chain.HookHandle);
+                throw;
+            }
 
-        chain.Nodes.Add(node);
-        return node.Id;
+            return node.Id;
+        }
     }
 
     public Guid AddHook( nint functionAddress, Func<Func<nint>, Delegate> callbackBuilder )
@@ -124,56 +148,68 @@ internal class HookManager
             CallbackBuilder = callbackBuilder,
         };
 
-        if (!chains.TryGetValue(functionAddress, out var chain))
+        lock (mutationLock)
         {
-            chain = new HookChain { FunctionAddress = functionAddress };
-            chains[functionAddress] = chain;
-        }
-        chain.Nodes.Add(node);
-        RebuildChain(chain);
+            if (!chains.TryGetValue(functionAddress, out var chain))
+            {
+                chain = new HookChain { FunctionAddress = functionAddress };
+                chains[functionAddress] = chain;
+            }
+            var previousNodes = chain.Nodes.ToArray();
+            chain.Nodes.Add(node);
+            RebuildChain(chain, previousNodes);
 
-        return node.Id;
+            return node.Id;
+        }
     }
 
     public void RemoveMidHook( List<Guid> nodeIds )
     {
-        midChains.Values.Where(c => c.Nodes.Any(n => nodeIds.Contains(n.Id))).ToList().ForEach(chain =>
+        lock (mutationLock)
         {
-            _ = chain.Nodes.RemoveAll(n => nodeIds.Contains(n.Id));
-        });
+            foreach (var chain in midChains.Values)
+                Volatile.Write(ref chain.Nodes, chain.Nodes.Where(node => !nodeIds.Contains(node.Id)).ToArray());
+        }
     }
 
     public void Remove( List<Guid> nodeIds )
     {
-        chains.Values.Where(c => c.Nodes.Any(n => nodeIds.Contains(n.Id))).ToList().ForEach(chain =>
+        lock (mutationLock)
         {
-            _ = chain.Nodes.RemoveAll(n => nodeIds.Contains(n.Id));
-            RebuildChain(chain);
-        });
+            foreach (var chain in chains.Values)
+            {
+                var previousNodes = chain.Nodes.ToArray();
+                if (chain.Nodes.RemoveAll(node => nodeIds.Contains(node.Id)) > 0)
+                    RebuildChain(chain, previousNodes);
+            }
+        }
     }
 
-    private void RebuildChain( HookChain chain )
+    private void RebuildChain( HookChain chain, HookNode[] previousNodes )
     {
+        var previousDelegates = previousNodes.Select(node => node.BuiltDelegate).ToArray();
         try
         {
             // Rebuild delegates from first to last, wiring each to previous pointer (or original for first)
             if (chain.Hooked)
             {
-                for (var i = 0; i < chain.Nodes.Count; i++)
+                for (var index = previousNodes.Length - 1; index >= 0; index--)
                 {
-                    chain.Nodes[i].BuiltDelegate = null;
-                    chain.Nodes[i].BuiltPointer = nint.Zero;
-                    if (chain.Nodes[i].HookHandle != 0)
+                    var previous = previousNodes[index];
+                    if (previous.HookHandle != 0)
                     {
-                        NativeHooks.DeallocateHook(chain.Nodes[i].HookHandle);
-                        chain.Nodes[i].HookHandle = 0;
+                        NativeHooks.DeallocateHook(previous.HookHandle);
+                        previous.HookHandle = 0;
                     }
+                    previous.BuiltDelegate = null;
+                    previous.BuiltPointer = nint.Zero;
                 }
                 chain.OriginalFunctionAddress = 0;
                 NativeHooks.DeallocateHook(chain.HookHandle);
                 chain.HookHandle = 0;
                 chain.Hooked = false;
             }
+            if (chain.Nodes.Count == 0) return;
             chain.HookHandle = NativeHooks.AllocateHook();
 
             for (var i = 0; i < chain.Nodes.Count; i++)
@@ -204,6 +240,10 @@ internal class HookManager
         {
             if (!GlobalExceptionHandler.Handle(ref e)) return;
             AnsiConsole.WriteException(e);
+        }
+        finally
+        {
+            GC.KeepAlive(previousDelegates);
         }
     }
 }

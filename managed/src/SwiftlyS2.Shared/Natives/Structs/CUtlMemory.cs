@@ -49,12 +49,13 @@ public struct CUtlMemory<T>
 
     public void Init( int growSize, int initSize )
     {
+        ArgumentOutOfRangeException.ThrowIfNegative(initSize);
         Purge();
 
         _growSize = (uint)(growSize & ~(int)(BufferMarkers.ExternalBufferMarker | BufferMarkers.ExternalConstBufferMarker));
         _allocationCount = (uint)initSize;
         if (initSize > 0)
-            _memory = NativeAllocator.Alloc((nuint)(initSize * ElementSize));
+            _memory = NativeAllocator.Alloc(checked((ulong)initSize * (ulong)ElementSize));
     }
 
     public void Purge()
@@ -62,8 +63,8 @@ public struct CUtlMemory<T>
         if (_memory != 0 && !ExternallyAllocated)
         {
             NativeAllocator.Free(_memory);
-            _memory = 0;
         }
+        _memory = 0;
         _allocationCount = 0;
         _growSize = 0;
     }
@@ -110,6 +111,7 @@ public struct CUtlMemory<T>
 
     public void SetExternalBuffer( nint memory, int numelements, bool readOnly )
     {
+        ArgumentOutOfRangeException.ThrowIfNegative(numelements);
         Purge();
 
         _memory = memory;
@@ -119,6 +121,7 @@ public struct CUtlMemory<T>
 
     public void AssumeMemory( nint memory, int numelements )
     {
+        ArgumentOutOfRangeException.ThrowIfNegative(numelements);
         Purge();
 
         _memory = memory;
@@ -139,7 +142,9 @@ public struct CUtlMemory<T>
 
     public void Grow( int num )
     {
-        if (IsReadOnly) return;
+        ArgumentOutOfRangeException.ThrowIfNegative(num);
+        if (num == 0) return;
+        ThrowIfReadOnly();
         if (_allocationCount + num > int.MaxValue)
         {
             ExternDLL.UtlVectorMemory_FailedAllocation((int)_allocationCount, num);
@@ -172,8 +177,9 @@ public struct CUtlMemory<T>
 
     public void EnsureCapacity( int num )
     {
+        ArgumentOutOfRangeException.ThrowIfNegative(num);
         if (_allocationCount >= num) return;
-        if (IsReadOnly) return;
+        ThrowIfReadOnly();
 
         _memory = ExternDLL.UtlVectorMemory_Alloc(_memory, !ExternallyAllocated, num * ElementSize, (int)(_allocationCount * ElementSize));
         _allocationCount = (uint)num;
@@ -188,27 +194,15 @@ public struct CUtlMemory<T>
 
     public bool IsValidIndex( int index ) => (uint)index < _allocationCount && index >= 0;
 
+    internal void ThrowIfReadOnly()
+    {
+        if (IsReadOnly) throw new InvalidOperationException("The buffer is read-only.");
+    }
+
     public ref T this[int index] {
         get {
-            unsafe
-            {
-                if (SchemaInfo.IsSchemaClass<T>())
-                {
-                    var address = (nint)((byte*)_memory + int.CreateChecked(index * ElementSize));
-                    var tType = typeof(T);
-
-                    var schemaClassType = $"SwiftlyS2.Core.SchemaDefinitions.{tType.Name}Impl";
-                    var implType = tType.Assembly.GetType(schemaClassType);
-                    if (implType == null) throw new InvalidOperationException($"Could not find implementation type {schemaClassType} for schema class {tType.FullName}");
-
-                    var obj = new[] { (T)Activator.CreateInstance(implType, [address])! };
-                    return ref obj[0];
-                }
-                else
-                {
-                    return ref Unsafe.AsRef<T>((byte*)_memory + int.CreateChecked(index * ElementSize));
-                }
-            }
+            if (!IsValidIndex(index)) throw new IndexOutOfRangeException();
+            return ref NativeElement<T>.At(_memory + checked((nint)index * ElementSize));
         }
     }
 
@@ -216,4 +210,25 @@ public struct CUtlMemory<T>
     public bool IsReadOnly => (_growSize & (int)BufferMarkers.ExternalConstBufferMarker) != 0;
     public nint Base => _memory;
     public int Count => (int)_allocationCount;
+}
+
+internal static class NativeElement<T>
+{
+    internal static unsafe ref T At( nint address )
+    {
+        if (SchemaInfo.IsSchemaClass<T>())
+        {
+            var type = typeof(T);
+            var implementationName = $"SwiftlyS2.Core.SchemaDefinitions.{type.Name}Impl";
+            var implementation = type.Assembly.GetType(implementationName)
+                ?? throw new InvalidOperationException($"Could not find implementation type {implementationName} for schema class {type.FullName}");
+            var wrapper = new[] { (T)Activator.CreateInstance(implementation, [address])! };
+            return ref wrapper[0];
+        }
+
+        if (RuntimeHelpers.IsReferenceOrContainsReferences<T>())
+            throw new NotSupportedException($"{typeof(T)} cannot be stored directly in native memory.");
+
+        return ref Unsafe.AsRef<T>((void*)address);
+    }
 }

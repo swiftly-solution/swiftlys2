@@ -354,7 +354,12 @@ extern void* g_pOnClientKeyStateChangedCallback;
 
 void CPlayer::Think()
 {
-    const bool showMenu = !centerMenuText.empty();
+    std::string menuText;
+    {
+        QueueLockGuard lock(centerMenuMutex);
+        menuText = centerMenuText;
+    }
+    const bool showMenu = !menuText.empty();
     const bool showMessage = !showMenu && centerMessageEndTime >= GetTime();
 
     if (!showMenu && !showMessage)
@@ -366,7 +371,7 @@ void CPlayer::Think()
         if(!centerMessageEvent)
             centerMessageEvent = g_pGameEventManager->GetGameEventManager()->CreateEvent("show_survival_respawn_status");
             
-        centerMessageEvent->SetString("loc_token", (showMenu ? centerMenuText : centerMessageText).c_str());
+        centerMessageEvent->SetString("loc_token", (showMenu ? menuText : centerMessageText).c_str());
         centerMessageEvent->SetInt("duration", 1);
         centerMessageEvent->SetInt("userid", m_iPlayerId);
         SendGameEvent(centerMessageEvent);

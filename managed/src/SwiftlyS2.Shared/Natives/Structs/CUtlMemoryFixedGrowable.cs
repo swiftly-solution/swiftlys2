@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 namespace SwiftlyS2.Shared.Natives;
 
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct CUtlMemoryFixedGrowable<T, TBuffer>
+public unsafe struct CUtlMemoryFixedGrowable<T, TBuffer> : IDisposable
     where T : unmanaged
     where TBuffer : unmanaged
 {
@@ -13,11 +13,15 @@ public unsafe struct CUtlMemoryFixedGrowable<T, TBuffer>
 
     public CUtlMemoryFixedGrowable( int size, int growSize = 0 )
     {
-        memory = new CUtlMemory<T>((nint)Unsafe.AsPointer(ref fixedMemory), size, false);
+        ArgumentOutOfRangeException.ThrowIfNegative(size);
+        if (size > Unsafe.SizeOf<TBuffer>() / sizeof(T)) throw new ArgumentOutOfRangeException(nameof(size));
+        memory = new CUtlMemory<T>(growSize, size);
     }
 
     public readonly nint Base => memory.Base;
     public readonly int AllocationCount => memory.Count;
+
+    public void Dispose() => memory.Purge();
 }
 
 [InlineArray(512)]

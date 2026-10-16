@@ -8,20 +8,19 @@ internal static class EntityManager
     private static readonly CEntityInstance?[] _Entities = new CEntityInstance?[1 << 15];
     private static readonly List<uint> _ActiveEntityIndices = [];
     private static readonly Dictionary<nint, uint> _PtrToIndex = [];
-    private static readonly CEntityInstanceImpl _Dummy = new(0);
     private static readonly Lock _lock = new();
 
     public static CEntityInstance OnEntityCreated( nint entityPtr )
     {
-        var ent = GetEntityByAddress(entityPtr);
-        if (ent != null) return ent;
-
-        _Dummy.DangerousSetHandle(entityPtr);
-        var index = _Dummy.Index;
-        var designerName = _Dummy.DesignerName;
-        var entity = ClassConvertor.ConvertEntityByDesignerName(entityPtr, designerName);
         lock (_lock)
         {
+            if (_PtrToIndex.TryGetValue(entityPtr, out var existingIndex))
+                return _Entities[existingIndex]!;
+
+            var dummy = new CEntityInstanceImpl(entityPtr);
+            var index = dummy.Index;
+            var designerName = dummy.DesignerName;
+            var entity = ClassConvertor.ConvertEntityByDesignerName(entityPtr, designerName);
             try
             {
                 _Entities[index] = entity;
@@ -89,7 +88,7 @@ internal static class EntityManager
         {
             try
             {
-                return _ActiveEntityIndices.Select(index => _Entities[index]!);
+                return _ActiveEntityIndices.Select(index => _Entities[index]!).ToArray();
             }
             catch
             {

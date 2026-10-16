@@ -132,15 +132,15 @@ void StartupServerEventHook(void* _this, const GameSessionConfiguration_t& confi
 
 void CEventManager::OnServerStartup()
 {
-    QueueLockGuard lock(m_mtxLock);
-    if (!g_gameEventManager || m_bListenersReady) return;
+    {
+        QueueLockGuard lock(m_mtxLock);
+        if (!g_gameEventManager || m_bListenersReady) return;
+        m_bListenersReady = true;
+        if (m_bDrainingListeners) return;
+        m_bDrainingListeners = true;
+    }
 
-    m_bListenersReady = true;
-
-    for (const auto& event_name : m_pendingListeners)
-        AddEngineListener(event_name);
-
-    m_pendingListeners.clear();
+    DrainEngineListeners();
 }
 
 void CEventManager::RegisterGameEventListener(std::string event_name)
@@ -184,14 +184,45 @@ void CEventManager::FireGameEvent(IGameEvent* event) {}
 
 void CEventManager::QueueListener(const std::string& event_name)
 {
-    QueueLockGuard lock(m_mtxLock);
-    if (!m_bListenersReady)
     {
+        QueueLockGuard lock(m_mtxLock);
         m_pendingListeners.insert(event_name);
-        return;
+        if (!m_bListenersReady || m_bDrainingListeners) return;
+        m_bDrainingListeners = true;
     }
 
-    AddEngineListener(event_name);
+    DrainEngineListeners();
+}
+
+void CEventManager::DrainEngineListeners()
+{
+    std::set<std::string> pending;
+    try
+    {
+        while (true)
+        {
+            {
+                QueueLockGuard lock(m_mtxLock);
+                if (m_pendingListeners.empty())
+                {
+                    m_bDrainingListeners = false;
+                    return;
+                }
+                pending.swap(m_pendingListeners);
+            }
+
+            for (const auto& event_name : pending)
+                AddEngineListener(event_name);
+            pending.clear();
+        }
+    }
+    catch (...)
+    {
+        QueueLockGuard lock(m_mtxLock);
+        m_pendingListeners.merge(pending);
+        m_bDrainingListeners = false;
+        throw;
+    }
 }
 
 bool bInitializedEvents = false;
@@ -220,10 +251,12 @@ void CEventManager::AddEngineListener(const std::string& event_name)
 
 int CEventManager::GetGameEventListenerID(std::string event_name)
 {
+    QueueLockGuard lock(m_mtxLock);
     return m_eventListenerIDs.contains(event_name) ? m_eventListenerIDs[event_name] : -1;
 }
 
 void CEventManager::RegisterGameEventListenerID(std::string event_name, int id)
 {
+    QueueLockGuard lock(m_mtxLock);
     m_eventListenerIDs[event_name] = id;
 }

@@ -1,4 +1,6 @@
+using System.Collections.Concurrent;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace SwiftlyS2.Shared.Natives;
@@ -26,22 +28,26 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
 
     public CUtlRBTree( TKey growSize, TKey initSize, LessFunc func )
     {
-        LFunc = Marshal.GetFunctionPointerForDelegate(func);
+        ArgumentNullException.ThrowIfNull(func);
+        LFunc = 0;
         Elements = new CUtlLeanVector<CUtlRBTreeNode<TKey, TValue>, TKey>(growSize, initSize);
         Root = -TKey.One;
         NumElements = TKey.Zero;
         FirstFree = -TKey.One;
         LastAlloc = new(-TKey.One);
+        try
+        {
+            SetLessFunc(func);
+        }
+        catch
+        {
+            Elements.Purge();
+            throw;
+        }
     }
 
-    public CUtlRBTree( LessFunc func )
+    public CUtlRBTree( LessFunc func ) : this(TKey.Zero, TKey.Zero, func)
     {
-        LFunc = Marshal.GetFunctionPointerForDelegate(func);
-        Elements = new CUtlLeanVector<CUtlRBTreeNode<TKey, TValue>, TKey>(TKey.Zero, TKey.Zero);
-        Root = -TKey.One;
-        NumElements = TKey.Zero;
-        FirstFree = -TKey.One;
-        LastAlloc = new(-TKey.One);
     }
 
     public void EnsureCapacity( TKey num )
@@ -53,8 +59,8 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
     public ref TKey Parent( TKey i ) => ref Links(i).Parent;
     public ref TKey LeftChild( TKey i ) => ref Links(i).Left;
     public ref TKey RightChild( TKey i ) => ref Links(i).Right;
-    public bool IsLeftChild( TKey i ) => LeftChild(Parent(i)) == i;
-    public bool IsRightChild( TKey i ) => RightChild(Parent(i)) == i;
+    public bool IsLeftChild( TKey i ) => i != InvalidIndex() && Parent(i) != InvalidIndex() && LeftChild(Parent(i)) == i;
+    public bool IsRightChild( TKey i ) => i != InvalidIndex() && Parent(i) != InvalidIndex() && RightChild(Parent(i)) == i;
     public bool IsRoot( TKey i ) => Root == i;
     public bool IsLeaf( TKey i ) => LeftChild(i) == -TKey.One && RightChild(i) == -TKey.One;
     public bool IsValidIndex( TKey i )
@@ -191,6 +197,8 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
                     {
                         elem = parent;
                         RotateLeft(elem);
+                        parent = Parent(elem);
+                        grandparent = Parent(parent);
                     }
 
                     SetColor(parent, NodeColor_t.BLACK);
@@ -214,6 +222,8 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
                     {
                         elem = parent;
                         RotateRight(elem);
+                        parent = Parent(elem);
+                        grandparent = Parent(parent);
                     }
 
                     SetColor(parent, NodeColor_t.BLACK);
@@ -258,9 +268,17 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
 
     public void RemoveRebalance( TKey elem )
     {
+        RemoveRebalance(elem, elem == InvalidIndex() ? InvalidIndex() : Parent(elem));
+    }
+
+    private TKey LeftOf( TKey index ) => index == InvalidIndex() ? InvalidIndex() : LeftChild(index);
+    private TKey RightOf( TKey index ) => index == InvalidIndex() ? InvalidIndex() : RightChild(index);
+
+    private void RemoveRebalance( TKey elem, TKey parent )
+    {
         while (elem != Root && IsBlack(elem))
         {
-            TKey parent = Parent(elem);
+            if (parent == InvalidIndex()) break;
 
             if (elem == LeftChild(parent))
             {
@@ -271,29 +289,28 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
                     SetColor(parent, NodeColor_t.RED);
                     RotateLeft(parent);
 
-                    parent = Parent(elem);
                     sibling = RightChild(parent);
                 }
-                if (IsBlack(LeftChild(sibling)) && IsBlack(RightChild(sibling)))
+                if (IsBlack(LeftOf(sibling)) && IsBlack(RightOf(sibling)))
                 {
                     if (sibling != InvalidIndex())
                         SetColor(sibling, NodeColor_t.RED);
                     elem = parent;
+                    parent = Parent(elem);
                 }
                 else
                 {
-                    if (IsBlack(RightChild(sibling)))
+                    if (IsBlack(RightOf(sibling)))
                     {
-                        SetColor(LeftChild(sibling), NodeColor_t.BLACK);
+                        SetColor(LeftOf(sibling), NodeColor_t.BLACK);
                         SetColor(sibling, NodeColor_t.RED);
                         RotateRight(sibling);
 
-                        parent = Parent(elem);
                         sibling = RightChild(parent);
                     }
                     SetColor(sibling, Color(parent));
                     SetColor(parent, NodeColor_t.BLACK);
-                    SetColor(RightChild(sibling), NodeColor_t.BLACK);
+                    SetColor(RightOf(sibling), NodeColor_t.BLACK);
                     RotateLeft(parent);
                     elem = Root;
                 }
@@ -307,29 +324,28 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
                     SetColor(parent, NodeColor_t.RED);
                     RotateRight(parent);
 
-                    parent = Parent(elem);
                     sibling = LeftChild(parent);
                 }
-                if (IsBlack(RightChild(sibling)) && IsBlack(LeftChild(sibling)))
+                if (IsBlack(RightOf(sibling)) && IsBlack(LeftOf(sibling)))
                 {
                     if (sibling != InvalidIndex())
                         SetColor(sibling, NodeColor_t.RED);
                     elem = parent;
+                    parent = Parent(elem);
                 }
                 else
                 {
-                    if (IsBlack(LeftChild(sibling)))
+                    if (IsBlack(LeftOf(sibling)))
                     {
-                        SetColor(RightChild(sibling), NodeColor_t.BLACK);
+                        SetColor(RightOf(sibling), NodeColor_t.BLACK);
                         SetColor(sibling, NodeColor_t.RED);
                         RotateLeft(sibling);
 
-                        parent = Parent(elem);
                         sibling = LeftChild(parent);
                     }
                     SetColor(sibling, Color(parent));
                     SetColor(parent, NodeColor_t.BLACK);
-                    SetColor(LeftChild(sibling), NodeColor_t.BLACK);
+                    SetColor(LeftOf(sibling), NodeColor_t.BLACK);
                     RotateRight(parent);
                     elem = Root;
                 }
@@ -340,65 +356,60 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
 
     public void Unlink( TKey elem )
     {
-        if (elem != InvalidIndex())
+        if (elem == InvalidIndex()) return;
+
+        var removed = elem;
+        var removedColor = Color(removed);
+        TKey replacement;
+        TKey replacementParent;
+
+        if (LeftChild(elem) == InvalidIndex())
         {
-            TKey x, y;
-
-            if ((LeftChild(elem) == InvalidIndex()) ||
-                (RightChild(elem) == InvalidIndex()))
-            {
-                y = elem;
-            }
-            else
-            {
-                y = RightChild(elem);
-                while (LeftChild(y) != InvalidIndex())
-                    y = LeftChild(y);
-            }
-
-            if (LeftChild(y) != InvalidIndex())
-                x = LeftChild(y);
-            else
-                x = RightChild(y);
-
-            if (x != InvalidIndex())
-                SetParent(x, Parent(y));
-            if (!IsRoot(y))
-            {
-                if (IsLeftChild(y))
-                    SetLeftChild(Parent(y), x);
-                else
-                    SetRightChild(Parent(y), x);
-            }
-            else
-                Root = x;
-
-            NodeColor_t ycolor = Color(y);
-            if (y != elem)
-            {
-                SetParent(y, Parent(elem));
-                SetRightChild(y, RightChild(elem));
-                SetLeftChild(y, LeftChild(elem));
-
-                if (!IsRoot(elem))
-                    if (IsLeftChild(elem))
-                        SetLeftChild(Parent(elem), y);
-                    else
-                        SetRightChild(Parent(elem), y);
-                else
-                    Root = y;
-
-                if (LeftChild(y) != InvalidIndex())
-                    SetParent(LeftChild(y), y);
-                if (RightChild(y) != InvalidIndex())
-                    SetParent(RightChild(y), y);
-
-                SetColor(y, Color(elem));
-            }
-
-            if ((x != InvalidIndex()) && (ycolor == NodeColor_t.BLACK))
-                RemoveRebalance(x);
+            replacement = RightChild(elem);
+            replacementParent = Parent(elem);
+            Transplant(elem, replacement);
         }
+        else if (RightChild(elem) == InvalidIndex())
+        {
+            replacement = LeftChild(elem);
+            replacementParent = Parent(elem);
+            Transplant(elem, replacement);
+        }
+        else
+        {
+            removed = NextInorder(elem);
+            removedColor = Color(removed);
+            replacement = RightChild(removed);
+            if (Parent(removed) == elem)
+            {
+                replacementParent = removed;
+                if (replacement != InvalidIndex()) SetParent(replacement, removed);
+            }
+            else
+            {
+                replacementParent = Parent(removed);
+                Transplant(removed, replacement);
+                SetRightChild(removed, RightChild(elem));
+                SetParent(RightChild(removed), removed);
+            }
+            Transplant(elem, removed);
+            SetLeftChild(removed, LeftChild(elem));
+            SetParent(LeftChild(removed), removed);
+            SetColor(removed, Color(elem));
+        }
+
+        if (removedColor == NodeColor_t.BLACK)
+            RemoveRebalance(replacement, replacementParent);
+    }
+
+    private void Transplant( TKey previous, TKey replacement )
+    {
+        var parent = Parent(previous);
+        if (parent == InvalidIndex()) Root = replacement;
+        else if (LeftChild(parent) == previous) SetLeftChild(parent, replacement);
+        else SetRightChild(parent, replacement);
+
+        if (replacement != InvalidIndex()) SetParent(replacement, parent);
     }
 
     public void Link( TKey elem )
@@ -415,23 +426,19 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
     {
         parent = InvalidIndex();
         leftchild = false;
-        unsafe
+        var current = Root;
+        while (IsValidIndex(current))
         {
-            var @delegate = (delegate*< ref TValue, ref TValue, bool >)LFunc;
-            var current = Root;
-            while (IsValidIndex(current))
+            parent = current;
+            if (Less(ref val, ref this[current]))
             {
-                parent = current;
-                if (!@delegate(ref val, ref this[current]))
-                {
-                    leftchild = true;
-                    current = LeftChild(current);
-                }
-                else
-                {
-                    leftchild = false;
-                    current = RightChild(current);
-                }
+                leftchild = true;
+                current = LeftChild(current);
+            }
+            else
+            {
+                leftchild = false;
+                current = RightChild(current);
             }
         }
     }
@@ -458,23 +465,19 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
     public TKey Find( TValue value )
     {
         TKey current = Root;
-        unsafe
+        while (IsValidIndex(current))
         {
-            var @delegate = (delegate*< ref TValue, ref TValue, bool >)LFunc;
-            while (IsValidIndex(current))
+            if (Less(ref value, ref this[current]))
             {
-                if (@delegate(ref value, ref this[current]))
-                {
-                    current = LeftChild(current);
-                }
-                else if (@delegate(ref this[current], ref value))
-                {
-                    current = RightChild(current);
-                }
-                else
-                {
-                    return current;
-                }
+                current = LeftChild(current);
+            }
+            else if (Less(ref this[current], ref value))
+            {
+                current = RightChild(current);
+            }
+            else
+            {
+                return current;
             }
         }
 
@@ -495,7 +498,7 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
                 FirstFree = i;
             }
 
-            Elements[i] = default;
+            Elements[i].Data = default!;
             if (i == LastAlloc.Index)
                 break;
         }
@@ -515,6 +518,8 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
     public void Dispose()
     {
         Purge();
+        NativeRBTreeComparers.Release(LFunc);
+        LFunc = 0;
     }
 
     public TKey FirstInorder()
@@ -695,7 +700,26 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
 
     public void SetLessFunc( LessFunc func )
     {
-        LFunc = Marshal.GetFunctionPointerForDelegate(func);
+        ArgumentNullException.ThrowIfNull(func);
+        unsafe
+        {
+            NativeRBTreeLessFunc callback = (left, right) => func(
+                ref Unsafe.AsRef<TValue>((void*)left),
+                ref Unsafe.AsRef<TValue>((void*)right)) ? (byte)1 : (byte)0;
+            var pointer = NativeRBTreeComparers.Register(callback);
+            NativeRBTreeComparers.Release(LFunc);
+            LFunc = pointer;
+        }
+    }
+
+    private unsafe bool Less( ref TValue left, ref TValue right )
+    {
+        if (LFunc == 0) throw new InvalidOperationException("The tree has no comparison function.");
+        fixed (byte* leftPointer = &Unsafe.As<TValue, byte>(ref left))
+        fixed (byte* rightPointer = &Unsafe.As<TValue, byte>(ref right))
+        {
+            return ((delegate* unmanaged[Cdecl]<nint, nint, byte>)LFunc)((nint)leftPointer, (nint)rightPointer) != 0;
+        }
     }
 
     public TKey Insert( TValue val )
@@ -719,4 +743,21 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
     public ref TValue this[TKey i] => ref Elements[i].Data;
     public readonly uint Count => uint.CreateChecked(NumElements);
     public TKey MaxElement => TKey.CreateChecked(Elements.NumAllocated);
+}
+
+[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+internal delegate byte NativeRBTreeLessFunc( nint left, nint right );
+
+internal static class NativeRBTreeComparers
+{
+    private static readonly ConcurrentDictionary<nint, NativeRBTreeLessFunc> callbacks = new();
+
+    internal static nint Register( NativeRBTreeLessFunc callback )
+    {
+        var pointer = Marshal.GetFunctionPointerForDelegate(callback);
+        callbacks[pointer] = callback;
+        return pointer;
+    }
+
+    internal static void Release( nint pointer ) => callbacks.TryRemove(pointer, out _);
 }

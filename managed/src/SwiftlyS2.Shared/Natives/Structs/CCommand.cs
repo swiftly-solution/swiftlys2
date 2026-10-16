@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 namespace SwiftlyS2.Shared.Natives;
 
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct CCommand
+public unsafe struct CCommand : IDisposable
 {
     private enum COMMAND : int
     {
@@ -84,6 +84,14 @@ public unsafe struct CCommand
     }
 
     public static int MaxCommandLength() => (int)COMMAND.MAX_LENGTH - 1;
+
+    public void Dispose()
+    {
+        argv0Size = 0;
+        args.Dispose();
+        argvBuffer.Dispose();
+        argSBuffer.Dispose();
+    }
 
     public bool Tokenize( string commandString )
     {

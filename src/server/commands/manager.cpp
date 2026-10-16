@@ -25,6 +25,7 @@
 
 #include <algorithm>
 #include <cstdio>
+#include <memory>
 #include <public/icvar.h>
 
 void DispatchConCommand(void* thisPtr, ConCommandRef cmd, const CCommandContext& ctx, const CCommand& args);
@@ -61,11 +62,11 @@ void CServerCommands::LoadPrefixes()
 
 bool CServerCommands::ResolveCommandName(std::string& commandName)
 {
-    if (m_commands.contains(commandName))
+    if (auto found = m_commands.find(commandName); found != m_commands.end() && found->second)
         return true;
 
     std::string prefixedName = "sw_" + commandName;
-    if (!m_commands.contains(prefixedName))
+    if (auto found = m_commands.find(prefixedName); found == m_commands.end() || !found->second)
         return false;
 
     commandName = std::move(prefixedName);
@@ -172,26 +173,32 @@ uint64_t CServerCommands::RegisterCommand(std::string commandName, bool register
 {
     commandName = str_tolower(commandName);
 
-    QueueLockGuard lock(m_mtxCommands);
-    if (!registerRaw)
     {
-        if (m_commands.contains(commandName))
+        QueueLockGuard lock(m_mtxCommands);
+        if (!registerRaw)
         {
-            return 0;
+            if (m_commands.contains(commandName)) return 0;
+            commandName.insert(0, "sw_");
         }
 
-        commandName.insert(0, "sw_");
+        if (!m_commands.emplace(commandName, nullptr).second) return 0;
     }
 
-    if (m_commands.contains(commandName))
+    std::unique_ptr<ConCommand> conCommand;
+    try
     {
-        return 0;
+        conCommand = std::make_unique<ConCommand>(commandName.c_str(), CommandsCallback, strdup(helpText.c_str()), FCVAR_CLIENT_CAN_EXECUTE | FCVAR_LINKED_CONCOMMAND);
+        conCommand->RemoveFlags(FCVAR_SERVER_CAN_EXECUTE);
+    }
+    catch (...)
+    {
+        QueueLockGuard lock(m_mtxCommands);
+        m_commands.erase(commandName);
+        throw;
     }
 
-    auto* conCommand = new ConCommand(commandName.c_str(), CommandsCallback, strdup(helpText.c_str()), FCVAR_CLIENT_CAN_EXECUTE | FCVAR_LINKED_CONCOMMAND);
-    conCommand->RemoveFlags(FCVAR_SERVER_CAN_EXECUTE);
-
-    m_commands[commandName] = conCommand;
+    QueueLockGuard lock(m_mtxCommands);
+    m_commands[commandName] = conCommand.release();
     m_commandNames[++m_lastCommandId] = commandName;
     return m_lastCommandId;
 }
@@ -203,22 +210,25 @@ void CServerCommands::SetCommandHandler(CommandHandler handler)
 
 void CServerCommands::UnregisterCommand(uint64_t commandId)
 {
+    ConCommand* command = nullptr;
+    std::string commandName;
+    {
+        QueueLockGuard lock(m_mtxCommands);
+        auto nameIt = m_commandNames.find(commandId);
+        if (nameIt == m_commandNames.end()) return;
+
+        commandName = nameIt->second;
+        auto commandIt = m_commands.find(commandName);
+        if (commandIt != m_commands.end())
+        {
+            command = commandIt->second;
+            commandIt->second = nullptr;
+        }
+        m_commandNames.erase(nameIt);
+    }
+    delete command;
     QueueLockGuard lock(m_mtxCommands);
-
-    auto nameIt = m_commandNames.find(commandId);
-    if (nameIt == m_commandNames.end())
-    {
-        return;
-    }
-
-    auto commandIt = m_commands.find(nameIt->second);
-    if (commandIt != m_commands.end())
-    {
-        delete commandIt->second;
-        m_commands.erase(commandIt);
-    }
-
-    m_commandNames.erase(nameIt);
+    m_commands.erase(commandName);
 }
 
 bool CServerCommands::IsCommandRegistered(std::string commandName)

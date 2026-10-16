@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Numerics;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared.Misc;
@@ -40,7 +39,8 @@ public struct CUtlLeanVector<T, I>
 
     public int ElementSize => SchemaInfo.Get<T>();
 
-    private I ExternalBufferMarker => I.One << ((Marshal.SizeOf<I>() * 8) - 1);
+    private static I ExternalBufferMarker => I.One << ((Marshal.SizeOf<I>() * 8) - (I.MinValue < I.Zero ? 2 : 1));
+    private static int MaxAllocationCount => int.CreateSaturating(ExternalBufferMarker - I.One);
 
     /// <summary>
     /// Please use <see cref="ManagedCUtlLeanVector{T, I}"/> instead to construct it.
@@ -48,8 +48,9 @@ public struct CUtlLeanVector<T, I>
     /// </summary>
     public CUtlLeanVector( I growSize, I initSize )
     {
-        Count = (I)(object)0;
-        Allocated = (I)(object)0;
+        Count = I.Zero;
+        Allocated = I.Zero;
+        Elements = 0;
         EnsureCapacity(int.CreateChecked(initSize), true);
     }
 
@@ -59,6 +60,7 @@ public struct CUtlLeanVector<T, I>
     /// </summary>
     public CUtlLeanVector( nint memory, I allocationCount, I numElements )
     {
+        ValidateBuffer(allocationCount, numElements);
         Count = numElements;
         Allocated = allocationCount | ExternalBufferMarker;
         Elements = memory;
@@ -66,35 +68,34 @@ public struct CUtlLeanVector<T, I>
 
     public void EnsureCapacity( int num, bool force )
     {
+        ArgumentOutOfRangeException.ThrowIfNegative(num);
+        if (num > MaxAllocationCount) throw new ArgumentOutOfRangeException(nameof(num));
         if (num <= NumAllocated)
             return;
 
-        I minAllocated = I.CreateChecked((31 + ElementSize - 1) / ElementSize);
-        I maxAllocated = I.MaxValue;
-        if (I.CreateChecked(num) > maxAllocated)
-            throw new ArgumentOutOfRangeException(nameof(num), $"num {num} exceeds max {maxAllocated}");
-
-        I newAllocated = I.CreateChecked(num);
+        var minAllocated = (31 + ElementSize - 1) / ElementSize;
+        var newAllocated = num;
         if (!force)
-            newAllocated = I.CreateChecked(MemoryHelpers.CalcNewDoublingCount(NumAllocated, num, int.CreateChecked(minAllocated), int.CreateChecked(maxAllocated)));
+            newAllocated = MemoryHelpers.CalcNewDoublingCount(NumAllocated, num, minAllocated, MaxAllocationCount);
 
         nint newElements;
         if (ExternallyAllocated)
         {
-            newElements = NativeAllocator.Alloc(ulong.CreateChecked(newAllocated) * (ulong)ElementSize);
-            NativeAllocator.Move(newElements, Elements, ulong.CreateChecked(Count) * (ulong)ElementSize);
+            newElements = NativeAllocator.Alloc(checked((ulong)newAllocated * (ulong)ElementSize));
+            NativeAllocator.Move(newElements, Elements, checked(ulong.CreateChecked(Count) * (ulong)ElementSize));
         }
         else
         {
-            newElements = NativeAllocator.Resize(Elements, ulong.CreateChecked(newAllocated) * (ulong)ElementSize);
+            newElements = NativeAllocator.Resize(Elements, checked((ulong)newAllocated * (ulong)ElementSize));
         }
 
         Elements = newElements;
-        Allocated = newAllocated;
+        Allocated = I.CreateChecked(newAllocated);
     }
 
     public void SetExternalBuffer( nint memory, I allocationCount, I numElements )
     {
+        ValidateBuffer(allocationCount, numElements);
         Purge();
 
         Elements = memory;
@@ -104,6 +105,7 @@ public struct CUtlLeanVector<T, I>
 
     public void AssumeMemory( nint memory, I allocationCount, I numElements )
     {
+        ValidateBuffer(allocationCount, numElements);
         Purge();
 
         Elements = memory;
@@ -135,6 +137,7 @@ public struct CUtlLeanVector<T, I>
 
     public void Purge()
     {
+        Count = I.Zero;
         if (!ExternallyAllocated)
         {
             if (Allocated > I.CreateChecked(0) && Elements != 0)
@@ -160,7 +163,7 @@ public struct CUtlLeanVector<T, I>
 
     public I AddToTail()
     {
-        EnsureCapacity(int.CreateChecked(Count + I.One), false);
+        EnsureCapacity(checked(int.CreateChecked(Count) + 1), false);
         return Count++;
     }
 
@@ -207,7 +210,7 @@ public struct CUtlLeanVector<T, I>
         if (Count > I.Zero)
         {
             if (elem != Count - I.One)
-                NativeAllocator.Copy(Elements + int.CreateChecked(elem * I.CreateChecked(ElementSize)), Elements + int.CreateChecked((Count - I.One) * I.CreateChecked(ElementSize)), (ulong)ElementSize);
+                NativeAllocator.Copy(ElementAddress(elem), ElementAddress(Count - I.One), (ulong)ElementSize);
             --Count;
         }
     }
@@ -224,7 +227,7 @@ public struct CUtlLeanVector<T, I>
 
     public void RemoveMultiple( I idx, I count )
     {
-        if (count <= I.Zero || !IsValidIndex(idx) || idx + count > Count)
+        if (count <= I.Zero || !IsValidIndex(idx) || count > Count - idx)
             return;
 
         for (I i = idx; i < idx + count; i++)
@@ -289,15 +292,23 @@ public struct CUtlLeanVector<T, I>
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-    public int NumAllocated => (int)((ulong)(object)Allocated & ~(ulong)(object)ExternalBufferMarker);
-    public bool ExternallyAllocated => ((ulong)(object)Allocated & (ulong)(object)ExternalBufferMarker) != 0;
+    private static void ValidateBuffer( I allocationCount, I numElements )
+    {
+        if (allocationCount < I.Zero || allocationCount > I.CreateChecked(MaxAllocationCount))
+            throw new ArgumentOutOfRangeException(nameof(allocationCount));
+        if (numElements < I.Zero || numElements > allocationCount)
+            throw new ArgumentOutOfRangeException(nameof(numElements));
+    }
+
+    private nint ElementAddress( I index ) => Elements + checked(nint.CreateChecked(index) * ElementSize);
+
+    public int NumAllocated => int.CreateChecked(Allocated & ~ExternalBufferMarker);
+    public bool ExternallyAllocated => (Allocated & ExternalBufferMarker) != I.Zero;
     public nint Base => Elements;
     public ref T this[I index] {
         get {
-            unsafe
-            {
-                return ref Unsafe.AsRef<T>((byte*)Elements + int.CreateChecked(index * I.CreateChecked(ElementSize)));
-            }
+            if (!IsValidIndex(index)) throw new IndexOutOfRangeException();
+            return ref NativeElement<T>.At(ElementAddress(index));
         }
     }
 }
