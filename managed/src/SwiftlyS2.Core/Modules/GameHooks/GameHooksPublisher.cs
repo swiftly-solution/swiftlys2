@@ -43,6 +43,7 @@ internal enum HookListener
     EndTouch,
     AcceptInput,
     FireOutput,
+    GetItemInLoadout,
 }
 
 internal static partial class GameHooksPublisher
@@ -148,6 +149,7 @@ internal static partial class GameHooksPublisher
             HookListener.EndTouch => HookEndTouch(),
             HookListener.AcceptInput => HookAcceptInput(),
             HookListener.FireOutput => HookFireOutput(),
+            HookListener.GetItemInLoadout => HookGetItemInLoadout(),
             _ => throw new ArgumentOutOfRangeException(nameof(hookName), $"No hook found for {hookName}"),
         };
     }
@@ -193,6 +195,7 @@ internal static partial class GameHooksPublisher
             HookListener.EndTouch => UnhookEndTouch(),
             HookListener.AcceptInput => UnhookAcceptInput(),
             HookListener.FireOutput => UnhookFireOutput(),
+            HookListener.GetItemInLoadout => UnhookGetItemInLoadout(),
             _ => throw new ArgumentOutOfRangeException(nameof(hookName), $"No hook found for {hookName}"),
         };
     }

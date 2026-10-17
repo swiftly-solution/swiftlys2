@@ -1,5 +1,6 @@
 ﻿using SwiftlyS2.Core.Engine;
 using SwiftlyS2.Core.EntitySystem;
+using SwiftlyS2.Core.GameHooks;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.Scheduler;
 using SwiftlyS2.Core.SchemaDefinitions;
@@ -237,6 +238,23 @@ internal class Player : IPlayer, IDisposable
     public Task ExecuteCommandAsync( string command )
     {
         return SchedulerManager.QueueOrNow(() => ExecuteCommand(command));
+    }
+
+    public CEconItemView? GetLoadoutItem( Team team, loadout_slot_t slot )
+    {
+        ThrowIfDisposed();
+        NativeBinding.ThrowIfNonMainThread();
+
+        if (NativeServerHelpers.IsFollowingServerGuidelines())
+        {
+            throw new InvalidOperationException("Cannot get loadout items while \"FollowCS2ServerGuidelines\" is enabled.\n\tTo use this operation, disable the option in core.jsonc.");
+        }
+
+        var inventoryServices = Controller?.InventoryServices;
+        if (inventoryServices == null || !inventoryServices.IsValid) return null;
+
+        var item = GameHooksPublisher.GetItemInLoadoutOriginal(inventoryServices, team, slot);
+        return item == 0 ? null : new CEconItemViewImpl(item);
     }
 
     public bool Equals( IPlayer? other )

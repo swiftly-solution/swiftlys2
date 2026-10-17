@@ -45,6 +45,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         ControllerHook.SimulateUserCommandsHook.UnregisterListeners();
 
         ItemsHook.CanAcquireHook.UnregisterListeners();
+        ItemsHook.GetItemInLoadoutHook.UnregisterListeners();
 
         MovementHook.RunCommandHook.UnregisterListeners();
         MovementHook.SetupMoveHook.UnregisterListeners();
@@ -204,6 +205,40 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
             }
         }
 
+    }
+
+    internal void InvokeGetItemInLoadoutPre( ref GetItemInLoadoutPreContext ctx )
+    {
+        if (!ItemsHook.GetItemInLoadoutHook.HasPreListeners) return;
+
+        try
+        {
+            ItemsHook.GetItemInLoadoutHook.InvokePre(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Items::GetItemInLoadout::Pre.");
+            }
+        }
+    }
+
+    internal void InvokeGetItemInLoadoutPost( ref GetItemInLoadoutPostContext ctx )
+    {
+        if (!ItemsHook.GetItemInLoadoutHook.HasPostListeners) return;
+
+        try
+        {
+            ItemsHook.GetItemInLoadoutHook.InvokePost(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Items::GetItemInLoadout::Post.");
+            }
+        }
     }
 
     internal void InvokePostThinkPre( ref PostThinkPawnPreContext ctx )

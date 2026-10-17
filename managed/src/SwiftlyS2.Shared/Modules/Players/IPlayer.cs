@@ -489,4 +489,18 @@ public interface IPlayer : IEquatable<IPlayer>
     /// </summary>
     /// <param name="command">The command to execute. Cannot be null or empty.</param>
     public Task ExecuteCommandAsync( string command );
+
+    /// <summary>
+    /// Gets the item in one of the player's loadout slots for a team, e.g. their AK-47 (with its skin)
+    /// from the T rifle slots while they play CT. GetItemInLoadout hooks don't run for this lookup,
+    /// so a hook can call it to read other slots.
+    /// Requires "FollowCS2ServerGuidelines" to be disabled in core.jsonc.
+    ///
+    /// Thread unsafe.
+    /// </summary>
+    /// <param name="team">The team whose loadout to read (T or CT).</param>
+    /// <param name="slot">The loadout slot to read.</param>
+    /// <returns>The item, or null when the slot is empty or the player has no inventory.</returns>
+    [ThreadUnsafe]
+    public CEconItemView? GetLoadoutItem( Team team, loadout_slot_t slot );
 }

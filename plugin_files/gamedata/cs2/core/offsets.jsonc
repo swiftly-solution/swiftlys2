@@ -85,6 +85,16 @@
         "windows": 30,
         "linux": 31
     },
+    /*
+    CEconItemView* CCSPlayerInventory::GetItemInLoadout(int team, int slot)
+    Find the CCSPlayerInventory vtable through its RTTI (CPlayerInventory is its base, nothing derives from it).
+    The function returns null if slot > 57 or team > 3, then looks up the item equipped for that team and slot,
+    falling back to the default item. It has "item_sub_position2" and "spray0" (2 other functions have both too).
+    */
+    "CCSPlayerInventory::GetItemInLoadout": {
+        "windows": 8,
+        "linux": 9
+    },
     "CPlayer_MovementServices::RunCommand": {
         "windows": 25,
         "linux": 26
