@@ -19,6 +19,8 @@ public partial interface CMixTrack : CMixPropertyBase, ISchemaClass<CMixTrack>
 
     public ref VMixMixDownRule_t MixDown { get; }
 
+    public ref VMixUpMixRule_t UpMixRule { get; }
+
     public ref VMixSendOperator_t SendOperator { get; }
 
     public ISchemaUtlStringFixedArray SendNames { get; }

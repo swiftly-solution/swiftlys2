@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVoiceContainerVsndTrigger : CVoiceContainerBase, ISchemaClass<CVoiceContainerVsndTrigger>
 {
     static CVoiceContainerVsndTrigger ISchemaClass<CVoiceContainerVsndTrigger>.From(nint handle) => new CVoiceContainerVsndTriggerImpl(handle);
-    static int ISchemaClass<CVoiceContainerVsndTrigger>.Size => 2296;
+    static int ISchemaClass<CVoiceContainerVsndTrigger>.Size => 2304;
     static string? ISchemaClass<CVoiceContainerVsndTrigger>.ClassName => null;
 
 

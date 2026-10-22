@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVoiceContainerRealtimeFMSineWave : CVoiceContainerGenerator, ISchemaClass<CVoiceContainerRealtimeFMSineWave>
 {
     static CVoiceContainerRealtimeFMSineWave ISchemaClass<CVoiceContainerRealtimeFMSineWave>.From(nint handle) => new CVoiceContainerRealtimeFMSineWaveImpl(handle);
-    static int ISchemaClass<CVoiceContainerRealtimeFMSineWave>.Size => 128;
+    static int ISchemaClass<CVoiceContainerRealtimeFMSineWave>.Size => 136;
     static string? ISchemaClass<CVoiceContainerRealtimeFMSineWave>.ClassName => null;
 
 

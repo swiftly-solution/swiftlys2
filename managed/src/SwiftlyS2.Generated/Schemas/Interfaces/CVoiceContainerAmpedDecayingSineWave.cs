@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVoiceContainerAmpedDecayingSineWave : CVoiceContainerDecayingSineWave, ISchemaClass<CVoiceContainerAmpedDecayingSineWave>
 {
     static CVoiceContainerAmpedDecayingSineWave ISchemaClass<CVoiceContainerAmpedDecayingSineWave>.From(nint handle) => new CVoiceContainerAmpedDecayingSineWaveImpl(handle);
-    static int ISchemaClass<CVoiceContainerAmpedDecayingSineWave>.Size => 128;
+    static int ISchemaClass<CVoiceContainerAmpedDecayingSineWave>.Size => 136;
     static string? ISchemaClass<CVoiceContainerAmpedDecayingSineWave>.ClassName => null;
 
 

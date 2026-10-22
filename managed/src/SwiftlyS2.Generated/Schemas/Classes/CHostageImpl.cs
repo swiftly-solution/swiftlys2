@@ -340,6 +340,19 @@ internal partial class CHostageImpl : CHostageExpresserShimImpl, CHostage
             return instance;
         }
     }
+    private static nint _GrabStartTimeOffset = -1;
+    private GameTime_tImpl? _GrabStartTimeInstance;
+
+    public GameTime_t GrabStartTime
+    {
+        get
+        {
+            if (_GrabStartTimeOffset == -1) _GrabStartTimeOffset = Schema.GetOffset(0x1A122BDF6CB07A96);
+            var instance = _GrabStartTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _GrabStartTimeOffset);
+            return instance;
+        }
+    }
     private static nint _PositionWhenStartedDroppingToGroundOffset = -1;
 
     public ref Vector PositionWhenStartedDroppingToGround

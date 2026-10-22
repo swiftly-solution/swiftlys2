@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVMixToolGraphEntry : CVMixToolGraph, ISchemaClass<CVMixToolGraphEntry>
 {
     static CVMixToolGraphEntry ISchemaClass<CVMixToolGraphEntry>.From(nint handle) => new CVMixToolGraphEntryImpl(handle);
-    static int ISchemaClass<CVMixToolGraphEntry>.Size => 152;
+    static int ISchemaClass<CVMixToolGraphEntry>.Size => 160;
     static string? ISchemaClass<CVMixToolGraphEntry>.ClassName => null;
 
 

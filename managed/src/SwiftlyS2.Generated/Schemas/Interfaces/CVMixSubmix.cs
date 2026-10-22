@@ -27,5 +27,7 @@ public partial interface CVMixSubmix : ISchemaClass<CVMixSubmix>
 
     public ref VMixMixDownRule_t MixDownRule { get; }
 
+    public ref VMixUpMixRule_t UpMixRule { get; }
+
 
 }

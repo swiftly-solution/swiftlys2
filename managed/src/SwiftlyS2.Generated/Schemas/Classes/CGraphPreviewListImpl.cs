@@ -39,5 +39,20 @@ internal partial class CGraphPreviewListImpl : SchemaClass, CGraphPreviewList
             return instance;
         }
     }
+    private static nint _PreviewGraphNameOffset = -1;
+
+    public string PreviewGraphName
+    {
+        get
+        {
+            if (_PreviewGraphNameOffset == -1) _PreviewGraphNameOffset = Schema.GetOffset(0x7A40C4721B481FA6);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_PreviewGraphNameOffset));
+        }
+        set
+        {
+            if (_PreviewGraphNameOffset == -1) _PreviewGraphNameOffset = Schema.GetOffset(0x7A40C4721B481FA6);
+            Schema.SetCUtlString(_Handle, _PreviewGraphNameOffset, value);
+        }
+    }
 
 }

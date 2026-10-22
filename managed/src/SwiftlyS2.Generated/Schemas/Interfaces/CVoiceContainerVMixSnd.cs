@@ -11,7 +11,11 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVoiceContainerVMixSnd : CVoiceContainerBase, ISchemaClass<CVoiceContainerVMixSnd>
 {
     static CVoiceContainerVMixSnd ISchemaClass<CVoiceContainerVMixSnd>.From(nint handle) => new CVoiceContainerVMixSndImpl(handle);
-    static int ISchemaClass<CVoiceContainerVMixSnd>.Size => 384;
+    static int ISchemaClass<CVoiceContainerVMixSnd>.Size => 400;
     static string? ISchemaClass<CVoiceContainerVMixSnd>.ClassName => null;
+
+
+    public string ResourceName { get; set; }
+
 
 }

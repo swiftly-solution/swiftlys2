@@ -16,4 +16,20 @@ internal partial class CVoiceContainerVMixSndImpl : CVoiceContainerBaseImpl, CVo
 {
     public CVoiceContainerVMixSndImpl(nint handle) : base(handle) { }
 
+    private static nint _ResourceNameOffset = -1;
+
+    public string ResourceName
+    {
+        get
+        {
+            if (_ResourceNameOffset == -1) _ResourceNameOffset = Schema.GetOffset(0x60624EE69EEC4BD6);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ResourceNameOffset));
+        }
+        set
+        {
+            if (_ResourceNameOffset == -1) _ResourceNameOffset = Schema.GetOffset(0x60624EE69EEC4BD6);
+            Schema.SetCUtlString(_Handle, _ResourceNameOffset, value);
+        }
+    }
+
 }

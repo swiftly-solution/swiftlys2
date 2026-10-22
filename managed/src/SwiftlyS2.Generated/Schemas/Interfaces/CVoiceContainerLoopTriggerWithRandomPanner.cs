@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVoiceContainerLoopTriggerWithRandomPanner : CVoiceContainerLoopTrigger, ISchemaClass<CVoiceContainerLoopTriggerWithRandomPanner>
 {
     static CVoiceContainerLoopTriggerWithRandomPanner ISchemaClass<CVoiceContainerLoopTriggerWithRandomPanner>.From(nint handle) => new CVoiceContainerLoopTriggerWithRandomPannerImpl(handle);
-    static int ISchemaClass<CVoiceContainerLoopTriggerWithRandomPanner>.Size => 192;
+    static int ISchemaClass<CVoiceContainerLoopTriggerWithRandomPanner>.Size => 200;
     static string? ISchemaClass<CVoiceContainerLoopTriggerWithRandomPanner>.ClassName => null;
 
 

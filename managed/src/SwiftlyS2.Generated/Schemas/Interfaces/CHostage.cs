@@ -75,6 +75,8 @@ public partial interface CHostage : CHostageExpresserShim, ISchemaClass<CHostage
 
     public GameTime_t LastGrabTime { get; }
 
+    public GameTime_t GrabStartTime { get; }
+
     public ref Vector PositionWhenStartedDroppingToGround { get; }
 
     public ref Vector GrabbedPos { get; }

@@ -11,13 +11,15 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CGraphPreviewList : ISchemaClass<CGraphPreviewList>
 {
     static CGraphPreviewList ISchemaClass<CGraphPreviewList>.From(nint handle) => new CGraphPreviewListImpl(handle);
-    static int ISchemaClass<CGraphPreviewList>.Size => 40;
+    static int ISchemaClass<CGraphPreviewList>.Size => 48;
     static string? ISchemaClass<CGraphPreviewList>.ClassName => null;
 
 
     public ref float Volume { get; }
 
     public CPreviewList PreviewList { get; }
+
+    public string PreviewGraphName { get; set; }
 
 
 }

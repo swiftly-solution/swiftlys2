@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVoiceContainerVsndRadioButton : CVoiceContainerBase, ISchemaClass<CVoiceContainerVsndRadioButton>
 {
     static CVoiceContainerVsndRadioButton ISchemaClass<CVoiceContainerVsndRadioButton>.From(nint handle) => new CVoiceContainerVsndRadioButtonImpl(handle);
-    static int ISchemaClass<CVoiceContainerVsndRadioButton>.Size => 2296;
+    static int ISchemaClass<CVoiceContainerVsndRadioButton>.Size => 2304;
     static string? ISchemaClass<CVoiceContainerVsndRadioButton>.ClassName => null;
 
 

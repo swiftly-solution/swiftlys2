@@ -36,6 +36,16 @@ internal partial class CMixTrackImpl : CMixPropertyBaseImpl, CMixTrack
             return ref _Handle.AsRef<VMixMixDownRule_t>(_MixDownOffset);
         }
     }
+    private static nint _UpMixRuleOffset = -1;
+
+    public ref VMixUpMixRule_t UpMixRule
+    {
+        get
+        {
+            if (_UpMixRuleOffset == -1) _UpMixRuleOffset = Schema.GetOffset(0x27C36339572461C);
+            return ref _Handle.AsRef<VMixUpMixRule_t>(_UpMixRuleOffset);
+        }
+    }
     private static nint _SendOperatorOffset = -1;
 
     public ref VMixSendOperator_t SendOperator

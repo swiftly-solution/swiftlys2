@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVoiceContainerGenerator : CVoiceContainerBase, ISchemaClass<CVoiceContainerGenerator>
 {
     static CVoiceContainerGenerator ISchemaClass<CVoiceContainerGenerator>.From(nint handle) => new CVoiceContainerGeneratorImpl(handle);
-    static int ISchemaClass<CVoiceContainerGenerator>.Size => 112;
+    static int ISchemaClass<CVoiceContainerGenerator>.Size => 120;
     static string? ISchemaClass<CVoiceContainerGenerator>.ClassName => null;
 
 }

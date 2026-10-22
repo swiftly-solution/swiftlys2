@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVoiceContainerLoopXFade : CVoiceContainerBase, ISchemaClass<CVoiceContainerLoopXFade>
 {
     static CVoiceContainerLoopXFade ISchemaClass<CVoiceContainerLoopXFade>.From(nint handle) => new CVoiceContainerLoopXFadeImpl(handle);
-    static int ISchemaClass<CVoiceContainerLoopXFade>.Size => 168;
+    static int ISchemaClass<CVoiceContainerLoopXFade>.Size => 176;
     static string? ISchemaClass<CVoiceContainerLoopXFade>.ClassName => null;
 
 

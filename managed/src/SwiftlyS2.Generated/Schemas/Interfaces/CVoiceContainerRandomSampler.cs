@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVoiceContainerRandomSampler : CVoiceContainerAsyncGenerator, ISchemaClass<CVoiceContainerRandomSampler>
 {
     static CVoiceContainerRandomSampler ISchemaClass<CVoiceContainerRandomSampler>.From(nint handle) => new CVoiceContainerRandomSamplerImpl(handle);
-    static int ISchemaClass<CVoiceContainerRandomSampler>.Size => 424;
+    static int ISchemaClass<CVoiceContainerRandomSampler>.Size => 432;
     static string? ISchemaClass<CVoiceContainerRandomSampler>.ClassName => null;
 
 

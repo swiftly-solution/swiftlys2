@@ -84,5 +84,15 @@ internal partial class CVMixSubmixImpl : SchemaClass, CVMixSubmix
             return ref _Handle.AsRef<VMixMixDownRule_t>(_MixDownRuleOffset);
         }
     }
+    private static nint _UpMixRuleOffset = -1;
+
+    public ref VMixUpMixRule_t UpMixRule
+    {
+        get
+        {
+            if (_UpMixRuleOffset == -1) _UpMixRuleOffset = Schema.GetOffset(0x219038069572461C);
+            return ref _Handle.AsRef<VMixUpMixRule_t>(_UpMixRuleOffset);
+        }
+    }
 
 }

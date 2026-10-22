@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVoiceContainerEnum : CVoiceContainerBase, ISchemaClass<CVoiceContainerEnum>
 {
     static CVoiceContainerEnum ISchemaClass<CVoiceContainerEnum>.From(nint handle) => new CVoiceContainerEnumImpl(handle);
-    static int ISchemaClass<CVoiceContainerEnum>.Size => 176;
+    static int ISchemaClass<CVoiceContainerEnum>.Size => 184;
     static string? ISchemaClass<CVoiceContainerEnum>.ClassName => null;
 
 
