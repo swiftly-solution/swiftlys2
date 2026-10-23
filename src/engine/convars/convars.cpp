@@ -55,9 +55,9 @@ bool OnConvarQuery(CServerSideClientBase* client, const CNetMessagePB<CCLCMsg_Re
 }
 
 template <typename Listeners>
-static std::vector<typename Listeners::mapped_type> CopyListeners(std::mutex& mutex, const Listeners& listeners)
+static std::vector<typename Listeners::mapped_type> CopyListeners(std::shared_mutex& mutex, const Listeners& listeners)
 {
-    std::lock_guard<std::mutex> lock(mutex);
+    std::shared_lock<std::shared_mutex> lock(mutex);
 
     std::vector<typename Listeners::mapped_type> copy;
     copy.reserve(listeners.size());
@@ -110,6 +110,11 @@ static std::string ConvertConvarValueToString(const ConvarValue& value)
 
 void CConvarManager::Initialize()
 {
+    {
+        std::unique_lock<std::shared_mutex> lock(m_mtxListeners);
+        m_bShuttingDown = false;
+    }
+
     if (bool* unlockedCvars = std::get_if<bool>(&g_pConfiguration->GetValue("core.Unlocker.Convars")))
     {
         if (*unlockedCvars == true)
@@ -150,17 +155,13 @@ void CConvarManager::Initialize()
 
 void CConvarManager::Shutdown()
 {
-    if (m_bChangeCallbackInstalled)
     {
-        g_pGameCvar->RemoveGlobalChangeCallback(ChangedConvarCallback);
-        m_bChangeCallbackInstalled = false;
+        std::unique_lock<std::shared_mutex> lock(m_mtxListeners);
+        m_bShuttingDown = true;
     }
 
-    if (m_bCreationListenerInstalled)
-    {
-        g_pGameCvar->RemoveCreationListeners(this);
-        m_bCreationListenerInstalled = false;
-    }
+    UpdateChangeCallback();
+    UpdateCreationListener();
 }
 
 void CConvarManager::QueryClientConvar(int playerid, const std::string& cvar_name)
@@ -183,7 +184,7 @@ void CConvarManager::QueryClientConvar(int playerid, const std::string& cvar_nam
 
 int CConvarManager::AddQueryClientCvarCallback(std::function<void(int, std::string, std::string)> callback)
 {
-    std::lock_guard<std::mutex> lock(m_mtxQueryCallbacks);
+    std::unique_lock<std::shared_mutex> lock(m_mtxQueryCallbacks);
 
     m_queryCallbacks[++m_lastQueryCallbackId] = std::move(callback);
     return m_lastQueryCallbackId;
@@ -191,7 +192,7 @@ int CConvarManager::AddQueryClientCvarCallback(std::function<void(int, std::stri
 
 void CConvarManager::RemoveQueryClientCvarCallback(int callback_id)
 {
-    std::lock_guard<std::mutex> lock(m_mtxQueryCallbacks);
+    std::unique_lock<std::shared_mutex> lock(m_mtxQueryCallbacks);
     m_queryCallbacks.erase(callback_id);
 }
 
@@ -259,7 +260,7 @@ void CConvarManager::CreateConvar(const std::string& cvar_name, EConVarType type
 
     if (!created.convar) return;
 
-    std::lock_guard<std::mutex> lock(m_mtxConvars);
+    std::unique_lock<std::shared_mutex> lock(m_mtxConvars);
     m_createdConvars[cvar_name] = created;
 }
 
@@ -267,7 +268,7 @@ void CConvarManager::DeleteConvar(const std::string& cvar_name)
 {
     CreatedConvar created;
     {
-        std::lock_guard<std::mutex> lock(m_mtxConvars);
+        std::unique_lock<std::shared_mutex> lock(m_mtxConvars);
 
         auto it = m_createdConvars.find(cvar_name);
         if (it == m_createdConvars.end()) return;
@@ -283,7 +284,13 @@ void CConvarManager::DeleteConvar(const std::string& cvar_name)
 
 ConVarRefAbstract& CConvarManager::GetConvarRef(const char* cvar_name)
 {
-    std::lock_guard<std::mutex> lock(m_mtxConvars);
+    {
+        std::shared_lock<std::shared_mutex> lock(m_mtxConvars);
+        auto it = m_convarRefs.find(std::string_view(cvar_name));
+        if (it != m_convarRefs.end() && it->second.IsValidRef()) return it->second;
+    }
+
+    std::unique_lock<std::shared_mutex> lock(m_mtxConvars);
 
     auto it = m_convarRefs.find(std::string_view(cvar_name));
     if (it == m_convarRefs.end())
@@ -307,7 +314,7 @@ uint64_t CConvarManager::AddGlobalChangeListener(std::function<void(const char*,
 {
     uint64_t id;
     {
-        std::lock_guard<std::mutex> lock(m_mtxListeners);
+        std::unique_lock<std::shared_mutex> lock(m_mtxListeners);
         id = ++m_lastListenerId;
         m_changeListeners[id] = std::move(callback);
     }
@@ -319,7 +326,7 @@ uint64_t CConvarManager::AddGlobalChangeListener(std::function<void(const char*,
 void CConvarManager::RemoveGlobalChangeListener(uint64_t callback_id)
 {
     {
-        std::lock_guard<std::mutex> lock(m_mtxListeners);
+        std::unique_lock<std::shared_mutex> lock(m_mtxListeners);
         m_changeListeners.erase(callback_id);
     }
 
@@ -330,7 +337,7 @@ uint64_t CConvarManager::AddConvarCreatedListener(std::function<void(const char*
 {
     uint64_t id;
     {
-        std::lock_guard<std::mutex> lock(m_mtxListeners);
+        std::unique_lock<std::shared_mutex> lock(m_mtxListeners);
         id = ++m_lastListenerId;
         m_convarCreatedListeners[id] = std::move(callback);
     }
@@ -342,7 +349,7 @@ uint64_t CConvarManager::AddConvarCreatedListener(std::function<void(const char*
 void CConvarManager::RemoveConvarCreatedListener(uint64_t callback_id)
 {
     {
-        std::lock_guard<std::mutex> lock(m_mtxListeners);
+        std::unique_lock<std::shared_mutex> lock(m_mtxListeners);
         m_convarCreatedListeners.erase(callback_id);
     }
 
@@ -353,7 +360,7 @@ uint64_t CConvarManager::AddConCommandCreatedListener(std::function<void(const c
 {
     uint64_t id;
     {
-        std::lock_guard<std::mutex> lock(m_mtxListeners);
+        std::unique_lock<std::shared_mutex> lock(m_mtxListeners);
         id = ++m_lastListenerId;
         m_conCommandCreatedListeners[id] = std::move(callback);
     }
@@ -365,7 +372,7 @@ uint64_t CConvarManager::AddConCommandCreatedListener(std::function<void(const c
 void CConvarManager::RemoveConCommandCreatedListener(uint64_t callback_id)
 {
     {
-        std::lock_guard<std::mutex> lock(m_mtxListeners);
+        std::unique_lock<std::shared_mutex> lock(m_mtxListeners);
         m_conCommandCreatedListeners.erase(callback_id);
     }
 
@@ -374,36 +381,56 @@ void CConvarManager::RemoveConCommandCreatedListener(uint64_t callback_id)
 
 void CConvarManager::UpdateChangeCallback()
 {
-    bool install;
+    std::unique_lock<std::shared_mutex> lock(m_mtxListeners);
+    if (m_bUpdatingChangeCallback) return;
+    m_bUpdatingChangeCallback = true;
+    try
     {
-        std::lock_guard<std::mutex> lock(m_mtxListeners);
-
-        install = !m_changeListeners.empty();
-        if (install == m_bChangeCallbackInstalled) return;
-
-        m_bChangeCallbackInstalled = install;
+        while ((!m_bShuttingDown && !m_changeListeners.empty()) != m_bChangeCallbackInstalled)
+        {
+            const bool install = !m_bShuttingDown && !m_changeListeners.empty();
+            lock.unlock();
+            if (install)
+                g_pGameCvar->InstallGlobalChangeCallback(ChangedConvarCallback);
+            else
+                g_pGameCvar->RemoveGlobalChangeCallback(ChangedConvarCallback);
+            lock.lock();
+            m_bChangeCallbackInstalled = install;
+        }
+        m_bUpdatingChangeCallback = false;
     }
-
-    if (install)
-        g_pGameCvar->InstallGlobalChangeCallback(ChangedConvarCallback);
-    else
-        g_pGameCvar->RemoveGlobalChangeCallback(ChangedConvarCallback);
+    catch (...)
+    {
+        if (!lock.owns_lock()) lock.lock();
+        m_bUpdatingChangeCallback = false;
+        throw;
+    }
 }
 
 void CConvarManager::UpdateCreationListener()
 {
-    bool install;
+    std::unique_lock<std::shared_mutex> lock(m_mtxListeners);
+    if (m_bUpdatingCreationListener) return;
+    m_bUpdatingCreationListener = true;
+    try
     {
-        std::lock_guard<std::mutex> lock(m_mtxListeners);
-
-        install = !m_convarCreatedListeners.empty() || !m_conCommandCreatedListeners.empty();
-        if (install == m_bCreationListenerInstalled) return;
-
-        m_bCreationListenerInstalled = install;
+        while ((!m_bShuttingDown && (!m_convarCreatedListeners.empty() || !m_conCommandCreatedListeners.empty())) != m_bCreationListenerInstalled)
+        {
+            const bool install = !m_bShuttingDown && (!m_convarCreatedListeners.empty() || !m_conCommandCreatedListeners.empty());
+            lock.unlock();
+            if (install)
+                g_pGameCvar->RegisterCreationListeners(this);
+            else
+                g_pGameCvar->RemoveCreationListeners(this);
+            lock.lock();
+            m_bCreationListenerInstalled = install;
+        }
+        m_bUpdatingCreationListener = false;
     }
-
-    if (install)
-        g_pGameCvar->RegisterCreationListeners(this);
-    else
-        g_pGameCvar->RemoveCreationListeners(this);
+    catch (...)
+    {
+        if (!lock.owns_lock()) lock.lock();
+        m_bUpdatingCreationListener = false;
+        throw;
+    }
 }

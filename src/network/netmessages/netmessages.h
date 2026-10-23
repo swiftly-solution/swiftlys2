@@ -21,8 +21,7 @@
 
 #include <api/network/netmessages/netmessages.h>
 
-#include <mutex>
-#include <api/utils/bitvec.h>
+#include <atomic>
 
  // ofc you need to stay here
 #include <public/engine/igameeventsystem.h>
@@ -39,8 +38,8 @@ public:
     virtual void SetClientMessageSendHandler(std::function<int(int, int, void*)> handler) override;
     virtual void SetServerMessageInternalSendHandler(std::function<int(int, int, void*)> handler) override;
 private:
-    std::mutex m_mtxRegisteredMessages;
-    CBitVector<16385> m_registeredMessages[NetMessageHook_Count];
+    static constexpr int MESSAGE_COUNT = 16385;
+    std::atomic<uint64_t> m_registeredMessages[NetMessageHook_Count][(MESSAGE_COUNT + 63) / 64]{};
 };
 
 #endif

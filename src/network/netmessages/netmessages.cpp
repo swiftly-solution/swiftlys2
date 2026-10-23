@@ -156,26 +156,23 @@ void PostEventAbstractHook(void* _this, CSplitScreenSlot nSlot, bool bLocalOnly,
 
 void CNetMessages::RegisterMessageHook(NetMessageHookType type, int messageid)
 {
-    if (type < 0 || type >= NetMessageHook_Count) return;
+    if (type < 0 || type >= NetMessageHook_Count || messageid < 0 || messageid >= MESSAGE_COUNT) return;
 
-    std::lock_guard<std::mutex> lock(m_mtxRegisteredMessages);
-    m_registeredMessages[type].Set(messageid);
+    m_registeredMessages[type][messageid >> 6].fetch_or(1ULL << (messageid & 63), std::memory_order_release);
 }
 
 void CNetMessages::UnregisterMessageHook(NetMessageHookType type, int messageid)
 {
-    if (type < 0 || type >= NetMessageHook_Count) return;
+    if (type < 0 || type >= NetMessageHook_Count || messageid < 0 || messageid >= MESSAGE_COUNT) return;
 
-    std::lock_guard<std::mutex> lock(m_mtxRegisteredMessages);
-    m_registeredMessages[type].Clear(messageid);
+    m_registeredMessages[type][messageid >> 6].fetch_and(~(1ULL << (messageid & 63)), std::memory_order_release);
 }
 
 bool CNetMessages::IsMessageRegistered(NetMessageHookType type, int messageid)
 {
-    if (type < 0 || type >= NetMessageHook_Count) return false;
+    if (type < 0 || type >= NetMessageHook_Count || messageid < 0 || messageid >= MESSAGE_COUNT) return false;
 
-    std::lock_guard<std::mutex> lock(m_mtxRegisteredMessages);
-    return m_registeredMessages[type].IsBitSet(messageid);
+    return (m_registeredMessages[type][messageid >> 6].load(std::memory_order_acquire) & (1ULL << (messageid & 63))) != 0;
 }
 
 void CNetMessages::SetServerMessageSendHandler(std::function<int(uint64_t*, int, void*)> handler)

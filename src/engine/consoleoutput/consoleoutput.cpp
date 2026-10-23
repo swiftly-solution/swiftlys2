@@ -82,6 +82,23 @@ struct ConsoleFilter
 CConsoleOutput::CConsoleOutput() = default;
 CConsoleOutput::~CConsoleOutput() = default;
 
+struct ConsoleDispatchScope
+{
+    CConsoleOutput* output;
+    const ConsoleDispatchScope* previous;
+    static inline thread_local const ConsoleDispatchScope* active = nullptr;
+
+    explicit ConsoleDispatchScope(CConsoleOutput* instance) : output(instance), previous(active) { active = this; }
+    ~ConsoleDispatchScope() { active = previous; }
+
+    static bool Contains(const CConsoleOutput* instance)
+    {
+        for (auto scope = active; scope; scope = scope->previous)
+            if (scope->output == instance) return true;
+        return false;
+    }
+};
+
 bool CConsoleOutput::ProcessLogMessage(const char* str, va_list* args)
 {
     if (m_SkipNextNewlineOnlyLog.load(std::memory_order_relaxed) && strcmp(str, "\n") == 0) {
@@ -280,8 +297,8 @@ void CConsoleOutput::RemoveConsoleListener(uint64_t id)
     if (removedLastListener)
     {
         std::lock_guard<std::mutex> lock(m_QueueMutex);
-        m_QueuedMessages.clear();
-        m_HasQueuedMessages.store(false, std::memory_order_release);
+        if (m_WorkState.load(std::memory_order_relaxed) < LISTENER_INCREMENT)
+            m_QueuedMessages.clear();
     }
 }
 
@@ -289,20 +306,24 @@ void CConsoleOutput::DispatchQueuedListeners()
 {
     // The idle dispatcher path is a single atomic load with no mutex acquisition.
     if (!m_HasQueuedMessages.load(std::memory_order_acquire)) return;
+    if (ConsoleDispatchScope::Contains(this)) return;
 
     // The worker is the normal consumer. An explicit command-output flush may race it;
     // wait for the active batch so the capture window cannot close too early.
     std::lock_guard<std::mutex> dispatchLock(m_DispatchMutex);
+    ConsoleDispatchScope scope(this);
 
-    // Avoid taking the queue mutex when no console messages were produced.
-    if (!m_HasQueuedMessages.exchange(false, std::memory_order_acq_rel)) return;
+    if (!m_HasQueuedMessages.load(std::memory_order_acquire)) return;
 
     {
         std::lock_guard<std::mutex> lock(m_QueueMutex);
         m_QueuedMessages.swap(m_DispatchedMessages);
+        if (m_DispatchedMessages.empty())
+        {
+            m_HasQueuedMessages.store(false, std::memory_order_release);
+            return;
+        }
     }
-
-    if (m_DispatchedMessages.empty()) return;
 
     std::vector<std::function<void(const std::string&)>> listeners;
     {
@@ -318,4 +339,8 @@ void CConsoleOutput::DispatchQueuedListeners()
 
     // Keep the allocation for the next buffer swap while releasing message payloads now.
     m_DispatchedMessages.clear();
+
+    // Keep the flag set through callbacks so another thread's flush waits for this batch.
+    std::lock_guard<std::mutex> lock(m_QueueMutex);
+    m_HasQueuedMessages.store(!m_QueuedMessages.empty(), std::memory_order_release);
 }

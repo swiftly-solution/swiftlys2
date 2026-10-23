@@ -43,6 +43,7 @@
 #include <api/shared/plat.h>
 #include <api/shared/string.h>
 #include <mutex>
+#include <shared_mutex>
 
 #include <public/icvar.h>
 #include <public/tier1/KeyValues.h>
@@ -280,12 +281,11 @@ void GameServerSteamAPIDeactivatedHook(void* _this)
 }
 
 std::string workshop_map = "";
-std::mutex g_qmMapLoadQueue;
+std::shared_mutex g_qmMapLoadQueue;
 std::string current_map = "";
 
 bool LoopInitHook(void* _this, KeyValues* pKeyValues, void* pRegistry)
 {
-    std::lock_guard<std::mutex> lock(g_qmMapLoadQueue);
     if (current_map != "")
     {
         g_SwiftlyCore.OnMapUnload();
@@ -293,16 +293,12 @@ bool LoopInitHook(void* _this, KeyValues* pKeyValues, void* pRegistry)
 
     bool ret = reinterpret_cast<decltype(&LoopInitHook)>(g_LoopInitHook.GetOriginal())(_this, pKeyValues, pRegistry);
 
-    g_SwiftlyCore.OnMapLoad(pKeyValues->GetString("levelname"));
+    {
+        std::unique_lock<std::shared_mutex> lock(g_qmMapLoadQueue);
+        workshop_map = pKeyValues->FindKey("customgamemode") ? pKeyValues->GetString("customgamemode") : "";
+    }
 
-    if (pKeyValues->FindKey("customgamemode"))
-    {
-        workshop_map = pKeyValues->GetString("customgamemode");
-    }
-    else
-    {
-        workshop_map = "";
-    }
+    g_SwiftlyCore.OnMapLoad(pKeyValues->GetString("levelname"));
 
     return ret;
 }

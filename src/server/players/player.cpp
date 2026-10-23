@@ -18,6 +18,8 @@
 
 #include "player.h"
 
+#include <mutex>
+
 #include <api/sdk/recipientfilter.h>
 #include <api/shared/string.h>
 
@@ -354,7 +356,12 @@ extern void* g_pOnClientKeyStateChangedCallback;
 
 void CPlayer::Think()
 {
-    const bool showMenu = !centerMenuText.empty();
+    std::string menuText;
+    {
+        std::shared_lock<std::shared_mutex> lock(centerMenuMutex);
+        menuText = centerMenuText;
+    }
+    const bool showMenu = !menuText.empty();
     const bool showMessage = !showMenu && centerMessageEndTime >= GetTime();
 
     if (!showMenu && !showMessage)
@@ -366,7 +373,7 @@ void CPlayer::Think()
         if(!centerMessageEvent)
             centerMessageEvent = g_pGameEventManager->GetGameEventManager()->CreateEvent("show_survival_respawn_status");
             
-        centerMessageEvent->SetString("loc_token", (showMenu ? centerMenuText : centerMessageText).c_str());
+        centerMessageEvent->SetString("loc_token", (showMenu ? menuText : centerMessageText).c_str());
         centerMessageEvent->SetInt("duration", 1);
         centerMessageEvent->SetInt("userid", m_iPlayerId);
         SendGameEvent(centerMessageEvent);
@@ -421,19 +428,19 @@ void CPlayer::Think()
 
 void CPlayer::RenderMenuCenterText(const std::string& text)
 {
-    std::lock_guard<std::mutex> lock(centerMenuMutex);
+    std::unique_lock<std::shared_mutex> lock(centerMenuMutex);
     centerMenuText = text;
 }
 
 void CPlayer::ClearRenderMenuCenterText()
 {
-    std::lock_guard<std::mutex> lock(centerMenuMutex);
+    std::unique_lock<std::shared_mutex> lock(centerMenuMutex);
     centerMenuText = "";
 }
 
 bool CPlayer::HasMenuShown()
 {
-    std::lock_guard<std::mutex> lock(centerMenuMutex);
+    std::shared_lock<std::shared_mutex> lock(centerMenuMutex);
     return !centerMenuText.empty();
 }
 
@@ -444,13 +451,13 @@ uint64_t CPlayer::GetSessionID()
 
 bool CPlayer::IsListeningGameEvent(int eventID)
 {
-    std::lock_guard<std::mutex> lock(m_listeningGameEventsMutex);
+    std::shared_lock<std::shared_mutex> lock(m_listeningGameEventsMutex);
     return m_listeningGameEvents.IsBitSet(eventID);
 }
 
 void CPlayer::SetListeningGameEvents(CBitVector<8192>& eventIDs)
 {
-    std::lock_guard<std::mutex> lock(m_listeningGameEventsMutex);
+    std::unique_lock<std::shared_mutex> lock(m_listeningGameEventsMutex);
     m_listeningGameEvents.CopyFrom(eventIDs);
 }
 

@@ -22,7 +22,7 @@
 #include <api/server/players/player.h>
 
 #include <public/igameevents.h>
-#include <mutex>
+#include <shared_mutex>
 
 #include <chrono>
 
@@ -102,11 +102,11 @@ private:
     std::string centerMessageText = "";
     IGameEvent* centerMessageEvent = nullptr;
 
-    std::mutex centerMenuMutex;
+    std::shared_mutex centerMenuMutex;
     std::string centerMenuText = "";
     uint64_t m_uSessionId = 0;
 
-    std::mutex m_listeningGameEventsMutex;
+    std::shared_mutex m_listeningGameEventsMutex;
     CBitVector<8192> m_listeningGameEvents = {};
 };
 
