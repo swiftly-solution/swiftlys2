@@ -24,6 +24,7 @@
 #include <queue>
 #include <condition_variable>
 
+/*
 class QueueMutex
 {
 public:
@@ -75,6 +76,9 @@ private:
     bool locked;
     std::queue<std::condition_variable*> waiters;
 };
+*/
+
+using QueueMutex = std::mutex;
 
 class QueueLockGuard
 {
