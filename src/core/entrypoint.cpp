@@ -43,7 +43,6 @@
 #include <api/shared/plat.h>
 #include <api/shared/string.h>
 #include <mutex>
-#include <shared_mutex>
 
 #include <public/icvar.h>
 #include <public/tier1/KeyValues.h>
@@ -281,7 +280,7 @@ void GameServerSteamAPIDeactivatedHook(void* _this)
 }
 
 std::string workshop_map = "";
-std::shared_mutex g_qmMapLoadQueue;
+std::mutex g_qmMapLoadQueue;
 std::string current_map = "";
 
 bool LoopInitHook(void* _this, KeyValues* pKeyValues, void* pRegistry)
@@ -294,7 +293,7 @@ bool LoopInitHook(void* _this, KeyValues* pKeyValues, void* pRegistry)
     bool ret = reinterpret_cast<decltype(&LoopInitHook)>(g_LoopInitHook.GetOriginal())(_this, pKeyValues, pRegistry);
 
     {
-        std::unique_lock<std::shared_mutex> lock(g_qmMapLoadQueue);
+        std::lock_guard<std::mutex> lock(g_qmMapLoadQueue);
         workshop_map = pKeyValues->FindKey("customgamemode") ? pKeyValues->GetString("customgamemode") : "";
     }
 

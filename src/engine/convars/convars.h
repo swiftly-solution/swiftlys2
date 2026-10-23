@@ -27,7 +27,6 @@
 
 #include <map>
 #include <optional>
-#include <shared_mutex>
 #include <unordered_map>
 
 // lookups by const char* or string_view without creating a std::string
@@ -81,7 +80,7 @@ private:
     void UpdateChangeCallback();
     void UpdateCreationListener();
 
-    std::shared_mutex m_mtxListeners;
+    std::mutex m_mtxListeners;
     uint64_t m_lastListenerId = 0;
 
     Listeners<std::function<void(const char*, int, const char*, const char*)>> m_changeListeners;
@@ -93,11 +92,11 @@ private:
     bool m_bUpdatingCreationListener = false;
     bool m_bShuttingDown = false;
 
-    std::shared_mutex m_mtxQueryCallbacks;
+    std::mutex m_mtxQueryCallbacks;
     int m_lastQueryCallbackId = 0;
     std::map<int, std::function<void(int, std::string, std::string)>> m_queryCallbacks;
 
-    std::shared_mutex m_mtxConvars;
+    std::mutex m_mtxConvars;
     std::map<std::string, CreatedConvar> m_createdConvars;
     std::unordered_map<std::string, ConVarRefAbstract, ConvarNameHash, std::equal_to<>> m_convarRefs;
 };

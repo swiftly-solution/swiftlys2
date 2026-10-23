@@ -146,7 +146,7 @@ void CEventManager::OnServerStartup()
 void CEventManager::RegisterGameEventListener(std::string event_name)
 {
     {
-        std::unique_lock<std::shared_mutex> lock(m_mtxRegisteredEvents);
+        std::lock_guard<std::mutex> lock(m_mtxRegisteredEvents);
         m_registeredEvents.insert(hash_32_fnv1a_const(event_name.c_str()));
     }
 
@@ -155,13 +155,13 @@ void CEventManager::RegisterGameEventListener(std::string event_name)
 
 void CEventManager::UnregisterGameEventListener(std::string event_name)
 {
-    std::unique_lock<std::shared_mutex> lock(m_mtxRegisteredEvents);
+    std::lock_guard<std::mutex> lock(m_mtxRegisteredEvents);
     m_registeredEvents.erase(hash_32_fnv1a_const(event_name.c_str()));
 }
 
 bool CEventManager::IsEventRegistered(uint32_t event_hash)
 {
-    std::shared_lock<std::shared_mutex> lock(m_mtxRegisteredEvents);
+    std::lock_guard<std::mutex> lock(m_mtxRegisteredEvents);
     return m_registeredEvents.contains(event_hash);
 }
 
@@ -184,11 +184,34 @@ void CEventManager::FireGameEvent(IGameEvent* event) {}
 
 void CEventManager::QueueListener(const std::string& event_name)
 {
+    bool registerImmediately = false;
     {
         std::lock_guard<std::mutex> lock(m_mtxLock);
-        m_pendingListeners.insert(event_name);
-        if (!m_bListenersReady || m_bDrainingListeners) return;
+        if (!m_bListenersReady || m_bDrainingListeners || !m_pendingListeners.empty())
+        {
+            m_pendingListeners.insert(event_name);
+            if (!m_bListenersReady || m_bDrainingListeners) return;
+        }
+        else
+        {
+            registerImmediately = true;
+        }
         m_bDrainingListeners = true;
+    }
+
+    if (registerImmediately)
+    {
+        try
+        {
+            AddEngineListener(event_name);
+        }
+        catch (...)
+        {
+            std::lock_guard<std::mutex> lock(m_mtxLock);
+            m_bDrainingListeners = false;
+            m_pendingListeners.insert(event_name);
+            throw;
+        }
     }
 
     DrainEngineListeners();
@@ -251,13 +274,29 @@ void CEventManager::AddEngineListener(const std::string& event_name)
 
 int CEventManager::GetGameEventListenerID(std::string event_name)
 {
-    std::shared_lock<std::shared_mutex> lock(m_mtxRegisteredEvents);
-    auto it = m_eventListenerIDs.find(event_name);
-    return it == m_eventListenerIDs.end() ? -1 : it->second;
+    auto& bucket = m_eventListenerIDs[std::hash<std::string>{}(event_name) % m_eventListenerIDs.size()];
+    for (auto* entry = bucket.load(std::memory_order_acquire); entry; entry = entry->next)
+        if (entry->name == event_name) return entry->id.load(std::memory_order_acquire);
+
+    return -1;
 }
 
 void CEventManager::RegisterGameEventListenerID(std::string event_name, int id)
 {
-    std::unique_lock<std::shared_mutex> lock(m_mtxRegisteredEvents);
-    m_eventListenerIDs[event_name] = id;
+    std::lock_guard<std::mutex> lock(m_mtxRegisteredEvents);
+    auto& bucket = m_eventListenerIDs[std::hash<std::string>{}(event_name) % m_eventListenerIDs.size()];
+    auto* head = bucket.load(std::memory_order_relaxed);
+    for (auto* entry = head; entry; entry = entry->next)
+    {
+        if (entry->name == event_name)
+        {
+            entry->id.store(id, std::memory_order_release);
+            return;
+        }
+    }
+
+    auto entry = std::make_unique<EventListenerID>(std::move(event_name), id, head);
+    auto* published = entry.get();
+    m_eventListenerIDEntries.push_back(std::move(entry));
+    bucket.store(published, std::memory_order_release);
 }

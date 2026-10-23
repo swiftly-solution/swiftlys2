@@ -21,13 +21,16 @@
 
 #include <api/engine/gameevents/gameevents.h>
 
+#include <array>
+#include <atomic>
+#include <memory>
 #include <mutex>
-#include <shared_mutex>
 
 #include <set>
 #include <unordered_set>
-#include <map>
 #include <string>
+#include <utility>
+#include <vector>
 
  // WHY THE ACTUAL FUCK YOU NEED THIS TO COMPILE ?????????????
 #include <public/entity2/entitysystem.h>
@@ -62,9 +65,22 @@ private:
     bool m_bListenersReady = false;
     bool m_bDrainingListeners = false;
 
-    std::shared_mutex m_mtxRegisteredEvents;
+    std::mutex m_mtxRegisteredEvents;
     std::unordered_set<uint32_t> m_registeredEvents;
-    std::map<std::string, int> m_eventListenerIDs;
+
+    struct EventListenerID
+    {
+        const std::string name;
+        std::atomic<int> id;
+        EventListenerID* const next;
+
+        EventListenerID(std::string event_name, int value, EventListenerID* next_entry)
+            : name(std::move(event_name)), id(value), next(next_entry) {}
+    };
+
+    // Entries stay alive until manager destruction; published names and links never change.
+    std::array<std::atomic<EventListenerID*>, 256> m_eventListenerIDs{};
+    std::vector<std::unique_ptr<EventListenerID>> m_eventListenerIDEntries;
 };
 
 #endif

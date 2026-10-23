@@ -185,7 +185,7 @@ uint64_t CServerCommands::RegisterCommand(std::string commandName, bool register
         }
 
         // Reserve the name while engine registration invokes creation callbacks.
-        if (!m_commands.emplace(commandName, nullptr).second) return 0;
+        if (!m_commands.try_emplace(commandName, nullptr).second) return 0;
     }
 
     try
@@ -222,7 +222,7 @@ void CServerCommands::UnregisterCommand(uint64_t commandId)
         auto nameIt = m_commandNames.find(commandId);
         if (nameIt == m_commandNames.end()) return;
 
-        commandName = nameIt->second;
+        commandName = std::move(nameIt->second);
         auto commandIt = m_commands.find(commandName);
         if (commandIt != m_commands.end())
         {

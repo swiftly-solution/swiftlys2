@@ -358,7 +358,7 @@ void CPlayer::Think()
 {
     std::string menuText;
     {
-        std::shared_lock<std::shared_mutex> lock(centerMenuMutex);
+        std::lock_guard<std::mutex> lock(centerMenuMutex);
         menuText = centerMenuText;
     }
     const bool showMenu = !menuText.empty();
@@ -428,19 +428,19 @@ void CPlayer::Think()
 
 void CPlayer::RenderMenuCenterText(const std::string& text)
 {
-    std::unique_lock<std::shared_mutex> lock(centerMenuMutex);
+    std::lock_guard<std::mutex> lock(centerMenuMutex);
     centerMenuText = text;
 }
 
 void CPlayer::ClearRenderMenuCenterText()
 {
-    std::unique_lock<std::shared_mutex> lock(centerMenuMutex);
+    std::lock_guard<std::mutex> lock(centerMenuMutex);
     centerMenuText = "";
 }
 
 bool CPlayer::HasMenuShown()
 {
-    std::shared_lock<std::shared_mutex> lock(centerMenuMutex);
+    std::lock_guard<std::mutex> lock(centerMenuMutex);
     return !centerMenuText.empty();
 }
 
@@ -451,13 +451,13 @@ uint64_t CPlayer::GetSessionID()
 
 bool CPlayer::IsListeningGameEvent(int eventID)
 {
-    std::shared_lock<std::shared_mutex> lock(m_listeningGameEventsMutex);
+    std::lock_guard<std::mutex> lock(m_listeningGameEventsMutex);
     return m_listeningGameEvents.IsBitSet(eventID);
 }
 
 void CPlayer::SetListeningGameEvents(CBitVector<8192>& eventIDs)
 {
-    std::unique_lock<std::shared_mutex> lock(m_listeningGameEventsMutex);
+    std::lock_guard<std::mutex> lock(m_listeningGameEventsMutex);
     m_listeningGameEvents.CopyFrom(eventIDs);
 }
 
