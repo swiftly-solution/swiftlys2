@@ -20,7 +20,7 @@
 #include <api/shared/files.h>
 #include <api/shared/string.h>
 #include <api/shared/plat.h>
-#include <api/utils/mutex.h>
+#include <mutex>
 
 #include <core/entrypoint.h>
 #include <scripting/scripting.h>
@@ -167,11 +167,11 @@ char* Bridge_EngineHelpers_GetIP(int* size)
 }
 
 extern std::string workshop_map;
-extern QueueMutex g_qmMapLoadQueue;
+extern std::mutex g_qmMapLoadQueue;
 
 char* Bridge_EngineHelpers_GetWorkshopId(int* size)
 {
-    QueueLockGuard lock(g_qmMapLoadQueue);
+    std::lock_guard<std::mutex> lock(g_qmMapLoadQueue);
     return Bridge_EngineHelpers_CopyString(workshop_map, size);
 }
 

@@ -132,7 +132,7 @@ void StartupServerEventHook(void* _this, const GameSessionConfiguration_t& confi
 
 void CEventManager::OnServerStartup()
 {
-    QueueLockGuard lock(m_mtxLock);
+    std::lock_guard<std::mutex> lock(m_mtxLock);
     if (!g_gameEventManager || m_bListenersReady) return;
 
     m_bListenersReady = true;
@@ -146,7 +146,7 @@ void CEventManager::OnServerStartup()
 void CEventManager::RegisterGameEventListener(std::string event_name)
 {
     {
-        QueueLockGuard lock(m_mtxRegisteredEvents);
+        std::lock_guard<std::mutex> lock(m_mtxRegisteredEvents);
         m_registeredEvents.insert(hash_32_fnv1a_const(event_name.c_str()));
     }
 
@@ -155,13 +155,13 @@ void CEventManager::RegisterGameEventListener(std::string event_name)
 
 void CEventManager::UnregisterGameEventListener(std::string event_name)
 {
-    QueueLockGuard lock(m_mtxRegisteredEvents);
+    std::lock_guard<std::mutex> lock(m_mtxRegisteredEvents);
     m_registeredEvents.erase(hash_32_fnv1a_const(event_name.c_str()));
 }
 
 bool CEventManager::IsEventRegistered(uint32_t event_hash)
 {
-    QueueLockGuard lock(m_mtxRegisteredEvents);
+    std::lock_guard<std::mutex> lock(m_mtxRegisteredEvents);
     return m_registeredEvents.contains(event_hash);
 }
 
@@ -184,7 +184,7 @@ void CEventManager::FireGameEvent(IGameEvent* event) {}
 
 void CEventManager::QueueListener(const std::string& event_name)
 {
-    QueueLockGuard lock(m_mtxLock);
+    std::lock_guard<std::mutex> lock(m_mtxLock);
     if (!m_bListenersReady)
     {
         m_pendingListeners.insert(event_name);

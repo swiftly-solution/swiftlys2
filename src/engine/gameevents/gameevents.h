@@ -21,7 +21,7 @@
 
 #include <api/engine/gameevents/gameevents.h>
 
-#include <api/utils/mutex.h>
+#include <mutex>
 
 #include <set>
 #include <unordered_set>
@@ -55,11 +55,11 @@ private:
     void QueueListener(const std::string& event_name);
     void AddEngineListener(const std::string& event_name);
 
-    QueueMutex m_mtxLock;
+    std::mutex m_mtxLock;
     std::set<std::string> m_pendingListeners;
     bool m_bListenersReady = false;
 
-    QueueMutex m_mtxRegisteredEvents;
+    std::mutex m_mtxRegisteredEvents;
     std::unordered_set<uint32_t> m_registeredEvents;
     std::map<std::string, int> m_eventListenerIDs;
 };

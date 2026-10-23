@@ -103,7 +103,7 @@ void CheckTransmitHook(void* _this, CCheckTransmitInfo** ppInfoList, int infoCou
         auto& blockedBits = player->GetBlockedTransmittingBits();
         if (blockedBits.blockedCount.load(std::memory_order_relaxed) == 0) continue;
 
-        QueueLockGuard lock(blockedBits.mutex);
+        std::lock_guard<std::mutex> lock(blockedBits.mutex);
 
         auto transmitEntity = reinterpret_cast<CBitVector<MAX_EDICTS>*>(pInfo->m_pTransmitEntity);
         transmitEntity->Filter(blockedBits.blockedTransmitBits);

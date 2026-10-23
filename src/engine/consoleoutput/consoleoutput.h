@@ -20,7 +20,7 @@
 #define src_engine_consoleoutput_consoleoutput_h
 
 #include <api/engine/consoleoutput/consoleoutput.h>
-#include <api/utils/mutex.h>
+#include <mutex>
 
 #include <atomic>
 #include <cstdarg>
@@ -62,16 +62,16 @@ private:
     std::atomic<uint32_t> m_WorkState{ 0 };
     std::atomic<bool> m_SkipNextNewlineOnlyLog{ false };
 
-    QueueMutex m_FiltersMutex;
+    std::mutex m_FiltersMutex;
     std::map<uint64_t, std::unique_ptr<ConsoleFilter>> m_Filters;
     uint64_t m_NextFilterId = 1;
 
-    QueueMutex m_ListenersMutex;
+    std::mutex m_ListenersMutex;
     std::map<uint64_t, std::function<void(const std::string&)>> m_Listeners;
     uint64_t m_NextListenerId = 0;
 
-    QueueMutex m_QueueMutex;
-    QueueMutex m_DispatchMutex;
+    std::mutex m_QueueMutex;
+    std::mutex m_DispatchMutex;
     std::vector<std::string> m_QueuedMessages;
     std::vector<std::string> m_DispatchedMessages;
     std::atomic<bool> m_HasQueuedMessages{ false };

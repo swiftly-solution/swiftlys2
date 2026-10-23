@@ -21,8 +21,6 @@
 
 #include <api/memory/allocator/allocator.h>
 
-#include <api/utils/mutex.h>
-
 class MemoryAllocator : public IMemoryAllocator
 {
 public:

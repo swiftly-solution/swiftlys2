@@ -20,7 +20,7 @@
 #define src_monitor_consolelogger_consolelogger_h
 
 #include <atomic>
-#include <api/utils/mutex.h>
+#include <mutex>
 
 #include <condition_variable>
 #include <cstdint>
@@ -47,8 +47,8 @@ private:
     void        WriteEntries(std::queue<std::string>& entries, const std::string& targetFile);
 
     std::queue<std::string>  m_queue;
-    QueueMutex               m_mutex;
-    std::condition_variable_any m_cv;
+    std::mutex               m_mutex;
+    std::condition_variable m_cv;
     std::thread              m_thread;
     std::atomic<bool>        m_running{ false };
 

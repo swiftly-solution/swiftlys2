@@ -55,9 +55,9 @@ bool OnConvarQuery(CServerSideClientBase* client, const CNetMessagePB<CCLCMsg_Re
 }
 
 template <typename Listeners>
-static std::vector<typename Listeners::mapped_type> CopyListeners(QueueMutex& mutex, const Listeners& listeners)
+static std::vector<typename Listeners::mapped_type> CopyListeners(std::mutex& mutex, const Listeners& listeners)
 {
-    QueueLockGuard lock(mutex);
+    std::lock_guard<std::mutex> lock(mutex);
 
     std::vector<typename Listeners::mapped_type> copy;
     copy.reserve(listeners.size());
@@ -183,7 +183,7 @@ void CConvarManager::QueryClientConvar(int playerid, const std::string& cvar_nam
 
 int CConvarManager::AddQueryClientCvarCallback(std::function<void(int, std::string, std::string)> callback)
 {
-    QueueLockGuard lock(m_mtxQueryCallbacks);
+    std::lock_guard<std::mutex> lock(m_mtxQueryCallbacks);
 
     m_queryCallbacks[++m_lastQueryCallbackId] = std::move(callback);
     return m_lastQueryCallbackId;
@@ -191,7 +191,7 @@ int CConvarManager::AddQueryClientCvarCallback(std::function<void(int, std::stri
 
 void CConvarManager::RemoveQueryClientCvarCallback(int callback_id)
 {
-    QueueLockGuard lock(m_mtxQueryCallbacks);
+    std::lock_guard<std::mutex> lock(m_mtxQueryCallbacks);
     m_queryCallbacks.erase(callback_id);
 }
 
@@ -259,7 +259,7 @@ void CConvarManager::CreateConvar(const std::string& cvar_name, EConVarType type
 
     if (!created.convar) return;
 
-    QueueLockGuard lock(m_mtxConvars);
+    std::lock_guard<std::mutex> lock(m_mtxConvars);
     m_createdConvars[cvar_name] = created;
 }
 
@@ -267,7 +267,7 @@ void CConvarManager::DeleteConvar(const std::string& cvar_name)
 {
     CreatedConvar created;
     {
-        QueueLockGuard lock(m_mtxConvars);
+        std::lock_guard<std::mutex> lock(m_mtxConvars);
 
         auto it = m_createdConvars.find(cvar_name);
         if (it == m_createdConvars.end()) return;
@@ -283,7 +283,7 @@ void CConvarManager::DeleteConvar(const std::string& cvar_name)
 
 ConVarRefAbstract& CConvarManager::GetConvarRef(const char* cvar_name)
 {
-    QueueLockGuard lock(m_mtxConvars);
+    std::lock_guard<std::mutex> lock(m_mtxConvars);
 
     auto it = m_convarRefs.find(std::string_view(cvar_name));
     if (it == m_convarRefs.end())
@@ -307,7 +307,7 @@ uint64_t CConvarManager::AddGlobalChangeListener(std::function<void(const char*,
 {
     uint64_t id;
     {
-        QueueLockGuard lock(m_mtxListeners);
+        std::lock_guard<std::mutex> lock(m_mtxListeners);
         id = ++m_lastListenerId;
         m_changeListeners[id] = std::move(callback);
     }
@@ -319,7 +319,7 @@ uint64_t CConvarManager::AddGlobalChangeListener(std::function<void(const char*,
 void CConvarManager::RemoveGlobalChangeListener(uint64_t callback_id)
 {
     {
-        QueueLockGuard lock(m_mtxListeners);
+        std::lock_guard<std::mutex> lock(m_mtxListeners);
         m_changeListeners.erase(callback_id);
     }
 
@@ -330,7 +330,7 @@ uint64_t CConvarManager::AddConvarCreatedListener(std::function<void(const char*
 {
     uint64_t id;
     {
-        QueueLockGuard lock(m_mtxListeners);
+        std::lock_guard<std::mutex> lock(m_mtxListeners);
         id = ++m_lastListenerId;
         m_convarCreatedListeners[id] = std::move(callback);
     }
@@ -342,7 +342,7 @@ uint64_t CConvarManager::AddConvarCreatedListener(std::function<void(const char*
 void CConvarManager::RemoveConvarCreatedListener(uint64_t callback_id)
 {
     {
-        QueueLockGuard lock(m_mtxListeners);
+        std::lock_guard<std::mutex> lock(m_mtxListeners);
         m_convarCreatedListeners.erase(callback_id);
     }
 
@@ -353,7 +353,7 @@ uint64_t CConvarManager::AddConCommandCreatedListener(std::function<void(const c
 {
     uint64_t id;
     {
-        QueueLockGuard lock(m_mtxListeners);
+        std::lock_guard<std::mutex> lock(m_mtxListeners);
         id = ++m_lastListenerId;
         m_conCommandCreatedListeners[id] = std::move(callback);
     }
@@ -365,7 +365,7 @@ uint64_t CConvarManager::AddConCommandCreatedListener(std::function<void(const c
 void CConvarManager::RemoveConCommandCreatedListener(uint64_t callback_id)
 {
     {
-        QueueLockGuard lock(m_mtxListeners);
+        std::lock_guard<std::mutex> lock(m_mtxListeners);
         m_conCommandCreatedListeners.erase(callback_id);
     }
 
@@ -376,7 +376,7 @@ void CConvarManager::UpdateChangeCallback()
 {
     bool install;
     {
-        QueueLockGuard lock(m_mtxListeners);
+        std::lock_guard<std::mutex> lock(m_mtxListeners);
 
         install = !m_changeListeners.empty();
         if (install == m_bChangeCallbackInstalled) return;
@@ -394,7 +394,7 @@ void CConvarManager::UpdateCreationListener()
 {
     bool install;
     {
-        QueueLockGuard lock(m_mtxListeners);
+        std::lock_guard<std::mutex> lock(m_mtxListeners);
 
         install = !m_convarCreatedListeners.empty() || !m_conCommandCreatedListeners.empty();
         if (install == m_bCreationListenerInstalled) return;

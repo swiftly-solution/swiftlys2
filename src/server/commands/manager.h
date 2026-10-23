@@ -20,7 +20,7 @@
 #define src_server_commands_manager_h
 
 #include <api/server/commands/manager.h>
-#include <api/utils/mutex.h>
+#include <mutex>
 
 #include <public/tier1/convar.h>
 
@@ -50,7 +50,7 @@ private:
     bool ResolveCommandName(std::string& command_name);
     void LoadPrefixes();
 
-    QueueMutex m_mtxCommands;
+    std::mutex m_mtxCommands;
     std::unordered_map<std::string, ConCommand*> m_commands;
     std::unordered_map<uint64_t, std::string> m_commandNames;
     uint64_t m_lastCommandId = 0;

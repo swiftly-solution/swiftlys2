@@ -116,7 +116,7 @@ int CServerCommands::HandleCommand(int playerid, const std::string& text, bool d
     args.erase(args.begin());
 
     {
-        QueueLockGuard lock(m_mtxCommands);
+        std::lock_guard<std::mutex> lock(m_mtxCommands);
         if (!ResolveCommandName(commandName))
         {
             return 0;
@@ -142,7 +142,7 @@ void CServerCommands::HandleRegisteredCommand(int playerid, const char* commandL
     args.erase(args.begin());
 
     {
-        QueueLockGuard lock(m_mtxCommands);
+        std::lock_guard<std::mutex> lock(m_mtxCommands);
         if (!ResolveCommandName(commandName))
         {
             return;
@@ -172,7 +172,7 @@ uint64_t CServerCommands::RegisterCommand(std::string commandName, bool register
 {
     commandName = str_tolower(commandName);
 
-    QueueLockGuard lock(m_mtxCommands);
+    std::lock_guard<std::mutex> lock(m_mtxCommands);
     if (!registerRaw)
     {
         if (m_commands.contains(commandName))
@@ -203,7 +203,7 @@ void CServerCommands::SetCommandHandler(CommandHandler handler)
 
 void CServerCommands::UnregisterCommand(uint64_t commandId)
 {
-    QueueLockGuard lock(m_mtxCommands);
+    std::lock_guard<std::mutex> lock(m_mtxCommands);
 
     auto nameIt = m_commandNames.find(commandId);
     if (nameIt == m_commandNames.end())
@@ -225,7 +225,7 @@ bool CServerCommands::IsCommandRegistered(std::string commandName)
 {
     commandName = str_tolower(commandName);
 
-    QueueLockGuard lock(m_mtxCommands);
+    std::lock_guard<std::mutex> lock(m_mtxCommands);
     return ResolveCommandName(commandName);
 }
 
@@ -233,7 +233,7 @@ uint64_t CServerCommands::RegisterAlias(std::string aliasCommand, std::string co
 {
     std::string helpText;
     {
-        QueueLockGuard lock(m_mtxCommands);
+        std::lock_guard<std::mutex> lock(m_mtxCommands);
 
         commandName = str_tolower(commandName);
         if (!ResolveCommandName(commandName))

@@ -21,7 +21,7 @@
 
 #include <api/network/netmessages/netmessages.h>
 
-#include <api/utils/mutex.h>
+#include <mutex>
 #include <api/utils/bitvec.h>
 
  // ofc you need to stay here
@@ -39,7 +39,7 @@ public:
     virtual void SetClientMessageSendHandler(std::function<int(int, int, void*)> handler) override;
     virtual void SetServerMessageInternalSendHandler(std::function<int(int, int, void*)> handler) override;
 private:
-    QueueMutex m_mtxRegisteredMessages;
+    std::mutex m_mtxRegisteredMessages;
     CBitVector<16385> m_registeredMessages[NetMessageHook_Count];
 };
 

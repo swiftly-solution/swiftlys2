@@ -58,7 +58,7 @@ void CEntityListener::OnEntityDeleted(CEntityInstance* pEntity)
         if (!player) continue;
 
         auto& transmittingBits = player->GetBlockedTransmittingBits();
-        QueueLockGuard lock(transmittingBits.mutex);
+        std::lock_guard<std::mutex> lock(transmittingBits.mutex);
 
         transmittingBits.Unblock(entindex);
     }

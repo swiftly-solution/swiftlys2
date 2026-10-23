@@ -24,7 +24,7 @@
 #include <string>
 
 #include <api/engine/voicemanager/voicemanager.h>
-#include <api/utils/mutex.h>
+#include <mutex>
 
 #include <api/utils/bitvec.h>
 #include <public/bitvec.h>
@@ -47,7 +47,7 @@ enum MessageType : uint8_t
 struct BlockedTransmitInfo
 {
     CBitVector<MAX_EDICTS> blockedTransmitBits;
-    QueueMutex mutex;
+    std::mutex mutex;
     std::atomic<int> blockedCount{0};
 
     void Block(int entityidx)

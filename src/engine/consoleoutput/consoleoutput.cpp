@@ -122,7 +122,7 @@ SWIFTLY_CONSOLE_NOINLINE bool CConsoleOutput::FilterOrQueueMessage(const char* s
     bool wakeDispatcher = false;
     if (hasListeners)
     {
-        QueueLockGuard lock(m_QueueMutex);
+        std::lock_guard<std::mutex> lock(m_QueueMutex);
 
         // A listener may have been removed after the fast-path load.
         if (m_WorkState.load(std::memory_order_relaxed) >= LISTENER_INCREMENT)
@@ -209,7 +209,7 @@ void CConsoleOutput::ReloadFilterConfiguration()
         compiled.emplace(nextId++, std::make_unique<ConsoleFilter>(key, code, matchData));
     }
 
-    QueueLockGuard lock(m_FiltersMutex);
+    std::lock_guard<std::mutex> lock(m_FiltersMutex);
     m_Filters = std::move(compiled);
     m_NextFilterId = nextId;
 }
@@ -231,7 +231,7 @@ bool CConsoleOutput::NeedsFiltering(char* text)
     const PCRE2_SPTR str = (PCRE2_SPTR)text;
     const PCRE2_SIZE len = (PCRE2_SIZE)strlen(text);
 
-    QueueLockGuard lock(m_FiltersMutex);
+    std::lock_guard<std::mutex> lock(m_FiltersMutex);
 
     for (auto& [id, filter] : m_Filters)
     {
@@ -247,7 +247,7 @@ bool CConsoleOutput::NeedsFiltering(char* text)
 
 std::string CConsoleOutput::GetCounterText()
 {
-    QueueLockGuard lock(m_FiltersMutex);
+    std::lock_guard<std::mutex> lock(m_FiltersMutex);
 
     std::string out;
     for (const auto& [id, filter] : m_Filters)
@@ -258,7 +258,7 @@ std::string CConsoleOutput::GetCounterText()
 
 uint64_t CConsoleOutput::AddConsoleListener(std::function<void(const std::string&)> callback)
 {
-    QueueLockGuard lock(m_ListenersMutex);
+    std::lock_guard<std::mutex> lock(m_ListenersMutex);
 
     const uint64_t id = m_NextListenerId++;
     m_Listeners.emplace(id, std::move(callback));
@@ -270,7 +270,7 @@ void CConsoleOutput::RemoveConsoleListener(uint64_t id)
 {
     bool removedLastListener = false;
     {
-        QueueLockGuard lock(m_ListenersMutex);
+        std::lock_guard<std::mutex> lock(m_ListenersMutex);
         if (m_Listeners.erase(id) == 0) return;
 
         const uint32_t previousState = m_WorkState.fetch_sub(LISTENER_INCREMENT, std::memory_order_relaxed);
@@ -279,7 +279,7 @@ void CConsoleOutput::RemoveConsoleListener(uint64_t id)
 
     if (removedLastListener)
     {
-        QueueLockGuard lock(m_QueueMutex);
+        std::lock_guard<std::mutex> lock(m_QueueMutex);
         m_QueuedMessages.clear();
         m_HasQueuedMessages.store(false, std::memory_order_release);
     }
@@ -292,13 +292,13 @@ void CConsoleOutput::DispatchQueuedListeners()
 
     // The worker is the normal consumer. An explicit command-output flush may race it;
     // wait for the active batch so the capture window cannot close too early.
-    QueueLockGuard dispatchLock(m_DispatchMutex);
+    std::lock_guard<std::mutex> dispatchLock(m_DispatchMutex);
 
     // Avoid taking the queue mutex when no console messages were produced.
     if (!m_HasQueuedMessages.exchange(false, std::memory_order_acq_rel)) return;
 
     {
-        QueueLockGuard lock(m_QueueMutex);
+        std::lock_guard<std::mutex> lock(m_QueueMutex);
         m_QueuedMessages.swap(m_DispatchedMessages);
     }
 
@@ -306,7 +306,7 @@ void CConsoleOutput::DispatchQueuedListeners()
 
     std::vector<std::function<void(const std::string&)>> listeners;
     {
-        QueueLockGuard lock(m_ListenersMutex);
+        std::lock_guard<std::mutex> lock(m_ListenersMutex);
         listeners.reserve(m_Listeners.size());
         for (const auto& [id, callback] : m_Listeners)
             listeners.emplace_back(callback);

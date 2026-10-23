@@ -158,7 +158,7 @@ void CNetMessages::RegisterMessageHook(NetMessageHookType type, int messageid)
 {
     if (type < 0 || type >= NetMessageHook_Count) return;
 
-    QueueLockGuard lock(m_mtxRegisteredMessages);
+    std::lock_guard<std::mutex> lock(m_mtxRegisteredMessages);
     m_registeredMessages[type].Set(messageid);
 }
 
@@ -166,7 +166,7 @@ void CNetMessages::UnregisterMessageHook(NetMessageHookType type, int messageid)
 {
     if (type < 0 || type >= NetMessageHook_Count) return;
 
-    QueueLockGuard lock(m_mtxRegisteredMessages);
+    std::lock_guard<std::mutex> lock(m_mtxRegisteredMessages);
     m_registeredMessages[type].Clear(messageid);
 }
 
@@ -174,7 +174,7 @@ bool CNetMessages::IsMessageRegistered(NetMessageHookType type, int messageid)
 {
     if (type < 0 || type >= NetMessageHook_Count) return false;
 
-    QueueLockGuard lock(m_mtxRegisteredMessages);
+    std::lock_guard<std::mutex> lock(m_mtxRegisteredMessages);
     return m_registeredMessages[type].IsBitSet(messageid);
 }
 

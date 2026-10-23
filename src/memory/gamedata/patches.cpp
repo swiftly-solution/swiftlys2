@@ -143,7 +143,7 @@ std::vector<uint8_t> HexToByte(const char* src, uint64_t& length)
 
 void GameDataPatches::Apply(const std::string& name)
 {
-    QueueLockGuard lock(m_mtxLock);
+    std::lock_guard<std::mutex> lock(m_mtxLock);
     auto signature = m_mPatches[name].second;
 
     if (!g_pGameDataManager->GetSignatures()->Exists(signature))
@@ -178,7 +178,7 @@ void GameDataPatches::Apply(const std::string& name)
 
 void GameDataPatches::Revert(const std::string& name)
 {
-    QueueLockGuard lock(m_mtxLock);
+    std::lock_guard<std::mutex> lock(m_mtxLock);
 
     if (m_mOriginalBytes[name].empty())
     {

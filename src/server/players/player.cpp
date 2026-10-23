@@ -421,19 +421,19 @@ void CPlayer::Think()
 
 void CPlayer::RenderMenuCenterText(const std::string& text)
 {
-    QueueLockGuard lock(centerMenuMutex);
+    std::lock_guard<std::mutex> lock(centerMenuMutex);
     centerMenuText = text;
 }
 
 void CPlayer::ClearRenderMenuCenterText()
 {
-    QueueLockGuard lock(centerMenuMutex);
+    std::lock_guard<std::mutex> lock(centerMenuMutex);
     centerMenuText = "";
 }
 
 bool CPlayer::HasMenuShown()
 {
-    QueueLockGuard lock(centerMenuMutex);
+    std::lock_guard<std::mutex> lock(centerMenuMutex);
     return !centerMenuText.empty();
 }
 
@@ -444,13 +444,13 @@ uint64_t CPlayer::GetSessionID()
 
 bool CPlayer::IsListeningGameEvent(int eventID)
 {
-    QueueLockGuard lock(m_listeningGameEventsMutex);
+    std::lock_guard<std::mutex> lock(m_listeningGameEventsMutex);
     return m_listeningGameEvents.IsBitSet(eventID);
 }
 
 void CPlayer::SetListeningGameEvents(CBitVector<8192>& eventIDs)
 {
-    QueueLockGuard lock(m_listeningGameEventsMutex);
+    std::lock_guard<std::mutex> lock(m_listeningGameEventsMutex);
     m_listeningGameEvents.CopyFrom(eventIDs);
 }
 

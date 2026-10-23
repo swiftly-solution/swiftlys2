@@ -131,7 +131,7 @@ void ConsoleLogger::Initialize()
     m_thread = std::thread(&ConsoleLogger::WorkerThread, this);
 
     m_listenerId = g_pConsoleOutput->AddConsoleListener([this](const std::string& message) {
-        QueueLockGuard lock(m_mutex);
+        std::lock_guard<std::mutex> lock(m_mutex);
         m_queue.push(fmt::format("[{}] {}", GetTimestampString(), message));
         });
 }
@@ -159,7 +159,7 @@ ConsoleLogger::~ConsoleLogger()
 void ConsoleLogger::StopWorker()
 {
     {
-        QueueLockGuard lock(m_mutex);
+        std::lock_guard<std::mutex> lock(m_mutex);
         m_running = false;
     }
     m_cv.notify_all();
@@ -181,7 +181,7 @@ void ConsoleLogger::FlushQueue()
 
     std::queue<std::string> local;
     {
-        QueueLockGuard lock(m_mutex);
+        std::lock_guard<std::mutex> lock(m_mutex);
         std::swap(local, m_queue);
     }
 
@@ -193,7 +193,7 @@ void ConsoleLogger::FlushQueue()
 
 void ConsoleLogger::WorkerThread()
 {
-    std::unique_lock<QueueMutex> lock(m_mutex);
+    std::unique_lock<std::mutex> lock(m_mutex);
     while (m_running)
     {
         m_cv.wait_for(lock, std::chrono::milliseconds(m_writeIntervalMs), [this] { return !m_running.load(); });
