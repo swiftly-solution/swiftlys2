@@ -33,7 +33,7 @@ public:
     {
         std::unique_lock<std::mutex> lk(internal_m);
 
-        if (!locked)
+        if (!locked && waiters.empty())
         {
             locked = true;
             return;
@@ -43,7 +43,7 @@ public:
         waiters.push(&cv);
 
         cv.wait(lk, [&]
-            { return &cv == waiters.front(); });
+            { return !locked && &cv == waiters.front(); });
 
         locked = true;
         waiters.pop();
@@ -61,8 +61,8 @@ public:
 
     bool try_lock()
     {
-        std::lock_guard<std::mutex> lk(internal_m);
-        if (!locked)
+        std::unique_lock<std::mutex> lk(internal_m, std::try_to_lock);
+        if (lk.owns_lock() && !locked && waiters.empty())
         {
             locked = true;
             return true;
