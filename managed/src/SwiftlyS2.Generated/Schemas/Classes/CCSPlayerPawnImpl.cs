@@ -1137,14 +1137,14 @@ internal partial class CCSPlayerPawnImpl : CCSPlayerPawnBaseImpl, CCSPlayerPawn
             return ref _Handle.AsRef<bool>(_GunGameImmunityOffset);
         }
     }
-    private static nint _Modifier0Offset = -1;
+    private static nint _BigHeadScaleOffset = -1;
 
-    public ref float Modifier0
+    public ref float BigHeadScale
     {
         get
         {
-            if (_Modifier0Offset == -1) _Modifier0Offset = Schema.GetOffset(0xC7614AABEF5E6FF2);
-            return ref _Handle.AsRef<float>(_Modifier0Offset);
+            if (_BigHeadScaleOffset == -1) _BigHeadScaleOffset = Schema.GetOffset(0xC7614AABF1538009);
+            return ref _Handle.AsRef<float>(_BigHeadScaleOffset);
         }
     }
     private static nint _MolotovDamageTimeOffset = -1;
@@ -1226,7 +1226,7 @@ internal partial class CCSPlayerPawnImpl : CCSPlayerPawnBaseImpl, CCSPlayerPawn
     public void GunGameImmunityColorUpdated() => Schema.Update(_Handle, 0xC7614AAB5C81D4A0);
     public void ImmuneToGunGameDamageTimeUpdated() => Schema.Update(_Handle, 0xC7614AAB8305FCCB);
     public void GunGameImmunityUpdated() => Schema.Update(_Handle, 0xC7614AAB9C15080D);
-    public void Modifier0Updated() => Schema.Update(_Handle, 0xC7614AABEF5E6FF2);
+    public void BigHeadScaleUpdated() => Schema.Update(_Handle, 0xC7614AABF1538009);
     public void MolotovDamageTimeUpdated() => Schema.Update(_Handle, 0xC7614AABD2CDBE21);
     public void EyeAnglesUpdated() => Schema.Update(_Handle, 0xC7614AAB4EE662AC);
 }

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_CSGameRules : C_TeamplayRules, ISchemaClass<C_CSGameRules>
 {
     static C_CSGameRules ISchemaClass<C_CSGameRules>.From(nint handle) => new C_CSGameRulesImpl(handle);
-    static int ISchemaClass<C_CSGameRules>.Size => 20320;
+    static int ISchemaClass<C_CSGameRules>.Size => 20328;
     static string? ISchemaClass<C_CSGameRules>.ClassName => null;
 
 
@@ -138,6 +138,8 @@ public partial interface C_CSGameRules : C_TeamplayRules, ISchemaClass<C_CSGameR
     public ISchemaFixedArray<int> MatchStats_PlayersAlive_T { get; }
 
     public ISchemaFixedArray<float> TeamRespawnWaveTimes { get; }
+
+    public ref int ActiveMutators { get; }
 
     public ISchemaClassFixedArray<GameTime_t> NextRespawnWave { get; }
 

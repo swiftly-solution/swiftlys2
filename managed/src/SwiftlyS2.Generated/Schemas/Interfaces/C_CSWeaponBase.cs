@@ -71,11 +71,11 @@ public partial interface C_CSWeaponBase : C_BasePlayerWeapon, ISchemaClass<C_CSW
 
     public GameTime_t TimeSilencerSwitchComplete { get; }
 
-    public ref bool Stealthy { get; }
+    public ref bool IsInStealthReload { get; }
 
     public ref bool InSilentReloadSection { get; }
 
-    public GameTime_t StealthHoldStartTime { get; }
+    public GameTime_t StealthReloadHoldStartTime { get; }
 
     public ref bool ReloadHeldSinceStart { get; }
 

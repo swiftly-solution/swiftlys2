@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CCSGameRules : CTeamplayRules, ISchemaClass<CCSGameRules>
 {
     static CCSGameRules ISchemaClass<CCSGameRules>.From(nint handle) => new CCSGameRulesImpl(handle);
-    static int ISchemaClass<CCSGameRules>.Size => 70728;
+    static int ISchemaClass<CCSGameRules>.Size => 70736;
     static string? ISchemaClass<CCSGameRules>.ClassName => null;
 
 
@@ -138,6 +138,8 @@ public partial interface CCSGameRules : CTeamplayRules, ISchemaClass<CCSGameRule
     public ISchemaFixedArray<int> MatchStats_PlayersAlive_T { get; }
 
     public ISchemaFixedArray<float> TeamRespawnWaveTimes { get; }
+
+    public ref int ActiveMutators { get; }
 
     public ISchemaClassFixedArray<GameTime_t> NextRespawnWave { get; }
 
@@ -456,6 +458,7 @@ public partial interface CCSGameRules : CTeamplayRules, ISchemaClass<CCSGameRule
     public void MatchStats_PlayersAlive_CTUpdated();
     public void MatchStats_PlayersAlive_TUpdated();
     public void TeamRespawnWaveTimesUpdated();
+    public void ActiveMutatorsUpdated();
     public void NextRespawnWaveUpdated();
     public void MinimapMinsUpdated();
     public void MinimapMaxsUpdated();
