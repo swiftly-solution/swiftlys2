@@ -134,6 +134,9 @@ void CrashReporter::Shutdown()
 #endif
 
     delete exceptionHandler;
+#ifndef _WIN32
+    ShutdownCrashReporterLinux();
+#endif
 
     if (!g_dumpWritten && !g_relativeDumpPath.empty())
         Files::Delete(g_relativeDumpPath);

@@ -40,6 +40,9 @@ local protobufs = {
 
 target("swiftlys2")
     set_kind("shared")
+    if not is_plat("windows") then
+        add_deps("sw2dump", {inherit = false})
+    end
     add_options("profiler")
     add_packages("pcre2")
 
@@ -439,4 +442,11 @@ target("swiftlys2")
         os.cp("plugin_files/", package)
         os.mkdir(package.."/bin/"..dist)
         os.cp(target:targetfile(), package.."/bin/"..dist.."/swiftlys2."..ext)
+        if not is_plat("windows") then
+            os.cp(target:dep("sw2dump"):targetfile(), package.."/bin/"..dist.."/sw2dump")
+        end
     end)
+
+if not is_plat("windows") then
+    includes("src/monitor/crashreporter/managed_dump")
+end

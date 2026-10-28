@@ -56,6 +56,7 @@ public:
 extern void InitCrashReporterWindows();
 extern void InitCrashReporterLinux();
 extern void ShutdownCrashReporterWindows();
+extern void ShutdownCrashReporterLinux();
 
 extern void CrashReporterOnTickLinux();
 
