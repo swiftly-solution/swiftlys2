@@ -18,8 +18,8 @@
 
 #include <api/interfaces/interfaces.h>
 #include <api/shared/profiler.h>
-#include <public/tier1/convar.h>
-#include <public/tier1/utlstring.h>
+#include <public/tier0/convar.h>
+#include <public/tier0/utlstring.h>
 #include <scripting/scripting.h>
 
 #include <optional>

@@ -20,28 +20,28 @@
 #include <memory/hooks/vfunction.h>
 
 #include <api/interfaces/interfaces.h>
-#include <api/sdk/recipientfilter.h>
-#include <api/sdk/serversideclient.h>
+#include <public/tier0/recipientfilter.h>
+#include <public/engine2/serversideclient.h>
 #include <api/shared/profiler.h>
 
 #include <optional>
 #include <vector>
 
 #include <public/networksystem/inetworkmessages.h>
-#include <public/engine/igameeventsystem.h>
+#include <public/engine2/igameeventsystem.h>
 
 #include <format>
 
 #include "networkbasetypes.pb.h"
 
-#define CONVAR_FLAGS_TO_REMOVE (FCVAR_HIDDEN | FCVAR_DEVELOPMENTONLY | FCVAR_CLIENTDLL)
+#define CONVAR_FLAGS_TO_REMOVE (CVarFlags::HIDDEN | CVarFlags::DEVELOPMENTONLY | CVarFlags::CLIENTDLL)
 
 bool OnConvarQuery(CServerSideClientBase* client, const CNetMessagePB<CCLCMsg_RespondCvarValue>& msg);
 VFunctionHook g_ProcessRespondCvarValueHook(reinterpret_cast<void*>(OnConvarQuery), "engine2", "CServerSideClient", "CServerSideClient::ProcessRespondCvarValue");
 
 extern bool bypassPostEventAbstractHook;
 
-void ChangedConvarCallback(ConVarRefAbstract* ref, CSplitScreenSlot nSlot, const char* pNewValue, const char* pOldValue, void* __unk01)
+void ChangedConvarCallback(ConVarRefAbstract* ref, CSplitScreenSlot nSlot, const char* pNewValue, const char* pOldValue, ConVarUserInfoSet_t* userData)
 {
     PROFILE_FUNCTION();
 
@@ -168,7 +168,7 @@ void CConvarManager::QueryClientConvar(int playerid, const std::string& cvar_nam
 
     bypassPostEventAbstractHook = true;
 
-    CSingleRecipientFilter filter(playerid);
+    CSingleUserRecipientFilter filter(playerid);
     g_pGameEventSystem->PostEventAbstract(-1, false, &filter, netmsg, msg, 0);
 
     bypassPostEventAbstractHook = false;

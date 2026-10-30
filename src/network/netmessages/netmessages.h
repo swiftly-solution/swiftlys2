@@ -24,7 +24,7 @@
 #include <atomic>
 
  // ofc you need to stay here
-#include <public/engine/igameeventsystem.h>
+#include <public/engine2/igameeventsystem.h>
 
 class CNetMessages : public INetMessages
 {

@@ -22,8 +22,8 @@
 #include <core/entrypoint.h>
 
 #include <public/tier0/platform.h>
-#include <public/steam/isteamclient.h>
-#include <public/steam/isteamgameserver.h>
+#include <public/steamworks/isteamclient.h>
+#include <public/steamworks/isteamgameserver.h>
 
 static constexpr double UPDATE_INTERVAL_SECONDS = 5.0;
 

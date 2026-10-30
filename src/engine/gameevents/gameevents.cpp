@@ -25,11 +25,13 @@
 #include <api/shared/hookresult.h>
 #include <api/shared/profiler.h>
 
-#include <public/iserver.h>
-#include <public/tier1/KeyValues.h>
+#include <public/tier0/keyvalues.h>
 
 #include <format>
 #include <scripting/engine/events.h>
+#include <public/engine2/gamesessionconfiguration.h>
+
+class ISource2WorldSession;
 
 GameEventFireHandler g_fnEventFireHandler;
 GameEventFireHandler g_fnPostEventFireHandler;

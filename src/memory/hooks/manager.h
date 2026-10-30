@@ -25,10 +25,6 @@
 #include "mfunction.h"
 #include "vfunction.h"
 
-#include <entityhandle.h>
-#include <public/entity2/entitysystem.h>
-#include <string_t.h>
-
 class HooksManager : public IHooksManager
 {
 public:
@@ -42,38 +38,6 @@ public:
     virtual void DestroyFunctionHook(IFunctionHook* hook) override;
     virtual void DestroyVFunctionHook(IVFunctionHook* hook) override;
     virtual void DestroyMFunctionHook(IMFunctionHook* hook) override;
-};
-
-struct EntityIOConnectionDesc_t
-{
-    string_t m_targetDesc;
-    string_t m_targetInput;
-    string_t m_valueOverride;
-    CEntityHandle m_hTarget;
-    EntityIOTargetType_t m_nTargetType;
-    int32_t m_nTimesToFire;
-    float m_flDelay;
-};
-
-struct EntityIOConnection_t : EntityIOConnectionDesc_t
-{
-    bool m_bMarkedForRemoval;
-    EntityIOConnection_t* m_pNext;
-};
-
-struct EntityIOOutputDesc_t
-{
-    const char* m_pName;
-    uint32_t m_nFlags;
-    uint32_t m_nOutputOffset;
-};
-
-class CEntityIOOutput
-{
-public:
-    void* vtable;
-    EntityIOConnection_t* m_pConnections;
-    EntityIOOutputDesc_t* m_pDesc;
 };
 
 #endif

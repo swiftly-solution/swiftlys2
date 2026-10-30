@@ -35,13 +35,13 @@ static bool IsStandardLayoutClass(const SchemaClassInfoData_t* classData)
     int classesWithFields = 0;
     for (auto pClass = classData; pClass != nullptr; pClass = pClass->m_pBaseClasses ? pClass->m_pBaseClasses->m_pClass : nullptr)
     {
-        if ((pClass->m_nSize > 1) || (pClass->m_nFieldCount != 0))
+        if ((pClass->m_nSizeOf > 1) || (pClass->m_nNumFields != 0))
             classesWithFields++;
 
         if (classesWithFields > 1) return false;
     }
 
-    for (const auto& field : std::span(classData->m_pFields, classData->m_nFieldCount))
+    for (const auto& field : std::span(classData->m_pFields, classData->m_nNumFields))
     {
         if (!field.m_pType || field.m_pType->m_eTypeCategory != SchemaTypeCategory_t::SCHEMA_TYPE_DECLARED_CLASS) continue;
 
@@ -56,11 +56,11 @@ static int FindChainerOffset(const CSchemaClassInfo* classInfo)
 {
     PROFILE_FUNCTION();
 
-    for (const auto& field : std::span(classInfo->m_pFields, classInfo->m_nFieldCount))
-        if (kChainEntityField == field.m_pszName)
+    for (const auto& field : std::span(classInfo->m_pFields, classInfo->m_nNumFields))
+        if (kChainEntityField == field.m_pName)
             return field.m_nSingleInheritanceOffset;
 
-    for (int i = 0; i < classInfo->m_nBaseClassCount; i++)
+    for (int i = 0; i < classInfo->m_nNumBaseClasses; i++)
     {
         auto baseClass = classInfo->m_pBaseClasses[i].m_pClass;
         if (!baseClass) continue;
@@ -80,33 +80,33 @@ void CSDKSchema::ReadClasses(CSchemaType_DeclaredClass* declClass)
     auto classInfo = declClass->m_pClassInfo;
     if (!classInfo) return;
 
-    const uint64_t classHash = static_cast<uint64_t>(hash_32_fnv1a_const(classInfo->m_pszName)) << 32;
+    const uint64_t classHash = static_cast<uint64_t>(hash_32_fnv1a_const(classInfo->m_pName)) << 32;
     void* classVtable = nullptr;
 
     const SchemaField classDefaults{
         .m_nChainerOffset = FindChainerOffset(classInfo),
         .m_bIsStruct = IsStandardLayoutClass(classInfo),
-        .m_bHasVtable = g_pS2BinLib->FindVtable("server", classInfo->m_pszName, &classVtable) == 0,
+        .m_bHasVtable = g_pS2BinLib->FindVtable("server", classInfo->m_pName, &classVtable) == 0,
     };
 
     std::string networkVarName;
 
-    for (const auto& field : std::span(classInfo->m_pFields, classInfo->m_nFieldCount))
+    for (const auto& field : std::span(classInfo->m_pFields, classInfo->m_nNumFields))
     {
         SchemaField info = classDefaults;
         info.m_uOffset = static_cast<uint32_t>(field.m_nSingleInheritanceOffset);
 
         void* vtable = nullptr;
         uint64_t index = 0;
-        networkVarName = std::format("NetworkVar_{}", field.m_pszName);
+        networkVarName = std::format("NetworkVar_{}", field.m_pName);
 
-        if (g_pS2BinLib->FindVtableNested2("server", classInfo->m_pszName, networkVarName.c_str(), &vtable) == 0 &&
+        if (g_pS2BinLib->FindVtableNested2("server", classInfo->m_pName, networkVarName.c_str(), &vtable) == 0 &&
             g_pS2BinLib->FindNetworkvarVtableStatechanged(reinterpret_cast<uint64_t>(vtable), &index) == 0)
         {
             info.m_nStateChangedOffset = static_cast<int32_t>(index);
             m_networkVarStateChangedOffsets.try_emplace(vtable, info.m_nStateChangedOffset);
         }
 
-        m_fields.try_emplace(classHash | hash_32_fnv1a_const(field.m_pszName), info);
+        m_fields.try_emplace(classHash | hash_32_fnv1a_const(field.m_pName), info);
     }
 }

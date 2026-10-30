@@ -213,10 +213,10 @@ uint64_t CServerCommands::RegisterCommand(std::string commandName, bool register
     }
 
     char* helpCopy = strdup(helpText.c_str());
-    std::unique_ptr<ConCommand> conCommand(new ConCommand(commandName.c_str(), CommandsCallback, helpCopy, FCVAR_CLIENT_CAN_EXECUTE | FCVAR_LINKED_CONCOMMAND));
+    std::unique_ptr<ConCommand> conCommand(new ConCommand(commandName.c_str(), CommandsCallback, helpCopy, CVarFlags::CLIENT_CAN_EXECUTE | CVarFlags::LINKED_CONCOMMAND));
 
     if (conCommand)
-        conCommand->RemoveFlags(FCVAR_SERVER_CAN_EXECUTE);
+        conCommand->RemoveFlags(CVarFlags::SERVER_CAN_EXECUTE);
 
     std::lock_guard lock(m_mtxCommands);
     if (!conCommand)

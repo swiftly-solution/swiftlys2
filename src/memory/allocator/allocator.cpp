@@ -20,7 +20,7 @@
 #include <api/shared/profiler.h>
 #include <cstring>
 
-#include "tier0/memdbgon.h"
+#include <public/tier0/memdbgon.h>
 
 void* MemoryAllocator::Alloc(uint64_t size)
 {

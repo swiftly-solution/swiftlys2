@@ -24,7 +24,7 @@
 
 #include <api/shared/hash.h>
 
-#include <public/datamap.h>
+#include <public/entity2/datamap.h>
 
 inline constexpr uint64_t SchemaFieldHash(const char* sClassName, const char* sMemberName) noexcept
 {

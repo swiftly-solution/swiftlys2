@@ -42,7 +42,7 @@ void Bridge_FileSystem_AddSearchPath(char* path, char* pathId, int32_t searchPat
 {
     PROFILE_FUNCTION();
 
-    g_pGameFileSystem->AddSearchPath(path, pathId, (SearchPathAdd_t)searchPathAdd, (SearchPathPriority_t)searchPathPriority, 0);
+    g_pGameFileSystem->AddSearchPath(path, pathId, (SearchPathAdd_t)searchPathAdd, (SearchPathPriority_t)searchPathPriority);
 }
 
 bool Bridge_FileSystem_RemoveSearchPath(char* path, char* pathId)

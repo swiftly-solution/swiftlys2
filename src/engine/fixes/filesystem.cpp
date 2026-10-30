@@ -34,5 +34,5 @@ void FileSystemFix::Start()
 
     g_pGameFileSystem->RemoveSearchPath(swiftly_path.c_str(), "GAME");
     g_pGameFileSystem->RemoveSearchPaths("DEFAULT_WRITE_PATH");
-    g_pGameFileSystem->AddSearchPath(gamefolder_path.c_str(), "DEFAULT_WRITE_PATH", PATH_ADD_TO_TAIL, SEARCH_PATH_PRIORITY_DEFAULT, 0);
+    g_pGameFileSystem->AddSearchPath(gamefolder_path.c_str(), "DEFAULT_WRITE_PATH", PATH_ADD_TO_TAIL, SEARCH_PATH_PRIORITY_DEFAULT);
 }

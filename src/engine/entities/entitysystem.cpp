@@ -22,13 +22,16 @@
 #include <cstdint>
 
 #include <public/entity2/entitysystem.h>
-#include <public/iserver.h>
+#include <public/game/gameentitysystem.h>
+#include <public/engine2/gamesessionconfiguration.h>
 
 #include "listener.h"
 
 #include <api/interfaces/interfaces.h>
 #include <api/shared/profiler.h>
 #include <scripting/engine/events.h>
+
+class ISource2WorldSession;
 
 CGameEntitySystem* g_pGameEntitySystem = nullptr;
 
@@ -66,22 +69,6 @@ void StartupServerHook(void* _this, const GameSessionConfiguration_t& config, IS
 
     if (g_pOnStartupServerCallback)
         g_pOnStartupServerCallback();
-}
-
-void CEntSystem::AddEntityListener(IEntityListener* listener)
-{
-    PROFILE_FUNCTION();
-
-    if (g_pGameEntitySystem)
-        g_pGameEntitySystem->AddListenerEntity(listener);
-}
-
-void CEntSystem::RemoveEntityListener(IEntityListener* listener)
-{
-    PROFILE_FUNCTION();
-
-    if (g_pGameEntitySystem)
-        g_pGameEntitySystem->RemoveListenerEntity(listener);
 }
 
 CEntitySystem* CEntSystem::GetEntitySystem()

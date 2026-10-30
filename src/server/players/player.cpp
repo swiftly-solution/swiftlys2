@@ -18,19 +18,19 @@
 
 #include "player.h"
 
-#include <api/sdk/recipientfilter.h>
+#include <public/tier0/recipientfilter.h>
 #include <api/shared/profiler.h>
 #include <api/shared/string.h>
 
-#include <public/engine/igameeventsystem.h>
+#include <public/engine2/igameeventsystem.h>
 #include <public/networksystem/inetworkmessages.h>
 
-#include <game/shared/ehandle.h>
+#include <public/game/ehandle.h>
 
 #include "usermessages.pb.h"
 #include "gameevents.pb.h"
-#include <api/sdk/serversideclient.h>
-#include <public/iserver.h>
+#include <public/engine2/serversideclient.h>
+#include <public/engine2/networkgameserverbase.h>
 #include <scripting/engine/events.h>
 
 #include <vector>
@@ -61,16 +61,12 @@ static void* GetHandleEntity(void* owner, uint64_t hash)
     return handle ? handle->Get() : nullptr;
 }
 
-CServerSideClient* GetServerSideClient(int playerid)
+CServerSideClientBase* GetServerSideClient(int playerid)
 {
     PROFILE_FUNCTION();
 
-    static const auto offset = g_pGameDataManager->GetOffsets()->Fetch("CNetworkGameServer::m_Clients");
-
     auto gameserver = g_pGameNetworkServerService->GetIGameServer();
-
-    auto clients = reinterpret_cast<CUtlVector<CServerSideClient*>*>(reinterpret_cast<uintptr_t>(gameserver) + offset);
-    return clients->Element(playerid);
+    return gameserver->m_Clients.Element(playerid);
 }
 
 void PostTextMsg(IRecipientFilter* filter, MessageType type, const std::string& message, std::optional<int> team)
@@ -170,7 +166,7 @@ void CPlayer::SendMsg(MessageType type, const std::string& message, int duration
         return;
     }
 
-    CSingleRecipientFilter filter(m_iPlayerId);
+    CSingleUserRecipientFilter filter(m_iPlayerId);
     PostTextMsg(&filter, type, message, GetTeam());
 }
 
@@ -391,7 +387,7 @@ void CPlayer::Kick(const std::string& sReason, int uReason)
 {
     PROFILE_FUNCTION();
 
-    g_pGameEngine->KickClient(m_iPlayerId, sReason.c_str(), uReason);
+    g_pGameEngine->KickClient(m_iPlayerId, sReason.c_str(), (ENetworkDisconnectionReason)uReason);
 }
 
 BlockedTransmitInfo& CPlayer::GetBlockedTransmittingBits()
@@ -545,7 +541,7 @@ void CPlayer::SendGameEvent(IGameEvent* event)
     if(!msg) return;
 
     auto data = msg->AllocateMessage()->ToPB<CMsgSource1LegacyGameEvent>();
-    CSingleRecipientFilter filter(m_iPlayerId);
+    CSingleUserRecipientFilter filter(m_iPlayerId);
 
     bypassPostEventAbstractHook = true;
     g_pGameEventManager->GetGameEventManager()->SerializeEvent(event, data);

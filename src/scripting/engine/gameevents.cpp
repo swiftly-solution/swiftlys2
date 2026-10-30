@@ -20,7 +20,7 @@
 
 #include <api/shared/profiler.h>
 
-#include <game/shared/ehandle.h>
+#include <public/entity2/entityhandle.h>
 
 #include <scripting/scripting.h>
 
@@ -101,7 +101,7 @@ bool Bridge_GameEvents_SetValue(void* pevent, const char* key, int kind, const v
         case GameEventValueKind_Float: event->SetFloat(key, *(const float*)value); break;
         case GameEventValueKind_Ptr: event->SetPtr(key, *(void* const*)value); break;
         case GameEventValueKind_Entity: event->SetEntity(key, *(CEntityInstance* const*)value); break;
-        case GameEventValueKind_EntityIndex: event->SetEntity(key, CEntityIndex(*(const int32_t*)value)); break;
+        case GameEventValueKind_EntityIndex: event->SetEntity(key, CEntityHandle(*(const int32_t*)value)); break;
         case GameEventValueKind_PlayerSlot: event->SetPlayer(key, CPlayerSlot(*(const int32_t*)value)); break;
         default: return false;
     }

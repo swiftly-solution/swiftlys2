@@ -22,7 +22,7 @@
 #include <string>
 #include <functional>
 
-#include <public/igameevents.h>
+#include <public/game/igameevents.h>
 
 // to supercede, return 1
 // IGameEvent* event, bool& dont_broadcast, uint32_t hash

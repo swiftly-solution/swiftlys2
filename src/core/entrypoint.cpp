@@ -34,21 +34,22 @@
 #include <engine/gamesystem/gamesystem.h>
 
 #include <public/tier0/icommandline.h>
-#include <public/tier1/utlstringtoken.h>
+#include <public/tier0/utlstringtoken.h>
+#include <public/engine2/ivengineserver2.h>
 
 #include <api/shared/plat.h>
 #include <api/shared/profiler.h>
 #include <api/shared/string.h>
 #include <mutex>
 
-#include <public/icvar.h>
-#include <public/tier1/KeyValues.h>
+#include <public/tier0/icvar.h>
+#include <public/tier0/keyvalues.h>
 
 #include <format>
 
-#include <public/engine/igameeventsystem.h>
+#include <public/engine2/igameeventsystem.h>
 
-#include <public/tier1/convar.h>
+#include <public/tier0/convar.h>
 #include <thread>
 
 #include <monitor/consolelogger/consolelogger.h>
@@ -112,8 +113,8 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
     g_pS2BinLib->SetModuleBaseFromPointer("engine2", libEngine);
 #endif
 
-    g_pCVar = g_pGameCvar;
-    ConVar_Register(FCVAR_RELEASE | FCVAR_SERVER_CAN_EXECUTE | FCVAR_CLIENT_CAN_EXECUTE | FCVAR_GAMEDLL, nullptr, nullptr);
+    SetGlobalCvarObject(g_pGameCvar);
+    ConVar_Register(CVarFlags::RELEASE | CVarFlags::SERVER_CAN_EXECUTE | CVarFlags::CLIENT_CAN_EXECUTE | CVarFlags::GAMEDLL, nullptr, nullptr);
 
     const char* logLevel = CommandLine()->ParmValue(CUtlStringToken("-sw_loglevel"));
     if (logLevel)

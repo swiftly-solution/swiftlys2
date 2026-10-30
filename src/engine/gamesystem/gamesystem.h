@@ -19,48 +19,6 @@
 #ifndef src_engine_gamesystem_gamesystem_h
 #define src_engine_gamesystem_gamesystem_h
 
-#include <public/entity2/entitysystem.h>
-#include <game/shared/igamesystemfactory.h>
-
 bool InitGameSystem();
-
-class CGameSystem : public CBaseGameSystem
-{
-public:
-    GS_EVENT(BuildGameSessionManifest);
-
-    void Shutdown() override
-    {
-        delete sm_Factory;
-    }
-
-    void SetGameSystemGlobalPtrs(void* pValue) override
-    {
-        if (sm_Factory)
-            sm_Factory->SetGlobalPtr(pValue);
-    }
-
-    bool DoesGameSystemReallocate() override { return sm_Factory->ShouldAutoAdd(); }
-
-    static IGameSystemFactory* sm_Factory;
-};
-
-abstract_class IGameSystemEventDispatcher{
-    public:
-        virtual ~IGameSystemEventDispatcher() {}
-};
-
-class CGameSystemEventDispatcher : public IGameSystemEventDispatcher
-{
-public:
-    CUtlVector<CUtlVector<IGameSystem*>>* m_funcListeners;
-};
-
-struct AddedGameSystem_t
-{
-    IGameSystem* m_pGameSystem;
-    int m_nPriority;
-    int m_nInsertionOrder;
-};
 
 #endif

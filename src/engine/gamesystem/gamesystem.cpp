@@ -22,8 +22,7 @@
 #include <api/interfaces/interfaces.h>
 #include <api/shared/profiler.h>
 #include <scripting/engine/events.h>
-
-CBaseGameSystemFactory** CBaseGameSystemFactory::sm_pFirst = nullptr;
+#include <public/game/igamesystemfactory.h>
 
 void BuildGameSessionManifestHook(void* _this, EventBuildGameSessionManifest_t* msg);
 VFunctionHook g_BuildGameSessionManifestHook(reinterpret_cast<void*>(BuildGameSessionManifestHook), "server", "CGameRulesGameSystem", "IGameSystem::BuildGameSessionManifest");
@@ -48,15 +47,11 @@ bool InitGameSystem()
         return false;
     }
 
-    uintptr_t pAddr = (uintptr_t)ptr;
-
-    pAddr += 3;
-
+    uintptr_t pAddr = (uintptr_t)ptr + 3;
     uint32_t offset = *(uint32_t*)pAddr;
-
     pAddr += 4;
 
-    CBaseGameSystemFactory::sm_pFirst = (CBaseGameSystemFactory**)(pAddr + offset);
+    CBaseGameSystemFactory::SetFirstPtr((CBaseGameSystemFactory**)(pAddr + offset));
 
     return true;
 }

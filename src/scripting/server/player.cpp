@@ -20,7 +20,7 @@
 #include <api/shared/profiler.h>
 #include <scripting/scripting.h>
 
-#include <api/sdk/serversideclient.h>
+#include <public/engine2/serversideclient.h>
 
 void Bridge_Player_SendMessage(int playerid, int kind, const char* message, int duration)
 {
@@ -215,7 +215,7 @@ void Bridge_Player_ExecuteCommand(int playerid, const char* command)
 
     ConCommandRef cmdRef(cmd[0]);
 
-    if (cmdRef.IsValidRef() && !cmdRef.IsFlagSet(FCVAR_SERVER_CAN_EXECUTE))
+    if (cmdRef.IsValidRef() && !cmdRef.IsFlagSet(CVarFlags::SERVER_CAN_EXECUTE))
     {
         CCommandContext context(CommandTarget_t::CT_FIRST_SPLITSCREEN_CLIENT, CPlayerSlot(player->GetSlot()));
         cmdRef.Dispatch(context, cmd);
@@ -267,7 +267,7 @@ char* Bridge_Player_GetClientConvarValue(int* size, int playerid, const char* co
     return Bridge_CopyString(value, size);
 }
 
-CServerSideClient* GetServerSideClient(int playerid);
+CServerSideClientBase* GetServerSideClient(int playerid);
 
 void* Bridge_Player_GetServerSideClient(int playerid)
 {

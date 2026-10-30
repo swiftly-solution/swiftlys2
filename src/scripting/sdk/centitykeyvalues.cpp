@@ -21,7 +21,7 @@
 #include <scripting/scripting.h>
 
 #include <public/entity2/entitykeyvalues.h>
-#include <public/tier1/utlstringtoken.h>
+#include <public/tier0/utlstringtoken.h>
 
 void* Bridge_CEntityKeyValues_Allocate()
 {

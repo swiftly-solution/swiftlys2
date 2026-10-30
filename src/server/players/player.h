@@ -21,8 +21,8 @@
 
 #include <api/server/players/player.h>
 
-#include <public/igameevents.h>
-#include <public/irecipientfilter.h>
+#include <public/game/igameevents.h>
+#include <public/tier0/recipientfilter.h>
 
 #include <chrono>
 #include <mutex>

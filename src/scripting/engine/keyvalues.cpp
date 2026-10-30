@@ -18,7 +18,7 @@
 
 #include <api/interfaces/interfaces.h>
 #include <api/shared/profiler.h>
-#include <public/tier1/IKeyValuesSystem.h>
+#include <public/tier0/keyvaluessystem.h>
 #include <scripting/scripting.h>
 
 uint32_t Bridge_KeyValuesSystem_GetSymbolForString(const char* str)

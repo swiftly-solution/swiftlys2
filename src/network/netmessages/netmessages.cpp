@@ -28,7 +28,7 @@
 #include <utility>
 
 #include <api/interfaces/interfaces.h>
-#include <api/sdk/serversideclient.h>
+#include <public/engine2/serversideclient.h>
 
 #include <api/shared/hookresult.h>
 #include <api/shared/plat.h>

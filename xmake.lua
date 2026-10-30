@@ -20,39 +20,17 @@ local SWIFTLY_VERSION = os.getenv("SWIFTLY_VERSION") or "Local"
 local sdk_path = "vendor/s2sdk"
 local breakpad_path = "vendor/breakpad/src"
 
-local protobufs = {
-    "networkbasetypes",
-    "cs_usercmd",
-    "usercmd",
-    "usermessages",
-    "gameevents",
-    "cstrike15_usermessages",
-    "valveextensions",
-    "network_connection",
-    "netmessages",
-    "networksystem_protomessages",
-    "source2_steam_stats",
-    "cstrike15_gcmessages",
-    "steammessages",
-    "engine_gcmessages",
-    "gcsdk_gcmessages"
-}
+includes(sdk_path)
 
 target("swiftlys2")
     set_kind("shared")
     add_options("profiler")
     add_packages("pcre2")
+    add_deps("s2sdk")
+    add_rules("cpp_properties")
 
     add_files({
         "src/**/*.cpp",
-
-        sdk_path.."/public/tier1/keyvalues3.cpp",
-        sdk_path.."/public/tier1/bitbuf.cpp",
-        sdk_path.."/public/entity2/entitysystem.cpp",
-        sdk_path.."/public/entity2/entityidentity.cpp",
-        sdk_path.."/public/tier1/convar.cpp",
-        sdk_path.."/public/entity2/entitykeyvalues.cpp",
-        sdk_path.."/public/tier0/memoverride.cpp",
     }, { cxxflags = "-rdynamic -g1" })
 
     --[[ -------------------------------- Include Section -------------------------------- ]]
@@ -61,136 +39,16 @@ target("swiftlys2")
         "src",
         "vendor",
 
-        "build/proto",
-
         "src/core/managed/host",
         "src/core/managed/libs/dotnet",
         "src/monitor/crashreporter",
 
-        sdk_path,
-        sdk_path.."/thirdparty/protobuf-3.21.8/src",
-        sdk_path.."/public",
-        sdk_path.."/public/engine",
-        sdk_path.."/public/mathlib",
-        sdk_path.."/public/tier0",
-        sdk_path.."/public/tier1",
-        sdk_path.."/public/entity2",
-        sdk_path.."/game/shared",
-
         breakpad_path,
     })
-
-    --[[ -------------------------------- Flags Section -------------------------------- ]]
-
-    if is_plat("windows") then
-        add_cxflags("/utf-8")
-    end
-
-    add_cxxflags("gcc::-Wno-invalid-offsetof")
-    add_cxxflags("gcc::-Wno-return-local-addr")
-    add_cxxflags("gcc::-Wno-overloaded-virtual")
-    add_cxxflags("gcc::-Wno-unknown-pragmas")
-    add_cxxflags("gcc::-Wno-non-virtual-dtor")
-    add_cxxflags("gcc::-Wno-attributes")
-    add_cxxflags("gcc::-Wno-array-bounds")
-    add_cxxflags("gcc::-Wno-int-to-pointer-cast")
-    add_cxxflags("gcc::-Wno-sign-compare")
-    add_cxxflags("gcc::-Wno-write-strings")
-    add_cxxflags("gcc::-Wno-class-memaccess")
-    add_cxxflags("gcc::-fexceptions")
-    add_cxxflags("gcc::-fPIC")
-    
-    add_cflags("gcc::-Wno-return-local-addr")
-    add_cflags("gcc::-Wno-unknown-pragmas")
-    add_cflags("gcc::-Wno-attributes")
-    add_cflags("gcc::-Wno-array-bounds")
-    add_cflags("gcc::-Wno-int-to-pointer-cast")
-    add_cflags("gcc::-Wno-sign-compare")
-    add_cflags("gcc::-Wno-write-strings")
-    add_cflags("gcc::-fexceptions")
-    add_cflags("gcc::-fPIC")
-    add_cflags("gcc::-pipe")
-    add_cflags("gcc::-fno-strict-aliasing")
-    add_cflags("gcc::-Wall")
-    add_cflags("gcc::-Wno-uninitialized")
-    add_cflags("gcc::-Wno-unused")
-    add_cflags("gcc::-Wno-switch")
-    add_cflags("gcc::-msse")
-    add_cflags("gcc::-fvisibility=hidden")
-    add_cflags("gcc::-mfpmath=sse")
-    add_cflags("gcc::-fno-omit-frame-pointer")
-    add_cflags("gcc::-fvisibility-inlines-hidden")
-    add_cflags("gcc::-fno-exceptions")
-    add_cflags("gcc::-fno-threadsafe-statics")
-    add_cflags("gcc::-Wno-register")
-    add_cflags("gcc::-Wno-delete-non-virtual-dtor")
-
-    add_cxxflags("cl::/Zc:__cplusplus")
-    add_cxxflags("cl::/Ox")
-    add_cxxflags("cl::/Zo")
-    add_cxxflags("cl::/Oy-")
-    add_cxxflags("cl::/TP")
-    add_cxxflags("cl::/W3")
-    add_cxxflags("cl::/EHsc")
-    add_cxxflags("cl::/wd4003")
-    add_cxxflags("cl::/wd4005")
-    add_cxxflags("cl::/wd4018")
-    add_cxxflags("cl::/wd4101")
-    add_cxxflags("cl::/wd4146")
-    add_cxxflags("cl::/wd4267")
-    add_cxxflags("cl::/wd4244")
-    add_cxxflags("cl::/wd4530")
-    add_cxxflags("cl::/wd4828")
-    add_cxxflags("cl::/wd4834")
-
-    set_runtimes("MT")
-
-    --[[ -------------------------------- HL2SDK Mandatory Libs Section -------------------------------- ]]
-
-    add_files({
-        sdk_path.."/mathlib/mathlib.cpp"
-    }, { cxxflags = "-g0" })
-
-    if is_plat("windows") then
-        add_links({
-            sdk_path.."/lib/public/win64/tier0.lib",
-            sdk_path.."/lib/public/win64/tier1.lib",
-            sdk_path.."/lib/public/win64/interfaces.lib",
-            sdk_path.."/lib/public/win64/2015/libprotobuf.lib",
-            sdk_path.."/lib/public/win64/steam_api64.lib"
-        })
-    else
-        add_links({
-            sdk_path.."/lib/linux64/libtier0.so",
-            sdk_path.."/lib/linux64/tier1.a",
-            sdk_path.."/lib/linux64/interfaces.a",
-            sdk_path.."/lib/linux64/release/libprotobuf.a",
-            sdk_path.."/lib/linux64/libsteam_api.so"
-        })
-    end
 
     --[[ -------------------------------- Defines Section -------------------------------- ]]
 
     if(is_plat("windows")) then
-        add_defines({
-            "COMPILER_MSVC",
-            "COMPILER_MSVC64",
-            "WIN32",
-            "_WIN32",
-            "WINDOWS",
-            "_WINDOWS",
-            "CRT_SECURE_NO_WARNINGS",
-            "_CRT_SECURE_NO_WARNINGS",
-            "CRT_SECURE_NO_DEPRECATE",
-            "_CRT_SECURE_NO_DEPRECATE",
-            "CRT_NONSTDC_NO_DEPRECATE",
-            "_CRT_NONSTDC_NO_DEPRECATE",
-            "_MBCS",
-            "PLATFORM_64BITS",
-            "NDEBUG",
-            "_LIBCPP_STD_VER",
-        })
-
         add_files({
             breakpad_path.."/client/windows/crash_generation/client_info.cc",
             breakpad_path.."/client/windows/crash_generation/crash_generation_client.cc",
@@ -203,14 +61,6 @@ target("swiftlys2")
         add_shflags("-Wl,-z,noexecstack", {force = true})
 
         add_defines({
-            "_LINUX",
-            "LINUX",
-            "POSIX",
-            "GNUC",
-            "COMPILER_GCC",
-            "PLATFORM_64BITS",
-            "_GLIBCXX_USE_CXX11_ABI=0",
-
             -- Breakpad config defines
             "BPLOG_MINIMUM_SEVERITY=SEVERITY_CRITICAL",
             "__STDC_FORMAT_MACROS",
@@ -231,15 +81,6 @@ target("swiftlys2")
             "HAVE_SYS_STAT_H=1",
             "HAVE_SYS_TYPES_H=1",
             "HAVE_UNISTD_H=1",
-
-            "_vsnprintf=vsnprintf",
-            "_alloca=alloca",
-            "strcmpi=strcasecmp",
-            "strnicmp=strncasecmp",
-            "_snprintf=snprintf",
-            "_stricmp=strcasecmp",
-            "_strnicmp=strncasecmp",
-            "stricmp=strcasecmp",
         })
 
         add_files({
@@ -277,53 +118,6 @@ target("swiftlys2")
         "HAVE_CONFIG_H",
         "SW_HOST"
     })
-
-    --[[ -------------------------------- Libraries Section -------------------------------- ]]
-
-    if is_plat("windows") then
-        add_links({
-            "psapi",
-            "winmm",
-            "ws2_32",
-            "wldap32",
-            "advapi32",
-            "kernel32",
-            "comdlg32",
-            "crypt32",
-            "normaliz",
-            "wsock32",
-            "legacy_stdio_definitions",
-            "legacy_stdio_wide_specifiers",
-            "user32",
-            "gdi32",
-            "winspool",
-            "shell32",
-            "ole32",
-            "oleaut32",
-            "uuid",
-            "odbc32",
-            "odbccp32",
-            "dbghelp",
-            "ntdll",
-        })
-    else
-        add_links({
-            "gnutls",
-            "z",
-            "pthread",
-            "ssl",
-            "crypto",
-            "m",
-            "dl",
-            "readline",
-            "rt",
-            "idn2",
-            "psl",
-            "brotlidec",
-            "backtrace",
-            "stdc++",
-        })
-    end
 
     --[[ -------------------------------- Vendor Section -------------------------------- ]]
 
@@ -389,36 +183,6 @@ target("swiftlys2")
 		breakpad_path.."/third_party/libdisasm/x86_misc.c",
 		breakpad_path.."/third_party/libdisasm/x86_operand_list.c",
     }, { cxxflags = "-g0" })
-
-    --[[ -------------------------------- Protobuf Section -------------------------------- ]]
-
-    on_load(function(target)
-        if os.exists("build/proto") then
-            return
-        end
-
-        local protoc = is_plat("windows") and sdk_path.."/devtools/bin/protoc.exe" or sdk_path.."/devtools/bin/linux/protoc" 
-        local args = "--proto_path="..sdk_path.."/thirdparty/protobuf-3.21.8/src --proto_path=./protobufs/cs2 --cpp_out=build/proto"
-    
-        os.mkdir("build/proto")
-
-        for _, filename in pairs(protobufs) do
-            local sourcefile = "./protobufs/cs2/"..filename..".proto"
-
-            try {
-                function()
-                    os.iorun(protoc .. " "..args.." --dependency_out=build/proto/"..filename..".d "..sourcefile)
-                end,
-                catch {
-                    function(err)
-                        print(err)
-                    end
-                }
-            }
-        end
-    end)
-
-    add_files("build/proto/**.cc", { cxxflags = "-g0" })
 
     --[[ -------------------------------- Misc Section -------------------------------- ]]
 

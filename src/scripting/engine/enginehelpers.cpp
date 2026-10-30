@@ -25,15 +25,13 @@
 #include <core/entrypoint.h>
 #include <scripting/scripting.h>
 
-#include <public/filesystem.h>
+#include <public/filesystem/filesystem.h>
 #include <public/tier0/platform.h>
-#include <public/iserver.h>
-#include <igamesystemfactory.h>
-#include <networksystem/inetworksystem.h>
+#include <public/tier0/recipientfilter.h>
+#include <public/game/igamesystemfactory.h>
+#include <public/networksystem/inetworksystem.h>
 
 #include <format>
-
-#include <api/sdk/recipientfilter.h>
 
 struct CBaseGameSystemFactory_t : public IGameSystemFactory {
     CBaseGameSystemFactory_t* m_pNext;

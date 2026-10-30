@@ -23,9 +23,9 @@
 
 #include "player.h"
 
-#include <steam/steam_api_common.h>
-#include <steam/isteamuser.h>
-#include <steam/steamclientpublic.h>
+#include <public/steamworks/steam_api_common.h>
+#include <public/steamworks/isteamuser.h>
+#include <public/steamworks/steamclientpublic.h>
 
 #include <array>
 #include <optional>

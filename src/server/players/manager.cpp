@@ -25,7 +25,9 @@
 
 #include <core/entrypoint.h>
 
-#include <api/sdk/recipientfilter.h>
+#include <public/tier0/recipientfilter.h>
+#include <public/entity2/entitynetworkable.h>
+#include <public/engine2/isource2server.h>
 #include <scripting/engine/events.h>
 
 void OnGameFramePlayerHook(void* _this, bool simulate, bool first, bool last);

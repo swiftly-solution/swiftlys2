@@ -20,10 +20,10 @@
 #include <api/shared/profiler.h>
 #include <scripting/scripting.h>
 
-#include <public/engine/igameeventsystem.h>
+#include <public/engine2/igameeventsystem.h>
 #include <public/networksystem/inetworkmessages.h>
 
-#include <api/sdk/recipientfilter.h>
+#include <public/tier0/recipientfilter.h>
 
 #ifdef GetMessage
 #undef GetMessage
@@ -600,7 +600,7 @@ void Bridge_NetMessages_SendMessage(void* pmsg, int msgid, int playerid)
 
     bypassPostEventAbstractHook = true;
 
-    CSingleRecipientFilter filter(playerid);
+    CSingleUserRecipientFilter filter(playerid);
     g_pGameEventSystem->PostEventAbstract(-1, false, &filter, netmsg, msg, 0);
 
     bypassPostEventAbstractHook = false;

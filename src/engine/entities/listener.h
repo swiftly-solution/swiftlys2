@@ -19,7 +19,7 @@
 #ifndef src_engine_entities_listener_h
 #define src_engine_entities_listener_h
 
-#include <public/entity2/entitysystem.h>
+#include <public/game/gameentitysystem.h>
 
 class CEntityListener : public IEntityListener
 {

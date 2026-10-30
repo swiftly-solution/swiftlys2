@@ -35,10 +35,10 @@ using json = nlohmann::json;
 
 extern CConsoleOutput g_ConsoleOutput;
 
-int CLoggingSystem_LogDirectHook(void* loggingSystem, int channel, int severity, LeafCodeInfo_t* leafCode, char const* str, va_list* args);
+int CLoggingSystem_LogDirectHook(void* loggingSystem, int channel, int severity, void* data, char const* str, va_list* args);
 FunctionHook g_CLoggingSystem_LogDirect_Hook(reinterpret_cast<void*>(CLoggingSystem_LogDirectHook), "CLoggingSystem::LogDirect");
 
-int CLoggingSystem_LogDirectHook(void* loggingSystem, int channel, int severity, LeafCodeInfo_t* leafCode, char const* str, va_list* args)
+int CLoggingSystem_LogDirectHook(void* loggingSystem, int channel, int severity, void* data, char const* str, va_list* args)
 {
     PROFILE_FUNCTION();
 
@@ -47,7 +47,7 @@ int CLoggingSystem_LogDirectHook(void* loggingSystem, int channel, int severity,
 
     PROFILE_PAUSE();
 
-    return reinterpret_cast<decltype(&CLoggingSystem_LogDirectHook)>(g_CLoggingSystem_LogDirect_Hook.GetOriginal())(loggingSystem, channel, severity, leafCode, str, args);
+    return reinterpret_cast<decltype(&CLoggingSystem_LogDirectHook)>(g_CLoggingSystem_LogDirect_Hook.GetOriginal())(loggingSystem, channel, severity, data, str, args);
 }
 
 struct ConsoleFilter

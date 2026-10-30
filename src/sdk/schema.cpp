@@ -20,23 +20,17 @@
 
 #include <algorithm>
 #include <cstddef>
+#include <cstring>
 #include <format>
 #include <vector>
 
 #include <api/interfaces/interfaces.h>
 #include <api/shared/profiler.h>
+#include <public/networksystem/networkvar.h>
 
 #include <public/entity2/entityclass.h>
 
 constexpr uint64_t CBaseEntity_m_nSubclassID = SchemaFieldHash("CBaseEntity", "m_nSubclassID");
-
-struct CNetworkVarChainer
-{
-    CEntityInstance* m_pEntity;
-    uint8 pad_0008[24];
-    ChangeAccessorFieldPathIndex_t m_PathIndex;
-    uint8 pad_0024[4];
-};
 
 std::optional<SchemaField> CSDKSchema::FindField(uint64_t uHash) const
 {
@@ -65,19 +59,20 @@ void CSDKSchema::Load()
     m_fields.clear();
     m_networkVarStateChangedOffsets.clear();
 
-    std::vector<CSchemaSystemTypeScope*> scopes{ g_pGameSchemaSystem->GlobalTypeScope() };
+    std::vector<ISchemaSystemTypeScope*> scopes{ g_pGameSchemaSystem->GlobalTypeScope() };
     for (int i = 0; i < g_pGameSchemaSystem->m_TypeScopes.GetNumStrings(); i++)
         scopes.push_back(g_pGameSchemaSystem->m_TypeScopes[i]);
 
     size_t classCount = 0, fieldCount = 0;
     for (auto scope : scopes)
     {
-        classCount += scope->m_DeclaredClasses.m_Map.Count();
+        auto rawScope = (CSchemaSystemTypeScope*)scope;
+        classCount += rawScope->m_DeclaredClasses.m_Map.Count();
 
-        FOR_EACH_MAP(scope->m_DeclaredClasses.m_Map, iter)
+        FOR_EACH_MAP(rawScope->m_DeclaredClasses.m_Map, iter)
         {
-            if (auto classInfo = scope->m_DeclaredClasses.m_Map.Element(iter)->m_pClassInfo)
-                fieldCount += classInfo->m_nFieldCount;
+            if (auto classInfo = rawScope->m_DeclaredClasses.m_Map.Element(iter)->m_pClassInfo)
+                fieldCount += classInfo->m_nNumFields;
         }
     }
 
@@ -85,9 +80,10 @@ void CSDKSchema::Load()
 
     for (auto scope : scopes)
     {
-        FOR_EACH_MAP(scope->m_DeclaredClasses.m_Map, iter)
+        auto rawScope = (CSchemaSystemTypeScope*)scope;
+        FOR_EACH_MAP(rawScope->m_DeclaredClasses.m_Map, iter)
         {
-            ReadClasses(scope->m_DeclaredClasses.m_Map.Element(iter));
+            ReadClasses(rawScope->m_DeclaredClasses.m_Map.Element(iter));
         }
     }
 
@@ -130,9 +126,10 @@ void CSDKSchema::SetStateChanged(void* pEntity, uint64_t uHash)
 
     if (field.m_nChainerOffset != -1) {
         auto pChainer = reinterpret_cast<CNetworkVarChainer*>(reinterpret_cast<uintptr_t>(pEntity) + field.m_nChainerOffset);
-        auto pOwner = pChainer->m_pEntity;
-        if (pOwner != nullptr)
-            pOwner->NetworkStateChanged(NetworkStateChangedData(field.m_uOffset, -1, pChainer->m_PathIndex));
+        if(pChainer == nullptr) return;
+        
+        NetworkStateChangedData data(field.m_uOffset, -1, pChainer->m_PathIndex);
+        pChainer->NetworkStateChanged(data);
     } else if (!field.m_bIsStruct) {
         reinterpret_cast<CEntityInstance*>(pEntity)->NetworkStateChanged(NetworkStateChangedData(field.m_uOffset));
     }
@@ -191,5 +188,10 @@ void* CSDKSchema::GetDatamapFunction(const char* className, const char* function
     if (!entitySystem->m_entClassesByCPPClassname.IsValidIndex(entityClassIndex)) return nullptr;
 
     auto entityClass = entitySystem->m_entClassesByCPPClassname[entityClassIndex];
-    return reinterpret_cast<void*>(entityClass->m_NameToThinkFunc(functionName));
+    if (entityClass == nullptr || entityClass->m_NameToThinkFunc == nullptr) return nullptr;
+
+    auto func = entityClass->m_NameToThinkFunc(functionName);
+    void* address = nullptr;
+    std::memcpy(&address, &func, sizeof(address));
+    return address;
 }

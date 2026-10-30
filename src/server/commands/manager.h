@@ -22,7 +22,7 @@
 #include <api/server/commands/manager.h>
 #include <shared_mutex>
 
-#include <public/tier1/convar.h>
+#include <public/tier0/convar.h>
 
 #include <string>
 #include <unordered_map>

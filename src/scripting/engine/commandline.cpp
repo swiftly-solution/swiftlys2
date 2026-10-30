@@ -17,8 +17,9 @@
  ************************************************************************************************/
 
 #include <scripting/scripting.h>
+
 #include <public/tier0/icommandline.h>
-#include <public/tier1/utlstringtoken.h>
+#include <public/tier0/utlstringtoken.h>
 
 #include <api/interfaces/interfaces.h>
 #include <api/shared/profiler.h>
@@ -104,7 +105,7 @@ bool Scripting_CommandLine_HasParameters()
     ICommandLine* cmdLine = CommandLine();
     if (!cmdLine) return false;
 
-    return cmdLine->HasParms();
+    return cmdLine->IsWellInitialized();
 }
 
 DEFINE_NATIVE("CommandLine.HasParameter", Scripting_CommandLine_HasParameter);

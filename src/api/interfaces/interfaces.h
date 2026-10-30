@@ -48,15 +48,16 @@
 
 #include <api/extension/host.h>
 
-#include <public/filesystem.h>
-#include <public/eiface.h>
-#include <public/engine/igameeventsystem.h>
+#include <public/filesystem/filesystem.h>
+#include <public/engine2/ivengineserver2.h>
+#include <public/engine2/igameeventsystem.h>
 #include <public/networksystem/inetworkmessages.h>
 #include <public/networksystem/inetworksystem.h>
-#include <public/iserver.h>
-#include <public/icvar.h>
+#include <public/tier0/icvar.h>
 #include <public/schemasystem/schemasystem.h>
-#include <public/networkstringtabledefs.h>
+#include <public/networkstrings/tabledefs.h>
+#include <public/schemasystem/atomictypes.h>
+#include <public/engine2/inetworkserverservice.h>
 
 #include <s2binlib/s2binlib.h>
 

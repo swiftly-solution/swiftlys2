@@ -28,9 +28,9 @@
 #include <mutex>
 
 #include <api/utils/bitvec.h>
-#include <public/bitvec.h>
+#include <public/tier0/bitvec.h>
 #include <public/const.h>
-#include <public/igameevents.h>
+#include <public/game/igameevents.h>
 
 #include "networkbasetypes.pb.h"
 

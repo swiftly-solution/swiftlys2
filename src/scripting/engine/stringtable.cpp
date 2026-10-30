@@ -18,7 +18,7 @@
 
 #include <api/interfaces/interfaces.h>
 #include <api/shared/profiler.h>
-#include <networkstringtabledefs.h>
+#include <public/networkstrings/tabledefs.h>
 #include <scripting/scripting.h>
 
 INetworkStringTable* Bridge_StringTable_ContainerFindTable(const char* tableName)
