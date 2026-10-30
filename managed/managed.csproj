@@ -79,7 +79,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="src\SwiftlyS2.Profiler\SwiftlyS2.Profiler.csproj" ReferenceOutputAssembly="false" PrivateAssets="all" />
+    <ProjectReference Include="src\SwiftlyS2.Profiler\SwiftlyS2.Profiler.csproj" ReferenceOutputAssembly="false" PrivateAssets="all"
+                      AdditionalProperties="BaseOutputPath=$([System.IO.Path]::GetFullPath('$(BaseOutputPath)', '$(MSBuildProjectDirectory)'))" />
   </ItemGroup>
 
   <ItemGroup>

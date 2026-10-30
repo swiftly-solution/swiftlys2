@@ -143,6 +143,10 @@ public class TestPlugin : BasePlugin
     public TestPlugin( ISwiftlyCore core ) : base(core)
     {
         Console.WriteLine("[TestPlugin] TestPlugin constructed successfully!");
+        core.GameHooks.Datamaps.CCSPlayerController.ResourceDataThink.Post += (ref @event) =>
+        {
+            Console.WriteLine("resourcedatathink");
+        };
 
         core.GameHooks.Controller.ProcessUsercmds.Pre += ( ref @event ) =>
         {
