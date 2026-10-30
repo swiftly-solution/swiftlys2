@@ -75,15 +75,13 @@ public partial interface CCSWeaponBase : CBasePlayerWeapon, ISchemaClass<CCSWeap
 
     public GameTime_t TimeSilencerSwitchComplete { get; }
 
-    public ref bool Stealthy { get; }
+    public ref bool IsInStealthReload { get; }
 
     public ref bool InSilentReloadSection { get; }
 
-    public ref bool SilentReloadStatCounted { get; }
-
     public ref bool SilentReloadStatPending { get; }
 
-    public GameTime_t StealthHoldStartTime { get; }
+    public GameTime_t StealthReloadHoldStartTime { get; }
 
     public ref bool ReloadHeldSinceStart { get; }
 
@@ -152,8 +150,8 @@ public partial interface CCSWeaponBase : CBasePlayerWeapon, ISchemaClass<CCSWeap
     public void IsHauledBackUpdated();
     public void SilencerOnUpdated();
     public void TimeSilencerSwitchCompleteUpdated();
-    public void StealthyUpdated();
-    public void StealthHoldStartTimeUpdated();
+    public void IsInStealthReloadUpdated();
+    public void StealthReloadHoldStartTimeUpdated();
     public void ReloadHeldSinceStartUpdated();
     public void WeaponActionPlaybackRateUpdated();
     public void OriginalTeamNumberUpdated();

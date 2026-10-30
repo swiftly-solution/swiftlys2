@@ -1033,14 +1033,14 @@ internal partial class C_CSPlayerPawnImpl : C_CSPlayerPawnBaseImpl, C_CSPlayerPa
             return instance;
         }
     }
-    private static nint _Modifier0Offset = -1;
+    private static nint _BigHeadScaleOffset = -1;
 
-    public ref float Modifier0
+    public ref float BigHeadScale
     {
         get
         {
-            if (_Modifier0Offset == -1) _Modifier0Offset = Schema.GetOffset(0x87CCE03EEF5E6FF2);
-            return ref _Handle.AsRef<float>(_Modifier0Offset);
+            if (_BigHeadScaleOffset == -1) _BigHeadScaleOffset = Schema.GetOffset(0x87CCE03EF1538009);
+            return ref _Handle.AsRef<float>(_BigHeadScaleOffset);
         }
     }
     private static nint _MolotovDamageTimeOffset = -1;

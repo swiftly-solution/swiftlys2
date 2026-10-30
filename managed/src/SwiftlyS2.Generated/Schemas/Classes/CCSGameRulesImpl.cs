@@ -692,6 +692,16 @@ internal partial class CCSGameRulesImpl : CTeamplayRulesImpl, CCSGameRules
             return instance;
         }
     }
+    private static nint _ActiveMutatorsOffset = -1;
+
+    public ref int ActiveMutators
+    {
+        get
+        {
+            if (_ActiveMutatorsOffset == -1) _ActiveMutatorsOffset = Schema.GetOffset(0x6295CF65AB325C60);
+            return ref _Handle.AsRef<int>(_ActiveMutatorsOffset);
+        }
+    }
     private static nint _NextRespawnWaveOffset = -1;
     private SchemaClassFixedArray<GameTime_t>? _NextRespawnWaveInstance;
 
@@ -2084,6 +2094,7 @@ internal partial class CCSGameRulesImpl : CTeamplayRulesImpl, CCSGameRules
     public void MatchStats_PlayersAlive_CTUpdated() => Schema.Update(_Handle, 0x6295CF650A468F9C);
     public void MatchStats_PlayersAlive_TUpdated() => Schema.Update(_Handle, 0x6295CF65DCEE8755);
     public void TeamRespawnWaveTimesUpdated() => Schema.Update(_Handle, 0x6295CF65A15A30B1);
+    public void ActiveMutatorsUpdated() => Schema.Update(_Handle, 0x6295CF65AB325C60);
     public void NextRespawnWaveUpdated() => Schema.Update(_Handle, 0x6295CF65F28FB62F);
     public void MinimapMinsUpdated() => Schema.Update(_Handle, 0x6295CF6589AD2CA5);
     public void MinimapMaxsUpdated() => Schema.Update(_Handle, 0x6295CF65F2B86C5F);

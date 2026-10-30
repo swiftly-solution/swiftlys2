@@ -221,7 +221,7 @@ public partial interface CCSPlayerPawn : CCSPlayerPawnBase, ISchemaClass<CCSPlay
 
     public ref bool GunGameImmunity { get; }
 
-    public ref float Modifier0 { get; }
+    public ref float BigHeadScale { get; }
 
     public ref float MolotovDamageTime { get; }
 
@@ -285,7 +285,7 @@ public partial interface CCSPlayerPawn : CCSPlayerPawnBase, ISchemaClass<CCSPlay
     public void GunGameImmunityColorUpdated();
     public void ImmuneToGunGameDamageTimeUpdated();
     public void GunGameImmunityUpdated();
-    public void Modifier0Updated();
+    public void BigHeadScaleUpdated();
     public void MolotovDamageTimeUpdated();
     public void EyeAnglesUpdated();
 }
