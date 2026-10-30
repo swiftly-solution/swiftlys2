@@ -32,7 +32,7 @@
 
 void OnGameFramePlayerHook(void* _this, bool simulate, bool first, bool last);
 
-void OnClientPutInServerHook(void* _this, CPlayerSlot slot, char const* pszName, int type, uint64 xuid);
+void OnClientPutInServerHook(void* _this, CPlayerSlot slot, char const* pszName, ClientPutInServerType_t type, uint64 xuid);
 bool ClientConnectHook(void* _this, CPlayerSlot slot, const char* pszName, uint64 xuid, const char* pszNetworkID, bool unk1, CBufferString* pRejectReason);
 void OnClientConnectedHook(void* _this, CPlayerSlot slot, const char* pszName, uint64 xuid, const char* pszNetworkID, const char* pszAddress, bool bFakePlayer);
 void ClientDisconnectHook(void* _this, CPlayerSlot slot, int reason, const char* pszName, uint64 xuid, const char* pszNetworkID);
@@ -61,15 +61,26 @@ void CPlayerManager::Shutdown()
         player.reset();
 }
 
-void OnClientPutInServerHook(void* _this, CPlayerSlot slot, char const* pszName, int type, uint64 xuid)
+void OnClientPutInServerHook(void* _this, CPlayerSlot slot, char const* pszName, ClientPutInServerType_t type, uint64 xuid)
 {
     reinterpret_cast<decltype(&OnClientPutInServerHook)>(g_ClientPutInServerHook.GetOriginal())(_this, slot, pszName, type, xuid);
 
     PROFILE_FUNCTION();
 
-    if (type == 0)
+    if (type == ClientPutInServerType_t::CLIENT_PUT_IN_SERVER_PLAYER)
     {
         g_pConvarManager->QueryClientConvar(slot.Get(), "cl_language");
+    }
+
+    if(type == ClientPutInServerType_t::CLIENT_PUT_IN_SERVER_HLTV)
+    {
+        auto player = g_pPlayerManager->GetPlayer(slot.Get());
+        if(player)
+        {
+            CBitVector<8192> filledBitVector;
+            filledBitVector.SetAll();
+            player->SetListeningGameEvents(filledBitVector);
+        }
     }
 
     if (g_pGameEngine->IsClientFullyAuthenticated(slot))

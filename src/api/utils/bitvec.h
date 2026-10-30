@@ -62,6 +62,12 @@ public:
         std::fill(std::begin(m_uData), std::end(m_uData), 0ULL);
     }
 
+    void SetAll()
+    {
+        std::fill(std::begin(m_uData), std::end(m_uData), ~0ULL);
+        if (N & 63) m_uData[NUM_QWORDS - 1] &= (1ULL << (N & 63)) - 1;
+    }
+
     void CopyFrom(CBitVector<N>& src)
     {
         for (int i = 0; i < NUM_QWORDS; i++)

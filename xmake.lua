@@ -29,6 +29,8 @@ target("swiftlys2")
     add_deps("s2sdk")
     add_rules("cpp_properties")
 
+    set_runtimes("MT", {public = true})
+
     add_files({
         "src/**/*.cpp",
     }, { cxxflags = "-rdynamic -g1" })
