@@ -261,21 +261,6 @@ void CPlayer::ChangeAuthorizationState(bool bAuthorized)
     }
 }
 
-std::string& CPlayer::GetLanguage()
-{
-    PROFILE_FUNCTION();
-
-    return m_bLanguageRetrieved ? m_sLanguage : std::get<std::string>(g_pConfiguration->GetValue("core.Language"));
-}
-
-void CPlayer::SetLanguage(const std::string& language)
-{
-    PROFILE_FUNCTION();
-
-    m_sLanguage = language;
-    m_bLanguageRetrieved = true;
-}
-
 void* CPlayer::GetController()
 {
     PROFILE_FUNCTION();

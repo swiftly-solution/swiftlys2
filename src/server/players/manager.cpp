@@ -67,11 +67,6 @@ void OnClientPutInServerHook(void* _this, CPlayerSlot slot, char const* pszName,
 
     PROFILE_FUNCTION();
 
-    if (type == ClientPutInServerType_t::CLIENT_PUT_IN_SERVER_PLAYER)
-    {
-        g_pConvarManager->QueryClientConvar(slot.Get(), "cl_language");
-    }
-
     if(type == ClientPutInServerType_t::CLIENT_PUT_IN_SERVER_HLTV)
     {
         auto player = g_pPlayerManager->GetPlayer(slot.Get());

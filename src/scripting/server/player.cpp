@@ -157,18 +157,6 @@ void Bridge_Player_ClearTransmitEntityBlocked(int playerid)
     bv.UnblockAll();
 }
 
-char* Bridge_Player_GetLanguage(int* size, int playerid)
-{
-    PROFILE_FUNCTION();
-
-    auto player = g_pPlayerManager->GetPlayer(playerid);
-    if (!player)
-        return Bridge_CopyString("", size);
-
-    std::string s = player->GetLanguage();
-    return Bridge_CopyString(s, size);
-}
-
 void Bridge_Player_SetCenterMenuRender(int playerid, const char* text)
 {
     PROFILE_FUNCTION();
@@ -291,7 +279,6 @@ DEFINE_NATIVE("Player.Kick", Bridge_Player_Kick);
 DEFINE_NATIVE("Player.ShouldBlockTransmitEntity", Bridge_Player_ShouldBlockTransmitEntity);
 DEFINE_NATIVE("Player.IsTransmitEntityBlocked", Bridge_Player_IsTransmitEntityBlocked);
 DEFINE_NATIVE("Player.ClearTransmitEntityBlocked", Bridge_Player_ClearTransmitEntityBlocked);
-DEFINE_NATIVE("Player.GetLanguage", Bridge_Player_GetLanguage);
 DEFINE_NATIVE("Player.SetCenterMenuRender", Bridge_Player_SetCenterMenuRender);
 DEFINE_NATIVE("Player.ClearCenterMenuRender", Bridge_Player_ClearCenterMenuRender);
 DEFINE_NATIVE("Player.HasMenuShown", Bridge_Player_HasMenuShown);

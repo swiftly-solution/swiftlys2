@@ -1,30 +1,32 @@
 namespace SwiftlyS2.Core.Services;
 
-internal class RootDirService {
-  public string GetRoot() {
-    if (Environment.GetEnvironmentVariable("SWIFTLY_MANAGED_ROOT") is { } root) {
-      return root;
+internal class RootDirService
+{
+    private static string? _root = null;
+
+    public static string GetRoot()
+    {
+        _root ??= Environment.GetEnvironmentVariable("SWIFTLY_MANAGED_ROOT") is { } root ? root : AppContext.BaseDirectory;
+        return _root;
     }
-    return AppContext.BaseDirectory;
-  }
 
-  public string CombineRoot(string path) {
-    return Path.Combine(GetRoot(), path);
-  }
+    public string CombineRoot( string path )
+    {
+        return Path.Combine(GetRoot(), path);
+    }
 
-  public string GetPluginsRoot() {
-    return CombineRoot("plugins");
-  }
+    public string GetPluginsRoot()
+    {
+        return CombineRoot("plugins");
+    }
 
-  public string GetConfigRoot() {
-    return CombineRoot("configs");
-  }
+    public string GetConfigRoot()
+    {
+        return CombineRoot("configs");
+    }
 
-  public string GetDataRoot() {
-    return CombineRoot("data");
-  }
-
-  public string GetTempRoot() {
-    return Path.Combine(GetDataRoot(), "temp");
-  }
+    public string GetDataRoot()
+    {
+        return CombineRoot("data");
+    }
 }

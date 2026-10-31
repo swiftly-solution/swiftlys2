@@ -211,7 +211,6 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
     }
 
     g_pPlayerManager->Initialize();
-    g_pTranslations->Initialize();
 
     StartFixes();
 

@@ -4,6 +4,7 @@ using SwiftlyS2.Core.GameHooks;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.Scheduler;
 using SwiftlyS2.Core.SchemaDefinitions;
+using SwiftlyS2.Core.Translations;
 using SwiftlyS2.Shared.Engine;
 using SwiftlyS2.Shared.Events;
 using SwiftlyS2.Shared.Natives;
@@ -24,6 +25,7 @@ internal class Player : IPlayer, IDisposable
 
     private bool _disposed = false;
     private ServerSideClient _serverSideClient = new();
+    internal Language _language = TranslationService.ServerLanguage;
 
     public int PlayerID => Slot;
     public ulong SessionId { get; }
@@ -37,7 +39,7 @@ internal class Player : IPlayer, IDisposable
     public bool IsAuthorized { get { ThrowIfDisposed(); return NativePlayer.IsAuthorized(Slot); } }
     public uint ConnectedTime { get { ThrowIfDisposed(); return NativePlayer.GetConnectedTime(Slot); } }
 
-    public Language PlayerLanguage { get { ThrowIfDisposed(); return new(NativePlayer.GetLanguage(Slot)); } }
+    public Language PlayerLanguage { get => _language; }
 
     public ulong SteamID { get { ThrowIfDisposed(); return NativePlayer.GetSteamID(Slot); } }
 
@@ -80,8 +82,6 @@ internal class Player : IPlayer, IDisposable
     public bool IsAlive => IsValid && Pawn!.LifeState == (byte)LifeState_t.LIFE_ALIVE;
 
     public bool IsFirstSpawn { get { ThrowIfDisposed(); return NativePlayer.IsFirstSpawn(Slot); } }
-
-    Language IPlayer.PlayerLanguage => PlayerLanguage;
 
     public string Name { get => ServerSideClient.Name; set => ServerSideClient.Name = value; }
 
@@ -176,8 +176,7 @@ internal class Player : IPlayer, IDisposable
 
     public Task SwitchTeamAsync( Team team )
     {
-        if (team == Team.None || team == Team.Spectator) return ChangeTeamAsync(team);
-        else return SchedulerManager.QueueOrNow(() => SwitchTeam(team));
+        return team == Team.None || team == Team.Spectator ? ChangeTeamAsync(team) : SchedulerManager.QueueOrNow(() => SwitchTeam(team));
     }
 
     public void TakeDamage( CTakeDamageInfo damageInfo )

@@ -1,7 +1,6 @@
 using System.Runtime;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Runtime.Loader;
 using Spectre.Console;
 using Microsoft.Extensions.Logging;
 using SwiftlyS2.Shared;
@@ -351,7 +350,7 @@ internal class CoreCommandService
                 break;
             case "save":
                 var generateSummary = !(args.Length > 2 && args[2].Trim().Equals("nosummary", StringComparison.OrdinalIgnoreCase));
-                _ = profileService.SaveAsync(rootDirService.GetRoot(), logger, generateSummary);
+                _ = profileService.SaveAsync(RootDirService.GetRoot(), logger, generateSummary);
                 break;
             default:
                 logger.LogWarning("Unknown command");
@@ -395,7 +394,7 @@ internal class CoreCommandService
                     statusText,
                     $"{pluginId}{version}",
                     Markup.Escape(plugin.Metadata?.Author ?? "Anonymous"),
-                    Markup.Escape(plugin.PluginDirectory is { } dir ? Path.Join("(swRoot)", Path.GetRelativePath(rootDirService.GetRoot(), dir)) : string.Empty));
+                    Markup.Escape(plugin.PluginDirectory is { } dir ? Path.Join("(swRoot)", Path.GetRelativePath(RootDirService.GetRoot(), dir)) : string.Empty));
             }
 
             logger.LogInformation("Plugins (page {Page}/{Total}, {Count} total):", page, totalPages, allPlugins.Count);
@@ -555,7 +554,7 @@ internal class CoreCommandService
                     Markup.Escape(ext.Id),
                     Markup.Escape($"{ext.Name} {ext.Version}"),
                     Markup.Escape(ext.Author),
-                    Markup.Escape(Path.Join("(swRoot)", Path.GetRelativePath(rootDirService.GetRoot(), ext.Path))));
+                    Markup.Escape(Path.Join("(swRoot)", Path.GetRelativePath(RootDirService.GetRoot(), ext.Path))));
             }
 
             logger.LogInformation("Extensions ({Count} total):", extensions.Count);

@@ -44,7 +44,6 @@
 #include <api/server/commands/manager.h>
 #include <api/server/configuration/configuration.h>
 #include <api/server/players/manager.h>
-#include <api/server/translations/translations.h>
 
 #include <api/extension/host.h>
 
@@ -78,7 +77,6 @@ extern IEventManager* g_pGameEventManager;
 extern IScriptingAPI* g_pScriptingAPI;
 extern IPlayerManager* g_pPlayerManager;
 extern IVoiceManager* g_pVoiceManager;
-extern ITranslations* g_pTranslations;
 extern IServerCommands* g_pServerCommands;
 extern INetMessages* g_pNetMessages;
 extern IConsoleOutput* g_pConsoleOutput;

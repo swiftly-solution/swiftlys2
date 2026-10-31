@@ -14,7 +14,7 @@ internal static class ConfigurationCommentService
 {
     public static bool HasDescriptions( Type type )
     {
-        return HasDescriptions(type, new HashSet<Type>());
+        return HasDescriptions(type, []);
     }
 
     public static string WriteJson( string json, string sectionName, Type modelType, JsonSerializerOptions options )
@@ -80,7 +80,7 @@ internal static class ConfigurationCommentService
             return (null, null);
         }
 
-        Type? type = modelType;
+        var type = modelType;
         string? description = null;
         foreach (var segment in segments.Skip(1))
         {
@@ -119,8 +119,8 @@ internal static class ConfigurationCommentService
             if (quote != '\0')
             {
                 if (c == '\\' && quote == '"' && i + 1 < path.Length)
-            {
-                    current.Append(path[++i]);
+                {
+                    _ = current.Append(path[++i]);
                 }
                 else if (c == quote)
                 {
@@ -128,7 +128,7 @@ internal static class ConfigurationCommentService
                 }
                 else
                 {
-                    current.Append(c);
+                    _ = current.Append(c);
                 }
             }
             else if (c is '"' or '\'')
@@ -138,11 +138,11 @@ internal static class ConfigurationCommentService
             else if (c == '.')
             {
                 segments.Add(current.ToString().Trim());
-                current.Clear();
+                _ = current.Clear();
             }
             else
             {
-                current.Append(c);
+                _ = current.Append(c);
             }
         }
         segments.Add(current.ToString().Trim());
@@ -202,11 +202,11 @@ internal static class ConfigurationCommentService
         {
             if (node.Count == 0)
             {
-                builder.Append("{}");
+                _ = builder.Append("{}");
                 return;
             }
 
-            builder.Append('{').Append(_newLine);
+            _ = builder.Append('{').Append(_newLine);
             var index = 0;
             foreach (var (key, value) in node)
             {
@@ -214,14 +214,14 @@ internal static class ConfigurationCommentService
                 WriteMember(key, value, depth + 1, type, description);
                 if (++index < node.Count)
                 {
-                    builder.Append(',');
+                    _ = builder.Append(',');
                 }
 
-                builder.Append(_newLine);
+                _ = builder.Append(_newLine);
             }
 
             Indent(depth);
-            builder.Append('}');
+            _ = builder.Append('}');
         }
 
         public void WriteMember( string key, JsonNode? value, int depth, Type? type, string? description )
@@ -231,12 +231,12 @@ internal static class ConfigurationCommentService
                 foreach (var line in SplitLines(description))
                 {
                     Indent(depth);
-                    builder.Append(line.Length == 0 ? "//" : "// " + line).Append(_newLine);
+                    _ = builder.Append(line.Length == 0 ? "//" : "// " + line).Append(_newLine);
                 }
             }
 
             Indent(depth);
-            builder.Append(JsonSerializer.Serialize(key, options)).Append(": ");
+            _ = builder.Append(JsonSerializer.Serialize(key, options)).Append(": ");
             WriteValue(value, depth, type);
         }
 
@@ -244,23 +244,23 @@ internal static class ConfigurationCommentService
         {
             if (node.Count == 0)
             {
-                builder.Append("[]");
+                _ = builder.Append("[]");
                 return;
             }
 
-            builder.Append('[').Append(_newLine);
+            _ = builder.Append('[').Append(_newLine);
             for (var i = 0; i < node.Count; i++)
             {
                 Indent(depth + 1);
                 WriteValue(node[i], depth + 1, elementType);
                 if (i < node.Count - 1)
                 {
-                    builder.Append(',');
+                    _ = builder.Append(',');
                 }
-                builder.Append(_newLine);
+                _ = builder.Append(_newLine);
             }
             Indent(depth);
-            builder.Append(']');
+            _ = builder.Append(']');
         }
 
         private void WriteValue( JsonNode? value, int depth, Type? type )
@@ -277,10 +277,10 @@ internal static class ConfigurationCommentService
                     WriteArray(array, depth, type is null ? null : GetElementType(type));
                     break;
                 case null:
-                    builder.Append("null");
+                    _ = builder.Append("null");
                     break;
                 default:
-                    builder.Append(value.ToJsonString(options));
+                    _ = builder.Append(value.ToJsonString(options));
                     break;
             }
         }
@@ -289,7 +289,7 @@ internal static class ConfigurationCommentService
         {
             for (var i = 0; i < depth; i++)
             {
-                builder.Append(_indent);
+                _ = builder.Append(_indent);
             }
         }
     }
@@ -348,12 +348,7 @@ internal static class ConfigurationCommentService
     private static bool Matches( MemberInfo member, string key, bool useJsonNames )
     {
         var jsonName = GetConfigurationKeyName(member) ?? member.GetCustomAttribute<JsonPropertyNameAttribute>()?.Name;
-        if (useJsonNames)
-        {
-            return (jsonName ?? member.Name) == key;
-        }
-
-        return member.Name == key || jsonName == key;
+        return useJsonNames ? (jsonName ?? member.Name) == key : member.Name == key || jsonName == key;
     }
 
     private static string? GetDescription( MemberInfo member )
@@ -419,7 +414,7 @@ internal static class ConfigurationCommentService
                 return true;
             }
         }
-        
+
         return false;
     }
 }

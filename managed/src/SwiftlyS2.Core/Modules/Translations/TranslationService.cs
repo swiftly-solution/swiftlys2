@@ -9,7 +9,7 @@ internal class TranslationService : ITranslationService
 {
     private CoreContext _Context { get; init; }
     private TranslationResource _TranslationResource { get; set; } = new();
-    private static Language ServerLanguage = new(NativeServerHelpers.GetServerLanguage());
+    internal static Language ServerLanguage = new(NativeServerHelpers.GetServerLanguage());
     private static Localizer _EmptyLocalizer = new(ServerLanguage, [], []);
 
     public TranslationService( CoreContext context )

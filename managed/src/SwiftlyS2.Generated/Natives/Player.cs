@@ -114,17 +114,6 @@ internal static class NativePlayer
         _ClearTransmitEntityBlocked(playerid);
     }
 
-    private unsafe static delegate* unmanaged<int*, int, byte*> _GetLanguage;
-
-    public unsafe static string GetLanguage(int playerid)
-    {
-        var length = 0;
-        var returnedPtr = _GetLanguage(&length, playerid);
-        var outString = StringAlloc.CreateCSharpString((nint)returnedPtr, length);
-        NativeAllocator.Free((nint)returnedPtr);
-        return outString;
-    }
-
     private unsafe static delegate* unmanaged<int, byte*, void> _SetCenterMenuRender;
 
     public unsafe static void SetCenterMenuRender(int playerid, string text)
