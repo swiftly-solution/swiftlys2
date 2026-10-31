@@ -93,6 +93,7 @@ internal static class Bootstrap
                     .AddPermissionManager()
                     .AddDatabaseConnectionManager()
                     .AddCoreHookService()
+                    .AddCoreVoiceService()
                     .AddCoreCommandService()
                     .AddMenuManagerAPI()
                     .AddMenuManagerAPIService()

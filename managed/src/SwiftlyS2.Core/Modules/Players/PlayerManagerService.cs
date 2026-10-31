@@ -33,6 +33,11 @@ internal class PlayerManagerService : IPlayerManagerService
         _ = SessionIdToPlayerObjects.TryAdd(player.SessionId, player);
     }
 
+    internal static Player? GetPlayerObject( int playerid )
+    {
+        return PlayerObjects.TryGetValue(playerid, out var player) ? (Player)player : null;
+    }
+
     public static void UnregisterPlayerObject( int playerid )
     {
         if (PlayerObjects.TryGetValue(playerid, out var player))

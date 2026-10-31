@@ -56,12 +56,11 @@ internal class CoreTranslationService : IDisposable
             var playerid = @event.PlayerId;
             _core.ConVar.QueryClient(playerid, "cl_language", ( value ) =>
             {
-                var player = _core.PlayerManager.GetPlayer(playerid);
+                var player = PlayerManagerService.GetPlayerObject(playerid);
                 if (player == null) return;
 
-                var corePlayer = (Player)player;
                 if (_languageCodes.TryGetValue(value, out var v))
-                    corePlayer._language = new(v);
+                    player._language = new(v);
             });
         }
     }

@@ -10,4 +10,9 @@ internal static class CoreTranslationServiceInjection
         _ = self.AddSingleton<CoreTranslationService>();
         return self;
     }
+
+    public static void UseCoreTranslationService( this IServiceProvider self )
+    {
+        _ = self.GetRequiredService<CoreTranslationService>();
+    }
 }

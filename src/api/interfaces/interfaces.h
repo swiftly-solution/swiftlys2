@@ -26,7 +26,6 @@
 #include <api/engine/convars/convars.h>
 #include <api/engine/entities/entitysystem.h>
 #include <api/engine/gameevents/gameevents.h>
-#include <api/engine/voicemanager/voicemanager.h>
 
 #include <api/memory/allocator/allocator.h>
 #include <api/memory/gamedata/manager.h>
@@ -76,7 +75,6 @@ extern IConvarManager* g_pConvarManager;
 extern IEventManager* g_pGameEventManager;
 extern IScriptingAPI* g_pScriptingAPI;
 extern IPlayerManager* g_pPlayerManager;
-extern IVoiceManager* g_pVoiceManager;
 extern IServerCommands* g_pServerCommands;
 extern INetMessages* g_pNetMessages;
 extern IConsoleOutput* g_pConsoleOutput;

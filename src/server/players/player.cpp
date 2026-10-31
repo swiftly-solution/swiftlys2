@@ -198,13 +198,6 @@ uint32_t CPlayer::GetConnectedTime()
     return static_cast<uint32_t>(std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - m_uConnectedTimeStart).count());
 }
 
-int CPlayer::GetSlot()
-{
-    PROFILE_FUNCTION();
-
-    return m_iPlayerId;
-}
-
 void CPlayer::SetUnauthorizedSteamID(uint64_t steamID)
 {
     PROFILE_FUNCTION();
@@ -331,27 +324,6 @@ void* CPlayer::GetPlayerPawn()
     PROFILE_FUNCTION();
 
     return GetHandleEntity(GetController(), CCSPlayerController_m_hPlayerPawn);
-}
-
-ListenOverride& CPlayer::GetListenOverride(int targetid)
-{
-    PROFILE_FUNCTION();
-
-    return m_uListenMap[targetid];
-}
-
-VoiceFlagValue& CPlayer::GetVoiceFlags()
-{
-    PROFILE_FUNCTION();
-
-    return m_uVoiceFlags;
-}
-
-CPlayerBitVec& CPlayer::GetSelfMutes()
-{
-    PROFILE_FUNCTION();
-
-    return m_bvSelfMutes;
 }
 
 std::string CPlayer::GetIPAddress()

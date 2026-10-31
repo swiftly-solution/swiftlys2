@@ -37,7 +37,6 @@ DEFINE_EVENT(g_pOnMapUnloadCallback, void, const char*) = nullptr;
 DEFINE_EVENT(g_pOnPrecacheResourceCallback, void, void*) = nullptr;
 DEFINE_EVENT(g_pOnPreworldUpdateCallback, void, bool) = nullptr;
 DEFINE_EVENT(g_pOnStartupServerCallback, void) = nullptr;
-DEFINE_EVENT(g_pOnClientVoiceCallback, void, int) = nullptr;
 
 void Bridge_Events_RegisterOnGameTickCallback(void* callback)
 {
@@ -151,13 +150,6 @@ void Bridge_Events_RegisterOnStartupServerCallback(void* callback)
     g_pOnStartupServerCallback = reinterpret_cast<decltype(g_pOnStartupServerCallback)>(callback);
 }
 
-void Bridge_Events_RegisterOnClientVoiceCallback(void* callback)
-{
-    PROFILE_FUNCTION();
-
-    g_pOnClientVoiceCallback = reinterpret_cast<decltype(g_pOnClientVoiceCallback)>(callback);
-}
-
 DEFINE_NATIVE("Events.RegisterOnGameTickCallback", Bridge_Events_RegisterOnGameTickCallback);
 DEFINE_NATIVE("Events.RegisterOnClientConnectCallback", Bridge_Events_RegisterOnClientConnectCallback);
 DEFINE_NATIVE("Events.RegisterOnClientDisconnectCallback", Bridge_Events_RegisterOnClientDisconnectCallback);
@@ -174,4 +166,3 @@ DEFINE_NATIVE("Events.RegisterOnMapUnloadCallback", Bridge_Events_RegisterOnMapU
 DEFINE_NATIVE("Events.RegisterOnPrecacheResourceCallback", Bridge_Events_RegisterOnPrecacheResourceCallback);
 DEFINE_NATIVE("Events.RegisterOnPreworldUpdateCallback", Bridge_Events_RegisterOnPreworldUpdateCallback);
 DEFINE_NATIVE("Events.RegisterOnStartupServerCallback", Bridge_Events_RegisterOnStartupServerCallback);
-DEFINE_NATIVE("Events.RegisterOnClientVoiceCallback", Bridge_Events_RegisterOnClientVoiceCallback);

@@ -27,6 +27,13 @@ internal class Player : IPlayer, IDisposable
     private ServerSideClient _serverSideClient = new();
     internal Language _language = TranslationService.ServerLanguage;
 
+    private VoiceFlagValue voiceFlags = VoiceFlagValue.Normal;
+    private readonly ListenOverride[] listenOverrides = new ListenOverride[66];
+    private ulong selfMutes;
+
+    internal bool IsMutedBySelf( int slot ) => (uint)slot < 64 && (selfMutes & (1UL << slot)) != 0;
+    internal void SetSelfMutesLowDWord( uint mask ) => selfMutes = (selfMutes & ~0xFFFFFFFFUL) | mask;
+
     public int PlayerID => Slot;
     public ulong SessionId { get; }
 
@@ -73,7 +80,7 @@ internal class Player : IPlayer, IDisposable
 
     public string IPAddress { get { ThrowIfDisposed(); return NativePlayer.GetIPAddress(Slot); } }
 
-    public VoiceFlagValue VoiceFlags { get { ThrowIfDisposed(); return (VoiceFlagValue)NativeVoiceManager.GetClientVoiceFlags(Slot); } set { ThrowIfDisposed(); NativeVoiceManager.SetClientVoiceFlags(Slot, (int)value); } }
+    public VoiceFlagValue VoiceFlags { get { return voiceFlags; } set { voiceFlags = value; } }
     public bool IsValid =>
         !_disposed &&
         Controller is { IsValid: true, IsHLTV: false, Connected: PlayerConnectedState.Connected } &&
@@ -109,7 +116,7 @@ internal class Player : IPlayer, IDisposable
     public ListenOverride GetListenOverride( int player )
     {
         ThrowIfDisposed();
-        return (ListenOverride)NativeVoiceManager.GetClientListenOverride(Slot, player);
+        return (uint)player < (uint)listenOverrides.Length ? listenOverrides[player] : ListenOverride.Default;
     }
 
     public bool IsTransmitEntityBlocked( int entityid )
@@ -156,7 +163,10 @@ internal class Player : IPlayer, IDisposable
     public void SetListenOverride( int player, ListenOverride listenOverride )
     {
         ThrowIfDisposed();
-        NativeVoiceManager.SetClientListenOverride(Slot, player, (int)listenOverride);
+        if ((uint)player < (uint)listenOverrides.Length)
+        {
+            listenOverrides[player] = listenOverride;
+        }
     }
 
     public void ShouldBlockTransmitEntity( int entityid, bool shouldBlockTransmit )
