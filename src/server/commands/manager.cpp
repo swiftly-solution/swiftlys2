@@ -30,6 +30,7 @@
 #include <algorithm>
 #include <cstdlib>
 #include <cstring>
+#include <format>
 #include <mutex>
 #include <shared_mutex>
 #include <string_view>
@@ -210,6 +211,15 @@ uint64_t CServerCommands::RegisterCommand(std::string commandName, bool register
 
         commandId = ++m_lastCommandId;
         m_commandNames.emplace(commandId, commandName);
+    }
+
+    if (g_pGameCvar && g_pGameCvar->FindConCommand(commandName.c_str(), true).IsValidRef())
+    {
+        std::lock_guard lock(m_mtxCommands);
+        m_commandNames.erase(commandId);
+        m_commands.erase(commandName);
+        g_pLogger->Warning("Commands", std::format("Cannot register command \"{}\": a command with this name already exists in the engine. Use a different name (e.g. without registerRaw so it gets the \"sw_\" prefix).", commandName));
+        return 0;
     }
 
     char* helpCopy = strdup(helpText.c_str());
