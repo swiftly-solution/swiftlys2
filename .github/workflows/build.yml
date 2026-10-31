@@ -57,11 +57,11 @@ jobs:
     - name: Build managed (Linux)
       run: |
         cd managed
-        dotnet build -c Release -p:SW2Platform=Linux -p:BaseOutputPath=build/linux/ -p:Version=${{ needs.versioning.outputs.semVer }} -p:InformationalVersion=${{ needs.versioning.outputs.informationalVersion }} -p:FileVersion=${{ needs.versioning.outputs.semVer }}
+        dotnet build -c Release -p:SW2Platform=Linux -p:UseSharedCompilation=false -p:BaseOutputPath=build/linux/ -p:Version=${{ needs.versioning.outputs.semVer }} -p:InformationalVersion=${{ needs.versioning.outputs.informationalVersion }} -p:FileVersion=${{ needs.versioning.outputs.semVer }}
     - name: Build managed (Windows)
       run: |
         cd managed
-        dotnet build -c Release -p:SW2Platform=Windows -p:BaseOutputPath=build/windows/ -p:Version=${{ needs.versioning.outputs.semVer }} -p:InformationalVersion=${{ needs.versioning.outputs.informationalVersion }} -p:FileVersion=${{ needs.versioning.outputs.semVer }}
+        dotnet build -c Release -p:SW2Platform=Windows -p:UseSharedCompilation=false -p:BaseOutputPath=build/windows/ -p:Version=${{ needs.versioning.outputs.semVer }} -p:InformationalVersion=${{ needs.versioning.outputs.informationalVersion }} -p:FileVersion=${{ needs.versioning.outputs.semVer }}
     - name: Upload plugin as artifact (Linux)
       uses: actions/upload-artifact@v4
       with:

@@ -205,12 +205,12 @@ void Bridge_Player_ExecuteCommand(int playerid, const char* command)
 
     if (cmdRef.IsValidRef() && !cmdRef.IsFlagSet(CVarFlags::SERVER_CAN_EXECUTE))
     {
-        CCommandContext context(CommandTarget_t::CT_FIRST_SPLITSCREEN_CLIENT, CPlayerSlot(player->GetSlot()));
+        CCommandContext context(CommandTarget_t::CT_FIRST_SPLITSCREEN_CLIENT, playerid);
         cmdRef.Dispatch(context, cmd);
     }
     else
     {
-        g_pGameEngine->ClientCommand(player->GetSlot(), command);
+        g_pGameEngine->ClientCommand(playerid, command);
     }
 }
 
