@@ -143,7 +143,7 @@ public class TestPlugin : BasePlugin
     public TestPlugin( ISwiftlyCore core ) : base(core)
     {
         Console.WriteLine("[TestPlugin] TestPlugin constructed successfully!");
-        core.GameHooks.Datamaps.CCSPlayerController.ResourceDataThink.Post += (ref @event) =>
+        core.GameHooks.Datamaps.CCSPlayerController.ResourceDataThink.Post += ( ref @event ) =>
         {
             Console.WriteLine("resourcedatathink");
         };
@@ -156,6 +156,11 @@ public class TestPlugin : BasePlugin
         core.GameHooks.Movement.PlayerMove.Pre += ( ref @event ) =>
         {
             @event.Params.MoveData.MaxSpeed = 2000f;
+        };
+
+        core.Event.OnClientSettingsChanged += ( @event ) =>
+        {
+            Console.WriteLine($"Player {@event.PlayerId} had it's settings changed");
         };
 
         core.GameHooks.Movement.GroundAccelerate.Pre += ( ref @event ) =>
@@ -196,7 +201,7 @@ public class TestPlugin : BasePlugin
     [CommandAlias("cat", true)]
     public void CommandAliasTest( ICommandContext context )
     {
-        
+
         foreach (var player in Core.PlayerManager.GetAllPlayers())
         {
             var controller = player.Controller;
@@ -588,10 +593,10 @@ public class TestPlugin : BasePlugin
     }
 
     [Command("qc")]
-    public void TestCommandQC(ICommandContext context)
+    public void TestCommandQC( ICommandContext context )
     {
         var player = context.Sender!;
-        Core.ConVar.QueryClient(player.PlayerID, context.Args[0], (value) =>
+        Core.ConVar.QueryClient(player.PlayerID, context.Args[0], ( value ) =>
         {
             player.SendChat($"QueryClient result for '{context.Args[0]}': {value} - {Core.Engine.GlobalVars.TickCount}");
         });
@@ -1513,7 +1518,8 @@ public class TestPlugin : BasePlugin
     {
         var calls = 0;
 
-        var collection = new PagedCollectionComponent<IPlayer>(async () => {
+        var collection = new PagedCollectionComponent<IPlayer>(async () =>
+        {
             await Task.Delay(1500);
 
             return ++calls % 3 == 0
@@ -1558,7 +1564,8 @@ public class TestPlugin : BasePlugin
 
         return Core.Menu.CreateMenu("testplugin.playerselection")
             .WithTitle("Player Selection")
-            .Add(new ButtonComponent("Report selected", ctx => {
+            .Add(new ButtonComponent("Report selected", ctx =>
+            {
                 var names = selection.GetSelected(ctx.Session).Select(p => p.Controller?.PlayerName ?? "?");
                 ctx.Player.SendChat($"Selected: {string.Join(", ", names)}");
                 return ValueTask.CompletedTask;
@@ -1570,7 +1577,8 @@ public class TestPlugin : BasePlugin
 
     private IMenu BuildCollectionSelectionMenu()
     {
-        var selection = new CollectionSelectionComponent<string>(async () => {
+        var selection = new CollectionSelectionComponent<string>(async () =>
+        {
             await Task.Delay(1000);
             return (IReadOnlyList<string>)["Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "India", "Juliet"];
         }) {
@@ -1584,7 +1592,8 @@ public class TestPlugin : BasePlugin
         return Core.Menu.CreateMenu("testplugin.collectionselection")
             .WithTitle("Collection Selection")
             .Add(new ButtonComponent("Reload", _ => { selection.Reload(); return ValueTask.CompletedTask; }))
-            .Add(new ButtonComponent("Report selected", ctx => {
+            .Add(new ButtonComponent("Report selected", ctx =>
+            {
                 ctx.Player.SendChat($"Selected: {string.Join(", ", selection.GetSelected(ctx.Session))}");
                 return ValueTask.CompletedTask;
             }))
@@ -2145,8 +2154,7 @@ public class TestPlugin : BasePlugin
             }
 
             Core.Logger.LogInformation("[ProfilerStress] Stopped, {Total} events emitted total.", total);
-        })
-        {
+        }) {
             IsBackground = true,
             Name = "ProfilerStress"
         };

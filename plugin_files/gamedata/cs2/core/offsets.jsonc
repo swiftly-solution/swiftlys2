@@ -133,6 +133,10 @@
         "windows": 17,
         "linux": 17
     },
+    "IServerGameClients::ClientSettingsChanged": {
+        "windows": 19,
+        "linux": 19
+    },
     "IServerGameClients::ClientVoice": {
         "windows": 27,
         "linux": 27

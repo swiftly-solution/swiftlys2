@@ -19,6 +19,7 @@ internal class StartupService : IHostedService
         provider.UseCoreHookService();
         provider.UseCoreVoiceService();
         provider.UseCoreTranslationService();
+        provider.UseCorePlayerService();
         provider.UsePermissionManager();
         provider.UseMenuManagerAPIService();
         provider.UseMenuRuntimeService();

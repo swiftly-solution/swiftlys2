@@ -157,6 +157,11 @@ public class EventDelegates
     public delegate void OnClientVoice( IOnClientVoiceEvent @event );
 
     /// <summary>
+    /// Called when a client changed one or several replicated convars (name etc).
+    /// </summary>
+    public delegate void OnClientSettingsChanged( IOnClientSettingsChangedEvent @event );
+
+    /// <summary>
     /// Called when a console output is received on the dedicated console dispatch thread.
     /// </summary>
     public delegate void OnConsoleOutput( IOnConsoleOutputEvent @event );

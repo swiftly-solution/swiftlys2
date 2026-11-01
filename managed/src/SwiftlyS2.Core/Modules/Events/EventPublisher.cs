@@ -943,6 +943,38 @@ internal static class EventPublisher
         }
     }
 
+    public static bool ListensToClientSettingsChanged {
+        get {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                if (subscribers[i].ListensToClientSettingsChanged) return true;
+            }
+            return false;
+        }
+    }
+
+    public static void InvokeOnClientSettingsChanged( int playerId )
+    {
+        if (subscribers.Count == 0 || !ListensToClientSettingsChanged) return;
+
+        try
+        {
+            OnClientSettingsChangedEvent @event = new() { PlayerId = playerId };
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                subscribers[i].InvokeOnClientSettingsChanged(ref @event);
+            }
+        }
+        catch (Exception e)
+        {
+            if (!GlobalExceptionHandler.Handle(ref e))
+            {
+                return;
+            }
+            AnsiConsole.WriteException(e);
+        }
+    }
+
     public static bool ListensToMapUnload {
         get {
             for (var i = 0; i < subscribers.Count; i++)

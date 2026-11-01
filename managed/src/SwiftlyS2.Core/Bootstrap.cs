@@ -94,6 +94,7 @@ internal static class Bootstrap
                     .AddDatabaseConnectionManager()
                     .AddCoreHookService()
                     .AddCoreVoiceService()
+                    .AddCorePlayerService()
                     .AddCoreCommandService()
                     .AddMenuManagerAPI()
                     .AddMenuManagerAPIService()
