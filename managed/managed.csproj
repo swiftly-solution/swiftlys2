@@ -71,7 +71,7 @@
     <PackageReference Include="MySqlConnector" Version="2.6.2" />
     <PackageReference Include="Npgsql" Version="10.0.3" />
     <PackageReference Include="Semver" Version="3.0.0" />
-    <PackageReference Include="Spectre.Console" Version="0.57.2" />
+    <PackageReference Include="Spectre.Console" Version="0.51.1" />
     <PackageReference Include="System.Data.SQLite.Core" Version="1.0.119" />
     <PackageReference Include="Tomlyn" Version="0.17.0" />
     <PackageReference Include="Tomlyn.Extensions.Configuration" Version="1.0.6" />
