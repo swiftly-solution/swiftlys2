@@ -213,7 +213,8 @@ uint64_t CServerCommands::RegisterCommand(std::string commandName, bool register
         m_commandNames.emplace(commandId, commandName);
     }
 
-    if (g_pGameCvar && g_pGameCvar->FindConCommand(commandName.c_str(), true).IsValidRef())
+    ConCommandRef existing = g_pGameCvar ? g_pGameCvar->FindConCommand(commandName.c_str(), true) : ConCommandRef();
+    if (existing.IsValidRef() && !existing.IsFlagSet(CVarFlags::LINKED_CONCOMMAND))
     {
         std::lock_guard lock(m_mtxCommands);
         m_commandNames.erase(commandId);
