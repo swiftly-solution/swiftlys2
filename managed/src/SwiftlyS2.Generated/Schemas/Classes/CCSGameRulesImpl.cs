@@ -1105,6 +1105,16 @@ internal partial class CCSGameRulesImpl : CTeamplayRulesImpl, CCSGameRules
             return ref _Handle.AsRef<uint>(_NumSpectatorsCountMaxLnkOffset);
         }
     }
+    private static nint _QueuedMatchmakingReportedRoundStatsPendingSendOffset = -1;
+
+    public ref bool QueuedMatchmakingReportedRoundStatsPendingSend
+    {
+        get
+        {
+            if (_QueuedMatchmakingReportedRoundStatsPendingSendOffset == -1) _QueuedMatchmakingReportedRoundStatsPendingSendOffset = Schema.GetOffset(0x6295CF65D2F92E7D);
+            return ref _Handle.AsRef<bool>(_QueuedMatchmakingReportedRoundStatsPendingSendOffset);
+        }
+    }
     private static nint _CTsAliveAtFreezetimeEndOffset = -1;
 
     public ref int CTsAliveAtFreezetimeEnd
