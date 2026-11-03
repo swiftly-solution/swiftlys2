@@ -217,6 +217,8 @@ public partial interface CCSGameRules : CTeamplayRules, ISchemaClass<CCSGameRule
 
     public ref uint NumSpectatorsCountMaxLnk { get; }
 
+    public ref bool QueuedMatchmakingReportedRoundStatsPendingSend { get; }
+
     public ref int CTsAliveAtFreezetimeEnd { get; }
 
     public ref int TerroristsAliveAtFreezetimeEnd { get; }
