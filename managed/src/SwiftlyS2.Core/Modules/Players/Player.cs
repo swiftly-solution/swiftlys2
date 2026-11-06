@@ -377,8 +377,8 @@ internal class Player : IPlayer, IDisposable
 
     public static bool operator ==( Player? left, Player? right )
     {
-        return left is not null && right is not null && left.Equals(right);
+        return left is null ? right is null : left.Equals(right);
     }
 
-    public static bool operator !=( Player left, Player right ) => !(left == right);
+    public static bool operator !=( Player? left, Player? right ) => !(left == right);
 }
