@@ -141,16 +141,6 @@ internal static class NativeEvents
         _RegisterOnMapUnloadCallback(callback);
     }
 
-    private unsafe static delegate* unmanaged<nint, void> _RegisterOnPrecacheResourceCallback;
-
-    /// <summary>
-    /// IEntityResourceManifest* pResourceManifest
-    /// </summary>
-    public unsafe static void RegisterOnPrecacheResourceCallback(nint callback)
-    {
-        _RegisterOnPrecacheResourceCallback(callback);
-    }
-
     private unsafe static delegate* unmanaged<nint, void> _RegisterOnPreworldUpdateCallback;
 
     /// <summary>

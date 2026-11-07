@@ -17,25 +17,10 @@
  ************************************************************************************************/
 
 #include "gamesystem.h"
-#include <memory/hooks/vfunction.h>
 
 #include <api/interfaces/interfaces.h>
 #include <api/shared/profiler.h>
-#include <scripting/engine/events.h>
 #include <public/game/igamesystemfactory.h>
-
-void BuildGameSessionManifestHook(void* _this, EventBuildGameSessionManifest_t* msg);
-VFunctionHook g_BuildGameSessionManifestHook(reinterpret_cast<void*>(BuildGameSessionManifestHook), "server", "CGameRulesGameSystem", "IGameSystem::BuildGameSessionManifest");
-
-void BuildGameSessionManifestHook(void* _this, EventBuildGameSessionManifest_t* msg)
-{
-    reinterpret_cast<decltype(&BuildGameSessionManifestHook)>(g_BuildGameSessionManifestHook.GetOriginal())(_this, msg);
-
-    PROFILE_FUNCTION();
-
-    IEntityResourceManifest* pResourceManifest = msg->m_pResourceManifest;
-    if (g_pOnPrecacheResourceCallback) g_pOnPrecacheResourceCallback(pResourceManifest);
-}
 
 bool InitGameSystem()
 {

@@ -13,6 +13,5 @@ void RegisterOnEntityParentChangedCallback = ptr callback // CEntityInstance* en
 void RegisterOnEntitySpawnedCallback = ptr callback // CEntityInstance* entity
 void RegisterOnMapLoadCallback = ptr callback // string mapname
 void RegisterOnMapUnloadCallback = ptr callback // string mapname
-void RegisterOnPrecacheResourceCallback = ptr callback // IEntityResourceManifest* pResourceManifest
 void RegisterOnPreworldUpdateCallback = ptr callback // bool simulating
 void RegisterOnStartupServerCallback = ptr callback // void

@@ -121,6 +121,22 @@ public interface ISchedulerService
   public Task<T> QueueOrNow<T>( Func<T> task, bool onWorldUpdate = false );
 
   /// <summary>
+  /// Never use this! you should never calls async callback in QueueOrNow,
+  /// because async callback have chance to run in async context, which breaks the the synchronization safety this function gives.
+  /// </summary>
+  /// <exception cref="InvalidOperationException">Thrown when this method is called.</exception>
+  [Obsolete("Please remove the async modifier on your callback for safety reason. See comments for more details.")]
+  public Task QueueOrNow( Func<Task?> task, bool onWorldUpdate = false );
+
+  /// <summary>
+  /// Never use this! you should never calls async callback in QueueOrNow,
+  /// because async callback have chance to run in async context, which breaks the the synchronization safety this function gives.
+  /// </summary>
+  /// <exception cref="InvalidOperationException">Thrown when this method is called.</exception>
+  [Obsolete("Please remove the async modifier on your callback for safety reason. See comments for more details.")]
+  public Task<T> QueueOrNow<T>( Func<Task<T?>> task, bool onWorldUpdate = false );
+
+  /// <summary>
   /// Add a delayed task to the scheduler.
   /// </summary>
   /// <param name="delayTick">The delay of the timer in ticks.</param>

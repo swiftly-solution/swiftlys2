@@ -95,6 +95,7 @@ internal static class Bootstrap
                     .AddCoreHookService()
                     .AddCoreVoiceService()
                     .AddCorePlayerService()
+                    .AddGameSystemService()
                     .AddCoreCommandService()
                     .AddMenuManagerAPI()
                     .AddMenuManagerAPIService()

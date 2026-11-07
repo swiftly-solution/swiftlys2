@@ -74,7 +74,6 @@ internal static class EventPublisher
             NativeEvents.RegisterOnEntitySpawnedCallback((nint)(delegate* unmanaged< nint, void >)&OnEntitySpawned);
             NativeEvents.RegisterOnMapLoadCallback((nint)(delegate* unmanaged< nint, void >)&OnMapLoad);
             NativeEvents.RegisterOnMapUnloadCallback((nint)(delegate* unmanaged< nint, void >)&OnMapUnload);
-            NativeEvents.RegisterOnPrecacheResourceCallback((nint)(delegate* unmanaged< nint, void >)&OnPrecacheResource);
             NativeEvents.RegisterOnStartupServerCallback((nint)(delegate* unmanaged< void >)&OnStartupServer);
             _ = NativeConvars.AddQueryClientCvarCallback((nint)(delegate* unmanaged< int, nint, nint, void >)&ConVarQueryCallback);
             NativeCommands.SetCommandHandler((nint)(delegate* unmanaged< nint, int, nint, nint, nint, byte, void >)&OnCommandDispatch);
@@ -1093,7 +1092,6 @@ internal static class EventPublisher
         }
     }
 
-    [UnmanagedCallersOnly]
     public static void OnPrecacheResource( nint pResourceManifest )
     {
         if (subscribers.Count == 0)

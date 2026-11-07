@@ -36,7 +36,6 @@ extern DEFINE_EVENT(g_pOnEntityParentChangedCallback, void, void*, void*);
 extern DEFINE_EVENT(g_pOnEntitySpawnedCallback, void, void*);
 extern DEFINE_EVENT(g_pOnMapLoadCallback, void, const char*);
 extern DEFINE_EVENT(g_pOnMapUnloadCallback, void, const char*);
-extern DEFINE_EVENT(g_pOnPrecacheResourceCallback, void, void*);
 extern DEFINE_EVENT(g_pOnPreworldUpdateCallback, void, bool);
 extern DEFINE_EVENT(g_pOnStartupServerCallback, void);
 
