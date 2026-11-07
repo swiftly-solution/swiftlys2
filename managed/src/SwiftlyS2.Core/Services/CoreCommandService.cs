@@ -654,7 +654,7 @@ internal class CoreCommandService
 
         var aliasesByCommand = CommandDispatcher.GetAliases()
             .GroupBy(target => target.CommandKey, StringComparer.OrdinalIgnoreCase)
-            .ToDictionary(group => group.Key, group => group.Select(target => target.Alias).OrderBy(alias => alias, StringComparer.OrdinalIgnoreCase).ToList(), StringComparer.OrdinalIgnoreCase);
+            .ToDictionary(group => group.Key, group => group.OrderBy(target => target.Alias, StringComparer.OrdinalIgnoreCase).Select(target => (target.Alias, target.RegisterRaw)).ToList(), StringComparer.OrdinalIgnoreCase);
 
         var allRows = commandsByPlugin
             .OrderBy(x => x.Key)
@@ -665,6 +665,7 @@ internal class CoreCommandService
                     cmd.CommandName,
                     cmd.HelpText,
                     cmd.Permission,
+                    cmd.RegisterRaw,
                     Aliases: aliasesByCommand.TryGetValue(CommandDispatcher.NormalizeName(cmd.CommandName, cmd.RegisterRaw), out var aliases) ? aliases : [])))
             .ToList();
 
@@ -682,16 +683,18 @@ internal class CoreCommandService
         var table = new Table()
             .AddColumn("Plugin")
             .AddColumn("Command Name")
+            .AddColumn("Raw")
             .AddColumn("Aliases")
             .AddColumn("Help Text")
             .AddColumn("Permission");
 
-        foreach (var (plugin, commandName, helpText, permission, aliases) in pageRows)
+        foreach (var (plugin, commandName, helpText, permission, registerRaw, aliases) in pageRows)
         {
             _ = table.AddRow(
                 plugin,
                 commandName,
-                aliases.Count == 0 ? "(none)" : Markup.Escape(string.Join(", ", aliases)),
+                registerRaw ? "yes" : "no",
+                aliases.Count == 0 ? "(none)" : Markup.Escape(string.Join(", ", aliases.Select(alias => $"{alias.Alias}{(alias.RegisterRaw ? " (raw)" : "")}"))),
                 Markup.Escape(helpText),
                 string.IsNullOrWhiteSpace(permission) ? "(none)" : permission);
         }
