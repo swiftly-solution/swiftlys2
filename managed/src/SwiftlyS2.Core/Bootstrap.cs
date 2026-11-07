@@ -80,28 +80,7 @@ internal static class Bootstrap
             })
             .ConfigureServices(( context, services ) =>
             {
-                _ = services
-                    .AddProfileService()
-                    .AddConfigurationService()
-                    .AddRootDirService()
-                    .AddDataDirectoryService()
-                    .AddCoreTranslationService()
-                    .AddPluginManager()
-                    .AddHookManager()
-                    .AddTraceManagerService()
-                    .AddCommandOverrideConfig()
-                    .AddPermissionManager()
-                    .AddDatabaseConnectionManager()
-                    .AddCoreHookService()
-                    .AddCoreVoiceService()
-                    .AddCorePlayerService()
-                    .AddGameSystemService()
-                    .AddCoreCommandService()
-                    .AddMenuManagerAPI()
-                    .AddMenuManagerAPIService()
-                    .AddMenu()
-                    .AddMenuRuntimeService()
-                    .AddSwiftlyCore(basePath);
+                _ = services.AddCoreServices(basePath);
             })
             .Build();
 
