@@ -30,7 +30,7 @@ internal class Player : IPlayer, IDisposable
     private ServerSideClient _serverSideClient = new();
     internal Language _language = TranslationService.ServerLanguage;
 
-    private VoiceFlagValue voiceFlags = VoiceFlagValue.Normal;
+    private readonly Atomic<VoiceFlagValue> voiceFlags = new(VoiceFlagValue.Normal);
     private readonly ListenOverride[] listenOverrides = new ListenOverride[66];
     private ulong selfMutes;
 
@@ -83,7 +83,7 @@ internal class Player : IPlayer, IDisposable
 
     public string IPAddress { get { ThrowIfDisposed(); return NativePlayer.GetIPAddress(Slot); } }
 
-    public VoiceFlagValue VoiceFlags { get { return voiceFlags; } set { voiceFlags = value; } }
+    public VoiceFlagValue VoiceFlags { get { return voiceFlags.Value; } set { voiceFlags.Value = value; } }
     public bool IsValid =>
         !_disposed &&
         Controller is { IsValid: true, IsHLTV: false, Connected: PlayerConnectedState.Connected } &&
