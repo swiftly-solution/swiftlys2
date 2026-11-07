@@ -84,6 +84,16 @@ internal class SchedulerService : ISchedulerService, IDisposable
         return SchedulerManager.NextWorldUpdateAsync(task);
     }
 
+    public Task QueueOrNow( Action task, bool onWorldUpdate = false )
+    {
+        return SchedulerManager.QueueOrNow(task, onWorldUpdate);
+    }
+
+    public Task<T> QueueOrNow<T>( Func<T> task, bool onWorldUpdate = false )
+    {
+        return SchedulerManager.QueueOrNow(task, onWorldUpdate);
+    }
+
     public CancellationTokenSource Delay( int delayTick, Action task )
     {
         CleanFinishedTimers();
