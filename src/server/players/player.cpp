@@ -51,8 +51,6 @@ constexpr uint64_t CInButtonState_m_pButtonStates = SchemaFieldHash("CInButtonSt
 
 extern bool bypassPostEventAbstractHook;
 
-static uint64_t s_nextSessionId = 1000;
-
 static void* GetHandleEntity(void* owner, uint64_t hash)
 {
     PROFILE_FUNCTION();
@@ -133,7 +131,6 @@ void CPlayer::Initialize(int playerid)
     m_iPlayerId = playerid;
 
     m_uConnectedTimeStart = std::chrono::steady_clock::now();
-    m_uSessionId = s_nextSessionId++;
     EnsureCenterMessageEvent();
 }
 
@@ -463,13 +460,6 @@ bool CPlayer::HasMenuShown()
 
     std::lock_guard lock(m_centerMenuMutex);
     return !m_sCenterMenuText.empty();
-}
-
-uint64_t CPlayer::GetSessionID()
-{
-    PROFILE_FUNCTION();
-
-    return m_uSessionId;
 }
 
 bool CPlayer::IsListeningGameEvent(int eventID)

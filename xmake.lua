@@ -28,6 +28,7 @@ target("swiftlys2")
     add_packages("pcre2")
     add_deps("s2sdk")
     add_rules("cpp_properties")
+    add_rules("plugin.compile_commands.autoupdate", {outputdir = ".", lsp = "clangd"})
 
     set_runtimes("MT", {public = true})
 

@@ -232,17 +232,6 @@ int Bridge_Player_GetUserID(int playerid)
     return g_pGameEngine->GetPlayerUserId(CPlayerSlot(playerid)).Get();
 }
 
-uint64_t Bridge_Player_GetSessionID(int playerid)
-{
-    PROFILE_FUNCTION();
-
-    auto player = g_pPlayerManager->GetPlayer(playerid);
-    if (!player)
-        return 0;
-
-    return player->GetSessionID();
-}
-
 char* Bridge_Player_GetClientConvarValue(int* size, int playerid, const char* convarName)
 {
     PROFILE_FUNCTION();
@@ -285,6 +274,5 @@ DEFINE_NATIVE("Player.HasMenuShown", Bridge_Player_HasMenuShown);
 DEFINE_NATIVE("Player.ExecuteCommand", Bridge_Player_ExecuteCommand);
 DEFINE_NATIVE("Player.IsFirstSpawn", Bridge_Player_IsFirstSpawn);
 DEFINE_NATIVE("Player.GetUserID", Bridge_Player_GetUserID);
-DEFINE_NATIVE("Player.GetSessionID", Bridge_Player_GetSessionID);
 DEFINE_NATIVE("Player.GetClientConvarValue", Bridge_Player_GetClientConvarValue);
 DEFINE_NATIVE("Player.GetServerSideClient", Bridge_Player_GetServerSideClient);

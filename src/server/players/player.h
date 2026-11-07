@@ -76,7 +76,6 @@ public:
     virtual bool HasMenuShown() override;
     virtual bool IsFirstSpawn() override;
     virtual void SetFirstSpawn(bool state) override;
-    virtual uint64_t GetSessionID() override;
 
 private:
     void UpdateCenterMessage();
@@ -103,7 +102,6 @@ private:
 
     std::mutex m_centerMenuMutex;
     std::string m_sCenterMenuText;
-    uint64_t m_uSessionId = 0;
 
     std::mutex m_listeningGameEventsMutex;
     CBitVector<8192> m_listeningGameEvents = {};

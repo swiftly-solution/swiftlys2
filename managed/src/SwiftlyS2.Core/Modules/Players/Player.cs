@@ -7,6 +7,7 @@ using SwiftlyS2.Core.SchemaDefinitions;
 using SwiftlyS2.Core.Translations;
 using SwiftlyS2.Shared.Engine;
 using SwiftlyS2.Shared.Events;
+using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Shared.Players;
 using SwiftlyS2.Shared.ProtobufDefinitions;
@@ -20,8 +21,10 @@ internal class Player : IPlayer, IDisposable
     public Player( int pid )
     {
         Slot = pid;
-        SessionId = NativePlayer.GetSessionID(pid);
+        SessionId = nextSessionId.Increment();
     }
+
+    private static readonly Atomic<ulong> nextSessionId = new(999);
 
     private bool _disposed = false;
     private ServerSideClient _serverSideClient = new();

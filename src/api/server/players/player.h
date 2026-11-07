@@ -120,8 +120,6 @@ public:
 
     virtual bool IsFirstSpawn() = 0;
     virtual void SetFirstSpawn(bool state) = 0;
-
-    virtual uint64_t GetSessionID() = 0;
 };
 
 #endif
