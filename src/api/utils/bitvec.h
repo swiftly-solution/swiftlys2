@@ -48,7 +48,10 @@ public:
     {
         if (dword < 0 || dword >= NUM_QWORDS * 2) return;
         int shift = (dword & 1) * 32;
-        m_uData[dword >> 1] = (m_uData[dword >> 1] & ~(0xFFFFFFFFULL << shift)) | (static_cast<uint64_t>(value) << shift);
+        int word = dword >> 1;
+        uint64_t data = (m_uData[word] & ~(0xFFFFFFFFULL << shift)) | (static_cast<uint64_t>(value) << shift);
+        if (word == NUM_QWORDS - 1 && (N & 63)) data &= (1ULL << (N & 63)) - 1;
+        m_uData[word] = data;
     }
 
     void Clear(int bit)
