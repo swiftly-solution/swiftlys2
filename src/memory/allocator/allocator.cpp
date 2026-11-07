@@ -17,51 +17,63 @@
  ************************************************************************************************/
 
 #include "allocator.h"
+#include <api/shared/profiler.h>
 #include <cstring>
-#include <algorithm>
 
-#include "tier0/memdbgon.h"
+#include <public/tier0/memdbgon.h>
 
 void* MemoryAllocator::Alloc(uint64_t size)
 {
+    PROFILE_FUNCTION();
+
     return malloc(size);
 }
 
 void MemoryAllocator::Free(void* ptr)
 {
+    PROFILE_FUNCTION();
+
     free(ptr);
 }
 
 void* MemoryAllocator::Resize(void* ptr, uint64_t newSize)
 {
+    PROFILE_FUNCTION();
+
     return realloc(ptr, newSize);
 }
 
 uint64_t MemoryAllocator::GetSize(void* ptr)
 {
+    PROFILE_FUNCTION();
+
     return _msize(ptr);
 }
 
 uint64_t MemoryAllocator::GetTotalAllocated()
 {
+    PROFILE_FUNCTION();
+
     return totalAllocated;
 }
 
 bool MemoryAllocator::IsPointerValid(void* ptr)
 {
+    PROFILE_FUNCTION();
+
     return true;
 }
 
 void MemoryAllocator::Copy(void* dest, void* src, uint64_t size)
 {
+    PROFILE_FUNCTION();
+
     memcpy(dest, src, size);
 }
 
 void MemoryAllocator::Move(void* dest, void* src, uint64_t size)
 {
-    memmove(dest, src, size);
-}
+    PROFILE_FUNCTION();
 
-MemoryAllocator::~MemoryAllocator()
-{
+    memmove(dest, src, size);
 }

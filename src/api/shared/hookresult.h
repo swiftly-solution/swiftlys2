@@ -16,22 +16,15 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ************************************************************************************************/
 
-#ifndef src_engine_voicemanager_voicemanager_h
-#define src_engine_voicemanager_voicemanager_h
+#ifndef src_api_shared_hookresult_h
+#define src_api_shared_hookresult_h
 
-#include <api/engine/voicemanager/voicemanager.h>
-
-#include <public/entity2/entitysystem.h>
-
-class CVoiceManager : public IVoiceManager
+enum HookResult : int
 {
-public:
-
-    virtual void SetClientListenOverride(int playerid, int targetid, ListenOverride override) override;
-    virtual ListenOverride GetClientListenOverride(int playerid, int targetid) override;
-
-    virtual void SetClientVoiceFlags(int playerid, VoiceFlagValue flags) override;
-    virtual VoiceFlagValue GetClientVoiceFlags(int playerid) override;
+    HookResult_Continue = 0,        // following hooks and the original function continue
+    HookResult_Stop = 1,            // following hooks and the original function are cancelled
+    HookResult_Handled = 2,         // following hooks are cancelled, the original function continues
+    HookResult_CancelOriginal = 3,  // following hooks continue, the original function is cancelled
 };
 
 #endif

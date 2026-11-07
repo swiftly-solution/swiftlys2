@@ -117,10 +117,6 @@
         "windows": 41,
         "linux": 41
     },
-    "IServerGameDLL::GameServerSteamAPIDeactivated": {
-        "windows": 42,
-        "linux": 42
-    },
     "IGameEventSystem::PostEventAbstract": {
         "windows": 16,
         "linux": 15
@@ -136,6 +132,10 @@
     "IServerGameClients::ClientCommand": {
         "windows": 17,
         "linux": 17
+    },
+    "IServerGameClients::ClientSettingsChanged": {
+        "windows": 19,
+        "linux": 19
     },
     "IServerGameClients::ClientVoice": {
         "windows": 27,
@@ -203,10 +203,6 @@
     "CGameRules::GetViewVectors": {
         "windows": 32,
         "linux": 33
-    },
-    "CNetworkGameServer::m_Clients": {
-        "windows": 616,
-        "linux": 616
     },
     "INetChannelInfo::GetName": {
         "windows": 0,

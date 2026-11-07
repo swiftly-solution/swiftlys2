@@ -20,9 +20,9 @@
 #include <memory/hooks/vfunction.h>
 
 #include <api/interfaces/interfaces.h>
-
-CBaseGameSystemFactory** CBaseGameSystemFactory::sm_pFirst = nullptr;
-extern void* g_pOnPrecacheResourceCallback;
+#include <api/shared/profiler.h>
+#include <scripting/engine/events.h>
+#include <public/game/igamesystemfactory.h>
 
 void BuildGameSessionManifestHook(void* _this, EventBuildGameSessionManifest_t* msg);
 VFunctionHook g_BuildGameSessionManifestHook(reinterpret_cast<void*>(BuildGameSessionManifestHook), "server", "CGameRulesGameSystem", "IGameSystem::BuildGameSessionManifest");
@@ -31,27 +31,27 @@ void BuildGameSessionManifestHook(void* _this, EventBuildGameSessionManifest_t* 
 {
     reinterpret_cast<decltype(&BuildGameSessionManifestHook)>(g_BuildGameSessionManifestHook.GetOriginal())(_this, msg);
 
+    PROFILE_FUNCTION();
+
     IEntityResourceManifest* pResourceManifest = msg->m_pResourceManifest;
-    if (g_pOnPrecacheResourceCallback) reinterpret_cast<void(*)(void*)>(g_pOnPrecacheResourceCallback)(pResourceManifest);
+    if (g_pOnPrecacheResourceCallback) g_pOnPrecacheResourceCallback(pResourceManifest);
 }
 
 bool InitGameSystem()
 {
+    PROFILE_FUNCTION();
+
     void* ptr = g_pGameDataManager->GetSignatures()->Fetch("IGameSystem::InitAllSystems->pFirst");
     if (!ptr) {
         g_pLogger->Error("Game System", "Couldn't find signature for 'IGameSystem::InitAllSystems->pFirst'!\n");
         return false;
     }
 
-    uintptr_t pAddr = (uintptr_t)ptr;
-
-    pAddr += 3;
-
+    uintptr_t pAddr = (uintptr_t)ptr + 3;
     uint32_t offset = *(uint32_t*)pAddr;
-
     pAddr += 4;
 
-    CBaseGameSystemFactory::sm_pFirst = (CBaseGameSystemFactory**)(pAddr + offset);
+    CBaseGameSystemFactory::SetFirstPtr((CBaseGameSystemFactory**)(pAddr + offset));
 
     return true;
 }

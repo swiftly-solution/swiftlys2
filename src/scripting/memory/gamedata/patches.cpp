@@ -18,19 +18,26 @@
 
 #include <scripting/scripting.h>
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 
 void Bridge_GameData_Patches_Apply(const char* name)
 {
+    PROFILE_FUNCTION();
+
     g_pGameDataManager->GetPatches()->Apply(name);
 }
 
 void Bridge_GameData_Patches_Revert(const char* name)
 {
+    PROFILE_FUNCTION();
+
     g_pGameDataManager->GetPatches()->Revert(name);
 }
 
 bool Bridge_GameData_Patches_Exists(const char* name)
 {
+    PROFILE_FUNCTION();
+
     return g_pGameDataManager->GetPatches()->Exists(name);
 }
 

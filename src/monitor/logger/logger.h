@@ -20,44 +20,31 @@
 #define src_monitor_logger_logger_h
 
 #include <api/monitor/logger/logger.h>
-#include <string>
 
-#include <set>
+#include <string>
 
 class Logger : public ILogger
 {
 public:
-    virtual void Log(LogType type, const std::string& message) override;
-    virtual void Log(LogType type, const std::string& category, const std::string& message) override;
+    void Log(LogType type, const std::string& message) override;
+    void Log(LogType type, const std::string& category, const std::string& message) override;
 
-    virtual void Trace(const std::string& message) override;
-    virtual void Debug(const std::string& message) override;
-    virtual void Info(const std::string& message) override;
-    virtual void Warning(const std::string& message) override;
-    virtual void Error(const std::string& message) override;
-    virtual void Critical(const std::string& message) override;
+    void Trace(const std::string& message) override { Log(LogType::TRACE, message); }
+    void Debug(const std::string& message) override { Log(LogType::DEBUG, message); }
+    void Info(const std::string& message) override { Log(LogType::INFO, message); }
+    void Warning(const std::string& message) override { Log(LogType::WARNING, message); }
+    void Error(const std::string& message) override { Log(LogType::ERR, message); }
+    void Critical(const std::string& message) override { Log(LogType::CRITICAL, message); }
 
-    virtual void Trace(const std::string& category, const std::string& message) override;
-    virtual void Debug(const std::string& category, const std::string& message) override;
-    virtual void Info(const std::string& category, const std::string& message) override;
-    virtual void Warning(const std::string& category, const std::string& message) override;
-    virtual void Error(const std::string& category, const std::string& message) override;
-    virtual void Critical(const std::string& category, const std::string& message) override;
-
-    virtual void SetLogFile(LogType type, const std::string& path) override;
-    virtual void ShouldOutputToFile(LogType type, bool enabled) override;
-
-    virtual void ShouldColorCategoryInConsole(const std::string& category, bool enabled) override;
-    virtual void ShouldOutputToConsole(LogType type, bool enabled) override;
+    void Trace(const std::string& category, const std::string& message) override { Log(LogType::TRACE, category, message); }
+    void Debug(const std::string& category, const std::string& message) override { Log(LogType::DEBUG, category, message); }
+    void Info(const std::string& category, const std::string& message) override { Log(LogType::INFO, category, message); }
+    void Warning(const std::string& category, const std::string& message) override { Log(LogType::WARNING, category, message); }
+    void Error(const std::string& category, const std::string& message) override { Log(LogType::ERR, category, message); }
+    void Critical(const std::string& category, const std::string& message) override { Log(LogType::CRITICAL, category, message); }
 
 private:
     bool ShouldLog(LogType type);
-    LogType GetMinLogLevelFromEnv();
-
-    bool m_bShouldOutputToConsole[7] = { true, true, true, true, true, true, false };
-    bool m_bShouldOutputToFile[7] = { false, false, false, false, false, false, false };
-    std::string m_sLogFilePaths[7] = { "", "", "", "", "", "", "" };
-    std::set<std::string> m_sNonColoredCategories;
 };
 
 #endif

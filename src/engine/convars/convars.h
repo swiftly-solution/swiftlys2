@@ -22,8 +22,8 @@
 #include <api/engine/convars/convars.h>
 #include <mutex>
 
-#include <public/icvar.h>
-#include <public/tier1/convar.h>
+#include <public/tier0/icvar.h>
+#include <public/tier0/convar.h>
 
 #include <map>
 #include <optional>

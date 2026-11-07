@@ -21,15 +21,17 @@
 
 #include <api/interfaces/interfaces.h>
 
-#include <api/shared/string.h>
+#include <api/shared/hash.h>
+#include <api/shared/hookresult.h>
+#include <api/shared/profiler.h>
 
-#include <memory/gamedata/manager.h>
-#include <api/memory/virtual/call.h>
+#include <public/tier0/keyvalues.h>
 
-#include <public/iserver.h>
-#include <public/tier1/KeyValues.h>
+#include <format>
+#include <scripting/engine/events.h>
+#include <public/engine2/gamesessionconfiguration.h>
 
-#include <fmt/format.h>
+class ISource2WorldSession;
 
 GameEventFireHandler g_fnEventFireHandler;
 GameEventFireHandler g_fnPostEventFireHandler;
@@ -38,6 +40,8 @@ IGameEventManager2* g_gameEventManager = nullptr;
 
 static IGameEventManager2* ResolveGameEventManager()
 {
+    PROFILE_FUNCTION();
+
     uintptr_t rawGameEventManager = (uintptr_t)(g_pGameDataManager->GetSignatures()->Fetch("CSource2Server::g_GameEventManager"));
     if (!rawGameEventManager) return nullptr;
 
@@ -58,50 +62,63 @@ VFunctionHook g_FireEventHook(reinterpret_cast<void*>(FireEventHook), []() -> vo
 
 void CEventManager::Initialize()
 {
+    PROFILE_FUNCTION();
+
     g_gameEventManager = ResolveGameEventManager();
 
     QueueListener("player_spawn");
 }
 
-extern void* g_pOnPreworldUpdateCallback;
 
 void PreworldUpdateHook(void* _this, bool simulate)
 {
     reinterpret_cast<decltype(&PreworldUpdateHook)>(g_PreworldUpdateHook.GetOriginal())(_this, simulate);
 
+    PROFILE_FUNCTION();
+
     if (g_pOnPreworldUpdateCallback)
-        reinterpret_cast<void(*)(bool)>(g_pOnPreworldUpdateCallback)(simulate);
+        g_pOnPreworldUpdateCallback(simulate);
 }
 
 bool FireEventHook(IGameEventManager2* _this, IGameEvent* event, bool bDontBroadcast)
 {
-    auto originalFireEvent = reinterpret_cast<decltype(&FireEventHook)>(g_FireEventHook.GetOriginal());
-    if (!event) return originalFireEvent(_this, event, bDontBroadcast);
-
     static constexpr uint32_t k_uPlayerSpawnHash = hash_32_fnv1a_const("player_spawn");
 
-    uint32_t event_hash = hash_32_fnv1a_const(event->GetName());
-    bool isPlayerSpawn = event_hash == k_uPlayerSpawnHash;
-    bool isRegistered = g_pGameEventManager->IsEventRegistered(event_hash);
-
-    if (!isRegistered && !isPlayerSpawn)
-        return originalFireEvent(_this, event, bDontBroadcast);
-
+    uint32_t event_hash = 0;
+    bool isPlayerSpawn = false;
+    bool isRegistered = false;
     bool shouldBroadcast = bDontBroadcast;
+    IGameEvent* dupEvent = nullptr;
+
+    PROFILE_FUNCTION();
+
+    if (event)
+    {
+        event_hash = hash_32_fnv1a_const(event->GetName());
+        isPlayerSpawn = event_hash == k_uPlayerSpawnHash;
+        isRegistered = g_pGameEventManager->IsEventRegistered(event_hash);
+    }
 
     if (isRegistered && g_fnEventFireHandler)
     {
         auto res = g_fnEventFireHandler(event, shouldBroadcast, event_hash);
-        if (res == 1 || res == 3) {
+        if (res == HookResult_Stop || res == HookResult_CancelOriginal) {
             g_gameEventManager->FreeEvent(event);
             return false;
         }
     }
 
     bool needsCopy = isPlayerSpawn || (isRegistered && g_fnPostEventFireHandler);
-    IGameEvent* dupEvent = needsCopy ? g_gameEventManager->DuplicateEvent(event) : nullptr;
+    dupEvent = needsCopy ? g_gameEventManager->DuplicateEvent(event) : nullptr;
 
-    bool result = originalFireEvent(_this, event, shouldBroadcast);
+    PROFILE_PAUSE();
+
+    bool result = reinterpret_cast<decltype(&FireEventHook)>(g_FireEventHook.GetOriginal())(_this, event, shouldBroadcast);
+
+    PROFILE_RESUME();
+
+    if (!event || (!isRegistered && !isPlayerSpawn))
+        return result;
 
     if (isPlayerSpawn)
     {
@@ -115,7 +132,7 @@ bool FireEventHook(IGameEventManager2* _this, IGameEvent* event, bool bDontBroad
     if (isRegistered && g_fnPostEventFireHandler)
     {
         auto res = g_fnPostEventFireHandler(dupEvent, shouldBroadcast, event_hash);
-        if (res == 1 || res == 3) result = false;
+        if (res == HookResult_Stop || res == HookResult_CancelOriginal) result = false;
     }
 
     if (dupEvent)
@@ -127,11 +144,15 @@ bool FireEventHook(IGameEventManager2* _this, IGameEvent* event, bool bDontBroad
 void StartupServerEventHook(void* _this, const GameSessionConfiguration_t& config, ISource2WorldSession* a, const char* b)
 {
     reinterpret_cast<decltype(&StartupServerEventHook)>(g_StartupServerEventHook.GetOriginal())(_this, config, a, b);
+
+    PROFILE_FUNCTION();
     g_pGameEventManager->OnServerStartup();
 }
 
 void CEventManager::OnServerStartup()
 {
+    PROFILE_FUNCTION();
+
     {
         std::lock_guard<std::mutex> lock(m_mtxLock);
         if (!g_gameEventManager || m_bListenersReady) return;
@@ -145,6 +166,8 @@ void CEventManager::OnServerStartup()
 
 void CEventManager::RegisterGameEventListener(std::string event_name)
 {
+    PROFILE_FUNCTION();
+
     {
         std::lock_guard<std::mutex> lock(m_mtxRegisteredEvents);
         m_registeredEvents.insert(hash_32_fnv1a_const(event_name.c_str()));
@@ -155,35 +178,50 @@ void CEventManager::RegisterGameEventListener(std::string event_name)
 
 void CEventManager::UnregisterGameEventListener(std::string event_name)
 {
+    PROFILE_FUNCTION();
+
     std::lock_guard<std::mutex> lock(m_mtxRegisteredEvents);
     m_registeredEvents.erase(hash_32_fnv1a_const(event_name.c_str()));
 }
 
 bool CEventManager::IsEventRegistered(uint32_t event_hash)
 {
+    PROFILE_FUNCTION();
+
     std::lock_guard<std::mutex> lock(m_mtxRegisteredEvents);
     return m_registeredEvents.contains(event_hash);
 }
 
 void CEventManager::SetGameEventFireHandler(GameEventFireHandler handler)
 {
+    PROFILE_FUNCTION();
+
     g_fnEventFireHandler = handler;
 }
 
 void CEventManager::SetPostGameEventFireHandler(GameEventFireHandler handler)
 {
+    PROFILE_FUNCTION();
+
     g_fnPostEventFireHandler = handler;
 }
 
 IGameEventManager2* CEventManager::GetGameEventManager()
 {
+    PROFILE_FUNCTION();
+
     return g_gameEventManager;
 }
 
-void CEventManager::FireGameEvent(IGameEvent* event) {}
+void CEventManager::FireGameEvent(IGameEvent* event)
+{
+    PROFILE_FUNCTION();
+}
 
 void CEventManager::QueueListener(const std::string& event_name)
 {
+    PROFILE_FUNCTION();
+
     bool registerImmediately = false;
     {
         std::lock_guard<std::mutex> lock(m_mtxLock);
@@ -219,6 +257,8 @@ void CEventManager::QueueListener(const std::string& event_name)
 
 void CEventManager::DrainEngineListeners()
 {
+    PROFILE_FUNCTION();
+
     std::set<std::string> pending;
     try
     {
@@ -252,12 +292,14 @@ bool bInitializedEvents = false;
 
 void CEventManager::AddEngineListener(const std::string& event_name)
 {
+    PROFILE_FUNCTION();
+
     if (!g_gameEventManager) return;
 
     if (!g_gameEventManager->FindListener(this, event_name.c_str()))
         g_gameEventManager->AddListener(this, event_name.c_str(), true);
 
-    g_pLogger->Debug("Game Events", fmt::format("Registered listener for event '{}'.\n", event_name));
+    g_pLogger->Debug("Game Events", std::format("Registered listener for event '{}'.\n", event_name));
     if(!bInitializedEvents)
     {
         bInitializedEvents = true;
@@ -274,6 +316,8 @@ void CEventManager::AddEngineListener(const std::string& event_name)
 
 int CEventManager::GetGameEventListenerID(std::string event_name)
 {
+    PROFILE_FUNCTION();
+
     auto& bucket = m_eventListenerIDs[std::hash<std::string>{}(event_name) % m_eventListenerIDs.size()];
     for (auto* entry = bucket.load(std::memory_order_acquire); entry; entry = entry->next)
         if (entry->name == event_name) return entry->id.load(std::memory_order_acquire);
@@ -283,6 +327,8 @@ int CEventManager::GetGameEventListenerID(std::string event_name)
 
 void CEventManager::RegisterGameEventListenerID(std::string event_name, int id)
 {
+    PROFILE_FUNCTION();
+
     std::lock_guard<std::mutex> lock(m_mtxRegisteredEvents);
     auto& bucket = m_eventListenerIDs[std::hash<std::string>{}(event_name) % m_eventListenerIDs.size()];
     auto* head = bucket.load(std::memory_order_relaxed);

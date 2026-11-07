@@ -18,12 +18,15 @@
 
 #include "init_impl_00001.h"
 #include <extension/extension.h>
+#include <api/shared/profiler.h>
 
 namespace
 {
 
 SwInitImpl00001* from_self(const sw_init_00001* self)
 {
+    PROFILE_FUNCTION();
+
     return reinterpret_cast<SwInitImpl00001*>(const_cast<sw_init_00001*>(self));
 }
 
@@ -34,6 +37,8 @@ sw_status set_info(
     const char* author,
     const char* description)
 {
+    PROFILE_FUNCTION();
+
     if (!self)
         return SW_E_INVALID_ARG;
     if (!from_self(self)->extension_->IsInitializing())
@@ -48,6 +53,8 @@ sw_status is_hotreloaded(
     const sw_init_00001* self,
     int32_t* hotreloaded_out)
 {
+    PROFILE_FUNCTION();
+
     if (!self)
         return SW_E_INVALID_ARG;
     if (!from_self(self)->extension_->IsInitializing())
@@ -64,6 +71,8 @@ sw_status set_unload_callback(
     sw_extension_callback_fn callback,
     void* user_data)
 {
+    PROFILE_FUNCTION();
+
     if (!self)
         return SW_E_INVALID_ARG;
     if (!from_self(self)->extension_->IsInitializing())
@@ -78,6 +87,8 @@ sw_status set_on_all_extensions_loaded_callback(
     sw_extension_callback_fn callback,
     void* user_data)
 {
+    PROFILE_FUNCTION();
+
     if (!self)
         return SW_E_INVALID_ARG;
     if (!from_self(self)->extension_->IsInitializing())
@@ -93,4 +104,5 @@ SwInitImpl00001::SwInitImpl00001(Extension* extension):
     api_{set_info, is_hotreloaded, set_unload_callback, set_on_all_extensions_loaded_callback},
     extension_(extension)
 {
+    PROFILE_FUNCTION();
 }

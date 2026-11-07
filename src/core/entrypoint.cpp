@@ -20,7 +20,6 @@
 #include <memory/hooks/vfunction.h>
 #include "console/colors.h"
 #include <api/interfaces/interfaces.h>
-#include <api/interfaces/interfaces.h>
 #include <api/memory/hooks/manager.h>
 #include <api/scripting/scripting.h>
 #include <api/shared/env.h>
@@ -31,33 +30,30 @@
 #include "managed/host/dynlib.h"
 #include "managed/host/strconv.h"
 
-#include <engine/entities/entitysystem.h>
-#include <engine/entities/listener.h>
 #include <engine/fixes/entrypoint.h>
 #include <engine/gamesystem/gamesystem.h>
 
 #include <public/tier0/icommandline.h>
-#include <public/tier1/utlstringtoken.h>
+#include <public/tier0/utlstringtoken.h>
+#include <public/engine2/ivengineserver2.h>
 
-#include <api/shared/files.h>
 #include <api/shared/plat.h>
+#include <api/shared/profiler.h>
 #include <api/shared/string.h>
 #include <mutex>
 
-#include <public/icvar.h>
-#include <public/tier1/KeyValues.h>
+#include <public/tier0/icvar.h>
+#include <public/tier0/keyvalues.h>
 
-#include <fmt/format.h>
+#include <format>
 
-#include <public/engine/igameeventsystem.h>
+#include <public/engine2/igameeventsystem.h>
 
-#include <public/steam/steam_gameserver.h>
-
-#include <public/tier1/convar.h>
+#include <public/tier0/convar.h>
 #include <thread>
-#include <cstdlib>
 
 #include <monitor/consolelogger/consolelogger.h>
+#include <scripting/engine/events.h>
 
 SwiftlyCore g_SwiftlyCore;
 std::thread::id g_mainThreadId;
@@ -66,18 +62,18 @@ CreateIFaceFn g_pServerFactory = nullptr;
 CreateIFaceFn g_pEngineFactory = nullptr;
 
 void GameServerSteamAPIActivatedHook(void* _this);
-void GameServerSteamAPIDeactivatedHook(void* _this);
 
 bool LoopInitHook(void* _this, KeyValues* pKeyValues, void* pRegistry);
 
 VFunctionHook g_GameServerSteamAPIActivated(reinterpret_cast<void*>(GameServerSteamAPIActivatedHook), "server", "CSource2Server", "IServerGameDLL::GameServerSteamAPIActivated");
-VFunctionHook g_GameServerSteamAPIDeactivated(reinterpret_cast<void*>(GameServerSteamAPIDeactivatedHook), "server", "CSource2Server", "IServerGameDLL::GameServerSteamAPIDeactivated");
 VFunctionHook g_LoopInitHook(reinterpret_cast<void*>(LoopInitHook), "engine2", "CLoopModeLevelLoad", "ILoopMode::LoopInit");
 
 extern ICvar* g_pCVar;
 
 bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFaceFn engineFactory)
 {
+    PROFILE_FUNCTION();
+
     g_pServerFactory = serverFactory;
     g_pEngineFactory = engineFactory;
     g_mainThreadId = std::this_thread::get_id();
@@ -86,12 +82,12 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
     SetupConsoleColors();
 
     m_sCorePath = CommandLine()->ParmValue(CUtlStringToken("-sw_path"), WIN_LINUX("addons\\swiftlys2", "addons/swiftlys2"));
-    if (!ends_with(m_sCorePath, WIN_LINUX("\\", "/")))
+    if (!m_sCorePath.ends_with(WIN_LINUX("\\", "/")))
     {
         m_sCorePath += WIN_LINUX("\\", "/");
     }
     m_sLogPath = CommandLine()->ParmValue(CUtlStringToken("-sw_logpath"), WIN_LINUX("addons\\swiftlys2\\logs", "addons/swiftlys2/logs"));
-    if (!ends_with(m_sLogPath, WIN_LINUX("\\", "/")))
+    if (!m_sLogPath.ends_with(WIN_LINUX("\\", "/")))
     {
         m_sLogPath += WIN_LINUX("\\", "/");
     }
@@ -108,7 +104,6 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
     g_pGameCvar = (ICvar*)GetInterface(CVAR_INTERFACE_VERSION);
     g_pGameSchemaSystem = (CSchemaSystem*)GetInterface(SCHEMASYSTEM_INTERFACE_VERSION);
     g_pGameNetworkStringTableContainer = (INetworkStringTableContainer*)GetInterface(SOURCE2ENGINETOSERVERSTRINGTABLE_INTERFACE_VERSION);
-    g_pGameClientsService = (ISource2GameClients*)GetInterface(INTERFACEVERSION_SERVERGAMECLIENTS);
     g_pGameResources = GetInterface(GAMERESOURCESERVICESERVER_INTERFACE_VERSION);
 
 #ifdef _WIN32
@@ -118,8 +113,8 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
     g_pS2BinLib->SetModuleBaseFromPointer("engine2", libEngine);
 #endif
 
-    g_pCVar = g_pGameCvar;
-    ConVar_Register(FCVAR_RELEASE | FCVAR_SERVER_CAN_EXECUTE | FCVAR_CLIENT_CAN_EXECUTE | FCVAR_GAMEDLL, nullptr, nullptr);
+    SetGlobalCvarObject(g_pGameCvar);
+    ConVar_Register(CVarFlags::RELEASE | CVarFlags::SERVER_CAN_EXECUTE | CVarFlags::CLIENT_CAN_EXECUTE | CVarFlags::GAMEDLL, nullptr, nullptr);
 
     const char* logLevel = CommandLine()->ParmValue(CUtlStringToken("-sw_loglevel"));
     if (logLevel)
@@ -137,7 +132,7 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
     {
         if (g_pGameEngine)
         {
-            g_pLogger->Error("Entrypoint", fmt::format("Unknown game detected. App ID: {}", g_pGameEngine->GetAppID()));
+            g_pLogger->Error("Entrypoint", std::format("Unknown game detected. App ID: {}", g_pGameEngine->GetAppID()));
         }
         else
         {
@@ -175,11 +170,11 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
             if (g_pGameDataManager->GetPatches()->Exists(patch))
             {
                 g_pGameDataManager->GetPatches()->Apply(patch);
-                g_pLogger->Info("Patching", fmt::format("Applied patch: {}\n", patch));
+                g_pLogger->Info("Patching", std::format("Applied patch: {}\n", patch));
             }
             else
             {
-                g_pLogger->Warning("Patching", fmt::format("Couldn't find patch: {}\n", patch));
+                g_pLogger->Warning("Patching", std::format("Couldn't find patch: {}\n", patch));
             }
         }
 
@@ -216,7 +211,6 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
     }
 
     g_pPlayerManager->Initialize();
-    g_pTranslations->Initialize();
 
     StartFixes();
 
@@ -224,7 +218,7 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
 
     if (!InitializeHostFXR(std::string(Plat_GetGameDirectory()) + "/" + g_sGameFolder + "/" + m_sCorePath))
     {
-        g_pCrashReporter->ReportPreventionIncident("Managed", fmt::format("Couldn't initialize the .NET runtime. Make sure you installed `swiftlys2-{}-{}-with-runtimes.zip`.", WIN_LINUX("windows", "linux"), GetVersion()));
+        g_pCrashReporter->ReportPreventionIncident("Managed", std::format("Couldn't initialize the .NET runtime. Make sure you installed `swiftlys2-{}-{}-with-runtimes.zip`.", WIN_LINUX("windows", "linux"), GetVersion()));
         return true;
     }
 
@@ -249,6 +243,8 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
 
 bool SwiftlyCore::Unload()
 {
+    PROFILE_FUNCTION();
+
     g_pExtensionHost->UnloadExtensions();
     g_pHooksManager->Shutdown();
     g_pPlayerManager->Shutdown();
@@ -259,24 +255,21 @@ bool SwiftlyCore::Unload()
     g_pConsoleOutput->Shutdown();
     g_pCrashReporter->Shutdown();
 
+    Profiler::Save(m_sLogPath + "profiler.txt");
+
     return true;
 }
 
 void GameServerSteamAPIActivatedHook(void* _this)
 {
-    if (!g_pGameEngine->IsDedicatedServer())
-    {
-        return reinterpret_cast<decltype(&GameServerSteamAPIActivatedHook)>(g_GameServerSteamAPIActivated.GetOriginal())(_this);
-    }
+    PROFILE_FUNCTION();
 
-    g_pPlayerManager->SteamAPIServerActivated();
+    if (g_pGameEngine->IsDedicatedServer())
+        g_pPlayerManager->SteamAPIServerActivated();
+
+    PROFILE_PAUSE();
 
     return reinterpret_cast<decltype(&GameServerSteamAPIActivatedHook)>(g_GameServerSteamAPIActivated.GetOriginal())(_this);
-}
-
-void GameServerSteamAPIDeactivatedHook(void* _this)
-{
-    return reinterpret_cast<decltype(&GameServerSteamAPIDeactivatedHook)>(g_GameServerSteamAPIDeactivated.GetOriginal())(_this);
 }
 
 std::string workshop_map = "";
@@ -285,12 +278,18 @@ std::string current_map = "";
 
 bool LoopInitHook(void* _this, KeyValues* pKeyValues, void* pRegistry)
 {
+    PROFILE_FUNCTION();
+
     if (current_map != "")
     {
         g_SwiftlyCore.OnMapUnload();
     }
 
+    PROFILE_PAUSE();
+
     bool ret = reinterpret_cast<decltype(&LoopInitHook)>(g_LoopInitHook.GetOriginal())(_this, pKeyValues, pRegistry);
+
+    PROFILE_RESUME();
 
     {
         std::lock_guard<std::mutex> lock(g_qmMapLoadQueue);
@@ -302,24 +301,25 @@ bool LoopInitHook(void* _this, KeyValues* pKeyValues, void* pRegistry)
     return ret;
 }
 
-extern void* g_pOnMapLoadCallback;
-extern void* g_pOnMapUnloadCallback;
-
 void SwiftlyCore::OnMapLoad(std::string map_name)
 {
+    PROFILE_FUNCTION();
+
     current_map = map_name;
 
     if (g_pOnMapLoadCallback)
     {
-        reinterpret_cast<void (*)(const char*)>(g_pOnMapLoadCallback)(map_name.c_str());
+        g_pOnMapLoadCallback(map_name.c_str());
     }
 }
 
 void SwiftlyCore::OnMapUnload()
 {
+    PROFILE_FUNCTION();
+
     if (g_pOnMapUnloadCallback)
     {
-        reinterpret_cast<void (*)(const char*)>(g_pOnMapUnloadCallback)(current_map.c_str());
+        g_pOnMapUnloadCallback(current_map.c_str());
     }
 
     current_map = "";
@@ -327,6 +327,8 @@ void SwiftlyCore::OnMapUnload()
 
 void* SwiftlyCore::GetInterface(const std::string& interface_name)
 {
+    PROFILE_FUNCTION();
+
     int returnCode = 0;
 
     void* iface = g_pServerFactory(interface_name.c_str(), &returnCode);
@@ -338,11 +340,15 @@ void* SwiftlyCore::GetInterface(const std::string& interface_name)
 
 void SwiftlyCore::SendConsoleMessage(const std::string& message)
 {
+    PROFILE_FUNCTION();
+
     Msg("%s", message.c_str());
 }
 
 std::string SwiftlyCore::GetCurrentGame()
 {
+    PROFILE_FUNCTION();
+
     if (g_sGameFolder == "")
     {
         return "unknown";
@@ -354,17 +360,27 @@ std::string SwiftlyCore::GetCurrentGame()
 
 int SwiftlyCore::GetMaxGameClients()
 {
-    if (g_sGameFolder == "csgo") return 64;
-    else return 0;
+    PROFILE_FUNCTION();
+    
+    if(m_iMaxClients == -1)
+    {
+        if (g_sGameFolder == "csgo")
+            m_iMaxClients = 64;
+    }
+    return m_iMaxClients;
 }
 
 std::string& SwiftlyCore::GetCorePath()
 {
+    PROFILE_FUNCTION();
+
     return m_sCorePath;
 }
 
 std::string SwiftlyCore::GetVersion()
 {
+    PROFILE_FUNCTION();
+
 #ifndef SWIFTLY_VERSION
     return "Local";
 #else

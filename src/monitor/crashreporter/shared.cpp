@@ -24,17 +24,12 @@
 #include <api/interfaces/interfaces.h>
 #include <api/shared/files.h>
 #include <api/shared/plat.h>
+#include <api/shared/profiler.h>
 #include <api/shared/string.h>
-
-#include <core/managed/host/host.h>
-#include <core/managed/host/strconv.h>
 
 #include <core/entrypoint.h>
 
-#include <fmt/format.h>
-
-
-#include <nlohmann/json.hpp>
+#include <format>
 
 bool setEnvVar(const std::string& key, const std::string& value);
 std::string g_dumpPath;
@@ -44,6 +39,8 @@ google_breakpad::ExceptionHandler* exceptionHandler = nullptr;
 
 void CrashReporter::Init()
 {
+    PROFILE_FUNCTION();
+
     if (!Files::ExistsPath(g_SwiftlyCore.GetCorePath() + "dumps"))
     {
         if (!Files::CreateDir(g_SwiftlyCore.GetCorePath() + "dumps"))
@@ -86,7 +83,7 @@ void CrashReporter::Init()
 
         for (const auto& f : fileNames)
         {
-            if (ends_with(f, "crashinfo.json"))
+            if (f.ends_with("crashinfo.json"))
             {
                 hasCrashInfo = true;
                 break;
@@ -98,7 +95,7 @@ void CrashReporter::Init()
 
         for (const auto& f : fileNames)
         {
-            if (ends_with(f, ".dmp"))
+            if (f.ends_with(".dmp"))
             {
                 dmpRelPath = f;
                 break;
@@ -108,7 +105,7 @@ void CrashReporter::Init()
         if (dmpRelPath.empty())
             continue;
 
-        g_pLogger->Info("Crash Reporter", fmt::format("Recovering crashinfo.json for: {}\n", dir));
+        g_pLogger->Info("Crash Reporter", std::format("Recovering crashinfo.json for: {}\n", dir));
         ParseAndWriteCrashInfo(Files::GeneratePath(dmpRelPath), dir + "/crashinfo.json");
     }
 
@@ -130,6 +127,8 @@ void CrashReporter::Init()
 
 void CrashReporter::Shutdown()
 {
+    PROFILE_FUNCTION();
+
 #ifdef _WIN32
     ShutdownCrashReporterWindows();
 #endif
@@ -142,7 +141,9 @@ void CrashReporter::Shutdown()
 
 void CrashReporter::EnableDotnetCrashTracer(int level)
 {
-    g_pLogger->Warning("Crash Reporter", fmt::format("Dotnet crash tracer level set to: {}\n", level));
+    PROFILE_FUNCTION();
+
+    g_pLogger->Warning("Crash Reporter", std::format("Dotnet crash tracer level set to: {}\n", level));
 
     m_tracerLevel = level;
     if (level <= 0)
@@ -158,23 +159,27 @@ void CrashReporter::EnableDotnetCrashTracer(int level)
 
 int CrashReporter::GetDotnetCrashTracerLevel()
 {
+    PROFILE_FUNCTION();
+
     return m_tracerLevel;
 }
 
 void CrashReporter::ReportPreventionIncident(std::string category, std::string reason)
 {
-    g_pLogger->Warning("Crash Prevention", "A crash has been prevented by Swiftly Core and the details will be listed below:\n");
-    g_pLogger->Warning("Crash Prevention", fmt::format("Category: {}\n", category));
-    g_pLogger->Warning("Crash Prevention", fmt::format("Message: {}\n", reason));
+    PROFILE_FUNCTION();
 
-    std::string file_path = fmt::format("{}dumps/prevention/incident.{}.log", g_SwiftlyCore.GetCorePath(), get_uuid());
+    g_pLogger->Warning("Crash Prevention", "A crash has been prevented by Swiftly Core and the details will be listed below:\n");
+    g_pLogger->Warning("Crash Prevention", std::format("Category: {}\n", category));
+    g_pLogger->Warning("Crash Prevention", std::format("Message: {}\n", reason));
+
+    std::string file_path = std::format("{}dumps/prevention/incident.{}.log", g_SwiftlyCore.GetCorePath(), get_uuid());
     if (Files::ExistsPath(file_path))
     {
         Files::Delete(file_path);
     }
 
-    Files::Append(file_path, fmt::format("================================\nCategory: {}\nDetails: {}", category, reason), false);
-    g_pLogger->Warning("Crash Prevention", fmt::format("A log file has been created at: {}\n", file_path));
+    Files::Append(file_path, std::format("================================\nCategory: {}\nDetails: {}", category, reason), false);
+    g_pLogger->Warning("Crash Prevention", std::format("A log file has been created at: {}\n", file_path));
 }
 
 #ifndef _WIN32
@@ -183,6 +188,8 @@ void CrashReporterOnTickLinux();
 
 void CrashReporter::OnTick()
 {
+    PROFILE_FUNCTION();
+
 #ifndef _WIN32
     CrashReporterOnTickLinux();
 #endif

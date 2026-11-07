@@ -51,12 +51,6 @@ public:
     virtual void Warning(const std::string& category, const std::string& message) = 0;
     virtual void Error(const std::string& category, const std::string& message) = 0;
     virtual void Critical(const std::string& category, const std::string& message) = 0;
-
-    virtual void SetLogFile(LogType type, const std::string& path) = 0;
-    virtual void ShouldOutputToFile(LogType type, bool enabled) = 0;
-
-    virtual void ShouldColorCategoryInConsole(const std::string& category, bool enabled) = 0;
-    virtual void ShouldOutputToConsole(LogType type, bool enabled) = 0;
 };
 
 #endif

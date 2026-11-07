@@ -44,12 +44,6 @@ public:
         return m_uData[qword];
     }
 
-    uint32_t GetDWord(int dword)
-    {
-        if (dword < 0 || dword >= NUM_QWORDS * 2) return 0;
-        return static_cast<uint32_t>(m_uData[dword >> 1] >> ((dword & 1) * 32));
-    }
-
     void SetDWord(int dword, uint32_t value)
     {
         if (dword < 0 || dword >= NUM_QWORDS * 2) return;
@@ -66,6 +60,12 @@ public:
     void ClearAll()
     {
         std::fill(std::begin(m_uData), std::end(m_uData), 0ULL);
+    }
+
+    void SetAll()
+    {
+        std::fill(std::begin(m_uData), std::end(m_uData), ~0ULL);
+        if (N & 63) m_uData[NUM_QWORDS - 1] &= (1ULL << (N & 63)) - 1;
     }
 
     void CopyFrom(CBitVector<N>& src)

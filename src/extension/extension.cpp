@@ -18,6 +18,7 @@
 
 #include "extension.h"
 #include <api/extension/sw_extension.h>
+#include <api/shared/profiler.h>
 
 #include <extension/impl/core/core_impl_00001.h>
 #include <core/managed/host/dynlib.h>
@@ -39,10 +40,13 @@ Extension::Extension(const std::string& id, const std::string& path, void* libra
     on_all_extensions_loaded_callback_(nullptr),
     on_all_extensions_loaded_user_data_(nullptr)
 {
+    PROFILE_FUNCTION();
 }
 
 Extension::~Extension()
 {
+    PROFILE_FUNCTION();
+
     FinishInitialization();
     if (unload_callback_)
         unload_callback_(unload_user_data_);
@@ -57,6 +61,8 @@ void Extension::Init(
     const char* description
 )
 {
+    PROFILE_FUNCTION();
+
     if (name && version)
     {
         initialized_ = true;
@@ -73,11 +79,15 @@ void Extension::Init(
 
 bool Extension::IsInitialized()
 {
+    PROFILE_FUNCTION();
+
     return initialized_;
 }
 
 void* Extension::GetCore(const char* core_name)
 {
+    PROFILE_FUNCTION();
+
     std::string core(core_name);
     if (core != SW_IFACE_CORE_00001)
         return nullptr;
@@ -90,33 +100,45 @@ void* Extension::GetCore(const char* core_name)
 
 void Extension::SetHotReloaded(bool hotreloaded)
 {
+    PROFILE_FUNCTION();
+
     hot_reloaded_ = hotreloaded;
 }
 
 bool Extension::IsHotReloaded()
 {
+    PROFILE_FUNCTION();
+
     return hot_reloaded_;
 }
 
 void Extension::FinishInitialization()
 {
+    PROFILE_FUNCTION();
+
     initializing_ = false;
 }
 
 void Extension::SetUnloadCallback(sw_extension_callback_fn callback, void* user_data)
 {
+    PROFILE_FUNCTION();
+
     unload_callback_ = callback;
     unload_user_data_ = user_data;
 }
 
 void Extension::SetOnAllExtensionsLoadedCallback(sw_extension_callback_fn callback, void* user_data)
 {
+    PROFILE_FUNCTION();
+
     on_all_extensions_loaded_callback_ = callback;
     on_all_extensions_loaded_user_data_ = user_data;
 }
 
 void Extension::OnAllExtensionsLoaded()
 {
+    PROFILE_FUNCTION();
+
     if (on_all_extensions_loaded_callback_)
         on_all_extensions_loaded_callback_(on_all_extensions_loaded_user_data_);
 }

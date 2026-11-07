@@ -4,8 +4,10 @@ using SwiftlyS2.Core.GameHooks;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.Scheduler;
 using SwiftlyS2.Core.SchemaDefinitions;
+using SwiftlyS2.Core.Translations;
 using SwiftlyS2.Shared.Engine;
 using SwiftlyS2.Shared.Events;
+using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Shared.Players;
 using SwiftlyS2.Shared.ProtobufDefinitions;
@@ -19,11 +21,21 @@ internal class Player : IPlayer, IDisposable
     public Player( int pid )
     {
         Slot = pid;
-        SessionId = NativePlayer.GetSessionID(pid);
+        SessionId = nextSessionId.Increment();
     }
+
+    private static readonly Atomic<ulong> nextSessionId = new(999);
 
     private bool _disposed = false;
     private ServerSideClient _serverSideClient = new();
+    internal Language _language = TranslationService.ServerLanguage;
+
+    private readonly Atomic<VoiceFlagValue> voiceFlags = new(VoiceFlagValue.Normal);
+    private readonly ListenOverride[] listenOverrides = new ListenOverride[66];
+    private ulong selfMutes;
+
+    internal bool IsMutedBySelf( int slot ) => (uint)slot < 64 && (selfMutes & (1UL << slot)) != 0;
+    internal void SetSelfMutesLowDWord( uint mask ) => selfMutes = (selfMutes & ~0xFFFFFFFFUL) | mask;
 
     public int PlayerID => Slot;
     public ulong SessionId { get; }
@@ -37,7 +49,7 @@ internal class Player : IPlayer, IDisposable
     public bool IsAuthorized { get { ThrowIfDisposed(); return NativePlayer.IsAuthorized(Slot); } }
     public uint ConnectedTime { get { ThrowIfDisposed(); return NativePlayer.GetConnectedTime(Slot); } }
 
-    public Language PlayerLanguage { get { ThrowIfDisposed(); return new(NativePlayer.GetLanguage(Slot)); } }
+    public Language PlayerLanguage { get => _language; }
 
     public ulong SteamID { get { ThrowIfDisposed(); return NativePlayer.GetSteamID(Slot); } }
 
@@ -71,7 +83,7 @@ internal class Player : IPlayer, IDisposable
 
     public string IPAddress { get { ThrowIfDisposed(); return NativePlayer.GetIPAddress(Slot); } }
 
-    public VoiceFlagValue VoiceFlags { get { ThrowIfDisposed(); return (VoiceFlagValue)NativeVoiceManager.GetClientVoiceFlags(Slot); } set { ThrowIfDisposed(); NativeVoiceManager.SetClientVoiceFlags(Slot, (int)value); } }
+    public VoiceFlagValue VoiceFlags { get { return voiceFlags.Value; } set { voiceFlags.Value = value; } }
     public bool IsValid =>
         !_disposed &&
         Controller is { IsValid: true, IsHLTV: false, Connected: PlayerConnectedState.Connected } &&
@@ -80,8 +92,6 @@ internal class Player : IPlayer, IDisposable
     public bool IsAlive => IsValid && Pawn!.LifeState == (byte)LifeState_t.LIFE_ALIVE;
 
     public bool IsFirstSpawn { get { ThrowIfDisposed(); return NativePlayer.IsFirstSpawn(Slot); } }
-
-    Language IPlayer.PlayerLanguage => PlayerLanguage;
 
     public string Name { get => ServerSideClient.Name; set => ServerSideClient.Name = value; }
 
@@ -109,7 +119,7 @@ internal class Player : IPlayer, IDisposable
     public ListenOverride GetListenOverride( int player )
     {
         ThrowIfDisposed();
-        return (ListenOverride)NativeVoiceManager.GetClientListenOverride(Slot, player);
+        return (uint)player < (uint)listenOverrides.Length ? listenOverrides[player] : ListenOverride.Default;
     }
 
     public bool IsTransmitEntityBlocked( int entityid )
@@ -156,7 +166,10 @@ internal class Player : IPlayer, IDisposable
     public void SetListenOverride( int player, ListenOverride listenOverride )
     {
         ThrowIfDisposed();
-        NativeVoiceManager.SetClientListenOverride(Slot, player, (int)listenOverride);
+        if ((uint)player < (uint)listenOverrides.Length)
+        {
+            listenOverrides[player] = listenOverride;
+        }
     }
 
     public void ShouldBlockTransmitEntity( int entityid, bool shouldBlockTransmit )
@@ -176,8 +189,7 @@ internal class Player : IPlayer, IDisposable
 
     public Task SwitchTeamAsync( Team team )
     {
-        if (team == Team.None || team == Team.Spectator) return ChangeTeamAsync(team);
-        else return SchedulerManager.QueueOrNow(() => SwitchTeam(team));
+        return team == Team.None || team == Team.Spectator ? ChangeTeamAsync(team) : SchedulerManager.QueueOrNow(() => SwitchTeam(team));
     }
 
     public void TakeDamage( CTakeDamageInfo damageInfo )
@@ -368,8 +380,8 @@ internal class Player : IPlayer, IDisposable
 
     public static bool operator ==( Player? left, Player? right )
     {
-        return left is not null && right is not null && left.Equals(right);
+        return left is null ? right is null : left.Equals(right);
     }
 
-    public static bool operator !=( Player left, Player right ) => !(left == right);
+    public static bool operator !=( Player? left, Player? right ) => !(left == right);
 }

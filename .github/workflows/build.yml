@@ -57,11 +57,11 @@ jobs:
     - name: Build managed (Linux)
       run: |
         cd managed
-        dotnet build -c Release -p:SW2Platform=Linux -p:BaseOutputPath=build/linux/ -p:Version=${{ needs.versioning.outputs.semVer }} -p:InformationalVersion=${{ needs.versioning.outputs.informationalVersion }} -p:FileVersion=${{ needs.versioning.outputs.semVer }}
+        dotnet build -c Release -p:SW2Platform=Linux -p:UseSharedCompilation=false -p:BaseOutputPath=build/linux/ -p:Version=${{ needs.versioning.outputs.semVer }} -p:InformationalVersion=${{ needs.versioning.outputs.informationalVersion }} -p:FileVersion=${{ needs.versioning.outputs.semVer }}
     - name: Build managed (Windows)
       run: |
         cd managed
-        dotnet build -c Release -p:SW2Platform=Windows -p:BaseOutputPath=build/windows/ -p:Version=${{ needs.versioning.outputs.semVer }} -p:InformationalVersion=${{ needs.versioning.outputs.informationalVersion }} -p:FileVersion=${{ needs.versioning.outputs.semVer }}
+        dotnet build -c Release -p:SW2Platform=Windows -p:UseSharedCompilation=false -p:BaseOutputPath=build/windows/ -p:Version=${{ needs.versioning.outputs.semVer }} -p:InformationalVersion=${{ needs.versioning.outputs.informationalVersion }} -p:FileVersion=${{ needs.versioning.outputs.semVer }}
     - name: Upload plugin as artifact (Linux)
       uses: actions/upload-artifact@v4
       with:
@@ -119,7 +119,7 @@ jobs:
         DOTNET_PATH: ./vendor/runtime
     - name: Build
       run: |
-        chmod 777 vendor/s2sdk/devtools/bin/linux/protoc
+        chmod 777 vendor/s2sdk/protobufs/bin/protoc
         xmake f --cc=gcc-14 --cxx=g++-14 -y
         xmake build -y
       env:
@@ -438,7 +438,7 @@ jobs:
           release/swiftlys2-windows-v${{ needs.versioning.outputs.semVer }}-pdb.zip
         prerelease: ${{ needs.versioning.outputs.preReleaseLabel != '' }}
         tag_name: ${{ env.TAG_NAME }}
-        name: Release v${{ needs.versioning.outputs.semVer }}
+        name: v${{ needs.versioning.outputs.semVer }}
         body: ${{ needs.versioning.outputs.semVer  }}
 
     - name: Trigger API docs build
@@ -578,5 +578,5 @@ jobs:
     - name: Publish to nuget
       run: |
         cd managed
-        dotnet pack --include-symbols --output nupkgs -c Release -p:Version=${{ needs.versioning.outputs.semVer }}
+        dotnet pack --include-symbols --output nupkgs -c Release -m:1 -p:Version=${{ needs.versioning.outputs.semVer }}
         dotnet nuget push nupkgs/SwiftlyS2.CS2.${{ needs.versioning.outputs.semVer }}.nupkg --api-key ${{ steps.login.outputs.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json

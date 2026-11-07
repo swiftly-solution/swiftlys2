@@ -16,4 +16,3 @@ void RegisterOnMapUnloadCallback = ptr callback // string mapname
 void RegisterOnPrecacheResourceCallback = ptr callback // IEntityResourceManifest* pResourceManifest
 void RegisterOnPreworldUpdateCallback = ptr callback // bool simulating
 void RegisterOnStartupServerCallback = ptr callback // void
-void RegisterOnClientVoiceCallback = ptr callback // int32 playerid

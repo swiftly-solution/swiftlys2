@@ -18,44 +18,61 @@
 
 #include <scripting/scripting.h>
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 
 void* Bridge_Memory_Alloc(uint64_t size)
 {
+    PROFILE_FUNCTION();
+
     return g_pMemoryAllocator->Alloc(size);
 }
 
 void Bridge_Memory_Free(void* ptr)
 {
+    PROFILE_FUNCTION();
+
     g_pMemoryAllocator->Free(ptr);
 }
 
 void* Bridge_Memory_Resize(void* ptr, uint64_t newSize)
 {
+    PROFILE_FUNCTION();
+
     return g_pMemoryAllocator->Resize(ptr, newSize);
 }
 
 uint64_t Bridge_Memory_GetSize(void* ptr)
 {
+    PROFILE_FUNCTION();
+
     return g_pMemoryAllocator->GetSize(ptr);
 }
 
 uint64_t Bridge_Memory_GetTotalAllocated()
 {
+    PROFILE_FUNCTION();
+
     return g_pMemoryAllocator->GetTotalAllocated();
 }
 
 bool Bridge_Memory_IsPointerValid(void* ptr)
 {
+    PROFILE_FUNCTION();
+
     return g_pMemoryAllocator->IsPointerValid(ptr);
 }
 
 void Bridge_Memory_Copy(void* dest, void* src, uint64_t size)
 {
+    PROFILE_FUNCTION();
+
     g_pMemoryAllocator->Copy(dest, src, size);
 }
 
 void Bridge_Memory_Move(void* dest, void* src, uint64_t size)
 {
+    PROFILE_FUNCTION();
+
     g_pMemoryAllocator->Move(dest, src, size);
 }
 

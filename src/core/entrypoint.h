@@ -20,8 +20,8 @@
 #define _core_entrypoint_h
 
 #include <string>
-#include <public/steam/steam_api_common.h>
-#include <public/steam/isteamugc.h>
+#include <public/steamworks/steam_api_common.h>
+#include <public/steamworks/isteamugc.h>
 
 typedef void* (*CreateIFaceFn)(const char* name, int* returnCode);
 
@@ -36,6 +36,7 @@ private:
     BridgeKind_t m_iKind;
     std::string m_sCorePath;
     std::string m_sLogPath;
+    int m_iMaxClients = -1;
 
 public:
     bool Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFaceFn engineFactory);

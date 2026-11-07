@@ -17,20 +17,27 @@
  ************************************************************************************************/
 
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 #include <scripting/scripting.h>
 
 int Bridge_PlayerManager_GetPlayerCount()
 {
+    PROFILE_FUNCTION();
+
     return g_pPlayerManager->GetPlayerCount();
 }
 
 int Bridge_PlayerManager_GetPlayerCap()
 {
+    PROFILE_FUNCTION();
+
     return g_pPlayerManager->GetPlayerCap();
 }
 
 void Bridge_PlayerManager_SendMessage(int kind, const char* message, int duration)
 {
+    PROFILE_FUNCTION();
+
     g_pPlayerManager->SendMsg((MessageType)kind, message, duration);
 }
 
@@ -38,6 +45,8 @@ void Bridge_Player_ShouldBlockTransmitEntity(int playerid, int entityidx, bool s
 
 void Bridge_PlayerManager_ShouldBlockTransmitEntity(int entityidx, bool shouldBlockTransmit)
 {
+    PROFILE_FUNCTION();
+
     if (entityidx < 0 || entityidx >= MAX_EDICTS) return;
 
     for (int i = 0; i < g_pPlayerManager->GetPlayerCap(); i++)
@@ -48,6 +57,8 @@ void Bridge_Player_ClearTransmitEntityBlocked(int playerid);
 
 void Bridge_PlayerManager_ClearAllBlockedTransmitEntity()
 {
+    PROFILE_FUNCTION();
+
     for (int i = 0; i < g_pPlayerManager->GetPlayerCap(); i++)
         Bridge_Player_ClearTransmitEntityBlocked(i);
 }

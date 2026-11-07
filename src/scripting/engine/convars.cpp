@@ -17,54 +17,53 @@
  ************************************************************************************************/
 
 #include <api/interfaces/interfaces.h>
-#include <public/tier1/convar.h>
-#include <public/tier1/utlstring.h>
+#include <api/shared/profiler.h>
+#include <public/tier0/convar.h>
+#include <public/tier0/utlstring.h>
 #include <scripting/scripting.h>
 
 #include <optional>
-#include <variant>
+
+typedef void (*QueryClientCvarCallback)(int, const char*, const char*);
+typedef void (*GlobalChangeListenerCallback)(const char*, int, const char*, const char*);
+typedef void (*ConvarNameCallback)(const char*);
 
 extern bool bypassConvarCallbacks;
 
-static char* Bridge_Convars_CopyString(const char* value, int* size)
-{
-    int outSize = value ? static_cast<int>(strlen(value)) : 0;
-    *size = outSize;
-
-    char* out = (char*)g_pMemoryAllocator->Alloc(outSize + 1);
-    if (outSize > 0)
-    {
-        g_pMemoryAllocator->Copy(out, (void*)value, outSize);
-    }
-
-    out[outSize] = '\0';
-    return out;
-}
-
 ConVarRefAbstract& GetConVarRef(const char* cvarName)
 {
+    PROFILE_FUNCTION();
+
     return g_pConvarManager->GetConvarRef(cvarName);
 }
 
 void Bridge_Convars_QueryClientConvar(int playerid, const char* cvarName)
 {
+    PROFILE_FUNCTION();
+
     g_pConvarManager->QueryClientConvar(playerid, cvarName);
 }
 
-int Bridge_Convars_AddQueryClientCvarCallback(void* callback)
+int Bridge_Convars_AddQueryClientCvarCallback(QueryClientCvarCallback callback)
 {
+    PROFILE_FUNCTION();
+
     return g_pConvarManager->AddQueryClientCvarCallback([callback](int playerid, std::string cvarName, std::string cvarValue) -> void {
-        ((void(*)(int, const char*, const char*))callback)(playerid, cvarName.c_str(), cvarValue.c_str());
+        callback(playerid, cvarName.c_str(), cvarValue.c_str());
         });
 }
 
 void Bridge_Convars_RemoveQueryClientCvarCallback(int callbackId)
 {
+    PROFILE_FUNCTION();
+
     g_pConvarManager->RemoveQueryClientCvarCallback(callbackId);
 }
 
 static ConvarValue ReadConvarValue(EConVarType type, const void* value)
 {
+    PROFILE_FUNCTION();
+
     switch (type)
     {
         case EConVarType_Int16: return *(const int16_t*)value;
@@ -88,6 +87,8 @@ static ConvarValue ReadConvarValue(EConVarType type, const void* value)
 
 static bool HasMinMax(EConVarType type)
 {
+    PROFILE_FUNCTION();
+
     switch (type)
     {
         case EConVarType_Int16:
@@ -106,6 +107,8 @@ static bool HasMinMax(EConVarType type)
 
 void Bridge_Convars_CreateConvar(const char* convarName, int cvarType, uint64_t cvarFlags, const char* helpMessage, void* defaultValue, void* minValue, void* maxValue)
 {
+    PROFILE_FUNCTION();
+
     auto type = (EConVarType)cvarType;
     if (!defaultValue) return;
 
@@ -122,107 +125,143 @@ void Bridge_Convars_CreateConvar(const char* convarName, int cvarType, uint64_t 
 
 void Bridge_Convars_DeleteConvar(const char* convarName)
 {
+    PROFILE_FUNCTION();
+
     g_pConvarManager->DeleteConvar(convarName);
 }
 
 bool Bridge_Convars_ExistsConvar(const char* convarName)
 {
+    PROFILE_FUNCTION();
+
     auto& cvar = GetConVarRef(convarName);
     return cvar.IsValidRef() && cvar.IsConVarDataValid();
 }
 
 int Bridge_Convars_GetConvarType(const char* convarName)
 {
+    PROFILE_FUNCTION();
+
     auto& cvar = GetConVarRef(convarName);
     return (int)(cvar.GetType());
 }
 
 uint64_t Bridge_Convars_GetFlags(const char* cvarName)
 {
+    PROFILE_FUNCTION();
+
     auto& cvar = GetConVarRef(cvarName);
     return cvar.GetConVarData()->m_nFlags;
 }
 
 void Bridge_Convars_SetFlags(const char* cvarName, uint64_t flags)
 {
+    PROFILE_FUNCTION();
+
     auto& cvar = GetConVarRef(cvarName);
     cvar.GetConVarData()->m_nFlags = flags;
 }
 
-uint64_t Bridge_Convars_AddGlobalChangeListener(void* callback)
+uint64_t Bridge_Convars_AddGlobalChangeListener(GlobalChangeListenerCallback callback)
 {
+    PROFILE_FUNCTION();
+
     return g_pConvarManager->AddGlobalChangeListener([callback](const char* convarName, int slot, const char* newValue, const char* oldValue) -> void {
-        ((void(*)(const char*, int, const char*, const char*))callback)(convarName, slot, newValue, oldValue);
+        callback(convarName, slot, newValue, oldValue);
         });
 }
 
 void Bridge_Convars_RemoveGlobalChangeListener(uint64_t listenerID)
 {
+    PROFILE_FUNCTION();
+
     g_pConvarManager->RemoveGlobalChangeListener(listenerID);
 }
 
-uint64_t Bridge_Convars_AddConvarCreatedListener(void* callback)
+uint64_t Bridge_Convars_AddConvarCreatedListener(ConvarNameCallback callback)
 {
+    PROFILE_FUNCTION();
+
     return g_pConvarManager->AddConvarCreatedListener([callback](const char* convarName) -> void {
-        ((void(*)(const char*))callback)(convarName);
+        callback(convarName);
         });
 }
 
 void Bridge_Convars_RemoveConvarCreatedListener(uint64_t listenerID)
 {
+    PROFILE_FUNCTION();
+
     g_pConvarManager->RemoveConvarCreatedListener(listenerID);
 }
 
-uint64_t Bridge_Convars_AddConCommandCreatedListener(void* callback)
+uint64_t Bridge_Convars_AddConCommandCreatedListener(ConvarNameCallback callback)
 {
+    PROFILE_FUNCTION();
+
     return g_pConvarManager->AddConCommandCreatedListener([callback](const char* convarName) -> void {
-        ((void(*)(const char*))callback)(convarName);
+        callback(convarName);
         });
 }
 
 void Bridge_Convars_RemoveConCommandCreatedListener(uint64_t listenerID)
 {
+    PROFILE_FUNCTION();
+
     g_pConvarManager->RemoveConCommandCreatedListener(listenerID);
 }
 
 void* Bridge_Convars_GetMinValuePtrPtr(const char* cvarName)
 {
+    PROFILE_FUNCTION();
+
     auto& cvar = GetConVarRef(cvarName);
     return &cvar.GetConVarData()->m_minValue;
 }
 
 void* Bridge_Convars_GetMaxValuePtrPtr(const char* cvarName)
 {
+    PROFILE_FUNCTION();
+
     auto& cvar = GetConVarRef(cvarName);
     return &cvar.GetConVarData()->m_maxValue;
 }
 
 bool Bridge_Convars_HasDefaultValue(const char* cvarName)
 {
+    PROFILE_FUNCTION();
+
     auto& cvar = GetConVarRef(cvarName);
     return cvar.HasDefault();
 }
 
 void* Bridge_Convars_GetDefaultValuePtr(const char* cvarName)
 {
+    PROFILE_FUNCTION();
+
     auto& cvar = GetConVarRef(cvarName);
     return cvar.GetConVarData()->DefaultValue();
 }
 
 void* Bridge_Convars_GetValuePtr(const char* cvarName)
 {
+    PROFILE_FUNCTION();
+
     auto& cvar = GetConVarRef(cvarName);
     return cvar.GetConVarData()->Value(0);
 }
 
 void Bridge_Convars_SetValuePtr(const char* cvarName, void* value)
 {
+    PROFILE_FUNCTION();
+
     auto& cvar = GetConVarRef(cvarName);
     cvar.SetOrQueueValueInternal(0, (CVValue_t*)value);
 }
 
 void Bridge_Convars_SetValueInternalPtr(const char* cvarName, void* value)
 {
+    PROFILE_FUNCTION();
+
     bypassConvarCallbacks = true;
     auto& cvar = GetConVarRef(cvarName);
     cvar.SetValueInternal(0, (CVValue_t*)value);
@@ -231,6 +270,8 @@ void Bridge_Convars_SetValueInternalPtr(const char* cvarName, void* value)
 
 bool Bridge_Convars_SetValueAsString(const char* cvarName, const char* value)
 {
+    PROFILE_FUNCTION();
+
     bypassConvarCallbacks = true;
     auto& cvar = GetConVarRef(cvarName);
     bool result = cvar.SetString(CUtlString(value), CSplitScreenSlot(0));
@@ -241,15 +282,19 @@ bool Bridge_Convars_SetValueAsString(const char* cvarName, const char* value)
 
 char* Bridge_Convars_GetValueAsString(int* size, const char* cvarName)
 {
+    PROFILE_FUNCTION();
+
     auto& cvar = GetConVarRef(cvarName);
     CBufferString buf;
     cvar.GetValueAsString(buf, CSplitScreenSlot(0));
 
-    return Bridge_Convars_CopyString(buf.Get(), size);
+    return Bridge_CopyString(buf.Get(), size);
 }
 
 bool Bridge_Convars_SetDefaultValueAsString(const char* cvarName, const char* defaultValue)
 {
+    PROFILE_FUNCTION();
+
     auto& cvar = GetConVarRef(cvarName);
     auto data = cvar.GetConVarData();
     if (!data->m_defaultValue)
@@ -261,24 +306,30 @@ bool Bridge_Convars_SetDefaultValueAsString(const char* cvarName, const char* de
 
 char* Bridge_Convars_GetDefaultValueAsString(int* size, const char* cvarName)
 {
+    PROFILE_FUNCTION();
+
     auto& cvar = GetConVarRef(cvarName);
     CBufferString buf;
     cvar.GetConVarData()->DefaultValueToString(buf);
 
-    return Bridge_Convars_CopyString(buf.Get(), size);
+    return Bridge_CopyString(buf.Get(), size);
 }
 
 char* Bridge_Convars_GetMinValueAsString(int* size, const char* cvarName)
 {
+    PROFILE_FUNCTION();
+
     auto& cvar = GetConVarRef(cvarName);
     CBufferString buf;
     cvar.GetConVarData()->MinValueToString(buf);
 
-    return Bridge_Convars_CopyString(buf.Get(), size);
+    return Bridge_CopyString(buf.Get(), size);
 }
 
 bool Bridge_Convars_SetMinValueAsString(const char* cvarName, const char* minValue)
 {
+    PROFILE_FUNCTION();
+
     auto& cvar = GetConVarRef(cvarName);
     auto data = cvar.GetConVarData();
     if (!data->m_minValue)
@@ -290,15 +341,19 @@ bool Bridge_Convars_SetMinValueAsString(const char* cvarName, const char* minVal
 
 char* Bridge_Convars_GetMaxValueAsString(int* size, const char* cvarName)
 {
+    PROFILE_FUNCTION();
+
     auto& cvar = GetConVarRef(cvarName);
     CBufferString buf;
     cvar.GetConVarData()->MaxValueToString(buf);
 
-    return Bridge_Convars_CopyString(buf.Get(), size);
+    return Bridge_CopyString(buf.Get(), size);
 }
 
 bool Bridge_Convars_SetMaxValueAsString(const char* cvarName, const char* maxValue)
 {
+    PROFILE_FUNCTION();
+
     auto& cvar = GetConVarRef(cvarName);
     auto data = cvar.GetConVarData();
     if (!data->m_maxValue)
@@ -310,6 +365,8 @@ bool Bridge_Convars_SetMaxValueAsString(const char* cvarName, const char* maxVal
 
 void Bridge_Convars_SetValueInternalAsString(const char* cvarName, const char* value)
 {
+    PROFILE_FUNCTION();
+
     auto& cvar = GetConVarRef(cvarName);
     CVValue_t v;
     cvar.GetConVarData()->TypeTraits()->StringToValue(value, &v);
@@ -318,10 +375,12 @@ void Bridge_Convars_SetValueInternalAsString(const char* cvarName, const char* v
 
 char* Bridge_Convars_GetDescription(int* size, const char* cvarName)
 {
+    PROFILE_FUNCTION();
+
     auto& cvar = GetConVarRef(cvarName);
     std::string s = cvar.GetHelpText();
 
-    return Bridge_Convars_CopyString(s.c_str(), size);
+    return Bridge_CopyString(s.c_str(), size);
 }
 
 DEFINE_NATIVE("Convars.QueryClientConvar", Bridge_Convars_QueryClientConvar);

@@ -16,20 +16,24 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ************************************************************************************************/
 
-#include <regex>
 #include <memory/hooks/function.h>
 
 #include <api/interfaces/interfaces.h>
-#include <fmt/format.h>
+#include <api/shared/profiler.h>
+#include <api/shared/string.h>
+
+#include <format>
+#include <string>
 
 #ifdef _WIN32
 #include <Windows.h>
 
-void __fastcall PreloadDLLHook(HMODULE hModule);
 extern FunctionHook g_PreloadDLLHook;
 
 void __fastcall PreloadDLLHook(HMODULE hModule)
 {
+    PROFILE_FUNCTION();
+
     if (!g_PreloadDLLHook.GetOriginal())
     {
         return;
@@ -41,14 +45,16 @@ void __fastcall PreloadDLLHook(HMODULE hModule)
         DWORD len = GetModuleFileNameA(hModule, modulePath, MAX_PATH);
         if (len > 0 && len < MAX_PATH)
         {
-            static const std::regex skipPattern(R"([/\\](bin[/\\]managed|resources[/\\]exports)[/\\])", std::regex_constants::icase);
-            if (std::regex_search(modulePath, skipPattern))
+            std::string normalized = str_tolower(replace(modulePath, "/", "\\"));
+            if (normalized.contains("\\bin\\managed\\") || normalized.contains("\\resources\\exports\\"))
             {
-                g_pLogger->Info("PreloadDLL", fmt::format("Skipping DLL: {}\n", modulePath));
+                g_pLogger->Info("PreloadDLL", std::format("Skipping DLL: {}\n", modulePath));
                 return;
             }
         }
     }
+
+    PROFILE_PAUSE();
 
     return reinterpret_cast<decltype(&PreloadDLLHook)>(g_PreloadDLLHook.GetOriginal())(hModule);
 }

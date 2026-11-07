@@ -291,6 +291,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
     }
     public event EventDelegates.OnStartupServer? OnStartupServer;
     public event EventDelegates.OnClientVoice? OnClientVoice;
+    public event EventDelegates.OnClientSettingsChanged? OnClientSettingsChanged;
     public event EventDelegates.OnCustomHudClicked? OnCustomHudClicked;
 
     private void ReleaseConVarListeners()
@@ -580,6 +581,27 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
             }
         }
 
+    }
+
+    public bool ListensToClientSettingsChanged => OnClientSettingsChanged != null;
+
+    public void InvokeOnClientSettingsChanged( ref OnClientSettingsChangedEvent @event )
+    {
+        if (OnClientSettingsChanged == null)
+        {
+            return;
+        }
+        try
+        {
+            OnClientSettingsChanged.Invoke(@event);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking OnClientSettingsChanged.");
+            }
+        }
     }
 
     public bool ListensToEntityDeleted => OnEntityDeleted != null;

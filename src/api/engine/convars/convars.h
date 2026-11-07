@@ -24,7 +24,7 @@
 #include <variant>
 #include <optional>
 
-#include <public/tier1/convar.h>
+#include <public/tier0/convar.h>
 #include <public/mathlib/vector2d.h>
 #include <public/mathlib/vector.h>
 #include <public/mathlib/vector4d.h>

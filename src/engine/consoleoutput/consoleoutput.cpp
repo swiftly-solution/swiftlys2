@@ -23,10 +23,11 @@
 
 #include <api/interfaces/interfaces.h>
 #include <pcre2.h>
-#include <fmt/format.h>
+#include <format>
 
 #include <api/shared/jsonc.h>
 #include <api/shared/files.h>
+#include <api/shared/profiler.h>
 
 #include <utility>
 
@@ -34,17 +35,19 @@ using json = nlohmann::json;
 
 extern CConsoleOutput g_ConsoleOutput;
 
-int CLoggingSystem_LogDirectHook(void* loggingSystem, int channel, int severity, LeafCodeInfo_t* leafCode, char const* str, va_list* args);
+int CLoggingSystem_LogDirectHook(void* loggingSystem, int channel, int severity, void* data, char const* str, va_list* args);
 FunctionHook g_CLoggingSystem_LogDirect_Hook(reinterpret_cast<void*>(CLoggingSystem_LogDirectHook), "CLoggingSystem::LogDirect");
 
-int CLoggingSystem_LogDirectHook(void* loggingSystem, int channel, int severity, LeafCodeInfo_t* leafCode, char const* str, va_list* args)
+int CLoggingSystem_LogDirectHook(void* loggingSystem, int channel, int severity, void* data, char const* str, va_list* args)
 {
-    const auto original = reinterpret_cast<decltype(&CLoggingSystem_LogDirectHook)>(g_CLoggingSystem_LogDirect_Hook.GetOriginal());
+    PROFILE_FUNCTION();
 
     if (str && g_ConsoleOutput.ProcessLogMessage(str, args))
         return 0;
 
-    return original(loggingSystem, channel, severity, leafCode, str, args);
+    PROFILE_PAUSE();
+
+    return reinterpret_cast<decltype(&CLoggingSystem_LogDirectHook)>(g_CLoggingSystem_LogDirect_Hook.GetOriginal())(loggingSystem, channel, severity, data, str, args);
 }
 
 struct ConsoleFilter
@@ -57,6 +60,7 @@ struct ConsoleFilter
     ConsoleFilter(std::string filterName, pcre2_code* filterCode, pcre2_match_data* filterMatchData)
         : name(std::move(filterName)), code(filterCode), matchData(filterMatchData)
     {
+        PROFILE_FUNCTION();
     }
 
     ConsoleFilter(const ConsoleFilter&) = delete;
@@ -64,17 +68,23 @@ struct ConsoleFilter
 
     ~ConsoleFilter()
     {
+        PROFILE_FUNCTION();
+
         pcre2_match_data_free(matchData);
         pcre2_code_free(code);
     }
 
     bool Matches(PCRE2_SPTR text, PCRE2_SIZE length) const
     {
+        PROFILE_FUNCTION();
+
         return pcre2_match(code, text, length, 0, 0, matchData, nullptr) > 0;
     }
 
     bool SuppressesFollowingNewline() const
     {
+        PROFILE_FUNCTION();
+
         return name == "Framerate_Values" || name == "Framerate_Total";
     }
 };
@@ -88,11 +98,23 @@ struct ConsoleDispatchScope
     const ConsoleDispatchScope* previous;
     static inline thread_local const ConsoleDispatchScope* active = nullptr;
 
-    explicit ConsoleDispatchScope(CConsoleOutput* instance) : output(instance), previous(active) { active = this; }
-    ~ConsoleDispatchScope() { active = previous; }
+    explicit ConsoleDispatchScope(CConsoleOutput* instance) : output(instance), previous(active)
+    {
+        PROFILE_FUNCTION();
+
+        active = this;
+    }
+    ~ConsoleDispatchScope()
+    {
+        PROFILE_FUNCTION();
+
+        active = previous;
+    }
 
     static bool Contains(const CConsoleOutput* instance)
     {
+        PROFILE_FUNCTION();
+
         for (auto scope = active; scope; scope = scope->previous)
             if (scope->output == instance) return true;
         return false;
@@ -101,6 +123,8 @@ struct ConsoleDispatchScope
 
 bool CConsoleOutput::ProcessLogMessage(const char* str, va_list* args)
 {
+    PROFILE_FUNCTION();
+
     if (m_SkipNextNewlineOnlyLog.load(std::memory_order_relaxed) && strcmp(str, "\n") == 0) {
         m_SkipNextNewlineOnlyLog.store(false, std::memory_order_relaxed);
         return true;
@@ -124,6 +148,8 @@ bool CConsoleOutput::ProcessLogMessage(const char* str, va_list* args)
 
 SWIFTLY_CONSOLE_NOINLINE bool CConsoleOutput::FilterOrQueueMessage(const char* str, va_list* args, bool filterEnabled, bool hasListeners)
 {
+    PROFILE_FUNCTION();
+
     char buf[MAX_LOGGING_MESSAGE_LENGTH];
     const char* message = str;
     if (args) {
@@ -163,6 +189,8 @@ SWIFTLY_CONSOLE_NOINLINE bool CConsoleOutput::FilterOrQueueMessage(const char* s
 
 void CConsoleOutput::DispatchWorker()
 {
+    PROFILE_FUNCTION();
+
     while (m_DispatchRunning.load(std::memory_order_acquire))
     {
         m_HasQueuedMessages.wait(false, std::memory_order_acquire);
@@ -176,6 +204,8 @@ void CConsoleOutput::DispatchWorker()
 
 void CConsoleOutput::Initialize()
 {
+    PROFILE_FUNCTION();
+
     ReloadFilterConfiguration();
 
     m_DispatchRunning.store(true, std::memory_order_release);
@@ -184,6 +214,8 @@ void CConsoleOutput::Initialize()
 
 void CConsoleOutput::Shutdown()
 {
+    PROFILE_FUNCTION();
+
     m_DispatchRunning.store(false, std::memory_order_release);
     m_HasQueuedMessages.store(true, std::memory_order_release);
     m_HasQueuedMessages.notify_one();
@@ -198,6 +230,8 @@ void CConsoleOutput::Shutdown()
 
 void CConsoleOutput::ReloadFilterConfiguration()
 {
+    PROFILE_FUNCTION();
+
     json filters = parseJsonc(Files::Read(g_SwiftlyCore.GetCorePath() + "/configs/confilter.jsonc"));
 
     std::map<uint64_t, std::unique_ptr<ConsoleFilter>> compiled;
@@ -209,8 +243,8 @@ void CConsoleOutput::ReloadFilterConfiguration()
 
         pcre2_code* code = pcre2_compile((PCRE2_SPTR8)(value.get<std::string>().c_str()), PCRE2_ZERO_TERMINATED, 0, &errorcode, &erroffset, nullptr);
         if (!code) {
-            g_pLogger->Error("Console Filter", fmt::format("The regex for \"{}\" is not valid.\n", key));
-            g_pLogger->Error("Console Filter", fmt::format("Failed to compile at offset {}.\n", erroffset));
+            g_pLogger->Error("Console Filter", std::format("The regex for \"{}\" is not valid.\n", key));
+            g_pLogger->Error("Console Filter", std::format("Failed to compile at offset {}.\n", erroffset));
             continue;
         }
 
@@ -218,7 +252,7 @@ void CConsoleOutput::ReloadFilterConfiguration()
 
         pcre2_match_data* matchData = pcre2_match_data_create_from_pattern(code, nullptr);
         if (!matchData) {
-            g_pLogger->Error("Console Filter", fmt::format("Failed to create match data for \"{}\".\n", key));
+            g_pLogger->Error("Console Filter", std::format("Failed to create match data for \"{}\".\n", key));
             pcre2_code_free(code);
             continue;
         }
@@ -233,16 +267,22 @@ void CConsoleOutput::ReloadFilterConfiguration()
 
 void CConsoleOutput::ToggleFilter()
 {
+    PROFILE_FUNCTION();
+
     m_WorkState.fetch_xor(FILTER_ENABLED, std::memory_order_relaxed);
 }
 
 bool CConsoleOutput::IsEnabled()
 {
+    PROFILE_FUNCTION();
+
     return (m_WorkState.load(std::memory_order_relaxed) & FILTER_ENABLED) != 0;
 }
 
 bool CConsoleOutput::NeedsFiltering(char* text)
 {
+    PROFILE_FUNCTION();
+
     if (!IsEnabled()) return false;
 
     const PCRE2_SPTR str = (PCRE2_SPTR)text;
@@ -264,6 +304,8 @@ bool CConsoleOutput::NeedsFiltering(char* text)
 
 std::string CConsoleOutput::GetCounterText()
 {
+    PROFILE_FUNCTION();
+
     std::lock_guard<std::mutex> lock(m_FiltersMutex);
 
     std::string out;
@@ -275,6 +317,8 @@ std::string CConsoleOutput::GetCounterText()
 
 uint64_t CConsoleOutput::AddConsoleListener(std::function<void(const std::string&)> callback)
 {
+    PROFILE_FUNCTION();
+
     std::lock_guard<std::mutex> lock(m_ListenersMutex);
 
     const uint64_t id = m_NextListenerId++;
@@ -285,6 +329,8 @@ uint64_t CConsoleOutput::AddConsoleListener(std::function<void(const std::string
 
 void CConsoleOutput::RemoveConsoleListener(uint64_t id)
 {
+    PROFILE_FUNCTION();
+
     bool removedLastListener = false;
     {
         std::lock_guard<std::mutex> lock(m_ListenersMutex);
@@ -304,6 +350,8 @@ void CConsoleOutput::RemoveConsoleListener(uint64_t id)
 
 void CConsoleOutput::DispatchQueuedListeners()
 {
+    PROFILE_FUNCTION();
+
     // The idle dispatcher path is a single atomic load with no mutex acquisition.
     if (!m_HasQueuedMessages.load(std::memory_order_acquire)) return;
     if (ConsoleDispatchScope::Contains(this)) return;

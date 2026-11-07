@@ -1,5 +1,6 @@
 using System.Collections.Concurrent;
 using SwiftlyS2.Shared.Menu;
+using SwiftlyS2.Shared.Misc;
 
 namespace SwiftlyS2.Core.Menu;
 
@@ -8,8 +9,8 @@ internal sealed class MenuActionRegistry
     private readonly ConcurrentDictionary<MenuActionId, OwnedAction> actions = new();
     private readonly ConcurrentDictionary<string, IReadOnlyList<MenuActionDescriptor>> scopes = new(StringComparer.OrdinalIgnoreCase);
 
-    private int version;
-    public int Version => Volatile.Read(ref version);
+    private readonly Atomic<int> version = new();
+    public int Version => version.Value;
 
     public IDisposable Register( MenuActionDescriptor descriptor, string owner )
     {
@@ -81,7 +82,7 @@ internal sealed class MenuActionRegistry
 
     private void Changed()
     {
-        _ = Interlocked.Increment(ref version);
+        _ = version.Increment();
         scopes.Clear();
     }
 

@@ -22,13 +22,6 @@
 #include <string>
 #include <api/extension/sw_extension.h>
 
-enum class ExtensionLoadState
-{
-    Loading,
-    Loaded,
-    Failed
-};
-
 class Extension
 {
 public:
@@ -55,7 +48,6 @@ public:
     const std::string& GetVersion() const { return version_; }
     const std::string& GetAuthor() const { return author_; }
     const std::string& GetDescription() const { return description_; }
-    void* GetLibrary() const { return library_; }
 private:
     bool initialized_;
     std::string id_;

@@ -18,108 +18,136 @@
 
 #include <scripting/scripting.h>
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
+#include <scripting/engine/events.h>
 
-void* g_pOnGameTickCallback = nullptr;
-void* g_pOnClientConnectCallback = nullptr;
-void* g_pOnClientDisconnectCallback = nullptr;
-void* g_pOnClientKeyStateChangedCallback = nullptr;
-void* g_pOnClientPutInServerCallback = nullptr;
-void* g_pOnClientSteamAuthorizeCallback = nullptr;
-void* g_pOnClientSteamAuthorizeFailCallback = nullptr;
-void* g_pOnEntityCreatedCallback = nullptr;
-void* g_pOnEntityDeletedCallback = nullptr;
-void* g_pOnEntityParentChangedCallback = nullptr;
-void* g_pOnEntitySpawnedCallback = nullptr;
-void* g_pOnMapLoadCallback = nullptr;
-void* g_pOnMapUnloadCallback = nullptr;
-void* g_pOnPrecacheResourceCallback = nullptr;
-void* g_pOnPreworldUpdateCallback = nullptr;
-void* g_pOnStartupServerCallback = nullptr;
-void* g_pOnClientVoiceCallback = nullptr;
+DEFINE_EVENT(g_pOnGameTickCallback, void, bool, bool, bool) = nullptr;
+DEFINE_EVENT(g_pOnClientConnectCallback, bool, int) = nullptr;
+DEFINE_EVENT(g_pOnClientDisconnectCallback, void, int, int) = nullptr;
+DEFINE_EVENT(g_pOnClientKeyStateChangedCallback, void, int, uint32_t, bool) = nullptr;
+DEFINE_EVENT(g_pOnClientPutInServerCallback, void, int, int) = nullptr;
+DEFINE_EVENT(g_pOnClientSteamAuthorizeCallback, void, int) = nullptr;
+DEFINE_EVENT(g_pOnClientSteamAuthorizeFailCallback, void, int) = nullptr;
+DEFINE_EVENT(g_pOnEntityCreatedCallback, void, void*) = nullptr;
+DEFINE_EVENT(g_pOnEntityDeletedCallback, void, void*) = nullptr;
+DEFINE_EVENT(g_pOnEntityParentChangedCallback, void, void*, void*) = nullptr;
+DEFINE_EVENT(g_pOnEntitySpawnedCallback, void, void*) = nullptr;
+DEFINE_EVENT(g_pOnMapLoadCallback, void, const char*) = nullptr;
+DEFINE_EVENT(g_pOnMapUnloadCallback, void, const char*) = nullptr;
+DEFINE_EVENT(g_pOnPrecacheResourceCallback, void, void*) = nullptr;
+DEFINE_EVENT(g_pOnPreworldUpdateCallback, void, bool) = nullptr;
+DEFINE_EVENT(g_pOnStartupServerCallback, void) = nullptr;
 
 void Bridge_Events_RegisterOnGameTickCallback(void* callback)
 {
-    g_pOnGameTickCallback = callback;
+    PROFILE_FUNCTION();
+
+    g_pOnGameTickCallback = reinterpret_cast<decltype(g_pOnGameTickCallback)>(callback);
 }
 
 void Bridge_Events_RegisterOnClientConnectCallback(void* callback)
 {
-    g_pOnClientConnectCallback = callback;
+    PROFILE_FUNCTION();
+
+    g_pOnClientConnectCallback = reinterpret_cast<decltype(g_pOnClientConnectCallback)>(callback);
 }
 
 void Bridge_Events_RegisterOnClientDisconnectCallback(void* callback)
 {
-    g_pOnClientDisconnectCallback = callback;
+    PROFILE_FUNCTION();
+
+    g_pOnClientDisconnectCallback = reinterpret_cast<decltype(g_pOnClientDisconnectCallback)>(callback);
 }
 
 void Bridge_Events_RegisterOnClientKeyStateChangedCallback(void* callback)
 {
-    g_pOnClientKeyStateChangedCallback = callback;
+    PROFILE_FUNCTION();
+
+    g_pOnClientKeyStateChangedCallback = reinterpret_cast<decltype(g_pOnClientKeyStateChangedCallback)>(callback);
 }
 
 void Bridge_Events_RegisterOnClientPutInServerCallback(void* callback)
 {
-    g_pOnClientPutInServerCallback = callback;
+    PROFILE_FUNCTION();
+
+    g_pOnClientPutInServerCallback = reinterpret_cast<decltype(g_pOnClientPutInServerCallback)>(callback);
 }
 
 void Bridge_Events_RegisterOnClientSteamAuthorizeCallback(void* callback)
 {
-    g_pOnClientSteamAuthorizeCallback = callback;
+    PROFILE_FUNCTION();
+
+    g_pOnClientSteamAuthorizeCallback = reinterpret_cast<decltype(g_pOnClientSteamAuthorizeCallback)>(callback);
 }
 
 void Bridge_Events_RegisterOnClientSteamAuthorizeFailCallback(void* callback)
 {
-    g_pOnClientSteamAuthorizeFailCallback = callback;
+    PROFILE_FUNCTION();
+
+    g_pOnClientSteamAuthorizeFailCallback = reinterpret_cast<decltype(g_pOnClientSteamAuthorizeFailCallback)>(callback);
 }
 
 void Bridge_Events_RegisterOnEntityCreatedCallback(void* callback)
 {
-    g_pOnEntityCreatedCallback = callback;
+    PROFILE_FUNCTION();
+
+    g_pOnEntityCreatedCallback = reinterpret_cast<decltype(g_pOnEntityCreatedCallback)>(callback);
 }
 
 void Bridge_Events_RegisterOnEntityDeletedCallback(void* callback)
 {
-    g_pOnEntityDeletedCallback = callback;
+    PROFILE_FUNCTION();
+
+    g_pOnEntityDeletedCallback = reinterpret_cast<decltype(g_pOnEntityDeletedCallback)>(callback);
 }
 
 void Bridge_Events_RegisterOnEntityParentChangedCallback(void* callback)
 {
-    g_pOnEntityParentChangedCallback = callback;
+    PROFILE_FUNCTION();
+
+    g_pOnEntityParentChangedCallback = reinterpret_cast<decltype(g_pOnEntityParentChangedCallback)>(callback);
 }
 
 void Bridge_Events_RegisterOnEntitySpawnedCallback(void* callback)
 {
-    g_pOnEntitySpawnedCallback = callback;
+    PROFILE_FUNCTION();
+
+    g_pOnEntitySpawnedCallback = reinterpret_cast<decltype(g_pOnEntitySpawnedCallback)>(callback);
 }
 
 void Bridge_Events_RegisterOnMapLoadCallback(void* callback)
 {
-    g_pOnMapLoadCallback = callback;
+    PROFILE_FUNCTION();
+
+    g_pOnMapLoadCallback = reinterpret_cast<decltype(g_pOnMapLoadCallback)>(callback);
 }
 
 void Bridge_Events_RegisterOnMapUnloadCallback(void* callback)
 {
-    g_pOnMapUnloadCallback = callback;
+    PROFILE_FUNCTION();
+
+    g_pOnMapUnloadCallback = reinterpret_cast<decltype(g_pOnMapUnloadCallback)>(callback);
 }
 
 void Bridge_Events_RegisterOnPrecacheResourceCallback(void* callback)
 {
-    g_pOnPrecacheResourceCallback = callback;
+    PROFILE_FUNCTION();
+
+    g_pOnPrecacheResourceCallback = reinterpret_cast<decltype(g_pOnPrecacheResourceCallback)>(callback);
 }
 
 void Bridge_Events_RegisterOnPreworldUpdateCallback(void* callback)
 {
-    g_pOnPreworldUpdateCallback = callback;
+    PROFILE_FUNCTION();
+
+    g_pOnPreworldUpdateCallback = reinterpret_cast<decltype(g_pOnPreworldUpdateCallback)>(callback);
 }
 
 void Bridge_Events_RegisterOnStartupServerCallback(void* callback)
 {
-    g_pOnStartupServerCallback = callback;
-}
+    PROFILE_FUNCTION();
 
-void Bridge_Events_RegisterOnClientVoiceCallback(void* callback)
-{
-    g_pOnClientVoiceCallback = callback;
+    g_pOnStartupServerCallback = reinterpret_cast<decltype(g_pOnStartupServerCallback)>(callback);
 }
 
 DEFINE_NATIVE("Events.RegisterOnGameTickCallback", Bridge_Events_RegisterOnGameTickCallback);
@@ -138,4 +166,3 @@ DEFINE_NATIVE("Events.RegisterOnMapUnloadCallback", Bridge_Events_RegisterOnMapU
 DEFINE_NATIVE("Events.RegisterOnPrecacheResourceCallback", Bridge_Events_RegisterOnPrecacheResourceCallback);
 DEFINE_NATIVE("Events.RegisterOnPreworldUpdateCallback", Bridge_Events_RegisterOnPreworldUpdateCallback);
 DEFINE_NATIVE("Events.RegisterOnStartupServerCallback", Bridge_Events_RegisterOnStartupServerCallback);
-DEFINE_NATIVE("Events.RegisterOnClientVoiceCallback", Bridge_Events_RegisterOnClientVoiceCallback);

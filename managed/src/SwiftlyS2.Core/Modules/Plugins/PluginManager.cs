@@ -398,7 +398,7 @@ internal class PluginManager : IPluginManager
             var pluginName = Path.GetFileName(directory);
             _ = _pluginLoadErrors.TryRemove(pluginName, out _);
 
-            if(PluginLoaded != null) PluginLoaded(context);
+            if (PluginLoaded != null) PluginLoaded(context);
 
             return context;
         }
@@ -424,7 +424,7 @@ internal class PluginManager : IPluginManager
 
         try
         {
-            if(PluginUnloading != null) PluginUnloading(context);
+            if (PluginUnloading != null) PluginUnloading(context);
             context.Dispose();
             _ = _plugins.Remove(context);
             return true;
@@ -956,7 +956,7 @@ internal class PluginManager : IPluginManager
 
     private string GetDisplayPath( string pluginDirectory )
     {
-        var relativePath = Path.GetRelativePath(_rootDirService.GetRoot(), pluginDirectory);
+        var relativePath = Path.GetRelativePath(RootDirService.GetRoot(), pluginDirectory);
         return Path.Join("(swRoot)", relativePath);
     }
 

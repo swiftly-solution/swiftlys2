@@ -47,3 +47,5 @@ __pycache__/
 vsxmake2022/
 
 *.lscache
+compile_commands.json
+.cache/

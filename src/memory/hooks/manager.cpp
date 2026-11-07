@@ -18,14 +18,13 @@
 
 #include "manager.h"
 
-#include <map>
 #include <vector>
 
 #include <api/interfaces/interfaces.h>
-#include <api/shared/string.h>
+#include <api/shared/profiler.h>
 
 #include <algorithm>
-#include <fmt/format.h>
+#include <format>
 
 static std::vector<IManagedHook*>* g_pManagedHooks = nullptr;
 
@@ -33,6 +32,8 @@ static bool g_bHooksInitialized = false;
 
 void RegisterManagedHook(IManagedHook* hook)
 {
+    PROFILE_FUNCTION();
+
     if (!g_pManagedHooks)
         g_pManagedHooks = new std::vector<IManagedHook*>();
 
@@ -41,6 +42,8 @@ void RegisterManagedHook(IManagedHook* hook)
 
 void UnregisterManagedHook(IManagedHook* hook)
 {
+    PROFILE_FUNCTION();
+
     if (!g_pManagedHooks) return;
 
     g_pManagedHooks->erase(std::remove(g_pManagedHooks->begin(), g_pManagedHooks->end(), hook), g_pManagedHooks->end());
@@ -48,36 +51,50 @@ void UnregisterManagedHook(IManagedHook* hook)
 
 IFunctionHook* HooksManager::CreateFunctionHook()
 {
+    PROFILE_FUNCTION();
+
     return new FunctionHook();
 }
 
 IVFunctionHook* HooksManager::CreateVFunctionHook()
 {
+    PROFILE_FUNCTION();
+
     return new VFunctionHook();
 }
 
 IMFunctionHook* HooksManager::CreateMFunctionHook()
 {
+    PROFILE_FUNCTION();
+
     return new MFunctionHook();
 }
 
 void HooksManager::DestroyFunctionHook(IFunctionHook* hook)
 {
+    PROFILE_FUNCTION();
+
     delete (FunctionHook*)hook;
 }
 
 void HooksManager::DestroyVFunctionHook(IVFunctionHook* hook)
 {
+    PROFILE_FUNCTION();
+
     delete (VFunctionHook*)hook;
 }
 
 void HooksManager::DestroyMFunctionHook(IMFunctionHook* hook)
 {
+    PROFILE_FUNCTION();
+
     delete (MFunctionHook*)hook;
 }
 
 void HooksManager::Initialize()
 {
+    PROFILE_FUNCTION();
+
     if (g_bHooksInitialized) return;
     g_bHooksInitialized = true;
 
@@ -86,12 +103,14 @@ void HooksManager::Initialize()
     for (auto* hook : *g_pManagedHooks)
     {
         if (!hook->Install())
-            g_pLogger->Warning("Hooks", fmt::format("Couldn't install the hook '{}'.\n", hook->GetName()));
+            g_pLogger->Warning("Hooks", std::format("Couldn't install the hook '{}'.\n", hook->GetName()));
     }
 }
 
 void HooksManager::Shutdown()
 {
+    PROFILE_FUNCTION();
+
     if (!g_bHooksInitialized) return;
     g_bHooksInitialized = false;
 

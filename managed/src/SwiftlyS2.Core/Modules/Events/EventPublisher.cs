@@ -76,7 +76,6 @@ internal static class EventPublisher
             NativeEvents.RegisterOnMapUnloadCallback((nint)(delegate* unmanaged< nint, void >)&OnMapUnload);
             NativeEvents.RegisterOnPrecacheResourceCallback((nint)(delegate* unmanaged< nint, void >)&OnPrecacheResource);
             NativeEvents.RegisterOnStartupServerCallback((nint)(delegate* unmanaged< void >)&OnStartupServer);
-            NativeEvents.RegisterOnClientVoiceCallback((nint)(delegate* unmanaged< int, void >)&OnClientVoice);
             _ = NativeConvars.AddQueryClientCvarCallback((nint)(delegate* unmanaged< int, nint, nint, void >)&ConVarQueryCallback);
             NativeCommands.SetCommandHandler((nint)(delegate* unmanaged< nint, int, nint, nint, nint, byte, void >)&OnCommandDispatch);
             NativeNetMessages.SetNetMessageServerHook((nint)(delegate* unmanaged< nint, int, nint, int >)&OnNetMessageServerDispatch);
@@ -917,8 +916,7 @@ internal static class EventPublisher
         }
     }
 
-    [UnmanagedCallersOnly]
-    public static void OnClientVoice( int playerId )
+    public static void InvokeOnClientVoice( int playerId )
     {
         if (subscribers.Count == 0)
         {
@@ -933,6 +931,38 @@ internal static class EventPublisher
             for (var i = 0; i < subscribers.Count; i++)
             {
                 subscribers[i].InvokeOnClientVoice(ref @event);
+            }
+        }
+        catch (Exception e)
+        {
+            if (!GlobalExceptionHandler.Handle(ref e))
+            {
+                return;
+            }
+            AnsiConsole.WriteException(e);
+        }
+    }
+
+    public static bool ListensToClientSettingsChanged {
+        get {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                if (subscribers[i].ListensToClientSettingsChanged) return true;
+            }
+            return false;
+        }
+    }
+
+    public static void InvokeOnClientSettingsChanged( int playerId )
+    {
+        if (subscribers.Count == 0 || !ListensToClientSettingsChanged) return;
+
+        try
+        {
+            OnClientSettingsChangedEvent @event = new() { PlayerId = playerId };
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                subscribers[i].InvokeOnClientSettingsChanged(ref @event);
             }
         }
         catch (Exception e)

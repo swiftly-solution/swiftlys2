@@ -19,20 +19,12 @@
 #ifndef src_api_engine_entities_entitysystem_h
 #define src_api_engine_entities_entitysystem_h
 
-#include <variant>
-
 #include <public/entity2/entitysystem.h>
-
-using InputType = std::variant<int32_t, uint32_t, int64_t, uint64_t, float, double, bool, const char*>;
 
 class IEntitySystem
 {
 public:
     virtual void Shutdown() = 0;
-
-    virtual void AddEntityListener(IEntityListener* listener) = 0;
-    virtual void RemoveEntityListener(IEntityListener* listener) = 0;
-
     virtual CEntitySystem* GetEntitySystem() = 0;
 };
 

@@ -18,22 +18,14 @@
 
 #include <scripting/scripting.h>
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 
 #include <nlohmann/json.hpp>
 
-static char* Bridge_Extensions_CopyString(const std::string& value, int* size)
-{
-    int outSize = static_cast<int>(value.size());
-    *size = outSize;
-
-    char* out = (char*)g_pMemoryAllocator->Alloc(outSize + 1);
-    g_pMemoryAllocator->Copy(out, (void*)value.c_str(), outSize);
-    out[outSize] = '\0';
-    return out;
-}
-
 char* Bridge_Extensions_GetExtensions(int* size)
 {
+    PROFILE_FUNCTION();
+
     nlohmann::json result = nlohmann::json::array();
     for (const auto& ext : g_pExtensionHost->GetExtensions())
     {
@@ -48,47 +40,63 @@ char* Bridge_Extensions_GetExtensions(int* size)
         });
     }
 
-    return Bridge_Extensions_CopyString(result.dump(-1, ' ', false, nlohmann::json::error_handler_t::replace), size);
+    return Bridge_CopyString(result.dump(-1, ' ', false, nlohmann::json::error_handler_t::replace), size);
 }
 
 bool Bridge_Extensions_Load(const char* id)
 {
+    PROFILE_FUNCTION();
+
     return id && g_pExtensionHost->LoadExtension(id);
 }
 
 bool Bridge_Extensions_Unload(const char* id)
 {
+    PROFILE_FUNCTION();
+
     return id && g_pExtensionHost->UnloadExtension(id);
 }
 
 bool Bridge_Extensions_LoadFromPath(const char* path)
 {
+    PROFILE_FUNCTION();
+
     return path && g_pExtensionHost->LoadExtensionFromPath(path);
 }
 
 bool Bridge_Extensions_UnloadFromPath(const char* path)
 {
+    PROFILE_FUNCTION();
+
     return path && g_pExtensionHost->UnloadExtensionFromPath(path);
 }
 
 void* Bridge_Extensions_GetSharedPointer(const char* key)
 {
+    PROFILE_FUNCTION();
+
     return key ? g_pExtensionHost->GetSharedPointer(key) : nullptr;
 }
 
 void Bridge_Extensions_SetSharedPointer(const char* key, void* pointer)
 {
+    PROFILE_FUNCTION();
+
     if (key)
         g_pExtensionHost->SetSharedPointer(key, pointer);
 }
 
 bool Bridge_Extensions_HasSharedPointer(const char* key)
 {
+    PROFILE_FUNCTION();
+
     return key && g_pExtensionHost->HasSharedPointer(key);
 }
 
 void Bridge_Extensions_RemoveSharedPointer(const char* key)
 {
+    PROFILE_FUNCTION();
+
     if (key)
         g_pExtensionHost->RemoveSharedPointer(key);
 }

@@ -198,6 +198,11 @@ public interface IEventSubscriber
     public event EventDelegates.OnClientVoice? OnClientVoice;
 
     /// <summary>
+    /// Called when a client changed one or several replicated convars (name etc).
+    /// </summary>
+    public event EventDelegates.OnClientSettingsChanged? OnClientSettingsChanged;
+
+    /// <summary>
     /// Called when a custom hud element is clicked.
     /// </summary>    
     public event EventDelegates.OnCustomHudClicked? OnCustomHudClicked;

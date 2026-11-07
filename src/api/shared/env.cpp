@@ -17,11 +17,14 @@
  ************************************************************************************************/
 
 #include "env.h"
+#include <api/shared/profiler.h>
 
 #include <cstdlib>
 
 void putenv(const char* variable, const char* value, int replace)
 {
+    PROFILE_FUNCTION();
+
 #ifdef _WIN32
     _putenv_s(variable, value);
 #else

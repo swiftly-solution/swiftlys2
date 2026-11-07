@@ -17,86 +17,95 @@
  ************************************************************************************************/
 
 #include <api/interfaces/interfaces.h>
-#include <networkstringtabledefs.h>
+#include <api/shared/profiler.h>
+#include <public/networkstrings/tabledefs.h>
 #include <scripting/scripting.h>
-#include <sstream>
-
-static char* Bridge_StringTable_CopyString(const std::string& value, int* size)
-{
-    int outSize = static_cast<int>(value.size());
-    *size = outSize;
-
-    char* out = (char*)g_pMemoryAllocator->Alloc(outSize + 1);
-    g_pMemoryAllocator->Copy(out, (void*)value.c_str(), outSize);
-    out[outSize] = '\0';
-    return out;
-}
 
 INetworkStringTable* Bridge_StringTable_ContainerFindTable(const char* tableName)
 {
+    PROFILE_FUNCTION();
+
     return g_pGameNetworkStringTableContainer->FindTable(tableName);
 }
 
 INetworkStringTable* Bridge_StringTable_ContainerGetTableById(TABLEID tableId)
 {
+    PROFILE_FUNCTION();
+
     return g_pGameNetworkStringTableContainer->GetTable(tableId);
 }
 
 int Bridge_StringTable_GetTableId(INetworkStringTable* table)
 {
+    PROFILE_FUNCTION();
+
     return table->GetTableId();
 }
 
 char* Bridge_StringTable_GetTableName(int* size, INetworkStringTable* table)
 {
+    PROFILE_FUNCTION();
+
     if (!table)
     {
-        return Bridge_StringTable_CopyString("", size);
+        return Bridge_CopyString("", size);
     }
 
     std::string s = table->GetTableName();
-    return Bridge_StringTable_CopyString(s, size);
+    return Bridge_CopyString(s, size);
 }
 
 int Bridge_StringTable_GetNumStrings(INetworkStringTable* table)
 {
+    PROFILE_FUNCTION();
+
     return table->GetNumStrings();
 }
 
 int Bridge_StringTable_FindStringIndex(INetworkStringTable* table, const char* string)
 {
+    PROFILE_FUNCTION();
+
     return table->FindStringIndex(string);
 }
 
 bool Bridge_StringTable_IsStringIndexValid(INetworkStringTable* table, int index)
 {
+    PROFILE_FUNCTION();
+
     return table->GetString(index) != nullptr;
 }
 
 char* Bridge_StringTable_GetString(int* size, INetworkStringTable* table, int index)
 {
+    PROFILE_FUNCTION();
+
     if (!table)
     {
-        return Bridge_StringTable_CopyString("", size);
+        return Bridge_CopyString("", size);
     }
 
     auto ptr = table->GetString(index);
     if (!ptr)
     {
-        return Bridge_StringTable_CopyString("", size);
+        return Bridge_CopyString("", size);
     }
 
     std::string s = ptr;
-    return Bridge_StringTable_CopyString(s, size);
+    return Bridge_CopyString(s, size);
 }
 
 const void* Bridge_StringTable_GetStringUserData(INetworkStringTable* table, int index)
 {
+    PROFILE_FUNCTION();
+
     return table->GetStringUserData(index);
 }
 
 bool Bridge_StringTable_SetStringUserData(INetworkStringTable* table, int index, void* userData, int userDataSize, bool bForceOverride)
 {
+    PROFILE_FUNCTION();
+
     SetStringUserDataRequest_t request;
     request.m_pRawData = userData;
     request.m_cbDataSize = userDataSize;
@@ -105,12 +114,16 @@ bool Bridge_StringTable_SetStringUserData(INetworkStringTable* table, int index,
 
 int Bridge_StringTable_AddString(INetworkStringTable* table, const char* string)
 {
+    PROFILE_FUNCTION();
+
     return table->AddString(true, string);
 }
 
 // Credits to https://github.com/ipsvn/ReplicateStringTableValue/blob/f72bb79048945593d25ffb7c523601dff0873d00/src/meta_interface.cpp#L46
 int Bridge_StringTable_Serialize(uint8_t* out, INetworkStringTable* table, int stringIndex, const char* keyName, bool newKey, void* userData, int userDataSize)
 {
+    PROFILE_FUNCTION();
+
     const int maxSize = 4096;
     if (!out) return maxSize;
     bf_write buf(out, maxSize);

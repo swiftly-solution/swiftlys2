@@ -20,18 +20,28 @@
 #define src_sdk_schema_h
 
 #include <api/sdk/schema.h>
-#include <api/shared/string.h>
 #include <api/memory/virtual/call.h>
 
+#include <public/entity2/entityinstance.h>
 #include <public/schemasystem/schemasystem.h>
-#include <nlohmann/json.hpp>
 
+#include <cstdint>
+#include <optional>
 #include <unordered_map>
-#include <set>
 
-using json = nlohmann::json;
+struct SchemaField
+{
+    uint32_t m_uOffset = 0;
+    int32_t m_nChainerOffset = -1;
+    int32_t m_nStateChangedOffset = -1;
+    bool m_bIsStruct = false;
+    bool m_bHasVtable = false;
+};
 
-void ReadClasses(CSchemaType_DeclaredClass* declClass);
+struct IdentityHasher64
+{
+    std::size_t operator()(uint64_t key) const noexcept { return static_cast<std::size_t>(key); }
+};
 
 class CSDKSchema : public ISDKSchema
 {
@@ -49,30 +59,21 @@ public:
     virtual void* GetDatamapFunction(const char* className, const char* functionName) override;
 
     virtual void Load() override;
-};
 
-struct SchemaField
-{
-    int32_t m_nChainerOffset;
-    int32_t m_nStateChangedOffset;
-    uint32_t m_uOffset;
-    bool m_bIsStruct;
-    bool m_bHasVtable;
-};
+private:
+    void ReadClasses(CSchemaType_DeclaredClass* declClass);
 
-struct FNV1aHasher64 {
-    std::size_t operator()(const uint64_t key) const {
-        return key;
-    }
-};
+    std::optional<SchemaField> FindField(uint64_t uHash) const;
+    std::optional<int32_t> FindStateChangedIndex(void* pVtable) const;
 
-extern std::unordered_map<uint64_t, SchemaField, FNV1aHasher64> offsets;
-extern std::unordered_map<void*, int32_t> networkVarStateChangedOffsets;
+    std::unordered_map<uint64_t, SchemaField, IdentityHasher64> m_fields;
+    std::unordered_map<void*, int32_t> m_networkVarStateChangedOffsets;
+};
 
 class NetworkVar {
 public:
     void StateChanged(uint64_t index, const NetworkStateChangedData& data) {
-        CALL_VIRTUAL(void, (int)index, this, &data);
+        CALL_VIRTUAL(void, static_cast<int>(index), this, &data);
     }
 };
 

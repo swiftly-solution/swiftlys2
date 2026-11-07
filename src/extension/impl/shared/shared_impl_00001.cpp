@@ -19,6 +19,7 @@
 #include "shared_impl_00001.h"
 
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 
 namespace
 {
@@ -29,6 +30,8 @@ sw_status get_shared_pointer(
     sw_ptr_out shared_pointer_out
 )
 {
+    PROFILE_FUNCTION();
+
     if (!self || !key || !shared_pointer_out)
         return SW_E_INVALID_ARG;
 
@@ -45,6 +48,8 @@ sw_status set_shared_pointer(
     void* shared_pointer
 )
 {
+    PROFILE_FUNCTION();
+
     if (!self || !key)
         return SW_E_INVALID_ARG;
 
@@ -58,6 +63,8 @@ sw_status has_shared_pointer(
     int32_t* result_out
 )
 {
+    PROFILE_FUNCTION();
+
     if (!self || !key || !result_out)
         return SW_E_INVALID_ARG;
 
@@ -70,6 +77,8 @@ sw_status remove_shared_pointer(
     const char* key
 )
 {
+    PROFILE_FUNCTION();
+
     if (!self || !key)
         return SW_E_INVALID_ARG;
 

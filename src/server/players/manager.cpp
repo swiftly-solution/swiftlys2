@@ -20,23 +20,19 @@
 #include <memory/hooks/vfunction.h>
 
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 #include <api/utils/bitvec.h>
 
 #include <core/entrypoint.h>
 
-#include "cs_usercmd.pb.h"
-#include "usercmd.pb.h"
-
-#include <api/shared/string.h>
-#include <api/sdk/recipientfilter.h>
-#include <public/engine/igameeventsystem.h>
-#include <public/networksystem/inetworkmessages.h>
-#include <public/networksystem/netmessage.h>
-#include "usermessages.pb.h"
+#include <public/tier0/recipientfilter.h>
+#include <public/entity2/entitynetworkable.h>
+#include <public/engine2/isource2server.h>
+#include <scripting/engine/events.h>
 
 void OnGameFramePlayerHook(void* _this, bool simulate, bool first, bool last);
 
-void OnClientPutInServerHook(void* _this, CPlayerSlot slot, char const* pszName, int type, uint64 xuid);
+void OnClientPutInServerHook(void* _this, CPlayerSlot slot, char const* pszName, ClientPutInServerType_t type, uint64 xuid);
 bool ClientConnectHook(void* _this, CPlayerSlot slot, const char* pszName, uint64 xuid, const char* pszNetworkID, bool unk1, CBufferString* pRejectReason);
 void OnClientConnectedHook(void* _this, CPlayerSlot slot, const char* pszName, uint64 xuid, const char* pszNetworkID, const char* pszAddress, bool bFakePlayer);
 void ClientDisconnectHook(void* _this, CPlayerSlot slot, int reason, const char* pszName, uint64 xuid, const char* pszNetworkID);
@@ -51,27 +47,35 @@ VFunctionHook g_OnGameFramePlayerHook(reinterpret_cast<void*>(OnGameFramePlayerH
 
 void CPlayerManager::Initialize()
 {
-    for (auto& player : g_Players)
-        player.reset();
+    PROFILE_FUNCTION();
 
+    for (auto& player : m_players)
+        player.reset();
 }
 
 void CPlayerManager::Shutdown()
 {
-    for (auto& slot : g_Players)
-        slot.reset();
+    PROFILE_FUNCTION();
 
+    for (auto& player : m_players)
+        player.reset();
 }
 
-extern void* g_pOnClientPutInServerCallback;
-
-void OnClientPutInServerHook(void* _this, CPlayerSlot slot, char const* pszName, int type, uint64 xuid)
+void OnClientPutInServerHook(void* _this, CPlayerSlot slot, char const* pszName, ClientPutInServerType_t type, uint64 xuid)
 {
     reinterpret_cast<decltype(&OnClientPutInServerHook)>(g_ClientPutInServerHook.GetOriginal())(_this, slot, pszName, type, xuid);
 
-    if (type == 0)
+    PROFILE_FUNCTION();
+
+    if(type == ClientPutInServerType_t::CLIENT_PUT_IN_SERVER_HLTV)
     {
-        g_pConvarManager->QueryClientConvar(slot.Get(), "cl_language");
+        auto player = g_pPlayerManager->GetPlayer(slot.Get());
+        if(player)
+        {
+            CBitVector<8192> filledBitVector;
+            filledBitVector.SetAll();
+            player->SetListeningGameEvents(filledBitVector);
+        }
     }
 
     if (g_pGameEngine->IsClientFullyAuthenticated(slot))
@@ -82,44 +86,44 @@ void OnClientPutInServerHook(void* _this, CPlayerSlot slot, char const* pszName,
     }
 
     if (g_pOnClientPutInServerCallback)
-        reinterpret_cast<void (*)(int, int)>(g_pOnClientPutInServerCallback)(slot.Get(), type);
+        g_pOnClientPutInServerCallback(slot.Get(), type);
 }
 
 void CheckTransmitHook(void* _this, CCheckTransmitInfo** ppInfoList, int infoCount, CBitVec<16384>& unionTransmitEdicts, CBitVec<16384>& unk, const Entity2Networkable_t** pNetworkables, const uint16_t* pEntityIndicies, int nEntities)
 {
     reinterpret_cast<decltype(&CheckTransmitHook)>(g_CheckTransmitHook.GetOriginal())(_this, ppInfoList, infoCount, unionTransmitEdicts, unk, pNetworkables, pEntityIndicies, nEntities);
 
+    PROFILE_FUNCTION();
+
     for (int i = 0; i < infoCount; i++)
     {
-        auto& pInfo = ppInfoList[i];
-        int playerid = pInfo->m_nPlayerSlot.Get();
+        auto* pInfo = ppInfoList[i];
 
-        auto player = g_pPlayerManager->GetPlayer(playerid);
+        auto player = g_pPlayerManager->GetPlayer(pInfo->m_nPlayerSlot.Get());
         if (!player)
-        {
             continue;
-        }
 
         auto& blockedBits = player->GetBlockedTransmittingBits();
-        if (blockedBits.blockedCount.load(std::memory_order_relaxed) == 0) continue;
+        if (blockedBits.blockedCount.load(std::memory_order_relaxed) == 0)
+            continue;
 
-        std::lock_guard<std::mutex> lock(blockedBits.mutex);
+        std::lock_guard lock(blockedBits.mutex);
 
         auto transmitEntity = reinterpret_cast<CBitVector<MAX_EDICTS>*>(pInfo->m_pTransmitEntity);
         transmitEntity->Filter(blockedBits.blockedTransmitBits);
     }
 }
 
-extern void* g_pOnGameTickCallback;
-
 void OnGameFramePlayerHook(void* _this, bool simulate, bool first, bool last)
 {
     reinterpret_cast<decltype(&OnGameFramePlayerHook)>(g_OnGameFramePlayerHook.GetOriginal())(_this, simulate, first, last);
 
-    if (g_pOnGameTickCallback)
-        reinterpret_cast<void (*)(bool, bool, bool)>(g_pOnGameTickCallback)(simulate, first, last);
+    PROFILE_FUNCTION();
 
-    for (int i = 0; i < 64; i++)
+    if (g_pOnGameTickCallback)
+        g_pOnGameTickCallback(simulate, first, last);
+
+    for (int i = 0; i < g_pPlayerManager->GetPlayerCap(); i++)
     {
         auto player = g_pPlayerManager->GetPlayer(i);
         if (player) player->Think();
@@ -128,10 +132,10 @@ void OnGameFramePlayerHook(void* _this, bool simulate, bool first, bool last)
     g_pCrashReporter->OnTick();
 }
 
-extern void* g_pOnClientConnectCallback;
-
 bool ClientConnectHook(void* _this, CPlayerSlot slot, const char* pszName, uint64 xuid, const char* pszNetworkID, bool unk1, CBufferString* pRejectReason)
 {
+    PROFILE_FUNCTION();
+
     auto playerid = slot.Get();
     auto player = g_pPlayerManager->RegisterPlayer(playerid);
     if (!player)
@@ -144,97 +148,107 @@ bool ClientConnectHook(void* _this, CPlayerSlot slot, const char* pszName, uint6
 
     if (g_pOnClientConnectCallback)
     {
-        if (reinterpret_cast<bool (*)(int)>(g_pOnClientConnectCallback)(playerid) == false)
+        if (!g_pOnClientConnectCallback(playerid))
         {
             g_pPlayerManager->UnregisterPlayer(playerid);
             return false;
         }
     }
 
+    PROFILE_PAUSE();
+
     return reinterpret_cast<decltype(&ClientConnectHook)>(g_ClientConnectHook.GetOriginal())(_this, slot, pszName, xuid, pszNetworkID, unk1, pRejectReason);
 }
 
 void OnClientConnectedHook(void* _this, CPlayerSlot slot, const char* pszName, uint64 xuid, const char* pszNetworkID, const char* pszAddress, bool bFakePlayer)
 {
+    PROFILE_FUNCTION();
+
     auto playerid = slot.Get();
 
     if (bFakePlayer)
     {
         auto player = g_pPlayerManager->RegisterPlayer(playerid);
-        player->SetFakeClient(true);
-
-        if (g_pOnClientConnectCallback)
+        if (player)
         {
-            if (reinterpret_cast<bool (*)(int)>(g_pOnClientConnectCallback)(playerid) == false)
+            player->SetFakeClient(true);
+
+            if (g_pOnClientConnectCallback && !g_pOnClientConnectCallback(playerid))
             {
                 player->Kick("Connection rejected by plugin.", 0);
                 return;
             }
         }
     }
-    else
+    else if (g_pGameEngine->IsClientFullyAuthenticated(slot))
     {
-        if (g_pGameEngine->IsClientFullyAuthenticated(slot))
-        {
-            auto player = g_pPlayerManager->GetPlayer(playerid);
-            if (player)
-                player->ChangeAuthorizationState(true);
-        }
+        auto player = g_pPlayerManager->GetPlayer(playerid);
+        if (player) player->ChangeAuthorizationState(true);
     }
 
     reinterpret_cast<decltype(&OnClientConnectedHook)>(g_OnClientConnectedHook.GetOriginal())(_this, slot, pszName, xuid, pszNetworkID, pszAddress, bFakePlayer);
 }
 
-extern void* g_pOnClientDisconnectCallback;
-
 void ClientDisconnectHook(void* _this, CPlayerSlot slot, int reason, const char* pszName, uint64 xuid, const char* pszNetworkID)
 {
     reinterpret_cast<decltype(&ClientDisconnectHook)>(g_ClientDisconnectHook.GetOriginal())(_this, slot, reason, pszName, xuid, pszNetworkID);
 
+    PROFILE_FUNCTION();
+
     auto playerid = slot.Get();
 
     if (g_pOnClientDisconnectCallback)
-        reinterpret_cast<void (*)(int, int)>(g_pOnClientDisconnectCallback)(playerid, reason);
+        g_pOnClientDisconnectCallback(playerid, reason);
 
     g_pPlayerManager->UnregisterPlayer(playerid);
 }
 
 IPlayer* CPlayerManager::RegisterPlayer(int playerid)
 {
+    PROFILE_FUNCTION();
+
     if (playerid < 0 || playerid >= g_SwiftlyCore.GetMaxGameClients())
         return nullptr;
 
-    if (g_Players[playerid].has_value())
+    auto& slot = m_players[playerid];
+    if (slot)
         UnregisterPlayer(playerid);
 
-    g_Players[playerid].emplace();
-    g_Players[playerid]->Initialize(playerid);
+    slot.emplace();
+    slot->Initialize(playerid);
 
-    return &g_Players[playerid].value();
+    return &*slot;
 }
 
 void CPlayerManager::UnregisterPlayer(int playerid)
 {
+    PROFILE_FUNCTION();
+
     if (playerid < 0 || playerid >= g_SwiftlyCore.GetMaxGameClients())
         return;
 
-    if (!g_Players[playerid].has_value())
+    auto& slot = m_players[playerid];
+    if (!slot)
         return;
 
-    g_Players[playerid]->Shutdown();
-    g_Players[playerid].reset();
+    slot->Shutdown();
+    slot.reset();
 }
 
 IPlayer* CPlayerManager::GetPlayer(int playerid)
 {
-    if (!g_Players[playerid].has_value())
+    PROFILE_FUNCTION();
+
+    if (playerid < 0 || playerid >= MAX_PLAYERS || !m_players[playerid])
         return nullptr;
 
-    return &g_Players[playerid].value();
+    return &*m_players[playerid];
 }
 
 int CPlayerManager::GetPlayerCount()
 {
+    PROFILE_FUNCTION();
+
     int count = 0;
 
     for (int i = 0; i < GetPlayerCap(); i++)
@@ -246,91 +260,40 @@ int CPlayerManager::GetPlayerCount()
 
 int CPlayerManager::GetPlayerCap()
 {
+    PROFILE_FUNCTION();
+
     return g_SwiftlyCore.GetMaxGameClients();
 }
 
-extern bool bypassPostEventAbstractHook;
-
 void CPlayerManager::SendMsg(MessageType type, const std::string& message, int duration)
 {
+    PROFILE_FUNCTION();
+
     if (type == MessageType::CenterHTML)
     {
-        for (int i = 0; i < g_SwiftlyCore.GetMaxGameClients(); i++)
+        for (int i = 0; i < GetPlayerCap(); i++)
         {
-            IPlayer* player = GetPlayer(i);
+            auto player = GetPlayer(i);
             if (player) player->SendMsg(type, message, duration);
         }
+        return;
     }
-    else {
-        auto msg = RemoveHtmlTags(message);
-        if (type == MessageType::Console)
-        {
-            msg = ClearColors(msg);
-            msg += "\n";
-        }
 
-        if (type == MessageType::Chat || type == MessageType::ChatEOT)
-        {
-            if (msg.size() > 0)
-            {
-                msg += "\x01";
-
-                bool startsWithColor = (msg.at(0) == '[');
-                msg = ProcessColor(message, 0);
-
-                if (startsWithColor)
-                    msg = " " + msg;
-            }
-
-            auto splitMessage = explode(msg, "[newline]");
-
-            auto netmsg = g_pGameNetworkMessages->FindNetworkMessagePartial("TextMsg");
-
-            for (auto& part : splitMessage)
-            {
-                auto pmsg = netmsg->AllocateMessage()->ToPB<CUserMessageTextMsg>();
-
-                pmsg->set_dest((int)type);
-                pmsg->add_param(part);
-
-                bypassPostEventAbstractHook = true;
-
-                CBroadcastRecipientFilter filter;
-                g_pGameEventSystem->PostEventAbstract(-1, false, &filter, netmsg, pmsg, 0);
-
-                bypassPostEventAbstractHook = false;
-
-                // see in src/engine/convars/convars.cpp at the end of the file why i "love" this now
-                delete pmsg;
-            }
-        }
-        else {
-            auto netmsg = g_pGameNetworkMessages->FindNetworkMessagePartial("TextMsg");
-            auto pmsg = netmsg->AllocateMessage()->ToPB<CUserMessageTextMsg>();
-
-            pmsg->set_dest((int)type);
-            pmsg->add_param(msg);
-
-            bypassPostEventAbstractHook = true;
-
-            CBroadcastRecipientFilter filter;
-            g_pGameEventSystem->PostEventAbstract(-1, false, &filter, netmsg, pmsg, 0);
-
-            bypassPostEventAbstractHook = false;
-
-            // see in src/engine/convars/convars.cpp at the end of the file why i "love" this now
-            delete pmsg;
-        }
-    }
+    CBroadcastRecipientFilter filter;
+    PostTextMsg(&filter, type, message, 0);
 }
 
 void CPlayerManager::SteamAPIServerActivated()
 {
+    PROFILE_FUNCTION();
+
     m_CallbackValidateAuthTicketResponse.Register(this, &CPlayerManager::OnValidateAuthTicket);
 }
 
 void CPlayerManager::OnValidateAuthTicket(ValidateAuthTicketResponse_t* response)
 {
+    PROFILE_FUNCTION();
+
     uint64_t steamid = response->m_SteamID.ConvertToUint64();
 
     for (int i = 0; i < GetPlayerCap(); i++)

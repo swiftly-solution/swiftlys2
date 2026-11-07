@@ -17,24 +17,16 @@
  ************************************************************************************************/
 
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 #include <scripting/scripting.h>
 
 #include <public/entity2/entitykeyvalues.h>
-#include <public/tier1/utlstringtoken.h>
-
-static char* Bridge_CEntityKeyValues_CopyString(const std::string& value, int* size)
-{
-    int outSize = static_cast<int>(value.size());
-    *size = outSize;
-
-    char* out = (char*)g_pMemoryAllocator->Alloc(outSize + 1);
-    g_pMemoryAllocator->Copy(out, (void*)value.c_str(), outSize);
-    out[outSize] = '\0';
-    return out;
-}
+#include <public/tier0/utlstringtoken.h>
 
 void* Bridge_CEntityKeyValues_Allocate()
 {
+    PROFILE_FUNCTION();
+
     CEntityKeyValues* kv = new CEntityKeyValues();
     kv->AddRef();
     return kv;
@@ -42,6 +34,8 @@ void* Bridge_CEntityKeyValues_Allocate()
 
 void Bridge_CEntityKeyValues_Deallocate(void* ptr)
 {
+    PROFILE_FUNCTION();
+
     ((CEntityKeyValues*)ptr)->Release();
 }
 
@@ -65,6 +59,8 @@ enum CEntityKeyValuesValueKind
 
 void Bridge_CEntityKeyValues_GetValue(void* keyvalues, const char* keyName, int kind, void* out)
 {
+    PROFILE_FUNCTION();
+
     CEntityKeyValues* kv = (CEntityKeyValues*)keyvalues;
     switch (kind)
     {
@@ -87,6 +83,8 @@ void Bridge_CEntityKeyValues_GetValue(void* keyvalues, const char* keyName, int 
 
 void Bridge_CEntityKeyValues_SetValue(void* keyvalues, const char* keyName, int kind, const void* value)
 {
+    PROFILE_FUNCTION();
+
     CEntityKeyValues* kv = (CEntityKeyValues*)keyvalues;
     switch (kind)
     {
@@ -109,17 +107,23 @@ void Bridge_CEntityKeyValues_SetValue(void* keyvalues, const char* keyName, int 
 
 char* Bridge_CEntityKeyValues_GetString(int* size, void* keyvalues, const char* keyName)
 {
+    PROFILE_FUNCTION();
+
     std::string s = ((CEntityKeyValues*)keyvalues)->GetString(keyName);
-    return Bridge_CEntityKeyValues_CopyString(s, size);
+    return Bridge_CopyString(s, size);
 }
 
 void Bridge_CEntityKeyValues_SetString(void* keyvalues, const char* keyName, const char* value)
 {
+    PROFILE_FUNCTION();
+
     ((CEntityKeyValues*)keyvalues)->SetString(keyName, value);
 }
 
 bool Bridge_CEntityKeyValues_HasKey(void* keyvalues, const char* keyName)
 {
+    PROFILE_FUNCTION();
+
     bool attr = false;
     return ((CEntityKeyValues*)keyvalues)->GetKeyValue(keyName, &attr) != nullptr;
 }

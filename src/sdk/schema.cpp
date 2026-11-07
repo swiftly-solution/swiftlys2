@@ -18,162 +18,180 @@
 
 #include "schema.h"
 
-#include <fmt/format.h>
-#include <unordered_map>
-#include <unordered_set>
-#include <string>
-
-#include <core/entrypoint.h>
+#include <algorithm>
+#include <cstddef>
+#include <cstring>
+#include <format>
+#include <vector>
 
 #include <api/interfaces/interfaces.h>
-#include <api/shared/files.h>
-#include <api/shared/plat.h>
-#include <api/memory/virtual/call.h>    
+#include <api/shared/profiler.h>
+#include <public/networksystem/networkvar.h>
 
 #include <public/entity2/entityclass.h>
 
-#define CBaseEntity_m_nSubclassID 0x9DC483B8C02CE796
+constexpr uint64_t CBaseEntity_m_nSubclassID = SchemaFieldHash("CBaseEntity", "m_nSubclassID");
 
-std::unordered_map<uint64_t, SchemaField, FNV1aHasher64> offsets;
-std::unordered_map<void*, int32_t> networkVarStateChangedOffsets;
-
-class CNetworkVarChainer
+std::optional<SchemaField> CSDKSchema::FindField(uint64_t uHash) const
 {
-public:
-    CEntityInstance* m_pEntity;
+    PROFILE_FUNCTION();
 
-private:
-    uint8 pad_0000[24];
+    auto it = m_fields.find(uHash);
+    if (it == m_fields.end()) return std::nullopt;
+    return it->second;
+}
 
-public:
-    ChangeAccessorFieldPathIndex_t m_PathIndex;
+std::optional<int32_t> CSDKSchema::FindStateChangedIndex(void* pVtable) const
+{
+    PROFILE_FUNCTION();
 
-private:
-    uint8 pad_0024[4];
-};
+    auto it = m_networkVarStateChangedOffsets.find(pVtable);
+    if (it == m_networkVarStateChangedOffsets.end()) return std::nullopt;
+    return it->second;
+}
 
 void CSDKSchema::Load()
 {
+    PROFILE_FUNCTION();
+
     g_pLogger->Info("SDK", "Loading SDK classes and network var vtables...\n");
 
-    offsets.clear();
-    networkVarStateChangedOffsets.clear();
+    m_fields.clear();
+    m_networkVarStateChangedOffsets.clear();
 
-    auto gts = g_pGameSchemaSystem->GlobalTypeScope();
-
-    int classes_count = gts->m_DeclaredClasses.m_Map.Count();
-
-    FOR_EACH_MAP(gts->m_DeclaredClasses.m_Map, iter)
-    {
-        ReadClasses(gts->m_DeclaredClasses.m_Map.Element(iter));
-    }
-
+    std::vector<ISchemaSystemTypeScope*> scopes{ g_pGameSchemaSystem->GlobalTypeScope() };
     for (int i = 0; i < g_pGameSchemaSystem->m_TypeScopes.GetNumStrings(); i++)
+        scopes.push_back(g_pGameSchemaSystem->m_TypeScopes[i]);
+
+    size_t classCount = 0, fieldCount = 0;
+    for (auto scope : scopes)
     {
-        auto ts = g_pGameSchemaSystem->m_TypeScopes[i];
+        auto rawScope = (CSchemaSystemTypeScope*)scope;
+        classCount += rawScope->m_DeclaredClasses.m_Map.Count();
 
-        classes_count += ts->m_DeclaredClasses.m_Map.Count();
-
-        FOR_EACH_MAP(ts->m_DeclaredClasses.m_Map, iter)
+        FOR_EACH_MAP(rawScope->m_DeclaredClasses.m_Map, iter)
         {
-            ReadClasses(ts->m_DeclaredClasses.m_Map.Element(iter));
+            if (auto classInfo = rawScope->m_DeclaredClasses.m_Map.Element(iter)->m_pClassInfo)
+                fieldCount += classInfo->m_nNumFields;
         }
     }
 
-    g_pLogger->Info("SDK", fmt::format("Finished loading {} SDK classes ({} fields).\n", classes_count, offsets.size()));
+    m_fields.reserve(fieldCount);
 
-    int networkVarFields = 0;
-    for (auto& [offset_hash, offset_data] : offsets)
-        if (offset_data.m_nStateChangedOffset != -1)
-            networkVarFields++;
+    for (auto scope : scopes)
+    {
+        auto rawScope = (CSchemaSystemTypeScope*)scope;
+        FOR_EACH_MAP(rawScope->m_DeclaredClasses.m_Map, iter)
+        {
+            ReadClasses(rawScope->m_DeclaredClasses.m_Map.Element(iter));
+        }
+    }
 
-    g_pLogger->Info("SDK", fmt::format("Loaded {} network var fields.\n", networkVarFields));
+    g_pLogger->Info("SDK", std::format("Finished loading {} SDK classes ({} fields).\n", classCount, m_fields.size()));
+
+    const auto networkVarFields = std::ranges::count_if(m_fields, [](const auto& entry) { return entry.second.m_nStateChangedOffset != -1; });
+    g_pLogger->Info("SDK", std::format("Loaded {} network var fields.\n", networkVarFields));
 
     g_pGameSchemaSystem->PrintSchemaStats("");
 }
 
 void CSDKSchema::SetStateChanged(void* pEntity, uint64_t uHash)
 {
+    PROFILE_FUNCTION();
+
     if (pEntity == nullptr) return;
 
-    auto fieldData = offsets.find(uHash);
-    if (fieldData == offsets.end()) return;
+    auto fieldInfo = FindField(uHash);
+    if (!fieldInfo) return;
 
-    auto& fieldInfo = fieldData->second;
+    const SchemaField& field = *fieldInfo;
 
-    if (fieldInfo.m_nStateChangedOffset != -1) {
+    if (field.m_nStateChangedOffset != -1) {
         // This slot belongs to the embedded field's vtable. Its thunk adds the
         // field offset when forwarding the notification to its enclosing object.
-        auto networkVar = reinterpret_cast<NetworkVar*>((uintptr_t)pEntity + fieldInfo.m_uOffset);
-        networkVar->StateChanged(fieldInfo.m_nStateChangedOffset, NetworkStateChangedData(uint32_t(0)));
+        auto networkVar = reinterpret_cast<NetworkVar*>(reinterpret_cast<uintptr_t>(pEntity) + field.m_uOffset);
+        networkVar->StateChanged(field.m_nStateChangedOffset, NetworkStateChangedData(uint32_t(0)));
         return;
     }
 
-    if (fieldInfo.m_bHasVtable) {
+    if (field.m_bHasVtable) {
         // A nested schema handle can itself point at a NetworkVar subclass,
         // e.g. fogparams_t inside CFogController. Use its actual runtime vtable.
-        auto stateChanged = networkVarStateChangedOffsets.find(*reinterpret_cast<void**>(pEntity));
-        if (stateChanged != networkVarStateChangedOffsets.end()) {
-            reinterpret_cast<NetworkVar*>(pEntity)->StateChanged(stateChanged->second, NetworkStateChangedData(fieldInfo.m_uOffset));
+        auto stateChanged = FindStateChangedIndex(*reinterpret_cast<void**>(pEntity));
+        if (stateChanged.has_value()) {
+            reinterpret_cast<NetworkVar*>(pEntity)->StateChanged(*stateChanged, NetworkStateChangedData(field.m_uOffset));
             return;
         }
     }
 
-    if (fieldInfo.m_nChainerOffset != -1) {
-        CNetworkVarChainer* pChainer = (CNetworkVarChainer*)((uintptr_t)pEntity + fieldInfo.m_nChainerOffset);
-
-        CEntityInstance* pEntity = pChainer->m_pEntity;
-        if (pEntity != nullptr)
-            pEntity->NetworkStateChanged(NetworkStateChangedData(fieldInfo.m_uOffset, -1, pChainer->m_PathIndex));
-    } else if (!fieldInfo.m_bIsStruct) {
-        reinterpret_cast<CEntityInstance*>(pEntity)->NetworkStateChanged(NetworkStateChangedData(fieldInfo.m_uOffset));
+    if (field.m_nChainerOffset != -1) {
+        auto pChainer = reinterpret_cast<CNetworkVarChainer*>(reinterpret_cast<uintptr_t>(pEntity) + field.m_nChainerOffset);
+        if(pChainer == nullptr) return;
+        
+        NetworkStateChangedData data(field.m_uOffset, -1, pChainer->m_PathIndex);
+        pChainer->NetworkStateChanged(data);
+    } else if (!field.m_bIsStruct) {
+        reinterpret_cast<CEntityInstance*>(pEntity)->NetworkStateChanged(NetworkStateChangedData(field.m_uOffset));
     }
 }
 
 int32_t CSDKSchema::GetOffset(const char* sClassName, const char* sMemberName)
 {
-    uint32_t class_hash = hash_32_fnv1a_const(sClassName);
-    uint64_t fieldHash = ((uint64_t)(class_hash) << 32 | hash_32_fnv1a_const(sMemberName));
-    return GetOffset(fieldHash);
+    PROFILE_FUNCTION();
+
+    return GetOffset(SchemaFieldHash(sClassName, sMemberName));
 }
 
 int32_t CSDKSchema::GetOffset(uint64_t uHash)
 {
-    auto it = offsets.find(uHash);
-    if (it == offsets.end()) return -1;
-    else return it->second.m_uOffset;
+    PROFILE_FUNCTION();
+
+    auto field = FindField(uHash);
+    return field.has_value() ? static_cast<int32_t>(field->m_uOffset) : -1;
 }
 
 void* CSDKSchema::GetPropPtr(void* pEntity, const char* sClassName, const char* sMemberName)
 {
-    uint32_t class_hash = hash_32_fnv1a_const(sClassName);
-    uint64_t fieldHash = ((uint64_t)(class_hash) << 32 | hash_32_fnv1a_const(sMemberName));
+    PROFILE_FUNCTION();
 
-    return GetPropPtr(pEntity, fieldHash);
+    return GetPropPtr(pEntity, SchemaFieldHash(sClassName, sMemberName));
 }
 
 void* CSDKSchema::GetPropPtr(void* pEntity, uint64_t uHash)
 {
-    auto it = offsets.find(uHash);
-    if (it == offsets.end()) return nullptr;
+    PROFILE_FUNCTION();
 
-    auto& fieldInfo = it->second;
-    return reinterpret_cast<void*>((uintptr_t)pEntity + fieldInfo.m_uOffset);
+    if (pEntity == nullptr) return nullptr;
+
+    auto field = FindField(uHash);
+    if (!field) return nullptr;
+
+    return reinterpret_cast<void*>(reinterpret_cast<uintptr_t>(pEntity) + field->m_uOffset);
 }
 
 void* CSDKSchema::GetVData(void* pEntity)
 {
+    PROFILE_FUNCTION();
+
     void* subclassPtr = GetPropPtr(pEntity, CBaseEntity_m_nSubclassID);
-    return *(void**)((uintptr_t)subclassPtr + 4);
+    return *reinterpret_cast<void**>(reinterpret_cast<uintptr_t>(subclassPtr) + 4);
 }
 
 void* CSDKSchema::GetDatamapFunction(const char* className, const char* functionName)
 {
+    PROFILE_FUNCTION();
+
     auto entitySystem = g_pEntSystem->GetEntitySystem();
+    if (entitySystem == nullptr) return nullptr;
 
     auto entityClassIndex = entitySystem->m_entClassesByCPPClassname.Find(className);
     if (!entitySystem->m_entClassesByCPPClassname.IsValidIndex(entityClassIndex)) return nullptr;
 
     auto entityClass = entitySystem->m_entClassesByCPPClassname[entityClassIndex];
-    return reinterpret_cast<void*>(entityClass->m_NameToThinkFunc(functionName));
+    if (entityClass == nullptr || entityClass->m_NameToThinkFunc == nullptr) return nullptr;
+
+    auto func = entityClass->m_NameToThinkFunc(functionName);
+    void* address = nullptr;
+    std::memcpy(&address, &func, sizeof(address));
+    return address;
 }

@@ -20,95 +20,42 @@
 #include "manager.h"
 
 #include <api/interfaces/interfaces.h>
-
-#include <api/shared/files.h>
 #include <api/shared/plat.h>
-#include <api/shared/string.h>
-#include <api/shared/jsonc.h>
-
-#include <core/entrypoint.h>
-
-#include <nlohmann/json.hpp>
+#include <api/shared/profiler.h>
 
 #include <format>
 
-using json = nlohmann::json;
-
 void GameDataSignatures::Load(const std::string& game)
 {
-    auto files = Files::FetchFileNames(g_SwiftlyCore.GetCorePath() + "gamedata/" + game);
-    for (auto file : files) {
-        if (!ends_with(file, "signatures.jsonc")) continue;
+    PROFILE_FUNCTION();
 
-        try {
-            json signaturesJson = json::object();
-            signaturesJson = parseJsonc(Files::Read(file));
+    ForEachGameDataEntry(game, "signatures.jsonc", [this](const std::string& key, const nlohmann::json& value) {
+        auto lib = ReadGameDataField<std::string>(value, "signature", key, "lib");
+        auto win = ReadGameDataField<std::string>(value, "signature", key, "windows");
+        auto lin = ReadGameDataField<std::string>(value, "signature", key, "linux");
+        if (!lib || !win || !lin) return;
 
-            for (auto& [key, value] : signaturesJson.items()) {
-                if (!value.contains("lib")) {
-                    g_pLogger->Error("GameData", std::format("Failed to parse signature '{}'.\nError: Couldn't find the field for Library. ('{}.lib')\n", key, key));
-                    continue;
-                }
+        const std::string& signature = WIN_LINUX(*win, *lin);
 
-                if (!value["lib"].is_string()) {
-                    g_pLogger->Error("GameData", std::format("Failed to parse signature '{}'.\nError: Library is not a string. ('{}.lib')\n", key, key));
-                    continue;
-                }
+        void* address = nullptr;
+        if (signature.starts_with('@') && !signature.contains(' ')) g_pS2BinLib->FindSymbol(lib->c_str(), signature.c_str() + 1, &address);
+        else address = FindSignature(*lib, signature);
 
-                if (!value.contains("windows")) {
-                    g_pLogger->Error("GameData", std::format("Failed to parse signature '{}'.\nError: Couldn't find the signature field for Windows. ('{}.windows')\n", key, key));
-                    continue;
-                }
-
-                if (!value["windows"].is_string()) {
-                    g_pLogger->Error("GameData", std::format("Failed to parse signature '{}'.\nError: Windows signature is not a string. ('{}.windows')\n", key, key));
-                    continue;
-                }
-
-                if (!value.contains("linux")) {
-                    g_pLogger->Error("GameData", std::format("Failed to parse signature '{}'.\nError: Couldn't find the signature field for Linux. ('{}.linux')\n", key, key));
-                    continue;
-                }
-
-                if (!value["linux"].is_string()) {
-                    g_pLogger->Error("GameData", std::format("Failed to parse signature '{}'.\nError: Linux signature is not a string. ('{}.linux')\n", key, key));
-                    continue;
-                }
-
-                auto lib = value["lib"].get<std::string>();
-                auto signature = value[WIN_LINUX("windows", "linux")].get<std::string>();
-
-                void* sig = nullptr;
-                if (signature.at(0) == '@' && signature.find(" ") == std::string::npos) g_pS2BinLib->FindSymbol(lib.c_str(), signature.substr(1).c_str(), &sig);
-                else sig = FindSignature(lib, signature);
-
-                if (!sig)
-                {
-                    g_pLogger->Error("GameData", std::format("Couldn't find signature '{}'. (lib='{}')\n", key, lib));
-                }
-                else
-                {
-                    m_mSignatures.insert({ key, sig });
-                }
-            }
+        if (!address) {
+            g_pLogger->Error("GameData", std::format("Couldn't find signature '{}'. (lib='{}')\n", key, *lib));
+            return;
         }
-        catch (json::parse_error& e) {
-            g_pLogger->Error("GameData", std::format("Failed to parse file '{}'.\nError: {}.\n", file, e.what()));
-            continue;
-        }
-    }
+
+        m_mSignatures.emplace(key, address);
+    });
 
     g_pLogger->Info("GameData", std::format("Loaded {} signatures.\n", m_mSignatures.size()));
 }
 
-bool GameDataSignatures::Exists(const std::string& name)
-{
-    return m_mSignatures.contains(name);
-}
-
 void* GameDataSignatures::Fetch(const std::string& name)
 {
+    PROFILE_FUNCTION();
+
     auto it = m_mSignatures.find(name);
-    if (it != m_mSignatures.end()) return it->second;
-    return nullptr;
+    return it != m_mSignatures.end() ? it->second : nullptr;
 }

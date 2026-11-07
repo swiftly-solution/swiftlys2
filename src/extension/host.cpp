@@ -21,9 +21,10 @@
 #include <algorithm>
 #include <filesystem>
 
-#include <fmt/format.h>
+#include <format>
 
 #include <api/shared/plat.h>
+#include <api/shared/profiler.h>
 #include <api/interfaces/interfaces.h>
 #include <core/managed/host/dynlib.h>
 #include "extension.h"
@@ -38,17 +39,23 @@ struct ExtensionUpdateScope
 
     explicit ExtensionUpdateScope(bool& value): updating(value)
     {
+        PROFILE_FUNCTION();
+
         updating = true;
     }
 
     ~ExtensionUpdateScope()
     {
+        PROFILE_FUNCTION();
+
         updating = false;
     }
 };
 
 bool IsSameExtensionPath(const std::string& loaded_path, const std::filesystem::path& path)
 {
+    PROFILE_FUNCTION();
+
     std::error_code error;
     return loaded_path == path.string() || std::filesystem::equivalent(loaded_path, path, error);
 }
@@ -57,11 +64,15 @@ bool IsSameExtensionPath(const std::string& loaded_path, const std::filesystem::
 
 CExtensionHost::~CExtensionHost()
 {
+    PROFILE_FUNCTION();
+
     UnloadExtensions();
 }
 
 void CExtensionHost::UnloadExtensions()
 {
+    PROFILE_FUNCTION();
+
     if (updating_extensions_)
         return;
     ExtensionUpdateScope update(updating_extensions_);
@@ -77,6 +88,8 @@ void CExtensionHost::UnloadExtensions()
 
 void CExtensionHost::LoadExtensions(std::string origin_path)
 {
+    PROFILE_FUNCTION();
+
     if (updating_extensions_)
         return;
     ExtensionUpdateScope update(updating_extensions_);
@@ -111,6 +124,8 @@ void CExtensionHost::LoadExtensions(std::string origin_path)
 
 bool CExtensionHost::LoadExtension(const std::string& id)
 {
+    PROFILE_FUNCTION();
+
     if (updating_extensions_ || id.empty() || extensions_folder_.empty())
     {
         return false;
@@ -127,6 +142,8 @@ bool CExtensionHost::LoadExtension(const std::string& id)
 
 bool CExtensionHost::LoadExtensionFromPath(const std::string& path)
 {
+    PROFILE_FUNCTION();
+
     const std::filesystem::path module_path{path};
     if (updating_extensions_ || !module_path.is_absolute())
         return false;
@@ -145,11 +162,13 @@ bool CExtensionHost::LoadExtensionFromPath(const std::string& path)
 
 bool CExtensionHost::LoadExtensionFromPath(const std::string& id, const std::string& path, bool hotreloaded)
 {
+    PROFILE_FUNCTION();
+
     std::error_code error;
     const auto module_path = std::filesystem::canonical(path, error);
     if (error || !std::filesystem::is_regular_file(module_path, error))
     {
-        g_pLogger->Error("Extension", fmt::format("Extension path does not exist: {}\n", path));
+        g_pLogger->Error("Extension", std::format("Extension path does not exist: {}\n", path));
         return false;
     }
 
@@ -159,21 +178,21 @@ bool CExtensionHost::LoadExtensionFromPath(const std::string& id, const std::str
     });
     if (it != extensions_.end())
     {
-        g_pLogger->Warning("Extension", fmt::format("Extension is already loaded: {}\n", id));
+        g_pLogger->Warning("Extension", std::format("Extension is already loaded: {}\n", id));
         return false;
     }
 
     void* lib = load_library(module_path.c_str());
     if (!lib)
     {
-        g_pLogger->Error("Extension", fmt::format("Failed to load extension: {}\n", path));
+        g_pLogger->Error("Extension", std::format("Failed to load extension: {}\n", path));
         return false;
     }
 
     sw_extension_init_fn init_fn = (sw_extension_init_fn)get_export(lib, "sw_extension_init");
     if (!init_fn)
     {
-        g_pLogger->Error("Extension", fmt::format("Extension missing entry function sw_extension_init: {}\n", path));
+        g_pLogger->Error("Extension", std::format("Extension missing entry function sw_extension_init: {}\n", path));
         unload_library(lib);
         return false;
     }
@@ -187,13 +206,13 @@ bool CExtensionHost::LoadExtensionFromPath(const std::string& id, const std::str
     ext->FinishInitialization();
     if (status != SW_OK)
     {
-        g_pLogger->Error("Extension", fmt::format("Extension initialization failed with status {}: {}\n", status, path));
+        g_pLogger->Error("Extension", std::format("Extension initialization failed with status {}: {}\n", status, path));
         return false;
     }
 
     if (!ext->IsInitialized())
     {
-        g_pLogger->Warning("Extension", fmt::format("Extension is not properly initialized: {}\n", path));
+        g_pLogger->Warning("Extension", std::format("Extension is not properly initialized: {}\n", path));
     }
 
     extensions_.push_back(std::move(ext));
@@ -202,13 +221,15 @@ bool CExtensionHost::LoadExtensionFromPath(const std::string& id, const std::str
 
 bool CExtensionHost::UnloadExtension(const std::string& id)
 {
+    PROFILE_FUNCTION();
+
     if (updating_extensions_ || id.empty())
         return false;
 
     const auto it = std::find_if(extensions_.begin(), extensions_.end(), [&](const auto& ext) { return ext->GetId() == id; });
     if (it == extensions_.end())
     {
-        g_pLogger->Warning("Extension", fmt::format("Extension is not loaded: {}\n", id));
+        g_pLogger->Warning("Extension", std::format("Extension is not loaded: {}\n", id));
         return false;
     }
 
@@ -222,6 +243,8 @@ bool CExtensionHost::UnloadExtension(const std::string& id)
 
 bool CExtensionHost::UnloadExtensionFromPath(const std::string& path)
 {
+    PROFILE_FUNCTION();
+
     const std::filesystem::path module_path{path};
     if (updating_extensions_ || !module_path.is_absolute())
         return false;
@@ -241,12 +264,16 @@ bool CExtensionHost::UnloadExtensionFromPath(const std::string& path)
 
 void CExtensionHost::NotifyAllExtensionsLoaded()
 {
+    PROFILE_FUNCTION();
+
     for (const auto& ext : extensions_)
         ext->OnAllExtensionsLoaded();
 }
 
 std::vector<ExtensionInfo> CExtensionHost::GetExtensions()
 {
+    PROFILE_FUNCTION();
+
     std::vector<ExtensionInfo> result;
     result.reserve(extensions_.size());
     for (const auto& ext : extensions_)
@@ -266,21 +293,29 @@ std::vector<ExtensionInfo> CExtensionHost::GetExtensions()
 
 void* CExtensionHost::GetSharedPointer(const std::string& key)
 {
+    PROFILE_FUNCTION();
+
     const auto it = shared_pointers_.find(key);
     return it != shared_pointers_.end() ? it->second : nullptr;
 }
 
 void CExtensionHost::SetSharedPointer(const std::string& key, void* value)
 {
+    PROFILE_FUNCTION();
+
     shared_pointers_.insert_or_assign(key, value);
 }
 
 bool CExtensionHost::HasSharedPointer(const std::string& key)
 {
+    PROFILE_FUNCTION();
+
     return shared_pointers_.find(key) != shared_pointers_.end();
 }
 
 void CExtensionHost::RemoveSharedPointer(const std::string& key)
 {
+    PROFILE_FUNCTION();
+
     shared_pointers_.erase(key);
 }

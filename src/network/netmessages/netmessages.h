@@ -24,7 +24,7 @@
 #include <atomic>
 
  // ofc you need to stay here
-#include <public/engine/igameeventsystem.h>
+#include <public/engine2/igameeventsystem.h>
 
 class CNetMessages : public INetMessages
 {
@@ -38,6 +38,8 @@ public:
     virtual void SetClientMessageSendHandler(std::function<int(int, int, void*)> handler) override;
     virtual void SetServerMessageInternalSendHandler(std::function<int(int, int, void*)> handler) override;
 private:
+    static bool IsValidHook(NetMessageHookType type, int messageid);
+
     static constexpr int MESSAGE_COUNT = 16385;
     std::atomic<uint64_t> m_registeredMessages[NetMessageHook_Count][(MESSAGE_COUNT + 63) / 64]{};
 };

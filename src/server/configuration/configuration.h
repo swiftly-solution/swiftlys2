@@ -21,25 +21,27 @@
 
 #include <api/server/configuration/configuration.h>
 
+#include <atomic>
+#include <shared_mutex>
+
 class Configuration : public IConfiguration
 {
 public:
-    virtual void InitializeExamples() override;
+    void InitializeExamples() override;
 
-    virtual bool Load() override;
-    virtual bool IsLoaded() override;
+    bool Load() override;
+    bool IsLoaded() override { return m_bLoaded; }
 
-    virtual std::map<std::string, ValueType>& GetConfiguration() override;
+    std::map<std::string, ValueType>& GetConfiguration() override { return m_mConfiguration; }
 
-    virtual ValueType& GetValue(const std::string& key) override;
-    virtual void SetValue(const std::string& key, ValueType value) override;
-    virtual bool HasKey(const std::string& key) override;
+    ValueType& GetValue(const std::string& key) override;
+    void SetValue(const std::string& key, ValueType value) override;
+    bool HasKey(const std::string& key) override;
 
 private:
+    std::shared_mutex m_mutex;
     std::map<std::string, ValueType> m_mConfiguration;
-    std::map<std::string, int> m_mConfigurationArraySizes;
-
-    bool m_bLoaded = false;
+    std::atomic<bool> m_bLoaded = false;
 };
 
 #endif

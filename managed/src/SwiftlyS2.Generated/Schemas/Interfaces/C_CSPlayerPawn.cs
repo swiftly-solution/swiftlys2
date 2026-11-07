@@ -201,7 +201,7 @@ public partial interface C_CSPlayerPawn : C_CSPlayerPawnBase, ISchemaClass<C_CSP
 
     public GameTime_t ImmuneToGunGameDamageTimeLast { get; }
 
-    public ref float Modifier0 { get; }
+    public ref float BigHeadScale { get; }
 
     public ref float MolotovDamageTime { get; }
 

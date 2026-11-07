@@ -17,16 +17,20 @@
  ************************************************************************************************/
 
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 #include <scripting/scripting.h>
 
-#include <public/engine/igameeventsystem.h>
+#include <public/engine2/igameeventsystem.h>
 #include <public/networksystem/inetworkmessages.h>
 
-#include <api/sdk/recipientfilter.h>
+#include <public/tier0/recipientfilter.h>
 
 #ifdef GetMessage
 #undef GetMessage
 #endif
+
+typedef int (*ServerNetMessageCallback)(uint64_t*, int, void*);
+typedef int (*NetMessageCallback)(int, int, void*);
 
 #define GETCHECK_FIELD(return_value)                                                                                                                                                                                                                           \
     if (!msg)                                                                                                                                                                                                                                                  \
@@ -84,19 +88,10 @@
         return return_value;                                                                                                                                                                                                                                   \
     }
 
-static char* Bridge_NetMessages_CopyString(const std::string& value, int* size)
-{
-    int outSize = static_cast<int>(value.size());
-    *size = outSize;
-
-    char* out = (char*)g_pMemoryAllocator->Alloc(outSize + 1);
-    g_pMemoryAllocator->Copy(out, (void*)value.c_str(), outSize);
-    out[outSize] = '\0';
-    return out;
-}
-
 void* Bridge_NetMessages_AllocateNetMessageByID(int msgid)
 {
+    PROFILE_FUNCTION();
+
     auto netmsg = g_pGameNetworkMessages->FindNetworkMessageById(msgid);
     if (!netmsg)
     {
@@ -107,6 +102,8 @@ void* Bridge_NetMessages_AllocateNetMessageByID(int msgid)
 
 void* Bridge_NetMessages_AllocateNetMessageByPartialName(const char* name)
 {
+    PROFILE_FUNCTION();
+
     auto netmsg = g_pGameNetworkMessages->FindNetworkMessagePartial(name);
     if (!netmsg)
     {
@@ -117,6 +114,8 @@ void* Bridge_NetMessages_AllocateNetMessageByPartialName(const char* name)
 
 void Bridge_NetMessages_DeallocateNetMessage(void* msg)
 {
+    PROFILE_FUNCTION();
+
     if (!msg)
     {
         return;
@@ -143,6 +142,8 @@ using google::protobuf::FieldDescriptor;
 
 static const FieldDescriptor* FindField(google::protobuf::Message* msg, const char* fieldName, int index, bool adding = false)
 {
+    PROFILE_FUNCTION();
+
     if (!msg)
         return nullptr;
 
@@ -165,6 +166,8 @@ static const FieldDescriptor* FindField(google::protobuf::Message* msg, const ch
 
 static bool KindMatchesField(int kind, const FieldDescriptor* field)
 {
+    PROFILE_FUNCTION();
+
     FieldDescriptor::CppType type = field->cpp_type();
     switch (kind)
     {
@@ -185,6 +188,8 @@ static bool KindMatchesField(int kind, const FieldDescriptor* field)
 
 static void WriteDefaultValue(int kind, void* out)
 {
+    PROFILE_FUNCTION();
+
     switch (kind)
     {
         case ProtobufValueKind_Int32: *(int32_t*)out = 0; break;
@@ -203,6 +208,8 @@ static void WriteDefaultValue(int kind, void* out)
 
 static void ReadMessageValue(int kind, const google::protobuf::Message& message, void* out)
 {
+    PROFILE_FUNCTION();
+
     switch (kind)
     {
         case ProtobufValueKind_Vector2D:
@@ -234,6 +241,8 @@ static void ReadMessageValue(int kind, const google::protobuf::Message& message,
 
 static void WriteMessageValue(int kind, google::protobuf::Message* message, const void* value)
 {
+    PROFILE_FUNCTION();
+
     switch (kind)
     {
         case ProtobufValueKind_Vector2D:
@@ -271,13 +280,10 @@ static void WriteMessageValue(int kind, google::protobuf::Message* message, cons
     }
 }
 
-static bool IsMessageKind(int kind)
-{
-    return kind == ProtobufValueKind_Vector2D || kind == ProtobufValueKind_Vector || kind == ProtobufValueKind_Color || kind == ProtobufValueKind_QAngle;
-}
-
 bool Bridge_NetMessages_HasField(void* pmsg, const char* fieldName)
 {
+    PROFILE_FUNCTION();
+
     google::protobuf::Message* msg = (google::protobuf::Message*)pmsg;
     GETCHECK_FIELD(false);
     CHECK_FIELD_NOT_REPEATED(false);
@@ -287,6 +293,8 @@ bool Bridge_NetMessages_HasField(void* pmsg, const char* fieldName)
 
 bool Bridge_NetMessages_GetValue(void* pmsg, const char* fieldName, int index, int kind, void* out)
 {
+    PROFILE_FUNCTION();
+
     google::protobuf::Message* msg = (google::protobuf::Message*)pmsg;
     WriteDefaultValue(kind, out);
 
@@ -325,6 +333,8 @@ bool Bridge_NetMessages_GetValue(void* pmsg, const char* fieldName, int index, i
 
 bool Bridge_NetMessages_SetValue(void* pmsg, const char* fieldName, int index, int kind, const void* value)
 {
+    PROFILE_FUNCTION();
+
     google::protobuf::Message* msg = (google::protobuf::Message*)pmsg;
 
     const FieldDescriptor* field = FindField(msg, fieldName, index);
@@ -373,6 +383,8 @@ bool Bridge_NetMessages_SetValue(void* pmsg, const char* fieldName, int index, i
 
 bool Bridge_NetMessages_AddValue(void* pmsg, const char* fieldName, int kind, const void* value)
 {
+    PROFILE_FUNCTION();
+
     google::protobuf::Message* msg = (google::protobuf::Message*)pmsg;
 
     const FieldDescriptor* field = FindField(msg, fieldName, -1, true);
@@ -417,19 +429,23 @@ bool Bridge_NetMessages_AddValue(void* pmsg, const char* fieldName, int kind, co
 
 char* Bridge_NetMessages_GetString(int* size, void* pmsg, const char* fieldName, int index)
 {
+    PROFILE_FUNCTION();
+
     google::protobuf::Message* msg = (google::protobuf::Message*)pmsg;
 
     const FieldDescriptor* field = FindField(msg, fieldName, index);
     if (!field || field->cpp_type() != FieldDescriptor::CPPTYPE_STRING)
-        return Bridge_NetMessages_CopyString("", size);
+        return Bridge_CopyString("", size);
 
     const google::protobuf::Reflection* reflection = msg->GetReflection();
     std::string s = index >= 0 ? reflection->GetRepeatedString(*msg, field, index) : reflection->GetString(*msg, field);
-    return Bridge_NetMessages_CopyString(s, size);
+    return Bridge_CopyString(s, size);
 }
 
 void Bridge_NetMessages_SetString(void* pmsg, const char* fieldName, int index, const char* value)
 {
+    PROFILE_FUNCTION();
+
     google::protobuf::Message* msg = (google::protobuf::Message*)pmsg;
 
     const FieldDescriptor* field = FindField(msg, fieldName, index);
@@ -444,6 +460,8 @@ void Bridge_NetMessages_SetString(void* pmsg, const char* fieldName, int index, 
 
 void Bridge_NetMessages_AddString(void* pmsg, const char* fieldName, const char* value)
 {
+    PROFILE_FUNCTION();
+
     google::protobuf::Message* msg = (google::protobuf::Message*)pmsg;
 
     const FieldDescriptor* field = FindField(msg, fieldName, -1, true);
@@ -455,6 +473,8 @@ void Bridge_NetMessages_AddString(void* pmsg, const char* fieldName, const char*
 
 int Bridge_NetMessages_GetBytes(uint8_t* out, void* pmsg, const char* fieldName, int index)
 {
+    PROFILE_FUNCTION();
+
     google::protobuf::Message* msg = (google::protobuf::Message*)pmsg;
 
     const FieldDescriptor* field = FindField(msg, fieldName, index);
@@ -472,6 +492,8 @@ int Bridge_NetMessages_GetBytes(uint8_t* out, void* pmsg, const char* fieldName,
 
 void Bridge_NetMessages_SetBytes(void* pmsg, const char* fieldName, int index, char* value, int valueLength)
 {
+    PROFILE_FUNCTION();
+
     google::protobuf::Message* msg = (google::protobuf::Message*)pmsg;
 
     const FieldDescriptor* field = FindField(msg, fieldName, index);
@@ -487,6 +509,8 @@ void Bridge_NetMessages_SetBytes(void* pmsg, const char* fieldName, int index, c
 
 void Bridge_NetMessages_AddBytes(void* pmsg, const char* fieldName, char* value, int valueLength)
 {
+    PROFILE_FUNCTION();
+
     google::protobuf::Message* msg = (google::protobuf::Message*)pmsg;
 
     const FieldDescriptor* field = FindField(msg, fieldName, -1, true);
@@ -499,6 +523,8 @@ void Bridge_NetMessages_AddBytes(void* pmsg, const char* fieldName, char* value,
 
 void* Bridge_NetMessages_GetNestedMessage(void* pmsg, const char* fieldName)
 {
+    PROFILE_FUNCTION();
+
     google::protobuf::Message* msg = (google::protobuf::Message*)pmsg;
     GETCHECK_FIELD(nullptr);
     CHECK_FIELD_NOT_REPEATED(nullptr);
@@ -507,6 +533,8 @@ void* Bridge_NetMessages_GetNestedMessage(void* pmsg, const char* fieldName)
 
 void* Bridge_NetMessages_GetRepeatedNestedMessage(void* pmsg, const char* fieldName, int index)
 {
+    PROFILE_FUNCTION();
+
     google::protobuf::Message* msg = (google::protobuf::Message*)pmsg;
 
     GETCHECK_FIELD(nullptr);
@@ -518,6 +546,8 @@ void* Bridge_NetMessages_GetRepeatedNestedMessage(void* pmsg, const char* fieldN
 
 void* Bridge_NetMessages_AddNestedMessage(void* pmsg, const char* fieldName)
 {
+    PROFILE_FUNCTION();
+
     google::protobuf::Message* msg = (google::protobuf::Message*)pmsg;
     GETCHECK_FIELD(nullptr);
     CHECK_FIELD_REPEATED(nullptr);
@@ -527,6 +557,8 @@ void* Bridge_NetMessages_AddNestedMessage(void* pmsg, const char* fieldName)
 
 int Bridge_NetMessages_GetRepeatedFieldSize(void* pmsg, const char* fieldName)
 {
+    PROFILE_FUNCTION();
+
     google::protobuf::Message* msg = (google::protobuf::Message*)pmsg;
 
     GETCHECK_FIELD(0);
@@ -535,6 +567,8 @@ int Bridge_NetMessages_GetRepeatedFieldSize(void* pmsg, const char* fieldName)
 
 void Bridge_NetMessages_ClearRepeatedField(void* pmsg, const char* fieldName)
 {
+    PROFILE_FUNCTION();
+
     google::protobuf::Message* msg = (google::protobuf::Message*)pmsg;
 
     GETCHECK_FIELD_VOID();
@@ -544,6 +578,8 @@ void Bridge_NetMessages_ClearRepeatedField(void* pmsg, const char* fieldName)
 
 void Bridge_NetMessages_Clear(void* pmsg)
 {
+    PROFILE_FUNCTION();
+
     google::protobuf::Message* msg = (google::protobuf::Message*)pmsg;
     msg->Clear();
 }
@@ -552,6 +588,8 @@ extern bool bypassPostEventAbstractHook;
 
 void Bridge_NetMessages_SendMessage(void* pmsg, int msgid, int playerid)
 {
+    PROFILE_FUNCTION();
+
     CNetMessagePB<google::protobuf::Message>* msg = (CNetMessagePB<google::protobuf::Message>*)pmsg;
 
     auto netmsg = g_pGameNetworkMessages->FindNetworkMessageById(msgid);
@@ -562,7 +600,7 @@ void Bridge_NetMessages_SendMessage(void* pmsg, int msgid, int playerid)
 
     bypassPostEventAbstractHook = true;
 
-    CSingleRecipientFilter filter(playerid);
+    CSingleUserRecipientFilter filter(playerid);
     g_pGameEventSystem->PostEventAbstract(-1, false, &filter, netmsg, msg, 0);
 
     bypassPostEventAbstractHook = false;
@@ -570,6 +608,8 @@ void Bridge_NetMessages_SendMessage(void* pmsg, int msgid, int playerid)
 
 void Bridge_NetMessages_SendMessageToPlayers(void* pmsg, int msgid, uint64_t playermask)
 {
+    PROFILE_FUNCTION();
+
     CNetMessagePB<google::protobuf::Message>* msg = (CNetMessagePB<google::protobuf::Message>*)pmsg;
     auto netmsg = g_pGameNetworkMessages->FindNetworkMessageById(msgid);
     if (!netmsg)
@@ -593,32 +633,42 @@ void Bridge_NetMessages_SendMessageToPlayers(void* pmsg, int msgid, uint64_t pla
 
 void Bridge_NetMessages_RegisterMessageHook(int hookType, int messageid)
 {
+    PROFILE_FUNCTION();
+
     g_pNetMessages->RegisterMessageHook((NetMessageHookType)hookType, messageid);
 }
 
 void Bridge_NetMessages_UnregisterMessageHook(int hookType, int messageid)
 {
+    PROFILE_FUNCTION();
+
     g_pNetMessages->UnregisterMessageHook((NetMessageHookType)hookType, messageid);
 }
 
-void Bridge_NetMessages_SetNetMessageServerHook(void* callback_ptr)
+void Bridge_NetMessages_SetNetMessageServerHook(ServerNetMessageCallback callback_ptr)
 {
+    PROFILE_FUNCTION();
+
     g_pNetMessages->SetServerMessageSendHandler([callback_ptr](uint64_t* clients, int messageid, void* msg) {
-        return ((int (*)(uint64_t*, int, void*))callback_ptr)(clients, messageid, msg);
+        return callback_ptr(clients, messageid, msg);
         });
 }
 
-void Bridge_NetMessages_SetNetMessageClientHook(void* callback_ptr)
+void Bridge_NetMessages_SetNetMessageClientHook(NetMessageCallback callback_ptr)
 {
+    PROFILE_FUNCTION();
+
     g_pNetMessages->SetClientMessageSendHandler([callback_ptr](int playerid, int messageid, void* msg) {
-        return ((int (*)(int, int, void*))callback_ptr)(playerid, messageid, msg);
+        return callback_ptr(playerid, messageid, msg);
         });
 }
 
-void Bridge_NetMessages_SetNetMessageServerHookInternal(void* callback_ptr)
+void Bridge_NetMessages_SetNetMessageServerHookInternal(NetMessageCallback callback_ptr)
 {
+    PROFILE_FUNCTION();
+
     g_pNetMessages->SetServerMessageInternalSendHandler([callback_ptr](int playerid, int messageid, void* msg) {
-        return ((int (*)(int, int, void*))callback_ptr)(playerid, messageid, msg);
+        return callback_ptr(playerid, messageid, msg);
         });
 }
 

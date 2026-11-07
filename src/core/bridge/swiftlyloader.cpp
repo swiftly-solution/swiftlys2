@@ -19,6 +19,7 @@
 #include <core/entrypoint.h>
 
 #include <api/dll/extern.h>
+#include <api/shared/profiler.h>
 #include <s2binlib/s2binlib.h>
 
 S2BinLib004* g_pS2BinLib;
@@ -26,6 +27,8 @@ std::string g_sGameFolder;
 
 SW_API bool StartCore(CreateIFaceFn serverFactory, CreateIFaceFn engineFactory, S2BinLib004* s2BinLib, const char* gameFolder)
 {
+    PROFILE_FUNCTION();
+
     g_sGameFolder = gameFolder;
     g_pS2BinLib = s2BinLib;
     return g_SwiftlyCore.Load(BridgeKind_t::SwiftlyLoader, serverFactory, engineFactory);
@@ -33,5 +36,7 @@ SW_API bool StartCore(CreateIFaceFn serverFactory, CreateIFaceFn engineFactory, 
 
 SW_API bool StopCore()
 {
+    PROFILE_FUNCTION();
+
     return g_SwiftlyCore.Unload();
 }

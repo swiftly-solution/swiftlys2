@@ -21,23 +21,30 @@
 
 #include <api/memory/gamedata/patches.h>
 
-#include <string>
-#include <map>
-#include <vector>
+#include <cstdint>
 #include <mutex>
+#include <string>
+#include <unordered_map>
+#include <vector>
+
+struct Patch
+{
+    std::string signature;
+    std::vector<uint8_t> bytes;
+    std::vector<uint8_t> original;
+};
 
 class GameDataPatches : public IGameDataPatches
 {
 public:
-    virtual void Load(const std::string& game) override;
-    virtual bool Exists(const std::string& name) override;
+    void Load(const std::string& game) override;
+    bool Exists(const std::string& name) override { return m_mPatches.contains(name); }
 
-    virtual void Apply(const std::string& name) override;
-    virtual void Revert(const std::string& name) override;
+    void Apply(const std::string& name) override;
+    void Revert(const std::string& name) override;
+
 private:
-    std::map<std::string, std::pair<std::string, std::string>> m_mPatches;
-    std::map<std::string, std::vector<uint8_t>> m_mOriginalBytes;
-
+    std::unordered_map<std::string, Patch> m_mPatches;
     std::mutex m_mtxLock;
 };
 

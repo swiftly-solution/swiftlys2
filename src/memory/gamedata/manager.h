@@ -21,18 +21,47 @@
 
 #include <api/memory/gamedata/manager.h>
 
+#include "offsets.h"
+#include "patches.h"
+#include "signatures.h"
+
+#include <api/interfaces/interfaces.h>
+
+#include <nlohmann/json.hpp>
+
+#include <format>
+#include <functional>
+#include <optional>
+#include <string>
+#include <type_traits>
+
 class GameDataManager : public IGameDataManager
 {
 public:
-    virtual IGameDataSignatures* GetSignatures() override;
-    virtual IGameDataOffsets* GetOffsets() override;
-    virtual IGameDataPatches* GetPatches() override;
+    IGameDataSignatures* GetSignatures() override { return &m_signatures; }
+    IGameDataOffsets* GetOffsets() override { return &m_offsets; }
+    IGameDataPatches* GetPatches() override { return &m_patches; }
+
 private:
-    IGameDataSignatures* m_pSignatures;
-    IGameDataOffsets* m_pOffsets;
-    IGameDataPatches* m_pPatches;
+    GameDataSignatures m_signatures;
+    GameDataOffsets m_offsets;
+    GameDataPatches m_patches;
 };
 
-void* FindSignature(std::string library, std::string pattern);
+void* FindSignature(const std::string& library, const std::string& pattern);
+
+void ForEachGameDataEntry(const std::string& game, const std::string& suffix, const std::function<void(const std::string&, const nlohmann::json&)>& callback);
+
+template <typename T>
+std::optional<T> ReadGameDataField(const nlohmann::json& entry, const char* kind, const std::string& key, const char* field)
+{
+    auto it = entry.find(field);
+    bool valid = it != entry.end() && (std::is_same_v<T, std::string> ? it->is_string() : it->is_number_integer());
+    if (!valid) {
+        g_pLogger->Error("GameData", std::format("Failed to parse {} '{}'.\nError: Field '{}.{}' is missing or has the wrong type.\n", kind, key, key, field));
+        return std::nullopt;
+    }
+    return it->template get<T>();
+}
 
 #endif

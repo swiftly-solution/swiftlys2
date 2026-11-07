@@ -17,52 +17,56 @@
  ************************************************************************************************/
 
 #include "listener.h"
-#include "entitysystem.h"
 
 #include <api/interfaces/interfaces.h>
-#include <api/shared/plat.h>
+#include <api/shared/profiler.h>
+#include <scripting/engine/events.h>
 
-#define CCSGameRulesProxy_m_pGameRules 0x242D3ADB925C1F40
+#include <mutex>
 
 CEntityListener g_entityListener;
 
-extern void* g_pOnEntityCreatedCallback;
-extern void* g_pOnEntityDeletedCallback;
-extern void* g_pOnEntityParentChangedCallback;
-extern void* g_pOnEntitySpawnedCallback;
-
 void CEntityListener::OnEntitySpawned(CEntityInstance* pEntity)
 {
+    PROFILE_FUNCTION();
+
     if (g_pOnEntitySpawnedCallback)
-        reinterpret_cast<void(*)(void*)>(g_pOnEntitySpawnedCallback)(pEntity);
+        g_pOnEntitySpawnedCallback(pEntity);
 }
 
 void CEntityListener::OnEntityParentChanged(CEntityInstance* pEntity, CEntityInstance* pNewParent)
 {
+    PROFILE_FUNCTION();
+
     if (g_pOnEntityParentChangedCallback)
-        reinterpret_cast<void(*)(void*, void*)>(g_pOnEntityParentChangedCallback)(pEntity, pNewParent);
+        g_pOnEntityParentChangedCallback(pEntity, pNewParent);
 }
 
 void CEntityListener::OnEntityCreated(CEntityInstance* pEntity)
 {
+    PROFILE_FUNCTION();
+
     if (g_pOnEntityCreatedCallback)
-        reinterpret_cast<void(*)(void*)>(g_pOnEntityCreatedCallback)(pEntity);
+        g_pOnEntityCreatedCallback(pEntity);
 }
 
 void CEntityListener::OnEntityDeleted(CEntityInstance* pEntity)
 {
+    PROFILE_FUNCTION();
+
     auto entindex = pEntity->m_pEntity->m_EHandle.GetEntryIndex();
 
-    for (int i = 0; i < 64; i++) {
+    for (int i = 0; i < g_pPlayerManager->GetPlayerCap(); i++)
+    {
         auto player = g_pPlayerManager->GetPlayer(i);
         if (!player) continue;
 
         auto& transmittingBits = player->GetBlockedTransmittingBits();
-        std::lock_guard<std::mutex> lock(transmittingBits.mutex);
+        std::lock_guard lock(transmittingBits.mutex);
 
         transmittingBits.Unblock(entindex);
     }
 
     if (g_pOnEntityDeletedCallback)
-        reinterpret_cast<void(*)(void*)>(g_pOnEntityDeletedCallback)(pEntity);
+        g_pOnEntityDeletedCallback(pEntity);
 }

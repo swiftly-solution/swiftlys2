@@ -20,10 +20,13 @@
 
 #include <api/shared/files.h>
 #include <api/shared/plat.h>
+#include <api/shared/profiler.h>
 
 #include <core/managed/host/strconv.h>
 
 bool setEnvVar(const std::string& key, const std::string& value) {
+    PROFILE_FUNCTION();
+
 #ifdef _WIN32
     if (_putenv_s(key.c_str(), value.c_str()) == 0) {
         return true;
@@ -38,6 +41,7 @@ bool setEnvVar(const std::string& key, const std::string& value) {
 
 void TracerDump(const std::string& corePath, const char* path)
 {
+    PROFILE_FUNCTION();
 
     void* lib = load_library(WIN_LINUX(StringWide("sw2tracer.dll").c_str(), (Files::GeneratePath(corePath + "bin/linuxsteamrt64/libsw2tracer.so")).c_str()));
     if (!lib) return;

@@ -19,9 +19,12 @@
 #include "init.h"
 
 #include <api/extension/sw_extension.h>
+#include <api/shared/profiler.h>
 
 InitContextImpl* from_self(const sw_init_context* self)
 {
+    PROFILE_FUNCTION();
+
     return reinterpret_cast<InitContextImpl*>(const_cast<sw_init_context*>(self));
 }
 
@@ -30,6 +33,8 @@ sw_status core(
     const char* core,
     sw_core** iface_out)
 {
+    PROFILE_FUNCTION();
+
     if (!self || !core || !iface_out)
         return SW_E_INVALID_ARG;
 
@@ -43,6 +48,8 @@ sw_status core(
 
 InitContextImpl CreateContext(Extension* data)
 {
+    PROFILE_FUNCTION();
+
     InitContextImpl ctx{
         .api = {
             core

@@ -17,187 +17,116 @@
  ************************************************************************************************/
 
 #include "patches.h"
+#include "manager.h"
 
 #include <api/interfaces/interfaces.h>
-
-#include <api/shared/files.h>
-#include <api/shared/string.h>
 #include <api/shared/plat.h>
-#include <api/shared/jsonc.h>
+#include <api/shared/profiler.h>
 
-#include <core/entrypoint.h>
+#include <format>
 
-#include <nlohmann/json.hpp>
+static std::vector<uint8_t> ParsePatchBytes(const std::string& patch)
+{
+    PROFILE_FUNCTION();
 
-#include <fmt/format.h>
+    auto nibble = [](char c) -> int {
+        if (c >= '0' && c <= '9') return c - '0';
+        if (c >= 'a' && c <= 'f') return c - 'a' + 10;
+        if (c >= 'A' && c <= 'F') return c - 'A' + 10;
+        return -1;
+    };
 
-using json = nlohmann::json;
+    std::vector<uint8_t> bytes;
+    for (size_t i = 0; i < patch.size();) {
+        if (patch[i] == ' ') { ++i; continue; }
+
+        size_t end = patch.find(' ', i);
+        if (end == std::string::npos) end = patch.size();
+        std::string token = patch.substr(i, end - i);
+        i = end;
+
+        if (token == "?" || token == "??") { bytes.push_back(0x2A); continue; }
+        if (token.size() != 2) return {};
+        int hi = nibble(token[0]), lo = nibble(token[1]);
+        if (hi < 0 || lo < 0) return {};
+
+        bytes.push_back(static_cast<uint8_t>(hi << 4 | lo));
+    }
+    return bytes;
+}
 
 void GameDataPatches::Load(const std::string& game)
 {
-    auto files = Files::FetchFileNames(g_SwiftlyCore.GetCorePath() + "gamedata/" + game);
-    for (auto file : files) {
-        if (!ends_with(file, "patches.jsonc")) continue;
+    PROFILE_FUNCTION();
 
-        try {
-            json patchesJson = json::object();
-            patchesJson = parseJsonc(Files::Read(file));
+    ForEachGameDataEntry(game, "patches.jsonc", [this](const std::string& key, const nlohmann::json& value) {
+        auto signature = ReadGameDataField<std::string>(value, "patch", key, "signature");
+        auto win = ReadGameDataField<std::string>(value, "patch", key, "windows");
+        auto lin = ReadGameDataField<std::string>(value, "patch", key, "linux");
+        if (!signature || !win || !lin) return;
 
-            for (auto& [key, value] : patchesJson.items()) {
-                if (!value.contains("signature")) {
-                    g_pLogger->Error("GameData", fmt::format("Failed to parse patch '{}'.\nError: Couldn't find the field for Signature. ('{}.signature')\n", key, key));
-                    continue;
-                }
-
-                if (!value["signature"].is_string()) {
-                    g_pLogger->Error("GameData", fmt::format("Failed to parse patch '{}'.\nError: Signature is not a string. ('{}.signature')\n", key, key));
-                    continue;
-                }
-
-                if (!value.contains("windows")) {
-                    g_pLogger->Error("GameData", fmt::format("Failed to parse patch '{}'.\nError: Couldn't find the patch field for Windows. ('{}.windows')\n", key, key));
-                    continue;
-                }
-
-                if (!value["windows"].is_string()) {
-                    g_pLogger->Error("GameData", fmt::format("Failed to parse patch '{}'.\nError: Windows patch is not a string. ('{}.windows')\n", key, key));
-                    continue;
-                }
-
-                if (!value.contains("linux")) {
-                    g_pLogger->Error("GameData", fmt::format("Failed to parse patch '{}'.\nError: Couldn't find the patch field for Linux. ('{}.linux')\n", key, key));
-                    continue;
-                }
-
-                if (!value["linux"].is_string()) {
-                    g_pLogger->Error("GameData", fmt::format("Failed to parse patch '{}'.\nError: Linux patch is not a string. ('{}.linux')\n", key, key));
-                    continue;
-                }
-
-                std::string signature = value["signature"].get<std::string>();
-                if (!g_pGameDataManager->GetSignatures()->Exists(signature))
-                {
-                    g_pLogger->Error("GameData", fmt::format("Failed to parse patch '{}'.\nError: Couldn't find the signature '{}'.\n", key, signature));
-                    continue;
-                }
-
-                auto patch = value[WIN_LINUX("windows", "linux")].get<std::string>();
-                m_mPatches.insert({ key, {patch, signature} });
-            }
+        if (!g_pGameDataManager->GetSignatures()->Exists(*signature)) {
+            g_pLogger->Error("GameData", std::format("Failed to parse patch '{}'.\nError: Couldn't find the signature '{}'.\n", key, *signature));
+            return;
         }
-        catch (json::parse_error& e) {
-            g_pLogger->Error("GameData", fmt::format("Failed to parse file '{}'.\nError: {}.\n", file, e.what()));
-            continue;
+
+        auto bytes = ParsePatchBytes(WIN_LINUX(*win, *lin));
+        if (bytes.empty()) {
+            g_pLogger->Error("GameData", std::format("Failed to parse patch '{}'.\nError: Couldn't parse the patch bytes.\n", key));
+            return;
         }
-    }
 
-    g_pLogger->Info("GameData", fmt::format("Loaded {} patches.\n", m_mPatches.size()));
-}
+        m_mPatches.emplace(key, Patch{ *signature, std::move(bytes), {} });
+    });
 
-bool GameDataPatches::Exists(const std::string& name)
-{
-    return m_mPatches.contains(name);
-}
-
-uint64_t HexStringToUint8Array(const char* hexString, std::vector<uint8_t>& byteArray, uint64_t maxBytes)
-{
-    if (!hexString)
-        return -1;
-
-    uint64_t hexStringLength = strlen(hexString);
-    uint64_t byteCount = hexStringLength / 4;
-
-    if (hexStringLength % 4 != 0 || byteCount == 0 || byteCount > maxBytes)
-        return -1;
-
-    for (uint64_t i = 0; i < hexStringLength; i += 4)
-    {
-        uint8_t byte;
-        if (sscanf(hexString + i, "\\x%2hhX", &byte) != 1)
-            return -1;
-
-        byteArray.push_back(byte);
-    }
-
-    byteArray.push_back('\0');
-
-    return byteCount;
-}
-
-std::vector<uint8_t> HexToByte(const char* src, uint64_t& length)
-{
-    if (!src || strlen(src) <= 0)
-        return {};
-
-    length = strlen(src) / 4;
-    std::vector<uint8_t> dest;
-    uint64_t byteCount = HexStringToUint8Array(src, dest, length);
-    if (byteCount == (uint64_t)-1 || byteCount == 0)
-    {
-        length = 0;
-        return {};
-    }
-
-    return dest;
+    g_pLogger->Info("GameData", std::format("Loaded {} patches.\n", m_mPatches.size()));
 }
 
 void GameDataPatches::Apply(const std::string& name)
 {
-    std::lock_guard<std::mutex> lock(m_mtxLock);
-    auto signature = m_mPatches[name].second;
+    PROFILE_FUNCTION();
 
-    if (!g_pGameDataManager->GetSignatures()->Exists(signature))
-    {
-        g_pLogger->Error("GameData", fmt::format("Failed to apply patch '{}'.\nError: Couldn't find the signature '{}'.\n", name, signature));
+    std::lock_guard lock(m_mtxLock);
+
+    auto it = m_mPatches.find(name);
+    if (it == m_mPatches.end()) {
+        g_pLogger->Error("GameData", std::format("Failed to apply patch '{}'.\nError: Patch doesn't exist.\n", name));
         return;
     }
 
-    void* signaturePtr = g_pGameDataManager->GetSignatures()->Fetch(signature);
-    auto patch = m_mPatches[name].first;
-
-    uint64_t length = 0;
-    std::vector<uint8_t> patchBytes = HexToByte(("\\x" + replace(replace(patch, "?", "2A"), " ", "\\x")).c_str(), length);
-
-    if (length == 0 || patchBytes.size() < length)
-    {
-        g_pLogger->Error("GameData", fmt::format("Failed to apply patch '{}'.\nError: Couldn't parse the patch bytes.\n", name));
+    auto& patch = it->second;
+    auto* address = static_cast<uint8_t*>(g_pGameDataManager->GetSignatures()->Fetch(patch.signature));
+    if (!address) {
+        g_pLogger->Error("GameData", std::format("Failed to apply patch '{}'.\nError: Couldn't find the signature '{}'.\n", name, patch.signature));
         return;
     }
 
-    if (!m_mOriginalBytes.contains(name)) {
-        m_mOriginalBytes.insert({ name, {} });
-        uint8_t* originalBytes = (uint8_t*)signaturePtr;
-        for (int i = 0; i < length; i++) {
-            m_mOriginalBytes[name].push_back(originalBytes[i]);
-        }
-    }
+    if (patch.original.empty()) patch.original.assign(address, address + patch.bytes.size());
 
-    Plat_WriteMemory(signaturePtr, patchBytes.data(), length);
-    g_pLogger->Info("GameData", fmt::format("Applied patch '{}' (signature='{}', bytes_count={:02}).\n", name, signature, length));
+    Plat_WriteMemory(address, patch.bytes.data(), static_cast<int>(patch.bytes.size()));
+    g_pLogger->Info("GameData", std::format("Applied patch '{}' (signature='{}', bytes_count={:02}).\n", name, patch.signature, patch.bytes.size()));
 }
 
 void GameDataPatches::Revert(const std::string& name)
 {
-    std::lock_guard<std::mutex> lock(m_mtxLock);
+    PROFILE_FUNCTION();
 
-    if (m_mOriginalBytes[name].empty())
-    {
-        g_pLogger->Error("GameData", fmt::format("Failed to revert patch '{}'.\nError: Patch wasn't applied or doesn't exist.\n", name));
+    std::lock_guard lock(m_mtxLock);
+
+    auto it = m_mPatches.find(name);
+    if (it == m_mPatches.end() || it->second.original.empty()) {
+        g_pLogger->Error("GameData", std::format("Failed to revert patch '{}'.\nError: Patch wasn't applied or doesn't exist.\n", name));
         return;
     }
 
-    auto signature = m_mPatches[name].second;
-
-    if (!g_pGameDataManager->GetSignatures()->Exists(signature))
-    {
-        g_pLogger->Error("GameData", fmt::format("Failed to apply patch '{}'.\nError: Couldn't find the signature '{}'.\n", name, signature));
+    auto& patch = it->second;
+    void* address = g_pGameDataManager->GetSignatures()->Fetch(patch.signature);
+    if (!address) {
+        g_pLogger->Error("GameData", std::format("Failed to revert patch '{}'.\nError: Couldn't find the signature '{}'.\n", name, patch.signature));
         return;
     }
 
-    void* signaturePtr = g_pGameDataManager->GetSignatures()->Fetch(signature);
-
-    Plat_WriteMemory(signaturePtr, m_mOriginalBytes[name].data(), m_mOriginalBytes[name].size());
-
-    m_mOriginalBytes[name].clear();
-    g_pLogger->Info("GameData", fmt::format("Reverted patch '{}' (signature='{}', bytes_count={:02}).\n", name, m_mPatches[name].second, m_mOriginalBytes[name].size()));
+    Plat_WriteMemory(address, patch.original.data(), static_cast<int>(patch.original.size()));
+    g_pLogger->Info("GameData", std::format("Reverted patch '{}' (signature='{}', bytes_count={:02}).\n", name, patch.signature, patch.original.size()));
+    patch.original.clear();
 }

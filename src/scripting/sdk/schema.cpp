@@ -17,25 +17,34 @@
  ************************************************************************************************/
 
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 #include <scripting/scripting.h>
 
 void Bridge_SDK_Schema_SetStateChanged(void* pEntity, uint64_t uHash)
 {
+    PROFILE_FUNCTION();
+
     g_pSDKSchema->SetStateChanged(pEntity, uHash);
 }
 
 int32_t Bridge_SDK_Schema_GetOffset(uint64_t uHash)
 {
+    PROFILE_FUNCTION();
+
     return g_pSDKSchema->GetOffset(uHash);
 }
 
 void* Bridge_SDK_Schema_GetVData(void* pEntity)
 {
+    PROFILE_FUNCTION();
+
     return g_pSDKSchema->GetVData(pEntity);
 }
 
 void* Bridge_SDK_Schema_GetDatamapFunction(const char* className, const char* functionName)
 {
+    PROFILE_FUNCTION();
+
     return g_pSDKSchema->GetDatamapFunction(className, functionName);
 }
 

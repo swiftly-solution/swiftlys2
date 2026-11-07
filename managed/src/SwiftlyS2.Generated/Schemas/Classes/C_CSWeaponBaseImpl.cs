@@ -323,14 +323,14 @@ internal partial class C_CSWeaponBaseImpl : C_BasePlayerWeaponImpl, C_CSWeaponBa
             return instance;
         }
     }
-    private static nint _StealthyOffset = -1;
+    private static nint _IsInStealthReloadOffset = -1;
 
-    public ref bool Stealthy
+    public ref bool IsInStealthReload
     {
         get
         {
-            if (_StealthyOffset == -1) _StealthyOffset = Schema.GetOffset(0x2A669744CEF3793F);
-            return ref _Handle.AsRef<bool>(_StealthyOffset);
+            if (_IsInStealthReloadOffset == -1) _IsInStealthReloadOffset = Schema.GetOffset(0x2A6697449FDE3664);
+            return ref _Handle.AsRef<bool>(_IsInStealthReloadOffset);
         }
     }
     private static nint _InSilentReloadSectionOffset = -1;
@@ -343,16 +343,16 @@ internal partial class C_CSWeaponBaseImpl : C_BasePlayerWeaponImpl, C_CSWeaponBa
             return ref _Handle.AsRef<bool>(_InSilentReloadSectionOffset);
         }
     }
-    private static nint _StealthHoldStartTimeOffset = -1;
-    private GameTime_tImpl? _StealthHoldStartTimeInstance;
+    private static nint _StealthReloadHoldStartTimeOffset = -1;
+    private GameTime_tImpl? _StealthReloadHoldStartTimeInstance;
 
-    public GameTime_t StealthHoldStartTime
+    public GameTime_t StealthReloadHoldStartTime
     {
         get
         {
-            if (_StealthHoldStartTimeOffset == -1) _StealthHoldStartTimeOffset = Schema.GetOffset(0x2A66974490F04734);
-            var instance = _StealthHoldStartTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _StealthHoldStartTimeOffset);
+            if (_StealthReloadHoldStartTimeOffset == -1) _StealthReloadHoldStartTimeOffset = Schema.GetOffset(0x2A669744BC16125B);
+            var instance = _StealthReloadHoldStartTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _StealthReloadHoldStartTimeOffset);
             return instance;
         }
     }

@@ -19,22 +19,19 @@
 #include <api/interfaces/interfaces.h>
 #include <api/shared/files.h>
 #include <api/shared/string.h>
-#include <api/shared/plat.h>
+#include <api/shared/profiler.h>
 #include <mutex>
 
 #include <core/entrypoint.h>
 #include <scripting/scripting.h>
 
-#include <public/filesystem.h>
-#include <public/steam/isteamgameserver.h>
+#include <public/filesystem/filesystem.h>
 #include <public/tier0/platform.h>
-#include <public/iserver.h>
-#include <igamesystemfactory.h>
-#include <networksystem/inetworksystem.h>
+#include <public/tier0/recipientfilter.h>
+#include <public/game/igamesystemfactory.h>
+#include <public/networksystem/inetworksystem.h>
 
-#include <fmt/format.h>
-
-#include <api/sdk/recipientfilter.h>
+#include <format>
 
 struct CBaseGameSystemFactory_t : public IGameSystemFactory {
     CBaseGameSystemFactory_t* m_pNext;
@@ -42,20 +39,10 @@ struct CBaseGameSystemFactory_t : public IGameSystemFactory {
     void** reallocating_ptr;
 };
 
-static char* Bridge_EngineHelpers_CopyString(const std::string& value, int* size)
-{
-    int outSize = static_cast<int>(value.size());
-    *size = outSize;
-
-    char* out = (char*)g_pMemoryAllocator->Alloc(outSize + 1);
-    g_pMemoryAllocator->Copy(out, (void*)value.c_str(), outSize);
-    out[outSize] = '\0';
-
-    return out;
-}
-
 bool Bridge_EngineHelpers_IsMapValid(const char* map_name)
 {
+    PROFILE_FUNCTION();
+
     if (!map_name) return false;
 
     static CBufferStringGrowable<MAX_PATH> s_sWorkingDir;
@@ -63,13 +50,15 @@ bool Bridge_EngineHelpers_IsMapValid(const char* map_name)
 
     return (
         g_pGameEngine->IsMapValid(map_name) ||
-        Files::ExistsPath(fmt::format("{}steamapps/workshop/content/730/{}/{}.vpk", s_sWorkingDir.Get(), map_name, map_name)) ||
-        Files::ExistsPath(fmt::format("{}steamapps/workshop/content/730/{}/{}_dir.vpk", s_sWorkingDir.Get(), map_name, map_name))
+        Files::ExistsPath(std::format("{}steamapps/workshop/content/730/{}/{}.vpk", s_sWorkingDir.Get(), map_name, map_name)) ||
+        Files::ExistsPath(std::format("{}steamapps/workshop/content/730/{}/{}_dir.vpk", s_sWorkingDir.Get(), map_name, map_name))
         );
 }
 
 void Bridge_EngineHelpers_ExecuteCommand(const char* command)
 {
+    PROFILE_FUNCTION();
+
     if (!command) return;
 
     g_pGameEngine->ServerCommand(command);
@@ -77,6 +66,8 @@ void Bridge_EngineHelpers_ExecuteCommand(const char* command)
 
 void* Bridge_EngineHelpers_FindGameSystemByName(const char* name)
 {
+    PROFILE_FUNCTION();
+
     CBaseGameSystemFactory_t* pFactoryList = *reinterpret_cast<CBaseGameSystemFactory_t**>(CBaseGameSystemFactory::sm_pFirst);
     while (pFactoryList)
     {
@@ -94,31 +85,41 @@ void* Bridge_EngineHelpers_FindGameSystemByName(const char* name)
 
 void Bridge_EngineHelpers_SendMessageToConsole(const char* message)
 {
+    PROFILE_FUNCTION();
+
     std::string msg(message);
     g_SwiftlyCore.SendConsoleMessage(TerminalProcessColor(msg));
 }
 
 char* Bridge_EngineHelpers_GetGameDirectoryPath(int* size)
 {
+    PROFILE_FUNCTION();
+
     std::string s = Plat_GetGameDirectory();
-    return Bridge_EngineHelpers_CopyString(s, size);
+    return Bridge_CopyString(s, size);
 }
 
 char* Bridge_EngineHelpers_GetCurrentGame(int* size)
 {
+    PROFILE_FUNCTION();
+
     std::string s = g_SwiftlyCore.GetCurrentGame();
-    return Bridge_EngineHelpers_CopyString(s, size);
+    return Bridge_CopyString(s, size);
 }
 
 char* Bridge_EngineHelpers_GetNativeVersion(int* size)
 {
+    PROFILE_FUNCTION();
+
     std::string s = g_SwiftlyCore.GetVersion();
 
-    return Bridge_EngineHelpers_CopyString(s, size);
+    return Bridge_CopyString(s, size);
 }
 
 char* Bridge_EngineHelpers_GetMenuSettings(int* size)
 {
+    PROFILE_FUNCTION();
+
     std::string s;
 
     try {
@@ -145,25 +146,31 @@ char* Bridge_EngineHelpers_GetMenuSettings(int* size)
         printf("Exception: %s\n", e.what());
     }
 
-    return Bridge_EngineHelpers_CopyString(s, size);
+    return Bridge_CopyString(s, size);
 }
 
 void* Bridge_EngineHelpers_GetGlobalVars()
 {
+    PROFILE_FUNCTION();
+
     return g_pGameEngine->GetServerGlobals();
 }
 
 void* Bridge_EngineHelpers_GetNetworkGameServer()
 {
+    PROFILE_FUNCTION();
+
     return g_pGameNetworkServerService->GetIGameServer();
 }
 
 char* Bridge_EngineHelpers_GetIP(int* size)
 {
-    auto& addr = g_pGameNetworkSystem->GetPublicAdr();
-    std::string s = fmt::format("{}.{}.{}.{}", addr.ip[0], addr.ip[1], addr.ip[2], addr.ip[3]);
+    PROFILE_FUNCTION();
 
-    return Bridge_EngineHelpers_CopyString(s, size);
+    auto& addr = g_pGameNetworkSystem->GetPublicAdr();
+    std::string s = std::format("{}.{}.{}.{}", addr.ip[0], addr.ip[1], addr.ip[2], addr.ip[3]);
+
+    return Bridge_CopyString(s, size);
 }
 
 extern std::string workshop_map;
@@ -171,12 +178,16 @@ extern std::mutex g_qmMapLoadQueue;
 
 char* Bridge_EngineHelpers_GetWorkshopId(int* size)
 {
+    PROFILE_FUNCTION();
+
     std::lock_guard<std::mutex> lock(g_qmMapLoadQueue);
-    return Bridge_EngineHelpers_CopyString(workshop_map, size);
+    return Bridge_CopyString(workshop_map, size);
 }
 
 void Bridge_EngineHelpers_DispatchParticleEffect(const char* particleName, uint attachmentType, void* entity, byte attachmentPoint, const char* attachmentName, bool resetAllParticlesOnEntity, int splitScreenSlot, uint64_t filtermask)
 {
+    PROFILE_FUNCTION();
+
     auto func = g_pGameDataManager->GetSignatures()->Fetch("DispatchParticleEffect");
     CRecipientFilter a;
     *(uint64_t*)(a.GetRecipients().Base()) = filtermask;

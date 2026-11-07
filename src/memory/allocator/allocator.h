@@ -37,8 +37,6 @@ public:
 
     virtual void Copy(void* dest, void* src, uint64_t size) override;
     virtual void Move(void* dest, void* src, uint64_t size) override;
-
-    ~MemoryAllocator();
 private:
     uint64_t totalAllocated = 0;
 };

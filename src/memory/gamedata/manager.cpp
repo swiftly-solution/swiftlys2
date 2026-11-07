@@ -18,38 +18,38 @@
 
 #include "manager.h"
 
-#include "offsets.h"
-#include "patches.h"
-#include "signatures.h"
-
-#include <public/eiface.h>
 #include <api/interfaces/interfaces.h>
-#include <api/shared/string.h>
-#include <api/shared/plat.h>
 #include <api/shared/files.h>
-#include <fmt/format.h>
+#include <api/shared/jsonc.h>
+#include <api/shared/profiler.h>
 
-IGameDataOffsets* GameDataManager::GetOffsets()
-{
-    if (m_pOffsets == nullptr) m_pOffsets = new GameDataOffsets();
-    return m_pOffsets;
-}
+#include <core/entrypoint.h>
 
-IGameDataSignatures* GameDataManager::GetSignatures()
-{
-    if (m_pSignatures == nullptr) m_pSignatures = new GameDataSignatures();
-    return m_pSignatures;
-}
+#include <format>
 
-IGameDataPatches* GameDataManager::GetPatches()
+void* FindSignature(const std::string& library, const std::string& pattern)
 {
-    if (m_pPatches == nullptr) m_pPatches = new GameDataPatches();
-    return m_pPatches;
-}
+    PROFILE_FUNCTION();
 
-void* FindSignature(std::string library, std::string pattern)
-{
-    void* result = 0;
+    void* result = nullptr;
     g_pS2BinLib->PatternScan(library.c_str(), pattern.c_str(), &result);
     return result;
+}
+
+void ForEachGameDataEntry(const std::string& game, const std::string& suffix, const std::function<void(const std::string&, const nlohmann::json&)>& callback)
+{
+    PROFILE_FUNCTION();
+
+    for (const auto& file : Files::FetchFileNames(g_SwiftlyCore.GetCorePath() + "gamedata/" + game)) {
+        if (!file.ends_with(suffix)) continue;
+
+        try {
+            auto entries = parseJsonc(Files::Read(file));
+            for (auto& [key, value] : entries.items())
+                callback(key, value);
+        }
+        catch (const nlohmann::json::exception& e) {
+            g_pLogger->Error("GameData", std::format("Failed to parse file '{}'.\nError: {}.\n", file, e.what()));
+        }
+    }
 }

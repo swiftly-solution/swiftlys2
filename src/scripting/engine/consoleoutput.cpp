@@ -19,61 +19,68 @@
 #include <api/interfaces/interfaces.h>
 #include <scripting/scripting.h>
 
-#include <api/shared/string.h>
+#include <api/shared/profiler.h>
 
-static char* Bridge_ConsoleOutput_CopyString(const std::string& value, int* size)
+typedef void (*ConsoleListenerCallback)(const char*);
+
+uint64_t Bridge_ConsoleOutput_AddConsoleListener(ConsoleListenerCallback callback)
 {
-    int outSize = static_cast<int>(value.size());
-    *size = outSize;
+    PROFILE_FUNCTION();
 
-    char* out = (char*)g_pMemoryAllocator->Alloc(outSize + 1);
-    g_pMemoryAllocator->Copy(out, (void*)value.c_str(), outSize);
-    out[outSize] = '\0';
-    return out;
-}
-
-uint64_t Bridge_ConsoleOutput_AddConsoleListener(void* callback)
-{
     return g_pConsoleOutput->AddConsoleListener([callback](const std::string& text) {
-        reinterpret_cast<void(*)(const char*)>(callback)(text.c_str());
+        callback(text.c_str());
         });
 }
 
 void Bridge_ConsoleOutput_RemoveConsoleListener(uint64_t listenerId)
 {
+    PROFILE_FUNCTION();
+
     g_pConsoleOutput->RemoveConsoleListener(listenerId);
 }
 
 void Bridge_ConsoleOutput_DispatchQueuedListeners()
 {
+    PROFILE_FUNCTION();
+
     g_pConsoleOutput->DispatchQueuedListeners();
 }
 
 bool Bridge_ConsoleOutput_IsEnabled()
 {
+    PROFILE_FUNCTION();
+
     return g_pConsoleOutput->IsEnabled();
 }
 
 void Bridge_ConsoleOutput_ToggleFilter()
 {
+    PROFILE_FUNCTION();
+
     g_pConsoleOutput->ToggleFilter();
 }
 
 void Bridge_ConsoleOutput_ReloadFilterConfiguration()
 {
+    PROFILE_FUNCTION();
+
     g_pConsoleOutput->ReloadFilterConfiguration();
 }
 
 bool Bridge_ConsoleOutput_NeedsFiltering(const char* text)
 {
+    PROFILE_FUNCTION();
+
     return g_pConsoleOutput->NeedsFiltering((char*)text);
 }
 
 char* Bridge_ConsoleOutput_GetCounterText(int* size)
 {
+    PROFILE_FUNCTION();
+
     std::string counterText = g_pConsoleOutput->GetCounterText();
 
-    return Bridge_ConsoleOutput_CopyString(counterText, size);
+    return Bridge_CopyString(counterText, size);
 }
 
 DEFINE_NATIVE("ConsoleOutput.AddConsoleListener", Bridge_ConsoleOutput_AddConsoleListener);

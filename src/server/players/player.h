@@ -21,10 +21,15 @@
 
 #include <api/server/players/player.h>
 
-#include <public/igameevents.h>
-#include <mutex>
+#include <public/game/igameevents.h>
+#include <public/tier0/recipientfilter.h>
 
 #include <chrono>
+#include <mutex>
+#include <optional>
+#include <string>
+
+void PostTextMsg(IRecipientFilter* filter, MessageType type, const std::string& message, std::optional<int> team);
 
 class CPlayer : public IPlayer
 {
@@ -39,7 +44,6 @@ public:
     virtual bool IsAuthorized() override;
 
     virtual uint32_t GetConnectedTime() override;
-    virtual int GetSlot() override;
 
     virtual void SetUnauthorizedSteamID(uint64_t steamID) override;
 
@@ -48,16 +52,13 @@ public:
 
     virtual void ChangeAuthorizationState(bool bAuthorized) override;
 
-    virtual std::string& GetLanguage() override;
-    virtual void SetLanguage(const std::string& language) override;
-
     virtual void* GetController() override;
     virtual void* GetPawn() override;
     virtual void* GetPlayerPawn() override;
+    virtual std::optional<int> GetTeam() override;
+    virtual int32_t GetKills() override;
+    virtual const char* GetName() override;
 
-    virtual ListenOverride& GetListenOverride(int targetid) override;
-    virtual VoiceFlagValue& GetVoiceFlags() override;
-    virtual CPlayerBitVec& GetSelfMutes() override;
 
     virtual std::string GetIPAddress() override;
     virtual void Kick(const std::string& sReason, int uReason) override;
@@ -75,36 +76,32 @@ public:
     virtual bool HasMenuShown() override;
     virtual bool IsFirstSpawn() override;
     virtual void SetFirstSpawn(bool state) override;
-    virtual uint64_t GetSessionID() override;
 
 private:
-    int m_iPlayerId;
-    bool m_bAuthorized;
+    void UpdateCenterMessage();
+    void UpdateButtons();
+    void EnsureCenterMessageEvent();
+
+    int m_iPlayerId = -1;
+    bool m_bAuthorized = false;
     bool m_bFirstSpawn = true;
     bool m_bIsFakeClient = false;
 
-    ListenOverride m_uListenMap[66] = {};
-    VoiceFlagValue m_uVoiceFlags = VoiceFlagValue::Speak_Normal;
-    CPlayerBitVec m_bvSelfMutes = {};
 
     BlockedTransmitInfo m_bvBlockedTransmittingEntities = {};
 
     uint64_t m_uPressedButtons = 0;
 
-    std::chrono::high_resolution_clock::time_point m_uConnectedTimeStart;
+    std::chrono::steady_clock::time_point m_uConnectedTimeStart;
 
     uint64_t m_uUnauthorizedSteamID = 0;
 
-    std::string m_sLanguage = "en";
-    bool m_bLanguageRetrieved = false;
+    std::chrono::steady_clock::time_point m_centerMessageEndTime;
+    std::string m_sCenterMessageText;
+    IGameEvent* m_pCenterMessageEvent = nullptr;
 
-    uint64_t centerMessageEndTime = 0;
-    std::string centerMessageText = "";
-    IGameEvent* centerMessageEvent = nullptr;
-
-    std::mutex centerMenuMutex;
-    std::string centerMenuText = "";
-    uint64_t m_uSessionId = 0;
+    std::mutex m_centerMenuMutex;
+    std::string m_sCenterMenuText;
 
     std::mutex m_listeningGameEventsMutex;
     CBitVector<8192> m_listeningGameEvents = {};

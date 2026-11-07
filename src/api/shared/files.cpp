@@ -18,31 +18,37 @@
 
 #include "files.h"
 #include "plat.h"
+#include <api/shared/profiler.h>
 #include <public/tier0/platform.h>
 
 #include "string.h"
 #include <ctime>
-#include <time.h>
 
 #include <algorithm>
 #include <filesystem>
-#include <fmt/format.h>
+#include <format>
 
 extern std::string g_sGameFolder;
 
 std::string GetRelativePath(std::string path)
 {
-    std::string str = fmt::format("{}{}{}{}", Plat_GetGameDirectory(), WIN_LINUX("\\", "/"), g_sGameFolder, WIN_LINUX("\\", "/"));
+    PROFILE_FUNCTION();
+
+    std::string str = std::format("{}{}{}{}", Plat_GetGameDirectory(), WIN_LINUX("\\", "/"), g_sGameFolder, WIN_LINUX("\\", "/"));
     return replace(path, str, "");
 }
 
 std::string Files::GeneratePath(std::string path)
 {
-    return fmt::format("{}{}{}{}{}", Plat_GetGameDirectory(), WIN_LINUX("\\", "/"), g_sGameFolder, WIN_LINUX("\\", "/"), path);
+    PROFILE_FUNCTION();
+
+    return std::format("{}{}{}{}{}", Plat_GetGameDirectory(), WIN_LINUX("\\", "/"), g_sGameFolder, WIN_LINUX("\\", "/"), path);
 }
 
 std::string Files::Read(std::string path)
 {
+    PROFILE_FUNCTION();
+
     path = Files::GeneratePath(path);
     if (!std::filesystem::exists(path))
     {
@@ -63,6 +69,8 @@ std::string Files::Read(std::string path)
 
 std::string Files::GetFileName(std::string filePath)
 {
+    PROFILE_FUNCTION();
+
     std::vector<std::string> v = explode(filePath, "/");
     v.pop_back();
     return implode(v, "/");
@@ -70,6 +78,8 @@ std::string Files::GetFileName(std::string filePath)
 
 void Files::Delete(std::string path)
 {
+    PROFILE_FUNCTION();
+
     path = Files::GeneratePath(path);
     if (!std::filesystem::exists(path))
     {
@@ -81,6 +91,8 @@ void Files::Delete(std::string path)
 
 void Files::Append(std::string path, std::string content, bool hasdate)
 {
+    PROFILE_FUNCTION();
+
     if (!Files::ExistsPath(Files::GetFileName(path)) && Files::GetFileName(path) != "")
     {
         std::filesystem::create_directories(Files::GetFileName(Files::GeneratePath(path)));
@@ -113,6 +125,8 @@ void Files::Append(std::string path, std::string content, bool hasdate)
 
 void Files::Write(std::string path, std::string content, bool hasdate)
 {
+    PROFILE_FUNCTION();
+
     if (!Files::ExistsPath(Files::GetFileName(path)) && Files::GetFileName(path) != "")
     {
         std::filesystem::create_directories(Files::GetFileName(Files::GeneratePath(path)));
@@ -145,18 +159,24 @@ void Files::Write(std::string path, std::string content, bool hasdate)
 
 bool Files::ExistsPath(std::string path)
 {
+    PROFILE_FUNCTION();
+
     path = Files::GeneratePath(path);
     return std::filesystem::exists(path);
 }
 
 bool Files::IsDirectory(std::string path)
 {
+    PROFILE_FUNCTION();
+
     path = Files::GeneratePath(path);
     return std::filesystem::is_directory(path);
 }
 
 bool Files::CreateDir(std::string path)
 {
+    PROFILE_FUNCTION();
+
     try {
         path = Files::GeneratePath(path);
         return std::filesystem::create_directory(path);
@@ -169,6 +189,8 @@ bool Files::CreateDir(std::string path)
 
 std::vector<std::string> Files::FetchFileNames(std::string path)
 {
+    PROFILE_FUNCTION();
+
     std::vector<std::string> files;
     if (!ExistsPath(path))
     {
@@ -201,6 +223,8 @@ std::vector<std::string> Files::FetchFileNames(std::string path)
 
 std::vector<std::string> Files::FetchDirectories(std::string path)
 {
+    PROFILE_FUNCTION();
+
     std::vector<std::string> directories;
     if (!ExistsPath(path))
     {

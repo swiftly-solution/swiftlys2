@@ -17,10 +17,10 @@
  ************************************************************************************************/
 
 #include "core_impl_00001.h"
-#include <extension/extension.h>
 #include <extension/impl/memory/memory_impl_00001.h>
 #include <extension/impl/schema/schema_impl_00001.h>
 #include <extension/impl/shared/shared_impl_00001.h>
+#include <api/shared/profiler.h>
 
 SwCoreImpl00001::SwCoreImpl00001(Extension* extension):
     api_{
@@ -31,4 +31,5 @@ SwCoreImpl00001::SwCoreImpl00001(Extension* extension):
     },
     init_(extension)
 {
+    PROFILE_FUNCTION();
 }

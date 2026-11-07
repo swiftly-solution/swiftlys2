@@ -17,75 +17,38 @@
  ************************************************************************************************/
 
 #include "offsets.h"
-
-#include <api/shared/files.h>
-#include <api/shared/string.h>
-#include <api/shared/plat.h>
-#include <api/shared/jsonc.h>
+#include "manager.h"
 
 #include <api/interfaces/interfaces.h>
+#include <api/shared/plat.h>
+#include <api/shared/profiler.h>
 
-#include <fmt/format.h>
-
-#include <core/entrypoint.h>
-
-#include <nlohmann/json.hpp>
-
-using json = nlohmann::json;
+#include <format>
 
 void GameDataOffsets::Load(const std::string& game)
 {
-    auto files = Files::FetchFileNames(g_SwiftlyCore.GetCorePath() + "gamedata/" + game);
-    for (auto file : files) {
-        if (!ends_with(file, "offsets.jsonc")) continue;
+    PROFILE_FUNCTION();
 
-        try {
-            json offsetsJson = json::object();
-            offsetsJson = parseJsonc(Files::Read(file));
-
-            for (auto& [key, value] : offsetsJson.items()) {
-                if (m_mOffsets.contains(key)) {
-                    g_pLogger->Warning("GameData", fmt::format("Offset '{}' is already defined. Skipping...\n", key));
-                    continue;
-                }
-
-                if (!value.contains("windows")) {
-                    g_pLogger->Error("GameData", fmt::format("Failed to parse offset '{}'.\nError: Couldn't find the offset field for Windows. ('{}.windows')\n", key, key));
-                    continue;
-                }
-
-                if (!value["windows"].is_number_integer()) {
-                    g_pLogger->Error("GameData", fmt::format("Failed to parse offset '{}'.\nError: Windows offset is not an integer. ('{}.windows')\n", key, key));
-                    continue;
-                }
-
-                if (!value.contains("linux")) {
-                    g_pLogger->Error("GameData", fmt::format("Failed to parse offset '{}'.\nError: Couldn't find the offset field for Linux. ('{}.linux')\n", key, key));
-                    continue;
-                }
-
-                if (!value["linux"].is_number_integer()) {
-                    g_pLogger->Error("GameData", fmt::format("Failed to parse offset '{}'.\nError: Linux offset is not an integer. ('{}.linux')\n", key, key));
-                    continue;
-                }
-
-                m_mOffsets.insert({ key, value[WIN_LINUX("windows", "linux")].get<int>() });
-            }
+    ForEachGameDataEntry(game, "offsets.jsonc", [this](const std::string& key, const nlohmann::json& value) {
+        if (m_mOffsets.contains(key)) {
+            g_pLogger->Warning("GameData", std::format("Offset '{}' is already defined. Skipping...\n", key));
+            return;
         }
-        catch (json::parse_error& e) {
-            g_pLogger->Error("GameData", fmt::format("Failed to parse file '{}'.\nError: {}.\n", file, e.what()));
-            continue;
-        }
-    }
-    g_pLogger->Info("GameData", fmt::format("Loaded {} offsets.\n", m_mOffsets.size()));
-}
 
-bool GameDataOffsets::Exists(const std::string& name)
-{
-    return m_mOffsets.contains(name);
+        auto win = ReadGameDataField<int>(value, "offset", key, "windows");
+        auto lin = ReadGameDataField<int>(value, "offset", key, "linux");
+        if (!win || !lin) return;
+
+        m_mOffsets.emplace(key, WIN_LINUX(*win, *lin));
+    });
+
+    g_pLogger->Info("GameData", std::format("Loaded {} offsets.\n", m_mOffsets.size()));
 }
 
 int GameDataOffsets::Fetch(const std::string& name)
 {
-    return m_mOffsets.contains(name) ? m_mOffsets.at(name) : 0;
+    PROFILE_FUNCTION();
+
+    auto it = m_mOffsets.find(name);
+    return it != m_mOffsets.end() ? it->second : 0;
 }

@@ -19,11 +19,14 @@
 #include "vfunction.h"
 
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 #include <core/entrypoint.h>
 
 VFunctionHook::VFunctionHook(void* callback, std::string moduleName, std::string vtableName, std::string offsetName)
     : m_sName(offsetName), m_bManaged(true)
 {
+    PROFILE_FUNCTION();
+
     m_fnResolve = [this, callback, moduleName = std::move(moduleName), vtableName = std::move(vtableName), offsetName = std::move(offsetName)]() {
         void* vtable = nullptr;
         g_pS2BinLib->FindVtable(moduleName.c_str(), vtableName.c_str(), &vtable);
@@ -37,6 +40,8 @@ VFunctionHook::VFunctionHook(void* callback, std::string moduleName, std::string
 VFunctionHook::VFunctionHook(void* callback, std::string interfaceName, std::string offsetName)
     : m_sName(offsetName), m_bManaged(true)
 {
+    PROFILE_FUNCTION();
+
     m_fnResolve = [this, callback, interfaceName = std::move(interfaceName), offsetName = std::move(offsetName)]() {
         SetHookFunction(interfaceName, g_pGameDataManager->GetOffsets()->Fetch(offsetName), callback);
     };
@@ -46,6 +51,8 @@ VFunctionHook::VFunctionHook(void* callback, std::string interfaceName, std::str
 VFunctionHook::VFunctionHook(void* callback, std::function<void*()> instanceResolver, std::string offsetName)
     : m_sName(offsetName), m_bManaged(true)
 {
+    PROFILE_FUNCTION();
+
     m_fnResolve = [this, callback, instanceResolver = std::move(instanceResolver), offsetName = std::move(offsetName)]() {
         SetHookFunction(instanceResolver(), g_pGameDataManager->GetOffsets()->Fetch(offsetName), callback, false);
     };
@@ -54,12 +61,16 @@ VFunctionHook::VFunctionHook(void* callback, std::function<void*()> instanceReso
 
 VFunctionHook::~VFunctionHook()
 {
+    PROFILE_FUNCTION();
+
     if (m_bManaged)
         UnregisterManagedHook(this);
 }
 
 bool VFunctionHook::Install()
 {
+    PROFILE_FUNCTION();
+
     if (!m_bManaged) return false;
     if (m_oHook) return true;
 
@@ -72,17 +83,23 @@ bool VFunctionHook::Install()
 
 void VFunctionHook::Uninstall()
 {
+    PROFILE_FUNCTION();
+
     Disable();
     m_oHook.reset();
 }
 
 const char* VFunctionHook::GetName() const
 {
+    PROFILE_FUNCTION();
+
     return m_sName.c_str();
 }
 
 void VFunctionHook::SetHookFunction(const std::string& iface_name, int index, void* callback)
 {
+    PROFILE_FUNCTION();
+
     auto iface = g_SwiftlyCore.GetInterface(iface_name);
     if (!iface) return;
 
@@ -95,6 +112,8 @@ void VFunctionHook::SetHookFunction(const std::string& iface_name, int index, vo
 
 void VFunctionHook::SetHookFunction(void* instance, int index, void* callback, bool is_vtable)
 {
+    PROFILE_FUNCTION();
+
     if (!instance) return;
 
     void* trampoline_addr = nullptr;
@@ -106,6 +125,8 @@ void VFunctionHook::SetHookFunction(void* instance, int index, void* callback, b
 
 void VFunctionHook::Enable()
 {
+    PROFILE_FUNCTION();
+
     if (!m_oHook || IsEnabled()) return;
 
     auto res = m_oHook.enable(); // due to nodiscard
@@ -113,6 +134,8 @@ void VFunctionHook::Enable()
 
 void VFunctionHook::Disable()
 {
+    PROFILE_FUNCTION();
+
     if (!m_oHook || !IsEnabled()) return;
 
     auto res = m_oHook.disable(); // due to nodiscard
@@ -120,10 +143,14 @@ void VFunctionHook::Disable()
 
 void* VFunctionHook::GetOriginal()
 {
+    PROFILE_FUNCTION();
+
     return (void*)(m_oHook.trampoline().address());
 }
 
 bool VFunctionHook::IsEnabled()
 {
+    PROFILE_FUNCTION();
+
     return m_oHook.enabled();
 }

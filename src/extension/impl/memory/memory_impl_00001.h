@@ -20,7 +20,6 @@
 #define src_extension_impl_memory_memory_impl_h
 
 #include <api/extension/sw_extension.h>
-#include <vector>
 
 struct SwMemoryImpl00001
 {

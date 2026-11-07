@@ -17,26 +17,19 @@
  ************************************************************************************************/
 
 #include <scripting/scripting.h>
+
 #include <public/tier0/icommandline.h>
-#include <public/tier1/utlstringtoken.h>
+#include <public/tier0/utlstringtoken.h>
 
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 
 #include <string>
 
-static char* Scripting_CommandLine_CopyString(const std::string& value, int* size)
-{
-    int outSize = static_cast<int>(value.size());
-    *size = outSize;
-
-    char* out = (char*)g_pMemoryAllocator->Alloc(outSize + 1);
-    g_pMemoryAllocator->Copy(out, (void*)value.c_str(), outSize);
-    out[outSize] = '\0';
-    return out;
-}
-
 bool Scripting_CommandLine_HasParameter(const char* param)
 {
+    PROFILE_FUNCTION();
+
     ICommandLine* cmdLine = CommandLine();
     if (!cmdLine) return false;
 
@@ -46,6 +39,8 @@ bool Scripting_CommandLine_HasParameter(const char* param)
 
 int Scripting_CommandLine_GetParameterCount()
 {
+    PROFILE_FUNCTION();
+
     ICommandLine* cmdLine = CommandLine();
     if (!cmdLine) return 0;
 
@@ -54,19 +49,23 @@ int Scripting_CommandLine_GetParameterCount()
 
 char* Scripting_CommandLine_GetParameterValueString(int* size, const char* param, const char* defaultValue)
 {
+    PROFILE_FUNCTION();
+
     ICommandLine* cmdLine = CommandLine();
     if (!cmdLine)
     {
-        return Scripting_CommandLine_CopyString("", size);
+        return Bridge_CopyString("", size);
     }
 
     CUtlStringToken token(param);
     std::string s = cmdLine->ParmValue(token, defaultValue);
-    return Scripting_CommandLine_CopyString(s, size);
+    return Bridge_CopyString(s, size);
 }
 
 int Scripting_CommandLine_GetParameterValueInt(const char* param, int defaultValue)
 {
+    PROFILE_FUNCTION();
+
     ICommandLine* cmdLine = CommandLine();
     if (!cmdLine) return defaultValue;
 
@@ -76,6 +75,8 @@ int Scripting_CommandLine_GetParameterValueInt(const char* param, int defaultVal
 
 float Scripting_CommandLine_GetParameterValueFloat(const char* param, float defaultValue)
 {
+    PROFILE_FUNCTION();
+
     ICommandLine* cmdLine = CommandLine();
     if (!cmdLine) return defaultValue;
 
@@ -85,22 +86,26 @@ float Scripting_CommandLine_GetParameterValueFloat(const char* param, float defa
 
 char* Scripting_CommandLine_GetCommandLine(int* size)
 {
+    PROFILE_FUNCTION();
+
     ICommandLine* cmdLine = CommandLine();
     if (!cmdLine)
     {
-        return Scripting_CommandLine_CopyString("", size);
+        return Bridge_CopyString("", size);
     }
 
     std::string s = cmdLine->GetCmdLine();
-    return Scripting_CommandLine_CopyString(s, size);
+    return Bridge_CopyString(s, size);
 }
 
 bool Scripting_CommandLine_HasParameters()
 {
+    PROFILE_FUNCTION();
+
     ICommandLine* cmdLine = CommandLine();
     if (!cmdLine) return false;
 
-    return cmdLine->HasParms();
+    return cmdLine->IsWellInitialized();
 }
 
 DEFINE_NATIVE("CommandLine.HasParameter", Scripting_CommandLine_HasParameter);

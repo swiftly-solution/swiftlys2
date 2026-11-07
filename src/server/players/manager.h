@@ -16,17 +16,16 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ************************************************************************************************/
 
-#include <api/server/players/manager.h>
+#ifndef src_server_players_manager_h
+#define src_server_players_manager_h
 
-#include <public/eiface.h>
+#include <api/server/players/manager.h>
 
 #include "player.h"
 
-#include "networkbasetypes.pb.h"
-
-#include <steam/steam_api_common.h>
-#include <steam/isteamuser.h>
-#include <steam/steamclientpublic.h>
+#include <public/steamworks/steam_api_common.h>
+#include <public/steamworks/isteamuser.h>
+#include <public/steamworks/steamclientpublic.h>
 
 #include <array>
 #include <optional>
@@ -51,5 +50,7 @@ public:
 
     STEAM_GAMESERVER_CALLBACK_MANUAL(CPlayerManager, OnValidateAuthTicket, ValidateAuthTicketResponse_t, m_CallbackValidateAuthTicketResponse);
 private:
-    std::array<std::optional<CPlayer>, MAX_PLAYERS> g_Players;
+    std::array<std::optional<CPlayer>, MAX_PLAYERS> m_players;
 };
+
+#endif

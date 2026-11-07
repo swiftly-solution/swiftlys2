@@ -17,9 +17,10 @@
  ************************************************************************************************/
 
 #include "crashreporter.h"
-#include <fmt/format.h>
+#include <format>
 #include <nlohmann/json.hpp>
 #include <core/entrypoint.h>
+#include <api/shared/profiler.h>
 
 #include <google_breakpad/processor/stack_frame.h>
 #include <google_breakpad/processor/stack_frame_cpu.h>
@@ -31,6 +32,8 @@ void PrintThread(nlohmann::json& thread_entry, google_breakpad::CallStack* stack
 
 std::string FormatProcessState(const google_breakpad::ProcessState& process_state, google_breakpad::SourceLineResolverInterface* resolver)
 {
+    PROFILE_FUNCTION();
+
     nlohmann::json out;
 
     nlohmann::json& native = out["native"];
@@ -55,7 +58,7 @@ std::string FormatProcessState(const google_breakpad::ProcessState& process_stat
 
     nlohmann::json& crash = process["crash"];
     crash["reason"] = process_state.crash_reason();
-    crash["address"] = fmt::format("0x{:016X}", process_state.crash_address());
+    crash["address"] = std::format("0x{:016X}", process_state.crash_address());
     crash["assertion"] = process_state.assertion();
     crash["thread_id"] = process_state.requesting_thread();
 
@@ -79,12 +82,14 @@ std::string FormatProcessState(const google_breakpad::ProcessState& process_stat
 
 void PrintModules(nlohmann::json& modules_entry, const google_breakpad::CodeModules* modules, const std::vector<const google_breakpad::CodeModule*>* modules_without_symbols, const std::vector<const google_breakpad::CodeModule*>* modules_with_corrupt_symbols)
 {
+    PROFILE_FUNCTION();
+
     for (size_t i = 0; i < modules->module_count(); i++)
     {
         const google_breakpad::CodeModule* module = modules->GetModuleAtSequence(i);
         if (!module) continue;
 
-        nlohmann::json& module_entry = modules_entry[fmt::format("0x{:016X}", module->base_address())];
+        nlohmann::json& module_entry = modules_entry[std::format("0x{:016X}", module->base_address())];
         module_entry["name"] = google_breakpad::PathnameStripper::File(module->code_file());
         module_entry["version"] = module->version();
         module_entry["debug_file"] = google_breakpad::PathnameStripper::File(module->debug_file());
@@ -95,16 +100,22 @@ void PrintModules(nlohmann::json& modules_entry, const google_breakpad::CodeModu
 }
 
 void PrintRegister(nlohmann::json& registers, const std::string& name, uint32_t value) {
-    registers[name] = fmt::format("0x{:016X}", value);
+    PROFILE_FUNCTION();
+
+    registers[name] = std::format("0x{:016X}", value);
 }
 
 void PrintRegister64(nlohmann::json& registers, const std::string& name, uint64_t value) {
-    registers[name] = fmt::format("0x{:016X}", value);
+    PROFILE_FUNCTION();
+
+    registers[name] = std::format("0x{:016X}", value);
 }
 
 void PrintThread(nlohmann::json& thread_entry, google_breakpad::CallStack* stack, const std::string& cpu,
     google_breakpad::MemoryRegion* memory, const google_breakpad::CodeModules* modules, google_breakpad::SourceLineResolverInterface* resolver)
 {
+    PROFILE_FUNCTION();
+
     nlohmann::json& frames = thread_entry["frames"];
 
     for (size_t i = 0; i < stack->frames()->size(); i++)
@@ -118,14 +129,14 @@ void PrintThread(nlohmann::json& thread_entry, google_breakpad::CallStack* stack
         uint64_t return_addr = frame->ReturnAddress();
 
         // Header
-        frame_entry["address"] = fmt::format("0x{:016X}", return_addr);
+        frame_entry["address"] = std::format("0x{:016X}", return_addr);
 
         if (frame->module) {
             frame_entry["module"] = google_breakpad::PathnameStripper::File(frame->module->code_file());
-            frame_entry["function_offset"] = fmt::format("0x{:016X}", return_addr - frame->module->base_address());
+            frame_entry["function_offset"] = std::format("0x{:016X}", return_addr - frame->module->base_address());
             if (!frame->function_name.empty()) {
                 frame_entry["function"] = frame->function_name;
-                frame_entry["instruction_offset"] = fmt::format("0x{:X}", return_addr - frame->function_base);
+                frame_entry["instruction_offset"] = std::format("0x{:X}", return_addr - frame->function_base);
                 if (!frame->source_file_name.empty()) {
                     std::string source_file = google_breakpad::PathnameStripper::File(frame->source_file_name);
                     frame_entry["source_file"] = source_file;

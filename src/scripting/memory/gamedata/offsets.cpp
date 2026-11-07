@@ -18,14 +18,19 @@
 
 #include <scripting/scripting.h>
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 
 bool Bridge_GameData_Offsets_Exists(const char* name)
 {
+    PROFILE_FUNCTION();
+
     return g_pGameDataManager->GetOffsets()->Exists(name);
 }
 
 int Bridge_GameData_Offsets_Fetch(const char* name)
 {
+    PROFILE_FUNCTION();
+
     return g_pGameDataManager->GetOffsets()->Fetch(name);
 }
 

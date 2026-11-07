@@ -25,14 +25,7 @@ class CEntSystem : public IEntitySystem
 {
 public:
     virtual void Shutdown() override;
-
-
-    virtual void AddEntityListener(IEntityListener* listener) override;
-    virtual void RemoveEntityListener(IEntityListener* listener) override;
-
     virtual CEntitySystem* GetEntitySystem() override;
-
-    void StartupServer(const GameSessionConfiguration_t& config, ISource2WorldSession*, const char*);
 };
 
 #endif

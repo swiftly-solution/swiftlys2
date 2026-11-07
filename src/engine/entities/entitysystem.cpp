@@ -21,23 +21,24 @@
 
 #include <cstdint>
 
-#include <public/entity2/entitykeyvalues.h>
 #include <public/entity2/entitysystem.h>
-#include <public/iserver.h>
-#include <public/gametrace.h>
+#include <public/game/gameentitysystem.h>
+#include <public/engine2/gamesessionconfiguration.h>
 
 #include "listener.h"
 
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
+#include <scripting/engine/events.h>
+
+class ISource2WorldSession;
 
 CGameEntitySystem* g_pGameEntitySystem = nullptr;
 
-extern void* g_pOnStartupServerCallback;
-
-bool g_bDone = false;
-
 CGameEntitySystem* GameEntitySystem()
 {
+    PROFILE_FUNCTION();
+
     return g_pGameEntitySystem;
 }
 
@@ -47,39 +48,32 @@ VFunctionHook g_StartupServerHook(reinterpret_cast<void*>(StartupServerHook), "e
 
 void CEntSystem::Shutdown()
 {
-    g_pGameEntitySystem->RemoveListenerEntity(&g_entityListener);
+    PROFILE_FUNCTION();
+
+    if (g_pGameEntitySystem)
+        g_pGameEntitySystem->RemoveListenerEntity(&g_entityListener);
 }
 
 void StartupServerHook(void* _this, const GameSessionConfiguration_t& config, ISource2WorldSession* a, const char* b)
 {
     reinterpret_cast<decltype(&StartupServerHook)>(g_StartupServerHook.GetOriginal())(_this, config, a, b);
 
-    if (!g_bDone)
-    {
-        CGameEntitySystem* entSystem = *reinterpret_cast<CGameEntitySystem**>((uintptr_t)(g_pGameResources)+g_pGameDataManager->GetOffsets()->Fetch("GameEntitySystem"));
-        g_pGameEntitySystem = entSystem;
-        g_pGameEntitySystem->AddListenerEntity(&g_entityListener);
+    PROFILE_FUNCTION();
 
-        g_bDone = true;
+    if (!g_pGameEntitySystem)
+    {
+        auto offset = g_pGameDataManager->GetOffsets()->Fetch("GameEntitySystem");
+        g_pGameEntitySystem = *reinterpret_cast<CGameEntitySystem**>(reinterpret_cast<uintptr_t>(g_pGameResources) + offset);
+        g_pGameEntitySystem->AddListenerEntity(&g_entityListener);
     }
 
     if (g_pOnStartupServerCallback)
-    {
-        reinterpret_cast<void(*)()>(g_pOnStartupServerCallback)();
-    }
-}
-
-void CEntSystem::AddEntityListener(IEntityListener* listener)
-{
-    g_pGameEntitySystem->AddListenerEntity(listener);
-}
-
-void CEntSystem::RemoveEntityListener(IEntityListener* listener)
-{
-    g_pGameEntitySystem->RemoveListenerEntity(listener);
+        g_pOnStartupServerCallback();
 }
 
 CEntitySystem* CEntSystem::GetEntitySystem()
 {
+    PROFILE_FUNCTION();
+
     return g_pGameEntitySystem;
 }

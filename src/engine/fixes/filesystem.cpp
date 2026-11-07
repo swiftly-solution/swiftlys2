@@ -20,16 +20,19 @@
 
 #include <api/shared/plat.h>
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 #include <core/entrypoint.h>
 
-#include <fmt/format.h>
+#include <format>
 
 void FileSystemFix::Start()
 {
-    std::string gamefolder_path = fmt::format("{}{}{}", Plat_GetGameDirectory(), WIN_LINUX("\\", "/"), g_sGameFolder);
-    std::string swiftly_path = fmt::format("{}{}{}", gamefolder_path, WIN_LINUX("\\", "/"), g_SwiftlyCore.GetCorePath());
+    PROFILE_FUNCTION();
+
+    std::string gamefolder_path = std::format("{}{}{}", Plat_GetGameDirectory(), WIN_LINUX("\\", "/"), g_sGameFolder);
+    std::string swiftly_path = std::format("{}{}{}", gamefolder_path, WIN_LINUX("\\", "/"), g_SwiftlyCore.GetCorePath());
 
     g_pGameFileSystem->RemoveSearchPath(swiftly_path.c_str(), "GAME");
     g_pGameFileSystem->RemoveSearchPaths("DEFAULT_WRITE_PATH");
-    g_pGameFileSystem->AddSearchPath(gamefolder_path.c_str(), "DEFAULT_WRITE_PATH", PATH_ADD_TO_TAIL, SEARCH_PATH_PRIORITY_DEFAULT, 0);
+    g_pGameFileSystem->AddSearchPath(gamefolder_path.c_str(), "DEFAULT_WRITE_PATH", PATH_ADD_TO_TAIL, SEARCH_PATH_PRIORITY_DEFAULT);
 }

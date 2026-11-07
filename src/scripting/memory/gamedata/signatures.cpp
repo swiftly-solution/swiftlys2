@@ -18,14 +18,19 @@
 
 #include <scripting/scripting.h>
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 
 bool Bridge_GameData_Signatures_Exists(const char* name)
 {
+    PROFILE_FUNCTION();
+
     return g_pGameDataManager->GetSignatures()->Exists(name);
 }
 
 void* Bridge_GameData_Signatures_Fetch(const char* name)
 {
+    PROFILE_FUNCTION();
+
     return g_pGameDataManager->GetSignatures()->Fetch(name);
 }
 

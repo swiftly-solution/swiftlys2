@@ -17,6 +17,9 @@ internal class StartupService : IHostedService
         // this.provider = provider;
         provider.UseGameHooksPublisher();
         provider.UseCoreHookService();
+        provider.UseCoreVoiceService();
+        provider.UseCoreTranslationService();
+        provider.UseCorePlayerService();
         provider.UsePermissionManager();
         provider.UseMenuManagerAPIService();
         provider.UseMenuRuntimeService();

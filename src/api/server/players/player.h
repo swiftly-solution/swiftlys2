@@ -21,15 +21,15 @@
 
 #include <atomic>
 #include <cstdint>
+#include <optional>
 #include <string>
 
-#include <api/engine/voicemanager/voicemanager.h>
 #include <mutex>
 
 #include <api/utils/bitvec.h>
-#include <public/bitvec.h>
+#include <public/tier0/bitvec.h>
 #include <public/const.h>
-#include <public/igameevents.h>
+#include <public/game/igameevents.h>
 
 #include "networkbasetypes.pb.h"
 
@@ -84,7 +84,6 @@ public:
     virtual bool IsAuthorized() = 0;
 
     virtual uint32_t GetConnectedTime() = 0;
-    virtual int GetSlot() = 0;
 
     virtual void SetUnauthorizedSteamID(uint64_t steamID) = 0;
 
@@ -93,18 +92,14 @@ public:
 
     virtual void ChangeAuthorizationState(bool bAuthorized) = 0;
 
-    virtual std::string& GetLanguage() = 0;
-    virtual void SetLanguage(const std::string& language) = 0;
-
     /** Player SDK Classes **/
     virtual void* GetController() = 0;
     virtual void* GetPawn() = 0;
     virtual void* GetPlayerPawn() = 0;
+    virtual std::optional<int> GetTeam() = 0;
+    virtual int32_t GetKills() = 0;
+    virtual const char* GetName() = 0;
 
-    /** Voice Manager **/
-    virtual ListenOverride& GetListenOverride(int targetid) = 0;
-    virtual VoiceFlagValue& GetVoiceFlags() = 0;
-    virtual CPlayerBitVec& GetSelfMutes() = 0;
 
     /** Engine Stuff **/
     virtual std::string GetIPAddress() = 0;
@@ -125,8 +120,6 @@ public:
 
     virtual bool IsFirstSpawn() = 0;
     virtual void SetFirstSpawn(bool state) = 0;
-
-    virtual uint64_t GetSessionID() = 0;
 };
 
 #endif

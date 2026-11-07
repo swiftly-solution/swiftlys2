@@ -18,8 +18,12 @@
 
 #include "mfunction.h"
 
+#include <api/shared/profiler.h>
+
 void MFunctionHook::SetHookFunction(void* addr, void* callback)
 {
+    PROFILE_FUNCTION();
+
     if (!addr || !callback)
     {
         return;
@@ -31,6 +35,8 @@ void MFunctionHook::SetHookFunction(void* addr, void* callback)
 
 void MFunctionHook::Enable()
 {
+    PROFILE_FUNCTION();
+
     if (m_oHook.enabled())
     {
         return;
@@ -40,6 +46,8 @@ void MFunctionHook::Enable()
 
 void MFunctionHook::Disable()
 {
+    PROFILE_FUNCTION();
+
     if (!m_oHook.enabled())
     {
         return;
@@ -49,5 +57,7 @@ void MFunctionHook::Disable()
 
 bool MFunctionHook::IsEnabled()
 {
+    PROFILE_FUNCTION();
+
     return m_oHook.enabled();
 }

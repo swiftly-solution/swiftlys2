@@ -20,16 +20,19 @@
 #define src_memory_gamedata_signatures_h
 
 #include <api/memory/gamedata/signatures.h>
-#include <map>
+
+#include <string>
+#include <unordered_map>
 
 class GameDataSignatures : public IGameDataSignatures
 {
 public:
-    virtual void Load(const std::string& game) override;
-    virtual bool Exists(const std::string& name) override;
-    virtual void* Fetch(const std::string& name) override;
+    void Load(const std::string& game) override;
+    bool Exists(const std::string& name) override { return m_mSignatures.contains(name); }
+    void* Fetch(const std::string& name) override;
+
 private:
-    std::map<std::string, void*> m_mSignatures;
+    std::unordered_map<std::string, void*> m_mSignatures;
 };
 
 #endif

@@ -26,7 +26,6 @@
 #include <api/engine/convars/convars.h>
 #include <api/engine/entities/entitysystem.h>
 #include <api/engine/gameevents/gameevents.h>
-#include <api/engine/voicemanager/voicemanager.h>
 
 #include <api/memory/allocator/allocator.h>
 #include <api/memory/gamedata/manager.h>
@@ -44,19 +43,19 @@
 #include <api/server/commands/manager.h>
 #include <api/server/configuration/configuration.h>
 #include <api/server/players/manager.h>
-#include <api/server/translations/translations.h>
 
 #include <api/extension/host.h>
 
-#include <public/filesystem.h>
-#include <public/eiface.h>
-#include <public/engine/igameeventsystem.h>
+#include <public/filesystem/filesystem.h>
+#include <public/engine2/ivengineserver2.h>
+#include <public/engine2/igameeventsystem.h>
 #include <public/networksystem/inetworkmessages.h>
 #include <public/networksystem/inetworksystem.h>
-#include <public/iserver.h>
-#include <public/icvar.h>
+#include <public/tier0/icvar.h>
 #include <public/schemasystem/schemasystem.h>
-#include <public/networkstringtabledefs.h>
+#include <public/networkstrings/tabledefs.h>
+#include <public/schemasystem/atomictypes.h>
+#include <public/engine2/inetworkserverservice.h>
 
 #include <s2binlib/s2binlib.h>
 
@@ -76,8 +75,6 @@ extern IConvarManager* g_pConvarManager;
 extern IEventManager* g_pGameEventManager;
 extern IScriptingAPI* g_pScriptingAPI;
 extern IPlayerManager* g_pPlayerManager;
-extern IVoiceManager* g_pVoiceManager;
-extern ITranslations* g_pTranslations;
 extern IServerCommands* g_pServerCommands;
 extern INetMessages* g_pNetMessages;
 extern IConsoleOutput* g_pConsoleOutput;
@@ -98,7 +95,6 @@ extern INetworkServerService* g_pGameNetworkServerService;
 extern ICvar* g_pGameCvar;
 extern CSchemaSystem* g_pGameSchemaSystem;
 extern INetworkStringTableContainer* g_pGameNetworkStringTableContainer;
-extern ISource2GameClients* g_pGameClientsService;
 extern void* g_pGameResources;
 
 #endif

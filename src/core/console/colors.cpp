@@ -18,6 +18,8 @@
 
 #include "colors.h"
 
+#include <api/shared/profiler.h>
+
 #if _WIN32
 #include <Windows.h>
 #include <stdio.h>
@@ -25,10 +27,14 @@
 FILE _ioccc[] = { *stdin, *stdout, *stderr };
 extern "C" FILE* __cdecl __iob_func(void)
 {
+    PROFILE_FUNCTION();
+
     return _ioccc;
 }
 
 void SetupConsoleColors() {
+    PROFILE_FUNCTION();
+
     SetConsoleOutputCP(CP_UTF8);
     SetConsoleCP(CP_UTF8);  
 
@@ -45,6 +51,9 @@ void SetupConsoleColors() {
 
 #else
 
-void SetupConsoleColors() {}
+void SetupConsoleColors()
+{
+    PROFILE_FUNCTION();
+}
 
 #endif

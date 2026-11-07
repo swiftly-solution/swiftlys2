@@ -19,10 +19,13 @@
 #include "function.h"
 
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 
 FunctionHook::FunctionHook(void* callback, std::string signatureName)
     : m_sName(signatureName), m_bManaged(true)
 {
+    PROFILE_FUNCTION();
+
     m_fnResolve = [this, callback, signatureName = std::move(signatureName)]() {
         SetHookFunction(signatureName, callback);
     };
@@ -32,6 +35,8 @@ FunctionHook::FunctionHook(void* callback, std::string signatureName)
 FunctionHook::FunctionHook(void* callback, std::function<void*()> addressResolver, std::string name)
     : m_sName(std::move(name)), m_bManaged(true)
 {
+    PROFILE_FUNCTION();
+
     m_fnResolve = [this, callback, addressResolver = std::move(addressResolver)]() {
         SetHookFunction(addressResolver(), callback);
     };
@@ -40,12 +45,16 @@ FunctionHook::FunctionHook(void* callback, std::function<void*()> addressResolve
 
 FunctionHook::~FunctionHook()
 {
+    PROFILE_FUNCTION();
+
     if (m_bManaged)
         UnregisterManagedHook(this);
 }
 
 bool FunctionHook::Install()
 {
+    PROFILE_FUNCTION();
+
     if (!m_bManaged) return false;
     if (m_oHook) return true;
 
@@ -58,17 +67,23 @@ bool FunctionHook::Install()
 
 void FunctionHook::Uninstall()
 {
+    PROFILE_FUNCTION();
+
     Disable();
     m_oHook.reset();
 }
 
 const char* FunctionHook::GetName() const
 {
+    PROFILE_FUNCTION();
+
     return m_sName.c_str();
 }
 
 void FunctionHook::Enable()
 {
+    PROFILE_FUNCTION();
+
     if (!m_oHook || IsEnabled()) return;
 
     auto result = m_oHook.enable(); // due to nodiscard
@@ -76,6 +91,8 @@ void FunctionHook::Enable()
 
 void FunctionHook::Disable()
 {
+    PROFILE_FUNCTION();
+
     if (!m_oHook || !IsEnabled()) return;
 
     auto result = m_oHook.disable(); // due to nodiscard
@@ -83,16 +100,22 @@ void FunctionHook::Disable()
 
 void* FunctionHook::GetOriginal()
 {
+    PROFILE_FUNCTION();
+
     return (void*)(m_oHook.trampoline().address());
 }
 
 bool FunctionHook::IsEnabled()
 {
+    PROFILE_FUNCTION();
+
     return m_oHook.enabled();
 }
 
 void FunctionHook::SetHookFunction(const std::string& functionSignature, void* callback)
 {
+    PROFILE_FUNCTION();
+
     void* functionAddress = g_pGameDataManager->GetSignatures()->Fetch(functionSignature);
     if (!functionAddress) return;
 
@@ -101,6 +124,8 @@ void FunctionHook::SetHookFunction(const std::string& functionSignature, void* c
 
 void FunctionHook::SetHookFunction(void* functionAddress, void* callback)
 {
+    PROFILE_FUNCTION();
+
     if (!functionAddress) return;
 
     m_oHook = safetyhook::create_inline(functionAddress, callback, safetyhook::InlineHook::Flags::StartDisabled);

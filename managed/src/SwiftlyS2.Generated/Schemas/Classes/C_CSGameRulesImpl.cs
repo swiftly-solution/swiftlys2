@@ -692,6 +692,16 @@ internal partial class C_CSGameRulesImpl : C_TeamplayRulesImpl, C_CSGameRules
             return instance;
         }
     }
+    private static nint _ActiveMutatorsOffset = -1;
+
+    public ref int ActiveMutators
+    {
+        get
+        {
+            if (_ActiveMutatorsOffset == -1) _ActiveMutatorsOffset = Schema.GetOffset(0xE048D26AB325C60);
+            return ref _Handle.AsRef<int>(_ActiveMutatorsOffset);
+        }
+    }
     private static nint _NextRespawnWaveOffset = -1;
     private SchemaClassFixedArray<GameTime_t>? _NextRespawnWaveInstance;
 

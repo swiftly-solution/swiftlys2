@@ -21,6 +21,8 @@
 
 #include <api/scripting/scripting.h>
 
+#include <string>
+
 class CScriptingAPI : public IScriptingAPI
 {
 public:
@@ -31,6 +33,9 @@ public:
 const int MAX_NATIVE_FUNCTIONS = 1024;
 extern NativeFunction g_NativeFunctions[MAX_NATIVE_FUNCTIONS];
 extern int g_NativeFunctionCount;
+
+char* Bridge_CopyString(const std::string& value, int* size);
+char* Bridge_CopyString(const char* value, int* size);
 
 #endif 
 

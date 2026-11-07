@@ -22,16 +22,17 @@
 #include <api/memory/gamedata/offsets.h>
 
 #include <string>
-#include <map>
+#include <unordered_map>
 
 class GameDataOffsets : public IGameDataOffsets
 {
 public:
-    virtual void Load(const std::string& game) override;
-    virtual bool Exists(const std::string& name) override;
-    virtual int Fetch(const std::string& name) override;
+    void Load(const std::string& game) override;
+    bool Exists(const std::string& name) override { return m_mOffsets.contains(name); }
+    int Fetch(const std::string& name) override;
+
 private:
-    std::map<std::string, int> m_mOffsets;
+    std::unordered_map<std::string, int> m_mOffsets;
 };
 
 #endif

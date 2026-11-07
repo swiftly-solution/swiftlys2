@@ -20,14 +20,14 @@
 
 #include <api/engine/consoleoutput/consoleoutput.h>
 #include <api/interfaces/interfaces.h>
-#include <api/interfaces/interfaces.h>
 #include <api/server/configuration/configuration.h>
 #include <api/shared/files.h>
 #include <api/shared/plat.h>
+#include <api/shared/profiler.h>
 #include <api/shared/string.h>
 #include <core/entrypoint.h>
 
-#include <fmt/format.h>
+#include <format>
 
 #include <algorithm>
 #include <chrono>
@@ -42,6 +42,8 @@ namespace fs = std::filesystem;
 
 static std::string GetTimestampString()
 {
+    PROFILE_FUNCTION();
+
     std::time_t now = std::time(nullptr);
     char buf[32];
 #ifdef _WIN32
@@ -58,6 +60,8 @@ static std::string GetTimestampString()
 
 static std::string GetDateString()
 {
+    PROFILE_FUNCTION();
+
     std::time_t now = std::time(nullptr);
     char buf[32];
 #ifdef _WIN32
@@ -74,6 +78,8 @@ static std::string GetDateString()
 
 void ConsoleLogger::Initialize()
 {
+    PROFILE_FUNCTION();
+
     if (bool* b = std::get_if<bool>(&g_pConfiguration->GetValue("core.ConsoleLogger.Enable")))
         m_enabled = *b;
 
@@ -132,12 +138,14 @@ void ConsoleLogger::Initialize()
 
     m_listenerId = g_pConsoleOutput->AddConsoleListener([this](const std::string& message) {
         std::lock_guard<std::mutex> lock(m_mutex);
-        m_queue.push(fmt::format("[{}] {}", GetTimestampString(), message));
+        m_queue.push(std::format("[{}] {}", GetTimestampString(), message));
         });
 }
 
 void ConsoleLogger::Shutdown()
 {
+    PROFILE_FUNCTION();
+
     if (!m_enabled)
         return;
 
@@ -153,11 +161,15 @@ void ConsoleLogger::Shutdown()
 
 ConsoleLogger::~ConsoleLogger()
 {
+    PROFILE_FUNCTION();
+
     StopWorker();
 }
 
 void ConsoleLogger::StopWorker()
 {
+    PROFILE_FUNCTION();
+
     {
         std::lock_guard<std::mutex> lock(m_mutex);
         m_running = false;
@@ -169,6 +181,8 @@ void ConsoleLogger::StopWorker()
 
 void ConsoleLogger::FlushQueue()
 {
+    PROFILE_FUNCTION();
+
     if (!m_enabled)
         return;
 
@@ -193,6 +207,8 @@ void ConsoleLogger::FlushQueue()
 
 void ConsoleLogger::WorkerThread()
 {
+    PROFILE_FUNCTION();
+
     std::unique_lock<std::mutex> lock(m_mutex);
     while (m_running)
     {
@@ -210,6 +226,8 @@ void ConsoleLogger::WorkerThread()
 
 void ConsoleLogger::ProcessBatch(std::queue<std::string>& entries)
 {
+    PROFILE_FUNCTION();
+
     if (entries.empty())
         return;
 
@@ -240,6 +258,8 @@ void ConsoleLogger::ProcessBatch(std::queue<std::string>& entries)
 
 void ConsoleLogger::WriteEntries(std::queue<std::string>& entries, const std::string& targetFile)
 {
+    PROFILE_FUNCTION();
+
     if (targetFile.empty() || entries.empty())
         return;
 
@@ -263,6 +283,8 @@ void ConsoleLogger::WriteEntries(std::queue<std::string>& entries, const std::st
 
 std::string ConsoleLogger::GetDailyLogPath() const
 {
+    PROFILE_FUNCTION();
+
     if (m_logDir.empty())
         return "";
     return m_logDir + GetDateString() + ".log";
@@ -270,6 +292,8 @@ std::string ConsoleLogger::GetDailyLogPath() const
 
 void ConsoleLogger::ApplyFileCountRotation(const std::string& dir)
 {
+    PROFILE_FUNCTION();
+
     if (dir.empty() || m_maxFiles <= 0)
         return;
 
@@ -300,6 +324,8 @@ void ConsoleLogger::ApplyFileCountRotation(const std::string& dir)
 
 void ConsoleLogger::ApplyTimeIntervalRotation(const std::string& dir)
 {
+    PROFILE_FUNCTION();
+
     if (dir.empty() || m_deleteOlderThanHours <= 0)
         return;
 
@@ -323,5 +349,7 @@ void ConsoleLogger::ApplyTimeIntervalRotation(const std::string& dir)
 
 void ConsoleLogger_FlushForCrash()
 {
+    PROFILE_FUNCTION();
+
     g_ConsoleLogger.FlushQueue();
 }

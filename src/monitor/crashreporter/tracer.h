@@ -3,7 +3,6 @@
 
 typedef void (*Sw2TracerDumpFunc)(const char* path);
 
-#include <iostream>
 #include <string>
 #include <cstdlib>
 

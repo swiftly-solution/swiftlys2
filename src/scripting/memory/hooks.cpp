@@ -17,71 +17,97 @@
  ************************************************************************************************/
 
 #include <api/interfaces/interfaces.h>
-#include <cstdio>
+#include <api/shared/profiler.h>
 #include <scripting/scripting.h>
 
 void* Bridge_Hooks_AllocateHook()
 {
+    PROFILE_FUNCTION();
+
     return g_pHooksManager->CreateFunctionHook();
 }
 
 void* Bridge_Hooks_AllocateMHook()
 {
+    PROFILE_FUNCTION();
+
     return g_pHooksManager->CreateMFunctionHook();
 }
 
 void Bridge_Hooks_DeallocateHook(void* hook)
 {
+    PROFILE_FUNCTION();
+
     g_pHooksManager->DestroyFunctionHook((IFunctionHook*)hook);
 }
 
 void Bridge_Hooks_DeallocateMHook(void* hook)
 {
+    PROFILE_FUNCTION();
+
     g_pHooksManager->DestroyMFunctionHook((IMFunctionHook*)hook);
 }
 
 void Bridge_Hooks_SetHook(void* hook, void* func, void* callback)
 {
+    PROFILE_FUNCTION();
+
     ((IFunctionHook*)hook)->SetHookFunction(func, callback);
 }
 
 void Bridge_Hooks_SetMHook(void* hook, void* addr, void* callback)
 {
+    PROFILE_FUNCTION();
+
     ((IMFunctionHook*)hook)->SetHookFunction(addr, callback);
 }
 
 void Bridge_Hooks_EnableHook(void* hook)
 {
+    PROFILE_FUNCTION();
+
     ((IFunctionHook*)hook)->Enable();
 }
 
 void Bridge_Hooks_EnableMHook(void* hook)
 {
+    PROFILE_FUNCTION();
+
     ((IMFunctionHook*)hook)->Enable();
 }
 
 void Bridge_Hooks_DisableHook(void* hook)
 {
+    PROFILE_FUNCTION();
+
     ((IFunctionHook*)hook)->Disable();
 }
 
 void Bridge_Hooks_DisableMHook(void* hook)
 {
+    PROFILE_FUNCTION();
+
     ((IMFunctionHook*)hook)->Disable();
 }
 
 bool Bridge_Hooks_IsHookEnabled(void* hook)
 {
+    PROFILE_FUNCTION();
+
     return ((IFunctionHook*)hook)->IsEnabled();
 }
 
 bool Bridge_Hooks_IsMHookEnabled(void* hook)
 {
+    PROFILE_FUNCTION();
+
     return ((IMFunctionHook*)hook)->IsEnabled();
 }
 
 void* Bridge_Hooks_GetHookOriginal(void* hook)
 {
+    PROFILE_FUNCTION();
+
     return ((IFunctionHook*)hook)->GetOriginal();
 }
 

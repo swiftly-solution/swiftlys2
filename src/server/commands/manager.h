@@ -20,12 +20,13 @@
 #define src_server_commands_manager_h
 
 #include <api/server/commands/manager.h>
-#include <mutex>
+#include <shared_mutex>
 
-#include <public/tier1/convar.h>
+#include <public/tier0/convar.h>
 
-#include <set>
+#include <string>
 #include <unordered_map>
+#include <vector>
 
 class CServerCommands : public IServerCommands
 {
@@ -50,7 +51,7 @@ private:
     bool ResolveCommandName(std::string& command_name);
     void LoadPrefixes();
 
-    std::mutex m_mtxCommands;
+    std::shared_mutex m_mtxCommands;
     std::unordered_map<std::string, ConCommand*> m_commands;
     std::unordered_map<uint64_t, std::string> m_commandNames;
     uint64_t m_lastCommandId = 0;
@@ -60,8 +61,8 @@ private:
     ClientChatHandler m_clientChatHandler;
 
     bool m_prefixesLoaded = false;
-    std::set<std::string> m_commandPrefixes;
-    std::set<std::string> m_silentCommandPrefixes;
+    std::vector<std::string> m_commandPrefixes;
+    std::vector<std::string> m_silentCommandPrefixes;
 };
 
 #endif
