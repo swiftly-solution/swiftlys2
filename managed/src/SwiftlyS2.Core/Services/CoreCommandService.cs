@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using Spectre.Console;
 using Microsoft.Extensions.Logging;
 using SwiftlyS2.Shared;
+using SwiftlyS2.Core.Commands;
 using SwiftlyS2.Core.Plugins;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared.Commands;
@@ -651,6 +652,10 @@ internal class CoreCommandService
             return;
         }
 
+        var aliasesByCommand = CommandDispatcher.GetAliases()
+            .GroupBy(target => target.CommandKey, StringComparer.OrdinalIgnoreCase)
+            .ToDictionary(group => group.Key, group => group.Select(target => target.Alias).OrderBy(alias => alias, StringComparer.OrdinalIgnoreCase).ToList(), StringComparer.OrdinalIgnoreCase);
+
         var allRows = commandsByPlugin
             .OrderBy(x => x.Key)
             .SelectMany(pluginEntry => pluginEntry.Value
@@ -659,7 +664,8 @@ internal class CoreCommandService
                     Plugin: idx == 0 ? pluginEntry.Key : string.Empty,
                     cmd.CommandName,
                     cmd.HelpText,
-                    cmd.Permission)))
+                    cmd.Permission,
+                    Aliases: aliasesByCommand.TryGetValue(CommandDispatcher.NormalizeName(cmd.CommandName, cmd.RegisterRaw), out var aliases) ? aliases : [])))
             .ToList();
 
         var totalPages = (int)Math.Ceiling(allRows.Count / (double)pageSize);
@@ -676,14 +682,16 @@ internal class CoreCommandService
         var table = new Table()
             .AddColumn("Plugin")
             .AddColumn("Command Name")
+            .AddColumn("Aliases")
             .AddColumn("Help Text")
             .AddColumn("Permission");
 
-        foreach (var (plugin, commandName, helpText, permission) in pageRows)
+        foreach (var (plugin, commandName, helpText, permission, aliases) in pageRows)
         {
             _ = table.AddRow(
                 plugin,
                 commandName,
+                aliases.Count == 0 ? "(none)" : Markup.Escape(string.Join(", ", aliases)),
                 Markup.Escape(helpText),
                 string.IsNullOrWhiteSpace(permission) ? "(none)" : permission);
         }

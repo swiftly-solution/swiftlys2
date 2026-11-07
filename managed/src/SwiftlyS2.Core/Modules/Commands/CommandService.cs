@@ -64,7 +64,7 @@ internal class CommandService : ICommandService, IDisposable
             }
 
             var normalizedAlias = CommandDispatcher.NormalizeName(alias, registerRaw);
-            CommandDispatcher.AddAlias(normalizedAlias, commandKey);
+            CommandDispatcher.AddAlias(normalizedAlias, alias, commandKey);
             commandAliasNames.Add(normalizedAlias);
         }
     }
