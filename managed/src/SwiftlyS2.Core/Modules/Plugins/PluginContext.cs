@@ -18,6 +18,8 @@ internal class PluginContext : IDisposable
 
     public PluginLoader? Loader { get; set; }
 
+    public TimeSpan LoadTime { get; set; }
+
     public void Dispose()
     {
         Plugin?.Unload();

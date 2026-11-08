@@ -296,12 +296,10 @@ internal class PluginManager : IPluginManager
 
             try
             {
-                var startedAt = Stopwatch.GetTimestamp();
                 var context = LoadPluginInternal(pluginDir, hotReload: false, silent: false);
-                var elapsed = Stopwatch.GetElapsedTime(startedAt);
                 if (context?.Status == PluginStatus.Loaded)
                 {
-                    LogPluginLoadSuccess(context, displayPath, elapsed);
+                    LogPluginLoadSuccess(context, displayPath, context.LoadTime);
                 }
                 else
                 {
@@ -404,7 +402,9 @@ internal class PluginManager : IPluginManager
 
         try
         {
+            var startedAt = Stopwatch.GetTimestamp();
             plugin.Load(hotReload);
+            context.LoadTime = Stopwatch.GetElapsedTime(startedAt);
             context.Status = PluginStatus.Loaded;
             context.Core = core;
             context.Plugin = plugin;
