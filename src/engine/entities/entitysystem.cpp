@@ -62,8 +62,7 @@ void StartupServerHook(void* _this, const GameSessionConfiguration_t& config, IS
 
     if (!g_pGameEntitySystem)
     {
-        auto offset = g_pGameDataManager->GetOffsets()->Fetch("GameEntitySystem");
-        g_pGameEntitySystem = *reinterpret_cast<CGameEntitySystem**>(reinterpret_cast<uintptr_t>(g_pGameResources) + offset);
+        g_pGameEntitySystem = reinterpret_cast<CGameEntitySystem*>(g_pGameResources->m_pEntityResourceManifestHandler);
         g_pGameEntitySystem->AddListenerEntity(&g_entityListener);
     }
 

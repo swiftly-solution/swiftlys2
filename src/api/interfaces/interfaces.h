@@ -56,6 +56,7 @@
 #include <public/networkstrings/tabledefs.h>
 #include <public/schemasystem/atomictypes.h>
 #include <public/engine2/inetworkserverservice.h>
+#include <public/engine2/igameresourceservice.h>
 
 #include <s2binlib/s2binlib.h>
 
@@ -95,6 +96,6 @@ extern INetworkServerService* g_pGameNetworkServerService;
 extern ICvar* g_pGameCvar;
 extern CSchemaSystem* g_pGameSchemaSystem;
 extern INetworkStringTableContainer* g_pGameNetworkStringTableContainer;
-extern void* g_pGameResources;
+extern CGameResourceService* g_pGameResources;
 
 #endif

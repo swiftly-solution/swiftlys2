@@ -86,4 +86,4 @@ INetworkServerService* g_pGameNetworkServerService = nullptr;
 ICvar* g_pGameCvar = nullptr;
 CSchemaSystem* g_pGameSchemaSystem = nullptr;
 INetworkStringTableContainer* g_pGameNetworkStringTableContainer = nullptr;
-void* g_pGameResources = nullptr;
+CGameResourceService* g_pGameResources = nullptr;

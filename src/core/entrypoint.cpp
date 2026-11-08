@@ -104,7 +104,7 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
     g_pGameCvar = (ICvar*)GetInterface(CVAR_INTERFACE_VERSION);
     g_pGameSchemaSystem = (CSchemaSystem*)GetInterface(SCHEMASYSTEM_INTERFACE_VERSION);
     g_pGameNetworkStringTableContainer = (INetworkStringTableContainer*)GetInterface(SOURCE2ENGINETOSERVERSTRINGTABLE_INTERFACE_VERSION);
-    g_pGameResources = GetInterface(GAMERESOURCESERVICESERVER_INTERFACE_VERSION);
+    g_pGameResources = (CGameResourceService *)GetInterface(GAMERESOURCESERVICESERVER_INTERFACE_VERSION);
 
 #ifdef _WIN32
     void* libServer = load_library(StringWide(Plat_GetGameDirectory() + std::string("\\" + g_sGameFolder + "\\bin\\win64\\server.dll")).c_str());
@@ -361,7 +361,7 @@ std::string SwiftlyCore::GetCurrentGame()
 int SwiftlyCore::GetMaxGameClients()
 {
     PROFILE_FUNCTION();
-    
+
     if(m_iMaxClients == -1)
     {
         if (g_sGameFolder == "csgo")
