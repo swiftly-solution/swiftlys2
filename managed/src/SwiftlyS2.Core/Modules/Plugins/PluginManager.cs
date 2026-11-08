@@ -271,7 +271,22 @@ internal class PluginManager : IPluginManager
 
     private void LoadPlugins()
     {
-        EnumeratePluginDirectories(_rootDirService.GetPluginsRoot(), pluginDir =>
+        var pluginDirs = new List<string>();
+        EnumeratePluginDirectories(_rootDirService.GetPluginsRoot(), pluginDirs.Add);
+
+        var loadOrder = NativeCore.PluginLoadOrder().Split('\x01', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToList();
+        if (loadOrder.Count > 0)
+        {
+            pluginDirs = pluginDirs.OrderBy(dir =>
+            {
+                var dllPath = GetPluginEntrypointPath(dir);
+                var id = File.Exists(dllPath) ? ReadMetadataFromDll(dllPath)?.Id : null;
+                var index = loadOrder.FindIndex(x => x.Equals(id ?? Path.GetFileName(dir), StringComparison.OrdinalIgnoreCase));
+                return index < 0 ? int.MaxValue : index;
+            }).ToList();
+        }
+
+        foreach (var pluginDir in pluginDirs)
         {
             var displayPath = GetDisplayPath(pluginDir);
             var dllName = Path.GetFileName(pluginDir);
@@ -303,7 +318,7 @@ internal class PluginManager : IPluginManager
                     _pluginLoadErrors[dllName] = e.ToString();
                 }
             }
-        });
+        }
 
         RebuildSharedServices();
         NotifyAllPluginsLoaded();
