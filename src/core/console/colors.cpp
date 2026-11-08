@@ -20,40 +20,36 @@
 
 #include <api/shared/profiler.h>
 
-#if _WIN32
+#ifdef _WIN32
 #include <Windows.h>
-#include <stdio.h>
+#include <cstdio>
 
-FILE _ioccc[] = { *stdin, *stdout, *stderr };
+static FILE s_iob[] = {*stdin, *stdout, *stderr};
+
 extern "C" FILE* __cdecl __iob_func(void)
 {
     PROFILE_FUNCTION();
 
-    return _ioccc;
+    return s_iob;
 }
-
-void SetupConsoleColors() {
-    PROFILE_FUNCTION();
-
-    SetConsoleOutputCP(CP_UTF8);
-    SetConsoleCP(CP_UTF8);  
-
-    auto hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-
-    if (hOut == INVALID_HANDLE_VALUE) return;
-
-    DWORD dwMode = 0;
-    if (!GetConsoleMode(hOut, &dwMode)) return;
-
-    dwMode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
-    SetConsoleMode(hOut, dwMode);
-}
-
-#else
 
 void SetupConsoleColors()
 {
     PROFILE_FUNCTION();
-}
 
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
+
+    const HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+    DWORD mode = 0;
+    if (hOut == INVALID_HANDLE_VALUE || !GetConsoleMode(hOut, &mode))
+        return;
+
+    SetConsoleMode(hOut, mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING);
+}
+#else
+void SetupConsoleColors()
+{
+    PROFILE_FUNCTION();
+}
 #endif

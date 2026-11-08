@@ -7,45 +7,43 @@ void* load_library(const char_t* path)
 {
     PROFILE_FUNCTION();
 
-    HMODULE h =::LoadLibraryW(path);
-    return (void*)h;
+    return ::LoadLibraryW(path);
 }
 
-void* get_export(void* h, const char* name)
+void* get_export(void* lib, const char* name)
 {
     PROFILE_FUNCTION();
 
-    void* f = ::GetProcAddress((HMODULE)h, name);
-    return f;
+    return reinterpret_cast<void*>(::GetProcAddress(static_cast<HMODULE>(lib), name));
 }
 
 void unload_library(void* lib)
 {
     PROFILE_FUNCTION();
 
-    if (!lib) return;
-    ::FreeLibrary((HMODULE)lib);
+    if (lib)
+        ::FreeLibrary(static_cast<HMODULE>(lib));
 }
 #else
 void* load_library(const char_t* path)
 {
     PROFILE_FUNCTION();
 
-    void* h = dlopen(path, RTLD_LAZY | RTLD_LOCAL);
-    return h;
+    return dlopen(path, RTLD_LAZY | RTLD_LOCAL);
 }
-void* get_export(void* h, const char* name)
+
+void* get_export(void* lib, const char* name)
 {
     PROFILE_FUNCTION();
 
-    void* f = dlsym(h, name);
-    return f;
+    return dlsym(lib, name);
 }
+
 void unload_library(void* lib)
 {
     PROFILE_FUNCTION();
 
-    if (!lib) return;
-    dlclose(lib);
+    if (lib)
+        dlclose(lib);
 }
 #endif

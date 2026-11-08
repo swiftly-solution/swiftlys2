@@ -4,183 +4,118 @@
 
 #include <api/shared/profiler.h>
 
+#include <algorithm>
+#include <filesystem>
 #include <iostream>
-#include <string.h>
 
-#define MIN(a, b) (((a) < (b)) ? (a) : (b))
+static void* s_hostfxrLib = nullptr;
+static hostfxr_handle s_context = nullptr;
 
-hostfxr_initialize_for_runtime_config_fn _initialize_for_runtime_config = nullptr;
-hostfxr_get_runtime_delegate_fn _get_runtime_delegate = nullptr;
-hostfxr_close_fn _close = nullptr;
-load_assembly_and_get_function_pointer_fn _load_assembly_and_get_function_pointer = nullptr;
-hostfxr_set_runtime_property_value_fn _set_runtime_prop_value = nullptr;
-hostfxr_handle fxrcxt;
+static hostfxr_initialize_for_runtime_config_fn s_initializeForRuntimeConfig = nullptr;
+static hostfxr_get_runtime_delegate_fn s_getRuntimeDelegate = nullptr;
+static hostfxr_close_fn s_close = nullptr;
+static hostfxr_set_runtime_property_value_fn s_setRuntimeProperty = nullptr;
+static load_assembly_and_get_function_pointer_fn s_loadAssemblyAndGetFunctionPointer = nullptr;
 
-void* hostfxr_lib = nullptr;
+static std::filesystem::path s_originPath;
+static std::filesystem::path s_dotnetRoot;
+static std::string s_originPathUtf8;
+static std::string s_logPathUtf8;
 
+template <class Fn>
+[[nodiscard]] static Fn GetHostFxrExport(const char* name)
+{
+    return reinterpret_cast<Fn>(get_export(s_hostfxrLib, name));
+}
+
+[[nodiscard]] static std::filesystem::path ToPath(const std::string& utf8)
+{
 #ifdef _WIN32
-char_t dotnet_path[1024];
+    return std::filesystem::path(StringWide(utf8));
 #else
-char dotnet_path[1024];
+    return std::filesystem::path(utf8);
 #endif
+}
 
-#ifdef _WIN32
-std::wstring widenedOriginPath;
-#else
-std::string widenedOriginPath;
-#endif
-
-std::string original_path;
-
-bool InitializeHostFXR(std::string origin_path)
+bool InitializeHostFXR(std::string_view origin_path)
 {
     PROFILE_FUNCTION();
 
-#ifdef _WIN32
-    for (size_t i = 0; i < origin_path.size(); ++i)
-    {
-        if (origin_path[i] == '/')
-        {
-            origin_path[i] = '\\';
-        }
-    }
-#endif
-
-    original_path = origin_path;
-
-#ifdef _WIN32
-    widenedOriginPath = StringWide(origin_path);
-#else
-    widenedOriginPath = origin_path;
-#endif
-
-    // Construct hostfxr library path
-#ifdef _WIN32
-    std::wstring hostfxr_path = widenedOriginPath + L"bin\\win64\\hostfxr.dll";
-#else
-    std::string hostfxr_path = widenedOriginPath + "bin/linuxsteamrt64/libhostfxr.so";
-#endif
-
-    hostfxr_lib = load_library(hostfxr_path.c_str());
-    if (!hostfxr_lib)
-    {
-        std::cerr << "[Swiftly] Error: Failed to load hostfxr library from: " << original_path << std::endl;
-        return false;
-    }
-
-    _initialize_for_runtime_config = (hostfxr_initialize_for_runtime_config_fn)get_export(hostfxr_lib, "hostfxr_initialize_for_runtime_config");
-    if (!_initialize_for_runtime_config)
-    {
-        return false;
-    }
-
-    _get_runtime_delegate = (hostfxr_get_runtime_delegate_fn)get_export(hostfxr_lib, "hostfxr_get_runtime_delegate");
-    if (!_get_runtime_delegate)
-    {
-        return false;
-    }
-
-    _close = (hostfxr_close_fn)get_export(hostfxr_lib, "hostfxr_close");
-    if (!_close)
-    {
-        return false;
-    }
-
-    _set_runtime_prop_value = (hostfxr_set_runtime_property_value_fn)get_export(hostfxr_lib, "hostfxr_set_runtime_property_value");
-    if (!_set_runtime_prop_value)
-    {
-        return false;
-    }
-
-    // Initialize params structure completely
-    hostfxr_initialize_parameters params;
-    memset(&params, 0, sizeof(params));
-    params.size = sizeof(hostfxr_initialize_parameters);
-
-#ifdef _WIN32
-    std::wstring dotnet_root_path = widenedOriginPath + L"bin\\managed\\dotnet";
-    std::wstring runtime_config_path = widenedOriginPath + L"bin\\managed\\SwiftlyS2.CS2.runtimeconfig.json";
-#else
-    std::string dotnet_root_path = widenedOriginPath + "bin/managed/dotnet";
-    std::string runtime_config_path = widenedOriginPath + "bin/managed/SwiftlyS2.CS2.runtimeconfig.json";
-#endif
-
-    // Validate origin path
-    if (widenedOriginPath.empty())
+    if (origin_path.empty())
     {
         std::cerr << "[Swiftly] Error: Origin path is empty!" << std::endl;
         return false;
     }
 
-    // Validate constructed paths
-    if (dotnet_root_path.empty() || runtime_config_path.empty())
+    s_originPathUtf8 = origin_path;
+#ifdef _WIN32
+    std::ranges::replace(s_originPathUtf8, '/', '\\');
+#endif
+    s_originPath = ToPath(s_originPathUtf8);
+
+    const auto hostfxrPath = s_originPath / "bin" / WIN_LIN("win64", "linuxsteamrt64") / WIN_LIN("hostfxr.dll", "libhostfxr.so");
+    s_hostfxrLib = load_library(hostfxrPath.c_str());
+    if (!s_hostfxrLib)
     {
-        std::cerr << "[Swiftly] Error: Runtime paths are empty. Origin path: " << original_path << std::endl;
+        std::cerr << "[Swiftly] Error: Failed to load hostfxr library from: " << s_originPathUtf8 << std::endl;
         return false;
     }
 
-    // Clear and copy dotnet root path to buffer with bounds checking
-    memset(dotnet_path, 0, sizeof(dotnet_path));
-#ifdef _WIN32
-    size_t copy_size = MIN(dotnet_root_path.size() * sizeof(wchar_t), sizeof(dotnet_path) - sizeof(wchar_t));
-#else
-    size_t copy_size = MIN(dotnet_root_path.size(), sizeof(dotnet_path) - 1);
-#endif
-    memcpy(dotnet_path, dotnet_root_path.c_str(), copy_size);
+    s_initializeForRuntimeConfig = GetHostFxrExport<hostfxr_initialize_for_runtime_config_fn>("hostfxr_initialize_for_runtime_config");
+    s_getRuntimeDelegate = GetHostFxrExport<hostfxr_get_runtime_delegate_fn>("hostfxr_get_runtime_delegate");
+    s_close = GetHostFxrExport<hostfxr_close_fn>("hostfxr_close");
+    s_setRuntimeProperty = GetHostFxrExport<hostfxr_set_runtime_property_value_fn>("hostfxr_set_runtime_property_value");
+    if (!s_initializeForRuntimeConfig || !s_getRuntimeDelegate || !s_close || !s_setRuntimeProperty)
+        return false;
 
-    params.dotnet_root = dotnet_path;
+    s_dotnetRoot = s_originPath / "bin" / "managed" / "dotnet";
+    const auto runtimeConfigPath = s_originPath / "bin" / "managed" / "SwiftlyS2.CS2.runtimeconfig.json";
 
-    // Initialize .NET runtime (using local variable to avoid dangling pointer)
-    int returnCode = _initialize_for_runtime_config(runtime_config_path.c_str(), &params, &fxrcxt);
+    hostfxr_initialize_parameters params{};
+    params.size = sizeof(params);
+    params.dotnet_root = s_dotnetRoot.c_str();
+
+    int returnCode = s_initializeForRuntimeConfig(runtimeConfigPath.c_str(), &params, &s_context);
     if (returnCode != 0)
     {
         std::cerr << "[Swiftly] Error: Failed to initialize .NET runtime (code: " << returnCode << ")" << std::endl;
-        std::cerr << "[Swiftly] Config path: " << original_path << std::endl;
-        _close(fxrcxt);
+        std::cerr << "[Swiftly] Config path: " << s_originPathUtf8 << std::endl;
+        s_close(s_context);
         return false;
     }
 
-    _set_runtime_prop_value(fxrcxt, WIN_LIN(L"APP_CONTEXT_BASE_DIRECTORY", "APP_CONTEXT_BASE_DIRECTORY"), dotnet_path);
+    s_setRuntimeProperty(s_context, STR("APP_CONTEXT_BASE_DIRECTORY"), s_dotnetRoot.c_str());
 
-    returnCode = _get_runtime_delegate(fxrcxt, hdt_load_assembly_and_get_function_pointer, (void**)&_load_assembly_and_get_function_pointer);
-    if (returnCode != 0 || (void*)_load_assembly_and_get_function_pointer == nullptr)
+    returnCode = s_getRuntimeDelegate(s_context, hdt_load_assembly_and_get_function_pointer, reinterpret_cast<void**>(&s_loadAssemblyAndGetFunctionPointer));
+    if (returnCode != 0 || !s_loadAssemblyAndGetFunctionPointer)
     {
-        _close(fxrcxt);
+        s_close(s_context);
         return false;
     }
 
     return true;
 }
 
-bool InitializeDotNetAPI(void* scripting_table, int scripting_table_size, std::string log_path)
+bool InitializeDotNetAPI(void* scripting_table, int scripting_table_size, std::string_view log_path)
 {
     PROFILE_FUNCTION();
 
-    typedef void(CORECLR_DELEGATE_CALLTYPE * custom_loader_fn)(void*, int, const char*, const char*);
+    using custom_loader_fn = void(CORECLR_DELEGATE_CALLTYPE*)(void*, int, const char*, const char*);
     static custom_loader_fn custom_loader = nullptr;
 
-    if (custom_loader == nullptr)
+    if (custom_loader)
+        return true;
+
+    const auto dllPath = s_originPath / "bin" / "managed" / "SwiftlyS2.CS2.dll";
+    const int returnCode = s_loadAssemblyAndGetFunctionPointer(dllPath.c_str(), STR("SwiftlyS2.Entrypoint, SwiftlyS2.CS2"), STR("Start"), UNMANAGEDCALLERSONLY_METHOD, nullptr, reinterpret_cast<void**>(&custom_loader));
+    if (returnCode != 0 || !custom_loader)
     {
-        // Construct DLL path as local variable to avoid dangling pointer
-#ifdef _WIN32
-        std::wstring dll_path = widenedOriginPath + L"bin\\managed\\SwiftlyS2.CS2.dll";
-#else
-        std::string dll_path = widenedOriginPath + "bin/managed/SwiftlyS2.CS2.dll";
-#endif
-
-        int returnCode = _load_assembly_and_get_function_pointer(dll_path.c_str(), STR("SwiftlyS2.Entrypoint, SwiftlyS2.CS2"), STR("Start"), UNMANAGEDCALLERSONLY_METHOD, nullptr, (void**)&custom_loader);
-
-        if (returnCode != 0 || (void*)custom_loader == nullptr)
-        {
-            std::cerr << "[Swiftly] Error: Failed to load .NET assembly (code: " << returnCode << ")" << std::endl;
-            return false;
-        }
-
-        static std::string s = log_path;
-
-        // Pass the callback setter function pointer to C#
-        custom_loader(scripting_table, scripting_table_size, original_path.c_str(), s.c_str());
+        std::cerr << "[Swiftly] Error: Failed to load .NET assembly (code: " << returnCode << ")" << std::endl;
+        return false;
     }
+
+    s_logPathUtf8 = log_path;
+    custom_loader(scripting_table, scripting_table_size, s_originPathUtf8.c_str(), s_logPathUtf8.c_str());
 
     return true;
 }

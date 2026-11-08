@@ -19,11 +19,13 @@
 #ifndef _core_entrypoint_h
 #define _core_entrypoint_h
 
-#include <string>
-#include <public/steamworks/steam_api_common.h>
 #include <public/steamworks/isteamugc.h>
+#include <public/steamworks/steam_api_common.h>
 
-typedef void* (*CreateIFaceFn)(const char* name, int* returnCode);
+#include <string>
+#include <string_view>
+
+using CreateIFaceFn = void* (*)(const char* name, int* returnCode);
 
 enum class BridgeKind_t
 {
@@ -33,26 +35,33 @@ enum class BridgeKind_t
 class SwiftlyCore
 {
 private:
-    BridgeKind_t m_iKind;
+    BridgeKind_t m_iKind = BridgeKind_t::SwiftlyLoader;
     std::string m_sCorePath;
     std::string m_sLogPath;
     int m_iMaxClients = -1;
 
 public:
-    bool Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFaceFn engineFactory);
+    [[nodiscard]] bool Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFaceFn engineFactory);
     bool Unload();
 
-    void OnMapLoad(std::string map_name);
+    void OnMapLoad(std::string_view map_name);
     void OnMapUnload();
 
-    void* GetInterface(const std::string& iface_name);
+    [[nodiscard]] void* GetInterface(const std::string& iface_name);
+
+    template <class T>
+    [[nodiscard]] T* GetInterfaceAs(const std::string& iface_name)
+    {
+        return static_cast<T*>(GetInterface(iface_name));
+    }
+
     void SendConsoleMessage(const std::string& message);
 
-    std::string GetCurrentGame();
-    int GetMaxGameClients();
+    [[nodiscard]] std::string GetCurrentGame();
+    [[nodiscard]] int GetMaxGameClients();
 
-    std::string& GetCorePath();
-    std::string GetVersion();
+    [[nodiscard]] std::string& GetCorePath();
+    [[nodiscard]] std::string GetVersion();
 };
 
 extern SwiftlyCore g_SwiftlyCore;
