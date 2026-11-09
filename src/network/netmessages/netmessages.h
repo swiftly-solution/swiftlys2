@@ -29,16 +29,16 @@
 class CNetMessages : public INetMessages
 {
 public:
+    void RegisterMessageHook(NetMessageHookType type, int messageid) override;
+    void UnregisterMessageHook(NetMessageHookType type, int messageid) override;
+    [[nodiscard]] bool IsMessageRegistered(NetMessageHookType type, int messageid) override;
 
-    virtual void RegisterMessageHook(NetMessageHookType type, int messageid) override;
-    virtual void UnregisterMessageHook(NetMessageHookType type, int messageid) override;
-    virtual bool IsMessageRegistered(NetMessageHookType type, int messageid) override;
+    void SetServerMessageSendHandler(std::function<int(uint64_t*, int, void*)> handler) override;
+    void SetClientMessageSendHandler(std::function<int(int, int, void*)> handler) override;
+    void SetServerMessageInternalSendHandler(std::function<int(int, int, void*)> handler) override;
 
-    virtual void SetServerMessageSendHandler(std::function<int(uint64_t*, int, void*)> handler) override;
-    virtual void SetClientMessageSendHandler(std::function<int(int, int, void*)> handler) override;
-    virtual void SetServerMessageInternalSendHandler(std::function<int(int, int, void*)> handler) override;
 private:
-    static bool IsValidHook(NetMessageHookType type, int messageid);
+    [[nodiscard]] static bool IsValidHook(NetMessageHookType type, int messageid);
 
     static constexpr int MESSAGE_COUNT = 16385;
     std::atomic<uint64_t> m_registeredMessages[NetMessageHook_Count][(MESSAGE_COUNT + 63) / 64]{};

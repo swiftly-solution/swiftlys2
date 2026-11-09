@@ -27,9 +27,11 @@
 
 #include <public/tier0/keyvalues.h>
 
-#include <format>
 #include <scripting/engine/events.h>
 #include <public/engine2/gamesessionconfiguration.h>
+
+#include <format>
+#include <utility>
 
 class ISource2WorldSession;
 
@@ -42,23 +44,23 @@ static IGameEventManager2* ResolveGameEventManager()
 {
     PROFILE_FUNCTION();
 
-    uintptr_t rawGameEventManager = (uintptr_t)(g_pGameDataManager->GetSignatures()->Fetch("CSource2Server::g_GameEventManager"));
-    if (!rawGameEventManager) return nullptr;
+    auto address = reinterpret_cast<uintptr_t>(g_pGameDataManager->GetSignatures()->Fetch("CSource2Server::g_GameEventManager"));
+    if (!address) return nullptr;
 
-    rawGameEventManager += 3;
-    rawGameEventManager += 4 + *(int*)(rawGameEventManager);
+    address += 3;
+    address += 4 + *reinterpret_cast<int*>(address);
 
-    return *(IGameEventManager2**)(rawGameEventManager);
+    return *reinterpret_cast<IGameEventManager2**>(address);
 }
 
-void PreworldUpdateHook(void* _this, bool simulate);
+static void PreworldUpdateHook(void* _this, bool simulate);
 VFunctionHook g_PreworldUpdateHook(reinterpret_cast<void*>(PreworldUpdateHook), "server", "CSource2Server", "IServerGameDLL::PreWorldUpdate");
 
-void StartupServerEventHook(void* _this, const GameSessionConfiguration_t& config, ISource2WorldSession* a, const char* b);
+static void StartupServerEventHook(void* _this, const GameSessionConfiguration_t& config, ISource2WorldSession* a, const char* b);
 VFunctionHook g_StartupServerEventHook(reinterpret_cast<void*>(StartupServerEventHook), "engine2", "CNetworkServerService", "INetworkServerService::StartupServer");
 
-bool FireEventHook(IGameEventManager2* _this, IGameEvent* event, bool bDontBroadcast);
-VFunctionHook g_FireEventHook(reinterpret_cast<void*>(FireEventHook), []() -> void* { return ResolveGameEventManager(); }, "IGameEventManager2::FireEvent");
+static bool FireEventHook(IGameEventManager2* _this, IGameEvent* event, bool bDontBroadcast);
+VFunctionHook g_FireEventHook(reinterpret_cast<void*>(FireEventHook), [] -> void* { return ResolveGameEventManager(); }, "IGameEventManager2::FireEvent");
 
 void CEventManager::Initialize()
 {
@@ -69,8 +71,7 @@ void CEventManager::Initialize()
     QueueListener("player_spawn");
 }
 
-
-void PreworldUpdateHook(void* _this, bool simulate)
+static void PreworldUpdateHook(void* _this, bool simulate)
 {
     reinterpret_cast<decltype(&PreworldUpdateHook)>(g_PreworldUpdateHook.GetOriginal())(_this, simulate);
 
@@ -80,7 +81,7 @@ void PreworldUpdateHook(void* _this, bool simulate)
         g_pOnPreworldUpdateCallback(simulate);
 }
 
-bool FireEventHook(IGameEventManager2* _this, IGameEvent* event, bool bDontBroadcast)
+static bool FireEventHook(IGameEventManager2* _this, IGameEvent* event, bool bDontBroadcast)
 {
     static constexpr uint32_t k_uPlayerSpawnHash = hash_32_fnv1a_const("player_spawn");
 
@@ -124,8 +125,8 @@ bool FireEventHook(IGameEventManager2* _this, IGameEvent* event, bool bDontBroad
     {
         int userid = dupEvent->GetInt("userid", -1);
         if (userid != -1) {
-            auto player = g_pPlayerManager->GetPlayer(userid);
-            if (player) player->SetFirstSpawn(false);
+            if (auto* player = g_pPlayerManager->GetPlayer(userid))
+                player->SetFirstSpawn(false);
         }
     }
 
@@ -141,7 +142,7 @@ bool FireEventHook(IGameEventManager2* _this, IGameEvent* event, bool bDontBroad
     return result;
 }
 
-void StartupServerEventHook(void* _this, const GameSessionConfiguration_t& config, ISource2WorldSession* a, const char* b)
+static void StartupServerEventHook(void* _this, const GameSessionConfiguration_t& config, ISource2WorldSession* a, const char* b)
 {
     reinterpret_cast<decltype(&StartupServerEventHook)>(g_StartupServerEventHook.GetOriginal())(_this, config, a, b);
 
@@ -196,14 +197,14 @@ void CEventManager::SetGameEventFireHandler(GameEventFireHandler handler)
 {
     PROFILE_FUNCTION();
 
-    g_fnEventFireHandler = handler;
+    g_fnEventFireHandler = std::move(handler);
 }
 
 void CEventManager::SetPostGameEventFireHandler(GameEventFireHandler handler)
 {
     PROFILE_FUNCTION();
 
-    g_fnPostEventFireHandler = handler;
+    g_fnPostEventFireHandler = std::move(handler);
 }
 
 IGameEventManager2* CEventManager::GetGameEventManager()
@@ -300,11 +301,11 @@ void CEventManager::AddEngineListener(const std::string& event_name)
         g_gameEventManager->AddListener(this, event_name.c_str(), true);
 
     g_pLogger->Debug("Game Events", std::format("Registered listener for event '{}'.\n", event_name));
-    if(!bInitializedEvents)
+    if (!bInitializedEvents)
     {
         bInitializedEvents = true;
-        std::vector<std::string> fileNames = {"resource/mod.gameevents", "resource/core.gameevents", "resource/game.gameevents"};
-        for(const auto& file : fileNames)
+        std::vector<std::string> fileNames = { "resource/mod.gameevents", "resource/core.gameevents", "resource/game.gameevents" };
+        for (const auto& file : fileNames)
         {
             KeyValues v("");
             v.LoadFromFile(g_pGameFileSystem, file.c_str());

@@ -24,9 +24,9 @@
 
 #include <optional>
 
-typedef void (*QueryClientCvarCallback)(int, const char*, const char*);
-typedef void (*GlobalChangeListenerCallback)(const char*, int, const char*, const char*);
-typedef void (*ConvarNameCallback)(const char*);
+using QueryClientCvarCallback = void (*)(int, const char*, const char*);
+using GlobalChangeListenerCallback = void (*)(const char*, int, const char*, const char*);
+using ConvarNameCallback = void (*)(const char*);
 
 extern bool bypassConvarCallbacks;
 
@@ -53,34 +53,27 @@ int Bridge_Convars_AddQueryClientCvarCallback(QueryClientCvarCallback callback)
         });
 }
 
-void Bridge_Convars_RemoveQueryClientCvarCallback(int callbackId)
-{
-    PROFILE_FUNCTION();
-
-    g_pConvarManager->RemoveQueryClientCvarCallback(callbackId);
-}
-
 static ConvarValue ReadConvarValue(EConVarType type, const void* value)
 {
     PROFILE_FUNCTION();
 
     switch (type)
     {
-        case EConVarType_Int16: return *(const int16_t*)value;
-        case EConVarType_UInt16: return *(const uint16_t*)value;
-        case EConVarType_Int32: return *(const int32_t*)value;
-        case EConVarType_UInt32: return *(const uint32_t*)value;
-        case EConVarType_Int64: return *(const int64_t*)value;
-        case EConVarType_UInt64: return *(const uint64_t*)value;
-        case EConVarType_Bool: return *(const bool*)value;
-        case EConVarType_Float32: return *(const float*)value;
-        case EConVarType_Float64: return *(const double*)value;
-        case EConVarType_Color: return *(const Color*)value;
-        case EConVarType_Vector2: return *(const Vector2D*)value;
-        case EConVarType_Vector3: return *(const Vector*)value;
-        case EConVarType_Vector4: return *(const Vector4D*)value;
-        case EConVarType_Qangle: return *(const QAngle*)value;
-        case EConVarType_String: return std::string((const char*)value);
+        case EConVarType_Int16: return *static_cast<const int16_t*>(value);
+        case EConVarType_UInt16: return *static_cast<const uint16_t*>(value);
+        case EConVarType_Int32: return *static_cast<const int32_t*>(value);
+        case EConVarType_UInt32: return *static_cast<const uint32_t*>(value);
+        case EConVarType_Int64: return *static_cast<const int64_t*>(value);
+        case EConVarType_UInt64: return *static_cast<const uint64_t*>(value);
+        case EConVarType_Bool: return *static_cast<const bool*>(value);
+        case EConVarType_Float32: return *static_cast<const float*>(value);
+        case EConVarType_Float64: return *static_cast<const double*>(value);
+        case EConVarType_Color: return *static_cast<const Color*>(value);
+        case EConVarType_Vector2: return *static_cast<const Vector2D*>(value);
+        case EConVarType_Vector3: return *static_cast<const Vector*>(value);
+        case EConVarType_Vector4: return *static_cast<const Vector4D*>(value);
+        case EConVarType_Qangle: return *static_cast<const QAngle*>(value);
+        case EConVarType_String: return std::string(static_cast<const char*>(value));
         default: return 0;
     }
 }
@@ -109,7 +102,7 @@ void Bridge_Convars_CreateConvar(const char* convarName, int cvarType, uint64_t 
 {
     PROFILE_FUNCTION();
 
-    auto type = (EConVarType)cvarType;
+    auto type = static_cast<EConVarType>(cvarType);
     if (!defaultValue) return;
 
     std::optional<ConvarValue> minValueOptional;
@@ -121,13 +114,6 @@ void Bridge_Convars_CreateConvar(const char* convarName, int cvarType, uint64_t 
     }
 
     g_pConvarManager->CreateConvar(convarName, type, cvarFlags, helpMessage, ReadConvarValue(type, defaultValue), minValueOptional, maxValueOptional);
-}
-
-void Bridge_Convars_DeleteConvar(const char* convarName)
-{
-    PROFILE_FUNCTION();
-
-    g_pConvarManager->DeleteConvar(convarName);
 }
 
 bool Bridge_Convars_ExistsConvar(const char* convarName)
@@ -143,7 +129,7 @@ int Bridge_Convars_GetConvarType(const char* convarName)
     PROFILE_FUNCTION();
 
     auto& cvar = GetConVarRef(convarName);
-    return (int)(cvar.GetType());
+    return static_cast<int>(cvar.GetType());
 }
 
 uint64_t Bridge_Convars_GetFlags(const char* cvarName)
@@ -255,7 +241,7 @@ void Bridge_Convars_SetValuePtr(const char* cvarName, void* value)
     PROFILE_FUNCTION();
 
     auto& cvar = GetConVarRef(cvarName);
-    cvar.SetOrQueueValueInternal(0, (CVValue_t*)value);
+    cvar.SetOrQueueValueInternal(0, static_cast<CVValue_t*>(value));
 }
 
 void Bridge_Convars_SetValueInternalPtr(const char* cvarName, void* value)
@@ -264,7 +250,7 @@ void Bridge_Convars_SetValueInternalPtr(const char* cvarName, void* value)
 
     bypassConvarCallbacks = true;
     auto& cvar = GetConVarRef(cvarName);
-    cvar.SetValueInternal(0, (CVValue_t*)value);
+    cvar.SetValueInternal(0, static_cast<CVValue_t*>(value));
     bypassConvarCallbacks = false;
 }
 
@@ -385,7 +371,6 @@ char* Bridge_Convars_GetDescription(int* size, const char* cvarName)
 
 DEFINE_NATIVE("Convars.QueryClientConvar", Bridge_Convars_QueryClientConvar);
 DEFINE_NATIVE("Convars.AddQueryClientCvarCallback", Bridge_Convars_AddQueryClientCvarCallback);
-DEFINE_NATIVE("Convars.RemoveQueryClientCvarCallback", Bridge_Convars_RemoveQueryClientCvarCallback);
 DEFINE_NATIVE("Convars.AddGlobalChangeListener", Bridge_Convars_AddGlobalChangeListener);
 DEFINE_NATIVE("Convars.RemoveGlobalChangeListener", Bridge_Convars_RemoveGlobalChangeListener);
 DEFINE_NATIVE("Convars.AddConvarCreatedListener", Bridge_Convars_AddConvarCreatedListener);
@@ -393,7 +378,6 @@ DEFINE_NATIVE("Convars.RemoveConvarCreatedListener", Bridge_Convars_RemoveConvar
 DEFINE_NATIVE("Convars.AddConCommandCreatedListener", Bridge_Convars_AddConCommandCreatedListener);
 DEFINE_NATIVE("Convars.RemoveConCommandCreatedListener", Bridge_Convars_RemoveConCommandCreatedListener);
 DEFINE_NATIVE("Convars.CreateConvar", Bridge_Convars_CreateConvar);
-DEFINE_NATIVE("Convars.DeleteConvar", Bridge_Convars_DeleteConvar);
 DEFINE_NATIVE("Convars.ExistsConvar", Bridge_Convars_ExistsConvar);
 DEFINE_NATIVE("Convars.GetConvarType", Bridge_Convars_GetConvarType);
 DEFINE_NATIVE("Convars.GetFlags", Bridge_Convars_GetFlags);

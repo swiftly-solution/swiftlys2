@@ -42,7 +42,7 @@ CGameEntitySystem* GameEntitySystem()
     return g_pGameEntitySystem;
 }
 
-void StartupServerHook(void* _this, const GameSessionConfiguration_t& config, ISource2WorldSession* a, const char* b);
+static void StartupServerHook(void* _this, const GameSessionConfiguration_t& config, ISource2WorldSession* a, const char* b);
 
 VFunctionHook g_StartupServerHook(reinterpret_cast<void*>(StartupServerHook), "engine2", "CNetworkServerService", "INetworkServerService::StartupServer");
 
@@ -54,7 +54,7 @@ void CEntSystem::Shutdown()
         g_pGameEntitySystem->RemoveListenerEntity(&g_entityListener);
 }
 
-void StartupServerHook(void* _this, const GameSessionConfiguration_t& config, ISource2WorldSession* a, const char* b)
+static void StartupServerHook(void* _this, const GameSessionConfiguration_t& config, ISource2WorldSession* a, const char* b)
 {
     reinterpret_cast<decltype(&StartupServerHook)>(g_StartupServerHook.GetOriginal())(_this, config, a, b);
 

@@ -116,14 +116,6 @@ internal static class NativeEngineHelpers
         return ret;
     }
 
-    private unsafe static delegate* unmanaged<nint> _GetNetworkGameServer;
-
-    public unsafe static nint GetNetworkGameServer()
-    {
-        var ret = _GetNetworkGameServer();
-        return ret;
-    }
-
     private unsafe static delegate* unmanaged<int*, byte*> _GetGameDirectoryPath;
 
     public unsafe static string GetGameDirectoryPath()

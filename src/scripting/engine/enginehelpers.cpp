@@ -156,13 +156,6 @@ void* Bridge_EngineHelpers_GetGlobalVars()
     return g_pGameEngine->GetServerGlobals();
 }
 
-void* Bridge_EngineHelpers_GetNetworkGameServer()
-{
-    PROFILE_FUNCTION();
-
-    return g_pGameNetworkServerService->GetIGameServer();
-}
-
 char* Bridge_EngineHelpers_GetIP(int* size)
 {
     PROFILE_FUNCTION();
@@ -205,5 +198,4 @@ DEFINE_NATIVE("EngineHelpers.GetMenuSettings", Bridge_EngineHelpers_GetMenuSetti
 DEFINE_NATIVE("EngineHelpers.GetGlobalVars", Bridge_EngineHelpers_GetGlobalVars);
 DEFINE_NATIVE("EngineHelpers.GetGameDirectoryPath", Bridge_EngineHelpers_GetGameDirectoryPath);
 DEFINE_NATIVE("EngineHelpers.GetWorkshopId", Bridge_EngineHelpers_GetWorkshopId);
-DEFINE_NATIVE("EngineHelpers.GetNetworkGameServer", Bridge_EngineHelpers_GetNetworkGameServer);
 DEFINE_NATIVE("EngineHelpers.DispatchParticleEffect", Bridge_EngineHelpers_DispatchParticleEffect);

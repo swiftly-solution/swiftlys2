@@ -21,7 +21,7 @@
 
 #include <api/shared/profiler.h>
 
-typedef void (*ConsoleListenerCallback)(const char*);
+using ConsoleListenerCallback = void (*)(const char*);
 
 uint64_t Bridge_ConsoleOutput_AddConsoleListener(ConsoleListenerCallback callback)
 {
@@ -37,13 +37,6 @@ void Bridge_ConsoleOutput_RemoveConsoleListener(uint64_t listenerId)
     PROFILE_FUNCTION();
 
     g_pConsoleOutput->RemoveConsoleListener(listenerId);
-}
-
-void Bridge_ConsoleOutput_DispatchQueuedListeners()
-{
-    PROFILE_FUNCTION();
-
-    g_pConsoleOutput->DispatchQueuedListeners();
 }
 
 bool Bridge_ConsoleOutput_IsEnabled()
@@ -71,7 +64,7 @@ bool Bridge_ConsoleOutput_NeedsFiltering(const char* text)
 {
     PROFILE_FUNCTION();
 
-    return g_pConsoleOutput->NeedsFiltering((char*)text);
+    return g_pConsoleOutput->NeedsFiltering(const_cast<char*>(text));
 }
 
 char* Bridge_ConsoleOutput_GetCounterText(int* size)
@@ -85,7 +78,6 @@ char* Bridge_ConsoleOutput_GetCounterText(int* size)
 
 DEFINE_NATIVE("ConsoleOutput.AddConsoleListener", Bridge_ConsoleOutput_AddConsoleListener);
 DEFINE_NATIVE("ConsoleOutput.RemoveConsoleListener", Bridge_ConsoleOutput_RemoveConsoleListener);
-DEFINE_NATIVE("ConsoleOutput.DispatchQueuedListeners", Bridge_ConsoleOutput_DispatchQueuedListeners);
 DEFINE_NATIVE("ConsoleOutput.IsEnabled", Bridge_ConsoleOutput_IsEnabled);
 DEFINE_NATIVE("ConsoleOutput.ToggleFilter", Bridge_ConsoleOutput_ToggleFilter);
 DEFINE_NATIVE("ConsoleOutput.ReloadFilterConfiguration", Bridge_ConsoleOutput_ReloadFilterConfiguration);

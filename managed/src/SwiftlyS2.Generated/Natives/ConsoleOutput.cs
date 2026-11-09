@@ -29,16 +29,6 @@ internal static class NativeConsoleOutput
         _RemoveConsoleListener(listenerId);
     }
 
-    private unsafe static delegate* unmanaged<void> _DispatchQueuedListeners;
-
-    /// <summary>
-    /// dispatches queued listener messages from the current safe native frame
-    /// </summary>
-    public unsafe static void DispatchQueuedListeners()
-    {
-        _DispatchQueuedListeners();
-    }
-
     private unsafe static delegate* unmanaged<byte> _IsEnabled;
 
     /// <summary>

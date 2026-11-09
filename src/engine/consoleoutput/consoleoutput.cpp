@@ -29,16 +29,17 @@
 #include <api/shared/files.h>
 #include <api/shared/profiler.h>
 
+#include <cstring>
 #include <utility>
 
 using json = nlohmann::json;
 
 extern CConsoleOutput g_ConsoleOutput;
 
-int CLoggingSystem_LogDirectHook(void* loggingSystem, int channel, int severity, void* data, char const* str, va_list* args);
+static int CLoggingSystem_LogDirectHook(void* loggingSystem, int channel, int severity, void* data, char const* str, va_list* args);
 FunctionHook g_CLoggingSystem_LogDirect_Hook(reinterpret_cast<void*>(CLoggingSystem_LogDirectHook), "CLoggingSystem::LogDirect");
 
-int CLoggingSystem_LogDirectHook(void* loggingSystem, int channel, int severity, void* data, char const* str, va_list* args)
+static int CLoggingSystem_LogDirectHook(void* loggingSystem, int channel, int severity, void* data, char const* str, va_list* args)
 {
     PROFILE_FUNCTION();
 
@@ -241,7 +242,7 @@ void CConsoleOutput::ReloadFilterConfiguration()
         PCRE2_SIZE erroffset;
         int errorcode;
 
-        pcre2_code* code = pcre2_compile((PCRE2_SPTR8)(value.get<std::string>().c_str()), PCRE2_ZERO_TERMINATED, 0, &errorcode, &erroffset, nullptr);
+        pcre2_code* code = pcre2_compile(reinterpret_cast<PCRE2_SPTR8>(value.get<std::string>().c_str()), PCRE2_ZERO_TERMINATED, 0, &errorcode, &erroffset, nullptr);
         if (!code) {
             g_pLogger->Error("Console Filter", std::format("The regex for \"{}\" is not valid.\n", key));
             g_pLogger->Error("Console Filter", std::format("Failed to compile at offset {}.\n", erroffset));
@@ -285,8 +286,8 @@ bool CConsoleOutput::NeedsFiltering(char* text)
 
     if (!IsEnabled()) return false;
 
-    const PCRE2_SPTR str = (PCRE2_SPTR)text;
-    const PCRE2_SIZE len = (PCRE2_SIZE)strlen(text);
+    const auto str = reinterpret_cast<PCRE2_SPTR>(text);
+    const auto len = static_cast<PCRE2_SIZE>(strlen(text));
 
     std::lock_guard<std::mutex> lock(m_FiltersMutex);
 
@@ -356,8 +357,7 @@ void CConsoleOutput::DispatchQueuedListeners()
     if (!m_HasQueuedMessages.load(std::memory_order_acquire)) return;
     if (ConsoleDispatchScope::Contains(this)) return;
 
-    // The worker is the normal consumer. An explicit command-output flush may race it;
-    // wait for the active batch so the capture window cannot close too early.
+    // Only the worker thread dispatches; the mutex keeps batches ordered.
     std::lock_guard<std::mutex> dispatchLock(m_DispatchMutex);
     ConsoleDispatchScope scope(this);
 

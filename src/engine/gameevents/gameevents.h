@@ -38,24 +38,25 @@
 class CEventManager : public IEventManager, public IGameEventListener2
 {
 public:
-    virtual void Initialize() override;
+    void Initialize() override;
 
-    virtual void OnServerStartup() override;
+    void OnServerStartup() override;
 
-    virtual void RegisterGameEventListener(std::string event_name) override;
-    virtual void UnregisterGameEventListener(std::string event_name) override;
-    virtual bool IsEventRegistered(uint32_t event_hash) override;
+    void RegisterGameEventListener(std::string event_name) override;
+    void UnregisterGameEventListener(std::string event_name) override;
+    [[nodiscard]] bool IsEventRegistered(uint32_t event_hash) override;
 
-    virtual void SetGameEventFireHandler(GameEventFireHandler handler) override;
-    virtual void SetPostGameEventFireHandler(GameEventFireHandler handler) override;
+    void SetGameEventFireHandler(GameEventFireHandler handler) override;
+    void SetPostGameEventFireHandler(GameEventFireHandler handler) override;
     
-    virtual int GetGameEventListenerID(std::string event_name) override;
-    virtual void RegisterGameEventListenerID(std::string event_name, int id) override;
+    [[nodiscard]] int GetGameEventListenerID(std::string event_name) override;
 
-    virtual IGameEventManager2* GetGameEventManager() override;
+    [[nodiscard]] IGameEventManager2* GetGameEventManager() override;
 
-    virtual void FireGameEvent(IGameEvent* event) override;
+    void FireGameEvent(IGameEvent* event) override;
+
 private:
+    void RegisterGameEventListenerID(std::string event_name, int id);
     void QueueListener(const std::string& event_name);
     void AddEngineListener(const std::string& event_name);
     void DrainEngineListeners();

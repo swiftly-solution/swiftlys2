@@ -37,20 +37,19 @@ public:
     CConsoleOutput();
     ~CConsoleOutput();
 
-    bool ProcessLogMessage(const char* str, va_list* args);
+    [[nodiscard]] bool ProcessLogMessage(const char* str, va_list* args);
 
-    virtual void Initialize() override;
-    virtual void Shutdown() override;
+    void Initialize() override;
+    void Shutdown() override;
 
-    virtual void ReloadFilterConfiguration() override;
-    virtual void ToggleFilter() override;
-    virtual bool IsEnabled() override;
-    virtual bool NeedsFiltering(char* text) override;
-    virtual std::string GetCounterText() override;
+    void ReloadFilterConfiguration() override;
+    void ToggleFilter() override;
+    [[nodiscard]] bool IsEnabled() override;
+    [[nodiscard]] bool NeedsFiltering(char* text) override;
+    [[nodiscard]] std::string GetCounterText() override;
 
-    virtual uint64_t AddConsoleListener(std::function<void(const std::string&)> callback) override;
-    virtual void RemoveConsoleListener(uint64_t id) override;
-    virtual void DispatchQueuedListeners() override;
+    uint64_t AddConsoleListener(std::function<void(const std::string&)> callback) override;
+    void RemoveConsoleListener(uint64_t id) override;
 
 private:
     static constexpr uint32_t FILTER_ENABLED = 1;
@@ -58,6 +57,7 @@ private:
 
     bool FilterOrQueueMessage(const char* str, va_list* args, bool filterEnabled, bool hasListeners);
     void DispatchWorker();
+    void DispatchQueuedListeners();
 
     std::atomic<uint32_t> m_WorkState{ 0 };
     std::atomic<bool> m_SkipNextNewlineOnlyLog{ false };

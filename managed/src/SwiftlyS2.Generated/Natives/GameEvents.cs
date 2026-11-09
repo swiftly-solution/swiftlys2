@@ -65,18 +65,6 @@ internal static class NativeGameEvents
         }
     }
 
-    private unsafe static delegate* unmanaged<nint, byte*, byte> _HasKey;
-
-    public unsafe static bool HasKey(nint _event, string key)
-    {
-        using var keyStr = new ScopedCString(key);
-        fixed (byte* keyBufferPtr = keyStr)
-        {
-            var ret = _HasKey(_event, keyBufferPtr);
-            return ret == 1;
-        }
-    }
-
     private unsafe static delegate* unmanaged<nint, byte> _IsReliable;
 
     public unsafe static bool IsReliable(nint _event)
@@ -186,13 +174,5 @@ internal static class NativeGameEvents
             var ret = _IsPlayerListeningToEventName(playerid, eventNameBufferPtr);
             return ret == 1;
         }
-    }
-
-    private unsafe static delegate* unmanaged<int, nint, byte> _IsPlayerListeningToEvent;
-
-    public unsafe static bool IsPlayerListeningToEvent(int playerid, nint _event)
-    {
-        var ret = _IsPlayerListeningToEvent(playerid, _event);
-        return ret == 1;
     }
 }

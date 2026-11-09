@@ -32,11 +32,11 @@ bool InitGameSystem()
         return false;
     }
 
-    uintptr_t pAddr = (uintptr_t)ptr + 3;
-    uint32_t offset = *(uint32_t*)pAddr;
-    pAddr += 4;
+    auto address = reinterpret_cast<uintptr_t>(ptr) + 3;
+    const auto offset = *reinterpret_cast<uint32_t*>(address);
+    address += 4;
 
-    CBaseGameSystemFactory::SetFirstPtr((CBaseGameSystemFactory**)(pAddr + offset));
+    CBaseGameSystemFactory::SetFirstPtr(reinterpret_cast<CBaseGameSystemFactory**>(address + offset));
 
     return true;
 }

@@ -100,18 +100,6 @@ void* Bridge_NetMessages_AllocateNetMessageByID(int msgid)
     return netmsg->AllocateMessage()->ToPB<google::protobuf::Message>();
 }
 
-void* Bridge_NetMessages_AllocateNetMessageByPartialName(const char* name)
-{
-    PROFILE_FUNCTION();
-
-    auto netmsg = g_pGameNetworkMessages->FindNetworkMessagePartial(name);
-    if (!netmsg)
-    {
-        return nullptr;
-    }
-    return netmsg->AllocateMessage()->ToPB<google::protobuf::Message>();
-}
-
 void Bridge_NetMessages_DeallocateNetMessage(void* msg)
 {
     PROFILE_FUNCTION();
@@ -586,26 +574,6 @@ void Bridge_NetMessages_Clear(void* pmsg)
 
 extern bool bypassPostEventAbstractHook;
 
-void Bridge_NetMessages_SendMessage(void* pmsg, int msgid, int playerid)
-{
-    PROFILE_FUNCTION();
-
-    CNetMessagePB<google::protobuf::Message>* msg = (CNetMessagePB<google::protobuf::Message>*)pmsg;
-
-    auto netmsg = g_pGameNetworkMessages->FindNetworkMessageById(msgid);
-    if (!netmsg)
-    {
-        return;
-    }
-
-    bypassPostEventAbstractHook = true;
-
-    CSingleUserRecipientFilter filter(playerid);
-    g_pGameEventSystem->PostEventAbstract(-1, false, &filter, netmsg, msg, 0);
-
-    bypassPostEventAbstractHook = false;
-}
-
 void Bridge_NetMessages_SendMessageToPlayers(void* pmsg, int msgid, uint64_t playermask)
 {
     PROFILE_FUNCTION();
@@ -673,7 +641,6 @@ void Bridge_NetMessages_SetNetMessageServerHookInternal(NetMessageCallback callb
 }
 
 DEFINE_NATIVE("NetMessages.AllocateNetMessageByID", Bridge_NetMessages_AllocateNetMessageByID);
-DEFINE_NATIVE("NetMessages.AllocateNetMessageByPartialName", Bridge_NetMessages_AllocateNetMessageByPartialName);
 DEFINE_NATIVE("NetMessages.DeallocateNetMessage", Bridge_NetMessages_DeallocateNetMessage);
 DEFINE_NATIVE("NetMessages.HasField", Bridge_NetMessages_HasField);
 DEFINE_NATIVE("NetMessages.GetValue", Bridge_NetMessages_GetValue);
@@ -691,7 +658,6 @@ DEFINE_NATIVE("NetMessages.AddNestedMessage", Bridge_NetMessages_AddNestedMessag
 DEFINE_NATIVE("NetMessages.GetRepeatedFieldSize", Bridge_NetMessages_GetRepeatedFieldSize);
 DEFINE_NATIVE("NetMessages.ClearRepeatedField", Bridge_NetMessages_ClearRepeatedField);
 DEFINE_NATIVE("NetMessages.Clear", Bridge_NetMessages_Clear);
-DEFINE_NATIVE("NetMessages.SendMessage", Bridge_NetMessages_SendMessage);
 DEFINE_NATIVE("NetMessages.SendMessageToPlayers", Bridge_NetMessages_SendMessageToPlayers);
 DEFINE_NATIVE("NetMessages.RegisterMessageHook", Bridge_NetMessages_RegisterMessageHook);
 DEFINE_NATIVE("NetMessages.UnregisterMessageHook", Bridge_NetMessages_UnregisterMessageHook);

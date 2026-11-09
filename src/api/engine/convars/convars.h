@@ -39,12 +39,10 @@ public:
 
     virtual void QueryClientConvar(int playerid, const std::string& cvar_name) = 0;
     virtual int AddQueryClientCvarCallback(std::function<void(int, std::string, std::string)> callback) = 0;
-    virtual void RemoveQueryClientCvarCallback(int callback_id) = 0;
     virtual void OnClientQueryCvar(int playerid, const std::string& cvar_name, const std::string& cvar_value) = 0;
     virtual void OnConvarChanged(ConVarRefAbstract* ref, CSplitScreenSlot slot, const char* new_value, const char* old_value) = 0;
 
     virtual void CreateConvar(const std::string& cvar_name, EConVarType type, uint64_t flags, const char* help_message, const ConvarValue& defaultValue, const std::optional<ConvarValue>& minValue = std::nullopt, const std::optional<ConvarValue>& maxValue = std::nullopt) = 0;
-    virtual void DeleteConvar(const std::string& cvar_name) = 0;
 
     virtual ConVarRefAbstract& GetConvarRef(const char* cvar_name) = 0;
 

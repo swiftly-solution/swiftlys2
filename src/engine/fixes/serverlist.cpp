@@ -27,10 +27,10 @@
 
 static constexpr double UPDATE_INTERVAL_SECONDS = 5.0;
 
-void GameFrame(void* _this, bool simulate, bool first, bool last);
+static void GameFrame(void* _this, bool simulate, bool first, bool last);
 VFunctionHook g_GameFrameHook(reinterpret_cast<void*>(GameFrame), "server", "CSource2Server", "IServerGameDLL::GameFrame");
 
-void GameFrame(void* _this, bool simulate, bool first, bool last)
+static void GameFrame(void* _this, bool simulate, bool first, bool last)
 {
     reinterpret_cast<decltype(&GameFrame)>(g_GameFrameHook.GetOriginal())(_this, simulate, first, last);
 
@@ -50,10 +50,8 @@ void GameFrame(void* _this, bool simulate, bool first, bool last)
         auto steamid = g_pGameEngine->GetClientSteamID(i);
         if (!steamid) continue;
 
-        auto player = g_pPlayerManager->GetPlayer(i);
-        if (!player) continue;
-
-        if (!player->GetController()) continue;
+        auto* player = g_pPlayerManager->GetPlayer(i);
+        if (!player || !player->GetController()) continue;
 
         steamGameServer->BUpdateUserData(*steamid, player->GetName(), player->GetKills());
     }

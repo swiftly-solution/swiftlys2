@@ -2,7 +2,6 @@ class Convars
 
 sync void QueryClientConvar = int32 playerid, string cvarName
 int32 AddQueryClientCvarCallback = ptr callback // the callback should receive the following: int32 playerid, string cvarName, string cvarValue
-void RemoveQueryClientCvarCallback = int32 callbackID
 uint64 AddGlobalChangeListener = ptr callback // the callback should receive the following: string convarName, int playerid, string newValue, string oldValue
 void RemoveGlobalChangeListener = uint64 callbackID
 uint64 AddConvarCreatedListener = ptr callback // the callback should receive the following: string convarName
@@ -10,7 +9,6 @@ void RemoveConvarCreatedListener = uint64 callbackID
 uint64 AddConCommandCreatedListener = ptr callback // the callback should receive the following: string commandName
 void RemoveConCommandCreatedListener = uint64 callbackID
 void CreateConvar = string cvarName, int32 cvarType, uint64 cvarFlags, string helpMessage, ptr defaultValue, ptr minValue, ptr maxValue // the pointers point to a value of the convar type, or to a null terminated string for string convars. minValue and maxValue are optional and only used by numeric types
-void DeleteConvar = string cvarName
 bool ExistsConvar = string cvarName
 int32 GetConvarType = string cvarName
 uint64 GetFlags = string cvarName

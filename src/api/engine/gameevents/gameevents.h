@@ -42,7 +42,6 @@ public:
     virtual void SetGameEventFireHandler(GameEventFireHandler handler) = 0;
     virtual void SetPostGameEventFireHandler(GameEventFireHandler handler) = 0;
     virtual int GetGameEventListenerID(std::string event_name) = 0;
-    virtual void RegisterGameEventListenerID(std::string event_name, int id) = 0;
 
     virtual IGameEventManager2* GetGameEventManager() = 0;
 };

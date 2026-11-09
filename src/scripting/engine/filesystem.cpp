@@ -87,7 +87,7 @@ char* Bridge_FileSystem_ReadFile(int* size, char* fileName, char* pathId)
         return Bridge_CopyString("", size);
     }
 
-    std::string result((const char*)buf.Base(), fileSize);
+    std::string result(static_cast<const char*>(buf.Base()), fileSize);
     return Bridge_CopyString(result, size);
 }
 
@@ -133,7 +133,7 @@ void Bridge_FileSystem_FindFileAbsoluteList(void* outVector, const char* wildcar
 {
     PROFILE_FUNCTION();
 
-    g_pGameFileSystem->FindFileAbsoluteList(*reinterpret_cast<CUtlVector<CUtlString>*>(outVector), wildcard, pathId);
+    g_pGameFileSystem->FindFileAbsoluteList(*static_cast<CUtlVector<CUtlString>*>(outVector), wildcard, pathId);
 }
 
 DEFINE_NATIVE("FileSystem.GetSearchPath", Bridge_FileSystem_GetSearchPath);
