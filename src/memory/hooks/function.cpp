@@ -26,8 +26,8 @@ FunctionHook::FunctionHook(void* callback, std::string signatureName)
 {
     PROFILE_FUNCTION();
 
-    m_fnResolve = [this, callback, signatureName = std::move(signatureName)]() {
-        SetHookFunction(signatureName, callback);
+    m_fnResolve = [this, callback, signatureName = std::move(signatureName)] {
+        SetHookFunction(g_pGameDataManager->GetSignatures()->Fetch(signatureName), callback);
     };
     RegisterManagedHook(this);
 }
@@ -37,7 +37,7 @@ FunctionHook::FunctionHook(void* callback, std::function<void*()> addressResolve
 {
     PROFILE_FUNCTION();
 
-    m_fnResolve = [this, callback, addressResolver = std::move(addressResolver)]() {
+    m_fnResolve = [this, callback, addressResolver = std::move(addressResolver)] {
         SetHookFunction(addressResolver(), callback);
     };
     RegisterManagedHook(this);
@@ -84,42 +84,25 @@ void FunctionHook::Enable()
 {
     PROFILE_FUNCTION();
 
-    if (!m_oHook || IsEnabled()) return;
+    if (!m_oHook || m_oHook.enabled()) return;
 
-    auto result = m_oHook.enable(); // due to nodiscard
+    (void)m_oHook.enable();
 }
 
 void FunctionHook::Disable()
 {
     PROFILE_FUNCTION();
 
-    if (!m_oHook || !IsEnabled()) return;
+    if (!m_oHook || !m_oHook.enabled()) return;
 
-    auto result = m_oHook.disable(); // due to nodiscard
+    (void)m_oHook.disable();
 }
 
 void* FunctionHook::GetOriginal()
 {
     PROFILE_FUNCTION();
 
-    return (void*)(m_oHook.trampoline().address());
-}
-
-bool FunctionHook::IsEnabled()
-{
-    PROFILE_FUNCTION();
-
-    return m_oHook.enabled();
-}
-
-void FunctionHook::SetHookFunction(const std::string& functionSignature, void* callback)
-{
-    PROFILE_FUNCTION();
-
-    void* functionAddress = g_pGameDataManager->GetSignatures()->Fetch(functionSignature);
-    if (!functionAddress) return;
-
-    m_oHook = safetyhook::create_inline(functionAddress, callback, safetyhook::InlineHook::Flags::StartDisabled);
+    return reinterpret_cast<void*>(m_oHook.trampoline().address());
 }
 
 void FunctionHook::SetHookFunction(void* functionAddress, void* callback)

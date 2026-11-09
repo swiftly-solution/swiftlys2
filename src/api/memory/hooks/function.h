@@ -25,14 +25,12 @@
 class IFunctionHook
 {
 public:
-    virtual void SetHookFunction(const std::string& functionSignature, void* callback) = 0;
     virtual void SetHookFunction(void* functionAddress, void* callback) = 0;
 
     virtual void Enable() = 0;
     virtual void Disable() = 0;
 
     virtual void* GetOriginal() = 0;
-    virtual bool IsEnabled() = 0;
 };
 
 #endif

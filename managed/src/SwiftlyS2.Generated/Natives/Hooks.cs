@@ -75,34 +75,11 @@ internal static class NativeHooks
         _EnableMHook(hook);
     }
 
-    private unsafe static delegate* unmanaged<nint, void> _DisableHook;
-
-    public unsafe static void DisableHook(nint hook)
-    {
-        _DisableHook(hook);
-    }
-
     private unsafe static delegate* unmanaged<nint, void> _DisableMHook;
 
     public unsafe static void DisableMHook(nint hook)
     {
         _DisableMHook(hook);
-    }
-
-    private unsafe static delegate* unmanaged<nint, byte> _IsHookEnabled;
-
-    public unsafe static bool IsHookEnabled(nint hook)
-    {
-        var ret = _IsHookEnabled(hook);
-        return ret == 1;
-    }
-
-    private unsafe static delegate* unmanaged<nint, byte> _IsMHookEnabled;
-
-    public unsafe static bool IsMHookEnabled(nint hook)
-    {
-        var ret = _IsMHookEnabled(hook);
-        return ret == 1;
     }
 
     private unsafe static delegate* unmanaged<nint, nint> _GetHookOriginal;

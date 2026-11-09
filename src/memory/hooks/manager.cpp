@@ -18,13 +18,11 @@
 
 #include "manager.h"
 
-#include <vector>
-
 #include <api/interfaces/interfaces.h>
 #include <api/shared/profiler.h>
 
-#include <algorithm>
 #include <format>
+#include <vector>
 
 static std::vector<IManagedHook*>* g_pManagedHooks = nullptr;
 
@@ -46,7 +44,7 @@ void UnregisterManagedHook(IManagedHook* hook)
 
     if (!g_pManagedHooks) return;
 
-    g_pManagedHooks->erase(std::remove(g_pManagedHooks->begin(), g_pManagedHooks->end(), hook), g_pManagedHooks->end());
+    std::erase(*g_pManagedHooks, hook);
 }
 
 IFunctionHook* HooksManager::CreateFunctionHook()
@@ -74,21 +72,21 @@ void HooksManager::DestroyFunctionHook(IFunctionHook* hook)
 {
     PROFILE_FUNCTION();
 
-    delete (FunctionHook*)hook;
+    delete static_cast<FunctionHook*>(hook);
 }
 
 void HooksManager::DestroyVFunctionHook(IVFunctionHook* hook)
 {
     PROFILE_FUNCTION();
 
-    delete (VFunctionHook*)hook;
+    delete static_cast<VFunctionHook*>(hook);
 }
 
 void HooksManager::DestroyMFunctionHook(IMFunctionHook* hook)
 {
     PROFILE_FUNCTION();
 
-    delete (MFunctionHook*)hook;
+    delete static_cast<MFunctionHook*>(hook);
 }
 
 void HooksManager::Initialize()

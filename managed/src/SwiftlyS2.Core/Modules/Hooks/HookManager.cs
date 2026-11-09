@@ -107,13 +107,17 @@ internal class HookManager
             var callbackPtr = Marshal.GetFunctionPointerForDelegate(internalCallback);
 
             NativeHooks.SetMHook(chain.HookHandle, address, callbackPtr);
-            NativeHooks.EnableMHook(chain.HookHandle);
-
-            chain.Hooked = true;
             midChains[address] = chain;
         }
 
         chain.Nodes.Add(node);
+
+        if (!chain.Hooked)
+        {
+            NativeHooks.EnableMHook(chain.HookHandle);
+            chain.Hooked = true;
+        }
+
         return node.Id;
     }
 
@@ -140,6 +144,13 @@ internal class HookManager
         midChains.Values.Where(c => c.Nodes.Any(n => nodeIds.Contains(n.Id))).ToList().ForEach(chain =>
         {
             _ = chain.Nodes.RemoveAll(n => nodeIds.Contains(n.Id));
+
+            // Disable rather than deallocate: the removal may come from inside the hook callback itself.
+            if (chain.Nodes.Count == 0 && chain.Hooked)
+            {
+                NativeHooks.DisableMHook(chain.HookHandle);
+                chain.Hooked = false;
+            }
         });
     }
 
@@ -174,7 +185,6 @@ internal class HookManager
                 chain.HookHandle = 0;
                 chain.Hooked = false;
             }
-            chain.HookHandle = NativeHooks.AllocateHook();
 
             for (var i = 0; i < chain.Nodes.Count; i++)
             {
@@ -185,6 +195,7 @@ internal class HookManager
                 node.BuiltPointer = Marshal.GetFunctionPointerForDelegate(node.BuiltDelegate);
                 if (i == 0)
                 {
+                    chain.HookHandle = NativeHooks.AllocateHook();
                     NativeHooks.SetHook(chain.HookHandle, chain.FunctionAddress, node.BuiltPointer);
                     node.OriginalFuncPtr = NativeHooks.GetHookOriginal(chain.HookHandle);
                     chain.OriginalFunctionAddress = node.OriginalFuncPtr;

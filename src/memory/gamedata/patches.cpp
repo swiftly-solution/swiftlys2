@@ -23,34 +23,31 @@
 #include <api/shared/plat.h>
 #include <api/shared/profiler.h>
 
+#include <charconv>
 #include <format>
+#include <string_view>
 
-static std::vector<uint8_t> ParsePatchBytes(const std::string& patch)
+static std::vector<uint8_t> ParsePatchBytes(std::string_view patch)
 {
     PROFILE_FUNCTION();
-
-    auto nibble = [](char c) -> int {
-        if (c >= '0' && c <= '9') return c - '0';
-        if (c >= 'a' && c <= 'f') return c - 'a' + 10;
-        if (c >= 'A' && c <= 'F') return c - 'A' + 10;
-        return -1;
-    };
 
     std::vector<uint8_t> bytes;
     for (size_t i = 0; i < patch.size();) {
         if (patch[i] == ' ') { ++i; continue; }
 
         size_t end = patch.find(' ', i);
-        if (end == std::string::npos) end = patch.size();
-        std::string token = patch.substr(i, end - i);
+        if (end == std::string_view::npos) end = patch.size();
+        std::string_view token = patch.substr(i, end - i);
         i = end;
 
         if (token == "?" || token == "??") { bytes.push_back(0x2A); continue; }
         if (token.size() != 2) return {};
-        int hi = nibble(token[0]), lo = nibble(token[1]);
-        if (hi < 0 || lo < 0) return {};
 
-        bytes.push_back(static_cast<uint8_t>(hi << 4 | lo));
+        uint8_t value = 0;
+        auto [ptr, ec] = std::from_chars(token.data(), token.data() + token.size(), value, 16);
+        if (ec != std::errc{} || ptr != token.data() + token.size()) return {};
+
+        bytes.push_back(value);
     }
     return bytes;
 }

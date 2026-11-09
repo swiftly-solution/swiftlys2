@@ -41,27 +41,6 @@ void* Bridge_Memory_Resize(void* ptr, uint64_t newSize)
     return g_pMemoryAllocator->Resize(ptr, newSize);
 }
 
-uint64_t Bridge_Memory_GetSize(void* ptr)
-{
-    PROFILE_FUNCTION();
-
-    return g_pMemoryAllocator->GetSize(ptr);
-}
-
-uint64_t Bridge_Memory_GetTotalAllocated()
-{
-    PROFILE_FUNCTION();
-
-    return g_pMemoryAllocator->GetTotalAllocated();
-}
-
-bool Bridge_Memory_IsPointerValid(void* ptr)
-{
-    PROFILE_FUNCTION();
-
-    return g_pMemoryAllocator->IsPointerValid(ptr);
-}
-
 void Bridge_Memory_Copy(void* dest, void* src, uint64_t size)
 {
     PROFILE_FUNCTION();
@@ -79,8 +58,5 @@ void Bridge_Memory_Move(void* dest, void* src, uint64_t size)
 DEFINE_NATIVE("Allocator.Alloc", Bridge_Memory_Alloc);
 DEFINE_NATIVE("Allocator.Free", Bridge_Memory_Free);
 DEFINE_NATIVE("Allocator.Resize", Bridge_Memory_Resize);
-DEFINE_NATIVE("Allocator.GetSize", Bridge_Memory_GetSize);
-DEFINE_NATIVE("Allocator.GetTotalAllocated", Bridge_Memory_GetTotalAllocated);
-DEFINE_NATIVE("Allocator.IsPointerValid", Bridge_Memory_IsPointerValid);
 DEFINE_NATIVE("Allocator.Copy", Bridge_Memory_Copy);
 DEFINE_NATIVE("Allocator.Move", Bridge_Memory_Move);

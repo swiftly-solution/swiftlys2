@@ -21,24 +21,18 @@
 
 #include <api/memory/allocator/allocator.h>
 
+#include <cstdint>
+
 class MemoryAllocator : public IMemoryAllocator
 {
 public:
-    virtual void* Alloc(uint64_t size) override;
+    void* Alloc(uint64_t size) override;
 
-    virtual void Free(void* ptr) override;
-    virtual void* Resize(void* ptr, uint64_t newSize) override;
+    void Free(void* ptr) override;
+    void* Resize(void* ptr, uint64_t newSize) override;
 
-    virtual uint64_t GetSize(void* ptr) override;
-
-    virtual uint64_t GetTotalAllocated() override;
-
-    virtual bool IsPointerValid(void* ptr) override;
-
-    virtual void Copy(void* dest, void* src, uint64_t size) override;
-    virtual void Move(void* dest, void* src, uint64_t size) override;
-private:
-    uint64_t totalAllocated = 0;
+    void Copy(void* dest, void* src, uint64_t size) override;
+    void Move(void* dest, void* src, uint64_t size) override;
 };
 
 #endif

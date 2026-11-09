@@ -25,11 +25,10 @@
 class MFunctionHook : public IMFunctionHook
 {
 public:
-    virtual void SetHookFunction(void* addr, void* callback) override;
+    void SetHookFunction(void* addr, void* callback) override;
 
-    virtual void Enable() override;
-    virtual void Disable() override;
-    virtual bool IsEnabled() override;
+    void Enable() override;
+    void Disable() override;
 
 private:
     SafetyHookMid m_oHook;
