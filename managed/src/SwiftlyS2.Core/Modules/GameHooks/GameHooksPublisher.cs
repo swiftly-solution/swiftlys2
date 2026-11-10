@@ -63,20 +63,24 @@ internal static partial class GameHooksPublisher
     {
         internal static GameHooksService[] Snapshot = [];
 
-        // Resolve the existing category -> hook -> delegate fields once per phase.
         private const BindingFlags Fields = BindingFlags.Instance | BindingFlags.NonPublic;
-        private static readonly Func<GameHooksService, bool> hasListeners = (
-            from category in typeof(GameHooksService).GetFields(Fields)
-            from hook in category.FieldType.GetFields(Fields)
-            from listener in hook.FieldType.GetFields(Fields)
-            where listener.FieldType == typeof(T)
-            select (Func<GameHooksService, bool>)(service =>
-                listener.GetValue(hook.GetValue(category.GetValue(service))) != null)
-        ).Single();
+        private static Func<GameHooksService, bool>? hasListeners;
 
         // Services subscribe empty and clear their listeners before unsubscribing.
         // Rebuild only on presence transitions, under subscribersLock.
-        internal static void Refresh() => Volatile.Write(ref Snapshot, subscribers.Where(hasListeners).ToArray());
+        internal static void Refresh()
+        {
+            // Discover fields on subscription, never on a phase's first empty dispatch.
+            hasListeners ??= (
+                from category in typeof(GameHooksService).GetFields(Fields)
+                from hook in category.FieldType.GetFields(Fields)
+                from listener in hook.FieldType.GetFields(Fields)
+                where listener.FieldType == typeof(T)
+                select (Func<GameHooksService, bool>)(service =>
+                    listener.GetValue(hook.GetValue(category.GetValue(service))) != null)
+            ).Single();
+            Volatile.Write(ref Snapshot, subscribers.Where(hasListeners).ToArray());
+        }
     }
 
     private static readonly Dictionary<HookListener, int> hookListeners = [];

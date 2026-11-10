@@ -5,6 +5,7 @@ using SwiftlyS2.Shared.GameHooks;
 using SwiftlyS2.Shared.Misc;
 
 var tests = new (string Name, Action Run)[] {
+    ("First empty dispatch does not discover listeners", EmptyFirstDispatch),
     ("Service order and handler order", ServiceOrder),
     ("Stop and Handled apply between services", GroupedResults),
     ("CancelOriginal continues dispatch", CancelOriginal),
@@ -45,6 +46,15 @@ static void Equal<T>( T expected, T actual )
 {
     if (!EqualityComparer<T>.Default.Equals(expected, actual))
         throw new Exception($"Expected {expected}; got {actual}.");
+}
+
+static void EmptyFirstDispatch()
+{
+    // Run before subscribing: only the shared empty array is initialized outside dispatch.
+    _ = typeof(Array).GetMethod(nameof(Array.Empty))!.MakeGenericMethod(Fixture.ServiceType).Invoke(null, null);
+    var before = GC.GetAllocatedBytesForCurrentThread();
+    Fixture.DispatchPost();
+    Equal(0L, GC.GetAllocatedBytesForCurrentThread() - before);
 }
 
 static void ServiceOrder()
