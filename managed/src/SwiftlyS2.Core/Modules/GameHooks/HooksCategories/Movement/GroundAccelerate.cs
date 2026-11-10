@@ -4,46 +4,30 @@ namespace SwiftlyS2.Core.GameHooks;
 
 internal sealed class GroundAccelerateMovementHook : IGroundAccelerateMovementHook
 {
-    internal event OnGroundAccelerateMovementPreDelegate? _Pre;
-    internal event OnGroundAccelerateMovementPostDelegate? _Post;
+    private OnGroundAccelerateMovementPreDelegate? _Pre;
+    private OnGroundAccelerateMovementPostDelegate? _Post;
 
     public event OnGroundAccelerateMovementPreDelegate Pre
     {
-        add
-        {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.GroundAccelerate);
-            _Pre += value;
-        }
-        remove
-        {
-            _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.GroundAccelerate);
-        }
+        add => GameHooksPublisher.UpdateListener(HookListener.GroundAccelerate, ref _Pre, value, add: true);
+        remove => GameHooksPublisher.UpdateListener(HookListener.GroundAccelerate, ref _Pre, value, add: false);
     }
 
     public event OnGroundAccelerateMovementPostDelegate Post
     {
-        add
-        {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.GroundAccelerate);
-            _Post += value;
-        }
-        remove
-        {
-            _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.GroundAccelerate);
-        }
+        add => GameHooksPublisher.UpdateListener(HookListener.GroundAccelerate, ref _Post, value, add: true);
+        remove => GameHooksPublisher.UpdateListener(HookListener.GroundAccelerate, ref _Post, value, add: false);
     }
 
-    public void InvokePre(ref GroundAccelerateMovementPreContext ctx) => _Pre?.Invoke(ref ctx);
-    public void InvokePost(ref GroundAccelerateMovementPostContext ctx) => _Post?.Invoke(ref ctx);
+    public void InvokePre(ref GroundAccelerateMovementPreContext ctx) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);
+    public void InvokePost(ref GroundAccelerateMovementPostContext ctx) => Volatile.Read(ref _Post)?.Invoke(ref ctx);
 
-    public bool HasPreListeners => _Pre != null;
-    public bool HasPostListeners => _Post != null;
+    public bool HasPreListeners => Volatile.Read(ref _Pre) != null;
+    public bool HasPostListeners => Volatile.Read(ref _Post) != null;
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.GroundAccelerate);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.GroundAccelerate);
+        GameHooksPublisher.ClearListeners(HookListener.GroundAccelerate, ref _Pre);
+        GameHooksPublisher.ClearListeners(HookListener.GroundAccelerate, ref _Post);
     }
 }

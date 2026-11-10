@@ -4,46 +4,30 @@ namespace SwiftlyS2.Core.GameHooks;
 
 internal sealed class ProcessUsercmdsHook : IProcessUsercmdsHook
 {
-    private event OnProcessUsercmdsPreDelegate? _Pre;
-    private event OnProcessUsercmdsPostDelegate? _Post;
+    private OnProcessUsercmdsPreDelegate? _Pre;
+    private OnProcessUsercmdsPostDelegate? _Post;
 
     public event OnProcessUsercmdsPreDelegate Pre
     {
-        add
-        {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.ProcessUsercmds);
-            _Pre += value;
-        }
-        remove
-        {
-            _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.ProcessUsercmds);
-        }
+        add => GameHooksPublisher.UpdateListener(HookListener.ProcessUsercmds, ref _Pre, value, add: true);
+        remove => GameHooksPublisher.UpdateListener(HookListener.ProcessUsercmds, ref _Pre, value, add: false);
     }
 
     public event OnProcessUsercmdsPostDelegate Post
     {
-        add
-        {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.ProcessUsercmds);
-            _Post += value;
-        }
-        remove
-        {
-            _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.ProcessUsercmds);
-        }
+        add => GameHooksPublisher.UpdateListener(HookListener.ProcessUsercmds, ref _Post, value, add: true);
+        remove => GameHooksPublisher.UpdateListener(HookListener.ProcessUsercmds, ref _Post, value, add: false);
     }
 
-    public void InvokePre(ref ProcessUsercmdsPreContext ctx) => _Pre?.Invoke(ref ctx);
-    public void InvokePost(ref ProcessUsercmdsPostContext ctx) => _Post?.Invoke(ref ctx);
+    public void InvokePre(ref ProcessUsercmdsPreContext ctx) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);
+    public void InvokePost(ref ProcessUsercmdsPostContext ctx) => Volatile.Read(ref _Post)?.Invoke(ref ctx);
 
-    public bool HasPreListeners => _Pre != null;
-    public bool HasPostListeners => _Post != null;
+    public bool HasPreListeners => Volatile.Read(ref _Pre) != null;
+    public bool HasPostListeners => Volatile.Read(ref _Post) != null;
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.ProcessUsercmds);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.ProcessUsercmds);
+        GameHooksPublisher.ClearListeners(HookListener.ProcessUsercmds, ref _Pre);
+        GameHooksPublisher.ClearListeners(HookListener.ProcessUsercmds, ref _Post);
     }
 }

@@ -80,6 +80,26 @@ internal static partial class GameHooksPublisher
         }
     }
 
+    internal static void UpdateListener<T>( HookListener hook, ref T? listeners, T? value, bool add ) where T : Delegate
+    {
+        lock (subscribersLock)
+        {
+            var updated = (T?)(add ? Delegate.Combine(listeners, value) : Delegate.Remove(listeners, value));
+            var hadListeners = listeners != null;
+            if (!hadListeners && updated != null) AddHookListener(hook);
+            Volatile.Write(ref listeners, updated);
+            if (hadListeners && updated == null) RemoveHookListener(hook);
+        }
+    }
+
+    internal static void ClearListeners<T>( HookListener hook, ref T? listeners ) where T : Delegate
+    {
+        lock (subscribersLock)
+        {
+            UpdateListener(hook, ref listeners, listeners, add: false);
+        }
+    }
+
     internal static void AddHookListener( HookListener hookName )
     {
         lock (hookListenersLock)

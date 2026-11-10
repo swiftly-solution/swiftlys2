@@ -4,46 +4,30 @@ namespace SwiftlyS2.Core.GameHooks;
 
 internal sealed class TryPlayerMoveMovementHook : ITryPlayerMoveMovementHook
 {
-    internal event OnTryPlayerMoveMovementPreDelegate? _Pre;
-    internal event OnTryPlayerMoveMovementPostDelegate? _Post;
+    private OnTryPlayerMoveMovementPreDelegate? _Pre;
+    private OnTryPlayerMoveMovementPostDelegate? _Post;
 
     public event OnTryPlayerMoveMovementPreDelegate Pre
     {
-        add
-        {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.TryPlayerMove);
-            _Pre += value;
-        }
-        remove
-        {
-            _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.TryPlayerMove);
-        }
+        add => GameHooksPublisher.UpdateListener(HookListener.TryPlayerMove, ref _Pre, value, add: true);
+        remove => GameHooksPublisher.UpdateListener(HookListener.TryPlayerMove, ref _Pre, value, add: false);
     }
 
     public event OnTryPlayerMoveMovementPostDelegate Post
     {
-        add
-        {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.TryPlayerMove);
-            _Post += value;
-        }
-        remove
-        {
-            _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.TryPlayerMove);
-        }
+        add => GameHooksPublisher.UpdateListener(HookListener.TryPlayerMove, ref _Post, value, add: true);
+        remove => GameHooksPublisher.UpdateListener(HookListener.TryPlayerMove, ref _Post, value, add: false);
     }
 
-    public void InvokePre(ref TryPlayerMoveMovementPreContext ctx) => _Pre?.Invoke(ref ctx);
-    public void InvokePost(ref TryPlayerMoveMovementPostContext ctx) => _Post?.Invoke(ref ctx);
+    public void InvokePre(ref TryPlayerMoveMovementPreContext ctx) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);
+    public void InvokePost(ref TryPlayerMoveMovementPostContext ctx) => Volatile.Read(ref _Post)?.Invoke(ref ctx);
 
-    public bool HasPreListeners => _Pre != null;
-    public bool HasPostListeners => _Post != null;
+    public bool HasPreListeners => Volatile.Read(ref _Pre) != null;
+    public bool HasPostListeners => Volatile.Read(ref _Post) != null;
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.TryPlayerMove);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.TryPlayerMove);
+        GameHooksPublisher.ClearListeners(HookListener.TryPlayerMove, ref _Pre);
+        GameHooksPublisher.ClearListeners(HookListener.TryPlayerMove, ref _Post);
     }
 }

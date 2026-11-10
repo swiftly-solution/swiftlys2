@@ -4,46 +4,30 @@ namespace SwiftlyS2.Core.GameHooks;
 
 internal sealed class TakeDamageEntityHook : ITakeDamageEntityHook
 {
-    internal event OnTakeDamageEntityPreDelegate? _Pre;
-    internal event OnTakeDamageEntityPostDelegate? _Post;
+    private OnTakeDamageEntityPreDelegate? _Pre;
+    private OnTakeDamageEntityPostDelegate? _Post;
 
     public event OnTakeDamageEntityPreDelegate Pre
     {
-        add
-        {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.TakeDamage);
-            _Pre += value;
-        }
-        remove
-        {
-            _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.TakeDamage);
-        }
+        add => GameHooksPublisher.UpdateListener(HookListener.TakeDamage, ref _Pre, value, add: true);
+        remove => GameHooksPublisher.UpdateListener(HookListener.TakeDamage, ref _Pre, value, add: false);
     }
 
     public event OnTakeDamageEntityPostDelegate Post
     {
-        add
-        {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.TakeDamage);
-            _Post += value;
-        }
-        remove
-        {
-            _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.TakeDamage);
-        }
+        add => GameHooksPublisher.UpdateListener(HookListener.TakeDamage, ref _Post, value, add: true);
+        remove => GameHooksPublisher.UpdateListener(HookListener.TakeDamage, ref _Post, value, add: false);
     }
 
-    public void InvokePre( ref TakeDamageEntityPreContext ctx ) => _Pre?.Invoke(ref ctx);
-    public void InvokePost( ref TakeDamageEntityPostContext ctx ) => _Post?.Invoke(ref ctx);
+    public void InvokePre( ref TakeDamageEntityPreContext ctx ) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);
+    public void InvokePost( ref TakeDamageEntityPostContext ctx ) => Volatile.Read(ref _Post)?.Invoke(ref ctx);
 
-    public bool HasPreListeners => _Pre != null;
-    public bool HasPostListeners => _Post != null;
+    public bool HasPreListeners => Volatile.Read(ref _Pre) != null;
+    public bool HasPostListeners => Volatile.Read(ref _Post) != null;
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.TakeDamage);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.TakeDamage);
+        GameHooksPublisher.ClearListeners(HookListener.TakeDamage, ref _Pre);
+        GameHooksPublisher.ClearListeners(HookListener.TakeDamage, ref _Post);
     }
 }

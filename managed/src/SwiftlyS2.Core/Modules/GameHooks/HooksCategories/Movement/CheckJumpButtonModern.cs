@@ -4,46 +4,30 @@ namespace SwiftlyS2.Core.GameHooks;
 
 internal sealed class CheckJumpButtonModernMovementHook : ICheckJumpButtonModernMovementHook
 {
-    internal event OnCheckJumpButtonModernMovementPreDelegate? _Pre;
-    internal event OnCheckJumpButtonModernMovementPostDelegate? _Post;
+    private OnCheckJumpButtonModernMovementPreDelegate? _Pre;
+    private OnCheckJumpButtonModernMovementPostDelegate? _Post;
 
     public event OnCheckJumpButtonModernMovementPreDelegate Pre
     {
-        add
-        {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.CheckJumpButtonModern);
-            _Pre += value;
-        }
-        remove
-        {
-            _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.CheckJumpButtonModern);
-        }
+        add => GameHooksPublisher.UpdateListener(HookListener.CheckJumpButtonModern, ref _Pre, value, add: true);
+        remove => GameHooksPublisher.UpdateListener(HookListener.CheckJumpButtonModern, ref _Pre, value, add: false);
     }
 
     public event OnCheckJumpButtonModernMovementPostDelegate Post
     {
-        add
-        {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.CheckJumpButtonModern);
-            _Post += value;
-        }
-        remove
-        {
-            _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.CheckJumpButtonModern);
-        }
+        add => GameHooksPublisher.UpdateListener(HookListener.CheckJumpButtonModern, ref _Post, value, add: true);
+        remove => GameHooksPublisher.UpdateListener(HookListener.CheckJumpButtonModern, ref _Post, value, add: false);
     }
 
-    public void InvokePre(ref CheckJumpButtonModernMovementPreContext ctx) => _Pre?.Invoke(ref ctx);
-    public void InvokePost(ref CheckJumpButtonModernMovementPostContext ctx) => _Post?.Invoke(ref ctx);
+    public void InvokePre(ref CheckJumpButtonModernMovementPreContext ctx) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);
+    public void InvokePost(ref CheckJumpButtonModernMovementPostContext ctx) => Volatile.Read(ref _Post)?.Invoke(ref ctx);
 
-    public bool HasPreListeners => _Pre != null;
-    public bool HasPostListeners => _Post != null;
+    public bool HasPreListeners => Volatile.Read(ref _Pre) != null;
+    public bool HasPostListeners => Volatile.Read(ref _Post) != null;
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.CheckJumpButtonModern);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.CheckJumpButtonModern);
+        GameHooksPublisher.ClearListeners(HookListener.CheckJumpButtonModern, ref _Pre);
+        GameHooksPublisher.ClearListeners(HookListener.CheckJumpButtonModern, ref _Post);
     }
 }

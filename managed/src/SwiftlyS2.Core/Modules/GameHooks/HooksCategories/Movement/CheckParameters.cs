@@ -4,46 +4,30 @@ namespace SwiftlyS2.Core.GameHooks;
 
 internal sealed class CheckParametersMovementHook : ICheckParametersMovementHook
 {
-    internal event OnCheckParametersMovementPreDelegate? _Pre;
-    internal event OnCheckParametersMovementPostDelegate? _Post;
+    private OnCheckParametersMovementPreDelegate? _Pre;
+    private OnCheckParametersMovementPostDelegate? _Post;
 
     public event OnCheckParametersMovementPreDelegate Pre
     {
-        add
-        {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.CheckParameters);
-            _Pre += value;
-        }
-        remove
-        {
-            _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.CheckParameters);
-        }
+        add => GameHooksPublisher.UpdateListener(HookListener.CheckParameters, ref _Pre, value, add: true);
+        remove => GameHooksPublisher.UpdateListener(HookListener.CheckParameters, ref _Pre, value, add: false);
     }
 
     public event OnCheckParametersMovementPostDelegate Post
     {
-        add
-        {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.CheckParameters);
-            _Post += value;
-        }
-        remove
-        {
-            _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.CheckParameters);
-        }
+        add => GameHooksPublisher.UpdateListener(HookListener.CheckParameters, ref _Post, value, add: true);
+        remove => GameHooksPublisher.UpdateListener(HookListener.CheckParameters, ref _Post, value, add: false);
     }
 
-    public void InvokePre(ref CheckParametersMovementPreContext ctx) => _Pre?.Invoke(ref ctx);
-    public void InvokePost(ref CheckParametersMovementPostContext ctx) => _Post?.Invoke(ref ctx);
+    public void InvokePre(ref CheckParametersMovementPreContext ctx) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);
+    public void InvokePost(ref CheckParametersMovementPostContext ctx) => Volatile.Read(ref _Post)?.Invoke(ref ctx);
 
-    public bool HasPreListeners => _Pre != null;
-    public bool HasPostListeners => _Post != null;
+    public bool HasPreListeners => Volatile.Read(ref _Pre) != null;
+    public bool HasPostListeners => Volatile.Read(ref _Post) != null;
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.CheckParameters);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.CheckParameters);
+        GameHooksPublisher.ClearListeners(HookListener.CheckParameters, ref _Pre);
+        GameHooksPublisher.ClearListeners(HookListener.CheckParameters, ref _Post);
     }
 }
