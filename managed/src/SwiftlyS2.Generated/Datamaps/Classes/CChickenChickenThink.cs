@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCChickenChickenThinkPre(ref CChickenChickenThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CChickenChickenThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCChickenChickenThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCChickenChickenThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCChickenChickenThinkPost(ref CChickenChickenThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CChickenChickenThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCChickenChickenThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCChickenChickenThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CChickenChickenThinkHook : ICChickenChickenThinkHook
+internal sealed class CChickenChickenThinkHook(GameHooksService owner) : ICChickenChickenThinkHook
 {
     private event OnCChickenChickenThinkPreDelegate? _Pre;
     private event OnCChickenChickenThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CChickenChickenThinkHook : ICChickenChickenThinkHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CChickenChickenThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CChickenChickenThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CChickenChickenThinkHook : ICChickenChickenThinkHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CChickenChickenThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CChickenChickenThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CChickenChickenThinkHook : ICChickenChickenThinkHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CChickenChickenThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CChickenChickenThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CChickenChickenThinkHook : ICChickenChickenThinkHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CChickenChickenThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CChickenChickenThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CChickenChickenThinkHook : ICChickenChickenThinkHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CChickenChickenThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CChickenChickenThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CChickenChickenThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CChickenChickenThink, owner);
         }
     }
 

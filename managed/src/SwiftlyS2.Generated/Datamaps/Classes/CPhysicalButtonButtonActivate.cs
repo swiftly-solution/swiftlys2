@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCPhysicalButtonButtonActivatePre(ref CPhysicalButtonButtonActivatePreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CPhysicalButtonButtonActivate);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCPhysicalButtonButtonActivatePre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCPhysicalButtonButtonActivatePre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCPhysicalButtonButtonActivatePost(ref CPhysicalButtonButtonActivatePostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CPhysicalButtonButtonActivate);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCPhysicalButtonButtonActivatePost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCPhysicalButtonButtonActivatePost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CPhysicalButtonButtonActivateHook : ICPhysicalButtonButtonActivateHook
+internal sealed class CPhysicalButtonButtonActivateHook(GameHooksService owner) : ICPhysicalButtonButtonActivateHook
 {
     private event OnCPhysicalButtonButtonActivatePreDelegate? _Pre;
     private event OnCPhysicalButtonButtonActivatePostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CPhysicalButtonButtonActivateHook : ICPhysicalButtonButton
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPhysicalButtonButtonActivate);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPhysicalButtonButtonActivate, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CPhysicalButtonButtonActivateHook : ICPhysicalButtonButton
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysicalButtonButtonActivate);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysicalButtonButtonActivate, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CPhysicalButtonButtonActivateHook : ICPhysicalButtonButton
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPhysicalButtonButtonActivate);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPhysicalButtonButtonActivate, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CPhysicalButtonButtonActivateHook : ICPhysicalButtonButton
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysicalButtonButtonActivate);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysicalButtonButtonActivate, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CPhysicalButtonButtonActivateHook : ICPhysicalButtonButton
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysicalButtonButtonActivate);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysicalButtonButtonActivate, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysicalButtonButtonActivate);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysicalButtonButtonActivate, owner);
         }
     }
 

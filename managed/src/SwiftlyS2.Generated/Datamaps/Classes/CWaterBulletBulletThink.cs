@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCWaterBulletBulletThinkPre(ref CWaterBulletBulletThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CWaterBulletBulletThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCWaterBulletBulletThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCWaterBulletBulletThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCWaterBulletBulletThinkPost(ref CWaterBulletBulletThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CWaterBulletBulletThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCWaterBulletBulletThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCWaterBulletBulletThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CWaterBulletBulletThinkHook : ICWaterBulletBulletThinkHook
+internal sealed class CWaterBulletBulletThinkHook(GameHooksService owner) : ICWaterBulletBulletThinkHook
 {
     private event OnCWaterBulletBulletThinkPreDelegate? _Pre;
     private event OnCWaterBulletBulletThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CWaterBulletBulletThinkHook : ICWaterBulletBulletThinkHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CWaterBulletBulletThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CWaterBulletBulletThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CWaterBulletBulletThinkHook : ICWaterBulletBulletThinkHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CWaterBulletBulletThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CWaterBulletBulletThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CWaterBulletBulletThinkHook : ICWaterBulletBulletThinkHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CWaterBulletBulletThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CWaterBulletBulletThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CWaterBulletBulletThinkHook : ICWaterBulletBulletThinkHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CWaterBulletBulletThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CWaterBulletBulletThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CWaterBulletBulletThinkHook : ICWaterBulletBulletThinkHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CWaterBulletBulletThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CWaterBulletBulletThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CWaterBulletBulletThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CWaterBulletBulletThink, owner);
         }
     }
 

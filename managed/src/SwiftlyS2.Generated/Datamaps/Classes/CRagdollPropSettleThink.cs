@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCRagdollPropSettleThinkPre(ref CRagdollPropSettleThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CRagdollPropSettleThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCRagdollPropSettleThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCRagdollPropSettleThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCRagdollPropSettleThinkPost(ref CRagdollPropSettleThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CRagdollPropSettleThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCRagdollPropSettleThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCRagdollPropSettleThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CRagdollPropSettleThinkHook : ICRagdollPropSettleThinkHook
+internal sealed class CRagdollPropSettleThinkHook(GameHooksService owner) : ICRagdollPropSettleThinkHook
 {
     private event OnCRagdollPropSettleThinkPreDelegate? _Pre;
     private event OnCRagdollPropSettleThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CRagdollPropSettleThinkHook : ICRagdollPropSettleThinkHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CRagdollPropSettleThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CRagdollPropSettleThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CRagdollPropSettleThinkHook : ICRagdollPropSettleThinkHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CRagdollPropSettleThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CRagdollPropSettleThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CRagdollPropSettleThinkHook : ICRagdollPropSettleThinkHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CRagdollPropSettleThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CRagdollPropSettleThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CRagdollPropSettleThinkHook : ICRagdollPropSettleThinkHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CRagdollPropSettleThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CRagdollPropSettleThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CRagdollPropSettleThinkHook : ICRagdollPropSettleThinkHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CRagdollPropSettleThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CRagdollPropSettleThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CRagdollPropSettleThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CRagdollPropSettleThink, owner);
         }
     }
 

@@ -2,7 +2,7 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class CanUseWeaponHook : ICanUseWeaponHook
+internal sealed class CanUseWeaponHook( GameHooksService owner ) : ICanUseWeaponHook
 {
     internal event OnCanUseWeaponPreDelegate? _Pre;
     internal event OnCanUseWeaponPostDelegate? _Post;
@@ -11,13 +11,13 @@ internal sealed class CanUseWeaponHook : ICanUseWeaponHook
     {
         add
         {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.CanUse);
+            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.CanUse, owner);
             _Pre += value;
         }
         remove
         {
             _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.CanUse);
+            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.CanUse, owner);
         }
     }
 
@@ -25,13 +25,13 @@ internal sealed class CanUseWeaponHook : ICanUseWeaponHook
     {
         add
         {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.CanUse);
+            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.CanUse, owner);
             _Post += value;
         }
         remove
         {
             _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.CanUse);
+            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.CanUse, owner);
         }
     }
 
@@ -43,7 +43,7 @@ internal sealed class CanUseWeaponHook : ICanUseWeaponHook
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.CanUse);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.CanUse);
+        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.CanUse, owner);
+        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.CanUse, owner);
     }
 }

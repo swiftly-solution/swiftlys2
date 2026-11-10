@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCTriggerSoundscapePlayerUpdateThinkPre(ref CTriggerSoundscapePlayerUpdateThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CTriggerSoundscapePlayerUpdateThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCTriggerSoundscapePlayerUpdateThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCTriggerSoundscapePlayerUpdateThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCTriggerSoundscapePlayerUpdateThinkPost(ref CTriggerSoundscapePlayerUpdateThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CTriggerSoundscapePlayerUpdateThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCTriggerSoundscapePlayerUpdateThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCTriggerSoundscapePlayerUpdateThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CTriggerSoundscapePlayerUpdateThinkHook : ICTriggerSoundscapePlayerUpdateThinkHook
+internal sealed class CTriggerSoundscapePlayerUpdateThinkHook(GameHooksService owner) : ICTriggerSoundscapePlayerUpdateThinkHook
 {
     private event OnCTriggerSoundscapePlayerUpdateThinkPreDelegate? _Pre;
     private event OnCTriggerSoundscapePlayerUpdateThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CTriggerSoundscapePlayerUpdateThinkHook : ICTriggerSoundsc
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerSoundscapePlayerUpdateThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerSoundscapePlayerUpdateThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CTriggerSoundscapePlayerUpdateThinkHook : ICTriggerSoundsc
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerSoundscapePlayerUpdateThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerSoundscapePlayerUpdateThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CTriggerSoundscapePlayerUpdateThinkHook : ICTriggerSoundsc
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerSoundscapePlayerUpdateThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerSoundscapePlayerUpdateThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CTriggerSoundscapePlayerUpdateThinkHook : ICTriggerSoundsc
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerSoundscapePlayerUpdateThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerSoundscapePlayerUpdateThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CTriggerSoundscapePlayerUpdateThinkHook : ICTriggerSoundsc
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerSoundscapePlayerUpdateThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerSoundscapePlayerUpdateThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerSoundscapePlayerUpdateThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerSoundscapePlayerUpdateThink, owner);
         }
     }
 

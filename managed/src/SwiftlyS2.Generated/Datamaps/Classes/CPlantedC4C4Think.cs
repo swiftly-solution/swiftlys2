@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCPlantedC4C4ThinkPre(ref CPlantedC4C4ThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CPlantedC4C4Think);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCPlantedC4C4ThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCPlantedC4C4ThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCPlantedC4C4ThinkPost(ref CPlantedC4C4ThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CPlantedC4C4Think);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCPlantedC4C4ThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCPlantedC4C4ThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CPlantedC4C4ThinkHook : ICPlantedC4C4ThinkHook
+internal sealed class CPlantedC4C4ThinkHook(GameHooksService owner) : ICPlantedC4C4ThinkHook
 {
     private event OnCPlantedC4C4ThinkPreDelegate? _Pre;
     private event OnCPlantedC4C4ThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CPlantedC4C4ThinkHook : ICPlantedC4C4ThinkHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPlantedC4C4Think);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPlantedC4C4Think, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CPlantedC4C4ThinkHook : ICPlantedC4C4ThinkHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPlantedC4C4Think);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPlantedC4C4Think, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CPlantedC4C4ThinkHook : ICPlantedC4C4ThinkHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPlantedC4C4Think);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPlantedC4C4Think, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CPlantedC4C4ThinkHook : ICPlantedC4C4ThinkHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPlantedC4C4Think);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPlantedC4C4Think, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CPlantedC4C4ThinkHook : ICPlantedC4C4ThinkHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPlantedC4C4Think);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPlantedC4C4Think, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPlantedC4C4Think);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPlantedC4C4Think, owner);
         }
     }
 

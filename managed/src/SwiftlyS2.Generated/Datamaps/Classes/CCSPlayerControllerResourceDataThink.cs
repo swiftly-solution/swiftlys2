@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCCSPlayerControllerResourceDataThinkPre(ref CCSPlayerControllerResourceDataThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CCSPlayerControllerResourceDataThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCCSPlayerControllerResourceDataThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCCSPlayerControllerResourceDataThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCCSPlayerControllerResourceDataThinkPost(ref CCSPlayerControllerResourceDataThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CCSPlayerControllerResourceDataThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCCSPlayerControllerResourceDataThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCCSPlayerControllerResourceDataThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CCSPlayerControllerResourceDataThinkHook : ICCSPlayerControllerResourceDataThinkHook
+internal sealed class CCSPlayerControllerResourceDataThinkHook(GameHooksService owner) : ICCSPlayerControllerResourceDataThinkHook
 {
     private event OnCCSPlayerControllerResourceDataThinkPreDelegate? _Pre;
     private event OnCCSPlayerControllerResourceDataThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CCSPlayerControllerResourceDataThinkHook : ICCSPlayerContr
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CCSPlayerControllerResourceDataThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CCSPlayerControllerResourceDataThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CCSPlayerControllerResourceDataThinkHook : ICCSPlayerContr
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerControllerResourceDataThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerControllerResourceDataThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CCSPlayerControllerResourceDataThinkHook : ICCSPlayerContr
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CCSPlayerControllerResourceDataThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CCSPlayerControllerResourceDataThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CCSPlayerControllerResourceDataThinkHook : ICCSPlayerContr
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerControllerResourceDataThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerControllerResourceDataThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CCSPlayerControllerResourceDataThinkHook : ICCSPlayerContr
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerControllerResourceDataThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerControllerResourceDataThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerControllerResourceDataThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerControllerResourceDataThink, owner);
         }
     }
 

@@ -71,25 +71,21 @@ internal static partial class GameHooksPublisher
 
     internal static void InvokePostThinkPre( ref PostThinkPawnPreContext ctx )
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(HookListener.PostThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokePostThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
-            }
+            subs[i].InvokePostThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
         }
     }
 
     internal static void InvokePostThinkPost( ref PostThinkPawnPostContext ctx )
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(HookListener.PostThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokePostThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
-            }
+            subs[i].InvokePostThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
         }
     }
 }

@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCBaseEntitySUB_CallUseTogglePre(ref CBaseEntitySUB_CallUseTogglePreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseEntitySUB_CallUseToggle);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseEntitySUB_CallUseTogglePre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseEntitySUB_CallUseTogglePre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCBaseEntitySUB_CallUseTogglePost(ref CBaseEntitySUB_CallUseTogglePostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseEntitySUB_CallUseToggle);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseEntitySUB_CallUseTogglePost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseEntitySUB_CallUseTogglePost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CBaseEntitySUB_CallUseToggleHook : ICBaseEntitySUB_CallUseToggleHook
+internal sealed class CBaseEntitySUB_CallUseToggleHook(GameHooksService owner) : ICBaseEntitySUB_CallUseToggleHook
 {
     private event OnCBaseEntitySUB_CallUseTogglePreDelegate? _Pre;
     private event OnCBaseEntitySUB_CallUseTogglePostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CBaseEntitySUB_CallUseToggleHook : ICBaseEntitySUB_CallUse
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseEntitySUB_CallUseToggle);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseEntitySUB_CallUseToggle, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CBaseEntitySUB_CallUseToggleHook : ICBaseEntitySUB_CallUse
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseEntitySUB_CallUseToggle);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseEntitySUB_CallUseToggle, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CBaseEntitySUB_CallUseToggleHook : ICBaseEntitySUB_CallUse
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseEntitySUB_CallUseToggle);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseEntitySUB_CallUseToggle, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CBaseEntitySUB_CallUseToggleHook : ICBaseEntitySUB_CallUse
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseEntitySUB_CallUseToggle);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseEntitySUB_CallUseToggle, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CBaseEntitySUB_CallUseToggleHook : ICBaseEntitySUB_CallUse
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseEntitySUB_CallUseToggle);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseEntitySUB_CallUseToggle, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseEntitySUB_CallUseToggle);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseEntitySUB_CallUseToggle, owner);
         }
     }
 

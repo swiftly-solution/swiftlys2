@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCItemDefuserActivateThinkPre(ref CItemDefuserActivateThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CItemDefuserActivateThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCItemDefuserActivateThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCItemDefuserActivateThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCItemDefuserActivateThinkPost(ref CItemDefuserActivateThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CItemDefuserActivateThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCItemDefuserActivateThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCItemDefuserActivateThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CItemDefuserActivateThinkHook : ICItemDefuserActivateThinkHook
+internal sealed class CItemDefuserActivateThinkHook(GameHooksService owner) : ICItemDefuserActivateThinkHook
 {
     private event OnCItemDefuserActivateThinkPreDelegate? _Pre;
     private event OnCItemDefuserActivateThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CItemDefuserActivateThinkHook : ICItemDefuserActivateThink
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CItemDefuserActivateThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CItemDefuserActivateThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CItemDefuserActivateThinkHook : ICItemDefuserActivateThink
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemDefuserActivateThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemDefuserActivateThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CItemDefuserActivateThinkHook : ICItemDefuserActivateThink
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CItemDefuserActivateThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CItemDefuserActivateThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CItemDefuserActivateThinkHook : ICItemDefuserActivateThink
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemDefuserActivateThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemDefuserActivateThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CItemDefuserActivateThinkHook : ICItemDefuserActivateThink
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemDefuserActivateThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemDefuserActivateThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemDefuserActivateThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemDefuserActivateThink, owner);
         }
     }
 

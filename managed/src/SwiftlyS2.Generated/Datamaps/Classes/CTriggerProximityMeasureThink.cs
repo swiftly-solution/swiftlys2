@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCTriggerProximityMeasureThinkPre(ref CTriggerProximityMeasureThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CTriggerProximityMeasureThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCTriggerProximityMeasureThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCTriggerProximityMeasureThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCTriggerProximityMeasureThinkPost(ref CTriggerProximityMeasureThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CTriggerProximityMeasureThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCTriggerProximityMeasureThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCTriggerProximityMeasureThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CTriggerProximityMeasureThinkHook : ICTriggerProximityMeasureThinkHook
+internal sealed class CTriggerProximityMeasureThinkHook(GameHooksService owner) : ICTriggerProximityMeasureThinkHook
 {
     private event OnCTriggerProximityMeasureThinkPreDelegate? _Pre;
     private event OnCTriggerProximityMeasureThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CTriggerProximityMeasureThinkHook : ICTriggerProximityMeas
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerProximityMeasureThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerProximityMeasureThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CTriggerProximityMeasureThinkHook : ICTriggerProximityMeas
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerProximityMeasureThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerProximityMeasureThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CTriggerProximityMeasureThinkHook : ICTriggerProximityMeas
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerProximityMeasureThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerProximityMeasureThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CTriggerProximityMeasureThinkHook : ICTriggerProximityMeas
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerProximityMeasureThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerProximityMeasureThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CTriggerProximityMeasureThinkHook : ICTriggerProximityMeas
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerProximityMeasureThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerProximityMeasureThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerProximityMeasureThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerProximityMeasureThink, owner);
         }
     }
 

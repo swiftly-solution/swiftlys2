@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCItemMaterializePre(ref CItemMaterializePreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CItemMaterialize);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCItemMaterializePre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCItemMaterializePre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCItemMaterializePost(ref CItemMaterializePostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CItemMaterialize);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCItemMaterializePost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCItemMaterializePost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CItemMaterializeHook : ICItemMaterializeHook
+internal sealed class CItemMaterializeHook(GameHooksService owner) : ICItemMaterializeHook
 {
     private event OnCItemMaterializePreDelegate? _Pre;
     private event OnCItemMaterializePostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CItemMaterializeHook : ICItemMaterializeHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CItemMaterialize);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CItemMaterialize, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CItemMaterializeHook : ICItemMaterializeHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemMaterialize);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemMaterialize, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CItemMaterializeHook : ICItemMaterializeHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CItemMaterialize);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CItemMaterialize, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CItemMaterializeHook : ICItemMaterializeHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemMaterialize);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemMaterialize, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CItemMaterializeHook : ICItemMaterializeHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemMaterialize);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemMaterialize, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemMaterialize);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemMaterialize, owner);
         }
     }
 

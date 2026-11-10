@@ -2,9 +2,9 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class GameHookDatamapCAmbientGeneric : IGameHookDatamapCAmbientGeneric
+internal sealed class GameHookDatamapCAmbientGeneric(GameHooksService owner) : IGameHookDatamapCAmbientGeneric
 {
-    internal readonly CAmbientGenericRampThinkHook CAmbientGenericRampThinkHook = new();
+    internal readonly CAmbientGenericRampThinkHook CAmbientGenericRampThinkHook = new(owner);
 
     public ICAmbientGenericRampThinkHook RampThink => CAmbientGenericRampThinkHook;
 

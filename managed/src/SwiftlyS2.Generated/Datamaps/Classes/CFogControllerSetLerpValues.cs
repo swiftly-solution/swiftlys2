@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCFogControllerSetLerpValuesPre(ref CFogControllerSetLerpValuesPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CFogControllerSetLerpValues);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCFogControllerSetLerpValuesPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCFogControllerSetLerpValuesPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCFogControllerSetLerpValuesPost(ref CFogControllerSetLerpValuesPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CFogControllerSetLerpValues);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCFogControllerSetLerpValuesPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCFogControllerSetLerpValuesPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CFogControllerSetLerpValuesHook : ICFogControllerSetLerpValuesHook
+internal sealed class CFogControllerSetLerpValuesHook(GameHooksService owner) : ICFogControllerSetLerpValuesHook
 {
     private event OnCFogControllerSetLerpValuesPreDelegate? _Pre;
     private event OnCFogControllerSetLerpValuesPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CFogControllerSetLerpValuesHook : ICFogControllerSetLerpVa
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFogControllerSetLerpValues);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFogControllerSetLerpValues, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CFogControllerSetLerpValuesHook : ICFogControllerSetLerpVa
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFogControllerSetLerpValues);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFogControllerSetLerpValues, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CFogControllerSetLerpValuesHook : ICFogControllerSetLerpVa
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFogControllerSetLerpValues);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFogControllerSetLerpValues, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CFogControllerSetLerpValuesHook : ICFogControllerSetLerpVa
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFogControllerSetLerpValues);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFogControllerSetLerpValues, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CFogControllerSetLerpValuesHook : ICFogControllerSetLerpVa
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFogControllerSetLerpValues);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFogControllerSetLerpValues, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFogControllerSetLerpValues);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFogControllerSetLerpValues, owner);
         }
     }
 

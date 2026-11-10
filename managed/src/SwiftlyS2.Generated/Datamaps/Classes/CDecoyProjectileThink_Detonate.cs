@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCDecoyProjectileThink_DetonatePre(ref CDecoyProjectileThink_DetonatePreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CDecoyProjectileThink_Detonate);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCDecoyProjectileThink_DetonatePre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCDecoyProjectileThink_DetonatePre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCDecoyProjectileThink_DetonatePost(ref CDecoyProjectileThink_DetonatePostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CDecoyProjectileThink_Detonate);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCDecoyProjectileThink_DetonatePost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCDecoyProjectileThink_DetonatePost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CDecoyProjectileThink_DetonateHook : ICDecoyProjectileThink_DetonateHook
+internal sealed class CDecoyProjectileThink_DetonateHook(GameHooksService owner) : ICDecoyProjectileThink_DetonateHook
 {
     private event OnCDecoyProjectileThink_DetonatePreDelegate? _Pre;
     private event OnCDecoyProjectileThink_DetonatePostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CDecoyProjectileThink_DetonateHook : ICDecoyProjectileThin
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CDecoyProjectileThink_Detonate);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CDecoyProjectileThink_Detonate, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CDecoyProjectileThink_DetonateHook : ICDecoyProjectileThin
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CDecoyProjectileThink_Detonate);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CDecoyProjectileThink_Detonate, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CDecoyProjectileThink_DetonateHook : ICDecoyProjectileThin
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CDecoyProjectileThink_Detonate);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CDecoyProjectileThink_Detonate, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CDecoyProjectileThink_DetonateHook : ICDecoyProjectileThin
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CDecoyProjectileThink_Detonate);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CDecoyProjectileThink_Detonate, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CDecoyProjectileThink_DetonateHook : ICDecoyProjectileThin
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CDecoyProjectileThink_Detonate);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CDecoyProjectileThink_Detonate, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CDecoyProjectileThink_Detonate);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CDecoyProjectileThink_Detonate, owner);
         }
     }
 

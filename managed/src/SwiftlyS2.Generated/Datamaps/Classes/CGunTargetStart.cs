@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCGunTargetStartPre(ref CGunTargetStartPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CGunTargetStart);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCGunTargetStartPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCGunTargetStartPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCGunTargetStartPost(ref CGunTargetStartPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CGunTargetStart);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCGunTargetStartPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCGunTargetStartPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CGunTargetStartHook : ICGunTargetStartHook
+internal sealed class CGunTargetStartHook(GameHooksService owner) : ICGunTargetStartHook
 {
     private event OnCGunTargetStartPreDelegate? _Pre;
     private event OnCGunTargetStartPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CGunTargetStartHook : ICGunTargetStartHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CGunTargetStart);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CGunTargetStart, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CGunTargetStartHook : ICGunTargetStartHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CGunTargetStart);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CGunTargetStart, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CGunTargetStartHook : ICGunTargetStartHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CGunTargetStart);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CGunTargetStart, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CGunTargetStartHook : ICGunTargetStartHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CGunTargetStart);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CGunTargetStart, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CGunTargetStartHook : ICGunTargetStartHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CGunTargetStart);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CGunTargetStart, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CGunTargetStart);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CGunTargetStart, owner);
         }
     }
 

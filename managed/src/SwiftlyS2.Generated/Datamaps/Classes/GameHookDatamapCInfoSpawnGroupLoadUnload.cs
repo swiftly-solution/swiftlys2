@@ -2,10 +2,10 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class GameHookDatamapCInfoSpawnGroupLoadUnload : IGameHookDatamapCInfoSpawnGroupLoadUnload
+internal sealed class GameHookDatamapCInfoSpawnGroupLoadUnload(GameHooksService owner) : IGameHookDatamapCInfoSpawnGroupLoadUnload
 {
-    internal readonly CInfoSpawnGroupLoadUnloadSpawnGroupLoadingThinkHook CInfoSpawnGroupLoadUnloadSpawnGroupLoadingThinkHook = new();
-    internal readonly CInfoSpawnGroupLoadUnloadSpawnGroupUnloadingThinkHook CInfoSpawnGroupLoadUnloadSpawnGroupUnloadingThinkHook = new();
+    internal readonly CInfoSpawnGroupLoadUnloadSpawnGroupLoadingThinkHook CInfoSpawnGroupLoadUnloadSpawnGroupLoadingThinkHook = new(owner);
+    internal readonly CInfoSpawnGroupLoadUnloadSpawnGroupUnloadingThinkHook CInfoSpawnGroupLoadUnloadSpawnGroupUnloadingThinkHook = new(owner);
 
     public ICInfoSpawnGroupLoadUnloadSpawnGroupLoadingThinkHook SpawnGroupLoadingThink => CInfoSpawnGroupLoadUnloadSpawnGroupLoadingThinkHook;
     public ICInfoSpawnGroupLoadUnloadSpawnGroupUnloadingThinkHook SpawnGroupUnloadingThink => CInfoSpawnGroupLoadUnloadSpawnGroupUnloadingThinkHook;

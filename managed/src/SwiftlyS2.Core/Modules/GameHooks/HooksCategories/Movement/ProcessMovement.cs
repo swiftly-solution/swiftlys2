@@ -2,7 +2,7 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class ProcessMovementMovementHook : IProcessMovementMovementHook
+internal sealed class ProcessMovementMovementHook( GameHooksService owner ) : IProcessMovementMovementHook
 {
     internal event OnProcessMovementMovementPreDelegate? _Pre;
     internal event OnProcessMovementMovementPostDelegate? _Post;
@@ -11,13 +11,13 @@ internal sealed class ProcessMovementMovementHook : IProcessMovementMovementHook
     {
         add
         {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.ProcessMovement);
+            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.ProcessMovement, owner);
             _Pre += value;
         }
         remove
         {
             _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.ProcessMovement);
+            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.ProcessMovement, owner);
         }
     }
 
@@ -25,13 +25,13 @@ internal sealed class ProcessMovementMovementHook : IProcessMovementMovementHook
     {
         add
         {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.ProcessMovement);
+            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.ProcessMovement, owner);
             _Post += value;
         }
         remove
         {
             _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.ProcessMovement);
+            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.ProcessMovement, owner);
         }
     }
 
@@ -43,7 +43,7 @@ internal sealed class ProcessMovementMovementHook : IProcessMovementMovementHook
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.ProcessMovement);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.ProcessMovement);
+        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.ProcessMovement, owner);
+        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.ProcessMovement, owner);
     }
 }

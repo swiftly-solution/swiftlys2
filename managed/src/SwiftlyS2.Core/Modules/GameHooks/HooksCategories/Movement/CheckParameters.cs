@@ -2,7 +2,7 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class CheckParametersMovementHook : ICheckParametersMovementHook
+internal sealed class CheckParametersMovementHook( GameHooksService owner ) : ICheckParametersMovementHook
 {
     internal event OnCheckParametersMovementPreDelegate? _Pre;
     internal event OnCheckParametersMovementPostDelegate? _Post;
@@ -11,13 +11,13 @@ internal sealed class CheckParametersMovementHook : ICheckParametersMovementHook
     {
         add
         {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.CheckParameters);
+            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.CheckParameters, owner);
             _Pre += value;
         }
         remove
         {
             _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.CheckParameters);
+            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.CheckParameters, owner);
         }
     }
 
@@ -25,13 +25,13 @@ internal sealed class CheckParametersMovementHook : ICheckParametersMovementHook
     {
         add
         {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.CheckParameters);
+            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.CheckParameters, owner);
             _Post += value;
         }
         remove
         {
             _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.CheckParameters);
+            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.CheckParameters, owner);
         }
     }
 
@@ -43,7 +43,7 @@ internal sealed class CheckParametersMovementHook : ICheckParametersMovementHook
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.CheckParameters);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.CheckParameters);
+        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.CheckParameters, owner);
+        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.CheckParameters, owner);
     }
 }

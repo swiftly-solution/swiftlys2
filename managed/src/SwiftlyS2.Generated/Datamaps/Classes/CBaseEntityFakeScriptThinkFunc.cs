@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCBaseEntityFakeScriptThinkFuncPre(ref CBaseEntityFakeScriptThinkFuncPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseEntityFakeScriptThinkFunc);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseEntityFakeScriptThinkFuncPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseEntityFakeScriptThinkFuncPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCBaseEntityFakeScriptThinkFuncPost(ref CBaseEntityFakeScriptThinkFuncPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseEntityFakeScriptThinkFunc);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseEntityFakeScriptThinkFuncPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseEntityFakeScriptThinkFuncPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CBaseEntityFakeScriptThinkFuncHook : ICBaseEntityFakeScriptThinkFuncHook
+internal sealed class CBaseEntityFakeScriptThinkFuncHook(GameHooksService owner) : ICBaseEntityFakeScriptThinkFuncHook
 {
     private event OnCBaseEntityFakeScriptThinkFuncPreDelegate? _Pre;
     private event OnCBaseEntityFakeScriptThinkFuncPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CBaseEntityFakeScriptThinkFuncHook : ICBaseEntityFakeScrip
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseEntityFakeScriptThinkFunc);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseEntityFakeScriptThinkFunc, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CBaseEntityFakeScriptThinkFuncHook : ICBaseEntityFakeScrip
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseEntityFakeScriptThinkFunc);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseEntityFakeScriptThinkFunc, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CBaseEntityFakeScriptThinkFuncHook : ICBaseEntityFakeScrip
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseEntityFakeScriptThinkFunc);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseEntityFakeScriptThinkFunc, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CBaseEntityFakeScriptThinkFuncHook : ICBaseEntityFakeScrip
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseEntityFakeScriptThinkFunc);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseEntityFakeScriptThinkFunc, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CBaseEntityFakeScriptThinkFuncHook : ICBaseEntityFakeScrip
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseEntityFakeScriptThinkFunc);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseEntityFakeScriptThinkFunc, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseEntityFakeScriptThinkFunc);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseEntityFakeScriptThinkFunc, owner);
         }
     }
 

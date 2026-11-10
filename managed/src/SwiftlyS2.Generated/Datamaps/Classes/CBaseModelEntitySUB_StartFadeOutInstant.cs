@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCBaseModelEntitySUB_StartFadeOutInstantPre(ref CBaseModelEntitySUB_StartFadeOutInstantPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseModelEntitySUB_StartFadeOutInstant);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseModelEntitySUB_StartFadeOutInstantPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseModelEntitySUB_StartFadeOutInstantPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCBaseModelEntitySUB_StartFadeOutInstantPost(ref CBaseModelEntitySUB_StartFadeOutInstantPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseModelEntitySUB_StartFadeOutInstant);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseModelEntitySUB_StartFadeOutInstantPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseModelEntitySUB_StartFadeOutInstantPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CBaseModelEntitySUB_StartFadeOutInstantHook : ICBaseModelEntitySUB_StartFadeOutInstantHook
+internal sealed class CBaseModelEntitySUB_StartFadeOutInstantHook(GameHooksService owner) : ICBaseModelEntitySUB_StartFadeOutInstantHook
 {
     private event OnCBaseModelEntitySUB_StartFadeOutInstantPreDelegate? _Pre;
     private event OnCBaseModelEntitySUB_StartFadeOutInstantPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CBaseModelEntitySUB_StartFadeOutInstantHook : ICBaseModelE
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseModelEntitySUB_StartFadeOutInstant);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseModelEntitySUB_StartFadeOutInstant, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CBaseModelEntitySUB_StartFadeOutInstantHook : ICBaseModelE
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseModelEntitySUB_StartFadeOutInstant);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseModelEntitySUB_StartFadeOutInstant, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CBaseModelEntitySUB_StartFadeOutInstantHook : ICBaseModelE
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseModelEntitySUB_StartFadeOutInstant);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseModelEntitySUB_StartFadeOutInstant, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CBaseModelEntitySUB_StartFadeOutInstantHook : ICBaseModelE
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseModelEntitySUB_StartFadeOutInstant);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseModelEntitySUB_StartFadeOutInstant, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CBaseModelEntitySUB_StartFadeOutInstantHook : ICBaseModelE
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseModelEntitySUB_StartFadeOutInstant);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseModelEntitySUB_StartFadeOutInstant, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseModelEntitySUB_StartFadeOutInstant);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseModelEntitySUB_StartFadeOutInstant, owner);
         }
     }
 

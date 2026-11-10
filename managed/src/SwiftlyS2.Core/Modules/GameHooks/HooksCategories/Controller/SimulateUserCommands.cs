@@ -2,7 +2,7 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class SimulateUserCommandsHook : ISimulateUserCommandsHook
+internal sealed class SimulateUserCommandsHook( GameHooksService owner ) : ISimulateUserCommandsHook
 {
     private event OnSimulateUserCommandsPreDelegate? _Pre;
     private event OnSimulateUserCommandsPostDelegate? _Post;
@@ -11,13 +11,13 @@ internal sealed class SimulateUserCommandsHook : ISimulateUserCommandsHook
     {
         add
         {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.SimulateUserCommands);
+            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.SimulateUserCommands, owner);
             _Pre += value;
         }
         remove
         {
             _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.SimulateUserCommands);
+            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.SimulateUserCommands, owner);
         }
     }
 
@@ -25,13 +25,13 @@ internal sealed class SimulateUserCommandsHook : ISimulateUserCommandsHook
     {
         add
         {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.SimulateUserCommands);
+            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.SimulateUserCommands, owner);
             _Post += value;
         }
         remove
         {
             _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.SimulateUserCommands);
+            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.SimulateUserCommands, owner);
         }
     }
 
@@ -43,7 +43,7 @@ internal sealed class SimulateUserCommandsHook : ISimulateUserCommandsHook
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.SimulateUserCommands);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.SimulateUserCommands);
+        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.SimulateUserCommands, owner);
+        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.SimulateUserCommands, owner);
     }
 }

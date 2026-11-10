@@ -2,7 +2,7 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class CheckJumpButtonLegacyMovementHook : ICheckJumpButtonLegacyMovementHook
+internal sealed class CheckJumpButtonLegacyMovementHook( GameHooksService owner ) : ICheckJumpButtonLegacyMovementHook
 {
     internal event OnCheckJumpButtonLegacyMovementPreDelegate? _Pre;
     internal event OnCheckJumpButtonLegacyMovementPostDelegate? _Post;
@@ -11,13 +11,13 @@ internal sealed class CheckJumpButtonLegacyMovementHook : ICheckJumpButtonLegacy
     {
         add
         {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.CheckJumpButtonLegacy);
+            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.CheckJumpButtonLegacy, owner);
             _Pre += value;
         }
         remove
         {
             _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.CheckJumpButtonLegacy);
+            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.CheckJumpButtonLegacy, owner);
         }
     }
 
@@ -25,13 +25,13 @@ internal sealed class CheckJumpButtonLegacyMovementHook : ICheckJumpButtonLegacy
     {
         add
         {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.CheckJumpButtonLegacy);
+            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.CheckJumpButtonLegacy, owner);
             _Post += value;
         }
         remove
         {
             _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.CheckJumpButtonLegacy);
+            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.CheckJumpButtonLegacy, owner);
         }
     }
 
@@ -43,7 +43,7 @@ internal sealed class CheckJumpButtonLegacyMovementHook : ICheckJumpButtonLegacy
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.CheckJumpButtonLegacy);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.CheckJumpButtonLegacy);
+        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.CheckJumpButtonLegacy, owner);
+        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.CheckJumpButtonLegacy, owner);
     }
 }

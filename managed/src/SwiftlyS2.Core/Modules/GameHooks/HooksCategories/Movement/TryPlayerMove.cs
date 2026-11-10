@@ -2,7 +2,7 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class TryPlayerMoveMovementHook : ITryPlayerMoveMovementHook
+internal sealed class TryPlayerMoveMovementHook( GameHooksService owner ) : ITryPlayerMoveMovementHook
 {
     internal event OnTryPlayerMoveMovementPreDelegate? _Pre;
     internal event OnTryPlayerMoveMovementPostDelegate? _Post;
@@ -11,13 +11,13 @@ internal sealed class TryPlayerMoveMovementHook : ITryPlayerMoveMovementHook
     {
         add
         {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.TryPlayerMove);
+            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.TryPlayerMove, owner);
             _Pre += value;
         }
         remove
         {
             _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.TryPlayerMove);
+            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.TryPlayerMove, owner);
         }
     }
 
@@ -25,13 +25,13 @@ internal sealed class TryPlayerMoveMovementHook : ITryPlayerMoveMovementHook
     {
         add
         {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.TryPlayerMove);
+            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.TryPlayerMove, owner);
             _Post += value;
         }
         remove
         {
             _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.TryPlayerMove);
+            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.TryPlayerMove, owner);
         }
     }
 
@@ -43,7 +43,7 @@ internal sealed class TryPlayerMoveMovementHook : ITryPlayerMoveMovementHook
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.TryPlayerMove);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.TryPlayerMove);
+        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.TryPlayerMove, owner);
+        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.TryPlayerMove, owner);
     }
 }

@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCSpriteAnimateThinkPre(ref CSpriteAnimateThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CSpriteAnimateThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCSpriteAnimateThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCSpriteAnimateThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCSpriteAnimateThinkPost(ref CSpriteAnimateThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CSpriteAnimateThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCSpriteAnimateThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCSpriteAnimateThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CSpriteAnimateThinkHook : ICSpriteAnimateThinkHook
+internal sealed class CSpriteAnimateThinkHook(GameHooksService owner) : ICSpriteAnimateThinkHook
 {
     private event OnCSpriteAnimateThinkPreDelegate? _Pre;
     private event OnCSpriteAnimateThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CSpriteAnimateThinkHook : ICSpriteAnimateThinkHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSpriteAnimateThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSpriteAnimateThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CSpriteAnimateThinkHook : ICSpriteAnimateThinkHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSpriteAnimateThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSpriteAnimateThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CSpriteAnimateThinkHook : ICSpriteAnimateThinkHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSpriteAnimateThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSpriteAnimateThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CSpriteAnimateThinkHook : ICSpriteAnimateThinkHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSpriteAnimateThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSpriteAnimateThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CSpriteAnimateThinkHook : ICSpriteAnimateThinkHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSpriteAnimateThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSpriteAnimateThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSpriteAnimateThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSpriteAnimateThink, owner);
         }
     }
 

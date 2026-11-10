@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCChickenChickenUsePre(ref CChickenChickenUsePreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CChickenChickenUse);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCChickenChickenUsePre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCChickenChickenUsePre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCChickenChickenUsePost(ref CChickenChickenUsePostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CChickenChickenUse);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCChickenChickenUsePost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCChickenChickenUsePost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CChickenChickenUseHook : ICChickenChickenUseHook
+internal sealed class CChickenChickenUseHook(GameHooksService owner) : ICChickenChickenUseHook
 {
     private event OnCChickenChickenUsePreDelegate? _Pre;
     private event OnCChickenChickenUsePostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CChickenChickenUseHook : ICChickenChickenUseHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CChickenChickenUse);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CChickenChickenUse, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CChickenChickenUseHook : ICChickenChickenUseHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CChickenChickenUse);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CChickenChickenUse, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CChickenChickenUseHook : ICChickenChickenUseHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CChickenChickenUse);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CChickenChickenUse, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CChickenChickenUseHook : ICChickenChickenUseHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CChickenChickenUse);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CChickenChickenUse, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CChickenChickenUseHook : ICChickenChickenUseHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CChickenChickenUse);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CChickenChickenUse, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CChickenChickenUse);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CChickenChickenUse, owner);
         }
     }
 

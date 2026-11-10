@@ -2,12 +2,12 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class GameHookDatamapCSprite : IGameHookDatamapCSprite
+internal sealed class GameHookDatamapCSprite(GameHooksService owner) : IGameHookDatamapCSprite
 {
-    internal readonly CSpriteAnimateThinkHook CSpriteAnimateThinkHook = new();
-    internal readonly CSpriteAnimateUntilDeadHook CSpriteAnimateUntilDeadHook = new();
-    internal readonly CSpriteBeginFadeOutThinkHook CSpriteBeginFadeOutThinkHook = new();
-    internal readonly CSpriteExpandThinkHook CSpriteExpandThinkHook = new();
+    internal readonly CSpriteAnimateThinkHook CSpriteAnimateThinkHook = new(owner);
+    internal readonly CSpriteAnimateUntilDeadHook CSpriteAnimateUntilDeadHook = new(owner);
+    internal readonly CSpriteBeginFadeOutThinkHook CSpriteBeginFadeOutThinkHook = new(owner);
+    internal readonly CSpriteExpandThinkHook CSpriteExpandThinkHook = new(owner);
 
     public ICSpriteAnimateThinkHook AnimateThink => CSpriteAnimateThinkHook;
     public ICSpriteAnimateUntilDeadHook AnimateUntilDead => CSpriteAnimateUntilDeadHook;

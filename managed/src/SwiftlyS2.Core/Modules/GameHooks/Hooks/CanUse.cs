@@ -85,25 +85,21 @@ internal static partial class GameHooksPublisher
 
     internal static void InvokeCanUsePre( ref CanUseWeaponPreContext ctx )
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(HookListener.CanUse);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeCanUsePre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
-            }
+            subs[i].InvokeCanUsePre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
         }
     }
 
     internal static void InvokeCanUsePost( ref CanUseWeaponPostContext ctx )
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(HookListener.CanUse);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeCanUsePost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
-            }
+            subs[i].InvokeCanUsePost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
         }
     }
 }

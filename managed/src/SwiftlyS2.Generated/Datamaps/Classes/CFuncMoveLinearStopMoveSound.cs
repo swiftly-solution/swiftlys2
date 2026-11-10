@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCFuncMoveLinearStopMoveSoundPre(ref CFuncMoveLinearStopMoveSoundPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CFuncMoveLinearStopMoveSound);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCFuncMoveLinearStopMoveSoundPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCFuncMoveLinearStopMoveSoundPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCFuncMoveLinearStopMoveSoundPost(ref CFuncMoveLinearStopMoveSoundPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CFuncMoveLinearStopMoveSound);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCFuncMoveLinearStopMoveSoundPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCFuncMoveLinearStopMoveSoundPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CFuncMoveLinearStopMoveSoundHook : ICFuncMoveLinearStopMoveSoundHook
+internal sealed class CFuncMoveLinearStopMoveSoundHook(GameHooksService owner) : ICFuncMoveLinearStopMoveSoundHook
 {
     private event OnCFuncMoveLinearStopMoveSoundPreDelegate? _Pre;
     private event OnCFuncMoveLinearStopMoveSoundPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CFuncMoveLinearStopMoveSoundHook : ICFuncMoveLinearStopMov
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncMoveLinearStopMoveSound);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncMoveLinearStopMoveSound, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CFuncMoveLinearStopMoveSoundHook : ICFuncMoveLinearStopMov
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncMoveLinearStopMoveSound);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncMoveLinearStopMoveSound, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CFuncMoveLinearStopMoveSoundHook : ICFuncMoveLinearStopMov
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncMoveLinearStopMoveSound);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncMoveLinearStopMoveSound, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CFuncMoveLinearStopMoveSoundHook : ICFuncMoveLinearStopMov
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncMoveLinearStopMoveSound);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncMoveLinearStopMoveSound, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CFuncMoveLinearStopMoveSoundHook : ICFuncMoveLinearStopMov
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncMoveLinearStopMoveSound);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncMoveLinearStopMoveSound, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncMoveLinearStopMoveSound);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncMoveLinearStopMoveSound, owner);
         }
     }
 

@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCEnvWindWindThinkPre(ref CEnvWindWindThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CEnvWindWindThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCEnvWindWindThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCEnvWindWindThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCEnvWindWindThinkPost(ref CEnvWindWindThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CEnvWindWindThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCEnvWindWindThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCEnvWindWindThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CEnvWindWindThinkHook : ICEnvWindWindThinkHook
+internal sealed class CEnvWindWindThinkHook(GameHooksService owner) : ICEnvWindWindThinkHook
 {
     private event OnCEnvWindWindThinkPreDelegate? _Pre;
     private event OnCEnvWindWindThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CEnvWindWindThinkHook : ICEnvWindWindThinkHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CEnvWindWindThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CEnvWindWindThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CEnvWindWindThinkHook : ICEnvWindWindThinkHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CEnvWindWindThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CEnvWindWindThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CEnvWindWindThinkHook : ICEnvWindWindThinkHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CEnvWindWindThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CEnvWindWindThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CEnvWindWindThinkHook : ICEnvWindWindThinkHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CEnvWindWindThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CEnvWindWindThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CEnvWindWindThinkHook : ICEnvWindWindThinkHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CEnvWindWindThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CEnvWindWindThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CEnvWindWindThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CEnvWindWindThink, owner);
         }
     }
 

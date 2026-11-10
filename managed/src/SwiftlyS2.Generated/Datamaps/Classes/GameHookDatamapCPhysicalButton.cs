@@ -2,16 +2,16 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class GameHookDatamapCPhysicalButton : IGameHookDatamapCPhysicalButton
+internal sealed class GameHookDatamapCPhysicalButton(GameHooksService owner) : IGameHookDatamapCPhysicalButton
 {
-    internal readonly CPhysicalButtonButtonActivateHook CPhysicalButtonButtonActivateHook = new();
-    internal readonly CPhysicalButtonButtonBackHomeHook CPhysicalButtonButtonBackHomeHook = new();
-    internal readonly CPhysicalButtonButtonReturnHook CPhysicalButtonButtonReturnHook = new();
-    internal readonly CPhysicalButtonButtonTouchHook CPhysicalButtonButtonTouchHook = new();
-    internal readonly CPhysicalButtonEndTouchHook CPhysicalButtonEndTouchHook = new();
-    internal readonly CPhysicalButtonPhysicsThinkHook CPhysicalButtonPhysicsThinkHook = new();
-    internal readonly CPhysicalButtonSetupButtonHook CPhysicalButtonSetupButtonHook = new();
-    internal readonly CPhysicalButtonTriggerAndWaitHook CPhysicalButtonTriggerAndWaitHook = new();
+    internal readonly CPhysicalButtonButtonActivateHook CPhysicalButtonButtonActivateHook = new(owner);
+    internal readonly CPhysicalButtonButtonBackHomeHook CPhysicalButtonButtonBackHomeHook = new(owner);
+    internal readonly CPhysicalButtonButtonReturnHook CPhysicalButtonButtonReturnHook = new(owner);
+    internal readonly CPhysicalButtonButtonTouchHook CPhysicalButtonButtonTouchHook = new(owner);
+    internal readonly CPhysicalButtonEndTouchHook CPhysicalButtonEndTouchHook = new(owner);
+    internal readonly CPhysicalButtonPhysicsThinkHook CPhysicalButtonPhysicsThinkHook = new(owner);
+    internal readonly CPhysicalButtonSetupButtonHook CPhysicalButtonSetupButtonHook = new(owner);
+    internal readonly CPhysicalButtonTriggerAndWaitHook CPhysicalButtonTriggerAndWaitHook = new(owner);
 
     public ICPhysicalButtonButtonActivateHook ButtonActivate => CPhysicalButtonButtonActivateHook;
     public ICPhysicalButtonButtonBackHomeHook ButtonBackHome => CPhysicalButtonButtonBackHomeHook;

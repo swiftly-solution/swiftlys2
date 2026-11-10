@@ -2,9 +2,9 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class GameHookDatamapCPhysicsPropRespawnable : IGameHookDatamapCPhysicsPropRespawnable
+internal sealed class GameHookDatamapCPhysicsPropRespawnable(GameHooksService owner) : IGameHookDatamapCPhysicsPropRespawnable
 {
-    internal readonly CPhysicsPropRespawnableMaterializeHook CPhysicsPropRespawnableMaterializeHook = new();
+    internal readonly CPhysicsPropRespawnableMaterializeHook CPhysicsPropRespawnableMaterializeHook = new(owner);
 
     public ICPhysicsPropRespawnableMaterializeHook Materialize => CPhysicsPropRespawnableMaterializeHook;
 

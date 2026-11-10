@@ -2,7 +2,7 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class CheckVelocityMovementHook : ICheckVelocityMovementHook
+internal sealed class CheckVelocityMovementHook( GameHooksService owner ) : ICheckVelocityMovementHook
 {
     internal event OnCheckVelocityMovementPreDelegate? _Pre;
     internal event OnCheckVelocityMovementPostDelegate? _Post;
@@ -11,13 +11,13 @@ internal sealed class CheckVelocityMovementHook : ICheckVelocityMovementHook
     {
         add
         {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.CheckVelocity);
+            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.CheckVelocity, owner);
             _Pre += value;
         }
         remove
         {
             _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.CheckVelocity);
+            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.CheckVelocity, owner);
         }
     }
 
@@ -25,13 +25,13 @@ internal sealed class CheckVelocityMovementHook : ICheckVelocityMovementHook
     {
         add
         {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.CheckVelocity);
+            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.CheckVelocity, owner);
             _Post += value;
         }
         remove
         {
             _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.CheckVelocity);
+            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.CheckVelocity, owner);
         }
     }
 
@@ -43,7 +43,7 @@ internal sealed class CheckVelocityMovementHook : ICheckVelocityMovementHook
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.CheckVelocity);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.CheckVelocity);
+        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.CheckVelocity, owner);
+        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.CheckVelocity, owner);
     }
 }

@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCMapVetoPickControllerVoteControllerThinkPre(ref CMapVetoPickControllerVoteControllerThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CMapVetoPickControllerVoteControllerThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCMapVetoPickControllerVoteControllerThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCMapVetoPickControllerVoteControllerThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCMapVetoPickControllerVoteControllerThinkPost(ref CMapVetoPickControllerVoteControllerThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CMapVetoPickControllerVoteControllerThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCMapVetoPickControllerVoteControllerThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCMapVetoPickControllerVoteControllerThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CMapVetoPickControllerVoteControllerThinkHook : ICMapVetoPickControllerVoteControllerThinkHook
+internal sealed class CMapVetoPickControllerVoteControllerThinkHook(GameHooksService owner) : ICMapVetoPickControllerVoteControllerThinkHook
 {
     private event OnCMapVetoPickControllerVoteControllerThinkPreDelegate? _Pre;
     private event OnCMapVetoPickControllerVoteControllerThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CMapVetoPickControllerVoteControllerThinkHook : ICMapVetoP
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CMapVetoPickControllerVoteControllerThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CMapVetoPickControllerVoteControllerThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CMapVetoPickControllerVoteControllerThinkHook : ICMapVetoP
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMapVetoPickControllerVoteControllerThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMapVetoPickControllerVoteControllerThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CMapVetoPickControllerVoteControllerThinkHook : ICMapVetoP
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CMapVetoPickControllerVoteControllerThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CMapVetoPickControllerVoteControllerThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CMapVetoPickControllerVoteControllerThinkHook : ICMapVetoP
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMapVetoPickControllerVoteControllerThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMapVetoPickControllerVoteControllerThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CMapVetoPickControllerVoteControllerThinkHook : ICMapVetoP
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMapVetoPickControllerVoteControllerThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMapVetoPickControllerVoteControllerThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMapVetoPickControllerVoteControllerThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMapVetoPickControllerVoteControllerThink, owner);
         }
     }
 

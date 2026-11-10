@@ -2,9 +2,9 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class GameHookDatamapCItemGenericTriggerHelper : IGameHookDatamapCItemGenericTriggerHelper
+internal sealed class GameHookDatamapCItemGenericTriggerHelper(GameHooksService owner) : IGameHookDatamapCItemGenericTriggerHelper
 {
-    internal readonly CItemGenericTriggerHelperItemGenericTriggerHelperTouchHook CItemGenericTriggerHelperItemGenericTriggerHelperTouchHook = new();
+    internal readonly CItemGenericTriggerHelperItemGenericTriggerHelperTouchHook CItemGenericTriggerHelperItemGenericTriggerHelperTouchHook = new(owner);
 
     public ICItemGenericTriggerHelperItemGenericTriggerHelperTouchHook ItemGenericTriggerHelperTouch => CItemGenericTriggerHelperItemGenericTriggerHelperTouchHook;
 

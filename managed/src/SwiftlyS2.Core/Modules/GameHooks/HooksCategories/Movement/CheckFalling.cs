@@ -2,7 +2,7 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class CheckFallingMovementHook : ICheckFallingMovementHook
+internal sealed class CheckFallingMovementHook( GameHooksService owner ) : ICheckFallingMovementHook
 {
     internal event OnCheckFallingMovementPreDelegate? _Pre;
     internal event OnCheckFallingMovementPostDelegate? _Post;
@@ -11,13 +11,13 @@ internal sealed class CheckFallingMovementHook : ICheckFallingMovementHook
     {
         add
         {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.CheckFalling);
+            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.CheckFalling, owner);
             _Pre += value;
         }
         remove
         {
             _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.CheckFalling);
+            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.CheckFalling, owner);
         }
     }
 
@@ -25,13 +25,13 @@ internal sealed class CheckFallingMovementHook : ICheckFallingMovementHook
     {
         add
         {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.CheckFalling);
+            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.CheckFalling, owner);
             _Post += value;
         }
         remove
         {
             _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.CheckFalling);
+            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.CheckFalling, owner);
         }
     }
 
@@ -43,7 +43,7 @@ internal sealed class CheckFallingMovementHook : ICheckFallingMovementHook
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.CheckFalling);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.CheckFalling);
+        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.CheckFalling, owner);
+        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.CheckFalling, owner);
     }
 }

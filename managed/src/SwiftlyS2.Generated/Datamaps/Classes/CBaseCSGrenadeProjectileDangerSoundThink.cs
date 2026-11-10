@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCBaseCSGrenadeProjectileDangerSoundThinkPre(ref CBaseCSGrenadeProjectileDangerSoundThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseCSGrenadeProjectileDangerSoundThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseCSGrenadeProjectileDangerSoundThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseCSGrenadeProjectileDangerSoundThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCBaseCSGrenadeProjectileDangerSoundThinkPost(ref CBaseCSGrenadeProjectileDangerSoundThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseCSGrenadeProjectileDangerSoundThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseCSGrenadeProjectileDangerSoundThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseCSGrenadeProjectileDangerSoundThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CBaseCSGrenadeProjectileDangerSoundThinkHook : ICBaseCSGrenadeProjectileDangerSoundThinkHook
+internal sealed class CBaseCSGrenadeProjectileDangerSoundThinkHook(GameHooksService owner) : ICBaseCSGrenadeProjectileDangerSoundThinkHook
 {
     private event OnCBaseCSGrenadeProjectileDangerSoundThinkPreDelegate? _Pre;
     private event OnCBaseCSGrenadeProjectileDangerSoundThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CBaseCSGrenadeProjectileDangerSoundThinkHook : ICBaseCSGre
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseCSGrenadeProjectileDangerSoundThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseCSGrenadeProjectileDangerSoundThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CBaseCSGrenadeProjectileDangerSoundThinkHook : ICBaseCSGre
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseCSGrenadeProjectileDangerSoundThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseCSGrenadeProjectileDangerSoundThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CBaseCSGrenadeProjectileDangerSoundThinkHook : ICBaseCSGre
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseCSGrenadeProjectileDangerSoundThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseCSGrenadeProjectileDangerSoundThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CBaseCSGrenadeProjectileDangerSoundThinkHook : ICBaseCSGre
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseCSGrenadeProjectileDangerSoundThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseCSGrenadeProjectileDangerSoundThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CBaseCSGrenadeProjectileDangerSoundThinkHook : ICBaseCSGre
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseCSGrenadeProjectileDangerSoundThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseCSGrenadeProjectileDangerSoundThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseCSGrenadeProjectileDangerSoundThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseCSGrenadeProjectileDangerSoundThink, owner);
         }
     }
 

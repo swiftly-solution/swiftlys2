@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCFuncTrainControlsFindPre(ref CFuncTrainControlsFindPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CFuncTrainControlsFind);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCFuncTrainControlsFindPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCFuncTrainControlsFindPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCFuncTrainControlsFindPost(ref CFuncTrainControlsFindPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CFuncTrainControlsFind);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCFuncTrainControlsFindPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCFuncTrainControlsFindPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CFuncTrainControlsFindHook : ICFuncTrainControlsFindHook
+internal sealed class CFuncTrainControlsFindHook(GameHooksService owner) : ICFuncTrainControlsFindHook
 {
     private event OnCFuncTrainControlsFindPreDelegate? _Pre;
     private event OnCFuncTrainControlsFindPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CFuncTrainControlsFindHook : ICFuncTrainControlsFindHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncTrainControlsFind);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncTrainControlsFind, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CFuncTrainControlsFindHook : ICFuncTrainControlsFindHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrainControlsFind);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrainControlsFind, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CFuncTrainControlsFindHook : ICFuncTrainControlsFindHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncTrainControlsFind);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncTrainControlsFind, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CFuncTrainControlsFindHook : ICFuncTrainControlsFindHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrainControlsFind);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrainControlsFind, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CFuncTrainControlsFindHook : ICFuncTrainControlsFindHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrainControlsFind);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrainControlsFind, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrainControlsFind);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrainControlsFind, owner);
         }
     }
 

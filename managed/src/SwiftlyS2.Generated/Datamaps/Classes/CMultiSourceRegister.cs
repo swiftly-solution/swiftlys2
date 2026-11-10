@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCMultiSourceRegisterPre(ref CMultiSourceRegisterPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CMultiSourceRegister);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCMultiSourceRegisterPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCMultiSourceRegisterPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCMultiSourceRegisterPost(ref CMultiSourceRegisterPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CMultiSourceRegister);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCMultiSourceRegisterPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCMultiSourceRegisterPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CMultiSourceRegisterHook : ICMultiSourceRegisterHook
+internal sealed class CMultiSourceRegisterHook(GameHooksService owner) : ICMultiSourceRegisterHook
 {
     private event OnCMultiSourceRegisterPreDelegate? _Pre;
     private event OnCMultiSourceRegisterPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CMultiSourceRegisterHook : ICMultiSourceRegisterHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CMultiSourceRegister);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CMultiSourceRegister, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CMultiSourceRegisterHook : ICMultiSourceRegisterHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMultiSourceRegister);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMultiSourceRegister, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CMultiSourceRegisterHook : ICMultiSourceRegisterHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CMultiSourceRegister);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CMultiSourceRegister, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CMultiSourceRegisterHook : ICMultiSourceRegisterHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMultiSourceRegister);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMultiSourceRegister, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CMultiSourceRegisterHook : ICMultiSourceRegisterHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMultiSourceRegister);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMultiSourceRegister, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMultiSourceRegister);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMultiSourceRegister, owner);
         }
     }
 

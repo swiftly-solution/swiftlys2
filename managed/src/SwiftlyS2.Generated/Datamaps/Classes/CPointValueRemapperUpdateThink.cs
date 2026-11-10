@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCPointValueRemapperUpdateThinkPre(ref CPointValueRemapperUpdateThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CPointValueRemapperUpdateThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCPointValueRemapperUpdateThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCPointValueRemapperUpdateThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCPointValueRemapperUpdateThinkPost(ref CPointValueRemapperUpdateThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CPointValueRemapperUpdateThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCPointValueRemapperUpdateThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCPointValueRemapperUpdateThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CPointValueRemapperUpdateThinkHook : ICPointValueRemapperUpdateThinkHook
+internal sealed class CPointValueRemapperUpdateThinkHook(GameHooksService owner) : ICPointValueRemapperUpdateThinkHook
 {
     private event OnCPointValueRemapperUpdateThinkPreDelegate? _Pre;
     private event OnCPointValueRemapperUpdateThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CPointValueRemapperUpdateThinkHook : ICPointValueRemapperU
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPointValueRemapperUpdateThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPointValueRemapperUpdateThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CPointValueRemapperUpdateThinkHook : ICPointValueRemapperU
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointValueRemapperUpdateThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointValueRemapperUpdateThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CPointValueRemapperUpdateThinkHook : ICPointValueRemapperU
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPointValueRemapperUpdateThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPointValueRemapperUpdateThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CPointValueRemapperUpdateThinkHook : ICPointValueRemapperU
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointValueRemapperUpdateThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointValueRemapperUpdateThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CPointValueRemapperUpdateThinkHook : ICPointValueRemapperU
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointValueRemapperUpdateThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointValueRemapperUpdateThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointValueRemapperUpdateThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointValueRemapperUpdateThink, owner);
         }
     }
 

@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCBaseGrenadeDetonateUsePre(ref CBaseGrenadeDetonateUsePreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseGrenadeDetonateUse);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseGrenadeDetonateUsePre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseGrenadeDetonateUsePre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCBaseGrenadeDetonateUsePost(ref CBaseGrenadeDetonateUsePostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseGrenadeDetonateUse);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseGrenadeDetonateUsePost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseGrenadeDetonateUsePost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CBaseGrenadeDetonateUseHook : ICBaseGrenadeDetonateUseHook
+internal sealed class CBaseGrenadeDetonateUseHook(GameHooksService owner) : ICBaseGrenadeDetonateUseHook
 {
     private event OnCBaseGrenadeDetonateUsePreDelegate? _Pre;
     private event OnCBaseGrenadeDetonateUsePostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CBaseGrenadeDetonateUseHook : ICBaseGrenadeDetonateUseHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseGrenadeDetonateUse);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseGrenadeDetonateUse, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CBaseGrenadeDetonateUseHook : ICBaseGrenadeDetonateUseHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeDetonateUse);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeDetonateUse, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CBaseGrenadeDetonateUseHook : ICBaseGrenadeDetonateUseHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseGrenadeDetonateUse);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseGrenadeDetonateUse, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CBaseGrenadeDetonateUseHook : ICBaseGrenadeDetonateUseHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeDetonateUse);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeDetonateUse, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CBaseGrenadeDetonateUseHook : ICBaseGrenadeDetonateUseHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeDetonateUse);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeDetonateUse, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeDetonateUse);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeDetonateUse, owner);
         }
     }
 

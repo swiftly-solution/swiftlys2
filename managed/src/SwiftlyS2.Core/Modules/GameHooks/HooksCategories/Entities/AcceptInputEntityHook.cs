@@ -2,7 +2,7 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class AcceptInputEntityHook : IAcceptInputEntityHook
+internal sealed class AcceptInputEntityHook( GameHooksService owner ) : IAcceptInputEntityHook
 {
     internal event OnAcceptInputEntityPreDelegate? _Pre;
     internal event OnAcceptInputEntityPostDelegate? _Post;
@@ -11,13 +11,13 @@ internal sealed class AcceptInputEntityHook : IAcceptInputEntityHook
     {
         add
         {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.AcceptInput);
+            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.AcceptInput, owner);
             _Pre += value;
         }
         remove
         {
             _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.AcceptInput);
+            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.AcceptInput, owner);
         }
     }
 
@@ -25,13 +25,13 @@ internal sealed class AcceptInputEntityHook : IAcceptInputEntityHook
     {
         add
         {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.AcceptInput);
+            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.AcceptInput, owner);
             _Post += value;
         }
         remove
         {
             _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.AcceptInput);
+            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.AcceptInput, owner);
         }
     }
 
@@ -43,7 +43,7 @@ internal sealed class AcceptInputEntityHook : IAcceptInputEntityHook
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.AcceptInput);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.AcceptInput);
+        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.AcceptInput, owner);
+        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.AcceptInput, owner);
     }
 }

@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCLogicMeasureMovementMeasureThinkPre(ref CLogicMeasureMovementMeasureThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CLogicMeasureMovementMeasureThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCLogicMeasureMovementMeasureThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCLogicMeasureMovementMeasureThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCLogicMeasureMovementMeasureThinkPost(ref CLogicMeasureMovementMeasureThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CLogicMeasureMovementMeasureThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCLogicMeasureMovementMeasureThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCLogicMeasureMovementMeasureThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CLogicMeasureMovementMeasureThinkHook : ICLogicMeasureMovementMeasureThinkHook
+internal sealed class CLogicMeasureMovementMeasureThinkHook(GameHooksService owner) : ICLogicMeasureMovementMeasureThinkHook
 {
     private event OnCLogicMeasureMovementMeasureThinkPreDelegate? _Pre;
     private event OnCLogicMeasureMovementMeasureThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CLogicMeasureMovementMeasureThinkHook : ICLogicMeasureMove
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CLogicMeasureMovementMeasureThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CLogicMeasureMovementMeasureThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CLogicMeasureMovementMeasureThinkHook : ICLogicMeasureMove
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CLogicMeasureMovementMeasureThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CLogicMeasureMovementMeasureThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CLogicMeasureMovementMeasureThinkHook : ICLogicMeasureMove
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CLogicMeasureMovementMeasureThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CLogicMeasureMovementMeasureThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CLogicMeasureMovementMeasureThinkHook : ICLogicMeasureMove
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CLogicMeasureMovementMeasureThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CLogicMeasureMovementMeasureThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CLogicMeasureMovementMeasureThinkHook : ICLogicMeasureMove
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CLogicMeasureMovementMeasureThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CLogicMeasureMovementMeasureThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CLogicMeasureMovementMeasureThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CLogicMeasureMovementMeasureThink, owner);
         }
     }
 

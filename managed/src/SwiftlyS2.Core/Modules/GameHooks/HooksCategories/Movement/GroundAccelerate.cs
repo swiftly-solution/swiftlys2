@@ -2,7 +2,7 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class GroundAccelerateMovementHook : IGroundAccelerateMovementHook
+internal sealed class GroundAccelerateMovementHook( GameHooksService owner ) : IGroundAccelerateMovementHook
 {
     internal event OnGroundAccelerateMovementPreDelegate? _Pre;
     internal event OnGroundAccelerateMovementPostDelegate? _Post;
@@ -11,13 +11,13 @@ internal sealed class GroundAccelerateMovementHook : IGroundAccelerateMovementHo
     {
         add
         {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.GroundAccelerate);
+            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.GroundAccelerate, owner);
             _Pre += value;
         }
         remove
         {
             _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.GroundAccelerate);
+            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.GroundAccelerate, owner);
         }
     }
 
@@ -25,13 +25,13 @@ internal sealed class GroundAccelerateMovementHook : IGroundAccelerateMovementHo
     {
         add
         {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.GroundAccelerate);
+            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.GroundAccelerate, owner);
             _Post += value;
         }
         remove
         {
             _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.GroundAccelerate);
+            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.GroundAccelerate, owner);
         }
     }
 
@@ -43,7 +43,7 @@ internal sealed class GroundAccelerateMovementHook : IGroundAccelerateMovementHo
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.GroundAccelerate);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.GroundAccelerate);
+        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.GroundAccelerate, owner);
+        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.GroundAccelerate, owner);
     }
 }

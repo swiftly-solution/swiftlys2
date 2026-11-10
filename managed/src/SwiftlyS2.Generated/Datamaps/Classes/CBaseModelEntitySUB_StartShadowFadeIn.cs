@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCBaseModelEntitySUB_StartShadowFadeInPre(ref CBaseModelEntitySUB_StartShadowFadeInPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseModelEntitySUB_StartShadowFadeIn);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseModelEntitySUB_StartShadowFadeInPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseModelEntitySUB_StartShadowFadeInPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCBaseModelEntitySUB_StartShadowFadeInPost(ref CBaseModelEntitySUB_StartShadowFadeInPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseModelEntitySUB_StartShadowFadeIn);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseModelEntitySUB_StartShadowFadeInPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseModelEntitySUB_StartShadowFadeInPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CBaseModelEntitySUB_StartShadowFadeInHook : ICBaseModelEntitySUB_StartShadowFadeInHook
+internal sealed class CBaseModelEntitySUB_StartShadowFadeInHook(GameHooksService owner) : ICBaseModelEntitySUB_StartShadowFadeInHook
 {
     private event OnCBaseModelEntitySUB_StartShadowFadeInPreDelegate? _Pre;
     private event OnCBaseModelEntitySUB_StartShadowFadeInPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CBaseModelEntitySUB_StartShadowFadeInHook : ICBaseModelEnt
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseModelEntitySUB_StartShadowFadeIn);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseModelEntitySUB_StartShadowFadeIn, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CBaseModelEntitySUB_StartShadowFadeInHook : ICBaseModelEnt
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseModelEntitySUB_StartShadowFadeIn);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseModelEntitySUB_StartShadowFadeIn, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CBaseModelEntitySUB_StartShadowFadeInHook : ICBaseModelEnt
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseModelEntitySUB_StartShadowFadeIn);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseModelEntitySUB_StartShadowFadeIn, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CBaseModelEntitySUB_StartShadowFadeInHook : ICBaseModelEnt
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseModelEntitySUB_StartShadowFadeIn);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseModelEntitySUB_StartShadowFadeIn, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CBaseModelEntitySUB_StartShadowFadeInHook : ICBaseModelEnt
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseModelEntitySUB_StartShadowFadeIn);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseModelEntitySUB_StartShadowFadeIn, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseModelEntitySUB_StartShadowFadeIn);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseModelEntitySUB_StartShadowFadeIn, owner);
         }
     }
 

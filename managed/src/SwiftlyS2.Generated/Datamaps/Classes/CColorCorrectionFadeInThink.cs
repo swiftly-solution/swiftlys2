@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCColorCorrectionFadeInThinkPre(ref CColorCorrectionFadeInThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CColorCorrectionFadeInThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCColorCorrectionFadeInThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCColorCorrectionFadeInThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCColorCorrectionFadeInThinkPost(ref CColorCorrectionFadeInThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CColorCorrectionFadeInThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCColorCorrectionFadeInThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCColorCorrectionFadeInThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CColorCorrectionFadeInThinkHook : ICColorCorrectionFadeInThinkHook
+internal sealed class CColorCorrectionFadeInThinkHook(GameHooksService owner) : ICColorCorrectionFadeInThinkHook
 {
     private event OnCColorCorrectionFadeInThinkPreDelegate? _Pre;
     private event OnCColorCorrectionFadeInThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CColorCorrectionFadeInThinkHook : ICColorCorrectionFadeInT
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CColorCorrectionFadeInThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CColorCorrectionFadeInThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CColorCorrectionFadeInThinkHook : ICColorCorrectionFadeInT
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CColorCorrectionFadeInThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CColorCorrectionFadeInThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CColorCorrectionFadeInThinkHook : ICColorCorrectionFadeInT
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CColorCorrectionFadeInThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CColorCorrectionFadeInThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CColorCorrectionFadeInThinkHook : ICColorCorrectionFadeInT
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CColorCorrectionFadeInThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CColorCorrectionFadeInThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CColorCorrectionFadeInThinkHook : ICColorCorrectionFadeInT
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CColorCorrectionFadeInThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CColorCorrectionFadeInThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CColorCorrectionFadeInThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CColorCorrectionFadeInThink, owner);
         }
     }
 

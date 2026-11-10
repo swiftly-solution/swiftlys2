@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCEnvBeamUpdateThinkPre(ref CEnvBeamUpdateThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CEnvBeamUpdateThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCEnvBeamUpdateThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCEnvBeamUpdateThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCEnvBeamUpdateThinkPost(ref CEnvBeamUpdateThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CEnvBeamUpdateThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCEnvBeamUpdateThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCEnvBeamUpdateThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CEnvBeamUpdateThinkHook : ICEnvBeamUpdateThinkHook
+internal sealed class CEnvBeamUpdateThinkHook(GameHooksService owner) : ICEnvBeamUpdateThinkHook
 {
     private event OnCEnvBeamUpdateThinkPreDelegate? _Pre;
     private event OnCEnvBeamUpdateThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CEnvBeamUpdateThinkHook : ICEnvBeamUpdateThinkHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CEnvBeamUpdateThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CEnvBeamUpdateThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CEnvBeamUpdateThinkHook : ICEnvBeamUpdateThinkHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CEnvBeamUpdateThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CEnvBeamUpdateThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CEnvBeamUpdateThinkHook : ICEnvBeamUpdateThinkHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CEnvBeamUpdateThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CEnvBeamUpdateThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CEnvBeamUpdateThinkHook : ICEnvBeamUpdateThinkHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CEnvBeamUpdateThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CEnvBeamUpdateThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CEnvBeamUpdateThinkHook : ICEnvBeamUpdateThinkHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CEnvBeamUpdateThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CEnvBeamUpdateThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CEnvBeamUpdateThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CEnvBeamUpdateThink, owner);
         }
     }
 

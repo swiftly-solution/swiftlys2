@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCMultiLightProxyRestoreFlashlightThinkPre(ref CMultiLightProxyRestoreFlashlightThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CMultiLightProxyRestoreFlashlightThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCMultiLightProxyRestoreFlashlightThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCMultiLightProxyRestoreFlashlightThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCMultiLightProxyRestoreFlashlightThinkPost(ref CMultiLightProxyRestoreFlashlightThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CMultiLightProxyRestoreFlashlightThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCMultiLightProxyRestoreFlashlightThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCMultiLightProxyRestoreFlashlightThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CMultiLightProxyRestoreFlashlightThinkHook : ICMultiLightProxyRestoreFlashlightThinkHook
+internal sealed class CMultiLightProxyRestoreFlashlightThinkHook(GameHooksService owner) : ICMultiLightProxyRestoreFlashlightThinkHook
 {
     private event OnCMultiLightProxyRestoreFlashlightThinkPreDelegate? _Pre;
     private event OnCMultiLightProxyRestoreFlashlightThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CMultiLightProxyRestoreFlashlightThinkHook : ICMultiLightP
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CMultiLightProxyRestoreFlashlightThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CMultiLightProxyRestoreFlashlightThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CMultiLightProxyRestoreFlashlightThinkHook : ICMultiLightP
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMultiLightProxyRestoreFlashlightThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMultiLightProxyRestoreFlashlightThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CMultiLightProxyRestoreFlashlightThinkHook : ICMultiLightP
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CMultiLightProxyRestoreFlashlightThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CMultiLightProxyRestoreFlashlightThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CMultiLightProxyRestoreFlashlightThinkHook : ICMultiLightP
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMultiLightProxyRestoreFlashlightThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMultiLightProxyRestoreFlashlightThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CMultiLightProxyRestoreFlashlightThinkHook : ICMultiLightP
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMultiLightProxyRestoreFlashlightThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMultiLightProxyRestoreFlashlightThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMultiLightProxyRestoreFlashlightThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMultiLightProxyRestoreFlashlightThink, owner);
         }
     }
 

@@ -2,9 +2,9 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class GameHookDatamapCFishPool : IGameHookDatamapCFishPool
+internal sealed class GameHookDatamapCFishPool(GameHooksService owner) : IGameHookDatamapCFishPool
 {
-    internal readonly CFishPoolUpdateHook CFishPoolUpdateHook = new();
+    internal readonly CFishPoolUpdateHook CFishPoolUpdateHook = new(owner);
 
     public ICFishPoolUpdateHook Update => CFishPoolUpdateHook;
 

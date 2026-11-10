@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCRagdollPropAttachedItemsThinkPre(ref CRagdollPropAttachedItemsThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CRagdollPropAttachedItemsThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCRagdollPropAttachedItemsThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCRagdollPropAttachedItemsThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCRagdollPropAttachedItemsThinkPost(ref CRagdollPropAttachedItemsThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CRagdollPropAttachedItemsThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCRagdollPropAttachedItemsThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCRagdollPropAttachedItemsThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CRagdollPropAttachedItemsThinkHook : ICRagdollPropAttachedItemsThinkHook
+internal sealed class CRagdollPropAttachedItemsThinkHook(GameHooksService owner) : ICRagdollPropAttachedItemsThinkHook
 {
     private event OnCRagdollPropAttachedItemsThinkPreDelegate? _Pre;
     private event OnCRagdollPropAttachedItemsThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CRagdollPropAttachedItemsThinkHook : ICRagdollPropAttached
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CRagdollPropAttachedItemsThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CRagdollPropAttachedItemsThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CRagdollPropAttachedItemsThinkHook : ICRagdollPropAttached
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CRagdollPropAttachedItemsThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CRagdollPropAttachedItemsThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CRagdollPropAttachedItemsThinkHook : ICRagdollPropAttached
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CRagdollPropAttachedItemsThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CRagdollPropAttachedItemsThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CRagdollPropAttachedItemsThinkHook : ICRagdollPropAttached
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CRagdollPropAttachedItemsThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CRagdollPropAttachedItemsThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CRagdollPropAttachedItemsThinkHook : ICRagdollPropAttached
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CRagdollPropAttachedItemsThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CRagdollPropAttachedItemsThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CRagdollPropAttachedItemsThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CRagdollPropAttachedItemsThink, owner);
         }
     }
 

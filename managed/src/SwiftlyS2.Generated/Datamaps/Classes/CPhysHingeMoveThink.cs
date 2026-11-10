@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCPhysHingeMoveThinkPre(ref CPhysHingeMoveThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CPhysHingeMoveThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCPhysHingeMoveThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCPhysHingeMoveThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCPhysHingeMoveThinkPost(ref CPhysHingeMoveThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CPhysHingeMoveThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCPhysHingeMoveThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCPhysHingeMoveThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CPhysHingeMoveThinkHook : ICPhysHingeMoveThinkHook
+internal sealed class CPhysHingeMoveThinkHook(GameHooksService owner) : ICPhysHingeMoveThinkHook
 {
     private event OnCPhysHingeMoveThinkPreDelegate? _Pre;
     private event OnCPhysHingeMoveThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CPhysHingeMoveThinkHook : ICPhysHingeMoveThinkHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPhysHingeMoveThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPhysHingeMoveThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CPhysHingeMoveThinkHook : ICPhysHingeMoveThinkHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysHingeMoveThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysHingeMoveThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CPhysHingeMoveThinkHook : ICPhysHingeMoveThinkHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPhysHingeMoveThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPhysHingeMoveThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CPhysHingeMoveThinkHook : ICPhysHingeMoveThinkHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysHingeMoveThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysHingeMoveThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CPhysHingeMoveThinkHook : ICPhysHingeMoveThinkHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysHingeMoveThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysHingeMoveThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysHingeMoveThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysHingeMoveThink, owner);
         }
     }
 

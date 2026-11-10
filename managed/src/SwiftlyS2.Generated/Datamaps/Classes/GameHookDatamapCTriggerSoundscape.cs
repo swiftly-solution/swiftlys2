@@ -2,9 +2,9 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class GameHookDatamapCTriggerSoundscape : IGameHookDatamapCTriggerSoundscape
+internal sealed class GameHookDatamapCTriggerSoundscape(GameHooksService owner) : IGameHookDatamapCTriggerSoundscape
 {
-    internal readonly CTriggerSoundscapePlayerUpdateThinkHook CTriggerSoundscapePlayerUpdateThinkHook = new();
+    internal readonly CTriggerSoundscapePlayerUpdateThinkHook CTriggerSoundscapePlayerUpdateThinkHook = new(owner);
 
     public ICTriggerSoundscapePlayerUpdateThinkHook PlayerUpdateThink => CTriggerSoundscapePlayerUpdateThinkHook;
 

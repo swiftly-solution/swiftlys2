@@ -1,4 +1,5 @@
 using SwiftlyS2.Shared;
+using SwiftlyS2.Core.Services;
 
 namespace SwiftlyS2.Core.GameHooks;
 
@@ -13,73 +14,40 @@ internal static partial class DatamapHooksPublisher
         core.Event.OnStartupServer += OnStartupServer;
     }
 
-    private static readonly List<GameHooksService> subscribers = [];
-    private static readonly Lock subscribersLock = new();
-
-    private static readonly Dictionary<DatamapHookListener, int> hookListeners = [];
     private static readonly HashSet<DatamapHookListener> pendingHookListeners = [];
-    private static readonly Lock hookListenersLock = new();
-
     private static readonly Dictionary<DatamapHookListener, Guid> hookIds = [];
 
-    internal static void Subscribe( GameHooksService subscriber )
-    {
-        lock (subscribersLock)
+    private static readonly SubscriberRouter<DatamapHookListener, GameHooksService> router = new(
+        onFirst: hookName =>
         {
-            subscribers.Add(subscriber);
-        }
-    }
-
-    internal static void Unsubscribe( GameHooksService subscriber )
-    {
-        lock (subscribersLock)
-        {
-            _ = subscribers.Remove(subscriber);
-        }
-    }
-
-    internal static void AddHookListener( DatamapHookListener hookName )
-    {
-        lock (hookListenersLock)
-        {
-            hookListeners[hookName] = hookListeners.TryGetValue(hookName, out var value) ? ++value : 1;
-            if (hookListeners[hookName] == 1)
+            if (_serverStarted)
             {
-                if (_serverStarted)
-                {
-                    hookIds[hookName] = HookFunction(hookName);
-                }
-                else
-                {
-                    _ = pendingHookListeners.Add(hookName);
-                }
+                hookIds[hookName] = HookFunction(hookName);
             }
-        }
-    }
-
-    internal static void RemoveHookListener( DatamapHookListener hookName )
-    {
-        lock (hookListenersLock)
-        {
-            if (hookListeners.ContainsKey(hookName))
+            else
             {
-                if (--hookListeners[hookName] <= 0)
-                {
-                    _ = hookListeners.Remove(hookName);
-                    if (pendingHookListeners.Remove(hookName))
-                    {
-                        return;
-                    }
-                    _ = UnhookFunction(hookName);
-                    _ = hookIds.Remove(hookName);
-                }
+                _ = pendingHookListeners.Add(hookName);
             }
-        }
-    }
+        },
+        onLast: hookName =>
+        {
+            if (pendingHookListeners.Remove(hookName))
+            {
+                return;
+            }
+            _ = UnhookFunction(hookName);
+            _ = hookIds.Remove(hookName);
+        });
+
+    private static GameHooksService[] GetSubscribers( DatamapHookListener hookName ) => router.Get(hookName);
+
+    internal static void AddHookListener( DatamapHookListener hookName, GameHooksService owner ) => router.Add(hookName, owner);
+
+    internal static void RemoveHookListener( DatamapHookListener hookName, GameHooksService owner ) => router.Remove(hookName, owner);
 
     private static void OnStartupServer()
     {
-        lock (hookListenersLock)
+        lock (router.Gate)
         {
             _serverStarted = true;
             foreach (var hookName in pendingHookListeners)

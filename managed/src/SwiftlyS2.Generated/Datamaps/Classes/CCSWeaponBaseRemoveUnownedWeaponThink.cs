@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCCSWeaponBaseRemoveUnownedWeaponThinkPre(ref CCSWeaponBaseRemoveUnownedWeaponThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CCSWeaponBaseRemoveUnownedWeaponThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCCSWeaponBaseRemoveUnownedWeaponThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCCSWeaponBaseRemoveUnownedWeaponThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCCSWeaponBaseRemoveUnownedWeaponThinkPost(ref CCSWeaponBaseRemoveUnownedWeaponThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CCSWeaponBaseRemoveUnownedWeaponThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCCSWeaponBaseRemoveUnownedWeaponThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCCSWeaponBaseRemoveUnownedWeaponThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CCSWeaponBaseRemoveUnownedWeaponThinkHook : ICCSWeaponBaseRemoveUnownedWeaponThinkHook
+internal sealed class CCSWeaponBaseRemoveUnownedWeaponThinkHook(GameHooksService owner) : ICCSWeaponBaseRemoveUnownedWeaponThinkHook
 {
     private event OnCCSWeaponBaseRemoveUnownedWeaponThinkPreDelegate? _Pre;
     private event OnCCSWeaponBaseRemoveUnownedWeaponThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CCSWeaponBaseRemoveUnownedWeaponThinkHook : ICCSWeaponBase
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CCSWeaponBaseRemoveUnownedWeaponThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CCSWeaponBaseRemoveUnownedWeaponThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CCSWeaponBaseRemoveUnownedWeaponThinkHook : ICCSWeaponBase
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSWeaponBaseRemoveUnownedWeaponThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSWeaponBaseRemoveUnownedWeaponThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CCSWeaponBaseRemoveUnownedWeaponThinkHook : ICCSWeaponBase
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CCSWeaponBaseRemoveUnownedWeaponThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CCSWeaponBaseRemoveUnownedWeaponThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CCSWeaponBaseRemoveUnownedWeaponThinkHook : ICCSWeaponBase
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSWeaponBaseRemoveUnownedWeaponThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSWeaponBaseRemoveUnownedWeaponThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CCSWeaponBaseRemoveUnownedWeaponThinkHook : ICCSWeaponBase
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSWeaponBaseRemoveUnownedWeaponThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSWeaponBaseRemoveUnownedWeaponThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSWeaponBaseRemoveUnownedWeaponThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSWeaponBaseRemoveUnownedWeaponThink, owner);
         }
     }
 

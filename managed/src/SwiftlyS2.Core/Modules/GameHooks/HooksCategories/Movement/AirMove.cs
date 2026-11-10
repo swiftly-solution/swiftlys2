@@ -2,7 +2,7 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class AirMoveMovementHook : IAirMoveMovementHook
+internal sealed class AirMoveMovementHook( GameHooksService owner ) : IAirMoveMovementHook
 {
     internal event OnAirMoveMovementPreDelegate? _Pre;
     internal event OnAirMoveMovementPostDelegate? _Post;
@@ -11,13 +11,13 @@ internal sealed class AirMoveMovementHook : IAirMoveMovementHook
     {
         add
         {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.AirMove);
+            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.AirMove, owner);
             _Pre += value;
         }
         remove
         {
             _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.AirMove);
+            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.AirMove, owner);
         }
     }
 
@@ -25,13 +25,13 @@ internal sealed class AirMoveMovementHook : IAirMoveMovementHook
     {
         add
         {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.AirMove);
+            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.AirMove, owner);
             _Post += value;
         }
         remove
         {
             _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.AirMove);
+            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.AirMove, owner);
         }
     }
 
@@ -43,7 +43,7 @@ internal sealed class AirMoveMovementHook : IAirMoveMovementHook
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.AirMove);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.AirMove);
+        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.AirMove, owner);
+        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.AirMove, owner);
     }
 }

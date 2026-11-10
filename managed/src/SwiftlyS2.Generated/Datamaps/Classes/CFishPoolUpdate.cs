@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCFishPoolUpdatePre(ref CFishPoolUpdatePreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CFishPoolUpdate);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCFishPoolUpdatePre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCFishPoolUpdatePre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCFishPoolUpdatePost(ref CFishPoolUpdatePostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CFishPoolUpdate);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCFishPoolUpdatePost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCFishPoolUpdatePost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CFishPoolUpdateHook : ICFishPoolUpdateHook
+internal sealed class CFishPoolUpdateHook(GameHooksService owner) : ICFishPoolUpdateHook
 {
     private event OnCFishPoolUpdatePreDelegate? _Pre;
     private event OnCFishPoolUpdatePostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CFishPoolUpdateHook : ICFishPoolUpdateHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFishPoolUpdate);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFishPoolUpdate, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CFishPoolUpdateHook : ICFishPoolUpdateHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFishPoolUpdate);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFishPoolUpdate, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CFishPoolUpdateHook : ICFishPoolUpdateHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFishPoolUpdate);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFishPoolUpdate, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CFishPoolUpdateHook : ICFishPoolUpdateHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFishPoolUpdate);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFishPoolUpdate, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CFishPoolUpdateHook : ICFishPoolUpdateHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFishPoolUpdate);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFishPoolUpdate, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFishPoolUpdate);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFishPoolUpdate, owner);
         }
     }
 

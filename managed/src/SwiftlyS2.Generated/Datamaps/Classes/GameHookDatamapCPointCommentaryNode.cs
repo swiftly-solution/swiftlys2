@@ -2,12 +2,12 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class GameHookDatamapCPointCommentaryNode : IGameHookDatamapCPointCommentaryNode
+internal sealed class GameHookDatamapCPointCommentaryNode(GameHooksService owner) : IGameHookDatamapCPointCommentaryNode
 {
-    internal readonly CPointCommentaryNodeAcculumatePlayTimeThinkHook CPointCommentaryNodeAcculumatePlayTimeThinkHook = new();
-    internal readonly CPointCommentaryNodeSpinThinkHook CPointCommentaryNodeSpinThinkHook = new();
-    internal readonly CPointCommentaryNodeUpdateViewPostThinkHook CPointCommentaryNodeUpdateViewPostThinkHook = new();
-    internal readonly CPointCommentaryNodeUpdateViewThinkHook CPointCommentaryNodeUpdateViewThinkHook = new();
+    internal readonly CPointCommentaryNodeAcculumatePlayTimeThinkHook CPointCommentaryNodeAcculumatePlayTimeThinkHook = new(owner);
+    internal readonly CPointCommentaryNodeSpinThinkHook CPointCommentaryNodeSpinThinkHook = new(owner);
+    internal readonly CPointCommentaryNodeUpdateViewPostThinkHook CPointCommentaryNodeUpdateViewPostThinkHook = new(owner);
+    internal readonly CPointCommentaryNodeUpdateViewThinkHook CPointCommentaryNodeUpdateViewThinkHook = new(owner);
 
     public ICPointCommentaryNodeAcculumatePlayTimeThinkHook AcculumatePlayTimeThink => CPointCommentaryNodeAcculumatePlayTimeThinkHook;
     public ICPointCommentaryNodeSpinThinkHook SpinThink => CPointCommentaryNodeSpinThinkHook;

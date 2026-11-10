@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCHostageHostageUsePre(ref CHostageHostageUsePreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CHostageHostageUse);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCHostageHostageUsePre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCHostageHostageUsePre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCHostageHostageUsePost(ref CHostageHostageUsePostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CHostageHostageUse);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCHostageHostageUsePost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCHostageHostageUsePost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CHostageHostageUseHook : ICHostageHostageUseHook
+internal sealed class CHostageHostageUseHook(GameHooksService owner) : ICHostageHostageUseHook
 {
     private event OnCHostageHostageUsePreDelegate? _Pre;
     private event OnCHostageHostageUsePostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CHostageHostageUseHook : ICHostageHostageUseHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CHostageHostageUse);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CHostageHostageUse, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CHostageHostageUseHook : ICHostageHostageUseHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CHostageHostageUse);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CHostageHostageUse, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CHostageHostageUseHook : ICHostageHostageUseHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CHostageHostageUse);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CHostageHostageUse, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CHostageHostageUseHook : ICHostageHostageUseHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CHostageHostageUse);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CHostageHostageUse, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CHostageHostageUseHook : ICHostageHostageUseHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CHostageHostageUse);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CHostageHostageUse, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CHostageHostageUse);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CHostageHostageUse, owner);
         }
     }
 

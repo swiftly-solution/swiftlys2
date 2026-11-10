@@ -2,12 +2,12 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class GameHookDatamapCMomentaryRotButton : IGameHookDatamapCMomentaryRotButton
+internal sealed class GameHookDatamapCMomentaryRotButton(GameHooksService owner) : IGameHookDatamapCMomentaryRotButton
 {
-    internal readonly CMomentaryRotButtonReturnMoveDoneHook CMomentaryRotButtonReturnMoveDoneHook = new();
-    internal readonly CMomentaryRotButtonSetPositionMoveDoneHook CMomentaryRotButtonSetPositionMoveDoneHook = new();
-    internal readonly CMomentaryRotButtonUpdateThinkHook CMomentaryRotButtonUpdateThinkHook = new();
-    internal readonly CMomentaryRotButtonUseMoveDoneHook CMomentaryRotButtonUseMoveDoneHook = new();
+    internal readonly CMomentaryRotButtonReturnMoveDoneHook CMomentaryRotButtonReturnMoveDoneHook = new(owner);
+    internal readonly CMomentaryRotButtonSetPositionMoveDoneHook CMomentaryRotButtonSetPositionMoveDoneHook = new(owner);
+    internal readonly CMomentaryRotButtonUpdateThinkHook CMomentaryRotButtonUpdateThinkHook = new(owner);
+    internal readonly CMomentaryRotButtonUseMoveDoneHook CMomentaryRotButtonUseMoveDoneHook = new(owner);
 
     public ICMomentaryRotButtonReturnMoveDoneHook ReturnMoveDone => CMomentaryRotButtonReturnMoveDoneHook;
     public ICMomentaryRotButtonSetPositionMoveDoneHook SetPositionMoveDone => CMomentaryRotButtonSetPositionMoveDoneHook;

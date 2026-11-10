@@ -2,7 +2,7 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class CanAcquireItemHook : ICanAcquireItemHook
+internal sealed class CanAcquireItemHook( GameHooksService owner ) : ICanAcquireItemHook
 {
     internal event OnCanAcquireItemPreDelegate? _Pre;
     internal event OnCanAcquireItemPostDelegate? _Post;
@@ -11,13 +11,13 @@ internal sealed class CanAcquireItemHook : ICanAcquireItemHook
     {
         add
         {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.CanAcquire);
+            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.CanAcquire, owner);
             _Pre += value;
         }
         remove
         {
             _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.CanAcquire);
+            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.CanAcquire, owner);
         }
     }
 
@@ -25,13 +25,13 @@ internal sealed class CanAcquireItemHook : ICanAcquireItemHook
     {
         add
         {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.CanAcquire);
+            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.CanAcquire, owner);
             _Post += value;
         }
         remove
         {
             _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.CanAcquire);
+            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.CanAcquire, owner);
         }
     }
 
@@ -43,7 +43,7 @@ internal sealed class CanAcquireItemHook : ICanAcquireItemHook
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.CanAcquire);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.CanAcquire);
+        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.CanAcquire, owner);
+        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.CanAcquire, owner);
     }
 }

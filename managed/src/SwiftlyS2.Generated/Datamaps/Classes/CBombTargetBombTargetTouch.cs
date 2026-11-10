@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCBombTargetBombTargetTouchPre(ref CBombTargetBombTargetTouchPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBombTargetBombTargetTouch);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBombTargetBombTargetTouchPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBombTargetBombTargetTouchPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCBombTargetBombTargetTouchPost(ref CBombTargetBombTargetTouchPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBombTargetBombTargetTouch);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBombTargetBombTargetTouchPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBombTargetBombTargetTouchPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CBombTargetBombTargetTouchHook : ICBombTargetBombTargetTouchHook
+internal sealed class CBombTargetBombTargetTouchHook(GameHooksService owner) : ICBombTargetBombTargetTouchHook
 {
     private event OnCBombTargetBombTargetTouchPreDelegate? _Pre;
     private event OnCBombTargetBombTargetTouchPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CBombTargetBombTargetTouchHook : ICBombTargetBombTargetTou
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBombTargetBombTargetTouch);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBombTargetBombTargetTouch, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CBombTargetBombTargetTouchHook : ICBombTargetBombTargetTou
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBombTargetBombTargetTouch);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBombTargetBombTargetTouch, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CBombTargetBombTargetTouchHook : ICBombTargetBombTargetTou
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBombTargetBombTargetTouch);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBombTargetBombTargetTouch, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CBombTargetBombTargetTouchHook : ICBombTargetBombTargetTou
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBombTargetBombTargetTouch);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBombTargetBombTargetTouch, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CBombTargetBombTargetTouchHook : ICBombTargetBombTargetTou
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBombTargetBombTargetTouch);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBombTargetBombTargetTouch, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBombTargetBombTargetTouch);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBombTargetBombTargetTouch, owner);
         }
     }
 

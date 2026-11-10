@@ -2,7 +2,7 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class WalkMoveMovementHook : IWalkMoveMovementHook
+internal sealed class WalkMoveMovementHook( GameHooksService owner ) : IWalkMoveMovementHook
 {
     internal event OnWalkMoveMovementPreDelegate? _Pre;
     internal event OnWalkMoveMovementPostDelegate? _Post;
@@ -11,13 +11,13 @@ internal sealed class WalkMoveMovementHook : IWalkMoveMovementHook
     {
         add
         {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.WalkMove);
+            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.WalkMove, owner);
             _Pre += value;
         }
         remove
         {
             _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.WalkMove);
+            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.WalkMove, owner);
         }
     }
 
@@ -25,13 +25,13 @@ internal sealed class WalkMoveMovementHook : IWalkMoveMovementHook
     {
         add
         {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.WalkMove);
+            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.WalkMove, owner);
             _Post += value;
         }
         remove
         {
             _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.WalkMove);
+            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.WalkMove, owner);
         }
     }
 
@@ -43,7 +43,7 @@ internal sealed class WalkMoveMovementHook : IWalkMoveMovementHook
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.WalkMove);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.WalkMove);
+        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.WalkMove, owner);
+        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.WalkMove, owner);
     }
 }

@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCItemGenericTriggerHelperItemGenericTriggerHelperTouchPre(ref CItemGenericTriggerHelperItemGenericTriggerHelperTouchPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CItemGenericTriggerHelperItemGenericTriggerHelperTouch);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCItemGenericTriggerHelperItemGenericTriggerHelperTouchPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCItemGenericTriggerHelperItemGenericTriggerHelperTouchPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCItemGenericTriggerHelperItemGenericTriggerHelperTouchPost(ref CItemGenericTriggerHelperItemGenericTriggerHelperTouchPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CItemGenericTriggerHelperItemGenericTriggerHelperTouch);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCItemGenericTriggerHelperItemGenericTriggerHelperTouchPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCItemGenericTriggerHelperItemGenericTriggerHelperTouchPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CItemGenericTriggerHelperItemGenericTriggerHelperTouchHook : ICItemGenericTriggerHelperItemGenericTriggerHelperTouchHook
+internal sealed class CItemGenericTriggerHelperItemGenericTriggerHelperTouchHook(GameHooksService owner) : ICItemGenericTriggerHelperItemGenericTriggerHelperTouchHook
 {
     private event OnCItemGenericTriggerHelperItemGenericTriggerHelperTouchPreDelegate? _Pre;
     private event OnCItemGenericTriggerHelperItemGenericTriggerHelperTouchPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CItemGenericTriggerHelperItemGenericTriggerHelperTouchHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CItemGenericTriggerHelperItemGenericTriggerHelperTouch);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CItemGenericTriggerHelperItemGenericTriggerHelperTouch, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CItemGenericTriggerHelperItemGenericTriggerHelperTouchHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemGenericTriggerHelperItemGenericTriggerHelperTouch);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemGenericTriggerHelperItemGenericTriggerHelperTouch, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CItemGenericTriggerHelperItemGenericTriggerHelperTouchHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CItemGenericTriggerHelperItemGenericTriggerHelperTouch);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CItemGenericTriggerHelperItemGenericTriggerHelperTouch, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CItemGenericTriggerHelperItemGenericTriggerHelperTouchHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemGenericTriggerHelperItemGenericTriggerHelperTouch);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemGenericTriggerHelperItemGenericTriggerHelperTouch, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CItemGenericTriggerHelperItemGenericTriggerHelperTouchHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemGenericTriggerHelperItemGenericTriggerHelperTouch);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemGenericTriggerHelperItemGenericTriggerHelperTouch, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemGenericTriggerHelperItemGenericTriggerHelperTouch);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemGenericTriggerHelperItemGenericTriggerHelperTouch, owner);
         }
     }
 

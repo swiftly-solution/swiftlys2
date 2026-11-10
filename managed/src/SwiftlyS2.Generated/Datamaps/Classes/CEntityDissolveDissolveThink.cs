@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCEntityDissolveDissolveThinkPre(ref CEntityDissolveDissolveThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CEntityDissolveDissolveThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCEntityDissolveDissolveThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCEntityDissolveDissolveThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCEntityDissolveDissolveThinkPost(ref CEntityDissolveDissolveThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CEntityDissolveDissolveThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCEntityDissolveDissolveThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCEntityDissolveDissolveThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CEntityDissolveDissolveThinkHook : ICEntityDissolveDissolveThinkHook
+internal sealed class CEntityDissolveDissolveThinkHook(GameHooksService owner) : ICEntityDissolveDissolveThinkHook
 {
     private event OnCEntityDissolveDissolveThinkPreDelegate? _Pre;
     private event OnCEntityDissolveDissolveThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CEntityDissolveDissolveThinkHook : ICEntityDissolveDissolv
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CEntityDissolveDissolveThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CEntityDissolveDissolveThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CEntityDissolveDissolveThinkHook : ICEntityDissolveDissolv
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CEntityDissolveDissolveThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CEntityDissolveDissolveThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CEntityDissolveDissolveThinkHook : ICEntityDissolveDissolv
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CEntityDissolveDissolveThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CEntityDissolveDissolveThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CEntityDissolveDissolveThinkHook : ICEntityDissolveDissolv
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CEntityDissolveDissolveThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CEntityDissolveDissolveThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CEntityDissolveDissolveThinkHook : ICEntityDissolveDissolv
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CEntityDissolveDissolveThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CEntityDissolveDissolveThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CEntityDissolveDissolveThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CEntityDissolveDissolveThink, owner);
         }
     }
 

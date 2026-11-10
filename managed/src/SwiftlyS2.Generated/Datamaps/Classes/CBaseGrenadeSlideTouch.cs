@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCBaseGrenadeSlideTouchPre(ref CBaseGrenadeSlideTouchPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseGrenadeSlideTouch);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseGrenadeSlideTouchPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseGrenadeSlideTouchPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCBaseGrenadeSlideTouchPost(ref CBaseGrenadeSlideTouchPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseGrenadeSlideTouch);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseGrenadeSlideTouchPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseGrenadeSlideTouchPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CBaseGrenadeSlideTouchHook : ICBaseGrenadeSlideTouchHook
+internal sealed class CBaseGrenadeSlideTouchHook(GameHooksService owner) : ICBaseGrenadeSlideTouchHook
 {
     private event OnCBaseGrenadeSlideTouchPreDelegate? _Pre;
     private event OnCBaseGrenadeSlideTouchPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CBaseGrenadeSlideTouchHook : ICBaseGrenadeSlideTouchHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseGrenadeSlideTouch);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseGrenadeSlideTouch, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CBaseGrenadeSlideTouchHook : ICBaseGrenadeSlideTouchHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeSlideTouch);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeSlideTouch, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CBaseGrenadeSlideTouchHook : ICBaseGrenadeSlideTouchHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseGrenadeSlideTouch);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseGrenadeSlideTouch, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CBaseGrenadeSlideTouchHook : ICBaseGrenadeSlideTouchHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeSlideTouch);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeSlideTouch, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CBaseGrenadeSlideTouchHook : ICBaseGrenadeSlideTouchHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeSlideTouch);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeSlideTouch, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeSlideTouch);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeSlideTouch, owner);
         }
     }
 

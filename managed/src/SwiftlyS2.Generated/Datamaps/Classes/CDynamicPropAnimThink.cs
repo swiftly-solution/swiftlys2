@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCDynamicPropAnimThinkPre(ref CDynamicPropAnimThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CDynamicPropAnimThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCDynamicPropAnimThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCDynamicPropAnimThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCDynamicPropAnimThinkPost(ref CDynamicPropAnimThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CDynamicPropAnimThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCDynamicPropAnimThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCDynamicPropAnimThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CDynamicPropAnimThinkHook : ICDynamicPropAnimThinkHook
+internal sealed class CDynamicPropAnimThinkHook(GameHooksService owner) : ICDynamicPropAnimThinkHook
 {
     private event OnCDynamicPropAnimThinkPreDelegate? _Pre;
     private event OnCDynamicPropAnimThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CDynamicPropAnimThinkHook : ICDynamicPropAnimThinkHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CDynamicPropAnimThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CDynamicPropAnimThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CDynamicPropAnimThinkHook : ICDynamicPropAnimThinkHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CDynamicPropAnimThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CDynamicPropAnimThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CDynamicPropAnimThinkHook : ICDynamicPropAnimThinkHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CDynamicPropAnimThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CDynamicPropAnimThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CDynamicPropAnimThinkHook : ICDynamicPropAnimThinkHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CDynamicPropAnimThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CDynamicPropAnimThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CDynamicPropAnimThinkHook : ICDynamicPropAnimThinkHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CDynamicPropAnimThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CDynamicPropAnimThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CDynamicPropAnimThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CDynamicPropAnimThink, owner);
         }
     }
 

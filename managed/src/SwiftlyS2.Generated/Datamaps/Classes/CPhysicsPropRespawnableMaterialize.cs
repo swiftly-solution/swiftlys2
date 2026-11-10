@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCPhysicsPropRespawnableMaterializePre(ref CPhysicsPropRespawnableMaterializePreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CPhysicsPropRespawnableMaterialize);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCPhysicsPropRespawnableMaterializePre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCPhysicsPropRespawnableMaterializePre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCPhysicsPropRespawnableMaterializePost(ref CPhysicsPropRespawnableMaterializePostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CPhysicsPropRespawnableMaterialize);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCPhysicsPropRespawnableMaterializePost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCPhysicsPropRespawnableMaterializePost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CPhysicsPropRespawnableMaterializeHook : ICPhysicsPropRespawnableMaterializeHook
+internal sealed class CPhysicsPropRespawnableMaterializeHook(GameHooksService owner) : ICPhysicsPropRespawnableMaterializeHook
 {
     private event OnCPhysicsPropRespawnableMaterializePreDelegate? _Pre;
     private event OnCPhysicsPropRespawnableMaterializePostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CPhysicsPropRespawnableMaterializeHook : ICPhysicsPropResp
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPhysicsPropRespawnableMaterialize);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPhysicsPropRespawnableMaterialize, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CPhysicsPropRespawnableMaterializeHook : ICPhysicsPropResp
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysicsPropRespawnableMaterialize);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysicsPropRespawnableMaterialize, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CPhysicsPropRespawnableMaterializeHook : ICPhysicsPropResp
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPhysicsPropRespawnableMaterialize);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPhysicsPropRespawnableMaterialize, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CPhysicsPropRespawnableMaterializeHook : ICPhysicsPropResp
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysicsPropRespawnableMaterialize);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysicsPropRespawnableMaterialize, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CPhysicsPropRespawnableMaterializeHook : ICPhysicsPropResp
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysicsPropRespawnableMaterialize);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysicsPropRespawnableMaterialize, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysicsPropRespawnableMaterialize);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysicsPropRespawnableMaterialize, owner);
         }
     }
 

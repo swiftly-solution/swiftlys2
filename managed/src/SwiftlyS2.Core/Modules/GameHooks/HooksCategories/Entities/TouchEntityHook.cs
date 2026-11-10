@@ -2,7 +2,7 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class TouchEntityHook : ITouchEntityHook
+internal sealed class TouchEntityHook( GameHooksService owner ) : ITouchEntityHook
 {
     internal event OnTouchEntityPreDelegate? _Pre;
     internal event OnTouchEntityPostDelegate? _Post;
@@ -11,13 +11,13 @@ internal sealed class TouchEntityHook : ITouchEntityHook
     {
         add
         {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.Touch);
+            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.Touch, owner);
             _Pre += value;
         }
         remove
         {
             _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.Touch);
+            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.Touch, owner);
         }
     }
 
@@ -25,13 +25,13 @@ internal sealed class TouchEntityHook : ITouchEntityHook
     {
         add
         {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.Touch);
+            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.Touch, owner);
             _Post += value;
         }
         remove
         {
             _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.Touch);
+            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.Touch, owner);
         }
     }
 
@@ -43,7 +43,7 @@ internal sealed class TouchEntityHook : ITouchEntityHook
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.Touch);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.Touch);
+        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.Touch, owner);
+        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.Touch, owner);
     }
 }

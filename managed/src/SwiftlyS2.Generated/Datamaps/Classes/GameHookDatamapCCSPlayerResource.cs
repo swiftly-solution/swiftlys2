@@ -2,9 +2,9 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class GameHookDatamapCCSPlayerResource : IGameHookDatamapCCSPlayerResource
+internal sealed class GameHookDatamapCCSPlayerResource(GameHooksService owner) : IGameHookDatamapCCSPlayerResource
 {
-    internal readonly CCSPlayerResourceResourceThinkHook CCSPlayerResourceResourceThinkHook = new();
+    internal readonly CCSPlayerResourceResourceThinkHook CCSPlayerResourceResourceThinkHook = new(owner);
 
     public ICCSPlayerResourceResourceThinkHook ResourceThink => CCSPlayerResourceResourceThinkHook;
 

@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCItemItemTouchPre(ref CItemItemTouchPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CItemItemTouch);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCItemItemTouchPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCItemItemTouchPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCItemItemTouchPost(ref CItemItemTouchPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CItemItemTouch);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCItemItemTouchPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCItemItemTouchPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CItemItemTouchHook : ICItemItemTouchHook
+internal sealed class CItemItemTouchHook(GameHooksService owner) : ICItemItemTouchHook
 {
     private event OnCItemItemTouchPreDelegate? _Pre;
     private event OnCItemItemTouchPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CItemItemTouchHook : ICItemItemTouchHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CItemItemTouch);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CItemItemTouch, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CItemItemTouchHook : ICItemItemTouchHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemItemTouch);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemItemTouch, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CItemItemTouchHook : ICItemItemTouchHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CItemItemTouch);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CItemItemTouch, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CItemItemTouchHook : ICItemItemTouchHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemItemTouch);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemItemTouch, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CItemItemTouchHook : ICItemItemTouchHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemItemTouch);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemItemTouch, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemItemTouch);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemItemTouch, owner);
         }
     }
 

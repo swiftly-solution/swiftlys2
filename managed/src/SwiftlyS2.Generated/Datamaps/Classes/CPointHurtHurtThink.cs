@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCPointHurtHurtThinkPre(ref CPointHurtHurtThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CPointHurtHurtThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCPointHurtHurtThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCPointHurtHurtThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCPointHurtHurtThinkPost(ref CPointHurtHurtThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CPointHurtHurtThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCPointHurtHurtThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCPointHurtHurtThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CPointHurtHurtThinkHook : ICPointHurtHurtThinkHook
+internal sealed class CPointHurtHurtThinkHook(GameHooksService owner) : ICPointHurtHurtThinkHook
 {
     private event OnCPointHurtHurtThinkPreDelegate? _Pre;
     private event OnCPointHurtHurtThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CPointHurtHurtThinkHook : ICPointHurtHurtThinkHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPointHurtHurtThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPointHurtHurtThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CPointHurtHurtThinkHook : ICPointHurtHurtThinkHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointHurtHurtThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointHurtHurtThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CPointHurtHurtThinkHook : ICPointHurtHurtThinkHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPointHurtHurtThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPointHurtHurtThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CPointHurtHurtThinkHook : ICPointHurtHurtThinkHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointHurtHurtThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointHurtHurtThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CPointHurtHurtThinkHook : ICPointHurtHurtThinkHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointHurtHurtThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointHurtHurtThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointHurtHurtThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointHurtHurtThink, owner);
         }
     }
 

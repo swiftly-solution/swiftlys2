@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCSoundEventOBBEntitySoundEventOBBThinkPre(ref CSoundEventOBBEntitySoundEventOBBThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CSoundEventOBBEntitySoundEventOBBThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCSoundEventOBBEntitySoundEventOBBThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCSoundEventOBBEntitySoundEventOBBThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCSoundEventOBBEntitySoundEventOBBThinkPost(ref CSoundEventOBBEntitySoundEventOBBThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CSoundEventOBBEntitySoundEventOBBThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCSoundEventOBBEntitySoundEventOBBThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCSoundEventOBBEntitySoundEventOBBThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CSoundEventOBBEntitySoundEventOBBThinkHook : ICSoundEventOBBEntitySoundEventOBBThinkHook
+internal sealed class CSoundEventOBBEntitySoundEventOBBThinkHook(GameHooksService owner) : ICSoundEventOBBEntitySoundEventOBBThinkHook
 {
     private event OnCSoundEventOBBEntitySoundEventOBBThinkPreDelegate? _Pre;
     private event OnCSoundEventOBBEntitySoundEventOBBThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CSoundEventOBBEntitySoundEventOBBThinkHook : ICSoundEventO
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSoundEventOBBEntitySoundEventOBBThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSoundEventOBBEntitySoundEventOBBThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CSoundEventOBBEntitySoundEventOBBThinkHook : ICSoundEventO
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSoundEventOBBEntitySoundEventOBBThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSoundEventOBBEntitySoundEventOBBThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CSoundEventOBBEntitySoundEventOBBThinkHook : ICSoundEventO
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSoundEventOBBEntitySoundEventOBBThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSoundEventOBBEntitySoundEventOBBThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CSoundEventOBBEntitySoundEventOBBThinkHook : ICSoundEventO
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSoundEventOBBEntitySoundEventOBBThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSoundEventOBBEntitySoundEventOBBThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CSoundEventOBBEntitySoundEventOBBThinkHook : ICSoundEventO
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSoundEventOBBEntitySoundEventOBBThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSoundEventOBBEntitySoundEventOBBThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSoundEventOBBEntitySoundEventOBBThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSoundEventOBBEntitySoundEventOBBThink, owner);
         }
     }
 

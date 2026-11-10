@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCPointCommentaryNodeSpinThinkPre(ref CPointCommentaryNodeSpinThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CPointCommentaryNodeSpinThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCPointCommentaryNodeSpinThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCPointCommentaryNodeSpinThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCPointCommentaryNodeSpinThinkPost(ref CPointCommentaryNodeSpinThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CPointCommentaryNodeSpinThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCPointCommentaryNodeSpinThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCPointCommentaryNodeSpinThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CPointCommentaryNodeSpinThinkHook : ICPointCommentaryNodeSpinThinkHook
+internal sealed class CPointCommentaryNodeSpinThinkHook(GameHooksService owner) : ICPointCommentaryNodeSpinThinkHook
 {
     private event OnCPointCommentaryNodeSpinThinkPreDelegate? _Pre;
     private event OnCPointCommentaryNodeSpinThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CPointCommentaryNodeSpinThinkHook : ICPointCommentaryNodeS
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPointCommentaryNodeSpinThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPointCommentaryNodeSpinThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CPointCommentaryNodeSpinThinkHook : ICPointCommentaryNodeS
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointCommentaryNodeSpinThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointCommentaryNodeSpinThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CPointCommentaryNodeSpinThinkHook : ICPointCommentaryNodeS
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPointCommentaryNodeSpinThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPointCommentaryNodeSpinThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CPointCommentaryNodeSpinThinkHook : ICPointCommentaryNodeS
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointCommentaryNodeSpinThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointCommentaryNodeSpinThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CPointCommentaryNodeSpinThinkHook : ICPointCommentaryNodeS
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointCommentaryNodeSpinThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointCommentaryNodeSpinThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointCommentaryNodeSpinThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointCommentaryNodeSpinThink, owner);
         }
     }
 

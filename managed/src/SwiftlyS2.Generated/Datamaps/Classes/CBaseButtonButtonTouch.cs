@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCBaseButtonButtonTouchPre(ref CBaseButtonButtonTouchPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseButtonButtonTouch);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseButtonButtonTouchPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseButtonButtonTouchPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCBaseButtonButtonTouchPost(ref CBaseButtonButtonTouchPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseButtonButtonTouch);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseButtonButtonTouchPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseButtonButtonTouchPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CBaseButtonButtonTouchHook : ICBaseButtonButtonTouchHook
+internal sealed class CBaseButtonButtonTouchHook(GameHooksService owner) : ICBaseButtonButtonTouchHook
 {
     private event OnCBaseButtonButtonTouchPreDelegate? _Pre;
     private event OnCBaseButtonButtonTouchPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CBaseButtonButtonTouchHook : ICBaseButtonButtonTouchHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseButtonButtonTouch);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseButtonButtonTouch, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CBaseButtonButtonTouchHook : ICBaseButtonButtonTouchHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseButtonButtonTouch);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseButtonButtonTouch, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CBaseButtonButtonTouchHook : ICBaseButtonButtonTouchHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseButtonButtonTouch);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseButtonButtonTouch, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CBaseButtonButtonTouchHook : ICBaseButtonButtonTouchHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseButtonButtonTouch);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseButtonButtonTouch, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CBaseButtonButtonTouchHook : ICBaseButtonButtonTouchHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseButtonButtonTouch);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseButtonButtonTouch, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseButtonButtonTouch);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseButtonButtonTouch, owner);
         }
     }
 

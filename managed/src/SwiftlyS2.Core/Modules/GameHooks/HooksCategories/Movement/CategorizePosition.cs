@@ -2,7 +2,7 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class CategorizePositionMovementHook : ICategorizePositionMovementHook
+internal sealed class CategorizePositionMovementHook( GameHooksService owner ) : ICategorizePositionMovementHook
 {
     internal event OnCategorizePositionMovementPreDelegate? _Pre;
     internal event OnCategorizePositionMovementPostDelegate? _Post;
@@ -11,13 +11,13 @@ internal sealed class CategorizePositionMovementHook : ICategorizePositionMoveme
     {
         add
         {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.CategorizePosition);
+            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.CategorizePosition, owner);
             _Pre += value;
         }
         remove
         {
             _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.CategorizePosition);
+            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.CategorizePosition, owner);
         }
     }
 
@@ -25,13 +25,13 @@ internal sealed class CategorizePositionMovementHook : ICategorizePositionMoveme
     {
         add
         {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.CategorizePosition);
+            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.CategorizePosition, owner);
             _Post += value;
         }
         remove
         {
             _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.CategorizePosition);
+            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.CategorizePosition, owner);
         }
     }
 
@@ -43,7 +43,7 @@ internal sealed class CategorizePositionMovementHook : ICategorizePositionMoveme
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.CategorizePosition);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.CategorizePosition);
+        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.CategorizePosition, owner);
+        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.CategorizePosition, owner);
     }
 }

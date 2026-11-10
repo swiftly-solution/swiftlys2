@@ -2,10 +2,10 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class GameHookDatamapCPathMoverEntitySpawner : IGameHookDatamapCPathMoverEntitySpawner
+internal sealed class GameHookDatamapCPathMoverEntitySpawner(GameHooksService owner) : IGameHookDatamapCPathMoverEntitySpawner
 {
-    internal readonly CPathMoverEntitySpawnerDebugThinkHook CPathMoverEntitySpawnerDebugThinkHook = new();
-    internal readonly CPathMoverEntitySpawnerSpawnThinkHook CPathMoverEntitySpawnerSpawnThinkHook = new();
+    internal readonly CPathMoverEntitySpawnerDebugThinkHook CPathMoverEntitySpawnerDebugThinkHook = new(owner);
+    internal readonly CPathMoverEntitySpawnerSpawnThinkHook CPathMoverEntitySpawnerSpawnThinkHook = new(owner);
 
     public ICPathMoverEntitySpawnerDebugThinkHook DebugThink => CPathMoverEntitySpawnerDebugThinkHook;
     public ICPathMoverEntitySpawnerSpawnThinkHook SpawnThink => CPathMoverEntitySpawnerSpawnThinkHook;

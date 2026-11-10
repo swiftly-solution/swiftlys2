@@ -2,9 +2,9 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class GameHookDatamapCParticleSystem : IGameHookDatamapCParticleSystem
+internal sealed class GameHookDatamapCParticleSystem(GameHooksService owner) : IGameHookDatamapCParticleSystem
 {
-    internal readonly CParticleSystemStartParticleSystemThinkHook CParticleSystemStartParticleSystemThinkHook = new();
+    internal readonly CParticleSystemStartParticleSystemThinkHook CParticleSystemStartParticleSystemThinkHook = new(owner);
 
     public ICParticleSystemStartParticleSystemThinkHook StartParticleSystemThink => CParticleSystemStartParticleSystemThinkHook;
 

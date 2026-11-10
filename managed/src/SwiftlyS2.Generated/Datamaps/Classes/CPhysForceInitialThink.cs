@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCPhysForceInitialThinkPre(ref CPhysForceInitialThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CPhysForceInitialThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCPhysForceInitialThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCPhysForceInitialThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCPhysForceInitialThinkPost(ref CPhysForceInitialThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CPhysForceInitialThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCPhysForceInitialThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCPhysForceInitialThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CPhysForceInitialThinkHook : ICPhysForceInitialThinkHook
+internal sealed class CPhysForceInitialThinkHook(GameHooksService owner) : ICPhysForceInitialThinkHook
 {
     private event OnCPhysForceInitialThinkPreDelegate? _Pre;
     private event OnCPhysForceInitialThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CPhysForceInitialThinkHook : ICPhysForceInitialThinkHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPhysForceInitialThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPhysForceInitialThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CPhysForceInitialThinkHook : ICPhysForceInitialThinkHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysForceInitialThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysForceInitialThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CPhysForceInitialThinkHook : ICPhysForceInitialThinkHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPhysForceInitialThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPhysForceInitialThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CPhysForceInitialThinkHook : ICPhysForceInitialThinkHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysForceInitialThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysForceInitialThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CPhysForceInitialThinkHook : ICPhysForceInitialThinkHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysForceInitialThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysForceInitialThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysForceInitialThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysForceInitialThink, owner);
         }
     }
 

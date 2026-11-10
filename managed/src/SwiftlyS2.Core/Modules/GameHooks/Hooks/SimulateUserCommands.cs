@@ -60,25 +60,21 @@ internal static partial class GameHooksPublisher
 
     internal static void InvokeSimulateUserCommandsPre( ref SimulateUserCommandsPreContext ctx )
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(HookListener.SimulateUserCommands);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeSimulateUserCommandsPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
-            }
+            subs[i].InvokeSimulateUserCommandsPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
         }
     }
 
     internal static void InvokeSimulateUserCommandsPost( ref SimulateUserCommandsPostContext ctx )
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(HookListener.SimulateUserCommands);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeSimulateUserCommandsPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
-            }
+            subs[i].InvokeSimulateUserCommandsPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
         }
     }
 }

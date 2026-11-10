@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCLogicActiveAutosaveSaveThinkPre(ref CLogicActiveAutosaveSaveThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CLogicActiveAutosaveSaveThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCLogicActiveAutosaveSaveThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCLogicActiveAutosaveSaveThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCLogicActiveAutosaveSaveThinkPost(ref CLogicActiveAutosaveSaveThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CLogicActiveAutosaveSaveThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCLogicActiveAutosaveSaveThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCLogicActiveAutosaveSaveThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CLogicActiveAutosaveSaveThinkHook : ICLogicActiveAutosaveSaveThinkHook
+internal sealed class CLogicActiveAutosaveSaveThinkHook(GameHooksService owner) : ICLogicActiveAutosaveSaveThinkHook
 {
     private event OnCLogicActiveAutosaveSaveThinkPreDelegate? _Pre;
     private event OnCLogicActiveAutosaveSaveThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CLogicActiveAutosaveSaveThinkHook : ICLogicActiveAutosaveS
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CLogicActiveAutosaveSaveThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CLogicActiveAutosaveSaveThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CLogicActiveAutosaveSaveThinkHook : ICLogicActiveAutosaveS
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CLogicActiveAutosaveSaveThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CLogicActiveAutosaveSaveThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CLogicActiveAutosaveSaveThinkHook : ICLogicActiveAutosaveS
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CLogicActiveAutosaveSaveThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CLogicActiveAutosaveSaveThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CLogicActiveAutosaveSaveThinkHook : ICLogicActiveAutosaveS
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CLogicActiveAutosaveSaveThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CLogicActiveAutosaveSaveThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CLogicActiveAutosaveSaveThinkHook : ICLogicActiveAutosaveS
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CLogicActiveAutosaveSaveThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CLogicActiveAutosaveSaveThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CLogicActiveAutosaveSaveThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CLogicActiveAutosaveSaveThink, owner);
         }
     }
 

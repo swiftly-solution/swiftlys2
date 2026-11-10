@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCTriggerLerpObjectAttachedEntityThinkPre(ref CTriggerLerpObjectAttachedEntityThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CTriggerLerpObjectAttachedEntityThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCTriggerLerpObjectAttachedEntityThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCTriggerLerpObjectAttachedEntityThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCTriggerLerpObjectAttachedEntityThinkPost(ref CTriggerLerpObjectAttachedEntityThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CTriggerLerpObjectAttachedEntityThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCTriggerLerpObjectAttachedEntityThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCTriggerLerpObjectAttachedEntityThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CTriggerLerpObjectAttachedEntityThinkHook : ICTriggerLerpObjectAttachedEntityThinkHook
+internal sealed class CTriggerLerpObjectAttachedEntityThinkHook(GameHooksService owner) : ICTriggerLerpObjectAttachedEntityThinkHook
 {
     private event OnCTriggerLerpObjectAttachedEntityThinkPreDelegate? _Pre;
     private event OnCTriggerLerpObjectAttachedEntityThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CTriggerLerpObjectAttachedEntityThinkHook : ICTriggerLerpO
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerLerpObjectAttachedEntityThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerLerpObjectAttachedEntityThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CTriggerLerpObjectAttachedEntityThinkHook : ICTriggerLerpO
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerLerpObjectAttachedEntityThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerLerpObjectAttachedEntityThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CTriggerLerpObjectAttachedEntityThinkHook : ICTriggerLerpO
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerLerpObjectAttachedEntityThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerLerpObjectAttachedEntityThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CTriggerLerpObjectAttachedEntityThinkHook : ICTriggerLerpO
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerLerpObjectAttachedEntityThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerLerpObjectAttachedEntityThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CTriggerLerpObjectAttachedEntityThinkHook : ICTriggerLerpO
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerLerpObjectAttachedEntityThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerLerpObjectAttachedEntityThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerLerpObjectAttachedEntityThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerLerpObjectAttachedEntityThink, owner);
         }
     }
 

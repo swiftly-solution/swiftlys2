@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCBarnLightThink_SetNextQueuedLightStylePre(ref CBarnLightThink_SetNextQueuedLightStylePreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBarnLightThink_SetNextQueuedLightStyle);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBarnLightThink_SetNextQueuedLightStylePre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBarnLightThink_SetNextQueuedLightStylePre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCBarnLightThink_SetNextQueuedLightStylePost(ref CBarnLightThink_SetNextQueuedLightStylePostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBarnLightThink_SetNextQueuedLightStyle);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBarnLightThink_SetNextQueuedLightStylePost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBarnLightThink_SetNextQueuedLightStylePost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CBarnLightThink_SetNextQueuedLightStyleHook : ICBarnLightThink_SetNextQueuedLightStyleHook
+internal sealed class CBarnLightThink_SetNextQueuedLightStyleHook(GameHooksService owner) : ICBarnLightThink_SetNextQueuedLightStyleHook
 {
     private event OnCBarnLightThink_SetNextQueuedLightStylePreDelegate? _Pre;
     private event OnCBarnLightThink_SetNextQueuedLightStylePostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CBarnLightThink_SetNextQueuedLightStyleHook : ICBarnLightT
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBarnLightThink_SetNextQueuedLightStyle);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBarnLightThink_SetNextQueuedLightStyle, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CBarnLightThink_SetNextQueuedLightStyleHook : ICBarnLightT
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBarnLightThink_SetNextQueuedLightStyle);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBarnLightThink_SetNextQueuedLightStyle, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CBarnLightThink_SetNextQueuedLightStyleHook : ICBarnLightT
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBarnLightThink_SetNextQueuedLightStyle);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBarnLightThink_SetNextQueuedLightStyle, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CBarnLightThink_SetNextQueuedLightStyleHook : ICBarnLightT
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBarnLightThink_SetNextQueuedLightStyle);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBarnLightThink_SetNextQueuedLightStyle, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CBarnLightThink_SetNextQueuedLightStyleHook : ICBarnLightT
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBarnLightThink_SetNextQueuedLightStyle);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBarnLightThink_SetNextQueuedLightStyle, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBarnLightThink_SetNextQueuedLightStyle);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBarnLightThink_SetNextQueuedLightStyle, owner);
         }
     }
 

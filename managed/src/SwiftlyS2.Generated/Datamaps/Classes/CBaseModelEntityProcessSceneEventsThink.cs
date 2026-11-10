@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCBaseModelEntityProcessSceneEventsThinkPre(ref CBaseModelEntityProcessSceneEventsThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseModelEntityProcessSceneEventsThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseModelEntityProcessSceneEventsThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseModelEntityProcessSceneEventsThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCBaseModelEntityProcessSceneEventsThinkPost(ref CBaseModelEntityProcessSceneEventsThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseModelEntityProcessSceneEventsThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseModelEntityProcessSceneEventsThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseModelEntityProcessSceneEventsThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CBaseModelEntityProcessSceneEventsThinkHook : ICBaseModelEntityProcessSceneEventsThinkHook
+internal sealed class CBaseModelEntityProcessSceneEventsThinkHook(GameHooksService owner) : ICBaseModelEntityProcessSceneEventsThinkHook
 {
     private event OnCBaseModelEntityProcessSceneEventsThinkPreDelegate? _Pre;
     private event OnCBaseModelEntityProcessSceneEventsThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CBaseModelEntityProcessSceneEventsThinkHook : ICBaseModelE
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseModelEntityProcessSceneEventsThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseModelEntityProcessSceneEventsThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CBaseModelEntityProcessSceneEventsThinkHook : ICBaseModelE
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseModelEntityProcessSceneEventsThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseModelEntityProcessSceneEventsThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CBaseModelEntityProcessSceneEventsThinkHook : ICBaseModelE
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseModelEntityProcessSceneEventsThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseModelEntityProcessSceneEventsThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CBaseModelEntityProcessSceneEventsThinkHook : ICBaseModelE
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseModelEntityProcessSceneEventsThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseModelEntityProcessSceneEventsThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CBaseModelEntityProcessSceneEventsThinkHook : ICBaseModelE
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseModelEntityProcessSceneEventsThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseModelEntityProcessSceneEventsThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseModelEntityProcessSceneEventsThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseModelEntityProcessSceneEventsThink, owner);
         }
     }
 

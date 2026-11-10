@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCRevertSavedLoadThinkPre(ref CRevertSavedLoadThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CRevertSavedLoadThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCRevertSavedLoadThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCRevertSavedLoadThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCRevertSavedLoadThinkPost(ref CRevertSavedLoadThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CRevertSavedLoadThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCRevertSavedLoadThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCRevertSavedLoadThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CRevertSavedLoadThinkHook : ICRevertSavedLoadThinkHook
+internal sealed class CRevertSavedLoadThinkHook(GameHooksService owner) : ICRevertSavedLoadThinkHook
 {
     private event OnCRevertSavedLoadThinkPreDelegate? _Pre;
     private event OnCRevertSavedLoadThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CRevertSavedLoadThinkHook : ICRevertSavedLoadThinkHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CRevertSavedLoadThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CRevertSavedLoadThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CRevertSavedLoadThinkHook : ICRevertSavedLoadThinkHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CRevertSavedLoadThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CRevertSavedLoadThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CRevertSavedLoadThinkHook : ICRevertSavedLoadThinkHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CRevertSavedLoadThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CRevertSavedLoadThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CRevertSavedLoadThinkHook : ICRevertSavedLoadThinkHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CRevertSavedLoadThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CRevertSavedLoadThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CRevertSavedLoadThinkHook : ICRevertSavedLoadThinkHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CRevertSavedLoadThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CRevertSavedLoadThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CRevertSavedLoadThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CRevertSavedLoadThink, owner);
         }
     }
 

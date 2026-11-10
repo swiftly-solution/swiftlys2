@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCBaseGrenadeDangerSoundThinkPre(ref CBaseGrenadeDangerSoundThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseGrenadeDangerSoundThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseGrenadeDangerSoundThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseGrenadeDangerSoundThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCBaseGrenadeDangerSoundThinkPost(ref CBaseGrenadeDangerSoundThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseGrenadeDangerSoundThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseGrenadeDangerSoundThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseGrenadeDangerSoundThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CBaseGrenadeDangerSoundThinkHook : ICBaseGrenadeDangerSoundThinkHook
+internal sealed class CBaseGrenadeDangerSoundThinkHook(GameHooksService owner) : ICBaseGrenadeDangerSoundThinkHook
 {
     private event OnCBaseGrenadeDangerSoundThinkPreDelegate? _Pre;
     private event OnCBaseGrenadeDangerSoundThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CBaseGrenadeDangerSoundThinkHook : ICBaseGrenadeDangerSoun
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseGrenadeDangerSoundThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseGrenadeDangerSoundThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CBaseGrenadeDangerSoundThinkHook : ICBaseGrenadeDangerSoun
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeDangerSoundThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeDangerSoundThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CBaseGrenadeDangerSoundThinkHook : ICBaseGrenadeDangerSoun
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseGrenadeDangerSoundThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseGrenadeDangerSoundThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CBaseGrenadeDangerSoundThinkHook : ICBaseGrenadeDangerSoun
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeDangerSoundThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeDangerSoundThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CBaseGrenadeDangerSoundThinkHook : ICBaseGrenadeDangerSoun
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeDangerSoundThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeDangerSoundThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeDangerSoundThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeDangerSoundThink, owner);
         }
     }
 

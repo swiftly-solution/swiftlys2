@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCCSPlayerControllerResetForceTeamThinkPre(ref CCSPlayerControllerResetForceTeamThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CCSPlayerControllerResetForceTeamThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCCSPlayerControllerResetForceTeamThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCCSPlayerControllerResetForceTeamThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCCSPlayerControllerResetForceTeamThinkPost(ref CCSPlayerControllerResetForceTeamThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CCSPlayerControllerResetForceTeamThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCCSPlayerControllerResetForceTeamThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCCSPlayerControllerResetForceTeamThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CCSPlayerControllerResetForceTeamThinkHook : ICCSPlayerControllerResetForceTeamThinkHook
+internal sealed class CCSPlayerControllerResetForceTeamThinkHook(GameHooksService owner) : ICCSPlayerControllerResetForceTeamThinkHook
 {
     private event OnCCSPlayerControllerResetForceTeamThinkPreDelegate? _Pre;
     private event OnCCSPlayerControllerResetForceTeamThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CCSPlayerControllerResetForceTeamThinkHook : ICCSPlayerCon
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CCSPlayerControllerResetForceTeamThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CCSPlayerControllerResetForceTeamThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CCSPlayerControllerResetForceTeamThinkHook : ICCSPlayerCon
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerControllerResetForceTeamThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerControllerResetForceTeamThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CCSPlayerControllerResetForceTeamThinkHook : ICCSPlayerCon
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CCSPlayerControllerResetForceTeamThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CCSPlayerControllerResetForceTeamThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CCSPlayerControllerResetForceTeamThinkHook : ICCSPlayerCon
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerControllerResetForceTeamThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerControllerResetForceTeamThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CCSPlayerControllerResetForceTeamThinkHook : ICCSPlayerCon
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerControllerResetForceTeamThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerControllerResetForceTeamThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerControllerResetForceTeamThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerControllerResetForceTeamThink, owner);
         }
     }
 

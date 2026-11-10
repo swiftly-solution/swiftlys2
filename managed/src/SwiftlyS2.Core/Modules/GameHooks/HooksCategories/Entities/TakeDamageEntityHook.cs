@@ -2,7 +2,7 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class TakeDamageEntityHook : ITakeDamageEntityHook
+internal sealed class TakeDamageEntityHook( GameHooksService owner ) : ITakeDamageEntityHook
 {
     internal event OnTakeDamageEntityPreDelegate? _Pre;
     internal event OnTakeDamageEntityPostDelegate? _Post;
@@ -11,13 +11,13 @@ internal sealed class TakeDamageEntityHook : ITakeDamageEntityHook
     {
         add
         {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.TakeDamage);
+            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.TakeDamage, owner);
             _Pre += value;
         }
         remove
         {
             _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.TakeDamage);
+            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.TakeDamage, owner);
         }
     }
 
@@ -25,13 +25,13 @@ internal sealed class TakeDamageEntityHook : ITakeDamageEntityHook
     {
         add
         {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.TakeDamage);
+            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.TakeDamage, owner);
             _Post += value;
         }
         remove
         {
             _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.TakeDamage);
+            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.TakeDamage, owner);
         }
     }
 
@@ -43,7 +43,7 @@ internal sealed class TakeDamageEntityHook : ITakeDamageEntityHook
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.TakeDamage);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.TakeDamage);
+        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.TakeDamage, owner);
+        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.TakeDamage, owner);
     }
 }

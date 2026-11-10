@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCTriggerImpactDisableThinkPre(ref CTriggerImpactDisableThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CTriggerImpactDisableThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCTriggerImpactDisableThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCTriggerImpactDisableThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCTriggerImpactDisableThinkPost(ref CTriggerImpactDisableThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CTriggerImpactDisableThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCTriggerImpactDisableThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCTriggerImpactDisableThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CTriggerImpactDisableThinkHook : ICTriggerImpactDisableThinkHook
+internal sealed class CTriggerImpactDisableThinkHook(GameHooksService owner) : ICTriggerImpactDisableThinkHook
 {
     private event OnCTriggerImpactDisableThinkPreDelegate? _Pre;
     private event OnCTriggerImpactDisableThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CTriggerImpactDisableThinkHook : ICTriggerImpactDisableThi
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerImpactDisableThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerImpactDisableThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CTriggerImpactDisableThinkHook : ICTriggerImpactDisableThi
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerImpactDisableThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerImpactDisableThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CTriggerImpactDisableThinkHook : ICTriggerImpactDisableThi
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerImpactDisableThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerImpactDisableThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CTriggerImpactDisableThinkHook : ICTriggerImpactDisableThi
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerImpactDisableThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerImpactDisableThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CTriggerImpactDisableThinkHook : ICTriggerImpactDisableThi
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerImpactDisableThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerImpactDisableThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerImpactDisableThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerImpactDisableThink, owner);
         }
     }
 

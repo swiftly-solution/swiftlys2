@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCMomentaryRotButtonSetPositionMoveDonePre(ref CMomentaryRotButtonSetPositionMoveDonePreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CMomentaryRotButtonSetPositionMoveDone);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCMomentaryRotButtonSetPositionMoveDonePre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCMomentaryRotButtonSetPositionMoveDonePre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCMomentaryRotButtonSetPositionMoveDonePost(ref CMomentaryRotButtonSetPositionMoveDonePostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CMomentaryRotButtonSetPositionMoveDone);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCMomentaryRotButtonSetPositionMoveDonePost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCMomentaryRotButtonSetPositionMoveDonePost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CMomentaryRotButtonSetPositionMoveDoneHook : ICMomentaryRotButtonSetPositionMoveDoneHook
+internal sealed class CMomentaryRotButtonSetPositionMoveDoneHook(GameHooksService owner) : ICMomentaryRotButtonSetPositionMoveDoneHook
 {
     private event OnCMomentaryRotButtonSetPositionMoveDonePreDelegate? _Pre;
     private event OnCMomentaryRotButtonSetPositionMoveDonePostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CMomentaryRotButtonSetPositionMoveDoneHook : ICMomentaryRo
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CMomentaryRotButtonSetPositionMoveDone);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CMomentaryRotButtonSetPositionMoveDone, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CMomentaryRotButtonSetPositionMoveDoneHook : ICMomentaryRo
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMomentaryRotButtonSetPositionMoveDone);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMomentaryRotButtonSetPositionMoveDone, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CMomentaryRotButtonSetPositionMoveDoneHook : ICMomentaryRo
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CMomentaryRotButtonSetPositionMoveDone);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CMomentaryRotButtonSetPositionMoveDone, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CMomentaryRotButtonSetPositionMoveDoneHook : ICMomentaryRo
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMomentaryRotButtonSetPositionMoveDone);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMomentaryRotButtonSetPositionMoveDone, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CMomentaryRotButtonSetPositionMoveDoneHook : ICMomentaryRo
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMomentaryRotButtonSetPositionMoveDone);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMomentaryRotButtonSetPositionMoveDone, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMomentaryRotButtonSetPositionMoveDone);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMomentaryRotButtonSetPositionMoveDone, owner);
         }
     }
 

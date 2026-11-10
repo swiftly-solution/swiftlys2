@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCSmokeGrenadeProjectileThink_DetonatePre(ref CSmokeGrenadeProjectileThink_DetonatePreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CSmokeGrenadeProjectileThink_Detonate);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCSmokeGrenadeProjectileThink_DetonatePre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCSmokeGrenadeProjectileThink_DetonatePre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCSmokeGrenadeProjectileThink_DetonatePost(ref CSmokeGrenadeProjectileThink_DetonatePostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CSmokeGrenadeProjectileThink_Detonate);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCSmokeGrenadeProjectileThink_DetonatePost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCSmokeGrenadeProjectileThink_DetonatePost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CSmokeGrenadeProjectileThink_DetonateHook : ICSmokeGrenadeProjectileThink_DetonateHook
+internal sealed class CSmokeGrenadeProjectileThink_DetonateHook(GameHooksService owner) : ICSmokeGrenadeProjectileThink_DetonateHook
 {
     private event OnCSmokeGrenadeProjectileThink_DetonatePreDelegate? _Pre;
     private event OnCSmokeGrenadeProjectileThink_DetonatePostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CSmokeGrenadeProjectileThink_DetonateHook : ICSmokeGrenade
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSmokeGrenadeProjectileThink_Detonate);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSmokeGrenadeProjectileThink_Detonate, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CSmokeGrenadeProjectileThink_DetonateHook : ICSmokeGrenade
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSmokeGrenadeProjectileThink_Detonate);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSmokeGrenadeProjectileThink_Detonate, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CSmokeGrenadeProjectileThink_DetonateHook : ICSmokeGrenade
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSmokeGrenadeProjectileThink_Detonate);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSmokeGrenadeProjectileThink_Detonate, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CSmokeGrenadeProjectileThink_DetonateHook : ICSmokeGrenade
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSmokeGrenadeProjectileThink_Detonate);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSmokeGrenadeProjectileThink_Detonate, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CSmokeGrenadeProjectileThink_DetonateHook : ICSmokeGrenade
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSmokeGrenadeProjectileThink_Detonate);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSmokeGrenadeProjectileThink_Detonate, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSmokeGrenadeProjectileThink_Detonate);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSmokeGrenadeProjectileThink_Detonate, owner);
         }
     }
 

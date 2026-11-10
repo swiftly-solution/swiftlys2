@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCCSPlayerControllerInventoryUpdateThinkPre(ref CCSPlayerControllerInventoryUpdateThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CCSPlayerControllerInventoryUpdateThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCCSPlayerControllerInventoryUpdateThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCCSPlayerControllerInventoryUpdateThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCCSPlayerControllerInventoryUpdateThinkPost(ref CCSPlayerControllerInventoryUpdateThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CCSPlayerControllerInventoryUpdateThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCCSPlayerControllerInventoryUpdateThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCCSPlayerControllerInventoryUpdateThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CCSPlayerControllerInventoryUpdateThinkHook : ICCSPlayerControllerInventoryUpdateThinkHook
+internal sealed class CCSPlayerControllerInventoryUpdateThinkHook(GameHooksService owner) : ICCSPlayerControllerInventoryUpdateThinkHook
 {
     private event OnCCSPlayerControllerInventoryUpdateThinkPreDelegate? _Pre;
     private event OnCCSPlayerControllerInventoryUpdateThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CCSPlayerControllerInventoryUpdateThinkHook : ICCSPlayerCo
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CCSPlayerControllerInventoryUpdateThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CCSPlayerControllerInventoryUpdateThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CCSPlayerControllerInventoryUpdateThinkHook : ICCSPlayerCo
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerControllerInventoryUpdateThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerControllerInventoryUpdateThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CCSPlayerControllerInventoryUpdateThinkHook : ICCSPlayerCo
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CCSPlayerControllerInventoryUpdateThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CCSPlayerControllerInventoryUpdateThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CCSPlayerControllerInventoryUpdateThinkHook : ICCSPlayerCo
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerControllerInventoryUpdateThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerControllerInventoryUpdateThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CCSPlayerControllerInventoryUpdateThinkHook : ICCSPlayerCo
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerControllerInventoryUpdateThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerControllerInventoryUpdateThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerControllerInventoryUpdateThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerControllerInventoryUpdateThink, owner);
         }
     }
 

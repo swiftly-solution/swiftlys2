@@ -2,12 +2,12 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class GameHookDatamapCSmokeGrenadeProjectile : IGameHookDatamapCSmokeGrenadeProjectile
+internal sealed class GameHookDatamapCSmokeGrenadeProjectile(GameHooksService owner) : IGameHookDatamapCSmokeGrenadeProjectile
 {
-    internal readonly CSmokeGrenadeProjectileThink_BuildingSmokeVolumeHook CSmokeGrenadeProjectileThink_BuildingSmokeVolumeHook = new();
-    internal readonly CSmokeGrenadeProjectileThink_DetonateHook CSmokeGrenadeProjectileThink_DetonateHook = new();
-    internal readonly CSmokeGrenadeProjectileThink_RemoveHook CSmokeGrenadeProjectileThink_RemoveHook = new();
-    internal readonly CSmokeGrenadeProjectileThink_UpdateHook CSmokeGrenadeProjectileThink_UpdateHook = new();
+    internal readonly CSmokeGrenadeProjectileThink_BuildingSmokeVolumeHook CSmokeGrenadeProjectileThink_BuildingSmokeVolumeHook = new(owner);
+    internal readonly CSmokeGrenadeProjectileThink_DetonateHook CSmokeGrenadeProjectileThink_DetonateHook = new(owner);
+    internal readonly CSmokeGrenadeProjectileThink_RemoveHook CSmokeGrenadeProjectileThink_RemoveHook = new(owner);
+    internal readonly CSmokeGrenadeProjectileThink_UpdateHook CSmokeGrenadeProjectileThink_UpdateHook = new(owner);
 
     public ICSmokeGrenadeProjectileThink_BuildingSmokeVolumeHook Think_BuildingSmokeVolume => CSmokeGrenadeProjectileThink_BuildingSmokeVolumeHook;
     public ICSmokeGrenadeProjectileThink_DetonateHook Think_Detonate => CSmokeGrenadeProjectileThink_DetonateHook;

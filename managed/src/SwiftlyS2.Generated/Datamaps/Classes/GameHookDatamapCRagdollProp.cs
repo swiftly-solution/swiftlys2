@@ -2,13 +2,13 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class GameHookDatamapCRagdollProp : IGameHookDatamapCRagdollProp
+internal sealed class GameHookDatamapCRagdollProp(GameHooksService owner) : IGameHookDatamapCRagdollProp
 {
-    internal readonly CRagdollPropAttachedItemsThinkHook CRagdollPropAttachedItemsThinkHook = new();
-    internal readonly CRagdollPropClearFlagsThinkHook CRagdollPropClearFlagsThinkHook = new();
-    internal readonly CRagdollPropFadeOutThinkHook CRagdollPropFadeOutThinkHook = new();
-    internal readonly CRagdollPropSetDebrisThinkHook CRagdollPropSetDebrisThinkHook = new();
-    internal readonly CRagdollPropSettleThinkHook CRagdollPropSettleThinkHook = new();
+    internal readonly CRagdollPropAttachedItemsThinkHook CRagdollPropAttachedItemsThinkHook = new(owner);
+    internal readonly CRagdollPropClearFlagsThinkHook CRagdollPropClearFlagsThinkHook = new(owner);
+    internal readonly CRagdollPropFadeOutThinkHook CRagdollPropFadeOutThinkHook = new(owner);
+    internal readonly CRagdollPropSetDebrisThinkHook CRagdollPropSetDebrisThinkHook = new(owner);
+    internal readonly CRagdollPropSettleThinkHook CRagdollPropSettleThinkHook = new(owner);
 
     public ICRagdollPropAttachedItemsThinkHook AttachedItemsThink => CRagdollPropAttachedItemsThinkHook;
     public ICRagdollPropClearFlagsThinkHook ClearFlagsThink => CRagdollPropClearFlagsThinkHook;

@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCSoundEventMultiPointEntityMultiPointThinkPre(ref CSoundEventMultiPointEntityMultiPointThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CSoundEventMultiPointEntityMultiPointThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCSoundEventMultiPointEntityMultiPointThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCSoundEventMultiPointEntityMultiPointThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCSoundEventMultiPointEntityMultiPointThinkPost(ref CSoundEventMultiPointEntityMultiPointThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CSoundEventMultiPointEntityMultiPointThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCSoundEventMultiPointEntityMultiPointThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCSoundEventMultiPointEntityMultiPointThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CSoundEventMultiPointEntityMultiPointThinkHook : ICSoundEventMultiPointEntityMultiPointThinkHook
+internal sealed class CSoundEventMultiPointEntityMultiPointThinkHook(GameHooksService owner) : ICSoundEventMultiPointEntityMultiPointThinkHook
 {
     private event OnCSoundEventMultiPointEntityMultiPointThinkPreDelegate? _Pre;
     private event OnCSoundEventMultiPointEntityMultiPointThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CSoundEventMultiPointEntityMultiPointThinkHook : ICSoundEv
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSoundEventMultiPointEntityMultiPointThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSoundEventMultiPointEntityMultiPointThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CSoundEventMultiPointEntityMultiPointThinkHook : ICSoundEv
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSoundEventMultiPointEntityMultiPointThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSoundEventMultiPointEntityMultiPointThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CSoundEventMultiPointEntityMultiPointThinkHook : ICSoundEv
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSoundEventMultiPointEntityMultiPointThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSoundEventMultiPointEntityMultiPointThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CSoundEventMultiPointEntityMultiPointThinkHook : ICSoundEv
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSoundEventMultiPointEntityMultiPointThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSoundEventMultiPointEntityMultiPointThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CSoundEventMultiPointEntityMultiPointThinkHook : ICSoundEv
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSoundEventMultiPointEntityMultiPointThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSoundEventMultiPointEntityMultiPointThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSoundEventMultiPointEntityMultiPointThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSoundEventMultiPointEntityMultiPointThink, owner);
         }
     }
 
