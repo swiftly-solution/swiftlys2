@@ -9,14 +9,26 @@ internal sealed class TouchEntityHook : ITouchEntityHook
 
     public event OnTouchEntityPreDelegate Pre
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.Touch, ref _Pre, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.Touch, ref _Pre, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.Touch, ref _Pre, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.Touch, ref _Pre, value, add: false);
+        }
     }
 
     public event OnTouchEntityPostDelegate Post
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.Touch, ref _Post, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.Touch, ref _Post, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.Touch, ref _Post, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.Touch, ref _Post, value, add: false);
+        }
     }
 
     public void InvokePre( ref TouchEntityPreContext ctx ) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);

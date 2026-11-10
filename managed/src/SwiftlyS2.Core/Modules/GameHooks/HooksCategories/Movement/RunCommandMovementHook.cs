@@ -9,14 +9,26 @@ internal sealed class RunCommandMovementHook : IRunCommandMovementHook
 
     public event OnRunCommandMovementPreDelegate Pre
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.RunCommand, ref _Pre, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.RunCommand, ref _Pre, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.RunCommand, ref _Pre, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.RunCommand, ref _Pre, value, add: false);
+        }
     }
 
     public event OnRunCommandMovementPostDelegate Post
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.RunCommand, ref _Post, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.RunCommand, ref _Post, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.RunCommand, ref _Post, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.RunCommand, ref _Post, value, add: false);
+        }
     }
 
     public void InvokePre(ref RunCommandMovementPreContext ctx) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);

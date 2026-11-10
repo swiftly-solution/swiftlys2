@@ -9,14 +9,26 @@ internal sealed class WalkMoveMovementHook : IWalkMoveMovementHook
 
     public event OnWalkMoveMovementPreDelegate Pre
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.WalkMove, ref _Pre, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.WalkMove, ref _Pre, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.WalkMove, ref _Pre, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.WalkMove, ref _Pre, value, add: false);
+        }
     }
 
     public event OnWalkMoveMovementPostDelegate Post
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.WalkMove, ref _Post, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.WalkMove, ref _Post, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.WalkMove, ref _Post, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.WalkMove, ref _Post, value, add: false);
+        }
     }
 
     public void InvokePre(ref WalkMoveMovementPreContext ctx) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);

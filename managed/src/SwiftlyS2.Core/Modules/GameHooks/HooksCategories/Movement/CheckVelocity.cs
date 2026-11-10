@@ -9,14 +9,26 @@ internal sealed class CheckVelocityMovementHook : ICheckVelocityMovementHook
 
     public event OnCheckVelocityMovementPreDelegate Pre
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.CheckVelocity, ref _Pre, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.CheckVelocity, ref _Pre, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.CheckVelocity, ref _Pre, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.CheckVelocity, ref _Pre, value, add: false);
+        }
     }
 
     public event OnCheckVelocityMovementPostDelegate Post
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.CheckVelocity, ref _Post, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.CheckVelocity, ref _Post, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.CheckVelocity, ref _Post, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.CheckVelocity, ref _Post, value, add: false);
+        }
     }
 
     public void InvokePre(ref CheckVelocityMovementPreContext ctx) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);

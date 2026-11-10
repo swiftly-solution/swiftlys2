@@ -59,7 +59,7 @@ internal static partial class GameHooksPublisher
     private static readonly List<GameHooksService> subscribers = [];
     private static readonly Lock subscribersLock = new();
 
-    private static class Listeners<T> where T : Delegate
+    private static class Listeners<TDelegate> where TDelegate : Delegate
     {
         internal static GameHooksService[] Snapshot = [];
 
@@ -71,15 +71,26 @@ internal static partial class GameHooksPublisher
         internal static void Refresh()
         {
             // Discover fields on subscription, never on a phase's first empty dispatch.
-            hasListeners ??= (
-                from category in typeof(GameHooksService).GetFields(Fields)
-                from hook in category.FieldType.GetFields(Fields)
-                from listener in hook.FieldType.GetFields(Fields)
-                where listener.FieldType == typeof(T)
-                select (Func<GameHooksService, bool>)(service =>
-                    listener.GetValue(hook.GetValue(category.GetValue(service))) != null)
-            ).Single();
-            Volatile.Write(ref Snapshot, subscribers.Where(hasListeners).ToArray());
+            hasListeners ??= CreateListenerPredicate();
+            var snapshot = subscribers.Where(hasListeners).ToArray();
+            Volatile.Write(ref Snapshot, snapshot);
+        }
+
+        private static Func<GameHooksService, bool> CreateListenerPredicate()
+        {
+            return typeof(GameHooksService).GetFields(Fields)
+                .SelectMany(category => category.FieldType.GetFields(Fields),
+                    ( category, hook ) => new { Category = category, Hook = hook })
+                .SelectMany(path => path.Hook.FieldType.GetFields(Fields),
+                    ( path, listener ) => new { path.Category, path.Hook, Listener = listener })
+                .Where(path => path.Listener.FieldType == typeof(TDelegate))
+                .Select(path => new Func<GameHooksService, bool>(service =>
+                {
+                    var category = path.Category.GetValue(service);
+                    var hook = path.Hook.GetValue(category);
+                    return path.Listener.GetValue(hook) != null;
+                }))
+                .Single();
         }
     }
 
@@ -105,20 +116,34 @@ internal static partial class GameHooksPublisher
         }
     }
 
-    internal static void UpdateListener<T>( HookListener hook, ref T? listeners, T? value, bool add ) where T : Delegate
+    internal static void UpdateListener<TDelegate>( HookListener hook, ref TDelegate? listeners, TDelegate? value, bool add ) where TDelegate : Delegate
     {
         lock (subscribersLock)
         {
-            var updated = (T?)(add ? Delegate.Combine(listeners, value) : Delegate.Remove(listeners, value));
+            var updated = (TDelegate?)(add ? Delegate.Combine(listeners, value) : Delegate.Remove(listeners, value));
             var hadListeners = listeners != null;
-            if (!hadListeners && updated != null) AddHookListener(hook);
+            var hasListeners = updated != null;
+
+            if (!hadListeners && hasListeners)
+            {
+                AddHookListener(hook);
+            }
+
             Volatile.Write(ref listeners, updated);
-            if (hadListeners && updated == null) RemoveHookListener(hook);
-            if (hadListeners != (updated != null)) Listeners<T>.Refresh();
+
+            if (hadListeners && !hasListeners)
+            {
+                RemoveHookListener(hook);
+            }
+
+            if (hadListeners != hasListeners)
+            {
+                Listeners<TDelegate>.Refresh();
+            }
         }
     }
 
-    internal static void ClearListeners<T>( HookListener hook, ref T? listeners ) where T : Delegate
+    internal static void ClearListeners<TDelegate>( HookListener hook, ref TDelegate? listeners ) where TDelegate : Delegate
     {
         lock (subscribersLock)
         {

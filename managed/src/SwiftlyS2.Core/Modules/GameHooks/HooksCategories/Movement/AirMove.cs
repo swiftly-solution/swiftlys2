@@ -9,14 +9,26 @@ internal sealed class AirMoveMovementHook : IAirMoveMovementHook
 
     public event OnAirMoveMovementPreDelegate Pre
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.AirMove, ref _Pre, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.AirMove, ref _Pre, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.AirMove, ref _Pre, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.AirMove, ref _Pre, value, add: false);
+        }
     }
 
     public event OnAirMoveMovementPostDelegate Post
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.AirMove, ref _Post, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.AirMove, ref _Post, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.AirMove, ref _Post, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.AirMove, ref _Post, value, add: false);
+        }
     }
 
     public void InvokePre(ref AirMoveMovementPreContext ctx) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);

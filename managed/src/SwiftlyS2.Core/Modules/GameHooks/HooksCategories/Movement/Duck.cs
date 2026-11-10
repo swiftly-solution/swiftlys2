@@ -9,14 +9,26 @@ internal sealed class DuckMovementHook : IDuckMovementHook
 
     public event OnDuckMovementPreDelegate Pre
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.Duck, ref _Pre, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.Duck, ref _Pre, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.Duck, ref _Pre, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.Duck, ref _Pre, value, add: false);
+        }
     }
 
     public event OnDuckMovementPostDelegate Post
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.Duck, ref _Post, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.Duck, ref _Post, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.Duck, ref _Post, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.Duck, ref _Post, value, add: false);
+        }
     }
 
     public void InvokePre(ref DuckMovementPreContext ctx) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);

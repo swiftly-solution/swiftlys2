@@ -9,14 +9,26 @@ internal sealed class OnJumpLegacyMovementHook : IOnJumpLegacyMovementHook
 
     public event OnOnJumpLegacyMovementPreDelegate Pre
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.OnJumpLegacy, ref _Pre, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.OnJumpLegacy, ref _Pre, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.OnJumpLegacy, ref _Pre, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.OnJumpLegacy, ref _Pre, value, add: false);
+        }
     }
 
     public event OnOnJumpLegacyMovementPostDelegate Post
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.OnJumpLegacy, ref _Post, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.OnJumpLegacy, ref _Post, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.OnJumpLegacy, ref _Post, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.OnJumpLegacy, ref _Post, value, add: false);
+        }
     }
 
     public void InvokePre(ref OnJumpLegacyMovementPreContext ctx) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);

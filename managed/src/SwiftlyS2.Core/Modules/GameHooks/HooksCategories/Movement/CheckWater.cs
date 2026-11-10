@@ -9,14 +9,26 @@ internal sealed class CheckWaterMovementHook : ICheckWaterMovementHook
 
     public event OnCheckWaterMovementPreDelegate Pre
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.CheckWater, ref _Pre, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.CheckWater, ref _Pre, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.CheckWater, ref _Pre, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.CheckWater, ref _Pre, value, add: false);
+        }
     }
 
     public event OnCheckWaterMovementPostDelegate Post
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.CheckWater, ref _Post, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.CheckWater, ref _Post, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.CheckWater, ref _Post, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.CheckWater, ref _Post, value, add: false);
+        }
     }
 
     public void InvokePre(ref CheckWaterMovementPreContext ctx) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);

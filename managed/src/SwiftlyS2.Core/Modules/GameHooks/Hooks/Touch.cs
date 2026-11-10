@@ -199,7 +199,7 @@ internal static partial class GameHooksPublisher
         foreach (var subscriber in Volatile.Read(ref Listeners<OnStartTouchEntityPreDelegate>.Snapshot))
         {
             subscriber.InvokeStartTouchPre(ref ctx);
-            if (ctx.HookResult is HookResult.Stop or HookResult.Handled) return;
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
         }
     }
 
@@ -208,7 +208,7 @@ internal static partial class GameHooksPublisher
         foreach (var subscriber in Volatile.Read(ref Listeners<OnStartTouchEntityPostDelegate>.Snapshot))
         {
             subscriber.InvokeStartTouchPost(ref ctx);
-            if (ctx.HookResult is HookResult.Stop or HookResult.Handled) return;
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
         }
     }
 
@@ -217,7 +217,7 @@ internal static partial class GameHooksPublisher
         foreach (var subscriber in Volatile.Read(ref Listeners<OnTouchEntityPreDelegate>.Snapshot))
         {
             subscriber.InvokeTouchPre(ref ctx);
-            if (ctx.HookResult is HookResult.Stop or HookResult.Handled) return;
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
         }
     }
 
@@ -226,7 +226,7 @@ internal static partial class GameHooksPublisher
         foreach (var subscriber in Volatile.Read(ref Listeners<OnTouchEntityPostDelegate>.Snapshot))
         {
             subscriber.InvokeTouchPost(ref ctx);
-            if (ctx.HookResult is HookResult.Stop or HookResult.Handled) return;
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
         }
     }
 
@@ -235,7 +235,7 @@ internal static partial class GameHooksPublisher
         foreach (var subscriber in Volatile.Read(ref Listeners<OnEndTouchEntityPreDelegate>.Snapshot))
         {
             subscriber.InvokeEndTouchPre(ref ctx);
-            if (ctx.HookResult is HookResult.Stop or HookResult.Handled) return;
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
         }
     }
 
@@ -244,7 +244,7 @@ internal static partial class GameHooksPublisher
         foreach (var subscriber in Volatile.Read(ref Listeners<OnEndTouchEntityPostDelegate>.Snapshot))
         {
             subscriber.InvokeEndTouchPost(ref ctx);
-            if (ctx.HookResult is HookResult.Stop or HookResult.Handled) return;
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
         }
     }
 }

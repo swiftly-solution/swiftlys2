@@ -9,14 +9,26 @@ internal sealed class ProcessUsercmdsHook : IProcessUsercmdsHook
 
     public event OnProcessUsercmdsPreDelegate Pre
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.ProcessUsercmds, ref _Pre, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.ProcessUsercmds, ref _Pre, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.ProcessUsercmds, ref _Pre, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.ProcessUsercmds, ref _Pre, value, add: false);
+        }
     }
 
     public event OnProcessUsercmdsPostDelegate Post
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.ProcessUsercmds, ref _Post, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.ProcessUsercmds, ref _Post, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.ProcessUsercmds, ref _Post, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.ProcessUsercmds, ref _Post, value, add: false);
+        }
     }
 
     public void InvokePre(ref ProcessUsercmdsPreContext ctx) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);

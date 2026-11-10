@@ -9,14 +9,26 @@ internal sealed class CanUnduckMovementHook : ICanUnduckMovementHook
 
     public event OnCanUnduckMovementPreDelegate Pre
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.CanUnduck, ref _Pre, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.CanUnduck, ref _Pre, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.CanUnduck, ref _Pre, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.CanUnduck, ref _Pre, value, add: false);
+        }
     }
 
     public event OnCanUnduckMovementPostDelegate Post
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.CanUnduck, ref _Post, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.CanUnduck, ref _Post, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.CanUnduck, ref _Post, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.CanUnduck, ref _Post, value, add: false);
+        }
     }
 
     public void InvokePre(ref CanUnduckMovementPreContext ctx) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);

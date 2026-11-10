@@ -9,14 +9,26 @@ internal sealed class TryPlayerMoveMovementHook : ITryPlayerMoveMovementHook
 
     public event OnTryPlayerMoveMovementPreDelegate Pre
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.TryPlayerMove, ref _Pre, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.TryPlayerMove, ref _Pre, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.TryPlayerMove, ref _Pre, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.TryPlayerMove, ref _Pre, value, add: false);
+        }
     }
 
     public event OnTryPlayerMoveMovementPostDelegate Post
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.TryPlayerMove, ref _Post, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.TryPlayerMove, ref _Post, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.TryPlayerMove, ref _Post, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.TryPlayerMove, ref _Post, value, add: false);
+        }
     }
 
     public void InvokePre(ref TryPlayerMoveMovementPreContext ctx) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);

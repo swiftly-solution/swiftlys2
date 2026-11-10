@@ -79,7 +79,7 @@ internal static partial class GameHooksPublisher
         foreach (var subscriber in Volatile.Read(ref Listeners<OnProcessMovementMovementPreDelegate>.Snapshot))
         {
             subscriber.InvokeProcessMovementPre(ref ctx);
-            if (ctx.HookResult is HookResult.Stop or HookResult.Handled) return;
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
         }
     }
 
@@ -88,7 +88,7 @@ internal static partial class GameHooksPublisher
         foreach (var subscriber in Volatile.Read(ref Listeners<OnProcessMovementMovementPostDelegate>.Snapshot))
         {
             subscriber.InvokeProcessMovementPost(ref ctx);
-            if (ctx.HookResult is HookResult.Stop or HookResult.Handled) return;
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
         }
     }
 }

@@ -9,14 +9,26 @@ internal sealed class CanMovePawnHook : ICanMovePawnHook
 
     public event OnCanMovePawnPreDelegate Pre
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.CanMove, ref _Pre, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.CanMove, ref _Pre, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.CanMove, ref _Pre, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.CanMove, ref _Pre, value, add: false);
+        }
     }
 
     public event OnCanMovePawnPostDelegate Post
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.CanMove, ref _Post, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.CanMove, ref _Post, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.CanMove, ref _Post, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.CanMove, ref _Post, value, add: false);
+        }
     }
 
     public void InvokePre(ref CanMovePawnPreContext ctx) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);

@@ -9,14 +9,26 @@ internal sealed class OnJumpModernMovementHook : IOnJumpModernMovementHook
 
     public event OnOnJumpModernMovementPreDelegate Pre
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.OnJumpModern, ref _Pre, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.OnJumpModern, ref _Pre, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.OnJumpModern, ref _Pre, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.OnJumpModern, ref _Pre, value, add: false);
+        }
     }
 
     public event OnOnJumpModernMovementPostDelegate Post
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.OnJumpModern, ref _Post, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.OnJumpModern, ref _Post, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.OnJumpModern, ref _Post, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.OnJumpModern, ref _Post, value, add: false);
+        }
     }
 
     public void InvokePre(ref OnJumpModernMovementPreContext ctx) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);

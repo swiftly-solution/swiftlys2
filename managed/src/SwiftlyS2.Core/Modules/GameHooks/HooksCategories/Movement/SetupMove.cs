@@ -9,14 +9,26 @@ internal sealed class SetupMoveMovementHook : ISetupMoveMovementHook
 
     public event OnSetupMoveMovementPreDelegate Pre
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.SetupMove, ref _Pre, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.SetupMove, ref _Pre, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.SetupMove, ref _Pre, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.SetupMove, ref _Pre, value, add: false);
+        }
     }
 
     public event OnSetupMoveMovementPostDelegate Post
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.SetupMove, ref _Post, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.SetupMove, ref _Post, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.SetupMove, ref _Post, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.SetupMove, ref _Post, value, add: false);
+        }
     }
 
     public void InvokePre(ref SetupMoveMovementPreContext ctx) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);

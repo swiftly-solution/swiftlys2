@@ -9,14 +9,26 @@ internal sealed class WeaponDropHook : IWeaponDropHook
 
     public event OnWeaponDropPreDelegate Pre
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.WeaponDrop, ref _Pre, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.WeaponDrop, ref _Pre, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.WeaponDrop, ref _Pre, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.WeaponDrop, ref _Pre, value, add: false);
+        }
     }
 
     public event OnWeaponDropPostDelegate Post
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.WeaponDrop, ref _Post, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.WeaponDrop, ref _Post, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.WeaponDrop, ref _Post, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.WeaponDrop, ref _Post, value, add: false);
+        }
     }
 
     public void InvokePre(ref WeaponDropPreContext ctx) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);

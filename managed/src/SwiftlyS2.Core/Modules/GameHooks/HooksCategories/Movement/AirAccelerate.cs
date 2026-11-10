@@ -9,14 +9,26 @@ internal sealed class AirAccelerateMovementHook : IAirAccelerateMovementHook
 
     public event OnAirAccelerateMovementPreDelegate Pre
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.AirAccelerate, ref _Pre, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.AirAccelerate, ref _Pre, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.AirAccelerate, ref _Pre, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.AirAccelerate, ref _Pre, value, add: false);
+        }
     }
 
     public event OnAirAccelerateMovementPostDelegate Post
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.AirAccelerate, ref _Post, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.AirAccelerate, ref _Post, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.AirAccelerate, ref _Post, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.AirAccelerate, ref _Post, value, add: false);
+        }
     }
 
     public void InvokePre(ref AirAccelerateMovementPreContext ctx) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);

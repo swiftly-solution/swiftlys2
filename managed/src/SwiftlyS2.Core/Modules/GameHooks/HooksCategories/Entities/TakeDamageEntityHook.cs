@@ -9,14 +9,26 @@ internal sealed class TakeDamageEntityHook : ITakeDamageEntityHook
 
     public event OnTakeDamageEntityPreDelegate Pre
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.TakeDamage, ref _Pre, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.TakeDamage, ref _Pre, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.TakeDamage, ref _Pre, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.TakeDamage, ref _Pre, value, add: false);
+        }
     }
 
     public event OnTakeDamageEntityPostDelegate Post
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.TakeDamage, ref _Post, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.TakeDamage, ref _Post, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.TakeDamage, ref _Post, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.TakeDamage, ref _Post, value, add: false);
+        }
     }
 
     public void InvokePre( ref TakeDamageEntityPreContext ctx ) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);

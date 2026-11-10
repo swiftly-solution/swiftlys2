@@ -9,14 +9,26 @@ internal sealed class GroundAccelerateMovementHook : IGroundAccelerateMovementHo
 
     public event OnGroundAccelerateMovementPreDelegate Pre
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.GroundAccelerate, ref _Pre, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.GroundAccelerate, ref _Pre, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.GroundAccelerate, ref _Pre, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.GroundAccelerate, ref _Pre, value, add: false);
+        }
     }
 
     public event OnGroundAccelerateMovementPostDelegate Post
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.GroundAccelerate, ref _Post, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.GroundAccelerate, ref _Post, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.GroundAccelerate, ref _Post, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.GroundAccelerate, ref _Post, value, add: false);
+        }
     }
 
     public void InvokePre(ref GroundAccelerateMovementPreContext ctx) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);

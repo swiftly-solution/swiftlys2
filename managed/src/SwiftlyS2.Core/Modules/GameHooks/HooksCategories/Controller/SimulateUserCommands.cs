@@ -9,14 +9,26 @@ internal sealed class SimulateUserCommandsHook : ISimulateUserCommandsHook
 
     public event OnSimulateUserCommandsPreDelegate Pre
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.SimulateUserCommands, ref _Pre, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.SimulateUserCommands, ref _Pre, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.SimulateUserCommands, ref _Pre, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.SimulateUserCommands, ref _Pre, value, add: false);
+        }
     }
 
     public event OnSimulateUserCommandsPostDelegate Post
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.SimulateUserCommands, ref _Post, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.SimulateUserCommands, ref _Post, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.SimulateUserCommands, ref _Post, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.SimulateUserCommands, ref _Post, value, add: false);
+        }
     }
 
     public void InvokePre(ref SimulateUserCommandsPreContext ctx) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);

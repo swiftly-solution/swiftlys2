@@ -9,14 +9,26 @@ internal sealed class LadderMoveMovementHook : ILadderMoveMovementHook
 
     public event OnLadderMoveMovementPreDelegate Pre
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.LadderMove, ref _Pre, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.LadderMove, ref _Pre, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.LadderMove, ref _Pre, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.LadderMove, ref _Pre, value, add: false);
+        }
     }
 
     public event OnLadderMoveMovementPostDelegate Post
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.LadderMove, ref _Post, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.LadderMove, ref _Post, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.LadderMove, ref _Post, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.LadderMove, ref _Post, value, add: false);
+        }
     }
 
     public void InvokePre(ref LadderMoveMovementPreContext ctx) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);

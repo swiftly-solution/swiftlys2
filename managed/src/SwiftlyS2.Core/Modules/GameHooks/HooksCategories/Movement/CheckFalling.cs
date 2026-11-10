@@ -9,14 +9,26 @@ internal sealed class CheckFallingMovementHook : ICheckFallingMovementHook
 
     public event OnCheckFallingMovementPreDelegate Pre
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.CheckFalling, ref _Pre, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.CheckFalling, ref _Pre, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.CheckFalling, ref _Pre, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.CheckFalling, ref _Pre, value, add: false);
+        }
     }
 
     public event OnCheckFallingMovementPostDelegate Post
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.CheckFalling, ref _Post, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.CheckFalling, ref _Post, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.CheckFalling, ref _Post, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.CheckFalling, ref _Post, value, add: false);
+        }
     }
 
     public void InvokePre(ref CheckFallingMovementPreContext ctx) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);

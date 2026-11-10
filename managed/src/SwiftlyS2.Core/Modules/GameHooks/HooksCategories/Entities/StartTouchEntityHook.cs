@@ -9,14 +9,26 @@ internal sealed class StartTouchEntityHook : IStartTouchEntityHook
 
     public event OnStartTouchEntityPreDelegate Pre
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.StartTouch, ref _Pre, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.StartTouch, ref _Pre, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.StartTouch, ref _Pre, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.StartTouch, ref _Pre, value, add: false);
+        }
     }
 
     public event OnStartTouchEntityPostDelegate Post
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.StartTouch, ref _Post, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.StartTouch, ref _Post, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.StartTouch, ref _Post, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.StartTouch, ref _Post, value, add: false);
+        }
     }
 
     public void InvokePre( ref StartTouchEntityPreContext ctx ) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);

@@ -9,14 +9,26 @@ internal sealed class CanUseWeaponHook : ICanUseWeaponHook
 
     public event OnCanUseWeaponPreDelegate Pre
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.CanUse, ref _Pre, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.CanUse, ref _Pre, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.CanUse, ref _Pre, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.CanUse, ref _Pre, value, add: false);
+        }
     }
 
     public event OnCanUseWeaponPostDelegate Post
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.CanUse, ref _Post, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.CanUse, ref _Post, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.CanUse, ref _Post, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.CanUse, ref _Post, value, add: false);
+        }
     }
 
     public void InvokePre(ref CanUseWeaponPreContext ctx) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);

@@ -9,14 +9,26 @@ internal sealed class FrictionMovementHook : IFrictionMovementHook
 
     public event OnFrictionMovementPreDelegate Pre
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.Friction, ref _Pre, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.Friction, ref _Pre, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.Friction, ref _Pre, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.Friction, ref _Pre, value, add: false);
+        }
     }
 
     public event OnFrictionMovementPostDelegate Post
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.Friction, ref _Post, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.Friction, ref _Post, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.Friction, ref _Post, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.Friction, ref _Post, value, add: false);
+        }
     }
 
     public void InvokePre(ref FrictionMovementPreContext ctx) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);

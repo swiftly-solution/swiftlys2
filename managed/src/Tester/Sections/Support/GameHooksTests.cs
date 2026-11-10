@@ -77,7 +77,11 @@ public static class GameHooksTests
             using var first = new Fixture();
             using var second = new Fixture();
             var calls = new List<int>();
-            first.Hook.Pre += ( ref ProcessMovementMovementPreContext ctx ) => { calls.Add(1); ctx.SetHookResult(result); };
+            first.Hook.Pre += ( ref ProcessMovementMovementPreContext ctx ) =>
+            {
+                calls.Add(1);
+                ctx.SetHookResult(result);
+            };
             first.Hook.Pre += ( ref ProcessMovementMovementPreContext ctx ) => calls.Add(2);
             second.Hook.Pre += ( ref ProcessMovementMovementPreContext ctx ) => calls.Add(3);
             Fixture.DispatchPre();
@@ -166,7 +170,8 @@ public static class GameHooksTests
         using var service = new Fixture();
         var before = Fixture.NativeCount;
         OnProcessMovementMovementPreDelegate handler = ( ref ProcessMovementMovementPreContext ctx ) => { };
-        Parallel.For(0, 16, _ => {
+        Parallel.For(0, 16, _ =>
+        {
             for (var i = 0; i < 100; i++)
             {
                 service.Hook.Pre += handler;
@@ -220,7 +225,8 @@ public static class GameHooksTests
         using var second = new Fixture();
         var calls = 0;
         var added = false;
-        first.Hook.Pre += ( ref ProcessMovementMovementPreContext ctx ) => {
+        first.Hook.Pre += ( ref ProcessMovementMovementPreContext ctx ) =>
+        {
             if (added) return;
             added = true;
             second.Hook.Pre += ( ref ProcessMovementMovementPreContext later ) => calls++;
@@ -245,20 +251,29 @@ public static class GameHooksTests
 
     private static void Discovery()
     {
-        var fields = (from category in Fixture.ServiceType.GetFields(Fixture.InstanceFields)
-                      from hook in category.FieldType.GetFields(Fixture.InstanceFields)
-                      from listener in hook.FieldType.GetFields(Fixture.InstanceFields)
-                      where typeof(Delegate).IsAssignableFrom(listener.FieldType)
-                      select listener).ToArray();
+        var fields = Fixture.ServiceType.GetFields(Fixture.InstanceFields)
+            .SelectMany(category => category.FieldType.GetFields(Fixture.InstanceFields))
+            .SelectMany(hook => hook.FieldType.GetFields(Fixture.InstanceFields))
+            .Where(listener => typeof(Delegate).IsAssignableFrom(listener.FieldType))
+            .ToArray();
         var phases = Fixture.Publisher.GetMethods(BindingFlags.NonPublic | BindingFlags.Static)
-            .Where(method => method.Name.StartsWith("Invoke") && method.GetParameters() is [{ ParameterType.IsByRef: true }])
+            .Where(method =>
+            {
+                if (!method.Name.StartsWith("Invoke")) return false;
+                var parameters = method.GetParameters();
+                return parameters.Length == 1 && parameters[0].ParameterType.IsByRef;
+            })
             .ToArray();
         Equal(fields.Length, phases.Length);
         Equal(true, phases.Length > 0);
         foreach (var phase in phases)
         {
             var context = phase.GetParameters()[0].ParameterType;
-            var matches = fields.Where(field => field.FieldType.GetMethod("Invoke")!.GetParameters() is [var parameter] && parameter.ParameterType == context).ToArray();
+            var matches = fields.Where(field =>
+            {
+                var parameters = field.FieldType.GetMethod("Invoke")!.GetParameters();
+                return parameters.Length == 1 && parameters[0].ParameterType == context;
+            }).ToArray();
             Equal(1, matches.Length);
         }
     }
@@ -267,17 +282,27 @@ public static class GameHooksTests
     {
         using var service = new Fixture();
         using var inactive = new Fixture();
-        var fields = (from category in Fixture.ServiceType.GetFields(Fixture.InstanceFields)
-                      from hook in category.FieldType.GetFields(Fixture.InstanceFields)
-                      from listener in hook.FieldType.GetFields(Fixture.InstanceFields)
-                      where typeof(Delegate).IsAssignableFrom(listener.FieldType)
-                      select (Owner: hook.GetValue(category.GetValue(service.Instance)), Listener: listener)).ToArray();
+        var fields = Fixture.ServiceType.GetFields(Fixture.InstanceFields)
+            .SelectMany(category => category.FieldType.GetFields(Fixture.InstanceFields),
+                ( category, hook ) => new { Category = category, Hook = hook })
+            .SelectMany(path => path.Hook.FieldType.GetFields(Fixture.InstanceFields),
+                ( path, listener ) => new { path.Category, path.Hook, Listener = listener })
+            .Where(path => typeof(Delegate).IsAssignableFrom(path.Listener.FieldType))
+            .Select(path => (Owner: path.Hook.GetValue(path.Category.GetValue(service.Instance)), Listener: path.Listener))
+            .ToArray();
         var phases = Fixture.Publisher.GetMethods(BindingFlags.NonPublic | BindingFlags.Static)
-            .Where(method => method.Name.StartsWith("Invoke") && method.GetParameters() is [{ ParameterType.IsByRef: true }]);
+            .Where(method =>
+            {
+                if (!method.Name.StartsWith("Invoke")) return false;
+                var parameters = method.GetParameters();
+                return parameters.Length == 1 && parameters[0].ParameterType.IsByRef;
+            });
         foreach (var phase in phases)
         {
             var context = phase.GetParameters()[0].ParameterType.GetElementType()!;
-            var (owner, field) = fields.Single(item => item.Listener.FieldType.GetMethod("Invoke")!.GetParameters()[0].ParameterType.GetElementType() == context);
+            var match = fields.Single(item => item.Listener.FieldType.GetMethod("Invoke")!.GetParameters()[0].ParameterType.GetElementType() == context);
+            var owner = match.Owner;
+            var field = match.Listener;
             var handler = typeof(Fixture).GetMethod(nameof(Fixture.CountInvocation))!.MakeGenericMethod(context).CreateDelegate(field.FieldType);
             var listeners = Fixture.Publisher.GetNestedType("Listeners`1", BindingFlags.NonPublic)!.MakeGenericType(field.FieldType);
             var refresh = listeners.GetMethod("Refresh", BindingFlags.NonPublic | BindingFlags.Static)!;
@@ -306,7 +331,8 @@ public static class GameHooksTests
         Fixture.DispatchPre();
         using var held = new ManualResetEventSlim();
         using var release = new ManualResetEventSlim();
-        var blocker = Task.Run(() => {
+        var blocker = Task.Run(() =>
+        {
             lock ((Lock)Fixture.Publisher.GetField("subscribersLock", BindingFlags.NonPublic | BindingFlags.Static)!.GetValue(null)!)
             {
                 held.Set();

@@ -9,14 +9,26 @@ internal sealed class CategorizePositionMovementHook : ICategorizePositionMoveme
 
     public event OnCategorizePositionMovementPreDelegate Pre
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.CategorizePosition, ref _Pre, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.CategorizePosition, ref _Pre, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.CategorizePosition, ref _Pre, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.CategorizePosition, ref _Pre, value, add: false);
+        }
     }
 
     public event OnCategorizePositionMovementPostDelegate Post
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.CategorizePosition, ref _Post, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.CategorizePosition, ref _Post, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.CategorizePosition, ref _Post, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.CategorizePosition, ref _Post, value, add: false);
+        }
     }
 
     public void InvokePre(ref CategorizePositionMovementPreContext ctx) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);

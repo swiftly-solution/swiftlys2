@@ -15,7 +15,10 @@ internal sealed class GetItemInLoadoutHook : IGetItemInLoadoutHook
             ThrowIfFollowingServerGuidelines();
             GameHooksPublisher.UpdateListener(HookListener.GetItemInLoadout, ref _Pre, value, add: true);
         }
-        remove => GameHooksPublisher.UpdateListener(HookListener.GetItemInLoadout, ref _Pre, value, add: false);
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.GetItemInLoadout, ref _Pre, value, add: false);
+        }
     }
 
     public event OnGetItemInLoadoutPostDelegate Post
@@ -25,7 +28,10 @@ internal sealed class GetItemInLoadoutHook : IGetItemInLoadoutHook
             ThrowIfFollowingServerGuidelines();
             GameHooksPublisher.UpdateListener(HookListener.GetItemInLoadout, ref _Post, value, add: true);
         }
-        remove => GameHooksPublisher.UpdateListener(HookListener.GetItemInLoadout, ref _Post, value, add: false);
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.GetItemInLoadout, ref _Post, value, add: false);
+        }
     }
 
     public void InvokePre(ref GetItemInLoadoutPreContext ctx) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);

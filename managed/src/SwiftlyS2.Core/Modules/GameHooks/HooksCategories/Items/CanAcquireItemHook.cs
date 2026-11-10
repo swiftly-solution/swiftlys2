@@ -9,14 +9,26 @@ internal sealed class CanAcquireItemHook : ICanAcquireItemHook
 
     public event OnCanAcquireItemPreDelegate Pre
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.CanAcquire, ref _Pre, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.CanAcquire, ref _Pre, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.CanAcquire, ref _Pre, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.CanAcquire, ref _Pre, value, add: false);
+        }
     }
 
     public event OnCanAcquireItemPostDelegate Post
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.CanAcquire, ref _Post, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.CanAcquire, ref _Post, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.CanAcquire, ref _Post, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.CanAcquire, ref _Post, value, add: false);
+        }
     }
 
     public void InvokePre(ref CanAcquireItemPreContext ctx) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);

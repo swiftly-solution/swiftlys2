@@ -9,14 +9,26 @@ internal sealed class PostThinkPawnHook : IPostThinkPawnHook
 
     public event OnPostThinkPawnPreDelegate Pre
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.PostThink, ref _Pre, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.PostThink, ref _Pre, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.PostThink, ref _Pre, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.PostThink, ref _Pre, value, add: false);
+        }
     }
 
     public event OnPostThinkPawnPostDelegate Post
     {
-        add => GameHooksPublisher.UpdateListener(HookListener.PostThink, ref _Post, value, add: true);
-        remove => GameHooksPublisher.UpdateListener(HookListener.PostThink, ref _Post, value, add: false);
+        add
+        {
+            GameHooksPublisher.UpdateListener(HookListener.PostThink, ref _Post, value, add: true);
+        }
+        remove
+        {
+            GameHooksPublisher.UpdateListener(HookListener.PostThink, ref _Post, value, add: false);
+        }
     }
 
     public void InvokePre(ref PostThinkPawnPreContext ctx) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);
