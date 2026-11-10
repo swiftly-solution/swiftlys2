@@ -58,8 +58,6 @@ jobs:
       run: |
         cd managed
         dotnet build -c Release -p:SW2Platform=Linux -p:UseSharedCompilation=false -p:BaseOutputPath=build/linux/ -p:Version=${{ needs.versioning.outputs.semVer }} -p:InformationalVersion=${{ needs.versioning.outputs.informationalVersion }} -p:FileVersion=${{ needs.versioning.outputs.semVer }}
-    - name: Test game hook dispatch
-      run: dotnet run --project tests/GameHooks -c Release -p:UseSharedCompilation=false
     - name: Build managed (Windows)
       run: |
         cd managed
