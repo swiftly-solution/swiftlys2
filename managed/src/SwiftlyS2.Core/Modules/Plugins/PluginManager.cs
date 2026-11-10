@@ -670,9 +670,12 @@ internal class PluginManager : IPluginManager
                 await WaitForPlatformDelay(cts.Token);
                 await WaitForFileAccessibility(filePath, cts.Token);
 
+                var reloading = FindPluginByDirectory(Path.GetDirectoryName(filePath) ?? string.Empty);
                 if (ReloadPluginByDllName(directoryName, silent: true))
                 {
-                    _logger.LogInformation("Reloaded plugin: {Name}", directoryName);
+                    var reloaded = FindPluginByDirectory(Path.GetDirectoryName(filePath) ?? string.Empty);
+                    _logger.LogInformation("Reloaded plugin: {Name} (unload {UnloadTimeMs:F1} ms, load {LoadTimeMs:F1} ms)",
+                        directoryName, reloading?.UnloadTime.TotalMilliseconds ?? 0, reloaded?.LoadTime.TotalMilliseconds ?? 0);
                 }
                 else
                 {
@@ -701,12 +704,14 @@ internal class PluginManager : IPluginManager
                             "Hot-loaded New Plugin",
                             "├─  {Id} {Version}",
                             "├─  Author: {Author}",
-                            "└─  Path: {RelativePath}"
+                            "├─  Path: {RelativePath}",
+                            "└─  Load time: {LoadTimeMs:F1} ms"
                         ]),
                         context.Metadata!.Id,
                         context.Metadata!.Version,
                         context.Metadata!.Author,
-                        displayPath
+                        displayPath,
+                        context.LoadTime.TotalMilliseconds
                     );
                 }
                 else

@@ -9,8 +9,14 @@ namespace SwiftlyS2.Shared.Misc;
 /// </summary>
 internal static class AtomicOps
 {
-    public static T Load<T>( ref T cell ) where T : struct
+    public static T Load<T>( ref T cell )
     {
+        if (!typeof(T).IsValueType)
+        {
+            var value = Volatile.Read(ref Unsafe.As<T, object?>(ref cell));
+            return Unsafe.As<object?, T>(ref value);
+        }
+
         if (Unsafe.SizeOf<T>() == 8)
         {
             return Unsafe.BitCast<long, T>(Volatile.Read(ref Unsafe.As<T, long>(ref cell)));
@@ -24,10 +30,10 @@ internal static class AtomicOps
         return Interlocked.CompareExchange(ref cell, default, default);
     }
 
-    public static bool TryCompareExchange<T>( ref T cell, ref T expected, T desired ) where T : struct
+    public static bool TryCompareExchange<T>( ref T cell, ref T expected, T desired )
     {
         var seen = Interlocked.CompareExchange(ref cell, desired, expected);
-        if (BitEquals(seen, expected))
+        if (!typeof(T).IsValueType ? ReferenceEquals(seen, expected) : BitEquals(seen, expected))
         {
             return true;
         }
@@ -108,7 +114,7 @@ internal static class AtomicOps
         }
     }
 
-    private static bool BitEquals<T>( T a, T b ) where T : struct =>
+    private static bool BitEquals<T>( T a, T b ) =>
         MemoryMarshal.CreateReadOnlySpan(ref Unsafe.As<T, byte>(ref a), Unsafe.SizeOf<T>())
             .SequenceEqual(MemoryMarshal.CreateReadOnlySpan(ref Unsafe.As<T, byte>(ref b), Unsafe.SizeOf<T>()));
 }

@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using McMaster.NETCore.Plugins;
 using SwiftlyS2.Core.Services;
 using SwiftlyS2.Shared;
@@ -20,9 +21,13 @@ internal class PluginContext : IDisposable
 
     public TimeSpan LoadTime { get; set; }
 
+    public TimeSpan UnloadTime { get; private set; }
+
     public void Dispose()
     {
+        var startedAt = Stopwatch.GetTimestamp();
         Plugin?.Unload();
+        UnloadTime = Stopwatch.GetElapsedTime(startedAt);
         Loader?.Dispose();
         // Core?.MenuManager?.CloseAllMenus();
         Core?.MenuManagerAPI?.CloseAllMenus();

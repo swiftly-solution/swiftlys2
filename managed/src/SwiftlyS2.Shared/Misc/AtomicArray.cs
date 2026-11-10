@@ -4,10 +4,10 @@ namespace SwiftlyS2.Shared.Misc;
 
 /// <summary>
 /// A fixed-size array whose elements are each a thread-safe cell, like <see cref="Atomic{T}"/> but stored contiguously.
-/// Same rules as <see cref="Atomic{T}"/> apply to every element; indexes out of range throw <see cref="IndexOutOfRangeException"/>.
+/// Supports value and reference types; reference loads are acquire loads and reference comparisons use identity. Indexes out of range throw <see cref="IndexOutOfRangeException"/>.
 /// </summary>
 /// <typeparam name="T">The value type to store.</typeparam>
-public sealed class AtomicArray<T> where T : struct
+public sealed class AtomicArray<T>
 {
     private readonly T[] items;
 

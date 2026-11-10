@@ -441,6 +441,13 @@ internal class CoreCommandService
             return false;
         }
 
+        PluginContext? FindLoadedPlugin( string dllName )
+        {
+            var dir = pluginManager.FindPluginDirectoryByDllName(dllName);
+            return pluginManager.GetPlugins().FirstOrDefault(p =>
+                p.Status == PluginStatus.Loaded && string.Equals(p.PluginDirectory, dir, StringComparison.OrdinalIgnoreCase));
+        }
+
         string GetColoredStatus( PluginStatus? status ) => status switch {
             // PluginStatus.Loaded => "[green]Loaded[/]",
             // PluginStatus.Error => "[red]Error[/]",
@@ -481,7 +488,7 @@ internal class CoreCommandService
 
                     if (pluginManager.LoadPluginByDllName(args[2], true))
                     {
-                        logger.LogInformation("Loaded plugin: {Format}", args[2]);
+                        logger.LogInformation("Loaded plugin: {Format} ({LoadTimeMs:F1} ms)", args[2], FindLoadedPlugin(args[2])?.LoadTime.TotalMilliseconds ?? 0);
                     }
                     else
                     {
@@ -494,9 +501,10 @@ internal class CoreCommandService
                 if (ValidatePluginId(args, "unload", "<dllName>"))
                 {
                     Console.WriteLine("\n");
+                    var unloading = FindLoadedPlugin(args[2]);
                     if (pluginManager.UnloadPluginByDllName(args[2], true))
                     {
-                        logger.LogInformation("Unloaded plugin: {Format}", args[2]);
+                        logger.LogInformation("Unloaded plugin: {Format} ({UnloadTimeMs:F1} ms)", args[2], unloading?.UnloadTime.TotalMilliseconds ?? 0);
                     }
                     else
                     {
@@ -509,9 +517,11 @@ internal class CoreCommandService
                 if (ValidatePluginId(args, "reload", "<dllName>"))
                 {
                     Console.WriteLine("\n");
+                    var reloading = FindLoadedPlugin(args[2]);
                     if (pluginManager.ReloadPluginByDllName(args[2], true))
                     {
-                        logger.LogInformation("Reloaded plugin: {Format}", args[2]);
+                        logger.LogInformation("Reloaded plugin: {Format} (unload {UnloadTimeMs:F1} ms, load {LoadTimeMs:F1} ms)", args[2],
+                            reloading?.UnloadTime.TotalMilliseconds ?? 0, FindLoadedPlugin(args[2])?.LoadTime.TotalMilliseconds ?? 0);
                     }
                     else
                     {
