@@ -76,25 +76,19 @@ internal static partial class GameHooksPublisher
 
     internal static void InvokeFullWalkMovePre( ref FullWalkMoveMovementPreContext ctx )
     {
-        lock (subscribersLock)
+        foreach (var subscriber in Volatile.Read(ref Listeners<OnFullWalkMoveMovementPreDelegate>.Snapshot))
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeFullWalkMovePre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
-            }
+            subscriber.InvokeFullWalkMovePre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
         }
     }
 
     internal static void InvokeFullWalkMovePost( ref FullWalkMoveMovementPostContext ctx )
     {
-        lock (subscribersLock)
+        foreach (var subscriber in Volatile.Read(ref Listeners<OnFullWalkMoveMovementPostDelegate>.Snapshot))
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeFullWalkMovePost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
-            }
+            subscriber.InvokeFullWalkMovePost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
         }
     }
 }

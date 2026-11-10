@@ -90,25 +90,19 @@ internal static partial class GameHooksPublisher
 
     internal static void InvokeRunCommandPre( ref RunCommandMovementPreContext ctx )
     {
-        lock (subscribersLock)
+        foreach (var subscriber in Volatile.Read(ref Listeners<OnRunCommandMovementPreDelegate>.Snapshot))
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeRunCommandPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
-            }
+            subscriber.InvokeRunCommandPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
         }
     }
 
     internal static void InvokeRunCommandPost( ref RunCommandMovementPostContext ctx )
     {
-        lock (subscribersLock)
+        foreach (var subscriber in Volatile.Read(ref Listeners<OnRunCommandMovementPostDelegate>.Snapshot))
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeRunCommandPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
-            }
+            subscriber.InvokeRunCommandPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
         }
     }
 }

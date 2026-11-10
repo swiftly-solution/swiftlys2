@@ -76,25 +76,19 @@ internal static partial class GameHooksPublisher
 
     internal static void InvokeLadderMovePre( ref LadderMoveMovementPreContext ctx )
     {
-        lock (subscribersLock)
+        foreach (var subscriber in Volatile.Read(ref Listeners<OnLadderMoveMovementPreDelegate>.Snapshot))
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeLadderMovePre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
-            }
+            subscriber.InvokeLadderMovePre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
         }
     }
 
     internal static void InvokeLadderMovePost( ref LadderMoveMovementPostContext ctx )
     {
-        lock (subscribersLock)
+        foreach (var subscriber in Volatile.Read(ref Listeners<OnLadderMoveMovementPostDelegate>.Snapshot))
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeLadderMovePost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
-            }
+            subscriber.InvokeLadderMovePost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
         }
     }
 }

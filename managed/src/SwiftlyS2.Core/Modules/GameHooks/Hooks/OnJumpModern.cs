@@ -79,25 +79,19 @@ internal static partial class GameHooksPublisher
 
     internal static void InvokeOnJumpModernPre( ref OnJumpModernMovementPreContext ctx )
     {
-        lock (subscribersLock)
+        foreach (var subscriber in Volatile.Read(ref Listeners<OnOnJumpModernMovementPreDelegate>.Snapshot))
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeOnJumpModernPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
-            }
+            subscriber.InvokeOnJumpModernPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
         }
     }
 
     internal static void InvokeOnJumpModernPost( ref OnJumpModernMovementPostContext ctx )
     {
-        lock (subscribersLock)
+        foreach (var subscriber in Volatile.Read(ref Listeners<OnOnJumpModernMovementPostDelegate>.Snapshot))
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeOnJumpModernPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
-            }
+            subscriber.InvokeOnJumpModernPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
         }
     }
 }

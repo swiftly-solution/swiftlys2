@@ -31,9 +31,6 @@ internal sealed class GetItemInLoadoutHook : IGetItemInLoadoutHook
     public void InvokePre(ref GetItemInLoadoutPreContext ctx) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);
     public void InvokePost(ref GetItemInLoadoutPostContext ctx) => Volatile.Read(ref _Post)?.Invoke(ref ctx);
 
-    public bool HasPreListeners => Volatile.Read(ref _Pre) != null;
-    public bool HasPostListeners => Volatile.Read(ref _Post) != null;
-
     public void UnregisterListeners()
     {
         GameHooksPublisher.ClearListeners(HookListener.GetItemInLoadout, ref _Pre);

@@ -1,3 +1,4 @@
+using System.Reflection;
 using System.Runtime.InteropServices;
 using SwiftlyS2.Shared;
 
@@ -58,6 +59,26 @@ internal static partial class GameHooksPublisher
     private static readonly List<GameHooksService> subscribers = [];
     private static readonly Lock subscribersLock = new();
 
+    private static class Listeners<T> where T : Delegate
+    {
+        internal static GameHooksService[] Snapshot = [];
+
+        // Resolve the existing category -> hook -> delegate fields once per phase.
+        private const BindingFlags Fields = BindingFlags.Instance | BindingFlags.NonPublic;
+        private static readonly Func<GameHooksService, bool> hasListeners = (
+            from category in typeof(GameHooksService).GetFields(Fields)
+            from hook in category.FieldType.GetFields(Fields)
+            from listener in hook.FieldType.GetFields(Fields)
+            where listener.FieldType == typeof(T)
+            select (Func<GameHooksService, bool>)(service =>
+                listener.GetValue(hook.GetValue(category.GetValue(service))) != null)
+        ).Single();
+
+        // Services subscribe empty and clear their listeners before unsubscribing.
+        // Rebuild only on presence transitions, under subscribersLock.
+        internal static void Refresh() => Volatile.Write(ref Snapshot, subscribers.Where(hasListeners).ToArray());
+    }
+
     private static readonly Dictionary<HookListener, int> hookListeners = [];
     private static readonly Lock hookListenersLock = new();
 
@@ -89,6 +110,7 @@ internal static partial class GameHooksPublisher
             if (!hadListeners && updated != null) AddHookListener(hook);
             Volatile.Write(ref listeners, updated);
             if (hadListeners && updated == null) RemoveHookListener(hook);
+            if (hadListeners != (updated != null)) Listeners<T>.Refresh();
         }
     }
 

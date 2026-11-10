@@ -17,6 +17,11 @@ var tests = new (string Name, Action Run)[] {
     ("Disposal clears captured delegates", DisposedDelegates),
     ("Disposal skips a later service", LaterDisposal),
     ("Listener discovery covers every published phase", Discovery),
+    ("Self-disposal does not skip the next service", SelfDisposal),
+    ("New listeners join the next dispatch", NewListeners),
+    ("Existing listeners observe handler changes", ChangedHandlers),
+    ("Every phase dispatches only its listening services", EveryPhase),
+    ("Dispatch does not acquire the subscriber lock", LockFreeDispatch),
 };
 
 var failures = 0;
@@ -187,6 +192,46 @@ static void LaterDisposal()
     Equal(0, calls);
 }
 
+static void SelfDisposal()
+{
+    using var first = new Fixture();
+    using var second = new Fixture();
+    var calls = 0;
+    first.Hook.Pre += ( ref ProcessMovementMovementPreContext ctx ) => first.Dispose();
+    second.Hook.Pre += ( ref ProcessMovementMovementPreContext ctx ) => calls++;
+    Fixture.DispatchPre();
+    Equal(1, calls);
+}
+
+static void NewListeners()
+{
+    using var first = new Fixture();
+    using var second = new Fixture();
+    var calls = 0;
+    var added = false;
+    first.Hook.Pre += ( ref ProcessMovementMovementPreContext ctx ) => {
+        if (added) return;
+        added = true;
+        second.Hook.Pre += ( ref ProcessMovementMovementPreContext later ) => calls++;
+    };
+    Fixture.DispatchPre();
+    Equal(0, calls);
+    Fixture.DispatchPre();
+    Equal(1, calls);
+}
+
+static void ChangedHandlers()
+{
+    using var first = new Fixture();
+    using var second = new Fixture();
+    var calls = new List<int>();
+    second.Hook.Pre += ( ref ProcessMovementMovementPreContext ctx ) => calls.Add(1);
+    first.Hook.Pre += ( ref ProcessMovementMovementPreContext ctx ) =>
+        second.Hook.Pre += ( ref ProcessMovementMovementPreContext later ) => calls.Add(2);
+    Fixture.DispatchPre();
+    Equal("1,2", string.Join(',', calls));
+}
+
 static void Discovery()
 {
     var fields = (from category in Fixture.ServiceType.GetFields(Fixture.InstanceFields)
@@ -207,6 +252,72 @@ static void Discovery()
     }
 }
 
+static void EveryPhase()
+{
+    using var service = new Fixture();
+    using var inactive = new Fixture();
+    var fields = (from category in Fixture.ServiceType.GetFields(Fixture.InstanceFields)
+                  from hook in category.FieldType.GetFields(Fixture.InstanceFields)
+                  from listener in hook.FieldType.GetFields(Fixture.InstanceFields)
+                  where typeof(Delegate).IsAssignableFrom(listener.FieldType)
+                  select (Owner: hook.GetValue(category.GetValue(service.Instance)), Listener: listener)).ToArray();
+    var phases = Fixture.Publisher.GetMethods(BindingFlags.NonPublic | BindingFlags.Static)
+        .Where(method => method.Name.StartsWith("Invoke") && method.GetParameters() is [{ ParameterType.IsByRef: true }]);
+    foreach (var phase in phases)
+    {
+        var context = phase.GetParameters()[0].ParameterType.GetElementType()!;
+        var (owner, field) = fields.Single(item => item.Listener.FieldType.GetMethod("Invoke")!.GetParameters()[0].ParameterType.GetElementType() == context);
+        var handler = typeof(Fixture).GetMethod(nameof(Fixture.CountInvocation))!.MakeGenericMethod(context).CreateDelegate(field.FieldType);
+        var listeners = Fixture.Publisher.GetNestedType("Listeners`1", BindingFlags.NonPublic)!.MakeGenericType(field.FieldType);
+        var refresh = listeners.GetMethod("Refresh", BindingFlags.NonPublic | BindingFlags.Static)!;
+        var snapshot = listeners.GetField("Snapshot", BindingFlags.NonPublic | BindingFlags.Static)!;
+        var invoke = typeof(Fixture).GetMethod(nameof(Fixture.DispatchContext))!.MakeGenericMethod(context);
+        var before = Fixture.Invocations;
+        // Bypass native installation and its server-guidelines guard; exercise actual snapshots and dispatchers.
+        field.SetValue(owner, handler);
+        refresh.Invoke(null, null);
+        Equal(1, ((Array)snapshot.GetValue(null)!).Length);
+        invoke.Invoke(null, [phase]);
+        Equal(before + 1, Fixture.Invocations);
+        field.SetValue(owner, null);
+        refresh.Invoke(null, null);
+        Equal(0, ((Array)snapshot.GetValue(null)!).Length);
+        invoke.Invoke(null, [phase]);
+        Equal(before + 1, Fixture.Invocations);
+    }
+}
+
+static void LockFreeDispatch()
+{
+    using var service = new Fixture();
+    var calls = 0;
+    service.Hook.Pre += ( ref ProcessMovementMovementPreContext ctx ) => Interlocked.Increment(ref calls);
+    Fixture.DispatchPre();
+    using var held = new ManualResetEventSlim();
+    using var release = new ManualResetEventSlim();
+    var blocker = Task.Run(() => {
+        lock ((Lock)Fixture.Publisher.GetField("subscribersLock", BindingFlags.NonPublic | BindingFlags.Static)!.GetValue(null)!)
+        {
+            held.Set();
+            release.Wait();
+        }
+    });
+    held.Wait();
+    var dispatch = Task.Run(Fixture.DispatchPre);
+    bool completed;
+    try
+    {
+        completed = dispatch.Wait(TimeSpan.FromSeconds(2));
+    }
+    finally
+    {
+        release.Set();
+    }
+    Task.WaitAll(blocker, dispatch);
+    Equal(true, completed);
+    Equal(2, calls);
+}
+
 sealed class Fixture : IDisposable
 {
     public const BindingFlags InstanceFields = BindingFlags.Instance | BindingFlags.NonPublic;
@@ -219,8 +330,10 @@ sealed class Fixture : IDisposable
     private static readonly OnProcessMovementMovementPostDelegate InvokePost = Publisher.GetMethod("InvokeProcessMovementPost", BindingFlags.NonPublic | BindingFlags.Static)!.CreateDelegate<OnProcessMovementMovementPostDelegate>();
     private readonly object service;
 
+    public object Instance => service;
     public IProcessMovementMovementHook Hook => ((IGameHooks)service).Movement.ProcessMovement;
     public static int NativeCount => (int)NativeCounts[MovementHookName]!;
+    public static int Invocations;
 
     public Fixture()
     {
@@ -244,6 +357,16 @@ sealed class Fixture : IDisposable
     {
         var context = new ProcessMovementMovementPostContext();
         InvokePost(ref context);
+    }
+
+    public static void CountInvocation<T>( ref T context ) where T : allows ref struct => Invocations++;
+
+    private delegate void ContextCallback<T>( ref T context ) where T : allows ref struct;
+
+    public static void DispatchContext<T>( MethodInfo phase ) where T : allows ref struct
+    {
+        T context = default!;
+        phase.CreateDelegate<ContextCallback<T>>()(ref context);
     }
 
     public void Dispose() => ((IDisposable)service).Dispose();

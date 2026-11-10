@@ -22,9 +22,6 @@ internal sealed class OnJumpLegacyMovementHook : IOnJumpLegacyMovementHook
     public void InvokePre(ref OnJumpLegacyMovementPreContext ctx) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);
     public void InvokePost(ref OnJumpLegacyMovementPostContext ctx) => Volatile.Read(ref _Post)?.Invoke(ref ctx);
 
-    public bool HasPreListeners => Volatile.Read(ref _Pre) != null;
-    public bool HasPostListeners => Volatile.Read(ref _Post) != null;
-
     public void UnregisterListeners()
     {
         GameHooksPublisher.ClearListeners(HookListener.OnJumpLegacy, ref _Pre);

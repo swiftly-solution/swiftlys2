@@ -22,9 +22,6 @@ internal sealed class WaterMoveMovementHook : IWaterMoveMovementHook
     public void InvokePre(ref WaterMoveMovementPreContext ctx) => Volatile.Read(ref _Pre)?.Invoke(ref ctx);
     public void InvokePost(ref WaterMoveMovementPostContext ctx) => Volatile.Read(ref _Post)?.Invoke(ref ctx);
 
-    public bool HasPreListeners => Volatile.Read(ref _Pre) != null;
-    public bool HasPostListeners => Volatile.Read(ref _Post) != null;
-
     public void UnregisterListeners()
     {
         GameHooksPublisher.ClearListeners(HookListener.WaterMove, ref _Pre);

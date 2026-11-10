@@ -95,8 +95,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeProcessUsercmdsPre( ref ProcessUsercmdsPreContext ctx )
     {
-        if (!ControllerHook.ProcessUsercmdsHook.HasPreListeners) return;
-
         try
         {
 
@@ -114,8 +112,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeProcessUsercmdsPost( ref ProcessUsercmdsPostContext ctx )
     {
-        if (!ControllerHook.ProcessUsercmdsHook.HasPostListeners) return;
-
         try
         {
 
@@ -133,8 +129,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeSimulateUserCommandsPre( ref SimulateUserCommandsPreContext ctx )
     {
-        if (!ControllerHook.SimulateUserCommandsHook.HasPreListeners) return;
-
         try
         {
 
@@ -152,8 +146,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeSimulateUserCommandsPost( ref SimulateUserCommandsPostContext ctx )
     {
-        if (!ControllerHook.SimulateUserCommandsHook.HasPostListeners) return;
-
         try
         {
 
@@ -171,8 +163,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeCanAcquirePre( ref CanAcquireItemPreContext ctx )
     {
-        if (!ItemsHook.CanAcquireHook.HasPreListeners) return;
-
         try
         {
 
@@ -190,8 +180,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeCanAcquirePost( ref CanAcquireItemPostContext ctx )
     {
-        if (!ItemsHook.CanAcquireHook.HasPostListeners) return;
-
         try
         {
 
@@ -209,8 +197,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeGetItemInLoadoutPre( ref GetItemInLoadoutPreContext ctx )
     {
-        if (!ItemsHook.GetItemInLoadoutHook.HasPreListeners) return;
-
         try
         {
             ItemsHook.GetItemInLoadoutHook.InvokePre(ref ctx);
@@ -226,8 +212,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeGetItemInLoadoutPost( ref GetItemInLoadoutPostContext ctx )
     {
-        if (!ItemsHook.GetItemInLoadoutHook.HasPostListeners) return;
-
         try
         {
             ItemsHook.GetItemInLoadoutHook.InvokePost(ref ctx);
@@ -243,8 +227,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokePostThinkPre( ref PostThinkPawnPreContext ctx )
     {
-        if (!PawnHook.PostThinkHook.HasPreListeners) return;
-
         try
         {
 
@@ -262,8 +244,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokePostThinkPost( ref PostThinkPawnPostContext ctx )
     {
-        if (!PawnHook.PostThinkHook.HasPostListeners) return;
-
         try
         {
 
@@ -281,8 +261,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeCanMovePre( ref CanMovePawnPreContext ctx )
     {
-        if (!PawnHook.CanMoveHook.HasPreListeners) return;
-
         try
         {
 
@@ -300,8 +278,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeCanMovePost( ref CanMovePawnPostContext ctx )
     {
-        if (!PawnHook.CanMoveHook.HasPostListeners) return;
-
         try
         {
 
@@ -319,8 +295,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeCanUsePre( ref CanUseWeaponPreContext ctx )
     {
-        if (!WeaponsHook.CanUseHook.HasPreListeners) return;
-
         try
         {
 
@@ -338,8 +312,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeCanUsePost( ref CanUseWeaponPostContext ctx )
     {
-        if (!WeaponsHook.CanUseHook.HasPostListeners) return;
-
         try
         {
 
@@ -357,8 +329,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeWeaponDropPre( ref WeaponDropPreContext ctx )
     {
-        if (!WeaponsHook.DropHook.HasPreListeners) return;
-
         try
         {
 
@@ -376,8 +346,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeWeaponDropPost( ref WeaponDropPostContext ctx )
     {
-        if (!WeaponsHook.DropHook.HasPostListeners) return;
-
         try
         {
 
@@ -395,8 +363,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeRunCommandPre( ref RunCommandMovementPreContext ctx )
     {
-        if (!MovementHook.RunCommandHook.HasPreListeners) return;
-
         try
         {
 
@@ -414,8 +380,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeRunCommandPost( ref RunCommandMovementPostContext ctx )
     {
-        if (!MovementHook.RunCommandHook.HasPostListeners) return;
-
         try
         {
 
@@ -433,8 +397,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeSetupMovePre( ref SetupMoveMovementPreContext ctx )
     {
-        if (!MovementHook.SetupMoveHook.HasPreListeners) return;
-
         try
         {
 
@@ -452,8 +414,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeSetupMovePost( ref SetupMoveMovementPostContext ctx )
     {
-        if (!MovementHook.SetupMoveHook.HasPostListeners) return;
-
         try
         {
 
@@ -471,8 +431,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeProcessMovementPre( ref ProcessMovementMovementPreContext ctx )
     {
-        if (!MovementHook.ProcessMovementHook.HasPreListeners) return;
-
         try
         {
 
@@ -490,8 +448,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeProcessMovementPost( ref ProcessMovementMovementPostContext ctx )
     {
-        if (!MovementHook.ProcessMovementHook.HasPostListeners) return;
-
         try
         {
 
@@ -509,8 +465,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeCheckFallingPre( ref CheckFallingMovementPreContext ctx )
     {
-        if (!MovementHook.CheckFallingHook.HasPreListeners) return;
-
         try
         {
 
@@ -528,8 +482,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeCheckFallingPost( ref CheckFallingMovementPostContext ctx )
     {
-        if (!MovementHook.CheckFallingHook.HasPostListeners) return;
-
         try
         {
 
@@ -547,8 +499,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeCategorizePositionPre( ref CategorizePositionMovementPreContext ctx )
     {
-        if (!MovementHook.CategorizePositionHook.HasPreListeners) return;
-
         try
         {
 
@@ -566,8 +516,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeCategorizePositionPost( ref CategorizePositionMovementPostContext ctx )
     {
-        if (!MovementHook.CategorizePositionHook.HasPostListeners) return;
-
         try
         {
 
@@ -585,8 +533,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeTryPlayerMovePre( ref TryPlayerMoveMovementPreContext ctx )
     {
-        if (!MovementHook.TryPlayerMoveHook.HasPreListeners) return;
-
         try
         {
 
@@ -604,8 +550,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeTryPlayerMovePost( ref TryPlayerMoveMovementPostContext ctx )
     {
-        if (!MovementHook.TryPlayerMoveHook.HasPostListeners) return;
-
         try
         {
 
@@ -623,8 +567,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeWalkMovePre( ref WalkMoveMovementPreContext ctx )
     {
-        if (!MovementHook.WalkMoveHook.HasPreListeners) return;
-
         try
         {
 
@@ -642,8 +584,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeWalkMovePost( ref WalkMoveMovementPostContext ctx )
     {
-        if (!MovementHook.WalkMoveHook.HasPostListeners) return;
-
         try
         {
 
@@ -661,8 +601,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeFrictionPre( ref FrictionMovementPreContext ctx )
     {
-        if (!MovementHook.FrictionHook.HasPreListeners) return;
-
         try
         {
 
@@ -680,8 +618,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeFrictionPost( ref FrictionMovementPostContext ctx )
     {
-        if (!MovementHook.FrictionHook.HasPostListeners) return;
-
         try
         {
 
@@ -699,8 +635,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeAirAcceleratePre( ref AirAccelerateMovementPreContext ctx )
     {
-        if (!MovementHook.AirAccelerateHook.HasPreListeners) return;
-
         try
         {
 
@@ -718,8 +652,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeAirAcceleratePost( ref AirAccelerateMovementPostContext ctx )
     {
-        if (!MovementHook.AirAccelerateHook.HasPostListeners) return;
-
         try
         {
 
@@ -737,8 +669,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeAirMovePre( ref AirMoveMovementPreContext ctx )
     {
-        if (!MovementHook.AirMoveHook.HasPreListeners) return;
-
         try
         {
 
@@ -756,8 +686,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeAirMovePost( ref AirMoveMovementPostContext ctx )
     {
-        if (!MovementHook.AirMoveHook.HasPostListeners) return;
-
         try
         {
 
@@ -775,8 +703,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeOnJumpModernPre( ref OnJumpModernMovementPreContext ctx )
     {
-        if (!MovementHook.OnJumpModernHook.HasPreListeners) return;
-
         try
         {
 
@@ -794,8 +720,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeOnJumpModernPost( ref OnJumpModernMovementPostContext ctx )
     {
-        if (!MovementHook.OnJumpModernHook.HasPostListeners) return;
-
         try
         {
 
@@ -813,8 +737,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeOnJumpLegacyPre( ref OnJumpLegacyMovementPreContext ctx )
     {
-        if (!MovementHook.OnJumpLegacyHook.HasPreListeners) return;
-
         try
         {
 
@@ -832,8 +754,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeOnJumpLegacyPost( ref OnJumpLegacyMovementPostContext ctx )
     {
-        if (!MovementHook.OnJumpLegacyHook.HasPostListeners) return;
-
         try
         {
 
@@ -851,8 +771,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeCheckJumpButtonModernPre( ref CheckJumpButtonModernMovementPreContext ctx )
     {
-        if (!MovementHook.CheckJumpButtonModernHook.HasPreListeners) return;
-
         try
         {
 
@@ -870,8 +788,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeCheckJumpButtonModernPost( ref CheckJumpButtonModernMovementPostContext ctx )
     {
-        if (!MovementHook.CheckJumpButtonModernHook.HasPostListeners) return;
-
         try
         {
 
@@ -889,8 +805,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeCheckJumpButtonLegacyPre( ref CheckJumpButtonLegacyMovementPreContext ctx )
     {
-        if (!MovementHook.CheckJumpButtonLegacyHook.HasPreListeners) return;
-
         try
         {
 
@@ -908,8 +822,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeCheckJumpButtonLegacyPost( ref CheckJumpButtonLegacyMovementPostContext ctx )
     {
-        if (!MovementHook.CheckJumpButtonLegacyHook.HasPostListeners) return;
-
         try
         {
 
@@ -927,8 +839,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeLadderMovePre( ref LadderMoveMovementPreContext ctx )
     {
-        if (!MovementHook.LadderMoveHook.HasPreListeners) return;
-
         try
         {
 
@@ -946,8 +856,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeLadderMovePost( ref LadderMoveMovementPostContext ctx )
     {
-        if (!MovementHook.LadderMoveHook.HasPostListeners) return;
-
         try
         {
 
@@ -965,8 +873,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeCanUnduckPre( ref CanUnduckMovementPreContext ctx )
     {
-        if (!MovementHook.CanUnduckHook.HasPreListeners) return;
-
         try
         {
 
@@ -984,8 +890,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeCanUnduckPost( ref CanUnduckMovementPostContext ctx )
     {
-        if (!MovementHook.CanUnduckHook.HasPostListeners) return;
-
         try
         {
 
@@ -1003,8 +907,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeDuckPre( ref DuckMovementPreContext ctx )
     {
-        if (!MovementHook.DuckHook.HasPreListeners) return;
-
         try
         {
 
@@ -1022,8 +924,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeDuckPost( ref DuckMovementPostContext ctx )
     {
-        if (!MovementHook.DuckHook.HasPostListeners) return;
-
         try
         {
 
@@ -1041,8 +941,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeCheckVelocityPre( ref CheckVelocityMovementPreContext ctx )
     {
-        if (!MovementHook.CheckVelocityHook.HasPreListeners) return;
-
         try
         {
 
@@ -1060,8 +958,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeCheckVelocityPost( ref CheckVelocityMovementPostContext ctx )
     {
-        if (!MovementHook.CheckVelocityHook.HasPostListeners) return;
-
         try
         {
 
@@ -1079,8 +975,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeWaterMovePre( ref WaterMoveMovementPreContext ctx )
     {
-        if (!MovementHook.WaterMoveHook.HasPreListeners) return;
-
         try
         {
 
@@ -1098,8 +992,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeWaterMovePost( ref WaterMoveMovementPostContext ctx )
     {
-        if (!MovementHook.WaterMoveHook.HasPostListeners) return;
-
         try
         {
 
@@ -1117,8 +1009,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeCheckWaterPre( ref CheckWaterMovementPreContext ctx )
     {
-        if (!MovementHook.CheckWaterHook.HasPreListeners) return;
-
         try
         {
 
@@ -1136,8 +1026,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeCheckWaterPost( ref CheckWaterMovementPostContext ctx )
     {
-        if (!MovementHook.CheckWaterHook.HasPostListeners) return;
-
         try
         {
 
@@ -1155,8 +1043,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeMoveInitPre( ref MoveInitMovementPreContext ctx )
     {
-        if (!MovementHook.MoveInitHook.HasPreListeners) return;
-
         try
         {
 
@@ -1174,8 +1060,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeMoveInitPost( ref MoveInitMovementPostContext ctx )
     {
-        if (!MovementHook.MoveInitHook.HasPostListeners) return;
-
         try
         {
 
@@ -1193,8 +1077,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeFullWalkMovePre( ref FullWalkMoveMovementPreContext ctx )
     {
-        if (!MovementHook.FullWalkMoveHook.HasPreListeners) return;
-
         try
         {
 
@@ -1212,8 +1094,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeFullWalkMovePost( ref FullWalkMoveMovementPostContext ctx )
     {
-        if (!MovementHook.FullWalkMoveHook.HasPostListeners) return;
-
         try
         {
 
@@ -1231,8 +1111,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeCheckParametersPre( ref CheckParametersMovementPreContext ctx )
     {
-        if (!MovementHook.CheckParametersHook.HasPreListeners) return;
-
         try
         {
 
@@ -1250,8 +1128,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeCheckParametersPost( ref CheckParametersMovementPostContext ctx )
     {
-        if (!MovementHook.CheckParametersHook.HasPostListeners) return;
-
         try
         {
 
@@ -1269,8 +1145,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokePlayerMovePre( ref PlayerMoveMovementPreContext ctx )
     {
-        if (!MovementHook.PlayerMoveHook.HasPreListeners) return;
-
         try
         {
 
@@ -1288,8 +1162,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokePlayerMovePost( ref PlayerMoveMovementPostContext ctx )
     {
-        if (!MovementHook.PlayerMoveHook.HasPostListeners) return;
-
         try
         {
 
@@ -1307,8 +1179,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeGroundAcceleratePre( ref GroundAccelerateMovementPreContext ctx )
     {
-        if (!MovementHook.GroundAccelerateHook.HasPreListeners) return;
-
         try
         {
 
@@ -1326,8 +1196,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeGroundAcceleratePost( ref GroundAccelerateMovementPostContext ctx )
     {
-        if (!MovementHook.GroundAccelerateHook.HasPostListeners) return;
-
         try
         {
 
@@ -1345,8 +1213,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeTakeDamagePre( ref TakeDamageEntityPreContext ctx )
     {
-        if (!EntitiesHook.TakeDamageHook.HasPreListeners) return;
-
         try
         {
 
@@ -1364,8 +1230,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeTakeDamagePost( ref TakeDamageEntityPostContext ctx )
     {
-        if (!EntitiesHook.TakeDamageHook.HasPostListeners) return;
-
         try
         {
 
@@ -1383,8 +1247,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeStartTouchPre( ref StartTouchEntityPreContext ctx )
     {
-        if (!EntitiesHook.StartTouchHook.HasPreListeners) return;
-
         try
         {
 
@@ -1402,8 +1264,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeStartTouchPost( ref StartTouchEntityPostContext ctx )
     {
-        if (!EntitiesHook.StartTouchHook.HasPostListeners) return;
-
         try
         {
 
@@ -1421,8 +1281,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeTouchPre( ref TouchEntityPreContext ctx )
     {
-        if (!EntitiesHook.TouchHook.HasPreListeners) return;
-
         try
         {
 
@@ -1440,8 +1298,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeTouchPost( ref TouchEntityPostContext ctx )
     {
-        if (!EntitiesHook.TouchHook.HasPostListeners) return;
-
         try
         {
 
@@ -1459,8 +1315,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeEndTouchPre( ref EndTouchEntityPreContext ctx )
     {
-        if (!EntitiesHook.EndTouchHook.HasPreListeners) return;
-
         try
         {
 
@@ -1478,8 +1332,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeEndTouchPost( ref EndTouchEntityPostContext ctx )
     {
-        if (!EntitiesHook.EndTouchHook.HasPostListeners) return;
-
         try
         {
 
@@ -1497,8 +1349,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeAcceptInputPre( ref AcceptInputEntityPreContext ctx )
     {
-        if (!EntitiesHook.AcceptInputHook.HasPreListeners) return;
-
         try
         {
 
@@ -1516,8 +1366,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeAcceptInputPost( ref AcceptInputEntityPostContext ctx )
     {
-        if (!EntitiesHook.AcceptInputHook.HasPostListeners) return;
-
         try
         {
 
@@ -1535,8 +1383,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeFireOutputPre( ref FireOutputEntityPreContext ctx )
     {
-        if (!EntitiesHook.FireOutputHook.HasPreListeners) return;
-
         try
         {
 
@@ -1554,8 +1400,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
 
     internal void InvokeFireOutputPost( ref FireOutputEntityPostContext ctx )
     {
-        if (!EntitiesHook.FireOutputHook.HasPostListeners) return;
-
         try
         {
 
