@@ -4,6 +4,7 @@ using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.Commands;
 using SwiftlyS2.Core.GameEvents;
+using SwiftlyS2.Core.GameHooks;
 using SwiftlyS2.Core.NetMessages;
 using SwiftlyS2.Shared.Events;
 using SwiftlyS2.Core.Scheduler;
@@ -17,43 +18,121 @@ using SwiftlyS2.Core.Convars;
 
 namespace SwiftlyS2.Core.Events;
 
+internal enum CoreEvent
+{
+    Tick,
+    WorldUpdate,
+    ClientConnected,
+    ClientDisconnected,
+    ClientKeyStateChanged,
+    ClientPutInServer,
+    ClientSteamAuthorize,
+    ClientSteamAuthorizeFail,
+    EntityCreated,
+    EntityDeleted,
+    EntityParentChanged,
+    EntitySpawned,
+    MapLoad,
+    MapUnload,
+    ClientProcessUsercmds,
+    ConVarValueChanged,
+    ConCommandCreated,
+    ConVarCreated,
+    EntityTakeDamage,
+    PrecacheResource,
+    EntityStartTouch,
+    EntityTouch,
+    EntityEndTouch,
+    CanAcquire,
+    CanUseWeapon,
+    WeaponDrop,
+    ConsoleOutput,
+    CommandExecuteHook,
+    SteamAPIActivated,
+    RunCommand,
+    PostThink,
+    AcceptInput,
+    FireOutput,
+    StartupServer,
+    ClientVoice,
+    ClientSettingsChanged,
+    CustomHudClicked,
+}
+
 internal static class EventPublisher
 {
-    private static readonly List<EventSubscriber> subscribers = [];
-    private static EventSubscriber[] subscriberSnapshot = [];
-    private static readonly Lock subscribersLock = new();
-    private static readonly Lock consoleOutputListenerLock = new();
-    private static int consoleOutputSubscriberCount;
-    private static ulong? consoleOutputListenerId;
+    private static readonly ulong[] nativeListenerIds = new ulong[Enum.GetValues<CoreEvent>().Length];
 
-    internal static readonly NativeListener ConVarValueChangedListener = new(
-        static () => { unsafe { return NativeConvars.AddGlobalChangeListener((nint)(delegate* unmanaged< nint, int, nint, nint, void >)&OnConVarValueChanged); } },
-        NativeConvars.RemoveGlobalChangeListener);
+    /// <summary>
+    /// Per-event subscriber lists. EventSubscriber adds itself on its first handler for an event and removes itself on its last.
+    /// The first / last subscriber of an event installs / removes the native listener or game hook that feeds it.
+    /// </summary>
+    internal static readonly SubscriberRouter<CoreEvent, EventSubscriber> Router = new(OnFirst, OnLast);
 
-    internal static readonly NativeListener ConVarCreatedListener = new(
-        static () => { unsafe { return NativeConvars.AddConvarCreatedListener((nint)(delegate* unmanaged< nint, void >)&OnConVarCreated); } },
-        NativeConvars.RemoveConvarCreatedListener);
+    private static HookListener? HookFor( CoreEvent kind ) => kind switch {
+        CoreEvent.ClientProcessUsercmds => HookListener.ProcessUsercmds,
+        CoreEvent.EntityTakeDamage => HookListener.TakeDamage,
+        CoreEvent.EntityStartTouch => HookListener.StartTouch,
+        CoreEvent.EntityTouch => HookListener.Touch,
+        CoreEvent.EntityEndTouch => HookListener.EndTouch,
+        CoreEvent.CanAcquire => HookListener.CanAcquire,
+        CoreEvent.CanUseWeapon => HookListener.CanUse,
+        CoreEvent.WeaponDrop => HookListener.WeaponDrop,
+        CoreEvent.RunCommand => HookListener.RunCommand,
+        CoreEvent.PostThink => HookListener.PostThink,
+        CoreEvent.AcceptInput => HookListener.AcceptInput,
+        CoreEvent.FireOutput => HookListener.FireOutput,
+        _ => null,
+    };
 
-    internal static readonly NativeListener ConCommandCreatedListener = new(
-        static () => { unsafe { return NativeConvars.AddConCommandCreatedListener((nint)(delegate* unmanaged< nint, void >)&OnConCommandCreated); } },
-        NativeConvars.RemoveConCommandCreatedListener);
-
-    public static void Subscribe( EventSubscriber subscriber )
+    private static unsafe void OnFirst( CoreEvent kind )
     {
-        lock (subscribersLock)
+        if (HookFor(kind) is { } hook)
         {
-            subscribers.Add(subscriber);
-            Volatile.Write(ref subscriberSnapshot, [.. subscribers]);
+            GameHooksPublisher.AddHookListener(hook);
+            return;
+        }
+
+        switch (kind)
+        {
+            case CoreEvent.ConsoleOutput:
+                nativeListenerIds[(int)kind] = NativeConsoleOutput.AddConsoleListener((nint)(delegate* unmanaged< nint, void >)&OnConsoleOutput);
+                break;
+            case CoreEvent.ConVarValueChanged:
+                nativeListenerIds[(int)kind] = NativeConvars.AddGlobalChangeListener((nint)(delegate* unmanaged< nint, int, nint, nint, void >)&OnConVarValueChanged);
+                break;
+            case CoreEvent.ConVarCreated:
+                nativeListenerIds[(int)kind] = NativeConvars.AddConvarCreatedListener((nint)(delegate* unmanaged< nint, void >)&OnConVarCreated);
+                break;
+            case CoreEvent.ConCommandCreated:
+                nativeListenerIds[(int)kind] = NativeConvars.AddConCommandCreatedListener((nint)(delegate* unmanaged< nint, void >)&OnConCommandCreated);
+                break;
         }
     }
 
-    public static void Unsubscribe( EventSubscriber subscriber )
+    private static void OnLast( CoreEvent kind )
     {
-        lock (subscribersLock)
+        if (HookFor(kind) is { } hook)
         {
-            _ = subscribers.Remove(subscriber);
-            Volatile.Write(ref subscriberSnapshot, [.. subscribers]);
+            GameHooksPublisher.RemoveHookListener(hook);
+            return;
         }
+
+        var id = nativeListenerIds[(int)kind];
+        switch (kind)
+        {
+            case CoreEvent.ConsoleOutput: NativeConsoleOutput.RemoveConsoleListener(id); break;
+            case CoreEvent.ConVarValueChanged: NativeConvars.RemoveGlobalChangeListener(id); break;
+            case CoreEvent.ConVarCreated: NativeConvars.RemoveConvarCreatedListener(id); break;
+            case CoreEvent.ConCommandCreated: NativeConvars.RemoveConCommandCreatedListener(id); break;
+        }
+    }
+
+    private static bool Listens( CoreEvent kind ) => Router.Get(kind).Length != 0;
+
+    private static void Report( Exception e )
+    {
+        if (GlobalExceptionHandler.Handle(ref e)) AnsiConsole.WriteException(e);
     }
 
     public static void Register()
@@ -86,36 +165,6 @@ internal static class EventPublisher
         }
     }
 
-    public static void AddConsoleOutputListener()
-    {
-        lock (consoleOutputListenerLock)
-        {
-            consoleOutputSubscriberCount++;
-            if (consoleOutputSubscriberCount != 1) return;
-
-            unsafe
-            {
-                consoleOutputListenerId = NativeConsoleOutput.AddConsoleListener(
-                    (nint)(delegate* unmanaged< nint, void >)&OnConsoleOutput
-                );
-            }
-        }
-    }
-
-    public static void RemoveConsoleOutputListener()
-    {
-        lock (consoleOutputListenerLock)
-        {
-            if (consoleOutputSubscriberCount == 0) return;
-
-            consoleOutputSubscriberCount--;
-            if (consoleOutputSubscriberCount != 0 || consoleOutputListenerId == null) return;
-
-            NativeConsoleOutput.RemoveConsoleListener(consoleOutputListenerId.Value);
-            consoleOutputListenerId = null;
-        }
-    }
-
     [UnmanagedCallersOnly]
     public static void ConVarQueryCallback( int playerId, nint name, nint value )
     {
@@ -125,11 +174,10 @@ internal static class EventPublisher
             var convarValue = StringAlloc.CreateCSharpString(value);
 
             ConVarService.ProcessConVarQueryCallback(playerId, convarName, convarValue);
-        } 
-        catch(Exception e)
+        }
+        catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e)) return;
-            AnsiConsole.WriteException(e);
+            Report(e);
         }
     }
 
@@ -150,8 +198,7 @@ internal static class EventPublisher
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e)) return;
-            AnsiConsole.WriteException(e);
+            Report(e);
         }
     }
 
@@ -165,8 +212,7 @@ internal static class EventPublisher
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e)) return 0;
-            AnsiConsole.WriteException(e);
+            Report(e);
             return 0;
         }
     }
@@ -181,8 +227,7 @@ internal static class EventPublisher
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e)) return 0;
-            AnsiConsole.WriteException(e);
+            Report(e);
             return 0;
         }
     }
@@ -196,8 +241,7 @@ internal static class EventPublisher
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e)) return 0;
-            AnsiConsole.WriteException(e);
+            Report(e);
             return 0;
         }
     }
@@ -211,8 +255,7 @@ internal static class EventPublisher
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e)) return 0;
-            AnsiConsole.WriteException(e);
+            Report(e);
             return 0;
         }
     }
@@ -226,8 +269,7 @@ internal static class EventPublisher
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e)) return 0;
-            AnsiConsole.WriteException(e);
+            Report(e);
             return 0;
         }
     }
@@ -241,8 +283,7 @@ internal static class EventPublisher
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e)) return 0;
-            AnsiConsole.WriteException(e);
+            Report(e);
             return 0;
         }
     }
@@ -256,107 +297,50 @@ internal static class EventPublisher
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e)) return 0;
-            AnsiConsole.WriteException(e);
+            Report(e);
             return 0;
-        }
-    }
-
-    public static bool ListensToConVarCreated {
-        get {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                if (subscribers[i].ListensToConVarCreated) return true;
-            }
-            return false;
         }
     }
 
     [UnmanagedCallersOnly]
     public static void OnConVarCreated( nint convarNamePtr )
     {
-        if (subscribers.Count == 0)
-        {
-            return;
-        }
-
-        if (!ListensToConVarCreated) return;
+        var subs = Router.Get(CoreEvent.ConVarCreated);
+        if (subs.Length == 0) return;
 
         try
         {
             OnConVarCreated @event = new() { ConVarName = StringAlloc.CreateCSharpString(convarNamePtr) };
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeOnConVarCreated(ref @event);
-            }
+            foreach (var sub in subs) sub.InvokeOnConVarCreated(ref @event);
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
-            AnsiConsole.WriteException(e);
-        }
-    }
-
-    public static bool ListensToConCommandCreated {
-        get {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                if (subscribers[i].ListensToConCommandCreated) return true;
-            }
-            return false;
+            Report(e);
         }
     }
 
     [UnmanagedCallersOnly]
     public static void OnConCommandCreated( nint commandNamePtr )
     {
-        if (subscribers.Count == 0)
-        {
-            return;
-        }
-
-        if (!ListensToConCommandCreated) return;
+        var subs = Router.Get(CoreEvent.ConCommandCreated);
+        if (subs.Length == 0) return;
 
         try
         {
             OnConCommandCreated @event = new() { CommandName = StringAlloc.CreateCSharpString(commandNamePtr) };
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeOnConCommandCreated(ref @event);
-            }
+            foreach (var sub in subs) sub.InvokeOnConCommandCreated(ref @event);
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
-            AnsiConsole.WriteException(e);
-        }
-    }
-
-    public static bool ListensToConVarValueChanged {
-        get {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                if (subscribers[i].ListensToConVarValueChanged) return true;
-            }
-            return false;
+            Report(e);
         }
     }
 
     [UnmanagedCallersOnly]
     public static void OnConVarValueChanged( nint convarNamePtr, int playerid, nint newValuePtr, nint oldValuePtr )
     {
-        if (subscribers.Count == 0)
-        {
-            return;
-        }
-
-        if (!ListensToConVarValueChanged) return;
+        var subs = Router.Get(CoreEvent.ConVarValueChanged);
+        if (subs.Length == 0) return;
 
         try
         {
@@ -366,28 +350,11 @@ internal static class EventPublisher
                 NewValue = StringAlloc.CreateCSharpString(newValuePtr),
                 OldValue = StringAlloc.CreateCSharpString(oldValuePtr),
             };
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeOnConVarValueChanged(ref @event);
-            }
+            foreach (var sub in subs) sub.InvokeOnConVarValueChanged(ref @event);
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
-            AnsiConsole.WriteException(e);
-        }
-    }
-
-    public static bool ListensToTick {
-        get {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                if (subscribers[i].ListensToTick) return true;
-            }
-            return false;
+            Report(e);
         }
     }
 
@@ -398,35 +365,11 @@ internal static class EventPublisher
         {
             SchedulerManager.OnTick();
 
-            if (subscribers.Count == 0)
-            {
-                return;
-            }
-
-            if (!ListensToTick) return;
-
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeOnTick();
-            }
+            foreach (var sub in Router.Get(CoreEvent.Tick)) sub.InvokeOnTick();
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
-            AnsiConsole.WriteException(e);
-        }
-    }
-
-    public static bool ListensToWorldUpdate {
-        get {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                if (subscribers[i].ListensToWorldUpdate) return true;
-            }
-            return false;
+            Report(e);
         }
     }
 
@@ -437,35 +380,11 @@ internal static class EventPublisher
         {
             SchedulerManager.OnWorldUpdate();
 
-            if (subscribers.Count == 0)
-            {
-                return;
-            }
-
-            if (!ListensToWorldUpdate) return;
-
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeOnWorldUpdate();
-            }
+            foreach (var sub in Router.Get(CoreEvent.WorldUpdate)) sub.InvokeOnWorldUpdate();
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
-            AnsiConsole.WriteException(e);
-        }
-    }
-
-    public static bool ListensToClientConnected {
-        get {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                if (subscribers[i].ListensToClientConnected) return true;
-            }
-            return false;
+            Report(e);
         }
     }
 
@@ -475,17 +394,14 @@ internal static class EventPublisher
         try
         {
             PlayerManagerService.RegisterPlayerObject(playerId);
-            if (subscribers.Count == 0)
-            {
-                return 1;
-            }
 
-            if (!ListensToClientConnected) return 1;
+            var subs = Router.Get(CoreEvent.ClientConnected);
+            if (subs.Length == 0) return 1;
 
             OnClientConnectedEvent @event = new() { PlayerId = playerId };
-            for (var i = 0; i < subscribers.Count; i++)
+            foreach (var sub in subs)
             {
-                subscribers[i].InvokeOnClientConnected(ref @event);
+                sub.InvokeOnClientConnected(ref @event);
 
                 if (@event.Result == HookResult.Handled)
                 {
@@ -499,28 +415,12 @@ internal static class EventPublisher
                 }
             }
 
-            if (@event.Result == HookResult.CancelOriginal) return 0;
-
-            return 1;
+            return @event.Result == HookResult.CancelOriginal ? (byte)0 : (byte)1;
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return 1;
-            }
-            AnsiConsole.WriteException(e);
+            Report(e);
             return 1;
-        }
-    }
-
-    public static bool ListensToClientDisconnected {
-        get {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                if (subscribers[i].ListensToClientDisconnected) return true;
-            }
-            return false;
         }
     }
 
@@ -529,23 +429,18 @@ internal static class EventPublisher
     {
         try
         {
-            if (subscribers.Count == 0 || !ListensToClientDisconnected) return;
+            var subs = Router.Get(CoreEvent.ClientDisconnected);
+            if (subs.Length == 0) return;
 
             OnClientDisconnectedEvent @event = new() {
                 PlayerId = playerId,
                 Reason = (ENetworkDisconnectionReason)reason
             };
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeOnClientDisconnected(ref @event);
-            }
+            foreach (var sub in subs) sub.InvokeOnClientDisconnected(ref @event);
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                AnsiConsole.WriteException(e);
-            }
+            Report(e);
         }
         finally
         {
@@ -553,25 +448,11 @@ internal static class EventPublisher
         }
     }
 
-    public static bool ListensToClientKeyStateChanged {
-        get {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                if (subscribers[i].ListensToClientKeyStateChanged) return true;
-            }
-            return false;
-        }
-    }
-
     [UnmanagedCallersOnly]
     public static void OnClientKeyStateChanged( int playerId, GameButtons key, byte pressed )
     {
-        if (subscribers.Count == 0)
-        {
-            return;
-        }
-
-        if (!ListensToClientKeyStateChanged) return;
+        var subs = Router.Get(CoreEvent.ClientKeyStateChanged);
+        if (subs.Length == 0) return;
 
         try
         {
@@ -580,28 +461,11 @@ internal static class EventPublisher
                 Key = key.ToKeyKind(),
                 Pressed = pressed != 0
             };
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeOnClientKeyStateChanged(ref @event);
-            }
+            foreach (var sub in subs) sub.InvokeOnClientKeyStateChanged(ref @event);
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
-            AnsiConsole.WriteException(e);
-        }
-    }
-
-    public static bool ListensToClientPutInServer {
-        get {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                if (subscribers[i].ListensToClientPutInServer) return true;
-            }
-            return false;
+            Report(e);
         }
     }
 
@@ -612,110 +476,52 @@ internal static class EventPublisher
         {
             if (clientKind == (int)ClientKind.Bot) PlayerManagerService.RegisterPlayerObject(playerId);
 
-            if (subscribers.Count == 0 || !ListensToClientPutInServer) return;
+            var subs = Router.Get(CoreEvent.ClientPutInServer);
+            if (subs.Length == 0) return;
 
             OnClientPutInServerEvent @event = new() {
                 PlayerId = playerId,
                 Kind = (ClientKind)clientKind
             };
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeOnClientPutInServer(ref @event);
-            }
+            foreach (var sub in subs) sub.InvokeOnClientPutInServer(ref @event);
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
-            AnsiConsole.WriteException(e);
-        }
-    }
-
-    public static bool ListensToClientSteamAuthorize {
-        get {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                if (subscribers[i].ListensToClientSteamAuthorize) return true;
-            }
-            return false;
+            Report(e);
         }
     }
 
     [UnmanagedCallersOnly]
     public static void OnClientSteamAuthorize( int playerId )
     {
-        if (subscribers.Count == 0)
-        {
-            return;
-        }
-
-        if (!ListensToClientSteamAuthorize) return;
+        var subs = Router.Get(CoreEvent.ClientSteamAuthorize);
+        if (subs.Length == 0) return;
 
         try
         {
             OnClientSteamAuthorizeEvent @event = new() { PlayerId = playerId };
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeOnClientSteamAuthorize(ref @event);
-            }
+            foreach (var sub in subs) sub.InvokeOnClientSteamAuthorize(ref @event);
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
-            AnsiConsole.WriteException(e);
-        }
-    }
-
-    public static bool ListensToClientSteamAuthorizeFail {
-        get {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                if (subscribers[i].ListensToClientSteamAuthorizeFail) return true;
-            }
-            return false;
+            Report(e);
         }
     }
 
     [UnmanagedCallersOnly]
     public static void OnClientSteamAuthorizeFail( int playerId )
     {
-        if (subscribers.Count == 0)
-        {
-            return;
-        }
-
-        if (!ListensToClientSteamAuthorizeFail) return;
+        var subs = Router.Get(CoreEvent.ClientSteamAuthorizeFail);
+        if (subs.Length == 0) return;
 
         try
         {
             OnClientSteamAuthorizeFailEvent @event = new() { PlayerId = playerId };
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeOnClientSteamAuthorizeFail(ref @event);
-            }
+            foreach (var sub in subs) sub.InvokeOnClientSteamAuthorizeFail(ref @event);
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
-            AnsiConsole.WriteException(e);
-        }
-    }
-
-    public static bool ListensToEntityCreated {
-        get {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                if (subscribers[i].ListensToEntityCreated) return true;
-            }
-            return false;
+            Report(e);
         }
     }
 
@@ -725,36 +531,16 @@ internal static class EventPublisher
         try
         {
             var entity = EntityManager.OnEntityCreated(entityPtr);
-            if (subscribers.Count == 0)
-            {
-                return;
-            }
 
-            if (!ListensToEntityCreated) return;
+            var subs = Router.Get(CoreEvent.EntityCreated);
+            if (subs.Length == 0) return;
 
             OnEntityCreatedEvent @event = new() { Entity = entity };
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeOnEntityCreated(ref @event);
-            }
+            foreach (var sub in subs) sub.InvokeOnEntityCreated(ref @event);
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
-            AnsiConsole.WriteException(e);
-        }
-    }
-
-    public static bool ListensToEntityDeleted {
-        get {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                if (subscribers[i].ListensToEntityDeleted) return true;
-            }
-            return false;
+            Report(e);
         }
     }
 
@@ -763,22 +549,16 @@ internal static class EventPublisher
     {
         try
         {
-            if (subscribers.Count == 0 || !ListensToEntityDeleted)
-            {
-                return;
-            }
+            var subs = Router.Get(CoreEvent.EntityDeleted);
+            if (subs.Length == 0) return;
 
             var entity = EntityManager.GetEntityByAddress(entityPtr);
             OnEntityDeletedEvent @event = new() { Entity = entity! };
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeOnEntityDeleted(ref @event);
-            }
+            foreach (var sub in subs) sub.InvokeOnEntityDeleted(ref @event);
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e)) return;
-            AnsiConsole.WriteException(e);
+            Report(e);
         }
         finally
         {
@@ -786,25 +566,11 @@ internal static class EventPublisher
         }
     }
 
-    public static bool ListensToEntityParentChanged {
-        get {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                if (subscribers[i].ListensToEntityParentChanged) return true;
-            }
-            return false;
-        }
-    }
-
     [UnmanagedCallersOnly]
     public static void OnEntityParentChanged( nint entityPtr, nint newParentPtr )
     {
-        if (subscribers.Count == 0)
-        {
-            return;
-        }
-
-        if (!ListensToEntityParentChanged) return;
+        var subs = Router.Get(CoreEvent.EntityParentChanged);
+        if (subs.Length == 0) return;
 
         try
         {
@@ -812,175 +578,79 @@ internal static class EventPublisher
                 Entity = EntityManager.GetEntityByAddress(entityPtr) ?? new CEntityInstanceImpl(entityPtr),
                 NewParent = newParentPtr != 0 ? EntityManager.GetEntityByAddress(newParentPtr) ?? new CEntityInstanceImpl(newParentPtr) : null
             };
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeOnEntityParentChanged(ref @event);
-            }
+            foreach (var sub in subs) sub.InvokeOnEntityParentChanged(ref @event);
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
-            AnsiConsole.WriteException(e);
-        }
-    }
-
-    public static bool ListensToEntitySpawned {
-        get {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                if (subscribers[i].ListensToEntitySpawned) return true;
-            }
-            return false;
+            Report(e);
         }
     }
 
     [UnmanagedCallersOnly]
     public static void OnEntitySpawned( nint entityPtr )
     {
-        if (subscribers.Count == 0)
-        {
-            return;
-        }
-
-        if (!ListensToEntitySpawned) return;
+        var subs = Router.Get(CoreEvent.EntitySpawned);
+        if (subs.Length == 0) return;
 
         try
         {
             OnEntitySpawnedEvent @event = new() { Entity = EntityManager.GetEntityByAddress(entityPtr) ?? new CEntityInstanceImpl(entityPtr) };
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeOnEntitySpawned(ref @event);
-            }
+            foreach (var sub in subs) sub.InvokeOnEntitySpawned(ref @event);
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
-            AnsiConsole.WriteException(e);
-        }
-    }
-
-    public static bool ListensToMapLoad {
-        get {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                if (subscribers[i].ListensToMapLoad) return true;
-            }
-            return false;
+            Report(e);
         }
     }
 
     [UnmanagedCallersOnly]
     public static void OnMapLoad( nint mapNamePtr )
     {
-        if (subscribers.Count == 0)
-        {
-            return;
-        }
-
-        HelpersService.RenewVDataCache();
-
-        if (!ListensToMapLoad) return;
-
         try
         {
+            HelpersService.RenewVDataCache();
+
+            var subs = Router.Get(CoreEvent.MapLoad);
+            if (subs.Length == 0) return;
+
             OnMapLoadEvent @event = new() { MapName = StringAlloc.CreateCSharpString(mapNamePtr) };
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeOnMapLoad(ref @event);
-            }
+            foreach (var sub in subs) sub.InvokeOnMapLoad(ref @event);
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
-            AnsiConsole.WriteException(e);
-        }
-    }
-
-    public static bool ListensToClientVoice {
-        get {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                if (subscribers[i].ListensToClientVoice) return true;
-            }
-            return false;
+            Report(e);
         }
     }
 
     public static void InvokeOnClientVoice( int playerId )
     {
-        if (subscribers.Count == 0)
-        {
-            return;
-        }
-
-        if (!ListensToClientVoice) return;
+        var subs = Router.Get(CoreEvent.ClientVoice);
+        if (subs.Length == 0) return;
 
         try
         {
             OnClientVoiceEvent @event = new() { PlayerId = playerId };
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeOnClientVoice(ref @event);
-            }
+            foreach (var sub in subs) sub.InvokeOnClientVoice(ref @event);
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
-            AnsiConsole.WriteException(e);
-        }
-    }
-
-    public static bool ListensToClientSettingsChanged {
-        get {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                if (subscribers[i].ListensToClientSettingsChanged) return true;
-            }
-            return false;
+            Report(e);
         }
     }
 
     public static void InvokeOnClientSettingsChanged( int playerId )
     {
-        if (subscribers.Count == 0 || !ListensToClientSettingsChanged) return;
+        var subs = Router.Get(CoreEvent.ClientSettingsChanged);
+        if (subs.Length == 0) return;
 
         try
         {
             OnClientSettingsChangedEvent @event = new() { PlayerId = playerId };
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeOnClientSettingsChanged(ref @event);
-            }
+            foreach (var sub in subs) sub.InvokeOnClientSettingsChanged(ref @event);
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
-            AnsiConsole.WriteException(e);
-        }
-    }
-
-    public static bool ListensToMapUnload {
-        get {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                if (subscribers[i].ListensToMapUnload) return true;
-            }
-            return false;
+            Report(e);
         }
     }
 
@@ -988,87 +658,44 @@ internal static class EventPublisher
     public static void OnMapUnload( nint mapNamePtr )
     {
         EntitySystemService.cachedGameRulesProxy = null;
-        if (subscribers.Count == 0)
-        {
-            return;
-        }
 
-        if (!ListensToMapUnload) return;
+        var subs = Router.Get(CoreEvent.MapUnload);
+        if (subs.Length == 0) return;
 
         try
         {
             OnMapUnloadEvent @event = new() { MapName = StringAlloc.CreateCSharpString(mapNamePtr) };
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeOnMapUnload(ref @event);
-            }
+            foreach (var sub in subs) sub.InvokeOnMapUnload(ref @event);
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
-            AnsiConsole.WriteException(e);
+            Report(e);
         }
     }
 
-    public static bool ListensToProcessUsercmds {
-        get {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                if (subscribers[i].ListensToProcessUsercmds) return true;
-            }
-            return false;
-        }
-    }
+    public static bool ListensToProcessUsercmds => Listens(CoreEvent.ClientProcessUsercmds);
 
     public static void OnClientProcessUsercmds( ref OnClientProcessUsercmdsEvent @event )
     {
-        if (subscribers.Count == 0)
-        {
-            return;
-        }
-
         try
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeOnClientProcessUsercmds(ref @event);
-            }
+            foreach (var sub in Router.Get(CoreEvent.ClientProcessUsercmds)) sub.InvokeOnClientProcessUsercmds(ref @event);
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
-            AnsiConsole.WriteException(e);
+            Report(e);
         }
     }
 
-    public static bool ListensToTakeDamage {
-        get {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                if (subscribers[i].ListensToTakeDamage) return true;
-            }
-            return false;
-        }
-    }
+    public static bool ListensToTakeDamage => Listens(CoreEvent.EntityTakeDamage);
 
     public static void InvokeOnEntityTakeDamage( ref OnEntityTakeDamageEvent @event )
     {
-        if (subscribers.Count == 0)
-        {
-            return;
-        }
-
         try
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            foreach (var sub in Router.Get(CoreEvent.EntityTakeDamage))
             {
-                subscribers[i].InvokeOnEntityTakeDamage(ref @event);
+                sub.InvokeOnEntityTakeDamage(ref @event);
 
                 if (@event.Result == HookResult.Handled || @event.Result == HookResult.Stop)
                 {
@@ -1078,557 +705,240 @@ internal static class EventPublisher
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e)) AnsiConsole.WriteException(e);
-        }
-    }
-
-    public static bool ListensToPrecacheResource {
-        get {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                if (subscribers[i].ListensToPrecacheResource) return true;
-            }
-            return false;
+            Report(e);
         }
     }
 
     public static void OnPrecacheResource( nint pResourceManifest )
     {
-        if (subscribers.Count == 0)
-        {
-            return;
-        }
-
-        if (!ListensToPrecacheResource) return;
+        var subs = Router.Get(CoreEvent.PrecacheResource);
+        if (subs.Length == 0) return;
 
         try
         {
             OnPrecacheResourceEvent @event = new() { pResourceManifest = pResourceManifest };
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeOnPrecacheResource(ref @event);
-            }
+            foreach (var sub in subs) sub.InvokeOnPrecacheResource(ref @event);
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
-            AnsiConsole.WriteException(e);
-        }
-    }
-
-    public static bool ListensToStartupServer {
-        get {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                if (subscribers[i].ListensToStartupServer) return true;
-            }
-            return false;
+            Report(e);
         }
     }
 
     [UnmanagedCallersOnly]
     public static void OnStartupServer()
     {
-        if (subscribers.Count == 0)
-        {
-            return;
-        }
-
-        if (!ListensToStartupServer) return;
-
         try
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeOnStartupServer();
-            }
+            foreach (var sub in Router.Get(CoreEvent.StartupServer)) sub.InvokeOnStartupServer();
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
-            AnsiConsole.WriteException(e);
+            Report(e);
         }
     }
 
-    public static bool ListensToEntityStartTouch {
-        get {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                if (subscribers[i].ListensToEntityStartTouch) return true;
-            }
-            return false;
-        }
-    }
+    public static bool ListensToEntityStartTouch => Listens(CoreEvent.EntityStartTouch);
 
     public static void InvokeOnEntityStartTouch( OnEntityStartTouchEvent @event )
     {
-        if (subscribers.Count == 0)
-        {
-            return;
-        }
-
         try
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeOnEntityStartTouch(ref @event);
-            }
+            foreach (var sub in Router.Get(CoreEvent.EntityStartTouch)) sub.InvokeOnEntityStartTouch(ref @event);
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
-            AnsiConsole.WriteException(e);
+            Report(e);
         }
     }
 
-    public static bool ListensToEntityTouch {
-        get {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                if (subscribers[i].ListensToEntityTouch) return true;
-            }
-            return false;
-        }
-    }
+    public static bool ListensToEntityTouch => Listens(CoreEvent.EntityTouch);
 
     public static void InvokeOnEntityTouch( OnEntityTouchEvent @event )
     {
-        if (subscribers.Count == 0)
-        {
-            return;
-        }
-
         try
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeOnEntityTouch(ref @event);
-            }
+            foreach (var sub in Router.Get(CoreEvent.EntityTouch)) sub.InvokeOnEntityTouch(ref @event);
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
-            AnsiConsole.WriteException(e);
+            Report(e);
         }
     }
 
-    public static bool ListensToEntityEndTouch {
-        get {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                if (subscribers[i].ListensToEntityEndTouch) return true;
-            }
-            return false;
-        }
-    }
+    public static bool ListensToEntityEndTouch => Listens(CoreEvent.EntityEndTouch);
 
     public static void InvokeOnEntityEndTouch( OnEntityEndTouchEvent @event )
     {
-        if (subscribers.Count == 0)
-        {
-            return;
-        }
-
         try
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeOnEntityEndTouch(ref @event);
-            }
+            foreach (var sub in Router.Get(CoreEvent.EntityEndTouch)) sub.InvokeOnEntityEndTouch(ref @event);
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
-            AnsiConsole.WriteException(e);
+            Report(e);
         }
     }
 
     public static void InvokeOnSteamAPIActivatedHook()
     {
-        if (subscribers.Count == 0)
-        {
-            return;
-        }
-
         try
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeOnSteamAPIActivatedHook();
-            }
+            foreach (var sub in Router.Get(CoreEvent.SteamAPIActivated)) sub.InvokeOnSteamAPIActivatedHook();
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
-            AnsiConsole.WriteException(e);
+            Report(e);
         }
     }
 
-    public static bool ListensToCanAcquire {
-        get {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                if (subscribers[i].ListensToCanAcquire) return true;
-            }
-            return false;
-        }
-    }
+    public static bool ListensToCanAcquire => Listens(CoreEvent.CanAcquire);
 
     public static void InvokeOnCanAcquireHook( OnItemServicesCanAcquireHookEvent @event )
     {
-        if (subscribers.Count == 0)
-        {
-            return;
-        }
-
         try
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            foreach (var sub in Router.Get(CoreEvent.CanAcquire))
             {
-                subscribers[i].InvokeOnItemServicesCanAcquireHook(ref @event);
-                if (@event.Intercepted)
-                {
-                    break;
-                }
+                sub.InvokeOnItemServicesCanAcquireHook(ref @event);
+                if (@event.Intercepted) break;
             }
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
-            AnsiConsole.WriteException(e);
+            Report(e);
         }
     }
 
-    public static bool ListensToCanUseWeapon {
-        get {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                if (subscribers[i].ListensToCanUseWeapon) return true;
-            }
-            return false;
-        }
-    }
+    public static bool ListensToCanUseWeapon => Listens(CoreEvent.CanUseWeapon);
 
     public static void InvokeOnWeaponServicesCanUseHook( OnWeaponServicesCanUseHookEvent @event )
     {
-        if (subscribers.Count == 0)
-        {
-            return;
-        }
-
         try
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeOnWeaponServicesCanUseHook(ref @event);
-            }
+            foreach (var sub in Router.Get(CoreEvent.CanUseWeapon)) sub.InvokeOnWeaponServicesCanUseHook(ref @event);
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
-            AnsiConsole.WriteException(e);
-        }
-    }
-
-    public static bool ListensToConsoleOutput {
-        get {
-            var currentSubscribers = System.Threading.Volatile.Read(ref subscriberSnapshot);
-            for (var i = 0; i < currentSubscribers.Length; i++)
-            {
-                if (currentSubscribers[i].ListensToConsoleOutput) return true;
-            }
-            return false;
+            Report(e);
         }
     }
 
     [UnmanagedCallersOnly]
     public static void OnConsoleOutput( nint messagePtr )
     {
+        var subs = Router.Get(CoreEvent.ConsoleOutput);
+        if (subs.Length == 0) return;
+
         try
         {
-            var currentSubscribers = Volatile.Read(ref subscriberSnapshot);
-            if (currentSubscribers.Length == 0) return;
-
-            var hasConsoleOutputListener = false;
-            for (var i = 0; i < currentSubscribers.Length; i++)
-            {
-                if (!currentSubscribers[i].ListensToConsoleOutput) continue;
-                hasConsoleOutputListener = true;
-                break;
-            }
-            if (!hasConsoleOutputListener) return;
-
             OnConsoleOutputEvent @event = new() { Message = StringAlloc.CreateCSharpString(messagePtr) };
-            for (var i = 0; i < currentSubscribers.Length; i++)
-            {
-                currentSubscribers[i].InvokeOnConsoleOutput(ref @event);
-            }
+            foreach (var sub in subs) sub.InvokeOnConsoleOutput(ref @event);
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
-            AnsiConsole.WriteException(e);
+            Report(e);
         }
     }
 
     public static void InvokeOnCommandExecuteHook( OnCommandExecuteHookEvent @event )
     {
-        if (subscribers.Count == 0)
-        {
-            return;
-        }
-
         try
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeOnCommandExecuteHook(ref @event);
-            }
+            foreach (var sub in Router.Get(CoreEvent.CommandExecuteHook)) sub.InvokeOnCommandExecuteHook(ref @event);
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
-            AnsiConsole.WriteException(e);
+            Report(e);
         }
     }
 
-    public static bool ListensToRunCommand {
-        get {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                if (subscribers[i].ListensToRunCommand) return true;
-            }
-            return false;
-        }
-    }
+    public static bool ListensToRunCommand => Listens(CoreEvent.RunCommand);
 
     public static void InvokeOnMovementServicesRunCommandHook( OnMovementServicesRunCommandHookEvent @event )
     {
-        if (subscribers.Count == 0)
-        {
-            return;
-        }
-
         try
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeOnMovementServicesRunCommandHook(ref @event);
-            }
+            foreach (var sub in Router.Get(CoreEvent.RunCommand)) sub.InvokeOnMovementServicesRunCommandHook(ref @event);
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
-            AnsiConsole.WriteException(e);
+            Report(e);
         }
     }
 
-    public static bool ListensToPostThink {
-        get {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                if (subscribers[i].ListensToPostThink) return true;
-            }
-            return false;
-        }
-    }
+    public static bool ListensToPostThink => Listens(CoreEvent.PostThink);
 
     public static void InvokeOnPlayerPawnPostThinkHook( OnPlayerPawnPostThinkHookEvent @event )
     {
-        if (subscribers.Count == 0)
-        {
-            return;
-        }
-
         try
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeOnPlayerPawnPostThinkHook(ref @event);
-            }
+            foreach (var sub in Router.Get(CoreEvent.PostThink)) sub.InvokeOnPlayerPawnPostThinkHook(ref @event);
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
-            AnsiConsole.WriteException(e);
+            Report(e);
         }
     }
 
-    public static bool ListensToAcceptInput {
-        get {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                if (subscribers[i].ListensToAcceptInput) return true;
-            }
-            return false;
-        }
-    }
+    public static bool ListensToAcceptInput => Listens(CoreEvent.AcceptInput);
 
     public static void InvokeOnEntityIdentityAcceptInputHook( OnEntityIdentityAcceptInputHookEvent @event )
     {
-        if (subscribers.Count == 0)
-        {
-            return;
-        }
-
         try
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeOnEntityIdentityAcceptInputHook(ref @event);
-            }
+            foreach (var sub in Router.Get(CoreEvent.AcceptInput)) sub.InvokeOnEntityIdentityAcceptInputHook(ref @event);
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
-            AnsiConsole.WriteException(e);
+            Report(e);
         }
     }
 
-    public static bool ListensToWeaponDrop {
-        get {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                if (subscribers[i].ListensToWeaponDrop) return true;
-            }
-            return false;
-        }
-    }
+    public static bool ListensToWeaponDrop => Listens(CoreEvent.WeaponDrop);
 
     public static void InvokeOnWeaponServicesDropWeaponHook( OnWeaponServicesDropWeaponHook @event )
     {
-        if (subscribers.Count == 0)
-        {
-            return;
-        }
-
         try
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeOnWeaponServicesDropWeaponHook(ref @event);
-            }
+            foreach (var sub in Router.Get(CoreEvent.WeaponDrop)) sub.InvokeOnWeaponServicesDropWeaponHook(ref @event);
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
-            AnsiConsole.WriteException(e);
+            Report(e);
         }
     }
 
-    public static bool ListensToFireOutput {
-        get {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                if (subscribers[i].ListensToFireOutput) return true;
-            }
-            return false;
-        }
-    }
+    public static bool ListensToFireOutput => Listens(CoreEvent.FireOutput);
 
     public static void InvokeEntityFireOutputHook( OnEntityFireOutputHookEvent @event )
     {
-        if (subscribers.Count == 0)
-        {
-            return;
-        }
-
         try
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeOnEntityFireOutputHook(ref @event);
-            }
+            foreach (var sub in Router.Get(CoreEvent.FireOutput)) sub.InvokeOnEntityFireOutputHook(ref @event);
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
-            AnsiConsole.WriteException(e);
-        }
-    }
-
-    public static bool ListensToCustomHudClicked {
-        get {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                if (subscribers[i].ListensToCustomHudClicked) return true;
-            }
-            return false;
+            Report(e);
         }
     }
 
     public static void InvokeOnCustomHudClicked( int playerId, nint pMessage )
     {
-        if (subscribers.Count == 0)
-        {
-            return;
-        }
+        var subs = Router.Get(CoreEvent.CustomHudClicked);
+        if (subs.Length == 0) return;
 
         try
         {
             var msg = new CCSUsrMsg_CustomHudClickedImpl(pMessage, false);
             OnCustomHudClickedEvent @event = new() { Message = msg, PlayerId = playerId };
-            if (!@event.IsValid)
-            {
-                return;
-            }
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeOnCustomHudClicked(ref @event);
-            }
+            if (!@event.IsValid) return;
+
+            foreach (var sub in subs) sub.InvokeOnCustomHudClicked(ref @event);
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
-            AnsiConsole.WriteException(e);
+            Report(e);
         }
     }
 }

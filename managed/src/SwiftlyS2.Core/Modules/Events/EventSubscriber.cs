@@ -1,5 +1,4 @@
 using Microsoft.Extensions.Logging;
-using SwiftlyS2.Core.GameHooks;
 using SwiftlyS2.Shared.Events;
 using SwiftlyS2.Shared.Profiler;
 
@@ -12,15 +11,15 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 {
     private readonly ILogger<EventSubscriber> logger;
 
-    private volatile bool disposed;
+    private readonly Lock sync = new();
+
+    private bool disposed;
 
     public bool Disposed => disposed;
 
     public EventSubscriber( IContextedProfilerService profiler, ILogger<EventSubscriber> logger )
     {
         this.logger = logger;
-        this.disposed = false;
-        EventPublisher.Subscribe(this);
     }
 
     ~EventSubscriber()
@@ -28,1178 +27,615 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         Dispose();
     }
 
-    public event EventDelegates.OnTick? OnTick;
-    public event EventDelegates.OnWorldUpdate? OnWorldUpdate;
-    public event EventDelegates.OnClientConnected? OnClientConnected;
-    public event EventDelegates.OnClientDisconnected? OnClientDisconnected;
-    public event EventDelegates.OnClientKeyStateChanged? OnClientKeyStateChanged;
-    public event EventDelegates.OnClientPutInServer? OnClientPutInServer;
-    public event EventDelegates.OnClientSteamAuthorize? OnClientSteamAuthorize;
-    public event EventDelegates.OnClientSteamAuthorizeFail? OnClientSteamAuthorizeFail;
-    public event EventDelegates.OnEntityCreated? OnEntityCreated;
-    public event EventDelegates.OnEntityDeleted? OnEntityDeleted;
-    public event EventDelegates.OnEntityParentChanged? OnEntityParentChanged;
-    public event EventDelegates.OnEntitySpawned? OnEntitySpawned;
-    public event EventDelegates.OnMapLoad? OnMapLoad;
-    public event EventDelegates.OnMapUnload? OnMapUnload;
+    private void Add<T>( CoreEvent kind, ref T? handlers, T? value ) where T : Delegate
+    {
+        if (value == null) return;
+
+        lock (sync)
+        {
+            if (disposed) return;
+
+            if (handlers == null) EventPublisher.Router.Add(kind, this);
+            handlers = (T)Delegate.Combine(handlers, value);
+        }
+    }
+
+    private void Remove<T>( CoreEvent kind, ref T? handlers, T? value ) where T : Delegate
+    {
+        if (value == null) return;
+
+        lock (sync)
+        {
+            if (handlers == null) return;
+
+            handlers = (T?)Delegate.Remove(handlers, value);
+            if (handlers == null) _ = EventPublisher.Router.Remove(kind, this);
+        }
+    }
+
+    private void LogError( Exception e, string eventName )
+    {
+        if (GlobalExceptionHandler.Handle(ref e)) logger.LogError(e, "Error invoking {Event}.", eventName);
+    }
+
+    private EventDelegates.OnTick? _OnTick;
+    public event EventDelegates.OnTick? OnTick {
+        add => Add(CoreEvent.Tick, ref _OnTick, value);
+        remove => Remove(CoreEvent.Tick, ref _OnTick, value);
+    }
+
+    private EventDelegates.OnWorldUpdate? _OnWorldUpdate;
+    public event EventDelegates.OnWorldUpdate? OnWorldUpdate {
+        add => Add(CoreEvent.WorldUpdate, ref _OnWorldUpdate, value);
+        remove => Remove(CoreEvent.WorldUpdate, ref _OnWorldUpdate, value);
+    }
+
+    private EventDelegates.OnClientConnected? _OnClientConnected;
+    public event EventDelegates.OnClientConnected? OnClientConnected {
+        add => Add(CoreEvent.ClientConnected, ref _OnClientConnected, value);
+        remove => Remove(CoreEvent.ClientConnected, ref _OnClientConnected, value);
+    }
+
+    private EventDelegates.OnClientDisconnected? _OnClientDisconnected;
+    public event EventDelegates.OnClientDisconnected? OnClientDisconnected {
+        add => Add(CoreEvent.ClientDisconnected, ref _OnClientDisconnected, value);
+        remove => Remove(CoreEvent.ClientDisconnected, ref _OnClientDisconnected, value);
+    }
+
+    private EventDelegates.OnClientKeyStateChanged? _OnClientKeyStateChanged;
+    public event EventDelegates.OnClientKeyStateChanged? OnClientKeyStateChanged {
+        add => Add(CoreEvent.ClientKeyStateChanged, ref _OnClientKeyStateChanged, value);
+        remove => Remove(CoreEvent.ClientKeyStateChanged, ref _OnClientKeyStateChanged, value);
+    }
+
+    private EventDelegates.OnClientPutInServer? _OnClientPutInServer;
+    public event EventDelegates.OnClientPutInServer? OnClientPutInServer {
+        add => Add(CoreEvent.ClientPutInServer, ref _OnClientPutInServer, value);
+        remove => Remove(CoreEvent.ClientPutInServer, ref _OnClientPutInServer, value);
+    }
+
+    private EventDelegates.OnClientSteamAuthorize? _OnClientSteamAuthorize;
+    public event EventDelegates.OnClientSteamAuthorize? OnClientSteamAuthorize {
+        add => Add(CoreEvent.ClientSteamAuthorize, ref _OnClientSteamAuthorize, value);
+        remove => Remove(CoreEvent.ClientSteamAuthorize, ref _OnClientSteamAuthorize, value);
+    }
+
+    private EventDelegates.OnClientSteamAuthorizeFail? _OnClientSteamAuthorizeFail;
+    public event EventDelegates.OnClientSteamAuthorizeFail? OnClientSteamAuthorizeFail {
+        add => Add(CoreEvent.ClientSteamAuthorizeFail, ref _OnClientSteamAuthorizeFail, value);
+        remove => Remove(CoreEvent.ClientSteamAuthorizeFail, ref _OnClientSteamAuthorizeFail, value);
+    }
+
+    private EventDelegates.OnEntityCreated? _OnEntityCreated;
+    public event EventDelegates.OnEntityCreated? OnEntityCreated {
+        add => Add(CoreEvent.EntityCreated, ref _OnEntityCreated, value);
+        remove => Remove(CoreEvent.EntityCreated, ref _OnEntityCreated, value);
+    }
+
+    private EventDelegates.OnEntityDeleted? _OnEntityDeleted;
+    public event EventDelegates.OnEntityDeleted? OnEntityDeleted {
+        add => Add(CoreEvent.EntityDeleted, ref _OnEntityDeleted, value);
+        remove => Remove(CoreEvent.EntityDeleted, ref _OnEntityDeleted, value);
+    }
+
+    private EventDelegates.OnEntityParentChanged? _OnEntityParentChanged;
+    public event EventDelegates.OnEntityParentChanged? OnEntityParentChanged {
+        add => Add(CoreEvent.EntityParentChanged, ref _OnEntityParentChanged, value);
+        remove => Remove(CoreEvent.EntityParentChanged, ref _OnEntityParentChanged, value);
+    }
+
+    private EventDelegates.OnEntitySpawned? _OnEntitySpawned;
+    public event EventDelegates.OnEntitySpawned? OnEntitySpawned {
+        add => Add(CoreEvent.EntitySpawned, ref _OnEntitySpawned, value);
+        remove => Remove(CoreEvent.EntitySpawned, ref _OnEntitySpawned, value);
+    }
+
+    private EventDelegates.OnMapLoad? _OnMapLoad;
+    public event EventDelegates.OnMapLoad? OnMapLoad {
+        add => Add(CoreEvent.MapLoad, ref _OnMapLoad, value);
+        remove => Remove(CoreEvent.MapLoad, ref _OnMapLoad, value);
+    }
+
+    private EventDelegates.OnMapUnload? _OnMapUnload;
+    public event EventDelegates.OnMapUnload? OnMapUnload {
+        add => Add(CoreEvent.MapUnload, ref _OnMapUnload, value);
+        remove => Remove(CoreEvent.MapUnload, ref _OnMapUnload, value);
+    }
+
     private EventDelegates.OnClientProcessUsercmds? _OnClientProcessUsercmds;
     [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Controller.ProcessUsercmds instead.")]
     public event EventDelegates.OnClientProcessUsercmds? OnClientProcessUsercmds {
-        add {
-            if (_OnClientProcessUsercmds == null) GameHooksPublisher.AddHookListener(HookListener.ProcessUsercmds);
-            _OnClientProcessUsercmds += value;
-        }
-        remove {
-            _OnClientProcessUsercmds -= value;
-            if (_OnClientProcessUsercmds == null) GameHooksPublisher.RemoveHookListener(HookListener.ProcessUsercmds);
-        }
+        add => Add(CoreEvent.ClientProcessUsercmds, ref _OnClientProcessUsercmds, value);
+        remove => Remove(CoreEvent.ClientProcessUsercmds, ref _OnClientProcessUsercmds, value);
     }
-    private readonly Lock OnConVarValueChangedLock = new();
+
     private EventDelegates.OnConVarValueChanged? _OnConVarValueChanged;
     public event EventDelegates.OnConVarValueChanged? OnConVarValueChanged {
-        add {
-            if (value == null) return;
-
-            lock (OnConVarValueChangedLock)
-            {
-                var addedFirstListener = _OnConVarValueChanged == null;
-                _OnConVarValueChanged += value;
-                if (addedFirstListener) EventPublisher.ConVarValueChangedListener.Acquire();
-            }
-        }
-        remove {
-            if (value == null) return;
-
-            lock (OnConVarValueChangedLock)
-            {
-                var hadListeners = _OnConVarValueChanged != null;
-                _OnConVarValueChanged -= value;
-                if (hadListeners && _OnConVarValueChanged == null) EventPublisher.ConVarValueChangedListener.Release();
-            }
-        }
+        add => Add(CoreEvent.ConVarValueChanged, ref _OnConVarValueChanged, value);
+        remove => Remove(CoreEvent.ConVarValueChanged, ref _OnConVarValueChanged, value);
     }
-    private readonly Lock OnConCommandCreatedLock = new();
+
     private EventDelegates.OnConCommandCreated? _OnConCommandCreated;
     public event EventDelegates.OnConCommandCreated? OnConCommandCreated {
-        add {
-            if (value == null) return;
-
-            lock (OnConCommandCreatedLock)
-            {
-                var addedFirstListener = _OnConCommandCreated == null;
-                _OnConCommandCreated += value;
-                if (addedFirstListener) EventPublisher.ConCommandCreatedListener.Acquire();
-            }
-        }
-        remove {
-            if (value == null) return;
-
-            lock (OnConCommandCreatedLock)
-            {
-                var hadListeners = _OnConCommandCreated != null;
-                _OnConCommandCreated -= value;
-                if (hadListeners && _OnConCommandCreated == null) EventPublisher.ConCommandCreatedListener.Release();
-            }
-        }
+        add => Add(CoreEvent.ConCommandCreated, ref _OnConCommandCreated, value);
+        remove => Remove(CoreEvent.ConCommandCreated, ref _OnConCommandCreated, value);
     }
-    private readonly Lock OnConVarCreatedLock = new();
+
     private EventDelegates.OnConVarCreated? _OnConVarCreated;
     public event EventDelegates.OnConVarCreated? OnConVarCreated {
-        add {
-            if (value == null) return;
-
-            lock (OnConVarCreatedLock)
-            {
-                var addedFirstListener = _OnConVarCreated == null;
-                _OnConVarCreated += value;
-                if (addedFirstListener) EventPublisher.ConVarCreatedListener.Acquire();
-            }
-        }
-        remove {
-            if (value == null) return;
-
-            lock (OnConVarCreatedLock)
-            {
-                var hadListeners = _OnConVarCreated != null;
-                _OnConVarCreated -= value;
-                if (hadListeners && _OnConVarCreated == null) EventPublisher.ConVarCreatedListener.Release();
-            }
-        }
+        add => Add(CoreEvent.ConVarCreated, ref _OnConVarCreated, value);
+        remove => Remove(CoreEvent.ConVarCreated, ref _OnConVarCreated, value);
     }
+
     private EventDelegates.OnEntityTakeDamage? _OnEntityTakeDamage;
     [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.TakeDamage instead.")]
     public event EventDelegates.OnEntityTakeDamage? OnEntityTakeDamage {
-        add {
-            if (_OnEntityTakeDamage == null) GameHooksPublisher.AddHookListener(HookListener.TakeDamage);
-            _OnEntityTakeDamage += value;
-        }
-        remove {
-            _OnEntityTakeDamage -= value;
-            if (_OnEntityTakeDamage == null) GameHooksPublisher.RemoveHookListener(HookListener.TakeDamage);
-        }
+        add => Add(CoreEvent.EntityTakeDamage, ref _OnEntityTakeDamage, value);
+        remove => Remove(CoreEvent.EntityTakeDamage, ref _OnEntityTakeDamage, value);
     }
-    public event EventDelegates.OnPrecacheResource? OnPrecacheResource;
+
+    private EventDelegates.OnPrecacheResource? _OnPrecacheResource;
+    public event EventDelegates.OnPrecacheResource? OnPrecacheResource {
+        add => Add(CoreEvent.PrecacheResource, ref _OnPrecacheResource, value);
+        remove => Remove(CoreEvent.PrecacheResource, ref _OnPrecacheResource, value);
+    }
+
     private EventDelegates.OnEntityStartTouch? _OnEntityStartTouch;
     [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.StartTouch instead.")]
     public event EventDelegates.OnEntityStartTouch? OnEntityStartTouch {
-        add {
-            if (_OnEntityStartTouch == null) GameHooksPublisher.AddHookListener(HookListener.StartTouch);
-            _OnEntityStartTouch += value;
-        }
-        remove {
-            _OnEntityStartTouch -= value;
-            if (_OnEntityStartTouch == null) GameHooksPublisher.RemoveHookListener(HookListener.StartTouch);
-        }
+        add => Add(CoreEvent.EntityStartTouch, ref _OnEntityStartTouch, value);
+        remove => Remove(CoreEvent.EntityStartTouch, ref _OnEntityStartTouch, value);
     }
+
     private EventDelegates.OnEntityTouch? _OnEntityTouch;
     [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.Touch instead.")]
     public event EventDelegates.OnEntityTouch? OnEntityTouch {
-        add {
-            if (_OnEntityTouch == null) GameHooksPublisher.AddHookListener(HookListener.Touch);
-            _OnEntityTouch += value;
-        }
-        remove {
-            _OnEntityTouch -= value;
-            if (_OnEntityTouch == null) GameHooksPublisher.RemoveHookListener(HookListener.Touch);
-        }
+        add => Add(CoreEvent.EntityTouch, ref _OnEntityTouch, value);
+        remove => Remove(CoreEvent.EntityTouch, ref _OnEntityTouch, value);
     }
+
     private EventDelegates.OnEntityEndTouch? _OnEntityEndTouch;
     [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.EndTouch instead.")]
     public event EventDelegates.OnEntityEndTouch? OnEntityEndTouch {
-        add {
-            if (_OnEntityEndTouch == null) GameHooksPublisher.AddHookListener(HookListener.EndTouch);
-            _OnEntityEndTouch += value;
-        }
-        remove {
-            _OnEntityEndTouch -= value;
-            if (_OnEntityEndTouch == null) GameHooksPublisher.RemoveHookListener(HookListener.EndTouch);
-        }
+        add => Add(CoreEvent.EntityEndTouch, ref _OnEntityEndTouch, value);
+        remove => Remove(CoreEvent.EntityEndTouch, ref _OnEntityEndTouch, value);
     }
+
     private EventDelegates.OnItemServicesCanAcquireHook? _OnItemServicesCanAcquireHook;
     [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Items.CanAcquire instead.")]
     public event EventDelegates.OnItemServicesCanAcquireHook? OnItemServicesCanAcquireHook {
-        add {
-            if (_OnItemServicesCanAcquireHook == null) GameHooksPublisher.AddHookListener(HookListener.CanAcquire);
-            _OnItemServicesCanAcquireHook += value;
-        }
-        remove {
-            _OnItemServicesCanAcquireHook -= value;
-            if (_OnItemServicesCanAcquireHook == null) GameHooksPublisher.RemoveHookListener(HookListener.CanAcquire);
-        }
+        add => Add(CoreEvent.CanAcquire, ref _OnItemServicesCanAcquireHook, value);
+        remove => Remove(CoreEvent.CanAcquire, ref _OnItemServicesCanAcquireHook, value);
     }
+
     private EventDelegates.OnWeaponServicesCanUseHook? _OnWeaponServicesCanUseHook;
     [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Weapons.CanUse instead.")]
     public event EventDelegates.OnWeaponServicesCanUseHook? OnWeaponServicesCanUseHook {
-        add {
-            if (_OnWeaponServicesCanUseHook == null) GameHooksPublisher.AddHookListener(HookListener.CanUse);
-            _OnWeaponServicesCanUseHook += value;
-        }
-        remove {
-            _OnWeaponServicesCanUseHook -= value;
-            if (_OnWeaponServicesCanUseHook == null) GameHooksPublisher.RemoveHookListener(HookListener.CanUse);
-        }
+        add => Add(CoreEvent.CanUseWeapon, ref _OnWeaponServicesCanUseHook, value);
+        remove => Remove(CoreEvent.CanUseWeapon, ref _OnWeaponServicesCanUseHook, value);
     }
+
     private EventDelegates.OnWeaponServicesDropWeaponHook? _OnWeaponServicesDropWeaponHook;
     [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Weapons.Drop instead.")]
     public event EventDelegates.OnWeaponServicesDropWeaponHook? OnWeaponServicesDropWeaponHook {
-        add {
-            if (_OnWeaponServicesDropWeaponHook == null) GameHooksPublisher.AddHookListener(HookListener.WeaponDrop);
-            _OnWeaponServicesDropWeaponHook += value;
-        }
-        remove {
-            _OnWeaponServicesDropWeaponHook -= value;
-            if (_OnWeaponServicesDropWeaponHook == null) GameHooksPublisher.RemoveHookListener(HookListener.WeaponDrop);
-        }
+        add => Add(CoreEvent.WeaponDrop, ref _OnWeaponServicesDropWeaponHook, value);
+        remove => Remove(CoreEvent.WeaponDrop, ref _OnWeaponServicesDropWeaponHook, value);
     }
-    private readonly Lock consoleOutputLock = new();
+
     private EventDelegates.OnConsoleOutput? _OnConsoleOutput;
     public event EventDelegates.OnConsoleOutput? OnConsoleOutput {
-        add {
-            if (value == null) return;
-
-            bool addedFirstListener;
-            lock (consoleOutputLock)
-            {
-                addedFirstListener = _OnConsoleOutput == null;
-                _OnConsoleOutput += value;
-                if (addedFirstListener) EventPublisher.AddConsoleOutputListener();
-            }
-        }
-        remove {
-            if (value == null) return;
-
-            bool removedLastListener;
-            lock (consoleOutputLock)
-            {
-                var hadListeners = _OnConsoleOutput != null;
-                _OnConsoleOutput -= value;
-                removedLastListener = hadListeners && _OnConsoleOutput == null;
-                if (removedLastListener) EventPublisher.RemoveConsoleOutputListener();
-            }
-        }
+        add => Add(CoreEvent.ConsoleOutput, ref _OnConsoleOutput, value);
+        remove => Remove(CoreEvent.ConsoleOutput, ref _OnConsoleOutput, value);
     }
-    public event EventDelegates.OnCommandExecuteHook? OnCommandExecuteHook;
-    public event EventDelegates.OnSteamAPIActivated? OnSteamAPIActivated;
-    private EventDelegates.OnMovementServicesRunCommandHook? _OnMovementServicesRunCommandHook;
 
+    private EventDelegates.OnCommandExecuteHook? _OnCommandExecuteHook;
+    public event EventDelegates.OnCommandExecuteHook? OnCommandExecuteHook {
+        add => Add(CoreEvent.CommandExecuteHook, ref _OnCommandExecuteHook, value);
+        remove => Remove(CoreEvent.CommandExecuteHook, ref _OnCommandExecuteHook, value);
+    }
+
+    private EventDelegates.OnSteamAPIActivated? _OnSteamAPIActivated;
+    public event EventDelegates.OnSteamAPIActivated? OnSteamAPIActivated {
+        add => Add(CoreEvent.SteamAPIActivated, ref _OnSteamAPIActivated, value);
+        remove => Remove(CoreEvent.SteamAPIActivated, ref _OnSteamAPIActivated, value);
+    }
+
+    private EventDelegates.OnMovementServicesRunCommandHook? _OnMovementServicesRunCommandHook;
     [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Movement.RunCommand instead.")]
     public event EventDelegates.OnMovementServicesRunCommandHook? OnMovementServicesRunCommandHook {
-        add {
-            if (_OnMovementServicesRunCommandHook == null) GameHooksPublisher.AddHookListener(HookListener.RunCommand);
-            _OnMovementServicesRunCommandHook += value;
-        }
-        remove {
-            _OnMovementServicesRunCommandHook -= value;
-            if (_OnMovementServicesRunCommandHook == null) GameHooksPublisher.RemoveHookListener(HookListener.RunCommand);
-        }
+        add => Add(CoreEvent.RunCommand, ref _OnMovementServicesRunCommandHook, value);
+        remove => Remove(CoreEvent.RunCommand, ref _OnMovementServicesRunCommandHook, value);
     }
+
     private EventDelegates.OnPlayerPawnPostThink? _OnPlayerPawnPostThink;
     [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Pawn.PostThink instead.")]
     public event EventDelegates.OnPlayerPawnPostThink? OnPlayerPawnPostThink {
-        add {
-            if (_OnPlayerPawnPostThink == null) GameHooksPublisher.AddHookListener(HookListener.PostThink);
-            _OnPlayerPawnPostThink += value;
-        }
-        remove {
-            _OnPlayerPawnPostThink -= value;
-            if (_OnPlayerPawnPostThink == null) GameHooksPublisher.RemoveHookListener(HookListener.PostThink);
-        }
+        add => Add(CoreEvent.PostThink, ref _OnPlayerPawnPostThink, value);
+        remove => Remove(CoreEvent.PostThink, ref _OnPlayerPawnPostThink, value);
     }
+
     private EventDelegates.OnEntityIdentityAcceptInputHook? _OnEntityIdentityAcceptInputHook;
     [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.AcceptInput instead.")]
     public event EventDelegates.OnEntityIdentityAcceptInputHook? OnEntityIdentityAcceptInputHook {
-        add {
-            if (_OnEntityIdentityAcceptInputHook == null) GameHooksPublisher.AddHookListener(HookListener.AcceptInput);
-            _OnEntityIdentityAcceptInputHook += value;
-        }
-        remove {
-            _OnEntityIdentityAcceptInputHook -= value;
-            if (_OnEntityIdentityAcceptInputHook == null) GameHooksPublisher.RemoveHookListener(HookListener.AcceptInput);
-        }
+        add => Add(CoreEvent.AcceptInput, ref _OnEntityIdentityAcceptInputHook, value);
+        remove => Remove(CoreEvent.AcceptInput, ref _OnEntityIdentityAcceptInputHook, value);
     }
+
     private EventDelegates.OnEntityFireOutputHookEvent? _OnEntityFireOutputHook;
     [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.FireOutput instead.")]
     public event EventDelegates.OnEntityFireOutputHookEvent? OnEntityFireOutputHook {
-        add {
-            if (_OnEntityFireOutputHook == null) GameHooksPublisher.AddHookListener(HookListener.FireOutput);
-            _OnEntityFireOutputHook += value;
-        }
-        remove {
-            _OnEntityFireOutputHook -= value;
-            if (_OnEntityFireOutputHook == null) GameHooksPublisher.RemoveHookListener(HookListener.FireOutput);
-        }
-    }
-    public event EventDelegates.OnStartupServer? OnStartupServer;
-    public event EventDelegates.OnClientVoice? OnClientVoice;
-    public event EventDelegates.OnClientSettingsChanged? OnClientSettingsChanged;
-    public event EventDelegates.OnCustomHudClicked? OnCustomHudClicked;
-
-    private void ReleaseConVarListeners()
-    {
-        ReleaseListener(OnConVarValueChangedLock, ref _OnConVarValueChanged, EventPublisher.ConVarValueChangedListener);
-        ReleaseListener(OnConCommandCreatedLock, ref _OnConCommandCreated, EventPublisher.ConCommandCreatedListener);
-        ReleaseListener(OnConVarCreatedLock, ref _OnConVarCreated, EventPublisher.ConVarCreatedListener);
+        add => Add(CoreEvent.FireOutput, ref _OnEntityFireOutputHook, value);
+        remove => Remove(CoreEvent.FireOutput, ref _OnEntityFireOutputHook, value);
     }
 
-    private static void ReleaseListener<T>( Lock sync, ref T? handlers, NativeListener listener ) where T : Delegate
-    {
-        lock (sync)
-        {
-            if (handlers == null)
-            {
-                return;
-            }
+    private EventDelegates.OnStartupServer? _OnStartupServer;
+    public event EventDelegates.OnStartupServer? OnStartupServer {
+        add => Add(CoreEvent.StartupServer, ref _OnStartupServer, value);
+        remove => Remove(CoreEvent.StartupServer, ref _OnStartupServer, value);
+    }
 
-            handlers = null;
-            listener.Release();
-        }
+    private EventDelegates.OnClientVoice? _OnClientVoice;
+    public event EventDelegates.OnClientVoice? OnClientVoice {
+        add => Add(CoreEvent.ClientVoice, ref _OnClientVoice, value);
+        remove => Remove(CoreEvent.ClientVoice, ref _OnClientVoice, value);
+    }
+
+    private EventDelegates.OnClientSettingsChanged? _OnClientSettingsChanged;
+    public event EventDelegates.OnClientSettingsChanged? OnClientSettingsChanged {
+        add => Add(CoreEvent.ClientSettingsChanged, ref _OnClientSettingsChanged, value);
+        remove => Remove(CoreEvent.ClientSettingsChanged, ref _OnClientSettingsChanged, value);
+    }
+
+    private EventDelegates.OnCustomHudClicked? _OnCustomHudClicked;
+    public event EventDelegates.OnCustomHudClicked? OnCustomHudClicked {
+        add => Add(CoreEvent.CustomHudClicked, ref _OnCustomHudClicked, value);
+        remove => Remove(CoreEvent.CustomHudClicked, ref _OnCustomHudClicked, value);
     }
 
     public void Dispose()
     {
-        if (disposed)
+        lock (sync)
         {
-            return;
+            if (disposed) return;
+            disposed = true;
+
+            _OnTick = null;
+            _OnWorldUpdate = null;
+            _OnClientConnected = null;
+            _OnClientDisconnected = null;
+            _OnClientKeyStateChanged = null;
+            _OnClientPutInServer = null;
+            _OnClientSteamAuthorize = null;
+            _OnClientSteamAuthorizeFail = null;
+            _OnEntityCreated = null;
+            _OnEntityDeleted = null;
+            _OnEntityParentChanged = null;
+            _OnEntitySpawned = null;
+            _OnMapLoad = null;
+            _OnMapUnload = null;
+            _OnClientProcessUsercmds = null;
+            _OnConVarValueChanged = null;
+            _OnConCommandCreated = null;
+            _OnConVarCreated = null;
+            _OnEntityTakeDamage = null;
+            _OnPrecacheResource = null;
+            _OnEntityStartTouch = null;
+            _OnEntityTouch = null;
+            _OnEntityEndTouch = null;
+            _OnItemServicesCanAcquireHook = null;
+            _OnWeaponServicesCanUseHook = null;
+            _OnWeaponServicesDropWeaponHook = null;
+            _OnConsoleOutput = null;
+            _OnCommandExecuteHook = null;
+            _OnSteamAPIActivated = null;
+            _OnMovementServicesRunCommandHook = null;
+            _OnPlayerPawnPostThink = null;
+            _OnEntityIdentityAcceptInputHook = null;
+            _OnEntityFireOutputHook = null;
+            _OnStartupServer = null;
+            _OnClientVoice = null;
+            _OnClientSettingsChanged = null;
+            _OnCustomHudClicked = null;
+
+            foreach (var kind in Enum.GetValues<CoreEvent>()) _ = EventPublisher.Router.Remove(kind, this);
         }
-        disposed = true;
 
-        if (_OnClientProcessUsercmds != null) GameHooksPublisher.RemoveHookListener(HookListener.ProcessUsercmds);
-        if (_OnEntityTakeDamage != null) GameHooksPublisher.RemoveHookListener(HookListener.TakeDamage);
-        if (_OnEntityStartTouch != null) GameHooksPublisher.RemoveHookListener(HookListener.StartTouch);
-        if (_OnEntityTouch != null) GameHooksPublisher.RemoveHookListener(HookListener.Touch);
-        if (_OnEntityEndTouch != null) GameHooksPublisher.RemoveHookListener(HookListener.EndTouch);
-        if (_OnItemServicesCanAcquireHook != null) GameHooksPublisher.RemoveHookListener(HookListener.CanAcquire);
-        if (_OnWeaponServicesCanUseHook != null) GameHooksPublisher.RemoveHookListener(HookListener.CanUse);
-        if (_OnWeaponServicesDropWeaponHook != null) GameHooksPublisher.RemoveHookListener(HookListener.WeaponDrop);
-        if (_OnPlayerPawnPostThink != null) GameHooksPublisher.RemoveHookListener(HookListener.PostThink);
-        if (_OnEntityIdentityAcceptInputHook != null) GameHooksPublisher.RemoveHookListener(HookListener.AcceptInput);
-        if (_OnEntityFireOutputHook != null) GameHooksPublisher.RemoveHookListener(HookListener.FireOutput);
-        if (_OnMovementServicesRunCommandHook != null) GameHooksPublisher.RemoveHookListener(HookListener.RunCommand);
-
-        lock (consoleOutputLock)
-        {
-            if (_OnConsoleOutput != null)
-            {
-                _OnConsoleOutput = null;
-                EventPublisher.RemoveConsoleOutputListener();
-            }
-        }
-
-        ReleaseConVarListeners();
-
-        EventPublisher.Unsubscribe(this);
         GC.SuppressFinalize(this);
     }
 
-    public bool ListensToTick => OnTick != null;
-
     public void InvokeOnTick()
     {
-        if (OnTick == null)
-        {
-            return;
-        }
-
-        try
-        {
-
-            OnTick.Invoke();
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnTick.");
-            }
-        }
-
+        var handler = _OnTick;
+        if (handler == null) return;
+        try { handler.Invoke(); }
+        catch (Exception e) { LogError(e, nameof(OnTick)); }
     }
-
-    public bool ListensToWorldUpdate => OnWorldUpdate != null;
 
     public void InvokeOnWorldUpdate()
     {
-        if (OnWorldUpdate == null)
-        {
-            return;
-        }
-        try
-        {
-
-            OnWorldUpdate.Invoke();
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnWorldUpdate.");
-            }
-        }
-
+        var handler = _OnWorldUpdate;
+        if (handler == null) return;
+        try { handler.Invoke(); }
+        catch (Exception e) { LogError(e, nameof(OnWorldUpdate)); }
     }
-
-    public bool ListensToClientConnected => OnClientConnected != null;
 
     public void InvokeOnClientConnected( ref OnClientConnectedEvent @event )
     {
-        if (OnClientConnected == null)
-        {
-            return;
-        }
-
-        try
-        {
-
-            OnClientConnected.Invoke(@event);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnClientConnected.");
-            }
-        }
-
+        var handler = _OnClientConnected;
+        if (handler == null) return;
+        try { handler.Invoke(@event); }
+        catch (Exception e) { LogError(e, nameof(OnClientConnected)); }
     }
-
-    public bool ListensToClientDisconnected => OnClientDisconnected != null;
 
     public void InvokeOnClientDisconnected( ref OnClientDisconnectedEvent @event )
     {
-        if (OnClientDisconnected == null)
-        {
-            return;
-        }
-        try
-        {
-
-            OnClientDisconnected.Invoke(@event);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnClientDisconnected.");
-            }
-        }
-
+        var handler = _OnClientDisconnected;
+        if (handler == null) return;
+        try { handler.Invoke(@event); }
+        catch (Exception e) { LogError(e, nameof(OnClientDisconnected)); }
     }
-
-    public bool ListensToClientKeyStateChanged => OnClientKeyStateChanged != null;
 
     public void InvokeOnClientKeyStateChanged( ref OnClientKeyStateChangedEvent @event )
     {
-        if (OnClientKeyStateChanged == null)
-        {
-            return;
-        }
-        try
-        {
-
-            OnClientKeyStateChanged.Invoke(@event);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnClientKeyStateChanged.");
-            }
-        }
-
+        var handler = _OnClientKeyStateChanged;
+        if (handler == null) return;
+        try { handler.Invoke(@event); }
+        catch (Exception e) { LogError(e, nameof(OnClientKeyStateChanged)); }
     }
-
-    public bool ListensToClientPutInServer => OnClientPutInServer != null;
 
     public void InvokeOnClientPutInServer( ref OnClientPutInServerEvent @event )
     {
-        if (OnClientPutInServer == null)
-        {
-            return;
-        }
-        try
-        {
-
-            OnClientPutInServer.Invoke(@event);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnClientPutInServer.");
-            }
-        }
-
+        var handler = _OnClientPutInServer;
+        if (handler == null) return;
+        try { handler.Invoke(@event); }
+        catch (Exception e) { LogError(e, nameof(OnClientPutInServer)); }
     }
-
-    public bool ListensToClientSteamAuthorize => OnClientSteamAuthorize != null;
 
     public void InvokeOnClientSteamAuthorize( ref OnClientSteamAuthorizeEvent @event )
     {
-        if (OnClientSteamAuthorize == null)
-        {
-            return;
-        }
-        try
-        {
-
-            OnClientSteamAuthorize.Invoke(@event);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnClientSteamAuthorize.");
-            }
-        }
-
+        var handler = _OnClientSteamAuthorize;
+        if (handler == null) return;
+        try { handler.Invoke(@event); }
+        catch (Exception e) { LogError(e, nameof(OnClientSteamAuthorize)); }
     }
-
-    public bool ListensToClientSteamAuthorizeFail => OnClientSteamAuthorizeFail != null;
 
     public void InvokeOnClientSteamAuthorizeFail( ref OnClientSteamAuthorizeFailEvent @event )
     {
-        if (OnClientSteamAuthorizeFail == null)
-        {
-            return;
-        }
-        try
-        {
-
-            OnClientSteamAuthorizeFail.Invoke(@event);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnClientSteamAuthorizeFail.");
-            }
-        }
-
+        var handler = _OnClientSteamAuthorizeFail;
+        if (handler == null) return;
+        try { handler.Invoke(@event); }
+        catch (Exception e) { LogError(e, nameof(OnClientSteamAuthorizeFail)); }
     }
-
-    public bool ListensToEntityCreated => OnEntityCreated != null;
 
     public void InvokeOnEntityCreated( ref OnEntityCreatedEvent @event )
     {
-        if (OnEntityCreated == null)
-        {
-            return;
-        }
-        try
-        {
-
-            OnEntityCreated.Invoke(@event);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnEntityCreated.");
-            }
-        }
-
+        var handler = _OnEntityCreated;
+        if (handler == null) return;
+        try { handler.Invoke(@event); }
+        catch (Exception e) { LogError(e, nameof(OnEntityCreated)); }
     }
-
-    public bool ListensToClientVoice => OnClientVoice != null;
 
     public void InvokeOnClientVoice( ref OnClientVoiceEvent @event )
     {
-        if (OnClientVoice == null)
-        {
-            return;
-        }
-        try
-        {
-
-            OnClientVoice.Invoke(@event);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnClientVoice.");
-            }
-        }
-
+        var handler = _OnClientVoice;
+        if (handler == null) return;
+        try { handler.Invoke(@event); }
+        catch (Exception e) { LogError(e, nameof(OnClientVoice)); }
     }
-
-    public bool ListensToClientSettingsChanged => OnClientSettingsChanged != null;
 
     public void InvokeOnClientSettingsChanged( ref OnClientSettingsChangedEvent @event )
     {
-        if (OnClientSettingsChanged == null)
-        {
-            return;
-        }
-        try
-        {
-            OnClientSettingsChanged.Invoke(@event);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnClientSettingsChanged.");
-            }
-        }
+        var handler = _OnClientSettingsChanged;
+        if (handler == null) return;
+        try { handler.Invoke(@event); }
+        catch (Exception e) { LogError(e, nameof(OnClientSettingsChanged)); }
     }
-
-    public bool ListensToEntityDeleted => OnEntityDeleted != null;
 
     public void InvokeOnEntityDeleted( ref OnEntityDeletedEvent @event )
     {
-        if (OnEntityDeleted == null)
-        {
-            return;
-        }
-        try
-        {
-
-            OnEntityDeleted.Invoke(@event);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnEntityDeleted.");
-            }
-        }
-
+        var handler = _OnEntityDeleted;
+        if (handler == null) return;
+        try { handler.Invoke(@event); }
+        catch (Exception e) { LogError(e, nameof(OnEntityDeleted)); }
     }
-
-    public bool ListensToEntityParentChanged => OnEntityParentChanged != null;
 
     public void InvokeOnEntityParentChanged( ref OnEntityParentChangedEvent @event )
     {
-        if (OnEntityParentChanged == null)
-        {
-            return;
-        }
-        try
-        {
-
-            OnEntityParentChanged.Invoke(@event);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnEntityParentChanged.");
-            }
-        }
-
+        var handler = _OnEntityParentChanged;
+        if (handler == null) return;
+        try { handler.Invoke(@event); }
+        catch (Exception e) { LogError(e, nameof(OnEntityParentChanged)); }
     }
-
-    public bool ListensToEntitySpawned => OnEntitySpawned != null;
 
     public void InvokeOnEntitySpawned( ref OnEntitySpawnedEvent @event )
     {
-        if (OnEntitySpawned == null)
-        {
-            return;
-        }
-        try
-        {
-
-            OnEntitySpawned.Invoke(@event);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnEntitySpawned.");
-            }
-        }
-
+        var handler = _OnEntitySpawned;
+        if (handler == null) return;
+        try { handler.Invoke(@event); }
+        catch (Exception e) { LogError(e, nameof(OnEntitySpawned)); }
     }
-
-    public bool ListensToMapLoad => OnMapLoad != null;
 
     public void InvokeOnMapLoad( ref OnMapLoadEvent @event )
     {
-        if (OnMapLoad == null)
-        {
-            return;
-        }
-        try
-        {
-
-            OnMapLoad.Invoke(@event);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnMapLoad.");
-            }
-        }
-
+        var handler = _OnMapLoad;
+        if (handler == null) return;
+        try { handler.Invoke(@event); }
+        catch (Exception e) { LogError(e, nameof(OnMapLoad)); }
     }
-
-    public bool ListensToMapUnload => OnMapUnload != null;
 
     public void InvokeOnMapUnload( ref OnMapUnloadEvent @event )
     {
-        if (OnMapUnload == null)
-        {
-            return;
-        }
-        try
-        {
-
-            OnMapUnload.Invoke(@event);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnMapUnload.");
-            }
-        }
-
+        var handler = _OnMapUnload;
+        if (handler == null) return;
+        try { handler.Invoke(@event); }
+        catch (Exception e) { LogError(e, nameof(OnMapUnload)); }
     }
-
-    public bool ListensToProcessUsercmds => _OnClientProcessUsercmds != null;
-
-    public bool ListensToTakeDamage => _OnEntityTakeDamage != null;
 
     public void InvokeOnClientProcessUsercmds( ref OnClientProcessUsercmdsEvent @event )
     {
-        if (_OnClientProcessUsercmds == null)
-        {
-            return;
-        }
-        try
-        {
-
-            _OnClientProcessUsercmds.Invoke(@event);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnClientProcessUsercmds.");
-            }
-        }
-
+        var handler = _OnClientProcessUsercmds;
+        if (handler == null) return;
+        try { handler.Invoke(@event); }
+        catch (Exception e) { LogError(e, nameof(OnClientProcessUsercmds)); }
     }
 
     public void InvokeOnEntityTakeDamage( ref OnEntityTakeDamageEvent @event )
     {
-        if (_OnEntityTakeDamage == null)
-        {
-            return;
-        }
-        try
-        {
-
-            _OnEntityTakeDamage.Invoke(@event);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnEntityTakeDamage.");
-            }
-        }
-
+        var handler = _OnEntityTakeDamage;
+        if (handler == null) return;
+        try { handler.Invoke(@event); }
+        catch (Exception e) { LogError(e, nameof(OnEntityTakeDamage)); }
     }
-
-    public bool ListensToPrecacheResource => OnPrecacheResource != null;
 
     public void InvokeOnPrecacheResource( ref OnPrecacheResourceEvent @event )
     {
-        if (OnPrecacheResource == null)
-        {
-            return;
-        }
-        try
-        {
-
-            OnPrecacheResource.Invoke(@event);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnPrecacheResource.");
-            }
-        }
-
+        var handler = _OnPrecacheResource;
+        if (handler == null) return;
+        try { handler.Invoke(@event); }
+        catch (Exception e) { LogError(e, nameof(OnPrecacheResource)); }
     }
-
-    public bool ListensToEntityStartTouch => _OnEntityStartTouch != null;
 
     public void InvokeOnEntityStartTouch( ref OnEntityStartTouchEvent @event )
     {
-        if (_OnEntityStartTouch == null)
-        {
-            return;
-        }
-        try
-        {
-
-            _OnEntityStartTouch.Invoke(@event);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnEntityStartTouch.");
-            }
-        }
-
+        var handler = _OnEntityStartTouch;
+        if (handler == null) return;
+        try { handler.Invoke(@event); }
+        catch (Exception e) { LogError(e, nameof(OnEntityStartTouch)); }
     }
-
-    public bool ListensToEntityTouch => _OnEntityTouch != null;
 
     public void InvokeOnEntityTouch( ref OnEntityTouchEvent @event )
     {
-        if (_OnEntityTouch == null)
-        {
-            return;
-        }
-        try
-        {
-
-            _OnEntityTouch.Invoke(@event);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnEntityTouch.");
-            }
-        }
-
+        var handler = _OnEntityTouch;
+        if (handler == null) return;
+        try { handler.Invoke(@event); }
+        catch (Exception e) { LogError(e, nameof(OnEntityTouch)); }
     }
-
-    public bool ListensToEntityEndTouch => _OnEntityEndTouch != null;
 
     public void InvokeOnEntityEndTouch( ref OnEntityEndTouchEvent @event )
     {
-        if (_OnEntityEndTouch == null)
-        {
-            return;
-        }
-        try
-        {
-
-            _OnEntityEndTouch.Invoke(@event);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnEntityEndTouch.");
-            }
-        }
-
+        var handler = _OnEntityEndTouch;
+        if (handler == null) return;
+        try { handler.Invoke(@event); }
+        catch (Exception e) { LogError(e, nameof(OnEntityEndTouch)); }
     }
 
     public void InvokeOnSteamAPIActivatedHook()
     {
-        if (OnSteamAPIActivated == null)
-        {
-            return;
-        }
-        try
-        {
-
-            OnSteamAPIActivated.Invoke();
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnSteamAPIActivatedHook.");
-            }
-        }
-
+        var handler = _OnSteamAPIActivated;
+        if (handler == null) return;
+        try { handler.Invoke(); }
+        catch (Exception e) { LogError(e, nameof(OnSteamAPIActivated)); }
     }
-
-    public bool ListensToCanAcquire => _OnItemServicesCanAcquireHook != null;
 
     public void InvokeOnItemServicesCanAcquireHook( ref OnItemServicesCanAcquireHookEvent @event )
     {
-        if (_OnItemServicesCanAcquireHook == null)
-        {
-            return;
-        }
-        try
-        {
-
-            _OnItemServicesCanAcquireHook.Invoke(@event);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnItemServicesCanAcquireHook.");
-            }
-        }
-
+        var handler = _OnItemServicesCanAcquireHook;
+        if (handler == null) return;
+        try { handler.Invoke(@event); }
+        catch (Exception e) { LogError(e, nameof(OnItemServicesCanAcquireHook)); }
     }
-
-    public bool ListensToCanUseWeapon => _OnWeaponServicesCanUseHook != null;
 
     public void InvokeOnWeaponServicesCanUseHook( ref OnWeaponServicesCanUseHookEvent @event )
     {
-        if (_OnWeaponServicesCanUseHook == null)
-        {
-            return;
-        }
-        try
-        {
-
-            _OnWeaponServicesCanUseHook.Invoke(@event);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnWeaponServicesCanUseHook.");
-            }
-        }
-
+        var handler = _OnWeaponServicesCanUseHook;
+        if (handler == null) return;
+        try { handler.Invoke(@event); }
+        catch (Exception e) { LogError(e, nameof(OnWeaponServicesCanUseHook)); }
     }
-
-    public bool ListensToConsoleOutput => System.Threading.Volatile.Read(ref _OnConsoleOutput) != null;
 
     public void InvokeOnConsoleOutput( ref OnConsoleOutputEvent @event )
     {
-        var handler = System.Threading.Volatile.Read(ref _OnConsoleOutput);
-        if (handler == null)
-        {
-            return;
-        }
-        try
-        {
-
-            handler.Invoke(@event);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnConsoleOutput.");
-            }
-        }
-
+        var handler = _OnConsoleOutput;
+        if (handler == null) return;
+        try { handler.Invoke(@event); }
+        catch (Exception e) { LogError(e, nameof(OnConsoleOutput)); }
     }
-
-    public bool ListensToConVarValueChanged => _OnConVarValueChanged != null;
 
     public void InvokeOnConVarValueChanged( ref OnConVarValueChanged @event )
     {
         var handler = _OnConVarValueChanged;
-        if (handler == null)
-        {
-            return;
-        }
-        try
-        {
-
-            handler.Invoke(@event);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnConVarValueChanged.");
-            }
-        }
-
+        if (handler == null) return;
+        try { handler.Invoke(@event); }
+        catch (Exception e) { LogError(e, nameof(OnConVarValueChanged)); }
     }
-
-    public bool ListensToConCommandCreated => _OnConCommandCreated != null;
 
     public void InvokeOnConCommandCreated( ref OnConCommandCreated @event )
     {
         var handler = _OnConCommandCreated;
-        if (handler == null)
-        {
-            return;
-        }
-        try
-        {
-
-            handler.Invoke(@event);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnConCommandCreated.");
-            }
-        }
-
+        if (handler == null) return;
+        try { handler.Invoke(@event); }
+        catch (Exception e) { LogError(e, nameof(OnConCommandCreated)); }
     }
-
-    public bool ListensToConVarCreated => _OnConVarCreated != null;
 
     public void InvokeOnConVarCreated( ref OnConVarCreated @event )
     {
         var handler = _OnConVarCreated;
-        if (handler == null)
-        {
-            return;
-        }
-        try
-        {
-
-            handler.Invoke(@event);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnConVarCreated.");
-            }
-        }
-
+        if (handler == null) return;
+        try { handler.Invoke(@event); }
+        catch (Exception e) { LogError(e, nameof(OnConVarCreated)); }
     }
 
     public void InvokeOnCommandExecuteHook( ref OnCommandExecuteHookEvent @event )
     {
-        if (OnCommandExecuteHook == null)
-        {
-            return;
-        }
-        try
-        {
-
-            OnCommandExecuteHook.Invoke(@event);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnCommandExecuteHook.");
-            }
-        }
-
+        var handler = _OnCommandExecuteHook;
+        if (handler == null) return;
+        try { handler.Invoke(@event); }
+        catch (Exception e) { LogError(e, nameof(OnCommandExecuteHook)); }
     }
-
-    public bool ListensToRunCommand => _OnMovementServicesRunCommandHook != null;
 
     public void InvokeOnMovementServicesRunCommandHook( ref OnMovementServicesRunCommandHookEvent @event )
     {
-        if (_OnMovementServicesRunCommandHook == null)
-        {
-            return;
-        }
-        try
-        {
-
-            _OnMovementServicesRunCommandHook.Invoke(@event);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnMovementServicesRunCommandHook.");
-            }
-        }
-
+        var handler = _OnMovementServicesRunCommandHook;
+        if (handler == null) return;
+        try { handler.Invoke(@event); }
+        catch (Exception e) { LogError(e, nameof(OnMovementServicesRunCommandHook)); }
     }
-
-    public bool ListensToPostThink => _OnPlayerPawnPostThink != null;
 
     public void InvokeOnPlayerPawnPostThinkHook( ref OnPlayerPawnPostThinkHookEvent @event )
     {
-        if (_OnPlayerPawnPostThink == null)
-        {
-            return;
-        }
-        try
-        {
-
-            _OnPlayerPawnPostThink.Invoke(@event);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnPlayerPawnPostThink.");
-            }
-        }
-
+        var handler = _OnPlayerPawnPostThink;
+        if (handler == null) return;
+        try { handler.Invoke(@event); }
+        catch (Exception e) { LogError(e, nameof(OnPlayerPawnPostThink)); }
     }
-
-    public bool ListensToAcceptInput => _OnEntityIdentityAcceptInputHook != null;
 
     public void InvokeOnEntityIdentityAcceptInputHook( ref OnEntityIdentityAcceptInputHookEvent @event )
     {
-        if (_OnEntityIdentityAcceptInputHook == null)
-        {
-            return;
-        }
-        try
-        {
-
-            _OnEntityIdentityAcceptInputHook.Invoke(@event);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnEntityIdentityAcceptInput.");
-            }
-        }
-
+        var handler = _OnEntityIdentityAcceptInputHook;
+        if (handler == null) return;
+        try { handler.Invoke(@event); }
+        catch (Exception e) { LogError(e, nameof(OnEntityIdentityAcceptInputHook)); }
     }
-
-    public bool ListensToWeaponDrop => _OnWeaponServicesDropWeaponHook != null;
 
     public void InvokeOnWeaponServicesDropWeaponHook( ref OnWeaponServicesDropWeaponHook @event )
     {
-        if (_OnWeaponServicesDropWeaponHook == null)
-        {
-            return;
-        }
-        try
-        {
-
-            _OnWeaponServicesDropWeaponHook.Invoke(@event);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnWeaponServicesDropWeaponHook.");
-            }
-        }
-
+        var handler = _OnWeaponServicesDropWeaponHook;
+        if (handler == null) return;
+        try { handler.Invoke(@event); }
+        catch (Exception e) { LogError(e, nameof(OnWeaponServicesDropWeaponHook)); }
     }
-
-    public bool ListensToFireOutput => _OnEntityFireOutputHook != null;
 
     public void InvokeOnEntityFireOutputHook( ref OnEntityFireOutputHookEvent @event )
     {
-        if (_OnEntityFireOutputHook == null)
-        {
-            return;
-        }
-        try
-        {
-
-            _OnEntityFireOutputHook.Invoke(@event);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnEntityFireOutputHook.");
-            }
-        }
-
+        var handler = _OnEntityFireOutputHook;
+        if (handler == null) return;
+        try { handler.Invoke(@event); }
+        catch (Exception e) { LogError(e, nameof(OnEntityFireOutputHook)); }
     }
-
-    public bool ListensToStartupServer => OnStartupServer != null;
 
     public void InvokeOnStartupServer()
     {
-        if (OnStartupServer == null)
-        {
-            return;
-        }
-
-        try
-        {
-
-            OnStartupServer.Invoke();
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnStartupServer.");
-            }
-        }
-
+        var handler = _OnStartupServer;
+        if (handler == null) return;
+        try { handler.Invoke(); }
+        catch (Exception e) { LogError(e, nameof(OnStartupServer)); }
     }
-
-    public bool ListensToCustomHudClicked => OnCustomHudClicked != null;
 
     public void InvokeOnCustomHudClicked( ref OnCustomHudClickedEvent @event )
     {
-        if (OnCustomHudClicked == null)
-        {
-            return;
-        }
-
-        try
-        {
-            OnCustomHudClicked.Invoke(@event);
-        }
-        catch (Exception e)
-        {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking OnCustomHudClicked.");
-            }
-        }
-
+        var handler = _OnCustomHudClicked;
+        if (handler == null) return;
+        try { handler.Invoke(@event); }
+        catch (Exception e) { LogError(e, nameof(OnCustomHudClicked)); }
     }
 }
