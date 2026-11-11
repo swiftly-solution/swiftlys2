@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CMapInfo : CPointEntity, ISchemaClass<CMapInfo>
 {
     static CMapInfo ISchemaClass<CMapInfo>.From(nint handle) => new CMapInfoImpl(handle);
-    static int ISchemaClass<CMapInfo>.Size => 1240;
+    static int ISchemaClass<CMapInfo>.Size => 1248;
     static string? ISchemaClass<CMapInfo>.ClassName => "info_map_parameters";
 
 
@@ -44,6 +44,8 @@ public partial interface CMapInfo : CPointEntity, ISchemaClass<CMapInfo>
     public ref float EnvWetnessCoverage { get; }
 
     public ref float EnvWetnessDryingAmount { get; }
+
+    public ref bool FrostEnabled { get; }
 
 
 }

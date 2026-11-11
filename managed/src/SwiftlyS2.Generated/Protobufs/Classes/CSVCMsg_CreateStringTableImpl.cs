@@ -26,8 +26,6 @@ internal class CSVCMsg_CreateStringTableImpl : NetMessage<CSVCMsg_CreateStringTa
     { get => Accessor.GetInt32("flags"); set => Accessor.SetInt32("flags", value); }
     public byte[] StringData
     { get => Accessor.GetBytes("string_data"); set => Accessor.SetBytes("string_data", value); }
-    public int UncompressedSize
-    { get => Accessor.GetInt32("uncompressed_size"); set => Accessor.SetInt32("uncompressed_size", value); }
     public bool DataCompressed
     { get => Accessor.GetBool("data_compressed"); set => Accessor.SetBool("data_compressed", value); }
     public bool UsingVarintBitcounts
