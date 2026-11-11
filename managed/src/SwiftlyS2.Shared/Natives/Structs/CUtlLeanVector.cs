@@ -140,6 +140,7 @@ public struct CUtlLeanVector<T, I>
             if (Allocated > I.CreateChecked(0) && Elements != 0)
                 NativeAllocator.Free(Elements);
 
+            Count = I.CreateChecked(0);
             Allocated = I.CreateChecked(0);
             Elements = 0;
         }
