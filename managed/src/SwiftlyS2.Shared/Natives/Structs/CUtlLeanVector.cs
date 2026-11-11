@@ -48,8 +48,8 @@ public struct CUtlLeanVector<T, I>
     /// </summary>
     public CUtlLeanVector( I growSize, I initSize )
     {
-        Count = (I)(object)0;
-        Allocated = (I)(object)0;
+        Count = I.Zero;
+        Allocated = I.Zero;
         EnsureCapacity(int.CreateChecked(initSize), true);
     }
 
@@ -290,8 +290,8 @@ public struct CUtlLeanVector<T, I>
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-    public int NumAllocated => (int)((ulong)(object)Allocated & ~(ulong)(object)ExternalBufferMarker);
-    public bool ExternallyAllocated => ((ulong)(object)Allocated & (ulong)(object)ExternalBufferMarker) != 0;
+    public int NumAllocated => int.CreateTruncating(Allocated & ~ExternalBufferMarker);
+    public bool ExternallyAllocated => (Allocated & ExternalBufferMarker) != I.Zero;
     public nint Base => Elements;
     public ref T this[I index] {
         get {
