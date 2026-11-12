@@ -19,7 +19,6 @@ public interface CSVCMsg_CreateStringTable : ITypedProtobuf<CSVCMsg_CreateString
     public int UserDataSizeBits { get; set; }
     public int Flags { get; set; }
     public byte[] StringData { get; set; }
-    public int UncompressedSize { get; set; }
     public bool DataCompressed { get; set; }
     public bool UsingVarintBitcounts { get; set; }
 }
