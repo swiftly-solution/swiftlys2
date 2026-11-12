@@ -37,5 +37,7 @@ public partial interface CNmAimCSNode__CDefinition : CNmPassthroughNode__CDefini
 
     public ref float PlantingBlendTimeSeconds { get; }
 
+    public ref float TransitionBlendTimeSeconds { get; }
+
 
 }

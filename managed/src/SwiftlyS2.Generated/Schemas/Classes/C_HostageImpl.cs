@@ -174,19 +174,6 @@ internal partial class C_HostageImpl : C_BaseCombatCharacterImpl, C_Hostage
             return instance;
         }
     }
-    private static nint _DeadOrRescuedTimeOffset = -1;
-    private GameTime_tImpl? _DeadOrRescuedTimeInstance;
-
-    public GameTime_t DeadOrRescuedTime
-    {
-        get
-        {
-            if (_DeadOrRescuedTimeOffset == -1) _DeadOrRescuedTimeOffset = Schema.GetOffset(0xA2C3D208EB85D86);
-            var instance = _DeadOrRescuedTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _DeadOrRescuedTimeOffset);
-            return instance;
-        }
-    }
     private static nint _BlinkTimerOffset = -1;
     private CountdownTimerImpl? _BlinkTimerInstance;
 
