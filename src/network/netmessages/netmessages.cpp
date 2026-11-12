@@ -95,7 +95,7 @@ static bool SendNetMessage(CServerSideClient* client, CNetMessage* pData, NetCha
 
     if (client && pData)
     {
-        int msgid = pData->GetNetMessage()->GetNetMessageInfo()->m_MessageId;
+        int msgid = pData->GetNetMessage()->m_MessageId;
         if (g_fnServerMessageInternalSendHandler && g_pNetMessages->IsMessageRegistered(NetMessageHook_ServerInternal, msgid))
         {
             auto playerid = client->GetPlayerSlot().Get();
@@ -119,7 +119,7 @@ static bool FilterMessage(void* client, CNetMessage* cMsg, INetChannel* netchan)
         static auto playerIndex = g_pGameDataManager->GetOffsets()->Fetch("CServerSideClientBase::m_nClientSlot") - WIN_LINUX(8, 48);
 
         auto playerid = *reinterpret_cast<int*>(reinterpret_cast<uintptr_t>(client) + playerIndex);
-        auto msgid = cMsg->GetNetMessage()->GetNetMessageInfo()->m_MessageId;
+        auto msgid = cMsg->GetNetMessage()->m_MessageId;
 
         if (msgid == GE_Source1LegacyListenEvents)
         {
@@ -167,7 +167,7 @@ static void PostEventAbstractHook(void* _this, CSplitScreenSlot nSlot, bool bLoc
 
     if (!bypassPostEventAbstractHook && g_fnServerMessageSendHandler)
     {
-        int msgid = pEvent->GetNetMessageInfo()->m_MessageId;
+        int msgid = pEvent->m_MessageId;
         if (g_pNetMessages->IsMessageRegistered(NetMessageHook_Server, msgid))
         {
             auto playermask = reinterpret_cast<uint64_t*>(const_cast<uint64*>(clients));
