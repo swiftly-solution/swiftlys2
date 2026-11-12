@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCBaseGrenadeTumbleThinkPre(ref CBaseGrenadeTumbleThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseGrenadeTumbleThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseGrenadeTumbleThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseGrenadeTumbleThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCBaseGrenadeTumbleThinkPost(ref CBaseGrenadeTumbleThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseGrenadeTumbleThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseGrenadeTumbleThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseGrenadeTumbleThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CBaseGrenadeTumbleThinkHook : ICBaseGrenadeTumbleThinkHook
+internal sealed class CBaseGrenadeTumbleThinkHook(GameHooksService owner) : ICBaseGrenadeTumbleThinkHook
 {
     private event OnCBaseGrenadeTumbleThinkPreDelegate? _Pre;
     private event OnCBaseGrenadeTumbleThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CBaseGrenadeTumbleThinkHook : ICBaseGrenadeTumbleThinkHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseGrenadeTumbleThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseGrenadeTumbleThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CBaseGrenadeTumbleThinkHook : ICBaseGrenadeTumbleThinkHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeTumbleThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeTumbleThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CBaseGrenadeTumbleThinkHook : ICBaseGrenadeTumbleThinkHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseGrenadeTumbleThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseGrenadeTumbleThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CBaseGrenadeTumbleThinkHook : ICBaseGrenadeTumbleThinkHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeTumbleThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeTumbleThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CBaseGrenadeTumbleThinkHook : ICBaseGrenadeTumbleThinkHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeTumbleThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeTumbleThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeTumbleThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeTumbleThink, owner);
         }
     }
 

@@ -2,9 +2,9 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class GameHookDatamapCLogicActiveAutosave : IGameHookDatamapCLogicActiveAutosave
+internal sealed class GameHookDatamapCLogicActiveAutosave(GameHooksService owner) : IGameHookDatamapCLogicActiveAutosave
 {
-    internal readonly CLogicActiveAutosaveSaveThinkHook CLogicActiveAutosaveSaveThinkHook = new();
+    internal readonly CLogicActiveAutosaveSaveThinkHook CLogicActiveAutosaveSaveThinkHook = new(owner);
 
     public ICLogicActiveAutosaveSaveThinkHook SaveThink => CLogicActiveAutosaveSaveThinkHook;
 

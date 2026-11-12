@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCTriggerMultipleMultiTouchPre(ref CTriggerMultipleMultiTouchPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CTriggerMultipleMultiTouch);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCTriggerMultipleMultiTouchPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCTriggerMultipleMultiTouchPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCTriggerMultipleMultiTouchPost(ref CTriggerMultipleMultiTouchPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CTriggerMultipleMultiTouch);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCTriggerMultipleMultiTouchPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCTriggerMultipleMultiTouchPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CTriggerMultipleMultiTouchHook : ICTriggerMultipleMultiTouchHook
+internal sealed class CTriggerMultipleMultiTouchHook(GameHooksService owner) : ICTriggerMultipleMultiTouchHook
 {
     private event OnCTriggerMultipleMultiTouchPreDelegate? _Pre;
     private event OnCTriggerMultipleMultiTouchPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CTriggerMultipleMultiTouchHook : ICTriggerMultipleMultiTou
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerMultipleMultiTouch);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerMultipleMultiTouch, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CTriggerMultipleMultiTouchHook : ICTriggerMultipleMultiTou
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerMultipleMultiTouch);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerMultipleMultiTouch, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CTriggerMultipleMultiTouchHook : ICTriggerMultipleMultiTou
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerMultipleMultiTouch);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerMultipleMultiTouch, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CTriggerMultipleMultiTouchHook : ICTriggerMultipleMultiTou
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerMultipleMultiTouch);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerMultipleMultiTouch, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CTriggerMultipleMultiTouchHook : ICTriggerMultipleMultiTou
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerMultipleMultiTouch);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerMultipleMultiTouch, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerMultipleMultiTouch);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerMultipleMultiTouch, owner);
         }
     }
 

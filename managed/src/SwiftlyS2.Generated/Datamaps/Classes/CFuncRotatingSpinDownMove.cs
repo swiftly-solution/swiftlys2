@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCFuncRotatingSpinDownMovePre(ref CFuncRotatingSpinDownMovePreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CFuncRotatingSpinDownMove);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCFuncRotatingSpinDownMovePre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCFuncRotatingSpinDownMovePre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCFuncRotatingSpinDownMovePost(ref CFuncRotatingSpinDownMovePostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CFuncRotatingSpinDownMove);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCFuncRotatingSpinDownMovePost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCFuncRotatingSpinDownMovePost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CFuncRotatingSpinDownMoveHook : ICFuncRotatingSpinDownMoveHook
+internal sealed class CFuncRotatingSpinDownMoveHook(GameHooksService owner) : ICFuncRotatingSpinDownMoveHook
 {
     private event OnCFuncRotatingSpinDownMovePreDelegate? _Pre;
     private event OnCFuncRotatingSpinDownMovePostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CFuncRotatingSpinDownMoveHook : ICFuncRotatingSpinDownMove
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncRotatingSpinDownMove);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncRotatingSpinDownMove, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CFuncRotatingSpinDownMoveHook : ICFuncRotatingSpinDownMove
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncRotatingSpinDownMove);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncRotatingSpinDownMove, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CFuncRotatingSpinDownMoveHook : ICFuncRotatingSpinDownMove
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncRotatingSpinDownMove);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncRotatingSpinDownMove, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CFuncRotatingSpinDownMoveHook : ICFuncRotatingSpinDownMove
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncRotatingSpinDownMove);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncRotatingSpinDownMove, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CFuncRotatingSpinDownMoveHook : ICFuncRotatingSpinDownMove
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncRotatingSpinDownMove);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncRotatingSpinDownMove, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncRotatingSpinDownMove);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncRotatingSpinDownMove, owner);
         }
     }
 

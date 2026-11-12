@@ -271,7 +271,22 @@ internal class PluginManager : IPluginManager
 
     private void LoadPlugins()
     {
-        EnumeratePluginDirectories(_rootDirService.GetPluginsRoot(), pluginDir =>
+        var pluginDirs = new List<string>();
+        EnumeratePluginDirectories(_rootDirService.GetPluginsRoot(), pluginDirs.Add);
+
+        var loadOrder = NativeCore.PluginLoadOrder().Split('\x01', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToList();
+        if (loadOrder.Count > 0)
+        {
+            pluginDirs = pluginDirs.OrderBy(dir =>
+            {
+                var dllPath = GetPluginEntrypointPath(dir);
+                var id = File.Exists(dllPath) ? ReadMetadataFromDll(dllPath)?.Id : null;
+                var index = loadOrder.FindIndex(x => x.Equals(id ?? Path.GetFileName(dir), StringComparison.OrdinalIgnoreCase));
+                return index < 0 ? int.MaxValue : index;
+            }).ToList();
+        }
+
+        foreach (var pluginDir in pluginDirs)
         {
             var displayPath = GetDisplayPath(pluginDir);
             var dllName = Path.GetFileName(pluginDir);
@@ -281,12 +296,10 @@ internal class PluginManager : IPluginManager
 
             try
             {
-                var startedAt = Stopwatch.GetTimestamp();
                 var context = LoadPluginInternal(pluginDir, hotReload: false, silent: false);
-                var elapsed = Stopwatch.GetElapsedTime(startedAt);
                 if (context?.Status == PluginStatus.Loaded)
                 {
-                    LogPluginLoadSuccess(context, displayPath, elapsed);
+                    LogPluginLoadSuccess(context, displayPath, context.LoadTime);
                 }
                 else
                 {
@@ -303,7 +316,7 @@ internal class PluginManager : IPluginManager
                     _pluginLoadErrors[dllName] = e.ToString();
                 }
             }
-        });
+        }
 
         RebuildSharedServices();
         NotifyAllPluginsLoaded();
@@ -389,7 +402,9 @@ internal class PluginManager : IPluginManager
 
         try
         {
+            var startedAt = Stopwatch.GetTimestamp();
             plugin.Load(hotReload);
+            context.LoadTime = Stopwatch.GetElapsedTime(startedAt);
             context.Status = PluginStatus.Loaded;
             context.Core = core;
             context.Plugin = plugin;
@@ -655,9 +670,12 @@ internal class PluginManager : IPluginManager
                 await WaitForPlatformDelay(cts.Token);
                 await WaitForFileAccessibility(filePath, cts.Token);
 
+                var reloading = FindPluginByDirectory(Path.GetDirectoryName(filePath) ?? string.Empty);
                 if (ReloadPluginByDllName(directoryName, silent: true))
                 {
-                    _logger.LogInformation("Reloaded plugin: {Name}", directoryName);
+                    var reloaded = FindPluginByDirectory(Path.GetDirectoryName(filePath) ?? string.Empty);
+                    _logger.LogInformation("Reloaded plugin: {Name} (unload {UnloadTimeMs:F1} ms, load {LoadTimeMs:F1} ms)",
+                        directoryName, reloading?.UnloadTime.TotalMilliseconds ?? 0, reloaded?.LoadTime.TotalMilliseconds ?? 0);
                 }
                 else
                 {
@@ -686,12 +704,14 @@ internal class PluginManager : IPluginManager
                             "Hot-loaded New Plugin",
                             "├─  {Id} {Version}",
                             "├─  Author: {Author}",
-                            "└─  Path: {RelativePath}"
+                            "├─  Path: {RelativePath}",
+                            "└─  Load time: {LoadTimeMs:F1} ms"
                         ]),
                         context.Metadata!.Id,
                         context.Metadata!.Version,
                         context.Metadata!.Author,
-                        displayPath
+                        displayPath,
+                        context.LoadTime.TotalMilliseconds
                     );
                 }
                 else

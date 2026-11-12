@@ -40,22 +40,19 @@ public:
     VFunctionHook(const VFunctionHook&) = delete;
     VFunctionHook& operator=(const VFunctionHook&) = delete;
 
-    virtual void SetHookFunction(const std::string& iface_name, int index, void* callback) override;
-    virtual void SetHookFunction(void* instance, int index, void* callback, bool is_vtable) override;
+    void SetHookFunction(void* instance, int index, void* callback, bool is_vtable) override;
 
-    virtual void Enable() override;
-    virtual void Disable() override;
+    void Enable() override;
+    void Disable() override;
 
-    virtual void* GetOriginal() override;
-    virtual bool IsEnabled() override;
+    void* GetOriginal() override;
 
-    virtual bool Install() override;
-    virtual void Uninstall() override;
-    virtual const char* GetName() const override;
+    bool Install() override;
+    void Uninstall() override;
+    const char* GetName() const override;
 
 private:
     SafetyHookInline m_oHook;
-    void* m_pOriginal = nullptr;
 
     std::function<void()> m_fnResolve;
     std::string m_sName;

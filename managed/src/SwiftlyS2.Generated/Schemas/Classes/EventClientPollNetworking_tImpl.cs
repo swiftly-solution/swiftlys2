@@ -26,5 +26,15 @@ internal partial class EventClientPollNetworking_tImpl : SchemaClass, EventClien
             return ref _Handle.AsRef<int>(_TickCountOffset);
         }
     }
+    private static nint _TotalTicksOffset = -1;
+
+    public ref int TotalTicks
+    {
+        get
+        {
+            if (_TotalTicksOffset == -1) _TotalTicksOffset = Schema.GetOffset(0xE9C02F0045397B31);
+            return ref _Handle.AsRef<int>(_TotalTicksOffset);
+        }
+    }
 
 }

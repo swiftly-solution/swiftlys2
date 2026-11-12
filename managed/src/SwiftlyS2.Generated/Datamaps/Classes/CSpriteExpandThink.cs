@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCSpriteExpandThinkPre(ref CSpriteExpandThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CSpriteExpandThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCSpriteExpandThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCSpriteExpandThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCSpriteExpandThinkPost(ref CSpriteExpandThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CSpriteExpandThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCSpriteExpandThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCSpriteExpandThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CSpriteExpandThinkHook : ICSpriteExpandThinkHook
+internal sealed class CSpriteExpandThinkHook(GameHooksService owner) : ICSpriteExpandThinkHook
 {
     private event OnCSpriteExpandThinkPreDelegate? _Pre;
     private event OnCSpriteExpandThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CSpriteExpandThinkHook : ICSpriteExpandThinkHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSpriteExpandThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSpriteExpandThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CSpriteExpandThinkHook : ICSpriteExpandThinkHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSpriteExpandThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSpriteExpandThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CSpriteExpandThinkHook : ICSpriteExpandThinkHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSpriteExpandThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSpriteExpandThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CSpriteExpandThinkHook : ICSpriteExpandThinkHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSpriteExpandThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSpriteExpandThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CSpriteExpandThinkHook : ICSpriteExpandThinkHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSpriteExpandThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSpriteExpandThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSpriteExpandThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSpriteExpandThink, owner);
         }
     }
 

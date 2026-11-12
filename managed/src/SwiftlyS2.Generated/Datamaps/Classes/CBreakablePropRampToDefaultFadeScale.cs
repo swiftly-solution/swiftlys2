@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCBreakablePropRampToDefaultFadeScalePre(ref CBreakablePropRampToDefaultFadeScalePreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBreakablePropRampToDefaultFadeScale);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBreakablePropRampToDefaultFadeScalePre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBreakablePropRampToDefaultFadeScalePre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCBreakablePropRampToDefaultFadeScalePost(ref CBreakablePropRampToDefaultFadeScalePostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBreakablePropRampToDefaultFadeScale);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBreakablePropRampToDefaultFadeScalePost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBreakablePropRampToDefaultFadeScalePost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CBreakablePropRampToDefaultFadeScaleHook : ICBreakablePropRampToDefaultFadeScaleHook
+internal sealed class CBreakablePropRampToDefaultFadeScaleHook(GameHooksService owner) : ICBreakablePropRampToDefaultFadeScaleHook
 {
     private event OnCBreakablePropRampToDefaultFadeScalePreDelegate? _Pre;
     private event OnCBreakablePropRampToDefaultFadeScalePostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CBreakablePropRampToDefaultFadeScaleHook : ICBreakableProp
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBreakablePropRampToDefaultFadeScale);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBreakablePropRampToDefaultFadeScale, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CBreakablePropRampToDefaultFadeScaleHook : ICBreakableProp
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBreakablePropRampToDefaultFadeScale);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBreakablePropRampToDefaultFadeScale, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CBreakablePropRampToDefaultFadeScaleHook : ICBreakableProp
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBreakablePropRampToDefaultFadeScale);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBreakablePropRampToDefaultFadeScale, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CBreakablePropRampToDefaultFadeScaleHook : ICBreakableProp
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBreakablePropRampToDefaultFadeScale);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBreakablePropRampToDefaultFadeScale, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CBreakablePropRampToDefaultFadeScaleHook : ICBreakableProp
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBreakablePropRampToDefaultFadeScale);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBreakablePropRampToDefaultFadeScale, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBreakablePropRampToDefaultFadeScale);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBreakablePropRampToDefaultFadeScale, owner);
         }
     }
 

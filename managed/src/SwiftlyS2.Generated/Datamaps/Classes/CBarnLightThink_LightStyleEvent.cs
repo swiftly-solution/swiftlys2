@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCBarnLightThink_LightStyleEventPre(ref CBarnLightThink_LightStyleEventPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBarnLightThink_LightStyleEvent);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBarnLightThink_LightStyleEventPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBarnLightThink_LightStyleEventPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCBarnLightThink_LightStyleEventPost(ref CBarnLightThink_LightStyleEventPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBarnLightThink_LightStyleEvent);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBarnLightThink_LightStyleEventPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBarnLightThink_LightStyleEventPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CBarnLightThink_LightStyleEventHook : ICBarnLightThink_LightStyleEventHook
+internal sealed class CBarnLightThink_LightStyleEventHook(GameHooksService owner) : ICBarnLightThink_LightStyleEventHook
 {
     private event OnCBarnLightThink_LightStyleEventPreDelegate? _Pre;
     private event OnCBarnLightThink_LightStyleEventPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CBarnLightThink_LightStyleEventHook : ICBarnLightThink_Lig
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBarnLightThink_LightStyleEvent);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBarnLightThink_LightStyleEvent, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CBarnLightThink_LightStyleEventHook : ICBarnLightThink_Lig
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBarnLightThink_LightStyleEvent);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBarnLightThink_LightStyleEvent, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CBarnLightThink_LightStyleEventHook : ICBarnLightThink_Lig
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBarnLightThink_LightStyleEvent);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBarnLightThink_LightStyleEvent, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CBarnLightThink_LightStyleEventHook : ICBarnLightThink_Lig
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBarnLightThink_LightStyleEvent);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBarnLightThink_LightStyleEvent, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CBarnLightThink_LightStyleEventHook : ICBarnLightThink_Lig
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBarnLightThink_LightStyleEvent);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBarnLightThink_LightStyleEvent, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBarnLightThink_LightStyleEvent);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBarnLightThink_LightStyleEvent, owner);
         }
     }
 

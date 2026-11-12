@@ -2,9 +2,9 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class GameHookDatamapCPathNode : IGameHookDatamapCPathNode
+internal sealed class GameHookDatamapCPathNode(GameHooksService owner) : IGameHookDatamapCPathNode
 {
-    internal readonly CPathNodeParentedMoveThinkHook CPathNodeParentedMoveThinkHook = new();
+    internal readonly CPathNodeParentedMoveThinkHook CPathNodeParentedMoveThinkHook = new(owner);
 
     public ICPathNodeParentedMoveThinkHook ParentedMoveThink => CPathNodeParentedMoveThinkHook;
 

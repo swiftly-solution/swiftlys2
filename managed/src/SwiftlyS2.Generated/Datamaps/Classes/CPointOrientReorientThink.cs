@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCPointOrientReorientThinkPre(ref CPointOrientReorientThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CPointOrientReorientThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCPointOrientReorientThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCPointOrientReorientThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCPointOrientReorientThinkPost(ref CPointOrientReorientThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CPointOrientReorientThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCPointOrientReorientThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCPointOrientReorientThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CPointOrientReorientThinkHook : ICPointOrientReorientThinkHook
+internal sealed class CPointOrientReorientThinkHook(GameHooksService owner) : ICPointOrientReorientThinkHook
 {
     private event OnCPointOrientReorientThinkPreDelegate? _Pre;
     private event OnCPointOrientReorientThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CPointOrientReorientThinkHook : ICPointOrientReorientThink
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPointOrientReorientThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPointOrientReorientThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CPointOrientReorientThinkHook : ICPointOrientReorientThink
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointOrientReorientThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointOrientReorientThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CPointOrientReorientThinkHook : ICPointOrientReorientThink
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPointOrientReorientThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPointOrientReorientThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CPointOrientReorientThinkHook : ICPointOrientReorientThink
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointOrientReorientThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointOrientReorientThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CPointOrientReorientThinkHook : ICPointOrientReorientThink
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointOrientReorientThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointOrientReorientThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointOrientReorientThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointOrientReorientThink, owner);
         }
     }
 

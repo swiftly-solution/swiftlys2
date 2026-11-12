@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCRagdollPropFadeOutThinkPre(ref CRagdollPropFadeOutThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CRagdollPropFadeOutThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCRagdollPropFadeOutThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCRagdollPropFadeOutThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCRagdollPropFadeOutThinkPost(ref CRagdollPropFadeOutThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CRagdollPropFadeOutThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCRagdollPropFadeOutThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCRagdollPropFadeOutThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CRagdollPropFadeOutThinkHook : ICRagdollPropFadeOutThinkHook
+internal sealed class CRagdollPropFadeOutThinkHook(GameHooksService owner) : ICRagdollPropFadeOutThinkHook
 {
     private event OnCRagdollPropFadeOutThinkPreDelegate? _Pre;
     private event OnCRagdollPropFadeOutThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CRagdollPropFadeOutThinkHook : ICRagdollPropFadeOutThinkHo
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CRagdollPropFadeOutThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CRagdollPropFadeOutThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CRagdollPropFadeOutThinkHook : ICRagdollPropFadeOutThinkHo
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CRagdollPropFadeOutThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CRagdollPropFadeOutThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CRagdollPropFadeOutThinkHook : ICRagdollPropFadeOutThinkHo
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CRagdollPropFadeOutThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CRagdollPropFadeOutThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CRagdollPropFadeOutThinkHook : ICRagdollPropFadeOutThinkHo
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CRagdollPropFadeOutThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CRagdollPropFadeOutThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CRagdollPropFadeOutThinkHook : ICRagdollPropFadeOutThinkHo
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CRagdollPropFadeOutThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CRagdollPropFadeOutThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CRagdollPropFadeOutThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CRagdollPropFadeOutThink, owner);
         }
     }
 

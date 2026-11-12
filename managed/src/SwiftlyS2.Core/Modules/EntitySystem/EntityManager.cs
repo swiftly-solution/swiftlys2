@@ -5,9 +5,7 @@ namespace SwiftlyS2.Core.EntitySystem;
 
 internal static class EntityManager
 {
-    private static readonly CEntityInstance?[] _Entities = new CEntityInstance?[1 << 15];
-    private static readonly List<uint> _ActiveEntityIndices = [];
-    private static readonly Dictionary<nint, uint> _PtrToIndex = [];
+    private static readonly DenseSlotTable<CEntityInstance> _Entities = new(1 << 15);
     private static readonly CEntityInstanceImpl _Dummy = new(0);
     private static readonly Lock _lock = new();
 
@@ -24,9 +22,7 @@ internal static class EntityManager
         {
             try
             {
-                _Entities[index] = entity;
-                _ActiveEntityIndices.Add(index);
-                _PtrToIndex.Add(entityPtr, index);
+                _Entities.Set(index, entityPtr, entity);
                 return entity;
             }
             catch
@@ -42,7 +38,7 @@ internal static class EntityManager
         {
             try
             {
-                return _Entities[index];
+                return _Entities.Get(index);
             }
             catch
             {
@@ -57,7 +53,7 @@ internal static class EntityManager
 
         lock (_lock)
         {
-            return !_PtrToIndex.TryGetValue(address, out var value) ? null : _Entities[value];
+            return _Entities.GetByAddress(address);
         }
     }
 
@@ -67,19 +63,7 @@ internal static class EntityManager
 
         lock (_lock)
         {
-            try
-            {
-                if (!_PtrToIndex.TryGetValue(entityPtr, out var index))
-                {
-                    return;
-                }
-                _Entities[index] = null;
-                _ = _ActiveEntityIndices.Remove(index);
-                _ = _PtrToIndex.Remove(entityPtr);
-            }
-            catch
-            {
-            }
+            _ = _Entities.Remove(entityPtr);
         }
     }
 
@@ -87,14 +71,7 @@ internal static class EntityManager
     {
         lock (_lock)
         {
-            try
-            {
-                return _ActiveEntityIndices.Select(index => _Entities[index]!);
-            }
-            catch
-            {
-                return [];
-            }
+            return _Entities.ToList();
         }
     }
 
@@ -104,7 +81,7 @@ internal static class EntityManager
 
         lock (_lock)
         {
-            return _PtrToIndex.ContainsKey(address);
+            return _Entities.ContainsAddress(address);
         }
     }
 

@@ -78,25 +78,21 @@ internal static partial class GameHooksPublisher
 
     internal static void InvokeTakeDamagePre( ref TakeDamageEntityPreContext ctx )
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(HookListener.TakeDamage);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeTakeDamagePre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
-            }
+            subs[i].InvokeTakeDamagePre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
         }
     }
 
     internal static void InvokeTakeDamagePost( ref TakeDamageEntityPostContext ctx )
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(HookListener.TakeDamage);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeTakeDamagePost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
-            }
+            subs[i].InvokeTakeDamagePost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
         }
     }
 }

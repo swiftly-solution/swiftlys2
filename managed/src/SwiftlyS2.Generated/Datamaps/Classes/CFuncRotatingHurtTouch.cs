@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCFuncRotatingHurtTouchPre(ref CFuncRotatingHurtTouchPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CFuncRotatingHurtTouch);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCFuncRotatingHurtTouchPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCFuncRotatingHurtTouchPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCFuncRotatingHurtTouchPost(ref CFuncRotatingHurtTouchPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CFuncRotatingHurtTouch);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCFuncRotatingHurtTouchPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCFuncRotatingHurtTouchPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CFuncRotatingHurtTouchHook : ICFuncRotatingHurtTouchHook
+internal sealed class CFuncRotatingHurtTouchHook(GameHooksService owner) : ICFuncRotatingHurtTouchHook
 {
     private event OnCFuncRotatingHurtTouchPreDelegate? _Pre;
     private event OnCFuncRotatingHurtTouchPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CFuncRotatingHurtTouchHook : ICFuncRotatingHurtTouchHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncRotatingHurtTouch);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncRotatingHurtTouch, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CFuncRotatingHurtTouchHook : ICFuncRotatingHurtTouchHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncRotatingHurtTouch);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncRotatingHurtTouch, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CFuncRotatingHurtTouchHook : ICFuncRotatingHurtTouchHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncRotatingHurtTouch);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncRotatingHurtTouch, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CFuncRotatingHurtTouchHook : ICFuncRotatingHurtTouchHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncRotatingHurtTouch);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncRotatingHurtTouch, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CFuncRotatingHurtTouchHook : ICFuncRotatingHurtTouchHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncRotatingHurtTouch);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncRotatingHurtTouch, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncRotatingHurtTouch);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncRotatingHurtTouch, owner);
         }
     }
 

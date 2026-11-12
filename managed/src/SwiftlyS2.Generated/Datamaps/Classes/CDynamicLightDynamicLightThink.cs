@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCDynamicLightDynamicLightThinkPre(ref CDynamicLightDynamicLightThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CDynamicLightDynamicLightThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCDynamicLightDynamicLightThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCDynamicLightDynamicLightThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCDynamicLightDynamicLightThinkPost(ref CDynamicLightDynamicLightThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CDynamicLightDynamicLightThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCDynamicLightDynamicLightThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCDynamicLightDynamicLightThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CDynamicLightDynamicLightThinkHook : ICDynamicLightDynamicLightThinkHook
+internal sealed class CDynamicLightDynamicLightThinkHook(GameHooksService owner) : ICDynamicLightDynamicLightThinkHook
 {
     private event OnCDynamicLightDynamicLightThinkPreDelegate? _Pre;
     private event OnCDynamicLightDynamicLightThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CDynamicLightDynamicLightThinkHook : ICDynamicLightDynamic
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CDynamicLightDynamicLightThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CDynamicLightDynamicLightThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CDynamicLightDynamicLightThinkHook : ICDynamicLightDynamic
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CDynamicLightDynamicLightThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CDynamicLightDynamicLightThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CDynamicLightDynamicLightThinkHook : ICDynamicLightDynamic
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CDynamicLightDynamicLightThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CDynamicLightDynamicLightThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CDynamicLightDynamicLightThinkHook : ICDynamicLightDynamic
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CDynamicLightDynamicLightThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CDynamicLightDynamicLightThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CDynamicLightDynamicLightThinkHook : ICDynamicLightDynamic
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CDynamicLightDynamicLightThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CDynamicLightDynamicLightThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CDynamicLightDynamicLightThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CDynamicLightDynamicLightThink, owner);
         }
     }
 

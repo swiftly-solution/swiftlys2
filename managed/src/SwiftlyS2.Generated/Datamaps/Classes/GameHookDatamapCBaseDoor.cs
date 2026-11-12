@@ -2,15 +2,15 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class GameHookDatamapCBaseDoor : IGameHookDatamapCBaseDoor
+internal sealed class GameHookDatamapCBaseDoor(GameHooksService owner) : IGameHookDatamapCBaseDoor
 {
-    internal readonly CBaseDoorCloseAreaPortalsThinkHook CBaseDoorCloseAreaPortalsThinkHook = new();
-    internal readonly CBaseDoorDoorGoDownHook CBaseDoorDoorGoDownHook = new();
-    internal readonly CBaseDoorDoorGoUpHook CBaseDoorDoorGoUpHook = new();
-    internal readonly CBaseDoorDoorHitBottomHook CBaseDoorDoorHitBottomHook = new();
-    internal readonly CBaseDoorDoorHitTopHook CBaseDoorDoorHitTopHook = new();
-    internal readonly CBaseDoorDoorTouchHook CBaseDoorDoorTouchHook = new();
-    internal readonly CBaseDoorMovingSoundThinkHook CBaseDoorMovingSoundThinkHook = new();
+    internal readonly CBaseDoorCloseAreaPortalsThinkHook CBaseDoorCloseAreaPortalsThinkHook = new(owner);
+    internal readonly CBaseDoorDoorGoDownHook CBaseDoorDoorGoDownHook = new(owner);
+    internal readonly CBaseDoorDoorGoUpHook CBaseDoorDoorGoUpHook = new(owner);
+    internal readonly CBaseDoorDoorHitBottomHook CBaseDoorDoorHitBottomHook = new(owner);
+    internal readonly CBaseDoorDoorHitTopHook CBaseDoorDoorHitTopHook = new(owner);
+    internal readonly CBaseDoorDoorTouchHook CBaseDoorDoorTouchHook = new(owner);
+    internal readonly CBaseDoorMovingSoundThinkHook CBaseDoorMovingSoundThinkHook = new(owner);
 
     public ICBaseDoorCloseAreaPortalsThinkHook CloseAreaPortalsThink => CBaseDoorCloseAreaPortalsThinkHook;
     public ICBaseDoorDoorGoDownHook DoorGoDown => CBaseDoorDoorGoDownHook;

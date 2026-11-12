@@ -37,13 +37,6 @@ internal static class NativeConvars
         return ret;
     }
 
-    private unsafe static delegate* unmanaged<int, void> _RemoveQueryClientCvarCallback;
-
-    public unsafe static void RemoveQueryClientCvarCallback(int callbackID)
-    {
-        _RemoveQueryClientCvarCallback(callbackID);
-    }
-
     private unsafe static delegate* unmanaged<nint, ulong> _AddGlobalChangeListener;
 
     /// <summary>
@@ -113,17 +106,6 @@ internal static class NativeConvars
             {
                 _CreateConvar(cvarNameBufferPtr, cvarType, cvarFlags, helpMessageBufferPtr, defaultValue, minValue, maxValue);
             }
-        }
-    }
-
-    private unsafe static delegate* unmanaged<byte*, void> _DeleteConvar;
-
-    public unsafe static void DeleteConvar(string cvarName)
-    {
-        using var cvarNameStr = new ScopedCString(cvarName);
-        fixed (byte* cvarNameBufferPtr = cvarNameStr)
-        {
-            _DeleteConvar(cvarNameBufferPtr);
         }
     }
 

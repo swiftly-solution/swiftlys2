@@ -1,8 +1,4 @@
 {
-    "GameEntitySystem": {
-        "windows": 88,
-        "linux": 80
-    },
     "CBasePlayerPawn::CommitSuicide": {
         "windows": 387,
         "linux": 387

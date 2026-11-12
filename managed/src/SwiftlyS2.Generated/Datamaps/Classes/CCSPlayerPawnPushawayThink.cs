@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCCSPlayerPawnPushawayThinkPre(ref CCSPlayerPawnPushawayThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CCSPlayerPawnPushawayThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCCSPlayerPawnPushawayThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCCSPlayerPawnPushawayThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCCSPlayerPawnPushawayThinkPost(ref CCSPlayerPawnPushawayThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CCSPlayerPawnPushawayThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCCSPlayerPawnPushawayThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCCSPlayerPawnPushawayThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CCSPlayerPawnPushawayThinkHook : ICCSPlayerPawnPushawayThinkHook
+internal sealed class CCSPlayerPawnPushawayThinkHook(GameHooksService owner) : ICCSPlayerPawnPushawayThinkHook
 {
     private event OnCCSPlayerPawnPushawayThinkPreDelegate? _Pre;
     private event OnCCSPlayerPawnPushawayThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CCSPlayerPawnPushawayThinkHook : ICCSPlayerPawnPushawayThi
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CCSPlayerPawnPushawayThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CCSPlayerPawnPushawayThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CCSPlayerPawnPushawayThinkHook : ICCSPlayerPawnPushawayThi
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerPawnPushawayThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerPawnPushawayThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CCSPlayerPawnPushawayThinkHook : ICCSPlayerPawnPushawayThi
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CCSPlayerPawnPushawayThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CCSPlayerPawnPushawayThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CCSPlayerPawnPushawayThinkHook : ICCSPlayerPawnPushawayThi
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerPawnPushawayThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerPawnPushawayThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CCSPlayerPawnPushawayThinkHook : ICCSPlayerPawnPushawayThi
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerPawnPushawayThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerPawnPushawayThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerPawnPushawayThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerPawnPushawayThink, owner);
         }
     }
 

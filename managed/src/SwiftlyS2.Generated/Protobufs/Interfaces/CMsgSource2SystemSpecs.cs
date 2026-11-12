@@ -12,6 +12,9 @@ public interface CMsgSource2SystemSpecs : ITypedProtobuf<CMsgSource2SystemSpecs>
     public string CpuBrand { get; set; }
     public uint CpuModel { get; set; }
     public uint CpuNumPhysical { get; set; }
+    public uint CpuNumLogical { get; set; }
+    public uint CpuNumPerformance { get; set; }
+    public uint CpuNumEfficiency { get; set; }
     public uint RamPhysicalTotalMb { get; set; }
     public string GpuRendersystemDllName { get; set; }
     public uint GpuVendorId { get; set; }
@@ -22,4 +25,5 @@ public interface CMsgSource2SystemSpecs : ITypedProtobuf<CMsgSource2SystemSpecs>
     public uint GpuTextureMemorySizeMb { get; set; }
     public uint BackbufferWidth { get; set; }
     public uint BackbufferHeight { get; set; }
+    public uint ThreadPoolWorkers { get; set; }
 }

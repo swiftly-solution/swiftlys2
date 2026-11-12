@@ -2,7 +2,7 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class CheckJumpButtonModernMovementHook : ICheckJumpButtonModernMovementHook
+internal sealed class CheckJumpButtonModernMovementHook( GameHooksService owner ) : ICheckJumpButtonModernMovementHook
 {
     internal event OnCheckJumpButtonModernMovementPreDelegate? _Pre;
     internal event OnCheckJumpButtonModernMovementPostDelegate? _Post;
@@ -11,13 +11,13 @@ internal sealed class CheckJumpButtonModernMovementHook : ICheckJumpButtonModern
     {
         add
         {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.CheckJumpButtonModern);
+            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.CheckJumpButtonModern, owner);
             _Pre += value;
         }
         remove
         {
             _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.CheckJumpButtonModern);
+            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.CheckJumpButtonModern, owner);
         }
     }
 
@@ -25,13 +25,13 @@ internal sealed class CheckJumpButtonModernMovementHook : ICheckJumpButtonModern
     {
         add
         {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.CheckJumpButtonModern);
+            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.CheckJumpButtonModern, owner);
             _Post += value;
         }
         remove
         {
             _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.CheckJumpButtonModern);
+            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.CheckJumpButtonModern, owner);
         }
     }
 
@@ -43,7 +43,7 @@ internal sealed class CheckJumpButtonModernMovementHook : ICheckJumpButtonModern
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.CheckJumpButtonModern);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.CheckJumpButtonModern);
+        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.CheckJumpButtonModern, owner);
+        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.CheckJumpButtonModern, owner);
     }
 }

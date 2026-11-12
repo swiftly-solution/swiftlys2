@@ -2,7 +2,7 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class ProcessUsercmdsHook : IProcessUsercmdsHook
+internal sealed class ProcessUsercmdsHook( GameHooksService owner ) : IProcessUsercmdsHook
 {
     private event OnProcessUsercmdsPreDelegate? _Pre;
     private event OnProcessUsercmdsPostDelegate? _Post;
@@ -11,13 +11,13 @@ internal sealed class ProcessUsercmdsHook : IProcessUsercmdsHook
     {
         add
         {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.ProcessUsercmds);
+            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.ProcessUsercmds, owner);
             _Pre += value;
         }
         remove
         {
             _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.ProcessUsercmds);
+            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.ProcessUsercmds, owner);
         }
     }
 
@@ -25,13 +25,13 @@ internal sealed class ProcessUsercmdsHook : IProcessUsercmdsHook
     {
         add
         {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.ProcessUsercmds);
+            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.ProcessUsercmds, owner);
             _Post += value;
         }
         remove
         {
             _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.ProcessUsercmds);
+            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.ProcessUsercmds, owner);
         }
     }
 
@@ -43,7 +43,7 @@ internal sealed class ProcessUsercmdsHook : IProcessUsercmdsHook
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.ProcessUsercmds);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.ProcessUsercmds);
+        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.ProcessUsercmds, owner);
+        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.ProcessUsercmds, owner);
     }
 }

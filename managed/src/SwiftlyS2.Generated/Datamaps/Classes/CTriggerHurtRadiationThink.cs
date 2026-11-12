@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCTriggerHurtRadiationThinkPre(ref CTriggerHurtRadiationThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CTriggerHurtRadiationThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCTriggerHurtRadiationThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCTriggerHurtRadiationThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCTriggerHurtRadiationThinkPost(ref CTriggerHurtRadiationThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CTriggerHurtRadiationThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCTriggerHurtRadiationThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCTriggerHurtRadiationThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CTriggerHurtRadiationThinkHook : ICTriggerHurtRadiationThinkHook
+internal sealed class CTriggerHurtRadiationThinkHook(GameHooksService owner) : ICTriggerHurtRadiationThinkHook
 {
     private event OnCTriggerHurtRadiationThinkPreDelegate? _Pre;
     private event OnCTriggerHurtRadiationThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CTriggerHurtRadiationThinkHook : ICTriggerHurtRadiationThi
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerHurtRadiationThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerHurtRadiationThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CTriggerHurtRadiationThinkHook : ICTriggerHurtRadiationThi
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerHurtRadiationThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerHurtRadiationThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CTriggerHurtRadiationThinkHook : ICTriggerHurtRadiationThi
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerHurtRadiationThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerHurtRadiationThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CTriggerHurtRadiationThinkHook : ICTriggerHurtRadiationThi
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerHurtRadiationThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerHurtRadiationThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CTriggerHurtRadiationThinkHook : ICTriggerHurtRadiationThi
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerHurtRadiationThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerHurtRadiationThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerHurtRadiationThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerHurtRadiationThink, owner);
         }
     }
 

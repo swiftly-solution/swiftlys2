@@ -2,7 +2,7 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class CheckWaterMovementHook : ICheckWaterMovementHook
+internal sealed class CheckWaterMovementHook( GameHooksService owner ) : ICheckWaterMovementHook
 {
     internal event OnCheckWaterMovementPreDelegate? _Pre;
     internal event OnCheckWaterMovementPostDelegate? _Post;
@@ -11,13 +11,13 @@ internal sealed class CheckWaterMovementHook : ICheckWaterMovementHook
     {
         add
         {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.CheckWater);
+            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.CheckWater, owner);
             _Pre += value;
         }
         remove
         {
             _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.CheckWater);
+            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.CheckWater, owner);
         }
     }
 
@@ -25,13 +25,13 @@ internal sealed class CheckWaterMovementHook : ICheckWaterMovementHook
     {
         add
         {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.CheckWater);
+            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.CheckWater, owner);
             _Post += value;
         }
         remove
         {
             _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.CheckWater);
+            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.CheckWater, owner);
         }
     }
 
@@ -43,7 +43,7 @@ internal sealed class CheckWaterMovementHook : ICheckWaterMovementHook
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.CheckWater);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.CheckWater);
+        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.CheckWater, owner);
+        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.CheckWater, owner);
     }
 }

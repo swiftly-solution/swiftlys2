@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCMultiLightProxyApproachBrightnessThinkPre(ref CMultiLightProxyApproachBrightnessThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CMultiLightProxyApproachBrightnessThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCMultiLightProxyApproachBrightnessThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCMultiLightProxyApproachBrightnessThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCMultiLightProxyApproachBrightnessThinkPost(ref CMultiLightProxyApproachBrightnessThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CMultiLightProxyApproachBrightnessThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCMultiLightProxyApproachBrightnessThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCMultiLightProxyApproachBrightnessThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CMultiLightProxyApproachBrightnessThinkHook : ICMultiLightProxyApproachBrightnessThinkHook
+internal sealed class CMultiLightProxyApproachBrightnessThinkHook(GameHooksService owner) : ICMultiLightProxyApproachBrightnessThinkHook
 {
     private event OnCMultiLightProxyApproachBrightnessThinkPreDelegate? _Pre;
     private event OnCMultiLightProxyApproachBrightnessThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CMultiLightProxyApproachBrightnessThinkHook : ICMultiLight
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CMultiLightProxyApproachBrightnessThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CMultiLightProxyApproachBrightnessThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CMultiLightProxyApproachBrightnessThinkHook : ICMultiLight
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMultiLightProxyApproachBrightnessThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMultiLightProxyApproachBrightnessThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CMultiLightProxyApproachBrightnessThinkHook : ICMultiLight
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CMultiLightProxyApproachBrightnessThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CMultiLightProxyApproachBrightnessThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CMultiLightProxyApproachBrightnessThinkHook : ICMultiLight
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMultiLightProxyApproachBrightnessThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMultiLightProxyApproachBrightnessThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CMultiLightProxyApproachBrightnessThinkHook : ICMultiLight
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMultiLightProxyApproachBrightnessThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMultiLightProxyApproachBrightnessThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMultiLightProxyApproachBrightnessThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMultiLightProxyApproachBrightnessThink, owner);
         }
     }
 

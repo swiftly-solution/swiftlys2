@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCItemComeToRestPre(ref CItemComeToRestPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CItemComeToRest);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCItemComeToRestPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCItemComeToRestPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCItemComeToRestPost(ref CItemComeToRestPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CItemComeToRest);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCItemComeToRestPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCItemComeToRestPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CItemComeToRestHook : ICItemComeToRestHook
+internal sealed class CItemComeToRestHook(GameHooksService owner) : ICItemComeToRestHook
 {
     private event OnCItemComeToRestPreDelegate? _Pre;
     private event OnCItemComeToRestPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CItemComeToRestHook : ICItemComeToRestHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CItemComeToRest);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CItemComeToRest, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CItemComeToRestHook : ICItemComeToRestHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemComeToRest);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemComeToRest, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CItemComeToRestHook : ICItemComeToRestHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CItemComeToRest);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CItemComeToRest, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CItemComeToRestHook : ICItemComeToRestHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemComeToRest);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemComeToRest, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CItemComeToRestHook : ICItemComeToRestHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemComeToRest);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemComeToRest, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemComeToRest);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemComeToRest, owner);
         }
     }
 

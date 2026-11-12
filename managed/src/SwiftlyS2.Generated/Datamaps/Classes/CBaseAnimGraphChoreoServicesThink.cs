@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCBaseAnimGraphChoreoServicesThinkPre(ref CBaseAnimGraphChoreoServicesThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseAnimGraphChoreoServicesThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseAnimGraphChoreoServicesThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseAnimGraphChoreoServicesThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCBaseAnimGraphChoreoServicesThinkPost(ref CBaseAnimGraphChoreoServicesThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseAnimGraphChoreoServicesThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseAnimGraphChoreoServicesThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseAnimGraphChoreoServicesThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CBaseAnimGraphChoreoServicesThinkHook : ICBaseAnimGraphChoreoServicesThinkHook
+internal sealed class CBaseAnimGraphChoreoServicesThinkHook(GameHooksService owner) : ICBaseAnimGraphChoreoServicesThinkHook
 {
     private event OnCBaseAnimGraphChoreoServicesThinkPreDelegate? _Pre;
     private event OnCBaseAnimGraphChoreoServicesThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CBaseAnimGraphChoreoServicesThinkHook : ICBaseAnimGraphCho
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseAnimGraphChoreoServicesThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseAnimGraphChoreoServicesThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CBaseAnimGraphChoreoServicesThinkHook : ICBaseAnimGraphCho
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseAnimGraphChoreoServicesThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseAnimGraphChoreoServicesThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CBaseAnimGraphChoreoServicesThinkHook : ICBaseAnimGraphCho
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseAnimGraphChoreoServicesThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseAnimGraphChoreoServicesThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CBaseAnimGraphChoreoServicesThinkHook : ICBaseAnimGraphCho
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseAnimGraphChoreoServicesThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseAnimGraphChoreoServicesThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CBaseAnimGraphChoreoServicesThinkHook : ICBaseAnimGraphCho
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseAnimGraphChoreoServicesThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseAnimGraphChoreoServicesThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseAnimGraphChoreoServicesThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseAnimGraphChoreoServicesThink, owner);
         }
     }
 

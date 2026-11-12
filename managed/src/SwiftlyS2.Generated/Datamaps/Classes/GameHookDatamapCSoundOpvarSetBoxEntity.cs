@@ -2,9 +2,9 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class GameHookDatamapCSoundOpvarSetBoxEntity : IGameHookDatamapCSoundOpvarSetBoxEntity
+internal sealed class GameHookDatamapCSoundOpvarSetBoxEntity(GameHooksService owner) : IGameHookDatamapCSoundOpvarSetBoxEntity
 {
-    internal readonly CSoundOpvarSetBoxEntitySetOpvarThinkHook CSoundOpvarSetBoxEntitySetOpvarThinkHook = new();
+    internal readonly CSoundOpvarSetBoxEntitySetOpvarThinkHook CSoundOpvarSetBoxEntitySetOpvarThinkHook = new(owner);
 
     public ICSoundOpvarSetBoxEntitySetOpvarThinkHook SetOpvarThink => CSoundOpvarSetBoxEntitySetOpvarThinkHook;
 

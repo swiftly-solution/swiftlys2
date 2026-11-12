@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCTriggerGravityGravityTouchPre(ref CTriggerGravityGravityTouchPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CTriggerGravityGravityTouch);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCTriggerGravityGravityTouchPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCTriggerGravityGravityTouchPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCTriggerGravityGravityTouchPost(ref CTriggerGravityGravityTouchPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CTriggerGravityGravityTouch);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCTriggerGravityGravityTouchPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCTriggerGravityGravityTouchPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CTriggerGravityGravityTouchHook : ICTriggerGravityGravityTouchHook
+internal sealed class CTriggerGravityGravityTouchHook(GameHooksService owner) : ICTriggerGravityGravityTouchHook
 {
     private event OnCTriggerGravityGravityTouchPreDelegate? _Pre;
     private event OnCTriggerGravityGravityTouchPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CTriggerGravityGravityTouchHook : ICTriggerGravityGravityT
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerGravityGravityTouch);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerGravityGravityTouch, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CTriggerGravityGravityTouchHook : ICTriggerGravityGravityT
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerGravityGravityTouch);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerGravityGravityTouch, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CTriggerGravityGravityTouchHook : ICTriggerGravityGravityT
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerGravityGravityTouch);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerGravityGravityTouch, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CTriggerGravityGravityTouchHook : ICTriggerGravityGravityT
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerGravityGravityTouch);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerGravityGravityTouch, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CTriggerGravityGravityTouchHook : ICTriggerGravityGravityT
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerGravityGravityTouch);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerGravityGravityTouch, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerGravityGravityTouch);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerGravityGravityTouch, owner);
         }
     }
 

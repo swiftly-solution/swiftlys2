@@ -2,7 +2,7 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class FullWalkMoveMovementHook : IFullWalkMoveMovementHook
+internal sealed class FullWalkMoveMovementHook( GameHooksService owner ) : IFullWalkMoveMovementHook
 {
     internal event OnFullWalkMoveMovementPreDelegate? _Pre;
     internal event OnFullWalkMoveMovementPostDelegate? _Post;
@@ -11,13 +11,13 @@ internal sealed class FullWalkMoveMovementHook : IFullWalkMoveMovementHook
     {
         add
         {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.FullWalkMove);
+            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.FullWalkMove, owner);
             _Pre += value;
         }
         remove
         {
             _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.FullWalkMove);
+            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.FullWalkMove, owner);
         }
     }
 
@@ -25,13 +25,13 @@ internal sealed class FullWalkMoveMovementHook : IFullWalkMoveMovementHook
     {
         add
         {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.FullWalkMove);
+            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.FullWalkMove, owner);
             _Post += value;
         }
         remove
         {
             _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.FullWalkMove);
+            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.FullWalkMove, owner);
         }
     }
 
@@ -43,7 +43,7 @@ internal sealed class FullWalkMoveMovementHook : IFullWalkMoveMovementHook
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.FullWalkMove);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.FullWalkMove);
+        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.FullWalkMove, owner);
+        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.FullWalkMove, owner);
     }
 }

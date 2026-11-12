@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCTriggerSaveRetriggerWaitOverPre(ref CTriggerSaveRetriggerWaitOverPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CTriggerSaveRetriggerWaitOver);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCTriggerSaveRetriggerWaitOverPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCTriggerSaveRetriggerWaitOverPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCTriggerSaveRetriggerWaitOverPost(ref CTriggerSaveRetriggerWaitOverPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CTriggerSaveRetriggerWaitOver);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCTriggerSaveRetriggerWaitOverPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCTriggerSaveRetriggerWaitOverPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CTriggerSaveRetriggerWaitOverHook : ICTriggerSaveRetriggerWaitOverHook
+internal sealed class CTriggerSaveRetriggerWaitOverHook(GameHooksService owner) : ICTriggerSaveRetriggerWaitOverHook
 {
     private event OnCTriggerSaveRetriggerWaitOverPreDelegate? _Pre;
     private event OnCTriggerSaveRetriggerWaitOverPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CTriggerSaveRetriggerWaitOverHook : ICTriggerSaveRetrigger
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerSaveRetriggerWaitOver);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerSaveRetriggerWaitOver, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CTriggerSaveRetriggerWaitOverHook : ICTriggerSaveRetrigger
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerSaveRetriggerWaitOver);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerSaveRetriggerWaitOver, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CTriggerSaveRetriggerWaitOverHook : ICTriggerSaveRetrigger
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerSaveRetriggerWaitOver);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerSaveRetriggerWaitOver, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CTriggerSaveRetriggerWaitOverHook : ICTriggerSaveRetrigger
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerSaveRetriggerWaitOver);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerSaveRetriggerWaitOver, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CTriggerSaveRetriggerWaitOverHook : ICTriggerSaveRetrigger
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerSaveRetriggerWaitOver);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerSaveRetriggerWaitOver, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerSaveRetriggerWaitOver);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerSaveRetriggerWaitOver, owner);
         }
     }
 

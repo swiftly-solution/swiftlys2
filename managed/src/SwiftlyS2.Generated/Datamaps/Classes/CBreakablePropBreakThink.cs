@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCBreakablePropBreakThinkPre(ref CBreakablePropBreakThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBreakablePropBreakThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBreakablePropBreakThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBreakablePropBreakThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCBreakablePropBreakThinkPost(ref CBreakablePropBreakThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBreakablePropBreakThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBreakablePropBreakThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBreakablePropBreakThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CBreakablePropBreakThinkHook : ICBreakablePropBreakThinkHook
+internal sealed class CBreakablePropBreakThinkHook(GameHooksService owner) : ICBreakablePropBreakThinkHook
 {
     private event OnCBreakablePropBreakThinkPreDelegate? _Pre;
     private event OnCBreakablePropBreakThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CBreakablePropBreakThinkHook : ICBreakablePropBreakThinkHo
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBreakablePropBreakThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBreakablePropBreakThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CBreakablePropBreakThinkHook : ICBreakablePropBreakThinkHo
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBreakablePropBreakThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBreakablePropBreakThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CBreakablePropBreakThinkHook : ICBreakablePropBreakThinkHo
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBreakablePropBreakThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBreakablePropBreakThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CBreakablePropBreakThinkHook : ICBreakablePropBreakThinkHo
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBreakablePropBreakThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBreakablePropBreakThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CBreakablePropBreakThinkHook : ICBreakablePropBreakThinkHo
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBreakablePropBreakThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBreakablePropBreakThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBreakablePropBreakThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBreakablePropBreakThink, owner);
         }
     }
 

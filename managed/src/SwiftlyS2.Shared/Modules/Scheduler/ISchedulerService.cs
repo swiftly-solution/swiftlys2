@@ -104,6 +104,39 @@ public interface ISchedulerService
   public Task<T> NextWorldUpdateAsync<T>( Func<T> task );
 
   /// <summary>
+  /// Executes the task immediately if called from the main thread, otherwise queues it for the next tick (or next world update).
+  /// </summary>
+  /// <param name="task">The task to execute.</param>
+  /// <param name="onWorldUpdate">When queued, run on the next world update instead of the next tick.</param>
+  /// <returns>A task that is already completed when ran immediately, otherwise completes after the queued execution.</returns>
+  public Task QueueOrNow( Action task, bool onWorldUpdate = false );
+
+  /// <summary>
+  /// Executes the task immediately if called from the main thread, otherwise queues it for the next tick (or next world update).
+  /// </summary>
+  /// <typeparam name="T">The result type.</typeparam>
+  /// <param name="task">The task to execute.</param>
+  /// <param name="onWorldUpdate">When queued, run on the next world update instead of the next tick.</param>
+  /// <returns>A task holding the result, already completed when ran immediately.</returns>
+  public Task<T> QueueOrNow<T>( Func<T> task, bool onWorldUpdate = false );
+
+  /// <summary>
+  /// Never use this! you should never calls async callback in QueueOrNow,
+  /// because async callback have chance to run in async context, which breaks the the synchronization safety this function gives.
+  /// </summary>
+  /// <exception cref="InvalidOperationException">Thrown when this method is called.</exception>
+  [Obsolete("Please remove the async modifier on your callback for safety reason. See comments for more details.")]
+  public Task QueueOrNow( Func<Task?> task, bool onWorldUpdate = false );
+
+  /// <summary>
+  /// Never use this! you should never calls async callback in QueueOrNow,
+  /// because async callback have chance to run in async context, which breaks the the synchronization safety this function gives.
+  /// </summary>
+  /// <exception cref="InvalidOperationException">Thrown when this method is called.</exception>
+  [Obsolete("Please remove the async modifier on your callback for safety reason. See comments for more details.")]
+  public Task<T> QueueOrNow<T>( Func<Task<T?>> task, bool onWorldUpdate = false );
+
+  /// <summary>
   /// Add a delayed task to the scheduler.
   /// </summary>
   /// <param name="delayTick">The delay of the timer in ticks.</param>

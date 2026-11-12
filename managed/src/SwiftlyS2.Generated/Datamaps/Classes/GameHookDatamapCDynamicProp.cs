@@ -2,9 +2,9 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class GameHookDatamapCDynamicProp : IGameHookDatamapCDynamicProp
+internal sealed class GameHookDatamapCDynamicProp(GameHooksService owner) : IGameHookDatamapCDynamicProp
 {
-    internal readonly CDynamicPropAnimThinkHook CDynamicPropAnimThinkHook = new();
+    internal readonly CDynamicPropAnimThinkHook CDynamicPropAnimThinkHook = new(owner);
 
     public ICDynamicPropAnimThinkHook AnimThink => CDynamicPropAnimThinkHook;
 

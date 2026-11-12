@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCPointCommentaryNodeUpdateViewPostThinkPre(ref CPointCommentaryNodeUpdateViewPostThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CPointCommentaryNodeUpdateViewPostThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCPointCommentaryNodeUpdateViewPostThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCPointCommentaryNodeUpdateViewPostThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCPointCommentaryNodeUpdateViewPostThinkPost(ref CPointCommentaryNodeUpdateViewPostThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CPointCommentaryNodeUpdateViewPostThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCPointCommentaryNodeUpdateViewPostThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCPointCommentaryNodeUpdateViewPostThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CPointCommentaryNodeUpdateViewPostThinkHook : ICPointCommentaryNodeUpdateViewPostThinkHook
+internal sealed class CPointCommentaryNodeUpdateViewPostThinkHook(GameHooksService owner) : ICPointCommentaryNodeUpdateViewPostThinkHook
 {
     private event OnCPointCommentaryNodeUpdateViewPostThinkPreDelegate? _Pre;
     private event OnCPointCommentaryNodeUpdateViewPostThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CPointCommentaryNodeUpdateViewPostThinkHook : ICPointComme
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPointCommentaryNodeUpdateViewPostThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPointCommentaryNodeUpdateViewPostThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CPointCommentaryNodeUpdateViewPostThinkHook : ICPointComme
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointCommentaryNodeUpdateViewPostThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointCommentaryNodeUpdateViewPostThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CPointCommentaryNodeUpdateViewPostThinkHook : ICPointComme
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPointCommentaryNodeUpdateViewPostThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPointCommentaryNodeUpdateViewPostThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CPointCommentaryNodeUpdateViewPostThinkHook : ICPointComme
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointCommentaryNodeUpdateViewPostThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointCommentaryNodeUpdateViewPostThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CPointCommentaryNodeUpdateViewPostThinkHook : ICPointComme
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointCommentaryNodeUpdateViewPostThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointCommentaryNodeUpdateViewPostThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointCommentaryNodeUpdateViewPostThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointCommentaryNodeUpdateViewPostThink, owner);
         }
     }
 

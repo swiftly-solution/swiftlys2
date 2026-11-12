@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCFuncTrackTrainNearestPathPre(ref CFuncTrackTrainNearestPathPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CFuncTrackTrainNearestPath);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCFuncTrackTrainNearestPathPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCFuncTrackTrainNearestPathPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCFuncTrackTrainNearestPathPost(ref CFuncTrackTrainNearestPathPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CFuncTrackTrainNearestPath);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCFuncTrackTrainNearestPathPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCFuncTrackTrainNearestPathPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CFuncTrackTrainNearestPathHook : ICFuncTrackTrainNearestPathHook
+internal sealed class CFuncTrackTrainNearestPathHook(GameHooksService owner) : ICFuncTrackTrainNearestPathHook
 {
     private event OnCFuncTrackTrainNearestPathPreDelegate? _Pre;
     private event OnCFuncTrackTrainNearestPathPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CFuncTrackTrainNearestPathHook : ICFuncTrackTrainNearestPa
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncTrackTrainNearestPath);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncTrackTrainNearestPath, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CFuncTrackTrainNearestPathHook : ICFuncTrackTrainNearestPa
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrackTrainNearestPath);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrackTrainNearestPath, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CFuncTrackTrainNearestPathHook : ICFuncTrackTrainNearestPa
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncTrackTrainNearestPath);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncTrackTrainNearestPath, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CFuncTrackTrainNearestPathHook : ICFuncTrackTrainNearestPa
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrackTrainNearestPath);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrackTrainNearestPath, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CFuncTrackTrainNearestPathHook : ICFuncTrackTrainNearestPa
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrackTrainNearestPath);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrackTrainNearestPath, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrackTrainNearestPath);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrackTrainNearestPath, owner);
         }
     }
 

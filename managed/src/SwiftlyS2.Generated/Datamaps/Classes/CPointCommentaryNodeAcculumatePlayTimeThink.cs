@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCPointCommentaryNodeAcculumatePlayTimeThinkPre(ref CPointCommentaryNodeAcculumatePlayTimeThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CPointCommentaryNodeAcculumatePlayTimeThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCPointCommentaryNodeAcculumatePlayTimeThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCPointCommentaryNodeAcculumatePlayTimeThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCPointCommentaryNodeAcculumatePlayTimeThinkPost(ref CPointCommentaryNodeAcculumatePlayTimeThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CPointCommentaryNodeAcculumatePlayTimeThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCPointCommentaryNodeAcculumatePlayTimeThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCPointCommentaryNodeAcculumatePlayTimeThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CPointCommentaryNodeAcculumatePlayTimeThinkHook : ICPointCommentaryNodeAcculumatePlayTimeThinkHook
+internal sealed class CPointCommentaryNodeAcculumatePlayTimeThinkHook(GameHooksService owner) : ICPointCommentaryNodeAcculumatePlayTimeThinkHook
 {
     private event OnCPointCommentaryNodeAcculumatePlayTimeThinkPreDelegate? _Pre;
     private event OnCPointCommentaryNodeAcculumatePlayTimeThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CPointCommentaryNodeAcculumatePlayTimeThinkHook : ICPointC
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPointCommentaryNodeAcculumatePlayTimeThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPointCommentaryNodeAcculumatePlayTimeThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CPointCommentaryNodeAcculumatePlayTimeThinkHook : ICPointC
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointCommentaryNodeAcculumatePlayTimeThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointCommentaryNodeAcculumatePlayTimeThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CPointCommentaryNodeAcculumatePlayTimeThinkHook : ICPointC
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPointCommentaryNodeAcculumatePlayTimeThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPointCommentaryNodeAcculumatePlayTimeThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CPointCommentaryNodeAcculumatePlayTimeThinkHook : ICPointC
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointCommentaryNodeAcculumatePlayTimeThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointCommentaryNodeAcculumatePlayTimeThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CPointCommentaryNodeAcculumatePlayTimeThinkHook : ICPointC
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointCommentaryNodeAcculumatePlayTimeThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointCommentaryNodeAcculumatePlayTimeThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointCommentaryNodeAcculumatePlayTimeThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPointCommentaryNodeAcculumatePlayTimeThink, owner);
         }
     }
 

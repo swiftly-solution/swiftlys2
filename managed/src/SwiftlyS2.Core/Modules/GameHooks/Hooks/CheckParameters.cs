@@ -75,25 +75,21 @@ internal static partial class GameHooksPublisher
 
     internal static void InvokeCheckParametersPre( ref CheckParametersMovementPreContext ctx )
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(HookListener.CheckParameters);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeCheckParametersPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
-            }
+            subs[i].InvokeCheckParametersPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
         }
     }
 
     internal static void InvokeCheckParametersPost( ref CheckParametersMovementPostContext ctx )
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(HookListener.CheckParameters);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeCheckParametersPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
-            }
+            subs[i].InvokeCheckParametersPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
         }
     }
 }

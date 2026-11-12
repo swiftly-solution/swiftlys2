@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCItemGenericItemGenericTouchPre(ref CItemGenericItemGenericTouchPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CItemGenericItemGenericTouch);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCItemGenericItemGenericTouchPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCItemGenericItemGenericTouchPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCItemGenericItemGenericTouchPost(ref CItemGenericItemGenericTouchPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CItemGenericItemGenericTouch);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCItemGenericItemGenericTouchPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCItemGenericItemGenericTouchPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CItemGenericItemGenericTouchHook : ICItemGenericItemGenericTouchHook
+internal sealed class CItemGenericItemGenericTouchHook(GameHooksService owner) : ICItemGenericItemGenericTouchHook
 {
     private event OnCItemGenericItemGenericTouchPreDelegate? _Pre;
     private event OnCItemGenericItemGenericTouchPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CItemGenericItemGenericTouchHook : ICItemGenericItemGeneri
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CItemGenericItemGenericTouch);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CItemGenericItemGenericTouch, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CItemGenericItemGenericTouchHook : ICItemGenericItemGeneri
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemGenericItemGenericTouch);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemGenericItemGenericTouch, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CItemGenericItemGenericTouchHook : ICItemGenericItemGeneri
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CItemGenericItemGenericTouch);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CItemGenericItemGenericTouch, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CItemGenericItemGenericTouchHook : ICItemGenericItemGeneri
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemGenericItemGenericTouch);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemGenericItemGenericTouch, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CItemGenericItemGenericTouchHook : ICItemGenericItemGeneri
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemGenericItemGenericTouch);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemGenericItemGenericTouch, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemGenericItemGenericTouch);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemGenericItemGenericTouch, owner);
         }
     }
 

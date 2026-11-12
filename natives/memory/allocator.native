@@ -3,8 +3,5 @@ class Allocator
 ptr Alloc = uint64 size
 void Free = ptr pointer
 ptr Resize = ptr pointer, uint64 new_size
-uint64 GetSize = ptr pointer // works only for pointers allocated through Memory.Allocator
-uint64 GetTotalAllocated = void
-bool IsPointerValid = ptr pointer
 void Copy = ptr dst, ptr src, uint64 size
 void Move = ptr dst, ptr src, uint64 size

@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCBaseEntitySUB_KillSelfPre(ref CBaseEntitySUB_KillSelfPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseEntitySUB_KillSelf);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseEntitySUB_KillSelfPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseEntitySUB_KillSelfPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCBaseEntitySUB_KillSelfPost(ref CBaseEntitySUB_KillSelfPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseEntitySUB_KillSelf);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseEntitySUB_KillSelfPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseEntitySUB_KillSelfPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CBaseEntitySUB_KillSelfHook : ICBaseEntitySUB_KillSelfHook
+internal sealed class CBaseEntitySUB_KillSelfHook(GameHooksService owner) : ICBaseEntitySUB_KillSelfHook
 {
     private event OnCBaseEntitySUB_KillSelfPreDelegate? _Pre;
     private event OnCBaseEntitySUB_KillSelfPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CBaseEntitySUB_KillSelfHook : ICBaseEntitySUB_KillSelfHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseEntitySUB_KillSelf);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseEntitySUB_KillSelf, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CBaseEntitySUB_KillSelfHook : ICBaseEntitySUB_KillSelfHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseEntitySUB_KillSelf);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseEntitySUB_KillSelf, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CBaseEntitySUB_KillSelfHook : ICBaseEntitySUB_KillSelfHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseEntitySUB_KillSelf);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseEntitySUB_KillSelf, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CBaseEntitySUB_KillSelfHook : ICBaseEntitySUB_KillSelfHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseEntitySUB_KillSelf);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseEntitySUB_KillSelf, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CBaseEntitySUB_KillSelfHook : ICBaseEntitySUB_KillSelfHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseEntitySUB_KillSelf);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseEntitySUB_KillSelf, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseEntitySUB_KillSelf);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseEntitySUB_KillSelf, owner);
         }
     }
 

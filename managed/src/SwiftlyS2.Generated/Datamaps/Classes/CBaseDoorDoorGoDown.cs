@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCBaseDoorDoorGoDownPre(ref CBaseDoorDoorGoDownPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseDoorDoorGoDown);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseDoorDoorGoDownPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseDoorDoorGoDownPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCBaseDoorDoorGoDownPost(ref CBaseDoorDoorGoDownPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseDoorDoorGoDown);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseDoorDoorGoDownPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseDoorDoorGoDownPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CBaseDoorDoorGoDownHook : ICBaseDoorDoorGoDownHook
+internal sealed class CBaseDoorDoorGoDownHook(GameHooksService owner) : ICBaseDoorDoorGoDownHook
 {
     private event OnCBaseDoorDoorGoDownPreDelegate? _Pre;
     private event OnCBaseDoorDoorGoDownPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CBaseDoorDoorGoDownHook : ICBaseDoorDoorGoDownHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseDoorDoorGoDown);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseDoorDoorGoDown, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CBaseDoorDoorGoDownHook : ICBaseDoorDoorGoDownHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseDoorDoorGoDown);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseDoorDoorGoDown, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CBaseDoorDoorGoDownHook : ICBaseDoorDoorGoDownHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseDoorDoorGoDown);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseDoorDoorGoDown, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CBaseDoorDoorGoDownHook : ICBaseDoorDoorGoDownHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseDoorDoorGoDown);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseDoorDoorGoDown, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CBaseDoorDoorGoDownHook : ICBaseDoorDoorGoDownHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseDoorDoorGoDown);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseDoorDoorGoDown, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseDoorDoorGoDown);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseDoorDoorGoDown, owner);
         }
     }
 

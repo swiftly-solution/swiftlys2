@@ -30,11 +30,6 @@ public:
     virtual void* Alloc(uint64_t size) = 0;
     virtual void Free(void* ptr) = 0;
     virtual void* Resize(void* ptr, uint64_t newSize) = 0;
-    virtual uint64_t GetSize(void* ptr) = 0;
-
-    virtual uint64_t GetTotalAllocated() = 0;
-
-    virtual bool IsPointerValid(void* ptr) = 0;
 
     virtual void Copy(void* dest, void* src, uint64_t size) = 0;
     virtual void Move(void* dest, void* src, uint64_t size) = 0;

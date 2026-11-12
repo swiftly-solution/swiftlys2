@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCHostageHostageThinkPre(ref CHostageHostageThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CHostageHostageThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCHostageHostageThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCHostageHostageThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCHostageHostageThinkPost(ref CHostageHostageThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CHostageHostageThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCHostageHostageThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCHostageHostageThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CHostageHostageThinkHook : ICHostageHostageThinkHook
+internal sealed class CHostageHostageThinkHook(GameHooksService owner) : ICHostageHostageThinkHook
 {
     private event OnCHostageHostageThinkPreDelegate? _Pre;
     private event OnCHostageHostageThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CHostageHostageThinkHook : ICHostageHostageThinkHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CHostageHostageThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CHostageHostageThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CHostageHostageThinkHook : ICHostageHostageThinkHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CHostageHostageThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CHostageHostageThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CHostageHostageThinkHook : ICHostageHostageThinkHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CHostageHostageThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CHostageHostageThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CHostageHostageThinkHook : ICHostageHostageThinkHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CHostageHostageThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CHostageHostageThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CHostageHostageThinkHook : ICHostageHostageThinkHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CHostageHostageThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CHostageHostageThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CHostageHostageThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CHostageHostageThink, owner);
         }
     }
 

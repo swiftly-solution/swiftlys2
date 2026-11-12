@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCHostageRescueZoneHostageRescueTouchPre(ref CHostageRescueZoneHostageRescueTouchPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CHostageRescueZoneHostageRescueTouch);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCHostageRescueZoneHostageRescueTouchPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCHostageRescueZoneHostageRescueTouchPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCHostageRescueZoneHostageRescueTouchPost(ref CHostageRescueZoneHostageRescueTouchPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CHostageRescueZoneHostageRescueTouch);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCHostageRescueZoneHostageRescueTouchPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCHostageRescueZoneHostageRescueTouchPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CHostageRescueZoneHostageRescueTouchHook : ICHostageRescueZoneHostageRescueTouchHook
+internal sealed class CHostageRescueZoneHostageRescueTouchHook(GameHooksService owner) : ICHostageRescueZoneHostageRescueTouchHook
 {
     private event OnCHostageRescueZoneHostageRescueTouchPreDelegate? _Pre;
     private event OnCHostageRescueZoneHostageRescueTouchPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CHostageRescueZoneHostageRescueTouchHook : ICHostageRescue
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CHostageRescueZoneHostageRescueTouch);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CHostageRescueZoneHostageRescueTouch, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CHostageRescueZoneHostageRescueTouchHook : ICHostageRescue
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CHostageRescueZoneHostageRescueTouch);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CHostageRescueZoneHostageRescueTouch, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CHostageRescueZoneHostageRescueTouchHook : ICHostageRescue
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CHostageRescueZoneHostageRescueTouch);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CHostageRescueZoneHostageRescueTouch, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CHostageRescueZoneHostageRescueTouchHook : ICHostageRescue
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CHostageRescueZoneHostageRescueTouch);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CHostageRescueZoneHostageRescueTouch, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CHostageRescueZoneHostageRescueTouchHook : ICHostageRescue
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CHostageRescueZoneHostageRescueTouch);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CHostageRescueZoneHostageRescueTouch, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CHostageRescueZoneHostageRescueTouch);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CHostageRescueZoneHostageRescueTouch, owner);
         }
     }
 

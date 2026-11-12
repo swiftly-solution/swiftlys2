@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCBaseDoorMovingSoundThinkPre(ref CBaseDoorMovingSoundThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseDoorMovingSoundThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseDoorMovingSoundThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseDoorMovingSoundThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCBaseDoorMovingSoundThinkPost(ref CBaseDoorMovingSoundThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseDoorMovingSoundThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseDoorMovingSoundThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseDoorMovingSoundThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CBaseDoorMovingSoundThinkHook : ICBaseDoorMovingSoundThinkHook
+internal sealed class CBaseDoorMovingSoundThinkHook(GameHooksService owner) : ICBaseDoorMovingSoundThinkHook
 {
     private event OnCBaseDoorMovingSoundThinkPreDelegate? _Pre;
     private event OnCBaseDoorMovingSoundThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CBaseDoorMovingSoundThinkHook : ICBaseDoorMovingSoundThink
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseDoorMovingSoundThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseDoorMovingSoundThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CBaseDoorMovingSoundThinkHook : ICBaseDoorMovingSoundThink
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseDoorMovingSoundThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseDoorMovingSoundThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CBaseDoorMovingSoundThinkHook : ICBaseDoorMovingSoundThink
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseDoorMovingSoundThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseDoorMovingSoundThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CBaseDoorMovingSoundThinkHook : ICBaseDoorMovingSoundThink
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseDoorMovingSoundThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseDoorMovingSoundThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CBaseDoorMovingSoundThinkHook : ICBaseDoorMovingSoundThink
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseDoorMovingSoundThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseDoorMovingSoundThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseDoorMovingSoundThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseDoorMovingSoundThink, owner);
         }
     }
 

@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCPathMoverEntitySpawnerSpawnThinkPre(ref CPathMoverEntitySpawnerSpawnThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CPathMoverEntitySpawnerSpawnThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCPathMoverEntitySpawnerSpawnThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCPathMoverEntitySpawnerSpawnThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCPathMoverEntitySpawnerSpawnThinkPost(ref CPathMoverEntitySpawnerSpawnThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CPathMoverEntitySpawnerSpawnThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCPathMoverEntitySpawnerSpawnThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCPathMoverEntitySpawnerSpawnThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CPathMoverEntitySpawnerSpawnThinkHook : ICPathMoverEntitySpawnerSpawnThinkHook
+internal sealed class CPathMoverEntitySpawnerSpawnThinkHook(GameHooksService owner) : ICPathMoverEntitySpawnerSpawnThinkHook
 {
     private event OnCPathMoverEntitySpawnerSpawnThinkPreDelegate? _Pre;
     private event OnCPathMoverEntitySpawnerSpawnThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CPathMoverEntitySpawnerSpawnThinkHook : ICPathMoverEntityS
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPathMoverEntitySpawnerSpawnThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPathMoverEntitySpawnerSpawnThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CPathMoverEntitySpawnerSpawnThinkHook : ICPathMoverEntityS
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPathMoverEntitySpawnerSpawnThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPathMoverEntitySpawnerSpawnThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CPathMoverEntitySpawnerSpawnThinkHook : ICPathMoverEntityS
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPathMoverEntitySpawnerSpawnThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPathMoverEntitySpawnerSpawnThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CPathMoverEntitySpawnerSpawnThinkHook : ICPathMoverEntityS
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPathMoverEntitySpawnerSpawnThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPathMoverEntitySpawnerSpawnThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CPathMoverEntitySpawnerSpawnThinkHook : ICPathMoverEntityS
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPathMoverEntitySpawnerSpawnThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPathMoverEntitySpawnerSpawnThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPathMoverEntitySpawnerSpawnThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPathMoverEntitySpawnerSpawnThink, owner);
         }
     }
 

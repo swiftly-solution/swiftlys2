@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCGenericConstraintUpdateThinkPre(ref CGenericConstraintUpdateThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CGenericConstraintUpdateThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCGenericConstraintUpdateThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCGenericConstraintUpdateThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCGenericConstraintUpdateThinkPost(ref CGenericConstraintUpdateThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CGenericConstraintUpdateThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCGenericConstraintUpdateThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCGenericConstraintUpdateThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CGenericConstraintUpdateThinkHook : ICGenericConstraintUpdateThinkHook
+internal sealed class CGenericConstraintUpdateThinkHook(GameHooksService owner) : ICGenericConstraintUpdateThinkHook
 {
     private event OnCGenericConstraintUpdateThinkPreDelegate? _Pre;
     private event OnCGenericConstraintUpdateThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CGenericConstraintUpdateThinkHook : ICGenericConstraintUpd
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CGenericConstraintUpdateThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CGenericConstraintUpdateThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CGenericConstraintUpdateThinkHook : ICGenericConstraintUpd
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CGenericConstraintUpdateThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CGenericConstraintUpdateThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CGenericConstraintUpdateThinkHook : ICGenericConstraintUpd
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CGenericConstraintUpdateThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CGenericConstraintUpdateThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CGenericConstraintUpdateThinkHook : ICGenericConstraintUpd
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CGenericConstraintUpdateThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CGenericConstraintUpdateThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CGenericConstraintUpdateThinkHook : ICGenericConstraintUpd
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CGenericConstraintUpdateThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CGenericConstraintUpdateThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CGenericConstraintUpdateThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CGenericConstraintUpdateThink, owner);
         }
     }
 

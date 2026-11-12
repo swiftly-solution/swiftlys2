@@ -2,7 +2,7 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class DuckMovementHook : IDuckMovementHook
+internal sealed class DuckMovementHook( GameHooksService owner ) : IDuckMovementHook
 {
     internal event OnDuckMovementPreDelegate? _Pre;
     internal event OnDuckMovementPostDelegate? _Post;
@@ -11,13 +11,13 @@ internal sealed class DuckMovementHook : IDuckMovementHook
     {
         add
         {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.Duck);
+            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.Duck, owner);
             _Pre += value;
         }
         remove
         {
             _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.Duck);
+            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.Duck, owner);
         }
     }
 
@@ -25,13 +25,13 @@ internal sealed class DuckMovementHook : IDuckMovementHook
     {
         add
         {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.Duck);
+            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.Duck, owner);
             _Post += value;
         }
         remove
         {
             _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.Duck);
+            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.Duck, owner);
         }
     }
 
@@ -43,7 +43,7 @@ internal sealed class DuckMovementHook : IDuckMovementHook
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.Duck);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.Duck);
+        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.Duck, owner);
+        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.Duck, owner);
     }
 }

@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCCSWeaponBaseDefaultTouchPre(ref CCSWeaponBaseDefaultTouchPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CCSWeaponBaseDefaultTouch);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCCSWeaponBaseDefaultTouchPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCCSWeaponBaseDefaultTouchPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCCSWeaponBaseDefaultTouchPost(ref CCSWeaponBaseDefaultTouchPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CCSWeaponBaseDefaultTouch);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCCSWeaponBaseDefaultTouchPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCCSWeaponBaseDefaultTouchPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CCSWeaponBaseDefaultTouchHook : ICCSWeaponBaseDefaultTouchHook
+internal sealed class CCSWeaponBaseDefaultTouchHook(GameHooksService owner) : ICCSWeaponBaseDefaultTouchHook
 {
     private event OnCCSWeaponBaseDefaultTouchPreDelegate? _Pre;
     private event OnCCSWeaponBaseDefaultTouchPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CCSWeaponBaseDefaultTouchHook : ICCSWeaponBaseDefaultTouch
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CCSWeaponBaseDefaultTouch);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CCSWeaponBaseDefaultTouch, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CCSWeaponBaseDefaultTouchHook : ICCSWeaponBaseDefaultTouch
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSWeaponBaseDefaultTouch);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSWeaponBaseDefaultTouch, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CCSWeaponBaseDefaultTouchHook : ICCSWeaponBaseDefaultTouch
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CCSWeaponBaseDefaultTouch);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CCSWeaponBaseDefaultTouch, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CCSWeaponBaseDefaultTouchHook : ICCSWeaponBaseDefaultTouch
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSWeaponBaseDefaultTouch);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSWeaponBaseDefaultTouch, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CCSWeaponBaseDefaultTouchHook : ICCSWeaponBaseDefaultTouch
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSWeaponBaseDefaultTouch);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSWeaponBaseDefaultTouch, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSWeaponBaseDefaultTouch);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSWeaponBaseDefaultTouch, owner);
         }
     }
 

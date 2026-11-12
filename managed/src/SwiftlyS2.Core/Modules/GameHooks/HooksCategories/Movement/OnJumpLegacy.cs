@@ -2,7 +2,7 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class OnJumpLegacyMovementHook : IOnJumpLegacyMovementHook
+internal sealed class OnJumpLegacyMovementHook( GameHooksService owner ) : IOnJumpLegacyMovementHook
 {
     internal event OnOnJumpLegacyMovementPreDelegate? _Pre;
     internal event OnOnJumpLegacyMovementPostDelegate? _Post;
@@ -11,13 +11,13 @@ internal sealed class OnJumpLegacyMovementHook : IOnJumpLegacyMovementHook
     {
         add
         {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.OnJumpLegacy);
+            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.OnJumpLegacy, owner);
             _Pre += value;
         }
         remove
         {
             _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.OnJumpLegacy);
+            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.OnJumpLegacy, owner);
         }
     }
 
@@ -25,13 +25,13 @@ internal sealed class OnJumpLegacyMovementHook : IOnJumpLegacyMovementHook
     {
         add
         {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.OnJumpLegacy);
+            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.OnJumpLegacy, owner);
             _Post += value;
         }
         remove
         {
             _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.OnJumpLegacy);
+            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.OnJumpLegacy, owner);
         }
     }
 
@@ -43,7 +43,7 @@ internal sealed class OnJumpLegacyMovementHook : IOnJumpLegacyMovementHook
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.OnJumpLegacy);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.OnJumpLegacy);
+        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.OnJumpLegacy, owner);
+        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.OnJumpLegacy, owner);
     }
 }

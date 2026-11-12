@@ -43,27 +43,6 @@ void* MemoryAllocator::Resize(void* ptr, uint64_t newSize)
     return realloc(ptr, newSize);
 }
 
-uint64_t MemoryAllocator::GetSize(void* ptr)
-{
-    PROFILE_FUNCTION();
-
-    return _msize(ptr);
-}
-
-uint64_t MemoryAllocator::GetTotalAllocated()
-{
-    PROFILE_FUNCTION();
-
-    return totalAllocated;
-}
-
-bool MemoryAllocator::IsPointerValid(void* ptr)
-{
-    PROFILE_FUNCTION();
-
-    return true;
-}
-
 void MemoryAllocator::Copy(void* dest, void* src, uint64_t size)
 {
     PROFILE_FUNCTION();

@@ -2,18 +2,18 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class GameHookDatamapCBaseModelEntity : IGameHookDatamapCBaseModelEntity
+internal sealed class GameHookDatamapCBaseModelEntity(GameHooksService owner) : IGameHookDatamapCBaseModelEntity
 {
-    internal readonly CBaseModelEntityProcessSceneEventsThinkHook CBaseModelEntityProcessSceneEventsThinkHook = new();
-    internal readonly CBaseModelEntitySUB_DissolveIfUncarriedHook CBaseModelEntitySUB_DissolveIfUncarriedHook = new();
-    internal readonly CBaseModelEntitySUB_FadeOutHook CBaseModelEntitySUB_FadeOutHook = new();
-    internal readonly CBaseModelEntitySUB_PerformShadowFadeInHook CBaseModelEntitySUB_PerformShadowFadeInHook = new();
-    internal readonly CBaseModelEntitySUB_PerformShadowFadeOutHook CBaseModelEntitySUB_PerformShadowFadeOutHook = new();
-    internal readonly CBaseModelEntitySUB_StartFadeOutHook CBaseModelEntitySUB_StartFadeOutHook = new();
-    internal readonly CBaseModelEntitySUB_StartFadeOutInstantHook CBaseModelEntitySUB_StartFadeOutInstantHook = new();
-    internal readonly CBaseModelEntitySUB_StartShadowFadeInHook CBaseModelEntitySUB_StartShadowFadeInHook = new();
-    internal readonly CBaseModelEntitySUB_StartShadowFadeOutHook CBaseModelEntitySUB_StartShadowFadeOutHook = new();
-    internal readonly CBaseModelEntitySUB_StopShadowFadeHook CBaseModelEntitySUB_StopShadowFadeHook = new();
+    internal readonly CBaseModelEntityProcessSceneEventsThinkHook CBaseModelEntityProcessSceneEventsThinkHook = new(owner);
+    internal readonly CBaseModelEntitySUB_DissolveIfUncarriedHook CBaseModelEntitySUB_DissolveIfUncarriedHook = new(owner);
+    internal readonly CBaseModelEntitySUB_FadeOutHook CBaseModelEntitySUB_FadeOutHook = new(owner);
+    internal readonly CBaseModelEntitySUB_PerformShadowFadeInHook CBaseModelEntitySUB_PerformShadowFadeInHook = new(owner);
+    internal readonly CBaseModelEntitySUB_PerformShadowFadeOutHook CBaseModelEntitySUB_PerformShadowFadeOutHook = new(owner);
+    internal readonly CBaseModelEntitySUB_StartFadeOutHook CBaseModelEntitySUB_StartFadeOutHook = new(owner);
+    internal readonly CBaseModelEntitySUB_StartFadeOutInstantHook CBaseModelEntitySUB_StartFadeOutInstantHook = new(owner);
+    internal readonly CBaseModelEntitySUB_StartShadowFadeInHook CBaseModelEntitySUB_StartShadowFadeInHook = new(owner);
+    internal readonly CBaseModelEntitySUB_StartShadowFadeOutHook CBaseModelEntitySUB_StartShadowFadeOutHook = new(owner);
+    internal readonly CBaseModelEntitySUB_StopShadowFadeHook CBaseModelEntitySUB_StopShadowFadeHook = new(owner);
 
     public ICBaseModelEntityProcessSceneEventsThinkHook ProcessSceneEventsThink => CBaseModelEntityProcessSceneEventsThinkHook;
     public ICBaseModelEntitySUB_DissolveIfUncarriedHook SUB_DissolveIfUncarried => CBaseModelEntitySUB_DissolveIfUncarriedHook;

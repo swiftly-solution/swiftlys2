@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCFuncTrackTrainDeadEndPre(ref CFuncTrackTrainDeadEndPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CFuncTrackTrainDeadEnd);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCFuncTrackTrainDeadEndPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCFuncTrackTrainDeadEndPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCFuncTrackTrainDeadEndPost(ref CFuncTrackTrainDeadEndPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CFuncTrackTrainDeadEnd);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCFuncTrackTrainDeadEndPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCFuncTrackTrainDeadEndPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CFuncTrackTrainDeadEndHook : ICFuncTrackTrainDeadEndHook
+internal sealed class CFuncTrackTrainDeadEndHook(GameHooksService owner) : ICFuncTrackTrainDeadEndHook
 {
     private event OnCFuncTrackTrainDeadEndPreDelegate? _Pre;
     private event OnCFuncTrackTrainDeadEndPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CFuncTrackTrainDeadEndHook : ICFuncTrackTrainDeadEndHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncTrackTrainDeadEnd);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncTrackTrainDeadEnd, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CFuncTrackTrainDeadEndHook : ICFuncTrackTrainDeadEndHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrackTrainDeadEnd);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrackTrainDeadEnd, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CFuncTrackTrainDeadEndHook : ICFuncTrackTrainDeadEndHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncTrackTrainDeadEnd);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncTrackTrainDeadEnd, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CFuncTrackTrainDeadEndHook : ICFuncTrackTrainDeadEndHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrackTrainDeadEnd);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrackTrainDeadEnd, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CFuncTrackTrainDeadEndHook : ICFuncTrackTrainDeadEndHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrackTrainDeadEnd);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrackTrainDeadEnd, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrackTrainDeadEnd);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrackTrainDeadEnd, owner);
         }
     }
 

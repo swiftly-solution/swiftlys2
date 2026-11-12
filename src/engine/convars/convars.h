@@ -25,8 +25,11 @@
 #include <public/tier0/icvar.h>
 #include <public/tier0/convar.h>
 
+#include <functional>
 #include <map>
 #include <optional>
+#include <string>
+#include <string_view>
 #include <unordered_map>
 
 // lookups by const char* or string_view without creating a std::string
@@ -40,39 +43,32 @@ struct ConvarNameHash
 class CConvarManager : public IConvarManager, public IConVarListener
 {
 public:
-    virtual void Initialize() override;
-    virtual void Shutdown() override;
+    void Initialize() override;
+    void Shutdown() override;
 
-    virtual void QueryClientConvar(int playerid, const std::string& cvar_name) override;
-    virtual int AddQueryClientCvarCallback(std::function<void(int, std::string, std::string)> callback) override;
-    virtual void RemoveQueryClientCvarCallback(int callback_id) override;
-    virtual void OnClientQueryCvar(int playerid, const std::string& cvar_name, const std::string& cvar_value) override;
-    virtual void OnConvarChanged(ConVarRefAbstract* ref, CSplitScreenSlot slot, const char* new_value, const char* old_value) override;
+    void QueryClientConvar(int playerid, const std::string& cvar_name) override;
+    int AddQueryClientCvarCallback(std::function<void(int, std::string, std::string)> callback) override;
+    void OnClientQueryCvar(int playerid, const std::string& cvar_name, const std::string& cvar_value) override;
+    void OnConvarChanged(ConVarRefAbstract* ref, CSplitScreenSlot slot, const char* new_value, const char* old_value) override;
 
-    virtual void CreateConvar(const std::string& cvar_name, EConVarType type, uint64_t flags, const char* help_message, const ConvarValue& defaultValue, const std::optional<ConvarValue>& minValue = std::nullopt, const std::optional<ConvarValue>& maxValue = std::nullopt) override;
-    virtual void DeleteConvar(const std::string& cvar_name) override;
+    void CreateConvar(const std::string& cvar_name, EConVarType type, uint64_t flags, const char* help_message, const ConvarValue& defaultValue, const std::optional<ConvarValue>& minValue = std::nullopt, const std::optional<ConvarValue>& maxValue = std::nullopt) override;
 
-    virtual ConVarRefAbstract& GetConvarRef(const char* cvar_name) override;
+    [[nodiscard]] ConVarRefAbstract& GetConvarRef(const char* cvar_name) override;
 
-    virtual uint64_t AddGlobalChangeListener(std::function<void(const char*, int, const char*, const char*)> callback) override;
-    virtual void RemoveGlobalChangeListener(uint64_t callback_id) override;
+    uint64_t AddGlobalChangeListener(std::function<void(const char*, int, const char*, const char*)> callback) override;
+    void RemoveGlobalChangeListener(uint64_t callback_id) override;
 
-    virtual uint64_t AddConvarCreatedListener(std::function<void(const char*)> callback) override;
-    virtual void RemoveConvarCreatedListener(uint64_t callback_id) override;
+    uint64_t AddConvarCreatedListener(std::function<void(const char*)> callback) override;
+    void RemoveConvarCreatedListener(uint64_t callback_id) override;
 
-    virtual uint64_t AddConCommandCreatedListener(std::function<void(const char*)> callback) override;
-    virtual void RemoveConCommandCreatedListener(uint64_t callback_id) override;
+    uint64_t AddConCommandCreatedListener(std::function<void(const char*)> callback) override;
+    void RemoveConCommandCreatedListener(uint64_t callback_id) override;
 
     // IConVarListener
-    virtual void OnConVarCreated(ConVarRefAbstract* pNewCvar) override;
-    virtual void OnConCommandCreated(ConCommand* pNewCommand) override;
-private:
-    struct CreatedConvar
-    {
-        void* convar = nullptr;
-        void (*free)(void*) = nullptr;
-    };
+    void OnConVarCreated(ConVarRefAbstract* pNewCvar) override;
+    void OnConCommandCreated(ConCommand* pNewCommand) override;
 
+private:
     template <typename Callback>
     using Listeners = std::map<uint64_t, Callback>;
 
@@ -97,7 +93,6 @@ private:
     std::map<int, std::function<void(int, std::string, std::string)>> m_queryCallbacks;
 
     std::mutex m_mtxConvars;
-    std::map<std::string, CreatedConvar> m_createdConvars;
     std::unordered_map<std::string, ConVarRefAbstract, ConvarNameHash, std::equal_to<>> m_convarRefs;
 };
 

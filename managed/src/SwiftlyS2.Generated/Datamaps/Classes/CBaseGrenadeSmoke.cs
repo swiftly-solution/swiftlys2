@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCBaseGrenadeSmokePre(ref CBaseGrenadeSmokePreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseGrenadeSmoke);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseGrenadeSmokePre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseGrenadeSmokePre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCBaseGrenadeSmokePost(ref CBaseGrenadeSmokePostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseGrenadeSmoke);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseGrenadeSmokePost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseGrenadeSmokePost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CBaseGrenadeSmokeHook : ICBaseGrenadeSmokeHook
+internal sealed class CBaseGrenadeSmokeHook(GameHooksService owner) : ICBaseGrenadeSmokeHook
 {
     private event OnCBaseGrenadeSmokePreDelegate? _Pre;
     private event OnCBaseGrenadeSmokePostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CBaseGrenadeSmokeHook : ICBaseGrenadeSmokeHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseGrenadeSmoke);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseGrenadeSmoke, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CBaseGrenadeSmokeHook : ICBaseGrenadeSmokeHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeSmoke);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeSmoke, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CBaseGrenadeSmokeHook : ICBaseGrenadeSmokeHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseGrenadeSmoke);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseGrenadeSmoke, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CBaseGrenadeSmokeHook : ICBaseGrenadeSmokeHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeSmoke);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeSmoke, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CBaseGrenadeSmokeHook : ICBaseGrenadeSmokeHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeSmoke);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeSmoke, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeSmoke);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseGrenadeSmoke, owner);
         }
     }
 

@@ -80,25 +80,21 @@ internal static partial class GameHooksPublisher
 
     internal static void InvokeAirAcceleratePre( ref AirAccelerateMovementPreContext ctx )
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(HookListener.AirAccelerate);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeAirAcceleratePre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
-            }
+            subs[i].InvokeAirAcceleratePre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
         }
     }
 
     internal static void InvokeAirAcceleratePost( ref AirAccelerateMovementPostContext ctx )
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(HookListener.AirAccelerate);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeAirAcceleratePost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
-            }
+            subs[i].InvokeAirAcceleratePost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
         }
     }
 }

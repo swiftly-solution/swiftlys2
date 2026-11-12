@@ -1,12 +1,10 @@
 using System.Numerics;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 
 namespace SwiftlyS2.Shared.Misc;
 
 /// <summary>
 /// A thread-safe cell, the counterpart of C++ <c>std::atomic&lt;T&gt;</c>.
-/// Every operation is atomic and acts as a full memory barrier.
+/// Every operation is atomic and acts as a full memory barrier, except <see cref="Load"/> on 4- and 8-byte types, which is an acquire load.
 /// </summary>
 /// <typeparam name="T">The value type to store.</typeparam>
 public sealed class Atomic<T> where T : struct
@@ -29,7 +27,7 @@ public sealed class Atomic<T> where T : struct
     /// <summary>
     /// Reads the current value.
     /// </summary>
-    public T Load() => Interlocked.CompareExchange(ref cell, default, default);
+    public T Load() => AtomicOps.Load(ref cell);
 
     /// <summary>
     /// Overwrites the current value.
@@ -50,17 +48,7 @@ public sealed class Atomic<T> where T : struct
     /// <c>compare_exchange_strong</c>: stores <paramref name="desired"/> only if the current value equals <paramref name="expected"/>.
     /// On failure <paramref name="expected"/> is overwritten with the value that was actually found.
     /// </summary>
-    public bool TryCompareExchange( ref T expected, T desired )
-    {
-        var seen = Interlocked.CompareExchange(ref cell, desired, expected);
-        if (BitEquals(seen, expected))
-        {
-            return true;
-        }
-
-        expected = seen;
-        return false;
-    }
+    public bool TryCompareExchange( ref T expected, T desired ) => AtomicOps.TryCompareExchange(ref cell, ref expected, desired);
 
     /// <summary>
     /// Reads the current value, like the C++ <c>operator T</c>.
@@ -69,9 +57,7 @@ public sealed class Atomic<T> where T : struct
 
     public override string ToString() => Load().ToString() ?? string.Empty;
 
-    private static bool BitEquals( T a, T b ) =>
-        MemoryMarshal.CreateReadOnlySpan(ref Unsafe.As<T, byte>(ref a), Unsafe.SizeOf<T>())
-            .SequenceEqual(MemoryMarshal.CreateReadOnlySpan(ref Unsafe.As<T, byte>(ref b), Unsafe.SizeOf<T>()));
+    internal ref T Cell => ref cell;
 }
 
 /// <summary>
@@ -79,33 +65,18 @@ public sealed class Atomic<T> where T : struct
 /// </summary>
 public static class AtomicExtensions
 {
-    public static T FetchAdd<T>( this Atomic<T> atomic, T operand ) where T : struct, IBinaryInteger<T> => Fetch(atomic, operand, static ( a, b ) => a + b);
-    public static T FetchSub<T>( this Atomic<T> atomic, T operand ) where T : struct, IBinaryInteger<T> => Fetch(atomic, operand, static ( a, b ) => a - b);
-    public static T FetchAnd<T>( this Atomic<T> atomic, T operand ) where T : struct, IBinaryInteger<T> => Fetch(atomic, operand, static ( a, b ) => a & b);
-    public static T FetchOr<T>( this Atomic<T> atomic, T operand ) where T : struct, IBinaryInteger<T> => Fetch(atomic, operand, static ( a, b ) => a | b);
-    public static T FetchXor<T>( this Atomic<T> atomic, T operand ) where T : struct, IBinaryInteger<T> => Fetch(atomic, operand, static ( a, b ) => a ^ b);
+    public static T FetchAdd<T>( this Atomic<T> atomic, T operand ) where T : struct, IBinaryInteger<T> => AtomicOps.FetchAdd(ref atomic.Cell, operand);
+    public static T FetchSub<T>( this Atomic<T> atomic, T operand ) where T : struct, IBinaryInteger<T> => AtomicOps.FetchSub(ref atomic.Cell, operand);
+    public static T FetchXor<T>( this Atomic<T> atomic, T operand ) where T : struct, IBinaryInteger<T> => AtomicOps.FetchXor(ref atomic.Cell, operand);
+    public static T FetchAnd<T>( this Atomic<T> atomic, T operand ) where T : struct, IBinaryInteger<T> => AtomicOps.FetchAnd(ref atomic.Cell, operand);
+    public static T FetchOr<T>( this Atomic<T> atomic, T operand ) where T : struct, IBinaryInteger<T> => AtomicOps.FetchOr(ref atomic.Cell, operand);
 
-    public static T Add<T>( this Atomic<T> atomic, T operand ) where T : struct, IBinaryInteger<T> => atomic.FetchAdd(operand) + operand;
-    public static T Sub<T>( this Atomic<T> atomic, T operand ) where T : struct, IBinaryInteger<T> => atomic.FetchSub(operand) - operand;
-    public static T And<T>( this Atomic<T> atomic, T operand ) where T : struct, IBinaryInteger<T> => atomic.FetchAnd(operand) & operand;
-    public static T Or<T>( this Atomic<T> atomic, T operand ) where T : struct, IBinaryInteger<T> => atomic.FetchOr(operand) | operand;
-    public static T Xor<T>( this Atomic<T> atomic, T operand ) where T : struct, IBinaryInteger<T> => atomic.FetchXor(operand) ^ operand;
+    public static T Add<T>( this Atomic<T> atomic, T operand ) where T : struct, IBinaryInteger<T> => AtomicOps.Add(ref atomic.Cell, operand);
+    public static T Sub<T>( this Atomic<T> atomic, T operand ) where T : struct, IBinaryInteger<T> => AtomicOps.Sub(ref atomic.Cell, operand);
+    public static T And<T>( this Atomic<T> atomic, T operand ) where T : struct, IBinaryInteger<T> => AtomicOps.And(ref atomic.Cell, operand);
+    public static T Or<T>( this Atomic<T> atomic, T operand ) where T : struct, IBinaryInteger<T> => AtomicOps.Or(ref atomic.Cell, operand);
+    public static T Xor<T>( this Atomic<T> atomic, T operand ) where T : struct, IBinaryInteger<T> => AtomicOps.Xor(ref atomic.Cell, operand);
 
-    public static T Increment<T>( this Atomic<T> atomic ) where T : struct, IBinaryInteger<T> => atomic.Add(T.One);
-    public static T Decrement<T>( this Atomic<T> atomic ) where T : struct, IBinaryInteger<T> => atomic.Sub(T.One);
-
-    private static T Fetch<T>( Atomic<T> atomic, T operand, Func<T, T, T> op ) where T : struct, IBinaryInteger<T>
-    {
-        var seen = atomic.Load();
-        while (true)
-        {
-            var previous = atomic.CompareExchange(op(seen, operand), seen);
-            if (previous == seen)
-            {
-                return previous;
-            }
-
-            seen = previous;
-        }
-    }
+    public static T Increment<T>( this Atomic<T> atomic ) where T : struct, IBinaryInteger<T> => AtomicOps.Add(ref atomic.Cell, T.One);
+    public static T Decrement<T>( this Atomic<T> atomic ) where T : struct, IBinaryInteger<T> => AtomicOps.Sub(ref atomic.Cell, T.One);
 }

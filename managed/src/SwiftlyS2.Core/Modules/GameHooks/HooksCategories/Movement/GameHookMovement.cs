@@ -2,33 +2,33 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class GameHookMovement : IGameHookMovement
+internal sealed class GameHookMovement( GameHooksService owner ) : IGameHookMovement
 {
-    internal readonly RunCommandMovementHook RunCommandHook = new();
-    internal readonly SetupMoveMovementHook SetupMoveHook = new();
-    internal readonly ProcessMovementMovementHook ProcessMovementHook = new();
-    internal readonly CheckFallingMovementHook CheckFallingHook = new();
-    internal readonly CategorizePositionMovementHook CategorizePositionHook = new();
-    internal readonly TryPlayerMoveMovementHook TryPlayerMoveHook = new();
-    internal readonly WalkMoveMovementHook WalkMoveHook = new();
-    internal readonly FrictionMovementHook FrictionHook = new();
-    internal readonly AirAccelerateMovementHook AirAccelerateHook = new();
-    internal readonly AirMoveMovementHook AirMoveHook = new();
-    internal readonly OnJumpModernMovementHook OnJumpModernHook = new();
-    internal readonly OnJumpLegacyMovementHook OnJumpLegacyHook = new();
-    internal readonly CheckJumpButtonModernMovementHook CheckJumpButtonModernHook = new();
-    internal readonly CheckJumpButtonLegacyMovementHook CheckJumpButtonLegacyHook = new();
-    internal readonly LadderMoveMovementHook LadderMoveHook = new();
-    internal readonly CanUnduckMovementHook CanUnduckHook = new();
-    internal readonly DuckMovementHook DuckHook = new();
-    internal readonly CheckVelocityMovementHook CheckVelocityHook = new();
-    internal readonly WaterMoveMovementHook WaterMoveHook = new();
-    internal readonly CheckWaterMovementHook CheckWaterHook = new();
-    internal readonly MoveInitMovementHook MoveInitHook = new();
-    internal readonly FullWalkMoveMovementHook FullWalkMoveHook = new();
-    internal readonly CheckParametersMovementHook CheckParametersHook = new();
-    internal readonly PlayerMoveMovementHook PlayerMoveHook = new();
-    internal readonly GroundAccelerateMovementHook GroundAccelerateHook = new();
+    internal readonly RunCommandMovementHook RunCommandHook = new(owner);
+    internal readonly SetupMoveMovementHook SetupMoveHook = new(owner);
+    internal readonly ProcessMovementMovementHook ProcessMovementHook = new(owner);
+    internal readonly CheckFallingMovementHook CheckFallingHook = new(owner);
+    internal readonly CategorizePositionMovementHook CategorizePositionHook = new(owner);
+    internal readonly TryPlayerMoveMovementHook TryPlayerMoveHook = new(owner);
+    internal readonly WalkMoveMovementHook WalkMoveHook = new(owner);
+    internal readonly FrictionMovementHook FrictionHook = new(owner);
+    internal readonly AirAccelerateMovementHook AirAccelerateHook = new(owner);
+    internal readonly AirMoveMovementHook AirMoveHook = new(owner);
+    internal readonly OnJumpModernMovementHook OnJumpModernHook = new(owner);
+    internal readonly OnJumpLegacyMovementHook OnJumpLegacyHook = new(owner);
+    internal readonly CheckJumpButtonModernMovementHook CheckJumpButtonModernHook = new(owner);
+    internal readonly CheckJumpButtonLegacyMovementHook CheckJumpButtonLegacyHook = new(owner);
+    internal readonly LadderMoveMovementHook LadderMoveHook = new(owner);
+    internal readonly CanUnduckMovementHook CanUnduckHook = new(owner);
+    internal readonly DuckMovementHook DuckHook = new(owner);
+    internal readonly CheckVelocityMovementHook CheckVelocityHook = new(owner);
+    internal readonly WaterMoveMovementHook WaterMoveHook = new(owner);
+    internal readonly CheckWaterMovementHook CheckWaterHook = new(owner);
+    internal readonly MoveInitMovementHook MoveInitHook = new(owner);
+    internal readonly FullWalkMoveMovementHook FullWalkMoveHook = new(owner);
+    internal readonly CheckParametersMovementHook CheckParametersHook = new(owner);
+    internal readonly PlayerMoveMovementHook PlayerMoveHook = new(owner);
+    internal readonly GroundAccelerateMovementHook GroundAccelerateHook = new(owner);
 
     public IRunCommandMovementHook RunCommand => RunCommandHook;
     public ISetupMoveMovementHook SetupMove => SetupMoveHook;

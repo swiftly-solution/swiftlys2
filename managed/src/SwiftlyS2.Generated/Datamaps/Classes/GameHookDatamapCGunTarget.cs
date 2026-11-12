@@ -2,11 +2,11 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class GameHookDatamapCGunTarget : IGameHookDatamapCGunTarget
+internal sealed class GameHookDatamapCGunTarget(GameHooksService owner) : IGameHookDatamapCGunTarget
 {
-    internal readonly CGunTargetNextHook CGunTargetNextHook = new();
-    internal readonly CGunTargetStartHook CGunTargetStartHook = new();
-    internal readonly CGunTargetWaitHook CGunTargetWaitHook = new();
+    internal readonly CGunTargetNextHook CGunTargetNextHook = new(owner);
+    internal readonly CGunTargetStartHook CGunTargetStartHook = new(owner);
+    internal readonly CGunTargetWaitHook CGunTargetWaitHook = new(owner);
 
     public ICGunTargetNextHook Next => CGunTargetNextHook;
     public ICGunTargetStartHook Start => CGunTargetStartHook;

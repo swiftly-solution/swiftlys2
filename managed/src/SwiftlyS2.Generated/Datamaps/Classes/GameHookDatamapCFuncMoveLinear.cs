@@ -2,11 +2,11 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class GameHookDatamapCFuncMoveLinear : IGameHookDatamapCFuncMoveLinear
+internal sealed class GameHookDatamapCFuncMoveLinear(GameHooksService owner) : IGameHookDatamapCFuncMoveLinear
 {
-    internal readonly CFuncMoveLinearNavMovableThinkHook CFuncMoveLinearNavMovableThinkHook = new();
-    internal readonly CFuncMoveLinearNavObstacleThinkHook CFuncMoveLinearNavObstacleThinkHook = new();
-    internal readonly CFuncMoveLinearStopMoveSoundHook CFuncMoveLinearStopMoveSoundHook = new();
+    internal readonly CFuncMoveLinearNavMovableThinkHook CFuncMoveLinearNavMovableThinkHook = new(owner);
+    internal readonly CFuncMoveLinearNavObstacleThinkHook CFuncMoveLinearNavObstacleThinkHook = new(owner);
+    internal readonly CFuncMoveLinearStopMoveSoundHook CFuncMoveLinearStopMoveSoundHook = new(owner);
 
     public ICFuncMoveLinearNavMovableThinkHook NavMovableThink => CFuncMoveLinearNavMovableThinkHook;
     public ICFuncMoveLinearNavObstacleThinkHook NavObstacleThink => CFuncMoveLinearNavObstacleThinkHook;

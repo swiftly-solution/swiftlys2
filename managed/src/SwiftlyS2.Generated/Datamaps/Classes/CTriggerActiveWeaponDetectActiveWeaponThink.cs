@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCTriggerActiveWeaponDetectActiveWeaponThinkPre(ref CTriggerActiveWeaponDetectActiveWeaponThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CTriggerActiveWeaponDetectActiveWeaponThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCTriggerActiveWeaponDetectActiveWeaponThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCTriggerActiveWeaponDetectActiveWeaponThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCTriggerActiveWeaponDetectActiveWeaponThinkPost(ref CTriggerActiveWeaponDetectActiveWeaponThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CTriggerActiveWeaponDetectActiveWeaponThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCTriggerActiveWeaponDetectActiveWeaponThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCTriggerActiveWeaponDetectActiveWeaponThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CTriggerActiveWeaponDetectActiveWeaponThinkHook : ICTriggerActiveWeaponDetectActiveWeaponThinkHook
+internal sealed class CTriggerActiveWeaponDetectActiveWeaponThinkHook(GameHooksService owner) : ICTriggerActiveWeaponDetectActiveWeaponThinkHook
 {
     private event OnCTriggerActiveWeaponDetectActiveWeaponThinkPreDelegate? _Pre;
     private event OnCTriggerActiveWeaponDetectActiveWeaponThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CTriggerActiveWeaponDetectActiveWeaponThinkHook : ICTrigge
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerActiveWeaponDetectActiveWeaponThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerActiveWeaponDetectActiveWeaponThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CTriggerActiveWeaponDetectActiveWeaponThinkHook : ICTrigge
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerActiveWeaponDetectActiveWeaponThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerActiveWeaponDetectActiveWeaponThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CTriggerActiveWeaponDetectActiveWeaponThinkHook : ICTrigge
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerActiveWeaponDetectActiveWeaponThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerActiveWeaponDetectActiveWeaponThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CTriggerActiveWeaponDetectActiveWeaponThinkHook : ICTrigge
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerActiveWeaponDetectActiveWeaponThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerActiveWeaponDetectActiveWeaponThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CTriggerActiveWeaponDetectActiveWeaponThinkHook : ICTrigge
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerActiveWeaponDetectActiveWeaponThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerActiveWeaponDetectActiveWeaponThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerActiveWeaponDetectActiveWeaponThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerActiveWeaponDetectActiveWeaponThink, owner);
         }
     }
 

@@ -36,19 +36,19 @@
 
 #define CONVAR_FLAGS_TO_REMOVE (CVarFlags::HIDDEN | CVarFlags::DEVELOPMENTONLY | CVarFlags::CLIENTDLL)
 
-bool OnConvarQuery(CServerSideClientBase* client, const CNetMessagePB<CCLCMsg_RespondCvarValue>& msg);
+static bool OnConvarQuery(CServerSideClientBase* client, const CNetMessagePB<CCLCMsg_RespondCvarValue>& msg);
 VFunctionHook g_ProcessRespondCvarValueHook(reinterpret_cast<void*>(OnConvarQuery), "engine2", "CServerSideClient", "CServerSideClient::ProcessRespondCvarValue");
 
 extern bool bypassPostEventAbstractHook;
 
-void ChangedConvarCallback(ConVarRefAbstract* ref, CSplitScreenSlot nSlot, const char* pNewValue, const char* pOldValue, ConVarUserInfoSet_t* userData)
+static void ChangedConvarCallback(ConVarRefAbstract* ref, CSplitScreenSlot nSlot, const char* pNewValue, const char* pOldValue, [[maybe_unused]] ConVarUserInfoSet_t* userData)
 {
     PROFILE_FUNCTION();
 
     g_pConvarManager->OnConvarChanged(ref, nSlot, pNewValue, pOldValue);
 }
 
-bool OnConvarQuery(CServerSideClientBase* client, const CNetMessagePB<CCLCMsg_RespondCvarValue>& msg)
+static bool OnConvarQuery(CServerSideClientBase* client, const CNetMessagePB<CCLCMsg_RespondCvarValue>& msg)
 {
     PROFILE_FUNCTION();
 
@@ -75,26 +75,18 @@ static std::vector<typename Listeners::mapped_type> CopyListeners(std::mutex& mu
 }
 
 template <typename T, typename V = T>
-static void* NewConVar(const std::string& cvar_name, uint64_t flags, const char* help_message, const ConvarValue& defaultValue, const std::optional<ConvarValue>& minValue, const std::optional<ConvarValue>& maxValue)
+static void NewConVar(const std::string& cvar_name, uint64_t flags, const char* help_message, const ConvarValue& defaultValue, const std::optional<ConvarValue>& minValue, const std::optional<ConvarValue>& maxValue)
 {
     PROFILE_FUNCTION();
 
-    auto defaultOrZero = (T)std::get<V>(defaultValue);
+    auto defaultOrZero = static_cast<T>(std::get<V>(defaultValue));
 
     bool hasMin = minValue.has_value();
     bool hasMax = maxValue.has_value();
-    auto min = hasMin ? (T)std::get<V>(*minValue) : defaultOrZero;
-    auto max = hasMax ? (T)std::get<V>(*maxValue) : defaultOrZero;
+    auto min = hasMin ? static_cast<T>(std::get<V>(*minValue)) : defaultOrZero;
+    auto max = hasMax ? static_cast<T>(std::get<V>(*maxValue)) : defaultOrZero;
 
-    return new CConVar<T>(cvar_name.c_str(), flags, help_message, defaultOrZero, hasMin, min, hasMax, max);
-}
-
-template <typename T>
-static void FreeConVar(void* convar)
-{
-    PROFILE_FUNCTION();
-
-    delete (CConVar<T>*)convar;
+    new CConVar<T>(cvar_name.c_str(), flags, help_message, defaultOrZero, hasMin, min, hasMax, max);
 }
 
 void CConvarManager::Initialize()
@@ -186,14 +178,6 @@ int CConvarManager::AddQueryClientCvarCallback(std::function<void(int, std::stri
     return m_lastQueryCallbackId;
 }
 
-void CConvarManager::RemoveQueryClientCvarCallback(int callback_id)
-{
-    PROFILE_FUNCTION();
-
-    std::lock_guard<std::mutex> lock(m_mtxQueryCallbacks);
-    m_queryCallbacks.erase(callback_id);
-}
-
 void CConvarManager::OnClientQueryCvar(int playerid, const std::string& cvar_name, const std::string& cvar_value)
 {
     PROFILE_FUNCTION();
@@ -233,10 +217,8 @@ void CConvarManager::CreateConvar(const std::string& cvar_name, EConVarType type
     ConVarRefAbstract cvar(cvar_name.c_str());
     if (cvar.IsValidRef()) return;
 
-    CreatedConvar created;
-
 #define CREATE_CONVAR(data_type, variant_type) \
-    created = { NewConVar<data_type, variant_type>(cvar_name, flags, help_message, defaultValue, minValue, maxValue), FreeConVar<data_type> }
+    NewConVar<data_type, variant_type>(cvar_name, flags, help_message, defaultValue, minValue, maxValue)
 
     switch (type)
     {
@@ -255,41 +237,13 @@ void CConvarManager::CreateConvar(const std::string& cvar_name, EConVarType type
         case EConVarType_Vector4: CREATE_CONVAR(Vector4D, Vector4D); break;
         case EConVarType_Qangle: CREATE_CONVAR(QAngle, QAngle); break;
         case EConVarType_String:
-            created = {
-                new CConVar<CUtlString>(cvar_name.c_str(), flags, help_message, CUtlString(std::get<std::string>(defaultValue).c_str())),
-                FreeConVar<CUtlString>
-            };
+            new CConVar<CUtlString>(cvar_name.c_str(), flags, help_message, CUtlString(std::get<std::string>(defaultValue).c_str()));
             break;
         default:
             break;
     }
 
 #undef CREATE_CONVAR
-
-    if (!created.convar) return;
-
-    std::lock_guard<std::mutex> lock(m_mtxConvars);
-    m_createdConvars[cvar_name] = created;
-}
-
-void CConvarManager::DeleteConvar(const std::string& cvar_name)
-{
-    PROFILE_FUNCTION();
-
-    CreatedConvar created;
-    {
-        std::lock_guard<std::mutex> lock(m_mtxConvars);
-
-        auto it = m_createdConvars.find(cvar_name);
-        if (it == m_createdConvars.end()) return;
-
-        created = it->second;
-        m_createdConvars.erase(it);
-
-        m_convarRefs.erase(cvar_name);
-    }
-
-    created.free(created.convar);
 }
 
 ConVarRefAbstract& CConvarManager::GetConvarRef(const char* cvar_name)

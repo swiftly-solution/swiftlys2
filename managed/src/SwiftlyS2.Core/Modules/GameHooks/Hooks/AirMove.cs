@@ -75,25 +75,21 @@ internal static partial class GameHooksPublisher
 
     internal static void InvokeAirMovePre( ref AirMoveMovementPreContext ctx )
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(HookListener.AirMove);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeAirMovePre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
-            }
+            subs[i].InvokeAirMovePre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
         }
     }
 
     internal static void InvokeAirMovePost( ref AirMoveMovementPostContext ctx )
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(HookListener.AirMove);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeAirMovePost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
-            }
+            subs[i].InvokeAirMovePost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
         }
     }
 }

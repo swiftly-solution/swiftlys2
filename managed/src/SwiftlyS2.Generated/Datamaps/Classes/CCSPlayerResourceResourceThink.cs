@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCCSPlayerResourceResourceThinkPre(ref CCSPlayerResourceResourceThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CCSPlayerResourceResourceThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCCSPlayerResourceResourceThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCCSPlayerResourceResourceThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCCSPlayerResourceResourceThinkPost(ref CCSPlayerResourceResourceThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CCSPlayerResourceResourceThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCCSPlayerResourceResourceThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCCSPlayerResourceResourceThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CCSPlayerResourceResourceThinkHook : ICCSPlayerResourceResourceThinkHook
+internal sealed class CCSPlayerResourceResourceThinkHook(GameHooksService owner) : ICCSPlayerResourceResourceThinkHook
 {
     private event OnCCSPlayerResourceResourceThinkPreDelegate? _Pre;
     private event OnCCSPlayerResourceResourceThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CCSPlayerResourceResourceThinkHook : ICCSPlayerResourceRes
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CCSPlayerResourceResourceThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CCSPlayerResourceResourceThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CCSPlayerResourceResourceThinkHook : ICCSPlayerResourceRes
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerResourceResourceThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerResourceResourceThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CCSPlayerResourceResourceThinkHook : ICCSPlayerResourceRes
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CCSPlayerResourceResourceThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CCSPlayerResourceResourceThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CCSPlayerResourceResourceThinkHook : ICCSPlayerResourceRes
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerResourceResourceThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerResourceResourceThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CCSPlayerResourceResourceThinkHook : ICCSPlayerResourceRes
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerResourceResourceThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerResourceResourceThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerResourceResourceThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerResourceResourceThink, owner);
         }
     }
 

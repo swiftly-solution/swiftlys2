@@ -2,7 +2,7 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class FrictionMovementHook : IFrictionMovementHook
+internal sealed class FrictionMovementHook( GameHooksService owner ) : IFrictionMovementHook
 {
     internal event OnFrictionMovementPreDelegate? _Pre;
     internal event OnFrictionMovementPostDelegate? _Post;
@@ -11,13 +11,13 @@ internal sealed class FrictionMovementHook : IFrictionMovementHook
     {
         add
         {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.Friction);
+            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.Friction, owner);
             _Pre += value;
         }
         remove
         {
             _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.Friction);
+            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.Friction, owner);
         }
     }
 
@@ -25,13 +25,13 @@ internal sealed class FrictionMovementHook : IFrictionMovementHook
     {
         add
         {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.Friction);
+            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.Friction, owner);
             _Post += value;
         }
         remove
         {
             _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.Friction);
+            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.Friction, owner);
         }
     }
 
@@ -43,7 +43,7 @@ internal sealed class FrictionMovementHook : IFrictionMovementHook
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.Friction);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.Friction);
+        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.Friction, owner);
+        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.Friction, owner);
     }
 }

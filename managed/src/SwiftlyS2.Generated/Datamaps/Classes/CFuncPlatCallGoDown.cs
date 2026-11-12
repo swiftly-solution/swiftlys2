@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCFuncPlatCallGoDownPre(ref CFuncPlatCallGoDownPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CFuncPlatCallGoDown);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCFuncPlatCallGoDownPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCFuncPlatCallGoDownPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCFuncPlatCallGoDownPost(ref CFuncPlatCallGoDownPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CFuncPlatCallGoDown);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCFuncPlatCallGoDownPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCFuncPlatCallGoDownPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CFuncPlatCallGoDownHook : ICFuncPlatCallGoDownHook
+internal sealed class CFuncPlatCallGoDownHook(GameHooksService owner) : ICFuncPlatCallGoDownHook
 {
     private event OnCFuncPlatCallGoDownPreDelegate? _Pre;
     private event OnCFuncPlatCallGoDownPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CFuncPlatCallGoDownHook : ICFuncPlatCallGoDownHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncPlatCallGoDown);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncPlatCallGoDown, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CFuncPlatCallGoDownHook : ICFuncPlatCallGoDownHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncPlatCallGoDown);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncPlatCallGoDown, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CFuncPlatCallGoDownHook : ICFuncPlatCallGoDownHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncPlatCallGoDown);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncPlatCallGoDown, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CFuncPlatCallGoDownHook : ICFuncPlatCallGoDownHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncPlatCallGoDown);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncPlatCallGoDown, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CFuncPlatCallGoDownHook : ICFuncPlatCallGoDownHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncPlatCallGoDown);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncPlatCallGoDown, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncPlatCallGoDown);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncPlatCallGoDown, owner);
         }
     }
 

@@ -34,33 +34,6 @@ internal static class NativeAllocator
         return ret;
     }
 
-    private unsafe static delegate* unmanaged<nint, ulong> _GetSize;
-
-    /// <summary>
-    /// works only for pointers allocated through Memory.Allocator
-    /// </summary>
-    public unsafe static ulong GetSize(nint pointer)
-    {
-        var ret = _GetSize(pointer);
-        return ret;
-    }
-
-    private unsafe static delegate* unmanaged<ulong> _GetTotalAllocated;
-
-    public unsafe static ulong GetTotalAllocated()
-    {
-        var ret = _GetTotalAllocated();
-        return ret;
-    }
-
-    private unsafe static delegate* unmanaged<nint, byte> _IsPointerValid;
-
-    public unsafe static bool IsPointerValid(nint pointer)
-    {
-        var ret = _IsPointerValid(pointer);
-        return ret == 1;
-    }
-
     private unsafe static delegate* unmanaged<nint, nint, ulong, void> _Copy;
 
     public unsafe static void Copy(nint dst, nint src, ulong size)

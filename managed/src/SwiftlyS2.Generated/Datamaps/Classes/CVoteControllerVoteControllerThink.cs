@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCVoteControllerVoteControllerThinkPre(ref CVoteControllerVoteControllerThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CVoteControllerVoteControllerThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCVoteControllerVoteControllerThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCVoteControllerVoteControllerThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCVoteControllerVoteControllerThinkPost(ref CVoteControllerVoteControllerThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CVoteControllerVoteControllerThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCVoteControllerVoteControllerThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCVoteControllerVoteControllerThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CVoteControllerVoteControllerThinkHook : ICVoteControllerVoteControllerThinkHook
+internal sealed class CVoteControllerVoteControllerThinkHook(GameHooksService owner) : ICVoteControllerVoteControllerThinkHook
 {
     private event OnCVoteControllerVoteControllerThinkPreDelegate? _Pre;
     private event OnCVoteControllerVoteControllerThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CVoteControllerVoteControllerThinkHook : ICVoteControllerV
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CVoteControllerVoteControllerThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CVoteControllerVoteControllerThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CVoteControllerVoteControllerThinkHook : ICVoteControllerV
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CVoteControllerVoteControllerThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CVoteControllerVoteControllerThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CVoteControllerVoteControllerThinkHook : ICVoteControllerV
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CVoteControllerVoteControllerThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CVoteControllerVoteControllerThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CVoteControllerVoteControllerThinkHook : ICVoteControllerV
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CVoteControllerVoteControllerThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CVoteControllerVoteControllerThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CVoteControllerVoteControllerThinkHook : ICVoteControllerV
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CVoteControllerVoteControllerThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CVoteControllerVoteControllerThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CVoteControllerVoteControllerThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CVoteControllerVoteControllerThink, owner);
         }
     }
 

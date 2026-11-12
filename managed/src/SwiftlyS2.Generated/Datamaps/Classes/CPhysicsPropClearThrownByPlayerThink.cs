@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCPhysicsPropClearThrownByPlayerThinkPre(ref CPhysicsPropClearThrownByPlayerThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CPhysicsPropClearThrownByPlayerThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCPhysicsPropClearThrownByPlayerThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCPhysicsPropClearThrownByPlayerThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCPhysicsPropClearThrownByPlayerThinkPost(ref CPhysicsPropClearThrownByPlayerThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CPhysicsPropClearThrownByPlayerThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCPhysicsPropClearThrownByPlayerThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCPhysicsPropClearThrownByPlayerThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CPhysicsPropClearThrownByPlayerThinkHook : ICPhysicsPropClearThrownByPlayerThinkHook
+internal sealed class CPhysicsPropClearThrownByPlayerThinkHook(GameHooksService owner) : ICPhysicsPropClearThrownByPlayerThinkHook
 {
     private event OnCPhysicsPropClearThrownByPlayerThinkPreDelegate? _Pre;
     private event OnCPhysicsPropClearThrownByPlayerThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CPhysicsPropClearThrownByPlayerThinkHook : ICPhysicsPropCl
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPhysicsPropClearThrownByPlayerThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPhysicsPropClearThrownByPlayerThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CPhysicsPropClearThrownByPlayerThinkHook : ICPhysicsPropCl
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysicsPropClearThrownByPlayerThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysicsPropClearThrownByPlayerThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CPhysicsPropClearThrownByPlayerThinkHook : ICPhysicsPropCl
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPhysicsPropClearThrownByPlayerThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPhysicsPropClearThrownByPlayerThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CPhysicsPropClearThrownByPlayerThinkHook : ICPhysicsPropCl
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysicsPropClearThrownByPlayerThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysicsPropClearThrownByPlayerThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CPhysicsPropClearThrownByPlayerThinkHook : ICPhysicsPropCl
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysicsPropClearThrownByPlayerThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysicsPropClearThrownByPlayerThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysicsPropClearThrownByPlayerThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysicsPropClearThrownByPlayerThink, owner);
         }
     }
 

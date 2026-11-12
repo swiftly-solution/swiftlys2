@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCSoundOpvarSetBoxEntitySetOpvarThinkPre(ref CSoundOpvarSetBoxEntitySetOpvarThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CSoundOpvarSetBoxEntitySetOpvarThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCSoundOpvarSetBoxEntitySetOpvarThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCSoundOpvarSetBoxEntitySetOpvarThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCSoundOpvarSetBoxEntitySetOpvarThinkPost(ref CSoundOpvarSetBoxEntitySetOpvarThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CSoundOpvarSetBoxEntitySetOpvarThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCSoundOpvarSetBoxEntitySetOpvarThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCSoundOpvarSetBoxEntitySetOpvarThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CSoundOpvarSetBoxEntitySetOpvarThinkHook : ICSoundOpvarSetBoxEntitySetOpvarThinkHook
+internal sealed class CSoundOpvarSetBoxEntitySetOpvarThinkHook(GameHooksService owner) : ICSoundOpvarSetBoxEntitySetOpvarThinkHook
 {
     private event OnCSoundOpvarSetBoxEntitySetOpvarThinkPreDelegate? _Pre;
     private event OnCSoundOpvarSetBoxEntitySetOpvarThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CSoundOpvarSetBoxEntitySetOpvarThinkHook : ICSoundOpvarSet
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSoundOpvarSetBoxEntitySetOpvarThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSoundOpvarSetBoxEntitySetOpvarThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CSoundOpvarSetBoxEntitySetOpvarThinkHook : ICSoundOpvarSet
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSoundOpvarSetBoxEntitySetOpvarThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSoundOpvarSetBoxEntitySetOpvarThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CSoundOpvarSetBoxEntitySetOpvarThinkHook : ICSoundOpvarSet
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSoundOpvarSetBoxEntitySetOpvarThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSoundOpvarSetBoxEntitySetOpvarThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CSoundOpvarSetBoxEntitySetOpvarThinkHook : ICSoundOpvarSet
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSoundOpvarSetBoxEntitySetOpvarThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSoundOpvarSetBoxEntitySetOpvarThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CSoundOpvarSetBoxEntitySetOpvarThinkHook : ICSoundOpvarSet
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSoundOpvarSetBoxEntitySetOpvarThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSoundOpvarSetBoxEntitySetOpvarThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSoundOpvarSetBoxEntitySetOpvarThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSoundOpvarSetBoxEntitySetOpvarThink, owner);
         }
     }
 

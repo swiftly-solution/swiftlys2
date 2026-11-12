@@ -2,7 +2,7 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class LadderMoveMovementHook : ILadderMoveMovementHook
+internal sealed class LadderMoveMovementHook( GameHooksService owner ) : ILadderMoveMovementHook
 {
     internal event OnLadderMoveMovementPreDelegate? _Pre;
     internal event OnLadderMoveMovementPostDelegate? _Post;
@@ -11,13 +11,13 @@ internal sealed class LadderMoveMovementHook : ILadderMoveMovementHook
     {
         add
         {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.LadderMove);
+            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.LadderMove, owner);
             _Pre += value;
         }
         remove
         {
             _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.LadderMove);
+            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.LadderMove, owner);
         }
     }
 
@@ -25,13 +25,13 @@ internal sealed class LadderMoveMovementHook : ILadderMoveMovementHook
     {
         add
         {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.LadderMove);
+            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.LadderMove, owner);
             _Post += value;
         }
         remove
         {
             _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.LadderMove);
+            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.LadderMove, owner);
         }
     }
 
@@ -43,7 +43,7 @@ internal sealed class LadderMoveMovementHook : ILadderMoveMovementHook
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.LadderMove);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.LadderMove);
+        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.LadderMove, owner);
+        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.LadderMove, owner);
     }
 }

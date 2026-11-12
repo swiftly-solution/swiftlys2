@@ -2,7 +2,7 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class EndTouchEntityHook : IEndTouchEntityHook
+internal sealed class EndTouchEntityHook( GameHooksService owner ) : IEndTouchEntityHook
 {
     internal event OnEndTouchEntityPreDelegate? _Pre;
     internal event OnEndTouchEntityPostDelegate? _Post;
@@ -11,13 +11,13 @@ internal sealed class EndTouchEntityHook : IEndTouchEntityHook
     {
         add
         {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.EndTouch);
+            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.EndTouch, owner);
             _Pre += value;
         }
         remove
         {
             _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.EndTouch);
+            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.EndTouch, owner);
         }
     }
 
@@ -25,13 +25,13 @@ internal sealed class EndTouchEntityHook : IEndTouchEntityHook
     {
         add
         {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.EndTouch);
+            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.EndTouch, owner);
             _Post += value;
         }
         remove
         {
             _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.EndTouch);
+            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.EndTouch, owner);
         }
     }
 
@@ -43,7 +43,7 @@ internal sealed class EndTouchEntityHook : IEndTouchEntityHook
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.EndTouch);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.EndTouch);
+        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.EndTouch, owner);
+        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.EndTouch, owner);
     }
 }

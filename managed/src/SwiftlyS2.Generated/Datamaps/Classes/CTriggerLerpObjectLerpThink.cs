@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCTriggerLerpObjectLerpThinkPre(ref CTriggerLerpObjectLerpThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CTriggerLerpObjectLerpThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCTriggerLerpObjectLerpThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCTriggerLerpObjectLerpThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCTriggerLerpObjectLerpThinkPost(ref CTriggerLerpObjectLerpThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CTriggerLerpObjectLerpThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCTriggerLerpObjectLerpThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCTriggerLerpObjectLerpThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CTriggerLerpObjectLerpThinkHook : ICTriggerLerpObjectLerpThinkHook
+internal sealed class CTriggerLerpObjectLerpThinkHook(GameHooksService owner) : ICTriggerLerpObjectLerpThinkHook
 {
     private event OnCTriggerLerpObjectLerpThinkPreDelegate? _Pre;
     private event OnCTriggerLerpObjectLerpThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CTriggerLerpObjectLerpThinkHook : ICTriggerLerpObjectLerpT
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerLerpObjectLerpThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerLerpObjectLerpThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CTriggerLerpObjectLerpThinkHook : ICTriggerLerpObjectLerpT
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerLerpObjectLerpThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerLerpObjectLerpThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CTriggerLerpObjectLerpThinkHook : ICTriggerLerpObjectLerpT
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerLerpObjectLerpThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerLerpObjectLerpThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CTriggerLerpObjectLerpThinkHook : ICTriggerLerpObjectLerpT
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerLerpObjectLerpThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerLerpObjectLerpThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CTriggerLerpObjectLerpThinkHook : ICTriggerLerpObjectLerpT
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerLerpObjectLerpThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerLerpObjectLerpThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerLerpObjectLerpThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerLerpObjectLerpThink, owner);
         }
     }
 

@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCScriptedSequenceScriptThinkPre(ref CScriptedSequenceScriptThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CScriptedSequenceScriptThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCScriptedSequenceScriptThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCScriptedSequenceScriptThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCScriptedSequenceScriptThinkPost(ref CScriptedSequenceScriptThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CScriptedSequenceScriptThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCScriptedSequenceScriptThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCScriptedSequenceScriptThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CScriptedSequenceScriptThinkHook : ICScriptedSequenceScriptThinkHook
+internal sealed class CScriptedSequenceScriptThinkHook(GameHooksService owner) : ICScriptedSequenceScriptThinkHook
 {
     private event OnCScriptedSequenceScriptThinkPreDelegate? _Pre;
     private event OnCScriptedSequenceScriptThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CScriptedSequenceScriptThinkHook : ICScriptedSequenceScrip
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CScriptedSequenceScriptThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CScriptedSequenceScriptThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CScriptedSequenceScriptThinkHook : ICScriptedSequenceScrip
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CScriptedSequenceScriptThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CScriptedSequenceScriptThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CScriptedSequenceScriptThinkHook : ICScriptedSequenceScrip
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CScriptedSequenceScriptThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CScriptedSequenceScriptThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CScriptedSequenceScriptThinkHook : ICScriptedSequenceScrip
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CScriptedSequenceScriptThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CScriptedSequenceScriptThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CScriptedSequenceScriptThinkHook : ICScriptedSequenceScrip
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CScriptedSequenceScriptThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CScriptedSequenceScriptThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CScriptedSequenceScriptThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CScriptedSequenceScriptThink, owner);
         }
     }
 

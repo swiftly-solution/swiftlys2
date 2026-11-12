@@ -22,12 +22,22 @@
 #include <api/shared/profiler.h>
 #include <core/entrypoint.h>
 
+static void* ObjectVtableSlot(void* instance, int index)
+{
+    return *static_cast<void***>(instance) + index;
+}
+
+static void* VtableSlot(void* vtable, int index)
+{
+    return static_cast<void**>(vtable) + index;
+}
+
 VFunctionHook::VFunctionHook(void* callback, std::string moduleName, std::string vtableName, std::string offsetName)
     : m_sName(offsetName), m_bManaged(true)
 {
     PROFILE_FUNCTION();
 
-    m_fnResolve = [this, callback, moduleName = std::move(moduleName), vtableName = std::move(vtableName), offsetName = std::move(offsetName)]() {
+    m_fnResolve = [this, callback, moduleName = std::move(moduleName), vtableName = std::move(vtableName), offsetName = std::move(offsetName)] {
         void* vtable = nullptr;
         g_pS2BinLib->FindVtable(moduleName.c_str(), vtableName.c_str(), &vtable);
         if (!vtable) return;
@@ -42,8 +52,8 @@ VFunctionHook::VFunctionHook(void* callback, std::string interfaceName, std::str
 {
     PROFILE_FUNCTION();
 
-    m_fnResolve = [this, callback, interfaceName = std::move(interfaceName), offsetName = std::move(offsetName)]() {
-        SetHookFunction(interfaceName, g_pGameDataManager->GetOffsets()->Fetch(offsetName), callback);
+    m_fnResolve = [this, callback, interfaceName = std::move(interfaceName), offsetName = std::move(offsetName)] {
+        SetHookFunction(g_SwiftlyCore.GetInterface(interfaceName), g_pGameDataManager->GetOffsets()->Fetch(offsetName), callback, false);
     };
     RegisterManagedHook(this);
 }
@@ -53,7 +63,7 @@ VFunctionHook::VFunctionHook(void* callback, std::function<void*()> instanceReso
 {
     PROFILE_FUNCTION();
 
-    m_fnResolve = [this, callback, instanceResolver = std::move(instanceResolver), offsetName = std::move(offsetName)]() {
+    m_fnResolve = [this, callback, instanceResolver = std::move(instanceResolver), offsetName = std::move(offsetName)] {
         SetHookFunction(instanceResolver(), g_pGameDataManager->GetOffsets()->Fetch(offsetName), callback, false);
     };
     RegisterManagedHook(this);
@@ -96,20 +106,6 @@ const char* VFunctionHook::GetName() const
     return m_sName.c_str();
 }
 
-void VFunctionHook::SetHookFunction(const std::string& iface_name, int index, void* callback)
-{
-    PROFILE_FUNCTION();
-
-    auto iface = g_SwiftlyCore.GetInterface(iface_name);
-    if (!iface) return;
-
-    void* trampoline_addr = nullptr;
-    g_pS2BinLib->InstallTrampoline(((void*)((uintptr_t)(*(void**)iface) + 8 * index)), &trampoline_addr);
-    if (!trampoline_addr) return;
-
-    m_oHook = safetyhook::create_inline(trampoline_addr, callback, safetyhook::InlineHook::Flags::StartDisabled);
-}
-
 void VFunctionHook::SetHookFunction(void* instance, int index, void* callback, bool is_vtable)
 {
     PROFILE_FUNCTION();
@@ -117,7 +113,7 @@ void VFunctionHook::SetHookFunction(void* instance, int index, void* callback, b
     if (!instance) return;
 
     void* trampoline_addr = nullptr;
-    g_pS2BinLib->InstallTrampoline(is_vtable ? (void*)((uintptr_t)instance + 8 * index) : ((void*)((uintptr_t)(*(void**)instance) + 8 * index)), &trampoline_addr);
+    g_pS2BinLib->InstallTrampoline(is_vtable ? VtableSlot(instance, index) : ObjectVtableSlot(instance, index), &trampoline_addr);
     if (!trampoline_addr) return;
 
     m_oHook = safetyhook::create_inline(trampoline_addr, callback, safetyhook::InlineHook::Flags::StartDisabled);
@@ -127,30 +123,23 @@ void VFunctionHook::Enable()
 {
     PROFILE_FUNCTION();
 
-    if (!m_oHook || IsEnabled()) return;
+    if (!m_oHook || m_oHook.enabled()) return;
 
-    auto res = m_oHook.enable(); // due to nodiscard
+    (void)m_oHook.enable();
 }
 
 void VFunctionHook::Disable()
 {
     PROFILE_FUNCTION();
 
-    if (!m_oHook || !IsEnabled()) return;
+    if (!m_oHook || !m_oHook.enabled()) return;
 
-    auto res = m_oHook.disable(); // due to nodiscard
+    (void)m_oHook.disable();
 }
 
 void* VFunctionHook::GetOriginal()
 {
     PROFILE_FUNCTION();
 
-    return (void*)(m_oHook.trampoline().address());
-}
-
-bool VFunctionHook::IsEnabled()
-{
-    PROFILE_FUNCTION();
-
-    return m_oHook.enabled();
+    return reinterpret_cast<void*>(m_oHook.trampoline().address());
 }

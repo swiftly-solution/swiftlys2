@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCSoundOpvarSetDomeEntitySetOpvarThinkPre(ref CSoundOpvarSetDomeEntitySetOpvarThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CSoundOpvarSetDomeEntitySetOpvarThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCSoundOpvarSetDomeEntitySetOpvarThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCSoundOpvarSetDomeEntitySetOpvarThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCSoundOpvarSetDomeEntitySetOpvarThinkPost(ref CSoundOpvarSetDomeEntitySetOpvarThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CSoundOpvarSetDomeEntitySetOpvarThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCSoundOpvarSetDomeEntitySetOpvarThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCSoundOpvarSetDomeEntitySetOpvarThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CSoundOpvarSetDomeEntitySetOpvarThinkHook : ICSoundOpvarSetDomeEntitySetOpvarThinkHook
+internal sealed class CSoundOpvarSetDomeEntitySetOpvarThinkHook(GameHooksService owner) : ICSoundOpvarSetDomeEntitySetOpvarThinkHook
 {
     private event OnCSoundOpvarSetDomeEntitySetOpvarThinkPreDelegate? _Pre;
     private event OnCSoundOpvarSetDomeEntitySetOpvarThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CSoundOpvarSetDomeEntitySetOpvarThinkHook : ICSoundOpvarSe
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSoundOpvarSetDomeEntitySetOpvarThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSoundOpvarSetDomeEntitySetOpvarThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CSoundOpvarSetDomeEntitySetOpvarThinkHook : ICSoundOpvarSe
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSoundOpvarSetDomeEntitySetOpvarThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSoundOpvarSetDomeEntitySetOpvarThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CSoundOpvarSetDomeEntitySetOpvarThinkHook : ICSoundOpvarSe
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSoundOpvarSetDomeEntitySetOpvarThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSoundOpvarSetDomeEntitySetOpvarThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CSoundOpvarSetDomeEntitySetOpvarThinkHook : ICSoundOpvarSe
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSoundOpvarSetDomeEntitySetOpvarThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSoundOpvarSetDomeEntitySetOpvarThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CSoundOpvarSetDomeEntitySetOpvarThinkHook : ICSoundOpvarSe
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSoundOpvarSetDomeEntitySetOpvarThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSoundOpvarSetDomeEntitySetOpvarThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSoundOpvarSetDomeEntitySetOpvarThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSoundOpvarSetDomeEntitySetOpvarThink, owner);
         }
     }
 

@@ -2,17 +2,17 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class GameHookDatamapCBaseGrenade : IGameHookDatamapCBaseGrenade
+internal sealed class GameHookDatamapCBaseGrenade(GameHooksService owner) : IGameHookDatamapCBaseGrenade
 {
-    internal readonly CBaseGrenadeBounceTouchHook CBaseGrenadeBounceTouchHook = new();
-    internal readonly CBaseGrenadeDangerSoundThinkHook CBaseGrenadeDangerSoundThinkHook = new();
-    internal readonly CBaseGrenadeDetonateHook CBaseGrenadeDetonateHook = new();
-    internal readonly CBaseGrenadeDetonateUseHook CBaseGrenadeDetonateUseHook = new();
-    internal readonly CBaseGrenadeExplodeTouchHook CBaseGrenadeExplodeTouchHook = new();
-    internal readonly CBaseGrenadePreDetonateHook CBaseGrenadePreDetonateHook = new();
-    internal readonly CBaseGrenadeSlideTouchHook CBaseGrenadeSlideTouchHook = new();
-    internal readonly CBaseGrenadeSmokeHook CBaseGrenadeSmokeHook = new();
-    internal readonly CBaseGrenadeTumbleThinkHook CBaseGrenadeTumbleThinkHook = new();
+    internal readonly CBaseGrenadeBounceTouchHook CBaseGrenadeBounceTouchHook = new(owner);
+    internal readonly CBaseGrenadeDangerSoundThinkHook CBaseGrenadeDangerSoundThinkHook = new(owner);
+    internal readonly CBaseGrenadeDetonateHook CBaseGrenadeDetonateHook = new(owner);
+    internal readonly CBaseGrenadeDetonateUseHook CBaseGrenadeDetonateUseHook = new(owner);
+    internal readonly CBaseGrenadeExplodeTouchHook CBaseGrenadeExplodeTouchHook = new(owner);
+    internal readonly CBaseGrenadePreDetonateHook CBaseGrenadePreDetonateHook = new(owner);
+    internal readonly CBaseGrenadeSlideTouchHook CBaseGrenadeSlideTouchHook = new(owner);
+    internal readonly CBaseGrenadeSmokeHook CBaseGrenadeSmokeHook = new(owner);
+    internal readonly CBaseGrenadeTumbleThinkHook CBaseGrenadeTumbleThinkHook = new(owner);
 
     public ICBaseGrenadeBounceTouchHook BounceTouch => CBaseGrenadeBounceTouchHook;
     public ICBaseGrenadeDangerSoundThinkHook DangerSoundThink => CBaseGrenadeDangerSoundThinkHook;

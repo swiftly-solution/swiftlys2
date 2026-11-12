@@ -11,7 +11,7 @@ internal static unsafe class CommandDispatcher
 
     private static readonly Dictionary<string, ulong> nativeCommandIds = [];
 
-    private static readonly ConcurrentDictionary<string, string> aliasToCommand = new();
+    private static readonly ConcurrentDictionary<string, (string Alias, string CommandKey, bool RegisterRaw)> aliasToCommand = new();
 
     private static ClientCommandListenerCallback[] clientCommandListeners = [];
     private static ClientChatListenerCallback[] clientChatListeners = [];
@@ -84,8 +84,10 @@ internal static unsafe class CommandDispatcher
         return commands.ContainsKey(prefixedName) ? prefixedName : null;
     }
 
-    internal static void AddAlias( string normalizedAlias, string commandKey ) =>
-        aliasToCommand[normalizedAlias] = commandKey;
+    internal static void AddAlias( string normalizedAlias, string alias, string commandKey, bool registerRaw ) =>
+        aliasToCommand[normalizedAlias] = (alias, commandKey, registerRaw);
+
+    internal static IEnumerable<(string Alias, string CommandKey, bool RegisterRaw)> GetAliases() => aliasToCommand.Values;
 
     internal static void RemoveAlias( string normalizedAlias ) =>
         _ = aliasToCommand.TryRemove(normalizedAlias, out _);
@@ -108,7 +110,7 @@ internal static unsafe class CommandDispatcher
 
     internal static void DispatchCommand( string commandName, int playerId, string[] args, string originalCommandName, string prefix, bool silent )
     {
-        var key = aliasToCommand.TryGetValue(commandName, out var original) ? original : commandName;
+        var key = aliasToCommand.TryGetValue(commandName, out var target) ? target.CommandKey : commandName;
         if (!commands.TryGetValue(key, out var callbacks))
         {
             return;

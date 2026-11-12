@@ -42,7 +42,7 @@ CGameEntitySystem* GameEntitySystem()
     return g_pGameEntitySystem;
 }
 
-void StartupServerHook(void* _this, const GameSessionConfiguration_t& config, ISource2WorldSession* a, const char* b);
+static void StartupServerHook(void* _this, const GameSessionConfiguration_t& config, ISource2WorldSession* a, const char* b);
 
 VFunctionHook g_StartupServerHook(reinterpret_cast<void*>(StartupServerHook), "engine2", "CNetworkServerService", "INetworkServerService::StartupServer");
 
@@ -54,7 +54,7 @@ void CEntSystem::Shutdown()
         g_pGameEntitySystem->RemoveListenerEntity(&g_entityListener);
 }
 
-void StartupServerHook(void* _this, const GameSessionConfiguration_t& config, ISource2WorldSession* a, const char* b)
+static void StartupServerHook(void* _this, const GameSessionConfiguration_t& config, ISource2WorldSession* a, const char* b)
 {
     reinterpret_cast<decltype(&StartupServerHook)>(g_StartupServerHook.GetOriginal())(_this, config, a, b);
 
@@ -62,8 +62,7 @@ void StartupServerHook(void* _this, const GameSessionConfiguration_t& config, IS
 
     if (!g_pGameEntitySystem)
     {
-        auto offset = g_pGameDataManager->GetOffsets()->Fetch("GameEntitySystem");
-        g_pGameEntitySystem = *reinterpret_cast<CGameEntitySystem**>(reinterpret_cast<uintptr_t>(g_pGameResources) + offset);
+        g_pGameEntitySystem = reinterpret_cast<CGameEntitySystem*>(g_pGameResources->m_pEntityResourceManifestHandler);
         g_pGameEntitySystem->AddListenerEntity(&g_entityListener);
     }
 

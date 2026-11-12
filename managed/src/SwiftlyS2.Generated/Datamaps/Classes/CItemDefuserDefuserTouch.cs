@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCItemDefuserDefuserTouchPre(ref CItemDefuserDefuserTouchPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CItemDefuserDefuserTouch);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCItemDefuserDefuserTouchPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCItemDefuserDefuserTouchPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCItemDefuserDefuserTouchPost(ref CItemDefuserDefuserTouchPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CItemDefuserDefuserTouch);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCItemDefuserDefuserTouchPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCItemDefuserDefuserTouchPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CItemDefuserDefuserTouchHook : ICItemDefuserDefuserTouchHook
+internal sealed class CItemDefuserDefuserTouchHook(GameHooksService owner) : ICItemDefuserDefuserTouchHook
 {
     private event OnCItemDefuserDefuserTouchPreDelegate? _Pre;
     private event OnCItemDefuserDefuserTouchPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CItemDefuserDefuserTouchHook : ICItemDefuserDefuserTouchHo
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CItemDefuserDefuserTouch);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CItemDefuserDefuserTouch, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CItemDefuserDefuserTouchHook : ICItemDefuserDefuserTouchHo
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemDefuserDefuserTouch);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemDefuserDefuserTouch, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CItemDefuserDefuserTouchHook : ICItemDefuserDefuserTouchHo
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CItemDefuserDefuserTouch);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CItemDefuserDefuserTouch, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CItemDefuserDefuserTouchHook : ICItemDefuserDefuserTouchHo
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemDefuserDefuserTouch);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemDefuserDefuserTouch, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CItemDefuserDefuserTouchHook : ICItemDefuserDefuserTouchHo
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemDefuserDefuserTouch);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemDefuserDefuserTouch, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemDefuserDefuserTouch);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemDefuserDefuserTouch, owner);
         }
     }
 

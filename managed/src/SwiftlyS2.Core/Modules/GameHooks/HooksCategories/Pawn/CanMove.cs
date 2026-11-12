@@ -2,7 +2,7 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class CanMovePawnHook : ICanMovePawnHook
+internal sealed class CanMovePawnHook( GameHooksService owner ) : ICanMovePawnHook
 {
     internal event OnCanMovePawnPreDelegate? _Pre;
     internal event OnCanMovePawnPostDelegate? _Post;
@@ -11,13 +11,13 @@ internal sealed class CanMovePawnHook : ICanMovePawnHook
     {
         add
         {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.CanMove);
+            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.CanMove, owner);
             _Pre += value;
         }
         remove
         {
             _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.CanMove);
+            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.CanMove, owner);
         }
     }
 
@@ -25,13 +25,13 @@ internal sealed class CanMovePawnHook : ICanMovePawnHook
     {
         add
         {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.CanMove);
+            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.CanMove, owner);
             _Post += value;
         }
         remove
         {
             _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.CanMove);
+            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.CanMove, owner);
         }
     }
 
@@ -43,7 +43,7 @@ internal sealed class CanMovePawnHook : ICanMovePawnHook
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.CanMove);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.CanMove);
+        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.CanMove, owner);
+        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.CanMove, owner);
     }
 }

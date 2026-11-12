@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCTriggerLerpObjectUnsetWaitForEntityPre(ref CTriggerLerpObjectUnsetWaitForEntityPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CTriggerLerpObjectUnsetWaitForEntity);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCTriggerLerpObjectUnsetWaitForEntityPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCTriggerLerpObjectUnsetWaitForEntityPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCTriggerLerpObjectUnsetWaitForEntityPost(ref CTriggerLerpObjectUnsetWaitForEntityPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CTriggerLerpObjectUnsetWaitForEntity);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCTriggerLerpObjectUnsetWaitForEntityPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCTriggerLerpObjectUnsetWaitForEntityPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CTriggerLerpObjectUnsetWaitForEntityHook : ICTriggerLerpObjectUnsetWaitForEntityHook
+internal sealed class CTriggerLerpObjectUnsetWaitForEntityHook(GameHooksService owner) : ICTriggerLerpObjectUnsetWaitForEntityHook
 {
     private event OnCTriggerLerpObjectUnsetWaitForEntityPreDelegate? _Pre;
     private event OnCTriggerLerpObjectUnsetWaitForEntityPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CTriggerLerpObjectUnsetWaitForEntityHook : ICTriggerLerpOb
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerLerpObjectUnsetWaitForEntity);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerLerpObjectUnsetWaitForEntity, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CTriggerLerpObjectUnsetWaitForEntityHook : ICTriggerLerpOb
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerLerpObjectUnsetWaitForEntity);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerLerpObjectUnsetWaitForEntity, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CTriggerLerpObjectUnsetWaitForEntityHook : ICTriggerLerpOb
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerLerpObjectUnsetWaitForEntity);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerLerpObjectUnsetWaitForEntity, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CTriggerLerpObjectUnsetWaitForEntityHook : ICTriggerLerpOb
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerLerpObjectUnsetWaitForEntity);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerLerpObjectUnsetWaitForEntity, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CTriggerLerpObjectUnsetWaitForEntityHook : ICTriggerLerpOb
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerLerpObjectUnsetWaitForEntity);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerLerpObjectUnsetWaitForEntity, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerLerpObjectUnsetWaitForEntity);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerLerpObjectUnsetWaitForEntity, owner);
         }
     }
 

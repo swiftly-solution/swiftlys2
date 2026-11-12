@@ -28,16 +28,16 @@
 class HooksManager : public IHooksManager
 {
 public:
-    virtual void Initialize() override;
-    virtual void Shutdown() override;
+    void Initialize() override;
+    void Shutdown() override;
 
-    virtual IFunctionHook* CreateFunctionHook() override;
-    virtual IVFunctionHook* CreateVFunctionHook() override;
-    virtual IMFunctionHook* CreateMFunctionHook() override;
+    IFunctionHook* CreateFunctionHook() override;
+    IVFunctionHook* CreateVFunctionHook() override;
+    IMFunctionHook* CreateMFunctionHook() override;
 
-    virtual void DestroyFunctionHook(IFunctionHook* hook) override;
-    virtual void DestroyVFunctionHook(IVFunctionHook* hook) override;
-    virtual void DestroyMFunctionHook(IMFunctionHook* hook) override;
+    void DestroyFunctionHook(IFunctionHook* hook) override;
+    void DestroyVFunctionHook(IVFunctionHook* hook) override;
+    void DestroyMFunctionHook(IMFunctionHook* hook) override;
 };
 
 #endif

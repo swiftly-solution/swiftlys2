@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCBaseModelEntitySUB_DissolveIfUncarriedPre(ref CBaseModelEntitySUB_DissolveIfUncarriedPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseModelEntitySUB_DissolveIfUncarried);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseModelEntitySUB_DissolveIfUncarriedPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseModelEntitySUB_DissolveIfUncarriedPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCBaseModelEntitySUB_DissolveIfUncarriedPost(ref CBaseModelEntitySUB_DissolveIfUncarriedPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseModelEntitySUB_DissolveIfUncarried);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseModelEntitySUB_DissolveIfUncarriedPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseModelEntitySUB_DissolveIfUncarriedPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CBaseModelEntitySUB_DissolveIfUncarriedHook : ICBaseModelEntitySUB_DissolveIfUncarriedHook
+internal sealed class CBaseModelEntitySUB_DissolveIfUncarriedHook(GameHooksService owner) : ICBaseModelEntitySUB_DissolveIfUncarriedHook
 {
     private event OnCBaseModelEntitySUB_DissolveIfUncarriedPreDelegate? _Pre;
     private event OnCBaseModelEntitySUB_DissolveIfUncarriedPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CBaseModelEntitySUB_DissolveIfUncarriedHook : ICBaseModelE
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseModelEntitySUB_DissolveIfUncarried);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseModelEntitySUB_DissolveIfUncarried, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CBaseModelEntitySUB_DissolveIfUncarriedHook : ICBaseModelE
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseModelEntitySUB_DissolveIfUncarried);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseModelEntitySUB_DissolveIfUncarried, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CBaseModelEntitySUB_DissolveIfUncarriedHook : ICBaseModelE
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseModelEntitySUB_DissolveIfUncarried);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseModelEntitySUB_DissolveIfUncarried, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CBaseModelEntitySUB_DissolveIfUncarriedHook : ICBaseModelE
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseModelEntitySUB_DissolveIfUncarried);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseModelEntitySUB_DissolveIfUncarried, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CBaseModelEntitySUB_DissolveIfUncarriedHook : ICBaseModelE
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseModelEntitySUB_DissolveIfUncarried);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseModelEntitySUB_DissolveIfUncarried, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseModelEntitySUB_DissolveIfUncarried);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseModelEntitySUB_DissolveIfUncarried, owner);
         }
     }
 

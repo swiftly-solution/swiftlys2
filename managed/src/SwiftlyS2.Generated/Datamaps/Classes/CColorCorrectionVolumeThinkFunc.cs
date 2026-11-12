@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCColorCorrectionVolumeThinkFuncPre(ref CColorCorrectionVolumeThinkFuncPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CColorCorrectionVolumeThinkFunc);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCColorCorrectionVolumeThinkFuncPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCColorCorrectionVolumeThinkFuncPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCColorCorrectionVolumeThinkFuncPost(ref CColorCorrectionVolumeThinkFuncPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CColorCorrectionVolumeThinkFunc);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCColorCorrectionVolumeThinkFuncPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCColorCorrectionVolumeThinkFuncPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CColorCorrectionVolumeThinkFuncHook : ICColorCorrectionVolumeThinkFuncHook
+internal sealed class CColorCorrectionVolumeThinkFuncHook(GameHooksService owner) : ICColorCorrectionVolumeThinkFuncHook
 {
     private event OnCColorCorrectionVolumeThinkFuncPreDelegate? _Pre;
     private event OnCColorCorrectionVolumeThinkFuncPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CColorCorrectionVolumeThinkFuncHook : ICColorCorrectionVol
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CColorCorrectionVolumeThinkFunc);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CColorCorrectionVolumeThinkFunc, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CColorCorrectionVolumeThinkFuncHook : ICColorCorrectionVol
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CColorCorrectionVolumeThinkFunc);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CColorCorrectionVolumeThinkFunc, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CColorCorrectionVolumeThinkFuncHook : ICColorCorrectionVol
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CColorCorrectionVolumeThinkFunc);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CColorCorrectionVolumeThinkFunc, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CColorCorrectionVolumeThinkFuncHook : ICColorCorrectionVol
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CColorCorrectionVolumeThinkFunc);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CColorCorrectionVolumeThinkFunc, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CColorCorrectionVolumeThinkFuncHook : ICColorCorrectionVol
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CColorCorrectionVolumeThinkFunc);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CColorCorrectionVolumeThinkFunc, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CColorCorrectionVolumeThinkFunc);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CColorCorrectionVolumeThinkFunc, owner);
         }
     }
 

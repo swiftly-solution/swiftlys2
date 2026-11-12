@@ -17,25 +17,10 @@
  ************************************************************************************************/
 
 #include "gamesystem.h"
-#include <memory/hooks/vfunction.h>
 
 #include <api/interfaces/interfaces.h>
 #include <api/shared/profiler.h>
-#include <scripting/engine/events.h>
 #include <public/game/igamesystemfactory.h>
-
-void BuildGameSessionManifestHook(void* _this, EventBuildGameSessionManifest_t* msg);
-VFunctionHook g_BuildGameSessionManifestHook(reinterpret_cast<void*>(BuildGameSessionManifestHook), "server", "CGameRulesGameSystem", "IGameSystem::BuildGameSessionManifest");
-
-void BuildGameSessionManifestHook(void* _this, EventBuildGameSessionManifest_t* msg)
-{
-    reinterpret_cast<decltype(&BuildGameSessionManifestHook)>(g_BuildGameSessionManifestHook.GetOriginal())(_this, msg);
-
-    PROFILE_FUNCTION();
-
-    IEntityResourceManifest* pResourceManifest = msg->m_pResourceManifest;
-    if (g_pOnPrecacheResourceCallback) g_pOnPrecacheResourceCallback(pResourceManifest);
-}
 
 bool InitGameSystem()
 {
@@ -47,11 +32,11 @@ bool InitGameSystem()
         return false;
     }
 
-    uintptr_t pAddr = (uintptr_t)ptr + 3;
-    uint32_t offset = *(uint32_t*)pAddr;
-    pAddr += 4;
+    auto address = reinterpret_cast<uintptr_t>(ptr) + 3;
+    const auto offset = *reinterpret_cast<uint32_t*>(address);
+    address += 4;
 
-    CBaseGameSystemFactory::SetFirstPtr((CBaseGameSystemFactory**)(pAddr + offset));
+    CBaseGameSystemFactory::SetFirstPtr(reinterpret_cast<CBaseGameSystemFactory**>(address + offset));
 
     return true;
 }

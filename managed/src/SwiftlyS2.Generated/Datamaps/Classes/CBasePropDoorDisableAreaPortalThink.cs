@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCBasePropDoorDisableAreaPortalThinkPre(ref CBasePropDoorDisableAreaPortalThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBasePropDoorDisableAreaPortalThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBasePropDoorDisableAreaPortalThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBasePropDoorDisableAreaPortalThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCBasePropDoorDisableAreaPortalThinkPost(ref CBasePropDoorDisableAreaPortalThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBasePropDoorDisableAreaPortalThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBasePropDoorDisableAreaPortalThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBasePropDoorDisableAreaPortalThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CBasePropDoorDisableAreaPortalThinkHook : ICBasePropDoorDisableAreaPortalThinkHook
+internal sealed class CBasePropDoorDisableAreaPortalThinkHook(GameHooksService owner) : ICBasePropDoorDisableAreaPortalThinkHook
 {
     private event OnCBasePropDoorDisableAreaPortalThinkPreDelegate? _Pre;
     private event OnCBasePropDoorDisableAreaPortalThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CBasePropDoorDisableAreaPortalThinkHook : ICBasePropDoorDi
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBasePropDoorDisableAreaPortalThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBasePropDoorDisableAreaPortalThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CBasePropDoorDisableAreaPortalThinkHook : ICBasePropDoorDi
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBasePropDoorDisableAreaPortalThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBasePropDoorDisableAreaPortalThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CBasePropDoorDisableAreaPortalThinkHook : ICBasePropDoorDi
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBasePropDoorDisableAreaPortalThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBasePropDoorDisableAreaPortalThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CBasePropDoorDisableAreaPortalThinkHook : ICBasePropDoorDi
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBasePropDoorDisableAreaPortalThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBasePropDoorDisableAreaPortalThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CBasePropDoorDisableAreaPortalThinkHook : ICBasePropDoorDi
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBasePropDoorDisableAreaPortalThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBasePropDoorDisableAreaPortalThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBasePropDoorDisableAreaPortalThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBasePropDoorDisableAreaPortalThink, owner);
         }
     }
 

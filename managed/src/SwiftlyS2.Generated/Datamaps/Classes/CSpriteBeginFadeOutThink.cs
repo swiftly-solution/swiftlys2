@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCSpriteBeginFadeOutThinkPre(ref CSpriteBeginFadeOutThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CSpriteBeginFadeOutThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCSpriteBeginFadeOutThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCSpriteBeginFadeOutThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCSpriteBeginFadeOutThinkPost(ref CSpriteBeginFadeOutThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CSpriteBeginFadeOutThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCSpriteBeginFadeOutThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCSpriteBeginFadeOutThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CSpriteBeginFadeOutThinkHook : ICSpriteBeginFadeOutThinkHook
+internal sealed class CSpriteBeginFadeOutThinkHook(GameHooksService owner) : ICSpriteBeginFadeOutThinkHook
 {
     private event OnCSpriteBeginFadeOutThinkPreDelegate? _Pre;
     private event OnCSpriteBeginFadeOutThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CSpriteBeginFadeOutThinkHook : ICSpriteBeginFadeOutThinkHo
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSpriteBeginFadeOutThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSpriteBeginFadeOutThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CSpriteBeginFadeOutThinkHook : ICSpriteBeginFadeOutThinkHo
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSpriteBeginFadeOutThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSpriteBeginFadeOutThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CSpriteBeginFadeOutThinkHook : ICSpriteBeginFadeOutThinkHo
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSpriteBeginFadeOutThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSpriteBeginFadeOutThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CSpriteBeginFadeOutThinkHook : ICSpriteBeginFadeOutThinkHo
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSpriteBeginFadeOutThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSpriteBeginFadeOutThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CSpriteBeginFadeOutThinkHook : ICSpriteBeginFadeOutThinkHo
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSpriteBeginFadeOutThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSpriteBeginFadeOutThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSpriteBeginFadeOutThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSpriteBeginFadeOutThink, owner);
         }
     }
 

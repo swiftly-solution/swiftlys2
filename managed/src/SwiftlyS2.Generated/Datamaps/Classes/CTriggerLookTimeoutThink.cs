@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCTriggerLookTimeoutThinkPre(ref CTriggerLookTimeoutThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CTriggerLookTimeoutThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCTriggerLookTimeoutThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCTriggerLookTimeoutThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCTriggerLookTimeoutThinkPost(ref CTriggerLookTimeoutThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CTriggerLookTimeoutThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCTriggerLookTimeoutThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCTriggerLookTimeoutThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CTriggerLookTimeoutThinkHook : ICTriggerLookTimeoutThinkHook
+internal sealed class CTriggerLookTimeoutThinkHook(GameHooksService owner) : ICTriggerLookTimeoutThinkHook
 {
     private event OnCTriggerLookTimeoutThinkPreDelegate? _Pre;
     private event OnCTriggerLookTimeoutThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CTriggerLookTimeoutThinkHook : ICTriggerLookTimeoutThinkHo
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerLookTimeoutThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerLookTimeoutThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CTriggerLookTimeoutThinkHook : ICTriggerLookTimeoutThinkHo
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerLookTimeoutThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerLookTimeoutThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CTriggerLookTimeoutThinkHook : ICTriggerLookTimeoutThinkHo
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerLookTimeoutThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CTriggerLookTimeoutThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CTriggerLookTimeoutThinkHook : ICTriggerLookTimeoutThinkHo
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerLookTimeoutThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerLookTimeoutThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CTriggerLookTimeoutThinkHook : ICTriggerLookTimeoutThinkHo
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerLookTimeoutThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerLookTimeoutThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerLookTimeoutThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CTriggerLookTimeoutThink, owner);
         }
     }
 

@@ -2,9 +2,9 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class GameHookDatamapCItemSoda : IGameHookDatamapCItemSoda
+internal sealed class GameHookDatamapCItemSoda(GameHooksService owner) : IGameHookDatamapCItemSoda
 {
-    internal readonly CItemSodaCanThinkHook CItemSodaCanThinkHook = new();
+    internal readonly CItemSodaCanThinkHook CItemSodaCanThinkHook = new(owner);
 
     public ICItemSodaCanThinkHook CanThink => CItemSodaCanThinkHook;
 

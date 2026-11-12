@@ -76,25 +76,21 @@ internal static partial class GameHooksPublisher
 
     internal static void InvokeProcessMovementPre( ref ProcessMovementMovementPreContext ctx )
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(HookListener.ProcessMovement);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeProcessMovementPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
-            }
+            subs[i].InvokeProcessMovementPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
         }
     }
 
     internal static void InvokeProcessMovementPost( ref ProcessMovementMovementPostContext ctx )
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(HookListener.ProcessMovement);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
-            {
-                subscribers[i].InvokeProcessMovementPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
-            }
+            subs[i].InvokeProcessMovementPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
         }
     }
 }

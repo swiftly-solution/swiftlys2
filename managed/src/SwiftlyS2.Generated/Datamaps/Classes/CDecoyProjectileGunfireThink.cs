@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCDecoyProjectileGunfireThinkPre(ref CDecoyProjectileGunfireThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CDecoyProjectileGunfireThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCDecoyProjectileGunfireThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCDecoyProjectileGunfireThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCDecoyProjectileGunfireThinkPost(ref CDecoyProjectileGunfireThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CDecoyProjectileGunfireThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCDecoyProjectileGunfireThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCDecoyProjectileGunfireThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CDecoyProjectileGunfireThinkHook : ICDecoyProjectileGunfireThinkHook
+internal sealed class CDecoyProjectileGunfireThinkHook(GameHooksService owner) : ICDecoyProjectileGunfireThinkHook
 {
     private event OnCDecoyProjectileGunfireThinkPreDelegate? _Pre;
     private event OnCDecoyProjectileGunfireThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CDecoyProjectileGunfireThinkHook : ICDecoyProjectileGunfir
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CDecoyProjectileGunfireThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CDecoyProjectileGunfireThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CDecoyProjectileGunfireThinkHook : ICDecoyProjectileGunfir
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CDecoyProjectileGunfireThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CDecoyProjectileGunfireThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CDecoyProjectileGunfireThinkHook : ICDecoyProjectileGunfir
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CDecoyProjectileGunfireThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CDecoyProjectileGunfireThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CDecoyProjectileGunfireThinkHook : ICDecoyProjectileGunfir
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CDecoyProjectileGunfireThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CDecoyProjectileGunfireThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CDecoyProjectileGunfireThinkHook : ICDecoyProjectileGunfir
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CDecoyProjectileGunfireThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CDecoyProjectileGunfireThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CDecoyProjectileGunfireThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CDecoyProjectileGunfireThink, owner);
         }
     }
 

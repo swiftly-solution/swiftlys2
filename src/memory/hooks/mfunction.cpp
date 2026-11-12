@@ -25,11 +25,9 @@ void MFunctionHook::SetHookFunction(void* addr, void* callback)
     PROFILE_FUNCTION();
 
     if (!addr || !callback)
-    {
         return;
-    }
 
-    auto callbackFunc = (void (*)(safetyhook::Context&))callback;
+    auto callbackFunc = reinterpret_cast<safetyhook::MidHookFn>(callback);
     m_oHook = safetyhook::create_mid(addr, callbackFunc, safetyhook::MidHook::StartDisabled);
 }
 
@@ -38,9 +36,8 @@ void MFunctionHook::Enable()
     PROFILE_FUNCTION();
 
     if (m_oHook.enabled())
-    {
         return;
-    }
+
     (void)m_oHook.enable();
 }
 
@@ -49,15 +46,7 @@ void MFunctionHook::Disable()
     PROFILE_FUNCTION();
 
     if (!m_oHook.enabled())
-    {
         return;
-    }
+
     (void)m_oHook.disable();
-}
-
-bool MFunctionHook::IsEnabled()
-{
-    PROFILE_FUNCTION();
-
-    return m_oHook.enabled();
 }

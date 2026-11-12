@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCItemSodaCanThinkPre(ref CItemSodaCanThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CItemSodaCanThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCItemSodaCanThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCItemSodaCanThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCItemSodaCanThinkPost(ref CItemSodaCanThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CItemSodaCanThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCItemSodaCanThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCItemSodaCanThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CItemSodaCanThinkHook : ICItemSodaCanThinkHook
+internal sealed class CItemSodaCanThinkHook(GameHooksService owner) : ICItemSodaCanThinkHook
 {
     private event OnCItemSodaCanThinkPreDelegate? _Pre;
     private event OnCItemSodaCanThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CItemSodaCanThinkHook : ICItemSodaCanThinkHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CItemSodaCanThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CItemSodaCanThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CItemSodaCanThinkHook : ICItemSodaCanThinkHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemSodaCanThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemSodaCanThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CItemSodaCanThinkHook : ICItemSodaCanThinkHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CItemSodaCanThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CItemSodaCanThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CItemSodaCanThinkHook : ICItemSodaCanThinkHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemSodaCanThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemSodaCanThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CItemSodaCanThinkHook : ICItemSodaCanThinkHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemSodaCanThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemSodaCanThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemSodaCanThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CItemSodaCanThink, owner);
         }
     }
 

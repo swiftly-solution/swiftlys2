@@ -2,7 +2,7 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class SetupMoveMovementHook : ISetupMoveMovementHook
+internal sealed class SetupMoveMovementHook( GameHooksService owner ) : ISetupMoveMovementHook
 {
     internal event OnSetupMoveMovementPreDelegate? _Pre;
     internal event OnSetupMoveMovementPostDelegate? _Post;
@@ -11,13 +11,13 @@ internal sealed class SetupMoveMovementHook : ISetupMoveMovementHook
     {
         add
         {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.SetupMove);
+            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.SetupMove, owner);
             _Pre += value;
         }
         remove
         {
             _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.SetupMove);
+            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.SetupMove, owner);
         }
     }
 
@@ -25,13 +25,13 @@ internal sealed class SetupMoveMovementHook : ISetupMoveMovementHook
     {
         add
         {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.SetupMove);
+            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.SetupMove, owner);
             _Post += value;
         }
         remove
         {
             _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.SetupMove);
+            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.SetupMove, owner);
         }
     }
 
@@ -43,7 +43,7 @@ internal sealed class SetupMoveMovementHook : ISetupMoveMovementHook
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.SetupMove);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.SetupMove);
+        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.SetupMove, owner);
+        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.SetupMove, owner);
     }
 }

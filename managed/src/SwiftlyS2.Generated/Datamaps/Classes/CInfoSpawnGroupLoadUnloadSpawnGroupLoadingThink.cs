@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCInfoSpawnGroupLoadUnloadSpawnGroupLoadingThinkPre(ref CInfoSpawnGroupLoadUnloadSpawnGroupLoadingThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CInfoSpawnGroupLoadUnloadSpawnGroupLoadingThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCInfoSpawnGroupLoadUnloadSpawnGroupLoadingThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCInfoSpawnGroupLoadUnloadSpawnGroupLoadingThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCInfoSpawnGroupLoadUnloadSpawnGroupLoadingThinkPost(ref CInfoSpawnGroupLoadUnloadSpawnGroupLoadingThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CInfoSpawnGroupLoadUnloadSpawnGroupLoadingThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCInfoSpawnGroupLoadUnloadSpawnGroupLoadingThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCInfoSpawnGroupLoadUnloadSpawnGroupLoadingThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CInfoSpawnGroupLoadUnloadSpawnGroupLoadingThinkHook : ICInfoSpawnGroupLoadUnloadSpawnGroupLoadingThinkHook
+internal sealed class CInfoSpawnGroupLoadUnloadSpawnGroupLoadingThinkHook(GameHooksService owner) : ICInfoSpawnGroupLoadUnloadSpawnGroupLoadingThinkHook
 {
     private event OnCInfoSpawnGroupLoadUnloadSpawnGroupLoadingThinkPreDelegate? _Pre;
     private event OnCInfoSpawnGroupLoadUnloadSpawnGroupLoadingThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CInfoSpawnGroupLoadUnloadSpawnGroupLoadingThinkHook : ICIn
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CInfoSpawnGroupLoadUnloadSpawnGroupLoadingThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CInfoSpawnGroupLoadUnloadSpawnGroupLoadingThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CInfoSpawnGroupLoadUnloadSpawnGroupLoadingThinkHook : ICIn
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CInfoSpawnGroupLoadUnloadSpawnGroupLoadingThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CInfoSpawnGroupLoadUnloadSpawnGroupLoadingThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CInfoSpawnGroupLoadUnloadSpawnGroupLoadingThinkHook : ICIn
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CInfoSpawnGroupLoadUnloadSpawnGroupLoadingThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CInfoSpawnGroupLoadUnloadSpawnGroupLoadingThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CInfoSpawnGroupLoadUnloadSpawnGroupLoadingThinkHook : ICIn
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CInfoSpawnGroupLoadUnloadSpawnGroupLoadingThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CInfoSpawnGroupLoadUnloadSpawnGroupLoadingThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CInfoSpawnGroupLoadUnloadSpawnGroupLoadingThinkHook : ICIn
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CInfoSpawnGroupLoadUnloadSpawnGroupLoadingThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CInfoSpawnGroupLoadUnloadSpawnGroupLoadingThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CInfoSpawnGroupLoadUnloadSpawnGroupLoadingThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CInfoSpawnGroupLoadUnloadSpawnGroupLoadingThink, owner);
         }
     }
 

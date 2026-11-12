@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCCSPlayerPawnCheckStuffThinkPre(ref CCSPlayerPawnCheckStuffThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CCSPlayerPawnCheckStuffThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCCSPlayerPawnCheckStuffThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCCSPlayerPawnCheckStuffThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCCSPlayerPawnCheckStuffThinkPost(ref CCSPlayerPawnCheckStuffThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CCSPlayerPawnCheckStuffThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCCSPlayerPawnCheckStuffThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCCSPlayerPawnCheckStuffThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CCSPlayerPawnCheckStuffThinkHook : ICCSPlayerPawnCheckStuffThinkHook
+internal sealed class CCSPlayerPawnCheckStuffThinkHook(GameHooksService owner) : ICCSPlayerPawnCheckStuffThinkHook
 {
     private event OnCCSPlayerPawnCheckStuffThinkPreDelegate? _Pre;
     private event OnCCSPlayerPawnCheckStuffThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CCSPlayerPawnCheckStuffThinkHook : ICCSPlayerPawnCheckStuf
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CCSPlayerPawnCheckStuffThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CCSPlayerPawnCheckStuffThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CCSPlayerPawnCheckStuffThinkHook : ICCSPlayerPawnCheckStuf
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerPawnCheckStuffThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerPawnCheckStuffThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CCSPlayerPawnCheckStuffThinkHook : ICCSPlayerPawnCheckStuf
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CCSPlayerPawnCheckStuffThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CCSPlayerPawnCheckStuffThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CCSPlayerPawnCheckStuffThinkHook : ICCSPlayerPawnCheckStuf
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerPawnCheckStuffThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerPawnCheckStuffThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CCSPlayerPawnCheckStuffThinkHook : ICCSPlayerPawnCheckStuf
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerPawnCheckStuffThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerPawnCheckStuffThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerPawnCheckStuffThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CCSPlayerPawnCheckStuffThink, owner);
         }
     }
 

@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCMomentaryRotButtonUpdateThinkPre(ref CMomentaryRotButtonUpdateThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CMomentaryRotButtonUpdateThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCMomentaryRotButtonUpdateThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCMomentaryRotButtonUpdateThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCMomentaryRotButtonUpdateThinkPost(ref CMomentaryRotButtonUpdateThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CMomentaryRotButtonUpdateThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCMomentaryRotButtonUpdateThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCMomentaryRotButtonUpdateThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CMomentaryRotButtonUpdateThinkHook : ICMomentaryRotButtonUpdateThinkHook
+internal sealed class CMomentaryRotButtonUpdateThinkHook(GameHooksService owner) : ICMomentaryRotButtonUpdateThinkHook
 {
     private event OnCMomentaryRotButtonUpdateThinkPreDelegate? _Pre;
     private event OnCMomentaryRotButtonUpdateThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CMomentaryRotButtonUpdateThinkHook : ICMomentaryRotButtonU
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CMomentaryRotButtonUpdateThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CMomentaryRotButtonUpdateThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CMomentaryRotButtonUpdateThinkHook : ICMomentaryRotButtonU
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMomentaryRotButtonUpdateThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMomentaryRotButtonUpdateThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CMomentaryRotButtonUpdateThinkHook : ICMomentaryRotButtonU
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CMomentaryRotButtonUpdateThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CMomentaryRotButtonUpdateThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CMomentaryRotButtonUpdateThinkHook : ICMomentaryRotButtonU
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMomentaryRotButtonUpdateThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMomentaryRotButtonUpdateThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CMomentaryRotButtonUpdateThinkHook : ICMomentaryRotButtonU
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMomentaryRotButtonUpdateThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMomentaryRotButtonUpdateThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMomentaryRotButtonUpdateThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMomentaryRotButtonUpdateThink, owner);
         }
     }
 

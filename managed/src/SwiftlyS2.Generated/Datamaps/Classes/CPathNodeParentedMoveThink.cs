@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCPathNodeParentedMoveThinkPre(ref CPathNodeParentedMoveThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CPathNodeParentedMoveThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCPathNodeParentedMoveThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCPathNodeParentedMoveThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCPathNodeParentedMoveThinkPost(ref CPathNodeParentedMoveThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CPathNodeParentedMoveThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCPathNodeParentedMoveThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCPathNodeParentedMoveThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CPathNodeParentedMoveThinkHook : ICPathNodeParentedMoveThinkHook
+internal sealed class CPathNodeParentedMoveThinkHook(GameHooksService owner) : ICPathNodeParentedMoveThinkHook
 {
     private event OnCPathNodeParentedMoveThinkPreDelegate? _Pre;
     private event OnCPathNodeParentedMoveThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CPathNodeParentedMoveThinkHook : ICPathNodeParentedMoveThi
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPathNodeParentedMoveThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPathNodeParentedMoveThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CPathNodeParentedMoveThinkHook : ICPathNodeParentedMoveThi
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPathNodeParentedMoveThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPathNodeParentedMoveThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CPathNodeParentedMoveThinkHook : ICPathNodeParentedMoveThi
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPathNodeParentedMoveThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPathNodeParentedMoveThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CPathNodeParentedMoveThinkHook : ICPathNodeParentedMoveThi
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPathNodeParentedMoveThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPathNodeParentedMoveThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CPathNodeParentedMoveThinkHook : ICPathNodeParentedMoveThi
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPathNodeParentedMoveThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPathNodeParentedMoveThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPathNodeParentedMoveThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPathNodeParentedMoveThink, owner);
         }
     }
 

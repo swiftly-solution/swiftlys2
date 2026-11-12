@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCParticleSystemStartParticleSystemThinkPre(ref CParticleSystemStartParticleSystemThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CParticleSystemStartParticleSystemThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCParticleSystemStartParticleSystemThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCParticleSystemStartParticleSystemThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCParticleSystemStartParticleSystemThinkPost(ref CParticleSystemStartParticleSystemThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CParticleSystemStartParticleSystemThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCParticleSystemStartParticleSystemThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCParticleSystemStartParticleSystemThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CParticleSystemStartParticleSystemThinkHook : ICParticleSystemStartParticleSystemThinkHook
+internal sealed class CParticleSystemStartParticleSystemThinkHook(GameHooksService owner) : ICParticleSystemStartParticleSystemThinkHook
 {
     private event OnCParticleSystemStartParticleSystemThinkPreDelegate? _Pre;
     private event OnCParticleSystemStartParticleSystemThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CParticleSystemStartParticleSystemThinkHook : ICParticleSy
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CParticleSystemStartParticleSystemThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CParticleSystemStartParticleSystemThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CParticleSystemStartParticleSystemThinkHook : ICParticleSy
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CParticleSystemStartParticleSystemThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CParticleSystemStartParticleSystemThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CParticleSystemStartParticleSystemThinkHook : ICParticleSy
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CParticleSystemStartParticleSystemThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CParticleSystemStartParticleSystemThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CParticleSystemStartParticleSystemThinkHook : ICParticleSy
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CParticleSystemStartParticleSystemThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CParticleSystemStartParticleSystemThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CParticleSystemStartParticleSystemThinkHook : ICParticleSy
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CParticleSystemStartParticleSystemThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CParticleSystemStartParticleSystemThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CParticleSystemStartParticleSystemThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CParticleSystemStartParticleSystemThink, owner);
         }
     }
 

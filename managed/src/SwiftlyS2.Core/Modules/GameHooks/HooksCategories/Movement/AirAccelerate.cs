@@ -2,7 +2,7 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class AirAccelerateMovementHook : IAirAccelerateMovementHook
+internal sealed class AirAccelerateMovementHook( GameHooksService owner ) : IAirAccelerateMovementHook
 {
     internal event OnAirAccelerateMovementPreDelegate? _Pre;
     internal event OnAirAccelerateMovementPostDelegate? _Post;
@@ -11,13 +11,13 @@ internal sealed class AirAccelerateMovementHook : IAirAccelerateMovementHook
     {
         add
         {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.AirAccelerate);
+            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.AirAccelerate, owner);
             _Pre += value;
         }
         remove
         {
             _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.AirAccelerate);
+            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.AirAccelerate, owner);
         }
     }
 
@@ -25,13 +25,13 @@ internal sealed class AirAccelerateMovementHook : IAirAccelerateMovementHook
     {
         add
         {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.AirAccelerate);
+            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.AirAccelerate, owner);
             _Post += value;
         }
         remove
         {
             _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.AirAccelerate);
+            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.AirAccelerate, owner);
         }
     }
 
@@ -43,7 +43,7 @@ internal sealed class AirAccelerateMovementHook : IAirAccelerateMovementHook
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.AirAccelerate);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.AirAccelerate);
+        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.AirAccelerate, owner);
+        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.AirAccelerate, owner);
     }
 }

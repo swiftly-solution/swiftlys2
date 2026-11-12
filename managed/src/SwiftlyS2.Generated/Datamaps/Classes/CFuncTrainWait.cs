@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCFuncTrainWaitPre(ref CFuncTrainWaitPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CFuncTrainWait);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCFuncTrainWaitPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCFuncTrainWaitPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCFuncTrainWaitPost(ref CFuncTrainWaitPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CFuncTrainWait);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCFuncTrainWaitPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCFuncTrainWaitPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CFuncTrainWaitHook : ICFuncTrainWaitHook
+internal sealed class CFuncTrainWaitHook(GameHooksService owner) : ICFuncTrainWaitHook
 {
     private event OnCFuncTrainWaitPreDelegate? _Pre;
     private event OnCFuncTrainWaitPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CFuncTrainWaitHook : ICFuncTrainWaitHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncTrainWait);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncTrainWait, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CFuncTrainWaitHook : ICFuncTrainWaitHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrainWait);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrainWait, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CFuncTrainWaitHook : ICFuncTrainWaitHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncTrainWait);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncTrainWait, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CFuncTrainWaitHook : ICFuncTrainWaitHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrainWait);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrainWait, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CFuncTrainWaitHook : ICFuncTrainWaitHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrainWait);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrainWait, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrainWait);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrainWait, owner);
         }
     }
 

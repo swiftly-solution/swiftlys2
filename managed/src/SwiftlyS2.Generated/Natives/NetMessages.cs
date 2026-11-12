@@ -19,18 +19,6 @@ internal static class NativeNetMessages
         return ret;
     }
 
-    private unsafe static delegate* unmanaged<byte*, nint> _AllocateNetMessageByPartialName;
-
-    public unsafe static nint AllocateNetMessageByPartialName(string name)
-    {
-        using var nameStr = new ScopedCString(name);
-        fixed (byte* nameBufferPtr = nameStr)
-        {
-            var ret = _AllocateNetMessageByPartialName(nameBufferPtr);
-            return ret;
-        }
-    }
-
     private unsafe static delegate* unmanaged<nint, void> _DeallocateNetMessage;
 
     public unsafe static void DeallocateNetMessage(nint netmsg)
@@ -249,17 +237,6 @@ internal static class NativeNetMessages
     public unsafe static void Clear(nint netmsg)
     {
         _Clear(netmsg);
-    }
-
-    private unsafe static delegate* unmanaged<nint, int, int, void> _SendMessage;
-
-    public unsafe static void SendMessage(nint netmsg, int msgid, int playerid)
-    {
-        if (!NativeBinding.IsMainThread)
-        {
-            throw new InvalidOperationException("This method can only be called from the main thread.");
-        }
-        _SendMessage(netmsg, msgid, playerid);
     }
 
     private unsafe static delegate* unmanaged<nint, int, ulong, void> _SendMessageToPlayers;

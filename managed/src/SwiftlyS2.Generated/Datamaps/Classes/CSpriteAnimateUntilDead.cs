@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCSpriteAnimateUntilDeadPre(ref CSpriteAnimateUntilDeadPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CSpriteAnimateUntilDead);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCSpriteAnimateUntilDeadPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCSpriteAnimateUntilDeadPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCSpriteAnimateUntilDeadPost(ref CSpriteAnimateUntilDeadPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CSpriteAnimateUntilDead);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCSpriteAnimateUntilDeadPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCSpriteAnimateUntilDeadPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CSpriteAnimateUntilDeadHook : ICSpriteAnimateUntilDeadHook
+internal sealed class CSpriteAnimateUntilDeadHook(GameHooksService owner) : ICSpriteAnimateUntilDeadHook
 {
     private event OnCSpriteAnimateUntilDeadPreDelegate? _Pre;
     private event OnCSpriteAnimateUntilDeadPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CSpriteAnimateUntilDeadHook : ICSpriteAnimateUntilDeadHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSpriteAnimateUntilDead);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSpriteAnimateUntilDead, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CSpriteAnimateUntilDeadHook : ICSpriteAnimateUntilDeadHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSpriteAnimateUntilDead);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSpriteAnimateUntilDead, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CSpriteAnimateUntilDeadHook : ICSpriteAnimateUntilDeadHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSpriteAnimateUntilDead);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSpriteAnimateUntilDead, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CSpriteAnimateUntilDeadHook : ICSpriteAnimateUntilDeadHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSpriteAnimateUntilDead);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSpriteAnimateUntilDead, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CSpriteAnimateUntilDeadHook : ICSpriteAnimateUntilDeadHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSpriteAnimateUntilDead);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSpriteAnimateUntilDead, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSpriteAnimateUntilDead);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSpriteAnimateUntilDead, owner);
         }
     }
 

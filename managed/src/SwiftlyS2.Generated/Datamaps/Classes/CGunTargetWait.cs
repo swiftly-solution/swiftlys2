@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCGunTargetWaitPre(ref CGunTargetWaitPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CGunTargetWait);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCGunTargetWaitPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCGunTargetWaitPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCGunTargetWaitPost(ref CGunTargetWaitPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CGunTargetWait);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCGunTargetWaitPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCGunTargetWaitPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CGunTargetWaitHook : ICGunTargetWaitHook
+internal sealed class CGunTargetWaitHook(GameHooksService owner) : ICGunTargetWaitHook
 {
     private event OnCGunTargetWaitPreDelegate? _Pre;
     private event OnCGunTargetWaitPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CGunTargetWaitHook : ICGunTargetWaitHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CGunTargetWait);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CGunTargetWait, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CGunTargetWaitHook : ICGunTargetWaitHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CGunTargetWait);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CGunTargetWait, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CGunTargetWaitHook : ICGunTargetWaitHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CGunTargetWait);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CGunTargetWait, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CGunTargetWaitHook : ICGunTargetWaitHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CGunTargetWait);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CGunTargetWait, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CGunTargetWaitHook : ICGunTargetWaitHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CGunTargetWait);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CGunTargetWait, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CGunTargetWait);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CGunTargetWait, owner);
         }
     }
 

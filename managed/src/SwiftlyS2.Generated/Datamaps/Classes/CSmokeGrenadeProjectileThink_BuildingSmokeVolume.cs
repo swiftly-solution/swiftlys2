@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCSmokeGrenadeProjectileThink_BuildingSmokeVolumePre(ref CSmokeGrenadeProjectileThink_BuildingSmokeVolumePreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CSmokeGrenadeProjectileThink_BuildingSmokeVolume);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCSmokeGrenadeProjectileThink_BuildingSmokeVolumePre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCSmokeGrenadeProjectileThink_BuildingSmokeVolumePre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCSmokeGrenadeProjectileThink_BuildingSmokeVolumePost(ref CSmokeGrenadeProjectileThink_BuildingSmokeVolumePostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CSmokeGrenadeProjectileThink_BuildingSmokeVolume);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCSmokeGrenadeProjectileThink_BuildingSmokeVolumePost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCSmokeGrenadeProjectileThink_BuildingSmokeVolumePost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CSmokeGrenadeProjectileThink_BuildingSmokeVolumeHook : ICSmokeGrenadeProjectileThink_BuildingSmokeVolumeHook
+internal sealed class CSmokeGrenadeProjectileThink_BuildingSmokeVolumeHook(GameHooksService owner) : ICSmokeGrenadeProjectileThink_BuildingSmokeVolumeHook
 {
     private event OnCSmokeGrenadeProjectileThink_BuildingSmokeVolumePreDelegate? _Pre;
     private event OnCSmokeGrenadeProjectileThink_BuildingSmokeVolumePostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CSmokeGrenadeProjectileThink_BuildingSmokeVolumeHook : ICS
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSmokeGrenadeProjectileThink_BuildingSmokeVolume);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSmokeGrenadeProjectileThink_BuildingSmokeVolume, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CSmokeGrenadeProjectileThink_BuildingSmokeVolumeHook : ICS
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSmokeGrenadeProjectileThink_BuildingSmokeVolume);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSmokeGrenadeProjectileThink_BuildingSmokeVolume, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CSmokeGrenadeProjectileThink_BuildingSmokeVolumeHook : ICS
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSmokeGrenadeProjectileThink_BuildingSmokeVolume);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSmokeGrenadeProjectileThink_BuildingSmokeVolume, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CSmokeGrenadeProjectileThink_BuildingSmokeVolumeHook : ICS
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSmokeGrenadeProjectileThink_BuildingSmokeVolume);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSmokeGrenadeProjectileThink_BuildingSmokeVolume, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CSmokeGrenadeProjectileThink_BuildingSmokeVolumeHook : ICS
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSmokeGrenadeProjectileThink_BuildingSmokeVolume);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSmokeGrenadeProjectileThink_BuildingSmokeVolume, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSmokeGrenadeProjectileThink_BuildingSmokeVolume);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSmokeGrenadeProjectileThink_BuildingSmokeVolume, owner);
         }
     }
 

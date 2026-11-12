@@ -27,6 +27,7 @@
     "FollowCS2ServerGuidelines": true,
     "Language": "en",
     "ManualLoadPlugins": false,
+    // Plugin IDs to load first, in listed order. Unlisted plugins load afterwards (when ManualLoadPlugins is false).
     "PluginLoadOrder": [],
     "DotnetCrashTracerLevel": 0,
     "WindowsFullDump": false,

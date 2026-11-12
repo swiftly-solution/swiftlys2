@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCLogicGameStateReportSetGameStateReportThinkPre(ref CLogicGameStateReportSetGameStateReportThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CLogicGameStateReportSetGameStateReportThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCLogicGameStateReportSetGameStateReportThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCLogicGameStateReportSetGameStateReportThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCLogicGameStateReportSetGameStateReportThinkPost(ref CLogicGameStateReportSetGameStateReportThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CLogicGameStateReportSetGameStateReportThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCLogicGameStateReportSetGameStateReportThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCLogicGameStateReportSetGameStateReportThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CLogicGameStateReportSetGameStateReportThinkHook : ICLogicGameStateReportSetGameStateReportThinkHook
+internal sealed class CLogicGameStateReportSetGameStateReportThinkHook(GameHooksService owner) : ICLogicGameStateReportSetGameStateReportThinkHook
 {
     private event OnCLogicGameStateReportSetGameStateReportThinkPreDelegate? _Pre;
     private event OnCLogicGameStateReportSetGameStateReportThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CLogicGameStateReportSetGameStateReportThinkHook : ICLogic
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CLogicGameStateReportSetGameStateReportThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CLogicGameStateReportSetGameStateReportThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CLogicGameStateReportSetGameStateReportThinkHook : ICLogic
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CLogicGameStateReportSetGameStateReportThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CLogicGameStateReportSetGameStateReportThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CLogicGameStateReportSetGameStateReportThinkHook : ICLogic
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CLogicGameStateReportSetGameStateReportThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CLogicGameStateReportSetGameStateReportThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CLogicGameStateReportSetGameStateReportThinkHook : ICLogic
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CLogicGameStateReportSetGameStateReportThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CLogicGameStateReportSetGameStateReportThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CLogicGameStateReportSetGameStateReportThinkHook : ICLogic
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CLogicGameStateReportSetGameStateReportThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CLogicGameStateReportSetGameStateReportThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CLogicGameStateReportSetGameStateReportThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CLogicGameStateReportSetGameStateReportThink, owner);
         }
     }
 

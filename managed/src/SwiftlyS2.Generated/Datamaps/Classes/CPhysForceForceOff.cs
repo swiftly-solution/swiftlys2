@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCPhysForceForceOffPre(ref CPhysForceForceOffPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CPhysForceForceOff);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCPhysForceForceOffPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCPhysForceForceOffPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCPhysForceForceOffPost(ref CPhysForceForceOffPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CPhysForceForceOff);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCPhysForceForceOffPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCPhysForceForceOffPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CPhysForceForceOffHook : ICPhysForceForceOffHook
+internal sealed class CPhysForceForceOffHook(GameHooksService owner) : ICPhysForceForceOffHook
 {
     private event OnCPhysForceForceOffPreDelegate? _Pre;
     private event OnCPhysForceForceOffPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CPhysForceForceOffHook : ICPhysForceForceOffHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPhysForceForceOff);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPhysForceForceOff, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CPhysForceForceOffHook : ICPhysForceForceOffHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysForceForceOff);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysForceForceOff, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CPhysForceForceOffHook : ICPhysForceForceOffHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPhysForceForceOff);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPhysForceForceOff, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CPhysForceForceOffHook : ICPhysForceForceOffHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysForceForceOff);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysForceForceOff, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CPhysForceForceOffHook : ICPhysForceForceOffHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysForceForceOff);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysForceForceOff, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysForceForceOff);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysForceForceOff, owner);
         }
     }
 

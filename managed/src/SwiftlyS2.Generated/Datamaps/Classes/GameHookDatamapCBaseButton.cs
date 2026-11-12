@@ -2,15 +2,15 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class GameHookDatamapCBaseButton : IGameHookDatamapCBaseButton
+internal sealed class GameHookDatamapCBaseButton(GameHooksService owner) : IGameHookDatamapCBaseButton
 {
-    internal readonly CBaseButtonActivateTouchHook CBaseButtonActivateTouchHook = new();
-    internal readonly CBaseButtonButtonBackHomeHook CBaseButtonButtonBackHomeHook = new();
-    internal readonly CBaseButtonButtonReturnHook CBaseButtonButtonReturnHook = new();
-    internal readonly CBaseButtonButtonSparkHook CBaseButtonButtonSparkHook = new();
-    internal readonly CBaseButtonButtonTouchHook CBaseButtonButtonTouchHook = new();
-    internal readonly CBaseButtonButtonUseHook CBaseButtonButtonUseHook = new();
-    internal readonly CBaseButtonTriggerAndWaitHook CBaseButtonTriggerAndWaitHook = new();
+    internal readonly CBaseButtonActivateTouchHook CBaseButtonActivateTouchHook = new(owner);
+    internal readonly CBaseButtonButtonBackHomeHook CBaseButtonButtonBackHomeHook = new(owner);
+    internal readonly CBaseButtonButtonReturnHook CBaseButtonButtonReturnHook = new(owner);
+    internal readonly CBaseButtonButtonSparkHook CBaseButtonButtonSparkHook = new(owner);
+    internal readonly CBaseButtonButtonTouchHook CBaseButtonButtonTouchHook = new(owner);
+    internal readonly CBaseButtonButtonUseHook CBaseButtonButtonUseHook = new(owner);
+    internal readonly CBaseButtonTriggerAndWaitHook CBaseButtonTriggerAndWaitHook = new(owner);
 
     public ICBaseButtonActivateTouchHook ActivateTouch => CBaseButtonActivateTouchHook;
     public ICBaseButtonButtonBackHomeHook ButtonBackHome => CBaseButtonButtonBackHomeHook;

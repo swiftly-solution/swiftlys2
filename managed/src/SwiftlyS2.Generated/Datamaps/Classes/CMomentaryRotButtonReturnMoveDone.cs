@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCMomentaryRotButtonReturnMoveDonePre(ref CMomentaryRotButtonReturnMoveDonePreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CMomentaryRotButtonReturnMoveDone);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCMomentaryRotButtonReturnMoveDonePre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCMomentaryRotButtonReturnMoveDonePre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCMomentaryRotButtonReturnMoveDonePost(ref CMomentaryRotButtonReturnMoveDonePostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CMomentaryRotButtonReturnMoveDone);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCMomentaryRotButtonReturnMoveDonePost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCMomentaryRotButtonReturnMoveDonePost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CMomentaryRotButtonReturnMoveDoneHook : ICMomentaryRotButtonReturnMoveDoneHook
+internal sealed class CMomentaryRotButtonReturnMoveDoneHook(GameHooksService owner) : ICMomentaryRotButtonReturnMoveDoneHook
 {
     private event OnCMomentaryRotButtonReturnMoveDonePreDelegate? _Pre;
     private event OnCMomentaryRotButtonReturnMoveDonePostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CMomentaryRotButtonReturnMoveDoneHook : ICMomentaryRotButt
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CMomentaryRotButtonReturnMoveDone);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CMomentaryRotButtonReturnMoveDone, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CMomentaryRotButtonReturnMoveDoneHook : ICMomentaryRotButt
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMomentaryRotButtonReturnMoveDone);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMomentaryRotButtonReturnMoveDone, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CMomentaryRotButtonReturnMoveDoneHook : ICMomentaryRotButt
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CMomentaryRotButtonReturnMoveDone);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CMomentaryRotButtonReturnMoveDone, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CMomentaryRotButtonReturnMoveDoneHook : ICMomentaryRotButt
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMomentaryRotButtonReturnMoveDone);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMomentaryRotButtonReturnMoveDone, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CMomentaryRotButtonReturnMoveDoneHook : ICMomentaryRotButt
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMomentaryRotButtonReturnMoveDone);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMomentaryRotButtonReturnMoveDone, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMomentaryRotButtonReturnMoveDone);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CMomentaryRotButtonReturnMoveDone, owner);
         }
     }
 

@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCBaseButtonTriggerAndWaitPre(ref CBaseButtonTriggerAndWaitPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseButtonTriggerAndWait);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseButtonTriggerAndWaitPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseButtonTriggerAndWaitPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCBaseButtonTriggerAndWaitPost(ref CBaseButtonTriggerAndWaitPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseButtonTriggerAndWait);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseButtonTriggerAndWaitPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseButtonTriggerAndWaitPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CBaseButtonTriggerAndWaitHook : ICBaseButtonTriggerAndWaitHook
+internal sealed class CBaseButtonTriggerAndWaitHook(GameHooksService owner) : ICBaseButtonTriggerAndWaitHook
 {
     private event OnCBaseButtonTriggerAndWaitPreDelegate? _Pre;
     private event OnCBaseButtonTriggerAndWaitPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CBaseButtonTriggerAndWaitHook : ICBaseButtonTriggerAndWait
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseButtonTriggerAndWait);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseButtonTriggerAndWait, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CBaseButtonTriggerAndWaitHook : ICBaseButtonTriggerAndWait
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseButtonTriggerAndWait);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseButtonTriggerAndWait, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CBaseButtonTriggerAndWaitHook : ICBaseButtonTriggerAndWait
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseButtonTriggerAndWait);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseButtonTriggerAndWait, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CBaseButtonTriggerAndWaitHook : ICBaseButtonTriggerAndWait
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseButtonTriggerAndWait);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseButtonTriggerAndWait, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CBaseButtonTriggerAndWaitHook : ICBaseButtonTriggerAndWait
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseButtonTriggerAndWait);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseButtonTriggerAndWait, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseButtonTriggerAndWait);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseButtonTriggerAndWait, owner);
         }
     }
 

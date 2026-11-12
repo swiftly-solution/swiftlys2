@@ -2,14 +2,14 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class GameHookDatamapCBaseEntity : IGameHookDatamapCBaseEntity
+internal sealed class GameHookDatamapCBaseEntity(GameHooksService owner) : IGameHookDatamapCBaseEntity
 {
-    internal readonly CBaseEntityClearNavIgnoreContentsThinkHook CBaseEntityClearNavIgnoreContentsThinkHook = new();
-    internal readonly CBaseEntityFakeScriptThinkFuncHook CBaseEntityFakeScriptThinkFuncHook = new();
-    internal readonly CBaseEntitySUB_CallUseToggleHook CBaseEntitySUB_CallUseToggleHook = new();
-    internal readonly CBaseEntitySUB_DoNothingHook CBaseEntitySUB_DoNothingHook = new();
-    internal readonly CBaseEntitySUB_KillSelfHook CBaseEntitySUB_KillSelfHook = new();
-    internal readonly CBaseEntitySUB_RemoveHook CBaseEntitySUB_RemoveHook = new();
+    internal readonly CBaseEntityClearNavIgnoreContentsThinkHook CBaseEntityClearNavIgnoreContentsThinkHook = new(owner);
+    internal readonly CBaseEntityFakeScriptThinkFuncHook CBaseEntityFakeScriptThinkFuncHook = new(owner);
+    internal readonly CBaseEntitySUB_CallUseToggleHook CBaseEntitySUB_CallUseToggleHook = new(owner);
+    internal readonly CBaseEntitySUB_DoNothingHook CBaseEntitySUB_DoNothingHook = new(owner);
+    internal readonly CBaseEntitySUB_KillSelfHook CBaseEntitySUB_KillSelfHook = new(owner);
+    internal readonly CBaseEntitySUB_RemoveHook CBaseEntitySUB_RemoveHook = new(owner);
 
     public ICBaseEntityClearNavIgnoreContentsThinkHook ClearNavIgnoreContentsThink => CBaseEntityClearNavIgnoreContentsThinkHook;
     public ICBaseEntityFakeScriptThinkFuncHook FakeScriptThinkFunc => CBaseEntityFakeScriptThinkFuncHook;

@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCSplineConstraintTransitionThinkPre(ref CSplineConstraintTransitionThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CSplineConstraintTransitionThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCSplineConstraintTransitionThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCSplineConstraintTransitionThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCSplineConstraintTransitionThinkPost(ref CSplineConstraintTransitionThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CSplineConstraintTransitionThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCSplineConstraintTransitionThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCSplineConstraintTransitionThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CSplineConstraintTransitionThinkHook : ICSplineConstraintTransitionThinkHook
+internal sealed class CSplineConstraintTransitionThinkHook(GameHooksService owner) : ICSplineConstraintTransitionThinkHook
 {
     private event OnCSplineConstraintTransitionThinkPreDelegate? _Pre;
     private event OnCSplineConstraintTransitionThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CSplineConstraintTransitionThinkHook : ICSplineConstraintT
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSplineConstraintTransitionThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSplineConstraintTransitionThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CSplineConstraintTransitionThinkHook : ICSplineConstraintT
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSplineConstraintTransitionThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSplineConstraintTransitionThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CSplineConstraintTransitionThinkHook : ICSplineConstraintT
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSplineConstraintTransitionThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CSplineConstraintTransitionThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CSplineConstraintTransitionThinkHook : ICSplineConstraintT
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSplineConstraintTransitionThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSplineConstraintTransitionThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CSplineConstraintTransitionThinkHook : ICSplineConstraintT
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSplineConstraintTransitionThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSplineConstraintTransitionThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSplineConstraintTransitionThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CSplineConstraintTransitionThink, owner);
         }
     }
 

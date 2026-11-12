@@ -2,9 +2,9 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class GameHookDatamapCPointValueRemapper : IGameHookDatamapCPointValueRemapper
+internal sealed class GameHookDatamapCPointValueRemapper(GameHooksService owner) : IGameHookDatamapCPointValueRemapper
 {
-    internal readonly CPointValueRemapperUpdateThinkHook CPointValueRemapperUpdateThinkHook = new();
+    internal readonly CPointValueRemapperUpdateThinkHook CPointValueRemapperUpdateThinkHook = new(owner);
 
     public ICPointValueRemapperUpdateThinkHook UpdateThink => CPointValueRemapperUpdateThinkHook;
 

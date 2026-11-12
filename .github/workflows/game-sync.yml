@@ -13,13 +13,6 @@ jobs:
   game-sync:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout CS2-Dumps
-        uses: actions/checkout@v5
-        with:
-          repository: Swiftly-Tracker/CS2-Dumps
-          ref: main
-          path: CS2-Dumps
-
       - name: Checkout codegen
         uses: actions/checkout@v5
         with:
@@ -41,20 +34,9 @@ jobs:
         with:
           dotnet-version: "10.0.x"
 
-      - name: Update existing protobufs
-        shell: bash
-        run: |
-          mkdir -p swiftlys2/protobufs/cs2
-          for file in $(find swiftlys2/protobufs/cs2 -name "*.proto"); do
-            filename=$(basename "$file")
-            found_file=$(find CS2-Dumps/protobufs/all -name "$filename" | head -n 1)
-            if [[ -n "$found_file" ]]; then
-              cp "$found_file" "swiftlys2/protobufs/cs2/$filename"
-              echo "Copied $filename"
-            else
-              echo "File $filename not found in CS2-Dumps"
-            fi
-          done
+      - name: Checkout s2sdk submodule
+        working-directory: swiftlys2
+        run: git submodule update --init vendor/s2sdk
 
       - name: Generate CS2 code
         working-directory: codegen
@@ -63,7 +45,7 @@ jobs:
           --project SwiftlyS2.Codegen.csproj --
           --game cs2
           --gameevents
-          --protobufs-path ../swiftlys2/protobufs/cs2
+          --protobufs-path ../swiftlys2/vendor/s2sdk/protobufs/protos
           --datamaps
           --schemas
 
@@ -132,7 +114,7 @@ jobs:
           committer: swiftlychan <swiftlychan@swiftlys2.net>
           title: ${{ steps.metadata.outputs.title }}
           body: |
-            This PR updates generated CS2 code using the latest CS2-Dumps data.
+            This PR updates generated CS2 code using the protobufs from vendor/s2sdk.
 
             Trigger: ${{ steps.metadata.outputs.trigger }}
             Workflow run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
@@ -140,7 +122,6 @@ jobs:
             update
             automation
           add-paths: |
-            protobufs/cs2
             managed/src/SwiftlyS2.Generated/GameEvents
             managed/src/SwiftlyS2.Generated/Datamaps
             managed/src/SwiftlyS2.Generated/Protobufs

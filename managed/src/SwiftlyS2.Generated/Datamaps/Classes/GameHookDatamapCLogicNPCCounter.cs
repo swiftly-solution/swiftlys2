@@ -2,9 +2,9 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class GameHookDatamapCLogicNPCCounter : IGameHookDatamapCLogicNPCCounter
+internal sealed class GameHookDatamapCLogicNPCCounter(GameHooksService owner) : IGameHookDatamapCLogicNPCCounter
 {
-    internal readonly CLogicNPCCounterSetNPCCounterThinkHook CLogicNPCCounterSetNPCCounterThinkHook = new();
+    internal readonly CLogicNPCCounterSetNPCCounterThinkHook CLogicNPCCounterSetNPCCounterThinkHook = new(owner);
 
     public ICLogicNPCCounterSetNPCCounterThinkHook SetNPCCounterThink => CLogicNPCCounterSetNPCCounterThinkHook;
 

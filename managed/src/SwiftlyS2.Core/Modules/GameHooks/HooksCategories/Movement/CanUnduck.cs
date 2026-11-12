@@ -2,7 +2,7 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class CanUnduckMovementHook : ICanUnduckMovementHook
+internal sealed class CanUnduckMovementHook( GameHooksService owner ) : ICanUnduckMovementHook
 {
     internal event OnCanUnduckMovementPreDelegate? _Pre;
     internal event OnCanUnduckMovementPostDelegate? _Post;
@@ -11,13 +11,13 @@ internal sealed class CanUnduckMovementHook : ICanUnduckMovementHook
     {
         add
         {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.CanUnduck);
+            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.CanUnduck, owner);
             _Pre += value;
         }
         remove
         {
             _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.CanUnduck);
+            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.CanUnduck, owner);
         }
     }
 
@@ -25,13 +25,13 @@ internal sealed class CanUnduckMovementHook : ICanUnduckMovementHook
     {
         add
         {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.CanUnduck);
+            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.CanUnduck, owner);
             _Post += value;
         }
         remove
         {
             _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.CanUnduck);
+            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.CanUnduck, owner);
         }
     }
 
@@ -43,7 +43,7 @@ internal sealed class CanUnduckMovementHook : ICanUnduckMovementHook
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.CanUnduck);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.CanUnduck);
+        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.CanUnduck, owner);
+        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.CanUnduck, owner);
     }
 }

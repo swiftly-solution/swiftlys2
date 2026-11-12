@@ -191,6 +191,8 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
                     {
                         elem = parent;
                         RotateLeft(elem);
+                        parent = Parent(elem);
+                        grandparent = Parent(parent);
                     }
 
                     SetColor(parent, NodeColor_t.BLACK);
@@ -214,6 +216,8 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
                     {
                         elem = parent;
                         RotateRight(elem);
+                        parent = Parent(elem);
+                        grandparent = Parent(parent);
                     }
 
                     SetColor(parent, NodeColor_t.BLACK);
@@ -422,7 +426,7 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
             while (IsValidIndex(current))
             {
                 parent = current;
-                if (!@delegate(ref val, ref this[current]))
+                if (@delegate(ref val, ref this[current]))
                 {
                     leftchild = true;
                     current = LeftChild(current);
@@ -483,21 +487,11 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
 
     public void RemoveAll()
     {
-        if (LastAlloc.Index == -TKey.One)
-            return;
-
-        for (var i = TKey.Zero; i <= LastAlloc.Index; i++)
+        for (var i = Elements.Count; i > TKey.Zero;)
         {
+            i--;
             if (IsValidIndex(i))
-            {
-                SetRightChild(i, FirstFree);
-                SetLeftChild(i, i);
-                FirstFree = i;
-            }
-
-            Elements[i] = default;
-            if (i == LastAlloc.Index)
-                break;
+                FreeNode(i);
         }
 
         Root = -TKey.One;

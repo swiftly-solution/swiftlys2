@@ -2,7 +2,7 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class FireOutputEntityHook : IFireOutputEntityHook
+internal sealed class FireOutputEntityHook( GameHooksService owner ) : IFireOutputEntityHook
 {
     internal event OnFireOutputEntityPreDelegate? _Pre;
     internal event OnFireOutputEntityPostDelegate? _Post;
@@ -11,13 +11,13 @@ internal sealed class FireOutputEntityHook : IFireOutputEntityHook
     {
         add
         {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.FireOutput);
+            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.FireOutput, owner);
             _Pre += value;
         }
         remove
         {
             _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.FireOutput);
+            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.FireOutput, owner);
         }
     }
 
@@ -25,13 +25,13 @@ internal sealed class FireOutputEntityHook : IFireOutputEntityHook
     {
         add
         {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.FireOutput);
+            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.FireOutput, owner);
             _Post += value;
         }
         remove
         {
             _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.FireOutput);
+            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.FireOutput, owner);
         }
     }
 
@@ -43,7 +43,7 @@ internal sealed class FireOutputEntityHook : IFireOutputEntityHook
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.FireOutput);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.FireOutput);
+        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.FireOutput, owner);
+        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.FireOutput, owner);
     }
 }

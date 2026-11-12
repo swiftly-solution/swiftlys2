@@ -15,18 +15,7 @@ internal class StartupService : IHostedService
         var _ = ClassConvertor.ConvertEntityByDesignerName(0, "abc");
 
         // this.provider = provider;
-        provider.UseGameHooksPublisher();
-        provider.UseCoreHookService();
-        provider.UseCoreVoiceService();
-        provider.UseCoreTranslationService();
-        provider.UseCorePlayerService();
-        provider.UsePermissionManager();
-        provider.UseMenuManagerAPIService();
-        provider.UseMenuRuntimeService();
-        // UseCoreCommandService must be the second to last one
-        provider.UseCoreCommandService();
-        // Initialize PluginManager after everything is ready
-        provider.UsePluginManager();
+        provider.StartCoreServices();
     }
 
     public Task StartAsync( CancellationToken cancellationToken )

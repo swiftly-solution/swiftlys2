@@ -6,12 +6,12 @@ namespace SwiftlyS2.Core.GameHooks;
 
 internal sealed partial class GameHooksService : IGameHooks, IDisposable
 {
-    internal readonly GameHookItem ItemsHook = new();
-    internal readonly GameHookMovement MovementHook = new();
-    internal readonly GameHookPawn PawnHook = new();
-    internal readonly GameHookWeapon WeaponsHook = new();
-    internal readonly GameHookController ControllerHook = new();
-    internal readonly GameHookEntities EntitiesHook = new();
+    internal readonly GameHookItem ItemsHook;
+    internal readonly GameHookMovement MovementHook;
+    internal readonly GameHookPawn PawnHook;
+    internal readonly GameHookWeapon WeaponsHook;
+    internal readonly GameHookController ControllerHook;
+    internal readonly GameHookEntities EntitiesHook;
     private bool _disposed = false;
     private readonly IContextedProfilerService profiler;
     private readonly ILogger<GameHooksService> logger;
@@ -27,8 +27,13 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
     {
         this.profiler = profiler;
         this.logger = logger;
-        GameHooksPublisher.Subscribe(this);
-        SubscribeDatamapsHooks();
+        ItemsHook = new(this);
+        MovementHook = new(this);
+        PawnHook = new(this);
+        WeaponsHook = new(this);
+        ControllerHook = new(this);
+        EntitiesHook = new(this);
+        InitializeDatamapsHooks();
     }
 
     ~GameHooksService()
@@ -89,7 +94,6 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         DisposeDatamapsHooks();
 
         _disposed = true;
-        GameHooksPublisher.Unsubscribe(this);
         GC.SuppressFinalize(this);
     }
 

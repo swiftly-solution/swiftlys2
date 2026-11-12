@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCFuncShatterglassGlassThinkPre(ref CFuncShatterglassGlassThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CFuncShatterglassGlassThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCFuncShatterglassGlassThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCFuncShatterglassGlassThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCFuncShatterglassGlassThinkPost(ref CFuncShatterglassGlassThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CFuncShatterglassGlassThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCFuncShatterglassGlassThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCFuncShatterglassGlassThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CFuncShatterglassGlassThinkHook : ICFuncShatterglassGlassThinkHook
+internal sealed class CFuncShatterglassGlassThinkHook(GameHooksService owner) : ICFuncShatterglassGlassThinkHook
 {
     private event OnCFuncShatterglassGlassThinkPreDelegate? _Pre;
     private event OnCFuncShatterglassGlassThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CFuncShatterglassGlassThinkHook : ICFuncShatterglassGlassT
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncShatterglassGlassThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncShatterglassGlassThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CFuncShatterglassGlassThinkHook : ICFuncShatterglassGlassT
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncShatterglassGlassThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncShatterglassGlassThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CFuncShatterglassGlassThinkHook : ICFuncShatterglassGlassT
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncShatterglassGlassThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncShatterglassGlassThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CFuncShatterglassGlassThinkHook : ICFuncShatterglassGlassT
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncShatterglassGlassThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncShatterglassGlassThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CFuncShatterglassGlassThinkHook : ICFuncShatterglassGlassT
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncShatterglassGlassThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncShatterglassGlassThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncShatterglassGlassThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncShatterglassGlassThink, owner);
         }
     }
 

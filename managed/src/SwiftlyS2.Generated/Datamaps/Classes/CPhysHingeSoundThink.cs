@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCPhysHingeSoundThinkPre(ref CPhysHingeSoundThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CPhysHingeSoundThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCPhysHingeSoundThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCPhysHingeSoundThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCPhysHingeSoundThinkPost(ref CPhysHingeSoundThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CPhysHingeSoundThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCPhysHingeSoundThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCPhysHingeSoundThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CPhysHingeSoundThinkHook : ICPhysHingeSoundThinkHook
+internal sealed class CPhysHingeSoundThinkHook(GameHooksService owner) : ICPhysHingeSoundThinkHook
 {
     private event OnCPhysHingeSoundThinkPreDelegate? _Pre;
     private event OnCPhysHingeSoundThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CPhysHingeSoundThinkHook : ICPhysHingeSoundThinkHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPhysHingeSoundThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPhysHingeSoundThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CPhysHingeSoundThinkHook : ICPhysHingeSoundThinkHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysHingeSoundThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysHingeSoundThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CPhysHingeSoundThinkHook : ICPhysHingeSoundThinkHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPhysHingeSoundThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPhysHingeSoundThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CPhysHingeSoundThinkHook : ICPhysHingeSoundThinkHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysHingeSoundThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysHingeSoundThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CPhysHingeSoundThinkHook : ICPhysHingeSoundThinkHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysHingeSoundThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysHingeSoundThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysHingeSoundThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysHingeSoundThink, owner);
         }
     }
 

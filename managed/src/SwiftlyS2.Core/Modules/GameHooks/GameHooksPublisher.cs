@@ -1,5 +1,6 @@
 using System.Runtime.InteropServices;
 using SwiftlyS2.Shared;
+using SwiftlyS2.Core.Services;
 
 namespace SwiftlyS2.Core.GameHooks;
 
@@ -55,58 +56,26 @@ internal static partial class GameHooksPublisher
         _core = core;
     }
 
-    private static readonly List<GameHooksService> subscribers = [];
-    private static readonly Lock subscribersLock = new();
-
-    private static readonly Dictionary<HookListener, int> hookListeners = [];
-    private static readonly Lock hookListenersLock = new();
-
     private static readonly Dictionary<HookListener, Guid> hookIds = [];
     private static readonly bool IsWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 
-    internal static void Subscribe( GameHooksService subscriber )
-    {
-        lock (subscribersLock)
+    private static readonly SubscriberRouter<HookListener, GameHooksService> router = new(
+        onFirst: hookName => hookIds[hookName] = HookFunction(hookName),
+        onLast: hookName =>
         {
-            subscribers.Add(subscriber);
-        }
-    }
+            _ = UnhookFunction(hookName);
+            _ = hookIds.Remove(hookName);
+        });
 
-    internal static void Unsubscribe( GameHooksService subscriber )
-    {
-        lock (subscribersLock)
-        {
-            _ = subscribers.Remove(subscriber);
-        }
-    }
+    private static GameHooksService[] GetSubscribers( HookListener hookName ) => router.Get(hookName);
 
-    internal static void AddHookListener( HookListener hookName )
-    {
-        lock (hookListenersLock)
-        {
-            hookListeners[hookName] = hookListeners.TryGetValue(hookName, out var value) ? ++value : 1;
-            if (hookListeners[hookName] == 1)
-            {
-                hookIds[hookName] = HookFunction(hookName);
-            }
-        }
-    }
+    internal static void AddHookListener( HookListener hookName, GameHooksService owner ) => router.Add(hookName, owner);
 
-    internal static void RemoveHookListener( HookListener hookName )
-    {
-        lock (hookListenersLock)
-        {
-            if (hookListeners.ContainsKey(hookName))
-            {
-                if (--hookListeners[hookName] <= 0)
-                {
-                    _ = hookListeners.Remove(hookName);
-                    _ = UnhookFunction(hookName);
-                    _ = hookIds.Remove(hookName);
-                }
-            }
-        }
-    }
+    internal static void RemoveHookListener( HookListener hookName, GameHooksService owner ) => router.Remove(hookName, owner);
+
+    internal static void AddHookListener( HookListener hookName ) => router.AddExternal(hookName);
+
+    internal static void RemoveHookListener( HookListener hookName ) => router.RemoveExternal(hookName);
 
     internal static Guid HookFunction( HookListener hookName )
     {

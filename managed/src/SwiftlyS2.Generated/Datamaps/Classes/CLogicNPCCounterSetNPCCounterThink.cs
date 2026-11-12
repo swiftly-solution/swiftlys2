@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCLogicNPCCounterSetNPCCounterThinkPre(ref CLogicNPCCounterSetNPCCounterThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CLogicNPCCounterSetNPCCounterThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCLogicNPCCounterSetNPCCounterThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCLogicNPCCounterSetNPCCounterThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCLogicNPCCounterSetNPCCounterThinkPost(ref CLogicNPCCounterSetNPCCounterThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CLogicNPCCounterSetNPCCounterThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCLogicNPCCounterSetNPCCounterThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCLogicNPCCounterSetNPCCounterThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CLogicNPCCounterSetNPCCounterThinkHook : ICLogicNPCCounterSetNPCCounterThinkHook
+internal sealed class CLogicNPCCounterSetNPCCounterThinkHook(GameHooksService owner) : ICLogicNPCCounterSetNPCCounterThinkHook
 {
     private event OnCLogicNPCCounterSetNPCCounterThinkPreDelegate? _Pre;
     private event OnCLogicNPCCounterSetNPCCounterThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CLogicNPCCounterSetNPCCounterThinkHook : ICLogicNPCCounter
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CLogicNPCCounterSetNPCCounterThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CLogicNPCCounterSetNPCCounterThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CLogicNPCCounterSetNPCCounterThinkHook : ICLogicNPCCounter
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CLogicNPCCounterSetNPCCounterThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CLogicNPCCounterSetNPCCounterThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CLogicNPCCounterSetNPCCounterThinkHook : ICLogicNPCCounter
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CLogicNPCCounterSetNPCCounterThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CLogicNPCCounterSetNPCCounterThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CLogicNPCCounterSetNPCCounterThinkHook : ICLogicNPCCounter
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CLogicNPCCounterSetNPCCounterThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CLogicNPCCounterSetNPCCounterThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CLogicNPCCounterSetNPCCounterThinkHook : ICLogicNPCCounter
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CLogicNPCCounterSetNPCCounterThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CLogicNPCCounterSetNPCCounterThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CLogicNPCCounterSetNPCCounterThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CLogicNPCCounterSetNPCCounterThink, owner);
         }
     }
 

@@ -2,12 +2,12 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class GameHookDatamapCFuncTrackTrain : IGameHookDatamapCFuncTrackTrain
+internal sealed class GameHookDatamapCFuncTrackTrain(GameHooksService owner) : IGameHookDatamapCFuncTrackTrain
 {
-    internal readonly CFuncTrackTrainDeadEndHook CFuncTrackTrainDeadEndHook = new();
-    internal readonly CFuncTrackTrainFindHook CFuncTrackTrainFindHook = new();
-    internal readonly CFuncTrackTrainNearestPathHook CFuncTrackTrainNearestPathHook = new();
-    internal readonly CFuncTrackTrainNextHook CFuncTrackTrainNextHook = new();
+    internal readonly CFuncTrackTrainDeadEndHook CFuncTrackTrainDeadEndHook = new(owner);
+    internal readonly CFuncTrackTrainFindHook CFuncTrackTrainFindHook = new(owner);
+    internal readonly CFuncTrackTrainNearestPathHook CFuncTrackTrainNearestPathHook = new(owner);
+    internal readonly CFuncTrackTrainNextHook CFuncTrackTrainNextHook = new(owner);
 
     public ICFuncTrackTrainDeadEndHook DeadEnd => CFuncTrackTrainDeadEndHook;
     public ICFuncTrackTrainFindHook Find => CFuncTrackTrainFindHook;

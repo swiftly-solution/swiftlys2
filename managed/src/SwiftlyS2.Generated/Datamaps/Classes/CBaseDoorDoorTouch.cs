@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCBaseDoorDoorTouchPre(ref CBaseDoorDoorTouchPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseDoorDoorTouch);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseDoorDoorTouchPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseDoorDoorTouchPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCBaseDoorDoorTouchPost(ref CBaseDoorDoorTouchPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CBaseDoorDoorTouch);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCBaseDoorDoorTouchPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCBaseDoorDoorTouchPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CBaseDoorDoorTouchHook : ICBaseDoorDoorTouchHook
+internal sealed class CBaseDoorDoorTouchHook(GameHooksService owner) : ICBaseDoorDoorTouchHook
 {
     private event OnCBaseDoorDoorTouchPreDelegate? _Pre;
     private event OnCBaseDoorDoorTouchPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CBaseDoorDoorTouchHook : ICBaseDoorDoorTouchHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseDoorDoorTouch);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseDoorDoorTouch, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CBaseDoorDoorTouchHook : ICBaseDoorDoorTouchHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseDoorDoorTouch);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseDoorDoorTouch, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CBaseDoorDoorTouchHook : ICBaseDoorDoorTouchHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseDoorDoorTouch);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CBaseDoorDoorTouch, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CBaseDoorDoorTouchHook : ICBaseDoorDoorTouchHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseDoorDoorTouch);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseDoorDoorTouch, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CBaseDoorDoorTouchHook : ICBaseDoorDoorTouchHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseDoorDoorTouch);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseDoorDoorTouch, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseDoorDoorTouch);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CBaseDoorDoorTouch, owner);
         }
     }
 

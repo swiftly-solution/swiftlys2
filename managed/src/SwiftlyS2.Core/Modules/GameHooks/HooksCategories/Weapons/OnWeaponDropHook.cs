@@ -2,7 +2,7 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class WeaponDropHook : IWeaponDropHook
+internal sealed class WeaponDropHook( GameHooksService owner ) : IWeaponDropHook
 {
     internal event OnWeaponDropPreDelegate? _Pre;
     internal event OnWeaponDropPostDelegate? _Post;
@@ -11,13 +11,13 @@ internal sealed class WeaponDropHook : IWeaponDropHook
     {
         add
         {
-            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.WeaponDrop);
+            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.WeaponDrop, owner);
             _Pre += value;
         }
         remove
         {
             _Pre -= value;
-            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.WeaponDrop);
+            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.WeaponDrop, owner);
         }
     }
 
@@ -25,13 +25,13 @@ internal sealed class WeaponDropHook : IWeaponDropHook
     {
         add
         {
-            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.WeaponDrop);
+            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.WeaponDrop, owner);
             _Post += value;
         }
         remove
         {
             _Post -= value;
-            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.WeaponDrop);
+            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.WeaponDrop, owner);
         }
     }
 
@@ -43,7 +43,7 @@ internal sealed class WeaponDropHook : IWeaponDropHook
 
     public void UnregisterListeners()
     {
-        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.WeaponDrop);
-        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.WeaponDrop);
+        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.WeaponDrop, owner);
+        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.WeaponDrop, owner);
     }
 }

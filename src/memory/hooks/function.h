@@ -39,18 +39,16 @@ public:
     FunctionHook(const FunctionHook&) = delete;
     FunctionHook& operator=(const FunctionHook&) = delete;
 
-    virtual void SetHookFunction(const std::string& functionSignature, void* callback) override;
-    virtual void SetHookFunction(void* functionAddress, void* callback) override;
+    void SetHookFunction(void* functionAddress, void* callback) override;
 
-    virtual void Enable() override;
-    virtual void Disable() override;
+    void Enable() override;
+    void Disable() override;
 
-    virtual void* GetOriginal() override;
-    virtual bool IsEnabled() override;
+    void* GetOriginal() override;
 
-    virtual bool Install() override;
-    virtual void Uninstall() override;
-    virtual const char* GetName() const override;
+    bool Install() override;
+    void Uninstall() override;
+    const char* GetName() const override;
 
 private:
     SafetyHookInline m_oHook;

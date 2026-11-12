@@ -76,32 +76,11 @@ void Bridge_Hooks_EnableMHook(void* hook)
     ((IMFunctionHook*)hook)->Enable();
 }
 
-void Bridge_Hooks_DisableHook(void* hook)
-{
-    PROFILE_FUNCTION();
-
-    ((IFunctionHook*)hook)->Disable();
-}
-
 void Bridge_Hooks_DisableMHook(void* hook)
 {
     PROFILE_FUNCTION();
 
     ((IMFunctionHook*)hook)->Disable();
-}
-
-bool Bridge_Hooks_IsHookEnabled(void* hook)
-{
-    PROFILE_FUNCTION();
-
-    return ((IFunctionHook*)hook)->IsEnabled();
-}
-
-bool Bridge_Hooks_IsMHookEnabled(void* hook)
-{
-    PROFILE_FUNCTION();
-
-    return ((IMFunctionHook*)hook)->IsEnabled();
 }
 
 void* Bridge_Hooks_GetHookOriginal(void* hook)
@@ -119,8 +98,5 @@ DEFINE_NATIVE("Hooks.SetHook", Bridge_Hooks_SetHook);
 DEFINE_NATIVE("Hooks.SetMHook", Bridge_Hooks_SetMHook);
 DEFINE_NATIVE("Hooks.EnableHook", Bridge_Hooks_EnableHook);
 DEFINE_NATIVE("Hooks.EnableMHook", Bridge_Hooks_EnableMHook);
-DEFINE_NATIVE("Hooks.DisableHook", Bridge_Hooks_DisableHook);
 DEFINE_NATIVE("Hooks.DisableMHook", Bridge_Hooks_DisableMHook);
-DEFINE_NATIVE("Hooks.IsHookEnabled", Bridge_Hooks_IsHookEnabled);
-DEFINE_NATIVE("Hooks.IsMHookEnabled", Bridge_Hooks_IsMHookEnabled);
 DEFINE_NATIVE("Hooks.GetHookOriginal", Bridge_Hooks_GetHookOriginal);

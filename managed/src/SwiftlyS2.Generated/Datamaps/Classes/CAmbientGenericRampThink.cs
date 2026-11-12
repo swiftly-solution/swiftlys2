@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCAmbientGenericRampThinkPre(ref CAmbientGenericRampThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CAmbientGenericRampThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCAmbientGenericRampThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCAmbientGenericRampThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCAmbientGenericRampThinkPost(ref CAmbientGenericRampThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CAmbientGenericRampThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCAmbientGenericRampThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCAmbientGenericRampThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CAmbientGenericRampThinkHook : ICAmbientGenericRampThinkHook
+internal sealed class CAmbientGenericRampThinkHook(GameHooksService owner) : ICAmbientGenericRampThinkHook
 {
     private event OnCAmbientGenericRampThinkPreDelegate? _Pre;
     private event OnCAmbientGenericRampThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CAmbientGenericRampThinkHook : ICAmbientGenericRampThinkHo
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CAmbientGenericRampThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CAmbientGenericRampThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CAmbientGenericRampThinkHook : ICAmbientGenericRampThinkHo
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CAmbientGenericRampThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CAmbientGenericRampThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CAmbientGenericRampThinkHook : ICAmbientGenericRampThinkHo
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CAmbientGenericRampThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CAmbientGenericRampThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CAmbientGenericRampThinkHook : ICAmbientGenericRampThinkHo
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CAmbientGenericRampThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CAmbientGenericRampThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CAmbientGenericRampThinkHook : ICAmbientGenericRampThinkHo
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CAmbientGenericRampThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CAmbientGenericRampThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CAmbientGenericRampThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CAmbientGenericRampThink, owner);
         }
     }
 

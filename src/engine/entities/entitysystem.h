@@ -24,8 +24,8 @@
 class CEntSystem : public IEntitySystem
 {
 public:
-    virtual void Shutdown() override;
-    virtual CEntitySystem* GetEntitySystem() override;
+    void Shutdown() override;
+    [[nodiscard]] CEntitySystem* GetEntitySystem() override;
 };
 
 #endif

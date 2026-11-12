@@ -84,6 +84,22 @@ internal class SchedulerService : ISchedulerService, IDisposable
         return SchedulerManager.NextWorldUpdateAsync(task);
     }
 
+    public Task QueueOrNow( Action task, bool onWorldUpdate = false )
+    {
+        return SchedulerManager.QueueOrNow(task, onWorldUpdate);
+    }
+
+    public Task<T> QueueOrNow<T>( Func<T> task, bool onWorldUpdate = false )
+    {
+        return SchedulerManager.QueueOrNow(task, onWorldUpdate);
+    }
+
+    public Task QueueOrNow( Func<Task?> task, bool onWorldUpdate = false ) => throw new InvalidOperationException(
+        "QueueOrNow does not support async callbacks.");
+
+    public Task<T> QueueOrNow<T>( Func<Task<T?>> task, bool onWorldUpdate = false ) => throw new InvalidOperationException(
+        "QueueOrNow does not support async callbacks.");
+
     public CancellationTokenSource Delay( int delayTick, Action task )
     {
         CleanFinishedTimers();

@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using Spectre.Console;
 using Microsoft.Extensions.Logging;
 using SwiftlyS2.Shared;
+using SwiftlyS2.Core.Commands;
 using SwiftlyS2.Core.Plugins;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared.Commands;
@@ -440,6 +441,13 @@ internal class CoreCommandService
             return false;
         }
 
+        PluginContext? FindLoadedPlugin( string dllName )
+        {
+            var dir = pluginManager.FindPluginDirectoryByDllName(dllName);
+            return pluginManager.GetPlugins().FirstOrDefault(p =>
+                p.Status == PluginStatus.Loaded && string.Equals(p.PluginDirectory, dir, StringComparison.OrdinalIgnoreCase));
+        }
+
         string GetColoredStatus( PluginStatus? status ) => status switch {
             // PluginStatus.Loaded => "[green]Loaded[/]",
             // PluginStatus.Error => "[red]Error[/]",
@@ -480,7 +488,7 @@ internal class CoreCommandService
 
                     if (pluginManager.LoadPluginByDllName(args[2], true))
                     {
-                        logger.LogInformation("Loaded plugin: {Format}", args[2]);
+                        logger.LogInformation("Loaded plugin: {Format} ({LoadTimeMs:F1} ms)", args[2], FindLoadedPlugin(args[2])?.LoadTime.TotalMilliseconds ?? 0);
                     }
                     else
                     {
@@ -493,9 +501,10 @@ internal class CoreCommandService
                 if (ValidatePluginId(args, "unload", "<dllName>"))
                 {
                     Console.WriteLine("\n");
+                    var unloading = FindLoadedPlugin(args[2]);
                     if (pluginManager.UnloadPluginByDllName(args[2], true))
                     {
-                        logger.LogInformation("Unloaded plugin: {Format}", args[2]);
+                        logger.LogInformation("Unloaded plugin: {Format} ({UnloadTimeMs:F1} ms)", args[2], unloading?.UnloadTime.TotalMilliseconds ?? 0);
                     }
                     else
                     {
@@ -508,9 +517,11 @@ internal class CoreCommandService
                 if (ValidatePluginId(args, "reload", "<dllName>"))
                 {
                     Console.WriteLine("\n");
+                    var reloading = FindLoadedPlugin(args[2]);
                     if (pluginManager.ReloadPluginByDllName(args[2], true))
                     {
-                        logger.LogInformation("Reloaded plugin: {Format}", args[2]);
+                        logger.LogInformation("Reloaded plugin: {Format} (unload {UnloadTimeMs:F1} ms, load {LoadTimeMs:F1} ms)", args[2],
+                            reloading?.UnloadTime.TotalMilliseconds ?? 0, FindLoadedPlugin(args[2])?.LoadTime.TotalMilliseconds ?? 0);
                     }
                     else
                     {
@@ -651,6 +662,10 @@ internal class CoreCommandService
             return;
         }
 
+        var aliasesByCommand = CommandDispatcher.GetAliases()
+            .GroupBy(target => target.CommandKey, StringComparer.OrdinalIgnoreCase)
+            .ToDictionary(group => group.Key, group => group.OrderBy(target => target.Alias, StringComparer.OrdinalIgnoreCase).Select(target => (target.Alias, target.RegisterRaw)).ToList(), StringComparer.OrdinalIgnoreCase);
+
         var allRows = commandsByPlugin
             .OrderBy(x => x.Key)
             .SelectMany(pluginEntry => pluginEntry.Value
@@ -659,7 +674,9 @@ internal class CoreCommandService
                     Plugin: idx == 0 ? pluginEntry.Key : string.Empty,
                     cmd.CommandName,
                     cmd.HelpText,
-                    cmd.Permission)))
+                    cmd.Permission,
+                    cmd.RegisterRaw,
+                    Aliases: aliasesByCommand.TryGetValue(CommandDispatcher.NormalizeName(cmd.CommandName, cmd.RegisterRaw), out var aliases) ? aliases : [])))
             .ToList();
 
         var totalPages = (int)Math.Ceiling(allRows.Count / (double)pageSize);
@@ -676,14 +693,18 @@ internal class CoreCommandService
         var table = new Table()
             .AddColumn("Plugin")
             .AddColumn("Command Name")
+            .AddColumn("Raw")
+            .AddColumn("Aliases")
             .AddColumn("Help Text")
             .AddColumn("Permission");
 
-        foreach (var (plugin, commandName, helpText, permission) in pageRows)
+        foreach (var (plugin, commandName, helpText, permission, registerRaw, aliases) in pageRows)
         {
             _ = table.AddRow(
                 plugin,
                 commandName,
+                registerRaw ? "yes" : "no",
+                aliases.Count == 0 ? "(none)" : Markup.Escape(string.Join(", ", aliases.Select(alias => $"{alias.Alias}{(alias.RegisterRaw ? " (raw)" : "")}"))),
                 Markup.Escape(helpText),
                 string.IsNullOrWhiteSpace(permission) ? "(none)" : permission);
         }

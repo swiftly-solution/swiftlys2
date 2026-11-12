@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCEnvEntityMakerCheckSpawnThinkPre(ref CEnvEntityMakerCheckSpawnThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CEnvEntityMakerCheckSpawnThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCEnvEntityMakerCheckSpawnThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCEnvEntityMakerCheckSpawnThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCEnvEntityMakerCheckSpawnThinkPost(ref CEnvEntityMakerCheckSpawnThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CEnvEntityMakerCheckSpawnThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCEnvEntityMakerCheckSpawnThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCEnvEntityMakerCheckSpawnThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CEnvEntityMakerCheckSpawnThinkHook : ICEnvEntityMakerCheckSpawnThinkHook
+internal sealed class CEnvEntityMakerCheckSpawnThinkHook(GameHooksService owner) : ICEnvEntityMakerCheckSpawnThinkHook
 {
     private event OnCEnvEntityMakerCheckSpawnThinkPreDelegate? _Pre;
     private event OnCEnvEntityMakerCheckSpawnThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CEnvEntityMakerCheckSpawnThinkHook : ICEnvEntityMakerCheck
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CEnvEntityMakerCheckSpawnThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CEnvEntityMakerCheckSpawnThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CEnvEntityMakerCheckSpawnThinkHook : ICEnvEntityMakerCheck
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CEnvEntityMakerCheckSpawnThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CEnvEntityMakerCheckSpawnThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CEnvEntityMakerCheckSpawnThinkHook : ICEnvEntityMakerCheck
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CEnvEntityMakerCheckSpawnThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CEnvEntityMakerCheckSpawnThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CEnvEntityMakerCheckSpawnThinkHook : ICEnvEntityMakerCheck
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CEnvEntityMakerCheckSpawnThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CEnvEntityMakerCheckSpawnThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CEnvEntityMakerCheckSpawnThinkHook : ICEnvEntityMakerCheck
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CEnvEntityMakerCheckSpawnThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CEnvEntityMakerCheckSpawnThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CEnvEntityMakerCheckSpawnThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CEnvEntityMakerCheckSpawnThink, owner);
         }
     }
 

@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCPhysHingeLimitThinkPre(ref CPhysHingeLimitThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CPhysHingeLimitThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCPhysHingeLimitThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCPhysHingeLimitThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCPhysHingeLimitThinkPost(ref CPhysHingeLimitThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CPhysHingeLimitThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCPhysHingeLimitThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCPhysHingeLimitThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CPhysHingeLimitThinkHook : ICPhysHingeLimitThinkHook
+internal sealed class CPhysHingeLimitThinkHook(GameHooksService owner) : ICPhysHingeLimitThinkHook
 {
     private event OnCPhysHingeLimitThinkPreDelegate? _Pre;
     private event OnCPhysHingeLimitThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CPhysHingeLimitThinkHook : ICPhysHingeLimitThinkHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPhysHingeLimitThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPhysHingeLimitThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CPhysHingeLimitThinkHook : ICPhysHingeLimitThinkHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysHingeLimitThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysHingeLimitThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CPhysHingeLimitThinkHook : ICPhysHingeLimitThinkHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPhysHingeLimitThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CPhysHingeLimitThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CPhysHingeLimitThinkHook : ICPhysHingeLimitThinkHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysHingeLimitThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysHingeLimitThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CPhysHingeLimitThinkHook : ICPhysHingeLimitThinkHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysHingeLimitThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysHingeLimitThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysHingeLimitThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CPhysHingeLimitThink, owner);
         }
     }
 

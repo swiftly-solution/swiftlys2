@@ -5,18 +5,17 @@ namespace SwiftlyS2.Core.GameHooks;
 
 internal sealed partial class GameHooksService
 {
-    internal readonly GameHookDatamaps DatamapsHook = new();
+    internal GameHookDatamaps DatamapsHook { get; private set; } = null!;
     public IGameHookDatamaps Datamaps => DatamapsHook;
 
-    internal void SubscribeDatamapsHooks()
+    internal void InitializeDatamapsHooks()
     {
-        DatamapHooksPublisher.Subscribe(this);
+        DatamapsHook = new(this);
     }
 
     internal void DisposeDatamapsHooks()
     {
         DatamapsHook.UnregisterAllListeners();
-        DatamapHooksPublisher.Unsubscribe(this);
     }
 
     internal void InvokeCAmbientGenericRampThinkPre(ref CAmbientGenericRampThinkPreContext ctx)

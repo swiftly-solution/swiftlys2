@@ -99,7 +99,7 @@ void PostTextMsg(IRecipientFilter* filter, MessageType type, const std::string& 
         parts.push_back(std::move(msg));
     }
 
-    auto netmsg = g_pGameNetworkMessages->FindNetworkMessagePartial("TextMsg");
+    auto netmsg = g_pGameNetworkMessages->FindNetworkMessageById(UM_TextMsg);
     if (!netmsg)
         return;
 
@@ -404,9 +404,9 @@ void CPlayer::UpdateButtons()
         return;
 
     auto buttons = g_pSDKSchema->GetPropPtr(*movementServices, CPlayer_MovementServices_m_nButtons);
-    if(!buttons) 
+    if(!buttons)
         return;
-        
+
     auto states = static_cast<uint64_t*>(g_pSDKSchema->GetPropPtr(buttons, CInButtonState_m_pButtonStates));
     if (!states)
         return;

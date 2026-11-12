@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCFuncMoveLinearNavObstacleThinkPre(ref CFuncMoveLinearNavObstacleThinkPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CFuncMoveLinearNavObstacleThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCFuncMoveLinearNavObstacleThinkPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCFuncMoveLinearNavObstacleThinkPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCFuncMoveLinearNavObstacleThinkPost(ref CFuncMoveLinearNavObstacleThinkPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CFuncMoveLinearNavObstacleThink);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCFuncMoveLinearNavObstacleThinkPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCFuncMoveLinearNavObstacleThinkPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CFuncMoveLinearNavObstacleThinkHook : ICFuncMoveLinearNavObstacleThinkHook
+internal sealed class CFuncMoveLinearNavObstacleThinkHook(GameHooksService owner) : ICFuncMoveLinearNavObstacleThinkHook
 {
     private event OnCFuncMoveLinearNavObstacleThinkPreDelegate? _Pre;
     private event OnCFuncMoveLinearNavObstacleThinkPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CFuncMoveLinearNavObstacleThinkHook : ICFuncMoveLinearNavO
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncMoveLinearNavObstacleThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncMoveLinearNavObstacleThink, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CFuncMoveLinearNavObstacleThinkHook : ICFuncMoveLinearNavO
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncMoveLinearNavObstacleThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncMoveLinearNavObstacleThink, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CFuncMoveLinearNavObstacleThinkHook : ICFuncMoveLinearNavO
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncMoveLinearNavObstacleThink);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncMoveLinearNavObstacleThink, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CFuncMoveLinearNavObstacleThinkHook : ICFuncMoveLinearNavO
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncMoveLinearNavObstacleThink);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncMoveLinearNavObstacleThink, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CFuncMoveLinearNavObstacleThinkHook : ICFuncMoveLinearNavO
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncMoveLinearNavObstacleThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncMoveLinearNavObstacleThink, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncMoveLinearNavObstacleThink);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncMoveLinearNavObstacleThink, owner);
         }
     }
 

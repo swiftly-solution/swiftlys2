@@ -80,36 +80,32 @@ internal static partial class DatamapHooksPublisher
 
     internal static void InvokeCFuncTrackTrainFindPre(ref CFuncTrackTrainFindPreContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CFuncTrackTrainFind);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCFuncTrackTrainFindPre(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCFuncTrackTrainFindPre(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 
     internal static void InvokeCFuncTrackTrainFindPost(ref CFuncTrackTrainFindPostContext ctx)
     {
-        lock (subscribersLock)
+        var subs = GetSubscribers(DatamapHookListener.CFuncTrackTrainFind);
+        for (var i = 0; i < subs.Length; i++)
         {
-            for (var i = 0; i < subscribers.Count; i++)
+            subs[i].InvokeCFuncTrackTrainFindPost(ref ctx);
+            if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
             {
-                subscribers[i].InvokeCFuncTrackTrainFindPost(ref ctx);
-                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled)
-                {
-                    return;
-                }
+                return;
             }
         }
     }
 }
 
-internal sealed class CFuncTrackTrainFindHook : ICFuncTrackTrainFindHook
+internal sealed class CFuncTrackTrainFindHook(GameHooksService owner) : ICFuncTrackTrainFindHook
 {
     private event OnCFuncTrackTrainFindPreDelegate? _Pre;
     private event OnCFuncTrackTrainFindPostDelegate? _Post;
@@ -120,7 +116,7 @@ internal sealed class CFuncTrackTrainFindHook : ICFuncTrackTrainFindHook
         {
             if (_Pre == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncTrackTrainFind);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncTrackTrainFind, owner);
             }
             _Pre += value;
         }
@@ -129,7 +125,7 @@ internal sealed class CFuncTrackTrainFindHook : ICFuncTrackTrainFindHook
             _Pre -= value;
             if (_Pre == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrackTrainFind);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrackTrainFind, owner);
             }
         }
     }
@@ -140,7 +136,7 @@ internal sealed class CFuncTrackTrainFindHook : ICFuncTrackTrainFindHook
         {
             if (_Post == null)
             {
-                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncTrackTrainFind);
+                DatamapHooksPublisher.AddHookListener(DatamapHookListener.CFuncTrackTrainFind, owner);
             }
             _Post += value;
         }
@@ -149,7 +145,7 @@ internal sealed class CFuncTrackTrainFindHook : ICFuncTrackTrainFindHook
             _Post -= value;
             if (_Post == null)
             {
-                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrackTrainFind);
+                DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrackTrainFind, owner);
             }
         }
     }
@@ -164,11 +160,11 @@ internal sealed class CFuncTrackTrainFindHook : ICFuncTrackTrainFindHook
     {
         if (_Pre != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrackTrainFind);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrackTrainFind, owner);
         }
         if (_Post != null)
         {
-            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrackTrainFind);
+            DatamapHooksPublisher.RemoveHookListener(DatamapHookListener.CFuncTrackTrainFind, owner);
         }
     }
 

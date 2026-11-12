@@ -20,6 +20,12 @@ internal class CMsgSource2SystemSpecsImpl : TypedProtobuf<CMsgSource2SystemSpecs
     { get => Accessor.GetUInt32("cpu_model"); set => Accessor.SetUInt32("cpu_model", value); }
     public uint CpuNumPhysical
     { get => Accessor.GetUInt32("cpu_num_physical"); set => Accessor.SetUInt32("cpu_num_physical", value); }
+    public uint CpuNumLogical
+    { get => Accessor.GetUInt32("cpu_num_logical"); set => Accessor.SetUInt32("cpu_num_logical", value); }
+    public uint CpuNumPerformance
+    { get => Accessor.GetUInt32("cpu_num_performance"); set => Accessor.SetUInt32("cpu_num_performance", value); }
+    public uint CpuNumEfficiency
+    { get => Accessor.GetUInt32("cpu_num_efficiency"); set => Accessor.SetUInt32("cpu_num_efficiency", value); }
     public uint RamPhysicalTotalMb
     { get => Accessor.GetUInt32("ram_physical_total_mb"); set => Accessor.SetUInt32("ram_physical_total_mb", value); }
     public string GpuRendersystemDllName
@@ -40,4 +46,6 @@ internal class CMsgSource2SystemSpecsImpl : TypedProtobuf<CMsgSource2SystemSpecs
     { get => Accessor.GetUInt32("backbuffer_width"); set => Accessor.SetUInt32("backbuffer_width", value); }
     public uint BackbufferHeight
     { get => Accessor.GetUInt32("backbuffer_height"); set => Accessor.SetUInt32("backbuffer_height", value); }
+    public uint ThreadPoolWorkers
+    { get => Accessor.GetUInt32("thread_pool_workers"); set => Accessor.SetUInt32("thread_pool_workers", value); }
 }
