@@ -5,9 +5,11 @@ namespace SwiftlyS2.Shared.Misc;
 /// <summary>
 /// A thread-safe cell, the counterpart of C++ <c>std::atomic&lt;T&gt;</c>.
 /// Every operation is atomic and acts as a full memory barrier, except <see cref="Load"/> on 4- and 8-byte types, which is an acquire load.
+/// For reference types (e.g. <see cref="string"/>) the cell holds a reference: reads and writes are atomic, and
+/// <see cref="CompareExchange"/> / <see cref="TryCompareExchange"/> compare by reference, not by value.
 /// </summary>
-/// <typeparam name="T">The value type to store.</typeparam>
-public sealed class Atomic<T> where T : struct
+/// <typeparam name="T">The type to store: a primitive, an enum, or a reference type.</typeparam>
+public sealed class Atomic<T>
 {
     private T cell;
 
@@ -55,7 +57,7 @@ public sealed class Atomic<T> where T : struct
     /// </summary>
     public static implicit operator T( Atomic<T> atomic ) => atomic.Load();
 
-    public override string ToString() => Load().ToString() ?? string.Empty;
+    public override string ToString() => Load()?.ToString() ?? string.Empty;
 
     internal ref T Cell => ref cell;
 }

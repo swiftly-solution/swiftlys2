@@ -151,8 +151,6 @@ internal static class EventPublisher
             NativeEvents.RegisterOnEntityDeletedCallback((nint)(delegate* unmanaged< nint, void >)&OnEntityDeleted);
             NativeEvents.RegisterOnEntityParentChangedCallback((nint)(delegate* unmanaged< nint, nint, void >)&OnEntityParentChanged);
             NativeEvents.RegisterOnEntitySpawnedCallback((nint)(delegate* unmanaged< nint, void >)&OnEntitySpawned);
-            NativeEvents.RegisterOnMapLoadCallback((nint)(delegate* unmanaged< nint, void >)&OnMapLoad);
-            NativeEvents.RegisterOnMapUnloadCallback((nint)(delegate* unmanaged< nint, void >)&OnMapUnload);
             NativeEvents.RegisterOnStartupServerCallback((nint)(delegate* unmanaged< void >)&OnStartupServer);
             _ = NativeConvars.AddQueryClientCvarCallback((nint)(delegate* unmanaged< int, nint, nint, void >)&ConVarQueryCallback);
             NativeCommands.SetCommandHandler((nint)(delegate* unmanaged< nint, int, nint, nint, nint, byte, void >)&OnCommandDispatch);
@@ -603,8 +601,7 @@ internal static class EventPublisher
         }
     }
 
-    [UnmanagedCallersOnly]
-    public static void OnMapLoad( nint mapNamePtr )
+    public static void OnMapLoad( string mapName )
     {
         try
         {
@@ -613,7 +610,7 @@ internal static class EventPublisher
             var subs = Router.Get(CoreEvent.MapLoad);
             if (subs.Length == 0) return;
 
-            OnMapLoadEvent @event = new() { MapName = StringAlloc.CreateCSharpString(mapNamePtr) };
+            OnMapLoadEvent @event = new() { MapName = mapName };
             foreach (var sub in subs) sub.InvokeOnMapLoad(ref @event);
         }
         catch (Exception e)
@@ -654,8 +651,7 @@ internal static class EventPublisher
         }
     }
 
-    [UnmanagedCallersOnly]
-    public static void OnMapUnload( nint mapNamePtr )
+    public static void OnMapUnload( string mapName )
     {
         EntitySystemService.cachedGameRulesProxy = null;
 
@@ -664,7 +660,7 @@ internal static class EventPublisher
 
         try
         {
-            OnMapUnloadEvent @event = new() { MapName = StringAlloc.CreateCSharpString(mapNamePtr) };
+            OnMapUnloadEvent @event = new() { MapName = mapName };
             foreach (var sub in subs) sub.InvokeOnMapUnload(ref @event);
         }
         catch (Exception e)

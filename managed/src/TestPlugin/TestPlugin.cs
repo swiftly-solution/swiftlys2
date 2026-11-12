@@ -547,6 +547,12 @@ public class TestPlugin : BasePlugin
             ctx.Sender!.SendCenterHTML("hello there");
         });
 
+        Core.Event.OnMapLoad += ( @e ) =>
+        {
+            Console.WriteLine($"Map {@e.MapName} loaded.");
+            Console.WriteLine($"Workshop ID: {Core.Engine.WorkshopId}");
+        };
+
         using CEntityKeyValues kv = new();
         kv.SetBool("test", true);
         Console.WriteLine(kv.Get<bool>("test2"));

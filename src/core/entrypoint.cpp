@@ -59,16 +59,9 @@ std::thread::id g_mainThreadId;
 static CreateIFaceFn g_pServerFactory = nullptr;
 static CreateIFaceFn g_pEngineFactory = nullptr;
 
-std::string workshop_map;
-std::mutex g_qmMapLoadQueue;
-
-static std::string s_currentMap;
-
 static void GameServerSteamAPIActivatedHook(void* _this);
-static bool LoopInitHook(void* _this, KeyValues* pKeyValues, void* pRegistry);
 
 static VFunctionHook g_GameServerSteamAPIActivated(reinterpret_cast<void*>(GameServerSteamAPIActivatedHook), "server", "CSource2Server", "IServerGameDLL::GameServerSteamAPIActivated");
-static VFunctionHook g_LoopInitHook(reinterpret_cast<void*>(LoopInitHook), "engine2", "CLoopModeLevelLoad", "ILoopMode::LoopInit");
 
 static constexpr std::string_view kPathSeparator = WIN_LINUX("\\", "/");
 static constexpr std::string_view kDefaultCorePath = WIN_LINUX("addons\\swiftlys2", "addons/swiftlys2");
@@ -262,49 +255,6 @@ static void GameServerSteamAPIActivatedHook(void* _this)
     PROFILE_PAUSE();
 
     return reinterpret_cast<decltype(&GameServerSteamAPIActivatedHook)>(g_GameServerSteamAPIActivated.GetOriginal())(_this);
-}
-
-static bool LoopInitHook(void* _this, KeyValues* pKeyValues, void* pRegistry)
-{
-    PROFILE_FUNCTION();
-
-    if (!s_currentMap.empty())
-        g_SwiftlyCore.OnMapUnload();
-
-    PROFILE_PAUSE();
-
-    const bool ret = reinterpret_cast<decltype(&LoopInitHook)>(g_LoopInitHook.GetOriginal())(_this, pKeyValues, pRegistry);
-
-    PROFILE_RESUME();
-
-    {
-        std::scoped_lock lock(g_qmMapLoadQueue);
-        workshop_map = pKeyValues->FindKey("customgamemode") ? pKeyValues->GetString("customgamemode") : "";
-    }
-
-    g_SwiftlyCore.OnMapLoad(pKeyValues->GetString("levelname"));
-
-    return ret;
-}
-
-void SwiftlyCore::OnMapLoad(std::string_view map_name)
-{
-    PROFILE_FUNCTION();
-
-    s_currentMap = map_name;
-
-    if (g_pOnMapLoadCallback)
-        g_pOnMapLoadCallback(s_currentMap.c_str());
-}
-
-void SwiftlyCore::OnMapUnload()
-{
-    PROFILE_FUNCTION();
-
-    if (g_pOnMapUnloadCallback)
-        g_pOnMapUnloadCallback(s_currentMap.c_str());
-
-    s_currentMap.clear();
 }
 
 void* SwiftlyCore::GetInterface(const std::string& interface_name)

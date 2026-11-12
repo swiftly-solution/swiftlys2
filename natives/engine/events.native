@@ -11,7 +11,5 @@ void RegisterOnEntityCreatedCallback = ptr callback // CEntityInstance* entity
 void RegisterOnEntityDeletedCallback = ptr callback // CEntityInstance* entity
 void RegisterOnEntityParentChangedCallback = ptr callback // CEntityInstance* entity, CEntityInstance* newparent
 void RegisterOnEntitySpawnedCallback = ptr callback // CEntityInstance* entity
-void RegisterOnMapLoadCallback = ptr callback // string mapname
-void RegisterOnMapUnloadCallback = ptr callback // string mapname
 void RegisterOnPreworldUpdateCallback = ptr callback // bool simulating
 void RegisterOnStartupServerCallback = ptr callback // void

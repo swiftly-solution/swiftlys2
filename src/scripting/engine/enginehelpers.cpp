@@ -166,17 +166,6 @@ char* Bridge_EngineHelpers_GetIP(int* size)
     return Bridge_CopyString(s, size);
 }
 
-extern std::string workshop_map;
-extern std::mutex g_qmMapLoadQueue;
-
-char* Bridge_EngineHelpers_GetWorkshopId(int* size)
-{
-    PROFILE_FUNCTION();
-
-    std::lock_guard<std::mutex> lock(g_qmMapLoadQueue);
-    return Bridge_CopyString(workshop_map, size);
-}
-
 void Bridge_EngineHelpers_DispatchParticleEffect(const char* particleName, uint attachmentType, void* entity, byte attachmentPoint, const char* attachmentName, bool resetAllParticlesOnEntity, int splitScreenSlot, uint64_t filtermask)
 {
     PROFILE_FUNCTION();
@@ -197,5 +186,4 @@ DEFINE_NATIVE("EngineHelpers.GetNativeVersion", Bridge_EngineHelpers_GetNativeVe
 DEFINE_NATIVE("EngineHelpers.GetMenuSettings", Bridge_EngineHelpers_GetMenuSettings);
 DEFINE_NATIVE("EngineHelpers.GetGlobalVars", Bridge_EngineHelpers_GetGlobalVars);
 DEFINE_NATIVE("EngineHelpers.GetGameDirectoryPath", Bridge_EngineHelpers_GetGameDirectoryPath);
-DEFINE_NATIVE("EngineHelpers.GetWorkshopId", Bridge_EngineHelpers_GetWorkshopId);
 DEFINE_NATIVE("EngineHelpers.DispatchParticleEffect", Bridge_EngineHelpers_DispatchParticleEffect);

@@ -10,5 +10,4 @@ string GetNativeVersion = void
 string GetMenuSettings = void
 ptr GetGlobalVars = void
 string GetGameDirectoryPath = void
-string GetWorkshopId = void
 void DispatchParticleEffect = string particleName, uint32 attachmentType, ptr entity, byte attachmentPoint, ptr attachmentName, bool resetAllParticlesOnEntity, int32 splitScreenSlot, uint64 filtermask

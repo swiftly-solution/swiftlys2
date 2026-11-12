@@ -1,6 +1,7 @@
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Scheduler;
+using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Shared.Services;
 using SwiftlyS2.Core.Extensions;
 using SwiftlyS2.Shared.SchemaDefinitions;
@@ -26,7 +27,9 @@ internal class EngineService : IEngineService
 
     public string Map => GlobalVars.MapName.Value;
 
-    public string WorkshopId => NativeEngineHelpers.GetWorkshopId();
+    internal static readonly Atomic<string> CurrentWorkshopId = new("");
+
+    public string WorkshopId => CurrentWorkshopId.Load();
 
     public int MaxPlayers => GlobalVars.MaxClients;
 

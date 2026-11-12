@@ -20,6 +20,7 @@ internal class CoreHookService : IDisposable
 
         HookExecuteCommand();
         HookSteamServerAPIActivated();
+        HookLoopInit();
     }
 
     /*
@@ -48,11 +49,15 @@ internal class CoreHookService : IDisposable
     */
     private delegate nint ExecuteCommand( nint a1, int a2, uint a3, nint a4, nint a5 );
     private delegate void SteamServerAPIActivated( nint pServer );
+    private delegate byte LoopInit( nint pThis, nint pKeyValues, nint pRegistry );
 
     private IUnmanagedFunction<ExecuteCommand>? executeCommand;
     private Guid executeCommandGuid;
     private IUnmanagedFunction<SteamServerAPIActivated>? steamServerAPIActivated;
     private Guid steamServerAPIActivatedGuid;
+    private IUnmanagedFunction<LoopInit>? loopInit;
+    private Guid loopInitGuid;
+    private string? currentMap;
 
     internal void HookExecuteCommand()
     {
@@ -125,8 +130,47 @@ internal class CoreHookService : IDisposable
         steamServerAPIActivated = null;
     }
 
+    internal void HookLoopInit()
+    {
+        var offset = core.GameData.GetOffset("ILoopMode::LoopInit");
+        loopInit = core.Memory.GetUnmanagedFunctionByVTable<LoopInit>(core.Memory.GetVTableAddress(Library.Engine, "CLoopModeLevelLoad")!.Value, offset);
+        logger.LogInformation("Hooking ILoopMode::LoopInit at {Address:X}", loopInit.Address);
+        loopInitGuid = loopInit.AddHook(next =>
+        {
+            return ( pThis, pKeyValues, pRegistry ) =>
+            {
+                if (currentMap != null)
+                {
+                    var unloaded = currentMap;
+                    currentMap = null;
+                    EventPublisher.OnMapUnload(unloaded);
+                }
+
+                var result = next()(pThis, pKeyValues, pRegistry);
+
+                unsafe
+                {
+                    ref var keyValues = ref Unsafe.AsRef<KeyValues>((void*)pKeyValues);
+                    EngineService.CurrentWorkshopId.Store(keyValues.GetString("customgamemode"));
+                    currentMap = keyValues.GetString("levelname");
+                }
+
+                EventPublisher.OnMapLoad(currentMap);
+                return result;
+            };
+        });
+    }
+
+    internal void UnhookLoopInit()
+    {
+        if (loopInit == null) return;
+        loopInit.RemoveHook(loopInitGuid);
+        loopInit = null;
+    }
+
     public void Dispose()
     {
+        UnhookLoopInit();
         UnhookExecuteCommand();
         UnhookSteamServerAPIActivated();
     }

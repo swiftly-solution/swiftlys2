@@ -121,26 +121,6 @@ internal static class NativeEvents
         _RegisterOnEntitySpawnedCallback(callback);
     }
 
-    private unsafe static delegate* unmanaged<nint, void> _RegisterOnMapLoadCallback;
-
-    /// <summary>
-    /// string mapname
-    /// </summary>
-    public unsafe static void RegisterOnMapLoadCallback(nint callback)
-    {
-        _RegisterOnMapLoadCallback(callback);
-    }
-
-    private unsafe static delegate* unmanaged<nint, void> _RegisterOnMapUnloadCallback;
-
-    /// <summary>
-    /// string mapname
-    /// </summary>
-    public unsafe static void RegisterOnMapUnloadCallback(nint callback)
-    {
-        _RegisterOnMapUnloadCallback(callback);
-    }
-
     private unsafe static delegate* unmanaged<nint, void> _RegisterOnPreworldUpdateCallback;
 
     /// <summary>

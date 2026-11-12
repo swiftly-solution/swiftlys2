@@ -32,8 +32,6 @@ DEFINE_EVENT(g_pOnEntityCreatedCallback, void, void*) = nullptr;
 DEFINE_EVENT(g_pOnEntityDeletedCallback, void, void*) = nullptr;
 DEFINE_EVENT(g_pOnEntityParentChangedCallback, void, void*, void*) = nullptr;
 DEFINE_EVENT(g_pOnEntitySpawnedCallback, void, void*) = nullptr;
-DEFINE_EVENT(g_pOnMapLoadCallback, void, const char*) = nullptr;
-DEFINE_EVENT(g_pOnMapUnloadCallback, void, const char*) = nullptr;
 DEFINE_EVENT(g_pOnPreworldUpdateCallback, void, bool) = nullptr;
 DEFINE_EVENT(g_pOnStartupServerCallback, void) = nullptr;
 
@@ -114,20 +112,6 @@ void Bridge_Events_RegisterOnEntitySpawnedCallback(void* callback)
     g_pOnEntitySpawnedCallback = reinterpret_cast<decltype(g_pOnEntitySpawnedCallback)>(callback);
 }
 
-void Bridge_Events_RegisterOnMapLoadCallback(void* callback)
-{
-    PROFILE_FUNCTION();
-
-    g_pOnMapLoadCallback = reinterpret_cast<decltype(g_pOnMapLoadCallback)>(callback);
-}
-
-void Bridge_Events_RegisterOnMapUnloadCallback(void* callback)
-{
-    PROFILE_FUNCTION();
-
-    g_pOnMapUnloadCallback = reinterpret_cast<decltype(g_pOnMapUnloadCallback)>(callback);
-}
-
 void Bridge_Events_RegisterOnPreworldUpdateCallback(void* callback)
 {
     PROFILE_FUNCTION();
@@ -153,7 +137,5 @@ DEFINE_NATIVE("Events.RegisterOnEntityCreatedCallback", Bridge_Events_RegisterOn
 DEFINE_NATIVE("Events.RegisterOnEntityDeletedCallback", Bridge_Events_RegisterOnEntityDeletedCallback);
 DEFINE_NATIVE("Events.RegisterOnEntityParentChangedCallback", Bridge_Events_RegisterOnEntityParentChangedCallback);
 DEFINE_NATIVE("Events.RegisterOnEntitySpawnedCallback", Bridge_Events_RegisterOnEntitySpawnedCallback);
-DEFINE_NATIVE("Events.RegisterOnMapLoadCallback", Bridge_Events_RegisterOnMapLoadCallback);
-DEFINE_NATIVE("Events.RegisterOnMapUnloadCallback", Bridge_Events_RegisterOnMapUnloadCallback);
 DEFINE_NATIVE("Events.RegisterOnPreworldUpdateCallback", Bridge_Events_RegisterOnPreworldUpdateCallback);
 DEFINE_NATIVE("Events.RegisterOnStartupServerCallback", Bridge_Events_RegisterOnStartupServerCallback);
