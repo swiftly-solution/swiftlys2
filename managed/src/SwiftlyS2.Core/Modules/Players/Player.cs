@@ -91,7 +91,8 @@ internal class Player : IPlayer, IDisposable
 
     public bool IsAlive => IsValid && Pawn!.LifeState == (byte)LifeState_t.LIFE_ALIVE;
 
-    public bool IsFirstSpawn { get { ThrowIfDisposed(); return NativePlayer.IsFirstSpawn(Slot); } }
+    private readonly Atomic<bool> isFirstSpawn = new(true);
+    public bool IsFirstSpawn { get { ThrowIfDisposed(); return isFirstSpawn.Value; } internal set => isFirstSpawn.Value = value; }
 
     public string Name { get => ServerSideClient.Name; set => ServerSideClient.Name = value; }
 

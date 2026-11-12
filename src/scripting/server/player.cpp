@@ -214,17 +214,6 @@ void Bridge_Player_ExecuteCommand(int playerid, const char* command)
     }
 }
 
-uint8_t Bridge_Player_IsFirstSpawn(int playerid)
-{
-    PROFILE_FUNCTION();
-
-    auto player = g_pPlayerManager->GetPlayer(playerid);
-    if (!player)
-        return 0;
-
-    return player->IsFirstSpawn() ? 1 : 0;
-}
-
 int Bridge_Player_GetUserID(int playerid)
 {
     PROFILE_FUNCTION();
@@ -272,7 +261,6 @@ DEFINE_NATIVE("Player.SetCenterMenuRender", Bridge_Player_SetCenterMenuRender);
 DEFINE_NATIVE("Player.ClearCenterMenuRender", Bridge_Player_ClearCenterMenuRender);
 DEFINE_NATIVE("Player.HasMenuShown", Bridge_Player_HasMenuShown);
 DEFINE_NATIVE("Player.ExecuteCommand", Bridge_Player_ExecuteCommand);
-DEFINE_NATIVE("Player.IsFirstSpawn", Bridge_Player_IsFirstSpawn);
 DEFINE_NATIVE("Player.GetUserID", Bridge_Player_GetUserID);
 DEFINE_NATIVE("Player.GetClientConvarValue", Bridge_Player_GetClientConvarValue);
 DEFINE_NATIVE("Player.GetServerSideClient", Bridge_Player_GetServerSideClient);

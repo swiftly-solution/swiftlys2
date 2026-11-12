@@ -74,8 +74,6 @@ public:
     virtual void RenderMenuCenterText(const std::string& text) override;
     virtual void ClearRenderMenuCenterText() override;
     virtual bool HasMenuShown() override;
-    virtual bool IsFirstSpawn() override;
-    virtual void SetFirstSpawn(bool state) override;
 
 private:
     void UpdateCenterMessage();
@@ -84,7 +82,6 @@ private:
 
     int m_iPlayerId = -1;
     bool m_bAuthorized = false;
-    bool m_bFirstSpawn = true;
     bool m_bIsFakeClient = false;
 
 

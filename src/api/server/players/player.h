@@ -118,8 +118,6 @@ public:
     virtual void ClearRenderMenuCenterText() = 0;
     virtual bool HasMenuShown() = 0;
 
-    virtual bool IsFirstSpawn() = 0;
-    virtual void SetFirstSpawn(bool state) = 0;
 };
 
 #endif

@@ -351,20 +351,6 @@ BlockedTransmitInfo& CPlayer::GetBlockedTransmittingBits()
     return m_bvBlockedTransmittingEntities;
 }
 
-bool CPlayer::IsFirstSpawn()
-{
-    PROFILE_FUNCTION();
-
-    return m_bFirstSpawn;
-}
-
-void CPlayer::SetFirstSpawn(bool state)
-{
-    PROFILE_FUNCTION();
-
-    m_bFirstSpawn = state;
-}
-
 void CPlayer::UpdateCenterMessage()
 {
     PROFILE_FUNCTION();

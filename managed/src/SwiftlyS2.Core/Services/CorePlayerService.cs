@@ -1,6 +1,9 @@
 using SwiftlyS2.Core.Events;
+using SwiftlyS2.Core.Players;
 using SwiftlyS2.Shared;
+using SwiftlyS2.Shared.GameEventDefinitions;
 using SwiftlyS2.Shared.Memory;
+using SwiftlyS2.Shared.Misc;
 
 namespace SwiftlyS2.Core.Services;
 
@@ -12,12 +15,19 @@ internal class CorePlayerService : IDisposable
 
     private IUnmanagedFunction<ClientSettingsChanged>? clientSettingsChanged;
     private Guid clientSettingsChangedGuid;
+    private readonly Guid firstSpawnHookGuid;
 
     public CorePlayerService( ISwiftlyCore core )
     {
         this.core = core;
 
         HookClientSettingsChanged();
+
+        firstSpawnHookGuid = core.GameEvent.HookPost<EventPlayerSpawn>(@event =>
+        {
+            if (@event.UserIdPlayer is Player player) player.IsFirstSpawn = false;
+            return HookResult.Continue;
+        });
     }
 
     private void HookClientSettingsChanged()
@@ -36,6 +46,7 @@ internal class CorePlayerService : IDisposable
 
     public void Dispose()
     {
+        core.GameEvent.Unhook(firstSpawnHookGuid);
         clientSettingsChanged?.RemoveHook(clientSettingsChangedGuid);
         clientSettingsChanged = null;
     }
