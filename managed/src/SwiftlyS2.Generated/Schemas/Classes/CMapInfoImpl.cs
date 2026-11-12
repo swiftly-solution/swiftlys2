@@ -166,5 +166,15 @@ internal partial class CMapInfoImpl : CPointEntityImpl, CMapInfo
             return ref _Handle.AsRef<float>(_EnvWetnessDryingAmountOffset);
         }
     }
+    private static nint _FrostEnabledOffset = -1;
+
+    public ref bool FrostEnabled
+    {
+        get
+        {
+            if (_FrostEnabledOffset == -1) _FrostEnabledOffset = Schema.GetOffset(0x64779D00316A3496);
+            return ref _Handle.AsRef<bool>(_FrostEnabledOffset);
+        }
+    }
 
 }

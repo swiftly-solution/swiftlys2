@@ -21,5 +21,7 @@ public partial interface CNmGraphDocAimCSNode : CNmGraphDocFlowNode, ISchemaClas
 
     public ref float PlantingBlendTimeSeconds { get; }
 
+    public ref float TransitionBlendTimeSeconds { get; }
+
 
 }

@@ -46,5 +46,15 @@ internal partial class CNmGraphDocAimCSNodeImpl : CNmGraphDocFlowNodeImpl, CNmGr
             return ref _Handle.AsRef<float>(_PlantingBlendTimeSecondsOffset);
         }
     }
+    private static nint _TransitionBlendTimeSecondsOffset = -1;
+
+    public ref float TransitionBlendTimeSeconds
+    {
+        get
+        {
+            if (_TransitionBlendTimeSecondsOffset == -1) _TransitionBlendTimeSecondsOffset = Schema.GetOffset(0x84A1EFACC42BD597);
+            return ref _Handle.AsRef<float>(_TransitionBlendTimeSecondsOffset);
+        }
+    }
 
 }
