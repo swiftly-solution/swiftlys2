@@ -41,13 +41,6 @@ void Bridge_Hooks_DeallocateHook(void* hook)
     g_pHooksManager->DestroyFunctionHook((IFunctionHook*)hook);
 }
 
-void Bridge_Hooks_DeallocateMHook(void* hook)
-{
-    PROFILE_FUNCTION();
-
-    g_pHooksManager->DestroyMFunctionHook((IMFunctionHook*)hook);
-}
-
 void Bridge_Hooks_SetHook(void* hook, void* func, void* callback)
 {
     PROFILE_FUNCTION();
@@ -93,7 +86,6 @@ void* Bridge_Hooks_GetHookOriginal(void* hook)
 DEFINE_NATIVE("Hooks.AllocateHook", Bridge_Hooks_AllocateHook);
 DEFINE_NATIVE("Hooks.AllocateMHook", Bridge_Hooks_AllocateMHook);
 DEFINE_NATIVE("Hooks.DeallocateHook", Bridge_Hooks_DeallocateHook);
-DEFINE_NATIVE("Hooks.DeallocateMHook", Bridge_Hooks_DeallocateMHook);
 DEFINE_NATIVE("Hooks.SetHook", Bridge_Hooks_SetHook);
 DEFINE_NATIVE("Hooks.SetMHook", Bridge_Hooks_SetMHook);
 DEFINE_NATIVE("Hooks.EnableHook", Bridge_Hooks_EnableHook);

@@ -34,13 +34,6 @@ internal static class NativeHooks
         _DeallocateHook(hook);
     }
 
-    private unsafe static delegate* unmanaged<nint, void> _DeallocateMHook;
-
-    public unsafe static void DeallocateMHook(nint hook)
-    {
-        _DeallocateMHook(hook);
-    }
-
     private unsafe static delegate* unmanaged<nint, nint, nint, void> _SetHook;
 
     /// <summary>
