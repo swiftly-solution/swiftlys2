@@ -182,7 +182,7 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
             g_pLogger->Warning("Patching", "Couldn't find patch: SetSchemaHammerUniqueId\n");
         }
     }
-!
+
     g_pHooksManager->Initialize();
 
     g_pConsoleOutput->Initialize();
@@ -206,6 +206,7 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
     StartFixes();
 
     const std::string coreRoot = GameRelativePath(m_sCorePath);
+    g_pServerCommands->Initialize();
     g_pExtensionHost->LoadExtensions(coreRoot);
 
     if (!managedEnabled)
@@ -245,6 +246,7 @@ bool SwiftlyCore::Unload()
     PROFILE_FUNCTION();
 
     g_pExtensionHost->UnloadExtensions();
+    g_pServerCommands->Shutdown();
     g_pHooksManager->Shutdown();
     g_pPlayerManager->Shutdown();
     g_pEntSystem->Shutdown();

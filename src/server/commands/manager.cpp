@@ -17,6 +17,7 @@
  ************************************************************************************************/
 
 #include "manager.h"
+#include "core.h"
 
 #include <memory>
 #include <memory/hooks/vfunction.h>
@@ -34,6 +35,7 @@
 #include <mutex>
 #include <shared_mutex>
 #include <string_view>
+#include <utility>
 #include <vector>
 
 void DispatchConCommand(void* thisPtr, ConCommandRef cmd, const CCommandContext& ctx, const CCommand& args);
@@ -47,6 +49,33 @@ void CommandsCallback(const CCommandContext& context, const CCommand& args)
     PROFILE_FUNCTION();
 
     g_pServerCommands->HandleRegisteredCommand(context.GetPlayerSlot().Get(), args.GetCommandString());
+}
+
+void CServerCommands::Initialize()
+{
+    PROFILE_FUNCTION();
+
+    if (m_coreCommandId != 0) return;
+
+    m_coreCommandId = RegisterCommand("sw", true, "SwiftlyS2 Core Command");
+    if (m_coreCommandId == 0)
+        g_pLogger->Error("Commands", "Couldn't register the core command 'sw'.\n");
+}
+
+void CServerCommands::Shutdown()
+{
+    PROFILE_FUNCTION();
+
+    std::vector<uint64_t> coreAliasIds;
+    {
+        std::shared_lock lock(m_mtxCommands);
+        for (const auto& [id, name] : m_commandNames)
+            if (m_coreAliases.contains(name)) coreAliasIds.push_back(id);
+    }
+    for (const auto id : coreAliasIds)
+        UnregisterAlias(id);
+
+    UnregisterCommand(std::exchange(m_coreCommandId, 0));
 }
 
 static const std::string* FindPrefix(const std::vector<std::string>& prefixes, std::string_view text)
@@ -133,16 +162,24 @@ int CServerCommands::HandleCommand(int playerid, const std::string& text, bool d
     std::string commandName = originalCommandName;
     args.erase(args.begin());
 
+    bool coreCommand;
     {
         std::shared_lock lock(m_mtxCommands);
         if (!ResolveCommandName(commandName))
         {
             return 0;
         }
+        coreCommand = commandName == "sw" || m_coreAliases.contains(commandName);
     }
 
-    if (!dryrun && m_commandHandler)
-        m_commandHandler(commandName, playerid, args, originalCommandName, *selectedPrefix, isSilentCommand);
+    if (!dryrun)
+    {
+        if (coreCommand && HandleCoreCommand(playerid, args, static_cast<bool>(m_commandHandler)))
+            return isSilentCommand ? 2 : 1;
+
+        if (m_commandHandler)
+            m_commandHandler(commandName, playerid, args, originalCommandName, *selectedPrefix, isSilentCommand);
+    }
 
     return isSilentCommand ? 2 : 1;
 }
@@ -152,7 +189,7 @@ void CServerCommands::HandleRegisteredCommand(int playerid, const char* commandL
     PROFILE_FUNCTION();
 
     std::vector<std::string> args = TokenizeCommand(commandLine);
-    if (args.empty() || !m_commandHandler)
+    if (args.empty())
     {
         return;
     }
@@ -161,15 +198,21 @@ void CServerCommands::HandleRegisteredCommand(int playerid, const char* commandL
     std::string commandName = originalCommandName;
     args.erase(args.begin());
 
+    bool coreCommand;
     {
         std::shared_lock lock(m_mtxCommands);
         if (!ResolveCommandName(commandName))
         {
             return;
         }
+        coreCommand = commandName == "sw" || m_coreAliases.contains(commandName);
     }
 
-    m_commandHandler(commandName, playerid, args, originalCommandName, "sw_", true);
+    if (coreCommand && HandleCoreCommand(playerid, args, static_cast<bool>(m_commandHandler)))
+        return;
+
+    if (m_commandHandler)
+        m_commandHandler(commandName, playerid, args, originalCommandName, "sw_", true);
 }
 
 bool CServerCommands::HandleClientCommand(int playerid, const char* text)
@@ -273,6 +316,7 @@ void CServerCommands::UnregisterCommand(uint64_t commandId)
     delete command;
     std::lock_guard lock(m_mtxCommands);
     m_commands.erase(commandName);
+    m_coreAliases.erase(commandName);
 }
 
 bool CServerCommands::IsCommandRegistered(std::string commandName)
@@ -290,6 +334,7 @@ uint64_t CServerCommands::RegisterAlias(std::string aliasCommand, std::string co
     PROFILE_FUNCTION();
 
     std::string helpText;
+    bool coreCommand;
     {
         std::shared_lock lock(m_mtxCommands);
 
@@ -300,9 +345,17 @@ uint64_t CServerCommands::RegisterAlias(std::string aliasCommand, std::string co
         }
 
         helpText = m_commands.find(commandName)->second->GetHelpText();
+        coreCommand = commandName == "sw" || m_coreAliases.contains(commandName);
     }
 
-    return RegisterCommand(aliasCommand, registerRaw, helpText);
+    const auto aliasId = RegisterCommand(aliasCommand, registerRaw, helpText);
+    if (aliasId != 0 && coreCommand)
+    {
+        std::lock_guard lock(m_mtxCommands);
+        if (const auto alias = m_commandNames.find(aliasId); alias != m_commandNames.end())
+            m_coreAliases.insert(alias->second);
+    }
+    return aliasId;
 }
 
 void CServerCommands::UnregisterAlias(uint64_t aliasId)
