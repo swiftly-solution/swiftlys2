@@ -1,14 +1,10 @@
+using SwiftlyS2.Core.Misc;
+
 namespace SwiftlyS2.Core.Services;
 
 internal class RootDirService
 {
-    private static string? _root = null;
-
-    public static string GetRoot()
-    {
-        _root ??= Environment.GetEnvironmentVariable("SWIFTLY_MANAGED_ROOT") is { } root ? root : AppContext.BaseDirectory;
-        return _root;
-    }
+    public static string GetRoot() => BootstrapInfo.RootPath;
 
     public string CombineRoot( string path )
     {

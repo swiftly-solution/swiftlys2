@@ -22,6 +22,7 @@
 #include <api/monitor/logger/logger.h>
 
 #include <string>
+#include <string_view>
 
 class Logger : public ILogger
 {
@@ -42,6 +43,8 @@ public:
     void Warning(const std::string& category, const std::string& message) override { Log(LogType::WARNING, category, message); }
     void Error(const std::string& category, const std::string& message) override { Log(LogType::ERR, category, message); }
     void Critical(const std::string& category, const std::string& message) override { Log(LogType::CRITICAL, category, message); }
+
+    static void SetMinLevel(std::string_view level);
 
 private:
     bool ShouldLog(LogType type);

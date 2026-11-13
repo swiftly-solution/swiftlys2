@@ -21,8 +21,9 @@ internal static class Bootstrap
     // how tf i forgot services can be collected hahahahahahahhaahhahaa FUCK
     private static IHost? sw2Host;
 
-    public static void Start( IntPtr nativeTable, int nativeTableSize, string basePath, string logPath )
+    public static void Start( IntPtr nativeTable, int nativeTableSize )
     {
+        var basePath = BootstrapInfo.RootPath;
 
         AppDomain.CurrentDomain.UnhandledException += ( sender, e ) =>
         {
@@ -37,15 +38,13 @@ internal static class Bootstrap
             e.SetObserved();
         };
 
-        Environment.SetEnvironmentVariable("SWIFTLY_MANAGED_ROOT", basePath);
-        Environment.SetEnvironmentVariable("SWIFTLY_MANAGED_LOG", logPath);
         NativeBinding.BindNatives(nativeTable, nativeTableSize);
         NativeMethodsBinder.BindAll(NativeLibrary.Load(OperatingSystem.IsWindows() ? "steam_api64.dll" : "libsteam_api.so"));
         GlobalLocalization.InitializeFromCore(basePath);
 
         EventPublisher.Register();
         GameFunctions.Initialize();
-        FileLogger.Initialize(logPath);
+        FileLogger.Initialize(BootstrapInfo.LogPath);
 
         var redirector = new ConsoleRedirector();
         Console.SetOut(redirector);
@@ -72,7 +71,7 @@ internal static class Bootstrap
             })
             .ConfigureAppConfiguration(( context, config ) =>
             {
-                _ = config.SetBasePath(Path.Combine(Environment.GetEnvironmentVariable("SWIFTLY_MANAGED_ROOT")!, "configs"));
+                _ = config.SetBasePath(Path.Combine(basePath, "configs"));
                 _ = config.AddJsonFile("permissions.jsonc", optional: false, reloadOnChange: true);
                 _ = config.AddJsonFile("command_overrides.jsonc", optional: false, reloadOnChange: true);
                 _ = config.AddJsonFile("database.jsonc", optional: false, reloadOnChange: true);

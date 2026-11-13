@@ -15,13 +15,11 @@ internal static class FileLogger
 
     public static void Initialize( string basePath )
     {
-        var enabledStr = Environment.GetEnvironmentVariable("SWIFTLY_MANAGED_LOG_ENABLE");
-        _enabled = enabledStr != "0";
+        _enabled = BootstrapInfo.ManagedLogEnabled;
         if (!_enabled)
             return;
 
-        var intervalStr = Environment.GetEnvironmentVariable("SWIFTLY_MANAGED_LOG_INTERVAL_MS");
-        var intervalMs = int.TryParse(intervalStr, out var parsed) && parsed > 0 ? parsed : 2000;
+        var intervalMs = BootstrapInfo.ManagedLogIntervalMs;
 
         _logDirectory = Path.Combine(basePath, "managed");
         if (!Directory.Exists(_logDirectory))

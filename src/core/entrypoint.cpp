@@ -25,7 +25,6 @@
 #include <api/interfaces/interfaces.h>
 #include <api/memory/hooks/manager.h>
 #include <api/scripting/scripting.h>
-#include <api/shared/env.h>
 #include <api/shared/plat.h>
 #include <api/shared/profiler.h>
 #include <api/shared/string.h>
@@ -38,6 +37,7 @@
 #include <memory/hooks/vfunction.h>
 
 #include <monitor/consolelogger/consolelogger.h>
+#include <monitor/logger/logger.h>
 
 #include <public/engine2/igameeventsystem.h>
 #include <public/engine2/ivengineserver2.h>
@@ -119,11 +119,11 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
     SetGlobalCvarObject(g_pGameCvar);
     ConVar_Register(CVarFlags::RELEASE | CVarFlags::SERVER_CAN_EXECUTE | CVarFlags::CLIENT_CAN_EXECUTE | CVarFlags::GAMEDLL, nullptr, nullptr);
 
-    if (const char* logLevel = CommandLine()->ParmValue(CUtlStringToken("-sw_loglevel")))
-        putenv("SWIFTLY_LOG_LEVEL", logLevel, 1);
+    const char* logLevel = CommandLine()->ParmValue(CUtlStringToken("-sw_loglevel"));
+    if (logLevel)
+        Logger::SetMinLevel(logLevel);
 
-    if (const char* hideLogInConsole = CommandLine()->ParmValue(CUtlStringToken("-sw_hide_logs_in_console")))
-        putenv("SWIFTLY_HIDE_LOG_IN_CONSOLE", hideLogInConsole, 1);
+    const char* hideLogInConsole = CommandLine()->ParmValue(CUtlStringToken("-sw_hide_logs_in_console"));
 
     if (GetCurrentGame() == "unknown")
     {
@@ -214,10 +214,17 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
     if (const int* interval = std::get_if<int>(&g_pConfiguration->GetValue("core.ConsoleLogger.WriteIntervalMs")))
         managedLogInterval = (*interval > 0) ? *interval : 2000;
 
-    putenv("SWIFTLY_MANAGED_LOG_ENABLE", managedLogEnabled ? "1" : "0", 1);
-    putenv("SWIFTLY_MANAGED_LOG_INTERVAL_MS", std::to_string(managedLogInterval).c_str(), 1);
+    const std::string hide = hideLogInConsole ? str_toupper(hideLogInConsole) : "";
+    const std::string logPath = GameRelativePath(m_sLogPath);
 
-    if (!InitializeDotNetAPI(g_pScriptingAPI->GetNativeFunctions(), g_pScriptingAPI->GetNativeFunctionsCount(), GameRelativePath(m_sLogPath)))
+    ManagedBootstrapInfo info {};
+    info.logPath = logPath.c_str();
+    info.logLevel = logLevel;
+    info.hideLogInConsole = (hide == "1" || hide == "TRUE" || hide == "YES");
+    info.managedLogEnabled = managedLogEnabled;
+    info.managedLogIntervalMs = managedLogInterval;
+
+    if (!InitializeDotNetAPI(g_pScriptingAPI->GetNativeFunctions(), g_pScriptingAPI->GetNativeFunctionsCount(), info))
     {
         g_pCrashReporter->ReportPreventionIncident("Managed", "Couldn't initialize the .NET scripting API.");
         return true;

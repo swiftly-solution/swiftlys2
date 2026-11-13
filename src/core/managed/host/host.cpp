@@ -20,7 +20,6 @@ static load_assembly_and_get_function_pointer_fn s_loadAssemblyAndGetFunctionPoi
 static std::filesystem::path s_originPath;
 static std::filesystem::path s_dotnetRoot;
 static std::string s_originPathUtf8;
-static std::string s_logPathUtf8;
 
 template <class Fn>
 [[nodiscard]] static Fn GetHostFxrExport(const char* name)
@@ -96,11 +95,11 @@ bool InitializeHostFXR(std::string_view origin_path)
     return true;
 }
 
-bool InitializeDotNetAPI(void* scripting_table, int scripting_table_size, std::string_view log_path)
+bool InitializeDotNetAPI(void* scripting_table, int scripting_table_size, ManagedBootstrapInfo info)
 {
     PROFILE_FUNCTION();
 
-    using custom_loader_fn = void(CORECLR_DELEGATE_CALLTYPE*)(void*, int, const char*, const char*);
+    using custom_loader_fn = void(CORECLR_DELEGATE_CALLTYPE*)(void*, int, const ManagedBootstrapInfo*);
     static custom_loader_fn custom_loader = nullptr;
 
     if (custom_loader)
@@ -114,8 +113,9 @@ bool InitializeDotNetAPI(void* scripting_table, int scripting_table_size, std::s
         return false;
     }
 
-    s_logPathUtf8 = log_path;
-    custom_loader(scripting_table, scripting_table_size, s_originPathUtf8.c_str(), s_logPathUtf8.c_str());
+    info.size = sizeof(info);
+    info.rootPath = s_originPathUtf8.c_str();
+    custom_loader(scripting_table, scripting_table_size, &info);
 
     return true;
 }

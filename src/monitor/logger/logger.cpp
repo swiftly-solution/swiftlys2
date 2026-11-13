@@ -45,29 +45,29 @@ static constexpr std::string_view LogTypeName(LogType type)
     return "UNKNOWN";
 }
 
-static LogType GetMinLogLevelFromEnv()
+static LogType s_minLevel = LogType::INFO;
+
+void Logger::SetMinLevel(std::string_view name)
 {
     PROFILE_FUNCTION();
 
-    const char* env = std::getenv("SWIFTLY_LOG_LEVEL");
-    if (!env) return LogType::INFO;
+    const auto level = str_toupper(name);
 
-    auto level = str_toupper(env);
-
+    s_minLevel = LogType::INFO;
     for (int i = 0; i <= std::to_underlying(LogType::NONE); ++i) {
         auto type = static_cast<LogType>(i);
-        if (level == LogTypeName(type)) return type;
+        if (level == LogTypeName(type)) {
+            s_minLevel = type;
+            return;
+        }
     }
-
-    return LogType::INFO;
 }
 
 bool Logger::ShouldLog(LogType type)
 {
     PROFILE_FUNCTION();
 
-    static const LogType minLevel = GetMinLogLevelFromEnv();
-    return type != LogType::NONE && type >= minLevel;
+    return type != LogType::NONE && type >= s_minLevel;
 }
 
 void Logger::Log(LogType type, const std::string& message)
