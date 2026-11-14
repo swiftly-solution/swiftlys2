@@ -28,7 +28,7 @@
 static constexpr double UPDATE_INTERVAL_SECONDS = 5.0;
 
 static void GameFrame(void* _this, bool simulate, bool first, bool last);
-VFunctionHook g_GameFrameHook(reinterpret_cast<void*>(GameFrame), "server", "CSource2Server", "IServerGameDLL::GameFrame");
+VFunctionHook g_GameFrameHook(reinterpret_cast<void*>(GameFrame), "server", "CSource2Server", "CSource2Server::GameFrame");
 
 static void GameFrame(void* _this, bool simulate, bool first, bool last)
 {

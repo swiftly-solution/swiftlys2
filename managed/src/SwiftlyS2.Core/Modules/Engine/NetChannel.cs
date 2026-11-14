@@ -5,7 +5,7 @@ namespace SwiftlyS2.Core.Engine;
 
 internal static class INetChannelVTable
 {
-    public static Lazy<int> CanPacketLazy = new(() => NativeOffsets.Fetch("INetChannel::CanPacket"));
+    public static Lazy<int> CanPacketLazy = new(() => NativeOffsets.Fetch("CNetChan::CanPacket"));
     public static int CanPacketOffset => CanPacketLazy.Value;
     public static unsafe bool CanPacket( nint basePtr )
     {
@@ -13,7 +13,7 @@ internal static class INetChannelVTable
         return ((delegate* unmanaged< nint, byte >)vFunction)(basePtr) == 1;
     }
 
-    public static Lazy<int> IsOverflowedLazy = new(() => NativeOffsets.Fetch("INetChannel::IsOverflowed"));
+    public static Lazy<int> IsOverflowedLazy = new(() => NativeOffsets.Fetch("CNetChan::IsOverflowed"));
     public static int IsOverflowedOffset => IsOverflowedLazy.Value;
     public static unsafe bool IsOverflowed( nint basePtr )
     {
@@ -21,7 +21,7 @@ internal static class INetChannelVTable
         return ((delegate* unmanaged< nint, byte >)vFunction)(basePtr) == 1;
     }
 
-    public static Lazy<int> HasPendingReliableDataLazy = new(() => NativeOffsets.Fetch("INetChannel::HasPendingReliableData"));
+    public static Lazy<int> HasPendingReliableDataLazy = new(() => NativeOffsets.Fetch("CNetChan::HasPendingReliableData"));
     public static int HasPendingReliableDataOffset => HasPendingReliableDataLazy.Value;
     public static unsafe bool HasPendingReliableData( nint basePtr )
     {
@@ -29,7 +29,7 @@ internal static class INetChannelVTable
         return ((delegate* unmanaged< nint, byte >)vFunction)(basePtr) == 1;
     }
 
-    public static Lazy<int> IsTimedOutLazy = new(() => NativeOffsets.Fetch("INetChannel::IsTimedOut"));
+    public static Lazy<int> IsTimedOutLazy = new(() => NativeOffsets.Fetch("CNetChan::IsTimedOut"));
     public static int IsTimedOutOffset => IsTimedOutLazy.Value;
     public static unsafe bool IsTimedOut( nint basePtr )
     {
@@ -37,7 +37,7 @@ internal static class INetChannelVTable
         return ((delegate* unmanaged< nint, byte >)vFunction)(basePtr) == 1;
     }
 
-    public static Lazy<int> IsSuppressingTransmitLazy = new(() => NativeOffsets.Fetch("INetChannel::IsSuppressingTransmit"));
+    public static Lazy<int> IsSuppressingTransmitLazy = new(() => NativeOffsets.Fetch("CNetChan::IsSuppressingTransmit"));
     public static int IsSuppressingTransmitOffset => IsSuppressingTransmitLazy.Value;
     public static unsafe bool IsSuppressingTransmit( nint basePtr )
     {
@@ -45,7 +45,7 @@ internal static class INetChannelVTable
         return ((delegate* unmanaged< nint, byte >)vFunction)(basePtr) == 1;
     }
 
-    public static Lazy<int> SetMinDataRateLazy = new(() => NativeOffsets.Fetch("INetChannel::SetMinDataRate"));
+    public static Lazy<int> SetMinDataRateLazy = new(() => NativeOffsets.Fetch("CNetChan::SetMinDataRate"));
     public static int SetMinDataRateOffset => SetMinDataRateLazy.Value;
     public static unsafe void SetMinDataRate( nint basePtr, int rate )
     {
@@ -53,7 +53,7 @@ internal static class INetChannelVTable
         ((delegate* unmanaged< nint, int, void >)vFunction)(basePtr, rate);
     }
 
-    public static Lazy<int> SetMaxDataRateLazy = new(() => NativeOffsets.Fetch("INetChannel::SetMaxDataRate"));
+    public static Lazy<int> SetMaxDataRateLazy = new(() => NativeOffsets.Fetch("CNetChan::SetMaxDataRate"));
     public static int SetMaxDataRateOffset => SetMaxDataRateLazy.Value;
     public static unsafe void SetMaxDataRate( nint basePtr, int rate )
     {
@@ -61,7 +61,7 @@ internal static class INetChannelVTable
         ((delegate* unmanaged< nint, int, void >)vFunction)(basePtr, rate);
     }
 
-    public static Lazy<int> SetTimeoutLazy = new(() => NativeOffsets.Fetch("INetChannel::SetTimeout"));
+    public static Lazy<int> SetTimeoutLazy = new(() => NativeOffsets.Fetch("CNetChan::SetTimeout"));
     public static int SetTimeoutOffset => SetTimeoutLazy.Value;
     public static unsafe void SetTimeout( nint basePtr, float seconds, bool bForceExact )
     {
@@ -69,7 +69,7 @@ internal static class INetChannelVTable
         ((delegate* unmanaged< nint, float, byte, void >)vFunction)(basePtr, seconds, (byte)(bForceExact ? 1 : 0));
     }
 
-    public static Lazy<int> SuppressTransmitLazy = new(() => NativeOffsets.Fetch("INetChannel::SuppressTransmit"));
+    public static Lazy<int> SuppressTransmitLazy = new(() => NativeOffsets.Fetch("CNetChan::SuppressTransmit"));
     public static int SuppressTransmitOffset => SuppressTransmitLazy.Value;
     public static unsafe void SuppressTransmit( nint basePtr, bool suppress )
     {

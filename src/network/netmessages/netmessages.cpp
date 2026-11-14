@@ -51,7 +51,7 @@ static void PostEventAbstractHook(void* _this, CSplitScreenSlot nSlot, bool bLoc
 static bool SendNetMessage(CServerSideClient* client, CNetMessage* pData, NetChannelBufType_t bufType);
 
 FunctionHook g_FilterMessageHook(reinterpret_cast<void*>(FilterMessage), "INetworkMessageProcessingPreFilter::FilterMessage");
-VFunctionHook g_PostEventAbstractHook(reinterpret_cast<void*>(PostEventAbstractHook), "engine2", "CGameEventSystem", "IGameEventSystem::PostEventAbstract");
+VFunctionHook g_PostEventAbstractHook(reinterpret_cast<void*>(PostEventAbstractHook), "engine2", "CGameEventSystem", "CGameEventSystem::PostEventAbstract");
 VFunctionHook g_SendNetMessageHook(reinterpret_cast<void*>(SendNetMessage), "engine2", "CServerSideClient", "CServerSideClient::SendNetMessage");
 
 template <typename T>

@@ -25,7 +25,7 @@ internal class GameSystemService : IDisposable
 
     private void HookBuildGameSessionManifest()
     {
-        var offset = core.GameData.GetOffset("IGameSystem::BuildGameSessionManifest");
+        var offset = core.GameData.GetOffset("CGameRulesGameSystem::BuildGameSessionManifest");
         buildGameSessionManifest = core.Memory.GetUnmanagedFunctionByVTable<BuildGameSessionManifest>(core.Memory.GetVTableAddress(Library.Server, "CGameRulesGameSystem")!.Value, offset);
         buildGameSessionManifestGuid = buildGameSessionManifest.AddHook(next =>
         {

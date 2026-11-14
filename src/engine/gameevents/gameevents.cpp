@@ -54,13 +54,13 @@ static IGameEventManager2* ResolveGameEventManager()
 }
 
 static void PreworldUpdateHook(void* _this, bool simulate);
-VFunctionHook g_PreworldUpdateHook(reinterpret_cast<void*>(PreworldUpdateHook), "server", "CSource2Server", "IServerGameDLL::PreWorldUpdate");
+VFunctionHook g_PreworldUpdateHook(reinterpret_cast<void*>(PreworldUpdateHook), "server", "CSource2Server", "CSource2Server::PreWorldUpdate");
 
 static void StartupServerEventHook(void* _this, const GameSessionConfiguration_t& config, ISource2WorldSession* a, const char* b);
-VFunctionHook g_StartupServerEventHook(reinterpret_cast<void*>(StartupServerEventHook), "engine2", "CNetworkServerService", "INetworkServerService::StartupServer");
+VFunctionHook g_StartupServerEventHook(reinterpret_cast<void*>(StartupServerEventHook), "engine2", "CNetworkServerService", "CNetworkServerService::StartupServer");
 
 static bool FireEventHook(IGameEventManager2* _this, IGameEvent* event, bool bDontBroadcast);
-VFunctionHook g_FireEventHook(reinterpret_cast<void*>(FireEventHook), [] -> void* { return ResolveGameEventManager(); }, "IGameEventManager2::FireEvent");
+VFunctionHook g_FireEventHook(reinterpret_cast<void*>(FireEventHook), [] -> void* { return ResolveGameEventManager(); }, "CGameEventManager::FireEvent");
 
 void CEventManager::Initialize()
 {

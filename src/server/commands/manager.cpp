@@ -39,8 +39,8 @@
 void DispatchConCommand(void* thisPtr, ConCommandRef cmd, const CCommandContext& ctx, const CCommand& args);
 void ClientCommandHook2(void* thisPtr, CPlayerSlot slot, const CCommand& args);
 
-VFunctionHook dispatchConCommandHook(reinterpret_cast<void*>(DispatchConCommand), "tier0", "CCvar", "ICvar::DispatchConCommand");
-VFunctionHook clientCommandHook2(reinterpret_cast<void*>(ClientCommandHook2), "server", "CSource2GameClients", "IServerGameClients::ClientCommand");
+VFunctionHook dispatchConCommandHook(reinterpret_cast<void*>(DispatchConCommand), "tier0", "CCvar", "CCvar::DispatchConCommand");
+VFunctionHook clientCommandHook2(reinterpret_cast<void*>(ClientCommandHook2), "server", "CSource2GameClients", "CSource2GameClients::ClientCommand");
 
 void CommandsCallback(const CCommandContext& context, const CCommand& args)
 {

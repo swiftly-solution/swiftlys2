@@ -104,7 +104,7 @@ internal class CoreHookService : IDisposable
 
     internal void HookSteamServerAPIActivated()
     {
-        var offset = core.GameData.GetOffset("IServerGameDLL::GameServerSteamAPIActivated");
+        var offset = core.GameData.GetOffset("CSource2Server::GameServerSteamAPIActivated");
         steamServerAPIActivated = core.Memory.GetUnmanagedFunctionByVTable<SteamServerAPIActivated>(core.Memory.GetVTableAddress(Library.Server, "CSource2Server")!.Value, offset);
         logger.LogInformation("Hooking IServerGameDLL::GameServerSteamAPIActivated at {Address:X}", steamServerAPIActivated.Address);
         steamServerAPIActivatedGuid = steamServerAPIActivated.AddHook(next =>
@@ -132,7 +132,7 @@ internal class CoreHookService : IDisposable
 
     internal void HookLoopInit()
     {
-        var offset = core.GameData.GetOffset("ILoopMode::LoopInit");
+        var offset = core.GameData.GetOffset("CLoopModeLevelLoad::LoopInit");
         loopInit = core.Memory.GetUnmanagedFunctionByVTable<LoopInit>(core.Memory.GetVTableAddress(Library.Engine, "CLoopModeLevelLoad")!.Value, offset);
         logger.LogInformation("Hooking ILoopMode::LoopInit at {Address:X}", loopInit.Address);
         loopInitGuid = loopInit.AddHook(next =>

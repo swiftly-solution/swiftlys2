@@ -38,12 +38,12 @@ void OnClientConnectedHook(void* _this, CPlayerSlot slot, const char* pszName, u
 void ClientDisconnectHook(void* _this, CPlayerSlot slot, int reason, const char* pszName, uint64 xuid, const char* pszNetworkID);
 void CheckTransmitHook(void* _this, CCheckTransmitInfo** ppInfoList, int infoCount, CBitVec<16384>& unionTransmitEdicts, CBitVec<16384>& unk, const Entity2Networkable_t** pNetworkables, const uint16_t* pEntityIndicies, int nEntities);
 
-VFunctionHook g_ClientConnectHook(reinterpret_cast<void*>(ClientConnectHook), "server", "CSource2GameClients", "IServerGameClients::ClientConnect");
-VFunctionHook g_OnClientConnectedHook(reinterpret_cast<void*>(OnClientConnectedHook), "server", "CSource2GameClients", "IServerGameClients::OnClientConnected");
-VFunctionHook g_ClientDisconnectHook(reinterpret_cast<void*>(ClientDisconnectHook), "server", "CSource2GameClients", "IServerGameClients::ClientDisconnect");
-VFunctionHook g_ClientPutInServerHook(reinterpret_cast<void*>(OnClientPutInServerHook), "server", "CSource2GameClients", "IServerGameClients::ClientPutInServer");
-VFunctionHook g_CheckTransmitHook(reinterpret_cast<void*>(CheckTransmitHook), "server", "CSource2GameEntities", "ISource2GameEntities::CheckTransmit");
-VFunctionHook g_OnGameFramePlayerHook(reinterpret_cast<void*>(OnGameFramePlayerHook), "server", "CSource2Server", "IServerGameDLL::GameFrame");
+VFunctionHook g_ClientConnectHook(reinterpret_cast<void*>(ClientConnectHook), "server", "CSource2GameClients", "CSource2GameClients::ClientConnect");
+VFunctionHook g_OnClientConnectedHook(reinterpret_cast<void*>(OnClientConnectedHook), "server", "CSource2GameClients", "CSource2GameClients::OnClientConnected");
+VFunctionHook g_ClientDisconnectHook(reinterpret_cast<void*>(ClientDisconnectHook), "server", "CSource2GameClients", "CSource2GameClients::ClientDisconnect");
+VFunctionHook g_ClientPutInServerHook(reinterpret_cast<void*>(OnClientPutInServerHook), "server", "CSource2GameClients", "CSource2GameClients::ClientPutInServer");
+VFunctionHook g_CheckTransmitHook(reinterpret_cast<void*>(CheckTransmitHook), "server", "CSource2GameEntities", "CSource2GameEntities::CheckTransmit");
+VFunctionHook g_OnGameFramePlayerHook(reinterpret_cast<void*>(OnGameFramePlayerHook), "server", "CSource2Server", "CSource2Server::GameFrame");
 
 void CPlayerManager::Initialize()
 {

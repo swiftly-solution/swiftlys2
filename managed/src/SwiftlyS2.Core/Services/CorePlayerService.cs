@@ -35,7 +35,7 @@ internal class CorePlayerService : IDisposable
 
     private void HookClientSettingsChanged()
     {
-        var offset = core.GameData.GetOffset("IServerGameClients::ClientSettingsChanged");
+        var offset = core.GameData.GetOffset("CSource2GameClients::ClientSettingsChanged");
         clientSettingsChanged = core.Memory.GetUnmanagedFunctionByVTable<ClientSettingsChanged>(core.Memory.GetVTableAddress(Library.Server, "CSource2GameClients")!.Value, offset);
         clientSettingsChangedGuid = clientSettingsChanged.AddHook(next =>
         {
