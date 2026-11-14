@@ -1,6 +1,0 @@
-class ServerHelpers
-
-string GetServerLanguage = void
-bool UsePlayerLanguage = void
-bool IsFollowingServerGuidelines = void
-bool UseAutoHotReload = void

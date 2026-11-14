@@ -11,7 +11,7 @@ internal class SwiftlyLoggerProvider( string contextName ) : ILoggerProvider
 
 internal class SwiftlyLogger( string categoryName, string contextName ) : ILogger
 {
-    private static readonly LogLevel MinLogLevel = BootstrapInfo.MinLogLevel;
+    private static readonly LogLevel MinLogLevel = GlobalState.MinLogLevel;
     private static readonly Dictionary<LogLevel, (string Text, string Color)> LogLevelConfig = new() {
         [LogLevel.Trace] = ("Debug", "grey42"),
         [LogLevel.Debug] = ("Debug", "grey42"),
@@ -20,7 +20,7 @@ internal class SwiftlyLogger( string categoryName, string contextName ) : ILogge
         [LogLevel.Error] = ("Error", "red3"),
         [LogLevel.Critical] = ("Critical", "red3")
     };
-    private static readonly bool HideLogInConsole = BootstrapInfo.HideLogInConsole;
+    private static readonly bool HideLogInConsole = GlobalState.HideLogInConsole;
 
     public IDisposable BeginScope<TState>( TState state ) where TState : notnull => NullScope.Instance;
 

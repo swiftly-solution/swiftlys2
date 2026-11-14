@@ -3,6 +3,7 @@ using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.GameHooks;
 using SwiftlyS2.Shared.Misc;
+using SwiftlyS2.Core.Misc;
 
 namespace SwiftlyS2.Core.GameHooks;
 
@@ -43,7 +44,7 @@ internal static partial class GameHooksPublisher
                     }
                 };
 
-                Schema.isFollowingServerGuidelines = NativeServerHelpers.IsFollowingServerGuidelines();
+                Schema.isFollowingServerGuidelines = GlobalState.IsFollowingServerGuidelines;
 
                 InvokeCanAcquirePre(ref preCtx);
                 if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal)

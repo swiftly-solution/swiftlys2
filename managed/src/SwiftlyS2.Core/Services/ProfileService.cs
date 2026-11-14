@@ -6,6 +6,7 @@ using Microsoft.Diagnostics.NETCore.Client;
 using Microsoft.Extensions.Logging;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.Plugins;
+using SwiftlyS2.Core.Misc;
 
 namespace SwiftlyS2.Core.Services;
 
@@ -56,7 +57,7 @@ internal class ProfileService
     {
         _diagnosticsClient = new DiagnosticsClient(Environment.ProcessId);
 
-        var defaultLevel = (ProfilerLevel)Math.Clamp(NativeCore.GetProfilerLevelByDefault(), 0, 1);
+        var defaultLevel = (ProfilerLevel)Math.Clamp(GlobalState.ProfilerLevel, 0, 1);
         if (defaultLevel != ProfilerLevel.Disabled)
             Enable(defaultLevel);
     }

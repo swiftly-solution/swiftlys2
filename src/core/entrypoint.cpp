@@ -54,6 +54,7 @@
 #include <thread>
 
 SwiftlyCore g_SwiftlyCore;
+GlobalState g_GlobalState {};
 std::thread::id g_mainThreadId;
 
 static CreateIFaceFn g_pServerFactory = nullptr;
@@ -71,6 +72,15 @@ static void EnsureTrailingSeparator(std::string& path)
 {
     if (!path.ends_with(kPathSeparator))
         path += kPathSeparator;
+}
+
+template <class T>
+[[nodiscard]] static T ConfigValueOr(const char* key, T fallback)
+{
+    if (const T* value = std::get_if<T>(&g_pConfiguration->GetValue(key)))
+        return *value;
+
+    return fallback;
 }
 
 [[nodiscard]] static std::string GameRelativePath(const std::string& relative)
@@ -215,16 +225,29 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
         managedLogInterval = (*interval > 0) ? *interval : 2000;
 
     const std::string hide = hideLogInConsole ? str_toupper(hideLogInConsole) : "";
-    const std::string logPath = GameRelativePath(m_sLogPath);
+    static std::string s_logPath;
+    s_logPath = GameRelativePath(m_sLogPath);
 
-    ManagedBootstrapInfo info {};
-    info.logPath = logPath.c_str();
-    info.logLevel = logLevel;
-    info.hideLogInConsole = (hide == "1" || hide == "TRUE" || hide == "YES");
-    info.managedLogEnabled = managedLogEnabled;
-    info.managedLogIntervalMs = managedLogInterval;
+    g_GlobalState.logPath = s_logPath.c_str();
+    g_GlobalState.logLevel = logLevel;
+    g_GlobalState.hideLogInConsole = (hide == "1" || hide == "TRUE" || hide == "YES");
+    g_GlobalState.managedLogEnabled = managedLogEnabled;
+    g_GlobalState.managedLogIntervalMs = managedLogInterval;
 
-    if (!InitializeDotNetAPI(g_pScriptingAPI->GetNativeFunctions(), g_pScriptingAPI->GetNativeFunctionsCount(), info))
+    static std::string s_pluginLoadOrder;
+    static std::string s_serverLanguage;
+    s_pluginLoadOrder = ConfigValueOr<std::string>("core.PluginLoadOrder", "");
+    s_serverLanguage = ConfigValueOr<std::string>("core.Language", "en");
+
+    g_GlobalState.profilerLevel = ConfigValueOr<int>("core.ProfilerLevel", 0);
+    g_GlobalState.pluginManualLoadState = ConfigValueOr<bool>("core.ManualLoadPlugins", false);
+    g_GlobalState.pluginLoadOrder = s_pluginLoadOrder.c_str();
+    g_GlobalState.serverLanguage = s_serverLanguage.c_str();
+    g_GlobalState.followingServerGuidelines = ConfigValueOr<bool>(std::format("core.Follow{}ServerGuidelines", str_toupper(GetCurrentGame())).c_str(), true);
+    g_GlobalState.usePlayerLanguage = ConfigValueOr<bool>("core.UsePlayerLanguage", true);
+    g_GlobalState.useAutoHotReload = ConfigValueOr<bool>("core.AutoHotReload", true);
+
+    if (!InitializeDotNetAPI(g_pScriptingAPI->GetNativeFunctions(), g_pScriptingAPI->GetNativeFunctionsCount()))
     {
         g_pCrashReporter->ReportPreventionIncident("Managed", "Couldn't initialize the .NET scripting API.");
         return true;

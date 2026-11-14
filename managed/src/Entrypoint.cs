@@ -8,11 +8,11 @@ namespace SwiftlyS2;
 internal class Entrypoint
 {
     [UnmanagedCallersOnly]
-    public static unsafe void Start( IntPtr nativeTable, int nativeTableSize, BootstrapInfo.Native* bootstrapInfo )
+    public static unsafe void Start( IntPtr nativeTable, int nativeTableSize, GlobalState.Native* globalState )
     {
         try
         {
-            BootstrapInfo.Load(bootstrapInfo);
+            GlobalState.Load(globalState);
             Bootstrap.Start(nativeTable, nativeTableSize);
         }
         catch (Exception e)

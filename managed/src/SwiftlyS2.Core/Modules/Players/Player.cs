@@ -13,6 +13,7 @@ using SwiftlyS2.Shared.Players;
 using SwiftlyS2.Shared.ProtobufDefinitions;
 using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Translation;
+using SwiftlyS2.Core.Misc;
 
 namespace SwiftlyS2.Core.Players;
 
@@ -258,7 +259,7 @@ internal class Player : IPlayer, IDisposable
         ThrowIfDisposed();
         NativeBinding.ThrowIfNonMainThread();
 
-        if (NativeServerHelpers.IsFollowingServerGuidelines())
+        if (GlobalState.IsFollowingServerGuidelines)
         {
             throw new InvalidOperationException("Cannot get loadout items while \"FollowCS2ServerGuidelines\" is enabled.\n\tTo use this operation, disable the option in core.jsonc.");
         }

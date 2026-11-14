@@ -1,6 +1,3 @@
 class Core
 
-bool PluginManualLoadState = void
-string PluginLoadOrder = void
-int32 GetProfilerLevelByDefault = void
 bool IsMainThread = void

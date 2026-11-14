@@ -5,6 +5,7 @@ using System.Text;
 using System.Buffers;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Scheduler;
+using SwiftlyS2.Core.Misc;
 
 namespace SwiftlyS2.Core.Schemas;
 
@@ -46,7 +47,7 @@ internal static class Schema
     0xCD91F68467ECC1E7, // CEconEntity.m_nFallbackStatTrak
     ];
 
-    public static bool isFollowingServerGuidelines = NativeServerHelpers.IsFollowingServerGuidelines();
+    public static bool isFollowingServerGuidelines = GlobalState.IsFollowingServerGuidelines;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static nint GetOffset( ulong hash )

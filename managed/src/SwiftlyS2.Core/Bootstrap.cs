@@ -23,7 +23,7 @@ internal static class Bootstrap
 
     public static void Start( IntPtr nativeTable, int nativeTableSize )
     {
-        var basePath = BootstrapInfo.RootPath;
+        var basePath = GlobalState.RootPath;
 
         AppDomain.CurrentDomain.UnhandledException += ( sender, e ) =>
         {
@@ -44,7 +44,7 @@ internal static class Bootstrap
 
         EventPublisher.Register();
         GameFunctions.Initialize();
-        FileLogger.Initialize(BootstrapInfo.LogPath);
+        FileLogger.Initialize(GlobalState.LogPath);
 
         var redirector = new ConsoleRedirector();
         Console.SetOut(redirector);

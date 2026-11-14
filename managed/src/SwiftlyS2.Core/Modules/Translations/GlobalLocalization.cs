@@ -3,6 +3,7 @@ using System.Text.Json;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared;
 using SwiftlyS2.Shared.Players;
+using SwiftlyS2.Core.Misc;
 
 namespace SwiftlyS2.Core.Translations;
 
@@ -18,7 +19,7 @@ internal static class GlobalLocalization
     {
         lock (_sync)
         {
-            var language = NativeServerHelpers.GetServerLanguage();
+            var language = GlobalState.ServerLanguage;
             var translationsDir = Path.Combine(basePath, "translations");
             _values = ParseTranslations(translationsDir, language);
             _translationsDir = translationsDir;
@@ -29,7 +30,7 @@ internal static class GlobalLocalization
 
     public static Func<string, string> For( IPlayer player )
     {
-        var code = player.IsValid && NativeServerHelpers.UsePlayerLanguage() ? player.PlayerLanguage.Value : _serverLanguage;
+        var code = player.IsValid && GlobalState.UsePlayerLanguage ? player.PlayerLanguage.Value : _serverLanguage;
         return _translators.GetOrAdd(code, CreateTranslator);
     }
 

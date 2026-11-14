@@ -2,6 +2,7 @@ using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.Services;
 using SwiftlyS2.Shared.Players;
 using SwiftlyS2.Shared.Translation;
+using SwiftlyS2.Core.Misc;
 
 namespace SwiftlyS2.Core.Translations;
 
@@ -9,7 +10,7 @@ internal class TranslationService : ITranslationService
 {
     private CoreContext _Context { get; init; }
     private TranslationResource _TranslationResource { get; set; } = new();
-    internal static Language ServerLanguage = new(NativeServerHelpers.GetServerLanguage());
+    internal static Language ServerLanguage = new(GlobalState.ServerLanguage);
     private static Localizer _EmptyLocalizer = new(ServerLanguage, [], []);
 
     public TranslationService( CoreContext context )
@@ -49,7 +50,7 @@ internal class TranslationService : ITranslationService
             return _EmptyLocalizer;
         }
 
-        var language = NativeServerHelpers.UsePlayerLanguage() ? player.PlayerLanguage : GetServerLanguage();
+        var language = GlobalState.UsePlayerLanguage ? player.PlayerLanguage : GetServerLanguage();
         return TranslationFactory.CreateLocalizer(_TranslationResource, language);
     }
 

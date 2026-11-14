@@ -4,12 +4,11 @@
 #include <coreclr_delegates.h>
 #include <hostfxr.h>
 #include <cstdint>
-#include <string>
 #include <string_view>
 
 [[nodiscard]] bool InitializeHostFXR(std::string_view origin_path);
 
-struct ManagedBootstrapInfo
+struct GlobalState
 {
     int32_t size;
     const char* rootPath;
@@ -18,8 +17,17 @@ struct ManagedBootstrapInfo
     int32_t hideLogInConsole;
     int32_t managedLogEnabled;
     int32_t managedLogIntervalMs;
+    int32_t profilerLevel;
+    int32_t pluginManualLoadState;
+    const char* pluginLoadOrder;
+    const char* serverLanguage;
+    int32_t followingServerGuidelines;
+    int32_t usePlayerLanguage;
+    int32_t useAutoHotReload;
 };
 
-[[nodiscard]] bool InitializeDotNetAPI(void* scripting_table, int scripting_table_size, ManagedBootstrapInfo info);
+extern GlobalState g_GlobalState;
+
+[[nodiscard]] bool InitializeDotNetAPI(void* scripting_table, int scripting_table_size);
 
 #endif

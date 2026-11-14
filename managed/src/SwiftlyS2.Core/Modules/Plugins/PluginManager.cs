@@ -12,6 +12,7 @@ using SwiftlyS2.Shared.Plugins;
 using SwiftlyS2.Core.Modules.Plugins;
 using System.Runtime.InteropServices;
 using Semver;
+using SwiftlyS2.Core.Misc;
 
 namespace SwiftlyS2.Core.Plugins;
 
@@ -57,7 +58,7 @@ internal class PluginManager : IPluginManager
         _pluginLoadErrors = new ConcurrentDictionary<string, string>();
         _exportAssemblies = new ConcurrentDictionary<string, Assembly>(StringComparer.OrdinalIgnoreCase);
 
-        if (NativeServerHelpers.UseAutoHotReload())
+        if (GlobalState.UseAutoHotReload)
         {
             _fileWatcher = InitializeFileWatcher();
         }
@@ -69,7 +70,7 @@ internal class PluginManager : IPluginManager
     {
         LoadExports();
 
-        if (!NativeCore.PluginManualLoadState())
+        if (!GlobalState.PluginManualLoadState)
         {
             LoadPlugins();
         }
@@ -96,7 +97,7 @@ internal class PluginManager : IPluginManager
                 _plugins.Add(context);
             });
 
-            LoadPluginsInOrder(NativeCore.PluginLoadOrder());
+            LoadPluginsInOrder(GlobalState.PluginLoadOrder);
         }
     }
 
@@ -274,7 +275,7 @@ internal class PluginManager : IPluginManager
         var pluginDirs = new List<string>();
         EnumeratePluginDirectories(_rootDirService.GetPluginsRoot(), pluginDirs.Add);
 
-        var loadOrder = NativeCore.PluginLoadOrder().Split('\x01', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToList();
+        var loadOrder = GlobalState.PluginLoadOrder.Split('\x01', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToList();
         if (loadOrder.Count > 0)
         {
             pluginDirs = pluginDirs.OrderBy(dir =>
@@ -619,7 +620,7 @@ internal class PluginManager : IPluginManager
     {
         directoryName = string.Empty;
 
-        if (!NativeServerHelpers.UseAutoHotReload())
+        if (!GlobalState.UseAutoHotReload)
         {
             return false;
         }

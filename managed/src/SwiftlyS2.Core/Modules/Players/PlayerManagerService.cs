@@ -218,7 +218,7 @@ internal class PlayerManagerService : IPlayerManagerService
                 return false;
 
             if (searchMode.HasFlag(TargetSearchMode.OppositeTeamOnly) && targetTeam == playerTeam)
-                return false;   
+                return false;
         }
 
         return true;
@@ -373,7 +373,7 @@ internal class PlayerManagerService : IPlayerManagerService
 
     public IPlayer? GetPlayerFromSteamId( ulong steamId, bool allowUnauthorized = true )
     {
-        return PlayerObjects.Values.FirstOrDefault(p =>
+        return GetAllPlayers().FirstOrDefault(p =>
         {
             if (allowUnauthorized)
             {

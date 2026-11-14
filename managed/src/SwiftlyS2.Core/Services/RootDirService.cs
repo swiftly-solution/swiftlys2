@@ -4,7 +4,7 @@ namespace SwiftlyS2.Core.Services;
 
 internal class RootDirService
 {
-    public static string GetRoot() => BootstrapInfo.RootPath;
+    public static string GetRoot() => GlobalState.RootPath;
 
     public string CombineRoot( string path )
     {

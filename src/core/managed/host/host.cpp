@@ -95,11 +95,11 @@ bool InitializeHostFXR(std::string_view origin_path)
     return true;
 }
 
-bool InitializeDotNetAPI(void* scripting_table, int scripting_table_size, ManagedBootstrapInfo info)
+bool InitializeDotNetAPI(void* scripting_table, int scripting_table_size)
 {
     PROFILE_FUNCTION();
 
-    using custom_loader_fn = void(CORECLR_DELEGATE_CALLTYPE*)(void*, int, const ManagedBootstrapInfo*);
+    using custom_loader_fn = void(CORECLR_DELEGATE_CALLTYPE*)(void*, int, const GlobalState*);
     static custom_loader_fn custom_loader = nullptr;
 
     if (custom_loader)
@@ -113,9 +113,9 @@ bool InitializeDotNetAPI(void* scripting_table, int scripting_table_size, Manage
         return false;
     }
 
-    info.size = sizeof(info);
-    info.rootPath = s_originPathUtf8.c_str();
-    custom_loader(scripting_table, scripting_table_size, &info);
+    g_GlobalState.size = sizeof(g_GlobalState);
+    g_GlobalState.rootPath = s_originPathUtf8.c_str();
+    custom_loader(scripting_table, scripting_table_size, &g_GlobalState);
 
     return true;
 }

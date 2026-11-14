@@ -15,11 +15,11 @@ internal static class FileLogger
 
     public static void Initialize( string basePath )
     {
-        _enabled = BootstrapInfo.ManagedLogEnabled;
+        _enabled = GlobalState.ManagedLogEnabled;
         if (!_enabled)
             return;
 
-        var intervalMs = BootstrapInfo.ManagedLogIntervalMs;
+        var intervalMs = GlobalState.ManagedLogIntervalMs;
 
         _logDirectory = Path.Combine(basePath, "managed");
         if (!Directory.Exists(_logDirectory))
