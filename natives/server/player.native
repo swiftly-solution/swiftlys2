@@ -1,7 +1,6 @@
 class Player
 
 sync void SendMessage = int32 playerid, int32 kind, string message, int32 htmlDuration
-bool IsFakeClient = int32 playerid
 bool IsAuthorized = int32 playerid
 string GetIPAddress = int32 playerid
 sync void Kick = int32 playerid, string reason, int32 gamereason

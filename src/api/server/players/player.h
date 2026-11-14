@@ -79,10 +79,7 @@ public:
 
     virtual void SendMsg(MessageType type, const std::string& message, int duration) = 0;
 
-    virtual bool IsFakeClient() = 0;
-    virtual void SetFakeClient(bool state) = 0;
     virtual bool IsAuthorized() = 0;
-
 
     virtual void ChangeAuthorizationState(bool bAuthorized) = 0;
 
@@ -93,7 +90,6 @@ public:
     virtual std::optional<int> GetTeam() = 0;
     virtual int32_t GetKills() = 0;
     virtual const char* GetName() = 0;
-
 
     /** Engine Stuff **/
     virtual std::string GetIPAddress() = 0;

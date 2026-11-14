@@ -29,6 +29,7 @@ extern DEFINE_EVENT(g_pOnClientDisconnectCallback, void, int, int);
 extern DEFINE_EVENT(g_pOnClientKeyStateChangedCallback, void, int, uint32_t, bool);
 extern DEFINE_EVENT(g_pOnClientPutInServerCallback, void, int, int);
 extern DEFINE_EVENT(g_pOnClientSteamAuthorizeCallback, void, int);
+extern DEFINE_EVENT(g_pOnClientConnectionEstablishedCallback, void, int, bool);
 extern DEFINE_EVENT(g_pOnClientSteamAuthorizeFailCallback, void, int);
 extern DEFINE_EVENT(g_pOnEntityCreatedCallback, void, void*);
 extern DEFINE_EVENT(g_pOnEntityDeletedCallback, void, void*);

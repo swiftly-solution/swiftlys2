@@ -163,6 +163,11 @@ public class TestPlugin : BasePlugin
             Console.WriteLine($"[TestPlugin] HookClientCommand: Player {playerId} executed command: {commandLine}");
             return HookResult.Continue;
         });
+
+        core.Event.OnClientConnectionEstablished += ( @event ) =>
+        {
+            Console.WriteLine($"Player ${@event.PlayerId} has established the connection.");
+        };
     }
 
     [Command("selfmute")]

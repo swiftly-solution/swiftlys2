@@ -173,20 +173,6 @@ bool CPlayer::IsAuthorized()
     return m_bAuthorized;
 }
 
-void CPlayer::SetFakeClient(bool state)
-{
-    PROFILE_FUNCTION();
-
-    m_bIsFakeClient = state;
-}
-
-bool CPlayer::IsFakeClient()
-{
-    PROFILE_FUNCTION();
-
-    return m_bIsFakeClient;
-}
-
 void CPlayer::ChangeAuthorizationState(bool bAuthorized)
 {
     PROFILE_FUNCTION();

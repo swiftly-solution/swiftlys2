@@ -31,6 +31,16 @@ internal static class NativeEvents
         _RegisterOnClientConnectCallback(callback);
     }
 
+    private unsafe static delegate* unmanaged<nint, void> _RegisterOnClientConnectionEstablishedCallback;
+
+    /// <summary>
+    /// int32 playerid, bool isauthorized -> void
+    /// </summary>
+    public unsafe static void RegisterOnClientConnectionEstablishedCallback(nint callback)
+    {
+        _RegisterOnClientConnectionEstablishedCallback(callback);
+    }
+
     private unsafe static delegate* unmanaged<nint, void> _RegisterOnClientDisconnectCallback;
 
     /// <summary>

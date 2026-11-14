@@ -26,14 +26,6 @@ internal static class NativePlayer
         }
     }
 
-    private unsafe static delegate* unmanaged<int, byte> _IsFakeClient;
-
-    public unsafe static bool IsFakeClient(int playerid)
-    {
-        var ret = _IsFakeClient(playerid);
-        return ret == 1;
-    }
-
     private unsafe static delegate* unmanaged<int, byte> _IsAuthorized;
 
     public unsafe static bool IsAuthorized(int playerid)

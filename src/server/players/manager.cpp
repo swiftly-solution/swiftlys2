@@ -143,8 +143,6 @@ bool ClientConnectHook(void* _this, CPlayerSlot slot, const char* pszName, uint6
         return false;
     }
 
-    player->SetFakeClient(xuid == 0);
-
     if (g_pOnClientConnectCallback)
     {
         if (!g_pOnClientConnectCallback(playerid, xuid))
@@ -170,8 +168,6 @@ void OnClientConnectedHook(void* _this, CPlayerSlot slot, const char* pszName, u
         auto player = g_pPlayerManager->RegisterPlayer(playerid);
         if (player)
         {
-            player->SetFakeClient(true);
-
             if (g_pOnClientConnectCallback && !g_pOnClientConnectCallback(playerid, 0))
             {
                 player->Kick("Connection rejected by plugin.", 0);
@@ -185,6 +181,9 @@ void OnClientConnectedHook(void* _this, CPlayerSlot slot, const char* pszName, u
         auto player = g_pPlayerManager->GetPlayer(playerid);
         if (player) player->ChangeAuthorizationState(true);
     }
+
+    if (g_pOnClientConnectionEstablishedCallback)
+        g_pOnClientConnectionEstablishedCallback(playerid, g_pGameEngine->IsClientFullyAuthenticated(slot));
 
     reinterpret_cast<decltype(&OnClientConnectedHook)>(g_OnClientConnectedHook.GetOriginal())(_this, slot, pszName, xuid, pszNetworkID, pszAddress, bFakePlayer);
 }

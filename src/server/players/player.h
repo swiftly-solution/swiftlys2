@@ -39,8 +39,6 @@ public:
 
     virtual void SendMsg(MessageType type, const std::string& message, int duration) override;
 
-    virtual bool IsFakeClient() override;
-    virtual void SetFakeClient(bool state) override;
     virtual bool IsAuthorized() override;
 
     virtual void ChangeAuthorizationState(bool bAuthorized) override;
@@ -75,11 +73,8 @@ private:
 
     int m_iPlayerId = -1;
     bool m_bAuthorized = false;
-    bool m_bIsFakeClient = false;
-
 
     BlockedTransmitInfo m_bvBlockedTransmittingEntities = {};
-
     uint64_t m_uPressedButtons = 0;
 
     std::chrono::steady_clock::time_point m_centerMessageEndTime;

@@ -29,6 +29,11 @@ public class EventDelegates
     public delegate void OnClientConnected( IOnClientConnectedEvent @event );
 
     /// <summary>
+    /// Called when a client connection is established.
+    /// </summary>
+    public delegate void OnClientConnectionEstablished( IOnClientConnectionEstablishedEvent @event );
+
+    /// <summary>
     /// Called when a client disconnects from the server.
     /// </summary>
     public delegate void OnClientDisconnected( IOnClientDisconnectedEvent @event );

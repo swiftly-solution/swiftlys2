@@ -24,6 +24,7 @@ internal enum CoreEvent
     Tick,
     WorldUpdate,
     ClientConnected,
+    ClientConnectionEstablished,
     ClientDisconnected,
     ClientKeyStateChanged,
     ClientPutInServer,
@@ -144,6 +145,7 @@ internal static class EventPublisher
             NativeEvents.RegisterOnGameTickCallback((nint)(delegate* unmanaged< byte, byte, byte, void >)&OnTick);
             NativeEvents.RegisterOnPreworldUpdateCallback((nint)(delegate* unmanaged< byte, void >)&OnPreworldUpdate);
             NativeEvents.RegisterOnClientConnectCallback((nint)(delegate* unmanaged< int, ulong, byte >)&OnClientConnected);
+            NativeEvents.RegisterOnClientConnectionEstablishedCallback((nint)(delegate* unmanaged< int, byte, void >)&OnClientConnectionEstablished);
             NativeEvents.RegisterOnClientDisconnectCallback((nint)(delegate* unmanaged< int, int, void >)&OnClientDisconnected);
             NativeEvents.RegisterOnClientKeyStateChangedCallback((nint)(delegate* unmanaged< int, GameButtons, byte, void >)&OnClientKeyStateChanged);
             NativeEvents.RegisterOnClientPutInServerCallback((nint)(delegate* unmanaged< int, int, void >)&OnClientPutInServer);
@@ -427,6 +429,23 @@ internal static class EventPublisher
         {
             Report(e);
             return 1;
+        }
+    }
+
+    [UnmanagedCallersOnly]
+    public static void OnClientConnectionEstablished( int playerId, byte isAuthorized )
+    {
+        try
+        {
+            var subs = Router.Get(CoreEvent.ClientConnectionEstablished);
+            if (subs.Length == 0) return;
+
+            OnClientConnectionEstablishedEvent @event = new() { PlayerId = playerId };
+            foreach (var sub in subs) sub.InvokeOnClientConnectionEstablished(ref @event);
+        }
+        catch (Exception e)
+        {
+            Report(e);
         }
     }
 

@@ -89,6 +89,12 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         remove => Remove(CoreEvent.ClientKeyStateChanged, ref _OnClientKeyStateChanged, value);
     }
 
+    private EventDelegates.OnClientConnectionEstablished? _OnClientConnectionEstablished;
+    public event EventDelegates.OnClientConnectionEstablished? OnClientConnectionEstablished {
+        add => Add(CoreEvent.ClientConnectionEstablished, ref _OnClientConnectionEstablished, value);
+        remove => Remove(CoreEvent.ClientConnectionEstablished, ref _OnClientConnectionEstablished, value);
+    }
+
     private EventDelegates.OnClientPutInServer? _OnClientPutInServer;
     public event EventDelegates.OnClientPutInServer? OnClientPutInServer {
         add => Add(CoreEvent.ClientPutInServer, ref _OnClientPutInServer, value);
@@ -311,6 +317,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
             _OnClientConnected = null;
             _OnClientDisconnected = null;
             _OnClientKeyStateChanged = null;
+            _OnClientConnectionEstablished = null;
             _OnClientPutInServer = null;
             _OnClientSteamAuthorize = null;
             _OnClientSteamAuthorizeFail = null;
@@ -389,6 +396,14 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         if (handler == null) return;
         try { handler.Invoke(@event); }
         catch (Exception e) { LogError(e, nameof(OnClientKeyStateChanged)); }
+    }
+
+    public void InvokeOnClientConnectionEstablished( ref OnClientConnectionEstablishedEvent @event )
+    {
+        var handler = _OnClientConnectionEstablished;
+        if (handler == null) return;
+        try { handler.Invoke(@event); }
+        catch (Exception e) { LogError(e, nameof(OnClientConnectionEstablished)); }
     }
 
     public void InvokeOnClientPutInServer( ref OnClientPutInServerEvent @event )
