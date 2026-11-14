@@ -60,10 +60,6 @@ std::thread::id g_mainThreadId;
 static CreateIFaceFn g_pServerFactory = nullptr;
 static CreateIFaceFn g_pEngineFactory = nullptr;
 
-static void GameServerSteamAPIActivatedHook(void* _this);
-
-static VFunctionHook g_GameServerSteamAPIActivated(reinterpret_cast<void*>(GameServerSteamAPIActivatedHook), "server", "CSource2Server", "IServerGameDLL::GameServerSteamAPIActivated");
-
 static constexpr std::string_view kPathSeparator = WIN_LINUX("\\", "/");
 static constexpr std::string_view kDefaultCorePath = WIN_LINUX("addons\\swiftlys2", "addons/swiftlys2");
 static constexpr std::string_view kDefaultLogPath = WIN_LINUX("addons\\swiftlys2\\logs", "addons/swiftlys2/logs");
@@ -274,18 +270,6 @@ bool SwiftlyCore::Unload()
     Profiler::Save(m_sLogPath + "profiler.txt");
 
     return true;
-}
-
-static void GameServerSteamAPIActivatedHook(void* _this)
-{
-    PROFILE_FUNCTION();
-
-    if (g_pGameEngine->IsDedicatedServer())
-        g_pPlayerManager->SteamAPIServerActivated();
-
-    PROFILE_PAUSE();
-
-    return reinterpret_cast<decltype(&GameServerSteamAPIActivatedHook)>(g_GameServerSteamAPIActivated.GetOriginal())(_this);
 }
 
 void* SwiftlyCore::GetInterface(const std::string& interface_name)

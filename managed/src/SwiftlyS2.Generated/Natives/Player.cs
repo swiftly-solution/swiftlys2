@@ -26,14 +26,6 @@ internal static class NativePlayer
         }
     }
 
-    private unsafe static delegate* unmanaged<int, byte> _IsAuthorized;
-
-    public unsafe static bool IsAuthorized(int playerid)
-    {
-        var ret = _IsAuthorized(playerid);
-        return ret == 1;
-    }
-
     private unsafe static delegate* unmanaged<int*, int, byte*> _GetIPAddress;
 
     public unsafe static string GetIPAddress(int playerid)

@@ -1,4 +1,5 @@
 ﻿using SwiftlyS2.Core.Engine;
+using SwiftlyS2.Core.Events;
 using SwiftlyS2.Core.EntitySystem;
 using SwiftlyS2.Core.GameHooks;
 using SwiftlyS2.Core.Natives;
@@ -54,7 +55,17 @@ internal class Player : IPlayer, IDisposable
 
     public int UserID { get { ThrowIfDisposed(); return NativePlayer.GetUserID(Slot); } }
     public bool IsFakeClient { get { ThrowIfDisposed(); return _steamID.GetSteamID64() == 0; } }
-    public bool IsAuthorized { get { ThrowIfDisposed(); return NativePlayer.IsAuthorized(Slot); } }
+    public bool IsAuthorized { get { ThrowIfDisposed(); return isAuthorized.Load(); } }
+
+    private readonly Atomic<bool> isAuthorized = new(false);
+
+    internal void ChangeAuthorizationState( bool authorized )
+    {
+        if (isAuthorized.Exchange(authorized) == authorized) return;
+
+        if (authorized) EventPublisher.OnClientSteamAuthorize(Slot);
+        else EventPublisher.OnClientSteamAuthorizeFail(Slot);
+    }
     public uint ConnectedTime { get { ThrowIfDisposed(); return (uint)((Environment.TickCount64 - connectedAt) / 1000); } }
     public Language PlayerLanguage { get { ThrowIfDisposed(); return _language; } }
     public ulong SteamID {

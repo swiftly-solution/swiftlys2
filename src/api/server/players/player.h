@@ -79,10 +79,6 @@ public:
 
     virtual void SendMsg(MessageType type, const std::string& message, int duration) = 0;
 
-    virtual bool IsAuthorized() = 0;
-
-    virtual void ChangeAuthorizationState(bool bAuthorized) = 0;
-
     /** Player SDK Classes **/
     virtual void* GetController() = 0;
     virtual void* GetPawn() = 0;

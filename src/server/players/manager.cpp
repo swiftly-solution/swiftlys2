@@ -78,15 +78,8 @@ void OnClientPutInServerHook(void* _this, CPlayerSlot slot, char const* pszName,
         }
     }
 
-    if (g_pGameEngine->IsClientFullyAuthenticated(slot))
-    {
-        auto player = g_pPlayerManager->GetPlayer(slot.Get());
-        if (player)
-            player->ChangeAuthorizationState(true);
-    }
-
     if (g_pOnClientPutInServerCallback)
-        g_pOnClientPutInServerCallback(slot.Get(), type);
+        g_pOnClientPutInServerCallback(slot.Get(), type, g_pGameEngine->IsClientFullyAuthenticated(slot));
 }
 
 void CheckTransmitHook(void* _this, CCheckTransmitInfo** ppInfoList, int infoCount, CBitVec<16384>& unionTransmitEdicts, CBitVec<16384>& unk, const Entity2Networkable_t** pNetworkables, const uint16_t* pEntityIndicies, int nEntities)
@@ -175,11 +168,6 @@ void OnClientConnectedHook(void* _this, CPlayerSlot slot, const char* pszName, u
                 return;
             }
         }
-    }
-    else if (g_pGameEngine->IsClientFullyAuthenticated(slot))
-    {
-        auto player = g_pPlayerManager->GetPlayer(playerid);
-        if (player) player->ChangeAuthorizationState(true);
     }
 
     if (g_pOnClientConnectionEstablishedCallback)
@@ -280,26 +268,4 @@ void CPlayerManager::SendMsg(MessageType type, const std::string& message, int d
 
     CBroadcastRecipientFilter filter;
     PostTextMsg(&filter, type, message, 0);
-}
-
-void CPlayerManager::SteamAPIServerActivated()
-{
-    PROFILE_FUNCTION();
-
-    m_CallbackValidateAuthTicketResponse.Register(this, &CPlayerManager::OnValidateAuthTicket);
-}
-
-void CPlayerManager::OnValidateAuthTicket(ValidateAuthTicketResponse_t* response)
-{
-    PROFILE_FUNCTION();
-
-    for (int i = 0; i < GetPlayerCap(); i++)
-    {
-        auto player = GetPlayer(i);
-        if (!player)
-            continue;
-
-        player->ChangeAuthorizationState(response->m_eAuthSessionResponse == k_EAuthSessionResponseOK);
-        break;
-    }
 }

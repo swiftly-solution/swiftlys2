@@ -148,9 +148,7 @@ internal static class EventPublisher
             NativeEvents.RegisterOnClientConnectionEstablishedCallback((nint)(delegate* unmanaged< int, byte, void >)&OnClientConnectionEstablished);
             NativeEvents.RegisterOnClientDisconnectCallback((nint)(delegate* unmanaged< int, int, void >)&OnClientDisconnected);
             NativeEvents.RegisterOnClientKeyStateChangedCallback((nint)(delegate* unmanaged< int, GameButtons, byte, void >)&OnClientKeyStateChanged);
-            NativeEvents.RegisterOnClientPutInServerCallback((nint)(delegate* unmanaged< int, int, void >)&OnClientPutInServer);
-            NativeEvents.RegisterOnClientSteamAuthorizeCallback((nint)(delegate* unmanaged< int, void >)&OnClientSteamAuthorize);
-            NativeEvents.RegisterOnClientSteamAuthorizeFailCallback((nint)(delegate* unmanaged< int, void >)&OnClientSteamAuthorizeFail);
+            NativeEvents.RegisterOnClientPutInServerCallback((nint)(delegate* unmanaged< int, int, byte, void >)&OnClientPutInServer);
             NativeEvents.RegisterOnEntityCreatedCallback((nint)(delegate* unmanaged< nint, void >)&OnEntityCreated);
             NativeEvents.RegisterOnEntityDeletedCallback((nint)(delegate* unmanaged< nint, void >)&OnEntityDeleted);
             NativeEvents.RegisterOnEntityParentChangedCallback((nint)(delegate* unmanaged< nint, nint, void >)&OnEntityParentChanged);
@@ -437,6 +435,12 @@ internal static class EventPublisher
     {
         try
         {
+            if (isAuthorized != 0)
+            {
+                var playerObject = PlayerManagerService.GetPlayerObject(playerId);
+                if(playerObject != null) playerObject.ChangeAuthorizationState(true);
+            }
+
             var subs = Router.Get(CoreEvent.ClientConnectionEstablished);
             if (subs.Length == 0) return;
 
@@ -495,10 +499,12 @@ internal static class EventPublisher
     }
 
     [UnmanagedCallersOnly]
-    public static void OnClientPutInServer( int playerId, int clientKind )
+    public static void OnClientPutInServer( int playerId, int clientKind, byte isAuthorized )
     {
         try
         {
+            if (isAuthorized != 0) PlayerManagerService.GetPlayerObject(playerId)?.ChangeAuthorizationState(true);
+
             var subs = Router.Get(CoreEvent.ClientPutInServer);
             if (subs.Length == 0) return;
 
@@ -514,7 +520,6 @@ internal static class EventPublisher
         }
     }
 
-    [UnmanagedCallersOnly]
     public static void OnClientSteamAuthorize( int playerId )
     {
         var subs = Router.Get(CoreEvent.ClientSteamAuthorize);
@@ -531,7 +536,6 @@ internal static class EventPublisher
         }
     }
 
-    [UnmanagedCallersOnly]
     public static void OnClientSteamAuthorizeFail( int playerId )
     {
         var subs = Router.Get(CoreEvent.ClientSteamAuthorizeFail);

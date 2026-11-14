@@ -138,7 +138,6 @@ void CPlayer::Shutdown()
     PROFILE_FUNCTION();
 
     m_iPlayerId = -1;
-    m_bAuthorized = false;
 
     g_pGameEventManager->GetGameEventManager()->FreeEvent(m_pCenterMessageEvent);
     m_pCenterMessageEvent = nullptr;
@@ -164,34 +163,6 @@ void CPlayer::SendMsg(MessageType type, const std::string& message, int duration
 
     CSingleUserRecipientFilter filter(m_iPlayerId);
     PostTextMsg(&filter, type, message, GetTeam());
-}
-
-bool CPlayer::IsAuthorized()
-{
-    PROFILE_FUNCTION();
-
-    return m_bAuthorized;
-}
-
-void CPlayer::ChangeAuthorizationState(bool bAuthorized)
-{
-    PROFILE_FUNCTION();
-
-    if (m_bAuthorized == bAuthorized)
-        return;
-
-    m_bAuthorized = bAuthorized;
-
-    if (bAuthorized)
-    {
-        if (g_pOnClientSteamAuthorizeCallback)
-            g_pOnClientSteamAuthorizeCallback(m_iPlayerId);
-    }
-    else
-    {
-        if (g_pOnClientSteamAuthorizeFailCallback)
-            g_pOnClientSteamAuthorizeFailCallback(m_iPlayerId);
-    }
 }
 
 void* CPlayer::GetController()

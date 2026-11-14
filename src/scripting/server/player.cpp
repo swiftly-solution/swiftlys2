@@ -33,17 +33,6 @@ void Bridge_Player_SendMessage(int playerid, int kind, const char* message, int 
     player->SendMsg((MessageType)kind, message, duration);
 }
 
-bool Bridge_Player_IsAuthorized(int playerid)
-{
-    PROFILE_FUNCTION();
-
-    auto player = g_pPlayerManager->GetPlayer(playerid);
-    if (!player)
-        return false;
-
-    return player->IsAuthorized();
-}
-
 char* Bridge_Player_GetIPAddress(int* size, int playerid)
 {
     PROFILE_FUNCTION();
@@ -203,7 +192,6 @@ void* Bridge_Player_GetServerSideClient(int playerid)
 }
 
 DEFINE_NATIVE("Player.SendMessage", Bridge_Player_SendMessage);
-DEFINE_NATIVE("Player.IsAuthorized", Bridge_Player_IsAuthorized);
 DEFINE_NATIVE("Player.GetIPAddress", Bridge_Player_GetIPAddress);
 DEFINE_NATIVE("Player.Kick", Bridge_Player_Kick);
 DEFINE_NATIVE("Player.ShouldBlockTransmitEntity", Bridge_Player_ShouldBlockTransmitEntity);

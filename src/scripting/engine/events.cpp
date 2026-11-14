@@ -26,9 +26,7 @@ DEFINE_EVENT(g_pOnClientConnectCallback, bool, int, uint64_t) = nullptr;
 DEFINE_EVENT(g_pOnClientConnectionEstablishedCallback, void, int, bool) = nullptr;
 DEFINE_EVENT(g_pOnClientDisconnectCallback, void, int, int) = nullptr;
 DEFINE_EVENT(g_pOnClientKeyStateChangedCallback, void, int, uint32_t, bool) = nullptr;
-DEFINE_EVENT(g_pOnClientPutInServerCallback, void, int, int) = nullptr;
-DEFINE_EVENT(g_pOnClientSteamAuthorizeCallback, void, int) = nullptr;
-DEFINE_EVENT(g_pOnClientSteamAuthorizeFailCallback, void, int) = nullptr;
+DEFINE_EVENT(g_pOnClientPutInServerCallback, void, int, int, bool) = nullptr;
 DEFINE_EVENT(g_pOnEntityCreatedCallback, void, void*) = nullptr;
 DEFINE_EVENT(g_pOnEntityDeletedCallback, void, void*) = nullptr;
 DEFINE_EVENT(g_pOnEntityParentChangedCallback, void, void*, void*) = nullptr;
@@ -76,20 +74,6 @@ void Bridge_Events_RegisterOnClientPutInServerCallback(void* callback)
     PROFILE_FUNCTION();
 
     g_pOnClientPutInServerCallback = reinterpret_cast<decltype(g_pOnClientPutInServerCallback)>(callback);
-}
-
-void Bridge_Events_RegisterOnClientSteamAuthorizeCallback(void* callback)
-{
-    PROFILE_FUNCTION();
-
-    g_pOnClientSteamAuthorizeCallback = reinterpret_cast<decltype(g_pOnClientSteamAuthorizeCallback)>(callback);
-}
-
-void Bridge_Events_RegisterOnClientSteamAuthorizeFailCallback(void* callback)
-{
-    PROFILE_FUNCTION();
-
-    g_pOnClientSteamAuthorizeFailCallback = reinterpret_cast<decltype(g_pOnClientSteamAuthorizeFailCallback)>(callback);
 }
 
 void Bridge_Events_RegisterOnEntityCreatedCallback(void* callback)
@@ -140,8 +124,6 @@ DEFINE_NATIVE("Events.RegisterOnClientConnectionEstablishedCallback", Bridge_Eve
 DEFINE_NATIVE("Events.RegisterOnClientDisconnectCallback",Bridge_Events_RegisterOnClientDisconnectCallback);
 DEFINE_NATIVE("Events.RegisterOnClientKeyStateChangedCallback", Bridge_Events_RegisterOnClientKeyStateChangedCallback);
 DEFINE_NATIVE("Events.RegisterOnClientPutInServerCallback", Bridge_Events_RegisterOnClientPutInServerCallback);
-DEFINE_NATIVE("Events.RegisterOnClientSteamAuthorizeCallback", Bridge_Events_RegisterOnClientSteamAuthorizeCallback);
-DEFINE_NATIVE("Events.RegisterOnClientSteamAuthorizeFailCallback", Bridge_Events_RegisterOnClientSteamAuthorizeFailCallback);
 DEFINE_NATIVE("Events.RegisterOnEntityCreatedCallback", Bridge_Events_RegisterOnEntityCreatedCallback);
 DEFINE_NATIVE("Events.RegisterOnEntityDeletedCallback", Bridge_Events_RegisterOnEntityDeletedCallback);
 DEFINE_NATIVE("Events.RegisterOnEntityParentChangedCallback", Bridge_Events_RegisterOnEntityParentChangedCallback);

@@ -39,10 +39,6 @@ public:
 
     virtual void SendMsg(MessageType type, const std::string& message, int duration) override;
 
-    virtual bool IsAuthorized() override;
-
-    virtual void ChangeAuthorizationState(bool bAuthorized) override;
-
     virtual void* GetController() override;
     virtual void* GetPawn() override;
     virtual void* GetPlayerPawn() override;
@@ -72,7 +68,6 @@ private:
     void EnsureCenterMessageEvent();
 
     int m_iPlayerId = -1;
-    bool m_bAuthorized = false;
 
     BlockedTransmitInfo m_bvBlockedTransmittingEntities = {};
     uint64_t m_uPressedButtons = 0;

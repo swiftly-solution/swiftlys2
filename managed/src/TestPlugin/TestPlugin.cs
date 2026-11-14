@@ -395,6 +395,12 @@ public class TestPlugin : BasePlugin
         //     return HookResult.Continue;
         // });
         //
+
+        Core.Event.OnClientSteamAuthorize += ( @event ) =>
+        {
+            Console.WriteLine($"Client {@event.PlayerId} has been authorized.");
+        };
+
         Core.Command.HookClientChat(( playerId, text, teamOnly ) =>
         {
             Console.WriteLine($"[TestPlugin] ClientChat: {playerId} said '{text}' (teamOnly: {teamOnly})");

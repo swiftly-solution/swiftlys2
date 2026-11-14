@@ -46,9 +46,6 @@ public:
 
     virtual void SendMsg(MessageType type, const std::string& message, int duration) override;
 
-    virtual void SteamAPIServerActivated() override;
-
-    STEAM_GAMESERVER_CALLBACK_MANUAL(CPlayerManager, OnValidateAuthTicket, ValidateAuthTicketResponse_t, m_CallbackValidateAuthTicketResponse);
 private:
     std::array<std::optional<CPlayer>, MAX_PLAYERS> m_players;
 };
