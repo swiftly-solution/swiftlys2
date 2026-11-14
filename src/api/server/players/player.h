@@ -83,7 +83,6 @@ public:
     virtual void SetFakeClient(bool state) = 0;
     virtual bool IsAuthorized() = 0;
 
-    virtual uint32_t GetConnectedTime() = 0;
 
     virtual void ChangeAuthorizationState(bool bAuthorized) = 0;
 

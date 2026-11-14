@@ -43,8 +43,6 @@ public:
     virtual void SetFakeClient(bool state) override;
     virtual bool IsAuthorized() override;
 
-    virtual uint32_t GetConnectedTime() override;
-
     virtual void ChangeAuthorizationState(bool bAuthorized) override;
 
     virtual void* GetController() override;
@@ -83,8 +81,6 @@ private:
     BlockedTransmitInfo m_bvBlockedTransmittingEntities = {};
 
     uint64_t m_uPressedButtons = 0;
-
-    std::chrono::steady_clock::time_point m_uConnectedTimeStart;
 
     std::chrono::steady_clock::time_point m_centerMessageEndTime;
     std::string m_sCenterMessageText;

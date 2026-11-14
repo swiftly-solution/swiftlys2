@@ -130,7 +130,6 @@ void CPlayer::Initialize(int playerid)
 
     m_iPlayerId = playerid;
 
-    m_uConnectedTimeStart = std::chrono::steady_clock::now();
     EnsureCenterMessageEvent();
 }
 
@@ -186,13 +185,6 @@ bool CPlayer::IsFakeClient()
     PROFILE_FUNCTION();
 
     return m_bIsFakeClient;
-}
-
-uint32_t CPlayer::GetConnectedTime()
-{
-    PROFILE_FUNCTION();
-
-    return static_cast<uint32_t>(std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - m_uConnectedTimeStart).count());
 }
 
 void CPlayer::ChangeAuthorizationState(bool bAuthorized)

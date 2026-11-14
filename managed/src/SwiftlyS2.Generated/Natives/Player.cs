@@ -42,14 +42,6 @@ internal static class NativePlayer
         return ret == 1;
     }
 
-    private unsafe static delegate* unmanaged<int, uint> _GetConnectedTime;
-
-    public unsafe static uint GetConnectedTime(int playerid)
-    {
-        var ret = _GetConnectedTime(playerid);
-        return ret;
-    }
-
     private unsafe static delegate* unmanaged<int*, int, byte*> _GetIPAddress;
 
     public unsafe static string GetIPAddress(int playerid)

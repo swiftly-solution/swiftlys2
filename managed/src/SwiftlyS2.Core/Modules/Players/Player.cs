@@ -25,7 +25,10 @@ internal class Player : IPlayer, IDisposable
         Slot = pid;
         SessionId = nextSessionId.Increment();
         _steamID = new(unauthorizedSteamID);
+        connectedAt = Environment.TickCount64;
     }
+
+    private readonly long connectedAt;
 
     private static readonly Atomic<ulong> nextSessionId = new(999);
 
@@ -52,7 +55,7 @@ internal class Player : IPlayer, IDisposable
     public int UserID { get { ThrowIfDisposed(); return NativePlayer.GetUserID(Slot); } }
     public bool IsFakeClient { get { ThrowIfDisposed(); return _steamID.GetSteamID64() == 0; } }
     public bool IsAuthorized { get { ThrowIfDisposed(); return NativePlayer.IsAuthorized(Slot); } }
-    public uint ConnectedTime { get { ThrowIfDisposed(); return NativePlayer.GetConnectedTime(Slot); } }
+    public uint ConnectedTime { get { ThrowIfDisposed(); return (uint)((Environment.TickCount64 - connectedAt) / 1000); } }
     public Language PlayerLanguage { get { ThrowIfDisposed(); return _language; } }
     public ulong SteamID {
         get {

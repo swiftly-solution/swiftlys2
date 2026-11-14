@@ -3,9 +3,6 @@ class Player
 sync void SendMessage = int32 playerid, int32 kind, string message, int32 htmlDuration
 bool IsFakeClient = int32 playerid
 bool IsAuthorized = int32 playerid
-uint32 GetConnectedTime = int32 playerid
-uint64 GetUnauthorizedSteamID = int32 playerid
-uint64 GetSteamID = int32 playerid
 string GetIPAddress = int32 playerid
 sync void Kick = int32 playerid, string reason, int32 gamereason
 void ShouldBlockTransmitEntity = int32 playerid, int32 entityidx, bool shouldBlockTransmit

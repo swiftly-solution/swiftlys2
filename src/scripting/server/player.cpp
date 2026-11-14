@@ -55,17 +55,6 @@ bool Bridge_Player_IsAuthorized(int playerid)
     return player->IsAuthorized();
 }
 
-uint32_t Bridge_Player_GetConnectedTime(int playerid)
-{
-    PROFILE_FUNCTION();
-
-    auto player = g_pPlayerManager->GetPlayer(playerid);
-    if (!player)
-        return 0;
-
-    return player->GetConnectedTime();
-}
-
 char* Bridge_Player_GetIPAddress(int* size, int playerid)
 {
     PROFILE_FUNCTION();
@@ -227,7 +216,6 @@ void* Bridge_Player_GetServerSideClient(int playerid)
 DEFINE_NATIVE("Player.SendMessage", Bridge_Player_SendMessage);
 DEFINE_NATIVE("Player.IsFakeClient", Bridge_Player_IsFakeClient);
 DEFINE_NATIVE("Player.IsAuthorized", Bridge_Player_IsAuthorized);
-DEFINE_NATIVE("Player.GetConnectedTime", Bridge_Player_GetConnectedTime);
 DEFINE_NATIVE("Player.GetIPAddress", Bridge_Player_GetIPAddress);
 DEFINE_NATIVE("Player.Kick", Bridge_Player_Kick);
 DEFINE_NATIVE("Player.ShouldBlockTransmitEntity", Bridge_Player_ShouldBlockTransmitEntity);
