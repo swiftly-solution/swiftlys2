@@ -21,28 +21,41 @@ namespace SwiftlyS2.Core.Players;
 
 internal class Player : IPlayer, IDisposable
 {
+    private static readonly Atomic<ulong> nextSessionId = new(999);
+
+    private readonly long connectedAt;
+    private readonly string ipAddress;
+    private readonly int userId;
+    private bool _disposed = false;
+    private ServerSideClient _serverSideClient = new();
+    private CSteamID _steamID;
+    internal Language _language = TranslationService.ServerLanguage;
+
+    private readonly Atomic<bool> isAuthorized = new(false);
+    private readonly Atomic<VoiceFlagValue> voiceFlags = new(VoiceFlagValue.Normal);
+    private readonly ListenOverride[] listenOverrides = new ListenOverride[66];
+    private readonly Atomic<ulong> selfMutes = new(0);
+
     public Player( int pid, ulong unauthorizedSteamID )
     {
         Slot = pid;
         SessionId = nextSessionId.Increment();
         _steamID = new(unauthorizedSteamID);
         connectedAt = Environment.TickCount64;
+        ipAddress = NativePlayer.GetIPAddress(pid);
+        userId = NativePlayer.GetUserID(pid);
     }
 
-    private readonly long connectedAt;
+    internal void ChangeAuthorizationState( bool authorized )
+    {
+        if (isAuthorized.Exchange(authorized) == authorized) return;
 
-    private static readonly Atomic<ulong> nextSessionId = new(999);
-
-    private bool _disposed = false;
-    private ServerSideClient _serverSideClient = new();
-    private CSteamID _steamID;
-    internal Language _language = TranslationService.ServerLanguage;
-
-    private readonly Atomic<VoiceFlagValue> voiceFlags = new(VoiceFlagValue.Normal);
-    private readonly ListenOverride[] listenOverrides = new ListenOverride[66];
-    private readonly Atomic<ulong> selfMutes = new(0);
+        if (authorized) EventPublisher.OnClientSteamAuthorize(Slot);
+        else EventPublisher.OnClientSteamAuthorizeFail(Slot);
+    }
 
     internal bool IsMutedBySelf( int slot ) => (uint)slot < 64 && (selfMutes.Load() & (1UL << slot)) != 0;
+
     internal void SetSelfMutesLowDWord( uint mask )
     {
         var seen = selfMutes.Load();
@@ -53,21 +66,41 @@ internal class Player : IPlayer, IDisposable
     public ulong SessionId { get; }
     public int Slot { get; }
 
-    public int UserID { get { ThrowIfDisposed(); return NativePlayer.GetUserID(Slot); } }
-    public bool IsFakeClient { get { ThrowIfDisposed(); return _steamID.GetSteamID64() == 0; } }
-    public bool IsAuthorized { get { ThrowIfDisposed(); return isAuthorized.Load(); } }
-
-    private readonly Atomic<bool> isAuthorized = new(false);
-
-    internal void ChangeAuthorizationState( bool authorized )
-    {
-        if (isAuthorized.Exchange(authorized) == authorized) return;
-
-        if (authorized) EventPublisher.OnClientSteamAuthorize(Slot);
-        else EventPublisher.OnClientSteamAuthorizeFail(Slot);
+    public int UserID {
+        get {
+            ThrowIfDisposed();
+            return userId;
+        }
     }
-    public uint ConnectedTime { get { ThrowIfDisposed(); return (uint)((Environment.TickCount64 - connectedAt) / 1000); } }
-    public Language PlayerLanguage { get { ThrowIfDisposed(); return _language; } }
+
+    public bool IsFakeClient {
+        get {
+            ThrowIfDisposed();
+            return _steamID.GetSteamID64() == 0;
+        }
+    }
+
+    public bool IsAuthorized {
+        get {
+            ThrowIfDisposed();
+            return isAuthorized.Load();
+        }
+    }
+
+    public uint ConnectedTime {
+        get {
+            ThrowIfDisposed();
+            return (uint)((Environment.TickCount64 - connectedAt) / 1000);
+        }
+    }
+
+    public Language PlayerLanguage {
+        get {
+            ThrowIfDisposed();
+            return _language;
+        }
+    }
+
     public ulong SteamID {
         get {
             ThrowIfDisposed();
@@ -75,9 +108,20 @@ internal class Player : IPlayer, IDisposable
         }
     }
 
-    public ulong UnauthorizedSteamID { get { ThrowIfDisposed(); return _steamID.GetSteamID64(); } }
+    public ulong UnauthorizedSteamID {
+        get {
+            ThrowIfDisposed();
+            return _steamID.GetSteamID64();
+        }
+    }
 
-    public CCSPlayerController Controller { get { ThrowIfDisposed(); return EntityManager.GetEntityByIndex((uint)(Slot + 1)) as CCSPlayerControllerImpl ?? new CCSPlayerControllerImpl(0); } }
+    public CCSPlayerController Controller {
+        get {
+            ThrowIfDisposed();
+            return EntityManager.GetEntityByIndex((uint)(Slot + 1)) as CCSPlayerControllerImpl ?? new CCSPlayerControllerImpl(0);
+        }
+    }
+
     public CCSPlayerController RequiredController => Controller is { IsValid: true } controller ? controller : throw new InvalidOperationException("Controller is not valid");
     public CBasePlayerPawn? Pawn => Controller is { IsValid: true } ? Controller.Pawn.Value : null;
     public CBasePlayerPawn RequiredPawn => Pawn is { IsValid: true } pawn ? pawn : throw new InvalidOperationException("Pawn is not valid");
@@ -99,9 +143,18 @@ internal class Player : IPlayer, IDisposable
         }
     }
 
-    public string IPAddress { get { ThrowIfDisposed(); return NativePlayer.GetIPAddress(Slot); } }
+    public string IPAddress {
+        get {
+            ThrowIfDisposed();
+            return ipAddress;
+        }
+    }
 
-    public VoiceFlagValue VoiceFlags { get { return voiceFlags.Value; } set { voiceFlags.Value = value; } }
+    public VoiceFlagValue VoiceFlags {
+        get => voiceFlags.Value;
+        set => voiceFlags.Value = value;
+    }
+
     public bool IsValid =>
         !_disposed &&
         Controller is { IsValid: true, IsHLTV: false, Connected: PlayerConnectedState.Connected } &&
@@ -110,11 +163,26 @@ internal class Player : IPlayer, IDisposable
     public bool IsAlive => IsValid && Pawn!.LifeState == (byte)LifeState_t.LIFE_ALIVE;
 
     private readonly Atomic<bool> isFirstSpawn = new(true);
-    public bool IsFirstSpawn { get { ThrowIfDisposed(); return isFirstSpawn.Value; } internal set => isFirstSpawn.Value = value; }
+    public bool IsFirstSpawn {
+        get {
+            ThrowIfDisposed();
+            return isFirstSpawn.Value;
+        }
+        internal set => isFirstSpawn.Value = value;
+    }
 
-    public string Name { get => ServerSideClient.Name; set => ServerSideClient.Name = value; }
+    public string Name {
+        get => ServerSideClient.Name;
+        set => ServerSideClient.Name = value;
+    }
 
-    public IServerSideClient ServerSideClient { get { ThrowIfDisposed(); _serverSideClient.SetDangerousHandle(NativePlayer.GetServerSideClient(PlayerID)); return _serverSideClient; } }
+    public IServerSideClient ServerSideClient {
+        get {
+            ThrowIfDisposed();
+            _serverSideClient.SetDangerousHandle(NativePlayer.GetServerSideClient(PlayerID));
+            return _serverSideClient;
+        }
+    }
 
     public void ChangeTeam( Team team )
     {
