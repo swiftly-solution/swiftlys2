@@ -514,7 +514,7 @@ internal sealed partial class TextStyleProcessor : IDisposable
 
         var newOffset = scrollOffsets.TryGetValue(key, out var offset) ? (offset + 1) % wrapLength : 0;
 
-        _ = scrollOffsets.AddOrUpdate(key, newOffset, ( _, _ ) => newOffset);
+        scrollOffsets[key] = newOffset;
         return newOffset;
     }
 

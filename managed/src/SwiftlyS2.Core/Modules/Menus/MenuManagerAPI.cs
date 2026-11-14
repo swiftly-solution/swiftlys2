@@ -527,7 +527,7 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
                 //      logical end of the menu flow is reached and the menu is truly closed.
                 _ = onClosedCallbacks.TryRemove((player.PlayerID, currentMenu), out var callback);
                 CloseMenuForPlayerInternal(player, currentMenu, false);
-                _ = onClosedCallbacks.AddOrUpdate((player.PlayerID, currentMenu), callback, ( _, _ ) => callback);
+                onClosedCallbacks[(player.PlayerID, currentMenu)] = callback;
             }
             else
             {
@@ -535,7 +535,7 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
             }
         }
 
-        _ = openMenus.AddOrUpdate(player.PlayerID, menu, ( _, _ ) => menu);
+        openMenus[player.PlayerID] = menu;
         menu.ShowForPlayer(player);
         MenuOpened?.Invoke(this, new MenuManagerEventArgs { Player = player, Menu = menu });
     }
@@ -543,7 +543,7 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
     public void OpenMenuForPlayer( IPlayer player, IMenuAPI menu, Action<IPlayer, IMenuAPI> onClosed )
     {
         OpenMenuForPlayer(player, menu);
-        _ = onClosedCallbacks.AddOrUpdate((player.PlayerID, menu), onClosed, ( _, _ ) => onClosed);
+        onClosedCallbacks[(player.PlayerID, menu)] = onClosed;
     }
 
     public void CloseMenu( IMenuAPI menu )

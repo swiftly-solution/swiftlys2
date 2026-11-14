@@ -303,7 +303,8 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
                 DesiredIndex: desiredOptionIndex.TryGetValue(player.PlayerID, out var desired) ? desired : -1,
                 SelectedIndex: selectedOptionIndex.TryGetValue(player.PlayerID, out var selected) ? selected : -1
             ))
-            .Where(state => state.DesiredIndex >= 0 && state.SelectedIndex >= 0);
+            .Where(state => state.DesiredIndex >= 0 && state.SelectedIndex >= 0)
+            .ToList();
 
             var baseMaxVisibleItems = Configuration.MaxVisibleItems < 1 ? core.MenusAPI.Configuration.ItemsPerPage : Configuration.MaxVisibleItems;
             var maxVisibleItems = Configuration.AutoIncreaseVisibleItems
@@ -311,9 +312,8 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
                 : Math.Clamp(baseMaxVisibleItems, 1, 5);
             var halfVisible = maxVisibleItems / 2;
 
-            for (var i = 0; i < playerStates.Count(); i++)
+            foreach (var (player, desiredIndex, selectedIndex) in playerStates)
             {
-                var (player, desiredIndex, selectedIndex) = playerStates.ElementAtOrDefault(i);
                 if (player == null) continue;
 
                 ProcessPlayerMenu(player, desiredIndex, selectedIndex, maxOptions, maxVisibleItems, halfVisible);
@@ -333,7 +333,10 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
         var filteredOptions = new List<IMenuOption>();
         lock (optionsLock)
         {
-            filteredOptions = options.Where(opt => opt.Visible && opt.GetVisible(player)).ToList();
+            foreach (var opt in options)
+            {
+                if (opt.Visible && opt.GetVisible(player)) filteredOptions.Add(opt);
+            }
         }
 
         if (filteredOptions.Count <= 0)

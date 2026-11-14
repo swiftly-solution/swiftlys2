@@ -224,11 +224,10 @@ internal class Player : IPlayer, IDisposable
     public void Kick( string reason, ENetworkDisconnectionReason gameReason )
     {
         ThrowIfDisposed();
-        CancellationTokenSource cts = new();
         SchedulerManager.NextTick(() =>
         {
             NativePlayer.Kick(Slot, reason, (int)gameReason);
-        }, cts.Token);
+        }, CancellationToken.None);
     }
 
     public Task KickAsync( string reason, ENetworkDisconnectionReason gameReason )

@@ -348,19 +348,19 @@ internal class PlayerManagerService : IPlayerManagerService
 
     public IPlayer? GetPlayerFromSteamId( ulong steamId, bool allowUnauthorized = true )
     {
-        return GetAllPlayers().FirstOrDefault(p =>
+        foreach (var p in GetAllPlayers())
         {
             if (allowUnauthorized)
             {
-                if (p.SteamID == steamId) return true;
-                if (p.UnauthorizedSteamID == steamId) return true;
+                if (p.SteamID == steamId || p.UnauthorizedSteamID == steamId) return p;
             }
-            else
+            else if (p.SteamID == steamId && p.IsAuthorized)
             {
-                if (p.SteamID == steamId && p.IsAuthorized) return true;
+                return p;
             }
-            return false;
-        });
+        }
+
+        return null;
     }
 
     public bool IsSessionIdValid( ulong sessionId )
