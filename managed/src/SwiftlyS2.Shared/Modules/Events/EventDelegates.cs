@@ -204,4 +204,10 @@ public class EventDelegates
     /// Called when a custom hud element is clicked.
     /// </summary>
     public delegate void OnCustomHudClicked( IOnCustomHudClickedEvent @event );
+
+    /// <summary>
+    /// Called for every candidate while resolving a target in FindTargettedPlayers.
+    /// Lets plugins add their own target selectors or veto candidates.
+    /// </summary>
+    public delegate void OnFindTargettedPlayers( IOnFindTargettedPlayersEvent @event );
 }

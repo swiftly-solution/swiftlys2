@@ -11,6 +11,7 @@ using SwiftlyS2.Core.Scheduler;
 using SwiftlyS2.Core.SchemaDefinitions;
 using SwiftlyS2.Shared.ProtobufDefinitions;
 using SwiftlyS2.Core.Players;
+using SwiftlyS2.Shared.Players;
 using SwiftlyS2.Core.EntitySystem;
 using SwiftlyS2.Core.Services;
 using SwiftlyS2.Core.ProtobufDefinitions;
@@ -57,6 +58,7 @@ internal enum CoreEvent
     ClientVoice,
     ClientSettingsChanged,
     CustomHudClicked,
+    FindTargettedPlayers,
 }
 
 internal static class EventPublisher
@@ -940,5 +942,19 @@ internal static class EventPublisher
         {
             Report(e);
         }
+    }
+
+    public static bool InvokeOnFindTargettedPlayers( IPlayer player, string target, TargetSearchMode searchMode, IPlayer candidate, bool isMatch )
+    {
+        var subs = Router.Get(CoreEvent.FindTargettedPlayers);
+        if (subs.Length == 0) return isMatch;
+
+        OnFindTargettedPlayersEvent @event = new() { Player = player, Target = target, SearchMode = searchMode, Candidate = candidate, IsMatch = isMatch };
+        foreach (var sub in subs)
+        {
+            sub.InvokeOnFindTargettedPlayers(ref @event);
+            if (@event.Result is HookResult.Handled or HookResult.Stop) break;
+        }
+        return @event.IsMatch;
     }
 }

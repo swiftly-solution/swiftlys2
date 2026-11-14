@@ -206,4 +206,10 @@ public interface IEventSubscriber
     /// Called when a custom hud element is clicked.
     /// </summary>    
     public event EventDelegates.OnCustomHudClicked? OnCustomHudClicked;
+
+    /// <summary>
+    /// Called for every candidate while resolving a target in FindTargettedPlayers.
+    /// Lets plugins add their own target selectors or veto candidates.
+    /// </summary>
+    public event EventDelegates.OnFindTargettedPlayers? OnFindTargettedPlayers;
 }
