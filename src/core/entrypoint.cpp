@@ -152,8 +152,15 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
         return false;
     }
 
-    if (const int* level = std::get_if<int>(&g_pConfiguration->GetValue("core.DotnetCrashTracerLevel")); level && *level > 0)
-        g_pCrashReporter->EnableDotnetCrashTracer(*level);
+    bool managedEnabled = true;
+    if (const bool* enabled = std::get_if<bool>(&g_pConfiguration->GetValue("core.Managed.Enable")))
+        managedEnabled = *enabled;
+
+    if (managedEnabled)
+    {
+        if (const int* level = std::get_if<int>(&g_pConfiguration->GetValue("core.DotnetCrashTracerLevel")); level && *level > 0)
+            g_pCrashReporter->EnableDotnetCrashTracer(*level);
+    }
 
     g_pGameDataManager->GetOffsets()->Load(GetCurrentGame());
     g_pGameDataManager->GetSignatures()->Load(GetCurrentGame());
@@ -209,7 +216,15 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
     StartFixes();
 
     const std::string coreRoot = GameRelativePath(m_sCorePath);
+    g_pServerCommands->Initialize();
     g_pExtensionHost->LoadExtensions(coreRoot);
+
+    if (!managedEnabled)
+    {
+        for (int warningIndex = 0; warningIndex < 3; ++warningIndex)
+            g_pLogger->Warning("Managed", "Managed runtime is disabled by configuration.\n");
+        return true;
+    }
 
     if (!InitializeHostFXR(coreRoot))
     {
@@ -261,6 +276,7 @@ bool SwiftlyCore::Unload()
     PROFILE_FUNCTION();
 
     g_pExtensionHost->UnloadExtensions();
+    g_pServerCommands->Shutdown();
     g_pHooksManager->Shutdown();
     g_pPlayerManager->Shutdown();
     g_pEntSystem->Shutdown();
