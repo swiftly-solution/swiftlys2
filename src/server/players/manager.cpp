@@ -143,12 +143,11 @@ bool ClientConnectHook(void* _this, CPlayerSlot slot, const char* pszName, uint6
         return false;
     }
 
-    player->SetUnauthorizedSteamID(xuid);
     player->SetFakeClient(xuid == 0);
 
     if (g_pOnClientConnectCallback)
     {
-        if (!g_pOnClientConnectCallback(playerid))
+        if (!g_pOnClientConnectCallback(playerid, xuid))
         {
             g_pPlayerManager->UnregisterPlayer(playerid);
             return false;
@@ -173,9 +172,10 @@ void OnClientConnectedHook(void* _this, CPlayerSlot slot, const char* pszName, u
         {
             player->SetFakeClient(true);
 
-            if (g_pOnClientConnectCallback && !g_pOnClientConnectCallback(playerid))
+            if (g_pOnClientConnectCallback && !g_pOnClientConnectCallback(playerid, 0))
             {
                 player->Kick("Connection rejected by plugin.", 0);
+                g_pPlayerManager->UnregisterPlayer(playerid);
                 return;
             }
         }
@@ -294,14 +294,10 @@ void CPlayerManager::OnValidateAuthTicket(ValidateAuthTicketResponse_t* response
 {
     PROFILE_FUNCTION();
 
-    uint64_t steamid = response->m_SteamID.ConvertToUint64();
-
     for (int i = 0; i < GetPlayerCap(); i++)
     {
         auto player = GetPlayer(i);
         if (!player)
-            continue;
-        if (player->GetUnauthorizedSteamID() != steamid)
             continue;
 
         player->ChangeAuthorizationState(response->m_eAuthSessionResponse == k_EAuthSessionResponseOK);

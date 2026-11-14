@@ -195,41 +195,6 @@ uint32_t CPlayer::GetConnectedTime()
     return static_cast<uint32_t>(std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - m_uConnectedTimeStart).count());
 }
 
-void CPlayer::SetUnauthorizedSteamID(uint64_t steamID)
-{
-    PROFILE_FUNCTION();
-
-    m_uUnauthorizedSteamID = steamID;
-}
-
-uint64_t CPlayer::GetUnauthorizedSteamID()
-{
-    PROFILE_FUNCTION();
-
-    if (IsFakeClient())
-        return 0;
-
-    auto steamid = g_pGameEngine->GetClientSteamID(m_iPlayerId);
-    return steamid ? steamid->ConvertToUint64() : m_uUnauthorizedSteamID;
-}
-
-uint64_t CPlayer::GetSteamID()
-{
-    PROFILE_FUNCTION();
-
-    if (IsFakeClient())
-        return 0;
-
-    if (m_bAuthorized)
-    {
-        auto steamid = g_pGameEngine->GetClientSteamID(m_iPlayerId);
-        return steamid ? steamid->ConvertToUint64() : 0;
-    }
-
-    const auto* mode = std::get_if<std::string>(&g_pConfiguration->GetValue("core.SteamAuth.Mode"));
-    return mode && *mode == "flexible" ? GetUnauthorizedSteamID() : 0;
-}
-
 void CPlayer::ChangeAuthorizationState(bool bAuthorized)
 {
     PROFILE_FUNCTION();

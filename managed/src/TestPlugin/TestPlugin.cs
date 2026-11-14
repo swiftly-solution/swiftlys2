@@ -143,11 +143,6 @@ public class TestPlugin : BasePlugin
     public TestPlugin( ISwiftlyCore core ) : base(core)
     {
         Console.WriteLine("[TestPlugin] TestPlugin constructed successfully!");
-        core.GameHooks.Datamaps.CCSPlayerController.ResourceDataThink.Post += ( ref @event ) =>
-        {
-            Console.WriteLine("resourcedatathink");
-        };
-
         core.GameHooks.Controller.ProcessUsercmds.Pre += ( ref @event ) =>
         {
             var usercmds = @event.Params.Usercmds;
@@ -156,11 +151,6 @@ public class TestPlugin : BasePlugin
         core.GameHooks.Movement.PlayerMove.Pre += ( ref @event ) =>
         {
             @event.Params.MoveData.MaxSpeed = 2000f;
-        };
-
-        core.Event.OnClientSettingsChanged += ( @event ) =>
-        {
-            Console.WriteLine($"Player {@event.PlayerId} had it's settings changed");
         };
 
         core.GameHooks.Movement.GroundAccelerate.Pre += ( ref @event ) =>
@@ -866,8 +856,8 @@ public class TestPlugin : BasePlugin
     [Command("tt99")]
     public void TestCommand99( ICommandContext context )
     {
-        Console.WriteLine(context.Sender!.SteamID);
-        Console.WriteLine(context.Sender!.UnauthorizedSteamID);
+        Core.Logger.LogInformation($"{context.Sender!.SteamID}");
+        Core.Logger.LogInformation($"{context.Sender!.UnauthorizedSteamID}");
     }
 
     [ClientNetMessageHandler]

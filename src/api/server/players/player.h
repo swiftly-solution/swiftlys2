@@ -85,11 +85,6 @@ public:
 
     virtual uint32_t GetConnectedTime() = 0;
 
-    virtual void SetUnauthorizedSteamID(uint64_t steamID) = 0;
-
-    virtual uint64_t GetUnauthorizedSteamID() = 0;
-    virtual uint64_t GetSteamID() = 0;
-
     virtual void ChangeAuthorizationState(bool bAuthorized) = 0;
 
     /** Player SDK Classes **/

@@ -3,6 +3,12 @@ using Microsoft.Extensions.Logging;
 
 namespace SwiftlyS2.Core.Misc;
 
+internal enum SteamAuthMode
+{
+    Flexible = 0,
+    Strict = 1
+}
+
 internal static class GlobalState
 {
     [StructLayout(LayoutKind.Sequential)]
@@ -22,6 +28,7 @@ internal static class GlobalState
         public int IsFollowingServerGuidelines;
         public int UsePlayerLanguage;
         public int UseAutoHotReload;
+        public int SteamAuthMode;
     }
 
     public static string RootPath { get; private set; } = AppContext.BaseDirectory;
@@ -37,6 +44,7 @@ internal static class GlobalState
     public static bool IsFollowingServerGuidelines { get; private set; } = true;
     public static bool UsePlayerLanguage { get; private set; } = true;
     public static bool UseAutoHotReload { get; private set; } = true;
+    public static SteamAuthMode SteamAuthMode { get; private set; } = SteamAuthMode.Flexible;
 
     public static new string ToString() =>
         $"GlobalState {{ RootPath = {RootPath}, LogPath = {LogPath}, MinLogLevel = {MinLogLevel}, " +
@@ -44,7 +52,8 @@ internal static class GlobalState
         $"ManagedLogIntervalMs = {ManagedLogIntervalMs}, ProfilerLevel = {ProfilerLevel}, " +
         $"PluginManualLoadState = {PluginManualLoadState}, PluginLoadOrder = {PluginLoadOrder}, " +
         $"ServerLanguage = {ServerLanguage}, IsFollowingServerGuidelines = {IsFollowingServerGuidelines}, " +
-        $"UsePlayerLanguage = {UsePlayerLanguage}, UseAutoHotReload = {UseAutoHotReload} }}";
+        $"UsePlayerLanguage = {UsePlayerLanguage}, UseAutoHotReload = {UseAutoHotReload}, " +
+        $"SteamAuthMode = {SteamAuthMode} }}";
 
     public static unsafe void Load( Native* native )
     {
@@ -70,5 +79,9 @@ internal static class GlobalState
         IsFollowingServerGuidelines = native->IsFollowingServerGuidelines != 0;
         UsePlayerLanguage = native->UsePlayerLanguage != 0;
         UseAutoHotReload = native->UseAutoHotReload != 0;
+        SteamAuthMode = native->SteamAuthMode switch {
+            (int)SteamAuthMode.Strict => SteamAuthMode.Strict,
+            _ => SteamAuthMode.Flexible
+        };
     }
 }

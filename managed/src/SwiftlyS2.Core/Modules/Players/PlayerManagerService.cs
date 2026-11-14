@@ -25,10 +25,10 @@ internal class PlayerManagerService : IPlayerManagerService
         _engineService = engineService;
     }
 
-    public static void RegisterPlayerObject( int playerid )
+    public static void RegisterPlayerObject( int playerid, ulong unauthorizedSteamID )
     {
         UnregisterPlayerObject(playerid);
-        var player = new Player(playerid);
+        var player = new Player(playerid, unauthorizedSteamID);
         _ = PlayerObjects.TryAdd(playerid, player);
         _ = SessionIdToPlayerObjects.TryAdd(player.SessionId, player);
     }

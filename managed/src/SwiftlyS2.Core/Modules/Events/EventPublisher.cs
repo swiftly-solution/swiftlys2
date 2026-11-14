@@ -141,7 +141,7 @@ internal static class EventPublisher
         {
             NativeEvents.RegisterOnGameTickCallback((nint)(delegate* unmanaged< byte, byte, byte, void >)&OnTick);
             NativeEvents.RegisterOnPreworldUpdateCallback((nint)(delegate* unmanaged< byte, void >)&OnPreworldUpdate);
-            NativeEvents.RegisterOnClientConnectCallback((nint)(delegate* unmanaged< int, byte >)&OnClientConnected);
+            NativeEvents.RegisterOnClientConnectCallback((nint)(delegate* unmanaged< int, ulong, byte >)&OnClientConnected);
             NativeEvents.RegisterOnClientDisconnectCallback((nint)(delegate* unmanaged< int, int, void >)&OnClientDisconnected);
             NativeEvents.RegisterOnClientKeyStateChangedCallback((nint)(delegate* unmanaged< int, GameButtons, byte, void >)&OnClientKeyStateChanged);
             NativeEvents.RegisterOnClientPutInServerCallback((nint)(delegate* unmanaged< int, int, void >)&OnClientPutInServer);
@@ -387,11 +387,11 @@ internal static class EventPublisher
     }
 
     [UnmanagedCallersOnly]
-    public static byte OnClientConnected( int playerId )
+    public static byte OnClientConnected( int playerId, ulong unauthorizedSteamID )
     {
         try
         {
-            PlayerManagerService.RegisterPlayerObject(playerId);
+            PlayerManagerService.RegisterPlayerObject(playerId, unauthorizedSteamID);
 
             var subs = Router.Get(CoreEvent.ClientConnected);
             if (subs.Length == 0) return 1;
@@ -413,7 +413,13 @@ internal static class EventPublisher
                 }
             }
 
-            return @event.Result == HookResult.CancelOriginal ? (byte)0 : (byte)1;
+            if (@event.Result == HookResult.CancelOriginal)
+            {
+                PlayerManagerService.UnregisterPlayerObject(playerId);
+                return 0;
+            }
+
+            return 1;
         }
         catch (Exception e)
         {
@@ -472,8 +478,6 @@ internal static class EventPublisher
     {
         try
         {
-            if (clientKind == (int)ClientKind.Bot) PlayerManagerService.RegisterPlayerObject(playerId);
-
             var subs = Router.Get(CoreEvent.ClientPutInServer);
             if (subs.Length == 0) return;
 

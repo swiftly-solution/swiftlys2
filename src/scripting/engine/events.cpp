@@ -22,7 +22,7 @@
 #include <scripting/engine/events.h>
 
 DEFINE_EVENT(g_pOnGameTickCallback, void, bool, bool, bool) = nullptr;
-DEFINE_EVENT(g_pOnClientConnectCallback, bool, int) = nullptr;
+DEFINE_EVENT(g_pOnClientConnectCallback, bool, int, uint64_t) = nullptr;
 DEFINE_EVENT(g_pOnClientDisconnectCallback, void, int, int) = nullptr;
 DEFINE_EVENT(g_pOnClientKeyStateChangedCallback, void, int, uint32_t, bool) = nullptr;
 DEFINE_EVENT(g_pOnClientPutInServerCallback, void, int, int) = nullptr;

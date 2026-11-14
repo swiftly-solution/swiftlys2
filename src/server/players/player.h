@@ -45,11 +45,6 @@ public:
 
     virtual uint32_t GetConnectedTime() override;
 
-    virtual void SetUnauthorizedSteamID(uint64_t steamID) override;
-
-    virtual uint64_t GetUnauthorizedSteamID() override;
-    virtual uint64_t GetSteamID() override;
-
     virtual void ChangeAuthorizationState(bool bAuthorized) override;
 
     virtual void* GetController() override;
@@ -90,8 +85,6 @@ private:
     uint64_t m_uPressedButtons = 0;
 
     std::chrono::steady_clock::time_point m_uConnectedTimeStart;
-
-    uint64_t m_uUnauthorizedSteamID = 0;
 
     std::chrono::steady_clock::time_point m_centerMessageEndTime;
     std::string m_sCenterMessageText;

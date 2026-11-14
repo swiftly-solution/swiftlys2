@@ -14,21 +14,24 @@ using SwiftlyS2.Shared.ProtobufDefinitions;
 using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Translation;
 using SwiftlyS2.Core.Misc;
+using SwiftlyS2.Shared.SteamAPI;
 
 namespace SwiftlyS2.Core.Players;
 
 internal class Player : IPlayer, IDisposable
 {
-    public Player( int pid )
+    public Player( int pid, ulong unauthorizedSteamID )
     {
         Slot = pid;
         SessionId = nextSessionId.Increment();
+        _steamID = new(unauthorizedSteamID);
     }
 
     private static readonly Atomic<ulong> nextSessionId = new(999);
 
     private bool _disposed = false;
     private ServerSideClient _serverSideClient = new();
+    private CSteamID _steamID;
     internal Language _language = TranslationService.ServerLanguage;
 
     private readonly Atomic<VoiceFlagValue> voiceFlags = new(VoiceFlagValue.Normal);
@@ -47,12 +50,18 @@ internal class Player : IPlayer, IDisposable
     public int Slot { get; }
 
     public int UserID { get { ThrowIfDisposed(); return NativePlayer.GetUserID(Slot); } }
-    public bool IsFakeClient { get { ThrowIfDisposed(); return NativePlayer.IsFakeClient(Slot); } }
+    public bool IsFakeClient { get { ThrowIfDisposed(); return _steamID.GetSteamID64() == 0; } }
     public bool IsAuthorized { get { ThrowIfDisposed(); return NativePlayer.IsAuthorized(Slot); } }
     public uint ConnectedTime { get { ThrowIfDisposed(); return NativePlayer.GetConnectedTime(Slot); } }
-    public Language PlayerLanguage { get => _language; }
-    public ulong SteamID { get { ThrowIfDisposed(); return NativePlayer.GetSteamID(Slot); } }
-    public ulong UnauthorizedSteamID { get { ThrowIfDisposed(); return NativePlayer.GetUnauthorizedSteamID(Slot); } }
+    public Language PlayerLanguage { get { ThrowIfDisposed(); return _language; } }
+    public ulong SteamID {
+        get {
+            ThrowIfDisposed();
+            return (IsAuthorized || GlobalState.SteamAuthMode == SteamAuthMode.Flexible) ? _steamID.GetSteamID64() : 0;
+        }
+    }
+
+    public ulong UnauthorizedSteamID { get { ThrowIfDisposed(); return _steamID.GetSteamID64(); } }
 
     public CCSPlayerController Controller { get { ThrowIfDisposed(); return EntityManager.GetEntityByIndex((uint)(Slot + 1)) as CCSPlayerControllerImpl ?? new CCSPlayerControllerImpl(0); } }
     public CCSPlayerController RequiredController => Controller is { IsValid: true } controller ? controller : throw new InvalidOperationException("Controller is not valid");

@@ -246,6 +246,7 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
     g_GlobalState.followingServerGuidelines = ConfigValueOr<bool>(std::format("core.Follow{}ServerGuidelines", str_toupper(GetCurrentGame())).c_str(), true);
     g_GlobalState.usePlayerLanguage = ConfigValueOr<bool>("core.UsePlayerLanguage", true);
     g_GlobalState.useAutoHotReload = ConfigValueOr<bool>("core.AutoHotReload", true);
+    g_GlobalState.steamAuthMode = ConfigValueOr<std::string>("core.SteamAuth.Mode", "flexible") == "strict" ? SteamAuthMode::Strict : SteamAuthMode::Flexible;
 
     if (!InitializeDotNetAPI(g_pScriptingAPI->GetNativeFunctions(), g_pScriptingAPI->GetNativeFunctionsCount()))
     {

@@ -8,6 +8,12 @@
 
 [[nodiscard]] bool InitializeHostFXR(std::string_view origin_path);
 
+enum class SteamAuthMode : int32_t
+{
+    Flexible = 0,
+    Strict = 1
+};
+
 struct GlobalState
 {
     int32_t size;
@@ -24,6 +30,7 @@ struct GlobalState
     int32_t followingServerGuidelines;
     int32_t usePlayerLanguage;
     int32_t useAutoHotReload;
+    SteamAuthMode steamAuthMode;
 };
 
 extern GlobalState g_GlobalState;

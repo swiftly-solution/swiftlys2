@@ -50,22 +50,6 @@ internal static class NativePlayer
         return ret;
     }
 
-    private unsafe static delegate* unmanaged<int, ulong> _GetUnauthorizedSteamID;
-
-    public unsafe static ulong GetUnauthorizedSteamID(int playerid)
-    {
-        var ret = _GetUnauthorizedSteamID(playerid);
-        return ret;
-    }
-
-    private unsafe static delegate* unmanaged<int, ulong> _GetSteamID;
-
-    public unsafe static ulong GetSteamID(int playerid)
-    {
-        var ret = _GetSteamID(playerid);
-        return ret;
-    }
-
     private unsafe static delegate* unmanaged<int*, int, byte*> _GetIPAddress;
 
     public unsafe static string GetIPAddress(int playerid)
