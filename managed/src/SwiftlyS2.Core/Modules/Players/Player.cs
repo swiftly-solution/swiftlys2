@@ -33,38 +33,32 @@ internal class Player : IPlayer, IDisposable
 
     private readonly Atomic<VoiceFlagValue> voiceFlags = new(VoiceFlagValue.Normal);
     private readonly ListenOverride[] listenOverrides = new ListenOverride[66];
-    private ulong selfMutes;
+    private readonly Atomic<ulong> selfMutes = new(0);
 
-    internal bool IsMutedBySelf( int slot ) => (uint)slot < 64 && (selfMutes & (1UL << slot)) != 0;
-    internal void SetSelfMutesLowDWord( uint mask ) => selfMutes = (selfMutes & ~0xFFFFFFFFUL) | mask;
+    internal bool IsMutedBySelf( int slot ) => (uint)slot < 64 && (selfMutes.Load() & (1UL << slot)) != 0;
+    internal void SetSelfMutesLowDWord( uint mask )
+    {
+        var seen = selfMutes.Load();
+        while (!selfMutes.TryCompareExchange(ref seen, (seen & ~0xFFFFFFFFUL) | mask)) { }
+    }
 
     public int PlayerID => Slot;
     public ulong SessionId { get; }
-
     public int Slot { get; }
 
     public int UserID { get { ThrowIfDisposed(); return NativePlayer.GetUserID(Slot); } }
-
     public bool IsFakeClient { get { ThrowIfDisposed(); return NativePlayer.IsFakeClient(Slot); } }
-
     public bool IsAuthorized { get { ThrowIfDisposed(); return NativePlayer.IsAuthorized(Slot); } }
     public uint ConnectedTime { get { ThrowIfDisposed(); return NativePlayer.GetConnectedTime(Slot); } }
-
     public Language PlayerLanguage { get => _language; }
-
     public ulong SteamID { get { ThrowIfDisposed(); return NativePlayer.GetSteamID(Slot); } }
-
     public ulong UnauthorizedSteamID { get { ThrowIfDisposed(); return NativePlayer.GetUnauthorizedSteamID(Slot); } }
 
     public CCSPlayerController Controller { get { ThrowIfDisposed(); return EntityManager.GetEntityByIndex((uint)(Slot + 1)) as CCSPlayerControllerImpl ?? new CCSPlayerControllerImpl(0); } }
     public CCSPlayerController RequiredController => Controller is { IsValid: true } controller ? controller : throw new InvalidOperationException("Controller is not valid");
-
     public CBasePlayerPawn? Pawn => Controller is { IsValid: true } ? Controller.Pawn.Value : null;
-
     public CBasePlayerPawn RequiredPawn => Pawn is { IsValid: true } pawn ? pawn : throw new InvalidOperationException("Pawn is not valid");
-
     public CCSPlayerPawn? PlayerPawn => Controller is { IsValid: true } ? Controller.PlayerPawn.Value : null;
-
     public CCSPlayerPawn RequiredPlayerPawn => PlayerPawn is { IsValid: true } pawn ? pawn : throw new InvalidOperationException("PlayerPawn is not valid");
 
     public GameButtonFlags PressedButtons {
