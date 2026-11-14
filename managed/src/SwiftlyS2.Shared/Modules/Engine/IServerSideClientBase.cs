@@ -24,11 +24,11 @@ public interface IServerSideClientBase
     /// <summary>Gets the connection type flags for the client.</summary>
     public byte ConnectionTypeFlags { get; }
 
-    /// <summary>Gets the asynchronous disconnect flags for the client.</summary>
-    public byte AsyncDisconnectFlags { get; }
+    /// <summary>Gets the send job state (ClientSendJobState_t: 0 idle, 1 running, 2 finished) of the client.</summary>
+    public byte SendJobState { get; }
 
-    /// <summary>Gets or sets a value indicating whether the client is marked to be kicked.</summary>
-    public bool MarkedToKick { get; set; }
+    /// <summary>Gets or sets a value indicating whether the client's send job is idle.</summary>
+    public bool SendJobIdle { get; set; }
 
     /// <summary>Gets the signon state of the client.</summary>
     public SignonState_t SignonState { get; }
@@ -36,8 +36,8 @@ public interface IServerSideClientBase
     /// <summary>Gets a value indicating whether the client is a fake player (bot).</summary>
     public bool FakePlayer { get; }
 
-    /// <summary>Gets a value indicating whether the client is currently sending snapshots.</summary>
-    public bool SendingSnapshots { get; }
+    /// <summary>Gets a value indicating whether the client's full update is logged.</summary>
+    public bool LogFullUpdate { get; }
 
     /// <summary>Gets the user ID of the client.</summary>
     public int UserID { get; }
@@ -48,8 +48,8 @@ public interface IServerSideClientBase
     /// <summary>Gets the Steam ID of the client.</summary>
     public ref CSteamID SteamID { get; }
 
-    /// <summary>Gets the Steam ID of the client when they are disconnected.</summary>
-    public ref CSteamID DisconnectedSteamID { get; }
+    /// <summary>Gets the last Steam ID of the client.</summary>
+    public ref CSteamID LastSteamID { get; }
 
     /// <summary>Gets the authentication ticket Steam ID of the client.</summary>
     public ref CSteamID AuthTicketSteamID { get; }
@@ -159,9 +159,9 @@ public interface IServerSideClientBase
     /// <summary>Frees the baselines for the client.</summary>
     public void FreeBaselines();
 
-    /// <summary>Marks the client to be kicked from the server.</summary>
-    public void MarkToKick();
+    /// <summary>Called when the client's send job finishes.</summary>
+    public void OnSendJobFinished();
 
-    /// <summary>Unmarks the client to be kicked from the server.</summary>
-    public void UnmarkToKick();
+    /// <summary>Called when the client's send job starts.</summary>
+    public void OnSendJobStarted();
 }

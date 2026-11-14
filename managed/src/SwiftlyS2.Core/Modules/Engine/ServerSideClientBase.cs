@@ -27,11 +27,11 @@ internal static class IServerSideClientBaseFields
     public static Lazy<int> ConnectionTypeFlagsLazy = new(() => NativeOffsets.Fetch("CServerSideClientBase::m_nConnectionTypeFlags"));
     public static int ConnectionTypeFlagsOffset => ConnectionTypeFlagsLazy.Value;
 
-    public static Lazy<int> AsyncDisconnectFlagsLazy = new(() => NativeOffsets.Fetch("CServerSideClientBase::m_nAsyncDisconnectFlags"));
-    public static int AsyncDisconnectFlagsOffset => AsyncDisconnectFlagsLazy.Value;
+    public static Lazy<int> SendJobStateLazy = new(() => NativeOffsets.Fetch("CServerSideClientBase::m_nSendJobState"));
+    public static int SendJobStateOffset => SendJobStateLazy.Value;
 
-    public static Lazy<int> MarkedToKickLazy = new(() => NativeOffsets.Fetch("CServerSideClientBase::m_bMarkedToKick"));
-    public static int MarkedToKickOffset => MarkedToKickLazy.Value;
+    public static Lazy<int> SendJobIdleLazy = new(() => NativeOffsets.Fetch("CServerSideClientBase::m_bSendJobIdle"));
+    public static int SendJobIdleOffset => SendJobIdleLazy.Value;
 
     public static Lazy<int> SignonStateLazy = new(() => NativeOffsets.Fetch("CServerSideClientBase::m_nSignonState"));
     public static int SignonStateOffset => SignonStateLazy.Value;
@@ -39,8 +39,8 @@ internal static class IServerSideClientBaseFields
     public static Lazy<int> FakePlayerLazy = new(() => NativeOffsets.Fetch("CServerSideClientBase::m_bFakePlayer"));
     public static int FakePlayerOffset => FakePlayerLazy.Value;
 
-    public static Lazy<int> SendingSnapshotLazy = new(() => NativeOffsets.Fetch("CServerSideClientBase::m_bSendingSnapshot"));
-    public static int SendingSnapshotOffset => SendingSnapshotLazy.Value;
+    public static Lazy<int> LogFullUpdateLazy = new(() => NativeOffsets.Fetch("CServerSideClientBase::m_bLogFullUpdate"));
+    public static int LogFullUpdateOffset => LogFullUpdateLazy.Value;
 
     public static Lazy<int> UserIDLazy = new(() => NativeOffsets.Fetch("CServerSideClientBase::m_UserID"));
     public static int UserIDOffset => UserIDLazy.Value;
@@ -51,8 +51,8 @@ internal static class IServerSideClientBaseFields
     public static Lazy<int> SteamIDLazy = new(() => NativeOffsets.Fetch("CServerSideClientBase::m_SteamID"));
     public static int SteamIDOffset => SteamIDLazy.Value;
 
-    public static Lazy<int> DisconnectedSteamIDLazy = new(() => NativeOffsets.Fetch("CServerSideClientBase::m_DisconnectedSteamID"));
-    public static int DisconnectedSteamIDOffset => DisconnectedSteamIDLazy.Value;
+    public static Lazy<int> LastSteamIDLazy = new(() => NativeOffsets.Fetch("CServerSideClientBase::m_LastSteamID"));
+    public static int LastSteamIDOffset => LastSteamIDLazy.Value;
 
     public static Lazy<int> AuthTicketSteamIDLazy = new(() => NativeOffsets.Fetch("CServerSideClientBase::m_AuthTicketSteamID"));
     public static int AuthTicketSteamIDOffset => AuthTicketSteamIDLazy.Value;
@@ -151,11 +151,11 @@ internal static class IServerSideClientBaseVTable
         return ((delegate* unmanaged< nint, int >)vFunction)(basePtr);
     }
 
-    public static Lazy<int> MarkToKickLazy = new(() => NativeOffsets.Fetch("CServerSideClientBase::MarkToKick"));
-    public static int MarkToKickOffset => MarkToKickLazy.Value;
-    public static unsafe void MarkToKick( nint basePtr )
+    public static Lazy<int> OnSendJobFinishedLazy = new(() => NativeOffsets.Fetch("CServerSideClientBase::OnSendJobFinished"));
+    public static int OnSendJobFinishedOffset => OnSendJobFinishedLazy.Value;
+    public static unsafe void OnSendJobFinished( nint basePtr )
     {
-        var vFunction = GameFunctions.GetVirtualFunction(basePtr, MarkToKickOffset);
+        var vFunction = GameFunctions.GetVirtualFunction(basePtr, OnSendJobFinishedOffset);
         ((delegate* unmanaged< nint, void >)vFunction)(basePtr);
     }
 
@@ -191,11 +191,11 @@ internal static class IServerSideClientBaseVTable
         ((delegate* unmanaged< nint, float, void >)vFunction)(basePtr, updateRate);
     }
 
-    public static Lazy<int> UnmarkToKickLazy = new(() => NativeOffsets.Fetch("CServerSideClientBase::UnmarkToKick"));
-    public static int UnmarkToKickOffset => UnmarkToKickLazy.Value;
-    public static unsafe void UnmarkToKick( nint basePtr )
+    public static Lazy<int> OnSendJobStartedLazy = new(() => NativeOffsets.Fetch("CServerSideClientBase::OnSendJobStarted"));
+    public static int OnSendJobStartedOffset => OnSendJobStartedLazy.Value;
+    public static unsafe void OnSendJobStarted( nint basePtr )
     {
-        var vFunction = GameFunctions.GetVirtualFunction(basePtr, UnmarkToKickOffset);
+        var vFunction = GameFunctions.GetVirtualFunction(basePtr, OnSendJobStartedOffset);
         ((delegate* unmanaged< nint, void >)vFunction)(basePtr);
     }
 
@@ -244,15 +244,15 @@ internal class ServerSideClientBase : IServerSideClientBase
     }
 
     public byte ConnectionTypeFlags => Address.AsRef<byte>(IServerSideClientBaseFields.ConnectionTypeFlagsOffset);
-    public byte AsyncDisconnectFlags => Address.AsRef<byte>(IServerSideClientBaseFields.AsyncDisconnectFlagsOffset);
+    public byte SendJobState => Address.AsRef<byte>(IServerSideClientBaseFields.SendJobStateOffset);
 
-    public bool MarkedToKick { get => Address.AsRef<byte>(IServerSideClientBaseFields.MarkedToKickOffset) == 1; set => Address.AsRef<byte>(IServerSideClientBaseFields.MarkedToKickOffset) = (byte)(value ? 1 : 0); }
+    public bool SendJobIdle { get => Address.AsRef<byte>(IServerSideClientBaseFields.SendJobIdleOffset) == 1; set => Address.AsRef<byte>(IServerSideClientBaseFields.SendJobIdleOffset) = (byte)(value ? 1 : 0); }
 
     public SignonState_t SignonState => Address.AsRef<SignonState_t>(IServerSideClientBaseFields.SignonStateOffset);
 
     public bool FakePlayer => Address.AsRef<byte>(IServerSideClientBaseFields.FakePlayerOffset) == 1;
 
-    public bool SendingSnapshots => Address.AsRef<byte>(IServerSideClientBaseFields.SendingSnapshotOffset) == 1;
+    public bool LogFullUpdate => Address.AsRef<byte>(IServerSideClientBaseFields.LogFullUpdateOffset) == 1;
 
     public int UserID => Address.AsRef<int>(IServerSideClientBaseFields.UserIDOffset);
 
@@ -260,7 +260,7 @@ internal class ServerSideClientBase : IServerSideClientBase
 
     public ref CSteamID SteamID => ref Address.AsRef<CSteamID>(IServerSideClientBaseFields.SteamIDOffset);
 
-    public ref CSteamID DisconnectedSteamID => ref Address.AsRef<CSteamID>(IServerSideClientBaseFields.DisconnectedSteamIDOffset);
+    public ref CSteamID LastSteamID => ref Address.AsRef<CSteamID>(IServerSideClientBaseFields.LastSteamIDOffset);
 
     public ref CSteamID AuthTicketSteamID => ref Address.AsRef<CSteamID>(IServerSideClientBaseFields.AuthTicketSteamIDOffset);
 
@@ -329,9 +329,9 @@ internal class ServerSideClientBase : IServerSideClientBase
         return IServerSideClientBaseVTable.GetRate(Address);
     }
 
-    public void MarkToKick()
+    public void OnSendJobFinished()
     {
-        IServerSideClientBaseVTable.MarkToKick(Address);
+        IServerSideClientBaseVTable.OnSendJobFinished(Address);
     }
 
     public void Reconnect()
@@ -354,9 +354,9 @@ internal class ServerSideClientBase : IServerSideClientBase
         IServerSideClientBaseVTable.SetUpdateRate(Address, updateRate);
     }
 
-    public void UnmarkToKick()
+    public void OnSendJobStarted()
     {
-        IServerSideClientBaseVTable.UnmarkToKick(Address);
+        IServerSideClientBaseVTable.OnSendJobStarted(Address);
     }
 
     public void UpdateSendState()
