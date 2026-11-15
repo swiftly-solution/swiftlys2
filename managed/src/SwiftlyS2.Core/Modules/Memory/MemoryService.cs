@@ -5,7 +5,6 @@ using SwiftlyS2.Core.Extensions;
 using SwiftlyS2.Shared.Memory;
 using SwiftlyS2.Shared.Schemas;
 using SwiftlyS2.Shared.Engine;
-using SwiftlyS2.Core.EntitySystem;
 using SwiftlyS2.Core.Engine;
 
 namespace SwiftlyS2.Core.Memory;
@@ -18,6 +17,8 @@ internal class MemoryService : IMemoryService, IDisposable
     private readonly ILoggerFactory _LoggerFactory;
     private readonly Dictionary<nint, UnmanagedFunction> _UnmanagedFunctions = [];
     private readonly Dictionary<nint, UnmanagedMemory> _UnmanagedMemories = [];
+
+    public IS2BinLib S2BinLib { get; } = new S2BinLibService();
 
     public MemoryService( ILogger<MemoryService> logger, HookManager hookManager, ILoggerFactory loggerFactory )
     {
@@ -97,35 +98,12 @@ internal class MemoryService : IMemoryService, IDisposable
 
     public nint? GetAddressBySignature( string library, string signature )
     {
-        var ptr = NativeMemoryHelpers.GetAddressBySignature(library, signature, 0, false);
-        if (ptr == 0)
-        {
-            return null;
-        }
-        return ptr;
+        return S2BinLib.PatternScan(library, signature);
     }
 
     public nint? GetVTableAddress( string library, string vtableName )
     {
-        var classes = vtableName.Split("::");
-        nint? ptr;
-        if (classes.Length == 1)
-        {
-            ptr = NativeMemoryHelpers.GetVirtualTableAddress(library, vtableName);
-        }
-        else if (classes.Length == 2)
-        {
-            ptr = NativeMemoryHelpers.GetVirtualTableAddressNested2(library, classes[0], classes[1]);
-        }
-        else
-        {
-            throw new ArgumentException("Vtable has too many nested classes, which is not supported for now.");
-        }
-        if (ptr == 0)
-        {
-            ptr = null;
-        }
-        return ptr;
+        return S2BinLib.FindVTable(library, vtableName);
     }
 
     public nint ResolveXrefAddress( nint xrefAddress )
@@ -136,18 +114,17 @@ internal class MemoryService : IMemoryService, IDisposable
 
     public string? GetObjectPtrVtableName( nint address )
     {
-        var result = NativeMemoryHelpers.GetObjectPtrVtableName(address);
-        return result == string.Empty ? null : result;
+        return S2BinLib.GetObjectPtrVtableName(address);
     }
 
     public bool ObjectPtrHasVtable( nint address )
     {
-        return NativeMemoryHelpers.ObjectPtrHasVtable(address);
+        return S2BinLib.ObjectPtrHasVtable(address);
     }
 
     public bool ObjectPtrHasBaseClass( nint address, string baseClassName )
     {
-        return NativeMemoryHelpers.ObjectPtrHasBaseClass(address, baseClassName);
+        return S2BinLib.ObjectPtrHasBaseClass(address, baseClassName);
     }
 
     public T ToSchemaClass<T>( nint address ) where T : class, ISchemaClass<T>

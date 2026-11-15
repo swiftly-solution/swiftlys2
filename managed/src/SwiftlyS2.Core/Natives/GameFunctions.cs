@@ -1,5 +1,6 @@
 using System.Runtime.InteropServices;
 using Spectre.Console;
+using SwiftlyS2.Core.Memory;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Shared.Players;
 using SwiftlyS2.Shared.SchemaDefinitions;
@@ -129,7 +130,7 @@ internal static class GameFunctions
                 pTerminateRoundLinux = (delegate* unmanaged< nint, uint, nint, float, void >)NativeSignatures.Fetch("CGameRules::TerminateRound");
             }
 
-            pTraceShape = (delegate* unmanaged< nint, Ray_t*, Vector*, Vector*, CTraceFilter*, CGameTrace*, void >)((void**)NativeMemoryHelpers.GetVirtualTableAddress("server", "CNavPhysicsInterface"))[TraceShapeOffset];
+            pTraceShape = (delegate* unmanaged< nint, Ray_t*, Vector*, Vector*, CTraceFilter*, CGameTrace*, void >)((void**)new S2BinLibService().FindVTable("server", "CNavPhysicsInterface")!.Value)[TraceShapeOffset];
         }
     }
 

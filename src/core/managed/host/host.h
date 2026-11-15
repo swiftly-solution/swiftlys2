@@ -31,6 +31,7 @@ struct GlobalState
     int32_t usePlayerLanguage;
     int32_t useAutoHotReload;
     SteamAuthMode steamAuthMode;
+    void* s2BinLib;
 };
 
 extern GlobalState g_GlobalState;

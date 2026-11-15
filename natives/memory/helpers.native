@@ -1,9 +1,3 @@
 class MemoryHelpers
 
 ptr FetchInterfaceByName = string ifaceName // supports both internal interface system, but also valve interface system
-ptr GetVirtualTableAddress = string library, string vtableName
-ptr GetVirtualTableAddressNested2 = string library, string class1, string class2
-ptr GetAddressBySignature = string library, string sig, int32 len, bool rawBytes
-string GetObjectPtrVtableName = ptr objptr
-bool ObjectPtrHasVtable = ptr objptr
-bool ObjectPtrHasBaseClass = ptr objptr, string baseClassName

@@ -168,6 +168,8 @@ public class TestPlugin : BasePlugin
         {
             Console.WriteLine($"Player ${@event.PlayerId} has established the connection.");
         };
+
+        Console.WriteLine($"Loader function: 0x{core.Memory.S2BinLib.FindFuncWithString("engine2", "Engine loading startup asset: '%s'\n"):X}");
     }
 
     [Command("selfmute")]

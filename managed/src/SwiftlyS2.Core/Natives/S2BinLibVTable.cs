@@ -1,0 +1,75 @@
+using System.Runtime.InteropServices;
+
+namespace SwiftlyS2.Core.Natives;
+
+[StructLayout(LayoutKind.Sequential)]
+internal unsafe struct S2BinLibVTable
+{
+    public delegate* unmanaged<nint, byte*, byte*, int> Initialize;
+    public delegate* unmanaged<nint, byte*, byte*, byte*, int> InitializeWithOs;
+    public delegate* unmanaged<nint, byte*, byte*, nint*, int> PatternScan;
+    public delegate* unmanaged<nint, byte*, byte*, nint*, int> FindVtable;
+    public delegate* unmanaged<nint, byte*, byte*, nint*, int> FindSymbol;
+    public delegate* unmanaged<nint, byte*, nint, int> SetModuleBaseFromPointer;
+    public delegate* unmanaged<nint, byte*, int> ClearModuleBaseAddress;
+    public delegate* unmanaged<nint, byte*, byte*, byte*, int> SetCustomBinaryPath;
+    public delegate* unmanaged<nint, byte*, nint*, int> GetModuleBaseAddress;
+    public delegate* unmanaged<nint, byte*, int> IsBinaryLoaded;
+    public delegate* unmanaged<nint, byte*, int> LoadBinary;
+    public delegate* unmanaged<nint, byte*, byte*, nuint, int> GetBinaryPath;
+    public delegate* unmanaged<nint, byte*, byte*, nint*, int> FindVtableRva;
+    public delegate* unmanaged<nint, byte*, byte*, nint*, int> FindVtableMangledRva;
+    public delegate* unmanaged<nint, byte*, byte*, nint*, int> FindVtableMangled;
+    public delegate* unmanaged<nint, byte*, byte*, byte*, nint*, int> FindVtableNested2Rva;
+    public delegate* unmanaged<nint, byte*, byte*, byte*, nint*, int> FindVtableNested2;
+    public delegate* unmanaged<nint, byte*, byte*, nuint*, int> GetVtableVfuncCount;
+    public delegate* unmanaged<nint, byte*, ulong, nuint*, int> GetVtableVfuncCountByRva;
+    public delegate* unmanaged<nint, byte*, byte*, nint*, int> PatternScanRva;
+    public delegate* unmanaged<nint, byte*, byte*, nint, nint, int> PatternScanAllRva;
+    public delegate* unmanaged<nint, byte*, byte*, nint, nint, int> PatternScanAll;
+    public delegate* unmanaged<nint, byte*, byte*, nint*, int> FindExportRva;
+    public delegate* unmanaged<nint, byte*, byte*, nint*, int> FindExport;
+    public delegate* unmanaged<nint, byte*, byte*, nint*, int> FindSymbolRva;
+    public delegate* unmanaged<nint, byte*, ulong, byte*, nuint, int> ReadByFileOffset;
+    public delegate* unmanaged<nint, byte*, ulong, byte*, nuint, int> ReadByRva;
+    public delegate* unmanaged<nint, byte*, ulong, byte*, nuint, int> ReadByMemAddress;
+    public delegate* unmanaged<nint, byte*, byte*, nuint, nint*, int> FindVfuncByVtbnameRva;
+    public delegate* unmanaged<nint, byte*, byte*, nuint, nint*, int> FindVfuncByVtbname;
+    public delegate* unmanaged<nint, nint, nuint, nint*, int> FindVfuncByVtbptrRva;
+    public delegate* unmanaged<nint, nint, nuint, nint*, int> FindVfuncByVtbptr;
+    public delegate* unmanaged<nint, nint, byte*, nuint, int> GetObjectPtrVtableName;
+    public delegate* unmanaged<nint, nint, int> ObjectPtrHasVtable;
+    public delegate* unmanaged<nint, nint, byte*, int> ObjectPtrHasBaseClass;
+    public delegate* unmanaged<nint, byte*, byte*, nint*, int> FindStringRva;
+    public delegate* unmanaged<nint, byte*, byte*, nint*, int> FindString;
+    public delegate* unmanaged<nint, byte*, int> DumpXrefs;
+    public delegate* unmanaged<nint, byte*, nint, int> GetXrefsCount;
+    public delegate* unmanaged<nint, byte*, nint, nint*, nuint, int> GetXrefsCached;
+    public delegate* unmanaged<nint, byte*, int> UnloadBinary;
+    public delegate* unmanaged<nint, int> UnloadAllBinaries;
+    public delegate* unmanaged<nint, nint, nint*, int> InstallTrampoline;
+    public delegate* unmanaged<nint, nint, nint*, int> FollowXrefMemToMem;
+    public delegate* unmanaged<nint, byte*, ulong, nint*, int> FollowXrefRvaToMem;
+    public delegate* unmanaged<nint, byte*, ulong, ulong*, int> FollowXrefRvaToRva;
+    public delegate* unmanaged<nint, byte*, int> DumpVtables;
+    public delegate* unmanaged<nint, byte*, ulong, byte*, nuint, nuint*, ulong*, int> FindVfuncStartRva;
+    public delegate* unmanaged<nint, byte*, ulong, byte*, nuint, nuint*, nint*, int> FindVfuncStart;
+    public delegate* unmanaged<nint, byte*, ulong, ulong*, int> FindXrefFuncStartRva;
+    public delegate* unmanaged<nint, byte*, ulong, nint*, int> FindXrefFuncStart;
+    public delegate* unmanaged<nint, byte*, byte*, nint*, int> FindXrefFuncWithString;
+    public delegate* unmanaged<nint, byte*, ulong, ulong*, int> FindFuncStartRva;
+    public delegate* unmanaged<nint, byte*, ulong, nint*, int> FindFuncStart;
+    public delegate* unmanaged<nint, byte*, byte*, ulong*, int> FindXrefFuncWithStringRva;
+    public delegate* unmanaged<nint, byte*, byte*, byte*, nuint, nuint*, ulong*, int> FindVfuncWithStringRva;
+    public delegate* unmanaged<nint, byte*, byte*, byte*, nuint, nuint*, nint*, int> FindVfuncWithString;
+    public delegate* unmanaged<nint, byte*, byte*, ulong*, int> FindFuncWithStringRva;
+    public delegate* unmanaged<nint, byte*, byte*, nint*, int> FindFuncWithString;
+    public delegate* unmanaged<nint, ulong, ulong*, int> FindNetworkvarVtableStatechangedRva;
+    public delegate* unmanaged<nint, ulong, ulong*, int> FindNetworkvarVtableStatechanged;
+    public delegate* unmanaged<nint, byte*, ulong, byte*, nuint, int> MakeSigRva;
+    public delegate* unmanaged<nint, int> Destroy;
+    public delegate* unmanaged<nint, byte*, ulong, ulong, ulong*, int> FindCallWithXrefArgRva;
+    public delegate* unmanaged<nint, byte*, nint, nint, nint*, int> FindCallWithXrefArg;
+    public delegate* unmanaged<nint, byte*, ulong, byte*, ulong*, int> FindCallWithStringArgRva;
+    public delegate* unmanaged<nint, byte*, nint, byte*, nint*, int> FindCallWithStringArg;
+}

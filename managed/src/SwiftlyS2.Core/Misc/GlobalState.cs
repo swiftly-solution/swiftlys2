@@ -29,6 +29,7 @@ internal static class GlobalState
         public int UsePlayerLanguage;
         public int UseAutoHotReload;
         public int SteamAuthMode;
+        public nint S2BinLib;
     }
 
     public static string RootPath { get; private set; } = AppContext.BaseDirectory;
@@ -45,6 +46,7 @@ internal static class GlobalState
     public static bool UsePlayerLanguage { get; private set; } = true;
     public static bool UseAutoHotReload { get; private set; } = true;
     public static SteamAuthMode SteamAuthMode { get; private set; } = SteamAuthMode.Flexible;
+    public static nint S2BinLibPtr { get; private set; }
 
     public static new string ToString() =>
         $"GlobalState {{ RootPath = {RootPath}, LogPath = {LogPath}, MinLogLevel = {MinLogLevel}, " +
@@ -53,7 +55,7 @@ internal static class GlobalState
         $"PluginManualLoadState = {PluginManualLoadState}, PluginLoadOrder = {PluginLoadOrder}, " +
         $"ServerLanguage = {ServerLanguage}, IsFollowingServerGuidelines = {IsFollowingServerGuidelines}, " +
         $"UsePlayerLanguage = {UsePlayerLanguage}, UseAutoHotReload = {UseAutoHotReload}, " +
-        $"SteamAuthMode = {SteamAuthMode} }}";
+        $"SteamAuthMode = {SteamAuthMode}, S2BinLibPtr = 0x{S2BinLibPtr:X} }}";
 
     public static unsafe void Load( Native* native )
     {
@@ -83,5 +85,6 @@ internal static class GlobalState
             (int)SteamAuthMode.Strict => SteamAuthMode.Strict,
             _ => SteamAuthMode.Flexible
         };
+        S2BinLibPtr = native->S2BinLib;
     }
 }
