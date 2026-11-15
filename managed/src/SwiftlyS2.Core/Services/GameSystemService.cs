@@ -40,7 +40,7 @@ internal class GameSystemService : IDisposable
                 }
                 catch (Exception e)
                 {
-                    if (GlobalExceptionHandler.Handle(ref e)) AnsiConsole.WriteException(e);
+                    AnsiConsole.WriteException(e);
                 }
             };
         });

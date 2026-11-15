@@ -96,7 +96,7 @@ internal class HookManager
                         }
                         catch (Exception e)
                         {
-                            if (!GlobalExceptionHandler.Handle(ref e)) return;
+                            AnsiConsole.WriteException(e);
                         }
                     }
                 };
@@ -213,7 +213,6 @@ internal class HookManager
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e)) return;
             AnsiConsole.WriteException(e);
         }
     }

@@ -326,7 +326,6 @@ public sealed class SelectorMenuOption<T> : MenuOptionBase
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e)) return;
             AnsiConsole.WriteException(e);
         }
     }

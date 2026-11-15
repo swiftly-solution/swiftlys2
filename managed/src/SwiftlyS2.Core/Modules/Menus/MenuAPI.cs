@@ -286,10 +286,7 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
             }
             catch (Exception ex)
             {
-                if (GlobalExceptionHandler.Handle(ref ex))
-                {
-                    AnsiConsole.WriteException(ex);
-                }
+                AnsiConsole.WriteException(ex);
             }
         }
 
@@ -321,10 +318,7 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
         }
         catch (Exception ex)
         {
-            if (GlobalExceptionHandler.Handle(ref ex))
-            {
-                AnsiConsole.WriteException(ex);
-            }
+            AnsiConsole.WriteException(ex);
         }
     }
 
@@ -575,10 +569,7 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
                         }
                         catch (Exception ex)
                         {
-                            if (GlobalExceptionHandler.Handle(ref ex))
-                            {
-                                AnsiConsole.WriteException(ex);
-                            }
+                            AnsiConsole.WriteException(ex);
                         }
                     }
                 }, token);

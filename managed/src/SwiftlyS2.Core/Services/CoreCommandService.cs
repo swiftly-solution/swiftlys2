@@ -172,10 +172,6 @@ internal class CoreCommandService
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
             logger.LogError(e, "Failed to execute command");
         }
     }

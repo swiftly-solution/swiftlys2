@@ -233,10 +233,7 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
                             await option.OnClickAsync(player);
                         } catch (Exception ex)
                         {
-                            if (GlobalExceptionHandler.Handle(ref ex))
-                            {
-                                AnsiConsole.WriteException(ex);
-                            }
+                            AnsiConsole.WriteException(ex);
                         }
                     });
 
@@ -267,10 +264,7 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
                     }
                     catch (Exception ex)
                     {
-                        if (GlobalExceptionHandler.Handle(ref ex))
-                        {
-                            AnsiConsole.WriteException(ex);
-                        }
+                        AnsiConsole.WriteException(ex);
                     }
                     break;
                 }
@@ -382,10 +376,7 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
                             await option.OnClickAsync(player);
                         } catch (Exception ex)
                         {
-                            if (GlobalExceptionHandler.Handle(ref ex))
-                            {
-                                AnsiConsole.WriteException(ex);
-                            }
+                            AnsiConsole.WriteException(ex);
                         }
                     });
 
@@ -416,10 +407,7 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
                     }
                     catch (Exception ex)
                     {
-                        if (GlobalExceptionHandler.Handle(ref ex))
-                        {
-                            AnsiConsole.WriteException(ex);
-                        }
+                        AnsiConsole.WriteException(ex);
                     }
                     break;
                 }

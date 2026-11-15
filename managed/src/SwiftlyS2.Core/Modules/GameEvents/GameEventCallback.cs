@@ -71,7 +71,6 @@ internal sealed class GameEventCallback<T> : GameEventCallback where T : IGameEv
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e)) return HookResult.Continue;
             logger.LogError(e, "Error in event {EventName} callback from context {ContextName}", eventName, Context.Name);
             return HookResult.Continue;
         }

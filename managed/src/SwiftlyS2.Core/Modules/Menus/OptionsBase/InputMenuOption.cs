@@ -142,7 +142,6 @@ public sealed class InputMenuOption : MenuOptionBase
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e)) return false;
             AnsiConsole.WriteException(e);
         }
 
@@ -217,9 +216,8 @@ public sealed class InputMenuOption : MenuOptionBase
                     completedCts.Dispose();
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                if (!GlobalExceptionHandler.Handle(ref e)) return;
             }
         }, cts.Token);
 

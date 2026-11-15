@@ -42,10 +42,6 @@ internal class DatabaseService : IDatabaseService
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                throw;
-            }
 
             logger.LogError(e, "Failed to create connection factory for '{ConnectionName}'", resolvedName);
             throw;

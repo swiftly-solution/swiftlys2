@@ -108,10 +108,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Controller::ProcessUsercmds::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Controller::ProcessUsercmds::Pre.");
         }
 
     }
@@ -127,10 +124,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Controller::ProcessUsercmds::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Controller::ProcessUsercmds::Post.");
         }
 
     }
@@ -146,10 +140,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Controller::SimulateUserCommands::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Controller::SimulateUserCommands::Pre.");
         }
 
     }
@@ -165,10 +156,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Controller::SimulateUserCommands::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Controller::SimulateUserCommands::Post.");
         }
 
     }
@@ -184,10 +172,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Items::CanAcquire::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Items::CanAcquire::Pre.");
         }
 
     }
@@ -203,10 +188,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Items::CanAcquire::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Items::CanAcquire::Post.");
         }
 
     }
@@ -221,10 +203,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Items::GetItemInLoadout::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Items::GetItemInLoadout::Pre.");
         }
     }
 
@@ -238,10 +217,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Items::GetItemInLoadout::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Items::GetItemInLoadout::Post.");
         }
     }
 
@@ -256,10 +232,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Pawn::PostThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Pawn::PostThink::Pre.");
         }
 
     }
@@ -275,10 +248,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Pawn::PostThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Pawn::PostThink::Post.");
         }
 
     }
@@ -294,10 +264,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Pawn::CanMove::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Pawn::CanMove::Pre.");
         }
 
     }
@@ -313,10 +280,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Pawn::CanMove::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Pawn::CanMove::Post.");
         }
 
     }
@@ -332,10 +296,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Weapons::CanUse::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Weapons::CanUse::Pre.");
         }
 
     }
@@ -351,10 +312,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Weapons::CanUse::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Weapons::CanUse::Post.");
         }
 
     }
@@ -370,10 +328,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Weapons::Drop::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Weapons::Drop::Pre.");
         }
 
     }
@@ -389,10 +344,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Weapons::Drop::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Weapons::Drop::Post.");
         }
 
     }
@@ -408,10 +360,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::RunCommand::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::RunCommand::Pre.");
         }
 
     }
@@ -427,10 +376,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::RunCommand::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::RunCommand::Post.");
         }
 
     }
@@ -446,10 +392,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::SetupMove::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::SetupMove::Pre.");
         }
 
     }
@@ -465,10 +408,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::SetupMove::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::SetupMove::Post.");
         }
 
     }
@@ -484,10 +424,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::ProcessMovement::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::ProcessMovement::Pre.");
         }
 
     }
@@ -503,10 +440,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::ProcessMovement::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::ProcessMovement::Post.");
         }
 
     }
@@ -522,10 +456,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::CheckFalling::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::CheckFalling::Pre.");
         }
 
     }
@@ -541,10 +472,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::CheckFalling::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::CheckFalling::Post.");
         }
 
     }
@@ -560,10 +488,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::CategorizePosition::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::CategorizePosition::Pre.");
         }
 
     }
@@ -579,10 +504,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::CategorizePosition::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::CategorizePosition::Post.");
         }
 
     }
@@ -598,10 +520,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::TryPlayerMove::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::TryPlayerMove::Pre.");
         }
 
     }
@@ -617,10 +536,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::TryPlayerMove::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::TryPlayerMove::Post.");
         }
 
     }
@@ -636,10 +552,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::WalkMove::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::WalkMove::Pre.");
         }
 
     }
@@ -655,10 +568,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::WalkMove::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::WalkMove::Post.");
         }
 
     }
@@ -674,10 +584,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::Friction::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::Friction::Pre.");
         }
 
     }
@@ -693,10 +600,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::Friction::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::Friction::Post.");
         }
 
     }
@@ -712,10 +616,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::AirAccelerate::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::AirAccelerate::Pre.");
         }
 
     }
@@ -731,10 +632,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::AirAccelerate::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::AirAccelerate::Post.");
         }
 
     }
@@ -750,10 +648,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::AirMove::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::AirMove::Pre.");
         }
 
     }
@@ -769,10 +664,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::AirMove::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::AirMove::Post.");
         }
 
     }
@@ -788,10 +680,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::OnJumpModern::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::OnJumpModern::Pre.");
         }
 
     }
@@ -807,10 +696,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::OnJumpModern::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::OnJumpModern::Post.");
         }
 
     }
@@ -826,10 +712,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::OnJumpLegacy::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::OnJumpLegacy::Pre.");
         }
 
     }
@@ -845,10 +728,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::OnJumpLegacy::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::OnJumpLegacy::Post.");
         }
 
     }
@@ -864,10 +744,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::CheckJumpButtonModern::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::CheckJumpButtonModern::Pre.");
         }
 
     }
@@ -883,10 +760,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::CheckJumpButtonModern::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::CheckJumpButtonModern::Post.");
         }
 
     }
@@ -902,10 +776,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::CheckJumpButtonLegacy::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::CheckJumpButtonLegacy::Pre.");
         }
 
     }
@@ -921,10 +792,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::CheckJumpButtonLegacy::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::CheckJumpButtonLegacy::Post.");
         }
 
     }
@@ -940,10 +808,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::LadderMove::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::LadderMove::Pre.");
         }
 
     }
@@ -959,10 +824,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::LadderMove::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::LadderMove::Post.");
         }
 
     }
@@ -978,10 +840,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::CanUnduck::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::CanUnduck::Pre.");
         }
 
     }
@@ -997,10 +856,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::CanUnduck::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::CanUnduck::Post.");
         }
 
     }
@@ -1016,10 +872,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::Duck::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::Duck::Pre.");
         }
 
     }
@@ -1035,10 +888,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::Duck::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::Duck::Post.");
         }
 
     }
@@ -1054,10 +904,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::CheckVelocity::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::CheckVelocity::Pre.");
         }
 
     }
@@ -1073,10 +920,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::CheckVelocity::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::CheckVelocity::Post.");
         }
 
     }
@@ -1092,10 +936,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::WaterMove::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::WaterMove::Pre.");
         }
 
     }
@@ -1111,10 +952,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::WaterMove::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::WaterMove::Post.");
         }
 
     }
@@ -1130,10 +968,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::CheckWater::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::CheckWater::Pre.");
         }
 
     }
@@ -1149,10 +984,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::CheckWater::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::CheckWater::Post.");
         }
 
     }
@@ -1168,10 +1000,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::MoveInit::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::MoveInit::Pre.");
         }
 
     }
@@ -1187,10 +1016,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::MoveInit::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::MoveInit::Post.");
         }
 
     }
@@ -1206,10 +1032,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::FullWalkMove::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::FullWalkMove::Pre.");
         }
 
     }
@@ -1225,10 +1048,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::FullWalkMove::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::FullWalkMove::Post.");
         }
 
     }
@@ -1244,10 +1064,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::CheckParameters::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::CheckParameters::Pre.");
         }
 
     }
@@ -1263,10 +1080,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::CheckParameters::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::CheckParameters::Post.");
         }
 
     }
@@ -1282,10 +1096,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::PlayerMove::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::PlayerMove::Pre.");
         }
 
     }
@@ -1301,10 +1112,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::PlayerMove::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::PlayerMove::Post.");
         }
 
     }
@@ -1320,10 +1128,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::GroundAccelerate::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::GroundAccelerate::Pre.");
         }
 
     }
@@ -1339,10 +1144,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Movement::GroundAccelerate::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Movement::GroundAccelerate::Post.");
         }
 
     }
@@ -1358,10 +1160,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Entities::TakeDamage::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Entities::TakeDamage::Pre.");
         }
 
     }
@@ -1377,10 +1176,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Entities::TakeDamage::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Entities::TakeDamage::Post.");
         }
 
     }
@@ -1396,10 +1192,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Entities::StartTouch::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Entities::StartTouch::Pre.");
         }
 
     }
@@ -1415,10 +1208,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Entities::StartTouch::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Entities::StartTouch::Post.");
         }
 
     }
@@ -1434,10 +1224,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Entities::Touch::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Entities::Touch::Pre.");
         }
 
     }
@@ -1453,10 +1240,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Entities::Touch::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Entities::Touch::Post.");
         }
 
     }
@@ -1472,10 +1256,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Entities::EndTouch::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Entities::EndTouch::Pre.");
         }
 
     }
@@ -1491,10 +1272,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Entities::EndTouch::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Entities::EndTouch::Post.");
         }
 
     }
@@ -1510,10 +1288,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Entities::AcceptInput::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Entities::AcceptInput::Pre.");
         }
 
     }
@@ -1529,10 +1304,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Entities::AcceptInput::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Entities::AcceptInput::Post.");
         }
 
     }
@@ -1548,10 +1320,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Entities::FireOutput::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Entities::FireOutput::Pre.");
         }
 
     }
@@ -1567,10 +1336,7 @@ internal sealed partial class GameHooksService : IGameHooks, IDisposable
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Entities::FireOutput::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Entities::FireOutput::Post.");
         }
 
     }

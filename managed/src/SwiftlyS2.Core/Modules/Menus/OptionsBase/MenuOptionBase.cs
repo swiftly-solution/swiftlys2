@@ -160,7 +160,6 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
             }
             catch (Exception e)
             {
-                if (!GlobalExceptionHandler.Handle(ref e)) return;
                 AnsiConsole.WriteException(e);
             }
         }
@@ -196,7 +195,6 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
                 }
                 catch (Exception e)
                 {
-                    if (!GlobalExceptionHandler.Handle(ref e)) return string.Empty;
                     AnsiConsole.WriteException(e);
                 }
             }
@@ -217,7 +215,6 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
             }
             catch (Exception e)
             {
-                if (!GlobalExceptionHandler.Handle(ref e)) return;
                 AnsiConsole.WriteException(e);
             }
         }
@@ -275,7 +272,6 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
             }
             catch (Exception e)
             {
-                if (!GlobalExceptionHandler.Handle(ref e)) return;
                 AnsiConsole.WriteException(e);
             }
         }
@@ -303,7 +299,6 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
             }
             catch (Exception e)
             {
-                if (!GlobalExceptionHandler.Handle(ref e)) return;
                 AnsiConsole.WriteException(e);
             }
         }
@@ -501,7 +496,6 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e)) return string.Empty;
             AnsiConsole.WriteException(e);
         }
 
@@ -543,7 +537,6 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e)) return string.Empty;
             AnsiConsole.WriteException(e);
         }
 
@@ -574,7 +567,6 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e)) return ValueTask.FromResult(true);
             AnsiConsole.WriteException(e);
         }
         return ValueTask.FromResult(!args.Cancel);
@@ -648,7 +640,6 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
             }
             catch (Exception e)
             {
-                if (!GlobalExceptionHandler.Handle(ref e)) return;
                 AnsiConsole.WriteException(e);
             }
             finally

@@ -56,7 +56,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     private void LogError( Exception e, string eventName )
     {
-        if (GlobalExceptionHandler.Handle(ref e)) logger.LogError(e, "Error invoking {Event}.", eventName);
+        logger.LogError(e, "Error invoking {Event}.", eventName);
     }
 
     private EventDelegates.OnTick? _OnTick;

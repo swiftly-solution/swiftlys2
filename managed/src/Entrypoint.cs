@@ -17,10 +17,6 @@ internal class Entrypoint
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
             AnsiConsole.WriteException(e);
         }
     }

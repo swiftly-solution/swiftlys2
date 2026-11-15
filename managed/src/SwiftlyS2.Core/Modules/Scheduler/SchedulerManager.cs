@@ -46,7 +46,7 @@ internal static class SchedulerManager
         }
         catch (Exception ex)
         {
-            if (GlobalExceptionHandler.Handle(ref ex)) AnsiConsole.WriteException(ex);
+            AnsiConsole.WriteException(ex);
         }
     }
 
@@ -62,7 +62,7 @@ internal static class SchedulerManager
             }
             catch (Exception ex)
             {
-                if (GlobalExceptionHandler.Handle(ref ex)) AnsiConsole.WriteException(ex);
+                AnsiConsole.WriteException(ex);
             }
         }
     }
@@ -85,7 +85,7 @@ internal static class SchedulerManager
                 }
                 catch (Exception ex)
                 {
-                    if (GlobalExceptionHandler.Handle(ref ex)) AnsiConsole.WriteException(ex);
+                    AnsiConsole.WriteException(ex);
                 }
             }
         }
@@ -105,7 +105,7 @@ internal static class SchedulerManager
         }
         catch (Exception ex)
         {
-            if (GlobalExceptionHandler.Handle(ref ex)) AnsiConsole.WriteException(ex);
+            AnsiConsole.WriteException(ex);
         }
     }
 
@@ -121,7 +121,7 @@ internal static class SchedulerManager
             }
             catch (Exception ex)
             {
-                if (GlobalExceptionHandler.Handle(ref ex)) AnsiConsole.WriteException(ex);
+                AnsiConsole.WriteException(ex);
             }
         }
     }
@@ -179,7 +179,7 @@ internal static class SchedulerManager
                 }
                 catch (Exception ex)
                 {
-                    if (GlobalExceptionHandler.Handle(ref ex)) AnsiConsole.WriteException(ex);
+                    AnsiConsole.WriteException(ex);
                 }
             }
         }
@@ -201,7 +201,7 @@ internal static class SchedulerManager
                 }
                 catch (Exception ex)
                 {
-                    if (GlobalExceptionHandler.Handle(ref ex)) AnsiConsole.WriteException(ex);
+                    AnsiConsole.WriteException(ex);
                 }
             }
 

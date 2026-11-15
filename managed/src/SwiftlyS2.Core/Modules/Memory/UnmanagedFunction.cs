@@ -74,7 +74,6 @@ internal class UnmanagedFunction<TDelegate> : UnmanagedFunction, IUnmanagedFunct
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e)) return Guid.Empty;
             _Logger.LogError(e, "Failed to add hook to function {0}.", Address);
             return Guid.Empty;
         }
@@ -89,7 +88,6 @@ internal class UnmanagedFunction<TDelegate> : UnmanagedFunction, IUnmanagedFunct
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e)) return;
             _Logger.LogError(e, "Failed to remove hook {0} from function {1}.", id, Address);
         }
     }

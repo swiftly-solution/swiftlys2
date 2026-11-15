@@ -135,7 +135,7 @@ internal static class EventPublisher
 
     private static void Report( Exception e )
     {
-        if (GlobalExceptionHandler.Handle(ref e)) AnsiConsole.WriteException(e);
+        AnsiConsole.WriteException(e);
     }
 
     public static void Register()
