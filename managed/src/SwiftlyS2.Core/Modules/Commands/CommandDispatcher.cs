@@ -172,6 +172,11 @@ internal static unsafe class CommandDispatcher
         }
 
         commands[key] = [callback];
+        // The native core owns sw; managed callbacks only handle its remaining subcommands.
+        if (key == "sw" && NativeCommands.IsCommandRegistered(key))
+        {
+            return;
+        }
         nativeCommandIds[key] = NativeCommands.RegisterCommand(callback.CommandName, callback.RegisterRaw, callback.HelpText);
     }
 

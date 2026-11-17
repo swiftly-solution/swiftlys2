@@ -29,6 +29,10 @@
     "ManualLoadPlugins": false,
     // Plugin IDs to load first, in listed order. Unlisted plugins load afterwards (when ManualLoadPlugins is false).
     "PluginLoadOrder": [],
+    "Managed": {
+        // Set to false to skip .NET runtime, C# plugins, managed logging and .NET crash tracing. Restart required.
+        "Enable": true
+    },
     "DotnetCrashTracerLevel": 0,
     "WindowsFullDump": false,
     "Menu": {

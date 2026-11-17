@@ -222,6 +222,7 @@ bool Configuration::Load()
         cfg.Add("SteamAuth.Mode", "flexible");
         cfg.AddList("SteamAuth.AvailableModes", { "flexible", "strict" }, " ");
 
+        cfg.Add("Managed.Enable", true);
         cfg.Add("DotnetCrashTracerLevel", 0);
         cfg.Add("WindowsFullDump", false);
 

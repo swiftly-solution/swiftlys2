@@ -92,6 +92,9 @@ void ConsoleLogger::Initialize()
     if (bool* b = std::get_if<bool>(&g_pConfiguration->GetValue("core.ConsoleLogger.ManagedEnable")))
         m_managedEnabled = *b;
 
+    if (const bool* enabled = std::get_if<bool>(&g_pConfiguration->GetValue("core.Managed.Enable")); enabled && !*enabled)
+        m_managedEnabled = false;
+
     if (bool* b = std::get_if<bool>(&g_pConfiguration->GetValue("core.ConsoleLogger.Rotation.Enable")))
         m_rotationEnabled = *b;
 

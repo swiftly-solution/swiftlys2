@@ -26,11 +26,15 @@
 
 #include <string>
 #include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 class CServerCommands : public IServerCommands
 {
 public:
+
+    virtual void Initialize() override;
+    virtual void Shutdown() override;
 
     virtual int HandleCommand(int playerid, const std::string& text, bool dryrun) override;
     virtual void HandleRegisteredCommand(int playerid, const char* commandLine) override;
@@ -54,7 +58,9 @@ private:
     std::shared_mutex m_mtxCommands;
     std::unordered_map<std::string, ConCommand*> m_commands;
     std::unordered_map<uint64_t, std::string> m_commandNames;
+    std::unordered_set<std::string> m_coreAliases;
     uint64_t m_lastCommandId = 0;
+    uint64_t m_coreCommandId = 0;
 
     CommandHandler m_commandHandler;
     ClientCommandHandler m_clientCommandHandler;
