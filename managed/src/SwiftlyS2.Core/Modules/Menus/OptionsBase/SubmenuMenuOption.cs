@@ -151,7 +151,6 @@ public sealed class SubmenuMenuOption : MenuOptionBase
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e)) return;
             AnsiConsole.WriteException(e);
         }
     }

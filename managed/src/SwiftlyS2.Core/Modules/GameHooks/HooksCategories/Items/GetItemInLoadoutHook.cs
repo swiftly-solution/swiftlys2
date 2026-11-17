@@ -1,5 +1,6 @@
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared.GameHooks;
+using SwiftlyS2.Core.Misc;
 
 namespace SwiftlyS2.Core.GameHooks;
 
@@ -52,7 +53,7 @@ internal sealed class GetItemInLoadoutHook( GameHooksService owner ) : IGetItemI
 
     private static void ThrowIfFollowingServerGuidelines()
     {
-        if (NativeServerHelpers.IsFollowingServerGuidelines())
+        if (GlobalState.IsFollowingServerGuidelines)
         {
             throw new InvalidOperationException("Cannot hook GetItemInLoadout while \"FollowCS2ServerGuidelines\" is enabled.\n\tTo use this operation, disable the option in core.jsonc.");
         }

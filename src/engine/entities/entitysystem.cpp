@@ -44,7 +44,7 @@ CGameEntitySystem* GameEntitySystem()
 
 static void StartupServerHook(void* _this, const GameSessionConfiguration_t& config, ISource2WorldSession* a, const char* b);
 
-VFunctionHook g_StartupServerHook(reinterpret_cast<void*>(StartupServerHook), "engine2", "CNetworkServerService", "INetworkServerService::StartupServer");
+VFunctionHook g_StartupServerHook(reinterpret_cast<void*>(StartupServerHook), "engine2", "CNetworkServerService", "CNetworkServerService::StartupServer");
 
 void CEntSystem::Shutdown()
 {

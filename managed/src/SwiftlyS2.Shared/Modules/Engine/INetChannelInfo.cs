@@ -28,8 +28,8 @@ public interface INetChannelInfo
 
     public float GetAvgLoss( NetworkFlow flow );
     public float GetAvgChoke( NetworkFlow flow );
+    public float GetPeakJitter( NetworkFlow flow );
     public float GetAvgData( NetworkFlow flow );
-    public float GetAvgPacketBytes( NetworkFlow flow );
     public float GetAvgPackets( NetworkFlow flow );
     public ulong GetTotalData( NetworkFlow flow );
     public int GetTotalPackets( NetworkFlow flow );

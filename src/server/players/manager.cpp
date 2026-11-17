@@ -38,12 +38,12 @@ void OnClientConnectedHook(void* _this, CPlayerSlot slot, const char* pszName, u
 void ClientDisconnectHook(void* _this, CPlayerSlot slot, int reason, const char* pszName, uint64 xuid, const char* pszNetworkID);
 void CheckTransmitHook(void* _this, CCheckTransmitInfo** ppInfoList, int infoCount, CBitVec<16384>& unionTransmitEdicts, CBitVec<16384>& unk, const Entity2Networkable_t** pNetworkables, const uint16_t* pEntityIndicies, int nEntities);
 
-VFunctionHook g_ClientConnectHook(reinterpret_cast<void*>(ClientConnectHook), "server", "CSource2GameClients", "IServerGameClients::ClientConnect");
-VFunctionHook g_OnClientConnectedHook(reinterpret_cast<void*>(OnClientConnectedHook), "server", "CSource2GameClients", "IServerGameClients::OnClientConnected");
-VFunctionHook g_ClientDisconnectHook(reinterpret_cast<void*>(ClientDisconnectHook), "server", "CSource2GameClients", "IServerGameClients::ClientDisconnect");
-VFunctionHook g_ClientPutInServerHook(reinterpret_cast<void*>(OnClientPutInServerHook), "server", "CSource2GameClients", "IServerGameClients::ClientPutInServer");
-VFunctionHook g_CheckTransmitHook(reinterpret_cast<void*>(CheckTransmitHook), "server", "CSource2GameEntities", "ISource2GameEntities::CheckTransmit");
-VFunctionHook g_OnGameFramePlayerHook(reinterpret_cast<void*>(OnGameFramePlayerHook), "server", "CSource2Server", "IServerGameDLL::GameFrame");
+VFunctionHook g_ClientConnectHook(reinterpret_cast<void*>(ClientConnectHook), "server", "CSource2GameClients", "CSource2GameClients::ClientConnect");
+VFunctionHook g_OnClientConnectedHook(reinterpret_cast<void*>(OnClientConnectedHook), "server", "CSource2GameClients", "CSource2GameClients::OnClientConnected");
+VFunctionHook g_ClientDisconnectHook(reinterpret_cast<void*>(ClientDisconnectHook), "server", "CSource2GameClients", "CSource2GameClients::ClientDisconnect");
+VFunctionHook g_ClientPutInServerHook(reinterpret_cast<void*>(OnClientPutInServerHook), "server", "CSource2GameClients", "CSource2GameClients::ClientPutInServer");
+VFunctionHook g_CheckTransmitHook(reinterpret_cast<void*>(CheckTransmitHook), "server", "CSource2GameEntities", "CSource2GameEntities::CheckTransmit");
+VFunctionHook g_OnGameFramePlayerHook(reinterpret_cast<void*>(OnGameFramePlayerHook), "server", "CSource2Server", "CSource2Server::GameFrame");
 
 void CPlayerManager::Initialize()
 {
@@ -78,15 +78,8 @@ void OnClientPutInServerHook(void* _this, CPlayerSlot slot, char const* pszName,
         }
     }
 
-    if (g_pGameEngine->IsClientFullyAuthenticated(slot))
-    {
-        auto player = g_pPlayerManager->GetPlayer(slot.Get());
-        if (player)
-            player->ChangeAuthorizationState(true);
-    }
-
     if (g_pOnClientPutInServerCallback)
-        g_pOnClientPutInServerCallback(slot.Get(), type);
+        g_pOnClientPutInServerCallback(slot.Get(), type, g_pGameEngine->IsClientFullyAuthenticated(slot));
 }
 
 void CheckTransmitHook(void* _this, CCheckTransmitInfo** ppInfoList, int infoCount, CBitVec<16384>& unionTransmitEdicts, CBitVec<16384>& unk, const Entity2Networkable_t** pNetworkables, const uint16_t* pEntityIndicies, int nEntities)
@@ -143,12 +136,9 @@ bool ClientConnectHook(void* _this, CPlayerSlot slot, const char* pszName, uint6
         return false;
     }
 
-    player->SetUnauthorizedSteamID(xuid);
-    player->SetFakeClient(xuid == 0);
-
     if (g_pOnClientConnectCallback)
     {
-        if (!g_pOnClientConnectCallback(playerid))
+        if (!g_pOnClientConnectCallback(playerid, xuid))
         {
             g_pPlayerManager->UnregisterPlayer(playerid);
             return false;
@@ -171,20 +161,17 @@ void OnClientConnectedHook(void* _this, CPlayerSlot slot, const char* pszName, u
         auto player = g_pPlayerManager->RegisterPlayer(playerid);
         if (player)
         {
-            player->SetFakeClient(true);
-
-            if (g_pOnClientConnectCallback && !g_pOnClientConnectCallback(playerid))
+            if (g_pOnClientConnectCallback && !g_pOnClientConnectCallback(playerid, 0))
             {
                 player->Kick("Connection rejected by plugin.", 0);
+                g_pPlayerManager->UnregisterPlayer(playerid);
                 return;
             }
         }
     }
-    else if (g_pGameEngine->IsClientFullyAuthenticated(slot))
-    {
-        auto player = g_pPlayerManager->GetPlayer(playerid);
-        if (player) player->ChangeAuthorizationState(true);
-    }
+
+    if (g_pOnClientConnectionEstablishedCallback)
+        g_pOnClientConnectionEstablishedCallback(playerid, g_pGameEngine->IsClientFullyAuthenticated(slot));
 
     reinterpret_cast<decltype(&OnClientConnectedHook)>(g_OnClientConnectedHook.GetOriginal())(_this, slot, pszName, xuid, pszNetworkID, pszAddress, bFakePlayer);
 }
@@ -281,30 +268,4 @@ void CPlayerManager::SendMsg(MessageType type, const std::string& message, int d
 
     CBroadcastRecipientFilter filter;
     PostTextMsg(&filter, type, message, 0);
-}
-
-void CPlayerManager::SteamAPIServerActivated()
-{
-    PROFILE_FUNCTION();
-
-    m_CallbackValidateAuthTicketResponse.Register(this, &CPlayerManager::OnValidateAuthTicket);
-}
-
-void CPlayerManager::OnValidateAuthTicket(ValidateAuthTicketResponse_t* response)
-{
-    PROFILE_FUNCTION();
-
-    uint64_t steamid = response->m_SteamID.ConvertToUint64();
-
-    for (int i = 0; i < GetPlayerCap(); i++)
-    {
-        auto player = GetPlayer(i);
-        if (!player)
-            continue;
-        if (player->GetUnauthorizedSteamID() != steamid)
-            continue;
-
-        player->ChangeAuthorizationState(response->m_eAuthSessionResponse == k_EAuthSessionResponseOK);
-        break;
-    }
 }

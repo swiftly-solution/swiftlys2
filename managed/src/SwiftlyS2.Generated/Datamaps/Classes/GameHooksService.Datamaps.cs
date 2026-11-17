@@ -31,10 +31,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CAmbientGeneric::RampThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CAmbientGeneric::RampThink::Pre.");
         }
     }
 
@@ -51,10 +48,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CAmbientGeneric::RampThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CAmbientGeneric::RampThink::Post.");
         }
     }
 
@@ -71,10 +65,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBarnLight::Think_ApplyLightStylesToTargets::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBarnLight::Think_ApplyLightStylesToTargets::Pre.");
         }
     }
 
@@ -91,10 +82,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBarnLight::Think_ApplyLightStylesToTargets::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBarnLight::Think_ApplyLightStylesToTargets::Post.");
         }
     }
 
@@ -111,10 +99,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBarnLight::Think_LightStyleEvent::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBarnLight::Think_LightStyleEvent::Pre.");
         }
     }
 
@@ -131,10 +116,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBarnLight::Think_LightStyleEvent::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBarnLight::Think_LightStyleEvent::Post.");
         }
     }
 
@@ -151,10 +133,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBarnLight::Think_SetNextQueuedLightStyle::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBarnLight::Think_SetNextQueuedLightStyle::Pre.");
         }
     }
 
@@ -171,10 +150,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBarnLight::Think_SetNextQueuedLightStyle::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBarnLight::Think_SetNextQueuedLightStyle::Post.");
         }
     }
 
@@ -191,10 +167,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseAnimGraph::ChoreoServicesThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseAnimGraph::ChoreoServicesThink::Pre.");
         }
     }
 
@@ -211,10 +184,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseAnimGraph::ChoreoServicesThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseAnimGraph::ChoreoServicesThink::Post.");
         }
     }
 
@@ -231,10 +201,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseButton::ActivateTouch::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseButton::ActivateTouch::Pre.");
         }
     }
 
@@ -251,10 +218,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseButton::ActivateTouch::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseButton::ActivateTouch::Post.");
         }
     }
 
@@ -271,10 +235,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseButton::ButtonBackHome::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseButton::ButtonBackHome::Pre.");
         }
     }
 
@@ -291,10 +252,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseButton::ButtonBackHome::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseButton::ButtonBackHome::Post.");
         }
     }
 
@@ -311,10 +269,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseButton::ButtonReturn::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseButton::ButtonReturn::Pre.");
         }
     }
 
@@ -331,10 +286,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseButton::ButtonReturn::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseButton::ButtonReturn::Post.");
         }
     }
 
@@ -351,10 +303,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseButton::ButtonSpark::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseButton::ButtonSpark::Pre.");
         }
     }
 
@@ -371,10 +320,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseButton::ButtonSpark::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseButton::ButtonSpark::Post.");
         }
     }
 
@@ -391,10 +337,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseButton::ButtonTouch::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseButton::ButtonTouch::Pre.");
         }
     }
 
@@ -411,10 +354,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseButton::ButtonTouch::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseButton::ButtonTouch::Post.");
         }
     }
 
@@ -431,10 +371,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseButton::ButtonUse::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseButton::ButtonUse::Pre.");
         }
     }
 
@@ -451,10 +388,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseButton::ButtonUse::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseButton::ButtonUse::Post.");
         }
     }
 
@@ -471,10 +405,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseButton::TriggerAndWait::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseButton::TriggerAndWait::Pre.");
         }
     }
 
@@ -491,10 +422,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseButton::TriggerAndWait::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseButton::TriggerAndWait::Post.");
         }
     }
 
@@ -511,10 +439,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseCSGrenadeProjectile::DangerSoundThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseCSGrenadeProjectile::DangerSoundThink::Pre.");
         }
     }
 
@@ -531,10 +456,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseCSGrenadeProjectile::DangerSoundThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseCSGrenadeProjectile::DangerSoundThink::Post.");
         }
     }
 
@@ -551,10 +473,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseDoor::CloseAreaPortalsThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseDoor::CloseAreaPortalsThink::Pre.");
         }
     }
 
@@ -571,10 +490,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseDoor::CloseAreaPortalsThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseDoor::CloseAreaPortalsThink::Post.");
         }
     }
 
@@ -591,10 +507,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseDoor::DoorGoDown::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseDoor::DoorGoDown::Pre.");
         }
     }
 
@@ -611,10 +524,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseDoor::DoorGoDown::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseDoor::DoorGoDown::Post.");
         }
     }
 
@@ -631,10 +541,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseDoor::DoorGoUp::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseDoor::DoorGoUp::Pre.");
         }
     }
 
@@ -651,10 +558,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseDoor::DoorGoUp::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseDoor::DoorGoUp::Post.");
         }
     }
 
@@ -671,10 +575,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseDoor::DoorHitBottom::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseDoor::DoorHitBottom::Pre.");
         }
     }
 
@@ -691,10 +592,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseDoor::DoorHitBottom::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseDoor::DoorHitBottom::Post.");
         }
     }
 
@@ -711,10 +609,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseDoor::DoorHitTop::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseDoor::DoorHitTop::Pre.");
         }
     }
 
@@ -731,10 +626,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseDoor::DoorHitTop::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseDoor::DoorHitTop::Post.");
         }
     }
 
@@ -751,10 +643,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseDoor::DoorTouch::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseDoor::DoorTouch::Pre.");
         }
     }
 
@@ -771,10 +660,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseDoor::DoorTouch::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseDoor::DoorTouch::Post.");
         }
     }
 
@@ -791,10 +677,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseDoor::MovingSoundThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseDoor::MovingSoundThink::Pre.");
         }
     }
 
@@ -811,10 +694,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseDoor::MovingSoundThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseDoor::MovingSoundThink::Post.");
         }
     }
 
@@ -831,10 +711,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseEntity::ClearNavIgnoreContentsThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseEntity::ClearNavIgnoreContentsThink::Pre.");
         }
     }
 
@@ -851,10 +728,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseEntity::ClearNavIgnoreContentsThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseEntity::ClearNavIgnoreContentsThink::Post.");
         }
     }
 
@@ -871,10 +745,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseEntity::FakeScriptThinkFunc::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseEntity::FakeScriptThinkFunc::Pre.");
         }
     }
 
@@ -891,10 +762,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseEntity::FakeScriptThinkFunc::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseEntity::FakeScriptThinkFunc::Post.");
         }
     }
 
@@ -911,10 +779,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseEntity::SUB_CallUseToggle::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseEntity::SUB_CallUseToggle::Pre.");
         }
     }
 
@@ -931,10 +796,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseEntity::SUB_CallUseToggle::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseEntity::SUB_CallUseToggle::Post.");
         }
     }
 
@@ -951,10 +813,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseEntity::SUB_DoNothing::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseEntity::SUB_DoNothing::Pre.");
         }
     }
 
@@ -971,10 +830,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseEntity::SUB_DoNothing::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseEntity::SUB_DoNothing::Post.");
         }
     }
 
@@ -991,10 +847,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseEntity::SUB_KillSelf::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseEntity::SUB_KillSelf::Pre.");
         }
     }
 
@@ -1011,10 +864,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseEntity::SUB_KillSelf::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseEntity::SUB_KillSelf::Post.");
         }
     }
 
@@ -1031,10 +881,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseEntity::SUB_Remove::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseEntity::SUB_Remove::Pre.");
         }
     }
 
@@ -1051,10 +898,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseEntity::SUB_Remove::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseEntity::SUB_Remove::Post.");
         }
     }
 
@@ -1071,10 +915,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::BounceTouch::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::BounceTouch::Pre.");
         }
     }
 
@@ -1091,10 +932,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::BounceTouch::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::BounceTouch::Post.");
         }
     }
 
@@ -1111,10 +949,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::DangerSoundThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::DangerSoundThink::Pre.");
         }
     }
 
@@ -1131,10 +966,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::DangerSoundThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::DangerSoundThink::Post.");
         }
     }
 
@@ -1151,10 +983,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::Detonate::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::Detonate::Pre.");
         }
     }
 
@@ -1171,10 +1000,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::Detonate::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::Detonate::Post.");
         }
     }
 
@@ -1191,10 +1017,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::DetonateUse::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::DetonateUse::Pre.");
         }
     }
 
@@ -1211,10 +1034,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::DetonateUse::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::DetonateUse::Post.");
         }
     }
 
@@ -1231,10 +1051,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::ExplodeTouch::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::ExplodeTouch::Pre.");
         }
     }
 
@@ -1251,10 +1068,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::ExplodeTouch::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::ExplodeTouch::Post.");
         }
     }
 
@@ -1271,10 +1085,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::PreDetonate::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::PreDetonate::Pre.");
         }
     }
 
@@ -1291,10 +1102,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::PreDetonate::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::PreDetonate::Post.");
         }
     }
 
@@ -1311,10 +1119,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::SlideTouch::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::SlideTouch::Pre.");
         }
     }
 
@@ -1331,10 +1136,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::SlideTouch::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::SlideTouch::Post.");
         }
     }
 
@@ -1351,10 +1153,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::Smoke::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::Smoke::Pre.");
         }
     }
 
@@ -1371,10 +1170,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::Smoke::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::Smoke::Post.");
         }
     }
 
@@ -1391,10 +1187,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::TumbleThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::TumbleThink::Pre.");
         }
     }
 
@@ -1411,10 +1204,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::TumbleThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseGrenade::TumbleThink::Post.");
         }
     }
 
@@ -1431,10 +1221,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::ProcessSceneEventsThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::ProcessSceneEventsThink::Pre.");
         }
     }
 
@@ -1451,10 +1238,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::ProcessSceneEventsThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::ProcessSceneEventsThink::Post.");
         }
     }
 
@@ -1471,10 +1255,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_DissolveIfUncarried::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_DissolveIfUncarried::Pre.");
         }
     }
 
@@ -1491,10 +1272,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_DissolveIfUncarried::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_DissolveIfUncarried::Post.");
         }
     }
 
@@ -1511,10 +1289,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_FadeOut::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_FadeOut::Pre.");
         }
     }
 
@@ -1531,10 +1306,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_FadeOut::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_FadeOut::Post.");
         }
     }
 
@@ -1551,10 +1323,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_PerformShadowFadeIn::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_PerformShadowFadeIn::Pre.");
         }
     }
 
@@ -1571,10 +1340,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_PerformShadowFadeIn::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_PerformShadowFadeIn::Post.");
         }
     }
 
@@ -1591,10 +1357,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_PerformShadowFadeOut::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_PerformShadowFadeOut::Pre.");
         }
     }
 
@@ -1611,10 +1374,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_PerformShadowFadeOut::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_PerformShadowFadeOut::Post.");
         }
     }
 
@@ -1631,10 +1391,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_StartFadeOut::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_StartFadeOut::Pre.");
         }
     }
 
@@ -1651,10 +1408,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_StartFadeOut::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_StartFadeOut::Post.");
         }
     }
 
@@ -1671,10 +1425,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_StartFadeOutInstant::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_StartFadeOutInstant::Pre.");
         }
     }
 
@@ -1691,10 +1442,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_StartFadeOutInstant::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_StartFadeOutInstant::Post.");
         }
     }
 
@@ -1711,10 +1459,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_StartShadowFadeIn::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_StartShadowFadeIn::Pre.");
         }
     }
 
@@ -1731,10 +1476,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_StartShadowFadeIn::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_StartShadowFadeIn::Post.");
         }
     }
 
@@ -1751,10 +1493,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_StartShadowFadeOut::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_StartShadowFadeOut::Pre.");
         }
     }
 
@@ -1771,10 +1510,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_StartShadowFadeOut::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_StartShadowFadeOut::Post.");
         }
     }
 
@@ -1791,10 +1527,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_StopShadowFade::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_StopShadowFade::Pre.");
         }
     }
 
@@ -1811,10 +1544,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_StopShadowFade::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBaseModelEntity::SUB_StopShadowFade::Post.");
         }
     }
 
@@ -1831,10 +1561,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBasePropDoor::DisableAreaPortalThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBasePropDoor::DisableAreaPortalThink::Pre.");
         }
     }
 
@@ -1851,10 +1578,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBasePropDoor::DisableAreaPortalThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBasePropDoor::DisableAreaPortalThink::Post.");
         }
     }
 
@@ -1871,10 +1595,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBasePropDoor::DoorAutoCloseThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBasePropDoor::DoorAutoCloseThink::Pre.");
         }
     }
 
@@ -1891,10 +1612,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBasePropDoor::DoorAutoCloseThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBasePropDoor::DoorAutoCloseThink::Post.");
         }
     }
 
@@ -1911,10 +1629,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBasePropDoor::DoorCloseMoveDone::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBasePropDoor::DoorCloseMoveDone::Pre.");
         }
     }
 
@@ -1931,10 +1646,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBasePropDoor::DoorCloseMoveDone::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBasePropDoor::DoorCloseMoveDone::Post.");
         }
     }
 
@@ -1951,10 +1663,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBasePropDoor::DoorOpenMoveDone::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBasePropDoor::DoorOpenMoveDone::Pre.");
         }
     }
 
@@ -1971,10 +1680,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBasePropDoor::DoorOpenMoveDone::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBasePropDoor::DoorOpenMoveDone::Post.");
         }
     }
 
@@ -1991,10 +1697,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBombTarget::BombTargetTouch::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBombTarget::BombTargetTouch::Pre.");
         }
     }
 
@@ -2011,10 +1714,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBombTarget::BombTargetTouch::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBombTarget::BombTargetTouch::Post.");
         }
     }
 
@@ -2031,10 +1731,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBombTarget::BombTargetUse::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBombTarget::BombTargetUse::Pre.");
         }
     }
 
@@ -2051,10 +1748,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBombTarget::BombTargetUse::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBombTarget::BombTargetUse::Post.");
         }
     }
 
@@ -2071,10 +1765,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBreakable::Die::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBreakable::Die::Pre.");
         }
     }
 
@@ -2091,10 +1782,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBreakable::Die::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBreakable::Die::Post.");
         }
     }
 
@@ -2111,10 +1799,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBreakableProp::BreakThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBreakableProp::BreakThink::Pre.");
         }
     }
 
@@ -2131,10 +1816,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBreakableProp::BreakThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBreakableProp::BreakThink::Post.");
         }
     }
 
@@ -2151,10 +1833,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBreakableProp::RampToDefaultFadeScale::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBreakableProp::RampToDefaultFadeScale::Pre.");
         }
     }
 
@@ -2171,10 +1850,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CBreakableProp::RampToDefaultFadeScale::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CBreakableProp::RampToDefaultFadeScale::Post.");
         }
     }
 
@@ -2191,10 +1867,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSPlayerController::InventoryUpdateThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSPlayerController::InventoryUpdateThink::Pre.");
         }
     }
 
@@ -2211,10 +1884,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSPlayerController::InventoryUpdateThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSPlayerController::InventoryUpdateThink::Post.");
         }
     }
 
@@ -2231,10 +1901,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSPlayerController::PlayerForceTeamThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSPlayerController::PlayerForceTeamThink::Pre.");
         }
     }
 
@@ -2251,10 +1918,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSPlayerController::PlayerForceTeamThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSPlayerController::PlayerForceTeamThink::Post.");
         }
     }
 
@@ -2271,10 +1935,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSPlayerController::ResetForceTeamThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSPlayerController::ResetForceTeamThink::Pre.");
         }
     }
 
@@ -2291,10 +1952,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSPlayerController::ResetForceTeamThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSPlayerController::ResetForceTeamThink::Post.");
         }
     }
 
@@ -2311,10 +1969,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSPlayerController::ResourceDataThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSPlayerController::ResourceDataThink::Pre.");
         }
     }
 
@@ -2331,10 +1986,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSPlayerController::ResourceDataThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSPlayerController::ResourceDataThink::Post.");
         }
     }
 
@@ -2351,10 +2003,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSPlayerPawn::CheckStuffThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSPlayerPawn::CheckStuffThink::Pre.");
         }
     }
 
@@ -2371,10 +2020,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSPlayerPawn::CheckStuffThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSPlayerPawn::CheckStuffThink::Post.");
         }
     }
 
@@ -2391,10 +2037,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSPlayerPawn::PushawayThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSPlayerPawn::PushawayThink::Pre.");
         }
     }
 
@@ -2411,10 +2054,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSPlayerPawn::PushawayThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSPlayerPawn::PushawayThink::Post.");
         }
     }
 
@@ -2431,10 +2071,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSPlayerResource::ResourceThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSPlayerResource::ResourceThink::Pre.");
         }
     }
 
@@ -2451,10 +2088,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSPlayerResource::ResourceThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSPlayerResource::ResourceThink::Post.");
         }
     }
 
@@ -2471,10 +2105,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSWeaponBase::DefaultTouch::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSWeaponBase::DefaultTouch::Pre.");
         }
     }
 
@@ -2491,10 +2122,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSWeaponBase::DefaultTouch::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSWeaponBase::DefaultTouch::Post.");
         }
     }
 
@@ -2511,10 +2139,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSWeaponBase::RemoveUnownedWeaponThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSWeaponBase::RemoveUnownedWeaponThink::Pre.");
         }
     }
 
@@ -2531,10 +2156,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSWeaponBase::RemoveUnownedWeaponThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CCSWeaponBase::RemoveUnownedWeaponThink::Post.");
         }
     }
 
@@ -2551,10 +2173,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CChicken::ChickenThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CChicken::ChickenThink::Pre.");
         }
     }
 
@@ -2571,10 +2190,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CChicken::ChickenThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CChicken::ChickenThink::Post.");
         }
     }
 
@@ -2591,10 +2207,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CChicken::ChickenTouch::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CChicken::ChickenTouch::Pre.");
         }
     }
 
@@ -2611,10 +2224,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CChicken::ChickenTouch::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CChicken::ChickenTouch::Post.");
         }
     }
 
@@ -2631,10 +2241,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CChicken::ChickenUse::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CChicken::ChickenUse::Pre.");
         }
     }
 
@@ -2651,10 +2258,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CChicken::ChickenUse::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CChicken::ChickenUse::Post.");
         }
     }
 
@@ -2671,10 +2275,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CColorCorrection::FadeInThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CColorCorrection::FadeInThink::Pre.");
         }
     }
 
@@ -2691,10 +2292,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CColorCorrection::FadeInThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CColorCorrection::FadeInThink::Post.");
         }
     }
 
@@ -2711,10 +2309,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CColorCorrection::FadeOutThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CColorCorrection::FadeOutThink::Pre.");
         }
     }
 
@@ -2731,10 +2326,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CColorCorrection::FadeOutThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CColorCorrection::FadeOutThink::Post.");
         }
     }
 
@@ -2751,10 +2343,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CColorCorrectionVolume::ThinkFunc::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CColorCorrectionVolume::ThinkFunc::Pre.");
         }
     }
 
@@ -2771,10 +2360,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CColorCorrectionVolume::ThinkFunc::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CColorCorrectionVolume::ThinkFunc::Post.");
         }
     }
 
@@ -2791,10 +2377,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CDecoyProjectile::GunfireThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CDecoyProjectile::GunfireThink::Pre.");
         }
     }
 
@@ -2811,10 +2394,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CDecoyProjectile::GunfireThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CDecoyProjectile::GunfireThink::Post.");
         }
     }
 
@@ -2831,10 +2411,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CDecoyProjectile::Think_Detonate::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CDecoyProjectile::Think_Detonate::Pre.");
         }
     }
 
@@ -2851,10 +2428,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CDecoyProjectile::Think_Detonate::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CDecoyProjectile::Think_Detonate::Post.");
         }
     }
 
@@ -2871,10 +2445,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CDynamicLight::DynamicLightThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CDynamicLight::DynamicLightThink::Pre.");
         }
     }
 
@@ -2891,10 +2462,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CDynamicLight::DynamicLightThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CDynamicLight::DynamicLightThink::Post.");
         }
     }
 
@@ -2911,10 +2479,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CDynamicProp::AnimThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CDynamicProp::AnimThink::Pre.");
         }
     }
 
@@ -2931,10 +2496,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CDynamicProp::AnimThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CDynamicProp::AnimThink::Post.");
         }
     }
 
@@ -2951,10 +2513,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CEntityDissolve::DissolveThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CEntityDissolve::DissolveThink::Pre.");
         }
     }
 
@@ -2971,10 +2530,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CEntityDissolve::DissolveThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CEntityDissolve::DissolveThink::Post.");
         }
     }
 
@@ -2991,10 +2547,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CEntityDissolve::ElectrocuteThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CEntityDissolve::ElectrocuteThink::Pre.");
         }
     }
 
@@ -3011,10 +2564,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CEntityDissolve::ElectrocuteThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CEntityDissolve::ElectrocuteThink::Post.");
         }
     }
 
@@ -3031,10 +2581,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CEntityFlame::FlameThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CEntityFlame::FlameThink::Pre.");
         }
     }
 
@@ -3051,10 +2598,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CEntityFlame::FlameThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CEntityFlame::FlameThink::Post.");
         }
     }
 
@@ -3071,10 +2615,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CEnvBeam::StrikeThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CEnvBeam::StrikeThink::Pre.");
         }
     }
 
@@ -3091,10 +2632,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CEnvBeam::StrikeThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CEnvBeam::StrikeThink::Post.");
         }
     }
 
@@ -3111,10 +2649,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CEnvBeam::UpdateThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CEnvBeam::UpdateThink::Pre.");
         }
     }
 
@@ -3131,10 +2666,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CEnvBeam::UpdateThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CEnvBeam::UpdateThink::Post.");
         }
     }
 
@@ -3151,10 +2683,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CEnvEntityMaker::CheckSpawnThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CEnvEntityMaker::CheckSpawnThink::Pre.");
         }
     }
 
@@ -3171,10 +2700,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CEnvEntityMaker::CheckSpawnThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CEnvEntityMaker::CheckSpawnThink::Post.");
         }
     }
 
@@ -3191,10 +2717,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CEnvLaser::StrikeThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CEnvLaser::StrikeThink::Pre.");
         }
     }
 
@@ -3211,10 +2734,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CEnvLaser::StrikeThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CEnvLaser::StrikeThink::Post.");
         }
     }
 
@@ -3231,10 +2751,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CEnvSpark::SparkThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CEnvSpark::SparkThink::Pre.");
         }
     }
 
@@ -3251,10 +2768,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CEnvSpark::SparkThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CEnvSpark::SparkThink::Post.");
         }
     }
 
@@ -3271,10 +2785,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CEnvWind::WindThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CEnvWind::WindThink::Pre.");
         }
     }
 
@@ -3291,10 +2802,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CEnvWind::WindThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CEnvWind::WindThink::Post.");
         }
     }
 
@@ -3311,10 +2819,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFishPool::Update::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFishPool::Update::Pre.");
         }
     }
 
@@ -3331,10 +2836,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFishPool::Update::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFishPool::Update::Post.");
         }
     }
 
@@ -3351,10 +2853,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFogController::SetLerpValues::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFogController::SetLerpValues::Pre.");
         }
     }
 
@@ -3371,10 +2870,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFogController::SetLerpValues::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFogController::SetLerpValues::Post.");
         }
     }
 
@@ -3391,10 +2887,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncMoveLinear::NavMovableThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncMoveLinear::NavMovableThink::Pre.");
         }
     }
 
@@ -3411,10 +2904,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncMoveLinear::NavMovableThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncMoveLinear::NavMovableThink::Post.");
         }
     }
 
@@ -3431,10 +2921,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncMoveLinear::NavObstacleThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncMoveLinear::NavObstacleThink::Pre.");
         }
     }
 
@@ -3451,10 +2938,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncMoveLinear::NavObstacleThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncMoveLinear::NavObstacleThink::Post.");
         }
     }
 
@@ -3471,10 +2955,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncMoveLinear::StopMoveSound::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncMoveLinear::StopMoveSound::Pre.");
         }
     }
 
@@ -3491,10 +2972,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncMoveLinear::StopMoveSound::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncMoveLinear::StopMoveSound::Post.");
         }
     }
 
@@ -3511,10 +2989,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncPlat::CallGoDown::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncPlat::CallGoDown::Pre.");
         }
     }
 
@@ -3531,10 +3006,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncPlat::CallGoDown::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncPlat::CallGoDown::Post.");
         }
     }
 
@@ -3551,10 +3023,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncPlat::CallHitBottom::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncPlat::CallHitBottom::Pre.");
         }
     }
 
@@ -3571,10 +3040,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncPlat::CallHitBottom::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncPlat::CallHitBottom::Post.");
         }
     }
 
@@ -3591,10 +3057,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncPlat::CallHitTop::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncPlat::CallHitTop::Pre.");
         }
     }
 
@@ -3611,10 +3074,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncPlat::CallHitTop::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncPlat::CallHitTop::Post.");
         }
     }
 
@@ -3631,10 +3091,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncPlat::PlatUse::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncPlat::PlatUse::Pre.");
         }
     }
 
@@ -3651,10 +3108,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncPlat::PlatUse::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncPlat::PlatUse::Post.");
         }
     }
 
@@ -3671,10 +3125,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncRotating::HurtTouch::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncRotating::HurtTouch::Pre.");
         }
     }
 
@@ -3691,10 +3142,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncRotating::HurtTouch::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncRotating::HurtTouch::Post.");
         }
     }
 
@@ -3711,10 +3159,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncRotating::ReverseMove::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncRotating::ReverseMove::Pre.");
         }
     }
 
@@ -3731,10 +3176,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncRotating::ReverseMove::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncRotating::ReverseMove::Post.");
         }
     }
 
@@ -3751,10 +3193,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncRotating::RotateMove::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncRotating::RotateMove::Pre.");
         }
     }
 
@@ -3771,10 +3210,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncRotating::RotateMove::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncRotating::RotateMove::Post.");
         }
     }
 
@@ -3791,10 +3227,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncRotating::RotatingUse::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncRotating::RotatingUse::Pre.");
         }
     }
 
@@ -3811,10 +3244,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncRotating::RotatingUse::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncRotating::RotatingUse::Post.");
         }
     }
 
@@ -3831,10 +3261,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncRotating::SpinDownMove::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncRotating::SpinDownMove::Pre.");
         }
     }
 
@@ -3851,10 +3278,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncRotating::SpinDownMove::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncRotating::SpinDownMove::Post.");
         }
     }
 
@@ -3871,10 +3295,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncRotating::SpinUpMove::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncRotating::SpinUpMove::Pre.");
         }
     }
 
@@ -3891,10 +3312,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncRotating::SpinUpMove::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncRotating::SpinUpMove::Post.");
         }
     }
 
@@ -3911,10 +3329,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncShatterglass::GlassThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncShatterglass::GlassThink::Pre.");
         }
     }
 
@@ -3931,10 +3346,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncShatterglass::GlassThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncShatterglass::GlassThink::Post.");
         }
     }
 
@@ -3951,10 +3363,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncTrackChange::Find::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncTrackChange::Find::Pre.");
         }
     }
 
@@ -3971,10 +3380,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncTrackChange::Find::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncTrackChange::Find::Post.");
         }
     }
 
@@ -3991,10 +3397,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncTrackTrain::DeadEnd::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncTrackTrain::DeadEnd::Pre.");
         }
     }
 
@@ -4011,10 +3414,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncTrackTrain::DeadEnd::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncTrackTrain::DeadEnd::Post.");
         }
     }
 
@@ -4031,10 +3431,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncTrackTrain::Find::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncTrackTrain::Find::Pre.");
         }
     }
 
@@ -4051,10 +3448,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncTrackTrain::Find::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncTrackTrain::Find::Post.");
         }
     }
 
@@ -4071,10 +3465,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncTrackTrain::NearestPath::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncTrackTrain::NearestPath::Pre.");
         }
     }
 
@@ -4091,10 +3482,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncTrackTrain::NearestPath::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncTrackTrain::NearestPath::Post.");
         }
     }
 
@@ -4111,10 +3499,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncTrackTrain::Next::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncTrackTrain::Next::Pre.");
         }
     }
 
@@ -4131,10 +3516,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncTrackTrain::Next::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncTrackTrain::Next::Post.");
         }
     }
 
@@ -4151,10 +3533,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncTrain::Next::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncTrain::Next::Pre.");
         }
     }
 
@@ -4171,10 +3550,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncTrain::Next::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncTrain::Next::Post.");
         }
     }
 
@@ -4191,10 +3567,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncTrain::Wait::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncTrain::Wait::Pre.");
         }
     }
 
@@ -4211,10 +3584,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncTrain::Wait::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncTrain::Wait::Post.");
         }
     }
 
@@ -4231,10 +3601,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncTrainControls::Find::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncTrainControls::Find::Pre.");
         }
     }
 
@@ -4251,10 +3618,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncTrainControls::Find::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CFuncTrainControls::Find::Post.");
         }
     }
 
@@ -4271,10 +3635,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CGenericConstraint::UpdateThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CGenericConstraint::UpdateThink::Pre.");
         }
     }
 
@@ -4291,10 +3652,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CGenericConstraint::UpdateThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CGenericConstraint::UpdateThink::Post.");
         }
     }
 
@@ -4311,10 +3669,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CGunTarget::Next::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CGunTarget::Next::Pre.");
         }
     }
 
@@ -4331,10 +3686,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CGunTarget::Next::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CGunTarget::Next::Post.");
         }
     }
 
@@ -4351,10 +3703,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CGunTarget::Start::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CGunTarget::Start::Pre.");
         }
     }
 
@@ -4371,10 +3720,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CGunTarget::Start::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CGunTarget::Start::Post.");
         }
     }
 
@@ -4391,10 +3737,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CGunTarget::Wait::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CGunTarget::Wait::Pre.");
         }
     }
 
@@ -4411,10 +3754,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CGunTarget::Wait::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CGunTarget::Wait::Post.");
         }
     }
 
@@ -4431,10 +3771,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CHostage::HostageThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CHostage::HostageThink::Pre.");
         }
     }
 
@@ -4451,10 +3788,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CHostage::HostageThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CHostage::HostageThink::Post.");
         }
     }
 
@@ -4471,10 +3805,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CHostage::HostageUse::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CHostage::HostageUse::Pre.");
         }
     }
 
@@ -4491,10 +3822,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CHostage::HostageUse::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CHostage::HostageUse::Post.");
         }
     }
 
@@ -4511,10 +3839,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CHostageRescueZone::HostageRescueTouch::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CHostageRescueZone::HostageRescueTouch::Pre.");
         }
     }
 
@@ -4531,10 +3856,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CHostageRescueZone::HostageRescueTouch::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CHostageRescueZone::HostageRescueTouch::Post.");
         }
     }
 
@@ -4551,10 +3873,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CInferno::InfernoThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CInferno::InfernoThink::Pre.");
         }
     }
 
@@ -4571,10 +3890,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CInferno::InfernoThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CInferno::InfernoThink::Post.");
         }
     }
 
@@ -4591,10 +3907,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CInfoSpawnGroupLoadUnload::SpawnGroupLoadingThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CInfoSpawnGroupLoadUnload::SpawnGroupLoadingThink::Pre.");
         }
     }
 
@@ -4611,10 +3924,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CInfoSpawnGroupLoadUnload::SpawnGroupLoadingThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CInfoSpawnGroupLoadUnload::SpawnGroupLoadingThink::Post.");
         }
     }
 
@@ -4631,10 +3941,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CInfoSpawnGroupLoadUnload::SpawnGroupUnloadingThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CInfoSpawnGroupLoadUnload::SpawnGroupUnloadingThink::Pre.");
         }
     }
 
@@ -4651,10 +3958,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CInfoSpawnGroupLoadUnload::SpawnGroupUnloadingThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CInfoSpawnGroupLoadUnload::SpawnGroupUnloadingThink::Post.");
         }
     }
 
@@ -4671,10 +3975,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CItem::ComeToRest::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CItem::ComeToRest::Pre.");
         }
     }
 
@@ -4691,10 +3992,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CItem::ComeToRest::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CItem::ComeToRest::Post.");
         }
     }
 
@@ -4711,10 +4009,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CItem::ItemTouch::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CItem::ItemTouch::Pre.");
         }
     }
 
@@ -4731,10 +4026,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CItem::ItemTouch::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CItem::ItemTouch::Post.");
         }
     }
 
@@ -4751,10 +4043,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CItem::Materialize::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CItem::Materialize::Pre.");
         }
     }
 
@@ -4771,10 +4060,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CItem::Materialize::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CItem::Materialize::Post.");
         }
     }
 
@@ -4791,10 +4077,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CItemDefuser::ActivateThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CItemDefuser::ActivateThink::Pre.");
         }
     }
 
@@ -4811,10 +4094,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CItemDefuser::ActivateThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CItemDefuser::ActivateThink::Post.");
         }
     }
 
@@ -4831,10 +4111,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CItemDefuser::DefuserTouch::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CItemDefuser::DefuserTouch::Pre.");
         }
     }
 
@@ -4851,10 +4128,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CItemDefuser::DefuserTouch::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CItemDefuser::DefuserTouch::Post.");
         }
     }
 
@@ -4871,10 +4145,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CItemGeneric::ItemGenericTouch::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CItemGeneric::ItemGenericTouch::Pre.");
         }
     }
 
@@ -4891,10 +4162,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CItemGeneric::ItemGenericTouch::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CItemGeneric::ItemGenericTouch::Post.");
         }
     }
 
@@ -4911,10 +4179,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CItemGenericTriggerHelper::ItemGenericTriggerHelperTouch::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CItemGenericTriggerHelper::ItemGenericTriggerHelperTouch::Pre.");
         }
     }
 
@@ -4931,10 +4196,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CItemGenericTriggerHelper::ItemGenericTriggerHelperTouch::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CItemGenericTriggerHelper::ItemGenericTriggerHelperTouch::Post.");
         }
     }
 
@@ -4951,10 +4213,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CItemSoda::CanThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CItemSoda::CanThink::Pre.");
         }
     }
 
@@ -4971,10 +4230,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CItemSoda::CanThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CItemSoda::CanThink::Post.");
         }
     }
 
@@ -4991,10 +4247,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CLogicActiveAutosave::SaveThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CLogicActiveAutosave::SaveThink::Pre.");
         }
     }
 
@@ -5011,10 +4264,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CLogicActiveAutosave::SaveThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CLogicActiveAutosave::SaveThink::Post.");
         }
     }
 
@@ -5031,10 +4281,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CLogicDistanceAutosave::SaveThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CLogicDistanceAutosave::SaveThink::Pre.");
         }
     }
 
@@ -5051,10 +4298,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CLogicDistanceAutosave::SaveThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CLogicDistanceAutosave::SaveThink::Post.");
         }
     }
 
@@ -5071,10 +4315,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CLogicGameStateReport::SetGameStateReportThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CLogicGameStateReport::SetGameStateReportThink::Pre.");
         }
     }
 
@@ -5091,10 +4332,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CLogicGameStateReport::SetGameStateReportThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CLogicGameStateReport::SetGameStateReportThink::Post.");
         }
     }
 
@@ -5111,10 +4349,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CLogicMeasureMovement::MeasureThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CLogicMeasureMovement::MeasureThink::Pre.");
         }
     }
 
@@ -5131,10 +4366,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CLogicMeasureMovement::MeasureThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CLogicMeasureMovement::MeasureThink::Post.");
         }
     }
 
@@ -5151,10 +4383,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CLogicNPCCounter::SetNPCCounterThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CLogicNPCCounter::SetNPCCounterThink::Pre.");
         }
     }
 
@@ -5171,10 +4400,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CLogicNPCCounter::SetNPCCounterThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CLogicNPCCounter::SetNPCCounterThink::Post.");
         }
     }
 
@@ -5191,10 +4417,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CMapVetoPickController::VoteControllerThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CMapVetoPickController::VoteControllerThink::Pre.");
         }
     }
 
@@ -5211,10 +4434,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CMapVetoPickController::VoteControllerThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CMapVetoPickController::VoteControllerThink::Post.");
         }
     }
 
@@ -5231,10 +4451,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CMomentaryRotButton::ReturnMoveDone::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CMomentaryRotButton::ReturnMoveDone::Pre.");
         }
     }
 
@@ -5251,10 +4468,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CMomentaryRotButton::ReturnMoveDone::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CMomentaryRotButton::ReturnMoveDone::Post.");
         }
     }
 
@@ -5271,10 +4485,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CMomentaryRotButton::SetPositionMoveDone::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CMomentaryRotButton::SetPositionMoveDone::Pre.");
         }
     }
 
@@ -5291,10 +4502,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CMomentaryRotButton::SetPositionMoveDone::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CMomentaryRotButton::SetPositionMoveDone::Post.");
         }
     }
 
@@ -5311,10 +4519,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CMomentaryRotButton::UpdateThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CMomentaryRotButton::UpdateThink::Pre.");
         }
     }
 
@@ -5331,10 +4536,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CMomentaryRotButton::UpdateThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CMomentaryRotButton::UpdateThink::Post.");
         }
     }
 
@@ -5351,10 +4553,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CMomentaryRotButton::UseMoveDone::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CMomentaryRotButton::UseMoveDone::Pre.");
         }
     }
 
@@ -5371,10 +4570,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CMomentaryRotButton::UseMoveDone::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CMomentaryRotButton::UseMoveDone::Post.");
         }
     }
 
@@ -5391,10 +4587,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CMultiLightProxy::ApproachBrightnessThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CMultiLightProxy::ApproachBrightnessThink::Pre.");
         }
     }
 
@@ -5411,10 +4604,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CMultiLightProxy::ApproachBrightnessThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CMultiLightProxy::ApproachBrightnessThink::Post.");
         }
     }
 
@@ -5431,10 +4621,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CMultiLightProxy::RestoreFlashlightThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CMultiLightProxy::RestoreFlashlightThink::Pre.");
         }
     }
 
@@ -5451,10 +4638,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CMultiLightProxy::RestoreFlashlightThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CMultiLightProxy::RestoreFlashlightThink::Post.");
         }
     }
 
@@ -5471,10 +4655,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CMultiSource::Register::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CMultiSource::Register::Pre.");
         }
     }
 
@@ -5491,10 +4672,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CMultiSource::Register::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CMultiSource::Register::Post.");
         }
     }
 
@@ -5511,10 +4689,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CParticleSystem::StartParticleSystemThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CParticleSystem::StartParticleSystemThink::Pre.");
         }
     }
 
@@ -5531,10 +4706,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CParticleSystem::StartParticleSystemThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CParticleSystem::StartParticleSystemThink::Post.");
         }
     }
 
@@ -5551,10 +4723,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPathMoverEntitySpawner::DebugThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPathMoverEntitySpawner::DebugThink::Pre.");
         }
     }
 
@@ -5571,10 +4740,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPathMoverEntitySpawner::DebugThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPathMoverEntitySpawner::DebugThink::Post.");
         }
     }
 
@@ -5591,10 +4757,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPathMoverEntitySpawner::SpawnThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPathMoverEntitySpawner::SpawnThink::Pre.");
         }
     }
 
@@ -5611,10 +4774,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPathMoverEntitySpawner::SpawnThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPathMoverEntitySpawner::SpawnThink::Post.");
         }
     }
 
@@ -5631,10 +4791,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPathNode::ParentedMoveThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPathNode::ParentedMoveThink::Pre.");
         }
     }
 
@@ -5651,10 +4808,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPathNode::ParentedMoveThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPathNode::ParentedMoveThink::Post.");
         }
     }
 
@@ -5671,10 +4825,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysForce::ForceOff::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysForce::ForceOff::Pre.");
         }
     }
 
@@ -5691,10 +4842,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysForce::ForceOff::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysForce::ForceOff::Post.");
         }
     }
 
@@ -5711,10 +4859,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysForce::InitialThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysForce::InitialThink::Pre.");
         }
     }
 
@@ -5731,10 +4876,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysForce::InitialThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysForce::InitialThink::Post.");
         }
     }
 
@@ -5751,10 +4893,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysHinge::LimitThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysHinge::LimitThink::Pre.");
         }
     }
 
@@ -5771,10 +4910,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysHinge::LimitThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysHinge::LimitThink::Post.");
         }
     }
 
@@ -5791,10 +4927,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysHinge::MoveThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysHinge::MoveThink::Pre.");
         }
     }
 
@@ -5811,10 +4944,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysHinge::MoveThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysHinge::MoveThink::Post.");
         }
     }
 
@@ -5831,10 +4961,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysHinge::SoundThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysHinge::SoundThink::Pre.");
         }
     }
 
@@ -5851,10 +4978,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysHinge::SoundThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysHinge::SoundThink::Post.");
         }
     }
 
@@ -5871,10 +4995,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysImpact::PointAtEntity::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysImpact::PointAtEntity::Pre.");
         }
     }
 
@@ -5891,10 +5012,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysImpact::PointAtEntity::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysImpact::PointAtEntity::Post.");
         }
     }
 
@@ -5911,10 +5029,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysSlideConstraint::SoundThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysSlideConstraint::SoundThink::Pre.");
         }
     }
 
@@ -5931,10 +5046,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysSlideConstraint::SoundThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysSlideConstraint::SoundThink::Post.");
         }
     }
 
@@ -5951,10 +5063,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::ButtonActivate::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::ButtonActivate::Pre.");
         }
     }
 
@@ -5971,10 +5080,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::ButtonActivate::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::ButtonActivate::Post.");
         }
     }
 
@@ -5991,10 +5097,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::ButtonBackHome::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::ButtonBackHome::Pre.");
         }
     }
 
@@ -6011,10 +5114,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::ButtonBackHome::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::ButtonBackHome::Post.");
         }
     }
 
@@ -6031,10 +5131,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::ButtonReturn::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::ButtonReturn::Pre.");
         }
     }
 
@@ -6051,10 +5148,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::ButtonReturn::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::ButtonReturn::Post.");
         }
     }
 
@@ -6071,10 +5165,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::ButtonTouch::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::ButtonTouch::Pre.");
         }
     }
 
@@ -6091,10 +5182,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::ButtonTouch::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::ButtonTouch::Post.");
         }
     }
 
@@ -6111,10 +5199,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::EndTouch::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::EndTouch::Pre.");
         }
     }
 
@@ -6131,10 +5216,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::EndTouch::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::EndTouch::Post.");
         }
     }
 
@@ -6151,10 +5233,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::PhysicsThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::PhysicsThink::Pre.");
         }
     }
 
@@ -6171,10 +5250,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::PhysicsThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::PhysicsThink::Post.");
         }
     }
 
@@ -6191,10 +5267,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::SetupButton::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::SetupButton::Pre.");
         }
     }
 
@@ -6211,10 +5284,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::SetupButton::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::SetupButton::Post.");
         }
     }
 
@@ -6231,10 +5301,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::TriggerAndWait::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::TriggerAndWait::Pre.");
         }
     }
 
@@ -6251,10 +5318,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::TriggerAndWait::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicalButton::TriggerAndWait::Post.");
         }
     }
 
@@ -6271,10 +5335,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicsProp::ClearFlagsThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicsProp::ClearFlagsThink::Pre.");
         }
     }
 
@@ -6291,10 +5352,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicsProp::ClearFlagsThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicsProp::ClearFlagsThink::Post.");
         }
     }
 
@@ -6311,10 +5369,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicsProp::ClearThrownByPlayerThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicsProp::ClearThrownByPlayerThink::Pre.");
         }
     }
 
@@ -6331,10 +5386,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicsProp::ClearThrownByPlayerThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicsProp::ClearThrownByPlayerThink::Post.");
         }
     }
 
@@ -6351,10 +5403,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicsPropRespawnable::Materialize::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicsPropRespawnable::Materialize::Pre.");
         }
     }
 
@@ -6371,10 +5420,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicsPropRespawnable::Materialize::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPhysicsPropRespawnable::Materialize::Post.");
         }
     }
 
@@ -6391,10 +5437,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPlantedC4::C4Think::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPlantedC4::C4Think::Pre.");
         }
     }
 
@@ -6411,10 +5454,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPlantedC4::C4Think::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPlantedC4::C4Think::Post.");
         }
     }
 
@@ -6431,10 +5471,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPointCommentaryNode::AcculumatePlayTimeThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPointCommentaryNode::AcculumatePlayTimeThink::Pre.");
         }
     }
 
@@ -6451,10 +5488,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPointCommentaryNode::AcculumatePlayTimeThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPointCommentaryNode::AcculumatePlayTimeThink::Post.");
         }
     }
 
@@ -6471,10 +5505,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPointCommentaryNode::SpinThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPointCommentaryNode::SpinThink::Pre.");
         }
     }
 
@@ -6491,10 +5522,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPointCommentaryNode::SpinThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPointCommentaryNode::SpinThink::Post.");
         }
     }
 
@@ -6511,10 +5539,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPointCommentaryNode::UpdateViewPostThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPointCommentaryNode::UpdateViewPostThink::Pre.");
         }
     }
 
@@ -6531,10 +5556,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPointCommentaryNode::UpdateViewPostThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPointCommentaryNode::UpdateViewPostThink::Post.");
         }
     }
 
@@ -6551,10 +5573,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPointCommentaryNode::UpdateViewThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPointCommentaryNode::UpdateViewThink::Pre.");
         }
     }
 
@@ -6571,10 +5590,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPointCommentaryNode::UpdateViewThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPointCommentaryNode::UpdateViewThink::Post.");
         }
     }
 
@@ -6591,10 +5607,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPointHurt::HurtThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPointHurt::HurtThink::Pre.");
         }
     }
 
@@ -6611,10 +5624,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPointHurt::HurtThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPointHurt::HurtThink::Post.");
         }
     }
 
@@ -6631,10 +5641,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPointOrient::ReorientThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPointOrient::ReorientThink::Pre.");
         }
     }
 
@@ -6651,10 +5658,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPointOrient::ReorientThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPointOrient::ReorientThink::Post.");
         }
     }
 
@@ -6671,10 +5675,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPointPush::PushThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPointPush::PushThink::Pre.");
         }
     }
 
@@ -6691,10 +5692,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPointPush::PushThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPointPush::PushThink::Post.");
         }
     }
 
@@ -6711,10 +5709,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPointValueRemapper::UpdateThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPointValueRemapper::UpdateThink::Pre.");
         }
     }
 
@@ -6731,10 +5726,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CPointValueRemapper::UpdateThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CPointValueRemapper::UpdateThink::Post.");
         }
     }
 
@@ -6751,10 +5743,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CRagdollProp::AttachedItemsThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CRagdollProp::AttachedItemsThink::Pre.");
         }
     }
 
@@ -6771,10 +5760,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CRagdollProp::AttachedItemsThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CRagdollProp::AttachedItemsThink::Post.");
         }
     }
 
@@ -6791,10 +5777,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CRagdollProp::ClearFlagsThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CRagdollProp::ClearFlagsThink::Pre.");
         }
     }
 
@@ -6811,10 +5794,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CRagdollProp::ClearFlagsThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CRagdollProp::ClearFlagsThink::Post.");
         }
     }
 
@@ -6831,10 +5811,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CRagdollProp::FadeOutThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CRagdollProp::FadeOutThink::Pre.");
         }
     }
 
@@ -6851,10 +5828,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CRagdollProp::FadeOutThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CRagdollProp::FadeOutThink::Post.");
         }
     }
 
@@ -6871,10 +5845,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CRagdollProp::SetDebrisThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CRagdollProp::SetDebrisThink::Pre.");
         }
     }
 
@@ -6891,10 +5862,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CRagdollProp::SetDebrisThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CRagdollProp::SetDebrisThink::Post.");
         }
     }
 
@@ -6911,10 +5879,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CRagdollProp::SettleThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CRagdollProp::SettleThink::Pre.");
         }
     }
 
@@ -6931,10 +5896,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CRagdollProp::SettleThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CRagdollProp::SettleThink::Post.");
         }
     }
 
@@ -6951,10 +5913,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CRevertSaved::LoadThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CRevertSaved::LoadThink::Pre.");
         }
     }
 
@@ -6971,10 +5930,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CRevertSaved::LoadThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CRevertSaved::LoadThink::Post.");
         }
     }
 
@@ -6991,10 +5947,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CScriptedSequence::ScriptThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CScriptedSequence::ScriptThink::Pre.");
         }
     }
 
@@ -7011,10 +5964,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CScriptedSequence::ScriptThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CScriptedSequence::ScriptThink::Post.");
         }
     }
 
@@ -7031,10 +5981,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSmokeGrenadeProjectile::Think_BuildingSmokeVolume::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSmokeGrenadeProjectile::Think_BuildingSmokeVolume::Pre.");
         }
     }
 
@@ -7051,10 +5998,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSmokeGrenadeProjectile::Think_BuildingSmokeVolume::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSmokeGrenadeProjectile::Think_BuildingSmokeVolume::Post.");
         }
     }
 
@@ -7071,10 +6015,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSmokeGrenadeProjectile::Think_Detonate::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSmokeGrenadeProjectile::Think_Detonate::Pre.");
         }
     }
 
@@ -7091,10 +6032,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSmokeGrenadeProjectile::Think_Detonate::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSmokeGrenadeProjectile::Think_Detonate::Post.");
         }
     }
 
@@ -7111,10 +6049,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSmokeGrenadeProjectile::Think_Remove::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSmokeGrenadeProjectile::Think_Remove::Pre.");
         }
     }
 
@@ -7131,10 +6066,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSmokeGrenadeProjectile::Think_Remove::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSmokeGrenadeProjectile::Think_Remove::Post.");
         }
     }
 
@@ -7151,10 +6083,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSmokeGrenadeProjectile::Think_Update::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSmokeGrenadeProjectile::Think_Update::Pre.");
         }
     }
 
@@ -7171,10 +6100,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSmokeGrenadeProjectile::Think_Update::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSmokeGrenadeProjectile::Think_Update::Post.");
         }
     }
 
@@ -7191,10 +6117,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundEventConeEntity::SoundEventConeThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundEventConeEntity::SoundEventConeThink::Pre.");
         }
     }
 
@@ -7211,10 +6134,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundEventConeEntity::SoundEventConeThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundEventConeEntity::SoundEventConeThink::Post.");
         }
     }
 
@@ -7231,10 +6151,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundEventEntity::SoundFinishedThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundEventEntity::SoundFinishedThink::Pre.");
         }
     }
 
@@ -7251,10 +6168,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundEventEntity::SoundFinishedThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundEventEntity::SoundFinishedThink::Post.");
         }
     }
 
@@ -7271,10 +6185,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundEventMultiPointEntity::MultiPointThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundEventMultiPointEntity::MultiPointThink::Pre.");
         }
     }
 
@@ -7291,10 +6202,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundEventMultiPointEntity::MultiPointThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundEventMultiPointEntity::MultiPointThink::Post.");
         }
     }
 
@@ -7311,10 +6219,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundEventOBBEntity::SoundEventOBBThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundEventOBBEntity::SoundEventOBBThink::Pre.");
         }
     }
 
@@ -7331,10 +6236,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundEventOBBEntity::SoundEventOBBThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundEventOBBEntity::SoundEventOBBThink::Post.");
         }
     }
 
@@ -7351,10 +6253,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundEventSphereEntity::SoundEventSphereThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundEventSphereEntity::SoundEventSphereThink::Pre.");
         }
     }
 
@@ -7371,10 +6270,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundEventSphereEntity::SoundEventSphereThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundEventSphereEntity::SoundEventSphereThink::Post.");
         }
     }
 
@@ -7391,10 +6287,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundOpvarSetAutoRoomEntity::SetOpvarThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundOpvarSetAutoRoomEntity::SetOpvarThink::Pre.");
         }
     }
 
@@ -7411,10 +6304,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundOpvarSetAutoRoomEntity::SetOpvarThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundOpvarSetAutoRoomEntity::SetOpvarThink::Post.");
         }
     }
 
@@ -7431,10 +6321,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundOpvarSetBoxEntity::SetOpvarThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundOpvarSetBoxEntity::SetOpvarThink::Pre.");
         }
     }
 
@@ -7451,10 +6338,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundOpvarSetBoxEntity::SetOpvarThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundOpvarSetBoxEntity::SetOpvarThink::Post.");
         }
     }
 
@@ -7471,10 +6355,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundOpvarSetDomeEntity::SetOpvarThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundOpvarSetDomeEntity::SetOpvarThink::Pre.");
         }
     }
 
@@ -7491,10 +6372,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundOpvarSetDomeEntity::SetOpvarThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundOpvarSetDomeEntity::SetOpvarThink::Post.");
         }
     }
 
@@ -7511,10 +6389,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundOpvarSetOBBWindEntity::SetOpvarThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundOpvarSetOBBWindEntity::SetOpvarThink::Pre.");
         }
     }
 
@@ -7531,10 +6406,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundOpvarSetOBBWindEntity::SetOpvarThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundOpvarSetOBBWindEntity::SetOpvarThink::Post.");
         }
     }
 
@@ -7551,10 +6423,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundOpvarSetPathCornerEntity::SetOpvarThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundOpvarSetPathCornerEntity::SetOpvarThink::Pre.");
         }
     }
 
@@ -7571,10 +6440,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundOpvarSetPathCornerEntity::SetOpvarThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundOpvarSetPathCornerEntity::SetOpvarThink::Post.");
         }
     }
 
@@ -7591,10 +6457,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundOpvarSetPointBase::SetOpvarThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundOpvarSetPointBase::SetOpvarThink::Pre.");
         }
     }
 
@@ -7611,10 +6474,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundOpvarSetPointBase::SetOpvarThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundOpvarSetPointBase::SetOpvarThink::Post.");
         }
     }
 
@@ -7631,10 +6491,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundOpvarSetPointEntity::SetOpvarThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundOpvarSetPointEntity::SetOpvarThink::Pre.");
         }
     }
 
@@ -7651,10 +6508,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundOpvarSetPointEntity::SetOpvarThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSoundOpvarSetPointEntity::SetOpvarThink::Post.");
         }
     }
 
@@ -7671,10 +6525,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSplineConstraint::TransitionThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSplineConstraint::TransitionThink::Pre.");
         }
     }
 
@@ -7691,10 +6542,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSplineConstraint::TransitionThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSplineConstraint::TransitionThink::Post.");
         }
     }
 
@@ -7711,10 +6559,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSprite::AnimateThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSprite::AnimateThink::Pre.");
         }
     }
 
@@ -7731,10 +6576,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSprite::AnimateThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSprite::AnimateThink::Post.");
         }
     }
 
@@ -7751,10 +6593,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSprite::AnimateUntilDead::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSprite::AnimateUntilDead::Pre.");
         }
     }
 
@@ -7771,10 +6610,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSprite::AnimateUntilDead::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSprite::AnimateUntilDead::Post.");
         }
     }
 
@@ -7791,10 +6627,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSprite::BeginFadeOutThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSprite::BeginFadeOutThink::Pre.");
         }
     }
 
@@ -7811,10 +6644,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSprite::BeginFadeOutThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSprite::BeginFadeOutThink::Post.");
         }
     }
 
@@ -7831,10 +6661,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSprite::ExpandThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSprite::ExpandThink::Pre.");
         }
     }
 
@@ -7851,10 +6678,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CSprite::ExpandThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CSprite::ExpandThink::Post.");
         }
     }
 
@@ -7871,10 +6695,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerActiveWeaponDetect::ActiveWeaponThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerActiveWeaponDetect::ActiveWeaponThink::Pre.");
         }
     }
 
@@ -7891,10 +6712,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerActiveWeaponDetect::ActiveWeaponThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerActiveWeaponDetect::ActiveWeaponThink::Post.");
         }
     }
 
@@ -7911,10 +6729,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerFan::PushThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerFan::PushThink::Pre.");
         }
     }
 
@@ -7931,10 +6746,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerFan::PushThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerFan::PushThink::Post.");
         }
     }
 
@@ -7951,10 +6763,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerGravity::GravityTouch::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerGravity::GravityTouch::Pre.");
         }
     }
 
@@ -7971,10 +6780,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerGravity::GravityTouch::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerGravity::GravityTouch::Post.");
         }
     }
 
@@ -7991,10 +6797,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerHurt::HurtThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerHurt::HurtThink::Pre.");
         }
     }
 
@@ -8011,10 +6814,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerHurt::HurtThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerHurt::HurtThink::Post.");
         }
     }
 
@@ -8031,10 +6831,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerHurt::NavThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerHurt::NavThink::Pre.");
         }
     }
 
@@ -8051,10 +6848,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerHurt::NavThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerHurt::NavThink::Post.");
         }
     }
 
@@ -8071,10 +6865,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerHurt::RadiationThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerHurt::RadiationThink::Pre.");
         }
     }
 
@@ -8091,10 +6882,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerHurt::RadiationThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerHurt::RadiationThink::Post.");
         }
     }
 
@@ -8111,10 +6899,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerImpact::DisableThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerImpact::DisableThink::Pre.");
         }
     }
 
@@ -8131,10 +6916,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerImpact::DisableThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerImpact::DisableThink::Post.");
         }
     }
 
@@ -8151,10 +6933,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerLerpObject::AttachedEntityThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerLerpObject::AttachedEntityThink::Pre.");
         }
     }
 
@@ -8171,10 +6950,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerLerpObject::AttachedEntityThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerLerpObject::AttachedEntityThink::Post.");
         }
     }
 
@@ -8191,10 +6967,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerLerpObject::LerpThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerLerpObject::LerpThink::Pre.");
         }
     }
 
@@ -8211,10 +6984,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerLerpObject::LerpThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerLerpObject::LerpThink::Post.");
         }
     }
 
@@ -8231,10 +7001,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerLerpObject::UnsetWaitForEntity::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerLerpObject::UnsetWaitForEntity::Pre.");
         }
     }
 
@@ -8251,10 +7018,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerLerpObject::UnsetWaitForEntity::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerLerpObject::UnsetWaitForEntity::Post.");
         }
     }
 
@@ -8271,10 +7035,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerLook::TimeoutThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerLook::TimeoutThink::Pre.");
         }
     }
 
@@ -8291,10 +7052,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerLook::TimeoutThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerLook::TimeoutThink::Post.");
         }
     }
 
@@ -8311,10 +7069,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerMultiple::MultiTouch::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerMultiple::MultiTouch::Pre.");
         }
     }
 
@@ -8331,10 +7086,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerMultiple::MultiTouch::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerMultiple::MultiTouch::Post.");
         }
     }
 
@@ -8351,10 +7103,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerMultiple::MultiWaitOver::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerMultiple::MultiWaitOver::Pre.");
         }
     }
 
@@ -8371,10 +7120,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerMultiple::MultiWaitOver::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerMultiple::MultiWaitOver::Post.");
         }
     }
 
@@ -8391,10 +7137,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerProximity::MeasureThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerProximity::MeasureThink::Pre.");
         }
     }
 
@@ -8411,10 +7154,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerProximity::MeasureThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerProximity::MeasureThink::Post.");
         }
     }
 
@@ -8431,10 +7171,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerSave::RetriggerWaitOver::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerSave::RetriggerWaitOver::Pre.");
         }
     }
 
@@ -8451,10 +7188,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerSave::RetriggerWaitOver::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerSave::RetriggerWaitOver::Post.");
         }
     }
 
@@ -8471,10 +7205,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerSndSosOpvar::SndSosTriggerOpvarWaitOver::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerSndSosOpvar::SndSosTriggerOpvarWaitOver::Pre.");
         }
     }
 
@@ -8491,10 +7222,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerSndSosOpvar::SndSosTriggerOpvarWaitOver::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerSndSosOpvar::SndSosTriggerOpvarWaitOver::Post.");
         }
     }
 
@@ -8511,10 +7239,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerSoundscape::PlayerUpdateThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerSoundscape::PlayerUpdateThink::Pre.");
         }
     }
 
@@ -8531,10 +7256,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerSoundscape::PlayerUpdateThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CTriggerSoundscape::PlayerUpdateThink::Post.");
         }
     }
 
@@ -8551,10 +7273,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CVoteController::VoteControllerThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CVoteController::VoteControllerThink::Pre.");
         }
     }
 
@@ -8571,10 +7290,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CVoteController::VoteControllerThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CVoteController::VoteControllerThink::Post.");
         }
     }
 
@@ -8591,10 +7307,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CWaterBullet::BulletThink::Pre.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CWaterBullet::BulletThink::Pre.");
         }
     }
 
@@ -8611,10 +7324,7 @@ internal sealed partial class GameHooksService
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                logger.LogError(e, "Error invoking GameHooks::Datamaps::CWaterBullet::BulletThink::Post.");
-            }
+            logger.LogError(e, "Error invoking GameHooks::Datamaps::CWaterBullet::BulletThink::Post.");
         }
     }
 

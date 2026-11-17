@@ -25,7 +25,6 @@
 #include <api/interfaces/interfaces.h>
 #include <api/memory/hooks/manager.h>
 #include <api/scripting/scripting.h>
-#include <api/shared/env.h>
 #include <api/shared/plat.h>
 #include <api/shared/profiler.h>
 #include <api/shared/string.h>
@@ -38,6 +37,7 @@
 #include <memory/hooks/vfunction.h>
 
 #include <monitor/consolelogger/consolelogger.h>
+#include <monitor/logger/logger.h>
 
 #include <public/engine2/igameeventsystem.h>
 #include <public/engine2/ivengineserver2.h>
@@ -54,21 +54,11 @@
 #include <thread>
 
 SwiftlyCore g_SwiftlyCore;
+GlobalState g_GlobalState {};
 std::thread::id g_mainThreadId;
 
 static CreateIFaceFn g_pServerFactory = nullptr;
 static CreateIFaceFn g_pEngineFactory = nullptr;
-
-std::string workshop_map;
-std::mutex g_qmMapLoadQueue;
-
-static std::string s_currentMap;
-
-static void GameServerSteamAPIActivatedHook(void* _this);
-static bool LoopInitHook(void* _this, KeyValues* pKeyValues, void* pRegistry);
-
-static VFunctionHook g_GameServerSteamAPIActivated(reinterpret_cast<void*>(GameServerSteamAPIActivatedHook), "server", "CSource2Server", "IServerGameDLL::GameServerSteamAPIActivated");
-static VFunctionHook g_LoopInitHook(reinterpret_cast<void*>(LoopInitHook), "engine2", "CLoopModeLevelLoad", "ILoopMode::LoopInit");
 
 static constexpr std::string_view kPathSeparator = WIN_LINUX("\\", "/");
 static constexpr std::string_view kDefaultCorePath = WIN_LINUX("addons\\swiftlys2", "addons/swiftlys2");
@@ -78,6 +68,15 @@ static void EnsureTrailingSeparator(std::string& path)
 {
     if (!path.ends_with(kPathSeparator))
         path += kPathSeparator;
+}
+
+template <class T>
+[[nodiscard]] static T ConfigValueOr(const char* key, T fallback)
+{
+    if (const T* value = std::get_if<T>(&g_pConfiguration->GetValue(key)))
+        return *value;
+
+    return fallback;
 }
 
 [[nodiscard]] static std::string GameRelativePath(const std::string& relative)
@@ -126,11 +125,11 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
     SetGlobalCvarObject(g_pGameCvar);
     ConVar_Register(CVarFlags::RELEASE | CVarFlags::SERVER_CAN_EXECUTE | CVarFlags::CLIENT_CAN_EXECUTE | CVarFlags::GAMEDLL, nullptr, nullptr);
 
-    if (const char* logLevel = CommandLine()->ParmValue(CUtlStringToken("-sw_loglevel")))
-        putenv("SWIFTLY_LOG_LEVEL", logLevel, 1);
+    const char* logLevel = CommandLine()->ParmValue(CUtlStringToken("-sw_loglevel"));
+    if (logLevel)
+        Logger::SetMinLevel(logLevel);
 
-    if (const char* hideLogInConsole = CommandLine()->ParmValue(CUtlStringToken("-sw_hide_logs_in_console")))
-        putenv("SWIFTLY_HIDE_LOG_IN_CONSOLE", hideLogInConsole, 1);
+    const char* hideLogInConsole = CommandLine()->ParmValue(CUtlStringToken("-sw_hide_logs_in_console"));
 
     if (GetCurrentGame() == "unknown")
     {
@@ -221,10 +220,32 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
     if (const int* interval = std::get_if<int>(&g_pConfiguration->GetValue("core.ConsoleLogger.WriteIntervalMs")))
         managedLogInterval = (*interval > 0) ? *interval : 2000;
 
-    putenv("SWIFTLY_MANAGED_LOG_ENABLE", managedLogEnabled ? "1" : "0", 1);
-    putenv("SWIFTLY_MANAGED_LOG_INTERVAL_MS", std::to_string(managedLogInterval).c_str(), 1);
+    const std::string hide = hideLogInConsole ? str_toupper(hideLogInConsole) : "";
+    static std::string s_logPath;
+    s_logPath = GameRelativePath(m_sLogPath);
 
-    if (!InitializeDotNetAPI(g_pScriptingAPI->GetNativeFunctions(), g_pScriptingAPI->GetNativeFunctionsCount(), GameRelativePath(m_sLogPath)))
+    g_GlobalState.logPath = s_logPath.c_str();
+    g_GlobalState.logLevel = logLevel;
+    g_GlobalState.hideLogInConsole = (hide == "1" || hide == "TRUE" || hide == "YES");
+    g_GlobalState.managedLogEnabled = managedLogEnabled;
+    g_GlobalState.managedLogIntervalMs = managedLogInterval;
+
+    static std::string s_pluginLoadOrder;
+    static std::string s_serverLanguage;
+    s_pluginLoadOrder = ConfigValueOr<std::string>("core.PluginLoadOrder", "");
+    s_serverLanguage = ConfigValueOr<std::string>("core.Language", "en");
+
+    g_GlobalState.profilerLevel = ConfigValueOr<int>("core.ProfilerLevel", 0);
+    g_GlobalState.pluginManualLoadState = ConfigValueOr<bool>("core.ManualLoadPlugins", false);
+    g_GlobalState.pluginLoadOrder = s_pluginLoadOrder.c_str();
+    g_GlobalState.serverLanguage = s_serverLanguage.c_str();
+    g_GlobalState.followingServerGuidelines = ConfigValueOr<bool>(std::format("core.Follow{}ServerGuidelines", str_toupper(GetCurrentGame())).c_str(), true);
+    g_GlobalState.usePlayerLanguage = ConfigValueOr<bool>("core.UsePlayerLanguage", true);
+    g_GlobalState.useAutoHotReload = ConfigValueOr<bool>("core.AutoHotReload", true);
+    g_GlobalState.steamAuthMode = ConfigValueOr<std::string>("core.SteamAuth.Mode", "flexible") == "strict" ? SteamAuthMode::Strict : SteamAuthMode::Flexible;
+    g_GlobalState.s2BinLib = g_pS2BinLib;
+
+    if (!InitializeDotNetAPI(g_pScriptingAPI->GetNativeFunctions(), g_pScriptingAPI->GetNativeFunctionsCount()))
     {
         g_pCrashReporter->ReportPreventionIncident("Managed", "Couldn't initialize the .NET scripting API.");
         return true;
@@ -250,61 +271,6 @@ bool SwiftlyCore::Unload()
     Profiler::Save(m_sLogPath + "profiler.txt");
 
     return true;
-}
-
-static void GameServerSteamAPIActivatedHook(void* _this)
-{
-    PROFILE_FUNCTION();
-
-    if (g_pGameEngine->IsDedicatedServer())
-        g_pPlayerManager->SteamAPIServerActivated();
-
-    PROFILE_PAUSE();
-
-    return reinterpret_cast<decltype(&GameServerSteamAPIActivatedHook)>(g_GameServerSteamAPIActivated.GetOriginal())(_this);
-}
-
-static bool LoopInitHook(void* _this, KeyValues* pKeyValues, void* pRegistry)
-{
-    PROFILE_FUNCTION();
-
-    if (!s_currentMap.empty())
-        g_SwiftlyCore.OnMapUnload();
-
-    PROFILE_PAUSE();
-
-    const bool ret = reinterpret_cast<decltype(&LoopInitHook)>(g_LoopInitHook.GetOriginal())(_this, pKeyValues, pRegistry);
-
-    PROFILE_RESUME();
-
-    {
-        std::scoped_lock lock(g_qmMapLoadQueue);
-        workshop_map = pKeyValues->FindKey("customgamemode") ? pKeyValues->GetString("customgamemode") : "";
-    }
-
-    g_SwiftlyCore.OnMapLoad(pKeyValues->GetString("levelname"));
-
-    return ret;
-}
-
-void SwiftlyCore::OnMapLoad(std::string_view map_name)
-{
-    PROFILE_FUNCTION();
-
-    s_currentMap = map_name;
-
-    if (g_pOnMapLoadCallback)
-        g_pOnMapLoadCallback(s_currentMap.c_str());
-}
-
-void SwiftlyCore::OnMapUnload()
-{
-    PROFILE_FUNCTION();
-
-    if (g_pOnMapUnloadCallback)
-        g_pOnMapUnloadCallback(s_currentMap.c_str());
-
-    s_currentMap.clear();
 }
 
 void* SwiftlyCore::GetInterface(const std::string& interface_name)

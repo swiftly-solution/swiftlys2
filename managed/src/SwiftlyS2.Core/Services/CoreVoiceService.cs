@@ -74,7 +74,7 @@ internal class CoreVoiceService : IDisposable
 
     private void HookSetClientListening()
     {
-        var offset = core.GameData.GetOffset("IVEngineServer2::SetClientListening");
+        var offset = core.GameData.GetOffset("CEngineServer::SetClientListening");
         setClientListening = core.Memory.GetUnmanagedFunctionByVTable<SetClientListening>(core.Memory.GetVTableAddress(Library.Engine, "CEngineServer")!.Value, offset);
         setClientListeningGuid = setClientListening.AddHook(next =>
         {
@@ -94,7 +94,7 @@ internal class CoreVoiceService : IDisposable
 
     private void HookClientCommand()
     {
-        var offset = core.GameData.GetOffset("IServerGameClients::ClientCommand");
+        var offset = core.GameData.GetOffset("CSource2GameClients::ClientCommand");
         clientCommand = core.Memory.GetUnmanagedFunctionByVTable<ClientCommand>(core.Memory.GetVTableAddress(Library.Server, "CSource2GameClients")!.Value, offset);
         clientCommandGuid = clientCommand.AddHook(next =>
         {
@@ -120,7 +120,7 @@ internal class CoreVoiceService : IDisposable
 
     private void HookClientVoice()
     {
-        var offset = core.GameData.GetOffset("IServerGameClients::ClientVoice");
+        var offset = core.GameData.GetOffset("CSource2GameClients::ClientVoice");
         clientVoice = core.Memory.GetUnmanagedFunctionByVTable<ClientVoice>(core.Memory.GetVTableAddress(Library.Server, "CSource2GameClients")!.Value, offset);
         clientVoiceGuid = clientVoice.AddHook(next =>
         {

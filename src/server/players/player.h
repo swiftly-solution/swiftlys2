@@ -39,19 +39,6 @@ public:
 
     virtual void SendMsg(MessageType type, const std::string& message, int duration) override;
 
-    virtual bool IsFakeClient() override;
-    virtual void SetFakeClient(bool state) override;
-    virtual bool IsAuthorized() override;
-
-    virtual uint32_t GetConnectedTime() override;
-
-    virtual void SetUnauthorizedSteamID(uint64_t steamID) override;
-
-    virtual uint64_t GetUnauthorizedSteamID() override;
-    virtual uint64_t GetSteamID() override;
-
-    virtual void ChangeAuthorizationState(bool bAuthorized) override;
-
     virtual void* GetController() override;
     virtual void* GetPawn() override;
     virtual void* GetPlayerPawn() override;
@@ -74,8 +61,6 @@ public:
     virtual void RenderMenuCenterText(const std::string& text) override;
     virtual void ClearRenderMenuCenterText() override;
     virtual bool HasMenuShown() override;
-    virtual bool IsFirstSpawn() override;
-    virtual void SetFirstSpawn(bool state) override;
 
 private:
     void UpdateCenterMessage();
@@ -83,18 +68,9 @@ private:
     void EnsureCenterMessageEvent();
 
     int m_iPlayerId = -1;
-    bool m_bAuthorized = false;
-    bool m_bFirstSpawn = true;
-    bool m_bIsFakeClient = false;
-
 
     BlockedTransmitInfo m_bvBlockedTransmittingEntities = {};
-
     uint64_t m_uPressedButtons = 0;
-
-    std::chrono::steady_clock::time_point m_uConnectedTimeStart;
-
-    uint64_t m_uUnauthorizedSteamID = 0;
 
     std::chrono::steady_clock::time_point m_centerMessageEndTime;
     std::string m_sCenterMessageText;

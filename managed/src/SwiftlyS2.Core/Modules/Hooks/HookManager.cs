@@ -87,17 +87,17 @@ internal class HookManager
             {
                 internalCallback = ( contextPtr ) =>
                 {
-                    try
+                    ref var ctx = ref Unsafe.AsRef<MidHookContext>(contextPtr);
+                    foreach (var n in chain.Nodes)
                     {
-                        ref var ctx = ref Unsafe.AsRef<MidHookContext>(contextPtr);
-                        foreach (var n in chain.Nodes)
+                        try
                         {
                             n.BuiltDelegate(ref ctx);
                         }
-                    }
-                    catch (Exception e)
-                    {
-                        if (!GlobalExceptionHandler.Handle(ref e)) return;
+                        catch (Exception e)
+                        {
+                            AnsiConsole.WriteException(e);
+                        }
                     }
                 };
             }
@@ -213,7 +213,6 @@ internal class HookManager
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e)) return;
             AnsiConsole.WriteException(e);
         }
     }

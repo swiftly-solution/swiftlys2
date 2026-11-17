@@ -24,18 +24,15 @@
 #define DEFINE_EVENT(variable, return_type, ...) return_type(*variable)(__VA_ARGS__)
 
 extern DEFINE_EVENT(g_pOnGameTickCallback, void, bool, bool, bool);
-extern DEFINE_EVENT(g_pOnClientConnectCallback, bool, int);
+extern DEFINE_EVENT(g_pOnClientConnectCallback, bool, int, uint64_t);
 extern DEFINE_EVENT(g_pOnClientDisconnectCallback, void, int, int);
 extern DEFINE_EVENT(g_pOnClientKeyStateChangedCallback, void, int, uint32_t, bool);
-extern DEFINE_EVENT(g_pOnClientPutInServerCallback, void, int, int);
-extern DEFINE_EVENT(g_pOnClientSteamAuthorizeCallback, void, int);
-extern DEFINE_EVENT(g_pOnClientSteamAuthorizeFailCallback, void, int);
+extern DEFINE_EVENT(g_pOnClientPutInServerCallback, void, int, int, bool);
+extern DEFINE_EVENT(g_pOnClientConnectionEstablishedCallback, void, int, bool);
 extern DEFINE_EVENT(g_pOnEntityCreatedCallback, void, void*);
 extern DEFINE_EVENT(g_pOnEntityDeletedCallback, void, void*);
 extern DEFINE_EVENT(g_pOnEntityParentChangedCallback, void, void*, void*);
 extern DEFINE_EVENT(g_pOnEntitySpawnedCallback, void, void*);
-extern DEFINE_EVENT(g_pOnMapLoadCallback, void, const char*);
-extern DEFINE_EVENT(g_pOnMapUnloadCallback, void, const char*);
 extern DEFINE_EVENT(g_pOnPreworldUpdateCallback, void, bool);
 extern DEFINE_EVENT(g_pOnStartupServerCallback, void);
 

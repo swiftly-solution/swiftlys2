@@ -31,6 +31,16 @@ internal static class NativeEvents
         _RegisterOnClientConnectCallback(callback);
     }
 
+    private unsafe static delegate* unmanaged<nint, void> _RegisterOnClientConnectionEstablishedCallback;
+
+    /// <summary>
+    /// int32 playerid, bool isauthorized -> void
+    /// </summary>
+    public unsafe static void RegisterOnClientConnectionEstablishedCallback(nint callback)
+    {
+        _RegisterOnClientConnectionEstablishedCallback(callback);
+    }
+
     private unsafe static delegate* unmanaged<nint, void> _RegisterOnClientDisconnectCallback;
 
     /// <summary>
@@ -54,31 +64,11 @@ internal static class NativeEvents
     private unsafe static delegate* unmanaged<nint, void> _RegisterOnClientPutInServerCallback;
 
     /// <summary>
-    /// int32 playerid, int32 client_kind (0 -> player, 1 -> bot, 2 -> unknown) -> void
+    /// int32 playerid, int32 client_kind (0 -> player, 1 -> bot, 2 -> unknown), bool isauthorized -> void
     /// </summary>
     public unsafe static void RegisterOnClientPutInServerCallback(nint callback)
     {
         _RegisterOnClientPutInServerCallback(callback);
-    }
-
-    private unsafe static delegate* unmanaged<nint, void> _RegisterOnClientSteamAuthorizeCallback;
-
-    /// <summary>
-    /// int32 playerid -> void
-    /// </summary>
-    public unsafe static void RegisterOnClientSteamAuthorizeCallback(nint callback)
-    {
-        _RegisterOnClientSteamAuthorizeCallback(callback);
-    }
-
-    private unsafe static delegate* unmanaged<nint, void> _RegisterOnClientSteamAuthorizeFailCallback;
-
-    /// <summary>
-    /// int32 playerid -> void
-    /// </summary>
-    public unsafe static void RegisterOnClientSteamAuthorizeFailCallback(nint callback)
-    {
-        _RegisterOnClientSteamAuthorizeFailCallback(callback);
     }
 
     private unsafe static delegate* unmanaged<nint, void> _RegisterOnEntityCreatedCallback;
@@ -119,26 +109,6 @@ internal static class NativeEvents
     public unsafe static void RegisterOnEntitySpawnedCallback(nint callback)
     {
         _RegisterOnEntitySpawnedCallback(callback);
-    }
-
-    private unsafe static delegate* unmanaged<nint, void> _RegisterOnMapLoadCallback;
-
-    /// <summary>
-    /// string mapname
-    /// </summary>
-    public unsafe static void RegisterOnMapLoadCallback(nint callback)
-    {
-        _RegisterOnMapLoadCallback(callback);
-    }
-
-    private unsafe static delegate* unmanaged<nint, void> _RegisterOnMapUnloadCallback;
-
-    /// <summary>
-    /// string mapname
-    /// </summary>
-    public unsafe static void RegisterOnMapUnloadCallback(nint callback)
-    {
-        _RegisterOnMapUnloadCallback(callback);
     }
 
     private unsafe static delegate* unmanaged<nint, void> _RegisterOnPreworldUpdateCallback;

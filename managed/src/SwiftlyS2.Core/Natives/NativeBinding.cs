@@ -61,7 +61,6 @@ internal class NativeBinding
             }
             catch (Exception e)
             {
-                if (!GlobalExceptionHandler.Handle(ref e)) return;
                 Console.WriteLine($"Failed to bind native function {currentFunctionName} in class {currentClassname}.");
                 AnsiConsole.WriteException(e);
             }

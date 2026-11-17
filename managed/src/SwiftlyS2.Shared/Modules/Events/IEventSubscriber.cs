@@ -29,6 +29,11 @@ public interface IEventSubscriber
     public event EventDelegates.OnClientConnected? OnClientConnected;
 
     /// <summary>
+    /// Called when a client connection is established.
+    /// </summary>
+    public event EventDelegates.OnClientConnectionEstablished? OnClientConnectionEstablished;
+
+    /// <summary>
     /// Called when a client disconnects from the server.
     /// </summary>
     public event EventDelegates.OnClientDisconnected? OnClientDisconnected;
@@ -204,6 +209,12 @@ public interface IEventSubscriber
 
     /// <summary>
     /// Called when a custom hud element is clicked.
-    /// </summary>    
+    /// </summary>
     public event EventDelegates.OnCustomHudClicked? OnCustomHudClicked;
+
+    /// <summary>
+    /// Called for every candidate while resolving a target in FindTargettedPlayers.
+    /// Lets plugins add their own target selectors or veto candidates.
+    /// </summary>
+    public event EventDelegates.OnFindTargettedPlayers? OnFindTargettedPlayers;
 }

@@ -129,7 +129,6 @@ public sealed class ChoiceMenuOption : MenuOptionBase
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e)) return ValueTask.CompletedTask;
             AnsiConsole.WriteException(e);
         }
 

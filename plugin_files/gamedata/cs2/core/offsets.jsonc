@@ -96,76 +96,76 @@
         "linux": 26
     },
     /* From sdk */
-    "ICvar::DispatchConCommand": {
+    "CCvar::DispatchConCommand": {
         "windows": 20,
         "linux": 20
     },
     /* From sdk */
-    "IServerGameDLL::PreWorldUpdate": {
+    "CSource2Server::PreWorldUpdate": {
         "windows": 15,
         "linux": 15
     },
-    "IServerGameDLL::GameFrame": {
+    "CSource2Server::GameFrame": {
         "windows": 19,
         "linux": 19
     },
-    "IServerGameDLL::GameServerSteamAPIActivated": {
+    "CSource2Server::GameServerSteamAPIActivated": {
         "windows": 41,
         "linux": 41
     },
-    "IGameEventSystem::PostEventAbstract": {
+    "CGameEventSystem::PostEventAbstract": {
         "windows": 16,
         "linux": 15
     },
-    "INetworkServerService::StartupServer": {
+    "CNetworkServerService::StartupServer": {
         "windows": 26,
         "linux": 27
     },
-    "IVEngineServer2::SetClientListening": {
+    "CEngineServer::SetClientListening": {
         "windows": 92,
         "linux": 92
     },
-    "IServerGameClients::ClientCommand": {
+    "CSource2GameClients::ClientCommand": {
         "windows": 17,
         "linux": 17
     },
-    "IServerGameClients::ClientSettingsChanged": {
+    "CSource2GameClients::ClientSettingsChanged": {
         "windows": 19,
         "linux": 19
     },
-    "IServerGameClients::ClientVoice": {
+    "CSource2GameClients::ClientVoice": {
         "windows": 27,
         "linux": 27
     },
-    "IServerGameClients::ClientConnect": {
+    "CSource2GameClients::ClientConnect": {
         "windows": 12,
         "linux": 12
     },
-    "IServerGameClients::OnClientConnected": {
+    "CSource2GameClients::OnClientConnected": {
         "windows": 11,
         "linux": 11
     },
-    "IServerGameClients::ClientDisconnect": {
+    "CSource2GameClients::ClientDisconnect": {
         "windows": 16,
         "linux": 16
     },
-    "IServerGameClients::ClientPutInServer": {
+    "CSource2GameClients::ClientPutInServer": {
         "windows": 13,
         "linux": 13
     },
-    "ISource2GameEntities::CheckTransmit": {
+    "CSource2GameEntities::CheckTransmit": {
         "windows": 12,
         "linux": 13
     },
-    "ILoopMode::LoopInit": {
+    "CLoopModeLevelLoad::LoopInit": {
         "windows": 0,
         "linux": 0
     },
-    "IGameEventManager2::FireEvent": {
+    "CGameEventManager::FireEvent": {
         "windows": 7,
         "linux": 8
     },
-    "IGameSystem::BuildGameSessionManifest": {
+    "CGameRulesGameSystem::BuildGameSessionManifest": {
         "windows": 7,
         "linux": 7
     },
@@ -200,149 +200,149 @@
         "windows": 32,
         "linux": 33
     },
-    "INetChannelInfo::GetName": {
+    "CNetChan::GetName": {
         "windows": 0,
         "linux": 0
     },
-    "INetChannelInfo::GetAddress": {
+    "CNetChan::GetAddress": {
         "windows": 1,
         "linux": 1
     },
-    "INetChannelInfo::GetRemoteAddress": {
+    "CNetChan::GetRemoteAddress": {
         "windows": 2,
         "linux": 2
     },
-    "INetChannelInfo::GetTime": {
+    "CNetChan::GetTime": {
         "windows": 3,
         "linux": 3
     },
-    "INetChannelInfo::GetTimeConnected": {
+    "CNetChan::GetTimeConnected": {
         "windows": 4,
         "linux": 4
     },
-    "INetChannelInfo::GetDataRate": {
+    "CNetChan::GetDataRate": {
         "windows": 5,
         "linux": 5
     },
-    "INetChannelInfo::IsLocalHost": {
+    "CNetChan::IsLocalHost": {
         "windows": 6,
         "linux": 6
     },
-    "INetChannelInfo::IsLoopback": {
+    "CNetChan::IsLoopback": {
         "windows": 7,
         "linux": 7
     },
-    "INetChannelInfo::IsTimingOut": {
+    "CNetChan::IsTimingOut": {
         "windows": 8,
         "linux": 8
     },
-    "INetChannelInfo::IsPlayback": {
+    "CNetChan::IsPlayback": {
         "windows": 9,
         "linux": 9
     },
-    "INetChannelInfo::GetAvgLatency": {
+    "CNetChan::GetAvgLatency": {
         "windows": 10,
         "linux": 10
     },
-    "INetChannelInfo::GetEngineLatency": {
+    "CNetChan::GetEngineLatency": {
         "windows": 11,
         "linux": 11
     },
-    "INetChannelInfo::GetAvgLoss": {
+    "CNetChan::GetAvgLoss": {
         "windows": 12,
         "linux": 12
     },
-    "INetChannelInfo::GetAvgChoke": {
+    "CNetChan::GetAvgChoke": {
         "windows": 13,
         "linux": 13
     },
-    "INetChannelInfo::GetAvgData": {
+    "CNetChan::GetPeakJitter": {
         "windows": 14,
         "linux": 14
     },
-    "INetChannelInfo::GetAvgPacketBytes": {
+    "CNetChan::GetAvgData": {
         "windows": 15,
         "linux": 15
     },
-    "INetChannelInfo::GetAvgPackets": {
+    "CNetChan::GetAvgPackets": {
         "windows": 16,
         "linux": 16
     },
-    "INetChannelInfo::GetTotalData": {
+    "CNetChan::GetTotalData": {
         "windows": 17,
         "linux": 17
     },
-    "INetChannelInfo::GetTotalPackets": {
+    "CNetChan::GetTotalPackets": {
         "windows": 18,
         "linux": 18
     },
-    "INetChannelInfo::GetSequenceNr": {
+    "CNetChan::GetSequenceNr": {
         "windows": 19,
         "linux": 19
     },
-    "INetChannelInfo::GetTimeSinceLastReceived": {
+    "CNetChan::GetTimeSinceLastReceived": {
         "windows": 20,
         "linux": 20
     },
-    "INetChannelInfo::SetInterpolationAmount": {
+    "CNetChan::SetInterpolationAmount": {
         "windows": 28,
         "linux": 28
     },
-    "INetChannelInfo::SetNumPredictionErrors": {
+    "CNetChan::SetNumPredictionErrors": {
         "windows": 29,
         "linux": 29
     },
-    "INetChannelInfo::SetShowNetMessages": {
+    "CNetChan::SetShowNetMessages": {
         "windows": 30,
         "linux": 30
     },
-    "INetChannelInfo::GetTimeoutSeconds": {
+    "CNetChan::GetTimeoutSeconds": {
         "windows": 22,
         "linux": 22
     },
-    "INetChannelInfo::GetTimeUntilTimeout": {
+    "CNetChan::GetTimeUntilTimeout": {
         "windows": 23,
         "linux": 23
     },
-    "INetChannelInfo::GetRemoteFramerate": {
+    "CNetChan::GetRemoteFramerate": {
         "windows": 21,
         "linux": 21
     },
-    "INetChannel::CanPacket": {
+    "CNetChan::CanPacket": {
         "windows": 47,
         "linux": 47
     },
-    "INetChannel::IsOverflowed": {
+    "CNetChan::IsOverflowed": {
         "windows": 48,
         "linux": 48
     },
-    "INetChannel::HasPendingReliableData": {
+    "CNetChan::HasPendingReliableData": {
         "windows": 49,
         "linux": 49
     },
-    "INetChannel::IsTimedOut": {
+    "CNetChan::IsTimedOut": {
         "windows": 56,
         "linux": 56
     },
-    "INetChannel::IsSuppressingTransmit": {
-        "windows": 81,
-        "linux": 81
+    "CNetChan::IsSuppressingTransmit": {
+        "windows": 82,
+        "linux": 82
     },
-    "INetChannel::SetMinDataRate": {
+    "CNetChan::SetMinDataRate": {
         "windows": 53,
         "linux": 53
     },
-    "INetChannel::SetMaxDataRate": {
+    "CNetChan::SetMaxDataRate": {
         "windows": 54,
         "linux": 54
     },
-    "INetChannel::SetTimeout": {
+    "CNetChan::SetTimeout": {
         "windows": 55,
         "linux": 55
     },
-    "INetChannel::SuppressTransmit": {
-        "windows": 80,
-        "linux": 80
+    "CNetChan::SuppressTransmit": {
+        "windows": 81,
+        "linux": 81
     },
     "CServerSideClientBase::m_UserIDString": {
         "windows": 56,
@@ -368,11 +368,11 @@
         "windows": 96,
         "linux": 96
     },
-    "CServerSideClientBase::m_nAsyncDisconnectFlags": {
+    "CServerSideClientBase::m_nSendJobState": {
         "windows": 97,
         "linux": 97
     },
-    "CServerSideClientBase::m_bMarkedToKick": {
+    "CServerSideClientBase::m_bSendJobIdle": {
         "windows": 98,
         "linux": 98
     },
@@ -384,7 +384,7 @@
         "windows": 160,
         "linux": 160
     },
-    "CServerSideClientBase::m_bSendingSnapshot": {
+    "CServerSideClientBase::m_bLogFullUpdate": {
         "windows": 161,
         "linux": 161
     },
@@ -400,7 +400,7 @@
         "windows": 171,
         "linux": 171
     },
-    "CServerSideClientBase::m_DisconnectedSteamID": {
+    "CServerSideClientBase::m_LastSteamID": {
         "windows": 179,
         "linux": 179
     },
@@ -521,7 +521,7 @@
         "windows": 12,
         "linux": 13
     },
-    "CServerSideClientBase::MarkToKick": {
+    "CServerSideClientBase::OnSendJobFinished": {
         "windows": 75,
         "linux": 77
     },
@@ -541,7 +541,7 @@
         "windows": 11,
         "linux": 12
     },
-    "CServerSideClientBase::UnmarkToKick": {
+    "CServerSideClientBase::OnSendJobStarted": {
         "windows": 76,
         "linux": 78
     },

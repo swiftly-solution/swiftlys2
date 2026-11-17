@@ -1,24 +1,22 @@
 ﻿using System.Runtime.InteropServices;
 using Spectre.Console;
 using SwiftlyS2.Core;
+using SwiftlyS2.Core.Misc;
 
 namespace SwiftlyS2;
 
 internal class Entrypoint
 {
     [UnmanagedCallersOnly]
-    public static void Start( IntPtr nativeTable, int nativeTableSize, IntPtr basePath, IntPtr logsPath )
+    public static unsafe void Start( IntPtr nativeTable, int nativeTableSize, GlobalState.Native* globalState )
     {
         try
         {
-            Bootstrap.Start(nativeTable, nativeTableSize, Marshal.PtrToStringUTF8(basePath)!, Marshal.PtrToStringUTF8(logsPath)!);
+            GlobalState.Load(globalState);
+            Bootstrap.Start(nativeTable, nativeTableSize);
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
             AnsiConsole.WriteException(e);
         }
     }

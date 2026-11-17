@@ -6,6 +6,11 @@ namespace SwiftlyS2.Shared.Memory;
 public interface IMemoryService
 {
     /// <summary>
+    /// Binary analysis helpers (pattern scan, vtables, symbols, xrefs...).
+    /// </summary>
+    public IS2BinLib S2BinLib { get; }
+
+    /// <summary>
     /// Get an unmanaged function by its address.
     /// </summary>
     /// <typeparam name="TDelegate">The delegate type of the unmanaged function.</typeparam>

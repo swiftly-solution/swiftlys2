@@ -143,11 +143,6 @@ public class TestPlugin : BasePlugin
     public TestPlugin( ISwiftlyCore core ) : base(core)
     {
         Console.WriteLine("[TestPlugin] TestPlugin constructed successfully!");
-        core.GameHooks.Datamaps.CCSPlayerController.ResourceDataThink.Post += ( ref @event ) =>
-        {
-            Console.WriteLine("resourcedatathink");
-        };
-
         core.GameHooks.Controller.ProcessUsercmds.Pre += ( ref @event ) =>
         {
             var usercmds = @event.Params.Usercmds;
@@ -156,11 +151,6 @@ public class TestPlugin : BasePlugin
         core.GameHooks.Movement.PlayerMove.Pre += ( ref @event ) =>
         {
             @event.Params.MoveData.MaxSpeed = 2000f;
-        };
-
-        core.Event.OnClientSettingsChanged += ( @event ) =>
-        {
-            Console.WriteLine($"Player {@event.PlayerId} had it's settings changed");
         };
 
         core.GameHooks.Movement.GroundAccelerate.Pre += ( ref @event ) =>
@@ -173,6 +163,13 @@ public class TestPlugin : BasePlugin
             Console.WriteLine($"[TestPlugin] HookClientCommand: Player {playerId} executed command: {commandLine}");
             return HookResult.Continue;
         });
+
+        core.Event.OnClientConnectionEstablished += ( @event ) =>
+        {
+            Console.WriteLine($"Player ${@event.PlayerId} has established the connection.");
+        };
+
+        Console.WriteLine($"Loader function: 0x{core.Memory.S2BinLib.FindFuncWithString("engine2", "Engine loading startup asset: '%s'\n"):X}");
     }
 
     [Command("selfmute")]
@@ -400,6 +397,12 @@ public class TestPlugin : BasePlugin
         //     return HookResult.Continue;
         // });
         //
+
+        Core.Event.OnClientSteamAuthorize += ( @event ) =>
+        {
+            Console.WriteLine($"Client {@event.PlayerId} has been authorized.");
+        };
+
         Core.Command.HookClientChat(( playerId, text, teamOnly ) =>
         {
             Console.WriteLine($"[TestPlugin] ClientChat: {playerId} said '{text}' (teamOnly: {teamOnly})");
@@ -546,6 +549,12 @@ public class TestPlugin : BasePlugin
             ctx.Sender!.TakeDamage(69f, DamageTypes_t.DMG_BULLET, ctx.Sender!.Pawn, ctx.Sender!.Pawn);
             ctx.Sender!.SendCenterHTML("hello there");
         });
+
+        Core.Event.OnMapLoad += ( @e ) =>
+        {
+            Console.WriteLine($"Map {@e.MapName} loaded.");
+            Console.WriteLine($"Workshop ID: {Core.Engine.WorkshopId}");
+        };
 
         using CEntityKeyValues kv = new();
         kv.SetBool("test", true);
@@ -860,8 +869,8 @@ public class TestPlugin : BasePlugin
     [Command("tt99")]
     public void TestCommand99( ICommandContext context )
     {
-        Console.WriteLine(context.Sender!.SteamID);
-        Console.WriteLine(context.Sender!.UnauthorizedSteamID);
+        Core.Logger.LogInformation($"{context.Sender!.SteamID}");
+        Core.Logger.LogInformation($"{context.Sender!.UnauthorizedSteamID}");
     }
 
     [ClientNetMessageHandler]

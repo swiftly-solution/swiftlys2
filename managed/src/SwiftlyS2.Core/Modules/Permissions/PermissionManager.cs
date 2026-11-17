@@ -32,7 +32,6 @@ internal class PermissionManager : IPermissionManager
             }
             catch (Exception e)
             {
-                if (!GlobalExceptionHandler.Handle(ref e)) return;
                 logger.LogError(e, "Error reloading permission config.");
             }
         });

@@ -44,9 +44,6 @@ public:
     [[nodiscard]] bool Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFaceFn engineFactory);
     bool Unload();
 
-    void OnMapLoad(std::string_view map_name);
-    void OnMapUnload();
-
     [[nodiscard]] void* GetInterface(const std::string& iface_name);
 
     template <class T>

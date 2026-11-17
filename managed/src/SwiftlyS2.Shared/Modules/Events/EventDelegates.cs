@@ -29,6 +29,11 @@ public class EventDelegates
     public delegate void OnClientConnected( IOnClientConnectedEvent @event );
 
     /// <summary>
+    /// Called when a client connection is established.
+    /// </summary>
+    public delegate void OnClientConnectionEstablished( IOnClientConnectionEstablishedEvent @event );
+
+    /// <summary>
     /// Called when a client disconnects from the server.
     /// </summary>
     public delegate void OnClientDisconnected( IOnClientDisconnectedEvent @event );
@@ -204,4 +209,10 @@ public class EventDelegates
     /// Called when a custom hud element is clicked.
     /// </summary>
     public delegate void OnCustomHudClicked( IOnCustomHudClickedEvent @event );
+
+    /// <summary>
+    /// Called for every candidate while resolving a target in FindTargettedPlayers.
+    /// Lets plugins add their own target selectors or veto candidates.
+    /// </summary>
+    public delegate void OnFindTargettedPlayers( IOnFindTargettedPlayersEvent @event );
 }

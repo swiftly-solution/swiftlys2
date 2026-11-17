@@ -3,7 +3,6 @@ class Hooks
 ptr AllocateHook = void
 ptr AllocateMHook = void
 void DeallocateHook = ptr hook
-void DeallocateMHook = ptr hook
 void SetHook = ptr hook, ptr func, ptr callback // the callback should receive the exact arguments as the function has, and to return the same amount of arguments
 void SetMHook = ptr hook, ptr addr, ptr callback // the callback should receive `ref Context64`
 void EnableHook = ptr hook

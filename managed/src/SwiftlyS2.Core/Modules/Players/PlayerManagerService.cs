@@ -1,4 +1,5 @@
 ﻿using System.Collections.Concurrent;
+using SwiftlyS2.Core.Events;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.Scheduler;
 using SwiftlyS2.Shared.EntitySystem;
@@ -25,10 +26,10 @@ internal class PlayerManagerService : IPlayerManagerService
         _engineService = engineService;
     }
 
-    public static void RegisterPlayerObject( int playerid )
+    public static void RegisterPlayerObject( int playerid, ulong unauthorizedSteamID )
     {
         UnregisterPlayerObject(playerid);
-        var player = new Player(playerid);
+        var player = new Player(playerid, unauthorizedSteamID);
         _ = PlayerObjects.TryAdd(playerid, player);
         _ = SessionIdToPlayerObjects.TryAdd(player.SessionId, player);
     }
@@ -115,11 +116,13 @@ internal class PlayerManagerService : IPlayerManagerService
                 return [];
 
             var aimedPlayer = pickerEntity.ToPlayer();
-            return aimedPlayer is { IsValid: true } && MatchesSearchMode(player, aimedPlayer, searchMode) ? [aimedPlayer] : [];
+            return aimedPlayer is { IsValid: true } && MatchesSearchMode(player, aimedPlayer, searchMode)
+                && EventPublisher.InvokeOnFindTargettedPlayers(player, target, searchMode, aimedPlayer, true) ? [aimedPlayer] : [];
         }
         else if(target == "@me")
         {
-            return player != null && player.IsValid && MatchesSearchMode(player, player, searchMode) ? [player] : [];
+            return player != null && player.IsValid && MatchesSearchMode(player, player, searchMode)
+                && EventPublisher.InvokeOnFindTargettedPlayers(player, target, searchMode, player, true) ? [player] : [];
         }
 
         List<IPlayer> allPlayers = [];
@@ -133,57 +136,29 @@ internal class PlayerManagerService : IPlayerManagerService
             if (!MatchesSearchMode(player, targetPlayer, searchMode))
                 continue;
 
-            if (target == "@all")
-            {
+            if (EventPublisher.InvokeOnFindTargettedPlayers(player, target, searchMode, targetPlayer, MatchesTarget(targetPlayer, target, nameComparison)))
                 allPlayers.Add(targetPlayer);
-            }
-            else if ((target == "@bots" || target == "@!human") && targetPlayer.IsFakeClient)
-            {
-                allPlayers.Add(targetPlayer);
-            }
-            else if ((target == "@!bots" || target == "@human") && !targetPlayer.IsFakeClient)
-            {
-                allPlayers.Add(targetPlayer);
-            }
-            else if (target == "@alive" && targetPlayer.Pawn?.LifeState == (byte)LifeState_t.LIFE_ALIVE)
-            {
-                allPlayers.Add(targetPlayer);
-            }
-            else if (target == "@dead" && targetPlayer.Pawn?.LifeState == (byte)LifeState_t.LIFE_DEAD)
-            {
-                allPlayers.Add(targetPlayer);
-            }
-            else if (target == "@ct" && targetPlayer.Pawn?.TeamNum == (int)Team.CT)
-            {
-                allPlayers.Add(targetPlayer);
-            }
-            else if (target == "@t" && targetPlayer.Pawn?.TeamNum == (int)Team.T)
-            {
-                allPlayers.Add(targetPlayer);
-            }
-            else if (target == "@spec" && targetPlayer.Pawn?.TeamNum == (int)Team.Spectator)
-            {
-                allPlayers.Add(targetPlayer);
-            }
-            else if (target.StartsWith('#'))
-            {
-                if (int.TryParse(target[1..], out var id) && (targetPlayer.PlayerID == id || targetPlayer.UserID == id))
-                {
-                    allPlayers.Add(targetPlayer);
-                }
-            }
-            else if (targetPlayer.Controller.PlayerName.Contains(target, nameComparison))
-            {
-                allPlayers.Add(targetPlayer);
-            }
-            else if (new CSteamID(target) is var steamId && steamId.IsValid() &&
-                     steamId.GetSteamID64() == targetPlayer.SteamID)
-            {
-                allPlayers.Add(targetPlayer);
-            }
         }
 
         return allPlayers;
+    }
+
+    private static bool MatchesTarget( IPlayer targetPlayer, string target, StringComparison nameComparison )
+    {
+        var pawn = targetPlayer.Pawn;
+        return target switch {
+            "@all" => true,
+            "@bots" or "@!human" => targetPlayer.IsFakeClient,
+            "@!bots" or "@human" => !targetPlayer.IsFakeClient,
+            "@alive" => pawn?.LifeState == (byte)LifeState_t.LIFE_ALIVE,
+            "@dead" => pawn?.LifeState == (byte)LifeState_t.LIFE_DEAD,
+            "@ct" => pawn?.TeamNum == (int)Team.CT,
+            "@t" => pawn?.TeamNum == (int)Team.T,
+            "@spec" => pawn?.TeamNum == (int)Team.Spectator,
+            _ when target.StartsWith('#') => int.TryParse(target[1..], out var id) && (targetPlayer.PlayerID == id || targetPlayer.UserID == id),
+            _ => targetPlayer.Controller.PlayerName.Contains(target, nameComparison)
+                || (new CSteamID(target) is var steamId && steamId.IsValid() && steamId.GetSteamID64() == targetPlayer.SteamID),
+        };
     }
 
     private static bool MatchesSearchMode( IPlayer player, IPlayer targetPlayer, TargetSearchMode searchMode )
@@ -218,7 +193,7 @@ internal class PlayerManagerService : IPlayerManagerService
                 return false;
 
             if (searchMode.HasFlag(TargetSearchMode.OppositeTeamOnly) && targetTeam == playerTeam)
-                return false;   
+                return false;
         }
 
         return true;
@@ -373,19 +348,19 @@ internal class PlayerManagerService : IPlayerManagerService
 
     public IPlayer? GetPlayerFromSteamId( ulong steamId, bool allowUnauthorized = true )
     {
-        return PlayerObjects.Values.FirstOrDefault(p =>
+        foreach (var p in GetAllPlayers())
         {
             if (allowUnauthorized)
             {
-                if (p.SteamID == steamId) return true;
-                if (p.UnauthorizedSteamID == steamId) return true;
+                if (p.SteamID == steamId || p.UnauthorizedSteamID == steamId) return p;
             }
-            else
+            else if (p.SteamID == steamId && p.IsAuthorized)
             {
-                if (p.SteamID == steamId && p.IsAuthorized) return true;
+                return p;
             }
-            return false;
-        });
+        }
+
+        return null;
     }
 
     public bool IsSessionIdValid( ulong sessionId )

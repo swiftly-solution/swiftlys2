@@ -37,7 +37,6 @@ internal class DependencyResolver
                 }
                 catch (Exception ex)
                 {
-                    if (!GlobalExceptionHandler.Handle(ref ex)) return;
                     _logger.LogWarning(ex, $"Failed to read assembly {exportFile}");
                 }
             }
@@ -86,7 +85,6 @@ internal class DependencyResolver
             }
             catch (Exception ex)
             {
-                if (!GlobalExceptionHandler.Handle(ref ex)) return;
                 _logger.LogWarning(ex, $"Failed to analyze dependencies for {assemblyName}");
             }
         }

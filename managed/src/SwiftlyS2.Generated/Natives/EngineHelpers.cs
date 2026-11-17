@@ -127,17 +127,6 @@ internal static class NativeEngineHelpers
         return outString;
     }
 
-    private unsafe static delegate* unmanaged<int*, byte*> _GetWorkshopId;
-
-    public unsafe static string GetWorkshopId()
-    {
-        var length = 0;
-        var returnedPtr = _GetWorkshopId(&length);
-        var outString = StringAlloc.CreateCSharpString((nint)returnedPtr, length);
-        NativeAllocator.Free((nint)returnedPtr);
-        return outString;
-    }
-
     private unsafe static delegate* unmanaged<byte*, uint, nint, byte, nint, byte, int, ulong, void> _DispatchParticleEffect;
 
     public unsafe static void DispatchParticleEffect(string particleName, uint attachmentType, nint entity, byte attachmentPoint, nint attachmentName, bool resetAllParticlesOnEntity, int splitScreenSlot, ulong filtermask)

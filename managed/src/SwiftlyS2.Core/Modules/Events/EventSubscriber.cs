@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Logging;
 using SwiftlyS2.Shared.Events;
+using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Shared.Profiler;
 
 namespace SwiftlyS2.Core.Events;
@@ -55,7 +56,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     private void LogError( Exception e, string eventName )
     {
-        if (GlobalExceptionHandler.Handle(ref e)) logger.LogError(e, "Error invoking {Event}.", eventName);
+        logger.LogError(e, "Error invoking {Event}.", eventName);
     }
 
     private EventDelegates.OnTick? _OnTick;
@@ -86,6 +87,12 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
     public event EventDelegates.OnClientKeyStateChanged? OnClientKeyStateChanged {
         add => Add(CoreEvent.ClientKeyStateChanged, ref _OnClientKeyStateChanged, value);
         remove => Remove(CoreEvent.ClientKeyStateChanged, ref _OnClientKeyStateChanged, value);
+    }
+
+    private EventDelegates.OnClientConnectionEstablished? _OnClientConnectionEstablished;
+    public event EventDelegates.OnClientConnectionEstablished? OnClientConnectionEstablished {
+        add => Add(CoreEvent.ClientConnectionEstablished, ref _OnClientConnectionEstablished, value);
+        remove => Remove(CoreEvent.ClientConnectionEstablished, ref _OnClientConnectionEstablished, value);
     }
 
     private EventDelegates.OnClientPutInServer? _OnClientPutInServer;
@@ -292,6 +299,12 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         remove => Remove(CoreEvent.CustomHudClicked, ref _OnCustomHudClicked, value);
     }
 
+    private EventDelegates.OnFindTargettedPlayers? _OnFindTargettedPlayers;
+    public event EventDelegates.OnFindTargettedPlayers? OnFindTargettedPlayers {
+        add => Add(CoreEvent.FindTargettedPlayers, ref _OnFindTargettedPlayers, value);
+        remove => Remove(CoreEvent.FindTargettedPlayers, ref _OnFindTargettedPlayers, value);
+    }
+
     public void Dispose()
     {
         lock (sync)
@@ -304,6 +317,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
             _OnClientConnected = null;
             _OnClientDisconnected = null;
             _OnClientKeyStateChanged = null;
+            _OnClientConnectionEstablished = null;
             _OnClientPutInServer = null;
             _OnClientSteamAuthorize = null;
             _OnClientSteamAuthorizeFail = null;
@@ -336,6 +350,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
             _OnClientVoice = null;
             _OnClientSettingsChanged = null;
             _OnCustomHudClicked = null;
+            _OnFindTargettedPlayers = null;
 
             foreach (var kind in Enum.GetValues<CoreEvent>()) _ = EventPublisher.Router.Remove(kind, this);
         }
@@ -381,6 +396,14 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         if (handler == null) return;
         try { handler.Invoke(@event); }
         catch (Exception e) { LogError(e, nameof(OnClientKeyStateChanged)); }
+    }
+
+    public void InvokeOnClientConnectionEstablished( ref OnClientConnectionEstablishedEvent @event )
+    {
+        var handler = _OnClientConnectionEstablished;
+        if (handler == null) return;
+        try { handler.Invoke(@event); }
+        catch (Exception e) { LogError(e, nameof(OnClientConnectionEstablished)); }
     }
 
     public void InvokeOnClientPutInServer( ref OnClientPutInServerEvent @event )
@@ -637,5 +660,23 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         if (handler == null) return;
         try { handler.Invoke(@event); }
         catch (Exception e) { LogError(e, nameof(OnCustomHudClicked)); }
+    }
+
+    public void InvokeOnFindTargettedPlayers( ref OnFindTargettedPlayersEvent @event )
+    {
+        var handler = _OnFindTargettedPlayers;
+        if (handler == null) return;
+        try
+        {
+            var array = handler.GetInvocationList();
+            for (var i = 0; i < array.Length; i++)
+            {
+                var h = (EventDelegates.OnFindTargettedPlayers)array[i];
+
+                h(@event);
+                if (@event.Result is HookResult.Handled or HookResult.Stop) return;
+            }
+        }
+        catch (Exception e) { LogError(e, nameof(OnFindTargettedPlayers)); }
     }
 }

@@ -33,61 +33,6 @@ void Bridge_Player_SendMessage(int playerid, int kind, const char* message, int 
     player->SendMsg((MessageType)kind, message, duration);
 }
 
-bool Bridge_Player_IsFakeClient(int playerid)
-{
-    PROFILE_FUNCTION();
-
-    auto player = g_pPlayerManager->GetPlayer(playerid);
-    if (!player)
-        return true;
-
-    return player->IsFakeClient();
-}
-
-bool Bridge_Player_IsAuthorized(int playerid)
-{
-    PROFILE_FUNCTION();
-
-    auto player = g_pPlayerManager->GetPlayer(playerid);
-    if (!player)
-        return false;
-
-    return player->IsAuthorized();
-}
-
-uint32_t Bridge_Player_GetConnectedTime(int playerid)
-{
-    PROFILE_FUNCTION();
-
-    auto player = g_pPlayerManager->GetPlayer(playerid);
-    if (!player)
-        return 0;
-
-    return player->GetConnectedTime();
-}
-
-uint64_t Bridge_Player_GetUnauthorizedSteamID(int playerid)
-{
-    PROFILE_FUNCTION();
-
-    auto player = g_pPlayerManager->GetPlayer(playerid);
-    if (!player)
-        return 0;
-
-    return player->GetUnauthorizedSteamID();
-}
-
-uint64_t Bridge_Player_GetSteamID(int playerid)
-{
-    PROFILE_FUNCTION();
-
-    auto player = g_pPlayerManager->GetPlayer(playerid);
-    if (!player)
-        return 0;
-
-    return player->GetSteamID();
-}
-
 char* Bridge_Player_GetIPAddress(int* size, int playerid)
 {
     PROFILE_FUNCTION();
@@ -214,17 +159,6 @@ void Bridge_Player_ExecuteCommand(int playerid, const char* command)
     }
 }
 
-uint8_t Bridge_Player_IsFirstSpawn(int playerid)
-{
-    PROFILE_FUNCTION();
-
-    auto player = g_pPlayerManager->GetPlayer(playerid);
-    if (!player)
-        return 0;
-
-    return player->IsFirstSpawn() ? 1 : 0;
-}
-
 int Bridge_Player_GetUserID(int playerid)
 {
     PROFILE_FUNCTION();
@@ -258,11 +192,6 @@ void* Bridge_Player_GetServerSideClient(int playerid)
 }
 
 DEFINE_NATIVE("Player.SendMessage", Bridge_Player_SendMessage);
-DEFINE_NATIVE("Player.IsFakeClient", Bridge_Player_IsFakeClient);
-DEFINE_NATIVE("Player.IsAuthorized", Bridge_Player_IsAuthorized);
-DEFINE_NATIVE("Player.GetConnectedTime", Bridge_Player_GetConnectedTime);
-DEFINE_NATIVE("Player.GetUnauthorizedSteamID", Bridge_Player_GetUnauthorizedSteamID);
-DEFINE_NATIVE("Player.GetSteamID", Bridge_Player_GetSteamID);
 DEFINE_NATIVE("Player.GetIPAddress", Bridge_Player_GetIPAddress);
 DEFINE_NATIVE("Player.Kick", Bridge_Player_Kick);
 DEFINE_NATIVE("Player.ShouldBlockTransmitEntity", Bridge_Player_ShouldBlockTransmitEntity);
@@ -272,7 +201,6 @@ DEFINE_NATIVE("Player.SetCenterMenuRender", Bridge_Player_SetCenterMenuRender);
 DEFINE_NATIVE("Player.ClearCenterMenuRender", Bridge_Player_ClearCenterMenuRender);
 DEFINE_NATIVE("Player.HasMenuShown", Bridge_Player_HasMenuShown);
 DEFINE_NATIVE("Player.ExecuteCommand", Bridge_Player_ExecuteCommand);
-DEFINE_NATIVE("Player.IsFirstSpawn", Bridge_Player_IsFirstSpawn);
 DEFINE_NATIVE("Player.GetUserID", Bridge_Player_GetUserID);
 DEFINE_NATIVE("Player.GetClientConvarValue", Bridge_Player_GetClientConvarValue);
 DEFINE_NATIVE("Player.GetServerSideClient", Bridge_Player_GetServerSideClient);

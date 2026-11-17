@@ -12,6 +12,7 @@ using SwiftlyS2.Shared.Plugins;
 using SwiftlyS2.Core.Modules.Plugins;
 using System.Runtime.InteropServices;
 using Semver;
+using SwiftlyS2.Core.Misc;
 
 namespace SwiftlyS2.Core.Plugins;
 
@@ -57,7 +58,7 @@ internal class PluginManager : IPluginManager
         _pluginLoadErrors = new ConcurrentDictionary<string, string>();
         _exportAssemblies = new ConcurrentDictionary<string, Assembly>(StringComparer.OrdinalIgnoreCase);
 
-        if (NativeServerHelpers.UseAutoHotReload())
+        if (GlobalState.UseAutoHotReload)
         {
             _fileWatcher = InitializeFileWatcher();
         }
@@ -69,7 +70,7 @@ internal class PluginManager : IPluginManager
     {
         LoadExports();
 
-        if (!NativeCore.PluginManualLoadState())
+        if (!GlobalState.PluginManualLoadState)
         {
             LoadPlugins();
         }
@@ -96,7 +97,7 @@ internal class PluginManager : IPluginManager
                 _plugins.Add(context);
             });
 
-            LoadPluginsInOrder(NativeCore.PluginLoadOrder());
+            LoadPluginsInOrder(GlobalState.PluginLoadOrder);
         }
     }
 
@@ -244,12 +245,9 @@ internal class PluginManager : IPluginManager
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                _logger.LogWarning(e, "Failed to load plugin by name: {Path}", pluginDir);
-                var pluginName = Path.GetFileName(pluginDir);
-                _pluginLoadErrors[pluginName] = e.ToString();
-            }
+            _logger.LogWarning(e, "Failed to load plugin by name: {Path}", pluginDir);
+            var pluginName = Path.GetFileName(pluginDir);
+            _pluginLoadErrors[pluginName] = e.ToString();
             return false;
         }
         finally
@@ -274,7 +272,7 @@ internal class PluginManager : IPluginManager
         var pluginDirs = new List<string>();
         EnumeratePluginDirectories(_rootDirService.GetPluginsRoot(), pluginDirs.Add);
 
-        var loadOrder = NativeCore.PluginLoadOrder().Split('\x01', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToList();
+        var loadOrder = GlobalState.PluginLoadOrder.Split('\x01', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToList();
         if (loadOrder.Count > 0)
         {
             pluginDirs = pluginDirs.OrderBy(dir =>
@@ -310,11 +308,8 @@ internal class PluginManager : IPluginManager
             }
             catch (Exception e)
             {
-                if (GlobalExceptionHandler.Handle(ref e))
-                {
-                    _logger.LogWarning(e, "Failed to load plugin: {Path}", fullDisplayPath);
-                    _pluginLoadErrors[dllName] = e.ToString();
-                }
+                _logger.LogWarning(e, "Failed to load plugin: {Path}", fullDisplayPath);
+                _pluginLoadErrors[dllName] = e.ToString();
             }
         }
 
@@ -380,10 +375,7 @@ internal class PluginManager : IPluginManager
             }
             catch (Exception e)
             {
-                if (GlobalExceptionHandler.Handle(ref e))
-                {
-                    _logger.LogWarning(e, "Failed to parse minimum API version for plugin {Id}: '{Version}'. Falling back to '0.0.0'.", context.Metadata.Id, minimumApiVersion);
-                }
+                _logger.LogWarning(e, "Failed to parse minimum API version for plugin {Id}: '{Version}'. Falling back to '0.0.0'.", context.Metadata.Id, minimumApiVersion);
                 minApiSemver = new SemVersion(0, 0, 0);
             }
 
@@ -419,7 +411,6 @@ internal class PluginManager : IPluginManager
         }
         catch (Exception e)
         {
-            _ = GlobalExceptionHandler.Handle(ref e);
             CleanupFailedPlugin(plugin, loader, core);
             _logger.LogError(e, "Exception occurred while loading plugin: {PluginPath}", entrypointDll);
             var pluginName = Path.GetFileName(directory);
@@ -516,10 +507,7 @@ internal class PluginManager : IPluginManager
         }
         catch (Exception ex)
         {
-            if (GlobalExceptionHandler.Handle(ref ex))
-            {
-                _logger.LogError(ex, "Failed to load exports");
-            }
+            _logger.LogError(ex, "Failed to load exports");
         }
     }
 
@@ -536,10 +524,7 @@ internal class PluginManager : IPluginManager
         }
         catch (Exception ex)
         {
-            if (GlobalExceptionHandler.Handle(ref ex))
-            {
-                _logger.LogWarning(ex, "Failed to load export assembly: {Path}", exportFile);
-            }
+            _logger.LogWarning(ex, "Failed to load export assembly: {Path}", exportFile);
         }
     }
 
@@ -580,10 +565,7 @@ internal class PluginManager : IPluginManager
         }
         catch (Exception ex)
         {
-            if (GlobalExceptionHandler.Handle(ref ex))
-            {
-                _logger.LogError(ex, "Failed to handle plugin change");
-            }
+            _logger.LogError(ex, "Failed to handle plugin change");
         }
     }
 
@@ -608,10 +590,7 @@ internal class PluginManager : IPluginManager
         }
         catch (Exception ex)
         {
-            if (GlobalExceptionHandler.Handle(ref ex))
-            {
-                _logger.LogError(ex, "Failed to handle new plugin creation");
-            }
+            _logger.LogError(ex, "Failed to handle new plugin creation");
         }
     }
 
@@ -619,7 +598,7 @@ internal class PluginManager : IPluginManager
     {
         directoryName = string.Empty;
 
-        if (!NativeServerHelpers.UseAutoHotReload())
+        if (!GlobalState.UseAutoHotReload)
         {
             return false;
         }
@@ -721,10 +700,7 @@ internal class PluginManager : IPluginManager
             }
             catch (Exception ex)
             {
-                if (GlobalExceptionHandler.Handle(ref ex))
-                {
-                    AnsiConsole.WriteException(ex);
-                }
+                AnsiConsole.WriteException(ex);
                 _logger.LogError(ex, "Failed to hot-load new plugin: {Name}", directoryName);
             }
             finally
@@ -886,10 +862,7 @@ internal class PluginManager : IPluginManager
         }
         catch (Exception ex)
         {
-            if (GlobalExceptionHandler.Handle(ref ex))
-            {
-                AnsiConsole.WriteException(ex);
-            }
+            AnsiConsole.WriteException(ex);
         }
     }
 
@@ -1012,10 +985,7 @@ internal class PluginManager : IPluginManager
         }
         catch (Exception e)
         {
-            if (GlobalExceptionHandler.Handle(ref e))
-            {
-                _logger.LogDebug(e, "Failed to scan plugin for obsolete API usage: {Path}", entrypointDll);
-            }
+            _logger.LogDebug(e, "Failed to scan plugin for obsolete API usage: {Path}", entrypointDll);
             return;
         }
 

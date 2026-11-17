@@ -26,46 +26,6 @@ internal static class NativePlayer
         }
     }
 
-    private unsafe static delegate* unmanaged<int, byte> _IsFakeClient;
-
-    public unsafe static bool IsFakeClient(int playerid)
-    {
-        var ret = _IsFakeClient(playerid);
-        return ret == 1;
-    }
-
-    private unsafe static delegate* unmanaged<int, byte> _IsAuthorized;
-
-    public unsafe static bool IsAuthorized(int playerid)
-    {
-        var ret = _IsAuthorized(playerid);
-        return ret == 1;
-    }
-
-    private unsafe static delegate* unmanaged<int, uint> _GetConnectedTime;
-
-    public unsafe static uint GetConnectedTime(int playerid)
-    {
-        var ret = _GetConnectedTime(playerid);
-        return ret;
-    }
-
-    private unsafe static delegate* unmanaged<int, ulong> _GetUnauthorizedSteamID;
-
-    public unsafe static ulong GetUnauthorizedSteamID(int playerid)
-    {
-        var ret = _GetUnauthorizedSteamID(playerid);
-        return ret;
-    }
-
-    private unsafe static delegate* unmanaged<int, ulong> _GetSteamID;
-
-    public unsafe static ulong GetSteamID(int playerid)
-    {
-        var ret = _GetSteamID(playerid);
-        return ret;
-    }
-
     private unsafe static delegate* unmanaged<int*, int, byte*> _GetIPAddress;
 
     public unsafe static string GetIPAddress(int playerid)
@@ -153,14 +113,6 @@ internal static class NativePlayer
         {
             _ExecuteCommand(playerid, commandBufferPtr);
         }
-    }
-
-    private unsafe static delegate* unmanaged<int, byte> _IsFirstSpawn;
-
-    public unsafe static bool IsFirstSpawn(int playerid)
-    {
-        var ret = _IsFirstSpawn(playerid);
-        return ret == 1;
     }
 
     private unsafe static delegate* unmanaged<int, int> _GetUserID;

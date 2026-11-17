@@ -54,13 +54,13 @@ static IGameEventManager2* ResolveGameEventManager()
 }
 
 static void PreworldUpdateHook(void* _this, bool simulate);
-VFunctionHook g_PreworldUpdateHook(reinterpret_cast<void*>(PreworldUpdateHook), "server", "CSource2Server", "IServerGameDLL::PreWorldUpdate");
+VFunctionHook g_PreworldUpdateHook(reinterpret_cast<void*>(PreworldUpdateHook), "server", "CSource2Server", "CSource2Server::PreWorldUpdate");
 
 static void StartupServerEventHook(void* _this, const GameSessionConfiguration_t& config, ISource2WorldSession* a, const char* b);
-VFunctionHook g_StartupServerEventHook(reinterpret_cast<void*>(StartupServerEventHook), "engine2", "CNetworkServerService", "INetworkServerService::StartupServer");
+VFunctionHook g_StartupServerEventHook(reinterpret_cast<void*>(StartupServerEventHook), "engine2", "CNetworkServerService", "CNetworkServerService::StartupServer");
 
 static bool FireEventHook(IGameEventManager2* _this, IGameEvent* event, bool bDontBroadcast);
-VFunctionHook g_FireEventHook(reinterpret_cast<void*>(FireEventHook), [] -> void* { return ResolveGameEventManager(); }, "IGameEventManager2::FireEvent");
+VFunctionHook g_FireEventHook(reinterpret_cast<void*>(FireEventHook), [] -> void* { return ResolveGameEventManager(); }, "CGameEventManager::FireEvent");
 
 void CEventManager::Initialize()
 {
@@ -83,10 +83,7 @@ static void PreworldUpdateHook(void* _this, bool simulate)
 
 static bool FireEventHook(IGameEventManager2* _this, IGameEvent* event, bool bDontBroadcast)
 {
-    static constexpr uint32_t k_uPlayerSpawnHash = hash_32_fnv1a_const("player_spawn");
-
     uint32_t event_hash = 0;
-    bool isPlayerSpawn = false;
     bool isRegistered = false;
     bool shouldBroadcast = bDontBroadcast;
     IGameEvent* dupEvent = nullptr;
@@ -96,7 +93,6 @@ static bool FireEventHook(IGameEventManager2* _this, IGameEvent* event, bool bDo
     if (event)
     {
         event_hash = hash_32_fnv1a_const(event->GetName());
-        isPlayerSpawn = event_hash == k_uPlayerSpawnHash;
         isRegistered = g_pGameEventManager->IsEventRegistered(event_hash);
     }
 
@@ -109,7 +105,7 @@ static bool FireEventHook(IGameEventManager2* _this, IGameEvent* event, bool bDo
         }
     }
 
-    bool needsCopy = isPlayerSpawn || (isRegistered && g_fnPostEventFireHandler);
+    bool needsCopy = isRegistered && g_fnPostEventFireHandler;
     dupEvent = needsCopy ? g_gameEventManager->DuplicateEvent(event) : nullptr;
 
     PROFILE_PAUSE();
@@ -118,17 +114,8 @@ static bool FireEventHook(IGameEventManager2* _this, IGameEvent* event, bool bDo
 
     PROFILE_RESUME();
 
-    if (!event || (!isRegistered && !isPlayerSpawn))
+    if (!event || !isRegistered)
         return result;
-
-    if (isPlayerSpawn)
-    {
-        int userid = dupEvent->GetInt("userid", -1);
-        if (userid != -1) {
-            if (auto* player = g_pPlayerManager->GetPlayer(userid))
-                player->SetFirstSpawn(false);
-        }
-    }
 
     if (isRegistered && g_fnPostEventFireHandler)
     {

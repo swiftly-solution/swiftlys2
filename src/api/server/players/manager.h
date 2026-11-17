@@ -38,8 +38,6 @@ public:
     virtual int GetPlayerCap() = 0;
 
     virtual void SendMsg(MessageType type, const std::string& message, int duration) = 0;
-
-    virtual void SteamAPIServerActivated() = 0;
 };
 
 #endif

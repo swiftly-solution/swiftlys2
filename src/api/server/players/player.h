@@ -79,19 +79,6 @@ public:
 
     virtual void SendMsg(MessageType type, const std::string& message, int duration) = 0;
 
-    virtual bool IsFakeClient() = 0;
-    virtual void SetFakeClient(bool state) = 0;
-    virtual bool IsAuthorized() = 0;
-
-    virtual uint32_t GetConnectedTime() = 0;
-
-    virtual void SetUnauthorizedSteamID(uint64_t steamID) = 0;
-
-    virtual uint64_t GetUnauthorizedSteamID() = 0;
-    virtual uint64_t GetSteamID() = 0;
-
-    virtual void ChangeAuthorizationState(bool bAuthorized) = 0;
-
     /** Player SDK Classes **/
     virtual void* GetController() = 0;
     virtual void* GetPawn() = 0;
@@ -99,7 +86,6 @@ public:
     virtual std::optional<int> GetTeam() = 0;
     virtual int32_t GetKills() = 0;
     virtual const char* GetName() = 0;
-
 
     /** Engine Stuff **/
     virtual std::string GetIPAddress() = 0;
@@ -118,8 +104,6 @@ public:
     virtual void ClearRenderMenuCenterText() = 0;
     virtual bool HasMenuShown() = 0;
 
-    virtual bool IsFirstSpawn() = 0;
-    virtual void SetFirstSpawn(bool state) = 0;
 };
 
 #endif

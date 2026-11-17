@@ -11,6 +11,7 @@ using SwiftlyS2.Core.Scheduler;
 using SwiftlyS2.Core.SchemaDefinitions;
 using SwiftlyS2.Shared.ProtobufDefinitions;
 using SwiftlyS2.Core.Players;
+using SwiftlyS2.Shared.Players;
 using SwiftlyS2.Core.EntitySystem;
 using SwiftlyS2.Core.Services;
 using SwiftlyS2.Core.ProtobufDefinitions;
@@ -23,6 +24,7 @@ internal enum CoreEvent
     Tick,
     WorldUpdate,
     ClientConnected,
+    ClientConnectionEstablished,
     ClientDisconnected,
     ClientKeyStateChanged,
     ClientPutInServer,
@@ -57,6 +59,7 @@ internal enum CoreEvent
     ClientVoice,
     ClientSettingsChanged,
     CustomHudClicked,
+    FindTargettedPlayers,
 }
 
 internal static class EventPublisher
@@ -132,7 +135,7 @@ internal static class EventPublisher
 
     private static void Report( Exception e )
     {
-        if (GlobalExceptionHandler.Handle(ref e)) AnsiConsole.WriteException(e);
+        AnsiConsole.WriteException(e);
     }
 
     public static void Register()
@@ -141,18 +144,15 @@ internal static class EventPublisher
         {
             NativeEvents.RegisterOnGameTickCallback((nint)(delegate* unmanaged< byte, byte, byte, void >)&OnTick);
             NativeEvents.RegisterOnPreworldUpdateCallback((nint)(delegate* unmanaged< byte, void >)&OnPreworldUpdate);
-            NativeEvents.RegisterOnClientConnectCallback((nint)(delegate* unmanaged< int, byte >)&OnClientConnected);
+            NativeEvents.RegisterOnClientConnectCallback((nint)(delegate* unmanaged< int, ulong, byte >)&OnClientConnected);
+            NativeEvents.RegisterOnClientConnectionEstablishedCallback((nint)(delegate* unmanaged< int, byte, void >)&OnClientConnectionEstablished);
             NativeEvents.RegisterOnClientDisconnectCallback((nint)(delegate* unmanaged< int, int, void >)&OnClientDisconnected);
             NativeEvents.RegisterOnClientKeyStateChangedCallback((nint)(delegate* unmanaged< int, GameButtons, byte, void >)&OnClientKeyStateChanged);
-            NativeEvents.RegisterOnClientPutInServerCallback((nint)(delegate* unmanaged< int, int, void >)&OnClientPutInServer);
-            NativeEvents.RegisterOnClientSteamAuthorizeCallback((nint)(delegate* unmanaged< int, void >)&OnClientSteamAuthorize);
-            NativeEvents.RegisterOnClientSteamAuthorizeFailCallback((nint)(delegate* unmanaged< int, void >)&OnClientSteamAuthorizeFail);
+            NativeEvents.RegisterOnClientPutInServerCallback((nint)(delegate* unmanaged< int, int, byte, void >)&OnClientPutInServer);
             NativeEvents.RegisterOnEntityCreatedCallback((nint)(delegate* unmanaged< nint, void >)&OnEntityCreated);
             NativeEvents.RegisterOnEntityDeletedCallback((nint)(delegate* unmanaged< nint, void >)&OnEntityDeleted);
             NativeEvents.RegisterOnEntityParentChangedCallback((nint)(delegate* unmanaged< nint, nint, void >)&OnEntityParentChanged);
             NativeEvents.RegisterOnEntitySpawnedCallback((nint)(delegate* unmanaged< nint, void >)&OnEntitySpawned);
-            NativeEvents.RegisterOnMapLoadCallback((nint)(delegate* unmanaged< nint, void >)&OnMapLoad);
-            NativeEvents.RegisterOnMapUnloadCallback((nint)(delegate* unmanaged< nint, void >)&OnMapUnload);
             NativeEvents.RegisterOnStartupServerCallback((nint)(delegate* unmanaged< void >)&OnStartupServer);
             _ = NativeConvars.AddQueryClientCvarCallback((nint)(delegate* unmanaged< int, nint, nint, void >)&ConVarQueryCallback);
             NativeCommands.SetCommandHandler((nint)(delegate* unmanaged< nint, int, nint, nint, nint, byte, void >)&OnCommandDispatch);
@@ -389,11 +389,11 @@ internal static class EventPublisher
     }
 
     [UnmanagedCallersOnly]
-    public static byte OnClientConnected( int playerId )
+    public static byte OnClientConnected( int playerId, ulong unauthorizedSteamID )
     {
         try
         {
-            PlayerManagerService.RegisterPlayerObject(playerId);
+            PlayerManagerService.RegisterPlayerObject(playerId, unauthorizedSteamID);
 
             var subs = Router.Get(CoreEvent.ClientConnected);
             if (subs.Length == 0) return 1;
@@ -415,12 +415,41 @@ internal static class EventPublisher
                 }
             }
 
-            return @event.Result == HookResult.CancelOriginal ? (byte)0 : (byte)1;
+            if (@event.Result == HookResult.CancelOriginal)
+            {
+                PlayerManagerService.UnregisterPlayerObject(playerId);
+                return 0;
+            }
+
+            return 1;
         }
         catch (Exception e)
         {
             Report(e);
             return 1;
+        }
+    }
+
+    [UnmanagedCallersOnly]
+    public static void OnClientConnectionEstablished( int playerId, byte isAuthorized )
+    {
+        try
+        {
+            if (isAuthorized != 0)
+            {
+                var playerObject = PlayerManagerService.GetPlayerObject(playerId);
+                if(playerObject != null) playerObject.ChangeAuthorizationState(true);
+            }
+
+            var subs = Router.Get(CoreEvent.ClientConnectionEstablished);
+            if (subs.Length == 0) return;
+
+            OnClientConnectionEstablishedEvent @event = new() { PlayerId = playerId };
+            foreach (var sub in subs) sub.InvokeOnClientConnectionEstablished(ref @event);
+        }
+        catch (Exception e)
+        {
+            Report(e);
         }
     }
 
@@ -470,11 +499,11 @@ internal static class EventPublisher
     }
 
     [UnmanagedCallersOnly]
-    public static void OnClientPutInServer( int playerId, int clientKind )
+    public static void OnClientPutInServer( int playerId, int clientKind, byte isAuthorized )
     {
         try
         {
-            if (clientKind == (int)ClientKind.Bot) PlayerManagerService.RegisterPlayerObject(playerId);
+            if (isAuthorized != 0) PlayerManagerService.GetPlayerObject(playerId)?.ChangeAuthorizationState(true);
 
             var subs = Router.Get(CoreEvent.ClientPutInServer);
             if (subs.Length == 0) return;
@@ -491,7 +520,6 @@ internal static class EventPublisher
         }
     }
 
-    [UnmanagedCallersOnly]
     public static void OnClientSteamAuthorize( int playerId )
     {
         var subs = Router.Get(CoreEvent.ClientSteamAuthorize);
@@ -508,7 +536,6 @@ internal static class EventPublisher
         }
     }
 
-    [UnmanagedCallersOnly]
     public static void OnClientSteamAuthorizeFail( int playerId )
     {
         var subs = Router.Get(CoreEvent.ClientSteamAuthorizeFail);
@@ -603,8 +630,7 @@ internal static class EventPublisher
         }
     }
 
-    [UnmanagedCallersOnly]
-    public static void OnMapLoad( nint mapNamePtr )
+    public static void OnMapLoad( string mapName )
     {
         try
         {
@@ -613,7 +639,7 @@ internal static class EventPublisher
             var subs = Router.Get(CoreEvent.MapLoad);
             if (subs.Length == 0) return;
 
-            OnMapLoadEvent @event = new() { MapName = StringAlloc.CreateCSharpString(mapNamePtr) };
+            OnMapLoadEvent @event = new() { MapName = mapName };
             foreach (var sub in subs) sub.InvokeOnMapLoad(ref @event);
         }
         catch (Exception e)
@@ -654,8 +680,7 @@ internal static class EventPublisher
         }
     }
 
-    [UnmanagedCallersOnly]
-    public static void OnMapUnload( nint mapNamePtr )
+    public static void OnMapUnload( string mapName )
     {
         EntitySystemService.cachedGameRulesProxy = null;
 
@@ -664,7 +689,7 @@ internal static class EventPublisher
 
         try
         {
-            OnMapUnloadEvent @event = new() { MapName = StringAlloc.CreateCSharpString(mapNamePtr) };
+            OnMapUnloadEvent @event = new() { MapName = mapName };
             foreach (var sub in subs) sub.InvokeOnMapUnload(ref @event);
         }
         catch (Exception e)
@@ -940,5 +965,19 @@ internal static class EventPublisher
         {
             Report(e);
         }
+    }
+
+    public static bool InvokeOnFindTargettedPlayers( IPlayer player, string target, TargetSearchMode searchMode, IPlayer candidate, bool isMatch )
+    {
+        var subs = Router.Get(CoreEvent.FindTargettedPlayers);
+        if (subs.Length == 0) return isMatch;
+
+        OnFindTargettedPlayersEvent @event = new() { Player = player, Target = target, SearchMode = searchMode, Candidate = candidate, IsMatch = isMatch };
+        foreach (var sub in subs)
+        {
+            sub.InvokeOnFindTargettedPlayers(ref @event);
+            if (@event.Result is HookResult.Handled or HookResult.Stop) break;
+        }
+        return @event.IsMatch;
     }
 }
