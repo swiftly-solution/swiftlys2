@@ -102,7 +102,7 @@ jobs:
     - name: Build coreclr-tracer
       working-directory: tracer
       run: |
-        xmake f -P . -m release --cc=gcc-14 --cxx=g++-14 -y
+        xmake f -P . -m release --cc=gcc-14 --cxx=g++-14 --ld=g++-14 --sh=g++-14 -y
         xmake build -P . -y
     - name: Build
       run: |
