@@ -19,6 +19,6 @@
 #ifndef src_api_shared_env_h
 #define src_api_shared_env_h
 
-void putenv(const char* variable, const char* value, int replace);
+void envvar(const char* variable, const char* value, int replace);
 
 #endif

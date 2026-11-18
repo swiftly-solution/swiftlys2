@@ -16,6 +16,7 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ************************************************************************************************/
 
+#include "api/tracer/tracer.h"
 #ifdef _WIN32
 
 #include <api/interfaces/interfaces.h>
@@ -24,21 +25,21 @@
 
 #include "crashreporter.h"
 
-#include <core/managed/host/strconv.h>
 #include <core/entrypoint.h>
+#include <core/managed/host/strconv.h>
 
 #include <format>
 
 #include <common/path_helper.h>
 #include <common/scoped_ptr.h>
 #include <google_breakpad/processor/basic_source_line_resolver.h>
+#include <google_breakpad/processor/call_stack.h>
 #include <google_breakpad/processor/minidump_processor.h>
 #include <google_breakpad/processor/process_state.h>
-#include <processor/simple_symbol_supplier.h>
-#include <processor/stackwalk_common.h>
-#include <google_breakpad/processor/call_stack.h>
 #include <google_breakpad/processor/stack_frame.h>
 #include <processor/pathname_stripper.h>
+#include <processor/simple_symbol_supplier.h>
+#include <processor/stackwalk_common.h>
 
 void TracerDump(const std::string& corePath, const char* path);
 
@@ -58,9 +59,7 @@ void InitCrashReporterWindows()
 
     MINIDUMP_TYPE mdmpType = static_cast<MINIDUMP_TYPE>(MiniDumpWithUnloadedModules | MiniDumpWithFullMemoryInfo);
 
-    exceptionHandler = new google_breakpad::ExceptionHandler(
-        wideString, NULL, windowsDumpCallback, NULL, google_breakpad::ExceptionHandler::HANDLER_ALL,
-        mdmpType, static_cast<const wchar_t*>(NULL), NULL);
+    exceptionHandler = new google_breakpad::ExceptionHandler(wideString, NULL, windowsDumpCallback, NULL, google_breakpad::ExceptionHandler::HANDLER_ALL, mdmpType, static_cast<const wchar_t*>(NULL), NULL);
 
     vectoredHandler = AddVectoredExceptionHandler(1, BreakpadVectoredHandler);
 }
@@ -113,7 +112,8 @@ LONG CALLBACK BreakpadVectoredHandler(_In_ PEXCEPTION_POINTERS ExceptionInfo)
 
         return EXCEPTION_EXECUTE_HANDLER;
     }
-    else {
+    else
+    {
         return EXCEPTION_CONTINUE_SEARCH;
     }
 }
@@ -125,19 +125,13 @@ static bool windowsDumpCallback(const wchar_t* dumpPath, const wchar_t* minidump
     std::string dmpFolder = StringTight(dumpPath);
     ConsoleLogger_FlushForCrash();
 
-    auto tracerLevel = g_pCrashReporter->GetDotnetCrashTracerLevel();
-    if (tracerLevel > 0)
-    {
-        std::string tracerPath = dmpFolder + "\\managedtrace.txt";
-        g_pLogger->Warning("Crash Reporter", std::format("Dumping managed trace to: {}\n", tracerPath));
-        TracerDump(g_SwiftlyCore.GetCorePath(), tracerPath.c_str());
-    }
+    auto managedSnapshot = g_pTracer->TakeCrashSnapshot();
 
     std::string mdmpId = StringTight(minidump_id);
-
     std::string mdmpPath = std::format("{}\\{}.dmp", dmpFolder, mdmpId);
 
-    if (!succeeded) {
+    if (!succeeded)
+    {
         g_pLogger->Error("Crash Reporter", std::format("Failed to write minidump to '{}'\n", mdmpPath));
         return succeeded;
     }
@@ -154,11 +148,13 @@ static bool windowsDumpCallback(const wchar_t* dumpPath, const wchar_t* minidump
     google_breakpad::MinidumpMemoryList::set_max_regions(std::numeric_limits<uint32_t>::max());
 
     google_breakpad::Minidump mdmp(mdmpPath);
-    if (!mdmp.Read()) {
+    if (!mdmp.Read())
+    {
         g_pLogger->Error("Crash Reporter", std::format("Failed to read minidump from '{}'\n", mdmpPath));
         return succeeded;
     }
-    else {
+    else
+    {
         google_breakpad::ProcessState processState;
         if (minidump_processor.Process(&mdmp, &processState) != google_breakpad::PROCESS_OK)
         {
@@ -166,7 +162,7 @@ static bool windowsDumpCallback(const wchar_t* dumpPath, const wchar_t* minidump
         }
         else
         {
-            auto crashInfoJson = FormatProcessState(processState, &resolver);
+            auto crashInfoJson = FormatProcessState(processState, &resolver, managedSnapshot);
             Files::Write(g_relativeDumpPath + "\\crashinfo.json", crashInfoJson, false);
         }
     }
@@ -200,7 +196,8 @@ void ParseAndWriteCrashInfo(const std::string& mdmpAbsPath, const std::string& c
         return;
     }
 
-    auto crashInfoJson = FormatProcessState(processState, &resolver);
+    std::map<uint32_t, std::vector<Event>> empty{};
+    auto crashInfoJson = FormatProcessState(processState, &resolver, empty);
     Files::Write(crashInfoRelPath, crashInfoJson, false);
 }
 

@@ -139,31 +139,6 @@ void CrashReporter::Shutdown()
         Files::Delete(g_relativeDumpPath);
 }
 
-void CrashReporter::EnableDotnetCrashTracer(int level)
-{
-    PROFILE_FUNCTION();
-
-    g_pLogger->Warning("Crash Reporter", std::format("Dotnet crash tracer level set to: {}\n", level));
-
-    m_tracerLevel = level;
-    if (level <= 0)
-    {
-        return;
-    }
-
-    setEnvVar("CORECLR_ENABLE_PROFILING", "1");
-    setEnvVar("CORECLR_PROFILER", "{a2648b53-a560-486c-9e56-c3922a330182}");
-    auto tracerPath = Files::GeneratePath(g_SwiftlyCore.GetCorePath() + WIN_LINUX("bin\\win64\\sw2tracer.dll", "bin/linuxsteamrt64/libsw2tracer.so"));
-    setEnvVar("CORECLR_PROFILER_PATH", tracerPath);
-}
-
-int CrashReporter::GetDotnetCrashTracerLevel()
-{
-    PROFILE_FUNCTION();
-
-    return m_tracerLevel;
-}
-
 void CrashReporter::ReportPreventionIncident(std::string category, std::string reason)
 {
     PROFILE_FUNCTION();

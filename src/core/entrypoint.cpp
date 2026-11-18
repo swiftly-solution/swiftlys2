@@ -39,6 +39,7 @@
 #include <monitor/consolelogger/consolelogger.h>
 #include <monitor/logger/logger.h>
 
+#include <monitor/crashreporter/tracer.h>
 #include <public/engine2/igameeventsystem.h>
 #include <public/engine2/ivengineserver2.h>
 #include <public/tier0/convar.h>
@@ -54,7 +55,7 @@
 #include <thread>
 
 SwiftlyCore g_SwiftlyCore;
-GlobalState g_GlobalState {};
+GlobalState g_GlobalState{};
 std::thread::id g_mainThreadId;
 
 static CreateIFaceFn g_pServerFactory = nullptr;
@@ -70,8 +71,7 @@ static void EnsureTrailingSeparator(std::string& path)
         path += kPathSeparator;
 }
 
-template <class T>
-[[nodiscard]] static T ConfigValueOr(const char* key, T fallback)
+template <class T> [[nodiscard]] static T ConfigValueOr(const char* key, T fallback)
 {
     if (const T* value = std::get_if<T>(&g_pConfiguration->GetValue(key)))
         return *value;
@@ -148,8 +148,7 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
         return false;
     }
 
-    if (const int* level = std::get_if<int>(&g_pConfiguration->GetValue("core.DotnetCrashTracerLevel")); level && *level > 0)
-        g_pCrashReporter->EnableDotnetCrashTracer(*level);
+    InitializeTraceAPI(GetCorePath());
 
     g_pGameDataManager->GetOffsets()->Load(GetCurrentGame());
     g_pGameDataManager->GetSignatures()->Load(GetCurrentGame());
@@ -173,11 +172,13 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
             }
         }
 
-        if (g_pGameDataManager->GetPatches()->Exists("SetSchemaHammerUniqueId")) {
+        if (g_pGameDataManager->GetPatches()->Exists("SetSchemaHammerUniqueId"))
+        {
             g_pGameDataManager->GetPatches()->Apply("SetSchemaHammerUniqueId");
             g_pLogger->Info("Patching", "Applied patch: SetSchemaHammerUniqueId\n");
         }
-        else {
+        else
+        {
             g_pLogger->Warning("Patching", "Couldn't find patch: SetSchemaHammerUniqueId\n");
         }
     }

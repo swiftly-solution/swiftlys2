@@ -18,37 +18,33 @@
 
 #include "tracer.h"
 
+#include <api/interfaces/interfaces.h>
+#include <api/shared/env.h>
 #include <api/shared/files.h>
 #include <api/shared/plat.h>
 #include <api/shared/profiler.h>
 
 #include <core/managed/host/strconv.h>
 
-bool setEnvVar(const std::string& key, const std::string& value) {
-    PROFILE_FUNCTION();
+ITracer* g_pTracer = nullptr;
 
-#ifdef _WIN32
-    if (_putenv_s(key.c_str(), value.c_str()) == 0) {
-        return true;
-    }
-#else
-    if (setenv(key.c_str(), value.c_str(), 1) == 0) {
-        return true;
-    }
-#endif
-    return false;
-}
-
-void TracerDump(const std::string& corePath, const char* path)
+void InitializeTraceAPI(const std::string& corePath)
 {
     PROFILE_FUNCTION();
 
-    void* lib = load_library(WIN_LINUX(StringWide("sw2tracer.dll").c_str(), (Files::GeneratePath(corePath + "bin/linuxsteamrt64/libsw2tracer.so")).c_str()));
-    if (!lib) return;
+    const std::string tracerPath = Files::GeneratePath(corePath + WIN_LINUX("bin\\win64\\coreclr-tracer.dll", "bin/linuxsteamrt64/coreclr-tracer.so"));
 
-    Sw2TracerDumpFunc dumpFunc = (Sw2TracerDumpFunc)get_export(lib, "SW2TracerDump");
-    if (dumpFunc)
+    envvar("CORECLR_ENABLE_PROFILING", "1", 1);
+    envvar("CORECLR_PROFILER", "{2e7d6025-9ef7-4942-b35e-4a9d3c4aa024}", 1);
+    envvar("CORECLR_PROFILER_PATH", tracerPath.c_str(), 1);
+
+    void* lib = load_library(WIN_LINUX(StringWide(tracerPath).c_str(), tracerPath.c_str()));
+    if (!lib)
+        return;
+
+    GetTracerFn getTracerFunc = (GetTracerFn)get_export(lib, "GetTracer");
+    if (getTracerFunc)
     {
-        dumpFunc(path);
+        g_pTracer = getTracerFunc();
     }
 }

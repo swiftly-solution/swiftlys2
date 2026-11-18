@@ -175,9 +175,6 @@ public class TestPlugin : BasePlugin
     [Command("selfmute")]
     public void SelfMuteCommand( ICommandContext context )
     {
-        var player = context.Sender!;
-        player.VoiceFlags = VoiceFlagValue.Muted;
-
     }
 
     [Command("be")]
@@ -690,37 +687,15 @@ public class TestPlugin : BasePlugin
             _dispatchspawn = Core.Memory.GetUnmanagedFunctionByAddress<DispatchSpawnDelegate>(targetAddress.Value);
             _ = _dispatchspawn.AddHook(( next ) =>
             {
-                return ( pEntity, pKV ) =>
-                {
-                    if (order == 0)
-                    {
-                        sw = Stopwatch.StartNew();
-                    }
-                    order++;
-
-                    var result = next()(pEntity, pKV);
-
-                    order--;
-                    if (order == 0)
-                    {
-                        sw.Stop();
-                        Console.WriteLine($"DispatchSpawn took {sw.ElapsedTicks * 1_000_000 / Stopwatch.Frequency} us");
-                    }
-
-                    return result;
-                };
-            });
-
-            for (var i = 0; i < 100; i++)
-            {
-                _ = _dispatchspawn.AddHook(( next ) =>
+                unsafe
                 {
                     return ( pEntity, pKV ) =>
                     {
-                        return next()(pEntity, pKV);
+                        var result = next()(pEntity, pKV);
+                        return result;
                     };
-                });
-            }
+                }
+            });
         }
     }
 
@@ -830,7 +805,7 @@ public class TestPlugin : BasePlugin
     [Command("tt4")]
     public void TestCommand4( ICommandContext context )
     {
-        Console.WriteLine(Core.Permission.PlayerHasPermission(7656, context.Args[0]));
+        Core.Engine.DispatchParticleEffect("test", ParticleAttachment_t.PATTACH_ABSORIGIN, 0, new(), new(0));
     }
 
     [Command("tt5")]

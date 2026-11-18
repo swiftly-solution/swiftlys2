@@ -22,16 +22,17 @@
 #include "config.h"
 
 #include <api/monitor/crashreporter/crashreporter.h>
+#include <api/tracer/tracer.h>
 
+#include <google_breakpad/processor/call_stack.h>
 #include <google_breakpad/processor/process_state.h>
 #include <google_breakpad/processor/source_line_resolver_interface.h>
-#include <google_breakpad/processor/call_stack.h>
 
 #if defined _LINUX
 #include <client/linux/handler/exception_handler.h>
+#include <common/linux/http_upload.h>
 #include <common/linux/linux_libc_support.h>
 #include <third_party/lss/linux_syscall_support.h>
-#include <common/linux/http_upload.h>
 
 #include <dirent.h>
 #include <unistd.h>
@@ -43,12 +44,11 @@ class CrashReporter : public ICrashReporter
 {
 private:
     int m_tracerLevel;
+
 public:
     virtual void Init() override;
     virtual void Shutdown() override;
 
-    virtual void EnableDotnetCrashTracer(int level) override;
-    virtual int GetDotnetCrashTracerLevel() override;
     virtual void ReportPreventionIncident(std::string category, std::string reason) override;
     virtual void OnTick() override;
 };
@@ -59,7 +59,7 @@ extern void ShutdownCrashReporterWindows();
 
 extern void CrashReporterOnTickLinux();
 
-std::string FormatProcessState(const google_breakpad::ProcessState& process_state, google_breakpad::SourceLineResolverInterface* resolver);
+std::string FormatProcessState(const google_breakpad::ProcessState& process_state, google_breakpad::SourceLineResolverInterface* resolver, std::map<uint32_t, std::vector<Event>>& managedFrames);
 void ParseAndWriteCrashInfo(const std::string& mdmpAbsPath, const std::string& crashInfoRelPath);
 
 extern void ConsoleLogger_FlushForCrash();

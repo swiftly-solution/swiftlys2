@@ -19,8 +19,8 @@
 #ifndef _api_interfaces_interfaces_h
 #define _api_interfaces_interfaces_h
 
-#include <string>
 #include <api/dll/extern.h>
+#include <string>
 
 #include <api/engine/consoleoutput/consoleoutput.h>
 #include <api/engine/convars/convars.h>
@@ -31,12 +31,12 @@
 #include <api/memory/gamedata/manager.h>
 #include <api/memory/hooks/manager.h>
 
-#include <api/monitor/logger/logger.h>
 #include <api/monitor/crashreporter/crashreporter.h>
+#include <api/monitor/logger/logger.h>
 
 #include <api/network/netmessages/netmessages.h>
-
 #include <api/scripting/scripting.h>
+#include <api/tracer/tracer.h>
 
 #include <api/sdk/schema.h>
 
@@ -46,23 +46,23 @@
 
 #include <api/extension/host.h>
 
-#include <public/filesystem/filesystem.h>
-#include <public/engine2/ivengineserver2.h>
 #include <public/engine2/igameeventsystem.h>
+#include <public/engine2/igameresourceservice.h>
+#include <public/engine2/inetworkserverservice.h>
+#include <public/engine2/ivengineserver2.h>
+#include <public/filesystem/filesystem.h>
+#include <public/networkstrings/tabledefs.h>
 #include <public/networksystem/inetworkmessages.h>
 #include <public/networksystem/inetworksystem.h>
-#include <public/tier0/icvar.h>
-#include <public/schemasystem/schemasystem.h>
-#include <public/networkstrings/tabledefs.h>
 #include <public/schemasystem/atomictypes.h>
-#include <public/engine2/inetworkserverservice.h>
-#include <public/engine2/igameresourceservice.h>
+#include <public/schemasystem/schemasystem.h>
+#include <public/tier0/icvar.h>
 
 #include <s2binlib/s2binlib.h>
 
- /**
-  * Project Interfaces
-  */
+/**
+ * Project Interfaces
+ */
 
 extern ILogger* g_pLogger;
 extern IMemoryAllocator* g_pMemoryAllocator;
@@ -80,6 +80,7 @@ extern IServerCommands* g_pServerCommands;
 extern INetMessages* g_pNetMessages;
 extern IConsoleOutput* g_pConsoleOutput;
 extern IExtensionHost* g_pExtensionHost;
+extern ITracer* g_pTracer;
 extern S2BinLib004* g_pS2BinLib;
 extern std::string g_sGameFolder;
 
