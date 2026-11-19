@@ -3,7 +3,6 @@ using System.Data;
 using System.Data.Common;
 using System.Data.SQLite;
 using System.Collections.Concurrent;
-using Microsoft.Extensions.Logging;
 using Npgsql;
 using MySqlConnector;
 using SwiftlyS2.Shared.Database;
@@ -12,7 +11,6 @@ namespace SwiftlyS2.Core.Database;
 
 internal class DatabaseService : IDatabaseService
 {
-    private readonly ILogger<DatabaseService> logger;
     private readonly DatabaseConnectionManager connectionManager;
     private readonly ConcurrentDictionary<string, Func<IDbConnection>> connectionFactories = new();
 
@@ -20,9 +18,8 @@ internal class DatabaseService : IDatabaseService
     {
     }
 
-    public DatabaseService(ILogger<DatabaseService> logger, DatabaseConnectionManager connectionManager)
+    public DatabaseService(DatabaseConnectionManager connectionManager)
     {
-        this.logger = logger;
         this.connectionManager = connectionManager;
         this.connectionFactories.Clear();
     }
@@ -36,16 +33,7 @@ internal class DatabaseService : IDatabaseService
     {
         var resolvedName = ResolveConnectionName(connectionName);
 
-        try
-        {
-            return connectionFactories.GetOrAdd(resolvedName, name => CreateConnectionFactory(connectionManager.GetConnectionInfo(name)));
-        }
-        catch (Exception e)
-        {
-
-            logger.LogError(e, "Failed to create connection factory for '{ConnectionName}'", resolvedName);
-            throw;
-        }
+        return connectionFactories.GetOrAdd(resolvedName, name => CreateConnectionFactory(connectionManager.GetConnectionInfo(name)));
     }
 
     private static Func<IDbConnection> CreateConnectionFactory(DatabaseConnectionInfo info)

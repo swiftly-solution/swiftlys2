@@ -216,7 +216,7 @@ public sealed class InputMenuOption : MenuOptionBase
                     completedCts.Dispose();
                 }
             }
-            catch (Exception)
+            catch (OperationCanceledException)
             {
             }
         }, cts.Token);

@@ -5,7 +5,8 @@ namespace SwiftlyS2.Core.EntitySystem;
 
 internal static class EntityManager
 {
-    private static readonly DenseSlotTable<CEntityInstance> _Entities = new(1 << 15);
+    private const int EntityCapacity = 1 << 15;
+    private static readonly DenseSlotTable<CEntityInstance> _Entities = new(EntityCapacity);
     private static readonly CEntityInstanceImpl _Dummy = new(0);
     private static readonly Lock _lock = new();
 
@@ -20,30 +21,18 @@ internal static class EntityManager
         var entity = ClassConvertor.ConvertEntityByDesignerName(entityPtr, designerName);
         lock (_lock)
         {
-            try
-            {
-                _Entities.Set(index, entityPtr, entity);
-                return entity;
-            }
-            catch
-            {
-                return entity;
-            }
+            _Entities.Set(index, entityPtr, entity);
+            return entity;
         }
     }
 
     public static CEntityInstance? GetEntityByIndex( uint index )
     {
+        if (index >= EntityCapacity) return null;
+
         lock (_lock)
         {
-            try
-            {
-                return _Entities.Get(index);
-            }
-            catch
-            {
-                return null;
-            }
+            return _Entities.Get(index);
         }
     }
 

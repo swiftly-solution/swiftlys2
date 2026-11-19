@@ -165,55 +165,48 @@ internal class HookManager
 
     private void RebuildChain( HookChain chain )
     {
-        try
+        // Rebuild delegates from first to last, wiring each to previous pointer (or original for first)
+        if (chain.Hooked)
         {
-            // Rebuild delegates from first to last, wiring each to previous pointer (or original for first)
-            if (chain.Hooked)
-            {
-                for (var i = 0; i < chain.Nodes.Count; i++)
-                {
-                    chain.Nodes[i].BuiltDelegate = null;
-                    chain.Nodes[i].BuiltPointer = nint.Zero;
-                    if (chain.Nodes[i].HookHandle != 0)
-                    {
-                        NativeHooks.DeallocateHook(chain.Nodes[i].HookHandle);
-                        chain.Nodes[i].HookHandle = 0;
-                    }
-                }
-                chain.OriginalFunctionAddress = 0;
-                NativeHooks.DeallocateHook(chain.HookHandle);
-                chain.HookHandle = 0;
-                chain.Hooked = false;
-            }
-
             for (var i = 0; i < chain.Nodes.Count; i++)
             {
-                var node = chain.Nodes[i];
-
-                var built = node.CallbackBuilder(() => node.OriginalFuncPtr);
-                node.BuiltDelegate = built;
-                node.BuiltPointer = Marshal.GetFunctionPointerForDelegate(node.BuiltDelegate);
-                if (i == 0)
+                chain.Nodes[i].BuiltDelegate = null;
+                chain.Nodes[i].BuiltPointer = nint.Zero;
+                if (chain.Nodes[i].HookHandle != 0)
                 {
-                    chain.HookHandle = NativeHooks.AllocateHook();
-                    NativeHooks.SetHook(chain.HookHandle, chain.FunctionAddress, node.BuiltPointer);
-                    node.OriginalFuncPtr = NativeHooks.GetHookOriginal(chain.HookHandle);
-                    chain.OriginalFunctionAddress = node.OriginalFuncPtr;
-                    NativeHooks.EnableHook(chain.HookHandle);
-                    chain.Hooked = true;
-                }
-                else
-                {
-                    node.HookHandle = NativeHooks.AllocateHook();
-                    NativeHooks.SetHook(node.HookHandle, chain.Nodes[i - 1].OriginalFuncPtr, node.BuiltPointer);
-                    NativeHooks.EnableHook(node.HookHandle);
-                    node.OriginalFuncPtr = NativeHooks.GetHookOriginal(node.HookHandle);
+                    NativeHooks.DeallocateHook(chain.Nodes[i].HookHandle);
+                    chain.Nodes[i].HookHandle = 0;
                 }
             }
+            chain.OriginalFunctionAddress = 0;
+            NativeHooks.DeallocateHook(chain.HookHandle);
+            chain.HookHandle = 0;
+            chain.Hooked = false;
         }
-        catch (Exception e)
+
+        for (var i = 0; i < chain.Nodes.Count; i++)
         {
-            AnsiConsole.WriteException(e);
+            var node = chain.Nodes[i];
+
+            var built = node.CallbackBuilder(() => node.OriginalFuncPtr);
+            node.BuiltDelegate = built;
+            node.BuiltPointer = Marshal.GetFunctionPointerForDelegate(node.BuiltDelegate);
+            if (i == 0)
+            {
+                chain.HookHandle = NativeHooks.AllocateHook();
+                NativeHooks.SetHook(chain.HookHandle, chain.FunctionAddress, node.BuiltPointer);
+                node.OriginalFuncPtr = NativeHooks.GetHookOriginal(chain.HookHandle);
+                chain.OriginalFunctionAddress = node.OriginalFuncPtr;
+                NativeHooks.EnableHook(chain.HookHandle);
+                chain.Hooked = true;
+            }
+            else
+            {
+                node.HookHandle = NativeHooks.AllocateHook();
+                NativeHooks.SetHook(node.HookHandle, chain.Nodes[i - 1].OriginalFuncPtr, node.BuiltPointer);
+                NativeHooks.EnableHook(node.HookHandle);
+                node.OriginalFuncPtr = NativeHooks.GetHookOriginal(node.HookHandle);
+            }
         }
     }
 }

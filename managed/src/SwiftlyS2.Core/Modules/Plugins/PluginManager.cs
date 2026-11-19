@@ -359,23 +359,16 @@ internal class PluginManager : IPluginManager
         var coreVersion = NativeEngineHelpers.GetNativeVersion();
         var minimumApiVersion = context.Metadata.MinimumAPIVersion ?? "0.0.0";
 
-        SemVersion? coreSemver = null;
-        try
+        if (!SemVersion.TryParse(coreVersion, SemVersionStyles.AllowV, out var coreSemver))
         {
-            coreSemver = SemVersion.Parse(coreVersion, SemVersionStyles.AllowV);
+            _logger.LogWarning("Failed to parse core version '{Version}'. Skipping plugin API version check for plugin {Id}.", coreVersion, context.Metadata.Id);
         }
-        catch (Exception) { }
 
         if (coreSemver != null)
         {
-            SemVersion? minApiSemver = null;
-            try
+            if (!SemVersion.TryParse(minimumApiVersion, SemVersionStyles.AllowV, out var minApiSemver))
             {
-                minApiSemver = SemVersion.Parse(minimumApiVersion, SemVersionStyles.AllowV);
-            }
-            catch (Exception e)
-            {
-                _logger.LogWarning(e, "Failed to parse minimum API version for plugin {Id}: '{Version}'. Falling back to '0.0.0'.", context.Metadata.Id, minimumApiVersion);
+                _logger.LogWarning("Failed to parse minimum API version for plugin {Id}: '{Version}'. Falling back to '0.0.0'.", context.Metadata.Id, minimumApiVersion);
                 minApiSemver = new SemVersion(0, 0, 0);
             }
 
@@ -661,7 +654,11 @@ internal class PluginManager : IPluginManager
                     _logger.LogWarning("Failed to reload plugin: {Name}", directoryName);
                 }
             }
-            catch (Exception) { }
+            catch (OperationCanceledException) { }
+            catch (Exception ex)
+            {
+                _logger.LogWarning(ex, "Failed to reload plugin: {Name}", directoryName);
+            }
         }, cts.Token);
     }
 
@@ -700,7 +697,6 @@ internal class PluginManager : IPluginManager
             }
             catch (Exception ex)
             {
-                AnsiConsole.WriteException(ex);
                 _logger.LogError(ex, "Failed to hot-load new plugin: {Name}", directoryName);
             }
             finally
@@ -1028,8 +1024,9 @@ internal class PluginManager : IPluginManager
                 }
             }
         }
-        catch
+        catch (Exception ex)
         {
+            _logger.LogDebug(ex, "Failed to read plugin metadata from: {Path}", dllPath);
         }
         finally
         {

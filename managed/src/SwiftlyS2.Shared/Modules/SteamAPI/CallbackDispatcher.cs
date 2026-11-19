@@ -441,7 +441,7 @@ internal static unsafe class CCallbackBaseVTable
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Exception in CCallbackBase.RunCallResult: {ex}");
+            Console.WriteLine($"Exception in CCallbackBase.RunCallbackOverload: {ex}");
         }
     }
 

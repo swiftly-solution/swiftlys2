@@ -12,78 +12,52 @@ namespace SwiftlyS2.Core.Memory;
 internal class MemoryService : IMemoryService, IDisposable
 {
 
-    private readonly ILogger<MemoryService> _Logger;
     private readonly HookManager _HookManager;
-    private readonly ILoggerFactory _LoggerFactory;
+    private readonly ILogger<MemoryService> _logger;
     private readonly Dictionary<nint, UnmanagedFunction> _UnmanagedFunctions = [];
     private readonly Dictionary<nint, UnmanagedMemory> _UnmanagedMemories = [];
 
     public IS2BinLib S2BinLib { get; } = new S2BinLibService();
 
-    public MemoryService( ILogger<MemoryService> logger, HookManager hookManager, ILoggerFactory loggerFactory )
+    public MemoryService( HookManager hookManager, ILogger<MemoryService> logger )
     {
-        _Logger = logger;
         _HookManager = hookManager;
-        _LoggerFactory = loggerFactory;
+        _logger = logger;
     }
 
     public IUnmanagedFunction<TDelegate> GetUnmanagedFunctionByAddress<TDelegate>( nint address ) where TDelegate : Delegate
     {
-        try
+        if (_UnmanagedFunctions.TryGetValue(address, out var function))
         {
-            if (_UnmanagedFunctions.TryGetValue(address, out var function))
+            if (function.DelegateType == typeof(TDelegate))
             {
-                if (function.DelegateType == typeof(TDelegate))
-                {
-                    return (UnmanagedFunction<TDelegate>)function;
-                }
-                else
-                {
-                    throw new Exception($"Cannot have two different delegate type on a same address. The previous one is {function.DelegateType}.");
-                }
+                return (UnmanagedFunction<TDelegate>)function;
             }
-            var newFunction = new UnmanagedFunction<TDelegate>(address, _HookManager, _LoggerFactory);
-            _UnmanagedFunctions.Add(address, newFunction);
-            return newFunction;
+
+            throw new Exception($"Cannot have two different delegate type on a same address. The previous one is {function.DelegateType}.");
         }
-        catch (Exception e)
-        {
-            _Logger.LogError(e, "Failed to get unmanaged function by address {0}.", address);
-            throw new Exception($"Failed to get unmanaged function by address {address}.");
-        }
+
+        var newFunction = new UnmanagedFunction<TDelegate>(address, _HookManager);
+        _UnmanagedFunctions.Add(address, newFunction);
+        return newFunction;
     }
 
     public IUnmanagedFunction<TDelegate> GetUnmanagedFunctionByVTable<TDelegate>( nint pVTable, int index ) where TDelegate : Delegate
     {
-        try
-        {
-            var address = pVTable.Read<nint>(index * IntPtr.Size);
-            return GetUnmanagedFunctionByAddress<TDelegate>(address);
-        }
-        catch (Exception e)
-        {
-            _Logger.LogError(e, "Failed to get unmanaged function by vtable {0} and index {1}.", pVTable, index);
-            throw new Exception($"Failed to get unmanaged function by vtable {pVTable} and index {index}.");
-        }
+        var address = pVTable.Read<nint>(index * IntPtr.Size);
+        return GetUnmanagedFunctionByAddress<TDelegate>(address);
     }
 
     public IUnmanagedMemory GetUnmanagedMemoryByAddress( nint address )
     {
-        try
+        if (_UnmanagedMemories.TryGetValue(address, out var memory))
         {
-            if (_UnmanagedMemories.TryGetValue(address, out var memory))
-            {
-                return memory;
-            }
-            var newMemory = new UnmanagedMemory(address, _HookManager, _LoggerFactory);
-            _UnmanagedMemories.Add(address, newMemory);
-            return newMemory;
+            return memory;
         }
-        catch (Exception e)
-        {
-            _Logger.LogError(e, "Failed to get unmanaged memory by address {0}.", address);
-            throw new Exception($"Failed to get unmanaged memory by address {address}.");
-        }
+
+        var newMemory = new UnmanagedMemory(address, _HookManager);
+        _UnmanagedMemories.Add(address, newMemory);
+        return newMemory;
     }
 
     public nint? GetInterfaceByName( string name )
@@ -151,11 +125,25 @@ internal class MemoryService : IMemoryService, IDisposable
     {
         foreach (var function in _UnmanagedFunctions)
         {
-            function.Value.Dispose();
+            try
+            {
+                function.Value.Dispose();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to dispose unmanaged function at {Address}.", function.Key);
+            }
         }
         foreach (var memory in _UnmanagedMemories)
         {
-            memory.Value.Dispose();
+            try
+            {
+                memory.Value.Dispose();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to dispose unmanaged memory at {Address}.", memory.Key);
+            }
         }
         _UnmanagedFunctions.Clear();
         _UnmanagedMemories.Clear();
