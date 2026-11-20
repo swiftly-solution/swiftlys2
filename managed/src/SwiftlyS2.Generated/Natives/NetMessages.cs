@@ -52,9 +52,6 @@ internal static class NativeNetMessages
 
     private unsafe static delegate* unmanaged<nint, byte*, int, int, nint, byte> _SetValue;
 
-    /// <summary>
-    /// index is -1 for a field that is not repeated
-    /// </summary>
     public unsafe static bool SetValue(nint netmsg, string fieldName, int index, int kind, nint value)
     {
         using var fieldNameStr = new ScopedCString(fieldName);

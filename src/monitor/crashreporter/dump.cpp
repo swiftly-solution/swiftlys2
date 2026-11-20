@@ -27,8 +27,6 @@
 #include <google_breakpad/processor/stack_frame_cpu.h>
 #include <processor/pathname_stripper.h>
 
-void PrintModules(nlohmann::json& modules_entry, const google_breakpad::CodeModules* modules, const std::vector<const google_breakpad::CodeModule*>* modules_without_symbols,
-                  const std::vector<const google_breakpad::CodeModule*>* modules_with_corrupt_symbols);
 void PrintThread(nlohmann::json& thread_entry, google_breakpad::CallStack* stack, const std::string& cpu, google_breakpad::MemoryRegion* memory, const google_breakpad::CodeModules* modules, google_breakpad::SourceLineResolverInterface* resolver);
 void PrintManaged(std::map<uint32_t, std::vector<Event>>& managedFrames, nlohmann::json& managedArray);
 

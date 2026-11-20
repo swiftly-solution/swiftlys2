@@ -41,8 +41,6 @@
 #include <processor/simple_symbol_supplier.h>
 #include <processor/stackwalk_common.h>
 
-void TracerDump(const std::string& corePath, const char* path);
-
 extern std::string g_dumpPath;
 extern std::string g_relativeDumpPath;
 extern bool g_dumpWritten;

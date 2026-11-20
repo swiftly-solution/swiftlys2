@@ -31,7 +31,6 @@
 
 #include <format>
 
-bool setEnvVar(const std::string& key, const std::string& value);
 std::string g_dumpPath;
 std::string g_relativeDumpPath;
 bool g_dumpWritten = false;

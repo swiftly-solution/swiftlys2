@@ -42,9 +42,6 @@
 
 class CrashReporter : public ICrashReporter
 {
-private:
-    int m_tracerLevel;
-
 public:
     virtual void Init() override;
     virtual void Shutdown() override;
