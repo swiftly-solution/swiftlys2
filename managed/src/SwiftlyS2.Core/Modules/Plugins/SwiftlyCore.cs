@@ -109,7 +109,6 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
             .AddSingleton(id)
             .AddSingleton(this)
             .AddSingleton<ISwiftlyCore>(this)
-            .AddSingleton(coreProvider.GetRequiredService<ProfileService>())
             .AddSingleton(coreProvider.GetRequiredService<PluginManager>())
             .AddSingleton(coreProvider.GetRequiredService<ConfigurationService>())
             .AddSingleton(coreProvider.GetRequiredService<IOptionsMonitor<CommandOverrideConfig>>())
