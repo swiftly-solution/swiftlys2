@@ -324,7 +324,7 @@ internal class CoreCommandService
             var table = new Table().AddColumn("Command").AddColumn("Description")
                 .AddRow("enable", "Start recording with the native tracer")
                 .AddRow("disable", "Stop recording (recorded events are discarded)")
-                .AddRow(Markup.Escape("objects <on|off>"), "Toggle object allocation tracking")
+                //.AddRow(Markup.Escape("objects <on|off>"), "Toggle object allocation tracking")
                 .AddRow("status", "Show the status of the profiler")
                 .AddRow("save", "Save the recorded events.");
             AnsiConsole.Write(table);
@@ -343,18 +343,18 @@ internal class CoreCommandService
                 profiling = false;
                 logger.LogInformation("The profiler has been disabled.");
                 break;
-            case "objects":
-                var value = args.Length > 2 ? args[2].Trim().ToLower() : "";
-                if (value is not ("on" or "off"))
-                {
-                    logger.LogWarning("Usage: profiler objects <on|off>");
-                    break;
-                }
-                NativeTracer.SetObjectTracking(value == "on");
-                logger.LogInformation("Object tracking is now {State}.", NativeTracer.IsObjectTracking() ? "on" : "off");
-                break;
+            //case "objects":
+            //    var value = args.Length > 2 ? args[2].Trim().ToLower() : "";
+            //    if (value is not ("on" or "off"))
+            //    {
+            //        logger.LogWarning("Usage: profiler objects <on|off>");
+            //        break;
+            //    }
+            //    NativeTracer.SetObjectTracking(value == "on");
+            //    logger.LogInformation("Object tracking is now {State}.", NativeTracer.IsObjectTracking() ? "on" : "off");
+            //    break;
             case "status":
-                logger.LogInformation("Profiler is currently {Status}, object tracking is {Objects}.", profiling ? "enabled" : "disabled", NativeTracer.IsObjectTracking() ? "on" : "off");
+                logger.LogInformation("Profiler is currently {Status}.", profiling ? "enabled" : "disabled");
                 break;
             case "save":
                 if (!profiling)
