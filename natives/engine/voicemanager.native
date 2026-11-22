@@ -1,0 +1,6 @@
+class VoiceManager
+
+void SetClientListenOverride = int32 playerid, int32 targetid, int32 listenOverride
+int32 GetClientListenOverride = int32 playerid, int32 targetid
+void SetClientVoiceFlags = int32 playerid, int32 flags
+int32 GetClientVoiceFlags = int32 playerid

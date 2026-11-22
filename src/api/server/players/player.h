@@ -24,6 +24,7 @@
 #include <optional>
 #include <string>
 
+#include <api/engine/voicemanager/voicemanager.h>
 #include <mutex>
 
 #include <api/utils/bitvec.h>
@@ -86,6 +87,11 @@ public:
     virtual std::optional<int> GetTeam() = 0;
     virtual int32_t GetKills() = 0;
     virtual const char* GetName() = 0;
+
+    /** Voice Manager **/
+    virtual ListenOverride& GetListenOverride(int targetid) = 0;
+    virtual VoiceFlagValue& GetVoiceFlags() = 0;
+    virtual CPlayerBitVec& GetSelfMutes() = 0;
 
     /** Engine Stuff **/
     virtual std::string GetIPAddress() = 0;

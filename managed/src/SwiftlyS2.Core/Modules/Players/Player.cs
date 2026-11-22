@@ -32,9 +32,6 @@ internal class Player : IPlayer, IDisposable
     internal Language _language = TranslationService.ServerLanguage;
 
     private readonly Atomic<bool> isAuthorized = new(false);
-    private readonly Atomic<VoiceFlagValue> voiceFlags = new(VoiceFlagValue.Normal);
-    private readonly ListenOverride[] listenOverrides = new ListenOverride[66];
-    private readonly Atomic<ulong> selfMutes = new(0);
 
     public Player( int pid, ulong unauthorizedSteamID )
     {
@@ -52,14 +49,6 @@ internal class Player : IPlayer, IDisposable
 
         if (authorized) EventPublisher.OnClientSteamAuthorize(Slot);
         else EventPublisher.OnClientSteamAuthorizeFail(Slot);
-    }
-
-    internal bool IsMutedBySelf( int slot ) => (uint)slot < 64 && (selfMutes.Load() & (1UL << slot)) != 0;
-
-    internal void SetSelfMutesLowDWord( uint mask )
-    {
-        var seen = selfMutes.Load();
-        while (!selfMutes.TryCompareExchange(ref seen, (seen & ~0xFFFFFFFFUL) | mask)) { }
     }
 
     public int PlayerID => Slot;
@@ -151,8 +140,14 @@ internal class Player : IPlayer, IDisposable
     }
 
     public VoiceFlagValue VoiceFlags {
-        get => voiceFlags.Value;
-        set => voiceFlags.Value = value;
+        get {
+            ThrowIfDisposed();
+            return (VoiceFlagValue)NativeVoiceManager.GetClientVoiceFlags(Slot);
+        }
+        set {
+            ThrowIfDisposed();
+            NativeVoiceManager.SetClientVoiceFlags(Slot, (int)value);
+        }
     }
 
     public bool IsValid =>
@@ -206,7 +201,7 @@ internal class Player : IPlayer, IDisposable
     public ListenOverride GetListenOverride( int player )
     {
         ThrowIfDisposed();
-        return (uint)player < (uint)listenOverrides.Length ? listenOverrides[player] : ListenOverride.Default;
+        return (ListenOverride)NativeVoiceManager.GetClientListenOverride(Slot, player);
     }
 
     public bool IsTransmitEntityBlocked( int entityid )
@@ -252,10 +247,7 @@ internal class Player : IPlayer, IDisposable
     public void SetListenOverride( int player, ListenOverride listenOverride )
     {
         ThrowIfDisposed();
-        if ((uint)player < (uint)listenOverrides.Length)
-        {
-            listenOverrides[player] = listenOverride;
-        }
+        NativeVoiceManager.SetClientListenOverride(Slot, player, (int)listenOverride);
     }
 
     public void ShouldBlockTransmitEntity( int entityid, bool shouldBlockTransmit )
