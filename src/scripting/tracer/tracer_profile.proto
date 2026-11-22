@@ -1,0 +1,58 @@
+/************************************************************************************************
+ *  SwiftlyS2 is a scripting framework for Source2-based games.
+ *  Copyright (C) 2023-2026 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ ************************************************************************************************/
+
+syntax = "proto2";
+
+package swiftlys2.tracer;
+
+message Profile {
+    optional uint32 version = 1 [default = 1];
+    repeated string strings = 2;
+    repeated Span spans = 3;
+    repeated Allocation allocations = 4;
+    repeated ThreadName threads = 5;
+}
+
+message Span {
+    enum Category {
+        MANAGED = 0;
+        NATIVE_TO_MANAGED = 1;
+        CUSTOM = 2;
+    }
+
+    optional uint32 name = 1;
+    optional Category category = 2 [default = MANAGED];
+    optional uint32 os_thread_id = 3;
+    optional uint64 start_ns = 4;
+    optional uint64 duration_ns = 5;
+    optional uint32 source = 6;
+    optional bool open = 7 [default = false];
+}
+
+message Allocation {
+    optional uint32 type_name = 1;
+    optional uint32 os_thread_id = 2;
+    optional uint64 timestamp_ns = 3;
+    optional uint64 size = 4;
+    optional uint32 function = 5;
+}
+
+message ThreadName {
+    optional uint32 os_thread_id = 1;
+    optional uint32 name = 2;
+}
