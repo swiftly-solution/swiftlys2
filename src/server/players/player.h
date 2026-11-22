@@ -46,6 +46,10 @@ public:
     virtual int32_t GetKills() override;
     virtual const char* GetName() override;
 
+    virtual ListenOverride& GetListenOverride(int targetid) override;
+    virtual VoiceFlagValue& GetVoiceFlags() override;
+    virtual CPlayerBitVec& GetSelfMutes() override;
+
 
     virtual std::string GetIPAddress() override;
     virtual void Kick(const std::string& sReason, int uReason) override;
@@ -68,6 +72,10 @@ private:
     void EnsureCenterMessageEvent();
 
     int m_iPlayerId = -1;
+
+    ListenOverride m_uListenMap[66] = {};
+    VoiceFlagValue m_uVoiceFlags = VoiceFlagValue::Speak_Normal;
+    CPlayerBitVec m_bvSelfMutes = {};
 
     BlockedTransmitInfo m_bvBlockedTransmittingEntities = {};
     uint64_t m_uPressedButtons = 0;
