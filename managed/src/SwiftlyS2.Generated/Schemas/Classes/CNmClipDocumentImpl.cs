@@ -86,6 +86,16 @@ internal partial class CNmClipDocumentImpl : CNmAnimDocumentImpl, CNmClipDocumen
             return ref _Handle.AsRef<int>(_EndFrameOffset);
         }
     }
+    private static nint _SpeedScaleModeOffset = -1;
+
+    public ref CNmClipDocument__SpeedScale_t SpeedScaleMode
+    {
+        get
+        {
+            if (_SpeedScaleModeOffset == -1) _SpeedScaleModeOffset = Schema.GetOffset(0x64AF70BC9A904D89);
+            return ref _Handle.AsRef<CNmClipDocument__SpeedScale_t>(_SpeedScaleModeOffset);
+        }
+    }
     private static nint _DurationOverrideSecondsOffset = -1;
 
     public ref float DurationOverrideSeconds
@@ -94,6 +104,16 @@ internal partial class CNmClipDocumentImpl : CNmAnimDocumentImpl, CNmClipDocumen
         {
             if (_DurationOverrideSecondsOffset == -1) _DurationOverrideSecondsOffset = Schema.GetOffset(0x64AF70BCC8038B38);
             return ref _Handle.AsRef<float>(_DurationOverrideSecondsOffset);
+        }
+    }
+    private static nint _SpeedScaleOffset = -1;
+
+    public ref float SpeedScale
+    {
+        get
+        {
+            if (_SpeedScaleOffset == -1) _SpeedScaleOffset = Schema.GetOffset(0x64AF70BC5E957F80);
+            return ref _Handle.AsRef<float>(_SpeedScaleOffset);
         }
     }
     private static nint _AdditiveTypeOffset = -1;

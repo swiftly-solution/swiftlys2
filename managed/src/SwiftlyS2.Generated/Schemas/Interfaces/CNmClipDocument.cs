@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmClipDocument : CNmAnimDocument, ISchemaClass<CNmClipDocument>
 {
     static CNmClipDocument ISchemaClass<CNmClipDocument>.From(nint handle) => new CNmClipDocumentImpl(handle);
-    static int ISchemaClass<CNmClipDocument>.Size => 248;
+    static int ISchemaClass<CNmClipDocument>.Size => 256;
     static string? ISchemaClass<CNmClipDocument>.ClassName => null;
 
 
@@ -27,7 +27,11 @@ public partial interface CNmClipDocument : CNmAnimDocument, ISchemaClass<CNmClip
 
     public ref int EndFrame { get; }
 
+    public ref CNmClipDocument__SpeedScale_t SpeedScaleMode { get; }
+
     public ref float DurationOverrideSeconds { get; }
+
+    public ref float SpeedScale { get; }
 
     public ref CNmClipDocument__AdditiveType_t AdditiveType { get; }
 
