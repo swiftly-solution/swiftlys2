@@ -102,16 +102,16 @@
     },
     /* From sdk */
     "CSource2Server::PreWorldUpdate": {
-        "windows": 15,
-        "linux": 15
+        "windows": 16,
+        "linux": 16
     },
     "CSource2Server::GameFrame": {
-        "windows": 19,
-        "linux": 19
+        "windows": 20,
+        "linux": 20
     },
     "CSource2Server::GameServerSteamAPIActivated": {
-        "windows": 41,
-        "linux": 41
+        "windows": 42,
+        "linux": 42
     },
     "CGameEventSystem::PostEventAbstract": {
         "windows": 16,
