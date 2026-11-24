@@ -1,6 +1,5 @@
 using System.Collections.Concurrent;
 using System.Runtime.InteropServices;
-using Microsoft.Extensions.Logging;
 using SwiftlyS2.Core.Hooks;
 using SwiftlyS2.Core.Natives.NativeObjects;
 using SwiftlyS2.Shared.Memory;
@@ -51,11 +50,8 @@ internal class UnmanagedFunction<TDelegate> : UnmanagedFunction, IUnmanagedFunct
 
     private HookManager _HookManager { get; set; }
 
-    private ILogger<UnmanagedFunction<TDelegate>> _Logger { get; set; }
-
-    public UnmanagedFunction( nint address, HookManager hookManager, ILoggerFactory loggerFactory ) : base(address)
+    public UnmanagedFunction( nint address, HookManager hookManager ) : base(address)
     {
-        _Logger = loggerFactory.CreateLogger<UnmanagedFunction<TDelegate>>();
         _HookManager = hookManager;
         DelegateType = typeof(TDelegate);
 
@@ -66,30 +62,15 @@ internal class UnmanagedFunction<TDelegate> : UnmanagedFunction, IUnmanagedFunct
 
     public Guid AddHook( Func<Func<TDelegate>, TDelegate> callbackBuilder )
     {
-        try
-        {
-            var id = _HookManager.AddHook(Address, ( builder ) => callbackBuilder(() => DelegateCache<TDelegate>.Get(builder())));
-            Hooks.Add(id);
-            return id;
-        }
-        catch (Exception e)
-        {
-            _Logger.LogError(e, "Failed to add hook to function {0}.", Address);
-            return Guid.Empty;
-        }
+        var id = _HookManager.AddHook(Address, ( builder ) => callbackBuilder(() => DelegateCache<TDelegate>.Get(builder())));
+        Hooks.Add(id);
+        return id;
     }
 
     public void RemoveHook( Guid id )
     {
-        try
-        {
-            _HookManager.Remove([id]);
-            _ = Hooks.Remove(id);
-        }
-        catch (Exception e)
-        {
-            _Logger.LogError(e, "Failed to remove hook {0} from function {1}.", id, Address);
-        }
+        _HookManager.Remove([id]);
+        _ = Hooks.Remove(id);
     }
 
     public override void Dispose()

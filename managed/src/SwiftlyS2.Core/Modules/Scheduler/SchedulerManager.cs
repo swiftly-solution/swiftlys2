@@ -39,15 +39,8 @@ internal static class SchedulerManager
 
     public static void OnWorldUpdate()
     {
-        try
-        {
-            ExecuteOnWorldUpdateAsyncTasks();
-            ExecuteOnWorldUpdateTimers();
-        }
-        catch (Exception ex)
-        {
-            AnsiConsole.WriteException(ex);
-        }
+        ExecuteOnWorldUpdateAsyncTasks();
+        ExecuteOnWorldUpdateTimers();
     }
 
     private static void ExecuteOnWorldUpdateAsyncTasks()
@@ -98,15 +91,8 @@ internal static class SchedulerManager
     public static void OnTick()
     {
         _currentTimeMs = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-        try
-        {
-            ExecuteOnTickAsyncTasks();
-            ExecuteOnTickTimers();
-        }
-        catch (Exception ex)
-        {
-            AnsiConsole.WriteException(ex);
-        }
+        ExecuteOnTickAsyncTasks();
+        ExecuteOnTickTimers();
     }
 
     private static void ExecuteOnTickAsyncTasks()

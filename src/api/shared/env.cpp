@@ -21,7 +21,7 @@
 
 #include <cstdlib>
 
-void putenv(const char* variable, const char* value, int replace)
+void envvar(const char* variable, const char* value, int replace)
 {
     PROFILE_FUNCTION();
 

@@ -33,29 +33,30 @@
 #include <common/path_helper.h>
 #include <common/scoped_ptr.h>
 #include <google_breakpad/processor/basic_source_line_resolver.h>
+#include <google_breakpad/processor/call_stack.h>
 #include <google_breakpad/processor/minidump_processor.h>
 #include <google_breakpad/processor/process_state.h>
-#include <processor/simple_symbol_supplier.h>
-#include <processor/stackwalk_common.h>
-#include <google_breakpad/processor/call_stack.h>
 #include <google_breakpad/processor/stack_frame.h>
 #include <processor/pathname_stripper.h>
+#include <processor/simple_symbol_supplier.h>
+#include <processor/stackwalk_common.h>
+
 
 extern std::string g_dumpPath;
 extern std::string g_relativeDumpPath;
 extern bool g_dumpWritten;
 bool linuxDumpCallback(const google_breakpad::MinidumpDescriptor& descriptor, void* context, bool succeeded);
-void TracerDump(const std::string& corePath, const char* path);
 
 void (*SignalHandler)(int, siginfo_t*, void*);
-const int kExceptionSignals[] = { SIGSEGV, SIGABRT, SIGFPE, SIGILL, SIGBUS };
+const int kExceptionSignals[] = {SIGSEGV, SIGABRT, SIGFPE, SIGILL, SIGBUS};
 const int kNumHandledSignals = std::size(kExceptionSignals);
 
 static void CrashSignalHandler(int sig, siginfo_t* info, void* uctx)
 {
     PROFILE_FUNCTION();
 
-    if (exceptionHandler) exceptionHandler->HandleSignal(sig, info, uctx);
+    if (exceptionHandler)
+        exceptionHandler->HandleSignal(sig, info, uctx);
     _exit(1);
 }
 
@@ -118,17 +119,14 @@ bool linuxDumpCallback(const google_breakpad::MinidumpDescriptor& descriptor, vo
 {
     PROFILE_FUNCTION();
 
-    auto tracerLevel = g_pCrashReporter->GetDotnetCrashTracerLevel();
-    if (tracerLevel > 0)
-    {
-        std::string tracerPath = g_dumpPath + "/managedtrace.txt";
-        g_pLogger->Warning("Crash Reporter", std::format("Dumping managed trace to: {}\n", tracerPath));
-        TracerDump(g_SwiftlyCore.GetCorePath(), tracerPath.c_str());
-    }
-
     std::string mdmpPath = descriptor.path();
 
-    if (!succeeded) {
+    std::map<uint32_t, std::vector<Event>> managedSnapshot;
+    if (g_pTracer)
+        managedSnapshot = g_pTracer->TakeCrashSnapshot();
+
+    if (!succeeded)
+    {
         g_pLogger->Error("Crash Reporter", std::format("Failed to write minidump to '{}'\n", mdmpPath));
         ConsoleLogger_FlushForCrash();
         _exit(1);
@@ -146,13 +144,15 @@ bool linuxDumpCallback(const google_breakpad::MinidumpDescriptor& descriptor, vo
     google_breakpad::MinidumpMemoryList::set_max_regions(std::numeric_limits<uint32_t>::max());
 
     google_breakpad::Minidump mdmp(mdmpPath);
-    if (!mdmp.Read()) {
+    if (!mdmp.Read())
+    {
         g_pLogger->Error("Crash Reporter", std::format("Failed to read minidump from '{}'\n", mdmpPath));
         ConsoleLogger_FlushForCrash();
         _exit(1);
         return succeeded;
     }
-    else {
+    else
+    {
         google_breakpad::ProcessState processState;
         if (minidump_processor.Process(&mdmp, &processState) != google_breakpad::PROCESS_OK)
         {
@@ -160,7 +160,7 @@ bool linuxDumpCallback(const google_breakpad::MinidumpDescriptor& descriptor, vo
         }
         else
         {
-            auto crashInfoJson = FormatProcessState(processState, &resolver);
+            auto crashInfoJson = FormatProcessState(processState, &resolver, managedSnapshot);
             Files::Write(g_relativeDumpPath + "/crashinfo.json", crashInfoJson, false);
         }
     }
@@ -195,7 +195,8 @@ void ParseAndWriteCrashInfo(const std::string& mdmpAbsPath, const std::string& c
         return;
     }
 
-    auto crashInfoJson = FormatProcessState(processState, &resolver);
+    std::map<uint32_t, std::vector<Event>> empty{};
+    auto crashInfoJson = FormatProcessState(processState, &resolver, empty);
     Files::Write(crashInfoRelPath, crashInfoJson, false);
 }
 

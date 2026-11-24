@@ -17,20 +17,20 @@
  ************************************************************************************************/
 
 #include "crashreporter.h"
+#include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
+#include <core/entrypoint.h>
 #include <format>
 #include <nlohmann/json.hpp>
-#include <core/entrypoint.h>
-#include <api/shared/profiler.h>
 
 #include <google_breakpad/processor/stack_frame.h>
 #include <google_breakpad/processor/stack_frame_cpu.h>
 #include <processor/pathname_stripper.h>
 
-void PrintModules(nlohmann::json& modules_entry, const google_breakpad::CodeModules* modules, const std::vector<const google_breakpad::CodeModule*>* modules_without_symbols, const std::vector<const google_breakpad::CodeModule*>* modules_with_corrupt_symbols);
-void PrintThread(nlohmann::json& thread_entry, google_breakpad::CallStack* stack, const std::string& cpu,
-    google_breakpad::MemoryRegion* memory, const google_breakpad::CodeModules* modules, google_breakpad::SourceLineResolverInterface* resolver);
+void PrintThread(nlohmann::json& thread_entry, google_breakpad::CallStack* stack, const std::string& cpu, google_breakpad::MemoryRegion* memory, const google_breakpad::CodeModules* modules, google_breakpad::SourceLineResolverInterface* resolver);
+void PrintManaged(std::map<uint32_t, std::vector<Event>>& managedFrames, nlohmann::json& managedArray);
 
-std::string FormatProcessState(const google_breakpad::ProcessState& process_state, google_breakpad::SourceLineResolverInterface* resolver)
+std::string FormatProcessState(const google_breakpad::ProcessState& process_state, google_breakpad::SourceLineResolverInterface* resolver, std::map<uint32_t, std::vector<Event>>& managedFrames)
 {
     PROFILE_FUNCTION();
 
@@ -68,51 +68,70 @@ std::string FormatProcessState(const google_breakpad::ProcessState& process_stat
         threads.push_back({
             {"thread_id", i},
             {"frames", nlohmann::json::array()},
-            });
+        });
 
         nlohmann::json& thread_entry = threads.back();
         PrintThread(thread_entry, process_state.threads()->at(i), process_state.system_info()->cpu, process_state.thread_memory_regions()->at(i), process_state.modules(), resolver);
     }
 
-    nlohmann::json& modules = process["modules"];
-    PrintModules(modules, process_state.modules(), process_state.modules_without_symbols(), process_state.modules_with_corrupt_symbols());
+    nlohmann::json& managed = process["managed"];
+    PrintManaged(managedFrames, managed);
 
     return out.dump(4);
 }
 
-void PrintModules(nlohmann::json& modules_entry, const google_breakpad::CodeModules* modules, const std::vector<const google_breakpad::CodeModule*>* modules_without_symbols, const std::vector<const google_breakpad::CodeModule*>* modules_with_corrupt_symbols)
+void PrintManagedFrames(nlohmann::json& managed_entry, std::vector<Event>& frames)
 {
-    PROFILE_FUNCTION();
-
-    for (size_t i = 0; i < modules->module_count(); i++)
+    std::vector<Event> reversedFrames(frames.rbegin(), frames.rend());
+    for (auto& frame : reversedFrames)
     {
-        const google_breakpad::CodeModule* module = modules->GetModuleAtSequence(i);
-        if (!module) continue;
+        if (frame.nameId == 0)
+            continue;
 
-        nlohmann::json& module_entry = modules_entry[std::format("0x{:016X}", module->base_address())];
-        module_entry["name"] = google_breakpad::PathnameStripper::File(module->code_file());
-        module_entry["version"] = module->version();
-        module_entry["debug_file"] = google_breakpad::PathnameStripper::File(module->debug_file());
-        module_entry["debug_identifier"] = module->debug_identifier();
-        module_entry["has_symbols"] = std::find(modules_without_symbols->begin(), modules_without_symbols->end(), module) == modules_without_symbols->end();
-        module_entry["corrupt_symbols"] = std::find(modules_with_corrupt_symbols->begin(), modules_with_corrupt_symbols->end(), module) != modules_with_corrupt_symbols->end();
+        std::string function_name = g_pTracer->GetString(frame.nameId);
+        if (function_name.empty())
+            continue;
+
+        managed_entry.push_back({
+            {"index", managed_entry.size()},
+            {"function_name", function_name},
+            {"source", g_pTracer->GetString(frame.sourceId)},
+            {"address", std::format("0x{:016X}", frame.b)},
+            {"timestamp", frame.timestampNs},
+        });
     }
 }
 
-void PrintRegister(nlohmann::json& registers, const std::string& name, uint32_t value) {
+void PrintManaged(std::map<uint32_t, std::vector<Event>>& managedFrames, nlohmann::json& managedArray)
+{
+    for (auto& [thread_id, frames] : managedFrames)
+    {
+        managedArray.push_back({
+            {"thread_id", thread_id},
+            {"thread_name", g_pTracer->GetThreadName(thread_id)},
+            {"frames", nlohmann::json::array()},
+        });
+
+        nlohmann::json& managed_entry = managedArray.back();
+        PrintManagedFrames(managed_entry["frames"], frames);
+    }
+}
+
+void PrintRegister(nlohmann::json& registers, const std::string& name, uint32_t value)
+{
     PROFILE_FUNCTION();
 
     registers[name] = std::format("0x{:016X}", value);
 }
 
-void PrintRegister64(nlohmann::json& registers, const std::string& name, uint64_t value) {
+void PrintRegister64(nlohmann::json& registers, const std::string& name, uint64_t value)
+{
     PROFILE_FUNCTION();
 
     registers[name] = std::format("0x{:016X}", value);
 }
 
-void PrintThread(nlohmann::json& thread_entry, google_breakpad::CallStack* stack, const std::string& cpu,
-    google_breakpad::MemoryRegion* memory, const google_breakpad::CodeModules* modules, google_breakpad::SourceLineResolverInterface* resolver)
+void PrintThread(nlohmann::json& thread_entry, google_breakpad::CallStack* stack, const std::string& cpu, google_breakpad::MemoryRegion* memory, const google_breakpad::CodeModules* modules, google_breakpad::SourceLineResolverInterface* resolver)
 {
     PROFILE_FUNCTION();
 
@@ -123,7 +142,7 @@ void PrintThread(nlohmann::json& thread_entry, google_breakpad::CallStack* stack
         google_breakpad::StackFrame* frame = stack->frames()->at(i);
         frames.push_back({
             {"index", i},
-            });
+        });
 
         nlohmann::json& frame_entry = frames.back();
         uint64_t return_addr = frame->ReturnAddress();
@@ -131,13 +150,16 @@ void PrintThread(nlohmann::json& thread_entry, google_breakpad::CallStack* stack
         // Header
         frame_entry["address"] = std::format("0x{:016X}", return_addr);
 
-        if (frame->module) {
+        if (frame->module)
+        {
             frame_entry["module"] = google_breakpad::PathnameStripper::File(frame->module->code_file());
             frame_entry["function_offset"] = std::format("0x{:016X}", return_addr - frame->module->base_address());
-            if (!frame->function_name.empty()) {
+            if (!frame->function_name.empty())
+            {
                 frame_entry["function"] = frame->function_name;
                 frame_entry["instruction_offset"] = std::format("0x{:X}", return_addr - frame->function_base);
-                if (!frame->source_file_name.empty()) {
+                if (!frame->source_file_name.empty())
+                {
                     std::string source_file = google_breakpad::PathnameStripper::File(frame->source_file_name);
                     frame_entry["source_file"] = source_file;
                     frame_entry["source_line"] = frame->source_line;
@@ -147,12 +169,13 @@ void PrintThread(nlohmann::json& thread_entry, google_breakpad::CallStack* stack
         }
 
         // Registers
-        if (frame->trust != google_breakpad::StackFrameAMD64::FRAME_TRUST_INLINE) {
+        if (frame->trust != google_breakpad::StackFrameAMD64::FRAME_TRUST_INLINE)
+        {
             nlohmann::json& registers = frame_entry["registers"];
 
-            if (cpu == "x86") {
-                const google_breakpad::StackFrameX86* frame_x86 =
-                    reinterpret_cast<const google_breakpad::StackFrameX86*>(frame);
+            if (cpu == "x86")
+            {
+                const google_breakpad::StackFrameX86* frame_x86 = reinterpret_cast<const google_breakpad::StackFrameX86*>(frame);
 
                 if (frame_x86->context_validity & google_breakpad::StackFrameX86::CONTEXT_VALID_EIP)
                     PrintRegister(registers, "eip", frame_x86->context.eip);
@@ -166,25 +189,26 @@ void PrintThread(nlohmann::json& thread_entry, google_breakpad::CallStack* stack
                     PrintRegister(registers, "esi", frame_x86->context.esi);
                 if (frame_x86->context_validity & google_breakpad::StackFrameX86::CONTEXT_VALID_EDI)
                     PrintRegister(registers, "edi", frame_x86->context.edi);
-                if (frame_x86->context_validity == google_breakpad::StackFrameX86::CONTEXT_VALID_ALL) {
+                if (frame_x86->context_validity == google_breakpad::StackFrameX86::CONTEXT_VALID_ALL)
+                {
                     PrintRegister(registers, "eax", frame_x86->context.eax);
                     PrintRegister(registers, "ecx", frame_x86->context.ecx);
                     PrintRegister(registers, "edx", frame_x86->context.edx);
                     PrintRegister(registers, "efl", frame_x86->context.eflags);
                 }
             }
-            else if (cpu == "ppc") {
-                const google_breakpad::StackFramePPC* frame_ppc =
-                    reinterpret_cast<const google_breakpad::StackFramePPC*>(frame);
+            else if (cpu == "ppc")
+            {
+                const google_breakpad::StackFramePPC* frame_ppc = reinterpret_cast<const google_breakpad::StackFramePPC*>(frame);
 
                 if (frame_ppc->context_validity & google_breakpad::StackFramePPC::CONTEXT_VALID_SRR0)
                     PrintRegister(registers, "srr0", frame_ppc->context.srr0);
                 if (frame_ppc->context_validity & google_breakpad::StackFramePPC::CONTEXT_VALID_GPR1)
                     PrintRegister(registers, "r1", frame_ppc->context.gpr[1]);
             }
-            else if (cpu == "amd64") {
-                const google_breakpad::StackFrameAMD64* frame_amd64 =
-                    reinterpret_cast<const google_breakpad::StackFrameAMD64*>(frame);
+            else if (cpu == "amd64")
+            {
+                const google_breakpad::StackFrameAMD64* frame_amd64 = reinterpret_cast<const google_breakpad::StackFrameAMD64*>(frame);
 
                 if (frame_amd64->context_validity & google_breakpad::StackFrameAMD64::CONTEXT_VALID_RAX)
                     PrintRegister64(registers, "rax", frame_amd64->context.rax);
@@ -221,9 +245,9 @@ void PrintThread(nlohmann::json& thread_entry, google_breakpad::CallStack* stack
                 if (frame_amd64->context_validity & google_breakpad::StackFrameAMD64::CONTEXT_VALID_RIP)
                     PrintRegister64(registers, "rip", frame_amd64->context.rip);
             }
-            else if (cpu == "sparc") {
-                const google_breakpad::StackFrameSPARC* frame_sparc =
-                    reinterpret_cast<const google_breakpad::StackFrameSPARC*>(frame);
+            else if (cpu == "sparc")
+            {
+                const google_breakpad::StackFrameSPARC* frame_sparc = reinterpret_cast<const google_breakpad::StackFrameSPARC*>(frame);
 
                 if (frame_sparc->context_validity & google_breakpad::StackFrameSPARC::CONTEXT_VALID_SP)
 
@@ -234,9 +258,9 @@ void PrintThread(nlohmann::json& thread_entry, google_breakpad::CallStack* stack
                 if (frame_sparc->context_validity & google_breakpad::StackFrameSPARC::CONTEXT_VALID_PC)
                     PrintRegister(registers, "pc", frame_sparc->context.pc);
             }
-            else if (cpu == "arm") {
-                const google_breakpad::StackFrameARM* frame_arm =
-                    reinterpret_cast<const google_breakpad::StackFrameARM*>(frame);
+            else if (cpu == "arm")
+            {
+                const google_breakpad::StackFrameARM* frame_arm = reinterpret_cast<const google_breakpad::StackFrameARM*>(frame);
 
                 // Argument registers (caller-saves), which will likely only be valid
                 // for the youngest frame.
@@ -277,441 +301,315 @@ void PrintThread(nlohmann::json& thread_entry, google_breakpad::CallStack* stack
                 if (frame_arm->context_validity & google_breakpad::StackFrameARM::CONTEXT_VALID_PC)
                     PrintRegister(registers, "pc", frame_arm->context.iregs[15]);
             }
-            else if (cpu == "arm64") {
-                const google_breakpad::StackFrameARM64* frame_arm64 =
-                    reinterpret_cast<const google_breakpad::StackFrameARM64*>(frame);
+            else if (cpu == "arm64")
+            {
+                const google_breakpad::StackFrameARM64* frame_arm64 = reinterpret_cast<const google_breakpad::StackFrameARM64*>(frame);
 
-                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X0) {
+                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X0)
+                {
                     PrintRegister64(registers, "x0", frame_arm64->context.iregs[0]);
                 }
-                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X1) {
+                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X1)
+                {
                     PrintRegister64(registers, "x1", frame_arm64->context.iregs[1]);
                 }
-                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X2) {
+                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X2)
+                {
                     PrintRegister64(registers, "x2", frame_arm64->context.iregs[2]);
                 }
-                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X3) {
+                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X3)
+                {
                     PrintRegister64(registers, "x3", frame_arm64->context.iregs[3]);
                 }
-                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X4) {
+                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X4)
+                {
                     PrintRegister64(registers, "x4", frame_arm64->context.iregs[4]);
                 }
-                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X5) {
+                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X5)
+                {
                     PrintRegister64(registers, "x5", frame_arm64->context.iregs[5]);
                 }
-                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X6) {
+                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X6)
+                {
                     PrintRegister64(registers, "x6", frame_arm64->context.iregs[6]);
                 }
-                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X7) {
+                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X7)
+                {
                     PrintRegister64(registers, "x7", frame_arm64->context.iregs[7]);
                 }
-                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X8) {
+                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X8)
+                {
                     PrintRegister64(registers, "x8", frame_arm64->context.iregs[8]);
                 }
-                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X9) {
+                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X9)
+                {
                     PrintRegister64(registers, "x9", frame_arm64->context.iregs[9]);
                 }
-                if (frame_arm64->context_validity &
-                    google_breakpad::StackFrameARM64::CONTEXT_VALID_X10) {
+                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X10)
+                {
                     PrintRegister64(registers, "x10", frame_arm64->context.iregs[10]);
                 }
-                if (frame_arm64->context_validity &
-                    google_breakpad::StackFrameARM64::CONTEXT_VALID_X11) {
+                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X11)
+                {
                     PrintRegister64(registers, "x11", frame_arm64->context.iregs[11]);
                 }
-                if (frame_arm64->context_validity &
-                    google_breakpad::StackFrameARM64::CONTEXT_VALID_X12) {
+                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X12)
+                {
                     PrintRegister64(registers, "x12", frame_arm64->context.iregs[12]);
                 }
-                if (frame_arm64->context_validity &
-                    google_breakpad::StackFrameARM64::CONTEXT_VALID_X13) {
+                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X13)
+                {
                     PrintRegister64(registers, "x13", frame_arm64->context.iregs[13]);
                 }
-                if (frame_arm64->context_validity &
-                    google_breakpad::StackFrameARM64::CONTEXT_VALID_X14) {
+                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X14)
+                {
                     PrintRegister64(registers, "x14", frame_arm64->context.iregs[14]);
                 }
-                if (frame_arm64->context_validity &
-                    google_breakpad::StackFrameARM64::CONTEXT_VALID_X15) {
+                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X15)
+                {
                     PrintRegister64(registers, "x15", frame_arm64->context.iregs[15]);
                 }
-                if (frame_arm64->context_validity &
-                    google_breakpad::StackFrameARM64::CONTEXT_VALID_X16) {
+                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X16)
+                {
                     PrintRegister64(registers, "x16", frame_arm64->context.iregs[16]);
                 }
-                if (frame_arm64->context_validity &
-                    google_breakpad::StackFrameARM64::CONTEXT_VALID_X17) {
+                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X17)
+                {
                     PrintRegister64(registers, "x17", frame_arm64->context.iregs[17]);
                 }
-                if (frame_arm64->context_validity &
-                    google_breakpad::StackFrameARM64::CONTEXT_VALID_X18) {
+                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X18)
+                {
                     PrintRegister64(registers, "x18", frame_arm64->context.iregs[18]);
                 }
-                if (frame_arm64->context_validity &
-                    google_breakpad::StackFrameARM64::CONTEXT_VALID_X19) {
+                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X19)
+                {
                     PrintRegister64(registers, "x19", frame_arm64->context.iregs[19]);
                 }
-                if (frame_arm64->context_validity &
-                    google_breakpad::StackFrameARM64::CONTEXT_VALID_X20) {
+                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X20)
+                {
                     PrintRegister64(registers, "x20", frame_arm64->context.iregs[20]);
                 }
-                if (frame_arm64->context_validity &
-                    google_breakpad::StackFrameARM64::CONTEXT_VALID_X21) {
+                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X21)
+                {
                     PrintRegister64(registers, "x21", frame_arm64->context.iregs[21]);
                 }
-                if (frame_arm64->context_validity &
-                    google_breakpad::StackFrameARM64::CONTEXT_VALID_X22) {
+                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X22)
+                {
                     PrintRegister64(registers, "x22", frame_arm64->context.iregs[22]);
                 }
-                if (frame_arm64->context_validity &
-                    google_breakpad::StackFrameARM64::CONTEXT_VALID_X23) {
+                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X23)
+                {
                     PrintRegister64(registers, "x23", frame_arm64->context.iregs[23]);
                 }
-                if (frame_arm64->context_validity &
-                    google_breakpad::StackFrameARM64::CONTEXT_VALID_X24) {
+                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X24)
+                {
                     PrintRegister64(registers, "x24", frame_arm64->context.iregs[24]);
                 }
-                if (frame_arm64->context_validity &
-                    google_breakpad::StackFrameARM64::CONTEXT_VALID_X25) {
+                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X25)
+                {
                     PrintRegister64(registers, "x25", frame_arm64->context.iregs[25]);
                 }
-                if (frame_arm64->context_validity &
-                    google_breakpad::StackFrameARM64::CONTEXT_VALID_X26) {
+                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X26)
+                {
                     PrintRegister64(registers, "x26", frame_arm64->context.iregs[26]);
                 }
-                if (frame_arm64->context_validity &
-                    google_breakpad::StackFrameARM64::CONTEXT_VALID_X27) {
+                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X27)
+                {
                     PrintRegister64(registers, "x27", frame_arm64->context.iregs[27]);
                 }
-                if (frame_arm64->context_validity &
-                    google_breakpad::StackFrameARM64::CONTEXT_VALID_X28) {
+                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_X28)
+                {
                     PrintRegister64(registers, "x28", frame_arm64->context.iregs[28]);
                 }
 
                 // Registers with a dedicated or conventional purpose.
-                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_FP) {
+                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_FP)
+                {
                     PrintRegister64(registers, "fp", frame_arm64->context.iregs[29]);
                 }
-                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_LR) {
+                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_LR)
+                {
                     PrintRegister64(registers, "lr", frame_arm64->context.iregs[30]);
                 }
-                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_SP) {
+                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_SP)
+                {
                     PrintRegister64(registers, "sp", frame_arm64->context.iregs[31]);
                 }
-                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_PC) {
+                if (frame_arm64->context_validity & google_breakpad::StackFrameARM64::CONTEXT_VALID_PC)
+                {
                     PrintRegister64(registers, "pc", frame_arm64->context.iregs[32]);
                 }
             }
-            else if ((cpu == "mips") || (cpu == "mips64")) {
-                const google_breakpad::StackFrameMIPS* frame_mips =
-                    reinterpret_cast<const google_breakpad::StackFrameMIPS*>(frame);
+            else if ((cpu == "mips") || (cpu == "mips64"))
+            {
+                const google_breakpad::StackFrameMIPS* frame_mips = reinterpret_cast<const google_breakpad::StackFrameMIPS*>(frame);
 
                 if (frame_mips->context_validity & google_breakpad::StackFrameMIPS::CONTEXT_VALID_GP)
-                    PrintRegister64(registers,
-                        "gp", frame_mips->context.iregs[MD_CONTEXT_MIPS_REG_GP]);
+                    PrintRegister64(registers, "gp", frame_mips->context.iregs[MD_CONTEXT_MIPS_REG_GP]);
                 if (frame_mips->context_validity & google_breakpad::StackFrameMIPS::CONTEXT_VALID_SP)
-                    PrintRegister64(registers,
-                        "sp", frame_mips->context.iregs[MD_CONTEXT_MIPS_REG_SP]);
+                    PrintRegister64(registers, "sp", frame_mips->context.iregs[MD_CONTEXT_MIPS_REG_SP]);
                 if (frame_mips->context_validity & google_breakpad::StackFrameMIPS::CONTEXT_VALID_FP)
-                    PrintRegister64(registers,
-                        "fp", frame_mips->context.iregs[MD_CONTEXT_MIPS_REG_FP]);
+                    PrintRegister64(registers, "fp", frame_mips->context.iregs[MD_CONTEXT_MIPS_REG_FP]);
                 if (frame_mips->context_validity & google_breakpad::StackFrameMIPS::CONTEXT_VALID_RA)
-                    PrintRegister64(registers,
-                        "ra", frame_mips->context.iregs[MD_CONTEXT_MIPS_REG_RA]);
+                    PrintRegister64(registers, "ra", frame_mips->context.iregs[MD_CONTEXT_MIPS_REG_RA]);
                 if (frame_mips->context_validity & google_breakpad::StackFrameMIPS::CONTEXT_VALID_PC)
                     PrintRegister64(registers, "pc", frame_mips->context.epc);
 
                 // Save registers s0-s7
                 if (frame_mips->context_validity & google_breakpad::StackFrameMIPS::CONTEXT_VALID_S0)
-                    PrintRegister64(registers,
-                        "s0", frame_mips->context.iregs[MD_CONTEXT_MIPS_REG_S0]);
+                    PrintRegister64(registers, "s0", frame_mips->context.iregs[MD_CONTEXT_MIPS_REG_S0]);
                 if (frame_mips->context_validity & google_breakpad::StackFrameMIPS::CONTEXT_VALID_S1)
-                    PrintRegister64(registers,
-                        "s1", frame_mips->context.iregs[MD_CONTEXT_MIPS_REG_S1]);
+                    PrintRegister64(registers, "s1", frame_mips->context.iregs[MD_CONTEXT_MIPS_REG_S1]);
                 if (frame_mips->context_validity & google_breakpad::StackFrameMIPS::CONTEXT_VALID_S2)
-                    PrintRegister64(registers,
-                        "s2", frame_mips->context.iregs[MD_CONTEXT_MIPS_REG_S2]);
+                    PrintRegister64(registers, "s2", frame_mips->context.iregs[MD_CONTEXT_MIPS_REG_S2]);
                 if (frame_mips->context_validity & google_breakpad::StackFrameMIPS::CONTEXT_VALID_S3)
-                    PrintRegister64(registers,
-                        "s3", frame_mips->context.iregs[MD_CONTEXT_MIPS_REG_S3]);
+                    PrintRegister64(registers, "s3", frame_mips->context.iregs[MD_CONTEXT_MIPS_REG_S3]);
                 if (frame_mips->context_validity & google_breakpad::StackFrameMIPS::CONTEXT_VALID_S4)
-                    PrintRegister64(registers,
-                        "s4", frame_mips->context.iregs[MD_CONTEXT_MIPS_REG_S4]);
+                    PrintRegister64(registers, "s4", frame_mips->context.iregs[MD_CONTEXT_MIPS_REG_S4]);
                 if (frame_mips->context_validity & google_breakpad::StackFrameMIPS::CONTEXT_VALID_S5)
-                    PrintRegister64(registers,
-                        "s5", frame_mips->context.iregs[MD_CONTEXT_MIPS_REG_S5]);
+                    PrintRegister64(registers, "s5", frame_mips->context.iregs[MD_CONTEXT_MIPS_REG_S5]);
                 if (frame_mips->context_validity & google_breakpad::StackFrameMIPS::CONTEXT_VALID_S6)
-                    PrintRegister64(registers,
-                        "s6", frame_mips->context.iregs[MD_CONTEXT_MIPS_REG_S6]);
+                    PrintRegister64(registers, "s6", frame_mips->context.iregs[MD_CONTEXT_MIPS_REG_S6]);
                 if (frame_mips->context_validity & google_breakpad::StackFrameMIPS::CONTEXT_VALID_S7)
-                    PrintRegister64(registers,
-                        "s7", frame_mips->context.iregs[MD_CONTEXT_MIPS_REG_S7]);
+                    PrintRegister64(registers, "s7", frame_mips->context.iregs[MD_CONTEXT_MIPS_REG_S7]);
             }
-            else if (cpu == "riscv") {
-                const google_breakpad::StackFrameRISCV* frame_riscv =
-                    reinterpret_cast<const google_breakpad::StackFrameRISCV*>(frame);
+            else if (cpu == "riscv")
+            {
+                const google_breakpad::StackFrameRISCV* frame_riscv = reinterpret_cast<const google_breakpad::StackFrameRISCV*>(frame);
 
-                if (frame_riscv->context_validity &
-                    google_breakpad::StackFrameRISCV::CONTEXT_VALID_PC)
-                    PrintRegister(registers,
-                        "pc", frame_riscv->context.pc);
-                if (frame_riscv->context_validity &
-                    google_breakpad::StackFrameRISCV::CONTEXT_VALID_RA)
-                    PrintRegister(registers,
-                        "ra", frame_riscv->context.ra);
-                if (frame_riscv->context_validity &
-                    google_breakpad::StackFrameRISCV::CONTEXT_VALID_SP)
-                    PrintRegister(registers,
-                        "sp", frame_riscv->context.sp);
-                if (frame_riscv->context_validity &
-                    google_breakpad::StackFrameRISCV::CONTEXT_VALID_GP)
-                    PrintRegister(registers,
-                        "gp", frame_riscv->context.gp);
-                if (frame_riscv->context_validity &
-                    google_breakpad::StackFrameRISCV::CONTEXT_VALID_TP)
-                    PrintRegister(registers,
-                        "tp", frame_riscv->context.tp);
-                if (frame_riscv->context_validity &
-                    google_breakpad::StackFrameRISCV::CONTEXT_VALID_T0)
-                    PrintRegister(registers,
-                        "t0", frame_riscv->context.t0);
-                if (frame_riscv->context_validity &
-                    google_breakpad::StackFrameRISCV::CONTEXT_VALID_T1)
-                    PrintRegister(registers,
-                        "t1", frame_riscv->context.t1);
-                if (frame_riscv->context_validity &
-                    google_breakpad::StackFrameRISCV::CONTEXT_VALID_T2)
-                    PrintRegister(registers,
-                        "t2", frame_riscv->context.t2);
-                if (frame_riscv->context_validity &
-                    google_breakpad::StackFrameRISCV::CONTEXT_VALID_S0)
-                    PrintRegister(registers,
-                        "s0", frame_riscv->context.s0);
-                if (frame_riscv->context_validity &
-                    google_breakpad::StackFrameRISCV::CONTEXT_VALID_S1)
-                    PrintRegister(registers,
-                        "s1", frame_riscv->context.s1);
-                if (frame_riscv->context_validity &
-                    google_breakpad::StackFrameRISCV::CONTEXT_VALID_A0)
-                    PrintRegister(registers,
-                        "a0", frame_riscv->context.a0);
-                if (frame_riscv->context_validity &
-                    google_breakpad::StackFrameRISCV::CONTEXT_VALID_A1)
-                    PrintRegister(registers,
-                        "a1", frame_riscv->context.a1);
-                if (frame_riscv->context_validity &
-                    google_breakpad::StackFrameRISCV::CONTEXT_VALID_A2)
-                    PrintRegister(registers,
-                        "a2", frame_riscv->context.a2);
-                if (frame_riscv->context_validity &
-                    google_breakpad::StackFrameRISCV::CONTEXT_VALID_A3)
-                    PrintRegister(registers,
-                        "a3", frame_riscv->context.a3);
-                if (frame_riscv->context_validity &
-                    google_breakpad::StackFrameRISCV::CONTEXT_VALID_A4)
-                    PrintRegister(registers,
-                        "a4", frame_riscv->context.a4);
-                if (frame_riscv->context_validity &
-                    google_breakpad::StackFrameRISCV::CONTEXT_VALID_A5)
-                    PrintRegister(registers,
-                        "a5", frame_riscv->context.a5);
-                if (frame_riscv->context_validity &
-                    google_breakpad::StackFrameRISCV::CONTEXT_VALID_A6)
-                    PrintRegister(registers,
-                        "a6", frame_riscv->context.a6);
-                if (frame_riscv->context_validity &
-                    google_breakpad::StackFrameRISCV::CONTEXT_VALID_A7)
-                    PrintRegister(registers,
-                        "a7", frame_riscv->context.a7);
-                if (frame_riscv->context_validity &
-                    google_breakpad::StackFrameRISCV::CONTEXT_VALID_S2)
-                    PrintRegister(registers,
-                        "s2", frame_riscv->context.s2);
-                if (frame_riscv->context_validity &
-                    google_breakpad::StackFrameRISCV::CONTEXT_VALID_S3)
-                    PrintRegister(registers,
-                        "s3", frame_riscv->context.s3);
-                if (frame_riscv->context_validity &
-                    google_breakpad::StackFrameRISCV::CONTEXT_VALID_S4)
-                    PrintRegister(registers,
-                        "s4", frame_riscv->context.s4);
-                if (frame_riscv->context_validity &
-                    google_breakpad::StackFrameRISCV::CONTEXT_VALID_S5)
-                    PrintRegister(registers,
-                        "s5", frame_riscv->context.s5);
-                if (frame_riscv->context_validity &
-                    google_breakpad::StackFrameRISCV::CONTEXT_VALID_S6)
-                    PrintRegister(registers,
-                        "s6", frame_riscv->context.s6);
-                if (frame_riscv->context_validity &
-                    google_breakpad::StackFrameRISCV::CONTEXT_VALID_S7)
-                    PrintRegister(registers,
-                        "s7", frame_riscv->context.s7);
-                if (frame_riscv->context_validity &
-                    google_breakpad::StackFrameRISCV::CONTEXT_VALID_S8)
-                    PrintRegister(registers,
-                        "s8", frame_riscv->context.s8);
-                if (frame_riscv->context_validity &
-                    google_breakpad::StackFrameRISCV::CONTEXT_VALID_S9)
-                    PrintRegister(registers,
-                        "s9", frame_riscv->context.s9);
-                if (frame_riscv->context_validity &
-                    google_breakpad::StackFrameRISCV::CONTEXT_VALID_S10)
-                    PrintRegister(registers,
-                        "s10", frame_riscv->context.s10);
-                if (frame_riscv->context_validity &
-                    google_breakpad::StackFrameRISCV::CONTEXT_VALID_S11)
-                    PrintRegister(registers,
-                        "s11", frame_riscv->context.s11);
-                if (frame_riscv->context_validity &
-                    google_breakpad::StackFrameRISCV::CONTEXT_VALID_T3)
-                    PrintRegister(registers,
-                        "t3", frame_riscv->context.t3);
-                if (frame_riscv->context_validity &
-                    google_breakpad::StackFrameRISCV::CONTEXT_VALID_T4)
-                    PrintRegister(registers,
-                        "t4", frame_riscv->context.t4);
-                if (frame_riscv->context_validity &
-                    google_breakpad::StackFrameRISCV::CONTEXT_VALID_T5)
-                    PrintRegister(registers,
-                        "t5", frame_riscv->context.t5);
-                if (frame_riscv->context_validity &
-                    google_breakpad::StackFrameRISCV::CONTEXT_VALID_T6)
-                    PrintRegister(registers,
-                        "t6", frame_riscv->context.t6);
+                if (frame_riscv->context_validity & google_breakpad::StackFrameRISCV::CONTEXT_VALID_PC)
+                    PrintRegister(registers, "pc", frame_riscv->context.pc);
+                if (frame_riscv->context_validity & google_breakpad::StackFrameRISCV::CONTEXT_VALID_RA)
+                    PrintRegister(registers, "ra", frame_riscv->context.ra);
+                if (frame_riscv->context_validity & google_breakpad::StackFrameRISCV::CONTEXT_VALID_SP)
+                    PrintRegister(registers, "sp", frame_riscv->context.sp);
+                if (frame_riscv->context_validity & google_breakpad::StackFrameRISCV::CONTEXT_VALID_GP)
+                    PrintRegister(registers, "gp", frame_riscv->context.gp);
+                if (frame_riscv->context_validity & google_breakpad::StackFrameRISCV::CONTEXT_VALID_TP)
+                    PrintRegister(registers, "tp", frame_riscv->context.tp);
+                if (frame_riscv->context_validity & google_breakpad::StackFrameRISCV::CONTEXT_VALID_T0)
+                    PrintRegister(registers, "t0", frame_riscv->context.t0);
+                if (frame_riscv->context_validity & google_breakpad::StackFrameRISCV::CONTEXT_VALID_T1)
+                    PrintRegister(registers, "t1", frame_riscv->context.t1);
+                if (frame_riscv->context_validity & google_breakpad::StackFrameRISCV::CONTEXT_VALID_T2)
+                    PrintRegister(registers, "t2", frame_riscv->context.t2);
+                if (frame_riscv->context_validity & google_breakpad::StackFrameRISCV::CONTEXT_VALID_S0)
+                    PrintRegister(registers, "s0", frame_riscv->context.s0);
+                if (frame_riscv->context_validity & google_breakpad::StackFrameRISCV::CONTEXT_VALID_S1)
+                    PrintRegister(registers, "s1", frame_riscv->context.s1);
+                if (frame_riscv->context_validity & google_breakpad::StackFrameRISCV::CONTEXT_VALID_A0)
+                    PrintRegister(registers, "a0", frame_riscv->context.a0);
+                if (frame_riscv->context_validity & google_breakpad::StackFrameRISCV::CONTEXT_VALID_A1)
+                    PrintRegister(registers, "a1", frame_riscv->context.a1);
+                if (frame_riscv->context_validity & google_breakpad::StackFrameRISCV::CONTEXT_VALID_A2)
+                    PrintRegister(registers, "a2", frame_riscv->context.a2);
+                if (frame_riscv->context_validity & google_breakpad::StackFrameRISCV::CONTEXT_VALID_A3)
+                    PrintRegister(registers, "a3", frame_riscv->context.a3);
+                if (frame_riscv->context_validity & google_breakpad::StackFrameRISCV::CONTEXT_VALID_A4)
+                    PrintRegister(registers, "a4", frame_riscv->context.a4);
+                if (frame_riscv->context_validity & google_breakpad::StackFrameRISCV::CONTEXT_VALID_A5)
+                    PrintRegister(registers, "a5", frame_riscv->context.a5);
+                if (frame_riscv->context_validity & google_breakpad::StackFrameRISCV::CONTEXT_VALID_A6)
+                    PrintRegister(registers, "a6", frame_riscv->context.a6);
+                if (frame_riscv->context_validity & google_breakpad::StackFrameRISCV::CONTEXT_VALID_A7)
+                    PrintRegister(registers, "a7", frame_riscv->context.a7);
+                if (frame_riscv->context_validity & google_breakpad::StackFrameRISCV::CONTEXT_VALID_S2)
+                    PrintRegister(registers, "s2", frame_riscv->context.s2);
+                if (frame_riscv->context_validity & google_breakpad::StackFrameRISCV::CONTEXT_VALID_S3)
+                    PrintRegister(registers, "s3", frame_riscv->context.s3);
+                if (frame_riscv->context_validity & google_breakpad::StackFrameRISCV::CONTEXT_VALID_S4)
+                    PrintRegister(registers, "s4", frame_riscv->context.s4);
+                if (frame_riscv->context_validity & google_breakpad::StackFrameRISCV::CONTEXT_VALID_S5)
+                    PrintRegister(registers, "s5", frame_riscv->context.s5);
+                if (frame_riscv->context_validity & google_breakpad::StackFrameRISCV::CONTEXT_VALID_S6)
+                    PrintRegister(registers, "s6", frame_riscv->context.s6);
+                if (frame_riscv->context_validity & google_breakpad::StackFrameRISCV::CONTEXT_VALID_S7)
+                    PrintRegister(registers, "s7", frame_riscv->context.s7);
+                if (frame_riscv->context_validity & google_breakpad::StackFrameRISCV::CONTEXT_VALID_S8)
+                    PrintRegister(registers, "s8", frame_riscv->context.s8);
+                if (frame_riscv->context_validity & google_breakpad::StackFrameRISCV::CONTEXT_VALID_S9)
+                    PrintRegister(registers, "s9", frame_riscv->context.s9);
+                if (frame_riscv->context_validity & google_breakpad::StackFrameRISCV::CONTEXT_VALID_S10)
+                    PrintRegister(registers, "s10", frame_riscv->context.s10);
+                if (frame_riscv->context_validity & google_breakpad::StackFrameRISCV::CONTEXT_VALID_S11)
+                    PrintRegister(registers, "s11", frame_riscv->context.s11);
+                if (frame_riscv->context_validity & google_breakpad::StackFrameRISCV::CONTEXT_VALID_T3)
+                    PrintRegister(registers, "t3", frame_riscv->context.t3);
+                if (frame_riscv->context_validity & google_breakpad::StackFrameRISCV::CONTEXT_VALID_T4)
+                    PrintRegister(registers, "t4", frame_riscv->context.t4);
+                if (frame_riscv->context_validity & google_breakpad::StackFrameRISCV::CONTEXT_VALID_T5)
+                    PrintRegister(registers, "t5", frame_riscv->context.t5);
+                if (frame_riscv->context_validity & google_breakpad::StackFrameRISCV::CONTEXT_VALID_T6)
+                    PrintRegister(registers, "t6", frame_riscv->context.t6);
             }
-            else if (cpu == "riscv64") {
-                const google_breakpad::StackFrameRISCV64* frame_riscv64 =
-                    reinterpret_cast<const google_breakpad::StackFrameRISCV64*>(frame);
+            else if (cpu == "riscv64")
+            {
+                const google_breakpad::StackFrameRISCV64* frame_riscv64 = reinterpret_cast<const google_breakpad::StackFrameRISCV64*>(frame);
 
-                if (frame_riscv64->context_validity &
-                    google_breakpad::StackFrameRISCV64::CONTEXT_VALID_PC)
-                    PrintRegister64(registers,
-                        "pc", frame_riscv64->context.pc);
-                if (frame_riscv64->context_validity &
-                    google_breakpad::StackFrameRISCV64::CONTEXT_VALID_RA)
-                    PrintRegister64(registers,
-                        "ra", frame_riscv64->context.ra);
-                if (frame_riscv64->context_validity &
-                    google_breakpad::StackFrameRISCV64::CONTEXT_VALID_SP)
-                    PrintRegister64(registers,
-                        "sp", frame_riscv64->context.sp);
-                if (frame_riscv64->context_validity &
-                    google_breakpad::StackFrameRISCV64::CONTEXT_VALID_GP)
-                    PrintRegister64(registers,
-                        "gp", frame_riscv64->context.gp);
-                if (frame_riscv64->context_validity &
-                    google_breakpad::StackFrameRISCV64::CONTEXT_VALID_TP)
-                    PrintRegister64(registers,
-                        "tp", frame_riscv64->context.tp);
-                if (frame_riscv64->context_validity &
-                    google_breakpad::StackFrameRISCV64::CONTEXT_VALID_T0)
-                    PrintRegister64(registers,
-                        "t0", frame_riscv64->context.t0);
-                if (frame_riscv64->context_validity &
-                    google_breakpad::StackFrameRISCV64::CONTEXT_VALID_T1)
-                    PrintRegister64(registers,
-                        "t1", frame_riscv64->context.t1);
-                if (frame_riscv64->context_validity &
-                    google_breakpad::StackFrameRISCV64::CONTEXT_VALID_T2)
-                    PrintRegister64(registers,
-                        "t2", frame_riscv64->context.t2);
-                if (frame_riscv64->context_validity &
-                    google_breakpad::StackFrameRISCV64::CONTEXT_VALID_S0)
-                    PrintRegister64(registers,
-                        "s0", frame_riscv64->context.s0);
-                if (frame_riscv64->context_validity &
-                    google_breakpad::StackFrameRISCV64::CONTEXT_VALID_S1)
-                    PrintRegister64(registers,
-                        "s1", frame_riscv64->context.s1);
-                if (frame_riscv64->context_validity &
-                    google_breakpad::StackFrameRISCV64::CONTEXT_VALID_A0)
-                    PrintRegister64(registers,
-                        "a0", frame_riscv64->context.a0);
-                if (frame_riscv64->context_validity &
-                    google_breakpad::StackFrameRISCV64::CONTEXT_VALID_A1)
-                    PrintRegister64(registers,
-                        "a1", frame_riscv64->context.a1);
-                if (frame_riscv64->context_validity &
-                    google_breakpad::StackFrameRISCV64::CONTEXT_VALID_A2)
-                    PrintRegister64(registers,
-                        "a2", frame_riscv64->context.a2);
-                if (frame_riscv64->context_validity &
-                    google_breakpad::StackFrameRISCV64::CONTEXT_VALID_A3)
-                    PrintRegister64(registers,
-                        "a3", frame_riscv64->context.a3);
-                if (frame_riscv64->context_validity &
-                    google_breakpad::StackFrameRISCV64::CONTEXT_VALID_A4)
-                    PrintRegister64(registers,
-                        "a4", frame_riscv64->context.a4);
-                if (frame_riscv64->context_validity &
-                    google_breakpad::StackFrameRISCV64::CONTEXT_VALID_A5)
-                    PrintRegister64(registers,
-                        "a5", frame_riscv64->context.a5);
-                if (frame_riscv64->context_validity &
-                    google_breakpad::StackFrameRISCV64::CONTEXT_VALID_A6)
-                    PrintRegister64(registers,
-                        "a6", frame_riscv64->context.a6);
-                if (frame_riscv64->context_validity &
-                    google_breakpad::StackFrameRISCV64::CONTEXT_VALID_A7)
-                    PrintRegister64(registers,
-                        "a7", frame_riscv64->context.a7);
-                if (frame_riscv64->context_validity &
-                    google_breakpad::StackFrameRISCV64::CONTEXT_VALID_S2)
-                    PrintRegister64(registers,
-                        "s2", frame_riscv64->context.s2);
-                if (frame_riscv64->context_validity &
-                    google_breakpad::StackFrameRISCV64::CONTEXT_VALID_S3)
-                    PrintRegister64(registers,
-                        "s3", frame_riscv64->context.s3);
-                if (frame_riscv64->context_validity &
-                    google_breakpad::StackFrameRISCV64::CONTEXT_VALID_S4)
-                    PrintRegister64(registers,
-                        "s4", frame_riscv64->context.s4);
-                if (frame_riscv64->context_validity &
-                    google_breakpad::StackFrameRISCV64::CONTEXT_VALID_S5)
-                    PrintRegister64(registers,
-                        "s5", frame_riscv64->context.s5);
-                if (frame_riscv64->context_validity &
-                    google_breakpad::StackFrameRISCV64::CONTEXT_VALID_S6)
-                    PrintRegister64(registers,
-                        "s6", frame_riscv64->context.s6);
-                if (frame_riscv64->context_validity &
-                    google_breakpad::StackFrameRISCV64::CONTEXT_VALID_S7)
-                    PrintRegister64(registers,
-                        "s7", frame_riscv64->context.s7);
-                if (frame_riscv64->context_validity &
-                    google_breakpad::StackFrameRISCV64::CONTEXT_VALID_S8)
-                    PrintRegister64(registers,
-                        "s8", frame_riscv64->context.s8);
-                if (frame_riscv64->context_validity &
-                    google_breakpad::StackFrameRISCV64::CONTEXT_VALID_S9)
-                    PrintRegister64(registers,
-                        "s9", frame_riscv64->context.s9);
-                if (frame_riscv64->context_validity &
-                    google_breakpad::StackFrameRISCV64::CONTEXT_VALID_S10)
-                    PrintRegister64(registers,
-                        "s10", frame_riscv64->context.s10);
-                if (frame_riscv64->context_validity &
-                    google_breakpad::StackFrameRISCV64::CONTEXT_VALID_S11)
-                    PrintRegister64(registers,
-                        "s11", frame_riscv64->context.s11);
-                if (frame_riscv64->context_validity &
-                    google_breakpad::StackFrameRISCV64::CONTEXT_VALID_T3)
-                    PrintRegister64(registers,
-                        "t3", frame_riscv64->context.t3);
-                if (frame_riscv64->context_validity &
-                    google_breakpad::StackFrameRISCV64::CONTEXT_VALID_T4)
-                    PrintRegister64(registers,
-                        "t4", frame_riscv64->context.t4);
-                if (frame_riscv64->context_validity &
-                    google_breakpad::StackFrameRISCV64::CONTEXT_VALID_T5)
-                    PrintRegister64(registers,
-                        "t5", frame_riscv64->context.t5);
-                if (frame_riscv64->context_validity &
-                    google_breakpad::StackFrameRISCV64::CONTEXT_VALID_T6)
-                    PrintRegister64(registers,
-                        "t6", frame_riscv64->context.t6);
+                if (frame_riscv64->context_validity & google_breakpad::StackFrameRISCV64::CONTEXT_VALID_PC)
+                    PrintRegister64(registers, "pc", frame_riscv64->context.pc);
+                if (frame_riscv64->context_validity & google_breakpad::StackFrameRISCV64::CONTEXT_VALID_RA)
+                    PrintRegister64(registers, "ra", frame_riscv64->context.ra);
+                if (frame_riscv64->context_validity & google_breakpad::StackFrameRISCV64::CONTEXT_VALID_SP)
+                    PrintRegister64(registers, "sp", frame_riscv64->context.sp);
+                if (frame_riscv64->context_validity & google_breakpad::StackFrameRISCV64::CONTEXT_VALID_GP)
+                    PrintRegister64(registers, "gp", frame_riscv64->context.gp);
+                if (frame_riscv64->context_validity & google_breakpad::StackFrameRISCV64::CONTEXT_VALID_TP)
+                    PrintRegister64(registers, "tp", frame_riscv64->context.tp);
+                if (frame_riscv64->context_validity & google_breakpad::StackFrameRISCV64::CONTEXT_VALID_T0)
+                    PrintRegister64(registers, "t0", frame_riscv64->context.t0);
+                if (frame_riscv64->context_validity & google_breakpad::StackFrameRISCV64::CONTEXT_VALID_T1)
+                    PrintRegister64(registers, "t1", frame_riscv64->context.t1);
+                if (frame_riscv64->context_validity & google_breakpad::StackFrameRISCV64::CONTEXT_VALID_T2)
+                    PrintRegister64(registers, "t2", frame_riscv64->context.t2);
+                if (frame_riscv64->context_validity & google_breakpad::StackFrameRISCV64::CONTEXT_VALID_S0)
+                    PrintRegister64(registers, "s0", frame_riscv64->context.s0);
+                if (frame_riscv64->context_validity & google_breakpad::StackFrameRISCV64::CONTEXT_VALID_S1)
+                    PrintRegister64(registers, "s1", frame_riscv64->context.s1);
+                if (frame_riscv64->context_validity & google_breakpad::StackFrameRISCV64::CONTEXT_VALID_A0)
+                    PrintRegister64(registers, "a0", frame_riscv64->context.a0);
+                if (frame_riscv64->context_validity & google_breakpad::StackFrameRISCV64::CONTEXT_VALID_A1)
+                    PrintRegister64(registers, "a1", frame_riscv64->context.a1);
+                if (frame_riscv64->context_validity & google_breakpad::StackFrameRISCV64::CONTEXT_VALID_A2)
+                    PrintRegister64(registers, "a2", frame_riscv64->context.a2);
+                if (frame_riscv64->context_validity & google_breakpad::StackFrameRISCV64::CONTEXT_VALID_A3)
+                    PrintRegister64(registers, "a3", frame_riscv64->context.a3);
+                if (frame_riscv64->context_validity & google_breakpad::StackFrameRISCV64::CONTEXT_VALID_A4)
+                    PrintRegister64(registers, "a4", frame_riscv64->context.a4);
+                if (frame_riscv64->context_validity & google_breakpad::StackFrameRISCV64::CONTEXT_VALID_A5)
+                    PrintRegister64(registers, "a5", frame_riscv64->context.a5);
+                if (frame_riscv64->context_validity & google_breakpad::StackFrameRISCV64::CONTEXT_VALID_A6)
+                    PrintRegister64(registers, "a6", frame_riscv64->context.a6);
+                if (frame_riscv64->context_validity & google_breakpad::StackFrameRISCV64::CONTEXT_VALID_A7)
+                    PrintRegister64(registers, "a7", frame_riscv64->context.a7);
+                if (frame_riscv64->context_validity & google_breakpad::StackFrameRISCV64::CONTEXT_VALID_S2)
+                    PrintRegister64(registers, "s2", frame_riscv64->context.s2);
+                if (frame_riscv64->context_validity & google_breakpad::StackFrameRISCV64::CONTEXT_VALID_S3)
+                    PrintRegister64(registers, "s3", frame_riscv64->context.s3);
+                if (frame_riscv64->context_validity & google_breakpad::StackFrameRISCV64::CONTEXT_VALID_S4)
+                    PrintRegister64(registers, "s4", frame_riscv64->context.s4);
+                if (frame_riscv64->context_validity & google_breakpad::StackFrameRISCV64::CONTEXT_VALID_S5)
+                    PrintRegister64(registers, "s5", frame_riscv64->context.s5);
+                if (frame_riscv64->context_validity & google_breakpad::StackFrameRISCV64::CONTEXT_VALID_S6)
+                    PrintRegister64(registers, "s6", frame_riscv64->context.s6);
+                if (frame_riscv64->context_validity & google_breakpad::StackFrameRISCV64::CONTEXT_VALID_S7)
+                    PrintRegister64(registers, "s7", frame_riscv64->context.s7);
+                if (frame_riscv64->context_validity & google_breakpad::StackFrameRISCV64::CONTEXT_VALID_S8)
+                    PrintRegister64(registers, "s8", frame_riscv64->context.s8);
+                if (frame_riscv64->context_validity & google_breakpad::StackFrameRISCV64::CONTEXT_VALID_S9)
+                    PrintRegister64(registers, "s9", frame_riscv64->context.s9);
+                if (frame_riscv64->context_validity & google_breakpad::StackFrameRISCV64::CONTEXT_VALID_S10)
+                    PrintRegister64(registers, "s10", frame_riscv64->context.s10);
+                if (frame_riscv64->context_validity & google_breakpad::StackFrameRISCV64::CONTEXT_VALID_S11)
+                    PrintRegister64(registers, "s11", frame_riscv64->context.s11);
+                if (frame_riscv64->context_validity & google_breakpad::StackFrameRISCV64::CONTEXT_VALID_T3)
+                    PrintRegister64(registers, "t3", frame_riscv64->context.t3);
+                if (frame_riscv64->context_validity & google_breakpad::StackFrameRISCV64::CONTEXT_VALID_T4)
+                    PrintRegister64(registers, "t4", frame_riscv64->context.t4);
+                if (frame_riscv64->context_validity & google_breakpad::StackFrameRISCV64::CONTEXT_VALID_T5)
+                    PrintRegister64(registers, "t5", frame_riscv64->context.t5);
+                if (frame_riscv64->context_validity & google_breakpad::StackFrameRISCV64::CONTEXT_VALID_T6)
+                    PrintRegister64(registers, "t6", frame_riscv64->context.t6);
             }
         }
 

@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Logging;
 using SwiftlyS2.Core.Hooks;
 using SwiftlyS2.Shared.Memory;
 using SwiftlyS2.Core.Natives.NativeObjects;
@@ -11,33 +10,23 @@ internal class UnmanagedMemory : NativeHandle, IUnmanagedMemory, IDisposable
     public List<Guid> Hooks { get; init; }
     private readonly Lock hooksLock;
     private readonly HookManager hookManager;
-    private readonly ILogger<UnmanagedMemory> logger;
 
-    public UnmanagedMemory( nint address, HookManager hookManager, ILoggerFactory loggerFactory ) : base(address)
+    public UnmanagedMemory( nint address, HookManager hookManager ) : base(address)
     {
         this.Address = address;
         this.Hooks = [];
 
         this.hooksLock = new();
         this.hookManager = hookManager;
-        this.logger = loggerFactory.CreateLogger<UnmanagedMemory>();
     }
 
     public Guid AddHook( MidHookDelegate callback )
     {
-        try
+        lock (hooksLock)
         {
-            lock (hooksLock)
-            {
-                var id = hookManager.AddMidHook(Address, callback);
-                Hooks.Add(id);
-                return id;
-            }
-        }
-        catch (Exception e)
-        {
-            logger.LogError(e, "Failed to add midhook to function {Address}.", Address);
-            return Guid.Empty;
+            var id = hookManager.AddMidHook(Address, callback);
+            Hooks.Add(id);
+            return id;
         }
     }
 
@@ -52,17 +41,10 @@ internal class UnmanagedMemory : NativeHandle, IUnmanagedMemory, IDisposable
 
     public void RemoveHook( Guid id )
     {
-        try
+        lock (hooksLock)
         {
-            lock (hooksLock)
-            {
-                hookManager.RemoveMidHook([id]);
-                _ = Hooks.Remove(id);
-            }
-        }
-        catch (Exception e)
-        {
-            logger.LogError(e, "Failed to remove midhook {Id} from function {Address}.", id, Address);
+            hookManager.RemoveMidHook([id]);
+            _ = Hooks.Remove(id);
         }
     }
 }

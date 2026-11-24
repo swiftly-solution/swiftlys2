@@ -237,6 +237,27 @@ void* CPlayer::GetPlayerPawn()
     return GetHandleEntity(GetController(), CCSPlayerController_m_hPlayerPawn);
 }
 
+ListenOverride& CPlayer::GetListenOverride(int targetid)
+{
+    PROFILE_FUNCTION();
+
+    return m_uListenMap[targetid];
+}
+
+VoiceFlagValue& CPlayer::GetVoiceFlags()
+{
+    PROFILE_FUNCTION();
+
+    return m_uVoiceFlags;
+}
+
+CPlayerBitVec& CPlayer::GetSelfMutes()
+{
+    PROFILE_FUNCTION();
+
+    return m_bvSelfMutes;
+}
+
 std::string CPlayer::GetIPAddress()
 {
     PROFILE_FUNCTION();

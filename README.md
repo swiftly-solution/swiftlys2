@@ -14,6 +14,7 @@ SwiftlyS2 is built with developers in mind, providing an extensive suite of scri
 We're preventing memory leaks when working with the game's SDK and functions, having active maintenance and faster execution speeds through natives which are calling directly Native (core) code.
 
 A list of features:
+
 - **Commands**: Handles custom console commands or chat-based commands in the game.
 - **Convars**: Manages console variables (cvars) to control game behavior and configuration.
 - **Database**: Provides access to a centralized space to store your database credentials.
@@ -39,32 +40,35 @@ A list of features:
 
 ### Prerequisites
 
-- **Windows**: Visual Studio 2022 with C++ and .NET workloads
+- **Windows**: Visual Studio 2022+ with C++ and .NET workloads
 - **Linux**: GCC 11+ and .NET 10.0 SDK
 - **XMake**
 
 ### Building SwiftlyS2
 
 1. **Clone the repository**
-   ```bash
-   git clone --recurse-submodules https://github.com/swiftly-solution/swiftlys2.git
-   cd swiftlys2
-   ```
+
+```bash
+git clone --recurse-submodules https://github.com/swiftly-solution/swiftlys2.git
+cd swiftlys2
+```
 
 2. **Build the framework**
-   ```bash
-   # Windows
-   xmake -j 4
-   
-   # Linux
-   xmake -j $(nproc)
-   ```
+
+```bash
+# Windows
+xmake -j 4
+
+# Linux
+xmake -j $(nproc)
+```
 
 3. **Install to game directory**
-   ```bash
-   # Copy built files to your CS2 server
-   cp -r build/package/* /path/to/cs2/game/csgo/
-   ```
+
+```bash
+# Copy built files to your CS2 server
+cp -r build/package/* /path/to/cs2/game/csgo/
+```
 
 4. **Start your server**
 

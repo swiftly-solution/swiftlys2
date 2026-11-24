@@ -42,6 +42,7 @@ internal class ProfileService
     ];
 
     private readonly DiagnosticsClient _diagnosticsClient;
+    private readonly ILogger<ProfileService> _logger;
     private volatile ProfilerLevel _level = ProfilerLevel.Disabled;
 
     private readonly record struct RecordedEntry( string Name, double DurationMs, long TimestampUtcMs );
@@ -53,8 +54,9 @@ internal class ProfileService
     private Task? _drainTask;
     private string? _tempTraceFile;
 
-    public ProfileService( PluginManager pluginManager )
+    public ProfileService( PluginManager pluginManager, ILogger<ProfileService> logger )
     {
+        _logger = logger;
         _diagnosticsClient = new DiagnosticsClient(Environment.ProcessId);
 
         var defaultLevel = (ProfilerLevel)Math.Clamp(GlobalState.ProfilerLevel, 0, 1);
@@ -168,10 +170,11 @@ internal class ProfileService
             var stream = _session.EventStream;
             var destFile = _tempTraceFile;
             var ct = _sessionCts.Token;
-            _drainTask = Task.Run(() => CopyToFileAsync(stream, destFile, ct), CancellationToken.None);
+            _drainTask = Task.Run(() => CopyToFileAsync(stream, destFile, ct, _logger), CancellationToken.None);
         }
-        catch
+        catch (Exception ex)
         {
+            _logger.LogError(ex, "Failed to start profiler EventPipe session.");
             _session = null;
             _tempTraceFile = null;
         }
@@ -211,7 +214,7 @@ internal class ProfileService
         _drainTask = null;
     }
 
-    private static async Task CopyToFileAsync( Stream source, string destPath, CancellationToken ct )
+    private static async Task CopyToFileAsync( Stream source, string destPath, CancellationToken ct, ILogger logger )
     {
         try
         {
@@ -219,6 +222,9 @@ internal class ProfileService
             await source.CopyToAsync(file, ct).ConfigureAwait(false);
         }
         catch (OperationCanceledException) { }
-        catch { }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Failed to write profiler trace to {FilePath}.", destPath);
+        }
     }
 }

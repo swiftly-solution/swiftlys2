@@ -23,6 +23,7 @@
 #include <engine/convars/convars.h>
 #include <engine/entities/entitysystem.h>
 #include <engine/gameevents/gameevents.h>
+#include <engine/voicemanager/voicemanager.h>
 
 #include <memory/allocator/allocator.h>
 #include <memory/hooks/manager.h>
@@ -55,6 +56,7 @@ CConvarManager g_ConvarManager;
 CEventManager g_GameEventManager;
 CScriptingAPI g_ScriptingAPI;
 CPlayerManager g_PlayerManager;
+CVoiceManager g_VoiceManager;
 CServerCommands g_ServerCommands;
 CNetMessages g_NetMessages;
 CConsoleOutput g_ConsoleOutput;
@@ -72,6 +74,7 @@ IConvarManager* g_pConvarManager = &g_ConvarManager;
 IEventManager* g_pGameEventManager = &g_GameEventManager;
 IScriptingAPI* g_pScriptingAPI = &g_ScriptingAPI;
 IPlayerManager* g_pPlayerManager = &g_PlayerManager;
+IVoiceManager* g_pVoiceManager = &g_VoiceManager;
 IServerCommands* g_pServerCommands = &g_ServerCommands;
 INetMessages* g_pNetMessages = &g_NetMessages;
 IConsoleOutput* g_pConsoleOutput = &g_ConsoleOutput;

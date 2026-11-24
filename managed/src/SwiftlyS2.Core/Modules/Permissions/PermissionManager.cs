@@ -42,7 +42,7 @@ internal class PermissionManager : IPermissionManager
         lock (_lock)
         {
             _queryCache = _queryCache.Clear();
-            _defaultPermissions = config.PermissionGroups.ContainsKey("__default") ? config.PermissionGroups["__default"] : [];
+            _defaultPermissions = config.PermissionGroups.TryGetValue("__default", out var value) ? value : [];
             _playerPermissions = config.Players.ToDictionary(x => ulong.Parse(x.Key), x => x.Value);
             _subPermissions = config.PermissionGroups;
         }

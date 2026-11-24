@@ -64,10 +64,16 @@ internal sealed class GameEventCallback<T> : GameEventCallback where T : IGameEv
         try
         {
             var eventObj = T.Create(pEvent);
-            var result = callback(eventObj);
-            pDontBroadcast.Write(eventObj.DontBroadcast);
-            eventObj.Dispose();
-            return result;
+            try
+            {
+                var result = callback(eventObj);
+                pDontBroadcast.Write(eventObj.DontBroadcast);
+                return result;
+            }
+            finally
+            {
+                eventObj.Dispose();
+            }
         }
         catch (Exception e)
         {

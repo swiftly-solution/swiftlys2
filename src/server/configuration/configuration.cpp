@@ -18,11 +18,12 @@
 
 #include "configuration.h"
 
+#include <api/interfaces/interfaces.h>
 #include <api/shared/files.h>
-#include <api/shared/string.h>
 #include <api/shared/jsonc.h>
 #include <api/shared/profiler.h>
-#include <api/interfaces/interfaces.h>
+#include <api/shared/string.h>
+
 
 #include <core/entrypoint.h>
 
@@ -36,16 +37,20 @@ static ValueType FromJson(const json& j)
 {
     PROFILE_FUNCTION();
 
-    if (j.is_number_integer()) return j.get<int>();
-    if (j.is_number_float()) return j.get<double>();
-    if (j.is_boolean()) return j.get<bool>();
-    if (j.is_string()) return j.get<std::string>();
+    if (j.is_number_integer())
+        return j.get<int>();
+    if (j.is_number_float())
+        return j.get<double>();
+    if (j.is_boolean())
+        return j.get<bool>();
+    if (j.is_string())
+        return j.get<std::string>();
 
     if (j.is_array())
     {
         std::vector<ValueStruct> items;
         for (const auto& item : j)
-            items.push_back({ FromJson(item) });
+            items.push_back({FromJson(item)});
         return items;
     }
 
@@ -53,7 +58,7 @@ static ValueType FromJson(const json& j)
     {
         std::map<ValueStruct, ValueStruct> items;
         for (const auto& [key, item] : j.items())
-            items.emplace(ValueStruct{ key }, ValueStruct{ FromJson(item) });
+            items.emplace(ValueStruct{key}, ValueStruct{FromJson(item)});
         return items;
     }
 
@@ -64,20 +69,28 @@ static json ToJson(const ValueType& value)
 {
     PROFILE_FUNCTION();
 
-    return std::visit([](const auto& v) -> json {
-        using T = std::decay_t<decltype(v)>;
-        if constexpr (std::is_same_v<T, std::vector<ValueStruct>>) return json::array();
-        else if constexpr (std::is_same_v<T, std::map<ValueStruct, ValueStruct>>) return json::object();
-        else return v;
-        }, value);
+    return std::visit(
+        [](const auto& v) -> json
+        {
+            using T = std::decay_t<decltype(v)>;
+            if constexpr (std::is_same_v<T, std::vector<ValueStruct>>)
+                return json::array();
+            else if constexpr (std::is_same_v<T, std::map<ValueStruct, ValueStruct>>)
+                return json::object();
+            else
+                return v;
+        },
+        value);
 }
 
 static bool SameKind(const json& value, const json& defaultValue)
 {
     PROFILE_FUNCTION();
 
-    if (defaultValue.is_number_integer()) return value.is_number_integer();
-    if (defaultValue.is_number_float()) return value.is_number_float();
+    if (defaultValue.is_number_integer())
+        return value.is_number_integer();
+    if (defaultValue.is_number_float())
+        return value.is_number_float();
     return value.type() == defaultValue.type();
 }
 
@@ -167,17 +180,19 @@ bool Configuration::Load()
     const std::string path = g_SwiftlyCore.GetCorePath() + "configs/core.jsonc";
     const std::string game = g_SwiftlyCore.GetCurrentGame();
 
-    try {
-        CoreConfig cfg{ parseJsonc(Files::Read(path)) };
+    try
+    {
+        CoreConfig cfg{parseJsonc(Files::Read(path))};
 
-        cfg.AddList("CommandPrefixes", { "!" }, " ");
-        cfg.AddList("CommandSilentPrefixes", { "/" }, " ");
+        cfg.AddList("CommandPrefixes", {"!"}, " ");
+        cfg.AddList("CommandSilentPrefixes", {"/"}, " ");
         cfg.Add("AutoHotReload", true);
         cfg.Add("ProfilerLevel", 0);
         cfg.Add("ConsoleFilter", true);
         cfg.AddList("PatchesToPerform", {}, " ");
 
-        if (game == "cs2") cfg.Add("CS2ServerGuidelines", "https://blog.counter-strike.net/index.php/server_guidelines/");
+        if (game == "cs2")
+            cfg.Add("CS2ServerGuidelines", "https://blog.counter-strike.net/index.php/server_guidelines/");
         cfg.Add(std::format("Follow{}ServerGuidelines", str_toupper(game)), true);
 
         cfg.Add("Language", "en");
@@ -207,22 +222,21 @@ bool Configuration::Load()
         cfg.Add("ConsoleLogger.WriteIntervalMs", 2000);
         cfg.Add("ConsoleLogger.Rotation.Enable", true);
         cfg.Add("ConsoleLogger.Rotation.Mode", "file_count");
-        cfg.AddList("ConsoleLogger.Rotation.AvailableModes", { "file_count", "time_interval" }, " ");
+        cfg.AddList("ConsoleLogger.Rotation.AvailableModes", {"file_count", "time_interval"}, " ");
         cfg.Add("ConsoleLogger.Rotation.MaximumFiles", 60);
         cfg.Add("ConsoleLogger.Rotation.DeleteOlderThanHours", 168);
 
         cfg.Add("ManualLoadPlugins", false);
         cfg.AddList("PluginLoadOrder", {}, "\x01");
 
-        cfg.AddList("Menu.AvailableInputModes", { "button", "wasd" }, " ");
+        cfg.AddList("Menu.AvailableInputModes", {"button", "wasd"}, " ");
         cfg.Add("Menu.InputMode", "button");
 
         cfg.Add("Menu.ItemsPerPage", 5);
 
         cfg.Add("SteamAuth.Mode", "flexible");
-        cfg.AddList("SteamAuth.AvailableModes", { "flexible", "strict" }, " ");
+        cfg.AddList("SteamAuth.AvailableModes", {"flexible", "strict"}, " ");
 
-        cfg.Add("DotnetCrashTracerLevel", 0);
         cfg.Add("WindowsFullDump", false);
 
         if (cfg.edited)
@@ -231,7 +245,8 @@ bool Configuration::Load()
         std::unique_lock lock(m_mutex);
         m_mConfiguration = std::move(cfg.values);
     }
-    catch (json::parse_error& e) {
+    catch (json::parse_error& e)
+    {
         g_pLogger->Error("Configuration", std::format("Failed to parse the core configuration ('{}').\nError: {}.\n", path, e.what()));
     }
 
