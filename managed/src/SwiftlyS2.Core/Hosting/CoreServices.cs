@@ -19,7 +19,6 @@ internal static class CoreServices
 {
     private static readonly Type[] Singletons =
     [
-        typeof(ProfileService),
         typeof(ConfigurationService),
         typeof(RootDirService),
         typeof(DataDirectoryService),

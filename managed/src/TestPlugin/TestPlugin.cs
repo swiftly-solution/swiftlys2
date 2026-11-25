@@ -27,7 +27,6 @@ using SwiftlyS2.Shared.SteamAPI;
 using SwiftlyS2.Core.Menus.OptionsBase;
 using SwiftlyS2.Shared.Trace;
 using System.Diagnostics;
-using System.Reflection;
 
 namespace TestPlugin;
 
@@ -214,53 +213,6 @@ public class TestPlugin : BasePlugin
         Core.Logger.LogInformation("[Database] Connection info: {Info}", connectionInfo);
 
         using var conn = Core.Database.GetConnection(connectionName);
-    }
-
-    [Command("analyzenettrace")]
-    public void AnalyzeNetTraceCommand( ICommandContext context )
-    {
-        if (context.Args.Length < 1)
-        {
-            context.Reply("Usage: analyzenettrace <path-to-.nettrace>");
-            return;
-        }
-
-        var path = context.Args[0];
-        if (!File.Exists(path))
-        {
-            context.Reply($"File not found: {path}");
-            return;
-        }
-
-        context.Reply($"Analyzing {path}...");
-
-        Task.Run(() =>
-        {
-            try
-            {
-                var hostDir = AppContext.BaseDirectory;
-                var profilerDll = Path.Combine(hostDir, "..", "SwiftlyS2.Profiler.dll");
-                if (!File.Exists(profilerDll))
-                {
-                    Core.Logger.LogWarning("[NetTrace] SwiftlyS2.Profiler.dll not found at {Path}", profilerDll);
-                    return;
-                }
-
-                var asm = Assembly.LoadFrom(profilerDll);
-                _ = asm.GetType("SwiftlyS2.Core.Services.ProfilerAnalyzer")!
-                    .GetMethod("Analyze")!
-                    .Invoke(null, [path, Core.Logger]);
-
-                var summaryPath = path.EndsWith(".nettrace", StringComparison.OrdinalIgnoreCase)
-                    ? path.Replace(".nettrace", ".summary.txt")
-                    : path + ".summary.txt";
-                Core.Logger.LogInformation("[NetTrace] Analysis complete → {Path}", summaryPath);
-            }
-            catch (Exception ex)
-            {
-                Core.Logger.LogError(ex, "[NetTrace] Analysis failed.");
-            }
-        });
     }
 
     [GameEventHandler(HookMode.Pre)]
@@ -2124,7 +2076,8 @@ public class TestPlugin : BasePlugin
             {
                 for (var i = 0; i < perTick && _profilerStressRunning; i++)
                 {
-                    Core.Profiler.RecordTime("stress_event", 0.01);
+                    Core.Profiler.StartRecording("stress_event");
+                    Core.Profiler.StopRecording("stress_event");
                     total++;
                 }
 
@@ -2143,7 +2096,7 @@ public class TestPlugin : BasePlugin
             Name = "ProfilerStress"
         };
         _profilerStressThread.Start();
-        Core.Logger.LogInformation("[ProfilerStress] Started, targeting ~{Rate} events/sec. Make sure 'sw profiler enable 1' was run first, then use 'sw profiler save' to time the summary generation.", ratePerSec);
+        Core.Logger.LogInformation("[ProfilerStress] Started, targeting ~{Rate} events/sec. Make sure 'sw profiler enable' was run first.", ratePerSec);
     }
 
     [Command("profilerstressstop")]

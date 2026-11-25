@@ -5,6 +5,7 @@ using Spectre.Console;
 using Microsoft.Extensions.Logging;
 using SwiftlyS2.Shared;
 using SwiftlyS2.Core.Commands;
+using SwiftlyS2.Core.Misc;
 using SwiftlyS2.Core.Plugins;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared.Commands;
@@ -21,15 +22,19 @@ internal class CoreCommandService
     private readonly ISwiftlyCore core;
     private readonly PluginManager pluginManager;
     private readonly RootDirService rootDirService;
-    private readonly ProfileService profileService;
+    private bool profiling;
 
-    public CoreCommandService( ILogger<CoreCommandService> logger, ISwiftlyCore core, PluginManager pluginManager, RootDirService rootDirService, ProfileService profileService )
+    public CoreCommandService( ILogger<CoreCommandService> logger, ISwiftlyCore core, PluginManager pluginManager, RootDirService rootDirService )
     {
         this.logger = logger;
         this.core = core;
         this.pluginManager = pluginManager;
         this.rootDirService = rootDirService;
-        this.profileService = profileService;
+        if (GlobalState.ProfilerLevel > 0)
+        {
+            NativeTracer.StartProfiling();
+            profiling = true;
+        }
         _ = core.Command.RegisterCommand("sw", OnCommand, true, helpText: "SwiftlyS2 Core Command");
         _ = core.Command.RegisterCommand("buildinfo", ( ctx ) => ctx.Reply($"SwiftlyS2 v{NativeEngineHelpers.GetNativeVersion()}"), true, helpText: "SwiftlyS2 Build Information");
     }
@@ -317,10 +322,11 @@ internal class CoreCommandService
         if (args.Length == 1)
         {
             var table = new Table().AddColumn("Command").AddColumn("Description")
-                .AddRow("enable <1>", "Enable the profiler (1 = EventPipe)")
-                .AddRow("disable", "Disable the profiler")
+                .AddRow("enable", "Start recording with the native tracer")
+                .AddRow("disable", "Stop recording (recorded events are discarded)")
+                //.AddRow(Markup.Escape("objects <on|off>"), "Toggle object allocation tracking")
                 .AddRow("status", "Show the status of the profiler")
-                .AddRow(Markup.Escape("save [nosummary]"), "Save the profiler data to a file (pass 'nosummary' to skip the .summary.txt report)");
+                .AddRow("save", "Save the recorded events.");
             AnsiConsole.Write(table);
             return;
         }
@@ -328,26 +334,45 @@ internal class CoreCommandService
         switch (args[1].Trim().ToLower())
         {
             case "enable":
-                var levelArg = args.Length > 2 ? args[2].Trim() : "1";
-                if (!int.TryParse(levelArg, out var levelValue) || levelValue is not 1)
-                {
-                    logger.LogWarning("Usage: profiler enable <1> (1 = EventPipe)");
-                    break;
-                }
-                var level = (ProfilerLevel)levelValue;
-                profileService.Enable(level);
-                logger.LogInformation("The profiler has been enabled ({Level}).", level);
+                NativeTracer.StartProfiling();
+                profiling = true;
+                logger.LogInformation("The profiler has been enabled.");
                 break;
             case "disable":
-                profileService.Disable();
+                NativeTracer.StopProfiling();
+                profiling = false;
                 logger.LogInformation("The profiler has been disabled.");
                 break;
+            //case "objects":
+            //    var value = args.Length > 2 ? args[2].Trim().ToLower() : "";
+            //    if (value is not ("on" or "off"))
+            //    {
+            //        logger.LogWarning("Usage: profiler objects <on|off>");
+            //        break;
+            //    }
+            //    NativeTracer.SetObjectTracking(value == "on");
+            //    logger.LogInformation("Object tracking is now {State}.", NativeTracer.IsObjectTracking() ? "on" : "off");
+            //    break;
             case "status":
-                logger.LogInformation("Profiler is currently {Status}.", profileService.CurrentLevel);
+                logger.LogInformation("Profiler is currently {Status}.", profiling ? "enabled" : "disabled");
                 break;
             case "save":
-                var generateSummary = !(args.Length > 2 && args[2].Trim().Equals("nosummary", StringComparison.OrdinalIgnoreCase));
-                _ = profileService.SaveAsync(RootDirService.GetRoot(), logger, generateSummary);
+                if (!profiling)
+                {
+                    logger.LogWarning("The profiler is disabled, run 'sw profiler enable' first.");
+                    break;
+                }
+                var dir = Path.Combine(RootDirService.GetRoot(), "profilers", Guid.NewGuid().ToString());
+                _ = Directory.CreateDirectory(dir);
+                var file = Path.Combine(dir, $"{DateTime.UtcNow:yyyyMMdd_HHmmss}.json");
+                _ = Task.Run(() =>
+                {
+                    logger.LogInformation("Saving profiler data...");
+                    if (NativeTracer.SaveProfile(file))
+                        logger.LogInformation("Profiler data has been saved to {Directory}.\nAnalysis methods:\n    {FileName}: Using https://ui.perfetto.dev/", dir, Path.GetFileName(file));
+                    else
+                        logger.LogError("Failed to save profiler data to {FilePath}.", file);
+                });
                 break;
             default:
                 logger.LogWarning("Unknown command");

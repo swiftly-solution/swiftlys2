@@ -1,0 +1,9 @@
+class Tracer
+
+void StartProfiling = void
+void StopProfiling = void
+void CustomBegin = string name, string source
+void CustomEnd = string name
+void SetObjectTracking = bool value
+bool IsObjectTracking = void
+bool SaveProfile = string path

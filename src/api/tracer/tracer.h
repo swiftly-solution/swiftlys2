@@ -82,7 +82,10 @@ public:
     // Records every event from StartProfiling until StopProfiling.
     // StopProfiling discards the recorded events.
     virtual void StartProfiling() = 0;
-    virtual std::vector<Event> TakeProfileSnapshot() = 0;
+    // Copies up to capacity events into out, returns the total count.
+    // Call with out = nullptr, capacity = 0 to size the buffer first.
+    // Caller owns out: no STL container crosses the module boundary.
+    virtual size_t TakeProfileSnapshot(Event* out, size_t capacity) = 0;
     virtual void StopProfiling() = 0;
 
     // Records a CustomBegin or CustomEnd event on the calling thread.
