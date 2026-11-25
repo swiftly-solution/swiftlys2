@@ -152,11 +152,20 @@ void PrintThread(nlohmann::json& thread_entry, google_breakpad::CallStack* stack
 
         if (frame->module)
         {
-            frame_entry["module"] = google_breakpad::PathnameStripper::File(frame->module->code_file());
+            std::string tracerFunctionName = g_pTracer->GetFunctionName(return_addr);
+            if (tracerFunctionName.size() > 0)
+            {
+                frame_entry["module"] = std::string(g_pTracer->GetFunctionSource(return_addr));
+                frame_entry["function_name"] = tracerFunctionName;
+            }
+            else
+            {
+                frame_entry["module"] = google_breakpad::PathnameStripper::File(frame->module->code_file());
+            }
             frame_entry["function_offset"] = std::format("0x{:016X}", return_addr - frame->module->base_address());
             if (!frame->function_name.empty())
             {
-                frame_entry["function"] = frame->function_name;
+                frame_entry["function_name"] = frame->function_name;
                 frame_entry["instruction_offset"] = std::format("0x{:X}", return_addr - frame->function_base);
                 if (!frame->source_file_name.empty())
                 {

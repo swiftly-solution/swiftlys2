@@ -535,8 +535,8 @@ public class TestPlugin : BasePlugin
     [Command("gd")]
     public void TestCommandGD( ICommandContext ctx )
     {
-        var player = ctx.Sender;
-        ctx.Reply($"Ground distance: {player!.RequiredPawn.GroundDistance}");
+        // var player = ctx.Sender;
+        // ctx.Reply($"Ground distance: {player!.RequiredPawn.GroundDistance}");
 
         var um = Core.NetMessage.Create<CUserMessageShake>();
         um.Duration = 1.0f;
