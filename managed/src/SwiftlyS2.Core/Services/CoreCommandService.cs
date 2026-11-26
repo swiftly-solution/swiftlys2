@@ -369,7 +369,7 @@ internal class CoreCommandService
                 {
                     logger.LogInformation("Saving profiler data...");
                     if (NativeTracer.SaveProfile(file))
-                        logger.LogInformation("Profiler data has been saved to {Directory}.\nAnalysis methods:\n    {FileName}: Using https://ui.perfetto.dev/", dir, Path.GetFileName(file));
+                        logger.LogInformation("Profiler data has been saved to {Directory}.\nAnalysis methods:\n    {JsonName}: Using https://ui.perfetto.dev/ or https://devtools.swiftlys2.net\n    {PbName}: Using https://devtools.swiftlys2.net", dir, Path.GetFileName(file), Path.ChangeExtension(Path.GetFileName(file), ".pb"));
                     else
                         logger.LogError("Failed to save profiler data to {FilePath}.", file);
                 });

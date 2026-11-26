@@ -100,9 +100,6 @@ public:
     virtual bool SetObjectTracking(bool enabled) = 0;
     virtual bool IsObjectTracking() = 0;
 
-    virtual const char* GetFunctionName(uint64_t address) = 0;
-    virtual const char* GetFunctionSource(uint64_t address) = 0;
-
 protected:
     ~ITracer() = default;
 };
