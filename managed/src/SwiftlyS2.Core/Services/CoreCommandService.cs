@@ -388,7 +388,10 @@ internal class CoreCommandService
 
             if (page < 1) page = 1;
 
-            var allPlugins = pluginManager.GetPlugins().ToList();
+            var allPlugins = pluginManager.GetPlugins()
+                .OrderBy(p => p.Metadata?.Id ?? (p.PluginDirectory is { } d ? Path.GetFileName(d) : string.Empty), StringComparer.OrdinalIgnoreCase)
+                .ThenBy(p => p.PluginDirectory ?? string.Empty, StringComparer.OrdinalIgnoreCase)
+                .ToList();
             var totalPages = (int)Math.Ceiling(allPlugins.Count / (double)pageSize);
             if (totalPages == 0) totalPages = 1;
 

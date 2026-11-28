@@ -273,16 +273,22 @@ internal class PluginManager : IPluginManager
         EnumeratePluginDirectories(_rootDirService.GetPluginsRoot(), pluginDirs.Add);
 
         var loadOrder = GlobalState.PluginLoadOrder.Split('\x01', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToList();
-        if (loadOrder.Count > 0)
-        {
-            pluginDirs = pluginDirs.OrderBy(dir =>
+        pluginDirs = pluginDirs
+            .Select(dir =>
             {
                 var dllPath = GetPluginEntrypointPath(dir);
                 var id = File.Exists(dllPath) ? ReadMetadataFromDll(dllPath)?.Id : null;
-                var index = loadOrder.FindIndex(x => x.Equals(id ?? Path.GetFileName(dir), StringComparison.OrdinalIgnoreCase));
+                return (Dir: dir, Id: id ?? Path.GetFileName(dir));
+            })
+            .OrderBy(x =>
+            {
+                var index = loadOrder.FindIndex(id => id.Equals(x.Id, StringComparison.OrdinalIgnoreCase));
                 return index < 0 ? int.MaxValue : index;
-            }).ToList();
-        }
+            })
+            .ThenBy(x => x.Id, StringComparer.OrdinalIgnoreCase)
+            .ThenBy(x => x.Dir, StringComparer.OrdinalIgnoreCase)
+            .Select(x => x.Dir)
+            .ToList();
 
         foreach (var pluginDir in pluginDirs)
         {
