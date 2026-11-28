@@ -36,26 +36,6 @@ target("swiftlys2")
         "src/**/*.cpp",
     }, { cxxflags = "-rdynamic -g1" })
 
-    on_load(function (target)
-        local proto_dir = path.join(os.projectdir(), "src", "scripting", "tracer")
-        local proto_name = "tracer_profile"
-        local out_dir = path.join(target:autogendir(), "proto")
-        local protoc = path.join(os.projectdir(), "vendor", "s2sdk", "protobufs", "bin", is_host("windows") and "protoc.exe" or "protoc")
-        local cc = path.join(out_dir, proto_name .. ".pb.cc")
-
-        if not os.isfile(cc) or os.mtime(path.join(proto_dir, proto_name .. ".proto")) > os.mtime(cc) then
-            os.mkdir(out_dir)
-            os.vrunv(protoc, {
-                "--proto_path=" .. proto_dir,
-                "--cpp_out=" .. out_dir,
-                path.join(proto_dir, proto_name .. ".proto")
-            })
-        end
-
-        target:add("files", cc)
-        target:add("includedirs", out_dir)
-    end)
-
     --[[ -------------------------------- Include Section -------------------------------- ]]
 
     add_includedirs({

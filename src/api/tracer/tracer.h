@@ -69,6 +69,9 @@ struct Event
 };
 static_assert(sizeof(Event) == 40, "Event layout is part of the API");
 
+// Receives one block of serialized profile data. Return false to stop.
+using ProfileBlockWriter = bool (*)(const void* data, size_t size, void* context);
+
 class ITracer
 {
 public:
@@ -82,10 +85,11 @@ public:
     // Records every event from StartProfiling until StopProfiling.
     // StopProfiling discards the recorded events.
     virtual void StartProfiling() = 0;
-    // Copies up to capacity events into out, returns the total count.
-    // Call with out = nullptr, capacity = 0 to size the buffer first.
-    // Caller owns out: no STL container crosses the module boundary.
-    virtual size_t TakeProfileSnapshot(Event* out, size_t capacity) = 0;
+    // Serializes everything recorded so far as one swiftlys2.tracer.Profile
+    // message (tracer_profile.proto) and passes it to write in blocks of
+    // about 4 MB. String ids in the output are ITracer string ids. Recording
+    // continues while this runs. Returns false when write returns false.
+    virtual bool WriteProfile(ProfileBlockWriter write, void* context) = 0;
     virtual void StopProfiling() = 0;
 
     // Records a CustomBegin or CustomEnd event on the calling thread.
