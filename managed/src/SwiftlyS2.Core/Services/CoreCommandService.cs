@@ -364,12 +364,12 @@ internal class CoreCommandService
                 }
                 var dir = Path.Combine(RootDirService.GetRoot(), "profilers", Guid.NewGuid().ToString());
                 _ = Directory.CreateDirectory(dir);
-                var file = Path.Combine(dir, $"{DateTime.UtcNow:yyyyMMdd_HHmmss}.json");
+                var file = Path.Combine(dir, $"{DateTime.UtcNow:yyyyMMdd_HHmmss}.pb");
                 _ = Task.Run(() =>
                 {
                     logger.LogInformation("Saving profiler data...");
                     if (NativeTracer.SaveProfile(file))
-                        logger.LogInformation("Profiler data has been saved to {Directory}.\nAnalysis methods:\n    {JsonName}: Using https://ui.perfetto.dev/ or https://devtools.swiftlys2.net\n    {PbName}: Using https://devtools.swiftlys2.net", dir, Path.GetFileName(file), Path.ChangeExtension(Path.GetFileName(file), ".pb"));
+                        logger.LogInformation("Profiler data has been saved to {FilePath}.\nAnalyze it using https://devtools.swiftlys2.net", file);
                     else
                         logger.LogError("Failed to save profiler data to {FilePath}.", file);
                 });

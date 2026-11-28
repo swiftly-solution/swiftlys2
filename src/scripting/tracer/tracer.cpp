@@ -22,11 +22,9 @@
 #include <scripting/scripting.h>
 
 #include "tracer_profile.pb.h"
-#include <nlohmann/json.hpp>
 
 #include <algorithm>
 #include <cstdio>
-#include <format>
 #include <map>
 #include <set>
 #include <string>
@@ -83,43 +81,6 @@ uint8_t Bridge_Tracer_IsObjectTracking()
 }
 
 std::string GetRelativePath(std::string path);
-
-static std::string JsonString(const char* value)
-{
-    return nlohmann::json(value ? value : "").dump(-1, ' ', false, nlohmann::json::error_handler_t::replace);
-}
-
-static void WriteSpan(std::string& out, bool& first, const Event& begin, uint64_t endNs, bool open)
-{
-    const char* cat = "managed";
-    const char* argKey = "module";
-    if (begin.type == EventType::UnmanagedToManaged)
-        cat = "native-to-managed";
-    else if (begin.type == EventType::CustomBegin)
-    {
-        cat = "custom";
-        argKey = "source";
-    }
-
-    const char* name = g_pTracer->GetString(begin.nameId);
-    const char* source = g_pTracer->GetString(begin.sourceId);
-
-    out += std::format("{}{{\"name\":{},\"cat\":\"{}\",\"ph\":\"X\",\"pid\":1,\"tid\":{},\"ts\":{:.3f},\"dur\":{:.3f},\"args\":{{", first ? "\n" : ",\n", JsonString(*name ? name : "<unknown>"), cat, begin.osThreadId, begin.timestampNs / 1000.0,
-                       (endNs - begin.timestampNs) / 1000.0);
-    first = false;
-    if (*source)
-        out += std::format("\"{}\":{}", argKey, JsonString(source));
-    if (open)
-        out += *source ? ",\"open\":true" : "\"open\":true";
-    out += "}}";
-}
-
-static void WriteAllocationJson(std::string& out, bool& first, const Event& e)
-{
-    out += std::format("{}{{\"name\":{},\"cat\":\"alloc\",\"ph\":\"i\",\"s\":\"t\",\"pid\":1,\"tid\":{},\"ts\":{:.3f},\"args\":{{\"size\":{},\"function\":{}}}}}", first ? "\n" : ",\n", JsonString(g_pTracer->GetString(e.nameId)), e.osThreadId,
-                       e.timestampNs / 1000.0, e.b, JsonString(g_pTracer->GetString(e.sourceId)));
-    first = false;
-}
 
 struct TraceEntry
 {
@@ -190,47 +151,6 @@ static std::vector<TraceEntry> BuildTraceEntries(const std::vector<Event>& event
     }
 
     return entries;
-}
-
-static bool WriteJson(const std::string& file, const std::vector<TraceEntry>& entries, const std::set<uint32_t>& threads)
-{
-    Files::Write(file, "{\"displayTimeUnit\":\"ms\",\"traceEvents\":[", false);
-    if (!Files::ExistsPath(file))
-        return false;
-
-    constexpr size_t flushSize = 4 * 1024 * 1024;
-    std::string out;
-    out.reserve(flushSize + 4096);
-    auto flush = [&](bool force)
-    {
-        if (out.empty() || (!force && out.size() < flushSize))
-            return;
-        Files::Append(file, out, false);
-        out.clear();
-    };
-
-    bool first = true;
-    for (const TraceEntry& entry : entries)
-    {
-        if (entry.allocation)
-            WriteAllocationJson(out, first, *entry.event);
-        else
-            WriteSpan(out, first, *entry.event, entry.endNs, entry.open);
-        flush(false);
-    }
-
-    for (uint32_t tid : threads)
-    {
-        const char* name = g_pTracer->GetThreadName(tid);
-        if (!*name)
-            continue;
-        out += std::format("{}{{\"name\":\"thread_name\",\"ph\":\"M\",\"pid\":1,\"tid\":{},\"args\":{{\"name\":{}}}}}", first ? "\n" : ",\n", tid, JsonString(name));
-        first = false;
-    }
-
-    out += "\n]}\n";
-    flush(true);
-    return true;
 }
 
 static profile_pb::Span::Category SpanCategory(EventType type)
@@ -332,14 +252,6 @@ static bool WriteBinaryProfile(const std::string& relativePath, const std::vecto
     return std::fclose(file) == 0 && ok;
 }
 
-static std::string BinaryPathFor(const std::string& jsonPath)
-{
-    const size_t separator = jsonPath.find_last_of("/\\");
-    const size_t dot = jsonPath.find_last_of('.');
-    const bool hasExtension = dot != std::string::npos && (separator == std::string::npos || dot > separator);
-    return (hasExtension ? jsonPath.substr(0, dot) : jsonPath) + ".pb";
-}
-
 static bool SaveProfileToFile(const char* path)
 {
     if (!g_pTracer || !path || !*path)
@@ -354,9 +266,7 @@ static bool SaveProfileToFile(const char* path)
     const std::vector<TraceEntry> entries = BuildTraceEntries(events, threads);
 
     const std::string file = GetRelativePath(path);
-    const bool json = WriteJson(file, entries, threads);
-    const bool binary = WriteBinaryProfile(BinaryPathFor(file), entries, threads);
-    return json && binary;
+    return WriteBinaryProfile(file, entries, threads);
 }
 
 uint8_t Bridge_Tracer_SaveProfile(char* path)
