@@ -440,12 +440,42 @@ internal class CoreCommandService
             }
         }
 
+        void ShowPluginInfo( string query )
+        {
+            var plugin = pluginManager.GetPlugins().FirstOrDefault(p =>
+                string.Equals(p.Metadata?.Id, query, StringComparison.OrdinalIgnoreCase) ||
+                (p.PluginDirectory is { } dir && string.Equals(Path.GetFileName(dir), query, StringComparison.OrdinalIgnoreCase)));
+
+            if (plugin is null)
+            {
+                logger.LogWarning("Plugin not found: {Query}", query);
+                return;
+            }
+
+            var metadata = plugin.Metadata;
+            var table = new Table()
+                .HideHeaders()
+                .AddColumn("Field")
+                .AddColumn("Value")
+                .AddRow("Status", GetColoredStatus(plugin.Status))
+                .AddRow("Id", Markup.Escape(metadata?.Id ?? "<Unknown>"))
+                .AddRow("Name", Markup.Escape(metadata?.Name ?? "<Unknown>"))
+                .AddRow("Version", Markup.Escape(metadata?.Version ?? "<Unknown>"))
+                .AddRow("Author", Markup.Escape(metadata?.Author ?? "Anonymous"))
+                .AddRow("Description", Markup.Escape(metadata?.Description ?? string.Empty))
+                .AddRow("Website", Markup.Escape(string.IsNullOrWhiteSpace(metadata?.Website) ? "-" : metadata.Website))
+                .AddRow("Minimum API version", Markup.Escape(metadata?.MinimumAPIVersion ?? "-"))
+                .AddRow("Location", Markup.Escape(plugin.PluginDirectory is { } pluginDir ? Path.Join("(swRoot)", Path.GetRelativePath(RootDirService.GetRoot(), pluginDir)) : string.Empty));
+            AnsiConsole.Write(table);
+        }
+
         void ShowPluginHelp()
         {
             var table = new Table()
                 .AddColumn("Command")
                 .AddColumn("Description")
                 .AddRow(Markup.Escape("list [page]"), "List all plugins (paginated, 20 per page)")
+                .AddRow(Markup.Escape("info <id|dllName>"), "Show full metadata of a plugin")
                 .AddRow("load", "Load a plugin")
                 .AddRow("unload", "Unload a plugin")
                 .AddRow("reload", "Reload a plugin");
@@ -495,6 +525,12 @@ internal class CoreCommandService
             case "list":
                 var listPage = args.Length >= 3 && int.TryParse(args[2], out var parsedListPage) ? parsedListPage : 1;
                 ShowPluginList(listPage);
+                break;
+            case "info":
+                if (ValidatePluginId(args, "info", "<id|dllName>"))
+                {
+                    ShowPluginInfo(args[2]);
+                }
                 break;
             case "load":
                 if (ValidatePluginId(args, "load", "<dllName>"))
